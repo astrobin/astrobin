@@ -11,7 +11,6 @@
 <body>
     <div id="header">
         {% block header %}
-	<a href="{% url index %}">{% trans "Home" %}</a> | 
 
 	{% if user.is_authenticated %}
 	{% trans "Logged in" %}: {{ user.username }} 

@@ -81,3 +81,5 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'registration',
 )
+
+LOGIN_REDIRECT_URL = '/bin/'
