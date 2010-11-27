@@ -20,6 +20,9 @@ class FocalReducer(Gear):
 class Subject(models.Model):
 	name = models.CharField(max_length=64)
 
+class Image(models.Model):
+	subject = models.ForeignKey(Subject)
+
 	# gear
 	camera = models.ForeignKey(Camera)
 	focal_reducer = models.ForeignKey(FocalReducer)
@@ -27,3 +30,4 @@ class Subject(models.Model):
 	mount = models.ForeignKey(Mount)
 
 	# data
+
