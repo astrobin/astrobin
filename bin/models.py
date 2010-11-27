@@ -12,16 +12,17 @@ class Telescope(Gear):
 	aperture = models.IntegerField()
 
 class Mount(Gear):
+	pass
 
-class FocalReduced(Gear):
-	ratio = models.DoubleField()
+class FocalReducer(Gear):
+	ratio = models.DecimalField(max_digits=3, decimal_places=2)
 
 class Subject(models.Model):
-	name = model.CharField(max_length=64)
+	name = models.CharField(max_length=64)
 
 	# gear
 	camera = models.ForeignKey(Camera)
-	focal_reducer = models.ForegnKey(FocalReducer)
+	focal_reducer = models.ForeignKey(FocalReducer)
 	telescope = models.ForeignKey(Telescope)
 	mount = models.ForeignKey(Mount)
 
