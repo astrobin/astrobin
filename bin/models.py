@@ -4,6 +4,9 @@ class Gear(models.Model):
 	name = models.CharField(max_length=64)
 	purchase_date = models.DateTimeField('date purchased')
 
+	def __unicode__(self):
+		return self.name
+
 class Camera(Gear):
 	chip_size = models.IntegerField()
 
@@ -20,14 +23,24 @@ class FocalReducer(Gear):
 class Subject(models.Model):
 	name = models.CharField(max_length=64)
 
-class Image(models.Model):
-	subject = models.ForeignKey(Subject)
-
 	# gear
 	camera = models.ForeignKey(Camera)
 	focal_reducer = models.ForeignKey(FocalReducer)
 	telescope = models.ForeignKey(Telescope)
 	mount = models.ForeignKey(Mount)
 
-	# data
+	def __unicode__(self):
+		return self.name
 
+class User(models.Model):
+	handle = models.CharField(max_length=64)
+
+	def __unicode__(self):
+		return self.handle;
+
+class Image(models.Model):
+	subject = models.ForeignKey(Subject)
+	author = models.ForeignKey(User)
+
+	def __unicode__(self):
+		return self.subject.name + " by " + self.author.handle
