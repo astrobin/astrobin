@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Gear(models.Model):
 	name = models.CharField(max_length=64)
@@ -31,12 +32,6 @@ class Subject(models.Model):
 
 	def __unicode__(self):
 		return self.name
-
-class User(models.Model):
-	handle = models.CharField(max_length=64)
-
-	def __unicode__(self):
-		return self.handle;
 
 class Image(models.Model):
 	subject = models.ForeignKey(Subject)
