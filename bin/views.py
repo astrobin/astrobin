@@ -34,4 +34,5 @@ def image_create(request):
 	return create_object(
 		request,
 		model=Image,
-		template_name='create.html')
+		template_name='create.html',
+		post_save_redirect='/bin')

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
 
 class Gear(models.Model):
 	name = models.CharField(max_length=64)
@@ -28,15 +29,16 @@ class Subject(models.Model):
 		return self.name
 
 class Image(models.Model):
-	subject = models.ForeignKey(Subject)
+	subjects = models.CharField(max_length=128) # comma separated list
+	#file = models.ImageField(upload_to='images/%Y/%m/%d')
 
 	# gear
-	camera = models.ForeignKey(Camera)
-	focal_reducer = models.ForeignKey(FocalReducer)
-	telescope = models.ForeignKey(Telescope)
-	mount = models.ForeignKey(Mount)
+	camera = models.CharField(max_length=32)
+	focal_reducer = models.CharField(max_length=32)
+	telescope = models.CharField(max_length=32)
+	mount = models.CharField(max_length=32)
 
 	description = models.TextField()
 
 	def __unicode__(self):
-		return self.subject.name
+		return ""
