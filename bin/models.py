@@ -24,18 +24,19 @@ class FocalReducer(Gear):
 class Subject(models.Model):
 	name = models.CharField(max_length=64)
 
+	def __unicode__(self):
+		return self.name
+
+class Image(models.Model):
+	subject = models.ForeignKey(Subject)
+
 	# gear
 	camera = models.ForeignKey(Camera)
 	focal_reducer = models.ForeignKey(FocalReducer)
 	telescope = models.ForeignKey(Telescope)
 	mount = models.ForeignKey(Mount)
 
-	def __unicode__(self):
-		return self.name
-
-class Image(models.Model):
-	subject = models.ForeignKey(Subject)
-	author = models.ForeignKey(User)
+	description = models.TextField()
 
 	def __unicode__(self):
-		return self.subject.name + " by " + self.author.handle
+		return self.subject.name
