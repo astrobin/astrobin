@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommannd
+from django.core.management.base import BaseCommand
 from bin.models import Subject
 
 class Command(BaseCommand):
