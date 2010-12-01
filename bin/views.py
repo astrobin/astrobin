@@ -16,7 +16,7 @@ def image_list(request):
 	return object_list(
 		request, 
 		queryset=Image.objects.all(),
-		template_name='list.html',
+		template_name='image_list.html',
 		template_object_name='image')
 
 def image_detail(request, id):
@@ -26,7 +26,7 @@ def image_detail(request, id):
 		request,
 		queryset = Image.objects.all(),
 		object_id = id,
-		template_name = 'detail.html',
+		template_name = 'image_detail.html',
 		template_object_name = 'image')
 
 def image_create(request):
