@@ -32,4 +32,4 @@ def image_detail(request, id):
 def image_create(request):
 	"""Create new image"""
 
-    #return render_to_response("create.html"
+    return render_to_response("image_upload.html")
