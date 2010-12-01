@@ -30,7 +30,7 @@ class Subject(models.Model):
 
 class Image(models.Model):
 	subjects = models.CharField(max_length=128) # comma separated list
-	#file = models.ImageField(upload_to='images/%Y/%m/%d')
+	file = models.ImageField(upload_to='images/%Y/%m/%d')
 
 	# gear
 	camera = models.CharField(max_length=32)

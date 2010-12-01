@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import create_object
@@ -30,9 +31,5 @@ def image_detail(request, id):
 
 def image_create(request):
 	"""Create new image"""
- 
-	return create_object(
-		request,
-		model=Image,
-		template_name='create.html',
-		post_save_redirect='/bin')
+
+    #return render_to_response("create.html"
