@@ -49,6 +49,8 @@ ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '***REMOVED***'
+S3_ACCESS_KEY = '***REMOVED***'
+S3_SECRET_KEY = 'hDo***REMOVED***'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

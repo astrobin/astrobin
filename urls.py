@@ -6,10 +6,11 @@ admin.autodiscover()
 from bin import views
 
 urlpatterns = patterns('',
-	(r'^bin/$', views.index),
+	(r'^$', views.index),
 	(r'^list/$', views.image_list),
 	(r'^show/(?P<id>\d+)/$', views.image_detail),
-	(r'^upload/$', views.image_create),
+	(r'^upload/$', views.image_upload),
+    (r'^upload/process$', views.image_upload_process),
 	(r'^accounts/', include('registration.urls')),
 
 	# Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
