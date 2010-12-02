@@ -43,8 +43,8 @@ class Subject(models.Model):
 
 class Image(models.Model):
     subjects = models.CharField(max_length=128)
-    url = models.CharField(max_length=128)
-    uploaded = models.DateTimeField()
+    filename = models.CharField(max_length=64, editable=False)
+    uploaded = models.DateTimeField(editable=False)
 
     # gear
     camera = models.CharField(max_length=32)
