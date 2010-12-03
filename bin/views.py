@@ -6,7 +6,9 @@ from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import create_object
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
+from django.contrib.auth.decorators import login_required
 
 from uuid import uuid4
 import os
@@ -40,12 +42,14 @@ def image_detail(request, id):
         extra_context = {"s3_images_bucket":settings.S3_IMAGES_BUCKET,
                          "s3_url":settings.S3_URL})
 
+@login_required
 def image_upload(request):
     """Create new image"""
 
     return render_to_response(
         "image_upload.html",
-        {"form":ImageUploadForm()})
+        {"form":ImageUploadForm()},
+        context_instance=RequestContext(request))
 
 @require_POST
 def image_upload_process(request):
