@@ -36,7 +36,9 @@ def image_detail(request, id):
         queryset = Image.objects.all(),
         object_id = id,
         template_name = 'image_detail.html',
-        template_object_name = 'image')
+        template_object_name = 'image',
+        extra_context = {"s3_images_bucket":settings.S3_IMAGES_BUCKET,
+                         "s3_url":settings.S3_URL})
 
 def image_upload(request):
     """Create new image"""
@@ -75,7 +77,6 @@ def image_upload_process_details(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
 
-
     if not form.is_valid():
         return render_to_response("image_upload_phase_2.html",
             {"image":image,
@@ -84,3 +85,4 @@ def image_upload_process_details(request):
              "form":form,
             })
 
+    return HttpResponseRedirect("/show/" + image_id)
