@@ -88,4 +88,5 @@ INSTALLED_APPS = (
     'registration',
 )
 
-LOGIN_REDIRECT_URL = '/bin/'
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_ACTIVATION_DAYS = 7
