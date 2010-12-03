@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-    <h2>Image:</h2>
+    <h2>{% trans "Image:" %}</h2>
     <img src="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}" />
 {% endblock %}

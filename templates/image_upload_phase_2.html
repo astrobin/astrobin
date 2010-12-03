@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-    <h2>Your image has been uploaded</h2>
+    <h2>{% trans "Your image has been uploaded" %}</h2>
     <img src="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}" />
     <form action="/upload/process_image_details" method="post">
         {{form.as_p}}
         <input type="hidden" name="image_id" value="{{image.id}}" />
-        <p><input type="submit" value="Continue &rarr;" /></p>
+        <p><input type="submit" value="{% trans "Continue" %} &rarr;" /></p>
     </form>
 
 {% endblock %}

@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
     {% if image_list %}
     <ul>
     {% for image in image_list %}
-        <li><a href="/show/{{image.id}}">Image: {{image.subjects}}</li>
+        <li><a href="/show/{{image.id}}">{% trans "Image:" %}: {{image.subjects}}</li>
     {% endfor %}
     </ul>
     {% else %}
