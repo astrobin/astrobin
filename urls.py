@@ -20,4 +20,5 @@ urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
 
     (r'^(?P<username>\w+)/$', views.user_page),
+    (r'^(?P<username>\w+)/edit/$', views.user_profile_edit),
 )
