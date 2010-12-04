@@ -91,7 +91,8 @@ def image_upload_process_details(request):
              "s3_images_bucket":settings.S3_IMAGES_BUCKET,
              "s3_url":settings.S3_URL,
              "form":form,
-            })
+            },
+            context_instance=RequestContext(request))
 
     return HttpResponseRedirect("/show/" + image_id)
 
@@ -105,3 +106,22 @@ def user_page(request, username):
         {"user":user},
         context_instance=RequestContext(request))
 
+@login_required
+@require_GET
+def user_profile_edit(request, username):
+    """Edits own profile"""
+
+    try:
+        requested_user = User.objects.get(username=username)
+    except DoesNotExist:
+        return render_to_response("user_not_found.html",
+        {"username":username},
+        context_instance=RequestContext(request))
+
+    if requested_user != request.user:
+        # what are we trying to do, uh, sneaky one?
+        return render_to_response("403.html",
+            context_instance=RequestContext(request))
+
+    return render_to_response("user_profile_edit.html",
+        context_instance=RequestContext(request))
