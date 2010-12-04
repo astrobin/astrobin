@@ -3,6 +3,7 @@ from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 from django import forms
 
 def upload_image_to(instance, filename):
@@ -60,3 +61,16 @@ class Image(models.Model):
     def save(self):
         self.uploaded = datetime.now()
         models.Model.save(self)
+
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+
+    def __unicode__(self):
+        return "%s' profile.." % self.user
+
+
+def create_user_profile(sender, instance, created, **kwargs):  
+    if created:  
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)

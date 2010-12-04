@@ -9,6 +9,7 @@ from django.conf import settings
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from uuid import uuid4
 import os
@@ -93,3 +94,14 @@ def image_upload_process_details(request):
             })
 
     return HttpResponseRedirect("/show/" + image_id)
+
+@require_GET
+def user_page(request, username):
+    """Shows the user's public page"""
+
+    user = User.objects.get(username=username)
+
+    return render_to_response("user_page.html",
+        {"user":user},
+        context_instance=RequestContext(request))
+
