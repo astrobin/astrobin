@@ -17,6 +17,7 @@ import os
 from models import Image
 from forms import ImageUploadForm
 from forms import ImageUploadDetailsForm
+from forms import UserProfileEditForm
 from file_utils import store_in_s3
 
 def index(request):
@@ -124,4 +125,5 @@ def user_profile_edit(request, username):
             context_instance=RequestContext(request))
 
     return render_to_response("user_profile_edit.html",
+        {"form":UserProfileEditForm()},
         context_instance=RequestContext(request))
