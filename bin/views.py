@@ -51,6 +51,7 @@ def image_upload(request):
         {"form":ImageUploadForm()},
         context_instance=RequestContext(request))
 
+@login_required
 @require_POST
 def image_upload_process(request):
     """Process the form"""
@@ -71,8 +72,10 @@ def image_upload_process(request):
          "s3_images_bucket":settings.S3_IMAGES_BUCKET,
          "s3_url":settings.S3_URL,
          "form":ImageUploadDetailsForm(),
-        })
+        },
+        context_instance=RequestContext(request))
 
+@login_required
 @require_POST
 def image_upload_process_details(request):
     """Process the second part of the form"""
