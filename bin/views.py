@@ -27,7 +27,10 @@ def index(request):
         request, 
         queryset=Image.objects.all(),
         template_name='index.html',
-        template_object_name='image')
+        template_object_name='image',
+        extra_context = {"thumbnail_size":settings.THUMBNAIL_SIZE,
+                         "s3_thumbnails_bucket":settings.S3_THUMBNAILS_BUCKET,
+                         "s3_url":settings.S3_URL})
 
 def image_detail(request, id):
     """ Show details of an image"""
