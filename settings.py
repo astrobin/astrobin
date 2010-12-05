@@ -52,9 +52,15 @@ SECRET_KEY = '***REMOVED***'
 S3_ACCESS_KEY = '***REMOVED***'
 S3_SECRET_KEY = 'hDo***REMOVED***'
 S3_IMAGES_BUCKET = 'astrobin_images'
+S3_RESIZED_IMAGES_BUCKET = 'astrobin_resized_image'
 S3_THUMBNAILS_BUCKET = 'astrobin_thumbnails'
+S3_SMALL_THUMBNAILS_BUCKET = 'astrobin_small_thumbnails'
 S3_AVATARS_BUCKET = 'astrobin_avatars'
 S3_URL = 's3.amazonaws.com'
+
+RESIZED_IMAGE_SIZE = 720
+THUMBNAIL_SIZE = 246
+SMALL_THUMBNAIL_SIZE = 100
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

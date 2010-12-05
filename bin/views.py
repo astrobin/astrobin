@@ -18,18 +18,15 @@ from models import Image
 from forms import ImageUploadForm
 from forms import ImageUploadDetailsForm
 from forms import UserProfileEditForm
-from file_utils import store_in_s3
+from file_utils import store_image_in_s3
 
 def index(request):
-    return HttpResponse("Hello, World.")
-
-def image_list(request):
-    """ List all images"""
+    """Main page"""
 
     return object_list(
         request, 
         queryset=Image.objects.all(),
-        template_name='image_list.html',
+        template_name='index.html',
         template_object_name='image')
 
 def image_detail(request, id):
@@ -42,6 +39,9 @@ def image_detail(request, id):
         template_name = 'image_detail.html',
         template_object_name = 'image',
         extra_context = {"s3_images_bucket":settings.S3_IMAGES_BUCKET,
+                         "s3_resized_images_bucket":settings.S3_RESIZED_IMAGES_BUCKET,
+                         "s3_thumbnails_bucket":settings.S3_THUMBNAILS_BUCKET,
+                         "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
                          "s3_url":settings.S3_URL})
 
 @login_required
@@ -64,7 +64,7 @@ def image_upload_process(request):
 
     file = request.FILES["file"]
     s3_filename = str(uuid4()) + os.path.splitext(file.name)[1]
-    store_in_s3(file, s3_filename, settings.S3_IMAGES_BUCKET)
+    store_image_in_s3(file, s3_filename)
 
     image = Image(filename = s3_filename)
     image.save()
