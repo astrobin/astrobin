@@ -56,3 +56,10 @@ table {
  * END CSS RESET
  *********************************************************************/
 
+#body {
+    width: 1024px;
+}
+
+#header {
+    background-image: url('/media/astrobin_header.jpg')
+}
