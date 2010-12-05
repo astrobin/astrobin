@@ -10,4 +10,8 @@
     <img src="http://{{s3_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}" />
     <h2>{% trans "Small thumbnail:" %}</h2>
     <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}" />
+    <h2>{% trans "Inverted:" %}</h2>
+    <img src="http://{{s3_inverted_bucket}}.{{s3_url}}/{{image.filename}}" />
+    <h2>{% trans "Resized inverted:" %}</h2>
+    <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}" />
 {% endblock %}

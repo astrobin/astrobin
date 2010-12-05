@@ -5,6 +5,7 @@ from django.conf import settings
 import mimetypes
 from uuid import uuid4
 from PIL import Image as PILImage
+from PIL import ImageOps
 import StringIO
 
 from models import Image
@@ -57,22 +58,36 @@ def store_image_in_s3(file, uid):
     # Then resize to the thumbnail
     (w, h) = image.size
     (w, h) = scale_dimensions(w, h, settings.THUMBNAIL_SIZE)
-    resizedImage = image.resize((w, h), PILImage.ANTIALIAS)
-    croppedImage = resizedImage.crop(crop_box(w, h))
+    thumbnailImage = image.resize((w, h), PILImage.ANTIALIAS)
+    croppedImage = thumbnailImage.crop(crop_box(w, h))
 
     # Then save to bucket
-    resizedFile = StringIO.StringIO()
-    croppedImage.save(resizedFile, 'JPEG')
-    save_to_bucket(resizedFile.getvalue(), 'image/jpeg', settings.S3_THUMBNAILS_BUCKET, uid)
+    thumbnailFile = StringIO.StringIO()
+    croppedImage.save(thumbnailFile, 'JPEG')
+    save_to_bucket(thumbnailFile.getvalue(), 'image/jpeg', settings.S3_THUMBNAILS_BUCKET, uid)
 
     # Shrink more!
     (w, h) = image.size
     (w, h) = scale_dimensions(w, h, settings.SMALL_THUMBNAIL_SIZE)
-    resizedImage = image.resize((w, h), PILImage.ANTIALIAS)
-    croppedImage = resizedImage.crop(crop_box(w, h))
+    thumbnailImage = image.resize((w, h), PILImage.ANTIALIAS)
+    croppedImage = thumbnailImage.crop(crop_box(w, h))
 
     # To the final bucket
-    resizedFile = StringIO.StringIO()
-    croppedImage.save(resizedFile, 'JPEG')
-    save_to_bucket(resizedFile.getvalue(), 'image/jpeg', settings.S3_SMALL_THUMBNAILS_BUCKET, uid)
+    thumbnailFile = StringIO.StringIO()
+    croppedImage.save(thumbnailFile, 'JPEG')
+    save_to_bucket(thumbnailFile.getvalue(), 'image/jpeg', settings.S3_SMALL_THUMBNAILS_BUCKET, uid)
+
+    # Let's also created a grayscale inverted image
+    grayscale = ImageOps.grayscale(image)
+    inverted = ImageOps.invert(grayscale)
+    invertedFile = StringIO.StringIO()
+    inverted.save(invertedFile, 'JPEG')
+    save_to_bucket(invertedFile.getvalue(), 'image/jpeg', settings.S3_INVERTED_BUCKET, uid)
+
+    # Then we invert the resized image too
+    grayscale = ImageOps.grayscale(resizedImage)
+    inverted = ImageOps.invert(grayscale)
+    invertedFile = StringIO.StringIO()
+    inverted.save(invertedFile, 'JPEG')
+    save_to_bucket(invertedFile.getvalue(), 'image/jpeg', settings.S3_RESIZED_INVERTED_BUCKET, uid)
 
