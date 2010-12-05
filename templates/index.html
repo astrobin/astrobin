@@ -3,15 +3,15 @@
 
 {% block content %}
     {% if image_list %}
-    <div style="width=984">
+    <h2>{% trans "Recent images" %}</h2>
     {% for image in image_list %}
     <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px;">
         <a href="/show/{{image.id}}">
-            <img src="http://{{s3_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}" />
+            <img src="http://{{s3_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}"
+				 width={{thumbnail_size}} height={{thumbnail_size}} />
         </a>
     </div>
     {% endfor %}
-    </div>
     {% else %}
     No images.
     {% endif %}

@@ -61,7 +61,7 @@ S3_AVATARS_BUCKET = 'astrobin_avatars'
 S3_URL = 's3.amazonaws.com'
 
 RESIZED_IMAGE_SIZE = 720
-THUMBNAIL_SIZE = 246
+THUMBNAIL_SIZE = 230
 SMALL_THUMBNAIL_SIZE = 100
 
 # List of callables that know how to import templates from various sources.

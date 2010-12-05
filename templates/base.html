@@ -1,47 +1,125 @@
 {% load i18n %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <title>{% block title %}AstroBin{% endblock %}</title>
+
+<title>AstroBin</title>
+
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="author" content="Salvatore Iovene - iovene.com" />
+<meta name="description" content="Community for astrophotographers" />
+<meta name="keywords" content="astrophotography, astronomy, telescopes" />
+<meta name="robots" content="index, follow, noarchive" />
+<meta name="googlebot" content="noarchive" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+<!--[if IE 6]><link rel="stylesheet" type="text/css" href="/static/css/ie6.css" media="screen" /><![endif]-->
+
 </head>
 
+
 <body>
-<div id="container">
-    <div id="header">
+<!-- wrap -->
+<div id="wrap">
+
+	<!-- header -->
+	<div id="header">
         {% block header %}
         <div id="login">
         	{% if user.is_authenticated %}
-        	{% trans "Logged in" %}: {{ user.username }} 
-        	(<a href="{% url auth_logout %}">{% trans "Log out" %}</a> | 
-        	<a href="{% url auth_password_change %}">{% trans "Change password" %}</a>)
+        	{% trans "Logged in as" %} {{ user.username }} 
+        	(<a href="{% url auth_logout %}">{% trans "Log out" %}</a>
         	{% else %}
         	<a href="{% url auth_login %}">{% trans "Log in" %}</a>
         	{% endif %}
-                {% endblock %}
         </div>
-        <div id="tagline">
+		
+		<h1 id="logo-text"><a href="/" title="">AstroBin</a></h1>
+        <p id="slogan">
             {% trans "The definite home for your astrophotography images." %}
-        </div>
-    </div>
-    <div id="menubar">
-        <ul>
-            <li class="first"><a href="/">{% trans "Home" %}</a></li>
-            <li><a href="#">{% trans "Top rated" %}</a></li>
-        </ul>
-    </div>
+        </p>
 
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+		<div  id="nav">
+			<ul>
+				<li id="current"><a href="/">{% trans "Home" %}</a></li>
+				<li><a href="#">{% trans "ABPOD" %}</a></li>
+				<li><a href="#">{% trans "Top images" %}</a></li>
+				<li><a href="#">{% trans "Support" %}</a></li>
+				<li><a href="#">{% trans "About" %}</a></li>
+				<li class="upload"><a href="/upload">{% trans "Upload" %}</a></li>		
+			</ul>		
+		</div>
 
-    <div id="footer">
-        {% block footer %}
-        &copy; 2010-2011, Salvatore Iovene
-        {% endblock %}
-    </div>
+		<form id="quick-search" action="index.html" method="get" >
+			<p>
+			<label for="qsearch">Search:</label>
+			<input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
+			<input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="/static/images/search.png" />
+			</p>
+		</form>
+		{% endblock %}
+	<!-- /header -->	
+	</div>
+
+	<!-- content -->
+	<div id="content-wrap" class="clear">
+    	<div id="content">
+	        {% block content %}{% endblock %}
+	    </div>
+	</div>
+
+<!-- footer -->	
+<div id="footer">	
+	{% block footer %}
+	<!-- footer-outer -->	
+	<div id="footer-outer" class="clear"><div id="footer-wrap">
+	
+		<div class="col-a">
+		
+			<h3>{% trans "About" %}</h3>			
+			
+			<p>
+			Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
+			Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
+			posuere nunc justo tempus leo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
+			Cras id urna. <a href="index.html">Learn more...</a>
+			</p>			
+			
+		</div>		
+		
+		<div class="fix"></div>
+		
+		<!-- footer-bottom -->
+		<div id="footer-bottom">
+	
+			<div class="bottom-left">
+				<p>
+				&copy; 2010 <strong>Salvatore Iovene</strong>&nbsp; &nbsp; &nbsp;
+				</p>
+			</div>		
+	
+			<div class="bottom-right">
+				<p>		
+					<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | 
+		   		    <a href="http://validator.w3.org/check/referer">XHTML</a>	|
+					<a href="/">{% trans "Home" %}</a> |
+					<strong><a href="#top" class="back-to-top">{% trans "Back to top" %}</a></strong>								
+				</p>
+			</div>
+
+		<!-- /footer-bottom -->		
+		</div>
+	
+	<!-- /footer-outer -->		
+	</div></div>		
+	{% endblock %}
+<!-- /footer -->
+</div>
+
+<!-- wrap -->
 </div>
 </body>
 

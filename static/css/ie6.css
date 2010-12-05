@@ -1,0 +1,9 @@
+/* ie fix */
+
+/*  ribbon GIF format. ie6 doesn't support transparent PNG */
+#featured-ribbon { background: url(../images/ribbon.gif) no-repeat; }
+
+/* display:block fix */
+* html body .sidemenu ul li { height: 1%; }
+* html body .commentlist li { height: 1%; }
+
