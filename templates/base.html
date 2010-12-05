@@ -4,23 +4,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <link rel="stylesheet" href="/style.css" />
-    <title>{% block title %}User test{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <title>{% block title %}AstroBin{% endblock %}</title>
 </head>
 
 <body>
+<div id="container">
     <div id="header">
         {% block header %}
-
-	{% if user.is_authenticated %}
-	{% trans "Logged in" %}: {{ user.username }} 
-	(<a href="{% url auth_logout %}">{% trans "Log out" %}</a> | 
-	<a href="{% url auth_password_change %}">{% trans "Change password" %}</a>)
-	{% else %}
-	<a href="{% url auth_login %}">{% trans "Log in" %}</a>
-	{% endif %}
-	<hr />
-        {% endblock %}
+        <div id="login">
+        	{% if user.is_authenticated %}
+        	{% trans "Logged in" %}: {{ user.username }} 
+        	(<a href="{% url auth_logout %}">{% trans "Log out" %}</a> | 
+        	<a href="{% url auth_password_change %}">{% trans "Change password" %}</a>)
+        	{% else %}
+        	<a href="{% url auth_login %}">{% trans "Log in" %}</a>
+        	{% endif %}
+                {% endblock %}
+        </div>
+        <div id="tagline">
+            {% trans "The definite home for your astrophotography images." %}
+        </div>
+    </div>
+    <div id="menubar">
+        <ul>
+            <li class="first"><a href="/">{% trans "Home" %}</a></li>
+            <li><a href="#">{% trans "Top rated" %}</a></li>
+        </ul>
     </div>
 
     <div id="content">
@@ -29,9 +39,10 @@
 
     <div id="footer">
         {% block footer %}
-        <hr />
+        &copy; 2010-2011, Salvatore Iovene
         {% endblock %}
     </div>
+</div>
 </body>
 
 </html>

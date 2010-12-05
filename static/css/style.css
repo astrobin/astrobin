@@ -55,11 +55,72 @@ table {
 /**********************************************************************
  * END CSS RESET
  *********************************************************************/
+body {
+    background: #131716;
+    font-family: Verdana, sans-serif;
+}
 
-#body {
+#container {
     width: 1024px;
+    margin: 0 auto;
+    color: #bbb;
 }
 
 #header {
-    background-image: url('/media/astrobin_header.jpg')
+    background: url('/static/img/astrobin_header.jpg') no-repeat;
+    height: 120px;
+    text-align: right;
+    padding: 10px 10px 10px 0;
+}
+
+#login {
+    border: 1px solid #8ba7a8;
+    padding: 5px 10px;
+    background-color: #131716;
+    float: right;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#tagline {
+    float:left;
+    position: absolute;
+    top: 85px;
+    margin-left: 20px;
+}
+
+a {
+    color: #198cb9;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+}
+
+#menubar {
+}
+
+#menubar ul {
+    display: inline;
+}
+
+#menubar ul li {
+    list-style: none;
+    display: inline;
+    border-left: 1px solid #bbb;
+    padding: 3px 15px;
+}
+
+#menubar ul li.first {
+    border-left: none;
+}
+
+
+#content {
+}
+
+#footer {
+    font-size: small;
+    text-align: center;
 }
