@@ -11,16 +11,25 @@ import StringIO
 from models import Image
 
 def store_image_in_s3(file, uid):
-    def scale_dimensions(width, height, longest_side):
-        if width > longest_side:
-            ratio = longest_side*1./width
-            return (int(width*ratio), int(height*ratio))
-        elif height > longest_side:
-            ratio = longest_side*1./height
+    def scale_dimensions(w, h, longest_side):
+        if w > longest_side:
+            ratio = longest_side*1./w
+        elif h > longest_side:
+            ratio = longest_side*1./h
         else:
             ratio = 1
 
-        return (int(width*ratio), int(height*ratio))
+        return (int(w*ratio), int(h*ratio))
+
+    def scale_dimensions_for_cropping(w, h, shortest_side):
+        if w < shortest_side and h < shortest_side:
+            return (w, h)
+        if w > h:
+            ratio = shortest_side*1./h
+        else:
+            ratio = shortest_side*1./w
+
+        return (int(w*ratio), int(h*ratio))
 
     def crop_box(w, h):
         if w > h:
@@ -57,7 +66,7 @@ def store_image_in_s3(file, uid):
 
     # Then resize to the thumbnail
     (w, h) = image.size
-    (w, h) = scale_dimensions(w, h, settings.THUMBNAIL_SIZE)
+    (w, h) = scale_dimensions_for_cropping(w, h, settings.THUMBNAIL_SIZE)
     thumbnailImage = image.resize((w, h), PILImage.ANTIALIAS)
     croppedImage = thumbnailImage.crop(crop_box(w, h))
 
@@ -68,7 +77,7 @@ def store_image_in_s3(file, uid):
 
     # Shrink more!
     (w, h) = image.size
-    (w, h) = scale_dimensions(w, h, settings.SMALL_THUMBNAIL_SIZE)
+    (w, h) = scale_dimensions_for_cropping(w, h, settings.SMALL_THUMBNAIL_SIZE)
     thumbnailImage = image.resize((w, h), PILImage.ANTIALIAS)
     croppedImage = thumbnailImage.crop(crop_box(w, h))
 

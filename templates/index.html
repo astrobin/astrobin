@@ -3,11 +3,15 @@
 
 {% block content %}
     {% if image_list %}
-    <ul>
+    <div style="width=984">
     {% for image in image_list %}
-        <li><a href="/show/{{image.id}}">{% trans "Image:" %}: {{image.subjects}}</li>
+    <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px;">
+        <a href="/show/{{image.id}}">
+            <img src="http://{{s3_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}" />
+        </a>
+    </div>
     {% endfor %}
-    </ul>
+    </div>
     {% else %}
     No images.
     {% endif %}

@@ -64,7 +64,6 @@ class Image(models.Model):
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, editable=False)
-    age = models.IntegerField()
 
     def __unicode__(self):
         return "%s' profile.." % self.user
