@@ -2,11 +2,12 @@
 {% load i18n %}
 
 {% block content %}
-    <h2>{% trans "Your image has been uploaded. Now fill in some details!" %}</h2>
+    <div class="form-box">
+    <h1>{% trans "Your image has been uploaded. Now fill in some details!" %}</h1>
     <form action="/upload/process_image_details" method="post">
         {{form.as_p}}
         <input type="hidden" name="image_id" value="{{image.id}}" />
-        <p><input type="submit" value="{% trans "Continue" %} &rarr;" /></p>
+        <p><input class="button" type="submit" value="{% trans "Continue" %} &rarr;" /></p>
     </form>
-
+    </div>
 {% endblock %}

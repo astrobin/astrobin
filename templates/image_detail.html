@@ -2,16 +2,6 @@
 {% load i18n %}
 
 {% block content %}
-    <h2>{% trans "Fullsize:" %}</h2>
-    <img src="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}" />
-    <h2>{% trans "Resized:" %}</h2>
+    <h2>{{image.subjects}}</h2>
     <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" />
-    <h2>{% trans "Thumbnail:" %}</h2>
-    <img src="http://{{s3_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}" />
-    <h2>{% trans "Small thumbnail:" %}</h2>
-    <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}" />
-    <h2>{% trans "Inverted:" %}</h2>
-    <img src="http://{{s3_inverted_bucket}}.{{s3_url}}/{{image.filename}}" />
-    <h2>{% trans "Resized inverted:" %}</h2>
-    <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}" />
 {% endblock %}

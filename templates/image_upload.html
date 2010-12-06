@@ -2,8 +2,10 @@
 {% load i18n %}
 
 {% block content %}
-    <form enctype="multipart/form-data" action="/upload/process" method="post">
-        {{form.as_p}}
-        <p><input type="submit" value="{% trans "Continue" %} &rarr;" /></p>
-    </form>
+        <div class="form-box">
+            <form enctype="multipart/form-data" action="/upload/process" method="post">
+                {{form.as_p}}
+                <p><input class="button" type="submit" value="{% trans "Continue" %} &rarr;" /></p>
+            </form>
+        </div>
 {% endblock %}

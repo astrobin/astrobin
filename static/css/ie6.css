@@ -1,7 +1,7 @@
 /* ie fix */
 
 /*  ribbon GIF format. ie6 doesn't support transparent PNG */
-#featured-ribbon { background: url(../images/ribbon.gif) no-repeat; }
+#abpod-ribbon { background: url(../images/abpod-ribbon.gif) no-repeat; }
 
 /* display:block fix */
 * html body .sidemenu ul li { height: 1%; }

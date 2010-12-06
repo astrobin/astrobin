@@ -57,12 +57,14 @@ S3_THUMBNAILS_BUCKET = 'astrobin_thumbnails'
 S3_SMALL_THUMBNAILS_BUCKET = 'astrobin_small_thumbnails'
 S3_INVERTED_BUCKET = 'astrobin_inverted'
 S3_RESIZED_INVERTED_BUCKET = 'astrobin_resized_inverted'
+S3_ABPOD_BUCKET = 'astrobin_abpod'
 S3_AVATARS_BUCKET = 'astrobin_avatars'
 S3_URL = 's3.amazonaws.com'
 
 RESIZED_IMAGE_SIZE = 720
 THUMBNAIL_SIZE = 230
 SMALL_THUMBNAIL_SIZE = 100
+ABPOD_SIZE = 350
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -84,6 +86,11 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     '/var/www/astrobin/templates'
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.core.context_processors.auth',
 )
 
 INSTALLED_APPS = (
