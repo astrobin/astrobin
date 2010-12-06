@@ -15,6 +15,7 @@ from uuid import uuid4
 import os
 
 from models import Image
+from models import ABPOD
 from forms import ImageUploadForm
 from forms import ImageUploadDetailsForm
 from forms import UserProfileEditForm
@@ -23,14 +24,22 @@ from file_utils import store_image_in_s3
 def index(request):
     """Main page"""
 
+    # get ABPOD
+    try:
+        abpod = ABPOD.objects.all()[0]
+    except IndexError:
+        abpod = None
+
     return object_list(
         request, 
-        queryset=Image.objects.all(),
+        queryset=Image.objects.all()[:8],
         template_name='index.html',
         template_object_name='image',
         extra_context = {"thumbnail_size":settings.THUMBNAIL_SIZE,
                          "s3_thumbnails_bucket":settings.S3_THUMBNAILS_BUCKET,
-                         "s3_url":settings.S3_URL})
+                         "s3_abpod_bucket":settings.S3_ABPOD_BUCKET,
+                         "s3_url":settings.S3_URL,
+                         "abpod":abpod})
 
 def image_detail(request, id):
     """ Show details of an image"""

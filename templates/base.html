@@ -28,30 +28,32 @@
 	<!-- header -->
 	<div id="header">
         {% block header %}
-        <div id="login">
-        	{% if user.is_authenticated %}
-        	{% trans "Logged in as" %} {{ user.username }} 
-        	(<a href="{% url auth_logout %}">{% trans "Log out" %}</a>
-        	{% else %}
-        	<a href="{% url auth_login %}">{% trans "Log in" %}</a>
-        	{% endif %}
-        </div>
-		
 		<h1 id="logo-text"><a href="/" title="">AstroBin</a></h1>
         <p id="slogan">
             {% trans "The definite home for your astrophotography images." %}
         </p>
 
+        {% load tags %}
 		<div  id="nav">
 			<ul>
-				<li id="current"><a href="/">{% trans "Home" %}</a></li>
+				<li id="{% current request "^/$" %}"><a href="/">{% trans "Home" %}</a></li>
 				<li><a href="#">{% trans "ABPOD" %}</a></li>
 				<li><a href="#">{% trans "Top images" %}</a></li>
 				<li><a href="#">{% trans "Support" %}</a></li>
-				<li><a href="#">{% trans "About" %}</a></li>
-				<li class="upload"><a href="/upload">{% trans "Upload" %}</a></li>		
+				<li><a href="#">{% trans "About" %}</a></li>	
 			</ul>		
 		</div>
+		<div id="user-nav">
+			<ul>
+			    {% if user.is_authenticated %}
+				<li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
+				<li id="{% current request "^/upload/" %}"><a href="/upload">{% trans "Upload!" %}</a></li>
+				<li id="{% current request "^/profile/" %}"><a href="/profile">{% trans "Profile" %}</a></li>
+				{% else %}
+				<li><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
+				{% endif %}
+			</ul>		
+		</div
 
 		<form id="quick-search" action="index.html" method="get" >
 			<p>
@@ -63,6 +65,8 @@
 		{% endblock %}
 	<!-- /header -->	
 	</div>
+
+	{% block abpod %}{% endblock %}
 
 	<!-- content -->
 	<div id="content-wrap" class="clear">

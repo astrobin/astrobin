@@ -232,7 +232,7 @@ input.button {
 	margin: 0; padding: 0;			
 	overflow: hidden;	
 	height: 60px;
-	width: 900px;	
+	width: 600px;	
 }
 #header #nav ul {	
 	float: left;	
@@ -258,13 +258,50 @@ input.button {
 	border: none;
 	color: #fff;		
 }
-#header #nav ul li.upload a {
-	color: red;
-}
 #header #nav ul li#current { 
 	background: url(../images/left-nav-bg.gif) no-repeat;			
 }
 #header #nav ul li#current a {	
+	background: url(../images/right-nav-bg.gif) no-repeat right top;
+	color: #f0e8e8;		
+}
+
+#header #user-nav {
+    float: right;
+	margin: 0; padding: 0;			
+	overflow: hidden;	
+	height: 60px;
+	width: 300px;	
+}
+#header #user-nav ul {	
+	float: right;	
+	margin: 0;	padding: 0;		
+	width: 100%;	
+	list-style: none;	
+}
+#header #user-nav ul li {
+	float: right;
+	margin: 0; padding: 0 0 0 5px;			
+}
+#header #user-nav ul li a:link,
+#header #user-nav ul li a:visited {
+	float: right;
+	margin: 0;
+	padding: 30px 15px 17px 11px;	
+	font: bold 12px Helvetica, Verdana, Sans-serif;
+	text-transform: lowercase;			
+	color: #867474;
+}
+#header #user-nav ul li a:hover, 
+#header #user-nav ul li a:active {
+	border: none;
+	color: #fff;		
+}
+
+#header #user-nav ul li#current { 
+	background: url(../images/left-nav-bg.gif) no-repeat;			
+}
+#header #user-nav ul li#current a {	
 	background: url(../images/right-nav-bg.gif) no-repeat right top;
 	color: #f0e8e8;		
 }
@@ -302,20 +339,15 @@ input.button {
 	display: none;
 }
 
-#login {
-	top: 27px;
-	position: relative;
-	float: right;
-}
-/* featured block */
-#featured {
+/* abpod block */
+#abpod {
 	clear: both;
 	margin: 0;	
 	padding-bottom: 20px;
 	width: 940px;		
 	background: url(../images/sep-bg.jpg) no-repeat center bottom; 		
 }
-#featured-block {
+#abpod-block {
 	position: relative;
 	border: 1px solid #251a14;
 	background-color: #130d0a;
@@ -323,45 +355,45 @@ input.button {
 	margin-left: 10px;	
 	padding-bottom: 25px;				
 }
-#featured-ribbon {
+#abpod-ribbon {
 	position: absolute;
-	background: url(../images/ribbon.png) no-repeat;
+	background: url(../images/abpod-ribbon.png) no-repeat;
 	width: 99px;
 	height: 98px;
 	top: -1px;
 	right: -2px;
 	z-index: 99999;
 }
-#featured h2 {
+#abpod h2 {
 	margin-bottom: 0;
 	padding-bottom: 0;	
 	font: bold 2.7em Helvetica, Verdana, Sans-serif;	
 	letter-spacing: -2.0px;	
 	color: #f0e8e8;
 }
-#featured h2 a {
+#abpod h2 a {
 	color: #f0e8e8;
 	border: none;	
 }
-#featured .image-block {
+#abpod .image-block {
 	float: left;
 	width: 380px;	
 	margin: 20px 0 0 25px;
 	padding: 10px 0 0 0;
 	display: inline;	
 }
-#featured .image-block img {
+#abpod .image-block img {
 	background-color: #1c130e;
    border: 1px solid #251a15;
 	padding: 12px;
 }
-#featured .text-block {
+#abpod .text-block {
 	float: right;
 	width: 480px;
 	margin: 15px 25px 0 0;
 	display: inline;
 }
-#featured a.more-link {
+#abpod a.more-link {
 	float: left;
 	margin-top: 25px;
 	padding: 5px 10px;
@@ -375,7 +407,7 @@ input.button {
 	color: #fff;	
 	display: block;
 }
-#featured a.more-link:hover {
+#abpod a.more-link:hover {
 	border: 1px solid #2f4c13;
 	background: #4a781d url(../images/button-hover-bg.png) repeat-x;
 }
@@ -392,6 +424,65 @@ input.button {
 	margin-left: 10px;		
 	padding-bottom: 40px;
 	display: inline;		
+}
+
+.form-box {
+    margin:0 auto;
+    width:500px;
+    position:relative;
+}
+
+.form-box h1 {
+    color:#ffffff;
+    font-size:18px;
+    letter-spacing: 0;
+    padding:5px 0 5px 5px;
+    border-bottom:1px solid #161712;
+    border-top:1px solid #161712;
+}
+
+.form-box p {
+    width:100%;
+    display: block;   
+    padding:10px 0 10px 0;
+}
+
+.form-box p label {
+    display: block;
+    color:#bbbbbb;
+    font-size:12px;
+    float:left;
+    width:100px;
+    text-align:right;
+    padding:5px 20px 0 0;
+}
+
+.form-box .input_text {
+    padding:10px 10px;
+    width:200px;
+    border-bottom: 1px double #171717;
+    border-top: 1px double #171717;
+    border-left:1px double #333333;
+    border-right:1px double #333333;
+}
+
+.form-box .message{
+    padding:7px 7px;
+    width:350px;    
+    border-bottom: 1px double #171717;
+    border-top: 1px double #171717;
+    border-left:1px double #333333;
+    border-right:1px double #333333;
+    overflow:hidden;
+    height:150px; }
+    
+.form-box .button {
+    margin:0 0 10px 0;
+    padding:4px 7px;
+    border:0px;
+    position: relative;
+    top:10px; left:308px;
+    width:100px;
 }
 
 /* Main */
@@ -626,14 +717,14 @@ input.button {
 .post .postmeta .date { margin: 0 10px 0 5px;	}
 
 .post .post-info, 
-#featured .post-info { 
+#abpod .post-info { 
 	margin-top: 0; 
 	text-transform: uppercase; 
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 	font-size: 9px;	
 }
 .post .post-info a, .post .post-info a:visited,
-#featured .post-info a, #featured .post-info a:visited { color: #6f892c; border: none; font-weight: bold }
+#abpod .post-info a, #abpod .post-info a:visited { color: #6f892c; border: none; font-weight: bold }
 .post .tags {
 	padding: 7px 15px; margin: 20px 20px 15px 20px;	
 	border-top: 1px solid #34251C;

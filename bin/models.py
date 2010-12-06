@@ -54,13 +54,23 @@ class Image(models.Model):
     mount = models.CharField(max_length=32)
 
     description = models.TextField()
-
+    
+    class Meta:
+        ordering = ('-uploaded', '-id')
+        
     def __unicode__(self):
         return self.subjects
 
     def save(self):
         self.uploaded = datetime.now()
         models.Model.save(self)
+
+class ABPOD(models.Model):
+	image = models.ForeignKey(Image, unique=True)
+	date = models.DateTimeField()
+	
+	def __unicode__(self):
+		return self.image.subjects
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, editable=False)
