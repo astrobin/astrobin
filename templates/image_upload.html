@@ -2,6 +2,9 @@
 {% load i18n %}
 
 {% block content %}
+        <div class="form-side">
+        <p>{% trans "Choose a file from your hard-drive." %}</p>
+        </div>
         <div class="form-box">
             <form enctype="multipart/form-data" action="/upload/process" method="post">
                 {{form.as_p}}
