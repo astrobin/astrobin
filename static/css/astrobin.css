@@ -482,7 +482,7 @@ input.button {
     padding:4px 7px;
     border:0px;
     position: relative;
-    top:10px; left:308px;
+    top:10px; left:272px;
     width:100px;
 }
 
@@ -889,6 +889,7 @@ p.thumbs {
 .form-side {
     float:left;
     width: 20%;
+    text-align: left;
 }
 
 .form-side ul {
