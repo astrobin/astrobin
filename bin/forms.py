@@ -11,6 +11,7 @@ class ImageUploadDetailsForm(forms.ModelForm):
     class Meta:
         model = Image
 
-class UserProfileEditForm(forms.ModelForm):
+class UserProfileEditBasicForm(forms.ModelForm):
     class Meta:
         model = UserProfile
+        fields = ('location', 'website', 'job', 'hobbies')

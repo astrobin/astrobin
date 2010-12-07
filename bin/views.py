@@ -16,9 +16,10 @@ import os
 
 from models import Image
 from models import ABPOD
+from models import UserProfile
 from forms import ImageUploadForm
 from forms import ImageUploadDetailsForm
-from forms import UserProfileEditForm
+from forms import UserProfileEditBasicForm
 from file_utils import store_image_in_s3
 
 def index(request):
@@ -109,6 +110,15 @@ def image_upload_process_details(request):
             },
             context_instance=RequestContext(request))
 
+    image.subjects = form.cleaned_data['subjects']
+    image.camera = form.cleaned_data['camera']
+    image.focal_reducer = form.cleaned_data['focal_reducer']
+    image.telescope = form.cleaned_data['telescope']
+    image.mount = form.cleaned_data['mount']
+    image.description = form.cleaned_data['description']
+
+    image.save()
+
     return HttpResponseRedirect("/show/" + image_id)
 
 @require_GET
@@ -123,7 +133,7 @@ def user_page(request, username):
 
 @login_required
 @require_GET
-def user_profile_edit(request, username):
+def user_profile_edit_basic(request, username):
     """Edits own profile"""
 
     try:
@@ -138,6 +148,28 @@ def user_profile_edit(request, username):
         return render_to_response("403.html",
             context_instance=RequestContext(request))
 
-    return render_to_response("user_profile_edit.html",
-        {"form":UserProfileEditForm()},
+    userProfile = UserProfile.objects.get(user = requested_user)
+    form = UserProfileEditBasicForm(instance = userProfile)
+    return render_to_response("user_profile_edit_basic.html",
+        {"form":form},
         context_instance=RequestContext(request))
+
+@login_required
+@require_POST
+def user_profile_save_basic(request):
+    """Saves the form"""
+
+    form = UserProfileEditBasicForm(request.POST)
+    if form.is_valid():
+        userProfile = UserProfile.objects.get(user = request.user)
+        userProfile.location = form.cleaned_data['location']
+        userProfile.website  = form.cleaned_data['website']
+        userProfile.job      = form.cleaned_data['job']
+        userProfile.hobbies  = form.cleaned_data['hobbies']
+
+        userProfile.save()
+
+    return render_to_response("user_profile_edit_basic.html",
+        {"form":form},
+        context_instance=RequestContext(request))
+ 

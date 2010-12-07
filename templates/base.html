@@ -47,8 +47,8 @@
 			<ul>
 			    {% if user.is_authenticated %}
 				<li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-				<li id="{% current request "^/upload/" %}"><a href="/upload">{% trans "Upload!" %}</a></li>
-				<li id="{% current request "^/profile/" %}"><a href="/profile">{% trans "Profile" %}</a></li>
+				<li id="{% current request "^/upload/" %}"><a href="/upload/">{% trans "Upload!" %}</a></li>
+				<li id="{% current request "^/profile/" %}"><a href="/{{user.username}}/edit/">{% trans "Profile" %}</a></li>
 				{% else %}
 				<li><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
 				{% endif %}
@@ -86,10 +86,7 @@
 			<h3>{% trans "About" %}</h3>			
 			
 			<p>
-			Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-			Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
-			posuere nunc justo tempus leo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-			Cras id urna. <a href="index.html">Learn more...</a>
+			{% trans "AstroBin is a community of astrophotographers and the last place where you need to upload your astrophotography images. It a unique combination of image hoster, forum and community specifically targetted to astrophotographers and their needs. Made by an astrophotographer, for the astrophotographers." %}
 			</p>			
 			
 		</div>		
