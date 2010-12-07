@@ -886,15 +886,16 @@ p.thumbs {
 	content: " "; 
 }
 
-#profile-edit-menu {
+.form-side {
     float:left;
     width: 20%;
 }
 
-#profile-edit-menu ul {
+.form-side ul {
     float:left;
 }
 
-#profile-edit-menu ul li {
+.form-side ul li {
     list-style: none;
 }
+

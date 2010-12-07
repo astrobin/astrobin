@@ -173,3 +173,19 @@ def user_profile_edit_gear(request):
         {"form":form},
         context_instance=RequestContext(request))
 
+@login_required
+@require_POST
+def user_profile_save_gear(request):
+    """Saves the form"""
+
+    form = UserProfileEditGearForm(request.POST)
+    if form.is_valid():
+        userProfile = UserProfile.objects.get(user = request.user)
+        userProfile.telescopes = form.cleaned_data['telescopes']
+
+        userProfile.save()
+
+    return render_to_response("user_profile_edit_gear.html",
+        {"form":form},
+        context_instance=RequestContext(request))
+

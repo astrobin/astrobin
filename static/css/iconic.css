@@ -22,7 +22,7 @@
 }
 
 input.ac_loading {
-	background: #FFF url('../images/loading-indicator.gif') no-repeat;
+	background: #91807F url('../images/loading-indicator.gif') no-repeat;
 	background-position: right;
 }
 
@@ -30,6 +30,8 @@ input.ac_loading {
 /* change the X to an image */
 .results_on_deck .iconic, .results_on_deck .iconic:hover {
     float: left;
+    margin-left: 170px;
+    margin-right: 5px;
     background: url(../images/trashcan.gif) no-repeat;
     color: transparent;
     border: 0;

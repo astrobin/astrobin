@@ -8,23 +8,22 @@ from django import forms
 
 class Gear(models.Model):
     name = models.CharField(max_length=64)
-    purchase_date = models.DateTimeField('date purchased')
 
     def __unicode__(self):
         return self.name
 
 class Telescope(Gear):
-    focal_length = models.IntegerField()
+    focal_length = models.IntegerField(null=True, blank=True)
     aperture = models.IntegerField()
 
 class Mount(Gear):
     pass
 
 class Camera(Gear):
-    chip_size = models.IntegerField()
+    pass
 
 class FocalReducer(Gear):
-    ratio = models.DecimalField(max_digits=3, decimal_places=2)
+    ratio = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
 
 class Subject(models.Model):
     name = models.CharField(max_length=64)
