@@ -6,16 +6,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django import forms
 
-def upload_image_to(instance, filename):
-    format = 'images/%Y/%m/%d'
-    prefix = os.path.normpath(force_unicode(datetime.datetime.now().strftime(smart_str(format))))
-    postfix = '%s%s' % (
-            string.join(random.sample(string.ascii_letters + string.digits, 5), ''),
-            os.path.splitext(filename)[-1],
-            )
-    filepath = '%s_%s' % (prefix, postfix)
-    return filepath
-
 class Gear(models.Model):
     name = models.CharField(max_length=64)
     purchase_date = models.DateTimeField('date purchased')
@@ -23,15 +13,15 @@ class Gear(models.Model):
     def __unicode__(self):
         return self.name
 
-class Camera(Gear):
-    chip_size = models.IntegerField()
-
 class Telescope(Gear):
     focal_length = models.IntegerField()
     aperture = models.IntegerField()
 
 class Mount(Gear):
     pass
+
+class Camera(Gear):
+    chip_size = models.IntegerField()
 
 class FocalReducer(Gear):
     ratio = models.DecimalField(max_digits=3, decimal_places=2)
@@ -61,9 +51,10 @@ class Image(models.Model):
     def __unicode__(self):
         return self.subjects
 
-    def save(self):
+    def save(self, *args, **kwargs):
         self.uploaded = datetime.now()
-        models.Model.save(self)
+        super(Image, self).save(*args, **kwargs)
+
 
 class ABPOD(models.Model):
 	image = models.ForeignKey(Image, unique=True)
@@ -75,9 +66,23 @@ class ABPOD(models.Model):
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, editable=False)
 
-    def __unicode__(self):
-        return "%s' profile.." % self.user
+    # Basic Information
+    location = models.CharField(max_length=32, null=True, blank=True)
+    website = models.CharField(max_length=32, null=True, blank=True)
+    job = models.CharField(max_length=32, null=True, blank=True)
+    hobbies = models.CharField(max_length=64, null=True, blank=True)
 
+    # Avatar
+    avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
+
+    # Gear
+    telescopes = models.ManyToManyField(Telescope, null=True, blank=True)
+    mounts = models.ManyToManyField(Mount, null=True, blank=True)
+    cameras = models.ManyToManyField(Camera, null=True, blank=True)
+    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True)
+    
+    def __unicode__(self):
+        return "%s' profile" % self.user
 
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:  

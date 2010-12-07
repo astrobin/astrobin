@@ -19,5 +19,7 @@ urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^(?P<username>\w+)/$', views.user_page),
-    (r'^(?P<username>\w+)/edit/$', views.user_profile_edit),
+    (r'^(?P<username>\w+)/edit/$', views.user_profile_edit_basic),
+    (r'^(?P<username>\w+)/edit/basic$', views.user_profile_edit_basic),
+    (r'^profile/save/basic/$', views.user_profile_save_basic),
 )

@@ -47,9 +47,9 @@ h1, h2, h3, h4 {
 	color: #f0e8e8;
 	margin: 10px 20px 7px 20px;	 
 }
-h1 { font-size: 2.9em; font-weight: bold; letter-spacing: -2px; }
-h2 { font-size: 2.8em; font-weight: bold; letter-spacing: -2px;}
-h3 { font-size: 2.1em; font-weight: normal; letter-spacing: -0.5px; padding-top: 5px; }
+h1 { font-size: 2.9em; font-weight: bold; }
+h2 { font-size: 2.8em; font-weight: bold; margin-bottom: 1em; }
+h3 { font-size: 2.1em; font-weight: normal; padding-top: 5px; }
 h4 { font-size: 1.7em; }
 
 /* Lists */
@@ -885,3 +885,14 @@ p.thumbs {
 	content: " "; 
 }
 
+#profile-edit-menu {
+    float:left;
+}
+
+#profile-edit-menu ul {
+    float:left;
+}
+
+#profile-edit-menu ul li {
+    list-style: none;
+}

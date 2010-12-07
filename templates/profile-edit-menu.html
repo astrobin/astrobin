@@ -1,0 +1,9 @@
+    {% load i18n %}
+    <h2>{% trans "Hello" %} {{user.username}}, {% trans "edit your profile!" %}</h2>
+    <div id="profile-edit-menu">
+        <ul>
+            <li><a href="/{{user.username}}/edit/basic">{% trans "Basic Information" %}</a></li>
+            <li><a href="/{{user.username}}/edit/avatar">{% trans "Profile Picture" %}</a></li>
+            <li><a href="/{{user.username}}/edit/gear">{% trans "Astrophotography Gear" %}</a></li>
+    </div>
+
