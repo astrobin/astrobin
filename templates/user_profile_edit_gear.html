@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    {% include 'profile-edit-menu.html' %}
+    <div class="form-box">
+        <form method="post" action="/profile/save/gear/">
+        {{form.as_p}}
+        <p><input class="button" type="submit" value="{% trans "Save" %}" /></p>
+        </form>
+    </div>  
+{% endblock %}
+

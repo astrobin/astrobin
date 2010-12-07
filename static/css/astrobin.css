@@ -137,7 +137,6 @@ form {
 	background-color: #130d0a;	
 }
 form p {
-	border-bottom: 1px solid #221813; 
 	margin: 0;
 	padding: 13px 5px 8px 5px;		
 	color: #fff;
@@ -155,6 +154,7 @@ input, select, textarea {
 	background-color: #1E150D;
 	font: 11px Verdana, Helvetica, Sans-Serif;
 	color: #925D3A;
+    width: 462px;
 }
 input:focus, select:focus, textarea:focus {
 	background-color: #934A00;
@@ -326,6 +326,7 @@ input.button {
 	border: none;
 	background: transparent;
 	color: #4a413c;	
+    width: 24px;
 }
 #header form#quick-search .tbox {
 	margin: 6px 0 0 5px; 
@@ -428,8 +429,8 @@ input.button {
 
 .form-box {
     margin:0 auto;
-    width:500px;
-    position:relative;
+    float: left;
+    width: 80%;
 }
 
 .form-box h1 {
@@ -444,7 +445,7 @@ input.button {
 .form-box p {
     width:100%;
     display: block;   
-    padding:10px 0 10px 0;
+    padding:5px 0 5px 0;
 }
 
 .form-box p label {
@@ -452,7 +453,7 @@ input.button {
     color:#bbbbbb;
     font-size:12px;
     float:left;
-    width:100px;
+    width:150px;
     text-align:right;
     padding:5px 20px 0 0;
 }
@@ -887,6 +888,7 @@ p.thumbs {
 
 #profile-edit-menu {
     float:left;
+    width: 20%;
 }
 
 #profile-edit-menu ul {

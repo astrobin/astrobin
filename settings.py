@@ -101,8 +101,14 @@ INSTALLED_APPS = (
     'bin',
     'django.contrib.admin',
     'registration',
+    'ajax_select',
 )
 
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_ACTIVATION_DAYS = 7
 AUTH_PROFILE_MODULE = 'bin.UserProfile'
+
+AJAX_LOOKUP_CHANNELS = {
+    'telescope' : ('bin.lookups', 'TelescopeLookup'),
+}
+

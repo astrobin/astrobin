@@ -18,6 +18,13 @@
 <link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
 <!--[if IE 6]><link rel="stylesheet" type="text/css" href="/static/css/ie6.css" media="screen" /><![endif]-->
 
+<link rel="stylesheet" type="text/css" href="/static/css/iconic.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/jquery.autocomplete.css" />
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script> 
+<script type="text/javascript" src="/static/js/jquery.autocomplete.min.js"></script> 
+<script type="text/javascript" src="/static/js/ajax_select.js"></script> 
+
 </head>
 
 
@@ -48,7 +55,7 @@
 			    {% if user.is_authenticated %}
 				<li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
 				<li id="{% current request "^/upload/" %}"><a href="/upload/">{% trans "Upload!" %}</a></li>
-				<li id="{% current request "^/profile/" %}"><a href="/{{user.username}}/edit/">{% trans "Profile" %}</a></li>
+				<li id="{% current request "^/profile/" %}"><a href="/profile/edit/">{% trans "Profile" %}</a></li>
 				{% else %}
 				<li><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
 				{% endif %}

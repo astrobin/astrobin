@@ -20,6 +20,7 @@ from models import UserProfile
 from forms import ImageUploadForm
 from forms import ImageUploadDetailsForm
 from forms import UserProfileEditBasicForm
+from forms import UserProfileEditGearForm
 from file_utils import store_image_in_s3
 
 def index(request):
@@ -133,22 +134,10 @@ def user_page(request, username):
 
 @login_required
 @require_GET
-def user_profile_edit_basic(request, username):
+def user_profile_edit_basic(request):
     """Edits own profile"""
 
-    try:
-        requested_user = User.objects.get(username=username)
-    except DoesNotExist:
-        return render_to_response("user_not_found.html",
-        {"username":username},
-        context_instance=RequestContext(request))
-
-    if requested_user != request.user:
-        # what are we trying to do, uh, sneaky one?
-        return render_to_response("403.html",
-            context_instance=RequestContext(request))
-
-    userProfile = UserProfile.objects.get(user = requested_user)
+    userProfile = UserProfile.objects.get(user = request.user)
     form = UserProfileEditBasicForm(instance = userProfile)
     return render_to_response("user_profile_edit_basic.html",
         {"form":form},
@@ -173,3 +162,14 @@ def user_profile_save_basic(request):
         {"form":form},
         context_instance=RequestContext(request))
  
+@login_required
+@require_GET
+def user_profile_edit_gear(request):
+    """Edits own profile"""
+
+    userProfile = UserProfile.objects.get(user = request.user)
+    form = UserProfileEditGearForm(instance = userProfile)
+    return render_to_response("user_profile_edit_gear.html",
+        {"form":form},
+        context_instance=RequestContext(request))
+

@@ -17,9 +17,12 @@ urlpatterns = patterns('',
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/(.*)', admin.site.root),
+    (r'^ajax_select/', include('ajax_select.urls')),
+
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^(?P<username>\w+)/$', views.user_page),
-    (r'^(?P<username>\w+)/edit/$', views.user_profile_edit_basic),
-    (r'^(?P<username>\w+)/edit/basic$', views.user_profile_edit_basic),
-    (r'^profile/save/basic/$', views.user_profile_save_basic),
+    (r'^profile/edit/$', views.user_profile_edit_basic),
+    (r'^profile/edit/basic$', views.user_profile_edit_basic),
+    (r'^profile/save/basic$', views.user_profile_save_basic),
+    (r'^profile/edit/gear$', views.user_profile_edit_gear),
 )
