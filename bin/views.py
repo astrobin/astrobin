@@ -181,9 +181,9 @@ def user_profile_save_gear(request):
     form = UserProfileEditGearForm(request.POST)
     if form.is_valid():
         userProfile = UserProfile.objects.get(user = request.user)
-        userProfile.telescopes = form.cleaned_data['telescopes']
-
+        userProfile.telescopes = request.POST.getlist('telescopes[]')
         userProfile.save()
+        form = UserProfileEditGearForm(instance = userProfile)
 
     return render_to_response("user_profile_edit_gear.html",
         {"form":form},

@@ -5,6 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 from bin import views
+from bin import lookups
 
 urlpatterns = patterns('',
     (r'^$', views.index),
@@ -26,4 +27,5 @@ urlpatterns = patterns('',
     (r'^profile/save/basic/$', views.user_profile_save_basic),
     (r'^profile/edit/gear/$', views.user_profile_edit_gear),
     (r'^profile/save/gear/$', views.user_profile_save_gear),
+    (r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete),
 )
