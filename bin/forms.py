@@ -1,8 +1,5 @@
 from django import forms
 from django.db import models
-from ajax_select.fields import AutoCompleteSelectMultipleField, AutoCompleteSelectField
-from ajax_select.fields import autoselect_fields_check_can_add
-from ajax_select.admin import AjaxSelectAdmin
 
 from models import Image
 from models import UserProfile
@@ -20,9 +17,6 @@ class UserProfileEditBasicForm(forms.ModelForm):
         fields = ('location', 'website', 'job', 'hobbies')
 
 class UserProfileEditGearForm(forms.ModelForm):
-    # declare a field and specify the named channel that it uses
-    telescopes = AutoCompleteSelectMultipleField('telescope', required=False)
     class Meta:
         model = UserProfile
         fields = ('telescopes')
-
