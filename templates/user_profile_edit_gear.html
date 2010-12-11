@@ -8,6 +8,18 @@
         {{form.as_p}}
         <p><input class="button" type="submit" value="{% trans "Save" %}" /></p>
         </form>
+        <script type="text/javascript">
+            $(document).ready(function(){                
+                $("#id_telescopes").fcbkcomplete({
+                    json_url: "/autocomplete/telescopes/",
+                    addontab: true,
+                    cache: false,
+                    filter_case: false,
+                    height: 2                    
+                });
+            });
+        </script>
+ 
     </div>  
 {% endblock %}
 
