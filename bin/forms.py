@@ -16,7 +16,5 @@ class UserProfileEditBasicForm(forms.ModelForm):
         model = UserProfile
         fields = ('location', 'website', 'job', 'hobbies')
 
-class UserProfileEditGearForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('telescopes')
+class UserProfileEditGearForm(forms.Form):
+    telescopes = forms.CharField()

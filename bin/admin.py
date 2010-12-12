@@ -9,4 +9,4 @@ admin.site.register(FocalReducer)
 admin.site.register(Subject)
 admin.site.register(Image)
 admin.site.register(ABPOD)
-
+admin.site.register(UserProfile)
