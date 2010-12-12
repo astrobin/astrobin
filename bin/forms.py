@@ -7,9 +7,10 @@ from models import UserProfile
 class ImageUploadForm(forms.Form):
     file = forms.ImageField()
 
-class ImageUploadDetailsForm(forms.ModelForm):
-    class Meta:
-        model = Image
+class ImageUploadDetailsForm(forms.Form):
+    title = forms.CharField(max_length=128)
+    subjects = forms.CharField()
+    description = forms.CharField(widget=forms.Textarea)
 
 class UserProfileEditBasicForm(forms.ModelForm):
     class Meta:

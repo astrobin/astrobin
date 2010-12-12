@@ -14,6 +14,7 @@ from django.contrib.auth.models import User
 from uuid import uuid4
 import os
 import simplejson
+import csv
 
 from models import Image
 from models import ABPOD
@@ -22,6 +23,7 @@ from models import Telescope
 from models import Mount
 from models import Camera
 from models import FocalReducer
+from models import Subject
 from forms import ImageUploadForm
 from forms import ImageUploadDetailsForm
 from forms import UserProfileEditBasicForm
@@ -100,6 +102,7 @@ def image_upload_process(request):
          "s3_images_bucket":settings.S3_IMAGES_BUCKET,
          "s3_url":settings.S3_URL,
          "form":ImageUploadDetailsForm(),
+         "subjects_prefill":[],
         },
         context_instance=RequestContext(request))
 
@@ -112,21 +115,18 @@ def image_upload_process_details(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
 
-    if not form.is_valid():
-        return render_to_response("image_upload_phase_2.html",
-            {"image":image,
-             "s3_images_bucket":settings.S3_IMAGES_BUCKET,
-             "s3_url":settings.S3_URL,
-             "form":form,
-            },
-            context_instance=RequestContext(request))
+    reader = csv.reader([request.POST['as_values_subjects']],
+                        skipinitialspace = True)
+    for row in reader:
+        for name in row:
+            if name != '':
+                subject, created = Subject.objects.get_or_create(name = name)
+                if created:
+                    subject.save()
+                image.subjects.add(subject)
 
-    image.subjects = form.cleaned_data['subjects']
-    image.camera = form.cleaned_data['camera']
-    image.focal_reducer = form.cleaned_data['focal_reducer']
-    image.telescope = form.cleaned_data['telescope']
-    image.mount = form.cleaned_data['mount']
-    image.description = form.cleaned_data['description']
+    image.title = request.POST['title']
+    image.description = request.POST['description']
 
     image.save()
 
@@ -193,8 +193,6 @@ def user_profile_edit_gear(request):
 @require_POST
 def user_profile_save_gear(request):
     """Saves the form"""
-
-    import csv
 
     profile = UserProfile.objects.get(user = request.user)
 
