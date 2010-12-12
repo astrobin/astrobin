@@ -12,34 +12,44 @@
                 var mountsData =         {items:{% autoescape off %}{{mounts_prefill}}{% endautoescape %}};
                 var camerasData =        {items:{% autoescape off %}{{cameras_prefill}}{% endautoescape %}};
                 var focal_reducersData = {items:{% autoescape off %}{{focal_reducers_prefill}}{% endautoescape %}};
+                var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
+                var emptyText = '{% trans "No results. Press TAB to add it!" %}';
                 $("#id_telescopes").autoSuggest("/autocomplete/telescopes/",
                     {asHtmlID: 'telescopes',
                      selectedItemProp: 'name',
                      searchObjProps: 'name',
                      preFill: telescopesData.items,
                      selectedItemProp: 'name',
-                     selectedValuesProp: 'name'});
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
                 $("#id_mounts").autoSuggest("/autocomplete/mounts/",
                     {asHtmlID: 'mounts',
                      selectedItemProp: 'name',
                      searchObjProps: 'name',
                      preFill: mountsData.items,
                      selectedItemProp: 'name',
-                     selectedValuesProp: 'name'});
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
                 $("#id_cameras").autoSuggest("/autocomplete/cameras/",
                     {asHtmlID: 'cameras',
                      selectedItemProp: 'name',
                      searchObjProps: 'name',
                      preFill: camerasData.items,
                      selectedItemProp: 'name',
-                     selectedValuesProp: 'name'});
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
                 $("#id_focal_reducers").autoSuggest("/autocomplete/focal_reducers/",
                     {asHtmlID: 'focal_reducers',
                      selectedItemProp: 'name',
                      searchObjProps: 'name',
                      preFill: focal_reducersData.items,
                      selectedItemProp: 'name',
-                     selectedValuesProp: 'name'});
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
 
             });
             </script>
