@@ -13,10 +13,12 @@ from django.contrib.auth.models import User
 
 from uuid import uuid4
 import os
+import simplejson
 
 from models import Image
 from models import ABPOD
 from models import UserProfile
+from models import Telescope
 from forms import ImageUploadForm
 from forms import ImageUploadDetailsForm
 from forms import UserProfileEditBasicForm
@@ -168,9 +170,12 @@ def user_profile_edit_gear(request):
     """Edits own profile"""
 
     userProfile = UserProfile.objects.get(user = request.user)
-    form = UserProfileEditGearForm(instance = userProfile)
+    telescopes = userProfile.telescopes.all()
+    prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in telescopes])
+    form = UserProfileEditGearForm()
     return render_to_response("user_profile_edit_gear.html",
-        {"form":form},
+        {"form":form,
+         "telescopes_prefill":prefill},
         context_instance=RequestContext(request))
 
 @login_required
@@ -178,14 +183,27 @@ def user_profile_edit_gear(request):
 def user_profile_save_gear(request):
     """Saves the form"""
 
-    form = UserProfileEditGearForm(request.POST)
-    if form.is_valid():
-        userProfile = UserProfile.objects.get(user = request.user)
-        userProfile.telescopes = request.POST.getlist('telescopes[]')
-        userProfile.save()
-        form = UserProfileEditGearForm(instance = userProfile)
+    import csv
+    userProfile = UserProfile.objects.get(user = request.user)
+    userProfile.telescopes.clear()
+    telescopes = csv.reader([request.POST['as_values_telescopes']],
+                            skipinitialspace = True)
+
+    for row in telescopes:
+        for name in row:
+            if name != '':
+                telescope, created = Telescope.objects.get_or_create(name = name)
+                if created:
+                    telescope.save()
+                userProfile.telescopes.add(telescope)
+    
+    userProfile.save()
+    form = UserProfileEditGearForm()
+    telescopes = userProfile.telescopes.all()
+    prefill = simplejson.dumps([{'value': str(t.id), 'name': t.name} for t in telescopes])
 
     return render_to_response("user_profile_edit_gear.html",
-        {"form":form},
+        {"form":form,
+         "telescopes_prefill":prefill},
         context_instance=RequestContext(request))
 

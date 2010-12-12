@@ -14,7 +14,7 @@ class Gear(models.Model):
 
 class Telescope(Gear):
     focal_length = models.IntegerField(null=True, blank=True)
-    aperture = models.IntegerField()
+    aperture = models.IntegerField(null=True, blank=True)
 
 class Mount(Gear):
     pass
