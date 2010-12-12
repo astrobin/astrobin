@@ -45,10 +45,9 @@ a:hover.more {
 h1, h2, h3, h4 {
 	font: bold 1em/1.5em Helvetica, Verdana, Sans-serif;
 	color: #f0e8e8;
-	margin: 10px 20px 7px 20px;	 
 }
 h1 { font-size: 2.9em; font-weight: bold; }
-h2 { font-size: 2.8em; font-weight: bold; margin-bottom: 1em; }
+h2 { font-size: 2.8em; font-weight: bold; }
 h3 { font-size: 2.1em; font-weight: normal; padding-top: 5px; }
 h4 { font-size: 1.7em; }
 
@@ -417,12 +416,11 @@ input.button {
 #content-wrap {
 	clear: both;	
 	width: 940px;
-	margin: 5px 0 0 0; padding: 0;			
 }
 #content {
 	float: left;
 	width: 920px;
-	margin-left: 10px;		
+    padding: 20px;
 	padding-bottom: 40px;
 	display: inline;		
 }
@@ -898,5 +896,26 @@ p.thumbs {
 
 .form-side ul li {
     list-style: none;
+}
+
+#image-detail {
+    float: left;
+}
+
+#image-detail h2 {
+    font-size: 2em;
+    display: inline;
+    margin-right: 10px;
+}
+
+#image-detail h3 {
+    font-size: 1.25em;
+    display: inline;
+    color: #555;
+    float: right;
+}
+
+#image-detail img#main-image {
+    display: block;
 }
 

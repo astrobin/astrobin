@@ -2,6 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-    <h2>{{image.title}}</h2>
-    <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" />
+    <div id="image-detail">
+        <h2>{{image.title}}</h2>
+        {% ifnotequal image.subjects.count() 0 %}<h3>Contains: {% for s in image.subjects.all %}{{s.name}} {% endfor %}</h3>{% endifnotequal %}
+        <img id="main-image" src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" />
+    </div>
+    <div id="image-sidebar">
+    </div>
 {% endblock %}
