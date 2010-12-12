@@ -2,6 +2,6 @@
 {% load i18n %}
 
 {% block content %}
-    <h2>{{image.subjects}}</h2>
+    <h2>{{image.title}}</h2>
     <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" />
 {% endblock %}

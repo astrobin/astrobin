@@ -6,6 +6,22 @@
     <h1>{% trans "Your image has been uploaded. Now fill in some details!" %}</h1>
     <form action="/upload/process_image_details" method="post">
         {{form.as_p}}
+            <script language="javascript">
+            $(document).ready(function() {
+                var subjectsData = {items:{% autoescape off %}{{subjects_prefill}}{% endautoescape %}};
+                var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
+                var emptyText = '{% trans "No results. Press TAB to add it!" %}';
+                $("#id_subjects").autoSuggest("/autocomplete/subjects/",
+                    {asHtmlID: 'subjects',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: subjectsData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+            });
+            </script>
         <input type="hidden" name="image_id" value="{{image.id}}" />
         <p><input class="button" type="submit" value="{% trans "Continue" %} &rarr;" /></p>
     </form>

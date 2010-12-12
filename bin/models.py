@@ -32,7 +32,8 @@ class Subject(models.Model):
         return self.name
 
 class Image(models.Model):
-    subjects = models.CharField(max_length=128)
+    title = models.CharField(max_length=128)
+    subjects = models.ManyToManyField(Subject)
     filename = models.CharField(max_length=64, editable=False)
     uploaded = models.DateTimeField(editable=False)
 

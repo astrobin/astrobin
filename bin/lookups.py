@@ -2,6 +2,7 @@ from models import Telescope
 from models import Mount
 from models import Camera
 from models import FocalReducer
+from models import Subject
 
 from django.db.models import Q 
 from django.http import HttpResponse
@@ -9,7 +10,11 @@ import simplejson
 
 def autocomplete(request, what):
     values = ()
-    for k, v in {'telescopes':Telescope, 'mounts':Mount, 'cameras':Camera, 'focal_reducers':FocalReducer}.iteritems():
+    for k, v in {'telescopes':Telescope,
+                 'mounts':Mount,
+                 'cameras':Camera,
+                 'focal_reducers':FocalReducer,
+                 'subjects':Subject}.iteritems():
         if what == k:
             values = v.objects.filter(Q(name__istartswith=request.GET['q']))
 
