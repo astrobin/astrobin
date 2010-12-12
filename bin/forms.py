@@ -18,3 +18,7 @@ class UserProfileEditBasicForm(forms.ModelForm):
 
 class UserProfileEditGearForm(forms.Form):
     telescopes = forms.CharField()
+    mounts = forms.CharField()
+    cameras = forms.CharField()
+    focal_reducers = forms.CharField()
+

@@ -19,6 +19,9 @@ from models import Image
 from models import ABPOD
 from models import UserProfile
 from models import Telescope
+from models import Mount
+from models import Camera
+from models import FocalReducer
 from forms import ImageUploadForm
 from forms import ImageUploadDetailsForm
 from forms import UserProfileEditBasicForm
@@ -171,11 +174,21 @@ def user_profile_edit_gear(request):
 
     userProfile = UserProfile.objects.get(user = request.user)
     telescopes = userProfile.telescopes.all()
-    prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in telescopes])
+    telescopes_prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in telescopes])
+    mounts = userProfile.mounts.all()
+    mounts_prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in mounts])
+    cameras = userProfile.cameras.all()
+    cameras_prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in cameras])
+    focal_reducers = userProfile.focal_reducers.all()
+    focal_reducers_prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in focal_reducers])
+
     form = UserProfileEditGearForm()
     return render_to_response("user_profile_edit_gear.html",
         {"form":form,
-         "telescopes_prefill":prefill},
+         "telescopes_prefill":telescopes_prefill,
+         "mounts_prefill":mounts_prefill,
+         "cameras_prefill":cameras_prefill,
+         "focal_reducers_prefill":focal_reducers_prefill},
         context_instance=RequestContext(request))
 
 @login_required
@@ -184,26 +197,48 @@ def user_profile_save_gear(request):
     """Saves the form"""
 
     import csv
-    userProfile = UserProfile.objects.get(user = request.user)
-    userProfile.telescopes.clear()
-    telescopes = csv.reader([request.POST['as_values_telescopes']],
-                            skipinitialspace = True)
 
-    for row in telescopes:
-        for name in row:
-            if name != '':
-                telescope, created = Telescope.objects.get_or_create(name = name)
-                if created:
-                    telescope.save()
-                userProfile.telescopes.add(telescope)
-    
+    userProfile = UserProfile.objects.get(user = request.user)
+
+    userProfile.telescopes.clear()
+    userProfile.mounts.clear()
+    userProfile.cameras.clear()
+    userProfile.focal_reducers.clear()
+
+    telescopes = csv.reader([request.POST['as_values_telescopes']], skipinitialspace = True)
+    mounts = csv.reader([request.POST['as_values_mounts']], skipinitialspace = True)
+    cameras = csv.reader([request.POST['as_values_cameras']], skipinitialspace = True)
+    focal_reducers = csv.reader([request.POST['as_values_focal_reducers']], skipinitialspace = True)
+
+    for k, v in {telescopes    : [Telescope, userProfile.telescopes],
+                 mounts        : [Mount, userProfile.mounts],
+                 cameras       : [Camera, userProfile.cameras],
+                 focal_reducers: [FocalReducer, userProfile.focal_reducers]}.iteritems():
+        for row in k:
+            for name in row:
+                if name != '':
+                    gear_item, created = v[0].objects.get_or_create(name = name)
+                    if created:
+                        gear_item.save()
+                    v[1].add(gear_item)
+
     userProfile.save()
     form = UserProfileEditGearForm()
     telescopes = userProfile.telescopes.all()
-    prefill = simplejson.dumps([{'value': str(t.id), 'name': t.name} for t in telescopes])
+    telescopes_prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in telescopes])
+    mounts = userProfile.mounts.all()
+    mounts_prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in mounts])
+    cameras = userProfile.cameras.all()
+    cameras_prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in cameras])
+    focal_reducers = userProfile.focal_reducers.all()
+    focal_reducers_prefill = simplejson.dumps([{'value_unused': str(t.id), 'name': t.name} for t in focal_reducers])
+
 
     return render_to_response("user_profile_edit_gear.html",
         {"form":form,
-         "telescopes_prefill":prefill},
+         "telescopes_prefill":telescopes_prefill,
+         "mounts_prefill":mounts_prefill,
+         "cameras_prefill":cameras_prefill,
+         "focal_reducers_prefill":focal_reducers_prefill},
         context_instance=RequestContext(request))
 
