@@ -8,10 +8,12 @@
             {{form.as_p}}
             <script language="javascript">
             $(document).ready(function() {
-                var telescopesData =     {items:{% autoescape off %}{{telescopes_prefill}}{% endautoescape %}};
-                var mountsData =         {items:{% autoescape off %}{{mounts_prefill}}{% endautoescape %}};
-                var camerasData =        {items:{% autoescape off %}{{cameras_prefill}}{% endautoescape %}};
+                var telescopesData     = {items:{% autoescape off %}{{telescopes_prefill}}{% endautoescape %}};
+                var mountsData         = {items:{% autoescape off %}{{mounts_prefill}}{% endautoescape %}};
+                var camerasData        = {items:{% autoescape off %}{{cameras_prefill}}{% endautoescape %}};
                 var focal_reducersData = {items:{% autoescape off %}{{focal_reducers_prefill}}{% endautoescape %}};
+                var softwareData       = {items:{% autoescape off %}{{software_prefill}}{% endautoescape %}};
+
                 var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
                 var emptyText = '{% trans "No results. Press TAB to add it!" %}';
                 $("#id_telescopes").autoSuggest("/autocomplete/telescopes/",
@@ -46,6 +48,15 @@
                      selectedItemProp: 'name',
                      searchObjProps: 'name',
                      preFill: focal_reducersData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+                $("#id_software").autoSuggest("/autocomplete/software/",
+                    {asHtmlID: 'software',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: softwareData.items,
                      selectedItemProp: 'name',
                      selectedValuesProp: 'name',
                      startText: startText,

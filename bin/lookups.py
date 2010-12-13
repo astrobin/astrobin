@@ -14,6 +14,7 @@ def autocomplete(request, what):
                  'mounts':Mount,
                  'cameras':Camera,
                  'focal_reducers':FocalReducer,
+                 'software':Software,
                  'subjects':Subject}.iteritems():
         if what == k:
             values = v.objects.filter(Q(name__istartswith=request.GET['q']))
