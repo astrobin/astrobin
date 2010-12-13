@@ -1,4 +1,4 @@
-from bin.models import *
+from astrobin.models import *
 from django.contrib import admin
 
 admin.site.register(Gear)

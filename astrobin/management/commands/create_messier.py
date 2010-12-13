@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from bin.models import Subject
+from astrobin.models import Subject
 
 class Command(BaseCommand):
 	help = "Creates the full list of Messier objects."
