@@ -2,6 +2,7 @@ from models import Telescope
 from models import Mount
 from models import Camera
 from models import FocalReducer
+from models import Software
 from models import Subject
 
 from django.db.models import Q 
