@@ -227,3 +227,8 @@ def user_profile_save_gear(request):
         formContent,
         context_instance=RequestContext(request))
 
+@login_required
+@require_GET
+def user_profile_flickr_import(request):
+    return render_to_response("user_profile_flickr_import.html",
+        context_instance=RequestContext(request))
