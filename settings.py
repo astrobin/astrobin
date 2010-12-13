@@ -112,3 +112,6 @@ AJAX_LOOKUP_CHANNELS = {
     'telescope' : ('bin.lookups', 'TelescopeLookup'),
 }
 
+FLICKR_API_KEY = '1f44b18e230b8c9816a39d9b34c3318d'
+FLICKR_SECRET  = 'd5fdb83e9aa995fc'
+
