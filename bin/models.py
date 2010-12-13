@@ -25,6 +25,9 @@ class Camera(Gear):
 class FocalReducer(Gear):
     ratio = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
 
+class Software(Gear):
+    pass
+
 class Subject(models.Model):
     name = models.CharField(max_length=64)
 
@@ -80,6 +83,7 @@ class UserProfile(models.Model):
     mounts = models.ManyToManyField(Mount, null=True, blank=True)
     cameras = models.ManyToManyField(Camera, null=True, blank=True)
     focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True)
+    software = models.ManyToManyField(Software, null=True, blank=True)
     
     def __unicode__(self):
         return "%s' profile" % self.user

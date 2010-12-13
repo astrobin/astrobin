@@ -23,6 +23,7 @@ from models import Telescope
 from models import Mount
 from models import Camera
 from models import FocalReducer
+from models import Software
 from models import Subject
 from forms import ImageUploadForm
 from forms import ImageUploadDetailsForm
@@ -181,7 +182,7 @@ def user_profile_edit_gear(request):
     form = UserProfileEditGearForm()
     formContent = {"form": form}
 
-    for attr in ["telescopes", "mounts", "cameras", "focal_reducers"]:
+    for attr in ["telescopes", "mounts", "cameras", "focal_reducers", "software"]:
         allGear = getattr(profile, attr).all()
         formContent[attr + "_prefill"] = jsonGearDump(allGear)
 
@@ -208,7 +209,8 @@ def user_profile_save_gear(request):
     for k, v in {"telescopes"    : [Telescope, profile.telescopes],
                  "mounts"        : [Mount, profile.mounts],
                  "cameras"       : [Camera, profile.cameras],
-                 "focal_reducers": [FocalReducer, profile.focal_reducers]}.iteritems():
+                 "focal_reducers": [FocalReducer, profile.focal_reducers],
+                 "software"      : [Software, profile.software]}.iteritems():
         data[k] = csv.reader([request.POST['as_values_' + k]], skipinitialspace = True)
         for row in data[k]:
             for name in row:
