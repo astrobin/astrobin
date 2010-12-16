@@ -2,10 +2,10 @@
 {% load i18n %}
 
 {% block content %}
-        <div class="form-side">
+        <div class="info-side-bar">
         <p>{% trans "Choose a file from your hard-drive." %}</p>
         </div>
-        <div class="form-box">
+        <div class="sided-main-content">
             <form enctype="multipart/form-data" action="/upload/process" method="post">
                 {{form.as_p}}
                 <p><input class="button" type="submit" value="{% trans "Continue" %} &rarr;" /></p>

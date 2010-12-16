@@ -132,8 +132,6 @@ td {
 form {
     margin: 0;
     padding: 20px;
-    border: 1px solid #251a14;
-    background-color: #130d0a;
 }
 form p {
     margin: 0;
@@ -428,12 +426,15 @@ input.button {
     border-right: 1px solid #211612;
 }
 
-.form-box {
+.sided-main-content {
     float: left;
     width: 780px;
+    border: 1px solid #251a14;
+    background-color: #130d0a;
+    min-height: 135px;
 }
 
-.form-box h1 {
+.sided-main-content h1 {
     color:#ffffff;
     font-size:18px;
     letter-spacing: 0;
@@ -442,13 +443,13 @@ input.button {
     border-top:1px solid #161712;
 }
 
-.form-box p {
+.sided-main-content p {
     width:100%;
     display: block;
     padding:5px 0 5px 0;
 }
 
-.form-box p label {
+.sided-main-content p label {
     display: block;
     color:#bbbbbb;
     font-size:12px;
@@ -458,7 +459,7 @@ input.button {
     padding:5px 20px 0 0;
 }
 
-.form-box .input_text {
+.sided-main-content .input_text {
     padding:10px 10px;
     width:200px;
     border-bottom: 1px double #171717;
@@ -467,7 +468,7 @@ input.button {
     border-right:1px double #333333;
 }
 
-.form-box .message{
+.sided-main-content .message{
     padding:7px 7px;
     width:350px;
     border-bottom: 1px double #171717;
@@ -477,13 +478,13 @@ input.button {
     overflow:hidden;
     height:150px; }
 
-.form-box .button {
+.sided-main-content .button {
     margin:0 0 10px 0;
     padding:4px 7px;
     border:0px;
     position: relative;
-    top:10px; left:272px;
-    width:100px;
+    top:10px; left:170px;
+    width:200px;
 }
 
 /* Main */
@@ -886,20 +887,35 @@ p.thumbs {
     content: " ";
 }
 
-.form-side {
+.info-side-bar {
     float:left;
-    text-align: left;
+    text-align: right;
+    margin-top: 10px;
     width: 120px;
+    border: 1px solid #251A14;
+    border-right: none;
+    background-color: #130D0A;
 }
 
-.form-side ul {
-    float:left;
-    margin: 0;
+.info-side-bar p {
+    line-height: 1.4em;
+    text-align: left;
+}
+
+.info-side-bar ul {
+    float:right;
+    margin: 0 8px 0 0;
     padding: 0;
 }
 
-.form-side ul li {
+.info-side-bar ul li {
     list-style: none;
+    margin: 6px 0;
+    border-bottom: 1px solid #251014;
+}
+
+.info-side-bar ul li.last {
+    border-bottom: none;
 }
 
 #image-detail {

@@ -1,10 +1,10 @@
     {% load i18n %}
     <h2>{% trans "Hello" %} {{user.username}}, {% trans "edit your profile!" %}</h2>
-    <div class="form-side">
+    <div class="info-side-bar">
         <ul>
             <li><a href="/profile/edit/basic">{% trans "Basic Information" %}</a></li>
             <li><a href="/profile/edit/avatar">{% trans "Profile Picture" %}</a></li>
             <li><a href="/profile/edit/gear">{% trans "Gear" %}</a></li>
-            <li><a href="/profile/edit/flickr">{% trans "Import from Flickr" %}</a></li>
+            <li class="last"><a href="/profile/edit/flickr">{% trans "Import from Flickr" %}</a></li>
     </div>
 
