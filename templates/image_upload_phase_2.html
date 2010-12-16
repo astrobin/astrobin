@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="form-box">
+    <div class="sided-main-content">
     <h1>{% trans "Your image has been uploaded. Now fill in some details!" %}</h1>
     <form action="/upload/process_image_details" method="post">
         {{form.as_p}}
