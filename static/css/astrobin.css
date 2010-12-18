@@ -179,14 +179,13 @@ input.button {
     width: 940px;
     margin: 0 auto;
     text-align: left;
-    background: #1C130E url(../images/content-bg.jpg) no-repeat bottom center;
     margin-top: 5px;
     /* ^ for the green bar */
 }
 /* header */
 #header {
     position: relative;
-    margin: 0 auto 20px auto;
+    margin: 0 auto;
     height: 159px;
     background: url(../images/header-bg.jpg) no-repeat center bottom;
 }
@@ -227,7 +226,7 @@ input.button {
 /*  navigation  */
 #header #nav {
     position: absolute;
-    left: 15px; top: 0px;
+    left: 0; top: 0px;
     margin: 0; padding: 0;
     overflow: hidden;
     height: 55px;
@@ -384,7 +383,7 @@ input.button {
 }
 #abpod .image-block img {
     background-color: #1c130e;
-   border: 1px solid #251a15;
+    border: 1px solid #251a15;
     padding: 12px;
 }
 #abpod .text-block {
@@ -416,11 +415,12 @@ input.button {
 #content-wrap {
     clear: both;
     width: 940px;
+    background: #1D140F url(../images/content-bg.jpg) no-repeat bottom center;
 }
 #content {
     float: left;
     width: 920px;
-    padding: 0 10px 40px;
+    padding: 20px 10px 40px 10px;
     display: inline;
     border-left: 1px solid #211612;
     border-right: 1px solid #211612;
@@ -456,7 +456,7 @@ input.button {
     float:left;
     width:150px;
     text-align:right;
-    padding:5px 20px 0 0;
+    padding:11px 20px 0 0;
 }
 
 .sided-main-content .input_text {
@@ -937,5 +937,30 @@ p.thumbs {
 
 #image-detail img#main-image {
     display: block;
+}
+
+img.flickr-photo-to-import {
+    border: 1px solid #111;
+    margin: 1px;
+}
+
+img.flickr-photo-to-import-selected {
+    border: 1px solid #eee;
+    margin: 1px;
+}
+
+ul.select-links {
+    margin: 0 0 0 2px;
+    padding: 0;
+}
+
+ul.select-links li {
+    display: inline;
+    list-style: none;
+    margin-right: 10px;
+}
+
+ul.select-links li a {
+    text-decoration: underline;
 }
 
