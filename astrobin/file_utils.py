@@ -10,7 +10,7 @@ import StringIO
 
 from models import Image
 
-def store_image_in_s3(file, uid):
+def store_image_in_s3(file, uid, mimetype=''):
     def scale_dimensions(w, h, longest_side):
         if w > longest_side:
             ratio = longest_side*1./w
@@ -47,7 +47,7 @@ def store_image_in_s3(file, uid):
         k.set_acl("public-read");
 
     conn = S3Connection(settings.S3_ACCESS_KEY, settings.S3_SECRET_KEY)
-    content_type = mimetypes.guess_type(file.name)[0]
+    content_type = mimetype if mimetype else mimetypes.guess_type(file.name)[0]
     data = StringIO.StringIO(file.read())
 
     # First store the original image

@@ -16,6 +16,7 @@ import os
 import simplejson
 import csv
 import flickrapi
+import urllib
 
 from models import Image
 from models import ABPOD
@@ -277,11 +278,37 @@ def user_profile_flickr_import(request):
         response_dict['flickr_sets'] = template_sets
     else:
         # This is POST!
-        set_id = request.POST['id_flickr_set']
-        urls_sq = []
-        for photo in flickr.walk_set(set_id, extras='url_sq'):
-            urls_sq.append(photo.attrib['url_sq'])
-        response_dict['flickr_photos'] = urls_sq
+        if 'id_flickr_set' in request.POST:
+            set_id = request.POST['id_flickr_set']
+            urls_sq = {}
+            for photo in flickr.walk_set(set_id, extras='url_sq'):
+                urls_sq[photo.attrib['id']] = photo.attrib['url_sq']
+                response_dict['flickr_photos'] = urls_sq
+        elif 'flickr_selected_photos[]' in request.POST:
+            selected_photos = request.POST.getlist('flickr_selected_photos[]')
+            # Starting the process of importing
+            request.session['current-progress'] = [0, 'Importing images...']
+            for index, photo_id in enumerate(selected_photos):
+                sizes = flickr.photos_getSizes(photo_id = photo_id)
+                found_size = False
+                for size in sizes.find('sizes').findall('size'):
+                    if size.attrib['label'] == 'Original':
+                        found_size = True
+                        break
+                if not found_size:
+                    for size in sizes.find('sizes').findall('size'):
+                        if size.attrib['label'] == 'Large':
+                            found_size = True
+                            break
+                if found_size:
+                    source = size.attrib['source']
+                    file = urllib.urlopen(source)
+                    s3_filename = str(uuid4())
+                    store_image_in_s3(file, s3_filename, 'image/jpeg')
+                    image = Image(filename = s3_filename)
+                    image.save()
+                    if index > 0:
+                        request.session['current-progress'] = [100 / index / len(selected_photos), photo_id]
 
         return HttpResponse(simplejson.dumps(response_dict),
                             mimetype='application/javascript')
@@ -303,3 +330,12 @@ def flickr_auth_callback(request):
 
     return HttpResponseRedirect("/profile/edit/flickr/")
 
+def request_progress(request):
+    ret = []
+    if 'current-progress' not in request.session:
+        ret = [0, '']
+    else:
+        ret = request.session['current-progress']
+
+    return HttpResponse(simplejson.dumps(ret),
+                        mimetype='application/javascript');

@@ -172,6 +172,10 @@ input.button {
     color: #fff;
 }
 
+.hidden {
+    display: none;
+}
+
 /* ------------------------------------------
    LAYOUT
 ------------------------------------------- */
@@ -445,7 +449,6 @@ input.button {
 
 .sided-main-content p {
     width:100%;
-    display: block;
     padding:5px 0 5px 0;
 }
 
@@ -483,8 +486,17 @@ input.button {
     padding:4px 7px;
     border:0px;
     position: relative;
-    top:10px; left:170px;
+    top:10px; left: 170px;
     width:200px;
+    cursor: hand;
+}
+
+.sided-main-content form p.fieldless {
+    text-align: center;
+}
+
+.sided-main-content form p.fieldless .button{
+    left: 0;
 }
 
 /* Main */
@@ -964,3 +976,6 @@ ul.select-links li a {
     text-decoration: underline;
 }
 
+p#flickr_progress_message, p#flickr_progress {
+    text-align: center;
+}
