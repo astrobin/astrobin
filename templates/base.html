@@ -15,15 +15,63 @@
 <meta name="robots" content="index, follow, noarchive" />
 <meta name="googlebot" content="noarchive" />
 
-<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
-<!--[if IE 6]><link rel="stylesheet" type="text/css" href="/static/css/ie6.css" media="screen" /><![endif]-->
-
 <link rel="stylesheet" type="text/css" media="screen" href="/static/css/autoSuggest.css" />
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/fileuploader.css" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+<!--[if IE 6]><link rel="stylesheet" type="text/css" href="/static/css/ie6.css" media="screen" /><![endif]-->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script> 
+<script type="text/javascript" src="/static/js/fileuploader.js"></script> 
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#upload-link').each(function() {
+            var $link = $(this);
+            var $url = $link.attr('href');
+            var $title = $link.attr('title');
+
+            var $dialog = $('<div></div>')
+                .load($url + ' #file-uploader-wrap')
+                .dialog({
+                    autoOpen: false,
+                    title: $title,
+                    width: 500,
+                    height: 300,
+                    closeText: '{% trans "Close" %}',
+                    draggable: false,
+                    modal: true,
+                    resizable: false
+            });
+
+            $link.click(function() {
+                $dialog.dialog('open');
+                return false;
+            });
+        });
+    });
+</script>
+<script src="fileuploader.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function createUploader(){            
+        var uploader = new qq.FileUploader({
+            element: document.getElementById('file-uploader'),
+            action: '/upload/process',
+            debug: false
+        });           
+    }
+    
+    // in your app create uploader as soon as the DOM is ready
+    // don't wait for the window to load  
+    window.onload = createUploader;     
+</script>    
+
+{% block extra_head %}
+{% endblock %}
+
 </head>
 
 
@@ -36,7 +84,8 @@
         {% block header %}
 		<h1 id="logo-text"><a href="/" title="">AstroBin</a></h1>
         <p id="slogan">
-            {% trans "The definite home for your astrophotography images." %}
+            {% trans "The definite home for your" %}<br/>
+            {% trans "astrophotography images." %}
         </p>
 
         {% load tags %}
@@ -53,7 +102,7 @@
 			<ul>
 			    {% if user.is_authenticated %}
 				<li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-				<li id="{% current request "^/upload/" %}"><a href="/upload/">{% trans "Upload!" %}</a></li>
+				<li id="{% current request "^/upload/" %}"><a id="upload-link" href="/upload/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a></li>
 				<li id="{% current request "^/profile/" %}"><a href="/profile/edit/">{% trans "Profile" %}</a></li>
 				{% else %}
 				<li id="{% current request "^/accounts/login/" %}"><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>

@@ -1,5 +1,7 @@
 # Django settings for astrobin project.
 
+from django.conf import global_settings
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
