@@ -88,26 +88,34 @@ def image_upload(request):
 @require_POST
 def image_upload_process(request):
     """Process the form"""
+    file = None
+    if 'qqfile' in request.GET:
+        from django.core.files.uploadedfile import SimpleUploadedFile
+        file = SimpleUploadedFile(request.GET['qqfile'], request.raw_post_data)
+    else:
+        form = ImageUploadForm(request.POST, request.FILES)
+        if not form.is_valid():
+            return render_to_response("image_upload.html", {"form":form})
+        file = request.FILES["file"]
 
-    form = ImageUploadForm(request.POST, request.FILES)
-    if not form.is_valid():
-        return render_to_response("image_upload.html", {"form":form})
-
-    file = request.FILES["file"]
     s3_filename = str(uuid4()) + os.path.splitext(file.name)[1]
     store_image_in_s3(file, s3_filename)
 
     image = Image(filename = s3_filename)
     image.save()
 
-    return render_to_response("image_upload_phase_2.html",
-        {"image":image,
-         "s3_images_bucket":settings.S3_IMAGES_BUCKET,
-         "s3_url":settings.S3_URL,
-         "form":ImageUploadDetailsForm(),
-         "subjects_prefill":[],
-        },
-        context_instance=RequestContext(request))
+    if 'qqfile' in request.GET:
+        return HttpResponse(simplejson.dumps({'success':'true'}),
+                            mimetype='application/javascript')
+    else:
+        return render_to_response("image_upload_phase_2.html",
+            {"image":image,
+             "s3_images_bucket":settings.S3_IMAGES_BUCKET,
+             "s3_url":settings.S3_URL,
+             "form":ImageUploadDetailsForm(),
+             "subjects_prefill":[],
+            },
+            context_instance=RequestContext(request))
 
 @login_required
 @require_POST
@@ -331,11 +339,18 @@ def flickr_auth_callback(request):
     return HttpResponseRedirect("/profile/edit/flickr/")
 
 def request_progress(request):
-    ret = []
-    if 'current-progress' not in request.session:
-        ret = [0, '']
+    """
+    Return JSON object with information about the progress of an upload.
+    """
+    progress_id = None
+    if 'X-Progress-ID' in request.GET:
+        progress_id = request.GET['X-Progress-ID']
+    elif 'X-Progress-ID' in request.META:
+        progress_id = request.META['X-Progress-ID']
+    if progress_id:
+        cache_key = "%s_%s" % (request.META['REMOTE_ADDR'], progress_id)
+        data = cache.get(cache_key)
+        json = simplejson.dumps(data)
+        return HttpResponse(json)
     else:
-        ret = request.session['current-progress']
-
-    return HttpResponse(simplejson.dumps(ret),
-                        mimetype='application/javascript');
+        return HttpResponseBadRequest('Server Error: You must provide X-Progress-ID header or query param.')

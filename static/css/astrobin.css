@@ -207,17 +207,18 @@ input.button {
 #header p#slogan {
     position: absolute;
     /* change the values of top and left to adjust the position */
-    top: 130px; left: 30px;
+    top: 120px; left: 46px;
     margin: 0; padding:  0 5px 0 0;
     font: bold 11px Helvetica, Verdana, Sans-serif;
     color: #897876;
+    text-align: center;
 }
 
 /* RSS Feed */
 #header #rss-feed {
     position: absolute;
     right: 5px; top: 18px;
-    z-index: 99999;
+    z-index: 999;
 }
 #header #rss-feed a.feed {
     padding: 0 0 0 30px;
@@ -311,8 +312,8 @@ input.button {
 /* header quick search */
 #header form#quick-search {
     position: absolute;
-    top: 95px; right: 15px;
-    z-index: 999999;
+    top: 19px; right: 212px;
+    z-index: 999;
     padding: 0; margin: 0;
     border: none;
     width: 222px; height: 32px;
@@ -365,7 +366,7 @@ input.button {
     height: 98px;
     top: -1px;
     right: -2px;
-    z-index: 99999;
+    z-index: 999;
 }
 #abpod h2 {
     margin-bottom: 0;
@@ -979,3 +980,39 @@ ul.select-links li a {
 p#flickr_progress_message, p#flickr_progress {
     text-align: center;
 }
+
+#file-uploader {
+    text-align: center;
+    width: 128px;
+    height: 128px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+
+#file-uploader-wrap {
+    text-align: center;
+    background-color: #130d0a;
+    padding: 20px;
+}
+
+#file-uploader-wrap p {
+    margin: 0;
+    padding: 0;
+    color: #897876;
+}
+
+.ui-widget-content {
+    background: #130d0a;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    background: url("../images/button-bg.png") repeat-x scroll 0 0 #E2721B;
+    color: #fff;
+}
+
+.ui-dialog .ui-dialog-content {
+    background-color: #130d0a;
+}
+
+

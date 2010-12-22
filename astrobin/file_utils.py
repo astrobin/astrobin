@@ -2,6 +2,7 @@ from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 
 from django.conf import settings
+
 import mimetypes
 from uuid import uuid4
 from PIL import Image as PILImage
