@@ -24,9 +24,118 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script> 
-<script type="text/javascript" src="/static/js/fileuploader.js"></script> 
+<script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
+<script type="text/javascript" src="/static/js/fileuploader.js"></script>
+{% block extra_head %}
+{% endblock %}
 
+</head>
+
+
+<body>
+<!-- wrap -->
+<div id="wrap">
+
+    <!-- header -->
+    <div id="header">
+        {% block header %}
+        <h1 id="logo-text"><a href="/" title="">AstroBin</a></h1>
+        <p id="slogan">
+            {% trans "The definite home for your" %}<br/>
+            {% trans "astrophotography images." %}
+        </p>
+
+        {% load tags %}
+        <div  id="nav">
+            <ul>
+                <li id="{% current request "^/$" %}"><a href="/">{% trans "Home" %}</a></li>
+                <li><a href="#">{% trans "ABPOD" %}</a></li>
+                <li><a href="#">{% trans "Top images" %}</a></li>
+                <li><a href="#">{% trans "Support" %}</a></li>
+                <li><a href="#">{% trans "About" %}</a></li>
+            </ul>
+        </div>
+        <div id="user-nav">
+            <ul>
+                {% if user.is_authenticated %}
+                <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
+                <li id="{% current request "^/upload/" %}"><a id="upload-link" href="/upload/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a></li>
+                <li id="{% current request "^/profile/" %}"><a href="/profile/edit/">{% trans "Profile" %}</a></li>
+                {% else %}
+                <li id="{% current request "^/accounts/login/" %}"><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
+                <li id="{% current request "^/accounts/register/" %}"><a href="{% url registration_register %}">{% trans "Register" %}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div id="search">
+        <form id="quick-search" action="index.html" method="get" >
+            <p>
+            <label for="qsearch">Search:</label>
+            <input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
+            <input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="/static/images/search.png" />
+            </p>
+        </form>
+        </div>
+        {% endblock %}
+    <!-- /header -->
+    </div>
+
+    {% block abpod %}{% endblock %}
+
+    <!-- content -->
+    <div id="content-wrap" class="clear">
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+<!-- footer -->
+<div id="footer">
+    {% block footer %}
+    <!-- footer-outer -->
+    <div id="footer-outer" class="clear"><div id="footer-wrap">
+
+        <div class="col-a">
+
+            <h3>{% trans "About" %}</h3>
+
+            <p>
+            {% trans "AstroBin is a community of astrophotographers and the last place where you need to upload your astrophotography images. It a unique combination of image hoster, forum and community specifically targetted to astrophotographers and their needs. Made by an astrophotographer, for the astrophotographers." %}
+            </p>
+
+        </div>
+
+        <div class="fix"></div>
+
+        <!-- footer-bottom -->
+        <div id="footer-bottom">
+
+            <div class="bottom-left">
+                <p>
+                &copy; 2010 <strong>Salvatore Iovene</strong>&nbsp; &nbsp; &nbsp;
+                </p>
+            </div>
+
+            <div class="bottom-right">
+                <p>
+                    <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> |
+                    <a href="http://validator.w3.org/check/referer">XHTML</a>   |
+                    <a href="/">{% trans "Home" %}</a> |
+                    <strong><a href="#top" class="back-to-top">{% trans "Back to top" %}</a></strong>
+                </p>
+            </div>
+
+        <!-- /footer-bottom -->
+        </div>
+
+    <!-- /footer-outer -->
+    </div></div>
+    {% endblock %}
+<!-- /footer -->
+</div>
+
+<!-- wrap -->
+</div>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#upload-link').each(function() {
@@ -44,141 +153,29 @@
                     closeText: '{% trans "Close" %}',
                     draggable: false,
                     modal: true,
-                    resizable: false
+                    resizable: false,
             });
 
             $link.click(function() {
                 $dialog.dialog('open');
+                createUploader();
                 return false;
             });
         });
     });
 </script>
-<script src="fileuploader.js" type="text/javascript"></script>
+
 <script type="text/javascript">
-    function createUploader(){            
+    function createUploader(){
         var uploader = new qq.FileUploader({
             element: document.getElementById('file-uploader'),
             action: '/upload/process',
-            debug: false
-        });           
+            debug: false,
+            onProgress: function(id, filename, loaded, total) {
+            }
+        });
     }
-    
-    // in your app create uploader as soon as the DOM is ready
-    // don't wait for the window to load  
-    window.onload = createUploader;     
-</script>    
-
-{% block extra_head %}
-{% endblock %}
-
-</head>
-
-
-<body>
-<!-- wrap -->
-<div id="wrap">
-
-	<!-- header -->
-	<div id="header">
-        {% block header %}
-		<h1 id="logo-text"><a href="/" title="">AstroBin</a></h1>
-        <p id="slogan">
-            {% trans "The definite home for your" %}<br/>
-            {% trans "astrophotography images." %}
-        </p>
-
-        {% load tags %}
-		<div  id="nav">
-			<ul>
-				<li id="{% current request "^/$" %}"><a href="/">{% trans "Home" %}</a></li>
-				<li><a href="#">{% trans "ABPOD" %}</a></li>
-				<li><a href="#">{% trans "Top images" %}</a></li>
-				<li><a href="#">{% trans "Support" %}</a></li>
-				<li><a href="#">{% trans "About" %}</a></li>	
-			</ul>		
-		</div>
-		<div id="user-nav">
-			<ul>
-			    {% if user.is_authenticated %}
-				<li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-				<li id="{% current request "^/upload/" %}"><a id="upload-link" href="/upload/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a></li>
-				<li id="{% current request "^/profile/" %}"><a href="/profile/edit/">{% trans "Profile" %}</a></li>
-				{% else %}
-				<li id="{% current request "^/accounts/login/" %}"><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
-                <li id="{% current request "^/accounts/register/" %}"><a href="{% url registration_register %}">{% trans "Register" %}</a></li>
-				{% endif %}
-			</ul>		
-		</div>
-		<div id="search">
-		<form id="quick-search" action="index.html" method="get" >
-			<p>
-			<label for="qsearch">Search:</label>
-			<input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
-			<input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="/static/images/search.png" />
-			</p>
-		</form>
-		</div>
-		{% endblock %}
-	<!-- /header -->	
-	</div>
-
-	{% block abpod %}{% endblock %}
-
-	<!-- content -->
-	<div id="content-wrap" class="clear">
-    	<div id="content">
-	        {% block content %}{% endblock %}
-	    </div>
-	</div>
-
-<!-- footer -->	
-<div id="footer">	
-	{% block footer %}
-	<!-- footer-outer -->	
-	<div id="footer-outer" class="clear"><div id="footer-wrap">
-	
-		<div class="col-a">
-		
-			<h3>{% trans "About" %}</h3>			
-			
-			<p>
-			{% trans "AstroBin is a community of astrophotographers and the last place where you need to upload your astrophotography images. It a unique combination of image hoster, forum and community specifically targetted to astrophotographers and their needs. Made by an astrophotographer, for the astrophotographers." %}
-			</p>			
-			
-		</div>		
-		
-		<div class="fix"></div>
-		
-		<!-- footer-bottom -->
-		<div id="footer-bottom">
-	
-			<div class="bottom-left">
-				<p>
-				&copy; 2010 <strong>Salvatore Iovene</strong>&nbsp; &nbsp; &nbsp;
-				</p>
-			</div>		
-	
-			<div class="bottom-right">
-				<p>		
-					<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | 
-		   		    <a href="http://validator.w3.org/check/referer">XHTML</a>	|
-					<a href="/">{% trans "Home" %}</a> |
-					<strong><a href="#top" class="back-to-top">{% trans "Back to top" %}</a></strong>								
-				</p>
-			</div>
-
-		<!-- /footer-bottom -->		
-		</div>
-	
-	<!-- /footer-outer -->		
-	</div></div>		
-	{% endblock %}
-<!-- /footer -->
-</div>
-
-<!-- wrap -->
-</div>
+</script>
 </body>
 
 </html>
