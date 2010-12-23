@@ -600,7 +600,7 @@ qq.extend(qq.FileUploader.prototype, {
         
         var text; 
         if (loaded != total){
-            text = Math.round(loaded / total * 100) + '% from ' + this._formatSize(total);
+            text = Math.round(loaded / total * 100) + '%'; // from ' + this._formatSize(total);
         } else {                                   
             text = this._formatSize(total);
         }          
