@@ -105,10 +105,11 @@ def image_upload_process(request):
     image.save()
 
     if 'qqfile' in request.GET:
-        return HttpResponse(simplejson.dumps({'success':'true'}),
+        return_dict = {'success':'true', 'id':image.id}
+        return HttpResponse(simplejson.dumps(return_dict),
                             mimetype='application/javascript')
     else:
-        return render_to_response("image_upload_phase_2.html",
+        return render_to_response("image_edit_basic.html",
             {"image":image,
              "s3_images_bucket":settings.S3_IMAGES_BUCKET,
              "s3_url":settings.S3_URL,
@@ -119,7 +120,7 @@ def image_upload_process(request):
 
 @login_required
 @require_POST
-def image_upload_process_details(request):
+def image_edit_process_basic(request):
     """Process the second part of the form"""
 
     form = ImageUploadDetailsForm(request.POST)
@@ -142,6 +143,19 @@ def image_upload_process_details(request):
     image.save()
 
     return HttpResponseRedirect("/show/" + image_id)
+
+@login_required
+@require_GET
+def image_edit(request, id):
+    image = Image.objects.get(pk=id)
+    return render_to_response("image_edit_basic.html",
+        {"image":image,
+         "s3_images_bucket":settings.S3_IMAGES_BUCKET,
+         "s3_url":settings.S3_URL,
+         "form":ImageUploadDetailsForm(),
+         "subjects_prefill":[],
+        },
+        context_instance=RequestContext(request))
 
 @require_GET
 def user_page(request, username):

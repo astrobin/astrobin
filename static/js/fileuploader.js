@@ -593,19 +593,6 @@ qq.extend(qq.FileUploader.prototype, {
     },
     _onProgress: function(id, fileName, loaded, total){
         qq.FileUploaderBasic.prototype._onProgress.apply(this, arguments);
-
-        var item = this._getItemByFileId(id);
-        var size = this._find(item, 'size');
-        size.style.display = 'inline';
-        
-        var text; 
-        if (loaded != total){
-            text = Math.round(loaded / total * 100) + '%'; // from ' + this._formatSize(total);
-        } else {                                   
-            text = this._formatSize(total);
-        }          
-        
-        qq.setText(size, text);         
     },
     _onComplete: function(id, fileName, result){
         qq.FileUploaderBasic.prototype._onComplete.apply(this, arguments);

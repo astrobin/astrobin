@@ -1,12 +1,12 @@
 /* AutoSuggest CSS - Version 1.2 */
 
 ul.as-selections {
-	list-style-type: none;
+    list-style-type: none;
     border: 1px solid #322014;
-	padding: 4px 0 4px 4px;
-	margin: 0;
-	overflow: auto;
-	background-color: #1E150D;
+    padding: 4px 0 4px 4px;
+    margin: 0;
+    overflow: auto;
+    background-color: #1E150D;
 }
 
 input.as-input {
@@ -17,194 +17,195 @@ ul.as-selections.loading {
 }
 
 ul.as-selections li {
-	float: left;
-	margin: 1px 4px 1px 0;
+    float: left;
+    margin: 1px 4px 1px 0;
 }
 
 ul.as-selections li.as-selection-item {
-	color: #f1f1f1;
-	font-family: "Lucida Grande", arial, sans-serif;
-	text-shadow: 0 1px 1px #111;
-	background-color: #FF9E35;
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF9E35), to(#BF6017));
-	border-color: #E1711B;
-	border-top-color: #DE7E16;
-	padding: 2px 7px 2px 10px;
-	border-radius: 12px;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
-	box-shadow: 0 1px 2px #333;
-	-webkit-box-shadow: 0 2px 1px #333;
-	-moz-box-shadow: 0 2px 1px #333;
+    color: #f1f1f1;
+    font-family: "Lucida Grande", arial, sans-serif;
+    text-shadow: 0 1px 1px #111;
+    background-color: #FF9E35;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF9E35), to(#BF6017));
+    border-color: #E1711B;
+    border-top-color: #DE7E16;
+    padding: 2px 7px 2px 10px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    box-shadow: 0 1px 2px #333;
+    -webkit-box-shadow: 0 2px 1px #333;
+    -moz-box-shadow: 0 2px 1px #333;
 }
 
 ul.as-selections li.as-selection-item:last-child {
-	margin-left: 30px;
+    margin-left: 30px;
 }
 
 ul.as-selections li.as-selection-item a.as-close {
-	float: right;
-	margin: 1px 0 0 7px;
-	padding: 0 2px;
-	cursor: pointer;
-	color: #222;
-	font-family: "Helvetica", helvetica, arial, sans-serif;
-	font-size: 14px;
-	font-weight: bold;
-	text-shadow: 0 1px 1px #fff;
-	-webkit-transition: color .1s ease-in;
+    float: right;
+    margin: 1px 0 0 7px;
+    padding: 0 2px;
+    cursor: pointer;
+    color: #222;
+    font-family: "Helvetica", helvetica, arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 1px 1px #fff;
+    -webkit-transition: color .1s ease-in;
 }
 
 ul.as-selections li.as-selection-item.blur {
-	color: #666666;
-	background-color: #f4f4f4;
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4f4f4), to(#d5d5d5));
-	border-color: #bbb;
-	border-top-color: #ccc;
-	box-shadow: 0 2px 1px #333;
-	-webkit-box-shadow: 0 2px 1px #333;
-	-moz-box-shadow: 0 2px 1px #333;
+    color: #666666;
+    background-color: #f4f4f4;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4f4f4), to(#d5d5d5));
+    border-color: #bbb;
+    border-top-color: #ccc;
+    box-shadow: 0 2px 1px #333;
+    -webkit-box-shadow: 0 2px 1px #333;
+    -moz-box-shadow: 0 2px 1px #333;
 }
 
 ul.as-selections li.as-selection-item.blur a.as-close {
-	color: #999;
+    color: #999;
 }
 
 ul.as-selections li:hover.as-selection-item {
-	color: #f1f1f1;
-	background-color: #FFBD76;
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFBD76), to(#DE7E16));
-	border-color: #E1711B;
-	border-top-color: #DE7E16;
+    color: #f1f1f1;
+    background-color: #FFBD76;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFBD76), to(#DE7E16));
+    border-color: #E1711B;
+    border-top-color: #DE7E16;
 }
 
 ul.as-selections li:hover.as-selection-item a.as-close {
-	color: #444;
+    color: #444;
 }
 
 ul.as-selections li.as-selection-item.selected {
-	border-color: #8C4611;
+    border-color: #8C4611;
 }
 
 ul.as-selections li.as-selection-item a:hover.as-close {
-	color: #444;
+    color: #444;
 }
 
 ul.as-selections li.as-selection-item a:active.as-close {
-	color: #444;
+    color: #444;
 }
 
 ul.as-selections li.as-original {
-	margin-left: 0;
+    margin-left: 0;
 }
 
 ul.as-selections li.as-original input {
-	border: none;
-	outline: none;
-	width: 458px;
-	height: 18px;
-	padding-top: 3px;
+    border: none;
+    outline: none;
+    width: 458px;
+    height: 18px;
+    padding-top: 3px;
+    background-color: #1E150D;
 }
 
 ul.as-list {
-	position: absolute;
-	list-style-type: none;
-	margin: 2px 0 0 170px;
-	padding: 0;
-	color: #000;
-	font-family: "Lucida Grande", arial, sans-serif;
-	background-color: #FED7A9;
-	z-index: 2;
-	box-shadow: 0 2px 12px #222;
-	-webkit-box-shadow: 0 2px 12px #222;
-	-moz-box-shadow: 0 2px 12px #222;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+    position: absolute;
+    list-style-type: none;
+    margin: 2px 0 0 170px;
+    padding: 0;
+    color: #000;
+    font-family: "Lucida Grande", arial, sans-serif;
+    background-color: #FED7A9;
+    z-index: 2;
+    box-shadow: 0 2px 12px #222;
+    -webkit-box-shadow: 0 2px 12px #222;
+    -moz-box-shadow: 0 2px 12px #222;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
 }
 
 li.as-result-item, li.as-message {
-	margin: 0 0 0 0;
-	padding: 5px 12px;
-	background-color: transparent;
-	border: 1px solid #fff;
-	border-bottom: 1px solid #ddd;
-	cursor: pointer;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+    margin: 0 0 0 0;
+    padding: 5px 12px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
 }
 
 li:first-child.as-result-item {
-	margin: 0;
+    margin: 0;
 }
 
 li.as-message {
-	margin: 0;
-	cursor: default;
+    margin: 0;
+    cursor: default;
 }
 
 li.as-result-item.active {
-	background-color: #E2721B;
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 64%, from(rgb(223, 127, 22)), to(rgb(223, 112, 26)));
-	border-color: #C96111;
-	color: #fff;
-	text-shadow: 0 1px 2px #122042;
+    background-color: #E2721B;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 64%, from(rgb(223, 127, 22)), to(rgb(223, 112, 26)));
+    border-color: #C96111;
+    color: #fff;
+    text-shadow: 0 1px 2px #122042;
 }
 
 li.as-result-item em { 
-	font-style: normal; 
-	background: #444;  
-	padding: 0 2px;
-	color: #fff;
+    font-style: normal; 
+    background: #444;  
+    padding: 0 2px;
+    color: #fff;
 }
 
 li.as-result-item.active em { 
-	background: #444;  
-	color: #fff;
+    background: #444;  
+    color: #fff;
 }
 
 /* Webkit Hacks  */
-@media screen and (-webkit-min-device-pixel-ratio:0) {	
-	ul.as-selections {
-		border-top-width: 2px;
-	}
-	ul.as-selections li.as-selection-item {
-		padding-top: 3px;
-		padding-bottom: 3px;
-	}
-	ul.as-selections li.as-selection-item a.as-close {
-		margin-top: -1px;
-	}
-	ul.as-selections li.as-original input {
-		height: 19px;
-	}
+@media screen and (-webkit-min-device-pixel-ratio:0) {  
+    ul.as-selections {
+        border-top-width: 2px;
+    }
+    ul.as-selections li.as-selection-item {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+    ul.as-selections li.as-selection-item a.as-close {
+        margin-top: -1px;
+    }
+    ul.as-selections li.as-original input {
+        height: 19px;
+    }
 }
 
 /* Opera Hacks  */
 @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
-	ul.as-list {
-		border: 1px solid #888;
-	}
-	ul.as-selections li.as-selection-item a.as-close {
-		margin-left: 4px;
-		margin-top: 0;
-	}
+    ul.as-list {
+        border: 1px solid #888;
+    }
+    ul.as-selections li.as-selection-item a.as-close {
+        margin-left: 4px;
+        margin-top: 0;
+    }
 }
 
 /* IE Hacks  */
 ul.as-list {
-	border: 1px solid #888\9;
+    border: 1px solid #888\9;
 }
 ul.as-selections li.as-selection-item a.as-close {
-	margin-left: 4px\9;
-	margin-top: 0\9;
+    margin-left: 4px\9;
+    margin-top: 0\9;
 }
 
 /* Firefox 3.0 Hacks */
 ul.as-list,  x:-moz-any-link, x:default { 
-	border: 1px solid #888;
+    border: 1px solid #888;
 }
 BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
-	border: none;
+    border: none;
 }

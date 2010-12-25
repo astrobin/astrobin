@@ -5,7 +5,7 @@
     {% include 'image-edit-menu.html' %}   
     <div class="sided-main-content">
     <h1>{% trans "Edit your image: basic information" %}</h1>
-    <form action="/upload/process_image_details" method="post">
+    <form action="/edit/process_basic" method="post">
         {{form.as_p}}
             <script language="javascript">
             $(document).ready(function() {
