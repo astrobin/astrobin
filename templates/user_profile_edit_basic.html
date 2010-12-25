@@ -4,6 +4,7 @@
 {% block content %}
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
+        <h1>{% trans "Hello" %} {{user.username}}, {% trans "edit your profile!" %}</h1>
         <form method="post" action="/profile/save/basic/">
         {{form.as_p}}
         <p><input class="button" type="submit" value="{% trans "Save" %}" /></p>

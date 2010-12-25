@@ -12,7 +12,10 @@ urlpatterns = patterns('',
     (r'^show/(?P<id>\d+)/$', views.image_detail),
     (r'^upload/$', views.image_upload),
     (r'^upload/process$', views.image_upload_process),
-    (r'^upload/process_image_details$', views.image_upload_process_details),
+    (r'^edit/(?P<id>\d+)/$', views.image_edit),
+    (r'^edit/advanced/(?P<id>\d+)/$', views.image_edit),
+    (r'^upload/process_basic$', views.image_edit_process_basic),
+
     (r'^accounts/', include('registration.urls')),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 

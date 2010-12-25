@@ -158,6 +158,16 @@ input:focus, select:focus, textarea:focus {
     border: 1px solid #BF6000;
     color: #fff;
 }
+
+form ul {
+    list-style: none;
+}
+
+form ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
 #name, #email, #message, #website {
     width: 470px;
 }
@@ -443,7 +453,7 @@ input.button {
     color:#ffffff;
     font-size:18px;
     letter-spacing: 0;
-    padding:5px 0 5px 5px;
+    padding:10px 20px;
     border-bottom:1px solid #161712;
     border-top:1px solid #161712;
 }
@@ -461,6 +471,18 @@ input.button {
     width:150px;
     text-align:right;
     padding:11px 20px 0 0;
+}
+
+.sided-main-content input {
+    width: 558px;
+}
+
+.sided-main-content textarea {
+    width: 558px;
+}
+
+.sided-main-content select {
+    width: 558px;
 }
 
 .sided-main-content .input_text {
@@ -483,11 +505,9 @@ input.button {
     height:150px; }
 
 .sided-main-content .button {
-    margin:0 0 10px 0;
+    margin:0 0 10px 130px;
     padding:4px 7px;
     border:0px;
-    position: relative;
-    top:10px; left: 170px;
     width:200px;
     cursor: hand;
 }
@@ -994,6 +1014,7 @@ p#flickr_progress_message, p#flickr_progress {
     text-align: center;
     background-color: #130d0a;
     padding: 20px;
+    min-height: 200px;
 }
 
 #file-uploader-wrap p {
