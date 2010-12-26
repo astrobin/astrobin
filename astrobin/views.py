@@ -28,13 +28,14 @@ from models import FocalReducer
 from models import Software
 from models import Subject
 from forms import ImageUploadForm
-from forms import ImageUploadDetailsForm
+from forms import ImageEditBasicForm
 from forms import UserProfileEditBasicForm
 from forms import UserProfileEditGearForm
 from file_utils import store_image_in_s3
 
-def jsonGearDump(allGear):
-    return simplejson.dumps([{'value_unused': g.id, 'name': g.name} for g in allGear])
+def jsonDump(all):
+    return simplejson.dumps([{'value_unused': i.id, 'name': i.name} for i in all])
+
 
 # VIEWS
 
@@ -58,6 +59,7 @@ def index(request):
                          "s3_url":settings.S3_URL,
                          "abpod":abpod})
 
+
 def image_detail(request, id):
     """ Show details of an image"""
 
@@ -75,6 +77,7 @@ def image_detail(request, id):
                          "s3_resized_inverted_bucket":settings.S3_RESIZED_INVERTED_BUCKET,
                          "s3_url":settings.S3_URL})
 
+
 @login_required
 def image_upload(request):
     """Create new image"""
@@ -83,6 +86,7 @@ def image_upload(request):
         "image_upload.html",
         {"form":ImageUploadForm()},
         context_instance=RequestContext(request))
+
 
 @login_required
 @require_POST
@@ -113,17 +117,35 @@ def image_upload_process(request):
             {"image":image,
              "s3_images_bucket":settings.S3_IMAGES_BUCKET,
              "s3_url":settings.S3_URL,
-             "form":ImageUploadDetailsForm(),
+             "form":ImageEditBasicForm(),
              "subjects_prefill":[],
             },
             context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
+def image_edit(request, id):
+    image = Image.objects.get(pk=id)
+    form = ImageEditBasicForm({'title': image.title,
+                               'description': image.description})
+
+    return render_to_response("image_edit_basic.html",
+        {"image":image,
+         "s3_images_bucket":settings.S3_IMAGES_BUCKET,
+         "s3_url":settings.S3_URL,
+         "form":form,
+         "subjects_prefill":jsonDump(image.subjects.all()),
+        },
+        context_instance=RequestContext(request))
+
 
 @login_required
 @require_POST
 def image_edit_process_basic(request):
     """Process the second part of the form"""
 
-    form = ImageUploadDetailsForm(request.POST)
+    form = ImageEditBasicForm(request.POST)
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
 
@@ -137,25 +159,18 @@ def image_edit_process_basic(request):
                     subject.save()
                 image.subjects.add(subject)
 
-    image.title = request.POST['title']
-    image.description = request.POST['description']
+    if form.is_valid():
+        image.title = form.cleaned_data['title'] 
+        image.description = form.cleaned_data['description']
+    else:
+        # form is not valid because of the tricks in the autosuggest field
+        image.title = request.POST['title']
+        image.description = request.POST['description']
 
     image.save()
 
     return HttpResponseRedirect("/show/" + image_id)
 
-@login_required
-@require_GET
-def image_edit(request, id):
-    image = Image.objects.get(pk=id)
-    return render_to_response("image_edit_basic.html",
-        {"image":image,
-         "s3_images_bucket":settings.S3_IMAGES_BUCKET,
-         "s3_url":settings.S3_URL,
-         "form":ImageUploadDetailsForm(),
-         "subjects_prefill":[],
-        },
-        context_instance=RequestContext(request))
 
 @require_GET
 def user_page(request, username):
@@ -167,6 +182,7 @@ def user_page(request, username):
         {"user":user},
         context_instance=RequestContext(request))
 
+
 @login_required
 @require_GET
 def user_profile_edit_basic(request):
@@ -177,6 +193,7 @@ def user_profile_edit_basic(request):
     return render_to_response("user_profile_edit_basic.html",
         {"form":form},
         context_instance=RequestContext(request))
+
 
 @login_required
 @require_POST
@@ -197,6 +214,7 @@ def user_profile_save_basic(request):
         {"form":form},
         context_instance=RequestContext(request))
  
+ 
 @login_required
 @require_GET
 def user_profile_edit_gear(request):
@@ -208,11 +226,12 @@ def user_profile_edit_gear(request):
 
     for attr in ["telescopes", "mounts", "cameras", "focal_reducers", "software"]:
         allGear = getattr(profile, attr).all()
-        formContent[attr + "_prefill"] = jsonGearDump(allGear)
+        formContent[attr + "_prefill"] = jsonDump(allGear)
 
     return render_to_response("user_profile_edit_gear.html",
                               formContent,
                               context_instance=RequestContext(request))
+
 
 @login_required
 @require_POST
@@ -245,13 +264,14 @@ def user_profile_save_gear(request):
                     getattr(profile, k).add(gear_item)
 
         allGear = getattr(profile, k).all()
-        formContent[k + "_prefill"] = jsonGearDump(allGear)
+        formContent[k + "_prefill"] = jsonDump(allGear)
 
     profile.save()
 
     return render_to_response("user_profile_edit_gear.html",
         formContent,
         context_instance=RequestContext(request))
+
 
 @login_required
 def user_profile_flickr_import(request):
@@ -339,6 +359,7 @@ def user_profile_flickr_import(request):
                               response_dict,
                               context_instance=RequestContext(request))
 
+
 def flickr_auth_callback(request):
     f = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
                             settings.FLICKR_SECRET, store_token = False)
@@ -351,6 +372,7 @@ def flickr_auth_callback(request):
     request.session['flickr_token'] = token
 
     return HttpResponseRedirect("/profile/edit/flickr/")
+
 
 def request_progress(request):
     """
