@@ -3,13 +3,54 @@
 
 {% block content %}
     <div id="image-detail">
-        <h2>{{image.title}}</h2>
-        {% ifnotequal image.subjects.count() 0 %}<h3>Contains: {% for s in image.subjects.all %}{{s.name}} {% endfor %}</h3>{% endifnotequal %}
+        <ul class="menu topnav">
+            <li id="actions" class="first">
+                <span class="text"><a href="#">{% trans "Actions" %}</a></span>
+                <span class="caret"><a href="#">&#9662;</a></span>
+                <ul class="subnav">
+                    <li class="first"><a href="#">{% trans "Edit photo's information" %}</a></li>
+                    <li><a href="#">{% trans "Bring to a user's attention" %}</a></li>
+                    <li class="last"><a href="#">{% trans "Request TIFF/FITS" %}</a></li>
+                </ul>
+            </li>
+            <li id="view" class="last">
+                <span class="text"><a href="#">{% trans "View" %}</a></span>
+                <span class="caret"><a href="#">&#9662;</a></span>
+                <ul class="subnav">
+                    <li class="first"><a href="#">{% trans "High resolution" %}</a></li>
+                    <li><a href="#">{% trans "False colors" %}</a></li>
+                    <li class="last"><a href="#">{% trans "Plate solved" %}</a></li>
+                </ul>
+            </li>
+        </ul>
         <img id="main-image" src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" />
-        {% if user.is_authenticated %}
-        <a href="/edit/{{image.id}}">{% trans "Edit" %}</a>
-        {% endif %}
+        <ul class="title">
+            <li class="title">{{image.title}}</li>
+
+            {% ifnotequal image.subjects.count() 0 %}
+            <li class="contains">Contains:
+                {% for s in image.subjects.all %}
+                    <a href="/search/{{s.name}}">{{s.name}}</a>
+                {% endfor %}
+            </li>
+            {% endifnotequal %}
+        </ul>
+        <p id="description">{{image.description}}</p>
     </div>
     <div id="image-sidebar">
     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("ul.subnav").parent().append("<span></span>");
+            $("ul.topnav li span").click(function() {
+                $(this).parent().find("ul.subnav").slideDown('fast').show();
+                $(this).parent().hover(function() {}, function() {
+                    $(this).parent().find("ul.subnav").slideUp('slow');
+                });
+            }).hover(function() {
+                $(this).addClass("subhover");
+            }, function() {                                                                           $(this).removeClass("subhover");
+            });
+        });
+    </script>
 {% endblock %}
