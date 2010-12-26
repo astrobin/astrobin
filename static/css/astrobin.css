@@ -957,21 +957,104 @@ p.thumbs {
     float: left;
 }
 
-#image-detail h2 {
-    font-size: 2em;
-    display: inline;
-    margin-right: 10px;
+#image-detail ul.menu {
+    list-style: none;
+    font-size: 12px;
+    margin: 0 0 30px 0;
+    padding: 0;
+    position: relative;
 }
 
-#image-detail h3 {
-    font-size: 1.25em;
+#image-detail ul.menu li {
+    display: inline-block;
+    background-color: #E2721B;
+    border: 1px solid #8C4611;
+    padding: 2px 10px;
+    margin: 0;
+    float: left;
+}
+
+#image-detail ul.menu li.first {
+    -moz-border-radius: 12px 0 0 12px;
+    border-right: none;
+}
+
+#image-detail ul.menu li.last {
+    -moz-border-radius: 0 12px 12px 0;
+    border-left: none;
+}
+
+#image-detail ul.menu li a {
+    color: #F1F1F1;
+    text-shadow: 1px 1px #111;
+}
+#image-detail ul.topnav li span.subhover {
+    cursor: pointer;
+
+}
+#image-detail ul.topnav li ul.subnav {
+     list-style: none;
+     position: absolute;
+     left: 0px; top: 22px;
+     margin: 0; padding: 0;
+     display: none;
+     float: left;
+     width: 170px;
+     border: 1px solid #111;
+}
+
+#image-detail ul.topnav li ul.subnav li {
+     margin: 0; padding: 0;
+     clear: both;
+     width: 170px;
+}
+
+#image-detail ul.topnav li ul.subnav li:hover {
+    background-color: #FF9E35;
+}
+
+#image-detail ul.topnav li ul.subnav li.first {
+    -moz-border-radius: 12px 12px 0 0;
+}
+
+#image-detail ul.topnav li ul.subnav li.last {
+    -moz-border-radius: 0 0 12px 12px;
+}
+
+#image-detail ul.topnav li ul.subnav li a {
+     float: left;
+     width: 145px;
+     padding: 4px 15px;
+}
+
+#image-detail ul.title {
+    list-style: none;
+    margin: 10px 0 5px 0;
+    padding: 0;
+}
+
+#image-detail ul.title li {
     display: inline;
-    color: #555;
+}
+
+#image-detail ul.title li.title {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    margin-right: 15px;
+}
+#image-detail ul.title li.contains {
     float: right;
+    font-size: 12px;
 }
 
 #image-detail img#main-image {
-    display: block;
+    border: 1px solid #000;
+}
+
+#image-detail p#description {
+    font-size: 12px;
+    margin: 10px 0 10px 0;
 }
 
 img.flickr-photo-to-import {
