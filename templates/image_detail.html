@@ -3,54 +3,85 @@
 
 {% block content %}
     <div id="image-detail">
-        <ul class="menu topnav">
-            <li id="actions" class="first">
-                <span class="text"><a href="#">{% trans "Actions" %}</a></span>
-                <span class="caret"><a href="#">&#9662;</a></span>
-                <ul class="subnav">
-                    <li class="first"><a href="#">{% trans "Edit photo's information" %}</a></li>
-                    <li><a href="#">{% trans "Bring to a user's attention" %}</a></li>
-                    <li class="last"><a href="#">{% trans "Request TIFF/FITS" %}</a></li>
-                </ul>
-            </li>
-            <li id="view" class="last">
-                <span class="text"><a href="#">{% trans "View" %}</a></span>
-                <span class="caret"><a href="#">&#9662;</a></span>
-                <ul class="subnav">
-                    <li class="first"><a href="#">{% trans "High resolution" %}</a></li>
-                    <li><a href="#">{% trans "False colors" %}</a></li>
-                    <li class="last"><a href="#">{% trans "Plate solved" %}</a></li>
-                </ul>
-            </li>
-        </ul>
-        <img id="main-image" src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" />
-        <ul class="title">
-            <li class="title">{{image.title}}</li>
-
-            {% ifnotequal image.subjects.count() 0 %}
-            <li class="contains">Contains:
-                {% for s in image.subjects.all %}
-                    <a href="/search/{{s.name}}">{{s.name}}</a>
-                {% endfor %}
-            </li>
-            {% endifnotequal %}
-        </ul>
-        <p id="description">{{image.description}}</p>
+        <div id="main-content">
+            <ul class="bar">
+                <li id="menu">
+                    <ul class="topnav">
+                        <li id="actions" class="first">
+                            <span class="text"><a href="#">{% trans "Actions" %}</a></span>
+                            <span class="caret"><a href="#">&#9662;</a></span>
+                            <ul class="subnav">
+                                <li class="first"><a href="/edit/{{image.id}}">{% trans "Edit photo's information" %}</a></li>
+                                <li><a href="#">{% trans "Bring to a user's attention" %}</a></li>
+                                <li class="last"><a href="#">{% trans "Request TIFF/FITS" %}</a></li>
+                            </ul>
+                        </li>
+                        <li id="view" class="last">
+                            <span class="text"><a href="#">{% trans "View" %}</a></span>
+                            <span class="caret"><a href="#">&#9662;</a></span>
+                            <ul class="subnav">
+                                <li class="first"><a href="#">{% trans "False colors" %}</a></li>
+                                <li class="last"><a href="#">{% trans "Plate solved" %}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li id="navigation">
+                    <ul class="topnav">
+                        <li class="first"><a href="#">&#8701;&nbsp;{% trans "Newer" %}</a></li>
+                        <li><a href="#"><img src="/static/images/zoom_in.png"/></a></li>
+                        <li class="last"><a href="#">{% trans "Older" %}&nbsp;&#8702;</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <img id="main-image" src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" />
+            <ul class="title">
+                <li class="title">{{image.title}}</li>
+                {% ifnotequal image.subjects.count() 0 %}
+                <li class="contains">Contains:
+                    {% for s in image.subjects.all %}
+                        <a href="/search/{{s.name}}">{{s.name}}</a>
+                    {% endfor %}
+                </li>
+                {% endifnotequal %}
+            </ul>
+            <p id="description">{{image.description}}</p>
+        </div>
     </div>
     <div id="image-sidebar">
     </div>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $("ul.subnav").parent().append("<span></span>");
-            $("ul.topnav li span").click(function() {
-                $(this).parent().find("ul.subnav").slideDown('fast').show();
-                $(this).parent().hover(function() {}, function() {
-                    $(this).parent().find("ul.subnav").slideUp('slow');
-                });
-            }).hover(function() {
-                $(this).addClass("subhover");
-            }, function() {                                                                           $(this).removeClass("subhover");
-            });
-        });
+    var timeout    = 500;
+    var closetimer = 0;
+    var ddmenuitem = 0;
+
+    function topnav_open() {
+        topnav_canceltimer();
+        topnav_close();
+        ddmenuitem = $(this).find('ul').css('visibility', 'visible');
+    }
+
+    function topnav_close() {
+        if (ddmenuitem)
+            ddmenuitem.css('visibility', 'hidden');
+    }
+
+    function topnav_timer() {
+        closetimer = window.setTimeout(topnav_close, timeout);
+    }
+
+    function topnav_canceltimer() {
+        if(closetimer) {
+            window.clearTimeout(closetimer);
+            closetimer = null;
+        }
+    }
+
+    $(document).ready(function() {
+        $('.topnav > li').bind('mouseover', topnav_open)
+        $('.topnav > li').bind('mouseout',  topnav_timer)
+    });
+
+    document.onclick = topnav_close;
     </script>
 {% endblock %}
