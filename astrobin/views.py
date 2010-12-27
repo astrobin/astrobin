@@ -150,6 +150,16 @@ def image_edit_process_basic(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
 
+    if not form.is_valid():
+        return render_to_response("image_edit_basic.html",
+            {"image":image,
+             "s3_images_bucket":settings.S3_IMAGES_BUCKET,
+             "s3_url":settings.S3_URL,
+             "form":form,
+             "subjects_prefill":jsonDump(image.subjects.all()),
+            },
+            context_instance=RequestContext(request))
+
     reader = csv.reader([request.POST['as_values_subjects']],
                         skipinitialspace = True)
     for row in reader:
@@ -163,10 +173,6 @@ def image_edit_process_basic(request):
     if form.is_valid():
         image.title = form.cleaned_data['title'] 
         image.description = form.cleaned_data['description']
-    else:
-        # form is not valid because of the tricks in the autosuggest field
-        image.title = request.POST['title']
-        image.description = request.POST['description']
 
     image.save()
 
