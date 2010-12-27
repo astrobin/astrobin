@@ -9,8 +9,8 @@ class ImageUploadForm(forms.Form):
 
 class ImageEditBasicForm(forms.Form):
     title = forms.CharField(max_length=128)
-    subjects = forms.CharField()
-    description = forms.CharField(widget=forms.Textarea)
+    subjects = forms.CharField(required=False)
+    description = forms.CharField(widget=forms.Textarea, required=False)
 
 class UserProfileEditBasicForm(forms.ModelForm):
     class Meta:
