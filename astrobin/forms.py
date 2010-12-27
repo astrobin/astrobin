@@ -23,4 +23,5 @@ class UserProfileEditGearForm(forms.Form):
     cameras = forms.CharField()
     focal_reducers = forms.CharField()
     software = forms.CharField()
+    filters = forms.CharField()
 

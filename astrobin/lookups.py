@@ -3,6 +3,7 @@ from models import Mount
 from models import Camera
 from models import FocalReducer
 from models import Software
+from models import Filter
 from models import Subject
 
 from django.db.models import Q 
@@ -16,7 +17,8 @@ def autocomplete(request, what):
                  'cameras':Camera,
                  'focal_reducers':FocalReducer,
                  'software':Software,
-                 'subjects':Subject}.iteritems():
+                 'subjects':Subject,
+                 'filters':Filter}.iteritems():
         if what == k:
             values = v.objects.filter(Q(name__istartswith=request.GET['q']))
 

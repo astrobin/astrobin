@@ -13,9 +13,11 @@
                 var camerasData        = {items:{% autoescape off %}{{cameras_prefill}}{% endautoescape %}};
                 var focal_reducersData = {items:{% autoescape off %}{{focal_reducers_prefill}}{% endautoescape %}};
                 var softwareData       = {items:{% autoescape off %}{{software_prefill}}{% endautoescape %}};
+                var filtersData        = {items:{% autoescape off %}{{filters_prefill}}{% endautoescape %}};
 
                 var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
                 var emptyText = '{% trans "No results. Press TAB to add it!" %}';
+
                 $("#id_telescopes").autoSuggest("/autocomplete/telescopes/",
                     {asHtmlID: 'telescopes',
                      selectedItemProp: 'name',
@@ -57,6 +59,15 @@
                      selectedItemProp: 'name',
                      searchObjProps: 'name',
                      preFill: softwareData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+                $("#id_filters").autoSuggest("/autocomplete/filters/",
+                    {asHtmlID: 'filters',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: filtersData.items,
                      selectedItemProp: 'name',
                      selectedValuesProp: 'name',
                      startText: startText,

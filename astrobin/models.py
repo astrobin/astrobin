@@ -28,6 +28,9 @@ class FocalReducer(Gear):
 class Software(Gear):
     pass
 
+class Filter(Gear):
+    pass
+
 class Subject(models.Model):
     name = models.CharField(max_length=64)
 
@@ -84,6 +87,7 @@ class UserProfile(models.Model):
     cameras = models.ManyToManyField(Camera, null=True, blank=True)
     focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True)
     software = models.ManyToManyField(Software, null=True, blank=True)
+    filters = models.ManyToManyField(Filter, null=True, blank=True)
     
     def __unicode__(self):
         return "%s' profile" % self.user
