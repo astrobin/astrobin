@@ -953,19 +953,26 @@ p.thumbs {
     border-bottom: none;
 }
 
-#image-detail {
+#image-detail #main-content {
     float: left;
+    width: 722px;
 }
 
-#image-detail ul.menu {
+#image-detail ul.bar {
+    list-style: none;
+    margin: 0 0 30px 0;
+    padding: 0;
+}
+
+#image-detail ul.topnav {
     list-style: none;
     font-size: 12px;
-    margin: 0 0 30px 0;
+    margin: 0 0 0 0;
     padding: 0;
     position: relative;
 }
 
-#image-detail ul.menu li {
+#image-detail ul.topnav li {
     display: inline-block;
     background-color: #E2721B;
     border: 1px solid #8C4611;
@@ -974,30 +981,30 @@ p.thumbs {
     float: left;
 }
 
-#image-detail ul.menu li.first {
+#image-detail ul.topnav li.first {
     -moz-border-radius: 12px 0 0 12px;
     border-right: none;
 }
 
-#image-detail ul.menu li.last {
+#image-detail ul.topnav li.last {
     -moz-border-radius: 0 12px 12px 0;
     border-left: none;
 }
 
-#image-detail ul.menu li a {
+#image-detail ul.topnav li a {
     color: #F1F1F1;
     text-shadow: 1px 1px #111;
 }
-#image-detail ul.topnav li span.subhover {
+#image-detail ul.topnav li.subhover {
     cursor: pointer;
-
 }
+
 #image-detail ul.topnav li ul.subnav {
      list-style: none;
      position: absolute;
-     left: 0px; top: 22px;
+     left: 0px; top: 28px;
      margin: 0; padding: 0;
-     display: none;
+     visibility: hidden;
      float: left;
      width: 170px;
      border: 1px solid #111;
@@ -1013,18 +1020,28 @@ p.thumbs {
     background-color: #FF9E35;
 }
 
-#image-detail ul.topnav li ul.subnav li.first {
+#image-detail ul.topnav li ul li.first {
     -moz-border-radius: 12px 12px 0 0;
+    border-right: none;
 }
 
-#image-detail ul.topnav li ul.subnav li.last {
+#image-detail ul.topnav li ul li.last {
     -moz-border-radius: 0 0 12px 12px;
+    border-left: none;
 }
 
 #image-detail ul.topnav li ul.subnav li a {
      float: left;
      width: 145px;
      padding: 4px 15px;
+}
+
+#image-detail li#navigation {
+    float: right;
+}
+
+#image-detail li#navigation img {
+    vertical-align: bottom;
 }
 
 #image-detail ul.title {
