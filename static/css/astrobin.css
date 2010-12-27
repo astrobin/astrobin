@@ -1006,20 +1006,21 @@ p.thumbs {
 #image-detail ul.topnav>li ul.subnav {
     list-style: none;
     position: absolute;
-    left: -2px; top: 28px;
+    left: 0px; top: 28px;
     margin: 0; padding: 0;
     visibility: hidden;
     float: left;
     width: 170px;
-    background: #e98e47;
-    background: -moz-linear-gradient(top, #e98e47, #E2721B);
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e98e47), to(#E2721B));
+    background: #271A14;
+    background: -moz-linear-gradient(top, #271A14, #1D140F);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#271A14), to(#1D140F));
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
-    -moz-box-shadow: 5px 5px 5px #151515;
-    -webkit-box-shadow: 5px 5px 5px #151515;
-    box-shadow: 5px 5px 5px #151515;
+    border: 1px solid #211612;
+    -moz-box-shadow: 5px 5px 5px #000;
+    -webkit-box-shadow: 5px 5px 5px #000;
+    box-shadow: 5px 5px 5px #000;
 }
 
 #image-detail ul.topnav>li ul.subnav li {
@@ -1034,6 +1035,11 @@ p.thumbs {
      float: left;
      width: 145px;
      padding: 4px 15px;
+     color: #867474;
+}
+
+#image-detail ul.topnav>li ul.subnav li a:hover {
+    color: white;
 }
 
 #image-detail li#navigation {
