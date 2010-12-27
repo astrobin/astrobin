@@ -12,6 +12,14 @@ class ImageEditBasicForm(forms.Form):
     subjects = forms.CharField(required=False)
     description = forms.CharField(widget=forms.Textarea, required=False)
 
+class ImageEditGearForm(forms.Form):
+    telescopes = forms.CharField()
+    mounts = forms.CharField()
+    cameras = forms.CharField()
+    focal_reducers = forms.CharField()
+    software = forms.CharField()
+    filters = forms.CharField()
+
 class UserProfileEditBasicForm(forms.ModelForm):
     class Meta:
         model = UserProfile

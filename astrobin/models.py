@@ -44,10 +44,12 @@ class Image(models.Model):
     uploaded = models.DateTimeField(editable=False)
 
     # gear
-    camera = models.CharField(max_length=32)
-    focal_reducer = models.CharField(max_length=32)
-    telescope = models.CharField(max_length=32)
-    mount = models.CharField(max_length=32)
+    telescopes = models.ManyToManyField(Telescope, null=True, blank=True)
+    mounts = models.ManyToManyField(Mount, null=True, blank=True)
+    cameras = models.ManyToManyField(Camera, null=True, blank=True)
+    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True)
+    software = models.ManyToManyField(Software, null=True, blank=True)
+    filters = models.ManyToManyField(Filter, null=True, blank=True)
 
     description = models.TextField()
     
