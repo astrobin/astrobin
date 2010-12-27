@@ -133,7 +133,6 @@
 					} else if(input_focus){
 						$("li.as-selection-item", selections_holder).removeClass("blur");
 						if($(this).val() != ""){
-							results_ul.css("width",selections_holder.outerWidth());
 							results_holder.show();
 						}
 					}
@@ -318,7 +317,6 @@
 					if(matchCount <= 0){
 						results_ul.html('<li class="as-message">'+opts.emptyText+'</li>');
 					}
-					results_ul.css("width", selections_holder.outerWidth());
 					results_holder.show();
 					opts.resultsComplete.call(this);
 				}
