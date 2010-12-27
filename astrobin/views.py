@@ -150,7 +150,8 @@ def image_edit_gear(request, id):
     form = ImageEditGearForm()
     response_dict = {"form": form}
 
-    for attr in ["telescopes",
+    for attr in ["imaging_telescopes",
+                 "guiding_telescopes",
                  "mounts",
                  "cameras",
                  "focal_reducers",
@@ -173,14 +174,13 @@ def image_edit_save_basic(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
 
+    response_dict = {'form': form,
+                     'image': image,
+                     'subjects_prefill': jsonDump(image.subjects.all())}
+
     if not form.is_valid():
         return render_to_response("image_edit_basic.html",
-            {"image":image,
-             "s3_images_bucket":settings.S3_IMAGES_BUCKET,
-             "s3_url":settings.S3_URL,
-             "form":form,
-             "subjects_prefill":jsonDump(image.subjects.all()),
-            },
+            response_dict,
             context_instance=RequestContext(request))
 
     reader = csv.reader([request.POST['as_values_subjects']],
@@ -198,9 +198,9 @@ def image_edit_save_basic(request):
         image.description = form.cleaned_data['description']
 
     image.save()
+    response_dict['subject_prefill'] = jsonDump(image.subjects.all())
 
-    response_dict = {'form': form, 'image': image}
-    return render_to_response("image_edit_gear.html",
+    return render_to_response("image_edit_basic.html",
                               response_dict,
                               context_instance=RequestContext(request))
 
@@ -212,7 +212,8 @@ def image_edit_save_gear(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
 
-    image.telescopes.clear()
+    image.imaging_telescopes.clear()
+    image.guiding_telescopes.clear()
     image.mounts.clear()
     image.cameras.clear()
     image.focal_reducers.clear()
@@ -222,12 +223,13 @@ def image_edit_save_gear(request):
     response_dict = {"form": form}
 
     data = {} 
-    for k, v in {"telescopes"    : [Telescope, profile.telescopes],
-                 "mounts"        : [Mount, profile.mounts],
-                 "cameras"       : [Camera, profile.cameras],
-                 "focal_reducers": [FocalReducer, profile.focal_reducers],
-                 "software"      : [Software, profile.software],
-                 "filters"       : [Filter, profile.filters]}.iteritems():
+    for k, v in {"imaging_telescopes": [Telescope, profile.telescopes, "telescopes"],
+                 "guiding_telescopes": [Telescope, profile.telescopes, "telescopes"],
+                 "mounts"            : [Mount, profile.mounts],
+                 "cameras"           : [Camera, profile.cameras],
+                 "focal_reducers"    : [FocalReducer, profile.focal_reducers],
+                 "software"          : [Software, profile.software],
+                 "filters"           : [Filter, profile.filters]}.iteritems():
         data[k] = csv.reader([request.POST['as_values_' + k]], skipinitialspace = True)
         for row in data[k]:
             for name in row:
@@ -235,7 +237,7 @@ def image_edit_save_gear(request):
                     gear_item, created = v[1].get_or_create(name = name)
                     if created:
                         gear_item.save()
-                        getattr(profile, k).add(gear_item)
+                        getattr(profile, v[2] if len(v) > 2 else k).add(gear_item)
                         profile.save()
                     getattr(image, k).add(gear_item)
 
@@ -247,7 +249,6 @@ def image_edit_save_gear(request):
     return render_to_response("image_edit_gear.html",
         response_dict,
         context_instance=RequestContext(request))
-
 
 
 @require_GET

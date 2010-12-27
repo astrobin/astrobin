@@ -44,7 +44,8 @@ class Image(models.Model):
     uploaded = models.DateTimeField(editable=False)
 
     # gear
-    telescopes = models.ManyToManyField(Telescope, null=True, blank=True)
+    imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes')
+    guiding_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='guiding_telescopes')
     mounts = models.ManyToManyField(Mount, null=True, blank=True)
     cameras = models.ManyToManyField(Camera, null=True, blank=True)
     focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True)

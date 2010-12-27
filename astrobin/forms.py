@@ -13,7 +13,8 @@ class ImageEditBasicForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea, required=False)
 
 class ImageEditGearForm(forms.Form):
-    telescopes = forms.CharField()
+    imaging_telescopes = forms.CharField()
+    guiding_telescopes = forms.CharField()
     mounts = forms.CharField()
     cameras = forms.CharField()
     focal_reducers = forms.CharField()
