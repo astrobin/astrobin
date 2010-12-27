@@ -30,6 +30,7 @@ from models import Filter
 from models import Subject
 from forms import ImageUploadForm
 from forms import ImageEditBasicForm
+from forms import ImageEditGearForm
 from forms import UserProfileEditBasicForm
 from forms import UserProfileEditGearForm
 from file_utils import store_image_in_s3
@@ -126,7 +127,7 @@ def image_upload_process(request):
 
 @login_required
 @require_GET
-def image_edit(request, id):
+def image_edit_basic(request, id):
     image = Image.objects.get(pk=id)
     form = ImageEditBasicForm({'title': image.title,
                                'description': image.description})
@@ -142,10 +143,32 @@ def image_edit(request, id):
 
 
 @login_required
-@require_POST
-def image_edit_process_basic(request):
-    """Process the second part of the form"""
+@require_GET
+def image_edit_gear(request, id):
+    profile = UserProfile.objects.get(user=request.user)
+    image = Image.objects.get(pk=id)
+    form = ImageEditGearForm()
+    response_dict = {"form": form}
 
+    for attr in ["telescopes",
+                 "mounts",
+                 "cameras",
+                 "focal_reducers",
+                 "software",
+                 "filters"]:
+        imageGear = getattr(image, attr).all()
+        response_dict[attr + "_prefill"] = jsonDump(imageGear)
+
+    response_dict['image'] = image
+
+    return render_to_response("image_edit_gear.html",
+                              response_dict,
+                              context_instance=RequestContext(request))
+
+
+@login_required
+@require_POST
+def image_edit_save_basic(request):
     form = ImageEditBasicForm(request.POST)
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
@@ -176,7 +199,55 @@ def image_edit_process_basic(request):
 
     image.save()
 
-    return HttpResponseRedirect("/show/" + image_id)
+    response_dict = {'form': form, 'image': image}
+    return render_to_response("image_edit_gear.html",
+                              response_dict,
+                              context_instance=RequestContext(request))
+
+
+@login_required
+@require_POST
+def image_edit_save_gear(request):
+    profile = UserProfile.objects.get(user = request.user)
+    image_id = request.POST.get('image_id')
+    image = Image.objects.get(pk=image_id)
+
+    image.telescopes.clear()
+    image.mounts.clear()
+    image.cameras.clear()
+    image.focal_reducers.clear()
+    image.filters.clear()
+
+    form = ImageEditGearForm()
+    response_dict = {"form": form}
+
+    data = {} 
+    for k, v in {"telescopes"    : [Telescope, profile.telescopes],
+                 "mounts"        : [Mount, profile.mounts],
+                 "cameras"       : [Camera, profile.cameras],
+                 "focal_reducers": [FocalReducer, profile.focal_reducers],
+                 "software"      : [Software, profile.software],
+                 "filters"       : [Filter, profile.filters]}.iteritems():
+        data[k] = csv.reader([request.POST['as_values_' + k]], skipinitialspace = True)
+        for row in data[k]:
+            for name in row:
+                if name != '':
+                    gear_item, created = v[1].get_or_create(name = name)
+                    if created:
+                        gear_item.save()
+                        getattr(profile, k).add(gear_item)
+                        profile.save()
+                    getattr(image, k).add(gear_item)
+
+        imageGear = getattr(image, k).all()
+        response_dict[k + "_prefill"] = jsonDump(imageGear)
+
+    image.save()
+    response_dict['image'] = image
+    return render_to_response("image_edit_gear.html",
+        response_dict,
+        context_instance=RequestContext(request))
+
 
 
 @require_GET
@@ -229,14 +300,14 @@ def user_profile_edit_gear(request):
     profile = UserProfile.objects.get(user=request.user)
 
     form = UserProfileEditGearForm()
-    formContent = {"form": form}
+    response_dict = {"form": form}
 
     for attr in ["telescopes", "mounts", "cameras", "focal_reducers", "software", "filters"]:
         allGear = getattr(profile, attr).all()
-        formContent[attr + "_prefill"] = jsonDump(allGear)
+        response_dict[attr + "_prefill"] = jsonDump(allGear)
 
     return render_to_response("user_profile_edit_gear.html",
-                              formContent,
+                              response_dict,
                               context_instance=RequestContext(request))
 
 
@@ -251,9 +322,10 @@ def user_profile_save_gear(request):
     profile.mounts.clear()
     profile.cameras.clear()
     profile.focal_reducers.clear()
+    profile.filters.clear()
 
     form = UserProfileEditGearForm()
-    formContent = {"form": form}
+    response_dict = {"form": form}
 
     data = {} 
     for k, v in {"telescopes"    : [Telescope, profile.telescopes],
@@ -272,12 +344,12 @@ def user_profile_save_gear(request):
                     getattr(profile, k).add(gear_item)
 
         allGear = getattr(profile, k).all()
-        formContent[k + "_prefill"] = jsonDump(allGear)
+        response_dict[k + "_prefill"] = jsonDump(allGear)
 
     profile.save()
 
     return render_to_response("user_profile_edit_gear.html",
-        formContent,
+        response_dict,
         context_instance=RequestContext(request))
 
 

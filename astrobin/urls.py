@@ -12,9 +12,10 @@ urlpatterns = patterns('',
     (r'^show/(?P<id>\d+)/$', views.image_detail),
     (r'^upload/$', views.image_upload),
     (r'^upload/process$', views.image_upload_process),
-    (r'^edit/(?P<id>\d+)/$', views.image_edit),
-    (r'^edit/advanced/(?P<id>\d+)/$', views.image_edit),
-    (r'^edit/process_basic$', views.image_edit_process_basic),
+    (r'^edit/basic/(?P<id>\d+)/$', views.image_edit_basic),
+    (r'^edit/gear/(?P<id>\d+)/$', views.image_edit_gear),
+    (r'^edit/save/basic/$', views.image_edit_save_basic),
+    (r'^edit/save/gear/$', views.image_edit_save_gear),
 
     (r'^accounts/', include('registration.urls')),
 
@@ -32,6 +33,8 @@ urlpatterns = patterns('',
     (r'^profile/edit/flickr/$', views.user_profile_flickr_import),
     (r'^flickr_auth_callback/$', views.flickr_auth_callback),
     (r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete),
+    (r'^autocomplete_user/(?P<what>\w+)/$', lookups.autocomplete_user),
+
     (r'^misc/request-progress/$', views.request_progress),
     (r'^(?P<username>\w+)/$', views.user_page),
 )
