@@ -24,6 +24,7 @@ ul.as-selections li {
 ul.as-selections li.as-selection-item {
     color: #f1f1f1;
     font-family: "Lucida Grande", arial, sans-serif;
+    font-size: 12px;
     text-shadow: 0 1px 1px #111;
     background-color: #FF9E35;
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF9E35), to(#BF6017));
@@ -114,6 +115,7 @@ ul.as-list {
     padding: 0;
     color: #000;
     font-family: "Lucida Grande", arial, sans-serif;
+    font-size: 12px;
     background-color: #FED7A9;
     z-index: 2;
     box-shadow: 0 2px 12px #222;
@@ -126,7 +128,7 @@ ul.as-list {
 
 li.as-result-item, li.as-message {
     margin: 0 0 0 0;
-    padding: 2px 12px;
+    padding: 0 12px;
     background-color: transparent;
     border: 1px solid #fff;
     border-bottom: 1px solid #ddd;
