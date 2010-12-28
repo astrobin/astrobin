@@ -105,7 +105,7 @@ def image_upload_process(request):
     else:
         return render_to_response("image_edit_basic.html",
             {"image":image,
-             "s3_images_bucket":settings.S3_IMAGES_BUCKET,
+             "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
              "s3_url":settings.S3_URL,
              "form":ImageEditBasicForm(),
              "subjects_prefill":[],
@@ -122,7 +122,7 @@ def image_edit_basic(request, id):
 
     return render_to_response("image_edit_basic.html",
         {"image":image,
-         "s3_images_bucket":settings.S3_IMAGES_BUCKET,
+         "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
          "s3_url":settings.S3_URL,
          "form":form,
          "subjects_prefill":jsonDump(image.subjects.all()),
@@ -136,7 +136,11 @@ def image_edit_gear(request, id):
     profile = UserProfile.objects.get(user=request.user)
     image = Image.objects.get(pk=id)
     form = ImageEditGearForm()
-    response_dict = {"form": form}
+    response_dict = {
+        "form": form,
+        "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
+        "s3_url":settings.S3_URL,
+    }
 
     for attr in ["imaging_telescopes",
                  "guiding_telescopes",
@@ -161,7 +165,12 @@ def image_edit_gear(request, id):
 def image_edit_acquisition(request, id):
     image = Image.objects.get(pk=id)
     form = ImageEditAcquisitionForm()
-    response_dict = {'form': form, 'image': image}
+    response_dict = {
+        'form': form,
+        'image': image,
+        "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
+        "s3_url":settings.S3_URL,
+    }
     return render_to_response('image_edit_acquisition.html',
                               response_dict,
                               context_instance=RequestContext(request))
