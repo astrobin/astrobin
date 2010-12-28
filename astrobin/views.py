@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import create_object
@@ -115,7 +116,7 @@ def image_upload_process(request):
 @login_required
 @require_GET
 def image_edit_basic(request, id):
-    image = Image.objects.get(pk=id)
+    image = get_object_or_404(Image, pk=id)
     form = ImageEditBasicForm({'title': image.title,
                                'description': image.description})
 
