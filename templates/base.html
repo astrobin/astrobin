@@ -172,7 +172,7 @@
             action: '/upload/process',
             debug: false,
             onComplete: function(id, filename, responseJSON) {
-                window.location = '/edit/basic' + responseJSON['id'];
+                window.location = '/edit/basic/' + responseJSON['id'];
             }
         });
     }
