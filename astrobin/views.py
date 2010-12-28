@@ -140,7 +140,8 @@ def image_edit_gear(request, id):
     for attr in ["imaging_telescopes",
                  "guiding_telescopes",
                  "mounts",
-                 "cameras",
+                 "imaging_cameras",
+                 "guiding_cameras",
                  "focal_reducers",
                  "software",
                  "filters"]:
@@ -213,7 +214,8 @@ def image_edit_save_gear(request):
     image.imaging_telescopes.clear()
     image.guiding_telescopes.clear()
     image.mounts.clear()
-    image.cameras.clear()
+    image.imaging_cameras.clear()
+    image.guiding_cameras.clear()
     image.focal_reducers.clear()
     image.filters.clear()
 
@@ -224,7 +226,8 @@ def image_edit_save_gear(request):
     for k, v in {"imaging_telescopes": [Telescope, profile.telescopes, "telescopes"],
                  "guiding_telescopes": [Telescope, profile.telescopes, "telescopes"],
                  "mounts"            : [Mount, profile.mounts],
-                 "cameras"           : [Camera, profile.cameras],
+                 "imaging_cameras"   : [Camera, profile.cameras, "cameras"],
+                 "guiding_cameras"   : [Camera, profile.cameras, "cameras"],
                  "focal_reducers"    : [FocalReducer, profile.focal_reducers],
                  "software"          : [Software, profile.software],
                  "filters"           : [Filter, profile.filters]}.iteritems():
