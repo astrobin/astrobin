@@ -37,9 +37,26 @@ class Subject(models.Model):
     def __unicode__(self):
         return self.name
 
+class LRGB_Acquisition(models.Model):
+    number_of_light_frames_l = models.IntegerField(null=True, blank=True)
+    number_of_light_frames_r = models.IntegerField(null=True, blank=True)
+    number_of_light_frames_g = models.IntegerField(null=True, blank=True)
+    number_of_light_frames_b = models.IntegerField(null=True, blank=True)
+
+    seconds_per_light_frame_l = models.IntegerField(null=True, blank=True)
+    seconds_per_light_frame_r = models.IntegerField(null=True, blank=True)
+    seconds_per_light_frame_g = models.IntegerField(null=True, blank=True)
+    seconds_per_light_frame_b = models.IntegerField(null=True, blank=True)
+
+    number_of_dark_frames = models.IntegerField(null=True, blank=True)
+    number_of_offset_frames = models.IntegerField(null=True, blank=True)
+    number_of_flat_frames = models.IntegerField(null=True, blank=True)
+    ISO_settings = models.IntegerField(null=True, blank=True)
+
 class Image(models.Model):
     title = models.CharField(max_length=128)
     subjects = models.ManyToManyField(Subject)
+    description = models.TextField()
     filename = models.CharField(max_length=64, editable=False)
     uploaded = models.DateTimeField(editable=False)
 
@@ -52,8 +69,9 @@ class Image(models.Model):
     software = models.ManyToManyField(Software, null=True, blank=True)
     filters = models.ManyToManyField(Filter, null=True, blank=True)
 
-    description = models.TextField()
-    
+    # acquisition (deep sky)
+    lrgb = models.ManyToManyField(LRGB_Acquisition, null=True, blank=True)
+
     class Meta:
         ordering = ('-uploaded', '-id')
         

@@ -21,6 +21,9 @@ class ImageEditGearForm(forms.Form):
     software = forms.CharField()
     filters = forms.CharField()
 
+class ImageEditAcquisitionForm(forms.Form):
+    pass
+
 class UserProfileEditBasicForm(forms.ModelForm):
     class Meta:
         model = UserProfile

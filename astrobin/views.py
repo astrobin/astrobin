@@ -18,22 +18,9 @@ import csv
 import flickrapi
 import urllib
 
-from models import Image
-from models import ABPOD
-from models import UserProfile
-from models import Telescope
-from models import Mount
-from models import Camera
-from models import FocalReducer
-from models import Software
-from models import Filter
-from models import Subject
-from forms import ImageUploadForm
-from forms import ImageEditBasicForm
-from forms import ImageEditGearForm
-from forms import UserProfileEditBasicForm
-from forms import UserProfileEditGearForm
-from file_utils import store_image_in_s3
+from models import *
+from forms import *
+from file_utils import *
 
 def jsonDump(all):
     return simplejson.dumps([{'value_unused': i.id, 'name': i.name} for i in all])
@@ -163,6 +150,17 @@ def image_edit_gear(request, id):
     response_dict['image'] = image
 
     return render_to_response("image_edit_gear.html",
+                              response_dict,
+                              context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
+def image_edit_acquisition(request, id):
+    image = Image.objects.get(pk=id)
+    form = ImageEditAcquisitionForm()
+    response_dict = {'form': form, 'image': image}
+    return render_to_response('image_edit_acquisition.html',
                               response_dict,
                               context_instance=RequestContext(request))
 

@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     (r'^upload/process$', views.image_upload_process),
     (r'^edit/basic/(?P<id>\d+)/$', views.image_edit_basic),
     (r'^edit/gear/(?P<id>\d+)/$', views.image_edit_gear),
+    (r'^edit/acquisition/(?P<id>\d+)/$', views.image_edit_acquisition),
     (r'^edit/save/basic/$', views.image_edit_save_basic),
     (r'^edit/save/gear/$', views.image_edit_save_gear),
 
