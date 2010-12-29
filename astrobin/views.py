@@ -164,9 +164,7 @@ def image_edit_gear(request, id):
 @require_GET
 def image_edit_acquisition(request, id):
     image = Image.objects.get(pk=id)
-    form = ImageEditAcquisitionForm()
     response_dict = {
-        'form': form,
         'image': image,
         "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
         "s3_url":settings.S3_URL,
@@ -261,6 +259,14 @@ def image_edit_save_gear(request):
         response_dict,
         context_instance=RequestContext(request))
 
+
+@login_required
+@require_POST
+def image_edit_save_acquisition(request):
+    image_id = request.POST.get('image_id')
+    image = Image.objects.get(pk=image_id)
+
+    
 
 @require_GET
 def user_page(request, username):

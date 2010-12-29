@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     (r'^edit/acquisition/(?P<id>\d+)/$', views.image_edit_acquisition),
     (r'^edit/save/basic/$', views.image_edit_save_basic),
     (r'^edit/save/gear/$', views.image_edit_save_gear),
+    (r'^edit/save/acquisition/$', views.image_edit_save_acquisition),
 
     (r'^accounts/', include('registration.urls')),
 

@@ -487,6 +487,10 @@ input.button {
     width: 558px;
 }
 
+.sided-main-content select.inline {
+    width: 458px;
+}
+
 .sided-main-content .input_text {
     padding:10px 10px;
     width:200px;
@@ -513,6 +517,12 @@ input.button {
     width:200px;
     cursor: hand;
 }
+
+.sided-main-content .inline-button {
+    width: 80px;
+    margin: 0;
+}
+
 
 .sided-main-content form p.fieldless {
     text-align: center;
@@ -1146,4 +1156,28 @@ p#flickr_progress_message, p#flickr_progress {
 
 form ul.errorlist {
     margin-left: 170px;
+}
+
+ul.inline {
+    margin: 0;
+    padding: 0;
+    clear: both;
+}
+ul.inline li {
+    display: inline-block;
+    margin-right: 0;
+    list-style: none;
+}
+ul.inline input {
+    width: 0;
+    margin-right: 10px;
+}
+
+ul.inline input.frame {
+    width: 45px;
+}
+
+ul.inline label.notfirst {
+    margin: 0;
+    width: auto;
 }
