@@ -24,7 +24,10 @@ from forms import *
 from file_utils import *
 
 def jsonDump(all):
-    return simplejson.dumps([{'value_unused': i.id, 'name': i.name} for i in all])
+    if len(all) > 0:
+        return simplejson.dumps([{'value_unused': i.id, 'name': i.name} for i in all])
+    else:
+        return []
 
 
 # VIEWS
@@ -185,13 +188,14 @@ def image_edit_save_basic(request):
                      'image': image,
                      's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
                      's3_url':settings.S3_URL,
-                     'subjects_prefill': jsonDump(image.subjects.all())}
+                    }
 
     if not form.is_valid():
         return render_to_response("image_edit_basic.html",
             response_dict,
             context_instance=RequestContext(request))
 
+    image.subjects.clear()
     reader = csv.reader([request.POST['as_values_subjects']],
                         skipinitialspace = True)
     for row in reader:
@@ -202,12 +206,11 @@ def image_edit_save_basic(request):
                     subject.save()
                 image.subjects.add(subject)
 
-    if form.is_valid():
-        image.title = form.cleaned_data['title'] 
-        image.description = form.cleaned_data['description']
+    image.title = form.cleaned_data['title'] 
+    image.description = form.cleaned_data['description']
 
     image.save()
-    response_dict['subject_prefill'] = jsonDump(image.subjects.all())
+    response_dict['subjects_prefill'] = jsonDump(image.subjects.all())
 
     return render_to_response("image_edit_basic.html",
                               response_dict,

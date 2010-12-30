@@ -77,7 +77,7 @@ class Image(models.Model):
         ordering = ('-uploaded', '-id')
         
     def __unicode__(self):
-        return self.subjects
+        return self.title
 
     def save(self, *args, **kwargs):
         self.uploaded = datetime.now()
