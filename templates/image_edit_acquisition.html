@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    {% include 'image-edit-menu.html' %}   
+    <div class="sided-main-content">
+    <h1>{% trans "Edit your image: acquisition details" %}</h1>
+    <form action="/edit/save/acquisition/" method="post">
+        <p id="image_type_controller">
+            <label for="image_type_controller">{% trans "Select type of image:" %}</label>
+            <select id="image_type_controller" class="inline" style="width:200px;margin-right:20px;">
+                <option value="deep_sky">{% trans "Deep sky" %}</option>
+                <option value="solar_system">{% trans "Solar System" %}</option>
+            </select>
+            <input type="button" class="button inline-button" value="{% trans "Continue" %}"/>
+        </p>
+        <p id="deep_sky_controller" style="display:none">
+            <label for="deep_sky_controller">{% trans "Add frame sequence data:" %}</label>
+            <select id="deep_sky_controller" class="inline" style="width:200px;margin-right:20px;">
+                <option value="l">{% trans "Light frames" %}</option>
+                <option value="r">{% trans "R frames" %}</option>
+                <option value="g">{% trans "G frames" %}</option>
+                <option value="b">{% trans "B frames" %}</option>
+                <option value="d">{% trans "Dark frames" %}</option>
+                <option value="o">{% trans "Offset/bias frames" %}</option>
+                <option value="f">{% trans "Flat frames" %}</option>
+                <option value="fd">{% trans "Flat dark frames" %}</option>
+            </select>
+            <input type="button" class="button inline-button" value="{% trans "Add" %}"/>
+        </p>
+        <span id="variable_fields"></span>
+        <input type="hidden" name="image_id" value="{{image.id}}" />
+        <ul style="clear:both">
+            <li><input class="button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+            <li><a href="/show/{{image.id}}">{% trans "Return to image" %}</a></li>
+        </ul>
+    </form>
+    <script type="text/javascript">
+        var id_counter = 0;
+
+        $(document).ready(function() {
+            $('p#image_type_controller input').click(function() {
+                if ($('select#image_type_controller').val() == 'deep_sky') {
+                    $('p#deep_sky_controller').css('display', 'block');
+                    $('p#iso_settings').css('display', 'block');
+                } else {
+                    $('p#solar_system_controller').css('display', 'block');
+                }
+                $(this).remove();
+            });
+            $('p#deep_sky_controller input').click(function() {
+                var value = $('select#deep_sky_controller').val()
+                var number_of_frames = ''
+                var frame_duration = 'Duration in seconds:'
+                if (value == 'l') {
+                    number_of_frames = '{% trans "Number of light frames" %}:'
+                } else if (value == 'r') {
+                    number_of_frames = '{% trans "Number of R frames" %}:'
+                } else if (value == 'g') {
+                    number_of_frames = '{% trans "Number of G frames" %}:'
+                } else if (value == 'b') {
+                    number_of_frames = '{% trans "Number of B frames" %}:'
+                } else if (value == 'd') {
+                    number_of_frames = '{% trans "Number of dark frames" %}:'
+                } else if (value == 'o') {
+                    number_of_frames = '{% trans "Number of offset/bias frames" %}:'
+                } else if (value == 'f') {
+                    number_of_frames = '{% trans "Number of flat frames" %}:'
+                } else if (value == 'fd') {
+                    number_of_frames = '{% trans "Number of flat dark frames" %}:'
+                }
+
+                $('#variable_fields').append(function() {
+                    var id = value + id_counter;
+                    var id_number = id + '_number';
+                    var id_duration = id + '_duration';
+                    var id_iso = id + '_iso';
+                    id_counter++;
+
+                    var ret = '\
+                        <ul id="' + id + '" class="inline">\
+                            <li>\
+                                <p>\
+                                    <label for="' + id_number + '">' + number_of_frames + '</label>\
+                                    <input id="' + id_number + '" class="frame" type="text" name="' + id_number + '" maxlength="4" size="4"/>\
+                                </p>\
+                            </li>';
+                    if (value == 'l' || value == 'r' || value == 'g' || value == 'b') {
+                        ret += '\
+                            <li>\
+                                <p>\
+                                    <label class="notfirst" for="' + id_duration + '">' + frame_duration + '</label>\
+                                    <input id="' + id_duration + '" class="frame" type="text" name="' + id_duration + '" maxlength="6" size="6"/>\
+                                </p>\
+                            </li>\
+                            <li>\
+                                <p>\
+                                    <label class="notfirst" for="' + id_iso + '">{% trans "ISO" %}:</label>\
+                                    <input id="' + id_iso + '" class="frame" name="' + id_iso  + '" type="text" size="6"/>\
+                                </p>\
+                            </li>';
+                    }
+
+                    ret += '\
+                            <li><a id="' + id + '" class="remove" href="#"><img src="/static/images/remove.gif" alt="{% trans "Remove" %}"/></a></li>\
+                        </ul>';
+
+                    return ret;
+                });
+
+                $('a.remove').live('click', function() {
+                    var id = $(this).attr('id');
+                    $('ul#' + id).remove();
+                });
+            });
+        });
+    </script>
+    </div>
+{% endblock %}

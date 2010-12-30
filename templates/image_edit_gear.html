@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    {% include 'image-edit-menu.html' %}
+    <div class="sided-main-content">
+        <h1>{% trans "Edit your image: gear userd" %}</h1>
+        <form method="post" action="/edit/save/gear/">
+            {{form.as_p}}
+            <script language="javascript">
+            $(document).ready(function() {
+                var imaging_telescopesData = {items:{% autoescape off %}{{imaging_telescopes_prefill}}{% endautoescape %}};
+                var guiding_telescopesData = {items:{% autoescape off %}{{guiding_telescopes_prefill}}{% endautoescape %}};
+                var mountsData             = {items:{% autoescape off %}{{mounts_prefill}}{% endautoescape %}};
+                var imaging_camerasData    = {items:{% autoescape off %}{{imaging_cameras_prefill}}{% endautoescape %}};
+                var guiding_camerasData    = {items:{% autoescape off %}{{guiding_cameras_prefill}}{% endautoescape %}};
+                var focal_reducersData     = {items:{% autoescape off %}{{focal_reducers_prefill}}{% endautoescape %}};
+                var softwareData           = {items:{% autoescape off %}{{software_prefill}}{% endautoescape %}};
+                var filtersData            = {items:{% autoescape off %}{{filters_prefill}}{% endautoescape %}};
+
+                var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
+                var emptyText = '{% trans "No results. Press TAB to add it to this image and your gear!" %}';
+
+                $("#id_imaging_telescopes").autoSuggest("/autocomplete_user/telescopes/",
+                    {asHtmlID: 'imaging_telescopes',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: imaging_telescopesData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+                $("#id_guiding_telescopes").autoSuggest("/autocomplete_user/telescopes/",
+                    {asHtmlID: 'guiding_telescopes',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: guiding_telescopesData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+                $("#id_mounts").autoSuggest("/autocomplete_user/mounts/",
+                    {asHtmlID: 'mounts',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: mountsData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+                $("#id_imaging_cameras").autoSuggest("/autocomplete_user/cameras/",
+                    {asHtmlID: 'imaging_cameras',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: imaging_camerasData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+                $("#id_guiding_cameras").autoSuggest("/autocomplete_user/cameras/",
+                    {asHtmlID: 'guiding_cameras',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: guiding_camerasData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+                $("#id_focal_reducers").autoSuggest("/autocomplete_user/focal_reducers/",
+                    {asHtmlID: 'focal_reducers',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: focal_reducersData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+                $("#id_software").autoSuggest("/autocomplete_user/software/",
+                    {asHtmlID: 'software',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: softwareData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+                $("#id_filters").autoSuggest("/autocomplete_user/filters/",
+                    {asHtmlID: 'filters',
+                     selectedItemProp: 'name',
+                     searchObjProps: 'name',
+                     preFill: filtersData.items,
+                     selectedItemProp: 'name',
+                     selectedValuesProp: 'name',
+                     startText: startText,
+                     emptyText: emptyText});
+
+            });
+            </script>
+
+            <input type="hidden" name="image_id" value="{{image.id}}" />
+            <ul>
+                <li><input class="button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+                <li><a href="/show/{{image.id}}">{% trans "Return to image" %}</a></li>
+            </ul>
+        </form>
+    </div>  
+{% endblock %}
+
