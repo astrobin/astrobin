@@ -8,15 +8,19 @@
     <form action="/edit/save/acquisition/" method="post">
         <p id="image_type_controller">
             <label for="image_type_controller">{% trans "Select type of image:" %}</label>
-            <select id="image_type_controller" class="inline" style="width:200px;margin-right:20px;">
+            <select id="image_type_controller" class="inline">
                 <option value="deep_sky">{% trans "Deep sky" %}</option>
                 <option value="solar_system">{% trans "Solar System" %}</option>
             </select>
             <input type="button" class="button inline-button" value="{% trans "Continue" %}"/>
         </p>
+        <p id="deep_sky_date_picker" style="display:none">
+            <label for="datepicker">{% trans "Add frame sequence:" %}</label>
+            <input class="inline" type="text" id="datepicker" value="{% trans "Date of the sequence" %}"/>
+            <input type="button" class="button inline-button" value="{% trans "Add" %}"/>            
+        </p>
         <p id="deep_sky_controller" style="display:none">
-            <label for="deep_sky_controller">{% trans "Add frame sequence data:" %}</label>
-            <select id="deep_sky_controller" class="inline" style="width:200px;margin-right:20px;">
+            <select id="deep_sky_controller" class="inline">
                 <option value="l">{% trans "Light frames" %}</option>
                 <option value="r">{% trans "R frames" %}</option>
                 <option value="g">{% trans "G frames" %}</option>
@@ -39,15 +43,17 @@
         var id_counter = 0;
 
         $(document).ready(function() {
+            $('#datepicker').datepicker();
+
             $('p#image_type_controller input').click(function() {
                 if ($('select#image_type_controller').val() == 'deep_sky') {
-                    $('p#deep_sky_controller').css('display', 'block');
-                    $('p#iso_settings').css('display', 'block');
+                    $('p#deep_sky_date_picker').css('display', 'block');
                 } else {
                     $('p#solar_system_controller').css('display', 'block');
                 }
                 $(this).remove();
             });
+
             $('p#deep_sky_controller input').click(function() {
                 var value = $('select#deep_sky_controller').val()
                 var number_of_frames = ''
