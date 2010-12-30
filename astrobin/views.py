@@ -183,6 +183,8 @@ def image_edit_save_basic(request):
 
     response_dict = {'form': form,
                      'image': image,
+                     's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
+                     's3_url':settings.S3_URL,
                      'subjects_prefill': jsonDump(image.subjects.all())}
 
     if not form.is_valid():
@@ -228,7 +230,10 @@ def image_edit_save_gear(request):
     image.filters.clear()
 
     form = ImageEditGearForm()
-    response_dict = {"form": form}
+    response_dict = {'form': form,
+                     's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
+                     's3_url':settings.S3_URL,
+                    }
 
     data = {} 
     for k, v in {"imaging_telescopes": [Telescope, profile.telescopes, "telescopes"],
