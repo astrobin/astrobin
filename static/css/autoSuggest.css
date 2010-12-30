@@ -7,6 +7,9 @@ ul.as-selections {
     margin: 0;
     overflow: auto;
     background-color: #1E150D;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
 }
 
 input.as-input {
