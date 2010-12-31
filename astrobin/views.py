@@ -167,10 +167,13 @@ def image_edit_gear(request, id):
 @require_GET
 def image_edit_acquisition(request, id):
     image = Image.objects.get(pk=id)
+    acquisitions = LRGB_Acquisition.objects.filter(image=image)
+
     response_dict = {
         'image': image,
-        "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
-        "s3_url":settings.S3_URL,
+        'acquisitions': acquisitions,
+        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
+        's3_url':settings.S3_URL,
     }
     return render_to_response('image_edit_acquisition.html',
                               response_dict,
@@ -274,7 +277,32 @@ def image_edit_save_acquisition(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
 
-    
+    for a in LRGB_Acquisition.objects.filter(image=image):
+        a.delete()
+
+    from collections import defaultdict
+    acquisitions = defaultdict(LRGB_Acquisition)
+    for field, value in request.POST.iteritems():
+        if field[1] == '_':
+            acquisition_type, sequence_number, attribute = field.split('_')
+            if value != '':
+                setattr(acquisitions[int(sequence_number)], attribute, value)
+            setattr(acquisitions[int(sequence_number)], 'acquisition_type', acquisition_type)
+
+    for a in acquisitions.values():
+        a.image = image
+        a.save()
+
+    response_dict = {
+        'image': image,
+        'acquisitions': acquisitions.values(),
+        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
+        's3_url':settings.S3_URL,
+    }
+    return render_to_response('image_edit_acquisition.html',
+                              response_dict,
+                              context_instance=RequestContext(request))
+
 
 @require_GET
 def user_page(request, username):

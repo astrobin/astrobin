@@ -37,22 +37,6 @@ class Subject(models.Model):
     def __unicode__(self):
         return self.name
 
-class LRGB_Acquisition(models.Model):
-    number_of_light_frames_l = models.IntegerField(null=True, blank=True)
-    number_of_light_frames_r = models.IntegerField(null=True, blank=True)
-    number_of_light_frames_g = models.IntegerField(null=True, blank=True)
-    number_of_light_frames_b = models.IntegerField(null=True, blank=True)
-
-    seconds_per_light_frame_l = models.IntegerField(null=True, blank=True)
-    seconds_per_light_frame_r = models.IntegerField(null=True, blank=True)
-    seconds_per_light_frame_g = models.IntegerField(null=True, blank=True)
-    seconds_per_light_frame_b = models.IntegerField(null=True, blank=True)
-
-    number_of_dark_frames = models.IntegerField(null=True, blank=True)
-    number_of_offset_frames = models.IntegerField(null=True, blank=True)
-    number_of_flat_frames = models.IntegerField(null=True, blank=True)
-    ISO_settings = models.IntegerField(null=True, blank=True)
-
 class Image(models.Model):
     title = models.CharField(max_length=128)
     subjects = models.ManyToManyField(Subject)
@@ -70,9 +54,6 @@ class Image(models.Model):
     software = models.ManyToManyField(Software, null=True, blank=True)
     filters = models.ManyToManyField(Filter, null=True, blank=True)
 
-    # acquisition (deep sky)
-    lrgb = models.ManyToManyField(LRGB_Acquisition, null=True, blank=True)
-
     class Meta:
         ordering = ('-uploaded', '-id')
         
@@ -82,6 +63,18 @@ class Image(models.Model):
     def save(self, *args, **kwargs):
         self.uploaded = datetime.now()
         super(Image, self).save(*args, **kwargs)
+
+
+class LRGB_Acquisition(models.Model):
+    acquisition_type = models.CharField(max_length=2)
+    number = models.IntegerField()
+    duration = models.IntegerField(null=True, blank=True)
+    iso = models.IntegerField(null=True, blank=True)
+    date = models.DateTimeField(null=True, blank=True)
+    image = models.ForeignKey(Image)
+
+    def __unicode__(self):
+        return ''
 
 
 class ABPOD(models.Model):
@@ -115,7 +108,7 @@ class UserProfile(models.Model):
         return "%s' profile" % self.user
 
 def create_user_profile(sender, instance, created, **kwargs):  
-    if created:  
+    if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
