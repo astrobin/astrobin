@@ -24,7 +24,7 @@
             labelMap['d'] = '{% trans "Number of dark frames" %}:'
             labelMap['o'] = '{% trans "Number of offset/bias frames" %}:'
             labelMap['f'] = '{% trans "Number of flat frames" %}:'
-            labelMap['fd'] = '{% trans "Number of flat dark frames" %}:'
+            labelMap['x'] = '{% trans "Number of flat dark frames" %}:'
  
             var frame_duration = '{% trans "Duration (seconds)" %}:'
 
@@ -35,13 +35,13 @@
             var id_date = id + '_date';
             id_counter++;
 
-            if (typeof(number_value) == 'undefined' || number_value == 'None')
+            if (typeof(number_value) == 'undefined' || number_value == 'None')
                 number_value = '';
-            if (typeof(duration_value) == 'undefined' || duration_value == 'None')
+            if (typeof(duration_value) == 'undefined' || duration_value == 'None')
                 duration_value = '';
-            if (typeof(iso_value) == 'undefined' || iso_value == 'None')
+            if (typeof(iso_value) == 'undefined' || iso_value == 'None')
                 iso_value = '';
-            if (typeof(date_value) == 'undefined' || date_value == 'None')
+            if (typeof(date_value) == 'undefined' || date_value == 'None')
                 date_value = '';
 
             var ret = '\
@@ -75,7 +75,7 @@
             }
 
             ret += '\
-                <li><a id="' + id + '" class="remove" href="#"><img src="/static/images/remove.gif" alt="{% trans "Remove" %}"/></a></li>\
+                <li><p><a id="' + id + '" class="remove" href="#"><img class="remove" src="/static/images/remove.gif" alt="{% trans "Remove" %}"/></a></p></li>\
                 </ul>';
 
             return ret;
@@ -133,7 +133,7 @@
                 <option value="d">{% trans "Dark frames" %}</option>
                 <option value="o">{% trans "Offset/bias frames" %}</option>
                 <option value="f">{% trans "Flat frames" %}</option>
-                <option value="fd">{% trans "Flat dark frames" %}</option>
+                <option value="x">{% trans "Flat dark frames" %}</option>
             </select>
             <input type="button" class="button inline-button" value="{% trans "Add" %}"/>
         </p>
