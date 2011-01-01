@@ -77,6 +77,14 @@ class LRGB_Acquisition(models.Model):
         return ''
 
 
+class HiRes_Acquisition(models.Model):
+    seeing = models.IntegerField(null=True, blank=True)
+    frames = models.IntegerField()
+    focal_length = models.IntegerField(null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
+    image = models.ForeignKey(Image)
+
+
 class ABPOD(models.Model):
 	image = models.ForeignKey(Image, unique=True)
 	date = models.DateTimeField()
