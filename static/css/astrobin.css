@@ -190,7 +190,10 @@ form ul li {
     font-size: 12px;
     font-family: Helvetica, Arial, Sans-Serif;
     text-decoration: none;
+    text-align: center;
     vertical-align: middle;
+    margin: 10px 0;
+    cursor: hand;
 }
 
 .button:hover {
@@ -202,6 +205,25 @@ form ul li {
 .button:active {
     border-top-color: #d99a47;
     background: #d99a47;
+}
+
+.dangerous-button, .dangerous-button:hover, .dangerous-button:active, .dangerous-button:visited {
+    border-top: 1px solid #ff4a4a;
+    background: red;
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.24, rgb(209,0,0)),
+        color-stop(0.62, rgb(255,0,0))
+        );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(209,0,0) 24%,
+        rgb(255,0,0) 62%
+    );
+
+
 }
 
 .hidden {
@@ -526,15 +548,14 @@ form ul li {
     overflow:hidden;
     height:150px; }
 
-.sided-main-content .button {
-    margin:10px 0 10px 170px;
-    padding:4px 7px;
+.sided-main-content .submit-button {
+    margin-left: 160px;
     width:200px;
     cursor: hand;
 }
 
 .sided-main-content .inline-button {
-    width: 80px;
+    width: auto;
     margin: 0;
 }
 
@@ -1190,7 +1211,7 @@ ul.inline label.notfirst {
 }
 
 input.date {
-    width: 70px;
+    width: 80px;
     margin-right: 20px;
 }
 

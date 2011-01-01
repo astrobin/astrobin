@@ -285,6 +285,8 @@ def image_edit_save_acquisition(request):
     for field, value in request.POST.iteritems():
         if field[1] == '_':
             acquisition_type, sequence_number, attribute = field.split('_')
+            if attribute == 'date' and value == 'yyyy-mm-dd':
+                value = '';
             if value != '':
                 setattr(acquisitions[int(sequence_number)], attribute, value)
             setattr(acquisitions[int(sequence_number)], 'acquisition_type', acquisition_type)
