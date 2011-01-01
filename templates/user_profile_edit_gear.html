@@ -8,74 +8,24 @@
             {{form.as_p}}
             <script language="javascript">
             $(document).ready(function() {
-                var telescopesData     = {items:{% autoescape off %}{{telescopes_prefill}}{% endautoescape %}};
-                var mountsData         = {items:{% autoescape off %}{{mounts_prefill}}{% endautoescape %}};
-                var camerasData        = {items:{% autoescape off %}{{cameras_prefill}}{% endautoescape %}};
-                var focal_reducersData = {items:{% autoescape off %}{{focal_reducers_prefill}}{% endautoescape %}};
-                var softwareData       = {items:{% autoescape off %}{{software_prefill}}{% endautoescape %}};
-                var filtersData        = {items:{% autoescape off %}{{filters_prefill}}{% endautoescape %}};
-
                 var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
                 var emptyText = '{% trans "No results. Press TAB to add it!" %}';
-
-                $("#id_telescopes").autoSuggest("/autocomplete/telescopes/",
-                    {asHtmlID: 'telescopes',
-                     selectedItemProp: 'name',
-                     searchObjProps: 'name',
-                     preFill: telescopesData.items,
-                     selectedItemProp: 'name',
-                     selectedValuesProp: 'name',
-                     startText: startText,
-                     emptyText: emptyText});
-                $("#id_mounts").autoSuggest("/autocomplete/mounts/",
-                    {asHtmlID: 'mounts',
-                     selectedItemProp: 'name',
-                     searchObjProps: 'name',
-                     preFill: mountsData.items,
-                     selectedItemProp: 'name',
-                     selectedValuesProp: 'name',
-                     startText: startText,
-                     emptyText: emptyText});
-                $("#id_cameras").autoSuggest("/autocomplete/cameras/",
-                    {asHtmlID: 'cameras',
-                     selectedItemProp: 'name',
-                     searchObjProps: 'name',
-                     preFill: camerasData.items,
-                     selectedItemProp: 'name',
-                     selectedValuesProp: 'name',
-                     startText: startText,
-                     emptyText: emptyText});
-                $("#id_focal_reducers").autoSuggest("/autocomplete/focal_reducers/",
-                    {asHtmlID: 'focal_reducers',
-                     selectedItemProp: 'name',
-                     searchObjProps: 'name',
-                     preFill: focal_reducersData.items,
-                     selectedItemProp: 'name',
-                     selectedValuesProp: 'name',
-                     startText: startText,
-                     emptyText: emptyText});
-                $("#id_software").autoSuggest("/autocomplete/software/",
-                    {asHtmlID: 'software',
-                     selectedItemProp: 'name',
-                     searchObjProps: 'name',
-                     preFill: softwareData.items,
-                     selectedItemProp: 'name',
-                     selectedValuesProp: 'name',
-                     startText: startText,
-                     emptyText: emptyText});
-                $("#id_filters").autoSuggest("/autocomplete/filters/",
-                    {asHtmlID: 'filters',
-                     selectedItemProp: 'name',
-                     searchObjProps: 'name',
-                     preFill: filtersData.items,
-                     selectedItemProp: 'name',
-                     selectedValuesProp: 'name',
-                     startText: startText,
-                     emptyText: emptyText});
-
+                {% autoescape off %}
+                {% for key, value in prefill_dict.items %}
+                $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
+                    {asHtmlID: '{{key}}',
+                    selectedItemProp: 'name',
+                    searchObjProps: 'name',
+                    preFill: {{value}},
+                    selectedItemProp: 'name',
+                    selectedValuesProp: 'name',
+                    startText: startText,
+                    emptyText: emptyText});
+                {% endfor %}
+                {% endautoescape %}
             });
             </script>
-            <p><input class="button" type="submit" value="{% trans "Save" %}" /></p>
+            <p><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></p>
         </form>
     </div>  
 {% endblock %}

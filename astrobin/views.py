@@ -144,6 +144,7 @@ def image_edit_gear(request, id):
         "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
         "s3_url":settings.S3_URL,
     }
+    prefill_dict = {}
 
     for attr in ["imaging_telescopes",
                  "guiding_telescopes",
@@ -152,11 +153,14 @@ def image_edit_gear(request, id):
                  "guiding_cameras",
                  "focal_reducers",
                  "software",
-                 "filters"]:
+                 "filters",
+                 "accessories",
+                ]:
         imageGear = getattr(image, attr).all()
-        response_dict[attr + "_prefill"] = jsonDump(imageGear)
+        prefill_dict[attr] = jsonDump(imageGear)
 
     response_dict['image'] = image
+    response_dict['prefill_dict'] = prefill_dict
 
     return render_to_response("image_edit_gear.html",
                               response_dict,
@@ -234,12 +238,14 @@ def image_edit_save_gear(request):
     image.guiding_cameras.clear()
     image.focal_reducers.clear()
     image.filters.clear()
+    image.accessories.clear()
 
     form = ImageEditGearForm()
     response_dict = {'form': form,
                      's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
                      's3_url':settings.S3_URL,
                     }
+    prefill_dict = {}
 
     data = {} 
     for k, v in {"imaging_telescopes": [Telescope, profile.telescopes, "telescopes"],
@@ -249,7 +255,9 @@ def image_edit_save_gear(request):
                  "guiding_cameras"   : [Camera, profile.cameras, "cameras"],
                  "focal_reducers"    : [FocalReducer, profile.focal_reducers],
                  "software"          : [Software, profile.software],
-                 "filters"           : [Filter, profile.filters]}.iteritems():
+                 "filters"           : [Filter, profile.filters],
+                 "accessories"       : [Accessory, profile.accessories],
+                }.iteritems():
         data[k] = csv.reader([request.POST['as_values_' + k]], skipinitialspace = True)
         for row in data[k]:
             for name in row:
@@ -262,10 +270,12 @@ def image_edit_save_gear(request):
                     getattr(image, k).add(gear_item)
 
         imageGear = getattr(image, k).all()
-        response_dict[k + "_prefill"] = jsonDump(imageGear)
+        prefill_dict[k] = jsonDump(imageGear)
 
     image.save()
     response_dict['image'] = image
+    response_dict['prefill_dict'] = prefill_dict
+
     return render_to_response("image_edit_gear.html",
         response_dict,
         context_instance=RequestContext(request))
@@ -357,11 +367,13 @@ def user_profile_edit_gear(request):
 
     form = UserProfileEditGearForm()
     response_dict = {"form": form}
-
-    for attr in ["telescopes", "mounts", "cameras", "focal_reducers", "software", "filters"]:
+    prefill_dict = {}
+    for attr in ["telescopes", "mounts", "cameras", "focal_reducers",
+                 "software", "filters", "accessories"]:
         allGear = getattr(profile, attr).all()
-        response_dict[attr + "_prefill"] = jsonDump(allGear)
+        prefill_dict[attr] = jsonDump(allGear)
 
+    response_dict['prefill_dict'] = prefill_dict
     return render_to_response("user_profile_edit_gear.html",
                               response_dict,
                               context_instance=RequestContext(request))
@@ -379,9 +391,11 @@ def user_profile_save_gear(request):
     profile.cameras.clear()
     profile.focal_reducers.clear()
     profile.filters.clear()
+    profile.accessories.clear()
 
     form = UserProfileEditGearForm()
     response_dict = {"form": form}
+    prefill_dict = {}
 
     data = {} 
     for k, v in {"telescopes"    : [Telescope, profile.telescopes],
@@ -389,7 +403,9 @@ def user_profile_save_gear(request):
                  "cameras"       : [Camera, profile.cameras],
                  "focal_reducers": [FocalReducer, profile.focal_reducers],
                  "software"      : [Software, profile.software],
-                 "filters"       : [Filter, profile.filters]}.iteritems():
+                 "filters"       : [Filter, profile.filters],
+                 "accessories"   : [Accessory, profile.accessories],
+                }.iteritems():
         data[k] = csv.reader([request.POST['as_values_' + k]], skipinitialspace = True)
         for row in data[k]:
             for name in row:
@@ -400,10 +416,11 @@ def user_profile_save_gear(request):
                     getattr(profile, k).add(gear_item)
 
         allGear = getattr(profile, k).all()
-        response_dict[k + "_prefill"] = jsonDump(allGear)
+        prefill_dict[k] = jsonDump(allGear)
 
     profile.save()
 
+    response_dict['prefill_dict'] = prefill_dict
     return render_to_response("user_profile_edit_gear.html",
         response_dict,
         context_instance=RequestContext(request))
