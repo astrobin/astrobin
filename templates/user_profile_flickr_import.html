@@ -21,9 +21,9 @@
 
             <p id="button">
                 {% if flickr_sets %}
-                <input class="button" type="submit" value="{% trans "Import photos" %} &rarr;"/>
+                <input class="button submit-button" type="submit" value="{% trans "Import photos" %} &rarr;"/>
                 {% else %}
-                <input class="button" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
+                <input class="button lone-button" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
                 {% endif %}
             </p>
         </form>
@@ -69,7 +69,8 @@
                                            '<div style="clear:both"></div>';
                             });
                             $('.button').val('{% trans "Import selected photos" %} \u2192');
-                            $('p#button').addClass('fieldless');
+                            $('.button').addClass('lone-button');
+                            $('.button').removeClass('submit-button');
                             $('p#flickr_sets').hide();
                             phase++;
                         }

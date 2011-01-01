@@ -4,6 +4,7 @@ from models import Camera
 from models import FocalReducer
 from models import Software
 from models import Filter
+from models import Accessory
 from models import Subject
 from models import UserProfile
 
@@ -13,6 +14,7 @@ from django.views.decorators.http import require_http_methods, require_GET, requ
 from django.contrib.auth.decorators import login_required
 
 import simplejson
+
 
 @login_required
 @require_GET
@@ -24,7 +26,8 @@ def autocomplete(request, what):
                  'focal_reducers':FocalReducer,
                  'software':Software,
                  'subjects':Subject,
-                 'filters':Filter}.iteritems():
+                 'filters':Filter,
+                 'accessories':Accessory}.iteritems():
         if what == k:
             values = v.objects.filter(Q(name__icontains=request.GET['q']))
 
@@ -37,11 +40,16 @@ def autocomplete_user(request, what):
     profile = UserProfile.objects.get(user=request.user)
     values = ()
     for k, v in {'telescopes':profile.telescopes,
+                 'imaging_telescopes':profile.telescopes,
+                 'guiding_telescopes':profile.telescopes,
                  'mounts':profile.mounts,
                  'cameras':profile.cameras,
+                 'imaging_cameras':profile.cameras,
+                 'guiding_cameras':profile.cameras,
                  'focal_reducers':profile.focal_reducers,
                  'software':profile.software,
-                 'filters':profile.filters}.iteritems():
+                 'filters':profile.filters,
+                 'accessories':profile.accessories}.iteritems():
         if what == k:
             values = v.all().filter(Q(name__icontains=request.GET['q']))
 

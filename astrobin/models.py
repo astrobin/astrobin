@@ -6,36 +6,49 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django import forms
 
+
 class Gear(models.Model):
     name = models.CharField(max_length=64)
 
     def __unicode__(self):
         return self.name
 
+
 class Telescope(Gear):
     focal_length = models.IntegerField(null=True, blank=True)
     aperture = models.IntegerField(null=True, blank=True)
 
+
 class Mount(Gear):
     pass
+
 
 class Camera(Gear):
     pass
 
+
 class FocalReducer(Gear):
     ratio = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+
 
 class Software(Gear):
     pass
 
+
 class Filter(Gear):
     pass
+
+
+class Accessory(Gear):
+    pass
+
 
 class Subject(models.Model):
     name = models.CharField(max_length=64)
 
     def __unicode__(self):
         return self.name
+
 
 class Image(models.Model):
     title = models.CharField(max_length=128)
@@ -53,6 +66,7 @@ class Image(models.Model):
     focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True)
     software = models.ManyToManyField(Software, null=True, blank=True)
     filters = models.ManyToManyField(Filter, null=True, blank=True)
+    accessories = models.ManyToManyField(Accessory, null=True, blank=True)
 
     class Meta:
         ordering = ('-uploaded', '-id')
@@ -92,6 +106,7 @@ class ABPOD(models.Model):
 	def __unicode__(self):
 		return self.image.subjects
 
+
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, editable=False)
 
@@ -111,9 +126,11 @@ class UserProfile(models.Model):
     focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True)
     software = models.ManyToManyField(Software, null=True, blank=True)
     filters = models.ManyToManyField(Filter, null=True, blank=True)
+    accessories = models.ManyToManyField(Accessory, null=True, blank=True)
     
     def __unicode__(self):
         return "%s' profile" % self.user
+
 
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:
