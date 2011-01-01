@@ -70,7 +70,7 @@ class LRGB_Acquisition(models.Model):
     number = models.IntegerField()
     duration = models.IntegerField(null=True, blank=True)
     iso = models.IntegerField(null=True, blank=True)
-    date = models.DateTimeField(null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
     image = models.ForeignKey(Image)
 
     def __unicode__(self):

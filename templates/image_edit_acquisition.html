@@ -42,7 +42,7 @@
             if (typeof(iso_value) == 'undefined' || iso_value == 'None')
                 iso_value = '';
             if (typeof(date_value) == 'undefined' || date_value == 'None')
-                date_value = '';
+                date_value = '{% trans "yyyy-mm-dd" %}';
 
             var ret = '\
                 <ul id="' + id + '" class="inline">\
@@ -69,7 +69,9 @@
                     <li>\
                         <p>\
                             <label class="notfirst" for="' + id_date + '">{% trans "Date" %}:</label>\
-                            <input class="date validate[optional,date]" type="text" id="datepicker" value="' + date_value + '"/>\
+                            <input id="' + id_date + '" name="' + id_date + '" \
+                                   class="date datepickerclass validate[optional,date]" \
+                                   type="text" value="' + date_value + '"/>\
                         </p>\
                     </li>';
             }
@@ -83,6 +85,9 @@
 
         $(document).ready(function() {
             $("form#image_acquisition").validationEngine();
+            $.datepicker.setDefaults({
+                    dateFormat: 'yy-mm-dd',
+            });
 
             {% for a in acquisitions %}
             $('#variable_fields').append(appendAcquisition('{{a.acquisition_type}}', '{{a.number}}', '{{a.duration}}', '{{a.iso}}', '{{a.date}}'));
@@ -96,25 +101,34 @@
                 }
 
                 $('#hidden_fields').append('<input type=hidden" name="image_type" value="' + $('select#image_type_controller').val() + '"/>');
-                $(this).remove();
+                $(this).css('display', 'none');
             });
 
             $('p#deep_sky_controller input').click(function() {
                 var acquisition_type = $('select#deep_sky_controller').val()
-                $('#variable_fields').append(appendAcquisition(acquisition_type));
-                $('#datepicker').datepicker();
+                $('#variable_fields').append(appendAcquisition(acquisition_type))
+                $('input').filter('.datepickerclass').datepicker();
             });
 
             $('a.remove').live('click', function() {
                 var id = $(this).attr('id');
                 $('ul#' + id).remove();
             });
+            
+            $('input').filter('.datepickerclass').datepicker();
+            
+            $('input#reset').click(function() {
+                $('p#deep_sky_controller').css('display', 'none');
+                $('p#solar_sysyem_controller').css('display', 'none');
+                $('p#image_type_controller').css('display', 'block');
+                $('p#image_type_controller input').css('display', 'inline-block');
+                $('#variable_fields').html('');
+            });
         });
     </script>
 
     <form id="image_acquisition" action="/edit/save/acquisition/" method="post">
-        {% if not acquisitions %}
-        <p id="image_type_controller">
+        <p id="image_type_controller" {% if acquisitions %}style="display:none"{% endif %}>
             <label for="image_type_controller">{% trans "Select type of image:" %}</label>
             <select id="image_type_controller" class="inline">
                 <option value="deep_sky">{% trans "Deep sky" %}</option>
@@ -122,7 +136,6 @@
             </select>
             <input type="button" class="button inline-button" value="{% trans "Continue" %}"/>
         </p>
-        {% endif %}
         <p id="deep_sky_controller" {% if not acquisitions %}style="display:none"{% endif %}>
             <label for="deep_sky_controller">{% trans "Add frame sequence" %}:</label>
             <select id="deep_sky_controller" class="inline">
@@ -141,7 +154,8 @@
         </span>
         <input type="hidden" name="image_id" value="{{image.id}}" />
         <ul style="clear:both">
-            <li><input class="button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+            <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+            <li><input id="reset" class="button dangerous-button inline-button" value="{% trans "Remove all data" %}" /></li>
             <li><a href="/show/{{image.id}}">{% trans "Return to image" %}</a></li>
         </ul>
     </form>
