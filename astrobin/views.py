@@ -171,7 +171,7 @@ def image_edit_gear(request, id):
 @require_GET
 def image_edit_acquisition(request, id):
     image = Image.objects.get(pk=id)
-    acquisitions = LRGB_Acquisition.objects.filter(image=image)
+    acquisitions = DeepSky_Acquisition.objects.filter(image=image)
 
     response_dict = {
         'image': image,
@@ -287,11 +287,11 @@ def image_edit_save_acquisition(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
 
-    for a in LRGB_Acquisition.objects.filter(image=image):
+    for a in DeepSky_Acquisition.objects.filter(image=image):
         a.delete()
 
     from collections import defaultdict
-    acquisitions = defaultdict(LRGB_Acquisition)
+    acquisitions = defaultdict(DeepSky_Acquisition)
     for field, value in request.POST.iteritems():
         if field[1] == '_':
             acquisition_type, sequence_number, attribute = field.split('_')
