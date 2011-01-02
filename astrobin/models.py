@@ -79,24 +79,28 @@ class Image(models.Model):
         super(Image, self).save(*args, **kwargs)
 
 
-class LRGB_Acquisition(models.Model):
+class Acquisition(models.Model):
+    date = models.DateField(null=True, blank=True)
+    image = models.ForeignKey(Image)
+
+
+class DeepSky_Acquisition(Acquisition):
     acquisition_type = models.CharField(max_length=2)
     number = models.IntegerField()
     duration = models.IntegerField(null=True, blank=True)
     iso = models.IntegerField(null=True, blank=True)
-    date = models.DateField(null=True, blank=True)
-    image = models.ForeignKey(Image)
+
 
     def __unicode__(self):
         return ''
 
 
-class HiRes_Acquisition(models.Model):
+class SolarSystem_Acquisition(Acqiusition):
     seeing = models.IntegerField(null=True, blank=True)
+    transparency = models.IntegerField(null=True, blank=True)
     frames = models.IntegerField()
     focal_length = models.IntegerField(null=True, blank=True)
-    date = models.DateField(null=True, blank=True)
-    image = models.ForeignKey(Image)
+
 
 
 class ABPOD(models.Model):
