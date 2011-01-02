@@ -123,12 +123,15 @@ def image_edit_basic(request, id):
     form = ImageEditBasicForm({'title': image.title,
                                'description': image.description})
 
-    return render_to_response("image_edit_basic.html",
-        {"image":image,
-         "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
-         "s3_url":settings.S3_URL,
-         "form":form,
-         "subjects_prefill":jsonDump(image.subjects.all()),
+    return render_to_response('image_edit_basic.html',
+        {'image':image,
+         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
+         's3_url':settings.S3_URL,
+         'form':form,
+         'prefill_dict': {
+            'subjects': jsonDump(image.subjects.all()),
+            'locations': jsonDump(image.locations.all()),
+         }
         },
         context_instance=RequestContext(request))
 
@@ -196,6 +199,7 @@ def image_edit_save_basic(request):
                      's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
                      's3_url':settings.S3_URL,
                     }
+    prefill_dict = {}
 
     if not form.is_valid():
         return render_to_response("image_edit_basic.html",
@@ -203,21 +207,26 @@ def image_edit_save_basic(request):
             context_instance=RequestContext(request))
 
     image.subjects.clear()
-    reader = csv.reader([request.POST['as_values_subjects']],
-                        skipinitialspace = True)
-    for row in reader:
-        for name in row:
-            if name != '':
-                subject, created = Subject.objects.get_or_create(name = name)
-                if created:
-                    subject.save()
-                image.subjects.add(subject)
+    image.locations.clear()
+
+    for i in [[image.subjects, 'subjects', Subject],
+              [image.locations, 'locations', Location]]:
+        reader = csv.reader([request.POST['as_values_' + i[1]]],
+                            skipinitialspace = True)
+        for row in reader:
+            for name in row:
+                if name != '':
+                    k, created = i[2].objects.get_or_create(name = name)
+                    if created:
+                        k.save()
+                    i[0].add(k)
+        prefill_dict[i[1]] = jsonDump(i[0].all())
 
     image.title = form.cleaned_data['title'] 
     image.description = form.cleaned_data['description']
 
     image.save()
-    response_dict['subjects_prefill'] = jsonDump(image.subjects.all())
+    response_dict['prefill_dict'] = prefill_dict
 
     return render_to_response("image_edit_basic.html",
                               response_dict,
@@ -331,11 +340,14 @@ def user_page(request, username):
 @require_GET
 def user_profile_edit_basic(request):
     """Edits own profile"""
-
     profile = UserProfile.objects.get(user = request.user)
     form = UserProfileEditBasicForm(instance = profile)
+    response_dict = {
+        'form': form,
+        'prefill_dict': {'locations': jsonDump(profile.locations.all())}
+    }
     return render_to_response("user_profile_edit_basic.html",
-        {"form":form},
+        response_dict,
         context_instance=RequestContext(request))
 
 
@@ -345,17 +357,30 @@ def user_profile_save_basic(request):
     """Saves the form"""
 
     form = UserProfileEditBasicForm(request.POST)
+    response_dict = {'form': form}
+
     if form.is_valid():
         profile = UserProfile.objects.get(user = request.user)
-        profile.location = form.cleaned_data['location']
+        profile.locations.clear()
+        reader = csv.reader([request.POST['as_values_locations']],
+                            skipinitialspace = True)
+        for row in reader:
+            for name in row:
+                if name != '':
+                    location, created = Location.objects.get_or_create(name = name)
+                    if created:
+                        location.save()
+                    profile.locations.add(location)
+
         profile.website  = form.cleaned_data['website']
         profile.job      = form.cleaned_data['job']
         profile.hobbies  = form.cleaned_data['hobbies']
 
         profile.save()
 
+    response_dict['prefill_dict'] = {'locations': jsonDump(profile.locations.all()) }
     return render_to_response("user_profile_edit_basic.html",
-        {"form":form},
+        response_dict,
         context_instance=RequestContext(request))
  
  

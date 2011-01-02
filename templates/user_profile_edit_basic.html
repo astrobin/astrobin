@@ -7,6 +7,25 @@
         <h1>{% trans "Hello" %} {{user.username}}, {% trans "edit your profile!" %}</h1>
         <form method="post" action="/profile/save/basic/">
         {{form.as_p}}
+        <script language="javascript">
+        $(document).ready(function() {
+            var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
+            var emptyText = '{% trans "No results. Press TAB to add it!" %}';
+            {% autoescape off %}
+            {% for key, value in prefill_dict.items %}
+            $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
+                {asHtmlID: '{{key}}',
+                selectedItemProp: 'name',
+                searchObjProps: 'name',
+                preFill: {{value}},
+                selectedItemProp: 'name',
+                selectedValuesProp: 'name',
+                startText: startText,
+                emptyText: emptyText});
+            {% endfor %}
+            {% endautoescape %}
+        });
+        </script>
         <p><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></p>
         </form>
     </div>  

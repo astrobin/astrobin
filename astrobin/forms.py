@@ -10,8 +10,9 @@ class ImageUploadForm(forms.Form):
 
 
 class ImageEditBasicForm(forms.Form):
-    title = forms.CharField(max_length=128)
+    title = forms.CharField(max_length=64)
     subjects = forms.CharField(required=False)
+    locations = forms.CharField(required=False)
     description = forms.CharField(widget=forms.Textarea, required=False)
 
 
@@ -28,9 +29,10 @@ class ImageEditGearForm(forms.Form):
 
 
 class UserProfileEditBasicForm(forms.ModelForm):
+    locations = forms.CharField(max_length=64, required=False)
     class Meta:
         model = UserProfile
-        fields = ('location', 'website', 'job', 'hobbies')
+        fields = ('website', 'job', 'hobbies')
 
 
 class UserProfileEditGearForm(forms.Form):
