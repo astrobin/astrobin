@@ -84,24 +84,47 @@
         };
 
         $(document).ready(function() {
+            {% ifequal image_type 'deep_sky' %}
+                $('p.solar_system_field').css('display', 'none');
+                $('p#image_type_controller').hide();
+                $('#hidden_inputs').append('\
+                    <input type="hidden" name="image_type"\
+                           value="{{image_type}}"/>\
+                ');
+            {% else %}
+                {% ifequal image_type 'solar_system' %}
+                    $('p#deep_sky_controller').css('display', 'none');
+                    $('p#image_type_controller').hide();
+                    $('#hidden_inputs').append('\
+                        <input type="hidden" name="image_type"\
+                               value="{{image_type}}"/>\
+                    ');
+                {% else %}
+                    $('p.solar_system_field').css('display', 'none');
+                    $('p#deep_sky_controller').css('display', 'none');
+                {% endifequal %}
+            {% endifequal %}
+
             $("form#image_acquisition").validationEngine();
             $.datepicker.setDefaults({
                     dateFormat: 'yy-mm-dd',
             });
 
-            {% for a in acquisitions %}
-            $('#variable_fields').append(appendAcquisition('{{a.acquisition_type}}', '{{a.number}}', '{{a.duration}}', '{{a.iso}}', '{{a.date}}'));
-            {% endfor %}
+            {% ifequal image_type 'deep_sky' %}
+                {% for a in deep_sky_acquisitions %}
+                    $('#variable_fields').append(appendAcquisition('{{a.acquisition_type}}', '{{a.number}}', '{{a.duration}}', '{{a.iso}}', '{{a.date}}'));
+                {% endfor %}
+            {% endifequal %}
 
             $('p#image_type_controller input').click(function() {
                 if ($('select#image_type_controller').val() == 'deep_sky') {
                     $('p#deep_sky_controller').css('display', 'block');
                 } else {
-                    $('p#solar_system_controller').css('display', 'block');
+                    $('p.solar_system_field').css('display', 'block');
                 }
 
-                $('#hidden_fields').append('<input type=hidden" name="image_type" value="' + $('select#image_type_controller').val() + '"/>');
-                $(this).css('display', 'none');
+                $('#hidden_inputs').append('<input type="hidden" name="image_type" value="' + $('select#image_type_controller').val() + '"/>');
+                $(this).parent().css('display', 'none');
             });
 
             $('p#deep_sky_controller input').click(function() {
@@ -123,6 +146,8 @@
                 $('p#image_type_controller').css('display', 'block');
                 $('p#image_type_controller input').css('display', 'inline-block');
                 $('#variable_fields').html('');
+                $('.solar_system_field').css('display', 'none');
+                $('#hidden_inputs').html('');
             });
         });
     </script>
@@ -136,7 +161,7 @@
             </select>
             <input type="button" class="button inline-button" value="{% trans "Continue" %}"/>
         </p>
-        <p id="deep_sky_controller" {% if not acquisitions %}style="display:none"{% endif %}>
+        <p id="deep_sky_controller">
             <label for="deep_sky_controller">{% trans "Add frame sequence" %}:</label>
             <select id="deep_sky_controller" class="inline">
                 <option value="l">{% trans "Light frames" %}</option>
@@ -150,8 +175,56 @@
             </select>
             <input type="button" class="button inline-button" value="{% trans "Add" %}"/>
         </p>
-        <span id="variable_fields">
-        </span>
+        <p class="solar_system_field">
+            <label for="number_of_frames">{% trans "Number of frames" %}:</label>
+            <input type="text"
+                   class="validate[{% ifequal image_type 'solar_system' %}required{% else %}optional{% endifequal %},custom[onlyNumber]]"
+                   id="number_of_frames"
+                   name="number_of_frames"
+                   value="{{solar_system_acquisition.frames}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="fps">{% trans "FPS" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[onlyNumber]]"
+                   id="fps"
+                   name="fps"
+                   value="{{solar_system_acquisition.fps}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="focal_length">{% trans "Focal length" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[onlyNumber]]"
+                   id="focal_length"
+                   name="focal_length",
+                   value="{{solar_system_acquisition.focal_length}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="seeing">{% trans "Seeing (0-5)" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[onlyNumber]]"
+                   id="seeing"
+                   name="seeing",
+                   value="{{solar_system_acquisition.seeing}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="transparency">{% trans "Transparency (0-10)" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[onlyNumber]]"
+                   id="transparency"
+                   name="transparency",
+                   value="{{solar_system_acquisition.transparency}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="date">{% trans "Date" %}:</label>
+            <input type="text"
+                   class="date datepickerclass validate[optional,date]"
+                   id="date"
+                   name="date",
+                   value="{% if solar_system_acquisition.date %}{{solar_system_acquisition.date}}{% else %}{% trans "yyyy-mm-dd" %}{% endif %}"/>
+        </p>
+        <span id="variable_fields"></span>
+        <span id="hidden_inputs"></span>
         <input type="hidden" name="image_id" value="{{image.id}}" />
         <ul style="clear:both">
             <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>

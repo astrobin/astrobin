@@ -107,11 +107,11 @@ class DeepSky_Acquisition(Acquisition):
 
 
 class SolarSystem_Acquisition(Acquisition):
-    seeing = models.IntegerField(null=True, blank=True)
-    transparency = models.IntegerField(null=True, blank=True)
     frames = models.IntegerField()
     fps = models.IntegerField(null=True, blank=True)
     focal_length = models.IntegerField(null=True, blank=True)
+    seeing = models.IntegerField(null=True, blank=True)
+    transparency = models.IntegerField(null=True, blank=True)
 
 
 class ABPOD(models.Model):
