@@ -136,17 +136,18 @@ form p {
 label {
     font-weight: bold;
     color: #8E7D6A;
+    width:20%;
 }
 input, select, textarea {
-    margin: 5px 0;
-    padding: 7px 5px;
+    margin: 2px 0;
+    padding: 8px 4px;
     border-width: 1px;
     border-style: solid;
     border-color: #322014;
     background-color: #1E150D;
     font: 11px Verdana, Helvetica, Sans-Serif;
     color: #925D3A;
-    width: 462px;
+    width: 70%;
     border-radius: 6px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -512,21 +513,8 @@ form ul li {
     color:#bbbbbb;
     font-size:12px;
     float:left;
-    width:150px;
     text-align:right;
     padding:11px 10px 0 0;
-}
-
-.sided-main-content input {
-    width: 558px;
-}
-
-.sided-main-content textarea {
-    width: 558px;
-}
-
-.sided-main-content select {
-    width: 558px;
 }
 
 .sided-main-content .input_text {
@@ -538,7 +526,7 @@ form ul li {
     border-right:1px double #333333;
 }
 
-.sided-main-content .message{
+.sided-main-content .message {
     padding:7px 7px;
     width:350px;
     border-bottom: 1px double #171717;
