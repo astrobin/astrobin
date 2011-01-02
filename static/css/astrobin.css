@@ -136,7 +136,7 @@ form p {
 label {
     font-weight: bold;
     color: #8E7D6A;
-    width:20%;
+    width: 150px;
 }
 input, select, textarea {
     margin: 2px 0;
@@ -194,7 +194,7 @@ form ul li {
     text-align: center;
     vertical-align: middle;
     margin: 10px 0;
-    cursor: hand;
+    cursor: pointer;
 }
 
 .button:hover {
@@ -208,7 +208,7 @@ form ul li {
     background: #d99a47;
 }
 
-.dangerous-button, .dangerous-button:hover, .dangerous-button:active, .dangerous-button:visited {
+.dangerous-button, .dangerous-button:hover, .dangerous-button:active {
     border-top: 1px solid #ff4a4a;
     background: red;
     background-image: -webkit-gradient(
@@ -223,8 +223,6 @@ form ul li {
         rgb(209,0,0) 24%,
         rgb(255,0,0) 62%
     );
-
-
 }
 
 .hidden {

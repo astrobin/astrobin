@@ -174,11 +174,25 @@ def image_edit_gear(request, id):
 @require_GET
 def image_edit_acquisition(request, id):
     image = Image.objects.get(pk=id)
-    acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+    solar_system_acquisition = None
+    image_type = None
+
+    try:
+        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
+    except:
+        pass
+
+    if deep_sky_acquisitions:
+        image_type = 'deep_sky'
+    elif solar_system_acquisition:
+        image_type = 'solar_system'
 
     response_dict = {
         'image': image,
-        'acquisitions': acquisitions,
+        'image_type': image_type,
+        'deep_sky_acquisitions': deep_sky_acquisitions,
+        'solar_system_acquisition': solar_system_acquisition,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
     }
@@ -295,31 +309,51 @@ def image_edit_save_gear(request):
 def image_edit_save_acquisition(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
+    image_type = request.POST.get('image_type')
+
+    deep_sky_acquisitions = {}
+    solar_system_acquisition = None
 
     for a in DeepSky_Acquisition.objects.filter(image=image):
         a.delete()
+    for a in SolarSystem_Acquisition.objects.filter(image=image):
+        a.delete()
 
-    from collections import defaultdict
-    acquisitions = defaultdict(DeepSky_Acquisition)
-    for field, value in request.POST.iteritems():
-        if field[1] == '_':
-            acquisition_type, sequence_number, attribute = field.split('_')
-            if attribute == 'date' and value == 'yyyy-mm-dd':
-                value = '';
-            if value != '':
-                setattr(acquisitions[int(sequence_number)], attribute, value)
-            setattr(acquisitions[int(sequence_number)], 'acquisition_type', acquisition_type)
+    if image_type == 'deep_sky':
+        from collections import defaultdict
+        deep_sky_acquisitions = defaultdict(DeepSky_Acquisition)
+        for field, value in request.POST.iteritems():
+            if field[1] == '_':
+                acquisition_type, sequence_number, attribute = field.split('_')
+                if attribute == 'date' and value == 'yyyy-mm-dd':
+                    value = '';
+                if value != '':
+                    setattr(deep_sky_acquisitions[int(sequence_number)], attribute, value)
+                setattr(deep_sky_acquisitions[int(sequence_number)], 'acquisition_type', acquisition_type)
 
-    for a in acquisitions.values():
-        a.image = image
-        a.save()
+        for a in deep_sky_acquisitions.values():
+            a.image = image
+            a.save()
+    elif image_type == 'solar_system':
+        solar_system_acquisition = SolarSystem_Acquisition(
+            image = image,
+            date = request.POST.get('date'),
+            frames = request.POST.get('number_of_frames'),
+            fps = request.POST.get('fps'),
+            focal_length = request.POST.get('focal_length'),
+            seeing = request.POST.get('seeing'),
+            transparency = request.POST.get('transparency'))
+        solar_system_acquisition.save()
 
     response_dict = {
         'image': image,
-        'acquisitions': acquisitions.values(),
+        'image_type': image_type,
+        'deep_sky_acquisitions': deep_sky_acquisitions.values(),
+        'solar_system_acquisition': solar_system_acquisition,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
     }
+
     return render_to_response('image_edit_acquisition.html',
                               response_dict,
                               context_instance=RequestContext(request))
