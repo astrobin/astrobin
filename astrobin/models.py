@@ -101,7 +101,6 @@ class DeepSky_Acquisition(Acquisition):
     duration = models.IntegerField(null=True, blank=True)
     iso = models.IntegerField(null=True, blank=True)
 
-
     def __unicode__(self):
         return ''
 
@@ -110,8 +109,12 @@ class SolarSystem_Acquisition(Acquisition):
     frames = models.IntegerField()
     fps = models.IntegerField(null=True, blank=True)
     focal_length = models.IntegerField(null=True, blank=True)
+    cmi = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2)
+    cmii = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2)
+    cmiii = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2)
     seeing = models.IntegerField(null=True, blank=True)
     transparency = models.IntegerField(null=True, blank=True)
+    time = models.CharField(null=True, blank=True, max_length=5)
 
 
 class ABPOD(models.Model):

@@ -15,7 +15,7 @@ body {
     color: #91807F;
     margin: 0; padding: 0;
     background: #1d140f url(../images/bg.gif) repeat-x;
-    text-align: center;
+    text-align: left;
 }
 
 /* links */
@@ -103,25 +103,6 @@ blockquote {
 
 }
 strong {    font-weight: bold; }
-
-/* start - table */
-table {
-    border-collapse: collapse;
-    margin: 10px 20px;
-}
-th, td {
-    text-align: left;
-    border-width: 1px;
-    border-style: solid;
-}
-th {
-    padding: .8em 1em;
-    font-weight: bold;
-}
-td {
-    padding: .7em 1em;
-}
-/* end - table */
 
 /* form elements */
 form {

@@ -2,6 +2,7 @@
 {% load i18n %}
 
 {% block extra_head %}
+<script src="/static/js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
 <link rel="stylesheet" href="/static/css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
 <script src="/static/js/jquery.validationEngine-en.js" type="text/javascript"></script>
 <script src="/static/js/jquery.validationEngine.js" type="text/javascript"></script>
@@ -82,7 +83,120 @@
 
             return ret;
         };
-
+    </script>
+    <form id="image_acquisition" action="/edit/save/acquisition/" method="post">
+        <p id="image_type_controller" {% if acquisitions %}style="display:none"{% endif %}>
+            <label for="image_type_controller">{% trans "Select type of image:" %}</label>
+            <select id="image_type_controller" class="inline">
+                <option value="deep_sky">{% trans "Deep sky" %}</option>
+                <option value="solar_system">{% trans "Solar System" %}</option>
+            </select>
+            <input type="button" class="button inline-button" value="{% trans "Continue" %}"/>
+        </p>
+        <p id="deep_sky_controller">
+            <label for="deep_sky_controller">{% trans "Add frame sequence" %}:</label>
+            <select id="deep_sky_controller" class="inline">
+                <option value="l">{% trans "Light frames" %}</option>
+                <option value="r">{% trans "R frames" %}</option>
+                <option value="g">{% trans "G frames" %}</option>
+                <option value="b">{% trans "B frames" %}</option>
+                <option value="d">{% trans "Dark frames" %}</option>
+                <option value="o">{% trans "Offset/bias frames" %}</option>
+                <option value="f">{% trans "Flat frames" %}</option>
+                <option value="x">{% trans "Flat dark frames" %}</option>
+            </select>
+            <input type="button" class="button inline-button" value="{% trans "Add" %}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="number_of_frames">{% trans "Number of frames" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[onlyNumber]]"
+                   id="number_of_frames"
+                   name="number_of_frames"
+                   value="{{solar_system_acquisition.frames}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="fps">{% trans "FPS" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[onlyNumber]]"
+                   id="fps"
+                   name="fps"
+                   value="{{solar_system_acquisition.fps}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="focal_length">{% trans "Focal length" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[onlyNumber]]"
+                   id="focal_length"
+                   name="focal_length",
+                   value="{{solar_system_acquisition.focal_length}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="cmi">{% trans "CMI" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[number]]"
+                   id="cmi"
+                   name="cmi",
+                   value="{{solar_system_acquisition.cmi}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="cmii">{% trans "CMII" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[number]]"
+                   id="cmii"
+                   name="cmii",
+                   value="{{solar_system_acquisition.cmii}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="cmiii">{% trans "CMIII" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[number]]"
+                   id="cmiii"
+                   name="cmiii",
+                   value="{{solar_system_acquisition.cmiii}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="seeing">{% trans "Seeing (0-5)" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[onlyNumber]]"
+                   id="seeing"
+                   name="seeing",
+                   value="{{solar_system_acquisition.seeing}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="transparency">{% trans "Transparency (0-10)" %}:</label>
+            <input type="text"
+                   class="validate[optional,custom[onlyNumber]]"
+                   id="transparency"
+                   name="transparency",
+                   value="{{solar_system_acquisition.transparency}}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="date">{% trans "Date" %}:</label>
+            <input type="text"
+                   class="date datepickerclass validate[optional,date]"
+                   id="date"
+                   name="date",
+                   value="{% if solar_system_acquisition.date %}{{solar_system_acquisition.date}}{% else %}{% trans "yyyy-mm-dd" %}{% endif %}"/>
+        </p>
+        <p class="solar_system_field">
+            <label for="time">{% trans "Universal time" %}:</label>
+            <input type="text"
+                   class="date timepickerclass validate[optional]"
+                   id="time"
+                   name="time",
+                   value="{% if solar_system_acquisition.time %}{{solar_system_acquisition.time}}{% else %}{% trans "hh:mm" %}{% endif %}"/>
+        </p>
+        <span id="variable_fields"></span>
+        <span id="hidden_inputs"></span>
+        <input type="hidden" name="image_id" value="{{image.id}}" />
+        <ul style="clear:both">
+            <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+            <li><input id="reset" class="button dangerous-button inline-button" value="{% trans "Remove all data" %}" /></li>
+            <li><a href="/show/{{image.id}}">{% trans "Return to image" %}</a></li>
+        </ul>
+    </form>
+    <script type="text/javascript">
         $(document).ready(function() {
             {% ifequal image_type 'deep_sky' %}
                 $('p.solar_system_field').css('display', 'none');
@@ -105,7 +219,6 @@
                 {% endifequal %}
             {% endifequal %}
 
-            $("form#image_acquisition").validationEngine();
             $.datepicker.setDefaults({
                     dateFormat: 'yy-mm-dd',
             });
@@ -139,6 +252,7 @@
             });
             
             $('input').filter('.datepickerclass').datepicker();
+            $('input').filter('.timepickerclass').timepicker({});
             
             $('input#reset').click(function() {
                 $('p#deep_sky_controller').css('display', 'none');
@@ -149,88 +263,11 @@
                 $('.solar_system_field').css('display', 'none');
                 $('#hidden_inputs').html('');
             });
+
+            $("form#image_acquisition").validationEngine(
+                {scroll: false,
+                });
         });
     </script>
-
-    <form id="image_acquisition" action="/edit/save/acquisition/" method="post">
-        <p id="image_type_controller" {% if acquisitions %}style="display:none"{% endif %}>
-            <label for="image_type_controller">{% trans "Select type of image:" %}</label>
-            <select id="image_type_controller" class="inline">
-                <option value="deep_sky">{% trans "Deep sky" %}</option>
-                <option value="solar_system">{% trans "Solar System" %}</option>
-            </select>
-            <input type="button" class="button inline-button" value="{% trans "Continue" %}"/>
-        </p>
-        <p id="deep_sky_controller">
-            <label for="deep_sky_controller">{% trans "Add frame sequence" %}:</label>
-            <select id="deep_sky_controller" class="inline">
-                <option value="l">{% trans "Light frames" %}</option>
-                <option value="r">{% trans "R frames" %}</option>
-                <option value="g">{% trans "G frames" %}</option>
-                <option value="b">{% trans "B frames" %}</option>
-                <option value="d">{% trans "Dark frames" %}</option>
-                <option value="o">{% trans "Offset/bias frames" %}</option>
-                <option value="f">{% trans "Flat frames" %}</option>
-                <option value="x">{% trans "Flat dark frames" %}</option>
-            </select>
-            <input type="button" class="button inline-button" value="{% trans "Add" %}"/>
-        </p>
-        <p class="solar_system_field">
-            <label for="number_of_frames">{% trans "Number of frames" %}:</label>
-            <input type="text"
-                   class="validate[{% ifequal image_type 'solar_system' %}required{% else %}optional{% endifequal %},custom[onlyNumber]]"
-                   id="number_of_frames"
-                   name="number_of_frames"
-                   value="{{solar_system_acquisition.frames}}"/>
-        </p>
-        <p class="solar_system_field">
-            <label for="fps">{% trans "FPS" %}:</label>
-            <input type="text"
-                   class="validate[optional,custom[onlyNumber]]"
-                   id="fps"
-                   name="fps"
-                   value="{{solar_system_acquisition.fps}}"/>
-        </p>
-        <p class="solar_system_field">
-            <label for="focal_length">{% trans "Focal length" %}:</label>
-            <input type="text"
-                   class="validate[optional,custom[onlyNumber]]"
-                   id="focal_length"
-                   name="focal_length",
-                   value="{{solar_system_acquisition.focal_length}}"/>
-        </p>
-        <p class="solar_system_field">
-            <label for="seeing">{% trans "Seeing (0-5)" %}:</label>
-            <input type="text"
-                   class="validate[optional,custom[onlyNumber]]"
-                   id="seeing"
-                   name="seeing",
-                   value="{{solar_system_acquisition.seeing}}"/>
-        </p>
-        <p class="solar_system_field">
-            <label for="transparency">{% trans "Transparency (0-10)" %}:</label>
-            <input type="text"
-                   class="validate[optional,custom[onlyNumber]]"
-                   id="transparency"
-                   name="transparency",
-                   value="{{solar_system_acquisition.transparency}}"/>
-        </p>
-        <p class="solar_system_field">
-            <label for="date">{% trans "Date" %}:</label>
-            <input type="text"
-                   class="date datepickerclass validate[optional,date]"
-                   id="date"
-                   name="date",
-                   value="{% if solar_system_acquisition.date %}{{solar_system_acquisition.date}}{% else %}{% trans "yyyy-mm-dd" %}{% endif %}"/>
-        </p>
-        <span id="variable_fields"></span>
-        <span id="hidden_inputs"></span>
-        <input type="hidden" name="image_id" value="{{image.id}}" />
-        <ul style="clear:both">
-            <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
-            <li><input id="reset" class="button dangerous-button inline-button" value="{% trans "Remove all data" %}" /></li>
-            <li><a href="/show/{{image.id}}">{% trans "Return to image" %}</a></li>
-        </ul>
-    </form>
     </div>
 {% endblock %}
