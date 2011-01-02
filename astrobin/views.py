@@ -341,6 +341,9 @@ def image_edit_save_acquisition(request):
             frames = request.POST.get('number_of_frames'),
             fps = request.POST.get('fps'),
             focal_length = request.POST.get('focal_length'),
+            cmi = request.POST.get('cmi'),
+            cmii = request.POST.get('cmii'),
+            cmiii = request.POST.get('cmiii'),
             seeing = request.POST.get('seeing'),
             transparency = request.POST.get('transparency'))
         solar_system_acquisition.save()
