@@ -50,9 +50,20 @@ class Subject(models.Model):
         return self.name
 
 
+class Location(models.Model):
+    name = models.CharField(max_length=64)
+    latitude = models.DecimalField(max_digits=3, decimal_places=4, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=3, decimal_places=4, null=True, blank=True)
+    altitude = models.IntegerField(null=True, blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Image(models.Model):
     title = models.CharField(max_length=128)
     subjects = models.ManyToManyField(Subject)
+    locations = models.ManyToManyField(Location, null=True, blank=True)
     description = models.TextField()
     filename = models.CharField(max_length=64, editable=False)
     uploaded = models.DateTimeField(editable=False)
@@ -95,12 +106,12 @@ class DeepSky_Acquisition(Acquisition):
         return ''
 
 
-class SolarSystem_Acquisition(Acqiusition):
+class SolarSystem_Acquisition(Acquisition):
     seeing = models.IntegerField(null=True, blank=True)
     transparency = models.IntegerField(null=True, blank=True)
     frames = models.IntegerField()
+    fps = models.IntegerField(null=True, blank=True)
     focal_length = models.IntegerField(null=True, blank=True)
-
 
 
 class ABPOD(models.Model):
@@ -115,7 +126,7 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, editable=False)
 
     # Basic Information
-    location = models.CharField(max_length=32, null=True, blank=True)
+    locations = models.ManyToManyField(Location, null=True, blank=True)
     website = models.CharField(max_length=32, null=True, blank=True)
     job = models.CharField(max_length=32, null=True, blank=True)
     hobbies = models.CharField(max_length=64, null=True, blank=True)

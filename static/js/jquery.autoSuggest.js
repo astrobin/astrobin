@@ -180,9 +180,9 @@
 								timeout = setTimeout(function(){ keyChange(); }, opts.keyDelay);
 							}
 							break;
-						case 9: case 188:  // tab or comma
+						case 9:  // tab
 							tab_press = true;
-							var i_input = input.val().replace(/(,)/g, "");
+							var i_input = input.val().replace(/(,)/g, " -");
 							if(i_input != "" && values_input.val().search(","+i_input+",") < 0 && i_input.length >= opts.minChars){	
 								e.preventDefault();
 								var n_data = {};

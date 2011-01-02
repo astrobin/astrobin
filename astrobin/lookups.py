@@ -6,6 +6,7 @@ from models import Software
 from models import Filter
 from models import Accessory
 from models import Subject
+from models import Location
 from models import UserProfile
 
 from django.db.models import Q 
@@ -20,7 +21,8 @@ import simplejson
 @require_GET
 def autocomplete(request, what):
     values = ()
-    for k, v in {'telescopes':Telescope,
+    for k, v in {'locations': Location,
+                 'telescopes':Telescope,
                  'mounts':Mount,
                  'cameras':Camera,
                  'focal_reducers':FocalReducer,
