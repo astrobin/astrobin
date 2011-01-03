@@ -547,18 +547,16 @@ def user_profile_flickr_import(request):
             request.session['current-progress'] = [0, 'Importing images...']
             for index, photo_id in enumerate(selected_photos):
                 sizes = flickr.photos_getSizes(photo_id = photo_id)
-                found_size = False
-                for size in sizes.find('sizes').findall('size'):
-                    if size.attrib['label'] == 'Original':
-                        found_size = True
-                        break
-                if not found_size:
+
+                # Attempt to find the largest image
+                found_size = None
+                for label in ['Square', 'Thumbnail', 'Small', 'Medium', 'Medium640', 'Large', 'Original']:
                     for size in sizes.find('sizes').findall('size'):
-                        if size.attrib['label'] == 'Large':
-                            found_size = True
-                            break
-                if found_size:
-                    source = size.attrib['source']
+                        if size.attrib['label'] == label:
+                            found_size = size
+
+                if found_size is not None:
+                    source = found_size.attrib['source']
                     file = urllib.urlopen(source)
                     s3_filename = str(uuid4())
                     store_image_in_s3(file, s3_filename, 'image/jpeg')
