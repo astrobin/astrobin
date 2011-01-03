@@ -335,17 +335,24 @@ def image_edit_save_acquisition(request):
             a.image = image
             a.save()
     elif image_type == 'solar_system':
+        date = request.POST.get('date')
+        if date == 'yyyy-mm-dd':
+            date = None
+
+        time = request.POST.get('time')
+        if time == 'hh:mm':
+            time = None
+
         solar_system_acquisition = SolarSystem_Acquisition(
             image = image,
-            date = request.POST.get('date'),
-            frames = request.POST.get('number_of_frames'),
-            fps = request.POST.get('fps'),
-            focal_length = request.POST.get('focal_length'),
-            cmi = request.POST.get('cmi'),
-            cmii = request.POST.get('cmii'),
-            cmiii = request.POST.get('cmiii'),
-            seeing = request.POST.get('seeing'),
-            transparency = request.POST.get('transparency'))
+            date = date,
+            time = time)
+        for k in ['frames', 'fps', 'focal_length', 'cmi', 'cmii',
+                  'cmiii', 'seeing', 'transparency']:
+            v = request.POST.get(k)
+            if v != '':
+                setattr(solar_system_acquisition, k, v)
+
         solar_system_acquisition.save()
 
     response_dict = {
