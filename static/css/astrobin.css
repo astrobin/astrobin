@@ -7,12 +7,21 @@
     Last Date Modified : August 31, 2009
  ------------------------------------------------ */
 
+@font-face {
+    font-family: 'Museo Sans';
+    src: url('/static/fonts/MuseoSans_500.otf');
+}
+
+@font-face {
+    font-family: 'Sling';
+    src: url('/static/fonts/Sling.ttf');
+}
+
 /* ----------------------------------------------
    HTML ELEMENTS
 ------------------------------------------------- */
 body {
-    font-family: Lato, Helvetica, Verdana, Sans-serif;
-    font-size: 75%;
+    font-family: 'Museo Sans', Helvetica, Verdana, Sans-serif;
     line-height: 1.5em;
     color: #91807F;
     margin: 0; padding: 0;
@@ -45,7 +54,7 @@ a:hover.more {
 
 /* headers */
 h1, h2, h3, h4 {
-    font: bold 1em/1.5em Neuton, Georgia, Times New Roman, serif;
+    font: bold 1em/1.5em Sling, Verdana;/* Georgia, Times New Roman, serif;*/
     color: #f0e8e8;
 }
 h1 { font-size: 2.9em; font-weight: bold; }
@@ -127,7 +136,7 @@ input, select, textarea {
     border-style: solid;
     border-color: #322014;
     background-color: #1E150D;
-    font: 11px Lato, Helvetica, Verdana, Sans-Serif;
+    font: 11px 'Museo Sans', Helvetica, Verdana, Sans-Serif;
     color: #925D3A;
     width: 70%;
     border-radius: 6px;
@@ -171,7 +180,7 @@ form ul li {
     text-shadow: rgba(0,0,0,.8) 0 0 2px;
     color: #ffffff;
     font-size: 1em;
-    font-family: Lato, Helvetica, Arial, Sans-Serif;
+    font-family: 'Museo Sans', Helvetica, Arial, Sans-Serif;
     text-decoration: none;
     text-align: center;
     vertical-align: middle;
@@ -232,18 +241,18 @@ form ul li {
 #header h1#logo-text a {
     position: absolute;
     /* change the values of top and left to adjust the position */
-    top: 68px; left: 15px;
+    top: 74px; left: 15px;
     margin: 0; padding: 0 5px 0 0;
-    font-size: 1.5em;
+    font-size: 1.25em;
     text-decoration: none;
     color: #fff;
 }
 #header h2#slogan {
     position: absolute;
     /* change the values of top and left to adjust the position */
-    top: 120px; left: 34px;
+    top: 120px; left: 36px;
     margin: 0; padding:  0 5px 0 0;
-    font-size: 1em;
+    font-size: 0.8em;
     color: #897876;
     text-align: center;
 }
@@ -286,7 +295,7 @@ form ul li {
     float: left;
     margin: 0;
     padding: 30px 15px 17px 11px;
-    font: bold Lato, Helvetica, Verdana, Sans-serif;
+    font: bold 'Museo Sans', Helvetica, Verdana, Sans-serif;
     text-transform: lowercase;
     color: #867474;
 }
@@ -325,7 +334,7 @@ form ul li {
     float: right;
     margin: 0;
     padding: 30px 15px 17px 11px;
-    font: bold Lato, Helvetica, Verdana, Sans-serif;
+    font: bold 'Museo Sans', Helvetica, Verdana, Sans-serif;
     text-transform: lowercase;
     color: #867474;
 }
@@ -405,7 +414,7 @@ form ul li {
 #abpod h2 {
     margin-bottom: 0;
     padding-bottom: 0;
-    font: bold 2.7em Lato, Helvetica, Verdana, Sans-serif;
+    font: bold 2.7em 'Museo Sans', Helvetica, Verdana, Sans-serif;
     letter-spacing: -2.0px;
     color: #f0e8e8;
 }
@@ -573,7 +582,7 @@ form ul li {
 }
 #main .block .blk-top h4 {
     margin: 0 5px;
-    font-family: Lato, Helvetica, Verdana, Sans-serif;
+    font-family: 'Museo Sans', Helvetica, Verdana, Sans-serif;
     font-size: 1.4em;
     font-weight: normal;
     line-height: 125%;
@@ -641,7 +650,7 @@ form ul li {
     display: block;
     margin-left: -16px;
     color: #9a8377;
-    font-family: Lato, Helvetica, Verdana, Sans-serif;
+    font-family: 'Museo Sans', Helvetica, Verdana, Sans-serif;
     text-transform: none;
 }
 .sidemenu ul li a:hover { color: #fff;  border: none; }
@@ -756,7 +765,7 @@ form ul li {
 }
 .post .image-section img {
     background: #150e0b;
-   border: 1px solid #261b15;
+    border: 1px solid #261b15;
     padding: 12px;
 }
 .post .postmeta {
@@ -772,7 +781,7 @@ form ul li {
 #abpod .post-info {
     margin-top: 0;
     text-transform: uppercase;
-    font-family: Lato, Helvetica, Verdana, sans-serif;
+    font-family: 'Museo Sans', Helvetica, Verdana, sans-serif;
 }
 .post .post-info a, .post .post-info a:visited,
 #abpod .post-info a, #abpod .post-info a:visited { color: #6f892c; border: none; font-weight: bold }
