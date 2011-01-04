@@ -4,7 +4,7 @@
 {% block content %}
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
-        <form name="flickr_form" action="">
+        <form name="flickr_form" action="">{% csrf_token %}
             {% if flickr_sets %}
             <p id="flickr_sets">
                 <label for="id_flickr_sets">{% trans "Which set" %}:</label>

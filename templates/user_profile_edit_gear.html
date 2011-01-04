@@ -4,7 +4,7 @@
 {% block content %}
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
-        <form method="post" action="/profile/save/gear/">
+        <form method="post" action="/profile/save/gear/">{% csrf_token %}
             {{form.as_p}}
             <script language="javascript">
             $(document).ready(function() {

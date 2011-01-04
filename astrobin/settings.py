@@ -79,6 +79,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfResponseMiddleware',
 )
 
 ROOT_URLCONF = 'astrobin.urls'
@@ -87,7 +89,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/var/www/astrobin/templates'
+    '/var/www/astrobin_env/www/astrobin/templates'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -103,7 +105,7 @@ INSTALLED_APPS = (
     'astrobin',
     'django.contrib.admin',
     'registration',
-    'ajax_select',
+    'djangoratings',
 )
 
 LOGIN_REDIRECT_URL = '/'

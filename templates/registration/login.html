@@ -11,7 +11,7 @@
 
 <div class="sided-main-content">
 <h1>{% trans "Login with AstroBin" %}</h1>
-<form method="post" action=".">
+<form method="post" action=".">{% csrf_token %}
   {{ form.as_p }}
   <input class="button submit-button" type="submit" value="{% trans 'Log in' %}" />
   <input type="hidden" name="next" value="{{ next }}" />
