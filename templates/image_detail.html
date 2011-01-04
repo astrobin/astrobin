@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
+{% block extra_head %}
+<script src="/static/js/jquery.raty.min.js"></script>
+{% endblock %}
+
 {% block content %}
     <div id="image-detail">
         <div id="main-content">
@@ -26,6 +30,7 @@
                         </li>
                     </ul>
                 </li>
+                <li><div id="rating"></div></li>
                 <li id="navigation">
                     <ul class="topnav">
                         <li class="first"><a href="#">&#8701;&nbsp;{% trans "Newer" %}</a></li>
@@ -80,6 +85,22 @@
     $(document).ready(function() {
         $('.topnav > li').bind('mouseover', topnav_open)
         $('.topnav > li').bind('mouseout',  topnav_timer)
+        $('#rating').raty(
+            {
+                path: '/static/images/raty/',
+                {% if user.is_authenticated %}
+                readOnly: false,
+                {% else %}
+                readOnly = true,
+                {% endif %}
+                showHalf: true,
+                hintList: ['{% trans "bad" %}',
+                           '{% trans "poor" %}',
+                           '{% trans "regular" %}',
+                           '{% trans "good" %}',
+                           '{% trans "gorgeous" %}']
+            }
+        );
     });
 
     document.onclick = topnav_close;
