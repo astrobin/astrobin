@@ -84,7 +84,7 @@
             return ret;
         };
     </script>
-    <form id="image_acquisition" action="/edit/save/acquisition/" method="post">
+    <form id="image_acquisition" action="/edit/save/acquisition/" method="post">{% csrf_token %}
         <p id="image_type_controller" {% if acquisitions %}style="display:none"{% endif %}>
             <label for="image_type_controller">{% trans "Select type of image:" %}</label>
             <select id="image_type_controller" class="inline">

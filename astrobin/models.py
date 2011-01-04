@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django import forms
 
+from djangoratings.fields import RatingField
+
 
 class Gear(models.Model):
     name = models.CharField(max_length=64)
@@ -78,6 +80,8 @@ class Image(models.Model):
     software = models.ManyToManyField(Software, null=True, blank=True)
     filters = models.ManyToManyField(Filter, null=True, blank=True)
     accessories = models.ManyToManyField(Accessory, null=True, blank=True)
+
+    rating = RatingField(range=5)
 
     class Meta:
         ordering = ('-uploaded', '-id')
