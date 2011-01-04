@@ -42,13 +42,13 @@
             <img id="main-image" src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" />
             <ul class="title">
                 <li class="title">{{image.title}}</li>
-                {% ifnotequal image.subjects.count() 0 %}
+                {% if image.subjects %}
                 <li class="contains">Contains:
                     {% for s in image.subjects.all %}
                         <a href="/search/{{s.name}}">{{s.name}}</a>
                     {% endfor %}
                 </li>
-                {% endifnotequal %}
+                {% endif %}
             </ul>
             <p id="description">{{image.description}}</p>
         </div>
