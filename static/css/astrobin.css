@@ -11,7 +11,9 @@
    HTML ELEMENTS
 ------------------------------------------------- */
 body {
-    font: 10px/170% Helvetica, Verdana, Sans-serif;
+    font-family: Lato, Helvetica, Verdana, Sans-serif;
+    font-size: 75%;
+    line-height: 1.5em;
     color: #91807F;
     margin: 0; padding: 0;
     background: #1d140f url(../images/bg.gif) repeat-x;
@@ -43,7 +45,7 @@ a:hover.more {
 
 /* headers */
 h1, h2, h3, h4 {
-    font: bold 1em/1.5em Helvetica, Verdana, Sans-serif;
+    font: bold 1em/1.5em Neuton, Georgia, Times New Roman, serif;
     color: #f0e8e8;
 }
 h1 { font-size: 2.9em; font-weight: bold; }
@@ -96,7 +98,6 @@ blockquote {
     border: 1px solid #251a14;
     background: #130d0a url(../images/quote.gif) no-repeat 12px 12px;
     font-weight: normal;
-    font-size: 17px;
     line-height: 1.5em;
     font-style: italic;
     font-family: Georgia, 'Times New Roman', Times, Serif;
@@ -126,7 +127,7 @@ input, select, textarea {
     border-style: solid;
     border-color: #322014;
     background-color: #1E150D;
-    font: 11px Verdana, Helvetica, Sans-Serif;
+    font: 11px Lato, Helvetica, Verdana, Sans-Serif;
     color: #925D3A;
     width: 70%;
     border-radius: 6px;
@@ -169,8 +170,8 @@ form ul li {
     box-shadow: rgba(0,0,0,1) 0 1px 0;
     text-shadow: rgba(0,0,0,.8) 0 0 2px;
     color: #ffffff;
-    font-size: 12px;
-    font-family: Helvetica, Arial, Sans-Serif;
+    font-size: 1em;
+    font-family: Lato, Helvetica, Arial, Sans-Serif;
     text-decoration: none;
     text-align: center;
     vertical-align: middle;
@@ -231,19 +232,18 @@ form ul li {
 #header h1#logo-text a {
     position: absolute;
     /* change the values of top and left to adjust the position */
-    top: 68px; left: 30px;
+    top: 68px; left: 15px;
     margin: 0; padding: 0 5px 0 0;
-    font: bold 48px Helvetica, Verdana, Sans-serif;
-    letter-spacing: -3px;
+    font-size: 1.5em;
     text-decoration: none;
     color: #fff;
 }
-#header p#slogan {
+#header h2#slogan {
     position: absolute;
     /* change the values of top and left to adjust the position */
-    top: 120px; left: 46px;
+    top: 120px; left: 34px;
     margin: 0; padding:  0 5px 0 0;
-    font: bold 11px Helvetica, Verdana, Sans-serif;
+    font-size: 1em;
     color: #897876;
     text-align: center;
 }
@@ -286,7 +286,7 @@ form ul li {
     float: left;
     margin: 0;
     padding: 30px 15px 17px 11px;
-    font: bold 12px Helvetica, Verdana, Sans-serif;
+    font: bold Lato, Helvetica, Verdana, Sans-serif;
     text-transform: lowercase;
     color: #867474;
 }
@@ -325,7 +325,7 @@ form ul li {
     float: right;
     margin: 0;
     padding: 30px 15px 17px 11px;
-    font: bold 12px Helvetica, Verdana, Sans-serif;
+    font: bold Lato, Helvetica, Verdana, Sans-serif;
     text-transform: lowercase;
     color: #867474;
 }
@@ -405,7 +405,7 @@ form ul li {
 #abpod h2 {
     margin-bottom: 0;
     padding-bottom: 0;
-    font: bold 2.7em Helvetica, Verdana, Sans-serif;
+    font: bold 2.7em Lato, Helvetica, Verdana, Sans-serif;
     letter-spacing: -2.0px;
     color: #f0e8e8;
 }
@@ -439,7 +439,6 @@ form ul li {
     background: #e2721b url(../images/button-bg.png) repeat-x;
     text-decoration: none;
     text-transform: uppercase;
-    font-size: 10px;
     font-weight: bold;
     line-height: 20px;
     color: #fff;
@@ -475,7 +474,7 @@ form ul li {
 
 .sided-main-content h1 {
     color:#ffffff;
-    font-size:18px;
+    font-size: 1.75em;
     letter-spacing: 0;
     padding:10px 20px;
     border-bottom:1px solid #161712;
@@ -490,7 +489,6 @@ form ul li {
 .sided-main-content p label {
     display: block;
     color:#bbbbbb;
-    font-size:12px;
     float:left;
     text-align:right;
     padding:11px 10px 0 0;
@@ -575,7 +573,7 @@ form ul li {
 }
 #main .block .blk-top h4 {
     margin: 0 5px;
-    font-family: Helvetica, Verdana, Sans-serif;
+    font-family: Lato, Helvetica, Verdana, Sans-serif;
     font-size: 1.4em;
     font-weight: normal;
     line-height: 125%;
@@ -586,7 +584,6 @@ form ul li {
 #main .block .blk-top p {
     padding: 2px 0 3px 0;
     margin: 0 3px;
-    font-size: 11px;
     color: #b5b5b5;
 }
 #main .block .blk-top p a:link,
@@ -630,7 +627,6 @@ form ul li {
     list-style: none;
     margin: 0;  padding: 8px 5px 8px 19px;
     border-bottom: 1px solid #29201c;
-    font-size: 11px;
     line-height: 20px;
     text-transform: uppercase;
     background: url(../images/bullet.gif) no-repeat 0 14px;
@@ -645,7 +641,7 @@ form ul li {
     display: block;
     margin-left: -16px;
     color: #9a8377;
-    font-family: Helvetica, Verdana, Sans-serif;
+    font-family: Lato, Helvetica, Verdana, Sans-serif;
     text-transform: none;
 }
 .sidemenu ul li a:hover { color: #fff;  border: none; }
@@ -776,8 +772,7 @@ form ul li {
 #abpod .post-info {
     margin-top: 0;
     text-transform: uppercase;
-    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-    font-size: 9px;
+    font-family: Lato, Helvetica, Verdana, sans-serif;
 }
 .post .post-info a, .post .post-info a:visited,
 #abpod .post-info a, #abpod .post-info a:visited { color: #6f892c; border: none; font-weight: bold }
@@ -837,7 +832,6 @@ ol.commentlist {
     background-color: #E27304;
     border: 1px solid #E7871C;
     font-weight: bold;
-    font-size: 11px;
     color: #fff;
 }
 .commentlist li ul.children { margin:0; padding: 0; }
@@ -989,7 +983,6 @@ p.thumbs {
 
 #image-detail ul.topnav {
     list-style: none;
-    font-size: 12px;
     margin: 0 0 0 0;
     padding: 0;
     background: #e98e47;
@@ -1080,14 +1073,13 @@ p.thumbs {
 }
 
 #image-detail ul.title li.title {
-    font-size: 22px;
+    font-size: 2em;
     font-weight: bold;
     color: white;
     margin-right: 15px;
 }
 #image-detail ul.title li.contains {
     float: right;
-    font-size: 12px;
 }
 
 #image-detail img#main-image {
@@ -1095,7 +1087,6 @@ p.thumbs {
 }
 
 #image-detail p#description {
-    font-size: 12px;
     margin: 10px 0 10px 0;
 }
 
