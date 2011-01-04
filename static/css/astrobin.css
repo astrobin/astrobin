@@ -988,6 +988,7 @@ p.thumbs {
 
 #image-detail ul.bar>li {
     float: left;
+    width: 33%;
 }
 
 #image-detail ul.topnav {
@@ -1065,6 +1066,7 @@ p.thumbs {
 
 #image-detail li#navigation {
     float: right;
+    text-align: right;
 }
 
 #image-detail li#navigation img {
@@ -1188,3 +1190,7 @@ input.date {
     margin-right: 20px;
 }
 
+#rating {
+    margin: 0 auto;
+    text-align: center;
+}
