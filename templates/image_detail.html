@@ -119,8 +119,9 @@
                             $.ajax({
                                 url: '/get_rating/{{image.id}}/',
                                 success: function(data) {
-                                    $.fn.raty.start(data['rating']);
-                                    $.fn.raty.readOnlu(true);
+                                    var rating = $.parseJSON(data).rating
+                                    $.fn.raty.start(rating);
+                                    $.fn.raty.readOnly(true);
                                 }
                             });
                         },
