@@ -82,6 +82,7 @@ class Image(models.Model):
     accessories = models.ManyToManyField(Accessory, null=True, blank=True)
 
     rating = RatingField(range=5)
+    user = models.ForeignKey(User)
 
     class Meta:
         ordering = ('-uploaded', '-id')
