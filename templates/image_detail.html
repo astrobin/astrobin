@@ -87,18 +87,36 @@
         $('.topnav > li').bind('mouseout',  topnav_timer)
         $('#rating').raty(
             {
+                start: {{current_rating}},
                 path: '/static/images/raty/',
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated and not already_voted %}
                 readOnly: false,
                 {% else %}
-                readOnly = true,
+                readOnly: true,
                 {% endif %}
                 showHalf: true,
                 hintList: ['{% trans "bad" %}',
                            '{% trans "poor" %}',
                            '{% trans "regular" %}',
                            '{% trans "good" %}',
-                           '{% trans "gorgeous" %}']
+                           '{% trans "gorgeous" %}'],
+                onClick: function(score) {
+                    $.ajax({
+                        url: '/rate/{{image.id}}/' + score + '/',
+                        success: function(data, textStatus, XMLHttpRequst) {
+                            $.ajax({
+                                url: '/get_rating/{{image.id}}/',
+                                success: function(data) {
+                                    $.fn.raty.start(data['rating']);
+                                    $.fn.raty.readOnlu(true);
+                                }
+                            });
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            $.fn.raty.readOnly(true);
+                        }
+                    });
+                }
             }
         );
     });

@@ -2,10 +2,13 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib import admin
 
+from djangoratings.views import AddRatingFromModel
+
 admin.autodiscover()
 
 from astrobin import views
 from astrobin import lookups
+from astrobin.models import Image
 
 urlpatterns = patterns('',
     (r'^$', views.index),
@@ -36,6 +39,12 @@ urlpatterns = patterns('',
     (r'^flickr_auth_callback/$', views.flickr_auth_callback),
     (r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete),
     (r'^autocomplete_user/(?P<what>\w+)/$', lookups.autocomplete_user),
+    (r'rate/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(), {
+        'app_label': 'astrobin',
+        'model': 'image',
+        'field_name': 'rating',
+    }),
+    (r'get_rating/(?P<image_id>\d+)/', views.image_get_rating),
 
     (r'^misc/request-progress/$', views.request_progress),
     (r'^(?P<username>\w+)/$', views.user_page),
