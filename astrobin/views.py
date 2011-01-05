@@ -55,6 +55,11 @@ def index(request):
 
 def image_detail(request, id):
     """ Show details of an image"""
+    image = get_object_or_404(Image, pk=id)
+    already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
+    votes = image.rating.votes
+    score = image.rating.score
+    rating = float(score)/votes
 
     return object_detail(
         request,
@@ -62,13 +67,27 @@ def image_detail(request, id):
         object_id = id,
         template_name = 'image_detail.html',
         template_object_name = 'image',
-        extra_context = {"s3_images_bucket":settings.S3_IMAGES_BUCKET,
-                         "s3_resized_images_bucket":settings.S3_RESIZED_IMAGES_BUCKET,
-                         "s3_thumbnails_bucket":settings.S3_THUMBNAILS_BUCKET,
-                         "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
-                         "s3_inverted_bucket":settings.S3_INVERTED_BUCKET,
-                         "s3_resized_inverted_bucket":settings.S3_RESIZED_INVERTED_BUCKET,
-                         "s3_url":settings.S3_URL})
+        extra_context = {'s3_images_bucket': settings.S3_IMAGES_BUCKET,
+                         's3_resized_images_bucket': settings.S3_RESIZED_IMAGES_BUCKET,
+                         's3_thumbnails_bucket': settings.S3_THUMBNAILS_BUCKET,
+                         's3_small_thumbnails_bucket': settings.S3_SMALL_THUMBNAILS_BUCKET,
+                         's3_inverted_bucket': settings.S3_INVERTED_BUCKET,
+                         's3_resized_inverted_bucket': settings.S3_RESIZED_INVERTED_BUCKET,
+                         's3_url': settings.S3_URL,
+                         'already_voted': already_voted,
+                         'current_rating': rating})
+
+
+@require_GET
+def image_get_rating(request, image_id):
+    image = get_object_or_404(Image, pk=image_id)
+    votes = image.rating.votes
+    score = image.rating.score
+    rating = float(score)/votes
+
+    response_dict = {'rating': rating}
+    return HttpResponse(simplejson.dumps(response_dict),
+                        mimetype='application/javascript')
 
 
 @login_required
