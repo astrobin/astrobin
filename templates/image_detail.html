@@ -24,7 +24,11 @@
                             <span class="text"><a href="#">{% trans "View" %}</a></span>
                             <span class="caret"><a href="#">&#9662;</a></span>
                             <ul class="subnav">
-                                <li class="first"><a href="#">{% trans "False colors" %}</a></li>
+                                {% if inverted %}
+                                <li class="first"><a href="/show/{{image.id}}/">{% trans "Normal" %}</a></li>
+                                {% else %}
+                                <li class="first"><a href="/show/{{image.id}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></li>
+                                {% endif %}
                                 <li class="last"><a href="#">{% trans "Plate solved" %}</a></li>
                             </ul>
                         </li>
@@ -39,7 +43,13 @@
                     </ul>
                 </li>
             </ul>
-            <img id="main-image" src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" />
+            <div id="main-image">
+            {% if inverted %}
+            <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title}}"/>
+            {% else %}
+            <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title}}"/>
+            {% endif %}
+            </div>
             <ul class="title">
                 <li class="title">{{image.title}}</li>
                 {% if image.subjects %}

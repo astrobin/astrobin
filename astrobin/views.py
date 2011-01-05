@@ -78,7 +78,8 @@ def image_detail(request, id):
                          's3_url': settings.S3_URL,
                          'already_voted': already_voted,
                          'current_rating': rating,
-                         'user_images': user_images})
+                         'user_images': user_images,
+                         'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False})
 
 
 @require_GET
