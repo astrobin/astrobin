@@ -86,7 +86,7 @@ def image_get_rating(request, image_id):
     image = get_object_or_404(Image, pk=image_id)
     votes = image.rating.votes
     score = image.rating.score
-    rating = float(score)/votes
+    rating = float(score)/votes if votes > 0 else 0
 
     response_dict = {'rating': rating}
     return HttpResponse(simplejson.dumps(response_dict),
