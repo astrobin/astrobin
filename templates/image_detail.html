@@ -52,8 +52,20 @@
             </ul>
             <p id="description">{{image.description}}</p>
         </div>
-    </div>
-    <div id="image-sidebar">
+        <div id="side-pane">
+            {% if user_images.count > 1 %} 
+            <h2>More from this user</h2>
+            <ul class="image-strip">
+            {% for i in user_images %}
+                <li>
+                    <a href="/show/{{i.id}}/">
+                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.filename}}" alt="{{i.title}}"/>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
     </div>
     <script type="text/javascript">
     var timeout    = 500;

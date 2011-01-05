@@ -981,6 +981,18 @@ p.thumbs {
     width: 722px;
 }
 
+#image-detail #side-pane {
+    float: left;
+    padding-lefT: 20px;
+    text-align: center;
+}
+
+#image-detail #side-pane h2 {
+    color: #897876;
+    font-size: 1em;
+    margin-bottom: 12px;
+}
+
 #image-detail ul.bar {
     list-style: none;
     margin: 0 0 30px 0;
@@ -1194,4 +1206,10 @@ input.date {
 #rating {
     margin: 0 auto;
     text-align: center;
+}
+
+ul.image-strip {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }

@@ -59,7 +59,9 @@ def image_detail(request, id):
     already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
     votes = image.rating.votes
     score = image.rating.score
-    rating = float(score)/votes
+    rating = float(score)/votes if votes > 0 else 0
+
+    user_images = Image.objects.filter(user=request.user).exclude(pk=id)[:10]
 
     return object_detail(
         request,
@@ -75,7 +77,8 @@ def image_detail(request, id):
                          's3_resized_inverted_bucket': settings.S3_RESIZED_INVERTED_BUCKET,
                          's3_url': settings.S3_URL,
                          'already_voted': already_voted,
-                         'current_rating': rating})
+                         'current_rating': rating,
+                         'user_images': user_images})
 
 
 @require_GET
@@ -117,7 +120,7 @@ def image_upload_process(request):
     s3_filename = str(uuid4()) + os.path.splitext(file.name)[1]
     store_image_in_s3(file, s3_filename)
 
-    image = Image(filename = s3_filename)
+    image = Image(filename = s3_filename, user = request.user)
     image.save()
 
     if 'qqfile' in request.GET:
@@ -586,7 +589,7 @@ def user_profile_flickr_import(request):
                     file = urllib.urlopen(source)
                     s3_filename = str(uuid4())
                     store_image_in_s3(file, s3_filename, 'image/jpeg')
-                    image = Image(filename = s3_filename)
+                    image = Image(filename = s3_filename, user = request.user)
                     image.save()
                     if index > 0:
                         request.session['current-progress'] = [100 / index / len(selected_photos), photo_id]
