@@ -22,6 +22,7 @@
 ------------------------------------------------- */
 body {
     font-family: 'Museo Sans', Helvetica, Verdana, Sans-serif;
+    font-size: 87.25%;
     line-height: 1.5em;
     color: #91807F;
     margin: 0; padding: 0;
@@ -54,13 +55,13 @@ a:hover.more {
 
 /* headers */
 h1, h2, h3, h4 {
-    font: bold 1em/1.5em Sling, Verdana;/* Georgia, Times New Roman, serif;*/
+    font: bold 1em/1.5em Sling, Georgia, Times New Roman, serif;
     color: #f0e8e8;
 }
-h1 { font-size: 2.9em; font-weight: bold; }
-h2 { font-size: 2.8em; font-weight: bold; margin-bottom: 20px;}
-h3 { font-size: 2.1em; font-weight: normal; padding-top: 5px; }
-h4 { font-size: 1.7em; }
+h1 { font-size: 2em; font-weight: bold; }
+h2 { font-size: 1.5em; font-weight: bold; margin-bottom: 20px;}
+h3 { font-size: 1.2em; font-weight: normal; padding-top: 5px; }
+h4 { font-size: 1.1em; }
 
 /* Lists */
 ul, ol {
@@ -241,16 +242,16 @@ form ul li {
 #header h1#logo-text a {
     position: absolute;
     /* change the values of top and left to adjust the position */
-    top: 74px; left: 15px;
+    top: 86px; left: 10px;
     margin: 0; padding: 0 5px 0 0;
-    font-size: 1.25em;
+    font-size: 1.5em;
     text-decoration: none;
     color: #fff;
 }
 #header h2#slogan {
     position: absolute;
     /* change the values of top and left to adjust the position */
-    top: 120px; left: 36px;
+    top: 120px; left: 8px;
     margin: 0; padding:  0 5px 0 0;
     font-size: 0.8em;
     color: #897876;
@@ -355,7 +356,7 @@ form ul li {
 /* header quick search */
 #header form#quick-search {
     position: absolute;
-    top: 19px; right: 212px;
+    top: 19px; right: 280px;
     z-index: 999;
     padding: 0; margin: 0;
     border: none;
