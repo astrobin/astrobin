@@ -1065,6 +1065,14 @@ p.thumbs {
      float: left;
 }
 
+#image-detail ul.topnav>li ul.subnav li.separator {
+    height: 0;
+    width: 150px;
+    margin: 7px 10px;
+    border-top: 1px solid #403737;
+    border-bottom: 1px solid #1A1616;
+}
+
 #image-detail ul.topnav>li ul.subnav li a {
      float: left;
      width: 145px;
@@ -1216,3 +1224,4 @@ ul.image-strip {
     margin: 0;
     padding: 0;
 }
+
