@@ -15,10 +15,12 @@
                             <span class="text"><a href="#">{% trans "Actions" %}</a></span>
                             <span class="caret"><a href="#">&#9662;</a></span>
                             <ul class="subnav">
+                            {% if request.user == image.user %}
                                 <li class="first"><a href="/edit/basic/{{image.id}}">{% trans "Edit basic information" %}</a></li>
                                 <li><a href="/edit/gear/{{image.id}}">{% trans "Edit gear used" %}</a></li>
                                 <li><a href="/edit/acquisition/{{image.id}}">{% trans "Edit acquisition details" %}</a></li>
                                 <li class="separator"></li>
+                            {% endif %}
                                 <li><a href="#">{% trans "Bring to a user's attention" %}</a></li>
                                 <li><a href="#">{% trans "Request additional details" %}</a></li>
                                 <li class="last"><a href="#">{% trans "Request TIFF/FITS" %}</a></li>
