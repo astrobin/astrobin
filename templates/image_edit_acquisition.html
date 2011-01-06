@@ -113,7 +113,7 @@
                    class="validate[optional,custom[onlyNumber]]"
                    id="frames"
                    name="frames"
-                   value="{{solar_system_acquisition.frames}}"/>
+                   value="{% if solar_system_acquisition.frames %}{{solar_system_acquisition.frames}}{% endif %}"/>
         </p>
         <p class="solar_system_field">
             <label for="fps">{% trans "FPS" %}:</label>
@@ -121,7 +121,7 @@
                    class="validate[optional,custom[onlyNumber]]"
                    id="fps"
                    name="fps"
-                   value="{{solar_system_acquisition.fps}}"/>
+                   value="{% if solar_system_acquisition.fps %}{{solar_system_acquisition.fps}}{% endif %}"/>
         </p>
         <p class="solar_system_field">
             <label for="focal_length">{% trans "Focal length" %}:</label>
@@ -129,7 +129,7 @@
                    class="validate[optional,custom[onlyNumber]]"
                    id="focal_length"
                    name="focal_length",
-                   value="{{solar_system_acquisition.focal_length}}"/>
+                   value="{% if solar_system_acquisition.focal_length %}{{solar_system_acquisition.focal_length}}{% endif %}"/>
         </p>
         <p class="solar_system_field">
             <label for="cmi">{% trans "CMI" %}:</label>
@@ -137,7 +137,7 @@
                    class="validate[optional,custom[number]]"
                    id="cmi"
                    name="cmi",
-                   value="{{solar_system_acquisition.cmi}}"/>
+                   value="{% if solar_system_acquisition.cmi %}{{solar_system_acquisition.cmi}}{% endif %}"/>
         </p>
         <p class="solar_system_field">
             <label for="cmii">{% trans "CMII" %}:</label>
@@ -145,7 +145,7 @@
                    class="validate[optional,custom[number]]"
                    id="cmii"
                    name="cmii",
-                   value="{{solar_system_acquisition.cmii}}"/>
+                   value="{% if solar_system_acquisition.cmii %}{{solar_system_acquisition.cmii}}{% endif %}"/>
         </p>
         <p class="solar_system_field">
             <label for="cmiii">{% trans "CMIII" %}:</label>
@@ -153,7 +153,7 @@
                    class="validate[optional,custom[number]]"
                    id="cmiii"
                    name="cmiii",
-                   value="{{solar_system_acquisition.cmiii}}"/>
+                   value="{% if solar_system_acquisition.cmiii %}{{solar_system_acquisition.cmiii}}{% endif %}"/>
         </p>
         <p class="solar_system_field">
             <label for="seeing">{% trans "Seeing (0-5)" %}:</label>
@@ -161,7 +161,7 @@
                    class="validate[optional,custom[onlyNumber]]"
                    id="seeing"
                    name="seeing",
-                   value="{{solar_system_acquisition.seeing}}"/>
+                   value="{% if solar_system_acquisition.seeing %}{{solar_system_acquisition.seeing}}{% endif %}"/>
         </p>
         <p class="solar_system_field">
             <label for="transparency">{% trans "Transparency (0-10)" %}:</label>
@@ -169,7 +169,7 @@
                    class="validate[optional,custom[onlyNumber]]"
                    id="transparency"
                    name="transparency",
-                   value="{{solar_system_acquisition.transparency}}"/>
+                   value="{% if solar_system_acquisition.transparency %}{{solar_system_acquisition.transparency}}{% endif %}"/>
         </p>
         <p class="solar_system_field">
             <label for="date">{% trans "Date" %}:</label>
