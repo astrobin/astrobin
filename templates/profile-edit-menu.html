@@ -1,9 +1,9 @@
     {% load i18n %}
+    {% load tags %}
     <div class="info-side-bar">
         <ul>
-            <li><a href="/profile/edit/basic">{% trans "Basic Information" %}</a></li>
-            <li><a href="/profile/edit/avatar">{% trans "Profile Picture" %}</a></li>
-            <li><a href="/profile/edit/gear">{% trans "Gear" %}</a></li>
-            <li class="last"><a href="/profile/edit/flickr">{% trans "Import from Flickr" %}</a></li>
+            <li class="{% current request '^/profile/edit/basic/$' %}"><a href="/profile/edit/basic/">{% trans "Basic Information" %}</a></li>
+            <li class="{% current request '^/profile/edit/gear/$' %}"><a href="/profile/edit/gear/">{% trans "Gear" %}</a></li>
+            <li class="last {% current request '^/profile/edit/flickr/$' %}"><a href="/profile/edit/flickr/">{% trans "Import from Flickr" %}</a></li>
     </div>
 

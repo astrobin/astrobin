@@ -1,9 +1,10 @@
     {% load i18n %}
+    {% load tags %}
     <div class="info-side-bar">
         <ul>
-            <li><a href="/edit/basic/{{image.id}}">{% trans "Basic Information" %}</a></li>
-            <li><a href="/edit/gear/{{image.id}}">{% trans "Gear used" %}</a></li>
-            <li><a href="/edit/acquisition/{{image.id}}">{% trans "Acquisition details" %}</a></li>
+            <li class="{% current request '^/edit/basic/' %}"><a href="/edit/basic/{{image.id}}">{% trans "Basic Information" %}</a></li>
+            <li class="{% current request '^/edit/gear/' %}"><a href="/edit/gear/{{image.id}}">{% trans "Gear used" %}</a></li>
+            <li class="{% current request '^/edit/acquisition/' %}"><a href="/edit/acquisition/{{image.id}}">{% trans "Acquisition details" %}</a></li>
             <li class="last"><img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}"/></li>
         </ul>
     </div>
