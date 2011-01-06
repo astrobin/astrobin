@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.http import HttpResponseForbidden
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.views.generic.list_detail import object_list
@@ -143,6 +144,9 @@ def image_upload_process(request):
 @require_GET
 def image_edit_basic(request, id):
     image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden();
+
     form = ImageEditBasicForm({'title': image.title,
                                'description': image.description})
 
@@ -164,6 +168,9 @@ def image_edit_basic(request, id):
 def image_edit_gear(request, id):
     profile = UserProfile.objects.get(user=request.user)
     image = Image.objects.get(pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden();
+
     form = ImageEditGearForm()
     response_dict = {
         "form": form,
@@ -197,6 +204,9 @@ def image_edit_gear(request, id):
 @require_GET
 def image_edit_acquisition(request, id):
     image = Image.objects.get(pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden();
+
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
     image_type = None
@@ -230,6 +240,8 @@ def image_edit_save_basic(request):
     form = ImageEditBasicForm(request.POST)
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
+    if request.user != image.user:
+        return HttpResponseForbidden();
 
     response_dict = {'form': form,
                      'image': image,
@@ -276,6 +288,8 @@ def image_edit_save_gear(request):
     profile = UserProfile.objects.get(user = request.user)
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
+    if request.user != image.user:
+        return HttpResponseForbidden();
 
     image.imaging_telescopes.clear()
     image.guiding_telescopes.clear()
@@ -332,6 +346,9 @@ def image_edit_save_gear(request):
 def image_edit_save_acquisition(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
+    if request.user != image.user:
+        return HttpResponseForbidden();
+
     image_type = request.POST.get('image_type')
 
     deep_sky_acquisitions = {}
