@@ -1133,6 +1133,7 @@ p.thumbs {
     padding: 8px 10px;
     border: 1px solid #897876;
     overflow: auto;
+    background-color: #291C15;
 }
 
 #technical-card h3 {
@@ -1147,10 +1148,16 @@ p.thumbs {
 
 #technical-card .gear {
     border-right: 1px solid #4D332A;
+    margin-right: 20px;
 }
 
 #technical-card p {
     margin: 0 15px;
+}
+
+#technical-card strong {
+    color: #DEC4C2;
+    font-weight: normal;
 }
 
 #image-detail p#description {

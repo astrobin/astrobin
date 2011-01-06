@@ -75,6 +75,41 @@ def image_detail(request, id):
                  ('Accessories'       , image.accessories.all()),
                 ]
 
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+    solar_system_acquisition = None
+    image_type = None
+    deep_sky_data = [['Dates', None],
+                     ['Light frames', None],
+                     ['R frames', None],
+                     ['G frames', None],
+                     ['B frames', None],
+                     ['Dark frames', None],
+                     ['Offset/bias frames', None],
+                     ['Flat frames', None],
+                     ['Flat dark frames', None]
+                    ]
+
+    try:
+        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
+    except:
+        pass
+
+    if deep_sky_acquisitions:
+        image_type = 'deep_sky'
+
+        deep_sky_data[0][1] = [a.date for a in deep_sky_acquisitions if a.date is not None]
+        deep_sky_data[1][1] = ['%dx%d @ ISO%d' % (a.number, a.duration, a.iso) for a in deep_sky_acquisitions if a.acquisition_type == 'l']
+        deep_sky_data[2][1] = ['%dx%d @ ISO%d' % (a.number, a.duration, a.iso) for a in deep_sky_acquisitions if a.acquisition_type == 'r']
+        deep_sky_data[3][1] = ['%dx%d @ ISO%d' % (a.number, a.duration, a.iso) for a in deep_sky_acquisitions if a.acquisition_type == 'g']
+        deep_sky_data[4][1] = ['%dx%d @ ISO%d' % (a.number, a.duration, a.iso) for a in deep_sky_acquisitions if a.acquisition_type == 'b']
+        deep_sky_data[5][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == 'd']
+        deep_sky_data[6][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == 'o']
+        deep_sky_data[7][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == 'f']
+        deep_sky_data[8][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == 'x']
+    elif solar_system_acquisition:
+        image_type = 'solar_system'
+
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -92,6 +127,8 @@ def image_detail(request, id):
                          'current_rating': rating,
                          'user_images': user_images,
                          'gear_list': gear_list,
+                         'image_type': image_type,
+                         'deep_sky_data': deep_sky_data,
                          'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False})
 
 

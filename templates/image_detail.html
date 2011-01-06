@@ -71,17 +71,28 @@
                 <div class="gear">
                     {% for i in gear_list %}
                         <p>
-                            <strong>{% trans i.0 %}</strong>
+                            <strong>{% trans i.0 %}:&nbsp;</strong>
                             {% for g in i.1 %}
                                 <a href="/search/?gear={{g.name}}">{{g.name}}</a>
                                 {% if not forloop.last %},&nbsp;{% endif %}
-                            {% empty %}
-                                -
                             {% endfor %}
                         </p>
                     {% endfor %}
                 </div>
                 <div class="acquisition">
+                    {% if image_type == 'deep_sky' %}
+                        {% for d in deep_sky_data %}
+                            {% if d.1 %}
+                                <p>
+                                <strong>{% trans d.0 %}:&nbsp;</strong>
+                                {% for i in d.1 %}
+                                    {{i}}
+                                    {% if not forloop.last %},&nbsp;{% endif %}
+                                {% endfor %}
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
 
