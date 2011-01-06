@@ -62,7 +62,7 @@ def image_detail(request, id):
     score = image.rating.score
     rating = float(score)/votes if votes > 0 else 0
 
-    user_images = Image.objects.filter(user=request.user).exclude(pk=id)[:10]
+    user_images = Image.objects.filter(user=image.user).exclude(pk=id)[:10]
 
     return object_detail(
         request,
