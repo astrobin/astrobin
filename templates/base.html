@@ -61,7 +61,7 @@
                 {% if user.is_authenticated %}
                 <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
                 <li id="{% current request "^/upload/" %}"><a id="upload-link" href="/upload/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a></li>
-                <li id="{% current request "^/profile/" %}"><a href="/profile/edit/">{% trans "Profile" %}</a></li>
+                <li id="{% current request "^/profile/" %}"><a href="/profile/edit/basic/">{% trans "Profile" %}</a></li>
                 {% else %}
                 <li id="{% current request "^/accounts/login/" %}"><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
                 <li id="{% current request "^/accounts/register/" %}"><a href="{% url registration_register %}">{% trans "Register" %}</a></li>

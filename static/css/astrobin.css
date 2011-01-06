@@ -961,14 +961,23 @@ p.thumbs {
 
 .info-side-bar ul {
     float:right;
-    margin: 0 8px 0 0;
+    margin: 0;
     padding: 0;
 }
 
 .info-side-bar ul li {
     list-style: none;
-    margin: 6px 0;
+    margin: 0;
+    padding: 3px 10px;
     border-bottom: 1px solid #251014;
+}
+
+.info-side-bar ul li.current {
+    background-color: #C67114;
+}
+
+.info-side-bar ul li.current a {
+    color: #130D0A;
 }
 
 .info-side-bar ul li.last {
