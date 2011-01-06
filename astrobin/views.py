@@ -64,6 +64,17 @@ def image_detail(request, id):
 
     user_images = Image.objects.filter(user=image.user).exclude(pk=id)[:10]
 
+    gear_list = [('Imaging telescopes', image.imaging_telescopes.all()),
+                 ('Imaging cameras'   , image.imaging_cameras.all()),
+                 ('Mounts'            , image.mounts.all()),
+                 ('Guiding telescopes', image.guiding_telescopes.all()),
+                 ('Guiding cameras'   , image.guiding_cameras.all()),
+                 ('Focal reducers'    , image.focal_reducers.all()),
+                 ('Software'          , image.software.all()),
+                 ('Filters'           , image.filters.all()),
+                 ('Accessories'       , image.accessories.all()),
+                ]
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -80,6 +91,7 @@ def image_detail(request, id):
                          'already_voted': already_voted,
                          'current_rating': rating,
                          'user_images': user_images,
+                         'gear_list': gear_list,
                          'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False})
 
 

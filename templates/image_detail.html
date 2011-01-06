@@ -68,7 +68,24 @@
             </ul>
             <div id="technical-card">
                 <h3>{% trans "Technical card" %}</h3>
+                <div class="gear">
+                    {% for i in gear_list %}
+                        <p>
+                            <strong>{% trans i.0 %}</strong>
+                            {% for g in i.1 %}
+                                <a href="/search/?gear={{g.name}}">{{g.name}}</a>
+                                {% if not forloop.last %},&nbsp;{% endif %}
+                            {% empty %}
+                                -
+                            {% endfor %}
+                        </p>
+                    {% endfor %}
+                </div>
+                <div class="acquisition">
+                </div>
             </div>
+
+            <h3>{% trans "Description" %}</h3>
             <p id="description">{{image.description}}</p>
         </div>
         <div id="side-pane">
