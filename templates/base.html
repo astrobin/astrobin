@@ -1,191 +1,197 @@
 {% load i18n %}
+{% load compress %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>{% block title %}AstroBin{% endblock %}</title>
 
-<head>
+        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+        <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
+        <meta name="description" content="Community for astrophotographers" />
+        <meta name="keywords" content="astrophotography, astronomy, telescopes" />
+        <meta name="robots" content="index, follow, noarchive" />
+        <meta name="googlebot" content="noarchive" />
 
-<title>AstroBin</title>
+        <!-- site's css -->
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css" />
+        {% compress css %}
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css" />
+        {% endcompress %}
+        <!--[if IE 6]><link rel="stylesheet" type="text/css" href="/static/css/ie6.css" media="screen" /><![endif]-->
 
-<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="author" content="Salvatore Iovene - iovene.com" />
-<meta name="description" content="Community for astrophotographers" />
-<meta name="keywords" content="astrophotography, astronomy, telescopes" />
-<meta name="robots" content="index, follow, noarchive" />
-<meta name="googlebot" content="noarchive" />
+        <!-- 3rd party css -->
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/css/ui-lightness/jquery-ui-1.8.7.custom.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/fileuploader.css" />
 
-<link rel="stylesheet" type="text/css" media="screen" href="/static/css/autoSuggest.css" />
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<link href="/static/css/ui-lightness/jquery-ui-1.8.7.custom.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" type="text/css" media="screen" href="/static/css/fileuploader.css" />
+        <!-- javascript -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script src="/static/js/jquery-ui-1.8.7.custom.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
+        <script type="text/javascript" src="/static/js/fileuploader.js"></script>
 
-<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
-<!--[if IE 6]><link rel="stylesheet" type="text/css" href="/static/css/ie6.css" media="screen" /><![endif]-->
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-<script src="/static/js/jquery-ui-1.8.7.custom.min.js"></script>
-<script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
-<script type="text/javascript" src="/static/js/fileuploader.js"></script>
-{% block extra_head %}
-{% endblock %}
-
-</head>
-
-
-<body>
-<!-- wrap -->
-<div id="wrap">
-
-    <!-- header -->
-    <div id="header">
-        <a name="top"></a>
-        {% block header %}
-        <h1 id="logo-text"><a href="/" title="">AstroBin</a></h1>
-        <h2 id="slogan">
-            {% trans "The definite home for your" %}<br/>
-            {% trans "astrophotography images." %}
-        </h2>
-
-        {% load tags %}
-        <div  id="nav">
-            <ul>
-                <li id="{% current request "^/$" %}"><a href="/">{% trans "Home" %}</a></li>
-                <li><a href="#">{% trans "ABPOD" %}</a></li>
-                <li><a href="#">{% trans "Top images" %}</a></li>
-                <li><a href="#">{% trans "Support" %}</a></li>
-                <li><a href="#">{% trans "About" %}</a></li>
-            </ul>
-        </div>
-        <div id="user-nav">
-            <ul>
-                {% if user.is_authenticated %}
-                <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-                <li id="{% current request "^/upload/" %}"><a id="upload-link" href="/upload/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a></li>
-                <li id="{% current request "^/profile/" %}"><a href="/profile/edit/basic/">{% trans "Profile" %}</a></li>
-                {% else %}
-                <li id="{% current request "^/accounts/login/" %}"><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
-                <li id="{% current request "^/accounts/register/" %}"><a href="{% url registration_register %}">{% trans "Register" %}</a></li>
-                {% endif %}
-            </ul>
-        </div>
-        <div id="search">
-        <form id="quick-search" action="index.html" method="get" >
-            <p>
-            <label for="qsearch">Search:</label>
-            <input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
-            <input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="/static/images/search.png" />
-            </p>
-        </form>
-        </div>
+        {% block extra_head %}
         {% endblock %}
-    <!-- /header -->
-    </div>
+    </head>
 
-    {% block abpod %}{% endblock %}
+    <body>
+        <!-- wrap -->
+        <div id="wrap">
 
-    <!-- content -->
-    <div id="content-wrap" class="clear">
-        <div id="content">
-            {% block content %}{% endblock %}
-        </div>
-    </div>
+            <!-- header -->
+            <div id="header">
+                <a name="top"></a>
+                {% block header %}
+                <div id="title">
+                    <h1><a href="/">AstroBin</a></h1>
+                    <h4>
+                        {% trans "The definite home for your" %}<br/>
+                        {% trans "astrophotography images." %}
+                    </h4>
+                </div>
 
-<!-- footer -->
-<div id="footer">
-    {% block footer %}
-    <!-- footer-outer -->
-    <div id="footer-outer" class="clear"><div id="footer-wrap">
-
-        <div class="col-a">
-            <h3>{% trans "Site links" %}</h2>
-            <p>
-                <ul>
-                    <li><a href="/">{% trans "Home" %}</a></li>
-                    <li><a href="#">{% trans "ABPOD" %}</a></li>
-                    <li><a href="#">{% trans "Top images" %}</a></li>
-                    <li><a href="#">{% trans "Support" %}</a></li>
-                    <li><a href="#">{% trans "About" %}</a></li>
-                </ul>
-            </p>
-        </div>
-        <div class="col-b">
-            <h3>{% trans "About" %}</h3>
-            <p>
-            {% trans "AstroBin is a image hosting website specifically targetted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
-            </p>
-        </div>
-
-        <div class="fix"></div>
-
-        <!-- footer-bottom -->
-        <div id="footer-bottom">
-
-            <div class="bottom-left">
-                <p>
-                &copy; 2010 Salvatore Iovene
-                </p>
+                {% load tags %}
+                <div  id="nav">
+                    <ul>
+                        <li id="{% current request "^/$" %}"><a href="/">{% trans "Home" %}</a></li>
+                        <li><a href="#">{% trans "ABPOD" %}</a></li>
+                        <li><a href="#">{% trans "Top images" %}</a></li>
+                        <li><a href="#">{% trans "Support" %}</a></li>
+                        <li><a href="#">{% trans "About" %}</a></li>
+                    </ul>
+                </div>
+                <div id="user-nav">
+                    <ul>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
+                        <li id="{% current request "^/upload/" %}"><a id="upload-link" href="/upload/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a></li>
+                        <li id="{% current request "^/profile/" %}"><a href="/profile/edit/basic/">{% trans "Profile" %}</a></li>
+                        {% else %}
+                        <li id="{% current request "^/accounts/login/" %}"><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
+                        <li id="{% current request "^/accounts/register/" %}"><a href="{% url registration_register %}">{% trans "Register" %}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div id="search">
+                <form id="quick-search" action="index.html" method="get" >
+                    <p>
+                    <label for="qsearch">Search:</label>
+                    <input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
+                    <input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="/static/images/search.png" />
+                    </p>
+                </form>
+                </div>
+                {% endblock %}
+            <!-- /header -->
             </div>
 
-            <div class="bottom-right">
-                <p>
-                    <a href="/">{% trans "Home" %}</a> |
-                    <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
-                </p>
+            {% block abpod %}{% endblock %}
+
+            <!-- content -->
+            <div id="content-wrap" class="clear">
+                <div id="content">
+                    {% block content %}{% endblock %}
+                </div>
             </div>
 
-        <!-- /footer-bottom -->
+        <!-- footer -->
+        <div id="footer">
+            {% block footer %}
+            <!-- footer-outer -->
+            <div id="footer-outer" class="clear"><div id="footer-wrap">
+
+                <div class="col-a">
+                    <h3>{% trans "Site links" %}</h2>
+                    <p>
+                        <ul>
+                            <li><a href="/">{% trans "Home" %}</a></li>
+                            <li><a href="#">{% trans "ABPOD" %}</a></li>
+                            <li><a href="#">{% trans "Top images" %}</a></li>
+                            <li><a href="#">{% trans "Support" %}</a></li>
+                            <li><a href="#">{% trans "About" %}</a></li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="col-b">
+                    <h3>{% trans "About" %}</h3>
+                    <p>
+                    {% trans "AstroBin is a image hosting website specifically targetted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
+                    </p>
+                </div>
+
+                <div class="fix"></div>
+
+                <!-- footer-bottom -->
+                <div id="footer-bottom">
+
+                    <div class="bottom-left">
+                        <p>
+                        &copy; 2010 Salvatore Iovene
+                        </p>
+                    </div>
+
+                    <div class="bottom-right">
+                        <p>
+                            <a href="/">{% trans "Home" %}</a> |
+                            <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
+                        </p>
+                    </div>
+
+                <!-- /footer-bottom -->
+                </div>
+
+            <!-- /footer-outer -->
+            </div></div>
+            {% endblock %}
+        <!-- /footer -->
         </div>
 
-    <!-- /footer-outer -->
-    </div></div>
-    {% endblock %}
-<!-- /footer -->
-</div>
+        <!-- wrap -->
+        </div>
 
-<!-- wrap -->
-</div>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#upload-link').each(function() {
-            var $link = $(this);
-            var $url = $link.attr('href');
-            var $title = $link.attr('title');
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#upload-link').each(function() {
+                    var $link = $(this);
+                    var $url = $link.attr('href');
+                    var $title = $link.attr('title');
 
-            var $dialog = $('<div></div>')
-                .load($url + ' #file-uploader-wrap')
-                .dialog({
-                    autoOpen: false,
-                    title: $title,
-                    width: 500,
-                    height: 300,
-                    closeText: '{% trans "Close" %}',
-                    draggable: false,
-                    modal: true,
-                    resizable: false,
+                    var $dialog = $('<div></div>')
+                        .load($url + ' #file-uploader-wrap')
+                        .dialog({
+                            autoOpen: false,
+                            title: $title,
+                            width: 500,
+                            height: 300,
+                            closeText: '{% trans "Close" %}',
+                            draggable: false,
+                            modal: true,
+                            resizable: false,
+                    });
+
+                    $link.click(function() {
+                        $dialog.dialog('open');
+                        createUploader();
+                        return false;
+                    });
+                });
             });
+        </script>
 
-            $link.click(function() {
-                $dialog.dialog('open');
-                createUploader();
-                return false;
-            });
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    function createUploader(){
-        var uploader = new qq.FileUploader({
-            element: document.getElementById('file-uploader'),
-            action: '/upload/process',
-            debug: false,
-            onComplete: function(id, filename, responseJSON) {
-                window.location = '/edit/basic/' + responseJSON['id'];
+        <script type="text/javascript">
+            function createUploader(){
+                var uploader = new qq.FileUploader({
+                    element: document.getElementById('file-uploader'),
+                    action: '/upload/process',
+                    debug: false,
+                    onComplete: function(id, filename, responseJSON) {
+                        window.location = '/edit/basic/' + responseJSON['id'];
+                    }
+                });
             }
-        });
-    }
-</script>
-</body>
+        </script>
 
+    </body>
 </html>
