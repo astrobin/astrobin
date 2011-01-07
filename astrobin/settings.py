@@ -37,7 +37,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/var/www/astrobin/static'
+MEDIA_ROOT = '/var/www/astrobin_env/www/astrobin/static'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -72,7 +72,6 @@ ABPOD_SIZE = 350
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -116,3 +115,12 @@ AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 FLICKR_API_KEY = '1f44b18e230b8c9816a39d9b34c3318d'
 FLICKR_SECRET  = 'd5fdb83e9aa995fc'
 
+COMPRESS = False
+COMPRESS_URL = '/static/'
+COMPILER_FORMATS = {
+    '.less': {
+        'binary_path':'lessc',
+        'arguments': '*.less'
+    },
+}
+CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
