@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'registration',
     'djangoratings',
+    'compressor',
 )
 
 LOGIN_REDIRECT_URL = '/'
