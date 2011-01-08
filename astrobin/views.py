@@ -644,6 +644,10 @@ def user_profile_flickr_import(request):
             request.session['current-progress'] = [0, 'Importing images...']
             for index, photo_id in enumerate(selected_photos):
                 sizes = flickr.photos_getSizes(photo_id = photo_id)
+                info = flickr.photos_getInfo(photo_id = photo_id).find('photo')
+
+                title = info.find('title').text
+                description = info.find('description').text
 
                 # Attempt to find the largest image
                 found_size = None
@@ -657,7 +661,8 @@ def user_profile_flickr_import(request):
                     file = urllib.urlopen(source)
                     s3_filename = str(uuid4())
                     store_image_in_s3(file, s3_filename, 'image/jpeg')
-                    image = Image(filename = s3_filename, user = request.user)
+                    image = Image(filename = s3_filename, user = request.user,
+                                  title = title, description = description)
                     image.save()
                     if index > 0:
                         request.session['current-progress'] = [100 / index / len(selected_photos), photo_id]
