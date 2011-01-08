@@ -23,19 +23,19 @@
 @button-gradient-inverted-top-color: @text-color * @hilight-factor;
 @button-gradient-inverted-bottom-color: @text-color;
 
-@base-font-size: 12.5px;
+@base-font-size: 1em;
 
 @font-face {
-    font-family: 'Museo Sans';
-    src: url('/static/fonts/MuseoSans_500.otf');}
+    font-family: 'astrobin_sans';
+    src: url('/static/fonts/Vegur-R_0600.otf');}
+
+@font-face {
+    font-family: 'astrobin_sans_strong';
+    src: url('/static/fonts/Vegur-B_0600.otf');}
 
 @font-face {
     font-family: 'Sling';
     src: url('/static/fonts/Sling.ttf');}
-
-.strong {
-    font-weight: bold;
-    color: @strong-text-color;}
 
 .button-gradient {
     border: 1px solid @button-gradient-bottom-color;
@@ -112,6 +112,11 @@
 .text-shadow {
     text-shadow: rgba(0,0,0,0.8) 0 1px 6px;}
 
+.strong {
+    font-family: astrobin_sans_strong;
+    color: @strong-text-color;
+    .text-shadow;}
+
 .hidden {
     display: none;}
 
@@ -135,7 +140,7 @@
    HTML ELEMENTS
 ------------------------------------------------- */
 body {
-    font-family: 'Museo Sans', Helvetica, Verdana, Sans-serif;
+    font-family: astrobin_sans, Helvetica, Verdana, Sans-serif;
     font-size: @base-font-size;
     line-height: 1.25em;
     color: @text-color;
@@ -401,7 +406,6 @@ form {
 #abpod h2 {
     margin-bottom: 0;
     padding-bottom: 0;
-    font: bold 2.7em 'Museo Sans', Helvetica, Verdana, Sans-serif;
     letter-spacing: -2.0px;
     color: #f0e8e8;
 }
@@ -589,15 +593,15 @@ form {
             vertical-align: bottom;}}
     ul.title {
         list-style: none;
-        margin: 10px 0 5px 0;
+        margin: 15px 0;
         padding: 0;
         li {
             display: inline;}
-        li.title {
+        h2 {
             font-size: 2em;
-            font-weight: bold;
-            color: @header-color;
-            margin-right: 15px;}
+            margin: 0;
+            border: 0;
+            display: inline;}
         li.contains {
             float: right;}}
     #main-image {
