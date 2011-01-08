@@ -709,7 +709,10 @@ form textarea:focus {
   border-top: 1px solid #bbbbaf;
   border-bottom: 1px solid #fcfcf0;
 }
-#image-detail ul.topnav a { color: #fcfcf0; }
+#image-detail ul.topnav a {
+  color: #fcfcf0;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+}
 #image-detail ul.topnav a:hover { color: #ffffff; }
 #image-detail ul.topnav > li.subhover { cursor: pointer; }
 #image-detail li#navigation {
