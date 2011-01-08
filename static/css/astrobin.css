@@ -49,6 +49,29 @@
   background: -moz-linear-gradient(top, #fffff7, #b8b8ac);
   color: #221812;
 }
+.danger-gradient {
+  border: 1px solid #c70000;
+  border-top: 1px solid #ee0000;
+  background: #c70000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ee0000), to(#c70000));
+  background: -moz-linear-gradient(top, #ee0000, #c70000);
+  color: #fcfcf0;
+}
+.danger-gradient-hilighted {
+  border-top-color: #ff0000;
+  background: #ee0000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), to(#c70000));
+  background: -moz-linear-gradient(top, #ff0000, #c70000);
+  color: #ffffff;
+}
+.danger-gradient-active {
+  border-color: #c70000;
+  border-bottom-color: #ee0000;
+  background: #a50000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#c70000), to(#a50000));
+  background: -moz-linear-gradient(top, #c70000, #a50000);
+  color: #ffffff;
+}
 .box-shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
@@ -72,7 +95,7 @@
 }
 body {
   font-family: 'Museo Sans', Helvetica, Verdana, Sans-serif;
-  font-size: 14px;
+  font-size: 12.5px;
   line-height: 1.25em;
   color: #b8b8ac;
   background: #1d140f;
@@ -261,16 +284,27 @@ form textarea:focus {
   color: #fcfcf0;
 }
 .dangerous-button {
-  border-top: 1px solid #ff4a4a;
-  background: red;
+  border: 1px solid #c70000;
+  border-top: 1px solid #ee0000;
+  background: #c70000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ee0000), to(#c70000));
+  background: -moz-linear-gradient(top, #ee0000, #c70000);
+  color: #fcfcf0;
 }
 .dangerous-button:hover {
-  border-top: 1px solid #ff4a4a;
-  background: red;
+  border-top-color: #ff0000;
+  background: #ee0000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), to(#c70000));
+  background: -moz-linear-gradient(top, #ff0000, #c70000);
+  color: #ffffff;
 }
 .dangerous-button:active {
-  border-top: 1px solid #ff4a4a;
-  background: red;
+  border-color: #c70000;
+  border-bottom-color: #ee0000;
+  background: #a50000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#c70000), to(#a50000));
+  background: -moz-linear-gradient(top, #c70000, #a50000);
+  color: #ffffff;
 }
 #wrap {
   width: 940px;
@@ -764,7 +798,7 @@ ul.as-selections li.as-original input {
 }
 input.as-input {
   background-color: #1d140f;
-  font-size: 14px;
+  font-size: 12.5px;
 }
 ul.as-list {
   position: absolute;
