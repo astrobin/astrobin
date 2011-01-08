@@ -44,16 +44,20 @@
                 <li id="navigation">
                     <ul class="topnav">
                         <li class="first"><a href="#">&#8701;&nbsp;{% trans "Newer" %}</a></li>
-                        <li><a href="#"><img src="/static/images/zoom_in.png"/></a></li>
+                        <li><a href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}"><img src="/static/images/zoom_in.png"/></a></li>
                         <li class="last"><a href="#">{% trans "Older" %}&nbsp;&#8702;</a></li>
                     </ul>
                 </li>
             </ul>
             <div id="main-image">
             {% if inverted %}
-            <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title}}"/>
+            <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}">
+                <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title}}"/>
+            </a>
             {% else %}
-            <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title}}"/>
+            <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}">
+                <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title}}"/>
+            </a>
             {% endif %}
             </div>
             <ul class="title">

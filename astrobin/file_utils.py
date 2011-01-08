@@ -118,8 +118,8 @@ def store_image_in_s3(file, uid, mimetype=''):
     # create histogram and store it
     histogram = generate_histogram(image)
     histogramFile = StringIO.StringIO()
-    histogram.save(histogramFile, 'PNG')
-    save_to_bucket(histogramFile.getvalue(), 'PNG', settings.S3_HISTOGRAMS_BUCKET, uid)
+    histogram.save(histogramFile, 'JPEG')
+    save_to_bucket(histogramFile.getvalue(), 'image/jpeg', settings.S3_HISTOGRAMS_BUCKET, uid)
 
     # Then resize to the display image
     (w, h) = image.size
