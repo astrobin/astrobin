@@ -8,6 +8,7 @@
 @input-color: @background-color;
 @hilight-factor: 1.2;
 @strong-hilight-factor: 1.5;
+@danger-color: #C70000;
 @border-color: @background-color * @hilight-factor;
 @border-color-inverted: @strong-text-color;
 @border-shadow-color: @background-color / @strong-hilight-factor;
@@ -21,7 +22,7 @@
 @button-gradient-inverted-top-color: @text-color * @hilight-factor;
 @button-gradient-inverted-bottom-color: @text-color;
 
-@base-font-size: 14px;
+@base-font-size: 12.5px;
 
 @font-face {
     font-family: 'Museo Sans';
@@ -58,7 +59,6 @@
     background: -moz-linear-gradient(top, @button-gradient-bottom-color, @button-gradient-bottom-color);
     color: @strong-text-color;}
 
-
 .button-gradient-inverted {
     border: 1px solid @button-gradient-inverted-bottom-color;
     border-top: 1px solid (@button-gradient-inverted-top-color * @hilight-factor);
@@ -74,6 +74,29 @@
     background: -webkit-gradient(linear, left top, left bottom, from(@button-gradient-inverted-top-color * @hilight-factor), to(@button-gradient-inverted-bottom-color));
     background: -moz-linear-gradient(top, @button-gradient-inverted-top-color * @hilight-factor, @button-gradient-inverted-bottom-color);
     color: @background-color * @hilight-factor;}
+
+.danger-gradient {
+    border: 1px solid @danger-color;
+    border-top: 1px solid (@danger-color * @hilight-factor);
+    background: @danger-color;
+    background: -webkit-gradient(linear, left top, left bottom, from(@danger-color * @hilight-factor), to(@danger-color));
+    background: -moz-linear-gradient(top, @danger-color * @hilight-factor, @danger-color);
+    color: @strong-text-color;}
+
+.danger-gradient-hilighted {
+    border-top-color: @danger-color * @strong-hilight-factor;
+    background: @danger-color * @hilight-factor;
+    background: -webkit-gradient(linear, left top, left bottom, from(@danger-color * @strong-hilight-factor), to(@danger-color));
+    background: -moz-linear-gradient(top, @danger-color * @strong-hilight-factor, @danger-color);
+    color: @strong-text-color * @hilight-factor;}
+
+.danger-gradient-active {
+    border-color: @danger-color;
+    border-bottom-color: @danger-color * @hilight-factor;
+    background: @danger-color / @hilight-factor;
+    background: -webkit-gradient(linear, left top, left bottom, from(@danger-color), to(@danger-color / @hilight-factor));
+    background: -moz-linear-gradient(top, @danger-color, @danger-color / @hilight-factor);
+    color: @strong-text-color * @hilight-factor;}
 
 .rounded-corners (@radius: 6px) {
     -moz-border-radius: @radius;
@@ -197,12 +220,10 @@ form {
         padding: 0;
         li {
             display: inline;
-            margin-right: 15px;}
-        }
+            margin-right: 15px;}}
     label {
         .strong;
-        width: 150px;
-    }
+        width: 150px;}
     input, select, textarea {
         margin: 2px 0;
         padding: 8px 4px;
@@ -217,8 +238,7 @@ form {
     input:focus, select:focus, textarea:focus {
         border-color: @border-color * @hilight-factor;
         background-color: @input-color * @hilight-factor;
-        color: @strong-text-color;}
-    }
+        color: @strong-text-color;}}
 
 .button {
     .button-gradient;
@@ -235,10 +255,12 @@ form {
     :active {
         .button-gradient-active;}}
 
-.dangerous-button, .dangerous-button:hover, .dangerous-button:active {
-    border-top: 1px solid #ff4a4a;
-    background: red;
-}
+.dangerous-button {
+    .danger-gradient;
+    :hover {
+        .danger-gradient-hilighted;}
+    :active {
+        .danger-gradient-active;}}
 
 /* ------------------------------------------
    LAYOUT
@@ -265,13 +287,10 @@ form {
             a {
                 font-size: 1.5em;
                 text-decoration: none;
-                color: @logo-color;}
-        }
+                color: @logo-color;}}
         h4 {
             margin-top: 6px;
-            color: @logo-color;}
-    }
-
+            color: @logo-color;}}
     /*  navigation  */
     #nav {
         position: absolute;
@@ -295,14 +314,10 @@ form {
                     text-transform: lowercase;}
                 a:hover, a:active {
                     border: none;
-                    color: @link-color * @hilight-factor;}
-            }
+                    color: @link-color * @hilight-factor;}}
             li#current {
                 a {
-                    color: @strong-text-color;}
-            }
-        }
-    }
+                    color: @strong-text-color;}}}}
     #user-nav {
         float: right;
         position: absolute;
@@ -326,15 +341,10 @@ form {
                     text-transform: lowercase;}
                 a:hover, a:active {
                         border: none;
-                        color: @link-color * @hilight-factor;}
-            }
+                        color: @link-color * @hilight-factor;}}
             li#current {
                 a {
-                    color: @strong-text-color;}
-            }
-        }
-    }
-
+                    color: @strong-text-color;}}}}
     form#quick-search {
         position: absolute;
         top: 19px; right: 280px;
@@ -360,9 +370,7 @@ form {
         .btn{
             width: 25px; height: 25px;}
         label {
-        display: none;}
-    }
-}
+            display: none;}}}
 
 /* abpod block */
 #abpod {
