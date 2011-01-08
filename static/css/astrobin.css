@@ -735,7 +735,10 @@ form textarea:focus {
 }
 #image-detail ul.title li.contains { float: right; }
 #image-detail #main-image { text-align: center; }
-#image-detail #main-image img { border: 1px solid #130d0a; }
+#image-detail #main-image img {
+  cursor: -moz-zoom-in;
+  border: 1px solid #130d0a;
+}
 #image-detail #technical-card {
   margin: 0 auto;
   padding: 8px 10px;
