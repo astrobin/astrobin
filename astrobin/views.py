@@ -122,6 +122,7 @@ def image_detail(request, id):
                          's3_small_thumbnails_bucket': settings.S3_SMALL_THUMBNAILS_BUCKET,
                          's3_inverted_bucket': settings.S3_INVERTED_BUCKET,
                          's3_resized_inverted_bucket': settings.S3_RESIZED_INVERTED_BUCKET,
+                         's3_histograms_bucket': settings.S3_HISTOGRAMS_BUCKET,
                          's3_url': settings.S3_URL,
                          'already_voted': already_voted,
                          'current_rating': rating,

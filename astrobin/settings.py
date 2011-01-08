@@ -61,6 +61,7 @@ S3_INVERTED_BUCKET = 'astrobin_inverted'
 S3_RESIZED_INVERTED_BUCKET = 'astrobin_resized_inverted'
 S3_ABPOD_BUCKET = 'astrobin_abpod'
 S3_AVATARS_BUCKET = 'astrobin_avatars'
+S3_HISTOGRAMS_BUCKET = 'astrobin_histograms'
 S3_URL = 's3.amazonaws.com'
 
 RESIZED_IMAGE_SIZE = 720

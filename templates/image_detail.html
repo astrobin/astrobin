@@ -93,6 +93,9 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
+                    <hr/>
+                    <h4>{% trans "Histogram" %}</h4>
+                    <img src="http://{{s3_histograms_bucket}}.{{s3_url}}/{{image.filename}}" alt="{% trans "Histogram" %}"/>
                 </div>
             </div>
 
