@@ -9,7 +9,9 @@
 @hilight-factor: 1.2;
 @strong-hilight-factor: 1.5;
 @border-color: @background-color * @hilight-factor;
+@border-color-inverted: @strong-text-color;
 @border-shadow-color: @background-color / @strong-hilight-factor;
+@border-shadow-color-inverted: @text-color + #030303;
 @dark-panel-color: @background-color / @strong-hilight-factor;
 @light-panel-color: @background-color * @strong-hilight-factor;
 
@@ -34,6 +36,7 @@
     color: @strong-text-color;}
 
 .button-gradient {
+    border: 1px solid @button-gradient-bottom-color;
     border-top: 1px solid (@button-gradient-top-color * @hilight-factor);
     background: @button-gradient-bottom-color;
     background: -webkit-gradient(linear, left top, left bottom, from(@button-gradient-top-color), to(@button-gradient-bottom-color));
@@ -47,7 +50,17 @@
     background: -moz-linear-gradient(top, @button-gradient-top-color * @hilight-factor, @button-gradient-bottom-color);
     color: @strong-text-color * @hilight-factor;}
 
+.button-gradient-active {
+    border-color: @button-gradient-top-color;
+    border-top-color: @button-gradient-bottom-color / @hilight-factor;
+    background: @button-gradient-top-color;
+    background: -webkit-gradient(linear, left top, left bottom, from(@button-gradient-bottom-color), to(@button-gradient-top-color));
+    background: -moz-linear-gradient(top, @button-gradient-bottom-color, @button-gradient-bottom-color);
+    color: @strong-text-color;}
+
+
 .button-gradient-inverted {
+    border: 1px solid @button-gradient-inverted-bottom-color;
     border-top: 1px solid (@button-gradient-inverted-top-color * @hilight-factor);
     background: @button-gradient-inverted-bottom-color;
     background: -webkit-gradient(linear, left top, left bottom, from(@button-gradient-inverted-top-color), to(@button-gradient-inverted-bottom-color));
@@ -55,7 +68,8 @@
     color: @background-color;}
 
 .button-gradient-inverted-hilighted {
-    border-top: 1px solid (@button-gradient-inverted-top-color * @strong-hilight-factor);
+    border-color: @button-gradient-inverted-bottom-color;
+    border-top-color: @button-gradient-inverted-top-color * @strong-hilight-factor;
     background: @button-gradient-inverted-bottom-color * @hilight-factor;
     background: -webkit-gradient(linear, left top, left bottom, from(@button-gradient-inverted-top-color * @hilight-factor), to(@button-gradient-inverted-bottom-color));
     background: -moz-linear-gradient(top, @button-gradient-inverted-top-color * @hilight-factor, @button-gradient-inverted-bottom-color);
@@ -67,12 +81,12 @@
      border-radius: @radius;}
 
 .box-shadow {
-    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    box-shadow: rgba(0,0,0,1) 0 1px 0;}
+    -webkit-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
+    -moz-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
+    box-shadow: rgba(0,0,0,0.8) 0 1px 6px;}
 
 .text-shadow {
-    text-shadow: rgba(0,0,0,0.8) 1px 1px 0;}
+    text-shadow: rgba(0,0,0,0.8) 0 1px 6px;}
 
 .hidden {
     display: none;}
@@ -101,7 +115,8 @@ body {
     font-size: @base-font-size;
     line-height: 1.25em;
     color: @text-color;
-    background: @background-color url(../images/bg.gif) repeat-x;
+    background: @background-color;
+    border-top: 5px solid @logo-color;
     text-align: left;}
 
 /* links */
@@ -118,7 +133,7 @@ h1, h2, h3, h4 {
     .text-shadow;}
 h1 { font-size: 2em; }
 h2 { font-size: 1.5em; margin: 20px; padding-bottom: 8px; border-bottom: 1px solid @border-color;}
-h3 { font-size: 1.4em; margin-bottom: 10px; }
+h3 { font-size: 1.4em; margin: 20px 0 10px 0; }
 h4 { font-size: 1.2em; }
 
 /* Lists */
@@ -215,10 +230,10 @@ form {
     margin: 10px 0;
     padding: 4.5px 9px;
     cursor: pointer;
-}
-
-.button:hover {
-    .button-gradient-hilighted;}
+    :hover {
+        .button-gradient-hilighted;}
+    :active {
+        .button-gradient-active;}}
 
 .dangerous-button, .dangerous-button:hover, .dangerous-button:active {
     border-top: 1px solid #ff4a4a;
@@ -230,8 +245,7 @@ form {
 ------------------------------------------- */
 #wrap {
     width: 940px;
-    margin: 0 auto;
-    margin-top: 5px;}
+    margin: 0 auto;}
 
 #header {
     position: relative;
@@ -245,6 +259,7 @@ form {
         top: 90px;
         left: 10px;
         text-align: center;
+        overflow: visible;
         h1 {
             font-size: 2.5em;
             a {
@@ -290,6 +305,8 @@ form {
     }
     #user-nav {
         float: right;
+        position: absolute;
+        right: 0;
         margin: 0; padding: 0;
         overflow: hidden;
         height: 55px;
@@ -512,6 +529,8 @@ form {
         .button-gradient;
         .rounded-corners;
         display: inline-block;
+        :hover {
+            .button-gradient-hilighted;}
         >li {
             display: inline-block;
             padding: 2px 10px;
@@ -526,12 +545,9 @@ form {
                 visibility: hidden;
                 float: left;
                 width: 170px;
-                background: @background-color;
-                background: -moz-linear-gradient(top, @light-panel-color, @background-color);
-                background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@light-panel-color), to(@background-color));
                 .rounded-corners;
-                border: 1px solid @border-color;
                 .box-shadow;
+                .button-gradient-inverted;
                 li {
                      clear: both;
                      width: 170px;
@@ -542,15 +558,15 @@ form {
                          float: left;
                          width: 145px;
                          padding: 4px 15px;
-                         color: @text-color;
+                         color: @background-color;
                          :hover {
-                            color: @strong-text-color;}}}
+                            color: @link-color;}}}
                 li.separator {
                     height: 0;
                     width: 150px;
                     margin: 7px 10px;
-                    border-top: 1px solid @border-color;
-                    border-bottom: 1px solid @border-shadow-color;}}}
+                    border-top: 1px solid @border-shadow-color-inverted;
+                    border-bottom: 1px solid @border-color-inverted;}}}
         a {
             color: @strong-text-color;
             :hover {
@@ -580,7 +596,7 @@ form {
         img {
             border: 1px solid @dark-panel-color;}}
     #technical-card {
-        margin: 10px 0;
+        margin: 0 auto;
         padding: 8px 10px;
         border: 1px solid (@light-panel-color * @hilight-factor);
         overflow: auto;
@@ -772,6 +788,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     a.back-to-top {
         padding-right: 20px;}
 }
+
+
+/* JQueryy UI */
+.ui-corner-all {
+    .rounded-corners;}
+
+.ui-widget-content {
+    .button-gradient-inverted;}
+
+.ui-widget-header {
+    .button-gradient;}
 
 img.flickr-photo-to-import {
     border: 1px solid #111;
