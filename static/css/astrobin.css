@@ -1,14 +1,14 @@
 @font-face {
-  font-family: 'Museo Sans';
-  src: url('/static/fonts/MuseoSans_500.otf');
+  font-family: 'astrobin_sans';
+  src: url('/static/fonts/Vegur-R_0600.otf');
+}
+@font-face {
+  font-family: 'astrobin_sans_strong';
+  src: url('/static/fonts/Vegur-B_0600.otf');
 }
 @font-face {
   font-family: 'Sling';
   src: url('/static/fonts/Sling.ttf');
-}
-.strong {
-  font-weight: bold;
-  color: #fcfcf0;
 }
 .button-gradient {
   border: 1px solid #cc4b2e;
@@ -78,6 +78,11 @@
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
 }
 .text-shadow { text-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px; }
+.strong {
+  font-family: astrobin_sans_strong;
+  color: #fcfcf0;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+}
 .hidden { display: none; }
 .fix {
   clear: both;
@@ -94,8 +99,8 @@
   content: " ";
 }
 body {
-  font-family: 'Museo Sans', Helvetica, Verdana, Sans-serif;
-  font-size: 12.5px;
+  font-family: astrobin_sans, Helvetica, Verdana, Sans-serif;
+  font-size: 1em;
   line-height: 1.25em;
   color: #b8b8ac;
   background: #1d140f;
@@ -168,8 +173,9 @@ blockquote {
   font-style: italic;
 }
 strong {
-  font-weight: bold;
+  font-family: astrobin_sans_strong;
   color: #fcfcf0;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
 }
 form {
   margin: 0;
@@ -190,8 +196,9 @@ form ul li {
   margin-right: 15px;
 }
 form label {
-  font-weight: bold;
+  font-family: astrobin_sans_strong;
   color: #fcfcf0;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   width: 150px;
 }
 form input {
@@ -484,7 +491,6 @@ form textarea:focus {
 #abpod h2 {
   margin-bottom: 0;
   padding-bottom: 0;
-  font: bold 2.7em 'Museo Sans', Helvetica, Verdana, Sans-serif;
   letter-spacing: -2px;
   color: #f0e8e8;
 }
@@ -696,15 +702,15 @@ form textarea:focus {
 #image-detail li#navigation img { vertical-align: bottom; }
 #image-detail ul.title {
   list-style: none;
-  margin: 10px 0 5px 0;
+  margin: 15px 0;
   padding: 0;
 }
 #image-detail ul.title li { display: inline; }
-#image-detail ul.title li.title {
+#image-detail ul.title h2 {
   font-size: 2em;
-  font-weight: bold;
-  color: #fcfcf0;
-  margin-right: 15px;
+  margin: 0;
+  border: 0;
+  display: inline;
 }
 #image-detail ul.title li.contains { float: right; }
 #image-detail #main-image { text-align: center; }
@@ -798,7 +804,7 @@ ul.as-selections li.as-original input {
 }
 input.as-input {
   background-color: #1d140f;
-  font-size: 12.5px;
+  font-size: 1em;
 }
 ul.as-list {
   position: absolute;
