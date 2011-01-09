@@ -193,6 +193,7 @@ p, dl { margin: 10px 20px; }
 
 /* images */
 img {
+    vertical-align: middle;
     border: none;}
 img.float-right { margin: 5px 0px 10px 10px; }
 img.float-left  { margin: 5px 10px 10px 0px; }
@@ -281,6 +282,9 @@ form {
         .danger-gradient-hilighted;}
     :active {
         .danger-gradient-active;}}
+
+.small-icon {
+    padding: 0 4px;}
 
 /* ------------------------------------------
    LAYOUT
@@ -568,23 +572,22 @@ form {
                 list-style: none;
                 position: absolute;
                 left: 0px; top: 28px;
-                margin: 0; padding: 5px;
+                margin: 0;
+                padding: 5px 5px 5px 16px;
                 visibility: hidden;
                 float: left;
-                width: 170px;
+                width: 220px;
                 .rounded-corners;
                 .box-shadow;
                 .button-gradient-inverted;
                 li {
                     clear: both;
-                    width: 170px;
                     display: inline-block;
                     margin: 0;
                     float: left;
                     a {
                         float: left;
-                        width: 145px;
-                        padding: 4px 15px;
+                        padding: 4px 8px;
                         color: @background-color;
                         text-shadow: none;
                         :hover {
@@ -595,7 +598,7 @@ form {
                             color: @danger-color * @hilight-factor;}}}
                 li.separator {
                     height: 0;
-                    width: 150px;
+                    width: 190px;
                     margin: 7px 10px;
                     border-top: 1px solid @border-shadow-color-inverted;
                     border-bottom: 1px solid @border-color-inverted;}}}
@@ -608,9 +611,7 @@ form {
             cursor: pointer;}}
     li#navigation {
         float: right;
-        text-align: right;
-        img {
-            vertical-align: bottom;}}
+        text-align: right;}
     ul.title {
         list-style: none;
         margin: 15px 0;
