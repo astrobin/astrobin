@@ -153,10 +153,17 @@ hr {
     background-color: @border-color;}
 
 /* links */
-a:link, a:visited {
-    text-decoration: none;
-    color: @link-color;}
-a:hover { color: @link-color + #333; }
+a {
+    :link, :visited {
+        text-decoration: none;
+        color: @link-color;}
+    :hover {
+        color: @link-color * @hilight-factor;}}
+a.danger {
+    :link, :visited {
+        color: @danger-color;}
+    :hover {
+        color: @danger-color * @hilight-factor;}}
 
 /* headers */
 h1, h2, h3, h4 {
@@ -569,18 +576,23 @@ form {
                 .box-shadow;
                 .button-gradient-inverted;
                 li {
-                     clear: both;
-                     width: 170px;
-                     display: inline-block;
-                     margin: 0;
-                     float: left;
-                     a {
-                         float: left;
-                         width: 145px;
-                         padding: 4px 15px;
-                         color: @background-color;
-                         :hover {
-                            color: @link-color;}}}
+                    clear: both;
+                    width: 170px;
+                    display: inline-block;
+                    margin: 0;
+                    float: left;
+                    a {
+                        float: left;
+                        width: 145px;
+                        padding: 4px 15px;
+                        color: @background-color;
+                        text-shadow: none;
+                        :hover {
+                            color: @link-color;}}
+                    a.danger {
+                        color: @danger-color;
+                        :hover {
+                            color: @danger-color * @hilight-factor;}}}
                 li.separator {
                     height: 0;
                     width: 150px;

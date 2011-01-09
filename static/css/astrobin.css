@@ -119,7 +119,10 @@ a:visited {
   text-decoration: none;
   color: #cc4b2e;
 }
-a:hover { color: #ff7e61; }
+a:hover { color: #f45a37; }
+a.danger:link { color: #c70000; }
+a.danger:visited { color: #c70000; }
+a.danger:hover { color: #ee0000; }
 h1, h2, h3, h4 {
   font-family: Sling, Georgia, Times New Roman, serif;
   font-weight: bold;
@@ -700,8 +703,11 @@ form textarea:focus {
   width: 145px;
   padding: 4px 15px;
   color: #1d140f;
+  text-shadow: none;
 }
 #image-detail ul.topnav > li ul.subnav li a:hover { color: #cc4b2e; }
+#image-detail ul.topnav > li ul.subnav li a.danger { color: #c70000; }
+#image-detail ul.topnav > li ul.subnav li a.danger:hover { color: #ee0000; }
 #image-detail ul.topnav > li ul.subnav li.separator {
   height: 0;
   width: 150px;
@@ -821,12 +827,7 @@ ul.as-selections li.as-selection-item a.as-close {
   color: #1d140f;
   font-weight: bold;
 }
-ul.as-selections li.as-selection-item a.as-close:hover {
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-  color: #cc4b2e;
-}
+ul.as-selections li.as-selection-item a.as-close:hover { color: #cc4b2e; }
 ul.as-selections li.as-original { margin-left: 0; }
 ul.as-selections li.as-original input {
   border: none;
