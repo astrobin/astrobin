@@ -821,15 +821,12 @@ ul.as-selections li.as-selection-item a.as-close {
   color: #1d140f;
   font-weight: bold;
 }
-ul.as-selections li.as-selection-item:hover {
-  border: 1px solid #cc4b2e;
-  border-top: 1px solid #ff6c42;
-  background: #cc4b2e;
-  background: -webkit-gradient(linear, left top, left bottom, from(#f45a37), to(#cc4b2e));
-  background: -moz-linear-gradient(top, #f45a37, #cc4b2e);
-  color: #fcfcf0;
+ul.as-selections li.as-selection-item a.as-close:hover {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  color: #cc4b2e;
 }
-ul.as-selections li.as-selection-item:hover a.as-close { color: #fcfcf0; }
 ul.as-selections li.as-original { margin-left: 0; }
 ul.as-selections li.as-original input {
   border: none;
