@@ -469,7 +469,14 @@ def image_edit_save_acquisition(request):
 @login_required
 @require_GET
 def image_delete(request, id):
-    pass
+    image = get_object_or_404(Image, pk=id) 
+    if request.user != image.user:
+        return HttpResponseForbidden();
+
+    image.delete()
+    return render_to_response("user_page.html",
+        {'user': request.user},
+        context_instance=RequestContext(request))
 
 
 @require_GET

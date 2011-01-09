@@ -8,6 +8,7 @@ from django import forms
 
 from djangoratings.fields import RatingField
 
+from file_utils import delete_image_from_s3
 
 class Gear(models.Model):
     name = models.CharField(max_length=64)
@@ -93,6 +94,10 @@ class Image(models.Model):
     def save(self, *args, **kwargs):
         self.uploaded = datetime.now()
         super(Image, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        delete_image_from_s3(self.filename) 
+        super(Image, self).delete(*args, **kwargs)
 
 
 class Acquisition(models.Model):

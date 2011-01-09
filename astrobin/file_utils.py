@@ -1,5 +1,6 @@
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
+from boto.s3.bucket import Bucket
 
 from django.conf import settings
 
@@ -9,8 +10,6 @@ from PIL import Image as PILImage
 from PIL import ImageOps
 from PIL import ImageDraw
 import StringIO
-
-from models import Image
 
 
 # RGB Hitogram
@@ -166,4 +165,20 @@ def store_image_in_s3(file, uid, mimetype=''):
     invertedFile = StringIO.StringIO()
     inverted.save(invertedFile, 'JPEG')
     save_to_bucket(invertedFile.getvalue(), 'image/jpeg', settings.S3_RESIZED_INVERTED_BUCKET, uid)
+
+
+def delete_image_from_s3(filename):
+    conn = S3Connection(settings.S3_ACCESS_KEY, settings.S3_SECRET_KEY)
+    for bucket in ['astrobin_thumbnails',
+                   'astrobin_small_thumbnails',
+                   'astrobin_resized_inverted',
+                   'astrobin_resized_image',
+                   'astrobin_inverted',
+                   'astrobin_images',
+                   'astrobin_histograms',
+                  ]:
+        b = Bucket(conn, bucket);
+        k = Key(b)
+        k.key = filename
+        b.delete_key(k)
 
