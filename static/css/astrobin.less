@@ -843,6 +843,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 .ui-widget-header {
     .button-gradient;}
 
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus {
+    color: @link-color;
+    border-color: @link-color * @hilight-factor;
+}
+
 img.flickr-photo-to-import {
     border: 1px solid #111;
     margin: 1px;

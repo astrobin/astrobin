@@ -959,6 +959,22 @@ x:default { border: none; }
   background: -moz-linear-gradient(top, #f45a37, #cc4b2e);
   color: #fcfcf0;
 }
+.ui-state-hover {
+  color: #cc4b2e;
+  border-color: #f45a37;
+}
+.ui-widget-content .ui-state-hover {
+  color: #cc4b2e;
+  border-color: #f45a37;
+}
+.ui-state-focus {
+  color: #cc4b2e;
+  border-color: #f45a37;
+}
+.ui-widget-content .ui-state-focus {
+  color: #cc4b2e;
+  border-color: #f45a37;
+}
 img.flickr-photo-to-import {
   border: 1px solid #111111;
   margin: 1px;
