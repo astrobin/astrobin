@@ -1,0 +1,43 @@
+.ic_container{
+    vertical-align:baseline;
+    margin:0;
+    position:relative;
+}
+.overlay{
+    opacity:0.3;
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+}
+.ic_caption{
+    position:absolute;    
+    opacity:0.6;   
+    overflow:hidden;
+    margin:0px;
+    padding:0px;
+    left:0px;
+    right:0px;
+    cursor:default;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+}
+.ic_category{
+    text-transform:uppercase;
+    font-size:11px;
+    padding:5px;
+    margin:0px;
+}
+.ic_caption h3{
+    padding:0px 5px 5px 5px;
+    margin:0px;
+    font-size:18px;
+    color: black;
+}
+.ic_text{
+    padding:5px;
+    margin:0px;
+    font-size:11px;
+}
+
