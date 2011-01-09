@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
+{% block extra_head %}
+<script type="text/javascript" src="/static/js/jquery.capSlide.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/capSlide.css" />
+{% endblock %}
+
 {% block abpod %}
 	{% if abpod %}
 	<!-- abpod -->		
@@ -32,14 +37,31 @@
     {% if image_list %}
     <h2>{% trans "Recent images" %}</h2>
     {% for image in image_list %}
-    <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px;">
+    <div class="ic_container" style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px;">
         <a href="/show/{{image.id}}">
             <img src="http://{{s3_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}"
 				 width={{thumbnail_size}} height={{thumbnail_size}} />
         </a>
+        <div class="overlay" style="display:none;"></div>
+        <div class="ic_caption">
+            <p class="ic_category">{{image.user.username}}</p>
+            <h3><a href="/show/{{image.id}}/">{{image.title}}</a></h3>
+            <p class="ic_text"><a href="/show/{{image.id}}/">{{image.description}}</a></p>
+        </div>
     </div>
     {% endfor %}
     {% else %}
-    No images.
+    {% trans "No images" %}.
     {% endif %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".ic_container").capslide({
+                caption_color   : 'black',
+                caption_bgcolor : 'white',
+                overlay_bgcolor : 'white',
+                border          : '',
+                showcaption     : false
+            });
+        });
+    </script>
 {% endblock %}
