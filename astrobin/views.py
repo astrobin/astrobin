@@ -466,6 +466,12 @@ def image_edit_save_acquisition(request):
                               context_instance=RequestContext(request))
 
 
+@login_required
+@require_GET
+def image_delete(request, id):
+    pass
+
+
 @require_GET
 def user_page(request, username):
     """Shows the user's public page"""
