@@ -161,7 +161,10 @@ dt {
 }
 dd { padding-left: 20px; }
 p, dl { margin: 10px 20px; }
-img { border: none; }
+img {
+  vertical-align: middle;
+  border: none;
+}
 img.float-right { margin: 5px 0px 10px 10px; }
 img.float-left { margin: 5px 10px 10px 0px; }
 code {
@@ -333,6 +336,7 @@ form textarea:focus {
   background: -moz-linear-gradient(top, #c70000, #a50000);
   color: #ffffff;
 }
+.small-icon { padding: 0 4px; }
 #wrap {
   width: 940px;
   margin: 0 auto;
@@ -674,10 +678,10 @@ form textarea:focus {
   left: 0px;
   top: 28px;
   margin: 0;
-  padding: 5px;
+  padding: 5px 5px 5px 16px;
   visibility: hidden;
   float: left;
-  width: 170px;
+  width: 220px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -693,15 +697,13 @@ form textarea:focus {
 }
 #image-detail ul.topnav > li ul.subnav li {
   clear: both;
-  width: 170px;
   display: inline-block;
   margin: 0;
   float: left;
 }
 #image-detail ul.topnav > li ul.subnav li a {
   float: left;
-  width: 145px;
-  padding: 4px 15px;
+  padding: 4px 8px;
   color: #1d140f;
   text-shadow: none;
 }
@@ -710,7 +712,7 @@ form textarea:focus {
 #image-detail ul.topnav > li ul.subnav li a.danger:hover { color: #ee0000; }
 #image-detail ul.topnav > li ul.subnav li.separator {
   height: 0;
-  width: 150px;
+  width: 190px;
   margin: 7px 10px;
   border-top: 1px solid #bbbbaf;
   border-bottom: 1px solid #fcfcf0;
@@ -725,7 +727,6 @@ form textarea:focus {
   float: right;
   text-align: right;
 }
-#image-detail li#navigation img { vertical-align: bottom; }
 #image-detail ul.title {
   list-style: none;
   margin: 15px 0;
