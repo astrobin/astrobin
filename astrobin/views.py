@@ -54,6 +54,13 @@ def index(request):
                          "abpod":abpod})
 
 
+
+@require_GET
+def no_javascript(request):
+    return render_to_response('no_javascript.html',
+        context_instance=RequestContext(request))
+
+
 def image_detail(request, id):
     """ Show details of an image"""
     image = get_object_or_404(Image, pk=id)

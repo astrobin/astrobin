@@ -12,6 +12,7 @@ from astrobin.models import Image
 
 urlpatterns = patterns('',
     (r'^$', views.index),
+    (r'^no_javascript', views.no_javascript),
     (r'^show/(?P<id>\d+)/$', views.image_detail),
     (r'^upload/$', views.image_upload),
     (r'^upload/process$', views.image_upload_process),
