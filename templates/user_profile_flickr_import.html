@@ -4,6 +4,7 @@
 {% block content %}
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
+        <h2>{% trans "Import yout photos from Flickr" %}</h2>
         <form name="flickr_form" action="">{% csrf_token %}
             {% if flickr_sets %}
             <p id="flickr_sets">
