@@ -21,7 +21,6 @@
         <!-- 3rd party css -->
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link href="/static/css/ui-lightness/jquery-ui-1.8.7.custom.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/fileuploader.css" />
 
         <!-- site's css -->
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css" />
@@ -34,7 +33,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
         <script src="/static/js/jquery-ui-1.8.7.custom.min.js"></script>
         <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
-        <script type="text/javascript" src="/static/js/fileuploader.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
 
         {% block extra_head %}
         {% endblock %}
@@ -70,7 +69,7 @@
                     <ul>
                         {% if user.is_authenticated %}
                         <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-                        <li id="{% current request "^/upload/" %}"><a id="upload-link" href="/upload/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a></li>
+                        <li><a href="/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a></li>
                         <li id="{% current request "^/profile/" %}"><a href="/profile/edit/basic/">{% trans "Profile" %}</a></li>
                         {% else %}
                         <li id="{% current request "^/accounts/login/" %}"><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
@@ -157,44 +156,8 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-                $('#upload-link').each(function() {
-                    var $link = $(this);
-                    var $url = $link.attr('href');
-                    var $title = $link.attr('title');
-
-                    var $dialog = $('<div></div>')
-                        .load($url + ' #file-uploader-wrap')
-                        .dialog({
-                            autoOpen: false,
-                            title: $title,
-                            width: 500,
-                            height: 300,
-                            closeText: '{% trans "Close" %}',
-                            draggable: false,
-                            modal: true,
-                            resizable: false,
-                    });
-
-                    $link.click(function() {
-                        $dialog.dialog('open');
-                        createUploader();
-                        return false;
-                    });
-                });
+                $('select, input:checkbox, input:radio, input:file').uniform();
             });
-        </script>
-
-        <script type="text/javascript">
-            function createUploader(){
-                var uploader = new qq.FileUploader({
-                    element: document.getElementById('file-uploader'),
-                    action: '/upload/process',
-                    debug: false,
-                    onComplete: function(id, filename, responseJSON) {
-                        window.location = '/edit/basic/' + responseJSON['id'];
-                    }
-                });
-            }
         </script>
 
     </body>

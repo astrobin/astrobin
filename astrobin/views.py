@@ -51,6 +51,7 @@ def index(request):
                          "s3_thumbnails_bucket":settings.S3_THUMBNAILS_BUCKET,
                          "s3_abpod_bucket":settings.S3_ABPOD_BUCKET,
                          "s3_url":settings.S3_URL,
+                         "upload_form": ImageUploadForm(),
                          "abpod":abpod})
 
 
@@ -173,7 +174,8 @@ def image_upload_process(request):
     else:
         form = ImageUploadForm(request.POST, request.FILES)
         if not form.is_valid():
-            return render_to_response("image_upload.html", {"form":form})
+            return render_to_response("index.html", {"upload_form":form},
+                context_instance=RequestContext(request))
         file = request.FILES["file"]
 
     s3_filename = str(uuid4()) + os.path.splitext(file.name)[1]
