@@ -46,7 +46,7 @@
         <div class="ic_caption">
             <p class="ic_category">{{image.user.username}}</p>
             <h3><a href="/show/{{image.id}}/">{{image.title}}</a></h3>
-            <p class="ic_text"><a href="/show/{{image.id}}/">{{image.description}}</a></p>
+            <p class="ic_text"><a href="/show/{{image.id}}/">{{image.description|truncatewords:20}}</a></p>
         </div>
     </div>
     {% endfor %}
