@@ -14,7 +14,9 @@
     </a>
     <div class="overlay" style="display:none;"></div>
     <div class="ic_caption">
-        <p class="ic_category">{{image.user.username}}</p>
+        <p class="ic_category">
+            <a href="/{{image.user.username}}">{{image.user.username}}</a>
+        </p>
         <h3><a href="/show/{{image.id}}/">{{image.title|default:_("(no title)")}}</a></h3>
         <p class="ic_text"><a href="/show/{{image.id}}/">{{image.description|truncatewords:20}}</a></p>
     </div>
