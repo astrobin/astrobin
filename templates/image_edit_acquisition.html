@@ -177,7 +177,7 @@
                    class="date datepickerclass validate[optional,date]"
                    id="date"
                    name="date",
-                   value="{% if solar_system_acquisition.date %}{{solar_system_acquisition.date}}{% else %}{% trans "yyyy-mm-dd" %}{% endif %}"/>
+                   value="{% if solar_system_acquisition.date %}{{solar_system_acquisition.date|date:'Y-m-d'}}{% else %}{% trans "yyyy-mm-dd" %}{% endif %}"/>
         </p>
         <p class="solar_system_field">
             <label for="time">{% trans "Universal time" %}:</label>
@@ -225,7 +225,7 @@
 
             {% ifequal image_type 'deep_sky' %}
                 {% for a in deep_sky_acquisitions %}
-                    $('#variable_fields').append(appendAcquisition('{{a.acquisition_type}}', '{{a.number}}', '{{a.duration}}', '{{a.iso}}', '{{a.date}}'));
+                    $('#variable_fields').append(appendAcquisition('{{a.acquisition_type}}', '{{a.number}}', '{{a.duration}}', '{{a.iso}}', '{{a.date|date:'Y-m-d'}}'));
                 {% endfor %}
             {% endifequal %}
 

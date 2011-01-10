@@ -452,10 +452,19 @@ def image_edit_save_acquisition(request):
 
         solar_system_acquisition.save()
 
+    # get them again because of date issues
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+    solar_system_acquisition = None
+
+    try:
+        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
+    except:
+        pass
+
     response_dict = {
         'image': image,
         'image_type': image_type,
-        'deep_sky_acquisitions': deep_sky_acquisitions.values(),
+        'deep_sky_acquisitions': deep_sky_acquisitions,
         'solar_system_acquisition': solar_system_acquisition,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
