@@ -496,9 +496,16 @@ def user_page(request, username):
 
     user = User.objects.get(username=username)
 
-    return render_to_response("user_page.html",
-        {"user":user},
-        context_instance=RequestContext(request))
+    return object_list(
+        request, 
+        queryset=Image.objects.filter(user=user)[:8],
+        template_name='user_page.html',
+        template_object_name='image',
+        extra_context = {"thumbnail_size":settings.THUMBNAIL_SIZE,
+                         "s3_thumbnails_bucket":settings.S3_THUMBNAILS_BUCKET,
+                         "s3_abpod_bucket":settings.S3_ABPOD_BUCKET,
+                         "s3_url":settings.S3_URL,
+                         "user":user})
 
 
 @login_required
