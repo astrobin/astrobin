@@ -7,6 +7,16 @@
 {% endblock %}
 
 {% block abpod %}
+    
+    <div class="small-box">
+        <h2>{% trans "Quick upload" %}</h2>
+        <div class="single-form">
+            <form id="upload" action="/upload/process" method="post" enctype="multipart/form-data">
+                <p><input type="file" name="file" id="id_file"/></p>
+                <p>{% trans "Choose an image to upload it." %}</p>
+            </form>
+        </div>
+    </div>
 	{% if abpod %}
 	<!-- abpod -->		
 	<div id="abpod">			
@@ -61,6 +71,13 @@
                 overlay_bgcolor : 'white',
                 border          : '',
                 showcaption     : false
+            });
+            $('form#upload input').change(function() {
+                $('form#upload').append('\
+                    <p>\
+                        <img alt="{% trans "Uploading..." %}" src="/static/images/ajax-loader.gif"/>\
+                    </p>');
+                $('form#upload').submit();
             });
         });
     </script>
