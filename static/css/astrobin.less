@@ -9,7 +9,7 @@
 @text-color: @strong-text-color - #444;
 @input-color: @background-color;
 @hilight-factor: 1.2;
-@strong-hilight-factor: 1.5;
+@strong-hilight-factor: 1.4;
 @border-color: @background-color * @hilight-factor;
 @border-color-inverted: @strong-text-color;
 @border-shadow-color: @background-color / @strong-hilight-factor;
@@ -575,13 +575,13 @@ div.uploader span.action {
   width: 85px;
   text-align: center;
   .text-shadow;
-  color: @background-color * @strong-hilight-factor;
+  color: @background-color * @hilight-factor;
   font-size: 11px;
   font-weight: bold;
 }
 
 div.uploader span.filename {
-  color: @text-color;
+  color: @background-color * @hilight-factor;
   width: 82px;
   border-right: solid 1px #bbb;
   font-size: 11px;
@@ -1102,6 +1102,7 @@ form {
         text-align: left;}
     ul {
         float:right;
+        width: 120px;
         margin: 0;
         padding: 0;}
     li {
@@ -1119,10 +1120,13 @@ form {
 
 .sided-main-content {
     float: left;
-    width: 780px;
+    width: 740px;
+    padding: 20px;
     border: 1px solid @border-color;
     background-color: @dark-panel-color;
     min-height: 135px;
+    .rounded-corners;
+    .box-shadow;
     label {
         float:left;
         text-align:right;
@@ -1147,7 +1151,8 @@ form {
     margin: 20px auto 20px;
     padding: 10px;
     .rounded-corners(12px);
-    background-color: @dark-panel-color;
+    .box-shadow;
+    background-color: @light-panel-color;
     border: 1px solid @border-color;
     width: 50%;
     margin-top: 30px;
