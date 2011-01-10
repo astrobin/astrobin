@@ -96,11 +96,13 @@
             {% endif %}
             </div>
             <ul class="title">
-                <h2>{{image.title}}</h2>
+                <h2>{{image.title|default:_("(no title)")}}</h2>
                 {% if image.subjects %}
                 <li class="contains">Contains:
                     {% for s in image.subjects.all %}
                         <a href="/search/{{s.name}}">{{s.name}}</a>
+                    {% empty %}
+                        {% trans "(no subjects)" %}
                     {% endfor %}
                 </li>
                 {% endif %}
