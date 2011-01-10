@@ -19,7 +19,7 @@
   color: #fcfcf0;
 }
 .button-gradient-hilighted {
-  border-top-color: #ff8752;
+  border-top-color: #ff7d4d;
   background: #f45a37;
   background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
   background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
@@ -359,12 +359,12 @@ div.button.disabled { background-position: 0px -613px; }
 div.button:disabled { background-position: 0px -613px; }
 div.button.disabled span {
   background-position: right -733px;
-  color: #130d0a;
+  color: #140e0a;
   cursor: default;
 }
 div.button:disabled span {
   background-position: right -733px;
-  color: #130d0a;
+  color: #140e0a;
   cursor: default;
 }
 div.button { height: 30px; }
@@ -410,12 +410,12 @@ div.uploader span.action {
   width: 85px;
   text-align: center;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  color: #2b1e16;
+  color: #221812;
   font-size: 11px;
   font-weight: bold;
 }
 div.uploader span.filename {
-  color: #b8b8ac;
+  color: #221812;
   width: 82px;
   border-right: solid 1px #bbbbbb;
   font-size: 11px;
@@ -727,7 +727,7 @@ form textarea:focus {
   cursor: pointer;
 }
 .button:hover {
-  border-top-color: #ff8752;
+  border-top-color: #ff7d4d;
   background: #f45a37;
   background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
   background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
@@ -1005,7 +1005,7 @@ form textarea:focus {
   width: 120px;
   border: 1px solid #221812;
   border-right: none;
-  background-color: #130d0a;
+  background-color: #140e0a;
 }
 .info-side-bar p {
   line-height: 1.4em;
@@ -1013,6 +1013,7 @@ form textarea:focus {
 }
 .info-side-bar ul {
   float: right;
+  width: 120px;
   margin: 0;
   padding: 0;
 }
@@ -1023,14 +1024,21 @@ form textarea:focus {
   border-bottom: 1px solid #221812;
 }
 .info-side-bar li.current { background-color: #cc4b2e; }
-.info-side-bar li.current a { color: #130d0a; }
+.info-side-bar li.current a { color: #140e0a; }
 .info-side-bar li.last { border-bottom: none; }
 .sided-main-content {
   float: left;
-  width: 780px;
+  width: 740px;
+  padding: 20px;
   border: 1px solid #221812;
-  background-color: #130d0a;
+  background-color: #140e0a;
   min-height: 135px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
 }
 .sided-main-content label {
   float: left;
@@ -1057,7 +1065,10 @@ form textarea:focus {
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   border-radius: 12px;
-  background-color: #130d0a;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  background-color: #281c15;
   border: 1px solid #221812;
   width: 50%;
   margin-top: 30px;
@@ -1098,7 +1109,7 @@ form textarea:focus {
   display: inline-block;
 }
 #image-detail ul.topnav:hover {
-  border-top-color: #ff8752;
+  border-top-color: #ff7d4d;
   background: #f45a37;
   background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
   background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
@@ -1183,14 +1194,14 @@ form textarea:focus {
 #image-detail #main-image { text-align: center; }
 #image-detail #main-image img {
   cursor: -moz-zoom-in;
-  border: 1px solid #130d0a;
+  border: 1px solid #140e0a;
 }
 #image-detail #technical-card {
   margin: 0 auto;
   padding: 8px 10px;
-  border: 1px solid #34241b;
+  border: 1px solid #302119;
   overflow: auto;
-  background-color: #2b1e16;
+  background-color: #281c15;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -1209,7 +1220,7 @@ form textarea:focus {
   display: inline-block;
 }
 #image-detail #technical-card .gear {
-  border-right: 1px solid #34241b;
+  border-right: 1px solid #302119;
   margin-right: 20px;
 }
 #image-detail #technical-card .acquisition {
@@ -1223,8 +1234,8 @@ form textarea:focus {
 }
 #image-detail #technical-card hr {
   border: 0;
-  color: #34241b;
-  background-color: #34241b;
+  color: #302119;
+  background-color: #302119;
 }
 #image-detail p#description { margin: 0; }
 ul.as-selections {
@@ -1335,7 +1346,7 @@ x:default { border: none; }
   width: 100%;
   text-align: center;
   background-color: #18100c;
-  color: #7a7a72;
+  color: #83837a;
 }
 #footer-outer {
   clear: both;
@@ -1355,7 +1366,7 @@ x:default { border: none; }
   margin-left: 20px;
   font-size: 1.6em;
   font-weight: bold;
-  color: #7a7a72;
+  color: #83837a;
 }
 #footer-wrap .col-a {
   width: 225px;
