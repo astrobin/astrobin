@@ -5,7 +5,9 @@
             <li class="{% current request '^/edit(/save)?/basic/' %}"><a href="/edit/basic/{{image.id}}">{% trans "Basic Information" %}</a></li>
             <li class="{% current request '^/edit(/save)?/gear/' %}"><a href="/edit/gear/{{image.id}}">{% trans "Gear used" %}</a></li>
             <li class="{% current request '^/edit(/save)?/acquisition/' %}"><a href="/edit/acquisition/{{image.id}}">{% trans "Acquisition details" %}</a></li>
-            <li class="last"><img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}"/></li>
+            <li class="last" style="margin: 8px 0;">
+                <a href="/show/{{image.id}}/"><img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}"/></a>
+            </li>
         </ul>
     </div>
 
