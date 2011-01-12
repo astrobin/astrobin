@@ -50,8 +50,7 @@
                 <div id="title">
                     <h1><a href="/">AstroBin</a></h1>
                     <h4>
-                        {% trans "The definite home for your" %}<br/>
-                        {% trans "astrophotography images." %}
+                        {% trans "The definite home for your astrophotography images." %}
                     </h4>
                 </div>
 
@@ -78,11 +77,24 @@
                     </ul>
                 </div>
                 <div id="search">
-                <form id="quick-search" action="index.html" method="get" >
+                <script type="text/javascript">
+                    function clearText(field){
+                        if (field.defaultValue == field.value) field.value = '';
+                        else if (field.value == '') field.value = field.defaultValue;
+                    }
+                </script>
+                <form id="quick-search" action="/search/" method="get" >
                     <p>
                     <label for="qsearch">Search:</label>
-                    <input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
-                    <input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="/static/images/search.png" />
+                    <input class="tbox"
+                           id="q"
+                           type="text"
+                           name="q"
+                           value="{% trans "Search..." %}"
+                           title="{% trans "Start typing and hit ENTER" %}"
+                           onFocus="clearText(this)"
+                           onBlur="clearText(this)"/>
+                    <input class="btn" alt="{% trans "Search" %}" type="image" name="searchsubmit" title="Search" src="/static/images/search.png" />
                     </p>
                 </form>
                 </div>

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="info-side-bar">
+    <p>{% trans "Search AstroBin images by subject or gear." %}</p>
+</div>
+<div class="sided-main-content">
+    <h1>{% trans "Search" %}</h1>
+    <form method="get" action=".">
+        <p>
+            <label for="id_q">{% trans "Search" %}:</label>
+            <input type="text" name="q" value="QHY5" id="id_q" />
+        </p> 
+        <input type="submit" value="{% trans "Search" %}" class="button submit-button" />
+    </form>
+</div>
+
+{% if query %}
+<div id="search-results">
+    <h2>{% trans "Results" %}</h2>
+
+    {% load tags %}
+    {% image_list page.object_list %}
+
+    {% if page.has_previous or page.has_next %}
+        <div>
+            {% if page.has_previous %}
+            <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">
+            {% endif %}
+            &laquo; {% trans "Previous" %}
+            {% if page.has_previous %}</a>{% endif %}
+            |
+            {% if page.has_next %}
+            <a href="?q={{ query }}&amp;page={{ page.next_page_number }}">
+            {% endif %}
+            {% trans "Next" %} &raquo;
+            {% if page.has_next %}</a>{% endif %}
+        </div>
+    {% endif %}
+</div>
+{% else %}
+    {# Show some example queries to run, maybe query syntax, something else? #}
+{% endif %}
+{% endblock %}

@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     (r'^edit/save/gear/$', views.image_edit_save_gear),
     (r'^edit/save/acquisition/$', views.image_edit_save_acquisition),
     (r'^delete/(?P<id>\d+)/$', views.image_delete),
+    (r'^search/', include('haystack.urls')),
 
     (r'^accounts/', include('registration.urls')),
 
