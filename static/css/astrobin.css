@@ -783,6 +783,7 @@ form textarea:focus {
   left: 10px;
   text-align: center;
   overflow: visible;
+  width: 220px;
 }
 #header #title h1 { font-size: 2.5em; }
 #header #title h1 a {
@@ -1008,6 +1009,8 @@ form textarea:focus {
   background-color: #140e0a;
 }
 .info-side-bar p {
+  margin: 0;
+  padding: 10px;
   line-height: 1.4em;
   text-align: left;
 }
@@ -1039,6 +1042,7 @@ form textarea:focus {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  margin-bottom: 40px;
 }
 .sided-main-content label {
   float: left;

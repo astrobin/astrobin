@@ -100,7 +100,7 @@
                 {% if image.subjects %}
                 <li class="contains">Contains:
                     {% for s in image.subjects.all %}
-                        <a href="/search/{{s.name}}">{{s.name}}</a>
+                        <a href="/search/?q={{s.name}}">{{s.name}}</a>
                     {% empty %}
                         {% trans "(no subjects)" %}
                     {% endfor %}
@@ -114,7 +114,7 @@
                         <p>
                             <strong>{% trans i.0 %}:&nbsp;</strong>
                             {% for g in i.1 %}
-                                <a href="/search/?gear={{g.name}}">{{g.name}}</a>
+                                <a href="/search/?q={{g.name}}">{{g.name}}</a>
                                 {% if not forloop.last %},&nbsp;{% endif %}
                             {% endfor %}
                         </p>

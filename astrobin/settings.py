@@ -107,6 +107,7 @@ INSTALLED_APPS = (
     'registration',
     'djangoratings',
     'compressor',
+    'haystack'
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -125,3 +126,9 @@ COMPILER_FORMATS = {
     },
 }
 CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
+
+HAYSTACK_SITECONF = 'astrobin.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'xapian'
+HAYSTACK_XAPIAN_PATH = '/var/www/astrobin_env/xapian_indexes'
+
+

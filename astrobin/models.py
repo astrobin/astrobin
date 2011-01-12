@@ -99,6 +99,8 @@ class Image(models.Model):
         delete_image_from_s3(self.filename) 
         super(Image, self).delete(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return '/show/%i/' % self.id
 
 class Acquisition(models.Model):
     date = models.DateField(null=True, blank=True)
