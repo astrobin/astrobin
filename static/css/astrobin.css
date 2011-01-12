@@ -888,10 +888,13 @@ form textarea:focus {
   z-index: 999;
   padding: 0;
   margin: 0;
-  border: none;
-  width: 222px;
+  border: #221812;
+  width: 250px;
   height: 32px;
-  background: url(../images/header-search.png) no-repeat;
+  background-color: #140e0a;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
 }
 #header form#quick-search p {
   margin: 0;
@@ -904,17 +907,17 @@ form textarea:focus {
   padding: 5px;
   border: none;
   background: transparent;
-  color: #b8b8ac;
-  width: 24px;
+  color: #5c5c56;
 }
 #header form#quick-search .tbox {
-  margin: 6px 0 0 5px;
-  width: 170px;
+  margin: 3px 0 0 5px;
+  width: 200px;
   display: inline;
 }
 #header form#quick-search .btn {
-  width: 25px;
-  height: 25px;
+  width: 16px;
+  height: 16px;
+  padding-top: 10px;
 }
 #header form#quick-search label { display: none; }
 #abpod {

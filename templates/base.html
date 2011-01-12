@@ -90,11 +90,13 @@
                            id="q"
                            type="text"
                            name="q"
-                           value="{% trans "Search..." %}"
+                           value="{% trans "Search images by subject or gear" %}"
                            title="{% trans "Start typing and hit ENTER" %}"
                            onFocus="clearText(this)"
                            onBlur="clearText(this)"/>
-                    <input class="btn" alt="{% trans "Search" %}" type="image" name="searchsubmit" title="Search" src="/static/images/search.png" />
+                    <input class="btn" alt="{% trans "Search" %}" type="image"
+                           name="searchsubmit" title="{% trans "Search" %}"
+                           src="/static/icons/iconic/white/magnifying_glass_16x16.png"/>
                     </p>
                 </form>
                 </div>

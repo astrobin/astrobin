@@ -8,8 +8,10 @@
 @header-color: @strong-text-color;
 @text-color: @strong-text-color - #444;
 @input-color: @background-color;
+
 @hilight-factor: 1.2;
 @strong-hilight-factor: 1.4;
+@strongest-hilight-factor: 2.0;
 @border-color: @background-color * @hilight-factor;
 @border-color-inverted: @strong-text-color;
 @border-shadow-color: @background-color / @strong-hilight-factor;
@@ -982,9 +984,10 @@ form {
         top: 19px; right: 280px;
         z-index: 999;
         padding: 0; margin: 0;
-        border: none;
-        width: 222px; height: 32px;
-        background: url(../images/header-search.png) no-repeat;
+        border: @border-color;
+        width: 250px; height: 32px;
+        background-color: @dark-panel-color;
+        .rounded-corners;
         p {
             margin: 0; padding: 0;
             border: none;}
@@ -993,14 +996,15 @@ form {
             margin: 0; padding: 5px;
             border: none;
             background: transparent;
-            color: @text-color;
-            width: 24px;}
+            color: @text-color / @strongest-hilight-factor;}
         .tbox {
-            margin: 6px 0 0 5px;
-            width: 170px;
+            margin: 3px 0 0 5px;
+            width: 200px;
             display: inline;}
         .btn{
-            width: 25px; height: 25px;}
+            width: 16px;
+            height: 16px;
+            padding-top: 10px;}
         label {
             display: none;}}}
 
