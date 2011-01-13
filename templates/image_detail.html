@@ -87,17 +87,17 @@
             <div id="main-image">
             {% if inverted %}
             <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}">
-                <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title}}"/>
+                <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title|escape}}"/>
             </a>
             {% else %}
             <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}">
-                <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title}}"/>
+                <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title|escape}}"/>
             </a>
             {% endif %}
             </div>
             <div class="main-image-data">
                 <ul>
-                    <li class="title">{{image.title|default:_("(no title)")}}</li>
+                    <li class="title">{{image.title|escape|default:_("(no title)")}}</li>
                     <li class="copy-box">
                         <div class="copy-box">
                             <span class="text"><strong>{% trans "Share link:" %}</strong>&nbsp;</span>
@@ -107,7 +107,7 @@
                     {% if image.subjects %}
                     <li class="contains">Contains:
                         {% for s in image.subjects.all %}
-                            <a href="/search/?q={{s.name}}">{{s.name}}</a>
+                            <a href="/search/?q={{s.name|escape}}">{{s.name|escape}}</a>
                         {% empty %}
                             {% trans "(no subjects)" %}
                         {% endfor %}
@@ -122,7 +122,7 @@
                         <p>
                             <strong>{% trans i.0 %}:&nbsp;</strong>
                             {% for g in i.1 %}
-                                <a href="/search/?q={{g.name}}">{{g.name}}</a>
+                                <a href="/search/?q={{g.name|escape}}">{{g.name|escape}}</a>
                                 {% if not forloop.last %},&nbsp;{% endif %}
                             {% endfor %}
                         </p>
@@ -149,7 +149,7 @@
             </div>
 
             <h3>{% trans "Description" %}</h3>
-            <p id="description">{{image.description}}</p>
+            <p id="description">{{image.description|escape}}</p>
         </div>
         <div id="side-pane">
             {% if user_images.count > 1 %} 
@@ -158,8 +158,8 @@
             <ul class="image-strip">
             {% for i in user_images %}
                 <li>
-                    <a href="/{{i.id}}/">
-                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.filename}}" alt="{{i.title}}"/>
+                    <a href="{{i.get_absolute_url}}/">
+                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.filename}}" alt="{{i.title|escape}}"/>
                     </a>
                 </li>
             {% endfor %}
