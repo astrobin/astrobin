@@ -31,7 +31,7 @@
         <input type="hidden" name="image_id" value="{{image.id}}" />
         <ul>
             <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
-            <li><a href="/{{image.id}}">{% trans "Return to image" %}</a></li>
+            <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
         </ul>
     </form>
     </div>
