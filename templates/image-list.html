@@ -13,8 +13,8 @@
         <p class="ic_category">
             <a href="/users/{{image.user.username}}">{{image.user.username}}</a>
         </p>
-        <h3><a href="{{image.get_absolute_url}}/">{{image.title|default:_("(no title)")}}</a></h3>
-        <p class="ic_text"><a href="{{image.get_absolute_url}}/">{{image.description|truncatewords:20}}</a></p>
+        <h3><a href="{{image.get_absolute_url}}/">{{image.title|escape|default:_("(no title)")}}</a></h3>
+        <p class="ic_text"><a href="{{image.get_absolute_url}}/">{{image.description|truncatewords:20|escape}}</a></p>
     </div>
 </div>
 {% empty %}
