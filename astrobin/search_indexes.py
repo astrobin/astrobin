@@ -3,7 +3,10 @@ from haystack import site
 from astrobin.models import Image
 
 class ImageIndex(SearchIndex):
-    title = CharField(document=True, use_template=True)
+    text = CharField(document=True, use_template=True)
+    title = CharField(model_attr='title')
+    user = CharField(model_attr='user')
+    description = CharField(model_attr='description')
     subjects = MultiValueField()
     gear = MultiValueField()
 
