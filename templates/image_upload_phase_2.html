@@ -26,7 +26,7 @@
         <input type="hidden" name="image_id" value="{{image.id}}" />
         <ul>
             <li><input class="button" type="submit" value="{% trans "Continue" %} &rarr;" /></li>
-            <li><a href="/{{image.id}}">{% trans "Cancel" %}</a></li>
+            <li><a href="{{image.get_absolute_url}}/">{% trans "Cancel" %}</a></li>
         </ul>
     </form>
     </div>

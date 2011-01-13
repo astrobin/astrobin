@@ -193,7 +193,7 @@
         <ul style="clear:both">
             <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
             <li><input id="reset" class="button dangerous-button inline-button" value="{% trans "Remove all data" %}" /></li>
-            <li><a href="/{{image.id}}">{% trans "Return to image" %}</a></li>
+            <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
         </ul>
     </form>
     <script type="text/javascript">
