@@ -95,18 +95,26 @@
             </a>
             {% endif %}
             </div>
-            <ul class="title">
-                <h2>{{image.title|default:_("(no title)")}}</h2>
-                {% if image.subjects %}
-                <li class="contains">Contains:
-                    {% for s in image.subjects.all %}
-                        <a href="/search/?q={{s.name}}">{{s.name}}</a>
-                    {% empty %}
-                        {% trans "(no subjects)" %}
-                    {% endfor %}
-                </li>
-                {% endif %}
-            </ul>
+            <div class="main-image-data">
+                <ul>
+                    <li class="title">{{image.title|default:_("(no title)")}}</li>
+                    <li class="copy-box">
+                        <div class="copy-box">
+                            <span class="text"><strong>{% trans "Share link:" %}</strong>&nbsp;</span>
+                            <span class="text"><a href="http://astrob.in/{{image.id}}/">http://astrob.in/{{image.id}}/</a></span>
+                        </div>
+                    </li>
+                    {% if image.subjects %}
+                    <li class="contains">Contains:
+                        {% for s in image.subjects.all %}
+                            <a href="/search/?q={{s.name}}">{{s.name}}</a>
+                        {% empty %}
+                            {% trans "(no subjects)" %}
+                        {% endfor %}
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
             <div id="technical-card">
                 <h3>{% trans "Technical card" %}</h3>
                 <div class="gear">

@@ -2,10 +2,16 @@
 
 {% load i18n %}
 
+{% block extra_head %}
+<script type="text/javascript" src="/static/js/jquery.capSlide.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/capSlide.css" />
+{% endblock %}
+
+
 {% block content %}
 {% if query %}
 <div id="search-results">
-    <h2>{% trans "Search results" %}</h2>
+    <h2>{% trans "Images matching" %} <em>"{{query}}"</em></h2>
 
     {% load tags %}
     {% image_list page.object_list %}

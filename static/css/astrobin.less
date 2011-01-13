@@ -1242,20 +1242,32 @@ form {
     li#navigation {
         float: right;
         text-align: right;}
-    ul.title {
-        list-style: none;
-        margin: 15px 0;
-        padding: 0;
-        height: 20px;
-        li {
-            display: inline;}
-        h2 {
-            font-size: 2em;
+    .main-image-data {
+        margin: 10px 0;
+        ul {
+            list-style: none;
             margin: 0;
-            border: 0;
-            display: inline;}
-        li.contains {
-            float: right;}}
+            padding: 0;
+            height: 30px;
+            li {
+                width: 235px;
+                float: left;
+                display: inline;}
+            h2 {
+                font-size: 2em;
+                margin: 0;
+                border: 0;
+                display: inline;}
+            li.title {
+                font-family: Sling, Georgia, Times New Roman, serif;
+                font-weight: bold;
+                color: @header-color;
+                .text-shadow;
+                font-size: 2em;}
+            li.contains {
+                text-align: right;}
+            li.copy-box {
+                text-align: center;}}}
     #main-image {
         text-align: center;
         img {
@@ -1291,6 +1303,13 @@ form {
     p#description {
         margin: 0;}}
 
+.copy-box {
+    display: inline;
+    padding: 4px;
+    font-size: @base-font-size + 2px;
+    border: @border-color;
+    background-color: @dark-panel-color;
+    .rounded-corners;}
 
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
