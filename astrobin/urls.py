@@ -13,7 +13,7 @@ from astrobin.models import Image
 urlpatterns = patterns('',
     (r'^$', views.index),
     (r'^no_javascript', views.no_javascript),
-    (r'^show/(?P<id>\d+)/$', views.image_detail),
+    (r'^(?P<id>\d+)/$', views.image_detail),
     (r'^upload/$', views.image_upload),
     (r'^upload/process$', views.image_upload_process),
     (r'^edit/basic/(?P<id>\d+)/$', views.image_edit_basic),
@@ -50,5 +50,5 @@ urlpatterns = patterns('',
     (r'get_rating/(?P<image_id>\d+)/', views.image_get_rating),
 
     (r'^misc/request-progress/$', views.request_progress),
-    (r'^(?P<username>\w+)/$', views.user_page),
+    (r'^users/(?P<username>\w+)/$', views.user_page),
 )

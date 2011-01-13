@@ -54,11 +54,11 @@
                             <ul class="subnav">
                                 <li class="first">
                                     {% if inverted %}
-                                    <span class="small-icon"><a href="/show/{{image.id}}/"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
-                                    <span class="text"><a href="/show/{{image.id}}/">{% trans "Normal" %}</a></span>
+                                    <span class="small-icon"><a href="/{{image.id}}/"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
+                                    <span class="text"><a href="/{{image.id}}/">{% trans "Normal" %}</a></span>
                                     {% else %}
-                                    <span class="small-icon"><a href="/show/{{image.id}}/?mod=inverted"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
-                                    <span class="text"><a href="/show/{{image.id}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
+                                    <span class="small-icon"><a href="/{{image.id}}/?mod=inverted"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
+                                    <span class="text"><a href="/{{image.id}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
                                     {% endif %}
                                 </li>
                                 <li class="last">
@@ -158,7 +158,7 @@
             <ul class="image-strip">
             {% for i in user_images %}
                 <li>
-                    <a href="/show/{{i.id}}/">
+                    <a href="/{{i.id}}/">
                         <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.filename}}" alt="{{i.title}}"/>
                     </a>
                 </li>

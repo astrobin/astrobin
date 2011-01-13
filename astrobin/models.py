@@ -100,7 +100,7 @@ class Image(models.Model):
         super(Image, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
-        return '/show/%i/' % self.id
+        return '/%i/' % self.id
 
 class Acquisition(models.Model):
     date = models.DateField(null=True, blank=True)

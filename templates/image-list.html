@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/static/js/own/capslide.js"></script>
 {% for image in image_list %}
 <div class="ic_container" style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px;">
-    <a href="/show/{{image.id}}/">
+    <a href="/{{image.id}}/">
         <img src="http://{{s3_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}"
              alt="{{image.title|default:_("(no title)")}}"
              width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
@@ -11,10 +11,10 @@
     <div class="overlay" style="display:none;"></div>
     <div class="ic_caption">
         <p class="ic_category">
-            <a href="/{{image.user.username}}">{{image.user.username}}</a>
+            <a href="/users/{{image.user.username}}">{{image.user.username}}</a>
         </p>
-        <h3><a href="/show/{{image.id}}/">{{image.title|default:_("(no title)")}}</a></h3>
-        <p class="ic_text"><a href="/show/{{image.id}}/">{{image.description|truncatewords:20}}</a></p>
+        <h3><a href="/{{image.id}}/">{{image.title|default:_("(no title)")}}</a></h3>
+        <p class="ic_text"><a href="/{{image.id}}/">{{image.description|truncatewords:20}}</a></p>
     </div>
 </div>
 {% empty %}
