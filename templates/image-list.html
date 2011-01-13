@@ -1,15 +1,11 @@
 {% load i18n %}
 
-{% block extra_head %}
-<script type="text/javascript" src="/static/js/jquery.capSlide.js"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="/static/css/capSlide.css" />
-{% endblock %}
-
 <script type="text/javascript" src="/static/js/own/capslide.js"></script>
 {% for image in image_list %}
 <div class="ic_container" style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px;">
     <a href="/show/{{image.id}}/">
         <img src="http://{{s3_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}"
+             alt="{{image.title|default:_("(no title)")}}"
              width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
     </a>
     <div class="overlay" style="display:none;"></div>
@@ -22,6 +18,6 @@
     </div>
 </div>
 {% empty %}
-{% trans "No images" %}.
+<p>{% trans "No images" %}.</p>
 {% endfor %}
 

@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
+{% block extra_head %}
+<script type="text/javascript" src="/static/js/jquery.capSlide.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/capSlide.css" />
+{% endblock %}
+
+
 {% block content %}
     <h2>{% trans "Recent images from" %} {{user.username}}</h2>
     {% include 'image-list.html' %}
