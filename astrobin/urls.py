@@ -9,6 +9,7 @@ admin.autodiscover()
 from astrobin import views
 from astrobin import lookups
 from astrobin.models import Image
+from astrobin.search import ImageSearchView
 
 urlpatterns = patterns('',
     (r'^$', views.index),
@@ -23,7 +24,7 @@ urlpatterns = patterns('',
     (r'^edit/save/gear/$', views.image_edit_save_gear),
     (r'^edit/save/acquisition/$', views.image_edit_save_acquisition),
     (r'^delete/(?P<id>\d+)/$', views.image_delete),
-    (r'^search/', include('haystack.urls')),
+    (r'^search/', ImageSearchView()),
 
     (r'^accounts/', include('registration.urls')),
 
