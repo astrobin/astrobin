@@ -745,30 +745,3 @@ def request_progress(request):
     else:
         return HttpResponseBadRequest('Server Error: You must provide X-Progress-ID header or query param.')
 
-
-@require_GET
-def search(request):
-    if 'gear' in request.GET:
-        gear = request.GET['gear']
-        queryset = Image.objects.filter(
-            Q(imaging_telescopes__name = gear) |
-            Q(guiding_telescopes__name = gear) |
-            Q(mounts__name = gear)             |
-            Q(imaging_cameras__name = gear)    |
-            Q(imaging_telescopes__name = gear) |
-            Q(focal_reducers__name = gear)     |
-            Q(software__name = gear)           |
-            Q(filters__name = gear)            |
-            Q(accessories__name = gear)).distinct()
-
-    return object_list(
-        request, 
-        queryset=queryset[:32],
-        template_name='search.html',
-        template_object_name='image',
-        extra_context = {"thumbnail_size":settings.THUMBNAIL_SIZE,
-                         "s3_thumbnails_bucket":settings.S3_THUMBNAILS_BUCKET,
-                         "s3_url":settings.S3_URL,
-                         "q":gear})
-
-
