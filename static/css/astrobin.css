@@ -1161,6 +1161,7 @@ form textarea:focus {
 #image-detail ul.topnav > li ul.subnav li a.danger { color: #c70000; }
 #image-detail ul.topnav > li ul.subnav li a.danger:hover { color: #ee0000; }
 #image-detail ul.topnav > li ul.subnav li img { padding-top: 4px; }
+#image-detail ul.topnav > li ul.subnav li.copy-box { margin: 8px 0; }
 #image-detail ul.topnav > li ul.subnav li.separator {
   height: 0;
   margin: 7px 0;
@@ -1200,10 +1201,6 @@ form textarea:focus {
   font-size: 2em;
 }
 #image-detail .main-image-data ul li.contains { text-align: right; }
-#image-detail .main-image-data ul li.copy-box {
-  margin: 0 20px;
-  text-align: center;
-}
 #image-detail #main-image { text-align: center; }
 #image-detail #main-image img {
   cursor: -moz-zoom-in;
@@ -1251,10 +1248,11 @@ form textarea:focus {
   background-color: #302119;
 }
 #image-detail p#description { margin: 0; }
-.copy-box {
+span.copy-box {
   display: inline;
-  padding: 4px;
-  font-size: 14px;
+  padding: 6px;
+  margin-left: 6px;
+  color: #b8b8ac;
   border: #221812;
   background-color: #140e0a;
   -moz-border-radius: 6px;
