@@ -48,7 +48,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li id="view" class="last">
+                        <li id="view">
                             <span class="text"><a href="#">{% trans "View" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
                             <ul class="subnav">
@@ -67,22 +67,19 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                </li>
-                <li><div id="rating"></div></li>
-                <li id="navigation">
-                    <ul class="topnav">
-                        <li class="first">
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_left_8x8.png"/></a></span>
-                            <span class="text"><a href="#">{% trans "Newer" %}</a></span>
-                        </li>
-                        <li><a href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}"><img src="/static/icons/iconic/white/magnifying_glass_12x12.png"/></a></li>
-                        <li class="last">
-                            <span class="text"><a href="#">{% trans "Older" %}</a>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_right_8x8.png"/></a></span>
+                        <li id="share" class="last">
+                            <span class="text"><a href="#">{% trans "Share" %}</a></span>
+                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
+                            <ul class="subnav">
+                                <li class="first">
+                                </li>
+                                <li class="last">
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
+                <li class="rating"><div id="rating"></div></li>
             </ul>
             <div id="main-image">
             {% if inverted %}

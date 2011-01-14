@@ -590,10 +590,7 @@ dt {
 }
 dd { padding-left: 20px; }
 p, dl { margin: 10px 20px; }
-img {
-  vertical-align: middle;
-  border: none;
-}
+img { border: none; }
 img.float-right { margin: 5px 0px 10px 10px; }
 img.float-left { margin: 5px 10px 10px 0px; }
 code {
@@ -796,14 +793,10 @@ form textarea:focus {
   color: #258e92;
 }
 #header #nav {
-  position: absolute;
-  left: 0;
-  top: 0px;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  height: 55px;
-  width: 600px;
+  float: left;
 }
 #header #nav ul {
   float: left;
@@ -840,13 +833,9 @@ form textarea:focus {
 #header #nav ul li#current a { color: #fcfcf0; }
 #header #user-nav {
   float: right;
-  position: absolute;
-  right: 0;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  height: 55px;
-  width: 300px;
 }
 #header #user-nav ul {
   float: right;
@@ -854,20 +843,22 @@ form textarea:focus {
   padding: 0;
   width: 100%;
   list-style: none;
+  display: inline;
 }
 #header #user-nav ul li {
-  float: right;
+  float: left;
   margin: 0;
   padding: 0 0 0 5px;
+  display: inline;
 }
 #header #user-nav ul li a:link {
-  float: right;
+  float: left;
   margin: 0;
   padding: 30px 15px 17px 11px;
   text-transform: lowercase;
 }
 #header #user-nav ul li a:visited {
-  float: right;
+  float: left;
   margin: 0;
   padding: 30px 15px 17px 11px;
   text-transform: lowercase;
@@ -1096,9 +1087,11 @@ form textarea:focus {
   margin: 0 0 30px 0;
   padding: 0;
 }
-#image-detail ul.bar > li {
-  float: left;
-  width: 33%;
+#image-detail ul.bar > li { float: left; }
+#image-detail ul.bar > li.rating {
+  padding-top: 4px;
+  text-align: right;
+  float: right;
 }
 #image-detail ul.topnav {
   list-style: none;
@@ -1138,7 +1131,7 @@ form textarea:focus {
   padding: 5px 5px 5px 16px;
   visibility: hidden;
   float: left;
-  width: 220px;
+  white-space: nowrap;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -1167,9 +1160,9 @@ form textarea:focus {
 #image-detail ul.topnav > li ul.subnav li a:hover { color: #cc4b2e; }
 #image-detail ul.topnav > li ul.subnav li a.danger { color: #c70000; }
 #image-detail ul.topnav > li ul.subnav li a.danger:hover { color: #ee0000; }
+#image-detail ul.topnav > li ul.subnav li img { padding-top: 4px; }
 #image-detail ul.topnav > li ul.subnav li.separator {
   height: 0;
-  width: 210px;
   margin: 7px 0;
   border-top: 1px solid #bbbbaf;
   border-bottom: 1px solid #fcfcf0;
@@ -1180,19 +1173,15 @@ form textarea:focus {
 }
 #image-detail ul.topnav a:hover { color: #ffffff; }
 #image-detail ul.topnav > li.subhover { cursor: pointer; }
-#image-detail li#navigation {
-  float: right;
-  text-align: right;
-}
 #image-detail .main-image-data { margin: 10px 0; }
 #image-detail .main-image-data ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  height: 30px;
+  height: 45px;
 }
 #image-detail .main-image-data ul li {
-  width: 235px;
+  width: 224px;
   float: left;
   display: inline;
 }
@@ -1205,12 +1194,16 @@ form textarea:focus {
 #image-detail .main-image-data ul li.title {
   font-family: Sling, Georgia, Times New Roman, serif;
   font-weight: bold;
+  line-height: 1.1em;
   color: #fcfcf0;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   font-size: 2em;
 }
 #image-detail .main-image-data ul li.contains { text-align: right; }
-#image-detail .main-image-data ul li.copy-box { text-align: center; }
+#image-detail .main-image-data ul li.copy-box {
+  margin: 0 20px;
+  text-align: center;
+}
 #image-detail #main-image { text-align: center; }
 #image-detail #main-image img {
   cursor: -moz-zoom-in;
@@ -1520,10 +1513,6 @@ ul.inline label.notfirst {
 input.date {
   width: 80px;
   margin-right: 20px;
-}
-#rating {
-  margin: 0 auto;
-  text-align: center;
 }
 ul.image-strip {
   list-style: none;
