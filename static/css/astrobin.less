@@ -1225,6 +1225,8 @@ form {
                             color: @danger-color * @hilight-factor;}}
                     img {
                         padding-top: 4px;}}
+                li.copy-box {
+                    margin: 8px 0;}
                 li.separator {
                     height: 0;
                     margin: 7px 0;
@@ -1261,10 +1263,7 @@ form {
                 .text-shadow;
                 font-size: 2em;}
             li.contains {
-                text-align: right;}
-            li.copy-box {
-                margin: 0 20px;
-                text-align: center;}}}
+                text-align: right;}}}
     #main-image {
         text-align: center;
         img {
@@ -1300,10 +1299,11 @@ form {
     p#description {
         margin: 0;}}
 
-.copy-box {
+span.copy-box {
     display: inline;
-    padding: 4px;
-    font-size: @base-font-size + 2px;
+    padding: 6px;
+    margin-left: 6px;
+    color: @text-color;
     border: @border-color;
     background-color: @dark-panel-color;
     .rounded-corners;}
