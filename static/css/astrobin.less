@@ -891,8 +891,6 @@ form {
     :active {
         .danger-gradient-active;}}
 
-.small-icon {
-    padding: 0 4px;}
 
 /* ------------------------------------------
    LAYOUT
@@ -1166,9 +1164,7 @@ form {
         float: left;
         width: 722px;}
     #side-pane {
-        float: left;
-        padding-left: 20px;
-        width: 178px;
+        float: right;
         text-align: center;}
     ul.bar {
         list-style: none;
@@ -1200,7 +1196,7 @@ form {
                 position: absolute;
                 left: 0px; top: 28px;
                 margin: 0;
-                padding: 5px 5px 5px 16px;
+                padding: 5px 8px;
                 visibility: hidden;
                 float: left;
                 white-space: nowrap;
@@ -1208,13 +1204,9 @@ form {
                 .box-shadow;
                 .button-gradient-inverted;
                 li {
-                    clear: both;
-                    display: inline-block;
-                    margin: 0;
                     float: left;
+                    padding: 4px 8px;
                     a {
-                        float: left;
-                        padding: 4px 8px;
                         color: @background-color;
                         text-shadow: none;
                         :hover {
@@ -1229,7 +1221,9 @@ form {
                     margin: 8px 0;}
                 li.separator {
                     height: 0;
-                    margin: 7px 0;
+                    margin: 8px 0;
+                    padding: 0;
+                    width: 100%;
                     border-top: 1px solid @border-shadow-color-inverted;
                     border-bottom: 1px solid @border-color-inverted;}}}
         a {
@@ -1247,8 +1241,6 @@ form {
             padding: 0;
             height: 45px;
             li {
-                width: 224px;
-                float: left;
                 display: inline;}
             h2 {
                 font-size: 2em;
@@ -1256,6 +1248,7 @@ form {
                 border: 0;
                 display: inline;}
             li.title {
+                margin-right: 15px;
                 font-family: Sling, Georgia, Times New Roman, serif;
                 font-weight: bold;
                 line-height: 1.1em;
@@ -1263,6 +1256,7 @@ form {
                 .text-shadow;
                 font-size: 2em;}
             li.contains {
+                float: right;
                 text-align: right;}}}
     #main-image {
         text-align: center;
@@ -1298,6 +1292,10 @@ form {
             background-color: @light-panel-color * @hilight-factor;}}
     p#description {
         margin: 0;}}
+
+.small-icon {
+    width: 16px;
+    margin-right: 8px;}
 
 span.copy-box {
     display: inline;
@@ -1585,10 +1583,15 @@ input.date {
 }
 
 ul.image-strip {
+    background-color: @light-panel-color;
+    border: 1px solid @border-color;
+    .rounded-corners;
+    .box-shadow;
     list-style: none;
-    margin: 0;
-    padding: 0;
-}
+    margin: 10px 0;
+    padding: 12px 16px;
+    li {
+        padding: 4px 0;}}
 
 .ic_caption a {
     color: black;

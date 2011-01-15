@@ -761,7 +761,6 @@ form textarea:focus {
   background: -moz-linear-gradient(top, #c70000, #a50000);
   color: #ffffff;
 }
-.small-icon { padding: 0 4px; }
 #wrap {
   width: 940px;
   margin: 0 auto;
@@ -1077,9 +1076,7 @@ form textarea:focus {
   width: 722px;
 }
 #image-detail #side-pane {
-  float: left;
-  padding-left: 20px;
-  width: 178px;
+  float: right;
   text-align: center;
 }
 #image-detail ul.bar {
@@ -1128,7 +1125,7 @@ form textarea:focus {
   left: 0px;
   top: 28px;
   margin: 0;
-  padding: 5px 5px 5px 16px;
+  padding: 5px 8px;
   visibility: hidden;
   float: left;
   white-space: nowrap;
@@ -1146,14 +1143,10 @@ form textarea:focus {
   color: #1d140f;
 }
 #image-detail ul.topnav > li ul.subnav li {
-  clear: both;
-  display: inline-block;
-  margin: 0;
-  float: left;
-}
-#image-detail ul.topnav > li ul.subnav li a {
   float: left;
   padding: 4px 8px;
+}
+#image-detail ul.topnav > li ul.subnav li a {
   color: #1d140f;
   text-shadow: none;
 }
@@ -1164,7 +1157,9 @@ form textarea:focus {
 #image-detail ul.topnav > li ul.subnav li.copy-box { margin: 8px 0; }
 #image-detail ul.topnav > li ul.subnav li.separator {
   height: 0;
-  margin: 7px 0;
+  margin: 8px 0;
+  padding: 0;
+  width: 100%;
   border-top: 1px solid #bbbbaf;
   border-bottom: 1px solid #fcfcf0;
 }
@@ -1181,11 +1176,7 @@ form textarea:focus {
   padding: 0;
   height: 45px;
 }
-#image-detail .main-image-data ul li {
-  width: 224px;
-  float: left;
-  display: inline;
-}
+#image-detail .main-image-data ul li { display: inline; }
 #image-detail .main-image-data ul h2 {
   font-size: 2em;
   margin: 0;
@@ -1193,6 +1184,7 @@ form textarea:focus {
   display: inline;
 }
 #image-detail .main-image-data ul li.title {
+  margin-right: 15px;
   font-family: Sling, Georgia, Times New Roman, serif;
   font-weight: bold;
   line-height: 1.1em;
@@ -1200,7 +1192,10 @@ form textarea:focus {
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   font-size: 2em;
 }
-#image-detail .main-image-data ul li.contains { text-align: right; }
+#image-detail .main-image-data ul li.contains {
+  float: right;
+  text-align: right;
+}
 #image-detail #main-image { text-align: center; }
 #image-detail #main-image img {
   cursor: -moz-zoom-in;
@@ -1248,6 +1243,10 @@ form textarea:focus {
   background-color: #302119;
 }
 #image-detail p#description { margin: 0; }
+.small-icon {
+  width: 16px;
+  margin-right: 8px;
+}
 span.copy-box {
   display: inline;
   padding: 6px;
@@ -1513,10 +1512,19 @@ input.date {
   margin-right: 20px;
 }
 ul.image-strip {
+  background-color: #281c15;
+  border: 1px solid #221812;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 10px 0;
+  padding: 12px 16px;
 }
+ul.image-strip li { padding: 4px 0; }
 .ic_caption a { color: black; }
 .ic_caption a:hover { color: #cc4b2e; }
 .sort { margin-bottom: 5px; }
