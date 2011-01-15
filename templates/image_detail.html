@@ -39,7 +39,7 @@
                                     <span class="text"><a href="#">{% trans "Bring to a user's attention" %}</a></span>
                                 </li>
                                 <li>
-                                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/info_4x8.png"/></a></span>
+                                    <span class="small-icon"><a href="#"><img style="margin-right: 4px" alt="" src="/static/icons/iconic/black/info_4x8.png"/></a></span>
                                     <a href="#">{% trans "Request additional information" %}</a></span>
                                 </li>
                                 <li class="last">
@@ -99,6 +99,7 @@
             <div class="main-image-data">
                 <ul>
                     <li class="title">{{image.title|escape|default:_("(no title)")}}</li>
+                    <li class="author">{% trans "by" %} <a href="/users/{{image.user.username}}/">{{image.user.username}}</a></li>
                     {% if image.subjects %}
                     <li class="contains">Contains:
                         {% for s in image.subjects.all %}
@@ -148,7 +149,16 @@
         </div>
         <div id="side-pane">
             {% if user_images.count > 1 %} 
-            <p>More from this user</p>
+            <ul class="topnav">
+                <li>
+                    <span class="text"><a href="#">More</a></span>
+                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
+                    <ul class="subnav">
+                        <li><a href="#">From {{image.user.username}}</a></li>
+                        <li><a href="#">Similar images</a></li>
+                    </ul>
+                </ul>
+            </ul>
 
             <ul class="image-strip">
             {% for i in user_images %}
