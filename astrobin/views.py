@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
 
+from haystack.query import SearchQuerySet, SQ
+
 from uuid import uuid4
 import os
 import simplejson
@@ -70,7 +72,25 @@ def image_detail(request, id):
     score = image.rating.score
     rating = float(score)/votes if votes > 0 else 0
 
-    user_images = Image.objects.filter(user=image.user).exclude(pk=id)[:10]
+    limit = 10
+    related = None
+    related_images = None
+    if 'related' in request.GET:
+        related = request.GET['related']
+    else:
+        related = 'user'
+
+    if related == 'user':
+        related_images = SearchQuerySet().filter(user=image.user.username).exclude(django_id=id)[:limit]
+    elif related == 'subject':
+        subjects = [s.name for s in image.subjects.all()]
+        related_images = SearchQuerySet().filter(SQ(subjects__in=subjects)).exclude(django_id=id)[:limit]
+    elif related == 'imaging_telescope':
+        telescopes = [t.name for t in image.imaging_telescopes.all()]
+        related_images = SearchQuerySet().filter(SQ(imaging_telescopes__in=telescopes)).exclude(django_id=id)[:limit]
+    elif related == 'imaging_camera':
+        cameras = [c.name for c in image.imaging_cameras.all()]
+        related_images = SearchQuerySet().filter(SQ(imaging_cameras__in=cameras)).exclude(django_id=id)[:limit]
 
     gear_list = [('Imaging telescopes', image.imaging_telescopes.all()),
                  ('Imaging cameras'   , image.imaging_cameras.all()),
@@ -134,7 +154,7 @@ def image_detail(request, id):
                          's3_url': settings.S3_URL,
                          'already_voted': already_voted,
                          'current_rating': rating,
-                         'user_images': user_images,
+                         'related_images': related_images,
                          'gear_list': gear_list,
                          'image_type': image_type,
                          'deep_sky_data': deep_sky_data,

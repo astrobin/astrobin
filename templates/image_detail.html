@@ -148,23 +148,25 @@
             <p id="description">{{image.description|escape}}</p>
         </div>
         <div id="side-pane">
-            {% if user_images.count > 1 %} 
+            {% if related_images.count > 1 %} 
             <ul class="topnav">
                 <li>
-                    <span class="text"><a href="#">More</a></span>
+                    <span class="text"><a href="#">Related images</a></span>
                     <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
                     <ul class="subnav">
-                        <li><a href="#">From {{image.user.username}}</a></li>
-                        <li><a href="#">Similar images</a></li>
+                        <li><a href="{{image.get_absolute_url}}/?related=user">{% trans "Same user" %} ({{image.user.username}})</a></li>
+                        <li><a href="{{image.get_absolute_url}}/?related=subject">{% trans "Same subject" %}</a></li>
+                        <li><a href="{{image.get_absolute_url}}/?related=imaging_telescope">{% trans "Same imaging telescope" %}</a></li>
+                        <li><a href="{{image.get_absolute_url}}/?related=imaging_camera">{% trans "Same imaging camera" %}</a></li>
                     </ul>
                 </ul>
             </ul>
 
             <ul class="image-strip">
-            {% for i in user_images %}
+            {% for i in related_images %}
                 <li>
-                    <a href="{{i.get_absolute_url}}/">
-                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.filename}}" alt="{{i.title|escape}}"/>
+                    <a href="{{i.object.get_absolute_url}}/">
+                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.object.filename}}" alt="{{i.object.title|escape}}"/>
                     </a>
                 </li>
             {% endfor %}
