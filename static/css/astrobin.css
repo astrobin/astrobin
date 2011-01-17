@@ -1201,47 +1201,6 @@ form textarea:focus {
   cursor: -moz-zoom-in;
   border: 1px solid #140e0a;
 }
-#image-detail #technical-card {
-  margin: 0 auto;
-  padding: 8px 10px;
-  border: 1px solid #302119;
-  overflow: auto;
-  background-color: #281c15;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-}
-#image-detail #technical-card .gear {
-  float: left;
-  width: 48%;
-  display: inline-block;
-}
-#image-detail #technical-card .acquisition {
-  float: left;
-  width: 48%;
-  display: inline-block;
-}
-#image-detail #technical-card .gear {
-  border-right: 1px solid #302119;
-  margin-right: 20px;
-}
-#image-detail #technical-card .acquisition {
-  margin-top: -27px;
-  padding-left: 5px;
-}
-#image-detail #technical-card .acquisition img { border: 1px solid #1d140f; }
-#image-detail #technical-card p {
-  margin: 2px 0;
-  font-size: 14px;
-}
-#image-detail #technical-card hr {
-  border: 0;
-  color: #302119;
-  background-color: #302119;
-}
 #image-detail p#description { margin: 0; }
 .small-icon {
   width: 16px;
@@ -1257,6 +1216,47 @@ span.copy-box {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
+}
+#technical-card {
+  margin: 0 auto 25px auto;
+  padding: 8px 10px;
+  border: 1px solid #302119;
+  overflow: auto;
+  background-color: #281c15;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+}
+#technical-card .gear {
+  float: left;
+  width: 48%;
+  display: inline-block;
+}
+#technical-card .acquisition {
+  float: left;
+  width: 48%;
+  display: inline-block;
+}
+#technical-card .gear {
+  border-right: 1px solid #302119;
+  margin-right: 20px;
+}
+#technical-card .acquisition {
+  margin-top: -27px;
+  padding-left: 5px;
+}
+#technical-card .acquisition img { border: 1px solid #1d140f; }
+#technical-card p {
+  margin: 2px 0;
+  font-size: 14px;
+}
+#technical-card hr {
+  border: 0;
+  color: #302119;
+  background-color: #302119;
 }
 ul.as-selections {
   list-style-type: none;

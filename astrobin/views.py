@@ -515,17 +515,29 @@ def user_page(request, username):
     """Shows the user's public page"""
 
     user = User.objects.get(username=username)
+    profile = UserProfile.objects.get(user=user)
+
+    gear_list = [('Telescopes'    , profile.telescopes.all()),
+                 ('Mounts'        , profile.mounts.all()),
+                 ('Cameras'       , profile.cameras.all()),
+                 ('Focal reducers', profile.focal_reducers.all()),
+                 ('Software'      , profile.software.all()),
+                 ('Filters'       , profile.filters.all()),
+                 ('Accessories'   , profile.accessories.all()),
+                ]
+
 
     return object_list(
         request, 
         queryset=Image.objects.filter(user=user)[:8],
         template_name='user_page.html',
         template_object_name='image',
-        extra_context = {"thumbnail_size":settings.THUMBNAIL_SIZE,
-                         "s3_thumbnails_bucket":settings.S3_THUMBNAILS_BUCKET,
-                         "s3_abpod_bucket":settings.S3_ABPOD_BUCKET,
-                         "s3_url":settings.S3_URL,
-                         "user":user})
+        extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
+                         's3_thumbnails_bucket':settings.S3_THUMBNAILS_BUCKET,
+                         's3_abpod_bucket':settings.S3_ABPOD_BUCKET,
+                         's3_url':settings.S3_URL,
+                         'user':user,
+                         'gear_list':gear_list})
 
 
 @login_required
