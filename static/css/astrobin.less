@@ -1263,33 +1263,6 @@ form {
         img {
             cursor: -moz-zoom-in;
             border: 1px solid @dark-panel-color;}}
-    #technical-card {
-        margin: 0 auto;
-        padding: 8px 10px;
-        border: 1px solid (@light-panel-color * @hilight-factor);
-        overflow: auto;
-        background-color: @light-panel-color;
-        .rounded-corners;
-        .box-shadow;
-        .gear, .acquisition {
-            float: left;
-            width: 48%;
-            display: inline-block;}
-        .gear {
-            border-right: 1px solid (@light-panel-color * @hilight-factor);
-            margin-right: 20px;}
-        .acquisition {
-            margin-top: -27px;
-            padding-left: 5px;
-            img {
-                border: 1px solid @background-color;}}
-        p {
-            margin: 2px 0;
-            font-size: @base-font-size + 2px;}
-        hr {
-            border: 0;
-            color: @light-panel-color * @hilight-factor;
-            background-color: @light-panel-color * @hilight-factor;}}
     p#description {
         margin: 0;}}
 
@@ -1305,6 +1278,34 @@ span.copy-box {
     border: @border-color;
     background-color: @dark-panel-color;
     .rounded-corners;}
+
+#technical-card {
+    margin: 0 auto 25px auto;
+    padding: 8px 10px;
+    border: 1px solid (@light-panel-color * @hilight-factor);
+    overflow: auto;
+    background-color: @light-panel-color;
+    .rounded-corners;
+    .box-shadow;
+    .gear, .acquisition {
+        float: left;
+        width: 48%;
+        display: inline-block;}
+    .gear {
+        border-right: 1px solid (@light-panel-color * @hilight-factor);
+        margin-right: 20px;}
+    .acquisition {
+        margin-top: -27px;
+        padding-left: 5px;
+        img {
+            border: 1px solid @background-color;}}
+    p {
+        margin: 2px 0;
+        font-size: @base-font-size + 2px;}
+    hr {
+        border: 0;
+        color: @light-panel-color * @hilight-factor;
+        background-color: @light-panel-color * @hilight-factor;}}
 
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {

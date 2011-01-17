@@ -8,6 +8,21 @@
 
 
 {% block content %}
+    <div id="technical-card">
+        <h3>{% trans "User's card" %}: {{user.username}}</h3>
+        <div class="gear">
+            {% for i in gear_list %}
+                <p>
+                    <strong>{% trans i.0 %}:&nbsp;</strong>
+                    {% for g in i.1 %}
+                        <a href="/search/?q={{g.name|escape}}">{{g.name|escape}}</a>
+                        {% if not forloop.last %},&nbsp;{% endif %}
+                    {% endfor %}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+
     <h2>{% trans "Recent images from" %} {{user.username}}</h2>
     {% include 'image-list.html' %}
 {% endblock %}
