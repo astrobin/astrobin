@@ -54,11 +54,11 @@
                             <ul class="subnav">
                                 <li class="first">
                                     {% if inverted %}
-                                    <span class="small-icon"><a href={{image.get_absolute_url}}/"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
-                                    <span class="text"><a href={{image.get_absolute_url}}/">{% trans "Normal" %}</a></span>
+                                    <span class="small-icon"><a href="{{image.get_absolute_url}}/"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
+                                    <span class="text"><a href="{{image.get_absolute_url}}/">{% trans "Normal" %}</a></span>
                                     {% else %}
-                                    <span class="small-icon"><a href={{image.get_absolute_url}}/?mod=inverted"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
-                                    <span class="text"><a href={{image.get_absolute_url}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
+                                    <span class="small-icon"><a href="{{image.get_absolute_url}}/?mod=inverted"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
+                                    <span class="text"><a href="{{image.get_absolute_url}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
                                     {% endif %}
                                 </li>
                                 <li class="last">
