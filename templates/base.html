@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load tags %}
 {% load compress %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -35,6 +36,7 @@
         <script src="/static/js/jquery-ui-1.8.7.custom.min.js"></script>
         <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
         <script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
+        <script type="text/javascript" src="/static/js/menus.js"></script>
 
         {% block extra_head %}
         {% endblock %}
@@ -54,54 +56,80 @@
                         {% trans "The definite home for your astrophotography images." %}
                     </h4>
                 </div>
-
-                {% load tags %}
-                <div  id="nav">
-                    <ul>
-                        <li id="{% current request "^/$" %}"><a href="/">{% trans "Home" %}</a></li>
-                        <li><a href="#">{% trans "ABPOD" %}</a></li>
-                        <li><a href="#">{% trans "Top images" %}</a></li>
-                        <li><a href="#">{% trans "Support" %}</a></li>
-                        <li><a href="#">{% trans "About" %}</a></li>
-                    </ul>
-                </div>
-                <div id="user-nav">
-                    <ul>
+                <div id="nav-container">
+                    <div id="nav">
+                        <ul>
+                            <li id="{% current request "^/$" %}"><a href="/">{% trans "Home" %}</a></li>
+                            <li><a href="#">{% trans "ABPOD" %}</a></li>
+                            <li><a href="#">{% trans "Help" %}</a></li>
+                        </ul>
+                    </div>
+                    <div id="search">
+                        <script type="text/javascript">
+                            function clearText(field){
+                                if (field.defaultValue == field.value) field.value = '';
+                                else if (field.value == '') field.value = field.defaultValue;
+                            }
+                        </script>
+                        <form id="quick-search" action="/search/" method="get" >
+                            <p>
+                            <label for="qsearch">Search:</label>
+                            <input class="tbox"
+                                   id="q"
+                                   type="text"
+                                   name="q"
+                                   value="{% trans "Search images by subject or gear" %}"
+                                   title="{% trans "Start typing and hit ENTER" %}"
+                                   onfocus="clearText(this)"
+                                   onblur="clearText(this)"/>
+                            <input class="btn" alt="{% trans "Search" %}" type="image"
+                                   name="searchsubmit" title="{% trans "Search" %}"
+                                   src="/static/icons/iconic/white/magnifying_glass_16x16.png"/>
+                            </p>
+                        </form>
+                    </div>
+                    <div id="user-nav">
+                        <ul>
                         {% if user.is_authenticated %}
-                        <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-                        <li><a href="/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a></li>
-                        <li id="{% current request "^/profile/" %}"><a href="/profile/edit/basic/">{% trans "Profile" %}</a></li>
+                            <li>
+                                <a href="#"><img alt="Account" src="/static/icons/iconic/orange/user_12x16.png"/></a>
+                                <div class="popup">
+                                    <ul>
+                                        <li>
+                                            <a href="{% url auth_logout %}">{% trans "Log out" %}</a>
+                                        </li>
+                                        <li>
+                                            <a href="/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a>
+                                        </li>
+                                        <li id="{% current request "^/profile/" %}">
+                                            <a href="/profile/edit/basic/">{% trans "Profile" %}</a>
+                                        </li>
+                                    </ul>
+                               </div>
+                            </li>
+                            <li>
+                                <a href="#"><img alt="Notifications" src="/static/icons/iconic/orange/new_window_16x16.png"/></a>
+                                <div class="popup">
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#"><img alt="Messages" src="/static/icons/iconic/orange/chat_alt_fill_16x16.png"/></a>
+                                <div class="popup">
+                                </div>
+                            </li>
                         {% else %}
-                        <li id="{% current request "^/accounts/login/" %}"><a href="{% url auth_login %}">{% trans "Log in" %}</a></li>
-                        <li id="{% current request "^/accounts/register/" %}"><a href="{% url registration_register %}">{% trans "Register" %}</a></li>
+                            <li id="{% current request "^/accounts/login/" %}">
+                                <a href="{% url auth_login %}">{% trans "Log in" %}</a>
+                            </li>
+                            <li id="{% current request "^/accounts/register/" %}">
+                                <a href="{% url registration_register %}">{% trans "Register" %}</a>
+                            </li>
                         {% endif %}
-                    </ul>
+
+                        </ul>
+                    </div>
                 </div>
-                <div id="search">
-                    <script type="text/javascript">
-                        function clearText(field){
-                            if (field.defaultValue == field.value) field.value = '';
-                            else if (field.value == '') field.value = field.defaultValue;
-                        }
-                    </script>
-                    <form id="quick-search" action="/search/" method="get" >
-                        <p>
-                        <label for="qsearch">Search:</label>
-                        <input class="tbox"
-                               id="q"
-                               type="text"
-                               name="q"
-                               value="{% trans "Search images by subject or gear" %}"
-                               title="{% trans "Start typing and hit ENTER" %}"
-                               onfocus="clearText(this)"
-                               onblur="clearText(this)"/>
-                        <input class="btn" alt="{% trans "Search" %}" type="image"
-                               name="searchsubmit" title="{% trans "Search" %}"
-                               src="/static/icons/iconic/white/magnifying_glass_16x16.png"/>
-                        </p>
-                    </form>
-                </div>
-                {% endblock %}
+               {% endblock %}
             <!-- /header -->
             </div>
 
@@ -109,7 +137,7 @@
 
             <!-- content -->
             <div id="content-wrap" class="clear">
-                <div id="content">
+                <div id="content" class="clear">
                     {% block content %}{% endblock %}
                 </div>
             </div>
@@ -126,9 +154,7 @@
                         <ul>
                             <li><a href="/">{% trans "Home" %}</a></li>
                             <li><a href="#">{% trans "ABPOD" %}</a></li>
-                            <li><a href="#">{% trans "Top images" %}</a></li>
-                            <li><a href="#">{% trans "Support" %}</a></li>
-                            <li><a href="#">{% trans "About" %}</a></li>
+                            <li><a href="#">{% trans "Help" %}</a></li>
                         </ul>
                     </p>
                 </div>
@@ -172,7 +198,10 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $('select, input:checkbox, input:radio, input:file').uniform();
+                $('#user-nav > ul > li').bind('mouseover', function() { top_open($(this), '.popup'); })
+                $('#user-nav > ul > li').bind('mouseout',  top_timer)
             });
+            document.onclick = top_close;
         </script>
 
     </body>

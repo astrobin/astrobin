@@ -1,8 +1,8 @@
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
-@background-color: #1D140F;
+@background-color: #252120;
 @link-color: #CC4B2E;
-@strong-text-color: #FCFCF0;
-@logo-color: #258E92;
+@strong-text-color: #FCFCFC;
+@logo-color: #3092CF;
 @danger-color: #C70000;
 
 @header-color: @strong-text-color;
@@ -26,6 +26,11 @@
 @button-gradient-inverted-bottom-color: @text-color;
 
 @base-font-size: 12px;
+@spacer-small: 4px;
+@spacer-medium: @spacer-small * 2;
+@spacer-large: @spacer-small * 3;
+@spacer-xlarge: @spacer-small * 4;
+@spacer-xxlarge: @spacer-small * 7;
 
 @font-face {
     font-family: 'astrobin_sans';
@@ -38,6 +43,23 @@
 @font-face {
     font-family: 'Sling';
     src: url('/static/fonts/Sling.ttf');}
+
+.background-gradient {
+    border: 1px solid @border-color;
+    border-top: 1px solid (@border-color * @hilight-factor);
+    background: @background-color;
+    background: -webkit-gradient(linear, left top, left bottom, from(@background-color), to(@background-color / @hilight-factor));
+    background: -moz-linear-gradient(top, @background-color, @background-color / @hilight-factor);
+    color: @text-color;}
+
+.background-gradient-inverted {
+    border: 1px solid @border-color;
+    border-top: 1px solid (@border-color / @hilight-factor);
+    background: @background-color;
+    background: -webkit-gradient(linear, left top, left bottom, from(@background-color), to(@background-color * @hilight-factor));
+    background: -moz-linear-gradient(top, @background-color, @background-color * @hilight-factor);
+    color: @text-color;}
+
 
 .button-gradient {
     border: 1px solid @button-gradient-bottom-color;
@@ -106,10 +128,20 @@
     -webkit-border-radius: @radius;
      border-radius: @radius;}
 
+.rounded-corners-bottom (@radius: 6px) {
+    -moz-border-radius: 0 0 @radius @radius;
+    -webkit-border-radius: 0 0 @radius @radius;
+     border-radius: 0 0 @radius @radius;}
+
 .box-shadow {
     -webkit-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
     -moz-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
     box-shadow: rgba(0,0,0,0.8) 0 1px 6px;}
+
+.no-box-shadow {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;}
 
 .text-shadow {
     text-shadow: rgba(0,0,0,0.8) 0 1px 6px;}
@@ -187,7 +219,7 @@ input.text,
 input.email, 
 input.password,
 textarea.uniform {
-  font-size: 12px;
+  font-size: @base-font-size;
   font-weight: normal;
   padding: 3px;
   color: @background-color;
@@ -521,7 +553,7 @@ div.button span {
   padding-top: 8px;
   font-weight: bold;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: @base-font-size;
   letter-spacing: 1px;
   text-transform: uppercase;
   padding-left: 2px;
@@ -531,13 +563,13 @@ div.button span {
 /* Select */
 div.selector {
   width: 190px;
-  font-size: 12px;
+  font-size: @base-font-size;
 }
 
 div.selector select {
   min-width: 190px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: @base-font-size;
   border: solid 1px @border-color;
 }
 
@@ -753,7 +785,7 @@ body {
     font-size: @base-font-size;
     line-height: 1.25em;
     color: @text-color;
-    background: @background-color;
+    background: @background-color / @hilight-factor;
     border-top: 5px solid @logo-color;
     text-align: left;}
 
@@ -834,8 +866,6 @@ strong { .strong; }
 
 /* form elements */
 form {
-    margin: 0;
-    padding: 10px;
     p {
         margin: 0;
         padding: 2px 5px;}
@@ -853,7 +883,7 @@ form {
     input, select, textarea {
         font-size: @base-font-size;
         margin: 2px 0;
-        padding: 8px 4px;
+        padding: @spacer-medium @spacer-small;
         border-width: 1px;
         border-style: solid;
         border-color: @border-color;
@@ -875,8 +905,8 @@ form {
     .text-shadow;
     text-align: center;
     vertical-align: middle;
-    margin: 10px 0;
-    padding: 4.5px 9px;
+    margin: @spacer-large 0;
+    padding: @spacer-small @spacer-medium;
     cursor: pointer;
     :hover {
         .button-gradient-hilighted;}
@@ -902,18 +932,20 @@ form {
     position: relative;
     margin: 0 auto;
     height: 159px;
-    background: url(../images/header-bg.jpg) no-repeat center bottom;
+    width: 940px;
+    .background-gradient-inverted;
     #title {
         margin: 0;
         padding: 0;
         position: absolute;
-        top: 64px;
+        top: 60px;
         left: 10px;
         text-align: center;
         overflow: visible;
         width: 220px;
         h1 {
             font-size: 2.5em;
+            border: none;
             a {
                 font-size: 1.5em;
                 text-decoration: none;
@@ -922,6 +954,20 @@ form {
             margin-top: 6px;
             color: @logo-color;}}
     /*  navigation  */
+    #nav-container {
+        border-bottom: 1px solid @border-color;
+        height: 55px;
+        a:link, a:visited {
+            float: left;
+            margin: 0;
+            padding: @spacer-xxlarge @spacer-small @spacer-large;
+            border-left: 1px solid @background-color;
+            border-right: 1px solid @background-color;
+            text-transform: lowercase;}
+        a:hover, a:active {
+            border-left: 1px solid (@border-color * @strong-hilight-factor);
+            border-right: 1px solid (@border-color * @strong-hilight-factor);
+            background-color: @background-color * @strong-hilight-factor;}}
     #nav {
         margin: 0; padding: 0;
         overflow: hidden;
@@ -933,50 +979,19 @@ form {
             list-style: none;
             li {
                 float: left;
-                margin: 0; padding: 0 0 0 5px;
-                a:link, a:visited {
-                    float: left;
-                    margin: 0;
-                    padding: 30px 15px 17px 11px;
-                    text-transform: lowercase;}
-                a:hover, a:active {
-                    border: none;
-                    color: @link-color * @hilight-factor;}}
+                margin: 0; padding: 0;
+                a:link {
+                    padding-left: @spacer-large;
+                    padding-right: @spacer-large;}}
             li#current {
                 a {
+                    background-color: @background-color * @hilight-factor;
                     color: @strong-text-color;}}}}
-    #user-nav {
+    #search {
         float: right;
-        margin: 0; padding: 0;
-        overflow: hidden;
-        ul {
-            float: right;
-            margin: 0;  padding: 0;
-            width: 100%;
-            list-style: none;
-            display: inline;
-            li {
-                float: left;
-                margin: 0; padding: 0 0 0 5px;
-                display: inline;
-                a:link, a:visited {
-                    float: left;
-                    margin: 0;
-                    padding: 30px 15px 17px 11px;
-                    text-transform: lowercase;}
-                a:hover, a:active {
-                        border: none;
-                        color: @link-color * @hilight-factor;}}
-            li#current {
-                a {
-                    color: @strong-text-color;}}}}
-    form#quick-search {
-        position: absolute;
-        top: 19px; right: 280px;
-        z-index: 999;
-        padding: 0; margin: 0;
+        margin: @spacer-xlarge 0 0 @spacer-medium;
+        padding: 0 @spacer-small;
         border: @border-color;
-        width: 250px; height: 32px;
         background-color: @dark-panel-color;
         .rounded-corners;
         p {
@@ -984,7 +999,6 @@ form {
             border: none;}
         input {
             float: left;
-            margin: 0; padding: 5px;
             border: none;
             background: transparent;
             color: @text-color / @strongest-hilight-factor;}
@@ -997,7 +1011,22 @@ form {
             height: 16px;
             padding-top: 10px;}
         label {
-            display: none;}}}
+            display: none;}}
+
+    #user-nav {
+        position: relative;
+        float: right;
+        margin: 0; padding: 0;
+        ul {
+            float: right;
+            margin: 0;  padding: 0;
+            width: 100%;
+            list-style: none;
+            display: inline;
+            li {
+                float: left;
+                margin: 0; padding: 0;
+                display: inline;}}}}
 
 /* abpod block */
 #abpod {
@@ -1044,7 +1073,7 @@ form {
 #abpod .image-block img {
     background-color: #1c130e;
     border: 1px solid #251a15;
-    padding: 12px;
+    padding: @spacer-large;
 }
 #abpod .text-block {
     float: right;
@@ -1073,17 +1102,15 @@ form {
 /* Content */
 #content-wrap {
     clear: both;
-    width: 940px;
-    background: @background-color url(../images/content-bg.jpg) no-repeat bottom center;}
+    width: 910px;
+    padding: 0 @spacer-xlarge;
+    background: @background-color;}
 
 #content {
     float: left;
-    width: 920px;
-    padding: 20px 10px 40px 10px;
-    display: inline;
-    border-left: 1px solid @border-color;
-    border-right: 1px solid @border-color;
-}
+    padding: 20px 0 10px 0;
+    width: 910px;
+    display: inline;}
 
 .info-side-bar {
     float:left;
@@ -1154,9 +1181,17 @@ form {
     background-color: @light-panel-color;
     border: 1px solid @border-color;
     width: 50%;
-    margin-top: 30px;
+    margin-top: @spacer-xxlarge;
     .single-form {
         text-align: center;}}
+
+.full-box {
+    width: 852px;
+    padding: @spacer-xxlarge;
+    margin: 0;
+    .rounded-corners;
+    background-color: @light-panel-color;
+    border: 1px solid @border-color;}
 
 #image-detail {
     #main-content {
@@ -1167,12 +1202,12 @@ form {
         text-align: center;}
     ul.bar {
         list-style: none;
-        margin: 0 0 30px 0;
+        margin: 0 0 @spacer-xxlarge 0;
         padding: 0;
         >li {
             float: left;}
         >li.rating {
-            padding-top: 4px;
+            padding-top: @spacer-small;
             text-align: right;
             float: right;}}
     ul.topnav {
@@ -1190,46 +1225,11 @@ form {
             margin: 0;
             float: left;
             position: relative;
-            ul.subnav {
-                list-style: none;
-                position: absolute;
-                left: 0px; top: 28px;
-                margin: 0;
-                padding: 5px 8px;
-                visibility: hidden;
-                float: left;
-                white-space: nowrap;
-                .rounded-corners;
-                .box-shadow;
-                .button-gradient-inverted;
-                li {
-                    text-align: left;
-                    padding: 4px 8px;
-                    a {
-                        color: @background-color;
-                        text-shadow: none;
-                        :hover {
-                            color: @link-color;}}
-                    a.danger {
-                        color: @danger-color;
-                        :hover {
-                            color: @danger-color * @hilight-factor;}}
-                    img {
-                        padding-top: 4px;}}
-                li.copy-box {
-                    margin: 8px 0;}
-                li.separator {
-                    height: 0;
-                    margin: 8px 0;
-                    padding: 0;
-                    width: 100%;
-                    border-top: 1px solid @border-shadow-color-inverted;
-                    border-bottom: 1px solid @border-color-inverted;}}}
-        a {
-            color: @strong-text-color;
-            .text-shadow;
-            :hover {
-                color: @strong-text-color * @hilight-factor;}}
+            >span >a {
+                color: @strong-text-color;
+                .text-shadow;
+                :hover {
+                    color: @strong-text-color * @hilight-factor;}}}
         >li.subhover {
             cursor: pointer;}}
     .main-image-data {
@@ -1264,6 +1264,55 @@ form {
             border: 1px solid @dark-panel-color;}}
     p#description {
         margin: 0;}}
+
+.sub {
+    visibility: hidden;
+    position: absolute;
+    left: 0px; top: 28px;
+    margin: 0;
+    padding: 5px 8px;
+    overflow: visible;
+    .button-gradient-inverted;
+    .rounded-corners;
+    .box-shadow;}
+
+.popup {
+    .sub;
+    background: @background-color * @strong-hilight-factor;
+    border: 1px solid (@border-color * @strong-hilight-factor);
+    border-top: none;
+    .rounded-corners-bottom;
+    .no-box-shadow;
+    top: 55px;}
+
+ul.subnav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    li {
+        text-align: left;
+        padding: 4px 8px;
+        a {
+            color: @background-color;
+            text-shadow: none;
+            :hover {
+                color: @link-color;}}
+        a.danger {
+            color: @danger-color;
+            :hover {
+                color: @danger-color * @hilight-factor;}}
+        >img {
+            padding-top: 4px;}}
+    li.copy-box {
+        margin: 8px 0;}
+    li.separator {
+        height: 0;
+        margin: 8px 0;
+        padding: 0;
+        width: 100%;
+        border-top: 1px solid @border-shadow-color-inverted;
+        border-bottom: 1px solid @border-color-inverted;}}
 
 .small-icon {
     width: 16px;
@@ -1325,7 +1374,7 @@ ul.as-selections {
         .rounded-corners;
         .box-shadow;
         :last-child {
-            margin-left: 30px;}
+            margin-left: @spacer-xxlarge}
         a.as-close {
             float: right;
             margin: 0 0 0 7px;
@@ -1365,7 +1414,7 @@ ul.as-list {
 
 li.as-result-item, li.as-message {
     margin: 0 0 0 0;
-    padding: 4px 12px;
+    padding: @spacer-small @spacer-large;
     background-color: transparent;
     cursor: pointer;
     display: block;}
@@ -1430,22 +1479,19 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 /* footer */
 #footer {
     float: left;
-    width: 100%;
     text-align: center;
-    background-color: @background-color / @hilight-factor;
+    background-color: @background-color / @strong-hilight-factor;
     color: @text-color / @strong-hilight-factor;}
 
 #footer-outer {
     clear: both;
-    width: 940px;
     margin: 0 auto;
+    width: 940px;
     font-size: .9em;
     text-align: left;}
 
 #footer-wrap {
     float: left;
-    width: 920px;
-    margin-left: 10px;
     padding-top: 20px;
     display: inline;
     h3 {
@@ -1467,7 +1513,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 #footer-bottom {
     float: left;
     width: 100%;
-    margin: 30px auto 15px auto;
+    margin: @spacer-xxlarge auto @spacer-xlarge auto;
     .bottom-left {
         float: left;}
     .bottom-right {
@@ -1589,9 +1635,9 @@ ul.image-strip {
     .box-shadow;
     list-style: none;
     margin: 10px 0;
-    padding: 12px 16px;
+    padding: @spacer-large @spacer-xlarge;
     li {
-        padding: 4px 0;}}
+        padding: @spacer-small 0;}}
 
 .ic_caption a {
     color: black;
