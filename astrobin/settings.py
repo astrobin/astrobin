@@ -65,7 +65,7 @@ S3_HISTOGRAMS_BUCKET = 'astrobin_histograms'
 S3_URL = 's3.amazonaws.com'
 
 RESIZED_IMAGE_SIZE = 720
-THUMBNAIL_SIZE = 230
+THUMBNAIL_SIZE = 213
 SMALL_THUMBNAIL_SIZE = 100
 ABPOD_SIZE = 350
 
@@ -107,7 +107,8 @@ INSTALLED_APPS = (
     'registration',
     'djangoratings',
     'compressor',
-    'haystack'
+    'haystack',
+    'notification',
 )
 
 LOGIN_REDIRECT_URL = '/'

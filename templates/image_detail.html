@@ -14,72 +14,78 @@
                         <li id="actions" class="first">
                             <span class="text"><a href="#">{% trans "Actions" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
-                            <ul class="subnav">
-                            {% if request.user == image.user %}
-                                <li class="first">
-                                    <span class="small-icon"><a href="/edit/basic/{{image.id}}"><img alt="" src="/static/icons/iconic/black/pen_8x8.png"/></a></span>
-                                    <span class="text"><a href="/edit/basic/{{image.id}}">{% trans "Edit basic information" %}</a></span>
-                                </li>
-                                <li>
-                                    <span class="small-icon"><a href="/edit/gear/{{image.id}}"><img alt="" src="/static/icons/iconic/black/pen_alt_stroke_8x8.png"/></a></span>
-                                    <span class="text"><a href="/edit/gear/{{image.id}}">{% trans "Edit gear used" %}</a></span>
-                                </li>
-                                <li>
-                                    <span class="small-icon"><a href="/edit/acquisition/{{image.id}}"><img alt="" src="/static/icons/iconic/black/pen_alt_fill_8x8.png"/></a></span>
-                                    <span class="text"><a href="/edit/acquisition/{{image.id}}">{% trans "Edit acquisition details" %}</a></span>
-                                </li>
-                                <li>
-                                    <span class="small-icon"><a class="delete" href="#"><img alt="" src="/static/icons/iconic/black/trash_stroke_8x8.png"/></a></span>
-                                    <span class="text"><a class="delete" class="danger" href="#">{% trans "Delete" %}</a></span>
-                                </li>
-                                <li class="separator"></li>
-                            {% endif %}
-                                <li>
-                                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/left_quote_8x8.png"/></a></span>
-                                    <span class="text"><a href="#">{% trans "Bring to a user's attention" %}</a></span>
-                                </li>
-                                <li>
-                                    <span class="small-icon"><a href="#"><img style="margin-right: 4px" alt="" src="/static/icons/iconic/black/info_4x8.png"/></a></span>
-                                    <a href="#">{% trans "Request additional information" %}</a></span>
-                                </li>
-                                <li class="last">
-                                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/folder_stroke_8x8.png"/></a></span>
-                                    <span class="text"><a href="#">{% trans "Request TIFF/FITS" %}</a></span>
-                                </li>
-                            </ul>
+                            <div class="sub">
+                                <ul class="subnav">
+                                {% if request.user == image.user %}
+                                    <li class="first">
+                                        <span class="small-icon"><a href="/edit/basic/{{image.id}}"><img alt="" src="/static/icons/iconic/black/pen_8x8.png"/></a></span>
+                                        <span class="text"><a href="/edit/basic/{{image.id}}">{% trans "Edit basic information" %}</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="small-icon"><a href="/edit/gear/{{image.id}}"><img alt="" src="/static/icons/iconic/black/pen_alt_stroke_8x8.png"/></a></span>
+                                        <span class="text"><a href="/edit/gear/{{image.id}}">{% trans "Edit gear used" %}</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="small-icon"><a href="/edit/acquisition/{{image.id}}"><img alt="" src="/static/icons/iconic/black/pen_alt_fill_8x8.png"/></a></span>
+                                        <span class="text"><a href="/edit/acquisition/{{image.id}}">{% trans "Edit acquisition details" %}</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="small-icon"><a class="delete" href="#"><img alt="" src="/static/icons/iconic/black/trash_stroke_8x8.png"/></a></span>
+                                        <span class="text"><a class="delete" class="danger" href="#">{% trans "Delete" %}</a></span>
+                                    </li>
+                                    <li class="separator"></li>
+                                {% endif %}
+                                    <li>
+                                        <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/left_quote_8x8.png"/></a></span>
+                                        <span class="text"><a href="#">{% trans "Bring to a user's attention" %}</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="small-icon"><a href="#"><img style="margin-right: 4px" alt="" src="/static/icons/iconic/black/info_4x8.png"/></a></span>
+                                        <span class="text"><a href="#">{% trans "Request additional information" %}</a></span>
+                                    </li>
+                                    <li class="last">
+                                        <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/folder_stroke_8x8.png"/></a></span>
+                                        <span class="text"><a href="#">{% trans "Request TIFF/FITS" %}</a></span>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li id="view">
                             <span class="text"><a href="#">{% trans "View" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
-                            <ul class="subnav">
-                                <li class="first">
-                                    {% if inverted %}
-                                    <span class="small-icon"><a href="{{image.get_absolute_url}}/"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
-                                    <span class="text"><a href="{{image.get_absolute_url}}/">{% trans "Normal" %}</a></span>
-                                    {% else %}
-                                    <span class="small-icon"><a href="{{image.get_absolute_url}}/?mod=inverted"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
-                                    <span class="text"><a href="{{image.get_absolute_url}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
-                                    {% endif %}
-                                </li>
-                                <li class="last">
-                                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/pin_8x8.png"/></a></span>
-                                    <span class="text"><a href="#">{% trans "Plate solved" %}</a></span>
-                                </li>
-                            </ul>
+                            <div class="sub">
+                                <ul class="subnav">
+                                    <li class="first">
+                                        {% if inverted %}
+                                        <span class="small-icon"><a href="{{image.get_absolute_url}}/"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
+                                        <span class="text"><a href="{{image.get_absolute_url}}/">{% trans "Normal" %}</a></span>
+                                        {% else %}
+                                        <span class="small-icon"><a href="{{image.get_absolute_url}}/?mod=inverted"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
+                                        <span class="text"><a href="{{image.get_absolute_url}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
+                                        {% endif %}
+                                    </li>
+                                    <li class="last">
+                                        <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/pin_8x8.png"/></a></span>
+                                        <span class="text"><a href="#">{% trans "Plate solved" %}</a></span>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li id="share" class="last">
                             <span class="text"><a href="#">{% trans "Share" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
-                            <ul class="subnav">
-                                <li class="first copy-box">
-                                    <span class="text">{% trans "Direct link:" %}</span>
-                                    <span class="copy-box">http://astrob.in/{{image.id}}/</span>
-                                </li>
-                                <li class="last copy-box">
-                                    <span class="text">{% trans "Forms link:" %}</span>
-                                    <span class="copy-box">[URL=http://astrob.in/{{image.id}}/]{{image.title|escape}}[/URL]</span>
-                                </li>
-                            </ul>
+                            <div class="sub">
+                                <ul class="subnav">
+                                    <li class="first copy-box">
+                                        <span class="text">{% trans "Direct link:" %}</span>
+                                        <span class="copy-box">http://astrob.in/{{image.id}}/</span>
+                                    </li>
+                                    <li class="last copy-box">
+                                        <span class="text">{% trans "Forms link:" %}</span>
+                                        <span class="copy-box">[URL=http://astrob.in/{{image.id}}/]{{image.title|escape}}[/URL]</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </li>
@@ -153,12 +159,14 @@
                 <li>
                     <span class="text"><a href="#">Related images</a></span>
                     <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
-                    <ul class="subnav">
-                        <li><a href="{{image.get_absolute_url}}/?related=user">{% trans "Same user" %} ({{image.user.username}})</a></li>
-                        <li><a href="{{image.get_absolute_url}}/?related=subject">{% trans "Same subject" %}</a></li>
-                        <li><a href="{{image.get_absolute_url}}/?related=imaging_telescope">{% trans "Same imaging telescope" %}</a></li>
-                        <li><a href="{{image.get_absolute_url}}/?related=imaging_camera">{% trans "Same imaging camera" %}</a></li>
-                    </ul>
+                    <div class="sub">
+                        <ul class="subnav">
+                            <li><a href="{{image.get_absolute_url}}/?related=user">{% trans "Same user" %} ({{image.user.username}})</a></li>
+                            <li><a href="{{image.get_absolute_url}}/?related=subject">{% trans "Same subject" %}</a></li>
+                            <li><a href="{{image.get_absolute_url}}/?related=imaging_telescope">{% trans "Same imaging telescope" %}</a></li>
+                            <li><a href="{{image.get_absolute_url}}/?related=imaging_camera">{% trans "Same imaging camera" %}</a></li>
+                        </ul>
+                    </div>
                 </ul>
             </ul>
 
@@ -175,35 +183,9 @@
         </div>
     </div>
     <script type="text/javascript">
-    var timeout    = 500;
-    var closetimer = 0;
-    var ddmenuitem = 0;
-
-    function topnav_open() {
-        topnav_canceltimer();
-        topnav_close();
-        ddmenuitem = $(this).find('ul').css('visibility', 'visible');
-    }
-
-    function topnav_close() {
-        if (ddmenuitem)
-            ddmenuitem.css('visibility', 'hidden');
-    }
-
-    function topnav_timer() {
-        closetimer = window.setTimeout(topnav_close, timeout);
-    }
-
-    function topnav_canceltimer() {
-        if(closetimer) {
-            window.clearTimeout(closetimer);
-            closetimer = null;
-        }
-    }
-
     $(document).ready(function() {
-        $('.topnav > li').bind('mouseover', topnav_open)
-        $('.topnav > li').bind('mouseout',  topnav_timer)
+        $('.topnav > li').bind('mouseover', function() { top_open($(this), 'div.sub'); })
+        $('.topnav > li').bind('mouseout',  top_timer)
         $('#rating').raty(
             {
                 start: {{current_rating}},
@@ -262,7 +244,5 @@
                 });
         });
     });
-
-    document.onclick = topnav_close;
     </script>
 {% endblock %}

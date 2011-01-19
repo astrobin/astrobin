@@ -44,8 +44,10 @@
 {% endblock %}
 
 {% block content %}
-    <h2>{% trans "Recent images" %}</h2>
-    {% include 'image-list.html' %}
+    <div class="full-box clear">
+        <h2>{% trans "Recent images" %}</h2>
+        {% include 'image-list.html' %}
+    </div>
     <script type="text/javascript">
         $(document).ready(function() {
             $('form#upload input').change(function() {
