@@ -92,7 +92,7 @@
                         <ul>
                         {% if user.is_authenticated %}
                             <li>
-                                <a href="#"><img alt="Account" src="/static/icons/iconic/orange/user_12x16.png"/></a>
+                                <a class="icon" href="#"><img alt="Account" src="/static/icons/iconic/orange/user_12x16.png"/></a>
                                 <div class="popup">
                                     <ul>
                                         <li>
@@ -108,12 +108,12 @@
                                </div>
                             </li>
                             <li>
-                                <a href="#"><img alt="Notifications" src="/static/icons/iconic/orange/new_window_16x16.png"/></a>
+                                <a class="icon" href="#"><img alt="Notifications" src="/static/icons/iconic/orange/new_window_16x16.png"/></a>
                                 <div class="popup">
                                 </div>
                             </li>
                             <li>
-                                <a href="#"><img alt="Messages" src="/static/icons/iconic/orange/chat_alt_fill_16x16.png"/></a>
+                                <a class="icon" href="#"><img alt="Messages" src="/static/icons/iconic/orange/chat_alt_fill_16x16.png"/></a>
                                 <div class="popup">
                                 </div>
                             </li>
@@ -143,6 +143,7 @@
             </div>
 
         <!-- footer -->
+        <div class="horizontal-separator"></div>
         <div id="footer">
             {% block footer %}
             <!-- footer-outer -->

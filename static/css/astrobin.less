@@ -1,5 +1,5 @@
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
-@background-color: #252120;
+@background-color: #333333;
 @link-color: #CC4B2E;
 @strong-text-color: #FCFCFC;
 @logo-color: #3092CF;
@@ -16,8 +16,9 @@
 @border-color-inverted: @strong-text-color;
 @border-shadow-color: @background-color / @strong-hilight-factor;
 @border-shadow-color-inverted: @text-color + #030303;
-@dark-panel-color: @background-color / @strong-hilight-factor;
+@dark-panel-color: @background-color / @strongest-hilight-factor;
 @light-panel-color: @background-color * @strong-hilight-factor;
+@light-panel-border-color: @background-color / @strong-hilight-factor;
 
 @button-gradient-top-color: @link-color * @hilight-factor;
 @button-gradient-bottom-color: @link-color;
@@ -138,6 +139,16 @@
     -moz-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
     box-shadow: rgba(0,0,0,0.8) 0 1px 6px;}
 
+.bottom-box-shadow {
+    -webkit-box-shadow: rgba(0,0,0,0.2) 0 6px 18px;
+    -moz-box-shadow: rgba(0,0,0,0.2) 0 6px 18px;
+    box-shadow: rgba(0,0,0,0.2) 0 6px 18px;}
+
+.wrap-box-shadow {
+    -webkit-box-shadow: rgba(0,0,0,0.9) 0 30px 6px;
+    -moz-box-shadow: rgba(0,0,0,0.9) 0 30px 6px;
+    box-shadow: rgba(0,0,0,0.9) 0 30px 6px;}
+
 .no-box-shadow {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -152,6 +163,12 @@
 
 .hidden {
     display: none;}
+
+.horizontal-separator {
+    width: 100%;
+    height: 0;
+    border-top: 1px solid (@border-color / @strong-hilight-factor);
+    border-bottom: 1px solid (@border-color * @hilight-factor);}
 
 /* clearing */
 .fix {
@@ -785,7 +802,7 @@ body {
     font-size: @base-font-size;
     line-height: 1.25em;
     color: @text-color;
-    background: @background-color / @hilight-factor;
+    background: (@background-color * @strong-hilight-factor) url('/static/images/background-tile.png');
     border-top: 5px solid @logo-color;
     text-align: left;}
 
@@ -926,20 +943,19 @@ form {
 ------------------------------------------- */
 #wrap {
     width: 940px;
+    .wrap-box-shadow;
     margin: 0 auto;}
 
 #header {
     position: relative;
     margin: 0 auto;
-    height: 159px;
-    width: 940px;
-    .background-gradient-inverted;
+    height: 180px;
+    background: transparent url('/static/images/header-bg.png');
     #title {
         margin: 0;
         padding: 0;
         position: absolute;
-        top: 60px;
-        left: 10px;
+        top: 95px;
         text-align: center;
         overflow: visible;
         width: 220px;
@@ -951,23 +967,16 @@ form {
                 text-decoration: none;
                 color: @logo-color;}}
         h4 {
-            margin-top: 6px;
+            margin-top: 0;
             color: @logo-color;}}
     /*  navigation  */
     #nav-container {
-        border-bottom: 1px solid @border-color;
-        height: 55px;
+        padding-top: 16px;
         a:link, a:visited {
             float: left;
             margin: 0;
-            padding: @spacer-xxlarge @spacer-small @spacer-large;
-            border-left: 1px solid @background-color;
-            border-right: 1px solid @background-color;
-            text-transform: lowercase;}
-        a:hover, a:active {
-            border-left: 1px solid (@border-color * @strong-hilight-factor);
-            border-right: 1px solid (@border-color * @strong-hilight-factor);
-            background-color: @background-color * @strong-hilight-factor;}}
+            padding: 47px 0 8px;
+            text-transform: lowercase;}}
     #nav {
         margin: 0; padding: 0;
         overflow: hidden;
@@ -980,20 +989,22 @@ form {
             li {
                 float: left;
                 margin: 0; padding: 0;
+                width: 80px;
                 a:link {
-                    padding-left: @spacer-large;
-                    padding-right: @spacer-large;}}
+                    width: 80px;
+                    text-align: center;}
+                a:hover {
+                    background: url('/static/images/header-hover-bg.png') no-repeat;}}
             li#current {
-                a {
-                    background-color: @background-color * @hilight-factor;
+                >a {
                     color: @strong-text-color;}}}}
     #search {
         float: right;
-        margin: @spacer-xlarge 0 0 @spacer-medium;
+        margin: 39px @spacer-medium 0 @spacer-medium;
         padding: 0 @spacer-small;
-        border: @border-color;
-        background-color: @dark-panel-color;
-        .rounded-corners;
+        border-bottom: 1px solid (@border-color * @hilight-factor);
+        background-color: @background-color / @hilight-factor;
+        .rounded-corners(24px);
         p {
             margin: 0; padding: 0;
             border: none;}
@@ -1003,17 +1014,20 @@ form {
             background: transparent;
             color: @text-color / @strongest-hilight-factor;}
         .tbox {
-            margin: 3px 0 0 5px;
+            padding: @spacer-medium 0 0 @spacer-small;
             width: 200px;
             display: inline;}
         .btn{
             width: 16px;
             height: 16px;
-            padding-top: 10px;}
+            padding: @spacer-small @spacer-medium;}
         label {
             display: none;}}
 
     #user-nav {
+        .icon {
+            text-align: center;
+            width: 16px;}
         position: relative;
         float: right;
         margin: 0; padding: 0;
@@ -1024,9 +1038,15 @@ form {
             list-style: none;
             display: inline;
             li {
+                padding: 0;
+                position: relative;
                 float: left;
-                margin: 0; padding: 0;
-                display: inline;}}}}
+                margin: 0;
+                display: inline;
+                >a:link {
+                    width: 40px;}
+                >a:hover {
+                    background: url('/static/images/header-hover-bg.png') no-repeat;}}}}}
 
 /* abpod block */
 #abpod {
@@ -1102,14 +1122,13 @@ form {
 /* Content */
 #content-wrap {
     clear: both;
-    width: 910px;
-    padding: 0 @spacer-xlarge;
+    width: 100%;
     background: @background-color;}
 
 #content {
     float: left;
-    padding: 20px 0 10px 0;
-    width: 910px;
+    width: 920px;
+    padding: 20px 10px;
     display: inline;}
 
 .info-side-bar {
@@ -1179,19 +1198,19 @@ form {
     .rounded-corners(12px);
     .box-shadow;
     background-color: @light-panel-color;
-    border: 1px solid @border-color;
+    border: 1px solid @light-panel-border-color;
     width: 50%;
     margin-top: @spacer-xxlarge;
     .single-form {
         text-align: center;}}
 
 .full-box {
-    width: 852px;
+    width: 860px;
     padding: @spacer-xxlarge;
     margin: 0;
     .rounded-corners;
     background-color: @light-panel-color;
-    border: 1px solid @border-color;}
+    border: 1px solid @light-panel-border-color;}
 
 #image-detail {
     #main-content {
@@ -1283,7 +1302,12 @@ form {
     border-top: none;
     .rounded-corners-bottom;
     .no-box-shadow;
-    top: 55px;}
+    top: 70px;
+    a {
+        :link {
+            padding: @spacer-small;}
+        :hover {
+            border: none;}}}
 
 ul.subnav {
     list-style: none;
@@ -1478,9 +1502,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 /* footer */
 #footer {
-    float: left;
+    .box-shadow;
     text-align: center;
-    background-color: @background-color / @strong-hilight-factor;
+    background: (@background-color / @strong-hilight-factor) url('/static/images/footer-bg.png');
     color: @text-color / @strong-hilight-factor;}
 
 #footer-outer {
@@ -1630,9 +1654,8 @@ input.date {
 
 ul.image-strip {
     background-color: @light-panel-color;
-    border: 1px solid @border-color;
+    border: 1px solid @light-panel-border-color;
     .rounded-corners;
-    .box-shadow;
     list-style: none;
     margin: 10px 0;
     padding: @spacer-large @spacer-xlarge;

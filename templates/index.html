@@ -8,15 +8,6 @@
 
 
 {% block abpod %}
-    <div class="small-box">
-        <h2>{% trans "Quick upload" %}</h2>
-        <div class="single-form">
-            <form id="upload" action="/upload/process" method="post" enctype="multipart/form-data">
-                <p><input type="file" name="file" id="id_file"/></p>
-                <p>{% trans "Choose an image to upload it." %}</p>
-            </form>
-        </div>
-    </div>
 	{% if abpod %}
 	<!-- abpod -->		
 	<div id="abpod">			
@@ -44,6 +35,16 @@
 {% endblock %}
 
 {% block content %}
+    <div class="small-box">
+        <h2>{% trans "Quick upload" %}</h2>
+        <div class="single-form">
+            <form id="upload" action="/upload/process" method="post" enctype="multipart/form-data">
+                <p><input type="file" name="file" id="id_file"/></p>
+                <p>{% trans "Choose an image to upload it." %}</p>
+            </form>
+        </div>
+    </div>
+
     <div class="full-box clear">
         <h2>{% trans "Recent images" %}</h2>
         {% include 'image-list.html' %}
