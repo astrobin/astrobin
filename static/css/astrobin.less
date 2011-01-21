@@ -10,13 +10,14 @@
 @input-color: @background-color;
 
 @hilight-factor: 1.2;
-@strong-hilight-factor: 1.4;
+@strong-hilight-factor: 1.5;
 @strongest-hilight-factor: 2.0;
-@border-color: @background-color * @hilight-factor;
+@border-color: @background-color / @strong-hilight-factor;
+@border-bottom-color: @background-color * @strongest-hilight-factor;
 @border-color-inverted: @strong-text-color;
 @border-shadow-color: @background-color / @strong-hilight-factor;
 @border-shadow-color-inverted: @text-color + #030303;
-@dark-panel-color: @background-color / @strongest-hilight-factor;
+@dark-panel-color: @background-color / @hilight-factor;
 @light-panel-color: @background-color * @strong-hilight-factor;
 @light-panel-border-color: @background-color / @strong-hilight-factor;
 
@@ -26,12 +27,15 @@
 @button-gradient-inverted-top-color: @text-color * @hilight-factor;
 @button-gradient-inverted-bottom-color: @text-color;
 
-@base-font-size: 12px;
+@base-font-size: 13px;
 @spacer-small: 4px;
 @spacer-medium: @spacer-small * 2;
 @spacer-large: @spacer-small * 3;
 @spacer-xlarge: @spacer-small * 4;
 @spacer-xxlarge: @spacer-small * 7;
+
+@footer-height: 260px;
+@wrap-shadow-offset: 62px;
 
 @font-face {
     font-family: 'astrobin_sans';
@@ -44,6 +48,9 @@
 @font-face {
     font-family: 'Sling';
     src: url('/static/fonts/Sling.ttf');}
+
+@headers_font: Museo-500;
+@regular_font: Museo-500;
 
 .background-gradient {
     border: 1px solid @border-color;
@@ -145,17 +152,21 @@
     box-shadow: rgba(0,0,0,0.2) 0 6px 18px;}
 
 .wrap-box-shadow {
-    -webkit-box-shadow: rgba(0,0,0,0.9) 0 30px 6px;
-    -moz-box-shadow: rgba(0,0,0,0.9) 0 30px 6px;
-    box-shadow: rgba(0,0,0,0.9) 0 30px 6px;}
+    -webkit-box-shadow: rgba(0,0,0,0.9) 0 @wrap-shadow-offset 6px;
+    -moz-box-shadow: rgba(0,0,0,0.9) 0 @wrap-shadow-offset 6px;
+    box-shadow: rgba(0,0,0,0.9) 0 @wrap-shadow-offset 6px;}
 
 .no-box-shadow {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;}
 
+.common-border {
+    border: 1px solid @border-color;
+    border-bottom: 1px solid @border-bottom-color;}
+
 .text-shadow {
-    text-shadow: rgba(0,0,0,0.8) 0 1px 6px;}
+    text-shadow: rgba(0,0,0,0.8) 0 1px 1px;}
 
 .strong {
     color: @strong-text-color;
@@ -242,10 +253,8 @@ textarea.uniform {
   color: @background-color;
   background: url('../images/uniform/bg-input-focus.png') repeat-x 0px 0px;
   background: url('../images/uniform/bg-input.png') repeat-x 0px 0px;
-  border: solid 1px @border-color;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  .common-border;
+  .rounded-corners(3px);
   outline: 0;
 }
 
@@ -253,11 +262,10 @@ input.text:focus,
 input.email:focus,
 input.password:focus,
 textarea.uniform:focus {
-  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
   box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
-  border-color: @border-color / @hilight-factor;
   background: url('../images/uniform/bg-input-focus.png') repeat-x 0px 0px;
+  .common-border;
+  .box-shadow;
 }
 
 /* SPRITES */
@@ -587,7 +595,7 @@ div.selector select {
   min-width: 190px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: @base-font-size;
-  border: solid 1px @border-color;
+  .common-border;
 }
 
 div.selector span {
@@ -633,7 +641,6 @@ div.uploader span.action {
 div.uploader span.filename {
   color: @background-color * @hilight-factor;
   width: 82px;
-  border-right: solid 1px #bbb;
   font-size: 11px;
 }
 
@@ -798,7 +805,7 @@ div.uploader input {
    HTML ELEMENTS
 ------------------------------------------------- */
 body {
-    font-family: astrobin_sans, Helvetica, Verdana, Sans-serif;
+    font-family: @regular_font, Helvetica, Verdana, Sans-serif;
     font-size: @base-font-size;
     line-height: 1.25em;
     color: @text-color;
@@ -825,12 +832,12 @@ a.danger {
 
 /* headers */
 h1, h2, h3, h4 {
-    font-family: Sling, Georgia, Times New Roman, serif;
+    font-family: @headers_font, Georgia, Times New Roman, serif;
     font-weight: bold;
     color: @header-color;
     .text-shadow;}
-h1 { font-size: 2em; margin: 20px 10px 0; padding-bottom: 10px; border-bottom: 1px solid @border-color;}
-h2 { font-size: 1.5em; margin: 5px; padding-bottom: 8px; border-bottom: 1px solid @border-color;}
+h1 { font-size: 2em; margin: 20px 10px 20px 0; padding-bottom: 10px; border-bottom: 1px solid @border-bottom-color;}
+h2 { font-size: 1.5em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid @border-bottom-color;}
 h3 { font-size: 1.4em; margin: 20px 0 10px 0; }
 h4 { font-size: 1.2em; margin: 10px 0 8px 0; }
 
@@ -863,7 +870,7 @@ code {
     overflow: auto;
     font-family: 'Lucida Console', 'Courier New', Monospace;
     /* white-space: pre; */
-    border: 1px solid #251a14;
+    .common-border;
     background-color: #130d0a;}
 
 acronym {
@@ -873,7 +880,7 @@ acronym {
 blockquote {
     margin: 10px 20px;
     padding: 15px 15px 15px 32px;
-    border: 1px solid #251a14;
+    .common-border;
     background: #130d0a url(../images/quote.gif) no-repeat 12px 12px;
     font-weight: normal;
     line-height: 1.5em;
@@ -901,9 +908,7 @@ form {
         font-size: @base-font-size;
         margin: 2px 0;
         padding: @spacer-medium @spacer-small;
-        border-width: 1px;
-        border-style: solid;
-        border-color: @border-color;
+        .common-border;
         background-color: @input-color;
         color: @text-color + #111;
         width: 70%;
@@ -942,12 +947,15 @@ form {
    LAYOUT
 ------------------------------------------- */
 #wrap {
+    position: relative;
     width: 940px;
+    min-height: 100%;
+    height: 100%;
     .wrap-box-shadow;
+    padding-top: 30px;
     margin: 0 auto;}
 
 #header {
-    position: relative;
     margin: 0 auto;
     height: 180px;
     background: transparent url('/static/images/header-bg.png');
@@ -955,12 +963,16 @@ form {
         margin: 0;
         padding: 0;
         position: absolute;
-        top: 95px;
+        top: 124px;
+        left: 10px;
         text-align: center;
         overflow: visible;
         width: 220px;
+        background: url('/static/images/title-bg.png') no-repeat;
         h1 {
             font-size: 2.5em;
+            margin-bottom: 0;
+            padding-bottom: @spacer-small;
             border: none;
             a {
                 font-size: 1.5em;
@@ -971,11 +983,13 @@ form {
             color: @logo-color;}}
     /*  navigation  */
     #nav-container {
-        padding-top: 16px;
+        padding: 16px 0;
         a:link, a:visited {
             float: left;
             margin: 0;
             padding: 47px 0 8px;
+            width: 80px;
+            text-align: center;
             text-transform: lowercase;}}
     #nav {
         margin: 0; padding: 0;
@@ -989,22 +1003,21 @@ form {
             li {
                 float: left;
                 margin: 0; padding: 0;
-                width: 80px;
-                a:link {
+                a:link, a:visited {
                     width: 80px;
                     text-align: center;}
-                a:hover {
+                a:hover, a:active {
                     background: url('/static/images/header-hover-bg.png') no-repeat;}}
             li#current {
                 >a {
                     color: @strong-text-color;}}}}
     #search {
-        float: right;
-        margin: 39px @spacer-medium 0 @spacer-medium;
+        position: absolute;
+        top: 12px; right: 0;
         padding: 0 @spacer-small;
-        border-bottom: 1px solid (@border-color * @hilight-factor);
+        .common-border;
         background-color: @background-color / @hilight-factor;
-        .rounded-corners(24px);
+        .rounded-corners;
         p {
             margin: 0; padding: 0;
             border: none;}
@@ -1014,7 +1027,7 @@ form {
             background: transparent;
             color: @text-color / @strongest-hilight-factor;}
         .tbox {
-            padding: @spacer-medium 0 0 @spacer-small;
+            padding: @spacer-small 0 0 @spacer-small;
             width: 200px;
             display: inline;}
         .btn{
@@ -1043,9 +1056,9 @@ form {
                 float: left;
                 margin: 0;
                 display: inline;
-                >a:link {
+                >a:link.icon, >a:visited.icon {
                     width: 40px;}
-                >a:hover {
+                >a:hover, >a:active {
                     background: url('/static/images/header-hover-bg.png') no-repeat;}}}}}
 
 /* abpod block */
@@ -1058,7 +1071,7 @@ form {
 }
 #abpod-block {
     position: relative;
-    border: 1px solid #251a14;
+    .common-border;
     background-color: #130d0a;
     width: 920px;
     margin-left: 10px;
@@ -1123,6 +1136,7 @@ form {
 #content-wrap {
     clear: both;
     width: 100%;
+    padding-bottom: @footer-height;
     background: @background-color;}
 
 #content {
@@ -1136,7 +1150,7 @@ form {
     text-align: right;
     margin-top: 10px;
     width: 120px;
-    border: 1px solid @border-color;
+    .common-border;
     border-right: none;
     background-color: @dark-panel-color;
     p {
@@ -1166,7 +1180,7 @@ form {
     float: left;
     width: 740px;
     padding: 20px;
-    border: 1px solid @border-color;
+    .common-border;
     background-color: @dark-panel-color;
     min-height: 135px;
     .rounded-corners;
@@ -1198,7 +1212,7 @@ form {
     .rounded-corners(12px);
     .box-shadow;
     background-color: @light-panel-color;
-    border: 1px solid @light-panel-border-color;
+    .common-border;
     width: 50%;
     margin-top: @spacer-xxlarge;
     .single-form {
@@ -1210,7 +1224,7 @@ form {
     margin: 0;
     .rounded-corners;
     background-color: @light-panel-color;
-    border: 1px solid @light-panel-border-color;}
+    .common-border;}
 
 #image-detail {
     #main-content {
@@ -1267,7 +1281,7 @@ form {
                 display: inline;}
             li.title {
                 margin-right: 15px;
-                font-family: Sling, Georgia, Times New Roman, serif;
+                font-family: @headers_font, Georgia, Times New Roman, serif;
                 font-weight: bold;
                 line-height: 1.1em;
                 color: @header-color;
@@ -1298,7 +1312,7 @@ form {
 .popup {
     .sub;
     background: @background-color * @strong-hilight-factor;
-    border: 1px solid (@border-color * @strong-hilight-factor);
+    .common-border;
     border-top: none;
     .rounded-corners-bottom;
     .no-box-shadow;
@@ -1347,14 +1361,14 @@ span.copy-box {
     padding: 6px;
     margin-left: 6px;
     color: @text-color;
-    border: @border-color;
+    .common-border;
     background-color: @dark-panel-color;
     .rounded-corners;}
 
 #technical-card {
     margin: 0 auto 25px auto;
     padding: 8px 10px;
-    border: 1px solid (@light-panel-color * @hilight-factor);
+    .common-border;
     overflow: auto;
     background-color: @light-panel-color;
     .rounded-corners;
@@ -1382,7 +1396,7 @@ span.copy-box {
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
     list-style-type: none;
-    border: 1px solid @border-color;
+    .common-border;
     padding: 8px 4px;
     margin: 2px 0;
     width: 70%;
@@ -1431,7 +1445,7 @@ ul.as-list {
     background: @text-color;
     background: -moz-linear-gradient(top, @strong-text-color, @text-color);
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@strong-text-color), to(@text-color));
-    border: 1px solid @border-color;
+    .common-border;
     color: @background-color;
     .rounded-corners;
     .box-shadow;}
@@ -1502,6 +1516,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 /* footer */
 #footer {
+    position: absolute;
+    bottom: 0 - @wrap-shadow-offset;
+    height: @footer-height;
     .box-shadow;
     text-align: center;
     background: (@background-color / @strong-hilight-factor) url('/static/images/footer-bg.png');
@@ -1654,7 +1671,7 @@ input.date {
 
 ul.image-strip {
     background-color: @light-panel-color;
-    border: 1px solid @light-panel-border-color;
+    .common-border;
     .rounded-corners;
     list-style: none;
     margin: 10px 0;

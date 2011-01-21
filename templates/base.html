@@ -38,6 +38,9 @@
         <script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
         <script type="text/javascript" src="/static/js/menus.js"></script>
 
+        <!-- fonts -->
+        <script type="text/javascript" src="/static/fonts/Museo-500/MyFonts Webfonts Order M2677657.js"></script>
+
         {% block extra_head %}
         {% endblock %}
     </head>
@@ -50,6 +53,30 @@
             <div id="header">
                 <a name="top"></a>
                 {% block header %}
+                <div id="search">
+                    <script type="text/javascript">
+                        function clearText(field){
+                            if (field.defaultValue == field.value) field.value = '';
+                            else if (field.value == '') field.value = field.defaultValue;
+                        }
+                    </script>
+                    <form id="quick-search" action="/search/" method="get" >
+                        <p>
+                        <label for="qsearch">Search:</label>
+                        <input class="tbox"
+                               id="q"
+                               type="text"
+                               name="q"
+                               value="{% trans "Search images by subject or gear" %}"
+                               title="{% trans "Start typing and hit ENTER" %}"
+                               onfocus="clearText(this)"
+                               onblur="clearText(this)"/>
+                        <input class="btn" alt="{% trans "Search" %}" type="image"
+                               name="searchsubmit" title="{% trans "Search" %}"
+                               src="/static/icons/iconic/white/magnifying_glass_16x16.png"/>
+                        </p>
+                    </form>
+                </div>
                 <div id="title">
                     <h1><a href="/">AstroBin</a></h1>
                     <h4>
@@ -63,30 +90,6 @@
                             <li><a href="#">{% trans "ABPOD" %}</a></li>
                             <li><a href="#">{% trans "Help" %}</a></li>
                         </ul>
-                    </div>
-                    <div id="search">
-                        <script type="text/javascript">
-                            function clearText(field){
-                                if (field.defaultValue == field.value) field.value = '';
-                                else if (field.value == '') field.value = field.defaultValue;
-                            }
-                        </script>
-                        <form id="quick-search" action="/search/" method="get" >
-                            <p>
-                            <label for="qsearch">Search:</label>
-                            <input class="tbox"
-                                   id="q"
-                                   type="text"
-                                   name="q"
-                                   value="{% trans "Search images by subject or gear" %}"
-                                   title="{% trans "Start typing and hit ENTER" %}"
-                                   onfocus="clearText(this)"
-                                   onblur="clearText(this)"/>
-                            <input class="btn" alt="{% trans "Search" %}" type="image"
-                                   name="searchsubmit" title="{% trans "Search" %}"
-                                   src="/static/icons/iconic/white/magnifying_glass_16x16.png"/>
-                            </p>
-                        </form>
                     </div>
                     <div id="user-nav">
                         <ul>
