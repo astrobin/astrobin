@@ -23,6 +23,8 @@
         </div>
     </div>
 
-    <h2>{% trans "Recent images from" %} {{user.username}}</h2>
-    {% include 'image-list.html' %}
+    <div class="full-box clear">
+        <h2>{% trans "Recent images from" %} {{user.username}}</h2>
+        {% include 'image-list.html' %}
+    </div>
 {% endblock %}
