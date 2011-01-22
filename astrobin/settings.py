@@ -65,7 +65,7 @@ S3_HISTOGRAMS_BUCKET = 'astrobin_histograms'
 S3_URL = 's3.amazonaws.com'
 
 RESIZED_IMAGE_SIZE = 720
-THUMBNAIL_SIZE = 213
+THUMBNAIL_SIZE = 168 
 SMALL_THUMBNAIL_SIZE = 100
 ABPOD_SIZE = 350
 
@@ -126,10 +126,11 @@ COMPILER_FORMATS = {
         'arguments': '*.less'
     },
 }
-CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
+CACHE_BACKEND = 'memcached://unix:/var/www/astrobin_env/memcached.sock'
 
 HAYSTACK_SITECONF = 'astrobin.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
 HAYSTACK_XAPIAN_PATH = '/var/www/astrobin_env/xapian_indexes'
 HAYSTACK_DEFAULT_OPERATOR = 'OR'
 
+#import pprint, sys; pprint.pprint(sys.path)

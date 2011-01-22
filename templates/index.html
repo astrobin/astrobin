@@ -40,13 +40,13 @@
         <div class="single-form">
             <form id="upload" action="/upload/process" method="post" enctype="multipart/form-data">
                 <p><input type="file" name="file" id="id_file"/></p>
-                <p>{% trans "Choose an image to upload it." %}</p>
+                <p>{% trans "Choose an image to upload it. Alternatively, you can <a href=\"/profile/edit/flickr/\">import from Flickr</a>." %}</p>
             </form>
         </div>
     </div>
 
     <div class="full-box clear">
-        <h2>{% trans "Recent images" %}</h2>
+        <h2>{% trans "These images have been uploaded recently" %}</h2>
         {% include 'image-list.html' %}
     </div>
     <script type="text/javascript">

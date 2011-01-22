@@ -69,6 +69,7 @@ class Image(models.Model):
     locations = models.ManyToManyField(Location, null=True, blank=True)
     description = models.TextField()
     filename = models.CharField(max_length=64, editable=False)
+    original_ext = models.CharField(max_length=6, editable=False)
     uploaded = models.DateTimeField(editable=False)
 
     # gear
@@ -96,7 +97,7 @@ class Image(models.Model):
         super(Image, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        delete_image_from_s3(self.filename) 
+        delete_image_from_s3(self.filename, self.original_ext) 
         super(Image, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
