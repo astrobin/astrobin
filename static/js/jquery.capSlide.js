@@ -11,7 +11,7 @@
 			var _img = $this.find('img:first');
 			var w = _img.css('width');
 			var h = _img.css('height');
-			$('.ic_caption',$this).css({'color':o.caption_color,'background-color':o.caption_bgcolor,'bottom':'0px','width':w});
+			$('.ic_caption',$this).css({'color':o.caption_color,'background-color':o.caption_bgcolor,'bottom':'0px','width':'148px'});
 			$('.overlay',$this).css('background-color',o.overlay_bgcolor);
 			$this.css({'width':w , 'height':h, 'border':o.border});
 			$this.hover(
