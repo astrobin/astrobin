@@ -9,7 +9,9 @@ from uuid import uuid4
 from PIL import Image as PILImage
 from PIL import ImageOps
 from PIL import ImageDraw
+
 import StringIO
+import os
 
 
 # RGB Hitogram
@@ -30,7 +32,7 @@ def generate_histogram(img):
     fStopLines = 5
 
     # Colours to be used
-    backgroundColor = (84,59,43)    # Background color
+    backgroundColor = (0,0,0,0)     # Background color
     lineColor = (102,102,102)       # Line color of fStop Markers 
     red = (255,60,60)               # Color for the red lines
     green = (51,204,51)             # Color for the green lines
@@ -70,7 +72,7 @@ def generate_histogram(img):
     return im
 
 
-def store_image_in_s3(file, uid, mimetype=''):
+def store_image_in_s3(file, uid, original_ext, mimetype=''):
     def scale_dimensions(w, h, longest_side):
         if w > longest_side:
             ratio = longest_side*1./w
@@ -98,27 +100,31 @@ def store_image_in_s3(file, uid, mimetype=''):
             return (0, (h-w)/2, w, (h+w)/2)
         return (0, 0, w, h)
 
-    def save_to_bucket(data, content_type, bucket, uid):
+    def save_to_bucket(data, content_type, bucket, uid, ext):
         b = conn.create_bucket(bucket)
         k = Key(b)
-        k.key = uid
+        k.key = uid + ext
         k.set_metadata("Content-Type", content_type)
         k.set_contents_from_string(data)
         k.set_acl("public-read");
+
+    format_map = {'image/jpeg':('JPEG', '.jpg'),
+                  'image/png' :('PNG', '.png'),
+                 }
 
     conn = S3Connection(settings.S3_ACCESS_KEY, settings.S3_SECRET_KEY)
     content_type = mimetype if mimetype else mimetypes.guess_type(file.name)[0]
     data = StringIO.StringIO(file.read())
 
     # First store the original image
-    save_to_bucket(data.getvalue(), content_type, settings.S3_IMAGES_BUCKET, uid)
+    save_to_bucket(data.getvalue(), content_type, settings.S3_IMAGES_BUCKET, uid, original_ext)
 
     image = PILImage.open(data)
     # create histogram and store it
     histogram = generate_histogram(image)
     histogramFile = StringIO.StringIO()
-    histogram.save(histogramFile, 'JPEG')
-    save_to_bucket(histogramFile.getvalue(), 'image/jpeg', settings.S3_HISTOGRAMS_BUCKET, uid)
+    histogram.save(histogramFile, format_map['image/png'][0])
+    save_to_bucket(histogramFile.getvalue(), 'image/png', settings.S3_HISTOGRAMS_BUCKET, uid, format_map['image/png'][1])
 
     # Then resize to the display image
     (w, h) = image.size
@@ -127,8 +133,8 @@ def store_image_in_s3(file, uid, mimetype=''):
 
     # Then save to bucket
     resizedFile = StringIO.StringIO()
-    resizedImage.save(resizedFile, 'JPEG')
-    save_to_bucket(resizedFile.getvalue(), 'image/jpeg', settings.S3_RESIZED_IMAGES_BUCKET, uid)
+    resizedImage.save(resizedFile, format_map[content_type][0])
+    save_to_bucket(resizedFile.getvalue(), content_type, settings.S3_RESIZED_IMAGES_BUCKET, uid, format_map[content_type][1])
 
     # Then resize to the thumbnail
     (w, h) = image.size
@@ -136,10 +142,15 @@ def store_image_in_s3(file, uid, mimetype=''):
     thumbnailImage = image.resize((w, h), PILImage.ANTIALIAS)
     croppedImage = thumbnailImage.crop(crop_box(w, h))
 
+    # Then mask to rounded corners
+    mask = PILImage.open('astrobin/thumbnail-mask.png').convert('L');
+    output = ImageOps.fit(croppedImage, mask.size, centering=(0.5, 0.5))
+    output.putalpha(mask)
+
     # Then save to bucket
     thumbnailFile = StringIO.StringIO()
-    croppedImage.save(thumbnailFile, 'JPEG')
-    save_to_bucket(thumbnailFile.getvalue(), 'image/jpeg', settings.S3_THUMBNAILS_BUCKET, uid)
+    output.save(thumbnailFile, format_map['image/png'][0])
+    save_to_bucket(thumbnailFile.getvalue(), 'image/png', settings.S3_THUMBNAILS_BUCKET, uid, format_map['image/png'][1])
 
     # Shrink more!
     (w, h) = image.size
@@ -149,25 +160,25 @@ def store_image_in_s3(file, uid, mimetype=''):
 
     # To the final bucket
     thumbnailFile = StringIO.StringIO()
-    croppedImage.save(thumbnailFile, 'JPEG')
-    save_to_bucket(thumbnailFile.getvalue(), 'image/jpeg', settings.S3_SMALL_THUMBNAILS_BUCKET, uid)
+    croppedImage.save(thumbnailFile, format_map[content_type][0])
+    save_to_bucket(thumbnailFile.getvalue(), content_type, settings.S3_SMALL_THUMBNAILS_BUCKET, uid, format_map[content_type][1])
 
     # Let's also created a grayscale inverted image
     grayscale = ImageOps.grayscale(image)
     inverted = ImageOps.invert(grayscale)
     invertedFile = StringIO.StringIO()
-    inverted.save(invertedFile, 'JPEG')
-    save_to_bucket(invertedFile.getvalue(), 'image/jpeg', settings.S3_INVERTED_BUCKET, uid)
+    inverted.save(invertedFile, format_map[content_type][0])
+    save_to_bucket(invertedFile.getvalue(), content_type, settings.S3_INVERTED_BUCKET, uid, format_map[content_type][1])
 
     # Then we invert the resized image too
     grayscale = ImageOps.grayscale(resizedImage)
     inverted = ImageOps.invert(grayscale)
     invertedFile = StringIO.StringIO()
-    inverted.save(invertedFile, 'JPEG')
-    save_to_bucket(invertedFile.getvalue(), 'image/jpeg', settings.S3_RESIZED_INVERTED_BUCKET, uid)
+    inverted.save(invertedFile, format_map[content_type][0])
+    save_to_bucket(invertedFile.getvalue(), content_type, settings.S3_RESIZED_INVERTED_BUCKET, uid, format_map[content_type][1])
 
 
-def delete_image_from_s3(filename):
+def delete_image_from_s3(filename, ext):
     conn = S3Connection(settings.S3_ACCESS_KEY, settings.S3_SECRET_KEY)
     for bucket in ['astrobin_thumbnails',
                    'astrobin_small_thumbnails',
@@ -177,8 +188,14 @@ def delete_image_from_s3(filename):
                    'astrobin_images',
                    'astrobin_histograms',
                   ]:
+        uid = filename
+        if bucket == 'astrobin_thumbnails':
+            uid += '.png'
+        else:
+            uid += ext
+
         b = Bucket(conn, bucket);
         k = Key(b)
-        k.key = filename
+        k.key = uid
         b.delete_key(k)
 

@@ -47,7 +47,7 @@ def index(request):
 
     return object_list(
         request, 
-        queryset=Image.objects.all()[:8],
+        queryset=Image.objects.all()[:10],
         template_name='index.html',
         template_object_name='image',
         extra_context = {"thumbnail_size":settings.THUMBNAIL_SIZE,
@@ -198,10 +198,11 @@ def image_upload_process(request):
                 context_instance=RequestContext(request))
         file = request.FILES["file"]
 
-    s3_filename = str(uuid4()) + os.path.splitext(file.name)[1]
-    store_image_in_s3(file, s3_filename)
+    s3_filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
+    store_image_in_s3(file, s3_filename, original_ext)
 
-    image = Image(filename = s3_filename, user = request.user)
+    image = Image(filename=s3_filename, original_ext=original_ext,
+                  user=request.user)
     image.save()
 
     if 'qqfile' in request.GET:
@@ -729,11 +730,13 @@ def user_profile_flickr_import(request):
                 if found_size is not None:
                     source = found_size.attrib['source']
                     file = urllib.urlopen(source)
-                    s3_filename = str(uuid4()) + '.JPG'
-                    store_image_in_s3(file, s3_filename, 'image/jpeg')
-                    image = Image(filename = s3_filename, user = request.user,
-                                  title = title if title is not None else '',
-                                  description = description if description is not None else '')
+                    s3_filename = str(uuid4())
+                    original_ext = '.jpg'
+                    store_image_in_s3(file, s3_filename, original_ext, 'image/jpeg')
+                    image = Image(filename=s3_filename, original_ext=original_ext,
+                                  user=request.user,
+                                  title=title if title is not None else '',
+                                  description=description if description is not None else '')
                     image.save()
                     if index > 0:
                         request.session['current-progress'] = [100 / index / len(selected_photos), photo_id]

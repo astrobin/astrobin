@@ -93,12 +93,12 @@
             </ul>
             <div id="main-image">
             {% if inverted %}
-            <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}">
-                <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title|escape}}"/>
+            <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
             </a>
             {% else %}
-            <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}">
-                <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}" alt="{{image.title|escape}}"/>
+            <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
             </a>
             {% endif %}
             </div>
@@ -146,7 +146,7 @@
                     {% endif %}
                     <hr/>
                     <h4>{% trans "Histogram" %}</h4>
-                    <img src="http://{{s3_histograms_bucket}}.{{s3_url}}/{{image.filename}}" alt="{% trans "Histogram" %}"/>
+                    <img src="http://{{s3_histograms_bucket}}.{{s3_url}}/{{image.filename}}.png" alt="{% trans "Histogram" %}"/>
                 </div>
             </div>
 
@@ -174,7 +174,7 @@
             {% for i in related_images %}
                 <li>
                     <a href="{{i.object.get_absolute_url}}/">
-                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.object.filename}}" alt="{{i.object.title|escape}}"/>
+                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.object.filename}}{{i.object.original_ext}}" alt="{{i.object.title|escape}}"/>
                     </a>
                 </li>
             {% endfor %}
