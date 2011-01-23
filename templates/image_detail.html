@@ -47,13 +47,14 @@
                                         <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/folder_stroke_8x8.png"/></a></span>
                                         <span class="text"><a href="#">{% trans "Request TIFF/FITS" %}</a></span>
                                     </li>
-
+                                {% if user.is_authenticated %}
                                     <li class="separator"></li>
 
                                     <li>
                                         <span class="small-icon"><a class="follow" href="#"><img alt="" src="/static/icons/iconic/black/arrow_right_alt1_8x8.png"/></a></span>
                                         <span class="text"><a class="follow" href="#">{% trans "Follow" %} {{image.user.username}}</a></span>
                                     </li>
+                                {% endif %}
                                 </ul>
                             </div>
                         </li>
@@ -256,7 +257,7 @@
                         <p>\
                             <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 20px 0;"></span>\
                             {% blocktrans with image.user.username as username %}\
-                            You will be notified when {{username}} posts new image. Continue?\
+                            You will be notified when {{username}} posts new images. Continue?\
                             {% endblocktrans %}\
                         </p>')
                 .dialog({
@@ -265,8 +266,22 @@
                     modal: true,
                     buttons: {
                         '{% trans "Yes, follow!" %}': function() {
-                            $(this).dialog('close');
-                            window.location = '/follow/{{image.user.username}}/';
+                            var dlg = $(this)
+                            $.ajax({
+                                url: '/follow/{{image.user.username}}/',
+                                success: function() {
+                                    dlg.dialog('close');
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/push_notification/',
+                                        data: {
+                                            'recipient': '{{user}}',
+                                            'type': 'follow_success',
+                                            'data': {'followed_user': '{{image.user.username}}'}
+                                        }
+                                    });
+                                }
+                            });
                         },
                         Cancel: function() {
                             $(this).dialog('close');

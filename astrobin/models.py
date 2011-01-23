@@ -158,7 +158,9 @@ class UserProfile(models.Model):
     software = models.ManyToManyField(Software, null=True, blank=True)
     filters = models.ManyToManyField(Filter, null=True, blank=True)
     accessories = models.ManyToManyField(Accessory, null=True, blank=True)
-    
+
+    follows = models.ManyToManyField('self', null=True, blank=True)
+
     def __unicode__(self):
         return "%s' profile" % self.user
 

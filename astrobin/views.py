@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 from haystack.query import SearchQuerySet, SQ
+from notification import models as notification
 
 from uuid import uuid4
 import os
@@ -779,4 +780,39 @@ def request_progress(request):
         return HttpResponse(json)
     else:
         return HttpResponseBadRequest('Server Error: You must provide X-Progress-ID header or query param.')
+
+
+@login_required
+@require_GET
+def follow(request, username):
+    from_profile = UserProfile.objects.get(user=request.user)
+    to_user = get_object_or_404(User, username=username)
+    to_profile = get_object_or_404(UserProfile, user=to_user)
+
+    if to_profile not in from_profile.follows.all():
+        from_profile.follows.add(to_profile)
+
+    return HttpResponse({'status':'success'}, mimetype='application/javascript');
+
+@login_required
+@require_POST
+def push_notification(request):
+    recipient = None
+    type = None
+    data = {}
+
+    if 'recipient' in request.POST:
+        recipient = request.POST['recipient']
+    if 'type' in request.POST:
+        type = request.POST['type']
+    if 'data' in request.POST:
+        data = request.POST['data']
+
+    if recipient is None or type is None:
+        return HttpResponse({'status':'fail'}, mimetype='application/javascript')
+
+    user = get_object_or_404(User, username=recipient)
+    notification.send([user], type, data)
+    urllib.urlopen('http://127.0.0.1/publish?id=notification', 'New notification');
+    return HttpResponse({'status':'success'}, mimetype='application/javascript')
 

@@ -10,6 +10,8 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+SERVER_EMAIL = 'astrobin@astrobin.com'
+DEFAULT_FROM_EMAIL = 'AstroBin <astrobin@astribin.com>'
 
 DATABASE_ENGINE = 'sqlite3'    # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = 'astrobin.db'  # Or path to database file if using sqlite3.
@@ -47,7 +49,7 @@ MEDIA_URL = '/static/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = '/admin-medica/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '***REMOVED***'
