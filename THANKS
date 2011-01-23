@@ -1,16 +1,27 @@
+Server side:
+===========
 debian
+nginx
+nginx_HTTP_Push_Modulen
+virtualenv
+
+Editing:
+========
 vim
 ssh
-virtualenv
+
+Libraries and frameworks:
+=========================
 django
-django-registration
-django-haystack
+    django-registration
+    django-haystack
+    django-compressor
+    django-ratings
+    django-notification
+
 xapian-haystack
 xapian-bindings
 xapian-code
-django-compressor
-django-ratings
-django-notification
 BeautifulSoup
 boto
 PIL
@@ -18,3 +29,16 @@ python-memcached
 simplejson
 flickrapi
 
+UI:
+===
+LessCSS
+jquery
+    jquery-UI
+    jquery-comet
+    jquery-timepicker-addon
+    jquery-autoSuggest
+    jquery-autocomplete
+    jquery-capSlide
+    jquery-raty
+    jquery-uniform
+    jquery-validationEngine

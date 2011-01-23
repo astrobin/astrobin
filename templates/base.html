@@ -41,11 +41,42 @@
         <!-- fonts -->
         <script type="text/javascript" src="/static/fonts/Museo-500/MyFonts Webfonts Order M2677657.js"></script>
 
+        {% if user.is_authenticated %}
+        <script type="text/javascript">
+            // notification listener
+            function listen(last_modified, etag) {
+               $.ajax({
+                   'beforeSend': function(xhr) {
+                       xhr.setRequestHeader("If-None-Match", etag);
+                       xhr.setRequestHeader("If-Modified-Since", last_modified);
+                   },
+                   url: '/activity?id=notification',
+                   dataType: 'text',
+                   type: 'get',
+                   cache: 'false',
+                   success: function(data, textStatus, xhr) {
+                       etag = xhr.getResponseHeader('Etag');
+                       last_modified = xhr.getResponseHeader('Last-Modified');
+
+                        $('ul#notification-feed').append('<li>'+data.message+'</li>');
+
+                       /* Start the next long poll. */
+                       listen(last_modified, etag);
+                   },
+                   error: function(xhr, textStatus, errorThrown) {
+                       $('#data').prepend(textStatus + ' | ' + errorThrown);
+                   }
+               });
+            };
+        </script>
+        {% endif %}
+
+
         {% block extra_head %}
         {% endblock %}
     </head>
 
-    <body>
+    <body {% if user.is_authenticated %}onload="setTimeout(function() {listen('', '')}, 1000);"{% endif %}>
         <!-- wrap -->
         <div id="wrap">
 
@@ -113,6 +144,8 @@
                             <li>
                                 <a class="icon" href="#"><img alt="Notifications" src="/static/icons/iconic/orange/new_window_16x16.png"/></a>
                                 <div class="popup">
+                                    <ul id="notification-feed">
+                                    </ul>
                                 </div>
                             </li>
                             <li>
@@ -201,9 +234,10 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
+                // popup menus
                 $('select, input:checkbox, input:radio, input:file').uniform();
-                $('#user-nav > ul > li').bind('mouseover', function() { top_open($(this), '.popup'); })
-                $('#user-nav > ul > li').bind('mouseout',  top_timer)
+                $('#user-nav > ul > li').bind('mouseover', function() { top_open($(this), '.popup'); });
+                $('#user-nav > ul > li').bind('mouseout',  top_timer);
             });
             document.onclick = top_close;
         </script>

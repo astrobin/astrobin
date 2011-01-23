@@ -1,0 +1,6 @@
+{% load i18n %}
+{% url notifications as notification_page %}
+{% url user_page username=notification.from_user.username as user_url %}
+{% blocktrans with notification.from_user as invitation_from_user %}
+    <a href="{{user_url}}">{{invitation_from_user}}</a> is now following you.
+{% endblocktrans %}
