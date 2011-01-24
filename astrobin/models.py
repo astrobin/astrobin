@@ -162,7 +162,10 @@ class UserProfile(models.Model):
     follows = models.ManyToManyField('self', null=True, blank=True)
 
     def __unicode__(self):
-        return "%s' profile" % self.user
+        return "%s' profile" % self.user.username
+
+    def get_absolute_url(self):
+        return '/users/%s' % self.user.username
 
 
 def create_user_profile(sender, instance, created, **kwargs):  

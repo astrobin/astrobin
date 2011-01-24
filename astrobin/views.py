@@ -15,18 +15,18 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 from haystack.query import SearchQuerySet, SQ
-from notification import models as notification
 
 from uuid import uuid4
 import os
 import simplejson
 import csv
 import flickrapi
-import urllib
+import urllib2
 
 from models import *
 from forms import *
 from file_utils import *
+from notifications import *
 
 def jsonDump(all):
     if len(all) > 0:
@@ -730,7 +730,7 @@ def user_profile_flickr_import(request):
 
                 if found_size is not None:
                     source = found_size.attrib['source']
-                    file = urllib.urlopen(source)
+                    file = urllib2.urlopen(source)
                     s3_filename = str(uuid4())
                     original_ext = '.jpg'
                     store_image_in_s3(file, s3_filename, original_ext, 'image/jpeg')
@@ -791,28 +791,8 @@ def follow(request, username):
 
     if to_profile not in from_profile.follows.all():
         from_profile.follows.add(to_profile)
-
+    push_notification(request.user, 'follow_success',
+                      {'object':username,
+                       'object_url': to_profile.get_absolute_url()})
     return HttpResponse({'status':'success'}, mimetype='application/javascript');
-
-@login_required
-@require_POST
-def push_notification(request):
-    recipient = None
-    type = None
-    data = {}
-
-    if 'recipient' in request.POST:
-        recipient = request.POST['recipient']
-    if 'type' in request.POST:
-        type = request.POST['type']
-    if 'data' in request.POST:
-        data = request.POST['data']
-
-    if recipient is None or type is None:
-        return HttpResponse({'status':'fail'}, mimetype='application/javascript')
-
-    user = get_object_or_404(User, username=recipient)
-    notification.send([user], type, data)
-    urllib.urlopen('http://127.0.0.1/publish?id=notification', 'New notification');
-    return HttpResponse({'status':'success'}, mimetype='application/javascript')
 

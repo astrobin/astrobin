@@ -271,15 +271,6 @@
                                 url: '/follow/{{image.user.username}}/',
                                 success: function() {
                                     dlg.dialog('close');
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: '/push_notification/',
-                                        data: {
-                                            'recipient': '{{user}}',
-                                            'type': 'follow_success',
-                                            'data': {'followed_user': '{{image.user.username}}'}
-                                        }
-                                    });
                                 }
                             });
                         },

@@ -45,28 +45,27 @@
         <script type="text/javascript">
             // notification listener
             function listen(last_modified, etag) {
-               $.ajax({
-                   'beforeSend': function(xhr) {
-                       xhr.setRequestHeader("If-None-Match", etag);
-                       xhr.setRequestHeader("If-Modified-Since", last_modified);
-                   },
-                   url: '/activity?id=notification',
-                   dataType: 'text',
-                   type: 'get',
-                   cache: 'false',
-                   success: function(data, textStatus, xhr) {
-                       etag = xhr.getResponseHeader('Etag');
-                       last_modified = xhr.getResponseHeader('Last-Modified');
+                $.ajax({
+                    'beforeSend': function(xhr) {
+                        xhr.setRequestHeader("If-None-Match", etag);
+                        xhr.setRequestHeader("If-Modified-Since", last_modified);
+                    },
+                    url: '/activity?id=notification_{{user.username}}',
+                    dataType: 'text',
+                    type: 'get',
+                    cache: 'false',
+                    success: function(data, textStatus, xhr) {
+                        etag = xhr.getResponseHeader('Etag');
+                        last_modified = xhr.getResponseHeader('Last-Modified');
 
-                        $('ul#notification-feed').append('<li>'+data.message+'</li>');
+                        json = jQuery.parseJSON(data);
 
-                       /* Start the next long poll. */
-                       listen(last_modified, etag);
-                   },
-                   error: function(xhr, textStatus, errorThrown) {
-                       $('#data').prepend(textStatus + ' | ' + errorThrown);
-                   }
-               });
+                        $('ul#notification-feed').append('<li>'+json['message']+'</li>');
+
+                        /* Start the next long poll. */
+                        listen(last_modified, etag);
+                    }
+                });
             };
         </script>
         {% endif %}
