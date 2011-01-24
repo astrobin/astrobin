@@ -839,7 +839,7 @@ h1, h2, h3, h4 {
 h1 { font-size: 2em; margin: 20px 10px 20px 0; padding-bottom: 10px; border-bottom: 1px solid @border-bottom-color;}
 h2 { font-size: 1.5em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid @border-bottom-color;}
 h3 { font-size: 1.4em; margin: 20px 0 10px 0; }
-h4 { font-size: 1.2em; margin: 10px 0 8px 0; }
+h4 { font-size: 1em; margin: 10px 0 8px 0; }
 
 /* Lists */
 ul, ol {
@@ -979,18 +979,12 @@ form {
                 text-decoration: none;
                 color: @logo-color;}}
         h4 {
-            margin-top: 0;
+            margin-top: @spacer-small;
             color: @logo-color;}}
     /*  navigation  */
     #nav-container {
         padding: 16px 0;
-        a:link, a:visited {
-            float: left;
-            margin: 0;
-            padding: 47px 0 8px;
-            width: 80px;
-            text-align: center;
-            text-transform: lowercase;}}
+    }
     #nav {
         margin: 0; padding: 0;
         overflow: hidden;
@@ -1004,8 +998,12 @@ form {
                 float: left;
                 margin: 0; padding: 0;
                 a:link, a:visited {
+                    float: left;
+                    margin: 0;
+                    padding: 47px 0 8px;
                     width: 80px;
-                    text-align: center;}
+                    text-align: center;
+                    text-transform: lowercase;}
                 a:hover, a:active {
                     background: url('/static/images/header-hover-bg.png') no-repeat;}}
             li#current {
@@ -1044,19 +1042,24 @@ form {
         position: relative;
         float: right;
         margin: 0; padding: 0;
-        ul {
+        >ul {
             float: right;
             margin: 0;  padding: 0;
             width: 100%;
             list-style: none;
             display: inline;
-            li {
+            >li {
                 padding: 0;
                 position: relative;
                 float: left;
                 margin: 0;
                 display: inline;
                 >a:link.icon, >a:visited.icon {
+                    float: left;
+                    margin: 0;
+                    padding: 47px 0 8px;
+                    text-align: center;
+                    text-transform: lowercase;
                     width: 40px;}
                 >a:hover, >a:active {
                     background: url('/static/images/header-hover-bg.png') no-repeat;}}}}}
@@ -1317,6 +1320,15 @@ form {
     .rounded-corners-bottom;
     .no-box-shadow;
     top: 70px;
+    white-space: nowrap;
+    color: @text-color;
+    padding: @spacer-medium;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;}
+    li {
+        padding: @spacer-small 0;}
     a {
         :link {
             padding: @spacer-small;}

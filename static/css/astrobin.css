@@ -624,7 +624,7 @@ h3 {
   margin: 20px 0 10px 0;
 }
 h4 {
-  font-size: 1.2em;
+  font-size: 1em;
   margin: 10px 0 8px 0;
 }
 ul, ol {
@@ -842,26 +842,10 @@ form textarea:focus {
   color: #3092cf;
 }
 #header #title h4 {
-  margin-top: 0;
+  margin-top: 4px;
   color: #3092cf;
 }
 #header #nav-container { padding: 16px 0; }
-#header #nav-container a:link {
-  float: left;
-  margin: 0;
-  padding: 47px 0 8px;
-  width: 80px;
-  text-align: center;
-  text-transform: lowercase;
-}
-#header #nav-container a:visited {
-  float: left;
-  margin: 0;
-  padding: 47px 0 8px;
-  width: 80px;
-  text-align: center;
-  text-transform: lowercase;
-}
 #header #nav {
   margin: 0;
   padding: 0;
@@ -881,12 +865,20 @@ form textarea:focus {
   padding: 0;
 }
 #header #nav ul li a:link {
+  float: left;
+  margin: 0;
+  padding: 47px 0 8px;
   width: 80px;
   text-align: center;
+  text-transform: lowercase;
 }
 #header #nav ul li a:visited {
+  float: left;
+  margin: 0;
+  padding: 47px 0 8px;
   width: 80px;
   text-align: center;
+  text-transform: lowercase;
 }
 #header #nav ul li a:hover { background: url('/static/images/header-hover-bg.png') no-repeat; }
 #header #nav ul li a:active { background: url('/static/images/header-hover-bg.png') no-repeat; }
@@ -935,7 +927,7 @@ form textarea:focus {
   text-align: center;
   width: 16px;
 }
-#header #user-nav ul {
+#header #user-nav > ul {
   float: right;
   margin: 0;
   padding: 0;
@@ -943,17 +935,31 @@ form textarea:focus {
   list-style: none;
   display: inline;
 }
-#header #user-nav ul li {
+#header #user-nav > ul > li {
   padding: 0;
   position: relative;
   float: left;
   margin: 0;
   display: inline;
 }
-#header #user-nav ul li > a:link.icon { width: 40px; }
-#header #user-nav ul li > a:visited.icon { width: 40px; }
-#header #user-nav ul li > a:hover { background: url('/static/images/header-hover-bg.png') no-repeat; }
-#header #user-nav ul li > a:active { background: url('/static/images/header-hover-bg.png') no-repeat; }
+#header #user-nav > ul > li > a:link.icon {
+  float: left;
+  margin: 0;
+  padding: 47px 0 8px;
+  text-align: center;
+  text-transform: lowercase;
+  width: 40px;
+}
+#header #user-nav > ul > li > a:visited.icon {
+  float: left;
+  margin: 0;
+  padding: 47px 0 8px;
+  text-align: center;
+  text-transform: lowercase;
+  width: 40px;
+}
+#header #user-nav > ul > li > a:hover { background: url('/static/images/header-hover-bg.png') no-repeat; }
+#header #user-nav > ul > li > a:active { background: url('/static/images/header-hover-bg.png') no-repeat; }
 #abpod {
   clear: both;
   margin: 0;
@@ -1268,7 +1274,16 @@ form textarea:focus {
   -moz-box-shadow: none;
   box-shadow: none;
   top: 70px;
+  white-space: nowrap;
+  color: #b8b8b8;
+  padding: 8px;
 }
+.popup ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.popup li { padding: 4px 0; }
 .popup a:link { padding: 4px; }
 .popup a:hover { border: none; }
 ul.subnav {

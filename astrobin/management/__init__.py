@@ -7,7 +7,7 @@ if 'notification' in settings.INSTALLED_APPS:
 
     def create_notice_types(app, created_models, verbosity, **kwargs):
         notification.create_notice_type('new_follower', _('A user is following you'), _('Your new images will be notified to them'))
-        notification.create_notice_type('follow_success', _('You are now folling a user'), _('Their new images will be notified to you'))
+        notification.create_notice_type('follow_success', _('You are now folling'), _('Their new images will be notified to you'))
 
     signals.post_syncdb.connect(create_notice_types, sender=notification)
 else:
