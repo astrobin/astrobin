@@ -60,8 +60,9 @@
 
                         json = jQuery.parseJSON(data);
 
+                        $('ul#notification-feed li#empty').remove();
                         $('img#notifications').attr('src', '/static/icons/iconic/orange/new_notifications.png');
-                        $('ul#notification-feed').append('<li>'+json['message']+'</li>');
+                        $('ul#notification-feed').prepend('<li>'+json['message']+'</li>');
 
                         /* Start the next long poll. */
                         listen(last_modified, etag);
@@ -146,8 +147,7 @@
                                     <img id="notifications" alt="{% trans "Notifications" %}" src="/static/icons/iconic/orange/notifications.png"/>
                                 </a>
                                 <div class="popup">
-                                    <ul id="notification-feed">
-                                    </ul>
+                                    {% notification_list request %}
                                 </div>
                             </li>
                             <li>

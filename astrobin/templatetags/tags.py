@@ -1,5 +1,6 @@
 from django.template import Library
 from django.conf import settings
+from notification import models as notifications
 
 register = Library() 
 
@@ -11,7 +12,7 @@ def current(request, pattern):
     return ''
 
 
-@register.inclusion_tag('image-list.html')
+@register.inclusion_tag('inclusion_tags/image_list.html')
 def image_list(objects_list):
     return {'image_list': [i.object for i in objects_list],
             'thumbnail_size':settings.THUMBNAIL_SIZE,
@@ -20,3 +21,7 @@ def image_list(objects_list):
             's3_url':settings.S3_URL,
            }
 
+@register.inclusion_tag('inclusion_tags/notification_list.html')
+def notification_list(request):
+    return {
+        'notifications':notifications.Notice.objects.filter(user=request.user)[:10]}

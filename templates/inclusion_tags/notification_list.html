@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<ul id="notification-feed">
+{% for n in notifications %}
+    <li>{% autoescape off %}{{n.message}}{% endautoescape %}</li>
+{% empty %}
+    <li id="empty">{% trans "You have no new notifications." %}</li>
+{% endfor %}
+</ul>
