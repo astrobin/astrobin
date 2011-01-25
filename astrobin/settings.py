@@ -83,6 +83,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.csrf.CsrfResponseMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'astrobin.urls'
@@ -111,6 +112,7 @@ INSTALLED_APPS = (
     'compressor',
     'haystack',
     'notification',
+    'debug_toolbar',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -135,4 +137,4 @@ HAYSTACK_SEARCH_ENGINE = 'xapian'
 HAYSTACK_XAPIAN_PATH = '/var/www/astrobin_env/xapian_indexes'
 HAYSTACK_DEFAULT_OPERATOR = 'OR'
 
-#import pprint, sys; pprint.pprint(sys.path)
+INTERNAL_IPS = ('',) # for django-debug-toolbar: add own local IP to enable

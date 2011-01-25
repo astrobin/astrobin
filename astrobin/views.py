@@ -791,8 +791,13 @@ def follow(request, username):
 
     if to_profile not in from_profile.follows.all():
         from_profile.follows.add(to_profile)
+
+    push_notification(to_user, 'new_follower',
+                      {'object':request.user.username,
+                       'object_url':from_profile.get_absolute_url()})
     push_notification(request.user, 'follow_success',
                       {'object':username,
-                       'object_url': to_profile.get_absolute_url()})
+                       'object_url':to_profile.get_absolute_url()})
+
     return HttpResponse({'status':'success'}, mimetype='application/javascript');
 
