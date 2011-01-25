@@ -927,6 +927,10 @@ form textarea:focus {
   text-align: center;
   width: 16px;
 }
+#header #user-nav img {
+  height: 26px;
+  width: 16px;
+}
 #header #user-nav > ul {
   float: right;
   margin: 0;
@@ -945,7 +949,7 @@ form textarea:focus {
 #header #user-nav > ul > li > a:link.icon {
   float: left;
   margin: 0;
-  padding: 47px 0 8px;
+  padding: 37px 0 8px;
   text-align: center;
   text-transform: lowercase;
   width: 40px;
@@ -953,7 +957,7 @@ form textarea:focus {
 #header #user-nav > ul > li > a:visited.icon {
   float: left;
   margin: 0;
-  padding: 47px 0 8px;
+  padding: 37px 0 8px;
   text-align: center;
   text-transform: lowercase;
   width: 40px;
