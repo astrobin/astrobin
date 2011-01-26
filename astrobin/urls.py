@@ -53,6 +53,8 @@ urlpatterns = patterns('',
     (r'^misc/request-progress/$', views.request_progress),
     (r'^users/(?P<username>\w+)/$', views.user_page),
     (r'^follow/(?P<username>\w+)/$', views.follow),
+    (r'^unfollow/(?P<username>\w+)/$', views.unfollow),
     (r'^notices/', include('notification.urls')),
     (r'^push_notification/$', views.push_notification),
+    (r'^notifications/seen/$', views.mark_notifications_seen),
 )

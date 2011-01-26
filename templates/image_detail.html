@@ -40,13 +40,6 @@
                                     <li class="last bg-icon icon-file">
                                         <span class="text"><a href="#">{% trans "Request TIFF/FITS" %}</a></span>
                                     </li>
-                                {% if user.is_authenticated %}
-                                    <li class="separator"></li>
-
-                                    <li class="bg-icon icon-follow">
-                                        <span class="text"><a class="follow" href="#">{% trans "Follow" %} {{image.user.username}}</a></span>
-                                    </li>
-                                {% endif %}
                                 </ul>
                             </div>
                         </li>
@@ -65,6 +58,33 @@
                                     <li class="last bg-icon icon-solved">
                                         <span class="text"><a href="#">{% trans "Plate solved" %}</a></span>
                                     </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li id="user">
+                            <span class="text"><a href="#">{% trans "User" %}</a></span>
+                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
+                            <div class="sub">
+                                <ul class="subnav">
+                                    <li class="first {% if not user.is_authenticated %}last{% endif %} bg-icon icon-profile">
+                                        <span class="text"><a href="{{image.user.get_absolute_url}}">{% trans "View profile" %}</a></span>
+                                    </li>
+                                    {% if user.is_authenticated %}
+                                    <li class="bg-icon {% if follows %}icon-unfollow{% else %}icon-follow{% endif %}">
+                                        <span class="text">
+                                            <a class="{% if follows %}unfollow{% else %}follow{% endif %}" href="#">
+                                                {% if follows %}
+                                                    {% trans "Stop following" %}
+                                                {% else %}
+                                                    {% trans "Follow" %}
+                                                {% endif %}
+                                            </a>
+                                        </span>
+                                    </li>
+                                    <li class="last bg-icon icon-message">
+                                        <span class="text"><a href="#">{% trans "Send private message" %}</a></span>
+                                    </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </li>
@@ -240,8 +260,11 @@
                     }
                 });
         });
-        $('a.follow').click(function() {
-            var $dialog = $('<div id="dialog-confirm" title="{% blocktrans with image.user.username as username %}Follow {{username}}?{% endblocktrans %}">></div>')
+        $('a.follow').live('click', function() {
+            var follow_a = $(this);
+            var span = follow_a.parent();
+
+            var $dialog = $('<div id="dialog-confirm" title="{% blocktrans with image.user.username as username %}Follow {{username}}?{% endblocktrans %}"></div>')
                 .html('\
                         <p>\
                             <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 20px 0;"></span>\
@@ -260,6 +283,46 @@
                                 url: '/follow/{{image.user.username}}/',
                                 success: function() {
                                     dlg.dialog('close');
+                                    follow_a.remove();
+                                    span.html('<a class="unfollow" href="#">{% trans "Stop following" %}</a>');
+                                    span.parent().removeClass('icon-follow');
+                                    span.parent().addClass('icon-unfollow');
+                                }
+                            });
+                        },
+                        Cancel: function() {
+                            $(this).dialog('close');
+                        }
+                    }
+                });
+        });
+        $('a.unfollow').live('click', function() {
+            var unfollow_a = $(this);
+            var span = unfollow_a.parent();
+
+            var $dialog = $('<div id="dialog-confirm" title="{% blocktrans with image.user.username as username %}Stop following {{username}}?{% endblocktrans %}"></div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>\
+                            {% blocktrans with image.user.username as username %}\
+                            You will stop receiving notifications when {{username}} posts new images. Continue?\
+                            {% endblocktrans %}\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    height: 180,
+                    modal: true,
+                    buttons: {
+                        '{% trans "Yes, stop following!" %}': function() {
+                            var dlg = $(this)
+                            $.ajax({
+                                url: '/unfollow/{{image.user.username}}/',
+                                success: function() {
+                                    dlg.dialog('close');
+                                    unfollow_a.remove();
+                                    span.html('<a class="follow" href="#">{% trans "Follow" %}</a>');
+                                    span.parent().removeClass('icon-unfollow');
+                                    span.parent().addClass('icon-follow');
                                 }
                             });
                         },

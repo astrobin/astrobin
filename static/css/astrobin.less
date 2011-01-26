@@ -218,12 +218,18 @@
     background: url('/static/icons/iconic/black/file.png') no-repeat left center;}
 .icon-follow {
     background: url('/static/icons/iconic/black/follow.png') no-repeat left center;}
+.icon-unfollow {
+    background: url('/static/icons/iconic/black/unfollow.png') no-repeat left center;}
 .icon-normal {
     background: url('/static/icons/iconic/black/normale.png') no-repeat left center;}
 .icon-inverted {
     background: url('/static/icons/iconic/black/inverted.png') no-repeat left center;}
 .icon-solved {
     background: url('/static/icons/iconic/black/solved.png') no-repeat left center;}
+.icon-profile {
+    background: url('/static/icons/iconic/black/profile.png') no-repeat left center;}
+.icon-message {
+    background: url('/static/icons/iconic/black/message.png') no-repeat left center;}
 
 /*
 Uniform Theme: Uniform Default
@@ -1379,14 +1385,16 @@ form {
         margin: 0;
         padding: 0;
         list-style: none;}
+    li.unread {
+        background: url('/static/images/popup-unread-bg.png');
+        border-left: 1px solid @strong-text-color;}
     li {
+        padding: @spacer-small;
         border-bottom: 1px dotted (@border-bottom-color * @strongest-hilight-factor);
         :hover {
             background: url('/static/images/popup-li-bg.png');}}
     li.last {
         border-bottom: none;}
-    li.unread {
-        border-left: 1px solid @strong-text-color;}
     a {
         :hover {
             border: none;}}}

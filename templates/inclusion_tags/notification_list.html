@@ -2,7 +2,7 @@
 
 <ul id="notification-feed">
 {% for n in notifications %}
-    <li {% if forloop.last %}class="last"{% endif %}>{% autoescape off %}{{n.message}}{% endautoescape %}</li>
+    <li {% if n.unseen %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>{% autoescape off %}{{n.message}}{% endautoescape %}</li>
 {% empty %}
     <li id="empty"><a href="#">{% trans "You have no new notifications." %}</a></li>
 {% endfor %}

@@ -146,9 +146,12 @@
 .icon-info { background: url('/static/icons/iconic/black/info.png') no-repeat left center; }
 .icon-file { background: url('/static/icons/iconic/black/file.png') no-repeat left center; }
 .icon-follow { background: url('/static/icons/iconic/black/follow.png') no-repeat left center; }
+.icon-unfollow { background: url('/static/icons/iconic/black/unfollow.png') no-repeat left center; }
 .icon-normal { background: url('/static/icons/iconic/black/normale.png') no-repeat left center; }
 .icon-inverted { background: url('/static/icons/iconic/black/inverted.png') no-repeat left center; }
 .icon-solved { background: url('/static/icons/iconic/black/solved.png') no-repeat left center; }
+.icon-profile { background: url('/static/icons/iconic/black/profile.png') no-repeat left center; }
+.icon-message { background: url('/static/icons/iconic/black/message.png') no-repeat left center; }
 div.selector {
   background-image: url(../images/uniform/sprite.png);
   background-repeat: no-repeat;
@@ -1320,10 +1323,16 @@ form textarea:focus {
   padding: 0;
   list-style: none;
 }
-.popup li { border-bottom: 1px dotted #cccccc; }
+.popup li.unread {
+  background: url('/static/images/popup-unread-bg.png');
+  border-left: 1px solid #fcfcfc;
+}
+.popup li {
+  padding: 4px;
+  border-bottom: 1px dotted #cccccc;
+}
 .popup li:hover { background: url('/static/images/popup-li-bg.png'); }
 .popup li.last { border-bottom: none; }
-.popup li.unread { border-left: 1px solid #fcfcfc; }
 .popup a:hover { border: none; }
 ul.subnav {
   list-style: none;

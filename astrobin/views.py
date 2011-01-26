@@ -138,6 +138,9 @@ def image_detail(request, id):
     elif solar_system_acquisition:
         image_type = 'solar_system'
 
+    follows = False
+    if UserProfile.objects.get(user=image.user) in UserProfile.objects.get(user=request.user).follows.all():
+        follows = True
 
     return object_detail(
         request,
@@ -159,7 +162,8 @@ def image_detail(request, id):
                          'gear_list': gear_list,
                          'image_type': image_type,
                          'deep_sky_data': deep_sky_data,
-                         'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False})
+                         'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
+                         'follows': follows})
 
 
 @require_GET
@@ -799,5 +803,30 @@ def follow(request, username):
                       {'object':username,
                        'object_url':to_profile.get_absolute_url()})
 
-    return HttpResponse({'status':'success'}, mimetype='application/javascript');
+    return HttpResponse({'status':'success'}, mimetype='application/javascript')
+
+
+@login_required
+@require_GET
+def unfollow(request, username):
+    from_profile = UserProfile.objects.get(user=request.user)
+    to_user = get_object_or_404(User, username=username)
+    to_profile = get_object_or_404(UserProfile, user=to_user)
+
+    if to_profile in from_profile.follows.all():
+        from_profile.follows.remove(to_profile)
+
+    push_notification(request.user, 'unfollow_success',
+                      {'object':username,
+                       'object_url':to_profile.get_absolute_url()})
+
+    return HttpResponse({'status':'success'}, mimetype='application/javascript')
+
+
+@login_required
+@require_GET
+def mark_notifications_seen(request):
+    for n in notification.Notice.objects.filter(user=request.user):
+        n.is_unseen()
+    return HttpResponse({'status':'success'}, mimetype='application/javascript')
 
