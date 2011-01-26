@@ -138,6 +138,17 @@
   height: 0;
   content: " ";
 }
+.icon-edit { background: url('/static/icons/iconic/black/edit.png') no-repeat left center; }
+.icon-edit-alt { background: url('/static/icons/iconic/black/edit-alt.png') no-repeat left center; }
+.icon-edit-alt2 { background: url('/static/icons/iconic/black/edit-alt2.png') no-repeat left center; }
+.icon-delete { background: url('/static/icons/iconic/black/delete.png') no-repeat left center; }
+.icon-quote { background: url('/static/icons/iconic/black/quote.png') no-repeat left center; }
+.icon-info { background: url('/static/icons/iconic/black/info.png') no-repeat left center; }
+.icon-file { background: url('/static/icons/iconic/black/file.png') no-repeat left center; }
+.icon-follow { background: url('/static/icons/iconic/black/follow.png') no-repeat left center; }
+.icon-normal { background: url('/static/icons/iconic/black/normale.png') no-repeat left center; }
+.icon-inverted { background: url('/static/icons/iconic/black/inverted.png') no-repeat left center; }
+.icon-solved { background: url('/static/icons/iconic/black/solved.png') no-repeat left center; }
 div.selector {
   background-image: url(../images/uniform/sprite.png);
   background-repeat: no-repeat;
@@ -1259,7 +1270,7 @@ form textarea:focus {
 .sub li a.danger { color: #c70000; }
 .sub li a.danger:hover { color: #ee0000; }
 .sub li > img { padding-top: 4px; }
-.sub li:hover { background: url('/static/images/popup-li-bg.png'); }
+.sub li.bg-icon a { padding-left: 16px; }
 .popup {
   visibility: hidden;
   position: absolute;
@@ -1303,16 +1314,17 @@ form textarea:focus {
 .popup li a.danger { color: #c70000; }
 .popup li a.danger:hover { color: #ee0000; }
 .popup li > img { padding-top: 4px; }
-.popup li:hover { background: url('/static/images/popup-li-bg.png'); }
+.popup li.bg-icon a { padding-left: 16px; }
 .popup ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 .popup li { border-bottom: 1px dotted #cccccc; }
-.popup li li.last { border-bottom: none; }
-.popup li li.unread { border-left: 1px solid #fcfcfc; }
-.popup li a:hover { border: none; }
+.popup li:hover { background: url('/static/images/popup-li-bg.png'); }
+.popup li.last { border-bottom: none; }
+.popup li.unread { border-left: 1px solid #fcfcfc; }
+.popup a:hover { border: none; }
 ul.subnav {
   list-style: none;
   margin: 0;
