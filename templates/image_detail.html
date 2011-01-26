@@ -61,6 +61,7 @@
                                 </ul>
                             </div>
                         </li>
+                        {% if request.user != image.user %}
                         <li id="user">
                             <span class="text"><a href="#">{% trans "User" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
@@ -88,6 +89,7 @@
                                 </ul>
                             </div>
                         </li>
+                        {% endif %}
                         <li id="share" class="last">
                             <span class="text"><a href="#">{% trans "Share" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
