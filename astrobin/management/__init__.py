@@ -19,5 +19,11 @@ def create_notice_types(app, created_models, verbosity, **kwargs):
         _('You are not following anymore'),
         _('Their new images will not be notified to you anymore'))
 
+    notification.create_notice_type(
+        'new_image',
+        _('New image'),
+        _('A user you follow has published a new image'))
+
+
 signals.post_syncdb.connect(create_notice_types, sender=notification)
 

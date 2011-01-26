@@ -1,0 +1,4 @@
+{% load i18n %}
+{% blocktrans %}
+New image by {{originator}}
+{% endblocktrans %}
