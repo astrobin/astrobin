@@ -22,9 +22,10 @@ def image_list(objects_list):
            }
 
 @register.inclusion_tag('inclusion_tags/notification_list.html')
-def notification_list(request):
+def notification_list(request, show_footer = True):
     return {
-        'notifications':notifications.Notice.objects.filter(user=request.user)[:10]}
+        'notifications':notifications.Notice.objects.filter(user=request.user)[:10],
+        'show_footer':show_footer}
 
 @register.simple_tag
 def notifications_icon(request):

@@ -57,4 +57,5 @@ urlpatterns = patterns('',
     (r'^notices/', include('notification.urls')),
     (r'^push_notification/$', views.push_notification),
     (r'^notifications/seen/$', views.mark_notifications_seen),
+    (r'^notifications/$', views.notifications),
 )

@@ -6,4 +6,7 @@
 {% empty %}
     <li id="empty"><a href="#">{% trans "You have no new notifications." %}</a></li>
 {% endfor %}
+{% if notifications and show_footer %}
+    <li class="footer"><a href="{% url views.notifications %}">{% trans "Show all notifications" %}</a></li>
+{% endif %}
 </ul>
