@@ -210,6 +210,12 @@ def image_upload_process(request):
                   user=request.user)
     image.save()
 
+    followers = [x.from_userprofile.user
+                 for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
+    push_notification(followers, 'new_image',
+                      {'originator':request.user,
+                       'object_url':image.get_absolute_url()})
+
     if 'qqfile' in request.GET:
         return_dict = {'success':'true', 'id':image.id}
         return HttpResponse(simplejson.dumps(return_dict),
@@ -360,6 +366,7 @@ def image_edit_save_basic(request):
     image.description = form.cleaned_data['description']
 
     image.save()
+
     response_dict['prefill_dict'] = prefill_dict
 
     return render_to_response("image_edit_basic.html",
@@ -743,6 +750,14 @@ def user_profile_flickr_import(request):
                                   title=title if title is not None else '',
                                   description=description if description is not None else '')
                     image.save()
+                    followers = [x.from_userprofile.user
+                                 for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
+                    push_notification(followers, 'new_image',
+                                      {'originator':request.user,
+                                       'object_url':image.get_absolute_url()})
+
+
+
                     if index > 0:
                         request.session['current-progress'] = [100 / index / len(selected_photos), photo_id]
 
@@ -796,10 +811,10 @@ def follow(request, username):
     if to_profile not in from_profile.follows.all():
         from_profile.follows.add(to_profile)
 
-    push_notification(to_user, 'new_follower',
+    push_notification([to_user], 'new_follower',
                       {'object':request.user.username,
                        'object_url':from_profile.get_absolute_url()})
-    push_notification(request.user, 'follow_success',
+    push_notification([request.user], 'follow_success',
                       {'object':username,
                        'object_url':to_profile.get_absolute_url()})
 
@@ -816,7 +831,7 @@ def unfollow(request, username):
     if to_profile in from_profile.follows.all():
         from_profile.follows.remove(to_profile)
 
-    push_notification(request.user, 'unfollow_success',
+    push_notification([request.user], 'unfollow_success',
                       {'object':username,
                        'object_url':to_profile.get_absolute_url()})
 

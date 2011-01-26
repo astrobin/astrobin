@@ -9,6 +9,7 @@ from django import forms
 from djangoratings.fields import RatingField
 
 from file_utils import delete_image_from_s3
+from notifications import push_notification
 
 class Gear(models.Model):
     name = models.CharField(max_length=64)
@@ -159,7 +160,7 @@ class UserProfile(models.Model):
     filters = models.ManyToManyField(Filter, null=True, blank=True)
     accessories = models.ManyToManyField(Accessory, null=True, blank=True)
 
-    follows = models.ManyToManyField('self', null=True, blank=True)
+    follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers')
 
     def __unicode__(self):
         return "%s' profile" % self.user.username

@@ -3,14 +3,15 @@ import urllib2
 import simplejson
 from notification import models as notification
 
-def push_notification(recipient, type, data):
-    notification.send([recipient], type, data)
+def push_notification(recipients, type, data):
+    notification.send(recipients, type, data)
     rendered = render_to_string('notification/%s/%s' % (type, 'short.html'), data)
     encoded_data = simplejson.dumps({'message':rendered})
 
-    url = 'http://127.0.0.1/publish?id=notification_' + recipient.username
-    try:
-        urllib2.urlopen(url, encoded_data);
-    except:
-        pass
+    for r in recipients:
+        url = 'http://127.0.0.1/publish?id=notification_' + r.username
+        try:
+            urllib2.urlopen(url, encoded_data);
+        except:
+            pass
 
