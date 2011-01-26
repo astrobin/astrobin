@@ -4,6 +4,6 @@
 {% for n in notifications %}
     <li {% if forloop.last %}class="last"{% endif %}>{% autoescape off %}{{n.message}}{% endautoescape %}</li>
 {% empty %}
-    <li id="empty">{% trans "You have no new notifications." %}</li>
+    <li id="empty"><a href="#">{% trans "You have no new notifications." %}</a></li>
 {% endfor %}
 </ul>

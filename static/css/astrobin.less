@@ -1318,13 +1318,32 @@ form {
     margin: 0;
     padding: 5px 8px;
     overflow: visible;
-    .button-gradient-inverted;
+    background: url('/static/images/popup-bg.png');
     .rounded-corners;
-    .box-shadow;}
+    .box-shadow;
+    text-shadow: white 0 1px 0;
+    strong {
+        color: @background-color / @hilight-factor;
+        font-weight: bold;}
+    li {
+        text-align: left;
+        a {
+            padding: @spacer-small;
+            color: @background-color;
+            display: inline-block;
+            :hover {
+                color: @link-color;}}
+        a.danger {
+            color: @danger-color;
+            :hover {
+                color: @danger-color * @hilight-factor;}}
+        >img {
+            padding-top: 4px;}
+        :hover {
+            background: url('/static/images/popup-li-bg.png');}}}
 
 .popup {
     .sub;
-    background: url('/static/images/popup-bg.png');
     border: none;
     .rounded-corners-bottom-right;
     .no-box-shadow;
@@ -1338,39 +1357,20 @@ form {
         padding: 0;
         list-style: none;}
     li {
-        padding: @spacer-large;
         border-bottom: 1px dotted (@border-bottom-color * @strongest-hilight-factor);
-        :hover {
-            background: url('/static/images/popup-li-bg.png');}}
     li.last {
         border-bottom: none;}
     li.unread {
         border-left: 1px solid @strong-text-color;}
     a {
-        :link {
-            padding: 0;}
         :hover {
-            border: none;}}}
+            border: none;}}}}
 
 ul.subnav {
     list-style: none;
     margin: 0;
     padding: 0;
     white-space: nowrap;
-    li {
-        text-align: left;
-        padding: 4px 8px;
-        a {
-            color: @background-color;
-            text-shadow: none;
-            :hover {
-                color: @link-color;}}
-        a.danger {
-            color: @danger-color;
-            :hover {
-                color: @danger-color * @hilight-factor;}}
-        >img {
-            padding-top: 4px;}}
     li.copy-box {
         margin: 8px 0;}
     li.separator {
@@ -1382,8 +1382,7 @@ ul.subnav {
         border-bottom: 1px solid @border-color-inverted;}}
 
 .small-icon {
-    width: 16px;
-    margin-right: 8px;}
+    width: 16px;}
 
 span.copy-box {
     display: inline;
