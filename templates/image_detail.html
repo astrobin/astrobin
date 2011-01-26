@@ -13,45 +13,37 @@
                     <ul class="topnav">
                         <li id="actions" class="first">
                             <span class="text"><a href="#">{% trans "Actions" %}</a></span>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
+                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
                                 <ul class="subnav">
                                 {% if request.user == image.user %}
-                                    <li class="first">
-                                        <span class="small-icon"><a href="/edit/basic/{{image.id}}"><img alt="" src="/static/icons/iconic/black/pen_8x8.png"/></a></span>
+                                    <li class="first bg-icon icon-edit">
                                         <span class="text"><a href="/edit/basic/{{image.id}}">{% trans "Edit basic information" %}</a></span>
                                     </li>
-                                    <li>
-                                        <span class="small-icon"><a href="/edit/gear/{{image.id}}"><img alt="" src="/static/icons/iconic/black/pen_alt_stroke_8x8.png"/></a></span>
+                                    <li class="bg-icon icon-edit-alt">
                                         <span class="text"><a href="/edit/gear/{{image.id}}">{% trans "Edit gear used" %}</a></span>
                                     </li>
-                                    <li>
-                                        <span class="small-icon"><a href="/edit/acquisition/{{image.id}}"><img alt="" src="/static/icons/iconic/black/pen_alt_fill_8x8.png"/></a></span>
+                                    <li class="bg-icon icon-edit-alt2">
                                         <span class="text"><a href="/edit/acquisition/{{image.id}}">{% trans "Edit acquisition details" %}</a></span>
                                     </li>
-                                    <li>
-                                        <span class="small-icon"><a class="delete" href="#"><img alt="" src="/static/icons/iconic/black/trash_stroke_8x8.png"/></a></span>
+                                    <li class="bg-icon icon-delete">
                                         <span class="text"><a class="delete" class="danger" href="#">{% trans "Delete" %}</a></span>
                                     </li>
                                     <li class="separator"></li>
                                 {% endif %}
-                                    <li>
-                                        <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/left_quote_8x8.png"/></a></span>
+                                    <li class="bg-icon icon-quote">
                                         <span class="text"><a href="#">{% trans "Bring to a user's attention" %}</a></span>
                                     </li>
-                                    <li>
-                                        <span class="small-icon"><a href="#"><img style="margin-right: 4px" alt="" src="/static/icons/iconic/black/info_4x8.png"/></a></span>
+                                    <li class="bg-icon icon-info">
                                         <span class="text"><a href="#">{% trans "Request additional information" %}</a></span>
                                     </li>
-                                    <li class="last">
-                                        <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/folder_stroke_8x8.png"/></a></span>
+                                    <li class="last bg-icon icon-file">
                                         <span class="text"><a href="#">{% trans "Request TIFF/FITS" %}</a></span>
                                     </li>
                                 {% if user.is_authenticated %}
                                     <li class="separator"></li>
 
-                                    <li>
-                                        <span class="small-icon"><a class="follow" href="#"><img alt="" src="/static/icons/iconic/black/arrow_right_alt1_8x8.png"/></a></span>
+                                    <li class="bg-icon icon-follow">
                                         <span class="text"><a class="follow" href="#">{% trans "Follow" %} {{image.user.username}}</a></span>
                                     </li>
                                 {% endif %}
@@ -60,20 +52,17 @@
                         </li>
                         <li id="view">
                             <span class="text"><a href="#">{% trans "View" %}</a></span>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
+                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
                                 <ul class="subnav">
-                                    <li class="first">
+                                    <li class="first {% if inverted %}bg-icon icon-normal{% else %}bg-icon icon-inverted{% endif %}">
                                         {% if inverted %}
-                                        <span class="small-icon"><a href="{{image.get_absolute_url}}/"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
                                         <span class="text"><a href="{{image.get_absolute_url}}/">{% trans "Normal" %}</a></span>
                                         {% else %}
-                                        <span class="small-icon"><a href="{{image.get_absolute_url}}/?mod=inverted"><img alt="" src="/static/icons/iconic/black/move_horizontal_alt2_8x8.png"/></a></span>
                                         <span class="text"><a href="{{image.get_absolute_url}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
                                         {% endif %}
                                     </li>
-                                    <li class="last">
-                                        <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/black/pin_8x8.png"/></a></span>
+                                    <li class="last bg-icon icon-solved">
                                         <span class="text"><a href="#">{% trans "Plate solved" %}</a></span>
                                     </li>
                                 </ul>
@@ -81,7 +70,7 @@
                         </li>
                         <li id="share" class="last">
                             <span class="text"><a href="#">{% trans "Share" %}</a></span>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
+                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
                                 <ul class="subnav">
                                     <li class="first copy-box">
@@ -166,7 +155,7 @@
             <ul class="topnav">
                 <li>
                     <span class="text"><a href="#">Related images</a></span>
-                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/arrow_down_8x8.png"/></a></span>
+                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                     <div class="sub">
                         <ul class="subnav">
                             <li><a href="{{image.get_absolute_url}}/?related=user">{% trans "Same user" %} ({{image.user.username}})</a></li>
