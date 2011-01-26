@@ -62,7 +62,7 @@
 
                         $('ul#notification-feed li#empty').remove();
                         $('img#notifications').attr('src', '/static/icons/iconic/orange/new_notifications.png');
-                        $('ul#notification-feed').prepend('<li>'+json['message']+'</li>');
+                        $('ul#notification-feed').prepend('<li class="unread">'+json['message']+'</li>');
 
                         /* Start the next long poll. */
                         listen(last_modified, etag);
@@ -238,8 +238,40 @@
             $(document).ready(function() {
                 // popup menus
                 $('select, input:checkbox, input:radio, input:file').uniform();
-                $('#user-nav > ul > li').bind('mouseover', function() { top_open($(this), '.popup'); });
-                $('#user-nav > ul > li').bind('mouseout',  top_timer);
+
+                var open_popup = 0;
+                var active_a = 0;
+                $('#user-nav > ul > li > a').click (function(event) {
+                    var a = $(this);
+                    var li = a.parent()
+                    var popup = li.find('.popup');
+
+                    if (open_popup && active_a) {
+                        var old_open_popup = open_popup;
+                        var old_active_a = active_a;
+
+                        open_popup.css('visibility', 'hidden');
+                        active_a.removeClass('active');
+                        open_popup = 0;
+                        active_a = 0;
+                        if (old_open_popup.get(0) == popup.get(0) &&
+                            old_active_a.get(0) == a.get(0)) {
+                            return;
+                        }
+                    }
+
+                    a.addClass('active');
+                    popup.css('visibility', 'visible');
+                    open_popup = popup;
+                    active_a = a;
+                    event.stopPropagation();
+                    $(document).one('click', function() {
+                        a.removeClass('active');
+                        activa_a = 0;
+                        popup.css('visibility', 'hidden');
+                        open_popup = 0;
+                    });
+                });
 
                 var notification_read_timer = 0;
                 $('ul#notification-feed').bind('mouseover', function() {
@@ -253,7 +285,6 @@
                     window.clearTimeout(notification_read_timer);
                 });
             });
-            document.onclick = top_close;
         </script>
 
     </body>
