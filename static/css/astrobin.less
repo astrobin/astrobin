@@ -141,6 +141,11 @@
     -webkit-border-radius: 0 0 @radius @radius;
      border-radius: 0 0 @radius @radius;}
 
+.rounded-corners-bottom-right (@radius: 6px) {
+    -moz-border-radius: 0 @radius @radius @radius;
+    -webkit-border-radius: 0 @radius @radius @radius;
+     border-radius: 0 @radius @radius @radius;}
+
 .box-shadow {
     -webkit-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
     -moz-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
@@ -1065,7 +1070,9 @@ form {
                     text-transform: lowercase;
                     width: 40px;}
                 >a:hover, >a:active {
-                    background: url('/static/images/header-hover-bg.png') no-repeat;}}}}}
+                    background: url('/static/images/user-nav-hover-bg.png') no-repeat;}
+                >a:link.active, >a:visited.active {
+                    background: url('/static/images/user-nav-active-bg.png') no-repeat;}}}}}
 
 /* abpod block */
 #abpod {
@@ -1317,24 +1324,31 @@ form {
 
 .popup {
     .sub;
-    background: @background-color * @strong-hilight-factor;
-    .common-border;
-    border-top: none;
-    .rounded-corners-bottom;
+    background: url('/static/images/popup-bg.png');
+    border: none;
+    .rounded-corners-bottom-right;
     .no-box-shadow;
-    top: 70px;
+    top: 69px;
     white-space: nowrap;
-    color: @text-color;
+    color: @background-color;
     padding: @spacer-medium;
+    z-index: 9999;
     ul {
         margin: 0;
         padding: 0;
         list-style: none;}
     li {
-        padding: @spacer-small 0;}
+        padding: @spacer-large;
+        border-bottom: 1px dotted (@border-bottom-color * @strongest-hilight-factor);
+        :hover {
+            background: url('/static/images/popup-li-bg.png');}}
+    li.last {
+        border-bottom: none;}
+    li.unread {
+        border-left: 1px solid @strong-text-color;}
     a {
         :link {
-            padding: @spacer-small;}
+            padding: 0;}
         :hover {
             border: none;}}}
 

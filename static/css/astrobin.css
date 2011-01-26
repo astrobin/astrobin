@@ -962,8 +962,10 @@ form textarea:focus {
   text-transform: lowercase;
   width: 40px;
 }
-#header #user-nav > ul > li > a:hover { background: url('/static/images/header-hover-bg.png') no-repeat; }
-#header #user-nav > ul > li > a:active { background: url('/static/images/header-hover-bg.png') no-repeat; }
+#header #user-nav > ul > li > a:hover { background: url('/static/images/user-nav-hover-bg.png') no-repeat; }
+#header #user-nav > ul > li > a:active { background: url('/static/images/user-nav-hover-bg.png') no-repeat; }
+#header #user-nav > ul > li > a:link.active { background: url('/static/images/user-nav-active-bg.png') no-repeat; }
+#header #user-nav > ul > li > a:visited.active { background: url('/static/images/user-nav-active-bg.png') no-repeat; }
 #abpod {
   clear: both;
   margin: 0;
@@ -1267,28 +1269,33 @@ form textarea:focus {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  background: #4c4c4c;
-  border: 1px solid #222222;
-  border-bottom: 1px solid #666666;
-  border-top: none;
-  -moz-border-radius: 0 0 6px 6px;
-  -webkit-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
+  background: url('/static/images/popup-bg.png');
+  border: none;
+  -moz-border-radius: 0 6px 6px 6px;
+  -webkit-border-radius: 0 6px 6px 6px;
+  border-radius: 0 6px 6px 6px;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  top: 70px;
+  top: 69px;
   white-space: nowrap;
-  color: #b8b8b8;
+  color: #333333;
   padding: 8px;
+  z-index: 9999;
 }
 .popup ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.popup li { padding: 4px 0; }
-.popup a:link { padding: 4px; }
+.popup li {
+  padding: 12px;
+  border-bottom: 1px dotted #cccccc;
+}
+.popup li:hover { background: url('/static/images/popup-li-bg.png'); }
+.popup li.last { border-bottom: none; }
+.popup li.unread { border-left: 1px solid #fcfcfc; }
+.popup a:link { padding: 0; }
 .popup a:hover { border: none; }
 ul.subnav {
   list-style: none;
