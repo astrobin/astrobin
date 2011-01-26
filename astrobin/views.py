@@ -845,3 +845,14 @@ def mark_notifications_seen(request):
         n.is_unseen()
     return HttpResponse({'status':'success'}, mimetype='application/javascript')
 
+
+@login_required
+@require_GET
+def notifications(request):
+    return object_list(
+        request, 
+        queryset=notification.Notice.objects.filter(user=request.user),
+        template_name='notification/all.html',
+        template_object_name='notification')
+
+

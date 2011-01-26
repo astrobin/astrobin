@@ -1274,6 +1274,11 @@ form textarea:focus {
 .sub li a.danger:hover { color: #ee0000; }
 .sub li > img { padding-top: 4px; }
 .sub li.bg-icon a { padding-left: 16px; }
+.sub li.footer {
+  text-align: center;
+  border: 1px solid #999999;
+  background: url('/static/images/popup-footer-bg.png');
+}
 .popup {
   visibility: hidden;
   position: absolute;
@@ -1318,6 +1323,11 @@ form textarea:focus {
 .popup li a.danger:hover { color: #ee0000; }
 .popup li > img { padding-top: 4px; }
 .popup li.bg-icon a { padding-left: 16px; }
+.popup li.footer {
+  text-align: center;
+  border: 1px solid #999999;
+  background: url('/static/images/popup-footer-bg.png');
+}
 .popup ul {
   margin: 0;
   padding: 0;

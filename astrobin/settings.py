@@ -98,6 +98,7 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.auth',
+    'notification.context_processors.notification',
 )
 
 INSTALLED_APPS = (
