@@ -25,3 +25,11 @@ def image_list(objects_list):
 def notification_list(request):
     return {
         'notifications':notifications.Notice.objects.filter(user=request.user)[:10]}
+
+@register.simple_tag
+def notifications_icon(request):
+    if notifications.Notice.objects.filter(user=request.user).filter(unseen=True):
+        return '/static/icons/iconic/orange/new_notifications.png'
+    else:
+        return '/static/icons/iconic/orange/notifications.png'
+
