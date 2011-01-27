@@ -156,6 +156,7 @@ def image_detail(request, id):
                          's3_resized_inverted_bucket': settings.S3_RESIZED_INVERTED_BUCKET,
                          's3_histograms_bucket': settings.S3_HISTOGRAMS_BUCKET,
                          's3_url': settings.S3_URL,
+                         'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
                          'already_voted': already_voted,
                          'current_rating': rating,
                          'related_images': related_images,

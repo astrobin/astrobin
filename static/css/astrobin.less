@@ -1125,7 +1125,7 @@ form {
     position: relative;
     .common-border;
     background-color: #130d0a;
-    width: 920px;
+    width: @site-width - 40px;
     margin-left: 10px;
     padding-bottom: 25px;
 }
@@ -1193,7 +1193,7 @@ form {
 
 #content {
     float: left;
-    width: 920px;
+    width: @site-width - 20px;
     padding: 20px 10px;
     display: inline;}
 
@@ -1283,8 +1283,8 @@ form {
         float: left;
         width: 722px;}
     #side-pane {
-        float: right;
-        text-align: center;}
+        width: 204px;
+        float: right;}
     ul.bar {
         list-style: none;
         margin: 0 0 @spacer-xxlarge 0;
@@ -1748,15 +1748,13 @@ input.date {
     margin-right: 20px;
 }
 
-ul.image-strip {
+.image-strip {
     background-color: @light-panel-color;
     .common-border;
     .rounded-corners;
     list-style: none;
-    margin: 10px 0;
-    padding: @spacer-large @spacer-xlarge;
-    li {
-        padding: @spacer-small 0;}}
+    margin: (@spacer-small * 1.5) 0;
+    padding: @spacer-large;}
 
 .ic_caption a {
     color: black;
