@@ -1001,20 +1001,19 @@ form {
 
 #header {
     margin: 0 auto;
-    height: 180px;
+    height: 220px;
     background: transparent url('/static/images/header-bg.png');
     #title {
         margin: 0;
         padding: 0;
         position: absolute;
-        top: 124px;
-        left: 10px;
+        top: 138px;
+        left: @spacer-large;
         text-align: center;
         overflow: visible;
-        width: 220px;
-        background: url('/static/images/title-bg.png') no-repeat;
+        width: 158px;
         h1 {
-            font-size: 2.5em;
+            font-size: 2em;
             margin-bottom: 0;
             padding-bottom: @spacer-small;
             border: none;
@@ -1025,6 +1024,10 @@ form {
         h4 {
             margin-top: @spacer-small;
             color: @logo-color;}}
+    #ad {
+        position: absolute;
+        top: 138px;
+        right: @spacer-small;}
     /*  navigation  */
     #nav-container {
         padding: 16px 0;
