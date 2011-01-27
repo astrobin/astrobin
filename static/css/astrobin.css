@@ -824,7 +824,7 @@ form textarea:focus {
 }
 #wrap {
   position: relative;
-  width: 940px;
+  width: 960px;
   min-height: 100%;
   height: 100%;
   -webkit-box-shadow: rgba(0, 0, 0, 0.9) 0 62px 6px;
@@ -989,7 +989,7 @@ form textarea:focus {
   clear: both;
   margin: 0;
   padding-bottom: 20px;
-  width: 940px;
+  width: 960px;
   background: url(../images/sep-bg.jpg) no-repeat center bottom;
 }
 #abpod-block {
@@ -1150,7 +1150,7 @@ form textarea:focus {
 }
 .small-box .single-form { text-align: center; }
 .full-box {
-  width: 860px;
+  width: 880px;
   padding: 28px;
   margin: 0;
   -moz-border-radius: 6px;
@@ -1529,7 +1529,7 @@ x:default { border: none; }
 #footer-outer {
   clear: both;
   margin: 0 auto;
-  width: 940px;
+  width: 960px;
   font-size: 0.9em;
   text-align: left;
 }
@@ -1682,3 +1682,4 @@ ul.image-strip li { padding: 4px 0; }
 .ic_caption a { color: black; }
 .ic_caption a:hover { color: #cc4b2e; }
 .sort { margin-bottom: 5px; }
+.thumbnail-list { padding: 0 10px; }
