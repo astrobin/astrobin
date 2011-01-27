@@ -98,6 +98,11 @@
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 6px 18px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 6px 18px;
 }
+.small-bottom-box-shadow {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
+}
 .wrap-box-shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.9) 0 62px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.9) 0 62px 6px;
@@ -1243,12 +1248,12 @@ form textarea:focus {
 }
 #image-detail p#description { margin: 0; }
 .sub {
+  color: #333333;
+  white-space: nowrap;
   visibility: hidden;
   position: absolute;
-  left: 0px;
-  top: 28px;
   margin: 0;
-  padding: 5px 8px;
+  padding: 4px 8px;
   overflow: visible;
   background: url('/static/images/popup-bg.png');
   -moz-border-radius: 6px;
@@ -1257,11 +1262,20 @@ form textarea:focus {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  z-index: 9999;
   text-shadow: white 0 1px 0;
+  left: 0px;
+  top: 28px;
 }
 .sub strong {
   color: #2a2a2a;
   font-weight: bold;
+}
+.sub li.footer {
+  margin-top: 4px;
+  text-align: center;
+  border: 1px solid #999999;
+  background: url('/static/images/popup-footer-bg.png');
 }
 .sub li { text-align: left; }
 .sub li a {
@@ -1274,18 +1288,13 @@ form textarea:focus {
 .sub li a.danger:hover { color: #ee0000; }
 .sub li > img { padding-top: 4px; }
 .sub li.bg-icon a { padding-left: 16px; }
-.sub li.footer {
-  text-align: center;
-  border: 1px solid #999999;
-  background: url('/static/images/popup-footer-bg.png');
-}
 .popup {
+  color: #333333;
+  white-space: nowrap;
   visibility: hidden;
   position: absolute;
-  left: 0px;
-  top: 28px;
   margin: 0;
-  padding: 5px 8px;
+  padding: 4px 8px;
   overflow: visible;
   background: url('/static/images/popup-bg.png');
   -moz-border-radius: 6px;
@@ -1294,36 +1303,23 @@ form textarea:focus {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  text-shadow: white 0 1px 0;
-  border: none;
-  -moz-border-radius: 0 6px 6px 6px;
-  -webkit-border-radius: 0 6px 6px 6px;
-  border-radius: 0 6px 6px 6px;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  top: 69px;
-  white-space: nowrap;
-  color: #333333;
-  padding: 8px;
   z-index: 9999;
+  text-shadow: white 0 1px 0;
+  -moz-border-radius: 6px 0 6px 6px;
+  -webkit-border-radius: 6px 0 6px 6px;
+  border-radius: 6px 0 6px 6px;
+  right: 0;
+  top: 69px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
 }
 .popup strong {
   color: #2a2a2a;
   font-weight: bold;
 }
-.popup li { text-align: left; }
-.popup li a {
-  padding: 4px;
-  color: #333333;
-  display: inline-block;
-}
-.popup li a:hover { color: #cc4b2e; }
-.popup li a.danger { color: #c70000; }
-.popup li a.danger:hover { color: #ee0000; }
-.popup li > img { padding-top: 4px; }
-.popup li.bg-icon a { padding-left: 16px; }
 .popup li.footer {
+  margin-top: 4px;
   text-align: center;
   border: 1px solid #999999;
   background: url('/static/images/popup-footer-bg.png');

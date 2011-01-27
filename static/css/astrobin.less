@@ -146,6 +146,11 @@
     -webkit-border-radius: 0 @radius @radius @radius;
      border-radius: 0 @radius @radius @radius;}
 
+.rounded-corners-bottom-left (@radius: 6px) {
+    -moz-border-radius: @radius 0 @radius @radius;
+    -webkit-border-radius: @radius 0 @radius @radius;
+     border-radius: @radius 0 @radius @radius;}
+
 .box-shadow {
     -webkit-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
     -moz-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
@@ -155,6 +160,11 @@
     -webkit-box-shadow: rgba(0,0,0,0.2) 0 6px 18px;
     -moz-box-shadow: rgba(0,0,0,0.2) 0 6px 18px;
     box-shadow: rgba(0,0,0,0.2) 0 6px 18px;}
+
+.small-bottom-box-shadow {
+    -webkit-box-shadow: rgba(0,0,0,0.4) 0 3px 6px;
+    -moz-box-shadow: rgba(0,0,0,0.4) 0 3px 6px;
+    box-shadow: rgba(0,0,0,0.4) 0 3px 6px;}
 
 .wrap-box-shadow {
     -webkit-box-shadow: rgba(0,0,0,0.9) 0 @wrap-shadow-offset 6px;
@@ -1339,20 +1349,32 @@ form {
     p#description {
         margin: 0;}}
 
-.sub {
+.popup-mixin() {
+    color: @background-color;
+    white-space: nowrap;
     visibility: hidden;
-    position: absolute;
-    left: 0px; top: 28px;
-    margin: 0;
-    padding: 5px 8px;
+    position:absolute;
+    margin:0;
+    padding: @spacer-small @spacer-medium;
     overflow: visible;
     background: url('/static/images/popup-bg.png');
     .rounded-corners;
     .box-shadow;
+    z-index: 9999;
     text-shadow: white 0 1px 0;
     strong {
         color: @background-color / @hilight-factor;
         font-weight: bold;}
+    li.footer {
+        margin-top: @spacer-small;
+        text-align: center;
+        border: 1px solid (@border-bottom-color * @strong-hilight-factor);
+        background: url('/static/images/popup-footer-bg.png');}}
+
+
+.sub {
+    .popup-mixin;
+    left: 0px; top: 28px;
     li {
         text-align: left;
         a {
@@ -1369,22 +1391,13 @@ form {
             padding-top: 4px;}}
     li.bg-icon {
         a {
-            padding-left: 16px;}}
-    li.footer {
-        text-align: center;
-        border: 1px solid (@border-bottom-color * @strong-hilight-factor);
-        background: url('/static/images/popup-footer-bg.png');}}
+            padding-left: 16px;}}}
 
 .popup {
-    .sub;
-    border: none;
-    .rounded-corners-bottom-right;
-    .no-box-shadow;
-    top: 69px;
-    white-space: nowrap;
-    color: @background-color;
-    padding: @spacer-medium;
-    z-index: 9999;
+    .popup-mixin;
+    .rounded-corners-bottom-left;
+    right: 0; top: 69px;
+    .small-bottom-box-shadow;
     ul {
         margin: 0;
         padding: 0;
