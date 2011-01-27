@@ -1063,7 +1063,7 @@ form textarea:focus {
 }
 #content {
   float: left;
-  width: 920px;
+  width: 940px;
   padding: 20px 10px;
   display: inline;
 }
@@ -1165,8 +1165,8 @@ form textarea:focus {
   width: 722px;
 }
 #image-detail #side-pane {
+  width: 204px;
   float: right;
-  text-align: center;
 }
 #image-detail ul.bar {
   list-style: none;
@@ -1667,7 +1667,7 @@ input.date {
   width: 80px;
   margin-right: 20px;
 }
-ul.image-strip {
+.image-strip {
   background-color: #4c4c4c;
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
@@ -1675,10 +1675,9 @@ ul.image-strip {
   -webkit-border-radius: 6px;
   border-radius: 6px;
   list-style: none;
-  margin: 10px 0;
-  padding: 12px 16px;
+  margin: 6px 0;
+  padding: 12px;
 }
-ul.image-strip li { padding: 4px 0; }
 .ic_caption a { color: black; }
 .ic_caption a:hover { color: #cc4b2e; }
 .sort { margin-bottom: 5px; }

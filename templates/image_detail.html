@@ -176,7 +176,7 @@
             {% if related_images.count > 1 %} 
             <ul class="topnav">
                 <li>
-                    <span class="text"><a href="#">Related images</a></span>
+                    <span class="text"><a href="#">{% trans "More..." %}</a></span>
                     <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                     <div class="sub">
                         <ul class="subnav">
@@ -189,15 +189,15 @@
                 </ul>
             </ul>
 
-            <ul class="image-strip">
+            <div class="image-strip clear">
             {% for i in related_images %}
-                <li>
+                <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
                     <a href="{{i.object.get_absolute_url}}/">
-                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.object.filename}}{{i.object.original_ext}}" alt="{{i.object.title|escape}}"/>
+                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.object.filename}}{{i.object.original_ext}}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
                     </a>
-                </li>
+                </div>
             {% endfor %}
-            </ul>
+            </div>
             {% endif %}
         </div>
     </div>
