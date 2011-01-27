@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load tags %}
 
 {% block extra_head %}
 <script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
@@ -83,7 +84,7 @@
                                         </span>
                                     </li>
                                     <li class="last bg-icon icon-message">
-                                        <span class="text"><a href="#">{% trans "Send private message" %}</a></span>
+                                        <span class="text"><a class="send-private-message" href="#">{% trans "Send private message" %}</a></span>
                                     </li>
                                     {% endif %}
                                 </ul>
@@ -334,7 +335,33 @@
                     }
                 });
         });
+        $('a.send-private-message').click(function() {
+            var $dialog = $('<div id="dialog-message" \
+                                  title="{% blocktrans with image.user.username as username %}\
+                                    Send {{username}} a private message{% endblocktrans %}"></div>')
+                .html('\
+                    <div class="sided-main-content-popup">\
+                    <form id="private-message" action="" method="post">\
+                        {% autoescape off %}{{private_message_form.as_p|append_slash}}{% endautoescape %}\
+                        <input type="hidden" name="to_user" value="{{image.user.username}}"/>\
+                        <input id="send" class="button submit-button" type="button" value="{% trans "Send" %} &rarr;" />\
+                    </form>\
+                    </div>\
+                ')
+                .dialog({
+                    resizable: true,
+                    height: 400,
+                    width: 280,
+                    modal: true});
 
+                $('form#private-message #send').live('click', function() {
+                    $.post('{% url views.send_private_message %}',
+                           $("form#private-message").serialize(),
+                           function() {
+                                $dialog.dialog('close');
+                           });
+                });
+        });
     });
     </script>
 {% endblock %}

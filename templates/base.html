@@ -36,48 +36,18 @@
         <script src="/static/js/jquery-ui-1.8.7.custom.min.js"></script>
         <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
         <script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
+
         <script type="text/javascript" src="/static/js/menus.js"></script>
+        <script type="text/javascript" src="/static/js/astrobin.common.js"></script>
 
         <!-- fonts -->
         <script type="text/javascript" src="/static/fonts/Museo-500/MyFonts Webfonts Order M2677657.js"></script>
-
-        {% if user.is_authenticated %}
-        <script type="text/javascript">
-            // notification listener
-            function listen(last_modified, etag) {
-                $.ajax({
-                    'beforeSend': function(xhr) {
-                        xhr.setRequestHeader("If-None-Match", etag);
-                        xhr.setRequestHeader("If-Modified-Since", last_modified);
-                    },
-                    url: '/activity?id=notification_{{user.username}}',
-                    dataType: 'text',
-                    type: 'get',
-                    cache: 'false',
-                    success: function(data, textStatus, xhr) {
-                        etag = xhr.getResponseHeader('Etag');
-                        last_modified = xhr.getResponseHeader('Last-Modified');
-
-                        json = jQuery.parseJSON(data);
-
-                        $('ul#notification-feed li#empty').remove();
-                        $('img#notifications').attr('src', '/static/icons/iconic/orange/new_notifications.png');
-                        $('ul#notification-feed').prepend('<li class="unread">'+json['message']+'</li>');
-
-                        /* Start the next long poll. */
-                        listen(last_modified, etag);
-                    }
-                });
-            };
-        </script>
-        {% endif %}
-
 
         {% block extra_head %}
         {% endblock %}
     </head>
 
-    <body {% if user.is_authenticated %}onload="setTimeout(function() {listen('', '')}, 1000);"{% endif %}>
+    <body{% if user.is_authenticated %} onload="start_listeners('{{request.user.username}}');"{%endif %}>
         <!-- wrap -->
         <div id="wrap">
 
@@ -86,12 +56,6 @@
                 <a name="top"></a>
                 {% block header %}
                 <div id="search">
-                    <script type="text/javascript">
-                        function clearText(field){
-                            if (field.defaultValue == field.value) field.value = '';
-                            else if (field.value == '') field.value = field.defaultValue;
-                        }
-                    </script>
                     <form id="quick-search" action="/search/" method="get" >
                         <p>
                         <label for="qsearch">Search:</label>
@@ -154,8 +118,10 @@
                                 </div>
                             </li>
                             <li>
-                                <a class="icon" href="#"><img alt="Messages" src="/static/icons/iconic/orange/messages.png"/></a>
+                                <a class="icon" title="{% trans "Messages" %}" href="#">
+                                    <img id="messages" alt="{% trans "Messages" %}" src="{% messages_icon request %}"/></a>
                                 <div class="popup">
+                                    {% message_list request %}
                                 </div>
                             </li>
                         {% else %}
@@ -276,9 +242,9 @@
                     });
                 });
 
-                var notification_read_timer = 0;
+                var notifications_read_timer = 0;
                 $('ul#notification-feed').bind('mouseover', function() {
-                    notification_read_timer = window.setTimeout(function() {
+                    notifications_read_timer = window.setTimeout(function() {
                         $.ajax({
                             url: '/notifications/seen/',
                             success: function() {
@@ -290,10 +256,26 @@
                     }, 250);
                 });
                 $('ul#notification-feed').bind('mouseout', function() {
-                    window.clearTimeout(notification_read_timer);
+                    window.clearTimeout(notifications_read_timer);
+                });
+
+                var messages_read_timer = 0;
+                $('ul#message-feed').bind('mouseover', function() {
+                    messages_read_timer = window.setTimeout(function() {
+                        $.ajax({
+                            url: '/messages/mark_read/all/',
+                            success: function() {
+                                $('img#messages').attr('src',
+                                    '/static/icons/iconic/orange/messages.png');
+                                $('ul#message-feed li.unread').removeClass('unread');
+                            },
+                        });
+                    }, 250);
+                });
+                $('ul#message-feed').bind('mouseout', function() {
+                    window.clearTimeout(messages_read_timer);
                 });
             });
         </script>
-
     </body>
 </html>

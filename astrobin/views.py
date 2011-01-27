@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 from haystack.query import SearchQuerySet, SQ
+import persistent_messages
 
 from uuid import uuid4
 import os
@@ -164,7 +165,8 @@ def image_detail(request, id):
                          'image_type': image_type,
                          'deep_sky_data': deep_sky_data,
                          'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
-                         'follows': follows})
+                         'follows': follows,
+                         'private_message_form': PrivateMessageForm()})
 
 
 @require_GET
@@ -857,3 +859,27 @@ def notifications(request):
         template_object_name='notification')
 
 
+@login_required
+@require_POST
+def send_private_message(request):
+    form = PrivateMessageForm(request.POST)
+    if form.is_valid():
+        subject = form.cleaned_data['subject']
+        body    = form.cleaned_data['body']
+        to_user = request.POST['to_user']
+
+        recipient = User.objects.get(username=to_user)
+        id = persistent_messages.add_message(
+            request, persistent_messages.SUCCESS, body,
+            subject=subject, user=recipient, from_user=request.user)
+        push_message(recipient, {'originator':request.user.username,
+                                 'object': subject})
+
+        return HttpResponse({'status':'success'}, mimetype='application/javascript')
+    return HttpResponse({'status':'fail'}, mimetype='application/javascript')
+
+
+@login_required
+@require_GET
+def messages(request):
+    pass
