@@ -36,6 +36,7 @@
 
 @footer-height: 260px;
 @wrap-shadow-offset: 62px;
+@site-width: 960px;
 
 @font-face {
     font-family: 'astrobin_sans';
@@ -991,7 +992,7 @@ form {
 ------------------------------------------- */
 #wrap {
     position: relative;
-    width: 940px;
+    width: @site-width;
     min-height: 100%;
     height: 100%;
     .wrap-box-shadow;
@@ -1117,7 +1118,7 @@ form {
     clear: both;
     margin: 0;
     padding-bottom: 20px;
-    width: 940px;
+    width: @site-width;
     background: url(../images/sep-bg.jpg) no-repeat center bottom;
 }
 #abpod-block {
@@ -1270,7 +1271,7 @@ form {
         text-align: center;}}
 
 .full-box {
-    width: 860px;
+    width: @site-width - 80px;
     padding: @spacer-xxlarge;
     margin: 0;
     .rounded-corners;
@@ -1605,7 +1606,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 #footer-outer {
     clear: both;
     margin: 0 auto;
-    width: 940px;
+    width: @site-width;
     font-size: .9em;
     text-align: left;}
 
@@ -1766,4 +1767,5 @@ ul.image-strip {
     margin-bottom: 5px;}
 
 img.thumbnail {}
-
+.thumbnail-list {
+    padding: 0 10px;}
