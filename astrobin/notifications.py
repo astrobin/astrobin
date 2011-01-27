@@ -15,3 +15,12 @@ def push_notification(recipients, type, data):
         except:
             pass
 
+
+def push_message(recipient, data):
+    encoded_data = simplejson.dumps(data)
+    url = 'http://127.0.0.1/publish?id=message_' + recipient.username
+    try:
+        urllib2.urlopen(url, encoded_data);
+    except:
+        pass
+

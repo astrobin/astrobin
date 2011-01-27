@@ -1,6 +1,7 @@
 from django.template import Library
 from django.conf import settings
 from notification import models as notifications
+from persistent_messages import models as messages
 
 register = Library() 
 
@@ -27,10 +28,33 @@ def notification_list(request, show_footer = True):
         'notifications':notifications.Notice.objects.filter(user=request.user)[:10],
         'show_footer':show_footer}
 
+
+@register.inclusion_tag('inclusion_tags/message_list.html')
+def message_list(request, show_footer = True):
+    return {
+        'messages':messages.Message.objects.filter(user=request.user).order_by('-created')[:10],
+        'show_footer':show_footer}
+
+
 @register.simple_tag
 def notifications_icon(request):
+    basepath = '/static/icons/iconic/orange/'
     if notifications.Notice.objects.filter(user=request.user).filter(unseen=True):
-        return '/static/icons/iconic/orange/new_notifications.png'
+        return basepath + 'new_notifications.png'
     else:
-        return '/static/icons/iconic/orange/notifications.png'
+        return basepath + 'notifications.png'
+
+
+@register.simple_tag
+def messages_icon(request):
+    basepath = '/static/icons/iconic/orange/'
+    if messages.Message.objects.filter(user=request.user).filter(read=False):
+        return basepath + 'new_messages.png'
+    else:
+        return basepath + 'messages.png'
+
+
+@register.filter
+def append_slash(value):
+    return value.replace('\n', '\\\n')
 

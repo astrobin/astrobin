@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<ul id="message-feed">
+{% for m in messages %}
+    <li {% if not m.read %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>{% autoescape off %}<strong>{{m.from_user}}</strong>: "{{m.subject}}"{% endautoescape %}</li>
+{% empty %}
+    <li id="empty"><a href="#">{% trans "You have no messages." %}</a></li>
+{% endfor %}
+{% if messages and show_footer %}
+    <li class="footer"><a href="{% url views.messages %}">{% trans "Show all messages" %}</a></li>
+{% endif %}
+</ul>

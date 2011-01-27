@@ -1137,6 +1137,12 @@ form textarea:focus {
 }
 .sided-main-content .fieldless { text-align: center; }
 .sided-main-content .fieldless .button { left: 0; }
+.sided-main-content-popup input { width: 220px; }
+.sided-main-content-popup textarea { width: 220px; }
+.sided-main-content-popup .submit-button {
+  margin-left: 6px;
+  width: 100px;
+}
 .small-box {
   margin: 20px auto 20px;
   padding: 10px;
@@ -1257,7 +1263,7 @@ form textarea:focus {
   visibility: hidden;
   position: absolute;
   margin: 0;
-  padding: 4px 8px;
+  padding: 8px;
   overflow: visible;
   background: url('/static/images/popup-bg.png');
   -moz-border-radius: 6px;
@@ -1298,7 +1304,7 @@ form textarea:focus {
   visibility: hidden;
   position: absolute;
   margin: 0;
-  padding: 4px 8px;
+  padding: 8px;
   overflow: visible;
   background: url('/static/images/popup-bg.png');
   -moz-border-radius: 6px;

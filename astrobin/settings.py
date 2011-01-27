@@ -81,8 +81,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.middleware.csrf.CsrfResponseMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware',
+#    'django.middleware.csrf.CsrfResponseMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
@@ -144,3 +144,4 @@ HAYSTACK_DEFAULT_OPERATOR = 'OR'
 INTERNAL_IPS = ('',) # for django-debug-toolbar: add own local IP to enable
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
+
