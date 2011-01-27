@@ -84,6 +84,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.csrf.CsrfResponseMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'astrobin.urls'
@@ -92,7 +93,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/var/www/astrobin_env/www/astrobin/templates'
+    '/var/www/astrobin_env/www/astrobin/templates',
+    '/var/www/astrobin_env/source/django-persistent-messages/persistent_messages/templates',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -114,6 +116,7 @@ INSTALLED_APPS = (
     'haystack',
     'notification',
     'debug_toolbar',
+    'persistent_messages',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -139,3 +142,5 @@ HAYSTACK_XAPIAN_PATH = '/var/www/astrobin_env/xapian_indexes'
 HAYSTACK_DEFAULT_OPERATOR = 'OR'
 
 INTERNAL_IPS = ('',) # for django-debug-toolbar: add own local IP to enable
+
+MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
