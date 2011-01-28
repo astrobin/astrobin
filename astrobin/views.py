@@ -869,11 +869,12 @@ def send_private_message(request):
         to_user = request.POST['to_user']
 
         recipient = User.objects.get(username=to_user)
-        persistent_messages.add_message(
+        message = persistent_messages.add_message(
             request, persistent_messages.SUCCESS, body,
             subject=subject, user=recipient, from_user=request.user)
-        push_message(recipient, {'originator':request.user.username,
-                                 'object': subject})
+        push_message(recipient, {'sender':request.user.username,
+                                 'subject': subject,
+                                 'message_id': message.id if message is not None else 0})
 
         return HttpResponse({'status':'success'}, mimetype='application/javascript')
     return HttpResponse({'status':'fail'}, mimetype='application/javascript')
@@ -881,5 +882,10 @@ def send_private_message(request):
 
 @login_required
 @require_GET
-def messages(request):
-    pass
+def messages_all(request):
+    return object_list(
+        request,
+        queryset=persistent_messages.models.Message.objects.filter(user=request.user),
+        template_name='messages/all.html',
+        template_object_name='message',
+        extra_context={})

@@ -1701,3 +1701,24 @@ input.date {
 .ic_caption a:hover { color: #cc4b2e; }
 .sort { margin-bottom: 5px; }
 .thumbnail-list { padding: 0 10px; }
+table.messages { width: 100%; }
+table.messages td.when { padding: 4px 12px; }
+table.messages td { padding: 0; }
+table.messages td a {
+  padding: 4px 12px;
+  display: block;
+}
+table.messages td a:hover { background-color: #3f3f3f; }
+th {
+  color: #fcfcfc;
+  font-weight: bold;
+  padding: 4px 12px;
+  border: 1px solid #222222;
+  background-color: #3f3f3f;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+}
+td {
+  padding: 4px 8px;
+  border: 1px dotted #3f3f3f;
+  background-color: #333333;
+}

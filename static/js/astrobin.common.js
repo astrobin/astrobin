@@ -45,7 +45,7 @@ function listen_for_messages(username, last_modified, etag) {
             $('img#messages').attr('src', '/static/icons/iconic/orange/new_messages.png');
             $('ul#message-feed').prepend('\
                 <li class="unread">\
-                    <a href="#"><strong>'+json['originator']+'</strong>: "' + json['object'] + '"</a>\
+                    <a href="/messages/detail/' + json['message_id'] + '"><strong>'+json['sender']+'</strong>: "' + json['subject'] + '"</a>\
                 </li>');
 
             /* Start the next long poll. */
