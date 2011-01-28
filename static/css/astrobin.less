@@ -1362,7 +1362,6 @@ form {
 
 .popup-mixin() {
     color: @background-color;
-    white-space: nowrap;
     visibility: hidden;
     position:absolute;
     margin:0;
@@ -1380,8 +1379,10 @@ form {
         margin-top: @spacer-small;
         text-align: center;
         border: 1px solid (@border-bottom-color * @strong-hilight-factor);
-        background: url('/static/images/popup-footer-bg.png');}}
-
+        background: url('/static/images/popup-footer-bg.png');}
+    a {
+        padding: @spacer-small @spacer-medium;
+        display: block;}}
 
 .sub {
     .popup-mixin;
@@ -1391,7 +1392,6 @@ form {
         a {
             padding: @spacer-small;
             color: @background-color;
-            display: inline-block;
             :hover {
                 color: @link-color;}}
         a.danger {
@@ -1417,15 +1417,24 @@ form {
         background: url('/static/images/popup-unread-bg.png');
         border-left: 1px solid @strong-text-color;}
     li {
-        padding: @spacer-small;
         border-bottom: 1px dotted (@border-bottom-color * @strongest-hilight-factor);
         :hover {
             background: url('/static/images/popup-li-bg.png');}}
     li.last {
         border-bottom: none;}
     a {
+        color: @background-color;
         :hover {
+            color: @link-color;
             border: none;}}}
+
+#notifications-popup,
+#messages-popup {
+    width: 250px;
+}
+#profile-popup,
+#profile-popup li a {
+    width: 125px;}
 
 ul.subnav {
     list-style: none;

@@ -95,7 +95,7 @@
                         {% if user.is_authenticated %}
                             <li>
                                 <a class="icon" href="#"><img alt="Account" src="/static/icons/iconic/orange/profile.png"/></a>
-                                <div class="popup">
+                                <div class="popup" id="profile-popup">
                                     <ul>
                                         <li>
                                             <a href="{% url auth_logout %}">{% trans "Log out" %}</a>
@@ -113,14 +113,14 @@
                                 <a class="icon" title="{% trans "Notifications" %}" href="#">
                                     <img id="notifications" alt="{% trans "Notifications" %}" src="{% notifications_icon request %}"/>
                                 </a>
-                                <div class="popup">
+                                <div class="popup" id="notifications-popup">
                                     {% notification_list request %}
                                 </div>
                             </li>
                             <li>
                                 <a class="icon" title="{% trans "Messages" %}" href="#">
                                     <img id="messages" alt="{% trans "Messages" %}" src="{% messages_icon request %}"/></a>
-                                <div class="popup">
+                                <div class="popup" id="messages-popup">
                                     {% message_list request %}
                                 </div>
                             </li>

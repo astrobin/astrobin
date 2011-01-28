@@ -1259,7 +1259,6 @@ form textarea:focus {
 #image-detail p#description { margin: 0; }
 .sub {
   color: #333333;
-  white-space: nowrap;
   visibility: hidden;
   position: absolute;
   margin: 0;
@@ -1287,11 +1286,14 @@ form textarea:focus {
   border: 1px solid #999999;
   background: url('/static/images/popup-footer-bg.png');
 }
+.sub a {
+  padding: 4px 8px;
+  display: block;
+}
 .sub li { text-align: left; }
 .sub li a {
   padding: 4px;
   color: #333333;
-  display: inline-block;
 }
 .sub li a:hover { color: #cc4b2e; }
 .sub li a.danger { color: #c70000; }
@@ -1300,7 +1302,6 @@ form textarea:focus {
 .sub li.bg-icon a { padding-left: 16px; }
 .popup {
   color: #333333;
-  white-space: nowrap;
   visibility: hidden;
   position: absolute;
   margin: 0;
@@ -1334,6 +1335,10 @@ form textarea:focus {
   border: 1px solid #999999;
   background: url('/static/images/popup-footer-bg.png');
 }
+.popup a {
+  padding: 4px 8px;
+  display: block;
+}
 .popup ul {
   margin: 0;
   padding: 0;
@@ -1343,13 +1348,17 @@ form textarea:focus {
   background: url('/static/images/popup-unread-bg.png');
   border-left: 1px solid #fcfcfc;
 }
-.popup li {
-  padding: 4px;
-  border-bottom: 1px dotted #cccccc;
-}
+.popup li { border-bottom: 1px dotted #cccccc; }
 .popup li:hover { background: url('/static/images/popup-li-bg.png'); }
 .popup li.last { border-bottom: none; }
-.popup a:hover { border: none; }
+.popup a { color: #333333; }
+.popup a:hover {
+  color: #cc4b2e;
+  border: none;
+}
+#notifications-popup, #messages-popup { width: 250px; }
+#profile-popup { width: 125px; }
+#profile-popup li a { width: 125px; }
 ul.subnav {
   list-style: none;
   margin: 0;
