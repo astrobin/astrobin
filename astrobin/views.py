@@ -869,7 +869,7 @@ def send_private_message(request):
         to_user = request.POST['to_user']
 
         recipient = User.objects.get(username=to_user)
-        id = persistent_messages.add_message(
+        persistent_messages.add_message(
             request, persistent_messages.SUCCESS, body,
             subject=subject, user=recipient, from_user=request.user)
         push_message(recipient, {'originator':request.user.username,
