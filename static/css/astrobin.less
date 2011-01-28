@@ -946,7 +946,7 @@ form {
             margin-right: 15px;}}
     label {
         .strong;
-        font-size: @base-font-size + 3px;
+        font-size: @base-font-size;
         width: 150px;}
     input, select, textarea {
         font-size: @base-font-size;
@@ -1262,6 +1262,7 @@ form {
 }
 
 .sided-main-content-popup {
+    width: 240px;
     input, textarea {
         width: 220px;}
     .submit-button {
@@ -1811,3 +1812,13 @@ td {
     padding: @spacer-small @spacer-medium;
     border: 1px dotted (@light-panel-color / @hilight-factor);
     background-color: @light-panel-color / @strong-hilight-factor;}
+
+.message {
+    p.body {
+        padding: @spacer-large @spacer-xlarge;
+        .rounded-corners;
+        border: 1px solid @border-color;
+        background-color: @light-panel-color / @hilight-factor;}}
+
+#message-reply {
+    margin: 10px 20px;}
