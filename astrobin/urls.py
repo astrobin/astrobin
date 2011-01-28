@@ -59,6 +59,7 @@ urlpatterns = patterns('',
     (r'^notifications/seen/$', views.mark_notifications_seen),
     (r'^notifications/$', views.notifications),
     (r'^messages/all/$', views.messages_all),
+    (r'^messages/detail/(?P<id>\d+)/$', views.message_detail),
     (r'^messages/', include('persistent_messages.urls')),
     (r'^send_private_message/', views.send_private_message),
 )

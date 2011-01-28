@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="full-box clear">
+    <div class="message{% if message.tags %} {{ message.tags }}{% endif %}>">
+        {% if message.subject %}<h2>{{ message.subject|escape }}</h2>{% endif %}
+        <p>
+            {{message.created|date:"D, d M. Y"}} {% trans "at" %} {{message.created|date:"H:i"}}
+            {% if message.from_user %}
+                ,&nbsp;{% trans "from" %}
+                <a href="{% url views.user_page message.from_user %}">
+                    {{message.from_user}}
+                </a>
+            {% endif %}
+        </p>
+        <p>{{ message.message|escape}}</p>
+    </div>
+</div>
+{% endblock %}
