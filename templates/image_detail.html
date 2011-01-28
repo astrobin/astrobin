@@ -354,7 +354,7 @@
                     width: 280,
                     modal: true});
 
-                $('form#private-message #send').live('click', function() {
+                $('form#private-message #send').one('click', function() {
                     $.post('{% url views.send_private_message %}',
                            $("form#private-message").serialize(),
                            function() {

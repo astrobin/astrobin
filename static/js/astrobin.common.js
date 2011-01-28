@@ -19,7 +19,7 @@ function listen_for_notifications(username, last_modified, etag) {
             $('ul#notification-feed').prepend('<li class="unread">'+json['message']+'</li>');
 
             /* Start the next long poll. */
-            listen_for_notifications(last_modified, etag);
+            listen_for_notifications(username, last_modified, etag);
         }
     });
 };
@@ -49,7 +49,7 @@ function listen_for_messages(username, last_modified, etag) {
                 </li>');
 
             /* Start the next long poll. */
-            listen_for_messages(last_modified, etag);
+            listen_for_messages(username, last_modified, etag);
         }
     });
 };
