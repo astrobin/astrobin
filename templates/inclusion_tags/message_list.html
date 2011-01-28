@@ -3,8 +3,10 @@
 <ul id="message-feed">
 {% for m in messages %}
     <li {% if not m.read %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>
-        <div class="message-link">
-            {% autoescape off %}<strong>{{m.from_user}}</strong>: "{{m.subject}}"{% endautoescape %}
+            <div class="message-link">
+            <a href="{% url persistent_messages.views.message_detail m.id %}">
+                {% autoescape off %}<strong>{{m.from_user}}</strong>: "{{m.subject}}"{% endautoescape %}
+            </a>
         </div>
     </li>
 {% empty %}
@@ -15,7 +17,7 @@
 {% if messages and show_footer %}
     <li class="footer">
         <div class="message-link">
-            <a href="{% url views.messages %}">{% trans "Show all messages" %}</a>
+            <a href="{% url views.messages_all %}">{% trans "Show all messages" %}</a>
         </div>
     </li>
 {% endif %}

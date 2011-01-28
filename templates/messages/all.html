@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="full-box clear">
+        <h2>{% trans "Here are your private messages" %}</h2>
+            <table class="messages">
+                <tr>
+                    <th>{% trans "When" %}</th>
+                    <th>{% trans "From" %}</th>
+                    <th>{% trans "Subject" %}</th>
+                </tr>
+            {% for message in message_list %}
+                <tr>
+                    <td class="when">{{message.created|date:"D, d M. Y"}} {% trans "at" %} {{message.created|date:"H:i" }}</td>
+                    <td><a href="{% url views.user_page message.from_user %}">{{message.from_user}}</a></td>
+                    <td><a href="{% url persistent_messages.views.message_detail message.id %}">{{message.subject}}</a></td>
+                </tr>
+            {% empty %}
+                <tr><td span="3">{% trans "You have no messages." %}</td></tr>
+            {% endfor %}
+            </table>
+    </div>
+{% endblock %}

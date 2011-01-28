@@ -1786,3 +1786,28 @@ input.date {
 img.thumbnail {}
 .thumbnail-list {
     padding: 0 10px;}
+
+table.messages {
+    width: 100%;
+    td.when {
+        padding: @spacer-small @spacer-large;}
+    td {
+        padding: 0;
+        a {
+            padding: @spacer-small @spacer-large;
+            display: block;
+            :hover {
+                background-color: @light-panel-color / @hilight-factor;}}}}
+
+th {
+    color: @strong-text-color;
+    font-weight: bold;
+    padding: @spacer-small @spacer-large;
+    border: 1px solid @border-color;
+    background-color: @light-panel-color / @hilight-factor;
+    .text-shadow;}
+
+td {
+    padding: @spacer-small @spacer-medium;
+    border: 1px dotted (@light-panel-color / @hilight-factor);
+    background-color: @light-panel-color / @strong-hilight-factor;}
