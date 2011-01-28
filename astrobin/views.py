@@ -13,6 +13,7 @@ from django.views.decorators.http import require_http_methods, require_GET, requ
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.utils.translation import ugettext as _
 
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
@@ -894,11 +895,12 @@ def messages_all(request):
 @login_required
 @require_GET
 def message_detail(request, id):
+    subject = '%s: %s' % (_('RE'), persistent_messages.models.Message.objects.get(id=id).subject)
     return object_detail(
         request,
         queryset=persistent_messages.models.Message.objects.all(),
         object_id=id,
         template_name='messages/detail.html',
         template_object_name='message',
-        extra_context={})
+        extra_context={'private_message_form':PrivateMessageForm(initial={'subject':subject})})
 

@@ -706,7 +706,7 @@ form ul li {
 form label {
   color: #fcfcfc;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
-  font-size: 16px;
+  font-size: 13px;
   width: 150px;
 }
 form input {
@@ -1137,6 +1137,7 @@ form textarea:focus {
 }
 .sided-main-content .fieldless { text-align: center; }
 .sided-main-content .fieldless .button { left: 0; }
+.sided-main-content-popup { width: 240px; }
 .sided-main-content-popup input { width: 220px; }
 .sided-main-content-popup textarea { width: 220px; }
 .sided-main-content-popup .submit-button {
@@ -1722,3 +1723,12 @@ td {
   border: 1px dotted #3f3f3f;
   background-color: #333333;
 }
+.message p.body {
+  padding: 12px 16px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #222222;
+  background-color: #3f3f3f;
+}
+#message-reply { margin: 10px 20px; }

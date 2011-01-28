@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="full-box clear">
-    <div class="message{% if message.tags %} {{ message.tags }}{% endif %}>">
+    <div class="message{% if message.tags %} {{ message.tags }}{% endif %}">
         {% if message.subject %}<h2>{{ message.subject|escape }}</h2>{% endif %}
         <p>
             {{message.created|date:"D, d M. Y"}} {% trans "at" %} {{message.created|date:"H:i"}}
@@ -14,7 +14,26 @@
                 </a>
             {% endif %}
         </p>
-        <p>{{ message.message|escape}}</p>
+        <p class="body">{{ message.message|escape}}</p>
+        <h3>{% trans "Reply" %}</h3>
+        <div id="message-reply" class="sided-main-content-popup">
+            <form id="private-message" action="" method="post">
+                {{private_message_form.as_p}}
+                <input type="hidden" name="to_user" value="{{message.from_user}}"/>
+                <input id="send" class="button submit-button" type="button" value="{% trans "Send" %} &rarr;" />
+            </form>
+            <script type="text/javascript">
+                $('form#private-message #send').one('click', function() {
+                    $.post('{% url views.send_private_message %}',
+                           $("form#private-message").serialize(),
+                           function() {
+                               $('#message-reply').html('\
+                                   <p>{% trans "Message sent" %}.</p>\
+                                ');
+                           });
+                });
+            </script>
+        </div>
     </div>
 </div>
 {% endblock %}
