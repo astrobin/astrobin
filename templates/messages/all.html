@@ -14,7 +14,7 @@
                 <tr>
                     <td class="when">{{message.created|date:"D, d M. Y"}} {% trans "at" %} {{message.created|date:"H:i" }}</td>
                     <td><a href="{% url views.user_page message.from_user %}">{{message.from_user}}</a></td>
-                    <td><a href="{% url persistent_messages.views.message_detail message.id %}">{{message.subject}}</a></td>
+                    <td><a href="{% url views.message_detail message.id %}">{{message.subject|escape}}</a></td>
                 </tr>
             {% empty %}
                 <tr><td span="3">{% trans "You have no messages." %}</td></tr>

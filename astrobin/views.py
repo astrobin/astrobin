@@ -889,3 +889,16 @@ def messages_all(request):
         template_name='messages/all.html',
         template_object_name='message',
         extra_context={})
+
+
+@login_required
+@require_GET
+def message_detail(request, id):
+    return object_detail(
+        request,
+        queryset=persistent_messages.models.Message.objects.all(),
+        object_id=id,
+        template_name='messages/detail.html',
+        template_object_name='message',
+        extra_context={})
+
