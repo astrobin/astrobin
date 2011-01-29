@@ -261,51 +261,19 @@
                     },
                     form_html: '{% autoescape off %}{{private_message_form.as_p|append_slash}}{% endautoescape %}',
                     url      : '{% url views.send_private_message %}'
+                },
+                bring_to_attention_action: {
+                    dialog: {
+                        title : '{% trans "Bring image attention" %}',
+                        body  : '{% blocktrans %}\
+                                    By choosing a user and clicking the button below, you will send them \
+                                    a notification prompting them to checkout this image.\
+                                 {% endblocktrans %}',
+                        button: '{% trans "Continue" %} &rarr;'
+                    },
+                    form_html: '{% autoescape off %}{{bring_to_attention_form.as_p|append_slash}}{% endautoescape %}'
                 }
             });
-        $('a.bring-to-attention').click(function() {
-            var $dialog = $('\
-                <div id="dialog-attention" title="{% trans "Bring to attention" %}"></div>')
-                .html('\
-                    <div class="sided-main-content-popup">\
-                    <p>\
-                        {% blocktrans %}\
-                        By clicking the button below, you will send a notification to a user,\
-                        bringing their attention to this image.\
-                        {% endblocktrans %}\
-                    </p>\
-                    <form id="form-attention" action="" method="post">\
-                        {% autoescape off %}{{bring_to_attention_form.as_p|append_slash}}{% endautoescape %}\
-                        <input id="send"\
-                               class="button submit-button"\
-                               type="button"\
-                               value="{% trans "Notify" %} &rarr;"/>\
-                    </form>\
-                    </div>\
-                ')
-                .dialog({
-                    resizable: false,
-                    height: 250,
-                    width: 280,
-                    modal: true});
-
-            var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
-            var emptyText = '{% trans "No result." %}';
-            {% autoescape off %}
-            {% for key, value in prefill_dict.items %}
-            $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
-                {asHtmlID: '{{key}}',
-                selectedItemProp: 'name',
-                searchObjProps: 'name',
-                preFill: {{value}},
-                selectedItemProp: 'name',
-                selectedValuesProp: 'name',
-                startText: startText,
-                emptyText: emptyText});
-            {% endfor %}
-            {% endautoescape %}
-
         });
-    });
     </script>
 {% endblock %}
