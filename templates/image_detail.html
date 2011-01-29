@@ -214,30 +214,17 @@
                         '{% trans "Poor" %}',
                         '{% trans "Regular" %}',
                         '{% trans "Good" %}',
-                        '{% trans "Gorgeous" %}']}
-            });
-        $('a.delete').click(function() {
-            var $dialog = $('<div id="dialog-confirm" title="{% trans "Delete image?" %}">></div>')
-                .html('\
-                        <p>\
-                            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>\
-                            {% trans "The image will be permanently deleted and cannot be recovered. Are you sure?" %}\
-                        </p>')
-                .dialog({
-                    resizable: false,
-                    height: 180,
-                    modal: true,
-                    buttons: {
-                        '{% trans "Delete image" %}': function() {
-                            $(this).dialog('close');
-                            window.location = '/delete/{{image.id}}/';
-                        },
-                        Cancel: function() {
-                            $(this).dialog('close');
-                        }
+                        '{% trans "Gorgeous" %}'],
+                    read_only: {% if user.is_authenticated %} false {% else %} true {% endif %}
+                },
+                delete_action: {
+                    dialog: {
+                        title : '{% trans "Delete image?" %}',
+                        body  : '{% trans "The image will be permanently deleted and cannot be recovered. Are you sure?"%}',
+                        button: '{% trans "Yes, delete image" %}'
                     }
-                });
-        });
+                }
+            });
         $('a.follow').live('click', function() {
             var follow_a = $(this);
             var span = follow_a.parent();

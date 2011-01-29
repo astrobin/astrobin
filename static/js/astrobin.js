@@ -104,7 +104,7 @@ var image_detail = {
     config: {
         /* Menus */
         topmenu   : '.topnav',
-        sub       : 'div.sub',
+        submenu   : 'div.sub',
         timeout   : 500,
 
         /* Rating */
@@ -115,6 +115,17 @@ var image_detail = {
             get_rating_url: '/get_rating/',
             hint_list     : ['bad', 'poor', 'regular', 'good', 'gorgeous'],
             read_only     : true
+        },
+
+        delete_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: '',
+                height: 180,
+            },
+            element: 'a.delete',
+            url    : '/delete/'
         }
     },
 
@@ -186,6 +197,34 @@ var image_detail = {
         });
     },
 
+    setup_delete: function() {
+        $(image_detail.config.delete_action.element).click(function() {
+            $('<div id="dialog-confirm" title="' +
+              image_detail.config.delete_action.dialog.title +
+              '"></div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-alert"\
+                                  style="float:left; margin:0 7px 20px 0;">\
+                            </span>' + image_detail.config.delete_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    height: image_detail.config.delete_action.dialog.height,
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog('close');
+                            window.location = image_detail.config.delete_action.url + image_detail.globals.image_id;
+                        },
+                        Cancel: function() {
+                            $(this).dialog('close');
+                        }
+                    }
+                });
+        });
+    },
+
     init: function(image_id, current_rating, config) {
         /* Init */
         image_detail.globals.image_id = image_id;
@@ -193,15 +232,18 @@ var image_detail = {
         $.extend(true, image_detail.config, config);
 
         /* Menus */
-        $(image_detail.config.topmenu)
-            .find('li')
+        $(image_detail.config.topmenu).find('>li')
             .bind('mouseover', function() {
-                image_detail.top_open($(this), image_detail.config.sub);
+                image_detail.top_open($(this), image_detail.config.submenu);
             })
-            .bind('mouseout', image_detail.top_timer);
+            .bind('mouseout', image_detail.top_timer)
+            .bind('click', image_detail.top_close);
 
         /* Rating */
         image_detail.setup_raty();
+
+        /* Delete */
+        image_detail.setup_delete();
     }
 };
 
