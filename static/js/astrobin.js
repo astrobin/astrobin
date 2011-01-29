@@ -138,7 +138,20 @@ var image_detail = {
             element       : 'a.follow',
             url           : '/follow/',
             stop_following: '',
+        },
+
+        unfollow_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: '',
+                height: 180
+            },
+            element       : 'a.unfollow',
+            url           : '/unfollow/',
+            follow        : '',
         }
+
     },
 
     globals: {
@@ -279,6 +292,48 @@ var image_detail = {
         });
     },
 
+    setup_unfollow: function() {
+        $(image_detail.config.unfollow_action.element).live('click', function() {
+            var unfollow_a = $(this);
+            var span = unfollow_a.parent();
+
+            $('<div id="dialog-confirm"\
+                    title="' + image_detail.config.unfollow_action.dialog.title + '">\
+               </div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>\
+                            ' + image_detail.config.unfollow_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    height: image_detail.config.unfollow_action.dialog.height,
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            var dlg = $(this)
+                            $.ajax({
+                                url: image_detail.config.unfollow_action.url + image_detail.globals.image_username,
+                                success: function() {
+                                    dlg.dialog('close');
+                                    unfollow_a.remove();
+                                    span.html('<a class="follow" href="#">' +
+                                        image_detail.config.unfollow_action.follow +
+                                        '</a>');
+                                    span.parent().removeClass('icon-unfollow');
+                                    span.parent().addClass('icon-follow');
+                                }
+                            });
+                        },
+                        Cancel: function() {
+                            $(this).dialog('close');
+                        }
+                    }
+                });
+        });
+    },
+
+
     init: function(image_id, image_username, current_rating, config) {
         /* Init */
         image_detail.globals.image_id = image_id;
@@ -302,6 +357,7 @@ var image_detail = {
 
         /* Following */
         image_detail.setup_follow();
+        image_detail.setup_unfollow();
     }
 };
 
