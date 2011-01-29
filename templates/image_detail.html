@@ -206,6 +206,7 @@
     $(document).ready(function() {
         image_detail.init(
             {{image.id}},
+            '{{image.user.username}}',
             {{current_rating}},
             {
                 rating: {
@@ -223,44 +224,21 @@
                         body  : '{% trans "The image will be permanently deleted and cannot be recovered. Are you sure?"%}',
                         button: '{% trans "Yes, delete image" %}'
                     }
+                },
+                follow_action: {
+                    dialog: {
+                        title : '{% blocktrans with image.user.username as username %}\
+                                     Follow {{username}}?\
+                                 {% endblocktrans %}',
+                        body  : '{% blocktrans with image.user.username as username %}\
+                                     You will receive a notification every time {{username}} posts a new image. \
+                                     Continue?\
+                                 {% endblocktrans %}',
+                        button: '{% trans "Yes, follow!" %}'
+                    },
+                    stop_following: '{% trans "Stop following" %}'
                 }
             });
-        $('a.follow').live('click', function() {
-            var follow_a = $(this);
-            var span = follow_a.parent();
-
-            var $dialog = $('<div id="dialog-confirm" title="{% blocktrans with image.user.username as username %}Follow {{username}}?{% endblocktrans %}"></div>')
-                .html('\
-                        <p>\
-                            <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 20px 0;"></span>\
-                            {% blocktrans with image.user.username as username %}\
-                            You will be notified when {{username}} posts new images. Continue?\
-                            {% endblocktrans %}\
-                        </p>')
-                .dialog({
-                    resizable: false,
-                    height: 180,
-                    modal: true,
-                    buttons: {
-                        '{% trans "Yes, follow!" %}': function() {
-                            var dlg = $(this)
-                            $.ajax({
-                                url: '/follow/{{image.user.username}}/',
-                                success: function() {
-                                    dlg.dialog('close');
-                                    follow_a.remove();
-                                    span.html('<a class="unfollow" href="#">{% trans "Stop following" %}</a>');
-                                    span.parent().removeClass('icon-follow');
-                                    span.parent().addClass('icon-unfollow');
-                                }
-                            });
-                        },
-                        Cancel: function() {
-                            $(this).dialog('close');
-                        }
-                    }
-                });
-        });
         $('a.unfollow').live('click', function() {
             var unfollow_a = $(this);
             var span = unfollow_a.parent();
