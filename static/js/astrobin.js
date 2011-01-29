@@ -150,8 +150,18 @@ var image_detail = {
             element       : 'a.unfollow',
             url           : '/unfollow/',
             follow        : '',
-        }
+        },
 
+        message_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: ''
+            },
+            element  : 'a.send-private-message',
+            form_html: '',
+            url      : ''
+        }
     },
 
     globals: {
@@ -333,6 +343,32 @@ var image_detail = {
         });
     },
 
+    setup_send_message: function() {
+        $(image_detail.config.message_action.element).click(function() {
+            var dlg = $('<div id="dialog-message" title="' + image_detail.config.message_action.dialog.title + '"></div>')
+                .html('\
+                    <div class="sided-main-content-popup">\
+                    <form id="private-message" action="" method="post">\
+                        ' + image_detail.config.message_action.form_html + '\
+                        <input type="hidden" name="to_user" value="' + image_detail.globals.image_username  + '"/>\
+                        <input id="send" class="button submit-button" type="button" value="' + image_detail.config.message_action.dialog.button  + '" />\
+                    </form>\
+                    </div>\
+                ')
+                .dialog({
+                    resizable: true,
+                    modal: true});
+
+                $('form#private-message #send').one('click', function() {
+                    $.post(image_detail.config.message_action.url,
+                           $("form#private-message").serialize(),
+                           function() {
+                                dlg.dialog('close');
+                           });
+                });
+        });
+
+    },
 
     init: function(image_id, image_username, current_rating, config) {
         /* Init */
@@ -358,6 +394,9 @@ var image_detail = {
         /* Following */
         image_detail.setup_follow();
         image_detail.setup_unfollow();
+
+        /* Messaging */
+        image_detail.setup_send_message();
     }
 };
 
