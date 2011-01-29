@@ -161,6 +161,16 @@ var image_detail = {
             element  : 'a.send-private-message',
             form_html: '',
             url      : ''
+        },
+
+        bring_to_attention_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: ''
+            },
+            element  : 'a.bring-to-attention',
+            form_html: ''
         }
     },
 
@@ -367,7 +377,30 @@ var image_detail = {
                            });
                 });
         });
+    },
 
+    setup_bring_to_attention: function() {
+        $(image_detail.config.bring_to_attention_action.element).click(function() {
+            $('\
+                <div id="dialog-attention" title="' + image_detail.config.bring_to_attention_action.dialog.title + '"></div>')
+                .html('\
+                    <div class="sided-main-content-popup">\
+                    <p>\
+                        ' + image_detail.config.bring_to_attention_action.dialog.body + '\
+                    </p>\
+                    <form id="form-attention" action="" method="post">\
+                        ' + image_detail.config.bring_to_attention_action.form_html + '\
+                        <input id="send"\
+                               class="button submit-button"\
+                               type="button"\
+                               value="' + image_detail.config.bring_to_attention_action.dialog.button + '"/>\
+                    </form>\
+                    </div>\
+                ')
+                .dialog({
+                    resizable: false,
+                    modal: true});
+            });
     },
 
     init: function(image_id, image_username, current_rating, config) {
@@ -397,6 +430,9 @@ var image_detail = {
 
         /* Messaging */
         image_detail.setup_send_message();
+
+        /* Bring to a user's attention */
+        image_detail.setup_bring_to_attention();
     }
 };
 
