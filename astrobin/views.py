@@ -167,7 +167,8 @@ def image_detail(request, id):
                          'deep_sky_data': deep_sky_data,
                          'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
                          'follows': follows,
-                         'private_message_form': PrivateMessageForm()})
+                         'private_message_form': PrivateMessageForm(),
+                         'bring_to_attention_form': BringToAttentionForm()})
 
 
 @require_GET

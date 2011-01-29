@@ -33,7 +33,7 @@
                                     <li class="separator"></li>
                                 {% endif %}
                                     <li class="bg-icon icon-quote">
-                                        <span class="text"><a href="#">{% trans "Bring to a user's attention" %}</a></span>
+                                        <span class="text"><a class="bring-to-attention" href="#">{% trans "Bring to a user's attention" %}</a></span>
                                     </li>
                                     <li class="bg-icon icon-info">
                                         <span class="text"><a href="#">{% trans "Request additional information" %}</a></span>
@@ -204,43 +204,18 @@
     </div>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('.topnav > li').bind('mouseover', function() { top_open($(this), 'div.sub'); })
-        $('.topnav > li').bind('mouseout',  top_timer)
-        $('#rating').raty(
+        image_detail.init(
+            {{image.id}},
+            {{current_rating}},
             {
-                start: {{current_rating}},
-                path: '/static/images/raty/',
-                {% if user.is_authenticated and not already_voted %}
-                readOnly: false,
-                {% else %}
-                readOnly: true,
-                {% endif %}
-                showHalf: true,
-                hintList: ['{% trans "bad" %}',
-                           '{% trans "poor" %}',
-                           '{% trans "regular" %}',
-                           '{% trans "good" %}',
-                           '{% trans "gorgeous" %}'],
-                onClick: function(score) {
-                    $.ajax({
-                        url: '/rate/{{image.id}}/' + score + '/',
-                        success: function(data, textStatus, XMLHttpRequst) {
-                            $.ajax({
-                                url: '/get_rating/{{image.id}}/',
-                                success: function(data) {
-                                    var rating = $.parseJSON(data).rating
-                                    $.fn.raty.start(rating);
-                                    $.fn.raty.readOnly(true);
-                                }
-                            });
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            $.fn.raty.readOnly(true);
-                        }
-                    });
-                }
-            }
-        );
+                rating: {
+                    hint_list: [
+                        '{% trans "Bad" %}',
+                        '{% trans "Poor" %}',
+                        '{% trans "Regular" %}',
+                        '{% trans "Good" %}',
+                        '{% trans "Gorgeous" %}']}
+            });
         $('a.delete').click(function() {
             var $dialog = $('<div id="dialog-confirm" title="{% trans "Delete image?" %}">></div>')
                 .html('\
@@ -361,6 +336,49 @@
                                 $dialog.dialog('close');
                            });
                 });
+        });
+        $('a.bring-to-attention').click(function() {
+            var $dialog = $('\
+                <div id="dialog-attention" title="{% trans "Bring to attention" %}"></div>')
+                .html('\
+                    <div class="sided-main-content-popup">\
+                    <p>\
+                        {% blocktrans %}\
+                        By clicking the button below, you will send a notification to a user,\
+                        bringing their attention to this image.\
+                        {% endblocktrans %}\
+                    </p>\
+                    <form id="form-attention" action="" method="post">\
+                        {% autoescape off %}{{bring_to_attention_form.as_p|append_slash}}{% endautoescape %}\
+                        <input id="send"\
+                               class="button submit-button"\
+                               type="button"\
+                               value="{% trans "Notify" %} &rarr;"/>\
+                    </form>\
+                    </div>\
+                ')
+                .dialog({
+                    resizable: false,
+                    height: 250,
+                    width: 280,
+                    modal: true});
+
+            var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
+            var emptyText = '{% trans "No result." %}';
+            {% autoescape off %}
+            {% for key, value in prefill_dict.items %}
+            $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
+                {asHtmlID: '{{key}}',
+                selectedItemProp: 'name',
+                searchObjProps: 'name',
+                preFill: {{value}},
+                selectedItemProp: 'name',
+                selectedValuesProp: 'name',
+                startText: startText,
+                emptyText: emptyText});
+            {% endfor %}
+            {% endautoescape %}
+
         });
     });
     </script>

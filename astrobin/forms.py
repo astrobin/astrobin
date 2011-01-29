@@ -44,7 +44,12 @@ class UserProfileEditGearForm(forms.Form):
     filters = forms.CharField(max_length=256)
     accessories = forms.CharField(max_length=256)
 
+
 class PrivateMessageForm(forms.Form):
     subject = forms.CharField(max_length=255, required=False)
     body = forms.CharField(widget=forms.Textarea, max_length=4096, required=False)
+
+
+class BringToAttentionForm(forms.Form):
+    user = forms.CharField(max_length=64, required=False)
 
