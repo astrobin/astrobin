@@ -38,7 +38,7 @@
         <script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
 
         <script type="text/javascript" src="/static/js/menus.js"></script>
-        <script type="text/javascript" src="/static/js/astrobin.common.js"></script>
+        <script type="text/javascript" src="/static/js/astrobin.js"></script>
 
         <!-- fonts -->
         <script type="text/javascript" src="/static/fonts/Museo-500/MyFonts Webfonts Order M2677657.js"></script>
@@ -47,7 +47,7 @@
         {% endblock %}
     </head>
 
-    <body{% if user.is_authenticated %} onload="start_listeners('{{request.user.username}}');"{%endif %}>
+    <body{% if user.is_authenticated %} onload="common.start_listeners('{{request.user.username}}');"{%endif %}>
         <!-- wrap -->
         <div id="wrap">
 
