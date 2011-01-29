@@ -46,7 +46,7 @@ var common = {
                     .prepend('<li class="unread">'+json['message']+'</li>');
 
                 /* Start the next long poll. */
-                listen_for_notifications(username, last_modified, etag);
+                common.listen_for_notifications(username, last_modified, etag);
             }
         });
     },
@@ -79,7 +79,7 @@ var common = {
                 ');
 
                 /* Start the next long poll. */
-                listen_for_messages(username, last_modified, etag);
+                common.listen_for_messages(username, last_modified, etag);
             }
         });
     },
@@ -126,6 +126,18 @@ var image_detail = {
             },
             element: 'a.delete',
             url    : '/delete/'
+        },
+
+        follow_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: '',
+                height: 180
+            },
+            element       : 'a.follow',
+            url           : '/follow/',
+            stop_following: '',
         }
     },
 
@@ -136,6 +148,7 @@ var image_detail = {
 
         /* Common */
         image_id      : 0,
+        image_username: '',
 
         /* Rating */
         rating: {
@@ -225,9 +238,51 @@ var image_detail = {
         });
     },
 
-    init: function(image_id, current_rating, config) {
+    setup_follow: function() {
+        $(image_detail.config.follow_action.element).live('click', function() {
+            var follow_a = $(this);
+            var span = follow_a.parent();
+
+            $('<div id="dialog-confirm"\
+                    title="' + image_detail.config.follow_action.dialog.title + '">\
+               </div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 20px 0;"></span>\
+                            ' + image_detail.config.follow_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    height: image_detail.config.follow_action.dialog.height,
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            var dlg = $(this)
+                            $.ajax({
+                                url: image_detail.config.follow_action.url + image_detail.globals.image_username,
+                                success: function() {
+                                    dlg.dialog('close');
+                                    follow_a.remove();
+                                    span.html('<a class="unfollow" href="#">' +
+                                        image_detail.config.follow_action.stop_following +
+                                        '</a>');
+                                    span.parent().removeClass('icon-follow');
+                                    span.parent().addClass('icon-unfollow');
+                                }
+                            });
+                        },
+                        Cancel: function() {
+                            $(this).dialog('close');
+                        }
+                    }
+                });
+        });
+    },
+
+    init: function(image_id, image_username, current_rating, config) {
         /* Init */
         image_detail.globals.image_id = image_id;
+        image_detail.globals.image_username = image_username;
         image_detail.globals.rating.current = current_rating;
         $.extend(true, image_detail.config, config);
 
@@ -244,6 +299,9 @@ var image_detail = {
 
         /* Delete */
         image_detail.setup_delete();
+
+        /* Following */
+        image_detail.setup_follow();
     }
 };
 
