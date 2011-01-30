@@ -1,0 +1,5 @@
+{% load i18n %}
+{% blocktrans %}
+{{originator}} would like to bring the following image to your attention:
+{{object_url}}
+{% endblocktrans %}

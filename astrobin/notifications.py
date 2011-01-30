@@ -1,9 +1,11 @@
 from django.template.loader import render_to_string
+from django.conf import settings
 import urllib2
 import simplejson
 from notification import models as notification
 
 def push_notification(recipients, type, data):
+    data['notices_url'] = settings.ASTROBIN_SHORT_BASE_URL + '/notifications/'
     notification.send(recipients, type, data)
     rendered = render_to_string('notification/%s/%s' % (type, 'short.html'), data)
     encoded_data = simplejson.dumps({'message':rendered})
