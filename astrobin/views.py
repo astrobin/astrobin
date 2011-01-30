@@ -904,3 +904,35 @@ def message_detail(request, id):
         template_object_name='message',
         extra_context={'private_message_form':PrivateMessageForm(initial={'subject':subject})})
 
+
+@login_required
+@require_POST
+def bring_to_attention(request):
+    form = BringToAttentionForm(request.POST)
+    image_id = request.POST.get('image_id')
+    try:
+        image = Image.objects.get(id=image_id)
+    except:
+        return HttpResponse({'status':'fail'}, mimetype='application/javascript')
+
+    if not form.is_valid():
+        return HttpResponse({'status':'fail'}, mimetype='application/javascript')
+
+    recipients = []
+    reader = csv.reader([request.POST['as_values_user']],
+                        skipinitialspace=True)
+    for row in reader:
+        for username in row:
+            if username != '':
+                user = User.objects.get(username=username)
+                if user is not None:
+                    recipients.append(user)
+
+    push_notification(recipients, 'attention_request',
+                      {'object':image,
+                       'object_url':settings.ASTROBIN_SHORT_BASE_URL + image.get_absolute_url(),
+                       'originator':request.user,
+                       'originator_url': request.user.get_absolute_url()})
+
+    return HttpResponse({'status':'success'}, mimetype='application/javascript')
+

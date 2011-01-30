@@ -63,4 +63,5 @@ urlpatterns = patterns('',
     (r'^messages/detail/(?P<id>\d+)/$', views.message_detail),
     (r'^messages/', include('persistent_messages.urls')),
     (r'^send_private_message/', views.send_private_message),
+    (r'^bring_to_attention/', views.bring_to_attention),
 )

@@ -15,7 +15,7 @@ var common = {
         notifications_icon_new     : '/static/icons/iconic/orange/new_notifications.png',
 
         /* Messages */
-        messages_base_url          : '/activity?iD=message_',
+        messages_base_url          : '/activity?id=message_',
         messages_element_empty     : 'ul#message-feed li#empty',
         messages_element_image     : 'img#messages',
         messages_element_ul        : 'ul#message-feed',
@@ -174,7 +174,8 @@ var image_detail = {
             autocomplete: {
                 startText: '',
                 emptyText: ''
-            }
+            },
+            url: ''
         }
     },
 
@@ -385,16 +386,17 @@ var image_detail = {
 
     setup_bring_to_attention: function() {
         $(image_detail.config.bring_to_attention_action.element).click(function() {
-            $('\
+            var dlg = $('\
                 <div id="dialog-attention" title="' + image_detail.config.bring_to_attention_action.dialog.title + '"></div>')
                 .html('\
                     <div class="sided-main-content-popup">\
                     <p>\
                         ' + image_detail.config.bring_to_attention_action.dialog.body + '\
                     </p>\
-                    <form id="form-attention" action="" method="post">\
+                    <form id="attention" action="" method="post">\
                         ' + image_detail.config.bring_to_attention_action.form_html + '\
-                        <input id="send"\
+                        <input type="hidden" name="image_id" value="' + image_detail.globals.image_id  + '"/>\
+                        <input id="submit"\
                                class="button submit-button"\
                                type="button"\
                                value="' + image_detail.config.bring_to_attention_action.dialog.button + '"/>\
@@ -415,6 +417,15 @@ var image_detail = {
                 startText: image_detail.config.bring_to_attention_action.autocomplete.startText,
                 emptyText: image_detail.config.bring_to_attention_action.autocomplete.emptyText
             });
+
+            $('form#attention #submit').one('click', function() {
+                $.post(image_detail.config.bring_to_attention_action.url,
+                       $("form#attention").serialize(),
+                       function() {
+                            dlg.dialog('close');
+                       });
+            });
+
         });
     },
 

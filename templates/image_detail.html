@@ -275,7 +275,8 @@
                     autocomplete: {
                         startText: '{% trans "Enter partial name" %}',
                         emptyText: '{% trans "User not found. Cannot notify them." %}'
-                    }
+                    },
+                    url: '{% url views.bring_to_attention %}'
                 }
             });
 
