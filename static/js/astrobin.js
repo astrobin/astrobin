@@ -170,7 +170,11 @@ var image_detail = {
                 button: ''
             },
             element  : 'a.bring-to-attention',
-            form_html: ''
+            form_html: '',
+            autocomplete: {
+                startText: '',
+                emptyText: ''
+            }
         }
     },
 
@@ -400,7 +404,18 @@ var image_detail = {
                 .dialog({
                     resizable: false,
                     modal: true});
+
+            $('#id_user').autoSuggest('/autocomplete_usernames/', {
+                asHtmlID: 'user',
+                selectedItemProp: 'name',
+                searchObjProps: 'name',
+                preFill: '',
+                selectedItemProp: 'name',
+                selectedValuesProp: 'name',
+                startText: image_detail.config.bring_to_attention_action.autocomplete.startText,
+                emptyText: image_detail.config.bring_to_attention_action.autocomplete.emptyText
             });
+        });
     },
 
     init: function(image_id, image_username, current_rating, config) {

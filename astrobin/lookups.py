@@ -13,6 +13,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 import simplejson
 
@@ -56,4 +57,11 @@ def autocomplete_user(request, what):
             values = v.all().filter(Q(name__icontains=request.GET['q']))
 
     return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.name} for v in values]))
+
+
+@login_required
+@require_GET
+def autocomplete_usernames(request):
+    values = User.objects.filter(Q(username__icontains=request.GET['q']))
+    return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.username} for v in values]))
 

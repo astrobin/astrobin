@@ -264,16 +264,21 @@
                 },
                 bring_to_attention_action: {
                     dialog: {
-                        title : '{% trans "Bring image attention" %}',
+                        title : '{% trans "Bring image to attention" %}',
                         body  : '{% blocktrans %}\
-                                    By choosing a user and clicking the button below, you will send them \
+                                    By choosing some users and clicking the button below, you will send them \
                                     a notification prompting them to checkout this image.\
                                  {% endblocktrans %}',
                         button: '{% trans "Continue" %} &rarr;'
                     },
-                    form_html: '{% autoescape off %}{{bring_to_attention_form.as_p|append_slash}}{% endautoescape %}'
+                    form_html: '{% autoescape off %}{{bring_to_attention_form.as_p|append_slash}}{% endautoescape %}',
+                    autocomplete: {
+                        startText: '{% trans "Enter partial name" %}',
+                        emptyText: '{% trans "User not found. Cannot notify them." %}'
+                    }
                 }
             });
+
         });
     </script>
 {% endblock %}
