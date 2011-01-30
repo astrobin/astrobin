@@ -43,6 +43,7 @@ urlpatterns = patterns('',
     (r'^flickr_auth_callback/$', views.flickr_auth_callback),
     (r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete),
     (r'^autocomplete_user/(?P<what>\w+)/$', lookups.autocomplete_user),
+    (r'^autocomplete_usernames/$', lookups.autocomplete_usernames),
     (r'rate/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(), {
         'app_label': 'astrobin',
         'model': 'image',

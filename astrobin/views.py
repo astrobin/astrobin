@@ -36,7 +36,6 @@ def jsonDump(all):
     else:
         return []
 
-
 # VIEWS
 
 def index(request):
