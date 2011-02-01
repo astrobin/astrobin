@@ -29,6 +29,7 @@ from models import *
 from forms import *
 from file_utils import *
 from notifications import *
+from shortcuts import *
 
 def jsonDump(all):
     if len(all) > 0:
@@ -178,8 +179,7 @@ def image_get_rating(request, image_id):
     rating = float(score)/votes if votes > 0 else 0
 
     response_dict = {'rating': rating}
-    return HttpResponse(simplejson.dumps(response_dict),
-                        mimetype='application/javascript')
+    return ajax_response(response_dict)
 
 
 @login_required
@@ -222,8 +222,7 @@ def image_upload_process(request):
 
     if 'qqfile' in request.GET:
         return_dict = {'success':'true', 'id':image.id}
-        return HttpResponse(simplejson.dumps(return_dict),
-                            mimetype='application/javascript')
+        return ajax_response(return_dict)
     else:
         return render_to_response("image_edit_basic.html",
             {"image":image,
@@ -765,8 +764,7 @@ def user_profile_flickr_import(request):
                     if index > 0:
                         request.session['current-progress'] = [100 / index / len(selected_photos), photo_id]
 
-        return HttpResponse(simplejson.dumps(response_dict),
-                            mimetype='application/javascript')
+        return ajax_response(response_dict)
 
     return render_to_response("user_profile_flickr_import.html",
                               response_dict,
@@ -822,8 +820,7 @@ def follow(request, username):
                       {'object':username,
                        'object_url':to_profile.get_absolute_url()})
 
-    return HttpResponse({'status':'success'}, mimetype='application/javascript')
-
+    return ajax_success()
 
 @login_required
 @require_GET
@@ -839,15 +836,14 @@ def unfollow(request, username):
                       {'object':username,
                        'object_url':to_profile.get_absolute_url()})
 
-    return HttpResponse({'status':'success'}, mimetype='application/javascript')
-
+    return ajax_success()
 
 @login_required
 @require_GET
 def mark_notifications_seen(request):
     for n in notification.Notice.objects.filter(user=request.user):
         n.is_unseen()
-    return HttpResponse({'status':'success'}, mimetype='application/javascript')
+    return ajax_success()
 
 
 @login_required
@@ -877,8 +873,8 @@ def send_private_message(request):
                                  'subject': subject,
                                  'message_id': message.id if message is not None else 0})
 
-        return HttpResponse({'status':'success'}, mimetype='application/javascript')
-    return HttpResponse({'status':'fail'}, mimetype='application/javascript')
+        return ajax_success()
+    return ajax_fail()
 
 
 @login_required
@@ -913,10 +909,10 @@ def bring_to_attention(request):
     try:
         image = Image.objects.get(id=image_id)
     except:
-        return HttpResponse({'status':'fail'}, mimetype='application/javascript')
+        return ajax_fail()
 
     if not form.is_valid():
-        return HttpResponse({'status':'fail'}, mimetype='application/javascript')
+        return ajax_fail()
 
     recipients = []
     reader = csv.reader([request.POST['as_values_user']],
@@ -934,5 +930,37 @@ def bring_to_attention(request):
                        'originator':request.user,
                        'originator_url': request.user.get_absolute_url()})
 
-    return HttpResponse({'status':'success'}, mimetype='application/javascript')
+    return ajax_success()
 
+
+@login_required
+@require_GET
+def requests(request):
+    return object_list(
+        request,
+        queryset=Request.objects.filter(to_user=request.user),
+        template_name='requests/all.html',
+        template_object_name='req',
+        extra_context={})
+
+
+@login_required
+@require_GET
+def request_additional_information(request, image_id):
+    image = None
+    try:
+        image = Image.objects.get(id=image_id);
+    except:
+        return ajax_fail()
+
+    r = Request(
+        from_user=request.user,
+        to_user=image.user,
+        image=image,
+        fulfilled=False,
+        message='', # not implemented yet
+        type='INFO')
+    r.save()
+    push_request(image.user, r);
+
+    return ajax_success()

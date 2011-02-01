@@ -1,0 +1,28 @@
+{% load i18n %}
+
+<ul id="request-feed">
+{% for r in requests %}
+    <li {% if not r.fulfilled %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>
+        <div class="request-link">
+        {% if r.type == 'INFO' %}
+            <a href="{{r.image.get_absolute_url}}">
+                {% blocktrans with r.from_user.username as username %}
+                <strong>{{username}}</strong> has requested additional information about your image.
+                {% endblocktrans %}
+            </a>
+        {% endif %}
+        </div>
+    </li>
+{% empty %}
+    <li id="empty">
+        {% trans "You have no unfulfilled requests." %}
+    </li>
+{% endfor %}
+{% if requests and show_footer %}
+    <li class="footer">
+        <div class="request-link">
+            <a href="{% url views.requests %}">{% trans "Show all requests" %}</a>
+        </div>
+    </li>
+{% endif %}
+</ul>
