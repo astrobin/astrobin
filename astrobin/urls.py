@@ -66,4 +66,5 @@ urlpatterns = patterns('',
     (r'^bring_to_attention/$', views.bring_to_attention),
     (r'^requests/$', views.requests),
     (r'^request/additional_information/(?P<image_id>\d+)/$', views.request_additional_information),
+    (r'^request/fits/(?P<image_id>\d+)/$', views.request_fits),
 )

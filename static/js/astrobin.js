@@ -229,6 +229,15 @@ var image_detail = {
             },
             element: 'a.request-additional-information',
             url    : '/request/additional_information/'
+        },
+
+        request_fits_action: {
+            dialog: {
+                title: '',
+                body: '',
+            },
+            element: 'a.request-fits',
+            url    : '/request/fits/'
         }
     },
 
@@ -506,7 +515,6 @@ var image_detail = {
                                     dlg.dialog('close');
                                 }
                             });
- 
                         },
                         Cancel: function() {
                             $(this).dialog('close');
@@ -516,6 +524,38 @@ var image_detail = {
         });
     },
 
+    setup_request_fits: function() {
+        var dlg = $(image_detail.config.request_fits_action.element).click(function() {
+            $('<div id="dialog-confirm" title="' +
+              image_detail.config.request_fits_action.dialog.title +
+              '"></div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-info"\
+                                  style="float:left; margin:0 7px 20px 0;">\
+                            </span>' + image_detail.config.request_fits_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog('close');
+                            $.ajax({
+                                url: image_detail.config.request_fits_action.url +
+                                     image_detail.globals.image_id + '/',
+                                success: function() {
+                                    dlg.dialog('close');
+                                }
+                            });
+                        },
+                        Cancel: function() {
+                            $(this).dialog('close');
+                        }
+                    }
+                });
+        });
+    },
 
     init: function(image_id, image_username, current_rating, config) {
         /* Init */
@@ -550,6 +590,7 @@ var image_detail = {
 
         /* Requests */
         image_detail.setup_request_additional_information();
+        image_detail.setup_request_fits();
     }
 };
 

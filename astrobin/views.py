@@ -964,3 +964,26 @@ def request_additional_information(request, image_id):
     push_request(image.user, r);
 
     return ajax_success()
+
+
+@login_required
+@require_GET
+def request_fits(request, image_id):
+    image = None
+    try:
+        image = Image.objects.get(id=image_id);
+    except:
+        return ajax_fail()
+
+    r = Request(
+        from_user=request.user,
+        to_user=image.user,
+        image=image,
+        fulfilled=False,
+        message='', # not implemented yet
+        type='FITS')
+    r.save()
+    push_request(image.user, r);
+
+    return ajax_success()
+

@@ -4,13 +4,19 @@
 {% for r in requests %}
     <li {% if not r.fulfilled %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>
         <div class="request-link">
-        {% if r.type == 'INFO' %}
             <a href="{{r.image.get_absolute_url}}">
+                {% if r.type == 'INFO' %}
                 {% blocktrans with r.from_user.username as username %}
                 <strong>{{username}}</strong> has requested additional information about your image.
                 {% endblocktrans %}
+                {% else %}
+                {% if r.type == 'FITS' %}
+                {% blocktrans with r.from_user.username as username %}
+                <strong>{{username}}</strong> has requested to see the TIFF of FITS of your image.
+                {% endblocktrans %}
+                {% endif %}
+                {% endif %}
             </a>
-        {% endif %}
         </div>
     </li>
 {% empty %}
