@@ -7,6 +7,7 @@
  *********************************************************************/
 var common = {
     config: {
+        image_detail_url           : '/',
         /* Notifications */
         notifications_base_url     : '/activity?id=notification_',
         notifications_element_empty: 'ul#notification-feed li#empty',
@@ -114,8 +115,7 @@ var common = {
                     .attr('src', common.config.requests_icon_new);
                 $(common.config.requests_element_ul).prepend('\
                     <li class="unread">\
-                        <a href="' + common.config.request_detail_url + json['request_id'] + '">\
-                            <strong>'+json['sender']+'</strong>: "' + json['message'] + '"\
+                        <a href="' + common.config.image_detail_url + json['image_id'] + '/">' + json['message'] + '\
                         </a>\
                     </li>\
                 ');
