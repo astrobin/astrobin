@@ -2,6 +2,7 @@ from django.template import Library
 from django.conf import settings
 from notification import models as notifications
 from persistent_messages import models as messages
+from astrobin.models import Request
 
 register = Library() 
 
@@ -36,6 +37,13 @@ def message_list(request, show_footer = True):
         'show_footer':show_footer}
 
 
+@register.inclusion_tag('inclusion_tags/request_list.html')
+def request_list(request, show_footer = True):
+    return {
+        'requests':Request.objects.filter(to_user=request.user).order_by('-created')[:10],
+        'show_footer':show_footer}
+
+
 @register.simple_tag
 def notifications_icon(request):
     basepath = '/static/icons/iconic/orange/'
@@ -52,6 +60,15 @@ def messages_icon(request):
         return basepath + 'new_messages.png'
     else:
         return basepath + 'messages.png'
+
+
+@register.simple_tag
+def requests_icon(request):
+    basepath = '/static/icons/iconic/orange/'
+    if Request.objects.filter(to_user=request.user).filter(fulfilled=False):
+        return basepath + 'new_requests.png'
+    else:
+        return basepath + 'requests.png'
 
 
 @register.filter

@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django import forms
+from django.utils.translation import ugettext as _
 
 from djangoratings.fields import RatingField
 
@@ -137,6 +138,31 @@ class ABPOD(models.Model):
 	
 	def __unicode__(self):
 		return self.image.subjects
+
+
+class Request(models.Model):
+    TYPE_CHOICES = (
+        ('INFO',  _('Additional information')),
+        ('FITS',  _('TIFF/FITS')),
+        ('HIRES', _('Higher resolution')),
+    )
+
+    from_user = models.ForeignKey(User, editable=False, related_name='requester')
+    to_user   = models.ForeignKey(User, editable=False, related_name='requestee')
+    image     = models.ForeignKey(Image, editable=False)
+    fulfilled = models.BooleanField()
+    message   = models.CharField(max_length=255)
+    type      = models.CharField(max_length=8, choices=TYPE_CHOICES)
+    created   = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)
+
+    class Meta:
+        ordering = ['-created']
+
+    def get_absolute_url():
+        return '/requests/detail/' + self.id + '/'
 
 
 class UserProfile(models.Model):

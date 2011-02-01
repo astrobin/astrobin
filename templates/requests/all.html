@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="full-box clear">
+        <h2>{% trans "Here are your requests" %}</h2>
+            <table class="requests">
+                <tr>
+                    <th>{% trans "When" %}</th>
+                    <th>{% trans "From" %}</th>
+                    <th>{% trans "Type" %}</th>
+                    <th>{% trans "Image" %}</th>
+                    <th>{% trans "Fullfilled" %}</th>
+                </tr>
+            {% for req in req_list %}
+                <tr>
+                    <td class="when">{{req.created|date:"D, d M. Y"}} {% trans "at" %} {{req.created|date:"H:i" }}</td>
+                    <td><a href="{% url views.user_page req.from_user %}">{{req.from_user}}</a></td>
+                    <td>{{req.get_type_display}}</td>
+                    <td><a href="{% url views.image_detail req.image.id %}">{{req.image.title|escape}}</a></td>
+                    <td>{% if req.fulfilled %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
+                </tr>
+            {% empty %}
+                <tr><td span="4">{% trans "You have no requests." %}</td></tr>
+            {% endfor %}
+            </table>
+    </div>
+{% endblock %}

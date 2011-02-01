@@ -20,7 +20,16 @@ var common = {
         messages_element_image     : 'img#messages',
         messages_element_ul        : 'ul#message-feed',
         messages_icon_new          : '/static/icons/iconic/orange/new_messages.png',
-        message_detail_url         : '/messages/detail/'
+        message_detail_url         : '/messages/detail/',
+
+
+        /* Requests */
+        requests_base_url          : '/activity/?id=request_',
+        requests_element_empty     : 'ul#request-feed li#empty',
+        requests_element_image     : 'img#requests',
+        requests_element_ul        : 'ul#request-feed',
+        requests_icon_new          : '/static/icons/iconic/orange/new_requests.png',
+        request_detail_url         : '/requests/detail/'
     },
 
     listen_for_notifications: function(username, last_modified, etag) {
@@ -84,10 +93,45 @@ var common = {
         });
     },
 
+    listen_for_requests: function(username, last_modified, etag) {
+        $.ajax({
+            'beforeSend': function(xhr) {
+                xhr.setRequestHeader("If-None-Match", etag);
+                xhr.setRequestHeader("If-Modified-Since", last_modified);
+            },
+            url: common.config.requests_base_url + username,
+            dataType: 'text',
+            type: 'get',
+            cache: 'false',
+            success: function(data, textStatus, xhr) {
+                etag = xhr.getResponseHeader('Etag');
+                last_modified = xhr.getResponseHeader('Last-Modified');
+
+                json = jQuery.parseJSON(data);
+
+                $(common.config.requests_element_empty).remove();
+                $(common.config.requests_element_image)
+                    .attr('src', common.config.requests_icon_new);
+                $(common.config.requests_element_ul).prepend('\
+                    <li class="unread">\
+                        <a href="' + common.config.request_detail_url + json['request_id'] + '">\
+                            <strong>'+json['sender']+'</strong>: "' + json['message'] + '"\
+                        </a>\
+                    </li>\
+                ');
+
+                /* Start the next long poll. */
+                common.listen_for_requests(username, last_modified, etag);
+            }
+        });
+    },
+
+
     start_listeners: function(username) {
         setTimeout(function() {
             common.listen_for_notifications(username, '', '');
             common.listen_for_messages(username, '', '');
+            common.listen_for_requests(username, '', '');
         }, 1000);
     },
 
@@ -176,6 +220,15 @@ var image_detail = {
                 emptyText: ''
             },
             url: ''
+        },
+
+        request_additional_information_action: {
+            dialog: {
+                title: '',
+                body: '',
+            },
+            element: 'a.request-additional-information',
+            url    : '/request/additional_information/'
         }
     },
 
@@ -429,6 +482,41 @@ var image_detail = {
         });
     },
 
+    setup_request_additional_information: function() {
+        var dlg = $(image_detail.config.request_additional_information_action.element).click(function() {
+            $('<div id="dialog-confirm" title="' +
+              image_detail.config.request_additional_information_action.dialog.title +
+              '"></div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-info"\
+                                  style="float:left; margin:0 7px 20px 0;">\
+                            </span>' + image_detail.config.request_additional_information_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog('close');
+                            $.ajax({
+                                url: image_detail.config.request_additional_information_action.url +
+                                     image_detail.globals.image_id + '/',
+                                success: function() {
+                                    dlg.dialog('close');
+                                }
+                            });
+ 
+                        },
+                        Cancel: function() {
+                            $(this).dialog('close');
+                        }
+                    }
+                });
+        });
+    },
+
+
     init: function(image_id, image_username, current_rating, config) {
         /* Init */
         image_detail.globals.image_id = image_id;
@@ -459,6 +547,9 @@ var image_detail = {
 
         /* Bring to a user's attention */
         image_detail.setup_bring_to_attention();
+
+        /* Requests */
+        image_detail.setup_request_additional_information();
     }
 };
 

@@ -36,7 +36,7 @@
                                         <span class="text"><a class="bring-to-attention" href="#">{% trans "Bring to a user's attention" %}</a></span>
                                     </li>
                                     <li class="bg-icon icon-info">
-                                        <span class="text"><a href="#">{% trans "Request additional information" %}</a></span>
+                                        <span class="text"><a class="request-additional-information" href="#">{% trans "Request additional information" %}</a></span>
                                     </li>
                                     <li class="last bg-icon icon-file">
                                         <span class="text"><a href="#">{% trans "Request TIFF/FITS" %}</a></span>
@@ -277,6 +277,15 @@
                         emptyText: '{% trans "User not found. Cannot notify them." %}'
                     },
                     url: '{% url views.bring_to_attention %}'
+                },
+                request_additional_information_action: {
+                    dialog: {
+                        title : '{% trans "Request additional information" %}',
+                        body  : '{% blocktrans %}\
+                                    You will notify the author of this image that you would like them to feed more \
+                                    information in the technical card for this photograph. Continue? \
+                                 {% endblocktrans %}',
+                    }
                 }
             });
 

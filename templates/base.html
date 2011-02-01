@@ -123,6 +123,14 @@
                                     {% message_list request %}
                                 </div>
                             </li>
+                            <li>
+                                <a class="icon" title="{% trans "Requests" %}" href="#">
+                                    <img id="requests" alt="{% trans "Requests" %}" src="{% requests_icon request %}"/></a>
+                                <div class="popup" id="requests-popup">
+                                    {% request_list request %}
+                                </div>
+                            </li>
+
                         {% else %}
                             <li id="{% current request "^/accounts/login/" %}">
                                 <a href="{% url auth_login %}">{% trans "Log in" %}</a>
