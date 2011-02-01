@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-    {% include 'image-edit-menu.html' %}   
+    {% include 'image/edit/menu.html' %}   
     <div class="sided-main-content">
     <h1>{% trans "Edit your image: basic information" %}</h1>
     <form action="/edit/save/basic/" method="post">{% csrf_token %}
