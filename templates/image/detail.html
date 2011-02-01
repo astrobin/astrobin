@@ -35,12 +35,14 @@
                                     <li class="bg-icon icon-quote">
                                         <span class="text"><a class="bring-to-attention" href="#">{% trans "Bring to a user's attention" %}</a></span>
                                     </li>
+                                {% if request.user != image.user %}
                                     <li class="bg-icon icon-info">
                                         <span class="text"><a class="request-additional-information" href="#">{% trans "Request additional information" %}</a></span>
                                     </li>
                                     <li class="last bg-icon icon-file">
                                         <span class="text"><a class="request-fits" href="#">{% trans "Request TIFF/FITS" %}</a></span>
                                     </li>
+                                {% endif %}
                                 </ul>
                             </div>
                         </li>
