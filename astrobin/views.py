@@ -148,7 +148,7 @@ def image_detail(request, id):
         request,
         queryset = Image.objects.all(),
         object_id = id,
-        template_name = 'image_detail.html',
+        template_name = 'image/detail.html',
         template_object_name = 'image',
         extra_context = {'s3_images_bucket': settings.S3_IMAGES_BUCKET,
                          's3_resized_images_bucket': settings.S3_RESIZED_IMAGES_BUCKET,
@@ -224,7 +224,7 @@ def image_upload_process(request):
         return_dict = {'success':'true', 'id':image.id}
         return ajax_response(return_dict)
     else:
-        return render_to_response("image_edit_basic.html",
+        return render_to_response("image/edit/basic.html",
             {"image":image,
              "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
              "s3_url":settings.S3_URL,
@@ -244,7 +244,7 @@ def image_edit_basic(request, id):
     form = ImageEditBasicForm({'title': image.title,
                                'description': image.description})
 
-    return render_to_response('image_edit_basic.html',
+    return render_to_response('image/edit/basic.html',
         {'image':image,
          's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
          's3_url':settings.S3_URL,
@@ -289,7 +289,7 @@ def image_edit_gear(request, id):
     response_dict['image'] = image
     response_dict['prefill_dict'] = prefill_dict
 
-    return render_to_response("image_edit_gear.html",
+    return render_to_response("image/edit/gear.html",
                               response_dict,
                               context_instance=RequestContext(request))
 
@@ -323,7 +323,7 @@ def image_edit_acquisition(request, id):
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
     }
-    return render_to_response('image_edit_acquisition.html',
+    return render_to_response('image/edit/acquisition.html',
                               response_dict,
                               context_instance=RequestContext(request))
 
@@ -345,7 +345,7 @@ def image_edit_save_basic(request):
     prefill_dict = {}
 
     if not form.is_valid():
-        return render_to_response("image_edit_basic.html",
+        return render_to_response("image/edit/basic.html",
             response_dict,
             context_instance=RequestContext(request))
 
@@ -372,7 +372,7 @@ def image_edit_save_basic(request):
 
     response_dict['prefill_dict'] = prefill_dict
 
-    return render_to_response("image_edit_basic.html",
+    return render_to_response("image/edit/basic.html",
                               response_dict,
                               context_instance=RequestContext(request))
 
@@ -431,7 +431,7 @@ def image_edit_save_gear(request):
     response_dict['image'] = image
     response_dict['prefill_dict'] = prefill_dict
 
-    return render_to_response("image_edit_gear.html",
+    return render_to_response("image/edit/gear.html",
         response_dict,
         context_instance=RequestContext(request))
 
@@ -508,7 +508,7 @@ def image_edit_save_acquisition(request):
         's3_url':settings.S3_URL,
     }
 
-    return render_to_response('image_edit_acquisition.html',
+    return render_to_response('image/edit/acquisition.html',
                               response_dict,
                               context_instance=RequestContext(request))
 
@@ -521,7 +521,7 @@ def image_delete(request, id):
         return HttpResponseForbidden();
 
     image.delete()
-    return render_to_response("user_page.html",
+    return render_to_response("user/profile.html",
         {'user': request.user},
         context_instance=RequestContext(request))
 
@@ -546,7 +546,7 @@ def user_page(request, username):
     return object_list(
         request, 
         queryset=Image.objects.filter(user=user)[:8],
-        template_name='user_page.html',
+        template_name='user/profile.html',
         template_object_name='image',
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                          's3_thumbnails_bucket':settings.S3_THUMBNAILS_BUCKET,
@@ -566,7 +566,7 @@ def user_profile_edit_basic(request):
         'form': form,
         'prefill_dict': {'locations': jsonDump(profile.locations.all())}
     }
-    return render_to_response("user_profile_edit_basic.html",
+    return render_to_response("user/profile/edit/basic.html",
         response_dict,
         context_instance=RequestContext(request))
 
@@ -599,7 +599,7 @@ def user_profile_save_basic(request):
         profile.save()
 
     response_dict['prefill_dict'] = {'locations': jsonDump(profile.locations.all()) }
-    return render_to_response("user_profile_edit_basic.html",
+    return render_to_response("user/profile/edit/basic.html",
         response_dict,
         context_instance=RequestContext(request))
  
@@ -619,7 +619,7 @@ def user_profile_edit_gear(request):
         prefill_dict[attr] = jsonDump(allGear)
 
     response_dict['prefill_dict'] = prefill_dict
-    return render_to_response("user_profile_edit_gear.html",
+    return render_to_response("user/profile/edit/gear.html",
                               response_dict,
                               context_instance=RequestContext(request))
 
@@ -666,7 +666,7 @@ def user_profile_save_gear(request):
     profile.save()
 
     response_dict['prefill_dict'] = prefill_dict
-    return render_to_response("user_profile_edit_gear.html",
+    return render_to_response("user/profile/edit/gear.html",
         response_dict,
         context_instance=RequestContext(request))
 
@@ -699,7 +699,7 @@ def user_profile_flickr_import(request):
         # to reauthenticate.
         link = flickr.web_login_url(perms='read')
         response_dict['flickr_link'] = link;
-        return render_to_response("user_profile_flickr_import.html",
+        return render_to_response("user/profile/flickr_import.html",
             response_dict,
             context_instance=RequestContext(request))
 
@@ -766,7 +766,7 @@ def user_profile_flickr_import(request):
 
         return ajax_response(response_dict)
 
-    return render_to_response("user_profile_flickr_import.html",
+    return render_to_response("user/profile/flickr_import.html",
                               response_dict,
                               context_instance=RequestContext(request))
 
