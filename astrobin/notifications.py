@@ -28,7 +28,12 @@ def push_message(recipient, data):
 
 
 def push_request(recipient, request):
-    encoded_data = simplejson.dumps({'image_id':request.image.id})
+    data = {
+        'from_user':request.from_user.username,
+        'image_id' :request.image.id,
+        'message'  :request.message,
+    }
+    encoded_data = simplejson.dumps(data)
     url = 'http://127.0.0.1/publish?id=request_' + recipient.username
     try:
         urllib2.urlopen(url, encoded_data);

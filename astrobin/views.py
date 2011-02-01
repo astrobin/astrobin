@@ -953,12 +953,13 @@ def request_additional_information(request, image_id):
     except:
         return ajax_fail()
 
+    message = _('<strong>%s</strong> has requested additional information about your image.') % request.user
     r = Request(
         from_user=request.user,
         to_user=image.user,
         image=image,
         fulfilled=False,
-        message='', # not implemented yet
+        message=message, # not implemented yet
         type='INFO')
     r.save()
     push_request(image.user, r);
@@ -975,12 +976,14 @@ def request_fits(request, image_id):
     except:
         return ajax_fail()
 
+    # message not implemented yet, let's hard code it for the notification
+    message = _('<strong>%s</strong> has requested to see the TIFF or FITS of your image.') % request.user
     r = Request(
         from_user=request.user,
         to_user=image.user,
         image=image,
         fulfilled=False,
-        message='', # not implemented yet
+        message=message, # not implemented yet
         type='FITS')
     r.save()
     push_request(image.user, r);
