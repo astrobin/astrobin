@@ -105,6 +105,31 @@ class Image(models.Model):
     def get_absolute_url(self):
         return '/%i' % self.id
 
+
+class ImageRevision(models.Model):
+    image = models.ForeignKey(Image)
+    filename = models.CharField(max_length=64, editable=False)
+    original_ext = models.CharField(max_length=6, editable=False)
+    uploaded = models.DateTimeField(editable=False)
+
+    class Meta:
+        ordering = ('uploaded', '-id')
+        
+    def __unicode__(self):
+        return 'Revision for %s' % self.image.title
+
+    def save(self, *args, **kwargs):
+        self.uploaded = datetime.now()
+        super(ImageRevision, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        delete_image_from_s3(self.filename, self.original_ext) 
+        super(ImageRevision, self).delete(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return '/%i?r=%i' % (self.image.id, self.id)
+ 
+
 class Acquisition(models.Model):
     date = models.DateField(null=True, blank=True)
     image = models.ForeignKey(Image)

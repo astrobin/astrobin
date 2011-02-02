@@ -144,8 +144,9 @@
   content: " ";
 }
 .icon-edit { background: url('/static/icons/iconic/black/edit.png') no-repeat left center; }
-.icon-edit-alt { background: url('/static/icons/iconic/black/edit-alt.png') no-repeat left center; }
-.icon-edit-alt2 { background: url('/static/icons/iconic/black/edit-alt2.png') no-repeat left center; }
+.icon-edit-gear { background: url('/static/icons/iconic/black/edit-gear.png') no-repeat left center; }
+.icon-edit-acquisition { background: url('/static/icons/iconic/black/edit-acquisition.png') no-repeat left center; }
+.icon-upload { background: url('/static/icons/iconic/black/upload.png') no-repeat left center; }
 .icon-delete { background: url('/static/icons/iconic/black/delete.png') no-repeat left center; }
 .icon-quote { background: url('/static/icons/iconic/black/quote.png') no-repeat left center; }
 .icon-info { background: url('/static/icons/iconic/black/info.png') no-repeat left center; }
@@ -1366,6 +1367,7 @@ x:default { border: none; }
   border: 1px solid #2a2a2a;
 }
 #image-detail p#description { margin: 0; }
+#image-detail #revisions .image-strip { width: 696px; }
 .sub {
   color: #333333;
   visibility: hidden;
@@ -1524,10 +1526,7 @@ span.copy-box {
   border-right: 1px solid #5b5b5b;
   margin-right: 20px;
 }
-#technical-card .acquisition {
-  margin-top: -27px;
-  padding-left: 5px;
-}
+#technical-card .acquisition { padding-left: 5px; }
 #technical-card .acquisition img { border: 1px solid #333333; }
 #technical-card p {
   margin: 2px 0;
@@ -1713,6 +1712,14 @@ table.messages td a {
   display: block;
 }
 table.messages td a:hover { background-color: #3f3f3f; }
+table.requests { width: 100%; }
+table.requests td.when { padding: 4px 12px; }
+table.requests td { padding: 0; }
+table.requests td a {
+  padding: 4px 12px;
+  display: block;
+}
+table.requests td a:hover { background-color: #3f3f3f; }
 th {
   color: #fcfcfc;
   font-weight: bold;

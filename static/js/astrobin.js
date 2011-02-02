@@ -161,6 +161,16 @@ var image_detail = {
             read_only     : true
         },
 
+        upload_revision_action: {
+            dialog: {
+                title: '',
+                body : ''
+            },
+            element  : 'a.upload-revision',
+            form_html: '',
+            url       : '/upload/revision/process/'
+        },
+
         delete_action: {
             dialog: {
                 title : '',
@@ -309,6 +319,39 @@ var image_detail = {
             }
         });
     },
+
+    setup_upload_revision: function() {
+        $(image_detail.config.upload_revision_action.element).click(function() {
+            var dlg = $('\
+                <div id="dialog-attention" title="' + image_detail.config.upload_revision_action.dialog.title + '"></div>')
+                .html('\
+                    <div class="sided-main-content-popup">\
+                    <p>\
+                        ' + image_detail.config.upload_revision_action.dialog.body + '\
+                    </p>\
+                    <form id="upload-revision" action="' + image_detail.config.upload_revision_action.url + '" method="post" enctype="multipart/form-data">\
+                        ' + image_detail.config.upload_revision_action.form_html + '\
+                        <input type="hidden" name="image_id" value="' + image_detail.globals.image_id  + '"/>\
+                    </form>\
+                    </div>\
+                ')
+                .dialog({
+                    resizable: false,
+                    modal: true});
+
+            $('input:file').uniform();
+            $('form#upload-revision input').live('change', function() {
+                $('form#upload-revision').append('\
+                    <p style="text-align:center">\
+                        <img style="margin: 10px" alt="{% trans "Uploading..." %}" src="/static/images/ajax-loader.gif"/>\
+                    </p>');
+
+                $('form#upload-revision').submit();
+            });
+
+        });
+    },
+
 
     setup_delete: function() {
         $(image_detail.config.delete_action.element).click(function() {
@@ -574,6 +617,9 @@ var image_detail = {
 
         /* Rating */
         image_detail.setup_raty();
+
+        /* Revisions */
+        image_detail.setup_upload_revision();
 
         /* Delete */
         image_detail.setup_delete();

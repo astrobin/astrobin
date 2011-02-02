@@ -215,10 +215,12 @@
 
 .icon-edit {
     background: url('/static/icons/iconic/black/edit.png') no-repeat left center;}
-.icon-edit-alt {
-    background: url('/static/icons/iconic/black/edit-alt.png') no-repeat left center;}
-.icon-edit-alt2 {
-    background: url('/static/icons/iconic/black/edit-alt2.png') no-repeat left center;}
+.icon-edit-gear {
+    background: url('/static/icons/iconic/black/edit-gear.png') no-repeat left center;}
+.icon-edit-acquisition {
+    background: url('/static/icons/iconic/black/edit-acquisition.png') no-repeat left center;}
+.icon-upload {
+    background: url('/static/icons/iconic/black/upload.png') no-repeat left center;}
 .icon-delete {
     background: url('/static/icons/iconic/black/delete.png') no-repeat left center;}
 .icon-quote {
@@ -1486,7 +1488,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
             cursor: -moz-zoom-in;
             border: 1px solid @dark-panel-color;}}
     p#description {
-        margin: 0;}}
+        margin: 0;}
+    #revisions .image-strip {
+        width: 696px;}}
 
 .popup-mixin() {
     color: @background-color;
@@ -1608,7 +1612,6 @@ span.copy-box {
         border-right: 1px solid (@light-panel-color * @hilight-factor);
         margin-right: 20px;}
     .acquisition {
-        margin-top: -27px;
         padding-left: 5px;
         img {
             border: 1px solid @background-color;}}

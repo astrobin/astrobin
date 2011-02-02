@@ -53,3 +53,7 @@ class PrivateMessageForm(forms.Form):
 class BringToAttentionForm(forms.Form):
     user = forms.CharField(max_length=64, required=False)
 
+
+class ImageRevisionUploadForm(forms.Form):
+    file = forms.ImageField()
+
