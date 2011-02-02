@@ -120,6 +120,7 @@ INSTALLED_APPS = (
     'notification',
     'debug_toolbar',
     'persistent_messages',
+    'djcelery',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -148,3 +149,15 @@ INTERNAL_IPS = ('',) # for django-debug-toolbar: add own local IP to enable
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 
+import djcelery
+djcelery.setup_loader()
+
+BROKER_HOST = 'localhost'
+BROKER_PORT = 5672
+BROKER_USER = 'astrobin'
+BROKER_PASSWORD = '***REMOVED***'
+BROKER_VHOST = 'astrobin'
+
+CELERY_RESULT_BACKEND = 'amqp'
+
+CELERY_IMPORTS = ('tasks', )
