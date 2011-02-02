@@ -144,6 +144,16 @@ def image_detail(request, id):
     if UserProfile.objects.get(user=image.user) in UserProfile.objects.get(user=request.user).follows.all():
         follows = True
 
+    is_revision = False
+    revision_id = 0
+    revision_image = None
+    revisions = ImageRevision.objects.filter(image=image)
+    if 'r' in request.GET:
+        is_revision = True
+        revision_id = int(request.GET['r'])
+        revision_image = ImageRevision.objects.get(id=revision_id)
+        revisions = revisions.exclude(id=revision_id)
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -168,7 +178,12 @@ def image_detail(request, id):
                          'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
                          'follows': follows,
                          'private_message_form': PrivateMessageForm(),
-                         'bring_to_attention_form': BringToAttentionForm()})
+                         'bring_to_attention_form': BringToAttentionForm(),
+                         'upload_revision_form': ImageRevisionUploadForm(),
+                         'revisions': revisions,
+                         'is_revision': is_revision,
+                         'revision_image': revision_image,
+                        })
 
 
 @require_GET
@@ -990,3 +1005,33 @@ def request_fits(request, image_id):
 
     return ajax_success()
 
+
+@login_required
+@require_POST
+def image_revision_upload_process(request):
+    file = None
+    image_id = request.POST['image_id']
+    image = Image.objects.get(id=image_id)
+
+    if 'qqfile' in request.GET:
+        from django.core.files.uploadedfile import SimpleUploadedFile
+        file = SimpleUploadedFile(request.GET['qqfile'], request.raw_post_data)
+    else:
+        form = ImageRevisionUploadForm(request.POST, request.FILES)
+        if not form.is_valid():
+            return HttpResponseRedirect(image.get_absolute_url())
+        file = request.FILES["file"]
+
+    s3_filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
+    store_image_in_s3(file, s3_filename, original_ext)
+
+    image_revision = ImageRevision(image=image, filename=s3_filename, original_ext=original_ext)
+    image_revision.save()
+
+    followers = [x.from_userprofile.user
+                 for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
+    push_notification(followers, 'new_image_revision',
+                      {'originator':request.user,
+                       'object_url':image.get_absolute_url()})
+
+    return HttpResponseRedirect(image.get_absolute_url())

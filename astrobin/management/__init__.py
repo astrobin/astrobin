@@ -29,6 +29,11 @@ def create_notice_types(app, created_models, verbosity, **kwargs):
         _('Attention request'),
         _('A user wants to bring an image to your attention'))
 
+    notification.create_notice_type(
+        'new_image_revision',
+        _('New image revision'),
+        _('A user you follow has uploaded a new image revision'))
+
 
 signals.post_syncdb.connect(create_notice_types, sender=notification)
 

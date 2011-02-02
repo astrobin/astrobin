@@ -21,14 +21,17 @@
                                     <li class="first bg-icon icon-edit">
                                         <span class="text"><a href="/edit/basic/{{image.id}}">{% trans "Edit basic information" %}</a></span>
                                     </li>
-                                    <li class="bg-icon icon-edit-alt">
+                                    <li class="bg-icon icon-edit-gear">
                                         <span class="text"><a href="/edit/gear/{{image.id}}">{% trans "Edit gear used" %}</a></span>
                                     </li>
-                                    <li class="bg-icon icon-edit-alt2">
+                                    <li class="bg-icon icon-edit-acquisition">
                                         <span class="text"><a href="/edit/acquisition/{{image.id}}">{% trans "Edit acquisition details" %}</a></span>
                                     </li>
+                                    <li class="bg-icon icon-upload">
+                                        <span class="text"><a class="upload-revision" href="#">{% trans "Upload new revision" %}</a></span>
+                                    </li>
                                     <li class="bg-icon icon-delete">
-                                        <span class="text"><a class="delete" class="danger" href="#">{% trans "Delete" %}</a></span>
+                                        <span class="text"><a class="delete danger" href="#">{% trans "Delete" %}</a></span>
                                     </li>
                                     <li class="separator"></li>
                                 {% endif %}
@@ -114,14 +117,28 @@
                 <li class="rating"><div id="rating"></div></li>
             </ul>
             <div id="main-image">
-            {% if inverted %}
-            <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
-            </a>
+            {% if is_revision %}
+                {% with revision_image as image %}
+                    {% if inverted %}
+                    <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                        <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                    </a>
+                    {% else %}
+                    <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                        <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                    </a>
+                    {% endif %}
+                {% endwith %}
             {% else %}
-            <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
-            </a>
+                {% if inverted %}
+                <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                    <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                </a>
+                {% else %}
+                <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                    <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                </a>
+                {% endif %}
             {% endif %}
             </div>
             <div class="main-image-data">
@@ -139,8 +156,35 @@
                     {% endif %}
                 </ul>
             </div>
+            {% if revisions %}
+            <div id="revisions">
+                <h3>
+                    {% if is_revision %}
+                        {% trans "This image is a revision. Here are its older versions" %}:
+                    {% else %}
+                        {% trans "This image has some later revisions" %}:
+                    {% endif %}
+                </h3>
+                <div class="image-strip clear">
+                    {% if is_revision %}
+                    <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
+                        <a href="{{image.get_absolute_url}}">
+                            <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% for i in revisions %}
+                    <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
+                        <a href="{{i.get_absolute_url}}">
+                            <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.filename}}{{i.original_ext}}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <h3>{% trans "Technical card" %}</h3>
             <div id="technical-card">
-                <h3>{% trans "Technical card" %}</h3>
                 <div class="gear">
                     {% for i in gear_list %}
                         <p>
@@ -219,6 +263,15 @@
                         '{% trans "Good" %}',
                         '{% trans "Gorgeous" %}'],
                     read_only: {% if user.is_authenticated %} false {% else %} true {% endif %}
+                },
+                upload_revision_action: {
+                    dialog: {
+                        title: '{% trans "Upload new revision" %}',
+                        body : '{% blocktrans %}\
+                                    Did you improve the post-processing of your image? Upload the new revision!\
+                                {% endblocktrans %}'
+                    },
+                    form_html: '{% autoescape off %}{{upload_revision_form.as_p|append_slash}}{% endautoescape %}'
                 },
                 delete_action: {
                     dialog: {
