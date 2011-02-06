@@ -6,6 +6,9 @@ from boto.s3.bucket import Bucket
 from boto.exception import S3CreateError
 
 import mimetypes
+import email
+import time
+import datetime
 
 from PIL import Image as PILImage
 from PIL import ImageOps
@@ -20,7 +23,16 @@ def save_to_bucket(data, content_type, bucket, uid, ext):
     k = Key(b)
     k.key = uid + ext
     k.set_metadata("Content-Type", content_type)
-    k.set_contents_from_string(data)
+
+    headers = {}
+    # HTTP/1.0
+    headers['Expires'] = '%s GMT' % (email.Utils.formatdate(
+        time.mktime((datetime.datetime.now() +
+        datetime.timedelta(days=365*2)).timetuple())))
+    # HTTP/1.1
+    headers['Cache-Control'] = 'max-age %d' % (3600 * 24 * 365 * 2)
+
+    k.set_contents_from_string(data, headers)
     k.set_acl("public-read");
 
 
