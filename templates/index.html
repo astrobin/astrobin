@@ -1,12 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block extra_head %}
-<script type="text/javascript" src="/static/js/jquery.capSlide.js"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="/static/css/capSlide.css" />
-{% endblock %}
-
-
 {% block abpod %}
 	{% if abpod %}
 	<!-- abpod -->		
@@ -40,7 +34,12 @@
         <div class="single-form">
             <form id="upload" action="/upload/process" method="post" enctype="multipart/form-data">
                 <p><input type="file" name="file" id="id_file"/></p>
-                <p>{% trans "Choose an image to upload it. Alternatively, you can <a href=\"/profile/edit/flickr/\">import from Flickr</a>." %}</p>
+                <p>
+                    {% blocktrans %}
+                    Choose an image to upload it,<br/>
+                    or <a href="/profile/edit/flickr/">import from Flickr</a>.
+                    {% endblocktrans %}
+                </p>
             </form>
         </div>
     </div>
@@ -49,15 +48,5 @@
         <h2>{% trans "These images have been uploaded recently" %}</h2>
         {% include 'inclusion_tags/image_list.html' %}
     </div>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('form#upload input').change(function() {
-                $('form#upload').append('\
-                    <p>\
-                        <img style="margin: 10px" alt="{% trans "Uploading..." %}" src="/static/images/ajax-loader.gif"/>\
-                    </p>');
-                $('form#upload').submit();
-            });
-        });
-    </script>
 {% endblock %}
+

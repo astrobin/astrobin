@@ -20,30 +20,20 @@
         <meta name="robots" content="index, follow, noarchive" />
         <meta name="googlebot" content="noarchive" />
 
-        <!-- 3rd party css -->
-        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-        <link href="/static/css/ui-lightness/jquery-ui-1.8.7.custom.css" rel="stylesheet" type="text/css"/>
-
-        <!-- site's css -->
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css" />
         {% compress css %}
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css" />
+        <!-- 3rd party css -->
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/ui-lightness/jquery-ui-1.8.7.custom.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/capSlide.css" />
+        <!-- site's css -->
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css"/>
+        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/static/css/ie6.css"/><![endif]-->
+
+        {% block extra_css %}{% endblock %}
         {% endcompress %}
-        <!--[if IE 6]><link rel="stylesheet" type="text/css" href="/static/css/ie6.css" media="screen" /><![endif]-->
 
-        <!-- javascript -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-        <script src="/static/js/jquery-ui-1.8.7.custom.min.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
-
-        <script type="text/javascript" src="/static/js/astrobin.js"></script>
-
-        <!-- fonts -->
-        <script type="text/javascript" src="/static/fonts/Museo-500/MyFonts Webfonts Order M2677657.js"></script>
-
-        {% block extra_head %}
-        {% endblock %}
+        {% block extra_head %}{% endblock %}
     </head>
 
     <body{% if user.is_authenticated %} onload="common.start_listeners('{{request.user.username}}');"{%endif %}>
@@ -209,8 +199,26 @@
         <!-- wrap -->
         </div>
 
+        <script type="text/javascript" src="/static/fonts/Museo-500/MyFonts Webfonts Order M2677657.js"></script>
+        {% compress js %}
+        <!-- javascript -->
+        <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
+        <script type="text/javascript" src="/static/js/astrobin.js"></script>
+        <script type="text/javascript" src="/static/js/jquery-ui-1.8.7.custom.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.capSlide.js"></script>
+        <script type="text/javascript" src="/static/js/own/capslide.js"></script>
+
         <script type="text/javascript">
             $(document).ready(function() {
+                $('form#upload input').change(function() {
+                    $('form#upload').append('\
+                        <p>\
+                            <img style="margin: 10px" alt="{% trans "Uploading..." %}" src="/static/images/ajax-loader.gif"/>\
+                        </p>');
+                    $('form#upload').submit();
+                });
+
                 // popup menus
                 $('select, input:checkbox, input:radio, input:file').uniform();
 
@@ -283,5 +291,15 @@
                 });
             });
         </script>
+        {% block extra_js %}{% endblock %}
+        {% endcompress %}
+
+        {% comment %}
+        UnicodeDecodeError: 'utf8' codec can't decode byte 0x9a in position 503: unexpected code byte
+        {% endcomment %}
+        <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
+
+
     </body>
 </html>
+

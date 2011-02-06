@@ -133,7 +133,7 @@ AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 FLICKR_API_KEY = '1f4***REMOVED***'
 FLICKR_SECRET  = 'd5fd***REMOVED***'
 
-COMPRESS = False
+COMPRESS = True 
 COMPRESS_URL = '/static/'
 COMPILER_FORMATS = {
     '.less': {

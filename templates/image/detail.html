@@ -2,10 +2,6 @@
 {% load i18n %}
 {% load tags %}
 
-{% block extra_head %}
-<script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
-{% endblock %}
-
 {% block content %}
     <div id="image-detail">
         <div id="main-content">
@@ -264,113 +260,118 @@
             {% endif %}
         </div>
     </div>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        image_detail.init(
-            {{image.id}},
-            '{{image.user.username}}',
-            {{current_rating}},
-            {
-                rating: {
-                    hint_list: [
-                        '{% trans "Bad" %}',
-                        '{% trans "Poor" %}',
-                        '{% trans "Regular" %}',
-                        '{% trans "Good" %}',
-                        '{% trans "Gorgeous" %}'],
-                    read_only: {% if user.is_authenticated %} false {% else %} true {% endif %}
-                },
-                upload_revision_action: {
-                    dialog: {
-                        title: '{% trans "Upload new revision" %}',
-                        body : '{% blocktrans %}\
-                                    Did you improve the post-processing of your image? Upload the new revision!\
-                                {% endblocktrans %}'
-                    },
-                    form_html: '{% autoescape off %}{{upload_revision_form.as_p|append_slash}}{% endautoescape %}'
-                },
-                delete_action: {
-                    dialog: {
-                        title : '{% trans "Delete image?" %}',
-                        body  : '{% trans "The image will be permanently deleted and cannot be recovered. Are you sure?"%}',
-                        button: '{% trans "Yes, delete image" %}'
-                    }
-                },
-                follow_action: {
-                    dialog: {
-                        title : '{% blocktrans with image.user.username as username %}\
-                                     Follow {{username}}?\
-                                 {% endblocktrans %}',
-                        body  : '{% blocktrans with image.user.username as username %}\
-                                     You will receive a notification every time {{username}} posts a new image. \
-                                     Continue?\
-                                 {% endblocktrans %}',
-                        button: '{% trans "Yes, follow!" %}'
-                    },
-                    stop_following: '{% trans "Stop following" %}'
-                },
-                unfollow_action: {
-                    dialog: {
-                        title : '{% blocktrans with image.user.username as username %}\
-                                     Stop following {{username}}?\
-                                 {% endblocktrans %}',
-                        body  : '{% blocktrans with image.user.username as username %}\
-                                     You will stop receiving notifications when {{username}} posts a new image. \
-                                     Continue?\
-                                 {% endblocktrans %}',
-                        button: '{% trans "Yes, stop following!" %}'
-                    },
-                    follow: '{% trans "Follow" %}'
-                },
-                message_action: {
-                    dialog: {
-                        title : '{% blocktrans with image.user.username as username %}\
-                                    Send {{username}} a message\
-                                 {% endblocktrans %}',
-                        body  : '',
-                        button: '{% trans "Send" %} &rarr;'
-                    },
-                    form_html: '{% autoescape off %}{{private_message_form.as_p|append_slash}}{% endautoescape %}',
-                    url      : '{% url views.send_private_message %}'
-                },
-                bring_to_attention_action: {
-                    dialog: {
-                        title : '{% trans "Bring image to attention" %}',
-                        body  : '{% blocktrans %}\
-                                    By choosing some users and clicking the button below, you will send them \
-                                    a notification prompting them to checkout this image.\
-                                 {% endblocktrans %}',
-                        button: '{% trans "Continue" %} &rarr;'
-                    },
-                    form_html: '{% autoescape off %}{{bring_to_attention_form.as_p|append_slash}}{% endautoescape %}',
-                    autocomplete: {
-                        startText: '{% trans "Enter partial name" %}',
-                        emptyText: '{% trans "User not found. Cannot notify them." %}'
-                    },
-                    url: '{% url views.bring_to_attention %}'
-                },
-                request_additional_information_action: {
-                    dialog: {
-                        title : '{% trans "Request additional information" %}',
-                        body  : '{% blocktrans with image.user.username as username %}\
-                                    You will notify {{username}} that you would like them to feed more \
-                                    information in the technical card for this photograph. Continue? \
-                                 {% endblocktrans %}',
-                    }
-                },
-                request_fits_action: {
-                    dialog: {
-                        title : '{% trans "Request TIFF/FITS" %}',
-                        body  : '{% blocktrans with image.user.username as username %}\
-                                    You will notify {{username}} that you would like see the TIFF or FITS \
-                                    file. AstroBin doesn\'t currently offer to host such large files, so \
-                                    hopefully {{username}} will contact you about how to handle the transaction. \
-                                    Continue? \
-                                 {% endblocktrans %}',
-                    }
-                }
-            });
-
-        });
-    </script>
 {% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    image_detail.init(
+        {{image.id}},
+        '{{image.user.username}}',
+        {{current_rating}},
+        {
+            rating: {
+                hint_list: [
+                    '{% trans "Bad" %}',
+                    '{% trans "Poor" %}',
+                    '{% trans "Regular" %}',
+                    '{% trans "Good" %}',
+                    '{% trans "Gorgeous" %}'],
+                read_only: {% if user.is_authenticated %} false {% else %} true {% endif %}
+            },
+            upload_revision_action: {
+                dialog: {
+                    title: '{% trans "Upload new revision" %}',
+                    body : '{% blocktrans %}\
+                                Did you improve the post-processing of your image? Upload the new revision!\
+                            {% endblocktrans %}'
+                },
+                form_html: '{% autoescape off %}{{upload_revision_form.as_p|append_slash}}{% endautoescape %}'
+            },
+            delete_action: {
+                dialog: {
+                    title : '{% trans "Delete image?" %}',
+                    body  : '{% trans "The image will be permanently deleted and cannot be recovered. Are you sure?"%}',
+                    button: '{% trans "Yes, delete image" %}'
+                }
+            },
+            follow_action: {
+                dialog: {
+                    title : '{% blocktrans with image.user.username as username %}\
+                                 Follow {{username}}?\
+                             {% endblocktrans %}',
+                    body  : '{% blocktrans with image.user.username as username %}\
+                                 You will receive a notification every time {{username}} posts a new image. \
+                                 Continue?\
+                             {% endblocktrans %}',
+                    button: '{% trans "Yes, follow!" %}'
+                },
+                stop_following: '{% trans "Stop following" %}'
+            },
+            unfollow_action: {
+                dialog: {
+                    title : '{% blocktrans with image.user.username as username %}\
+                                 Stop following {{username}}?\
+                             {% endblocktrans %}',
+                    body  : '{% blocktrans with image.user.username as username %}\
+                                 You will stop receiving notifications when {{username}} posts a new image. \
+                                 Continue?\
+                             {% endblocktrans %}',
+                    button: '{% trans "Yes, stop following!" %}'
+                },
+                follow: '{% trans "Follow" %}'
+            },
+            message_action: {
+                dialog: {
+                    title : '{% blocktrans with image.user.username as username %}\
+                                Send {{username}} a message\
+                             {% endblocktrans %}',
+                    body  : '',
+                    button: '{% trans "Send" %} &rarr;'
+                },
+                form_html: '{% autoescape off %}{{private_message_form.as_p|append_slash}}{% endautoescape %}',
+                url      : '{% url views.send_private_message %}'
+            },
+            bring_to_attention_action: {
+                dialog: {
+                    title : '{% trans "Bring image to attention" %}',
+                    body  : '{% blocktrans %}\
+                                By choosing some users and clicking the button below, you will send them \
+                                a notification prompting them to checkout this image.\
+                             {% endblocktrans %}',
+                    button: '{% trans "Continue" %} &rarr;'
+                },
+                form_html: '{% autoescape off %}{{bring_to_attention_form.as_p|append_slash}}{% endautoescape %}',
+                autocomplete: {
+                    startText: '{% trans "Enter partial name" %}',
+                    emptyText: '{% trans "User not found. Cannot notify them." %}'
+                },
+                url: '{% url views.bring_to_attention %}'
+            },
+            request_additional_information_action: {
+                dialog: {
+                    title : '{% trans "Request additional information" %}',
+                    body  : '{% blocktrans with image.user.username as username %}\
+                                You will notify {{username}} that you would like them to feed more \
+                                information in the technical card for this photograph. Continue? \
+                             {% endblocktrans %}',
+                }
+            },
+            request_fits_action: {
+                dialog: {
+                    title : '{% trans "Request TIFF/FITS" %}',
+                    body  : '{% blocktrans with image.user.username as username %}\
+                                You will notify {{username}} that you would like see the TIFF or FITS \
+                                file. AstroBin doesn\'t currently offer to host such large files, so \
+                                hopefully {{username}} will contact you about how to handle the transaction. \
+                                Continue? \
+                             {% endblocktrans %}',
+                }
+            }
+        });
+
+    });
+</script>
+{% endblock %}
+
