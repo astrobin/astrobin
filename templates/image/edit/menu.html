@@ -4,10 +4,12 @@
         <ul>
             <li class="{% current request '^/edit(/save)?/basic/' %}"><a href="/edit/basic/{{image.id}}">{% trans "Basic Information" %}</a></li>
             <li class="{% current request '^/edit(/save)?/gear/' %}"><a href="/edit/gear/{{image.id}}">{% trans "Gear used" %}</a></li>
-            <li class="{% current request '^/edit(/save)?/acquisition/' %}"><a href="/edit/acquisition/{{image.id}}">{% trans "Acquisition details" %}</a></li>
+            <li class="{% current request '^/edit(/save)?/acquisition/' %}{% if not is_ready %} last {% endif %}"><a href="/edit/acquisition/{{image.id}}">{% trans "Acquisition details" %}</a></li>
+            {% if is_ready %}
             <li class="last" style="margin: 8px 0;">
                 <a href="{{image.get_absolute_url}}/"><img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}"/></a>
             </li>
+            {% endif %}
         </ul>
     </div>
 

@@ -11,7 +11,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 SERVER_EMAIL = 'astrobin@astrobin.com'
-DEFAULT_FROM_EMAIL = 'AstroBin <astrobin@astribin.com>'
+DEFAULT_FROM_EMAIL = 'AstroBin <astrobin@astrobin.com>'
 
 DATABASE_ENGINE = 'sqlite3'    # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = 'astrobin.db'  # Or path to database file if using sqlite3.
@@ -22,6 +22,8 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 
 ASTROBIN_BASE_URL = 'http://astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
+
+UPLOADS_DIRECTORY = '/var/www/astrobin_env/www/astrobin/uploads/'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -67,6 +69,7 @@ S3_RESIZED_INVERTED_BUCKET = 'astrobin_resized_inverted'
 S3_ABPOD_BUCKET = 'astrobin_abpod'
 S3_AVATARS_BUCKET = 'astrobin_avatars'
 S3_HISTOGRAMS_BUCKET = 'astrobin_histograms'
+S3_SOLVED_BUCKET = 'astrobin_solved'
 S3_URL = 's3.amazonaws.com'
 
 RESIZED_IMAGE_SIZE = 720
@@ -158,6 +161,5 @@ BROKER_USER = 'astrobin'
 BROKER_PASSWORD = 'Sheckjov'
 BROKER_VHOST = 'astrobin'
 
-CELERY_RESULT_BACKEND = 'amqp'
-
-CELERY_IMPORTS = ('tasks', )
+CELERY_RESULT_BACKEND = 'database'
+CELERY_IMPORTS = ('astrobin.tasks', )

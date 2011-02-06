@@ -1742,3 +1742,12 @@ td {
   background-color: #3f3f3f;
 }
 #message-reply { margin: 10px 20px; }
+p.info {
+  text-align: left;
+  color: #333333;
+  margin: 0;
+  padding: 30px 10px;
+  border: 1px solid #222222;
+  border-bottom: 1px solid #666666;
+  background-color: #ffffd0;
+}

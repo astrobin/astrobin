@@ -24,12 +24,13 @@ import simplejson
 import csv
 import flickrapi
 import urllib2
+from celery.result import AsyncResult
 
 from models import *
 from forms import *
-from file_utils import *
 from notifications import *
 from shortcuts import *
+from tasks import *
 
 def jsonDump(all):
     if len(all) > 0:
@@ -50,7 +51,7 @@ def index(request):
 
     return object_list(
         request, 
-        queryset=Image.objects.all()[:10],
+        queryset=Image.objects.all(),
         template_name='index.html',
         template_object_name='image',
         extra_context = {"thumbnail_size":settings.THUMBNAIL_SIZE,
@@ -67,6 +68,7 @@ def no_javascript(request):
         context_instance=RequestContext(request))
 
 
+@require_GET
 def image_detail(request, id):
     """ Show details of an image"""
     image = get_object_or_404(Image, pk=id)
@@ -167,6 +169,7 @@ def image_detail(request, id):
                          's3_inverted_bucket': settings.S3_INVERTED_BUCKET,
                          's3_resized_inverted_bucket': settings.S3_RESIZED_INVERTED_BUCKET,
                          's3_histograms_bucket': settings.S3_HISTOGRAMS_BUCKET,
+                         's3_solved_bucket': settings.S3_SOLVED_BUCKET,
                          's3_url': settings.S3_URL,
                          'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
                          'already_voted': already_voted,
@@ -176,6 +179,7 @@ def image_detail(request, id):
                          'image_type': image_type,
                          'deep_sky_data': deep_sky_data,
                          'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
+                         'solved': True if 'mod' in request.GET and request.GET['mod'] == 'solved' else False,
                          'follows': follows,
                          'private_message_form': PrivateMessageForm(),
                          'bring_to_attention_form': BringToAttentionForm(),
@@ -183,6 +187,7 @@ def image_detail(request, id):
                          'revisions': revisions,
                          'is_revision': is_revision,
                          'revision_image': revision_image,
+                         'is_ready': True,#AsyncResult(image.store_task_id).ready(),
                         })
 
 
@@ -223,10 +228,15 @@ def image_upload_process(request):
         file = request.FILES["file"]
 
     s3_filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    store_image_in_s3(file, s3_filename, original_ext)
+    destination = open(settings.UPLOADS_DIRECTORY + s3_filename + original_ext, 'wb+')
+    for chunk in file.chunks():
+        destination.write(chunk)
+        destination.close()
+    image = Image(
+        filename=s3_filename,
+        original_ext=original_ext,
+        user=request.user)
 
-    image = Image(filename=s3_filename, original_ext=original_ext,
-                  user=request.user)
     image.save()
 
     followers = [x.from_userprofile.user
@@ -245,6 +255,7 @@ def image_upload_process(request):
              "s3_url":settings.S3_URL,
              "form":ImageEditBasicForm(),
              "subjects_prefill":[],
+             "is_ready":AsyncResult(image.store_task_id).ready(),
             },
             context_instance=RequestContext(request))
 
@@ -267,7 +278,8 @@ def image_edit_basic(request, id):
          'prefill_dict': {
             'subjects': jsonDump(image.subjects.all()),
             'locations': jsonDump(image.locations.all()),
-         }
+         },
+         "is_ready":AsyncResult(image.store_task_id).ready(),
         },
         context_instance=RequestContext(request))
 
@@ -285,6 +297,7 @@ def image_edit_gear(request, id):
         "form": form,
         "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
         "s3_url":settings.S3_URL,
+        "is_ready":AsyncResult(image.store_task_id).ready(),
     }
     prefill_dict = {}
 
@@ -337,6 +350,7 @@ def image_edit_acquisition(request, id):
         'solar_system_acquisition': solar_system_acquisition,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
+        'is_ready':AsyncResult(image.store_task_id).ready(),
     }
     return render_to_response('image/edit/acquisition.html',
                               response_dict,
@@ -356,6 +370,7 @@ def image_edit_save_basic(request):
                      'image': image,
                      's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
                      's3_url':settings.S3_URL,
+                     'is_ready':AsyncResult(image.store_task_id).ready(),
                     }
     prefill_dict = {}
 
@@ -414,6 +429,7 @@ def image_edit_save_gear(request):
     response_dict = {'form': form,
                      's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
                      's3_url':settings.S3_URL,
+                     'is_ready':AsyncResult(image.store_task_id).ready(),
                     }
     prefill_dict = {}
 
@@ -521,6 +537,7 @@ def image_edit_save_acquisition(request):
         'solar_system_acquisition': solar_system_acquisition,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
+        'is_ready':AsyncResult(image.store_task_id).ready(),
     }
 
     return render_to_response('image/edit/acquisition.html',
@@ -742,7 +759,6 @@ def user_profile_flickr_import(request):
         elif 'flickr_selected_photos[]' in request.POST:
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
-            request.session['current-progress'] = [0, 'Importing images...']
             for index, photo_id in enumerate(selected_photos):
                 sizes = flickr.photos_getSizes(photo_id = photo_id)
                 info = flickr.photos_getInfo(photo_id = photo_id).find('photo')
@@ -762,7 +778,10 @@ def user_profile_flickr_import(request):
                     file = urllib2.urlopen(source)
                     s3_filename = str(uuid4())
                     original_ext = '.jpg'
-                    store_image_in_s3(file, s3_filename, original_ext, 'image/jpeg')
+                    destination = open(settings.UPLOADS_DIRECTORY + s3_filename + original_ext, 'wb+')
+                    destination.write(file.read())
+                    destination.close()
+
                     image = Image(filename=s3_filename, original_ext=original_ext,
                                   user=request.user,
                                   title=title if title is not None else '',
@@ -773,11 +792,6 @@ def user_profile_flickr_import(request):
                     push_notification(followers, 'new_image',
                                       {'originator':request.user,
                                        'object_url':image.get_absolute_url()})
-
-
-
-                    if index > 0:
-                        request.session['current-progress'] = [100 / index / len(selected_photos), photo_id]
 
         return ajax_response(response_dict)
 
@@ -798,24 +812,6 @@ def flickr_auth_callback(request):
     request.session['flickr_token'] = token
 
     return HttpResponseRedirect("/profile/edit/flickr/")
-
-
-def request_progress(request):
-    """
-    Return JSON object with information about the progress of an upload.
-    """
-    progress_id = None
-    if 'X-Progress-ID' in request.GET:
-        progress_id = request.GET['X-Progress-ID']
-    elif 'X-Progress-ID' in request.META:
-        progress_id = request.META['X-Progress-ID']
-    if progress_id:
-        cache_key = "%s_%s" % (request.META['REMOTE_ADDR'], progress_id)
-        data = cache.get(cache_key)
-        json = simplejson.dumps(data)
-        return HttpResponse(json)
-    else:
-        return HttpResponseBadRequest('Server Error: You must provide X-Progress-ID header or query param.')
 
 
 @login_required

@@ -55,14 +55,14 @@
                             <div class="sub">
                                 <ul class="subnav">
                                     <li class="first {% if inverted %}bg-icon icon-normal{% else %}bg-icon icon-inverted{% endif %}">
-                                        {% if inverted %}
+                                        {% if inverted or solved %}
                                         <span class="text"><a href="{{image.get_absolute_url}}/">{% trans "Normal" %}</a></span>
                                         {% else %}
                                         <span class="text"><a href="{{image.get_absolute_url}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
                                         {% endif %}
                                     </li>
                                     <li class="last bg-icon icon-solved">
-                                        <span class="text"><a href="#">{% trans "Plate solved" %}</a></span>
+                                        <span class="text"><a href="{{image.get_absolute_url}}/?mod=solved">{% trans "Annotated" %}</a></span>
                                     </li>
                                 </ul>
                             </div>
@@ -117,28 +117,42 @@
                 <li class="rating"><div id="rating"></div></li>
             </ul>
             <div id="main-image">
-            {% if is_revision %}
-                {% with revision_image as image %}
+            {% if is_ready %}
+                {% if is_revision %}
+                    {% with revision_image as image %}
+                        {% if inverted %}
+                        <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                            <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                        </a>
+                        {% endif %}
+                        {% if solved %}
+                        <img src="http://{{s3_solved_bucket}}.{{s3_url}}/{{image.filename}}.png" alt="{{image.title|escape}}"/>
+                        {% else %}
+                        <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                            <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                        </a>
+                        {% endif %}
+                    {% endwith %}
+                {% else %}
                     {% if inverted %}
                     <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
                         <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
                     </a>
+                    {% endif %}
+                    {% if solved %}
+                    <img src="http://{{s3_solved_bucket}}.{{s3_url}}/{{image.filename}}.png" alt="{{image.title|escape}}"/>
                     {% else %}
                     <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
                         <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
                     </a>
                     {% endif %}
-                {% endwith %}
-            {% else %}
-                {% if inverted %}
-                <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                    <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
-                </a>
-                {% else %}
-                <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                    <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
-                </a>
                 {% endif %}
+            {% else %} <!-- not ready -->
+            <p class="info">
+                {% blocktrans %}
+                This image was just uploaded and is still processing. Please try again in a few seconds.
+                {% endblocktrans %}
+            </p>
             {% endif %}
             </div>
             <div class="main-image-data">
@@ -210,9 +224,11 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
+                    {% if is_ready %}
                     <hr/>
                     <h4>{% trans "Histogram" %}</h4>
                     <img src="http://{{s3_histograms_bucket}}.{{s3_url}}/{{image.filename}}.png" alt="{% trans "Histogram" %}"/>
+                    {% endif %}
                 </div>
             </div>
 

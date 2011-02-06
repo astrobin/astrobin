@@ -34,6 +34,21 @@ def create_notice_types(app, created_models, verbosity, **kwargs):
         _('New image revision'),
         _('A user you follow has uploaded a new image revision'))
 
+    notification.create_notice_type(
+        'image_ready',
+        _('Image ready'),
+        _('The image has been stored'))
+
+    notification.create_notice_type(
+        'image_solved',
+        _('Image solved'),
+        _('Plate solving the image has succeeded'))
+
+    notification.create_notice_type(
+        'image_not_solved',
+        _('Image not solved'),
+        _('Plate solving the image has failed'))
+
 
 signals.post_syncdb.connect(create_notice_types, sender=notification)
 
