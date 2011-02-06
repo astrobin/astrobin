@@ -9,7 +9,7 @@ from django.utils.translation import ugettext as _
 
 from djangoratings.fields import RatingField
 
-from file_utils import delete_image_from_s3
+from tasks import store_image, delete_image
 from notifications import push_notification
 
 class Gear(models.Model):
@@ -88,6 +88,9 @@ class Image(models.Model):
     rating = RatingField(range=5)
     user = models.ForeignKey(User)
 
+    store_task_id = models.CharField(max_length=36, editable=False, null=True, blank=True)
+    solve_task_id = models.CharField(max_length=36, editable=False, null=True, blank=True)
+
     class Meta:
         ordering = ('-uploaded', '-id')
         
@@ -96,10 +99,17 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         self.uploaded = datetime.now()
+        super(Image, self).save(*args, **kwargs) # obtain id
+        self.store_task_id = store_image.delay(self).task_id
         super(Image, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        delete_image_from_s3(self.filename, self.original_ext) 
+        delete_image.delay(self.filename, self.original_ext) 
+
+        # Delete references
+        for r in Request.objects.filter(image=self):
+            r.delete()
+
         super(Image, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):

@@ -25,6 +25,7 @@ django
     django-ratings
     django-notification
     django-persistent-messages
+    django-celery
 
 xapian-haystack
 xapian-bindings
@@ -35,6 +36,9 @@ PIL
 python-memcached
 simplejson
 flickrapi
+celery
+astrometry.net
+    numpy
 
 UI:
 ===

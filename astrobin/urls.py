@@ -52,7 +52,6 @@ urlpatterns = patterns('',
     }),
     (r'get_rating/(?P<image_id>\d+)/', views.image_get_rating),
 
-    (r'^misc/request-progress/$', views.request_progress),
     (r'^users/(?P<username>\w+)/$', views.user_page),
     (r'^follow/(?P<username>\w+)/$', views.follow),
     (r'^unfollow/(?P<username>\w+)/$', views.unfollow),
