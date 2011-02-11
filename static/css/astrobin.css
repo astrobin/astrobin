@@ -1679,7 +1679,7 @@ input.inline, select.inline {
 select.inline { width: 200px; }
 ul.inline input.frame {
   width: 32px;
-  margin-right: 10px;
+  margin-right: 0;
 }
 ul.inline label.notfirst {
   margin: 0;

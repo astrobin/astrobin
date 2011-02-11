@@ -2,6 +2,8 @@ from django.template import Library
 from django.conf import settings
 from notification import models as notifications
 from persistent_messages import models as messages
+from celery.result import AsyncResult
+
 from astrobin.models import Request
 
 register = Library() 
@@ -74,4 +76,9 @@ def requests_icon(request):
 @register.filter
 def append_slash(value):
     return value.replace('\n', '\\\n')
+
+
+@register.simple_tag
+def image_is_ready(image):
+    return AsyncResult(image.store_task_id).ready()
 

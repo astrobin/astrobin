@@ -1,89 +1,11 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block extra_head %}
-<script src="/static/js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
-<link rel="stylesheet" href="/static/css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
-<script src="/static/js/jquery.validationEngine-en.js" type="text/javascript"></script>
-<script src="/static/js/jquery.validationEngine.js" type="text/javascript"></script>
-{% endblock %}
-
 {% block content %}
     {% include 'image/edit/menu.html' %}   
     <div class="sided-main-content">
     <h1>{% trans "Edit your image: acquisition details" %}</h1>
 
-    <script type="text/javascript">
-        var id_counter = 0;
-
-        function appendAcquisition(acquisition_type, number_value, duration_value, iso_value, date_value) {
-            var labelMap = new Array()
-            labelMap['l'] = '{% trans "Number of light frames" %}:'
-            labelMap['r'] = '{% trans "Number of R frames" %}:'
-            labelMap['g'] = '{% trans "Number of G frames" %}:'
-            labelMap['b'] = '{% trans "Number of B frames" %}:'
-            labelMap['d'] = '{% trans "Number of dark frames" %}:'
-            labelMap['o'] = '{% trans "Number of offset/bias frames" %}:'
-            labelMap['f'] = '{% trans "Number of flat frames" %}:'
-            labelMap['x'] = '{% trans "Number of flat dark frames" %}:'
- 
-            var frame_duration = '{% trans "Duration (seconds)" %}:'
-
-            var id = acquisition_type + '_' + id_counter;
-            var id_number = id + '_number';
-            var id_duration = id + '_duration';
-            var id_iso = id + '_iso';
-            var id_date = id + '_date';
-            id_counter++;
-
-            if (typeof(number_value) == 'undefined' || number_value == 'None')
-                number_value = '';
-            if (typeof(duration_value) == 'undefined' || duration_value == 'None')
-                duration_value = '';
-            if (typeof(iso_value) == 'undefined' || iso_value == 'None')
-                iso_value = '';
-            if (typeof(date_value) == 'undefined' || date_value == 'None')
-                date_value = '{% trans "yyyy-mm-dd" %}';
-
-            var ret = '\
-                <ul id="' + id + '" class="inline">\
-                    <li>\
-                        <p>\
-                            <label for="' + id_number + '">' + labelMap[acquisition_type] + '</label>\
-                            <input id="' + id_number + '" class="frame validate[required,custom[onlyNumber]]" type="text" name="' + id_number + '" maxlength="4" size="4" value="' + number_value + '"/>\
-                        </p>\
-                    </li>';
-            if (acquisition_type == 'l' || acquisition_type == 'r' || acquisition_type == 'g' || acquisition_type == 'b') {
-                ret += '\
-                    <li>\
-                        <p>\
-                            <label class="notfirst" for="' + id_duration + '">' + frame_duration + '</label>\
-                            <input id="' + id_duration + '" class="frame validate[required,custom[onlyNumber]]" type="text" name="' + id_duration + '" maxlength="6" size="6" value="' + duration_value + '"/>\
-                        </p>\
-                    </li>\
-                    <li>\
-                        <p>\
-                            <label class="notfirst" for="' + id_iso + '">{% trans "ISO" %}:</label>\
-                            <input id="' + id_iso + '" class="frame validate[optional,custom[onlyNumber]]" name="' + id_iso  + '" type="text" size="6" value="' + iso_value + '"/>\
-                        </p>\
-                    </li>\
-                    <li>\
-                        <p>\
-                            <label class="notfirst" for="' + id_date + '">{% trans "Date" %}:</label>\
-                            <input id="' + id_date + '" name="' + id_date + '" \
-                                   class="date datepickerclass validate[optional,date]" \
-                                   type="text" value="' + date_value + '"/>\
-                        </p>\
-                    </li>';
-            }
-
-            ret += '\
-                <li><p><a id="' + id + '" class="remove" href="#"><img class="remove" src="/static/icons/iconic/white/minus_alt_16x16.png" alt="{% trans "Remove" %}"/></a></p></li>\
-                </ul>';
-
-            return ret;
-        };
-    </script>
     <form id="image_acquisition" action="/edit/save/acquisition/" method="post">{% csrf_token %}
         <p id="image_type_controller" {% if acquisitions %}style="display:none"{% endif %}>
             <label for="image_type_controller">{% trans "Select type of image:" %}</label>
@@ -196,78 +118,152 @@
             <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
         </ul>
     </form>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            {% ifequal image_type 'deep_sky' %}
-                $('p.solar_system_field').css('display', 'none');
-                $('p#image_type_controller').hide();
-                $('#hidden_inputs').append('\
-                    <input type="hidden" name="image_type"\
-                           value="{{image_type}}"/>\
-                ');
-            {% else %}
-                {% ifequal image_type 'solar_system' %}
-                    $('p#deep_sky_controller').css('display', 'none');
-                    $('p#image_type_controller').hide();
-                    $('#hidden_inputs').append('\
-                        <input type="hidden" name="image_type"\
-                               value="{{image_type}}"/>\
-                    ');
-                {% else %}
-                    $('p.solar_system_field').css('display', 'none');
-                    $('p#deep_sky_controller').css('display', 'none');
-                {% endifequal %}
-            {% endifequal %}
-
-            $.datepicker.setDefaults({
-                    dateFormat: 'yy-mm-dd',
-            });
-
-            {% ifequal image_type 'deep_sky' %}
-                {% for a in deep_sky_acquisitions %}
-                    $('#variable_fields').append(appendAcquisition('{{a.acquisition_type}}', '{{a.number}}', '{{a.duration}}', '{{a.iso}}', '{{a.date|date:'Y-m-d'}}'));
-                {% endfor %}
-            {% endifequal %}
-
-            $('p#image_type_controller input').click(function() {
-                if ($('select#image_type_controller').val() == 'deep_sky') {
-                    $('p#deep_sky_controller').css('display', 'block');
-                } else {
-                    $('p.solar_system_field').css('display', 'block');
-                }
-
-                $('#hidden_inputs').append('<input type="hidden" name="image_type" value="' + $('select#image_type_controller').val() + '"/>');
-                $(this).parent().css('display', 'none');
-            });
-
-            $('p#deep_sky_controller input').click(function() {
-                var acquisition_type = $('select#deep_sky_controller').val()
-                $('#variable_fields').append(appendAcquisition(acquisition_type))
-                $('input').filter('.datepickerclass').datepicker();
-            });
-
-            $('a.remove').live('click', function() {
-                var id = $(this).attr('id');
-                $('ul#' + id).remove();
-            });
-            
-            $('input').filter('.datepickerclass').datepicker();
-            $('input').filter('.timepickerclass').timepicker({});
-            
-            $('input#reset').click(function() {
-                $('p#deep_sky_controller').css('display', 'none');
-                $('p#solar_sysyem_controller').css('display', 'none');
-                $('p#image_type_controller').css('display', 'block');
-                $('p#image_type_controller input').css('display', 'inline-block');
-                $('#variable_fields').html('');
-                $('.solar_system_field').css('display', 'none');
-                $('#hidden_inputs').html('');
-            });
-
-            $("form#image_acquisition").validationEngine(
-                {scroll: false,
-                });
-        });
-    </script>
     </div>
+{% endblock %}
+
+
+{% block extra_js %}
+<script type="text/javascript">
+    var id_counter = 0;
+
+    function appendAcquisition(acquisition_type, number_value, duration_value, iso_value, date_value) {
+        var labelMap = new Array()
+        labelMap['l'] = '{% trans "Number of light frames" %}:'
+        labelMap['r'] = '{% trans "Number of R frames" %}:'
+        labelMap['g'] = '{% trans "Number of G frames" %}:'
+        labelMap['b'] = '{% trans "Number of B frames" %}:'
+        labelMap['d'] = '{% trans "Number of dark frames" %}:'
+        labelMap['o'] = '{% trans "Number of offset/bias frames" %}:'
+        labelMap['f'] = '{% trans "Number of flat frames" %}:'
+        labelMap['x'] = '{% trans "Number of flat dark frames" %}:'
+
+        var frame_duration = '{% trans "Duration (seconds)" %}:'
+
+        var id = acquisition_type + '_' + id_counter;
+        var id_number = id + '_number';
+        var id_duration = id + '_duration';
+        var id_iso = id + '_iso';
+        var id_date = id + '_date';
+        id_counter++;
+
+        if (typeof(number_value) == 'undefined' || number_value == 'None')
+            number_value = '';
+        if (typeof(duration_value) == 'undefined' || duration_value == 'None')
+            duration_value = '';
+        if (typeof(iso_value) == 'undefined' || iso_value == 'None')
+            iso_value = '';
+        if (typeof(date_value) == 'undefined' || date_value == 'None')
+            date_value = '{% trans "yyyy-mm-dd" %}';
+
+        var ret = '\
+            <ul id="' + id + '" class="inline">\
+                <li>\
+                    <p>\
+                        <label for="' + id_number + '">' + labelMap[acquisition_type] + '</label>\
+                        <input id="' + id_number + '" class="frame validate[required,custom[onlyNumber]]" type="text" name="' + id_number + '" maxlength="4" size="4" value="' + number_value + '"/>\
+                    </p>\
+                </li>';
+        if (acquisition_type == 'l' || acquisition_type == 'r' || acquisition_type == 'g' || acquisition_type == 'b') {
+            ret += '\
+                <li>\
+                    <p>\
+                        <label class="notfirst" for="' + id_duration + '">' + frame_duration + '</label>\
+                        <input id="' + id_duration + '" class="frame validate[required,custom[onlyNumber]]" type="text" name="' + id_duration + '" maxlength="6" size="6" value="' + duration_value + '"/>\
+                    </p>\
+                </li>\
+                <li>\
+                    <p>\
+                        <label class="notfirst" for="' + id_iso + '">{% trans "ISO" %}:</label>\
+                        <input id="' + id_iso + '" class="frame validate[optional,custom[onlyNumber]]" name="' + id_iso  + '" type="text" size="6" value="' + iso_value + '"/>\
+                    </p>\
+                </li>\
+                <li>\
+                    <p>\
+                        <label class="notfirst" for="' + id_date + '">{% trans "Date" %}:</label>\
+                        <input id="' + id_date + '" name="' + id_date + '" \
+                               class="date datepickerclass validate[optional,date]" \
+                               type="text" value="' + date_value + '"/>\
+                    </p>\
+                </li>';
+        }
+
+        ret += '\
+            <li><p><a id="' + id + '" class="remove" href="#"><img class="remove" src="/static/icons/iconic/white/minus_alt_16x16.png" alt="{% trans "Remove" %}"/></a></p></li>\
+            </ul>';
+
+        return ret;
+    };
+
+    {% ifequal image_type 'deep_sky' %}
+        $('p.solar_system_field').css('display', 'none');
+        $('p#image_type_controller').hide();
+        $('#hidden_inputs').append('\
+            <input type="hidden" name="image_type"\
+                   value="{{image_type}}"/>\
+        ');
+    {% else %}
+        {% ifequal image_type 'solar_system' %}
+            $('p#deep_sky_controller').css('display', 'none');
+            $('p#image_type_controller').hide();
+            $('#hidden_inputs').append('\
+                <input type="hidden" name="image_type"\
+                       value="{{image_type}}"/>\
+            ');
+        {% else %}
+            $('p.solar_system_field').css('display', 'none');
+            $('p#deep_sky_controller').css('display', 'none');
+        {% endifequal %}
+    {% endifequal %}
+
+$(document).ready(function() {
+    $.datepicker.setDefaults({
+            dateFormat: 'yy-mm-dd',
+    });
+
+    {% ifequal image_type 'deep_sky' %}
+    {% for a in deep_sky_acquisitions %}
+        $('#variable_fields').append(appendAcquisition('{{a.acquisition_type}}', '{{a.number}}', '{{a.duration}}', '{{a.iso}}', '{{a.date|date:'Y-m-d'}}'));
+    {% endfor %}
+    {% endifequal %}
+
+    $('p#image_type_controller input').click(function() {
+        if ($('select#image_type_controller').val() == 'deep_sky') {
+            $('p#deep_sky_controller').css('display', 'block');
+        } else {
+            $('p.solar_system_field').css('display', 'block');
+        }
+
+        $('#hidden_inputs').append('<input type="hidden" name="image_type" value="' + $('select#image_type_controller').val() + '"/>');
+        $(this).parent().css('display', 'none');
+    });
+
+    $('p#deep_sky_controller input').click(function() {
+        var acquisition_type = $('select#deep_sky_controller').val()
+        $('#variable_fields').append(appendAcquisition(acquisition_type))
+        $('input').filter('.datepickerclass').datepicker();
+    });
+
+    $('a.remove').live('click', function() {
+        var id = $(this).attr('id');
+        $('ul#' + id).remove();
+    });
+    
+    $('input').filter('.datepickerclass').datepicker();
+    $('input').filter('.timepickerclass').timepicker({});
+    
+    $('input#reset').click(function() {
+        $('p#deep_sky_controller').css('display', 'none');
+        $('p#solar_sysyem_controller').css('display', 'none');
+        $('p#image_type_controller').css('display', 'block');
+        $('p#image_type_controller input').css('display', 'inline-block');
+        $('#variable_fields').html('');
+        $('.solar_system_field').css('display', 'none');
+        $('#hidden_inputs').html('');
+    });
+
+    $("form#image_acquisition").validationEngine(
+        {scroll: false,
+        });
+});
+</script>
 {% endblock %}
