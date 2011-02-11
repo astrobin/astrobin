@@ -1,5 +1,6 @@
 from django.conf import settings
 from celery.decorators import task
+from celery.task.sets import subtask
 
 from PIL import Image as PILImage
 from subprocess import call
@@ -14,14 +15,14 @@ from s3 import *
 from notifications import *
 
 @task()
-def solve_image(image):
+def solve_image(image, callback=None):
     # Solve
     path = settings.UPLOADS_DIRECTORY
     uid = image.filename
     original_ext = image.original_ext
     solved = False
 
-    command = ['/usr/local/astrometry/bin/solve-field', path + uid + original_ext]
+    command = ['nice', '-n', '5', '/usr/local/astrometry/bin/solve-field', path + uid + original_ext]
     call(command)
     solved_filename = settings.UPLOADS_DIRECTORY + image.filename + '-ngc.png'
     if os.path.exists(settings.UPLOADS_DIRECTORY + image.filename + '.solved'):
@@ -49,24 +50,30 @@ def solve_image(image):
 
     if solved:
         push_notification([image.user], 'image_solved',
-                      {'object_url':image.get_absolute_url() + '?mod=solved'})
+                          {'object_url':image.get_absolute_url() + '?mod=solved'})
     else:
         push_notification([image.user], 'image_not_solved',
-                      {'object_url':image.get_absolute_url()})
+                          {'object_url':image.get_absolute_url()})
 
-
-@task
-def delete_image(filename, ext):
-    delete_image_from_s3(filename, ext)
+    if callback:
+        callback(image, solved)
 
 
 @task()
-def store_image(image):
+def store_image(image, solve, callback=None):
     try:
         store_image_in_s3(settings.UPLOADS_DIRECTORY, image.filename, image.original_ext)
     except S3CreateError, exc:
         store_image.retry(exc=exc)
 
     push_notification([image.user], 'image_ready', {'object_url':image.get_absolute_url()})
-    image.solve_task_id = solve_image.delay(image).task_id 
+
+    if callback:
+        callback(image, True, solve)
+
+
+@task
+def delete_image(filename, ext):
+    delete_image_from_s3(filename, ext)
+
 

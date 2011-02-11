@@ -1,1 +1,2 @@
-gunicorn_django -w 4 -b 0.0.0.0:8082 -t 600
+#! /bin/sh
+python manage.py run_gunicorn 0.0.0.0:8082 -w 4

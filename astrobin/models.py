@@ -9,7 +9,7 @@ from django.utils.translation import ugettext as _
 
 from djangoratings.fields import RatingField
 
-from tasks import store_image, delete_image
+from tasks import store_image, solve_image, delete_image
 from notifications import push_notification
 
 class Gear(models.Model):
@@ -65,6 +65,19 @@ class Location(models.Model):
         return self.name
 
 
+def image_solved_callback(image, solved):
+    image.is_solved = solved
+    image.save()
+
+
+def image_stored_callback(image, stored, solve):
+    image.is_stored = stored
+    image.save()
+
+    if solve:
+        solve_image.delay(image, callback=image_solved_callback)
+
+
 class Image(models.Model):
     title = models.CharField(max_length=128)
     subjects = models.ManyToManyField(Subject)
@@ -88,8 +101,8 @@ class Image(models.Model):
     rating = RatingField(range=5)
     user = models.ForeignKey(User)
 
-    store_task_id = models.CharField(max_length=36, editable=False, null=True, blank=True)
-    solve_task_id = models.CharField(max_length=36, editable=False, null=True, blank=True)
+    is_stored = models.BooleanField(editable=False)
+    is_solved = models.BooleanField(editable=False)
 
     class Meta:
         ordering = ('-uploaded', '-id')
@@ -99,9 +112,10 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         self.uploaded = datetime.now()
-        super(Image, self).save(*args, **kwargs) # obtain id
-        self.store_task_id = store_image.delay(self).task_id
         super(Image, self).save(*args, **kwargs)
+
+    def process(self):
+        store_image.delay(self, solve=True, callback=image_stored_callback)
 
     def delete(self, *args, **kwargs):
         delete_image.delay(self.filename, self.original_ext) 

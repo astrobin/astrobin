@@ -24,7 +24,6 @@ import simplejson
 import csv
 import flickrapi
 import urllib2
-from celery.result import AsyncResult
 
 from models import *
 from forms import *
@@ -51,15 +50,15 @@ def index(request):
 
     return object_list(
         request, 
-        queryset=Image.objects.all(),
+        queryset=Image.objects.filter(is_stored=True),
         template_name='index.html',
         template_object_name='image',
-        extra_context = {"thumbnail_size":settings.THUMBNAIL_SIZE,
-                         "s3_thumbnails_bucket":settings.S3_THUMBNAILS_BUCKET,
-                         "s3_abpod_bucket":settings.S3_ABPOD_BUCKET,
-                         "s3_url":settings.S3_URL,
-                         "upload_form": ImageUploadForm(),
-                         "abpod":abpod})
+        extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
+                         's3_thumbnails_bucket':settings.S3_THUMBNAILS_BUCKET,
+                         's3_abpod_bucket':settings.S3_ABPOD_BUCKET,
+                         's3_url':settings.S3_URL,
+                         'upload_form': ImageUploadForm(),
+                         'abpod':abpod})
 
 
 @require_GET
@@ -187,7 +186,7 @@ def image_detail(request, id):
                          'revisions': revisions,
                          'is_revision': is_revision,
                          'revision_image': revision_image,
-                         'is_ready': True,#AsyncResult(image.store_task_id).ready(),
+                         'is_ready': image.is_stored,
                         })
 
 
@@ -238,6 +237,7 @@ def image_upload_process(request):
         user=request.user)
 
     image.save()
+    image.process()
 
     followers = [x.from_userprofile.user
                  for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
@@ -249,13 +249,16 @@ def image_upload_process(request):
         return_dict = {'success':'true', 'id':image.id}
         return ajax_response(return_dict)
     else:
-        return render_to_response("image/edit/basic.html",
-            {"image":image,
-             "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
-             "s3_url":settings.S3_URL,
-             "form":ImageEditBasicForm(),
-             "subjects_prefill":[],
-             "is_ready":AsyncResult(image.store_task_id).ready(),
+        return render_to_response('image/edit/basic.html',
+            {'image':image,
+             's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
+             's3_url':settings.S3_URL,
+             'form':ImageEditBasicForm(),
+             'prefill_dict': {
+                'subjects': [],
+                'locations': [],
+             },
+             'is_ready':image.is_stored,
             },
             context_instance=RequestContext(request))
 
@@ -279,7 +282,7 @@ def image_edit_basic(request, id):
             'subjects': jsonDump(image.subjects.all()),
             'locations': jsonDump(image.locations.all()),
          },
-         "is_ready":AsyncResult(image.store_task_id).ready(),
+         "is_ready":image.is_stored,
         },
         context_instance=RequestContext(request))
 
@@ -297,7 +300,7 @@ def image_edit_gear(request, id):
         "form": form,
         "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
         "s3_url":settings.S3_URL,
-        "is_ready":AsyncResult(image.store_task_id).ready(),
+        "is_ready":image.is_stored,
     }
     prefill_dict = {}
 
@@ -350,7 +353,7 @@ def image_edit_acquisition(request, id):
         'solar_system_acquisition': solar_system_acquisition,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
-        'is_ready':AsyncResult(image.store_task_id).ready(),
+        'is_ready':image.is_stored,
     }
     return render_to_response('image/edit/acquisition.html',
                               response_dict,
@@ -370,7 +373,7 @@ def image_edit_save_basic(request):
                      'image': image,
                      's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
                      's3_url':settings.S3_URL,
-                     'is_ready':AsyncResult(image.store_task_id).ready(),
+                     'is_ready':image.is_stored,
                     }
     prefill_dict = {}
 
@@ -401,10 +404,7 @@ def image_edit_save_basic(request):
     image.save()
 
     response_dict['prefill_dict'] = prefill_dict
-
-    return render_to_response("image/edit/basic.html",
-                              response_dict,
-                              context_instance=RequestContext(request))
+    return HttpResponseRedirect('/edit/gear/%i/' % image.id)
 
 
 @login_required
@@ -429,7 +429,7 @@ def image_edit_save_gear(request):
     response_dict = {'form': form,
                      's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
                      's3_url':settings.S3_URL,
-                     'is_ready':AsyncResult(image.store_task_id).ready(),
+                     'is_ready':image.is_stored,
                     }
     prefill_dict = {}
 
@@ -462,9 +462,7 @@ def image_edit_save_gear(request):
     response_dict['image'] = image
     response_dict['prefill_dict'] = prefill_dict
 
-    return render_to_response("image/edit/gear.html",
-        response_dict,
-        context_instance=RequestContext(request))
+    return HttpResponseRedirect('/edit/acquisition/%i/' % image.id)
 
 
 @login_required
@@ -537,7 +535,7 @@ def image_edit_save_acquisition(request):
         'solar_system_acquisition': solar_system_acquisition,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
-        'is_ready':AsyncResult(image.store_task_id).ready(),
+        'is_ready':image.is_stored,
     }
 
     return render_to_response('image/edit/acquisition.html',
@@ -787,6 +785,8 @@ def user_profile_flickr_import(request):
                                   title=title if title is not None else '',
                                   description=description if description is not None else '')
                     image.save()
+                    image.process()
+
                     followers = [x.from_userprofile.user
                                  for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
                     push_notification(followers, 'new_image',

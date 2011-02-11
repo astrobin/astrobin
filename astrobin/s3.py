@@ -18,22 +18,22 @@ import StringIO
 from image_utils import *
 
 def save_to_bucket(data, content_type, bucket, uid, ext):
+    now = datetime.datetime.utcnow()
+    then = now + datetime.timedelta(365*2)
+    expires = then.strftime('%a, %d %b %Y %H:%M:%S GMT')
+
+    headers = {
+        'x-amz-acl'    : 'public-read',
+        'Content-Type' : content_type,
+        'Expires'      : expires,
+        'Cache-Control': 'max-age %d' % (3600 * 24 * 365 * 2),
+    }
+
     conn = S3Connection(settings.S3_ACCESS_KEY, settings.S3_SECRET_KEY)
     b = conn.create_bucket(bucket)
     k = Key(b)
     k.key = uid + ext
-    k.set_metadata("Content-Type", content_type)
-
-    headers = {}
-    # HTTP/1.0
-    headers['Expires'] = '%s GMT' % (email.Utils.formatdate(
-        time.mktime((datetime.datetime.now() +
-        datetime.timedelta(days=365*2)).timetuple())))
-    # HTTP/1.1
-    headers['Cache-Control'] = 'max-age %d' % (3600 * 24 * 365 * 2)
-
-    k.set_contents_from_string(data, headers)
-    k.set_acl("public-read");
+    k.set_contents_from_string(data, headers=headers)
 
 
 def store_image_in_s3(path, uid, original_ext, mimetype=''):

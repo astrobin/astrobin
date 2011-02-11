@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'persistent_messages',
     'djcelery',
+    'gunicorn',
 )
 
 LOGIN_REDIRECT_URL = '/'
