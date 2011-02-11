@@ -986,10 +986,14 @@ form textarea:focus {
   text-transform: lowercase;
   width: 40px;
 }
-#header #user-nav > ul > li > a:hover { background: url('/static/images/user-nav-hover-bg.png') no-repeat; }
-#header #user-nav > ul > li > a:active { background: url('/static/images/user-nav-hover-bg.png') no-repeat; }
+#header #user-nav > ul > li > a:hover.icon { background: url('/static/images/user-nav-hover-bg.png') no-repeat; }
+#header #user-nav > ul > li > a:active.icon { background: url('/static/images/user-nav-hover-bg.png') no-repeat; }
 #header #user-nav > ul > li > a:link.active { background: url('/static/images/user-nav-active-bg.png') no-repeat; }
 #header #user-nav > ul > li > a:visited.active { background: url('/static/images/user-nav-active-bg.png') no-repeat; }
+#header #user-nav > ul > li.text a {
+  text-transform: lowercase;
+  padding: 0 10px;
+}
 ul.as-selections {
   list-style-type: none;
   border: 1px solid #222222;

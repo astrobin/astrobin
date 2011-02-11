@@ -122,10 +122,10 @@
                             </li>
 
                         {% else %}
-                            <li id="{% current request "^/accounts/login/" %}">
+                            <li class="text" id="{% current request "^/accounts/login/" %}">
                                 <a href="{% url auth_login %}">{% trans "Log in" %}</a>
                             </li>
-                            <li id="{% current request "^/accounts/register/" %}">
+                            <li class="text" id="{% current request "^/accounts/register/" %}">
                                 <a href="{% url registration_register %}">{% trans "Register" %}</a>
                             </li>
                         {% endif %}

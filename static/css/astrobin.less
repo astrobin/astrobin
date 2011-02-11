@@ -1113,10 +1113,14 @@ form {
                     text-align: center;
                     text-transform: lowercase;
                     width: 40px;}
-                >a:hover, >a:active {
+                >a:hover.icon, >a:active.icon {
                     background: url('/static/images/user-nav-hover-bg.png') no-repeat;}
                 >a:link.active, >a:visited.active {
-                    background: url('/static/images/user-nav-active-bg.png') no-repeat;}}}}}
+                    background: url('/static/images/user-nav-active-bg.png') no-repeat;}}
+            >li.text {
+                a {
+                    text-transform: lowercase;
+                    padding: 0 10px;}}}}}
 
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
