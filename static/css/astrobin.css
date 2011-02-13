@@ -1339,11 +1339,11 @@ x:default { border: none; }
 #image-detail ul.topnav > li > span > a:hover { color: #ffffff; }
 #image-detail ul.topnav > li.subhover { cursor: pointer; }
 #image-detail .main-image-data { margin: 10px 0; }
+#image-detail .main-image-data p { margin: 4px 0 0 0; }
 #image-detail .main-image-data ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  height: 45px;
 }
 #image-detail .main-image-data ul li { display: inline; }
 #image-detail .main-image-data ul h2 {
