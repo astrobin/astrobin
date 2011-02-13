@@ -1,11 +1,14 @@
 import uuid
 from datetime import datetime
+import glob
+import os
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django import forms
 from django.utils.translation import ugettext as _
+from django.conf import settings
 
 from djangoratings.fields import RatingField
 
@@ -57,17 +60,34 @@ class Subject(models.Model):
 
 class Location(models.Model):
     name = models.CharField(max_length=64)
-    latitude = models.DecimalField(max_digits=3, decimal_places=4, null=True, blank=True)
-    longitude = models.DecimalField(max_digits=3, decimal_places=4, null=True, blank=True)
+    latitude = models.DecimalField(max_digits=7, decimal_places=4, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=7, decimal_places=4, null=True, blank=True)
     altitude = models.IntegerField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name
 
 
-def image_solved_callback(image, solved):
+def image_solved_callback(image, solved, clean_path):
     image.is_solved = solved
+    if image.is_solved:
+        # grab objects from list
+        list_fn = settings.UPLOADS_DIRECTORY + image.filename + '-list.txt'
+        f = open(list_fn, 'r')
+        for line in f:
+            if line != '':
+                s, created = Subject.objects.get_or_create(name=line)
+                if created:
+                    s.save()
+                image.subjects.add(s)
+        f.close()
+
     image.save()
+
+    # Clean up!
+    clean_list = glob.glob(clean_path)
+    for f in clean_list:
+        os.remove(f)
 
 
 def image_stored_callback(image, stored, solve):

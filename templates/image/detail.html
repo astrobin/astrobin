@@ -156,15 +156,17 @@
                     <li class="title">{{image.title|escape|default:_("(no title)")}}</li>
                     <li class="author">{% trans "by" %} <a href="/users/{{image.user.username}}/">{{image.user.username}}</a></li>
                     {% if image.subjects %}
-                    <li class="contains">Contains:
-                        {% for s in image.subjects.all %}
-                            <a href="/search/?q={{s.name|escape}}">{{s.name|escape}}</a>
-                        {% empty %}
-                            {% trans "(no subjects)" %}
-                        {% endfor %}
-                    </li>
                     {% endif %}
                 </ul>
+                <p>
+                    {% trans "Contains" %}:
+                    {% for s in image.subjects.all %}
+                        <a href="/search/?q={{s.name|escape}}">{{s.name|escape}}</a>
+                        {% if not forloop.last %},&nbsp;{% endif %}
+                    {% empty %}
+                        {% trans "(no subjects)" %}
+                    {% endfor %}
+                </p>
             </div>
             {% if revisions %}
             <div id="revisions">

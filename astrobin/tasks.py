@@ -8,7 +8,6 @@ from subprocess import call
 import StringIO
 import os
 import os.path
-import glob
 
 from image_utils import *
 from s3 import *
@@ -43,11 +42,6 @@ def solve_image(image, callback=None):
                        settings.S3_SOLVED_BUCKET,
                        uid,
                        '.png')
-    # Clean up!
-    clean_list = glob.glob(path + uid + '*')
-    for f in clean_list:
-        os.remove(f)
-
     if solved:
         push_notification([image.user], 'image_solved',
                           {'object_url':image.get_absolute_url() + '?mod=solved'})
@@ -56,7 +50,7 @@ def solve_image(image, callback=None):
                           {'object_url':image.get_absolute_url()})
 
     if callback:
-        callback(image, solved)
+        callback(image, solved, '%s%s*' % (path, uid))
 
 
 @task()
