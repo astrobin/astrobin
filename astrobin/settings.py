@@ -13,10 +13,10 @@ MANAGERS = ADMINS
 SERVER_EMAIL = 'astrobin@astrobin.com'
 DEFAULT_FROM_EMAIL = 'AstroBin <astrobin@astrobin.com>'
 
-DATABASE_ENGINE = 'sqlite3'    # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'astrobin.db'  # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
+DATABASE_ENGINE = 'mysql'      # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_NAME = 'astrobin'     # Or path to database file if using sqlite3.
+DATABASE_USER = 'root'         # Not used with sqlite3.
+DATABASE_PASSWORD = 'Sheckjov' # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
@@ -84,6 +84,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -91,6 +92,8 @@ MIDDLEWARE_CLASSES = (
 #    'django.middleware.csrf.CsrfResponseMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'astrobin.prof.ProfilerMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
 ROOT_URLCONF = 'astrobin.urls'
@@ -142,14 +145,16 @@ COMPILER_FORMATS = {
         'arguments': '*.less'
     },
 }
-CACHE_BACKEND = 'memcached://unix:/var/www/astrobin_env/memcached.sock'
+#CACHE_BACKEND = 'memcached://unix:/var/www/astrobin_env/memcached.sock'
+CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
 
 HAYSTACK_SITECONF = 'astrobin.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
 HAYSTACK_XAPIAN_PATH = '/var/www/astrobin_env/xapian_indexes'
 HAYSTACK_DEFAULT_OPERATOR = 'OR'
 
-INTERNAL_IPS = ('',) # for django-debug-toolbar: add own local IP to enable
+#INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
+INTERNAL_IPS = ('',)
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 
