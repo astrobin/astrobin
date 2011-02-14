@@ -95,7 +95,7 @@
                                </div>
                             </li>
                             <li>
-                                <a class="icon" title="{% trans "Notifications" %}" href="#">
+                                <a class="icon" title="{% trans "Notifications" %}" href="{% url views.notifications %}">
                                     <img id="notifications" alt="{% trans "Notifications" %}" src="{% notifications_icon request %}"/>
                                 </a>
                                 <div class="popup" id="notifications-popup">
@@ -103,14 +103,14 @@
                                 </div>
                             </li>
                             <li>
-                                <a class="icon" title="{% trans "Messages" %}" href="#">
+                                <a class="icon" title="{% trans "Messages" %}" href="{% url views.messages_all %}">
                                     <img id="messages" alt="{% trans "Messages" %}" src="{% messages_icon request %}"/></a>
                                 <div class="popup" id="messages-popup">
                                     {% message_list request %}
                                 </div>
                             </li>
                             <li>
-                                <a class="icon" title="{% trans "Requests" %}" href="#">
+                                <a class="icon" title="{% trans "Requests" %}" href="{% url views.requests %}">
                                     <img id="requests" alt="{% trans "Requests" %}" src="{% requests_icon request %}"/></a>
                                 <div class="popup" id="requests-popup">
                                     {% request_list request %}
