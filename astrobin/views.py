@@ -142,8 +142,10 @@ def image_detail(request, id):
         image_type = 'solar_system'
 
     follows = False
-    if UserProfile.objects.get(user=image.user) in UserProfile.objects.get(user=request.user).follows.all():
-        follows = True
+    if request.user.is_authenticated():
+        profile = UserProfile.objects.get(user=request.user)
+        if UserProfile.objects.get(user=image.user) in profile.follows.all():
+            follows = True
 
     is_revision = False
     revision_id = 0
