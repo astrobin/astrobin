@@ -76,7 +76,7 @@ def image_solved_callback(image, solved, clean_path):
         f = open(list_fn, 'r')
         for line in f:
             if line != '':
-                s, created = Subject.objects.get_or_create(name=line)
+                s, created = Subject.objects.get_or_create(name=line.rstrip('\r\n'))
                 if created:
                     s.save()
                 image.subjects.add(s)
