@@ -272,8 +272,12 @@ def image_edit_basic(request, id):
     if request.user != image.user:
         return HttpResponseForbidden();
 
-    form = ImageEditBasicForm({'title': image.title,
-                               'description': image.description})
+    form = ImageEditBasicForm({
+        'title': image.title,
+        'description': image.description,
+        'subjects': u', '.join(x.name for x in image.subjects.all()),
+        'locations': u', '.join(x.name for x in image.locations.all())
+    })
 
     return render_to_response('image/edit/basic.html',
         {'image':image,
@@ -297,32 +301,34 @@ def image_edit_gear(request, id):
     if request.user != image.user:
         return HttpResponseForbidden();
 
-    form = ImageEditGearForm()
-    response_dict = {
-        "form": form,
-        "s3_small_thumbnails_bucket":settings.S3_SMALL_THUMBNAILS_BUCKET,
-        "s3_url":settings.S3_URL,
-        "is_ready":image.is_stored,
-    }
     prefill_dict = {}
+    prefill_form = {}
 
-    for attr in ["imaging_telescopes",
-                 "guiding_telescopes",
-                 "mounts",
-                 "imaging_cameras",
-                 "guiding_cameras",
-                 "focal_reducers",
-                 "software",
-                 "filters",
-                 "accessories",
+    for attr in ['imaging_telescopes',
+                 'guiding_telescopes',
+                 'mounts',
+                 'imaging_cameras',
+                 'guiding_cameras',
+                 'focal_reducers',
+                 'software',
+                 'filters',
+                 'accessories',
                 ]:
         imageGear = getattr(image, attr).all()
         prefill_dict[attr] = jsonDump(imageGear)
+        prefill_form[attr] = u', '.join([x.name for x in getattr(image, attr).all()])
 
-    response_dict['image'] = image
-    response_dict['prefill_dict'] = prefill_dict
+    form = ImageEditGearForm(prefill_form)
+    response_dict = {
+        'form': form,
+        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
+        's3_url':settings.S3_URL,
+        'is_ready':image.is_stored,
+        'image':image,
+        'prefill_dict':prefill_dict,
+    }
 
-    return render_to_response("image/edit/gear.html",
+    return render_to_response('image/edit/gear.html',
                               response_dict,
                               context_instance=RequestContext(request))
 
@@ -389,17 +395,20 @@ def image_edit_save_basic(request):
 
     for i in [[image.subjects, 'subjects', Subject],
               [image.locations, 'locations', Location]]:
+        values = form.cleaned_data[i[1]]
         if 'as_values_' + i[1] in request.POST:
-            reader = csv.reader([request.POST['as_values_' + i[1]]],
-                                skipinitialspace = True)
-            for row in reader:
-                for name in row:
-                    if name != '':
-                        k, created = i[2].objects.get_or_create(name = name)
-                        if created:
-                            k.save()
-                        i[0].add(k)
-            prefill_dict[i[1]] = jsonDump(i[0].all())
+            values = request.POST['as_values_' + i[1]]
+        reader = csv.reader([values],
+                            skipinitialspace = True)
+        for row in reader:
+            for name in row:
+                if name != '':
+                    k, created = i[2].objects.get_or_create(name = name)
+                    if created:
+                        k.save()
+                    i[0].add(k)
+        prefill_dict[i[1]] = jsonDump(i[0].all())
+        form.fields[i[1]].initial = u', '.join(x.name for x in getattr(image, i[1]).all())
 
     image.title = form.cleaned_data['title'] 
     image.description = form.cleaned_data['description']
@@ -428,26 +437,35 @@ def image_edit_save_gear(request):
     image.filters.clear()
     image.accessories.clear()
 
-    form = ImageEditGearForm()
-    response_dict = {'form': form,
-                     's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
-                     's3_url':settings.S3_URL,
-                     'is_ready':image.is_stored,
-                    }
-    prefill_dict = {}
+    form = ImageEditGearForm(request.POST)
+    response_dict = {
+        'image': image,
+        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
+        's3_url':settings.S3_URL,
+        'is_ready':image.is_stored,
+    }
 
+    if not form.is_valid():
+        return render_to_response("image/edit/gear.html",
+            response_dict,
+            context_instance=RequestContext(request))
+
+    prefill_dict = {}
     data = {} 
-    for k, v in {"imaging_telescopes": [Telescope, profile.telescopes, "telescopes"],
-                 "guiding_telescopes": [Telescope, profile.telescopes, "telescopes"],
-                 "mounts"            : [Mount, profile.mounts],
-                 "imaging_cameras"   : [Camera, profile.cameras, "cameras"],
-                 "guiding_cameras"   : [Camera, profile.cameras, "cameras"],
-                 "focal_reducers"    : [FocalReducer, profile.focal_reducers],
-                 "software"          : [Software, profile.software],
-                 "filters"           : [Filter, profile.filters],
-                 "accessories"       : [Accessory, profile.accessories],
+    for k, v in {'imaging_telescopes': [Telescope, profile.telescopes, 'telescopes'],
+                 'guiding_telescopes': [Telescope, profile.telescopes, 'telescopes'],
+                 'mounts'            : [Mount, profile.mounts],
+                 'imaging_cameras'   : [Camera, profile.cameras, 'cameras'],
+                 'guiding_cameras'   : [Camera, profile.cameras, 'cameras'],
+                 'focal_reducers'    : [FocalReducer, profile.focal_reducers],
+                 'software'          : [Software, profile.software],
+                 'filters'           : [Filter, profile.filters],
+                 'accessories'       : [Accessory, profile.accessories],
                 }.iteritems():
-        data[k] = csv.reader([request.POST['as_values_' + k]], skipinitialspace = True)
+        values = form.cleaned_data[k]
+        if 'as_values_' + k in request.POST:
+            values = request.POST['as_values_' + k]
+        data[k] = csv.reader([values], skipinitialspace = True)
         for row in data[k]:
             for name in row:
                 if name != '':
