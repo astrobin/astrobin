@@ -5,13 +5,15 @@
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
         <h2>{% trans "Edit your astrophotography gear" %}</h2>
-        <noscript>
-            <p>{% blocktrans %}
-                Use the comma to separate the items.
-            {% endblocktrans %}</p>
-        </noscript>
         <form method="post" action="/profile/save/gear/">{% csrf_token %}
             {{form.as_p}}
+            <noscript>
+                <p class="hint">
+                {% blocktrans %}
+                * use a comma to separate the values.
+                {% endblocktrans %}
+                </p>
+            </noscript>
             <p><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></p>
         </form>
     </div>  
