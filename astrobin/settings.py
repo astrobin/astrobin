@@ -84,7 +84,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
+#    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -93,7 +93,7 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'astrobin.prof.ProfilerMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
+#    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
 ROOT_URLCONF = 'astrobin.urls'
@@ -145,7 +145,6 @@ COMPILER_FORMATS = {
         'arguments': '*.less'
     },
 }
-#CACHE_BACKEND = 'memcached://unix:/var/www/astrobin_env/memcached.sock'
 CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
 
 HAYSTACK_SITECONF = 'astrobin.search_sites'
