@@ -120,6 +120,7 @@
 .text-shadow { text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px; }
 .strong {
   color: #fcfcfc;
+  font-weight: bold;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
 }
 .hidden { display: none; }
@@ -689,11 +690,17 @@ blockquote {
 }
 strong {
   color: #fcfcfc;
+  font-weight: bold;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
 }
 form p {
   margin: 0;
   padding: 2px 5px;
+}
+form p.hint {
+  font-style: italic;
+  width: 70%;
+  margin-left: 160px;
 }
 form ul {
   list-style: none;
@@ -706,6 +713,7 @@ form ul li {
 }
 form label {
   color: #fcfcfc;
+  font-weight: bold;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
   font-size: 13px;
   width: 150px;
