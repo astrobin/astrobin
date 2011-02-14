@@ -655,6 +655,7 @@ def user_profile_edit_gear(request):
                  "software", "filters", "accessories"]:
         allGear = getattr(profile, attr).all()
         prefill_dict[attr] = jsonDump(allGear)
+        form.fields[attr].initial = u', '.join(x.name for x in getattr(profile, attr).all())
 
     response_dict['prefill_dict'] = prefill_dict
     return render_to_response("user/profile/edit/gear.html",
@@ -689,7 +690,10 @@ def user_profile_save_gear(request):
                  "filters"       : [Filter, profile.filters],
                  "accessories"   : [Accessory, profile.accessories],
                 }.iteritems():
-        data[k] = csv.reader([request.POST['as_values_' + k]], skipinitialspace = True)
+        values = request.POST[k]
+        if 'as_values_' + k in request.POST:
+            values = request.POST['as_values_' + k]
+        data[k] = csv.reader([values], skipinitialspace = True)
         for row in data[k]:
             for name in row:
                 if name != '':
@@ -697,6 +701,7 @@ def user_profile_save_gear(request):
                     if created:
                         gear_item.save()
                     getattr(profile, k).add(gear_item)
+                    form.fields[k].initial = values
 
         allGear = getattr(profile, k).all()
         prefill_dict[k] = jsonDump(allGear)
