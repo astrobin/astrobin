@@ -1118,6 +1118,7 @@ form {
                 >a:link.active, >a:visited.active {
                     background: url('/static/images/user-nav-active-bg.png') no-repeat;}}
             >li.text {
+                padding-top: 47px;
                 a {
                     text-transform: lowercase;
                     padding: 0 10px;}}}}}
@@ -1523,7 +1524,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 .sub {
     .popup-mixin;
-    left: 0px; top: 28px;
+    left: 0px; top: 20px;
     li {
         text-align: left;
         a {
@@ -1564,6 +1565,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         :hover {
             color: @link-color;
             border: none;}}}
+
+li:hover >.sub, .sub:hover {
+    visibility: visible;}
 
 #notifications-popup,
 #messages-popup,
