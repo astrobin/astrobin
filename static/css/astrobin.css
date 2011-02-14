@@ -990,6 +990,7 @@ form textarea:focus {
 #header #user-nav > ul > li > a:active.icon { background: url('/static/images/user-nav-hover-bg.png') no-repeat; }
 #header #user-nav > ul > li > a:link.active { background: url('/static/images/user-nav-active-bg.png') no-repeat; }
 #header #user-nav > ul > li > a:visited.active { background: url('/static/images/user-nav-active-bg.png') no-repeat; }
+#header #user-nav > ul > li.text { padding-top: 47px; }
 #header #user-nav > ul > li.text a {
   text-transform: lowercase;
   padding: 0 10px;
@@ -1389,7 +1390,7 @@ x:default { border: none; }
   z-index: 9999;
   text-shadow: white 0 1px 0;
   left: 0px;
-  top: 28px;
+  top: 20px;
 }
 .sub strong {
   color: #2a2a2a;
@@ -1471,6 +1472,8 @@ x:default { border: none; }
   color: #cc4b2e;
   border: none;
 }
+li:hover > .sub { visibility: visible; }
+.sub:hover { visibility: visible; }
 #notifications-popup, #messages-popup, #requests-popup { width: 250px; }
 #profile-popup { width: 125px; }
 #profile-popup li a { width: 125px; }

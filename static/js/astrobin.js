@@ -607,14 +607,6 @@ var image_detail = {
         image_detail.globals.rating.current = current_rating;
         $.extend(true, image_detail.config, config);
 
-        /* Menus */
-        $(image_detail.config.topmenu).find('>li')
-            .bind('mouseover', function() {
-                image_detail.top_open($(this), image_detail.config.submenu);
-            })
-            .bind('mouseout', image_detail.top_timer)
-            .bind('click', image_detail.top_close);
-
         /* Rating */
         image_detail.setup_raty();
 
