@@ -240,7 +240,7 @@
                         active_a = 0;
                         if (old_open_popup.get(0) == popup.get(0) &&
                             old_active_a.get(0) == a.get(0)) {
-                            return;
+                            return false;
                         }
                     }
 
@@ -255,6 +255,8 @@
                         popup.css('visibility', 'hidden');
                         open_popup = 0;
                     });
+
+                    return false;
                 });
 
                 var notifications_read_timer = 0;
