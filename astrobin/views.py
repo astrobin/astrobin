@@ -389,16 +389,17 @@ def image_edit_save_basic(request):
 
     for i in [[image.subjects, 'subjects', Subject],
               [image.locations, 'locations', Location]]:
-        reader = csv.reader([request.POST['as_values_' + i[1]]],
-                            skipinitialspace = True)
-        for row in reader:
-            for name in row:
-                if name != '':
-                    k, created = i[2].objects.get_or_create(name = name)
-                    if created:
-                        k.save()
-                    i[0].add(k)
-        prefill_dict[i[1]] = jsonDump(i[0].all())
+        if 'as_values_' + i[1] in request.POST:
+            reader = csv.reader([request.POST['as_values_' + i[1]]],
+                                skipinitialspace = True)
+            for row in reader:
+                for name in row:
+                    if name != '':
+                        k, created = i[2].objects.get_or_create(name = name)
+                        if created:
+                            k.save()
+                        i[0].add(k)
+            prefill_dict[i[1]] = jsonDump(i[0].all())
 
     image.title = form.cleaned_data['title'] 
     image.description = form.cleaned_data['description']
@@ -594,6 +595,7 @@ def user_profile_edit_basic(request):
     """Edits own profile"""
     profile = UserProfile.objects.get(user = request.user)
     form = UserProfileEditBasicForm(instance = profile)
+    form.fields['locations'].initial = u', '.join(x.name for x in profile.locations.all())
     response_dict = {
         'form': form,
         'prefill_dict': {'locations': jsonDump(profile.locations.all())}
@@ -614,7 +616,10 @@ def user_profile_save_basic(request):
     if form.is_valid():
         profile = UserProfile.objects.get(user = request.user)
         profile.locations.clear()
-        reader = csv.reader([request.POST['as_values_locations']],
+        values = form.cleaned_data['locations']
+        if 'as_values_locations' in request.POST:
+            values = request.POST['as_values_locations']
+        reader = csv.reader([values],
                             skipinitialspace = True)
         for row in reader:
             for name in row:
@@ -629,6 +634,7 @@ def user_profile_save_basic(request):
         profile.hobbies  = form.cleaned_data['hobbies']
 
         profile.save()
+        form.fields['locations'].initial = values
 
     response_dict['prefill_dict'] = {'locations': jsonDump(profile.locations.all()) }
     return render_to_response("user/profile/edit/basic.html",
