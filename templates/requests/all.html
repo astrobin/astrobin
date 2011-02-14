@@ -4,6 +4,7 @@
 {% block content %}
     <div class="full-box clear">
         <h2>{% trans "Here are your requests" %}</h2>
+        {% if req_list %}
             <table class="requests">
                 <tr>
                     <th>{% trans "When" %}</th>
@@ -20,9 +21,10 @@
                     <td><a href="{% url views.image_detail req.image.id %}">{{req.image.title|escape}}</a></td>
                     <td>{% if req.fulfilled %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
                 </tr>
-            {% empty %}
-                <tr><td span="4">{% trans "You have no requests." %}</td></tr>
             {% endfor %}
             </table>
+        {% else %}
+            <p>{% trans "You have no requests." %}</p>
+        {% endif %}
     </div>
 {% endblock %}
