@@ -6,7 +6,23 @@
     <div class="sided-main-content">
     <h1>{% trans "Edit your image: basic information" %}</h1>
     <form action="/edit/save/basic/" method="post">{% csrf_token %}
+        <p class="hint">
+            {% blocktrans %}
+            Remember that AstroBin will try to identify the subjects automatically,
+            so you can leave that empty and come check it out later!
+            {% endblocktrans %}
+        </p>
+
         {{form.as_p}}
+
+        <noscript>
+            <p class="hint">
+            {% blocktrans %}
+            * use a comma to separate the values.
+            {% endblocktrans %}
+            </p>
+        </noscript>
+
         <input type="hidden" name="image_id" value="{{image.id}}" />
         <ul>
             <li><input class="button submit-button" type="submit" value="{% trans "Save and continue" %} &rarr;" /></li>
