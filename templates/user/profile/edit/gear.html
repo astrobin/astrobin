@@ -5,29 +5,37 @@
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
         <h2>{% trans "Edit your astrophotography gear" %}</h2>
+        <noscript>
+            <p>{% blocktrans %}
+                Use the comma to separate the items.
+            {% endblocktrans %}</p>
+        </noscript>
         <form method="post" action="/profile/save/gear/">{% csrf_token %}
             {{form.as_p}}
-            <script language="javascript">
-            $(document).ready(function() {
-                var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
-                var emptyText = '{% trans "No results. Press TAB to add it!" %}';
-                {% autoescape off %}
-                {% for key, value in prefill_dict.items %}
-                $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
-                    {asHtmlID: '{{key}}',
-                    selectedItemProp: 'name',
-                    searchObjProps: 'name',
-                    preFill: {{value}},
-                    selectedItemProp: 'name',
-                    selectedValuesProp: 'name',
-                    startText: startText,
-                    emptyText: emptyText});
-                {% endfor %}
-                {% endautoescape %}
-            });
-            </script>
             <p><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></p>
         </form>
     </div>  
+{% endblock %}
+
+{% block extra_js %}
+    <script language="javascript">
+    $(document).ready(function() {
+        var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
+        var emptyText = '{% trans "No results. Press TAB to add it!" %}';
+        {% autoescape off %}
+        {% for key, value in prefill_dict.items %}
+        $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
+            {asHtmlID: '{{key}}',
+            selectedItemProp: 'name',
+            searchObjProps: 'name',
+            preFill: {{value}},
+            selectedItemProp: 'name',
+            selectedValuesProp: 'name',
+            startText: startText,
+            emptyText: emptyText});
+        {% endfor %}
+        {% endautoescape %}
+    });
+    </script>
 {% endblock %}
 
