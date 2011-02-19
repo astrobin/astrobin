@@ -336,9 +336,13 @@ def image_edit_gear(request, id):
 @login_required
 @require_GET
 def image_edit_acquisition(request, id):
-    image = Image.objects.get(pk=id)
+    image = get_object_or_404(Image, pk=id)
     if request.user != image.user:
-        return HttpResponseForbidden();
+        return HttpResponseForbidden()
+
+    edit_type = None
+    if 'type' in request.GET:
+        edit_type = request.GET['type']
 
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
@@ -357,8 +361,30 @@ def image_edit_acquisition(request, id):
     response_dict = {
         'image': image,
         'image_type': image_type,
+        'edit_type': edit_type if image_type is None else image_type,
         'deep_sky_acquisitions': deep_sky_acquisitions,
         'solar_system_acquisition': solar_system_acquisition,
+        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
+        's3_url':settings.S3_URL,
+        'is_ready':image.is_stored,
+    }
+    return render_to_response('image/edit/acquisition.html',
+                              response_dict,
+                              context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
+def image_edit_acquisition_reset(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    DeepSky_Acquisition.objects.filter(image=image).delete()
+    SolarSystem_Acquisition.objects.filter(image=image).delete()
+
+    response_dict = {
+        'image': image,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
@@ -552,6 +578,7 @@ def image_edit_save_acquisition(request):
     response_dict = {
         'image': image,
         'image_type': image_type,
+        'edit_type': image_type,
         'deep_sky_acquisitions': deep_sky_acquisitions,
         'solar_system_acquisition': solar_system_acquisition,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,

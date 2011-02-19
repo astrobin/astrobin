@@ -144,6 +144,7 @@
   height: 0;
   content: " ";
 }
+.js { display: none; }
 .icon-edit { background: url('/static/icons/iconic/black/edit.png') no-repeat left center; }
 .icon-edit-gear { background: url('/static/icons/iconic/black/edit-gear.png') no-repeat left center; }
 .icon-edit-acquisition { background: url('/static/icons/iconic/black/edit-acquisition.png') no-repeat left center; }
@@ -774,6 +775,7 @@ form textarea:focus {
 }
 .button {
   font-size: 13px;
+  color: #b8b8b8;
   border: 1px solid #cc4b2e;
   border-top: 1px solid #ff6c42;
   background: #cc4b2e;
@@ -808,6 +810,80 @@ form textarea:focus {
   background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
   color: #fcfcfc;
 }
+.button:link {
+  font-size: 13px;
+  color: #b8b8b8;
+  border: 1px solid #cc4b2e;
+  border-top: 1px solid #ff6c42;
+  background: #cc4b2e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f45a37), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #f45a37, #cc4b2e);
+  color: #fcfcfc;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 12px 0;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+.button:link:hover {
+  border-top-color: #ff8752;
+  background: #f45a37;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
+  color: #ffffff;
+}
+.button:link:active {
+  border-color: #f45a37;
+  border-top-color: #aa3e26;
+  background: #f45a37;
+  background: -webkit-gradient(linear, left top, left bottom, from(#cc4b2e), to(#f45a37));
+  background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
+  color: #fcfcfc;
+}
+.button:visited {
+  font-size: 13px;
+  color: #b8b8b8;
+  border: 1px solid #cc4b2e;
+  border-top: 1px solid #ff6c42;
+  background: #cc4b2e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f45a37), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #f45a37, #cc4b2e);
+  color: #fcfcfc;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 12px 0;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+.button:visited:hover {
+  border-top-color: #ff8752;
+  background: #f45a37;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
+  color: #ffffff;
+}
+.button:visited:active {
+  border-color: #f45a37;
+  border-top-color: #aa3e26;
+  background: #f45a37;
+  background: -webkit-gradient(linear, left top, left bottom, from(#cc4b2e), to(#f45a37));
+  background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
+  color: #fcfcfc;
+}
 .dangerous-button {
   border: 1px solid #c70000;
   border-top: 1px solid #ee0000;
@@ -824,6 +900,29 @@ form textarea:focus {
   color: #ffffff;
 }
 .dangerous-button:active {
+  border-color: #c70000;
+  border-bottom-color: #ee0000;
+  background: #a50000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#c70000), to(#a50000));
+  background: -moz-linear-gradient(top, #c70000, #a50000);
+  color: #ffffff;
+}
+.dangerous-button:link {
+  border: 1px solid #c70000;
+  border-top: 1px solid #ee0000;
+  background: #c70000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ee0000), to(#c70000));
+  background: -moz-linear-gradient(top, #ee0000, #c70000);
+  color: #fcfcfc;
+}
+.dangerous-button:link:hover {
+  border-top-color: #ff0000;
+  background: #ee0000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), to(#c70000));
+  background: -moz-linear-gradient(top, #ff0000, #c70000);
+  color: #ffffff;
+}
+.dangerous-button:link:active {
   border-color: #c70000;
   border-bottom-color: #ee0000;
   background: #a50000;
@@ -1766,3 +1865,4 @@ p.info {
   border-bottom: 1px solid #666666;
   background-color: #ffffd0;
 }
+.simple-choice { margin-left: 20px; }
