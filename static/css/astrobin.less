@@ -214,6 +214,9 @@
     height:0;
     content: " ";}
 
+.js {
+    display: none;}
+
 .icon-edit {
     background: url('/static/icons/iconic/black/edit.png') no-repeat left center;}
 .icon-edit-gear {
@@ -970,8 +973,9 @@ form {
         background-color: @input-color * @hilight-factor;
         color: @strong-text-color;}}
 
-.button {
+.button, .button:link, .button:visited {
     font-size: @base-font-size;
+    color: @text-color;
     .button-gradient;
     .rounded-corners;
     .box-shadow;
@@ -986,7 +990,7 @@ form {
     :active {
         .button-gradient-active;}}
 
-.dangerous-button {
+.dangerous-button, .dangerous-button:link {
     .danger-gradient;
     :hover {
         .danger-gradient-hilighted;}
@@ -1855,3 +1859,6 @@ p.info {
     padding: 30px 10px;
     .common-border;
     background-color: #FFFFD0;}
+
+.simple-choice {
+margin-left: 20px;}
