@@ -130,14 +130,14 @@ def image_detail(request, id):
         image_type = 'deep_sky'
 
         deep_sky_data[0][1] = [a.date for a in deep_sky_acquisitions if a.date is not None]
-        deep_sky_data[1][1] = ['%dx%d @ ISO%d' % (a.number, a.duration, a.iso) for a in deep_sky_acquisitions if a.acquisition_type == 'l']
-        deep_sky_data[2][1] = ['%dx%d @ ISO%d' % (a.number, a.duration, a.iso) for a in deep_sky_acquisitions if a.acquisition_type == 'r']
-        deep_sky_data[3][1] = ['%dx%d @ ISO%d' % (a.number, a.duration, a.iso) for a in deep_sky_acquisitions if a.acquisition_type == 'g']
-        deep_sky_data[4][1] = ['%dx%d @ ISO%d' % (a.number, a.duration, a.iso) for a in deep_sky_acquisitions if a.acquisition_type == 'b']
-        deep_sky_data[5][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == 'd']
-        deep_sky_data[6][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == 'o']
-        deep_sky_data[7][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == 'f']
-        deep_sky_data[8][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == 'x']
+        deep_sky_data[1][1] = ['%sx%s @ ISO%s' % (a.number, a.duration, a.iso if a.iso else '-') for a in deep_sky_acquisitions if a.acquisition_type == '0l']
+        deep_sky_data[2][1] = ['%sx%s @ ISO%s' % (a.number, a.duration, a.iso if a.iso else '-') for a in deep_sky_acquisitions if a.acquisition_type == '1r']
+        deep_sky_data[3][1] = ['%sx%s @ ISO%s' % (a.number, a.duration, a.iso if a.iso else '-') for a in deep_sky_acquisitions if a.acquisition_type == '2g']
+        deep_sky_data[4][1] = ['%sx%s @ ISO%s' % (a.number, a.duration, a.iso if a.iso else '-') for a in deep_sky_acquisitions if a.acquisition_type == '3b']
+        deep_sky_data[5][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '4d']
+        deep_sky_data[7][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '5f']
+        deep_sky_data[8][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '6x']
+        deep_sky_data[6][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '7o']
     elif solar_system_acquisition:
         image_type = 'solar_system'
 
@@ -270,7 +270,7 @@ def image_upload_process(request):
 def image_edit_basic(request, id):
     image = get_object_or_404(Image, pk=id)
     if request.user != image.user:
-        return HttpResponseForbidden();
+        return HttpResponseForbidden()
 
     form = ImageEditBasicForm({
         'title': image.title,
@@ -299,7 +299,7 @@ def image_edit_gear(request, id):
     profile = UserProfile.objects.get(user=request.user)
     image = Image.objects.get(pk=id)
     if request.user != image.user:
-        return HttpResponseForbidden();
+        return HttpResponseForbidden()
 
     prefill_dict = {}
     prefill_form = {}
@@ -344,7 +344,8 @@ def image_edit_acquisition(request, id):
     if 'type' in request.GET:
         edit_type = request.GET['type']
 
-    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+    dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
+    deep_sky_acquisitions = list(dsa_qs)
     solar_system_acquisition = None
     image_type = None
 
@@ -357,6 +358,12 @@ def image_edit_acquisition(request, id):
         image_type = 'deep_sky'
     elif solar_system_acquisition:
         image_type = 'solar_system'
+
+    if image_type == 'deep_sky' or edit_type == 'deep_sky':
+        for t in ('0l', '1r', '2g', '3b', '4d', '5f', '6x', '7o'):
+            if not DeepSky_Acquisition.objects.filter(image=image, acquisition_type=t):
+                deep_sky_acquisitions.append(DeepSky_Acquisition(acquisition_type=t))
+    deep_sky_acquisitions = sorted(deep_sky_acquisitions, key=lambda a: a.acquisition_type)
 
     response_dict = {
         'image': image,
@@ -401,7 +408,7 @@ def image_edit_save_basic(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
     if request.user != image.user:
-        return HttpResponseForbidden();
+        return HttpResponseForbidden()
 
     response_dict = {'form': form,
                      'image': image,
@@ -452,7 +459,7 @@ def image_edit_save_gear(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
     if request.user != image.user:
-        return HttpResponseForbidden();
+        return HttpResponseForbidden()
 
     image.imaging_telescopes.clear()
     image.guiding_telescopes.clear()
@@ -518,7 +525,7 @@ def image_edit_save_acquisition(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
     if request.user != image.user:
-        return HttpResponseForbidden();
+        return HttpResponseForbidden()
 
     image_type = request.POST.get('image_type')
 
@@ -534,13 +541,15 @@ def image_edit_save_acquisition(request):
         from collections import defaultdict
         deep_sky_acquisitions = defaultdict(DeepSky_Acquisition)
         for field, value in request.POST.iteritems():
-            if field[1] == '_':
+            if field[2] == '_':
                 acquisition_type, sequence_number, attribute = field.split('_')
                 if attribute == 'date' and value == 'yyyy-mm-dd':
-                    value = '';
+                    value = ''
+                if value == 'None':
+                    value = ''
                 if value != '':
                     setattr(deep_sky_acquisitions[int(sequence_number)], attribute, value)
-                setattr(deep_sky_acquisitions[int(sequence_number)], 'acquisition_type', acquisition_type)
+                    setattr(deep_sky_acquisitions[int(sequence_number)], 'acquisition_type', acquisition_type)
 
         for a in deep_sky_acquisitions.values():
             a.image = image
@@ -567,7 +576,13 @@ def image_edit_save_acquisition(request):
         solar_system_acquisition.save()
 
     # get them again because of date issues
-    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+    deep_sky_acquisitions = list(DeepSky_Acquisition.objects.filter(image=image))
+    # add missing ones
+    for t in ('0l', '1r', '2g', '3b', '4d', '5f', '6x', '7o'):
+        if not DeepSky_Acquisition.objects.filter(image=image, acquisition_type=t):
+            deep_sky_acquisitions.append(DeepSky_Acquisition(image=image, acquisition_type=t))
+    deep_sky_acquisitions = sorted(deep_sky_acquisitions, key=lambda a: a.acquisition_type)
+
     solar_system_acquisition = None
 
     try:
@@ -596,7 +611,7 @@ def image_edit_save_acquisition(request):
 def image_delete(request, id):
     image = get_object_or_404(Image, pk=id) 
     if request.user != image.user:
-        return HttpResponseForbidden();
+        return HttpResponseForbidden()
 
     image.delete()
     return render_to_response("user/profile.html",
@@ -786,7 +801,7 @@ def user_profile_flickr_import(request):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
         link = flickr.web_login_url(perms='read')
-        response_dict['flickr_link'] = link;
+        response_dict['flickr_link'] = link
         return render_to_response("user/profile/flickr_import.html",
             response_dict,
             context_instance=RequestContext(request))
@@ -1018,7 +1033,7 @@ def requests(request):
 def request_additional_information(request, image_id):
     image = None
     try:
-        image = Image.objects.get(id=image_id);
+        image = Image.objects.get(id=image_id)
     except:
         return ajax_fail()
 
@@ -1031,7 +1046,7 @@ def request_additional_information(request, image_id):
         message=message, # not implemented yet
         type='INFO')
     r.save()
-    push_request(image.user, r);
+    push_request(image.user, r)
 
     return ajax_success()
 
@@ -1041,7 +1056,7 @@ def request_additional_information(request, image_id):
 def request_fits(request, image_id):
     image = None
     try:
-        image = Image.objects.get(id=image_id);
+        image = Image.objects.get(id=image_id)
     except:
         return ajax_fail()
 
@@ -1055,7 +1070,7 @@ def request_fits(request, image_id):
         message=message, # not implemented yet
         type='FITS')
     r.save()
-    push_request(image.user, r);
+    push_request(image.user, r)
 
     return ajax_success()
 

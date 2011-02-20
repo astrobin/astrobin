@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load tags %}
 
 {% block content %}
     {% include 'image/edit/menu.html' %}   
@@ -96,17 +97,65 @@
             </ul>
         </form>
     {% else %}
-        {% if edit_type == 'deep_sky' %}
-        {% else %}
-            <p>{% trans "What kind of image is this?" %}</p>
-            <div class="simple-choice">
-                <a class="button" href="{% url views.image_edit_acquisition image.id %}?type=solar_system">
-                    Solar system
-                </a>
-                <a class="button" href="{% url views.image_edit_acquisition image.id %}?type=deep_sky">
-                    Deep sky
-                </a>
-            </div>
-        {% endif %}
+    {% if edit_type == 'deep_sky' %}
+        <form id="image_acquisition" action="/edit/save/acquisition/" method="post">{% csrf_token %}
+        {% for a in deep_sky_acquisitions %}
+            <ul class="inline">
+                <li>
+                    <p>
+                        <label for="{{a.acquisition_type}}_{{forloop.counter0}}_number">{% acquisition_label a.acquisition_type %} ({% trans "num" %})</label>
+                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_number" id="{{a.acquisition_type}}_{{forloop.counter0}}_number"
+                               class="frame validate[custom[onlyNuber]]" max_length="4" size="4"
+                               value="{% if a.number != None %}{{a.number}}{% endif %}"/>
+                    </p>
+                </li>
+                {% if a.acquisition_type == '0l' or a.acquisition_type == '1r' or a.acquisition_type == '2g' or a.acquisition_type == '3b' %}
+                <li>
+                    <p>
+                        <label class="notfirst" for="{{a.acquisition_type}}_{{forloop.counter0}}_duration">{% trans "x secs" %}</label>
+                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_duration" id="{{a.acquisition_type}}_{{forloop.counter0}}_duration"
+                               class="frame validate[custom[onlyNumber]]" max_lenght="4"  size="4"
+                               value="{% if a.duration != None %}{{a.duration}}{% endif %}"/>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <label class="notfirst" for="{{a.acquisition_type}}_{{forloop.counter0}}_iso">{% trans "ISO" %}</label>
+                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_so" id="{{a.acquisition_type}}_{{forloop.counter0}}_iso"
+                               class="frame validate[custom[onlyNumber]]" max_lenght="4"  size="4"
+                               value="{% if a.iso != None %}{{a.iso}}{% endif %}"/>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <label class="notfirst" for="{{a.acquisition_type}}_{{forloop.counter0}}_date">{% trans "Date" %}</label>
+                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_so" id="{{a.acquisition_type}}_{{forloop.counter0}}_date"
+                               class="date datepickerclass frame validate[custom[onlyNumber]]"
+                               value="{{a.date|date:'Y-m-d'}}"/>
+                    </p>
+                </li>
+                {% endif %}
+            </ul>
+        {% endfor %}
+            <input type="hidden" name="image_id" value="{{image.id}}" />
+            <input type="hidden" name="image_type" value="deep_sky" />
+            <ul style="clear:both">
+                <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+                <li><a class="button dangerous-button inline-button" href="{% url views.image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
+                <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+            </ul>
+        </form>
+
+    {% else %}
+        <p>{% trans "What kind of image is this?" %}</p>
+        <div class="simple-choice">
+            <a class="button" href="{% url views.image_edit_acquisition image.id %}?type=solar_system">
+                Solar system
+            </a>
+            <a class="button" href="{% url views.image_edit_acquisition image.id %}?type=deep_sky">
+                Deep sky
+            </a>
+        </div>
+    {% endif %}
     {% endif %}
 {% endblock %}

@@ -178,12 +178,14 @@ class Acquisition(models.Model):
     date = models.DateField(null=True, blank=True)
     image = models.ForeignKey(Image)
 
-
 class DeepSky_Acquisition(Acquisition):
     acquisition_type = models.CharField(max_length=2)
     number = models.IntegerField()
     duration = models.IntegerField(null=True, blank=True)
     iso = models.IntegerField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['acquisition_type']
 
     def __unicode__(self):
         return ''
