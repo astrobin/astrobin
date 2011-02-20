@@ -1014,6 +1014,23 @@ form textarea:focus {
 #header #nav ul li a:hover { background: url('/static/images/header-hover-bg.png') no-repeat; }
 #header #nav ul li a:active { background: url('/static/images/header-hover-bg.png') no-repeat; }
 #header #nav ul li#current > a { color: #fcfcfc; }
+#header #noscript {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 65%;
+  padding: 4px 12px;
+  border: 1px solid #222222;
+  border-bottom: 1px solid #666666;
+  color: #333333;
+  background-color: #fafad2;
+  font-size: 90%;
+  font-weight: bold;
+}
+#header #noscript p {
+  padding: 0;
+  margin: 0;
+}
 #header #search {
   position: absolute;
   top: 12px;
