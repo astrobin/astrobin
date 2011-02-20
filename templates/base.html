@@ -41,6 +41,17 @@
             <div id="header">
                 <a name="top"></a>
                 {% block header %}
+                <noscript>
+                <div id="noscript">
+                    <p>
+                    {% blocktrans %}
+                        Hey! It looks like your browser doesn't support Javascript, or you disabled it.
+                        AstroBin will provide you with a much more pleasant experience if you enable
+                        Javascript.
+                    {% endblocktrans %}
+                    </p>
+                </div>
+                </noscript>
                 <div id="search">
                     <form id="quick-search" action="/search/" method="get" >
                         <p>

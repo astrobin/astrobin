@@ -3,6 +3,7 @@
 @link-color: #CC4B2E;
 @strong-text-color: #FCFCFC;
 @logo-color: #3092CF;
+@notice-color: #fafad2;
 @danger-color: #C70000;
 
 @header-color: @strong-text-color;
@@ -1067,6 +1068,19 @@ form {
             li#current {
                 >a {
                     color: @strong-text-color;}}}}
+    #noscript {
+        position: absolute;
+        top: @spacer-small; left: 0;
+        width: 65%;
+        padding: @spacer-small @spacer-large;
+        .common-border;
+        color: @background-color;
+        background-color: @notice-color;
+        font-size: 90%;
+        font-weight: bold;
+        p {
+            padding: 0;
+            margin: 0;}}
     #search {
         position: absolute;
         top: 12px; right: 0;
