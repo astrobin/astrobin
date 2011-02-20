@@ -1,0 +1,60 @@
+upstream app_server {
+    server 127.0.0.1:8082 fail_timeout=0;
+}
+
+server {
+    listen 80 default;
+    client_max_body_size 4G;
+    server_name _;
+    
+	access_log /var/log/nginx/astrobin.com-access.log;
+	error_log /var/log/nginx/astrobin.com-error.log;
+
+    keepalive_timeout 5;
+    proxy_read_timeout 300;
+
+    location /static/  {
+        root /var/www/astrobin_env/www/astrobin;
+        expires 30d;
+    }
+
+    location / {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        if (!-f $request_filename) {
+            proxy_pass http://app_server;
+            break;
+        }
+        proxy_pass http://app_server;
+    }
+
+    location /favicon.ico {
+        root /var/www/astrobin_env/www/astrobin/static;
+    }
+
+    # internal publish endpoint (keep it private / protected)
+    location /publish {
+        set $push_channel_id $arg_id;      #/?id=239aff3 or somesuch
+        push_publisher;
+
+        push_store_messages off;           # disable message queueing 
+        push_message_timeout 0;            # never expire buffer messages
+        push_message_buffer_length 0;      # don't store messages
+        #push_min_message_recipients 0;    # minimum recipients before purge
+    }
+
+    # public long-polling endpoint
+    location /activity {
+        push_subscriber;
+
+        # how multiple listener requests to the same channel id are handled
+        # - last: only the most recent listener request is kept, 409 for others.
+        # - first: only the oldest listener request is kept, 409 for others.
+        # - broadcast: any number of listener requests may be long-polling.
+        push_subscriber_concurrency broadcast;
+        set $push_channel_id $arg_id;
+        default_type  text/plain;
+    } 
+}
+
