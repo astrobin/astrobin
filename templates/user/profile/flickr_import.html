@@ -5,29 +5,39 @@
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
         <h2>{% trans "Import your photos from Flickr" %}</h2>
-        <form name="flickr_form" action="">{% csrf_token %}
-            {% if flickr_sets %}
-            <p id="flickr_sets">
-                <label for="id_flickr_sets">{% trans "Which set" %}:</label>
-                <select id="id_flickr_sets">
-                {% for title, id in flickr_sets.items %}
-                    <option value="{{id}}">{{title}}</option>
-                {% endfor %}
-                </select>
-            </p>
-            <p id="flickr_photos" class="hidden"></p>
-            <p id="flickr_progress" class="hidden"></p>
-            <p id="flickr_progress_message" class="hidden"></p>
-            {% endif %}
-
-            <p id="button">
+        <div class="js">
+            <form name="flickr_form" action="">{% csrf_token %}
                 {% if flickr_sets %}
-                <input class="button submit-button" type="submit" value="{% trans "Import photos" %} &rarr;"/>
-                {% else %}
-                <input class="button lone-button" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
+                <p id="flickr_sets">
+                    <label for="id_flickr_sets">{% trans "Which set" %}:</label>
+                    <select id="id_flickr_sets">
+                    {% for title, id in flickr_sets.items %}
+                        <option value="{{id}}">{{title}}</option>
+                    {% endfor %}
+                    </select>
+                </p>
+                <p id="flickr_photos" class="hidden"></p>
+                <p id="flickr_progress" class="hidden"></p>
+                <p id="flickr_progress_message" class="hidden"></p>
                 {% endif %}
+
+                <p id="button">
+                    {% if flickr_sets %}
+                    <input class="button submit-button" type="submit" value="{% trans "Import photos" %} &rarr;"/>
+                    {% else %}
+                    <input class="button lone-button" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
+                    {% endif %}
+                </p>
+            </form>
+        </div>
+        <noscript>
+            <p>
+                {% blocktrans %}
+                Unfortunately you need to enable Javascript to be able to import
+                photos from Flickr at this time.
+                {% endblocktrans %}
             </p>
-        </form>
+        </noscript>
     </div>  
 {% endblock %}
 
@@ -38,6 +48,9 @@ $(function() {
     var phase = 0; // nothing done yet
     var link = '{% autoescape off %}{{flickr_link}}{% endautoescape %}';
     var refresh_id;
+
+    $('.js').css('display', 'block');
+
     if (link == '') {
         // we have passed the user authentication phase
         phase++;
