@@ -8,6 +8,29 @@
 
 
 {% block content %}
+    {% if request.user == user %}
+    <div class="tools-box clear">
+        <ul>
+            <li>
+                <a href="{% url views.user_profile_edit_basic %}">
+                    <img src="/static/icons/iconic/orange/edit_profile.png" alt="{% trans "Edit profile" %}"/>
+                </a>
+                <a href="{% url views.user_profile_edit_basic %}">
+                    {% trans "Edit profile" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url auth_logout %}">
+                    <img src="/static/icons/iconic/orange/logout.png" alt="{% trans "Logout" %}"/>
+                </a>
+                <a href="{% url auth_logout %}">
+                    {% trans "Logout" %}
+                </a>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+
     <div id="technical-card">
         <h3>{% trans "User's card" %}: {{user.username}}</h3>
         <div class="gear">

@@ -1430,13 +1430,26 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin: 20px auto 20px;
     padding: 10px;
     .rounded-corners(12px);
-    .box-shadow;
     background-color: @light-panel-color;
     .common-border;
     width: 50%;
     margin-top: @spacer-xxlarge;
     .single-form {
         text-align: center;}}
+
+.tools-box {
+    .small-box;
+    padding: @spacer-xlarge;
+    text-align: center;
+    ul {
+        list-style: none;
+        display: inline;}
+    li {
+        padding: 0 @spacer-large;
+        float: left;}
+    a:link {
+        padding: @spacer-small 0;
+        display: block;}}
 
 .full-box {
     width: @site-width - 80px;
@@ -1635,7 +1648,6 @@ span.copy-box {
     overflow: auto;
     background-color: @light-panel-color;
     .rounded-corners;
-    .box-shadow;
     .gear, .acquisition {
         float: left;
         width: 48%;

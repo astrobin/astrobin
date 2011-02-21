@@ -90,18 +90,24 @@
                         <ul>
                         {% if user.is_authenticated %}
                             <li>
-                                <a class="icon" href="#"><img alt="Account" src="/static/icons/iconic/orange/profile.png"/></a>
+                                <a class="icon" href="{% url views.user_page user %}">
+                                    <img alt="Account" src="/static/icons/iconic/orange/profile.png"/>
+                                </a>
                                 <div class="popup" id="profile-popup">
                                     <ul>
                                         <li>
-                                            <a href="{% url auth_logout %}">{% trans "Log out" %}</a>
+                                            <a href="{% url views.user_page user %}">{% trans "View your profile" %}</a>
+                                        </li>
+                                        <li>
+                                            <a href="/profile/edit/basic/">{% trans "Edit your profile" %}</a>
                                         </li>
                                         <li>
                                             <a href="/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a>
                                         </li>
-                                        <li id="{% current request "^/profile/" %}">
-                                            <a href="/profile/edit/basic/">{% trans "Profile" %}</a>
+                                        <li>
+                                            <a href="{% url auth_logout %}">{% trans "Logout" %}</a>
                                         </li>
+
                                     </ul>
                                </div>
                             </li>

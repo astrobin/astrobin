@@ -1388,9 +1388,6 @@ x:default { border: none; }
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   border-radius: 12px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   background-color: #4c4c4c;
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
@@ -1398,6 +1395,33 @@ x:default { border: none; }
   margin-top: 28px;
 }
 .small-box .single-form { text-align: center; }
+.tools-box {
+  margin: 20px auto 20px;
+  padding: 10px;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+  background-color: #4c4c4c;
+  border: 1px solid #222222;
+  border-bottom: 1px solid #666666;
+  width: 50%;
+  margin-top: 28px;
+  padding: 16px;
+  text-align: center;
+}
+.tools-box .single-form { text-align: center; }
+.tools-box ul {
+  list-style: none;
+  display: inline;
+}
+.tools-box li {
+  padding: 0 12px;
+  float: left;
+}
+.tools-box a:link {
+  padding: 4px 0;
+  display: block;
+}
 .full-box {
   width: 880px;
   padding: 28px;
@@ -1639,9 +1663,6 @@ span.copy-box {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
 }
 #technical-card .gear {
   float: left;
