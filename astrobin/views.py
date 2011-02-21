@@ -645,7 +645,6 @@ def user_page(request, username):
                          's3_thumbnails_bucket':settings.S3_THUMBNAILS_BUCKET,
                          's3_abpod_bucket':settings.S3_ABPOD_BUCKET,
                          's3_url':settings.S3_URL,
-                         'user':user,
                          'gear_list':gear_list})
 
 
