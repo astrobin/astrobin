@@ -34,12 +34,8 @@
         <div class="single-form">
             <form id="upload" action="/upload/process" method="post" enctype="multipart/form-data">
                 <p><input type="file" name="file" id="id_file"/></p>
-                <p>
-                    {% blocktrans %}
-                    Choose an image to upload, or
-                    <a href="/profile/edit/flickr/">import from Flickr</a>
-                    {% endblocktrans %}
-                </p>
+                <p>{% trans "Choose an image to upload, or" %}
+                <p><a href="/profile/edit/flickr/">{% trans "import from Flickr" %}</a></p>
             </form>
         </div>
     </div>
