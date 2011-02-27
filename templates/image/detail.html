@@ -50,7 +50,7 @@
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
                                 <ul class="subnav">
-                                    <li class="first {% if inverted %}bg-icon icon-normal{% else %}bg-icon icon-inverted{% endif %}">
+                                    <li class="first {% if inverted or solved %}bg-icon icon-normal{% else %}bg-icon icon-inverted{% endif %}">
                                         {% if inverted or solved %}
                                         <span class="text"><a href="{{image.get_absolute_url}}/">{% trans "Normal" %}</a></span>
                                         {% else %}
@@ -123,7 +123,8 @@
                         {% endif %}
                         {% if solved %}
                         <img src="http://{{s3_solved_bucket}}.{{s3_url}}/{{image.filename}}.png" alt="{{image.title|escape}}"/>
-                        {% else %}
+                        {% endif %}
+                        {% if not inverted and not solved %}
                         <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
                             <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         </a>
@@ -137,7 +138,8 @@
                     {% endif %}
                     {% if solved %}
                     <img src="http://{{s3_solved_bucket}}.{{s3_url}}/{{image.filename}}.png" alt="{{image.title|escape}}"/>
-                    {% else %}
+                    {% endif %}
+                    {% if not inverted and not solved %}
                     <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
                         <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
                     </a>
