@@ -1142,7 +1142,8 @@ form {
                     background: url('/static/images/user-nav-active-bg.png') no-repeat;}}
             >li.text {
                 padding-top: 47px;
-                a {
+                a, a:link, a:visited, a:active {
+                    background: none;
                     text-transform: lowercase;
                     padding: 0 10px;}}}}}
 
@@ -1437,10 +1438,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .single-form {
         text-align: center;}}
 
+.full-box {
+    width: @site-width - 80px;
+    padding: @spacer-xxlarge;
+    margin: @spacer-large 0;
+    .rounded-corners;
+    background-color: @light-panel-color;
+    .common-border;}
+
 .tools-box {
-    .small-box;
-    padding: @spacer-xlarge;
-    text-align: center;
+    .full-box;
     ul {
         list-style: none;
         display: inline;}
@@ -1450,14 +1457,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     a:link {
         padding: @spacer-small 0;
         display: block;}}
-
-.full-box {
-    width: @site-width - 80px;
-    padding: @spacer-xxlarge;
-    margin: 0;
-    .rounded-corners;
-    background-color: @light-panel-color;
-    .common-border;}
 
 #image-detail {
     #main-content {

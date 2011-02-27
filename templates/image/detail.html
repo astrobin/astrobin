@@ -69,10 +69,10 @@
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
                                 <ul class="subnav">
-                                    <li class="first {% if not user.is_authenticated %}last{% endif %} bg-icon icon-profile">
+                                    <li class="first {% if not request.user.is_authenticated %}last{% endif %} bg-icon icon-profile">
                                         <span class="text"><a href="{{image.user.get_absolute_url}}">{% trans "View profile" %}</a></span>
                                     </li>
-                                    {% if user.is_authenticated %}
+                                    {% if request.user.is_authenticated %}
                                     <li class="bg-icon {% if follows %}icon-unfollow{% else %}icon-follow{% endif %}">
                                         <span class="text">
                                             <a class="{% if follows %}unfollow{% else %}follow{% endif %}" href="#">
@@ -280,7 +280,7 @@ $(document).ready(function() {
                     '{% trans "Regular" %}',
                     '{% trans "Good" %}',
                     '{% trans "Gorgeous" %}'],
-                read_only: {% if user.is_authenticated %} false {% else %} true {% endif %}
+                read_only: {% if request.user.is_authenticated %} false {% else %} true {% endif %}
             },
             upload_revision_action: {
                 dialog: {

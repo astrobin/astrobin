@@ -33,7 +33,7 @@
         {% block extra_head %}{% endblock %}
     </head>
 
-    <body{% if user.is_authenticated %} onload="common.start_listeners('{{request.user.username}}');"{%endif %}>
+    <body{% if request.user.is_authenticated %} onload="common.start_listeners('{{request.user.username}}');"{%endif %}>
         <!-- wrap -->
         <div id="wrap">
 
@@ -88,8 +88,8 @@
                     </div>
                     <div id="user-nav">
                         <ul>
-                        {% if user.is_authenticated %}
-                            <li>
+                        {% if request.user.is_authenticated %}
+                            <li class="menu">
                                 <a class="icon" href="{% url views.user_page user %}">
                                     <img alt="Account" src="/static/icons/iconic/orange/profile.png"/>
                                 </a>
@@ -111,7 +111,7 @@
                                     </ul>
                                </div>
                             </li>
-                            <li>
+                            <li class="menu">
                                 <a class="icon" title="{% trans "Notifications" %}" href="{% url views.notifications %}">
                                     <img id="notifications" alt="{% trans "Notifications" %}" src="{% notifications_icon request %}"/>
                                 </a>
@@ -119,14 +119,14 @@
                                     {% notification_list request %}
                                 </div>
                             </li>
-                            <li>
+                            <li class="menu">
                                 <a class="icon" title="{% trans "Messages" %}" href="{% url views.messages_all %}">
                                     <img id="messages" alt="{% trans "Messages" %}" src="{% messages_icon request %}"/></a>
                                 <div class="popup" id="messages-popup">
                                     {% message_list request %}
                                 </div>
                             </li>
-                            <li>
+                            <li class="menu">
                                 <a class="icon" title="{% trans "Requests" %}" href="{% url views.requests %}">
                                     <img id="requests" alt="{% trans "Requests" %}" src="{% requests_icon request %}"/></a>
                                 <div class="popup" id="requests-popup">
@@ -242,7 +242,7 @@
 
                 var open_popup = 0;
                 var active_a = 0;
-                $('#user-nav > ul > li > a').click (function(event) {
+                $('#user-nav > ul > li.menu > a').click (function(event) {
                     var a = $(this);
                     var li = a.parent()
                     var popup = li.find('.popup');
