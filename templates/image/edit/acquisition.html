@@ -121,7 +121,7 @@
                 <li>
                     <p>
                         <label class="notfirst" for="{{a.acquisition_type}}_{{forloop.counter0}}_iso">{% trans "ISO" %}</label>
-                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_so" id="{{a.acquisition_type}}_{{forloop.counter0}}_iso"
+                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_iso" id="{{a.acquisition_type}}_{{forloop.counter0}}_iso"
                                class="frame validate[custom[onlyNumber]]" max_lenght="4"  size="4"
                                value="{% if a.iso != None %}{{a.iso}}{% endif %}"/>
                     </p>
@@ -130,8 +130,8 @@
                     <p>
                         <label class="notfirst" for="{{a.acquisition_type}}_{{forloop.counter0}}_date">{% trans "Date" %}</label>
                         <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_so" id="{{a.acquisition_type}}_{{forloop.counter0}}_date"
-                               class="date datepickerclass frame validate[custom[onlyNumber]]"
-                               value="{{a.date|date:'Y-m-d'}}"/>
+                               class="date datepickerclass validate[custom[onlyNumber]]"
+                               value="{% if a.date %}{{a.date|date:'Y-m-d'}}{% else %}{% trans "yyyy-mm-dd" %}{% endif %}"/>
                     </p>
                 </li>
                 {% endif %}
