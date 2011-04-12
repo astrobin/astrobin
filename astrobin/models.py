@@ -188,7 +188,7 @@ class DeepSky_Acquisition(Acquisition):
         ordering = ['acquisition_type']
 
     def __unicode__(self):
-        return ''
+        return self.image.title
 
 
 class SolarSystem_Acquisition(Acquisition):
