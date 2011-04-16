@@ -759,7 +759,7 @@ def user_profile_save_gear(request):
                     if created:
                         gear_item.save()
                     getattr(profile, k).add(gear_item)
-                    form.fields[k].initial = values
+        form.fields[k].initial = values
 
         allGear = getattr(profile, k).all()
         prefill_dict[k] = jsonDump(allGear)
