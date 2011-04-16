@@ -31,6 +31,25 @@ from notifications import *
 from shortcuts import *
 from tasks import *
 
+def valueReader(request, field):
+    def utf_8_encoder(data):
+        for line in data:
+            yield line.encode('utf-8')
+
+    as_field = 'as_values_' + field
+    if as_field in request.POST:
+        value = request.POST[as_field]
+    else:
+        value = request.POST[field]
+    items = []
+    reader = csv.reader(utf_8_encoder([value]),
+                        skipinitialspace = True)
+    for row in reader:
+        items += [unicode(x, 'utf-8') for x in row if x != '']
+
+    return items, value
+
+
 def jsonDump(all):
     if len(all) > 0:
         return simplejson.dumps([{'value_unused': i.id, 'name': i.name} for i in all])
@@ -428,18 +447,12 @@ def image_edit_save_basic(request):
 
     for i in [[image.subjects, 'subjects', Subject],
               [image.locations, 'locations', Location]]:
-        values = form.cleaned_data[i[1]]
-        if 'as_values_' + i[1] in request.POST:
-            values = request.POST['as_values_' + i[1]]
-        reader = csv.reader([values],
-                            skipinitialspace = True)
-        for row in reader:
-            for name in row:
-                if name != '':
-                    k, created = i[2].objects.get_or_create(name = name)
-                    if created:
-                        k.save()
-                    i[0].add(k)
+        (names, value) = valueReader(request, i[1])
+        for name in names:
+            k, created = i[2].objects.get_or_create(name = name)
+            if created:
+                k.save()
+            i[0].add(k)
         prefill_dict[i[1]] = jsonDump(i[0].all())
         form.fields[i[1]].initial = u', '.join(x.name for x in getattr(image, i[1]).all())
 
@@ -494,19 +507,14 @@ def image_edit_save_gear(request):
                  'filters'           : [Filter, profile.filters],
                  'accessories'       : [Accessory, profile.accessories],
                 }.iteritems():
-        values = form.cleaned_data[k]
-        if 'as_values_' + k in request.POST:
-            values = request.POST['as_values_' + k]
-        reader = csv.reader([values], skipinitialspace = True)
-        for row in reader:
-            for name in row:
-                if name != '':
-                    gear_item, created = v[1].get_or_create(name = name)
-                    if created:
-                        gear_item.save()
-                        getattr(profile, v[2] if len(v) > 2 else k).add(gear_item)
-                        profile.save()
-                    getattr(image, k).add(gear_item)
+        (names, value) = valueReader(request, k)
+        for name in names:
+            gear_item, created = v[1].get_or_create(name = name)
+            if created:
+                gear_item.save()
+                getattr(profile, v[2] if len(v) > 2 else k).add(gear_item)
+                profile.save()
+            getattr(image, k).add(gear_item)
 
         imageGear = getattr(image, k).all()
         prefill_dict[k] = jsonDump(imageGear)
@@ -675,25 +683,19 @@ def user_profile_save_basic(request):
     if form.is_valid():
         profile = UserProfile.objects.get(user = request.user)
         profile.locations.clear()
-        values = form.cleaned_data['locations']
-        if 'as_values_locations' in request.POST:
-            values = request.POST['as_values_locations']
-        reader = csv.reader([values],
-                            skipinitialspace = True)
-        for row in reader:
-            for name in row:
-                if name != '':
-                    location, created = Location.objects.get_or_create(name = name)
-                    if created:
-                        location.save()
-                    profile.locations.add(location)
+        (names, value) = valueReader(request, 'locations')
+        for name in names:
+            location, created = Location.objects.get_or_create(name = name)
+            if created:
+                location.save()
+            profile.locations.add(location)
 
         profile.website  = form.cleaned_data['website']
         profile.job      = form.cleaned_data['job']
         profile.hobbies  = form.cleaned_data['hobbies']
 
         profile.save()
-        form.fields['locations'].initial = values
+        form.fields['locations'].initial = value
 
     response_dict['prefill_dict'] = {'locations': jsonDump(profile.locations.all()) }
     return render_to_response("user/profile/edit/basic.html",
@@ -748,18 +750,13 @@ def user_profile_save_gear(request):
                  "filters"       : [Filter, profile.filters],
                  "accessories"   : [Accessory, profile.accessories],
                 }.iteritems():
-        values = request.POST[k]
-        if 'as_values_' + k in request.POST:
-            values = request.POST['as_values_' + k]
-        reader = csv.reader([values], skipinitialspace = True)
-        for row in reader:
-            for name in row:
-                if name != '':
+        (names, value) = valueReader(request, k)
+        for name in names:
                     gear_item, created = v[0].objects.get_or_create(name = name)
                     if created:
                         gear_item.save()
                     getattr(profile, k).add(gear_item)
-        form.fields[k].initial = values
+        form.fields[k].initial = value
 
         allGear = getattr(profile, k).all()
         prefill_dict[k] = jsonDump(allGear)
@@ -996,15 +993,12 @@ def bring_to_attention(request):
     if not form.is_valid():
         return ajax_fail()
 
+    (usernames, value) = valueReader(request, 'user')
     recipients = []
-    reader = csv.reader([request.POST['as_values_user']],
-                        skipinitialspace=True)
-    for row in reader:
-        for username in row:
-            if username != '':
-                user = User.objects.get(username=username)
-                if user is not None:
-                    recipients.append(user)
+    for username in usernames:
+        user = User.objects.get(username=username)
+        if user is not None:
+            recipients.append(user)
 
     push_notification(recipients, 'attention_request',
                       {'object':image,
