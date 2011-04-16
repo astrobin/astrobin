@@ -13,12 +13,16 @@ MANAGERS = ADMINS
 SERVER_EMAIL = 'astrobin@astrobin.com'
 DEFAULT_FROM_EMAIL = 'AstroBin <astrobin@astrobin.com>'
 
-DATABASE_ENGINE = 'mysql'      # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'astrobin'     # Or path to database file if using sqlite3.
-DATABASE_USER = 'root'         # Not used with sqlite3.
-DATABASE_PASSWORD = '***REMOVED***' # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'astrobin',     # Or path to database file if using sqlite3.
+        'USER': 'root',         # Not used with sqlite3.
+        'PASSWORD': '***REMOVED***', # Not used with sqlite3.
+        'HOST': '',             # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',             # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
 ASTROBIN_BASE_URL = 'http://astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
