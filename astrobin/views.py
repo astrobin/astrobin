@@ -484,7 +484,6 @@ def image_edit_save_gear(request):
             context_instance=RequestContext(request))
 
     prefill_dict = {}
-    data = {} 
     for k, v in {'imaging_telescopes': [Telescope, profile.telescopes, 'telescopes'],
                  'guiding_telescopes': [Telescope, profile.telescopes, 'telescopes'],
                  'mounts'            : [Mount, profile.mounts],
@@ -498,8 +497,8 @@ def image_edit_save_gear(request):
         values = form.cleaned_data[k]
         if 'as_values_' + k in request.POST:
             values = request.POST['as_values_' + k]
-        data[k] = csv.reader([values], skipinitialspace = True)
-        for row in data[k]:
+        reader = csv.reader([values], skipinitialspace = True)
+        for row in reader:
             for name in row:
                 if name != '':
                     gear_item, created = v[1].get_or_create(name = name)
@@ -741,7 +740,6 @@ def user_profile_save_gear(request):
     response_dict = {"form": form}
     prefill_dict = {}
 
-    data = {} 
     for k, v in {"telescopes"    : [Telescope, profile.telescopes],
                  "mounts"        : [Mount, profile.mounts],
                  "cameras"       : [Camera, profile.cameras],
@@ -753,8 +751,8 @@ def user_profile_save_gear(request):
         values = request.POST[k]
         if 'as_values_' + k in request.POST:
             values = request.POST['as_values_' + k]
-        data[k] = csv.reader([values], skipinitialspace = True)
-        for row in data[k]:
+        reader = csv.reader([values], skipinitialspace = True)
+        for row in reader:
             for name in row:
                 if name != '':
                     gear_item, created = v[0].objects.get_or_create(name = name)
