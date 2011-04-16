@@ -27,7 +27,8 @@ DATABASES = {
 ASTROBIN_BASE_URL = 'http://astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
-UPLOADS_DIRECTORY = '/var/www/astrobin_env/www/astrobin/uploads/'
+ASTROBIN_BASE_PATH = '/var/www/astrobin_env/www/astrobin'
+UPLOADS_DIRECTORY = ASTROBIN_BASE_PATH + '/uploads/'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -48,7 +49,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/var/www/astrobin_env/www/astrobin/static'
+MEDIA_ROOT = ASTROBIN_BASE_PATH + '/static'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -106,8 +107,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/var/www/astrobin_env/www/astrobin/templates',
-    '/var/www/astrobin_env/source/django-persistent-messages/persistent_messages/templates',
+    ASTROBIN_BASE_PATH + '/templates',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
