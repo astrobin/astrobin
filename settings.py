@@ -1,1 +1,0 @@
-astrobin/settings.py
