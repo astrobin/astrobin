@@ -320,31 +320,13 @@ def image_edit_gear(request, id):
     if request.user != image.user:
         return HttpResponseForbidden()
 
-    prefill_dict = {}
-    prefill_form = {}
-
-    for attr in ['imaging_telescopes',
-                 'guiding_telescopes',
-                 'mounts',
-                 'imaging_cameras',
-                 'guiding_cameras',
-                 'focal_reducers',
-                 'software',
-                 'filters',
-                 'accessories',
-                ]:
-        imageGear = getattr(image, attr).all()
-        prefill_dict[attr] = jsonDump(imageGear)
-        prefill_form[attr] = u', '.join([x.name for x in getattr(image, attr).all()])
-
-    form = ImageEditGearForm(prefill_form)
+    form = ImageEditGearForm(user=request.user, instance=image)
     response_dict = {
         'form': form,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
         'image':image,
-        'prefill_dict':prefill_dict,
     }
 
     return render_to_response('image/edit/gear.html',
@@ -483,7 +465,9 @@ def image_edit_save_gear(request):
     image.filters.clear()
     image.accessories.clear()
 
-    form = ImageEditGearForm(request.POST)
+    form = ImageEditGearForm(data=request.POST,
+                             user=request.user,
+                             instance=image)
     response_dict = {
         'image': image,
         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
@@ -495,33 +479,9 @@ def image_edit_save_gear(request):
         return render_to_response("image/edit/gear.html",
             response_dict,
             context_instance=RequestContext(request))
+    form.save()
 
-    prefill_dict = {}
-    for k, v in {'imaging_telescopes': [Telescope, profile.telescopes, 'telescopes'],
-                 'guiding_telescopes': [Telescope, profile.telescopes, 'telescopes'],
-                 'mounts'            : [Mount, profile.mounts],
-                 'imaging_cameras'   : [Camera, profile.cameras, 'cameras'],
-                 'guiding_cameras'   : [Camera, profile.cameras, 'cameras'],
-                 'focal_reducers'    : [FocalReducer, profile.focal_reducers],
-                 'software'          : [Software, profile.software],
-                 'filters'           : [Filter, profile.filters],
-                 'accessories'       : [Accessory, profile.accessories],
-                }.iteritems():
-        (names, value) = valueReader(request, k)
-        for name in names:
-            gear_item, created = v[1].get_or_create(name = name)
-            if created:
-                gear_item.save()
-                getattr(profile, v[2] if len(v) > 2 else k).add(gear_item)
-                profile.save()
-            getattr(image, k).add(gear_item)
-
-        imageGear = getattr(image, k).all()
-        prefill_dict[k] = jsonDump(imageGear)
-
-    image.save()
     response_dict['image'] = image
-    response_dict['prefill_dict'] = prefill_dict
 
     return HttpResponseRedirect('/edit/acquisition/%i/' % image.id)
 
