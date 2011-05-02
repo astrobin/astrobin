@@ -4,7 +4,7 @@
 {% block content %}
     {% include 'image/edit/menu.html' %}
     <div class="sided-main-content" id="image-edit-gear">
-        <h1>{% trans "Edit your image: gear userd" %}</h1>
+        <h1>{% trans "Edit your image: gear used" %}</h1>
         <form method="post" action="/edit/save/gear/">{% csrf_token %}
             {{form.as_p}}
             <noscript>
