@@ -16,16 +16,36 @@ class ImageEditBasicForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea, required=False)
 
 
-class ImageEditGearForm(forms.Form):
-    imaging_telescopes = forms.CharField(max_length=256, required=False, help_text="<noscript>*</noscript>")
-    guiding_telescopes = forms.CharField(max_length=256, required=False, help_text="<noscript>*</noscript>")
-    mounts = forms.CharField(max_length=256, required=False, help_text="<noscript>*</noscript>")
-    imaging_cameras = forms.CharField(max_length=256, required=False, help_text="<noscript>*</noscript>")
-    guiding_cameras = forms.CharField(max_length=256, required=False, help_text="<noscript>*</noscript>")
-    focal_reducers = forms.CharField(max_length=256, required=False, help_text="<noscript>*</noscript>")
-    software = forms.CharField(max_length=256, required=False, help_text="<noscript>*</noscript>")
-    filters = forms.CharField(max_length=256, required=False, help_text="<noscript>*</noscript>")
-    accessories = forms.CharField(max_length=256, required=False, help_text="<noscript>*</noscript>")
+class ImageEditGearForm(forms.ModelForm):
+    def __init__(self, user=None, **kwargs):
+        super(ImageEditGearForm, self).__init__(**kwargs)
+        profile = UserProfile.objects.get(user=user)
+        telescopes = profile.telescopes.all()
+        self.fields['imaging_telescopes'].queryset = telescopes
+        self.fields['guiding_telescopes'].queryset = telescopes
+        cameras = profile.cameras.all()
+        self.fields['imaging_cameras'].queryset = cameras
+        self.fields['guiding_cameras'].queryset = cameras
+        for attr in ('mounts',
+                     'focal_reducers',
+                     'software',
+                     'filters',
+                     'accessories',
+                    ):
+            self.fields[attr].queryset = getattr(profile, attr).all()
+
+    class Meta:
+        model = Image
+        fields = ('imaging_telescopes',
+                  'guiding_telescopes',
+                  'mounts',
+                  'imaging_cameras',
+                  'guiding_cameras',
+                  'focal_reducers',
+                  'software',
+                  'filters',
+                  'accessories',
+                 )
 
 
 class UserProfileEditBasicForm(forms.ModelForm):

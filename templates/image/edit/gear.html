@@ -23,27 +23,3 @@
     </div>  
 {% endblock %}
 
-{% block extra_js %}
-<script language="javascript">
-    $(document).ready(function() {
-        var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
-        var emptyText = '{% trans "No results. Press TAB to add it to this image and your gear!" %}';
-
-        {% autoescape off %}
-        {% for key, value in prefill_dict.items %}
-        $('#id_{{key}}').autoSuggest('/autocomplete_user/{{key}}/',
-            {asHtmlID: '{{key}}',
-            selectedItemProp: 'name',
-            searchObjProps: 'name',
-            preFill: {{value}},
-            selectedItemProp: 'name',
-            selectedValuesProp: 'name',
-            startText: startText,
-            emptyText: emptyText});
-        {% endfor %}
-        {% endautoescape %}
-    });
-</script>
-{% endblock %}
-
-
