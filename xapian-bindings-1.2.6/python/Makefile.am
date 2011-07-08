@@ -70,12 +70,10 @@ xapian/__init__.py: modern/xapian.py
 # We "import _xapian" first so that if we fail to import the glue library
 # we don't generate a broken __init__.pyc or __init__.pyo.
 xapian/__init__.pyc: xapian/__init__.py xapian/_xapian$(PYTHON_SO)
-	PYTHONPATH="xapian:$$PYTHONPATH" $(PYTHON) -c "import _xapian"
-	PYTHONPATH=".:$$PYTHONPATH" $(PYTHON) -c "import xapian"
+	$(PYTHON) -c "import xapian"
 
 xapian/__init__.pyo: xapian/__init__.py xapian/_xapian$(PYTHON_SO)
-	PYTHONPATH="xapian:$$PYTHONPATH" $(PYTHON) -O -c "import _xapian"
-	PYTHONPATH=".:$$PYTHONPATH" $(PYTHON) -O -c "import xapian"
+	$(PYTHON) -O -c "import xapian"
 
 xapian/_xapian$(PYTHON_SO): _xapian.la
 	-test -d xapian || mkdir xapian
