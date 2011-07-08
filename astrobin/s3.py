@@ -98,6 +98,6 @@ def delete_image_from_s3(filename, ext):
         '_thumb',
         '_small_thumb',
         '_inverted',
-        '_resized_inverted'
-    )
+        '_resized_inverted',
+    ):
         default_storage.delete(filename + ext);
