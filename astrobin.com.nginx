@@ -7,14 +7,14 @@ server {
     client_max_body_size 4G;
     server_name _;
     
-	access_log /var/log/nginx/astrobin.com-access.log;
-	error_log /var/log/nginx/astrobin.com-error.log;
+    access_log /usr/local/nginx/logs/astrobin.com-access.log;
+    error_log /usr/local/nginx/logs/astrobin.com-error.log;
 
     keepalive_timeout 5;
     proxy_read_timeout 300;
 
     location /static/  {
-        root /var/www/astrobin_env/www/astrobin;
+        root /home/astrobin/Code/astrobin;
         expires 30d;
     }
 
@@ -30,7 +30,7 @@ server {
     }
 
     location /favicon.ico {
-        root /var/www/astrobin_env/www/astrobin/static;
+        root /home/astrobin/Code/astrobin/static;
     }
 
     # internal publish endpoint (keep it private / protected)
