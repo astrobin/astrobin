@@ -589,7 +589,6 @@ def image_delete(request, id):
 @require_GET
 def user_page(request, username):
     """Shows the user's public page"""
-
     user = User.objects.get(username=username)
     profile = UserProfile.objects.get(user=user)
 

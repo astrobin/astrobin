@@ -21,34 +21,58 @@ class Gear(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        app_label = 'astrobin'
+
 
 class Telescope(Gear):
     focal_length = models.IntegerField(null=True, blank=True)
     aperture = models.IntegerField(null=True, blank=True)
 
+    class Meta:
+        app_label = 'astrobin'
+
 
 class Mount(Gear):
     pass
+
+    class Meta:
+        app_label = 'astrobin'
 
 
 class Camera(Gear):
     pass
 
+    class Meta:
+        app_label = 'astrobin'
+
 
 class FocalReducer(Gear):
     ratio = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+
+    class Meta:
+        app_label = 'astrobin'
 
 
 class Software(Gear):
     pass
 
+    class Meta:
+        app_label = 'astrobin'
+
 
 class Filter(Gear):
     pass
 
+    class Meta:
+        app_label = 'astrobin'
+
 
 class Accessory(Gear):
     pass
+
+    class Meta:
+        app_label = 'astrobin'
 
 
 class Subject(models.Model):
@@ -56,6 +80,9 @@ class Subject(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        app_label = 'astrobin'
 
 
 class Location(models.Model):
@@ -66,6 +93,9 @@ class Location(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        app_label = 'astrobin'
 
 
 def image_solved_callback(image, solved, clean_path):
@@ -125,6 +155,7 @@ class Image(models.Model):
     is_solved = models.BooleanField(editable=False)
 
     class Meta:
+        app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
         
     def __unicode__(self):
@@ -157,6 +188,7 @@ class ImageRevision(models.Model):
     uploaded = models.DateTimeField(editable=False)
 
     class Meta:
+        app_label = 'astrobin'
         ordering = ('uploaded', '-id')
         
     def __unicode__(self):
@@ -178,6 +210,10 @@ class Acquisition(models.Model):
     date = models.DateField(null=True, blank=True)
     image = models.ForeignKey(Image)
 
+    class Meta:
+        app_label = 'astrobin'
+
+
 class DeepSky_Acquisition(Acquisition):
     acquisition_type = models.CharField(max_length=2)
     number = models.IntegerField()
@@ -185,6 +221,7 @@ class DeepSky_Acquisition(Acquisition):
     iso = models.IntegerField(null=True, blank=True)
 
     class Meta:
+        app_label = 'astrobin'
         ordering = ['acquisition_type']
 
     def __unicode__(self):
@@ -202,13 +239,19 @@ class SolarSystem_Acquisition(Acquisition):
     transparency = models.IntegerField(null=True, blank=True)
     time = models.CharField(null=True, blank=True, max_length=5)
 
+    class Meta:
+        app_label = 'astrobin'
+
 
 class ABPOD(models.Model):
-	image = models.ForeignKey(Image, unique=True)
-	date = models.DateTimeField()
-	
-	def __unicode__(self):
-		return self.image.subjects
+    image = models.ForeignKey(Image, unique=True)
+    date = models.DateTimeField()
+
+    def __unicode__(self):
+        return self.image.subjects
+
+    class Meta:
+        app_label = 'astrobin'
 
 
 class Request(models.Model):
@@ -230,6 +273,7 @@ class Request(models.Model):
         return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)
 
     class Meta:
+        app_label = 'astrobin'
         ordering = ['-created']
 
     def get_absolute_url():
@@ -264,6 +308,9 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         return '/users/%s' % self.user.username
+
+    class Meta:
+        app_label = 'astrobin'
 
 
 def create_user_profile(sender, instance, created, **kwargs):  
