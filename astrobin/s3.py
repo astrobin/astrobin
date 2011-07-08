@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 import mimetypes
 import email
@@ -14,15 +15,14 @@ import StringIO
 from image_utils import *
 
 def save_to_bucket(filename, content):
-    import pdb; pdb.set_trace()
-    default_storage.save(filename, content);
+    default_storage.save(filename, ContentFile(content));
 
 def store_image_in_s3(path, uid, original_ext, mimetype=''):
     format_map = {'image/jpeg':('JPEG', '.jpg'),
                   'image/png' :('PNG', '.png'),
                  }
 
-    content_type = mimetype if mimetype else mimetypes.guess_type(original_ext)[0]
+    content_type = mimetype if mimetype else mimetypes.guess_type(uid+original_ext)[0]
     file = open(path + uid + original_ext)
     data = StringIO.StringIO(file.read())
 
@@ -44,7 +44,7 @@ def store_image_in_s3(path, uid, original_ext, mimetype=''):
     # Then save to bucket
     resizedFile = StringIO.StringIO()
     resizedImage.save(resizedFile, format_map[content_type][0])
-    save_to_bucket(uid + '_resized' + formtat_map[content_type][1],
+    save_to_bucket(uid + '_resized' + format_map[content_type][1],
                    resizedFile.getvalue())
 
     # Then resize to the thumbnail
