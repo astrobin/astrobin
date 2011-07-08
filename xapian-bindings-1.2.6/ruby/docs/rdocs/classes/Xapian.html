@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Xapian</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Xapian</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/xapian_rb.html">
+                xapian.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Ruby <a href="Xapian.html">Xapian</a> bindings</h1>
+<p>
+Original version by Paul Legato (plegato@nks.net), 4/20/06.
+</p>
+<p>
+Copyright (C) 2006 Networked Knowledge Systems, Inc. Copyright (C)
+2008,2011 Olly Betts Copyright (C) 2010 Richard Boulton
+</p>
+<p>
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 2 of the License, or (at your option)
+any later version.
+</p>
+<p>
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+</p>
+<p>
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc., 51
+Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+</p>
+<h2>Underscore methods</h2>
+<p>
+Note: Methods whose names start with an underscore character _ are internal
+methods from the C++ API. Their functionality is not accessible in a
+Ruby-friendly way, so this file provides wrapper code to make it easier to
+use them from a Ruby programming idiom. Most are also dangerous insofar as
+misusing them can cause your program to segfault. In particular, all of <a
+href="Xapian.html">Xapian</a>&#8216;s *Iterator classes are wrapped into
+nice Ruby-friendly Arrays.
+</p>
+<p>
+It should never be necessary to use any method whose name starts with an
+underscore from user-level code. Make sure you are <em>VERY</em> certain
+that you know exactly what you&#8216;re doing if you do use one of these
+methods. Beware. You&#8216;ve been warned&#8230;
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="Xapian/AssertionError.html" class="link">Xapian::AssertionError</a><br />
+Class <a href="Xapian/BM25Weight.html" class="link">Xapian::BM25Weight</a><br />
+Class <a href="Xapian/BoolWeight.html" class="link">Xapian::BoolWeight</a><br />
+Class <a href="Xapian/Compactor.html" class="link">Xapian::Compactor</a><br />
+Class <a href="Xapian/Database.html" class="link">Xapian::Database</a><br />
+Class <a href="Xapian/DatabaseCorruptError.html" class="link">Xapian::DatabaseCorruptError</a><br />
+Class <a href="Xapian/DatabaseCreateError.html" class="link">Xapian::DatabaseCreateError</a><br />
+Class <a href="Xapian/DatabaseError.html" class="link">Xapian::DatabaseError</a><br />
+Class <a href="Xapian/DatabaseLockError.html" class="link">Xapian::DatabaseLockError</a><br />
+Class <a href="Xapian/DatabaseModifiedError.html" class="link">Xapian::DatabaseModifiedError</a><br />
+Class <a href="Xapian/DatabaseOpeningError.html" class="link">Xapian::DatabaseOpeningError</a><br />
+Class <a href="Xapian/DatabaseVersionError.html" class="link">Xapian::DatabaseVersionError</a><br />
+Class <a href="Xapian/DateValueRangeProcessor.html" class="link">Xapian::DateValueRangeProcessor</a><br />
+Class <a href="Xapian/DecreasingValueWeightPostingSource.html" class="link">Xapian::DecreasingValueWeightPostingSource</a><br />
+Class <a href="Xapian/DocNotFoundError.html" class="link">Xapian::DocNotFoundError</a><br />
+Class <a href="Xapian/Document.html" class="link">Xapian::Document</a><br />
+Class <a href="Xapian/ESet.html" class="link">Xapian::ESet</a><br />
+Class <a href="Xapian/ESetIterator.html" class="link">Xapian::ESetIterator</a><br />
+Class <a href="Xapian/Enquire.html" class="link">Xapian::Enquire</a><br />
+Class <a href="Xapian/Error.html" class="link">Xapian::Error</a><br />
+Class <a href="Xapian/ErrorHandler.html" class="link">Xapian::ErrorHandler</a><br />
+Class <a href="Xapian/ExpandDecider.html" class="link">Xapian::ExpandDecider</a><br />
+Class <a href="Xapian/ExpandDeciderAnd.html" class="link">Xapian::ExpandDeciderAnd</a><br />
+Class <a href="Xapian/ExpandDeciderFilterTerms.html" class="link">Xapian::ExpandDeciderFilterTerms</a><br />
+Class <a href="Xapian/ExpandTerm.html" class="link">Xapian::ExpandTerm</a><br />
+Class <a href="Xapian/FeatureUnavailableError.html" class="link">Xapian::FeatureUnavailableError</a><br />
+Class <a href="Xapian/FixedWeightPostingSource.html" class="link">Xapian::FixedWeightPostingSource</a><br />
+Class <a href="Xapian/InternalError.html" class="link">Xapian::InternalError</a><br />
+Class <a href="Xapian/InvalidArgumentError.html" class="link">Xapian::InvalidArgumentError</a><br />
+Class <a href="Xapian/InvalidOperationError.html" class="link">Xapian::InvalidOperationError</a><br />
+Class <a href="Xapian/KeyMaker.html" class="link">Xapian::KeyMaker</a><br />
+Class <a href="Xapian/LogicError.html" class="link">Xapian::LogicError</a><br />
+Class <a href="Xapian/MSet.html" class="link">Xapian::MSet</a><br />
+Class <a href="Xapian/MSetIterator.html" class="link">Xapian::MSetIterator</a><br />
+Class <a href="Xapian/Match.html" class="link">Xapian::Match</a><br />
+Class <a href="Xapian/MatchDecider.html" class="link">Xapian::MatchDecider</a><br />
+Class <a href="Xapian/MatchSpy.html" class="link">Xapian::MatchSpy</a><br />
+Class <a href="Xapian/MultiValueKeyMaker.html" class="link">Xapian::MultiValueKeyMaker</a><br />
+Class <a href="Xapian/MultiValueSorter.html" class="link">Xapian::MultiValueSorter</a><br />
+Class <a href="Xapian/NetworkError.html" class="link">Xapian::NetworkError</a><br />
+Class <a href="Xapian/NetworkTimeoutError.html" class="link">Xapian::NetworkTimeoutError</a><br />
+Class <a href="Xapian/NumberValueRangeProcessor.html" class="link">Xapian::NumberValueRangeProcessor</a><br />
+Class <a href="Xapian/PositionIterator.html" class="link">Xapian::PositionIterator</a><br />
+Class <a href="Xapian/Posting.html" class="link">Xapian::Posting</a><br />
+Class <a href="Xapian/PostingIterator.html" class="link">Xapian::PostingIterator</a><br />
+Class <a href="Xapian/PostingSource.html" class="link">Xapian::PostingSource</a><br />
+Class <a href="Xapian/Query.html" class="link">Xapian::Query</a><br />
+Class <a href="Xapian/QueryParser.html" class="link">Xapian::QueryParser</a><br />
+Class <a href="Xapian/QueryParserError.html" class="link">Xapian::QueryParserError</a><br />
+Class <a href="Xapian/RSet.html" class="link">Xapian::RSet</a><br />
+Class <a href="Xapian/RangeError.html" class="link">Xapian::RangeError</a><br />
+Class <a href="Xapian/Registry.html" class="link">Xapian::Registry</a><br />
+Class <a href="Xapian/RuntimeError.html" class="link">Xapian::RuntimeError</a><br />
+Class <a href="Xapian/SerialisationError.html" class="link">Xapian::SerialisationError</a><br />
+Class <a href="Xapian/SimpleStopper.html" class="link">Xapian::SimpleStopper</a><br />
+Class <a href="Xapian/Sorter.html" class="link">Xapian::Sorter</a><br />
+Class <a href="Xapian/Stem.html" class="link">Xapian::Stem</a><br />
+Class <a href="Xapian/StemImplementation.html" class="link">Xapian::StemImplementation</a><br />
+Class <a href="Xapian/Stopper.html" class="link">Xapian::Stopper</a><br />
+Class <a href="Xapian/StringValueRangeProcessor.html" class="link">Xapian::StringValueRangeProcessor</a><br />
+Class <a href="Xapian/Term.html" class="link">Xapian::Term</a><br />
+Class <a href="Xapian/TermGenerator.html" class="link">Xapian::TermGenerator</a><br />
+Class <a href="Xapian/TermIterator.html" class="link">Xapian::TermIterator</a><br />
+Class <a href="Xapian/TradWeight.html" class="link">Xapian::TradWeight</a><br />
+Class <a href="Xapian/UnimplementedError.html" class="link">Xapian::UnimplementedError</a><br />
+Class <a href="Xapian/Utf8Iterator.html" class="link">Xapian::Utf8Iterator</a><br />
+Class <a href="Xapian/Value.html" class="link">Xapian::Value</a><br />
+Class <a href="Xapian/ValueCountMatchSpy.html" class="link">Xapian::ValueCountMatchSpy</a><br />
+Class <a href="Xapian/ValueIterator.html" class="link">Xapian::ValueIterator</a><br />
+Class <a href="Xapian/ValueMapPostingSource.html" class="link">Xapian::ValueMapPostingSource</a><br />
+Class <a href="Xapian/ValuePostingSource.html" class="link">Xapian::ValuePostingSource</a><br />
+Class <a href="Xapian/ValueRangeProcessor.html" class="link">Xapian::ValueRangeProcessor</a><br />
+Class <a href="Xapian/ValueSetMatchDecider.html" class="link">Xapian::ValueSetMatchDecider</a><br />
+Class <a href="Xapian/ValueWeightPostingSource.html" class="link">Xapian::ValueWeightPostingSource</a><br />
+Class <a href="Xapian/Weight.html" class="link">Xapian::Weight</a><br />
+Class <a href="Xapian/WritableDatabase.html" class="link">Xapian::WritableDatabase</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

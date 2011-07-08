@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Matcher Design Notes</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="matcher-design-notes">
+<h1 class="title">Matcher Design Notes</h1>
+
+<p>This document is incomplete at present. It lacks explanation of the
+min-heap used to keep the best N M-set items (Managing Gigabytes
+describes this technique well), the check() method isn't discussed, and
+probably some other things.</p>
+<div class="section" id="the-postlist-tree">
+<h1>The PostList Tree</h1>
+<p>The QueryOptimiser class builds a tree structure of PostList objects
+from the query. At the leaf level, a PostList object is created for each
+term, and for other leaf-level subqueries, like PostingSource objects
+and value ranges. Then pairs or groups of PostLists are combined using
+2-way or n-way branching tree elements for AND, OR, etc - these are
+virtual PostLists whose class names reflect the operation
+(MultiAndPostList, OrPostList, etc). See below for a full list.</p>
+<div class="section" id="or">
+<h2>OR</h2>
+<p>For a group of OR operations, each OrPostList has two children, job).
+The OR tree is built up in a similar way to how an optimal huffman code
+is constructed, so the sub-PostLists with the fewest entries are
+furthest down the tree, and those with most nearest the top (this is
+more efficient than an n-ary tree in terms of the number of comparisons
+which need to be performed, ignoring various optimisations which the
+matcher can perform - it may actually be the case that a MultiOrPostList
+could do a better job in practice though).</p>
+<p>OR is coded for maximum efficiency when the right branch has fewer
+postings in than the left branch.</p>
+<p>When an OR gets &quot;at end&quot;, it autoprunes, replacing itself with the
+branch that still has postings - see below for full details.</p>
+</div>
+<div class="section" id="and">
+<h2>AND</h2>
+<p>For a multi-way AND operation, we have MultiAndPostList, which tries the
+sub-postlists in order from least frequent to most frequent (two-way AND
+is handled the same way). This will generally minimise the number of
+posting list entries we read and maximises the size of each skip_to.</p>
+<p>When one of a sub-trees of AND operations runs out, the sub-query will
+signal &quot;at end&quot;, and this causes the AND to signal &quot;at end&quot; too.</p>
+<p>The OP_FILTER query operator is actually treated as AND in the postlist
+tree - the boolean-ness is pushed down to the leaf query, where it is
+handled by the Weight object.</p>
+</div>
+<div class="section" id="other-operations">
+<h2>Other operations</h2>
+<p>The other operations also handle &quot;at end&quot; either like OR or AND (for
+asymmetric operations like AND_MAYBE, which happens may depend which
+branch has run out).</p>
+</div>
+</div>
+<div class="section" id="running-the-match">
+<h1>running the match</h1>
+<p>Once the tree is built, the matcher repeatedly asks the root of the tree
+for the next matching document and compares it to those in the
+proto-mset it maintains. Once the proto-mset is of the desired final
+size, the candidate needs to score more highly that the lowest scoring
+document in the proto-mset (either by weight, or in sort order if
+sorting is used) to be interesting. If it is, the lowest scoring
+document is removed (which is easy as we store the proto-mset as a min
+heap) and the candidate is added.</p>
+<p>When the matcher itself gets &quot;at end&quot; from the postlist tree, the match
+process ends.</p>
+<p>The matcher also passes the lowest weight currently needed make the
+proto-mset into the tree, and each node may adjust this weight and pass
+it on to its subtrees. Each PostList can report a minimum weight it
+could contribute - so if the left branch of an AND will always return a
+weight of 2 or more, then if the whole AND needs to return at least 6,
+the right branch is told it needs to return at least 4.</p>
+<p>For example, an OR knows that if its left branch can contribute at most
+a weight of 4 and its right branch at most 7, then if the minimum weight
+is 8, only documents matching both branches are now of interest so it
+mutates into an AND. If the minimum weight is 6 it changes into an
+AND_MAYBE (A AND_MAYBE B matches documents which which match A, but B
+contributes to the weight - in most search engines query syntax, that's
+expressed as `+A B'). See the &quot;Operator Decay&quot; section below for full
+details of these mutations. If the minimum weight needed is 12, no
+document is good enough, and the OR returns &quot;end of list&quot;.</p>
+</div>
+<div class="section" id="phrase-and-near-matching">
+<h1>Phrase and near matching</h1>
+<p>The way phrase and near matching works is to perform an AND query for
+all the terms, with a filter node in front which only returns documents
+whose positional information fulfils the phrase requirements.</p>
+<p>Because checking the positional information can be quite costly compared
+to matching postlist trees, we hoist the position check higher up the
+tree in cases when the phrase operation is below an AND. So A AND (B
+NEAR C) will actually filter the results of (A AND B AND C) through a
+check for B NEAR C, which means we never need to check positions for
+documents which don't match A.</p>
+</div>
+<div class="section" id="virtual-postlist-types">
+<h1>virtual postlist types</h1>
+<p>There are several types of virtual PostList. Each type can be treated as
+boolean or probabilistic - the only difference is whether the weights
+are ignored or not. The types are:</p>
+<ul class="simple">
+<li>OrPostList: returns documents which match either branch</li>
+<li>MultiAndPostList: returns documents which match all branches</li>
+<li>MultiXorPostList: returns documents which match an odd number of
+branches</li>
+<li>AndNotPostList: returns documents which match the left branch, but
+not the right (the weights of documents from the right branch are
+ignored).</li>
+<li>AndMaybePostList: returns documents which match the left branch -
+weights from documents also in the right branch are added in for the
+probabilistic case (&quot;X ANDMAYBE Y&quot; is what Altavista did for &quot;+X Y&quot;).</li>
+<li>FIXME: this list is no longer complete...</li>
+</ul>
+<p>[Note: You can use AndNotPostList to apply an inverted boolean filter to
+a probabilistic query]</p>
+<p>There are two main optimisations which the best match performs:
+autoprune and operator decay.</p>
+</div>
+<div class="section" id="autoprune">
+<h1>autoprune</h1>
+<p>For example, if a branch in the match tree is &quot;A OR B&quot;, when A runs out
+then &quot;A OR B&quot; is replaced by &quot;B&quot;. Similar reductions occur for XOR,
+ANDNOT, and ANDMAYBE (if the right branch runs out). Other operators
+(AND, FILTER, and ANDMAYBE (when the left branch runs out) simply return
+&quot;at_end&quot; and this is dealt with somewhere further up the tree as
+appropriate.</p>
+<p>An autoprune is indicated by the next or skip_to method returning a
+pointer to the PostList object to replace the postlist being read with.</p>
+</div>
+<div class="section" id="operator-decay">
+<h1>operator decay</h1>
+<p>The matcher tracks the minimum weight needed for a document to make it
+into the m-set (this decreases monotonically as the m-set forms). This
+can be used to replace on boolean operator with a stricter one. E.g.
+consider A OR B - when maxweight(A) &lt; minweight and maxweight(B) &lt;
+minweight then only documents matching both A and B can make it into the
+m-set so we can replace the OR with an AND. Operator decay is flagged
+using the same mechanism as autoprune, by returning the replacement
+operator from next or skip_to.</p>
+<p>Possible decays:</p>
+<ul class="simple">
+<li>OR → AND</li>
+<li>OR → ANDMAYBE</li>
+<li>ANDMAYBE → AND</li>
+<li>XOR → ANDNOT</li>
+</ul>
+<p>A related optimisation is that the Match object may terminate early if
+maxweight for the whole tree is less than the smallest weight in the
+mset.</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1086 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Overview</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="overview">
+<h1 class="title">Overview</h1>
+
+<p>This document provides an introduction to the native C++ Xapian API.
+This API provides programmers with the ability to index and search
+through (potentially very large) bodies of data using probabilistic
+methods.</p>
+<p><em>Note:</em> The portion of the API currently documented here covers only the
+part of Xapian concerned with searching through existing databases, not
+that concerned with creating them.</p>
+<p>This document assumes you already have Xapian installed, so if you
+haven't, it is a good idea to read <a class="reference external" href="install.html">Installing Xapian</a>
+first.</p>
+<p>You may also wish to read the <a class="reference external" href="quickstart.html">QuickStart</a> reference,
+for some simple worked examples of Xapian usage, and the <a class="reference external" href="intro_ir.html">Introduction
+to Information Retrieval</a> for a background into the
+Information Retrieval theories behind Xapian.</p>
+<p>This document does not detail the exact calling conventions (parameters
+passed, return value, exceptions thrown, etc...) for each method in the
+API. For such documentation, you should refer to the automatically
+extracted documentation, which is generated from detailed comments in
+the source code, and should thus remain up-to-date and accurate. This
+documentation is generated using the
+<a class="reference external" href="http://www.doxygen.org/">Doxygen</a> application. To save you having
+to generate this documentation yourself, we include the <a class="reference external" href="apidoc/html/index.html">built
+version</a> in our distributions, and also keep
+the <a class="reference external" href="http://xapian.org/docs/apidoc/html/index.html">latest version</a> on
+our website.</p>
+<div class="section" id="design-principles">
+<h1>Design Principles</h1>
+<p>API classes are either very lightweight or a wrapper around a reference
+counted pointer (this style of class design is sometimes known as PIMPL
+for &quot;Private IMPLementation&quot;). In either case copying is a cheap
+operation as classes are at most a few words of memory.</p>
+<p>API objects keep a reference to other objects they rely on so the user
+doesn't need to worry about whether an object is still valid or not.</p>
+<p>Where appropriate, API classes can be used as containers and iterators
+just like those in the C++ STL.</p>
+</div>
+<div class="section" id="errors-and-exceptions">
+<h1>Errors and exceptions</h1>
+<p>Error reporting is often relegated to the back of manuals such as this.
+However, it is extremely important to understand the errors which may be
+caused by the operations which you are trying to perform.</p>
+<p>This becomes particularly relevant when using a large system, with such
+possibilities as databases which are being updated while you search
+through them, and distributed enquiry systems.</p>
+<p>Errors in Xapian are all reported by means of exceptions. All exceptions
+thrown by Xapian will be subclasses of
+<a class="reference external" href="apidoc/html/classXapian_1_1Error.html">Xapian::Error</a>. Note that
+<tt class="docutils literal"><span class="pre">Xapian::Error</span></tt> is an abstract class; thus you must catch exceptions
+by reference rather than by value.</p>
+<p>There are two flavours of error, derived from <tt class="docutils literal"><span class="pre">Xapian::Error</span></tt>:</p>
+<ul class="simple">
+<li><a class="reference external" href="apidoc/html/classXapian_1_1LogicError.html">Xapian::LogicError</a>
+- for error conditions due to programming errors, such as a misuse of
+the API. A finished application should not receive these errors
+(though it would still be sensible to catch them).</li>
+<li><a class="reference external" href="apidoc/html/classXapian_1_1RuntimeError.html">Xapian::RuntimeError</a>
+- for error conditions due to run time problems, such as failure to
+open a database. You must always be ready to cope with such errors.</li>
+</ul>
+<p>Each of these flavours is further subdivided, such that any particular
+error condition can be trapped by catching the appropriate exception. If
+desired, a human readable explanation of the error can be retrieved by
+calling
+<a class="reference external" href="apidoc/html/classXapian_1_1Error.html">Xapian::Error::get_msg()</a>.</p>
+<p>In addition, standard system errors may occur: these will be reported by
+throwing appropriate exceptions. Most notably, if the system runs out of
+memory, a <tt class="docutils literal"><span class="pre">std::bad_alloc()</span></tt> exception will be thrown.</p>
+</div>
+<div class="section" id="terminology">
+<h1>Terminology</h1>
+<div class="section" id="databases">
+<h2>Databases</h2>
+<p>These may also occasionally be called <em>Indexes</em>. In Xapian (as opposed
+to a database package) a database consists of little more than indexed
+documents: this reflects the purpose of Xapian as an information
+retrieval system, rather than an information storage system.</p>
+<p>The exact contents of a database depend on the type (see &quot;<a class="reference external" href="#database_types">Database
+Types</a>&quot; for more details of the database types
+currently provided).</p>
+</div>
+<div class="section" id="queries">
+<h2>Queries</h2>
+<p>The information to be searched for is specified by a <em>Query</em>. In Xapian,
+queries are made up of a structured boolean tree, upon which
+probabilistic weightings are imposed: when the search is performed, the
+documents returned are filtered according to the boolean structure, and
+weighted (and sorted) according to the probabilistic model of
+information retrieval.</p>
+</div>
+</div>
+<div class="section" id="memory-handling">
+<h1>Memory handling</h1>
+<p>The user of Xapian does not usually need to worry about how Xapian
+performs its memory allocation: Xapian objects can all be created and
+deleted as any other C++ objects. The convention is that whoever creates
+an object is ultimately responsible for deleting it. This becomes
+relevant when passing a pointer to data to Xapian: Xapian will not
+assume that such pointers remain valid across separate API calls, and it
+will be the callers responsibility to delete the object pointed to, as
+and when required.</p>
+</div>
+<div class="section" id="the-xapian-enquire-class">
+<h1>The Xapian::Enquire class</h1>
+<p>The <a class="reference external" href="apidoc/html/classXapian_1_1Enquire.html">Xapian::Enquire</a>
+class is central to all searching operations. It provides an interface
+for</p>
+<ul class="simple">
+<li>Specifying the database, or databases, to search across.</li>
+<li>Specifying a query to perform.</li>
+<li>Specifying a set of documents which a user considers relevant.</li>
+<li>Given the supplied information, returning a ranked set of documents
+for the user.</li>
+<li>Given the supplied information, suggesting a ranked set of terms to
+add to the query.</li>
+<li>Returning information about the documents which matched, such as
+their associated data, and which terms from the query were found
+within them.</li>
+</ul>
+<p>A typical enquiry session will consist of most of these operations, in
+various orders. The Xapian::Enquire class presents as few restrictions
+as possible on the order in which operations should be performed.
+Although you must set the query before any operation which uses it, you
+can call any of the other methods in any order.</p>
+<p>Many operations performed by the Xapian::Enquire class are performed
+lazily (ie, just before their results are needed). This need not concern
+the user except to note that, as a result, errors may not be reported as
+soon as would otherwise be expected.</p>
+</div>
+<div class="section" id="specifying-a-database">
+<h1>Specifying a database</h1>
+<p>When creating a Xapian::Enquire object, a database to search must be
+specified. Databases are specified by creating a <a class="reference external" href="apidoc/html/classXapian_1_1Database.html">Xapian::Database
+object</a>. Generally, you can
+just construct the object, passing the pathname to the database. Xapian
+looks at the path and autodetects the database type.</p>
+<p>In some cases (with the Remote backend, or if you want more control) you
+need to use a factory function such as <tt class="docutils literal"><span class="pre">Xapian::Flint::open()</span></tt> - each
+backend type has one or more. The parameters the function takes depend
+on the backend type, and whether we are creating a read-only or a
+writable database.</p>
+<p>You can also create a &quot;stub database&quot; file which lists one or more
+databases. These files are recognised by the autodetection in the
+Database constructor (if the pathname is file rather than a directory,
+it's treated as a stub database file) or you can open them explicitly
+using Xapian::Auto::open_stub(). The stub database format specifies one
+database per line. For example:</p>
+<pre class="literal-block">
+remote localhost:23876
+flint /var/spool/xapian/webindex
+</pre>
+<div class="section" id="id1">
+<h2>Database types</h2>
+<p>The current types understood by Xapian are:</p>
+<dl class="docutils">
+<dt>auto</dt>
+<dd>This isn't an actual database format, but rather auto-detection of one of
+the disk based backends (e.g. &quot;flint&quot; or &quot;chert&quot;) from a single specified
+path (which can be to a file or directory).</dd>
+<dt>brass</dt>
+<dd>Brass is the current development backend, and it is intended to be the
+default backend in Xapian 1.4.x.</dd>
+<dt>chert</dt>
+<dd>Chert is the default backend in Xapian 1.2.x. It supports incremental
+modifications, concurrent single-writer and multiple-reader access to a
+database. It's very efficient and highly scalable.</dd>
+<dt>flint</dt>
+<dd><p class="first">Flint was the default backend in Xapian 1.0.x. It supports incremental
+modifications, concurrent single-writer and multiple-reader access to a
+database. It's very efficient and highly scalable. Flint takes lessons
+learned from studying Quartz in action, and is appreciably faster (both
+when indexing and searching), more compact, and features an improved
+locking mechanism which automatically releases the lock if a writing
+process dies.</p>
+<p class="last">For more information, see the <a class="reference external" href="http://trac.xapian.org/wiki/FlintBackend">Xapian Wiki</a>.</p>
+</dd>
+<dt>inmemory</dt>
+<dd>This type is a database held entirely in memory. It was originally written
+for testing purposes only, but may prove useful for building up temporary
+small databases.</dd>
+<dt>quartz</dt>
+<dd>Quartz was the default backend prior to Xapian 1.0, and has been removed as
+of Xapian 1.1.0. If you want to migrate an existing Quartz database to
+Flint, <a class="reference external" href="admin_notes.html#converting-a-quartz-database-to-a-flint-database%60">see the 'Admin Notes'</a>
+for a way to do this.</dd>
+<dt>remote</dt>
+<dd><p class="first">This can specify either a &quot;program&quot; or TCP remote backend, for example:</p>
+<pre class="literal-block">
+remote ssh xapian-prog.example.com xapian-progsrv
+</pre>
+<p>or:</p>
+<pre class="literal-block">
+remote xapian-tcp.example.com:12345
+</pre>
+<p class="last">Currently the two are distinguished by checking for a colon (<tt class="docutils literal"><span class="pre">:</span></tt>)
+anywhere in the line, so for the &quot;program&quot; backend, your command can't
+contain a colon.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="multiple-databases">
+<h2>Multiple databases</h2>
+<p>Xapian can search across several databases as easily as searching across
+a single one. Simply call
+<a class="reference external" href="apidoc/html/classXapian_1_1Database.html">Xapian::Database::add_database()</a>
+for each database that you wish to search through.</p>
+<p>You can also set up &quot;pre-canned&quot; listed of databases to search over
+using a &quot;stub database&quot; - see above for details.</p>
+</div>
+</div>
+<div class="section" id="specifying-a-query">
+<h1>Specifying a query</h1>
+<p>Xapian implements both boolean and probabilistic searching. There are
+two obvious ways in which a pure boolean query can be combined with a
+pure probabilistic query:</p>
+<ul class="simple">
+<li>First perform the boolean search to create a subset of the whole
+document collection, and then do the probabilistic search on this
+subset, or</li>
+<li>Do the probabilistic search, and then filter out the resulting
+documents with a boolean query.</li>
+</ul>
+<p>There is in fact a subtle difference in these two approaches. In the
+first, the collection statistics for the probabilistic query will be
+determined by the document subset which is obtained by running the
+boolean query. In the second, the collection statistics for the
+probabilistic query are determined by the whole document collection.
+These differences can affect the final result.</p>
+<p>Suppose for example the boolean query is being used to retrieve
+documents in English in a database containing English and French
+documents. A word like &quot;<em>grand</em>&quot;, exists in both languages (with similar
+meanings), but is more common in French than English. In the English
+subset it could therefore be expected to have a higher weight than it
+would get in the joint English and French databases.</p>
+<p>Xapian takes the second approach simply because this can be implemented
+very efficiently. The first approach is more exact, but inefficient to
+implement.</p>
+<p>Rather than implementing this approach as described above and first
+performing the probabilistic search and then filtering the results,
+Xapian actually performs both tasks simultaneously. This allows various
+optimisations to be performed, such as giving up on calculating a
+boolean AND operation when the probabilistic weights that could result
+from further documents can have no effect on the result set. These
+optimisations have been found to often give a several-fold performance
+increase. The performance is particularly good for queries containing
+many terms.</p>
+<div class="section" id="a-query-for-a-single-term">
+<h2>A query for a single term</h2>
+<p>A search query is represented by a
+<a class="reference external" href="apidoc/html/classXapian_1_1Query.html">Xapian::Query</a> object. The
+simplest useful query is one which searches for a single term (and
+several of these can be combined to form more complex queries). A single
+term query can be created as follows (where <tt class="docutils literal"><span class="pre">term</span></tt> is a
+<tt class="docutils literal"><span class="pre">std::string</span></tt> holding the term to be searched for):</p>
+<pre class="literal-block">
+Xapian::Query query(term);
+</pre>
+<p>A term in Xapian is represented simply by a string of binary characters.
+Usually, when searching text, these characters will be the word which
+the term represents, but during the information retrieval process Xapian
+attaches no specific meaning to the term.</p>
+<p>This constructor actually takes a couple of extra parameters, which may
+be used to specify positional and frequency information for terms in the
+query:</p>
+<pre class="literal-block">
+Xapian::Query(const string &amp; tname_,
+        Xapian::termcount wqf_ = 1,
+        Xapian::termpos term_pos_ = 0)
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">wqf</span></tt> (Within Query Frequency) is a measure of how
+common a term is in the query. This isn't useful for a single term query
+unless it is going to be combined to form a more complex query. In that
+case, it's particularly useful when generating a query from an existing
+document, but may also be used to increase the &quot;importance&quot;  of a term in
+a query. Another way to increase the &quot;importance&quot; of a term is to use
+<tt class="docutils literal"><span class="pre">OP_SCALE_WEIGHT</span></tt>. But if the intention is simply to ensure that a
+particular term is in the query results, you should use a boolean AND or
+AND_MAYBE rather than setting a high wqf.</p>
+<p>The <tt class="docutils literal"><span class="pre">term_pos</span></tt> represents the position of the term in the query.
+Again, this isn't useful for a single term query by itself, but is used
+for phrase searching, passage retrieval, and other operations which
+require knowledge of the order of terms in the query (such as returning
+the set of matching terms in a given document in the same order as they
+occur in the query). If such operations are not required, the default
+value of 0 may be used.</p>
+<p>Note that it may not make much sense to specify a wqf other than 1 when
+supplying a term position (unless you are trying to affect the
+weighting, as previously described).</p>
+<p>Note also that the results of <tt class="docutils literal"><span class="pre">Xapian::Query(tname,</span> <span class="pre">2)</span></tt> and
+<tt class="docutils literal"><span class="pre">Xapian::Query(Xapian::Query::OP_OR,</span> <span class="pre">Xapian::Query(tname),</span> <span class="pre">Xapian::Query(tname))</span></tt>
+are exactly equivalent.</p>
+</div>
+<div class="section" id="compound-queries">
+<h2>Compound queries</h2>
+<p>Compound queries can be built up from single term queries by combining
+them a connecting operator. Most operators can operate on either a
+single term query or a compound query. You can combine pair-wise using
+the following constructor:</p>
+<pre class="literal-block">
+Xapian::Query(Xapian::Query::op op_,
+        const Xapian::Query &amp; left,
+        const Xapian::Query &amp; right)
+</pre>
+<p>The two most commonly used operators are <tt class="docutils literal"><span class="pre">Xapian::Query::OP_AND</span></tt> and
+<tt class="docutils literal"><span class="pre">Xapian::Query::OP_OR</span></tt>, which enable us to construct boolean queries
+made up from the usual AND and OR operations. But in addition to this, a
+probabilistic query in its simplest form, where we have a list of terms
+which give rise to weights that need to be added together, is also made
+up from a set of terms joined together with <tt class="docutils literal"><span class="pre">Xapian::Query::OP_OR</span></tt>.</p>
+<p>The full set of available <tt class="docutils literal"><span class="pre">Xapian::Query::op</span></tt> operators is:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>Xapian::Query::OP_AND</td>
+<td>Return documents returned by both subqueries.</td>
+</tr>
+<tr><td>Xapian::Query::OP_OR</td>
+<td>Return documents returned by either subquery.</td>
+</tr>
+<tr><td>Xapian::Query::OP_AND_NOT</td>
+<td>Return documents returned by the left subquery but not the right subquery.</td>
+</tr>
+<tr><td>Xapian::Query::OP_FILTER</td>
+<td>As Xapian::Query::OP_AND, but use only weights from left subquery.</td>
+</tr>
+<tr><td>Xapian::Query::OP_AND_MAYBE</td>
+<td>Return documents returned by the left subquery, but adding document weights from both subqueries.</td>
+</tr>
+<tr><td>Xapian::Query::OP_XOR</td>
+<td>Return documents returned by one subquery only.</td>
+</tr>
+<tr><td>Xapian::Query::OP_NEAR</td>
+<td>Return documents where the terms are with the specified distance of each other.</td>
+</tr>
+<tr><td>Xapian::Query::OP_PHRASE</td>
+<td>Return documents where the terms are with the specified distance of each other and in the given order.</td>
+</tr>
+<tr><td>Xapian::Query::OP_ELITE_SET</td>
+<td>Select an elite set of terms from the subqueries, and perform a query with all those terms combined as an OR query.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="understanding-queries">
+<h2>Understanding queries</h2>
+<p>Each term in the query has a weight in each document. Each document may
+also have an additional weight not associated with any of the terms. By
+default the probabilistic weighting scheme <a class="reference external" href="bm25.html">BM25</a> is used
+to provide the formulae which give these weights.</p>
+<p>A query can be thought of as a tree structure. At each node is an
+<tt class="docutils literal"><span class="pre">Xapian::Query::op</span></tt> operator, and on the left and right branch are two
+other queries. At each leaf node is a term, t, transmitting documents
+and scores, D and w<sub>D</sub>(t), up the tree.</p>
+<p>A Xapian::Query::OP_OR node transmits documents from both branches up
+the tree, summing the scores when a document is found in both the left
+and right branch. For example,</p>
+<pre class="literal-block">
+                        docs       1    8    12    16    17    18
+                        scores    7.3  4.1   3.2  7.6   3.8   4.7 ...
+                          |
+                          |
+                Xapian::Query::OP_OR
+                      /       \
+                     /         \
+                    /           \
+                   /             \
+docs     1   12   16   17         1   8   16   18
+scores  3.1 3.2  3.1  3.8 ...    4.2 4.1 4.5  4.7 ...
+</pre>
+<p>A Xapian::Query::OP_AND node transmits only the documents found on both
+branches up the tree, again summing the scores,</p>
+<pre class="literal-block">
+                        docs       1   16
+                        scores    7.3  7.6  ...
+                          |
+                          |
+                Xapian::Query::OP_AND
+                      /       \
+                     /         \
+                    /           \
+                   /             \
+docs     1   12   16   17         1   8   16   18
+scores  3.1 3.2  3.1  3.8 ...    4.2 4.1 4.5  4.7 ...
+</pre>
+<p>A Xapian::Query::OP_AND_NOT node transmits up the tree the documents
+on the left branch which are not on the right branch. The scores are
+taken from the left branch. For example, again summing the scores,</p>
+<pre class="literal-block">
+                        docs       12   17
+                        scores    3.2  3.8 ...
+                          |
+                          |
+              Xapian::Query::OP_AND_NOT
+                      /       \
+                     /         \
+                    /           \
+                   /             \
+docs     1   12   16   17         1   8   16   18
+scores  3.1 3.2  3.1  3.8 ...    4.2 4.1 4.5  4.7 ...
+</pre>
+<p>A Xapian::Query::OP_AND_MAYBE node transmits the documents up the tree
+from the left branch only, but adds in the score from the right branch
+for documents which occur on both branches. For example,</p>
+<pre class="literal-block">
+                        docs       1    12   16   17
+                        scores    7.3  3.2  7.6  3.8 ...
+                          |
+                          |
+             Xapian::Query::OP_AND_MAYBE
+                      /       \
+                     /         \
+                    /           \
+                   /             \
+docs     1   12   16   17         1   8   16   18
+scores  3.1 3.2  3.1  3.8 ...    4.2 4.1 4.5  4.7 ...
+</pre>
+<p>Xapian::Query::OP_FILTER is like Xapian::Query::OP_AND, but weights
+are only transmitted from the left branch. For example,</p>
+<pre class="literal-block">
+                        docs       1   16
+                        scores    3.1  3.1  ...
+                          |
+                          |
+               Xapian::Query::OP_FILTER
+                      /       \
+                     /         \
+                    /           \
+                   /             \
+docs     1   12   16   17         1   8   16   18
+scores  3.1 3.2  3.1  3.8 ...    4.2 4.1 4.5  4.7 ...
+</pre>
+<p>Xapian::Query::OP_XOR is like Xapian::Query::OP_OR, but documents on
+both left and right branches are not transmitted up the tree. For
+example,</p>
+<pre class="literal-block">
+                        docs       8    12    17    18
+                        scores    4.1   3.2  3.8   4.7 ...
+                          |
+                          |
+                   Xapian::Query::OP_XOR
+                      /       \
+                     /         \
+                    /           \
+                   /             \
+docs     1   12   16   17         1   8   16   18
+scores  3.1 3.2  3.1  3.8 ...    4.2 4.1 4.5  4.7 ...
+</pre>
+<p>A query can therefore be thought of as a process for generating an MSet
+from the terms at the leaf nodes of the query. Each leaf node gives rise
+to a posting list of documents with scores. Each higher level node gives
+rise to a similar list, and the root node of the tree contains the final
+set of documents with scores (or weights), which are candidates for
+going into the MSet. The MSet contains the documents which get the
+highest weights, and they are held in the MSet in weight order.</p>
+<p>It is important to realise that within Xapian the structure of a query
+is optimised for best performance, and it undergoes various
+transformations as the query progresses. The precise way in which the
+query is built up is therefore of little importance to Xapian - for
+example, you can AND together terms pair-by-pair, or combine several
+using AND on a std::vector of terms, and Xapian will build the same
+structure internally.</p>
+</div>
+<div class="section" id="using-queries">
+<h2>Using queries</h2>
+<div class="section" id="probabilistic-queries">
+<h3>Probabilistic queries</h3>
+<p>A plain probabilistic query is created by connecting terms together with
+Xapian::Query::OP_OR operators. For example,</p>
+<pre class="literal-block">
+Xapian::Query query(&quot;regulation&quot;));
+query = Xapian::Query(Xapian::Query::OP_OR, query, Xapian::Query(&quot;import&quot;));
+query = Xapian::Query(Xapian::Query::OP_OR, query, Xapian::Query(&quot;export&quot;));
+query = Xapian::Query(Xapian::Query::OP_OR, query, Xapian::Query(&quot;canned&quot;));
+query = Xapian::Query(Xapian::Query::OP_OR, query, Xapian::Query(&quot;fish&quot;));
+</pre>
+<p>This creates a probabilistic query with terms `regulation', `import',
+`export', `canned' and `fish'.</p>
+<p>In fact this style of creation is so common that there is the shortcut
+construction:</p>
+<pre class="literal-block">
+vector &lt;string&gt; terms;
+terms.push_back(&quot;regulation&quot;);
+terms.push_back(&quot;import&quot;);
+terms.push_back(&quot;export&quot;);
+terms.push_back(&quot;canned&quot;);
+terms.push_back(&quot;fish&quot;);
+
+Xapian::Query query(Xapian::Query::OP_OR, terms.begin(), terms.end());
+</pre>
+</div>
+<div class="section" id="boolean-queries">
+<h3>Boolean queries</h3>
+<p>Suppose now we have this Boolean query,</p>
+<pre class="literal-block">
+('EEC' - 'France') and ('1989' or '1991' or '1992') and 'Corporate Law'
+</pre>
+<p>This could be built up as bquery like this,</p>
+<pre class="literal-block">
+Xapian::Query bquery1(Xapian::Query::OP_AND_NOT, &quot;EEC&quot;, &quot;France&quot;);
+
+Xapian::Query bquery2(&quot;1989&quot;);
+bquery2 = Xapian::Query(Xapian::Query::OP_OR, bquery2, &quot;1991&quot;);
+bquery2 = Xapian::Query(Xapian::Query::OP_OR, bquery2, &quot;1992&quot;);
+
+Xapian::Query bquery3(&quot;Corporate Law&quot;);
+
+Xapian::Query bquery(Xapian::Query::OP_AND, bquery1, Xapian::Query(Xapian::Query::OP_AND(bquery2, bquery3)));
+</pre>
+<p>and this can be attached as a filter to <tt class="docutils literal"><span class="pre">query</span></tt> to run the
+probabilistic query with a Boolean filter,</p>
+<pre class="literal-block">
+query = Xapian::Query(Xapian::Query::OP_FILTER, query, bquery);
+</pre>
+<p>If you want to run a pure boolean query, then set BoolWeight as the
+weighting scheme (by calling Enquire::set_weighting_scheme() with
+argument BoolWeight()).</p>
+</div>
+<div class="section" id="plus-and-minus-terms">
+<h3>Plus and minus terms</h3>
+<p>A common requirement in search engine functionality is to run a
+probabilistic query where some terms are required to index all the
+retrieved documents (`+' terms), and others are required to index none
+of the retrieved documents (`-' terms). For example,</p>
+<pre class="literal-block">
+regulation import export +canned +fish -japan
+</pre>
+<p>the corresponding query can be set up by,</p>
+<pre class="literal-block">
+vector &lt;string&gt; plus_terms;
+vector &lt;string&gt; minus_terms;
+vector &lt;string&gt; normal_terms;
+
+plus_terms.push_back(&quot;canned&quot;);
+plus_terms.push_back(&quot;fish&quot;);
+
+minus_terms.push_back(&quot;japan&quot;);
+
+normal_terms.push_back(&quot;regulation&quot;);
+normal_terms.push_back(&quot;import&quot;);
+normal_terms.push_back(&quot;export&quot;);
+
+Xapian::Query query(Xapian::Query::OP_AND_MAYBE,
+              Xapian::Query(Xapian::Query::OP_AND, plus_terms.begin(), plus_terms.end());
+              Xapian::Query(Xapian::Query::OP_OR, normal_terms.begin(), normal_terms.end()));
+
+query = Xapian::Query(Xapian::Query::OP_AND_NOT,
+                query,
+                Xapian::Query(Xapian::Query::OP_OR, minus_terms.begin(), minus_terms.end()));
+</pre>
+</div>
+</div>
+<div class="section" id="undefined-queries">
+<h2>Undefined queries</h2>
+<p>Performing a match with an undefined query matches nothing, which is
+sometimes useful. However an undefined query can't be used with
+operators to compose a query.</p>
+</div>
+</div>
+<div class="section" id="retrieving-the-results-of-a-query">
+<h1>Retrieving the results of a query</h1>
+<p>The Xapian::Enquire class does not require that a method be called in
+order to perform the query. Rather, you simply ask for the results of a
+query, and it will perform whatever calculations are necessary to
+provide the answer:</p>
+<pre class="literal-block">
+Xapian::MSet Xapian::Enquire::get_mset(Xapian::doccount first,
+                           Xapian::doccount maxitems,
+                           const Xapian::RSet * rset = 0,
+                           const Xapian::MatchDecider * mdecider = 0) const
+</pre>
+<p>When asking for the results, you must specify (in <tt class="docutils literal"><span class="pre">first</span></tt>) the first
+item in the result set to return, where the numbering starts at zero (so
+a value of zero corresponds to the first item returned being that with
+the highest score, and a value of 10 corresponds to the first 10 items
+being ignored, and the returned items starting at the eleventh).</p>
+<p>You must also specify (in <tt class="docutils literal"><span class="pre">maxitems</span></tt>) the maximum number of items to
+return. Unless there are not enough matching items, precisely this
+number of items will be returned. If <tt class="docutils literal"><span class="pre">maxitems</span></tt> is zero, no items will
+be returned, but the usual statistics (such as the maximum possible
+weight which a document could be assigned by the query) will be
+calculated. (See &quot;The Xapian::MSet&quot; below).</p>
+<div class="section" id="the-xapian-mset">
+<h2>The Xapian::MSet</h2>
+<p>Query results are returned in an
+<a class="reference external" href="apidoc/html/classXapian_1_1MSet.html">Xapian::MSet</a> object. The
+results can be accessed using a
+<a class="reference external" href="apidoc/html/classXapian_1_1MSetIterator.html">Xapian::MSetIterator</a>
+which returns the matches in descending sorted order of relevance (so
+the most relevant document is first in the list). Each <tt class="docutils literal"><span class="pre">Xapian::MSet</span></tt>
+entry comprises a document id, and the weight calculated for that
+document.</p>
+<p>An <tt class="docutils literal"><span class="pre">Xapian::MSet</span></tt> also contains various information about the search
+result:</p>
+<dl class="docutils">
+<dt>firstitem</dt>
+<dd>The index of the first item in the result which was put into the MSet.
+(Corresponding to <tt class="docutils literal"><span class="pre">first</span></tt> in <tt class="docutils literal"><span class="pre">Xapian::Enquire::get_mset()</span></tt>)</dd>
+<dt>max_attained</dt>
+<dd>The greatest weight which is attained in the full results of the search.</dd>
+<dt>max_possible</dt>
+<dd>The maximum possible weight in the MSet.</dd>
+<dt>docs_considered</dt>
+<dd>The number of documents matching the query considered for the MSet. This
+provides a lower bound on the number of documents in the database which
+have a weight greater than zero. Note that this value may change if the
+search is recalculated with different values for <tt class="docutils literal"><span class="pre">first</span></tt> or
+<tt class="docutils literal"><span class="pre">max_items</span></tt>.</dd>
+</dl>
+<p>See the <a class="reference external" href="apidoc/html/classXapian_1_1MSet.html">automatically extracted
+documentation</a> for more details
+of these fields.</p>
+<p>The <tt class="docutils literal"><span class="pre">Xapian::MSet</span></tt> also provides methods for converting the score
+calculated for a given document into a percentage value, suitable for
+displaying to a user. This may be done using the
+<a class="reference external" href="apidoc/html/classXapian_1_1MSet.html">convert_to_percent()</a>
+methods:</p>
+<pre class="literal-block">
+int Xapian::MSet::convert_to_percent(const Xapian::MSetIterator &amp; item) const
+int Xapian::MSet::convert_to_percent(Xapian::weight wt) const
+</pre>
+<p>These methods return a value in the range 0 to 100, which will be 0 if
+and only if the item did not match the query at all.</p>
+</div>
+<div class="section" id="accessing-a-document">
+<h2>Accessing a document</h2>
+<p>A document in the database is accessed via a
+<a class="reference external" href="apidoc/html/classXapian_1_1Document.html">Xapian::Document</a>
+object. This can be obtained by calling
+<a class="reference external" href="apidoc/html/classXapian_1_1Database.html">Xapian::Database::get_document()</a>.
+The returned <tt class="docutils literal"><span class="pre">Xapian::Document</span></tt> is a reference counted handle so
+copying is cheap.</p>
+<p>Each document can have the following types of information associated
+with it:</p>
+<ul class="simple">
+<li>document data - this is an arbitrary block of data accessed using
+<a class="reference external" href="apidoc/html/classXapian_1_1Document.html">Xapian::Document::get_data()</a>.
+The contents of the document data can be whatever you want and in
+whatever format. Often it contains fields such as a URL or other
+external UID, a document title, and an excerpt from the document
+text. If you wish to interoperate with Omega, it should contain
+name=value pairs, one per line (recent versions of Omega also support
+one field value per line, and can assign names to line numbers in the
+query template).</li>
+<li>terms and positional information - terms index the document (like
+index entries in the back of a book); positional information records
+the word offset into the document of each occurrence of a particular
+term. This is used to implement phrase searching and the NEAR
+operator.</li>
+<li>document values - these are arbitrary pieces of data which are stored
+so they can be accessed rapidly during the match process (to allow
+sorting collapsing of duplicates, etc). Each value is stored in a
+numbered slot so you can have several for each document. There's
+currently no length limit, but you should keep them short for
+efficiency.</li>
+</ul>
+<p>There's some overlap in what you can do with terms and with values. A
+simple boolean operator (e.g. document language) is definitely better
+done using a term and OP_FILTER.</p>
+<p>Using a value allows you to do things you can't do with terms, such as
+&quot;sort by price&quot;, or &quot;show only the best match for each website&quot;. You can
+also perform filtering with a value which is more sophisticated than can
+easily be achieved with terms, for example: find matches with a price
+between $100 and $900. Omega uses boolean terms to perform date range
+filtering, but this might actually be better done using a value (the
+code in Omega was written before values were added to Xapian).</p>
+</div>
+</div>
+<div class="section" id="specifying-a-relevance-set">
+<h1>Specifying a relevance set</h1>
+<p>Xapian supports the idea of relevance feedback: that is, of allowing the
+user to mark documents as being relevant to the search, and using this
+information to modify the search. This is supported by means of
+relevance sets, which are simply sets of document ids which are marked
+as relevant. These are held in
+<a class="reference external" href="apidoc/html/classXapian_1_1RSet.html">Xapian::RSet</a> objects, one
+of which may optionally be supplied to Xapian in the <tt class="docutils literal"><span class="pre">rset</span></tt>
+parameter when calling <tt class="docutils literal"><span class="pre">Xapian::Enquire::get_mset()</span></tt>.</p>
+<div class="section" id="match-options">
+<h2>Match options</h2>
+<p>There are various additional options which may be specified when
+performing the query. These are specified by calling <a class="reference external" href="apidoc/html/classXapian_1_1Enquire.html">various methods of
+the Xapian::Enquire object</a>.
+The options are as follows.</p>
+<dl class="docutils">
+<dt>collapse key</dt>
+<dd>Each document in a database may have a set of numbered keys. The contents
+of each key is a string of arbitrary length. The
+<tt class="docutils literal"><span class="pre">set_collapse_key(Xapian::valueno</span> <span class="pre">collapse_key)</span></tt> method specifies a key
+number upon which to remove duplicates. Only the most recently set
+duplicate removal key is active at any time, and the default is to perform
+no duplicate removal.</dd>
+<dt>percentage cutoff</dt>
+<dd>It may occasionally be desirable to exclude any documents which have a
+weight less than a given percentage value. This may be done using
+<tt class="docutils literal"><span class="pre">set_cutoff(Xapian::percent</span> <span class="pre">percent_cutoff)</span></tt>.</dd>
+<dt>sort direction</dt>
+<dd><p class="first">Some weighting functions may frequently result in several documents being
+returned with the same weight. In this case, by default, the documents will
+be returned in ascending document id order. This can be changed by using
+<tt class="docutils literal"><span class="pre">set_docid_order()</span></tt> to set the sort direction.</p>
+<p class="last"><tt class="docutils literal"><span class="pre">set_sort_forward(Xapian::Enquire::DESCENDING)</span></tt> may be useful, for
+example, when it would be best to return the newest documents, and new
+documents are being added to the end of the database (which is what happens
+by default).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="match-decision-functors">
+<h2>Match decision functors</h2>
+<p>Sometimes it may be useful to return only documents matching criteria
+which can't be easily represented by queries. This can be done using a
+match decision functor. To set such a condition, derive a class from
+<tt class="docutils literal"><span class="pre">Xapian::MatchDecider</span></tt> and override the function operator,
+<tt class="docutils literal"><span class="pre">operator()(const</span> <span class="pre">Xapian::Document</span> <span class="pre">&amp;doc)</span></tt>. The operator can make a
+decision based on the document values via
+<tt class="docutils literal"><span class="pre">Xapian::Document::get_value(Xapian::valueno)</span></tt>.</p>
+<p>The functor will also have access to the document data stored in the
+database (via <tt class="docutils literal"><span class="pre">Xapian::Document::get_data()</span></tt>), but beware that for
+most database backends, this is an expensive operation and is likely to
+slow down the search considerably.</p>
+</div>
+</div>
+<div class="section" id="expand-suggesting-new-terms-for-the-query">
+<h1>Expand - Suggesting new terms for the query</h1>
+<p>Xapian also supports the idea of calculating terms to add to the query,
+based on the relevant documents supplied. A set of such terms, together
+with their weights, may be returned by:</p>
+<pre class="literal-block">
+Xapian::ESet Xapian::Enquire::get_eset(Xapian::termcount maxitems,
+                           const Xapian::RSet &amp; rset,
+               bool exclude_query_terms = true,
+               bool use_exact_termfreq = false,
+               double k = 1.0,
+               const Xapian::ExpandDecider * edecider = 0) const;
+Xapian::ESet Xapian::Enquire::get_eset(Xapian::termcount maxitems,
+                           const Xapian::RSet &amp; rset,
+                           const Xapian::ExpandDecider * edecider) const
+</pre>
+<p>As for <tt class="docutils literal"><span class="pre">get_mset</span></tt>, up to <tt class="docutils literal"><span class="pre">maxitems</span></tt> expand terms will be returned,
+with fewer being returned if and only if no more terms could be found.</p>
+<p>The expand terms are returned in sorted weight order in an
+<a class="reference external" href="apidoc/html/classXapian_1_1ESet.html">Xapian::ESet</a> item.</p>
+<div class="section" id="exclude-query-terms">
+<h2>exclude_query_terms</h2>
+<p>By default terms which are already in the query will never be returned
+by <tt class="docutils literal"><span class="pre">get_eset()</span></tt>. If <tt class="docutils literal"><span class="pre">exclude_query_terms</span></tt> is <tt class="docutils literal"><span class="pre">false</span></tt>) then query
+terms may be returned.</p>
+</div>
+<div class="section" id="use-exact-termfreq">
+<h2>use_exact_termfreq</h2>
+<p>By default, Xapian uses an approximation to the term frequency when
+<tt class="docutils literal"><span class="pre">get_eset()</span></tt> is called when searching over multiple databases. This
+approximation improves performance, and usually still returns good
+results. If you're willing to pay the performance penalty, you can get
+Xapian to calculate the exact term frequencies by passing <tt class="docutils literal"><span class="pre">true</span></tt> for
+<tt class="docutils literal"><span class="pre">use_exact_termfreq</span></tt>.</p>
+</div>
+<div class="section" id="expand-decision-functors">
+<h2>Expand decision functors</h2>
+<p>It is often useful to allow only certain classes of term to be returned
+in the expand set. For example, there may be special terms in the
+database with various prefixes, which should be removed from the expand
+set. This is accomplished by providing a decision functor. To do this,
+derive a class from <tt class="docutils literal"><span class="pre">Xapian::ExpandDecider</span></tt> and override the function
+operator, <tt class="docutils literal"><span class="pre">operator()(const</span> <span class="pre">string</span> <span class="pre">&amp;)</span></tt>. The functor is called with
+each term before it is added to the set, and it may accept (by returning
+<tt class="docutils literal"><span class="pre">true</span></tt>) or reject (by returning <tt class="docutils literal"><span class="pre">false</span></tt>) the term as appropriate.</p>
+</div>
+</div>
+<div class="section" id="thread-safety">
+<h1>Thread safety</h1>
+<p>There's no pthread specific code in Xapian. If you want to use the same
+object concurrently from different threads, it's up to you to police
+access (with a mutex or in some other way) to ensure only one method is
+being executed at once. The reason for this is to avoid adding the
+overhead of locking and unlocking mutexes when they aren't required. It
+also makes the Xapian code easier to maintain, and simplifies building
+it.</p>
+<p>For most applications, this is unlikely to be an issue - generally the
+calls to Xapian are likely to be from a single thread. And if they
+aren't, you can just create an entirely separate Xapian::Database object
+in each thread - this is no different to accessing the same database
+from two different processes.</p>
+</div>
+<div class="section" id="examples">
+<h1>Examples</h1>
+<p>Extensively documented examples of simple usage of the Xapian API for
+creating databases and then for searching through them are given in the
+<a class="reference external" href="quickstart.html">QuickStart</a> tutorial.</p>
+<p>Further examples of usage of Xapian are available in the examples
+subdirectory of xapian-core.</p>
+</div>
+</div>
+</body>
+</html>

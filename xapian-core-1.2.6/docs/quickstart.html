@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Quickstart</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="quickstart">
+<h1 class="title">Quickstart</h1>
+
+<p>The document contains a quick introduction to the basic concepts, and
+then a walk-through development of a simple application using the Xapian
+library, together with commentary on how the application could be taken
+further. It deliberately avoids going into a lot of detail - see the
+<a class="reference external" href="index.html">rest of the documentation</a> for more detail.</p>
+<hr class="docutils" />
+<div class="section" id="requirements">
+<h1>Requirements</h1>
+<p>Before following the steps outlined in this document, you will need to
+have the Xapian library installed on your system. For instructions on
+obtaining and installing Xapian, read the <a class="reference external" href="install.html">Installation</a>
+document.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="databases">
+<h1>Databases</h1>
+<p>An information retrieval system using Xapian typically has two parts.
+The first part is the <em>indexer</em>, which takes documents in various
+formats, processes them so that they can be efficiently searched, and
+stores the processed documents in an appropriate data structure (the
+<em>database</em>). The second part is the <em>searcher</em>, which takes queries and
+reads the database to return a list of the documents relevant to each
+query.</p>
+<p>The database is the data structure which ties the indexer and searcher
+together, and is fundamental to the retrieval process. Given how
+fundamental it is, it is unsurprising that different applications put
+different demands on the database. For example, some applications may be
+happy to deal with searching a static collection of data, but need to do
+this extremely fast (for example, a web search engine which builds new
+databases from scratch nightly or even weekly). Other applications may
+require that new data can be added to the system incrementally, but
+don't require extremely high performance searching (perhaps an email
+system, which is only being searched occasionally). There are many other
+constraints which may be placed on an information retrieval system: for
+example, it may be required to have small database sizes, even at the
+expense of getting poorer results from the system.</p>
+<p>To provide the required flexibility, Xapian has the ability to use one
+of many available database <em>backends</em>, each of which satisfies a
+different set of constraints, and stores its data in a different way.
+Currently, these must be compiled into the whole system, and selected at
+runtime, but the ability to dynamically load modules for each of these
+backends is likely to be added in future, and would require little
+design modification.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="an-example-indexer">
+<h1>An example indexer</h1>
+<p>We now present sample code for an indexer. This is deliberately
+simplified to make it easier to follow. You can also read it in <a class="reference external" href="quickstartsearch.cc.html">an HTML
+formatted version</a>.</p>
+<p>The &quot;indexer&quot; presented here is simply a small program which takes a
+path to a database and a set of parameters defining a document on the
+command line, and stores that document as a new entry in the database.</p>
+<div class="section" id="include-header-files">
+<h2>Include header files</h2>
+<p>The first requirement in any program using the Xapian library is to
+include the Xapian header file, &quot;<tt class="docutils literal"><span class="pre">xapian.h</span></tt>&quot;:</p>
+<pre class="literal-block">
+#include &lt;xapian.h&gt;
+</pre>
+<p>We're going to use C++ iostreams for output, so we need to include the
+<tt class="docutils literal"><span class="pre">iostream</span></tt> header, and we'll also import everything from namespace
+<tt class="docutils literal"><span class="pre">std</span></tt> for convenience:</p>
+<pre class="literal-block">
+#include &lt;iostream&gt;
+using namespace std;
+</pre>
+<p>Our example only has a single function, <tt class="docutils literal"><span class="pre">main()</span></tt>, so next we define
+that:</p>
+<pre class="literal-block">
+int main(int argc, char **argv)
+</pre>
+</div>
+<div class="section" id="options-parsing">
+<h2>Options parsing</h2>
+<p>For this example we do very simple options parsing. We are going to use
+the core functionality of Xapian of searching for specific terms in the
+database, and we are not going to use any of the extra facilities, such
+as the keys which may be associated with each document. We are also
+going to store a simple string as the data associated with each
+document.</p>
+<p>Thus, our command line syntax is:</p>
+<ul class="simple">
+<li><strong>Parameter 1</strong> - the (possibly relative) path to the database.</li>
+<li><strong>Parameter 2</strong> - the string to be stored as the document data.</li>
+<li><strong>Parameters 3 onward</strong> - the terms to be stored in the database. The
+terms will be assumed to occur at successive positions in the
+document.</li>
+</ul>
+<p>The validity of a command line can therefore be checked very simply by
+ensuring that there are at least 3 parameters:</p>
+<pre class="literal-block">
+if (argc &lt; 4) {
+    cout &lt;&lt; &quot;usage: &quot; &lt;&lt; argv[0] &lt;&lt;
+            &quot; &lt;path to database&gt; &lt;document data&gt; &lt;document terms&gt;&quot; &lt;&lt; endl;
+    exit(1);
+}
+</pre>
+</div>
+<div class="section" id="catching-exceptions">
+<h2>Catching exceptions</h2>
+<p>When an error occurs in Xapian it is reported by means of the C++
+exception mechanism. All errors in Xapian are derived classes of
+<tt class="docutils literal"><span class="pre">Xapian::Error</span></tt>, so simple error handling can be performed by
+enclosing all the code in a try-catch block to catch any
+<tt class="docutils literal"><span class="pre">Xapian::Error</span></tt> exceptions. A (hopefully) helpful message can be
+extracted from the <tt class="docutils literal"><span class="pre">Xapian::Error</span></tt> object by calling its <tt class="docutils literal"><span class="pre">get_msg()</span></tt>
+method, which returns a human readable string.</p>
+<p>Note that all calls to the Xapian library should be performed inside a
+try-catch block, since otherwise errors will result in uncaught
+exceptions; this usually results in the execution aborting.</p>
+<p>Note also that Xapian::Error is a virtual base class, and thus can't be
+copied: you must therefore catch exceptions by reference, as in the
+following example code:</p>
+<pre class="literal-block">
+try {
+    [code which accesses Xapian]
+} catch (const Xapian::Error &amp; error) {
+    cout &lt;&lt; &quot;Exception: &quot; &lt;&lt; error.get_msg() &lt;&lt; endl;
+}
+</pre>
+</div>
+<div class="section" id="opening-the-database">
+<h2>Opening the database</h2>
+<p>In Xapian, a database is opened for writing by creating a
+Xapian::WritableDatabase object.</p>
+<p>If you pass Xapian::DB_CREATE_OR_OPEN and there isn't an existing
+database in the specified directory, Xapian will try to create a new
+empty database there. If there is already database in the specified
+directory, it will be opened.</p>
+<p>If an error occurs when trying to open a database, or to create a new
+database, an exception, usually of type <tt class="docutils literal"><span class="pre">Xapian::DatabaseOpeningError</span></tt>
+or <tt class="docutils literal"><span class="pre">Xapian::DatabaseCreateError</span></tt>, will be thrown.</p>
+<p>The code to open a database for writing is, then:</p>
+<pre class="literal-block">
+Xapian::WritableDatabase database(argv[1], Xapian::DB_CREATE_OR_OPEN);
+</pre>
+</div>
+<div class="section" id="preparing-the-new-document">
+<h2>Preparing the new document</h2>
+<p>Now that we have the database open, we need to prepare a document to put
+in it. This is done by creating a Xapian::Document object, filling this
+with data, and then giving it to the database.</p>
+<p>The first step, then, is to create the document:</p>
+<pre class="literal-block">
+Xapian::Document newdocument;
+</pre>
+<p>Each <tt class="docutils literal"><span class="pre">Xapian::Document</span></tt> has a &quot;cargo&quot; known as the <em>document data</em>.
+This data is opaque to Xapian - the meaning of it is entirely
+user-defined. Typically it contains information to allow results to be
+displayed by the application, for example a URL for the indexed document
+and some text which is to be displayed when returning the document as
+search result.</p>
+<p>For our example, we shall simply store the second parameter given on the
+command line in the data field:</p>
+<pre class="literal-block">
+newdocument.set_data(string(argv[2]));
+</pre>
+<p>The next step is to put the terms which are to be used when searching
+for the document into the Xapian::Document object.</p>
+<p>We shall use the <tt class="docutils literal"><span class="pre">add_posting()</span></tt> method, which adds an occurrence of a
+term to the struct. The first parameter is the &quot;<em>termname</em>&quot;, which is a
+string defining the term. This string can be anything, as long as the
+same string is always used to refer to the same term. The string will
+often be the (possibly stemmed) text of the term, but might be in a
+compressed, or even hashed, form. In general, there is no upper limit to
+the length of a termname, but some database methods may impose their own
+limits.</p>
+<p>The second parameter is the position at which the term occurs within the
+document. These positions start at 1. This information is used for some
+search features such as phrase matching or passage retrieval, but is not
+essential to the search.</p>
+<p>We add postings for terms with the termname given as each of the
+remaining command line parameters:</p>
+<pre class="literal-block">
+for (int i = 3; i &lt; argc; ++i) {
+    newdocument.add_posting(argv[i], i - 2);
+}
+</pre>
+</div>
+<div class="section" id="adding-the-document-to-the-database">
+<h2>Adding the document to the database</h2>
+<p>Finally, we can add the document to the database. This simply involves
+calling <tt class="docutils literal"><span class="pre">Xapian::WritableDatabase::add_document()</span></tt>, and passing it the
+<tt class="docutils literal"><span class="pre">Xapian::Document</span></tt> object:</p>
+<pre class="literal-block">
+database.add_document(newdocument);
+</pre>
+<p>The operation of adding a document is atomic: either the document will
+be added, or an exception will be thrown and the document will not be in
+the new database.</p>
+<p><tt class="docutils literal"><span class="pre">add_document()</span></tt> returns a value of type <tt class="docutils literal"><span class="pre">Xapian::docid</span></tt>. This is
+the document ID of the newly added document, which is simply a handle
+which can be used to access the document in future.</p>
+<p>Note that this use of <tt class="docutils literal"><span class="pre">add_document()</span></tt> is actually fairly inefficient:
+if we had a large database, it would be desirable to group as many
+document additions together as possible, by encapsulating them within a
+session. For details of this, and of the transaction facility for
+performing sets of database modifications atomically, see the <a class="reference external" href="overview.html">API
+Overview</a>.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="an-example-searcher">
+<h1>An example searcher</h1>
+<p>Now we show the code for a simple searcher, which will search the
+database built by the indexer above. Again, you can read <a class="reference external" href="quickstartsearch.cc.html">an HTML
+formatted version</a>.</p>
+<p>The &quot;searcher&quot; presented here is, like the &quot;indexer&quot;, simply a small
+command line driven program. It takes a path to a database and some
+search terms, performs a probabilistic search for documents represented
+by those terms and displays a ranked list of matching documents.</p>
+<div class="section" id="setting-up">
+<h2>Setting up</h2>
+<p>Just like &quot;quickstartindex&quot;, we have a single-function example. So we
+include the Xapian header file, and begin:</p>
+<pre class="literal-block">
+#include &lt;xapian.h&gt;
+
+int main(int argc, char **argv)
+{
+</pre>
+</div>
+<div class="section" id="id2">
+<h2>Options parsing</h2>
+<p>Again, we are going to use no special options, and have a very simple
+command line syntax:</p>
+<ul class="simple">
+<li><strong>Parameter 1</strong> - the (possibly relative) path to the database.</li>
+<li><strong>Parameters 2 onward</strong> - the terms to be searched for in the
+database.</li>
+</ul>
+<p>The validity of a command line can therefore be checked very simply by
+ensuring that there are at least 2 parameters:</p>
+<pre class="literal-block">
+if (argc &lt; 3) {
+    cout &lt;&lt; &quot;usage: &quot; &lt;&lt; argv[0] &lt;&lt;
+            &quot; &lt;path to database&gt; &lt;search terms&gt;&quot; &lt;&lt; endl;
+    exit(1);
+}
+</pre>
+</div>
+<div class="section" id="id3">
+<h2>Catching exceptions</h2>
+<p>Again, this is performed just as it was for the simple indexer.</p>
+<pre class="literal-block">
+try {
+    [code which accesses Xapian]
+} catch (const Xapian::Error &amp; error) {
+    cout &lt;&lt; &quot;Exception: &quot; &lt;&lt; error.get_msg() &lt;&lt; endl;
+}
+</pre>
+</div>
+<div class="section" id="specifying-the-databases">
+<h2>Specifying the databases</h2>
+<p>Xapian has the ability to search over many databases simultaneously,
+possibly even with the databases distributed across a network of
+machines. Each database can be in its own format, so, for example, we
+might have a system searching across two remote databases and a flint
+database.</p>
+<p>To open a single database, we create a Xapian::Database object, passing
+the path to the database we want to open:</p>
+<pre class="literal-block">
+Xapian::Database db(argv[1]);
+</pre>
+<p>You can also search multiple database by adding them together using
+<tt class="docutils literal"><span class="pre">Xapian::Database::add_database</span></tt>:</p>
+<pre class="literal-block">
+Xapian::Database databases;
+databases.add_database(Xapian::Database(argv[1]));
+databases.add_database(Xapian::Database(argv[2]));
+</pre>
+</div>
+<div class="section" id="starting-an-enquire-session">
+<h2>Starting an enquire session</h2>
+<p>All searches across databases by Xapian are performed within the context
+of an &quot;<em>Enquire</em>&quot; session. This session is represented by a
+<tt class="docutils literal"><span class="pre">Xapian::Enquire</span></tt> object, and is across a specified collection of
+databases. To change the database collection, it is necessary to open a
+new enquire session, by creating a new <tt class="docutils literal"><span class="pre">Xapian::Enquire</span></tt> object.</p>
+<pre class="literal-block">
+Xapian::Enquire enquire(databases);
+</pre>
+<p>An enquire session is also the context within which all other database
+reading operations, such as query expansion and reading the data
+associated with a document, are performed.</p>
+</div>
+<div class="section" id="preparing-to-search">
+<h2>Preparing to search</h2>
+<p>We are going to use all command line parameters from the second onward
+as terms to search for in the database. For convenience, we shall store
+them in an STL vector. This is probably the point at which we would want
+to apply a stemming algorithm, or any other desired normalisation and
+conversion operation, to the terms.</p>
+<pre class="literal-block">
+vector&lt;string&gt; queryterms;
+for (int optpos = 2; optpos &lt; argc; optpos++) {
+    queryterms.push_back(argv[optpos]);
+}
+</pre>
+<p>Queries are represented within Xapian by <tt class="docutils literal"><span class="pre">Xapian::Query</span></tt> objects, so
+the next step is to construct one from our query terms. Conveniently
+there is a constructor which will take our vector of terms and create an
+<tt class="docutils literal"><span class="pre">Xapian::Query</span></tt> object from it.</p>
+<pre class="literal-block">
+Xapian::Query query(Xapian::Query::OP_OR, queryterms.begin(), queryterms.end());
+</pre>
+<p>You will notice that we had to specify an operation to be performed on
+the terms (the <tt class="docutils literal"><span class="pre">Xapian::Query::OP_OR</span></tt> parameter). Queries in Xapian
+are actually fairly complex things: a full range of boolean operations
+can be applied to queries to restrict the result set, and probabilistic
+weightings are then applied to order the results by relevance. By
+specifying the OR operation, we are not performing any boolean
+restriction, and are performing a traditional pure probabilistic search.</p>
+<p>We now print a message out to confirm to the user what the query being
+performed is. This is done with the <tt class="docutils literal"><span class="pre">Xapian::Query::get_description()</span></tt>
+method, which is mainly included for debugging purposes, and displays a
+string representation of the query.</p>
+<pre class="literal-block">
+cout &lt;&lt; &quot;Performing query `&quot; &lt;&lt;
+     query.get_description() &lt;&lt; &quot;'&quot; &lt;&lt; endl;
+</pre>
+</div>
+<div class="section" id="performing-the-search">
+<h2>Performing the search</h2>
+<p>Now, we are ready to perform the search. The first step of this is to
+give the query object to the enquire session. Note that the query is
+copied at this operation, and that changing the Xapian::Query object
+after setting the query with it has no effect.</p>
+<pre class="literal-block">
+enquire.set_query(query);
+</pre>
+<p>Next, we ask for the results of the search. There is no need to tell
+Xapian to perform the search: it will do this automatically. We use the
+<tt class="docutils literal"><span class="pre">get_mset()</span></tt> method to get the results, which are returned in an
+<tt class="docutils literal"><span class="pre">Xapian::MSet</span></tt> object. (MSet for Match Set)</p>
+<p><tt class="docutils literal"><span class="pre">get_mset()</span></tt> can take many parameters, such as a set of relevant
+documents to use, and various options to modify the search, but we give
+it the minimum; which is the first document to return (starting at 0 for
+the top ranked document), and the maximum number of documents to return
+(we specify 10 here):</p>
+<pre class="literal-block">
+Xapian::MSet matches = enquire.get_mset(0, 10);
+</pre>
+</div>
+<div class="section" id="displaying-the-results-of-the-search">
+<h2>Displaying the results of the search</h2>
+<p>Finally, we display the results of the search. The results are stored in
+in the <tt class="docutils literal"><span class="pre">Xapian::MSet</span></tt> object, which provides the features required to
+be an STL-compatible container, so first we display how many items are
+in the MSet:</p>
+<pre class="literal-block">
+cout &lt;&lt; matches.size() &lt;&lt; &quot; results found&quot; &lt;&lt; endl;
+</pre>
+<p>Now we display some information about each of the items in the
+<tt class="docutils literal"><span class="pre">Xapian::MSet</span></tt>. We access these items using an
+<tt class="docutils literal"><span class="pre">Xapian::MSetIterator</span></tt>:</p>
+<ul class="simple">
+<li>First, we display the document ID, accessed by <tt class="docutils literal"><span class="pre">*i</span></tt>. This is not
+usually very useful information to give to users, but it is at least
+a unique handle on each document.</li>
+<li>Next, we display a &quot;percentage&quot; score for the document. Readers
+familiar with Information Retrieval will not be surprised to hear
+that this is not really a percentage: it is just a value from 0 to
+100, such that a more relevant document has a higher value. We get
+this using <tt class="docutils literal"><span class="pre">i.get_percent()</span></tt>.</li>
+<li>Last, we display the data associated with each returned document,
+which was specified by the user at database generation time. To do
+this, we first use <tt class="docutils literal"><span class="pre">i.get_document()</span></tt> to get an
+<tt class="docutils literal"><span class="pre">Xapian::Document</span></tt> object representing the returned document; then
+we use the <tt class="docutils literal"><span class="pre">get_data()</span></tt> method of this object to get access to the
+data stored in this document.</li>
+</ul>
+<pre class="literal-block">
+Xapian::MSetIterator i;
+for (i = matches.begin(); i != matches.end(); ++i) {
+    cout &lt;&lt; &quot;Document ID &quot; &lt;&lt; *i &lt;&lt; &quot;\t&quot;;
+cout &lt;&lt; i.get_percent() &lt;&lt; &quot;% &quot;;
+    Xapian::Document doc = i.get_document();
+cout &lt;&lt; &quot;[&quot; &lt;&lt; doc.get_data() &lt;&lt; &quot;]&quot; &lt;&lt; endl;
+}
+</pre>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="compiling">
+<h1>Compiling</h1>
+<p>Now that we have the code written, all we need to do is compile it!</p>
+<div class="section" id="finding-the-xapian-library">
+<h2>Finding the Xapian library</h2>
+<p>A small utility, &quot;xapian-config&quot;, is installed along with Xapian to
+assist you in finding the installed Xapian library, and in generating
+the flags to pass to the compiler and linker to compile.</p>
+<p>After a successful compilation, this utility should be in your path, so
+you can simply run</p>
+<pre class="literal-block">
+xapian-config --cxxflags
+</pre>
+<p>to determine the flags to pass to the compiler, and</p>
+<pre class="literal-block">
+xapian-config --libs
+</pre>
+<p>to determine the flags to pass to the linker. These flags are returned
+on the utility's standard output (so you could use backtick notation to
+include them on your command line).</p>
+<p>If your project uses the GNU autoconf tool, you may also use the
+<tt class="docutils literal"><span class="pre">XO_LIB_XAPIAN</span></tt> macro, which is included as part of Xapian, and will
+check for an installation of Xapian and set (and <tt class="docutils literal"><span class="pre">AC_SUBST</span></tt>) the
+<tt class="docutils literal"><span class="pre">XAPIAN_CXXFLAGS</span></tt> and <tt class="docutils literal"><span class="pre">XAPIAN_LIBS</span></tt> variables to be the flags to
+pass to the compiler and linker, respectively.</p>
+<p>If you don't use GNU autoconf, don't worry about this.</p>
+</div>
+<div class="section" id="compiling-the-quickstart-examples">
+<h2>Compiling the quickstart examples</h2>
+<p>Once you know the compilation flags, compilation is a simple matter of
+invoking the compiler! For our example, we could compile the two
+utilities (quickstartindex and quickstartsearch) with the commands:</p>
+<pre class="literal-block">
+c++ quickstartindex.cc `xapian-config --libs --cxxflags` -o quickstartindex
+c++ quickstartsearch.cc `xapian-config --libs --cxxflags` -o quickstartsearch
+</pre>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="running-the-examples">
+<h1>Running the examples</h1>
+<p>Once we have compiled the above examples, we can build up a simple
+database as follows. Note that we must first create a directory for the
+database files to live in; although Xapian will create new empty
+database files if they do not yet exist, it will not create a new
+directory for them.</p>
+<pre class="literal-block">
+$ mkdir proverbs
+$ ./quickstartindex proverbs \
+&gt; &quot;people who live in glass houses should not throw stones&quot; \
+&gt; people live glass house stone
+$ ./quickstartindex proverbs \
+&gt; &quot;Don't look a gift horse in the mouth&quot; \
+&gt; look gift horse mouth
+</pre>
+<p>Now, we should have a database with a couple of documents in it. Looking
+in the database directory, you should see something like:</p>
+<pre class="literal-block">
+$ ls proverbs/
+[some files]
+</pre>
+<p>Given the small amount of data in the database, you may be concerned
+that the total size of these files is somewhat over 50k. Be reassured
+that the database is block structured, here consisting of largely empty
+blocks, and will behave much better for large databases.</p>
+<p>We can now perform searches over the database using the quickstartsearch
+program.</p>
+<pre class="literal-block">
+$ ./quickstartsearch proverbs look
+Performing query `look'
+1 results found
+Document ID 2   50% [Don't look a gift horse in the mouth]
+</pre>
+</div>
+</div>
+</body>
+</html>
