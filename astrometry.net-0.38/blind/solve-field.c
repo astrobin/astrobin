@@ -444,11 +444,15 @@ static int plot_index_overlay(augment_xylist_t* axy, const char* me,
 }
 
 static int plot_annotations(augment_xylist_t* axy, const char* me, bool verbose,
-                            const char* annfn, double plotscale, const char* bgfn) {
+                            const char* annfn, const char* listfn,
+                            double plotscale, const char* bgfn) {
     sl* cmdline = sl_new(16);
     char* cmd;
     sl* lines;
 	char* imgfn;
+    FILE* list_f;
+
+    logmsg("Opening objects list file: %s\n", listfn);
 
 	imgfn = axy->pnmfn;
 	if (bgfn) {
@@ -494,8 +498,23 @@ static int plot_annotations(augment_xylist_t* axy, const char* me, bool verbose,
         int i;
         if (strlen(sl_get(lines, 0))) {
             logmsg("Your field contains:\n");
-            for (i=0; i<sl_size(lines); i++)
-                logmsg("  %s\n", sl_get(lines, i));
+            list_f = fopen(listfn, "w");
+
+            for (i=0; i<sl_size(lines); i++) {
+                char buf[255];
+                char *name = sl_get(lines, i);
+                size_t len = strlen(name);
+
+                strncpy(buf, name, 255);
+                buf[len] = '\n';
+
+                logmsg("  %s\n", buf);
+                if (list_f != NULL) {
+                    fwrite(buf, len + 1, 1, list_f);
+                }
+            }
+            if (list_f != NULL)
+                fclose(list_f);
         }
     }
     if (lines)
@@ -527,6 +546,7 @@ struct solve_field_args {
 	char* indxylsfn;
 	char* redgreenfn;
 	char* ngcfn;
+    char* listfn;
 	char* kmzfn;
 	char* scampfn;
 	char* scampconfigfn;
@@ -603,7 +623,7 @@ static void after_solved(augment_xylist_t* axy,
 
 	if (makeplots && axy->imagefn && file_exists(axy->wcsfn) && axy->pnmfn) {
 		logmsg("Creating annotation plot...\n");
-		if (plot_annotations(axy, me, verbose, sf->ngcfn, plotscale, bgfn)) {
+		if (plot_annotations(axy, me, verbose, sf->ngcfn, sf->listfn, plotscale, bgfn)) {
 			ERROR("Plot annotations failed.");
 		}
 	}
@@ -1058,6 +1078,7 @@ int main(int argc, char** args) {
             objsfn     = sl_appendf(outfiles, "%s-objs.png",  base);
             sf->redgreenfn = sl_appendf(outfiles, "%s-indx.png",  base);
             sf->ngcfn      = sl_appendf(outfiles, "%s-ngc.png",   base);
+            sf->listfn     = sl_appendf(outfiles, "%s-list.txt",   base);
         }
         if (isurl) {
             if (suffix)
