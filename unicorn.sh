@@ -1,2 +1,2 @@
 #! /bin/sh
-python manage.py run_gunicorn 0.0.0.0:8082 -w 4
+./venv/bin/python manage.py run_gunicorn 0.0.0.0:8082 -w 4
