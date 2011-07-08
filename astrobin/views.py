@@ -236,15 +236,13 @@ def image_upload(request):
 @require_POST
 def image_upload_process(request):
     """Process the form"""
+
     file = None
     if 'qqfile' in request.GET:
         from django.core.files.uploadedfile import SimpleUploadedFile
         file = SimpleUploadedFile(request.GET['qqfile'], request.raw_post_data)
     else:
         form = ImageUploadForm(request.POST, request.FILES)
-        if not form.is_valid():
-            return render_to_response("index.html", {"upload_form":form},
-                context_instance=RequestContext(request))
         file = request.FILES["file"]
 
     s3_filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
