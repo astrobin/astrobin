@@ -57,6 +57,11 @@ sudo make install
 # Use nginx config
 Add 'include /home/astrobin/Code/astrobin/astrobin.com.nginx;' to the http{} section of /usr/local/nginx/conf/nginx.conf.
 
+# Configure rabbitmq
+sudo rabbitmqctl add_user astrobin astrobin
+sudo rabbitmqctl add_vhost astrobin
+sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
+
 # Run it!
 /usr/local/nginx/sbin/nginx
 ./run.sh
