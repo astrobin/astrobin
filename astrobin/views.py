@@ -180,7 +180,7 @@ def image_detail(request, id):
         object_id = id,
         template_name = 'image/detail.html',
         template_object_name = 'image',
-        extra_content = {'s3_url': settings.S3_URL,
+        extra_context = {'s3_url': settings.S3_URL,
                          'already_voted': already_voted,
                          'current_rating': rating,
                          'related_images': related_images,
