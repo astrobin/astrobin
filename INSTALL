@@ -38,7 +38,7 @@ ln -s ./venv/bin/pip vpip
 ./vpip install django-ratings (for the voting)
 ./vpip install django-memcached
 ./vpip install PIL (for the image editing)
-./vpip install boto (for s3)
+./vpip install boto django-storages (for s3)
 ./vpip install simplejson
 ./vpip install django-compressor (for optimizing bandwidth)
 ./vpip install django-registration (for users' management)
