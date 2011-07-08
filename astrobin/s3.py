@@ -91,23 +91,13 @@ def store_image_in_s3(path, uid, original_ext, mimetype=''):
 
 
 def delete_image_from_s3(filename, ext):
-    conn = S3Connection(settings.S3_ACCESS_KEY, settings.S3_SECRET_KEY)
-    for bucket in ['astrobin_thumbnails',
-                   'astrobin_small_thumbnails',
-                   'astrobin_resized_inverted',
-                   'astrobin_resized_image',
-                   'astrobin_inverted',
-                   'astrobin_images',
-                   'astrobin_histograms',
-                  ]:
-        uid = filename
-        if bucket == 'astrobin_thumbnails':
-            uid += '.png'
-        else:
-            uid += ext
-
-        b = Bucket(conn, bucket);
-        k = Key(b)
-        k.key = uid
-        b.delete_key(k)
-
+    for suffix in (
+        '',
+        '_hist',
+        '_resized',
+        '_thumb',
+        '_small_thumb',
+        '_inverted',
+        '_resized_inverted'
+    )
+        default_storage.delete(filename + ext);
