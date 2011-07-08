@@ -73,8 +73,6 @@ def index(request):
         template_name='index.html',
         template_object_name='image',
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                         's3_thumbnails_bucket':settings.S3_THUMBNAILS_BUCKET,
-                         's3_abpod_bucket':settings.S3_ABPOD_BUCKET,
                          's3_url':settings.S3_URL,
                          'upload_form': ImageUploadForm(),
                          'abpod':abpod})
@@ -182,16 +180,7 @@ def image_detail(request, id):
         object_id = id,
         template_name = 'image/detail.html',
         template_object_name = 'image',
-        extra_context = {'s3_images_bucket': settings.S3_IMAGES_BUCKET,
-                         's3_resized_images_bucket': settings.S3_RESIZED_IMAGES_BUCKET,
-                         's3_thumbnails_bucket': settings.S3_THUMBNAILS_BUCKET,
-                         's3_small_thumbnails_bucket': settings.S3_SMALL_THUMBNAILS_BUCKET,
-                         's3_inverted_bucket': settings.S3_INVERTED_BUCKET,
-                         's3_resized_inverted_bucket': settings.S3_RESIZED_INVERTED_BUCKET,
-                         's3_histograms_bucket': settings.S3_HISTOGRAMS_BUCKET,
-                         's3_solved_bucket': settings.S3_SOLVED_BUCKET,
-                         's3_url': settings.S3_URL,
-                         'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
+        extra_content = {'s3_url': settings.S3_URL,
                          'already_voted': already_voted,
                          'current_rating': rating,
                          'related_images': related_images,
@@ -270,7 +259,6 @@ def image_upload_process(request):
     else:
         return render_to_response('image/edit/basic.html',
             {'image':image,
-             's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
              's3_url':settings.S3_URL,
              'form':ImageEditBasicForm(),
              'prefill_dict': {
@@ -298,7 +286,6 @@ def image_edit_basic(request, id):
 
     return render_to_response('image/edit/basic.html',
         {'image':image,
-         's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
          's3_url':settings.S3_URL,
          'form':form,
          'prefill_dict': {
@@ -321,7 +308,6 @@ def image_edit_gear(request, id):
     form = ImageEditGearForm(user=request.user, instance=image)
     response_dict = {
         'form': form,
-        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
         'image':image,
@@ -370,7 +356,6 @@ def image_edit_acquisition(request, id):
         'edit_type': edit_type if image_type is None else image_type,
         'deep_sky_acquisitions': deep_sky_acquisitions,
         'solar_system_acquisition': solar_system_acquisition,
-        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
     }
@@ -391,7 +376,6 @@ def image_edit_acquisition_reset(request, id):
 
     response_dict = {
         'image': image,
-        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
     }
@@ -411,7 +395,6 @@ def image_edit_save_basic(request):
 
     response_dict = {'form': form,
                      'image': image,
-                     's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
                      's3_url':settings.S3_URL,
                      'is_ready':image.is_stored,
                     }
@@ -468,7 +451,6 @@ def image_edit_save_gear(request):
                              instance=image)
     response_dict = {
         'image': image,
-        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
     }
@@ -561,7 +543,6 @@ def image_edit_save_acquisition(request):
         'edit_type': image_type,
         'deep_sky_acquisitions': deep_sky_acquisitions,
         'solar_system_acquisition': solar_system_acquisition,
-        's3_small_thumbnails_bucket':settings.S3_SMALL_THUMBNAILS_BUCKET,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
     }
@@ -606,8 +587,6 @@ def user_page(request, username):
         template_name='user/profile.html',
         template_object_name='image',
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                         's3_thumbnails_bucket':settings.S3_THUMBNAILS_BUCKET,
-                         's3_abpod_bucket':settings.S3_ABPOD_BUCKET,
                          's3_url':settings.S3_URL,
                          'user':user,
                          'gear_list':gear_list})
