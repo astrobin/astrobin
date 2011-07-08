@@ -1,1 +1,2 @@
-python manage.py rebuild_index
+#!/bin/sh
+./venv/bin/python manage.py rebuild_index
