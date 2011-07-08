@@ -1,2 +1,2 @@
 #! /bin/sh
-python manage.py runserver 0.0.0.0:8082
+./venv/bin/python manage.py runserver 0.0.0.0:8082
