@@ -37,11 +37,7 @@ def solve_image(image, callback=None):
         # Then save to bucket
         solved_resizedFile = StringIO.StringIO()
         solved_resizedImage.save(solved_resizedFile, 'PNG')
-        save_to_bucket(solved_resizedFile.getvalue(),
-                       'image/png',
-                       settings.S3_SOLVED_BUCKET,
-                       uid,
-                       '.png')
+        save_to_bucket(uid + '_solved.png', solved_resizedFile.getvalue())
     if solved:
         push_notification([image.user], 'image_solved',
                           {'object_url':image.get_absolute_url() + '?mod=solved'})
