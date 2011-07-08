@@ -1,0 +1,64 @@
+Basic packages:
+===============
+
+sudo apt-get install \
+	apt-file \
+	vim \
+	git \
+	python2.7-dev \
+	mysql-server \
+	libmysqlclient-dev \
+	rabbitmq-server \
+	python-pip \
+	build-essential \
+	uuid-dev \
+	libpcre3-dev
+sudo apt-file update
+sudo pip install virtualenv
+
+AstroBin instructions:
+======================
+
+git clone astrobin
+cd astrobin; virtualenv --no-site-packages venv
+
+Build xapian-code, xapian-bindings; install in /opt and remember XAPIAN_CONFIG=/opt/bin/xapian-config. Remember to do this while in the virtualenv.
+	
+ln -s ./venv/bin/pip vpip
+./vpip install yolk (to list installed python packaged)
+./vpip install django-celery django-haystack xapian-haystack (for search)
+./vpip install setproctitle gunicorn gunicorn-console (for deployment)
+./venv/bin/python django-notification django-persistent-messages/setup.py install (for the notifications system)
+./vpip install django-debug-toolbar (useful for session debugging in-browser)
+./vpip install MySQL-python (for the database backend)
+./vpip install django-ratings (for the voting)
+./vpip install django-memcached
+./vpip install PIL (for the image editing)
+./vpip install boto (for s3)
+./vpip install simplejson
+./vpip install django-compressor (for optimizing bandwidth)
+./vpip install django-registration (for users' management)
+./vpip install flickrapi
+
+mysql -u user -p (password is astrobin)
+> create user 'astrobin'@'localhost' identified by 'astrobin';
+> create database astrobin;
+
+# Initialize db
+./syncdb.sh
+(When asked, do create super user astrobin:astrobin <astrobin@astrobin.com>)
+
+# Build nginx
+cd nginx-1.0.4
+./configure --add-module=../nginx_http_push_module
+make
+sudo make install
+
+# Use nginx config
+Add 'include /home/astrobin/Code/astrobin/astrobin.com.nginx;' to the http{} section of /usr/local/nginx/conf/nginx.conf.
+
+# Run it!
+/usr/local/nginx/sbin/nginx
+./run.sh
+
+Go to http://localhost/
