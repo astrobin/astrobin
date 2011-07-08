@@ -1,9 +1,5 @@
 from django.conf import settings
-
-from boto.s3.connection import S3Connection
-from boto.s3.key import Key
-from boto.s3.bucket import Bucket
-from boto.exception import S3CreateError
+from django.core.files.storage import default_storage
 
 import mimetypes
 import email
@@ -17,44 +13,28 @@ import StringIO
 
 from image_utils import *
 
-def save_to_bucket(data, content_type, bucket, uid, ext):
-    now = datetime.datetime.utcnow()
-    then = now + datetime.timedelta(365*2)
-    expires = then.strftime('%a, %d %b %Y %H:%M:%S GMT')
-
-    headers = {
-        'x-amz-acl'    : 'public-read',
-        'Content-Type' : content_type,
-        'Expires'      : expires,
-        'Cache-Control': 'max-age %d' % (3600 * 24 * 365 * 2),
-    }
-
-    conn = S3Connection(settings.S3_ACCESS_KEY, settings.S3_SECRET_KEY)
-    b = conn.create_bucket(bucket)
-    k = Key(b)
-    k.key = uid + ext
-    k.set_contents_from_string(data, headers=headers)
-
+def save_to_bucket(filename, content):
+    import pdb; pdb.set_trace()
+    default_storage.save(filename, content);
 
 def store_image_in_s3(path, uid, original_ext, mimetype=''):
     format_map = {'image/jpeg':('JPEG', '.jpg'),
                   'image/png' :('PNG', '.png'),
                  }
 
-    conn = S3Connection(settings.S3_ACCESS_KEY, settings.S3_SECRET_KEY)
     content_type = mimetype if mimetype else mimetypes.guess_type(original_ext)[0]
     file = open(path + uid + original_ext)
     data = StringIO.StringIO(file.read())
 
     # First store the original image
-    save_to_bucket(data.getvalue(), content_type, settings.S3_IMAGES_BUCKET, uid, original_ext)
+    save_to_bucket(uid + '' + original_ext, data.getvalue())
 
     image = PILImage.open(data)
     # create histogram and store it
     histogram = generate_histogram(image)
     histogramFile = StringIO.StringIO()
     histogram.save(histogramFile, format_map['image/png'][0])
-    save_to_bucket(histogramFile.getvalue(), 'image/png', settings.S3_HISTOGRAMS_BUCKET, uid, format_map['image/png'][1])
+    save_to_bucket(uid + '_hist.png', histogramFile.getvalue())
 
     # Then resize to the display image
     (w, h) = image.size
@@ -64,7 +44,8 @@ def store_image_in_s3(path, uid, original_ext, mimetype=''):
     # Then save to bucket
     resizedFile = StringIO.StringIO()
     resizedImage.save(resizedFile, format_map[content_type][0])
-    save_to_bucket(resizedFile.getvalue(), content_type, settings.S3_RESIZED_IMAGES_BUCKET, uid, format_map[content_type][1])
+    save_to_bucket(uid + '_resized' + formtat_map[content_type][1],
+                   resizedFile.getvalue())
 
     # Then resize to the thumbnail
     (w, h) = image.size
@@ -80,7 +61,7 @@ def store_image_in_s3(path, uid, original_ext, mimetype=''):
     # Then save to bucket
     thumbnailFile = StringIO.StringIO()
     output.save(thumbnailFile, format_map['image/png'][0])
-    save_to_bucket(thumbnailFile.getvalue(), 'image/png', settings.S3_THUMBNAILS_BUCKET, uid, format_map['image/png'][1])
+    save_to_bucket(uid + '_thumb.png', thumbnailFile.getvalue())
 
     # Shrink more!
     (w, h) = image.size
