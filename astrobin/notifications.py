@@ -6,7 +6,10 @@ from notification import models as notification
 
 def push_notification(recipients, type, data):
     data['notices_url'] = settings.ASTROBIN_SHORT_BASE_URL + '/notifications/'
-    notification.send(recipients, type, data)
+    try:
+        notification.send(recipients, type, data)
+    except:
+        pass
     rendered = render_to_string('notification/%s/%s' % (type, 'short.html'), data)
     encoded_data = simplejson.dumps({'message':rendered})
 
