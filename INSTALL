@@ -28,7 +28,8 @@ Build xapian-code, xapian-bindings; install in /opt and remember XAPIAN_CONFIG=/
 	
 ln -s ./venv/bin/pip vpip
 ./vpip install yolk (to list installed python packaged)
-./vpip install django-celery django-haystack xapian-haystack (for search)
+./vpip install django-haystack xapian-haystack (for search)
+./vpip install django-celery celerymon (for tasks)
 ./vpip install setproctitle gunicorn gunicorn-console (for deployment)
 ./venv/bin/python django-notification django-persistent-messages/setup.py install (for the notifications system)
 ./vpip install django-debug-toolbar (useful for session debugging in-browser)
