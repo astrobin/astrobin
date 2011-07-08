@@ -73,7 +73,7 @@ make
 sudo make install
 
 # Run it!
-/usr/local/nginx/sbin/nginx &
+./nginx.sh
 ./celeryd.sh &
 ./celerybeat.sh &
 ./unicorn.sh &
