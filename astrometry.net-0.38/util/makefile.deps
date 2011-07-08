@@ -1,0 +1,49 @@
+# This file is part of the Astrometry.net suite.
+# Copyright 2006, 2007 Dustin Lang, Keir Mierle and Sam Roweis.
+#
+# The Astrometry.net suite is free software; you can redistribute
+# it and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, version 2.
+#
+# The Astrometry.net suite is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with the Astrometry.net suite ; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+# Dependencies:           
+DEPS := $(subst .o,.dep,$(DEP_OBJ))
+
+deps: $(DEP_PREREQS) $(DEPS)
+	cat $(DEPS) > deps
+
+DEP_ARGS := $(CFLAGS) -MM -MG
+
+CCTEST = $(CC) -x c -E $(ARG) - < /dev/null > /dev/null 2> /dev/null && echo $(ARG)
+
+# -MP is new in gcc-3.0
+ARG := -MP
+DEP_ARGS += $(shell $(CCTEST))
+
+# -MF is new in gcc-3.0
+ARG := -MF cc-out.tmp
+X := $(shell $(CCTEST) && rm -f cc-out.tmp)
+ifeq ($(X),)
+  DEP_OUT := -MF
+else
+  DEP_OUT := \>
+endif
+
+%.dep : %.c
+	$(CC) $(DEP_ARGS) $< $(DEP_OUT) $@
+
+ifneq ($(MAKECMDGOALS),clean)
+  ifneq ($(MAKECMDGOALS),realclean)
+    ifneq ($(MAKECMDGOALS),allclean)
+      include deps
+    endif
+  endif
+endif
