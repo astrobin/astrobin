@@ -37,12 +37,13 @@ ln -s ./venv/bin/pip vpip
 ./vpip install MySQL-python (for the database backend)
 ./vpip install django-ratings (for the voting)
 ./vpip install django-memcached
-./vpip install PIL (for the image editing)
-./vpip install boto django-storages (for s3)
+./vpip install django-storages boto (for s3)
 ./vpip install simplejson
 ./vpip install django-compressor (for optimizing bandwidth)
 ./vpip install django-registration (for users' management)
 ./vpip install flickrapi
+./vpip install Pillow (image manipulation)
+
 
 mysql -u user -p (password is astrobin)
 > create user 'astrobin'@'localhost' identified by 'astrobin';
