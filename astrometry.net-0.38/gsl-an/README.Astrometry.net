@@ -1,0 +1,29 @@
+This is a subset of the gsl-1.9 package, containing the files required
+to provide Cholesky, QR, and LU decompositions.
+
+=> Updated to gsl-1.11.
+=> Updated to gsl-1.14.
+
+To grab files from a new version (assuming nothing has changed
+structurally):
+
+    - unpack gsl-VVV into /tmp
+    - ./configure
+ 	- make   #--> to generate header files
+    - edit grab-gsl-sources.sh to point to that directory
+
+	cd gsl-an
+	./grab-gsl-sources.sh
+
+--Note that grab-gsl-source.sh only updates *existing* files, it doesn't
+  grab new ones.
+
+We have not modified any of the source files, though we have provided
+our own Makefile (ignoring all the automake/autowhatever jazz) that
+builds just what we need.
+
+Our contributions are Copyright 2007, 2008, 2010 Dustin Lang and are
+placed under the GPL.
+
+Yes, that's the royal we.  And we are pleased.
+
