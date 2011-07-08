@@ -20,8 +20,6 @@ def current(request, pattern):
 def image_list(objects_list):
     return {'image_list': [i.object for i in objects_list],
             'thumbnail_size':settings.THUMBNAIL_SIZE,
-            's3_thumbnails_bucket':settings.S3_THUMBNAILS_BUCKET,
-            's3_abpod_bucket':settings.S3_ABPOD_BUCKET,
             's3_url':settings.S3_URL,
            }
 
