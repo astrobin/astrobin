@@ -72,19 +72,22 @@ def store_image_in_s3(path, uid, original_ext, mimetype=''):
     # To the final bucket
     thumbnailFile = StringIO.StringIO()
     croppedImage.save(thumbnailFile, format_map[content_type][0])
-    save_to_bucket(thumbnailFile.getvalue(), content_type, settings.S3_SMALL_THUMBNAILS_BUCKET, uid, format_map[content_type][1])
+    save_to_bucket(uid + '_small_thumb' + format_map[content_type][1],
+                   thumbnailFile.getvalue())
 
     # Let's also created a grayscale inverted image
     grayscale = ImageOps.grayscale(image)
     inverted = ImageOps.invert(grayscale)
     invertedFile = StringIO.StringIO()
     inverted.save(invertedFile, format_map[content_type][0])
-    save_to_bucket(invertedFile.getvalue(), content_type, settings.S3_INVERTED_BUCKET, uid, format_map[content_type][1])
+    save_to_bucket(uid + '_inverted' + format_map[content_type][1],
+                   invertedFile.getvalue())
     grayscale = ImageOps.grayscale(resizedImage)
     inverted = ImageOps.invert(grayscale)
     invertedFile = StringIO.StringIO()
     inverted.save(invertedFile, format_map[content_type][0])
-    save_to_bucket(invertedFile.getvalue(), content_type, settings.S3_RESIZED_INVERTED_BUCKET, uid, format_map[content_type][1])
+    save_to_bucket(uid + '_resized_inverted' + format_map[content_type][1],
+                   invertedFile.getvalue())
 
 
 def delete_image_from_s3(filename, ext):
