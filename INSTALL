@@ -62,6 +62,12 @@ sudo rabbitmqctl add_user astrobin astrobin
 sudo rabbitmqctl add_vhost astrobin
 sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 
+# Build astrometry.net
+cd astrometry.net-0.38
+./configure
+make
+sudo make install
+
 # Run it!
 /usr/local/nginx/sbin/nginx &
 ./celeryd.sh &
