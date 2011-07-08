@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- automatically generated from xapian-core 1.2.6 source code -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Xapian: Code structure</title>
+</head>
+<body bgcolor="white" text="black">
+<h1>Index</h1>
+<ul>
+<li><a href="#ROOT">ROOT</a>
+<li><a href="#api">api</a>
+<li><a href="#backends">backends</a>
+<ul>
+<li><a href="#backends_brass">backends/brass</a>
+<li><a href="#backends_chert">backends/chert</a>
+<li><a href="#backends_flint">backends/flint</a>
+<li><a href="#backends_inmemory">backends/inmemory</a>
+<li><a href="#backends_multi">backends/multi</a>
+<li><a href="#backends_remote">backends/remote</a>
+</ul>
+<li><a href="#bin">bin</a>
+<li><a href="#common">common</a>
+<li><a href="#docs">docs</a>
+<li><a href="#examples">examples</a>
+<li><a href="#expand">expand</a>
+<li><a href="#include">include</a>
+<li><a href="#languages">languages</a>
+<li><a href="#matcher">matcher</a>
+<li><a href="#net">net</a>
+<li><a href="#queryparser">queryparser</a>
+<li><a href="#tests">tests</a>
+<ul>
+<li><a href="#tests_harness">tests/harness</a>
+<li><a href="#tests_perftest">tests/perftest</a>
+<li><a href="#tests_soaktest">tests/soaktest</a>
+</ul>
+<li><a href="#unicode">unicode</a>
+<li><a href="#weight">weight</a>
+</ul>
+<hr>
+<h1>Directory structure</h1>
+<div id="ROOT">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/">ROOT</a></h2>
+<p>Top level directory.</p>
+</div>
+
+<div id="api">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/api/">api</a></h2>
+<p>API classes and their PIMPL internals.</p>
+</div>
+
+<div id="backends">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/backends/">backends</a></h2>
+<p>This directory contains a subdirectory for each of the available database
+backends.  Each backend corresponds to a different underlying file
+structure.  For example, the inmemory backend holds its databases
+entirely in RAM, and the flint backend is a fully featured disk based
+backend.
+
+<p>The directory also contains the implementation of Xapian::Database::Internal
+(the base class for each backend database class) and the factory functions
+which are the public interface for instantiating the database backend classes.</p>
+</div>
+
+<div id="backends_brass">
+<h3><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/backends/brass/">backends/brass</a></h3>
+<p>Brass is the development backend for the Xapian 1.2.x series.
+It's highly efficient, and also (aims to) use significantly less disk space
+than previous Xapian backends.  All Xapian features are supported.</p>
+</div>
+
+<div id="backends_chert">
+<h3><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/backends/chert/">backends/chert</a></h3>
+<p>Chert is the default backend for the Xapian 1.2.x release series.
+It uses a custom written Btree management system to store
+posting lists and termlists.  This is a highly efficient
+backend, using compression to store the postlists, and supporting the
+full range of indexing functionality (positional information, transactions,
+etc).</p>
+</div>
+
+<div id="backends_flint">
+<h3><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/backends/flint/">backends/flint</a></h3>
+<p>Flint is the default Xapian backend as of Xapian 1.0.
+It uses a custom written Btree management system to store
+posting lists and termlists.  This is a highly efficient
+backend, using compression to store the postlists, and supporting the
+full range of indexing functionality (positional information, transactions,
+etc).</p>
+</div>
+
+<div id="backends_inmemory">
+<h3><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/backends/inmemory/">backends/inmemory</a></h3>
+<p>This backend stores a database entirely in memory.  When the
+database is closed these indexed contents are lost.
+
+<p>This is useful for searching through relatively small amounts of data
+(such as a single large file) which hasn't previously been indexed.</p>
+</div>
+
+<div id="backends_multi">
+<h3><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/backends/multi/">backends/multi</a></h3>
+<p>The MultiDatabase backend, which enables
+searches to be performed across several databases.  Opening this
+database involves opening each of the sub-databases and merging
+them together.
+
+<p>Searches are performed across the sub-databases via MultiPostList
+and MultiTermList objects, which represent merged sets of postlist
+and termlist objects.</p>
+</div>
+
+<div id="backends_remote">
+<h3><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/backends/remote/">backends/remote</a></h3>
+<p>The remote backend, which enables
+searches to be performed across databases on remote machines.  Opening
+this database involves opening a communications channel with a remote
+database.
+
+<p>RemoteDatabase objects are used with RemoteSubMatch objects.</p>
+</div>
+
+<div id="bin">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/bin/">bin</a></h2>
+<p>Programs relating to the Xapian library.</p>
+</div>
+
+<div id="common">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/common/">common</a></h2>
+<p>Header files which are used in various places within
+the Xapian library code.  It does not contain header files which are
+externally visible: these are kept in the "include" directory.</p>
+</div>
+
+<div id="docs">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/docs/">docs</a></h2>
+<p>Documentation, and scripts to automatically generate
+further documentation from the source code.  If you have the appropriate
+packages installed (currently, this means Perl), these scripts will be run
+by make.</p>
+</div>
+
+<div id="examples">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/examples/">examples</a></h2>
+<p>This directory contains example programs which use the Xapian library.
+These programs are intended to be a good starting point for those trying
+to get acquainted with the Xapian API.  Some of them are really just
+toy programs, but others are actually useful utilities in their own
+right (for example: delve, quest, and copydatabase).</p>
+</div>
+
+<div id="expand">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/expand/">expand</a></h2>
+<p>This directory houses the query expansion code.</p>
+</div>
+
+<div id="include">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/include/">include</a></h2>
+<p>This directory contains the externally visible header files.  Internal header
+files are kept in the "common" directory.</p>
+</div>
+
+<div id="languages">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/languages/">languages</a></h2>
+<p>Utilities for performing processing of text in various different languages.
+Current these comprise stemming algorithms.  In future language detection,
+character set normalisation, and other language related utilities will be
+added.</p>
+</div>
+
+<div id="matcher">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/matcher/">matcher</a></h2>
+<p>The code for performing the best match algorithm lives here.
+This is the heart of the Xapian system, and is the code which calculates
+relevance rankings for the documents in the collection for a given query.</p>
+</div>
+
+<div id="net">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/net/">net</a></h2>
+<p>The code implementing the network protocols lives here.</p>
+</div>
+
+<div id="queryparser">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/queryparser/">queryparser</a></h2>
+<p>Implementations of the Xapian::QueryParser and Xapian::TermGenerator classes.</p>
+</div>
+
+<div id="tests">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/tests/">tests</a></h2>
+<p>This directory contains various test programs which exercise most parts of
+the Xapian library.</p>
+</div>
+
+<div id="tests_harness">
+<h3><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/tests/harness/">tests/harness</a></h3>
+<p>This contains the test suite harness, which is linked with by most of the
+C++ test programs to perform sets of tests.</p>
+</div>
+
+<div id="tests_perftest">
+<h3><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/tests/perftest/">tests/perftest</a></h3>
+<p>This directory contains various the performance test suite.</p>
+</div>
+
+<div id="tests_soaktest">
+<h3><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/tests/soaktest/">tests/soaktest</a></h3>
+<p>This directory contains a testsuite for "soak" testing Xapian - it generates
+and runs random sequences of operations, checking the validity of the output
+whenever possible.</p>
+</div>
+
+<div id="unicode">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/unicode/">unicode</a></h2>
+<p>Unicode and UTF-8 handling classes and functions.</p>
+</div>
+
+<div id="weight">
+<h2><a href="http://trac.xapian.org/browser/tags/1.2.6/xapian-core/weight/">weight</a></h2>
+<p>Implementations of weighting schemes for Xapian.</p>
+</div>
+
+<hr>
+<address>
+Generated for xapian-core 1.2.6 on 2011-06-13 by gen_codestructure_doc.
+</address>
+</body>
+</html>

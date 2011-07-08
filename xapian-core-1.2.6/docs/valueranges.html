@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Value Ranges</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="value-ranges">
+<h1 class="title">Value Ranges</h1>
+
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="#stringvaluerangeprocessor" id="id2">StringValueRangeProcessor</a></li>
+<li><a class="reference internal" href="#datevaluerangeprocessor" id="id3">DateValueRangeProcessor</a></li>
+<li><a class="reference internal" href="#numbervaluerangeprocessor" id="id4">NumberValueRangeProcessor</a></li>
+<li><a class="reference internal" href="#custom-subclasses" id="id5">Custom subclasses</a></li>
+<li><a class="reference internal" href="#using-several-valuerangeprocessors" id="id6">Using Several ValueRangeProcessors</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h1><a class="toc-backref" href="#id1">Introduction</a></h1>
+<p>The <tt class="docutils literal"><span class="pre">Xapian::ValueRangeProcessor</span></tt> was introduced in Xapian 1.0.0.  It
+provides a powerful and flexible way to parse range queries in the users'
+query string.</p>
+<p>This document describes the <tt class="docutils literal"><span class="pre">Xapian::ValueRangeProcessor</span></tt> class and
+its standard subclasses, how to create your own subclasses, and how
+these classes are used with <tt class="docutils literal"><span class="pre">Xapian::QueryParser</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">Xapian::ValueRangeProcessor</span></tt> is a virtual base class, so you need to
+use a subclass of it.  <tt class="docutils literal"><span class="pre">Xapian::QueryParser</span></tt> maintains a list of
+<tt class="docutils literal"><span class="pre">Xapian::ValueRangeProcessor</span></tt> objects which it tries in order for
+each range search in the query until one accepts it, or all have been
+tried (in which case an error is reported).</p>
+<p>Each <tt class="docutils literal"><span class="pre">Xapian::ValueRangeProcessor</span></tt> is passed the start and end of the
+range.  If it doesn't understand the range, it should return
+<tt class="docutils literal"><span class="pre">Xapian::BAD_VALUENO</span></tt>.  If it does understand the range, it should return
+the value number to use with <tt class="docutils literal"><span class="pre">Xapian::Query::OP_VALUE_RANGE</span></tt> and if it
+wants to, it can modify the start and end values (to convert them to the
+correct format so that for the string comparison which <tt class="docutils literal"><span class="pre">OP_VALUE_RANGE</span></tt>
+uses).</p>
+<p>In Xapian 1.2.1 and later, <tt class="docutils literal"><span class="pre">Xapian::QueryParser</span></tt> supports open-ended
+ranges - if the start of the range is empty, that means any value less than
+the end, and similarly if the end is empty, that means any value greater
+than the start.  The start and end can't both be empty.</p>
+</div>
+<div class="section" id="stringvaluerangeprocessor">
+<h1><a class="toc-backref" href="#id2">StringValueRangeProcessor</a></h1>
+<p>This is the simplest of the standard subclasses.  It understands any range
+passed (so it should always be the last <tt class="docutils literal"><span class="pre">ValueRangeProcessor</span></tt>) and it
+doesn't alter the range start or end.</p>
+<p>For example, suppose you have stored author names in value number 4, and want
+the user to be able to filter queries by specifying ranges of values such as:</p>
+<pre class="literal-block">
+mars asimov..bradbury
+</pre>
+<p>To do this, you can use a <tt class="docutils literal"><span class="pre">StringValueRangeProcessor</span></tt> like so:</p>
+<pre class="literal-block">
+Xapian::QueryParser qp;
+Xapian::StringValueRangeProcessor author_proc(4);
+qp.add_valuerangeprocessor(&amp;author_proc);
+</pre>
+<p>The parsed query will use <tt class="docutils literal"><span class="pre">OP_VALUE_RANGE</span></tt>, so <tt class="docutils literal"><span class="pre">query.get_description()</span></tt>
+would report:</p>
+<pre class="literal-block">
+Xapian::Query(mars:(pos=1) FILTER (VALUE_RANGE 4 asimov bradbury)
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">VALUE_RANGE</span></tt> subquery will only match documents where value 4 is
+&gt;= asimov and &lt;= bradbury (using a string comparison).</p>
+</div>
+<div class="section" id="datevaluerangeprocessor">
+<h1><a class="toc-backref" href="#id3">DateValueRangeProcessor</a></h1>
+<p>This class allows you to implement date range searches.  As well as the value
+number to search, you can tell it whether to prefer US-style month/day/year
+or European-style day/month/year, and specify the epoch year to use for
+interpreting 2 digit years (the default is day/month/year with an epoch of
+1970).  The best choice of settings depends on the expectations of your users.
+As these settings are only applied at search time, you can also easily offer
+different versions of your search front-end with different settings if that is
+useful.</p>
+<p>For example, if your users are American and the dates present in your database
+can extend a decade or so into the future, you might use something like this
+which specifies to prefer US-style dates and that the epoch year is 1930 (so
+02/01/29 is February 1st 2029 while 02/01/30 is February 1st 1930):</p>
+<pre class="literal-block">
+Xapian::QueryParser qp;
+Xapian::DateValueRangeProcessor date_proc(0, true, 1930);
+qp.add_valuerangeprocessor(&amp;date_proc);
+</pre>
+<p>The dates are converted to the format YYYYMMDD, so the values you index also
+need to also be in this format - for example, if <tt class="docutils literal"><span class="pre">doc_time</span></tt> is a <tt class="docutils literal"><span class="pre">time_t</span></tt>:</p>
+<pre class="literal-block">
+char buf[9];
+if (strftime(buf, sizeof(buf), &quot;%Y%m%d&quot;, gmtime(&amp;doc_time))) {
+    doc.add_value(0, buf);
+}
+</pre>
+</div>
+<div class="section" id="numbervaluerangeprocessor">
+<h1><a class="toc-backref" href="#id4">NumberValueRangeProcessor</a></h1>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class had a design flaw in Xapian 1.0.0 and 1.0.1 - you should
+avoid using it with releases of Xapian earlier than 1.0.2.</p>
+</div>
+<p>This class allows you to implement numeric range searches.  The numbers used
+may be any number which is representable as a double, but requires that the
+stored values which the range is being applied have been converted to strings
+at index time using the <tt class="docutils literal"><span class="pre">Xapian::sortable_serialise()</span></tt> method:</p>
+<pre class="literal-block">
+Xapian::Document doc;
+doc.add_value(0, Xapian::sortable_serialise(price));
+</pre>
+<p>This method produces strings which will sort in numeric order, so you can use
+it if you want to be able to sort based on the value in numeric order, too.</p>
+<p>The class allows a prefix or suffix to be specified which must be present on
+the values, allowing multiple NumberValueRangeProcessors to be active in the
+same queryparser.  For example, this specifies that a prefix of &quot;$&quot; must be
+present on the first value (and may optionally be present on the second
+value):</p>
+<pre class="literal-block">
+Xapian::QueryParser qp;
+Xapian::NumberValueRangeProcessor numrange_proc(0, &quot;$&quot;, true);
+qp.add_valuerangeprocessor(&amp;numrange_proc);
+</pre>
+</div>
+<div class="section" id="custom-subclasses">
+<h1><a class="toc-backref" href="#id5">Custom subclasses</a></h1>
+<p>You can easily create your own subclasses of <tt class="docutils literal"><span class="pre">Xapian::ValueRangeProcessor</span></tt>.
+Your subclass needs to implement a method
+<tt class="docutils literal"><span class="pre">Xapian::valueno</span> <span class="pre">operator()(std::string</span> <span class="pre">&amp;begin,</span> <span class="pre">std::string</span> <span class="pre">&amp;end)</span></tt>
+so for example you could implement a better version of the author range
+described above which only matches ranges with a prefix (e.g.
+<tt class="docutils literal"><span class="pre">author:asimov..bradbury</span></tt>) and lower-cases the names:</p>
+<pre class="literal-block">
+struct AuthorValueRangeProcessor : public Xapian::ValueRangeProcessor {
+    AuthorValueRangeProcessor() {}
+
+    Xapian::valueno operator()(std::string &amp;begin, std::string &amp;end) {
+        if (begin.substr(0, 7) != &quot;author:&quot;)
+            return Xapian::BAD_VALUENO;
+        begin.erase(0, 7);
+        begin = Xapian::Unicode::tolower(begin);
+        end = Xapian::Unicode::tolower(end);
+        return 4;
+    }
+};
+</pre>
+<p>If you want to support open-ended ranges, you need to handle begin or end
+being empty suitably.  <tt class="docutils literal"><span class="pre">Xapian::QueryParser</span></tt> won't call your subclass
+with both begin and end being empty.</p>
+</div>
+<div class="section" id="using-several-valuerangeprocessors">
+<h1><a class="toc-backref" href="#id6">Using Several ValueRangeProcessors</a></h1>
+<p>If you want to allow the user to specify different types of ranges, you can
+specify multiple <tt class="docutils literal"><span class="pre">ValueRangeProcessor</span></tt> objects to use.  Just add them in
+the order you want them to be checked:</p>
+<pre class="literal-block">
+Xapian::QueryParser qp;
+AuthorValueRangeProcessor author_proc();
+qp.add_valuerangeprocessor(&amp;author_proc);
+Xapian::DateValueRangeProcessor date_proc(0, false, 1930);
+qp.add_valuerangeprocessor(&amp;date_proc);
+</pre>
+<p>And then you can parse queries such as
+<tt class="docutils literal"><span class="pre">mars</span> <span class="pre">author:Asimov..Bradbury</span> <span class="pre">01/01/1960..31/12/1969</span></tt> successfully.</p>
+</div>
+</div>
+</body>
+</html>

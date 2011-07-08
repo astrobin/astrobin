@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Xapian Administrator's Guide</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="xapian-administrator-s-guide">
+<h1 class="title">Xapian Administrator's Guide</h1>
+
+<!-- Copyright (C) 2006 Lemur Consulting Ltd -->
+<!-- Copyright (C) 2007,2008,2009,2010,2011 Olly Betts -->
+<!-- FIXME: Once brass settles down, update this for brass -->
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="#databases" id="id2">Databases</a><ul>
+<li><a class="reference internal" href="#atomic-modifications" id="id3">Atomic modifications</a></li>
+<li><a class="reference internal" href="#single-writer-multiple-reader" id="id4">Single writer, multiple reader</a></li>
+<li><a class="reference internal" href="#revision-numbers" id="id5">Revision numbers</a></li>
+<li><a class="reference internal" href="#network-file-systems" id="id6">Network file systems</a></li>
+<li><a class="reference internal" href="#which-database-format-to-use" id="id7">Which database format to use?</a></li>
+<li><a class="reference internal" href="#can-i-put-other-files-in-the-database-directory" id="id8">Can I put other files in the database directory?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#backup-strategies" id="id9">Backup Strategies</a><ul>
+<li><a class="reference internal" href="#summary" id="id10">Summary</a></li>
+<li><a class="reference internal" href="#detail" id="id11">Detail</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inspecting-a-database" id="id12">Inspecting a database</a></li>
+<li><a class="reference internal" href="#database-maintenance" id="id13">Database maintenance</a><ul>
+<li><a class="reference internal" href="#compacting-a-database" id="id14">Compacting a database</a></li>
+<li><a class="reference internal" href="#merging-databases" id="id15">Merging databases</a></li>
+<li><a class="reference internal" href="#checking-database-integrity" id="id16">Checking database integrity</a></li>
+<li><a class="reference internal" href="#converting-a-flint-database-to-a-chert-database" id="id17">Converting a flint database to a chert database</a></li>
+<li><a class="reference internal" href="#converting-a-quartz-database-to-a-flint-database" id="id18">Converting a quartz database to a flint database</a></li>
+<li><a class="reference internal" href="#converting-a-0-9-x-flint-database-to-work-with-1-0-y" id="id19">Converting a 0.9.x flint database to work with 1.0.y</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h1><a class="toc-backref" href="#id1">Introduction</a></h1>
+<p>This document is intended to provide general hints, tips and advice to
+administrators of Xapian systems.  It assumes that you have installed Xapian
+on your system, and are familiar with the basics of creating and searching
+Xapian databases.</p>
+<p>The intended audience is system administrators who need to be able to perform
+general management of a Xapian database, including tasks such as taking
+backups and optimising performance.  It may also be useful introductory
+reading for Xapian application developers.</p>
+<p>The document is up-to-date for Xapian version 1.2.5.</p>
+</div>
+<div class="section" id="databases">
+<h1><a class="toc-backref" href="#id2">Databases</a></h1>
+<p>Xapian databases hold all the information needed to perform searches in a set
+of tables.  The following tables always exist:</p>
+<blockquote>
+<ul class="simple">
+<li>A posting list table, which holds a list of all the documents indexed by
+each term in the database.</li>
+<li>A record table, which holds the document data associated with each document
+in the database.</li>
+<li>A termlist table, which holds a list of all the terms which index each
+document.</li>
+</ul>
+</blockquote>
+<p>And the following optional tables exist only when there is data to store in
+them (in 1.0.1 and earlier, the position and value tables were always created
+even if empty; spelling and synonym tables were new in 1.0.2):</p>
+<blockquote>
+<ul class="simple">
+<li>A position list table, which holds a list of all the word positions in each
+document which each term occurs at.</li>
+<li>A value table, which holds the &quot;values&quot; (used for sorting, collapsing, and
+other match-time calculations) associated with each document in the
+database (only for flint - newer backends store values in the postlist and
+termlist tables).</li>
+<li>A spelling table, which holds data for suggesting spelling corrections.</li>
+<li>A synonym table, which holds a synonym dictionary.</li>
+</ul>
+</blockquote>
+<p>Each of the tables is held in a separate file, allowing an administrator to
+see how much data is being used for each of the above purposes.  It is not
+always necessary to fully populate these tables: for example, if phrase
+searches are never going to be performed on the database, it is not necessary
+to store any positionlist information.</p>
+<p>If you look at a Xapian database, you will see that each of these tables
+actually uses 2 or 3 files.  For example, for a &quot;chert&quot; format database the
+termlist table is stored in the files &quot;termlist.baseA&quot;, &quot;termlist.baseB&quot;
+and &quot;termlist.DB&quot;.</p>
+<p>The &quot;.DB&quot; file actually stores the data, and is structured as a tree of
+blocks, which have a default size of 8KB (though this can be set, either
+through the Xapian API, or with some of the tools detailed later in this
+document).</p>
+<p>The &quot;.baseA&quot; and &quot;.baseB&quot; files are used to keep track of where to start
+looking for data in the &quot;.DB&quot; file (the root of the tree), and which blocks are
+in use.  Often only one of the &quot;.baseA&quot; and &quot;.baseB&quot; files will be present;
+each of these files refers to a revision of the database, and there may be more
+than one valid revision of the database stored in the &quot;.DB&quot; file at once.</p>
+<p>Changing the blocksize may have performance implications, but it is hard to
+tell whether these will be positive or negative for a particular combination
+of hardware and software without doing some profiling.</p>
+<div class="section" id="atomic-modifications">
+<h2><a class="toc-backref" href="#id3">Atomic modifications</a></h2>
+<p>Xapian ensures that all modifications to its database are performed
+atomically.  This means that:</p>
+<blockquote>
+<ul class="simple">
+<li>From the point of view of a separate process (or a separate database object
+in the same process) reading the database, all modifications made to a
+database are invisible until the modifications is committed.</li>
+<li>The database on disk is always in a consistent state.</li>
+<li>If the system is interrupted during a modification, the database should
+always be left in a valid state.  This applies even if the power is cut
+unexpectedly, as long as the disk does not become corrupted due to hardware
+failure.</li>
+</ul>
+</blockquote>
+<p>Committing a modification requires several calls to the operating system to
+make it flush any cached modifications to the database to disk.  This is to
+ensure that if the system fails at any point, the database is left in a
+consistent state.  Of course, this is a fairly slow process (since the system
+has to wait for the disk to physically write the data), so grouping many
+changes together will speed up the throughput considerably.</p>
+<p>Many modifications can be explicitly grouped into a single transaction, so
+that lots of changes are applied at once.  Even if an application doesn't
+explicitly protect modifications to the database using transactions, Xapian
+will group modifications into transactions, applying the modifications in
+batches.</p>
+<p>Note that it is not currently possible to extend Xapian's transactions to
+cover multiple databases, or to link them with transactions in external
+systems, such as an RDBMS.</p>
+<p>Finally, note that it is possible to compile Xapian such that it doesn't make
+modifications in an atomic manner, in order to build very large databases more
+quickly (search the Xapian mailing list archives for &quot;DANGEROUS&quot; mode for more
+details).  This isn't yet integrated into standard builds of Xapian, but may
+be in future, if appropriate protections can be incorporated.</p>
+</div>
+<div class="section" id="single-writer-multiple-reader">
+<h2><a class="toc-backref" href="#id4">Single writer, multiple reader</a></h2>
+<p>Xapian implements a &quot;single writer, multiple reader&quot; model.  This means that,
+at any given instant, there is only permitted to be a single object modifying
+a database, but there may (simultaneously) be many objects reading the
+database at once.</p>
+<p>Xapian enforces this restriction using by having a writer lock the database.
+Each Xapian database directory contains a lock file named
+<tt class="docutils literal"><span class="pre">flintlock</span></tt> (we've kept the same name as flint used, since the locking
+technique is the same).</p>
+<p>This lock-file will always exist, but will be locked using <tt class="docutils literal"><span class="pre">fcntl()</span></tt> when the
+database is open for writing.  Because of the semantics of <tt class="docutils literal"><span class="pre">fcntl()</span></tt> locking,
+for each WritableDatabase opened we spawn a child process to hold the lock,
+which then exec-s <tt class="docutils literal"><span class="pre">cat</span></tt>, so you will see a <tt class="docutils literal"><span class="pre">cat</span></tt> subprocess of any writer
+process in the output of <tt class="docutils literal"><span class="pre">ps</span></tt>, <tt class="docutils literal"><span class="pre">top</span></tt>, etc.</p>
+<p>If a writer exits without being given a chance to clean up (for example, if the
+application holding the writer is killed), the <tt class="docutils literal"><span class="pre">fcntl()</span></tt> lock will be
+automatically released by the operating system.  Under Microsoft Windows, we
+use a different locking technique which doesn't require a child process, but
+also means the lock is released automatically when the writing process exits.</p>
+</div>
+<div class="section" id="revision-numbers">
+<h2><a class="toc-backref" href="#id5">Revision numbers</a></h2>
+<p>Xapian databases contain a revision number.  This is essentially a count of
+the number of modifications since the database was created, and is needed to
+implement the atomic modification functionality.  It is stored as a 32 bit
+integer, so there is a chance that a very frequently updated database could
+cause this to overflow.  The consequence of such an overflow would be to throw
+an exception reporting that the database has run out of revision numbers.</p>
+<p>This isn't likely to be a practical problem, since it would take nearly a year
+for a database to reach this limit if 100 modifications were committed every
+second, and no normal Xapian system will commit more than once every few
+seconds.  However, if you are concerned, you can use the <tt class="docutils literal"><span class="pre">xapian-compact</span></tt>
+tool to make a fresh copy of the database with the revision number set to 1.</p>
+<p>The revision number of each table can be displayed by the <tt class="docutils literal"><span class="pre">xapian-check</span></tt>
+tool.</p>
+</div>
+<div class="section" id="network-file-systems">
+<h2><a class="toc-backref" href="#id6">Network file systems</a></h2>
+<p>Xapian should work correctly over a network file system.  However, there are
+various potential issues with such file systems, so we recommend
+extensive testing of your particular network file system before deployment.</p>
+<p>Be warned that Xapian is heavily I/O dependent, and therefore performance over
+a network file system is likely to be slow unless you've got a very well tuned
+setup.</p>
+<p>Xapian needs to be able to create a lock file in a database directory when
+modifications are being performed.  On some network files systems (e.g., NFS)
+this requires a lock daemon to be running.</p>
+</div>
+<div class="section" id="which-database-format-to-use">
+<h2><a class="toc-backref" href="#id7">Which database format to use?</a></h2>
+<p>As of release 1.2.0, you should generally use the chert format (which is now
+the default).</p>
+<p>Support for the pre-1.0 quartz format (deprecated in 1.0) was removed in 1.1.0.
+See below for how to convert a quartz database to a flint one.</p>
+<p>The flint backend (the default for 1.0) is still supported by 1.2.x, but
+deprecated - only use it if you already have flint databases; and plan to
+migrate away.</p>
+<p>There's also a development backend called brass.  The main distinguishing
+feature of this is that the format may change incompatibly from time to time.
+It passes Xapian's extensive testsuite, but has seen less real world use
+than chert.</p>
+</div>
+<div class="section" id="can-i-put-other-files-in-the-database-directory">
+<h2><a class="toc-backref" href="#id8">Can I put other files in the database directory?</a></h2>
+<p>If you wish to store meta-data or other information relating to the Xapian
+database, it is reasonable to wish to put this in files inside the Xapian
+database directory, for neatness.  For example, you might wish to store a list
+of the prefixes you've applied to terms for specific fields in the database.</p>
+<p>Current Xapian backends don't do anything
+which will break this technique, so as long as you don't choose a filename
+that Xapian uses itself, there should be no problems.  However, be aware that
+new versions of Xapian may use new files in the database directory, and it is
+also possible that new backend formats may not be compatible with the
+technique (e.g., it is possible that a future backend could store its entire
+database in a single file, not in a directory).</p>
+</div>
+</div>
+<div class="section" id="backup-strategies">
+<h1><a class="toc-backref" href="#id9">Backup Strategies</a></h1>
+<div class="section" id="summary">
+<h2><a class="toc-backref" href="#id10">Summary</a></h2>
+<blockquote>
+<ul class="simple">
+<li>The simplest way to perform a backup is to temporarily halt modifications,
+take a copy of all files in the database directory, and then allow
+modifications to resume.  Read access can continue while a backup is being
+taken.</li>
+<li>If you have a filesystem which allows atomic snapshots to be taken of
+directories (such as an LVM filesystem), an alternative strategy is to take
+a snapshot and simply copy all the files in the database directory to the
+backup medium.  Such a copy will always be a valid database.</li>
+<li>Progressive backups are not easily possible; modifications are typically
+spread throughout the database files.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="detail">
+<h2><a class="toc-backref" href="#id11">Detail</a></h2>
+<p>Even though Xapian databases are often automatically generated from source
+data which is stored in a reliable manner, it is usually desirable to keep
+backups of Xapian databases being run in production environments.  This is
+particularly important in systems with high-availability requirements, since
+re-building a Xapian database from scratch can take many hours.  It is also
+important in the case where the data stored in the database cannot easily be
+recovered from external sources.</p>
+<p>Xapian databases are managed such that at any instant in time, there is at
+least one valid revision of the database written to disk (and if there are
+multiple valid revisions, Xapian will always open the most recent).
+Therefore, if it is possible to take an instantaneous snapshot of all the
+database files (for example, on an LVM filesystem), this snapshot is suitable
+for copying to a backup medium.  Note that it is not sufficient to take a
+snapshot of each database file in turn - the snapshot must be across all
+database files simultaneously.  Otherwise, there is a risk that the snapshot
+could contain database files from different revisions.</p>
+<p>If it is not possible to take an instantaneous snapshot, the best backup
+strategy is simply to ensure that no modifications are committed during the
+backup procedure.  While the simplest way to implement this may be to stop
+whatever processes are used to modify the database, and ensure that they close
+the database, it is not actually necessary to ensure that no writers are open
+on the database; it is enough to ensure that no writer makes any modification
+to the database.</p>
+<p>Because a Xapian database can contain more than one valid revision of the
+database, it is actually possible to allow a limited number of modifications
+to be performed while a backup copy is being made, but this is tricky and we
+do not recommend relying on it.  Future versions of Xapian are likely to
+support this better, by allowing the current revision of a database to be
+preserved while modifications continue.</p>
+<p>Progressive backups are not recommended for Xapian databases: Xapian database
+files are block-structured, and modifications are spread throughout the
+/database file.  Therefore, a progressive backup tool will not be able to take
+a backup by storing only the new parts of the database.  Modifications will
+normally be so extensive that most parts of the database have been modified,
+however, if only a small number of modifications have been made, a binary diff
+algorithm might make a usable progressive backup tool.</p>
+</div>
+</div>
+<div class="section" id="inspecting-a-database">
+<h1><a class="toc-backref" href="#id12">Inspecting a database</a></h1>
+<p>When designing an indexing strategy, it is often useful to be able to check
+the contents of the database.  Xapian includes a simple command-line program,
+&quot;delve&quot;, to allow this.</p>
+<p>For example, to display the list of terms in document &quot;1&quot; of the database
+&quot;foo&quot;, use:</p>
+<pre class="literal-block">
+delve foo -r 1
+</pre>
+<p>It is also possible to perform simple searches of a database.  Xapian includes
+another simple command-line program, &quot;quest&quot;, to support this.  &quot;quest&quot; is
+only able to search for un-prefixed terms, the query string must be quoted to
+protect it from the shell.  To search the database &quot;foo&quot; for the phrase &quot;hello
+world&quot;, use:</p>
+<pre class="literal-block">
+quest -d foo '&quot;hello world&quot;'
+</pre>
+<p>If you have installed the &quot;Omega&quot; CGI application built on Xapian, this can
+also be used with the built-in &quot;godmode&quot; template to provide a web-based
+interface for browsing a database.  See Omega's documentation for more details
+on this.</p>
+</div>
+<div class="section" id="database-maintenance">
+<h1><a class="toc-backref" href="#id13">Database maintenance</a></h1>
+<div class="section" id="compacting-a-database">
+<h2><a class="toc-backref" href="#id14">Compacting a database</a></h2>
+<p>Xapian databases normally have some spare space in each block to allow
+new information to be efficiently slotted into the database.  However, the
+smaller a database is, the faster it can be searched, so if there aren't
+expected to be many further modifications, it can be desirable to compact the
+database.</p>
+<p>Xapian includes a tool called &quot;xapian-compact&quot; for compacting databases.
+This tool makes a copy of a database, and takes advantage of
+the sorted nature of the source Xapian database to write the database out
+without leaving spare space for future modifications.  This can result in a
+large space saving.</p>
+<p>The downside of compaction is that future modifications may take a little
+longer, due to needing to reorganise the database to make space for them.
+However, modifications are still possible, and if many modifications are made,
+the database will gradually develop spare space.</p>
+<p>There's an option (&quot;-F&quot;) to perform a &quot;fuller&quot; compaction.  This option
+compacts the database as much as possible, but it violates the design of the
+Btree format slightly to achieve this, so it is not recommended if further
+modifications are at all likely in future.  If you do need to modify a &quot;fuller&quot;
+compacted database, we recommend you run xapian-compact on it without &quot;-F&quot;
+first.</p>
+<p>While taking a copy of the database, it is also possible to change the
+blocksize.  If you wish to profile search speed with different blocksizes,
+this is the recommended way to generate the different databases (but remember
+to compact the original database as well, for a fair comparison).</p>
+</div>
+<div class="section" id="merging-databases">
+<h2><a class="toc-backref" href="#id15">Merging databases</a></h2>
+<p>When building an index for a very large amount of data, it can be desirable to
+index the data in smaller chunks (perhaps on separate machines), and then
+merge the chunks together into a single database.  This can be performed using
+the &quot;xapian-compact&quot; tool, simply by supplying several source database paths.</p>
+<p>Normally, merging works by reading the source databases in parallel, and
+writing the contents in sorted order to the destination database.  This will
+work most efficiently if excessive disk seeking can be avoided; if you have
+several disks, it may be worth placing the source databases and the
+destination database on separate disks to obtain maximum speed.</p>
+<p>The <tt class="docutils literal"><span class="pre">xapian-compact</span></tt> tool supports an additional option, <tt class="docutils literal"><span class="pre">--multipass</span></tt>,
+which is useful when merging more than three databases.  This will cause the
+postlist tables to be grouped and merged into temporary tables, which are then
+grouped and merged, and so on until a single postlist table is created, which
+is usually faster, but requires more disk space for the temporary files.</p>
+</div>
+<div class="section" id="checking-database-integrity">
+<h2><a class="toc-backref" href="#id16">Checking database integrity</a></h2>
+<p>Xapian includes a command-line tool to check that a database is
+self-consistent.  This tool, &quot;xapian-check&quot;, runs through the entire database,
+checking that all the internal nodes are correctly connected.  It can also be
+used on a single table, for example, this command will check the termlist table
+of database &quot;foo&quot;:</p>
+<pre class="literal-block">
+xapian-check foo/termlist.DB
+</pre>
+</div>
+<div class="section" id="converting-a-flint-database-to-a-chert-database">
+<h2><a class="toc-backref" href="#id17">Converting a flint database to a chert database</a></h2>
+<p>It is possible to convert a flint database to a chert database by
+using the &quot;copydatabase&quot; example program included with Xapian.  This is a
+lot slower to run than &quot;xapian-compact&quot;, since it has to perform the
+sorting of the term occurrence data from scratch, but should be faster than a
+re-index from source data since it doesn't need to perform the tokenisation
+step.  It is also useful if you no longer have the source data available.</p>
+<p>The following command will copy a database from &quot;SOURCE&quot; to &quot;DESTINATION&quot;,
+creating the new database at &quot;DESTINATION&quot; as a chert database:</p>
+<pre class="literal-block">
+copydatabase SOURCE DESTINATION
+</pre>
+<p>By default copydatabase will renumber your documents starting with docid 1.
+If the docids are stored in or come from some external system, you should
+preserve them by using the --no-renumber option (new in Xapian 1.2.5):</p>
+<pre class="literal-block">
+copydatabase --no-renumber SOURCE DESTINATION
+</pre>
+</div>
+<div class="section" id="converting-a-quartz-database-to-a-flint-database">
+<h2><a class="toc-backref" href="#id18">Converting a quartz database to a flint database</a></h2>
+<p>It is possible to convert a quartz database to a flint database by installing
+Xapian 1.0.x (since this has support for both quartz and flint)
+and using the &quot;copydatabase&quot; example program included with Xapian.  This is a
+lot slower to run than &quot;xapian-compact&quot;, since it has to perform the
+sorting of the term occurrence data from scratch, but should be faster than a
+re-index from source data since it doesn't need to perform the tokenisation
+step.  It is also useful if you no longer have the source data available.</p>
+<p>The following command will copy a database from &quot;SOURCE&quot; to &quot;DESTINATION&quot;,
+creating the new database at &quot;DESTINATION&quot; as a flint database:</p>
+<pre class="literal-block">
+copydatabase SOURCE DESTINATION
+</pre>
+</div>
+<div class="section" id="converting-a-0-9-x-flint-database-to-work-with-1-0-y">
+<h2><a class="toc-backref" href="#id19">Converting a 0.9.x flint database to work with 1.0.y</a></h2>
+<p>In 0.9.x, flint was the development backend.</p>
+<p>Due to a bug in the flint position list encoding in 0.9.x which made flint
+databases non-portable between platforms, we had to make an incompatible
+change in the flint format.  It's not easy to write an upgrader, but you
+can convert a database using the following procedure (although it might
+be better to rebuild from scratch if you want to use the new UTF-8 support
+in Xapian::QueryParser, Xapian::Stem, and Xapian::TermGenerator).</p>
+<p>Run the following command in your Xapian 0.9.x installation to copy your
+0.9.x flint database &quot;SOURCE&quot; to a new quartz database &quot;INTERMEDIATE&quot;:</p>
+<pre class="literal-block">
+copydatabase SOURCE INTERMEDIATE
+</pre>
+<p>Then run the following command in your Xapian 1.0.y installation to copy
+your quartz database to a 1.0.y flint database &quot;DESTINATION&quot;:</p>
+<pre class="literal-block">
+copydatabase INTERMEDIATE DESTINATION
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

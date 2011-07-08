@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Scalability</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="scalability">
+<h1 class="title">Scalability</h1>
+
+<p>People often want to know how Xapian will scale. The short answer is
+&quot;very well&quot; - a previous version of the software powered BrightStation's
+Webtop search engine, which offered a search over around 500 million web
+pages (around 1.5 terabytes of database files). Searches took less than
+a second.</p>
+<p>In terms of current deployments, <a class="reference external" href="http://search.gmane.org/">gmane</a>
+indexes and searches 90 million mail messages on a single server at the
+time of writing (2011), and we've had user reports of systems with more
+250 million documents.</p>
+<div class="section" id="benchmarking">
+<h1>Benchmarking</h1>
+<p>One effect to be aware of when designing benchmarks is that queries will
+be a lot slower when nothing is cached. So the first few queries on a
+database which hasn't been searched recently will be unrepresentatively
+slow compared to the typical case.</p>
+<p>In real use, pretty much all the non-leaf blocks from the B-trees being
+used for the search will be cached pretty quickly, as well as many
+commonly used leaf blocks.</p>
+</div>
+<div class="section" id="general-scalability-considerations">
+<h1>General Scalability Considerations</h1>
+<p>In a large search application, I/O will end up being the limiting
+factor. So you want a RAID setup optimised for fast reading, lots of RAM
+in the box so the OS can cache lots of disk blocks (the access patterns
+typically mean that you only need to cache a few percent of the database
+to eliminate most disk cache misses).</p>
+<p>It also means that reducing the database size is usually a win. The
+Chert backend compresses the information in the tables in ways which
+work well given the nature of the data but aren't too expensive to
+unpack (e.g. lists of sorted docids are stored as differences with
+smaller values encoded in fewer bytes). There is further potential for
+improving the encodings used.</p>
+<p>Another way to reduce disk I/O is to run databases through
+xapian-compact. The Btree manager usually leaves some spare space in
+each block so that updates are more efficient (though there are
+heuristics which will fill blocks fuller when they detect a long
+sequence of sequential insertions, which means adding documents to the
+end of an empty database will produce fairly compact tables, apart from
+the postlist table). Compacting makes all blocks as full as possible,
+and so reduces the size of the database. It also produces a database
+with revision 1 which is inherently faster to search. The penalty is
+that updates will be slow for a while, as they'll result in a lot of
+block splitting when all blocks are full.</p>
+<p>Splitting the data over several databases is generally a good strategy.
+Once each has finished being updated, compact it to make it small and
+faster to search.</p>
+<p>A multiple-database scheme works particularly well if you want a rolling
+web index where the contents of the oldest database can be rechecked and
+live links put back into a new database which, once built, replaces the
+oldest database. It's also good for a news-type application where older
+documents should expire from the index.</p>
+</div>
+<div class="section" id="size-limits-in-xapian">
+<h1>Size Limits in Xapian</h1>
+<p>The chert backend (which is currently the default and recommended
+backend) stores the indexes in several files containing Btree tables. If
+you're indexing with positional information (for phrase searching) the
+term positions table is usually the largest.</p>
+<p>The current limits are:</p>
+<ul>
+<li><p class="first">Xapian uses unsigned 32-bit ints for document ids, so you're limited
+to just over 4 billion documents in a database. The other limits will
+cut in first for a single database, but searches over multiple
+databases are done by interleaving the document ids, so this might
+start to matter (especially if one database is much larger than the
+others). This interleaving technique could be changed fairly easily
+if it proves problematic.</p>
+</li>
+<li><p class="first">If you search many databases concurrently, you may hit the
+per-process file-descriptor limit - each chert database uses between
+3 and 7 fds depending which tables are present. Some Unix-like OSes
+allow this limit to be raised. Another way to avoid it (and to spread
+the search load) is to use the remote backend to search databases on
+a cluster of machines. Chert could be made to not open fds for tables
+which aren't being used during search (values and positions may not
+be), or to juggle fds - the record table is typically only used for
+results, while the posting table is typically only used during
+matching.</p>
+</li>
+<li><p class="first">If the OS has a filesize limit, that obviously applies to Xapian (a
+2GB limit used to be common for older operating systems). The
+xapian-core configure script will attempt to detect and automatically
+enable support for &quot;LARGE FILES&quot; where possible.</p>
+<p>So what is the limit for a modern OS? Taking Linux 2.6 as an example,
+ext4 allows files up to 16TB and filesystems up to 1EB, while btrfs
+allows files and filesystems up to 16EB (<a class="reference external" href="http://en.wikipedia.org/wiki/Comparison_of_file_systems">figures from
+Wikipedia</a>).</p>
+</li>
+<li><p class="first">The B-trees use a 32-bit unsigned block count. The default blocksize
+is 8K which limits you to 32TB tables. You can increase the blocksize
+if this is a problem, but it's best to do it before you create the
+database as otherwise you need to use xapian-compact to make a
+compacted copy of the database with the new blocksize, and that will
+take a while for such a large database. The maximum blocksize
+currently allowed is 64K, which limits you to 256TB tables.</p>
+</li>
+<li><p class="first">Flint stores the total length (i.e. number of terms) of all the
+documents in a database so it can calculate the average document
+length. This is currently stored as an unsigned 64-bit quantity so
+it's not likely to be a limit you'll hit. It's listed here for
+completeness.</p>
+</li>
+</ul>
+<p>If you've further questions about scalability, ask on the mailing lists
+- people using Xapian to search large databases may be able to make
+further suggestions.</p>
+</div>
+</div>
+</body>
+</html>
