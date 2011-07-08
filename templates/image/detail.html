@@ -117,31 +117,31 @@
                 {% if is_revision %}
                     {% with revision_image as image %}
                         {% if inverted %}
-                        <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                            <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                        <a class="zoomable" href="http://astrobin_images.{{s3_url}}/{{image.filename}}_inverted{{image.original_ext}}">
+                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         </a>
                         {% endif %}
                         {% if solved %}
-                        <img src="http://{{s3_solved_bucket}}.{{s3_url}}/{{image.filename}}.png" alt="{{image.title|escape}}"/>
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved.png" alt="{{image.title|escape}}"/>
                         {% endif %}
                         {% if not inverted and not solved %}
-                        <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                            <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                        <a class="zoomable" href="http://astrobin_images.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         </a>
                         {% endif %}
                     {% endwith %}
                 {% else %}
                     {% if inverted %}
-                    <a class="zoomable" href="http://{{s3_inverted_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                        <img src="http://{{s3_resized_inverted_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                    <a class="zoomable" href="http://astrobin_images.{{s3_url}}/{{image.filename}}_inverted{{image.original_ext}}">
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                     </a>
                     {% endif %}
                     {% if solved %}
-                    <img src="http://{{s3_solved_bucket}}.{{s3_url}}/{{image.filename}}.png" alt="{{image.title|escape}}"/>
+                    <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved.png" alt="{{image.title|escape}}"/>
                     {% endif %}
                     {% if not inverted and not solved %}
-                    <a class="zoomable" href="http://{{s3_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                        <img src="http://{{s3_resized_images_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                    <a class="zoomable" href="http://astrobin_images.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}"/>
                     </a>
                     {% endif %}
                 {% endif %}
@@ -183,14 +183,14 @@
                     {% if is_revision %}
                     <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
                         <a href="{{image.get_absolute_url}}">
-                            <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{image.filename}}{{image.original_ext}}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
+                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
                         </a>
                     </div>
                     {% endif %}
                     {% for i in revisions %}
                     <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
                         <a href="{{i.get_absolute_url}}">
-                            <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.filename}}{{i.original_ext}}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
+                            <img src="http://astrobin_images.{{s3_url}}/{{i.filename}}_small_thumb{{i.original_ext}}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
                         </a>
                     </div>
                     {% endfor %}
@@ -227,7 +227,7 @@
                     {% if is_ready %}
                     <hr/>
                     <h4>{% trans "Histogram" %}</h4>
-                    <img src="http://{{s3_histograms_bucket}}.{{s3_url}}/{{image.filename}}.png" alt="{% trans "Histogram" %}"/>
+                    <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
                     {% endif %}
                 </div>
             </div>
@@ -256,7 +256,7 @@
             {% for i in related_images %}
                 <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
                     <a href="{{i.object.get_absolute_url}}/">
-                        <img src="http://{{s3_small_thumbnails_bucket}}.{{s3_url}}/{{i.object.filename}}{{i.object.original_ext}}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
+                        <img src="http://astrobin_images.{{s3_url}}/{{i.object.filename}}_small_thumb{{i.object.original_ext}}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
                     </a>
                 </div>
             {% endfor %}
