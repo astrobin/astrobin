@@ -63,7 +63,11 @@ sudo rabbitmqctl add_vhost astrobin
 sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 
 # Run it!
-/usr/local/nginx/sbin/nginx
-./run.sh
+/usr/local/nginx/sbin/nginx &
+./celeryd.sh &
+./celerybeat.sh &
+./unicorn.sh &
+
+(replace ./unicorn.sh with ./run.sh if you want to debug)
 
 Go to http://localhost/
