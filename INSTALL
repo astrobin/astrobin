@@ -94,6 +94,10 @@ cd astrometry.net-0.38
 make
 sudo make install
 
+# Create db and index
+./syncdb.sh
+./rebuild_index.sh
+
 # Run it!
 ./nginx.sh
 ./celeryd.sh &
