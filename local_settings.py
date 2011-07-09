@@ -27,7 +27,7 @@ DATABASES = {
 ASTROBIN_BASE_URL = 'http://localhost:8082'
 ASTROBIN_SHORT_BASE_URL = 'http://localhost:8082'
 
-ASTROBIN_BASE_PATH = '/home/astrobin/Code/astrobin.hg'
+ASTROBIN_BASE_PATH = '/home/astrobin/Code/astrobin'
 UPLOADS_DIRECTORY = ASTROBIN_BASE_PATH + '/uploads/'
 
 # Local time zone for this installation. Choices can be found here:
@@ -159,7 +159,7 @@ CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
 
 HAYSTACK_SITECONF = 'astrobin.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
-HAYSTACK_XAPIAN_PATH = '/home/astrobin/Code/astrobin.hg/xapian_indexes'
+HAYSTACK_XAPIAN_PATH = '/home/astrobin/Code/astrobin/xapian_indexes'
 HAYSTACK_DEFAULT_OPERATOR = 'OR'
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
