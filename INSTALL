@@ -1,5 +1,5 @@
-Basic packages:
-===============
+# Distribution packages:
+# ======================
 
 # We need Mercurial 1.8+ for git submodule support
 sudo add-apt-repository ppa:mercurial-ppa/releases
@@ -27,20 +27,20 @@ sudo apt-get install \
 sudo apt-file update
 sudo pip install virtualenv
 
-AstroBin instructions:
-======================
+
+# Obtain the code:
+# ================
 
 hg clone https://bitbucket.org/siovene/astrobin astrobin
-cd astrobin; virtualenv --no-site-packages venv
 
-. ./venv/binActivate
-cd xapian-core-1.2.6
-./configure --prefix=/opt && make && sudo make install
-cd ../xapian-bindings-1.2.6
-XAPIAN_CONFIG=/opt/bin/xapian-config ./configure --prefix=/opt && make && sudo make install
-deactivate
-	
+
+# Python packages:
+# ================
+
+cd astrobin
+virtualenv --no-site-packages venv
 ln -s ./venv/bin/pip vpip
+
 # setproctitle must be installed first
 ./vpip install setproctitle
 ./vpip install \
@@ -66,15 +66,33 @@ ln -s ./venv/bin/pip vpip
 cd django-persistent-messages
 ../venv/bin/python setup.py install
 
+
+# Set up Xapian:
+# ==============
+
+. ./venv/bin/activate
+cd xapian-core-1.2.6
+./configure --prefix=/opt && make && sudo make install
+cd ../xapian-bindings-1.2.6
+XAPIAN_CONFIG=/opt/bin/xapian-config ./configure --prefix=/opt && make && sudo make install
+deactivate
+
+
+# Set up MySQL:
+# =============
+
 mysql -u user -p (password is astrobin)
 > create user 'astrobin'@'localhost' identified by 'astrobin';
 > create database astrobin;
 
 # Initialize db
-./syncdb.sh
+./scripts/syncdb.sh
 (When asked, do create super user astrobin:astrobin <astrobin@astrobin.com>)
 
-# Build nginx
+
+# Build nginx:
+# ============
+
 cd nginx-1.0.4
 ./configure --add-module=../nginx_http_push_module
 make
@@ -83,27 +101,45 @@ sudo make install
 # Use nginx config
 Add 'include /home/astrobin/Code/astrobin/astrobin.com.nginx;' to the http{} section of /usr/local/nginx/conf/nginx.conf.
 
-# Configure rabbitmq
+
+# Configure rabbitmq:
+# ===================
+
 sudo rabbitmqctl add_user astrobin astrobin
 sudo rabbitmqctl add_vhost astrobin
 sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 
-# Build astrometry.net
+
+# Build astrometry.net:
+# =====================
+
 cd astrometry.net-0.38
 ./configure
 make
 sudo make install
 
-# Create db and index
-./scripts/syncdb.sh
+
+# Build index:
+# ============
+
 ./scripts/rebuild_index.sh
 
+
 # Run it!
+# =======
 ./scripts/nginx.sh
 ./scripts/celeryd.sh &
 ./scripts/celerybeat.sh &
 ./scripts/gunicorn.sh &
 
-(replace gunicorn.sh with run.sh if you want to debug)
+# (replace gunicorn.sh with run.sh if you want to debug)
 
 Go to http://localhost/
+
+
+# Run tasks regularly:
+# ====================
+
+# Update images index
+*/5 * * * * (cd ~/Code/astrobin; ./scripts/update_index.sh) 2>&1 >/dev/null
+
