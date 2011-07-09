@@ -33,14 +33,22 @@ AstroBin instructions:
 hg clone https://bitbucket.org/siovene/astrobin astrobin
 cd astrobin; virtualenv --no-site-packages venv
 
-Build xapian-code, xapian-bindings; install in /opt and remember XAPIAN_CONFIG=/opt/bin/xapian-config. Remember to do this while in the virtualenv.
+. ./venv/binActivate
+cd xapian-core-1.2.6
+./configure --prefix=/opt && make && sudo make install
+cd ../xapian-bindings-1.2.6
+XAPIAN_CONFIG=/opt/bin/xapian-config ./configure --prefix=/opt && make && sudo make install
+deactivate
 	
 ln -s ./venv/bin/pip vpip
+# setproctitle must be installed first
+./vpip install setproctitle
 ./vpip install \
     yolk \
+    django \
     django-haystack xapian-haystack \
     django-celery celerymon \
-    setproctitle gunicorn gunicorn-console \
+    gunicorn gunicorn-console \
     django-debug-toolbar \
     MySQL-python \
     django-ratings \
@@ -49,10 +57,14 @@ ln -s ./venv/bin/pip vpip
     simplejson \
     django-compressor \
     django-registration \
+    django-notification \
     flickrapi \
-    Pillow
+    Pillow \
+    python-memcached
 
-./venv/bin/python django-notification django-persistent-messages/setup.py install (for the notifications system)
+# for the notifications system
+cd django-persistent-messages
+../venv/bin/python setup.py install
 
 mysql -u user -p (password is astrobin)
 > create user 'astrobin'@'localhost' identified by 'astrobin';
