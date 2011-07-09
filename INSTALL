@@ -36,22 +36,23 @@ cd astrobin; virtualenv --no-site-packages venv
 Build xapian-code, xapian-bindings; install in /opt and remember XAPIAN_CONFIG=/opt/bin/xapian-config. Remember to do this while in the virtualenv.
 	
 ln -s ./venv/bin/pip vpip
-./vpip install yolk (to list installed python packaged)
-./vpip install django-haystack xapian-haystack (for search)
-./vpip install django-celery celerymon (for tasks)
-./vpip install setproctitle gunicorn gunicorn-console (for deployment)
-./venv/bin/python django-notification django-persistent-messages/setup.py install (for the notifications system)
-./vpip install django-debug-toolbar (useful for session debugging in-browser)
-./vpip install MySQL-python (for the database backend)
-./vpip install django-ratings (for the voting)
-./vpip install django-memcached
-./vpip install django-storages boto (for s3)
-./vpip install simplejson
-./vpip install django-compressor (for optimizing bandwidth)
-./vpip install django-registration (for users' management)
-./vpip install flickrapi
-./vpip install Pillow (image manipulation)
+./vpip install \
+    yolk \
+    django-haystack xapian-haystack \
+    django-celery celerymon \
+    setproctitle gunicorn gunicorn-console \
+    django-debug-toolbar \
+    MySQL-python \
+    django-ratings \
+    django-memcached
+    django-storages boto \
+    simplejson \
+    django-compressor \
+    django-registration \
+    flickrapi \
+    Pillow
 
+./venv/bin/python django-notification django-persistent-messages/setup.py install (for the notifications system)
 
 mysql -u user -p (password is astrobin)
 > create user 'astrobin'@'localhost' identified by 'astrobin';
