@@ -6,7 +6,7 @@ syntax: glob
 *.o
 astrobin.db
 static/CACHE
-uploads
+uploads/*
 venv
 vpip
 xapian-core-1.2.6/build
