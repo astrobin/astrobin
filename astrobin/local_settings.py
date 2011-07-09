@@ -178,3 +178,5 @@ BROKER_VHOST = 'astrobin'
 
 CELERY_RESULT_BACKEND = 'database'
 CELERY_IMPORTS = ('astrobin.tasks', )
+
+ASTROBIN_ENABLE_SOLVING = False
