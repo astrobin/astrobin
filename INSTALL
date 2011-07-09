@@ -102,8 +102,8 @@ sudo make install
 ./nginx.sh
 ./celeryd.sh &
 ./celerybeat.sh &
-./unicorn.sh &
+./gunicorn.sh &
 
-(replace ./unicorn.sh with ./run.sh if you want to debug)
+(replace ./gunicorn.sh with ./run.sh if you want to debug)
 
 Go to http://localhost/
