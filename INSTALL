@@ -1,6 +1,10 @@
 Basic packages:
 ===============
 
+# We need Mercurial 1.8+ for git submodule support
+sudo add-apt-repository ppa:mercurial-ppa/releases
+
+sudo apt-get update
 sudo apt-get install \
 	apt-file \
 	vim \
@@ -26,8 +30,8 @@ sudo pip install virtualenv
 AstroBin instructions:
 ======================
 
-hg clone astrobin
-cd astrobin; virtualenv --no-site-packages venv
+hg clone https://bitbucket.org/siovene/astrobin
+cd astrobin.hg; virtualenv --no-site-packages venv
 
 Build xapian-code, xapian-bindings; install in /opt and remember XAPIAN_CONFIG=/opt/bin/xapian-config. Remember to do this while in the virtualenv.
 	
