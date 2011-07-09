@@ -95,15 +95,15 @@ make
 sudo make install
 
 # Create db and index
-./syncdb.sh
-./rebuild_index.sh
+./scripts/syncdb.sh
+./scripts/rebuild_index.sh
 
 # Run it!
-./nginx.sh
-./celeryd.sh &
-./celerybeat.sh &
-./gunicorn.sh &
+./scripts/nginx.sh
+./scripts/celeryd.sh &
+./scripts/celerybeat.sh &
+./scripts/gunicorn.sh &
 
-(replace ./gunicorn.sh with ./run.sh if you want to debug)
+(replace gunicorn.sh with run.sh if you want to debug)
 
 Go to http://localhost/
