@@ -15,6 +15,11 @@ from notifications import *
 
 @task()
 def solve_image(image, callback=None):
+    # If solving is disabled in the settings, then we override what we're
+    # asked to do.
+    if not settings.ASTROBIN_ENABLE_SOLVING:
+        return
+
     # Solve
     path = settings.UPLOADS_DIRECTORY
     uid = image.filename
