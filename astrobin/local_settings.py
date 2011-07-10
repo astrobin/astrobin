@@ -178,5 +178,14 @@ BROKER_VHOST = 'astrobin'
 
 CELERY_RESULT_BACKEND = 'database'
 CELERY_IMPORTS = ('astrobin.tasks', )
+CELERYD_NODES = "w1 w2"
+CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG"
+CELERYD_CHDIR = ASTROBIN_BASE_PATH
+CELERYD_LOG_FILE = "celeryd.log"
+CELERYD_PID_FILE = "celeryd.pid"
+CELERYD = ASTROBIN_BASE_PATH + "manage.py celeryd"
+CELERYBEAT = ASTROBIN_BASE_PATH + "manage.py celerybeat"
+CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
+
 
 ASTROBIN_ENABLE_SOLVING = False
