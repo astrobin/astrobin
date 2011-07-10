@@ -66,6 +66,9 @@ ln -s ./venv/bin/pip vpip
 cd django-persistent-messages
 ../venv/bin/python setup.py install
 
+# for the moon phase module
+easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
+
 
 # Set up Xapian:
 # ==============
