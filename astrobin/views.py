@@ -135,13 +135,18 @@ def image_detail(request, id):
                      ['Dark frames', None],
                      ['Offset/bias frames', None],
                      ['Flat frames', None],
-                     ['Flat dark frames', None]
+                     ['Flat dark frames', None],
+                     ['Moon\'s age', None],
+                     ['Moon\'s fraction', None],
                     ]
 
     try:
         solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
     except:
         pass
+
+    moon_age = 0
+    moon_illuinated = 0
 
     if deep_sky_acquisitions:
         image_type = 'deep_sky'
@@ -155,6 +160,17 @@ def image_detail(request, id):
         deep_sky_data[7][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '5f']
         deep_sky_data[8][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '6x']
         deep_sky_data[6][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '7o']
+
+        moon_age_list = []
+        moon_illuminated_list = []
+        for a in deep_sky_acquisitions:
+            m = MoonPhase(a.date)
+            moon_age_list.append(m.age)
+            moon_illuminated_list.append(m.illuminated)
+
+        deep_sky_data[9][1]  = sum(moon_age_list)         / float(len(moon_age_list))
+        deep_sky_data[10][1] = sum(moon_illuminated_list) / float(len(moon_age_illuminated))
+
     elif solar_system_acquisition:
         image_type = 'solar_system'
 
