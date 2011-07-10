@@ -10,7 +10,7 @@ import os
 import os.path
 
 from image_utils import *
-from s3 import *
+from storage import *
 from notifications import *
 
 @task()
@@ -57,7 +57,7 @@ def solve_image(image, callback=None):
 @task()
 def store_image(image, solve, callback=None):
     try:
-        store_image_in_s3(settings.UPLOADS_DIRECTORY, image.filename, image.original_ext)
+        store_image_in_backend(settings.UPLOADS_DIRECTORY, image.filename, image.original_ext)
     except S3CreateError, exc:
         store_image.retry(exc=exc)
 
@@ -69,6 +69,6 @@ def store_image(image, solve, callback=None):
 
 @task
 def delete_image(filename, ext):
-    delete_image_from_s3(filename, ext)
+    delete_image_from_backend(filename, ext)
 
 
