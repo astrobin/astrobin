@@ -17,7 +17,7 @@ from image_utils import *
 def save_to_bucket(filename, content):
     default_storage.save(filename, ContentFile(content));
 
-def store_image_in_s3(path, uid, original_ext, mimetype=''):
+def store_image_in_backend(path, uid, original_ext, mimetype=''):
     format_map = {'image/jpeg':('JPEG', '.jpg'),
                   'image/png' :('PNG', '.png'),
                  }
@@ -90,7 +90,7 @@ def store_image_in_s3(path, uid, original_ext, mimetype=''):
                    invertedFile.getvalue())
 
 
-def delete_image_from_s3(filename, ext):
+def delete_image_from_backend(filename, ext):
     for suffix in (
         '',
         '_hist',

@@ -234,13 +234,13 @@ def image_upload_process(request):
         form = ImageUploadForm(request.POST, request.FILES)
         file = request.FILES["file"]
 
-    s3_filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    destination = open(settings.UPLOADS_DIRECTORY + s3_filename + original_ext, 'wb+')
+    filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
+    destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
         destination.write(chunk)
         destination.close()
     image = Image(
-        filename=s3_filename,
+        filename=filename,
         original_ext=original_ext,
         user=request.user)
 
@@ -778,13 +778,13 @@ def user_profile_flickr_import(request):
                 if found_size is not None:
                     source = found_size.attrib['source']
                     file = urllib2.urlopen(source)
-                    s3_filename = str(uuid4())
+                    filename = str(uuid4())
                     original_ext = '.jpg'
-                    destination = open(settings.UPLOADS_DIRECTORY + s3_filename + original_ext, 'wb+')
+                    destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
                     destination.write(file.read())
                     destination.close()
 
-                    image = Image(filename=s3_filename, original_ext=original_ext,
+                    image = Image(filename=filename, original_ext=original_ext,
                                   user=request.user,
                                   title=title if title is not None else '',
                                   description=description if description is not None else '')
@@ -1019,10 +1019,10 @@ def image_revision_upload_process(request):
             return HttpResponseRedirect(image.get_absolute_url())
         file = request.FILES["file"]
 
-    s3_filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    store_image_in_s3(file, s3_filename, original_ext)
+    filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
+    store_image_in_backend(file, filename, original_ext)
 
-    image_revision = ImageRevision(image=image, filename=s3_filename, original_ext=original_ext)
+    image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext)
     image_revision.save()
 
     followers = [x.from_userprofile.user
