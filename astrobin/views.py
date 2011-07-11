@@ -87,6 +87,8 @@ def no_javascript(request):
 @require_GET
 def image_detail(request, id):
     """ Show details of an image"""
+    from moon import MoonPhase;
+
     image = get_object_or_404(Image, pk=id)
     already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
     votes = image.rating.votes
@@ -136,8 +138,8 @@ def image_detail(request, id):
                      ['Offset/bias frames', None],
                      ['Flat frames', None],
                      ['Flat dark frames', None],
-                     ['Moon\'s age', None],
-                     ['Moon\'s fraction', None],
+                     ['Avg. moon\'s age', None],
+                     ['Avg. moon\'s fraction', None],
                     ]
 
     try:
@@ -168,8 +170,8 @@ def image_detail(request, id):
             moon_age_list.append(m.age)
             moon_illuminated_list.append(m.illuminated)
 
-        deep_sky_data[9][1]  = sum(moon_age_list)         / float(len(moon_age_list))
-        deep_sky_data[10][1] = sum(moon_illuminated_list) / float(len(moon_age_illuminated))
+        deep_sky_data[9][1]  = ["%.2f" % (sum(moon_age_list)         / float(len(moon_age_list)))]
+        deep_sky_data[10][1] = ["%.2f" % (sum(moon_illuminated_list) / float(len(moon_illuminated_list)))]
 
     elif solar_system_acquisition:
         image_type = 'solar_system'
