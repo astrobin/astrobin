@@ -103,6 +103,7 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'astrobin.prof.ProfilerMiddleware',
+    'astrobin.middlewares.ComingSoonMiddleware',
 #    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
@@ -189,3 +190,5 @@ CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
 
 
 ASTROBIN_ENABLE_SOLVING = False
+ASTROBIN_COMING_SOON = True
+ASTROBIN_COMING_SOON_URL = '/comingsoon/'
