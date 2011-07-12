@@ -85,6 +85,12 @@ def no_javascript(request):
 
 
 @require_GET
+def comingsoon(request):
+    return render_to_response('comingsoon.html',
+        context_instance=RequestContext(request))
+
+
+@require_GET
 def image_detail(request, id):
     """ Show details of an image"""
     from moon import MoonPhase;
