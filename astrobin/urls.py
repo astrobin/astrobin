@@ -14,6 +14,7 @@ from astrobin.search import ImageSearchView
 urlpatterns = patterns('',
     (r'^$', views.index),
     (r'^no_javascript', views.no_javascript),
+    (r'^comingsoon/', views.comingsoon),
     (r'^(?P<id>\d+)/$', views.image_detail),
     (r'^upload/$', views.image_upload),
     (r'^upload/process$', views.image_upload_process),
