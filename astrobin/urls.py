@@ -14,7 +14,6 @@ from astrobin.search import ImageSearchView
 urlpatterns = patterns('',
     (r'^$', views.index),
     (r'^no_javascript', views.no_javascript),
-    (r'^comingsoon/', views.comingsoon),
     (r'^(?P<id>\d+)/$', views.image_detail),
     (r'^upload/$', views.image_upload),
     (r'^upload/process$', views.image_upload_process),
@@ -69,4 +68,6 @@ urlpatterns = patterns('',
     (r'^requests/$', views.requests),
     (r'^request/additional_information/(?P<image_id>\d+)/$', views.request_additional_information),
     (r'^request/fits/(?P<image_id>\d+)/$', views.request_fits),
+
+    (r'^invite/', include('privatebeta.urls')),
 )

@@ -103,7 +103,7 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'astrobin.prof.ProfilerMiddleware',
-    'astrobin.middlewares.ComingSoonMiddleware',
+    'privatebeta.middleware.PrivateBetaMiddleware',
 #    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     'persistent_messages',
     'djcelery',
     'gunicorn',
+    'privatebeta',
 )
 
 LOGIN_REDIRECT_URL = '/'

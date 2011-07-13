@@ -60,7 +60,8 @@ ln -s ./venv/bin/pip vpip
     django-notification \
     flickrapi \
     Pillow \
-    python-memcached
+    python-memcached \
+    privatebeta
 
 # for the notifications system
 cd django-persistent-messages
