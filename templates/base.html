@@ -82,7 +82,7 @@
                     <div id="nav">
                         <ul>
                             <li id="{% current request "^/$" %}"><a href="/">{% trans "Home" %}</a></li>
-                            {% if not privatebeta_enabled %}
+                            {% if request.user.is_authenticated or not privatebeta_enabled %}
                             <li><a href="#">{% trans "ABPOD" %}</a></li>
                             {% endif %}
                             <li><a href="#">{% trans "Help" %}</a></li>
@@ -159,7 +159,7 @@
             <!-- /header -->
             </div>
 
-            {% if not privatebeta_enabled %}
+            {% if request.user.is_authenticated or not privatebeta_enabled %}
             {% block abpod %}{% endblock %}
             {% endif %}
 
@@ -182,7 +182,7 @@
                     <p>
                         <ul>
                             <li><a href="/">{% trans "Home" %}</a></li>
-                            {% if not privatebeta_enabled %}
+                            {% if request.user.is_authenticated or not privatebeta_enabled %}
                             <li><a href="#">{% trans "ABPOD" %}</a></li>
                             {% endif %}
                             <li><a href="#">{% trans "Help" %}</a></li>
