@@ -1,0 +1,11 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Enter your email address and we'll notify you when the website is open!</h3>
+<form action="{% url privatebeta_invite %}" method="post">
+{{ form }}
+{% csrf_token %}
+<input type="submit" value="Submit &rarr;" />
+</form>
+{% endblock %}
