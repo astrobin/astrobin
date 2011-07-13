@@ -1,4 +1,4 @@
-from django.template import Library
+from django.template import  Library
 from django.conf import settings
 from notification import models as notifications
 from persistent_messages import models as messages

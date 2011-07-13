@@ -120,6 +120,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.auth',
     'notification.context_processors.notification',
+    'astrobin.context_processors.privatebeta_enabled',
 )
 
 INSTALLED_APPS = (
@@ -191,4 +192,4 @@ CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
 
 
 ASTROBIN_ENABLE_SOLVING = False
-PRIVATEBETA_ENABLE_BETA = False
+PRIVATEBETA_ENABLE_BETA = True
