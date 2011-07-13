@@ -1,11 +1,28 @@
-
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-<h3>Enter your email address and we'll notify you when the website is open!</h3>
-<form action="{% url privatebeta_invite %}" method="post">
-{{ form }}
-{% csrf_token %}
-<input type="submit" value="Submit &rarr;" />
-</form>
+<div class="info-side-bar">
+    <ul>
+        <li><a href="#">{% trans "What is AstroBin?" %}</a></li>
+        <li><a href="#">{% trans "How can I get access?" %}</a></li>
+    </ul>
+</div>
+<div class="sided-main-content">
+    <h3>{% trans "AstroBin is currently in closed beta" %}</h3>
+    <p>
+    {% url auth_login as login_url %}
+    {% blocktrans%}
+    and it will be open for everybody soon. If you've been invited,
+    you can <a href="{{login_url}}">login</a>, otherwise you
+    can leave us your email address and we will notify you when the
+    website is up!
+    {% endblocktrans %}
+    </p>
+    <form action="{% url privatebeta_invite %}" method="post">
+    {{ form }}
+    {% csrf_token %}
+    <input type="submit" class="button submit-button"  value="Submit &rarr;" />
+    </form>
+</div>
 {% endblock %}
