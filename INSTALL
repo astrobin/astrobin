@@ -60,11 +60,14 @@ ln -s ./venv/bin/pip vpip
     django-notification \
     flickrapi \
     Pillow \
-    python-memcached \
-    privatebeta
+    python-memcached
 
 # for the notifications system
 cd django-persistent-messages
+../venv/bin/python setup.py install
+
+# for the private beta
+cd django-privatebeta
 ../venv/bin/python setup.py install
 
 # for the moon phase module
