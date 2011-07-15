@@ -166,9 +166,10 @@ def image_detail(request, id):
         moon_age_list = []
         moon_illuminated_list = []
         for a in deep_sky_acquisitions:
-            m = MoonPhase(a.date)
-            moon_age_list.append(m.age)
-            moon_illuminated_list.append(m.illuminated)
+            if a.date is not None:
+                m = MoonPhase(a.date)
+                moon_age_list.append(m.age)
+                moon_illuminated_list.append(m.illuminated)
 
         deep_sky_data[9][1]  = ["%.2f" % (sum(moon_age_list)         / float(len(moon_age_list)))]
         deep_sky_data[10][1] = ["%.2f" % (sum(moon_illuminated_list) / float(len(moon_illuminated_list)))]
