@@ -1051,3 +1051,10 @@ def image_revision_upload_process(request):
                        'object_url':settings.ASTROBIN_SHORT_BASE_URL + image_revision.get_absolute_url()})
 
     return HttpResponseRedirect(image_revision.get_absolute_url())
+
+
+@require_GET
+def help(request):
+    return render_to_response('help.html',
+        context_instance=RequestContext(request))
+

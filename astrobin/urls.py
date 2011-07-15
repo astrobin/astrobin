@@ -70,4 +70,5 @@ urlpatterns = patterns('',
     (r'^request/fits/(?P<image_id>\d+)/$', views.request_fits),
 
     (r'^invite/', include('privatebeta.urls')),
+    (r'^help/', views.help),
 )
