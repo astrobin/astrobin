@@ -85,7 +85,7 @@
                             {% if request.user.is_authenticated or not privatebeta_enabled %}
                             <li><a href="#">{% trans "ABPOD" %}</a></li>
                             {% endif %}
-                            <li><a href="#">{% trans "Help" %}</a></li>
+                            <li><a href="{% url views.help %}">{% trans "Help" %}</a></li>
                         </ul>
                     </div>
                     <div id="user-nav">
@@ -185,7 +185,7 @@
                             {% if request.user.is_authenticated or not privatebeta_enabled %}
                             <li><a href="#">{% trans "ABPOD" %}</a></li>
                             {% endif %}
-                            <li><a href="#">{% trans "Help" %}</a></li>
+                            <li><a href="{% url views.help %}">{% trans "Help" %}</a></li>
                         </ul>
                     </p>
                 </div>

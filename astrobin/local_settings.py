@@ -190,6 +190,9 @@ CELERYD = ASTROBIN_BASE_PATH + "manage.py celeryd"
 CELERYBEAT = ASTROBIN_BASE_PATH + "manage.py celerybeat"
 CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
 
-
 ASTROBIN_ENABLE_SOLVING = False
+
 PRIVATEBETA_ENABLE_BETA = True
+PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
+    'astrobin.views.help',
+)
