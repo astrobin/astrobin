@@ -3,6 +3,15 @@
 {% load i18n %}
 
 {% block content %}
+{% if advanced_form %}
+<div class="full-box clear">
+    <form method="get" action="/search/">{% csrf_token %}
+        {{advanced_form.as_p}}
+        <input class="button submit-button" type="submit" value="{% trans "Search" %} &rarr;" />
+    </form>
+</div>
+{% endif %}
+
 {% if query %}
 <div id="search-results" class="full-box clear">
     <h2>{% trans "Images matching" %} <em>"{{query}}"</em></h2>
