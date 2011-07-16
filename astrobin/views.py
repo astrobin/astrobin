@@ -1058,3 +1058,10 @@ def help(request):
     return render_to_response('help.html',
         context_instance=RequestContext(request))
 
+
+def advanced_search(request):
+    return render_to_response(
+        "search/advanced_search.html",
+        {"form":AdvancedSearchForm()},
+        context_instance=RequestContext(request))
+

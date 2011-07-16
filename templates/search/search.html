@@ -13,6 +13,7 @@
             <a href="/search/?q={{query}}&sort=-new">{% trans "Date" %}</a>&nbsp;|&nbsp;
             <a href="/search/?q={{query}}&sort=-rating">{% trans "Rating" %}</a>&nbsp;|&nbsp;
             <a href="/search/?q={{query}}&sort=-integration">{% trans "Integration" %}</a>
+            {% trans "or go to the" %}&nbsp;<a href="{% url advanced_search %}">{% trans "Advanced Search" %}</a>
     </div>
 
     {% load tags %}
