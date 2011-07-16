@@ -1061,7 +1061,12 @@ def help(request):
 
 @require_GET
 def advanced_search(request):
-    form = AdvancedSearchForm({'q':request.GET['q']})
+    prefill = request.GET.copy()
+    for s in ('start_date', 'end_date'):
+        if s not in prefill:
+            prefill[s] = _('yyyy-mm-dd')
+    form = AdvancedSearchForm(prefill)
+
     return render_to_response(
         "search/search.html",
         {
