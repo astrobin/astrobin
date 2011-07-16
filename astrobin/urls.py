@@ -26,7 +26,8 @@ urlpatterns = patterns('',
     (r'^edit/save/gear/$', views.image_edit_save_gear),
     (r'^edit/save/acquisition/$', views.image_edit_save_acquisition),
     (r'^delete/(?P<id>\d+)/$', views.image_delete),
-    (r'^search/', ImageSearchView()),
+
+    url(r'^search/', ImageSearchView(), name='haystack_search'),
 
     (r'^accounts/', include('registration.urls')),
 
