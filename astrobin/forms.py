@@ -82,19 +82,33 @@ class ImageRevisionUploadForm(forms.Form):
 
 
 class AdvancedSearchForm(SearchForm):
-    start_date = forms.DateField(required=False,
-                                 widget=forms.TextInput(attrs={'class':'datepickerclass'}),
-                                 help_text=_("Please use the following format: yyyy-mm-dd"))
-    end_date = forms.DateField(required=False,
-                               widget=forms.TextInput(attrs={'class':'datepickerclass'}),
-                               help_text=_("Please use the following format: yyyy-mm-dd"))
-    moon_phase_min = forms.FloatField(required=False)
-    moon_phase_max = forms.FloatField(required=False)
+    start_date = forms.DateField(
+        required=False,
+        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+        help_text=_("Please use the following format: yyyy-mm-dd"))
+    end_date = forms.DateField(
+        required=False,
+        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+        help_text=_("Please use the following format: yyyy-mm-dd"))
+    integration_min = forms.FloatField(
+        required=False,
+        help_text=_("Express value in hours"))
+    integration_max = forms.FloatField(
+        required=False,
+        help_text=_("Express value in hours"))
+    moon_phase_min = forms.FloatField(
+        required=False,
+        help_text="0-100")
+    moon_phase_max = forms.FloatField(
+        required=False,
+        help_text="0-100")
 
     def __init__(self, data=None, **kwargs):
         super(AdvancedSearchForm, self).__init__(data, **kwargs)
         self.fields['start_date'].label = _("Min. upload date")
         self.fields['end_date'].label = _("Max. upload date")
+        self.fields['integration_min'].label = _("Min. integration")
+        self.fields['integration_max'].label = _("Max. integration")
         self.fields['moon_phase_min'].label = _("Min. Moon phase %")
         self.fields['moon_phase_max'].label = _("Max. Moon phase %")
 
@@ -108,6 +122,12 @@ class AdvancedSearchForm(SearchForm):
 
             if self.cleaned_data['end_date']:
                 sqs = sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
+
+            if self.cleaned_data['integration_min']:
+                sqs = sqs.filter(integration__gte=int(self.cleaned_data['integration_min'] * 3600))
+
+            if self.cleaned_data['integration_max']:
+                sqs = sqs.filter(integration__lte=int(self.cleaned_data['integration_max'] * 3600))
 
             if self.cleaned_data['moon_phase_min']:
                 sqs = sqs.filter(moon_phase__gte=self.cleaned_data['moon_phase_min'])
