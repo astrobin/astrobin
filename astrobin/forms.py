@@ -87,14 +87,15 @@ class AdvancedSearchForm(SearchForm):
     def search(self):
         # First, store the SearchQuerySet received from other processing.
         sqs = super(AdvancedSearchForm, self).search()
+ 
+        if self.is_valid():
+            # Check to see if a start_date was chosen.
+            if self.cleaned_data['start_date']:
+                sqs = sqs.filter(uploaded__gte=self.cleaned_data['start_date'])
 
-        # Check to see if a start_date was chosen.
-        if self.cleaned_data['start_date']:
-            sqs = sqs.filter(uploaded__gte=self.cleaned_data['start_date'])
-
-        # Check to see if an end_date was chosen.
-        if self.cleaned_data['end_date']:
-            sqs = sqs.filter(uploaded__lte=self.cleaned_data['end_date'])
+            # Check to see if an end_date was chosen.
+            if self.cleaned_data['end_date']:
+                sqs = sqs.filter(uploaded__lte=self.cleaned_data['end_date'])
 
         return sqs
 

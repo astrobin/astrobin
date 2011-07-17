@@ -162,8 +162,8 @@ CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
 
 HAYSTACK_SITECONF = 'astrobin.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
-HAYSTACK_XAPIAN_PATH = '/home/astrobin/Code/astrobin/xapian_indexes'
-HAYSTACK_DEFAULT_OPERATOR = 'OR'
+HAYSTACK_XAPIAN_PATH = ASTROBIN_BASE_PATH + '/xapian_indexes'
+HAYSTACK_DEFAULT_OPERATOR = 'AND'
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
 INTERNAL_IPS = ('',)

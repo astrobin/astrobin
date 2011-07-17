@@ -1058,19 +1058,3 @@ def help(request):
     return render_to_response('help.html',
         context_instance=RequestContext(request))
 
-
-@require_GET
-def advanced_search(request):
-    prefill = request.GET.copy()
-    for s in ('start_date', 'end_date'):
-        if s not in prefill:
-            prefill[s] = _('yyyy-mm-dd')
-    form = AdvancedSearchForm(prefill)
-
-    return render_to_response(
-        "search/search.html",
-        {
-            "advanced_form": form,
-        },
-        context_instance=RequestContext(request))
-
