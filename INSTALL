@@ -27,6 +27,16 @@ sudo apt-get install \
 sudo apt-file update
 sudo pip install virtualenv
 
+# Install things needed by the CSS compiler
+cd /tmp
+sudo apt-get install git-core curl build-essential openssl libssl-dev
+git clone https://github.com/joyent/node.git && cd node
+git checkout v0.4.9 # or whatever the latest stable is
+./configure && make
+sudo make install
+curl http://npmjs.org/install.sh | sudo sh
+npm install less
+echo "alias lessc=/home/astrobin/.npm/less/1.1.2/package/bin/lessc" >> ~/.bashrc
 
 # Obtain the code:
 # ================
