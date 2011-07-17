@@ -82,8 +82,12 @@ class ImageRevisionUploadForm(forms.Form):
 
 
 class AdvancedSearchForm(SearchForm):
-    start_date = forms.DateField(required=False)
-    end_date = forms.DateField(required=False)
+    start_date = forms.DateField(required=False,
+                                 widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+                                 help_text=_("Please use the following format: yyyy-mm-dd"))
+    end_date = forms.DateField(required=False,
+                               widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+                               help_text=_("Please use the following format: yyyy-mm-dd"))
     moon_phase_min = forms.FloatField(required=False)
     moon_phase_max = forms.FloatField(required=False)
 
