@@ -10,6 +10,7 @@ from astrobin import views
 from astrobin import lookups
 from astrobin.models import Image
 from astrobin.search import ImageSearchView
+from astrobin.forms import AdvancedSearchForm
 
 urlpatterns = patterns('',
     (r'^$', views.index),
@@ -27,7 +28,7 @@ urlpatterns = patterns('',
     (r'^edit/save/acquisition/$', views.image_edit_save_acquisition),
     (r'^delete/(?P<id>\d+)/$', views.image_delete),
 
-    url(r'^search/', ImageSearchView(), name='haystack_search'),
+    url(r'^search/', ImageSearchView(form_class=AdvancedSearchForm), name='haystack_search'),
 
     (r'^accounts/', include('registration.urls')),
 
