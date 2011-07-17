@@ -242,6 +242,10 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
+                // date and time pickers
+                $('input').filter('.timepickerclass').timepicker({});
+                $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
+
                 $('form#upload input').change(function() {
                     $('form#upload').append('\
                         <p>\
