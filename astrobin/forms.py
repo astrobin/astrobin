@@ -1,5 +1,8 @@
 from django import forms
 from django.db import models
+from django.utils.translation import ugettext as _
+
+from haystack.forms import SearchForm
 
 from models import Image
 from models import UserProfile
@@ -76,4 +79,37 @@ class BringToAttentionForm(forms.Form):
 
 class ImageRevisionUploadForm(forms.Form):
     file = forms.ImageField()
+
+
+class AdvancedSearchForm(SearchForm):
+    start_date = forms.DateField(required=False)
+    end_date = forms.DateField(required=False)
+    moon_phase_min = forms.FloatField(required=False)
+    moon_phase_max = forms.FloatField(required=False)
+
+    def __init__(self, data=None, **kwargs):
+        super(AdvancedSearchForm, self).__init__(data, **kwargs)
+        self.fields['start_date'].label = _("Min. upload date")
+        self.fields['end_date'].label = _("Max. upload date")
+        self.fields['moon_phase_min'].label = _("Min. Moon phase %")
+        self.fields['moon_phase_max'].label = _("Max. Moon phase %")
+
+    def search(self):
+        # First, store the SearchQuerySet received from other processing.
+        sqs = super(AdvancedSearchForm, self).search()
+ 
+        if self.is_valid():
+            if self.cleaned_data['start_date']:
+                sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
+
+            if self.cleaned_data['end_date']:
+                sqs = sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
+
+            if self.cleaned_data['moon_phase_min']:
+                sqs = sqs.filter(moon_phase__gte=self.cleaned_data['moon_phase_min'])
+
+            if self.cleaned_data['moon_phase_max']:
+                sqs = sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
+
+        return sqs
 

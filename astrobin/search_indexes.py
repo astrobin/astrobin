@@ -25,6 +25,11 @@ class ImageIndex(SearchIndex):
     integration = IntegerField()
     uploaded = DateTimeField(model_attr='uploaded')
 
+    moon_phase = FloatField()
+
+    first_acquisition_date = DateTimeField()
+    last_acquisition_date = DateTimeField()
+
     def get_query(self):
         return Image.objects.all()
 
@@ -81,6 +86,66 @@ class ImageIndex(SearchIndex):
             integration = solar_system_acquisition.frames
 
         return integration
+
+    def prepare_moon_phase(self, obj):
+        from moon import MoonPhase
+
+        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
+        moon_illuminated_list = []
+        if deep_sky_acquisitions:
+            for a in deep_sky_acquisitions:
+                if a.date is not None:
+                    m = MoonPhase(a.date)
+                    moon_illuminated_list.append(m.illuminated)
+
+        if len(moon_illuminated_list) == 0:
+            # We must make an assumption between 0 and 100, or this won't
+            # show up in any searches.
+            return 0
+
+        return sum(moon_illuminated_list) / float(len(moon_illuminated_list))
+
+    def prepare_first_acquisition_date(self, obj):
+        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
+        solar_system_acquisition = None
+
+        try:
+            solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=obj)
+        except:
+            pass
+
+        date = None
+        if deep_sky_acquisitions:
+            date = deep_sky_acquisitions[0].date
+            for a in deep_sky_acquisitions:
+                if a.date is not None:
+                    if a.date < date:
+                        date = a.date
+        elif solar_system_acquisition:
+            date = solar_system_acquisition.date
+
+        return date
+
+    def prepare_last_acquisition_date(self, obj):
+        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
+        solar_system_acquisition = None
+
+        try:
+            solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=obj)
+        except:
+            pass
+
+        date = None
+        if deep_sky_acquisitions:
+            date = deep_sky_acquisitions[0].date
+            for a in deep_sky_acquisitions:
+                if a.date is not None:
+                    if a.date > date:
+                        date = a.date
+        elif solar_system_acquisition:
+            date = solar_system_acquisition.date
+
+        return date
 
 
 site.register(Image, ImageIndex)
