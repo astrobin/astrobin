@@ -100,16 +100,16 @@ class AdvancedSearchForm(SearchForm):
  
         if self.is_valid():
             if self.cleaned_data['start_date']:
-                sqs = sqs.filter(uploaded__gte=self.cleaned_data['start_date'])
+                sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
 
             if self.cleaned_data['end_date']:
-                sqs = sqs.filter(uploaded__lte=self.cleaned_data['end_date'])
+                sqs = sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
 
             if self.cleaned_data['moon_phase_min']:
                 sqs = sqs.filter(moon_phase__gte=self.cleaned_data['moon_phase_min'])
 
             if self.cleaned_data['moon_phase_max']:
                 sqs = sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
-                
+
         return sqs
 
