@@ -3,7 +3,6 @@
 {% load i18n %}
 
 {% block content %}
-{% if advanced_form %}
 <div class="info-side-bar">
     <p>
     {% blocktrans %}
@@ -12,12 +11,11 @@
     </p>
 </div>
 <div class="sided-main-content">
-    <form method="get" action="/search/">{% csrf_token %}
-        {{advanced_form.as_p}}
+    <form method="get" action="{% url haystack_search %}">{% csrf_token %}
+        {{form.as_p}}
         <input class="button submit-button" type="submit" value="{% trans "Search" %} &rarr;" />
     </form>
 </div>
-{% endif %}
 
 {% if query %}
 <div id="search-results" class="full-box clear">
@@ -29,7 +27,6 @@
             <a href="/search/?q={{query}}&sort=-new">{% trans "Date" %}</a>&nbsp;|&nbsp;
             <a href="/search/?q={{query}}&sort=-rating">{% trans "Rating" %}</a>&nbsp;|&nbsp;
             <a href="/search/?q={{query}}&sort=-integration">{% trans "Integration" %}</a>
-            {% trans "or go to the" %}&nbsp;<a href="{% url advanced_search %}">{% trans "Advanced Search" %}</a>
     </div>
 
     {% load tags %}
