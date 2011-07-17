@@ -25,6 +25,8 @@ class ImageIndex(SearchIndex):
     integration = IntegerField()
     uploaded = DateTimeField(model_attr='uploaded')
 
+    moon_phase = FloatField()
+
     def get_query(self):
         return Image.objects.all()
 
@@ -82,6 +84,23 @@ class ImageIndex(SearchIndex):
 
         return integration
 
+    def prepare_moon_phase(self, obj):
+        from moon import MoonPhase
+
+        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
+        moon_illuminated_list = []
+        if deep_sky_acquisitions:
+            for a in deep_sky_acquisitions:
+                if a.date is not None:
+                    m = MoonPhase(a.date)
+                    moon_illuminated_list.append(m.illuminated)
+
+        if len(moon_illuminated_list) == 0:
+            # We must make an assumption between 0 and 100, or this won't
+            # show up in any searches.
+            return 0
+
+        return sum(moon_illuminated_list) / float(len(moon_illuminated_list))
 
 site.register(Image, ImageIndex)
 
