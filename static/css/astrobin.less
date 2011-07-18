@@ -869,17 +869,15 @@ hr {
     background-color: @border-color;}
 
 /* links */
-a {
-    :link, :visited {
-        text-decoration: none;
-        color: @link-color;}
-    :hover {
-        color: @link-color * @hilight-factor;}}
-a.danger {
-    :link, :visited {
-        color: @danger-color;}
-    :hover {
-        color: @danger-color * @hilight-factor;}}
+a, a:visited {
+    text-decoration: none;
+    color: @link-color;}
+a:hover {
+    color: @link-color * @hilight-factor;}
+a.danger, a:visited.danger {
+    color: @danger-color;}
+a:hover.danger {
+    color: @danger-color * @hilight-factor;}
 
 /* headers */
 h1, h2, h3, h4 {
@@ -979,7 +977,7 @@ form {
         background-color: @input-color * @hilight-factor;
         color: @strong-text-color;}}
 
-.button, .button:link, .button:visited {
+.button, .button:visited {
     font-size: @base-font-size;
     color: @text-color;
     .button-gradient;
@@ -990,13 +988,14 @@ form {
     vertical-align: middle;
     margin: @spacer-large 0;
     padding: @spacer-small @spacer-medium;
-    cursor: pointer;
+    cursor: pointer;}
+.button {
     :hover {
         .button-gradient-hilighted;}
     :active {
         .button-gradient-active;}}
 
-.dangerous-button, .dangerous-button:link {
+.dangerous-button {
     .danger-gradient;
     :hover {
         .danger-gradient-hilighted;}
@@ -1061,7 +1060,7 @@ form {
             li {
                 float: left;
                 margin: 0; padding: 0;
-                a:link, a:visited {
+                a, a:visited {
                     float: left;
                     margin: 0;
                     padding: 47px 0 8px;
@@ -1134,7 +1133,7 @@ form {
                 float: left;
                 margin: 0;
                 display: inline;
-                >a:link.icon, >a:visited.icon {
+                >a.icon, >a:visited.icon {
                     float: left;
                     margin: 0;
                     padding: 37px 0 8px;
@@ -1143,11 +1142,11 @@ form {
                     width: 40px;}
                 >a:hover.icon, >a:active.icon {
                     background: url('/static/images/user-nav-hover-bg.png') no-repeat;}
-                >a:link.active, >a:visited.active {
+                >a.active, >a:visited.active {
                     background: url('/static/images/user-nav-active-bg.png') no-repeat;}}
             >li.text {
                 padding-top: 47px;
-                a, a:link, a:visited, a:active {
+                a, a, a:visited, a:active {
                     background: none;
                     text-transform: lowercase;
                     padding: 0 10px;}}}}}
@@ -1459,7 +1458,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     li {
         padding: 0 @spacer-large;
         float: left;}
-    a:link {
+    a {
         padding: @spacer-small 0;
         display: block;}}
 
@@ -1487,8 +1486,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         .button-gradient;
         .rounded-corners;
         display: inline-block;
-        :hover {
-            .button-gradient-hilighted;}
         >li {
             display: inline-block;
             padding: 2px 10px;
@@ -1501,7 +1498,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
                 :hover {
                     color: @strong-text-color * @hilight-factor;}}}
         >li.subhover {
-            cursor: pointer;}}
+            cursor: pointer;}
+        >li:hover {
+            .rounded-corners;
+            .button-gradient-hilighted;}}
     .main-image-data {
         margin: 10px 0;
         p {
@@ -1559,7 +1559,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         border: 1px solid (@border-bottom-color * @strong-hilight-factor);
         background: url('/static/images/popup-footer-bg.png');}
     a {
-        padding: @spacer-small @spacer-medium;
+        padding: @spacer-small 0 @spacer-small @spacer-medium;
+        margin-left: -@spacer-small;
         display: block;}}
 
 .sub {
@@ -1569,9 +1570,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         text-align: left;
         a {
             padding: @spacer-small;
-            color: @background-color;
-            :hover {
-                color: @link-color;}}
+            color: @background-color;}
+        a:hover {
+                color: @link-color;}
         a.danger {
             color: @danger-color;
             :hover {

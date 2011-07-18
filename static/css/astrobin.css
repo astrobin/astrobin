@@ -697,17 +697,17 @@ hr {
   background-color: #222222;
 }
 /* links */
-a :link, a :visited {
+a, a:visited {
   text-decoration: none;
   color: #cc4b2e;
 }
-a :hover {
+a:hover {
   color: #f55a37;
 }
-a.danger :link, a.danger :visited {
+a.danger, a:visited.danger {
   color: #c70000;
 }
-a.danger :hover {
+a:hover.danger {
   color: #ef0000;
 }
 /* headers */
@@ -853,7 +853,7 @@ form input:focus, form select:focus, form textarea:focus {
   background-color: #3d3d3d;
   color: #fcfcfc;
 }
-.button, .button:link, .button:visited {
+.button, .button:visited {
   font-size: 13px;
   color: #b8b8b8;
   border: 1px solid #cc4b2e;
@@ -875,14 +875,14 @@ form input:focus, form select:focus, form textarea:focus {
   padding: 4px 8px;
   cursor: pointer;
 }
-.button :hover, .button:link :hover, .button:visited :hover {
+.button :hover {
   border-top-color: #ff8753;
   background: #f55a37;
   background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
   background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
   color: #ffffff;
 }
-.button :active, .button:link :active, .button:visited :active {
+.button :active {
   border-color: #f55a37;
   border-top-color: #aa3f26;
   background: #f55a37;
@@ -890,7 +890,7 @@ form input:focus, form select:focus, form textarea:focus {
   background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
   color: #fcfcfc;
 }
-.dangerous-button, .dangerous-button:link {
+.dangerous-button {
   border: 1px solid #c70000;
   border-top: 1px solid #ef0000;
   background: #c70000;
@@ -898,14 +898,14 @@ form input:focus, form select:focus, form textarea:focus {
   background: -moz-linear-gradient(top, #ef0000, #c70000);
   color: #fcfcfc;
 }
-.dangerous-button :hover, .dangerous-button:link :hover {
+.dangerous-button :hover {
   border-top-color: #ff0000;
   background: #ef0000;
   background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), to(#c70000));
   background: -moz-linear-gradient(top, #ff0000, #c70000);
   color: #ffffff;
 }
-.dangerous-button :active, .dangerous-button:link :active {
+.dangerous-button :active {
   border-color: #c70000;
   border-bottom-color: #ef0000;
   background: #a60000;
@@ -985,7 +985,7 @@ form input:focus, form select:focus, form textarea:focus {
   margin: 0;
   padding: 0;
 }
-#header #nav ul li a:link, #header #nav ul li a:visited {
+#header #nav ul li a, #header #nav ul li a:visited {
   float: left;
   margin: 0;
   padding: 47px 0 8px;
@@ -1081,7 +1081,7 @@ form input:focus, form select:focus, form textarea:focus {
   margin: 0;
   display: inline;
 }
-#header #user-nav > ul > li > a:link.icon, #header #user-nav > ul > li > a:visited.icon {
+#header #user-nav > ul > li > a.icon, #header #user-nav > ul > li > a:visited.icon {
   float: left;
   margin: 0;
   padding: 37px 0 8px;
@@ -1092,14 +1092,14 @@ form input:focus, form select:focus, form textarea:focus {
 #header #user-nav > ul > li > a:hover.icon, #header #user-nav > ul > li > a:active.icon {
   background: url('/static/images/user-nav-hover-bg.png') no-repeat;
 }
-#header #user-nav > ul > li > a:link.active, #header #user-nav > ul > li > a:visited.active {
+#header #user-nav > ul > li > a.active, #header #user-nav > ul > li > a:visited.active {
   background: url('/static/images/user-nav-active-bg.png') no-repeat;
 }
 #header #user-nav > ul > li.text {
   padding-top: 47px;
 }
 #header #user-nav > ul > li.text a,
-#header #user-nav > ul > li.text a:link,
+#header #user-nav > ul > li.text a,
 #header #user-nav > ul > li.text a:visited,
 #header #user-nav > ul > li.text a:active {
   background: none;
@@ -1478,7 +1478,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   padding: 0 12px;
   float: left;
 }
-.tools-box a:link {
+.tools-box a {
   padding: 4px 0;
   display: block;
 }
@@ -1518,13 +1518,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border-radius: 6px;
   display: inline-block;
 }
-#image-detail ul.topnav :hover {
-  border-top-color: #ff8753;
-  background: #f55a37;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
-  background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
-  color: #ffffff;
-}
 #image-detail ul.topnav > li {
   display: inline-block;
   padding: 2px 10px;
@@ -1541,6 +1534,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 #image-detail ul.topnav > li.subhover {
   cursor: pointer;
+}
+#image-detail ul.topnav > li:hover {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border-top-color: #ff8753;
+  background: #f55a37;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
+  color: #ffffff;
 }
 #image-detail .main-image-data {
   margin: 10px 0;
@@ -1618,7 +1621,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   background: url('/static/images/popup-footer-bg.png');
 }
 .sub a {
-  padding: 4px 8px;
+  padding: 4px 0 4px 8px;
+  margin-left: -4px;
   display: block;
 }
 .sub li {
@@ -1628,7 +1632,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   padding: 4px;
   color: #333333;
 }
-.sub li a :hover {
+.sub li a:hover {
   color: #cc4b2e;
 }
 .sub li a.danger {
@@ -1679,7 +1683,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   background: url('/static/images/popup-footer-bg.png');
 }
 .popup a {
-  padding: 4px 8px;
+  padding: 4px 0 4px 8px;
+  margin-left: -4px;
   display: block;
 }
 .popup ul {
