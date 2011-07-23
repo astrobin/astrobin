@@ -170,59 +170,62 @@
                 </div>
             </div>
 
-        <!-- footer -->
-        <div class="horizontal-separator"></div>
-        <div id="footer">
-            {% block footer %}
-            <!-- footer-outer -->
-            <div id="footer-outer" class="clear"><div id="footer-wrap">
+            <!-- footer -->
+            <div class="horizontal-separator"></div>
+            <div id="footer">
+                {% block footer %}
+                <!-- footer-outer -->
+                <div id="footer-outer" class="clear"><div id="footer-wrap">
 
-                <div class="col-a">
-                    <h3>{% trans "Site links" %}</h2>
-                    <p>
-                        <ul>
-                            <li><a href="/">{% trans "Home" %}</a></li>
-                            {% if request.user.is_authenticated or not privatebeta_enabled %}
-                            <li><a href="#">{% trans "ABPOD" %}</a></li>
-                            {% endif %}
-                            <li><a href="{% url views.help %}">{% trans "Help" %}</a></li>
-                        </ul>
-                    </p>
-                </div>
-                <div class="col-b">
-                    <h3>{% trans "About" %}</h3>
-                    <p>
-                    {% trans "AstroBin is a image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
-                    </p>
-                </div>
-
-                <div class="fix"></div>
-
-                <!-- footer-bottom -->
-                <div id="footer-bottom">
-
-                    <div class="bottom-left">
+                    <div class="col-a">
+                        <h3>{% trans "Site links" %}</h2>
                         <p>
-                        &copy; 2011 Salvatore Iovene
+                            <ul>
+                                <li><a href="/">{% trans "Home" %}</a></li>
+                                {% if request.user.is_authenticated or not privatebeta_enabled %}
+                                <li><a href="#">{% trans "ABPOD" %}</a></li>
+                                {% endif %}
+                                <li><a href="{% url views.help %}">{% trans "Help" %}</a></li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="col-b">
+                        <h3>{% trans "About" %}</h3>
+                        <p>
+                        {% trans "AstroBin is a image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
                         </p>
                     </div>
 
-                    <div class="bottom-right">
-                        <p>
-                            <a href="/">{% trans "Home" %}</a> |
-                            <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
-                        </p>
+                    <div class="fix"></div>
+
+                    <!-- footer-bottom -->
+                    <div id="footer-bottom">
+
+                        <div class="bottom-left">
+                            <p>
+                            &copy; 2011 Salvatore Iovene
+                            </p>
+                        </div>
+
+                        <div class="bottom-right">
+                            <p>
+                                <a href="/">{% trans "Home" %}</a> |
+                                <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
+                            </p>
+                        </div>
+
+                    <!-- /footer-bottom -->
                     </div>
 
-                <!-- /footer-bottom -->
-                </div>
+                <!-- /footer-outer -->
+                </div></div>
+                {% endblock %}
+            <!-- /footer -->
+            </div>
 
-            <!-- /footer-outer -->
-            </div></div>
-            {% endblock %}
-        <!-- /footer -->
-        </div>
-
+            <div id="feedback">
+                <a href="mailto:astrobin@astrobin.com">{% trans "Feedback" %}</a>
+            </div> <!-- /feedback -->
         <!-- wrap -->
         </div>
 
