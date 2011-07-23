@@ -87,7 +87,15 @@
                 <h4>AstroBin is social!</h4>
                 <p>On <em>AstroBin</em> you can message other astrophotographer,
                    follow them and be notified when they post new images, or
-                   perform requests for more data. You can also vote on images
+                   perform requests for more data. You can also vote on images.
+                </p>
+            </li>
+            <li>
+                <h4>AstroBin supports multiple image revisions</h4>
+                <p>Don't tell me you have never gone back to revise the processing
+                   of an image <em>after</em> you have published. <em>AstroBin</em>
+                   embraces this concept and lets you publish several revisions of
+                   the same image easily and intuitively!
                 </p>
             </li>
         </ul>
@@ -103,7 +111,9 @@
             hub for astrophotographers all over the world.
         </p>
         {% endblocktrans %}
-        
+        <p>{% trans "So, what are you waiting for?" %}
+           <a href="{% url registration_register %}">{% trans "Sign up now!" %}</a>
+        </p>        
     </div>
 {% endblock %}
 
