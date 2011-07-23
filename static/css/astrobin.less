@@ -1894,3 +1894,27 @@ p.info {
 .simple-choice {
 margin-left: 20px;}
 
+#feedback {
+    position: fixed;
+    right: -35px;
+    top: 50%;
+    padding: @spacer-medium @spacer-large;
+    margin: @spacer-medium @spacer-large;
+    height: @spacer-xlarge;
+
+    .rounded-corners;
+
+    font-size: @base-font-size * 1.2;
+    color: @text-color;
+    border: 1px solid @border-color;
+    background: @background-color;
+    writing-mode: bt-rl;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    white-space: nowrap;
+    display: block;
+    bottom: 0;
+    font-weight: normal;
+    text-shadow: 0px 0px 1px @background-color;}
+
