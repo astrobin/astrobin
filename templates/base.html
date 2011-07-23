@@ -71,7 +71,7 @@
                     </form>
                 </div>
                 <div id="title">
-                    <h1><a href="/">AstroBin</a></h1>
+                    <h1><a href="{% url index %}">AstroBin</a></h1>
                     <h4>
                         {% trans "The definive home for your astrophotography." %}
                     </h4>
@@ -81,30 +81,30 @@
                 <div id="nav-container">
                     <div id="nav">
                         <ul>
-                            <li id="{% current request "^/$" %}"><a href="/">{% trans "Home" %}</a></li>
+                            <li id="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
                             {% if request.user.is_authenticated or not privatebeta_enabled %}
                             <li><a href="#">{% trans "ABPOD" %}</a></li>
                             {% endif %}
-                            <li><a href="{% url views.help %}">{% trans "Help" %}</a></li>
+                            <li><a href="{% url help %}">{% trans "Help" %}</a></li>
                         </ul>
                     </div>
                     <div id="user-nav">
                         <ul>
                         {% if request.user.is_authenticated %}
                             <li class="menu">
-                                <a class="icon" href="{% url views.user_page user %}">
+                                <a class="icon" href="{% url user_page user %}">
                                     <img alt="Account" src="/static/icons/iconic/orange/profile.png"/>
                                 </a>
                                 <div class="popup" id="profile-popup">
                                     <ul>
                                         <li>
-                                            <a href="{% url views.user_page user %}">{% trans "View your profile" %}</a>
+                                            <a href="{% url user_page user %}">{% trans "View your profile" %}</a>
                                         </li>
                                         <li>
-                                            <a href="/profile/edit/basic/">{% trans "Edit your profile" %}</a>
+                                            <a href="{% url profile_edit_basic %}">{% trans "Edit your profile" %}</a>
                                         </li>
                                         <li>
-                                            <a href="/" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a>
+                                            <a href="{% url index %}" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a>
                                         </li>
                                         <li>
                                             <a href="{% url auth_logout %}">{% trans "Logout" %}</a>
@@ -114,21 +114,21 @@
                                </div>
                             </li>
                             <li class="menu">
-                                <a class="icon" title="{% trans "Notifications" %}" href="{% url views.notifications %}">
+                                <a class="icon" title="{% trans "Notifications" %}" href="{% url notifications %}">
                                     <img id="notifications" alt="{% trans "Notifications" %}" src="{% notifications_icon request %}"/>
                                 </a>
                                 <div class="popup" id="notifications-popup">
                                     {% notification_list request %}
                                 </div>
                             </li> <li class="menu">
-                                <a class="icon" title="{% trans "Messages" %}" href="{% url views.messages_all %}">
+                                <a class="icon" title="{% trans "Messages" %}" href="{% url messages_all %}">
                                     <img id="messages" alt="{% trans "Messages" %}" src="{% messages_icon request %}"/></a>
                                 <div class="popup" id="messages-popup">
                                     {% message_list request %}
                                 </div>
                             </li>
                             <li class="menu">
-                                <a class="icon" title="{% trans "Requests" %}" href="{% url views.requests %}">
+                                <a class="icon" title="{% trans "Requests" %}" href="{% url requests %}">
                                     <img id="requests" alt="{% trans "Requests" %}" src="{% requests_icon request %}"/></a>
                                 <div class="popup" id="requests-popup">
                                     {% request_list request %}
@@ -181,11 +181,11 @@
                         <h3>{% trans "Site links" %}</h2>
                         <p>
                             <ul>
-                                <li><a href="/">{% trans "Home" %}</a></li>
+                                <li><a href="{% url index %}">{% trans "Home" %}</a></li>
                                 {% if request.user.is_authenticated or not privatebeta_enabled %}
                                 <li><a href="#">{% trans "ABPOD" %}</a></li>
                                 {% endif %}
-                                <li><a href="{% url views.help %}">{% trans "Help" %}</a></li>
+                                <li><a href="{% url help %}">{% trans "Help" %}</a></li>
                             </ul>
                         </p>
                     </div>
@@ -209,7 +209,7 @@
 
                         <div class="bottom-right">
                             <p>
-                                <a href="/">{% trans "Home" %}</a> |
+                                <a href="{% url index %}">{% trans "Home" %}</a> |
                                 <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
                             </p>
                         </div>

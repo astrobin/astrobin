@@ -14,8 +14,8 @@
             {% for message in message_list %}
                 <tr>
                     <td class="when">{{message.created|date:"D, d M. Y"}} {% trans "at" %} {{message.created|date:"H:i" }}</td>
-                    <td><a href="{% url views.user_page message.from_user %}">{{message.from_user}}</a></td>
-                    <td><a href="{% url views.message_detail message.id %}">{{message.subject|escape|truncatewords:64}}</a></td>
+                    <td><a href="{% url user_page message.from_user %}">{{message.from_user}}</a></td>
+                    <td><a href="{% url message_detail message.id %}">{{message.subject|escape|truncatewords:64}}</a></td>
                 </tr>
             {% endfor %}
             </table>
