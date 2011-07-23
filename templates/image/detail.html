@@ -15,13 +15,13 @@
                                 <ul class="subnav">
                                 {% if request.user == image.user %}
                                     <li class="first bg-icon icon-edit">
-                                        <span class="text"><a href="/edit/basic/{{image.id}}">{% trans "Edit basic information" %}</a></span>
+                                        <span class="text"><a href="{% url image_edit_basic image.id %}">{% trans "Edit basic information" %}</a></span>
                                     </li>
                                     <li class="bg-icon icon-edit-gear">
-                                        <span class="text"><a href="/edit/gear/{{image.id}}">{% trans "Edit gear used" %}</a></span>
+                                        <span class="text"><a href="{% url image_edit_gear image.id %}">{% trans "Edit gear used" %}</a></span>
                                     </li>
                                     <li class="bg-icon icon-edit-acquisition">
-                                        <span class="text"><a href="/edit/acquisition/{{image.id}}">{% trans "Edit acquisition details" %}</a></span>
+                                        <span class="text"><a href="{% image_edit_acquisition image.id %}">{% trans "Edit acquisition details" %}</a></span>
                                     </li>
                                     <li class="bg-icon icon-upload">
                                         <span class="text"><a class="upload-revision" href="#">{% trans "Upload new revision" %}</a></span>
@@ -158,7 +158,7 @@
             <div class="main-image-data">
                 <ul>
                     <li class="title">{{image.title|escape|default:_("(no title)")}}</li>
-                    <li class="author">{% trans "by" %} <a href="/users/{{image.user.username}}/">{{image.user.username}}</a></li>
+                    <li class="author">{% trans "by" %} <a href="{% url user_page image.user.username %}">{{image.user.username}}</a></li>
                     {% if image.subjects %}
                     {% endif %}
                 </ul>
@@ -337,7 +337,7 @@ $(document).ready(function() {
                     button: '{% trans "Send" %} &rarr;'
                 },
                 form_html: '{% autoescape off %}{{private_message_form.as_p|append_slash}}{% endautoescape %}',
-                url      : '{% url views.send_private_message %}'
+                url      : '{% url send_private_message %}'
             },
             bring_to_attention_action: {
                 dialog: {
@@ -353,7 +353,7 @@ $(document).ready(function() {
                     startText: '{% trans "Enter partial name" %}',
                     emptyText: '{% trans "User not found. Cannot notify them." %}'
                 },
-                url: '{% url views.bring_to_attention %}'
+                url: '{% url bring_to_attention %}'
             },
             request_additional_information_action: {
                 dialog: {
