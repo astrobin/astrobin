@@ -9,7 +9,7 @@
             {{message.created|date:"D, d M. Y"}} {% trans "at" %} {{message.created|date:"H:i"}}
             {% if message.from_user %}
                 ,&nbsp;{% trans "from" %}
-                <a href="{% url views.user_page message.from_user %}">
+                <a href="{% url user_page message.from_user %}">
                     {{message.from_user}}
                 </a>
             {% endif %}
@@ -24,7 +24,7 @@
             </form>
             <script type="text/javascript">
                 $('form#private-message #send').one('click', function() {
-                    $.post('{% url views.send_private_message %}',
+                    $.post('{% url send_private_message %}',
                            $("form#private-message").serialize(),
                            function() {
                                $('#message-reply').html('\
