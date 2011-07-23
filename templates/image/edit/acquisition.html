@@ -92,7 +92,7 @@
             <input type="hidden" name="image_type" value="solar_system" />
             <ul style="clear:both">
                 <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
-                <li><a class="button dangerous-button inline-button" href="{% url views.image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
+                <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
                 <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
             </ul>
         </form>
@@ -141,7 +141,7 @@
             <input type="hidden" name="image_type" value="deep_sky" />
             <ul style="clear:both">
                 <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
-                <li><a class="button dangerous-button inline-button" href="{% url views.image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
+                <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
                 <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
             </ul>
         </form>
@@ -149,10 +149,10 @@
     {% else %}
         <p>{% trans "What kind of image is this?" %}</p>
         <div class="simple-choice">
-            <a class="button" href="{% url views.image_edit_acquisition image.id %}?type=solar_system">
+            <a class="button" href="{% url image_edit_acquisition image.id %}?type=solar_system">
                 Solar system
             </a>
-            <a class="button" href="{% url views.image_edit_acquisition image.id %}?type=deep_sky">
+            <a class="button" href="{% url image_edit_acquisition image.id %}?type=deep_sky">
                 Deep sky
             </a>
         </div>

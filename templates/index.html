@@ -9,14 +9,14 @@
 			<div id="abpod-ribbon"></div>	
 			<a name="TemplateInfo"></a>
 			<div class="image-block">
-              <a href="/{{abpod.image.id}}" title="{{abpod.image.subjects}}">
+              <a href="{{abpod.image.get_absolute_url}}" title="{{abpod.image.subjects}}">
                 <img src="http://astrobin_images.{{s3_url}}/{{abpod.image.filename}}_thumb.png" alt="AstroBin Picture of the Day"
 			         width="350px" height="350px"/></a>
 			</div>			
 			<div class="text-block">
-				<h2><a href="/{{abpod.image.id}}">{{abpod.image.subjects}}</a></h2>
+				<h2><a href="{{abpod.image.get_absolute_url}}">{{abpod.image.subjects}}</a></h2>
 				<p class="post-info">{% trans "Posted by" %}
-				    <a href="/user/{{abpod.image.user.name}}">
+				    <a href="{% url user_page abpod.image.user.name %}">
 				        {{abpod.image.user.name}}
 				    </a>
 				</p>
@@ -35,7 +35,7 @@
             <form id="upload" action="/upload/process" method="post" enctype="multipart/form-data">
                 <p><input type="file" name="file" id="id_file"/></p>
                 <p>{% trans "Choose an image to upload, or" %}
-                <p><a href="/profile/edit/flickr/">{% trans "import from Flickr" %}</a></p>
+                <p><a href="{% url profile_flickr_import %}">{% trans "import from Flickr" %}</a></p>
             </form>
         </div>
     </div>

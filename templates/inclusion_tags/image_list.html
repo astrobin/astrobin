@@ -14,7 +14,7 @@
         <a href="{{image.get_absolute_url}}/"><div class="overlay" style="display:none;"></div></a>
         <div class="ic_caption">
             <p class="ic_category">
-                <a href="/users/{{image.user.username}}">{{image.user.username}}</a>
+                <a href="{% url user_page image.user.username %}">{{image.user.username}}</a>
             </p>
             <h3><a href="{{image.get_absolute_url}}/">{{image.title|escape|default:_("(no title)")}}</a></h3>
             <p class="ic_text"><a href="{{image.get_absolute_url}}/">{{image.description|truncatewords:10|escape}}</a></p>

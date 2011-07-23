@@ -16,9 +16,9 @@
             {% for req in req_list %}
                 <tr>
                     <td class="when">{{req.created|date:"D, d M. Y"}} {% trans "at" %} {{req.created|date:"H:i" }}</td>
-                    <td><a href="{% url views.user_page req.from_user %}">{{req.from_user}}</a></td>
+                    <td><a href="{% url user_page req.from_user %}">{{req.from_user}}</a></td>
                     <td>{{req.get_type_display}}</td>
-                    <td><a href="{% url views.image_detail req.image.id %}">{{req.image.title|escape}}</a></td>
+                    <td><a href="{% url image_detail req.image.id %}">{{req.image.title|escape}}</a></td>
                     <td>{% if req.fulfilled %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
                 </tr>
             {% endfor %}
