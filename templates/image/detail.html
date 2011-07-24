@@ -165,7 +165,7 @@
                 <p>
                     {% trans "Contains" %}:
                     {% for s in image.subjects.all %}
-                        <a href="/search/?q={{s.name|escape}}">{{s.name|escape}}</a>
+                        <a href="/search/?q={{s.OBJECT|escape}}">{{s.OBJECT|escape}}</a>
                         {% if not forloop.last %},&nbsp;{% endif %}
                     {% empty %}
                         {% trans "(no subjects)" %}
