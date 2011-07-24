@@ -1170,16 +1170,18 @@ ul.as-selections {
         .rounded-corners;
         .box-shadow;
         :last-child {
-            margin-left: @spacer-xxlarge}
-        a.as-close {
+            margin-left: @spacer-small}
+        a.as-close, a.as-edit {
             float: right;
-            margin: 0 0 0 7px;
-            padding: 0 2px;
+            margin: 0;
+            padding: 3px 0 0 0;
             cursor: pointer;
             color: @background-color;
             font-weight: bold;
             :hover {
-                color: @link-color;}}}
+                color: @link-color;}}
+        a.as-edit {
+            padding-left: @spacer-medium;}}
     li.as-original {
         margin-left: 0;
         input {
@@ -1239,7 +1241,7 @@ li.as-result-item em {
         padding-top: 3px;
         padding-bottom: 3px;
     }
-    ul.as-selections li.as-selection-item a.as-close {
+    ul.as-selections li.as-selection-item a.as-close a.as-edit {
         margin-top: -1px;
     }
     ul.as-selections li.as-original input {
@@ -1252,7 +1254,7 @@ li.as-result-item em {
     ul.as-list {
         border: 1px solid #888;
     }
-    ul.as-selections li.as-selection-item a.as-close {
+    ul.as-selections li.as-selection-item a.as-close a.as-edit {
         margin-left: 4px;
         margin-top: 0;
     }
@@ -1261,7 +1263,7 @@ li.as-result-item em {
 /* IE Hacks  */
 ul.as-list {
     border: 1px solid @border-color; }
-ul.as-selections li.as-selection-item a.as-close {
+ul.as-selections li.as-selection-item a.as-close a.as-edit {
     margin-left: 4px;
     margin-top: 0;}
 
