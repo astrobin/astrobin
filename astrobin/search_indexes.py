@@ -34,7 +34,7 @@ class ImageIndex(SearchIndex):
         return Image.objects.all()
 
     def prepare_subjects(self, obj):
-        return [subject.OBJECT for subject in obj.subjects.all()]
+        return ["%s, %s" % (subject.OBJECT, subject.OTHER) for subject in obj.subjects.all()]
 
     def prepare_imaging_telescopes(self, obj):
         return [i.name for i in obj.imaging_telescopes.all()]
