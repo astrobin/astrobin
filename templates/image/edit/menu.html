@@ -4,7 +4,7 @@
         <ul>
             <li class="{% current request '^/edit(/save)?/basic/' %}"><a href="{% url image_edit_basic image.id %}">{% trans "Basic Information" %}</a></li>
             <li class="{% current request '^/edit(/save)?/gear/' %}"><a href="{% url image_edit_gear image.id %}">{% trans "Gear used" %}</a></li>
-            <li class="{% current request '^/edit(/save)?/acquisition/' %}{% if not is_ready %} last {% endif %}"><a href="{% url image_edit_acqiosition image.id %}">{% trans "Acquisition details" %}</a></li>
+            <li class="{% current request '^/edit(/save)?/acquisition/' %}{% if not is_ready %} last {% endif %}"><a href="{% url image_edit_acquisition image.id %}">{% trans "Acquisition details" %}</a></li>
             {% if is_ready %}
             <li class="last" style="margin: 8px 0;">
                 <a href="{{image.get_absolute_url}}/"><img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}"/></a>
