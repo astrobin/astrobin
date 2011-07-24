@@ -53,7 +53,7 @@
                 </div>
                 </noscript>
                 <div id="search">
-                    <form id="quick-search" action="/search/" method="get" >
+                    <form id="quick-search" action="{% url haystack_search %}" method="get" >
                         <p>
                         <label for="qsearch">Search:</label>
                         <input class="tbox"

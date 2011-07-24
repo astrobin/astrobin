@@ -5,7 +5,7 @@
     {% include 'image/edit/menu.html' %}   
     <div class="sided-main-content">
     <h1>{% trans "Edit your image: basic information" %}</h1>
-    <form action="/edit/save/basic/" method="post">{% csrf_token %}
+    <form action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
         <p class="hint">
             {% blocktrans %}
             Remember that AstroBin will try to identify the subjects automatically,
