@@ -1,0 +1,354 @@
+   	SAGUARO ASTRONOMY CLUB DATABASE VERSION 8.1
+                   dated March 22, 2010
+		stevecoe at cloudynights dot com
+		  
+
+This compilation of data was begun in an effort to provide a comprehensive observing list for use at the eyepiece of a modest amateur telescope.  This data is released for private use of anyone who wishes to use this database. 
+
+The members of the Saguaro Astronomy Club (pronounced sa-war-oh) of Phoenix, Arizona have provided much of the effort to compile this database.  However, it could not have been completed without the skill of a variety of people.  There is a listing of folks in the read me file who have helped with this database, thank you to all.
+
+To align the information in this document correctly, use a non-proportional font, such as Courier.
+
+A description of the fields and what data they contain follows:
+
+Field Number: 1      Name: OBJECT        Size: 17
+Object name, usually the NGC number is in field #1, but for objects with no NGC value the alphabetical name used is listed below.  These abbreviations are also used in field #2 as an OTHER name for some objects.
+
+3C         - Third Cambridge Catalog of Radio Wave Sources
+Abell      - George Abell (planetary nebulae and galaxy clusters)
+ADS        - Aitken Double Star catalog
+AM         - Arp-Madore (globular clusters)
+Antalova   - (open clusters)
+Ap         - Apriamasvili (planetary nebulae)
+Arp        - Halton Arp (interacting galaxies)
+Bark       - Barkhatova (open clusters)
+B          - Barnard (dark nebulae)
+Basel      - (open clusters)
+BD         - Bonner Durchmusterung (stars)
+Berk       - Berkeley (open clusters)
+Be         - Bernes (dark nebulae)
+Biur       - Biurakan (open clusters)
+Blanco     - (open clusters)
+Bochum     - (open clusters)
+Ced        - Cederblad (bright nebulae)
+CGCG       - Catalog of Galaxies and Clusters of Galaxies
+Cr         - Collinder (open clusters)
+Czernik    - (open clusters)
+DDO        - David Dunlap Observatory (dwarf galaxies)
+Do         - Dolidze (open clusters)
+DoDz       - Dolidze-Dzimselejsvili (open clusters)
+Dun        - Dunlop (Southern objects of all types)
+ESO        - European Southern Observatory (Southern objects)
+Fein       - Feinstein (open clusters)
+Frolov     - (open clusters)
+Gum        - (bright nebulae)
+H          - William Herschel (globular clusters)
+Haffner    - (open clusters)
+Harvard    - (open clusters)
+Hav-Moffat - Havermeyer and Moffat (open clusters)
+He         - Henize (planetary nebulae)
+Hogg       - (open clusters)
+Ho         - Holmberg (galaxies)
+HP         - Haute Provence (globular clusters)
+Hu         - Humason (planetary nebulae)
+IC         - 1st and 2nd Index Catalogs to the NGC
+                  (All types of objects except dark nebulae)
+Isk        - Iskudarian (open clusters)
+J          - Jonckheere (planetary nebulae)
+K          - Kohoutek (planetary nebulae)
+Kemble     - Father Lucian Kemble (asterisms)
+King       - (open clusters)
+Kr         - Krasnogorskaja (planetary nebulae)
+Lac        - Lacaille (globular clusters)
+Loden      - (open clusters)
+LBN        - Lynds (bright nebula)
+LDN        - Lynds (dark nebulae)
+NPM1G      - Northern Proper Motion, 1st part, Galaxies
+Lynga      - (open clusters)
+M          - Messier (all types of objects except dark nebula)
+MCG        - Morphological Catalog of Galaxies
+Me         - Merrill (plantary nebulae)
+Mrk        - Markarian (open clusters and galaxies)
+Mel        - Melotte (open clusters)
+M1 thru M4 - Minkowski (planetary nebulae)
+New	   - "New" galaxies in the Revised Shapley-Ames Catalog
+NGC        - New General Catalog of Nebulae & Clusters of Stars.
+                  (All types of objects except dark nebulae)
+Pal        - Palomar (globular clusters)
+PB         - Peimbert and Batiz (planetary nebulae)
+PC         - Peimbert and Costero (planetary nebulae)
+Pismis     - (open clusters)
+PK         - Perek & Kohoutek (planetary nebulae)
+RCW        - Rodgers, Campbell, & Whiteoak (bright nebulae)
+Roslund    - (open clusters)
+Ru         - Ruprecht (open clusters)
+Sa         - Sandqvist (dark nebulae)
+Sher       - (open clusters)
+Sh         - Sharpless (bright nebulae)
+SL         - Sandqvist & Lindroos (dark nebulae)
+SL         - Shapley & Lindsay (clusters in LMC)
+Steph      - Stephenson (open clusters)
+Stock      - (open clusters)
+Ter        - Terzan (globular clusters)
+Tombaugh   - (open clusters)
+Ton        - Tonantzintla (globular clusters)
+Tr         - Trumpler (open clusters)
+UGC        - Uppsala General Catalog (galaxies)
+UGCA       - Uppsala General Catalog, Addendum (galaxies)
+UKS        - United Kingdom Schmidt (globular clusters)
+Upgren     - (open clusters)
+V V        - Vorontsov-Velyaminov (interacting galaxies)
+vdB        - van den Bergh (open clusters, bright nebulae)
+vdBH       - van den Bergh & Herbst (bright nebulae)
+vdB-Ha     - van den Bergh-Hagen (open clusters)
+Vy         - Vyssotsky (planetary nebulae)
+Waterloo   - (open clusters)
+Winnecke   - Double Star (Messier 40)
+ZwG        - Zwicky (galaxies)
+
+
+Field Number: 2      Name: OTHER         Size: 18
+Other catalog designations by which this object may be known. The same abbreviations as the OBJECT field are used in this field.  The 'M' designations for Messier objects are in this field.
+
+
+Field Number: 3      Name: TYPE          Size: 5
+Type of object.  The code that applies is:
+
+       ASTER  Asterism
+       BRTNB  Bright Nebula
+       CL+NB  Cluster with Nebulosity
+       DRKNB  Dark Nebula
+       GALCL  Galaxy cluster
+       GALXY  Galaxy
+       GLOCL  Globular Cluster
+       GX+DN  Diffuse Nebula in a Galaxy
+       GX+GC  Globular Cluster in a Galaxy
+       G+C+N  Cluster with Nebulosity in a Galaxy
+       LMCCN  Cluster with Nebulosity in the LMC
+       LMCDN  Diffuse Nebula in the LMC
+       LMCGC  Globular Cluster in the LMC
+       LMCOC  Open cluster in the LMC
+       NONEX  Nonexistent
+       OPNCL  Open Cluster
+       PLNNB  Planetary Nebula
+       SMCCN  Cluster with Nebulosity in the SMC
+       SMCDN  Diffuse Nebula in the SMC
+       SMCGC  Globular Cluster in the SMC
+       SMCOC  Open cluster in the SMC
+       SNREM  Supernova Remnant
+       QUASR  Quasar
+       #STAR  # Stars (#=1, 2, 3, 4, 5, etc.)
+
+
+Field Number: 4      Name: CON           Size: 3
+Constellation in which the object is found in IAU format, given in the table below. Only upper case abbreviations are used for ease of programming using case-sensitive commands.
+
+ANDROMEDA           AND                 LACERTA             LAC
+ANTLIA              ANT                 LEO                 LEO
+APUS                APS                 LEO MINOR           LMI
+AQUARIUS            AQR                 LEPUS               LEP
+AQUILA              AQL                 LIBRA               LIB
+ARA                 ARA                 LUPUS               LUP
+ARIES               ARI                 LYNX                LYN
+AURIGA              AUR                 LYRA                LYR
+BOOTES              BOO                 MENSA               MEN
+CAELUM              CAE                 MICROSCOPIUM        MIC
+CAMELOPARDALIS      CAM                 MONOCEROS           MON
+CANCER              CNC                 MUSCA               MUS
+CANES VENATICI      CVN                 NORMA               NOR
+CANIS MAJOR         CMA                 OCTANS              OCT
+CANIS MINOR         CMI                 OPHIUCHUS           OPH
+CAPRICORNUS         CAP                 ORION               ORI
+CARINA              CAR                 PAVO                PAV
+CASSIOPEIA          CAS                 PEGASUS             PEG
+CENTAURUS           CEN                 PERSEUS             PER
+CEPHEUS             CEP                 PHOENIX             PHE
+CETUS               CET                 PICTOR              PIC
+CHAMAELEON          CHA                 PISCES              PSC
+CIRCINUS            CIR                 PISCES AUSTRINUS    PSA
+COLUMBA             COL                 PUPPIS              PUP
+COMA BERENICES      COM                 PYXIS               PYX
+CORONA AUSTRALIS    CRA                 RETICULUM           RET
+CORONA BOREALIS     CRB                 SAGITTA             SGE
+CORVUS              CRV                 SAGITTARIUS         SGR
+CRATER              CRT                 SCORPIUS            SCO
+CRUX                CRU                 SCULPTOR            SCL
+CYGNUS              CYG                 SCUTUM              SCT
+DELPHINUS           DEL                 SERPENS             SER
+DORADO              DOR                 SEXTANS             SEX
+DRACO               DRA                 TAURUS              TAU
+EQUULEUS            EQU                 TELESCOPIUM         TEL
+ERIDANUS            ERI                 TRIANGULUM AUSTRALE TRA
+FORNAX              FOR                 TRIANGULUM          TRI
+GEMINI              GEM                 TUCANA              TUC
+GRUS                GRU                 URSA MAJOR          UMA
+HERCULES            HER                 URSA MINOR          UMI
+HOROLOGIUM          HOR                 VELA                VEL
+HYDRA               HYA                 VIRGO               VIR
+HYDRUS              HYI                 VOLANS              VOL
+INDUS               IND                 VULPECULA           VUL
+
+
+Field Number: 5      Name: R.A.          Size: 7 
+Right Ascension of the object in equinox 2000.0 coordinates.  The RA is in the form  XX XX.X, such as 14 34.8 or 05 04.7.  Leading zeros are present so that a sort of the data will be numerically correct.
+
+
+Field Number: 6      Name: DEC           Size: 6
+Declination of the object in equinox 2000.0 coordinates.  The DEC is in the form  +/-XX XX, such as +48 10 or -88 04.  Use the sign and leading zeros.  The declination is given in degrees and minutes.
+
+
+Field Number: 7      Name: MAG           Size: 4
+Magnitude to nearest tenth in the form XX.X, such as 12.3.  There are many objects which have no published magnitude, they have been assigned a magnitude of 99.9.  Dark nebulae obviously have no magnitude, so we assigned them a mag of 79.9 to differentiate them from objects with no magnitude given.  The reason we chose large values for objects without magnitudes is that a sort would find 0.0 or "" as a large value of brightness. 
+
+
+Field Number: 8      Name: SUBR          Size: 4
+Surface brightness as given in the Reference Catalog of Galaxies 3.  Dr. Harold Corwin calculated these values of surface brightness and has supplied them to us, along with much other valuable galaxy data.
+
+
+Field Number: 9      Name: U2K           Size: 3
+The charts in the first release of Uranometria 2000.0 that map the area of sky in which the object is located.  It is not guaranteed that all objects plotted on U2000 are contained in the database.
+
+
+Field Number: 10      Name:  TI          Size:  2
+The charts in the Tirion Sky Atlas 2000.0 that map the area of sky in which the object is located.  This is included so that a less detailed view of the area will be available to star hoppers.
+
+
+Field Number: 11      Name:  SIZE_MAX    Size:  8
+The large dimension of the object.  A lower case "m" was used for arcminutes and a lower case "s" was used for arcseconds.  In general, only Planetary Nebulae have sizes in arcseconds.  A lower case "d" is used for degrees.
+
+
+Field Number:  12     Name:  SIZE_MIN    Size:  8
+The small dimension of the object.  A lower case "m" was used for arcminutes and a lower case "s" was used for arcseconds.
+
+
+Field Number: 13      Name:  PA          Size:  3
+The Position Angle of an elongated object.  The value is in degrees, starting with north as zero degrees and progressing clockwise from north.  So, an object which William Herschel would have described as "Elong. NE-SW" is elongated in a PA of 45 degrees.
+
+
+Field Number:  14     Name: CLASS              Size:  11
+Several professional classification schemes are contained here.
+
+----Trumpler type for open clusters-----
+
+Concentration
+I.   Detached, strong concentration toward the center
+II.  Detached, weak concentration toward the center
+III. Detached, no concentration toward the center
+IV.  Not well detached from surrounding star field
+
+Range in brightness
+1.  Small range        2.  Moderate range       3.  Large range
+
+Richness
+p  Poor (<50 stars)
+m  Moderately rich (50-100 stars)
+r  Rich (>100 stars)
+
+An "n" following the Trumpler type denotes nebulosity in cluster
+
+Note:  the type descriptions from the source used also contained references to other scientific papers.
+These notes are seen as either ":a" or ":b" at the end of the Trumpler types.  For visual purposes
+they can be ignored.
+
+----Shapley-Sawyer concentration rating for globular clusters---
+
+The values range from 1 to 12, smaller numbers are more
+concentrated clusters.
+
+----Vorontsov-Velyaminov type for planetary nebulae-----
+
+1.  Stellar
+2.  Smooth disk (a, brighter center; b, uniform brightness;
+                 c, traces of ring structure)
+3.  Irregular disk (a, very irregular brightness distribution;
+                    b, traces of ring structure)
+4.  Ring structure
+5.  Irregular form similar to diffuse nebula
+6.  Anomalous form, no regular structure
+
+Some very complex forms may combine two types.
+
+-----Hubble type for galaxies-----
+
+E  elliptical, E0 is roundest to E7 is flattest
+   subgroups; 'd'is dwarf, 'c'is supergiant, 'D' has diffuse halo
+S  Spiral, 'a' has tightly wound arms, 'b' has moderately wound
+   arms and 'c' has loosely wound arms
+SB Spiral with central bar
+Ir Irregular
+
+
+Field Number:  15     Name:  NSTS         Size:  4
+Number of stars within a cluster from a study of POSS plates by R. Lynga.
+
+
+Field Number:  16     Name:  BRSTR        Size:  5
+Magnitude of brightest star in cluster or central star of planetary nebula.  Much of this information is from Brian Skiff at Lowell Observatory in Flagstaff, Arizona.
+
+
+Field Number:  17     Name:  BCHM         Size:  4
+Catalogs that include this object.  There are four catalogs included in this field. B=Best of the NGC from SAC, C=Caldwell catalog from Patrick Moore, H=Herschel 400 from Astronomical League, M=Messier object.  The letters for each catalog are aligned under their respective letter abbreviation.  Some objects do appear in several catalogs and therefore have several entries.
+
+
+Field Number:  18     Name:  NGC_DESCR    Size:  55
+
+Visual description of the object.  Most of these are from the NGC, some are from prominent amateurs.  Back issues of Deep Sky Magazine, Astronomy magazine, Sky and Telescope magazine and Burnham's Celestial Handbook are used as a source of some of these descriptions.  The descriptions use the abbreviations from the original NGC and Burnham's.
+There are some observations by Steve Coe, they use these abbreviations:
+
+!    remarkable object                 !!   very remarkable object
+am   among                             n    north
+att  attached                          N    nucleus
+bet  between                           neb  nebula, nebulosity
+B    bright                            P w  paired with
+b    brighter                          p    pretty (before F,B,L,S)
+C    compressed                        p    preceding
+c    considerably                      P    poor
+Cl   cluster                           R    round
+D    double                            Ri   rich
+def  defined                           r    not well resolved
+deg  degrees                           rr   partially resolved
+diam diameter                          rrr  well resolved
+dif  diffuse                           S    small
+E    elongated                         s    suddenly
+e    extremely                         s    south
+er   easily resolved                   sc   scattered
+F    faint                             susp suspected
+f    following                         st   star or stellar
+g    gradually                         v    very
+iF   irregular figure                  var  variable
+inv  involved                          nf   north following
+irr  irregular                         np   north preceding
+L    large                             sf   south following
+l    little                            sp   south preceding
+mag  magnitude                         11m  11th magnitude
+M    middle                            8... 8th mag and fainter
+m    much                              9...13  9th to 13th magnitude
+
+If you have never dealt with the NGC abbreviations before, perhaps a few examples will help.
+
+NGC#     Description            Decoded descriptions
+
+214   pF, pS, lE, gvlbM   pretty faint, pretty small,
+                          little elongated, gradually very
+                          little brighter in the middle
+
+708   vF, vS, R           very faint, very small, round
+
+891   B, vL, vmE          bright, very large, very much elongated
+
+7009  !, vB, S            remarkable object, very bright, small
+
+7089  !! B, vL, mbM       extremely remarkable object, bright, very
+      rrr, stars mags     large, much brighter middle, resolved,
+      13.....             stars 13th magnitude and dimmer
+
+2099  !  B, vRi, mC       remarkable object, bright, very rich,
+                          much compressed
+
+6643  pB,pL,E50,2 st p    pretty bright, pretty large,
+                          elongated in position angle 50 degrees,
+                          two stars preceding
+
+
+Field Number:  19     Name:  NOTES        Size:  86
+Some of this field notes provided by Jim Lucyk.  Much of the rest of this information is from a variety of sources.  Most of the abbreviations used by the NGC apply here also.  Several other common names are included in these notes, so you may search for the "Owl Nebula" in this column.  There are some other names listed in this field. If there is a PA in the NOTES that is providing a companion objects' angle in relation to the main object.  Another abbreviation that is used often is P w N ( paired with NGC ###) or P w U ( paired with UGC ###).  Most of the data on companions to an object have been marked to make recognition easier, but some did not fit into the 60 spaces we alloted.  So, the data is always in this order:  distance in minutes from main object, PA from main object, then size and mag of companion. Example: P w N4566 @ 4.5,120,0.9X0.7 says that the main object is paired with NGC 4566 and is at 4.5 arcminutes distance, in a direction of PA 120 degrees (ESE) and 0.9'X0.7'in size.
