@@ -328,14 +328,16 @@
 							selections_holder.children().removeClass("selected");
 							$(this).addClass("selected");
 						}).mousedown(function(){ input_focus = false; });
-					var close = $('<a class="as-close">&times;</a>').click(function(){
+					var edit = $('<a href="#" class="as-edit"><img alt="&rarr;" src="/static/icons/iconic/black/edit.png"/></a>').click(function() {
+						});
+					var close = $('<a href="#" class="as-close"><img alt="&times;" src="/static/icons/iconic/black/trash_fill_8x8.png"/></a>').click(function(){
 							values_input.val(values_input.val().replace(","+data[opts.selectedValuesProp]+",",","));
 							opts.selectionRemoved.call(this, item);
 							input_focus = true;
 							input.focus();
 							return false;
 						});
-					org_li.before(item.html(data[opts.selectedItemProp]).prepend(close));
+					org_li.before(item.html(data[opts.selectedItemProp]).append(close).append(edit));
 					opts.selectionAdded.call(this, org_li.prev());	
 				}
 				

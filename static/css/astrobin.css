@@ -1140,18 +1140,21 @@ ul.as-selections li.as-selection-item {
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
 }
 ul.as-selections li.as-selection-item :last-child {
-  margin-left: 28px;
+  margin-left: 4px;
 }
-ul.as-selections li.as-selection-item a.as-close {
+ul.as-selections li.as-selection-item a.as-close, ul.as-selections li.as-selection-item a.as-edit {
   float: right;
-  margin: 0 0 0 7px;
-  padding: 0 2px;
+  margin: 0;
+  padding: 3px 0 0 0;
   cursor: pointer;
   color: #333333;
   font-weight: bold;
 }
-ul.as-selections li.as-selection-item a.as-close :hover {
+ul.as-selections li.as-selection-item a.as-close :hover, ul.as-selections li.as-selection-item a.as-edit :hover {
   color: #cc4b2e;
+}
+ul.as-selections li.as-selection-item a.as-edit {
+  padding-left: 8px;
 }
 ul.as-selections li.as-original {
   margin-left: 0;
@@ -1220,7 +1223,7 @@ li.as-result-item em {
         padding-top: 3px;
         padding-bottom: 3px;
     }
-    ul.as-selections li.as-selection-item a.as-close {
+    ul.as-selections li.as-selection-item a.as-close a.as-edit {
         margin-top: -1px;
     }
     ul.as-selections li.as-original input {
@@ -1232,7 +1235,7 @@ li.as-result-item em {
     ul.as-list {
         border: 1px solid #888;
     }
-    ul.as-selections li.as-selection-item a.as-close {
+    ul.as-selections li.as-selection-item a.as-close a.as-edit {
         margin-left: 4px;
         margin-top: 0;
     }
@@ -1241,7 +1244,7 @@ li.as-result-item em {
 ul.as-list {
   border: 1px solid #222222;
 }
-ul.as-selections li.as-selection-item a.as-close {
+ul.as-selections li.as-selection-item a.as-close a.as-edit {
   margin-left: 4px;
   margin-top: 0;
 }
