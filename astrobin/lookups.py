@@ -28,13 +28,18 @@ def autocomplete(request, what):
                  'cameras':Camera,
                  'focal_reducers':FocalReducer,
                  'software':Software,
-                 'subjects':Subject,
                  'filters':Filter,
                  'accessories':Accessory}.iteritems():
         if what == k:
             values = v.objects.filter(Q(name__icontains=request.GET['q']))
+            return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.name} for v in values]))
 
-    return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.name} for v in values]))
+    # Subjects have a special case because their name is in the OBJECT field.
+    if what == 'subjects':
+        values = Subject.obects.filter(Q(OBJECT__icontains=request.GET['q']))
+        return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.OBJECT} for v in values]))
+
+    return [{}]
 
 
 @login_required

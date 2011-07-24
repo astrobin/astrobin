@@ -97,7 +97,7 @@ class Subject(models.Model):
     NOTES     = models.CharField(max_length=86, null=True, blank=True)
 
     def __unicode__(self):
-        return self.name
+        return self.OBJECT
 
     class Meta:
         app_label = 'astrobin'

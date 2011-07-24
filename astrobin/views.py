@@ -56,6 +56,14 @@ def jsonDump(all):
     else:
         return []
 
+
+def jsonDumpSubjects(all):
+    if len(all) > 0:
+        return simplejson.dumps([{'value_unused': i.id, 'name': i.OBJECT} for i in all])
+    else:
+        return []
+
+
 # VIEWS
 
 def index(request):
@@ -106,7 +114,7 @@ def image_detail(request, id):
     if related == 'user':
         related_images = SearchQuerySet().filter(user=image.user.username).exclude(django_id=id)[:limit]
     elif related == 'subject':
-        subjects = [s.name for s in image.subjects.all()]
+        subjects = [s.OBJECT for s in image.subjects.all()]
         related_images = SearchQuerySet().filter(SQ(subjects__in=subjects)).exclude(django_id=id)[:limit]
     elif related == 'imaging_telescope':
         telescopes = [t.name for t in image.imaging_telescopes.all()]
@@ -299,7 +307,7 @@ def image_edit_basic(request, id):
     form = ImageEditBasicForm({
         'title': image.title,
         'description': image.description,
-        'subjects': u', '.join(x.name for x in image.subjects.all()),
+        'subjects': u', '.join(x.OBJECT for x in image.subjects.all()),
         'locations': u', '.join(x.name for x in image.locations.all())
     })
 
@@ -308,7 +316,7 @@ def image_edit_basic(request, id):
          's3_url':settings.S3_URL,
          'form':form,
          'prefill_dict': {
-            'subjects': jsonDump(image.subjects.all()),
+            'subjects': jsonDumpSubjects(image.subjects.all()),
             'locations': jsonDump(image.locations.all()),
          },
          "is_ready":image.is_stored,
@@ -427,16 +435,23 @@ def image_edit_save_basic(request):
     image.subjects.clear()
     image.locations.clear()
 
-    for i in [[image.subjects, 'subjects', Subject],
-              [image.locations, 'locations', Location]]:
-        (names, value) = valueReader(request, i[1])
-        for name in names:
-            k, created = i[2].objects.get_or_create(name = name)
-            if created:
-                k.save()
-            i[0].add(k)
-        prefill_dict[i[1]] = jsonDump(i[0].all())
-        form.fields[i[1]].initial = u', '.join(x.name for x in getattr(image, i[1]).all())
+    (names, value) = valueReader(request, 'subjects')
+    for name in names:
+        k, created = Subject.objects.get_or_create(OBJECT = name)
+        if created:
+            k.save()
+        image.subjects.add(k)
+    prefill_dict['subjects'] = jsonDumpSubjects(image.subjects.all())
+    form.fields['subjects'].initial = u', '.join(x.OBJECT for x in getattr(image, 'subjects').all())
+
+    (names, value) = valueReader(request, 'locations')
+    for name in names:
+        k, created = Location.objects.get_or_create(name = name)
+        if created:
+            k.save()
+        image.locations.add(k)
+    prefill_dict['locations'] = jsonDump(image.locations.all())
+    form.fields['locations'].initial = u', '.join(x.name for x in getattr(image, 'locations').all())
 
     image.title = form.cleaned_data['title'] 
     image.description = form.cleaned_data['description']
