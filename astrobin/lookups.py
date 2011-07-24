@@ -22,6 +22,17 @@ import simplejson
 @require_GET
 def autocomplete(request, what):
     values = ()
+    q = request.GET['q']
+    limit = 10
+
+    # Subjects have a special case because their name is in the OBJECT field.
+    if what == 'subjects':
+        values = Subject.objects.filter(Q(OBJECT__icontains=q))[:limit]
+        if values:
+            return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.OBJECT} for v in values]))
+        values = Subject.objects.filter(Q(OTHER__icontains=q))[:limit]
+        return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.OTHER} for v in values]))
+
     for k, v in {'locations': Location,
                  'telescopes':Telescope,
                  'mounts':Mount,
@@ -31,13 +42,8 @@ def autocomplete(request, what):
                  'filters':Filter,
                  'accessories':Accessory}.iteritems():
         if what == k:
-            values = v.objects.filter(Q(name__icontains=request.GET['q']))
+            values = v.objects.filter(Q(name__icontains=q))[:limit]
             return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.name} for v in values]))
-
-    # Subjects have a special case because their name is in the OBJECT field.
-    if what == 'subjects':
-        values = Subject.obects.filter(Q(OBJECT__icontains=request.GET['q']))
-        return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.OBJECT} for v in values]))
 
     return [{}]
 

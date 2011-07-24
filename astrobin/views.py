@@ -59,7 +59,7 @@ def jsonDump(all):
 
 def jsonDumpSubjects(all):
     if len(all) > 0:
-        return simplejson.dumps([{'value_unused': i.id, 'name': i.OBJECT} for i in all])
+        return simplejson.dumps([{'value_unused': i.id, 'name': i.OBJECT, 'other': i.OTHER} for i in all])
     else:
         return []
 
@@ -437,8 +437,9 @@ def image_edit_save_basic(request):
 
     (names, value) = valueReader(request, 'subjects')
     for name in names:
-        k, created = Subject.objects.get_or_create(OBJECT = name)
-        if created:
+        k = Subject.objects.get(Q(OBJECT=name) | Q(OTHER=name))
+        if not k:
+            k = Subject(OBJECT=name)
             k.save()
         image.subjects.add(k)
     prefill_dict['subjects'] = jsonDumpSubjects(image.subjects.all())
