@@ -76,7 +76,25 @@ class Accessory(Gear):
 
 
 class Subject(models.Model):
-    name = models.CharField(max_length=64)
+    name          = models.CharField(max_length=64, null=True, blank=True)
+    other         = models.CharField(max_length=18, null=True, blank=True)
+    type          = models.CharField(max_length=5, null=True, blank=True)
+    constellation = models.CharField(max_length=3, null=True, blank=True)
+    ra            = models.CharField(max_length=7, null=True, blank=True)
+    dec           = models.CharField(max_length=6, null=True, blank=True)
+    mag           = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
+    surb          = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
+    u2k           = models.CharField(max_length=3, null=True, blank=True)
+    ti            = models.CharField(max_length=2, null=True, blank=True)
+    size_max      = models.CharField(max_length=8, null=True, blank=True)
+    size_min      = models.CharField(max_length=8, null=True, blank=True)
+    pa            = models.IntegerField(null=True, blank=True)
+    klass         = models.CharField(max_length=11, null=True, blank=True)    
+    nsts          = models.IntegerField(null=True, blank=True)
+    brstr         = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
+    bchm          = models.CharField(max_length=4, null=True, blank=True)
+    ngc_descr     = models.CharField(max_length=55, null=True, blank=True)
+    notes         = models.CharField(max_length=86, null=True, blank=True)
 
     def __unicode__(self):
         return self.name
