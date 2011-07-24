@@ -5,7 +5,7 @@
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
         <h2>{% trans "Edit your astrophotography gear" %}</h2>
-        <form method="post" action="/profile/save/gear/">{% csrf_token %}
+        <form method="post" action="{% url profile_save_gear %}">{% csrf_token %}
             {{form.as_p}}
             <noscript>
                 <p class="hint">
