@@ -72,6 +72,16 @@ ln -s ./venv/bin/pip vpip
     Pillow \
     python-memcached
 
+# NOTE: if you run into this: https://github.com/ask/celery/commit/edf3b3f33acdada9264754068d9c74ee76692cd9
+# then install kombu, celery and django-celery from git master:
+#
+# git clone https://github.com/ask/kombu.git
+# git clone https://github.com/ask/celery.git
+# git clone https://github.com/ask/django-celery.git
+# cd kombu; ../astrobin/venv/bin/python setup.py install; cd ..
+# cd celery; ../astrobin/venv/bin/python setup.py install; cd ..
+# cd django-celery; ../astrobin/venv/bin/python setup.py install; cd ..
+
 # for the notifications system
 cd django-persistent-messages
 ../venv/bin/python setup.py install
