@@ -450,10 +450,10 @@ def image_edit_save_basic(request):
         k, created = Location.objects.get_or_create(name = name)
         if created:
             k.save()
-            r = Request(
+            r = LocationRequest(
                 from_user=User.objects.get(username=settings.ASTROBIN_USER),
                 to_user=image.user,
-                image=image,
+                location=k,
                 fullfilled=False,
                 message='', # not implemented yet
                 type='LOCATION_DATA')
@@ -1011,7 +1011,7 @@ def image_request_additional_information(request, image_id):
         return ajax_fail()
 
     message = _('<strong>%s</strong> has requested additional information about your image.') % request.user
-    r = Request(
+    r = ImageRequest(
         from_user=request.user,
         to_user=image.user,
         image=image,
@@ -1035,7 +1035,7 @@ def image_request_fits(request, image_id):
 
     # message not implemented yet, let's hard code it for the notification
     message = _('<strong>%s</strong> has requested to see the TIFF or FITS of your image.') % request.user
-    r = Request(
+    r = ImageRequest(
         from_user=request.user,
         to_user=image.user,
         image=image,
