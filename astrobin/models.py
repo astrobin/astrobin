@@ -277,6 +277,7 @@ class Request(models.Model):
         ('INFO',  _('Additional information')),
         ('FITS',  _('TIFF/FITS')),
         ('HIRES', _('Higher resolution')),
+        ('LOCATION_DATA', _('Location data')),
     )
 
     from_user = models.ForeignKey(User, editable=False, related_name='requester')
