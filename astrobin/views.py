@@ -451,7 +451,7 @@ def image_edit_save_basic(request):
         if created:
             k.save()
             r = Request(
-                from_user=settings.ASTROBIN_USER,
+                from_user=User.objects.get(username=settings.ASTROBIN_USER),
                 to_user=image.user,
                 image=image,
                 fullfilled=False,
