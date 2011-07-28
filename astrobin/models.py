@@ -273,18 +273,10 @@ class ABPOD(models.Model):
 
 
 class Request(models.Model):
-    TYPE_CHOICES = (
-        ('INFO',  _('Additional information')),
-        ('FITS',  _('TIFF/FITS')),
-        ('HIRES', _('Higher resolution')),
-        ('LOCATION_DATA', _('Location data')),
-    )
-
     from_user = models.ForeignKey(User, editable=False, related_name='requester')
     to_user   = models.ForeignKey(User, editable=False, related_name='requestee')
     fulfilled = models.BooleanField()
     message   = models.CharField(max_length=255)
-    type      = models.CharField(max_length=8, choices=TYPE_CHOICES)
     created   = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
@@ -299,7 +291,14 @@ class Request(models.Model):
 
 
 class ImageRequest(Request):
+    TYPE_CHOICES = (
+        ('INFO',     _('Additional information')),
+        ('FITS',     _('TIFF/FITS')),
+        ('HIRES',    _('Higher resolution')),
+    )
+
     image = models.ForeignKey(Image, editable=False)
+    type  = models.CharField(max_length=8, choices=TYPE_CHOICES)
 
 
 class LocationRequest(Request):

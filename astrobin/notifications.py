@@ -33,9 +33,16 @@ def push_message(recipient, data):
 def push_request(recipient, request):
     data = {
         'from_user':request.from_user.username,
-        'image_id' :request.image.id,
         'message'  :request.message,
     }
+
+    try:
+        data['image_id'] = request.image.id
+        data['location_id'] = request.location.id
+    except:
+        # we're allowed to pass because all but one will fail
+        pass
+
     encoded_data = simplejson.dumps(data)
     url = 'http://127.0.0.1/publish?id=request_' + recipient.username
     try:
