@@ -40,7 +40,7 @@ def valueReader(request, field):
     if as_field in request.POST:
         value = request.POST[as_field]
     else:
-        value = request.POST[field]
+        return None, None
     items = []
     reader = csv.reader(utf_8_encoder([value]),
                         skipinitialspace = True)
@@ -437,8 +437,10 @@ def image_edit_save_basic(request):
 
     (names, value) = valueReader(request, 'subjects')
     for name in names:
-        k = Subject.objects.get(Q(OBJECT=name) | Q(OTHER=name))
-        if not k:
+        k = None
+        try:
+            k = Subject.objects.get(Q(OBJECT=name) | Q(OTHER=name))
+        except Subject.DoesNotExist:
             k = Subject(OBJECT=name)
             k.save()
         image.subjects.add(k)
@@ -454,9 +456,8 @@ def image_edit_save_basic(request):
                 from_user=User.objects.get(username=settings.ASTROBIN_USER),
                 to_user=image.user,
                 location=k,
-                fullfilled=False,
-                message='', # not implemented yet
-                type='LOCATION_DATA')
+                fulfilled=False,
+                message='') # not implemented yet
             r.save()
             push_request(image.user, r)
 
