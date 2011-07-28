@@ -450,6 +450,16 @@ def image_edit_save_basic(request):
         k, created = Location.objects.get_or_create(name = name)
         if created:
             k.save()
+            r = Request(
+                from_user=settings.ASTROBIN_USER,
+                to_user=image.user,
+                image=image,
+                fullfilled=False,
+                message='', # not implemented yet
+                type='LOCATION_DATA')
+            r.save()
+            push_request(image.user, r)
+
         image.locations.add(k)
     prefill_dict['locations'] = jsonDump(image.locations.all())
     form.fields['locations'].initial = u', '.join(x.name for x in getattr(image, 'locations').all())
