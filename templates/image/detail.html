@@ -36,10 +36,10 @@
                                     </li>
                                 {% if request.user != image.user %}
                                     <li class="bg-icon icon-info">
-                                        <span class="text"><a class="request-additional-information" href="#">{% trans "Request additional information" %}</a></span>
+                                        <span class="text"><a class="image-request-additional-information" href="#">{% trans "Request additional information" %}</a></span>
                                     </li>
                                     <li class="last bg-icon icon-file">
-                                        <span class="text"><a class="request-fits" href="#">{% trans "Request TIFF/FITS" %}</a></span>
+                                        <span class="text"><a class="image-request-fits" href="#">{% trans "Request TIFF/FITS" %}</a></span>
                                     </li>
                                 {% endif %}
                                 </ul>
@@ -355,7 +355,7 @@ $(document).ready(function() {
                 },
                 url: '{% url bring_to_attention %}'
             },
-            request_additional_information_action: {
+            image_request_additional_information_action: {
                 dialog: {
                     title : '{% trans "Request additional information" %}',
                     body  : '{% blocktrans with image.user.username as username %}\
@@ -364,7 +364,7 @@ $(document).ready(function() {
                              {% endblocktrans %}',
                 }
             },
-            request_fits_action: {
+            image_request_fits_action: {
                 dialog: {
                     title : '{% trans "Request TIFF/FITS" %}',
                     body  : '{% blocktrans with image.user.username as username %}\

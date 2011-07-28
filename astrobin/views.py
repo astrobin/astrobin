@@ -1003,7 +1003,7 @@ def requests(request):
 
 @login_required
 @require_GET
-def request_additional_information(request, image_id):
+def image_request_additional_information(request, image_id):
     image = None
     try:
         image = Image.objects.get(id=image_id)
@@ -1026,7 +1026,7 @@ def request_additional_information(request, image_id):
 
 @login_required
 @require_GET
-def request_fits(request, image_id):
+def image_request_fits(request, image_id):
     image = None
     try:
         image = Image.objects.get(id=image_id)

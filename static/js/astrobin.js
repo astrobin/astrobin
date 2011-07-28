@@ -232,22 +232,22 @@ var image_detail = {
             url: ''
         },
 
-        request_additional_information_action: {
+        image_request_additional_information_action: {
             dialog: {
                 title: '',
                 body: '',
             },
             element: 'a.request-additional-information',
-            url    : '/request/additional_information/'
+            url    : '/request/image/additional_information/'
         },
 
-        request_fits_action: {
+        image_request_fits_action: {
             dialog: {
                 title: '',
                 body: '',
             },
             element: 'a.request-fits',
-            url    : '/request/fits/'
+            url    : '/request/image/fits/'
         }
     },
 
