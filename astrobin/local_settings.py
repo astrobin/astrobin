@@ -196,3 +196,6 @@ PRIVATEBETA_ENABLE_BETA = True
 PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
     'astrobin.views.help',
 )
+
+ASTROBIN_USER='astrobin'
+
