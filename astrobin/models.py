@@ -282,7 +282,6 @@ class Request(models.Model):
 
     from_user = models.ForeignKey(User, editable=False, related_name='requester')
     to_user   = models.ForeignKey(User, editable=False, related_name='requestee')
-    image     = models.ForeignKey(Image, editable=False)
     fulfilled = models.BooleanField()
     message   = models.CharField(max_length=255)
     type      = models.CharField(max_length=8, choices=TYPE_CHOICES)
@@ -297,6 +296,14 @@ class Request(models.Model):
 
     def get_absolute_url():
         return '/requests/detail/' + self.id + '/'
+
+
+class ImageRequest(Request):
+    image = models.ForeignKey(Image, editable=False)
+
+
+class LocationRequest(Request):
+    location = models.ForeignKey(Location, editable=False)
 
 
 class UserProfile(models.Model):
