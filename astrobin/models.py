@@ -11,6 +11,7 @@ from django.utils.translation import ugettext as _
 from django.conf import settings
 
 from djangoratings.fields import RatingField
+from model_utils.managers import InheritanceManager
 
 from tasks import store_image, solve_image, delete_image
 from notifications import push_notification
@@ -278,6 +279,8 @@ class Request(models.Model):
     fulfilled = models.BooleanField()
     message   = models.CharField(max_length=255)
     created   = models.DateTimeField(auto_now_add=True)
+
+    objects   = InheritanceManager()
 
     def __unicode__(self):
         return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)

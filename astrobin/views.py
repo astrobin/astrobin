@@ -996,7 +996,7 @@ def bring_to_attention(request):
 def requests(request):
     return object_list(
         request,
-        queryset=Request.objects.filter(to_user=request.user),
+        queryset=Request.objects.filter(to_user=request.user).select_subclasses(),
         template_name='requests/all.html',
         template_object_name='req',
         extra_context={})

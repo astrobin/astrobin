@@ -70,7 +70,8 @@ ln -s ./venv/bin/pip vpip
     django-notification \
     flickrapi \
     Pillow \
-    python-memcached
+    python-memcached \
+    django-model-utils
 
 # NOTE: if you run into this: https://github.com/ask/celery/commit/edf3b3f33acdada9264754068d9c74ee76692cd9
 # then install kombu, celery and django-celery from git master:
