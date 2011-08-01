@@ -1975,15 +1975,15 @@ input.date {
 table.messages, table.requests {
   width: 100%;
 }
-table.messages td.when, table.requests td.when {
+table.messages td, table.requests td {
   padding: 4px 12px;
 }
 table.messages td, table.requests td {
-  padding: 0;
+  padding: 4px 12px;
 }
 table.messages td a, table.requests td a {
-  padding: 4px 12px;
-  display: block;
+  padding: 0;
+  display: inline;
 }
 table.messages td a :hover, table.requests td a :hover {
   background-color: #404040;

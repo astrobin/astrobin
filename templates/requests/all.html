@@ -9,8 +9,8 @@
                 <tr>
                     <th>{% trans "When" %}</th>
                     <th>{% trans "From" %}</th>
-                    <th>{% trans "Type" %}</th>
-                    <th>{% trans "What" %}</th>
+                    <th>{% trans "Action needed" %}</th>
+                    <th>{% trans "Object affected" %}</th>
                     <th>{% trans "Fullfilled" %}</th>
                 </tr>
             {% for req in req_list %}
@@ -22,10 +22,17 @@
                     <td><a href="{% url image_detail req.image.id %}">{{req.image.title|escape}}</a></td>
                     {% endif %}
                     {% if req.location %}
-                    <td>{% trans "Location details" %}</td>
-                    <td><a href="{% url image_detail req.location.id %}">{{req.location.name|escape}}</a></td>
+                    <td>{% trans "Location details missing." %}</td>
+                    <td><a href="/search/?q={{req.location.name}}">{{req.location.name|escape}}</a></td>
                     {% endif %}
-                    <td>{% if req.fulfilled %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
+                    <td>
+                    {% if req.fulfilled %}
+                        {% trans "Yes." %}
+                    {% else %}
+                            {% trans "No." %}
+                            <a href="#">{% trans "Do it now?" %}</a>
+                    {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </table>
