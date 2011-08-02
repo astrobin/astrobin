@@ -4,6 +4,7 @@
 {% for r in requests %}
     <li {% if not r.fulfilled %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>
         <div class="request-link">
+            {% if r.image %}
             <a href="{{r.image.get_absolute_url}}">
                 {% if r.type == 'INFO' %}
                 {% blocktrans with r.from_user.username as username %}
@@ -17,6 +18,14 @@
                 {% endif %}
                 {% endif %}
             </a>
+            {% endif %}
+            {% if r.location %}
+            <a href="#">
+                {% blocktrans with r.location as location %}
+                You should insert data for the location you have created: <strong>{{location}}</strong>
+                {% endblocktrans %}
+            </a>
+            {% endif %}
         </div>
     </li>
 {% empty %}
