@@ -40,7 +40,7 @@ def message_list(request, show_footer = True):
 @register.inclusion_tag('inclusion_tags/request_list.html')
 def request_list(request, show_footer = True):
     return {
-        'requests':Request.objects.filter(to_user=request.user).order_by('-created')[:10],
+        'requests':Request.objects.filter(to_user=request.user).order_by('-created').select_subclasses()[:10],
         'show_footer':show_footer}
 
 
