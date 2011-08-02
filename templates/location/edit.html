@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="info-side-bar">
+        <p>
+            {% blocktrans %}
+            If this location is missing data, or has incorrect data, please fix it.
+            {% endblocktrans %}
+        </p>
+    </div>
+    <div class="sided-main-content">
+        <h1>{% trans "Edit your location" %}</h1>
+        <form action="{% url location_save %}" method="post">{% csrf_token %}
+        {{form.as_p}}
+        <input type="hidden" name="location_id" value="{{id}}"/>
+        <ul>
+            <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+            {% if saved %}
+            <li>{% trans "Saved. Thanks!" %}</li>
+            {% endif %}
+        </ul>
+        </form>
+    </div>
+{% endblock %}
+

@@ -1085,3 +1085,35 @@ def help(request):
     return render_to_response('help.html',
         context_instance=RequestContext(request))
 
+
+@login_required
+@require_GET
+def location_edit(request, id):
+    location = get_object_or_404(Location, pk=id)
+    form = LocationEditForm(instance=location)
+
+    return render_to_response('location/edit.html',
+        {'form': form,
+         'id'  : id,
+        },
+        context_instance=RequestContext(request))
+
+@login_required
+@require_POST
+def location_save(request):
+    id = request.POST.get('location_id')
+    location = Location.objects.get(pk=id)
+    form = LocationEditForm(request.POST, instance=location)
+    if not form.is_valid():
+        return render_to_response('location/edit.html',
+            {'form': form},
+            context_instance=RequestContext(request))
+
+    form.save()
+    return render_to_response('location/edit.html',
+        {'form' : form,
+         'id'   : id,
+         'saved': True,
+        },
+        context_instance=RequestContext(request))
+

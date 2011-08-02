@@ -20,7 +20,7 @@
             </a>
             {% endif %}
             {% if r.location %}
-            <a href="#">
+            <a href="{% url location_edit r.location.id %}">
                 {% blocktrans with r.location as location %}
                 You should insert data for the location you have created: <strong>{{location}}</strong>
                 {% endblocktrans %}

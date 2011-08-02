@@ -269,6 +269,10 @@ textarea.uniform:focus {
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
 }
+input[readonly], input:focus[readonly] {
+  color: #7b7b7b;
+  background: #222222;
+}
 /* SPRITES */
 /* Select */
 div.selector {
