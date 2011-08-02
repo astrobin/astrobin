@@ -71,4 +71,6 @@ urlpatterns = patterns('',
 
        (r'^invite/', include('privatebeta.urls')),
     url(r'^help/', views.help, name='help'),
+    url(r'^location/edit/(?P<id>\d+)/$', views.location_edit, name='location_edit'),
+    url(r'^location/save/$', views.location_save, name='location_save'),
 )

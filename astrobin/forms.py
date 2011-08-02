@@ -6,6 +6,7 @@ from haystack.forms import SearchForm
 
 from models import Image
 from models import UserProfile
+from models import Location
 
 
 class ImageUploadForm(forms.Form):
@@ -138,4 +139,22 @@ class AdvancedSearchForm(SearchForm):
                 sqs = sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
 
         return sqs
+
+
+class LocationEditForm(forms.ModelForm):
+    latitude = forms.FloatField(
+        required=False,
+        help_text=_("Examples: +12.44, -51.25"))
+    longitude = forms.FloatField(
+        required=False,
+        help_text=_("Examples: +12.44, -51.25"))
+
+    def __init__(self, *args, **kwargs):
+        super(LocationEditForm, self).__init__(*args, **kwargs)
+        instance = getattr(self, 'instance', None)
+        if instance and instance.id:
+            self.fields['name'].widget.attrs['readonly'] = True
+
+    class Meta:
+        model = Location
 
