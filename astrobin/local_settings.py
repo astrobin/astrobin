@@ -199,3 +199,5 @@ PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
 
 ASTROBIN_USER='astrobin'
 
+
+SIMBAD_QUERY_URL="http://simbad.u-strasbg.fr/simbad/sim-nameresolver?data=I.0,J,C.0,T,D,M,I&output.max=1&output=json&Ident="
