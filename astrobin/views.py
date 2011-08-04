@@ -59,7 +59,7 @@ def jsonDump(all):
 
 def jsonDumpSubjects(all):
     if len(all) > 0:
-        return simplejson.dumps([{'value_unused': i.id, 'name': i.OBJECT, 'other': i.OTHER} for i in all])
+        return simplejson.dumps([{'value_unused': i.id, 'name': i.mainId} for i in all])
     else:
         return []
 
@@ -114,7 +114,7 @@ def image_detail(request, id):
     if related == 'user':
         related_images = SearchQuerySet().filter(user=image.user.username).exclude(django_id=id)[:limit]
     elif related == 'subject':
-        subjects = [s.OBJECT for s in image.subjects.all()]
+        subjects = [s.mainId for s in image.subjects.all()]
         related_images = SearchQuerySet().filter(SQ(subjects__in=subjects)).exclude(django_id=id)[:limit]
     elif related == 'imaging_telescope':
         telescopes = [t.name for t in image.imaging_telescopes.all()]
@@ -307,7 +307,7 @@ def image_edit_basic(request, id):
     form = ImageEditBasicForm({
         'title': image.title,
         'description': image.description,
-        'subjects': u', '.join(x.OBJECT for x in image.subjects.all()),
+        'subjects': u', '.join(x.mainId for x in image.subjects.all()),
         'locations': u', '.join(x.name for x in image.locations.all())
     })
 
@@ -439,13 +439,13 @@ def image_edit_save_basic(request):
     for name in names:
         k = None
         try:
-            k = Subject.objects.get(Q(OBJECT=name) | Q(OTHER=name))
+            k = Subject.objects.get(Q(mainId=name)) # TODO: query also idlist
         except Subject.DoesNotExist:
-            k = Subject(OBJECT=name)
+            k = Subject(mainId=name) # FIXME: maybe we don't create subjects as we use Simbad
             k.save()
         image.subjects.add(k)
     prefill_dict['subjects'] = jsonDumpSubjects(image.subjects.all())
-    form.fields['subjects'].initial = u', '.join(x.OBJECT for x in getattr(image, 'subjects').all())
+    form.fields['subjects'].initial = u', '.join(x.mainId for x in getattr(image, 'subjects').all())
 
     (names, value) = valueReader(request, 'locations')
     for name in names:

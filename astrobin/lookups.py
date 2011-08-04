@@ -25,13 +25,12 @@ def autocomplete(request, what):
     q = request.GET['q']
     limit = 10
 
-    # Subjects have a special case because their name is in the OBJECT field.
+    # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
-        values = Subject.objects.filter(Q(OBJECT__icontains=q))[:limit]
+        # TODO: search also idlist
+        values = Subject.objects.filter(Q(mainId__icontains=q))[:limit]
         if values:
-            return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.OBJECT} for v in values]))
-        values = Subject.objects.filter(Q(OTHER__icontains=q))[:limit]
-        return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.OTHER} for v in values]))
+            return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.mainId} for v in values]))
 
     for k, v in {'locations': Location,
                  'telescopes':Telescope,
@@ -45,7 +44,7 @@ def autocomplete(request, what):
             values = v.objects.filter(Q(name__icontains=q))[:limit]
             return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.name} for v in values]))
 
-    return [{}]
+    return HttpResponse(simplejson.dumps([{}]))
 
 
 @login_required
