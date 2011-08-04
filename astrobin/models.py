@@ -2,6 +2,8 @@ import uuid
 from datetime import datetime
 import glob
 import os
+import urllib2
+import simplejson
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -84,7 +86,7 @@ class Subject(models.Model):
     # Declination
     dec = models.DecimalField(max_digits=8, decimal_places=5, null=True, blank=True)
     # Main object identifier (aka main name)
-    mainId = models.CharField(max_length=64)
+    mainId = models.CharField(max_length=64, unique=True)
     # Object type
     otype = models.CharField(max_length=16, null=True, blank=True)
     # Morphological type
@@ -102,9 +104,29 @@ class Subject(models.Model):
     class Meta:
         app_label = 'astrobin'
 
+    # Note: this function doesn't deal with the alternative names.
+    def initFromJSON(self, json):
+        for attr in [field.name for field in self._meta.fields]:
+            if attr != 'id' and attr in json:
+                setattr(self, attr, json[attr])
+
+    def getFromSimbad(self):
+        if not self.mainId:
+            return
+        url = settings.SIMBAD_SEARCH_URL + self.mainId
+        f = None
+        try:
+            f = urllib2.urlopen(url)
+        except:
+            return;
+
+        json = simplejson.loads(f.read())
+        self.initFromJson(json)
+        f.close()
+
 
 class SubjectIdentifier(models.Model):
-    identifier = models.CharField(max_length=64)
+    identifier = models.CharField(max_length=64, unique=True)
     subject = models.ForeignKey(Subject, related_name='idlist')
 
     class Meta:
