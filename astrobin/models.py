@@ -77,28 +77,35 @@ class Accessory(Gear):
 
 
 class Subject(models.Model):
-    OBJECT    = models.CharField(max_length=64, null=True, blank=True)
-    OTHER     = models.CharField(max_length=18, null=True, blank=True)
-    TYPE      = models.CharField(max_length=5, null=True, blank=True)
-    CON       = models.CharField(max_length=3, null=True, blank=True)
-    RA        = models.CharField(max_length=7, null=True, blank=True)
-    DEC       = models.CharField(max_length=6, null=True, blank=True)
-    MAG       = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
-    SUBR      = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
-    U2K       = models.CharField(max_length=3, null=True, blank=True)
-    TI        = models.CharField(max_length=2, null=True, blank=True)
-    SIZE_MAX  = models.CharField(max_length=8, null=True, blank=True)
-    SIZE_MIN  = models.CharField(max_length=8, null=True, blank=True)
-    PA        = models.IntegerField(null=True, blank=True)
-    CLASS     = models.CharField(max_length=11, null=True, blank=True)
-    NSTS      = models.IntegerField(null=True, blank=True)
-    BRSTR     = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
-    BCHM      = models.CharField(max_length=4, null=True, blank=True)
-    NGC_DESCR = models.CharField(max_length=55, null=True, blank=True)
-    NOTES     = models.CharField(max_length=86, null=True, blank=True)
+    # Simbad object id
+    oid = models.IntegerField()
+    # Right ascension
+    ra = models.DecimalField(max_digits=8, decimal_places=5, null=True, blank=True)
+    # Declination
+    dec = models.DecimalField(max_digits=8, decimal_places=5, null=True, blank=True)
+    # Main object identifier (aka main name)
+    mainId = models.CharField(max_length=64)
+    # Object type
+    otype = models.CharField(max_length=16, null=True, blank=True)
+    # Morphological type
+    mtype = models.CharField(max_length=16, null=True, blank=True)
+    # Dimensions along the major and minor axis
+    dim_majaxis = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    dim_minaxis = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+
+    # The list of identifier (aka alternative names) is done via
+    # a many-to-one relationship in SubjectIdentifier.
 
     def __unicode__(self):
-        return self.OBJECT
+        return self.mainId
+
+    class Meta:
+        app_label = 'astrobin'
+
+
+class SubjectIdentifier(models.Model):
+    identifier = models.CharField(max_length=64)
+    subject = models.ForeignKey(Subject, related_name='idlist')
 
     class Meta:
         app_label = 'astrobin'
