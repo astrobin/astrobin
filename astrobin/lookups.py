@@ -5,32 +5,104 @@ from models import FocalReducer
 from models import Software
 from models import Filter
 from models import Accessory
-from models import Subject
+from models import Subject, SubjectIdentifier
 from models import Location
 from models import UserProfile
 
 from django.db.models import Q 
+from django.db import IntegrityError
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.conf import settings
 
 import simplejson
+import urllib2
+import string
 
 
 @login_required
 @require_GET
 def autocomplete(request, what):
-    values = ()
+    values = []
     q = request.GET['q']
     limit = 10
 
     # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
-        # TODO: search also idlist
+        # First search for the mainId
         values = Subject.objects.filter(Q(mainId__icontains=q))[:limit]
         if values:
             return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.mainId} for v in values]))
+        # If not found, search for the alternative ids
+        values = SubjectIdentifier.objects.filter(Q(identifier__icontains=q))[:limit]
+        if values:
+            return HttpResponse(simplejson.dumps(
+                [{'value_unused': str(v.subject.id), 'name': "%s (%s)" % (v.subject.mainId, v.identifier) } for v in values]))
+        # If we're still not finding it, then query Simbad
+        url = settings.SIMBAD_SEARCH_QUERY_URL + q
+        f = None
+        try:
+            f = urllib2.urlopen(url)
+        except:
+            return HttpResponse(simplejson.dumps([{}]))
+
+        # json will be a list of dictionaries with simbad objects.
+        json = simplejson.loads(f.read())
+        # Reset values, which might be of QuerySet type.
+        values = []
+        for obj in json:
+            found = False
+
+            # We need to add it to our database first. We
+            # are actally saving this early, because the user might
+            # just disregard this result and select another, or
+            # navigate away from the page. This might not be
+            # optimal, but we need to have an object id in our
+            # database if the user does decide to use this object.
+            s = Subject()
+            s.initFromJSON(obj)
+            try:
+                s.save()
+            except IntegrityError:
+                # Sometimes, for a racecondition somewhere, if the
+                # user tries to lookups names really fast, a name that
+                # is going to the database gets looked up again before
+                # it really is there. So we try to save it again and
+                # get the IntegrityError because of the duplicate key.
+                pass
+
+            # We need to make sure that q is part of the mainId, or the
+            # ui will be very confused. If that's not the case, then
+            # we construct a string that has both the mainId and the id
+            # that was found, just like above.
+            if string.find(q, obj['mainId']):
+                found = True
+                values.append(
+                    {'value_unused': str(s.id),
+                     'name': obj['mainId']})
+
+            # The id that matched q is actually one of the
+            # alternative ids. Let's find it.
+            for id in obj['idlist']:
+                # We've got to save also all the alternative ids
+                # in our database if we want to stay true to our
+                # caching philosophy.
+                sid = SubjectIdentifier(identifier=id, subject=s)
+                try:
+                    sid.save()
+                except IntegrityError:
+                    # It looks like we picked this name on a previous
+                    # pass. It's all right.
+                    pass
+                if not found and string.find(q, id):
+                    values.append(
+                        {'value_unused': str(s.id),
+                         'name': "%s (%s)" % (obj['mainId'], id)})
+
+        f.close()
+        return HttpResponse(simplejson.dumps(values))
 
     for k, v in {'locations': Location,
                  'telescopes':Telescope,
