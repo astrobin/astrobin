@@ -35,16 +35,16 @@
 {% block extra_js %}
 <script language="javascript">
     $(document).ready(function() {
-    var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
-    var emptyText = '{% trans "No results. Press TAB to add it!" %}';
-
     {% autoescape off %}
     {% for key, value in prefill_dict.items %}
+    var startText = '{{value.1}}';
+    var emptyText = '{{value.2}}';
+
     $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
         {asHtmlID: '{{key}}',
         selectedItemProp: 'name',
         searchObjProps: 'name',
-        preFill: {{value}},
+        preFill: {{value.0}},
         selectedItemProp: 'name',
         selectedValuesProp: 'name',
         startText: startText,
