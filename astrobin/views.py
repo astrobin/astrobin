@@ -316,8 +316,12 @@ def image_edit_basic(request, id):
          's3_url':settings.S3_URL,
          'form':form,
          'prefill_dict': {
-            'subjects': jsonDumpSubjects(image.subjects.all()),
-            'locations': jsonDump(image.locations.all()),
+            'subjects': [jsonDumpSubjects(image.subjects.all()),
+                         _("Enter partial name and wait for the suggestions!"),
+                         _("No results. Sorry.")],
+            'locations': [jsonDump(image.locations.all()),
+                          _("Enter partial name and wait for the suggestions!"),
+                          _("No results. Press TAB to create this location!")],
          },
          "is_ready":image.is_stored,
         },
@@ -439,12 +443,19 @@ def image_edit_save_basic(request):
     for name in names:
         k = None
         try:
-            k = Subject.objects.get(Q(mainId=name)) # TODO: query also idlist
+            k = Subject.objects.get(Q(mainId=name))
         except Subject.DoesNotExist:
-            k = Subject(mainId=name) # FIXME: maybe we don't create subjects as we use Simbad
-            k.save()
+            try:
+                sid = SubjectIdentifier.objects.get(Q(identifier=name))
+                k = Subject.objects.get(id=sid.subject.id) # FIXME: can this line be written better?
+            except SubjectIdentifier.DoesNotExist:
+                # Skip it quietly
+                continue
         image.subjects.add(k)
-    prefill_dict['subjects'] = jsonDumpSubjects(image.subjects.all())
+    prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
+                                _("Enter partial name and wait for the suggestions!"),
+                                _("No results. Sorry.")]
+
     form.fields['subjects'].initial = u', '.join(x.mainId for x in getattr(image, 'subjects').all())
 
     (names, value) = valueReader(request, 'locations')
@@ -462,7 +473,11 @@ def image_edit_save_basic(request):
             push_request(image.user, r)
 
         image.locations.add(k)
-    prefill_dict['locations'] = jsonDump(image.locations.all())
+    prefill_dict['locations'] = [jsonDump(image.locations.all()),
+                                 _("Enter partial name and wait for the suggestions!"),
+                                 _("No results. Sorry.")]
+
+
     form.fields['locations'].initial = u', '.join(x.name for x in getattr(image, 'locations').all())
 
     image.title = form.cleaned_data['title'] 
