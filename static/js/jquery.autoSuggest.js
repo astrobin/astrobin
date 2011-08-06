@@ -271,7 +271,12 @@
 						}
 						if(str){
 							if (!opts.matchCase){ str = str.toLowerCase(); }				
-							if(str.search(query) != -1 && values_input.val().search(","+data[num][opts.selectedValuesProp]+",") == -1){
+							var stripped = query.replace("/\s/g", "");
+							var regx = ".*";
+							for (j=0; j<stripped.length; j++) {
+								regx += stripped.charAt(j) + ".*";
+							}
+							if(str.search(regx) != -1 && values_input.val().search(","+data[num][opts.selectedValuesProp]+",") == -1){
 								forward = true;
 							}	
 						}

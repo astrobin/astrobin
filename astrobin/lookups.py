@@ -20,6 +20,7 @@ from django.conf import settings
 import simplejson
 import urllib2
 import string
+import re
 
 
 @login_required
@@ -28,28 +29,39 @@ def autocomplete(request, what):
     values = []
     q = request.GET['q']
     limit = 10
+    regex = ".*"
+
+    for c in re.sub(r'\s', '', q):
+        regex += "%c.*" % re.escape(c)
 
     # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
         # First search for the mainId
-        values = Subject.objects.filter(Q(mainId__icontains=q))[:limit]
+        values = Subject.objects.filter(Q(mainId__regex=r'%s'%regex))[:limit]
         if values:
             return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.mainId} for v in values]))
         # If not found, search for the alternative ids
-        values = SubjectIdentifier.objects.filter(Q(identifier__icontains=q))[:limit]
+        values = SubjectIdentifier.objects.filter(Q(identifier__regex=r'%s'%regex))[:limit]
         if values:
             return HttpResponse(simplejson.dumps(
                 [{'value_unused': str(v.subject.id), 'name': "%s (%s)" % (v.subject.mainId, v.identifier) } for v in values]))
         # If we're still not finding it, then query Simbad
-        url = settings.SIMBAD_SEARCH_QUERY_URL + q
-        f = None
+        url = settings.SIMBAD_SEARCH_QUERY_URL + urllib2.quote(q)
+        json_string = ""
         try:
-            f = urllib2.urlopen(url)
+            f = urllib2.urlopen(url, timeout=1)
+            json_string = f.read()
         except:
             return HttpResponse(simplejson.dumps([{}]))
+        try:
+            # json will be a list of dictionaries with simbad objects.
+            json = simplejson.loads(json_string)
+        except simplejson.JSONDecodeError:
+            # Malformatted query and Simbad didn't accept it. Let's
+            # ignore it
+            f.close()
+            return HttpResponse(simplejson.dumps([{}]))
 
-        # json will be a list of dictionaries with simbad objects.
-        json = simplejson.loads(f.read())
         # Reset values, which might be of QuerySet type.
         values = []
         for obj in json:
@@ -71,13 +83,13 @@ def autocomplete(request, what):
                 # is going to the database gets looked up again before
                 # it really is there. So we try to save it again and
                 # get the IntegrityError because of the duplicate key.
-                pass
+                s = Subject.objects.get(mainId=obj['mainId'])
 
             # We need to make sure that q is part of the mainId, or the
             # ui will be very confused. If that's not the case, then
             # we construct a string that has both the mainId and the id
             # that was found, just like above.
-            if string.find(q, obj['mainId']):
+            if re.match(regex, obj['mainId'], flags=re.IGNORECASE):
                 found = True
                 values.append(
                     {'value_unused': str(s.id),
@@ -96,7 +108,7 @@ def autocomplete(request, what):
                     # It looks like we picked this name on a previous
                     # pass. It's all right.
                     pass
-                if not found and string.find(q, id):
+                if not found and re.match(regex, id, flags=re.IGNORECASE):
                     values.append(
                         {'value_unused': str(s.id),
                          'name': "%s (%s)" % (obj['mainId'], id)})
@@ -113,7 +125,7 @@ def autocomplete(request, what):
                  'filters':Filter,
                  'accessories':Accessory}.iteritems():
         if what == k:
-            values = v.objects.filter(Q(name__icontains=q))[:limit]
+            values = v.objects.filter(Q(name__regex=r'%s'%regex))[:limit]
             return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.name} for v in values]))
 
     return HttpResponse(simplejson.dumps([{}]))
