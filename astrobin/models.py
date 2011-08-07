@@ -134,10 +134,11 @@ class SubjectIdentifier(models.Model):
 
 
 class Location(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=255)
     latitude = models.DecimalField(max_digits=7, decimal_places=4, null=True, blank=True)
     longitude = models.DecimalField(max_digits=7, decimal_places=4, null=True, blank=True)
     altitude = models.IntegerField(null=True, blank=True)
+    user_generated = models.BooleanField()
 
     def __unicode__(self):
         return self.name
