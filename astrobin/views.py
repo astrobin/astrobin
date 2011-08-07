@@ -460,8 +460,9 @@ def image_edit_save_basic(request):
 
     (names, value) = valueReader(request, 'locations')
     for name in names:
-        k, created = Location.objects.get_or_create(name = name)
+        k, created = Location.objects.get_or_create(name=name)
         if created:
+            k.user_generated = True
             k.save()
             r = LocationRequest(
                 from_user=User.objects.get(username=settings.ASTROBIN_USER),
@@ -684,6 +685,7 @@ def user_profile_save_basic(request):
         for name in names:
             location, created = Location.objects.get_or_create(name = name)
             if created:
+                location.user_generated = True
                 location.save()
             profile.locations.add(location)
 

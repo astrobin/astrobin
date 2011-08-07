@@ -111,7 +111,7 @@ deactivate
 
 mysql -u user -p (password is astrobin)
 > create user 'astrobin'@'localhost' identified by 'astrobin';
-> create database astrobin;
+> create database astrobin character set utf8;
 
 # Initialize db
 ./scripts/syncdb.sh

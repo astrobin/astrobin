@@ -23,6 +23,7 @@ DATABASES = {
         'PORT': '',             # Set to empty string for default. Not used with sqlite3.
     }
 }
+DEFAULT_CHARSET = 'utf-8'
 
 ASTROBIN_BASE_URL = 'http://localhost:8082'
 ASTROBIN_SHORT_BASE_URL = 'http://localhost:8082'
