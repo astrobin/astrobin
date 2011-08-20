@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django import db
 
 from astrobin.models import Location
 
@@ -18,6 +19,7 @@ class Command(BaseCommand):
         reader = unicode_csv_reader(open('data/cities.txt', 'r'))
         # Skip the header:
         reader.next()
+        i = 0
         for row in reader:
             print 'Creating city: ' +  row[2]
             l = Location(name=row[2],
@@ -25,3 +27,6 @@ class Command(BaseCommand):
                          longitude=Decimal(row[6]),
                          user_generated=False)
             l.save()
+            i += 1
+            if i % 100 == 0:
+                db.reset_queries()
