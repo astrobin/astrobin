@@ -2,8 +2,10 @@ syntax: glob
 
 *.pyc
 *.swp
+*.swo
 *.dep
 *.o
+*.orig
 astrobin.db
 astrobin.pid
 static/CACHE
