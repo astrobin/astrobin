@@ -440,18 +440,19 @@ def image_edit_save_basic(request):
     image.locations.clear()
 
     (names, value) = valueReader(request, 'subjects')
-    for name in names:
-        k = None
-        try:
-            k = Subject.objects.get(Q(mainId=name))
-        except Subject.DoesNotExist:
+    if names:
+        for name in names:
+            k = None
             try:
-                sid = SubjectIdentifier.objects.get(Q(identifier=name))
-                k = Subject.objects.get(id=sid.subject.id) # FIXME: can this line be written better?
-            except SubjectIdentifier.DoesNotExist:
-                # Skip it quietly
-                continue
-        image.subjects.add(k)
+                k = Subject.objects.get(Q(mainId=name))
+            except Subject.DoesNotExist:
+                try:
+                    sid = SubjectIdentifier.objects.get(Q(identifier=name))
+                    k = Subject.objects.get(id=sid.subject.id) # FIXME: can this line be written better?
+                except SubjectIdentifier.DoesNotExist:
+                    # Skip it quietly
+                    continue
+            image.subjects.add(k)
     prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
                                 _("Enter partial name and wait for the suggestions!"),
                                 _("No results. Sorry.")]
@@ -459,21 +460,22 @@ def image_edit_save_basic(request):
     form.fields['subjects'].initial = u', '.join(x.mainId for x in getattr(image, 'subjects').all())
 
     (names, value) = valueReader(request, 'locations')
-    for name in names:
-        k, created = Location.objects.get_or_create(name=name)
-        if created:
-            k.user_generated = True
-            k.save()
-            r = LocationRequest(
-                from_user=User.objects.get(username=settings.ASTROBIN_USER),
-                to_user=image.user,
-                location=k,
-                fulfilled=False,
-                message='') # not implemented yet
-            r.save()
-            push_request(image.user, r)
+    if names:
+        for name in names:
+            k, created = Location.objects.get_or_create(name=name)
+            if created:
+                k.user_generated = True
+                k.save()
+                r = LocationRequest(
+                    from_user=User.objects.get(username=settings.ASTROBIN_USER),
+                    to_user=image.user,
+                    location=k,
+                    fulfilled=False,
+                    message='') # not implemented yet
+                r.save()
+                push_request(image.user, r)
 
-        image.locations.add(k)
+            image.locations.add(k)
     prefill_dict['locations'] = [jsonDump(image.locations.all()),
                                  _("Enter partial name and wait for the suggestions!"),
                                  _("No results. Sorry.")]
