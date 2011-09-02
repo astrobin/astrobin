@@ -157,4 +157,10 @@ class LocationEditForm(forms.ModelForm):
 
     class Meta:
         model = Location
+        fields = (
+            'name',
+            'latitude',
+            'longitude',
+            'altitude',
+        )
 
