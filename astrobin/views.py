@@ -1130,6 +1130,18 @@ def location_save(request):
             context_instance=RequestContext(request))
 
     form.save()
+
+    # Now let's mark the request as fullfilled, if it exists.
+    try:
+        req = LocationRequest.objects.get(
+            from_user = request.user,
+            location = id,
+            fulfilled = False)
+        req.fulfilled = True
+        req.save()
+    except:
+        pass
+
     return render_to_response('location/edit.html',
         {'form' : form,
          'id'   : id,
