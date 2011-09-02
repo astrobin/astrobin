@@ -1117,6 +1117,7 @@ def location_edit(request, id):
         },
         context_instance=RequestContext(request))
 
+
 @login_required
 @require_POST
 def location_save(request):
