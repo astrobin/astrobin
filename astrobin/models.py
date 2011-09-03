@@ -214,6 +214,17 @@ class Image(models.Model):
         self.uploaded = datetime.now()
         super(Image, self).save(*args, **kwargs)
 
+        # Find requests and mark as fulfilled
+        try:
+            req = ImageRequest.objects.get(
+                image = self.id,
+                type = 'INFO',
+                fulfilled = False)
+            req.fulfilled = True
+            req.save()
+        except:
+            pass
+
     def process(self):
         store_image.delay(self, solve=True, callback=image_stored_callback)
 
