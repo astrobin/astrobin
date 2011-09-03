@@ -216,12 +216,13 @@ class Image(models.Model):
 
         # Find requests and mark as fulfilled
         try:
-            req = ImageRequest.objects.get(
+            req = ImageRequest.objects.filter(
                 image = self.id,
                 type = 'INFO',
                 fulfilled = False)
-            req.fulfilled = True
-            req.save()
+            for r in req:
+                r.fulfilled = True
+                r.save()
         except:
             pass
 
