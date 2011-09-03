@@ -237,7 +237,7 @@ var image_detail = {
                 title: '',
                 body: '',
             },
-            element: 'a.request-additional-information',
+            element: 'a.image-request-additional-information',
             url    : '/request/image/additional_information/'
         },
 
@@ -246,7 +246,7 @@ var image_detail = {
                 title: '',
                 body: '',
             },
-            element: 'a.request-fits',
+            element: 'a.image-request-fits',
             url    : '/request/image/fits/'
         }
     },
@@ -534,16 +534,16 @@ var image_detail = {
         });
     },
 
-    setup_request_additional_information: function() {
-        var dlg = $(image_detail.config.request_additional_information_action.element).click(function() {
+    setup_image_request_additional_information: function() {
+        var dlg = $(image_detail.config.image_request_additional_information_action.element).click(function() {
             $('<div id="dialog-confirm" title="' +
-              image_detail.config.request_additional_information_action.dialog.title +
+              image_detail.config.image_request_additional_information_action.dialog.title +
               '"></div>')
                 .html('\
                         <p>\
                             <span class="ui-icon ui-icon-info"\
                                   style="float:left; margin:0 7px 20px 0;">\
-                            </span>' + image_detail.config.request_additional_information_action.dialog.body + '\
+                            </span>' + image_detail.config.image_request_additional_information_action.dialog.body + '\
                         </p>')
                 .dialog({
                     resizable: false,
@@ -552,7 +552,7 @@ var image_detail = {
                         Ok: function() {
                             $(this).dialog('close');
                             $.ajax({
-                                url: image_detail.config.request_additional_information_action.url +
+                                url: image_detail.config.image_request_additional_information_action.url +
                                      image_detail.globals.image_id + '/',
                                 success: function() {
                                     dlg.dialog('close');
@@ -567,16 +567,16 @@ var image_detail = {
         });
     },
 
-    setup_request_fits: function() {
-        var dlg = $(image_detail.config.request_fits_action.element).click(function() {
+    setup_image_request_fits: function() {
+        var dlg = $(image_detail.config.image_request_fits_action.element).click(function() {
             $('<div id="dialog-confirm" title="' +
-              image_detail.config.request_fits_action.dialog.title +
+              image_detail.config.image_request_fits_action.dialog.title +
               '"></div>')
                 .html('\
                         <p>\
                             <span class="ui-icon ui-icon-info"\
                                   style="float:left; margin:0 7px 20px 0;">\
-                            </span>' + image_detail.config.request_fits_action.dialog.body + '\
+                            </span>' + image_detail.config.image_request_fits_action.dialog.body + '\
                         </p>')
                 .dialog({
                     resizable: false,
@@ -585,7 +585,7 @@ var image_detail = {
                         Ok: function() {
                             $(this).dialog('close');
                             $.ajax({
-                                url: image_detail.config.request_fits_action.url +
+                                url: image_detail.config.image_request_fits_action.url +
                                      image_detail.globals.image_id + '/',
                                 success: function() {
                                     dlg.dialog('close');
@@ -627,8 +627,8 @@ var image_detail = {
         image_detail.setup_bring_to_attention();
 
         /* Requests */
-        image_detail.setup_request_additional_information();
-        image_detail.setup_request_fits();
+        image_detail.setup_image_request_additional_information();
+        image_detail.setup_image_request_fits();
     }
 };
 
