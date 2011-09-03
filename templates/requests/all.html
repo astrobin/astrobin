@@ -30,7 +30,9 @@
                         {% trans "Yes." %}
                     {% else %}
                             {% trans "No." %}
+                            {% if req.location %}
                             <a href="{% url location_edit req.location.id %}">{% trans "Do it now?" %}</a>
+                            {% endif %}
                     {% endif %}
                     </td>
                 </tr>
