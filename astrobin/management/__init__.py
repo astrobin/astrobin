@@ -49,6 +49,11 @@ def create_notice_types(app, created_models, verbosity, **kwargs):
         _('Image not solved'),
         _('Plate solving the image has failed'))
 
+    notification.create_notice_type(
+        'request_fulfilled',
+        _('Request fulfilled'),
+        _('The user has fulfilled your request'))
+
 
 signals.post_syncdb.connect(create_notice_types, sender=notification)
 
