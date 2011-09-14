@@ -22,18 +22,21 @@
                 <input type="hidden" name="to_user" value="{{message.from_user}}"/>
                 <input id="send" class="button submit-button" type="button" value="{% trans "Send" %} &rarr;" />
             </form>
-            <script type="text/javascript">
-                $('form#private-message #send').one('click', function() {
-                    $.post('{% url send_private_message %}',
-                           $("form#private-message").serialize(),
-                           function() {
-                               $('#message-reply').html('\
-                                   <p>{% trans "Message sent" %}.</p>\
-                                ');
-                           });
-                });
-            </script>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    $('form#private-message #send').one('click', function() {
+        $.post('{% url send_private_message %}',
+               $("form#private-message").serialize(),
+               function() {
+                   $('#message-reply').html('\
+                       <p>{% trans "Message sent" %}.</p>\
+                    ');
+               });
+    });
+</script>
 {% endblock %}
