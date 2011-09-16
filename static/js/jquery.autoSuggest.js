@@ -354,7 +354,7 @@
 					org_li.before(item.html(data[opts.selectedItemProp]).append(close));
                     if (edit !== undefined)
                         org_li.before(item.html(data[opts.selectedItemProp]).append(close).append(edit));
-					opts.selectionAdded.call(this, org_li.prev());	
+					opts.selectionAdded.call(this, org_li.prev());
 				}
 				
 				function moveSelection(direction){
