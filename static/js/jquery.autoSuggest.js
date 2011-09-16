@@ -341,6 +341,7 @@
                     if (data[opts.selectedValuesProp] !== undefined) {
                         var edit_url = '/' + opts.asHtmlID + '/edit/' + data[opts.selectedValuesProp];
                         edit = $('<a href="' + edit_url + '" class="as-edit"><img alt="&rarr;" src="/static/icons/iconic/black/edit.png"/></a>');
+                        // TODO: this should also be done in a jQuery dialog.
                     }
 
 					var close = $('<a href="#" class="as-close"><img alt="&times;" src="/static/icons/iconic/black/trash_fill_8x8.png"/></a>').click(function(){
