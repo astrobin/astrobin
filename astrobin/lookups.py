@@ -39,12 +39,12 @@ def autocomplete(request, what):
         # First search for the mainId
         values = Subject.objects.filter(Q(mainId__regex=r'%s'%regex))[:limit]
         if values:
-            return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.mainId} for v in values]))
+            return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.mainId} for v in values]))
         # If not found, search for the alternative ids
         values = SubjectIdentifier.objects.filter(Q(identifier__regex=r'%s'%regex))[:limit]
         if values:
             return HttpResponse(simplejson.dumps(
-                [{'value_unused': str(v.subject.id), 'name': "%s (%s)" % (v.subject.mainId, v.identifier) } for v in values]))
+                [{'id': str(v.subject.id), 'name': "%s (%s)" % (v.subject.mainId, v.identifier) } for v in values]))
         # If we're still not finding it, then query Simbad
         url = settings.SIMBAD_SEARCH_QUERY_URL + urllib2.quote(q)
         json_string = ""
@@ -92,7 +92,7 @@ def autocomplete(request, what):
             if re.match(regex, obj['mainId'], flags=re.IGNORECASE):
                 found = True
                 values.append(
-                    {'value_unused': str(s.id),
+                    {'id': str(s.id),
                      'name': obj['mainId']})
 
             # The id that matched q is actually one of the
@@ -110,7 +110,7 @@ def autocomplete(request, what):
                     pass
                 if not found and re.match(regex, id, flags=re.IGNORECASE):
                     values.append(
-                        {'value_unused': str(s.id),
+                        {'id': str(s.id),
                          'name': "%s (%s)" % (obj['mainId'], id)})
 
         f.close()
@@ -126,7 +126,7 @@ def autocomplete(request, what):
                  'accessories':Accessory}.iteritems():
         if what == k:
             values = v.objects.filter(Q(name__regex=r'%s'%regex))[:limit]
-            return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.name} for v in values]))
+            return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.name} for v in values]))
 
     return HttpResponse(simplejson.dumps([{}]))
 
@@ -150,12 +150,12 @@ def autocomplete_user(request, what):
         if what == k:
             values = v.all().filter(Q(name__icontains=request.GET['q']))
 
-    return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.name} for v in values]))
+    return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.name} for v in values]))
 
 
 @login_required
 @require_GET
 def autocomplete_usernames(request):
     values = User.objects.filter(Q(username__icontains=request.GET['q']))
-    return HttpResponse(simplejson.dumps([{'value_unused': str(v.id), 'name': v.username} for v in values]))
+    return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.username} for v in values]))
 
