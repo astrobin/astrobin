@@ -99,7 +99,7 @@ def index(request):
 
     return object_list(
         request, 
-        queryset=Image.objects.filter(is_stored=True),
+        queryset=Image.objects.filter(is_stored=True)[:15],
         template_name='index.html',
         template_object_name='image',
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
