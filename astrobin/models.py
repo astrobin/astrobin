@@ -214,6 +214,24 @@ class Image(models.Model):
         self.uploaded = datetime.now()
         super(Image, self).save(*args, **kwargs)
 
+        # Find requests and mark as fulfilled
+        try:
+            req = ImageRequest.objects.filter(
+                image = self.id,
+                type = 'INFO',
+                fulfilled = False)
+            for r in req:
+                r.fulfilled = True
+                r.save()
+                push_notification(
+                    [r.from_user], 'request_fulfilled',
+                    {'object': self,
+                     'object_url': settings.ASTROBIN_SHORT_BASE_URL + self.get_absolute_url(),
+                     'originator': r.to_user,
+                     'originaror_url': r.to_user.get_absolute_url()})
+        except:
+            pass
+
     def process(self):
         store_image.delay(self, solve=True, callback=image_stored_callback)
 
