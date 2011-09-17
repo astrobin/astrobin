@@ -187,7 +187,7 @@
 								e.preventDefault();
 								var n_data = {};
 								n_data[opts.selectedItemProp] = i_input;
-								n_data[opts.selectedValuesProp] = undefined;
+								n_data[opts.selectedValuesProp] = -1;
 								var lis = $("li", selections_holder).length;
 								add_selected_item(n_data, "00"+(lis+1));
 								input.val("");
@@ -335,8 +335,8 @@
 							$(this).addClass("selected");
 						}).mousedown(function(){ input_focus = false; });
 
-					var edit = undefined;
-					if (data[opts.selectedValuesProp] !== undefined) {
+					var edit;
+					if (data[opts.selectedValuesProp] !== -1) {
 						var edit_url = '/' + opts.asHtmlID + '/edit/' + data[opts.selectedValuesProp];
 						edit = $('<a href="' + edit_url + '" class="as-edit"><img alt="&rarr;" src="/static/icons/iconic/black/edit.png"/></a>');
 						// TODO: this should also be done in a jQuery dialog.
