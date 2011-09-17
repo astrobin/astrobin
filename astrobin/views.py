@@ -952,6 +952,17 @@ def send_private_message(request):
         push_message(recipient, {'sender':request.user.username,
                                  'subject': subject,
                                  'message_id': message.id if message is not None else 0})
+        try:
+            reqs = ImageRequest.objects.filter(
+                to_user = request.user,
+                from_user = recipient,
+                type = "FITS",
+                fulfilled = False)
+            for req in reqs:
+                req.fulfilled = True
+                req.save()
+        except:
+            pass
 
         return ajax_success()
     return ajax_fail()
