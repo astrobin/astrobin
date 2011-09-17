@@ -327,22 +327,20 @@
 				}
 				
 				function add_selected_item(data, num){
-                    //hidden_value = data[opts.selectedValuesProp];
-                    //if (hidden_value === undefined)
-                    hidden_value = data[opts.selectedItemProp];
-                    values_input.val(values_input.val() + hidden_value + ",");
+					hidden_value = data[opts.selectedItemProp];
+					values_input.val(values_input.val() + hidden_value + ",");
 					var item = $('<li class="as-selection-item" id="as-selection-'+num+'"></li>').click(function(){
 							opts.selectionClick.call(this, $(this));
 							selections_holder.children().removeClass("selected");
 							$(this).addClass("selected");
 						}).mousedown(function(){ input_focus = false; });
 
-                    var edit = undefined;
-                    if (data[opts.selectedValuesProp] !== undefined) {
-                        var edit_url = '/' + opts.asHtmlID + '/edit/' + data[opts.selectedValuesProp];
-                        edit = $('<a href="' + edit_url + '" class="as-edit"><img alt="&rarr;" src="/static/icons/iconic/black/edit.png"/></a>');
-                        // TODO: this should also be done in a jQuery dialog.
-                    }
+					var edit = undefined;
+					if (data[opts.selectedValuesProp] !== undefined) {
+						var edit_url = '/' + opts.asHtmlID + '/edit/' + data[opts.selectedValuesProp];
+						edit = $('<a href="' + edit_url + '" class="as-edit"><img alt="&rarr;" src="/static/icons/iconic/black/edit.png"/></a>');
+						// TODO: this should also be done in a jQuery dialog.
+					}
 
 					var close = $('<a href="#" class="as-close"><img alt="&times;" src="/static/icons/iconic/black/trash_fill_8x8.png"/></a>').click(function(){
 							values_input.val(values_input.val().replace(","+data[opts.selectedValuesProp]+",",","));
@@ -352,8 +350,8 @@
 							return false;
 						});
 					org_li.before(item.html(data[opts.selectedItemProp]).append(close));
-                    if (edit !== undefined)
-                        org_li.before(item.html(data[opts.selectedItemProp]).append(close).append(edit));
+					if (edit !== undefined)
+						org_li.before(item.html(data[opts.selectedItemProp]).append(close).append(edit));
 					opts.selectionAdded.call(this, org_li.prev());
 				}
 				
@@ -381,4 +379,4 @@
 			});
 		}
 	}
-})(jQuery);  	
+})(jQuery);
