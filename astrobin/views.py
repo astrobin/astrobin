@@ -7,6 +7,7 @@ from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import create_object
 from django.core.urlresolvers import reverse
+from django.core.exceptions import MultipleObjectsReturned
 from django.conf import settings
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
@@ -50,16 +51,37 @@ def valueReader(request, field):
     return items, value
 
 
+def get_or_create_location(prop, value):
+    k = None
+    created = False
+
+    try:
+        return Location.objects.get(id=value)
+    except ValueError:
+        pass
+
+    try:
+        k, created = Location.objects.get_or_create(**{prop : value})
+    except MultipleObjectsReturned:
+        k = Location.objects.filter(**{prop : value})[0]
+
+    if created:
+        k.user_generated = True
+        k.save()
+
+    return k
+
+
 def jsonDump(all):
     if len(all) > 0:
-        return simplejson.dumps([{'value_unused': i.id, 'name': i.name} for i in all])
+        return simplejson.dumps([{'id': i.id, 'name': i.name} for i in all])
     else:
         return []
 
 
 def jsonDumpSubjects(all):
     if len(all) > 0:
-        return simplejson.dumps([{'value_unused': i.id, 'name': i.mainId} for i in all])
+        return simplejson.dumps([{'id': i.id, 'name': i.mainId} for i in all])
     else:
         return []
 
@@ -462,18 +484,15 @@ def image_edit_save_basic(request):
     (names, value) = valueReader(request, 'locations')
     if names:
         for name in names:
-            k, created = Location.objects.get_or_create(name=name)
-            if created:
-                k.user_generated = True
-                k.save()
-                r = LocationRequest(
-                    from_user=User.objects.get(username=settings.ASTROBIN_USER),
-                    to_user=image.user,
-                    location=k,
-                    fulfilled=False,
-                    message='') # not implemented yet
-                r.save()
-                push_request(image.user, r)
+            k = get_or_create_location("name", name)
+            r = LocationRequest(
+                from_user=User.objects.get(username=settings.ASTROBIN_USER),
+                to_user=image.user,
+                location=k,
+                fulfilled=False,
+                message='') # not implemented yet
+            r.save()
+            push_request(image.user, r)
 
             image.locations.add(k)
     prefill_dict['locations'] = [jsonDump(image.locations.all()),
@@ -685,10 +704,7 @@ def user_profile_save_basic(request):
         profile.locations.clear()
         (names, value) = valueReader(request, 'locations')
         for name in names:
-            location, created = Location.objects.get_or_create(name = name)
-            if created:
-                location.user_generated = True
-                location.save()
+            location = get_or_create_location("name", name)
             profile.locations.add(location)
 
         profile.website  = form.cleaned_data['website']
