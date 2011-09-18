@@ -246,6 +246,7 @@ def image_detail(request, id):
                          'is_revision': is_revision,
                          'revision_image': revision_image,
                          'is_ready': image.is_stored,
+                         'full': 'full' in request.GET,
                         })
 
 

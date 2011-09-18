@@ -112,38 +112,40 @@
                         </li>
                     </ul>
                 </li>
+                {% if not full %}
                 <li class="rating"><div id="rating"></div></li>
+                {% endif %}
             </ul>
             <div id="main-image">
             {% if is_ready %}
                 {% if is_revision %}
                     {% with revision_image as image %}
                         {% if inverted %}
-                        <a class="zoomable" href="http://astrobin_images.{{s3_url}}/{{image.filename}}_inverted{{image.original_ext}}">
-                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                        <a class="zoomable" href="{% url image_detail image.id %}?mod=inverted{% if not full %}&full{% endif %}">
+                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         </a>
                         {% endif %}
                         {% if solved %}
                         <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved.png" alt="{{image.title|escape}}"/>
                         {% endif %}
                         {% if not inverted and not solved %}
-                        <a class="zoomable" href="http://astrobin_images.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                        <a class="zoomable" href="{% url image_detail image.id %}{% if not full %}?full{% endif %}">
+                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         </a>
                         {% endif %}
                     {% endwith %}
                 {% else %}
                     {% if inverted %}
-                    <a class="zoomable" href="http://astrobin_images.{{s3_url}}/{{image.filename}}_inverted{{image.original_ext}}">
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                    <a class="zoomable" href="{% url image_detail image.id %}?mod=inverted{% if not full %}&full{% endif %}">
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                     </a>
                     {% endif %}
                     {% if solved %}
                     <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved.png" alt="{{image.title|escape}}"/>
                     {% endif %}
                     {% if not inverted and not solved %}
-                    <a class="zoomable" href="http://astrobin_images.{{s3_url}}/{{image.filename}}{{image.original_ext}}">
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                    <a class="zoomable" href="{% url image_detail image.id %}{% if not full %}?full{% endif %}">
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}"/>
                     </a>
                     {% endif %}
                 {% endif %}
@@ -155,6 +157,8 @@
             </p>
             {% endif %}
             </div>
+
+            {% if not full %}
             <div class="main-image-data">
                 <ul>
                     <li class="title">{{image.title|escape|default:_("(no title)")}}</li>
@@ -265,6 +269,7 @@
             </div>
             {% endif %}
         </div>
+        {% endif %} <!-- full -->
     </div>
 {% endblock %}
 
