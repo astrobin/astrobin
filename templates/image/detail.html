@@ -121,7 +121,7 @@
                 {% if is_revision %}
                     {% with revision_image as image %}
                         {% if inverted %}
-                        <a class="zoomable" href="{% url image_detail image.id %}?mod=inverted{% if not full %}&full{% endif %}">
+                        <a class="zoomable" href="{% url image_detail image.image.id %}?r={{image.id}}&mod=inverted{% if not full %}&full{% endif %}">
                             <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         </a>
                         {% endif %}
@@ -129,7 +129,7 @@
                         <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved.png" alt="{{image.title|escape}}"/>
                         {% endif %}
                         {% if not inverted and not solved %}
-                        <a class="zoomable" href="{% url image_detail image.id %}{% if not full %}?full{% endif %}">
+                        <a class="zoomable" href="{% url image_detail image.image.id %}{% if not full %}?r={{image.id}}&full{% endif %}">
                             <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         </a>
                         {% endif %}
