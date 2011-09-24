@@ -132,6 +132,9 @@ class SubjectIdentifier(models.Model):
     class Meta:
         app_label = 'astrobin'
 
+    def __unicode__(self):
+        return self.identifier
+
 
 class Location(models.Model):
     name = models.CharField(max_length=255)
@@ -280,6 +283,9 @@ class Acquisition(models.Model):
     class Meta:
         app_label = 'astrobin'
 
+    def __unicode__(self):
+        return self.image.title
+
 
 class DeepSky_Acquisition(Acquisition):
     acquisition_type = models.CharField(max_length=2)
@@ -290,9 +296,6 @@ class DeepSky_Acquisition(Acquisition):
     class Meta:
         app_label = 'astrobin'
         ordering = ['acquisition_type']
-
-    def __unicode__(self):
-        return self.image.title
 
 
 class SolarSystem_Acquisition(Acquisition):
@@ -394,3 +397,4 @@ def create_user_profile(sender, instance, created, **kwargs):
         profile, created = UserProfile.objects.get_or_create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
+
