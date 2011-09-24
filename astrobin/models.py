@@ -242,7 +242,7 @@ class Image(models.Model):
         delete_image.delay(self.filename, self.original_ext) 
 
         # Delete references
-        for r in Request.objects.filter(image=self):
+        for r in ImageRequest.objects.filter(image=self):
             r.delete()
 
         super(Image, self).delete(*args, **kwargs)
