@@ -152,7 +152,7 @@ class Location(models.Model):
 
 def image_solved_callback(image, solved, clean_path):
     image.is_solved = solved
-    if image.is_solved:
+    if image.__class__ == 'Image' and image.is_solved:
         # grab objects from list
         list_fn = settings.UPLOADS_DIRECTORY + image.filename + '-list.txt'
         f = open(list_fn, 'r')
@@ -257,6 +257,9 @@ class ImageRevision(models.Model):
     original_ext = models.CharField(max_length=6, editable=False)
     uploaded = models.DateTimeField(editable=False)
 
+    is_stored = models.BooleanField(editable=False)
+    is_solved = models.BooleanField(editable=False)
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('uploaded', '-id')
@@ -267,6 +270,9 @@ class ImageRevision(models.Model):
     def save(self, *args, **kwargs):
         self.uploaded = datetime.now()
         super(ImageRevision, self).save(*args, **kwargs)
+
+    def process(self):
+        store_image.delay(self, solve=True, callback=image_stored_callback)
 
     def delete(self, *args, **kwargs):
         delete_image_from_s3(self.filename, self.original_ext) 

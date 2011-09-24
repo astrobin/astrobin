@@ -120,6 +120,8 @@ def image_detail(request, id):
     from moon import MoonPhase;
 
     image = get_object_or_404(Image, pk=id)
+    is_ready = image.is_stored
+
     already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
     votes = image.rating.votes
     score = image.rating.score
@@ -222,6 +224,7 @@ def image_detail(request, id):
         revision_id = int(request.GET['r'])
         revision_image = ImageRevision.objects.get(id=revision_id)
         revisions = revisions.exclude(id=revision_id)
+        is_ready = revision_image.is_stored
 
     return object_detail(
         request,
@@ -245,7 +248,7 @@ def image_detail(request, id):
                          'revisions': revisions,
                          'is_revision': is_revision,
                          'revision_image': revision_image,
-                         'is_ready': image.is_stored,
+                         'is_ready': is_ready,
                          'full': 'full' in request.GET,
                         })
 
@@ -1113,10 +1116,14 @@ def image_revision_upload_process(request):
         file = request.FILES["file"]
 
     filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    store_image_in_backend(file, filename, original_ext)
+    destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
+    for chunk in file.chunks():
+        destination.write(chunk)
+        destination.close()
 
     image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext)
     image_revision.save()
+    image_revision.process()
 
     followers = [x.from_userprofile.user
                  for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]

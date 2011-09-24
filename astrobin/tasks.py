@@ -61,7 +61,18 @@ def store_image(image, solve, callback=None):
     except S3CreateError, exc:
         store_image.retry(exc=exc)
 
-    push_notification([image.user], 'image_ready', {'object_url':image.get_absolute_url()})
+    user = None
+    img = None
+
+    try:
+        user = image.user
+        img = image
+    except AttributeError:
+        # It's a revision
+        user = image.image.user
+        img = image.image
+
+    push_notification([user], 'image_ready', {'object_url':img.get_absolute_url()})
 
     if callback:
         callback(image, True, solve)
@@ -70,5 +81,4 @@ def store_image(image, solve, callback=None):
 @task
 def delete_image(filename, ext):
     delete_image_from_backend(filename, ext)
-
 

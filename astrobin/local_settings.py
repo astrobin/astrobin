@@ -181,6 +181,7 @@ BROKER_PASSWORD = 'astrobin'
 BROKER_VHOST = 'astrobin'
 
 CELERY_RESULT_BACKEND = 'database'
+CELERY_RESULT_DBURI = "mysql://astrobin:astrobin@localhost/astrobin"
 CELERY_IMPORTS = ('astrobin.tasks', )
 CELERYD_NODES = "w1 w2"
 CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG"
