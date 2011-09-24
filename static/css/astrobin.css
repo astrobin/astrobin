@@ -1523,7 +1523,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
-  display: inline-block;
+  display: block;
+  height: 24px;
 }
 #image-detail ul.topnav > li {
   display: inline-block;
