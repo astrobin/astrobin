@@ -465,19 +465,17 @@ def image_edit_save_basic(request):
     image.subjects.clear()
     image.locations.clear()
 
-    (names, value) = valueReader(request, 'subjects')
-    if names:
-        for name in names:
+    (ids, value) = valueReader(request, 'subjects')
+    if ids:
+        for id in ids:
             k = None
             try:
-                k = Subject.objects.get(Q(mainId=name))
-            except Subject.DoesNotExist:
-                try:
-                    sid = SubjectIdentifier.objects.get(Q(identifier=name))
-                    k = Subject.objects.get(id=sid.subject.id) # FIXME: can this line be written better?
-                except SubjectIdentifier.DoesNotExist:
-                    # Skip it quietly
-                    continue
+                k = Subject.objects.get(Q(id=id))
+            except (Subject.DoesNotExist, ValueError):
+                ''' Skip it quietly. "Subject" doesn't care about values
+                like {-1, "Foo"} because we're not adding new subjects
+                ever. We're just sticking to Simbad. '''
+                continue
             image.subjects.add(k)
     prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
                                 _("Enter partial name and wait for the suggestions!"),
@@ -485,18 +483,23 @@ def image_edit_save_basic(request):
 
     form.fields['subjects'].initial = u', '.join(x.mainId for x in getattr(image, 'subjects').all())
 
-    (names, value) = valueReader(request, 'locations')
-    if names:
-        for name in names:
-            k = get_or_create_location("name", name)
-            r = LocationRequest(
-                from_user=User.objects.get(username=settings.ASTROBIN_USER),
-                to_user=image.user,
-                location=k,
-                fulfilled=False,
-                message='') # not implemented yet
-            r.save()
-            push_request(image.user, r)
+    (ids, value) = valueReader(request, 'locations')
+    if ids:
+        for id in ids:
+            try:
+                k = Location.objects.get(Q(id=id));
+            except (Location.DoesNotExist, ValueError):
+                k = Location(name=id)
+                k.save();
+
+                r = LocationRequest(
+                    from_user=User.objects.get(username=settings.ASTROBIN_USER),
+                    to_user=image.user,
+                    location=k,
+                    fulfilled=False,
+                    message='') # not implemented yet
+                r.save()
+                push_request(image.user, r)
 
             image.locations.add(k)
     prefill_dict['locations'] = [jsonDump(image.locations.all()),
@@ -706,10 +709,25 @@ def user_profile_save_basic(request):
     if form.is_valid():
         profile = UserProfile.objects.get(user = request.user)
         profile.locations.clear()
-        (names, value) = valueReader(request, 'locations')
-        for name in names:
-            location = get_or_create_location("name", name)
-            profile.locations.add(location)
+        (ids, value) = valueReader(request, 'locations')
+        for id in ids:
+            k = None
+            try:
+                k = Location.objects.get(Q(id=id));
+            except (Location.DoesNotExist, ValueError):
+                k = Location(name=id)
+                k.save();
+
+                r = LocationRequest(
+                    from_user=User.objects.get(username=settings.ASTROBIN_USER),
+                    to_user=request.user,
+                    location=k,
+                    fulfilled=False,
+                    message='') # not implemented yet
+                r.save()
+                push_request(request.user, r)
+
+            profile.locations.add(k)
 
         profile.website  = form.cleaned_data['website']
         profile.job      = form.cleaned_data['job']
