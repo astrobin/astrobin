@@ -487,7 +487,11 @@ def image_edit_save_basic(request):
     if ids:
         for id in ids:
             try:
-                k = Location.objects.get(Q(id=id));
+                try:
+                    id = float(id);
+                    k = Location.objects.get(Q(id=id))
+                except ValueError:
+                    k = Location.objects.get(Q(name=id))
             except (Location.DoesNotExist, ValueError):
                 k = Location(name=id)
                 k.save();
@@ -713,7 +717,11 @@ def user_profile_save_basic(request):
         for id in ids:
             k = None
             try:
-                k = Location.objects.get(Q(id=id));
+                try:
+                    id = float(id)
+                    k = Location.objects.get(Q(id=id))
+                except ValueError:
+                    k = Location.objects.get(Q(name=id))
             except (Location.DoesNotExist, ValueError):
                 k = Location(name=id)
                 k.save();
