@@ -16,6 +16,7 @@ from django.views.decorators.http import require_http_methods, require_GET, requ
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.utils.translation import ugettext as _
 
 import simplejson
 import urllib2
@@ -101,7 +102,8 @@ def autocomplete(request, what):
                 if not found and re.match(regex, id, flags=re.IGNORECASE):
                     values.append(
                         {'id': str(s.id),
-                         'name': "%s (%s)" % (obj['mainId'], id)})
+                         'name': "<em>%s</em>: %s (<em>%s</em>: %s)" %
+                         (_("Match"), obj['mainId'], _("Found as"), id)})
 
         f.close()
         return HttpResponse(simplejson.dumps(values))
