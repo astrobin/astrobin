@@ -36,16 +36,6 @@ def autocomplete(request, what):
 
     # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
-        # First search for the mainId
-        values = Subject.objects.filter(Q(mainId__regex=r'%s'%regex))[:limit]
-        if values:
-            return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.mainId} for v in values]))
-        # If not found, search for the alternative ids
-        values = SubjectIdentifier.objects.filter(Q(identifier__regex=r'%s'%regex))[:limit]
-        if values:
-            return HttpResponse(simplejson.dumps(
-                [{'id': str(v.subject.id), 'name': "%s (%s)" % (v.subject.mainId, v.identifier) } for v in values]))
-        # If we're still not finding it, then query Simbad
         url = settings.SIMBAD_SEARCH_QUERY_URL + urllib2.quote(q)
         json_string = ""
         try:
