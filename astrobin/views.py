@@ -1016,6 +1016,48 @@ def send_private_message(request):
 
 @login_required
 @require_GET
+def messages_new(request, username):
+    form = PrivateMessageForm()
+    return render_to_response('messages/new.html',
+        {'form': form,
+         'to_user': username},
+        context_instance=RequestContext(request))
+
+
+@login_required
+@require_POST
+def messages_save(request):
+    form = PrivateMessageForm(request.POST)
+    if form.is_valid():
+        subject = form.cleaned_data['subject']
+        body    = form.cleaned_data['body']
+        to_user = request.POST['to_user']
+
+        recipient = User.objects.get(username=to_user)
+        message = persistent_messages.add_message(
+            request, persistent_messages.SUCCESS, body,
+            subject=subject, user=recipient, from_user=request.user)
+        push_message(recipient, {'sender':request.user.username,
+                                 'subject': subject,
+                                 'message_id': message.id if message is not None else 0})
+        try:
+            reqs = ImageRequest.objects.filter(
+                to_user = request.user,
+                from_user = recipient,
+                type = "FITS",
+                fulfilled = False)
+            for req in reqs:
+                req.fulfilled = True
+                req.save()
+        except:
+            pass
+
+        return render_to_response('messages/sent.html',
+            context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
 def messages_all(request):
     return object_list(
         request,
