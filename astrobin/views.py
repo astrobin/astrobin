@@ -1229,7 +1229,8 @@ def location_save(request):
     form = LocationEditForm(request.POST, instance=location)
     if not form.is_valid():
         return render_to_response('location/edit.html',
-            {'form': form},
+            {'form': form,
+             'id': id},
             context_instance=RequestContext(request))
 
     form.save()
