@@ -17,10 +17,10 @@
         <p class="body">{{ message.message|escape}}</p>
         <h3>{% trans "Reply" %}</h3>
         <div id="message-reply" class="sided-main-content-popup">
-            <form id="private-message" action="" method="post">
+            <form id="private-message" action="{% url messages_save %}" method="post">{% csrf_token %}
                 {{private_message_form.as_p}}
                 <input type="hidden" name="to_user" value="{{message.from_user}}"/>
-                <input id="send" class="button submit-button" type="button" value="{% trans "Send" %} &rarr;" />
+                <input id="send" class="button submit-button" type="submit" value="{% trans "Send" %} &rarr;" />
             </form>
         </div>
     </div>

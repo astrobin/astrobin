@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="info-side-bar">
+        <p>
+            {% blocktrans %}
+            Send a private message to a user. Messages are only shared
+            between you and the recipient.
+            {% endblocktrans %}
+        </p>
+    </div>
+    <div class="sided-main-content">
+        <h1>{% trans "Write a new private message to" %} {{to_user}}</h1>
+        <form action="{% url messages_save %}" method="post">{% csrf_token %}
+            {{form.as_p}}
+            <input type="hidden" name="to_user" value="{{to_user}}" />
+            <input class="button submit-button" type="submit" value="{% trans "Send" %} &rarr;" />
+        </form>
+    </div>
+{% endblock %}
+
