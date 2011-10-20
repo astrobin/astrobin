@@ -946,7 +946,11 @@ def follow(request, username):
                       {'object':username,
                        'object_url':to_profile.get_absolute_url()})
 
-    return ajax_success()
+    if request.is_ajax():
+        return ajax_success()
+    else:
+        return HttpResponseRedirect(request.GET['next'])
+
 
 @login_required
 @require_GET
@@ -962,7 +966,11 @@ def unfollow(request, username):
                       {'object':username,
                        'object_url':to_profile.get_absolute_url()})
 
-    return ajax_success()
+    if request.is_ajax():
+        return ajax_success()
+    else:
+        return HttpResponseRedirect(request.GET['next'])
+
 
 @login_required
 @require_GET

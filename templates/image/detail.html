@@ -77,7 +77,8 @@
                                     {% if request.user.is_authenticated %}
                                     <li class="bg-icon {% if follows %}icon-unfollow{% else %}icon-follow{% endif %}">
                                         <span class="text">
-                                            <a class="{% if follows %}unfollow{% else %}follow{% endif %}" href="#">
+                                            <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
+                                               href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}?next={{request.path}}">
                                                 {% if follows %}
                                                     {% trans "Stop following" %}
                                                 {% else %}
