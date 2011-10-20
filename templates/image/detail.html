@@ -190,14 +190,14 @@
                     {% if is_revision %}
                     <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
                         <a href="{{image.get_absolute_url}}">
-                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
+                            <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
                         </a>
                     </div>
                     {% endif %}
                     {% for i in revisions %}
                     <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
                         <a href="{{i.get_absolute_url}}">
-                            <img src="http://astrobin_images.{{s3_url}}/{{i.filename}}_small_thumb{{i.original_ext}}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
+                            <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
                         </a>
                     </div>
                     {% endfor %}
@@ -263,7 +263,7 @@
             {% for i in related_images %}
                 <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
                     <a href="{{i.object.get_absolute_url}}/">
-                        <img src="http://astrobin_images.{{s3_url}}/{{i.object.filename}}_small_thumb{{i.object.original_ext}}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
+                        <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{i.object.filename}}_small_thumb{{i.object.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbanail_size}}"/>
                     </a>
                 </div>
             {% endfor %}
