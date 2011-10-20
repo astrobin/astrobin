@@ -6,7 +6,7 @@
     <div class="ic_container"
          style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
         <a href="{{image.get_absolute_url}}/">
-            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png"
+            <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="thumbnail"
                  alt="{{image.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
