@@ -54,6 +54,11 @@ def create_notice_types(app, created_models, verbosity, **kwargs):
         _('Request fulfilled'),
         _('The user has fulfilled your request'))
 
+    notification.create_notice_type(
+        'image_deleted',
+        _('Image deleted'),
+        _('Your image has been successfully deleted'))
+
 
 signals.post_syncdb.connect(create_notice_types, sender=notification)
 

@@ -27,7 +27,7 @@
                                         <span class="text"><a class="upload-revision" href="#">{% trans "Upload new revision" %}</a></span>
                                     </li>
                                     <li class="bg-icon icon-delete">
-                                        <span class="text"><a class="delete danger" href="#">{% trans "Delete" %}</a></span>
+                                        <span class="text"><a class="delete danger" href="{% url image_delete image.id %}">{% trans "Delete" %}</a></span>
                                     </li>
                                     <li class="separator"></li>
                                 {% endif %}
