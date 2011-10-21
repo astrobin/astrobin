@@ -3,15 +3,9 @@
 {% load i18n %}
 
 {% block content %}
-<div class="info-side-bar">
-    <p>
-    {% blocktrans %}
-        Search for image with fine tuned control.
-    {% endblocktrans %}
-    </p>
-</div>
-<div class="sided-main-content">
-    <form method="get" action="{% url haystack_search %}">{% csrf_token %}
+<div class="full-box">
+    <p><a href="#" onclick="common.showHideAdvancedSearch()">{% trans "Show/hide advanced search box." %}</a></p>
+    <form id="advanced_search" method="get" action="{% url haystack_search %}">{% csrf_token %}
         {{form.as_p}}
         <input class="button submit-button" type="submit" value="{% trans "Search" %} &rarr;" />
     </form>

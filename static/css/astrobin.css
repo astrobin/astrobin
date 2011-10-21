@@ -1466,6 +1466,29 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
 }
+.full-box label {
+  float: left;
+  text-align: right;
+  padding: 11px 10px 0 0;
+}
+.full-box .submit-button {
+  margin-left: 160px;
+  width: 200px;
+}
+.full-box .lone-button {
+  margin: 0 auto;
+  width: 200px;
+}
+.full-box .inline-button {
+  width: auto;
+  margin: 0;
+}
+.full-box .fieldless {
+  text-align: center;
+}
+.full-box .fieldless .button {
+  left: 0;
+}
 .tools-box {
   width: 880px;
   padding: 28px;
@@ -1476,6 +1499,29 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   background-color: #4d4d4d;
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
+}
+.tools-box label {
+  float: left;
+  text-align: right;
+  padding: 11px 10px 0 0;
+}
+.tools-box .submit-button {
+  margin-left: 160px;
+  width: 200px;
+}
+.tools-box .lone-button {
+  margin: 0 auto;
+  width: 200px;
+}
+.tools-box .inline-button {
+  width: auto;
+  margin: 0;
+}
+.tools-box .fieldless {
+  text-align: center;
+}
+.tools-box .fieldless .button {
+  left: 0;
 }
 .tools-box ul {
   list-style: none;
@@ -2052,4 +2098,7 @@ p.info {
   bottom: 0;
   font-weight: normal;
   text-shadow: 0px 0px 1px #333333;
+}
+form#advanced_search {
+  display: none;
 }

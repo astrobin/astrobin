@@ -1454,7 +1454,24 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin: @spacer-large 0;
     .rounded-corners;
     background-color: @light-panel-color;
-    .common-border;}
+    .common-border;
+    label {
+        float:left;
+        text-align:right;
+        padding:11px 10px 0 0;}
+    .submit-button {
+        margin-left: 160px;
+        width:200px;}
+    .lone-button {
+        margin: 0 auto;
+        width:200px;}
+    .inline-button {
+        width: auto;
+        margin: 0;}
+    .fieldless {
+        text-align: center;
+        .button{
+            left: 0;}}}
 
 .tools-box {
     .full-box;
@@ -1925,3 +1942,5 @@ margin-left: 20px;}
     font-weight: normal;
     text-shadow: 0px 0px 1px @background-color;}
 
+form#advanced_search {
+    display: none;}
