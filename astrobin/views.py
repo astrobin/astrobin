@@ -41,7 +41,8 @@ def valueReader(request, field):
     if as_field in request.POST:
         value = request.POST[as_field]
     else:
-        return None, None
+        value = request.POST[field]
+
     items = []
     reader = csv.reader(utf_8_encoder([value]),
                         skipinitialspace = True)
