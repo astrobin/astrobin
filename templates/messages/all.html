@@ -5,6 +5,9 @@
     <div class="full-box clear">
         <h2>{% trans "Here are your private messages" %}</h2>
             {% if message_list %}
+            <p>
+                <a href="/messages/mark_read/all/">{% trans "Mark all read" %}</a>
+            </p>
             <table class="messages">
                 <tr>
                     <th>{% trans "When" %}</th>
