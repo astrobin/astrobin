@@ -2102,3 +2102,6 @@ p.info {
 form#advanced_search {
   display: none;
 }
+form#upload input {
+  width: auto;
+}

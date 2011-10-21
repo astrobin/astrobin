@@ -33,7 +33,12 @@
         <h2>{% trans "Quick upload" %}</h2>
         <div class="single-form">
             <form id="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
-                <p><input type="file" name="file" id="id_file"/></p>
+                <p>
+                    <input type="file" name="file" id="id_file"/>
+                    <noscript>
+                        <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
+                    </noscript>
+                </p>
                 <p>{% trans "Choose an image to upload, or" %}
                 <p><a href="{% url profile_flickr_import %}">{% trans "import from Flickr" %}</a></p>
             </form>
