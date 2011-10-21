@@ -654,10 +654,9 @@ def image_delete(request, id):
         return HttpResponseForbidden()
 
     image.delete()
-    return render_to_response("user/profile.html",
-        {'user': request.user},
-        context_instance=RequestContext(request))
+    push_notification([request.user], 'image_deleted', {});
 
+    return HttpResponseRedirect("/");
 
 @require_GET
 def user_page(request, username):
