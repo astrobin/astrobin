@@ -138,6 +138,10 @@ var common = {
     clearText: function(field) {
         if (field.defaultValue == field.value) field.value = '';
         else if (field.value == '') field.value = field.defaultValue;
+    },
+
+    showHideAdvancedSearch: function() {
+        $('form#advanced_search').slideToggle('slow');
     }
 };
 
