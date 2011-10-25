@@ -2105,3 +2105,7 @@ form#advanced_search {
 form#upload input {
   width: auto;
 }
+p.error {
+  color: red;
+  font-weight: bold;
+}

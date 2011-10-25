@@ -7,7 +7,7 @@ from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import create_object
 from django.core.urlresolvers import reverse
-from django.core.exceptions import MultipleObjectsReturned
+from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.conf import settings
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
@@ -25,6 +25,7 @@ import simplejson
 import csv
 import flickrapi
 import urllib2
+from datetime import datetime
 
 from models import *
 from forms import *
@@ -581,6 +582,8 @@ def image_edit_save_acquisition(request):
     deep_sky_acquisitions = {}
     solar_system_acquisition = None
 
+    error = None
+
     for a in DeepSky_Acquisition.objects.filter(image=image):
         a.delete()
     for a in SolarSystem_Acquisition.objects.filter(image=image):
@@ -607,9 +610,19 @@ def image_edit_save_acquisition(request):
         date = request.POST.get('date')
         if date == 'yyyy-mm-dd':
             date = None
+        try:
+            if date is not None:
+                datetime.datetime.strptime(date, '%Y-%m-%d')
+        except ValueError:
+            date = None
 
         time = request.POST.get('time')
         if time == 'hh:mm':
+            time = None
+        try:
+            if time is not None:
+                datetime.datetime.strptime(time, '%H:%M')
+        except ValueError:
             time = None
 
         solar_system_acquisition = SolarSystem_Acquisition(
@@ -622,7 +635,10 @@ def image_edit_save_acquisition(request):
             if v != '':
                 setattr(solar_system_acquisition, k, v)
 
-        solar_system_acquisition.save()
+        try:
+            solar_system_acquisition.save()
+        except ValidationError:
+            error = _("There was an error. Check your input!");
 
     # get them again because of date issues
     deep_sky_acquisitions = list(DeepSky_Acquisition.objects.filter(image=image))
@@ -647,6 +663,7 @@ def image_edit_save_acquisition(request):
         'solar_system_acquisition': solar_system_acquisition,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
+        'error': error,
     }
 
     return render_to_response('image/edit/acquisition.html',
