@@ -8,6 +8,9 @@
     <h1>{% trans "Edit your image: acquisition details" %}</h1>
     {% if edit_type == 'solar_system' %}
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
+            {% if error %}
+            <p class="error">{{error}}</p>
+            {% endif %}
             <p class="solar_system_field">
                 <label for="frames">{% trans "Number of frames" %}:</label>
                 <input type="text"
