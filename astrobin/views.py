@@ -40,8 +40,10 @@ def valueReader(request, field):
     as_field = 'as_values_' + field
     if as_field in request.POST:
         value = request.POST[as_field]
-    else:
+    elif field in request.POST:
         value = request.POST[field]
+    else:
+        return [], ""
 
     items = []
     reader = csv.reader(utf_8_encoder([value]),
@@ -331,11 +333,14 @@ def image_edit_basic(request, id):
     if request.user != image.user:
         return HttpResponseForbidden()
 
+    subjects =  u', '.join(x.mainId for x in image.subjects.all())
+    locations = u', '.join(x.name for x in image.locations.all())
+
     form = ImageEditBasicForm({
         'title': image.title,
         'description': image.description,
-        'subjects': u', '.join(x.mainId for x in image.subjects.all()),
-        'locations': u', '.join(x.name for x in image.locations.all())
+        'subjects': subjects,
+        'locations': locations,
     })
 
     return render_to_response('image/edit/basic.html',
@@ -350,7 +355,9 @@ def image_edit_basic(request, id):
                           _("Enter partial name and wait for the suggestions!"),
                           _("No results. Press TAB to create this location!")],
          },
-         "is_ready":image.is_stored,
+         'is_ready': image.is_stored,
+         'subjects': subjects,
+         'locations': locations,
         },
         context_instance=RequestContext(request))
 
@@ -489,7 +496,7 @@ def image_edit_save_basic(request):
         for id in ids:
             try:
                 try:
-                    id = float(id);
+                    id = float(id)
                     k = Location.objects.get(Q(id=id))
                 except ValueError:
                     k = Location.objects.get(Q(name=id))
