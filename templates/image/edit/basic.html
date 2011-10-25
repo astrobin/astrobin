@@ -13,13 +13,33 @@
             {% endblocktrans %}
         </p>
 
-        {{form.as_p}}
+        <div id="js_form" style="display:none">
+            {{form.as_p}}
+        </div>
 
         <noscript>
-            <p class="hint">
-            {% blocktrans %}
-            * use a comma to separate the values.
-            {% endblocktrans %}
+            <p><label for="id_title">Title:</label>
+               <input id="id_title" type="text" name="title" value="{{image.title}}" maxlength="64" />
+            </p>
+            <p>
+                <label for="id_subjects">Subjects:</label>
+                <input type="text" name="subjects" id="id_subjects" value="{{subjects}}" disabled="disabled" />
+                <span class="helptext">{% trans "You can't edit Subjects without Javascript. Please enable it in your Internet browser." %}</span>
+            </p>
+            <p>
+                <label for="id_locations">Locations:</label>
+                <input type="text" name="locations" value="{{locations}}" id="id_locations" />
+                <span class="helptext">
+                    <p class="hint">
+                        {% blocktrans %}
+                            Use a comma to separate the values.
+                        {% endblocktrans %}
+                    </p>
+                </span>
+            </p>
+            <p>
+                <label for="id_description">Description:</label>
+                <textarea id="id_description" rows="10" cols="40" name="description">{{image.description}}</textarea>
             </p>
         </noscript>
 
@@ -35,22 +55,24 @@
 {% block extra_js %}
 <script language="javascript">
     $(document).ready(function() {
-    {% autoescape off %}
-    {% for key, value in prefill_dict.items %}
-    var startText = '{{value.1}}';
-    var emptyText = '{{value.2}}';
+        $('#js_form').show();
 
-    $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
-        {asHtmlID: '{{key}}',
-        selectedItemProp: 'name',
-        searchObjProps: 'name',
-        preFill: {{value.0}},
-        selectedItemProp: 'name',
-        selectedValuesProp: 'id',
-        startText: startText,
-        emptyText: emptyText});
-    {% endfor %}
-    {% endautoescape %}
+        {% autoescape off %}
+        {% for key, value in prefill_dict.items %}
+        var startText = '{{value.1}}';
+        var emptyText = '{{value.2}}';
+
+        $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
+            {asHtmlID: '{{key}}',
+            selectedItemProp: 'name',
+            searchObjProps: 'name',
+            preFill: {{value.0}},
+            selectedItemProp: 'name',
+            selectedValuesProp: 'id',
+            startText: startText,
+            emptyText: emptyText});
+        {% endfor %}
+        {% endautoescape %}
     });
 </script>
 {% endblock %}
