@@ -82,9 +82,6 @@
                     <div id="nav">
                         <ul>
                             <li id="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
-                            {% if request.user.is_authenticated or not privatebeta_enabled %}
-                            <li><a href="#">{% trans "ABPOD" %}</a></li>
-                            {% endif %}
                             <li><a href="{% url help %}">{% trans "Help" %}</a></li>
                         </ul>
                     </div>
