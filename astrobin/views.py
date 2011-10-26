@@ -283,13 +283,8 @@ def image_upload(request):
 def image_upload_process(request):
     """Process the form"""
 
-    file = None
-    if 'qqfile' in request.GET:
-        from django.core.files.uploadedfile import SimpleUploadedFile
-        file = SimpleUploadedFile(request.GET['qqfile'], request.raw_post_data)
-    else:
-        form = ImageUploadForm(request.POST, request.FILES)
-        file = request.FILES["file"]
+    form = ImageUploadForm(request.POST, request.FILES)
+    file = request.FILES["file"]
 
     filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
@@ -310,21 +305,17 @@ def image_upload_process(request):
                       {'originator':request.user,
                        'object_url':image.get_absolute_url()})
 
-    if 'qqfile' in request.GET:
-        return_dict = {'success':'true', 'id':image.id}
-        return ajax_response(return_dict)
-    else:
-        return render_to_response('image/edit/basic.html',
-            {'image':image,
-             's3_url':settings.S3_URL,
-             'form':ImageEditBasicForm(),
-             'prefill_dict': {
-                'subjects': [],
-                'locations': [],
-             },
-             'is_ready':image.is_stored,
-            },
-            context_instance=RequestContext(request))
+    return render_to_response('image/edit/basic.html',
+        {'image':image,
+         's3_url':settings.S3_URL,
+         'form':ImageEditBasicForm(),
+         'prefill_dict': {
+            'subjects': [],
+            'locations': [],
+         },
+         'is_ready':image.is_stored,
+        },
+        context_instance=RequestContext(request))
 
 
 @login_required
@@ -1224,14 +1215,10 @@ def image_revision_upload_process(request):
     image_id = request.POST['image_id']
     image = Image.objects.get(id=image_id)
 
-    if 'qqfile' in request.GET:
-        from django.core.files.uploadedfile import SimpleUploadedFile
-        file = SimpleUploadedFile(request.GET['qqfile'], request.raw_post_data)
-    else:
-        form = ImageRevisionUploadForm(request.POST, request.FILES)
-        if not form.is_valid():
-            return HttpResponseRedirect(image.get_absolute_url())
-        file = request.FILES["file"]
+    form = ImageRevisionUploadForm(request.POST, request.FILES)
+    if not form.is_valid():
+        return HttpResponseRedirect(image.get_absolute_url())
+    file = request.FILES["file"]
 
     filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
