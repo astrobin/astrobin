@@ -382,6 +382,8 @@ var image_detail = {
                         }
                     }
                 });
+
+            return false;
         });
     },
 
