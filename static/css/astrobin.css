@@ -1978,7 +1978,13 @@ p#flickr_progress_message, p#flickr_progress {
   color: #897876;
 }
 form ul.errorlist {
-  margin-left: 170px;
+  margin-left: 166px;
+  position: relative;
+  top: 6px;
+}
+form ul.errorlist li {
+  font-size: 90%;
+  color: #f9645b;
 }
 ul.inline {
   margin: 0;
