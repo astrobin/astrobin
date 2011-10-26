@@ -21,7 +21,7 @@
 @border-shadow-color: @background-color / @strong-hilight-factor;
 @border-shadow-color-inverted: @text-color + #030303;
 @dark-panel-color: @background-color / @hilight-factor;
-@light-panel-color: @background-color * @strong-hilight-factor;
+@light-panel-color: @background-color * @hilight-factor;
 @light-panel-border-color: @background-color / @strong-hilight-factor;
 
 @button-gradient-top-color: @link-color * @hilight-factor;
@@ -1697,8 +1697,7 @@ span.copy-box {
         img {
             border: 1px solid @background-color;}}
     p {
-        margin: 2px 0;
-        font-size: @base-font-size + 2px;}
+        margin: 2px 0;}
     hr {
         border: 0;
         color: @light-panel-color * @hilight-factor;
