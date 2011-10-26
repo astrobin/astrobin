@@ -163,10 +163,12 @@
             <div class="main-image-data">
                 <ul>
                     <li class="title">{{image.title|escape|default:_("(no title)")}}</li>
-                    <li class="author">{% trans "by" %} <a href="{% url user_page image.user.username %}">{{image.user.username}}</a></li>
+                    <li class="uploaded">({% trans "uploaded on" %} {{image.uploaded}}</li>
+                    <li class="author">{% trans "by" %} <a href="{% url user_page image.user.username %}">{{image.user.username}}</a>)</li>
                     {% if image.subjects %}
                     {% endif %}
                 </ul>
+                <div class="hline"></div>
                 <p>
                     {% trans "Contains" %}:
                     {% for s in image.subjects.all %}

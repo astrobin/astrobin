@@ -1646,6 +1646,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 #image-detail #main-image {
   text-align: center;
+  padding-top: 4px;
 }
 #image-detail #main-image img {
   cursor: -moz-zoom-in;
@@ -2159,4 +2160,10 @@ p.error {
 #context_message img {
   margin-right: 8px;
   float: left;
+}
+.hline {
+  height: 2px;
+  margin: 8px 0;
+  border-top: 1px solid #2b2b2b;
+  border-bottom: 1px solid #3d3d3d;
 }
