@@ -163,6 +163,17 @@
             <!-- content -->
             <div id="content-wrap" class="clear">
                 <div id="content" class="clear">
+                    {% if context_message %}
+                    <div id="context_message">
+                        {% if context_message.error %}
+                        <img src="/static/icons/iconic/black/x_alt_16x16.png" alt="{% trans "Error" %}" />
+                        {% else %}
+                        <img src="/static/icons/iconic/black/info_8x16.png" alt="{% trans "Info" %}" />
+                        {% endif %}
+                        <p>{{context_message.text}}</p>
+                    </div>
+                    {% endif %}
+
                     {% block content %}{% endblock %}
                 </div>
             </div>

@@ -3,8 +3,10 @@
 @link-color: #CC4B2E;
 @strong-text-color: #FCFCFC;
 @logo-color: #3092CF;
-@notice-color: #fafad2;
-@danger-color: #C70000;
+@notice-color: #f9edbe;
+@notice-border-color: #f0c36d;
+@notice-text-color: #383732;
+@danger-color: #F9645B;
 
 @header-color: @strong-text-color;
 @text-color: @strong-text-color - #444;
@@ -189,6 +191,12 @@
     color: @strong-text-color;
     font-weight: bold;
     .text-shadow;}
+
+.notice {
+    color: @notice-text-color;
+    background-color: @notice-color;
+    border: 1px solid @notice-border-color;
+    .box-shadow;}
 
 .hidden {
     display: none;}
@@ -1077,13 +1085,11 @@ form {
                 >a {
                     color: @strong-text-color;}}}}
     #noscript {
+        .notice;
         position: absolute;
         top: @spacer-small; left: 0;
         width: 65%;
         padding: @spacer-small @spacer-large;
-        .common-border;
-        color: @background-color;
-        background-color: @notice-color;
         font-size: 90%;
         font-weight: bold;
         p {
@@ -1951,4 +1957,17 @@ form#upload input {
 p.error {
     color: red;
     font-weight: bold;}
+
+.context_message {
+    padding: @spacer-small @spacer-large;
+    .notice;
+    p {
+        padding: 0;
+        margin: 0;}
+    img {
+        margin-right: @spacer-medium;
+        float: left;}}
+
+#context_message {
+    .context_message;}
 

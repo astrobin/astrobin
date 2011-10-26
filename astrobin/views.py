@@ -285,6 +285,14 @@ def image_upload_process(request):
 
     form = ImageUploadForm(request.POST, request.FILES)
     file = request.FILES["file"]
+    try:
+        from PIL import Image
+        trial_image = Image.open(file)
+        trial_image.verify()
+    except:
+        return render_to_response('index.html',
+            {'context_message': {'error': True, 'text': _("Invalid image.")}},
+            context_instance=RequestContext(request))
 
     filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
