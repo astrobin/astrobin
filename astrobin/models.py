@@ -12,6 +12,8 @@ from django import forms
 from django.utils.translation import ugettext as _
 from django.conf import settings
 
+from celery.decorators import task
+
 from djangoratings.fields import RatingField
 from model_utils.managers import InheritanceManager
 
@@ -172,6 +174,7 @@ def image_solved_callback(image, solved, clean_path):
         os.remove(f)
 
 
+@task
 def image_stored_callback(image, stored, solve):
     image.is_stored = stored
     image.save()
