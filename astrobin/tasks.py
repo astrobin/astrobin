@@ -1,6 +1,7 @@
 from django.conf import settings
 from celery.decorators import task
 from celery.task.sets import subtask
+from boto.exception import S3CreateError
 
 from PIL import Image as PILImage
 from subprocess import call
@@ -50,8 +51,8 @@ def solve_image(image, callback=None):
         push_notification([image.user], 'image_not_solved',
                           {'object_url':image.get_absolute_url()})
 
-    if callback:
-        callback(image, solved, '%s%s*' % (path, uid))
+    if callback is not None:
+        subtask(callback).delay(image, solved, '%s%s*' % (path, uid))
 
 
 @task()
@@ -74,8 +75,8 @@ def store_image(image, solve, callback=None):
 
     push_notification([user], 'image_ready', {'object_url':img.get_absolute_url()})
 
-    if callback:
-        callback(image, True, solve)
+    if callback is not None:
+        subtask(callback).delay(image, True, solve)
 
 
 @task
