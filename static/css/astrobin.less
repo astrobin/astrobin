@@ -1562,6 +1562,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
                 text-align: right;}}}
     #main-image {
         text-align: center;
+        padding-top: @spacer-small;
         img {
             cursor: -moz-zoom-in;
             border: 1px solid @dark-panel-color;}}
@@ -1977,3 +1978,8 @@ p.error {
 #context_message {
     .context_message;}
 
+.hline {
+    height: 2px;
+    margin: @spacer-medium 0;
+    border-top: 1px solid (@background-color / @hilight-factor);
+    border-bottom: 1px solid (@background-color * @hilight-factor);}
