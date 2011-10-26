@@ -459,17 +459,32 @@ def image_edit_save_basic(request):
     if request.user != image.user:
         return HttpResponseForbidden()
 
-    response_dict = {'form': form,
-                     'image': image,
-                     's3_url':settings.S3_URL,
-                     'is_ready':image.is_stored,
-                    }
-    prefill_dict = {}
+    subjects =  u', '.join(x.mainId for x in image.subjects.all())
+    locations = u', '.join(x.name for x in image.locations.all())
+
+    response_dict = {
+        'image': image,
+        's3_url': settings.S3_URL,
+        'form': form,
+        'prefill_dict': {
+           'subjects': [jsonDumpSubjects(image.subjects.all()),
+                        _("Enter partial name and wait for the suggestions!"),
+                        _("No results. Sorry.")],
+           'locations': [jsonDump(image.locations.all()),
+                         _("Enter partial name and wait for the suggestions!"),
+                         _("No results. Press TAB to create this location!")],
+        },
+        'is_ready': image.is_stored,
+        'subjects': subjects,
+        'locations': locations,
+    }
 
     if not form.is_valid():
         return render_to_response("image/edit/basic.html",
             response_dict,
             context_instance=RequestContext(request))
+
+    prefill_dict = {}
 
     image.subjects.clear()
     image.locations.clear()
