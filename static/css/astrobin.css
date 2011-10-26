@@ -827,9 +827,11 @@ form p.hint {
 }
 form span.helptext {
   font-style: italic;
+  font-size: 87.5%;
   width: 70%;
-  margin-left: 160px;
-  font-size: small;
+  margin-left: 162px;
+  display: block;
+  color: #7b7b7b;
 }
 form ul {
   list-style: none;
