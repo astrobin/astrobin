@@ -5,6 +5,9 @@ from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 
+def _join_stripped(a):
+    return a + [''.join(x.split()) for x in a]
+
 class ImageIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
     title = CharField(model_attr='title')
@@ -33,36 +36,39 @@ class ImageIndex(SearchIndex):
     def get_query(self):
         return Image.objects.all()
 
+    def prepare_title(self, obj):
+        return obj.title + ' ' + ''.join(obj.title.split())
+
     def prepare_subjects(self, obj):
         # TODO: prepare also idlist
-        return [subject.mainId for subject in obj.subjects.all()]
+        return _join_stripped([s.mainId for s in obj.subjects.all()])
 
     def prepare_imaging_telescopes(self, obj):
-        return [i.name for i in obj.imaging_telescopes.all()]
+        return _join_stripped([i.name for i in obj.imaging_telescopes.all()])
 
     def prepare_guiding_telescopes(self, obj):
-        return [i.name for i in obj.guiding_telescopes.all()]
+        return _join_stripped([i.name for i in obj.guiding_telescopes.all()])
 
     def prepare_mounts(self, obj):
-        return [i.name for i in obj.mounts.all()]
+        return _join_stripped([i.name for i in obj.mounts.all()])
 
     def prepare_imaging_cameras(self, obj):
-        return [i.name for i in obj.imaging_cameras.all()]
+        return _join_stripped([i.name for i in obj.imaging_cameras.all()])
 
     def prepare_guiding_cameras(self, obj):
-        return [i.name for i in obj.guiding_cameras.all()]
+        return _join_stripped([i.name for i in obj.guiding_cameras.all()])
 
     def prepare_focal_reducers(self, obj):
-        return [i.name for i in obj.focal_reducers.all()]
+        return _join_stripped([i.name for i in obj.focal_reducers.all()])
 
     def prepare_software(self, obj):
-        return [i.name for i in obj.software.all()]
+        return _join_stripped([i.name for i in obj.software.all()])
 
     def prepare_filters(self, obj):
-        return [i.name for i in obj.filters.all()]
+        return _join_stripped([i.name for i in obj.filters.all()])
 
     def prepare_accessories(self, obj):
-        return [i.name for i in obj.accessories.all()]
+        return _join_stripped([i.name for i in obj.accessories.all()])
 
     def prepare_rating(self, obj):
         votes = obj.rating.votes
