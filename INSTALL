@@ -169,5 +169,5 @@ Go to http://localhost/
 # ====================
 
 # Update images index
-*/5 * * * * (cd ~/Code/astrobin; ./scripts/update_index.sh) 2>&1 >/dev/null
+*/1 * * * * (cd ~/Code/astrobin; ./scripts/update_index.sh) 2>&1 >/dev/null
 
