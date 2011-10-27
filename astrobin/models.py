@@ -152,6 +152,7 @@ class Location(models.Model):
         app_label = 'astrobin'
 
 
+@task
 def image_solved_callback(image, solved, clean_path):
     image.is_solved = solved
     if image.__class__ == 'Image' and image.is_solved:
