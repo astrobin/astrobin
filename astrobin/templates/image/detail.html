@@ -152,9 +152,7 @@
                 {% endif %}
             {% else %} <!-- not ready -->
             <p class="info">
-                {% blocktrans %}
-                This image was just uploaded and is still processing. Please try again in a few seconds.
-                {% endblocktrans %}
+                {% blocktrans %}This image was just uploaded and is still processing. Please try again in a few seconds.{% endblocktrans %}
             </p>
             {% endif %}
             </div>
@@ -297,9 +295,7 @@ $(document).ready(function() {
             upload_revision_action: {
                 dialog: {
                     title: '{% trans "Upload new revision" %}',
-                    body : '{% blocktrans %}\
-                                Did you improve the post-processing of your image? Upload the new revision!\
-                            {% endblocktrans %}'
+                    body : '{% blocktrans %}Did you improve the post-processing of your image? Upload the new revision!{% endblocktrans %}'
                 },
                 form_html: '{% autoescape off %}{{upload_revision_form.as_p|append_slash}}{% endautoescape %}'
             },
@@ -312,35 +308,23 @@ $(document).ready(function() {
             },
             follow_action: {
                 dialog: {
-                    title : '{% blocktrans with image.user.username as username %}\
-                                 Follow {{username}}?\
-                             {% endblocktrans %}',
-                    body  : '{% blocktrans with image.user.username as username %}\
-                                 You will receive a notification every time {{username}} posts a new image. \
-                                 Continue?\
-                             {% endblocktrans %}',
+                    title : '{% blocktrans with image.user.username as username %}Follow {{username}}?{% endblocktrans %}',
+                    body  : '{% blocktrans with image.user.username as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}',
                     button: '{% trans "Yes, follow!" %}'
                 },
                 stop_following: '{% trans "Stop following" %}'
             },
             unfollow_action: {
                 dialog: {
-                    title : '{% blocktrans with image.user.username as username %}\
-                                 Stop following {{username}}?\
-                             {% endblocktrans %}',
-                    body  : '{% blocktrans with image.user.username as username %}\
-                                 You will stop receiving notifications when {{username}} posts a new image. \
-                                 Continue?\
-                             {% endblocktrans %}',
+                    title : '{% blocktrans with image.user.username as username %}Stop following {{username}}?{% endblocktrans %}',
+                    body  : '{% blocktrans with image.user.username as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}',
                     button: '{% trans "Yes, stop following!" %}'
                 },
                 follow: '{% trans "Follow" %}'
             },
             message_action: {
                 dialog: {
-                    title : '{% blocktrans with image.user.username as username %}\
-                                Send {{username}} a message\
-                             {% endblocktrans %}',
+                    title : '{% blocktrans with image.user.username as username %}Send {{username}} a message{% endblocktrans %}',
                     body  : '',
                     button: '{% trans "Send" %} &rarr;'
                 },
@@ -350,10 +334,7 @@ $(document).ready(function() {
             bring_to_attention_action: {
                 dialog: {
                     title : '{% trans "Bring image to attention" %}',
-                    body  : '{% blocktrans %}\
-                                By choosing some users and clicking the button below, you will send them \
-                                a notification prompting them to checkout this image.\
-                             {% endblocktrans %}',
+                    body  : '{% blocktrans %}By choosing some users and clicking the button below, you will send them a notification prompting them to checkout this image.{% endblocktrans %}',
                     button: '{% trans "Continue" %} &rarr;'
                 },
                 form_html: '{% autoescape off %}{{bring_to_attention_form.as_p|append_slash}}{% endautoescape %}',
@@ -366,21 +347,13 @@ $(document).ready(function() {
             image_request_additional_information_action: {
                 dialog: {
                     title : '{% trans "Request additional information" %}',
-                    body  : '{% blocktrans with image.user.username as username %}\
-                                You will notify {{username}} that you would like them to feed more \
-                                information in the technical card for this photograph. Continue? \
-                             {% endblocktrans %}',
+                    body  : '{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like them to feed more information in the technical card for this photograph. Continue?{% endblocktrans %}',
                 }
             },
             image_request_fits_action: {
                 dialog: {
                     title : '{% trans "Request TIFF/FITS" %}',
-                    body  : '{% blocktrans with image.user.username as username %}\
-                                You will notify {{username}} that you would like see the TIFF or FITS \
-                                file. AstroBin doesn\'t currently offer to host such large files, so \
-                                hopefully {{username}} will contact you about how to handle the transaction. \
-                                Continue? \
-                             {% endblocktrans %}',
+                    body  : '{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like see the TIFF or FITS file. AstroBin doesn\'t currently offer to host such large files, so hopefully {{username}} will contact you about how to handle the transaction. Continue?{% endblocktrans %}',
                 }
             }
         });

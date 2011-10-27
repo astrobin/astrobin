@@ -12,12 +12,7 @@
     <h3>{% trans "AstroBin is currently in closed beta" %}</h3>
     <p>
     {% url auth_login as login_url %}
-    {% blocktrans%}
-    and it will be open for everybody soon. If you've been invited,
-    you can <a href="{{login_url}}">login</a>, otherwise you
-    can leave us your email address and we will notify you when the
-    website is up!
-    {% endblocktrans %}
+    {% blocktrans%}and it will be open for everybody soon. If you've been invited, you can <a href="{{login_url}}">login</a>, otherwise you can leave us your email address and we will notify you when the website is up!{% endblocktrans %}
     </p>
     <form action="{% url privatebeta_invite %}" method="post">
     {{ form }}
