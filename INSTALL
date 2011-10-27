@@ -23,7 +23,8 @@ sudo apt-get install \
 	libjpeg8-dev \
 	netpbm \
 	netpbm10-dev \
-	python-numpy
+	python-numpy \
+	libqfits-dev
 sudo apt-file update
 sudo pip install virtualenv
 
@@ -144,6 +145,7 @@ sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 cd astrometry.net-0.38
 ./configure
 make
+make extra
 sudo make install
 
 
