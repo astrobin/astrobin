@@ -23,8 +23,7 @@ sudo apt-get install \
 	libjpeg8-dev \
 	netpbm \
 	netpbm10-dev \
-	python-numpy \
-	libqfits-dev
+	python-numpy
 sudo apt-file update
 sudo pip install virtualenv
 
