@@ -7,23 +7,17 @@
             {% if r.image %}
             <a href="{{r.image.get_absolute_url}}">
                 {% if r.type == 'INFO' %}
-                {% blocktrans with r.from_user.username as username %}
-                <strong>{{username}}</strong> has requested additional information about your image.
-                {% endblocktrans %}
+                {% blocktrans with r.from_user.username as username %}<strong>{{username}}</strong> has requested additional information about your image.{% endblocktrans %}
                 {% else %}
                 {% if r.type == 'FITS' %}
-                {% blocktrans with r.from_user.username as username %}
-                <strong>{{username}}</strong> has requested to see the TIFF of FITS of your image.
-                {% endblocktrans %}
+                {% blocktrans with r.from_user.username as username %}<strong>{{username}}</strong> has requested to see the TIFF of FITS of your image.{% endblocktrans %}
                 {% endif %}
                 {% endif %}
             </a>
             {% endif %}
             {% if r.location %}
             <a href="{% url location_edit r.location.id %}">
-                {% blocktrans with r.location as location %}
-                You should insert data for the location you have created: <strong>{{location}}</strong>
-                {% endblocktrans %}
+                {% blocktrans with r.location as location %}You should insert data for the location you have created: <strong>{{location}}</strong>{% endblocktrans %}
             </a>
             {% endif %}
         </div>
