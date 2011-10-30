@@ -216,7 +216,7 @@ class Image(models.Model):
         ordering = ('-uploaded', '-id')
         
     def __unicode__(self):
-        return self.title
+        return self.title if self.title is not None else _("(no title)")
 
     def save(self, *args, **kwargs):
         self.uploaded = datetime.now()
