@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-28 20:09+0300\n"
+"POT-Creation-Date: 2011-10-30 20:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,43 +18,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: forms.py:90 forms.py:94
+#: forms.py:42
+msgid "Imaging telescopes"
+msgstr ""
+
+#: forms.py:43
+msgid "Guiding telescopes"
+msgstr ""
+
+#: forms.py:44
+msgid "Mounts"
+msgstr ""
+
+#: forms.py:45
+msgid "Imaging cameras"
+msgstr ""
+
+#: forms.py:46
+msgid "Guiding cameras"
+msgstr ""
+
+#: forms.py:47
+msgid "Focal reducers"
+msgstr ""
+
+#: forms.py:48
+msgid "Software"
+msgstr ""
+
+#: forms.py:49
+msgid "Filters"
+msgstr ""
+
+#: forms.py:50
+msgid "Accessories"
+msgstr ""
+
+#: forms.py:100 forms.py:104
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr ""
 
-#: forms.py:97 forms.py:100
+#: forms.py:107 forms.py:110
 msgid "Express value in hours"
 msgstr ""
 
-#: forms.py:110
+#: forms.py:120
 msgid "Search for astronomical objects, telescopes, cameras, filters..."
 msgstr ""
 
-#: forms.py:112
+#: forms.py:122
 msgid "Min. upload date"
 msgstr ""
 
-#: forms.py:113
+#: forms.py:123
 msgid "Max. upload date"
 msgstr ""
 
-#: forms.py:114
+#: forms.py:124
 msgid "Min. integration"
 msgstr ""
 
-#: forms.py:115
+#: forms.py:125
 msgid "Max. integration"
 msgstr ""
 
-#: forms.py:116
+#: forms.py:126
 msgid "Min. Moon phase %"
 msgstr ""
 
-#: forms.py:117
+#: forms.py:127
 msgid "Max. Moon phase %"
 msgstr ""
 
-#: forms.py:151 forms.py:154
+#: forms.py:161 forms.py:164
 msgid "Examples: +12.44, -51.25"
 msgstr ""
 
@@ -78,35 +114,36 @@ msgstr ""
 msgid "Invalid image."
 msgstr ""
 
-#: views.py:358 views.py:361 views.py:476 views.py:479 views.py:510
-#: views.py:539 templates/user/profile/edit/basic.html:23
+#: views.py:328 views.py:331 views.py:362 views.py:365 views.py:480
+#: views.py:483 views.py:514 views.py:543
+#: templates/user/profile/edit/basic.html:23
 #: templates/user/profile/edit/gear.html:23
 msgid "Enter partial name and wait for the suggestions!"
 msgstr ""
 
-#: views.py:359 views.py:477 views.py:511 views.py:540
+#: views.py:329 views.py:363 views.py:481 views.py:515 views.py:544
 msgid "No results. Sorry."
 msgstr ""
 
-#: views.py:362 views.py:480
+#: views.py:332 views.py:366 views.py:484
 msgid "No results. Press TAB to create this location!"
 msgstr ""
 
-#: views.py:661
+#: views.py:665
 msgid "There was an error. Check your input!"
 msgstr ""
 
-#: views.py:1128
+#: views.py:1132
 msgid "RE"
 msgstr ""
 
-#: views.py:1187
+#: views.py:1191
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr ""
 
-#: views.py:1211
+#: views.py:1215
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -1047,12 +1084,24 @@ msgstr ""
 msgid "Here are your notifications"
 msgstr ""
 
+#: templates/notification/attention_request/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s would like to bring the following image to your attention: "
+"%(object_url)s"
+msgstr ""
+
 #: templates/notification/attention_request/notice.html:2
-#: templates/notification/attention_request/short.html:2
+#: templates/notification/attention_request/short.html:1
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
 "image to your attention.</a>"
+msgstr ""
+
+#: templates/notification/attention_request/short.txt:2
+#, python-format
+msgid "%(originator)s wants to bring an image to your attention"
 msgstr ""
 
 #: templates/notification/follow_success/notice.html:2
@@ -1082,12 +1131,30 @@ msgid ""
 "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr ""
 
+#: templates/notification/new_follower/full.txt:2
+#, python-format
+msgid ""
+"User %(object)s is now following you. They will be notified when you publish "
+"new images."
+msgstr ""
+
 #: templates/notification/new_follower/notice.html:2
 #: templates/notification/new_follower/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you."
 "</a>"
+msgstr ""
+
+#: templates/notification/new_follower/short.txt:2
+msgid "You have a new follower!"
+msgstr ""
+
+#: templates/notification/new_image/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image! Check it out at the following url: "
+"%(object_url)s"
 msgstr ""
 
 #: templates/notification/new_image/notice.html:2
@@ -1104,6 +1171,18 @@ msgid ""
 "new image</a>"
 msgstr ""
 
+#: templates/notification/new_image/short.txt:2
+#, python-format
+msgid "New image by %(originator)s"
+msgstr ""
+
+#: templates/notification/new_image_revision/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image revision! Check it out at the "
+"following url: %(object_url)s"
+msgstr ""
+
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
 #, python-format
@@ -1112,12 +1191,29 @@ msgid ""
 "new image revision.</a>"
 msgstr ""
 
+#: templates/notification/new_image_revision/short.txt:2
+#, python-format
+msgid "New image revision by %(originator)s"
+msgstr ""
+
+#: templates/notification/request_fulfilled/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has fulfilled your request! Check it out at the following "
+"url: %(object_url)s"
+msgstr ""
+
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
 "your request</a>"
+msgstr ""
+
+#: templates/notification/request_fulfilled/short.txt:2
+#, python-format
+msgid "%(originator)s has fulfilled your request."
 msgstr ""
 
 #: templates/notification/unfollow_success/notice.html:2
@@ -1160,6 +1256,19 @@ msgstr ""
 
 #: templates/registration/activate.html:14
 msgid "Account activation failed"
+msgstr ""
+
+#: templates/registration/activation_email.txt:2
+msgid "Activate account at"
+msgstr ""
+
+#: templates/registration/activation_email.txt:6
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr ""
+
+#: templates/registration/activation_email_subject.txt:1
+msgid "Account activation on"
 msgstr ""
 
 #: templates/registration/login.html:7

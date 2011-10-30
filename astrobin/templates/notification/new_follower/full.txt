@@ -1,4 +1,2 @@
 {% load i18n %}
-{% blocktrans %}
-User {{object}} is now following you. They will be notified when you publish new images.
-{% endblocktrans %}
+{% blocktrans %}User {{object}} is now following you. They will be notified when you publish new images.{% endblocktrans %}

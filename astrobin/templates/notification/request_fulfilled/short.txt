@@ -1,4 +1,2 @@
 {% load i18n %}
-{% blocktrans %}
-{{originator}} has fulfilled your request.
-{% endblocktrans %}
+{% blocktrans %}{{originator}} has fulfilled your request.{% endblocktrans %}

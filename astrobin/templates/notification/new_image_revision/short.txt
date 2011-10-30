@@ -1,4 +1,2 @@
 {% load i18n %}
-{% blocktrans %}
-New image revision by {{originator}}
-{% endblocktrans %}
+{% blocktrans %}New image revision by {{originator}}{% endblocktrans %}
