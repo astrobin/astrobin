@@ -23,7 +23,11 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
                  }
 
     content_type = mimetype if mimetype else mimetypes.guess_type(uid+original_ext)[0]
-    file = open(path + uid + original_ext)
+    try:
+        file = open(path + uid + original_ext)
+    except IOError:
+        return
+
     data = StringIO.StringIO(file.read())
 
     # First store the original image
