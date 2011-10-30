@@ -98,6 +98,7 @@ MIDDLEWARE_CLASSES = (
 #    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 #    'django.middleware.csrf.CsrfViewMiddleware',
 #    'django.middleware.csrf.CsrfResponseMiddleware',
