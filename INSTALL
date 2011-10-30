@@ -164,6 +164,14 @@ cd astrobin;
 ../venv/bin/django-admin.py compilemessages
 
 
+# Set site name:
+# ==============
+
+Go to: http://localhost/admin/sites/site/1/
+
+and set site's properties.
+
+
 # Run it!
 # =======
 ./scripts/nginx.sh
