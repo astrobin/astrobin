@@ -153,6 +153,16 @@ sudo make install
 
 ./scripts/rebuild_index.sh
 
+# Add new language:
+# =================
+cd astrobin;
+../venv/bin/django-admin.py makemessages -l se # Example for swedish
+
+
+# Compile languages:
+cd astrobin;
+../venv/bin/django-admin.py compilemessages
+
 
 # Run it!
 # =======
