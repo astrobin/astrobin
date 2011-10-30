@@ -329,7 +329,7 @@ class ABPOD(models.Model):
     date = models.DateTimeField()
 
     def __unicode__(self):
-        return self.image.subjects
+        return self.image.title
 
     class Meta:
         app_label = 'astrobin'
