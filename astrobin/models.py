@@ -181,6 +181,8 @@ def image_stored_callback(image, stored, solve):
     image.is_stored = stored
     image.save()
 
+    push_notification([user], 'image_ready', {'object_url':img.get_absolute_url()})
+
     if solve:
         solve_image.delay(image, callback=image_solved_callback)
 

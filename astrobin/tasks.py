@@ -73,8 +73,6 @@ def store_image(image, solve, callback=None):
         user = image.image.user
         img = image.image
 
-    push_notification([user], 'image_ready', {'object_url':img.get_absolute_url()})
-
     if callback is not None:
         subtask(callback).delay(image, True, solve)
 
