@@ -184,6 +184,11 @@ and set site's properties.
 Go to http://localhost/
 
 
+# Restart gunicorn
+# ================
+kill -HUP `cat astrobin.pid`
+
+
 # Run tasks regularly:
 # ====================
 
