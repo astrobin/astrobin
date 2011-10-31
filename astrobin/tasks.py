@@ -37,7 +37,7 @@ def solve_image(image, callback=None):
     solved = False
 
     signal.signal(signal.SIGALRM, alarm_handler)
-    signal.alarm(60*4.5)
+    signal.alarm(270) # 4.5 minutes
     command = ['nice', '-n', '5', '/usr/local/astrometry/bin/solve-field', path + uid + original_ext]
     proc = subprocess.Popen(command)
     try:
