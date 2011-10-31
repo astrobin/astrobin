@@ -180,7 +180,7 @@ var image_detail = {
                 title : '',
                 body  : '',
                 button: '',
-                height: 180,
+                height: 250,
             },
             element: 'a.delete',
             url    : '/delete/'
