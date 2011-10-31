@@ -170,6 +170,13 @@ def image_solved_callback(image, solved, clean_path):
 
     image.save()
 
+    if solved:
+        push_notification([image.user], 'image_solved',
+                          {'object_url':image.get_absolute_url() + '?mod=solved'})
+    else:
+        push_notification([image.user], 'image_not_solved',
+                          {'object_url':image.get_absolute_url()})
+
     # Clean up!
     clean_list = glob.glob(clean_path)
     for f in clean_list:

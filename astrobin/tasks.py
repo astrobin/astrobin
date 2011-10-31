@@ -44,12 +44,6 @@ def solve_image(image, callback=None):
         solved_resizedFile = StringIO.StringIO()
         solved_resizedImage.save(solved_resizedFile, 'PNG')
         save_to_bucket(uid + '_solved.png', solved_resizedFile.getvalue())
-    if solved:
-        push_notification([image.user], 'image_solved',
-                          {'object_url':image.get_absolute_url() + '?mod=solved'})
-    else:
-        push_notification([image.user], 'image_not_solved',
-                          {'object_url':image.get_absolute_url()})
 
     if callback is not None:
         subtask(callback).delay(image, solved, '%s%s*' % (path, uid))
