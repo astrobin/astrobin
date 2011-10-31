@@ -4,15 +4,24 @@ from celery.task.sets import subtask
 from boto.exception import S3CreateError
 
 from PIL import Image as PILImage
-from subprocess import call
+import subprocess
 
 import StringIO
 import os
 import os.path
+import signal
 
 from image_utils import *
 from storage import *
 from notifications import *
+
+class Alarm(Exception):
+    pass
+
+
+def alarm_handler(signum, frame):
+    raise Alarm
+
 
 @task()
 def solve_image(image, callback=None):
@@ -27,8 +36,15 @@ def solve_image(image, callback=None):
     original_ext = image.original_ext
     solved = False
 
+    signal.signal(signal.SIGALRM, alarm_handler)
+    signal.alarm(60*4.5)
     command = ['nice', '-n', '5', '/usr/local/astrometry/bin/solve-field', path + uid + original_ext]
-    call(command)
+    proc = subprocess.Popen(command)
+    try:
+        proc.communicate()
+    except Alarm:
+        print "Task taking too long."
+
     solved_filename = settings.UPLOADS_DIRECTORY + image.filename + '-ngc.png'
     if os.path.exists(settings.UPLOADS_DIRECTORY + image.filename + '.solved'):
         solved = True
