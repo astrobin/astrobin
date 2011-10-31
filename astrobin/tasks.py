@@ -56,17 +56,6 @@ def store_image(image, solve, callback=None):
     except S3CreateError, exc:
         store_image.retry(exc=exc)
 
-    user = None
-    img = None
-
-    try:
-        user = image.user
-        img = image
-    except AttributeError:
-        # It's a revision
-        user = image.image.user
-        img = image.image
-
     if callback is not None:
         subtask(callback).delay(image, True, solve)
 

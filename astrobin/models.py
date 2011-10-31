@@ -188,6 +188,16 @@ def image_stored_callback(image, stored, solve):
     image.is_stored = stored
     image.save()
 
+    user = None
+    img = None
+    try:
+        user = image.user
+        img = image
+    except AttributeError:
+        # It's a revision
+        user = image.image.user
+        img = image.image
+
     push_notification([user], 'image_ready', {'object_url':img.get_absolute_url()})
 
     if solve:
