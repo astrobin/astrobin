@@ -93,7 +93,7 @@ $(function() {
             $('p#flickr_progress').html('<img src="/static/images/loading-bar.gif" alt="Loading..."/>');
             $('p#flickr_progress_message').removeClass('hidden');
             $('.button').hide();
-            $('p#flickr_progress_message').html('<strong>{% trans "Importing images." %}</strong> {% trans "Do not navigate away from this window: this might take a while!" %}');
+            $('p#flickr_progress_message').html("<strong>{% trans "Importing images." %}</strong> {% trans "Do not navigate away from this window: this might take a while!" %}");
             
             $.ajax({
                     type: 'POST',
