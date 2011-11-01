@@ -170,12 +170,22 @@ def image_solved_callback(image, solved, clean_path):
 
     image.save()
 
+    user = None
+    img = None
+    try:
+        user = image.user
+        img = image
+    except AttributeError:
+        # It's a revision
+        user = image.image.user
+        img = image.image
+
     if solved:
-        push_notification([image.user], 'image_solved',
-                          {'object_url':image.get_absolute_url() + '?mod=solved'})
+        push_notification([user], 'image_solved',
+                          {'object_url':img.get_absolute_url() + '?mod=solved'})
     else:
-        push_notification([image.user], 'image_not_solved',
-                          {'object_url':image.get_absolute_url()})
+        push_notification([user], 'image_not_solved',
+                          {'object_url':img.get_absolute_url()})
 
     # Clean up!
     clean_list = glob.glob(clean_path)
