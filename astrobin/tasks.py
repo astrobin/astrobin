@@ -66,7 +66,7 @@ def solve_image(image, callback=None):
             return success
 
         command = ['/usr/local/astrometry/bin/solve-field', path + uid + original_ext]
-        run_popen_with_timeout(command, 300)
+        run_popen_with_timeout(command, SUBPROCESS_EXPIRE)
 
         solved_filename = settings.UPLOADS_DIRECTORY + image.filename + '-ngc.png'
         if os.path.exists(settings.UPLOADS_DIRECTORY + image.filename + '.solved'):
