@@ -297,7 +297,10 @@ $(document).ready(function() {
                     title: "{% trans "Upload new revision" %}",
                     body : "{% blocktrans %}Did you improve the post-processing of your image? Upload the new revision!{% endblocktrans %}"
                 },
-                form_html: '{% autoescape off %}{{upload_revision_form.as_p|append_slash}}{% endautoescape %}'
+                form_html: '{% autoescape off %}{{upload_revision_form.as_p|append_slash}}{% endautoescape %}',
+                fileDefaultText: "{% trans "No file selected" %}",
+                fileBtnText: "{% trans "Choose file" %}",
+                uploadingText: "{% trans "Uploading..." %}"
             },
             delete_action: {
                 dialog: {

@@ -269,13 +269,17 @@
                 $('form#upload input').change(function() {
                     $('form#upload').append('\
                         <p>\
-                            <img style="margin: 10px" alt="{% trans "Uploading..." %}" src="/static/images/ajax-loader.gif"/>\
+                            <img style="margin: 10px" alt="{% blocktrans %}Uploading...{% endblocktrans %}" src="/static/images/ajax-loader.gif"/>\
                         </p>');
                     $('form#upload').submit();
                 });
 
                 // popup menus
-                $('select, input:checkbox, input:radio, input:file').uniform();
+                $('select, input:checkbox, input:radio, input:file').uniform(
+                    {fileDefaultText: '{% trans "No file selected" %}',
+                     fileBtnText: '{% trans "Choose file" %}'
+                    }
+                );
 
                 var open_popup = 0;
                 var active_a = 0;
