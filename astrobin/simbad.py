@@ -11,8 +11,9 @@ from models import Subject, SubjectIdentifier
 def find_subjects(q):
     regex = ".*"
     for c in re.sub(r'\s', '', q):
-        regex += "%c.*" % re.escape(c)
-
+        esc = re.escape(c)
+        for d in esc:
+            regex += "%c.*" % d
 
     url = settings.SIMBAD_SEARCH_QUERY_URL + urllib2.quote(q)
     json_string = ""
