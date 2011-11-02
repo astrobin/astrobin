@@ -111,7 +111,7 @@
                                     <img id="notifications" alt="{% trans "Notifications" %}" src="{% notifications_icon request %}"/>
                                 </a>
                                 <div class="popup" id="notifications-popup">
-                                    {% notification_list request %}
+                                    {% notification_list request 1 10 %}
                                 </div>
                             </li> <li class="menu">
                                 <a class="icon" title="{% trans "Messages" %}" href="{% url messages_all %}">
