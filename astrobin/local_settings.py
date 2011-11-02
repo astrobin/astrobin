@@ -184,12 +184,19 @@ BROKER_VHOST = 'astrobin'
 CELERY_RESULT_BACKEND = 'database'
 CELERY_RESULT_DBURI = "mysql://astrobin:astrobin@localhost/astrobin"
 CELERY_IMPORTS = ('astrobin.tasks', )
+CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},
+                 "plate_solve": {"exchange":"plate_solve", "binding_key":"plate_solve_key"}
+                }
+CELERY_DEFAULT_QUEUE = "default"
+CELERY_ROUTES = {"astrobin.tasks.solve_image" : {"queue":"plate_solve", "routing_key":"plate_solve_key"}}
+
 CELERYD_NODES = "w1 w2 w3 w4"
 CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG"
 CELERYD_CHDIR = ASTROBIN_BASE_PATH
 CELERYD_LOG_FILE = "celeryd.log"
 CELERYD_PID_FILE = "celeryd.pid"
 CELERYD = ASTROBIN_BASE_PATH + "manage.py celeryd"
+
 CELERYBEAT = ASTROBIN_BASE_PATH + "manage.py celerybeat"
 CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
 
