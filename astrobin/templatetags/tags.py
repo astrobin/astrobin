@@ -37,9 +37,12 @@ def image_list(request, object_list):
            }
 
 @register.inclusion_tag('inclusion_tags/notification_list.html')
-def notification_list(request, show_footer = True):
+def notification_list(request, show_footer = True, limit = 0):
+    ret = notifications.Notice.objects.filter(user=request.user)
+    if limit > 0:
+        ret = ret[:limit]
     return {
-        'notifications':notifications.Notice.objects.filter(user=request.user)[:10],
+        'notifications':ret,
         'show_footer':show_footer}
 
 
