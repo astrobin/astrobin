@@ -505,10 +505,14 @@ def image_edit_save_basic(request):
             try:
                 k = Subject.objects.get(Q(id=id))
             except (Subject.DoesNotExist, ValueError):
-                ''' Skip it quietly. "Subject" doesn't care about values
-                like {-1, "Foo"} because we're not adding new subjects
-                ever. We're just sticking to Simbad. '''
-                continue
+                '''User pressed TAB without waiting for autocomplete,
+                or on something that didn't find a match in Simbad.
+                Let's try to match it once more, in case it indeed
+                was a case of premature TAB.'''
+                import simbad
+                subjects = simbad.find_subjects(id.strip())
+                if subjects:
+                    k = subjects[0]
             image.subjects.add(k)
     prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
                                 _("Enter partial name and wait for the suggestions!"),
