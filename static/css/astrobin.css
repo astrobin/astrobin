@@ -2171,3 +2171,11 @@ p.error {
   border-top: 1px solid #2b2b2b;
   border-bottom: 1px solid #3d3d3d;
 }
+.left_col {
+  width: 50%;
+  float: left;
+}
+.right_col {
+  width: 50%;
+  float: right;
+}
