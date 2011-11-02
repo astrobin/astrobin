@@ -740,6 +740,21 @@ def user_page(request, username):
 
 @login_required
 @require_GET
+def user_profile_edit_language(request):
+    """Edits own language preferences"""
+    return render_to_response("user/profile/edit/language.html",
+        {
+            "LANGUAGES": (
+                ("en", _("English")),
+                ("it", _("Italian")),
+                ("fi", _("Finnish")),
+            ),
+        },
+        context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
 def user_profile_edit_basic(request):
     """Edits own profile"""
     profile = UserProfile.objects.get(user = request.user)
