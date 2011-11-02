@@ -103,7 +103,7 @@ def index(request):
 
     return object_list(
         request, 
-        queryset=Image.objects.filter(is_stored=True)[:15],
+        queryset=Image.objects.filter(is_stored=True),
         template_name='index.html',
         template_object_name='image',
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
@@ -726,17 +726,15 @@ def user_page(request, username):
                  ('Accessories'   , profile.accessories.all()),
                 ]
 
-
     return object_list(
-        request, 
-        queryset=Image.objects.filter(user=user)[:8],
+        request,
+        queryset=Image.objects.filter(user=user),
         template_name='user/profile.html',
         template_object_name='image',
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                          's3_url':settings.S3_URL,
                          'user':user,
                          'gear_list':gear_list})
-
 
 @login_required
 @require_GET
