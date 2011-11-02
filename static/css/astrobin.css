@@ -1875,8 +1875,9 @@ span.copy-box {
 }
 #footer-wrap {
   float: left;
-  padding-top: 20px;
+  padding: 20px 30px;
   display: inline;
+  width: 100%;
 }
 #footer-wrap h3 {
   margin-left: 20px;
@@ -1896,16 +1897,14 @@ span.copy-box {
 }
 /* footer-bottom */
 #footer-bottom {
-  float: left;
-  width: 100%;
-  margin: 28px auto 16px auto;
+  margin-top: 16px;
 }
 #footer-bottom .bottom-left {
   float: left;
 }
 #footer-bottom .bottom-right {
   position: absolute;
-  right: 0;
+  right: 30px;
   text-align: right;
   padding-right: 0;
 }

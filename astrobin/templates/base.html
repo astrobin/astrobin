@@ -182,6 +182,12 @@
                 <div id="footer-outer" class="clear"><div id="footer-wrap">
 
                     <div class="col-a">
+                        <h3>{% trans "About" %}</h3>
+                        <p>
+                        {% trans "AstroBin is a image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
+                        </p>
+                    </div>
+                    <div class="col-b">
                         <h3>{% trans "Site links" %}</h2>
                         <p>
                             <ul>
@@ -191,11 +197,21 @@
                         </p>
                     </div>
                     <div class="col-b">
-                        <h3>{% trans "About" %}</h3>
+                        <h3>{% trans "Thanks to" %}</h2>
                         <p>
-                        {% trans "AstroBin is a image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
+                            <ul>
+                                <li><a href="http://simbad.u-strasbg.fr/simbad/" target="_blank">SIMBAD Astronomical Database</a></li>
+                                <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
+                            </ul>
                         </p>
                     </div>
+                    <div class="col-b">
+                        <h3>{% trans "Copyright" %}</h2>
+                        <p>
+                        {% blocktrans %}AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners.{% endblocktrans %}
+                        </p>
+                    </div>
+
 
                     <div class="fix"></div>
 
@@ -204,7 +220,7 @@
 
                         <div class="bottom-left">
                             <p>
-                            &copy; 2011 Salvatore Iovene
+                            &copy; 2011 <a href="http://www.iovene.com/" target="_blank">Salvatore Iovene</a>
                             </p>
                         </div>
 
