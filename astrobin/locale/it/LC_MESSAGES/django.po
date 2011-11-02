@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-02 11:03+0200\n"
-"PO-Revision-Date: 2011-11-02 11:04+0200\n"
+"POT-Creation-Date: 2011-11-02 12:30+0200\n"
+"PO-Revision-Date: 2011-11-02 12:35+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -396,137 +396,105 @@ msgid "Feedback"
 msgstr "Feedback"
 
 #: templates/base.html:272
+#: templates/image/detail.html:303
 msgid "Uploading..."
 msgstr "Caricamento in corso..."
 
 #: templates/base.html:279
+#: templates/image/detail.html:301
 msgid "No file selected"
 msgstr "Nessun file"
 
 #: templates/base.html:280
+#: templates/image/detail.html:302
 msgid "Choose file"
 msgstr "Scegli file"
 
-#: templates/help.html:6
+#: templates/help.html:7
 msgid "What is this site?"
 msgstr "Che cos'è questo sito?"
 
-#: templates/help.html:7
-msgid ""
-"\n"
-"        <h4>Hey!</h4>\n"
-"        <p>\n"
-"        Are you an astrophotographer? Have you ever wanted to share the\n"
-"        outcome of your hard work with others? I guess you already do\n"
-"        that, but as an astrophotographer myself, and a subscriber to\n"
-"        numerous Astrophotography forums, I have found that the\n"
-"        Internet is lacking a centralized place where astrophotographers\n"
-"        can share their work.\n"
-"        </p>\n"
-"        <h4>Well, this is finally over!</h4>\n"
-"        <p>\n"
-"        <em>AstroBin</em> comes to fill the gap. It's a website built by an\n"
-"        astrophotographer, and it provides means to people who want to\n"
-"        share their astrophotographs.\n"
-"        </p>\n"
-"        <p><img src=\"/static/images/content/help_screenshot.png\"\n"
-"                alt=\"AstroBin screenshot\"/></p>\n"
-"        <h4>So how is this different from any other photo sharing sites?</h4>\n"
-"        <p>\n"
-"        <em>AstroBin</em> provides a number of features that are tailored\n"
-"        directly to astrophotography. Here's a quick run down of the main\n"
-"        ones:\n"
-"        <ul>\n"
-"            <li>\n"
-"                <h4>Dedication to data</h4>\n"
-"                <p>On a general purpose photo sharing site, you would upload\n"
-"                   your image and be done with it. <em>AstroBin</em>, instead,\n"
-"                   has a user interface specifically designed to enable you\n"
-"                   to input all the technical data of your image. And if you\n"
-"                   neglect to supply technical data to your image, <em>AstroBin</em>\n"
-"                   will periodically remind you to do so.\n"
-"                </p>\n"
-"            </li>\n"
-"            <li>\n"
-"                <h4>Data is strongly interconnected</h4>\n"
-"                <p>Have you ever wanted to see how your next image is going\n"
-"                   to look like? On <em>AstroBin</em>, you can search for\n"
-"                   all images of a certain target that were taken with a\n"
-"                   certain telescope and a certain CCD or camera. Or a certain\n"
-"                   filter. How about all the images between 6 and 8 hours of\n"
-"                   integration? Or with a certain Moon phase? You can do that!\n"
-"                </p>\n"
-"            </li>\n"
-"            <li>\n"
-"                <h4>All the data at a glance</h4>\n"
-"                <p>Each image on <em>AstroBin</em> is annotated of all the\n"
-"                   technical details about its acquisition. Telescopes involved,\n"
-"                   cameras, mounts, filters, everything is visible at a glance\n"
-"                   in the Technical Card. Even the Moon age at the time of the\n"
-"                   acquisition is displayed.\n"
-"                </p>\n"
-"            </li>\n"
-"            <li>\n"
-"                <h4>More than just an image</h4>\n"
-"                <p><em>AstroBin</em> will do more than just host a copy of your\n"
-"                   image: when you upload a photograph, a histogram and a black\n"
-"                   &amp; white inverted version of the image will be generated\n"
-"                   on the fly, so it's easier to spot faint nebulosity regions\n"
-"                   or spiral arms. On request, images can also be plate solved,\n"
-"                   and an annotated version will appear on the site.\n"
-"                </p>\n"
-"            </li>\n"
-"            <li>\n"
-"                <h4>AstroBin helps you out</h4>\n"
-"                <p>Ever looked for a hint on what subject you should tackle next?\n"
-"                   <em>AstroBin</em> is able to make suggestions that suit your\n"
-"                   geographical location and your equipment!\n"
-"                </p>\n"
-"            </li>\n"
-"            <li>\n"
-"                <h4>Will you discover the next supernova?</h4>\n"
-"                <p>Have you ever wondered if in your years long journey into\n"
-"                   astrophotography, having imaged tens or even hundreds of\n"
-"                   galaxies, you might have discovered a supernova? <em>AstroBin</em>\n"
-"                   will compare your images of galaxies to older ones. They will\n"
-"                   be aligned, stacked, and examined for anomalies.\n"
-"                </p>\n"
-"            </li>\n"
-"            <li>\n"
-"                <h4>AstroBin is social!</h4>\n"
-"                <p>On <em>AstroBin</em> you can message other astrophotographer,\n"
-"                   follow them and be notified when they post new images, or\n"
-"                   perform requests for more data. You can also vote on images.\n"
-"                </p>\n"
-"            </li>\n"
-"            <li>\n"
-"                <h4>AstroBin supports multiple image revisions</h4>\n"
-"                <p>Don't tell me you have never gone back to revise the processing\n"
-"                   of an image <em>after</em> you have published. <em>AstroBin</em>\n"
-"                   embraces this concept and lets you publish several revisions of\n"
-"                   the same image easily and intuitively!\n"
-"                </p>\n"
-"            </li>\n"
-"        </ul>\n"
-"        <p>\n"
-"            As you have undoubtly realized by now, <em>AstroBin</em> is way more\n"
-"            than an image hosting service. It's what the Astrophotography\n"
-"            community has needed for a long time. For years, I have seen amazing\n"
-"            images scattered all over the Internet: general purpose image hosting\n"
-"            sites, forums, personal websites and even temporary places. Some of\n"
-"            those images contain data that is too precious to go wasted in a sea\n"
-"            of chaos.\n"
-"            <em>AstroBin</em> comes to the rescue to provide a home and a central\n"
-"            hub for astrophotographers all over the world.\n"
-"        </p>\n"
-"        "
-msgstr ""
+#: templates/help.html:8
+msgid "Hey!"
+msgstr "Ehi!"
 
-#: templates/help.html:114
+#: templates/help.html:10
+msgid "Are you an astrophotographer? Do you like to share the outcome of your hard work with others? As an astrophotographer myself, and a subscriber to numerous Astrophotography forums, I have found that the Internet is lacking a centralized place where astrophotographers can share their work."
+msgstr "Sei un astrofotografo? Ti piace mostrare il risultato del tuo duro lavoro agli altri? Essendo io stesso un astrofotografo, ed uno che frequenta numerosi forum di Astrofotogtrafia, ho notato che su Internet manca un punto centrale dove gli astrofotografi possano condividere i propri lavori."
+
+#: templates/help.html:12
+msgid "Well, this is finally over!"
+msgstr "Beh, finalmente le cose cambiano!"
+
+#: templates/help.html:14
+msgid "<em>AstroBin</em> comes to fill the gap. It's a website built from the ground up by an astrophotographer, and it provides means to people who want to share their astrophotographs."
+msgstr "<em>AstroBin</em> riempie questa lacuna. È un sito creato da zero da un astrofotografo, e fornisce i mezzi per condividere le vostre astrofotografie."
+
+#: templates/help.html:16
+msgid "So how is this different from any other image sharing websites?"
+msgstr "Ma in che modo è diverso da altri siti di hosting d'immagini?"
+
+#: templates/help.html:18
+msgid "<em>AstroBin</em> provides a number of features that are tailored specificlly to astrophotography. Here's a quick run down of the main ones:"
+msgstr "<em>AstroBin</em> mette a disposizione un numero di funzionalità che sono state progettate specificamente per l'astrofotografia. Ecco una breve lista di quelle più importanti:"
+
+#: templates/help.html:21
+msgid "Dedication to data"
+msgstr "Dedizione ai dati"
+
+#: templates/help.html:23
+msgid "On a general purpose image sharing site, you would upload your image and be done with it. <em>AstroBin</em>, instead, has a user interface specifically designed to enable you to input all the technical data of your image."
+msgstr "Su un sito di hosting d'immagini generico, tu caricheresti la tua foto e questo sarebbe tutto. <em>AstroBin</em>, invece, ha un interfaccia utente progettata per darti la possibilità di inserire tutti i dati tecnici riguardo la tua immagine."
+
+#: templates/help.html:27
+msgid "Data is strongly interconnected"
+msgstr "I dati sono fortemente interconnessi"
+
+#: templates/help.html:29
+msgid "Have you ever wanted to see how your next image is going to look like? On <em>AstroBin</em>, you can search for all images of a certain target that were taken with a certain telescope and a certain CCD or camera. Or a certain filter. How about all the images between 6 and 8 hours of integration? Or with a certain Moon phase? You can do that!"
+msgstr "Hai mai voluto vedere cosa aspettarti dalla tua prossima immagine? Su <em>AstroBin</em>, puoi cercare tutte le immagini di un certo soggetto che sono state acquisite con un certo telescopio ed una certa camera o CCD. Oppure un certo filtro. E che ne dici di tutte le immagini fra 6 e 8 ore d'integrazione? Oppure con una certa fase lunare? Puoi farlo!"
+
+#: templates/help.html:33
+msgid "All the data at a glance"
+msgstr "Tutti i dati con uno sguardo"
+
+#: templates/help.html:35
+msgid "Each image on <em>AstroBin</em> is annotated of all the technical details about its acquisition. Telescopes involved, cameras, mounts, filters, everything is visible at a glance in the Technical Card. Even the Moon age at the time of the acquisition is displayed."
+msgstr "Ogni immagine su <em>AstroBin</em> è corredata da una scheda tecnica con tutti i dettagli di acquisizione. Telescopi, camere, montature, filtri, tutto è visibile con uno sguardo nella scheda tecnica. Anche la fase lunare al tempo dell'acquisizione viene mostrata."
+
+#: templates/help.html:39
+msgid "More than just an image"
+msgstr "Più che semplicemente un'immagine"
+
+#: templates/help.html:41
+msgid "<em>AstroBin</em> will do more than just host a copy of your image: when you upload a photograph, a histogram and a black &amp; white inverted version of the image will be generated on the fly, so it's easier to spot faint nebulosity regions or spiral arms. Images will also be plate solved, and an annotated version will appear on the site. <em>AstroBin</em> will know what are the astronomical objects in your image without you telling!"
+msgstr "<em>AstroBin</em> fa ben più che semplicemente fornire l'hosting delle tue immagini: quando carichi una foto, l'istogramma ed una versione in bianco e nero invertita vengono generati al volo, così da mostrare meglio regioni nebulari deboli o bracci a spirale. Alle immagini viene anche eseguito il plate-solving, e la versione annotata apparirà sul sito. <em>AstroBin</em> saprà quali oggetti ci sono nella tua immagine, senza che tu glielo dica!"
+
+#: templates/help.html:45
+msgid "AstroBin supports multiple image revisions"
+msgstr "AstroBin supporta multiple versioni della stessa immagine"
+
+#: templates/help.html:47
+msgid "Don't tell me you have never gone back to revise the processing of an image <em>after</em> you had published it. <em>AstroBin</em> embraces this concept and lets you publish several revisions of the same image easily and intuitively! Now it's going to be really easy to tell whether your processing has improved."
+msgstr "Non dirmi che non sei mai tornato a rivedere l'elaborazione di un'immagine <em>dopo</em> averla pubblicata. <em>AstroBin</em> si sposa con questo concetto, e ti permette di aggiungere versioni rielaborate della stessa immagine in modo facile ed intuitivo! Così sarà davvero facile vedere se la tua tecnica elaborativa è migliorata."
+
+#: templates/help.html:51
+msgid "AstroBin is social!"
+msgstr "AstroBin è social!"
+
+#: templates/help.html:53
+msgid "On <em>AstroBin</em> you can message other astrophotographer, follow them and be notified when they post new images, or perform requests for more data. You can also vote on images."
+msgstr "Su <em>AstroBin</em> puoi scambiarti messaggi con altri astrofotografi, seguirli ed essere notificato quando questi postano nuove immagini, oppure richiedere ulteriori dati su una foto. Puoi anche votare le immagini."
+
+#: templates/help.html:58
+msgid "As you have undoubtly realized by now, <em>AstroBin</em> is way more than an image hosting service. It's what the Astrophotography community has needed for a long time. For years, I have seen amazing images scattered all over the Internet: general purpose image hosting sites, forums, personal websites and even temporary places. Some of those images contain data that is too precious to go wasted in a sea of chaos. <em>AstroBin</em> comes to the rescue to provide a home and a central hub for astrophotographers all over the world."
+msgstr "Come ti sarai senza dubbio reso conto a questo punto, <em>AstroBin</em> è molto più di un servizio di hosting d'immagini. È cioè di cui la comunità di Astrofotografia ha avuto bisogno per molto tempo. Per anni, ho visto immagini fantastiche disperse su Internet: hosting d'immagini generici, forum, siti personali, e persino cartelle temporanee. Alcune di queste immagini contengono dati che sono troppo preziosi per essere persi in un mare di caos. <em>AstroBin</em> accorre in aiuto per dare una casa ed un punto d'incontro per gli astrofotografi di tutto il mondo."
+
+#: templates/help.html:60
 msgid "So, what are you waiting for?"
 msgstr "Allora, cos'aspetti?"
 
-#: templates/help.html:115
+#: templates/help.html:61
 msgid "Sign up now!"
 msgstr "Registrati adesso!"
 
@@ -605,12 +573,12 @@ msgid "Bring to a user's attention"
 msgstr "Porta all'attenzione di un utente"
 
 #: templates/image/detail.html:39
-#: templates/image/detail.html.py:349
+#: templates/image/detail.html.py:352
 msgid "Request additional information"
 msgstr "Richiedi ulteriori informazioni"
 
 #: templates/image/detail.html:42
-#: templates/image/detail.html.py:355
+#: templates/image/detail.html.py:358
 msgid "Request TIFF/FITS"
 msgstr "Richiedi il TIFF/FITS"
 
@@ -639,12 +607,12 @@ msgid "View profile"
 msgstr "Vedi il profilo"
 
 #: templates/image/detail.html:83
-#: templates/image/detail.html.py:315
+#: templates/image/detail.html.py:318
 msgid "Stop following"
 msgstr "Smetti di seguire"
 
 #: templates/image/detail.html:85
-#: templates/image/detail.html.py:323
+#: templates/image/detail.html.py:326
 msgid "Follow"
 msgstr "Segui"
 
@@ -750,83 +718,83 @@ msgstr "Fantastico"
 msgid "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr "Hai migliorato l'elaborazione della tua immagine? Carica la nuova versione!"
 
-#: templates/image/detail.html:304
+#: templates/image/detail.html:307
 msgid "Delete image?"
 msgstr "Cancellare l'immagine?"
 
-#: templates/image/detail.html:305
+#: templates/image/detail.html:308
 msgid "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?"
 msgstr "L'immagine verrà cancellata permanentemente e non potrà più essere recuperata. Tutte le sue versioni verranno cancellate. Sei sicuro?"
 
-#: templates/image/detail.html:306
+#: templates/image/detail.html:309
 msgid "Yes, delete image"
 msgstr "Sì, cancella l'immagine"
 
-#: templates/image/detail.html:311
+#: templates/image/detail.html:314
 #, python-format
 msgid "Follow %(username)s?"
 msgstr "Seguire %(username)s?"
 
-#: templates/image/detail.html:312
+#: templates/image/detail.html:315
 #, python-format
 msgid "You will receive a notification every time %(username)s posts a new image. Continue?"
 msgstr "Riceverai una notifica ogni volta che %(username)s carica una nuova immagine. Continuare?"
 
-#: templates/image/detail.html:313
+#: templates/image/detail.html:316
 msgid "Yes, follow!"
 msgstr "Sì, segui!"
 
-#: templates/image/detail.html:319
+#: templates/image/detail.html:322
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr "Smettere di seguire %(username)s?"
 
-#: templates/image/detail.html:320
+#: templates/image/detail.html:323
 #, python-format
 msgid "You will stop receiving notifications when %(username)s posts a new image. Continue?"
 msgstr "Non riceverai più notifiche quando %(username)s carica una nuova immagine. Continuare?"
 
-#: templates/image/detail.html:321
+#: templates/image/detail.html:324
 msgid "Yes, stop following!"
 msgstr "Si, smettere di seguire!"
 
-#: templates/image/detail.html:327
+#: templates/image/detail.html:330
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Manda un messaggio a %(username)s"
 
-#: templates/image/detail.html:329
+#: templates/image/detail.html:332
 #: templates/messages/detail.html:23
 #: templates/messages/new.html:15
 msgid "Send"
 msgstr "Manda"
 
-#: templates/image/detail.html:336
+#: templates/image/detail.html:339
 msgid "Bring image to attention"
 msgstr "Porta immagine all'attenzione"
 
-#: templates/image/detail.html:337
+#: templates/image/detail.html:340
 msgid "By choosing some users and clicking the button below, you will send them a notification prompting them to checkout this image."
 msgstr "Scegliendo degli utenti e cliccando il pulsante qui sotto, manderai loro una notifica che gli chiederà di dare un'occhiata a quest'immagine."
 
-#: templates/image/detail.html:338
+#: templates/image/detail.html:341
 msgid "Continue"
 msgstr "Continua"
 
-#: templates/image/detail.html:342
+#: templates/image/detail.html:345
 msgid "Enter partial name"
 msgstr "Inserire parte del nome"
 
-#: templates/image/detail.html:343
+#: templates/image/detail.html:346
 msgid "User not found. Cannot notify them."
 msgstr "Utente non trovato. Sarà impossibile notificarlo."
 
-#: templates/image/detail.html:350
+#: templates/image/detail.html:353
 #, python-format
 msgid "You will notify %(username)s that you would like them to feed more information in the technical card for this photograph. Continue?"
 msgstr "Manderai a %(username)s una notifica, con la richiesta d'inserire ulteriori informazione nella scheda tecnica di quest'immagine. Continuare?"
 
-#: templates/image/detail.html:356
+#: templates/image/detail.html:359
 #, python-format
 msgid "You will notify %(username)s that you would like see the TIFF or FITS file. AstroBin doesn\\'t currently offer to host such large files, so hopefully %(username)s will contact you about how to handle the transaction. Continue?"
 msgstr "Manderai a %(username)s una notifica, con la richiesta di accedere al file TIFF o FITS. AstroBin al momento non offre l'hosting di file così grandi, quindi si spera che %(username)s ti contatterà per organizzarvi con il file. Continuare?"
