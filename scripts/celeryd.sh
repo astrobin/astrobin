@@ -1,2 +1,2 @@
 #! /bin/sh
-./manage.py celeryd --verbosity=2 --loglevel=DEBUG -c 4
+./manage.py celeryd -E --verbosity=2 --loglevel=DEBUG -c 4
