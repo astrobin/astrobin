@@ -1348,7 +1348,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 #content-wrap {
   clear: both;
   width: 100%;
-  padding-bottom: 260px;
+  padding-bottom: 268px;
   background: #333333;
 }
 #content {
@@ -1858,7 +1858,7 @@ span.copy-box {
 #footer {
   position: absolute;
   bottom: -62px;
-  height: 260px;
+  height: 268px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
@@ -1904,8 +1904,13 @@ span.copy-box {
   float: left;
 }
 #footer-bottom .bottom-right {
+  position: absolute;
+  right: 0;
   text-align: right;
   padding-right: 0;
+}
+#footer-bottom .bottom-right p {
+  margin-right: 4px;
 }
 #footer-bottom a.back-to-top {
   padding-right: 20px;

@@ -37,7 +37,7 @@
 @spacer-xlarge: @spacer-small * 4;
 @spacer-xxlarge: @spacer-small * 7;
 
-@footer-height: 260px;
+@footer-height: 268px;
 @wrap-shadow-offset: 62px;
 @site-width: 960px;
 
@@ -1748,8 +1748,12 @@ span.copy-box {
     .bottom-left {
         float: left;}
     .bottom-right {
+        position: absolute;
+        right: 0;
         text-align: right;
-        padding-right: 0;}
+        padding-right: 0;
+        p {
+            margin-right: @spacer-small;}}
     a.back-to-top {
         padding-right: 20px;}
 }
