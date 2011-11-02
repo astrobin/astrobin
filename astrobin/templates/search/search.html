@@ -12,6 +12,7 @@
 </div>
 
 {% if query %}
+<a name="pag_anchor"></a>
 <div id="search-results" class="full-box clear">
     <h2>{% trans "Images matching" %} <em>"{{query}}"</em></h2>
 
@@ -24,23 +25,7 @@
     </div>
 
     {% load tags %}
-    {% image_list page.object_list %}
-
-    {% if page.has_previous or page.has_next %}
-        <div>
-            {% if page.has_previous %}
-            <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">
-            {% endif %}
-            &laquo; {% trans "Previous" %}
-            {% if page.has_previous %}</a>{% endif %}
-            |
-            {% if page.has_next %}
-            <a href="?q={{ query }}&amp;page={{ page.next_page_number }}">
-            {% endif %}
-            {% trans "Next" %} &raquo;
-            {% if page.has_next %}</a>{% endif %}
-        </div>
-    {% endif %}
+    {% image_list request page.object_list %}
 </div>
 {% else %}
     {# Show some example queries to run, maybe query syntax, something else? #}

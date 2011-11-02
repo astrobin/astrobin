@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-02 12:30+0200\n"
+"POT-Creation-Date: 2011-11-02 15:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,29 +139,29 @@ msgstr ""
 msgid "There was an error. Check your input!"
 msgstr ""
 
-#: views.py:748
+#: views.py:746
 msgid "English"
 msgstr ""
 
-#: views.py:749
+#: views.py:747
 msgid "Italian"
 msgstr ""
 
-#: views.py:750
+#: views.py:748
 msgid "Finnish"
 msgstr ""
 
-#: views.py:1151
+#: views.py:1149
 msgid "RE"
 msgstr ""
 
-#: views.py:1210
+#: views.py:1208
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr ""
 
-#: views.py:1234
+#: views.py:1232
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -307,8 +307,8 @@ msgstr ""
 msgid "Upload!"
 msgstr ""
 
-#: templates/base.html:103 templates/user/profile.html:20
-#: templates/user/profile.html.py:23
+#: templates/base.html:103 templates/user/profile.html:21
+#: templates/user/profile.html.py:24
 msgid "Logout"
 msgstr ""
 
@@ -525,27 +525,27 @@ msgstr ""
 msgid "Sign up now!"
 msgstr ""
 
-#: templates/index.html:18
+#: templates/index.html:19
 msgid "Posted by"
 msgstr ""
 
-#: templates/index.html:33
+#: templates/index.html:34
 msgid "Quick upload"
 msgstr ""
 
-#: templates/index.html:39
+#: templates/index.html:40
 msgid "Upload"
 msgstr ""
 
-#: templates/index.html:42
+#: templates/index.html:43
 msgid "Choose an image to upload, or"
 msgstr ""
 
-#: templates/index.html:43
+#: templates/index.html:44
 msgid "import from Flickr"
 msgstr ""
 
-#: templates/index.html:49
+#: templates/index.html:51
 msgid "These images have been uploaded recently"
 msgstr ""
 
@@ -972,6 +972,14 @@ msgstr ""
 
 #: templates/inclusion_tags/image_list.html:24
 msgid "No images"
+msgstr ""
+
+#: templates/inclusion_tags/image_list.html:31
+msgid "newer"
+msgstr ""
+
+#: templates/inclusion_tags/image_list.html:35
+msgid "older"
 msgstr ""
 
 #: templates/inclusion_tags/message_list.html:14
@@ -1418,19 +1426,19 @@ msgstr ""
 msgid "User not found:"
 msgstr ""
 
-#: templates/user/profile.html:8
+#: templates/user/profile.html:9
 msgid "Tools"
 msgstr ""
 
-#: templates/user/profile.html:12 templates/user/profile.html.py:15
+#: templates/user/profile.html:13 templates/user/profile.html.py:16
 msgid "Edit profile"
 msgstr ""
 
-#: templates/user/profile.html:32
+#: templates/user/profile.html:33
 msgid "User's card"
 msgstr ""
 
-#: templates/user/profile.html:47
+#: templates/user/profile.html:49
 msgid "Recent images from"
 msgstr ""
 

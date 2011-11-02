@@ -22,7 +22,7 @@ def current(request, pattern):
 def image_list(request, object_list):
     paginator = Paginator(object_list, 10)
 
-    page = request.GET.get('page')
+    page = request.GET.get('p')
     try:
         images = paginator.page(page)
     except (TypeError, PageNotAnInteger):
@@ -33,6 +33,7 @@ def image_list(request, object_list):
     return {'images': images,
             'thumbnail_size':settings.THUMBNAIL_SIZE,
             's3_url':settings.S3_URL,
+            'query':request.GET.get('q'),
            }
 
 @register.inclusion_tag('inclusion_tags/notification_list.html')

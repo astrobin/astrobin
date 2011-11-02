@@ -28,11 +28,11 @@
 <div class="pagination">
     <span class="step-links">
         {% if images.has_previous %}
-            <a href="?page={{images.previous_page_number}}#recent">&laquo; {% trans "newer" %}</a>
+            <a href="?p={{images.previous_page_number}}{% if query %}&amp;q={{query}}{% endif %}#pag_anchor">&laquo; {% trans "newer" %}</a>
         {% endif %}
         {% if images.has_previous and images.has_next %}|{% endif %}
         {% if images.has_next %}
-            <a href="?page={{images.next_page_number}}#recent">{% trans "older" %} &raquo;</a>
+            <a href="?p={{images.next_page_number}}{% if query %}&amp;q={{query}}{% endif %}#pag_anchor">{% trans "older" %} &raquo;</a>
         {% endif %}
     </span>
 </div>
