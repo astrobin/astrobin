@@ -172,7 +172,10 @@ var image_detail = {
             },
             element  : 'a.upload-revision',
             form_html: '',
-            url       : '/upload/revision/process/'
+            url       : '/upload/revision/process/',
+            fileDefaultText: '',
+            fileBtnText: '',
+            uploadingText: ''
         },
 
         delete_action: {
@@ -343,11 +346,15 @@ var image_detail = {
                     resizable: false,
                     modal: true});
 
-            $('input:file').uniform();
+            $('input:file').uniform(
+               {fileDefaultText: image_detail.config.upload_revision_action.fileDefaultText,
+                fileBtnText: image_detail.config.upload_revision_action.fileBtnText
+               }
+            );
             $('form#upload-revision input').live('change', function() {
                 $('form#upload-revision').append('\
                     <p style="text-align:center">\
-                        <img style="margin: 10px" alt="{% trans "Uploading..." %}" src="/static/images/ajax-loader.gif"/>\
+                        <img style="margin: 10px" alt="' + image_detail.config.upload_revision_action.uploadingText + '" src="/static/images/ajax-loader.gif"/>\
                     </p>');
 
                 $('form#upload-revision').submit();

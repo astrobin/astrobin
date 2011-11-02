@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-02 10:45+0200\n"
+"POT-Creation-Date: 2011-11-02 11:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -383,6 +383,14 @@ msgstr ""
 
 #: templates/base.html:272
 msgid "Uploading..."
+msgstr ""
+
+#: templates/base.html:279
+msgid "No file selected"
+msgstr ""
+
+#: templates/base.html:280
+msgid "Choose file"
 msgstr ""
 
 #: templates/help.html:6
