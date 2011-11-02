@@ -2,7 +2,7 @@
 {% load tags %}
 
 <div class="thumbnail-list clear">
-{% for image in image_list %}
+{% for image in images.object_list %}
     <div class="ic_container"
          style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
         <a href="{{image.get_absolute_url}}/">
@@ -25,3 +25,14 @@
 {% endfor %}
 </div>
 
+<div class="pagination">
+    <span class="step-links">
+        {% if images.has_previous %}
+            <a href="?page={{images.previous_page_number}}#recent">&laquo; {% trans "newer" %}</a>
+        {% endif %}
+        {% if images.has_previous and images.has_next %}|{% endif %}
+        {% if images.has_next %}
+            <a href="?page={{images.next_page_number}}#recent">{% trans "older" %} &raquo;</a>
+        {% endif %}
+    </span>
+</div>

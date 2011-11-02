@@ -1,5 +1,7 @@
 from django.template import  Library
 from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from notification import models as notifications
 from persistent_messages import models as messages
 from celery.result import AsyncResult
@@ -17,8 +19,18 @@ def current(request, pattern):
 
 
 @register.inclusion_tag('inclusion_tags/image_list.html')
-def image_list(objects_list):
-    return {'image_list': [i.object for i in objects_list],
+def image_list(request, object_list):
+    paginator = Paginator(object_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        images = paginator.page(page)
+    except (TypeError, PageNotAnInteger):
+        images = paginator.page(1)
+    except EmptyPage:
+        images = paginator.page(paginator.num_pages)
+
+    return {'images': images,
             'thumbnail_size':settings.THUMBNAIL_SIZE,
             's3_url':settings.S3_URL,
            }

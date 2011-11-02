@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load tags %}
 
 {% block abpod %}
 	{% if abpod %}
@@ -45,9 +46,10 @@
         </div>
     </div>
 
+    <a name="recent"></a>
     <div class="full-box clear">
         <h2>{% trans "These images have been uploaded recently" %}</h2>
-        {% include 'inclusion_tags/image_list.html' %}
+        {% image_list request image_list %}
     </div>
 {% endblock %}
 
