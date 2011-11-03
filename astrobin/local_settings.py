@@ -152,7 +152,7 @@ FLICKR_API_KEY = '1f4***REMOVED***'
 FLICKR_SECRET  = 'd5fd***REMOVED***'
 
 # Turn COMPRESS to True for deployment
-COMPRESS = False 
+COMPRESS = True
 COMPRESS_URL = '/static/'
 COMPILER_FORMATS = {
     '.less': {
