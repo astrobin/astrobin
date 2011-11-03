@@ -246,9 +246,7 @@
         <!-- wrap -->
         </div>
 
-        <script type="text/javascript" src="/static/fonts/Museo-500/MyFonts Webfonts Order M2677657.js"></script>
         {% compress js %}
-        <!-- javascript -->
         <script type="text/javascript" src="/static/js/jquery.min.js"></script>
         <script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
         <script type="text/javascript" src="/static/js/astrobin.js"></script>
@@ -259,7 +257,10 @@
         <script type="text/javascript" src="/static/js/jquery.validationEngine-en.js"></script>
         <script type="text/javascript" src="/static/js/jquery.validationEngine.js"></script>
         <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
+        <script type="text/javascript" src="/static/fonts/Museo-500/MyFonts Webfonts Order M2677657.js"></script>
+        {% endcompress %}
 
+        <!-- javascript -->
         <script type="text/javascript">
             $(document).ready(function() {
                 // date and time pickers
@@ -352,8 +353,10 @@
                 });
             });
         </script>
-        {% endcompress %}
+
+        {% compress js %}
         {% block extra_js %}{% endblock %}
+        {% endcompress %}
     </body>
 </html>
 
