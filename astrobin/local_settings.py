@@ -47,6 +47,7 @@ SITE_ID = 1
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
+USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -95,18 +96,21 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-#    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
+    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
+    'django.middleware.http.ConditionalGetMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-#    'django.middleware.csrf.CsrfViewMiddleware',
-#    'django.middleware.csrf.CsrfResponseMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.CacheMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+#   'django.middleware.csrf.CsrfViewMiddleware',
+#   'django.middleware.csrf.CsrfResponseMiddleware',
+#   'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'astrobin.prof.ProfilerMiddleware',
+#   'astrobin.middlewares.ProfilerMiddleware',
+#   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'privatebeta.middleware.PrivateBetaMiddleware',
-#    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
+    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
 ROOT_URLCONF = 'astrobin.urls'
