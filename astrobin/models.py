@@ -407,6 +407,7 @@ class UserProfile(models.Model):
     website = models.CharField(max_length=32, null=True, blank=True)
     job = models.CharField(max_length=32, null=True, blank=True)
     hobbies = models.CharField(max_length=64, null=True, blank=True)
+    language = models.CharField(max_length=8, null=True, blank=True, editable=False)
 
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)

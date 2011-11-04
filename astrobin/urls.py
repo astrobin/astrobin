@@ -38,8 +38,6 @@ urlpatterns = patterns('',
 
        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 
-    url(r'^profile/edit/language/$', views.user_profile_edit_language, name='profile_edit_language'),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^profile/edit/$', views.user_profile_edit_basic, name='profile_edit_basic'),
     url(r'^profile/edit/basic/$', views.user_profile_edit_basic, name='profile_edit_basic'),
     url(r'^profile/save/basic/$', views.user_profile_save_basic, name='profile_save_basic'),
@@ -77,4 +75,5 @@ urlpatterns = patterns('',
     url(r'^help/', views.help, name='help'),
     url(r'^locations/edit/(?P<id>\d+)/$', views.location_edit, name='location_edit'),
     url(r'^locations/save/$', views.location_save, name='location_save'),
+    url(r'^language/set/(?P<lang>\w+)/$', views.set_language, name='set_language'),
 )

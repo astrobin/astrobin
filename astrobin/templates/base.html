@@ -48,6 +48,11 @@
                     </p>
                 </div>
                 </noscript>
+                <div id="languages">
+                    <a href="{% url set_language "en" %}"><img src="/static/icons/flags/16/United-Kingdom.png" alt="{% trans "English" %}"/></a>
+                    <a href="{% url set_language "it" %}"><img src="/static/icons/flags/16/Italy.png" alt="{% trans "Italian" %}"/></a>
+                    <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="{% trans "Finnish" %}"/></a>
+                </div>
                 <div id="search">
                     <form id="quick-search" action="{% url haystack_search %}" method="get" >
                         <p>

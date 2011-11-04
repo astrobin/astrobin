@@ -736,20 +736,6 @@ def user_page(request, username):
                          'user':user,
                          'gear_list':gear_list})
 
-@login_required
-@require_GET
-def user_profile_edit_language(request):
-    """Edits own language preferences"""
-    return render_to_response("user/profile/edit/language.html",
-        {
-            "LANGUAGES": (
-                ("en", _("English")),
-                ("it", _("Italian")),
-                ("fi", _("Finnish")),
-            ),
-        },
-        context_instance=RequestContext(request))
-
 
 @login_required
 @require_GET
@@ -1325,3 +1311,26 @@ def location_save(request):
         },
         context_instance=RequestContext(request))
 
+@require_GET
+def set_language(request, lang):
+    from django.utils.translation import check_for_language, activate
+
+    next = request.REQUEST.get('next', None)
+    if not next:
+        next = request.META.get('HTTP_REFERER', None)
+    if not next:
+        next = '/'
+    response = HttpResponseRedirect(next)
+    if lang and check_for_language(lang):
+        if hasattr(request, 'session'):
+            request.session['django_language'] = lang
+        else:
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
+        activate(lang)
+
+    if request.user.is_authenticated():
+        profile = UserProfile.objects.get(user = request.user)
+        profile.language = lang
+        profile.save()
+
+    return response
