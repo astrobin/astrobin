@@ -175,9 +175,11 @@ and set site's properties.
 # Run it!
 # =======
 ./scripts/nginx.sh
-./scripts/celeryd.sh &
-./scripts/celerybeat.sh &
+./scripts/celeryd_default.sh &
+./scripts/celeryd_plate_solve.sh &
 ./scripts/gunicorn.sh &
+
+or use ./start.sh
 
 # (replace gunicorn.sh with run.sh if you want to debug)
 
