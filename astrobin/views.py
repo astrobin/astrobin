@@ -11,6 +11,7 @@ from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.conf import settings
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
+from django.views.decorators.vary import vary_on_headers
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -91,7 +92,7 @@ def jsonDumpSubjects(all):
 
 
 # VIEWS
-
+@vary_on_headers('Accept-Language')
 def index(request):
     """Main page"""
 
