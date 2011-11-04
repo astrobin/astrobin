@@ -1325,8 +1325,8 @@ def set_language(request, lang):
     if lang and check_for_language(lang):
         if hasattr(request, 'session'):
             request.session['django_language'] = lang
-        else:
-            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
+
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
         activate(lang)
 
     if request.user.is_authenticated():
