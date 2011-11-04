@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-04 14:06+0200\n"
+"POT-Creation-Date: 2011-11-04 20:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,29 +138,17 @@ msgstr ""
 msgid "There was an error. Check your input!"
 msgstr ""
 
-#: views.py:746
-msgid "English"
-msgstr ""
-
-#: views.py:747
-msgid "Italian"
-msgstr ""
-
-#: views.py:748
-msgid "Finnish"
-msgstr ""
-
-#: views.py:1149
+#: views.py:1135
 msgid "RE"
 msgstr ""
 
-#: views.py:1208
+#: views.py:1194
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr ""
 
-#: views.py:1232
+#: views.py:1218
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -273,89 +261,101 @@ msgid ""
 "enable Javascript."
 msgstr ""
 
-#: templates/base.html:59
+#: templates/base.html:52
+msgid "English"
+msgstr ""
+
+#: templates/base.html:53
+msgid "Italian"
+msgstr ""
+
+#: templates/base.html:54
+msgid "Finnish"
+msgstr ""
+
+#: templates/base.html:64
 msgid "Search images by subject or gear"
 msgstr ""
 
-#: templates/base.html:60
+#: templates/base.html:65
 msgid "Start typing and hit ENTER"
 msgstr ""
 
-#: templates/base.html:63 templates/base.html.py:64
+#: templates/base.html:68 templates/base.html.py:69
 #: templates/search/search.html:10
 msgid "Search"
 msgstr ""
 
-#: templates/base.html:72
+#: templates/base.html:77
 msgid "The definitive home for your astrophotography."
 msgstr ""
 
-#: templates/base.html:80 templates/base.html.py:194 templates/base.html:229
+#: templates/base.html:85 templates/base.html.py:199 templates/base.html:234
 msgid "Home"
 msgstr ""
 
-#: templates/base.html:81 templates/base.html.py:195
+#: templates/base.html:86 templates/base.html.py:200
 msgid "Help"
 msgstr ""
 
-#: templates/base.html:94
+#: templates/base.html:99
 msgid "View your profile"
 msgstr ""
 
-#: templates/base.html:97
+#: templates/base.html:102
 msgid "Edit your profile"
 msgstr ""
 
-#: templates/base.html:100
+#: templates/base.html:105
 msgid "Upload an image"
 msgstr ""
 
-#: templates/base.html:100
+#: templates/base.html:105
 msgid "Upload!"
 msgstr ""
 
-#: templates/base.html:103 templates/user/profile.html:21
+#: templates/base.html:108 templates/user/profile.html:21
 #: templates/user/profile.html.py:24
 msgid "Logout"
 msgstr ""
 
-#: templates/base.html:110 templates/base.html.py:111
+#: templates/base.html:115 templates/base.html.py:116
 msgid "Notifications"
 msgstr ""
 
-#: templates/base.html:117 templates/base.html.py:118
+#: templates/base.html:122 templates/base.html.py:123
 msgid "Messages"
 msgstr ""
 
-#: templates/base.html:124 templates/base.html.py:125
+#: templates/base.html:129 templates/base.html.py:130
 msgid "Requests"
 msgstr ""
 
-#: templates/base.html:135
+#: templates/base.html:140
 msgid "Have an invite? Login!"
 msgstr ""
 
-#: templates/base.html:137
+#: templates/base.html:142
 msgid "Login"
 msgstr ""
 
-#: templates/base.html:143 templates/registration/login.html:8
+#: templates/base.html:148 templates/registration/login.html:8
 msgid "Register"
 msgstr ""
 
-#: templates/base.html:165
+#: templates/base.html:170
 msgid "Error"
 msgstr ""
 
-#: templates/base.html:167
+#: templates/base.html:172
 msgid "Info"
 msgstr ""
 
-#: templates/base.html:185
+#: templates/base.html:190
 msgid "About"
 msgstr ""
 
-#: templates/base.html:187
+#: templates/base.html:192
 msgid ""
 "AstroBin is a image hosting website specifically targeted to "
 "astrophotographers: it's the last place where you need to upload your "
@@ -363,45 +363,45 @@ msgid ""
 "astrophotographers."
 msgstr ""
 
-#: templates/base.html:191
+#: templates/base.html:196
 msgid "Site links"
 msgstr ""
 
-#: templates/base.html:200
+#: templates/base.html:205
 msgid "Thanks to"
 msgstr ""
 
-#: templates/base.html:209
+#: templates/base.html:214
 msgid "Copyright"
 msgstr ""
 
-#: templates/base.html:211
+#: templates/base.html:216
 msgid ""
 "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The "
 "images on this websites are copyright of their respective owners."
 msgstr ""
 
-#: templates/base.html:230
+#: templates/base.html:235
 msgid "Follow AstroBin on Twitter"
 msgstr ""
 
-#: templates/base.html:231
+#: templates/base.html:236
 msgid "Back to top"
 msgstr ""
 
-#: templates/base.html:245
+#: templates/base.html:250
 msgid "Feedback"
 msgstr ""
 
-#: templates/base.html:274 templates/image/detail.html:303
+#: templates/base.html:279 templates/image/detail.html:303
 msgid "Uploading..."
 msgstr ""
 
-#: templates/base.html:281 templates/image/detail.html:301
+#: templates/base.html:286 templates/image/detail.html:301
 msgid "No file selected"
 msgstr ""
 
-#: templates/base.html:282 templates/image/detail.html:302
+#: templates/base.html:287 templates/image/detail.html:302
 msgid "Choose file"
 msgstr ""
 
@@ -550,23 +550,32 @@ msgstr ""
 msgid "Posted by"
 msgstr ""
 
-#: templates/index.html:34
+#: templates/index.html:35
 msgid "Quick upload"
 msgstr ""
 
-#: templates/index.html:40
+#: templates/index.html:41
 msgid "Upload"
 msgstr ""
 
-#: templates/index.html:43
+#: templates/index.html:44
 msgid "Choose an image to upload, or"
 msgstr ""
 
-#: templates/index.html:44
+#: templates/index.html:45
 msgid "import from Flickr"
 msgstr ""
 
-#: templates/index.html:51
+#: templates/index.html:52
+#, python-format
+msgid ""
+"<strong>Hello there! Welcome to AstroBin!</strong> <em>AstroBin</em> is an "
+"image hosting service made specifically for astrophotographers. It comes "
+"packed with features that benefits the astrophotography community greatly! "
+"Read more in the <a href=\"%(help_url)s\">help page.</a>"
+msgstr ""
+
+#: templates/index.html:57
 msgid "These images have been uploaded recently"
 msgstr ""
 
@@ -574,19 +583,15 @@ msgstr ""
 msgid "Object not found"
 msgstr ""
 
-#: templates/profile-edit-menu.html:5
-msgid "Language"
-msgstr ""
-
-#: templates/profile-edit-menu.html:6 templates/image/edit/menu.html:5
+#: templates/profile-edit-menu.html:5 templates/image/edit/menu.html:5
 msgid "Basic Information"
 msgstr ""
 
-#: templates/profile-edit-menu.html:7
+#: templates/profile-edit-menu.html:6
 msgid "Gear"
 msgstr ""
 
-#: templates/profile-edit-menu.html:8
+#: templates/profile-edit-menu.html:7
 msgid "Import from Flickr"
 msgstr ""
 
@@ -912,7 +917,6 @@ msgstr ""
 #: templates/image/edit/acquisition.html:146 templates/location/edit.html:16
 #: templates/user/profile/edit/basic.html:15
 #: templates/user/profile/edit/gear.html:15
-#: templates/user/profile/edit/language.html:17
 msgid "Save"
 msgstr ""
 
@@ -1521,12 +1525,4 @@ msgstr ""
 
 #: templates/user/profile/edit/gear.html:7
 msgid "Edit your astrophotography gear"
-msgstr ""
-
-#: templates/user/profile/edit/language.html:7
-msgid "Set the language used in this website"
-msgstr ""
-
-#: templates/user/profile/edit/language.html:10
-msgid "Select language"
 msgstr ""
