@@ -15,7 +15,7 @@ FAILED="(echo failed; exit 1;)"
 if [ -e $NGINX_PID ]
 then
     $ECHON 'Stopping nginx... '
-    $SUDO kill `cat $NGINX_PID` 2>- && $RM $NGINX_PID
+    $SUDO kill `cat $NGINX_PID` 2>- && $SUDO $RM $NGINX_PID
     $DONE
 else
     $ECHO 'nginx not running.'
