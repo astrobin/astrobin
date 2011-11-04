@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <h2>404 - {% trans "Page not found." %}</h2>
+    <p>{% blocktrans %}Sorry, but the content you were looking for is not here.{% endblocktrans %}
+{% endblock %}
