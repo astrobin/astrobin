@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-02 15:53+0200\n"
+"POT-Creation-Date: 2011-11-04 14:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,6 +258,14 @@ msgstr ""
 msgid "You are not allowed to see this page."
 msgstr ""
 
+#: templates/404.html:5
+msgid "Page not found."
+msgstr ""
+
+#: templates/404.html:6
+msgid "Sorry, but the content you were looking for is not here."
+msgstr ""
+
 #: templates/base.html:47
 msgid ""
 "Hey! It looks like your browser doesn't support Javascript, or you disabled "
@@ -374,22 +382,26 @@ msgid ""
 msgstr ""
 
 #: templates/base.html:230
+msgid "Follow AstroBin on Twitter"
+msgstr ""
+
+#: templates/base.html:231
 msgid "Back to top"
 msgstr ""
 
-#: templates/base.html:244
+#: templates/base.html:245
 msgid "Feedback"
 msgstr ""
 
-#: templates/base.html:272 templates/image/detail.html:303
+#: templates/base.html:274 templates/image/detail.html:303
 msgid "Uploading..."
 msgstr ""
 
-#: templates/base.html:279 templates/image/detail.html:301
+#: templates/base.html:281 templates/image/detail.html:301
 msgid "No file selected"
 msgstr ""
 
-#: templates/base.html:280 templates/image/detail.html:302
+#: templates/base.html:282 templates/image/detail.html:302
 msgid "Choose file"
 msgstr ""
 
@@ -441,11 +453,21 @@ msgid ""
 "designed to enable you to input all the technical data of your image."
 msgstr ""
 
-#: templates/help.html:27
+#: templates/help.html:24
+msgid ""
+"<em>AstroBin</em> will autocomplete your input using a vast database: "
+"everything from telescopes, CCDs and filters to astronomical objects in many "
+"catalogues will show in popup dialogs for easy selection when you start "
+"typing their names. <em>AstroBin</em> is connected to the SIMBAD "
+"Astronomical Database, which contains over 5 million objects under over 15 "
+"million names!"
+msgstr ""
+
+#: templates/help.html:28
 msgid "Data is strongly interconnected"
 msgstr ""
 
-#: templates/help.html:29
+#: templates/help.html:30
 msgid ""
 "Have you ever wanted to see how your next image is going to look like? On "
 "<em>AstroBin</em>, you can search for all images of a certain target that "
@@ -454,11 +476,11 @@ msgid ""
 "integration? Or with a certain Moon phase? You can do that!"
 msgstr ""
 
-#: templates/help.html:33
+#: templates/help.html:34
 msgid "All the data at a glance"
 msgstr ""
 
-#: templates/help.html:35
+#: templates/help.html:36
 msgid ""
 "Each image on <em>AstroBin</em> is annotated of all the technical details "
 "about its acquisition. Telescopes involved, cameras, mounts, filters, "
@@ -466,11 +488,11 @@ msgid ""
 "at the time of the acquisition is displayed."
 msgstr ""
 
-#: templates/help.html:39
+#: templates/help.html:40
 msgid "More than just an image"
 msgstr ""
 
-#: templates/help.html:41
+#: templates/help.html:42
 msgid ""
 "<em>AstroBin</em> will do more than just host a copy of your image: when you "
 "upload a photograph, a histogram and a black &amp; white inverted version of "
@@ -480,11 +502,11 @@ msgid ""
 "are the astronomical objects in your image without you telling!"
 msgstr ""
 
-#: templates/help.html:45
+#: templates/help.html:46
 msgid "AstroBin supports multiple image revisions"
 msgstr ""
 
-#: templates/help.html:47
+#: templates/help.html:48
 msgid ""
 "Don't tell me you have never gone back to revise the processing of an image "
 "<em>after</em> you had published it. <em>AstroBin</em> embraces this concept "
@@ -493,18 +515,18 @@ msgid ""
 "processing has improved."
 msgstr ""
 
-#: templates/help.html:51
+#: templates/help.html:52
 msgid "AstroBin is social!"
 msgstr ""
 
-#: templates/help.html:53
+#: templates/help.html:54
 msgid ""
 "On <em>AstroBin</em> you can message other astrophotographer, follow them "
 "and be notified when they post new images, or perform requests for more "
 "data. You can also vote on images."
 msgstr ""
 
-#: templates/help.html:58
+#: templates/help.html:59
 msgid ""
 "As you have undoubtly realized by now, <em>AstroBin</em> is way more than an "
 "image hosting service. It's what the Astrophotography community has needed "
@@ -516,11 +538,11 @@ msgid ""
 "the world."
 msgstr ""
 
-#: templates/help.html:60
+#: templates/help.html:61
 msgid "So, what are you waiting for?"
 msgstr ""
 
-#: templates/help.html:61
+#: templates/help.html:62
 msgid "Sign up now!"
 msgstr ""
 
@@ -869,7 +891,7 @@ msgid "Transparency (0-10)"
 msgstr ""
 
 #: templates/image/edit/acquisition.html:79
-#: templates/image/edit/acquisition.html:134 templates/search/search.html:21
+#: templates/image/edit/acquisition.html:134 templates/search/search.html:22
 msgid "Date"
 msgstr ""
 
@@ -1393,32 +1415,24 @@ msgstr ""
 msgid "Show/hide advanced search box."
 msgstr ""
 
-#: templates/search/search.html:16
+#: templates/search/search.html:17
 msgid "Images matching"
 msgstr ""
 
-#: templates/search/search.html:19
+#: templates/search/search.html:20
 msgid "Sort these images by:"
 msgstr ""
 
-#: templates/search/search.html:20
+#: templates/search/search.html:21
 msgid "Relevance"
 msgstr ""
 
-#: templates/search/search.html:22
+#: templates/search/search.html:23
 msgid "Rating"
 msgstr ""
 
-#: templates/search/search.html:23
+#: templates/search/search.html:24
 msgid "Integration"
-msgstr ""
-
-#: templates/search/search.html:34
-msgid "Previous"
-msgstr ""
-
-#: templates/search/search.html:40
-msgid "Next"
 msgstr ""
 
 #: templates/user/not_found.html:5
