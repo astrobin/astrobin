@@ -1032,6 +1032,11 @@ form input:focus, form select:focus, form textarea:focus {
   padding: 0;
   margin: 0;
 }
+#header #languages {
+  position: absolute;
+  top: 20px;
+  right: 250px;
+}
 #header #search {
   position: absolute;
   top: 12px;
