@@ -59,7 +59,7 @@
                                         <span class="text"><a href="{{image.get_absolute_url}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
                                         {% endif %}
                                     </li>
-                                    {% if image.is_solved %}
+                                    {% if image.is_solved and not solved %}
                                     <li class="last bg-icon icon-solved">
                                         <span class="text"><a href="{{image.get_absolute_url}}/?mod=solved">{% trans "Annotated" %}</a></span>
                                     </li>
