@@ -50,6 +50,7 @@ server {
 
     location /favicon.ico {
         root /home/astrobin/Code/astrobin/static;
+        expires max;
     }
 
     # internal publish endpoint (keep it private / protected)
