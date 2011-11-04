@@ -8,6 +8,7 @@
             <ul class="bar">
                 <li id="menu">
                     <ul class="topnav">
+                        {% if request.user.is_authenticated %}
                         <li id="actions" class="first">
                             <span class="text"><a href="#">{% trans "Actions" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
@@ -45,7 +46,8 @@
                                 </ul>
                             </div>
                         </li>
-                        <li id="view">
+                        {% endif %}
+                        <li id="view" {% if not request.user.is_authenticated %}class="first"{% endif %}>
                             <span class="text"><a href="#">{% trans "View" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
