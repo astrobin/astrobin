@@ -30,6 +30,7 @@
 {% endblock %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
     <div class="small-box">
         <h2>{% trans "Quick upload" %}</h2>
         <div class="single-form">
@@ -45,7 +46,12 @@
             </form>
         </div>
     </div>
-
+    {% else %}
+    {% url help as help_url %}
+    <p class="hello">
+    {% blocktrans %}<strong>Hello there! Welcome to AstroBin!</strong> <em>AstroBin</em> is an image hosting service made specifically for astrophotographers. It comes packed with features that benefits the astrophotography community greatly! Read more in the <a href="{{help_url}}">help page.</a>{% endblocktrans %}
+    {% endif %}
+    </p>
     <a name="pag_anchor"></a>
     <div class="full-box clear">
         <h2>{% trans "These images have been uploaded recently" %}</h2>
