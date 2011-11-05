@@ -196,6 +196,8 @@ def image_detail(request, id):
                 frames += ' @ ISO%s' % (a.iso, )
 
         def average(values):
+            if not len(values):
+                return 0
             return float(sum(values)) / len(values)
 
         deep_sky_data = {
