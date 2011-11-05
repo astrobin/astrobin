@@ -21,6 +21,7 @@ from django.utils.translation import ugettext as _
 
 import simplejson
 import string
+import re
 
 
 @login_required
@@ -29,6 +30,13 @@ def autocomplete(request, what):
     values = []
     q = request.GET['q']
     limit = 10
+
+    regex = ".*"
+    for c in re.sub(r'\s', '', q):
+        esc = re.escape(c)
+        for d in esc:
+            regex += "%c.*" % d
+
 
     # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
