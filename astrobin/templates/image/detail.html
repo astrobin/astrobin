@@ -107,7 +107,7 @@
                                         <span class="copy-box">http://astrob.in/{{image.id}}/</span>
                                     </li>
                                     <li class="last copy-box">
-                                        <span class="text">{% trans "Forms link:" %}</span>
+                                        <span class="text">{% trans "Link for forums:" %}</span>
                                         <span class="copy-box">[URL=http://astrob.in/{{image.id}}/]{{image.title|escape}}[/URL]</span>
                                     </li>
                                 </ul>
@@ -164,7 +164,9 @@
                 <ul>
                     <li class="title">{{image.title|escape|default:_("(no title)")}}</li>
                     <li class="uploaded">({% trans "uploaded on" %} {{image.uploaded}}</li>
-                    <li class="author">{% trans "by" %} <a href="{% url user_page image.user.username %}">{{image.user.username}}</a>)</li>
+                    <li class="author">
+                        {% url user_page image.user.username as the_url %}
+                        {% blocktrans %}by <a href="{{ the_url }}">{{image.user.username}}</a>{% endblocktrans %})</li>
                     {% if image.subjects %}
                     {% endif %}
                 </ul>
@@ -358,7 +360,7 @@ $(document).ready(function() {
             image_request_fits_action: {
                 dialog: {
                     title : "{% trans "Request TIFF/FITS" %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like see the TIFF or FITS file. AstroBin doesn\'t currently offer to host such large files, so hopefully {{username}} will contact you about how to handle the transaction. Continue?{% endblocktrans %}",
+                    body  : "{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully {{username}} will contact you about how to handle the transaction. Continue?{% endblocktrans %}",
                 }
             }
         });

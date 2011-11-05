@@ -11,7 +11,7 @@ def create_notice_types(app, created_models, verbosity, **kwargs):
 
     notification.create_notice_type(
         'follow_success',
-        _('You are now folling'),
+        _('You are now following'),
         _('Their new images will be notified to you'))
 
     notification.create_notice_type(
