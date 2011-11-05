@@ -317,7 +317,7 @@ class ImageRevision(models.Model):
  
 
 class Acquisition(models.Model):
-    date = models.DateField(_("Date"), null=True, blank=True)
+    date = models.DateField(_("Date"), null=True, blank=True, help_text=_("Please use the following format: yyyy-mm-dd"))
     image = models.ForeignKey(Image, verbose_name=_("Image"))
 
     class Meta:

@@ -432,7 +432,7 @@ def image_edit_acquisition(request, id):
             extra = 1
         if not dsa_qs:
             extra = 1
-        DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=extra, can_delete=False)
+        DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=extra, can_delete=False, form=DeepSky_AcquisitionForm)
         deep_sky_acquisition_formset = DSAFormSet(instance=image)
 
     response_dict = {
