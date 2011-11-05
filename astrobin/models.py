@@ -21,7 +21,7 @@ from tasks import store_image, solve_image, delete_image
 from notifications import push_notification
 
 class Gear(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(_("Name"), max_length=64)
 
     def __unicode__(self):
         return self.name
@@ -31,8 +31,8 @@ class Gear(models.Model):
 
 
 class Telescope(Gear):
-    focal_length = models.IntegerField(null=True, blank=True)
-    aperture = models.IntegerField(null=True, blank=True)
+    focal_length = models.IntegerField(_("Focal length"), null=True, blank=True)
+    aperture = models.IntegerField(_("Aperture"), null=True, blank=True)
 
     class Meta:
         app_label = 'astrobin'
@@ -53,7 +53,7 @@ class Camera(Gear):
 
 
 class FocalReducer(Gear):
-    ratio = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    ratio = models.DecimalField(_("Ratio"), max_digits=3, decimal_places=2, null=True, blank=True)
 
     class Meta:
         app_label = 'astrobin'
@@ -139,10 +139,10 @@ class SubjectIdentifier(models.Model):
 
 
 class Location(models.Model):
-    name = models.CharField(max_length=255)
-    latitude = models.DecimalField(max_digits=7, decimal_places=4, null=True, blank=True)
-    longitude = models.DecimalField(max_digits=7, decimal_places=4, null=True, blank=True)
-    altitude = models.IntegerField(null=True, blank=True)
+    name = models.CharField(_("Name"), max_length=255)
+    latitude = models.DecimalField(_("Latitude"), max_digits=7, decimal_places=4, null=True, blank=True)
+    longitude = models.DecimalField(_("Longitude"), max_digits=7, decimal_places=4, null=True, blank=True)
+    altitude = models.IntegerField(_("Altitude"), null=True, blank=True)
     user_generated = models.BooleanField()
 
     def __unicode__(self):
@@ -215,24 +215,24 @@ def image_stored_callback(image, stored, solve):
 
 
 class Image(models.Model):
-    title = models.CharField(max_length=128)
-    subjects = models.ManyToManyField(Subject)
-    locations = models.ManyToManyField(Location, null=True, blank=True)
-    description = models.TextField()
+    title = models.CharField(_("Title"), max_length=128)
+    subjects = models.ManyToManyField(Subject, verbose_name=_("Subjects"))
+    locations = models.ManyToManyField(Location, null=True, blank=True, verbose_name=_("Locations"))
+    description = models.TextField(_("Description"))
     filename = models.CharField(max_length=64, editable=False)
     original_ext = models.CharField(max_length=6, editable=False)
     uploaded = models.DateTimeField(editable=False)
 
     # gear
-    imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes')
-    guiding_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='guiding_telescopes')
-    mounts = models.ManyToManyField(Mount, null=True, blank=True)
-    imaging_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='imaging_cameras')
-    guiding_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='guiding_cameras')
-    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True)
-    software = models.ManyToManyField(Software, null=True, blank=True)
-    filters = models.ManyToManyField(Filter, null=True, blank=True)
-    accessories = models.ManyToManyField(Accessory, null=True, blank=True)
+    imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes"))
+    guiding_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes"))
+    mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"))
+    imaging_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='imaging_cameras', verbose_name=_("Imaging cameras")) 
+    guiding_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='guiding_cameras', verbose_name=_("Guiding cameras"))
+    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers")) 
+    software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"))
+    filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"))
+    accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
 
     rating = RatingField(range=5)
     user = models.ForeignKey(User)
@@ -317,8 +317,8 @@ class ImageRevision(models.Model):
  
 
 class Acquisition(models.Model):
-    date = models.DateField(null=True, blank=True)
-    image = models.ForeignKey(Image)
+    date = models.DateField(_("Date"), null=True, blank=True)
+    image = models.ForeignKey(Image, verbose_name=_("Image"))
 
     class Meta:
         app_label = 'astrobin'
@@ -328,34 +328,42 @@ class Acquisition(models.Model):
 
 
 class DeepSky_Acquisition(Acquisition):
-    acquisition_type = models.CharField(max_length=2)
-    number = models.IntegerField()
-    duration = models.IntegerField(null=True, blank=True)
-    iso = models.IntegerField(null=True, blank=True)
+    filter = models.ForeignKey(Filter, null=True, blank=True, verbose_name=_("Filter"))
+    number = models.IntegerField(_("Number"), null=True, blank=True)
+    duration = models.IntegerField(_("Duration"), null=True, blank=True)
+    iso = models.IntegerField(_("ISO"), null=True, blank=True)
+    gain = models.DecimalField(_("Gain"), null=True, blank=True, max_digits=5, decimal_places=2)
+    sensor_cooling = models.IntegerField(_("Sensor cooling"), null=True, blank=True)
+    darks = models.IntegerField(_("Darks"), null=True, blank=True)
+    flats = models.IntegerField(_("Flats"), null=True, blank=True)
+    flat_darks = models.IntegerField(_("Flat darks"), null=True, blank=True)
+    bias = models.IntegerField(_("Bias"), null=True, blank=True)
+    mean_sqm = models.DecimalField(_("Mean SQM"), null=True, blank=True, max_digits=5, decimal_places=2)
+    mean_fwhm = models.DecimalField(_("Mean FWHM"), null=True, blank=True, max_digits=5, decimal_places=2)
 
     class Meta:
         app_label = 'astrobin'
-        ordering = ['acquisition_type']
+        ordering = ['filter']
 
 
 class SolarSystem_Acquisition(Acquisition):
-    frames = models.IntegerField(null=True, blank=True)
-    fps = models.IntegerField(null=True, blank=True)
-    focal_length = models.IntegerField(null=True, blank=True)
-    cmi = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2)
-    cmii = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2)
-    cmiii = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2)
-    seeing = models.IntegerField(null=True, blank=True)
-    transparency = models.IntegerField(null=True, blank=True)
-    time = models.CharField(null=True, blank=True, max_length=5)
+    frames = models.IntegerField(_("Frames"), null=True, blank=True)
+    fps = models.IntegerField(_("FPS"), null=True, blank=True)
+    focal_length = models.IntegerField(_("Focal length"), null=True, blank=True)
+    cmi = models.DecimalField(_("CMI"), null=True, blank=True, max_digits=5, decimal_places=2)
+    cmii = models.DecimalField(_("CMII"), null=True, blank=True, max_digits=5, decimal_places=2)
+    cmiii = models.DecimalField(_("CMIII"), null=True, blank=True, max_digits=5, decimal_places=2)
+    seeing = models.IntegerField(_("Seeing"), null=True, blank=True)
+    transparency = models.IntegerField(_("Transparency"), null=True, blank=True)
+    time = models.CharField(_("Time"), null=True, blank=True, max_length=5)
 
     class Meta:
         app_label = 'astrobin'
 
 
 class ABPOD(models.Model):
-    image = models.ForeignKey(Image, unique=True)
-    date = models.DateTimeField()
+    image = models.ForeignKey(Image, unique=True, verbose_name=_("Image"))
+    date = models.DateTimeField(_("Date"))
 
     def __unicode__(self):
         return self.image.title
@@ -403,23 +411,23 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, editable=False)
 
     # Basic Information
-    locations = models.ManyToManyField(Location, null=True, blank=True)
-    website = models.CharField(max_length=32, null=True, blank=True)
-    job = models.CharField(max_length=32, null=True, blank=True)
-    hobbies = models.CharField(max_length=64, null=True, blank=True)
-    language = models.CharField(max_length=8, null=True, blank=True, editable=False)
+    locations = models.ManyToManyField(Location, null=True, blank=True, verbose_name=_("Locations"))
+    website = models.CharField(_("Website"), max_length=32, null=True, blank=True)
+    job = models.CharField(_("Job"), max_length=32, null=True, blank=True)
+    hobbies = models.CharField(_("Hobbies"), max_length=64, null=True, blank=True)
+    language = models.CharField(_("Language"), max_length=8, null=True, blank=True, editable=False)
 
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
 
     # Gear
-    telescopes = models.ManyToManyField(Telescope, null=True, blank=True)
-    mounts = models.ManyToManyField(Mount, null=True, blank=True)
-    cameras = models.ManyToManyField(Camera, null=True, blank=True)
-    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True)
-    software = models.ManyToManyField(Software, null=True, blank=True)
-    filters = models.ManyToManyField(Filter, null=True, blank=True)
-    accessories = models.ManyToManyField(Accessory, null=True, blank=True)
+    telescopes = models.ManyToManyField(Telescope, null=True, blank=True, verbose_name=_("Telescopes"))
+    mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"))
+    cameras = models.ManyToManyField(Camera, null=True, blank=True, verbose_name=_("Cameras"))
+    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers"))
+    software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"))
+    filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"))
+    accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
 
     follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers')
 

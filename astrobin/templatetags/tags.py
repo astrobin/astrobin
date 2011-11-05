@@ -96,18 +96,3 @@ def append_slash(value):
 def image_is_ready(image):
     return AsyncResult(image.store_task_id).ready()
 
-
-@register.simple_tag
-def acquisition_label(type):
-    dict = {
-        '0l':'Luminance',
-        '1r':'Red',
-        '2g':'Green',
-        '3b':'Blue',
-        '4d':'Darks',
-        '5f':'Flats',
-        '6x':'Flat darks',
-        '7o':'Offset/bias',
-    }
-    return dict[type]
-
