@@ -45,7 +45,6 @@ server {
             proxy_pass http://app_server;
             break;
         }
-        proxy_pass http://app_server;
     }
 
     location /favicon.ico {
