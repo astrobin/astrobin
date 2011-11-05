@@ -103,12 +103,22 @@
                             <div class="sub">
                                 <ul class="subnav">
                                     <li class="first copy-box">
-                                        <span class="text">{% trans "Direct link:" %}</span>
-                                        <span class="copy-box">http://astrob.in/{{image.id}}/</span>
-                                    </li>
-                                    <li class="last copy-box">
-                                        <span class="text">{% trans "Link for forums:" %}</span>
-                                        <span class="copy-box">[URL=http://astrob.in/{{image.id}}/]{{image.title|escape}}[/URL]</span>
+                                        <table>
+                                            <tr>
+                                                <th><span class="text">{% trans "Direct link:" %}</span></th>
+                                                <td><form><textarea rows="1">http://astrob.in/{{image.id}}/</textarea></form></td>
+                                            </tr>
+                                            <tr>
+                                                <th><span class="text">{% trans "Link for forums:" %}</span></th>
+                                                <td><form><textarea>[URL=http://astrob.in/{{image.id}}/]{{image.title|escape}}[/URL]</textarea></form></td>
+                                            </tr>
+                                            {% if is_ready %}
+                                            <tr>
+                                                <th><span class="text">{% trans "With thumbnail:" %}</span></th>
+                                                <td><form><textarea rows="8">[URL=http://astrob.in/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb{{image.original_ext}}[/IMG][/URL]</textarea></form></td>
+                                            </tr>
+                                            {% endif %}
+                                        </table>
                                     </li>
                                 </ul>
                             </div>

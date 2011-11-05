@@ -1802,6 +1802,20 @@ ul.subnav {
 ul.subnav li.copy-box {
   margin: 8px 0;
 }
+ul.subnav li.copy-box textarea {
+  width: 200px;
+}
+ul.subnav li.copy-box tr {
+  height: 32px;
+}
+ul.subnav li.copy-box th, ul.subnav li.copy-box td {
+  vertical-align: middle;
+  color: #333333;
+  text-shadow: white 0 1px 0;
+  font-weight: normal;
+  border: none;
+  background: none;
+}
 ul.subnav li.separator {
   height: 0;
   margin: 8px 0;
