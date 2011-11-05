@@ -206,6 +206,7 @@ def image_detail(request, id):
         def average(values):
             return float(sum(values)) / len(values)
         deep_sky_data['moon_age'] = "%.2f" % (average(moon_age_list), )
+        deep_sky_data['moon_illuminated'] = "%.2f" % (average(moon_illuminated_list), )
 
     elif solar_system_acquisition:
         image_type = 'solar_system'
