@@ -233,14 +233,10 @@
                 </div>
                 <div class="acquisition">
                     {% if image_type == 'deep_sky' %}
-                        {% for d in deep_sky_data %}
-                            {% if d.1 %}
+                        {% for label, data in deep_sky_data.items %}
+                            {% if data %}
                                 <p>
-                                <strong>{% trans d.0 %}:&nbsp;</strong>
-                                {% for i in d.1 %}
-                                    {{i}}
-                                    {% if not forloop.last %},&nbsp;{% endif %}
-                                {% endfor %}
+                                    <strong>{{label}}</strong>: {{data}}
                                 </p>
                             {% endif %}
                         {% endfor %}

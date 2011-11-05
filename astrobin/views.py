@@ -182,31 +182,33 @@ def image_detail(request, id):
         acquisitions = []
 
         for a in deep_sky_acquisitions:
+            dates = []
             if a.date is not None:
+                dates.append(a.date)
                 m = MoonPhase(a.date)
                 moon_age_list.append(m.age)
                 moon_illuminated_list.append(m.illuminated)
 
-            frames = '%sx%s' % (a.number, a.duration)
+            frames = None
+            if a.number and a.duration:
+                frames = '%sx%s' % (a.number, a.duration)
             if a.iso:
                 frames += ' @ ISO%s' % (a.iso, )
 
-            acquisition = {
-                'date': a.date,
-                'filter': a.filter,
-                'frames': frames,
-                'darks' : a.darks,
-                'flats': a.flats,
-                'flat_darks': a.flat_darks,
-                'bias': a.bias,
-            }
-            acquisitions.append(acquisition)
-
-        deep_sky_data['acquisitions'] = acquisitions
         def average(values):
             return float(sum(values)) / len(values)
-        deep_sky_data['moon_age'] = "%.2f" % (average(moon_age_list), )
-        deep_sky_data['moon_illuminated'] = "%.2f" % (average(moon_illuminated_list), )
+
+        deep_sky_data = {
+            _('Dates'): u', '.join([str(x) for x in dates]),
+            _('Filter'): a.filter,
+            _('Frames'): frames,
+            _('Darks') : a.darks,
+            _('Flats'): a.flats,
+            _('Flat darks'): a.flat_darks,
+            _('Bias'): a.bias,
+            _('Avg. Moon age'): "%.2f" % (average(moon_age_list), ),
+            _('Avg. Moon phase'): "%.2f" % (average(moon_illuminated_list), )
+        }
 
     elif solar_system_acquisition:
         image_type = 'solar_system'
