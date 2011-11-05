@@ -818,7 +818,7 @@ strong {
 /* form elements */
 form p {
   margin: 0;
-  padding: 4px;
+  padding: 6px;
 }
 form p.hint {
   font-style: italic;
@@ -836,7 +836,7 @@ form span.helptext {
 form ul {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 6px;
 }
 form ul li {
   display: inline;
@@ -1421,7 +1421,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   padding: 11px 10px 0 0;
 }
 .sided-main-content .submit-button {
-  margin-left: 160px;
+  margin-left: 162px;
   width: 200px;
 }
 .sided-main-content .lone-button {

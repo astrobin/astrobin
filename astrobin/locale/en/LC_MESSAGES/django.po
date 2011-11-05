@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-04 20:52+0200\n"
+"POT-Creation-Date: 2011-11-05 09:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Examples: +12.44, -51.25"
 msgstr ""
 
-#: models.py:248 templates/image/detail.html:163
+#: models.py:248 templates/image/detail.html:165
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/image_list.html:19
 msgid "(no title)"
@@ -121,7 +121,7 @@ msgstr ""
 
 #: views.py:328 views.py:331 views.py:362 views.py:365 views.py:480
 #: views.py:483 views.py:518 views.py:547
-#: templates/user/profile/edit/basic.html:23
+#: templates/user/profile/edit/basic.html:28
 #: templates/user/profile/edit/gear.html:23
 msgid "Enter partial name and wait for the suggestions!"
 msgstr ""
@@ -393,15 +393,15 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
-#: templates/base.html:279 templates/image/detail.html:303
+#: templates/base.html:279 templates/image/detail.html:305
 msgid "Uploading..."
 msgstr ""
 
-#: templates/base.html:286 templates/image/detail.html:301
+#: templates/base.html:286 templates/image/detail.html:303
 msgid "No file selected"
 msgstr ""
 
-#: templates/base.html:287 templates/image/detail.html:302
+#: templates/base.html:287 templates/image/detail.html:304
 msgid "Choose file"
 msgstr ""
 
@@ -595,263 +595,263 @@ msgstr ""
 msgid "Import from Flickr"
 msgstr ""
 
-#: templates/image/detail.html:12
+#: templates/image/detail.html:13
 msgid "Actions"
 msgstr ""
 
-#: templates/image/detail.html:18
+#: templates/image/detail.html:19
 msgid "Edit basic information"
 msgstr ""
 
-#: templates/image/detail.html:21
+#: templates/image/detail.html:22
 msgid "Edit gear used"
 msgstr ""
 
-#: templates/image/detail.html:24
+#: templates/image/detail.html:25
 msgid "Edit acquisition details"
 msgstr ""
 
-#: templates/image/detail.html:27 templates/image/detail.html.py:297
+#: templates/image/detail.html:28 templates/image/detail.html.py:299
 msgid "Upload new revision"
 msgstr ""
 
-#: templates/image/detail.html:30
+#: templates/image/detail.html:31
 msgid "Delete"
 msgstr ""
 
-#: templates/image/detail.html:35
+#: templates/image/detail.html:36
 msgid "Bring to a user's attention"
 msgstr ""
 
-#: templates/image/detail.html:39 templates/image/detail.html.py:352
+#: templates/image/detail.html:40 templates/image/detail.html.py:354
 msgid "Request additional information"
 msgstr ""
 
-#: templates/image/detail.html:42 templates/image/detail.html.py:358
+#: templates/image/detail.html:43 templates/image/detail.html.py:360
 msgid "Request TIFF/FITS"
 msgstr ""
 
-#: templates/image/detail.html:49
+#: templates/image/detail.html:51
 msgid "View"
 msgstr ""
 
-#: templates/image/detail.html:55
+#: templates/image/detail.html:57
 msgid "Normal"
 msgstr ""
 
-#: templates/image/detail.html:57
+#: templates/image/detail.html:59
 msgid "Inverted monochrome"
 msgstr ""
 
-#: templates/image/detail.html:62
+#: templates/image/detail.html:64
 msgid "Annotated"
 msgstr ""
 
-#: templates/image/detail.html:70
+#: templates/image/detail.html:72
 msgid "User"
 msgstr ""
 
-#: templates/image/detail.html:75
+#: templates/image/detail.html:77
 msgid "View profile"
 msgstr ""
 
-#: templates/image/detail.html:83 templates/image/detail.html.py:318
+#: templates/image/detail.html:85 templates/image/detail.html.py:320
 msgid "Stop following"
 msgstr ""
 
-#: templates/image/detail.html:85 templates/image/detail.html.py:326
+#: templates/image/detail.html:87 templates/image/detail.html.py:328
 msgid "Follow"
 msgstr ""
 
-#: templates/image/detail.html:91
+#: templates/image/detail.html:93
 msgid "Send private message"
 msgstr ""
 
-#: templates/image/detail.html:99
+#: templates/image/detail.html:101
 msgid "Share"
 msgstr ""
 
-#: templates/image/detail.html:104
+#: templates/image/detail.html:106
 msgid "Direct link:"
 msgstr ""
 
-#: templates/image/detail.html:108
+#: templates/image/detail.html:110
 msgid "Forms link:"
 msgstr ""
 
-#: templates/image/detail.html:155
+#: templates/image/detail.html:157
 msgid ""
 "This image was just uploaded and is still processing. Please try again in a "
 "few seconds."
 msgstr ""
 
-#: templates/image/detail.html:164
+#: templates/image/detail.html:166
 msgid "uploaded on"
 msgstr ""
 
-#: templates/image/detail.html:165
+#: templates/image/detail.html:167
 msgid "by"
 msgstr ""
 
-#: templates/image/detail.html:171
+#: templates/image/detail.html:173
 msgid "Contains"
 msgstr ""
 
-#: templates/image/detail.html:176
+#: templates/image/detail.html:178
 msgid "(no subjects)"
 msgstr ""
 
-#: templates/image/detail.html:184
+#: templates/image/detail.html:186
 msgid "This image is a revision. Here are its older versions"
 msgstr ""
 
-#: templates/image/detail.html:186
+#: templates/image/detail.html:188
 msgid "This image has some later revisions"
 msgstr ""
 
-#: templates/image/detail.html:207
+#: templates/image/detail.html:209
 msgid "Technical card"
 msgstr ""
 
-#: templates/image/detail.html:236 templates/image/detail.html.py:237
+#: templates/image/detail.html:238 templates/image/detail.html.py:239
 msgid "Histogram"
 msgstr ""
 
-#: templates/image/detail.html:242 templates/image/edit/basic.html:36
+#: templates/image/detail.html:244 templates/image/edit/basic.html:36
 msgid "Description"
 msgstr ""
 
-#: templates/image/detail.html:249
+#: templates/image/detail.html:251
 msgid "More..."
 msgstr ""
 
-#: templates/image/detail.html:253
+#: templates/image/detail.html:255
 msgid "Same user"
 msgstr ""
 
-#: templates/image/detail.html:254
+#: templates/image/detail.html:256
 msgid "Same subject"
 msgstr ""
 
-#: templates/image/detail.html:255
+#: templates/image/detail.html:257
 msgid "Same imaging telescope"
 msgstr ""
 
-#: templates/image/detail.html:256
+#: templates/image/detail.html:258
 msgid "Same imaging camera"
 msgstr ""
 
-#: templates/image/detail.html:288
+#: templates/image/detail.html:290
 msgid "Bad"
 msgstr ""
 
-#: templates/image/detail.html:289
+#: templates/image/detail.html:291
 msgid "Poor"
 msgstr ""
 
-#: templates/image/detail.html:290
+#: templates/image/detail.html:292
 msgid "Regular"
 msgstr ""
 
-#: templates/image/detail.html:291
+#: templates/image/detail.html:293
 msgid "Good"
 msgstr ""
 
-#: templates/image/detail.html:292
+#: templates/image/detail.html:294
 msgid "Gorgeous"
 msgstr ""
 
-#: templates/image/detail.html:298
+#: templates/image/detail.html:300
 msgid ""
 "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr ""
 
-#: templates/image/detail.html:307
+#: templates/image/detail.html:309
 msgid "Delete image?"
 msgstr ""
 
-#: templates/image/detail.html:308
+#: templates/image/detail.html:310
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
 msgstr ""
 
-#: templates/image/detail.html:309
+#: templates/image/detail.html:311
 msgid "Yes, delete image"
 msgstr ""
 
-#: templates/image/detail.html:314
+#: templates/image/detail.html:316
 #, python-format
 msgid "Follow %(username)s?"
 msgstr ""
 
-#: templates/image/detail.html:315
+#: templates/image/detail.html:317
 #, python-format
 msgid ""
 "You will receive a notification every time %(username)s posts a new image. "
 "Continue?"
 msgstr ""
 
-#: templates/image/detail.html:316
+#: templates/image/detail.html:318
 msgid "Yes, follow!"
 msgstr ""
 
-#: templates/image/detail.html:322
+#: templates/image/detail.html:324
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr ""
 
-#: templates/image/detail.html:323
+#: templates/image/detail.html:325
 #, python-format
 msgid ""
 "You will stop receiving notifications when %(username)s posts a new image. "
 "Continue?"
 msgstr ""
 
-#: templates/image/detail.html:324
+#: templates/image/detail.html:326
 msgid "Yes, stop following!"
 msgstr ""
 
-#: templates/image/detail.html:330
+#: templates/image/detail.html:332
 #, python-format
 msgid "Send %(username)s a message"
 msgstr ""
 
-#: templates/image/detail.html:332 templates/messages/detail.html:23
+#: templates/image/detail.html:334 templates/messages/detail.html:23
 #: templates/messages/new.html:15
 msgid "Send"
 msgstr ""
 
-#: templates/image/detail.html:339
+#: templates/image/detail.html:341
 msgid "Bring image to attention"
 msgstr ""
 
-#: templates/image/detail.html:340
+#: templates/image/detail.html:342
 msgid ""
 "By choosing some users and clicking the button below, you will send them a "
 "notification prompting them to checkout this image."
 msgstr ""
 
-#: templates/image/detail.html:341
+#: templates/image/detail.html:343
 msgid "Continue"
 msgstr ""
 
-#: templates/image/detail.html:345
+#: templates/image/detail.html:347
 msgid "Enter partial name"
 msgstr ""
 
-#: templates/image/detail.html:346
+#: templates/image/detail.html:348
 msgid "User not found. Cannot notify them."
 msgstr ""
 
-#: templates/image/detail.html:353
+#: templates/image/detail.html:355
 #, python-format
 msgid ""
 "You will notify %(username)s that you would like them to feed more "
 "information in the technical card for this photograph. Continue?"
 msgstr ""
 
-#: templates/image/detail.html:359
+#: templates/image/detail.html:361
 #, python-format
 msgid ""
 "You will notify %(username)s that you would like see the TIFF or FITS file. "
@@ -915,7 +915,7 @@ msgstr ""
 
 #: templates/image/edit/acquisition.html:97
 #: templates/image/edit/acquisition.html:146 templates/location/edit.html:16
-#: templates/user/profile/edit/basic.html:15
+#: templates/user/profile/edit/basic.html:16
 #: templates/user/profile/edit/gear.html:15
 msgid "Save"
 msgstr ""
@@ -1339,7 +1339,12 @@ msgstr ""
 msgid "Password changed"
 msgstr ""
 
-#: templates/registration/password_change_form.html:8
+#: templates/registration/password_change_form.html:6
+#: templates/registration/password_change_form.html:10
+msgid "Change your password"
+msgstr ""
+
+#: templates/registration/password_change_form.html:13
 #: templates/registration/password_reset_confirm.html:11
 #: templates/registration/password_reset_form.html:12
 #: templates/registration/registration_form.html:14
@@ -1518,7 +1523,11 @@ msgstr ""
 msgid "* use a comma to separate the values."
 msgstr ""
 
-#: templates/user/profile/edit/basic.html:24
+#: templates/user/profile/edit/basic.html:19
+msgid "or click here to change your password"
+msgstr ""
+
+#: templates/user/profile/edit/basic.html:29
 #: templates/user/profile/edit/gear.html:24
 msgid "No results. Press TAB to add it!"
 msgstr ""

@@ -12,7 +12,11 @@
             {% blocktrans %}* use a comma to separate the values.{% endblocktrans %}
             </p>
         </noscript>
-        <p><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></p>
+        <ul>
+            <li><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></li>
+            {% comment %}We should use {% url password_cchange %} or something.{% endcomment %}
+            <li><a href="/accounts/password/change/">{% trans "or click here to change your password" %}</a>
+        </ul>
         </form>
     </div>  
 {% endblock %}
