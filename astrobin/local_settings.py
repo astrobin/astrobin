@@ -96,12 +96,11 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
+#    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
     'django.middleware.http.ConditionalGetMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.cache.CacheMiddleware',
     'django.middleware.locale.LocaleMiddleware',
 #   'django.middleware.csrf.CsrfViewMiddleware',
 #   'django.middleware.csrf.CsrfResponseMiddleware',
@@ -110,7 +109,7 @@ MIDDLEWARE_CLASSES = (
 #   'astrobin.middlewares.ProfilerMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'privatebeta.middleware.PrivateBetaMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
+#    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
 ROOT_URLCONF = 'astrobin.urls'
