@@ -7,6 +7,7 @@ from haystack.forms import SearchForm
 from models import Image
 from models import UserProfile
 from models import Location
+from models import DeepSky_Acquisition
 
 import string
 
@@ -178,3 +179,12 @@ class LocationEditForm(forms.ModelForm):
             'altitude',
         )
 
+
+class DeepSky_AcquisitionForm(forms.ModelForm):
+    date = forms.DateField(
+        required=False,
+        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+        help_text=_("Please use the following format: yyyy-mm-dd"))
+
+    class Meta:
+        model = DeepSky_Acquisition
