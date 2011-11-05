@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-05 09:22+0200\n"
+"POT-Creation-Date: 2011-11-05 09:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,7 @@ msgid "Your new images will be notified to them"
 msgstr ""
 
 #: management/__init__.py:14
-msgid "You are now folling"
+msgid "You are now following"
 msgstr ""
 
 #: management/__init__.py:15
@@ -357,7 +357,7 @@ msgstr ""
 
 #: templates/base.html:192
 msgid ""
-"AstroBin is a image hosting website specifically targeted to "
+"AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the last place where you need to upload your "
 "astrophotography images. Made by an astrophotographer, for the "
 "astrophotographers."
@@ -393,15 +393,15 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
-#: templates/base.html:279 templates/image/detail.html:305
+#: templates/base.html:279 templates/image/detail.html:307
 msgid "Uploading..."
 msgstr ""
 
-#: templates/base.html:286 templates/image/detail.html:303
+#: templates/base.html:286 templates/image/detail.html:305
 msgid "No file selected"
 msgstr ""
 
-#: templates/base.html:287 templates/image/detail.html:304
+#: templates/base.html:287 templates/image/detail.html:306
 msgid "Choose file"
 msgstr ""
 
@@ -611,7 +611,7 @@ msgstr ""
 msgid "Edit acquisition details"
 msgstr ""
 
-#: templates/image/detail.html:28 templates/image/detail.html.py:299
+#: templates/image/detail.html:28 templates/image/detail.html.py:301
 msgid "Upload new revision"
 msgstr ""
 
@@ -623,11 +623,11 @@ msgstr ""
 msgid "Bring to a user's attention"
 msgstr ""
 
-#: templates/image/detail.html:40 templates/image/detail.html.py:354
+#: templates/image/detail.html:40 templates/image/detail.html.py:356
 msgid "Request additional information"
 msgstr ""
 
-#: templates/image/detail.html:43 templates/image/detail.html.py:360
+#: templates/image/detail.html:43 templates/image/detail.html.py:362
 msgid "Request TIFF/FITS"
 msgstr ""
 
@@ -655,11 +655,11 @@ msgstr ""
 msgid "View profile"
 msgstr ""
 
-#: templates/image/detail.html:85 templates/image/detail.html.py:320
+#: templates/image/detail.html:85 templates/image/detail.html.py:322
 msgid "Stop following"
 msgstr ""
 
-#: templates/image/detail.html:87 templates/image/detail.html.py:328
+#: templates/image/detail.html:87 templates/image/detail.html.py:330
 msgid "Follow"
 msgstr ""
 
@@ -676,7 +676,7 @@ msgid "Direct link:"
 msgstr ""
 
 #: templates/image/detail.html:110
-msgid "Forms link:"
+msgid "Link for forums:"
 msgstr ""
 
 #: templates/image/detail.html:157
@@ -689,174 +689,176 @@ msgstr ""
 msgid "uploaded on"
 msgstr ""
 
-#: templates/image/detail.html:167
-msgid "by"
+#: templates/image/detail.html:169
+#, python-format
+msgid "by <a href=\"%(the_url)s\">%(image.user.username)s</a>"
 msgstr ""
 
-#: templates/image/detail.html:173
+#: templates/image/detail.html:175
 msgid "Contains"
 msgstr ""
 
-#: templates/image/detail.html:178
+#: templates/image/detail.html:180
 msgid "(no subjects)"
 msgstr ""
 
-#: templates/image/detail.html:186
+#: templates/image/detail.html:188
 msgid "This image is a revision. Here are its older versions"
 msgstr ""
 
-#: templates/image/detail.html:188
+#: templates/image/detail.html:190
 msgid "This image has some later revisions"
 msgstr ""
 
-#: templates/image/detail.html:209
+#: templates/image/detail.html:211
 msgid "Technical card"
 msgstr ""
 
-#: templates/image/detail.html:238 templates/image/detail.html.py:239
+#: templates/image/detail.html:240 templates/image/detail.html.py:241
 msgid "Histogram"
 msgstr ""
 
-#: templates/image/detail.html:244 templates/image/edit/basic.html:36
+#: templates/image/detail.html:246 templates/image/edit/basic.html:36
 msgid "Description"
 msgstr ""
 
-#: templates/image/detail.html:251
+#: templates/image/detail.html:253
 msgid "More..."
 msgstr ""
 
-#: templates/image/detail.html:255
+#: templates/image/detail.html:257
 msgid "Same user"
 msgstr ""
 
-#: templates/image/detail.html:256
+#: templates/image/detail.html:258
 msgid "Same subject"
 msgstr ""
 
-#: templates/image/detail.html:257
+#: templates/image/detail.html:259
 msgid "Same imaging telescope"
 msgstr ""
 
-#: templates/image/detail.html:258
+#: templates/image/detail.html:260
 msgid "Same imaging camera"
 msgstr ""
 
-#: templates/image/detail.html:290
+#: templates/image/detail.html:292
 msgid "Bad"
 msgstr ""
 
-#: templates/image/detail.html:291
+#: templates/image/detail.html:293
 msgid "Poor"
 msgstr ""
 
-#: templates/image/detail.html:292
+#: templates/image/detail.html:294
 msgid "Regular"
 msgstr ""
 
-#: templates/image/detail.html:293
+#: templates/image/detail.html:295
 msgid "Good"
 msgstr ""
 
-#: templates/image/detail.html:294
+#: templates/image/detail.html:296
 msgid "Gorgeous"
 msgstr ""
 
-#: templates/image/detail.html:300
+#: templates/image/detail.html:302
 msgid ""
 "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr ""
 
-#: templates/image/detail.html:309
+#: templates/image/detail.html:311
 msgid "Delete image?"
 msgstr ""
 
-#: templates/image/detail.html:310
+#: templates/image/detail.html:312
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
 msgstr ""
 
-#: templates/image/detail.html:311
+#: templates/image/detail.html:313
 msgid "Yes, delete image"
 msgstr ""
 
-#: templates/image/detail.html:316
+#: templates/image/detail.html:318
 #, python-format
 msgid "Follow %(username)s?"
 msgstr ""
 
-#: templates/image/detail.html:317
+#: templates/image/detail.html:319
 #, python-format
 msgid ""
 "You will receive a notification every time %(username)s posts a new image. "
 "Continue?"
 msgstr ""
 
-#: templates/image/detail.html:318
+#: templates/image/detail.html:320
 msgid "Yes, follow!"
 msgstr ""
 
-#: templates/image/detail.html:324
+#: templates/image/detail.html:326
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr ""
 
-#: templates/image/detail.html:325
+#: templates/image/detail.html:327
 #, python-format
 msgid ""
 "You will stop receiving notifications when %(username)s posts a new image. "
 "Continue?"
 msgstr ""
 
-#: templates/image/detail.html:326
+#: templates/image/detail.html:328
 msgid "Yes, stop following!"
 msgstr ""
 
-#: templates/image/detail.html:332
+#: templates/image/detail.html:334
 #, python-format
 msgid "Send %(username)s a message"
 msgstr ""
 
-#: templates/image/detail.html:334 templates/messages/detail.html:23
+#: templates/image/detail.html:336 templates/messages/detail.html:23
 #: templates/messages/new.html:15
 msgid "Send"
 msgstr ""
 
-#: templates/image/detail.html:341
+#: templates/image/detail.html:343
 msgid "Bring image to attention"
 msgstr ""
 
-#: templates/image/detail.html:342
+#: templates/image/detail.html:344
 msgid ""
 "By choosing some users and clicking the button below, you will send them a "
 "notification prompting them to checkout this image."
 msgstr ""
 
-#: templates/image/detail.html:343
+#: templates/image/detail.html:345
 msgid "Continue"
 msgstr ""
 
-#: templates/image/detail.html:347
+#: templates/image/detail.html:349
 msgid "Enter partial name"
 msgstr ""
 
-#: templates/image/detail.html:348
+#: templates/image/detail.html:350
 msgid "User not found. Cannot notify them."
 msgstr ""
 
-#: templates/image/detail.html:355
+#: templates/image/detail.html:357
 #, python-format
 msgid ""
 "You will notify %(username)s that you would like them to feed more "
 "information in the technical card for this photograph. Continue?"
 msgstr ""
 
-#: templates/image/detail.html:361
+#: templates/image/detail.html:363
 #, python-format
 msgid ""
-"You will notify %(username)s that you would like see the TIFF or FITS file. "
-"AstroBin doesn\\'t currently offer to host such large files, so hopefully "
-"%(username)s will contact you about how to handle the transaction. Continue?"
+"You will notify %(username)s that you would like to see the TIFF or FITS "
+"file. AstroBin doesn't currently offer to host such large files, so "
+"hopefully %(username)s will contact you about how to handle the transaction. "
+"Continue?"
 msgstr ""
 
 #: templates/image/edit/acquisition.html:8
