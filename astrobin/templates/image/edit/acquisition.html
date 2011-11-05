@@ -92,7 +92,7 @@
                        value="{% if solar_system_acquisition.time %}{{solar_system_acquisition.time}}{% else %}{% trans "hh:mm" %}{% endif %}"/>
             </p>
             <input type="hidden" name="image_id" value="{{image.id}}" />
-            <input type="hidden" name="image_type" value="solar_system" />
+            <input type="hidden" name="edit_type" value="solar_system" />
             <ul style="clear:both">
                 <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
                 <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
@@ -101,49 +101,21 @@
         </form>
     {% else %}
     {% if edit_type == 'deep_sky' %}
+        <p>
+        {% blocktrans %}You can insert as many acquisition sessions as you want, as often images are taken across several nights. An acquisition session is defined primarily by a date and a filter. Fill in your data and then click on <strong>Save</strong> to finish, or on <strong>Add more</strong> to add more acquisition sessions.{% endblocktrans %}
+        </p>
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
-        {% for a in deep_sky_acquisitions %}
-            <ul class="inline">
-                <li>
-                    <p>
-                        <label for="{{a.acquisition_type}}_{{forloop.counter0}}_number">{% acquisition_label a.acquisition_type %} ({% trans "num" %})</label>
-                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_number" id="{{a.acquisition_type}}_{{forloop.counter0}}_number"
-                               class="frame validate[custom[onlyNuber]]" max_length="4" size="4"
-                               value="{% if a.number != None %}{{a.number}}{% endif %}"/>
-                    </p>
-                </li>
-                {% if a.acquisition_type == '0l' or a.acquisition_type == '1r' or a.acquisition_type == '2g' or a.acquisition_type == '3b' %}
-                <li>
-                    <p>
-                        <label class="notfirst" for="{{a.acquisition_type}}_{{forloop.counter0}}_duration">{% trans "x secs" %}</label>
-                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_duration" id="{{a.acquisition_type}}_{{forloop.counter0}}_duration"
-                               class="frame validate[custom[onlyNumber]]" max_lenght="4"  size="4"
-                               value="{% if a.duration != None %}{{a.duration}}{% endif %}"/>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <label class="notfirst" for="{{a.acquisition_type}}_{{forloop.counter0}}_iso">{% trans "ISO" %}</label>
-                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_iso" id="{{a.acquisition_type}}_{{forloop.counter0}}_iso"
-                               class="frame validate[custom[onlyNumber]]" max_lenght="4"  size="4"
-                               value="{% if a.iso != None %}{{a.iso}}{% endif %}"/>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <label class="notfirst" for="{{a.acquisition_type}}_{{forloop.counter0}}_date">{% trans "Date" %}</label>
-                        <input type="text" name="{{a.acquisition_type}}_{{forloop.counter0}}_date" id="{{a.acquisition_type}}_{{forloop.counter0}}_date"
-                               class="date datepickerclass validate[custom[onlyNumber]]"
-                               value="{% if a.date %}{{a.date|date:'Y-m-d'}}{% else %}{% trans "yyyy-mm-dd" %}{% endif %}"/>
-                    </p>
-                </li>
-                {% endif %}
-            </ul>
-        {% endfor %}
+            {% for form in deep_sky_acquisitions %}
+                <h3>{% trans "Acquisition session" %}:</h3>
+                {{form.as_p}}
+                <div class="hline"></div>
+            {% endfor %}
+            {{deep_sky_acquisitions.management_form}}
             <input type="hidden" name="image_id" value="{{image.id}}" />
-            <input type="hidden" name="image_type" value="deep_sky" />
+            <input type="hidden" name="edit_type" value="deep_sky" />
             <ul style="clear:both">
                 <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+                <li><input class="button inline-button" type="submit" value="{% trans "Add more" %}" name="add_more" /></li>
                 <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
                 <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
             </ul>
@@ -152,10 +124,10 @@
     {% else %}
         <p>{% trans "What kind of image is this?" %}</p>
         <div class="simple-choice">
-            <a class="button" href="{% url image_edit_acquisition image.id %}?type=solar_system">
+            <a class="button" href="{% url image_edit_acquisition image.id %}?edit_type=solar_system">
                 Solar system
             </a>
-            <a class="button" href="{% url image_edit_acquisition image.id %}?type=deep_sky">
+            <a class="button" href="{% url image_edit_acquisition image.id %}?edit_type=deep_sky">
                 Deep sky
             </a>
         </div>

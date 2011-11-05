@@ -14,7 +14,9 @@ from django.views.decorators.http import require_http_methods, require_GET, requ
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.db import IntegrityError
 from django.utils.translation import ugettext as _
+from django.forms.models import inlineformset_factory
 
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
@@ -165,50 +167,45 @@ def image_detail(request, id):
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
     image_type = None
-    deep_sky_data = [['Dates', None],
-                     ['Light frames', None],
-                     ['R frames', None],
-                     ['G frames', None],
-                     ['B frames', None],
-                     ['Dark frames', None],
-                     ['Offset/bias frames', None],
-                     ['Flat frames', None],
-                     ['Flat dark frames', None],
-                     ['Avg. moon\'s age', None],
-                     ['Avg. moon\'s fraction', None],
-                    ]
+    deep_sky_data = {}
 
     try:
         solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
     except:
         pass
 
-    moon_age = 0
-    moon_illuinated = 0
-
     if deep_sky_acquisitions:
         image_type = 'deep_sky'
 
-        deep_sky_data[0][1] = [a.date for a in deep_sky_acquisitions if a.date is not None]
-        deep_sky_data[1][1] = ['%sx%s @ ISO%s' % (a.number, a.duration, a.iso if a.iso else '-') for a in deep_sky_acquisitions if a.acquisition_type == '0l']
-        deep_sky_data[2][1] = ['%sx%s @ ISO%s' % (a.number, a.duration, a.iso if a.iso else '-') for a in deep_sky_acquisitions if a.acquisition_type == '1r']
-        deep_sky_data[3][1] = ['%sx%s @ ISO%s' % (a.number, a.duration, a.iso if a.iso else '-') for a in deep_sky_acquisitions if a.acquisition_type == '2g']
-        deep_sky_data[4][1] = ['%sx%s @ ISO%s' % (a.number, a.duration, a.iso if a.iso else '-') for a in deep_sky_acquisitions if a.acquisition_type == '3b']
-        deep_sky_data[5][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '4d']
-        deep_sky_data[7][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '5f']
-        deep_sky_data[8][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '6x']
-        deep_sky_data[6][1] = [a.number for a in deep_sky_acquisitions if a.acquisition_type == '7o']
-
         moon_age_list = []
         moon_illuminated_list = []
+        acquisitions = []
+
         for a in deep_sky_acquisitions:
             if a.date is not None:
                 m = MoonPhase(a.date)
                 moon_age_list.append(m.age)
                 moon_illuminated_list.append(m.illuminated)
 
-        deep_sky_data[9][1]  = ["%.2f" % (sum(moon_age_list)         / float(len(moon_age_list)))]
-        deep_sky_data[10][1] = ["%.2f" % (sum(moon_illuminated_list) / float(len(moon_illuminated_list)))]
+            frames = '%sx%s' % (a.number, a.duration)
+            if a.iso:
+                frames += ' @ ISO%s' % (a.iso, )
+
+            acquisition = {
+                'date': a.date,
+                'filter': a.filter,
+                'frames': frames,
+                'darks' : a.darks,
+                'flats': a.flats,
+                'flat_darks': a.flat_darks,
+                'bias': a.bias,
+            }
+            acquisitions.append(acquisition)
+
+        deep_sky_data['acquisitions'] = acquisitions
+        def average(values):
+            return float(sum(values)) / len(values)
+        deep_sky_data['moon_age'] = "%.2f" % (average(moon_age_list), )
 
     elif solar_system_acquisition:
         image_type = 'solar_system'
@@ -400,36 +397,37 @@ def image_edit_acquisition(request, id):
     if request.user != image.user:
         return HttpResponseForbidden()
 
-    edit_type = None
-    if 'type' in request.GET:
-        edit_type = request.GET['type']
-
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
-    deep_sky_acquisitions = list(dsa_qs)
     solar_system_acquisition = None
-    image_type = None
 
     try:
         solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
     except:
         pass
 
-    if deep_sky_acquisitions:
-        image_type = 'deep_sky'
+    if dsa_qs:
+        edit_type = 'deep_sky'
     elif solar_system_acquisition:
-        image_type = 'solar_system'
+        edit_type = 'solar_system'
+    elif 'edit_type' in request.REQUEST:
+       edit_type = request.REQUEST['edit_type']
+    else:
+       edit_type = None
 
-    if image_type == 'deep_sky' or edit_type == 'deep_sky':
-        for t in ('0l', '1r', '2g', '3b', '4d', '5f', '6x', '7o'):
-            if not DeepSky_Acquisition.objects.filter(image=image, acquisition_type=t):
-                deep_sky_acquisitions.append(DeepSky_Acquisition(acquisition_type=t))
-    deep_sky_acquisitions = sorted(deep_sky_acquisitions, key=lambda a: a.acquisition_type)
+    deep_sky_acquisition_formset = None
+    if edit_type == 'deep_sky':
+        extra = 0
+        if 'add_more' in request.GET:
+            extra = 1
+        if not dsa_qs:
+            extra = 1
+        DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=extra, can_delete=False)
+        deep_sky_acquisition_formset = DSAFormSet(instance=image)
 
     response_dict = {
         'image': image,
-        'image_type': image_type,
-        'edit_type': edit_type if image_type is None else image_type,
-        'deep_sky_acquisitions': deep_sky_acquisitions,
+        'edit_type': edit_type,
+        'deep_sky_acquisitions': deep_sky_acquisition_formset,
         'solar_system_acquisition': solar_system_acquisition,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
@@ -605,36 +603,29 @@ def image_edit_save_acquisition(request):
     if request.user != image.user:
         return HttpResponseForbidden()
 
-    image_type = request.POST.get('image_type')
+    edit_type = request.POST.get('edit_type')
 
-    deep_sky_acquisitions = {}
+    dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
 
-    error = None
+    context_message = None
 
-    for a in DeepSky_Acquisition.objects.filter(image=image):
-        a.delete()
     for a in SolarSystem_Acquisition.objects.filter(image=image):
         a.delete()
 
-    if image_type == 'deep_sky':
-        from collections import defaultdict
-        deep_sky_acquisitions = defaultdict(DeepSky_Acquisition)
-        for field, value in request.POST.iteritems():
-            if field[2] == '_':
-                acquisition_type, sequence_number, attribute = field.split('_')
-                if attribute == 'date' and value == 'yyyy-mm-dd':
-                    value = ''
-                if value == 'None':
-                    value = ''
-                if value != '':
-                    setattr(deep_sky_acquisitions[int(sequence_number)], attribute, value)
-                    setattr(deep_sky_acquisitions[int(sequence_number)], 'acquisition_type', acquisition_type)
-
-        for a in deep_sky_acquisitions.values():
-            a.image = image
-            a.save()
-    elif image_type == 'solar_system':
+    if edit_type == 'deep_sky':
+        DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False)
+        deep_sky_acquisition_formset = DSAFormSet(request.POST, instance=image)
+        if deep_sky_acquisition_formset.is_valid():
+            deep_sky_acquisition_formset.save()
+            if 'add_more' in request.POST:
+                DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False)
+                deep_sky_acquisition_formset = DSAFormSet(instance=image)
+                if not dsa_qs:
+                    context_message = {'error': False, 'text': _("Fill in one session, before adding more.")}
+        else:
+            context_message = {'error': True, 'text': _("There was an error. Check your input!")}
+    elif edit_type == 'solar_system':
         date = request.POST.get('date')
         if date == 'yyyy-mm-dd':
             date = None
@@ -666,15 +657,7 @@ def image_edit_save_acquisition(request):
         try:
             solar_system_acquisition.save()
         except ValidationError:
-            error = _("There was an error. Check your input!");
-
-    # get them again because of date issues
-    deep_sky_acquisitions = list(DeepSky_Acquisition.objects.filter(image=image))
-    # add missing ones
-    for t in ('0l', '1r', '2g', '3b', '4d', '5f', '6x', '7o'):
-        if not DeepSky_Acquisition.objects.filter(image=image, acquisition_type=t):
-            deep_sky_acquisitions.append(DeepSky_Acquisition(image=image, acquisition_type=t))
-    deep_sky_acquisitions = sorted(deep_sky_acquisitions, key=lambda a: a.acquisition_type)
+            context_message = {'error': True, 'text': _("There was an error. Check your input!")}
 
     solar_system_acquisition = None
 
@@ -685,13 +668,12 @@ def image_edit_save_acquisition(request):
 
     response_dict = {
         'image': image,
-        'image_type': image_type,
-        'edit_type': image_type,
-        'deep_sky_acquisitions': deep_sky_acquisitions,
+        'edit_type': edit_type,
+        'deep_sky_acquisitions': deep_sky_acquisition_formset,
         'solar_system_acquisition': solar_system_acquisition,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
-        'error': error,
+        'context_message': context_message,
     }
 
     return render_to_response('image/edit/acquisition.html',

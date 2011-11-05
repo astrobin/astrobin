@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-05 13:46+0200\n"
+"POT-Creation-Date: 2011-11-05 21:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,39 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:42
+#: forms.py:42 models.py:227
 msgid "Imaging telescopes"
 msgstr ""
 
-#: forms.py:43
+#: forms.py:43 models.py:228
 msgid "Guiding telescopes"
 msgstr ""
 
-#: forms.py:44
+#: forms.py:44 models.py:229 models.py:425
 msgid "Mounts"
 msgstr ""
 
-#: forms.py:45
+#: forms.py:45 models.py:230
 msgid "Imaging cameras"
 msgstr ""
 
-#: forms.py:46
+#: forms.py:46 models.py:231
 msgid "Guiding cameras"
 msgstr ""
 
-#: forms.py:47
+#: forms.py:47 models.py:232 models.py:427
 msgid "Focal reducers"
 msgstr ""
 
-#: forms.py:48
+#: forms.py:48 models.py:233 models.py:428
 msgid "Software"
 msgstr ""
 
-#: forms.py:49
+#: forms.py:49 models.py:234 models.py:429
 msgid "Filters"
 msgstr ""
 
-#: forms.py:50
+#: forms.py:50 models.py:235 models.py:430
 msgid "Accessories"
 msgstr ""
 
@@ -93,62 +93,224 @@ msgstr ""
 msgid "Examples: +12.44, -51.25"
 msgstr ""
 
+#: models.py:24 models.py:142
+msgid "Name"
+msgstr ""
+
+#: models.py:34 models.py:352 templates/image/edit/acquisition.html:31
+msgid "Focal length"
+msgstr ""
+
+#: models.py:35
+msgid "Aperture"
+msgstr ""
+
+#: models.py:56
+msgid "Ratio"
+msgstr ""
+
+#: models.py:143
+msgid "Latitude"
+msgstr ""
+
+#: models.py:144
+msgid "Longitude"
+msgstr ""
+
+#: models.py:145
+msgid "Altitude"
+msgstr ""
+
+#: models.py:218 templates/image/edit/basic.html:18
+msgid "Title"
+msgstr ""
+
+#: models.py:219 templates/image/edit/basic.html:22
+msgid "Subjects"
+msgstr ""
+
+#: models.py:220 models.py:414 templates/image/edit/basic.html:27
+msgid "Locations"
+msgstr ""
+
+#: models.py:221 templates/image/detail.html:256
+#: templates/image/edit/basic.html:36
+msgid "Description"
+msgstr ""
+
 #: models.py:248 templates/image/detail.html:175
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/image_list.html:19
 msgid "(no title)"
 msgstr ""
 
-#: models.py:377
+#: models.py:320 models.py:366 templates/image/edit/acquisition.html:79
+#: templates/search/search.html:22
+msgid "Date"
+msgstr ""
+
+#: models.py:321 models.py:365
+msgid "Image"
+msgstr ""
+
+#: models.py:331
+msgid "Filter"
+msgstr ""
+
+#: models.py:332
+msgid "Number"
+msgstr ""
+
+#: models.py:333
+msgid "Duration"
+msgstr ""
+
+#: models.py:334
+msgid "ISO"
+msgstr ""
+
+#: models.py:335
+msgid "Gain"
+msgstr ""
+
+#: models.py:336
+msgid "Sensor cooling"
+msgstr ""
+
+#: models.py:337
+msgid "Darks"
+msgstr ""
+
+#: models.py:338
+msgid "Flats"
+msgstr ""
+
+#: models.py:339
+msgid "Flat darks"
+msgstr ""
+
+#: models.py:340
+msgid "Bias"
+msgstr ""
+
+#: models.py:341
+msgid "Mean SQM"
+msgstr ""
+
+#: models.py:342
+msgid "Mean FWHM"
+msgstr ""
+
+#: models.py:350
+msgid "Frames"
+msgstr ""
+
+#: models.py:351 templates/image/edit/acquisition.html:23
+msgid "FPS"
+msgstr ""
+
+#: models.py:353 templates/image/edit/acquisition.html:39
+msgid "CMI"
+msgstr ""
+
+#: models.py:354 templates/image/edit/acquisition.html:47
+msgid "CMII"
+msgstr ""
+
+#: models.py:355 templates/image/edit/acquisition.html:55
+msgid "CMIII"
+msgstr ""
+
+#: models.py:356
+msgid "Seeing"
+msgstr ""
+
+#: models.py:357
+msgid "Transparency"
+msgstr ""
+
+#: models.py:358
+msgid "Time"
+msgstr ""
+
+#: models.py:385
 msgid "Request from"
 msgstr ""
 
-#: models.py:389
+#: models.py:397
 msgid "Additional information"
 msgstr ""
 
-#: models.py:390
+#: models.py:398
 msgid "TIFF/FITS"
 msgstr ""
 
-#: models.py:391
+#: models.py:399
 msgid "Higher resolution"
 msgstr ""
 
-#: views.py:301
+#: models.py:415
+msgid "Website"
+msgstr ""
+
+#: models.py:416
+msgid "Job"
+msgstr ""
+
+#: models.py:417
+msgid "Hobbies"
+msgstr ""
+
+#: models.py:418
+msgid "Language"
+msgstr ""
+
+#: models.py:424
+msgid "Telescopes"
+msgstr ""
+
+#: models.py:426
+msgid "Cameras"
+msgstr ""
+
+#: views.py:298
 msgid "Invalid image."
 msgstr ""
 
-#: views.py:328 views.py:331 views.py:362 views.py:365 views.py:480
-#: views.py:483 views.py:518 views.py:547
+#: views.py:325 views.py:328 views.py:359 views.py:362 views.py:478
+#: views.py:481 views.py:516 views.py:545
 #: templates/user/profile/edit/basic.html:28
 #: templates/user/profile/edit/gear.html:23
 msgid "Enter partial name and wait for the suggestions!"
 msgstr ""
 
-#: views.py:329 views.py:363 views.py:481 views.py:519 views.py:548
+#: views.py:326 views.py:360 views.py:479 views.py:517 views.py:546
 msgid "No results. Sorry."
 msgstr ""
 
-#: views.py:332 views.py:366 views.py:484
+#: views.py:329 views.py:363 views.py:482
 msgid "No results. Press TAB to create this location!"
 msgstr ""
 
-#: views.py:669
+#: views.py:625
+msgid "Fill in one session, before adding more."
+msgstr ""
+
+#: views.py:627 views.py:660
 msgid "There was an error. Check your input!"
 msgstr ""
 
-#: views.py:1135
+#: views.py:1117
 msgid "RE"
 msgstr ""
 
-#: views.py:1194
+#: views.py:1176
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr ""
 
-#: views.py:1218
+#: views.py:1200
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -722,10 +884,6 @@ msgstr ""
 msgid "Histogram"
 msgstr ""
 
-#: templates/image/detail.html:256 templates/image/edit/basic.html:36
-msgid "Description"
-msgstr ""
-
 #: templates/image/detail.html:263
 msgid "More..."
 msgstr ""
@@ -873,26 +1031,6 @@ msgstr ""
 msgid "Number of frames"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:23
-msgid "FPS"
-msgstr ""
-
-#: templates/image/edit/acquisition.html:31
-msgid "Focal length"
-msgstr ""
-
-#: templates/image/edit/acquisition.html:39
-msgid "CMI"
-msgstr ""
-
-#: templates/image/edit/acquisition.html:47
-msgid "CMII"
-msgstr ""
-
-#: templates/image/edit/acquisition.html:55
-msgid "CMIII"
-msgstr ""
-
 #: templates/image/edit/acquisition.html:63
 msgid "Seeing (0-5)"
 msgstr ""
@@ -901,13 +1039,7 @@ msgstr ""
 msgid "Transparency (0-10)"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:79
-#: templates/image/edit/acquisition.html:134 templates/search/search.html:22
-msgid "Date"
-msgstr ""
-
 #: templates/image/edit/acquisition.html:84
-#: templates/image/edit/acquisition.html:137
 msgid "yyyy-mm-dd"
 msgstr ""
 
@@ -920,36 +1052,41 @@ msgid "hh:mm"
 msgstr ""
 
 #: templates/image/edit/acquisition.html:97
-#: templates/image/edit/acquisition.html:146 templates/location/edit.html:16
+#: templates/image/edit/acquisition.html:117 templates/location/edit.html:16
 #: templates/user/profile/edit/basic.html:16
 #: templates/user/profile/edit/gear.html:15
 msgid "Save"
 msgstr ""
 
 #: templates/image/edit/acquisition.html:98
-#: templates/image/edit/acquisition.html:147
+#: templates/image/edit/acquisition.html:119
 msgid "Remove data"
 msgstr ""
 
 #: templates/image/edit/acquisition.html:99
-#: templates/image/edit/acquisition.html:148
+#: templates/image/edit/acquisition.html:120
 #: templates/image/edit/basic.html:44 templates/image/edit/gear.html:13
 msgid "Return to image"
 msgstr ""
 
+#: templates/image/edit/acquisition.html:105
+msgid ""
+"You can insert as many acquisition sessions as you want, as often images are "
+"taken across several nights. An acquisition session is defined primarily by "
+"a date and a filter. Fill in your data and then click on <strong>Save</"
+"strong> to finish, or on <strong>Add more</strong> to add more acquisition "
+"sessions."
+msgstr ""
+
 #: templates/image/edit/acquisition.html:109
-msgid "num"
+msgid "Acquisition session"
 msgstr ""
 
 #: templates/image/edit/acquisition.html:118
-msgid "x secs"
+msgid "Add more"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:126
-msgid "ISO"
-msgstr ""
-
-#: templates/image/edit/acquisition.html:153
+#: templates/image/edit/acquisition.html:125
 msgid "What kind of image is this?"
 msgstr ""
 
@@ -963,22 +1100,10 @@ msgid ""
 "you can leave that empty and come check it out later!"
 msgstr ""
 
-#: templates/image/edit/basic.html:18
-msgid "Title"
-msgstr ""
-
-#: templates/image/edit/basic.html:22
-msgid "Subjects"
-msgstr ""
-
 #: templates/image/edit/basic.html:24
 msgid ""
 "You can't edit Subjects without Javascript. Please enable it in your "
 "Internet browser."
-msgstr ""
-
-#: templates/image/edit/basic.html:27
-msgid "Locations"
 msgstr ""
 
 #: templates/image/edit/basic.html:31
