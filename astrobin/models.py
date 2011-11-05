@@ -328,6 +328,7 @@ class Acquisition(models.Model):
 
 
 class DeepSky_Acquisition(Acquisition):
+    is_synthetic = models.BooleanField(_("Synthetic channel"))
     filter = models.ForeignKey(Filter, null=True, blank=True, verbose_name=_("Filter"))
     number = models.IntegerField(_("Number"), null=True, blank=True)
     duration = models.IntegerField(_("Duration"), null=True, blank=True)
