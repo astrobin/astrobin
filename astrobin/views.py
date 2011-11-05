@@ -181,19 +181,26 @@ def image_detail(request, id):
         moon_illuminated_list = []
         acquisitions = []
 
+
+        dates = []
+        frames = []
+
         for a in deep_sky_acquisitions:
-            dates = []
             if a.date is not None:
                 dates.append(a.date)
                 m = MoonPhase(a.date)
                 moon_age_list.append(m.age)
                 moon_illuminated_list.append(m.illuminated)
 
-            frames = None
-            if a.number and a.duration:
-                frames = '%sx%s' % (a.number, a.duration)
-            if a.iso:
-                frames += ' @ ISO%s' % (a.iso, )
+            if a.filter and a.number and a.duration:
+                f = a.filter.name
+                if a.is_synthetic:
+                    f += " (S)"
+                f += '; %sx%s"' % (a.number, a.duration)
+                if a.iso:
+                    f += ' @ ISO%s' % (a.iso, )
+
+                frames.append(f)
 
         def average(values):
             if not len(values):
@@ -202,8 +209,7 @@ def image_detail(request, id):
 
         deep_sky_data = {
             _('Dates'): u', '.join([str(x) for x in dates]),
-            _('Filter'): a.filter,
-            _('Frames'): frames,
+            _('Frames'): u', '.join(frames),
             _('Darks') : a.darks,
             _('Flats'): a.flats,
             _('Flat darks'): a.flat_darks,
