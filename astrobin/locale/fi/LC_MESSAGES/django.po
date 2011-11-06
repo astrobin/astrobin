@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-06 09:31+0200\n"
-"PO-Revision-Date: 2011-11-06 10:45+0200\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2011-11-06 15:18+0200\n"
+"Last-Translator: Lauri Kangas <vostok@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -22,12 +22,12 @@ msgstr ""
 #: forms.py:43
 #: models.py:227
 msgid "Imaging telescopes"
-msgstr "Kuvaus teleskooppi"
+msgstr "Kuvauskaukoputket"
 
 #: forms.py:44
 #: models.py:228
 msgid "Guiding telescopes"
-msgstr "Seuranta teleskooppi"
+msgstr "Seurantakaukoputket"
 
 #: forms.py:45
 #: models.py:229
@@ -38,18 +38,18 @@ msgstr "Jalustat"
 #: forms.py:46
 #: models.py:230
 msgid "Imaging cameras"
-msgstr "Kuvaus kamera"
+msgstr "Kuvauskamerat"
 
 #: forms.py:47
 #: models.py:231
 msgid "Guiding cameras"
-msgstr "Seuranta kamera"
+msgstr "Seurantakamerat"
 
 #: forms.py:48
 #: models.py:232
 #: models.py:428
 msgid "Focal reducers"
-msgstr "Polttovälin lyhentäjä"
+msgstr "Polttovälin lyhentäjät"
 
 #: forms.py:49
 #: models.py:233
@@ -83,7 +83,7 @@ msgstr "Ilmaise arvo tunneissa"
 
 #: forms.py:121
 msgid "Search for astronomical objects, telescopes, cameras, filters..."
-msgstr "Etsi tähtitieteellisiä kohteita, teleskooppeja, kameroita, suodattimia..."
+msgstr "Etsi tähtitieteellisiä kohteita, kaukoputkia, kameroita, suodattimia..."
 
 #: forms.py:123
 msgid "Min. upload date"
@@ -95,11 +95,11 @@ msgstr "Viimeisin latauspäivä"
 
 #: forms.py:125
 msgid "Min. integration"
-msgstr "Min. valoitusaika"
+msgstr "Min. valotusaika"
 
 #: forms.py:126
 msgid "Max. integration"
-msgstr "Max. valoitusaika"
+msgstr "Max. valotusaika"
 
 #: forms.py:127
 msgid "Min. Moon phase %"
@@ -112,7 +112,7 @@ msgstr "Max. kuun vaihe %"
 #: forms.py:162
 #: forms.py:165
 msgid "Examples: +12.44, -51.25"
-msgstr "Esimerkit: +12.44, -51.25"
+msgstr "Esimerksi: +12.44, -51.25"
 
 #: models.py:24
 #: models.py:142
@@ -127,11 +127,11 @@ msgstr "Polttoväli"
 
 #: models.py:35
 msgid "Aperture"
-msgstr "Valotusaukko"
+msgstr "Apertuuri (aukko)"
 
 #: models.py:56
 msgid "Ratio"
-msgstr "Mittasuhde"
+msgstr "Lyhentäjän kerroin"
 
 #: models.py:143
 msgid "Latitude"
@@ -148,18 +148,18 @@ msgstr "Korkeus"
 #: models.py:218
 #: templates/image/edit/basic.html:18
 msgid "Title"
-msgstr "Nimi"
+msgstr "Otsikko"
 
 #: models.py:219
 #: templates/image/edit/basic.html:22
 msgid "Subjects"
-msgstr "Aiheet"
+msgstr "Kohteet"
 
 #: models.py:220
 #: models.py:415
 #: templates/image/edit/basic.html:27
 msgid "Locations"
-msgstr "Paikat"
+msgstr "Sijainnit"
 
 #: models.py:221
 #: templates/image/detail.html:252
@@ -200,7 +200,7 @@ msgstr "Numero"
 
 #: models.py:334
 msgid "Duration"
-msgstr "Valoitusaika"
+msgstr "Valotusaika"
 
 #: models.py:335
 msgid "ISO"
@@ -212,7 +212,7 @@ msgstr ""
 
 #: models.py:337
 msgid "Sensor cooling"
-msgstr "Sensorin lämpötila"
+msgstr "Kennon jäähdytys"
 
 #: models.py:338
 #: views.py:233
@@ -316,7 +316,7 @@ msgstr "Kieli"
 
 #: models.py:425
 msgid "Telescopes"
-msgstr "Teleskoopit"
+msgstr "Kaukoputket"
 
 #: models.py:427
 msgid "Cameras"
@@ -328,7 +328,7 @@ msgstr "Päivämäärät"
 
 #: views.py:237
 msgid "Avg. Moon age"
-msgstr "Kuun keski-ikä"
+msgstr "Keskimääräinen kuun ikä"
 
 #: views.py:238
 msgid "Avg. Moon phase"
@@ -336,7 +336,7 @@ msgstr "Kuun vaiheen keskiarvo"
 
 #: views.py:331
 msgid "Invalid image."
-msgstr "Pätemätön kuva."
+msgstr "Virheellinen kuva."
 
 #: views.py:358
 #: views.py:361
@@ -367,7 +367,7 @@ msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 
 #: views.py:658
 msgid "Fill in one session, before adding more."
-msgstr "Täytä ensin tämä sessio ennen kuin lisäät muita sessioita."
+msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
 #: views.py:660
 #: views.py:693
@@ -394,23 +394,23 @@ msgstr "Käyttäjä seuraa sinua"
 
 #: management/__init__.py:10
 msgid "Your new images will be notified to them"
-msgstr "Ilmoitus uusista kuvistasi lähetetään hänelle"
+msgstr "Hänelle ilmoitetaan uusista kuvistasi"
 
 #: management/__init__.py:14
 msgid "You are now following"
-msgstr "Nyt seuraat"
+msgstr "Seuraat nyt käyttäjää"
 
 #: management/__init__.py:15
 msgid "Their new images will be notified to you"
-msgstr "Tieto hänen uusista kuvistaan ilmoitetaan sinulle"
+msgstr "Sinulle ilmoitetaan heidän uusista kuvistaan"
 
 #: management/__init__.py:19
 msgid "You are not following anymore"
-msgstr "Et enää seuraa"
+msgstr "Et enää seuraa "
 
 #: management/__init__.py:20
 msgid "Their new images will not be notified to you anymore"
-msgstr "Tietoa hänen uusista kuvistaan ei enää ilmoiteta sinulle"
+msgstr "Sinulle ei enää ilmoiteta heidän kuvistaan"
 
 #: management/__init__.py:24
 msgid "New image"
@@ -426,7 +426,7 @@ msgstr "Huomiopyyntö"
 
 #: management/__init__.py:30
 msgid "A user wants to bring an image to your attention"
-msgstr "Käyttäjä haluaa herättää huomiosi eräästä kuvasta"
+msgstr "Käyttäjä haluaa herättää huomiosi kuvasta"
 
 #: management/__init__.py:34
 msgid "New image revision"
@@ -446,19 +446,19 @@ msgstr "Kuva on tallennettu"
 
 #: management/__init__.py:44
 msgid "Image solved"
-msgstr "Astronominen ratkaisu tehty"
+msgstr "Astrometrinen ratkaisu tehty"
 
 #: management/__init__.py:45
 msgid "Plate solving the image has succeeded"
-msgstr "Astronominen ratkaisu onnistui"
+msgstr "Astrometrinen ratkaisu onnistui"
 
 #: management/__init__.py:49
 msgid "Image not solved"
-msgstr "Astronomista ratkaisua ei tehty"
+msgstr "Astrometristä ratkaisua ei tehty"
 
 #: management/__init__.py:50
 msgid "Plate solving the image has failed"
-msgstr "Astronominen ratkaisu epäonnistui"
+msgstr "Astrometrinen ratkaisu epäonnistui"
 
 #: management/__init__.py:54
 msgid "Request fulfilled"
@@ -490,7 +490,7 @@ msgstr "Sisältö, jota etsit, ei ole täällä. Pahoitteluni."
 
 #: templates/base.html:47
 msgid "Hey! It looks like your browser doesn't support Javascript, or you disabled it. AstroBin will provide you with a much more pleasant experience if you enable Javascript."
-msgstr "Hei! Näyttää siltä, että selaimesi ei tue Javascriptiä, tai olet ottanut sen pois päältä. AstroBin tarjoa huomattavsti miellyttävämmän käyttökokemuksen jos otat Javascriptin käyttöön."
+msgstr "Hei! Näyttää siltä, että selaimesi ei tue Javascriptiä, tai olet ottanut sen pois päältä. AstroBinin käyttö on huomattavasti miellyttävämpää jos otat Javascriptin käyttöön."
 
 #: templates/base.html:52
 msgid "English"
@@ -510,7 +510,7 @@ msgstr "Etsi kuvia kohteen tai laitteen perusteella"
 
 #: templates/base.html:65
 msgid "Start typing and hit ENTER"
-msgstr "Aloita kirjoittamaan ja paina ENTER"
+msgstr "Ala kirjoittaa ja paina ENTER"
 
 #: templates/base.html:68
 #: templates/base.html.py:69
@@ -520,7 +520,7 @@ msgstr "Etsi"
 
 #: templates/base.html:77
 msgid "The definitive home for your astrophotography."
-msgstr "Lopullinen koti tähtivalokuvillesi."
+msgstr "Paras paikka tähtikuvillesi."
 
 #: templates/base.html:85
 #: templates/base.html.py:199
@@ -597,7 +597,7 @@ msgstr "Tietoja AstroBinistä"
 
 #: templates/base.html:192
 msgid "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers."
-msgstr "AstroBin on erityisesti tähtivalokuvaajille suunnattu kuvien ylläpitosivusto: se on tähtivalokuviesi lopullinen koti. Tähtivalokuvaajan suunnittelema, tähtivalokuvaajille suunniteltu. "
+msgstr "AstroBin on erityisesti tähtikuvaajille suunnattu kuvien julkaisusivusto: se on tähtikuviesi lopullinen koti. Tähtikuvaajan suunnittelema, tähtikuvaajia varten. "
 
 #: templates/base.html:196
 msgid "Site links"
@@ -613,7 +613,7 @@ msgstr "Tekijänoikeus"
 
 #: templates/base.html:216
 msgid "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
-msgstr "AstroBinin Tekijänoikeudet &copy; 2011 Salvatore Iovene, kaikki oikeudet pidätetty. Tällä internetsivulla olevien kuvien Tekijänoikeudet kuuluvat kuvan julkaisijalle. "
+msgstr "AstroBinin Tekijänoikeudet &copy; 2011 Salvatore Iovene, kaikki oikeudet pidätetty. Tällä internetsivulla olevien kuvien tekijänoikeudet kuuluvat kuvan julkaisijalle. "
 
 #: templates/base.html:235
 msgid "Follow AstroBin on Twitter"
@@ -652,15 +652,15 @@ msgstr "Hei!"
 
 #: templates/help.html:10
 msgid "Are you an astrophotographer? Do you like to share the outcome of your hard work with others? As an astrophotographer myself, and a subscriber to numerous Astrophotography forums, I have found that the Internet is lacking a centralized place where astrophotographers can share their work."
-msgstr "Oletko Astrovalokuvaaja? Haluaisitko jakaa kovan työsi tulokset muiden kanssa? Olen itsekkin astrovalokuvaaja ja seuratessani aiheseen liittyviä keskustelufoorumeja, olen huomannut, että internetistä puuttuu keskitetty paikka missä astrovalokuvaajat voivat jakaa ottamiaan valokuvia. "
+msgstr "Oletko tähtikuvaaja? Haluatko jakaa kovan työsi tulokset muiden kanssa? Olen itsekin tähtikuvaaja ja seuratessani alan foorumeja olen huomannut, että internetistä puuttuu keskitetty paikka kuvien jakamiseen nimenomaan tähtikuvaajille. "
 
 #: templates/help.html:12
 msgid "Well, this is finally over!"
-msgstr "Tästä on vihdoin tullut loppu!"
+msgstr "No, odotus on vihdoin loppu."
 
 #: templates/help.html:14
 msgid "<em>AstroBin</em> comes to fill the gap. It's a website built from the ground up by an astrophotographer, and it provides means to people who want to share their astrophotographs."
-msgstr "<em>AstroBin</em> on tullut täyttämään aukon. Se on astrovalokuvaajan alusta asti luoma nettisivu, joka tarjoaa tähtivalokuvauksesta kiinnostuneille paikan missä jakaa tähtivalokuvia."
+msgstr "<em>AstroBin</em> on tullut korjaamaan puutteen. Se on alusta asti tähtikuvaajan suunnittelema sivusto, joka tarjoaa tähtivalokuvauksesta kiinnostuneille paikan kuvien jakamiseen."
 
 #: templates/help.html:16
 msgid "So how is this different from any other image sharing websites?"
@@ -668,27 +668,27 @@ msgstr "Miten AstroBin eroaa muista valokuvien jakamiseen tarkoitetuista nettisi
 
 #: templates/help.html:18
 msgid "<em>AstroBin</em> provides a number of features that are tailored specificlly to astrophotography. Here's a quick run down of the main ones:"
-msgstr "<em>AstroBin</em> tarjoaa lukuisan määrän toimintoja, jotka on räätälöity erityisesti tähtivalokuville. Tässä lyhyesti päätoiminnot:"
+msgstr "<em>AstroBin</em> tarjoaa lukuisan määrän toimintoja, jotka on räätälöity erityisesti tähtikuville. Tässä lyhyesti päätoiminnot:"
 
 #: templates/help.html:21
 msgid "Dedication to data"
-msgstr "Omistautuminen tiedolle"
+msgstr "Kuvaustietojen huomiointi"
 
 #: templates/help.html:23
 msgid "On a general purpose image sharing site, you would upload your image and be done with it. <em>AstroBin</em>, instead, has a user interface specifically designed to enable you to input all the technical data of your image."
-msgstr "Yleisellä valokuvien jako sivustolla käyt vain lataamassa kuvan ja homma on hoidettu. AstroBin on vienyt kuvien jakamisen askeleen eteenpäin. <em>AstroBinin</em>, käyttäjätietokanta on suunniteltu niin, että se mahdollistaa kaiken kuvaan liittyvän teknisen tiedon kirjaamisen."
+msgstr "Perinteisellä kuvienjakosivustolla lataisit vain kuvan ja homma olisi hoidettu. AstroBin sen sijaan on ottanut askeleen eteenpäin mahdollistaen kaiken kuvaan liittyvän teknisen tiedon kirjaamisen."
 
 #: templates/help.html:24
 msgid "<em>AstroBin</em> will autocomplete your input using a vast database: everything from telescopes, CCDs and filters to astronomical objects in many catalogues will show in popup dialogs for easy selection when you start typing their names. <em>AstroBin</em> is connected to the SIMBAD Astronomical Database, which contains over 5 million objects under over 15 million names!"
-msgstr "<em>AstroBin</em> täydentää automaattisesti syöttämäsi tiedon käyttäen laajaa tietokantaa joka sisältää kaiken teleskoopeista, CCD:stä ja filttereistä katalogeissa oleviin astronomisiin objekteihin, jotka ilmestyvät popupikkunoina kun alat kirjoittamaan kohteiden nimiä. "
+msgstr "<em>AstroBin</em> täydentää automaattisesti syöttämäsi tiedon käyttäen laajaa tietokantaa joka sisältää kaiken kaukoputkista, kameroista ja filttereistä aina eri katalogien tähtitaivaan kohteisiin, jotka ponnahtavat näkyviin alkaessasi kirjoittaa niiden nimiä. AstroBin on yhteydessä SIMBAD-tietokantaan joka sisältää yli 15 miljoonaa nimeä yli viidelle miljoonalle kohteelle."
 
 #: templates/help.html:28
 msgid "Data is strongly interconnected"
-msgstr "Vahvasti yhteenliitetyt tiedot"
+msgstr "Tiedot nivoutuvat toisiinsa"
 
 #: templates/help.html:30
 msgid "Have you ever wanted to see how your next image is going to look like? On <em>AstroBin</em>, you can search for all images of a certain target that were taken with a certain telescope and a certain CCD or camera. Or a certain filter. How about all the images between 6 and 8 hours of integration? Or with a certain Moon phase? You can do that!"
-msgstr "Oleko joskus halunnut tietää miltä kuvasi tulee näyttämään? <em>AstroBinissa</em> voit etsiä kuvia jostain tietystä kohteesta, joka on otettu jollain tietyllä teleskoopilla ja jollain tietyllä CCD:llä tai kameralla. Tai jollain tietyllä filtterillä. Entäpä kaikki kuvat joiden valoitusaika on kuuden ja kahdeksan tunnin välillä? Tai kuvat jollain tietyllä kuun vaiheella? AstroBinissä voit tehdä tämän kaiken!"
+msgstr "Oletko koskaan miettinyt miltä seuraava kuvasi mahtaisi näyttää? <em>AstroBinissä</em> voit etsiä kuvia tietystä kohteesta, joka on otettu tietyllä kaukoputkella ja tietyllä CCD:llä tai kameralla. Tai jollain tietyllä filtterillä. Entäpä kaikki kuvat joiden valoitusaika on kuuden ja kahdeksan tunnin välillä? Tai kuvat tietyllä kuun vaiheella? AstroBinissä voit tehdä kaiken tämän!"
 
 #: templates/help.html:34
 msgid "All the data at a glance"
@@ -696,23 +696,23 @@ msgstr "Kaikki tiedot yhdellä silmäyksellä"
 
 #: templates/help.html:36
 msgid "Each image on <em>AstroBin</em> is annotated of all the technical details about its acquisition. Telescopes involved, cameras, mounts, filters, everything is visible at a glance in the Technical Card. Even the Moon age at the time of the acquisition is displayed."
-msgstr "Jokainen <em>AstroBinissa</em> oleva kuva on merkitty kaikilla teknisillä tiedoilla. Käytetyt teleskoopit, kamerat, jalustat, filtterit jne ovat helposti nähtävissä Tekniset Tiedot -kortissa. Jopa kuun ikä kuvan otto hetkellä on nähtävissä."
+msgstr "Jokainen <em>AstroBinissä</em> oleva kuva on merkitty kaikilla teknisillä tiedoilla. Käytetyt kaukoputket, kamerat, jalustat, filtterit jne. ovat helposti nähtävissä Tekniset tiedot -kortissa. Jopa kuun vaihe kuvanottohetkellä lasketaan automaattisesti."
 
 #: templates/help.html:40
 msgid "More than just an image"
-msgstr "Enemmän kuin vain kuva"
+msgstr "Enemmän kuin pelkkä  kuva"
 
 #: templates/help.html:42
 msgid "<em>AstroBin</em> will do more than just host a copy of your image: when you upload a photograph, a histogram and a black &amp; white inverted version of the image will be generated on the fly, so it's easier to spot faint nebulosity regions or spiral arms. Images will also be plate solved, and an annotated version will appear on the site. <em>AstroBin</em> will know what are the astronomical objects in your image without you telling!"
-msgstr "<em>AstroBin</em> tekee enemmän kuin vain ylläpitää kuviasi: kun lataat valokuvan, sen histogrammi ja käänteiset mustavalkovärit luodaan hetkessä. Tällä tavoin on helpompaa havaita heikot sumualueet tai spiraalihaarat. Kuvat myös ratkaistaan astronomisesti, ja merkitty versio ilmestyy nettisivulle. Näiden lisäksi <em>AstroBin</em> tietää mitkä ovat kuvasi astronomiset objektit ilman, että merkitset niitä itse!"
+msgstr "<em>AstroBin</em> tekee enemmän kuin vain ylläpitää kuviasi: kun lataat valokuvan, sen histogrammi ja negatiivinen mustavalkokuva luodaan hetkessä. Näin on helpompaa havaita heikot sumualueet tai spiraalihaarat. Kuvan tarkat koordinaatit myös ratkaistaan astrometrisesti, ja merkitty versio ilmestyy nettisivulle. Näiden lisäksi <em>AstroBin</em> löytää kuvissasi olevat kohteet ilman, että merkitset niitä itse!"
 
 #: templates/help.html:46
 msgid "AstroBin supports multiple image revisions"
-msgstr "AstroBin tukee saman kuvan useita versioita"
+msgstr "AstroBiniin saat useita versioita samasta kuvasta"
 
 #: templates/help.html:48
 msgid "Don't tell me you have never gone back to revise the processing of an image <em>after</em> you had published it. <em>AstroBin</em> embraces this concept and lets you publish several revisions of the same image easily and intuitively! Now it's going to be really easy to tell whether your processing has improved."
-msgstr "Mitä todennäköisemmin olet joskus palannut kuvaasi sen julkaisemisen jälkeen tehdäksesi siihen muutoksia. <em>AstroBin</em> tukee tätä konseptia ja mahdollistaa usean version julkaisemisen samasta kuvasta. Uuden version julkaiseminen käy helposti ja intuitiivisesti. Tämän jälkeen on todella helppoa nähdä onko kuvankäsittelytekniikkasi parantunut.  "
+msgstr "Mitä todennäköisemmin olet joskus palannut käsittelemään kuvaasi sen julkaisemisen jälkeen. <em>AstroBin</em> mahdollistaa usean version julkaisemisen samasta kuvasta. Uuden version julkaiseminen käy helposti ja intuitiivisesti. Tämän jälkeen on helppoa nähdä onko kuvankäsittelytekniikkasi parantunut.  "
 
 #: templates/help.html:52
 msgid "AstroBin is social!"
@@ -720,15 +720,15 @@ msgstr "AstroBin on sosiaalinen!"
 
 #: templates/help.html:54
 msgid "On <em>AstroBin</em> you can message other astrophotographer, follow them and be notified when they post new images, or perform requests for more data. You can also vote on images."
-msgstr "<em>AstroBinissa</em> voit lähettää viestejä toisille astrovalokuvaajille, seurata heitä ja saada ilmoituksia kun he julkaisevat uusia kuvia tai pyytävät lisäinformaatiota. Voit myös äänestää kuvia."
+msgstr "<em>AstroBinissa</em> voit lähettää viestejä toisille tähtikuvaajille, seurata heitä ja saada ilmoituksia kun he julkaisevat uusia kuvia tai pyytävät lisätietoja. Voit myös äänestää kuvia."
 
 #: templates/help.html:59
 msgid "As you have undoubtly realized by now, <em>AstroBin</em> is way more than an image hosting service. It's what the Astrophotography community has needed for a long time. For years, I have seen amazing images scattered all over the Internet: general purpose image hosting sites, forums, personal websites and even temporary places. Some of those images contain data that is too precious to go wasted in a sea of chaos. <em>AstroBin</em> comes to the rescue to provide a home and a central hub for astrophotographers all over the world."
-msgstr "Niin kuin olet epäilemättä jo ymmärtänyt, <em>AstroBin</em> on paljon muutakin kuin vain valokuvien ylläpitosivusto. Se on sitä mitä astrovalokuvaaja yhteisö on kaivannut jo pitkän aikaa. Vuosia olen nähnyt upeita kuvia ripoteltuina ympäri internettiä: yleisillä valokuvien ylläpitosivustoilla, foorumeilla, henkilökohtaisilla nettisivuilla ja jopa väliaikaisilla sivustoilla. Osa niistä kuvista sisältää paljon aivan liian arvokasta materiaalia kadotakseen jonnekkin kaiken tuon kaaoksen keskelle. <em>AstroBin</em> on tullut pelastamaan tilanteen tarjoamalla kodin ja tapaamispaikan astrovalokuvaajille ympäri maailman."
+msgstr "Kuten huomaat, <em>AstroBin</em> on paljon muutakin kuin vain kuvienjakosivusto. Tätä tähtikuvausyhteisö on kaivannut jo pitkän aikaa. Vuosien ajan olen nähnyt upeita kuvia siroteltuna ympäri internettiä: normaaleilla kuvienjakosivuilla, foorumeilla, henkilökohtaisilla nettisivuilla ja jopa väliaikaisilla sivustoilla. Osa niistä kuvista sisältää paljon aivan liian arvokasta materiaalia kadotakseen jonnekin kaiken tuon kaaoksen keskelle. <em>AstroBin</em> pelastaa tilanteen tarjoamalla kodin ja tapaamispaikan astrovalokuvaajille ympäri maailman."
 
 #: templates/help.html:61
 msgid "So, what are you waiting for?"
-msgstr "Mitä vielä odotat?"
+msgstr "Mitä siis vielä odotat?"
 
 #: templates/help.html:62
 msgid "Sign up now!"
@@ -740,7 +740,7 @@ msgstr "Julkaisija"
 
 #: templates/index.html:35
 msgid "Quick upload"
-msgstr "Nopea lataus"
+msgstr "Pikalataus"
 
 #: templates/index.html:41
 msgid "Upload"
@@ -752,12 +752,12 @@ msgstr "Valitse ladattava kuva, tai"
 
 #: templates/index.html:45
 msgid "import from Flickr"
-msgstr "tuo Flickeristä"
+msgstr "tuo Flickristä"
 
 #: templates/index.html:52
 #, python-format
 msgid "<strong>Hello there! Welcome to AstroBin!</strong> <em>AstroBin</em> is an image hosting service made specifically for astrophotographers. It comes packed with features that benefits the astrophotography community greatly! Read more in the <a href=\"%(help_url)s\">help page.</a>"
-msgstr "<strong> Hei Siellä! Tervetuloa AstroBiniin!</strong> <em>AstroBin</em> on kuvien ylläpitosivusto, joka on suunniteltu erityisesti astrovalokuvaajille. Se sisältää toimintoja, joista on suurta hyötyä astrovalokuvaajayhteisölle! Lue lisää <a href=\"%(help_url)s\">ohjeita- sivulta.</a>"
+msgstr "<strong> Hei siellä! Tervetuloa AstroBiniin!</strong> <em>AstroBin</em> on kuvien ylläpitosivusto, joka on suunniteltu erityisesti tähtikuvaajille. Se sisältää toimintoja, joista on suurta hyötyä tähtikuvaajayhteisölle! Lue lisää <a href=\"%(help_url)s\">ohjeita-sivulta.</a>"
 
 #: templates/index.html:57
 msgid "These images have been uploaded recently"
@@ -778,7 +778,7 @@ msgstr "Laitteisto"
 
 #: templates/profile-edit-menu.html:7
 msgid "Import from Flickr"
-msgstr "Tuo Flickeristä"
+msgstr "Tuo Flickristä"
 
 #: templates/image/detail.html:13
 msgid "Actions"
@@ -807,7 +807,7 @@ msgstr "Poista"
 
 #: templates/image/detail.html:36
 msgid "Bring to a user's attention"
-msgstr "Tuo käyttäjän tietoon"
+msgstr "Huomauta käyttäjälle"
 
 #: templates/image/detail.html:40
 #: templates/image/detail.html.py:362
@@ -829,7 +829,7 @@ msgstr "Normaali"
 
 #: templates/image/detail.html:59
 msgid "Inverted monochrome"
-msgstr "Käänteiset mustavalkovärit"
+msgstr "Negatiivinen mustavalkokuva"
 
 #: templates/image/detail.html:64
 msgid "Annotated"
@@ -855,7 +855,7 @@ msgstr "Seuraa"
 
 #: templates/image/detail.html:93
 msgid "Send private message"
-msgstr "Lähetä henkilökohtainen viesti"
+msgstr "Lähetä yksityisviesti"
 
 #: templates/image/detail.html:101
 msgid "Share"
@@ -875,11 +875,11 @@ msgstr "Pikkukuvalla:"
 
 #: templates/image/detail.html:167
 msgid "This image was just uploaded and is still processing. Please try again in a few seconds."
-msgstr "Tämä kuva on juuri ladattu ja sitä edelleen käsitellään. Olkaa hyvä ja yrittäkää uudestaan muutaman sekunnin kuluttua."
+msgstr "Tämä kuva on vasta ladattu ja sitä käsitellään yhä. Ole hyvä ja yritä uudestaan parin sekunnin päästä."
 
 #: templates/image/detail.html:176
 msgid "uploaded on"
-msgstr "Ladattu"
+msgstr "ladattu"
 
 #: templates/image/detail.html:179
 #, python-format
@@ -925,7 +925,7 @@ msgstr "Sama kohde"
 
 #: templates/image/detail.html:265
 msgid "Same imaging telescope"
-msgstr "Sama teleskooppi"
+msgstr "Sama kaukoputki"
 
 #: templates/image/detail.html:266
 msgid "Same imaging camera"
@@ -970,7 +970,7 @@ msgstr "Kyllä, poista kuva"
 #: templates/image/detail.html:324
 #, python-format
 msgid "Follow %(username)s?"
-msgstr "Seuranta %(username)s?"
+msgstr "Seuraa %(username)s?"
 
 #: templates/image/detail.html:325
 #, python-format
@@ -998,7 +998,7 @@ msgstr "Kyllä, lopeta seuraaminen!"
 #: templates/image/detail.html:340
 #, python-format
 msgid "Send %(username)s a message"
-msgstr "Lähetä %(username)s viesti"
+msgstr "Lähetä viesti käyttäjälle %(username)s"
 
 #: templates/image/detail.html:342
 #: templates/messages/detail.html:23
@@ -1024,17 +1024,17 @@ msgstr "Syötä nimen osa"
 
 #: templates/image/detail.html:356
 msgid "User not found. Cannot notify them."
-msgstr "Käyttäjää ei löytynyt. Häntä ei voida informoida."
+msgstr "Käyttäjää ei löytynyt. Ei voida tiedottaa."
 
 #: templates/image/detail.html:363
 #, python-format
 msgid "You will notify %(username)s that you would like them to feed more information in the technical card for this photograph. Continue?"
-msgstr "Ilmoitat %(username)s, että haluaisit heidän lisäävän tietoja tämän kuvan teknisiin tietoihin. Jatka?"
+msgstr "Ilmoitat käyttäjälle %(username)s, että haluaisit heidän täydentävän kuvan teknisiä tietoja. Jatka?"
 
 #: templates/image/detail.html:369
 #, python-format
 msgid "You will notify %(username)s that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully %(username)s will contact you about how to handle the transaction. Continue?"
-msgstr "Ilmoitat %(username)s, että haluaisit nähdä TIFF tai FITS tiedoston. AstroBin ei tällä hetkellä tue näin isojen tiedostojen jakamista, joten toivottavasti %(username)s ottaa sinuun yhteyttä jotta voitte selvittää kuinka tiedosto voitaisiin jakaa. Jatka?"
+msgstr "Ilmoitat käyttäjälle %(username)s, että haluaisit nähdä TIFF tai FITS tiedoston. AstroBin ei tällä hetkellä tue näin isojen tiedostojen jakamista, joten toivottavasti %(username)s ottaa sinuun yhteyttä jotta voitte selvittää kuinka tiedosto voitaisiin jakaa. Jatka?"
 
 #: templates/image/edit/acquisition.html:8
 msgid "Edit your image: acquisition details"
@@ -1042,7 +1042,7 @@ msgstr "Muokkaa kuvaasi: tekniset yksityiskohdat"
 
 #: templates/image/edit/acquisition.html:15
 msgid "Number of frames"
-msgstr "Kehyksien lukumäärä"
+msgstr "Ruutujen lukumäärä"
 
 #: templates/image/edit/acquisition.html:63
 msgid "Seeing (0-5)"
@@ -1058,7 +1058,7 @@ msgstr "vvvv-kk-pp"
 
 #: templates/image/edit/acquisition.html:87
 msgid "Universal time"
-msgstr "Universaali aika"
+msgstr "Yleisaika (UT)"
 
 #: templates/image/edit/acquisition.html:92
 msgid "hh:mm"
@@ -1086,11 +1086,11 @@ msgstr "Palaa kuvaan"
 
 #: templates/image/edit/acquisition.html:105
 msgid "You can insert as many acquisition sessions as you want, as often images are taken across several nights. An acquisition session is defined primarily by a date and a filter. Fill in your data and then click on <strong>Save</strong> to finish, or on <strong>Add more</strong> to add more acquisition sessions."
-msgstr "Voit lisätä niin monta valokuvaus-sessiota kuin haluat, koska usein kuvat on otettu useamman yön aikana. Yksi valokuvaus-sessio on määritelty ensisijaisesti päivämäärän ja sudattimen mukaan. Täytä tiedot ja klikkaa sitten <strong>Tallenna</strong> valmis, tai <strong>Lisää</strong> lisätäksesi muita valokuvaus-sessioita."
+msgstr "Voit lisätä haluamasi määrän kuvaussessioita, koska usein kuvaa on valotettu useana yönä. Yksi sessio on määritelty lähinnä päivämäärän ja suodattimen perusteella. Täytä tiedot ja klikkaa <strong>Tallenna</strong> lopettaaksesi, tai <strong>Lisää</strong> lisätäksesi muita kuvaussessioita."
 
 #: templates/image/edit/acquisition.html:109
 msgid "Acquisition session"
-msgstr "Valokuvaus-sessio"
+msgstr "Kuvaussessio"
 
 #: templates/image/edit/acquisition.html:118
 msgid "Add more"
@@ -1110,7 +1110,7 @@ msgstr "Muista, että AstroBin yrittää automaattisesti tunnistaa kohteet, jote
 
 #: templates/image/edit/basic.html:24
 msgid "You can't edit Subjects without Javascript. Please enable it in your Internet browser."
-msgstr "Et voi muuttaa Kohteita ilman Javascriptiä. Aktivoi Javascripti kohdasta Asetukset internetselaimessasi. "
+msgstr "Et voi muuttaa Kohteita ilman Javascriptiä. Aktivoi Javascript selaimesi asetuksista."
 
 #: templates/image/edit/basic.html:31
 msgid "Use a comma to separate the values."
@@ -1123,12 +1123,12 @@ msgstr "Tallenna ja jatka"
 
 #: templates/image/edit/gear.html:7
 msgid "Edit your image: gear used"
-msgstr "Muokkaa kuvaasi: käytetyt "
+msgstr "Muokkaa kuvaasi: käytetyt laitteet"
 
 #: templates/image/edit/gear.html:10
 #, python-format
 msgid "Can't see anything here? Perhaps you should first add some gear in your <a href=\"%(the_url)s\">profile</a>!"
-msgstr "Onko tämä kohta tyhjä? Sinun tulisi ensin lisätä laitteita <a href=\"%(the_url)s\">profiiliisi</a>!"
+msgstr "Onko tämä kohta tyhjä? Sinun täytyy ensin lisätä laitteita <a href=\"%(the_url)s\">profiiliisi</a>!"
 
 #: templates/image/edit/menu.html:6
 msgid "Gear used"
@@ -1175,7 +1175,7 @@ msgstr "<strong>%(username)s</strong> on pyytänyt lisätietoja kuvastasi."
 #: templates/inclusion_tags/request_list.html:13
 #, python-format
 msgid "<strong>%(username)s</strong> has requested to see the TIFF of FITS of your image."
-msgstr "<strong>%(username)s</strong> on pyytänyt nähdä TIFF tai FITS tiedoston kuvastasi."
+msgstr "<strong>%(username)s</strong> on pyytänyt nähdä kuvasi TIFF tai FITS -tiedostona."
 
 #: templates/inclusion_tags/request_list.html:20
 #, python-format
@@ -1196,7 +1196,7 @@ msgstr "Jos tältä kohteelta puuttuu tietoja, tai siinä on vääriä tietoja, 
 
 #: templates/location/edit.html:11
 msgid "Edit your location"
-msgstr "Muokkaa kohdetta"
+msgstr "Muokkaa sijaintiasi"
 
 #: templates/location/edit.html:18
 msgid "Saved. Thanks!"
@@ -1204,7 +1204,7 @@ msgstr "Tallennettu. Kiitos!"
 
 #: templates/messages/all.html:6
 msgid "Here are your private messages"
-msgstr "Tässä ovat henkilökohtaiset viestisi"
+msgstr "Tässä ovat yksityisviestisi"
 
 #: templates/messages/all.html:9
 msgid "Mark all read"
@@ -1244,11 +1244,11 @@ msgstr "Viesti lähetetty"
 
 #: templates/messages/new.html:7
 msgid "Send a private message to a user. Messages are only shared between you and the recipient."
-msgstr "Lähetä käyttäjälle henkilökohtainen viesti. Viestit näkyvät vain sinulle ja vastaanottajalle."
+msgstr "Lähetä käyttäjälle yksityisviesti. Viestit näkyvät vain sinulle ja vastaanottajalle."
 
 #: templates/messages/new.html:11
 msgid "Write a new private message to"
-msgstr "Luo uusi henkilökotainen viesti"
+msgstr "Luo uusi yksityisviesti"
 
 #: templates/messages/sent.html:7
 msgid "Message sent."
@@ -1300,7 +1300,7 @@ msgstr "Kuvasi on poistettu."
 #: templates/notification/image_not_solved/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
-msgstr "<a href=\"%(object_url)s\">Kuvaasi ei voitu astronomisesti ratkaista.</a>"
+msgstr "<a href=\"%(object_url)s\">Kuvasi astrometrinen ratkaisu ei onnistunut.</a>"
 
 #: templates/notification/image_ready/notice.html:2
 #: templates/notification/image_ready/short.html:2
@@ -1312,7 +1312,7 @@ msgstr "<a href=\"%(object_url)s\">Kuvasi on käsitelty.</a>"
 #: templates/notification/image_solved/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
-msgstr "<a href=\"%(object_url)s\">Kuvasi astronominen ratkaisu onnistui.</a>"
+msgstr "<a href=\"%(object_url)s\">Kuvasi astrometrinen ratkaisu onnistui.</a>"
 
 #: templates/notification/new_follower/full.txt:2
 #, python-format
@@ -1323,7 +1323,7 @@ msgstr "Käyttäjä %(object)s nyt seuraa sinua. Ilmoitus uusista kuvistasi läh
 #: templates/notification/new_follower/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you.</a>"
-msgstr "<a href=\"%(object_url)s\"><strong>%(object)s</strong> seuraa sinua.</a>"
+msgstr "<a href=\"%(object_url)s\"><strong>%(object)s</strong> seuraa nyt sinua.</a>"
 
 #: templates/notification/new_follower/short.txt:2
 msgid "You have a new follower!"
@@ -1397,16 +1397,16 @@ msgstr ""
 
 #: templates/privatebeta/invite.html:12
 msgid "AstroBin is currently in closed beta"
-msgstr "AstroBin on tällä hetkellä suljettuna beta versiona"
+msgstr "AstroBin on tällä hetkellä suljettuna beta-versiona"
 
 #: templates/privatebeta/invite.html:15
 #, python-format
 msgid "and it will be open for everybody soon. If you've been invited, you can <a href=\"%(login_url)s\">login</a>, otherwise you can leave us your email address and we will notify you when the website is up!"
-msgstr "ja pian se on avoinna kaikille. Jos olet saanut kutsun, voit <a href=\"%(login_url)s\">login</a>, muussa tapauksessa voit jättää meille sähköpostiosoitteesi ja me otamme sinuun yhteyttä heti kun nettisivu avataan!"
+msgstr "ja pian se on avoinna kaikille. Jos olet saanut kutsun, voit <a href=\"%(login_url)s\">kirjautua sisään</a>, muussa tapauksessa voit jättää meille sähköpostiosoitteesi ja me otamme sinuun yhteyttä heti kun nettisivu avataan!"
 
 #: templates/registration/activate.html:8
 msgid "Account successfully activated"
-msgstr "Tili onnistuneesti aktivoitu"
+msgstr "Käyttäjätunnus aktivoitu onnistuneesti"
 
 #: templates/registration/activate.html:10
 #: templates/registration/login.html:16
@@ -1416,11 +1416,11 @@ msgstr "Kirjaudu sisään"
 
 #: templates/registration/activate.html:14
 msgid "Account activation failed"
-msgstr "Tilin aktivoiminen epäonnistui"
+msgstr "Tunnuksen aktivoiminen epäonnistui"
 
 #: templates/registration/activation_email.txt:2
 msgid "Activate account at"
-msgstr "Aktivoi tili sivustolle"
+msgstr "Aktivoi tunnus  sivustolle"
 
 #: templates/registration/activation_email.txt:6
 #, python-format
@@ -1486,7 +1486,7 @@ msgstr "Olet nyt rekisteröitynyt. Linkki tilin aktivoimiseksi on lähetetty sä
 
 #: templates/registration/registration_form.html:6
 msgid "Fill the form to join AstroBin!"
-msgstr "Täytä lomake liittyäksesi AstroBiniin"
+msgstr "Täytä lomake liittyäksesi AstroBiniin!"
 
 #: templates/registration/registration_form.html:10
 msgid "Register with AstroBin"
@@ -1510,7 +1510,7 @@ msgstr "Täytetty"
 
 #: templates/requests/all.html:25
 msgid "Location details missing."
-msgstr "Paikkayksityiskohdat puuttuvat."
+msgstr "Sijainnin tiedot puuttuvat."
 
 #: templates/requests/all.html:30
 msgid "Yes."
@@ -1531,7 +1531,7 @@ msgstr "Sinulla ei ole pyyntöjä."
 
 #: templates/search/search.html:7
 msgid "Show/hide advanced search box."
-msgstr "Näytä/piilota laajennettu haku -lomake"
+msgstr "Näytä/piilota laajennettu hakukenttä"
 
 #: templates/search/search.html:17
 msgid "Images matching"
@@ -1551,7 +1551,7 @@ msgstr "Arviointi"
 
 #: templates/search/search.html:24
 msgid "Integration"
-msgstr "Valoitusaika"
+msgstr "Valotusaika"
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
@@ -1559,7 +1559,7 @@ msgstr "Käyttäjää ei löytynyt:"
 
 #: templates/user/profile.html:9
 msgid "Tools"
-msgstr "Välineet"
+msgstr "Työkalut"
 
 #: templates/user/profile.html:13
 #: templates/user/profile.html.py:16
@@ -1576,7 +1576,7 @@ msgstr "Viimeisimmät kuvat käyttäjältä"
 
 #: templates/user/profile/flickr_import.html:7
 msgid "Import your photos from Flickr"
-msgstr "Tuo kuviasi Flickeristä"
+msgstr "Tuo kuviasi Flickristä"
 
 #: templates/user/profile/flickr_import.html:12
 msgid "Which set"
@@ -1588,11 +1588,11 @@ msgstr "Tuo kuvia"
 
 #: templates/user/profile/flickr_import.html:28
 msgid "Authenticate with Flickr"
-msgstr "Tunnistaudu Flickerissä"
+msgstr "Tunnistaudu Flickrissä"
 
 #: templates/user/profile/flickr_import.html:35
 msgid "Unfortunately you need to enable Javascript to be able to import photos from Flickr at this time."
-msgstr "Valitettavasti tällä hetkellä sinun täytyy aktivoida Javascript voidaksesi tuoda kuvia Flickeristä."
+msgstr "Valitettavasti tällä hetkellä sinun täytyy aktivoida Javascript voidaksesi tuoda kuvia Flickristä."
 
 #: templates/user/profile/flickr_import.html:68
 msgid "Click to select the photos you want to import"
@@ -1600,11 +1600,11 @@ msgstr "Klikkaa valitaksesi kuvat, jotka haluat tuoda"
 
 #: templates/user/profile/flickr_import.html:70
 msgid "Select all"
-msgstr "Valiste kaikki"
+msgstr "Valitse kaikki"
 
 #: templates/user/profile/flickr_import.html:71
 msgid "Select none"
-msgstr "Älä valitse yhtään"
+msgstr "Poista valinnat"
 
 #: templates/user/profile/flickr_import.html:84
 msgid "Import selected photos"
@@ -1612,7 +1612,7 @@ msgstr "Tuo valitut kuvat"
 
 #: templates/user/profile/flickr_import.html:96
 msgid "Importing images."
-msgstr "Tuodaan kuvia"
+msgstr "Tuodaan kuvia."
 
 #: templates/user/profile/flickr_import.html:96
 msgid "Do not navigate away from this window: this might take a while!"
@@ -1633,7 +1633,7 @@ msgstr "* käytä pilkkua erotellaksesi arvot."
 
 #: templates/user/profile/edit/basic.html:19
 msgid "or click here to change your password"
-msgstr "tai klikkaa tästä vaihtaaksesi salasanan"
+msgstr "tai klikkaa tästä vaihtaaksesi salasanasi"
 
 #: templates/user/profile/edit/basic.html:29
 #: templates/user/profile/edit/gear.html:24
@@ -1642,7 +1642,7 @@ msgstr "Ei tuloksia. Paina TAB lisätäksesi sen!"
 
 #: templates/user/profile/edit/gear.html:7
 msgid "Edit your astrophotography gear"
-msgstr "Muokkaa tähtivalokuvauslaitteitasi"
+msgstr "Muokkaa tähtikuvauslaitteitasi"
 
 #~ msgid "num"
 #~ msgstr "num"
