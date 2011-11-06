@@ -647,12 +647,12 @@ def image_edit_save_acquisition(request):
         a.delete()
 
     if edit_type == 'deep_sky':
-        DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False)
+        DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False, form=DeepSky_AcquisitionForm)
         deep_sky_acquisition_formset = DSAFormSet(request.POST, instance=image)
         if deep_sky_acquisition_formset.is_valid():
             deep_sky_acquisition_formset.save()
             if 'add_more' in request.POST:
-                DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False)
+                DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
                 deep_sky_acquisition_formset = DSAFormSet(instance=image)
                 if not dsa_qs:
                     context_message = {'error': False, 'text': _("Fill in one session, before adding more.")}
