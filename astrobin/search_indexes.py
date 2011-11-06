@@ -87,7 +87,8 @@ class ImageIndex(SearchIndex):
 
         if deep_sky_acquisitions:
             for a in deep_sky_acquisitions:
-                integration += (a.duration * a.number)
+                if a.duration and a.number:
+                    integration += (a.duration * a.number)
         elif solar_system_acquisition:
             integration = solar_system_acquisition.frames
 
