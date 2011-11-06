@@ -9,6 +9,8 @@
         {% url profile_edit_gear as the_url %}
         {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your <a href="{{the_url}}">profile</a>!{% endblocktrans %}
         </p>
+        <br/>
+        <h3>{% trans "Select by clicking on the gear used for this image" %}:</h3>
         <form method="post" action="{% url image_edit_save_gear %}">{% csrf_token %}
             {{form.as_p}}
             <input type="hidden" name="image_id" value="{{image.id}}" />
