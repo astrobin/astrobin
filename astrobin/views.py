@@ -376,7 +376,7 @@ def image_edit_basic(request, id):
     subjects =  u', '.join(x.mainId for x in image.subjects.all())
     locations = u', '.join(x.name for x in image.locations.all())
 
-    form = ImageEditBasicForm({
+    form = ImageEditBasicForm(data={
         'title': image.title,
         'description': image.description,
         'subjects': subjects,
@@ -493,7 +493,7 @@ def image_edit_acquisition_reset(request, id):
 @login_required
 @require_POST
 def image_edit_save_basic(request):
-    form = ImageEditBasicForm(request.POST)
+    form = ImageEditBasicForm(data=request.POST)
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
     if request.user != image.user:
