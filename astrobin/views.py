@@ -181,10 +181,14 @@ def image_detail(request, id):
         moon_illuminated_list = []
         acquisitions = []
 
-
-        dates = []
-        frames = []
-
+        dsa_data = {
+            'dates': [],
+            'frames': [],
+            'darks': [],
+            'flats': [],
+            'flat_darks': [],
+            'bias': [],
+        }
         for a in deep_sky_acquisitions:
             if a.date is not None:
                 dates.append(a.date)
@@ -200,7 +204,13 @@ def image_detail(request, id):
                 if a.iso:
                     f += ' @ ISO%s' % (a.iso, )
 
-                frames.append(f)
+                dsa_data['frames'].append(f)
+
+            for i in ['darks', 'flats', 'flat_darks', 'bias']:
+                if a.filter and getattr(a, i):
+                    dsa_data[i].append("%s: %s" % (a.filter.name, getattr(a, i)))
+                elif getattr(a, i):
+                    dsa_data[i].append(getattr(a, i))
 
         def average(values):
             if not len(values):
@@ -208,14 +218,14 @@ def image_detail(request, id):
             return float(sum(values)) / len(values)
 
         deep_sky_data = {
-            _('Dates'): u', '.join([str(x) for x in dates]),
-            _('Frames'): u', '.join(frames),
-            _('Darks') : a.darks,
-            _('Flats'): a.flats,
-            _('Flat darks'): a.flat_darks,
-            _('Bias'): a.bias,
-            _('Avg. Moon age'): "%.2f" % (average(moon_age_list), ),
-            _('Avg. Moon phase'): "%.2f" % (average(moon_illuminated_list), )
+            _('Dates'): u', '.join([str(x) for x in dsa_data['dates']]),
+            _('Frames'): u', '.join(dsa_data['frames']),
+            _('Darks') : u', '.join(dsa_data['darks']),
+            _('Flats'): u', '.join(dsa_data['flats']),
+            _('Flat darks'): u', '.join(dsa_data['flat_darks']),
+            _('Bias'): u', '.join(dsa_data['bias']),
+            _('Avg. Moon age'): "%.2f" % (average(moon_age_list), ) if moon_age_list else None,
+            _('Avg. Moon phase'): "%.2f" % (average(moon_illuminated_list), ) if moon_illuminated_list else None,
         }
 
     elif solar_system_acquisition:
