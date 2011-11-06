@@ -176,7 +176,7 @@
                     <li class="uploaded">({% trans "uploaded on" %} {{image.uploaded}}</li>
                     <li class="author">
                         {% url user_page image.user.username as the_url %}
-                        {% blocktrans %}by <a href="{{ the_url }}">{{image.user.username}}</a>{% endblocktrans %})</li>
+                        {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %})</li>
                     {% if image.subjects %}
                     {% endif %}
                 </ul>
