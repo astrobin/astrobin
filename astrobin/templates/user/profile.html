@@ -29,6 +29,7 @@
     </noscript>
     {% endif %}
 
+    <p><a href="{% url index %}">{% trans "Go to the homepage to upload a new image!" %}</a></p>
     <div class="full-box">
         <h2>{% trans "User's card" %}: {{user.username}}</h2>
         <div class="gear">
