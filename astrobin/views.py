@@ -198,11 +198,13 @@ def image_detail(request, id):
                 moon_age_list.append(m.age)
                 moon_illuminated_list.append(m.illuminated)
 
-            if a.filter and a.number and a.duration:
-                f = a.filter.name
-                if a.is_synthetic:
-                    f += " (S)"
-                f += '; %sx%s"' % (a.number, a.duration)
+            if a.number and a.duration:
+                f = ""
+                if a.filter:
+                    f = a.filter.name
+                    if a.is_synthetic:
+                        f += " (S)"
+                f += '%sx%s"' % (a.number, a.duration)
                 if a.iso:
                     f += ' @ ISO%s' % a.iso 
                 if a.sensor_cooling:
