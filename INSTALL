@@ -23,7 +23,8 @@ sudo apt-get install \
 	libjpeg8-dev \
 	netpbm \
 	libnetpbm10-dev \
-	python-numpy
+	python-numpy \
+	gettext
 sudo apt-file update
 sudo pip install virtualenv
 
