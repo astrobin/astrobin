@@ -212,5 +212,8 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
         model = DeepSky_Acquisition
 
     def __init__(self, user=None, **kwargs):
+        queryset = kwargs.pop('queryset')
         super(DeepSky_AcquisitionForm, self).__init__(**kwargs)
         self.fields['date'].label = _("Date")
+        self.fields['filter'].queryset = queryset
+

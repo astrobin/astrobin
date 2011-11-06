@@ -17,6 +17,7 @@ from django.db.models import Q
 from django.db import IntegrityError
 from django.utils.translation import ugettext as _
 from django.forms.models import inlineformset_factory
+from django.utils.functional import curry
 
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
@@ -457,6 +458,9 @@ def image_edit_acquisition(request, id):
         if not dsa_qs:
             extra = 1
         DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=extra, can_delete=False, form=DeepSky_AcquisitionForm)
+        profile = UserProfile.objects.get(user=image.user)
+        filter_queryset = profile.filters.all()
+        DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
         deep_sky_acquisition_formset = DSAFormSet(instance=image)
 
     response_dict = {
