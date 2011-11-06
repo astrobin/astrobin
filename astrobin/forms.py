@@ -21,6 +21,13 @@ class ImageEditBasicForm(forms.Form):
     locations = forms.CharField(required=False, help_text="<noscript>*</noscript>")
     description = forms.CharField(widget=forms.Textarea, required=False)
 
+    def __init__(self, user=None, **kwargs):
+        super(ImageEditBasicForm, self).__init__(**kwargs)
+        self.fields['title'].label = _("Title")
+        self.fields['subjects'].label = _("Subjects")
+        self.fields['locations'].label = _("Locations")
+        self.fields['description'].label = _("Description")
+
 
 class ImageEditGearForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
@@ -66,9 +73,14 @@ class ImageEditGearForm(forms.ModelForm):
 
 class UserProfileEditBasicForm(forms.ModelForm):
     locations = forms.CharField(max_length=64, required=False, help_text="<noscript>*</noscript>")
+
     class Meta:
         model = UserProfile
         fields = ('website', 'job', 'hobbies')
+
+    def __init__(self, user=None, **kwargs):
+        super(UserProfileEditBasicForm, self).__init__(**kwargs)
+        self.fields['locations'].label = _("Locations")
 
 
 class UserProfileEditGearForm(forms.Form):
@@ -79,6 +91,16 @@ class UserProfileEditGearForm(forms.Form):
     software = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
     filters = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
     accessories = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
+
+    def __init__(self, user=None, **kwargs):
+        super(UserProfileEditGearForm, self).__init__(**kwargs)
+        self.fields['telescopes'].label = _("Telescopes")
+        self.fields['mounts'].label = _("Mounts")
+        self.fields['cameras'].label = _("Cameras")
+        self.fields['focal_reducers'].label = _("Focal reducers")
+        self.fields['software'].label = _("Software")
+        self.fields['filters'].label = _("Filters")
+        self.fields['accessories'].label = _("Accessories")
 
 
 class PrivateMessageForm(forms.Form):
