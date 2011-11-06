@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-06 15:00+0000\n"
+"POT-Creation-Date: 2011-11-06 16:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -190,31 +190,31 @@ msgstr ""
 msgid "Sensor cooling"
 msgstr ""
 
-#: models.py:338 views.py:233
+#: models.py:338 views.py:235
 msgid "Darks"
 msgstr ""
 
-#: models.py:339 views.py:234
+#: models.py:339 views.py:236
 msgid "Flats"
 msgstr ""
 
-#: models.py:340 views.py:235
+#: models.py:340 views.py:237
 msgid "Flat darks"
 msgstr ""
 
-#: models.py:341 views.py:236
+#: models.py:341 views.py:238
 msgid "Bias"
 msgstr ""
 
-#: models.py:342 views.py:239
+#: models.py:342 views.py:241
 msgid "Mean SQM"
 msgstr ""
 
-#: models.py:343 views.py:240
+#: models.py:343 views.py:242
 msgid "Mean FWHM"
 msgstr ""
 
-#: models.py:351 views.py:232
+#: models.py:351 views.py:234
 msgid "Frames"
 msgstr ""
 
@@ -278,56 +278,56 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: views.py:231
+#: views.py:233
 msgid "Dates"
 msgstr ""
 
-#: views.py:237
+#: views.py:239
 msgid "Avg. Moon age"
 msgstr ""
 
-#: views.py:238
+#: views.py:240
 msgid "Avg. Moon phase"
 msgstr ""
 
-#: views.py:331
+#: views.py:333
 msgid "Invalid image."
 msgstr ""
 
-#: views.py:358 views.py:361 views.py:392 views.py:395 views.py:511
-#: views.py:514 views.py:549 views.py:578
+#: views.py:360 views.py:363 views.py:394 views.py:397 views.py:513
+#: views.py:516 views.py:551 views.py:580
 #: templates/user/profile/edit/basic.html:28
 #: templates/user/profile/edit/gear.html:23
 msgid "Enter partial name and wait for the suggestions!"
 msgstr ""
 
-#: views.py:359 views.py:393 views.py:512 views.py:550 views.py:579
+#: views.py:361 views.py:395 views.py:514 views.py:552 views.py:581
 msgid "No results. Sorry."
 msgstr ""
 
-#: views.py:362 views.py:396 views.py:515
+#: views.py:364 views.py:398 views.py:517
 msgid "No results. Press TAB to create this location!"
 msgstr ""
 
-#: views.py:658
+#: views.py:668
 msgid "Fill in one session, before adding more."
 msgstr ""
 
-#: views.py:660 views.py:693
+#: views.py:673 views.py:710
 msgid "There was an error. Check your input!"
 msgstr ""
 
-#: views.py:1150
+#: views.py:1152
 msgid "RE"
 msgstr ""
 
-#: views.py:1209
+#: views.py:1211
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr ""
 
-#: views.py:1233
+#: views.py:1235
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -1082,7 +1082,7 @@ msgstr ""
 
 #: templates/image/edit/acquisition.html:99
 #: templates/image/edit/acquisition.html:120
-#: templates/image/edit/basic.html:44 templates/image/edit/gear.html:17
+#: templates/image/edit/basic.html:44 templates/image/edit/gear.html:19
 msgid "Return to image"
 msgstr ""
 
@@ -1127,7 +1127,7 @@ msgstr ""
 msgid "Use a comma to separate the values."
 msgstr ""
 
-#: templates/image/edit/basic.html:43 templates/image/edit/gear.html:16
+#: templates/image/edit/basic.html:43 templates/image/edit/gear.html:18
 msgid "Save and continue"
 msgstr ""
 
@@ -1140,6 +1140,10 @@ msgstr ""
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your <a "
 "href=\"%(the_url)s\">profile</a>!"
+msgstr ""
+
+#: templates/image/edit/gear.html:13
+msgid "Select by clicking on the gear used for this image"
 msgstr ""
 
 #: templates/image/edit/menu.html:6
