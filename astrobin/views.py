@@ -188,10 +188,12 @@ def image_detail(request, id):
             'flats': [],
             'flat_darks': [],
             'bias': [],
+            'mean_sqm': [],
+            'mean_fwhm': [],
         }
         for a in deep_sky_acquisitions:
             if a.date is not None:
-                dates.append(a.date)
+                dsa_data['dates'].append(a.date)
                 m = MoonPhase(a.date)
                 moon_age_list.append(m.age)
                 moon_illuminated_list.append(m.illuminated)
@@ -202,7 +204,9 @@ def image_detail(request, id):
                     f += " (S)"
                 f += '; %sx%s"' % (a.number, a.duration)
                 if a.iso:
-                    f += ' @ ISO%s' % (a.iso, )
+                    f += ' @ ISO%s' % a.iso 
+                if a.sensor_cooling:
+                    f += ' @ %s\'C' % a.sensor_cooling
 
                 dsa_data['frames'].append(f)
 
@@ -211,6 +215,12 @@ def image_detail(request, id):
                     dsa_data[i].append("%s: %s" % (a.filter.name, getattr(a, i)))
                 elif getattr(a, i):
                     dsa_data[i].append(getattr(a, i))
+
+            if a.mean_sqm:
+                dsa_data['mean_sqm'].append(a.mean_sqm)
+
+            if a.mean_fwhm:
+                dsa_data['mean_fwhm'].append(a.mean_fwhm)
 
         def average(values):
             if not len(values):
@@ -226,6 +236,8 @@ def image_detail(request, id):
             _('Bias'): u', '.join(dsa_data['bias']),
             _('Avg. Moon age'): "%.2f" % (average(moon_age_list), ) if moon_age_list else None,
             _('Avg. Moon phase'): "%.2f" % (average(moon_illuminated_list), ) if moon_illuminated_list else None,
+            _('Mean SQM'): "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None,
+            _('Mean FWHM'): "%.2f" % (average([float(x) for x in dsa_data['mean_fwhm']])) if dsa_data['mean_fwhm'] else None,
         }
 
     elif solar_system_acquisition:
