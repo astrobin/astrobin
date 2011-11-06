@@ -353,9 +353,9 @@
                         input.focus();
                         return false;
                     });
-                    if (edit !== undefined)
-                        org_li.before(item.html(data[opts.selectedItemProp]).append(close).append(edit));
-                    else
+                    //if (edit !== undefined)
+                    //    org_li.before(item.html(data[opts.selectedItemProp]).append(close).append(edit));
+                    //else
                         org_li.before(item.html(data[opts.selectedItemProp]).append(close));
                     opts.selectionAdded.call(this, org_li.prev());
                 }
