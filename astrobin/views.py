@@ -637,6 +637,12 @@ def image_edit_save_acquisition(request):
         return HttpResponseForbidden()
 
     edit_type = request.POST.get('edit_type')
+    response_dict = {
+        'image': image,
+        'edit_type': edit_type,
+        's3_url':settings.S3_URL,
+        'is_ready':image.is_stored,
+    }
 
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
@@ -649,15 +655,24 @@ def image_edit_save_acquisition(request):
     if edit_type == 'deep_sky':
         DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False, form=DeepSky_AcquisitionForm)
         deep_sky_acquisition_formset = DSAFormSet(request.POST, instance=image)
+        response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
         if deep_sky_acquisition_formset.is_valid():
             deep_sky_acquisition_formset.save()
             if 'add_more' in request.POST:
                 DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
                 deep_sky_acquisition_formset = DSAFormSet(instance=image)
+                response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
                 if not dsa_qs:
-                    context_message = {'error': False, 'text': _("Fill in one session, before adding more.")}
+                    response_dict['context_message'] = {'error': False, 'text': _("Fill in one session, before adding more.")}
+                return render_to_response('image/edit/acquisition.html',
+                    response_dict,
+                    context_instance=RequestContext(request))
         else:
-            context_message = {'error': True, 'text': _("There was an error. Check your input!")}
+            response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
+            return render_to_response('image/edit/acquisition.html',
+                                      response_dict,
+                                      context_instance=RequestContext(request))
+
     elif edit_type == 'solar_system':
         date = request.POST.get('date')
         if date == 'yyyy-mm-dd':
@@ -690,28 +705,13 @@ def image_edit_save_acquisition(request):
         try:
             solar_system_acquisition.save()
         except ValidationError:
-            context_message = {'error': True, 'text': _("There was an error. Check your input!")}
+            response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
+            response_dict['solar_system_acquisitions'] = solar_system_acquisition
+            return render_to_response('image/edit/acquisition.html',
+                                      response_dict,
+                                      context_instance=RequestContext(request))
 
-    solar_system_acquisition = None
-
-    try:
-        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
-    except:
-        pass
-
-    response_dict = {
-        'image': image,
-        'edit_type': edit_type,
-        'deep_sky_acquisitions': deep_sky_acquisition_formset,
-        'solar_system_acquisition': solar_system_acquisition,
-        's3_url':settings.S3_URL,
-        'is_ready':image.is_stored,
-        'context_message': context_message,
-    }
-
-    return render_to_response('image/edit/acquisition.html',
-                              response_dict,
-                              context_instance=RequestContext(request))
+    return HttpResponseRedirect("/edit/acquisition/%s" % image_id)
 
 
 @login_required
