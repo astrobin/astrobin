@@ -773,7 +773,7 @@ def user_profile_edit_basic(request):
 def user_profile_save_basic(request):
     """Saves the form"""
 
-    form = UserProfileEditBasicForm(request.POST)
+    form = UserProfileEditBasicForm(data=request.POST)
     profile = UserProfile.objects.get(user = request.user)
     response_dict = {'form': form}
 
@@ -1062,7 +1062,7 @@ def notifications(request):
 @login_required
 @require_POST
 def send_private_message(request):
-    form = PrivateMessageForm(request.POST)
+    form = PrivateMessageForm(data=request.POST)
     if form.is_valid():
         subject = form.cleaned_data['subject']
         body    = form.cleaned_data['body']
@@ -1104,7 +1104,7 @@ def messages_new(request, username):
 @login_required
 @require_POST
 def messages_save(request):
-    form = PrivateMessageForm(request.POST)
+    form = PrivateMessageForm(data=request.POST)
     if form.is_valid():
         subject = form.cleaned_data['subject']
         body    = form.cleaned_data['body']
@@ -1160,7 +1160,7 @@ def message_detail(request, id):
 @login_required
 @require_POST
 def bring_to_attention(request):
-    form = BringToAttentionForm(request.POST)
+    form = BringToAttentionForm(data=request.POST)
     image_id = request.POST.get('image_id')
     try:
         image = Image.objects.get(id=image_id)
@@ -1299,7 +1299,7 @@ def location_edit(request, id):
 def location_save(request):
     id = request.POST.get('location_id')
     location = Location.objects.get(pk=id)
-    form = LocationEditForm(request.POST, instance=location)
+    form = LocationEditForm(data=request.POST, instance=location)
     if not form.is_valid():
         return render_to_response('location/edit.html',
             {'form': form,
