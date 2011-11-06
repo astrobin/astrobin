@@ -774,10 +774,10 @@ def user_profile_save_basic(request):
     """Saves the form"""
 
     form = UserProfileEditBasicForm(request.POST)
+    profile = UserProfile.objects.get(user = request.user)
     response_dict = {'form': form}
 
     if form.is_valid():
-        profile = UserProfile.objects.get(user = request.user)
         profile.locations.clear()
         (ids, value) = valueReader(request, 'locations')
         for id in ids:
