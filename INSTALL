@@ -24,7 +24,8 @@ sudo apt-get install \
 	netpbm \
 	libnetpbm10-dev \
 	python-numpy \
-	gettext
+	gettext \
+	python-egenix-mxdatetime
 sudo apt-file update
 sudo pip install virtualenv
 
