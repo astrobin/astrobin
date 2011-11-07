@@ -430,7 +430,7 @@ class UserProfile(models.Model):
     filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"))
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
 
-    follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers')
+    follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers', symmetrical=False)
 
     def __unicode__(self):
         return "%s' profile" % self.user.username
