@@ -98,12 +98,6 @@ def jsonDumpSubjects(all):
 def index(request):
     """Main page"""
 
-    # get ABPOD
-    try:
-        abpod = ABPOD.objects.all()[0]
-    except IndexError:
-        abpod = None
-
     return object_list(
         request, 
         queryset=Image.objects.filter(is_stored=True),
