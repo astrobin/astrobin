@@ -3,8 +3,8 @@
 PROJECT_DIR="/home/astrobin/Code/astrobin"
 NGINX_PID="/usr/local/nginx/logs/nginx.pid"
 GUNICORN_PID="$PROJECT_DIR/astrobin.pid"
-CELERYD_DEFAULT_PID="celeryd@default.pid"
-CELERYD_PLATE_SOLVE_PID="celeryd@plate_solve.pid"
+CELERYD_DEFAULT_PID="celeryd_default.pid"
+CELERYD_PLATE_SOLVE_PID="celeryd_plate_solve.pid"
 
 SUDO="sudo -E"
 ECHO="echo ${PREFIX}"
@@ -17,7 +17,7 @@ then
     $ECHO 'nginx already running, skipping.'
 else
     $ECHON 'Starting nginx... '
-    $SUDO ./scripts/nginx.sh 2>-
+    $SUDO ./scripts/nginx.sh
     $DONE
 fi
 
@@ -27,7 +27,7 @@ then
     $ECHO 'astrobin already running, skipping.'
 else
     $ECHON 'Starting astrobin... '
-    ./scripts/gunicorn.sh 2>- &
+    ./scripts/gunicorn.sh &
     $DONE
 fi
 
@@ -36,7 +36,7 @@ then
     $ECHO 'celeryd default worker already running, skipping.'
 else
     $ECHON 'Starting celeryd default worker... '
-    ./scripts/celeryd_default.sh 2>-
+    ./scripts/celeryd_default.sh
     $DONE
 fi
 
@@ -45,7 +45,7 @@ then
     $ECHO 'celeryd plate_solve worker already running, skipping.'
 else
     $ECHON 'Starting celeryd plate_solve worker... '
-    ./scripts/celeryd_plate_solve.sh 2>-
+    ./scripts/celeryd_plate_solve.sh
     $DONE
 fi
 
