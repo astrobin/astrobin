@@ -2,7 +2,7 @@
 
 from django.conf import global_settings
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

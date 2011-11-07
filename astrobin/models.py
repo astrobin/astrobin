@@ -9,6 +9,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django import forms
+from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
@@ -153,7 +154,7 @@ class Location(models.Model):
 
 
 @task
-def image_solved_callback(image, solved, clean_path):
+def image_solved_callback(image, solved, clean_path, lang):
     image.is_solved = solved
     if image.__class__.__name__ == 'Image' and image.is_solved:
         # grab objects from list
@@ -180,6 +181,7 @@ def image_solved_callback(image, solved, clean_path):
         user = image.image.user
         img = image.image
 
+    translation.activate(lang)
     if solved:
         push_notification([user], 'image_solved',
                           {'object_url':img.get_absolute_url() + '?mod=solved'})
@@ -194,7 +196,7 @@ def image_solved_callback(image, solved, clean_path):
 
 
 @task
-def image_stored_callback(image, stored, solve):
+def image_stored_callback(image, stored, solve, lang):
     image.is_stored = stored
     image.save()
 
@@ -208,6 +210,7 @@ def image_stored_callback(image, stored, solve):
         user = image.image.user
         img = image.image
 
+    translation.activate(lang)
     push_notification([user], 'image_ready', {'object_url':img.get_absolute_url()})
 
     if solve:
@@ -270,7 +273,7 @@ class Image(models.Model):
             pass
 
     def process(self):
-        store_image.delay(self, solve=True, callback=image_stored_callback)
+        store_image.delay(self, solve=True, lang=translation.get_language(), callback=image_stored_callback)
 
     def delete(self, *args, **kwargs):
         delete_image.delay(self.filename, self.original_ext) 
@@ -306,7 +309,7 @@ class ImageRevision(models.Model):
         super(ImageRevision, self).save(*args, **kwargs)
 
     def process(self):
-        store_image.delay(self, solve=True, callback=image_stored_callback)
+        store_image.delay(self, solve=True, lang=translation.get_language(), callback=image_stored_callback)
 
     def delete(self, *args, **kwargs):
         delete_image_from_s3(self.filename, self.original_ext) 
