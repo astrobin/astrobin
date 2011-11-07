@@ -214,7 +214,7 @@ def image_stored_callback(image, stored, solve, lang):
     push_notification([user], 'image_ready', {'object_url':img.get_absolute_url()})
 
     if solve:
-        solve_image.delay(image, callback=image_solved_callback)
+        solve_image.delay(image, lang, callback=image_solved_callback)
 
 
 class Image(models.Model):
