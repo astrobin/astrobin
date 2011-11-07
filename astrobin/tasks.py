@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.cache import cache
 
-from celery.decorators import task
+from celery.task import task
 from celery.task.sets import subtask
 from boto.exception import S3CreateError
 
