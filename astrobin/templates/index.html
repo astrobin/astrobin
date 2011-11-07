@@ -7,6 +7,7 @@
     <div class="small-box">
         <h2>{% trans "Quick upload" %}</h2>
         <div class="single-form">
+            {% if upload_form %} 
             <form id="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
                 <p>
                     <input type="file" name="file" id="id_file"/>
@@ -17,6 +18,14 @@
                 <p>{% trans "Choose an image to upload, or" %}
                 <p><a href="{% url profile_flickr_import %}">{% trans "import from Flickr" %}</a></p>
             </form>
+            {% else %}
+            {% url profile_edit_gear as the_url %}
+            <img src="/static/images/dim_upload.png" />
+            <h3>{% trans "Warning!" %}</h3>
+            <p>
+            {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}">your profile</a>!{% endblocktrans %}
+            </p>
+            {% endif %}
         </div>
     </div>
     {% else %}
