@@ -97,7 +97,16 @@ def jsonDumpSubjects(all):
 
 def index(request):
     """Main page"""
+    form = None
+    profile = None
 
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        pass
+
+    if profile and profile.telescopes.all() and profile.cameras.all():
+        form = ImageUploadForm()
     return object_list(
         request, 
         queryset=Image.objects.filter(is_stored=True),
@@ -105,8 +114,7 @@ def index(request):
         template_object_name='image',
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                          's3_url':settings.S3_URL,
-                         'upload_form': ImageUploadForm(),
-                         'abpod':abpod})
+                         'upload_form':form,})
 
 
 @require_GET
