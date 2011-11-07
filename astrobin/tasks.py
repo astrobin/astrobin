@@ -22,7 +22,7 @@ from notifications import *
 SUBPROCESS_EXPIRE = 60 * 5
 
 @task()
-def solve_image(image, callback=None):
+def solve_image(image, lang, callback=None):
 	# If solving is disabled in the settings, then we override what we're
 	# asked to do.
 	if not settings.ASTROBIN_ENABLE_SOLVING:
@@ -75,18 +75,18 @@ def solve_image(image, callback=None):
 		save_to_bucket(uid + '_solved.png', solved_resizedFile.getvalue())
 
 	if callback is not None:
-		subtask(callback).delay(image, solved, '%s%s*' % (path, uid))
+		subtask(callback).delay(image, solved, '%s%s*' % (path, uid), lang)
 
 
 @task()
-def store_image(image, solve, callback=None):
+def store_image(image, solve, lang, callback=None):
     try:
         store_image_in_backend(settings.UPLOADS_DIRECTORY, image.filename, image.original_ext)
     except S3CreateError, exc:
         store_image.retry(exc=exc)
 
     if callback is not None:
-        subtask(callback).delay(image, True, solve)
+        subtask(callback).delay(image, True, solve, lang)
 
 
 @task
