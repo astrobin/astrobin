@@ -337,7 +337,7 @@ def image_upload_process(request):
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
         destination.write(chunk)
-        destination.close()
+    destination.close()
     image = Image(
         filename=filename,
         original_ext=original_ext,
