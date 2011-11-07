@@ -2,33 +2,6 @@
 {% load i18n %}
 {% load tags %}
 
-{% block abpod %}
-	{% if abpod %}
-	<!-- abpod -->		
-	<div id="abpod">			
-		<div id="abpod-block" class="clear">
-			<div id="abpod-ribbon"></div>	
-			<a name="TemplateInfo"></a>
-			<div class="image-block">
-              <a href="{{abpod.image.get_absolute_url}}" title="{{abpod.image.subjects}}">
-                <img src="http://astrobin_images.{{s3_url}}/{{abpod.image.filename}}_thumb.png" alt="AstroBin Picture of the Day"
-			         width="350px" height="350px"/></a>
-			</div>			
-			<div class="text-block">
-				<h2><a href="{{abpod.image.get_absolute_url}}">{{abpod.image.subjects}}</a></h2>
-				<p class="post-info">{% trans "Posted by" %}
-				    <a href="{% url user_page abpod.image.user.name %}">
-				        {{abpod.image.user.name}}
-				    </a>
-				</p>
-				<p>{{abpod.image.description}}</p>
-			</div>
-		</div>		
-	<!-- /abpod -->
-	</div>
-	{% endif %}
-{% endblock %}
-
 {% block content %}
     {% if request.user.is_authenticated %}
     <div class="small-box">
