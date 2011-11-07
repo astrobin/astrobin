@@ -47,7 +47,7 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
 
     # Then save to bucket
     resizedFile = StringIO.StringIO()
-    resizedImage.save(resizedFile, format_map[content_type][0])
+    resizedImage.save(resizedFile, format_map[content_type][0], quality=100)
     save_to_bucket(uid + '_resized' + format_map[content_type][1],
                    resizedFile.getvalue())
 
