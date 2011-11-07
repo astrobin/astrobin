@@ -35,6 +35,7 @@ from forms import *
 from notifications import *
 from shortcuts import *
 from tasks import *
+from search_indexes import xapian_escape
 
 def valueReader(request, field):
     def utf_8_encoder(data):
@@ -147,13 +148,13 @@ def image_detail(request, id):
     if related == 'user':
         related_images = SearchQuerySet().filter(user=image.user.username).exclude(django_id=id)[:limit]
     elif related == 'subject':
-        subjects = [s.mainId for s in image.subjects.all()]
+        subjects = [xapian_escape(s.mainId) for s in image.subjects.all()]
         related_images = SearchQuerySet().filter(SQ(subjects__in=subjects)).exclude(django_id=id)[:limit]
     elif related == 'imaging_telescope':
-        telescopes = [t.name for t in image.imaging_telescopes.all()]
+        telescopes = [xapian_escape(t.name) for t in image.imaging_telescopes.all()]
         related_images = SearchQuerySet().filter(SQ(imaging_telescopes__in=telescopes)).exclude(django_id=id)[:limit]
     elif related == 'imaging_camera':
-        cameras = [c.name for c in image.imaging_cameras.all()]
+        cameras = [xapian_escape(c.name) for c in image.imaging_cameras.all()]
         related_images = SearchQuerySet().filter(SQ(imaging_cameras__in=cameras)).exclude(django_id=id)[:limit]
 
     gear_list = [('Imaging telescopes', image.imaging_telescopes.all()),

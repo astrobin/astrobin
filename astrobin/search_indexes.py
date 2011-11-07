@@ -5,6 +5,12 @@ from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 
+XAPIAN_OPERATORS = ['-', '+',]
+def xapian_escape(s):
+    for op in XAPIAN_OPERATORS:
+        s = s.replace(op, ' ')
+    return s
+
 def _join_stripped(a):
     return a + [''.join(x.split()) for x in a]
 
