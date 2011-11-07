@@ -13,7 +13,7 @@ from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
-from celery.decorators import task
+from celery.task import task
 
 from djangoratings.fields import RatingField
 from model_utils.managers import InheritanceManager
