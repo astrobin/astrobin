@@ -14,6 +14,16 @@ import StringIO
 
 from image_utils import *
 
+
+def download_from_bucket(filename, path):
+    import urllib2
+    s3_path = 'http://astrobin_images.%s/%s' % (settings.S3_URL, filename)
+    image = urllib2.urlopen(s3_path)
+    output = open(path + filename, 'wb')
+    output.write(image.read())
+    output.flush()
+    output.close()
+
 def save_to_bucket(filename, content):
     default_storage.save(filename, ContentFile(content));
 

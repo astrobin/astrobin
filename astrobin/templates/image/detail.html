@@ -3,6 +3,13 @@
 {% load tags %}
 
 {% block content %}
+    {% if 'plate_solving_started' in request.GET %}
+    <div id="context_message">
+        <img src="/static/icons/iconic/black/info_8x16.png" alt="{% trans "Info" %}" />
+        <p>{% blocktrans %}Plate-solving has started in the background. It might take a while, so please don't request it again! You will be notified when the job has completed. Thanks!{% endblocktrans %}</p>
+    </div>
+    {% endif %}
+
     <div id="image-detail">
         <div id="main-content">
             <ul class="bar">
@@ -27,6 +34,11 @@
                                     <li class="bg-icon icon-upload">
                                         <span class="text"><a class="upload-revision" href="#">{% trans "Upload new revision" %}</a></span>
                                     </li>
+                                    {% if not image.is_solved %}
+                                    <li class="bg-icon icon-edit">
+                                        <span class="text"><a class="plate-solve" href="{% url image_edit_presolve image.id %}?done_later">{% trans "Plate-solve" %}</a></span>
+                                    </li>
+                                    {% endif %}
                                     <li class="bg-icon icon-delete">
                                         <span class="text"><a class="delete danger" href="{% url image_delete image.id %}">{% trans "Delete" %}</a></span>
                                     </li>
