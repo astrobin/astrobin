@@ -159,15 +159,19 @@ def image_solved_callback(image, solved, clean_path, lang):
     if image.__class__.__name__ == 'Image' and image.is_solved:
         # grab objects from list
         list_fn = settings.UPLOADS_DIRECTORY + image.filename + '-list.txt'
-        f = open(list_fn, 'r')
+        try:
+            f = open(list_fn, 'r')
 
-        import simbad
-        for line in f:
-            if line != '':
-                subjects = simbad.find_subjects(line.partition('/')[0].strip().rstrip('\r\n'))
-                for s in subjects:
-                    image.subjects.add(s)
-        f.close()
+            import simbad
+            for line in f:
+                if line != '':
+                    subjects = simbad.find_subjects(line.partition('/')[0].strip().rstrip('\r\n'))
+                    for s in subjects:
+                        image.subjects.add(s)
+            f.close()
+        except:
+            image.is_solved = false
+            solved = false
 
     image.save()
 
