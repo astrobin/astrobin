@@ -1,16 +1,4 @@
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
-@font-face {
-  font-family: 'astrobin_sans';
-  src: url('/static/fonts/Vegur-R_0600.otf');
-}
-@font-face {
-  font-family: 'astrobin_sans_strong';
-  src: url('/static/fonts/Vegur-B_0600.otf');
-}
-@font-face {
-  font-family: 'Sling';
-  src: url('/static/fonts/Sling.ttf');
-}
 .background-gradient {
   border: 1px solid #222222;
   border-top: 1px solid #292929;
@@ -696,7 +684,7 @@ div.uploader input {
    HTML ELEMENTS
 ------------------------------------------------- */
 body {
-  font-family: Museo- 500, Helvetica, Verdana, Sans-serif;
+  font-family: "Droid Sans", Helvetica, Verdana, Sans-serif;
   font-size: 14px;
   line-height: 1.25em;
   color: #b8b8b8;
@@ -727,14 +715,14 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: Museo- 500, Georgia, Times New Roman, serif;
+  font-family: "Droid Sans", Georgia, Times New Roman, serif;
   font-weight: bold;
   color: #fcfcfc;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
 }
 h1 {
   font-size: 2em;
-  margin: 20px 10px 20px 0;
+  margin: 20px 10px 20px 6px;
   padding-bottom: 10px;
   border-bottom: 1px solid #666666;
 }
@@ -1647,7 +1635,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 #image-detail .main-image-data ul li.title {
   margin-right: 15px;
-  font-family: Museo- 500, Georgia, Times New Roman, serif;
+  font-family: "Droid Sans", Georgia, Times New Roman, serif;
   font-weight: bold;
   line-height: 1.1em;
   color: #fcfcfc;
