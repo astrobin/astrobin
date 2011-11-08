@@ -1360,12 +1360,8 @@ def location_save(request):
     except:
         pass
 
-    return render_to_response('location/edit.html',
-        {'form' : form,
-         'id'   : id,
-         'saved': True,
-        },
-        context_instance=RequestContext(request))
+    return HttpResponseRedirect('/locations/edit/%d/?saved' % location.id)
+
 
 @require_GET
 def set_language(request, lang):
