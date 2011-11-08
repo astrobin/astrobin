@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 08:39+0000\n"
+"POT-Creation-Date: 2011-11-08 09:43+0000\n"
 "PO-Revision-Date: 2011-11-06 09:14+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,8 +119,8 @@ msgstr "% fase lunare max."
 msgid "Examples: +12.44, -51.25"
 msgstr "Esempi: +12.44, -51.25"
 
-#: forms.py:220 models.py:323 models.py:370
-#: templates/image/edit/acquisition.html:79 templates/search/search.html:22
+#: forms.py:225 models.py:323 models.py:370
+#: templates/image/edit/acquisition.html:80 templates/search/search.html:22
 msgid "Date"
 msgstr "Data"
 
@@ -128,7 +128,7 @@ msgstr "Data"
 msgid "Name"
 msgstr "Nome"
 
-#: models.py:35 models.py:356 templates/image/edit/acquisition.html:31
+#: models.py:35 models.py:356 templates/image/edit/acquisition.html:32
 msgid "Focal length"
 msgstr "Lunghezza focale"
 
@@ -218,19 +218,19 @@ msgstr "FWHM medio"
 msgid "Frames"
 msgstr "Frame"
 
-#: models.py:355 templates/image/edit/acquisition.html:23
+#: models.py:355 templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:357 templates/image/edit/acquisition.html:39
+#: models.py:357 templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:358 templates/image/edit/acquisition.html:47
+#: models.py:358 templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:359 templates/image/edit/acquisition.html:55
+#: models.py:359 templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr "CMIII"
 
@@ -447,7 +447,7 @@ msgstr "Pagina non trovata"
 msgid "Sorry, but the content you were looking for is not here."
 msgstr "Spiacenti, ma quello che cercavi non è qui."
 
-#: templates/base.html:61
+#: templates/base.html:59
 msgid ""
 "Hey! It looks like your browser doesn't support Javascript, or you disabled "
 "it. AstroBin will provide you with a much more pleasant experience if you "
@@ -457,101 +457,101 @@ msgstr ""
 "disabilitato. AstroBin può darti un'esperienza molto migliore se abiliti "
 "Javascript."
 
-#: templates/base.html:66
+#: templates/base.html:64
 msgid "English"
 msgstr "Inglese"
 
-#: templates/base.html:67
+#: templates/base.html:65
 msgid "Italian"
 msgstr "Italiano"
 
-#: templates/base.html:68
+#: templates/base.html:66
 msgid "Finnish"
 msgstr "Finlandese"
 
-#: templates/base.html:78
+#: templates/base.html:76
 msgid "Search images by subject or gear"
 msgstr "Cerca immagini per soggetto o strumentazione"
 
-#: templates/base.html:79
+#: templates/base.html:77
 msgid "Start typing and hit ENTER"
 msgstr "Inizia a digitare e poi premi INVIO"
 
-#: templates/base.html:82 templates/base.html.py:83
+#: templates/base.html:80 templates/base.html.py:81
 #: templates/search/search.html:10
 msgid "Search"
 msgstr "Cerca"
 
-#: templates/base.html:91
+#: templates/base.html:89
 msgid "The definitive home for your astrophotography."
 msgstr "La casa definitiva per la tua astrofotografia."
 
-#: templates/base.html:99 templates/base.html.py:213 templates/base.html:248
+#: templates/base.html:97 templates/base.html.py:211 templates/base.html:246
 msgid "Home"
 msgstr "Home"
 
-#: templates/base.html:100 templates/base.html.py:214
+#: templates/base.html:98 templates/base.html.py:212
 msgid "Help"
 msgstr "Aiuto"
 
-#: templates/base.html:113
+#: templates/base.html:111
 msgid "View your profile"
 msgstr "Vedi il tuo profilo"
 
-#: templates/base.html:116
+#: templates/base.html:114
 msgid "Edit your profile"
 msgstr "Modifica il tuo profilo"
 
-#: templates/base.html:119
+#: templates/base.html:117
 msgid "Upload an image"
 msgstr "Carica un'immagine"
 
-#: templates/base.html:119
+#: templates/base.html:117
 msgid "Upload!"
 msgstr "Carica!"
 
-#: templates/base.html:122 templates/user/profile.html:21
+#: templates/base.html:120 templates/user/profile.html:21
 #: templates/user/profile.html.py:24
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.html:129 templates/base.html.py:130
+#: templates/base.html:127 templates/base.html.py:128
 msgid "Notifications"
 msgstr "Notifiche"
 
-#: templates/base.html:136 templates/base.html.py:137
+#: templates/base.html:134 templates/base.html.py:135
 msgid "Messages"
 msgstr "Messaggi"
 
-#: templates/base.html:143 templates/base.html.py:144
+#: templates/base.html:141 templates/base.html.py:142
 msgid "Requests"
 msgstr "Richieste"
 
-#: templates/base.html:154
+#: templates/base.html:152
 msgid "Have an invite? Login!"
 msgstr "Hai un invito? Fai il login!"
 
-#: templates/base.html:156
+#: templates/base.html:154
 msgid "Login"
 msgstr "Login"
 
-#: templates/base.html:162 templates/registration/login.html:8
+#: templates/base.html:160 templates/registration/login.html:8
 msgid "Register"
 msgstr "Registrati"
 
-#: templates/base.html:184
+#: templates/base.html:182
 msgid "Error"
 msgstr "Errore"
 
-#: templates/base.html:186
+#: templates/base.html:184
 msgid "Info"
 msgstr "Informazione"
 
-#: templates/base.html:204
+#: templates/base.html:202
 msgid "About"
 msgstr "Informazioni"
 
-#: templates/base.html:206
+#: templates/base.html:204
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the last place where you need to upload your "
@@ -562,19 +562,19 @@ msgstr ""
 "astrofotografi: è il posto finale dove caricare le proprie immmagini. Fatto "
 "da un'astrofotografo, per gli astrofotografi."
 
-#: templates/base.html:210
+#: templates/base.html:208
 msgid "Site links"
 msgstr "Link del sito"
 
-#: templates/base.html:219
+#: templates/base.html:217
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/base.html:228
+#: templates/base.html:226
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:230
+#: templates/base.html:228
 msgid ""
 "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The "
 "images on this websites are copyright of their respective owners."
@@ -583,27 +583,31 @@ msgstr ""
 "Riservati. Le immagini su questo sito sono copyright dei loro rispettivi "
 "proprietari"
 
-#: templates/base.html:249
+#: templates/base.html:247
 msgid "Follow AstroBin on Twitter"
 msgstr "Segui AstroBin su Twitter"
 
-#: templates/base.html:250
+#: templates/base.html:248
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/base.html:264
+#: templates/base.html:262
 msgid "Feedback"
 msgstr "Feedback"
 
-#: templates/base.html:293 templates/image/detail.html:313
+#: templates/base.html:272
+msgid "Cancel"
+msgstr "Annulla"
+
+#: templates/base.html:298 templates/image/detail.html:313
 msgid "Uploading..."
 msgstr "Caricamento in corso..."
 
-#: templates/base.html:300 templates/image/detail.html:311
+#: templates/base.html:305 templates/image/detail.html:311
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:301 templates/image/detail.html:312
+#: templates/base.html:306 templates/image/detail.html:312
 msgid "Choose file"
 msgstr "Scegli file"
 
@@ -1094,7 +1098,7 @@ msgstr "Si, smettere di seguire!"
 msgid "Send %(username)s a message"
 msgstr "Manda un messaggio a %(username)s"
 
-#: templates/image/detail.html:342 templates/messages/detail.html:23
+#: templates/image/detail.html:342 templates/messages/detail.html:25
 #: templates/messages/new.html:15
 msgid "Send"
 msgstr "Manda"
@@ -1149,50 +1153,50 @@ msgstr ""
 msgid "Edit your image: acquisition details"
 msgstr "Modifica l'immagine: dettagli d'acquisizione"
 
-#: templates/image/edit/acquisition.html:15
+#: templates/image/edit/acquisition.html:16
 msgid "Number of frames"
 msgstr "Numero di frame"
 
-#: templates/image/edit/acquisition.html:63
+#: templates/image/edit/acquisition.html:64
 msgid "Seeing (0-5)"
 msgstr "Seeing (0-5)"
 
-#: templates/image/edit/acquisition.html:71
+#: templates/image/edit/acquisition.html:72
 msgid "Transparency (0-10)"
 msgstr "Trasparenza (0-10)"
 
-#: templates/image/edit/acquisition.html:84
+#: templates/image/edit/acquisition.html:85
 msgid "yyyy-mm-dd"
 msgstr "aaaa-mm-gg"
 
-#: templates/image/edit/acquisition.html:87
+#: templates/image/edit/acquisition.html:88
 msgid "Universal time"
 msgstr "Tempo universale"
 
-#: templates/image/edit/acquisition.html:92
+#: templates/image/edit/acquisition.html:93
 msgid "hh:mm"
 msgstr "hh:mm"
 
-#: templates/image/edit/acquisition.html:97
-#: templates/image/edit/acquisition.html:117
+#: templates/image/edit/acquisition.html:98
+#: templates/image/edit/acquisition.html:118
 #: templates/image/edit/basic.html:42 templates/image/edit/gear.html:20
 #: templates/location/edit.html:16 templates/user/profile/edit/basic.html:20
 #: templates/user/profile/edit/gear.html:18
 msgid "Save"
 msgstr "Salva"
 
-#: templates/image/edit/acquisition.html:98
-#: templates/image/edit/acquisition.html:119
+#: templates/image/edit/acquisition.html:99
+#: templates/image/edit/acquisition.html:120
 msgid "Remove data"
 msgstr "Rimuovi dati"
 
-#: templates/image/edit/acquisition.html:99
-#: templates/image/edit/acquisition.html:120
+#: templates/image/edit/acquisition.html:100
+#: templates/image/edit/acquisition.html:121
 #: templates/image/edit/basic.html:43 templates/image/edit/gear.html:21
 msgid "Return to image"
 msgstr "Torna all'immagine"
 
-#: templates/image/edit/acquisition.html:105
+#: templates/image/edit/acquisition.html:106
 msgid ""
 "You can insert as many acquisition sessions as you want, as often images are "
 "taken across several nights. An acquisition session is defined primarily by "
@@ -1207,15 +1211,15 @@ msgstr ""
 "oppure su <strong>Aggiungi</strong> per aggiungere altre sessioni di "
 "acquisizione."
 
-#: templates/image/edit/acquisition.html:109
+#: templates/image/edit/acquisition.html:110
 msgid "Acquisition session"
 msgstr "Sessione di acquisizione"
 
-#: templates/image/edit/acquisition.html:118
+#: templates/image/edit/acquisition.html:119
 msgid "Add more"
 msgstr "Aggiungi"
 
-#: templates/image/edit/acquisition.html:125
+#: templates/image/edit/acquisition.html:126
 msgid "What kind of image is this?"
 msgstr "Di che tipo d'immagine si tratta?"
 
@@ -1375,30 +1379,30 @@ msgstr "Da"
 msgid "Subject"
 msgstr "Soggetto"
 
-#: templates/messages/all.html:19 templates/messages/detail.html:9
+#: templates/messages/all.html:19 templates/messages/detail.html:12
 #: templates/requests/all.html:18
 msgid "at"
 msgstr "a"
 
-#: templates/messages/detail.html:11
-msgid "from"
-msgstr "da"
-
-#: templates/messages/detail.html:18
-msgid "Reply"
-msgstr "Rispondi"
-
-#: templates/messages/detail.html:37
-msgid "Message sent"
-msgstr "Messaggio spedito"
-
-#: templates/messages/new.html:7
+#: templates/messages/detail.html:6 templates/messages/new.html:7
 msgid ""
 "Send a private message to a user. Messages are only shared between you and "
 "the recipient."
 msgstr ""
 "Manda un messaggio privato ad un utente. I messaggi sono visibili solo da te "
 "e dal destinatario."
+
+#: templates/messages/detail.html:14
+msgid "from"
+msgstr "da"
+
+#: templates/messages/detail.html:21
+msgid "Reply"
+msgstr "Rispondi"
+
+#: templates/messages/detail.html:38
+msgid "Message sent"
+msgstr "Messaggio spedito"
 
 #: templates/messages/new.html:11
 msgid "Write a new private message to"
@@ -1517,12 +1521,13 @@ msgstr ""
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
+#, python-format
 msgid ""
 "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
 "strong>.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Hai smesso di seguire <strong>%(object)s</"
-"strong>.</a>"
+"<a href=\"%(object_url)s\">Hai smesso di seguire <strong>%(object)s</strong>."
+"</a>"
 
 #: templates/privatebeta/invite.html:7
 msgid "What is AstroBin?"
