@@ -61,7 +61,7 @@ def autocomplete(request, what):
                  'filters':Filter,
                  'accessories':Accessory}.iteritems():
         if what == k:
-            values = v.objects.filter(Q(name__regex=r'%s'%regex))[:limit]
+            values = v.objects.filter(Q(name__iregex=r'%s'%regex))[:limit]
             return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.name} for v in values]))
 
     return HttpResponse(simplejson.dumps([{}]))
