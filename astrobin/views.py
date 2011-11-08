@@ -864,9 +864,18 @@ def user_profile_save_gear(request):
     profile.filters.clear()
     profile.accessories.clear()
 
-    form = UserProfileEditGearForm()
-    response_dict = {"form": form}
-    prefill_dict = {}
+    form = UserProfileEditGearForm(data=request.POST)
+    if not form.is_valid():
+        response_dict = {"form": form}
+        prefill_dict = {}
+        for k in ("telescopes", "mounts", "cameras", "focal_reducers",
+                  "software", "filters", "accessories",):
+            allGear = getattr(profile, k).all()
+            prefill_dict[k] = jsonDump(allGear)
+
+        return render_to_response("user/profile/edit/gear.html",
+            response_dict,
+            context_instance=RequestContext(request))
 
     for k, v in {"telescopes"    : [Telescope, profile.telescopes],
                  "mounts"        : [Mount, profile.mounts],
@@ -884,15 +893,9 @@ def user_profile_save_gear(request):
                     getattr(profile, k).add(gear_item)
         form.fields[k].initial = value
 
-        allGear = getattr(profile, k).all()
-        prefill_dict[k] = jsonDump(allGear)
-
     profile.save()
 
-    response_dict['prefill_dict'] = prefill_dict
-    return render_to_response("user/profile/edit/gear.html",
-        response_dict,
-        context_instance=RequestContext(request))
+    return HttpResponseRedirect("/profile/edit/gear/?saved");
 
 
 @login_required
