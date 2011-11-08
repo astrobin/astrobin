@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 17:07+0000\n"
+"POT-Creation-Date: 2011-11-08 17:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,69 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:34 models.py:221 templates/image/edit/basic.html:17
+#: forms.py:34 models.py:225 templates/image/edit/basic.html:17
 msgid "Title"
 msgstr ""
 
-#: forms.py:35 models.py:222 templates/image/edit/basic.html:21
+#: forms.py:35 models.py:226 templates/image/edit/basic.html:21
 msgid "Subjects"
 msgstr ""
 
-#: forms.py:36 forms.py:91 models.py:223 models.py:424
+#: forms.py:36 forms.py:91 models.py:227 models.py:428
 #: templates/image/edit/basic.html:26
 msgid "Locations"
 msgstr ""
 
-#: forms.py:37 models.py:224 templates/image/detail.html:263
+#: forms.py:37 models.py:228 templates/image/detail.html:263
 #: templates/image/edit/basic.html:35
 msgid "Description"
 msgstr ""
 
-#: forms.py:58 models.py:233
+#: forms.py:58 models.py:237
 msgid "Imaging telescopes"
 msgstr ""
 
-#: forms.py:59 models.py:234
+#: forms.py:59 models.py:238
 msgid "Guiding telescopes"
 msgstr ""
 
-#: forms.py:60 forms.py:106 models.py:235 models.py:435
+#: forms.py:60 forms.py:106 models.py:239 models.py:439
 msgid "Mounts"
 msgstr ""
 
-#: forms.py:61 models.py:236
+#: forms.py:61 models.py:240
 msgid "Imaging cameras"
 msgstr ""
 
-#: forms.py:62 models.py:237
+#: forms.py:62 models.py:241
 msgid "Guiding cameras"
 msgstr ""
 
-#: forms.py:63 forms.py:108 models.py:238 models.py:437
+#: forms.py:63 forms.py:108 models.py:242 models.py:441
 msgid "Focal reducers"
 msgstr ""
 
-#: forms.py:64 forms.py:109 models.py:239 models.py:438
+#: forms.py:64 forms.py:109 models.py:243 models.py:442
 msgid "Software"
 msgstr ""
 
-#: forms.py:65 forms.py:110 models.py:240 models.py:439
+#: forms.py:65 forms.py:110 models.py:244 models.py:443
 msgid "Filters"
 msgstr ""
 
-#: forms.py:66 forms.py:111 models.py:241 models.py:440
+#: forms.py:66 forms.py:111 models.py:245 models.py:444
 msgid "Accessories"
 msgstr ""
 
-#: forms.py:105 models.py:434
+#: forms.py:105 models.py:438
 msgid "Telescopes"
 msgstr ""
 
-#: forms.py:107 models.py:436
+#: forms.py:107 models.py:440
 msgid "Cameras"
 msgstr ""
 
-#: forms.py:131 forms.py:135 forms.py:218 models.py:329
+#: forms.py:131 forms.py:135 forms.py:218 models.py:333
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr ""
 
@@ -123,7 +123,7 @@ msgstr ""
 msgid "For example: -51.25"
 msgstr ""
 
-#: forms.py:231 models.py:329 models.py:376
+#: forms.py:231 models.py:333 models.py:380
 #: templates/image/edit/acquisition.html:80 templates/search/search.html:22
 msgid "Date"
 msgstr ""
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: models.py:35 models.py:362 templates/image/edit/acquisition.html:32
+#: models.py:35 models.py:366 templates/image/edit/acquisition.html:32
 msgid "Focal length"
 msgstr ""
 
@@ -156,137 +156,137 @@ msgstr ""
 msgid "Altitude"
 msgstr ""
 
-#: models.py:229
+#: models.py:233
 msgid "(in mm)"
 msgstr ""
 
-#: models.py:230
-msgid "(in &mu;m, taking binning into account)"
+#: models.py:234
+msgid "(in &mu;m, taking binning and image scaling into account)"
 msgstr ""
 
-#: models.py:254 templates/image/detail.html:187
+#: models.py:258 templates/image/detail.html:187
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/image_list.html:19
 msgid "(no title)"
 msgstr ""
 
-#: models.py:330 models.py:375
+#: models.py:334 models.py:379
 msgid "Image"
 msgstr ""
 
-#: models.py:340
+#: models.py:344
 msgid "Synthetic channel"
 msgstr ""
 
-#: models.py:341
+#: models.py:345
 msgid "Filter"
 msgstr ""
 
-#: models.py:342
+#: models.py:346
 msgid "Number"
 msgstr ""
 
-#: models.py:343
+#: models.py:347
 msgid "Duration"
 msgstr ""
 
-#: models.py:344
+#: models.py:348
 msgid "ISO"
 msgstr ""
 
-#: models.py:345
+#: models.py:349
 msgid "Gain"
 msgstr ""
 
-#: models.py:346
+#: models.py:350
 msgid "Sensor cooling"
 msgstr ""
 
-#: models.py:347 views.py:239
+#: models.py:351 views.py:239
 msgid "Darks"
 msgstr ""
 
-#: models.py:348 views.py:240
+#: models.py:352 views.py:240
 msgid "Flats"
 msgstr ""
 
-#: models.py:349 views.py:241
+#: models.py:353 views.py:241
 msgid "Flat darks"
 msgstr ""
 
-#: models.py:350 views.py:242
+#: models.py:354 views.py:242
 msgid "Bias"
 msgstr ""
 
-#: models.py:351 views.py:245
+#: models.py:355 views.py:245
 msgid "Mean SQM"
 msgstr ""
 
-#: models.py:352 views.py:246
+#: models.py:356 views.py:246
 msgid "Mean FWHM"
 msgstr ""
 
-#: models.py:360 views.py:238
+#: models.py:364 views.py:238
 msgid "Frames"
 msgstr ""
 
-#: models.py:361 templates/image/edit/acquisition.html:24
+#: models.py:365 templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr ""
 
-#: models.py:363 templates/image/edit/acquisition.html:40
+#: models.py:367 templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr ""
 
-#: models.py:364 templates/image/edit/acquisition.html:48
+#: models.py:368 templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr ""
 
-#: models.py:365 templates/image/edit/acquisition.html:56
+#: models.py:369 templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr ""
 
-#: models.py:366
+#: models.py:370
 msgid "Seeing"
 msgstr ""
 
-#: models.py:367
+#: models.py:371
 msgid "Transparency"
 msgstr ""
 
-#: models.py:368
+#: models.py:372
 msgid "Time"
 msgstr ""
 
-#: models.py:395
+#: models.py:399
 msgid "Request from"
 msgstr ""
 
-#: models.py:407
+#: models.py:411
 msgid "Additional information"
 msgstr ""
 
-#: models.py:408
+#: models.py:412
 msgid "TIFF/FITS"
 msgstr ""
 
-#: models.py:409
+#: models.py:413
 msgid "Higher resolution"
 msgstr ""
 
-#: models.py:425
+#: models.py:429
 msgid "Website"
 msgstr ""
 
-#: models.py:426
+#: models.py:430
 msgid "Job"
 msgstr ""
 
-#: models.py:427
+#: models.py:431
 msgid "Hobbies"
 msgstr ""
 
-#: models.py:428
+#: models.py:432
 msgid "Language"
 msgstr ""
 

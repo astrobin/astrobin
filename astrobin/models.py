@@ -231,7 +231,7 @@ class Image(models.Model):
     uploaded = models.DateTimeField(editable=False)
 
     focal_length = models.IntegerField(null=True, blank=True, help_text=_("(in mm)"))
-    pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text=_("(in &mu;m, taking binning into account)"))
+    pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text=_("(in &mu;m, taking binning and image scaling into account)"))
 
     # gear
     imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes"))
