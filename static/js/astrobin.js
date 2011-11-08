@@ -228,7 +228,8 @@ var image_detail = {
             dialog: {
                 title : '',
                 body  : '',
-                button: ''
+                button: '',
+                height: 400
             },
             element  : 'a.bring-to-attention',
             form_html: '',
@@ -544,6 +545,7 @@ var image_detail = {
                 ')
                 .dialog({
                     resizable: false,
+                    height: image_detail.config.bring_to_attention_action.dialog.height,
                     modal: true});
 
             $('#id_user').autoSuggest('/autocomplete_usernames/', {
