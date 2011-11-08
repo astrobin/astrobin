@@ -766,6 +766,13 @@ def image_delete(request, id):
 
     return HttpResponseRedirect("/");
 
+
+@login_required
+@require_GET
+def me(request):
+    return user_page(request, request.user.username)
+
+
 @require_GET
 def user_page(request, username):
     """Shows the user's public page"""
