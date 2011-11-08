@@ -501,6 +501,7 @@ var image_detail = {
                                 dlg.dialog('close');
                            });
                 });
+            return false;
         });
     },
 
@@ -545,7 +546,7 @@ var image_detail = {
                             dlg.dialog('close');
                        });
             });
-
+            return false;
         });
     },
 
@@ -579,6 +580,7 @@ var image_detail = {
                         }
                     }
                 });
+            return false;
         });
     },
 
@@ -612,6 +614,7 @@ var image_detail = {
                         }
                     }
                 });
+             return false;
         });
     },
 
