@@ -124,6 +124,10 @@ class PrivateMessageForm(forms.Form):
 class BringToAttentionForm(forms.Form):
     user = forms.CharField(max_length=64, required=False)
 
+    def __init__(self, user=None, **kwargs):
+        super(BringToAttentionForm, self).__init__(**kwargs)
+        self.fields['user'].label = _("User")
+
 
 class ImageRevisionUploadForm(forms.Form):
     file = forms.ImageField()
