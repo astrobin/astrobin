@@ -379,15 +379,21 @@ var image_detail = {
                     resizable: false,
                     height: image_detail.config.delete_action.dialog.height,
                     modal: true,
-                    buttons: {
-                        Ok: function() {
-                            $(this).dialog('close');
-                            window.location = image_detail.config.delete_action.url + image_detail.globals.image_id;
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                $(this).dialog('close');
+                                window.location = image_detail.config.delete_action.url + image_detail.globals.image_id;
+                            }
                         },
-                        Cancel: function() {
-                            $(this).dialog('close');
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
                         }
-                    }
+                    ]
                 });
 
             return false;
@@ -411,26 +417,32 @@ var image_detail = {
                     resizable: false,
                     height: image_detail.config.follow_action.dialog.height,
                     modal: true,
-                    buttons: {
-                        Ok: function() {
-                            var dlg = $(this)
-                            $.ajax({
-                                url: image_detail.config.follow_action.url + image_detail.globals.image_username,
-                                success: function() {
-                                    dlg.dialog('close');
-                                    follow_a.remove();
-                                    span.html('<a class="unfollow" href="#">' +
-                                        image_detail.config.follow_action.stop_following +
-                                        '</a>');
-                                    span.parent().removeClass('icon-follow');
-                                    span.parent().addClass('icon-unfollow');
-                                }
-                            });
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                var dlg = $(this)
+                                $.ajax({
+                                    url: image_detail.config.follow_action.url + image_detail.globals.image_username,
+                                    success: function() {
+                                        dlg.dialog('close');
+                                        follow_a.remove();
+                                        span.html('<a class="unfollow" href="#">' +
+                                            image_detail.config.follow_action.stop_following +
+                                            '</a>');
+                                        span.parent().removeClass('icon-follow');
+                                        span.parent().addClass('icon-unfollow');
+                                    }
+                                });
+                            }
                         },
-                        Cancel: function() {
-                            $(this).dialog('close');
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
                         }
-                    }
+                    ]
                 });
                 return false;
         });
@@ -453,26 +465,32 @@ var image_detail = {
                     resizable: false,
                     height: image_detail.config.unfollow_action.dialog.height,
                     modal: true,
-                    buttons: {
-                        Ok: function() {
-                            var dlg = $(this)
-                            $.ajax({
-                                url: image_detail.config.unfollow_action.url + image_detail.globals.image_username,
-                                success: function() {
-                                    dlg.dialog('close');
-                                    unfollow_a.remove();
-                                    span.html('<a class="follow" href="#">' +
-                                        image_detail.config.unfollow_action.follow +
-                                        '</a>');
-                                    span.parent().removeClass('icon-unfollow');
-                                    span.parent().addClass('icon-follow');
-                                }
-                            });
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                var dlg = $(this)
+                                $.ajax({
+                                    url: image_detail.config.unfollow_action.url + image_detail.globals.image_username,
+                                    success: function() {
+                                        dlg.dialog('close');
+                                        unfollow_a.remove();
+                                        span.html('<a class="follow" href="#">' +
+                                            image_detail.config.unfollow_action.follow +
+                                            '</a>');
+                                        span.parent().removeClass('icon-unfollow');
+                                        span.parent().addClass('icon-follow');
+                                    }
+                                });
+                            }
                         },
-                        Cancel: function() {
-                            $(this).dialog('close');
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
                         }
-                    }
+                    ]
                 });
             return false;
         });
@@ -564,21 +582,27 @@ var image_detail = {
                 .dialog({
                     resizable: false,
                     modal: true,
-                    buttons: {
-                        Ok: function() {
-                            $(this).dialog('close');
-                            $.ajax({
-                                url: image_detail.config.image_request_additional_information_action.url +
-                                     image_detail.globals.image_id + '/',
-                                success: function() {
-                                    dlg.dialog('close');
-                                }
-                            });
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                $(this).dialog('close');
+                                $.ajax({
+                                    url: image_detail.config.image_request_additional_information_action.url +
+                                         image_detail.globals.image_id + '/',
+                                    success: function() {
+                                        dlg.dialog('close');
+                                    }
+                                });
+                            }
                         },
-                        Cancel: function() {
-                            $(this).dialog('close');
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
                         }
-                    }
+                    ]
                 });
             return false;
         });
@@ -598,21 +622,27 @@ var image_detail = {
                 .dialog({
                     resizable: false,
                     modal: true,
-                    buttons: {
-                        Ok: function() {
-                            $(this).dialog('close');
-                            $.ajax({
-                                url: image_detail.config.image_request_fits_action.url +
-                                     image_detail.globals.image_id + '/',
-                                success: function() {
-                                    dlg.dialog('close');
-                                }
-                            });
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                $(this).dialog('close');
+                                $.ajax({
+                                    url: image_detail.config.image_request_fits_action.url +
+                                         image_detail.globals.image_id + '/',
+                                    success: function() {
+                                        dlg.dialog('close');
+                                    }
+                                });
+                            }
                         },
-                        Cancel: function() {
-                            $(this).dialog('close');
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
                         }
-                    }
+                    ]
                 });
              return false;
         });
