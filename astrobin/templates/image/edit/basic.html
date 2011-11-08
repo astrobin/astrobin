@@ -6,10 +6,6 @@
     <div class="sided-main-content">
     <h1>{% trans "Edit your image: basic information" %}</h1>
     <form action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
-        <p class="hint">
-            {% blocktrans %}Remember that AstroBin will try to identify the subjects automatically, so you can leave that empty and come check it out later!{% endblocktrans %}
-        </p>
-
         <div id="js_form" style="display:none">
             {{form.as_p}}
         </div>
