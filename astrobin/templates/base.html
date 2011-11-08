@@ -106,13 +106,13 @@
                         <ul>
                         {% if request.user.is_authenticated %}
                             <li class="menu">
-                                <a class="icon" href="{% url user_page user %}">
+                                <a class="icon" href="{% url user_page request.user %}">
                                     <img alt="Account" src="/static/icons/iconic/orange/profile.png"/>
                                 </a>
                                 <div class="popup" id="profile-popup">
                                     <ul>
                                         <li>
-                                            <a href="{% url user_page user %}">{% trans "View your profile" %}</a>
+                                            <a href="{% url user_page request.user %}">{% trans "View your profile" %}</a>
                                         </li>
                                         <li>
                                             <a href="{% url profile_edit_basic %}">{% trans "Edit your profile" %}</a>
