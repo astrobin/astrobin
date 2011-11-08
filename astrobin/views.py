@@ -275,6 +275,7 @@ def image_detail(request, id):
         extra_context = {'s3_url': settings.S3_URL,
                          'already_voted': already_voted,
                          'current_rating': rating,
+                         'related': related,
                          'related_images': related_images,
                          'gear_list': gear_list,
                          'image_type': image_type,
