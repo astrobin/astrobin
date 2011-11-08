@@ -233,10 +233,10 @@
                 </div>
                 <div class="acquisition">
                     {% if image_type == 'deep_sky' %}
-                        {% for label, data in deep_sky_data.items %}
-                            {% if data %}
+                        {% for data in deep_sky_data %}
+                            {% if data.1 %}
                                 <p>
-                                    <strong>{{label}}</strong>: {{data}}
+                                    <strong>{{data.0}}</strong>: {{data.1}}
                                 </p>
                             {% endif %}
                         {% endfor %}
