@@ -96,3 +96,8 @@ def append_slash(value):
 def image_is_ready(image):
     return AsyncResult(image.store_task_id).ready()
 
+
+@register.inclusion_tag('inclusion_tags/form_saved.html')
+def form_saved(request):
+    return {'saved': 'saved' in request.GET}
+

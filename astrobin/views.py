@@ -599,7 +599,7 @@ def image_edit_save_basic(request):
     image.save()
 
     response_dict['prefill_dict'] = prefill_dict
-    return HttpResponseRedirect('/edit/gear/%i/' % image.id)
+    return HttpResponseRedirect('/edit/basic/%i/?saved' % image.id)
 
 
 @login_required
@@ -637,7 +637,7 @@ def image_edit_save_gear(request):
 
     response_dict['image'] = image
 
-    return HttpResponseRedirect('/edit/acquisition/%i/' % image.id)
+    return HttpResponseRedirect('/edit/gear/%i/?saved' % image.id)
 
 
 @login_required
