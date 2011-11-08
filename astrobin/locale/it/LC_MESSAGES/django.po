@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 18:27+0000\n"
-"PO-Revision-Date: 2011-11-08 20:28+0200\n"
+"POT-Creation-Date: 2011-11-08 18:50+0000\n"
+"PO-Revision-Date: 2011-11-08 20:51+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -17,147 +17,158 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: forms.py:34
+#: forms.py:23
+#: models.py:35
+#: models.py:366
+#: templates/image/edit/acquisition.html:32
+msgid "Focal length"
+msgstr "Lunghezza focale"
+
+#: forms.py:24
+msgid "Pixel size"
+msgstr "Dimensione del pixel"
+
+#: forms.py:39
 #: models.py:225
 #: templates/image/edit/basic.html:17
 msgid "Title"
 msgstr "Titolo"
 
-#: forms.py:35
+#: forms.py:40
 #: models.py:226
 #: templates/image/edit/basic.html:21
 msgid "Subjects"
 msgstr "Soggetti"
 
-#: forms.py:36
-#: forms.py:91
+#: forms.py:41
+#: forms.py:96
 #: models.py:227
 #: models.py:428
 #: templates/image/edit/basic.html:26
 msgid "Locations"
 msgstr "Luoghi"
 
-#: forms.py:37
+#: forms.py:42
 #: models.py:228
 #: templates/image/detail.html:263
 #: templates/image/edit/basic.html:35
 msgid "Description"
 msgstr "Descrizione"
 
-#: forms.py:58
+#: forms.py:63
 #: models.py:237
 msgid "Imaging telescopes"
 msgstr "Telescopi di acquisizione"
 
-#: forms.py:59
+#: forms.py:64
 #: models.py:238
 msgid "Guiding telescopes"
 msgstr "Telescopi di guida"
 
-#: forms.py:60
-#: forms.py:106
+#: forms.py:65
+#: forms.py:111
 #: models.py:239
 #: models.py:439
 msgid "Mounts"
 msgstr "Montature"
 
-#: forms.py:61
+#: forms.py:66
 #: models.py:240
 msgid "Imaging cameras"
 msgstr "Camere di acquisizione"
 
-#: forms.py:62
+#: forms.py:67
 #: models.py:241
 msgid "Guiding cameras"
 msgstr "Camere di guida"
 
-#: forms.py:63
-#: forms.py:108
+#: forms.py:68
+#: forms.py:113
 #: models.py:242
 #: models.py:441
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
-#: forms.py:64
-#: forms.py:109
+#: forms.py:69
+#: forms.py:114
 #: models.py:243
 #: models.py:442
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:65
-#: forms.py:110
+#: forms.py:70
+#: forms.py:115
 #: models.py:244
 #: models.py:443
 msgid "Filters"
 msgstr "Filtri"
 
-#: forms.py:66
-#: forms.py:111
+#: forms.py:71
+#: forms.py:116
 #: models.py:245
 #: models.py:444
 msgid "Accessories"
 msgstr "Accessori"
 
-#: forms.py:105
+#: forms.py:110
 #: models.py:438
 msgid "Telescopes"
 msgstr "Telescopi"
 
-#: forms.py:107
+#: forms.py:112
 #: models.py:440
 msgid "Cameras"
 msgstr "Camere"
 
-#: forms.py:131
-#: forms.py:135
-#: forms.py:218
+#: forms.py:136
+#: forms.py:140
+#: forms.py:223
 #: models.py:333
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Usa il seguente formato: aaaa-mm-gg"
 
-#: forms.py:138
-#: forms.py:141
+#: forms.py:143
+#: forms.py:146
 msgid "Express value in hours"
 msgstr "Esprimi il valore in ore"
 
-#: forms.py:151
+#: forms.py:156
 msgid "Search for astronomical objects, telescopes, cameras, filters..."
 msgstr "Cerca oggetti astronomici, telescopi, camere, filtri..."
 
-#: forms.py:153
+#: forms.py:158
 msgid "Min. upload date"
 msgstr "Min. data di upload"
 
-#: forms.py:154
+#: forms.py:159
 msgid "Max. upload date"
 msgstr "Max. data di upload"
 
-#: forms.py:155
+#: forms.py:160
 msgid "Min. integration"
 msgstr "Integrazione min."
 
-#: forms.py:156
+#: forms.py:161
 msgid "Max. integration"
 msgstr "Integrazione max."
 
-#: forms.py:157
+#: forms.py:162
 msgid "Min. Moon phase %"
 msgstr "% fase lunare min."
 
-#: forms.py:158
+#: forms.py:163
 msgid "Max. Moon phase %"
 msgstr "% fase lunare max."
 
-#: forms.py:193
+#: forms.py:198
 msgid "For example: +12.44"
 msgstr "Per esempio: +12.44"
 
-#: forms.py:196
+#: forms.py:201
 msgid "For example: -51.25"
 msgstr "Per esempio: -51.25"
 
-#: forms.py:231
+#: forms.py:236
 #: models.py:333
 #: models.py:380
 #: templates/image/edit/acquisition.html:80
@@ -169,12 +180,6 @@ msgstr "Data"
 #: models.py:143
 msgid "Name"
 msgstr "Nome"
-
-#: models.py:35
-#: models.py:366
-#: templates/image/edit/acquisition.html:32
-msgid "Focal length"
-msgstr "Lunghezza focale"
 
 #: models.py:36
 msgid "Aperture"
@@ -355,62 +360,62 @@ msgstr "Giorno lunare medio"
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:335
+#: views.py:336
 msgid "Invalid image."
 msgstr "Immagine non valida."
 
-#: views.py:399
-#: views.py:403
-#: views.py:548
-#: views.py:551
-#: views.py:586
-#: views.py:615
+#: views.py:400
+#: views.py:404
+#: views.py:549
+#: views.py:552
+#: views.py:587
+#: views.py:616
 #: templates/user/profile/edit/basic.html:34
 #: templates/user/profile/edit/gear.html:28
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
-#: views.py:400
-#: views.py:549
-#: views.py:587
-#: views.py:616
+#: views.py:401
+#: views.py:550
+#: views.py:588
+#: views.py:617
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
-#: views.py:401
+#: views.py:402
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:404
-#: views.py:552
+#: views.py:405
+#: views.py:553
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:405
+#: views.py:406
 #: templates/user/profile/edit/basic.html:36
 #: templates/user/profile/edit/gear.html:30
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:703
+#: views.py:704
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:708
-#: views.py:745
+#: views.py:709
+#: views.py:746
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1198
+#: views.py:1199
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1257
+#: views.py:1258
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1281
+#: views.py:1282
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -1153,9 +1158,8 @@ msgid "Edit your image: basic information"
 msgstr "Modifica l'immagine: informazioni di base"
 
 #: templates/image/edit/basic.html:10
-#: templates/user/profile/edit/basic.html:10
-msgid "Remember that the location field autocompletes, and you need to press TAB to add something to your list. If it's not in a white box, it doesn't get saved!"
-msgstr "Ricorda che il campo dei luoghi si autocompleta, e che devi premere TAB per aggiungere qualcosa alla lista. Se qualcosa non si trova in un rettangolo bianco, non viene salvato!"
+msgid "Remember that the locations and subjects fields autocomplete, and you need to press TAB to add something to your list. If it's not in a white box, it doesn't get saved!"
+msgstr "Ricorda che i campi dei luoghi e dei soggetti si autocompletano, e che devi premere TAB per aggiungere qualcosa alla lista. Se qualcosa non si trova in un rettangolo bianco, non viene salvato!"
 
 #: templates/image/edit/basic.html:23
 msgid "You can't edit Subjects without Javascript. Please enable it in your Internet browser."
@@ -1583,15 +1587,15 @@ msgstr "Strumenti"
 msgid "Edit profile"
 msgstr "Modifica profilo"
 
-#: templates/user/profile.html:32
+#: templates/user/profile.html:33
 msgid "Go to the homepage to upload a new image!"
 msgstr "Vai alla home per caricare una nuova foto!"
 
-#: templates/user/profile.html:34
+#: templates/user/profile.html:36
 msgid "User's card"
 msgstr "Scheda utente"
 
-#: templates/user/profile.html:50
+#: templates/user/profile.html:52
 msgid "Recent images from"
 msgstr "Immagini recenti da"
 
@@ -1646,6 +1650,10 @@ msgstr "Fatto! Vai al <a href=\"/me\">tuo profilo</a> per vedere le nuove immagi
 #: templates/user/profile/edit/basic.html:8
 msgid "Edit your basic information"
 msgstr "Modifica le tue informazioni di base"
+
+#: templates/user/profile/edit/basic.html:10
+msgid "Remember that the location field autocompletes, and you need to press TAB to add something to your list. If it's not in a white box, it doesn't get saved!"
+msgstr "Ricorda che il campo dei luoghi si autocompleta, e che devi premere TAB per aggiungere qualcosa alla lista. Se qualcosa non si trova in un rettangolo bianco, non viene salvato!"
 
 #: templates/user/profile/edit/basic.html:13
 msgid "These are the cities from which you usually image."
