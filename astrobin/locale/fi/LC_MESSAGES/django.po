@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 06:51+0000\n"
+"POT-Creation-Date: 2011-11-08 08:39+0000\n"
 "PO-Revision-Date: 2011-11-06 15:18+0200\n"
 "Last-Translator: Lauri Kangas <vostok@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -1506,10 +1506,10 @@ msgstr ""
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
-"strong></a>."
+"strong>.</a>"
 msgstr ""
 "<a href=\"%(object_url)s\">Et enää seuraa <strong>%(object)s</strong></a>."
 
