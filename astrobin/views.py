@@ -820,14 +820,15 @@ def user_profile_save_basic(request):
         profile.hobbies  = form.cleaned_data['hobbies']
 
         profile.save()
-        form.fields['locations'].initial = value
+    else:
+        response_dict['prefill_dict'] = {'locations': jsonDump(profile.locations.all()) }
+        return render_to_response("user/profile/edit/basic.html",
+            response_dict,
+            context_instance=RequestContext(request))
 
-    response_dict['prefill_dict'] = {'locations': jsonDump(profile.locations.all()) }
-    return render_to_response("user/profile/edit/basic.html",
-        response_dict,
-        context_instance=RequestContext(request))
- 
- 
+    return HttpResponseRedirect("/profile/edit/basic/?saved");
+
+
 @login_required
 @require_GET
 def user_profile_edit_gear(request):
