@@ -99,15 +99,12 @@ def jsonDumpSubjects(all):
 def index(request):
     """Main page"""
     form = None
-    profile = None
 
-    try:
+    if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
-    except UserProfile.DoesNotExist:
-        pass
+        if profile and profile.telescopes.all() and profile.cameras.all():
+            form = ImageUploadForm()
 
-    if profile and profile.telescopes.all() and profile.cameras.all():
-        form = ImageUploadForm()
     return object_list(
         request, 
         queryset=Image.objects.filter(is_stored=True),
@@ -273,6 +270,7 @@ def image_detail(request, id):
         template_name = 'image/detail.html',
         template_object_name = 'image',
         extra_context = {'s3_url': settings.S3_URL,
+                         'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
                          'already_voted': already_voted,
                          'current_rating': rating,
                          'related': related,
