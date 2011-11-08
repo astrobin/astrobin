@@ -86,13 +86,13 @@ class UserProfileEditBasicForm(forms.ModelForm):
 
 
 class UserProfileEditGearForm(forms.Form):
-    telescopes = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
-    mounts = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
-    cameras = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
-    focal_reducers = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
-    software = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
-    filters = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
-    accessories = forms.CharField(max_length=256, help_text="<noscript>*</noscript>")
+    telescopes = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
+    mounts = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
+    cameras = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
+    focal_reducers = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
+    software = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
+    filters = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
+    accessories = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
 
     def __init__(self, user=None, **kwargs):
         super(UserProfileEditGearForm, self).__init__(**kwargs)
