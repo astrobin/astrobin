@@ -6,6 +6,7 @@
     {% include 'image/edit/menu.html' %}   
     <div class="sided-main-content">
     <h1>{% trans "Edit your image: acquisition details" %}</h1>
+    {% form_saved request %}
     {% if edit_type == 'solar_system' %}
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
             {% if error %}

@@ -723,7 +723,7 @@ def image_edit_save_acquisition(request):
                                       response_dict,
                                       context_instance=RequestContext(request))
 
-    return HttpResponseRedirect("/edit/acquisition/%s" % image_id)
+    return HttpResponseRedirect("/edit/acquisition/%s/?saved" % image_id)
 
 
 @login_required
