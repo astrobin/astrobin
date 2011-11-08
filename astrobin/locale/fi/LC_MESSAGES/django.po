@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 17:31+0000\n"
+"POT-Creation-Date: 2011-11-08 18:27+0000\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -205,31 +205,31 @@ msgstr ""
 msgid "Sensor cooling"
 msgstr "Kennon jäähdytys"
 
-#: models.py:351 views.py:239
+#: models.py:351 views.py:236
 msgid "Darks"
 msgstr ""
 
-#: models.py:352 views.py:240
+#: models.py:352 views.py:237
 msgid "Flats"
 msgstr ""
 
-#: models.py:353 views.py:241
+#: models.py:353 views.py:238
 msgid "Flat darks"
 msgstr ""
 
-#: models.py:354 views.py:242
+#: models.py:354 views.py:239
 msgid "Bias"
 msgstr ""
 
-#: models.py:355 views.py:245
+#: models.py:355 views.py:242
 msgid "Mean SQM"
 msgstr "Keskiarvo SQM"
 
-#: models.py:356 views.py:246
+#: models.py:356 views.py:243
 msgid "Mean FWHM"
 msgstr "Keskiarvo FWHM"
 
-#: models.py:364 views.py:238
+#: models.py:364 views.py:235
 #, fuzzy
 msgid "Frames"
 msgstr "Frames"
@@ -294,64 +294,64 @@ msgstr "Harrastukset"
 msgid "Language"
 msgstr "Kieli"
 
-#: views.py:237
+#: views.py:234
 msgid "Dates"
 msgstr "Päivämäärät"
 
-#: views.py:243
+#: views.py:240
 msgid "Avg. Moon age"
 msgstr "Keskimääräinen kuun ikä"
 
-#: views.py:244
+#: views.py:241
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
-#: views.py:338
+#: views.py:335
 msgid "Invalid image."
 msgstr "Virheellinen kuva."
 
-#: views.py:402 views.py:406 views.py:551 views.py:554 views.py:589
-#: views.py:618 templates/user/profile/edit/basic.html:34
+#: views.py:399 views.py:403 views.py:548 views.py:551 views.py:586
+#: views.py:615 templates/user/profile/edit/basic.html:34
 #: templates/user/profile/edit/gear.html:28
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Syötä nimen osa ja odota ehdotuksia!"
 
-#: views.py:403 views.py:552 views.py:590 views.py:619
+#: views.py:400 views.py:549 views.py:587 views.py:616
 msgid "No results. Sorry."
 msgstr "Ei tuloksia, pahoitteluni."
 
-#: views.py:404
+#: views.py:401
 msgid "Subjects found in the SIMBAD database"
 msgstr ""
 
-#: views.py:407 views.py:555
+#: views.py:404 views.py:552
 msgid "No results. Press TAB to create this location!"
 msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 
-#: views.py:408 templates/user/profile/edit/basic.html:36
+#: views.py:405 templates/user/profile/edit/basic.html:36
 #: templates/user/profile/edit/gear.html:30
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:706
+#: views.py:703
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views.py:711 views.py:748
+#: views.py:708 views.py:745
 msgid "There was an error. Check your input!"
 msgstr "Virhe. Tarkista tiedot!"
 
-#: views.py:1194
+#: views.py:1198
 msgid "RE"
 msgstr "VS"
 
-#: views.py:1253
+#: views.py:1257
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1277
+#: views.py:1281
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -846,11 +846,11 @@ msgstr ""
 "\">profiilissasi</a>!"
 
 #: templates/index.html:34
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "<strong>Hello there! Welcome to AstroBin!</strong> <em>AstroBin</em> is an "
 "image hosting service made specifically for astrophotographers. It comes "
-"packed with features that benefits the astrophotography community greatly! "
+"packed with features that benefit the astrophotography community greatly! "
 "Read more in the <a href=\"%(help_url)s\">help page.</a>"
 msgstr ""
 "<strong> Hei siellä! Tervetuloa AstroBiniin!</strong> <em>AstroBin</em> on "
@@ -1802,8 +1802,10 @@ msgid "Do not navigate away from this window: this might take a while!"
 msgstr "Älä poistu tästä ikkunasta: tähän saattaa mennä hetki!"
 
 #: templates/user/profile/flickr_import.html:104
-msgid "Done!"
-msgstr "Valmis!"
+msgid ""
+"Done! Go to <a href=\"/me\">your profile</a> to see the new pictures (and "
+"keep an eye on your notifications)!"
+msgstr ""
 
 #: templates/user/profile/edit/basic.html:8
 msgid "Edit your basic information"
@@ -1836,6 +1838,9 @@ msgid ""
 "Remember that these items autocomplete, and you need to press TAB to add "
 "something to your list. If it's not in a white box, it doesn't get saved!"
 msgstr ""
+
+#~ msgid "Done!"
+#~ msgstr "Valmis!"
 
 #~ msgid "Saved. Thanks!"
 #~ msgstr "Tallennettu. Kiitos!"
