@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 06:51+0000\n"
+"POT-Creation-Date: 2011-11-08 08:39+0000\n"
 "PO-Revision-Date: 2011-11-06 09:14+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -316,7 +316,8 @@ msgstr "Soggetti trovati nel database SIMBAD"
 #: views.py:405 templates/user/profile/edit/basic.html:36
 #: templates/user/profile/edit/gear.html:30
 msgid "Matching items (press TAB to add what you typed instead):"
-msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
+msgstr ""
+"Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
 #: views.py:678
 msgid "Fill in one session, before adding more."
@@ -1227,8 +1228,9 @@ msgstr "Modifica l'immagine: informazioni di base"
 msgid ""
 "Remember that the location field autocompletes, and you need to press TAB to "
 "add something to your list. If it's not in a white box, it doesn't get saved!"
-msgstr "Ricorda che il campo dei luoghi si autocompleta, e che devi premere TAB "
-"per aggiungere qualcosa alla lista. Se qualcosa non si trova in un rettangolo "
+msgstr ""
+"Ricorda che il campo dei luoghi si autocompleta, e che devi premere TAB per "
+"aggiungere qualcosa alla lista. Se qualcosa non si trova in un rettangolo "
 "bianco, non viene salvato!"
 
 #: templates/image/edit/basic.html:23
@@ -1515,13 +1517,12 @@ msgstr ""
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
-#, python-format
 msgid ""
 "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
-"strong></a>."
+"strong>.</a>"
 msgstr ""
 "<a href=\"%(object_url)s\">Hai smesso di seguire <strong>%(object)s</"
-"strong></a>."
+"strong>.</a>"
 
 #: templates/privatebeta/invite.html:7
 msgid "What is AstroBin?"
@@ -1784,8 +1785,9 @@ msgstr "Modifica la tua strumentazione"
 msgid ""
 "Remember that these items autocomplete, and you need to press TAB to add "
 "something to your list. If it's not in a white box, it doesn't get saved!"
-msgstr "Ricorda che questi elementi si autocompletano, e devi premere TAB "
-"per aggiungere qualcosa alla tua lista. Se qualcosa non si trova in un "
+msgstr ""
+"Ricorda che questi elementi si autocompletano, e devi premere TAB per "
+"aggiungere qualcosa alla tua lista. Se qualcosa non si trova in un "
 "rettangolo bianco, non viene salvato!"
 
 #~ msgid ""
