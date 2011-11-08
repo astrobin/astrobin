@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 19:05+0000\n"
+"POT-Creation-Date: 2011-11-08 19:27+0000\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -1484,6 +1484,25 @@ msgstr "Viestisi on lähetetty onnistuneesti."
 msgid "Here are your notifications"
 msgstr "Tässä ovat uudet ilmoituksesi"
 
+#: templates/notification/email_body.txt:1
+#, python-format
+msgid ""
+"You have received the following notice from %(current_site)s:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"To see other notices or change how you receive notifications, please go to "
+"%(notices_url)s.\n"
+msgstr ""
+
+#: templates/notification/attention_request/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s would like to bring the following image to your attention: "
+"%(object_url)s"
+msgstr ""
+"%(originator)s haluaa herättää huomiosi oheisesta kuvasta: %(object_url)s"
+
 #: templates/notification/attention_request/notice.html:2
 #: templates/notification/attention_request/short.html:1
 #, python-format
@@ -1493,6 +1512,11 @@ msgid ""
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> haluaa herättää "
 "huomiosi eräästä kuvasta.</a>"
+
+#: templates/notification/attention_request/short.txt:2
+#, python-format
+msgid "%(originator)s wants to bring an image to your attention"
+msgstr "%(originator)s haluaa herättää huomiosi eräästä kuvasta"
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -1504,8 +1528,10 @@ msgstr ""
 "<a href=\"%(object_url)s\">Seuraat nyt <strong>%(object)s</strong>.</a>"
 
 #: templates/notification/image_deleted/full.html:2
+#: templates/notification/image_deleted/full.txt:2
 #: templates/notification/image_deleted/notice.html:2
 #: templates/notification/image_deleted/short.html:2
+#: templates/notification/image_deleted/short.txt:2
 msgid "Your image has been deleted."
 msgstr "Kuvasi on poistettu."
 
@@ -1529,6 +1555,15 @@ msgid ""
 "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr "<a href=\"%(object_url)s\">Kuvasi astrometrinen ratkaisu onnistui.</a>"
 
+#: templates/notification/new_follower/full.txt:2
+#, python-format
+msgid ""
+"User %(object)s is now following you. They will be notified when you publish "
+"new images."
+msgstr ""
+"Käyttäjä %(object)s nyt seuraa sinua. Ilmoitus uusista kuvistasi lähetetään "
+"hänelle."
+
 #: templates/notification/new_follower/notice.html:2
 #: templates/notification/new_follower/short.html:2
 #, python-format
@@ -1537,6 +1572,19 @@ msgid ""
 "</a>"
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(object)s</strong> seuraa nyt sinua.</a>"
+
+#: templates/notification/new_follower/short.txt:2
+msgid "You have a new follower!"
+msgstr "Sinulla on uusi seuraaja!"
+
+#: templates/notification/new_image/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image! Check it out at the following url: "
+"%(object_url)s"
+msgstr ""
+"%(originator)s on julkaissut uuden kuvan! Voit käydä katsomassa kuvan "
+"osoitteesta: %(object_url)s"
 
 #: templates/notification/new_image/notice.html:2
 #, python-format
@@ -1556,6 +1604,20 @@ msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on julkaissut "
 "uuden kuvan</a>"
 
+#: templates/notification/new_image/short.txt:2
+#, python-format
+msgid "New image by %(originator)s"
+msgstr "%(originator)s julkaisi uuden kuvan "
+
+#: templates/notification/new_image_revision/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image revision! Check it out at the "
+"following url: %(object_url)s"
+msgstr ""
+"%(originator)s on julkaissut uuden version kuvasta! Voit käydä katsomassa "
+"kuvan osoitteesta: %(object_url)s"
+
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
 #, python-format
@@ -1566,6 +1628,20 @@ msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on julkaissut "
 "uuden version kuvasta.</a>"
 
+#: templates/notification/new_image_revision/short.txt:2
+#, python-format
+msgid "New image revision by %(originator)s"
+msgstr "%(originator)s julkaisi kuvasta uuden version"
+
+#: templates/notification/request_fulfilled/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has fulfilled your request! Check it out at the following "
+"url: %(object_url)s"
+msgstr ""
+"%(originator)s on toteuttanut pyyntösi! Voit käydä katsomassa sen "
+"osoitteesta: %(object_url)s"
+
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
 #, python-format
@@ -1575,6 +1651,11 @@ msgid ""
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on toteuttanut "
 "pyyntösi</a>"
+
+#: templates/notification/request_fulfilled/short.txt:2
+#, python-format
+msgid "%(originator)s has fulfilled your request."
+msgstr "%(originator)s  on toteuttanut pyyntösi."
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
@@ -1618,6 +1699,19 @@ msgstr "Kirjaudu sisään"
 #: templates/registration/activate.html:14
 msgid "Account activation failed"
 msgstr "Tunnuksen aktivoiminen epäonnistui"
+
+#: templates/registration/activation_email.txt:2
+msgid "Activate account at"
+msgstr "Aktivoi tunnus  sivustolle"
+
+#: templates/registration/activation_email.txt:6
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr "Linkki on voimassa %(expiration_days)s päivää."
+
+#: templates/registration/activation_email_subject.txt:1
+msgid "Account activation on"
+msgstr "Tilin aktivoiminen sivustolla"
 
 #: templates/registration/login.html:7
 msgid "Reset password"
@@ -1873,64 +1967,6 @@ msgstr ""
 
 #~ msgid "Posted by"
 #~ msgstr "Julkaisija"
-
-#~ msgid ""
-#~ "%(originator)s would like to bring the following image to your attention: "
-#~ "%(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s haluaa herättää huomiosi oheisesta kuvasta: %(object_url)s"
-
-#~ msgid "%(originator)s wants to bring an image to your attention"
-#~ msgstr "%(originator)s haluaa herättää huomiosi eräästä kuvasta"
-
-#~ msgid ""
-#~ "User %(object)s is now following you. They will be notified when you "
-#~ "publish new images."
-#~ msgstr ""
-#~ "Käyttäjä %(object)s nyt seuraa sinua. Ilmoitus uusista kuvistasi "
-#~ "lähetetään hänelle."
-
-#~ msgid "You have a new follower!"
-#~ msgstr "Sinulla on uusi seuraaja!"
-
-#~ msgid ""
-#~ "%(originator)s has published a new image! Check it out at the following "
-#~ "url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s on julkaissut uuden kuvan! Voit käydä katsomassa kuvan "
-#~ "osoitteesta: %(object_url)s"
-
-#~ msgid "New image by %(originator)s"
-#~ msgstr "%(originator)s julkaisi uuden kuvan "
-
-#~ msgid ""
-#~ "%(originator)s has published a new image revision! Check it out at the "
-#~ "following url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s on julkaissut uuden version kuvasta! Voit käydä katsomassa "
-#~ "kuvan osoitteesta: %(object_url)s"
-
-#~ msgid "New image revision by %(originator)s"
-#~ msgstr "%(originator)s julkaisi kuvasta uuden version"
-
-#~ msgid ""
-#~ "%(originator)s has fulfilled your request! Check it out at the following "
-#~ "url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s on toteuttanut pyyntösi! Voit käydä katsomassa sen "
-#~ "osoitteesta: %(object_url)s"
-
-#~ msgid "%(originator)s has fulfilled your request."
-#~ msgstr "%(originator)s  on toteuttanut pyyntösi."
-
-#~ msgid "Activate account at"
-#~ msgstr "Aktivoi tunnus  sivustolle"
-
-#~ msgid "Link is valid for %(expiration_days)s days."
-#~ msgstr "Linkki on voimassa %(expiration_days)s päivää."
-
-#~ msgid "Account activation on"
-#~ msgstr "Tilin aktivoiminen sivustolla"
 
 #~ msgid "num"
 #~ msgstr "num"
