@@ -356,21 +356,24 @@ def image_upload_process(request):
                       {'originator':request.user,
                        'object_url':image.get_absolute_url()})
 
-    return render_to_response('image/edit/basic.html',
-        {'image':image,
-         's3_url':settings.S3_URL,
-         'form':ImageEditBasicForm(),
-         'prefill_dict': {
-            'subjects': ['[]',
-                         _("Enter partial name and wait for the suggestions!"),
-                         _("No results. Sorry.")],
-            'locations': ['[]',
-                          _("Enter partial name and wait for the suggestions!"),
-                          _("No results. Press TAB to create this location!")],
-         },
-         'is_ready':image.is_stored,
+    return HttpResponseRedirect("/edit/presolve/%d/" % image.id)
+
+
+@login_required
+@require_GET
+def image_edit_presolve(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    form = ImageEditPresolveForm(
+        {'focal_length': image.focal_length,
+         'pixel_size': image.pixel_size})
+    return render_to_response('image/edit/presolve.html',
+        {'image': image,
+         'form': form,
         },
-        context_instance=RequestContext(request))
+        context_instance = RequestContext(request))
 
 
 @login_required
@@ -500,6 +503,28 @@ def image_edit_acquisition_reset(request, id):
     return render_to_response('image/edit/acquisition.html',
                               response_dict,
                               context_instance=RequestContext(request))
+
+
+@login_required
+@require_POST
+def image_edit_save_presolve(request):
+    image_id = request.POST.get('image_id')
+    image = Image.objects.get(pk=image_id)
+    form = ImageEditPresolveForm(data=request.POST, instance=image)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    if not form.is_valid():
+        return render_to_response("image/edit/presolve.html",
+            {'image': image,
+             'form': form,
+            },
+            context_instance = RequestContext(request))
+
+    form.save()
+    image.solve()
+
+    return HttpResponseRedirect('/edit/basic/%i/' % image.id)
 
 
 @login_required

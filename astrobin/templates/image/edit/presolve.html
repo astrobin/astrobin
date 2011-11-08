@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+
+{% block content %}
+    {% include 'image/edit/menu.html' %}   
+    <div class="sided-main-content">
+    <h1>{% trans "Edit your image: plate-solving scale" %}</h1>
+    <p>
+    {% blocktrans %}AstroBin <em>could</em> plate-solve your image without knowing anything about it, but that's a very long process. If you know the focal length of your telescope and the pixel size of your camera, plate-solving will be much faster and will have a better chance of success!{% endblocktrans %}
+    </p>
+    <p>{% blocktrans %}PS: It's OK if you're a little off with these numbers.{% endblocktrans %}</p>
+    <form action="{% url image_edit_save_presolve %}" method="post">{% csrf_token %}
+        {{form.as_p}}
+        <input type="hidden" name="image_id" value="{{image.id}}" />
+        <ul>
+            <li><input class="button submit-button" type="submit" value="{% trans "Save and continue" %} &rarr;" /></li>
+            <li><a href="{% url image_edit_basic image.id %}">{% trans "or skip plate-solving" %}</a></li>
+        </ul>
+    </form>
+    </div>
+{% endblock %}
+

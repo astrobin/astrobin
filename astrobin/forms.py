@@ -17,6 +17,12 @@ class ImageUploadForm(forms.Form):
     file = forms.ImageField()
 
 
+class ImageEditPresolveForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('focal_length', 'pixel_size')
+
+
 class ImageEditBasicForm(forms.Form):
     title = forms.CharField(max_length=64)
     subjects = forms.CharField(required=False, help_text="<noscript>*</noscript>")

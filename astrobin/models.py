@@ -226,6 +226,9 @@ class Image(models.Model):
     original_ext = models.CharField(max_length=6, editable=False)
     uploaded = models.DateTimeField(editable=False)
 
+    focal_length = models.IntegerField(null=True, blank=True, help_text="(in mm)")
+    pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text="(in &mu;m)")
+
     # gear
     imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes"))
     guiding_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes"))
@@ -273,7 +276,10 @@ class Image(models.Model):
             pass
 
     def process(self):
-        store_image.delay(self, solve=True, lang=translation.get_language(), callback=image_stored_callback)
+        store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
+
+    def solve(self):
+        solve_image.delay(self, lang=translation.get_language(), callback=image_solved_callback)
 
     def delete(self, *args, **kwargs):
         delete_image.delay(self.filename, self.original_ext) 
