@@ -190,10 +190,10 @@ class AdvancedSearchForm(SearchForm):
 class LocationEditForm(forms.ModelForm):
     latitude = forms.FloatField(
         required=False,
-        help_text=_("Examples: +12.44, -51.25"))
+        help_text=_("For example: +12.44"))
     longitude = forms.FloatField(
         required=False,
-        help_text=_("Examples: +12.44, -51.25"))
+        help_text=_("For example: -51.25"))
 
     def __init__(self, *args, **kwargs):
         super(LocationEditForm, self).__init__(*args, **kwargs)
