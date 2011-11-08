@@ -18,6 +18,7 @@ import threading
 from image_utils import *
 from storage import *
 from notifications import *
+from storage import download_from_bucket
 
 SUBPROCESS_EXPIRE = 60 * 5
 
@@ -64,6 +65,13 @@ def solve_image(image, lang, callback=None):
         scale_low = scale * 0.8
         scale_high = scale * 1.2
 
+    # If the the original image doesn't exist anymore, we need to
+    # download it again.
+    if not os.path.exists(path + uid + original_ext):
+        print "Path doesn't exist: %s" % path + uid + original_ext
+        download_from_bucket(uid + original_ext, path)
+
+    print "Path exists: %s" % path + uid + original_ext
     command = ['/usr/local/astrometry/bin/solve-field',
                '--scale-units', 'arcsecperpix',
                '--scale-low', str(scale_low),

@@ -524,7 +524,10 @@ def image_edit_save_presolve(request):
     form.save()
     image.solve()
 
-    return HttpResponseRedirect('/edit/basic/%i/' % image.id)
+    if 'done_later' in request.POST:
+        return HttpResponseRedirect('/%s/?plate_solving_started' % image_id);
+
+    return HttpResponseRedirect('/edit/basic/%s/' % image_id)
 
 
 @login_required
