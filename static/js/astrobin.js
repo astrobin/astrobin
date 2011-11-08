@@ -183,7 +183,7 @@ var image_detail = {
                 title : '',
                 body  : '',
                 button: '',
-                height: 250,
+                height: 230,
             },
             element: 'a.delete',
             url    : '/delete/'
@@ -194,7 +194,7 @@ var image_detail = {
                 title : '',
                 body  : '',
                 button: '',
-                height: 180
+                height: 230
             },
             element       : 'a.follow',
             url           : '/follow/',
@@ -206,7 +206,7 @@ var image_detail = {
                 title : '',
                 body  : '',
                 button: '',
-                height: 180
+                height: 230
             },
             element       : 'a.unfollow',
             url           : '/unfollow/',
