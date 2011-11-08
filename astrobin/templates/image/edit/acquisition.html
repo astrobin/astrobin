@@ -126,10 +126,10 @@
         <p>{% trans "What kind of image is this?" %}</p>
         <div class="simple-choice">
             <a class="button" href="{% url image_edit_acquisition image.id %}?edit_type=solar_system">
-                Solar system
+                {% trans "Solar system" %}
             </a>
             <a class="button" href="{% url image_edit_acquisition image.id %}?edit_type=deep_sky">
-                Deep sky
+                {% trans "Deep sky" %}
             </a>
         </div>
     {% endif %}
