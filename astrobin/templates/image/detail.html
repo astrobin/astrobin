@@ -35,7 +35,7 @@
                                         <span class="text"><a class="upload-revision" href="#">{% trans "Upload new revision" %}</a></span>
                                     </li>
                                     {% if not image.is_solved %}
-                                    <li class="bg-icon icon-edit">
+                                    <li class="bg-icon icon-plate-solve">
                                         <span class="text"><a class="plate-solve" href="{% url image_edit_presolve image.id %}?done_later">{% trans "Plate-solve" %}</a></span>
                                     </li>
                                     {% endif %}
