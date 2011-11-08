@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 08:39+0000\n"
+"POT-Creation-Date: 2011-11-08 09:43+0000\n"
 "PO-Revision-Date: 2011-11-06 15:18+0200\n"
 "Last-Translator: Lauri Kangas <vostok@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -122,8 +122,8 @@ msgstr "Max. kuun vaihe %"
 msgid "Examples: +12.44, -51.25"
 msgstr "Esimerksi: +12.44, -51.25"
 
-#: forms.py:220 models.py:323 models.py:370
-#: templates/image/edit/acquisition.html:79 templates/search/search.html:22
+#: forms.py:225 models.py:323 models.py:370
+#: templates/image/edit/acquisition.html:80 templates/search/search.html:22
 msgid "Date"
 msgstr "Päivämäärä"
 
@@ -131,7 +131,7 @@ msgstr "Päivämäärä"
 msgid "Name"
 msgstr "Nimi"
 
-#: models.py:35 models.py:356 templates/image/edit/acquisition.html:31
+#: models.py:35 models.py:356 templates/image/edit/acquisition.html:32
 msgid "Focal length"
 msgstr "Polttoväli"
 
@@ -222,19 +222,19 @@ msgstr "Keskiarvo FWHM"
 msgid "Frames"
 msgstr "Frames"
 
-#: models.py:355 templates/image/edit/acquisition.html:23
+#: models.py:355 templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr "Kuvataajuus"
 
-#: models.py:357 templates/image/edit/acquisition.html:39
+#: models.py:357 templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:358 templates/image/edit/acquisition.html:47
+#: models.py:358 templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:359 templates/image/edit/acquisition.html:55
+#: models.py:359 templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr "CMIII"
 
@@ -447,7 +447,7 @@ msgstr "Sivua ei löytynyt"
 msgid "Sorry, but the content you were looking for is not here."
 msgstr "Sisältö, jota etsit, ei ole täällä. Pahoitteluni."
 
-#: templates/base.html:61
+#: templates/base.html:59
 msgid ""
 "Hey! It looks like your browser doesn't support Javascript, or you disabled "
 "it. AstroBin will provide you with a much more pleasant experience if you "
@@ -457,101 +457,101 @@ msgstr ""
 "pois päältä. AstroBinin käyttö on huomattavasti miellyttävämpää jos otat "
 "Javascriptin käyttöön."
 
-#: templates/base.html:66
+#: templates/base.html:64
 msgid "English"
 msgstr "Englanti"
 
-#: templates/base.html:67
+#: templates/base.html:65
 msgid "Italian"
 msgstr "Italia"
 
-#: templates/base.html:68
+#: templates/base.html:66
 msgid "Finnish"
 msgstr "Suomi"
 
-#: templates/base.html:78
+#: templates/base.html:76
 msgid "Search images by subject or gear"
 msgstr "Etsi kuvia kohteen tai laitteen perusteella"
 
-#: templates/base.html:79
+#: templates/base.html:77
 msgid "Start typing and hit ENTER"
 msgstr "Ala kirjoittaa ja paina ENTER"
 
-#: templates/base.html:82 templates/base.html.py:83
+#: templates/base.html:80 templates/base.html.py:81
 #: templates/search/search.html:10
 msgid "Search"
 msgstr "Etsi"
 
-#: templates/base.html:91
+#: templates/base.html:89
 msgid "The definitive home for your astrophotography."
 msgstr "Paras paikka tähtikuvillesi."
 
-#: templates/base.html:99 templates/base.html.py:213 templates/base.html:248
+#: templates/base.html:97 templates/base.html.py:211 templates/base.html:246
 msgid "Home"
 msgstr "Etusivu"
 
-#: templates/base.html:100 templates/base.html.py:214
+#: templates/base.html:98 templates/base.html.py:212
 msgid "Help"
 msgstr "Ohjeita"
 
-#: templates/base.html:113
+#: templates/base.html:111
 msgid "View your profile"
 msgstr "Katsele profiiliasi"
 
-#: templates/base.html:116
+#: templates/base.html:114
 msgid "Edit your profile"
 msgstr "Muokkaa profiiliasi"
 
-#: templates/base.html:119
+#: templates/base.html:117
 msgid "Upload an image"
 msgstr "Lataa kuva"
 
-#: templates/base.html:119
+#: templates/base.html:117
 msgid "Upload!"
 msgstr "Lataa uusi kuva!"
 
-#: templates/base.html:122 templates/user/profile.html:21
+#: templates/base.html:120 templates/user/profile.html:21
 #: templates/user/profile.html.py:24
 msgid "Logout"
 msgstr "Kirjaudu ulos"
 
-#: templates/base.html:129 templates/base.html.py:130
+#: templates/base.html:127 templates/base.html.py:128
 msgid "Notifications"
 msgstr "Ilmoitukset"
 
-#: templates/base.html:136 templates/base.html.py:137
+#: templates/base.html:134 templates/base.html.py:135
 msgid "Messages"
 msgstr "Viestit"
 
-#: templates/base.html:143 templates/base.html.py:144
+#: templates/base.html:141 templates/base.html.py:142
 msgid "Requests"
 msgstr "Pyynnöt"
 
-#: templates/base.html:154
+#: templates/base.html:152
 msgid "Have an invite? Login!"
 msgstr "Oletko saanut kutsun? Kirjaudu sisään!"
 
-#: templates/base.html:156
+#: templates/base.html:154
 msgid "Login"
 msgstr "Kirjaudu sisään"
 
-#: templates/base.html:162 templates/registration/login.html:8
+#: templates/base.html:160 templates/registration/login.html:8
 msgid "Register"
 msgstr "Rekisteröidy"
 
-#: templates/base.html:184
+#: templates/base.html:182
 msgid "Error"
 msgstr "Virhe"
 
-#: templates/base.html:186
+#: templates/base.html:184
 msgid "Info"
 msgstr "Info"
 
-#: templates/base.html:204
+#: templates/base.html:202
 msgid "About"
 msgstr "Tietoja AstroBinistä"
 
-#: templates/base.html:206
+#: templates/base.html:204
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the last place where you need to upload your "
@@ -562,19 +562,19 @@ msgstr ""
 "on tähtikuviesi lopullinen koti. Tähtikuvaajan suunnittelema, tähtikuvaajia "
 "varten. "
 
-#: templates/base.html:210
+#: templates/base.html:208
 msgid "Site links"
 msgstr "Linkit"
 
-#: templates/base.html:219
+#: templates/base.html:217
 msgid "Thanks to"
 msgstr "Kiitokset"
 
-#: templates/base.html:228
+#: templates/base.html:226
 msgid "Copyright"
 msgstr "Tekijänoikeus"
 
-#: templates/base.html:230
+#: templates/base.html:228
 msgid ""
 "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The "
 "images on this websites are copyright of their respective owners."
@@ -583,27 +583,31 @@ msgstr ""
 "pidätetty. Tällä internetsivulla olevien kuvien tekijänoikeudet kuuluvat "
 "kuvan julkaisijalle. "
 
-#: templates/base.html:249
+#: templates/base.html:247
 msgid "Follow AstroBin on Twitter"
 msgstr "Seuraa AstroBiniä Twitterissä"
 
-#: templates/base.html:250
+#: templates/base.html:248
 msgid "Back to top"
 msgstr "Takaisin ylös"
 
-#: templates/base.html:264
+#: templates/base.html:262
 msgid "Feedback"
 msgstr "Palaute"
 
-#: templates/base.html:293 templates/image/detail.html:313
+#: templates/base.html:272
+msgid "Cancel"
+msgstr ""
+
+#: templates/base.html:298 templates/image/detail.html:313
 msgid "Uploading..."
 msgstr "Ladataan..."
 
-#: templates/base.html:300 templates/image/detail.html:311
+#: templates/base.html:305 templates/image/detail.html:311
 msgid "No file selected"
 msgstr "Yhtään tiedostoa ei ole valittu"
 
-#: templates/base.html:301 templates/image/detail.html:312
+#: templates/base.html:306 templates/image/detail.html:312
 msgid "Choose file"
 msgstr "Valitse tiedosto"
 
@@ -1090,7 +1094,7 @@ msgstr "Kyllä, lopeta seuraaminen!"
 msgid "Send %(username)s a message"
 msgstr "Lähetä viesti käyttäjälle %(username)s"
 
-#: templates/image/detail.html:342 templates/messages/detail.html:23
+#: templates/image/detail.html:342 templates/messages/detail.html:25
 #: templates/messages/new.html:15
 msgid "Send"
 msgstr "Lähetä"
@@ -1145,50 +1149,50 @@ msgstr ""
 msgid "Edit your image: acquisition details"
 msgstr "Muokkaa kuvaasi: tekniset yksityiskohdat"
 
-#: templates/image/edit/acquisition.html:15
+#: templates/image/edit/acquisition.html:16
 msgid "Number of frames"
 msgstr "Ruutujen lukumäärä"
 
-#: templates/image/edit/acquisition.html:63
+#: templates/image/edit/acquisition.html:64
 msgid "Seeing (0-5)"
 msgstr "Seeing (0-5)"
 
-#: templates/image/edit/acquisition.html:71
+#: templates/image/edit/acquisition.html:72
 msgid "Transparency (0-10)"
 msgstr "Läpinäkyvyys (0-10)"
 
-#: templates/image/edit/acquisition.html:84
+#: templates/image/edit/acquisition.html:85
 msgid "yyyy-mm-dd"
 msgstr "vvvv-kk-pp"
 
-#: templates/image/edit/acquisition.html:87
+#: templates/image/edit/acquisition.html:88
 msgid "Universal time"
 msgstr "Yleisaika (UT)"
 
-#: templates/image/edit/acquisition.html:92
+#: templates/image/edit/acquisition.html:93
 msgid "hh:mm"
 msgstr "tt:mm"
 
-#: templates/image/edit/acquisition.html:97
-#: templates/image/edit/acquisition.html:117
+#: templates/image/edit/acquisition.html:98
+#: templates/image/edit/acquisition.html:118
 #: templates/image/edit/basic.html:42 templates/image/edit/gear.html:20
 #: templates/location/edit.html:16 templates/user/profile/edit/basic.html:20
 #: templates/user/profile/edit/gear.html:18
 msgid "Save"
 msgstr "Tallenna"
 
-#: templates/image/edit/acquisition.html:98
-#: templates/image/edit/acquisition.html:119
+#: templates/image/edit/acquisition.html:99
+#: templates/image/edit/acquisition.html:120
 msgid "Remove data"
 msgstr "Poista tiedot"
 
-#: templates/image/edit/acquisition.html:99
-#: templates/image/edit/acquisition.html:120
+#: templates/image/edit/acquisition.html:100
+#: templates/image/edit/acquisition.html:121
 #: templates/image/edit/basic.html:43 templates/image/edit/gear.html:21
 msgid "Return to image"
 msgstr "Palaa kuvaan"
 
-#: templates/image/edit/acquisition.html:105
+#: templates/image/edit/acquisition.html:106
 msgid ""
 "You can insert as many acquisition sessions as you want, as often images are "
 "taken across several nights. An acquisition session is defined primarily by "
@@ -1201,15 +1205,15 @@ msgstr ""
 "perusteella. Täytä tiedot ja klikkaa <strong>Tallenna</strong> "
 "lopettaaksesi, tai <strong>Lisää</strong> lisätäksesi muita kuvaussessioita."
 
-#: templates/image/edit/acquisition.html:109
+#: templates/image/edit/acquisition.html:110
 msgid "Acquisition session"
 msgstr "Kuvaussessio"
 
-#: templates/image/edit/acquisition.html:118
+#: templates/image/edit/acquisition.html:119
 msgid "Add more"
 msgstr "Lisää"
 
-#: templates/image/edit/acquisition.html:125
+#: templates/image/edit/acquisition.html:126
 msgid "What kind of image is this?"
 msgstr "Millainen kuva tämä on?"
 
@@ -1367,30 +1371,30 @@ msgstr "Lähettäjä"
 msgid "Subject"
 msgstr "Aihe"
 
-#: templates/messages/all.html:19 templates/messages/detail.html:9
+#: templates/messages/all.html:19 templates/messages/detail.html:12
 #: templates/requests/all.html:18
 msgid "at"
 msgstr "klo:"
 
-#: templates/messages/detail.html:11
-msgid "from"
-msgstr "käyttäjältä"
-
-#: templates/messages/detail.html:18
-msgid "Reply"
-msgstr "Vastaa"
-
-#: templates/messages/detail.html:37
-msgid "Message sent"
-msgstr "Viesti lähetetty"
-
-#: templates/messages/new.html:7
+#: templates/messages/detail.html:6 templates/messages/new.html:7
 msgid ""
 "Send a private message to a user. Messages are only shared between you and "
 "the recipient."
 msgstr ""
 "Lähetä käyttäjälle yksityisviesti. Viestit näkyvät vain sinulle ja "
 "vastaanottajalle."
+
+#: templates/messages/detail.html:14
+msgid "from"
+msgstr "käyttäjältä"
+
+#: templates/messages/detail.html:21
+msgid "Reply"
+msgstr "Vastaa"
+
+#: templates/messages/detail.html:38
+msgid "Message sent"
+msgstr "Viesti lähetetty"
 
 #: templates/messages/new.html:11
 msgid "Write a new private message to"
