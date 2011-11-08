@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load tags %}
 
 {% block content %}
     {% include 'image/edit/menu.html' %}
     <div class="sided-main-content" id="image-edit-gear">
         <h1>{% trans "Edit your image: gear used" %}</h1>
+        {% form_saved request %}
         <p>
         {% url profile_edit_gear as the_url %}
         {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your <a href="{{the_url}}">profile</a>!{% endblocktrans %}
@@ -15,7 +17,7 @@
             {{form.as_p}}
             <input type="hidden" name="image_id" value="{{image.id}}" />
             <ul>
-                <li><input class="button submit-button" type="submit" value="{% trans "Save and continue" %} &rarr;" /></li>
+                <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
                 <li><a href="{{image.get_absolute_url}}">{% trans "Return to image" %}</a></li>
             </ul>
         </form>
