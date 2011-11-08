@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 18:50+0000\n"
+"POT-Creation-Date: 2011-11-08 19:05+0000\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -1245,6 +1245,14 @@ msgstr "Lisää"
 #: templates/image/edit/acquisition.html:126
 msgid "What kind of image is this?"
 msgstr "Millainen kuva tämä on?"
+
+#: templates/image/edit/acquisition.html:129
+msgid "Solar system"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:132
+msgid "Deep sky"
+msgstr ""
 
 #: templates/image/edit/basic.html:8
 msgid "Edit your image: basic information"

@@ -197,7 +197,7 @@ def image_detail(request, id):
                 dsa_data['dates'].append(a.date)
                 m = MoonPhase(a.date)
                 moon_age_list.append(m.age)
-                moon_illuminated_list.append(m.illuminated)
+                moon_illuminated_list.append(m.illuminated * 100.0)
 
             if a.number and a.duration:
                 f = ""
@@ -238,7 +238,7 @@ def image_detail(request, id):
             (_('Flat darks'), u', '.join([str(x) for x in dsa_data['flat_darks']])),
             (_('Bias'), u', '.join([str(x) for x in dsa_data['bias']])),
             (_('Avg. Moon age'), "%.2f" % (average(moon_age_list), ) if moon_age_list else None),
-            (_('Avg. Moon phase'), "%.2f" % (average(moon_illuminated_list), ) if moon_illuminated_list else None),
+            (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list), ) if moon_illuminated_list else None),
             (_('Mean SQM'), "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None),
             (_('Mean FWHM'), "%.2f" % (average([float(x) for x in dsa_data['mean_fwhm']])) if dsa_data['mean_fwhm'] else None),
         )

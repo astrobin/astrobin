@@ -109,7 +109,7 @@ class ImageIndex(SearchIndex):
             for a in deep_sky_acquisitions:
                 if a.date is not None:
                     m = MoonPhase(a.date)
-                    moon_illuminated_list.append(m.illuminated)
+                    moon_illuminated_list.append(m.illuminated * 100.0)
 
         if len(moon_illuminated_list) == 0:
             # We must make an assumption between 0 and 100, or this won't
