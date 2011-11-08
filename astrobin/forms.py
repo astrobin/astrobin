@@ -18,6 +18,11 @@ class ImageUploadForm(forms.Form):
 
 
 class ImageEditPresolveForm(forms.ModelForm):
+    def __init__(self, user=None, **kwargs):
+        super(ImageEditPresolveForm, self).__init__(**kwargs)
+        self.fields['focal_length'].label = _("Focal length")
+        self.fields['pixel_size'].label = _("Pixel size")
+
     class Meta:
         model = Image
         fields = ('focal_length', 'pixel_size')
