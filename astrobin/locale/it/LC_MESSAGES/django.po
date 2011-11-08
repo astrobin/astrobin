@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 19:05+0000\n"
-"PO-Revision-Date: 2011-11-08 21:05+0200\n"
+"POT-Creation-Date: 2011-11-08 19:27+0000\n"
+"PO-Revision-Date: 2011-11-08 21:28+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -1363,11 +1363,36 @@ msgstr "Il tuo messaggio è stato spedito con successo."
 msgid "Here are your notifications"
 msgstr "Ecco le tue notifiche"
 
+#: templates/notification/email_body.txt:1
+#, python-format
+msgid ""
+"You have received the following notice from %(current_site)s:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"To see other notices or change how you receive notifications, please go to %(notices_url)s.\n"
+msgstr ""
+"Hai ricevuto la seguente notifica su %(current_site)s:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"Per vedere questa ed altre notifiche, vai al seguente indirizzo: %(notices_url)s.\n"
+
+#: templates/notification/attention_request/full.txt:2
+#, python-format
+msgid "%(originator)s would like to bring the following image to your attention: %(object_url)s"
+msgstr "%(originator)s vorrebbe portare la seguente immagine alla tua attenzione: %(object_url)s"
+
 #: templates/notification/attention_request/notice.html:2
 #: templates/notification/attention_request/short.html:1
 #, python-format
 msgid "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an image to your attention.</a>"
 msgstr "<a href=\"%(object_url)s\"<strong>%(originator)s</strong> vuole portare un'immagine alla tua attenzione.</a>"
+
+#: templates/notification/attention_request/short.txt:2
+#, python-format
+msgid "%(originator)s wants to bring an image to your attention"
+msgstr "%(originator)s vuole portare un immagine alla tua attenzione"
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -1376,8 +1401,10 @@ msgid "<a href=\"%(object_url)s\">You are now following <strong>%(object)s</stro
 msgstr "<a href=\"%(object_url)s\">Adesso stai seguendo <strong>%(object)s</strong>.</a>"
 
 #: templates/notification/image_deleted/full.html:2
+#: templates/notification/image_deleted/full.txt:2
 #: templates/notification/image_deleted/notice.html:2
 #: templates/notification/image_deleted/short.html:2
+#: templates/notification/image_deleted/short.txt:2
 msgid "Your image has been deleted."
 msgstr "La tua immagine è stata cancellata"
 
@@ -1399,11 +1426,25 @@ msgstr "<a href=\"%(object_url)s\">La tua immagine è stata processata.</a>"
 msgid "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr "<a href=\"%(object_url)s\">La risoluzione astrometrica della tua immagine è stata effettuata con successo.</a>"
 
+#: templates/notification/new_follower/full.txt:2
+#, python-format
+msgid "User %(object)s is now following you. They will be notified when you publish new images."
+msgstr "L'utente %(object)s ti sta seguendo. Sarà notificato quando pubblichi nuove immagini."
+
 #: templates/notification/new_follower/notice.html:2
 #: templates/notification/new_follower/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you.</a>"
 msgstr "<a href=\"%(object_url)s\"><strong>%(object)s</strong> ti sta seguendo.</a>"
+
+#: templates/notification/new_follower/short.txt:2
+msgid "You have a new follower!"
+msgstr "Una nuova persona ti segue!"
+
+#: templates/notification/new_image/full.txt:2
+#, python-format
+msgid "%(originator)s has published a new image! Check it out at the following url: %(object_url)s"
+msgstr "%(originator)s ha pubblicato una nuova immagine! Guardala al seguente indirizzo: %(object_url)s"
 
 #: templates/notification/new_image/notice.html:2
 #, python-format
@@ -1415,17 +1456,42 @@ msgstr "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ha pubblicato
 msgid "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a new image</a>"
 msgstr "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ha pubblicato una nuova immagine</a>"
 
+#: templates/notification/new_image/short.txt:2
+#, python-format
+msgid "New image by %(originator)s"
+msgstr "Nuova immagine da %(originator)s"
+
+#: templates/notification/new_image_revision/full.txt:2
+#, python-format
+msgid "%(originator)s has published a new image revision! Check it out at the following url: %(object_url)s"
+msgstr "%(originator)s ha pubblicato una nuova revisione di una sua immagine! Guardala al seguente indirizzo: %(object_url)s"
+
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a new image revision.</a>"
 msgstr "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ha pubblicato una nuova versione di una sua immagine.</a>"
 
+#: templates/notification/new_image_revision/short.txt:2
+#, python-format
+msgid "New image revision by %(originator)s"
+msgstr "Nuova revisione d'immagine da %(originator)s"
+
+#: templates/notification/request_fulfilled/full.txt:2
+#, python-format
+msgid "%(originator)s has fulfilled your request! Check it out at the following url: %(object_url)s"
+msgstr "%(originator)s ha soddisfatto la tua richiesta! Guardala al seguente indirizzo: %(object_url)s"
+
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled your request</a>"
 msgstr "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ha soddisfatto la tua richeista</a>"
+
+#: templates/notification/request_fulfilled/short.txt:2
+#, python-format
+msgid "%(originator)s has fulfilled your request."
+msgstr "L'utente %(originator)s ha soddisfatto la tua richiesta."
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
@@ -1459,6 +1525,19 @@ msgstr "Login"
 #: templates/registration/activate.html:14
 msgid "Account activation failed"
 msgstr "Attivazione dell'account fallita"
+
+#: templates/registration/activation_email.txt:2
+msgid "Activate account at"
+msgstr "Attiva l'account presso"
+
+#: templates/registration/activation_email.txt:6
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr "Il link è valido per %(expiration_days)s giorni."
+
+#: templates/registration/activation_email_subject.txt:1
+msgid "Account activation on"
+msgstr "Attivazione dell'account su"
 
 #: templates/registration/login.html:7
 msgid "Reset password"
@@ -1705,67 +1784,8 @@ msgstr "Ricorda che questi elementi si autocompletano, e devi premere TAB per ag
 #~ msgid "Posted by"
 #~ msgstr "Caricata da"
 
-#~ msgid ""
-#~ "%(originator)s would like to bring the following image to your attention: "
-#~ "%(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s vorrebbe portare la seguente immagine alla tua attenzione: "
-#~ "%(object_url)s"
-
-#~ msgid "%(originator)s wants to bring an image to your attention"
-#~ msgstr "%(originator)s vuole portare un immagine alla tua attenzione"
-
-#~ msgid ""
-#~ "User %(object)s is now following you. They will be notified when you "
-#~ "publish new images."
-#~ msgstr ""
-#~ "L'utente %(object)s ti sta seguendo. Sarà notificato quando pubblichi "
-#~ "nuove immagini."
-
-#~ msgid "You have a new follower!"
-#~ msgstr "Una nuova persona ti segue!"
-
-#~ msgid ""
-#~ "%(originator)s has published a new image! Check it out at the following "
-#~ "url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s ha pubblicato una nuova immagine! Guardala al seguente "
-#~ "indirizzo: %(object_url)s"
-
-#~ msgid "New image by %(originator)s"
-#~ msgstr "Nuova immagine da %(originator)s"
-
-#~ msgid ""
-#~ "%(originator)s has published a new image revision! Check it out at the "
-#~ "following url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s ha pubblicato una nuova revisione di una sua immagine! "
-#~ "Guardala al seguente indirizzo: %(object_url)s"
-
-#~ msgid "New image revision by %(originator)s"
-#~ msgstr "Nuova revisione d'immagine da %(originator)s"
-
-#~ msgid ""
-#~ "%(originator)s has fulfilled your request! Check it out at the following "
-#~ "url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s ha soddisfatto la tua richiesta! Guardala al seguente "
-#~ "indirizzo: %(object_url)s"
-
-#~ msgid "%(originator)s has fulfilled your request."
-#~ msgstr "L'utente %(originator)s ha soddisfatto la tua richiesta."
-
 #~ msgid "How can I get access?"
 #~ msgstr "Come posso ottenere l'accesso?"
-
-#~ msgid "Activate account at"
-#~ msgstr "Attiva l'account presso"
-
-#~ msgid "Link is valid for %(expiration_days)s days."
-#~ msgstr "Il link è valido per %(expiration_days)s giorni."
-
-#~ msgid "Account activation on"
-#~ msgstr "Attivazione dell'account su"
 
 #~ msgid "num"
 #~ msgstr "num"

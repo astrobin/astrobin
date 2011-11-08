@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 19:05+0000\n"
+"POT-Creation-Date: 2011-11-08 19:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1381,12 +1381,35 @@ msgstr ""
 msgid "Here are your notifications"
 msgstr ""
 
+#: templates/notification/email_body.txt:1
+#, python-format
+msgid ""
+"You have received the following notice from %(current_site)s:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"To see other notices or change how you receive notifications, please go to "
+"%(notices_url)s.\n"
+msgstr ""
+
+#: templates/notification/attention_request/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s would like to bring the following image to your attention: "
+"%(object_url)s"
+msgstr ""
+
 #: templates/notification/attention_request/notice.html:2
 #: templates/notification/attention_request/short.html:1
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
 "image to your attention.</a>"
+msgstr ""
+
+#: templates/notification/attention_request/short.txt:2
+#, python-format
+msgid "%(originator)s wants to bring an image to your attention"
 msgstr ""
 
 #: templates/notification/follow_success/notice.html:2
@@ -1398,8 +1421,10 @@ msgid ""
 msgstr ""
 
 #: templates/notification/image_deleted/full.html:2
+#: templates/notification/image_deleted/full.txt:2
 #: templates/notification/image_deleted/notice.html:2
 #: templates/notification/image_deleted/short.html:2
+#: templates/notification/image_deleted/short.txt:2
 msgid "Your image has been deleted."
 msgstr ""
 
@@ -1422,12 +1447,30 @@ msgid ""
 "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr ""
 
+#: templates/notification/new_follower/full.txt:2
+#, python-format
+msgid ""
+"User %(object)s is now following you. They will be notified when you publish "
+"new images."
+msgstr ""
+
 #: templates/notification/new_follower/notice.html:2
 #: templates/notification/new_follower/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you."
 "</a>"
+msgstr ""
+
+#: templates/notification/new_follower/short.txt:2
+msgid "You have a new follower!"
+msgstr ""
+
+#: templates/notification/new_image/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image! Check it out at the following url: "
+"%(object_url)s"
 msgstr ""
 
 #: templates/notification/new_image/notice.html:2
@@ -1444,6 +1487,18 @@ msgid ""
 "new image</a>"
 msgstr ""
 
+#: templates/notification/new_image/short.txt:2
+#, python-format
+msgid "New image by %(originator)s"
+msgstr ""
+
+#: templates/notification/new_image_revision/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image revision! Check it out at the "
+"following url: %(object_url)s"
+msgstr ""
+
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
 #, python-format
@@ -1452,12 +1507,29 @@ msgid ""
 "new image revision.</a>"
 msgstr ""
 
+#: templates/notification/new_image_revision/short.txt:2
+#, python-format
+msgid "New image revision by %(originator)s"
+msgstr ""
+
+#: templates/notification/request_fulfilled/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has fulfilled your request! Check it out at the following "
+"url: %(object_url)s"
+msgstr ""
+
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
 "your request</a>"
+msgstr ""
+
+#: templates/notification/request_fulfilled/short.txt:2
+#, python-format
+msgid "%(originator)s has fulfilled your request."
 msgstr ""
 
 #: templates/notification/unfollow_success/notice.html:2
@@ -1496,6 +1568,19 @@ msgstr ""
 
 #: templates/registration/activate.html:14
 msgid "Account activation failed"
+msgstr ""
+
+#: templates/registration/activation_email.txt:2
+msgid "Activate account at"
+msgstr ""
+
+#: templates/registration/activation_email.txt:6
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr ""
+
+#: templates/registration/activation_email_subject.txt:1
+msgid "Account activation on"
 msgstr ""
 
 #: templates/registration/login.html:7
