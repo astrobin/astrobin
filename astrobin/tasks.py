@@ -77,6 +77,7 @@ def solve_image(image, lang, callback=None):
                '--scale-low', str(scale_low),
                '--scale-high', str(scale_high),
                '--verbose',
+               '--continue',
                path + uid + original_ext]
     run_popen_with_timeout(command, SUBPROCESS_EXPIRE)
 
