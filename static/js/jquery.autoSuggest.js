@@ -24,6 +24,7 @@
         var defaults = { 
             asHtmlID: false,
             startText: "Enter Name Here",
+            resultsTitleText: "Matching items",
             emptyText: "No Results Found",
             preFill: {},
             limitText: "No More Selections Are Allowed",
@@ -37,7 +38,7 @@
             minChars: 1,
             keyDelay: 400,
             resultsHighlight: true,
-            neverSubmit: false,
+            neverSubmit: true,
             selectionLimit: false,
             showResultList: true,
             start: function(){},
@@ -254,8 +255,8 @@
                 function processData(data, query){
                     if (!opts.matchCase){ query = query.toLowerCase(); }
                     var matchCount = 0;
-                    results_holder.html(results_ul.html("")).hide();
-                    for(var i=0;i<d_count;i++){             
+                    results_holder.html(results_ul.html("<li><h1>" +  opts.resultsTitleText + "</h1></li>")).hide();
+                    for(var i=0;i<d_count;i++){
                         var num = i;
                         num_count++;
                         var forward = false;

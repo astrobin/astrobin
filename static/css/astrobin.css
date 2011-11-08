@@ -1211,6 +1211,15 @@ ul.as-list {
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
 }
+ul.as-list h1 {
+  color: #333333;
+  font-size: 14px;
+  border: none;
+  margin: 0 12px 4px;
+  padding: 0;
+  font-weight: bold;
+  text-align: left;
+}
 li.as-result-item, li.as-message {
   margin: 0 0 0 0;
   padding: 4px 12px;
