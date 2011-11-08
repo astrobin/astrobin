@@ -191,7 +191,9 @@ CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},
                  "plate_solve": {"exchange":"plate_solve", "binding_key":"plate_solve_key"}
                 }
 CELERY_DEFAULT_QUEUE = "default"
-CELERY_ROUTES = {"astrobin.tasks.solve_image" : {"queue":"plate_solve", "routing_key":"plate_solve_key"}}
+CELERY_ROUTES = {"astrobin.tasks.solve_image" : {"queue":"plate_solve", "routing_key":"plate_solve_key"},
+                 "astrobin.tasks.image_solved_callback" : {"queue":"plate_solve", "routing_key":"plate_solve_key"},
+                }
 
 CELERYD_NODES = "w1 w2 w3 w4"
 CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG"
