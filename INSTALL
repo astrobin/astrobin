@@ -25,7 +25,9 @@ sudo apt-get install \
 	libnetpbm10-dev \
 	python-numpy \
 	gettext \
-	python-egenix-mxdatetime
+	python-egenix-mxdatetime \
+	supervisor
+
 sudo apt-file update
 sudo pip install virtualenv
 
@@ -104,7 +106,7 @@ easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
 cd xapian-core-1.2.6
 ./configure --prefix=/opt && make && sudo make install
 cd ../xapian-bindings-1.2.6
-XAPIAN_CONFIG=/opt/bin/xapian-config ./configure --prefix=/opt && make && sudo make install
+XAPIAN_CONFIG=/opt/bin/xapian-config ./configure --prefix=../venv/lib/python2.7/site-packages && make && sudo make install
 deactivate
 
 
@@ -114,12 +116,12 @@ deactivate
 mysql -u user -p (password is astrobin)
 > create user 'astrobin'@'localhost' identified by 'astrobin';
 > create database astrobin character set utf8;
-> use atrobin;
+> use astrobin;
 > grant all privileges on *.* to 'astrobin'@'localhost' identified by 'password';
 
 # Initialize db
 ./scripts/syncdb.sh
-(When asked, do create super user astrobin:astrobin <astrobin@astrobin.com>)
+(When asked, do create super user astrobin:password <astrobin@astrobin.com>)
 
 
 # Build nginx:
@@ -133,6 +135,11 @@ sudo make install
 # Use nginx config
 Add 'include /home/astrobin/Code/astrobin/astrobin.com.nginx;' to the http{} section of /usr/local/nginx/conf/nginx.conf.
 
+Also set these in /usr/local/nginx/conf/nginx.conf
+
+    client_max_body_size 20m;
+    worker_processes 4;
+
 
 # Configure rabbitmq:
 # ===================
@@ -144,6 +151,8 @@ sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 
 # Build astrometry.net:
 # =====================
+
+If on 64bit, use gcc-4.4.
 
 cd astrometry.net-0.38
 ./configure
@@ -160,7 +169,7 @@ sudo make install
 # Add new language:
 # =================
 cd astrobin;
-../venv/bin/django-admin.py makemessages -l se # Example for swedish
+../venv/bin/django-admin.py makemessages -l se -e txt,html,py # Example for swedish
 
 
 # Compile languages:
@@ -175,17 +184,17 @@ Go to: http://localhost/admin/sites/site/1/
 
 and set site's properties.
 
+# Set up supervisor
+Copy scripts/supervisord/* to /etc/supervisord/conf.d/
 
 # Run it!
 # =======
-./scripts/nginx.sh
-./scripts/celeryd_default.sh &
-./scripts/celeryd_plate_solve.sh &
-./scripts/gunicorn.sh &
-
-or use ./start.sh
+sudo supervisorctl start all
 
 # (replace gunicorn.sh with run.sh if you want to debug)
+sudo supervisorctl stop gunicorn
+./scripts/run.sh
+
 
 Go to http://localhost/
 
