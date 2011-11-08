@@ -5,6 +5,7 @@
     {% include 'image/edit/menu.html' %}   
     <div class="sided-main-content">
     <h1>{% trans "Edit your image: basic information" %}</h1>
+    <p id="form_help_text" style="display:none">{% blocktrans %}Remember that the location field autocompletes, and you need to press TAB to add something to your list. If it's not in a white box, it doesn't get saved!{% endblocktrans %}
     <form action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
         <div id="js_form" style="display:none">
             {{form.as_p}}
@@ -46,13 +47,14 @@
 {% block extra_js %}
 <script language="javascript">
     $(document).ready(function() {
+        $('p#form_help_text').show();
         $('#js_form').show();
 
         {% autoescape off %}
         {% for key, value in prefill_dict.items %}
         var startText = '{{value.1}}';
         var emptyText = '{{value.2}}';
-
+        var resultsTitleText = '{{value.3}}';
         $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
             {asHtmlID: '{{key}}',
             selectedItemProp: 'name',
@@ -61,7 +63,8 @@
             selectedItemProp: 'name',
             selectedValuesProp: 'id',
             startText: startText,
-            emptyText: emptyText});
+            emptyText: emptyText,
+            resultsTitleText: resultsTitleText});
         {% endfor %}
         {% endautoescape %}
     });
