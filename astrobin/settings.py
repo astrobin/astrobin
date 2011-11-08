@@ -25,8 +25,8 @@ DATABASES = {
 }
 DEFAULT_CHARSET = 'utf-8'
 
-ASTROBIN_BASE_URL = 'http://localhost'
-ASTROBIN_SHORT_BASE_URL = 'http://localhost'
+ASTROBIN_BASE_URL = 'http://astrobin.com'
+ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
 ASTROBIN_BASE_PATH = '/home/astrobin/Code/astrobin'
 UPLOADS_DIRECTORY = ASTROBIN_BASE_PATH + '/uploads/'
