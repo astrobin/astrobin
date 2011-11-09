@@ -101,7 +101,7 @@ $(function() {
                     data: ({'flickr_selected_photos': selected_photos}),
                     success: function(data) {
                         $('p#flickr_progress_message').hide();
-                        $('p#flickr_progress').html('{% blocktrans %}Done! Go to <a href="/me">your profile</a> to see the new pictures (and keep an eye on your notifications)!{% endblocktrans %}');
+                        $('p#flickr_progress').html("{% blocktrans %}Done! Go to <a href=\"/me\">your profile</a> to see the new pictures (and keep an eye on your notifications)!{% endblocktrans %}");
                     }
             });
         }
