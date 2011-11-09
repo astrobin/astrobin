@@ -2,7 +2,9 @@
 # ======================
 
 # We need Mercurial 1.8+ for git submodule support
-sudo add-apt-repository ppa:mercurial-ppa/releases
+#
+# It's included in Ubuntu 11.10
+# sudo add-apt-repository ppa:mercurial-ppa/releases
 
 sudo apt-get update
 sudo apt-get install \
@@ -26,7 +28,8 @@ sudo apt-get install \
 	python-numpy \
 	gettext \
 	python-egenix-mxdatetime \
-	supervisor
+	supervisor \
+	gcc-4.4
 
 sudo apt-file update
 sudo pip install virtualenv
@@ -106,18 +109,18 @@ easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
 cd xapian-core-1.2.6
 ./configure --prefix=/opt && make && sudo make install
 cd ../xapian-bindings-1.2.6
-XAPIAN_CONFIG=/opt/bin/xapian-config ./configure --prefix=../venv/lib/python2.7/site-packages && make && sudo make install
+XAPIAN_CONFIG=/opt/bin/xapian-config ./configure --prefix=/home/astrobin/Code/astrobin/venv/lib/python2.7/site-packages && make && sudo make install
 deactivate
 
 
 # Set up MySQL:
 # =============
 
-mysql -u user -p (password is astrobin)
-> create user 'astrobin'@'localhost' identified by 'astrobin';
-> create database astrobin character set utf8;
-> use astrobin;
-> grant all privileges on *.* to 'astrobin'@'localhost' identified by 'password';
+mysql -u root -p
+create user 'astrobin'@'localhost' identified by 'password';
+create database astrobin character set utf8;
+use astrobin;
+grant all privileges on *.* to 'astrobin'@'localhost' identified by 'password';
 
 # Initialize db
 ./scripts/syncdb.sh
@@ -129,6 +132,7 @@ mysql -u user -p (password is astrobin)
 
 cd nginx-1.0.4
 ./configure --add-module=../nginx_http_push_module
+# Remove -Werror and -g in objs/Makefile
 make
 sudo make install
 
@@ -151,14 +155,20 @@ sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 
 # Build astrometry.net:
 # =====================
-
-If on 64bit, use gcc-4.4.
-
 cd astrometry.net-0.38
 ./configure
-make
-make extra
+CC="gcc-4.4" make
+CC="gcc-4.4" make extra
 sudo make install
+
+# Set up supervisor
+sudo cp scripts/supervisord/* to /etc/supervisor/conf.d/
+sudo mkdir /var/log/{celeryd,gunicorn}
+
+# Run it!
+# =======
+sudo /usr/local/nginx/sbin/nginx
+sudo supervisorctl start all
 
 
 # Build index:
@@ -183,13 +193,6 @@ cd astrobin;
 Go to: http://localhost/admin/sites/site/1/
 
 and set site's properties.
-
-# Set up supervisor
-Copy scripts/supervisord/* to /etc/supervisord/conf.d/
-
-# Run it!
-# =======
-sudo supervisorctl start all
 
 # (replace gunicorn.sh with run.sh if you want to debug)
 sudo supervisorctl stop gunicorn
