@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 06:05+0000\n"
+"POT-Creation-Date: 2011-11-09 08:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -626,10 +626,28 @@ msgid "Frequently Asked Questions"
 msgstr ""
 
 #: templates/faq.html:9
+msgid "Is this website for free?"
+msgstr ""
+
+#: templates/faq.html:10
+msgid "Yes. AstroBin is completely free!"
+msgstr ""
+
+#: templates/faq.html:13
+msgid "Are there any limits on how large and how many images I can upload?"
+msgstr ""
+
+#: templates/faq.html:15
+msgid ""
+"<strong>NO!</strong> On AstroBin you can upload as many images as you want, "
+"and as large as you want. In fact, full size images encouraged!"
+msgstr ""
+
+#: templates/faq.html:19
 msgid "Where did you get the idea for this site?"
 msgstr ""
 
-#: templates/faq.html:11
+#: templates/faq.html:21
 msgid ""
 "I'm an astrophotographer myself, and an active member of several amateur "
 "astronomy forums. For some time I have seen how lots and lots of valuable "
@@ -638,7 +656,7 @@ msgid ""
 "various places of disposable content."
 msgstr ""
 
-#: templates/faq.html:14
+#: templates/faq.html:24
 msgid ""
 "I realized that the astrophotography community was lacking a central hub. It "
 "needed a way to store all the data it was producing in a reliable and "
@@ -646,11 +664,11 @@ msgid ""
 "deserves."
 msgstr ""
 
-#: templates/faq.html:18
+#: templates/faq.html:28
 msgid "What are the plans for the future?"
 msgstr ""
 
-#: templates/faq.html:20
+#: templates/faq.html:30
 msgid ""
 "<em>AstroBin</em> is just starting out, and this time we can really say that "
 "the sky is the limit! I've got tons of ideas in the pipeline. As the user "
@@ -659,14 +677,14 @@ msgid ""
 "AstroBin could compare it to pictures of the same galaxy taken previously."
 msgstr ""
 
-#: templates/faq.html:23
+#: templates/faq.html:33
 msgid ""
 "AstroBin could also recommend subjects for you to image! Knowing your "
 "equipment, your location, and comparing what you have imaged to what users "
 "similar to you have, AstroBin could suggest your next challange!"
 msgstr ""
 
-#: templates/faq.html:26
+#: templates/faq.html:36
 msgid ""
 "Another interesting possibility are <em>Smart Albums</em>. Since all your "
 "images are supposed to be accompanied by lots of data about their "
@@ -676,7 +694,7 @@ msgid ""
 "or by year."
 msgstr ""
 
-#: templates/faq.html:29
+#: templates/faq.html:39
 msgid ""
 "Then there are stats, or course. As the amount of data increases, there is "
 "literally no limit at the amount of interesting stats that can be concieved."
