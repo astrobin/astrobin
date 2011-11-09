@@ -582,7 +582,8 @@ def image_edit_save_basic(request):
                 subjects = simbad.find_subjects(id.strip())
                 if subjects:
                     k = subjects[0]
-            image.subjects.add(k)
+            if k:
+                image.subjects.add(k)
     prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
                                 _("Enter partial name and wait for the suggestions!"),
                                 _("No results. Sorry.")]

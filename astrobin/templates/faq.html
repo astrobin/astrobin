@@ -38,6 +38,12 @@
             <p>
             {% blocktrans %}Then there are stats, or course. As the amount of data increases, there is literally no limit at the amount of interesting stats that can be concieved.{% endblocktrans %}
             </p>
+        </li>
+        <li>
+            <h4>{% blocktrans %}Why won't my image get plate-solved?{% endblocktrans %}</h4>
+            <p>{% blocktrans %}Most images should get plate-solved if you've specified the correct pixel scale. When you're asked for the focal length of the telescope and the pixel size of the camera, remember that you have to consider binning and, importantly, image scaling. That means that if you resized the image before submitting to AstroBin, you have to take that into account when you write your pixel size. If you resized your image by 50%, then you have to double the size of the pixel.{% endblocktrans %}</p>
+        </li>
+    </ol>
     </div>
 {% endblock %}
 

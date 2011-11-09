@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 08:07+0000\n"
-"PO-Revision-Date: 2011-11-09 10:07+0200\n"
+"POT-Creation-Date: 2011-11-09 17:03+0000\n"
+"PO-Revision-Date: 2011-11-09 19:05+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -373,8 +373,8 @@ msgstr "Immagine non valida."
 #: views.py:404
 #: views.py:549
 #: views.py:552
-#: views.py:587
-#: views.py:616
+#: views.py:588
+#: views.py:617
 #: templates/user/profile/edit/basic.html:34
 #: templates/user/profile/edit/gear.html:29
 msgid "Enter partial name and wait for the suggestions!"
@@ -382,8 +382,8 @@ msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
 #: views.py:401
 #: views.py:550
-#: views.py:588
-#: views.py:617
+#: views.py:589
+#: views.py:618
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
@@ -402,25 +402,25 @@ msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:704
+#: views.py:705
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:709
-#: views.py:746
+#: views.py:710
+#: views.py:747
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1199
+#: views.py:1200
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1258
+#: views.py:1259
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1282
+#: views.py:1283
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -739,6 +739,15 @@ msgstr "Un'altra possibilità interessante è quella degli <em>Album Intelligent
 #: templates/faq.html:39
 msgid "Then there are stats, or course. As the amount of data increases, there is literally no limit at the amount of interesting stats that can be concieved."
 msgstr "E poi ci sono le statitiche, ovviamente. Con l'aumentare della quantità di dati, non c'è veramente alcun limite alla mole di statistiche interessanti che possono essere concepite."
+
+#: templates/faq.html:43
+msgid "Why won't my image get plate-solved?"
+msgstr "Perché la risoluzione astrometrica della mia immagine non funziona?"
+
+#: templates/faq.html:44
+#, python-format
+msgid "Most images should get plate-solved if you've specified the correct pixel scale. When you're asked for the focal length of the telescope and the pixel size of the camera, remember that you have to consider binning and, importantly, image scaling. That means that if you resized the image before submitting to AstroBin, you have to take that into account when you write your pixel size. If you resized your image by 50%%, then you have to double the size of the pixel."
+msgstr "La maggior parte delle immagini vengono risolve astrometricamente con successo, se specifichi la corretta scala del pixel. Quando ti si chiede la lunghezza focale del telescopio e la dimensione del pixel della camera, ricordati che devi tenere in considerazione il binning, e, questo è importante, l'eventuale ridimensionamento dell'immagine. Questo vuol dire che se hai ridimensionato l'immagine prima di caricarla su AstroBin, allora devi tenerlo in considerazione quando specifichi la dimensione del pixel. Se hai ridimensionato l'immagine rimpicciolendola al 50%%, allora devi raddoppiare la dimensione del pixel."
 
 #: templates/help.html:7
 msgid "What is this site?"
@@ -1276,8 +1285,8 @@ msgid "AstroBin <em>could</em> plate-solve your image without knowing anything a
 msgstr "AstroBin <em>potrebbe</em> effettuare la risoluzione astrometrica della tua immagine senza alcuna informazione su di essa, ma si tratta di un procedimento molto lungo. Se conosci la lunghezza focale del tuo telescopio e la dimensione dei singoli pixel della tua camera, la risoluzione astrometrica può essere molto più veloce ed avere una miglior possibilità di successo!"
 
 #: templates/image/edit/presolve.html:23
-msgid "PS: It's OK if you're a little off with these numbers."
-msgstr "PS: non fa niente se non sei precisissimo con questi numeri."
+msgid "PS: It's OK if you're a little off with these numbers. It's OK if you have cropped your image, but if you have resized it plate-solving will probably fail, unless you account for the resizing in the pixel-scale input field."
+msgstr "PS: non fa niente se non sei precisissimo con questi numeri. Va bene se hai croppato la foto, ma se l'hai ridimensionata allora la risoluzione astrometrica potrebbe non riuscire, a meno che non prendi in considerazione questo ridimensionamento quando specifici la dimensione del pixel."
 
 #: templates/image/edit/presolve.html:30
 msgid "Start plate-solving"
@@ -1832,6 +1841,9 @@ msgstr "Ricorda che questi elementi si autocompletano, e devi premere TAB per ag
 #: templates/user/profile/edit/gear.html:11
 msgid "Please use full names (make and model) for all your gear items!"
 msgstr "Ti raccomando di usare nomi completi (marca e modello) per tutti gli elementi della tua strumentazione!"
+
+#~ msgid "PS: It's OK if you're a little off with these numbers."
+#~ msgstr "PS: non fa niente se non sei precisissimo con questi numeri."
 
 #~ msgid "Done!"
 #~ msgstr "Fatto!"

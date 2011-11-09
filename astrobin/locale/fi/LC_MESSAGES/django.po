@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 08:07+0000\n"
+"POT-Creation-Date: 2011-11-09 17:03+0000\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -319,13 +319,13 @@ msgstr "Kuun vaiheen keskiarvo"
 msgid "Invalid image."
 msgstr "Virheellinen kuva."
 
-#: views.py:400 views.py:404 views.py:549 views.py:552 views.py:587
-#: views.py:616 templates/user/profile/edit/basic.html:34
+#: views.py:400 views.py:404 views.py:549 views.py:552 views.py:588
+#: views.py:617 templates/user/profile/edit/basic.html:34
 #: templates/user/profile/edit/gear.html:29
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Syötä nimen osa ja odota ehdotuksia!"
 
-#: views.py:401 views.py:550 views.py:588 views.py:617
+#: views.py:401 views.py:550 views.py:589 views.py:618
 msgid "No results. Sorry."
 msgstr "Ei tuloksia, pahoitteluni."
 
@@ -342,25 +342,25 @@ msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:704
+#: views.py:705
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views.py:709 views.py:746
+#: views.py:710 views.py:747
 msgid "There was an error. Check your input!"
 msgstr "Virhe. Tarkista tiedot!"
 
-#: views.py:1199
+#: views.py:1200
 msgid "RE"
 msgstr "VS"
 
-#: views.py:1258
+#: views.py:1259
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1282
+#: views.py:1283
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -712,6 +712,22 @@ msgstr ""
 msgid ""
 "Then there are stats, or course. As the amount of data increases, there is "
 "literally no limit at the amount of interesting stats that can be concieved."
+msgstr ""
+
+#: templates/faq.html:43
+msgid "Why won't my image get plate-solved?"
+msgstr ""
+
+#: templates/faq.html:44
+#, python-format
+msgid ""
+"Most images should get plate-solved if you've specified the correct pixel "
+"scale. When you're asked for the focal length of the telescope and the pixel "
+"size of the camera, remember that you have to consider binning and, "
+"importantly, image scaling. That means that if you resized the image before "
+"submitting to AstroBin, you have to take that into account when you write "
+"your pixel size. If you resized your image by 50%%, then you have to double "
+"the size of the pixel."
 msgstr ""
 
 #: templates/help.html:7
@@ -1411,7 +1427,10 @@ msgid ""
 msgstr ""
 
 #: templates/image/edit/presolve.html:23
-msgid "PS: It's OK if you're a little off with these numbers."
+msgid ""
+"PS: It's OK if you're a little off with these numbers. It's OK if you have "
+"cropped your image, but if you have resized it plate-solving will probably "
+"fail, unless you account for the resizing in the pixel-scale input field."
 msgstr ""
 
 #: templates/image/edit/presolve.html:30

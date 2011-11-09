@@ -20,7 +20,7 @@
     <p>
     {% blocktrans %}AstroBin <em>could</em> plate-solve your image without knowing anything about it, but that's a very long process. If you know the focal length of your telescope and the pixel size of your camera, plate-solving will be much faster and will have a better chance of success!{% endblocktrans %}
     </p>
-    <p>{% blocktrans %}PS: It's OK if you're a little off with these numbers.{% endblocktrans %}</p>
+    <p>{% blocktrans %}PS: It's OK if you're a little off with these numbers. It's OK if you have cropped your image, but if you have resized it plate-solving will probably fail, unless you account for the resizing in the pixel-scale input field.{% endblocktrans %}</p>
     <form action="{% url image_edit_save_presolve %}" method="post">{% csrf_token %}
         {{form.as_p}}
         <input type="hidden" name="image_id" value="{{image.id}}" />
