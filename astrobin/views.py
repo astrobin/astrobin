@@ -1330,6 +1330,12 @@ def help(request):
         context_instance=RequestContext(request))
 
 
+@require_GET
+def faq(request):
+    return render_to_response('faq.html',
+        context_instance=RequestContext(request))
+
+
 @login_required
 @require_GET
 def location_edit(request, id):
