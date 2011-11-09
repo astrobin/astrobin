@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 05:33+0000\n"
+"POT-Creation-Date: 2011-11-09 06:01+0000\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -321,7 +321,7 @@ msgstr "Virheellinen kuva."
 
 #: views.py:400 views.py:404 views.py:549 views.py:552 views.py:587
 #: views.py:616 templates/user/profile/edit/basic.html:34
-#: templates/user/profile/edit/gear.html:28
+#: templates/user/profile/edit/gear.html:29
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Syötä nimen osa ja odota ehdotuksia!"
 
@@ -338,7 +338,7 @@ msgid "No results. Press TAB to create this location!"
 msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 
 #: views.py:406 templates/user/profile/edit/basic.html:36
-#: templates/user/profile/edit/gear.html:30
+#: templates/user/profile/edit/gear.html:31
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
@@ -485,97 +485,97 @@ msgstr "Englanti"
 msgid "Italian"
 msgstr "Italia"
 
-#: templates/base.html:70
+#: templates/base.html:71
 msgid "Finnish"
 msgstr "Suomi"
 
-#: templates/base.html:80
+#: templates/base.html:82
 msgid "Search images by subject or gear"
 msgstr "Etsi kuvia kohteen tai laitteen perusteella"
 
-#: templates/base.html:81
+#: templates/base.html:83
 msgid "Start typing and hit ENTER"
 msgstr "Ala kirjoittaa ja paina ENTER"
 
-#: templates/base.html:84 templates/base.html.py:85
+#: templates/base.html:86 templates/base.html.py:87
 #: templates/search/search.html:10
 msgid "Search"
 msgstr "Etsi"
 
-#: templates/base.html:93
+#: templates/base.html:95
 msgid "The definitive home for your astrophotography."
 msgstr "Paras paikka tähtikuvillesi."
 
-#: templates/base.html:101 templates/base.html.py:216 templates/base.html:251
+#: templates/base.html:103 templates/base.html.py:218 templates/base.html:253
 msgid "Home"
 msgstr "Etusivu"
 
-#: templates/base.html:102 templates/base.html.py:217
+#: templates/base.html:104 templates/base.html.py:219
 msgid "Help"
 msgstr "Ohjeita"
 
-#: templates/base.html:103
+#: templates/base.html:105
 msgid "FAQ"
 msgstr ""
 
-#: templates/base.html:116
+#: templates/base.html:118
 msgid "View your profile"
 msgstr "Katsele profiiliasi"
 
-#: templates/base.html:119
+#: templates/base.html:121
 msgid "Edit your profile"
 msgstr "Muokkaa profiiliasi"
 
-#: templates/base.html:122
+#: templates/base.html:124
 msgid "Upload an image"
 msgstr "Lataa kuva"
 
-#: templates/base.html:122
+#: templates/base.html:124
 msgid "Upload!"
 msgstr "Lataa uusi kuva!"
 
-#: templates/base.html:125 templates/user/profile.html:21
+#: templates/base.html:127 templates/user/profile.html:21
 #: templates/user/profile.html.py:24
 msgid "Logout"
 msgstr "Kirjaudu ulos"
 
-#: templates/base.html:132 templates/base.html.py:133
+#: templates/base.html:134 templates/base.html.py:135
 msgid "Notifications"
 msgstr "Ilmoitukset"
 
-#: templates/base.html:139 templates/base.html.py:140
+#: templates/base.html:141 templates/base.html.py:142
 msgid "Messages"
 msgstr "Viestit"
 
-#: templates/base.html:146 templates/base.html.py:147
+#: templates/base.html:148 templates/base.html.py:149
 msgid "Requests"
 msgstr "Pyynnöt"
 
-#: templates/base.html:157
+#: templates/base.html:159
 msgid "Have an invite? Login!"
 msgstr "Oletko saanut kutsun? Kirjaudu sisään!"
 
-#: templates/base.html:159
+#: templates/base.html:161
 msgid "Login"
 msgstr "Kirjaudu sisään"
 
-#: templates/base.html:165 templates/registration/login.html:8
+#: templates/base.html:167 templates/registration/login.html:8
 msgid "Register"
 msgstr "Rekisteröidy"
 
-#: templates/base.html:187
+#: templates/base.html:189
 msgid "Error"
 msgstr "Virhe"
 
-#: templates/base.html:189 templates/image/detail.html:8
+#: templates/base.html:191 templates/image/detail.html:8
 msgid "Info"
 msgstr "Info"
 
-#: templates/base.html:207
+#: templates/base.html:209
 msgid "About"
 msgstr "Tietoja AstroBinistä"
 
-#: templates/base.html:209
+#: templates/base.html:211
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the last place where you need to upload your "
@@ -586,19 +586,19 @@ msgstr ""
 "on tähtikuviesi lopullinen koti. Tähtikuvaajan suunnittelema, tähtikuvaajia "
 "varten. "
 
-#: templates/base.html:213
+#: templates/base.html:215
 msgid "Site links"
 msgstr "Linkit"
 
-#: templates/base.html:222
+#: templates/base.html:224
 msgid "Thanks to"
 msgstr "Kiitokset"
 
-#: templates/base.html:231
+#: templates/base.html:233
 msgid "Copyright"
 msgstr "Tekijänoikeus"
 
-#: templates/base.html:233
+#: templates/base.html:235
 msgid ""
 "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The "
 "images on this websites are copyright of their respective owners."
@@ -607,31 +607,31 @@ msgstr ""
 "pidätetty. Tällä internetsivulla olevien kuvien tekijänoikeudet kuuluvat "
 "kuvan julkaisijalle. "
 
-#: templates/base.html:252
+#: templates/base.html:254
 msgid "Follow AstroBin on Twitter"
 msgstr "Seuraa AstroBiniä Twitterissä"
 
-#: templates/base.html:253
+#: templates/base.html:255
 msgid "Back to top"
 msgstr "Takaisin ylös"
 
-#: templates/base.html:267
+#: templates/base.html:269
 msgid "Feedback"
 msgstr "Palaute"
 
-#: templates/base.html:277
+#: templates/base.html:279
 msgid "Cancel"
 msgstr "Peruta"
 
-#: templates/base.html:302 templates/image/detail.html:333
+#: templates/base.html:304 templates/image/detail.html:331
 msgid "Uploading..."
 msgstr "Ladataan..."
 
-#: templates/base.html:309 templates/image/detail.html:331
+#: templates/base.html:311 templates/image/detail.html:329
 msgid "No file selected"
 msgstr "Yhtään tiedostoa ei ole valittu"
 
-#: templates/base.html:310 templates/image/detail.html:332
+#: templates/base.html:312 templates/image/detail.html:330
 msgid "Choose file"
 msgstr "Valitse tiedosto"
 
@@ -979,7 +979,7 @@ msgstr "Muokkaa käytettyjä laitteita"
 msgid "Edit acquisition details"
 msgstr "Muokkaa teknisiä tietoja"
 
-#: templates/image/detail.html:42 templates/image/detail.html.py:327
+#: templates/image/detail.html:42 templates/image/detail.html.py:325
 msgid "Upload new revision"
 msgstr "Lataa uusi versio"
 
@@ -996,11 +996,11 @@ msgstr "Poista"
 msgid "Bring to a user's attention"
 msgstr "Huomauta käyttäjälle"
 
-#: templates/image/detail.html:59 templates/image/detail.html.py:382
+#: templates/image/detail.html:59 templates/image/detail.html.py:380
 msgid "Request additional information"
 msgstr "Pyydä lisätietoja"
 
-#: templates/image/detail.html:62 templates/image/detail.html.py:388
+#: templates/image/detail.html:62 templates/image/detail.html.py:386
 msgid "Request TIFF/FITS"
 msgstr "Pyydä TIFF/FITS tiedostoa"
 
@@ -1024,11 +1024,11 @@ msgstr "Merkitty"
 msgid "View profile"
 msgstr "Katsele profiilia"
 
-#: templates/image/detail.html:104 templates/image/detail.html.py:348
+#: templates/image/detail.html:104 templates/image/detail.html.py:346
 msgid "Stop following"
 msgstr "Lopeta seuraaminen"
 
-#: templates/image/detail.html:106 templates/image/detail.html.py:356
+#: templates/image/detail.html:106 templates/image/detail.html.py:354
 msgid "Follow"
 msgstr "Seuraa"
 
@@ -1113,36 +1113,36 @@ msgstr "Sama kaukoputki"
 msgid "Same imaging camera"
 msgstr "Sama kamera"
 
-#: templates/image/detail.html:318
+#: templates/image/detail.html:316
 msgid "Bad"
 msgstr "Surkea"
 
-#: templates/image/detail.html:319
+#: templates/image/detail.html:317
 msgid "Poor"
 msgstr "Heikko"
 
-#: templates/image/detail.html:320
+#: templates/image/detail.html:318
 msgid "Regular"
 msgstr "Normaali"
 
-#: templates/image/detail.html:321
+#: templates/image/detail.html:319
 msgid "Good"
 msgstr "Hyvä"
 
-#: templates/image/detail.html:322
+#: templates/image/detail.html:320
 msgid "Gorgeous"
 msgstr "Erinomainen"
 
-#: templates/image/detail.html:328
+#: templates/image/detail.html:326
 msgid ""
 "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr "Teitkö muutoksia kuvaasi? Lataa uusi versio!"
 
-#: templates/image/detail.html:337
+#: templates/image/detail.html:335
 msgid "Delete image?"
 msgstr "Poista kuva?"
 
-#: templates/image/detail.html:338
+#: templates/image/detail.html:336
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
@@ -1150,57 +1150,57 @@ msgstr ""
 "Kuva poistetaan pysyvästi eikä sitä voida enää palauttaa. Myös kaikki "
 "versiot kuvasta poistetaan. Oletko varma?"
 
-#: templates/image/detail.html:339
+#: templates/image/detail.html:337
 msgid "Yes, delete image"
 msgstr "Kyllä, poista kuva"
 
-#: templates/image/detail.html:344
+#: templates/image/detail.html:342
 #, python-format
 msgid "Follow %(username)s?"
 msgstr "Seuraa %(username)s?"
 
-#: templates/image/detail.html:345
+#: templates/image/detail.html:343
 #, python-format
 msgid ""
 "You will receive a notification every time %(username)s posts a new image. "
 "Continue?"
 msgstr "Saat ilmoituksen aina kun %(username)s julkaisee uuden kuvan. Jatka?"
 
-#: templates/image/detail.html:346
+#: templates/image/detail.html:344
 msgid "Yes, follow!"
 msgstr "Kyllä, seuraa!"
 
-#: templates/image/detail.html:352
+#: templates/image/detail.html:350
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr "Lopeta käyttäjän %(username)s seuraaminen?"
 
-#: templates/image/detail.html:353
+#: templates/image/detail.html:351
 #, python-format
 msgid ""
 "You will stop receiving notifications when %(username)s posts a new image. "
 "Continue?"
 msgstr "Et enää saa ilmoituksia kun %(username)s julkaisee uuden kuvan. Jatka?"
 
-#: templates/image/detail.html:354
+#: templates/image/detail.html:352
 msgid "Yes, stop following!"
 msgstr "Kyllä, lopeta seuraaminen!"
 
-#: templates/image/detail.html:360
+#: templates/image/detail.html:358
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Lähetä viesti käyttäjälle %(username)s"
 
-#: templates/image/detail.html:362 templates/messages/detail.html:25
+#: templates/image/detail.html:360 templates/messages/detail.html:25
 #: templates/messages/new.html:15
 msgid "Send"
 msgstr "Lähetä"
 
-#: templates/image/detail.html:369
+#: templates/image/detail.html:367
 msgid "Bring image to attention"
 msgstr "Tuo kuva muiden käyttäjien tietoon"
 
-#: templates/image/detail.html:370
+#: templates/image/detail.html:368
 msgid ""
 "By choosing some users and clicking the button below, you will send them a "
 "notification prompting them to checkout this image."
@@ -1208,19 +1208,19 @@ msgstr ""
 "Valitsemalla haluamasi käyttäjät ja klikkaamalla alla olevaa painiketta, "
 "lähetät heille ilmoituksen pyytääksesi heitä katsomaan tämän kuvan."
 
-#: templates/image/detail.html:371
+#: templates/image/detail.html:369
 msgid "Continue"
 msgstr "Jatka"
 
-#: templates/image/detail.html:375
+#: templates/image/detail.html:373
 msgid "Enter partial name"
 msgstr "Syötä nimen osa"
 
-#: templates/image/detail.html:376
+#: templates/image/detail.html:374
 msgid "User not found. Cannot notify them."
 msgstr "Käyttäjää ei löytynyt. Ei voida tiedottaa."
 
-#: templates/image/detail.html:383
+#: templates/image/detail.html:381
 #, python-format
 msgid ""
 "You will notify %(username)s that you would like them to feed more "
@@ -1229,7 +1229,7 @@ msgstr ""
 "Ilmoitat käyttäjälle %(username)s, että haluaisit heidän täydentävän kuvan "
 "teknisiä tietoja. Jatka?"
 
-#: templates/image/detail.html:389
+#: templates/image/detail.html:387
 #, python-format
 msgid ""
 "You will notify %(username)s that you would like to see the TIFF or FITS "
@@ -1274,7 +1274,7 @@ msgstr "tt:mm"
 #: templates/image/edit/acquisition.html:118
 #: templates/image/edit/basic.html:42 templates/image/edit/gear.html:20
 #: templates/location/edit.html:18 templates/user/profile/edit/basic.html:20
-#: templates/user/profile/edit/gear.html:18
+#: templates/user/profile/edit/gear.html:19
 msgid "Save"
 msgstr "Tallenna"
 
@@ -1998,7 +1998,7 @@ msgid "These are the cities from which you usually image."
 msgstr ""
 
 #: templates/user/profile/edit/basic.html:16
-#: templates/user/profile/edit/gear.html:15
+#: templates/user/profile/edit/gear.html:16
 msgid "* use a comma to separate the values."
 msgstr "* käytä pilkkua erotellaksesi arvot."
 
@@ -2007,7 +2007,7 @@ msgid "or click here to change your password"
 msgstr "tai klikkaa tästä vaihtaaksesi salasanasi"
 
 #: templates/user/profile/edit/basic.html:35
-#: templates/user/profile/edit/gear.html:29
+#: templates/user/profile/edit/gear.html:30
 msgid "No results. Press TAB to add it!"
 msgstr "Ei tuloksia. Paina TAB lisätäksesi sen!"
 
@@ -2019,6 +2019,10 @@ msgstr "Muokkaa tähtikuvauslaitteitasi"
 msgid ""
 "Remember that these items autocomplete, and you need to press TAB to add "
 "something to your list. If it's not in a white box, it doesn't get saved!"
+msgstr ""
+
+#: templates/user/profile/edit/gear.html:11
+msgid "Please use full names (make and model) for all your gear items!"
 msgstr ""
 
 #~ msgid "Done!"
