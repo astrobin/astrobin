@@ -1228,7 +1228,7 @@ def bring_to_attention(request):
 
     push_notification(recipients, 'attention_request',
                       {'object':image,
-                       'object_url':settings.ASTROBIN_SHORT_BASE_URL + image.get_absolute_url(),
+                       'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
                        'originator':request.user,
                        'originator_url': request.user.get_absolute_url()})
 
@@ -1319,7 +1319,7 @@ def image_revision_upload_process(request):
                  for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
     push_notification(followers, 'new_image_revision',
                       {'originator':request.user,
-                       'object_url':settings.ASTROBIN_SHORT_BASE_URL + image_revision.get_absolute_url()})
+                       'object_url':settings.ASTROBIN_BASE_URL + image_revision.get_absolute_url()})
 
     return HttpResponseRedirect(image_revision.get_absolute_url())
 
