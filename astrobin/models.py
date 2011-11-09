@@ -273,7 +273,7 @@ class Image(models.Model):
                 push_notification(
                     [r.from_user], 'request_fulfilled',
                     {'object': self,
-                     'object_url': settings.ASTROBIN_SHORT_BASE_URL + self.get_absolute_url(),
+                     'object_url': settings.ASTROBIN_BASE_URL + self.get_absolute_url(),
                      'originator': r.to_user,
                      'originaror_url': r.to_user.get_absolute_url()})
         except:

@@ -7,7 +7,7 @@ import simplejson
 from notification import models as notification
 
 def push_notification(recipients, type, data):
-    data['notices_url'] = settings.ASTROBIN_SHORT_BASE_URL + '/notifications/'
+    data['notices_url'] = settings.ASTROBIN_BASE_URL + '/notifications/'
     data['LANGUAGE_CODE'] = translation.get_language()
     try:
         notification.send(recipients, type, data)
