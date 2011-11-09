@@ -107,7 +107,7 @@ def index(request):
 
     return object_list(
         request, 
-        queryset=Image.objects.filter(is_stored=True).order_by('uploaded'),
+        queryset=Image.objects.filter(is_stored=True).order_by('-uploaded'),
         template_name='index.html',
         template_object_name='image',
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
@@ -788,7 +788,7 @@ def user_page(request, username):
 
     return object_list(
         request,
-        queryset=Image.objects.filter(user=user).order_by('uploaded'),
+        queryset=Image.objects.filter(user=user).order_by('-uploaded'),
         template_name='user/profile.html',
         template_object_name='image',
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
