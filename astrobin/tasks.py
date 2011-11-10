@@ -20,10 +20,8 @@ from storage import *
 from notifications import *
 from storage import download_from_bucket
 
-SUBPROCESS_EXPIRE = 60 * 5
-
 @task()
-def solve_image(image, lang, callback=None):
+def solve_image(image, lang, use_scale=True, callback=None):
     # If solving is disabled in the settings, then we override what we're
     # asked to do.
     if not settings.ASTROBIN_ENABLE_SOLVING:
@@ -56,14 +54,21 @@ def solve_image(image, lang, callback=None):
         kill_check.clear()
         return success
 
-    # Optimize for most cases
-    scale_low = 0.5
-    scale_high = 5
-    if image.focal_length and image.pixel_size:
-        scale = float(image.pixel_size) / float(image.focal_length) * 206.3
-        # Allow a 20% tolerance
-        scale_low = scale * 0.8
-        scale_high = scale * 1.2
+    if use_scale:
+        # Optimize for most cases
+        scale_low = 0.5
+        scale_high = 5
+        if image.focal_length and image.pixel_size:
+            scale = float(image.pixel_size) / float(image.focal_length) * 206.3
+            # Allow a 20% tolerance
+            scale_low = scale * 0.8
+            scale_high = scale * 1.2
+            if image.binning:
+                scale_low *= image.binning
+                scale_high *= image.binning
+            if image.scaling:
+                scale_low *= 100.0 / float(image.scaling)
+                scale_high *= 100.0 / float(image.scaling)
 
     # If the the original image doesn't exist anymore, we need to
     # download it again.
@@ -71,15 +76,28 @@ def solve_image(image, lang, callback=None):
         print "Path doesn't exist: %s" % path + uid + original_ext
         download_from_bucket(uid + original_ext, path)
 
-    print "Path exists: %s" % path + uid + original_ext
     command = ['/usr/local/astrometry/bin/solve-field',
-               '--scale-units', 'arcsecperpix',
-               '--scale-low', str(scale_low),
-               '--scale-high', str(scale_high),
+               '', '',
+               '', '',
+               '', '',
                '--verbose',
                '--continue',
                path + uid + original_ext]
-    run_popen_with_timeout(command, SUBPROCESS_EXPIRE)
+
+    if use_scale:
+        command[1] = '--scale-units'
+        command[2] = 'arcsecperpix'
+        command[3] = '--scale-low'
+        command[4] = str(scale_low)
+        command[5] = '--scale-high'
+        command[6] = str(scale_high)
+    else:
+        command[1] = '--backend-config'
+        command[2] = '/usr/local/astrometry/etc/backend.blind.cfg'
+        del command[3:7]
+
+    print command
+    run_popen_with_timeout(command, 120 if use_scale else 600)
 
     solved_filename = settings.UPLOADS_DIRECTORY + image.filename + '-ngc.png'
     if os.path.exists(settings.UPLOADS_DIRECTORY + image.filename + '.solved'):
@@ -98,7 +116,7 @@ def solve_image(image, lang, callback=None):
         save_to_bucket(uid + '_solved.png', solved_resizedFile.getvalue())
 
     if callback is not None:
-        subtask(callback).delay(image, solved, '%s%s*' % (path, uid), lang)
+        subtask(callback).delay(image, solved, use_scale, '%s%s*' % (path, uid), lang)
 
 
 @task()

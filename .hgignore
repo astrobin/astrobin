@@ -8,7 +8,8 @@ syntax: glob
 *.mo
 *.orig
 astrobin.db
-astrobin.pid
+*.pid
+*.log
 static/CACHE
 uploads/*
 venv
@@ -22,3 +23,4 @@ celeryd.log
 nginx-1.0.4/Makefile
 nginx-1.0.4/objs/
 data/cities.txt
+
