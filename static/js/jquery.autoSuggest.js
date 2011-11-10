@@ -193,6 +193,7 @@
                                 add_selected_item(n_data, "00"+(lis+1));
                                 input.val("");
                             }
+                            results_holder.hide();
                         case 13: // return
                             tab_press = false;
                             var active = $("li.active:first", results_holder);
