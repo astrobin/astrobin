@@ -18,14 +18,32 @@ class ImageUploadForm(forms.Form):
 
 
 class ImageEditPresolveForm(forms.ModelForm):
+    binning = forms.IntegerField(
+        required  = False,
+        widget    = forms.TextInput(),
+        initial   = 1,
+        help_text = "1, 2, 3, 4, ...",
+    )
+
+    scaling = forms.DecimalField(
+        required       = False,
+        max_digits     = 6,
+        decimal_places = 2,
+        widget         = forms.TextInput(),
+        initial        = 100,
+        help_text      = _("If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size.")
+    )
+
     def __init__(self, user=None, **kwargs):
         super(ImageEditPresolveForm, self).__init__(**kwargs)
         self.fields['focal_length'].label = _("Focal length")
         self.fields['pixel_size'].label = _("Pixel size")
+        self.fields['binning'].label = _("Binning")
+        self.fields['scaling'].label = _("Scaling")
 
     class Meta:
         model = Image
-        fields = ('focal_length', 'pixel_size')
+        fields = ('focal_length', 'pixel_size', 'binning', 'scaling',)
 
 
 class ImageEditBasicForm(forms.Form):

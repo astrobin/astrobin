@@ -64,6 +64,12 @@ def solve_image(image, lang, callback=None):
         # Allow a 20% tolerance
         scale_low = scale * 0.8
         scale_high = scale * 1.2
+        if image.binning:
+            scale_low *= image.binning
+            scale_high *= image.binning
+        if image.scaling:
+            scale_low *= 100.0 / float(image.scaling)
+            scale_high *= 100.0 / float(image.scaling)
 
     # If the the original image doesn't exist anymore, we need to
     # download it again.

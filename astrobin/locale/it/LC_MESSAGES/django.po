@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 07:05+0000\n"
-"PO-Revision-Date: 2011-11-10 09:06+0200\n"
+"POT-Creation-Date: 2011-11-10 06:04-0500\n"
+"PO-Revision-Date: 2011-11-10 06:06-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -17,165 +17,177 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: forms.py:23
+#: forms.py:34
+msgid "If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size."
+msgstr "Se hai ridimensionato l'immagine prima di caricarla, scrivi qui la percentuale della nuova dimensione. Per esempio 50, se l'hai ridimensionata di metà."
+
+#: forms.py:39
 #: models.py:35
-#: models.py:366
+#: models.py:364
 #: templates/image/edit/acquisition.html:32
 msgid "Focal length"
 msgstr "Lunghezza focale"
 
-#: forms.py:24
+#: forms.py:40
 msgid "Pixel size"
 msgstr "Dimensione del pixel"
 
-#: forms.py:39
+#: forms.py:41
+msgid "Binning"
+msgstr "Bin"
+
+#: forms.py:42
+msgid "Scaling"
+msgstr "Ridimensionamento"
+
+#: forms.py:57
 #: models.py:225
 #: templates/image/edit/basic.html:17
 msgid "Title"
 msgstr "Titolo"
 
-#: forms.py:40
+#: forms.py:58
 #: models.py:226
 #: templates/image/edit/basic.html:21
 msgid "Subjects"
 msgstr "Soggetti"
 
-#: forms.py:41
-#: forms.py:96
+#: forms.py:59
+#: forms.py:114
 #: models.py:227
-#: models.py:428
+#: models.py:426
 #: templates/image/edit/basic.html:26
 msgid "Locations"
 msgstr "Luoghi"
 
-#: forms.py:42
+#: forms.py:60
 #: models.py:228
 #: templates/image/detail.html:270
 #: templates/image/edit/basic.html:35
 msgid "Description"
 msgstr "Descrizione"
 
-#: forms.py:63
-#: models.py:237
+#: forms.py:81
+#: models.py:240
 msgid "Imaging telescopes"
 msgstr "Telescopi di acquisizione"
 
-#: forms.py:64
-#: models.py:238
+#: forms.py:82
+#: models.py:241
 msgid "Guiding telescopes"
 msgstr "Telescopi di guida"
 
-#: forms.py:65
-#: forms.py:111
-#: models.py:239
-#: models.py:439
+#: forms.py:83
+#: forms.py:129
+#: models.py:242
+#: models.py:437
 msgid "Mounts"
 msgstr "Montature"
 
-#: forms.py:66
-#: models.py:240
+#: forms.py:84
+#: models.py:243
 msgid "Imaging cameras"
 msgstr "Camere di acquisizione"
 
-#: forms.py:67
-#: models.py:241
+#: forms.py:85
+#: models.py:244
 msgid "Guiding cameras"
 msgstr "Camere di guida"
 
-#: forms.py:68
-#: forms.py:113
-#: models.py:242
-#: models.py:441
+#: forms.py:86
+#: forms.py:131
+#: models.py:245
+#: models.py:439
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
-#: forms.py:69
-#: forms.py:114
-#: models.py:243
-#: models.py:442
+#: forms.py:87
+#: forms.py:132
+#: models.py:246
+#: models.py:440
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:70
-#: forms.py:115
-#: models.py:244
-#: models.py:443
+#: forms.py:88
+#: forms.py:133
+#: models.py:247
+#: models.py:441
 msgid "Filters"
 msgstr "Filtri"
 
-#: forms.py:71
-#: forms.py:116
-#: models.py:245
-#: models.py:444
+#: forms.py:89
+#: forms.py:134
+#: models.py:248
+#: models.py:442
 msgid "Accessories"
 msgstr "Accessori"
 
-#: forms.py:110
-#: models.py:438
+#: forms.py:128
+#: models.py:436
 msgid "Telescopes"
 msgstr "Telescopi"
 
-#: forms.py:112
-#: models.py:440
+#: forms.py:130
+#: models.py:438
 msgid "Cameras"
 msgstr "Camere"
 
-#: forms.py:129
+#: forms.py:147
 #: templates/image/detail.html:91
 msgid "User"
 msgstr "Utente"
 
-#: forms.py:140
-#: forms.py:144
-#: forms.py:227
-#: models.py:333
+#: forms.py:158
+#: forms.py:162
+#: forms.py:245
+#: models.py:331
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Usa il seguente formato: aaaa-mm-gg"
 
-#: forms.py:147
-#: forms.py:150
+#: forms.py:165
+#: forms.py:168
 msgid "Express value in hours"
 msgstr "Esprimi il valore in ore"
 
-#: forms.py:160
+#: forms.py:178
 msgid "Search for astronomical objects, telescopes, cameras, filters..."
 msgstr "Cerca oggetti astronomici, telescopi, camere, filtri..."
 
-#: forms.py:162
+#: forms.py:180
 msgid "Min. upload date"
 msgstr "Min. data di upload"
 
-#: forms.py:163
+#: forms.py:181
 msgid "Max. upload date"
 msgstr "Max. data di upload"
 
-#: forms.py:164
+#: forms.py:182
 msgid "Min. integration"
 msgstr "Integrazione min."
 
-#: forms.py:165
+#: forms.py:183
 msgid "Max. integration"
 msgstr "Integrazione max."
 
-#: forms.py:166
+#: forms.py:184
 msgid "Min. Moon phase %"
 msgstr "% fase lunare min."
 
-#: forms.py:167
+#: forms.py:185
 msgid "Max. Moon phase %"
 msgstr "% fase lunare max."
 
-#: forms.py:202
+#: forms.py:220
 msgid "For example: +12.44"
 msgstr "Per esempio: +12.44"
 
-#: forms.py:205
+#: forms.py:223
 msgid "For example: -51.25"
 msgstr "Per esempio: -51.25"
 
-#: forms.py:240
-#: models.py:333
-#: models.py:380
+#: forms.py:258
+#: models.py:331
+#: models.py:378
 #: templates/image/edit/acquisition.html:80
 #: templates/search/search.html:22
 msgid "Date"
@@ -206,150 +218,150 @@ msgstr "Longitudine"
 msgid "Altitude"
 msgstr "Altitudine"
 
-#: models.py:233
+#: models.py:234
 msgid "(in mm)"
 msgstr "(in mm)"
 
-#: models.py:234
+#: models.py:235
 msgid "(in &mu;m, taking binning and image scaling into account)"
 msgstr "(in &mu;m, considerando anche il binning e l'eventuale ridimensionamento dell'immagine)"
 
-#: models.py:258
+#: models.py:261
 #: templates/image/detail.html:194
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/image_list.html:19
 msgid "(no title)"
 msgstr "(senza titolo)"
 
-#: models.py:334
-#: models.py:379
+#: models.py:332
+#: models.py:377
 msgid "Image"
 msgstr "Immagine"
 
-#: models.py:344
+#: models.py:342
 msgid "Synthetic channel"
 msgstr "Canale sintetico"
 
-#: models.py:345
+#: models.py:343
 msgid "Filter"
 msgstr "Filtro"
 
-#: models.py:346
+#: models.py:344
 msgid "Number"
 msgstr "Numero"
 
-#: models.py:347
+#: models.py:345
 msgid "Duration"
 msgstr "Durata"
 
-#: models.py:348
+#: models.py:346
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:349
+#: models.py:347
 msgid "Gain"
 msgstr "Gain"
 
-#: models.py:350
+#: models.py:348
 msgid "Sensor cooling"
 msgstr "Temperatura sensore"
 
-#: models.py:351
+#: models.py:349
 #: views.py:236
 msgid "Darks"
 msgstr "Dark"
 
-#: models.py:352
+#: models.py:350
 #: views.py:237
 msgid "Flats"
 msgstr "Flat"
 
-#: models.py:353
+#: models.py:351
 #: views.py:238
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
-#: models.py:354
+#: models.py:352
 #: views.py:239
 msgid "Bias"
 msgstr "Bias"
 
-#: models.py:355
+#: models.py:353
 #: views.py:242
 msgid "Mean SQM"
 msgstr "SQM medio"
 
-#: models.py:356
+#: models.py:354
 #: views.py:243
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
-#: models.py:364
+#: models.py:362
 #: views.py:235
 msgid "Frames"
 msgstr "Frame"
 
-#: models.py:365
+#: models.py:363
 #: templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:367
+#: models.py:365
 #: templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:368
+#: models.py:366
 #: templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:369
+#: models.py:367
 #: templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:370
+#: models.py:368
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:371
+#: models.py:369
 msgid "Transparency"
 msgstr "Trasparenza"
 
-#: models.py:372
+#: models.py:370
 msgid "Time"
 msgstr "Ora"
 
-#: models.py:399
+#: models.py:397
 msgid "Request from"
 msgstr "Richiesta da"
 
-#: models.py:411
+#: models.py:409
 msgid "Additional information"
 msgstr "Ulteriori informazioni"
 
-#: models.py:412
+#: models.py:410
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:413
+#: models.py:411
 msgid "Higher resolution"
 msgstr "Risoluzione superiore"
 
-#: models.py:429
+#: models.py:427
 msgid "Website"
 msgstr "Sito web"
 
-#: models.py:430
+#: models.py:428
 msgid "Job"
 msgstr "Professione"
 
-#: models.py:431
+#: models.py:429
 msgid "Hobbies"
 msgstr "Interessi"
 
-#: models.py:432
+#: models.py:430
 msgid "Language"
 msgstr "Lingua"
 
