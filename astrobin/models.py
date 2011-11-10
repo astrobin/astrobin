@@ -228,7 +228,8 @@ class Image(models.Model):
     description = models.TextField(_("Description"))
     filename = models.CharField(max_length=64, editable=False)
     original_ext = models.CharField(max_length=6, editable=False)
-    uploaded = models.DateTimeField(editable=False)
+    uploaded = models.DateTimeField(editable=False, auto_now_add=True)
+    updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
     focal_length = models.IntegerField(null=True, blank=True, help_text=_("(in mm)"))
     pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text=_("(in &mu;m, taking binning and image scaling into account)"))
@@ -258,8 +259,6 @@ class Image(models.Model):
         return self.title if self.title is not None else _("(no title)")
 
     def save(self, *args, **kwargs):
-        if not self.uploaded:
-            self.uploaded = datetime.now()
         super(Image, self).save(*args, **kwargs)
 
         # Find requests and mark as fulfilled
@@ -314,11 +313,6 @@ class ImageRevision(models.Model):
         
     def __unicode__(self):
         return 'Revision for %s' % self.image.title
-
-    def save(self, *args, **kwargs):
-        if not self.uploaded:
-            self.uploaded = datetime.now()
-        super(ImageRevision, self).save(*args, **kwargs)
 
     def process(self):
         store_image.delay(self, solve=True, lang=translation.get_language(), callback=image_stored_callback)
