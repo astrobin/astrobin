@@ -102,8 +102,12 @@
         </form>
     {% else %}
     {% if edit_type == 'deep_sky' %}
+        {% if advanced or request.GET.advanced == 'true' %}
         <p>
         {% blocktrans %}You can insert as many acquisition sessions as you want, as often images are taken across several nights. An acquisition session is defined primarily by a date and a filter. Fill in your data and then click on <strong>Save</strong> to finish, or on <strong>Add more</strong> to add more acquisition sessions.{% endblocktrans %}
+        </p>
+        <p>
+        {% blocktrans %}Is this too much data for you to handle? Go to the <a href="{{basic_form_url}}?edit_type=deep_sky&advanced=false">basic form</a>.{% endblocktrans %}
         </p>
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
             {% for form in deep_sky_acquisitions %}
@@ -114,6 +118,7 @@
             {{deep_sky_acquisitions.management_form}}
             <input type="hidden" name="image_id" value="{{image.id}}" />
             <input type="hidden" name="edit_type" value="deep_sky" />
+            <input type="hidden" name="advanced" value="true"/>
             <ul style="clear:both">
                 <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
                 <li><input class="button inline-button" type="submit" value="{% trans "Add more" %}" name="add_more" /></li>
@@ -121,7 +126,22 @@
                 <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
             </ul>
         </form>
+        {% else %}
+        {% url image_edit_acquisition as advanced_form_url %}
+        <p>{% blocktrans %}With this form you can input the basic details for the acquisition of your image. If you want to be more thorough or fill in separate details for each filter, go to the <a href="{{advanced_form_url}}?edit_type=deep_sky&advanced=true">advanced form</a>.{% endblocktrans %}</p>
+        <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
+            {{deep_sky_acquisition_basic_form.as_p}}
+            <input type="hidden" name="image_id" value="{{image.id}}" />
+            <input type="hidden" name="edit_type" value="deep_sky" />
+            <input type="hidden" name="advanced" value="false"/>
+            <ul style="clear:both">
+                <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+                <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
+                <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+            </ul>
+        </form>
 
+        {% endif %}
     {% else %}
         <p>{% trans "What kind of image is this?" %}</p>
         <div class="simple-choice">

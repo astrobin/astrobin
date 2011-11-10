@@ -492,22 +492,34 @@ def image_edit_acquisition(request, id):
        edit_type = None
 
     deep_sky_acquisition_formset = None
+    deep_sky_acquisition_basic_form = None
+    advanced = False
     if edit_type == 'deep_sky':
-        extra = 0
-        if 'add_more' in request.GET:
-            extra = 1
-        if not dsa_qs:
-            extra = 1
-        DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=extra, can_delete=False, form=DeepSky_AcquisitionForm)
-        profile = UserProfile.objects.get(user=image.user)
-        filter_queryset = profile.filters.all()
-        DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
-        deep_sky_acquisition_formset = DSAFormSet(instance=image)
+        advanced = dsa_qs[0].advanced if dsa_qs else False
+        advanced = request.GET['advanced'] if 'advanced' in request.GET else advanced
+        advanced = True if advanced == 'true' else advanced
+        advanced = False if advanced == 'false' else advanced
+        if advanced:
+            extra = 0
+            if 'add_more' in request.GET:
+                extra = 1
+            if not dsa_qs:
+                extra = 1
+            DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=extra, can_delete=False, form=DeepSky_AcquisitionForm)
+            profile = UserProfile.objects.get(user=image.user)
+            filter_queryset = profile.filters.all()
+            DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
+            deep_sky_acquisition_formset = DSAFormSet(instance=image)
+        else:
+            dsa = dsa_qs[0] if dsa_qs else DeepSky_Acquisition({image: image, advanced: False})
+            deep_sky_acquisition_basic_form = DeepSky_AcquisitionBasicForm(instance=dsa)
 
     response_dict = {
         'image': image,
         'edit_type': edit_type,
         'deep_sky_acquisitions': deep_sky_acquisition_formset,
+        'deep_sky_acquisition_basic_form': deep_sky_acquisition_basic_form,
+        'advanced': advanced,
         'solar_system_acquisition': solar_system_acquisition,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
@@ -710,6 +722,9 @@ def image_edit_save_acquisition(request):
         return HttpResponseForbidden()
 
     edit_type = request.POST.get('edit_type')
+    advanced = request.POST['advanced'] if 'advanced' in request.POST else False
+    advanced = True if advanced == 'true' else False
+
     response_dict = {
         'image': image,
         'edit_type': edit_type,
@@ -726,25 +741,43 @@ def image_edit_save_acquisition(request):
         a.delete()
 
     if edit_type == 'deep_sky':
-        DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False, form=DeepSky_AcquisitionForm)
-        deep_sky_acquisition_formset = DSAFormSet(request.POST, instance=image)
-        response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
-        if deep_sky_acquisition_formset.is_valid():
-            deep_sky_acquisition_formset.save()
-            if 'add_more' in request.POST:
-                DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
-                deep_sky_acquisition_formset = DSAFormSet(instance=image)
-                response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
-                if not dsa_qs:
-                    response_dict['context_message'] = {'error': False, 'text': _("Fill in one session, before adding more.")}
+        if advanced:
+            DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False, form=DeepSky_AcquisitionForm)
+            saving_data = {}
+            for i in request.POST:
+                saving_data[i] = request.POST[i]
+            saving_data['advanced'] = advanced
+            deep_sky_acquisition_formset = DSAFormSet(saving_data, instance=image)
+            response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
+            if deep_sky_acquisition_formset.is_valid():
+                deep_sky_acquisition_formset.save()
+                if 'add_more' in request.POST:
+                    DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
+                    deep_sky_acquisition_formset = DSAFormSet(instance=image)
+                    response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
+                    if not dsa_qs:
+                        response_dict['context_message'] = {'error': False, 'text': _("Fill in one session, before adding more.")}
+                    return render_to_response('image/edit/acquisition.html',
+                        response_dict,
+                        context_instance=RequestContext(request))
+            else:
+                response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
                 return render_to_response('image/edit/acquisition.html',
-                    response_dict,
-                    context_instance=RequestContext(request))
+                                          response_dict,
+                                          context_instance=RequestContext(request))
         else:
-            response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
-            return render_to_response('image/edit/acquisition.html',
-                                      response_dict,
-                                      context_instance=RequestContext(request))
+            DeepSky_Acquisition.objects.filter(image=image).delete()
+            dsa = DeepSky_Acquisition()
+            dsa.image = image
+            deep_sky_acquisition_basic_form = DeepSky_AcquisitionBasicForm(data=request.POST, instance=dsa)
+            if deep_sky_acquisition_basic_form.is_valid():
+                deep_sky_acquisition_basic_form.save()
+            else:
+                response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
+                response_dict['deep_sky_acquisition_basic_form'] = deep_sky_acquisition_basic_form
+                return render_to_response('image/edit/acquisition.html',
+                                          response_dict,
+                                          context_instance=RequestContext(request))
 
     elif edit_type == 'solar_system':
         date = request.POST.get('date')
