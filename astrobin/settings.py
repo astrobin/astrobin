@@ -4,6 +4,7 @@ from django.conf import global_settings
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+MAINTENANCE_MODE = True
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@iovene.com'),
@@ -109,6 +110,7 @@ MIDDLEWARE_CLASSES = (
 #   'astrobin.middlewares.ProfilerMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'privatebeta.middleware.PrivateBetaMiddleware',
+    'maintenancemode.middleware.MaintenanceModeMiddleware',
 #    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
