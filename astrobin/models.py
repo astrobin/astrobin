@@ -258,7 +258,8 @@ class Image(models.Model):
         return self.title if self.title is not None else _("(no title)")
 
     def save(self, *args, **kwargs):
-        self.uploaded = datetime.now()
+        if not self.uploaded:
+            self.uploaded = datetime.now()
         super(Image, self).save(*args, **kwargs)
 
         # Find requests and mark as fulfilled
@@ -315,7 +316,8 @@ class ImageRevision(models.Model):
         return 'Revision for %s' % self.image.title
 
     def save(self, *args, **kwargs):
-        self.uploaded = datetime.now()
+        if not self.uploaded:
+            self.uploaded = datetime.now()
         super(ImageRevision, self).save(*args, **kwargs)
 
     def process(self):
