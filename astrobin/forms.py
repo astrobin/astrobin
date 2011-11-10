@@ -115,13 +115,40 @@ class UserProfileEditBasicForm(forms.ModelForm):
 
 
 class UserProfileEditGearForm(forms.Form):
-    telescopes = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
-    mounts = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
-    cameras = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
-    focal_reducers = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
-    software = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
-    filters = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
-    accessories = forms.CharField(max_length=256, help_text="<noscript>*</noscript>", required=False)
+    telescopes = forms.CharField(
+        max_length=256,
+        help_text="<noscript>*</noscript>" + _("All the telescopes you own, including the ones you use for guiding, go here."),
+        required=False)
+
+    mounts = forms.CharField(
+        max_length=256,
+        help_text="<noscript>*</noscript>",
+        required=False)
+
+    cameras = forms.CharField(
+        max_length=256,
+        help_text="<noscript>*</noscript>" + _("Your DSLRs, CCDs, planetary cameras and guiding cameras go here."),
+        required=False)
+
+    focal_reducers = forms.CharField(
+        max_length=256,
+        help_text="<noscript>*</noscript>",
+        required=False)
+
+    software = forms.CharField(
+        max_length=256,
+        help_text="<noscript>*</noscript>",
+        required=False)
+
+    filters = forms.CharField(
+        max_length=256,
+        help_text="<noscript>*</noscript>" + _("Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."),
+        required=False)
+
+    accessories = forms.CharField(
+        max_length=256,
+        help_text="<noscript>*</noscript>",
+        required=False)
 
     def __init__(self, user=None, **kwargs):
         super(UserProfileEditGearForm, self).__init__(**kwargs)
