@@ -20,7 +20,7 @@ def current(request, pattern):
 
 @register.inclusion_tag('inclusion_tags/image_list.html')
 def image_list(request, object_list):
-    paginator = Paginator(object_list, 10)
+    paginator = Paginator(object_list, 20)
 
     page = request.GET.get('p')
     try:
