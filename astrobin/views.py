@@ -210,6 +210,8 @@ def image_detail(request, id):
                     f += ' @ ISO%s' % a.iso 
                 if a.sensor_cooling:
                     f += ' @ %s\'C' % a.sensor_cooling
+                if a.binning:
+                    f+= ' bin %dx%d' % (a.binning, a.binning)
 
                 dsa_data['frames'].append(f)
 
@@ -363,7 +365,7 @@ def image_upload_process(request):
                  for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
     push_notification(followers, 'new_image',
                       {'originator':request.user,
-                       'object_url':image.get_absolute_url()})
+                       'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url()})
 
     return HttpResponseRedirect("/edit/presolve/%d/" % image.id)
 
@@ -1033,7 +1035,7 @@ def user_profile_flickr_import(request):
                                  for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
                     push_notification(followers, 'new_image',
                                       {'originator':request.user,
-                                       'object_url':image.get_absolute_url()})
+                                       'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url()})
 
         return ajax_response(response_dict)
 

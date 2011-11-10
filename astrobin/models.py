@@ -154,7 +154,12 @@ class Location(models.Model):
 
 
 @task
-def image_solved_callback(image, solved, clean_path, lang):
+def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
+    if not solved and did_use_scale:
+        # Try again!
+        solve_image.delay(image, lang, False, callback=image_solved_callback)
+        return
+
     image.is_solved = solved
     if image.__class__.__name__ == 'Image' and image.is_solved:
         # grab objects from list
@@ -228,10 +233,13 @@ class Image(models.Model):
     description = models.TextField(_("Description"))
     filename = models.CharField(max_length=64, editable=False)
     original_ext = models.CharField(max_length=6, editable=False)
-    uploaded = models.DateTimeField(editable=False)
+    uploaded = models.DateTimeField(editable=False, auto_now_add=True)
+    updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
     focal_length = models.IntegerField(null=True, blank=True, help_text=_("(in mm)"))
     pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text=_("(in &mu;m, taking binning and image scaling into account)"))
+    binning = models.IntegerField(null=True, blank=True)
+    scaling = models.DecimalField(null=True, blank=True, max_digits=6, decimal_places=2)
 
     # gear
     imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes"))
@@ -258,7 +266,6 @@ class Image(models.Model):
         return self.title if self.title is not None else _("(no title)")
 
     def save(self, *args, **kwargs):
-        self.uploaded = datetime.now()
         super(Image, self).save(*args, **kwargs)
 
         # Find requests and mark as fulfilled
@@ -314,10 +321,6 @@ class ImageRevision(models.Model):
     def __unicode__(self):
         return 'Revision for %s' % self.image.title
 
-    def save(self, *args, **kwargs):
-        self.uploaded = datetime.now()
-        super(ImageRevision, self).save(*args, **kwargs)
-
     def process(self):
         store_image.delay(self, solve=True, lang=translation.get_language(), callback=image_stored_callback)
 
@@ -341,19 +344,79 @@ class Acquisition(models.Model):
 
 
 class DeepSky_Acquisition(Acquisition):
-    is_synthetic = models.BooleanField(_("Synthetic channel"))
-    filter = models.ForeignKey(Filter, null=True, blank=True, verbose_name=_("Filter"))
-    number = models.IntegerField(_("Number"), null=True, blank=True)
-    duration = models.IntegerField(_("Duration"), null=True, blank=True)
-    iso = models.IntegerField(_("ISO"), null=True, blank=True)
-    gain = models.DecimalField(_("Gain"), null=True, blank=True, max_digits=5, decimal_places=2)
-    sensor_cooling = models.IntegerField(_("Sensor cooling"), null=True, blank=True)
-    darks = models.IntegerField(_("Darks"), null=True, blank=True)
-    flats = models.IntegerField(_("Flats"), null=True, blank=True)
-    flat_darks = models.IntegerField(_("Flat darks"), null=True, blank=True)
-    bias = models.IntegerField(_("Bias"), null=True, blank=True)
-    mean_sqm = models.DecimalField(_("Mean SQM"), null=True, blank=True, max_digits=5, decimal_places=2)
-    mean_fwhm = models.DecimalField(_("Mean FWHM"), null=True, blank=True, max_digits=5, decimal_places=2)
+    BINNING_CHOICES = (
+        (1, '1x1'),
+        (2, '2x2'),
+        (3, '3x3'),
+        (4, '4x4'),
+    )
+
+    is_synthetic = models.BooleanField(
+        _("Synthetic channel"))
+
+    filter = models.ForeignKey(
+        Filter,
+        null=True, blank=True,
+        verbose_name=_("Filter"))
+
+    binning = models.IntegerField(
+        null=True, blank=True,
+        choices=BINNING_CHOICES,
+        verbose_name=_("Binning"))
+
+    number = models.IntegerField(
+        _("Number"),
+        null=True, blank=True,
+        help_text=_("The number of sub-frames."))
+
+    duration = models.IntegerField(
+        _("Duration"),
+        null=True, blank=True,
+        help_text=_("Duration of each sub-frame, in seconds."))
+
+    iso = models.IntegerField(
+        _("ISO"),
+        null=True, blank=True)
+
+    gain = models.DecimalField(
+        _("Gain"),
+        null=True, blank=True,
+        max_digits=5, decimal_places=2)
+
+    sensor_cooling = models.IntegerField(
+        _("Sensor cooling"),
+        null=True, blank=True,
+        help_text=_("The temperature of the chip. E.g.: -20."))
+
+    darks = models.IntegerField(
+        _("Darks"),
+        null=True, blank=True,
+        help_text=_("The number of dark frames."))
+
+    flats = models.IntegerField(
+        _("Flats"),
+        null=True, blank=True,
+        help_text=_("The number of flat frames."))
+
+    flat_darks = models.IntegerField(
+        _("Flat darks"),
+        null=True, blank=True,
+        help_text=_("The number of dark flat frames."))
+
+    bias = models.IntegerField(
+        _("Bias"),
+        null=True, blank=True,
+        help_text=_("The number of bias/offset frames."))
+
+    mean_sqm = models.DecimalField(
+        _("Mean SQM"),
+        null=True, blank=True,
+        max_digits=5, decimal_places=2)
+
+    mean_fwhm = models.DecimalField(
+        _("Mean FWHM"),
+        null=True, blank=True,
+        max_digits=5, decimal_places=2)
 
     class Meta:
         app_label = 'astrobin'
@@ -362,7 +425,7 @@ class DeepSky_Acquisition(Acquisition):
 
 class SolarSystem_Acquisition(Acquisition):
     frames = models.IntegerField(_("Frames"), null=True, blank=True)
-    fps = models.IntegerField(_("FPS"), null=True, blank=True)
+    fps = models.DecimalField(_("FPS"), max_digits=12, decimal_places=5, null=True, blank=True)
     focal_length = models.IntegerField(_("Focal length"), null=True, blank=True)
     cmi = models.DecimalField(_("CMI"), null=True, blank=True, max_digits=5, decimal_places=2)
     cmii = models.DecimalField(_("CMII"), null=True, blank=True, max_digits=5, decimal_places=2)
@@ -426,9 +489,9 @@ class UserProfile(models.Model):
 
     # Basic Information
     locations = models.ManyToManyField(Location, null=True, blank=True, verbose_name=_("Locations"))
-    website = models.CharField(_("Website"), max_length=32, null=True, blank=True)
-    job = models.CharField(_("Job"), max_length=32, null=True, blank=True)
-    hobbies = models.CharField(_("Hobbies"), max_length=64, null=True, blank=True)
+    website = models.CharField(_("Website"), max_length=128, null=True, blank=True)
+    job = models.CharField(_("Job"), max_length=128, null=True, blank=True)
+    hobbies = models.CharField(_("Hobbies"), max_length=128, null=True, blank=True)
     language = models.CharField(_("Language"), max_length=8, null=True, blank=True, editable=False)
 
     # Avatar

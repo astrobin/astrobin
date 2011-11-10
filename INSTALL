@@ -78,7 +78,8 @@ ln -s ./venv/bin/pip vpip
     flickrapi \
     Pillow \
     python-memcached \
-    django-model-utils
+    django-model-utils \
+    django-maintenancemode
 
 # NOTE: if you run into this: https://github.com/ask/celery/commit/edf3b3f33acdada9264754068d9c74ee76692cd9
 # then install kombu, celery and django-celery from git master:
@@ -160,6 +161,11 @@ cd astrometry.net-0.38
 CC="gcc-4.4" make
 CC="gcc-4.4" make extra
 sudo make install
+
+Edit /usr/local/astrometry/etc/backend.cfg and enable "inparallel".
+sudo cp /usr/local/astrometry/etc/backend.cfg /usr/local/astrometry/etc/backend.blind.cfg
+Edit this file, disable auto indexing, and enable all large indexes up to the 7th
+
 
 # Set up supervisor
 sudo cp scripts/supervisord/* to /etc/supervisor/conf.d/
