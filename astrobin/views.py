@@ -210,6 +210,8 @@ def image_detail(request, id):
                     f += ' @ ISO%s' % a.iso 
                 if a.sensor_cooling:
                     f += ' @ %s\'C' % a.sensor_cooling
+                if a.binning:
+                    f+= ' bin %dx%d' % (a.binning, a.binning)
 
                 dsa_data['frames'].append(f)
 
