@@ -283,6 +283,8 @@ def image_detail(request, id):
         revisions = revisions.exclude(id=revision_id)
         is_ready = revision_image.is_stored
 
+    uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -309,7 +311,7 @@ def image_detail(request, id):
                          'revision_image': revision_image,
                          'is_ready': is_ready,
                          'full': 'full' in request.GET,
-                         'uploaded_on': to_user_timezone(image.uploaded, profile) if profile else image.uploaded,
+                         'uploaded_on': uploaded_on
                         })
 
 

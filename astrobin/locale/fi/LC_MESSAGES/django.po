@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 11:20-0500\n"
+"POT-Creation-Date: 2011-11-10 12:16-0500\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -387,52 +387,52 @@ msgstr "Keskimääräinen kuun ikä"
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
-#: views.py:354 views.py:369 views.py:1352 views.py:1367
+#: views.py:356 views.py:371 views.py:1354 views.py:1369
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 
-#: views.py:432 views.py:436 views.py:581 views.py:584 views.py:620
-#: views.py:649 templates/user/profile/edit/basic.html:53
+#: views.py:434 views.py:438 views.py:583 views.py:586 views.py:622
+#: views.py:651 templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:29
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Syötä nimen osa ja odota ehdotuksia!"
 
-#: views.py:433 views.py:582 views.py:621 views.py:650
+#: views.py:435 views.py:584 views.py:623 views.py:652
 msgid "No results. Sorry."
 msgstr "Ei tuloksia, pahoitteluni."
 
-#: views.py:434
+#: views.py:436
 msgid "Subjects found in the SIMBAD database"
 msgstr ""
 
-#: views.py:437 views.py:585
+#: views.py:439 views.py:587
 msgid "No results. Press TAB to create this location!"
 msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 
-#: views.py:438 templates/user/profile/edit/basic.html:55
+#: views.py:440 templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:31
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:737
+#: views.py:739
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views.py:742 views.py:779
+#: views.py:744 views.py:781
 msgid "There was an error. Check your input!"
 msgstr "Virhe. Tarkista tiedot!"
 
-#: views.py:1233
+#: views.py:1235
 msgid "RE"
 msgstr "VS"
 
-#: views.py:1292
+#: views.py:1294
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1316
+#: views.py:1318
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -1167,7 +1167,8 @@ msgstr ""
 "uudestaan parin sekunnin päästä."
 
 #: templates/image/detail.html:195
-msgid "uploaded on"
+#, fuzzy
+msgid "uploaded"
 msgstr "ladattu"
 
 #: templates/image/detail.html:198
@@ -2132,6 +2133,15 @@ msgstr ""
 
 #: templates/user/profile/edit/gear.html:11
 msgid "Please use full names (make and model) for all your gear items!"
+msgstr ""
+
+#: templatetags/tags.py:117
+msgid "seconds ago"
+msgstr ""
+
+#: templatetags/tags.py:118
+#, python-format
+msgid "%s ago"
 msgstr ""
 
 #~ msgid "Invalid image."
