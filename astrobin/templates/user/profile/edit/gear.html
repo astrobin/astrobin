@@ -6,11 +6,21 @@
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
         <h1>{% trans "Edit your astrophotography gear" %}</h1>
-        {% form_saved request %}
+        <table class="form_saved_container">
+            <tr>
+                <td>{% form_saved request %}</td>
+                {% if request.GET.initial == 'true' %}
+                <td><a href="/">{% trans "Go back to the home page." %}</a></td>
+                {% endif %}
+            </tr>
+        </table>
         <p id="form_help_text" style="display:none">{% blocktrans %}Remember that these items autocomplete, and you need to press TAB to add something to your list. If it's not in a white box, it doesn't get saved!{% endblocktrans %}</p>
         <p><strong>{% blocktrans %}Please use full names (make and model) for all your gear items!{% endblocktrans %}</strong></p>
         <form method="post" action="{% url profile_save_gear %}">{% csrf_token %}
             {{form.as_p}}
+            {% if initial %}
+            <input type="hidden" name="initial"/>
+            {% endif %}
             <noscript>
                 <p class="hint">
                 {% blocktrans %}* use a comma to separate the values.{% endblocktrans %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 18:14+0000\n"
+"POT-Creation-Date: 2011-11-10 13:39-0500\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -387,13 +387,13 @@ msgstr "Keskimääräinen kuun ikä"
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
-#: views.py:356 views.py:371 views.py:1354 views.py:1369
+#: views.py:356 views.py:371 views.py:1358 views.py:1373
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 
 #: views.py:434 views.py:438 views.py:583 views.py:586 views.py:622
 #: views.py:651 templates/user/profile/edit/basic.html:53
-#: templates/user/profile/edit/gear.html:29
+#: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Syötä nimen osa ja odota ehdotuksia!"
 
@@ -410,7 +410,7 @@ msgid "No results. Press TAB to create this location!"
 msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 
 #: views.py:440 templates/user/profile/edit/basic.html:55
-#: templates/user/profile/edit/gear.html:31
+#: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
@@ -422,17 +422,17 @@ msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 msgid "There was an error. Check your input!"
 msgstr "Virhe. Tarkista tiedot!"
 
-#: views.py:1235
+#: views.py:1239
 msgid "RE"
 msgstr "VS"
 
-#: views.py:1294
+#: views.py:1298
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1318
+#: views.py:1322
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -1016,10 +1016,10 @@ msgid "Warning!"
 msgstr "Huomio!"
 
 #: templates/index.html:26
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Before you start uploading images, you have to add at least one telescope "
-"and one camera. Do that in <a href=\"%(the_url)s\">your profile</a>!"
+"and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
 msgstr ""
 "Ennen kuin aloitat kuvien lataamisen sinun tulee lisätä ainakin yksi "
 "kaukoputki ja yksi kamera. Tämän voit tehdä <a href=\"%(the_url)s"
@@ -1381,7 +1381,7 @@ msgstr "tt:mm"
 #: templates/image/edit/acquisition.html:118
 #: templates/image/edit/basic.html:42 templates/image/edit/gear.html:20
 #: templates/location/edit.html:18 templates/user/profile/edit/basic.html:20
-#: templates/user/profile/edit/gear.html:19
+#: templates/user/profile/edit/gear.html:29
 msgid "Save"
 msgstr "Tallenna"
 
@@ -2108,7 +2108,7 @@ msgid "These are the cities from which you usually image."
 msgstr ""
 
 #: templates/user/profile/edit/basic.html:16
-#: templates/user/profile/edit/gear.html:16
+#: templates/user/profile/edit/gear.html:26
 msgid "* use a comma to separate the values."
 msgstr "* käytä pilkkua erotellaksesi arvot."
 
@@ -2117,7 +2117,7 @@ msgid "or click here to change your password"
 msgstr "tai klikkaa tästä vaihtaaksesi salasanasi"
 
 #: templates/user/profile/edit/basic.html:54
-#: templates/user/profile/edit/gear.html:30
+#: templates/user/profile/edit/gear.html:40
 msgid "No results. Press TAB to add it!"
 msgstr "Ei tuloksia. Paina TAB lisätäksesi sen!"
 
@@ -2125,13 +2125,17 @@ msgstr "Ei tuloksia. Paina TAB lisätäksesi sen!"
 msgid "Edit your astrophotography gear"
 msgstr "Muokkaa tähtikuvauslaitteitasi"
 
-#: templates/user/profile/edit/gear.html:10
+#: templates/user/profile/edit/gear.html:13
+msgid "Go back to the home page."
+msgstr ""
+
+#: templates/user/profile/edit/gear.html:17
 msgid ""
 "Remember that these items autocomplete, and you need to press TAB to add "
 "something to your list. If it's not in a white box, it doesn't get saved!"
 msgstr ""
 
-#: templates/user/profile/edit/gear.html:11
+#: templates/user/profile/edit/gear.html:18
 msgid "Please use full names (make and model) for all your gear items!"
 msgstr ""
 
