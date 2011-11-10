@@ -320,6 +320,18 @@ def image_upload_process(request):
 
     form = ImageUploadForm(request.POST, request.FILES)
     file = request.FILES["file"]
+    filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
+    if original_ext.lower() not in ('.jpg', '.jpeg', '.png', '.gif'):
+        return object_list(
+            request,
+            queryset=Image.objects.filter(is_stored=True)[:15],
+            template_name='index.html',
+            template_object_name='image',
+            extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
+                             's3_url':settings.S3_URL,
+                             'upload_form': ImageUploadForm(),
+                             'context_message': {'error': True, 'text': _("Invalid image. Allowed formats are JPG, PNG and GIF.")}})
+
     try:
         from PIL import Image as PILImage
         trial_image = PILImage.open(file)
@@ -333,9 +345,8 @@ def image_upload_process(request):
             extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                              's3_url':settings.S3_URL,
                              'upload_form': ImageUploadForm(),
-                             'context_message': {'error': True, 'text': _("Invalid image.")}})
+                             'context_message': {'error': True, 'text': _("Invalid image. Allowed formats are JPG, PNG and GIF.")}})
 
-    filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
         destination.write(chunk)
@@ -1307,6 +1318,32 @@ def image_revision_upload_process(request):
     file = request.FILES["file"]
 
     filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
+    if original_ext.lower() not in ('.jpg', '.jpeg', '.png', '.gif'):
+        return object_list(
+            request,
+            queryset=Image.objects.filter(is_stored=True)[:15],
+            template_name='index.html',
+            template_object_name='image',
+            extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
+                             's3_url':settings.S3_URL,
+                             'upload_form': ImageUploadForm(),
+                             'context_message': {'error': True, 'text': _("Invalid image. Allowed formats are JPG, PNG and GIF.")}})
+
+    try:
+        from PIL import Image as PILImage
+        trial_image = PILImage.open(file)
+        trial_image.verify()
+    except:
+        return object_list(
+            request,
+            queryset=Image.objects.filter(is_stored=True)[:15],
+            template_name='index.html',
+            template_object_name='image',
+            extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
+                             's3_url':settings.S3_URL,
+                             'upload_form': ImageUploadForm(),
+                             'context_message': {'error': True, 'text': _("Invalid image. Allowed formats are JPG, PNG and GIF.")}})
+
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
         destination.write(chunk)

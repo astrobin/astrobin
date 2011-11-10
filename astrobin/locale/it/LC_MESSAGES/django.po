@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 17:03+0000\n"
-"PO-Revision-Date: 2011-11-09 19:05+0200\n"
+"POT-Creation-Date: 2011-11-10 07:05+0000\n"
+"PO-Revision-Date: 2011-11-10 09:06+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -365,62 +365,65 @@ msgstr "Giorno lunare medio"
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:336
-msgid "Invalid image."
-msgstr "Immagine non valida."
+#: views.py:333
+#: views.py:348
+#: views.py:1330
+#: views.py:1345
+msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
+msgstr "Immagine non valida. I formati accettati sono JPG, PNG e GIF."
 
-#: views.py:400
-#: views.py:404
-#: views.py:549
-#: views.py:552
-#: views.py:588
-#: views.py:617
+#: views.py:411
+#: views.py:415
+#: views.py:560
+#: views.py:563
+#: views.py:599
+#: views.py:628
 #: templates/user/profile/edit/basic.html:34
 #: templates/user/profile/edit/gear.html:29
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
-#: views.py:401
-#: views.py:550
-#: views.py:589
-#: views.py:618
+#: views.py:412
+#: views.py:561
+#: views.py:600
+#: views.py:629
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
-#: views.py:402
+#: views.py:413
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:405
-#: views.py:553
+#: views.py:416
+#: views.py:564
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:406
+#: views.py:417
 #: templates/user/profile/edit/basic.html:36
 #: templates/user/profile/edit/gear.html:31
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:705
+#: views.py:716
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:710
-#: views.py:747
+#: views.py:721
+#: views.py:758
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1200
+#: views.py:1211
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1259
+#: views.py:1270
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1283
+#: views.py:1294
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -1841,6 +1844,9 @@ msgstr "Ricorda che questi elementi si autocompletano, e devi premere TAB per ag
 #: templates/user/profile/edit/gear.html:11
 msgid "Please use full names (make and model) for all your gear items!"
 msgstr "Ti raccomando di usare nomi completi (marca e modello) per tutti gli elementi della tua strumentazione!"
+
+#~ msgid "Invalid image."
+#~ msgstr "Immagine non valida."
 
 #~ msgid "PS: It's OK if you're a little off with these numbers."
 #~ msgstr "PS: non fa niente se non sei precisissimo con questi numeri."
