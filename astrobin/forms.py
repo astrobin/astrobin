@@ -286,3 +286,25 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
         if queryset:
             self.fields['filter'].queryset = queryset
 
+    def save(self, force_insert=False, force_update=False, commit=True):
+        m = super(DeepSky_AcquisitionForm, self).save(commit=False)
+        m.advanced = True
+        if commit:
+            m.save()
+        return m
+
+
+class DeepSky_AcquisitionBasicForm(forms.ModelForm):
+    date = forms.DateField(
+        required=False,
+        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+        help_text=_("Please use the following format: yyyy-mm-dd"))
+
+    class Meta:
+        model = DeepSky_Acquisition
+        fields = ('date', 'number', 'duration',)
+
+    def __init__(self, user=None, **kwargs):
+        super(DeepSky_AcquisitionBasicForm, self).__init__(**kwargs)
+        self.fields['date'].label = _("Date")
+

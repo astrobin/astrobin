@@ -419,6 +419,10 @@ class DeepSky_Acquisition(Acquisition):
         null=True, blank=True,
         max_digits=5, decimal_places=2)
 
+    advanced = models.BooleanField(
+        editable=False,
+        default=False)
+
     class Meta:
         app_label = 'astrobin'
         ordering = ['filter']
