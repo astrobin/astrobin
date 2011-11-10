@@ -743,7 +743,7 @@ def image_edit_save_acquisition(request):
 
         try:
             solar_system_acquisition.save()
-        except ValidationError:
+        except (ValueError, ValidationError):
             response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
             response_dict['solar_system_acquisitions'] = solar_system_acquisition
             return render_to_response('image/edit/acquisition.html',
