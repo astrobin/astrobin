@@ -1,3 +1,7 @@
+from datetime import datetime
+
+from django.template.defaultfilters import timesince
+from django.utils.translation import ugettext as _
 from django.template import  Library
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -100,4 +104,17 @@ def image_is_ready(image):
 @register.inclusion_tag('inclusion_tags/form_saved.html')
 def form_saved(request):
     return {'saved': 'saved' in request.GET}
+
+
+@register.filter
+def ago(date_time):
+    date_time = date_time.replace(tzinfo = None)
+    diff = abs(date_time - datetime.today())
+    if diff.days <= 0:
+        span = timesince(date_time)
+        span = span.split(",")[0] # just the most significant digit
+        if span == "0 minutes":
+            return _("seconds ago")
+        return _("%s ago") % span 
+    return date(date_time)  
 

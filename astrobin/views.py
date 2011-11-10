@@ -37,6 +37,22 @@ from shortcuts import *
 from tasks import *
 from search_indexes import xapian_escape
 
+import settings
+import pytz
+
+# need to translate to a non-naive timezone, even if timezone == settings.TIME_ZONE, so we can compare two dates
+def to_user_timezone(date, profile):
+    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE               
+    return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(timezone))
+    
+def to_system_timezone(date, profile):
+    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE               
+    return date.replace(tzinfo=pytz.timezone(timezone)).astimezone(pytz.timezone(settings.TIME_ZONE))
+    
+def now_timezone():   
+    return datetime.datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
+
+
 def valueReader(request, field):
     def utf_8_encoder(data):
         for line in data:
@@ -249,8 +265,10 @@ def image_detail(request, id):
         image_type = 'solar_system'
 
     follows = False
+    profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
+    if profile:
         if UserProfile.objects.get(user=image.user) in profile.follows.all():
             follows = True
 
@@ -264,6 +282,8 @@ def image_detail(request, id):
         revision_image = ImageRevision.objects.get(id=revision_id)
         revisions = revisions.exclude(id=revision_id)
         is_ready = revision_image.is_stored
+
+    uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
     return object_detail(
         request,
@@ -291,6 +311,7 @@ def image_detail(request, id):
                          'revision_image': revision_image,
                          'is_ready': is_ready,
                          'full': 'full' in request.GET,
+                         'uploaded_on': uploaded_on
                         })
 
 
@@ -865,6 +886,7 @@ def user_profile_save_basic(request):
         profile.website  = form.cleaned_data['website']
         profile.job      = form.cleaned_data['job']
         profile.hobbies  = form.cleaned_data['hobbies']
+        profile.timezone = form.cleaned_data['timezone']
 
         profile.save()
     else:
