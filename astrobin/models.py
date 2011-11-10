@@ -426,9 +426,9 @@ class UserProfile(models.Model):
 
     # Basic Information
     locations = models.ManyToManyField(Location, null=True, blank=True, verbose_name=_("Locations"))
-    website = models.CharField(_("Website"), max_length=32, null=True, blank=True)
-    job = models.CharField(_("Job"), max_length=32, null=True, blank=True)
-    hobbies = models.CharField(_("Hobbies"), max_length=64, null=True, blank=True)
+    website = models.CharField(_("Website"), max_length=128, null=True, blank=True)
+    job = models.CharField(_("Job"), max_length=128, null=True, blank=True)
+    hobbies = models.CharField(_("Hobbies"), max_length=128, null=True, blank=True)
     language = models.CharField(_("Language"), max_length=8, null=True, blank=True, editable=False)
 
     # Avatar
