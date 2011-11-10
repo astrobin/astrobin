@@ -116,5 +116,5 @@ def ago(date_time):
         if span == "0 minutes":
             return _("seconds ago")
         return _("%s ago") % span 
-    return date(date_time)  
+    return datetime.date(date_time)  
 
