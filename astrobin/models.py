@@ -344,8 +344,16 @@ class Acquisition(models.Model):
 
 
 class DeepSky_Acquisition(Acquisition):
+    BINNING_CHOICES = (
+        (1, '1x1'),
+        (2, '2x2'),
+        (3, '3x3'),
+        (4, '4x4'),
+    )
+
     is_synthetic = models.BooleanField(_("Synthetic channel"))
     filter = models.ForeignKey(Filter, null=True, blank=True, verbose_name=_("Filter"))
+    binning = models.IntegerField(null=True, blank=True, choices=BINNING_CHOICES, verbose_name=_("Binning"))
     number = models.IntegerField(_("Number"), null=True, blank=True)
     duration = models.IntegerField(_("Duration"), null=True, blank=True)
     iso = models.IntegerField(_("ISO"), null=True, blank=True)
