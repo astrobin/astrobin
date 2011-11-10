@@ -34,9 +34,7 @@ def autocomplete(request, what):
     regex = ".*"
     for c in re.sub(r'\s', '', q):
         esc = re.escape(c)
-        for d in esc:
-            regex += "%c.*" % d
-
+        regex += "%s.*" % esc
 
     # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
