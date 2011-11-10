@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 13:39-0500\n"
-"PO-Revision-Date: 2011-11-10 13:40-0500\n"
+"POT-Creation-Date: 2011-11-10 15:34-0500\n"
+"PO-Revision-Date: 2011-11-10 15:36-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -23,7 +23,7 @@ msgstr "Se hai ridimensionato l'immagine prima di caricarlo, metti qui la percen
 
 #: forms.py:39
 #: models.py:36
-#: models.py:430
+#: models.py:434
 #: templates/image/edit/acquisition.html:32
 msgid "Focal length"
 msgstr "Lunghezza focale"
@@ -56,7 +56,7 @@ msgstr "Soggetti"
 #: forms.py:59
 #: forms.py:114
 #: models.py:233
-#: models.py:492
+#: models.py:496
 #: templates/image/edit/basic.html:26
 msgid "Locations"
 msgstr "Luoghi"
@@ -81,7 +81,7 @@ msgstr "Telescopi di guida"
 #: forms.py:83
 #: forms.py:156
 #: models.py:248
-#: models.py:509
+#: models.py:513
 msgid "Mounts"
 msgstr "Montature"
 
@@ -98,28 +98,28 @@ msgstr "Camere di guida"
 #: forms.py:86
 #: forms.py:158
 #: models.py:251
-#: models.py:511
+#: models.py:515
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
 #: forms.py:87
 #: forms.py:159
 #: models.py:252
-#: models.py:512
+#: models.py:516
 msgid "Software"
 msgstr "Software"
 
 #: forms.py:88
 #: forms.py:160
 #: models.py:253
-#: models.py:513
+#: models.py:517
 msgid "Filters"
 msgstr "Filtri"
 
 #: forms.py:89
 #: forms.py:161
 #: models.py:254
-#: models.py:514
+#: models.py:518
 msgid "Accessories"
 msgstr "Accessori"
 
@@ -136,12 +136,12 @@ msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in 
 msgstr "Suggerimento: inserisci i filtri separatamente! Se invece l'inserisci tutti assieme, ad esempio LRGB insieme, non potrai aggiungere sessioni di acquisizione separate per ogni filtro."
 
 #: forms.py:155
-#: models.py:508
+#: models.py:512
 msgid "Telescopes"
 msgstr "Telescopi"
 
 #: forms.py:157
-#: models.py:510
+#: models.py:514
 msgid "Cameras"
 msgstr "Camere"
 
@@ -153,6 +153,7 @@ msgstr "Utente"
 #: forms.py:185
 #: forms.py:189
 #: forms.py:272
+#: forms.py:301
 #: models.py:337
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Usa il seguente formato: aaaa-mm-gg"
@@ -199,8 +200,9 @@ msgid "For example: -51.25"
 msgstr "Per esempio: -51.25"
 
 #: forms.py:285
+#: forms.py:309
 #: models.py:337
-#: models.py:444
+#: models.py:448
 #: templates/image/edit/acquisition.html:80
 #: templates/search/search.html:22
 msgid "Date"
@@ -247,7 +249,7 @@ msgid "(no title)"
 msgstr "(senza titolo)"
 
 #: models.py:338
-#: models.py:443
+#: models.py:447
 msgid "Image"
 msgstr "Immagine"
 
@@ -337,80 +339,80 @@ msgstr "SQM medio"
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
-#: models.py:428
+#: models.py:432
 #: views.py:253
 msgid "Frames"
 msgstr "Frame"
 
-#: models.py:429
+#: models.py:433
 #: templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:431
+#: models.py:435
 #: templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:432
+#: models.py:436
 #: templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:433
+#: models.py:437
 #: templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:434
+#: models.py:438
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:435
+#: models.py:439
 msgid "Transparency"
 msgstr "Trasparenza"
 
-#: models.py:436
+#: models.py:440
 msgid "Time"
 msgstr "Ora"
 
-#: models.py:463
+#: models.py:467
 msgid "Request from"
 msgstr "Richiesta da"
 
-#: models.py:475
+#: models.py:479
 msgid "Additional information"
 msgstr "Ulteriori informazioni"
 
-#: models.py:476
+#: models.py:480
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:477
+#: models.py:481
 msgid "Higher resolution"
 msgstr "Risoluzione superiore"
 
-#: models.py:493
+#: models.py:497
 msgid "Website"
 msgstr "Sito web"
 
-#: models.py:494
+#: models.py:498
 msgid "Job"
 msgstr "Professione"
 
-#: models.py:495
+#: models.py:499
 msgid "Hobbies"
 msgstr "Interessi"
 
-#: models.py:496
+#: models.py:500
 msgid "Language"
 msgstr "Lingua"
 
-#: models.py:501
+#: models.py:505
 msgid "Timezone"
 msgstr "Fusorario"
 
-#: models.py:502
+#: models.py:506
 msgid "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr "Se inserisci questo, AstroBin ti mostrerà tutte le date nel tuo fusorario."
 
@@ -428,26 +430,26 @@ msgstr "Fase lunare media"
 
 #: views.py:356
 #: views.py:371
-#: views.py:1358
-#: views.py:1373
+#: views.py:1391
+#: views.py:1406
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida. I formati accettati sono JPG, PNG e GIF."
 
 #: views.py:434
 #: views.py:438
-#: views.py:583
-#: views.py:586
-#: views.py:622
-#: views.py:651
+#: views.py:595
+#: views.py:598
+#: views.py:634
+#: views.py:663
 #: templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
 #: views.py:435
-#: views.py:584
-#: views.py:623
-#: views.py:652
+#: views.py:596
+#: views.py:635
+#: views.py:664
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
@@ -456,7 +458,7 @@ msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
 #: views.py:439
-#: views.py:587
+#: views.py:599
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
@@ -466,25 +468,26 @@ msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:739
+#: views.py:759
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:744
-#: views.py:781
+#: views.py:764
+#: views.py:776
+#: views.py:814
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1239
+#: views.py:1272
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1298
+#: views.py:1331
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1322
+#: views.py:1355
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -1249,7 +1252,8 @@ msgid "hh:mm"
 msgstr "hh:mm"
 
 #: templates/image/edit/acquisition.html:98
-#: templates/image/edit/acquisition.html:118
+#: templates/image/edit/acquisition.html:123
+#: templates/image/edit/acquisition.html:138
 #: templates/image/edit/basic.html:42
 #: templates/image/edit/gear.html:20
 #: templates/location/edit.html:18
@@ -1259,39 +1263,51 @@ msgid "Save"
 msgstr "Salva"
 
 #: templates/image/edit/acquisition.html:99
-#: templates/image/edit/acquisition.html:120
+#: templates/image/edit/acquisition.html:125
+#: templates/image/edit/acquisition.html:139
 msgid "Remove data"
 msgstr "Rimuovi dati"
 
 #: templates/image/edit/acquisition.html:100
-#: templates/image/edit/acquisition.html:121
+#: templates/image/edit/acquisition.html:126
+#: templates/image/edit/acquisition.html:140
 #: templates/image/edit/basic.html:43
 #: templates/image/edit/gear.html:21
 #: templates/image/edit/presolve.html:31
 msgid "Return to image"
 msgstr "Torna all'immagine"
 
-#: templates/image/edit/acquisition.html:106
+#: templates/image/edit/acquisition.html:107
 msgid "You can insert as many acquisition sessions as you want, as often images are taken across several nights. An acquisition session is defined primarily by a date and a filter. Fill in your data and then click on <strong>Save</strong> to finish, or on <strong>Add more</strong> to add more acquisition sessions."
 msgstr "Puoi inserire tutte le sessioni di acquisizione che vuoi, dato che spesso un'immagine viene acquisita durante diverse notti. Una session di acquisizione è definita principalmente da una data ed un filtro. Insierisci i dati e poi clicca su <strong>Salva</strong> per completare l'operazione, oppure su <strong>Aggiungi</strong> per aggiungere altre sessioni di acquisizione."
 
 #: templates/image/edit/acquisition.html:110
+#, python-format
+msgid "Is this too much data for you to handle? Go to the <a href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+msgstr "Questi dati ti sembrano troppi? Vai al <a href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">modulo di base</a>."
+
+#: templates/image/edit/acquisition.html:114
 msgid "Acquisition session"
 msgstr "Sessione di acquisizione"
 
-#: templates/image/edit/acquisition.html:119
+#: templates/image/edit/acquisition.html:124
 msgid "Add more"
 msgstr "Aggiungi"
 
-#: templates/image/edit/acquisition.html:126
+#: templates/image/edit/acquisition.html:131
+#, python-format
+msgid "With this form you can input the basic details for the acquisition of your image. If you want to be more thorough or fill in separate details for each filter, go to the <a href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</a>."
+msgstr "In questo modulo puoi inserire i dettagli di base dell'acquisizione della tua immagine. Se vuoi essere più dettagliato oppure inserire valori diversi per ogni filtro, allora vai <a href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">modulo avanzato</a>."
+
+#: templates/image/edit/acquisition.html:146
 msgid "What kind of image is this?"
 msgstr "Di che tipo d'immagine si tratta?"
 
-#: templates/image/edit/acquisition.html:129
+#: templates/image/edit/acquisition.html:149
 msgid "Solar system"
 msgstr "Sistema solare"
 
-#: templates/image/edit/acquisition.html:132
+#: templates/image/edit/acquisition.html:152
 msgid "Deep sky"
 msgstr "Profondo cielo"
 
@@ -1497,36 +1513,11 @@ msgstr "Il tuo messaggio è stato spedito con successo."
 msgid "Here are your notifications"
 msgstr "Ecco le tue notifiche"
 
-#: templates/notification/email_body.txt:1
-#, python-format
-msgid ""
-"You have received the following notice from %(current_site)s:\n"
-"\n"
-"%(message)s\n"
-"\n"
-"To see other notices or change how you receive notifications, please go to %(notices_url)s.\n"
-msgstr ""
-"Hai ricevuto la seguente notifica su %(current_site)s:\n"
-"\n"
-"%(message)s\n"
-"\n"
-"Per vedere questa ed altre notifiche, vai al seguente indirizzo: %(notices_url)s.\n"
-
-#: templates/notification/attention_request/full.txt:2
-#, python-format
-msgid "%(originator)s would like to bring the following image to your attention: %(object_url)s"
-msgstr "%(originator)s vorrebbe portare la seguente immagine alla tua attenzione: %(object_url)s"
-
 #: templates/notification/attention_request/notice.html:2
 #: templates/notification/attention_request/short.html:1
 #, python-format
 msgid "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an image to your attention.</a>"
 msgstr "<a href=\"%(object_url)s\"<strong>%(originator)s</strong> vuole portare un'immagine alla tua attenzione.</a>"
-
-#: templates/notification/attention_request/short.txt:2
-#, python-format
-msgid "%(originator)s wants to bring an image to your attention"
-msgstr "%(originator)s vuole portare un immagine alla tua attenzione"
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -1535,10 +1526,8 @@ msgid "<a href=\"%(object_url)s\">You are now following <strong>%(object)s</stro
 msgstr "<a href=\"%(object_url)s\">Adesso stai seguendo <strong>%(object)s</strong>.</a>"
 
 #: templates/notification/image_deleted/full.html:2
-#: templates/notification/image_deleted/full.txt:2
 #: templates/notification/image_deleted/notice.html:2
 #: templates/notification/image_deleted/short.html:2
-#: templates/notification/image_deleted/short.txt:2
 msgid "Your image has been deleted."
 msgstr "La tua immagine è stata cancellata"
 
@@ -1560,25 +1549,11 @@ msgstr "<a href=\"%(object_url)s\">La tua immagine è stata processata.</a>"
 msgid "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr "<a href=\"%(object_url)s\">La risoluzione astrometrica della tua immagine è stata effettuata con successo.</a>"
 
-#: templates/notification/new_follower/full.txt:2
-#, python-format
-msgid "User %(object)s is now following you. They will be notified when you publish new images."
-msgstr "L'utente %(object)s ti sta seguendo. Sarà notificato quando pubblichi nuove immagini."
-
 #: templates/notification/new_follower/notice.html:2
 #: templates/notification/new_follower/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you.</a>"
 msgstr "<a href=\"%(object_url)s\"><strong>%(object)s</strong> ti sta seguendo.</a>"
-
-#: templates/notification/new_follower/short.txt:2
-msgid "You have a new follower!"
-msgstr "Una nuova persona ti segue!"
-
-#: templates/notification/new_image/full.txt:2
-#, python-format
-msgid "%(originator)s has published a new image! Check it out at the following url: %(object_url)s"
-msgstr "%(originator)s ha pubblicato una nuova immagine! Guardala al seguente indirizzo: %(object_url)s"
 
 #: templates/notification/new_image/notice.html:2
 #, python-format
@@ -1590,42 +1565,17 @@ msgstr "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ha pubblicato
 msgid "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a new image</a>"
 msgstr "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ha pubblicato una nuova immagine</a>"
 
-#: templates/notification/new_image/short.txt:2
-#, python-format
-msgid "New image by %(originator)s"
-msgstr "Nuova immagine da %(originator)s"
-
-#: templates/notification/new_image_revision/full.txt:2
-#, python-format
-msgid "%(originator)s has published a new image revision! Check it out at the following url: %(object_url)s"
-msgstr "%(originator)s ha pubblicato una nuova revisione di una sua immagine! Guardala al seguente indirizzo: %(object_url)s"
-
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a new image revision.</a>"
 msgstr "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ha pubblicato una nuova versione di una sua immagine.</a>"
 
-#: templates/notification/new_image_revision/short.txt:2
-#, python-format
-msgid "New image revision by %(originator)s"
-msgstr "Nuova revisione d'immagine da %(originator)s"
-
-#: templates/notification/request_fulfilled/full.txt:2
-#, python-format
-msgid "%(originator)s has fulfilled your request! Check it out at the following url: %(object_url)s"
-msgstr "%(originator)s ha soddisfatto la tua richiesta! Guardala al seguente indirizzo: %(object_url)s"
-
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled your request</a>"
 msgstr "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ha soddisfatto la tua richeista</a>"
-
-#: templates/notification/request_fulfilled/short.txt:2
-#, python-format
-msgid "%(originator)s has fulfilled your request."
-msgstr "L'utente %(originator)s ha soddisfatto la tua richiesta."
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
@@ -1659,19 +1609,6 @@ msgstr "Login"
 #: templates/registration/activate.html:14
 msgid "Account activation failed"
 msgstr "Attivazione dell'account fallita"
-
-#: templates/registration/activation_email.txt:2
-msgid "Activate account at"
-msgstr "Attiva l'account presso"
-
-#: templates/registration/activation_email.txt:6
-#, python-format
-msgid "Link is valid for %(expiration_days)s days."
-msgstr "Il link è valido per %(expiration_days)s giorni."
-
-#: templates/registration/activation_email_subject.txt:1
-msgid "Account activation on"
-msgstr "Attivazione dell'account su"
 
 #: templates/registration/login.html:7
 msgid "Reset password"
@@ -1910,6 +1847,10 @@ msgstr "Ricorda che questi elementi si autocompletano, e devi premere TAB per ag
 msgid "Please use full names (make and model) for all your gear items!"
 msgstr "Ti raccomando di usare nomi completi (marca e modello) per tutti gli elementi della tua strumentazione!"
 
+#: templatetags/tags.py:116
+msgid "minutes"
+msgstr "minuti"
+
 #: templatetags/tags.py:117
 msgid "seconds ago"
 msgstr "secondi fa"
@@ -1918,6 +1859,80 @@ msgstr "secondi fa"
 #, python-format
 msgid "%s ago"
 msgstr "%s fa"
+
+#~ msgid ""
+#~ "You have received the following notice from %(current_site)s:\n"
+#~ "\n"
+#~ "%(message)s\n"
+#~ "\n"
+#~ "To see other notices or change how you receive notifications, please go "
+#~ "to %(notices_url)s.\n"
+#~ msgstr ""
+#~ "Hai ricevuto la seguente notifica su %(current_site)s:\n"
+#~ "\n"
+#~ "%(message)s\n"
+#~ "\n"
+#~ "Per vedere questa ed altre notifiche, vai al seguente indirizzo: "
+#~ "%(notices_url)s.\n"
+
+#~ msgid ""
+#~ "%(originator)s would like to bring the following image to your attention: "
+#~ "%(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s vorrebbe portare la seguente immagine alla tua attenzione: "
+#~ "%(object_url)s"
+
+#~ msgid "%(originator)s wants to bring an image to your attention"
+#~ msgstr "%(originator)s vuole portare un immagine alla tua attenzione"
+
+#~ msgid ""
+#~ "User %(object)s is now following you. They will be notified when you "
+#~ "publish new images."
+#~ msgstr ""
+#~ "L'utente %(object)s ti sta seguendo. Sarà notificato quando pubblichi "
+#~ "nuove immagini."
+
+#~ msgid "You have a new follower!"
+#~ msgstr "Una nuova persona ti segue!"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s ha pubblicato una nuova immagine! Guardala al seguente "
+#~ "indirizzo: %(object_url)s"
+
+#~ msgid "New image by %(originator)s"
+#~ msgstr "Nuova immagine da %(originator)s"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image revision! Check it out at the "
+#~ "following url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s ha pubblicato una nuova revisione di una sua immagine! "
+#~ "Guardala al seguente indirizzo: %(object_url)s"
+
+#~ msgid "New image revision by %(originator)s"
+#~ msgstr "Nuova revisione d'immagine da %(originator)s"
+
+#~ msgid ""
+#~ "%(originator)s has fulfilled your request! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s ha soddisfatto la tua richiesta! Guardala al seguente "
+#~ "indirizzo: %(object_url)s"
+
+#~ msgid "%(originator)s has fulfilled your request."
+#~ msgstr "L'utente %(originator)s ha soddisfatto la tua richiesta."
+
+#~ msgid "Activate account at"
+#~ msgstr "Attiva l'account presso"
+
+#~ msgid "Link is valid for %(expiration_days)s days."
+#~ msgstr "Il link è valido per %(expiration_days)s giorni."
+
+#~ msgid "Account activation on"
+#~ msgstr "Attivazione dell'account su"
 
 #~ msgid "Invalid image."
 #~ msgstr "Immagine non valida."
