@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 07:28-0500\n"
+"POT-Creation-Date: 2011-11-10 11:20-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgid ""
 "new size. E.g. 50 if you made it half the size."
 msgstr ""
 
-#: forms.py:39 models.py:35 models.py:429
+#: forms.py:39 models.py:36 models.py:430
 #: templates/image/edit/acquisition.html:32
 msgid "Focal length"
 msgstr ""
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Pixel size"
 msgstr ""
 
-#: forms.py:41 models.py:365
+#: forms.py:41 models.py:366
 msgid "Binning"
 msgstr ""
 
@@ -40,57 +40,57 @@ msgstr ""
 msgid "Scaling"
 msgstr ""
 
-#: forms.py:57 models.py:230 templates/image/edit/basic.html:17
+#: forms.py:57 models.py:231 templates/image/edit/basic.html:17
 msgid "Title"
 msgstr ""
 
-#: forms.py:58 models.py:231 templates/image/edit/basic.html:21
+#: forms.py:58 models.py:232 templates/image/edit/basic.html:21
 msgid "Subjects"
 msgstr ""
 
-#: forms.py:59 forms.py:114 models.py:232 models.py:491
+#: forms.py:59 forms.py:114 models.py:233 models.py:492
 #: templates/image/edit/basic.html:26
 msgid "Locations"
 msgstr ""
 
-#: forms.py:60 models.py:233 templates/image/detail.html:270
+#: forms.py:60 models.py:234 templates/image/detail.html:270
 #: templates/image/edit/basic.html:35
 msgid "Description"
 msgstr ""
 
-#: forms.py:81 models.py:245
+#: forms.py:81 models.py:246
 msgid "Imaging telescopes"
 msgstr ""
 
-#: forms.py:82 models.py:246
+#: forms.py:82 models.py:247
 msgid "Guiding telescopes"
 msgstr ""
 
-#: forms.py:83 forms.py:156 models.py:247 models.py:502
+#: forms.py:83 forms.py:156 models.py:248 models.py:509
 msgid "Mounts"
 msgstr ""
 
-#: forms.py:84 models.py:248
+#: forms.py:84 models.py:249
 msgid "Imaging cameras"
 msgstr ""
 
-#: forms.py:85 models.py:249
+#: forms.py:85 models.py:250
 msgid "Guiding cameras"
 msgstr ""
 
-#: forms.py:86 forms.py:158 models.py:250 models.py:504
+#: forms.py:86 forms.py:158 models.py:251 models.py:511
 msgid "Focal reducers"
 msgstr ""
 
-#: forms.py:87 forms.py:159 models.py:251 models.py:505
+#: forms.py:87 forms.py:159 models.py:252 models.py:512
 msgid "Software"
 msgstr ""
 
-#: forms.py:88 forms.py:160 models.py:252 models.py:506
+#: forms.py:88 forms.py:160 models.py:253 models.py:513
 msgid "Filters"
 msgstr ""
 
-#: forms.py:89 forms.py:161 models.py:253 models.py:507
+#: forms.py:89 forms.py:161 models.py:254 models.py:514
 msgid "Accessories"
 msgstr ""
 
@@ -109,11 +109,11 @@ msgid ""
 "box, you won't be able to add separate acquisition sessions for them."
 msgstr ""
 
-#: forms.py:155 models.py:501
+#: forms.py:155 models.py:508
 msgid "Telescopes"
 msgstr ""
 
-#: forms.py:157 models.py:503
+#: forms.py:157 models.py:510
 msgid "Cameras"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: forms.py:185 forms.py:189 forms.py:272 models.py:336
+#: forms.py:185 forms.py:189 forms.py:272 models.py:337
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr ""
 
@@ -165,255 +165,264 @@ msgstr ""
 msgid "For example: -51.25"
 msgstr ""
 
-#: forms.py:285 models.py:336 models.py:443
+#: forms.py:285 models.py:337 models.py:444
 #: templates/image/edit/acquisition.html:80 templates/search/search.html:22
 msgid "Date"
 msgstr ""
 
-#: models.py:25 models.py:143
+#: models.py:26 models.py:144
 msgid "Name"
 msgstr ""
 
-#: models.py:36
+#: models.py:37
 msgid "Aperture"
 msgstr ""
 
-#: models.py:57
+#: models.py:58
 msgid "Ratio"
 msgstr ""
 
-#: models.py:144
+#: models.py:145
 msgid "Latitude"
 msgstr ""
 
-#: models.py:145
+#: models.py:146
 msgid "Longitude"
 msgstr ""
 
-#: models.py:146
+#: models.py:147
 msgid "Altitude"
 msgstr ""
 
-#: models.py:239
+#: models.py:240
 msgid "(in mm)"
 msgstr ""
 
-#: models.py:240
+#: models.py:241
 msgid "(in &mu;m, taking binning and image scaling into account)"
 msgstr ""
 
-#: models.py:266 templates/image/detail.html:194
+#: models.py:267 templates/image/detail.html:194
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/image_list.html:19
 msgid "(no title)"
 msgstr ""
 
-#: models.py:337 models.py:442
+#: models.py:338 models.py:443
 msgid "Image"
 msgstr ""
 
-#: models.py:355
+#: models.py:356
 msgid "Synthetic channel"
 msgstr ""
 
-#: models.py:360
+#: models.py:361
 msgid "Filter"
 msgstr ""
 
-#: models.py:368
+#: models.py:369
 msgid "Number"
 msgstr ""
 
-#: models.py:370
+#: models.py:371
 msgid "The number of sub-frames."
 msgstr ""
 
-#: models.py:373
+#: models.py:374
 msgid "Duration"
 msgstr ""
 
-#: models.py:375
+#: models.py:376
 msgid "Duration of each sub-frame, in seconds."
 msgstr ""
 
-#: models.py:378
+#: models.py:379
 msgid "ISO"
 msgstr ""
 
-#: models.py:382
+#: models.py:383
 msgid "Gain"
 msgstr ""
 
-#: models.py:387
+#: models.py:388
 msgid "Sensor cooling"
 msgstr ""
 
-#: models.py:389
+#: models.py:390
 msgid "The temperature of the chip. E.g.: -20."
 msgstr ""
 
-#: models.py:392 views.py:238
+#: models.py:393 views.py:254
 msgid "Darks"
 msgstr ""
 
-#: models.py:394
+#: models.py:395
 msgid "The number of dark frames."
 msgstr ""
 
-#: models.py:397 views.py:239
+#: models.py:398 views.py:255
 msgid "Flats"
 msgstr ""
 
-#: models.py:399
+#: models.py:400
 msgid "The number of flat frames."
 msgstr ""
 
-#: models.py:402 views.py:240
+#: models.py:403 views.py:256
 msgid "Flat darks"
 msgstr ""
 
-#: models.py:404
+#: models.py:405
 msgid "The number of dark flat frames."
 msgstr ""
 
-#: models.py:407 views.py:241
+#: models.py:408 views.py:257
 msgid "Bias"
 msgstr ""
 
-#: models.py:409
+#: models.py:410
 msgid "The number of bias/offset frames."
 msgstr ""
 
-#: models.py:412 views.py:244
+#: models.py:413 views.py:260
 msgid "Mean SQM"
 msgstr ""
 
-#: models.py:417 views.py:245
+#: models.py:418 views.py:261
 msgid "Mean FWHM"
 msgstr ""
 
-#: models.py:427 views.py:237
+#: models.py:428 views.py:253
 msgid "Frames"
 msgstr ""
 
-#: models.py:428 templates/image/edit/acquisition.html:24
+#: models.py:429 templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr ""
 
-#: models.py:430 templates/image/edit/acquisition.html:40
+#: models.py:431 templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr ""
 
-#: models.py:431 templates/image/edit/acquisition.html:48
+#: models.py:432 templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr ""
 
-#: models.py:432 templates/image/edit/acquisition.html:56
+#: models.py:433 templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr ""
 
-#: models.py:433
+#: models.py:434
 msgid "Seeing"
 msgstr ""
 
-#: models.py:434
+#: models.py:435
 msgid "Transparency"
 msgstr ""
 
-#: models.py:435
+#: models.py:436
 msgid "Time"
 msgstr ""
 
-#: models.py:462
+#: models.py:463
 msgid "Request from"
 msgstr ""
 
-#: models.py:474
+#: models.py:475
 msgid "Additional information"
 msgstr ""
 
-#: models.py:475
+#: models.py:476
 msgid "TIFF/FITS"
 msgstr ""
 
-#: models.py:476
+#: models.py:477
 msgid "Higher resolution"
 msgstr ""
 
-#: models.py:492
+#: models.py:493
 msgid "Website"
 msgstr ""
 
-#: models.py:493
+#: models.py:494
 msgid "Job"
 msgstr ""
 
-#: models.py:494
+#: models.py:495
 msgid "Hobbies"
 msgstr ""
 
-#: models.py:495
+#: models.py:496
 msgid "Language"
 msgstr ""
 
-#: views.py:236
+#: models.py:501
+msgid "Timezone"
+msgstr ""
+
+#: models.py:502
+msgid ""
+"By selecting this, you will see all the dates on AstroBin in your timezone."
+msgstr ""
+
+#: views.py:252
 msgid "Dates"
 msgstr ""
 
-#: views.py:242
+#: views.py:258
 msgid "Avg. Moon age"
 msgstr ""
 
-#: views.py:243
+#: views.py:259
 msgid "Avg. Moon phase"
 msgstr ""
 
-#: views.py:335 views.py:350 views.py:1332 views.py:1347
+#: views.py:354 views.py:369 views.py:1352 views.py:1367
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 
-#: views.py:413 views.py:417 views.py:562 views.py:565 views.py:601
-#: views.py:630 templates/user/profile/edit/basic.html:34
+#: views.py:432 views.py:436 views.py:581 views.py:584 views.py:620
+#: views.py:649 templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:29
 msgid "Enter partial name and wait for the suggestions!"
 msgstr ""
 
-#: views.py:414 views.py:563 views.py:602 views.py:631
+#: views.py:433 views.py:582 views.py:621 views.py:650
 msgid "No results. Sorry."
 msgstr ""
 
-#: views.py:415
+#: views.py:434
 msgid "Subjects found in the SIMBAD database"
 msgstr ""
 
-#: views.py:418 views.py:566
+#: views.py:437 views.py:585
 msgid "No results. Press TAB to create this location!"
 msgstr ""
 
-#: views.py:419 templates/user/profile/edit/basic.html:36
+#: views.py:438 templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:31
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:718
+#: views.py:737
 msgid "Fill in one session, before adding more."
 msgstr ""
 
-#: views.py:723 views.py:760
+#: views.py:742 views.py:779
 msgid "There was an error. Check your input!"
 msgstr ""
 
-#: views.py:1213
+#: views.py:1233
 msgid "RE"
 msgstr ""
 
-#: views.py:1272
+#: views.py:1292
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr ""
 
-#: views.py:1296
+#: views.py:1316
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -1966,7 +1975,7 @@ msgstr ""
 msgid "or click here to change your password"
 msgstr ""
 
-#: templates/user/profile/edit/basic.html:35
+#: templates/user/profile/edit/basic.html:54
 #: templates/user/profile/edit/gear.html:30
 msgid "No results. Press TAB to add it!"
 msgstr ""

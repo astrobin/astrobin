@@ -17,6 +17,7 @@ from celery.task import task
 
 from djangoratings.fields import RatingField
 from model_utils.managers import InheritanceManager
+from timezones.forms import PRETTY_TIMEZONE_CHOICES
 
 from tasks import store_image, solve_image, delete_image
 from notifications import push_notification
@@ -493,6 +494,12 @@ class UserProfile(models.Model):
     job = models.CharField(_("Job"), max_length=128, null=True, blank=True)
     hobbies = models.CharField(_("Hobbies"), max_length=128, null=True, blank=True)
     language = models.CharField(_("Language"), max_length=8, null=True, blank=True, editable=False)
+    timezone = models.CharField(
+        max_length=255,
+        choices=PRETTY_TIMEZONE_CHOICES,
+        blank=True, null=True,
+        verbose_name=_("Timezone"),
+        help_text=_("By selecting this, you will see all the dates on AstroBin in your timezone."))
 
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
