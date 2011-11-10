@@ -425,7 +425,7 @@ class DeepSky_Acquisition(Acquisition):
 
 class SolarSystem_Acquisition(Acquisition):
     frames = models.IntegerField(_("Frames"), null=True, blank=True)
-    fps = models.IntegerField(_("FPS"), null=True, blank=True)
+    fps = models.DecimalField(_("FPS"), max_digits=12, decimal_places=5, null=True, blank=True)
     focal_length = models.IntegerField(_("Focal length"), null=True, blank=True)
     cmi = models.DecimalField(_("CMI"), null=True, blank=True, max_digits=5, decimal_places=2)
     cmii = models.DecimalField(_("CMII"), null=True, blank=True, max_digits=5, decimal_places=2)
