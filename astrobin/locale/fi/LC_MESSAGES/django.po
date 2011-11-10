@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 13:39-0500\n"
+"POT-Creation-Date: 2011-11-10 15:34-0500\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -25,7 +25,7 @@ msgid ""
 "new size. E.g. 50 if you made it half the size."
 msgstr ""
 
-#: forms.py:39 models.py:36 models.py:430
+#: forms.py:39 models.py:36 models.py:434
 #: templates/image/edit/acquisition.html:32
 msgid "Focal length"
 msgstr "Polttoväli"
@@ -50,7 +50,7 @@ msgstr "Otsikko"
 msgid "Subjects"
 msgstr "Kohteet"
 
-#: forms.py:59 forms.py:114 models.py:233 models.py:492
+#: forms.py:59 forms.py:114 models.py:233 models.py:496
 #: templates/image/edit/basic.html:26
 msgid "Locations"
 msgstr "Sijainnit"
@@ -68,7 +68,7 @@ msgstr "Kuvauskaukoputket"
 msgid "Guiding telescopes"
 msgstr "Seurantakaukoputket"
 
-#: forms.py:83 forms.py:156 models.py:248 models.py:509
+#: forms.py:83 forms.py:156 models.py:248 models.py:513
 msgid "Mounts"
 msgstr "Jalustat"
 
@@ -80,19 +80,19 @@ msgstr "Kuvauskamerat"
 msgid "Guiding cameras"
 msgstr "Seurantakamerat"
 
-#: forms.py:86 forms.py:158 models.py:251 models.py:511
+#: forms.py:86 forms.py:158 models.py:251 models.py:515
 msgid "Focal reducers"
 msgstr "Polttovälin lyhentäjät"
 
-#: forms.py:87 forms.py:159 models.py:252 models.py:512
+#: forms.py:87 forms.py:159 models.py:252 models.py:516
 msgid "Software"
 msgstr "Ohjelmistot"
 
-#: forms.py:88 forms.py:160 models.py:253 models.py:513
+#: forms.py:88 forms.py:160 models.py:253 models.py:517
 msgid "Filters"
 msgstr "Suodattimet"
 
-#: forms.py:89 forms.py:161 models.py:254 models.py:514
+#: forms.py:89 forms.py:161 models.py:254 models.py:518
 msgid "Accessories"
 msgstr "Oheislaitteet"
 
@@ -111,11 +111,11 @@ msgid ""
 "box, you won't be able to add separate acquisition sessions for them."
 msgstr ""
 
-#: forms.py:155 models.py:508
+#: forms.py:155 models.py:512
 msgid "Telescopes"
 msgstr "Kaukoputket"
 
-#: forms.py:157 models.py:510
+#: forms.py:157 models.py:514
 msgid "Cameras"
 msgstr "Kamerat"
 
@@ -123,7 +123,7 @@ msgstr "Kamerat"
 msgid "User"
 msgstr "Käyttäjä"
 
-#: forms.py:185 forms.py:189 forms.py:272 models.py:337
+#: forms.py:185 forms.py:189 forms.py:272 forms.py:301 models.py:337
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Käytä seuraavaa muotoa: vvvv-kk-pp"
 
@@ -168,7 +168,7 @@ msgstr "Esimerksi: +12.44"
 msgid "For example: -51.25"
 msgstr "Esimerksi: -51.25"
 
-#: forms.py:285 models.py:337 models.py:444
+#: forms.py:285 forms.py:309 models.py:337 models.py:448
 #: templates/image/edit/acquisition.html:80 templates/search/search.html:22
 msgid "Date"
 msgstr "Päivämäärä"
@@ -211,7 +211,7 @@ msgstr ""
 msgid "(no title)"
 msgstr "(ei otsikkoa)"
 
-#: models.py:338 models.py:443
+#: models.py:338 models.py:447
 msgid "Image"
 msgstr "Kuva"
 
@@ -300,77 +300,77 @@ msgstr "Keskiarvo SQM"
 msgid "Mean FWHM"
 msgstr "Keskiarvo FWHM"
 
-#: models.py:428 views.py:253
+#: models.py:432 views.py:253
 #, fuzzy
 msgid "Frames"
 msgstr "Frames"
 
-#: models.py:429 templates/image/edit/acquisition.html:24
+#: models.py:433 templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr "Kuvataajuus"
 
-#: models.py:431 templates/image/edit/acquisition.html:40
+#: models.py:435 templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:432 templates/image/edit/acquisition.html:48
+#: models.py:436 templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:433 templates/image/edit/acquisition.html:56
+#: models.py:437 templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:434
+#: models.py:438
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:435
+#: models.py:439
 msgid "Transparency"
 msgstr "Läpinäkyvyys"
 
-#: models.py:436
+#: models.py:440
 msgid "Time"
 msgstr "Aika"
 
-#: models.py:463
+#: models.py:467
 msgid "Request from"
 msgstr "Pyyntö käyttäjältä"
 
-#: models.py:475
+#: models.py:479
 msgid "Additional information"
 msgstr "Lisätietoja"
 
-#: models.py:476
+#: models.py:480
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:477
+#: models.py:481
 msgid "Higher resolution"
 msgstr "Suurempi resoluutio"
 
-#: models.py:493
+#: models.py:497
 msgid "Website"
 msgstr "Kotisivu"
 
-#: models.py:494
+#: models.py:498
 msgid "Job"
 msgstr "Ammatti"
 
-#: models.py:495
+#: models.py:499
 msgid "Hobbies"
 msgstr "Harrastukset"
 
-#: models.py:496
+#: models.py:500
 msgid "Language"
 msgstr "Kieli"
 
-#: models.py:501
+#: models.py:505
 #, fuzzy
 msgid "Timezone"
 msgstr "Aika"
 
-#: models.py:502
+#: models.py:506
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
@@ -387,17 +387,17 @@ msgstr "Keskimääräinen kuun ikä"
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
-#: views.py:356 views.py:371 views.py:1358 views.py:1373
+#: views.py:356 views.py:371 views.py:1391 views.py:1406
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 
-#: views.py:434 views.py:438 views.py:583 views.py:586 views.py:622
-#: views.py:651 templates/user/profile/edit/basic.html:53
+#: views.py:434 views.py:438 views.py:595 views.py:598 views.py:634
+#: views.py:663 templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Syötä nimen osa ja odota ehdotuksia!"
 
-#: views.py:435 views.py:584 views.py:623 views.py:652
+#: views.py:435 views.py:596 views.py:635 views.py:664
 msgid "No results. Sorry."
 msgstr "Ei tuloksia, pahoitteluni."
 
@@ -405,7 +405,7 @@ msgstr "Ei tuloksia, pahoitteluni."
 msgid "Subjects found in the SIMBAD database"
 msgstr ""
 
-#: views.py:439 views.py:587
+#: views.py:439 views.py:599
 msgid "No results. Press TAB to create this location!"
 msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 
@@ -414,25 +414,25 @@ msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:739
+#: views.py:759
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views.py:744 views.py:781
+#: views.py:764 views.py:776 views.py:814
 msgid "There was an error. Check your input!"
 msgstr "Virhe. Tarkista tiedot!"
 
-#: views.py:1239
+#: views.py:1272
 msgid "RE"
 msgstr "VS"
 
-#: views.py:1298
+#: views.py:1331
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1322
+#: views.py:1355
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -1378,7 +1378,8 @@ msgid "hh:mm"
 msgstr "tt:mm"
 
 #: templates/image/edit/acquisition.html:98
-#: templates/image/edit/acquisition.html:118
+#: templates/image/edit/acquisition.html:123
+#: templates/image/edit/acquisition.html:138
 #: templates/image/edit/basic.html:42 templates/image/edit/gear.html:20
 #: templates/location/edit.html:18 templates/user/profile/edit/basic.html:20
 #: templates/user/profile/edit/gear.html:29
@@ -1386,18 +1387,20 @@ msgid "Save"
 msgstr "Tallenna"
 
 #: templates/image/edit/acquisition.html:99
-#: templates/image/edit/acquisition.html:120
+#: templates/image/edit/acquisition.html:125
+#: templates/image/edit/acquisition.html:139
 msgid "Remove data"
 msgstr "Poista tiedot"
 
 #: templates/image/edit/acquisition.html:100
-#: templates/image/edit/acquisition.html:121
+#: templates/image/edit/acquisition.html:126
+#: templates/image/edit/acquisition.html:140
 #: templates/image/edit/basic.html:43 templates/image/edit/gear.html:21
 #: templates/image/edit/presolve.html:31
 msgid "Return to image"
 msgstr "Palaa kuvaan"
 
-#: templates/image/edit/acquisition.html:106
+#: templates/image/edit/acquisition.html:107
 msgid ""
 "You can insert as many acquisition sessions as you want, as often images are "
 "taken across several nights. An acquisition session is defined primarily by "
@@ -1411,22 +1414,38 @@ msgstr ""
 "lopettaaksesi, tai <strong>Lisää</strong> lisätäksesi muita kuvaussessioita."
 
 #: templates/image/edit/acquisition.html:110
+#, python-format
+msgid ""
+"Is this too much data for you to handle? Go to the <a href="
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+msgstr ""
+
+#: templates/image/edit/acquisition.html:114
 msgid "Acquisition session"
 msgstr "Kuvaussessio"
 
-#: templates/image/edit/acquisition.html:119
+#: templates/image/edit/acquisition.html:124
 msgid "Add more"
 msgstr "Lisää"
 
-#: templates/image/edit/acquisition.html:126
+#: templates/image/edit/acquisition.html:131
+#, python-format
+msgid ""
+"With this form you can input the basic details for the acquisition of your "
+"image. If you want to be more thorough or fill in separate details for each "
+"filter, go to the <a href=\"%(advanced_form_url)s?"
+"edit_type=deep_sky&advanced=true\">advanced form</a>."
+msgstr ""
+
+#: templates/image/edit/acquisition.html:146
 msgid "What kind of image is this?"
 msgstr "Millainen kuva tämä on?"
 
-#: templates/image/edit/acquisition.html:129
+#: templates/image/edit/acquisition.html:149
 msgid "Solar system"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:132
+#: templates/image/edit/acquisition.html:152
 msgid "Deep sky"
 msgstr ""
 
@@ -1663,25 +1682,6 @@ msgstr "Viestisi on lähetetty onnistuneesti."
 msgid "Here are your notifications"
 msgstr "Tässä ovat uudet ilmoituksesi"
 
-#: templates/notification/email_body.txt:1
-#, python-format
-msgid ""
-"You have received the following notice from %(current_site)s:\n"
-"\n"
-"%(message)s\n"
-"\n"
-"To see other notices or change how you receive notifications, please go to "
-"%(notices_url)s.\n"
-msgstr ""
-
-#: templates/notification/attention_request/full.txt:2
-#, python-format
-msgid ""
-"%(originator)s would like to bring the following image to your attention: "
-"%(object_url)s"
-msgstr ""
-"%(originator)s haluaa herättää huomiosi oheisesta kuvasta: %(object_url)s"
-
 #: templates/notification/attention_request/notice.html:2
 #: templates/notification/attention_request/short.html:1
 #, python-format
@@ -1691,11 +1691,6 @@ msgid ""
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> haluaa herättää "
 "huomiosi eräästä kuvasta.</a>"
-
-#: templates/notification/attention_request/short.txt:2
-#, python-format
-msgid "%(originator)s wants to bring an image to your attention"
-msgstr "%(originator)s haluaa herättää huomiosi eräästä kuvasta"
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -1707,10 +1702,8 @@ msgstr ""
 "<a href=\"%(object_url)s\">Seuraat nyt <strong>%(object)s</strong>.</a>"
 
 #: templates/notification/image_deleted/full.html:2
-#: templates/notification/image_deleted/full.txt:2
 #: templates/notification/image_deleted/notice.html:2
 #: templates/notification/image_deleted/short.html:2
-#: templates/notification/image_deleted/short.txt:2
 msgid "Your image has been deleted."
 msgstr "Kuvasi on poistettu."
 
@@ -1734,15 +1727,6 @@ msgid ""
 "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr "<a href=\"%(object_url)s\">Kuvasi astrometrinen ratkaisu onnistui.</a>"
 
-#: templates/notification/new_follower/full.txt:2
-#, python-format
-msgid ""
-"User %(object)s is now following you. They will be notified when you publish "
-"new images."
-msgstr ""
-"Käyttäjä %(object)s nyt seuraa sinua. Ilmoitus uusista kuvistasi lähetetään "
-"hänelle."
-
 #: templates/notification/new_follower/notice.html:2
 #: templates/notification/new_follower/short.html:2
 #, python-format
@@ -1751,19 +1735,6 @@ msgid ""
 "</a>"
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(object)s</strong> seuraa nyt sinua.</a>"
-
-#: templates/notification/new_follower/short.txt:2
-msgid "You have a new follower!"
-msgstr "Sinulla on uusi seuraaja!"
-
-#: templates/notification/new_image/full.txt:2
-#, python-format
-msgid ""
-"%(originator)s has published a new image! Check it out at the following url: "
-"%(object_url)s"
-msgstr ""
-"%(originator)s on julkaissut uuden kuvan! Voit käydä katsomassa kuvan "
-"osoitteesta: %(object_url)s"
 
 #: templates/notification/new_image/notice.html:2
 #, python-format
@@ -1783,20 +1754,6 @@ msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on julkaissut "
 "uuden kuvan</a>"
 
-#: templates/notification/new_image/short.txt:2
-#, python-format
-msgid "New image by %(originator)s"
-msgstr "%(originator)s julkaisi uuden kuvan "
-
-#: templates/notification/new_image_revision/full.txt:2
-#, python-format
-msgid ""
-"%(originator)s has published a new image revision! Check it out at the "
-"following url: %(object_url)s"
-msgstr ""
-"%(originator)s on julkaissut uuden version kuvasta! Voit käydä katsomassa "
-"kuvan osoitteesta: %(object_url)s"
-
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
 #, python-format
@@ -1807,20 +1764,6 @@ msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on julkaissut "
 "uuden version kuvasta.</a>"
 
-#: templates/notification/new_image_revision/short.txt:2
-#, python-format
-msgid "New image revision by %(originator)s"
-msgstr "%(originator)s julkaisi kuvasta uuden version"
-
-#: templates/notification/request_fulfilled/full.txt:2
-#, python-format
-msgid ""
-"%(originator)s has fulfilled your request! Check it out at the following "
-"url: %(object_url)s"
-msgstr ""
-"%(originator)s on toteuttanut pyyntösi! Voit käydä katsomassa sen "
-"osoitteesta: %(object_url)s"
-
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
 #, python-format
@@ -1830,11 +1773,6 @@ msgid ""
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on toteuttanut "
 "pyyntösi</a>"
-
-#: templates/notification/request_fulfilled/short.txt:2
-#, python-format
-msgid "%(originator)s has fulfilled your request."
-msgstr "%(originator)s  on toteuttanut pyyntösi."
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
@@ -1878,19 +1816,6 @@ msgstr "Kirjaudu sisään"
 #: templates/registration/activate.html:14
 msgid "Account activation failed"
 msgstr "Tunnuksen aktivoiminen epäonnistui"
-
-#: templates/registration/activation_email.txt:2
-msgid "Activate account at"
-msgstr "Aktivoi tunnus  sivustolle"
-
-#: templates/registration/activation_email.txt:6
-#, python-format
-msgid "Link is valid for %(expiration_days)s days."
-msgstr "Linkki on voimassa %(expiration_days)s päivää."
-
-#: templates/registration/activation_email_subject.txt:1
-msgid "Account activation on"
-msgstr "Tilin aktivoiminen sivustolla"
 
 #: templates/registration/login.html:7
 msgid "Reset password"
@@ -2139,6 +2064,10 @@ msgstr ""
 msgid "Please use full names (make and model) for all your gear items!"
 msgstr ""
 
+#: templatetags/tags.py:116
+msgid "minutes"
+msgstr ""
+
 #: templatetags/tags.py:117
 msgid "seconds ago"
 msgstr ""
@@ -2147,6 +2076,64 @@ msgstr ""
 #, python-format
 msgid "%s ago"
 msgstr ""
+
+#~ msgid ""
+#~ "%(originator)s would like to bring the following image to your attention: "
+#~ "%(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s haluaa herättää huomiosi oheisesta kuvasta: %(object_url)s"
+
+#~ msgid "%(originator)s wants to bring an image to your attention"
+#~ msgstr "%(originator)s haluaa herättää huomiosi eräästä kuvasta"
+
+#~ msgid ""
+#~ "User %(object)s is now following you. They will be notified when you "
+#~ "publish new images."
+#~ msgstr ""
+#~ "Käyttäjä %(object)s nyt seuraa sinua. Ilmoitus uusista kuvistasi "
+#~ "lähetetään hänelle."
+
+#~ msgid "You have a new follower!"
+#~ msgstr "Sinulla on uusi seuraaja!"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s on julkaissut uuden kuvan! Voit käydä katsomassa kuvan "
+#~ "osoitteesta: %(object_url)s"
+
+#~ msgid "New image by %(originator)s"
+#~ msgstr "%(originator)s julkaisi uuden kuvan "
+
+#~ msgid ""
+#~ "%(originator)s has published a new image revision! Check it out at the "
+#~ "following url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s on julkaissut uuden version kuvasta! Voit käydä katsomassa "
+#~ "kuvan osoitteesta: %(object_url)s"
+
+#~ msgid "New image revision by %(originator)s"
+#~ msgstr "%(originator)s julkaisi kuvasta uuden version"
+
+#~ msgid ""
+#~ "%(originator)s has fulfilled your request! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s on toteuttanut pyyntösi! Voit käydä katsomassa sen "
+#~ "osoitteesta: %(object_url)s"
+
+#~ msgid "%(originator)s has fulfilled your request."
+#~ msgstr "%(originator)s  on toteuttanut pyyntösi."
+
+#~ msgid "Activate account at"
+#~ msgstr "Aktivoi tunnus  sivustolle"
+
+#~ msgid "Link is valid for %(expiration_days)s days."
+#~ msgstr "Linkki on voimassa %(expiration_days)s päivää."
+
+#~ msgid "Account activation on"
+#~ msgstr "Tilin aktivoiminen sivustolla"
 
 #~ msgid "Invalid image."
 #~ msgstr "Virheellinen kuva."
