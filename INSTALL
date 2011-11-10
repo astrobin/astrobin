@@ -161,6 +161,11 @@ CC="gcc-4.4" make
 CC="gcc-4.4" make extra
 sudo make install
 
+Edit /usr/local/astrometry/etc/backend.cfg and enable "inparallel".
+sudo cp /usr/local/astrometry/etc/backend.cfg /usr/local/astrometry/etc/backend.blind.cfg
+Edit this file, disable auto indexing, and enable all large indexes up to the 7th
+
+
 # Set up supervisor
 sudo cp scripts/supervisord/* to /etc/supervisor/conf.d/
 sudo mkdir /var/log/{celeryd,gunicorn}

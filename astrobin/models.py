@@ -154,7 +154,12 @@ class Location(models.Model):
 
 
 @task
-def image_solved_callback(image, solved, clean_path, lang):
+def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
+    if not solved and did_use_scale:
+        # Try again!
+        solve_image.delay(image, lang, False, callback=image_solved_callback)
+        return
+
     image.is_solved = solved
     if image.__class__.__name__ == 'Image' and image.is_solved:
         # grab objects from list
