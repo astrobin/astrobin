@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'djcelery',
     'gunicorn',
     'privatebeta',
+    'south',
 )
 
 LOGIN_REDIRECT_URL = '/'
