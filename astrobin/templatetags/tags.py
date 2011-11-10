@@ -113,7 +113,7 @@ def ago(date_time):
     if diff.days <= 0:
         span = timesince(date_time)
         span = span.split(",")[0] # just the most significant digit
-        if span == "0 minutes":
+        if span == "0 " + _("minutes"):
             return _("seconds ago")
         return _("%s ago") % span 
     return datetime.date(date_time)  
