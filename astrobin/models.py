@@ -351,20 +351,72 @@ class DeepSky_Acquisition(Acquisition):
         (4, '4x4'),
     )
 
-    is_synthetic = models.BooleanField(_("Synthetic channel"))
-    filter = models.ForeignKey(Filter, null=True, blank=True, verbose_name=_("Filter"))
-    binning = models.IntegerField(null=True, blank=True, choices=BINNING_CHOICES, verbose_name=_("Binning"))
-    number = models.IntegerField(_("Number"), null=True, blank=True)
-    duration = models.IntegerField(_("Duration"), null=True, blank=True)
-    iso = models.IntegerField(_("ISO"), null=True, blank=True)
-    gain = models.DecimalField(_("Gain"), null=True, blank=True, max_digits=5, decimal_places=2)
-    sensor_cooling = models.IntegerField(_("Sensor cooling"), null=True, blank=True)
-    darks = models.IntegerField(_("Darks"), null=True, blank=True)
-    flats = models.IntegerField(_("Flats"), null=True, blank=True)
-    flat_darks = models.IntegerField(_("Flat darks"), null=True, blank=True)
-    bias = models.IntegerField(_("Bias"), null=True, blank=True)
-    mean_sqm = models.DecimalField(_("Mean SQM"), null=True, blank=True, max_digits=5, decimal_places=2)
-    mean_fwhm = models.DecimalField(_("Mean FWHM"), null=True, blank=True, max_digits=5, decimal_places=2)
+    is_synthetic = models.BooleanField(
+        _("Synthetic channel"))
+
+    filter = models.ForeignKey(
+        Filter,
+        null=True, blank=True,
+        verbose_name=_("Filter"))
+
+    binning = models.IntegerField(
+        null=True, blank=True,
+        choices=BINNING_CHOICES,
+        verbose_name=_("Binning"))
+
+    number = models.IntegerField(
+        _("Number"),
+        null=True, blank=True,
+        help_text=_("The number of sub-frames."))
+
+    duration = models.IntegerField(
+        _("Duration"),
+        null=True, blank=True,
+        help_text=_("Duration of each sub-frame, in seconds."))
+
+    iso = models.IntegerField(
+        _("ISO"),
+        null=True, blank=True)
+
+    gain = models.DecimalField(
+        _("Gain"),
+        null=True, blank=True,
+        max_digits=5, decimal_places=2)
+
+    sensor_cooling = models.IntegerField(
+        _("Sensor cooling"),
+        null=True, blank=True,
+        help_text=_("The temperature of the chip. E.g.: -20."))
+
+    darks = models.IntegerField(
+        _("Darks"),
+        null=True, blank=True,
+        help_text=_("The number of dark frames."))
+
+    flats = models.IntegerField(
+        _("Flats"),
+        null=True, blank=True,
+        help_text=_("The number of flat frames."))
+
+    flat_darks = models.IntegerField(
+        _("Flat darks"),
+        null=True, blank=True,
+        help_text=_("The number of dark flat frames."))
+
+    bias = models.IntegerField(
+        _("Bias"),
+        null=True, blank=True,
+        help_text=_("The number of bias/offset frames."))
+
+    mean_sqm = models.DecimalField(
+        _("Mean SQM"),
+        null=True, blank=True,
+        max_digits=5, decimal_places=2)
+
+    mean_fwhm = models.DecimalField(
+        _("Mean FWHM"),
+        null=True, blank=True,
+        max_digits=5, decimal_places=2)
 
     class Meta:
         app_label = 'astrobin'
