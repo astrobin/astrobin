@@ -1310,7 +1310,7 @@ def image_revision_upload_process(request):
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
         destination.write(chunk)
-        destination.close()
+    destination.close()
 
     image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext)
     image_revision.save()
