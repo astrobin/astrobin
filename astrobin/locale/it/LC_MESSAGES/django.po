@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 18:14+0000\n"
-"PO-Revision-Date: 2011-11-10 20:18+0200\n"
+"POT-Creation-Date: 2011-11-10 13:39-0500\n"
+"PO-Revision-Date: 2011-11-10 13:40-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -428,8 +428,8 @@ msgstr "Fase lunare media"
 
 #: views.py:356
 #: views.py:371
-#: views.py:1354
-#: views.py:1369
+#: views.py:1358
+#: views.py:1373
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida. I formati accettati sono JPG, PNG e GIF."
 
@@ -440,7 +440,7 @@ msgstr "Immagine non valida. I formati accettati sono JPG, PNG e GIF."
 #: views.py:622
 #: views.py:651
 #: templates/user/profile/edit/basic.html:53
-#: templates/user/profile/edit/gear.html:29
+#: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
@@ -462,7 +462,7 @@ msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
 #: views.py:440
 #: templates/user/profile/edit/basic.html:55
-#: templates/user/profile/edit/gear.html:31
+#: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
@@ -475,16 +475,16 @@ msgstr "Compila una sessione, prima di aggiungerne altre."
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1235
+#: views.py:1239
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1294
+#: views.py:1298
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1318
+#: views.py:1322
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -927,8 +927,8 @@ msgstr "Attenzione!"
 
 #: templates/index.html:26
 #, python-format
-msgid "Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href=\"%(the_url)s\">your profile</a>!"
-msgstr "Prima di poter caricare delle immagini, devi aggiungere almeno un telescopio ed una camera di ripresa alla tua strumentazione. Fallo nel <a href=\"%(the_url)s\">tuo profilo</a>!"
+msgid "Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
+msgstr "Prima di poter caricare delle immagini, devi aggiungere almeno un telescopio ed una camera di ripresa alla tua strumentazione. Fallo nel <a href=\"%(the_url)s?initial\">tuo profilo</a>!"
 
 #: templates/index.html:34
 #, python-format
@@ -1254,7 +1254,7 @@ msgstr "hh:mm"
 #: templates/image/edit/gear.html:20
 #: templates/location/edit.html:18
 #: templates/user/profile/edit/basic.html:20
-#: templates/user/profile/edit/gear.html:19
+#: templates/user/profile/edit/gear.html:29
 msgid "Save"
 msgstr "Salva"
 
@@ -1881,7 +1881,7 @@ msgid "These are the cities from which you usually image."
 msgstr "Questo sono le città da cui fotografi di solito."
 
 #: templates/user/profile/edit/basic.html:16
-#: templates/user/profile/edit/gear.html:16
+#: templates/user/profile/edit/gear.html:26
 msgid "* use a comma to separate the values."
 msgstr "* usa la virgola per separare i valori."
 
@@ -1890,7 +1890,7 @@ msgid "or click here to change your password"
 msgstr "o clicca qui per cambiare la tua password"
 
 #: templates/user/profile/edit/basic.html:54
-#: templates/user/profile/edit/gear.html:30
+#: templates/user/profile/edit/gear.html:40
 msgid "No results. Press TAB to add it!"
 msgstr "Nessun risultato. Premi TAB per aggiungerlo!"
 
@@ -1898,11 +1898,15 @@ msgstr "Nessun risultato. Premi TAB per aggiungerlo!"
 msgid "Edit your astrophotography gear"
 msgstr "Modifica la tua strumentazione"
 
-#: templates/user/profile/edit/gear.html:10
+#: templates/user/profile/edit/gear.html:13
+msgid "Go back to the home page."
+msgstr "Torna alla home."
+
+#: templates/user/profile/edit/gear.html:17
 msgid "Remember that these items autocomplete, and you need to press TAB to add something to your list. If it's not in a white box, it doesn't get saved!"
 msgstr "Ricorda che questi elementi si autocompletano, e devi premere TAB per aggiungere qualcosa alla tua lista. Se qualcosa non si trova in un rettangolo bianco, non viene salvato!"
 
-#: templates/user/profile/edit/gear.html:11
+#: templates/user/profile/edit/gear.html:18
 msgid "Please use full names (make and model) for all your gear items!"
 msgstr "Ti raccomando di usare nomi completi (marca e modello) per tutti gli elementi della tua strumentazione!"
 

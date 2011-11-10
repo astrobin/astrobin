@@ -841,7 +841,7 @@ def user_profile_edit_basic(request):
     form.fields['locations'].initial = u', '.join(x.name for x in profile.locations.all())
     response_dict = {
         'form': form,
-        'prefill_dict': {'locations': jsonDump(profile.locations.all())}
+        'prefill_dict': {'locations': jsonDump(profile.locations.all())},
     }
     return render_to_response("user/profile/edit/basic.html",
         response_dict,
@@ -905,7 +905,10 @@ def user_profile_edit_gear(request):
     profile = UserProfile.objects.get(user=request.user)
 
     form = UserProfileEditGearForm()
-    response_dict = {"form": form}
+    response_dict = {
+        "form": form,
+        'initial': 'initial' in request.GET,
+    }
     prefill_dict = {}
     for attr in ["telescopes", "mounts", "cameras", "focal_reducers",
                  "software", "filters", "accessories"]:
@@ -964,7 +967,8 @@ def user_profile_save_gear(request):
 
     profile.save()
 
-    return HttpResponseRedirect("/profile/edit/gear/?saved");
+    initial = "&initial=true" if "initial" in request.POST else ""
+    return HttpResponseRedirect("/profile/edit/gear/?saved" + initial);
 
 
 @login_required

@@ -2210,10 +2210,10 @@ p.error {
   line-height: 120%;
   font-size: 140%;
 }
-table.form_saved {
+table.form_saved, table.form_saved_container {
   margin-left: 12px;
 }
-table.form_saved td {
+table.form_saved td, table.form_saved_container td {
   border: none;
   background: none;
   vertical-align: middle;
