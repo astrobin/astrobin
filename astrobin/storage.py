@@ -37,7 +37,7 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
     try:
         file = open(path + uid + original_ext)
     except IOError:
-        return (0, 0)
+        return (0, 0, False)
 
     data = StringIO.StringIO(file.read())
 
@@ -118,7 +118,7 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
     save_to_bucket(uid + '_small_thumb' + format_map[content_type][1],
                    thumbnailFile.getvalue())
 
-    return image.size
+    return (image.size[0], image.size[1], is_animated)
 
 def delete_image_from_backend(filename, ext):
     for suffix in (
