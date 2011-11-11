@@ -215,7 +215,6 @@ class AdvancedSearchForm(SearchForm):
         q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
         self.cleaned_data['q'] = q
 
-        # First, store the SearchQuerySet received from other processing.
         sqs = super(AdvancedSearchForm, self).search()
  
         if self.is_valid():
