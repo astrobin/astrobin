@@ -1,3 +1,5 @@
+import string
+
 from haystack.indexes import *
 from haystack import site
 
@@ -5,14 +7,16 @@ from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 
-XAPIAN_OPERATORS = ['-', '+', '*',]
 def xapian_escape(s):
-    for op in XAPIAN_OPERATORS:
-        s = s.replace(op, ' ')
-    return s
+    return ''.join(ch for ch in s if ch not in set(string.punctuation))
 
 def _join_stripped(a):
-    return a + [''.join(x.split()) for x in a]
+    escaped = []
+    for i in a:
+        x = xapian_escape(''.join(i.split()))
+        escaped.append(x)
+
+    return a + escaped 
 
 class ImageIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
