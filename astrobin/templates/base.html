@@ -47,6 +47,13 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
           })();
         </script>
+        <script type="text/javascript">
+        {% if user.is_authenticated %}
+            __utmSetVar("Visitor");
+        {% else %}
+            __utmSetVar("Member");
+        {% endif %}
+        </script>
     </head>
 
     <body{% if request.user.is_authenticated %} onload="common.start_listeners('{{request.user.username}}');"{%endif %}>
