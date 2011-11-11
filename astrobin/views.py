@@ -636,6 +636,24 @@ def image_edit_save_basic(request):
                 subjects = simbad.find_subjects(id.strip())
                 if subjects:
                     k = subjects[0]
+                else:
+                    '''Alright fine, I give up. Let's look for it in
+                    our database.'''
+                    k = Subject.objects.filter(mainId = id.strip())
+                    if k:
+                        k = k[0]
+                    else:
+                        # How about the SubjectIdentifiers?
+                        k = SubjectIdentifier.objects.filter(identifier = id.strip())
+                        if k:
+                            k = k[0].subject
+                        else:
+                            # You win this time. I'll create one.
+                            k = Subject()
+                            k.oid = -999
+                            k.mainId = id.strip()
+                            k.save()
+
             if k:
                 image.subjects.add(k)
     prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
