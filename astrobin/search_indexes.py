@@ -21,7 +21,7 @@ def _join_stripped(a):
 class ImageIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
     title = CharField(model_attr='title')
-    user = CharField(model_attr='user')
+    username_auto = NgramField()
     description = CharField(model_attr='description')
     subjects = MultiValueField()
     imaging_telescopes = MultiValueField()
@@ -48,6 +48,9 @@ class ImageIndex(SearchIndex):
 
     def prepare_title(self, obj):
         return obj.title + ' ' + ''.join(obj.title.split())
+
+    def prepare_username_auto(self, obj):
+        return str(obj.user.username)
 
     def prepare_subjects(self, obj):
         # TODO: prepare also idlist
