@@ -162,7 +162,7 @@
                         {% endif %}
                         {% if not inverted and not solved %}
                         <a class="zoomable" href="{% url image_detail image.image.id %}{% if not full %}?r={{image.id}}&full{% endif %}">
-                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                         </a>
                         {% endif %}
                     {% endwith %}
@@ -177,7 +177,7 @@
                     {% endif %}
                     {% if not inverted and not solved %}
                     <a class="zoomable" href="{% url image_detail image.id %}{% if not full %}?full{% endif %}">
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                     </a>
                     {% endif %}
                 {% endif %}

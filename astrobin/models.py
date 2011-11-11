@@ -258,6 +258,8 @@ class Image(models.Model):
 
     is_stored = models.BooleanField(editable=False)
     is_solved = models.BooleanField(editable=False)
+    w = models.IntegerField(editable=False, default=0)
+    h = models.IntegerField(editable=False, default=0)
 
     class Meta:
         app_label = 'astrobin'
@@ -310,7 +312,7 @@ class ImageRevision(models.Model):
     image = models.ForeignKey(Image)
     filename = models.CharField(max_length=64, editable=False)
     original_ext = models.CharField(max_length=6, editable=False)
-    uploaded = models.DateTimeField(editable=False)
+    uploaded = models.DateTimeField(editable=False, auto_now_add=True)
 
     is_stored = models.BooleanField(editable=False)
     is_solved = models.BooleanField(editable=False)

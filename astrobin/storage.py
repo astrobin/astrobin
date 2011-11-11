@@ -30,13 +30,14 @@ def save_to_bucket(filename, content):
 def store_image_in_backend(path, uid, original_ext, mimetype=''):
     format_map = {'image/jpeg':('JPEG', '.jpg'),
                   'image/png' :('PNG', '.png'),
+                  'image/gif' :('GIF', '.gif'),
                  }
 
     content_type = mimetype if mimetype else mimetypes.guess_type(uid+original_ext)[0]
     try:
         file = open(path + uid + original_ext)
     except IOError:
-        return
+        return (0, 0)
 
     data = StringIO.StringIO(file.read())
 
@@ -44,22 +45,50 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
     save_to_bucket(uid + '' + original_ext, data.getvalue())
 
     image = PILImage.open(data)
-    # create histogram and store it
-    histogram = generate_histogram(image)
-    histogramFile = StringIO.StringIO()
-    histogram.save(histogramFile, format_map['image/png'][0])
-    save_to_bucket(uid + '_hist.png', histogramFile.getvalue())
 
-    # Then resize to the display image
-    (w, h) = image.size
-    (w, h) = scale_dimensions(w, h, settings.RESIZED_IMAGE_SIZE)
-    resizedImage = image.resize((w, h), PILImage.ANTIALIAS)
+    is_animated = False
+    if content_type == 'image/gif':
+        try:
+            image.seek(1)
+            is_animated = True
+        except:
+            image.seek(0)
+            is_animated = False
 
-    # Then save to bucket
-    resizedFile = StringIO.StringIO()
-    resizedImage.save(resizedFile, format_map[content_type][0], quality=100)
-    save_to_bucket(uid + '_resized' + format_map[content_type][1],
-                   resizedFile.getvalue())
+    if not is_animated:
+        # create histogram and store it
+        histogram = generate_histogram(image)
+        histogramFile = StringIO.StringIO()
+        histogram.save(histogramFile, format_map['image/png'][0])
+        save_to_bucket(uid + '_hist.png', histogramFile.getvalue())
+
+        # Then resize to the display image
+        (w, h) = image.size
+        (w, h) = scale_dimensions(w, h, settings.RESIZED_IMAGE_SIZE)
+        resizedImage = image.resize((w, h), PILImage.ANTIALIAS)
+
+        # Then save to bucket
+        resizedFile = StringIO.StringIO()
+        resizedImage.save(resizedFile, format_map[content_type][0], quality=100)
+        save_to_bucket(uid + '_resized' + format_map[content_type][1],
+                       resizedFile.getvalue())
+
+        # Let's also created a grayscale inverted image
+        grayscale = ImageOps.grayscale(image)
+        inverted = ImageOps.invert(grayscale)
+        invertedFile = StringIO.StringIO()
+        inverted.save(invertedFile, format_map[content_type][0])
+        save_to_bucket(uid + '_inverted' + format_map[content_type][1],
+                       invertedFile.getvalue())
+        grayscale = ImageOps.grayscale(resizedImage)
+        inverted = ImageOps.invert(grayscale)
+        invertedFile = StringIO.StringIO()
+        inverted.save(invertedFile, format_map[content_type][0])
+        save_to_bucket(uid + '_resized_inverted' + format_map[content_type][1],
+                       invertedFile.getvalue())
+    else:
+        save_to_bucket(uid + '_resized' + format_map[content_type][1],
+                       data.getvalue())
 
     # Then resize to the thumbnail
     (w, h) = image.size
@@ -89,20 +118,7 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
     save_to_bucket(uid + '_small_thumb' + format_map[content_type][1],
                    thumbnailFile.getvalue())
 
-    # Let's also created a grayscale inverted image
-    grayscale = ImageOps.grayscale(image)
-    inverted = ImageOps.invert(grayscale)
-    invertedFile = StringIO.StringIO()
-    inverted.save(invertedFile, format_map[content_type][0])
-    save_to_bucket(uid + '_inverted' + format_map[content_type][1],
-                   invertedFile.getvalue())
-    grayscale = ImageOps.grayscale(resizedImage)
-    inverted = ImageOps.invert(grayscale)
-    invertedFile = StringIO.StringIO()
-    inverted.save(invertedFile, format_map[content_type][0])
-    save_to_bucket(uid + '_resized_inverted' + format_map[content_type][1],
-                   invertedFile.getvalue())
-
+    return image.size
 
 def delete_image_from_backend(filename, ext):
     for suffix in (
