@@ -238,7 +238,7 @@ class Image(models.Model):
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
     focal_length = models.IntegerField(null=True, blank=True, help_text=_("(in mm)"))
-    pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text=_("(in &mu;m, taking binning and image scaling into account)"))
+    pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text=_("(in &mu;m)"))
     binning = models.IntegerField(null=True, blank=True)
     scaling = models.DecimalField(null=True, blank=True, max_digits=6, decimal_places=2)
 
