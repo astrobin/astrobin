@@ -363,6 +363,7 @@ class DeepSky_Acquisition(Acquisition):
     binning = models.IntegerField(
         null=True, blank=True,
         choices=BINNING_CHOICES,
+        default=1,
         verbose_name=_("Binning"))
 
     number = models.IntegerField(
