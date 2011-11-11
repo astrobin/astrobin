@@ -218,9 +218,9 @@ def image_detail(request, id):
             if a.number and a.duration:
                 f = ""
                 if a.filter:
-                    f = a.filter.name
+                    f = "%s " % a.filter.name
                     if a.is_synthetic:
-                        f += " (S)"
+                        f += "(S) "
                 f += '%sx%s"' % (a.number, a.duration)
                 if a.iso:
                     f += ' @ ISO%s' % a.iso 
