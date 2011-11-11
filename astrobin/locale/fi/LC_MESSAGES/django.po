@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 15:34-0500\n"
+"POT-Creation-Date: 2011-11-11 08:51+0000\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -25,7 +25,7 @@ msgid ""
 "new size. E.g. 50 if you made it half the size."
 msgstr ""
 
-#: forms.py:39 models.py:36 models.py:434
+#: forms.py:39 models.py:36 models.py:439
 #: templates/image/edit/acquisition.html:32
 msgid "Focal length"
 msgstr "Polttoväli"
@@ -50,7 +50,7 @@ msgstr "Otsikko"
 msgid "Subjects"
 msgstr "Kohteet"
 
-#: forms.py:59 forms.py:114 models.py:233 models.py:496
+#: forms.py:59 forms.py:114 models.py:233 models.py:501
 #: templates/image/edit/basic.html:26
 msgid "Locations"
 msgstr "Sijainnit"
@@ -68,7 +68,7 @@ msgstr "Kuvauskaukoputket"
 msgid "Guiding telescopes"
 msgstr "Seurantakaukoputket"
 
-#: forms.py:83 forms.py:156 models.py:248 models.py:513
+#: forms.py:83 forms.py:156 models.py:248 models.py:518
 msgid "Mounts"
 msgstr "Jalustat"
 
@@ -80,19 +80,19 @@ msgstr "Kuvauskamerat"
 msgid "Guiding cameras"
 msgstr "Seurantakamerat"
 
-#: forms.py:86 forms.py:158 models.py:251 models.py:515
+#: forms.py:86 forms.py:158 models.py:251 models.py:520
 msgid "Focal reducers"
 msgstr "Polttovälin lyhentäjät"
 
-#: forms.py:87 forms.py:159 models.py:252 models.py:516
+#: forms.py:87 forms.py:159 models.py:252 models.py:521
 msgid "Software"
 msgstr "Ohjelmistot"
 
-#: forms.py:88 forms.py:160 models.py:253 models.py:517
+#: forms.py:88 forms.py:160 models.py:253 models.py:522
 msgid "Filters"
 msgstr "Suodattimet"
 
-#: forms.py:89 forms.py:161 models.py:254 models.py:518
+#: forms.py:89 forms.py:161 models.py:254 models.py:523
 msgid "Accessories"
 msgstr "Oheislaitteet"
 
@@ -111,11 +111,11 @@ msgid ""
 "box, you won't be able to add separate acquisition sessions for them."
 msgstr ""
 
-#: forms.py:155 models.py:512
+#: forms.py:155 models.py:517
 msgid "Telescopes"
 msgstr "Kaukoputket"
 
-#: forms.py:157 models.py:514
+#: forms.py:157 models.py:519
 msgid "Cameras"
 msgstr "Kamerat"
 
@@ -168,7 +168,7 @@ msgstr "Esimerksi: +12.44"
 msgid "For example: -51.25"
 msgstr "Esimerksi: -51.25"
 
-#: forms.py:285 forms.py:309 models.py:337 models.py:448
+#: forms.py:285 forms.py:309 models.py:337 models.py:453
 #: templates/image/edit/acquisition.html:80 templates/search/search.html:22
 msgid "Date"
 msgstr "Päivämäärä"
@@ -202,7 +202,7 @@ msgid "(in mm)"
 msgstr ""
 
 #: models.py:241
-msgid "(in &mu;m, taking binning and image scaling into account)"
+msgid "(in &mu;m)"
 msgstr ""
 
 #: models.py:267 templates/image/detail.html:194
@@ -211,7 +211,7 @@ msgstr ""
 msgid "(no title)"
 msgstr "(ei otsikkoa)"
 
-#: models.py:338 models.py:447
+#: models.py:338 models.py:452
 msgid "Image"
 msgstr "Kuva"
 
@@ -300,77 +300,77 @@ msgstr "Keskiarvo SQM"
 msgid "Mean FWHM"
 msgstr "Keskiarvo FWHM"
 
-#: models.py:432 views.py:253
+#: models.py:437 views.py:253
 #, fuzzy
 msgid "Frames"
 msgstr "Frames"
 
-#: models.py:433 templates/image/edit/acquisition.html:24
+#: models.py:438 templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr "Kuvataajuus"
 
-#: models.py:435 templates/image/edit/acquisition.html:40
+#: models.py:440 templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:436 templates/image/edit/acquisition.html:48
+#: models.py:441 templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:437 templates/image/edit/acquisition.html:56
+#: models.py:442 templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:438
+#: models.py:443
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:439
+#: models.py:444
 msgid "Transparency"
 msgstr "Läpinäkyvyys"
 
-#: models.py:440
+#: models.py:445
 msgid "Time"
 msgstr "Aika"
 
-#: models.py:467
+#: models.py:472
 msgid "Request from"
 msgstr "Pyyntö käyttäjältä"
 
-#: models.py:479
+#: models.py:484
 msgid "Additional information"
 msgstr "Lisätietoja"
 
-#: models.py:480
+#: models.py:485
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:481
+#: models.py:486
 msgid "Higher resolution"
 msgstr "Suurempi resoluutio"
 
-#: models.py:497
+#: models.py:502
 msgid "Website"
 msgstr "Kotisivu"
 
-#: models.py:498
+#: models.py:503
 msgid "Job"
 msgstr "Ammatti"
 
-#: models.py:499
+#: models.py:504
 msgid "Hobbies"
 msgstr "Harrastukset"
 
-#: models.py:500
+#: models.py:505
 msgid "Language"
 msgstr "Kieli"
 
-#: models.py:505
+#: models.py:510
 #, fuzzy
 msgid "Timezone"
 msgstr "Aika"
 
-#: models.py:506
+#: models.py:511
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
@@ -387,7 +387,7 @@ msgstr "Keskimääräinen kuun ikä"
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
-#: views.py:356 views.py:371 views.py:1391 views.py:1406
+#: views.py:356 views.py:371 views.py:1392 views.py:1407
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 
@@ -414,25 +414,25 @@ msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:759
+#: views.py:760
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views.py:764 views.py:776 views.py:814
+#: views.py:765 views.py:777 views.py:815
 msgid "There was an error. Check your input!"
 msgstr "Virhe. Tarkista tiedot!"
 
-#: views.py:1272
+#: views.py:1273
 msgid "RE"
 msgstr "VS"
 
-#: views.py:1331
+#: views.py:1332
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1355
+#: views.py:1356
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -539,7 +539,7 @@ msgstr "Sivua ei löytynyt"
 msgid "Sorry, but the content you were looking for is not here."
 msgstr "Sisältö, jota etsit, ei ole täällä. Pahoitteluni."
 
-#: templates/base.html:63
+#: templates/base.html:70
 msgid ""
 "Hey! It looks like your browser doesn't support Javascript, or you disabled "
 "it. AstroBin will provide you with a much more pleasant experience if you "
@@ -549,105 +549,105 @@ msgstr ""
 "pois päältä. AstroBinin käyttö on huomattavasti miellyttävämpää jos otat "
 "Javascriptin käyttöön."
 
-#: templates/base.html:68
+#: templates/base.html:75
 msgid "English"
 msgstr "Englanti"
 
-#: templates/base.html:69
+#: templates/base.html:76
 msgid "Italian"
 msgstr "Italia"
 
-#: templates/base.html:71
+#: templates/base.html:78
 msgid "Finnish"
 msgstr "Suomi"
 
-#: templates/base.html:82
+#: templates/base.html:89
 msgid "Search images by subject or gear"
 msgstr "Etsi kuvia kohteen tai laitteen perusteella"
 
-#: templates/base.html:83
+#: templates/base.html:90
 msgid "Start typing and hit ENTER"
 msgstr "Ala kirjoittaa ja paina ENTER"
 
-#: templates/base.html:86 templates/base.html.py:87
+#: templates/base.html:93 templates/base.html.py:94
 #: templates/search/search.html:10
 msgid "Search"
 msgstr "Etsi"
 
-#: templates/base.html:95
+#: templates/base.html:102
 msgid "The definitive home for your astrophotography."
 msgstr "Paras paikka tähtikuvillesi."
 
-#: templates/base.html:103 templates/base.html.py:218 templates/base.html:253
+#: templates/base.html:110 templates/base.html.py:225 templates/base.html:260
 msgid "Home"
 msgstr "Etusivu"
 
-#: templates/base.html:104 templates/base.html.py:219
+#: templates/base.html:111 templates/base.html.py:226
 msgid "Help"
 msgstr "Ohjeita"
 
-#: templates/base.html:105
+#: templates/base.html:112
 msgid "FAQ"
 msgstr ""
 
-#: templates/base.html:118
+#: templates/base.html:125
 msgid "View your profile"
 msgstr "Katsele profiiliasi"
 
-#: templates/base.html:121
+#: templates/base.html:128
 msgid "Edit your profile"
 msgstr "Muokkaa profiiliasi"
 
-#: templates/base.html:124
+#: templates/base.html:131
 msgid "Upload an image"
 msgstr "Lataa kuva"
 
-#: templates/base.html:124
+#: templates/base.html:131
 msgid "Upload!"
 msgstr "Lataa uusi kuva!"
 
-#: templates/base.html:127 templates/user/profile.html:21
+#: templates/base.html:134 templates/user/profile.html:21
 #: templates/user/profile.html.py:24
 msgid "Logout"
 msgstr "Kirjaudu ulos"
 
-#: templates/base.html:134 templates/base.html.py:135
+#: templates/base.html:141 templates/base.html.py:142
 msgid "Notifications"
 msgstr "Ilmoitukset"
 
-#: templates/base.html:141 templates/base.html.py:142
+#: templates/base.html:148 templates/base.html.py:149
 msgid "Messages"
 msgstr "Viestit"
 
-#: templates/base.html:148 templates/base.html.py:149
+#: templates/base.html:155 templates/base.html.py:156
 msgid "Requests"
 msgstr "Pyynnöt"
 
-#: templates/base.html:159
+#: templates/base.html:166
 msgid "Have an invite? Login!"
 msgstr "Oletko saanut kutsun? Kirjaudu sisään!"
 
-#: templates/base.html:161
+#: templates/base.html:168
 msgid "Login"
 msgstr "Kirjaudu sisään"
 
-#: templates/base.html:167 templates/registration/login.html:8
+#: templates/base.html:174 templates/registration/login.html:8
 msgid "Register"
 msgstr "Rekisteröidy"
 
-#: templates/base.html:189
+#: templates/base.html:196
 msgid "Error"
 msgstr "Virhe"
 
-#: templates/base.html:191 templates/image/detail.html:8
+#: templates/base.html:198 templates/image/detail.html:8
 msgid "Info"
 msgstr "Info"
 
-#: templates/base.html:209
+#: templates/base.html:216
 msgid "About"
 msgstr "Tietoja AstroBinistä"
 
-#: templates/base.html:211
+#: templates/base.html:218
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the last place where you need to upload your "
@@ -658,19 +658,19 @@ msgstr ""
 "on tähtikuviesi lopullinen koti. Tähtikuvaajan suunnittelema, tähtikuvaajia "
 "varten. "
 
-#: templates/base.html:215
+#: templates/base.html:222
 msgid "Site links"
 msgstr "Linkit"
 
-#: templates/base.html:224
+#: templates/base.html:231
 msgid "Thanks to"
 msgstr "Kiitokset"
 
-#: templates/base.html:233
+#: templates/base.html:240
 msgid "Copyright"
 msgstr "Tekijänoikeus"
 
-#: templates/base.html:235
+#: templates/base.html:242
 msgid ""
 "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The "
 "images on this websites are copyright of their respective owners."
@@ -679,31 +679,31 @@ msgstr ""
 "pidätetty. Tällä internetsivulla olevien kuvien tekijänoikeudet kuuluvat "
 "kuvan julkaisijalle. "
 
-#: templates/base.html:254
+#: templates/base.html:261
 msgid "Follow AstroBin on Twitter"
 msgstr "Seuraa AstroBiniä Twitterissä"
 
-#: templates/base.html:255
+#: templates/base.html:262
 msgid "Back to top"
 msgstr "Takaisin ylös"
 
-#: templates/base.html:269
+#: templates/base.html:276
 msgid "Feedback"
 msgstr "Palaute"
 
-#: templates/base.html:279
+#: templates/base.html:286
 msgid "Cancel"
 msgstr "Peruta"
 
-#: templates/base.html:304 templates/image/detail.html:331
+#: templates/base.html:311 templates/image/detail.html:331
 msgid "Uploading..."
 msgstr "Ladataan..."
 
-#: templates/base.html:311 templates/image/detail.html:329
+#: templates/base.html:318 templates/image/detail.html:329
 msgid "No file selected"
 msgstr "Yhtään tiedostoa ei ole valittu"
 
-#: templates/base.html:312 templates/image/detail.html:330
+#: templates/base.html:319 templates/image/detail.html:330
 msgid "Choose file"
 msgstr "Valitse tiedosto"
 
@@ -784,22 +784,6 @@ msgstr ""
 msgid ""
 "Then there are stats, or course. As the amount of data increases, there is "
 "literally no limit at the amount of interesting stats that can be concieved."
-msgstr ""
-
-#: templates/faq.html:43
-msgid "Why won't my image get plate-solved?"
-msgstr ""
-
-#: templates/faq.html:44
-#, python-format
-msgid ""
-"Most images should get plate-solved if you've specified the correct pixel "
-"scale. When you're asked for the focal length of the telescope and the pixel "
-"size of the camera, remember that you have to consider binning and, "
-"importantly, image scaling. That means that if you resized the image before "
-"submitting to AstroBin, you have to take that into account when you write "
-"your pixel size. If you resized your image by 50%%, then you have to double "
-"the size of the pixel."
 msgstr ""
 
 #: templates/help.html:7
@@ -1519,10 +1503,7 @@ msgid ""
 msgstr ""
 
 #: templates/image/edit/presolve.html:23
-msgid ""
-"PS: It's OK if you're a little off with these numbers. It's OK if you have "
-"cropped your image, but if you have resized it plate-solving will probably "
-"fail, unless you account for the resizing in the pixel-scale input field."
+msgid "PS: It's OK if you're a little off with these numbers."
 msgstr ""
 
 #: templates/image/edit/presolve.html:30
@@ -1682,6 +1663,25 @@ msgstr "Viestisi on lähetetty onnistuneesti."
 msgid "Here are your notifications"
 msgstr "Tässä ovat uudet ilmoituksesi"
 
+#: templates/notification/email_body.txt:1
+#, python-format
+msgid ""
+"You have received the following notice from %(current_site)s:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"To see other notices or change how you receive notifications, please go to "
+"%(notices_url)s.\n"
+msgstr ""
+
+#: templates/notification/attention_request/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s would like to bring the following image to your attention: "
+"%(object_url)s"
+msgstr ""
+"%(originator)s haluaa herättää huomiosi oheisesta kuvasta: %(object_url)s"
+
 #: templates/notification/attention_request/notice.html:2
 #: templates/notification/attention_request/short.html:1
 #, python-format
@@ -1691,6 +1691,11 @@ msgid ""
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> haluaa herättää "
 "huomiosi eräästä kuvasta.</a>"
+
+#: templates/notification/attention_request/short.txt:2
+#, python-format
+msgid "%(originator)s wants to bring an image to your attention"
+msgstr "%(originator)s haluaa herättää huomiosi eräästä kuvasta"
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -1702,8 +1707,10 @@ msgstr ""
 "<a href=\"%(object_url)s\">Seuraat nyt <strong>%(object)s</strong>.</a>"
 
 #: templates/notification/image_deleted/full.html:2
+#: templates/notification/image_deleted/full.txt:2
 #: templates/notification/image_deleted/notice.html:2
 #: templates/notification/image_deleted/short.html:2
+#: templates/notification/image_deleted/short.txt:2
 msgid "Your image has been deleted."
 msgstr "Kuvasi on poistettu."
 
@@ -1727,6 +1734,15 @@ msgid ""
 "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr "<a href=\"%(object_url)s\">Kuvasi astrometrinen ratkaisu onnistui.</a>"
 
+#: templates/notification/new_follower/full.txt:2
+#, python-format
+msgid ""
+"User %(object)s is now following you. They will be notified when you publish "
+"new images."
+msgstr ""
+"Käyttäjä %(object)s nyt seuraa sinua. Ilmoitus uusista kuvistasi lähetetään "
+"hänelle."
+
 #: templates/notification/new_follower/notice.html:2
 #: templates/notification/new_follower/short.html:2
 #, python-format
@@ -1735,6 +1751,19 @@ msgid ""
 "</a>"
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(object)s</strong> seuraa nyt sinua.</a>"
+
+#: templates/notification/new_follower/short.txt:2
+msgid "You have a new follower!"
+msgstr "Sinulla on uusi seuraaja!"
+
+#: templates/notification/new_image/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image! Check it out at the following url: "
+"%(object_url)s"
+msgstr ""
+"%(originator)s on julkaissut uuden kuvan! Voit käydä katsomassa kuvan "
+"osoitteesta: %(object_url)s"
 
 #: templates/notification/new_image/notice.html:2
 #, python-format
@@ -1754,6 +1783,20 @@ msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on julkaissut "
 "uuden kuvan</a>"
 
+#: templates/notification/new_image/short.txt:2
+#, python-format
+msgid "New image by %(originator)s"
+msgstr "%(originator)s julkaisi uuden kuvan "
+
+#: templates/notification/new_image_revision/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image revision! Check it out at the "
+"following url: %(object_url)s"
+msgstr ""
+"%(originator)s on julkaissut uuden version kuvasta! Voit käydä katsomassa "
+"kuvan osoitteesta: %(object_url)s"
+
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
 #, python-format
@@ -1764,6 +1807,20 @@ msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on julkaissut "
 "uuden version kuvasta.</a>"
 
+#: templates/notification/new_image_revision/short.txt:2
+#, python-format
+msgid "New image revision by %(originator)s"
+msgstr "%(originator)s julkaisi kuvasta uuden version"
+
+#: templates/notification/request_fulfilled/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has fulfilled your request! Check it out at the following "
+"url: %(object_url)s"
+msgstr ""
+"%(originator)s on toteuttanut pyyntösi! Voit käydä katsomassa sen "
+"osoitteesta: %(object_url)s"
+
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
 #, python-format
@@ -1773,6 +1830,11 @@ msgid ""
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on toteuttanut "
 "pyyntösi</a>"
+
+#: templates/notification/request_fulfilled/short.txt:2
+#, python-format
+msgid "%(originator)s has fulfilled your request."
+msgstr "%(originator)s  on toteuttanut pyyntösi."
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
@@ -1816,6 +1878,19 @@ msgstr "Kirjaudu sisään"
 #: templates/registration/activate.html:14
 msgid "Account activation failed"
 msgstr "Tunnuksen aktivoiminen epäonnistui"
+
+#: templates/registration/activation_email.txt:2
+msgid "Activate account at"
+msgstr "Aktivoi tunnus  sivustolle"
+
+#: templates/registration/activation_email.txt:6
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr "Linkki on voimassa %(expiration_days)s päivää."
+
+#: templates/registration/activation_email_subject.txt:1
+msgid "Account activation on"
+msgstr "Tilin aktivoiminen sivustolla"
 
 #: templates/registration/login.html:7
 msgid "Reset password"
@@ -2076,64 +2151,6 @@ msgstr ""
 #, python-format
 msgid "%s ago"
 msgstr ""
-
-#~ msgid ""
-#~ "%(originator)s would like to bring the following image to your attention: "
-#~ "%(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s haluaa herättää huomiosi oheisesta kuvasta: %(object_url)s"
-
-#~ msgid "%(originator)s wants to bring an image to your attention"
-#~ msgstr "%(originator)s haluaa herättää huomiosi eräästä kuvasta"
-
-#~ msgid ""
-#~ "User %(object)s is now following you. They will be notified when you "
-#~ "publish new images."
-#~ msgstr ""
-#~ "Käyttäjä %(object)s nyt seuraa sinua. Ilmoitus uusista kuvistasi "
-#~ "lähetetään hänelle."
-
-#~ msgid "You have a new follower!"
-#~ msgstr "Sinulla on uusi seuraaja!"
-
-#~ msgid ""
-#~ "%(originator)s has published a new image! Check it out at the following "
-#~ "url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s on julkaissut uuden kuvan! Voit käydä katsomassa kuvan "
-#~ "osoitteesta: %(object_url)s"
-
-#~ msgid "New image by %(originator)s"
-#~ msgstr "%(originator)s julkaisi uuden kuvan "
-
-#~ msgid ""
-#~ "%(originator)s has published a new image revision! Check it out at the "
-#~ "following url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s on julkaissut uuden version kuvasta! Voit käydä katsomassa "
-#~ "kuvan osoitteesta: %(object_url)s"
-
-#~ msgid "New image revision by %(originator)s"
-#~ msgstr "%(originator)s julkaisi kuvasta uuden version"
-
-#~ msgid ""
-#~ "%(originator)s has fulfilled your request! Check it out at the following "
-#~ "url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s on toteuttanut pyyntösi! Voit käydä katsomassa sen "
-#~ "osoitteesta: %(object_url)s"
-
-#~ msgid "%(originator)s has fulfilled your request."
-#~ msgstr "%(originator)s  on toteuttanut pyyntösi."
-
-#~ msgid "Activate account at"
-#~ msgstr "Aktivoi tunnus  sivustolle"
-
-#~ msgid "Link is valid for %(expiration_days)s days."
-#~ msgstr "Linkki on voimassa %(expiration_days)s päivää."
-
-#~ msgid "Account activation on"
-#~ msgstr "Tilin aktivoiminen sivustolla"
 
 #~ msgid "Invalid image."
 #~ msgstr "Virheellinen kuva."
