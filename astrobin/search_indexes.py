@@ -5,7 +5,7 @@ from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 
-XAPIAN_OPERATORS = ['-', '+',]
+XAPIAN_OPERATORS = ['-', '+', '*',]
 def xapian_escape(s):
     for op in XAPIAN_OPERATORS:
         s = s.replace(op, ' ')
