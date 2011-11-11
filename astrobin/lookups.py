@@ -38,7 +38,7 @@ def autocomplete(request, what):
 
     # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
-        subjects = simbad.find_subjects(q)
+        subjects = simbad.find_subjects(q)[:10]
         if subjects:
             for s in subjects:
                 id = s.mainId
@@ -48,6 +48,15 @@ def autocomplete(request, what):
                         if q.lower() in sid.identifier.lower():
                             id = sid.identifier
                 values.append({'id': str(s.id), 'name': id})
+        if len(values) < 10:
+            # Let's try to get some from our db too.
+            db_values = Subject.objects.filter(Q(mainId__iregex=r'%s'%regex))
+            for v in db_values:
+                if len(values) < 10:
+                    values.append({'id': str(v.id), 'name': v.mainId})
+                else:
+                    break
+
             return HttpResponse(simplejson.dumps(values))
 
     regex = ".*%s.*" % q
