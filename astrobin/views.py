@@ -159,7 +159,7 @@ def image_detail(request, id):
         related = 'user'
 
     if related == 'user':
-        related_images = SearchQuerySet().filter(user=image.user.username).exclude(django_id=id).order_by('-uploaded')[:limit]
+        related_images = SearchQuerySet().filter(username_auto=image.user.username).exclude(django_id=id).order_by('-uploaded')[:limit]
     elif related == 'subject':
         subjects = [xapian_escape(s.mainId) for s in image.subjects.all()]
         related_images = SearchQuerySet().filter(SQ(subjects__in=subjects)).exclude(django_id=id).order_by('-uploaded')[:limit]
@@ -285,6 +285,10 @@ def image_detail(request, id):
 
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
+    resized_size = settings.RESIZED_IMAGE_SIZE
+    if image.w > 0 and image.w > resized_size:
+        resized_size = image.w
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -293,7 +297,7 @@ def image_detail(request, id):
         template_object_name = 'image',
         extra_context = {'s3_url': settings.S3_URL,
                          'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
-                         'resized_size': settings.RESIZED_IMAGE_SIZE if image.w > settings.RESIZED_IMAGE_SIZE else image.w,
+                         'resized_size': resized_size,
                          'already_voted': already_voted,
                          'current_rating': rating,
                          'related': related,
