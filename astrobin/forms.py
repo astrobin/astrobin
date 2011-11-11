@@ -18,13 +18,6 @@ class ImageUploadForm(forms.Form):
 
 
 class ImageEditPresolveForm(forms.ModelForm):
-    binning = forms.IntegerField(
-        required  = False,
-        widget    = forms.TextInput(),
-        initial   = 1,
-        help_text = "1, 2, 3, 4, ...",
-    )
-
     scaling = forms.DecimalField(
         required       = False,
         max_digits     = 6,

@@ -228,6 +228,13 @@ def image_stored_callback(image, stored, solve, lang):
 
 
 class Image(models.Model):
+    BINNING_CHOICES = (
+        (1, '1x1'),
+        (2, '2x2'),
+        (3, '3x3'),
+        (4, '4x4'),
+    )
+
     title = models.CharField(_("Title"), max_length=128)
     subjects = models.ManyToManyField(Subject, verbose_name=_("Subjects"))
     locations = models.ManyToManyField(Location, null=True, blank=True, verbose_name=_("Locations"))
@@ -239,7 +246,7 @@ class Image(models.Model):
 
     focal_length = models.IntegerField(null=True, blank=True, help_text=_("(in mm)"))
     pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text=_("(in &mu;m)"))
-    binning = models.IntegerField(null=True, blank=True)
+    binning = models.IntegerField(null=True, blank=True, choices=BINNING_CHOICES, default=1)
     scaling = models.DecimalField(null=True, blank=True, max_digits=6, decimal_places=2)
 
     # gear
