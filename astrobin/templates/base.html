@@ -40,19 +40,18 @@
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-844985-10']);
           _gaq.push(['_trackPageview']);
+          {% if user.is_authenticated %}
+          _gaq.push(['_setCustomVar', 1, 'User Type', 'Member']);
+          _gaq.push(['_setCustomVar', 2, 'Username', '{{user.username}}']);
+          {% else %}
+          _gaq.push(['_setCustomVar', 1, 'User Type', 'Anonymous']);
+          {% endif %}
 
           (function() {
             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
           })();
-        </script>
-        <script type="text/javascript">
-        {% if user.is_authenticated %}
-            __utmSetVar("Visitor");
-        {% else %}
-            __utmSetVar("Member");
-        {% endif %}
         </script>
     </head>
 
