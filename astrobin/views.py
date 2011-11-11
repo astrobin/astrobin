@@ -293,6 +293,7 @@ def image_detail(request, id):
         template_object_name = 'image',
         extra_context = {'s3_url': settings.S3_URL,
                          'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
+                         'resized_size': settings.RESIZED_IMAGE_SIZE if image.w > settings.RESIZED_IMAGE_SIZE else image.w,
                          'already_voted': already_voted,
                          'current_rating': rating,
                          'related': related,
@@ -344,7 +345,10 @@ def image_upload_process(request):
     form = ImageUploadForm(request.POST, request.FILES)
     file = request.FILES["file"]
     filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    if original_ext.lower() not in ('.jpg', '.jpeg', '.png', '.gif'):
+    original_ext = original_ext.lower()
+    if original_ext == '.jpeg':
+        original_ext = '.jpg'
+    if original_ext not in ('.jpg', '.png', '.gif'):
         return object_list(
             request,
             queryset=Image.objects.filter(is_stored=True)[:15],
@@ -1380,7 +1384,10 @@ def image_revision_upload_process(request):
     file = request.FILES["file"]
 
     filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    if original_ext.lower() not in ('.jpg', '.jpeg', '.png', '.gif'):
+    original_ext = original_ext.lower()
+    if original_ext == '.jpeg':
+        original_ext = '.jpg'
+    if original_ext not in ('.jpg', '.png', '.gif'):
         return object_list(
             request,
             queryset=Image.objects.filter(is_stored=True)[:15],
