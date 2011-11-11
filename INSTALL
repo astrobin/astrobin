@@ -144,8 +144,12 @@ Add 'include /home/astrobin/Code/astrobin/astrobin.com.nginx;' to the http{} sec
 
 Also set these in /usr/local/nginx/conf/nginx.conf
 
+To the http section:
     client_max_body_size 20m;
+
+To the top:
     worker_processes 4;
+    worker_rlimit_nofile 20480;
 
 
 # Configure rabbitmq:
