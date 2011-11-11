@@ -286,7 +286,7 @@ def image_detail(request, id):
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
     resized_size = settings.RESIZED_IMAGE_SIZE
-    if image.w > 0 and image.w > resized_size:
+    if image.w > 0 and image.w < resized_size:
         resized_size = image.w
 
     return object_detail(
