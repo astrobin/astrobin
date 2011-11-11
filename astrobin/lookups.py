@@ -50,6 +50,7 @@ def autocomplete(request, what):
                 values.append({'id': str(s.id), 'name': id})
             return HttpResponse(simplejson.dumps(values))
 
+    regex = ".*%s.*" % q
     for k, v in {'locations': Location,
                  'telescopes':Telescope,
                  'mounts':Mount,
