@@ -212,7 +212,8 @@ class AdvancedSearchForm(SearchForm):
         self.fields['moon_phase_max'].label = _("Max. Moon phase %")
 
     def search(self):
-        self.cleaned_data['q'] = xapian_escape(self.cleaned_data['q'])
+        q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
+        self.cleaned_data['q'] = q
 
         # First, store the SearchQuerySet received from other processing.
         sqs = super(AdvancedSearchForm, self).search()
