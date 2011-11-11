@@ -216,7 +216,7 @@ class AdvancedSearchForm(SearchForm):
         self.cleaned_data['q'] = q
 
         sqs = super(AdvancedSearchForm, self).search()
- 
+
         if self.is_valid():
             if self.cleaned_data['start_date']:
                 sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
