@@ -259,7 +259,7 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
-                    {% if is_ready %}
+                    {% if is_ready and not image.animated %}
                     <hr/>
                     <h4>{% trans "Histogram" %}</h4>
                     <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>

@@ -260,6 +260,7 @@ class Image(models.Model):
     is_solved = models.BooleanField(editable=False)
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)
+    animated = models.BooleanField(editable=False, default=False)
 
     class Meta:
         app_label = 'astrobin'
