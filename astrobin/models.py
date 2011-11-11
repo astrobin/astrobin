@@ -423,9 +423,14 @@ class DeepSky_Acquisition(Acquisition):
         editable=False,
         default=False)
 
+    saved_on = models.DateTimeField(
+        editable=False,
+        auto_now=True,
+        null=True)
+
     class Meta:
         app_label = 'astrobin'
-        ordering = ['filter']
+        ordering = ['-saved_on', 'filter']
 
 
 class SolarSystem_Acquisition(Acquisition):

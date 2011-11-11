@@ -755,6 +755,7 @@ def image_edit_save_acquisition(request):
                     DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
                     deep_sky_acquisition_formset = DSAFormSet(instance=image)
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
+                    response_dict['advanced'] = True
                     if not dsa_qs:
                         response_dict['context_message'] = {'error': False, 'text': _("Fill in one session, before adding more.")}
                     return render_to_response('image/edit/acquisition.html',
