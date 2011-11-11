@@ -48,8 +48,8 @@ class ImageEditPresolveForm(forms.ModelForm):
 
 class ImageEditBasicForm(forms.Form):
     title = forms.CharField(max_length=64)
-    subjects = forms.CharField(required=False, help_text="<noscript>*</noscript>")
-    locations = forms.CharField(required=False, help_text="<noscript>*</noscript>")
+    subjects = forms.CharField(required=False, help_text="<noscript>*</noscript>" + _("Please only use a catalog name (e.g. M101, or NGC224 or IC1370)."))
+    locations = forms.CharField(required=False, help_text="<noscript>*</noscript>" + _("The places from which you have taken this image."))
     description = forms.CharField(widget=forms.Textarea, required=False)
 
     def __init__(self, user=None, **kwargs):
