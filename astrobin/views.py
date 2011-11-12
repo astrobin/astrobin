@@ -670,7 +670,9 @@ def image_edit_save_basic(request):
                     id = float(id)
                     k = Location.objects.get(Q(id=id))
                 except ValueError:
-                    k = Location.objects.filter(Q(name=id))[0]
+                    k = Location.objects.filter(Q(name=id))
+                    if k:
+                        k = k[0]
             except (Location.DoesNotExist, ValueError):
                 k = Location(name=id)
                 k.save();
@@ -927,7 +929,9 @@ def user_profile_save_basic(request):
                     id = float(id)
                     k = Location.objects.get(Q(id=id))
                 except ValueError:
-                    k = Location.objects.filter(Q(name=id))[0]
+                    k = Location.objects.filter(Q(name=id))
+                    if k:
+                        k = k[0]
             except (Location.DoesNotExist, ValueError):
                 k = Location(name=id)
                 k.save();
