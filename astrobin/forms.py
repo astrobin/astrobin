@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 from haystack.forms import SearchForm
+from haystack.query import SearchQuerySet
 
 from models import Image
 from models import UserProfile
@@ -208,7 +209,12 @@ class AdvancedSearchForm(SearchForm):
         q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
         self.cleaned_data['q'] = q
 
-        sqs = super(AdvancedSearchForm, self).search()
+        if self.cleaned_data['q'] == '':
+            sqs = SearchQuerySet().all()
+            if self.load_all:
+                sqs = sqs.load_all()
+        else:
+            sqs = super(AdvancedSearchForm, self).search()
 
         if self.is_valid():
             if self.cleaned_data['start_date']:
