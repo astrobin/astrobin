@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 from haystack.forms import SearchForm
-from haystack.query import SearchQuerySet
+from haystack.query import SearchQuerySet, EmptySearchQuerySet
 
 from models import Image
 from models import UserProfile
@@ -206,17 +206,20 @@ class AdvancedSearchForm(SearchForm):
         self.fields['moon_phase_max'].label = _("Max. Moon phase %")
 
     def search(self):
-        q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
-        self.cleaned_data['q'] = q
-
-        if self.cleaned_data['q'] == '':
-            sqs = SearchQuerySet().all()
-            if self.load_all:
-                sqs = sqs.load_all()
-        else:
-            sqs = super(AdvancedSearchForm, self).search()
+        sqs = EmptySearchQuerySet()
 
         if self.is_valid():
+            q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
+            self.cleaned_data['q'] = q
+
+            if self.cleaned_data['q'] == '':
+                sqs = SearchQuerySet().all()
+                if self.load_all:
+                    sqs = sqs.load_all()
+            else:
+                sqs = super(AdvancedSearchForm, self).search()
+
+
             if self.cleaned_data['start_date']:
                 sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
 

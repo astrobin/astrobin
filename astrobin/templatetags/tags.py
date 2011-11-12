@@ -241,3 +241,10 @@ def string_to_list(string):
     return args
 
 
+@register.filter
+def string_to_date(date):
+    try:
+        return datetime.strptime(date, "%Y-%m-%d")
+    except:
+        return datetime.now()
+        

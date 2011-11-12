@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load tags %}
 
 {% block content %}
 <div class="full-box">
@@ -13,7 +14,28 @@
 
 <a name="pag_anchor"></a>
 <div id="search-results" class="full-box clear">
-    <h2>{% trans "Images matching" %} <em>"{{query}}"</em></h2>
+    <h2>
+        {% if query %}
+            {% trans "Images matching" %} <em>"{{query}}"</em>
+        {% else %}
+            {% trans "All images" %}
+        {% endif %}
+
+        {% if 'start_date' in request.GET and 'end_date' in request.GET and request.GET.start_date != '' and request.GET.end_date != '' and request.GET.start_date == request.GET.end_date %}
+            &nbsp;{% trans "acquired on" %} {{request.GET.start_date|string_to_date|date:"DATE_FORMAT"}}
+        {% else %}
+            {% if 'start_date' in request.GET and request.GET.start_date != '' %}
+                &nbsp;{% trans "acquired after" %} {{request.GET.start_date|string_to_date|date:"DATE_FORMAT"}}
+                {% if 'end_date' in request.GET and request.GET.end_date != '' %}
+                    &nbsp;{% trans "and before" %} {{request.GET.end_date|string_to_date|date:"DATE_FORMAT"}}
+                {% endif %}
+            {% else %}
+                {% if 'end_date' in request.GET and request.GET.end_date != '' %}
+                    &nbsp;{% trans "acquired before" %} {{request.GET.end_date|string_to_date|date:"DATE_FORMAT"}}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </h2>
 
     <div class="sort">
             {% trans "Sort these images by:" %}&nbsp;
