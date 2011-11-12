@@ -1463,7 +1463,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   width: 100px;
 }
 .small-box {
-  margin: 20px auto 20px;
+  margin: 0 auto;
   padding: 10px;
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
@@ -1472,7 +1472,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
   width: 50%;
-  margin-top: 28px;
 }
 .small-box .single-form {
   text-align: center;
