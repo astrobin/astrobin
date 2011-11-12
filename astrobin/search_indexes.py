@@ -1,4 +1,5 @@
 import string
+import re
 
 from haystack.indexes import *
 from haystack import site
@@ -47,14 +48,40 @@ class ImageIndex(SearchIndex):
         return Image.objects.all()
 
     def prepare_title(self, obj):
-        return obj.title + ' ' + ''.join(obj.title.split())
+        value = obj.title
+
+        match = re.match(r'.*\s+m\s*(?P<id>\d+).*', obj.title.lower())
+        if match:
+            value += ' Messier %s Messier%s' % (match.group('id'), match.group('id'))
+
+        match = re.match(r'.*\s+messier\s*(?P<id>\d+).*', obj.title.lower())
+        if match:
+            value += ' M %s M%s' % (match.group('id'), match.group('id'))
+
+        return value + ' ' + ''.join(value.split())
 
     def prepare_username_auto(self, obj):
         return str(obj.user.username)
 
     def prepare_subjects(self, obj):
         # TODO: prepare also idlist
-        return _join_stripped([s.mainId for s in obj.subjects.all()])
+        subjects = []
+        for s in obj.subjects.all():
+            name = s.mainId
+            mindreader = ""
+            match = re.match(r'^m\s?(?P<id>\d+.*)', name.lower())
+            if match:
+                mindreader = 'Messier %s' % match.group('id')
+            else:
+                match = re.match(r'^messier\s?(?P<id>\d+.*)', name.lower())
+                if match:
+                    mindreader = 'M %s' % match.group('id')
+
+            subjects.append(name)
+            if mindreader != "":
+                subjects.append(mindreader)
+
+        return _join_stripped(subjects)
 
     def prepare_imaging_telescopes(self, obj):
         return _join_stripped([i.name for i in obj.imaging_telescopes.all()])
