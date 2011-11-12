@@ -69,6 +69,56 @@
             resultsTitleText: resultsTitleText});
         {% endfor %}
         {% endautoescape %}
+
+        // Perform some magic as the user types the title
+        var timer;
+        var current_subjects = new Array();
+        $('input[name=title]').keydown(function(e) {
+            var $input = $(this)
+
+            if (e.keyCode == 8 ) { //delete
+                // TODO
+            } else {
+                var val = $input.val().toUpperCase();
+                var regex = /(M|MESSIER|IC|NGC|VDB)\s*([0-9]+)/g;
+                var m = regex.exec(val);
+                if (m != null) {
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        while (m != null) {
+                            m[0] = m[0].replace('MESSIER', 'M');
+
+                            var subjects = $('input[name=subjects]');
+                            var subjects_values = $('input[name=as_values_subjects]');
+                            var split_regex = /([A-Z]+)(\d+)/;
+                            var split = split_regex.exec(m[0]);
+                            if (split)
+                                s = split[1] + ' ' + split[2];
+                            else
+                                s = m[0]; // and good luck with that.
+
+                            var subjects_regex = new RegExp(s + "\\b", "g");
+                            var subjects_matches = subjects[0].defaultValue.toUpperCase().search(subjects_regex, "regex");
+                            var subjects_values_matches = subjects_values.val().toUpperCase().search(subjects_regex, "regex");
+                            if (subjects_matches == -1 && subjects_values_matches == -1) {
+                                // Let's add the subject to the auto suggest box
+                                if (subjects.val() == startText)
+                                    subjects.val("");
+
+                                subjects.val(subjects.val() + s);
+
+                                e = jQuery.Event('keydown');
+                                e.keyCode = 188; // tab
+                                subjects.trigger(e);
+
+                                current_subjects.push(s);
+                            }
+                            m = regex.exec(val);
+                        }
+                    }, 500);
+                }
+            }
+        });
     });
 </script>
 {% endblock %}
