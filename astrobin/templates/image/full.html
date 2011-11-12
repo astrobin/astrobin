@@ -1,0 +1,68 @@
+{% load compress %}
+{% load tags %}
+{% load i18n %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>{% block title %}AstroBin{% endblock %}</title>
+
+        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+        <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
+        <meta name="description" content="Community for astrophotographers" />
+        <meta name="keywords" content="astrophotography, astronomy, telescopes" />
+        <meta name="robots" content="index, follow, noarchive" />
+        <meta name="googlebot" content="noarchive" />
+
+        <!-- font -->
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
+
+        {% compress css %}
+        <!-- site's css -->
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css"/>
+        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/static/css/ie6.css"/><![endif]-->
+        {% endcompress %}
+
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-844985-10']);
+          _gaq.push(['_trackPageview']);
+          {% if user.is_authenticated %}
+          _gaq.push(['_setCustomVar', 1, 'User Type', 'Member']);
+          _gaq.push(['_setCustomVar', 2, 'Username', '{{user.username}}']);
+          {% else %}
+          _gaq.push(['_setCustomVar', 1, 'User Type', 'Anonymous']);
+          {% endif %}
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
+    </head>
+
+    <body style="width: 100%">
+        <div id="full-size-header">
+            <h1><a href="/">AstroBin</a></h1>
+        </div>
+        <div id="full-size-image">
+                <div class="main-image-data">
+                        <h2 class="title">{{image.title|escape|default:_("(no title)")}}</h2>
+                        <span class="subtitle">
+                            ({% trans "uploaded" %}: {{image.uploaded|ago}}
+                            {% url user_page image.user.username as the_url %}
+                            {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %})
+                        </span>
+            </div>
+            <a href="{% url image_detail image.id %}{% query_string "mod=request.GET.mod" "" %}">
+                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% ifequal request.GET.mod 'inverted' %}_inverted{% endifequal %}{{image.original_ext}}"
+                     alt="{{image.title|escape}}">
+            </a>
+        </div>
+    </body>
+</html>
+
