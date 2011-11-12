@@ -75,6 +75,22 @@ def valueReader(request, field):
     return items, value
 
 
+def new_location(name, user):
+    k = Location(name=name)
+    k.save();
+
+    r = LocationRequest(
+        from_user=User.objects.get(username=settings.ASTROBIN_USER),
+        to_user=user,
+        location=k,
+        fulfilled=False,
+        message='') # not implemented yet
+    r.save()
+    push_request(user, r)
+
+    return k
+
+
 def get_or_create_location(prop, value):
     k = None
     created = False
@@ -674,17 +690,10 @@ def image_edit_save_basic(request):
                     if k:
                         k = k[0]
             except (Location.DoesNotExist, ValueError):
-                k = Location(name=id)
-                k.save();
+                k = new_location(id, image.user)
 
-                r = LocationRequest(
-                    from_user=User.objects.get(username=settings.ASTROBIN_USER),
-                    to_user=image.user,
-                    location=k,
-                    fulfilled=False,
-                    message='') # not implemented yet
-                r.save()
-                push_request(image.user, r)
+            if not k:
+                k = new_location(id, image.user)
 
             image.locations.add(k)
     prefill_dict['locations'] = [jsonDump(image.locations.all()),
@@ -932,18 +941,11 @@ def user_profile_save_basic(request):
                     k = Location.objects.filter(Q(name=id))
                     if k:
                         k = k[0]
-            except (Location.DoesNotExist, ValueError):
-                k = Location(name=id)
-                k.save();
+            except (Location.DoesNotExist, ValueError, TypeError):
+                k = new_location(id, request.user)
 
-                r = LocationRequest(
-                    from_user=User.objects.get(username=settings.ASTROBIN_USER),
-                    to_user=request.user,
-                    location=k,
-                    fulfilled=False,
-                    message='') # not implemented yet
-                r.save()
-                push_request(request.user, r)
+            if not k:
+                k = new_location(id, request.user)
 
             profile.locations.add(k)
 
