@@ -259,7 +259,7 @@
                                     <strong>{{data.0}}</strong>:
                                     {% if data.0 == dates_label %}
                                         {% for date in data.1 %}
-                                            {{date|date:"DATE_FORMAT"}}{% if not forloop.last %},&nbsp;{% endif %}
+                                            <a href="/search/{% query_string "start_date=date, end_date=date" "" %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
                                         {% endfor %}
                                     {% else %}
                                         {{data.1}}
