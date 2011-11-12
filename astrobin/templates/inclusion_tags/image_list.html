@@ -12,10 +12,10 @@
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
         </a>
         <div id="capty-content-{{image.id}}">
-            {{image.title|default:_("(no title)")}}<br/>
+            {{image.uploaded|ago}}<br/>
             {% with image.user.username as user %}
             {% url user_page user as user_page %}
-            {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}, {{image.uploaded|ago}}
+            {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
             {% endwith %}
         </div>
     </div>
