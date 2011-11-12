@@ -264,6 +264,37 @@
                                 </p>
                             {% endif %}
                         {% endfor %}
+                    {% else %}
+                        {% if ssa.date %}
+                            <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "start_date=date, end_date=date" "" %}">{{ssa.date|date:"DATE_FORMAT"}}</a>
+                        {% endif %}
+                        {% if ssa.time %}
+                            <p><strong>{% trans "Time" %}</strong>: {{ssa.time}}
+                        {% endif %}
+                        {% if ssa.frames %}
+                            <p><strong>{% trans "Frames" %}</strong>: {{ssa.frames}}
+                        {% endif %}
+                        {% if ssa.fps %}
+                            <p><strong>{% trans "FPS" %}</strong>: {{ssa.fps}}
+                        {% endif %}
+                        {% if ssa.focal_length %}
+                            <p><strong>{% trans "Focal length" %}</strong>: {{ssa.focal_length}}
+                        {% endif %}
+                        {% if ssa.cmi %}
+                            <p><strong>{% trans "CMI" %}</strong>: {{ssa.cmi}}
+                        {% endif %}
+                        {% if ssa.cmii %}
+                            <p><strong>{% trans "CMII" %}</strong>: {{ssa.cmii}}
+                        {% endif %}
+                        {% if ssa.cmiii %}
+                            <p><strong>{% trans "CMIII" %}</strong>: {{ssa.cmiii}}
+                        {% endif %}
+                        {% if ssa.seeing %}
+                            <p><strong>{% trans "Seeing" %}</strong>: {{ssa.seeing}}
+                        {% endif %}
+                        {% if ssa.transparency %}
+                            <p><strong>{% trans "Transparency" %}</strong>: {{ssa.transparency}}
+                        {% endif %}
                     {% endif %}
                     {% if is_ready and not image.animated %}
                     <hr/>
