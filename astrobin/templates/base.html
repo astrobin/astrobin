@@ -289,8 +289,7 @@
         <script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
         <script type="text/javascript" src="/static/js/astrobin.js"></script>
         <script type="text/javascript" src="/static/js/jquery-ui-1.8.7.custom.min.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.capSlide.js"></script>
-        <script type="text/javascript" src="/static/js/own/capslide.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.capty.js"></script>
         <script type="text/javascript" src="/static/js/jquery-ui-timepicker-addon.js"></script>
         <script type="text/javascript" src="/static/js/jquery.validationEngine-en.js"></script>
         <script type="text/javascript" src="/static/js/jquery.validationEngine.js"></script>
@@ -300,6 +299,8 @@
         <!-- javascript -->
         <script type="text/javascript">
             $(document).ready(function() {
+                $('.capty').capty({animation: 'fade', speed: 150, height: 45});
+
                 // date and time pickers
                 $('input').filter('.timepickerclass').timepicker({});
                 $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});

@@ -2218,3 +2218,19 @@ table.form_saved td, table.form_saved_container td {
   background: none;
   vertical-align: middle;
 }
+div.capty-caption {
+  background-color: #FFF;
+  color: #000;
+  padding-left: 10px;
+  padding-top: 7px;
+  text-shadow: 1px 1px 0 #222;
+  -moz-border-radius: 0 0 24px 24px;
+  -webkit-border-radius: 0 0 24px 24px;
+  border-radius: 0 0 24px 24px;
+  font-size: 11.9px;
+}
+div.capty-caption a {
+  color: #cc4b2e;
+  text-decoration: none;
+  text-shadow: none;
+}
