@@ -254,7 +254,14 @@
                         {% for data in deep_sky_data %}
                             {% if data.1 %}
                                 <p>
-                                    <strong>{{data.0}}</strong>: {{data.1}}
+                                    <strong>{{data.0}}</strong>:
+                                    {% if data.0 == dates_label %}
+                                        {% for date in data.1 %}
+                                            {{date|date}}{% if not forloop.last %},&nbsp;{% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        {{data.1}}
+                                    {% endif %}
                                 </p>
                             {% endif %}
                         {% endfor %}

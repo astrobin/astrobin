@@ -265,7 +265,7 @@ def image_detail(request, id):
             return float(sum(values)) / len(values)
 
         deep_sky_data = (
-            (_('Dates'), u', '.join([str(x) for x in dsa_data['dates']])),
+            (_('Dates'), dsa_data['dates']),
             (_('Frames'), u', '.join(dsa_data['frames'])),
             (_('Darks') , u', '.join([str(x) for x in dsa_data['darks']])),
             (_('Flats'), u', '.join([str(x) for x in dsa_data['flats']])),
@@ -332,6 +332,7 @@ def image_detail(request, id):
                          'revision_image': revision_image,
                          'is_ready': is_ready,
                          'full': 'full' in request.GET,
+                         'dates_label': _("Dates"),
                          'uploaded_on': uploaded_on
                         })
 
