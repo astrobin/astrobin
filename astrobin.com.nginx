@@ -30,7 +30,7 @@ server {
     
     # Set a vary header so downstream proxies don't send cached gzipped content to IE6
     gzip_vary on;
-    ## /CompressionO
+    ## /Compression
 
     location /static/  {
         root /home/astrobin/Code/astrobin;
@@ -38,6 +38,10 @@ server {
     }
 
     location / {
+        if ($request_uri ~* "^/robots.txt") {
+            rewrite ^/robots.txt /static/robots.txt permanent;
+        }
+
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
         proxy_redirect off;
