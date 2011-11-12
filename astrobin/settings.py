@@ -211,7 +211,7 @@ CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
 
 ASTROBIN_ENABLE_SOLVING = True
 
-PRIVATEBETA_ENABLE_BETA = True
+PRIVATEBETA_ENABLE_BETA = False
 PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
     'astrobin.views.help',
     'astrobin.views.faq',
