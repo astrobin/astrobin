@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 07:36-0500\n"
-"PO-Revision-Date: 2011-11-12 07:38-0500\n"
+"POT-Creation-Date: 2011-11-12 08:53-0500\n"
+"PO-Revision-Date: 2011-11-12 08:54-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -176,12 +176,12 @@ msgid "Search for astronomical objects, telescopes, cameras, filters..."
 msgstr "Cerca oggetti astronomici, telescopi, camere, filtri..."
 
 #: forms.py:200
-msgid "Min. upload date"
-msgstr "Min. data di upload"
+msgid "Acquired after"
+msgstr "Acquisita dopo il"
 
 #: forms.py:201
-msgid "Max. upload date"
-msgstr "Max. data di upload"
+msgid "Acquired before"
+msgstr "Acquisita prima del"
 
 #: forms.py:202
 msgid "Min. integration"
@@ -212,7 +212,6 @@ msgstr "Per esempio: -51.25"
 #: models.py:347
 #: models.py:464
 #: templates/image/edit/acquisition.html:80
-#: templates/search/search.html:22
 msgid "Date"
 msgstr "Data"
 
@@ -301,7 +300,7 @@ msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del sensore. Esempio: -20."
 
 #: models.py:404
-#: views.py:270
+#: views.py:279
 msgid "Darks"
 msgstr "Dark"
 
@@ -310,7 +309,7 @@ msgid "The number of dark frames."
 msgstr "Numero di dark."
 
 #: models.py:409
-#: views.py:271
+#: views.py:280
 msgid "Flats"
 msgstr "Flat"
 
@@ -319,7 +318,7 @@ msgid "The number of flat frames."
 msgstr "Numero di flat."
 
 #: models.py:414
-#: views.py:272
+#: views.py:281
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
@@ -328,7 +327,7 @@ msgid "The number of dark flat frames."
 msgstr "Numero di dark dei flat."
 
 #: models.py:419
-#: views.py:273
+#: views.py:282
 msgid "Bias"
 msgstr "Bias"
 
@@ -337,17 +336,17 @@ msgid "The number of bias/offset frames."
 msgstr "Numero di frame bias/offset."
 
 #: models.py:424
-#: views.py:276
+#: views.py:285
 msgid "Mean SQM"
 msgstr "SQM medio"
 
 #: models.py:429
-#: views.py:277
+#: views.py:286
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
 #: models.py:448
-#: views.py:269
+#: views.py:278
 msgid "Frames"
 msgstr "Frame"
 
@@ -423,79 +422,79 @@ msgstr "Fusorario"
 msgid "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr "Se inserisci questo, AstroBin ti mostrerà tutte le date nel tuo fusorario."
 
-#: views.py:268
-#: views.py:335
+#: views.py:277
+#: views.py:344
 msgid "Dates"
 msgstr "Date"
 
-#: views.py:274
+#: views.py:283
 msgid "Avg. Moon age"
 msgstr "Giorno lunare medio"
 
-#: views.py:275
+#: views.py:284
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:381
-#: views.py:396
-#: views.py:1431
-#: views.py:1446
+#: views.py:390
+#: views.py:405
+#: views.py:1440
+#: views.py:1455
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida. I formati accettati sono JPG, PNG e GIF."
 
-#: views.py:458
-#: views.py:462
-#: views.py:620
-#: views.py:623
-#: views.py:677
-#: views.py:701
+#: views.py:467
+#: views.py:471
+#: views.py:629
+#: views.py:632
+#: views.py:686
+#: views.py:710
 #: templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
-#: views.py:459
-#: views.py:621
-#: views.py:678
-#: views.py:702
+#: views.py:468
+#: views.py:630
+#: views.py:687
+#: views.py:711
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
-#: views.py:460
+#: views.py:469
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:463
-#: views.py:624
+#: views.py:472
+#: views.py:633
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:464
+#: views.py:473
 #: templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:801
+#: views.py:810
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:806
-#: views.py:818
-#: views.py:856
+#: views.py:815
+#: views.py:827
+#: views.py:865
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1309
+#: views.py:1318
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1368
+#: views.py:1377
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1392
+#: views.py:1401
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -1828,6 +1827,10 @@ msgstr "Ordina queste immagini per:"
 msgid "Relevance"
 msgstr "Rilevanza"
 
+#: templates/search/search.html:22
+msgid "Upload time"
+msgstr "Data di caricamento"
+
 #: templates/search/search.html:23
 msgid "Rating"
 msgstr "Voto"
@@ -1971,6 +1974,12 @@ msgstr "secondi fa"
 #, python-format
 msgid "%s ago"
 msgstr "%s fa"
+
+#~ msgid "Min. upload date"
+#~ msgstr "Min. data di upload"
+
+#~ msgid "Max. upload date"
+#~ msgstr "Max. data di upload"
 
 #~ msgid "(in &mu;m, taking binning and image scaling into account)"
 #~ msgstr ""

@@ -175,16 +175,18 @@ def image_detail(request, id):
         related = 'user'
 
     if related == 'user':
-        related_images = SearchQuerySet().filter(username_auto=image.user.username).exclude(django_id=id).order_by('-uploaded')[:limit]
+        related_images = SearchQuerySet().filter(username_auto=image.user.username)
     elif related == 'subject':
         subjects = [xapian_escape(s.mainId) for s in image.subjects.all()]
-        related_images = SearchQuerySet().filter(SQ(subjects__in=subjects)).exclude(django_id=id).order_by('-uploaded')[:limit]
+        related_images = SearchQuerySet().filter(SQ(subjects__in=subjects))
     elif related == 'imaging_telescope':
         telescopes = [xapian_escape(t.name) for t in image.imaging_telescopes.all()]
-        related_images = SearchQuerySet().filter(SQ(imaging_telescopes__in=telescopes)).exclude(django_id=id).order_by('-uploaded')[:limit]
+        related_images = SearchQuerySet().filter(SQ(imaging_telescopes__in=telescopes))
     elif related == 'imaging_camera':
         cameras = [xapian_escape(c.name) for c in image.imaging_cameras.all()]
-        related_images = SearchQuerySet().filter(SQ(imaging_cameras__in=cameras)).exclude(django_id=id).order_by('-uploaded')[:limit]
+        related_images = SearchQuerySet().filter(SQ(imaging_cameras__in=cameras))
+
+    related_images = related_images.exclude(django_id=id).order_by('-uploaded')[:limit]
 
     gear_list = [('Imaging telescopes', image.imaging_telescopes.all()),
                  ('Imaging cameras'   , image.imaging_cameras.all()),

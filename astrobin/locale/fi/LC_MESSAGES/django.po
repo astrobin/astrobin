@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 07:36-0500\n"
+"POT-Creation-Date: 2011-11-12 08:53-0500\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -145,12 +145,12 @@ msgstr ""
 "Etsi tähtitieteellisiä kohteita, kaukoputkia, kameroita, suodattimia..."
 
 #: forms.py:200
-msgid "Min. upload date"
-msgstr "Aikaisin latauspäivä"
+msgid "Acquired after"
+msgstr ""
 
 #: forms.py:201
-msgid "Max. upload date"
-msgstr "Viimeisin latauspäivä"
+msgid "Acquired before"
+msgstr ""
 
 #: forms.py:202
 msgid "Min. integration"
@@ -177,7 +177,7 @@ msgid "For example: -51.25"
 msgstr "Esimerksi: -51.25"
 
 #: forms.py:276 forms.py:300 models.py:347 models.py:464
-#: templates/image/edit/acquisition.html:80 templates/search/search.html:22
+#: templates/image/edit/acquisition.html:80
 msgid "Date"
 msgstr "Päivämäärä"
 
@@ -263,7 +263,7 @@ msgstr "Kennon jäähdytys"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr ""
 
-#: models.py:404 views.py:270
+#: models.py:404 views.py:279
 msgid "Darks"
 msgstr ""
 
@@ -272,7 +272,7 @@ msgstr ""
 msgid "The number of dark frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:409 views.py:271
+#: models.py:409 views.py:280
 msgid "Flats"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgstr ""
 msgid "The number of flat frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:414 views.py:272
+#: models.py:414 views.py:281
 msgid "Flat darks"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgstr ""
 msgid "The number of dark flat frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:419 views.py:273
+#: models.py:419 views.py:282
 msgid "Bias"
 msgstr ""
 
@@ -299,15 +299,15 @@ msgstr ""
 msgid "The number of bias/offset frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:424 views.py:276
+#: models.py:424 views.py:285
 msgid "Mean SQM"
 msgstr "Keskiarvo SQM"
 
-#: models.py:429 views.py:277
+#: models.py:429 views.py:286
 msgid "Mean FWHM"
 msgstr "Keskiarvo FWHM"
 
-#: models.py:448 views.py:269
+#: models.py:448 views.py:278
 #, fuzzy
 msgid "Frames"
 msgstr "Frames"
@@ -382,64 +382,64 @@ msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 
-#: views.py:268 views.py:335
+#: views.py:277 views.py:344
 msgid "Dates"
 msgstr "Päivämäärät"
 
-#: views.py:274
+#: views.py:283
 msgid "Avg. Moon age"
 msgstr "Keskimääräinen kuun ikä"
 
-#: views.py:275
+#: views.py:284
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
-#: views.py:381 views.py:396 views.py:1431 views.py:1446
+#: views.py:390 views.py:405 views.py:1440 views.py:1455
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 
-#: views.py:458 views.py:462 views.py:620 views.py:623 views.py:677
-#: views.py:701 templates/user/profile/edit/basic.html:53
+#: views.py:467 views.py:471 views.py:629 views.py:632 views.py:686
+#: views.py:710 templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Syötä nimen osa ja odota ehdotuksia!"
 
-#: views.py:459 views.py:621 views.py:678 views.py:702
+#: views.py:468 views.py:630 views.py:687 views.py:711
 msgid "No results. Sorry."
 msgstr "Ei tuloksia, pahoitteluni."
 
-#: views.py:460
+#: views.py:469
 msgid "Subjects found in the SIMBAD database"
 msgstr ""
 
-#: views.py:463 views.py:624
+#: views.py:472 views.py:633
 msgid "No results. Press TAB to create this location!"
 msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 
-#: views.py:464 templates/user/profile/edit/basic.html:55
+#: views.py:473 templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:801
+#: views.py:810
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views.py:806 views.py:818 views.py:856
+#: views.py:815 views.py:827 views.py:865
 msgid "There was an error. Check your input!"
 msgstr "Virhe. Tarkista tiedot!"
 
-#: views.py:1309
+#: views.py:1318
 msgid "RE"
 msgstr "VS"
 
-#: views.py:1368
+#: views.py:1377
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1392
+#: views.py:1401
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -2044,6 +2044,11 @@ msgstr "Järjestä nämä kuvat: "
 msgid "Relevance"
 msgstr "Relevanssi"
 
+#: templates/search/search.html:22
+#, fuzzy
+msgid "Upload time"
+msgstr "Lataa kuva"
+
 #: templates/search/search.html:23
 msgid "Rating"
 msgstr "Arviointi"
@@ -2196,6 +2201,12 @@ msgstr ""
 #, python-format
 msgid "%s ago"
 msgstr ""
+
+#~ msgid "Min. upload date"
+#~ msgstr "Aikaisin latauspäivä"
+
+#~ msgid "Max. upload date"
+#~ msgstr "Viimeisin latauspäivä"
 
 #~ msgid "Invalid image."
 #~ msgstr "Virheellinen kuva."
