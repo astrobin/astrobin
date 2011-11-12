@@ -1,0 +1,24 @@
+{% load i18n %}
+{% load tags %}
+
+<div class="image-strip clear">
+{% for i in images.object_list %}
+    <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
+        <a href="{{i.object.get_absolute_url}}{% query_string "related=related_type" "r, mod" %}">
+            <img src="{% if i.object.is_stored %}http://astrobin_images.{{s3_url}}/{{i.object.filename}}_small_thumb{{i.object.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+        </a>
+    </div>
+{% endfor %}
+    <div class="clear"></div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if images.has_previous %}
+                <a href="{% query_string "p=images.previous_page_number" "" %}#related_anchor">&laquo; {% trans "newer" %}</a>
+            {% endif %}
+            {% if images.has_previous and images.has_next %}|{% endif %}
+            {% if images.has_next %}
+                <a href="{% query_string "p=images.next_page_number" "" %}#related_anchor">{% trans "older" %} &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
