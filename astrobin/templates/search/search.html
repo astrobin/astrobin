@@ -4,7 +4,7 @@
 {% load tags %}
 
 {% block content %}
-<div class="full-box">
+<div class="full-box advanced-search-box">
     <p><a href="#" onclick="common.showHideAdvancedSearch()">{% trans "Show/hide advanced search box." %}</a></p>
     <form id="advanced_search" method="get" action="{% url haystack_search %}">{% csrf_token %}
         {{form.as_p}}

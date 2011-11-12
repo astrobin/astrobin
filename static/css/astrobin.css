@@ -1511,6 +1511,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 .full-box .fieldless .button {
   left: 0;
 }
+.advanced-search-box {
+  padding: 4px 28px;
+}
 .tools-box {
   width: 880px;
   padding: 28px;
