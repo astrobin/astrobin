@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-11 19:45-0500\n"
+"POT-Creation-Date: 2011-11-12 03:01-0500\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -2031,6 +2031,14 @@ msgstr "Arviointi"
 #: templates/search/search.html:24
 msgid "Integration"
 msgstr "Valotusaika"
+
+#: templates/search/search.html:32
+msgid "previous"
+msgstr ""
+
+#: templates/search/search.html:36
+msgid "next"
+msgstr ""
 
 #: templates/user/not_found.html:5
 msgid "User not found:"

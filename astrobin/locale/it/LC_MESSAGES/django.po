@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-11 19:45-0500\n"
-"PO-Revision-Date: 2011-11-11 19:46-0500\n"
+"POT-Creation-Date: 2011-11-12 03:01-0500\n"
+"PO-Revision-Date: 2011-11-12 03:02-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -1819,6 +1819,14 @@ msgstr "Voto"
 msgid "Integration"
 msgstr "Integrazione"
 
+#: templates/search/search.html:32
+msgid "previous"
+msgstr "precedenti"
+
+#: templates/search/search.html:36
+msgid "next"
+msgstr "successive"
+
 #: templates/user/not_found.html:5
 msgid "User not found:"
 msgstr "Utente non trovato"
@@ -2025,9 +2033,6 @@ msgstr "%s fa"
 
 #~ msgid "Select language"
 #~ msgstr "Seleziona lingua"
-
-#~ msgid "Previous"
-#~ msgstr "Precedente"
 
 #~ msgid "Next"
 #~ msgstr "Successivo"
