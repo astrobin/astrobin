@@ -11,7 +11,6 @@
     </form>
 </div>
 
-{% if query %}
 <a name="pag_anchor"></a>
 <div id="search-results" class="full-box clear">
     <h2>{% trans "Images matching" %} <em>"{{query}}"</em></h2>
@@ -38,7 +37,4 @@
         </span>
     </div>
 </div>
-{% else %}
-    {# Show some example queries to run, maybe query syntax, something else? #}
-{% endif %}
 {% endblock %}
