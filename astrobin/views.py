@@ -340,6 +340,19 @@ def image_detail(request, id):
 
 
 @require_GET
+def image_full(request, id):
+    return object_detail(
+        request,
+        queryset = Image.objects.all(),
+        object_id = id,
+        template_name = 'image/full.html',
+        template_object_name = 'image',
+        extra_context = {
+            's3_url': settings.S3_URL,
+        })
+
+
+@require_GET
 def image_get_rating(request, image_id):
     image = get_object_or_404(Image, pk=image_id)
     votes = image.rating.votes

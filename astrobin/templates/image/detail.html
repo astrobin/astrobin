@@ -75,7 +75,7 @@
                                 <ul class="subnav">
                                     <li class="first {% if inverted or solved %}bg-icon icon-normal{% else %}bg-icon icon-inverted{% endif %}">
                                         {% if inverted or solved %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "" "" %}">{% trans "Normal" %}</a></span>
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='none'" "" %}">{% trans "Normal" %}</a></span>
                                         {% else %}
                                         <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "" %}">{% trans "Inverted monochrome" %}</a></span>
                                         {% endif %}
@@ -146,16 +146,14 @@
                         </li>
                     </ul>
                 </li>
-                {% if not full %}
                 <li class="rating"><div id="rating"></div></li>
-                {% endif %}
             </ul>
             <div id="main-image">
             {% if is_ready %}
                 {% if is_revision %}
                     {% with revision_image as image %}
                         {% if inverted %}
-                        <a class="zoomable" href="{% url image_detail image.image.id %}{% query_string "r=image.id, mod='inverted'" "" %}{% if not full %}{% query_string "full=" "" %}{% endif %}">
+                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id, mod='inverted'" "" %}">
                             <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         </a>
                         {% endif %}
@@ -163,23 +161,23 @@
                         <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved.png" alt="{{image.title|escape}}"/>
                         {% endif %}
                         {% if not inverted and not solved %}
-                        <a class="zoomable" href="{% url image_detail image.image.id %}{% if not full %}{% query_string "r=image.id, full=" "" %}{% endif %}">
-                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}" {% if 'full' not in request.GET %}width="{{resized_size}}"{% endif %}/>
+                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id=" "mod" %}">
+                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                         </a>
                         {% endif %}
                     {% endwith %}
                 {% else %}
                     {% if inverted %}
-                    <a class="zoomable" href="{% url image_detail image.id %}{% query_string "mod='inverted'" "" %}{% if not full %}{% query_string "full=" "" %}{% endif %}">
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                    <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "" %}">
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                     </a>
                     {% endif %}
                     {% if solved %}
                     <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved.png" alt="{{image.title|escape}}"/>
                     {% endif %}
                     {% if not inverted and not solved %}
-                    <a class="zoomable" href="{% url image_detail image.id %}{% if not full %}{% query_string "full=" "" %}{% endif %}">
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}" {% if 'full' not in request.GET %}width="{{resized_size}}"{% endif %}/>
+                    <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "" %}">
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                     </a>
                     {% endif %}
                 {% endif %}
@@ -190,7 +188,6 @@
             {% endif %}
             </div>
 
-            {% if not full %}
             <div class="main-image-data">
                 <ul>
                     <li class="title">{{image.title|escape|default:_("(no title)")}}</li>
@@ -305,7 +302,6 @@
             {% related_images request related_images related %}
             {% endif %}
         </div>
-        {% endif %} <!-- full -->
     </div>
 {% endblock %}
 
