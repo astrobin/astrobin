@@ -1501,7 +1501,7 @@ def location_save(request):
     # Now let's mark the request as fullfilled, if it exists.
     try:
         req = LocationRequest.objects.get(
-            from_user = request.user,
+            to_user = request.user,
             location = id,
             fulfilled = False)
         req.fulfilled = True
