@@ -102,6 +102,14 @@
                 </div>
                 <div id="ad">
                 </div>
+                <div id="hello">
+                    {% if request.user.is_authenticated %}
+                        {% with request.user as username %}
+                            {% url user_page request.user as user_page %}
+                            {% blocktrans %}Hello, <a href="{{user_page}}">{{username}}.</a>{% endblocktrans %}
+                        {% endwith %}
+                    {% endif %}
+                </div>
                 <div id="nav-container">
                     <div id="nav">
                         <ul>
