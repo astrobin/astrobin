@@ -197,8 +197,8 @@ class AdvancedSearchForm(SearchForm):
         super(AdvancedSearchForm, self).__init__(data, **kwargs)
         self.fields['q'].help_text = _("Search for astronomical objects, telescopes, cameras, filters...")
 
-        self.fields['start_date'].label = _("Min. upload date")
-        self.fields['end_date'].label = _("Max. upload date")
+        self.fields['start_date'].label = _("Acquired after")
+        self.fields['end_date'].label = _("Acquired before")
         self.fields['integration_min'].label = _("Min. integration")
         self.fields['integration_max'].label = _("Max. integration")
         self.fields['moon_phase_min'].label = _("Min. Moon phase %")
