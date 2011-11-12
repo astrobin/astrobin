@@ -3,21 +3,20 @@
 
 <div class="thumbnail-list clear">
 {% for image in images.object_list %}
-    <div class="ic_container"
-         style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
+    <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
         <a href="{{image.get_absolute_url}}/">
             <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
-                 class="thumbnail"
+                 class="capty thumbnail"
+                 name="#capty-content-{{image.id}}"
                  alt="{{image.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
         </a>
-        <a href="{{image.get_absolute_url}}/"><div class="overlay" style="display:none;"></div></a>
-        <div class="ic_caption">
-            <p class="ic_category">
-                <a href="{% url user_page image.user.username %}">{{image.user.username}}</a>
-            </p>
-            <h3><a href="{{image.get_absolute_url}}/">{{image.title|escape|default:_("(no title)")}}</a></h3>
-            <p class="ic_text"><a href="{{image.get_absolute_url}}/">{{image.description|truncatewords:10|escape}}</a></p>
+        <div id="capty-content-{{image.id}}">
+            {{image.title|default:_("(no title)")}}<br/>
+            {% with image.user.username as user %}
+            {% url user_page user as user_page %}
+            {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}, {{image.uploaded|ago}}
+            {% endwith %}
         </div>
     </div>
 {% empty %}
