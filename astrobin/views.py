@@ -199,12 +199,12 @@ def image_detail(request, id):
                 ]
 
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
-    solar_system_acquisition = None
+    ssa = None
     image_type = None
     deep_sky_data = {}
 
     try:
-        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
+        ssa = SolarSystem_Acquisition.objects.get(image=image)
     except:
         pass
 
@@ -278,7 +278,7 @@ def image_detail(request, id):
             (_('Mean FWHM'), "%.2f" % (average([float(x) for x in dsa_data['mean_fwhm']])) if dsa_data['mean_fwhm'] else None),
         )
 
-    elif solar_system_acquisition:
+    elif ssa:
         image_type = 'solar_system'
 
     follows = False
@@ -321,6 +321,7 @@ def image_detail(request, id):
                          'related_images': related_images,
                          'gear_list': gear_list,
                          'image_type': image_type,
+                         'ssa': ssa,
                          'deep_sky_data': deep_sky_data,
                          'mod': request.GET.get('mod') if 'mod' in request.GET else '',
                          'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
