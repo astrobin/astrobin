@@ -257,7 +257,7 @@
                                     <strong>{{data.0}}</strong>:
                                     {% if data.0 == dates_label %}
                                         {% for date in data.1 %}
-                                            {{date|date}}{% if not forloop.last %},&nbsp;{% endif %}
+                                            {{date|date:"DATE_FORMAT"}}{% if not forloop.last %},&nbsp;{% endif %}
                                         {% endfor %}
                                     {% else %}
                                         {{data.1}}
