@@ -297,8 +297,8 @@ class Image(models.Model):
         except:
             pass
 
-    def process(self):
-        store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
+    def process(self, solve=False):
+        store_image.delay(self, solve=solve, lang=translation.get_language(), callback=image_stored_callback)
 
     def solve(self):
         solve_image.delay(self, lang=translation.get_language(), callback=image_solved_callback)

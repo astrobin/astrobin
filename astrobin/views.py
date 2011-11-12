@@ -405,7 +405,6 @@ def image_upload_process(request):
         user=request.user)
 
     image.save()
-    image.process()
 
     followers = [x.from_userprofile.user
                  for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
@@ -591,7 +590,8 @@ def image_edit_save_presolve(request):
             context_instance = RequestContext(request))
 
     form.save()
-    image.solve()
+    if image.is_stored:
+        image.solve()
 
     if 'done_later' in request.POST:
         return HttpResponseRedirect('/%s/?plate_solving_started' % image_id);
@@ -708,9 +708,12 @@ def image_edit_save_basic(request):
     image.description = form.cleaned_data['description']
 
     image.save()
+    image.process(True if (image.focal_length and image.pixel_size) else False)
 
-    response_dict['prefill_dict'] = prefill_dict
-    return HttpResponseRedirect('/edit/basic/%i/?saved' % image.id)
+    if 'was_not_ready' in request.POST:
+        return HttpResponseRedirect(image.get_absolute_url())
+    else:
+        return HttpResponseRedirect('/edit/basic/%i/?saved' % image.id)
 
 
 @login_required
