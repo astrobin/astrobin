@@ -2,9 +2,11 @@ from datetime import datetime
 
 from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
-from django.template import  Library
+from django import template
+from django.template import Library, Node
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.utils.safestring import mark_safe
 
 from notification import models as notifications
 from persistent_messages import models as messages
@@ -39,6 +41,28 @@ def image_list(request, object_list):
             's3_url':settings.S3_URL,
             'query':request.GET.get('q'),
            }
+
+
+@register.inclusion_tag('inclusion_tags/related_images.html')
+def related_images(request, object_list, type):
+    paginator = Paginator(object_list, 10)
+
+    page = request.GET.get('p')
+    try:
+        images = paginator.page(page)
+    except (TypeError, PageNotAnInteger):
+        images = paginator.page(1)
+    except EmptyPage:
+        images = paginator.page(paginator.num_pages)
+
+    return {
+            'request': request,
+            'images': images,
+            'small_thumbnail_size':settings.SMALL_THUMBNAIL_SIZE,
+            's3_url':settings.S3_URL,
+            'related_type': type,
+           }
+
 
 @register.inclusion_tag('inclusion_tags/notification_list.html')
 def notification_list(request, show_footer = True, limit = 0):
@@ -117,4 +141,103 @@ def ago(date_time):
             return _("seconds ago")
         return _("%s ago") % span 
     return datetime.date(date_time)  
+
+
+@register.tag
+def query_string(parser, token):
+    """
+    Allows you too manipulate the query string of a page by adding and removing keywords.
+    If a given value is a context variable it will resolve it.
+    Based on similiar snippet by user "dnordberg".
+    
+    requires you to add:
+    
+    TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    )
+    
+    to your django settings. 
+    
+    Usage:
+    http://www.url.com/{% query_string "param_to_add=value, param_to_add=value" "param_to_remove, params_to_remove" %}
+    
+    Example:
+    http://www.url.com/{% query_string "" "filter" %}filter={{new_filter}}
+    http://www.url.com/{% query_string "page=page_obj.number" "sort" %} 
+    
+    """
+    try:
+        tag_name, add_string,remove_string = token.split_contents()
+    except ValueError:
+        raise template.TemplateSyntaxError, "%r tag requires two arguments" % token.contents.split()[0]
+    if not (add_string[0] == add_string[-1] and add_string[0] in ('"', "'")) or not (remove_string[0] == remove_string[-1] and remove_string[0] in ('"', "'")):
+        raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
+    
+    add = string_to_dict(add_string[1:-1])
+    remove = string_to_list(remove_string[1:-1])
+    
+    return QueryStringNode(add,remove)
+
+class QueryStringNode(Node):
+    def __init__(self, add,remove):
+        self.add = add
+        self.remove = remove
+        
+    def render(self, context):
+        p = {}
+        for k, v in context["request"].GET.items():
+            p[k]=v
+        return get_query_string(p,self.add,self.remove,context)
+
+def get_query_string(p, new_params, remove, context):
+    """
+    Add and remove query parameters. From `django.contrib.admin`.
+    """
+    for r in remove:
+        for k in p.keys():
+            if k.startswith(r):
+                del p[k]
+    for k, v in new_params.items():
+        if k in p and v is None:
+            del p[k]
+        elif v is not None:
+            p[k] = v
+            
+    for k, v in p.items():
+        try:
+            p[k] = template.Variable(v).resolve(context)
+        except:
+            p[k]=v
+                
+    return mark_safe('?' + '&amp;'.join([u'%s=%s' % (k, v) for k, v in p.items()]).replace(' ', '%20'))
+
+# Taken from lib/utils.py   
+def string_to_dict(string):
+    kwargs = {}
+    
+    if string:
+        string = str(string)
+        if ',' not in string:
+            # ensure at least one ','
+            string += ','
+        for arg in string.split(','):
+            arg = arg.strip()
+            if arg == '': continue
+            kw, val = arg.split('=', 1)
+            kwargs[kw] = val
+    return kwargs
+
+def string_to_list(string):
+    args = []
+    if string:
+        string = str(string)
+        if ',' not in string:
+            # ensure at least one ','
+            string += ','
+        for arg in string.split(','):
+            arg = arg.strip()
+            if arg == '': continue
+            args.append(arg)
+    return args
+
 

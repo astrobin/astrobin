@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 08:53-0500\n"
+"POT-Creation-Date: 2011-11-12 10:42-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Locations"
 msgstr ""
 
-#: forms.py:53 models.py:241 templates/image/detail.html:277
+#: forms.py:53 models.py:241 templates/image/detail.html:279
 #: templates/image/edit/basic.html:46
 msgid "Description"
 msgstr ""
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Cameras"
 msgstr ""
 
-#: forms.py:167 templates/image/detail.html:91
+#: forms.py:167 templates/image/detail.html:93
 msgid "User"
 msgstr ""
 
@@ -210,7 +210,7 @@ msgstr ""
 msgid "(in &mu;m)"
 msgstr ""
 
-#: models.py:277 templates/image/detail.html:194
+#: models.py:277 templates/image/detail.html:196
 #: templates/inclusion_tags/image_list.html:11
 msgid "(no title)"
 msgstr ""
@@ -259,7 +259,7 @@ msgstr ""
 msgid "The temperature of the chip. E.g.: -20."
 msgstr ""
 
-#: models.py:404 views.py:279
+#: models.py:404 views.py:271
 msgid "Darks"
 msgstr ""
 
@@ -267,7 +267,7 @@ msgstr ""
 msgid "The number of dark frames."
 msgstr ""
 
-#: models.py:409 views.py:280
+#: models.py:409 views.py:272
 msgid "Flats"
 msgstr ""
 
@@ -275,7 +275,7 @@ msgstr ""
 msgid "The number of flat frames."
 msgstr ""
 
-#: models.py:414 views.py:281
+#: models.py:414 views.py:273
 msgid "Flat darks"
 msgstr ""
 
@@ -283,7 +283,7 @@ msgstr ""
 msgid "The number of dark flat frames."
 msgstr ""
 
-#: models.py:419 views.py:282
+#: models.py:419 views.py:274
 msgid "Bias"
 msgstr ""
 
@@ -291,15 +291,15 @@ msgstr ""
 msgid "The number of bias/offset frames."
 msgstr ""
 
-#: models.py:424 views.py:285
+#: models.py:424 views.py:277
 msgid "Mean SQM"
 msgstr ""
 
-#: models.py:429 views.py:286
+#: models.py:429 views.py:278
 msgid "Mean FWHM"
 msgstr ""
 
-#: models.py:448 views.py:278
+#: models.py:448 views.py:270
 msgid "Frames"
 msgstr ""
 
@@ -372,64 +372,64 @@ msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 
-#: views.py:277 views.py:344
+#: views.py:269 views.py:336
 msgid "Dates"
 msgstr ""
 
-#: views.py:283
+#: views.py:275
 msgid "Avg. Moon age"
 msgstr ""
 
-#: views.py:284
+#: views.py:276
 msgid "Avg. Moon phase"
 msgstr ""
 
-#: views.py:390 views.py:405 views.py:1440 views.py:1455
+#: views.py:382 views.py:397 views.py:1432 views.py:1447
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 
-#: views.py:467 views.py:471 views.py:629 views.py:632 views.py:686
-#: views.py:710 templates/user/profile/edit/basic.html:53
+#: views.py:459 views.py:463 views.py:621 views.py:624 views.py:678
+#: views.py:702 templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr ""
 
-#: views.py:468 views.py:630 views.py:687 views.py:711
+#: views.py:460 views.py:622 views.py:679 views.py:703
 msgid "No results. Sorry."
 msgstr ""
 
-#: views.py:469
+#: views.py:461
 msgid "Subjects found in the SIMBAD database"
 msgstr ""
 
-#: views.py:472 views.py:633
+#: views.py:464 views.py:625
 msgid "No results. Press TAB to create this location!"
 msgstr ""
 
-#: views.py:473 templates/user/profile/edit/basic.html:55
+#: views.py:465 templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:810
+#: views.py:802
 msgid "Fill in one session, before adding more."
 msgstr ""
 
-#: views.py:815 views.py:827 views.py:865
+#: views.py:807 views.py:819 views.py:857
 msgid "There was an error. Check your input!"
 msgstr ""
 
-#: views.py:1318
+#: views.py:1310
 msgid "RE"
 msgstr ""
 
-#: views.py:1377
+#: views.py:1369
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr ""
 
-#: views.py:1401
+#: views.py:1393
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -982,155 +982,151 @@ msgid ""
 "completed. Thanks!"
 msgstr ""
 
-#: templates/image/detail.html:20
+#: templates/image/detail.html:22
 msgid "Actions"
 msgstr ""
 
-#: templates/image/detail.html:27
+#: templates/image/detail.html:29
 msgid "Sorry, but the items in this menu<br/>require Javascript, at this time."
 msgstr ""
 
-#: templates/image/detail.html:33
+#: templates/image/detail.html:35
 msgid "Edit basic information"
 msgstr ""
 
-#: templates/image/detail.html:36
+#: templates/image/detail.html:38
 msgid "Edit gear used"
 msgstr ""
 
-#: templates/image/detail.html:39
+#: templates/image/detail.html:41
 msgid "Edit acquisition details"
 msgstr ""
 
-#: templates/image/detail.html:42 templates/image/detail.html.py:332
+#: templates/image/detail.html:44 templates/image/detail.html.py:332
 msgid "Upload new revision"
 msgstr ""
 
-#: templates/image/detail.html:46
+#: templates/image/detail.html:48
 msgid "Plate-solve"
 msgstr ""
 
-#: templates/image/detail.html:50
+#: templates/image/detail.html:52
 msgid "Delete"
 msgstr ""
 
-#: templates/image/detail.html:55
+#: templates/image/detail.html:57
 msgid "Bring to a user's attention"
 msgstr ""
 
-#: templates/image/detail.html:59 templates/image/detail.html.py:387
+#: templates/image/detail.html:61 templates/image/detail.html.py:387
 msgid "Request additional information"
 msgstr ""
 
-#: templates/image/detail.html:62 templates/image/detail.html.py:393
+#: templates/image/detail.html:64 templates/image/detail.html.py:393
 msgid "Request TIFF/FITS"
 msgstr ""
 
-#: templates/image/detail.html:70
+#: templates/image/detail.html:72
 msgid "View"
 msgstr ""
 
-#: templates/image/detail.html:76
+#: templates/image/detail.html:78
 msgid "Normal"
 msgstr ""
 
-#: templates/image/detail.html:78
+#: templates/image/detail.html:80
 msgid "Inverted monochrome"
 msgstr ""
 
-#: templates/image/detail.html:83
+#: templates/image/detail.html:85
 msgid "Annotated"
 msgstr ""
 
-#: templates/image/detail.html:96
+#: templates/image/detail.html:98
 msgid "View profile"
 msgstr ""
 
-#: templates/image/detail.html:104 templates/image/detail.html.py:353
+#: templates/image/detail.html:106 templates/image/detail.html.py:353
 msgid "Stop following"
 msgstr ""
 
-#: templates/image/detail.html:106 templates/image/detail.html.py:361
+#: templates/image/detail.html:108 templates/image/detail.html.py:361
 msgid "Follow"
 msgstr ""
 
-#: templates/image/detail.html:112
+#: templates/image/detail.html:114
 msgid "Send private message"
 msgstr ""
 
-#: templates/image/detail.html:120
+#: templates/image/detail.html:122
 msgid "Share"
 msgstr ""
 
-#: templates/image/detail.html:127
+#: templates/image/detail.html:129
 msgid "Direct link:"
 msgstr ""
 
-#: templates/image/detail.html:131
+#: templates/image/detail.html:133
 msgid "Link for forums:"
 msgstr ""
 
-#: templates/image/detail.html:136
+#: templates/image/detail.html:138
 msgid "With thumbnail:"
 msgstr ""
 
-#: templates/image/detail.html:186
+#: templates/image/detail.html:188
 msgid ""
 "This image was just uploaded and is still processing. Please try to refresh "
 "this page in a few seconds."
 msgstr ""
 
-#: templates/image/detail.html:195
+#: templates/image/detail.html:197
 msgid "uploaded"
 msgstr ""
 
-#: templates/image/detail.html:198
+#: templates/image/detail.html:200
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr ""
 
-#: templates/image/detail.html:204
+#: templates/image/detail.html:206
 msgid "Contains"
 msgstr ""
 
-#: templates/image/detail.html:208
+#: templates/image/detail.html:210
 msgid "(no subjects)"
 msgstr ""
 
-#: templates/image/detail.html:216
+#: templates/image/detail.html:218
 msgid "This image is a revision. Here are its older versions"
 msgstr ""
 
-#: templates/image/detail.html:218
+#: templates/image/detail.html:220
 msgid "This image has some later revisions"
 msgstr ""
 
-#: templates/image/detail.html:239
+#: templates/image/detail.html:241
 msgid "Technical card"
 msgstr ""
 
-#: templates/image/detail.html:271 templates/image/detail.html.py:272
+#: templates/image/detail.html:273 templates/image/detail.html.py:274
 msgid "Histogram"
 msgstr ""
 
-#: templates/image/detail.html:284
-msgid "More..."
+#: templates/image/detail.html:287 templates/image/detail.html.py:296
+msgid "More: same user"
 msgstr ""
 
-#: templates/image/detail.html:288
-msgid "Same user"
+#: templates/image/detail.html:288 templates/image/detail.html.py:297
+msgid "More: same subjects"
 msgstr ""
 
-#: templates/image/detail.html:289
-msgid "Same subject"
+#: templates/image/detail.html:289 templates/image/detail.html.py:298
+msgid "More: same telescope"
 msgstr ""
 
-#: templates/image/detail.html:290
-msgid "Same imaging telescope"
-msgstr ""
-
-#: templates/image/detail.html:291
-msgid "Same imaging camera"
+#: templates/image/detail.html:290 templates/image/detail.html.py:299
+msgid "More: same camera"
 msgstr ""
 
 #: templates/image/detail.html:323
@@ -1462,10 +1458,12 @@ msgid "No images"
 msgstr ""
 
 #: templates/inclusion_tags/image_list.html:30
+#: templates/inclusion_tags/related_images.html:16
 msgid "newer"
 msgstr ""
 
 #: templates/inclusion_tags/image_list.html:34
+#: templates/inclusion_tags/related_images.html:20
 msgid "older"
 msgstr ""
 
@@ -2043,15 +2041,15 @@ msgstr ""
 msgid "Please use full names (make and model) for all your gear items!"
 msgstr ""
 
-#: templatetags/tags.py:116
+#: templatetags/tags.py:140
 msgid "minutes"
 msgstr ""
 
-#: templatetags/tags.py:117
+#: templatetags/tags.py:141
 msgid "seconds ago"
 msgstr ""
 
-#: templatetags/tags.py:118
+#: templatetags/tags.py:142
 #, python-format
 msgid "%s ago"
 msgstr ""

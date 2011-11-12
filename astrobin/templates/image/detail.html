@@ -10,6 +10,8 @@
     </div>
     {% endif %}
 
+
+    <a name="related_anchor"></a>
     <div id="image-detail">
         <div id="main-content">
             <ul class="bar">
@@ -43,7 +45,7 @@
                                     </li>
                                     {% if not image.is_solved %}
                                     <li class="bg-icon icon-plate-solve">
-                                        <span class="text"><a class="plate-solve" href="{% url image_edit_presolve image.id %}?done_later">{% trans "Plate-solve" %}</a></span>
+                                        <span class="text"><a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "" %}">{% trans "Plate-solve" %}</a></span>
                                     </li>
                                     {% endif %}
                                     <li class="bg-icon icon-delete">
@@ -73,14 +75,14 @@
                                 <ul class="subnav">
                                     <li class="first {% if inverted or solved %}bg-icon icon-normal{% else %}bg-icon icon-inverted{% endif %}">
                                         {% if inverted or solved %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}/">{% trans "Normal" %}</a></span>
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "" "" %}">{% trans "Normal" %}</a></span>
                                         {% else %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}/?mod=inverted">{% trans "Inverted monochrome" %}</a></span>
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "" %}">{% trans "Inverted monochrome" %}</a></span>
                                         {% endif %}
                                     </li>
                                     {% if image.is_solved and not solved %}
                                     <li class="last bg-icon icon-solved">
-                                        <span class="text"><a href="{{image.get_absolute_url}}/?mod=solved">{% trans "Annotated" %}</a></span>
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved' "" %}">{% trans "Annotated" %}</a></span>
                                     </li>
                                     {% endif %}
                                 </ul>
@@ -99,7 +101,7 @@
                                     <li class="bg-icon {% if follows %}icon-unfollow{% else %}icon-follow{% endif %}">
                                         <span class="text">
                                             <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
-                                               href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}?next={{request.path}}">
+                                               href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "" %}">
                                                 {% if follows %}
                                                     {% trans "Stop following" %}
                                                 {% else %}
@@ -153,7 +155,7 @@
                 {% if is_revision %}
                     {% with revision_image as image %}
                         {% if inverted %}
-                        <a class="zoomable" href="{% url image_detail image.image.id %}?r={{image.id}}&mod=inverted{% if not full %}&full{% endif %}">
+                        <a class="zoomable" href="{% url image_detail image.image.id %}{% query_string "r=image.id, mod='inverted'" "" %}{% if not full %}{% query_string "full=" "" %}{% endif %}">
                             <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         </a>
                         {% endif %}
@@ -161,14 +163,14 @@
                         <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved.png" alt="{{image.title|escape}}"/>
                         {% endif %}
                         {% if not inverted and not solved %}
-                        <a class="zoomable" href="{% url image_detail image.image.id %}{% if not full %}?r={{image.id}}&full{% endif %}">
+                        <a class="zoomable" href="{% url image_detail image.image.id %}{% if not full %}{% query_string "r=image.id, full=" "" %}{% endif %}">
                             <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}" {% if 'full' not in request.GET %}width="{{resized_size}}"{% endif %}/>
                         </a>
                         {% endif %}
                     {% endwith %}
                 {% else %}
                     {% if inverted %}
-                    <a class="zoomable" href="{% url image_detail image.id %}?mod=inverted{% if not full %}&full{% endif %}">
+                    <a class="zoomable" href="{% url image_detail image.id %}{% query_string "mod='inverted'" "" %}{% if not full %}{% query_string "full=" "" %}{% endif %}">
                         <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                     </a>
                     {% endif %}
@@ -176,7 +178,7 @@
                     <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved.png" alt="{{image.title|escape}}"/>
                     {% endif %}
                     {% if not inverted and not solved %}
-                    <a class="zoomable" href="{% url image_detail image.id %}{% if not full %}?full{% endif %}">
+                    <a class="zoomable" href="{% url image_detail image.id %}{% if not full %}{% query_string "full=" "" %}{% endif %}">
                         <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}{{image.original_ext}}" alt="{{image.title|escape}}" {% if 'full' not in request.GET %}width="{{resized_size}}"{% endif %}/>
                     </a>
                     {% endif %}
@@ -278,31 +280,29 @@
             <p id="description">{{image.description|escape}}</p>
         </div>
         <div id="side-pane">
-            {% if related_images.count > 1 %} 
             <ul class="topnav">
                 <li>
-                    <span class="text"><a href="#">{% trans "More..." %}</a></span>
+                    <span class="text">
+                        <a href="#">
+                            {% if related == 'rel_user' %}{% trans "More: same user" %}{% endif %}
+                            {% if related == 'rel_subject' %}{% trans "More: same subjects" %}{% endif %}
+                            {% if related == 'rel_imaging_telescope' %}{% trans "More: same telescope" %}{% endif %}
+                            {% if related == 'rel_imaging_camera' %}{% trans "More: same camera" %}{% endif %}
+                        </a>
+                    </span>
                     <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                     <div class="sub">
                         <ul class="subnav">
-                            <li><a href="{{image.get_absolute_url}}/?related=user">{% trans "Same user" %} ({{image.user.username}})</a></li>
-                            <li><a href="{{image.get_absolute_url}}/?related=subject">{% trans "Same subject" %}</a></li>
-                            <li><a href="{{image.get_absolute_url}}/?related=imaging_telescope">{% trans "Same imaging telescope" %}</a></li>
-                            <li><a href="{{image.get_absolute_url}}/?related=imaging_camera">{% trans "Same imaging camera" %}</a></li>
+                            <li><a href="{{image.get_absolute_url}}{% query_string "related='rel_user', mod=mod" "" %}">{% trans "More: same user"%}</a></li>
+                            <li><a href="{{image.get_absolute_url}}{% query_string "related='rel_subject', mod=mod" "" %}">{% trans "More: same subjects" %}</a></li>
+                            <li><a href="{{image.get_absolute_url}}{% query_string "related='rel_imaging_telescope', mod=mod" "" %}">{% trans "More: same telescope" %}</a></li>
+                            <li><a href="{{image.get_absolute_url}}{% query_string "related='rel_imaging_camera', mod=mod" "" %}">{% trans "More: same camera" %}</a></li>
                         </ul>
                     </div>
                 </ul>
             </ul>
-
-            <div class="image-strip clear">
-            {% for i in related_images %}
-                <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
-                    <a href="{{i.object.get_absolute_url}}/{% if related %}?related={{related}}{% endif %}">
-                        <img src="{% if i.object.is_stored %}http://astrobin_images.{{s3_url}}/{{i.object.filename}}_small_thumb{{i.object.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
-                    </a>
-                </div>
-            {% endfor %}
-            </div>
+            {% if related_images.count > 1 %} 
+            {% related_images request related_images related %}
             {% endif %}
         </div>
         {% endif %} <!-- full -->

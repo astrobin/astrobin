@@ -166,27 +166,26 @@ def image_detail(request, id):
     score = image.rating.score
     rating = float(score)/votes if votes > 0 else 0
 
-    limit = 10
     related = None
     related_images = None
     if 'related' in request.GET:
         related = request.GET['related']
     else:
-        related = 'user'
+        related = 'rel_user'
 
-    if related == 'user':
+    if related == 'rel_user':
         related_images = SearchQuerySet().filter(username_auto=image.user.username)
-    elif related == 'subject':
+    elif related == 'rel_subject':
         subjects = [xapian_escape(s.mainId) for s in image.subjects.all()]
         related_images = SearchQuerySet().filter(SQ(subjects__in=subjects))
-    elif related == 'imaging_telescope':
+    elif related == 'rel_imaging_telescope':
         telescopes = [xapian_escape(t.name) for t in image.imaging_telescopes.all()]
         related_images = SearchQuerySet().filter(SQ(imaging_telescopes__in=telescopes))
-    elif related == 'imaging_camera':
+    elif related == 'rel_imaging_camera':
         cameras = [xapian_escape(c.name) for c in image.imaging_cameras.all()]
         related_images = SearchQuerySet().filter(SQ(imaging_cameras__in=cameras))
 
-    related_images = related_images.exclude(django_id=id).order_by('-uploaded')[:limit]
+    related_images = related_images.exclude(django_id=id).order_by('-uploaded')
 
     gear_list = [('Imaging telescopes', image.imaging_telescopes.all()),
                  ('Imaging cameras'   , image.imaging_cameras.all()),
@@ -323,6 +322,7 @@ def image_detail(request, id):
                          'gear_list': gear_list,
                          'image_type': image_type,
                          'deep_sky_data': deep_sky_data,
+                         'mod': request.GET.get('mod') if 'mod' in request.GET else '',
                          'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
                          'solved': True if 'mod' in request.GET and request.GET['mod'] == 'solved' else False,
                          'follows': follows,
@@ -335,7 +335,7 @@ def image_detail(request, id):
                          'is_ready': is_ready,
                          'full': 'full' in request.GET,
                          'dates_label': _("Dates"),
-                         'uploaded_on': uploaded_on
+                         'uploaded_on': uploaded_on,
                         })
 
 
