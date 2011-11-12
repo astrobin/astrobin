@@ -8,14 +8,24 @@
         <p>{% blocktrans %}A little help might be useful!{% endblocktrans %}</p>
     </div>
     {% else %}
-        {% include 'image/edit/menu.html' %}   
+        {% if image.is_stored %}
+            {% include 'image/edit/menu.html' %}   
+        {% else %}
+            {% include 'image/edit/menu_not_ready.html' %}
+        {% endif %}
     {% endif %}
 
     <div class="sided-main-content">
     {% if 'done_later' in request.GET %}
     <h1>{% trans "Knowing the pixel scale will help" %}</h1>
     {% else %}
-    <h1>{% trans "Edit your image: plate-solving scale" %}</h1>
+    <h1>
+        {% if not image.is_stored %}
+            {% blocktrans %}Step 1 of 2: plate solving scale{% endblocktrans %}
+        {% else %}
+            {% blocktrans %}Edit your image: plate-solving scale{% endblocktrans %}
+        {% endif %}
+    </h1>
     {% endif %}
     <p>
     {% blocktrans %}AstroBin <em>could</em> plate-solve your image without knowing anything about it, but that's a very long process. If you know the focal length of your telescope and the pixel size of your camera, plate-solving will be much faster and will have a better chance of success!{% endblocktrans %}
