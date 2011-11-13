@@ -342,6 +342,17 @@ def image_detail(request, id):
 
 @require_GET
 def image_full(request, id):
+    image = get_object_or_404(Image, pk=id)
+
+    is_revision = False
+    revision_id = 0
+    revision_image = None
+    if 'r' in request.GET:
+        is_revision = True
+        revision_id = int(request.GET['r'])
+        revision_image = ImageRevision.objects.get(id=revision_id)
+
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -350,6 +361,7 @@ def image_full(request, id):
         template_object_name = 'image',
         extra_context = {
             's3_url': settings.S3_URL,
+            'revision_image': revision_image,
         })
 
 
