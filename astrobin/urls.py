@@ -75,7 +75,6 @@ urlpatterns = patterns('',
     url(r'^request/image/additional_information/(?P<image_id>\d+)/$', views.image_request_additional_information, name='image_request_additional_information'),
     url(r'^request/image/fits/(?P<image_id>\d+)/$', views.image_request_fits, name='image_request_fits'),
 
-       (r'^invite/', include('privatebeta.urls')),
     url(r'^help/', views.help, name='help'),
     url(r'^faq/', views.faq, name='faq'),
     url(r'^locations/edit/(?P<id>\d+)/$', views.location_edit, name='location_edit'),
