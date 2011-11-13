@@ -58,10 +58,19 @@
                             {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %})
                         </span>
             </div>
+            {% if revision_image %}
+                 {% with revision_image as image %}
+                 <a href="{% url image_detail image.image.id %}{% query_string "mod=request.GET.mod" "" %}">
+                      <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% ifequal request.GET.mod 'inverted' %}_inverted{% endifequal %}{{image.original_ext}}"
+                           alt="{{image.title|escape}}">
+                 </a>
+                 {% endwith %}
+            {% else %}
             <a href="{% url image_detail image.id %}{% query_string "mod=request.GET.mod" "" %}">
                 <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% ifequal request.GET.mod 'inverted' %}_inverted{% endifequal %}{{image.original_ext}}"
                      alt="{{image.title|escape}}">
             </a>
+            {% endif %}
         </div>
     </body>
 </html>

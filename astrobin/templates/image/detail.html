@@ -220,14 +220,14 @@
                 <div class="image-strip clear">
                     {% if is_revision %}
                     <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
-                        <a href="{{image.get_absolute_url}}">
+                        <a href="{% url image_detail image.id %}{% query_string "" "r" %}">
                             <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
                         </a>
                     </div>
                     {% endif %}
                     {% for i in revisions %}
                     <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
-                        <a href="{{i.get_absolute_url}}">
+                        <a href="{% url image_detail i.image.id %}{% query_string "r=i.id" "" %}">
                             <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
                         </a>
                     </div>
