@@ -161,7 +161,7 @@
                         <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{image.original_ext}}" alt="{{image.title|escape}}"/>
                         {% endif %}
                         {% if not inverted and not solved %}
-                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id=" "mod" %}">
+                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id" "mod" %}">
                             <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                         </a>
                         {% endif %}
