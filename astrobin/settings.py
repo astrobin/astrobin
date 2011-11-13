@@ -44,6 +44,12 @@ TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'
 LANGUAGE_COOKIE_NAME = 'astrobin_lang'
 
+gettext = lambda s: s
+LANGUAGES = (
+    ('en', gettext('English')),
+    ('it', gettext('Italian')),
+)
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
