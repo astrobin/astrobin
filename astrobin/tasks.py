@@ -20,6 +20,7 @@ from storage import *
 from notifications import *
 from storage import download_from_bucket
 
+
 @task()
 def solve_image(image, lang, use_scale=True, callback=None):
     # If solving is disabled in the settings, then we override what we're
@@ -29,7 +30,7 @@ def solve_image(image, lang, use_scale=True, callback=None):
 
     # Solve
     path = settings.UPLOADS_DIRECTORY
-    uid = image.filename
+    uid = image.filename + '_resized'
     original_ext = image.original_ext
     solved = False
 
@@ -54,27 +55,37 @@ def solve_image(image, lang, use_scale=True, callback=None):
         kill_check.clear()
         return success
 
+    # If the the original image doesn't exist anymore, we need to
+    # download it again.
+    if not os.path.exists(path + uid + original_ext):
+        print "Path doesn't exist: %s" % path + uid + original_ext
+        download_from_bucket(uid + original_ext, path)
+
     if use_scale:
         # Optimize for most cases
         scale_low = 0.5
         scale_high = 5
         if image.focal_length and image.pixel_size:
             scale = float(image.pixel_size) / float(image.focal_length) * 206.3
+            # Account for the fact that we're using a resized image
+            our_file = open(path + uid + original_ext)
+            our_data = StringIO.StringIO(our_file.read())
+            our_image = PILImage.open(our_data)
+            (our_w, our_h) = our_image.size
+
+            scale *= (image.w * 1./our_w)
+
             # Allow a 20% tolerance
-            scale_low = scale * 0.8
-            scale_high = scale * 1.2
+            scale_low = scale * 0.95
+            scale_high = scale * 1.05
             if image.binning:
                 scale_low *= image.binning
                 scale_high *= image.binning
             if image.scaling:
                 scale_low *= 100.0 / float(image.scaling)
                 scale_high *= 100.0 / float(image.scaling)
-
-    # If the the original image doesn't exist anymore, we need to
-    # download it again.
-    if not os.path.exists(path + uid + original_ext):
-        print "Path doesn't exist: %s" % path + uid + original_ext
-        download_from_bucket(uid + original_ext, path)
+        else:
+            use_scale = False
 
     command = ['/usr/local/astrometry/bin/solve-field',
                '', '',
@@ -99,21 +110,15 @@ def solve_image(image, lang, use_scale=True, callback=None):
     print command
     run_popen_with_timeout(command, 120 if use_scale else 600)
 
-    solved_filename = settings.UPLOADS_DIRECTORY + image.filename + '-ngc.png'
-    if os.path.exists(settings.UPLOADS_DIRECTORY + image.filename + '.solved'):
+    solved_filename = settings.UPLOADS_DIRECTORY + uid + '-ngc.png'
+    if os.path.exists(settings.UPLOADS_DIRECTORY + uid + '.solved'):
         solved = True
         solved_file = open(solved_filename)
         solved_data = StringIO.StringIO(solved_file.read())
         solved_image = PILImage.open(solved_data)
 
-        (w, h) = solved_image.size
-        (w, h) = scale_dimensions(w, h, settings.RESIZED_IMAGE_SIZE)
-        solved_resizedImage = solved_image.resize((w, h), PILImage.ANTIALIAS)
-
         # Then save to bucket
-        solved_resizedFile = StringIO.StringIO()
-        solved_resizedImage.save(solved_resizedFile, 'PNG')
-        save_to_bucket(uid + '_solved.png', solved_resizedFile.getvalue())
+        save_to_bucket(image.filename + '_solved' + original_ext, solved_data.getvalue())
 
     if callback is not None:
         subtask(callback).delay(image, solved, use_scale, '%s%s*' % (path, uid), lang)

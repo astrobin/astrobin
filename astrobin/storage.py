@@ -72,6 +72,9 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
         resizedImage.save(resizedFile, format_map[content_type][0], quality=100)
         save_to_bucket(uid + '_resized' + format_map[content_type][1],
                        resizedFile.getvalue())
+        # Also, save this to uploads/ so can the solver can pick it up
+        resizedImage.save(path + uid + '_resized' + format_map[content_type][1],
+                          format_map[content_type][0], quality=100)
 
         # Let's also created a grayscale inverted image
         grayscale = ImageOps.grayscale(image)
