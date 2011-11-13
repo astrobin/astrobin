@@ -35,6 +35,22 @@ class ImageEditPresolveForm(forms.ModelForm):
         self.fields['binning'].label = _("Binning")
         self.fields['scaling'].label = _("Scaling")
 
+    def clean_focal_length(self):
+        data = self.cleaned_data['focal_length']
+        if data and int(data):
+            return
+
+        if not data or data.isspace():
+            raise forms.ValidationError(_("Insert a focal length if you want to plate-solve."))
+
+    def clean_pixel_size(self):
+        data = self.cleaned_data['pixel_size']
+        if data and int(data):
+            return
+
+        if not data or data.isspace():
+            raise forms.ValidationError(_("Insert a pixel size if you want to plate-solve."))
+
     class Meta:
         model = Image
         fields = ('focal_length', 'pixel_size', 'binning', 'scaling',)
