@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 06:02-0500\n"
-"PO-Revision-Date: 2011-11-13 06:02-0500\n"
+"POT-Creation-Date: 2011-11-13 09:06-0500\n"
+"PO-Revision-Date: 2011-11-13 09:07-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -42,174 +42,182 @@ msgstr "Bin"
 msgid "Scaling"
 msgstr "Ridimensionamento"
 
-#: forms.py:45
+#: forms.py:44
+msgid "Insert a focal length if you want to plate-solve."
+msgstr "Inserisci la lunghezza focale se vuoi avviare la risoluzione astrometrica."
+
+#: forms.py:52
+msgid "Insert a pixel size if you want to plate-solve."
+msgstr "Inserisci la dimensione del pixel se vuoi avviare la risoluzione astrometrica."
+
+#: forms.py:61
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr "Se possibile, usa nomi da catalogo (per esempio M101, o NGC224 o IC1370)."
 
-#: forms.py:46
+#: forms.py:62
 msgid "The places from which you have taken this image."
 msgstr "Questi sono i luoghi da cui hai acquisito quest'immagine."
 
-#: forms.py:51
+#: forms.py:67
 #: models.py:238
 #: templates/image/edit/basic.html:28
 msgid "Title"
 msgstr "Titolo"
 
-#: forms.py:52
+#: forms.py:68
 #: models.py:239
 #: templates/image/edit/basic.html:32
 msgid "Subjects"
 msgstr "Soggetti"
 
-#: forms.py:53
-#: forms.py:108
+#: forms.py:69
+#: forms.py:124
 #: models.py:240
 #: models.py:512
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Luoghi"
 
-#: forms.py:54
+#: forms.py:70
 #: models.py:241
 #: templates/image/detail.html:308
 #: templates/image/edit/basic.html:46
 msgid "Description"
 msgstr "Descrizione"
 
-#: forms.py:75
+#: forms.py:91
 #: models.py:253
 msgid "Imaging telescopes"
 msgstr "Telescopi di acquisizione"
 
-#: forms.py:76
+#: forms.py:92
 #: models.py:254
 msgid "Guiding telescopes"
 msgstr "Telescopi di guida"
 
-#: forms.py:77
-#: forms.py:150
+#: forms.py:93
+#: forms.py:166
 #: models.py:255
 #: models.py:529
 msgid "Mounts"
 msgstr "Montature"
 
-#: forms.py:78
+#: forms.py:94
 #: models.py:256
 msgid "Imaging cameras"
 msgstr "Camere di acquisizione"
 
-#: forms.py:79
+#: forms.py:95
 #: models.py:257
 msgid "Guiding cameras"
 msgstr "Camere di guida"
 
-#: forms.py:80
-#: forms.py:152
+#: forms.py:96
+#: forms.py:168
 #: models.py:258
 #: models.py:531
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
-#: forms.py:81
-#: forms.py:153
+#: forms.py:97
+#: forms.py:169
 #: models.py:259
 #: models.py:532
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:82
-#: forms.py:154
+#: forms.py:98
+#: forms.py:170
 #: models.py:260
 #: models.py:533
 msgid "Filters"
 msgstr "Filtri"
 
-#: forms.py:83
-#: forms.py:155
+#: forms.py:99
+#: forms.py:171
 #: models.py:261
 #: models.py:534
 msgid "Accessories"
 msgstr "Accessori"
 
-#: forms.py:114
+#: forms.py:130
 msgid "All the telescopes you own, including the ones you use for guiding, go here."
 msgstr "Tutti i tuoi telescopi, compresi quelli che usi per guidare, vanno qui."
 
-#: forms.py:124
+#: forms.py:140
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr "Le tue DSLR, CCD, camere planetarie e camere di guida vanno qui."
 
-#: forms.py:139
+#: forms.py:155
 msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."
 msgstr "Suggerimento: inserisci i filtri separatamente! Se invece l'inserisci tutti assieme, ad esempio LRGB insieme, non potrai aggiungere sessioni di acquisizione separate per ogni filtro."
 
-#: forms.py:149
+#: forms.py:165
 #: models.py:528
 msgid "Telescopes"
 msgstr "Telescopi"
 
-#: forms.py:151
+#: forms.py:167
 #: models.py:530
 msgid "Cameras"
 msgstr "Camere"
 
-#: forms.py:168
+#: forms.py:184
 #: templates/image/detail.html:93
 msgid "User"
 msgstr "Utente"
 
-#: forms.py:179
-#: forms.py:183
-#: forms.py:272
-#: forms.py:301
+#: forms.py:195
+#: forms.py:199
+#: forms.py:288
+#: forms.py:317
 #: models.py:347
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Usa il seguente formato: aaaa-mm-gg"
 
-#: forms.py:186
-#: forms.py:189
+#: forms.py:202
+#: forms.py:205
 msgid "Express value in hours"
 msgstr "Esprimi il valore in ore"
 
-#: forms.py:199
+#: forms.py:215
 msgid "Search for astronomical objects, telescopes, cameras, filters..."
 msgstr "Cerca oggetti astronomici, telescopi, camere, filtri..."
 
-#: forms.py:201
+#: forms.py:217
 msgid "Acquired after"
 msgstr "Acquisita dopo il"
 
-#: forms.py:202
+#: forms.py:218
 msgid "Acquired before"
 msgstr "Acquisita prima del"
 
-#: forms.py:203
+#: forms.py:219
 msgid "Min. integration"
 msgstr "Integrazione min."
 
-#: forms.py:204
+#: forms.py:220
 msgid "Max. integration"
 msgstr "Integrazione max."
 
-#: forms.py:205
+#: forms.py:221
 msgid "Min. Moon phase %"
 msgstr "% fase lunare min."
 
-#: forms.py:206
+#: forms.py:222
 msgid "Max. Moon phase %"
 msgstr "% fase lunare max."
 
-#: forms.py:247
+#: forms.py:263
 msgid "For example: +12.44"
 msgstr "Per esempio: +12.44"
 
-#: forms.py:250
+#: forms.py:266
 msgid "For example: -51.25"
 msgstr "Per esempio: -51.25"
 
-#: forms.py:285
-#: forms.py:309
+#: forms.py:301
+#: forms.py:325
 #: models.py:347
 #: models.py:464
 #: templates/image/detail.html:269
@@ -433,6 +441,16 @@ msgstr "Fusorario"
 msgid "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr "Se inserisci questo, AstroBin ti mostrerà tutte le date nel tuo fusorario."
 
+#: settings.py:49
+#: templates/base.html:77
+msgid "English"
+msgstr "Inglese"
+
+#: settings.py:50
+#: templates/base.html:78
+msgid "Italian"
+msgstr "Italiano"
+
 #: views.py:269
 #: views.py:338
 msgid "Dates"
@@ -446,66 +464,66 @@ msgstr "Giorno lunare medio"
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:397
-#: views.py:412
-#: views.py:1447
-#: views.py:1462
+#: views.py:409
+#: views.py:424
+#: views.py:1459
+#: views.py:1474
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida. I formati accettati sono JPG, PNG e GIF."
 
-#: views.py:474
-#: views.py:478
-#: views.py:636
-#: views.py:639
-#: views.py:693
-#: views.py:717
+#: views.py:486
+#: views.py:490
+#: views.py:648
+#: views.py:651
+#: views.py:705
+#: views.py:729
 #: templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
-#: views.py:475
-#: views.py:637
-#: views.py:694
-#: views.py:718
+#: views.py:487
+#: views.py:649
+#: views.py:706
+#: views.py:730
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
-#: views.py:476
+#: views.py:488
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:479
-#: views.py:640
+#: views.py:491
+#: views.py:652
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:480
+#: views.py:492
 #: templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:817
+#: views.py:829
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:822
 #: views.py:834
-#: views.py:872
+#: views.py:846
+#: views.py:884
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1325
+#: views.py:1337
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1384
+#: views.py:1396
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1408
+#: views.py:1420
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -613,14 +631,6 @@ msgstr "Spiacenti, ma quello che cercavi non è qui."
 #: templates/base.html:72
 msgid "Hey! It looks like your browser doesn't support Javascript, or you disabled it. AstroBin will provide you with a much more pleasant experience if you enable Javascript."
 msgstr "Ehi! Pare che il tuo browser non supporti Javascript, oppure l'hai disabilitato. AstroBin può darti un'esperienza molto migliore se abiliti Javascript."
-
-#: templates/base.html:77
-msgid "English"
-msgstr "Inglese"
-
-#: templates/base.html:78
-msgid "Italian"
-msgstr "Italiano"
 
 #: templates/base.html:80
 msgid "Finnish"
