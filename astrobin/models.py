@@ -164,7 +164,7 @@ def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
     image.is_solved = solved
     if image.__class__.__name__ == 'Image' and image.is_solved:
         # grab objects from list
-        list_fn = settings.UPLOADS_DIRECTORY + image.filename + '-list.txt'
+        list_fn = settings.UPLOADS_DIRECTORY + image.filename + '_resized-list.txt'
         try:
             f = open(list_fn, 'r')
 
@@ -176,8 +176,8 @@ def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
                         image.subjects.add(s)
             f.close()
         except:
-            image.is_solved = false
-            solved = false
+            image.is_solved = False
+            solved = False
 
     image.save()
 
