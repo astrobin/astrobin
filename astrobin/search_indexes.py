@@ -165,7 +165,7 @@ class ImageIndex(SearchIndex):
         if deep_sky_acquisitions:
             date = deep_sky_acquisitions[0].date
             for a in deep_sky_acquisitions:
-                if a.date is not None:
+                if a.date is not None and date is not None:
                     if a.date < date:
                         date = a.date
         elif solar_system_acquisition:
@@ -186,7 +186,7 @@ class ImageIndex(SearchIndex):
         if deep_sky_acquisitions:
             date = deep_sky_acquisitions[0].date
             for a in deep_sky_acquisitions:
-                if a.date is not None:
+                if a.date is not None and date is not None:
                     if a.date > date:
                         date = a.date
         elif solar_system_acquisition:
