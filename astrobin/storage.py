@@ -9,6 +9,7 @@ import datetime
 
 from PIL import Image as PILImage
 from PIL import ImageOps
+from PIL import ImageEnhance
 
 import StringIO
 
@@ -79,12 +80,16 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
         # Let's also created a grayscale inverted image
         grayscale = ImageOps.grayscale(image)
         inverted = ImageOps.invert(grayscale)
+        enhancer = ImageEnhance.Contrast(inverted)
+        inverted = enhancer.enhance(2.5)
         invertedFile = StringIO.StringIO()
         inverted.save(invertedFile, format_map[content_type][0])
         save_to_bucket(uid + '_inverted' + format_map[content_type][1],
                        invertedFile.getvalue())
         grayscale = ImageOps.grayscale(resizedImage)
         inverted = ImageOps.invert(grayscale)
+        enhancer = ImageEnhance.Contrast(inverted)
+        inverted = enhancer.enhance(2.5)
         invertedFile = StringIO.StringIO()
         inverted.save(invertedFile, format_map[content_type][0])
         save_to_bucket(uid + '_resized_inverted' + format_map[content_type][1],
