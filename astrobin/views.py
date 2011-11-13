@@ -900,7 +900,7 @@ def me(request):
 @require_GET
 def user_page(request, username):
     """Shows the user's public page"""
-    user = User.objects.get(username=username)
+    user = get_object_or_404(User, username = username)
     profile = UserProfile.objects.get(user=user)
 
     gear_list = [('Telescopes'    , profile.telescopes.all()),
