@@ -451,9 +451,7 @@ def image_edit_presolve(request, id):
     if request.user != image.user:
         return HttpResponseForbidden()
 
-    form = ImageEditPresolveForm(
-        {'focal_length': image.focal_length,
-         'pixel_size': image.pixel_size})
+    form = ImageEditPresolveForm(instance=image)
     return render_to_response('image/edit/presolve.html',
         {'image': image,
          'form': form,

@@ -19,6 +19,20 @@ class ImageUploadForm(forms.Form):
 
 
 class ImageEditPresolveForm(forms.ModelForm):
+    focal_length = forms.IntegerField(
+        error_messages = {
+            'required': _("Insert a focal length if you want to plate-solve."),
+        }
+    )
+
+    pixel_size = forms.DecimalField(
+        max_digits = 5,
+        decimal_places = 2,
+        error_messages = {
+            'required': _("Insert a pixel size if you want to plate-solve."),
+        }
+    )
+
     scaling = forms.DecimalField(
         required       = False,
         max_digits     = 6,
@@ -34,22 +48,6 @@ class ImageEditPresolveForm(forms.ModelForm):
         self.fields['pixel_size'].label = _("Pixel size")
         self.fields['binning'].label = _("Binning")
         self.fields['scaling'].label = _("Scaling")
-
-    def clean_focal_length(self):
-        data = self.cleaned_data['focal_length']
-        if data and int(data):
-            return
-
-        if not data or data.isspace():
-            raise forms.ValidationError(_("Insert a focal length if you want to plate-solve."))
-
-    def clean_pixel_size(self):
-        data = self.cleaned_data['pixel_size']
-        if data and int(data):
-            return
-
-        if not data or data.isspace():
-            raise forms.ValidationError(_("Insert a pixel size if you want to plate-solve."))
 
     class Meta:
         model = Image
