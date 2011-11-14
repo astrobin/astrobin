@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-14 10:58-0500\n"
-"PO-Revision-Date: 2011-11-14 10:53-0500\n"
+"POT-Creation-Date: 2011-11-14 11:53-0500\n"
+"PO-Revision-Date: 2011-11-14 11:52-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -17,118 +17,80 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: forms.py:24
-msgid "Insert a focal length if you want to plate-solve."
-msgstr ""
-"Inserisci la lunghezza focale se vuoi avviare la risoluzione astrometrica."
-
-#: forms.py:32
-msgid "Insert a pixel size if you want to plate-solve."
-msgstr ""
-"Inserisci la dimensione del pixel se vuoi avviare la risoluzione "
-"astrometrica."
-
-#: forms.py:41
-msgid ""
-"If you scaled your image before uploading, enter here the percentage of the "
-"new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't "
-"matter."
-msgstr ""
-"Se hai ridimensionato l'immagine prima di caricarlo, metti qui la "
-"percentuale della nuova dimensione. Per esempio 50, se hai ridimensionato "
-"l'immagine della metà. Averla ritagliata (crop), invece, non ha importanza."
-
-#: forms.py:46 models.py:36 models.py:450 templates/image/detail.html:281
-#: templates/image/edit/acquisition.html:32
-msgid "Focal length"
-msgstr "Lunghezza focale"
-
-#: forms.py:47
-msgid "Pixel size"
-msgstr "Dimensione del pixel"
-
-#: forms.py:48 models.py:377
-msgid "Binning"
-msgstr "Bin"
-
-#: forms.py:49
-msgid "Scaling"
-msgstr "Ridimensionamento"
-
-#: forms.py:58
+#: forms.py:29
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr ""
 "Se possibile, usa nomi da catalogo (per esempio M101, o NGC224 o IC1370)."
 
-#: forms.py:59
+#: forms.py:30
 msgid "The places from which you have taken this image."
 msgstr "Questi sono i luoghi da cui hai acquisito quest'immagine."
 
-#: forms.py:64 models.py:238 templates/image/edit/basic.html:28
+#: forms.py:35 models.py:238 templates/image/edit/basic.html:28
 msgid "Title"
 msgstr "Titolo"
 
-#: forms.py:65 models.py:239 templates/image/edit/basic.html:32
+#: forms.py:36 models.py:239 templates/image/edit/basic.html:32
 msgid "Subjects"
 msgstr "Soggetti"
 
-#: forms.py:66 forms.py:121 models.py:240 models.py:512 views.py:272
+#: forms.py:37 forms.py:92 models.py:240 models.py:548 views.py:272
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Luoghi"
 
-#: forms.py:67 models.py:241 templates/image/detail.html:308
+#: forms.py:38 models.py:241 templates/image/detail.html:308
 #: templates/image/edit/basic.html:46
 msgid "Description"
 msgstr "Descrizione"
 
-#: forms.py:88 models.py:253
+#: forms.py:59 models.py:289
 msgid "Imaging telescopes"
 msgstr "Telescopi di acquisizione"
 
-#: forms.py:89 models.py:254
+#: forms.py:60 models.py:290
 msgid "Guiding telescopes"
 msgstr "Telescopi di guida"
 
-#: forms.py:90 forms.py:163 models.py:255 models.py:529
+#: forms.py:61 forms.py:134 models.py:291 models.py:565
 msgid "Mounts"
 msgstr "Montature"
 
-#: forms.py:91 models.py:256
+#: forms.py:62 models.py:292
 msgid "Imaging cameras"
 msgstr "Camere di acquisizione"
 
-#: forms.py:92 models.py:257
+#: forms.py:63 models.py:293
 msgid "Guiding cameras"
 msgstr "Camere di guida"
 
-#: forms.py:93 forms.py:165 models.py:258 models.py:531
+#: forms.py:64 forms.py:136 models.py:294 models.py:567
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
-#: forms.py:94 forms.py:166 models.py:259 models.py:532
+#: forms.py:65 forms.py:137 models.py:295 models.py:568
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:95 forms.py:167 models.py:260 models.py:533
+#: forms.py:66 forms.py:138 models.py:296 models.py:569
 msgid "Filters"
 msgstr "Filtri"
 
-#: forms.py:96 forms.py:168 models.py:261 models.py:534
+#: forms.py:67 forms.py:139 models.py:297 models.py:570
 msgid "Accessories"
 msgstr "Accessori"
 
-#: forms.py:127
+#: forms.py:98
 msgid ""
 "All the telescopes you own, including the ones you use for guiding, go here."
 msgstr ""
 "Tutti i tuoi telescopi, compresi quelli che usi per guidare, vanno qui."
 
-#: forms.py:137
+#: forms.py:108
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr "Le tue DSLR, CCD, camere planetarie e camere di guida vanno qui."
 
-#: forms.py:152
+#: forms.py:123
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
@@ -137,63 +99,63 @@ msgstr ""
 "assieme, ad esempio LRGB insieme, non potrai aggiungere sessioni di "
 "acquisizione separate per ogni filtro."
 
-#: forms.py:162 models.py:528
+#: forms.py:133 models.py:564
 msgid "Telescopes"
 msgstr "Telescopi"
 
-#: forms.py:164 models.py:530
+#: forms.py:135 models.py:566
 msgid "Cameras"
 msgstr "Camere"
 
-#: forms.py:181 templates/image/detail.html:93
+#: forms.py:152 templates/image/detail.html:93
 msgid "User"
 msgstr "Utente"
 
-#: forms.py:192 forms.py:196 forms.py:285 forms.py:314 models.py:347
+#: forms.py:163 forms.py:167 forms.py:256 forms.py:285 models.py:383
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Usa il seguente formato: aaaa-mm-gg"
 
-#: forms.py:199 forms.py:202
+#: forms.py:170 forms.py:173
 msgid "Express value in hours"
 msgstr "Esprimi il valore in ore"
 
-#: forms.py:212
+#: forms.py:183
 msgid "Search for astronomical objects, telescopes, cameras, filters..."
 msgstr "Cerca oggetti astronomici, telescopi, camere, filtri..."
 
-#: forms.py:214
+#: forms.py:185
 msgid "Acquired after"
 msgstr "Acquisita dopo il"
 
-#: forms.py:215
+#: forms.py:186
 msgid "Acquired before"
 msgstr "Acquisita prima del"
 
-#: forms.py:216
+#: forms.py:187
 msgid "Min. integration"
 msgstr "Integrazione min."
 
-#: forms.py:217
+#: forms.py:188
 msgid "Max. integration"
 msgstr "Integrazione max."
 
-#: forms.py:218
+#: forms.py:189
 msgid "Min. Moon phase %"
 msgstr "% fase lunare min."
 
-#: forms.py:219
+#: forms.py:190
 msgid "Max. Moon phase %"
 msgstr "% fase lunare max."
 
-#: forms.py:260
+#: forms.py:231
 msgid "For example: +12.44"
 msgstr "Per esempio: +12.44"
 
-#: forms.py:263
+#: forms.py:234
 msgid "For example: -51.25"
 msgstr "Per esempio: -51.25"
 
-#: forms.py:298 forms.py:322 models.py:347 models.py:464
+#: forms.py:269 forms.py:293 models.py:383 models.py:500
 #: templates/image/detail.html:269 templates/image/edit/acquisition.html:80
 msgid "Date"
 msgstr "Data"
@@ -201,6 +163,11 @@ msgstr "Data"
 #: models.py:26 models.py:144
 msgid "Name"
 msgstr "Nome"
+
+#: models.py:36 models.py:254 models.py:486 templates/image/detail.html:281
+#: templates/image/edit/acquisition.html:32
+msgid "Focal length"
+msgstr "Lunghezza focale"
 
 #: models.py:37
 msgid "Aperture"
@@ -222,176 +189,217 @@ msgstr "Longitudine"
 msgid "Altitude"
 msgstr "Altitudine"
 
-#: models.py:247
+#: models.py:250
 msgid "(in mm)"
 msgstr "(in mm)"
 
-#: models.py:248
+#: models.py:252
+msgid "Insert a focal length if you want to plate-solve."
+msgstr ""
+"Inserisci la lunghezza focale se vuoi avviare la risoluzione astrometrica."
+
+#: models.py:262
 msgid "(in &mu;m)"
 msgstr "(in &mu;m)"
 
-#: models.py:277 templates/image/detail.html:193 templates/image/full.html:54
+#: models.py:264
+msgid "Insert a pixel size if you want to plate-solve."
+msgstr ""
+"Inserisci la dimensione del pixel se vuoi avviare la risoluzione "
+"astrometrica."
+
+#: models.py:266
+msgid "Pixel size"
+msgstr "Dimensione del pixel"
+
+#: models.py:274
+msgid ""
+"This is the smallest of the binning values you used. If you imaged L in 1x1 "
+"and RGB in 2x2, put 1x1 here."
+msgstr ""
+"Questo è il più piccolo dei valori di bin che hai usato. Se hai fatto L a "
+"1x1 e RGB a 2x2, scegli 1x1."
+
+#: models.py:275 models.py:413
+msgid "Binning"
+msgstr "Bin"
+
+#: models.py:284
+msgid ""
+"If you scaled your image before uploading, enter here the percentage of the "
+"new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't "
+"matter."
+msgstr ""
+"Se hai ridimensionato l'immagine prima di caricarlo, metti qui la "
+"percentuale della nuova dimensione. Per esempio 50, se hai ridimensionato "
+"l'immagine della metà. Averla ritagliata (crop), invece, non ha importanza."
+
+#: models.py:285
+msgid "Scaling"
+msgstr "Ridimensionamento"
+
+#: models.py:313 templates/image/detail.html:193 templates/image/full.html:54
 #: templates/inclusion_tags/image_list.html:11
 msgid "(no title)"
 msgstr "(senza titolo)"
 
-#: models.py:348 models.py:463
+#: models.py:384 models.py:499
 msgid "Image"
 msgstr "Immagine"
 
-#: models.py:366
+#: models.py:402
 msgid "Synthetic channel"
 msgstr "Canale sintetico"
 
-#: models.py:371
+#: models.py:407
 msgid "Filter"
 msgstr "Filtro"
 
-#: models.py:380
+#: models.py:416
 msgid "Number"
 msgstr "Numero"
 
-#: models.py:382
+#: models.py:418
 msgid "The number of sub-frames."
 msgstr "Numero di frame."
 
-#: models.py:385
+#: models.py:421
 msgid "Duration"
 msgstr "Durata"
 
-#: models.py:387
+#: models.py:423
 msgid "Duration of each sub-frame, in seconds."
 msgstr "Durata di ogni frame, in secondi."
 
-#: models.py:390
+#: models.py:426
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:394
+#: models.py:430
 msgid "Gain"
 msgstr "Gain"
 
-#: models.py:399
+#: models.py:435
 msgid "Sensor cooling"
 msgstr "Temperatura sensore"
 
-#: models.py:401
+#: models.py:437
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del sensore. Esempio: -20."
 
-#: models.py:404 views.py:274
+#: models.py:440 views.py:274
 msgid "Darks"
 msgstr "Dark"
 
-#: models.py:406
+#: models.py:442
 msgid "The number of dark frames."
 msgstr "Numero di dark."
 
-#: models.py:409 views.py:275
+#: models.py:445 views.py:275
 msgid "Flats"
 msgstr "Flat"
 
-#: models.py:411
+#: models.py:447
 msgid "The number of flat frames."
 msgstr "Numero di flat."
 
-#: models.py:414 views.py:276
+#: models.py:450 views.py:276
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
-#: models.py:416
+#: models.py:452
 msgid "The number of dark flat frames."
 msgstr "Numero di dark dei flat."
 
-#: models.py:419 views.py:277
+#: models.py:455 views.py:277
 msgid "Bias"
 msgstr "Bias"
 
-#: models.py:421
+#: models.py:457
 msgid "The number of bias/offset frames."
 msgstr "Numero di frame bias/offset."
 
-#: models.py:424 views.py:280
+#: models.py:460 views.py:280
 msgid "Mean SQM"
 msgstr "SQM medio"
 
-#: models.py:429 views.py:281
+#: models.py:465 views.py:281
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
-#: models.py:448 views.py:273 templates/image/detail.html:275
+#: models.py:484 views.py:273 templates/image/detail.html:275
 msgid "Frames"
 msgstr "Frame"
 
-#: models.py:449 templates/image/detail.html:278
+#: models.py:485 templates/image/detail.html:278
 #: templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:451 templates/image/detail.html:284
+#: models.py:487 templates/image/detail.html:284
 #: templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:452 templates/image/detail.html:287
+#: models.py:488 templates/image/detail.html:287
 #: templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:453 templates/image/detail.html:290
+#: models.py:489 templates/image/detail.html:290
 #: templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:454 templates/image/detail.html:293
+#: models.py:490 templates/image/detail.html:293
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:455 templates/image/detail.html:296
+#: models.py:491 templates/image/detail.html:296
 msgid "Transparency"
 msgstr "Trasparenza"
 
-#: models.py:456 templates/image/detail.html:272
+#: models.py:492 templates/image/detail.html:272
 msgid "Time"
 msgstr "Ora"
 
-#: models.py:483
+#: models.py:519
 msgid "Request from"
 msgstr "Richiesta da"
 
-#: models.py:495
+#: models.py:531
 msgid "Additional information"
 msgstr "Ulteriori informazioni"
 
-#: models.py:496
+#: models.py:532
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:497
+#: models.py:533
 msgid "Higher resolution"
 msgstr "Risoluzione superiore"
 
-#: models.py:513
+#: models.py:549
 msgid "Website"
 msgstr "Sito web"
 
-#: models.py:514
+#: models.py:550
 msgid "Job"
 msgstr "Professione"
 
-#: models.py:515
+#: models.py:551
 msgid "Hobbies"
 msgstr "Interessi"
 
-#: models.py:516
+#: models.py:552
 msgid "Language"
 msgstr "Lingua"
 
-#: models.py:521
+#: models.py:557
 msgid "Timezone"
 msgstr "Fusorario"
 
-#: models.py:522
+#: models.py:558
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
