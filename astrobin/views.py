@@ -267,7 +267,7 @@ def image_detail(request, id):
             return float(sum(values)) / len(values)
 
         deep_sky_data = (
-            (_('Resolution'), '%dx%d' % (image.w, image.h)),
+            (_('Resolution'), '%dx%d' % (image.w, image.h) if (image.w and image.h) else None),
             (_('Dates'), dsa_data['dates']),
             (_('Frames'), u', '.join(dsa_data['frames'])),
             (_('Darks') , u', '.join([smart_unicode(x) for x in dsa_data['darks']])),

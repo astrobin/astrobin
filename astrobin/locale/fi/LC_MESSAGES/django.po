@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-14 10:52-0500\n"
+"POT-Creation-Date: 2011-11-14 10:58-0500\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -67,7 +67,7 @@ msgstr "Otsikko"
 msgid "Subjects"
 msgstr "Kohteet"
 
-#: forms.py:66 forms.py:121 models.py:240 models.py:512
+#: forms.py:66 forms.py:121 models.py:240 models.py:512 views.py:272
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Sijainnit"
@@ -272,7 +272,7 @@ msgstr "Kennon jäähdytys"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr ""
 
-#: models.py:404 views.py:273
+#: models.py:404 views.py:274
 msgid "Darks"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgstr ""
 msgid "The number of dark frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:409 views.py:274
+#: models.py:409 views.py:275
 msgid "Flats"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgstr ""
 msgid "The number of flat frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:414 views.py:275
+#: models.py:414 views.py:276
 msgid "Flat darks"
 msgstr ""
 
@@ -299,7 +299,7 @@ msgstr ""
 msgid "The number of dark flat frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:419 views.py:276
+#: models.py:419 views.py:277
 msgid "Bias"
 msgstr ""
 
@@ -308,15 +308,15 @@ msgstr ""
 msgid "The number of bias/offset frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:424 views.py:279
+#: models.py:424 views.py:280
 msgid "Mean SQM"
 msgstr "Keskiarvo SQM"
 
-#: models.py:429 views.py:280
+#: models.py:429 views.py:281
 msgid "Mean FWHM"
 msgstr "Keskiarvo FWHM"
 
-#: models.py:448 views.py:272 templates/image/detail.html:275
+#: models.py:448 views.py:273 templates/image/detail.html:275
 #, fuzzy
 msgid "Frames"
 msgstr "Frames"
@@ -408,64 +408,64 @@ msgstr "Italia"
 msgid "Resolution"
 msgstr "Suurempi resoluutio"
 
-#: views.py:271 views.py:340
+#: views.py:271 views.py:341
 msgid "Dates"
 msgstr "Päivämäärät"
 
-#: views.py:277
+#: views.py:278
 msgid "Avg. Moon age"
 msgstr "Keskimääräinen kuun ikä"
 
-#: views.py:278
+#: views.py:279
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
-#: views.py:411 views.py:426 views.py:1465 views.py:1480
+#: views.py:412 views.py:427 views.py:1466 views.py:1481
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 
-#: views.py:486 views.py:490 views.py:653 views.py:656 views.py:710
-#: views.py:734 templates/user/profile/edit/basic.html:53
+#: views.py:487 views.py:491 views.py:654 views.py:657 views.py:711
+#: views.py:735 templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Syötä nimen osa ja odota ehdotuksia!"
 
-#: views.py:487 views.py:654 views.py:711 views.py:735
+#: views.py:488 views.py:655 views.py:712 views.py:736
 msgid "No results. Sorry."
 msgstr "Ei tuloksia, pahoitteluni."
 
-#: views.py:488
+#: views.py:489
 msgid "Subjects found in the SIMBAD database"
 msgstr ""
 
-#: views.py:491 views.py:657
+#: views.py:492 views.py:658
 msgid "No results. Press TAB to create this location!"
 msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 
-#: views.py:492 templates/user/profile/edit/basic.html:55
+#: views.py:493 templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:835
+#: views.py:836
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views.py:840 views.py:852 views.py:890
+#: views.py:841 views.py:853 views.py:891
 msgid "There was an error. Check your input!"
 msgstr "Virhe. Tarkista tiedot!"
 
-#: views.py:1343
+#: views.py:1344
 msgid "RE"
 msgstr "VS"
 
-#: views.py:1402
+#: views.py:1403
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1426
+#: views.py:1427
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
