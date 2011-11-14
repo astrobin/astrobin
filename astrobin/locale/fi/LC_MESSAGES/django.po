@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 09:06-0500\n"
+"POT-Creation-Date: 2011-11-14 10:52-0500\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -19,173 +19,173 @@ msgstr ""
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-Country: FINLAND\n"
 
-#: forms.py:28
+#: forms.py:24
+msgid "Insert a focal length if you want to plate-solve."
+msgstr ""
+
+#: forms.py:32
+msgid "Insert a pixel size if you want to plate-solve."
+msgstr ""
+
+#: forms.py:41
 msgid ""
 "If you scaled your image before uploading, enter here the percentage of the "
 "new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't "
 "matter."
 msgstr ""
 
-#: forms.py:33 models.py:36 models.py:450 templates/image/detail.html:281
+#: forms.py:46 models.py:36 models.py:450 templates/image/detail.html:281
 #: templates/image/edit/acquisition.html:32
 msgid "Focal length"
 msgstr "Polttoväli"
 
-#: forms.py:34
+#: forms.py:47
 msgid "Pixel size"
 msgstr ""
 
-#: forms.py:35 models.py:377
+#: forms.py:48 models.py:377
 msgid "Binning"
 msgstr ""
 
-#: forms.py:36
+#: forms.py:49
 msgid "Scaling"
 msgstr ""
 
-#: forms.py:44
-msgid "Insert a focal length if you want to plate-solve."
-msgstr ""
-
-#: forms.py:52
-msgid "Insert a pixel size if you want to plate-solve."
-msgstr ""
-
-#: forms.py:61
+#: forms.py:58
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr ""
 
-#: forms.py:62
+#: forms.py:59
 msgid "The places from which you have taken this image."
 msgstr ""
 
-#: forms.py:67 models.py:238 templates/image/edit/basic.html:28
+#: forms.py:64 models.py:238 templates/image/edit/basic.html:28
 msgid "Title"
 msgstr "Otsikko"
 
-#: forms.py:68 models.py:239 templates/image/edit/basic.html:32
+#: forms.py:65 models.py:239 templates/image/edit/basic.html:32
 msgid "Subjects"
 msgstr "Kohteet"
 
-#: forms.py:69 forms.py:124 models.py:240 models.py:512
+#: forms.py:66 forms.py:121 models.py:240 models.py:512
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Sijainnit"
 
-#: forms.py:70 models.py:241 templates/image/detail.html:308
+#: forms.py:67 models.py:241 templates/image/detail.html:308
 #: templates/image/edit/basic.html:46
 msgid "Description"
 msgstr "Kuvaus"
 
-#: forms.py:91 models.py:253
+#: forms.py:88 models.py:253
 msgid "Imaging telescopes"
 msgstr "Kuvauskaukoputket"
 
-#: forms.py:92 models.py:254
+#: forms.py:89 models.py:254
 msgid "Guiding telescopes"
 msgstr "Seurantakaukoputket"
 
-#: forms.py:93 forms.py:166 models.py:255 models.py:529
+#: forms.py:90 forms.py:163 models.py:255 models.py:529
 msgid "Mounts"
 msgstr "Jalustat"
 
-#: forms.py:94 models.py:256
+#: forms.py:91 models.py:256
 msgid "Imaging cameras"
 msgstr "Kuvauskamerat"
 
-#: forms.py:95 models.py:257
+#: forms.py:92 models.py:257
 msgid "Guiding cameras"
 msgstr "Seurantakamerat"
 
-#: forms.py:96 forms.py:168 models.py:258 models.py:531
+#: forms.py:93 forms.py:165 models.py:258 models.py:531
 msgid "Focal reducers"
 msgstr "Polttovälin lyhentäjät"
 
-#: forms.py:97 forms.py:169 models.py:259 models.py:532
+#: forms.py:94 forms.py:166 models.py:259 models.py:532
 msgid "Software"
 msgstr "Ohjelmistot"
 
-#: forms.py:98 forms.py:170 models.py:260 models.py:533
+#: forms.py:95 forms.py:167 models.py:260 models.py:533
 msgid "Filters"
 msgstr "Suodattimet"
 
-#: forms.py:99 forms.py:171 models.py:261 models.py:534
+#: forms.py:96 forms.py:168 models.py:261 models.py:534
 msgid "Accessories"
 msgstr "Oheislaitteet"
 
-#: forms.py:130
+#: forms.py:127
 msgid ""
 "All the telescopes you own, including the ones you use for guiding, go here."
 msgstr ""
 
-#: forms.py:140
+#: forms.py:137
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr ""
 
-#: forms.py:155
+#: forms.py:152
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
 msgstr ""
 
-#: forms.py:165 models.py:528
+#: forms.py:162 models.py:528
 msgid "Telescopes"
 msgstr "Kaukoputket"
 
-#: forms.py:167 models.py:530
+#: forms.py:164 models.py:530
 msgid "Cameras"
 msgstr "Kamerat"
 
-#: forms.py:184 templates/image/detail.html:93
+#: forms.py:181 templates/image/detail.html:93
 msgid "User"
 msgstr "Käyttäjä"
 
-#: forms.py:195 forms.py:199 forms.py:288 forms.py:317 models.py:347
+#: forms.py:192 forms.py:196 forms.py:285 forms.py:314 models.py:347
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Käytä seuraavaa muotoa: vvvv-kk-pp"
 
-#: forms.py:202 forms.py:205
+#: forms.py:199 forms.py:202
 msgid "Express value in hours"
 msgstr "Ilmaise arvo tunneissa"
 
-#: forms.py:215
+#: forms.py:212
 msgid "Search for astronomical objects, telescopes, cameras, filters..."
 msgstr ""
 "Etsi tähtitieteellisiä kohteita, kaukoputkia, kameroita, suodattimia..."
 
-#: forms.py:217
+#: forms.py:214
 msgid "Acquired after"
 msgstr ""
 
-#: forms.py:218
+#: forms.py:215
 msgid "Acquired before"
 msgstr ""
 
-#: forms.py:219
+#: forms.py:216
 msgid "Min. integration"
 msgstr "Min. valotusaika"
 
-#: forms.py:220
+#: forms.py:217
 msgid "Max. integration"
 msgstr "Max. valotusaika"
 
-#: forms.py:221
+#: forms.py:218
 msgid "Min. Moon phase %"
 msgstr "Min. kuun vaihe %"
 
-#: forms.py:222
+#: forms.py:219
 msgid "Max. Moon phase %"
 msgstr "Max. kuun vaihe %"
 
-#: forms.py:263
+#: forms.py:260
 msgid "For example: +12.44"
 msgstr "Esimerksi: +12.44"
 
-#: forms.py:266
+#: forms.py:263
 msgid "For example: -51.25"
 msgstr "Esimerksi: -51.25"
 
-#: forms.py:301 forms.py:325 models.py:347 models.py:464
+#: forms.py:298 forms.py:322 models.py:347 models.py:464
 #: templates/image/detail.html:269 templates/image/edit/acquisition.html:80
 msgid "Date"
 msgstr "Päivämäärä"
@@ -272,7 +272,7 @@ msgstr "Kennon jäähdytys"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr ""
 
-#: models.py:404 views.py:271
+#: models.py:404 views.py:273
 msgid "Darks"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgstr ""
 msgid "The number of dark frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:409 views.py:272
+#: models.py:409 views.py:274
 msgid "Flats"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgstr ""
 msgid "The number of flat frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:414 views.py:273
+#: models.py:414 views.py:275
 msgid "Flat darks"
 msgstr ""
 
@@ -299,7 +299,7 @@ msgstr ""
 msgid "The number of dark flat frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:419 views.py:274
+#: models.py:419 views.py:276
 msgid "Bias"
 msgstr ""
 
@@ -308,15 +308,15 @@ msgstr ""
 msgid "The number of bias/offset frames."
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:424 views.py:277
+#: models.py:424 views.py:279
 msgid "Mean SQM"
 msgstr "Keskiarvo SQM"
 
-#: models.py:429 views.py:278
+#: models.py:429 views.py:280
 msgid "Mean FWHM"
 msgstr "Keskiarvo FWHM"
 
-#: models.py:448 views.py:270 templates/image/detail.html:275
+#: models.py:448 views.py:272 templates/image/detail.html:275
 #, fuzzy
 msgid "Frames"
 msgstr "Frames"
@@ -403,29 +403,34 @@ msgstr "Englanti"
 msgid "Italian"
 msgstr "Italia"
 
-#: views.py:269 views.py:338
+#: views.py:270
+#, fuzzy
+msgid "Resolution"
+msgstr "Suurempi resoluutio"
+
+#: views.py:271 views.py:340
 msgid "Dates"
 msgstr "Päivämäärät"
 
-#: views.py:275
+#: views.py:277
 msgid "Avg. Moon age"
 msgstr "Keskimääräinen kuun ikä"
 
-#: views.py:276
+#: views.py:278
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
-#: views.py:409 views.py:424 views.py:1459 views.py:1474
+#: views.py:411 views.py:426 views.py:1465 views.py:1480
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 
-#: views.py:486 views.py:490 views.py:648 views.py:651 views.py:705
-#: views.py:729 templates/user/profile/edit/basic.html:53
+#: views.py:486 views.py:490 views.py:653 views.py:656 views.py:710
+#: views.py:734 templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Syötä nimen osa ja odota ehdotuksia!"
 
-#: views.py:487 views.py:649 views.py:706 views.py:730
+#: views.py:487 views.py:654 views.py:711 views.py:735
 msgid "No results. Sorry."
 msgstr "Ei tuloksia, pahoitteluni."
 
@@ -433,7 +438,7 @@ msgstr "Ei tuloksia, pahoitteluni."
 msgid "Subjects found in the SIMBAD database"
 msgstr ""
 
-#: views.py:491 views.py:652
+#: views.py:491 views.py:657
 msgid "No results. Press TAB to create this location!"
 msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 
@@ -442,25 +447,25 @@ msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:829
+#: views.py:835
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views.py:834 views.py:846 views.py:884
+#: views.py:840 views.py:852 views.py:890
 msgid "There was an error. Check your input!"
 msgstr "Virhe. Tarkista tiedot!"
 
-#: views.py:1337
+#: views.py:1343
 msgid "RE"
 msgstr "VS"
 
-#: views.py:1396
+#: views.py:1402
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1420
+#: views.py:1426
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
