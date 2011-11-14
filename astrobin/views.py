@@ -309,6 +309,9 @@ def image_detail(request, id):
     if image.w > 0 and image.w < resized_size:
         resized_size = image.w
 
+    subjects = image.subjects.all()
+    subjects_limit = 5 
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -340,6 +343,10 @@ def image_detail(request, id):
                          'full': 'full' in request.GET,
                          'dates_label': _("Dates"),
                          'uploaded_on': uploaded_on,
+                         'subjects_short': subjects[:subjects_limit],
+                         'subjects_reminder': subjects[subjects_limit:],
+                         'subjects_all': subjects,
+                         'subjects_limit': subjects_limit,
                         })
 
 

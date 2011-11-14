@@ -650,6 +650,29 @@ var image_detail = {
         });
     },
 
+    setup_view_more_subjects: function() {
+        var $hidden = $('#more-subjects .hidden');
+        var $more = $('#more-subjects .more');
+        var $collapse = $('#more-subjects .collapse');
+
+        $hidden.hide();
+        $more.show();
+
+        $more.find('a').click(function() {
+            $hidden.slideDown();
+            $more.hide();
+            $collapse.show();
+            return false;
+        });          
+
+        $collapse.find('a').click(function() {
+            $hidden.slideUp();
+            $collapse.hide();
+            $more.show();
+            return false;
+        });          
+    },
+
     init: function(image_id, image_username, current_rating, config) {
         /* Init */
         image_detail.globals.image_id = image_id;
@@ -679,6 +702,9 @@ var image_detail = {
         /* Requests */
         image_detail.setup_image_request_additional_information();
         image_detail.setup_image_request_fits();
+
+        /* View more subjects */
+        image_detail.setup_view_more_subjects();
     }
 };
 
