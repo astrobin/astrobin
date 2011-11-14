@@ -369,7 +369,7 @@ class ImageRevision(models.Model):
         return 'Revision for %s' % self.image.title
 
     def process(self):
-        store_image.delay(self, solve=True, lang=translation.get_language(), callback=image_stored_callback)
+        store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
 
     def delete(self, *args, **kwargs):
         delete_image_from_s3(self.filename, self.original_ext) 
