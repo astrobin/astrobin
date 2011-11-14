@@ -616,7 +616,12 @@ def image_edit_save_presolve(request):
             },
             context_instance = RequestContext(request))
 
-    form.save()
+
+    image = form.save(commit=False)
+    if not form.cleaned_data['scaling']:
+        image.scaling = 100
+    image.save()
+
     if image.is_stored:
         image.solve()
 

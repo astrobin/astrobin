@@ -37,7 +37,6 @@ class ImageEditPresolveForm(forms.ModelForm):
         required       = False,
         max_digits     = 6,
         decimal_places = 2,
-        widget         = forms.TextInput(),
         initial        = 100,
         help_text      = _("If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't matter.")
     )
