@@ -227,7 +227,7 @@ def image_detail(request, id):
             'mean_fwhm': [],
         }
         for a in deep_sky_acquisitions:
-            if a.date is not None:
+            if a.date is not None and a.date not in dsa_data['dates']:
                 dsa_data['dates'].append(a.date)
                 m = MoonPhase(a.date)
                 moon_age_list.append(m.age)
