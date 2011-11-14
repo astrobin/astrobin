@@ -108,7 +108,7 @@ def solve_image(image, lang, use_scale=True, callback=None):
         del command[3:7]
 
     print command
-    run_popen_with_timeout(command, 300 if use_scale else 600)
+    run_popen_with_timeout(command, 330 if use_scale else 630)
 
     solved_filename = settings.UPLOADS_DIRECTORY + uid + '-ngc.png'
     if os.path.exists(settings.UPLOADS_DIRECTORY + uid + '.solved'):
