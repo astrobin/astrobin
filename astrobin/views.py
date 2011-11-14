@@ -737,7 +737,8 @@ def image_edit_save_basic(request):
     image.description = form.cleaned_data['description']
 
     image.save()
-    image.process(True if (image.focal_length and image.pixel_size) else False)
+    if not image.is_stored:
+        image.process(True if (image.focal_length and image.pixel_size) else False)
 
     if 'was_not_ready' in request.POST:
         return HttpResponseRedirect(image.get_absolute_url())
