@@ -269,6 +269,7 @@ def image_detail(request, id):
         deep_sky_data = (
             (_('Resolution'), '%dx%d' % (image.w, image.h) if (image.w and image.h) else None),
             (_('Dates'), dsa_data['dates']),
+            (_('Locations'), u', '.join([x.name for x in image.locations.all()])),
             (_('Frames'), u', '.join(dsa_data['frames'])),
             (_('Darks') , u', '.join([smart_unicode(x) for x in dsa_data['darks']])),
             (_('Flats'), u', '.join([smart_unicode(x) for x in dsa_data['flats']])),
