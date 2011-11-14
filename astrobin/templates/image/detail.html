@@ -201,11 +201,37 @@
                 <div class="hline"></div>
                 <p>
                     {% trans "Contains" %}:
-                    {% for s in image.subjects.all %}
+                    {% for s in subjects_short %}
                         <a href="/search/?q={{s.mainId|escape|cut:" "}}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                     {% empty %}
                         {% trans "(no subjects)" %}
                     {% endfor %}
+                    {% if subjects_all|length > 10 %}
+                        <span id="more-subjects">
+                            <span class="hidden">
+                                ,&nbsp;
+                                {% for s in subjects_reminder %}
+                                    <a href="/search/?q={{s.mainId|escape|cut:" "}}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            </span>
+                            <span class="more">
+                                &#8230;&nbsp; 
+                                <a href="#">
+                                    <em>
+                                       {% blocktrans with subjects_all|length|add:subjects_limit as number %}and {{number}} more (click to view).{% endblocktrans %}
+                                    </em>
+                                </a>
+                            </span>
+                            <span class="collapse">
+                                <a href="#">
+                                    &nbsp;
+                                    <em>
+                                       {% blocktrans %}(hide these subjects){% endblocktrans %}
+                                    </em>
+                                </a>
+                            </span>
+                        </span>
+                    {% endif %}
                 </p>
             </div>
             {% if revisions or is_revision %}

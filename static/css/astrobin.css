@@ -2285,3 +2285,6 @@ div.capty-caption a {
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
 }
+#more-subjects .more, #more-subjects .collapse {
+  display: none;
+}
