@@ -2242,9 +2242,9 @@ div.capty-caption a {
   text-shadow: none;
 }
 #full-size-header {
-  position: fixed;
+  position: absolute;
   left: 8px;
-  bottom: 8px;
+  top: 28px;
   margin: 0;
   padding: 0;
 }
