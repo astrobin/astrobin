@@ -62,6 +62,7 @@ def solve_image(image, lang, use_scale=True, callback=None):
         download_from_bucket(uid + original_ext, path)
 
     if use_scale:
+        print "Using scale."
         # Optimize for most cases
         scale_low = 0.5
         scale_high = 5
