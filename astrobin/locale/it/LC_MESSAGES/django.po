@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 14:02+0000\n"
+"POT-Creation-Date: 2011-11-15 14:17+0000\n"
 "PO-Revision-Date: 2011-11-14 14:06-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
@@ -2216,7 +2216,7 @@ msgstr "Cambia la password"
 #: templates/registration/password_change_form.html:13
 #: templates/registration/password_reset_confirm.html:15
 #: templates/registration/password_reset_form.html:13
-#: templates/registration/registration_form.html:14
+#: templates/registration/registration_form.html:18
 msgid "Submit"
 msgstr "Vai"
 
@@ -2261,6 +2261,15 @@ msgstr "Riempi il modulo per iscriverti ad AstroBin!"
 #: templates/registration/registration_form.html:10
 msgid "Register with AstroBin"
 msgstr "Iscriviti ad AstroBin"
+
+#: templates/registration/registration_form.html:13
+#, python-format
+msgid ""
+"By registering with AstroBin, you agree to our <a href=\"%(tos_url)s\">terms "
+"of service</a>."
+msgstr ""
+"Iscrivendoti ad AstroBin, accetti le nostre <a href=\"%(tos_url)s\">condizioni "
+"d'uso</a>."
 
 #: templates/requests/all.html:6
 msgid "Here are your requests"
