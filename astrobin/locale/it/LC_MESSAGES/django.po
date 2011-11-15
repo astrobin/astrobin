@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 11:28+0000\n"
+"POT-Creation-Date: 2011-11-15 14:02+0000\n"
 "PO-Revision-Date: 2011-11-14 14:06-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
@@ -622,7 +622,7 @@ msgstr "La casa definitiva per la tua astrofotografia."
 msgid "Hello, <a href=\"%(user_page)s\">%(username)s.</a>"
 msgstr "Ciao, <a href=\"%(user_page)s\">%(username)s.</a>"
 
-#: templates/base.html:120 templates/base.html.py:235 templates/base.html:271
+#: templates/base.html:120 templates/base.html.py:235 templates/base.html:272
 msgid "Home"
 msgstr "Home"
 
@@ -706,15 +706,19 @@ msgstr ""
 msgid "Site links"
 msgstr "Link del sito"
 
-#: templates/base.html:242
+#: templates/base.html:238 templates/tos.html:6
+msgid "Terms of Service"
+msgstr "Condizioni d'uso"
+
+#: templates/base.html:243
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/base.html:251
+#: templates/base.html:252
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:253
+#: templates/base.html:254
 msgid ""
 "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The "
 "images on this websites are copyright of their respective owners."
@@ -723,31 +727,31 @@ msgstr ""
 "Riservati. Le immagini su questo sito sono copyright dei loro rispettivi "
 "proprietari"
 
-#: templates/base.html:272
+#: templates/base.html:273
 msgid "Follow AstroBin on Twitter"
 msgstr "Segui AstroBin su Twitter"
 
-#: templates/base.html:273
+#: templates/base.html:274
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/base.html:287
+#: templates/base.html:288
 msgid "Feedback"
 msgstr "Feedback"
 
-#: templates/base.html:297
+#: templates/base.html:298
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:323 templates/image/detail.html:397
+#: templates/base.html:324 templates/image/detail.html:397
 msgid "Uploading..."
 msgstr "Caricamento in corso..."
 
-#: templates/base.html:330 templates/image/detail.html:395
+#: templates/base.html:331 templates/image/detail.html:395
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:331 templates/image/detail.html:396
+#: templates/base.html:332 templates/image/detail.html:396
 msgid "Choose file"
 msgstr "Scegli file"
 
@@ -788,7 +792,8 @@ msgstr ""
 #: templates/faq.html:25
 msgid ""
 "I've seen beautiful images on this site. I'm not worthy of posting mine!"
-msgstr "Ci sono foto bellissime su questo sito. Non sono degno di postare la mia!"
+msgstr ""
+"Ci sono foto bellissime su questo sito. Non sono degno di postare la mia!"
 
 #: templates/faq.html:27
 msgid ""
@@ -799,11 +804,11 @@ msgid ""
 "em> here! Don't be shy and post it!"
 msgstr ""
 "Sciocchezze. Astrobin <strong>non</strong> è stato realizzato per mostrare "
-"solo le immagini bellissime, ma per dare a tutti un'opportunità di contribuire "
-"ad un vasto (e sempre in crescita) impegno di centralizzazione e catalogazione "
-"di importanti dati. Quello scatto veloce di M31 che hai ottenuto ieri fra le "
-"le nuvole è perfettamente al suo posto, su AstroBin. Non essere timido e "
-"pubblicalo qui!"
+"solo le immagini bellissime, ma per dare a tutti un'opportunità di "
+"contribuire ad un vasto (e sempre in crescita) impegno di centralizzazione e "
+"catalogazione di importanti dati. Quello scatto veloce di M31 che hai "
+"ottenuto ieri fra le le nuvole è perfettamente al suo posto, su AstroBin. "
+"Non essere timido e pubblicalo qui!"
 
 #: templates/faq.html:31
 msgid "Where did you get the idea for this site?"
@@ -1145,6 +1150,126 @@ msgstr "Strumentazione"
 #: templates/profile-edit-menu.html:7
 msgid "Import from Flickr"
 msgstr "Importa da Flickr"
+
+#: templates/tos.html:8
+msgid ""
+"AstroBin accounts are meant for members to share original images that they "
+"have created."
+msgstr ""
+"Lo scopo di un account su AstroBin è quello di permettere all'utente di "
+"condividere immagini originali che egli stesso ha creato."
+
+#: templates/tos.html:10
+msgid "What is allowed"
+msgstr "Cosa è permesso"
+
+#: templates/tos.html:13
+msgid "Do upload content you have created yourself."
+msgstr "Carica contenuti che hai creato tu stesso."
+
+#: templates/tos.html:14
+msgid ""
+"Respect the copyright of others. Stealing images from other people and "
+"trying to pass them off as yours is not allowed on AstroBin."
+msgstr ""
+"Rispetta il copyright di altri. Rubare immagini da un'altra persona e "
+"cercare di spacciarle per proprie non è permesso su AstroBin."
+
+#: templates/tos.html:17
+msgid "Do fill in all the technical details you can."
+msgstr "Compila tutti i dati tecnici della tua foto."
+
+#: templates/tos.html:18
+msgid ""
+"AstroBin is founded on the idea that data is important and can't go wasted "
+"in a sea of chaos. As much as you can, please fill in the technical details "
+"of your images."
+msgstr ""
+"AstroBin è basato sull'idea che i dati sono importanti e non possono essere "
+"perduti in un mare di caos. Per quanto ti è possibile, per favore compila i "
+"dati tecnici della tua foto."
+
+#: templates/tos.html:21
+msgid "Be respectful of other users."
+msgstr "Rispetta gli altri utenti."
+
+#: templates/tos.html:22
+msgid "Be nice and friendly to other users when you send them messages."
+msgstr ""
+"Sii a modo ed amichevole con gli altri utenti quando mandi loro dei messaggi."
+
+#: templates/tos.html:25
+msgid "What is forbidden"
+msgstr "Che cosa è proibito"
+
+#: templates/tos.html:28
+msgid "Don't upload anything that you don't hold the copyright for."
+msgstr "Non caricare niente di cui non possiedi i diritti d'autore."
+
+#: templates/tos.html:29
+msgid ""
+"It's simple: if you didn't take an image yourself, then don't upload it. "
+"Images taken with remote equipment and images taken with borrowed equipment "
+"are fine of course. What matters is that it was your work."
+msgstr ""
+"È semplice: se non hai scattato tu un'immagine, non caricarla. Immagini "
+"scattate con strumentazione in remoto oppure con strumentazione presa in "
+"prestito vanno bene, naturalmente. La cosa importante è che si tratta del "
+"tuo lavoro."
+
+#: templates/tos.html:32
+msgid "No nudity, no explicitly sexual content, no illegal content."
+msgstr ""
+"Niente nudo, niente contenuto esplicitamente sessuale, niente contenuto "
+"illegale."
+
+#: templates/tos.html:33
+msgid ""
+"Your account will be permanently deleted, and so will all your content, if "
+"you upload any content that is illegal, porn or nudity. We also reserve the "
+"right to report you to the authorities, if we find it necessary."
+msgstr ""
+"Il tuo account sarà cancellato permanentemente, e così anche tutto il tuo "
+"contenuto, se carichi qualunque cosa che sia illegale, pornografica, o nudo. "
+"Ci riserviamo inoltre il diritto di riportarti alle autorità competenti, nel "
+"caso lo ritenessimo necessario."
+
+#: templates/tos.html:36
+msgid "Don't upload images that have nothing to do with astronomy."
+msgstr "Non caricare immagini che non c'entrano nulla con l'astronomia."
+
+#: templates/tos.html:37
+msgid ""
+"Images of your equipment are fine, but don't use AstroBin to upload pictures "
+"from your last vacation. Your account won't be deleted, but we will ask you "
+"to remove those pictures."
+msgstr ""
+"Le foto della tua strumentazione vanno benissimo, ma non usare AstroBin per "
+"caricare le foto delle tue ultime vacanze. Non ti cancelleremo l'account, ma "
+"ti chiederemo di rimuovere quelle foto."
+
+#: templates/tos.html:40
+msgid "Don't use your account to host images for websites, banners or logos."
+msgstr ""
+"Non usare il tuo account per appoggiare immagini per siti, banner o loghi."
+
+#: templates/tos.html:41
+msgid ""
+"Banners, logos, icons or other graphic elements that are not "
+"astrophotography are not allowed on AstroBin."
+msgstr ""
+"Banner, loghi, icone o altri elementi di grafica che non sono "
+"astrofotografie non sono permessi su AstroBin."
+
+#: templates/tos.html:45
+msgid ""
+"In conclusion, these terms are just a way to say \"please be nice and use "
+"common sense\". If you feel you can't abide by them, please let us know what "
+"you feel is wrong."
+msgstr ""
+"Per concludere, queste condizioni sono semplicemente un modo di dire \"sii a "
+"modo ed usa senso comune\". Se non ti senti di accettarle, facci sapere cosa "
+"pensi non vada bene."
 
 #: templates/image/detail.html:9
 msgid ""
@@ -2375,6 +2500,9 @@ msgstr "secondi fa"
 #, python-format
 msgid "%s ago"
 msgstr "%s fa"
+
+#~ msgid "Terms of service"
+#~ msgstr "Condizioni d'uso"
 
 #~ msgid "More..."
 #~ msgstr "Altro..."

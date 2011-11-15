@@ -1517,6 +1517,12 @@ def faq(request):
         context_instance=RequestContext(request))
 
 
+@require_GET
+def tos(request):
+    return render_to_response('tos.html',
+        context_instance=RequestContext(request))
+
+
 @login_required
 @require_GET
 def location_edit(request, id):
