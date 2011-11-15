@@ -219,6 +219,7 @@ def image_detail(request, id):
         dsa_data = {
             'dates': [],
             'frames': [],
+            'integration': 0,
             'darks': [],
             'flats': [],
             'flat_darks': [],
@@ -248,6 +249,8 @@ def image_detail(request, id):
                     f+= ' bin %dx%d' % (a.binning, a.binning)
 
                 dsa_data['frames'].append(f)
+                dsa_data['integration'] += (a.duration * a.number / 3600.0)
+                print dsa_data['integration']
 
             for i in ['darks', 'flats', 'flat_darks', 'bias']:
                 if a.filter and getattr(a, i):
@@ -271,6 +274,7 @@ def image_detail(request, id):
             (_('Dates'), dsa_data['dates']),
             (_('Locations'), u', '.join([x.name for x in image.locations.all()])),
             (_('Frames'), u'\n'.join(dsa_data['frames'])),
+            (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
             (_('Darks') , u'\n'.join([smart_unicode(x) for x in dsa_data['darks']])),
             (_('Flats'), u'\n'.join([smart_unicode(x) for x in dsa_data['flats']])),
             (_('Flat darks'), u'\n'.join([smart_unicode(x) for x in dsa_data['flat_darks']])),
