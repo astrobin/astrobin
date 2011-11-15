@@ -48,6 +48,8 @@ echo "alias lessc=/home/astrobin/.npm/less/1.1.2/package/bin/lessc" >> ~/.bashrc
 # Obtain the code:
 # ================
 
+cd
+mkdir Code && cd Code
 hg clone https://bitbucket.org/siovene/astrobin astrobin
 
 
@@ -81,7 +83,8 @@ ln -s ./venv/bin/pip vpip
     django-model-utils \
     django-maintenancemode \
     pytz \
-    django-timezones
+    django-timezones==0.1.4 \
+    south
 
 # NOTE: if you run into this: https://github.com/ask/celery/commit/edf3b3f33acdada9264754068d9c74ee76692cd9
 # then install kombu, celery and django-celery from git master:
@@ -96,13 +99,15 @@ ln -s ./venv/bin/pip vpip
 # for the notifications system
 cd django-persistent-messages
 ../venv/bin/python setup.py install
+cd ..
 
 # for the private beta
 cd django-privatebeta
 ../venv/bin/python setup.py install
+cd ..
 
 # for the moon phase module
-easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
+sudo easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
 
 
 # Set up Xapian:
@@ -114,20 +119,24 @@ cd xapian-core-1.2.6
 cd ../xapian-bindings-1.2.6
 XAPIAN_CONFIG=/opt/bin/xapian-config ./configure --prefix=/home/astrobin/Code/astrobin/venv/lib/python2.7/site-packages && make && sudo make install
 deactivate
+cd ..
 
 
 # Set up MySQL:
 # =============
 
 mysql -u root -p
-create user 'astrobin'@'localhost' identified by 'password';
+create user 'astrobin'@'localhost' identified by 'h3C_U77a';
 create database astrobin character set utf8;
 use astrobin;
-grant all privileges on *.* to 'astrobin'@'localhost' identified by 'password';
+grant all privileges on *.* to 'astrobin'@'localhost' identified by 'h3C_U77a';
+quit
 
 # Initialize db
+./manage.py migrate astrobin 0001 --fake
+./manage.py migrate astrobin
 ./scripts/syncdb.sh
-(When asked, do create super user astrobin:password <astrobin@astrobin.com>)
+(When asked, do create super user astrobin:h3C_U77a <astrobin@astrobin.com>)
 
 
 # Build nginx:
@@ -138,6 +147,7 @@ cd nginx-1.0.4
 # Remove -Werror and -g in objs/Makefile
 make
 sudo make install
+cd ..
 
 # Use nginx config
 Add 'include /home/astrobin/Code/astrobin/astrobin.com.nginx;' to the http{} section of /usr/local/nginx/conf/nginx.conf.
@@ -170,16 +180,18 @@ sudo make install
 
 Edit /usr/local/astrometry/etc/backend.cfg and enable "inparallel".
 sudo cp /usr/local/astrometry/etc/backend.cfg /usr/local/astrometry/etc/backend.blind.cfg
-Edit this file, disable auto indexing, and enable all large indexes up to the 7th
+Edit this file, disable auto indexing, and enable all large indexes from 213 to 207
 
 
 # Set up supervisor
-sudo cp scripts/supervisord/* to /etc/supervisor/conf.d/
-sudo mkdir /var/log/{celeryd,gunicorn}
+cd ~/Code/astrobin
+sudo cp scripts/supervisord/* /etc/supervisor/conf.d/
+sudo mkdir /var/log/{celery,gunicorn}
 
 # Run it!
 # =======
 sudo /usr/local/nginx/sbin/nginx
+sudo supervisord
 sudo supervisorctl start all
 
 
