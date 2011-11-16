@@ -4,7 +4,7 @@ from django.conf import global_settings
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-MAINTENANCE_MODE = False
+MAINTENANCE_MODE = True
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@iovene.com'),
