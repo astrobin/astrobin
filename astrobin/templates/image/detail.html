@@ -165,7 +165,7 @@
                         </a>
                         {% endif %}
                         {% if solved %}
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
                         {% endif %}
                         {% if not inverted and not solved %}
                         <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id" "mod, plate_solving_started" %}">
@@ -180,7 +180,7 @@
                     </a>
                     {% endif %}
                     {% if solved %}
-                    <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                    <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
                     {% endif %}
                     {% if not inverted and not solved %}
                     <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">

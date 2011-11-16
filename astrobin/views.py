@@ -363,6 +363,10 @@ def image_detail(request, id):
                          'subjects_limit': subjects_limit,
                          'license_icon': licenses[image.license][1],
                          'license_title': licenses[image.license][2],
+                         # Because of a regression introduced at
+                         # revision e1dad12babe5, now we have to
+                         # implement this ugly hack.
+                         'solved_ext': '.png' if image.uploaded < datetime.datetime(2011, 11, 13, 5, 3, 1) else image.original_ext,
                         })
 
 
