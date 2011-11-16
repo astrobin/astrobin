@@ -1243,10 +1243,12 @@ def user_profile_flickr_import(request):
                     destination.write(file.read())
                     destination.close()
 
+                    profile = UserProfile.objects.get(user = request.user)
                     image = Image(filename=filename, original_ext=original_ext,
                                   user=request.user,
                                   title=title if title is not None else '',
-                                  description=description if description is not None else '')
+                                  description=description if description is not None else '',
+                                  license = profile.default_license)
                     image.save()
                     image.process()
 
