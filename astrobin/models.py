@@ -22,6 +22,18 @@ from timezones.forms import PRETTY_TIMEZONE_CHOICES
 from tasks import store_image, solve_image, delete_image
 from notifications import push_notification
 
+
+LICENSE_CHOICES = (
+    (0, _("None (All rights reserved)")),
+    (1, _("Attribution-NonCommercial-ShareAlike Creative Commons")),
+    (2, _("Attribution-NonCommercial Creative Commons")),
+    (3, _("Attribution-NonCommercial-NoDerivs Creative Commons")),
+    (4, _("Attribution Creative Commons")),
+    (5, _("Attribution-ShareAlike Creative Commons")),
+    (6, _("Attribution-NoDerivs Creative Commons")),
+)
+
+
 class Gear(models.Model):
     name = models.CharField(_("Name"), max_length=64)
 
@@ -244,10 +256,46 @@ class Image(models.Model):
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
-    focal_length = models.IntegerField(null=True, blank=True, help_text=_("(in mm)"))
-    pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text=_("(in &mu;m)"))
-    binning = models.IntegerField(null=True, blank=True, choices=BINNING_CHOICES, default=1)
-    scaling = models.DecimalField(null=True, blank=True, max_digits=6, decimal_places=2)
+    focal_length = models.IntegerField(
+        null = True,
+        blank = True,
+        help_text = _("(in mm)"),
+        error_messages = {
+            'required': _("Insert a focal length if you want to plate-solve."),
+        },
+        verbose_name = _("Focal length"),
+    )
+
+    pixel_size = models.DecimalField(
+        null = True,
+        blank = True,
+        max_digits = 5,
+        decimal_places = 2,
+        help_text = _("(in &mu;m)"),
+        error_messages = {
+            'required': _("Insert a pixel size if you want to plate-solve."),
+        },
+        verbose_name = _("Pixel size"),
+    )
+
+    binning = models.IntegerField(
+        null      = True,
+        blank     = True,
+        choices   = BINNING_CHOICES,
+        default   = 1,
+        help_text = _("This is the smallest of the binning values you used. If you imaged L in 1x1 and RGB in 2x2, put 1x1 here."),
+        verbose_name = _("Binning"),
+    )
+
+    scaling = models.DecimalField(
+        null = True,
+        blank = True,
+        max_digits = 6,
+        decimal_places = 2,
+        default = 100,
+        help_text = _("If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't matter."),
+        verbose_name = _("Scaling"),
+    )
 
     # gear
     imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes"))
@@ -268,6 +316,17 @@ class Image(models.Model):
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)
     animated = models.BooleanField(editable=False, default=False)
+
+    license = models.IntegerField(
+        choices = LICENSE_CHOICES,
+        default = 0,
+        verbose_name = _("License"),
+    )
+
+    is_final = models.BooleanField(
+        editable = False,
+        default = True
+    )
 
     class Meta:
         app_label = 'astrobin'
@@ -325,6 +384,11 @@ class ImageRevision(models.Model):
     is_stored = models.BooleanField(editable=False)
     is_solved = models.BooleanField(editable=False)
 
+    is_final = models.BooleanField(
+        editable = False,
+        default = False
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('uploaded', '-id')
@@ -333,7 +397,7 @@ class ImageRevision(models.Model):
         return 'Revision for %s' % self.image.title
 
     def process(self):
-        store_image.delay(self, solve=True, lang=translation.get_language(), callback=image_stored_callback)
+        store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
 
     def delete(self, *args, **kwargs):
         delete_image_from_s3(self.filename, self.original_ext) 
@@ -534,6 +598,16 @@ class UserProfile(models.Model):
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
 
     follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers', symmetrical=False)
+
+    default_license = models.IntegerField(
+        choices = LICENSE_CHOICES,
+        default = 0,
+        verbose_name = _("Default license"),
+        help_text = _(
+            "The license you select here is automatically applied to "
+            "all your new images."
+        ),
+    )
 
     def __unicode__(self):
         return "%s' profile" % self.user.username
