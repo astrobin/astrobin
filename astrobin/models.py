@@ -244,10 +244,46 @@ class Image(models.Model):
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
-    focal_length = models.IntegerField(null=True, blank=True, help_text=_("(in mm)"))
-    pixel_size = models.DecimalField(null=True, blank=True, max_digits=5, decimal_places=2, help_text=_("(in &mu;m)"))
-    binning = models.IntegerField(null=True, blank=True, choices=BINNING_CHOICES, default=1)
-    scaling = models.DecimalField(null=True, blank=True, max_digits=6, decimal_places=2)
+    focal_length = models.IntegerField(
+        null = True,
+        blank = True,
+        help_text = _("(in mm)"),
+        error_messages = {
+            'required': _("Insert a focal length if you want to plate-solve."),
+        },
+        verbose_name = _("Focal length"),
+    )
+
+    pixel_size = models.DecimalField(
+        null = True,
+        blank = True,
+        max_digits = 5,
+        decimal_places = 2,
+        help_text = _("(in &mu;m)"),
+        error_messages = {
+            'required': _("Insert a pixel size if you want to plate-solve."),
+        },
+        verbose_name = _("Pixel size"),
+    )
+
+    binning = models.IntegerField(
+        null      = True,
+        blank     = True,
+        choices   = BINNING_CHOICES,
+        default   = 1,
+        help_text = _("This is the smallest of the binning values you used. If you imaged L in 1x1 and RGB in 2x2, put 1x1 here."),
+        verbose_name = _("Binning"),
+    )
+
+    scaling = models.DecimalField(
+        null = True,
+        blank = True,
+        max_digits = 6,
+        decimal_places = 2,
+        default = 100,
+        help_text = _("If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't matter."),
+        verbose_name = _("Scaling"),
+    )
 
     # gear
     imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes"))
@@ -333,7 +369,7 @@ class ImageRevision(models.Model):
         return 'Revision for %s' % self.image.title
 
     def process(self):
-        store_image.delay(self, solve=True, lang=translation.get_language(), callback=image_stored_callback)
+        store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
 
     def delete(self, *args, **kwargs):
         delete_image_from_s3(self.filename, self.original_ext) 
