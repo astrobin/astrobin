@@ -316,6 +316,16 @@ def image_detail(request, id):
     subjects = image.subjects.all()
     subjects_limit = 5 
 
+    licenses = (
+        (0, 'cc/c.png',           LICENSE_CHOICES[0][1]),
+        (1, 'cc/cc-by-nc-sa.png', LICENSE_CHOICES[1][1]),
+        (2, 'cc/cc-by-nc.png',    LICENSE_CHOICES[2][1]),
+        (3, 'cc/cc-by-nc-nd.png', LICENSE_CHOICES[3][1]),
+        (4, 'cc/cc-by.png',       LICENSE_CHOICES[4][1]),
+        (5, 'cc/cc-by-sa.png',    LICENSE_CHOICES[5][1]),
+        (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
+    )
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -351,6 +361,12 @@ def image_detail(request, id):
                          'subjects_reminder': subjects[subjects_limit:],
                          'subjects_all': subjects,
                          'subjects_limit': subjects_limit,
+                         'license_icon': licenses[image.license][1],
+                         'license_title': licenses[image.license][2],
+                         # Because of a regression introduced at
+                         # revision e1dad12babe5, now we have to
+                         # implement this ugly hack.
+                         'solved_ext': '.png' if image.uploaded < datetime.datetime(2011, 11, 13, 5, 3, 1) else image.original_ext,
                         })
 
 
@@ -441,10 +457,13 @@ def image_upload_process(request):
     for chunk in file.chunks():
         destination.write(chunk)
     destination.close()
+
+    profile = UserProfile.objects.get(user = request.user)
     image = Image(
         filename=filename,
         original_ext=original_ext,
-        user=request.user)
+        user=request.user,
+        license = profile.default_license)
 
     image.save()
 
@@ -611,6 +630,21 @@ def image_edit_acquisition_reset(request, id):
     return render_to_response('image/edit/acquisition.html',
                               response_dict,
                               context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
+def image_edit_license(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    form = ImageLicenseForm(instance = image)
+    return render_to_response(
+        'image/edit/license.html',
+        {'form': form,
+         'image': image},
+        context_instance = RequestContext(request))
 
 
 @login_required
@@ -909,6 +943,25 @@ def image_edit_save_acquisition(request):
 
 
 @login_required
+@require_POST
+def image_edit_save_license(request):
+    image_id = request.POST.get('image_id')
+    image = get_object_or_404(Image, pk=image_id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    form = ImageLicenseForm(data = request.POST, instance = image)
+    if not form.is_valid():
+        return render_to_response(
+            'image/edit/license.html',
+            {'form': form},
+            context_instance = RequestContext(request))
+
+    form.save()
+
+    return HttpResponseRedirect('/edit/license/%s/?saved' % image_id)
+
+@login_required
 @require_GET
 def image_delete(request, id):
     image = get_object_or_404(Image, pk=id) 
@@ -1012,6 +1065,34 @@ def user_profile_save_basic(request):
             context_instance=RequestContext(request))
 
     return HttpResponseRedirect("/profile/edit/basic/?saved");
+
+
+@login_required
+@require_GET
+def user_profile_edit_license(request):
+    profile = UserProfile.objects.get(user = request.user)
+    form = DefaultImageLicenseForm(instance = profile)
+    return render_to_response(
+        'user/profile/edit/license.html',
+        {'form': form},
+        context_instance = RequestContext(request))
+
+
+@login_required
+@require_POST
+def user_profile_save_license(request):
+    profile = UserProfile.objects.get(user = request.user)
+    form = DefaultImageLicenseForm(data = request.POST, instance = profile)
+
+    if not form.is_valid():
+        return render_to_response(
+            'user/profile/edit/license.html',
+            {'form': form},
+            context_instance = RequestContext(request))
+
+    form.save()
+
+    return HttpResponseRedirect('/profile/edit/license/?saved')
 
 
 @login_required
@@ -1166,10 +1247,12 @@ def user_profile_flickr_import(request):
                     destination.write(file.read())
                     destination.close()
 
+                    profile = UserProfile.objects.get(user = request.user)
                     image = Image(filename=filename, original_ext=original_ext,
                                   user=request.user,
                                   title=title if title is not None else '',
-                                  description=description if description is not None else '')
+                                  description=description if description is not None else '',
+                                  license = profile.default_license)
                     image.save()
                     image.process()
 
