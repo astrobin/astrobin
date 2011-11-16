@@ -323,6 +323,11 @@ class Image(models.Model):
         verbose_name = _("License"),
     )
 
+    is_final = models.BooleanField(
+        editable = False,
+        default = True
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
@@ -378,6 +383,11 @@ class ImageRevision(models.Model):
 
     is_stored = models.BooleanField(editable=False)
     is_solved = models.BooleanField(editable=False)
+
+    is_final = models.BooleanField(
+        editable = False,
+        default = False
+    )
 
     class Meta:
         app_label = 'astrobin'

@@ -157,9 +157,27 @@ def no_javascript(request):
 @require_GET
 def image_detail(request, id):
     """ Show details of an image"""
+    image = get_object_or_404(Image, pk=id)
+
+    is_revision = False
+    revision_id = 0
+    revision_image = None
+    revisions = ImageRevision.objects.filter(image=image)
+    is_final = image.is_final
+    if 'r' in request.GET and request.GET.get('r') != '0':
+        is_revision = True
+        revision_id = int(request.GET['r'])
+        revision_image = ImageRevision.objects.get(id=revision_id)
+        is_final = revision_image.is_final
+        revisions = revisions.exclude(id=revision_id)
+        is_ready = revision_image.is_stored
+    elif 'r' not in request.GET:
+        if not is_final:
+            final = revisions.filter(is_final = True)[0]
+            return HttpResponseRedirect('/%i/?r=%i' % (image.id, final.id))
+
     from moon import MoonPhase;
 
-    image = get_object_or_404(Image, pk=id)
     is_ready = image.is_stored
 
     already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
@@ -296,17 +314,6 @@ def image_detail(request, id):
         if UserProfile.objects.get(user=image.user) in profile.follows.all():
             follows = True
 
-    is_revision = False
-    revision_id = 0
-    revision_image = None
-    revisions = ImageRevision.objects.filter(image=image)
-    if 'r' in request.GET:
-        is_revision = True
-        revision_id = int(request.GET['r'])
-        revision_image = ImageRevision.objects.get(id=revision_id)
-        revisions = revisions.exclude(id=revision_id)
-        is_ready = revision_image.is_stored
-
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
     resized_size = settings.RESIZED_IMAGE_SIZE
@@ -354,6 +361,7 @@ def image_detail(request, id):
                          'is_revision': is_revision,
                          'revision_image': revision_image,
                          'is_ready': is_ready,
+                         'is_final': is_final,
                          'full': 'full' in request.GET,
                          'dates_label': _("Dates"),
                          'uploaded_on': uploaded_on,
@@ -377,11 +385,10 @@ def image_full(request, id):
     is_revision = False
     revision_id = 0
     revision_image = None
-    if 'r' in request.GET:
-        is_revision = True
-        revision_id = int(request.GET['r'])
-        revision_image = ImageRevision.objects.get(id=revision_id)
-
+    if 'r' in request.GET and request.GET.get('r') != '0':
+            is_revision = True
+            revision_id = int(request.GET['r'])
+            revision_image = ImageRevision.objects.get(id=revision_id)
 
     return object_detail(
         request,
@@ -630,6 +637,44 @@ def image_edit_acquisition_reset(request, id):
     return render_to_response('image/edit/acquisition.html',
                               response_dict,
                               context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
+def image_edit_make_final(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    revisions = ImageRevision.objects.filter(image = image)
+    for r in revisions:
+        r.is_final = False
+        r.save()
+    image.is_final = True
+    image.save()
+
+    return HttpResponseRedirect('/%i/' % image.id)
+
+
+@login_required
+@require_GET
+def image_edit_revision_make_final(request, id):
+    r = get_object_or_404(ImageRevision, pk=id)
+    if request.user != r.image.user:
+        return HttpResponseForbidden()
+
+    other = ImageRevision.objects.filter(image = r.image)
+    for i in other:
+        i.is_final = False
+        i.save()
+
+    r.image.is_final = False
+    r.image.save()
+
+    r.is_final = True
+    r.save()
+
+    return HttpResponseRedirect('/%i/?r=%i' % (r.image.id, r.id))
 
 
 @login_required
@@ -1579,7 +1624,10 @@ def image_revision_upload_process(request):
         destination.write(chunk)
     destination.close()
 
-    image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext)
+    image.is_final = False
+    image.save()
+
+    image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext, is_final=True)
     image_revision.save()
     image_revision.process()
 
