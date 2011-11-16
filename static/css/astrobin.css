@@ -2077,6 +2077,12 @@ input.date {
 .thumbnail-list {
   padding: 0 10px;
 }
+.thumbnail-list img.solved-badge {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+}
 table.messages, table.requests {
   width: 100%;
 }
