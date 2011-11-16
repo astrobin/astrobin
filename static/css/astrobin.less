@@ -220,6 +220,8 @@
     background: url('/static/icons/iconic/black/edit-gear.png') no-repeat left center;}
 .icon-edit-acquisition {
     background: url('/static/icons/iconic/black/edit-acquisition.png') no-repeat left center;}
+.icon-change-license {
+    background: url('/static/icons/iconic/black/copy_8x8.png') no-repeat left center;}
 .icon-plate-solve {
     background: url('/static/icons/iconic/black/read_more_8x8.png') no-repeat left center;}
 .icon-upload {
@@ -976,7 +978,9 @@ form {
         width: 70%;
         .rounded-corners;}
 
-    input:focus, select:focus, textarea:focus {
+    select:focus {
+        color: @background-color;}
+    input:focus, textarea:focus {
         border-color: @border-color * @hilight-factor;
         background-color: @input-color * @hilight-factor;
         color: @strong-text-color;}}
@@ -1901,6 +1905,11 @@ input.date {
 
 img.thumbnail {}
 .thumbnail-list {
+    img.solved-badge {
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        left: 0;}
     padding: 0 10px;}
 
 table.messages,
@@ -2094,3 +2103,17 @@ div.capty-caption a {
         margin-top: @spacer-large;
     }
 }
+
+table.title {
+    width: 100%;
+    td {
+        background-color: transparent;}
+    td.data {
+        padding: 0;
+        vertical-align: top;
+        h2 {
+            border: none;
+            margin: 0;}}
+    td.license {
+        padding: 0;
+        width: 90px;}}

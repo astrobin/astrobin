@@ -160,6 +160,9 @@
 .icon-edit-acquisition {
   background: url('/static/icons/iconic/black/edit-acquisition.png') no-repeat left center;
 }
+.icon-change-license {
+  background: url('/static/icons/iconic/black/copy_8x8.png') no-repeat left center;
+}
 .icon-plate-solve {
   background: url('/static/icons/iconic/black/read_more_8x8.png') no-repeat left center;
 }
@@ -853,7 +856,10 @@ form input, form select, form textarea {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-form input:focus, form select:focus, form textarea:focus {
+form select:focus {
+  color: #333333;
+}
+form input:focus, form textarea:focus {
   border-color: #292929;
   background-color: #3d3d3d;
   color: #fcfcfc;
@@ -2071,6 +2077,12 @@ input.date {
 .thumbnail-list {
   padding: 0 10px;
 }
+.thumbnail-list img.solved-badge {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+}
 table.messages, table.requests {
   width: 100%;
 }
@@ -2293,4 +2305,22 @@ div.capty-caption a {
 }
 .tos li {
   margin-top: 12px;
+}
+table.title {
+  width: 100%;
+}
+table.title td {
+  background-color: transparent;
+}
+table.title td.data {
+  padding: 0;
+  vertical-align: top;
+}
+table.title td.data h2 {
+  border: none;
+  margin: 0;
+}
+table.title td.license {
+  padding: 0;
+  width: 90px;
 }
