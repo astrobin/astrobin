@@ -4,7 +4,10 @@
 <div class="thumbnail-list clear">
 {% for image in images.object_list %}
     <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
-        <a href="{{image.get_absolute_url}}/">
+        <a href="{% url image_detail image.id %}{% if image.is_solved %}?mod=solved{% endif %}">
+            {% if image.is_solved %}
+            <img class="solved-badge" src="/static/images/solved_badge.gif" alt="" />
+            {% endif %}
             <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="capty thumbnail"
                  name="#capty-content-{{image.id}}"
@@ -13,7 +16,7 @@
         </a>
         <div id="capty-content-{{image.id}}">
             {{image.uploaded|ago}}<br/>
-            {% with image.user.username as user %}
+            {% with image.user.username|truncatechars:25 as user %}
             {% url user_page user as user_page %}
             {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
             {% endwith %}

@@ -5,10 +5,7 @@ from django.utils.translation import ugettext as _
 from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet, EmptySearchQuerySet
 
-from models import Image
-from models import UserProfile
-from models import Location
-from models import DeepSky_Acquisition
+from models import *
 
 from search_indexes import xapian_escape
 
@@ -19,38 +16,6 @@ class ImageUploadForm(forms.Form):
 
 
 class ImageEditPresolveForm(forms.ModelForm):
-    scaling = forms.DecimalField(
-        required       = False,
-        max_digits     = 6,
-        decimal_places = 2,
-        widget         = forms.TextInput(),
-        initial        = 100,
-        help_text      = _("If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't matter.")
-    )
-
-    def __init__(self, user=None, **kwargs):
-        super(ImageEditPresolveForm, self).__init__(**kwargs)
-        self.fields['focal_length'].label = _("Focal length")
-        self.fields['pixel_size'].label = _("Pixel size")
-        self.fields['binning'].label = _("Binning")
-        self.fields['scaling'].label = _("Scaling")
-
-    def clean_focal_length(self):
-        data = self.cleaned_data['focal_length']
-        if data and int(data):
-            return
-
-        if not data or data.isspace():
-            raise forms.ValidationError(_("Insert a focal length if you want to plate-solve."))
-
-    def clean_pixel_size(self):
-        data = self.cleaned_data['pixel_size']
-        if data and int(data):
-            return
-
-        if not data or data.isspace():
-            raise forms.ValidationError(_("Insert a pixel size if you want to plate-solve."))
-
     class Meta:
         model = Image
         fields = ('focal_length', 'pixel_size', 'binning', 'scaling',)
@@ -323,4 +288,17 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
         super(DeepSky_AcquisitionBasicForm, self).__init__(**kwargs)
         self.fields['date'].label = _("Date")
+
+
+class DefaultImageLicenseForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('default_license',)
+
+
+class ImageLicenseForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('license',)
+
 
