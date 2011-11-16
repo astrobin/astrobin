@@ -5,10 +5,7 @@ from django.utils.translation import ugettext as _
 from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet, EmptySearchQuerySet
 
-from models import Image
-from models import UserProfile
-from models import Location
-from models import DeepSky_Acquisition
+from models import *
 
 from search_indexes import xapian_escape
 
@@ -291,4 +288,17 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
         super(DeepSky_AcquisitionBasicForm, self).__init__(**kwargs)
         self.fields['date'].label = _("Date")
+
+
+class DefaultImageLicenseForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('default_license',)
+
+
+class ImageLicenseForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('license',)
+
 
