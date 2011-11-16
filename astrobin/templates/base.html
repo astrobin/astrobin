@@ -329,7 +329,7 @@
             $(document).ready(function() {
                 {% if request.user.is_authenticated %}
                 var ver = getInternetExplorerVersion();
-                if (ver == -1 || ver >= 9) {
+                if (ver == -1) {
                     common.start_listeners('{{request.user.username}}');
                 }
                 {%endif %}
