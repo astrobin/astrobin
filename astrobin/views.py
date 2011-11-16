@@ -18,6 +18,7 @@ from django.db import IntegrityError
 from django.utils.translation import ugettext as _
 from django.forms.models import inlineformset_factory
 from django.utils.functional import curry
+from django.utils.encoding import smart_str, smart_unicode
 
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
@@ -218,6 +219,7 @@ def image_detail(request, id):
         dsa_data = {
             'dates': [],
             'frames': [],
+            'integration': 0,
             'darks': [],
             'flats': [],
             'flat_darks': [],
@@ -226,7 +228,7 @@ def image_detail(request, id):
             'mean_fwhm': [],
         }
         for a in deep_sky_acquisitions:
-            if a.date is not None:
+            if a.date is not None and a.date not in dsa_data['dates']:
                 dsa_data['dates'].append(a.date)
                 m = MoonPhase(a.date)
                 moon_age_list.append(m.age)
@@ -247,6 +249,8 @@ def image_detail(request, id):
                     f+= ' bin %dx%d' % (a.binning, a.binning)
 
                 dsa_data['frames'].append(f)
+                dsa_data['integration'] += (a.duration * a.number / 3600.0)
+                print dsa_data['integration']
 
             for i in ['darks', 'flats', 'flat_darks', 'bias']:
                 if a.filter and getattr(a, i):
@@ -266,12 +270,15 @@ def image_detail(request, id):
             return float(sum(values)) / len(values)
 
         deep_sky_data = (
+            (_('Resolution'), '%dx%d' % (image.w, image.h) if (image.w and image.h) else None),
             (_('Dates'), dsa_data['dates']),
-            (_('Frames'), u', '.join(dsa_data['frames'])),
-            (_('Darks') , u', '.join([str(x) for x in dsa_data['darks']])),
-            (_('Flats'), u', '.join([str(x) for x in dsa_data['flats']])),
-            (_('Flat darks'), u', '.join([str(x) for x in dsa_data['flat_darks']])),
-            (_('Bias'), u', '.join([str(x) for x in dsa_data['bias']])),
+            (_('Locations'), u', '.join([x.name for x in image.locations.all()])),
+            (_('Frames'), u'\n'.join(dsa_data['frames'])),
+            (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
+            (_('Darks') , u'\n'.join([smart_unicode(x) for x in dsa_data['darks']])),
+            (_('Flats'), u'\n'.join([smart_unicode(x) for x in dsa_data['flats']])),
+            (_('Flat darks'), u'\n'.join([smart_unicode(x) for x in dsa_data['flat_darks']])),
+            (_('Bias'), u'\n'.join([smart_unicode(x) for x in dsa_data['bias']])),
             (_('Avg. Moon age'), "%.2f" % (average(moon_age_list), ) if moon_age_list else None),
             (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list), ) if moon_illuminated_list else None),
             (_('Mean SQM'), "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None),
@@ -306,6 +313,9 @@ def image_detail(request, id):
     if image.w > 0 and image.w < resized_size:
         resized_size = image.w
 
+    subjects = image.subjects.all()
+    subjects_limit = 5 
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -337,6 +347,10 @@ def image_detail(request, id):
                          'full': 'full' in request.GET,
                          'dates_label': _("Dates"),
                          'uploaded_on': uploaded_on,
+                         'subjects_short': subjects[:subjects_limit],
+                         'subjects_reminder': subjects[subjects_limit:],
+                         'subjects_all': subjects,
+                         'subjects_limit': subjects_limit,
                         })
 
 
@@ -450,9 +464,7 @@ def image_edit_presolve(request, id):
     if request.user != image.user:
         return HttpResponseForbidden()
 
-    form = ImageEditPresolveForm(
-        {'focal_length': image.focal_length,
-         'pixel_size': image.pixel_size})
+    form = ImageEditPresolveForm(instance=image)
     return render_to_response('image/edit/presolve.html',
         {'image': image,
          'form': form,
@@ -617,7 +629,12 @@ def image_edit_save_presolve(request):
             },
             context_instance = RequestContext(request))
 
-    form.save()
+
+    image = form.save(commit=False)
+    if not form.cleaned_data['scaling']:
+        image.scaling = 100
+    image.save()
+
     if image.is_stored:
         image.solve()
 
@@ -736,7 +753,8 @@ def image_edit_save_basic(request):
     image.description = form.cleaned_data['description']
 
     image.save()
-    image.process(True if (image.focal_length and image.pixel_size) else False)
+    if not image.is_stored:
+        image.process(True if (image.focal_length and image.pixel_size) else False)
 
     if 'was_not_ready' in request.POST:
         return HttpResponseRedirect(image.get_absolute_url())
@@ -1500,6 +1518,12 @@ def help(request):
 @require_GET
 def faq(request):
     return render_to_response('faq.html',
+        context_instance=RequestContext(request))
+
+
+@require_GET
+def tos(request):
+    return render_to_response('tos.html',
         context_instance=RequestContext(request))
 
 

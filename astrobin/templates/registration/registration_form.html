@@ -8,6 +8,10 @@
 
 <div class="sided-main-content">
 <h1>{% trans "Register with AstroBin" %}</h1>
+<p>
+    {% url tos as tos_url %}
+    {% blocktrans %}By registering with AstroBin, you agree to our <a href="{{tos_url}}">terms of service</a>.{% endblocktrans %}
+</p>
 <form method="post" action=".">{% csrf_token %}
   {{ form.as_p }}
 
