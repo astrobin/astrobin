@@ -18,6 +18,7 @@ from django.db import IntegrityError
 from django.utils.translation import ugettext as _
 from django.forms.models import inlineformset_factory
 from django.utils.functional import curry
+from django.utils.encoding import smart_str, smart_unicode
 
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
@@ -156,9 +157,27 @@ def no_javascript(request):
 @require_GET
 def image_detail(request, id):
     """ Show details of an image"""
+    image = get_object_or_404(Image, pk=id)
+
+    is_revision = False
+    revision_id = 0
+    revision_image = None
+    revisions = ImageRevision.objects.filter(image=image)
+    is_final = image.is_final
+    if 'r' in request.GET and request.GET.get('r') != '0':
+        is_revision = True
+        revision_id = int(request.GET['r'])
+        revision_image = ImageRevision.objects.get(id=revision_id)
+        is_final = revision_image.is_final
+        revisions = revisions.exclude(id=revision_id)
+        is_ready = revision_image.is_stored
+    elif 'r' not in request.GET:
+        if not is_final:
+            final = revisions.filter(is_final = True)[0]
+            return HttpResponseRedirect('/%i/?r=%i' % (image.id, final.id))
+
     from moon import MoonPhase;
 
-    image = get_object_or_404(Image, pk=id)
     is_ready = image.is_stored
 
     already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
@@ -218,6 +237,7 @@ def image_detail(request, id):
         dsa_data = {
             'dates': [],
             'frames': [],
+            'integration': 0,
             'darks': [],
             'flats': [],
             'flat_darks': [],
@@ -226,7 +246,7 @@ def image_detail(request, id):
             'mean_fwhm': [],
         }
         for a in deep_sky_acquisitions:
-            if a.date is not None:
+            if a.date is not None and a.date not in dsa_data['dates']:
                 dsa_data['dates'].append(a.date)
                 m = MoonPhase(a.date)
                 moon_age_list.append(m.age)
@@ -247,6 +267,8 @@ def image_detail(request, id):
                     f+= ' bin %dx%d' % (a.binning, a.binning)
 
                 dsa_data['frames'].append(f)
+                dsa_data['integration'] += (a.duration * a.number / 3600.0)
+                print dsa_data['integration']
 
             for i in ['darks', 'flats', 'flat_darks', 'bias']:
                 if a.filter and getattr(a, i):
@@ -266,12 +288,15 @@ def image_detail(request, id):
             return float(sum(values)) / len(values)
 
         deep_sky_data = (
+            (_('Resolution'), '%dx%d' % (image.w, image.h) if (image.w and image.h) else None),
             (_('Dates'), dsa_data['dates']),
-            (_('Frames'), u', '.join(dsa_data['frames'])),
-            (_('Darks') , u', '.join([str(x) for x in dsa_data['darks']])),
-            (_('Flats'), u', '.join([str(x) for x in dsa_data['flats']])),
-            (_('Flat darks'), u', '.join([str(x) for x in dsa_data['flat_darks']])),
-            (_('Bias'), u', '.join([str(x) for x in dsa_data['bias']])),
+            (_('Locations'), u', '.join([x.name for x in image.locations.all()])),
+            (_('Frames'), u'\n'.join(dsa_data['frames'])),
+            (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
+            (_('Darks') , u'\n'.join([smart_unicode(x) for x in dsa_data['darks']])),
+            (_('Flats'), u'\n'.join([smart_unicode(x) for x in dsa_data['flats']])),
+            (_('Flat darks'), u'\n'.join([smart_unicode(x) for x in dsa_data['flat_darks']])),
+            (_('Bias'), u'\n'.join([smart_unicode(x) for x in dsa_data['bias']])),
             (_('Avg. Moon age'), "%.2f" % (average(moon_age_list), ) if moon_age_list else None),
             (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list), ) if moon_illuminated_list else None),
             (_('Mean SQM'), "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None),
@@ -289,22 +314,24 @@ def image_detail(request, id):
         if UserProfile.objects.get(user=image.user) in profile.follows.all():
             follows = True
 
-    is_revision = False
-    revision_id = 0
-    revision_image = None
-    revisions = ImageRevision.objects.filter(image=image)
-    if 'r' in request.GET:
-        is_revision = True
-        revision_id = int(request.GET['r'])
-        revision_image = ImageRevision.objects.get(id=revision_id)
-        revisions = revisions.exclude(id=revision_id)
-        is_ready = revision_image.is_stored
-
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
     resized_size = settings.RESIZED_IMAGE_SIZE
     if image.w > 0 and image.w < resized_size:
         resized_size = image.w
+
+    subjects = image.subjects.all()
+    subjects_limit = 5 
+
+    licenses = (
+        (0, 'cc/c.png',           LICENSE_CHOICES[0][1]),
+        (1, 'cc/cc-by-nc-sa.png', LICENSE_CHOICES[1][1]),
+        (2, 'cc/cc-by-nc.png',    LICENSE_CHOICES[2][1]),
+        (3, 'cc/cc-by-nc-nd.png', LICENSE_CHOICES[3][1]),
+        (4, 'cc/cc-by.png',       LICENSE_CHOICES[4][1]),
+        (5, 'cc/cc-by-sa.png',    LICENSE_CHOICES[5][1]),
+        (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
+    )
 
     return object_detail(
         request,
@@ -334,9 +361,20 @@ def image_detail(request, id):
                          'is_revision': is_revision,
                          'revision_image': revision_image,
                          'is_ready': is_ready,
+                         'is_final': is_final,
                          'full': 'full' in request.GET,
                          'dates_label': _("Dates"),
                          'uploaded_on': uploaded_on,
+                         'subjects_short': subjects[:subjects_limit],
+                         'subjects_reminder': subjects[subjects_limit:],
+                         'subjects_all': subjects,
+                         'subjects_limit': subjects_limit,
+                         'license_icon': licenses[image.license][1],
+                         'license_title': licenses[image.license][2],
+                         # Because of a regression introduced at
+                         # revision e1dad12babe5, now we have to
+                         # implement this ugly hack.
+                         'solved_ext': '.png' if image.uploaded < datetime.datetime(2011, 11, 13, 5, 3, 1) else image.original_ext,
                         })
 
 
@@ -347,11 +385,10 @@ def image_full(request, id):
     is_revision = False
     revision_id = 0
     revision_image = None
-    if 'r' in request.GET:
-        is_revision = True
-        revision_id = int(request.GET['r'])
-        revision_image = ImageRevision.objects.get(id=revision_id)
-
+    if 'r' in request.GET and request.GET.get('r') != '0':
+            is_revision = True
+            revision_id = int(request.GET['r'])
+            revision_image = ImageRevision.objects.get(id=revision_id)
 
     return object_detail(
         request,
@@ -427,10 +464,13 @@ def image_upload_process(request):
     for chunk in file.chunks():
         destination.write(chunk)
     destination.close()
+
+    profile = UserProfile.objects.get(user = request.user)
     image = Image(
         filename=filename,
         original_ext=original_ext,
-        user=request.user)
+        user=request.user,
+        license = profile.default_license)
 
     image.save()
 
@@ -450,9 +490,7 @@ def image_edit_presolve(request, id):
     if request.user != image.user:
         return HttpResponseForbidden()
 
-    form = ImageEditPresolveForm(
-        {'focal_length': image.focal_length,
-         'pixel_size': image.pixel_size})
+    form = ImageEditPresolveForm(instance=image)
     return render_to_response('image/edit/presolve.html',
         {'image': image,
          'form': form,
@@ -602,6 +640,59 @@ def image_edit_acquisition_reset(request, id):
 
 
 @login_required
+@require_GET
+def image_edit_make_final(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    revisions = ImageRevision.objects.filter(image = image)
+    for r in revisions:
+        r.is_final = False
+        r.save()
+    image.is_final = True
+    image.save()
+
+    return HttpResponseRedirect('/%i/' % image.id)
+
+
+@login_required
+@require_GET
+def image_edit_revision_make_final(request, id):
+    r = get_object_or_404(ImageRevision, pk=id)
+    if request.user != r.image.user:
+        return HttpResponseForbidden()
+
+    other = ImageRevision.objects.filter(image = r.image)
+    for i in other:
+        i.is_final = False
+        i.save()
+
+    r.image.is_final = False
+    r.image.save()
+
+    r.is_final = True
+    r.save()
+
+    return HttpResponseRedirect('/%i/?r=%i' % (r.image.id, r.id))
+
+
+@login_required
+@require_GET
+def image_edit_license(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    form = ImageLicenseForm(instance = image)
+    return render_to_response(
+        'image/edit/license.html',
+        {'form': form,
+         'image': image},
+        context_instance = RequestContext(request))
+
+
+@login_required
 @require_POST
 def image_edit_save_presolve(request):
     image_id = request.POST.get('image_id')
@@ -617,7 +708,12 @@ def image_edit_save_presolve(request):
             },
             context_instance = RequestContext(request))
 
-    form.save()
+
+    image = form.save(commit=False)
+    if not form.cleaned_data['scaling']:
+        image.scaling = 100
+    image.save()
+
     if image.is_stored:
         image.solve()
 
@@ -736,7 +832,8 @@ def image_edit_save_basic(request):
     image.description = form.cleaned_data['description']
 
     image.save()
-    image.process(True if (image.focal_length and image.pixel_size) else False)
+    if not image.is_stored:
+        image.process(True if (image.focal_length and image.pixel_size) else False)
 
     if 'was_not_ready' in request.POST:
         return HttpResponseRedirect(image.get_absolute_url())
@@ -891,6 +988,25 @@ def image_edit_save_acquisition(request):
 
 
 @login_required
+@require_POST
+def image_edit_save_license(request):
+    image_id = request.POST.get('image_id')
+    image = get_object_or_404(Image, pk=image_id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    form = ImageLicenseForm(data = request.POST, instance = image)
+    if not form.is_valid():
+        return render_to_response(
+            'image/edit/license.html',
+            {'form': form},
+            context_instance = RequestContext(request))
+
+    form.save()
+
+    return HttpResponseRedirect('/edit/license/%s/?saved' % image_id)
+
+@login_required
 @require_GET
 def image_delete(request, id):
     image = get_object_or_404(Image, pk=id) 
@@ -994,6 +1110,34 @@ def user_profile_save_basic(request):
             context_instance=RequestContext(request))
 
     return HttpResponseRedirect("/profile/edit/basic/?saved");
+
+
+@login_required
+@require_GET
+def user_profile_edit_license(request):
+    profile = UserProfile.objects.get(user = request.user)
+    form = DefaultImageLicenseForm(instance = profile)
+    return render_to_response(
+        'user/profile/edit/license.html',
+        {'form': form},
+        context_instance = RequestContext(request))
+
+
+@login_required
+@require_POST
+def user_profile_save_license(request):
+    profile = UserProfile.objects.get(user = request.user)
+    form = DefaultImageLicenseForm(data = request.POST, instance = profile)
+
+    if not form.is_valid():
+        return render_to_response(
+            'user/profile/edit/license.html',
+            {'form': form},
+            context_instance = RequestContext(request))
+
+    form.save()
+
+    return HttpResponseRedirect('/profile/edit/license/?saved')
 
 
 @login_required
@@ -1148,10 +1292,12 @@ def user_profile_flickr_import(request):
                     destination.write(file.read())
                     destination.close()
 
+                    profile = UserProfile.objects.get(user = request.user)
                     image = Image(filename=filename, original_ext=original_ext,
                                   user=request.user,
                                   title=title if title is not None else '',
-                                  description=description if description is not None else '')
+                                  description=description if description is not None else '',
+                                  license = profile.default_license)
                     image.save()
                     image.process()
 
@@ -1478,7 +1624,10 @@ def image_revision_upload_process(request):
         destination.write(chunk)
     destination.close()
 
-    image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext)
+    image.is_final = False
+    image.save()
+
+    image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext, is_final=True)
     image_revision.save()
     image_revision.process()
 
@@ -1500,6 +1649,12 @@ def help(request):
 @require_GET
 def faq(request):
     return render_to_response('faq.html',
+        context_instance=RequestContext(request))
+
+
+@require_GET
+def tos(request):
+    return render_to_response('tos.html',
         context_instance=RequestContext(request))
 
 

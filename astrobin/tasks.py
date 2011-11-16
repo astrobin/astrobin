@@ -62,18 +62,22 @@ def solve_image(image, lang, use_scale=True, callback=None):
         download_from_bucket(uid + original_ext, path)
 
     if use_scale:
+        print "Using scale."
         # Optimize for most cases
         scale_low = 0.5
         scale_high = 5
         if image.focal_length and image.pixel_size:
             scale = float(image.pixel_size) / float(image.focal_length) * 206.3
+            print "Setting initial scale to %f." % scale
             # Account for the fact that we're using a resized image
             our_file = open(path + uid + original_ext)
             our_data = StringIO.StringIO(our_file.read())
             our_image = PILImage.open(our_data)
             (our_w, our_h) = our_image.size
 
-            scale *= (image.w * 1./our_w)
+            if image.w > 0:
+                scale *= (image.w * 1./our_w)
+            print "Scale changed to %f because resized image is (%f, %f) and original is (%f, %f)." % (scale, our_w, our_h, image.w, image.h)
 
             # Allow a 20% tolerance
             scale_low = scale * 0.95
@@ -108,7 +112,7 @@ def solve_image(image, lang, use_scale=True, callback=None):
         del command[3:7]
 
     print command
-    run_popen_with_timeout(command, 300 if use_scale else 600)
+    run_popen_with_timeout(command, 330 if use_scale else 630)
 
     solved_filename = settings.UPLOADS_DIRECTORY + uid + '-ngc.png'
     if os.path.exists(settings.UPLOADS_DIRECTORY + uid + '.solved'):

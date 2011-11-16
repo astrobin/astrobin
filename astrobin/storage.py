@@ -107,7 +107,10 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
     # Then mask to rounded corners
     mask = PILImage.open('astrobin/thumbnail-mask.png').convert('L');
     output = ImageOps.fit(croppedImage, mask.size, centering=(0.5, 0.5))
-    output.putalpha(mask)
+    try:
+        output.putalpha(mask)
+    except ValueError:
+        pass
 
     # Then save to bucket
     thumbnailFile = StringIO.StringIO()
