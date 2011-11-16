@@ -40,6 +40,9 @@
                                     <li class="bg-icon icon-edit-acquisition">
                                         <span class="text"><a href="{% url image_edit_acquisition image.id %}">{% trans "Edit acquisition details" %}</a></span>
                                     </li>
+                                    <li class="bg-icon icon-change-license">
+                                        <span class="text"><a href="{% url image_edit_license image.id %}">{% trans "Change license" %}</a></span>
+                                    </li>
                                     <li class="bg-icon icon-upload">
                                         <span class="text"><a class="upload-revision" href="#">{% trans "Upload new revision" %}</a></span>
                                     </li>
@@ -193,15 +196,25 @@
             </div>
 
             <div class="main-image-data">
-                <ul>
-                    <li class="title">{{image.title|escape|default:_("(no title)")}}</li>
-                    <li class="uploaded">({% trans "uploaded" %}: {{uploaded_on|ago}}</li>
-                    <li class="author">
-                        {% url user_page image.user.username as the_url %}
-                        {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %})</li>
-                    {% if image.subjects %}
-                    {% endif %}
-                </ul>
+                <table class="title">
+                    <tr>
+                        <td class="data">
+                            <h2>{{image.title|escape|default:_("(no title)")}}</h2>
+                            <span>
+                                ({% trans "uploaded" %}: {{uploaded_on|ago}}
+                                {% url user_page image.user.username as the_url %}
+                                {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %})
+                            </span>
+                        </td>
+                        <td class="license">
+                            <a target="_blank" href="http://creativecommons.org/licenses/">
+                                <img src="/static/icons/{{license_icon}}"
+                                     alt="{% trans "License" %}: {{license_title}}"
+                                     title="{% trans "License" %}: {{license_title}}" />
+                            </a>
+                        </td>
+                    </tr>
+                </table>
                 <div class="hline"></div>
                 <p>
                     {% trans "Contains" %}:

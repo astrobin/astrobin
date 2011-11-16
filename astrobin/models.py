@@ -22,6 +22,18 @@ from timezones.forms import PRETTY_TIMEZONE_CHOICES
 from tasks import store_image, solve_image, delete_image
 from notifications import push_notification
 
+
+LICENSE_CHOICES = (
+    (0, _("None (All rights reserved)")),
+    (1, _("Attribution-NonCommercial-ShareAlike Creative Commons")),
+    (2, _("Attribution-NonCommercial Creative Commons")),
+    (3, _("Attribution-NonCommercial-NoDerivs Creative Commons")),
+    (4, _("Attribution Creative Commons")),
+    (5, _("Attribution-ShareAlike Creative Commons")),
+    (6, _("Attribution-NoDerivs Creative Commons")),
+)
+
+
 class Gear(models.Model):
     name = models.CharField(_("Name"), max_length=64)
 
@@ -305,6 +317,12 @@ class Image(models.Model):
     h = models.IntegerField(editable=False, default=0)
     animated = models.BooleanField(editable=False, default=False)
 
+    license = models.IntegerField(
+        choices = LICENSE_CHOICES,
+        default = 0,
+        verbose_name = _("License"),
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
@@ -570,6 +588,16 @@ class UserProfile(models.Model):
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
 
     follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers', symmetrical=False)
+
+    default_license = models.IntegerField(
+        choices = LICENSE_CHOICES,
+        default = 0,
+        verbose_name = _("Default license"),
+        help_text = _(
+            "The license you select here is automatically applied to "
+            "all your new images."
+        ),
+    )
 
     def __unicode__(self):
         return "%s' profile" % self.user.username
