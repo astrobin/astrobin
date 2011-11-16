@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-16 01:36-0500\n"
-"PO-Revision-Date: 2011-11-16 01:42-0500\n"
+"POT-Creation-Date: 2011-11-16 05:50-0500\n"
+"PO-Revision-Date: 2011-11-16 05:52-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -300,7 +300,7 @@ msgstr "Licenza"
 #: models.py:331
 #: templates/image/detail.html:202
 #: templates/image/full.html:54
-#: templates/inclusion_tags/image_list.html:11
+#: templates/inclusion_tags/image_list.html:14
 msgid "(no title)"
 msgstr "(senza titolo)"
 
@@ -525,66 +525,66 @@ msgstr "Giorno lunare medio"
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:435
-#: views.py:450
-#: views.py:1554
-#: views.py:1569
+#: views.py:439
+#: views.py:454
+#: views.py:1560
+#: views.py:1575
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida. I formati accettati sono JPG, PNG e GIF."
 
-#: views.py:513
 #: views.py:517
-#: views.py:695
-#: views.py:698
-#: views.py:752
-#: views.py:776
+#: views.py:521
+#: views.py:699
+#: views.py:702
+#: views.py:756
+#: views.py:780
 #: templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
-#: views.py:514
-#: views.py:696
-#: views.py:753
-#: views.py:777
+#: views.py:518
+#: views.py:700
+#: views.py:757
+#: views.py:781
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
-#: views.py:515
+#: views.py:519
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:518
-#: views.py:699
+#: views.py:522
+#: views.py:703
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:519
+#: views.py:523
 #: templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:877
+#: views.py:881
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:882
-#: views.py:894
-#: views.py:932
+#: views.py:886
+#: views.py:898
+#: views.py:936
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1432
+#: views.py:1438
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1491
+#: views.py:1497
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1515
+#: views.py:1521
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -892,34 +892,42 @@ msgid "Nonsense. AstroBin has <strong>not</strong> been made to showcase beautif
 msgstr "Sciocchezze. Astrobin <strong>non</strong> è stato realizzato per mostrare solo le immagini bellissime, ma per dare a tutti un'opportunità di contribuire ad un vasto (e sempre in crescita) impegno di centralizzazione e catalogazione di importanti dati. Quello scatto veloce di M31 che hai ottenuto ieri fra le le nuvole è perfettamente al suo posto, su AstroBin. Non essere timido e pubblicalo qui!"
 
 #: templates/faq.html:31
+msgid "What's that orange ribbon on the thumbnails?"
+msgstr "Che cos'è quel nastro arancione sulle miniature?"
+
+#: templates/faq.html:33
+msgid "It's a badge that proudly marks the images that were plate-solved."
+msgstr "È una spilla che marchia le immagini a cui è stata applicata la risoluzione astrometrica."
+
+#: templates/faq.html:37
 msgid "Where did you get the idea for this site?"
 msgstr "Come ti è venuto l'idea per questo sito?"
 
-#: templates/faq.html:33
+#: templates/faq.html:39
 msgid "I'm an astrophotographer myself, and an active member of several amateur astronomy forums. For some time I have seen how lots and lots of valuable images were scattered all over the Internet: on general purpose image hosting websites, on forum upload boards, on personal website, and on various places of disposable content."
 msgstr "Io stesso sono un astrofotografo, ed un membro attivo di numerosi forum di astronomia amatoriale. Per un po' di tempo, ho visto che tante e tante immagini preziose venivano un po' sparpagliate in giro per Internet: siti di hosting di immagini generici, upload diretto su forum, siti personali, e persino spazi usa-e-getta."
 
-#: templates/faq.html:36
+#: templates/faq.html:42
 msgid "I realized that the astrophotography community was lacking a central hub. It needed a way to store all the data it was producing in a reliable and uniform fashion. It needed the visibility that such a great community deserves."
 msgstr "Mi sono reso conto che alla comunità di astrofotografia mancava un perno centrale. Aveva bisono di conservare tutti i dati che produceva in un modo affidabile ed uniforme. Aveva bisogno della visibilità che una comunità del genere merita."
 
-#: templates/faq.html:40
+#: templates/faq.html:46
 msgid "What are the plans for the future?"
 msgstr "Quali sono i progetti per il futuro?"
 
-#: templates/faq.html:42
+#: templates/faq.html:48
 msgid "<em>AstroBin</em> is just starting out, and this time we can really say that the sky is the limit! I've got tons of ideas in the pipeline. As the user base grows, so does the data. Suddenly, things like automated supernovae search become possible: you could simply upload an image of a galaxy, and AstroBin could compare it to pictures of the same galaxy taken previously."
 msgstr "<em>AstroBin</em> è appena nato, e stavolta è proprio opportuno dire che il limite è solo il cielo! Ci sono moltissime idee in cantiere. Con l'aumentare degli utenti, anche la mole di dati aumenta. E quindi, cose come la ricerca automatica di supernove diventano possibili: potresti semplicemente caricare la tua foto di una galassia, ed AstroBin potrebbe paragonarla a foto della stessa galassia scattate precedentemente."
 
-#: templates/faq.html:45
+#: templates/faq.html:51
 msgid "AstroBin could also recommend subjects for you to image! Knowing your equipment, your location, and comparing what you have imaged to what users similar to you have, AstroBin could suggest your next challenge!"
 msgstr "AstroBin potrebbe anche raccomandarti soggetti da fotografare! Conoscendo la tua strumentazione, la tua posizione geografica, e paragonando quello che hai fotografato finora con quello che altri utenti simili a te hanno fotografato, AstroBin potrebbe suggerirti la tua prossima sfida!"
 
-#: templates/faq.html:48
+#: templates/faq.html:54
 msgid "Another interesting possibility are <em>Smart Albums</em>. Since all your images are supposed to be accompanied by lots of data about their acquisition, it will be easy for AstroBin to create dynamic image collections. So you can have your images quickly sorted by type of subject (galaxy, nebula, etc) or by telescope, or by some other piece of equipment, or by year."
 msgstr "Un'altra possibilità interessante è quella degli <em>Album Intelligenti</em>. Dato che tutte le tue immagini, si presume, sono accompagnate da molti dati riguardo la loro acquisizione, sarà facile per AstroBin creare degli album dinamici. Così puoi avere le tue immagini velocemente ordinate per tipo di soggetto (galassia, nebulosa, ecc) oppure per telescopio, o per qualche altra strumentazione, oppure per anno."
 
-#: templates/faq.html:51
+#: templates/faq.html:57
 msgid "Then there are stats, or course. As the amount of data increases, there is literally no limit at the amount of interesting stats that can be concieved."
 msgstr "E poi ci sono le statitiche, ovviamente. Con l'aumentare della quantità di dati, non c'è veramente alcun limite alla mole di statistiche interessanti che possono essere concepite."
 
@@ -1623,21 +1631,21 @@ msgstr "Salvato!"
 msgid "Form saved. Thank you!"
 msgstr "Salvato. Grazie!"
 
-#: templates/inclusion_tags/image_list.html:18
+#: templates/inclusion_tags/image_list.html:21
 #, python-format
 msgid " by <a href=\"%(user_page)s\">%(user)s</a>"
 msgstr " di <a href=\"%(user_page)s\">%(user)s</a>"
 
-#: templates/inclusion_tags/image_list.html:23
+#: templates/inclusion_tags/image_list.html:26
 msgid "No images"
 msgstr "Nessuna immagine"
 
-#: templates/inclusion_tags/image_list.html:30
+#: templates/inclusion_tags/image_list.html:33
 #: templates/inclusion_tags/related_images.html:16
 msgid "newer"
 msgstr "più recenti"
 
-#: templates/inclusion_tags/image_list.html:34
+#: templates/inclusion_tags/image_list.html:37
 #: templates/inclusion_tags/related_images.html:20
 msgid "older"
 msgstr "più vecchie"
