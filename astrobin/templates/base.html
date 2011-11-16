@@ -58,7 +58,7 @@
         </script>
     </head>
 
-    <body{% if request.user.is_authenticated %} onload="common.start_listeners('{{request.user.username}}');"{%endif %}>
+    <body>
         <!-- wrap -->
         <div id="wrap">
 
@@ -311,7 +311,29 @@
 
         <!-- javascript -->
         <script type="text/javascript">
+            function getInternetExplorerVersion()
+            // Returns the version of Internet Explorer or a -1
+            // (indicating the use of another browser).
+            {
+              var rv = -1; // Return value assumes failure.
+              if (navigator.appName == 'Microsoft Internet Explorer')
+              {
+                var ua = navigator.userAgent;
+                var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+                if (re.exec(ua) != null)
+                  rv = parseFloat( RegExp.$1 );
+              }
+              return rv;
+            }
+
             $(document).ready(function() {
+                {% if request.user.is_authenticated %}
+                var ver = getInternetExplorerVersion();
+                if (ver == -1 || ver >= 9) {
+                    common.start_listeners('{{request.user.username}}');
+                }
+                {%endif %}
+                
                 $('.capty').capty({animation: 'fade', speed: 150, height: 45});
 
                 // date and time pickers
