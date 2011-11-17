@@ -15,7 +15,7 @@
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
         </a>
         <div id="capty-content-{{image.id}}">
-            {{image.title|escape|truncatechars:26}}<br/>
+            {{image.title|escape|truncatechars:25}}<br/>
             {% with image.user.username|truncatechars:24 as user %}
             {% url user_page user as user_page %}
             {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
