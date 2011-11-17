@@ -138,14 +138,23 @@ def index(request):
         if profile and profile.telescopes.all() and profile.cameras.all():
             form = ImageUploadForm()
 
+    sqs = SearchQuerySet().filter(index_name = 'ImageIndex')
+    sqs = sqs.order_by('-last_acquisition_date, -uploaded')
+
+    response_dict = {'thumbnail_size':settings.THUMBNAIL_SIZE,
+                     's3_url':settings.S3_URL,
+                     'upload_form':form,}
+
+    if 'upload_error' in request.GET:
+        response_dict['upload_error'] = True
+
     return object_list(
         request, 
-        queryset=Image.objects.filter(is_stored=True).order_by('-uploaded'),
+        queryset=sqs,
         template_name='index.html',
         template_object_name='image',
-        extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                         's3_url':settings.S3_URL,
-                         'upload_form':form,})
+        paginate_by = 20,
+        extra_context = response_dict)
 
 
 @require_GET
@@ -340,49 +349,54 @@ def image_detail(request, id):
         (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
     )
 
+    response_dict = {'s3_url': settings.S3_URL,
+                     'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
+                     'resized_size': resized_size,
+                     'already_voted': already_voted,
+                     'current_rating': rating,
+                     'related': related,
+                     'related_images': related_images,
+                     'gear_list': gear_list,
+                     'image_type': image_type,
+                     'ssa': ssa,
+                     'deep_sky_data': deep_sky_data,
+                     'mod': request.GET.get('mod') if 'mod' in request.GET else '',
+                     'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
+                     'solved': True if 'mod' in request.GET and request.GET['mod'] == 'solved' else False,
+                     'follows': follows,
+                     'private_message_form': PrivateMessageForm(),
+                     'bring_to_attention_form': BringToAttentionForm(),
+                     'upload_revision_form': ImageRevisionUploadForm(),
+                     'revisions': revisions,
+                     'is_revision': is_revision,
+                     'revision_image': revision_image,
+                     'is_ready': is_ready,
+                     'is_final': is_final,
+                     'full': 'full' in request.GET,
+                     'dates_label': _("Dates"),
+                     'uploaded_on': uploaded_on,
+                     'subjects_short': subjects[:subjects_limit],
+                     'subjects_reminder': subjects[subjects_limit:],
+                     'subjects_all': subjects,
+                     'subjects_limit': subjects_limit,
+                     'license_icon': licenses[image.license][1],
+                     'license_title': licenses[image.license][2],
+                     # Because of a regression introduced at
+                     # revision e1dad12babe5, now we have to
+                     # implement this ugly hack.
+                     'solved_ext': '.png' if image.uploaded < datetime.datetime(2011, 11, 13, 5, 3, 1) else image.original_ext,
+                    }
+
+    if 'upload_error' in request.GET:
+        response_dict['upload_error'] = True
+
     return object_detail(
         request,
         queryset = Image.objects.all(),
         object_id = id,
         template_name = 'image/detail.html',
         template_object_name = 'image',
-        extra_context = {'s3_url': settings.S3_URL,
-                         'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
-                         'resized_size': resized_size,
-                         'already_voted': already_voted,
-                         'current_rating': rating,
-                         'related': related,
-                         'related_images': related_images,
-                         'gear_list': gear_list,
-                         'image_type': image_type,
-                         'ssa': ssa,
-                         'deep_sky_data': deep_sky_data,
-                         'mod': request.GET.get('mod') if 'mod' in request.GET else '',
-                         'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
-                         'solved': True if 'mod' in request.GET and request.GET['mod'] == 'solved' else False,
-                         'follows': follows,
-                         'private_message_form': PrivateMessageForm(),
-                         'bring_to_attention_form': BringToAttentionForm(),
-                         'upload_revision_form': ImageRevisionUploadForm(),
-                         'revisions': revisions,
-                         'is_revision': is_revision,
-                         'revision_image': revision_image,
-                         'is_ready': is_ready,
-                         'is_final': is_final,
-                         'full': 'full' in request.GET,
-                         'dates_label': _("Dates"),
-                         'uploaded_on': uploaded_on,
-                         'subjects_short': subjects[:subjects_limit],
-                         'subjects_reminder': subjects[subjects_limit:],
-                         'subjects_all': subjects,
-                         'subjects_limit': subjects_limit,
-                         'license_icon': licenses[image.license][1],
-                         'license_title': licenses[image.license][2],
-                         # Because of a regression introduced at
-                         # revision e1dad12babe5, now we have to
-                         # implement this ugly hack.
-                         'solved_ext': '.png' if image.uploaded < datetime.datetime(2011, 11, 13, 5, 3, 1) else image.original_ext,
-                        })
+        extra_context = response_dict)
 
 
 @require_GET
@@ -442,30 +456,14 @@ def image_upload_process(request):
     if original_ext == '.jpeg':
         original_ext = '.jpg'
     if original_ext not in ('.jpg', '.png', '.gif'):
-        return object_list(
-            request,
-            queryset=Image.objects.filter(is_stored=True)[:15],
-            template_name='index.html',
-            template_object_name='image',
-            extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                             's3_url':settings.S3_URL,
-                             'upload_form': ImageUploadForm(),
-                             'context_message': {'error': True, 'text': _("Invalid image. Allowed formats are JPG, PNG and GIF.")}})
+        return HttpResponseRedirect('/?upload_error')
 
     try:
         from PIL import Image as PILImage
         trial_image = PILImage.open(file)
         trial_image.verify()
     except:
-        return object_list(
-            request,
-            queryset=Image.objects.filter(is_stored=True)[:15],
-            template_name='index.html',
-            template_object_name='image',
-            extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                             's3_url':settings.S3_URL,
-                             'upload_form': ImageUploadForm(),
-                             'context_message': {'error': True, 'text': _("Invalid image. Allowed formats are JPG, PNG and GIF.")}})
+        return HttpResponseRedirect('/?upload_error')
 
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
@@ -1074,11 +1072,16 @@ def user_page(request, username):
         (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
     )
 
+    sqs = SearchQuerySet().filter(index_name = 'ImageIndex')
+    sqs = sqs.filter(username_auto = user.username)
+    sqs = sqs.order_by('-last_acquisition_date, -uploaded')
+
     return object_list(
         request,
-        queryset=Image.objects.filter(user=user).order_by('-uploaded'),
+        queryset=sqs,
         template_name='user/profile.html',
         template_object_name='image',
+        paginate_by = 20,
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                          's3_url':settings.S3_URL,
                          'user':user,
@@ -1621,7 +1624,7 @@ def image_revision_upload_process(request):
 
     form = ImageRevisionUploadForm(request.POST, request.FILES)
     if not form.is_valid():
-        return HttpResponseRedirect(image.get_absolute_url())
+        return HttpResponseRedirect('/%i/?upload_error' % image.id)
     file = request.FILES["file"]
 
     filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
@@ -1629,30 +1632,14 @@ def image_revision_upload_process(request):
     if original_ext == '.jpeg':
         original_ext = '.jpg'
     if original_ext not in ('.jpg', '.png', '.gif'):
-        return object_list(
-            request,
-            queryset=Image.objects.filter(is_stored=True)[:15],
-            template_name='index.html',
-            template_object_name='image',
-            extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                             's3_url':settings.S3_URL,
-                             'upload_form': ImageUploadForm(),
-                             'context_message': {'error': True, 'text': _("Invalid image. Allowed formats are JPG, PNG and GIF.")}})
+        return HttpRenderRedirect('/%i/?upload_error' % image.id)
 
     try:
         from PIL import Image as PILImage
         trial_image = PILImage.open(file)
         trial_image.verify()
     except:
-        return object_list(
-            request,
-            queryset=Image.objects.filter(is_stored=True)[:15],
-            template_name='index.html',
-            template_object_name='image',
-            extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                             's3_url':settings.S3_URL,
-                             'upload_form': ImageUploadForm(),
-                             'context_message': {'error': True, 'text': _("Invalid image. Allowed formats are JPG, PNG and GIF.")}})
+        return HttpRenderRedirect('/%i/?upload_error' % image.id)
 
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
@@ -1699,6 +1686,7 @@ def leaderboard(request):
         queryset = queryset,
         template_name = 'leaderboard.html',
         template_object_name = 'user',
+        paginate_by=50,
         extra_context = response_dict,
     )
 

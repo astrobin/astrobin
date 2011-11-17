@@ -28,25 +28,6 @@ def current(request, pattern):
     return ''
 
 
-@register.inclusion_tag('inclusion_tags/image_list.html')
-def image_list(request, object_list):
-    paginator = Paginator(object_list, 20)
-
-    page = request.GET.get('p')
-    try:
-        images = paginator.page(page)
-    except (TypeError, PageNotAnInteger):
-        images = paginator.page(1)
-    except EmptyPage:
-        images = paginator.page(paginator.num_pages)
-
-    return {'images': images,
-            'thumbnail_size':settings.THUMBNAIL_SIZE,
-            's3_url':settings.S3_URL,
-            'query':request.GET.get('q'),
-           }
-
-
 @register.inclusion_tag('inclusion_tags/related_images.html')
 def related_images(request, object_list, type):
     paginator = Paginator(object_list, 10)
@@ -288,3 +269,53 @@ def truncatechars(value, arg):
 truncatechars.is_safe = True
 truncatechars = stringfilter(truncatechars)
 
+
+def image_list(context, request, object_list):
+    adjacent_pages = 3
+
+    # If we're paginating a search, we've got to replace some
+    # suff in the context, because haystack folks thought they
+    # were cool with naming their search result 'page'.
+    paginator = context['paginator']
+    try:
+        page = int(context['page'])
+        pages = int(context['pages'])
+        page_obj = context['page_obj']
+        next = context['next']
+        previous = context['previous']
+        has_next = context['has_next']
+        has_previous = context['has_previous']
+    except:
+        page_obj = context['page']
+        page = page_obj.number
+        pages = paginator.num_pages
+        next = page_obj.next_page_number
+        previous = page_obj.previous_page_number
+        has_next = page_obj.has_next
+        has_previous = page_obj.has_previous
+
+    startPage = max(page - adjacent_pages, 1)
+    if startPage <= 3: startPage = 1
+    endPage = page + adjacent_pages + 1
+    if endPage >= pages - 1: endPage = pages + 1
+    page_numbers = [n for n in range(startPage, endPage) \
+            if n > 0 and n <= pages]
+
+    return {
+        'page_obj': page_obj,
+        'paginator': paginator,
+        'page': page,
+        'pages': pages,
+        'page_numbers': page_numbers,
+        'next': next,
+        'previous': previous,
+        'has_next': has_next,
+        'has_previous': has_previous,
+        'show_first': 1 not in page_numbers,
+        'show_last': pages not in page_numbers,
+        'image_list': object_list,
+        'thumbnail_size':settings.THUMBNAIL_SIZE,
+        's3_url':settings.S3_URL,
+        'request': request,
+    }
+register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
