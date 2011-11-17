@@ -1080,21 +1080,27 @@ def user_page(request, username):
     else:
         member_since = _("%s ago") % span 
 
-    sqs = SearchQuerySet().filter(index_name='ImageIndex')
-    sqs = sqs.filter(username_auto = user.username)
-    sqs = sqs.order_by('-uploaded')
+    last_login = user.last_login
+    if request.user.is_authenticated():
+        viewer_profile = UserProfile.objects.get(user = request.user)
+        last_login = to_user_timezone(user.last_login, viewer_profile)
 
+    sqs = SearchQuerySet().filter(index_name='ImageIndex').filter(username_auto = user.username)
     images = len(sqs)
     integrated_images = len(sqs.filter(integration__gt = 0))
     integration = sum([x.integration for x in sqs]) / 3600.0
     avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
     stats = (
         (_('Member since'), member_since),
-        (_('Last login'), user.last_login),
+        (_('Last login'), last_login),
         (_('Images uploaded'), len(sqs)),
         (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
         (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
     )
+
+    sqs = SearchQuerySet().filter(index_name = 'ImageIndex')
+    sqs = sqs.filter(username_auto = user.username)
+    sqs = sqs.order_by('-last_acquisition_date, -uploaded')
 
     return object_list(
         request,
