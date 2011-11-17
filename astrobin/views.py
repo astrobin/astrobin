@@ -55,6 +55,10 @@ def now_timezone():
 
 
 def valueReader(request, field):
+    def unicode_truncate(s, length, encoding='utf-8'):
+        encoded = s.encode(encoding)[:length]
+        return encoded.decode(encoding, 'ignore')
+
     def utf_8_encoder(data):
         for line in data:
             yield line.encode('utf-8')
@@ -71,7 +75,7 @@ def valueReader(request, field):
     reader = csv.reader(utf_8_encoder([value]),
                         skipinitialspace = True)
     for row in reader:
-        items += [unicode(x, 'utf-8') for x in row if x != '']
+        items += [unicode_truncate(unicode(x, 'utf-8'), 64) for x in row if x != '']
 
     return items, value
 
@@ -139,7 +143,7 @@ def index(request):
             form = ImageUploadForm()
 
     sqs = SearchQuerySet().filter(index_name = 'ImageIndex')
-    sqs = sqs.order_by('-last_acquisition_date, -uploaded')
+    sqs = sqs.order_by('-uploaded')
 
     response_dict = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                      's3_url':settings.S3_URL,
@@ -861,6 +865,7 @@ def image_edit_save_gear(request):
     image.guiding_cameras.clear()
     image.focal_reducers.clear()
     image.filters.clear()
+    image.software.clear()
     image.accessories.clear()
 
     form = ImageEditGearForm(data=request.POST,
@@ -1230,6 +1235,7 @@ def user_profile_save_gear(request):
     profile.cameras.clear()
     profile.focal_reducers.clear()
     profile.filters.clear()
+    profile.software.clear()
     profile.accessories.clear()
 
     form = UserProfileEditGearForm(data=request.POST)
@@ -1255,10 +1261,10 @@ def user_profile_save_gear(request):
                 }.iteritems():
         (names, value) = valueReader(request, k)
         for name in names:
-                    gear_item, created = v[0].objects.get_or_create(name = name)
-                    if created:
-                        gear_item.save()
-                    getattr(profile, k).add(gear_item)
+            gear_item, created = v[0].objects.get_or_create(name = name)
+            if created:
+                gear_item.save()
+            getattr(profile, k).add(gear_item)
         form.fields[k].initial = value
 
     profile.save()
@@ -1702,7 +1708,6 @@ def leaderboard(request):
         queryset = queryset,
         template_name = 'leaderboard.html',
         template_object_name = 'user',
-        paginate_by=50,
         extra_context = response_dict,
     )
 
