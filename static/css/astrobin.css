@@ -742,7 +742,7 @@ h2 {
   border-bottom: 1px solid #666666;
 }
 h3 {
-  font-size: 1.4em;
+  font-size: 1.25em;
   margin: 20px 0 10px 0;
 }
 h4 {
@@ -2326,4 +2326,12 @@ table.title td.data h2 {
 table.title td.license {
   padding: 0;
   width: 90px;
+}
+.user-card .gear {
+  width: 50%;
+  float: left;
+}
+.user-card .stats {
+  width: 50%;
+  float: right;
 }

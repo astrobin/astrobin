@@ -1044,6 +1044,32 @@ def user_page(request, username):
                  ('Accessories'   , profile.accessories.all()),
                 ]
 
+    # Calculate some stats
+    from django.template.defaultfilters import timesince
+
+    member_since = None
+    date_time = user.date_joined.replace(tzinfo = None)
+    diff = abs(date_time - datetime.datetime.today())
+    span = timesince(date_time)
+    span = span.split(",")[0] # just the most significant digit
+    if span == "0 " + _("minutes"):
+        member_since = _("seconds ago")
+    else:
+        member_since = _("%s ago") % span 
+
+    sqs = SearchQuerySet().filter(username_auto = user.username)
+    images = len(sqs)
+    integrated_images = len(sqs.filter(integration__gt = 0))
+    integration = sum([x.integration for x in sqs]) / 3600.0
+    avg_integration = integration / integrated_images
+    stats = (
+        (_('Member since'), member_since),
+        (_('Last login'), user.last_login),
+        (_('Images uploaded'), len(sqs)),
+        (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
+        (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+    )
+
     return object_list(
         request,
         queryset=Image.objects.filter(user=user).order_by('-uploaded'),
@@ -1052,7 +1078,8 @@ def user_page(request, username):
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                          's3_url':settings.S3_URL,
                          'user':user,
-                         'gear_list':gear_list})
+                         'gear_list':gear_list,
+                         'stats':stats})
 
 
 @login_required
