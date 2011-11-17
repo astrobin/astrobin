@@ -139,7 +139,7 @@ def index(request):
             form = ImageUploadForm()
 
     sqs = SearchQuerySet().filter(index_name = 'ImageIndex')
-    sqs = sqs.order_by('-last_acquisition_date, -uploaded')
+    sqs = sqs.order_by('-uploaded')
 
     response_dict = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                      's3_url':settings.S3_URL,
