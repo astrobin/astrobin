@@ -320,8 +320,12 @@ def image_detail(request, id):
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
     resized_size = settings.RESIZED_IMAGE_SIZE
-    if image.w > 0 and image.w < resized_size:
-        resized_size = image.w
+    if is_revision:
+        if revision_image.w > 0 and revision_image.w < resized_size:
+            resized_size = revision_image.w
+    else:
+        if image.w > 0 and image.w < resized_size:
+            resized_size = image.w
 
     subjects = image.subjects.all()
     subjects_limit = 5 
@@ -1654,6 +1658,11 @@ def image_revision_upload_process(request):
     for chunk in file.chunks():
         destination.write(chunk)
     destination.close()
+
+    revisions = ImageRevision.objects.filter(image = image)
+    for r in revisions:
+        r.is_final = False
+        r.save()
 
     image.is_final = False
     image.save()
