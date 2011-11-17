@@ -1686,7 +1686,6 @@ def leaderboard(request):
         queryset = queryset,
         template_name = 'leaderboard.html',
         template_object_name = 'user',
-        paginate_by=50,
         extra_context = response_dict,
     )
 
