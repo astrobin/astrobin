@@ -59,7 +59,7 @@ def autocomplete(request, what):
 
             return HttpResponse(simplejson.dumps(values))
 
-    regex = ".*%s.*" % q
+    regex = ".*%s.*" % re.escape(q)
     for k, v in {'locations': Location,
                  'telescopes':Telescope,
                  'mounts':Mount,
