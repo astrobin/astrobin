@@ -3,6 +3,7 @@
 
 <div class="thumbnail-list clear">
 {% for image in images.object_list %}
+    {% if image.is_stored %}
     <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
         <a href="{% url image_detail image.id %}{% if image.is_solved %}?mod=solved{% endif %}">
             {% if image.is_solved %}
@@ -22,6 +23,7 @@
             {% endwith %}
         </div>
     </div>
+    {% endif %}
 {% empty %}
 <p>{% trans "No images" %}.</p>
 {% endfor %}
