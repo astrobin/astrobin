@@ -173,6 +173,7 @@ def image_detail(request, id):
     revision_image = None
     revisions = ImageRevision.objects.filter(image=image)
     is_final = image.is_final
+    is_ready = image.is_stored
     if 'r' in request.GET and request.GET.get('r') != '0':
         is_revision = True
         revision_id = int(request.GET['r'])
@@ -189,8 +190,6 @@ def image_detail(request, id):
                 return HttpResponseRedirect('/%i/?r=%i' % (image.id, final.id))
 
     from moon import MoonPhase;
-
-    is_ready = image.is_stored
 
     already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
     votes = image.rating.votes
@@ -1023,6 +1022,23 @@ def image_delete(request, id):
     push_notification([request.user], 'image_deleted', {});
 
     return HttpResponseRedirect("/");
+
+
+@login_required
+@require_GET
+def image_delete_revision(request, id):
+    revision = get_object_or_404(ImageRevision, pk=id) 
+    image = revision.image
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    if revision.is_final:
+        image.is_final = True
+        image.save()
+
+    revision.delete()
+
+    return HttpResponseRedirect("/%i/" % image.id);
 
 
 @login_required

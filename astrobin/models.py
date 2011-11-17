@@ -369,6 +369,10 @@ class Image(models.Model):
         for r in ImageRequest.objects.filter(image=self):
             r.delete()
 
+        # Delete revisions
+        for r in ImageRevision.objects.filter(image=self):
+            r.delete()
+
         super(Image, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -403,7 +407,7 @@ class ImageRevision(models.Model):
         store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
 
     def delete(self, *args, **kwargs):
-        delete_image_from_s3(self.filename, self.original_ext) 
+        delete_image.delay(self.filename, self.original_ext) 
         super(ImageRevision, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
