@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-16 12:16-0500\n"
-"PO-Revision-Date: 2011-11-16 12:20-0500\n"
+"POT-Creation-Date: 2011-11-17 00:59-0500\n"
+"PO-Revision-Date: 2011-11-17 00:59-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -41,7 +41,7 @@ msgstr "Soggetti"
 #: forms.py:89
 #: models.py:252
 #: models.py:576
-#: views.py:293
+#: views.py:296
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Luoghi"
@@ -350,7 +350,7 @@ msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del sensore. Esempio: -20."
 
 #: models.py:468
-#: views.py:296
+#: views.py:299
 msgid "Darks"
 msgstr "Dark"
 
@@ -359,7 +359,7 @@ msgid "The number of dark frames."
 msgstr "Numero di dark."
 
 #: models.py:473
-#: views.py:297
+#: views.py:300
 msgid "Flats"
 msgstr "Flat"
 
@@ -368,7 +368,7 @@ msgid "The number of flat frames."
 msgstr "Numero di flat."
 
 #: models.py:478
-#: views.py:298
+#: views.py:301
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
@@ -377,7 +377,7 @@ msgid "The number of dark flat frames."
 msgstr "Numero di dark dei flat."
 
 #: models.py:483
-#: views.py:299
+#: views.py:302
 msgid "Bias"
 msgstr "Bias"
 
@@ -386,17 +386,17 @@ msgid "The number of bias/offset frames."
 msgstr "Numero di frame bias/offset."
 
 #: models.py:488
-#: views.py:302
+#: views.py:305
 msgid "Mean SQM"
 msgstr "SQM medio"
 
 #: models.py:493
-#: views.py:303
+#: views.py:306
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
 #: models.py:512
-#: views.py:294
+#: views.py:297
 #: templates/image/detail.html:330
 msgid "Frames"
 msgstr "Frame"
@@ -499,92 +499,130 @@ msgstr "Inglese"
 msgid "Italian"
 msgstr "Italiano"
 
-#: views.py:291
+#: views.py:294
 msgid "Resolution"
 msgstr "Risoluzione"
 
-#: views.py:292
-#: views.py:366
+#: views.py:295
+#: views.py:369
 msgid "Dates"
 msgstr "Date"
 
-#: views.py:295
+#: views.py:298
 #: templates/search/search.html:45
 msgid "Integration"
 msgstr "Integrazione"
 
-#: views.py:295
+#: views.py:298
+#: views.py:1069
+#: views.py:1070
 msgid "hours"
 msgstr "ore"
 
-#: views.py:300
+#: views.py:303
 msgid "Avg. Moon age"
 msgstr "Giorno lunare medio"
 
-#: views.py:301
+#: views.py:304
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:446
-#: views.py:461
-#: views.py:1605
-#: views.py:1620
+#: views.py:449
+#: views.py:464
+#: views.py:1636
+#: views.py:1651
 msgid "Invalid image. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida. I formati accettati sono JPG, PNG e GIF."
 
-#: views.py:524
-#: views.py:528
-#: views.py:744
+#: views.py:527
+#: views.py:531
 #: views.py:747
-#: views.py:801
-#: views.py:825
+#: views.py:750
+#: views.py:804
+#: views.py:828
 #: templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
-#: views.py:525
-#: views.py:745
-#: views.py:802
-#: views.py:826
+#: views.py:528
+#: views.py:748
+#: views.py:805
+#: views.py:829
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
-#: views.py:526
+#: views.py:529
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:529
-#: views.py:748
+#: views.py:532
+#: views.py:751
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:530
+#: views.py:533
 #: templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:926
+#: views.py:929
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:931
-#: views.py:943
-#: views.py:981
+#: views.py:934
+#: views.py:946
+#: views.py:984
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1483
+#: views.py:1055
+#: templatetags/tags.py:144
+msgid "minutes"
+msgstr "minuti"
+
+#: views.py:1056
+#: templatetags/tags.py:145
+msgid "seconds ago"
+msgstr "secondi fa"
+
+#: views.py:1058
+#: templatetags/tags.py:146
+#, python-format
+msgid "%s ago"
+msgstr "%s fa"
+
+#: views.py:1066
+msgid "Member since"
+msgstr "Utente da"
+
+#: views.py:1067
+msgid "Last login"
+msgstr "Ultimo login"
+
+#: views.py:1068
+msgid "Images uploaded"
+msgstr "Immagini caricate"
+
+#: views.py:1069
+msgid "Total integration time"
+msgstr "Integrazione totale"
+
+#: views.py:1070
+msgid "Average integration time"
+msgstr "Integrazione media"
+
+#: views.py:1514
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1542
+#: views.py:1573
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1566
+#: views.py:1597
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -1067,6 +1105,7 @@ msgid "Basic Information"
 msgstr "Informazioni di base"
 
 #: templates/profile-edit-menu.html:9
+#: templates/user/profile.html:38
 msgid "Gear"
 msgstr "Strumentazione"
 
@@ -2128,7 +2167,11 @@ msgstr "Vai alla home per caricare una nuova foto!"
 msgid "User's card"
 msgstr "Scheda utente"
 
-#: templates/user/profile.html:52
+#: templates/user/profile.html:49
+msgid "Stats"
+msgstr "Statistiche"
+
+#: templates/user/profile.html:58
 msgid "Recent images from"
 msgstr "Immagini recenti da"
 
@@ -2229,19 +2272,6 @@ msgstr "Seleziona la licenza predefinita per le tue immagini"
 #: templates/user/profile/edit/license.html:13
 msgid "You can set a default type of license for everything you upload into AstroBin. Change your default here."
 msgstr "Puoi selezionare una licenza predefinita per tutto quello che carichi su AstroBin. Fallo qui."
-
-#: templatetags/tags.py:144
-msgid "minutes"
-msgstr "minuti"
-
-#: templatetags/tags.py:145
-msgid "seconds ago"
-msgstr "secondi fa"
-
-#: templatetags/tags.py:146
-#, python-format
-msgid "%s ago"
-msgstr "%s fa"
 
 #~ msgid "Terms of service"
 #~ msgstr "Condizioni d'uso"
