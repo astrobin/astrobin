@@ -194,7 +194,7 @@ class AdvancedSearchForm(SearchForm):
             self.cleaned_data['q'] = q
 
             if self.cleaned_data['q'] == '':
-                sqs = SearchQuerySet().all()
+                sqs = SearchQuerySet().filter(index_name='UserIndex')
                 if self.load_all:
                     sqs = sqs.load_all()
             else:

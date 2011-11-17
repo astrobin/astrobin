@@ -196,16 +196,16 @@ def image_detail(request, id):
         related = 'rel_user'
 
     if related == 'rel_user':
-        related_images = SearchQuerySet().filter(username_auto=image.user.username)
+        related_images = SearchQuerySet().filter(index_name='ImageIndex').filter(username_auto=image.user.username)
     elif related == 'rel_subject':
         subjects = [xapian_escape(s.mainId) for s in image.subjects.all()]
-        related_images = SearchQuerySet().filter(SQ(subjects__in=subjects))
+        related_images = SearchQuerySet().filter(index_name='ImageIndex').filter(SQ(subjects__in=subjects))
     elif related == 'rel_imaging_telescope':
         telescopes = [xapian_escape(t.name) for t in image.imaging_telescopes.all()]
-        related_images = SearchQuerySet().filter(SQ(imaging_telescopes__in=telescopes))
+        related_images = SearchQuerySet().filter(index_name='ImageIndex').filter(SQ(imaging_telescopes__in=telescopes))
     elif related == 'rel_imaging_camera':
         cameras = [xapian_escape(c.name) for c in image.imaging_cameras.all()]
-        related_images = SearchQuerySet().filter(SQ(imaging_cameras__in=cameras))
+        related_images = SearchQuerySet().filter(index_name='ImageIndex').filter(SQ(imaging_cameras__in=cameras))
 
     related_images = related_images.exclude(django_id=id).order_by('-uploaded')
 
@@ -1057,7 +1057,7 @@ def user_page(request, username):
     else:
         member_since = _("%s ago") % span 
 
-    sqs = SearchQuerySet().filter(username_auto = user.username)
+    sqs = SearchQuerySet().filter(index_name='ImageIndex').filter(username_auto = user.username)
     images = len(sqs)
     integrated_images = len(sqs.filter(integration__gt = 0))
     integration = sum([x.integration for x in sqs]) / 3600.0
@@ -1669,6 +1669,29 @@ def image_revision_upload_process(request):
                        'object_url':settings.ASTROBIN_BASE_URL + image_revision.get_absolute_url()})
 
     return HttpResponseRedirect(image_revision.get_absolute_url())
+
+
+@require_GET
+def leaderboard(request):
+    response_dict = {}
+
+    sort = '-user_integration'
+    if 'sort' in request.GET:
+        sort = request.GET.get('sort')
+        if sort == 'integration':
+            sort = '-user_integration'
+        elif sort == 'images':
+            sort = '-user_images'
+
+    queryset = SearchQuerySet().filter(index_name='UserIndex').order_by(sort)
+    
+    return object_list(
+        request,
+        queryset = queryset,
+        template_name = 'leaderboard.html',
+        template_object_name = 'user',
+        extra_context = response_dict,
+    )
 
 
 @require_GET
