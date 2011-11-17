@@ -194,7 +194,7 @@ class AdvancedSearchForm(SearchForm):
             self.cleaned_data['q'] = q
 
             if self.cleaned_data['q'] == '':
-                sqs = SearchQuerySet().filter(index_name='ImageIndex')
+                sqs = SearchQuerySet().all().models(Image)
                 if self.load_all:
                     sqs = sqs.load_all()
             else:

@@ -45,7 +45,6 @@ def _get_integration(image):
 
 class UserIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
-    index_name = CharField()
     user_name = CharField(model_attr='username')
     user_images = IntegerField()
     user_integration = IntegerField()
@@ -55,9 +54,6 @@ class UserIndex(SearchIndex):
 
     def get_model(self):
         return User
-
-    def prepare_index_name(self, obj):
-        return 'UserIndex'
 
     def prepare_user_images(self, obj):
         return len(Image.objects.filter(user = obj))
@@ -72,7 +68,6 @@ class UserIndex(SearchIndex):
 
 class ImageIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
-    index_name = CharField()
     title = CharField(model_attr='title')
     username_auto = NgramField()
     description = CharField(model_attr='description')
@@ -101,9 +96,6 @@ class ImageIndex(SearchIndex):
 
     def get_model(self):
         return Image
-
-    def prepare_index_name(self, obj):
-        return 'ImageIndex'
 
     def prepare_title(self, obj):
         value = obj.title
