@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-17 10:05-0500\n"
-"PO-Revision-Date: 2011-11-17 10:06-0500\n"
+"POT-Creation-Date: 2011-11-17 10:28-0500\n"
+"PO-Revision-Date: 2011-11-17 10:28-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -792,8 +792,8 @@ msgid "Upload!"
 msgstr "Carica!"
 
 #: templates/base.html:145
-#: templates/user/profile.html:21
-#: templates/user/profile.html.py:24
+#: templates/user/profile.html:27
+#: templates/user/profile.html.py:30
 msgid "Logout"
 msgstr "Logout"
 
@@ -1131,7 +1131,7 @@ msgid "Basic Information"
 msgstr "Informazioni di base"
 
 #: templates/profile-edit-menu.html:9
-#: templates/user/profile.html:38
+#: templates/user/profile.html:41
 msgid "Gear"
 msgstr "Strumentazione"
 
@@ -2194,30 +2194,31 @@ msgstr "Voto"
 msgid "User not found:"
 msgstr "Utente non trovato:"
 
-#: templates/user/profile.html:9
+#: templates/user/profile.html:8
+msgid "Recent images from"
+msgstr "Immagini recenti da"
+
+#: templates/user/profile.html:15
 msgid "Tools"
 msgstr "Strumenti"
 
-#: templates/user/profile.html:13
-#: templates/user/profile.html.py:16
+#: templates/user/profile.html:19
+#: templates/user/profile.html.py:22
 msgid "Edit profile"
 msgstr "Modifica profilo"
 
-#: templates/user/profile.html:33
-msgid "Go to the homepage to upload a new image!"
-msgstr "Vai alla home per caricare una nuova foto!"
+#: templates/user/profile.html:39
+#, python-format
+msgid "%(username)s's techical card"
+msgstr "Scheda tecnica di %(username)s"
 
-#: templates/user/profile.html:36
-msgid "User's card"
-msgstr "Scheda utente"
-
-#: templates/user/profile.html:49
+#: templates/user/profile.html:52
 msgid "Stats"
 msgstr "Statistiche"
 
-#: templates/user/profile.html:58
-msgid "Recent images from"
-msgstr "Immagini recenti da"
+#: templates/user/profile.html:59
+msgid "Go to the homepage to upload a new image!"
+msgstr "Vai alla home per caricare una nuova foto!"
 
 #: templates/user/profile/flickr_import.html:7
 msgid "Import your photos from Flickr"
@@ -2316,6 +2317,9 @@ msgstr "Seleziona la licenza predefinita per le tue immagini"
 #: templates/user/profile/edit/license.html:13
 msgid "You can set a default type of license for everything you upload into AstroBin. Change your default here."
 msgstr "Puoi selezionare una licenza predefinita per tutto quello che carichi su AstroBin. Fallo qui."
+
+#~ msgid "User's card"
+#~ msgstr "Scheda utente"
 
 #~ msgid "These images have been taken recently"
 #~ msgstr "Queste immagini sono state riprese di recente"

@@ -3,6 +3,12 @@
 {% load tags %}
 
 {% block content %}
+    <a name="page_anchor"></a>
+    <div class="full-box clear">
+        <h2>{% trans "Recent images from" %} {{user.username}}</h2>
+        {% image_list request image_list %}
+    </div>
+
     {% if request.user == user %}
     <noscript>
         <div class="tools-box clear">
@@ -29,11 +35,8 @@
     </noscript>
     {% endif %}
 
-    {% if request.user == user %}
-    <p><a href="{% url index %}">{% trans "Go to the homepage to upload a new image!" %}</a></p>
-    {% endif %}
     <div class="user-card full-box clear">
-        <h2>{% trans "User's card" %}: {{user.username}}</h2>
+        <h2>{% blocktrans with user.username as username %}{{username}}'s techical card{% endblocktrans %}</h2>
         <div class="gear">
             <h3>{% trans "Gear" %}</h3>
             {% for i in gear_list %}
@@ -52,10 +55,9 @@
             {% endfor %}
         </div>
     </div>
+    {% if request.user == user %}
+    <p style="text-align: center"><a href="{% url index %}">{% trans "Go to the homepage to upload a new image!" %}</a></p>
+    {% endif %}
 
-    <a name="page_anchor"></a>
-    <div class="full-box clear">
-        <h2>{% trans "Recent images from" %} {{user.username}}</h2>
-        {% image_list request image_list %}
-    </div>
+
 {% endblock %}
