@@ -1080,7 +1080,10 @@ def user_page(request, username):
     else:
         member_since = _("%s ago") % span 
 
-    sqs = SearchQuerySet().filter(index_name='ImageIndex').filter(username_auto = user.username)
+    sqs = SearchQuerySet().filter(index_name='ImageIndex')
+    sqs = sqs.filter(username_auto = user.username)
+    sqs = sqs.order_by('-uploaded')
+
     images = len(sqs)
     integrated_images = len(sqs.filter(integration__gt = 0))
     integration = sum([x.integration for x in sqs]) / 3600.0
@@ -1092,10 +1095,6 @@ def user_page(request, username):
         (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
         (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
     )
-
-    sqs = SearchQuerySet().filter(index_name = 'ImageIndex')
-    sqs = sqs.filter(username_auto = user.username)
-    sqs = sqs.order_by('-last_acquisition_date, -uploaded')
 
     return object_list(
         request,
