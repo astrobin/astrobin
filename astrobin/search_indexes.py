@@ -97,7 +97,7 @@ class ImageIndex(SearchIndex):
     last_acquisition_date = DateTimeField()
 
     def get_query(self):
-        return Image.objects.all()
+        return Image.objects.filter(is_stored = True)
 
     def get_model(self):
         return Image
