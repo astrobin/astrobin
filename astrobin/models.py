@@ -381,6 +381,9 @@ class ImageRevision(models.Model):
     original_ext = models.CharField(max_length=6, editable=False)
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
 
+    w = models.IntegerField(editable=False, default=0)
+    h = models.IntegerField(editable=False, default=0)
+
     is_stored = models.BooleanField(editable=False)
     is_solved = models.BooleanField(editable=False)
 

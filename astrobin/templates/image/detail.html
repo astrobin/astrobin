@@ -89,20 +89,42 @@
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
                                 <ul class="subnav">
-                                    <li class="first {% if inverted or solved %}bg-icon icon-normal{% else %}bg-icon icon-inverted{% endif %}">
-                                        {% if inverted or solved %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='none'" "plate_solving_started" %}">{% trans "Normal" %}</a></span>
-                                        {% else %}
+                                    {% if not inverted and not solved %}
+                                    <li class="first bg-icon icon-inverted">
                                         <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "plate_solving_started" %}">{% trans "Inverted monochrome" %}</a></span>
-                                        {% endif %}
                                     </li>
                                     {% if image.is_solved and not solved %}
                                     <li class="last bg-icon icon-solved">
                                         {% if is_revision %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "r, plate_solving_started" %}">{% trans "Annotatad (original version)" %}</a></span>
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">{% trans "Annotatad (original version)" %}</a></span>
                                         {% else %}
                                         <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "plate_solving_started" %}">{% trans "Annotated" %}</a></span>
                                         {% endif %}
+                                    </li>
+                                    {% endif %}
+                                    {% endif %}
+
+                                    {% if inverted %}
+                                    <li class="first bg-icon icon-normal">
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='none'" "plate_solving_started" %}">{% trans "Normal" %}</a></span>
+                                    </li>
+                                    {% if image.is_solved and not solved %}
+                                    <li class="last bg-icon icon-solved">
+                                        {% if is_revision %}
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">{% trans "Annotatad (original version)" %}</a></span>
+                                        {% else %}
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "plate_solving_started" %}">{% trans "Annotated" %}</a></span>
+                                        {% endif %}
+                                    </li>
+                                    {% endif %}
+                                    {% endif %}
+
+                                    {% if solved %}
+                                    <li class="first bg-icon icon-normal">
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='none'" "plate_solving_started" %}">{% trans "Normal" %}</a></span>
+                                    </li>
+                                    <li class="first bg-icon icon-inverted">
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "plate_solving_started" %}">{% trans "Inverted monochrome" %}</a></span>
                                     </li>
                                     {% endif %}
                                 </ul>
