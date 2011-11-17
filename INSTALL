@@ -107,13 +107,13 @@ cd django-privatebeta
 cd ..
 
 # for the moon phase module
-sudo easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
+. ./venv/bin/activate
+easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
 
 
 # Set up Xapian:
 # ==============
 
-. ./venv/bin/activate
 cd xapian-core-1.2.6
 ./configure --prefix=/opt && make && sudo make install
 cd ../xapian-bindings-1.2.6
@@ -165,7 +165,7 @@ To the top:
 # Configure rabbitmq:
 # ===================
 
-sudo rabbitmqctl add_user astrobin astrobin
+sudo rabbitmqctl add_user astrobin ***REMOVED***
 sudo rabbitmqctl add_vhost astrobin
 sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 
