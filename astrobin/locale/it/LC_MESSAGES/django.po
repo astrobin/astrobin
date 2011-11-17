@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-17 00:59-0500\n"
-"PO-Revision-Date: 2011-11-17 00:59-0500\n"
+"POT-Creation-Date: 2011-11-17 02:42-0500\n"
+"PO-Revision-Date: 2011-11-17 02:43-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -131,6 +131,7 @@ msgid "Cameras"
 msgstr "Camere"
 
 #: forms.py:149
+#: templates/leaderboard.html:20
 #: templates/image/detail.html:113
 msgid "User"
 msgstr "Utente"
@@ -509,6 +510,7 @@ msgid "Dates"
 msgstr "Date"
 
 #: views.py:298
+#: templates/leaderboard.html:14
 #: templates/search/search.html:45
 msgid "Integration"
 msgstr "Integrazione"
@@ -602,6 +604,7 @@ msgid "Last login"
 msgstr "Ultimo login"
 
 #: views.py:1068
+#: templates/leaderboard.html:22
 msgid "Images uploaded"
 msgstr "Immagini caricate"
 
@@ -759,136 +762,141 @@ msgid "Hello, <a href=\"%(user_page)s\">%(username)s.</a>"
 msgstr "Ciao, <a href=\"%(user_page)s\">%(username)s.</a>"
 
 #: templates/base.html:120
-#: templates/base.html.py:235
-#: templates/base.html:272
+#: templates/base.html.py:236
+#: templates/base.html:273
 msgid "Home"
 msgstr "Home"
 
 #: templates/base.html:121
-#: templates/base.html.py:236
-msgid "Help"
-msgstr "Aiuto"
+#: templates/leaderboard.html:7
+msgid "Leaderboard"
+msgstr "Classifica"
 
 #: templates/base.html:122
 #: templates/base.html.py:237
+msgid "Help"
+msgstr "Aiuto"
+
+#: templates/base.html:123
+#: templates/base.html.py:238
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/base.html:135
+#: templates/base.html:136
 msgid "View your profile"
 msgstr "Vedi il tuo profilo"
 
-#: templates/base.html:138
+#: templates/base.html:139
 msgid "Edit your profile"
 msgstr "Modifica il tuo profilo"
 
-#: templates/base.html:141
+#: templates/base.html:142
 msgid "Upload an image"
 msgstr "Carica un'immagine"
 
-#: templates/base.html:141
+#: templates/base.html:142
 msgid "Upload!"
 msgstr "Carica!"
 
-#: templates/base.html:144
+#: templates/base.html:145
 #: templates/user/profile.html:21
 #: templates/user/profile.html.py:24
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.html:151
-#: templates/base.html.py:152
+#: templates/base.html:152
+#: templates/base.html.py:153
 msgid "Notifications"
 msgstr "Notifiche"
 
-#: templates/base.html:158
-#: templates/base.html.py:159
+#: templates/base.html:159
+#: templates/base.html.py:160
 msgid "Messages"
 msgstr "Messaggi"
 
-#: templates/base.html:165
-#: templates/base.html.py:166
+#: templates/base.html:166
+#: templates/base.html.py:167
 msgid "Requests"
 msgstr "Richieste"
 
-#: templates/base.html:176
+#: templates/base.html:177
 msgid "Have an invite? Login!"
 msgstr "Hai un invito? Fai il login!"
 
-#: templates/base.html:178
+#: templates/base.html:179
 msgid "Login"
 msgstr "Login"
 
-#: templates/base.html:184
+#: templates/base.html:185
 #: templates/registration/login.html:8
 msgid "Register"
 msgstr "Registrati"
 
-#: templates/base.html:206
+#: templates/base.html:207
 msgid "Error"
 msgstr "Errore"
 
-#: templates/base.html:208
+#: templates/base.html:209
 #: templates/image/detail.html:8
 msgid "Info"
 msgstr "Informazione"
 
-#: templates/base.html:226
+#: templates/base.html:227
 msgid "About"
 msgstr "Informazioni"
 
-#: templates/base.html:228
+#: templates/base.html:229
 msgid "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers."
 msgstr "AstroBin è un sito di hosting d'immagini pensato specificamente per gli astrofotografi: è il posto finale dove caricare le proprie immagini. Fatto da un astrofotografo, per gli astrofotografi."
 
-#: templates/base.html:232
+#: templates/base.html:233
 msgid "Site links"
 msgstr "Link del sito"
 
-#: templates/base.html:238
+#: templates/base.html:239
 #: templates/tos.html:6
 msgid "Terms of Service"
 msgstr "Condizioni d'uso"
 
-#: templates/base.html:243
+#: templates/base.html:244
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/base.html:252
+#: templates/base.html:253
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:254
+#: templates/base.html:255
 msgid "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
 msgstr "AstroBin è Copyright &copy; 2011 Salvatore Iovene, Tutti i Diritti Riservati. Le immagini su questo sito sono copyright dei loro rispettivi proprietari."
 
-#: templates/base.html:273
+#: templates/base.html:274
 msgid "Follow AstroBin on Twitter"
 msgstr "Segui AstroBin su Twitter"
 
-#: templates/base.html:274
+#: templates/base.html:275
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/base.html:288
+#: templates/base.html:289
 msgid "Feedback"
 msgstr "Feedback"
 
-#: templates/base.html:298
+#: templates/base.html:299
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:346
+#: templates/base.html:347
 #: templates/image/detail.html:422
 msgid "Uploading..."
 msgstr "Caricamento in corso..."
 
-#: templates/base.html:353
+#: templates/base.html:354
 #: templates/image/detail.html:420
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:354
+#: templates/base.html:355
 #: templates/image/detail.html:421
 msgid "Choose file"
 msgstr "Scegli file"
@@ -1094,6 +1102,26 @@ msgstr "<strong>Ma ciao! Benvenuto su AstroBin!</strong> <em>AstroBin</em> è un
 #: templates/index.html:39
 msgid "These images have been uploaded recently"
 msgstr "Queste immagini sono state caricate di recente"
+
+#: templates/leaderboard.html:9
+msgid "How productive are the users on AstroBin? Here you can see them all, sorted by total hours of integration time (counting all their images) or number of images."
+msgstr "Quanto sono produttivi gli utenti di AstroBin? Qui puoi vederli tutti, ordinati per ore totali di integrazione (calcolando tutte le immagini di ogni utente) oppure numero di immagini."
+
+#: templates/leaderboard.html:13
+msgid "Sort by:"
+msgstr "Ordina per:"
+
+#: templates/leaderboard.html:15
+msgid "Images"
+msgstr "Immagini"
+
+#: templates/leaderboard.html:19
+msgid "Position"
+msgstr "Posizione"
+
+#: templates/leaderboard.html:21
+msgid "Total integration hours"
+msgstr "Ore totali di integrazione"
 
 #: templates/object_not_found.html:5
 msgid "Object not found"
