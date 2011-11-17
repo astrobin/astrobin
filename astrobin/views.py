@@ -1061,7 +1061,7 @@ def user_page(request, username):
     images = len(sqs)
     integrated_images = len(sqs.filter(integration__gt = 0))
     integration = sum([x.integration for x in sqs]) / 3600.0
-    avg_integration = integration / integrated_images
+    avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
     stats = (
         (_('Member since'), member_since),
         (_('Last login'), user.last_login),
