@@ -118,9 +118,9 @@
                     <div id="nav">
                         <ul>
                             <li id="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
-                            <li id="{% current request "^leaderboard/$" %}"><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
-                            <li id="{% current request "^help/$" %}"><a href="{% url help %}">{% trans "Help" %}</a></li>
-                            <li id="{% current request "^faq/$" %}"><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
+                            <li id="{% current request "^/leaderboard/$" %}"><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
+                            <li id="{% current request "^/help/$" %}"><a href="{% url help %}">{% trans "Help" %}</a></li>
+                            <li id="{% current request "^/faq/$" %}"><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
                         </ul>
                     </div>
                     <div id="user-nav">
