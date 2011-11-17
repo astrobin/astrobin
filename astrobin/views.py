@@ -173,8 +173,11 @@ def image_detail(request, id):
         is_ready = revision_image.is_stored
     elif 'r' not in request.GET:
         if not is_final:
-            final = revisions.filter(is_final = True)[0]
-            return HttpResponseRedirect('/%i/?r=%i' % (image.id, final.id))
+            final_revs = revisions.filter(is_final = True)
+            # We should only have one
+            if final_revs:
+                final = revisions.filter(is_final = True)[0]
+                return HttpResponseRedirect('/%i/?r=%i' % (image.id, final.id))
 
     from moon import MoonPhase;
 
@@ -999,7 +1002,8 @@ def image_edit_save_license(request):
     if not form.is_valid():
         return render_to_response(
             'image/edit/license.html',
-            {'form': form},
+            {'form': form,
+             'image': image},
             context_instance = RequestContext(request))
 
     form.save()
