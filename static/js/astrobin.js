@@ -189,6 +189,17 @@ var image_detail = {
             url    : '/delete/'
         },
 
+        delete_revision_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: '',
+                height: 230
+            },
+            element: 'a.delete-revision',
+            url    : '/delete/revision/'
+        },
+
         follow_action: {
             dialog: {
                 title : '',
@@ -266,6 +277,7 @@ var image_detail = {
 
         /* Common */
         image_id      : 0,
+        revision_id   : 0,
         image_username: '',
 
         /* Rating */
@@ -364,7 +376,6 @@ var image_detail = {
         });
     },
 
-
     setup_delete: function() {
         $(image_detail.config.delete_action.element).click(function() {
             $('<div id="dialog-confirm" title="' +
@@ -386,6 +397,42 @@ var image_detail = {
                             click: function() {
                                 $(this).dialog('close');
                                 window.location = image_detail.config.delete_action.url + image_detail.globals.image_id;
+                            }
+                        },
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
+                        }
+                    ]
+                });
+
+            return false;
+        });
+    },
+
+    setup_delete_revision: function() {
+        $(image_detail.config.delete_revision_action.element).click(function() {
+            $('<div id="dialog-confirm" title="' +
+              image_detail.config.delete_revision_action.dialog.title +
+              '"></div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-alert"\
+                                  style="float:left; margin:0 7px 20px 0;">\
+                            </span>' + image_detail.config.delete_revision_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    height: image_detail.config.delete_revision_action.dialog.height,
+                    modal: true,
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                $(this).dialog('close');
+                                window.location = image_detail.config.delete_revision_action.url + image_detail.globals.revision_id;
                             }
                         },
                         {
@@ -673,9 +720,10 @@ var image_detail = {
         });          
     },
 
-    init: function(image_id, image_username, current_rating, config) {
+    init: function(image_id, revision_id, image_username, current_rating, config) {
         /* Init */
         image_detail.globals.image_id = image_id;
+        image_detail.globals.revision_id = revision_id;
         image_detail.globals.image_username = image_username;
         image_detail.globals.rating.current = current_rating;
         $.extend(true, image_detail.config, config);
@@ -688,6 +736,7 @@ var image_detail = {
 
         /* Delete */
         image_detail.setup_delete();
+        image_detail.setup_delete_revision();
 
         /* Following */
         image_detail.setup_follow();

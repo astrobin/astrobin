@@ -65,7 +65,13 @@
                                     </li>
                                     {% endif %}
                                     <li class="bg-icon icon-delete">
-                                        <span class="text"><a class="delete danger" href="{% url image_delete image.id %}">{% trans "Delete" %}</a></span>
+                                        <span class="text">
+                                        {% if not is_revision %}
+                                            <a class="delete danger" href="{% url image_delete image.id %}">{% trans "Delete" %}</a>
+                                        {% else %}
+                                            <a class="delete-revision danger" href="{% url image_delete_revision image.id %}">{% trans "Delete this revision" %}</a>
+                                        {% endif %}
+                                        </span>
                                     </li>
                                     <li class="separator"></li>
                                 {% endif %}
@@ -421,6 +427,7 @@
 $(document).ready(function() {
     image_detail.init(
         {{image.id}},
+        {% if is_revision %}{{revision_image.id}}{% else %}0{% endif %},
         "{{image.user.username}}",
         {{current_rating}},
         {
@@ -448,6 +455,13 @@ $(document).ready(function() {
                     title : "{% trans "Delete image?" %}",
                     body  : "{% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?"%}",
                     button: "{% trans "Yes, delete image" %}"
+                }
+            },
+            delete_revision_action: {
+                dialog: {
+                    title : "{% trans "Delete this revision?" %}",
+                    body  : "{% trans "This revision will be permanently deleted and cannot be recovered. Are you sure?"%}",
+                    button: "{% trans "Yes, delete revision" %}"
                 }
             },
             follow_action: {

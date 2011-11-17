@@ -33,6 +33,7 @@ urlpatterns = patterns('',
     url(r'^edit/save/acquisition/$', views.image_edit_save_acquisition, name='image_edit_save_acquisition'),
     url(r'^edit/save/license/$', views.image_edit_save_license, name='image_edit_save_license'),
     url(r'^delete/(?P<id>\d+)/$', views.image_delete, name='image_delete'),
+    url(r'^delete/revision/(?P<id>\d+)/$', views.image_delete_revision, name='image_delete_revision'),
 
     url(r'^search/', ImageSearchView(form_class=AdvancedSearchForm), name='haystack_search'),
 
