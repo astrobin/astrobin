@@ -2,22 +2,22 @@
 {% load tags %}
 
 <div class="thumbnail-list clear">
-{% for image in images.object_list %}
-    {% if image.is_stored %}
+{% for image in image_list %}
+    {% if image.object.is_stored %}
     <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
-        <a href="{% url image_detail image.id %}{% if image.is_solved %}?mod=solved{% endif %}">
-            {% if image.is_solved %}
+        <a href="{% url image_detail image.object.id %}{% if image.object.is_solved %}?mod=solved{% endif %}">
+            {% if image.object.is_solved %}
             <img class="solved-badge" src="/static/images/solved_badge.gif" alt="" />
             {% endif %}
-            <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
+            <img src="{% if image.object.is_stored %}http://astrobin_images.{{s3_url}}/{{image.object.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="capty thumbnail"
-                 name="#capty-content-{{image.id}}"
-                 alt="{{image.title|default:_("(no title)")}}"
+                 name="#capty-content-{{image.object.id}}"
+                 alt="{{image.object.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
         </a>
-        <div id="capty-content-{{image.id}}">
-            {{image.title|escape|truncatechars:25}}<br/>
-            {% with image.user.username|truncatechars:24 as user %}
+        <div id="capty-content-{{image.object.id}}">
+            {{image.object.title|escape|truncatechars:25}}<br/>
+            {% with image.object.user.username|truncatechars:24 as user %}
             {% url user_page user as user_page %}
             {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
             {% endwith %}
@@ -30,13 +30,31 @@
 </div>
 
 <div class="pagination">
-    <span class="step-links">
-        {% if images.has_previous %}
-            <a href="?p={{images.previous_page_number}}{% if query %}&amp;q={{query}}{% endif %}#pag_anchor">&laquo; {% trans "newer" %}</a>
-        {% endif %}
-        {% if images.has_previous and images.has_next %}|{% endif %}
-        {% if images.has_next %}
-            <a href="?p={{images.next_page_number}}{% if query %}&amp;q={{query}}{% endif %}#pag_anchor">{% trans "older" %} &raquo;</a>
-        {% endif %}
-    </span>
+    <div class="pager">
+       {% if has_previous %}
+          <span class="page">
+          <a href="{% query_string "page=previous" "" %}#page_anchor">&laquo; {% trans "previous" %}</a>
+          </span>
+       {% endif %}
+
+       {% if show_first %}
+          <span class="page"><a href="{% query_string "page=1" "" %}#page_anchor">1</a></span>
+          <span class="ellipsis">...</span>
+       {% endif %}
+       {% for linkpage in page_numbers %}
+          {% ifequal linkpage page %}
+             <span class="current">{{ page }}</span>
+          {% else %}
+             <span class="page"><a href="{% query_string "page=linkpage" "" %}#page_anchor"
+                   >{{ linkpage }}</a></span>
+          {% endifequal %}
+       {% endfor %}
+       {% if show_last %}
+          <span class="ellipsis">...</span>
+          <span class="page"><a href="{% query_string "page=last" "" %}#page_anchor">{{ pages }}</a></span>
+       {% endif %}
+       {% if has_next %}
+          <span class="page"><a href="{% query_string "page=next" "" %}#page_anchor">{% trans "next" %} &raquo;</a></span>
+       {% endif %}
+    </div>
 </div>
