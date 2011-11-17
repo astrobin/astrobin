@@ -8,6 +8,8 @@ from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 
+from django.contrib.auth.models import User
+
 def xapian_escape(s):
     return ''.join(ch for ch in s if ch not in set(string.punctuation))
 
@@ -19,8 +21,58 @@ def _join_stripped(a):
 
     return a + escaped 
 
+def _get_integration(image):
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+    solar_system_acquisition = None
+    integration = 0
+
+    try:
+        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
+    except:
+        pass
+
+    if deep_sky_acquisitions:
+        for a in deep_sky_acquisitions:
+            if a.duration and a.number:
+                integration += (a.duration * a.number)
+    elif solar_system_acquisition:
+        frames = solar_system_acquisition.frames
+        if frames:
+            integration = frames
+
+    return integration
+
+
+class UserIndex(SearchIndex):
+    text = CharField(document=True, use_template=True)
+    index_name = CharField()
+    user_name = CharField(model_attr='username')
+    user_images = IntegerField()
+    user_integration = IntegerField()
+
+    def get_query(self):
+        return User.objects.all()
+
+    def get_model(self):
+        return User
+
+    def prepare_index_name(self, obj):
+        return 'UserIndex'
+
+    def prepare_user_images(self, obj):
+        return len(Image.objects.filter(user = obj))
+
+    def prepare_user_integration(self, obj):
+        integration = 0
+        for i in Image.objects.filter(user = obj):
+            integration += _get_integration(i)
+
+        return integration / 3600.0
+       
+
 class ImageIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
+    index_name = CharField()
     title = CharField(model_attr='title')
     username_auto = NgramField()
     description = CharField(model_attr='description')
@@ -46,6 +98,12 @@ class ImageIndex(SearchIndex):
 
     def get_query(self):
         return Image.objects.all()
+
+    def get_model(self):
+        return Image
+
+    def prepare_index_name(self, obj):
+        return 'ImageIndex'
 
     def prepare_title(self, obj):
         value = obj.title
@@ -116,23 +174,7 @@ class ImageIndex(SearchIndex):
         return float(score)/votes if votes > 0 else 0
 
     def prepare_integration(self, obj):
-        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
-        solar_system_acquisition = None
-        integration = 0
-
-        try:
-            solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=obj)
-        except:
-            pass
-
-        if deep_sky_acquisitions:
-            for a in deep_sky_acquisitions:
-                if a.duration and a.number:
-                    integration += (a.duration * a.number)
-        elif solar_system_acquisition:
-            integration = solar_system_acquisition.frames
-
-        return integration
+        return _get_integration(obj)
 
     def prepare_moon_phase(self, obj):
         from moon import MoonPhase
@@ -196,4 +238,4 @@ class ImageIndex(SearchIndex):
 
 
 site.register(Image, ImageIndex)
-
+site.register(User, UserIndex)
