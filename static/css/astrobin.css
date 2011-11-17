@@ -1386,6 +1386,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border-right: none;
   background-color: #2b2b2b;
 }
+.info-side-bar img.thumbnail {
+  border: 1px solid #cc4b2e;
+}
 .info-side-bar p {
   margin: 0;
   padding: 10px;
