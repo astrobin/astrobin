@@ -2346,3 +2346,15 @@ table.leaderboard {
   padding: 0 28px;
   width: 100%;
 }
+.pager {
+  padding-top: 16px;
+}
+.pager .page a {
+  padding-left: 4px;
+  padding-right: 4px;
+  text-decoration: none;
+}
+.pager .current {
+  padding-left: 4px;
+  padding-right: 4px;
+}

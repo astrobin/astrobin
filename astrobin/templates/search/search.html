@@ -12,7 +12,7 @@
     </form>
 </div>
 
-<a name="pag_anchor"></a>
+<a name="page_anchor"></a>
 <div id="search-results" class="full-box clear">
     <h2>
         {% if query %}
@@ -45,18 +45,7 @@
             <a href="/search/?q={{query}}&sort=-integration">{% trans "Integration" %}</a>
     </div>
 
-    {% load tags %}
     {% image_list request page.object_list %}
-    <div class="pagination">
-        <span class="step-links">
-            {% if page.has_previous %}
-                <a href="?page={{page.previous_page_number}}{% if query %}&amp;q={{query}}{% endif %}#pag_anchor">&laquo; {% trans "previous" %}</a>
-            {% endif %}
-            {% if page.has_previous and page.has_next %}|{% endif %}
-            {% if page.has_next %}
-                <a href="?page={{page.next_page_number}}{% if query %}&amp;q={{query}}{% endif %}#pag_anchor">{% trans "next" %} &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+
 </div>
 {% endblock %}

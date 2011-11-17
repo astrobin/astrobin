@@ -212,6 +212,15 @@
                     </div>
                     {% endif %}
 
+                    {% if upload_error %}
+                    <div class="context_message">
+                        <img src="/static/icons/iconic/black/x_alt_16x16.png" alt="{% trans "Error" %}" />
+                        <p>
+                            {% blocktrans %}Invalid image. Allowed formats are JPG, PNG and GIF.{% endblocktrans %}
+                        </p>
+                    </div>
+                    {% endif %}
+
                     {% block content %}{% endblock %}
                 </div>
             </div>
