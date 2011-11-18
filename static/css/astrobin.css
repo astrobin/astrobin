@@ -859,9 +859,6 @@ form input, form select, form textarea {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-form select:focus {
-  color: #333333;
-}
 form input:focus, form textarea:focus {
   border-color: #292929;
   background-color: #3d3d3d;
@@ -2190,24 +2187,6 @@ p.error {
   margin: 0;
 }
 .context_message img {
-  margin-right: 8px;
-  float: left;
-}
-#context_message {
-  padding: 4px 12px;
-  margin-bottom: 16px;
-  color: #383732;
-  background-color: #f9edbe;
-  border: 1px solid #f0c36d;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
-}
-#context_message p {
-  padding: 0;
-  margin: 0;
-}
-#context_message img {
   margin-right: 8px;
   float: left;
 }
