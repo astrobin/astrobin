@@ -1412,7 +1412,10 @@ def follow(request, username):
     if request.is_ajax():
         return ajax_success()
     else:
-        return HttpResponseRedirect(request.GET['next'])
+        next_page = '/'
+        if 'next' in request.GET:
+            next_page = request.GET.get('next')
+        return HttpResponseRedirect(next_page)
 
 
 @login_required
@@ -1432,7 +1435,10 @@ def unfollow(request, username):
     if request.is_ajax():
         return ajax_success()
     else:
-        return HttpResponseRedirect(request.GET['next'])
+        next_page = '/'
+        if 'next' in request.GET:
+            next_page = request.GET.get('next')
+        return HttpResponseRedirect(next_page)
 
 
 @login_required
