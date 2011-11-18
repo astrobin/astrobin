@@ -859,10 +859,16 @@ form input, form select, form textarea {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
+form select:focus {
+  color: #333333;
+}
 form input:focus, form textarea:focus {
   border-color: #292929;
   background-color: #3d3d3d;
   color: #fcfcfc;
+}
+select[multiple]:focus {
+  color: #c9c9c9;
 }
 .button, .button:visited {
   font-size: 14px;
