@@ -135,7 +135,6 @@ def delete_image_from_backend(filename, ext):
     for suffix in (
         '',
         '_resized',
-        '_thumb',
         '_small_thumb',
         '_inverted',
         '_resized_inverted',
@@ -145,7 +144,11 @@ def delete_image_from_backend(filename, ext):
         print "Deleting %s." % whole_name
         default_storage.delete(whole_name)
 
-    whole_name = filename + '_hist.png'
-    print "Deleting %s." % whole_name
-    default_storage.delete(whole_name)
+    for suffix in (
+        '_thumb',
+        '_hist',
+    ):
+        whole_name = filename + suffix + '.png'
+        print "Deleting %s." % whole_name
+        default_storage.delete(whole_name)
 
