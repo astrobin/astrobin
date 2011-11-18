@@ -34,6 +34,8 @@ urlpatterns = patterns('',
     url(r'^edit/save/license/$', views.image_edit_save_license, name='image_edit_save_license'),
     url(r'^delete/(?P<id>\d+)/$', views.image_delete, name='image_delete'),
     url(r'^delete/revision/(?P<id>\d+)/$', views.image_delete_revision, name='image_delete_revision'),
+    url(r'^promote/(?P<id>\d+)/$', views.image_promote, name='image_promote'),
+    url(r'^demote/(?P<id>\d+)/$', views.image_demote, name='image_demote'),
 
     url(r'^search/', ImageSearchView(form_class=AdvancedSearchForm), name='haystack_search'),
 

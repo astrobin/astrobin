@@ -101,6 +101,8 @@ class ImageIndex(SearchIndex):
     first_acquisition_date = DateTimeField()
     last_acquisition_date = DateTimeField()
 
+    is_wip = BooleanField(model_attr='is_wip')
+
     def index_queryset(self):
         return Image.objects.filter(is_stored = True)
 

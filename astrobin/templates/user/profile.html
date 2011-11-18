@@ -5,7 +5,40 @@
 {% block content %}
     <a name="page_anchor"></a>
     <div class="full-box clear">
-        <h2>{% trans "Recent images from" %} {{user.username}}</h2>
+        <h2 class="inline">
+            {% ifequal user request.user %}
+                {% blocktrans %}View your images{% endblocktrans %}
+            {% else %}
+                {% blocktrans with user.username as username %}View {{username}}'s images:{% endblocktrans %}
+            {% endifequal %}
+        </h2>
+        {% ifequal user request.user %}
+        <span class="gallery-links">
+            {% if section == 'public' %}
+                {% trans "Public Area" %}
+            {% else %}
+                <a href="{% url me %}">{% trans "Public Area" %}</a>
+            {% endif %}
+            |
+            {% if section == 'staging' %}
+                {% trans "Staging Area" %}
+            {% else %}
+                <a href="?staging">{% trans "Staging Area" %}</a>
+            {% endif %}
+        </span>
+        {% endifequal %}
+        <div class="fix"></div>
+        {% ifequal user request.user %}
+        <p>
+            {% if section == 'public' %}
+                {% blocktrans %}These are your public images: everybody can see them.{% endblocktrans %}
+            {% endif %}
+            {% if section == 'staging' %}
+                {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
+            {% endif %}
+        </p>
+        {% endifequal %}
+
         {% image_list request image_list %}
     </div>
 

@@ -222,6 +222,10 @@
     background: url('/static/icons/iconic/black/edit-acquisition.png') no-repeat left center;}
 .icon-make-final {
     background: url('/static/icons/iconic/black/check_8x7.png') no-repeat left center;}
+.icon-promote {
+    background: url('/static/icons/iconic/black/arrow_right_8x8.png') no-repeat left center;}
+.icon-demote {
+    background: url('/static/icons/iconic/black/arrow_left_8x8.png') no-repeat left center;}
 .icon-change-license {
     background: url('/static/icons/iconic/black/copy_8x8.png') no-repeat left center;}
 .icon-plate-solve {
@@ -896,6 +900,10 @@ h2 { font-size: 1.5em; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 
 h3 { font-size: 1.25em; margin: 20px 0 10px 0; }
 h4 { font-size: 1em; margin: 10px 0 8px 0; }
 
+h2.inline {
+    margin-right: @spacer-large;
+    display: inline-block; }
+
 /* Lists */
 ul, ol {
     margin: 10px 20px;
@@ -1460,15 +1468,33 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         margin-left: 6px;
         width:100px;}}
 
+.upload-forms {
+    margin: 0 auto;
+    width: 70%;}
+
 .small-box {
     margin: 0 auto;
     padding: 10px;
     .rounded-corners(12px);
     background-color: @light-panel-color;
     .common-border;
-    width: 50%;
+    max-width: 300px;
+    padding: @spacer-large;
+    text-align: center;
+    height: 180px;
     .single-form {
-        text-align: center;}}
+        p {
+            margin: 0; padding: @spacer-large 0;}
+        h1 {
+            text-align: center;}}}
+
+.wip-form-box {
+    .small-box;
+    float: left;}
+
+.final-form-box {
+    .small-box;
+    float: right;}
 
 .full-box {
     width: @site-width - 80px;
@@ -1494,6 +1520,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         text-align: center;
         .button{
             left: 0;}}}
+
+.missing-gear-warning {
+    width: 33%;
+    text-align: center;
+    margin: 0 auto;}
 
 .advanced-search-box {
     padding: @spacer-small @spacer-xxlarge;}
@@ -1957,11 +1988,14 @@ td {
 
 p.info {
     text-align: left;
-    color: @background-color;
-    margin: 0;
-    padding: 30px 10px;
+    color: @notice-text-color;
+    margin: @spacer-large 0;
+    padding: @spacer-large;
     .common-border;
-    background-color: #FFFFD0;}
+    border-color: @notice-border-color;
+    background-color: @notice-color;
+    strong {
+        color: @notice-text-color;}}
 
 .simple-choice {
 margin-left: 20px;}
@@ -1993,7 +2027,7 @@ margin-left: 20px;}
 form#advanced_search {
     display: none;}
 
-form#upload input {
+form.upload input {
     width: auto;}
 
 p.error {
@@ -2150,3 +2184,4 @@ table.leaderboard {
   padding-left: @spacer-small;
   padding-right: @spacer-small;
   }
+
