@@ -980,10 +980,15 @@ form {
         width: 70%;
         .rounded-corners;}
 
+    select:focus {
+        color: @background-color;}
     input:focus, textarea:focus {
         border-color: @border-color * @hilight-factor;
         background-color: @input-color * @hilight-factor;
         color: @strong-text-color;}}
+
+    select[multiple]:focus {
+        color: @text-color + #111;}
 
 .button, .button:visited {
     font-size: @base-font-size;
