@@ -49,7 +49,7 @@ class UserIndex(SearchIndex):
     user_images = IntegerField()
     user_integration = IntegerField()
 
-    def get_query(self):
+    def index_queryset(self):
         return User.objects.all()
 
     def get_model(self):
@@ -91,7 +91,7 @@ class ImageIndex(SearchIndex):
     first_acquisition_date = DateTimeField()
     last_acquisition_date = DateTimeField()
 
-    def get_query(self):
+    def index_queryset(self):
         return Image.objects.filter(is_stored = True)
 
     def get_model(self):
