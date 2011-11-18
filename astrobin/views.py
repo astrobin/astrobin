@@ -1706,8 +1706,10 @@ def leaderboard(request):
     sort = '-user_integration'
     if 'sort' in request.GET:
         sort = request.GET.get('sort')
-        if sort == 'integration':
+        if sort == 'tot_integration':
             sort = '-user_integration'
+        elif sort == 'avg_integration':
+            sort = '-user_avg_integration'
         elif sort == 'images':
             sort = '-user_images'
 

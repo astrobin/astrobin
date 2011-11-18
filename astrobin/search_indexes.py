@@ -36,9 +36,7 @@ def _get_integration(image):
             if a.duration and a.number:
                 integration += (a.duration * a.number)
     elif solar_system_acquisition:
-        frames = solar_system_acquisition.frames
-        if frames:
-            integration = frames
+        return 0
 
     return integration
 
@@ -48,6 +46,7 @@ class UserIndex(SearchIndex):
     user_name = CharField(model_attr='username')
     user_images = IntegerField()
     user_integration = IntegerField()
+    user_avg_integration = IntegerField()
 
     def index_queryset(self):
         return User.objects.all()
@@ -64,8 +63,19 @@ class UserIndex(SearchIndex):
             integration += _get_integration(i)
 
         return integration / 3600.0
-       
 
+    def prepare_user_avg_integration(self, obj):
+        integration = 0
+        images = 0
+        for i in Image.objects.filter(user = obj):
+            image_integration = _get_integration(i)
+            if image_integration:
+                images += 1
+                integration += image_integration
+
+        return (integration / 3600.0) / images if images else 0
+
+       
 class ImageIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
     title = CharField(model_attr='title')

@@ -11,7 +11,8 @@
 
         <div class="leaderboard-sort">
                 {% trans "Sort by:" %}&nbsp;
-                <a href="{% url leaderboard %}{% query_string "sort='integration'" "" %}">{% trans "Integration" %}</a>&nbsp;|&nbsp;
+                <a href="{% url leaderboard %}{% query_string "sort='tot_integration'" "" %}">{% trans "Total integration" %}</a>&nbsp;|&nbsp;
+                <a href="{% url leaderboard %}{% query_string "sort='avg_integration'" "" %}">{% trans "Avg. integration" %}</a>&nbsp;|&nbsp;
                 <a href="{% url leaderboard %}{% query_string "sort='images'" "" %}">{% trans "Images" %}</a>
         </div>
         <table class="leaderboard">
@@ -19,6 +20,7 @@
                 <th>{% trans "Position" %}</th>
                 <th>{% trans "User" %}</th>
                 <th>{% trans "Total integration hours" %}</th>
+                <th>{% trans "Avg. integration hours" %}</th>
                 <th>{% trans "Images uploaded" %}</th>
             </tr>
         {% for u in user_list %}
@@ -26,6 +28,7 @@
                 <td>{{forloop.counter}}</td>
                 <td><a href="{% url user_page u.user_name %}">{{u.user_name}}</a></td>
                 <td>{{u.user_integration|floatformat}}</a></td>
+                <td>{{u.user_avg_integration|floatformat}}</a></td>
                 <td>{{u.user_images}}</td>
             </tr>
         {% endfor %}
