@@ -451,6 +451,8 @@ def image_upload(request):
 @require_POST
 def image_upload_process(request):
     """Process the form"""
+    if 'file' not in request.FILES:
+        return HttpResponseRedirect('/?upload_error')
 
     form = ImageUploadForm(request.POST, request.FILES)
     file = request.FILES["file"]
@@ -478,9 +480,17 @@ def image_upload_process(request):
         filename=filename,
         original_ext=original_ext,
         user=request.user,
-        license = profile.default_license)
+        license = profile.default_license,
+        is_wip = 'wip' in request.POST)
 
     image.save()
+
+    from haystack import site
+    try:
+        site.update_object(image)
+    except:
+        # Database locked, it's ok.
+        pass
 
     followers = [x.from_userprofile.user
                  for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
@@ -1048,6 +1058,49 @@ def image_delete_revision(request, id):
 
 @login_required
 @require_GET
+def image_promote(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    if image.is_wip:
+        image.is_wip = False
+        image.save()
+
+        from haystack import site
+        try:
+            site.update_object(image)
+        except:
+            # Database locked, it's ok.
+            pass
+
+    return HttpResponseRedirect('/%i/' % image.id);
+
+
+@login_required
+@require_GET
+def image_demote(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    if not image.is_wip:
+        image.is_wip = True
+        image.save()
+
+        from haystack import site
+        try:
+            site.update_object(image)
+        except:
+            # Database locked, it's ok.
+            pass
+
+
+    return HttpResponseRedirect('/%i/' % image.id);
+
+
+@login_required
+@require_GET
 def me(request):
     return user_page(request, request.user.username)
 
@@ -1101,6 +1154,13 @@ def user_page(request, username):
         (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
     )
 
+    section = 'public'
+    if 'staging' in request.GET:
+        sqs = sqs.filter(is_wip = True)
+        section = 'staging'
+    else:
+        sqs = sqs.filter(is_wip = False)
+
     return object_list(
         request,
         queryset=sqs,
@@ -1110,6 +1170,7 @@ def user_page(request, username):
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                          's3_url':settings.S3_URL,
                          'user':user,
+                         'section':section,
                          'gear_list':gear_list,
                          'stats':stats})
 
