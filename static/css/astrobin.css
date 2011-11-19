@@ -2220,11 +2220,10 @@ p.info strong {
 }
 #feedback {
   position: fixed;
-  right: -35px;
   top: 50%;
+  right: 0;
   padding: 8px 12px;
-  margin: 8px 12px;
-  height: 16px;
+  margin: 0;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -2236,9 +2235,10 @@ p.info strong {
   -webkit-transform: rotate(270deg);
   -moz-transform: rotate(270deg);
   -o-transform: rotate(270deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  height: auto;
   white-space: nowrap;
   display: block;
-  bottom: 0;
   font-weight: normal;
   text-shadow: 0px 0px 1px #333333;
 }
