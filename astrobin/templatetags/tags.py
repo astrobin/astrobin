@@ -273,13 +273,22 @@ truncatechars = stringfilter(truncatechars)
 def image_list(context, request, object_list):
     adjacent_pages = 3
     paginator = context['paginator']
-    page = int(context['page'])
-    pages = int(context['pages'])
-    page_obj = context['page_obj']
-    next = context['next']
-    previous = context['previous']
-    has_next = context['has_next']
-    has_previous = context['has_previous']
+    try:
+        page = int(context['page'])
+        pages = int(context['pages'])
+        page_obj = context['page_obj']
+        next = context['next']
+        previous = context['previous']
+        has_next = context['has_next']
+        has_previous = context['has_previous']
+    except:
+        page_obj = context['page']
+        page = page_obj.number
+        pages = paginator.num_pages
+        next = page_obj.next_page_number
+        previous = page_obj.previous_page_number
+        has_next = page_obj.has_next
+        has_previous = page_obj.has_previous
 
     try:
         image_list = [x.object for x in object_list]
