@@ -12,6 +12,7 @@
     {% endif %}
 
     <a name="related_anchor"></a>
+    {% ifequal request.user image.user %}
     {% if image.is_wip %}
     <p class="info">
         {% url image_promote image.id as promote_url %}
@@ -19,6 +20,7 @@
         {% blocktrans %}This image is a <strong>work in progress</strong> from your <a href="{{profile_url}}?staging">Staging Area</a>. This means nobody can see it unless you give them one of the links you can find in the <em>Share</em> menu below. Use that link to post this image to Internet forums and get feedback on it. When you are satisfied, perhaps after uploading some revisions, <a href="{{promote_url}}">promote it</a> to the <a href="{{profile_url}}">Public Area</a>.{% endblocktrans %}
     </p>
     {% endif %}
+    {% endifequal %}
     <div id="image-detail">
         <div id="main-content">
             <ul class="bar">

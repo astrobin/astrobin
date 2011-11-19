@@ -412,7 +412,8 @@ def image_full(request, id):
     if 'r' in request.GET and request.GET.get('r') != '0':
             is_revision = True
             revision_id = int(request.GET['r'])
-            revision_image = ImageRevision.objects.get(id=revision_id)
+            revision_image = get_object_or_404(ImageRevision, id=revision_id)
+            
 
     return object_detail(
         request,
