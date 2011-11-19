@@ -70,6 +70,8 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
 
         # Then save to bucket
         resizedFile = StringIO.StringIO()
+        if resizedImage.mode != "RGB":
+            resizedImage = resizedImage.convert("RGB")
         resizedImage.save(resizedFile, format_map[content_type][0], quality=100)
         save_to_bucket(uid + '_resized' + format_map[content_type][1],
                        resizedFile.getvalue())
@@ -83,6 +85,8 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
         enhancer = ImageEnhance.Contrast(inverted)
         inverted = enhancer.enhance(2.5)
         invertedFile = StringIO.StringIO()
+        if inverted.mode != "RGB":
+            inverted = inverted.convert("RGB")
         inverted.save(invertedFile, format_map[content_type][0])
         save_to_bucket(uid + '_inverted' + format_map[content_type][1],
                        invertedFile.getvalue())
@@ -91,6 +95,8 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
         enhancer = ImageEnhance.Contrast(inverted)
         inverted = enhancer.enhance(2.5)
         invertedFile = StringIO.StringIO()
+        if inverted.mode != "RGB":
+            inverted = inverted.convert("RGB")
         inverted.save(invertedFile, format_map[content_type][0])
         save_to_bucket(uid + '_resized_inverted' + format_map[content_type][1],
                        invertedFile.getvalue())
@@ -125,6 +131,8 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
 
     # To the final bucket
     thumbnailFile = StringIO.StringIO()
+    if croppedImage.mode != "RGB":
+        croppedImage = croppedImage.convert("RGB")
     croppedImage.save(thumbnailFile, format_map[content_type][0])
     save_to_bucket(uid + '_small_thumb' + format_map[content_type][1],
                    thumbnailFile.getvalue())
