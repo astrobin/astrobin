@@ -1739,6 +1739,7 @@ def image_revision_upload_process(request):
     return HttpResponseRedirect(image_revision.get_absolute_url())
 
 
+@login_required
 @require_GET
 def leaderboard(request):
     response_dict = {}
