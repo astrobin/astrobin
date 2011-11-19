@@ -216,7 +216,7 @@
                     <div class="context_message">
                         <img src="/static/icons/iconic/black/x_alt_16x16.png" alt="{% trans "Error" %}" />
                         <p>
-                            {% blocktrans %}Invalid image. Allowed formats are JPG, PNG and GIF.{% endblocktrans %}
+                            {% blocktrans %}Invalid image or no image provided. Allowed formats are JPG, PNG and GIF.{% endblocktrans %}
                         </p>
                     </div>
                     {% endif %}
@@ -349,14 +349,6 @@
                 // date and time pickers
                 $('input').filter('.timepickerclass').timepicker({});
                 $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
-
-                $('form#upload input').change(function() {
-                    $('form#upload').append('\
-                        <p>\
-                            <img style="margin: 10px" alt="{% blocktrans %}Uploading...{% endblocktrans %}" src="/static/images/ajax-loader.gif"/>\
-                        </p>');
-                    $('form#upload').submit();
-                });
 
                 // popup menus
                 $('select, input:checkbox, input:radio, input:file').uniform(

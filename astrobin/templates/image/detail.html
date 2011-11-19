@@ -12,6 +12,13 @@
 
 
     <a name="related_anchor"></a>
+    {% if image.is_wip %}
+    <p class="info">
+        {% url image_promote image.id as promote_url %}
+        {% url me as profile_url %}
+        {% blocktrans %}This image is a <strong>work in progress</strong> from your <a href="{{profile_url}}?staging">Staging Area</a>. This means nobody can see it unless you give them one of the links you can find in the <em>Share</em> menu below. Use that link to post this image to Internet forums and get feedback on it. When you are satisfied, perhaps after uploading some revisions, <a href="{{promote_url}}">promote it</a> to the <a href="{{profile_url}}">Public Area</a>.{% endblocktrans %}
+    </p>
+    {% endif %}
     <div id="image-detail">
         <div id="main-content">
             <ul class="bar">
@@ -62,6 +69,15 @@
                                     {% if not image.is_solved and not is_revision %}
                                     <li class="bg-icon icon-plate-solve">
                                         <span class="text"><a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "plate_solving_started" %}">{% trans "Plate-solve" %}</a></span>
+                                    </li>
+                                    {% endif %}
+                                    {% if image.is_wip %}
+                                    <li class="bg-icon icon-promote">
+                                        <span class="text"><a href="{% url image_promote image.id %}{% query_string "" "plate_solving_started" %}">{% trans "Promote to public area" %}</a></span>
+                                    </li>
+                                    {% else %}
+                                    <li class="bg-icon icon-demote">
+                                        <span class="text"><a href="{% url image_demote image.id %}{% query_string "" "plate_solving_started" %}">{% trans "Move to staging area" %}</a></span>
                                     </li>
                                     {% endif %}
                                     <li class="bg-icon icon-delete">
