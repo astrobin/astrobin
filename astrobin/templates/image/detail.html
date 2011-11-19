@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load tags %}
 
+{% block title %}AstroBin - {{image.title}} ({{image.user}}){% endblock %}
 {% block content %}
     {% if 'plate_solving_started' in request.GET %}
     <div class="context_message">
