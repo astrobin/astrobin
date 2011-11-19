@@ -1088,8 +1088,8 @@ form {
                 a, a:visited {
                     float: left;
                     margin: 0;
-                    padding: 47px 0 8px;
-                    width: 80px;
+                    min-width: 40px;
+                    padding: 47px @spacer-large @spacer-medium;
                     text-align: center;
                     text-transform: lowercase;}
                 a:hover, a:active {
@@ -1166,8 +1166,6 @@ form {
                     text-align: center;
                     text-transform: lowercase;
                     width: 40px;}
-                >a:hover.icon, >a:active.icon {
-                    background: url('/static/images/user-nav-hover-bg.png') no-repeat;}
                 >a.active, >a:visited.active {
                     background: url('/static/images/user-nav-active-bg.png') no-repeat;}}
             >li.text {
