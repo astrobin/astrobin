@@ -445,7 +445,7 @@ $(document).ready(function() {
         {{image.id}},
         {% if is_revision %}{{revision_image.id}}{% else %}0{% endif %},
         "{{image.user.username}}",
-        {{current_rating}},
+        "{{current_rating}}",
         {
             rating: {
                 hint_list: [

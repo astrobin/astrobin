@@ -725,7 +725,7 @@ var image_detail = {
         image_detail.globals.image_id = image_id;
         image_detail.globals.revision_id = revision_id;
         image_detail.globals.image_username = image_username;
-        image_detail.globals.rating.current = current_rating;
+        image_detail.globals.rating.current = parseInt(current_rating);
         $.extend(true, image_detail.config, config);
 
         /* Rating */
