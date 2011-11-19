@@ -4,36 +4,53 @@
 
 {% block content %}
     {% if request.user.is_authenticated %}
-    <div class="small-box">
-        <h2>{% trans "Quick upload" %}</h2>
-        <div class="single-form">
-            {% if upload_form %} 
-            <form id="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
+        {% if upload_form %} 
+            <div class="upload-forms">
+                <div class="wip-form-box">
+                    <h2>{% trans "Upload as a work in progress" %}</h2>
+                    <div class="single-form">
+                        <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" id="id_file"/>
+                            <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
+                            <input type="hidden" name="wip" value="" />
+                        </form>
+                        <p>
+                            {% blocktrans %}Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums.{% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
+                <div class="final-form-box">
+                    <h2>{% trans "Upload as a finished image" %}</h2>
+                    <div class="single-form">
+                        <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" id="id_file"/>
+                            <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
+                        </form>
+                        <p>
+                            {% url profile_flickr_import as flick_url %}
+                            {% url me as profile_url %}
+                            {% blocktrans %}Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href="{{profile_url}}">your profile</a> and here on the home page. You can <a href="{{flickr_url}}">import from Flickr</a> too.{% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% else %} <!-- upload_form -->
+            <div class="full-box missing-gear-warning">
+                {% url profile_edit_gear as the_url %}
+                <img src="/static/images/dim_upload.png" />
+                <h3>{% trans "Warning!" %}</h3>
                 <p>
-                    <input type="file" name="file" id="id_file"/>
-                    <noscript>
-                        <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
-                    </noscript>
+                {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}?initial">your profile</a>!{% endblocktrans %}
                 </p>
-                <p>{% trans "Choose an image to upload, or" %}
-                <p><a href="{% url profile_flickr_import %}">{% trans "import from Flickr" %}</a></p>
-            </form>
-            {% else %}
-            {% url profile_edit_gear as the_url %}
-            <img src="/static/images/dim_upload.png" />
-            <h3>{% trans "Warning!" %}</h3>
-            <p>
-            {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}?initial">your profile</a>!{% endblocktrans %}
-            </p>
-            {% endif %}
-        </div>
-    </div>
-    {% else %}
-    {% url help as help_url %}
-    <p class="hello">
-    {% blocktrans %}<strong>Hello there! Welcome to AstroBin!</strong> <em>AstroBin</em> is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}
-    {% endif %}
-    </p>
+            </div>
+        {% endif %} <!-- upload_form -->
+    {% else %}<!-- authenticated -->
+        {% url help as help_url %}
+        <p class="hello">
+            {% blocktrans %}<strong>Hello there! Welcome to AstroBin!</strong> <em>AstroBin</em> is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}
+        </p>
+    {% endif %}<!-- authenticated -->
+
     <a name="page_anchor"></a>
     <div class="full-box clear">
         <h2>{% trans "Recent images" %}</h2>

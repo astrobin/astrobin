@@ -272,27 +272,19 @@ truncatechars = stringfilter(truncatechars)
 
 def image_list(context, request, object_list):
     adjacent_pages = 3
-
-    # If we're paginating a search, we've got to replace some
-    # suff in the context, because haystack folks thought they
-    # were cool with naming their search result 'page'.
     paginator = context['paginator']
+    page = int(context['page'])
+    pages = int(context['pages'])
+    page_obj = context['page_obj']
+    next = context['next']
+    previous = context['previous']
+    has_next = context['has_next']
+    has_previous = context['has_previous']
+
     try:
-        page = int(context['page'])
-        pages = int(context['pages'])
-        page_obj = context['page_obj']
-        next = context['next']
-        previous = context['previous']
-        has_next = context['has_next']
-        has_previous = context['has_previous']
+        image_list = [x.object for x in object_list]
     except:
-        page_obj = context['page']
-        page = page_obj.number
-        pages = paginator.num_pages
-        next = page_obj.next_page_number
-        previous = page_obj.previous_page_number
-        has_next = page_obj.has_next
-        has_previous = page_obj.has_previous
+        image_list = object_list
 
     startPage = max(page - adjacent_pages, 1)
     if startPage <= 3: startPage = 1
@@ -313,7 +305,7 @@ def image_list(context, request, object_list):
         'has_previous': has_previous,
         'show_first': 1 not in page_numbers,
         'show_last': pages not in page_numbers,
-        'image_list': object_list,
+        'image_list': image_list,
         'thumbnail_size':settings.THUMBNAIL_SIZE,
         's3_url':settings.S3_URL,
         'request': request,

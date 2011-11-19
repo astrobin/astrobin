@@ -313,6 +313,7 @@ class Image(models.Model):
 
     is_stored = models.BooleanField(editable=False)
     is_solved = models.BooleanField(editable=False)
+    is_wip = models.BooleanField(editable=False, default=False)
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)
     animated = models.BooleanField(editable=False, default=False)

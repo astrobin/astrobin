@@ -235,5 +235,5 @@ kill -HUP `cat astrobin.pid`
 # ====================
 
 # Update images index
-*/1 * * * * (cd ~/Code/astrobin; ./scripts/update_index.sh) 2>&1 >/dev/null
+*/10 * * * * (cd ~/Code/astrobin; ./scripts/update_index.sh) 2>&1 >/dev/null
 
