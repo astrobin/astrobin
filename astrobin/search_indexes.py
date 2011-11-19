@@ -9,6 +9,7 @@ from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 def xapian_escape(s):
     return ''.join(ch for ch in s if ch not in set(string.punctuation))
@@ -101,10 +102,8 @@ class ImageIndex(SearchIndex):
     first_acquisition_date = DateTimeField()
     last_acquisition_date = DateTimeField()
 
-    is_wip = BooleanField(model_attr='is_wip')
-
     def index_queryset(self):
-        return Image.objects.filter(is_stored = True)
+        return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
 
     def get_model(self):
         return Image

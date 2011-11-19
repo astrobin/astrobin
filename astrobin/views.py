@@ -485,13 +485,6 @@ def image_upload_process(request):
 
     image.save()
 
-    from haystack import site
-    try:
-        site.update_object(image)
-    except:
-        # Database locked, it's ok.
-        pass
-
     followers = [x.from_userprofile.user
                  for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
     push_notification(followers, 'new_image',
@@ -1067,13 +1060,6 @@ def image_promote(request, id):
         image.is_wip = False
         image.save()
 
-        from haystack import site
-        try:
-            site.update_object(image)
-        except:
-            # Database locked, it's ok.
-            pass
-
     return HttpResponseRedirect('/%i/' % image.id);
 
 
@@ -1087,14 +1073,6 @@ def image_demote(request, id):
     if not image.is_wip:
         image.is_wip = True
         image.save()
-
-        from haystack import site
-        try:
-            site.update_object(image)
-        except:
-            # Database locked, it's ok.
-            pass
-
 
     return HttpResponseRedirect('/%i/' % image.id);
 
@@ -1155,6 +1133,7 @@ def user_page(request, username):
     )
 
     section = 'public'
+    sqs = Image.objects.filter(user = request.user).order_by('-uploaded')
     if 'staging' in request.GET:
         sqs = sqs.filter(is_wip = True)
         section = 'staging'
