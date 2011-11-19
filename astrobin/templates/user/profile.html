@@ -30,12 +30,17 @@
         <div class="fix"></div>
         {% ifequal user request.user %}
         <p>
+            <strong>
             {% if section == 'public' %}
                 {% blocktrans %}These are your public images: everybody can see them.{% endblocktrans %}
             {% endif %}
             {% if section == 'staging' %}
                 {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
             {% endif %}
+            </strong>
+        </p>
+        <p>
+            <em>{% blocktrans %}(PS: this page might take a few minutes to be updated with your new images.){% endblocktrans %}</em>
         </p>
         {% endifequal %}
 
