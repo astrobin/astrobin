@@ -1080,7 +1080,7 @@ def image_demote(request, id):
 @login_required
 @require_GET
 def me(request):
-    return user_page(request, request.user.username)
+    return HttpResponseRedirect('/users/%s/' % request.user.username)
 
 
 @require_GET
