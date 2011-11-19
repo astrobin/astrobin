@@ -1133,7 +1133,7 @@ def user_page(request, username):
     )
 
     section = 'public'
-    sqs = Image.objects.filter(user = request.user).order_by('-uploaded')
+    sqs = Image.objects.filter(user = user).order_by('-uploaded')
     if 'staging' in request.GET:
         sqs = sqs.filter(is_wip = True)
         section = 'staging'

@@ -219,7 +219,7 @@ class AdvancedSearchForm(SearchForm):
             if self.cleaned_data['moon_phase_max']:
                 sqs = sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
 
-        return sqs.filter(is_wip = False)
+        return sqs
 
 
 class LocationEditForm(forms.ModelForm):
