@@ -181,7 +181,7 @@ def image_detail(request, id):
     if 'r' in request.GET and request.GET.get('r') != '0':
         is_revision = True
         revision_id = int(request.GET['r'])
-        revision_image = ImageRevision.objects.get(id=revision_id)
+        revision_image = get_object_or_404(ImageRevision, id=revision_id)
         is_final = revision_image.is_final
         revisions = revisions.exclude(id=revision_id)
         is_ready = revision_image.is_stored
