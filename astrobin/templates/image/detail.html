@@ -4,12 +4,11 @@
 
 {% block content %}
     {% if 'plate_solving_started' in request.GET %}
-    <div id="context_message">
+    <div class="context_message">
         <img src="/static/icons/iconic/black/info_8x16.png" alt="{% trans "Info" %}" />
         <p>{% blocktrans %}Plate-solving has started in the background. It might take a while, so please don't request it again! You will be notified when the job has completed. Thanks!{% endblocktrans %}</p>
     </div>
     {% endif %}
-
 
     <a name="related_anchor"></a>
     {% if image.is_wip %}
