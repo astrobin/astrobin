@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-18 15:35-0500\n"
-"PO-Revision-Date: 2011-11-18 15:44-0500\n"
+"POT-Creation-Date: 2011-11-19 01:48-0500\n"
+"PO-Revision-Date: 2011-11-19 01:49-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -1229,8 +1229,8 @@ msgstr "La risoluzione astrometrica è stata avviata in background. Potrebbe vol
 
 #: templates/image/detail.html:19
 #, python-format
-msgid "This image is a <strong>work in progress</strong> from your <a href=\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it unless you give them the <em>Direct Link</em> you can find in the <em>Share</em> menu below. Use that link to post this image to Internet forums and get feedback on it. When you are satisfied, perhaps after uploading some revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href=\"%(profile_url)s\">Public Area</a>."
-msgstr "Quest'immagine è un <strong>lavoro in corso</strong> nella tua <a href=\"%(profile_url)s?staging\">Area di Lavoro</a>. Questo vuol dire che nessuno può vederla, a meno che tu gli dia il <em>Link Diretto</em> che puoi trovare nel menù <em>Condividi</em> qui sotto. Usa quel link per pubblicare questa immagine su dei forum e ricevere commenti. Quando sei soddisfatto, magari dopo aver caricato qualche nuova versione, <a href=\"%(promote_url)s\">promuovila</a> nell'<a href=\"%(profile_url)s\">Area Pubblica</a>."
+msgid "This image is a <strong>work in progress</strong> from your <a href=\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it unless you give them one of the links you can find in the <em>Share</em> menu below. Use that link to post this image to Internet forums and get feedback on it. When you are satisfied, perhaps after uploading some revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href=\"%(profile_url)s\">Public Area</a>."
+msgstr "Quest'immagine è un <strong>lavoro in corso</strong> nella tua <a href=\"%(profile_url)s?staging\">Area di Lavoro</a>. Questo vuol dire che nessuno può vederla, a meno che tu gli dia uno dei link che puoi trovare nel menù <em>Condividi</em> qui sotto. Usa quel link per pubblicare questa immagine su dei forum e ricevere commenti. Quando sei soddisfatto, magari dopo aver caricato qualche nuova versione, <a href=\"%(promote_url)s\">promuovila</a> nell'<a href=\"%(profile_url)s\">Area Pubblica</a>."
 
 #: templates/image/detail.html:29
 msgid "Actions"
