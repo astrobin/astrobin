@@ -1020,8 +1020,8 @@ select[multiple]:focus {
 #header #nav ul li a, #header #nav ul li a:visited {
   float: left;
   margin: 0;
-  padding: 47px 0 8px;
-  width: 80px;
+  min-width: 40px;
+  padding: 47px 12px 8px;
   text-align: center;
   text-transform: lowercase;
 }
@@ -1127,9 +1127,6 @@ select[multiple]:focus {
   text-align: center;
   text-transform: lowercase;
   width: 40px;
-}
-#header #user-nav > ul > li > a:hover.icon, #header #user-nav > ul > li > a:active.icon {
-  background: url('/static/images/user-nav-hover-bg.png') no-repeat;
 }
 #header #user-nav > ul > li > a.active, #header #user-nav > ul > li > a:visited.active {
   background: url('/static/images/user-nav-active-bg.png') no-repeat;
