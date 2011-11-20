@@ -36,7 +36,7 @@
             extraParams: "",
             matchCase: false,
             minChars: 1,
-            keyDelay: 400,
+            keyDelay: 50,
             resultsHighlight: true,
             neverSubmit: true,
             selectionLimit: false,
