@@ -28,6 +28,10 @@
                 {{search_result.object.uploaded|ago}}
             {% endifequal %}
 
+            {% ifequal sort '-acquired' %}
+                {{search_result.last_acquisition_date}}
+            {% endifequal %}
+
             {% if not sort %}
                 {{search_result.object.title|escape|truncatechars:25}}
             {% endif %}

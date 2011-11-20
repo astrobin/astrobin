@@ -54,7 +54,22 @@
 
     <a name="page_anchor"></a>
     <div class="full-box clear">
-        <h2>{% trans "Recent images" %}</h2>
+        <h2 class="inline">{% trans "Recent images" %}</h2>
+        <span>
+            {% trans "Sort by:" %}
+            {% if sort == '-uploaded' %}
+                {% trans "Uploaded" %}
+            {% else %}
+                <a href="{% url index %}">{% trans "Uploaded" %}</a>
+            {% endif %}
+            |
+            {% if sort == '-acquired' %}
+                {% trans "Acquired" %}
+            {% else %}
+                <a href="{% url index %}{% query_string "sort='-acquired'" "" %}">{% trans "Acquired" %}</a>
+            {% endif %}
+        </span>
+
         {% search_image_list request image_list %}
     </div>
 {% endblock %}

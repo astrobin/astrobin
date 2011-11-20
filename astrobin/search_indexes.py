@@ -1,5 +1,6 @@
 import string
 import re
+import datetime
 
 from haystack.indexes import *
 from haystack import site
@@ -238,7 +239,7 @@ class ImageIndex(SearchIndex):
         elif solar_system_acquisition:
             date = solar_system_acquisition.date
 
-        return date
+        return date if date else datetime.datetime.min
 
 
 class SubjectIdentifierIndex(SearchIndex):
