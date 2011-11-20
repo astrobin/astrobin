@@ -18,46 +18,79 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils.translation import ugettext as _
+from django.utils.encoding import smart_str
 
 import simplejson
 import string
 import re
 
+INTERESTING_CATALOGS = (
+    'NAME',
+    'M',
+    'NGC',
+    'IC',
+    'VDB',
+    'SH',
+)
 
 @login_required
 @require_GET
 def autocomplete(request, what):
     values = []
-    q = request.GET['q']
+    q = smart_str(request.GET['q'])
     limit = 10
-
-    regex = ".*"
-    for c in re.sub(r'\s', '', q):
-        esc = re.escape(c)
-        regex += "%s.*" % esc
 
     # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
-        subjects = simbad.find_subjects(q)[:10]
-        if subjects:
-            for s in subjects:
-                id = s.mainId
-                if q.lower() not in id.lower():
-                    sids = SubjectIdentifier.objects.filter(subject = s)
-                    for sid in sids:
-                        if q.lower() in sid.identifier.lower():
-                            id = sid.identifier
-                values.append({'id': str(s.id), 'name': id})
-        if len(values) < 10:
-            # Let's try to get some from our db too.
-            db_values = Subject.objects.filter(Q(mainId__iregex=r'%s'%regex))
-            for v in db_values:
-                if len(values) < 10:
-                    values.append({'id': str(v.id), 'name': v.mainId})
-                else:
-                    break
+        db_values = SubjectIdentifier.objects.filter(Q(identifier__icontains=q))[:10]
+        for v in db_values:
+            if v.catalog in INTERESTING_CATALOGS:
+                id = str(v.subject.id)
+                name = v.identifier
+                if v.catalog == 'NAME':
+                    name = name[4:]
 
-            return HttpResponse(simplejson.dumps(values))
+                item = {'id': id, 'name': name}
+                if item not in values:
+                    values.append(item)
+
+        # Not enough? Search Subjects.
+        if len(values) < 10:
+            db_values = Subject.objects.filter(Q(mainId__icontains=q))[:10]
+            for v in db_values:
+                if (v.catalog and v.catalog in INTERESTING_CATALOGS) or not v.catalog:
+                    id = str(v.id)
+                    name = v.mainId
+                    if v.catalog == 'NAME':
+                        name = name[4:]
+
+                    item = {'id': id, 'name': name}
+                    if item not in values:
+                        values.append(item)
+
+        # If still not enough, query Simbad.
+        if len(values) < 10:
+            limit = 10 - len(values)
+            subjects = simbad.find_subjects(q)[:limit]
+            if subjects:
+                for s in subjects:
+                    name = s.mainId
+                    if q.lower() not in name.lower():
+                        sids = SubjectIdentifier.objects.filter(subject = s)
+                        for sid in sids:
+                            if q.lower() in sid.identifier.lower():
+                                name = sid.identifier
+                    split = name.split(' ')
+                    if len(split) > 1:
+                        catalog = split[0]
+                        if catalog in INTERESTING_CATALOGS:
+                            if catalog == 'NAME':
+                                name = name[4:]
+                            item = {'id': str(s.id), 'name': name}
+                            if item not in values:
+                                values.append(item)
+
+        return HttpResponse(simplejson.dumps(values))
 
     regex = ".*%s.*" % re.escape(q)
     for k, v in {'locations': Location,

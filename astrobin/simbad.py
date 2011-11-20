@@ -7,7 +7,6 @@ from django.db import IntegrityError
 
 from models import Subject, SubjectIdentifier
 
-
 def find_subjects(q):
     regex = ".*"
     for c in re.sub(r'\s', '', q):
