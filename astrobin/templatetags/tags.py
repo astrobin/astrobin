@@ -272,28 +272,17 @@ truncatechars = stringfilter(truncatechars)
 
 def image_list(context, request, object_list):
     adjacent_pages = 3
-    paginator = context['paginator']
-    try:
-        page = int(context['page'])
-        pages = int(context['pages'])
-        page_obj = context['page_obj']
-        next = context['next']
-        previous = context['previous']
-        has_next = context['has_next']
-        has_previous = context['has_previous']
-    except:
-        page_obj = context['page']
-        page = page_obj.number
-        pages = paginator.num_pages
-        next = page_obj.next_page_number
-        previous = page_obj.previous_page_number
-        has_next = page_obj.has_next
-        has_previous = page_obj.has_previous
 
-    try:
-        image_list = [x.object for x in object_list]
-    except:
-        image_list = object_list
+    paginator = context['paginator']
+    page = int(context['page'])
+    pages = int(context['pages'])
+    page_obj = context['page_obj']
+    next = context['next']
+    previous = context['previous']
+    has_next = context['has_next']
+    has_previous = context['has_previous']
+
+    image_list = object_list
 
     startPage = max(page - adjacent_pages, 1)
     if startPage <= 3: startPage = 1
@@ -318,5 +307,69 @@ def image_list(context, request, object_list):
         'thumbnail_size':settings.THUMBNAIL_SIZE,
         's3_url':settings.S3_URL,
         'request': request,
+        'sort': request.GET.get('sort'),
     }
 register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
+
+
+def search_image_list(context, request, object_list):
+    adjacent_pages = 3
+
+    try:
+        paginator = context['paginator']
+        page = int(context['page'])
+        pages = int(context['pages'])
+        page_obj = context['page_obj']
+        next = context['next']
+        previous = context['previous']
+        has_next = context['has_next']
+        has_previous = context['has_previous']
+    except:
+        paginator = context['paginator']
+        page_obj = context['page']
+        page = page_obj.number
+        pages = paginator.num_pages
+        next = page_obj.next_page_number
+        previous = page_obj.previous_page_number
+        has_next = page_obj.has_next
+        has_previous = page_obj.has_previous
+
+    image_list = object_list
+
+    startPage = max(page - adjacent_pages, 1)
+    if startPage <= 3: startPage = 1
+    endPage = page + adjacent_pages + 1
+    if endPage >= pages - 1: endPage = pages + 1
+    page_numbers = [n for n in range(startPage, endPage) \
+            if n > 0 and n <= pages]
+
+    return {
+        'page_obj': page_obj,
+        'paginator': paginator,
+        'page': page,
+        'pages': pages,
+        'page_numbers': page_numbers,
+        'next': next,
+        'previous': previous,
+        'has_next': has_next,
+        'has_previous': has_previous,
+        'show_first': 1 not in page_numbers,
+        'show_last': pages not in page_numbers,
+        'image_list': image_list,
+        'thumbnail_size':settings.THUMBNAIL_SIZE,
+        's3_url':settings.S3_URL,
+        'request': request,
+        'sort': request.GET.get('sort'),
+    }
+register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context=True)(search_image_list)
+
+@register.filter
+def seconds_to_hours(value):
+    try:
+        value = int(value)
+    except ValueError:
+        return "0"
+
+    return "%.1f" % (int(value) / 3600.0)
+
+
