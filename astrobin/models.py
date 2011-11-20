@@ -94,6 +94,16 @@ class Accessory(Gear):
         app_label = 'astrobin'
 
 
+def build_catalog_and_name(obj, name):
+    split = name.split(' ')
+    if len(split) > 1:
+        cat = split[0]
+        del(split[0])
+        name = ' '.join(split)
+
+        setattr(obj, 'catalog', cat)
+    setattr(obj, 'name', name)
+
 class Subject(models.Model):
     # Simbad object id
     oid = models.IntegerField()
@@ -110,6 +120,12 @@ class Subject(models.Model):
     # Dimensions along the major and minor axis
     dim_majaxis = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     dim_minaxis = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+
+    # Catalog name, i.e. fist word of a SIMBAD mainId
+    catalog = models.CharField(max_length=64, null=True, blank=True)
+
+    # id of the Subject, excluding the catalog name
+    name = models.CharField(max_length=64, default = '')
 
     # The list of identifier (aka alternative names) is done via
     # a many-to-one relationship in SubjectIdentifier.
@@ -140,16 +156,30 @@ class Subject(models.Model):
         self.initFromJson(json)
         f.close()
 
+    def save(self, *args, **kwargs):
+        build_catalog_and_name(self, self.mainId)
+        super(Subject, self).save(*args, **kwargs)
+
 
 class SubjectIdentifier(models.Model):
     identifier = models.CharField(max_length=64, unique=True)
     subject = models.ForeignKey(Subject, related_name='idlist')
+
+    # Catalog name, i.e. fist word of a SIMBAD mainId
+    catalog = models.CharField(max_length=64, null=True, blank=True)
+
+    # id of the Subject, excluding the catalog name
+    name = models.CharField(max_length=64, default = '')
 
     class Meta:
         app_label = 'astrobin'
 
     def __unicode__(self):
         return self.identifier
+
+    def save(self, *args, **kwargs):
+        build_catalog_and_name(self, self.identifier)
+        super(SubjectIdentifier, self).save(*args, **kwargs)
 
 
 class Location(models.Model):
