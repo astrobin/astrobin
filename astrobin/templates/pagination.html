@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load tags %}
+
+<div class="pagination">
+    <div class="pager">
+       {% if has_previous %}
+          <span class="page">
+          <a href="{% query_string "page=previous" "" %}#page_anchor">&laquo; {% trans "previous" %}</a>
+          </span>
+       {% endif %}
+
+       {% if show_first %}
+          <span class="page"><a href="{% query_string "page=1" "" %}#page_anchor">1</a></span>
+          <span class="ellipsis">...</span>
+       {% endif %}
+       {% for linkpage in page_numbers %}
+          {% ifequal linkpage page %}
+             <span class="current">{{ page }}</span>
+          {% else %}
+             <span class="page"><a href="{% query_string "page=linkpage" "" %}#page_anchor"
+                   >{{ linkpage }}</a></span>
+          {% endifequal %}
+       {% endfor %}
+       {% if show_last %}
+          <span class="ellipsis">...</span>
+          <span class="page"><a href="{% query_string "page=last" "" %}#page_anchor">{{ pages }}</a></span>
+       {% endif %}
+       {% if has_next %}
+          <span class="page"><a href="{% query_string "page=next" "" %}#page_anchor">{% trans "next" %} &raquo;</a></span>
+       {% endif %}
+    </div>
+</div>

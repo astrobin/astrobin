@@ -10,4 +10,4 @@ class ImageSearchView(SearchView):
             order_by = self.request.GET['sort']
             sqs = sqs.order_by(order_by)
 
-        return [x.object for x in sqs]
+        return sqs
