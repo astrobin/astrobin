@@ -143,7 +143,6 @@ def index(request):
             form = ImageUploadForm()
 
     sqs = SearchQuerySet().all().models(Image)
-    sqs = sqs.order_by('-uploaded')
 
     response_dict = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                      's3_url':settings.S3_URL,
@@ -151,6 +150,13 @@ def index(request):
 
     if 'upload_error' in request.GET:
         response_dict['upload_error'] = True
+
+    if request.GET.get('sort') == '-acquired':
+        response_dict['sort'] = '-acquired'
+        sqs = sqs.order_by('-last_acquisition_date')
+    else:
+        response_dict['sort'] = '-uploaded'
+        sqs = sqs.order_by('-uploaded')
 
     return object_list(
         request, 
