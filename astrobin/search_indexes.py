@@ -7,6 +7,7 @@ from haystack import site
 from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
+from astrobin.models import Subject, SubjectIdentifier
 
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -240,5 +241,29 @@ class ImageIndex(SearchIndex):
         return date
 
 
+class SubjectIdentifierIndex(SearchIndex):
+    text = CharField(document=True, use_template=False)
+    name_auto = NgramField(model_attr='identifier')
+
+    def index_queryset(self):
+        return SubjectIdentifier.objects.all()
+
+    def get_model(self):
+        return SubjectIdentifier
+
+
+class SubjectIndex(SearchIndex):
+    text = CharField(document=True, use_template=False)
+    name_auto = NgramField(model_attr='mainId')
+
+    def index_queryset(self):
+        return Subject.objects.all()
+
+    def get_model(self):
+        return Subject
+
+
 site.register(Image, ImageIndex)
 site.register(User, UserIndex)
+site.register(SubjectIdentifier, SubjectIdentifierIndex)
+site.register(Subject, SubjectIndex)
