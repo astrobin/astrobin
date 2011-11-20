@@ -48,6 +48,8 @@
           _gaq.push(['_setCustomVar', 1, 'User Type', 'Anonymous']);
           {% endif %}
 
+          {% block extra_gaq_push %}{% endblock %}
+
           _gaq.push(['_trackPageview']);
 
           (function() {

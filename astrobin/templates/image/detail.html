@@ -2,6 +2,12 @@
 {% load i18n %}
 {% load tags %}
 
+{% block extra_gaq_push %}
+    {% if image.is_wip %}
+          _gaq.push(['_setCustomVar', 3, 'Staging Image', 'Yes']);
+    {% endif %}
+{% endblock %}
+
 {% block title %}AstroBin - {{image.title}} ({{image.user}}){% endblock %}
 {% block content %}
     {% if 'plate_solving_started' in request.GET %}
