@@ -20,6 +20,8 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.utils.encoding import smart_str
 
+from haystack.query import SearchQuerySet
+
 import simplejson
 import string
 import re
@@ -42,12 +44,12 @@ def autocomplete(request, what):
 
     # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
-        db_values = SubjectIdentifier.objects.filter(Q(identifier__icontains=q))[:10]
+        db_values = SearchQuerySet().autocomplete(name_auto = q).models(SubjectIdentifier)[:10]
         for v in db_values:
-            if v.catalog in INTERESTING_CATALOGS:
-                id = str(v.subject.id)
-                name = v.identifier
-                if v.catalog == 'NAME':
+            if v.object.catalog in INTERESTING_CATALOGS:
+                id = str(v.object.subject.id)
+                name = v.object.identifier
+                if v.object.catalog == 'NAME':
                     name = name[4:]
 
                 item = {'id': id, 'name': name}
@@ -56,12 +58,12 @@ def autocomplete(request, what):
 
         # Not enough? Search Subjects.
         if len(values) < 10:
-            db_values = Subject.objects.filter(Q(mainId__icontains=q))[:10]
+            db_values = SearchQuerySet().autocomplete(name_auto = q).models(Subject)[:10]
             for v in db_values:
-                if (v.catalog and v.catalog in INTERESTING_CATALOGS) or not v.catalog:
-                    id = str(v.id)
-                    name = v.mainId
-                    if v.catalog == 'NAME':
+                if (v.object.catalog and v.object.catalog in INTERESTING_CATALOGS) or not v.object.catalog:
+                    id = str(v.object.id)
+                    name = v.object.mainId
+                    if v.object.catalog == 'NAME':
                         name = name[4:]
 
                     item = {'id': id, 'name': name}
