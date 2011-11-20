@@ -4,10 +4,12 @@ import re
 
 from django.conf import settings
 from django.db import IntegrityError
+from django.utils.encoding import smart_str
 
 from models import Subject, SubjectIdentifier
 
 def find_subjects(q):
+    q = smart_str(q)
     regex = ".*"
     for c in re.sub(r'\s', '', q):
         esc = re.escape(c)
