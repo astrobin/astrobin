@@ -53,7 +53,22 @@ def autocomplete(request, what):
                 item = {'id': id, 'name': name}
                 if item not in values:
                     values.append(item)
-        # If still not enough, query Simbad
+
+        # Not enough? Search Subjects.
+        if len(values) < 10:
+            db_values = Subject.objects.filter(Q(mainId__icontains=q))[:10]
+            for v in db_values:
+                if (v.catalog and v.catalog in INTERESTING_CATALOGS) or not v.catalog:
+                    id = str(v.id)
+                    name = v.mainId
+                    if v.catalog == 'NAME':
+                        name = name[4:]
+
+                    item = {'id': id, 'name': name}
+                    if item not in values:
+                        values.append(item)
+
+        # If still not enough, query Simbad.
         if len(values) < 10:
             limit = 10 - len(values)
             subjects = simbad.find_subjects(q)[:limit]
