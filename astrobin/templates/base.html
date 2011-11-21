@@ -48,6 +48,8 @@
           _gaq.push(['_setCustomVar', 1, 'User Type', 'Anonymous']);
           {% endif %}
 
+          // Reset the custom variables that might be then overriden later.
+          _gaq.push(['_setCustomVar', 3, 'Staging Image', 'No']);
           {% block extra_gaq_push %}{% endblock %}
 
           _gaq.push(['_trackPageview']);
