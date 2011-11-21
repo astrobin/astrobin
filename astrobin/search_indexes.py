@@ -105,7 +105,7 @@ class ImageIndex(SearchIndex):
     last_acquisition_date = DateTimeField()
 
     def index_queryset(self):
-        return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
+        return Image.objects.filter(Q(is_stored = True), Q(is_wip = False)).order_by('-uploaded')
 
     def get_model(self):
         return Image
