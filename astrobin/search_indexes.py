@@ -243,8 +243,7 @@ class ImageIndex(SearchIndex):
 
 
 class SubjectIdentifierIndex(SearchIndex):
-    text = CharField(document=True, use_template=False)
-    name_auto = NgramField(model_attr='identifier')
+    text = NgramField(document=True, use_template=True)
 
     def index_queryset(self):
         return SubjectIdentifier.objects.all()
@@ -254,8 +253,7 @@ class SubjectIdentifierIndex(SearchIndex):
 
 
 class SubjectIndex(SearchIndex):
-    text = CharField(document=True, use_template=False)
-    name_auto = NgramField(model_attr='mainId')
+    text = NgramField(document=True, use_template=True)
 
     def index_queryset(self):
         return Subject.objects.all()
