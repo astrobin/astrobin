@@ -44,7 +44,7 @@ def autocomplete(request, what):
 
     # Subjects have a special case because their name is in the mainId field.
     if what == 'subjects':
-        db_values = SearchQuerySet().autocomplete(name_auto = q).models(SubjectIdentifier)[:10]
+        db_values = SearchQuerySet().autocomplete(text = q).models(SubjectIdentifier)[:10]
         for v in db_values:
             if v.object.catalog in INTERESTING_CATALOGS:
                 id = str(v.object.subject.id)
@@ -58,7 +58,7 @@ def autocomplete(request, what):
 
         # Not enough? Search Subjects.
         if len(values) < 10:
-            db_values = SearchQuerySet().autocomplete(name_auto = q).models(Subject)[:10]
+            db_values = SearchQuerySet().autocomplete(text = q).models(Subject)[:10]
             for v in db_values:
                 if (v.object.catalog and v.object.catalog in INTERESTING_CATALOGS) or not v.object.catalog:
                     id = str(v.object.id)
