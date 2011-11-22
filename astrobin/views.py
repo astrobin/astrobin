@@ -54,7 +54,7 @@ def now_timezone():
     return datetime.datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
-def valueReader(request, field):
+def valueReader(source, field):
     def unicode_truncate(s, length, encoding='utf-8'):
         encoded = s.encode(encoding)[:length]
         return encoded.decode(encoding, 'ignore')
@@ -64,10 +64,10 @@ def valueReader(request, field):
             yield line.encode('utf-8')
 
     as_field = 'as_values_' + field
-    if as_field in request.POST:
-        value = request.POST[as_field]
-    elif field in request.POST:
-        value = request.POST[field]
+    if as_field in source:
+        value = source[as_field]
+    elif field in source:
+        value = source[field]
     else:
         return [], ""
 
@@ -782,7 +782,7 @@ def image_edit_save_basic(request):
     image.subjects.clear()
     image.locations.clear()
 
-    (ids, value) = valueReader(request, 'subjects')
+    (ids, value) = valueReader(request.POST, 'subjects')
     if ids:
         for id in ids:
             k = None
@@ -823,7 +823,7 @@ def image_edit_save_basic(request):
 
     form.fields['subjects'].initial = u', '.join(x.mainId for x in getattr(image, 'subjects').all())
 
-    (ids, value) = valueReader(request, 'locations')
+    (ids, value) = valueReader(request.POST, 'locations')
     if ids:
         for id in ids:
             try:
@@ -1191,7 +1191,7 @@ def user_profile_save_basic(request):
 
     if form.is_valid():
         profile.locations.clear()
-        (ids, value) = valueReader(request, 'locations')
+        (ids, value) = valueReader(request.POST, 'locations')
         for id in ids:
             k = None
             try:
@@ -1313,7 +1313,7 @@ def user_profile_save_gear(request):
                  "filters"       : [Filter, profile.filters],
                  "accessories"   : [Accessory, profile.accessories],
                 }.iteritems():
-        (names, value) = valueReader(request, k)
+        (names, value) = valueReader(request.POST, k)
         for name in names:
             gear_item, created = v[0].objects.get_or_create(name = name)
             if created:
@@ -1623,7 +1623,7 @@ def bring_to_attention(request):
     if not form.is_valid():
         return ajax_fail()
 
-    (usernames, value) = valueReader(request, 'user')
+    (usernames, value) = valueReader(request.POST, 'user')
     recipients = []
     for username in usernames:
         user = User.objects.get(username=username)
