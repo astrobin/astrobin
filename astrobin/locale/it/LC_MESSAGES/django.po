@@ -261,7 +261,7 @@ msgstr "(in mm)"
 
 #: models.py:294
 msgid "Insert a focal length if you want to plate-solve."
-msgstr "Inserisci la lunghezza focale se vuoi avviare la risoluzione astrometrica."
+msgstr "Inserisci la lunghezza focale se vuoi avviare la riduzione astrometrica."
 
 #: models.py:304
 msgid "(in &mu;m)"
@@ -269,7 +269,7 @@ msgstr "(in &mu;m)"
 
 #: models.py:306
 msgid "Insert a pixel size if you want to plate-solve."
-msgstr "Inserisci la dimensione del pixel se vuoi avviare la risoluzione astrometrica."
+msgstr "Inserisci la dimensione del pixel se vuoi avviare la riduzione astrometrica."
 
 #: models.py:308
 msgid "Pixel size"
@@ -683,19 +683,19 @@ msgstr "L'immagine è stata salvata"
 
 #: management/__init__.py:44
 msgid "Image solved"
-msgstr "L'immagine è stata risolta"
+msgstr "La riduzione astrometrica è stata effettuata"
 
 #: management/__init__.py:45
 msgid "Plate solving the image has succeeded"
-msgstr "La risoluzione astrometrica dell'immagine è stata completata con successo"
+msgstr "La riduzione astrometrica dell'immagine è stata completata con successo"
 
 #: management/__init__.py:49
 msgid "Image not solved"
-msgstr "Immagine non risolta"
+msgstr "La riduzione astrometrica non è stata effettuata"
 
 #: management/__init__.py:50
 msgid "Plate solving the image has failed"
-msgstr "La risoluzione astrometrica dell'immagine non è andata a buon fine"
+msgstr "La riduzione astrometrica dell'immagine non è andata a buon fine"
 
 #: management/__init__.py:54
 msgid "Request fulfilled"
@@ -965,7 +965,7 @@ msgstr "Sciocchezze. Astrobin <strong>non</strong> è stato realizzato per mostr
 
 #: templates/faq.html:52
 msgid "It's a badge that proudly marks the images that were plate-solved."
-msgstr "È una spilla che marchia le immagini a cui è stata applicata la risoluzione astrometrica."
+msgstr "È una spilla che marchia le immagini a cui è stata applicata la riduzione astrometrica."
 
 #: templates/faq.html:59
 msgid "On AstroBin you have two places for our images. The Staging Area is where you can upload images that you want to quickly share on forums, mailing lists or social networks. The days of scaling down and compressing your image so you can upload it to a forum for feedback and critique are over! Just upload to AstroBin's Staging Area, and send the link to anyone you want. The image will be visible only to the intended recipients, and won't appear on your profile or AstroBin's home page."
@@ -1061,7 +1061,7 @@ msgstr "Molto più di un'immagine"
 
 #: templates/help.html:44
 msgid "<em>AstroBin</em> will do more than just host a copy of your image: when you upload a photograph, a histogram and a black &amp; white inverted version of the image will be generated on the fly, so it's easier to spot faint nebulosity regions or spiral arms. Images will also be plate solved, and an annotated version will appear on the site. <em>AstroBin</em> will know what are the astronomical objects in your image without you telling!"
-msgstr "<em>AstroBin</em> fa ben più che semplicemente fornire l'hosting delle tue immagini: quando carichi una foto, l'istogramma ed una versione in bianco e nero invertita vengono generati al volo, così da mostrare meglio regioni nebulari deboli o bracci a spirale. Alle immagini viene anche effettuata la risoluzione astrometrica, e la versione annotata apparirà sul sito. <em>AstroBin</em> saprà quali oggetti ci sono nella tua immagine, senza che tu glielo dica!"
+msgstr "<em>AstroBin</em> fa ben più che semplicemente fornire l'hosting delle tue immagini: quando carichi una foto, l'istogramma ed una versione in bianco e nero invertita vengono generati al volo, così da mostrare meglio regioni nebulari deboli o bracci a spirale. Alle immagini viene anche effettuata la riduzione astrometrica, e la versione annotata apparirà sul sito. <em>AstroBin</em> saprà quali oggetti ci sono nella tua immagine, senza che tu glielo dica!"
 
 #: templates/help.html:48
 msgid "AstroBin supports multiple image revisions"
@@ -1275,7 +1275,7 @@ msgstr "Per concludere, queste condizioni sono semplicemente un modo di dire \"s
 
 #: templates/image/detail.html:10
 msgid "Plate-solving has started in the background. It might take a while, so please don't request it again! You will be notified when the job has completed. Thanks!"
-msgstr "La risoluzione astrometrica è stata avviata in background. Potrebbe volerci un po', quindi non cercare di avviarla nuovamente! Riceverai una notifica quando il processo è stato completato. Grazie!"
+msgstr "La riduzione astrometrica è stata avviata in background. Potrebbe volerci un po', quindi non cercare di avviarla nuovamente! Riceverai una notifica quando il processo è stato completato. Grazie!"
 
 #: templates/image/detail.html:20
 #, python-format
@@ -1765,15 +1765,15 @@ msgstr "Conoscere la scala dei pixel sarebbe d'aiuto"
 
 #: templates/image/edit/presolve.html:24
 msgid "Step 1 of 2: plate solving scale"
-msgstr "Passo 1 di 2: scala per la risoluzione astrometrica"
+msgstr "Passo 1 di 2: scala per la riduzione astrometrica"
 
 #: templates/image/edit/presolve.html:26
 msgid "Edit your image: plate-solving scale"
-msgstr "Modifica l'immagine: scala per la risoluzione astrometrica"
+msgstr "Modifica l'immagine: scala per la riduzione astrometrica"
 
 #: templates/image/edit/presolve.html:31
 msgid "AstroBin <em>could</em> plate-solve your image without knowing anything about it, but that's a very long process. If you know the focal length of your telescope and the pixel size of your camera, plate-solving will be much faster and will have a better chance of success!"
-msgstr "AstroBin <em>potrebbe</em> effettuare la risoluzione astrometrica della tua immagine senza alcuna informazione su di essa, ma si tratta di un procedimento molto lungo. Se conosci la lunghezza focale del tuo telescopio e la dimensione dei singoli pixel della tua camera, la risoluzione astrometrica può essere molto più veloce ed avere una miglior possibilità di successo!"
+msgstr "AstroBin <em>potrebbe</em> effettuare la riduzione astrometrica della tua immagine senza alcuna informazione su di essa, ma si tratta di un procedimento molto lungo. Se conosci la lunghezza focale del tuo telescopio e la dimensione dei singoli pixel della tua camera, la riduzione astrometrica può essere molto più veloce ed avere una miglior possibilità di successo!"
 
 #: templates/image/edit/presolve.html:33
 msgid "PS: It's OK if you're a little off with these numbers."
@@ -1781,7 +1781,7 @@ msgstr "PS: non importa se non sei precisissimo con questi numeri."
 
 #: templates/image/edit/presolve.html:40
 msgid "Start plate-solving"
-msgstr "Avvia la risoluzione"
+msgstr "Avvia la riduzione"
 
 #: templates/image/edit/presolve.html:43
 msgid "Save and continue"
@@ -1789,7 +1789,7 @@ msgstr "Salva e continua"
 
 #: templates/image/edit/presolve.html:44
 msgid "or skip plate-solving for now"
-msgstr "oppure salta la risoluzione astrometrica per ora"
+msgstr "oppure salta la riduzione astrometrica per ora"
 
 #: templates/inclusion_tags/form_saved.html:5
 msgid "Saved!"
@@ -1984,7 +1984,7 @@ msgstr "La tua immagine è stata cancellata"
 #: templates/notification/image_not_solved/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
-msgstr "<a href=\"%(object_url)s\">Non è stato possibile effettuare la risoluzione astrometrica della tua immagine.</a>"
+msgstr "<a href=\"%(object_url)s\">Non è stato possibile effettuare la riduzione astrometrica della tua immagine.</a>"
 
 #: templates/notification/image_ready/notice.html:2
 #: templates/notification/image_ready/short.html:2
@@ -1996,7 +1996,7 @@ msgstr "<a href=\"%(object_url)s\">La tua immagine è stata processata.</a>"
 #: templates/notification/image_solved/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
-msgstr "<a href=\"%(object_url)s\">La risoluzione astrometrica della tua immagine è stata effettuata con successo.</a>"
+msgstr "<a href=\"%(object_url)s\">La riduzione astrometrica della tua immagine è stata effettuata con successo.</a>"
 
 #: templates/notification/new_follower/full.txt:2
 #, python-format
@@ -2468,7 +2468,7 @@ msgstr "Puoi selezionare una licenza predefinita per tutto quello che carichi su
 #~ "dell'immagine)"
 
 #~ msgid "Why won't my image get plate-solved?"
-#~ msgstr "Perché la risoluzione astrometrica della mia immagine non funziona?"
+#~ msgstr "Perché la riduzione astrometrica della mia immagine non funziona?"
 
 #~ msgid ""
 #~ "Most images should get plate-solved if you've specified the correct pixel "
@@ -2479,7 +2479,7 @@ msgstr "Puoi selezionare una licenza predefinita per tutto quello che carichi su
 #~ "you write your pixel size. If you resized your image by 50%%, then you "
 #~ "have to double the size of the pixel."
 #~ msgstr ""
-#~ "La maggior parte delle immagini vengono risolve astrometricamente con "
+#~ "La maggior parte delle immagini vengono ridotte astrometricamente con "
 #~ "successo, se specifichi la corretta scala del pixel. Quando ti si chiede "
 #~ "la lunghezza focale del telescopio e la dimensione del pixel della "
 #~ "camera, ricordati che devi tenere in considerazione il binning, e, questo "
@@ -2496,7 +2496,7 @@ msgstr "Puoi selezionare una licenza predefinita per tutto quello che carichi su
 #~ "input field."
 #~ msgstr ""
 #~ "PS: non fa niente se non sei precisissimo con questi numeri. Va bene se "
-#~ "hai croppato la foto, ma se l'hai ridimensionata allora la risoluzione "
+#~ "hai croppato la foto, ma se l'hai ridimensionata allora la riduzione "
 #~ "astrometrica potrebbe non riuscire, a meno che non prendi in "
 #~ "considerazione questo ridimensionamento quando specifici la dimensione "
 #~ "del pixel."
