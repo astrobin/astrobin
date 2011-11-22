@@ -349,7 +349,7 @@
                         <p>
                             <strong>{% trans i.0 %}:&nbsp;</strong>
                             {% for g in i.1 %}
-                                <a href="/search/?q={{g.name|escape|cut:" "}}">{{g.name|escape}}</a>
+                                <a href="/search/?q={{g.name|escape}}&type={{i.2}}">{{g.name|escape}}</a>
                                 {% if not forloop.last %},&nbsp;{% endif %}
                             {% endfor %}
                         </p>

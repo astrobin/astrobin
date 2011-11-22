@@ -227,16 +227,18 @@ def image_detail(request, id):
 
     related_images = related_images.exclude(django_id=id).models(Image).order_by('-uploaded')
 
-    gear_list = [('Imaging telescopes', image.imaging_telescopes.all()),
-                 ('Imaging cameras'   , image.imaging_cameras.all()),
-                 ('Mounts'            , image.mounts.all()),
-                 ('Guiding telescopes', image.guiding_telescopes.all()),
-                 ('Guiding cameras'   , image.guiding_cameras.all()),
-                 ('Focal reducers'    , image.focal_reducers.all()),
-                 ('Software'          , image.software.all()),
-                 ('Filters'           , image.filters.all()),
-                 ('Accessories'       , image.accessories.all()),
-                ]
+    gear_list = (
+        ('Imaging telescopes', image.imaging_telescopes.all(), 'imaging_telescopes'),
+        ('Imaging cameras'   , image.imaging_cameras.all(), 'imaging_cameras'),
+        ('Mounts'            , image.mounts.all(), 'mounts'),
+        ('Guiding telescopes', image.guiding_telescopes.all(), 'guiding_telescopes'),
+        ('Guiding cameras'   , image.guiding_cameras.all(), 'guiding_cameras'),
+        ('Focal reducers'    , image.focal_reducers.all(), 'focal_reducers'),
+        ('Software'          , image.software.all(), 'software'),
+        ('Filters'           , image.filters.all(), 'filters'),
+        ('Accessories'       , image.accessories.all(), 'accessories'),
+    )
+
 
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
     ssa = None
@@ -1096,13 +1098,13 @@ def user_page(request, username):
     user = get_object_or_404(User, username = username)
     profile = UserProfile.objects.get(user=user)
 
-    gear_list = [('Telescopes'    , profile.telescopes.all()),
-                 ('Mounts'        , profile.mounts.all()),
-                 ('Cameras'       , profile.cameras.all()),
-                 ('Focal reducers', profile.focal_reducers.all()),
-                 ('Software'      , profile.software.all()),
-                 ('Filters'       , profile.filters.all()),
-                 ('Accessories'   , profile.accessories.all()),
+    gear_list = [('Telescopes'    , profile.telescopes.all(), 'imaging_telescopes'),
+                 ('Mounts'        , profile.mounts.all(), 'mounts'),
+                 ('Cameras'       , profile.cameras.all(), 'imaging_cameras'),
+                 ('Focal reducers', profile.focal_reducers.all(), 'focal_reducers'),
+                 ('Software'      , profile.software.all(), 'software'),
+                 ('Filters'       , profile.filters.all(), 'filters'),
+                 ('Accessories'   , profile.accessories.all(), 'accessories'),
                 ]
 
     # Calculate some stats
