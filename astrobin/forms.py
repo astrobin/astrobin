@@ -183,7 +183,7 @@ class AdvancedSearchForm(SearchForm):
 
     def __init__(self, data=None, **kwargs):
         super(AdvancedSearchForm, self).__init__(data, **kwargs)
-        self.fields['q'].help_text = _("Search astronomical objects (or leave empty to search all)")
+        self.fields['q'].help_text = _("Search for astronomical objects, telescopes, cameras, filters...")
 
         self.fields['imaging_telescopes'].label = _("Imaging telescopes")
         self.fields['imaging_cameras'].label = _("Imaging cameras")
