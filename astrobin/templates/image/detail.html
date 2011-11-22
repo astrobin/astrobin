@@ -349,7 +349,11 @@
                         <p>
                             <strong>{% trans i.0 %}:&nbsp;</strong>
                             {% for g in i.1 %}
-                                <a href="/search/?q={{g.name|escape|cut:" "}}">{{g.name|escape}}</a>
+                                {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}
+                                    <a href="/search/?q=&as_values_{{i.2}}={{g.id}}">{{g.name|escape}}</a>
+                                {% else %}
+                                    <a href="/search/?q={{g.name|escape}}&type={{i.2}}">{{g.name|escape}}</a>
+                                {% endif %}
                                 {% if not forloop.last %},&nbsp;{% endif %}
                             {% endfor %}
                         </p>

@@ -97,8 +97,12 @@ def autocomplete(request, what):
     regex = ".*%s.*" % re.escape(q)
     for k, v in {'locations': Location,
                  'telescopes':Telescope,
+                 'imaging_telescopes':Telescope,
+                 'guiding_telescopes':Telescope,
                  'mounts':Mount,
                  'cameras':Camera,
+                 'imaging_cameras':Camera,
+                 'guiding_cameras':Camera,
                  'focal_reducers':FocalReducer,
                  'software':Software,
                  'filters':Filter,
