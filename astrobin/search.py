@@ -19,7 +19,9 @@ class ImageSearchView(SearchView):
         sqs = super(ImageSearchView, self).get_results()
 
         search_type = self.request.GET.get('type')
-        q = xapian_escape(self.request.GET.get('q')).replace(' ', '')
+        q = self.request.GET.get('q')
+        if q:
+            q = xapian_escape(q).replace(' ', '')
 
         if search_type:
             sqs = sqs.filter(**{search_type: q})
