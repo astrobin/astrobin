@@ -68,7 +68,7 @@ class ImageSearchView(SearchView):
         prefills = {}
         for tag, klass in {'imaging_telescopes': Telescope,
                            'imaging_cameras': Camera}.iteritems():
-            ids, value = valueReader(self.request.POST, tag)
+            ids, value = valueReader(self.request.GET, tag)
             prefills[tag] = []
             for id in ids:
                 try:
