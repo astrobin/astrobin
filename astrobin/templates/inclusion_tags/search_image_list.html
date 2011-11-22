@@ -33,7 +33,7 @@
             {% endifequal %}
 
             {% if not sort %}
-                {{search_result.object.title|escape|truncatechars:25}}
+                {{search_result.object.title|escape|truncatechars:23}}
             {% endif %}
             <br/>
             {% with search_result.object.user.username|truncatechars:24 as user %}
