@@ -54,7 +54,7 @@ def now_timezone():
     return datetime.datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
-def valueReader(request, field):
+def valueReader(source, field):
     def unicode_truncate(s, length, encoding='utf-8'):
         encoded = s.encode(encoding)[:length]
         return encoded.decode(encoding, 'ignore')
@@ -64,10 +64,10 @@ def valueReader(request, field):
             yield line.encode('utf-8')
 
     as_field = 'as_values_' + field
-    if as_field in request.POST:
-        value = request.POST[as_field]
-    elif field in request.POST:
-        value = request.POST[field]
+    if as_field in source:
+        value = source[as_field]
+    elif field in source:
+        value = source[field]
     else:
         return [], ""
 
@@ -227,16 +227,18 @@ def image_detail(request, id):
 
     related_images = related_images.exclude(django_id=id).models(Image).order_by('-uploaded')
 
-    gear_list = [('Imaging telescopes', image.imaging_telescopes.all()),
-                 ('Imaging cameras'   , image.imaging_cameras.all()),
-                 ('Mounts'            , image.mounts.all()),
-                 ('Guiding telescopes', image.guiding_telescopes.all()),
-                 ('Guiding cameras'   , image.guiding_cameras.all()),
-                 ('Focal reducers'    , image.focal_reducers.all()),
-                 ('Software'          , image.software.all()),
-                 ('Filters'           , image.filters.all()),
-                 ('Accessories'       , image.accessories.all()),
-                ]
+    gear_list = (
+        ('Imaging telescopes', image.imaging_telescopes.all(), 'imaging_telescopes'),
+        ('Imaging cameras'   , image.imaging_cameras.all(), 'imaging_cameras'),
+        ('Mounts'            , image.mounts.all(), 'mounts'),
+        ('Guiding telescopes', image.guiding_telescopes.all(), 'guiding_telescopes'),
+        ('Guiding cameras'   , image.guiding_cameras.all(), 'guiding_cameras'),
+        ('Focal reducers'    , image.focal_reducers.all(), 'focal_reducers'),
+        ('Software'          , image.software.all(), 'software'),
+        ('Filters'           , image.filters.all(), 'filters'),
+        ('Accessories'       , image.accessories.all(), 'accessories'),
+    )
+
 
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
     ssa = None
@@ -780,7 +782,7 @@ def image_edit_save_basic(request):
     image.subjects.clear()
     image.locations.clear()
 
-    (ids, value) = valueReader(request, 'subjects')
+    (ids, value) = valueReader(request.POST, 'subjects')
     if ids:
         for id in ids:
             k = None
@@ -821,7 +823,7 @@ def image_edit_save_basic(request):
 
     form.fields['subjects'].initial = u', '.join(x.mainId for x in getattr(image, 'subjects').all())
 
-    (ids, value) = valueReader(request, 'locations')
+    (ids, value) = valueReader(request.POST, 'locations')
     if ids:
         for id in ids:
             try:
@@ -1096,13 +1098,13 @@ def user_page(request, username):
     user = get_object_or_404(User, username = username)
     profile = UserProfile.objects.get(user=user)
 
-    gear_list = [('Telescopes'    , profile.telescopes.all()),
-                 ('Mounts'        , profile.mounts.all()),
-                 ('Cameras'       , profile.cameras.all()),
-                 ('Focal reducers', profile.focal_reducers.all()),
-                 ('Software'      , profile.software.all()),
-                 ('Filters'       , profile.filters.all()),
-                 ('Accessories'   , profile.accessories.all()),
+    gear_list = [('Telescopes'    , profile.telescopes.all(), 'imaging_telescopes'),
+                 ('Mounts'        , profile.mounts.all(), 'mounts'),
+                 ('Cameras'       , profile.cameras.all(), 'imaging_cameras'),
+                 ('Focal reducers', profile.focal_reducers.all(), 'focal_reducers'),
+                 ('Software'      , profile.software.all(), 'software'),
+                 ('Filters'       , profile.filters.all(), 'filters'),
+                 ('Accessories'   , profile.accessories.all(), 'accessories'),
                 ]
 
     # Calculate some stats
@@ -1189,7 +1191,7 @@ def user_profile_save_basic(request):
 
     if form.is_valid():
         profile.locations.clear()
-        (ids, value) = valueReader(request, 'locations')
+        (ids, value) = valueReader(request.POST, 'locations')
         for id in ids:
             k = None
             try:
@@ -1311,7 +1313,7 @@ def user_profile_save_gear(request):
                  "filters"       : [Filter, profile.filters],
                  "accessories"   : [Accessory, profile.accessories],
                 }.iteritems():
-        (names, value) = valueReader(request, k)
+        (names, value) = valueReader(request.POST, k)
         for name in names:
             gear_item, created = v[0].objects.get_or_create(name = name)
             if created:
@@ -1621,7 +1623,7 @@ def bring_to_attention(request):
     if not form.is_valid():
         return ajax_fail()
 
-    (usernames, value) = valueReader(request, 'user')
+    (usernames, value) = valueReader(request.POST, 'user')
     recipients = []
     for username in usernames:
         user = User.objects.get(username=username)

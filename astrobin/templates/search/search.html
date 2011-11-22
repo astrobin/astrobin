@@ -19,6 +19,9 @@
             {% trans "Images matching" %} <em>"{{query}}"</em>
         {% else %}
             {% trans "All images" %}
+            {% if request.GET.as_values_imaging_telescopes or request.GET.as_values_imaging_cameras %}
+                &nbsp;{% trans "(acquired with the selected telescopes or cameras)" %}
+            {% endif %}
         {% endif %}
 
         {% if 'start_date' in request.GET and 'end_date' in request.GET and request.GET.start_date != '' and request.GET.end_date != '' and request.GET.start_date == request.GET.end_date %}
@@ -48,4 +51,28 @@
     {% search_image_list request page.object_list %}
 
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script language="javascript">
+    $(document).ready(function() {
+        {% autoescape off %}
+        {% for key, value in prefill_dict.items %}
+        var startText = '{{value.1}}';
+        var emptyText = '{{value.2}}';
+        var resultsTitleText = '{{value.3}}';
+        $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
+            {asHtmlID: '{{key}}',
+            selectedItemProp: 'name',
+            searchObjProps: 'name',
+            preFill: {{value.0}},
+            selectedItemProp: 'name',
+            selectedValuesProp: 'id',
+            startText: startText,
+            emptyText: emptyText,
+            resultsTitleText: resultsTitleText});
+        {% endfor %}
+        {% endautoescape %}
+    });
+</script>
 {% endblock %}
