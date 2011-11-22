@@ -49,3 +49,27 @@
 
 </div>
 {% endblock %}
+
+{% block extra_js %}
+<script language="javascript">
+    $(document).ready(function() {
+        {% autoescape off %}
+        {% for key, value in prefill_dict.items %}
+        var startText = '{{value.1}}';
+        var emptyText = '{{value.2}}';
+        var resultsTitleText = '{{value.3}}';
+        $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
+            {asHtmlID: '{{key}}',
+            selectedItemProp: 'name',
+            searchObjProps: 'name',
+            preFill: {{value.0}},
+            selectedItemProp: 'name',
+            selectedValuesProp: 'id',
+            startText: startText,
+            emptyText: emptyText,
+            resultsTitleText: resultsTitleText});
+        {% endfor %}
+        {% endautoescape %}
+    });
+</script>
+{% endblock %}

@@ -154,6 +154,12 @@ class ImageRevisionUploadForm(forms.Form):
 
 
 class AdvancedSearchForm(SearchForm):
+    imaging_telescopes = forms.CharField(
+        required = False
+    )
+    imaging_cameras = forms.CharField(
+        required = False
+    )
     start_date = forms.DateField(
         required=False,
         widget=forms.TextInput(attrs={'class':'datepickerclass'}),
@@ -177,8 +183,10 @@ class AdvancedSearchForm(SearchForm):
 
     def __init__(self, data=None, **kwargs):
         super(AdvancedSearchForm, self).__init__(data, **kwargs)
-        self.fields['q'].help_text = _("Search for astronomical objects, telescopes, cameras, filters...")
+        self.fields['q'].help_text = _("Search astronomical objects (or leave empty to search all)")
 
+        self.fields['imaging_telescopes'].label = _("Imaging telescopes")
+        self.fields['imaging_cameras'].label = _("Imaging cameras")
         self.fields['start_date'].label = _("Acquired after")
         self.fields['end_date'].label = _("Acquired before")
         self.fields['integration_min'].label = _("Min. integration")
@@ -199,7 +207,6 @@ class AdvancedSearchForm(SearchForm):
                     sqs = sqs.load_all()
             else:
                 sqs = super(AdvancedSearchForm, self).search()
-
 
             if self.cleaned_data['start_date']:
                 sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
