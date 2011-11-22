@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-22 13:34-0500\n"
-"PO-Revision-Date: 2011-11-22 13:34-0500\n"
+"POT-Creation-Date: 2011-11-22 13:37-0500\n"
+"PO-Revision-Date: 2011-11-22 13:38-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -538,7 +538,7 @@ msgstr "Date"
 
 #: views.py:318
 #: templates/inclusion_tags/search_image_list.html:20
-#: templates/search/search.html:45
+#: templates/search/search.html:48
 msgid "Integration"
 msgstr "Integrazione"
 
@@ -2240,35 +2240,39 @@ msgstr "Immagini trovate"
 msgid "All images"
 msgstr "Tutte le immagini"
 
-#: templates/search/search.html:25
+#: templates/search/search.html:23
+msgid "(acquired with the selected telescopes or cameras)"
+msgstr "(acquisiti con i telescopi o le camere selezionate)"
+
+#: templates/search/search.html:28
 msgid "acquired on"
 msgstr "Acquisita il"
 
-#: templates/search/search.html:28
+#: templates/search/search.html:31
 msgid "acquired after"
 msgstr "acquisita dopo il"
 
-#: templates/search/search.html:30
+#: templates/search/search.html:33
 msgid "and before"
 msgstr "e prima del"
 
-#: templates/search/search.html:34
+#: templates/search/search.html:37
 msgid "acquired before"
 msgstr "acquisita prima del"
 
-#: templates/search/search.html:41
+#: templates/search/search.html:44
 msgid "Sort these images by:"
 msgstr "Ordina queste immagini per:"
 
-#: templates/search/search.html:42
+#: templates/search/search.html:45
 msgid "Relevance"
 msgstr "Rilevanza"
 
-#: templates/search/search.html:43
+#: templates/search/search.html:46
 msgid "Upload time"
 msgstr "Data di caricamento"
 
-#: templates/search/search.html:44
+#: templates/search/search.html:47
 msgid "Rating"
 msgstr "Voto"
 

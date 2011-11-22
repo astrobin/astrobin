@@ -19,6 +19,9 @@
             {% trans "Images matching" %} <em>"{{query}}"</em>
         {% else %}
             {% trans "All images" %}
+            {% if request.GET.as_values_imaging_telescopes or request.GET.as_values_imaging_cameras %}
+                &nbsp;{% trans "(acquired with the selected telescopes or cameras)" %}
+            {% endif %}
         {% endif %}
 
         {% if 'start_date' in request.GET and 'end_date' in request.GET and request.GET.start_date != '' and request.GET.end_date != '' and request.GET.start_date == request.GET.end_date %}
