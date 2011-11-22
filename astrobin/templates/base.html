@@ -87,12 +87,11 @@
                 <div id="search">
                     <form id="quick-search" action="{% url haystack_search %}" method="get" >
                         <p>
-                        <label for="q">Search:</label>
                         <input class="tbox"
                                id="q"
                                type="text"
                                name="q"
-                               value="{% trans "Search images by subject or gear" %}"
+                               value="{% trans "Search" %}"
                                title="{% trans "Start typing and hit ENTER" %}"
                                onfocus="common.clearText(this)"
                                onblur="common.clearText(this)"/>
