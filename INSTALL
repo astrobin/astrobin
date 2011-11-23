@@ -84,7 +84,8 @@ ln -s ./venv/bin/pip vpip
     django-maintenancemode \
     pytz \
     django-timezones==0.1.4 \
-    south
+    south \
+    django-blog-zinnia
 
 # NOTE: if you run into this: https://github.com/ask/celery/commit/edf3b3f33acdada9264754068d9c74ee76692cd9
 # then install kombu, celery and django-celery from git master:
@@ -136,6 +137,7 @@ quit
 ./manage.py migrate astrobin 0001 --fake
 ./manage.py migrate astrobin
 ./scripts/syncdb.sh
+./manage.py migrate zinnia
 (When asked, do create super user astrobin:***REMOVED*** <astrobin@astrobin.com>)
 
 

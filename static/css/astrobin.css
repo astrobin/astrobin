@@ -2413,3 +2413,29 @@ table.leaderboard {
   padding-left: 4px;
   padding-right: 4px;
 }
+/* Zinnia stuff */
+.hentry {
+  padding: 8px 28px 28px 28px;
+}
+.hentry p {
+  margin: 0;
+}
+.hentry .entry-header .entry-info {
+  margin-bottom: 8px;
+  text-align: right;
+  font-size: 80%;
+}
+.hentry .entry-content {
+  line-height: 150%;
+}
+.hentry .entry-footer {
+  margin-top: 8px;
+  font-size: 80%;
+}
+#comments {
+  margin-bottom: 28px;
+}
+#comments .comment-author {
+  font-weight: bold;
+  color: #fcfcfc;
+}

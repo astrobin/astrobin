@@ -110,8 +110,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-#   'django.middleware.csrf.CsrfViewMiddleware',
-#   'django.middleware.csrf.CsrfResponseMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfResponseMiddleware',
 #   'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 #   'astrobin.middlewares.ProfilerMiddleware',
@@ -135,6 +135,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
     'notification.context_processors.notification',
     'astrobin.context_processors.privatebeta_enabled',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'zinnia.context_processors.version',
 )
 
 INSTALLED_APPS = (
@@ -155,6 +159,10 @@ INSTALLED_APPS = (
     'gunicorn',
     'privatebeta',
     'south',
+    'django.contrib.comments',
+    'tagging',
+    'mptt',
+    'zinnia',
 )
 
 LOGIN_REDIRECT_URL = '/'
