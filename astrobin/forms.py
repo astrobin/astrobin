@@ -10,6 +10,7 @@ from models import *
 from search_indexes import xapian_escape
 
 import string
+import unicodedata
 
 class ImageUploadForm(forms.Form):
     file = forms.ImageField()
@@ -198,7 +199,7 @@ class AdvancedSearchForm(SearchForm):
         sqs = EmptySearchQuerySet()
 
         if self.is_valid():
-            q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
+            q = unicodedata.normalize('NFKD', xapian_escape(self.cleaned_data['q']).replace(' ', '')).encode('ascii', 'ignore')
             self.cleaned_data['q'] = q
 
             if self.cleaned_data['q'] == '':

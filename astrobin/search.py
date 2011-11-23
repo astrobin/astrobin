@@ -10,19 +10,22 @@ from views import jsonDump, valueReader
 from models import Telescope, Camera
 
 import operator
+import unicodedata
 
 class ImageSearchView(SearchView):
     def __name__(self):
         return 'ImageSearchView'
 
     def get_results(self):
-        sqs = super(ImageSearchView, self).get_results()
-
-        search_type = self.request.GET.get('type')
         q = self.request.GET.get('q')
         if q:
             q = xapian_escape(q).replace(' ', '')
+        q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore')
 
+        self.query = q
+        sqs = super(ImageSearchView, self).get_results()
+
+        search_type = self.request.GET.get('type')
         if search_type:
             sqs = sqs.filter(**{search_type: q})
 
