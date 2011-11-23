@@ -359,6 +359,11 @@ class Image(models.Model):
         default = True
     )
 
+    was_revision = models.BooleanField(
+        editable = False,
+        default = False,
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
@@ -394,7 +399,7 @@ class Image(models.Model):
         solve_image.delay(self, lang=translation.get_language(), callback=image_solved_callback)
 
     def delete(self, *args, **kwargs):
-        delete_image.delay(self.filename, self.original_ext) 
+        self.delete_data()
 
         # Delete references
         for r in ImageRequest.objects.filter(image=self):
@@ -405,6 +410,9 @@ class Image(models.Model):
             r.delete()
 
         super(Image, self).delete(*args, **kwargs)
+
+    def delete_data(self):
+        delete_image.delay(self.filename, self.original_ext)
 
     def get_absolute_url(self):
         return '/%i' % self.id
@@ -438,7 +446,9 @@ class ImageRevision(models.Model):
         store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
 
     def delete(self, *args, **kwargs):
-        delete_image.delay(self.filename, self.original_ext) 
+        delete_data = not kwargs.pop('dont_delete_data', False)
+        if delete_data: 
+            delete_image.delay(self.filename, self.original_ext) 
         super(ImageRevision, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):

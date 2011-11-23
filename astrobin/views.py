@@ -1060,6 +1060,46 @@ def image_delete_revision(request, id):
 
 @login_required
 @require_GET
+def image_delete_original(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user:
+        return HttpResponseForbidden()
+
+    revisions = ImageRevision.objects.filter(image = image).order_by('-uploaded')
+    final = None
+    if revisions:
+        for r in revisions:
+            if r.is_final:
+                final = r
+        if not final:
+            # Fallback to the most recent revision.
+            final = revisions[0]
+    else:
+        # You can't delete just the original if you have no revisions.
+        return HttpResponseForbidden()
+
+    image.delete_data()
+    image.filename = final.filename
+    image.original_ext = final.original_ext
+    image.uploaded = final.uploaded
+
+    image.w = final.w
+    image.h = final.h
+
+    image.is_stored = final.is_stored
+    image.is_solved = False # We don't solve revisions.
+
+    image.is_final = True
+    image.was_revision = True
+
+    image.save()
+    final.delete(dont_delete_data = True)
+
+    return HttpResponseRedirect("/%i/" % image.id);
+
+
+@login_required
+@require_GET
 def image_promote(request, id):
     image = get_object_or_404(Image, pk=id)
     if request.user != image.user:
