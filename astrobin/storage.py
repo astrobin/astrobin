@@ -57,11 +57,15 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
             is_animated = False
 
     if not is_animated:
-        # create histogram and store it
-        histogram = generate_histogram(image)
-        histogramFile = StringIO.StringIO()
-        histogram.save(histogramFile, format_map['image/png'][0])
-        save_to_bucket(uid + '_hist.png', histogramFile.getvalue())
+        try:
+            # create histogram and store it
+            histogram = generate_histogram(image)
+            histogramFile = StringIO.StringIO()
+            histogram.save(histogramFile, format_map['image/png'][0])
+            save_to_bucket(uid + '_hist.png', histogramFile.getvalue())
+        except:
+            # I've seen this fail sometimes with IOError: image is truncated.
+            pass
 
         # Then resize to the display image
         (w, h) = image.size
