@@ -239,3 +239,6 @@ SIMBAD_QUERY_URL="http://simbad.u-strasbg.fr/simbad/sim-nameresolver?data=@,I.0,
 SIMBAD_SEARCH_QUERY_URL="http://simbad.u-strasbg.fr/simbad/sim-nameresolver?data=@,I.0,J,C.0,T,D,M,I&output=json&Ident="
 
 NOTIFICATION_LANGUAGE_MODULE = "astrobin.UserProfile"
+
+ZINNIA_COPYRIGHT = 'AstroBin'
+
