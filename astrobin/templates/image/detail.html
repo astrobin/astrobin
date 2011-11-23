@@ -207,8 +207,16 @@
                                             </tr>
                                             {% if is_ready %}
                                             <tr>
-                                                <th><span class="text">{% trans "With thumbnail:" %}</span></th>
+                                                <th><span class="text">{% trans "...with thumbnail:" %}</span></th>
                                                 <td><form><textarea rows="10">[URL=http://astrob.in/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]</textarea></form></td>
+                                            </tr>
+                                            <tr>
+                                                <th><span class="text">{% trans "Full size:" %}</span></th>
+                                                <td><form><textarea rows="2">http://astrob.in/full/{{image.id}}/</textarea></form></td>
+                                            </tr>
+                                            <tr>
+                                                <th><span class="text">{% trans "...with thumbnail:" %}</span></th>
+                                                <td><form><textarea rows="10">[URL=http://astrob.in/full/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]</textarea></form></td>
                                             </tr>
                                             {% endif %}
                                         </table>
