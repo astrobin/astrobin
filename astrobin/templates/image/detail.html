@@ -91,7 +91,11 @@
                                     <li class="bg-icon icon-delete">
                                         <span class="text">
                                         {% if not is_revision %}
-                                            <a class="delete danger" href="{% url image_delete image.id %}">{% trans "Delete" %}</a>
+                                            {% if revisions %}
+                                            <a class="delete-original danger" href="{% url image_delete_original image.id %}">{% trans "Delete original image" %}</a>
+                                            {% else %}
+                                            <a class="delete-everything danger" href="{% url image_delete image.id %}">{% trans "Delete everything" %}</a>
+                                            {% endif %}
                                         {% else %}
                                             <a class="delete-revision danger" href="{% url image_delete_revision image.id %}">{% trans "Delete this revision" %}</a>
                                         {% endif %}
@@ -488,9 +492,9 @@ $(document).ready(function() {
             },
             delete_action: {
                 dialog: {
-                    title : "{% trans "Delete image?" %}",
+                    title : "{% trans "Delete image and all its revisions?" %}",
                     body  : "{% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?"%}",
-                    button: "{% trans "Yes, delete image" %}"
+                    button: "{% trans "Yes, delete everything" %}"
                 }
             },
             delete_revision_action: {
@@ -498,6 +502,13 @@ $(document).ready(function() {
                     title : "{% trans "Delete this revision?" %}",
                     body  : "{% trans "This revision will be permanently deleted and cannot be recovered. Are you sure?"%}",
                     button: "{% trans "Yes, delete revision" %}"
+                }
+            },
+            delete_original_action: {
+                dialog: {
+                    title : "{% trans "Delete original image?" %}",
+                    body  : "{% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}",
+                    button: "{% trans "Yes, delete image" %}"
                 }
             },
             follow_action: {

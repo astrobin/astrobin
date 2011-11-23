@@ -185,7 +185,7 @@ var image_detail = {
                 button: '',
                 height: 230
             },
-            element: 'a.delete',
+            element: 'a.delete-everything',
             url    : '/delete/'
         },
 
@@ -198,6 +198,17 @@ var image_detail = {
             },
             element: 'a.delete-revision',
             url    : '/delete/revision/'
+        },
+
+        delete_original_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: '',
+                height: 230
+            },
+            element: 'a.delete-original',
+            url    : '/delete/original/'
         },
 
         follow_action: {
@@ -433,6 +444,42 @@ var image_detail = {
                             click: function() {
                                 $(this).dialog('close');
                                 window.location = image_detail.config.delete_revision_action.url + image_detail.globals.revision_id;
+                            }
+                        },
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
+                        }
+                    ]
+                });
+
+            return false;
+        });
+    },
+
+    setup_delete_original: function() {
+        $(image_detail.config.delete_original_action.element).click(function() {
+            $('<div id="dialog-confirm" title="' +
+              image_detail.config.delete_original_action.dialog.title +
+              '"></div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-alert"\
+                                  style="float:left; margin:0 7px 20px 0;">\
+                            </span>' + image_detail.config.delete_original_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    height: image_detail.config.delete_original_action.dialog.height,
+                    modal: true,
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                $(this).dialog('close');
+                                window.location = image_detail.config.delete_original_action.url + image_detail.globals.image_id;
                             }
                         },
                         {
@@ -737,6 +784,7 @@ var image_detail = {
         /* Delete */
         image_detail.setup_delete();
         image_detail.setup_delete_revision();
+        image_detail.setup_delete_original();
 
         /* Following */
         image_detail.setup_follow();
