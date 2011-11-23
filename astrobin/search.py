@@ -20,7 +20,10 @@ class ImageSearchView(SearchView):
         q = self.request.GET.get('q')
         if q:
             q = xapian_escape(q).replace(' ', '')
-        q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore')
+        try:
+            q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore')
+        except:
+            pass
 
         self.query = q
         sqs = super(ImageSearchView, self).get_results()
