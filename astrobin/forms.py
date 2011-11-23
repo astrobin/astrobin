@@ -199,7 +199,7 @@ class AdvancedSearchForm(SearchForm):
         sqs = EmptySearchQuerySet()
 
         if self.is_valid():
-            q = unicodedata.normalize('NFKD', xapian_escape(self.cleaned_data['q']).replace(' ', '')).encode('ascii', 'ignore')
+            q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
             self.cleaned_data['q'] = q
 
             if self.cleaned_data['q'] == '':
