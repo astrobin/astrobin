@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-23 14:16-0500\n"
-"PO-Revision-Date: 2011-11-23 14:18-0500\n"
+"POT-Creation-Date: 2011-11-24 00:38-0500\n"
+"PO-Revision-Date: 2011-11-24 00:38-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -768,8 +768,8 @@ msgid "Home"
 msgstr "Home"
 
 #: templates/base.html:124
-msgid "News"
-msgstr "News in English"
+msgid "Blog"
+msgstr "Blog in English"
 
 #: templates/base.html:126
 #: templates/leaderboard.html:5
@@ -2451,6 +2451,9 @@ msgstr "Seleziona la licenza predefinita per le tue immagini"
 #: templates/user/profile/edit/license.html:13
 msgid "You can set a default type of license for everything you upload into AstroBin. Change your default here."
 msgstr "Puoi selezionare una licenza predefinita per tutto quello che carichi su AstroBin. Fallo qui."
+
+#~ msgid "News"
+#~ msgstr "News in English"
 
 #, fuzzy
 #~ msgid "Please correct following error."

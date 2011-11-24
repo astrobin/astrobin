@@ -121,7 +121,7 @@
                     <div id="nav">
                         <ul>
                             <li id="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
-                            <li id="{% current request "^/news/$" %}"><a href="/news/">{% trans "News" %}</a></li>
+                            <li id="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
                             {% if request.user.is_authenticated %}
                             <li id="{% current request "^/leaderboard/$" %}"><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
                             {% endif %}
