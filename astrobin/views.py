@@ -1640,14 +1640,19 @@ def messages_all(request):
 @login_required
 @require_GET
 def message_detail(request, id):
-    subject = '%s: %s' % (_('RE'), persistent_messages.models.Message.objects.get(id=id).subject)
+    subject = persistent_messages.models.Message.objects.get(id=id).subject
+    if subject.startswith('%s: ' % (_('RE'),)):
+        reply_subject = subject
+    else:
+        reply_subject = '%s: %s' % (_('RE'), subject)
+
     return object_detail(
         request,
         queryset=persistent_messages.models.Message.objects.all(),
         object_id=id,
         template_name='messages/detail.html',
         template_object_name='message',
-        extra_context={'private_message_form':PrivateMessageForm(initial={'subject':subject})})
+        extra_context={'private_message_form':PrivateMessageForm(initial={'subject':reply_subject})})
 
 
 @login_required
