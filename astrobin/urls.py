@@ -93,7 +93,7 @@ urlpatterns = patterns('',
     url(r'^locations/save/$', views.location_save, name='location_save'),
     url(r'^language/set/(?P<lang>\w+)/$', views.set_language, name='set_language'),
 
-    url(r'^news/', include('zinnia.urls')),
+    url(r'^blog/', include('zinnia.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
 )
