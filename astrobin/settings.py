@@ -163,6 +163,7 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'zinnia',
+    'tinymce',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -241,4 +242,7 @@ SIMBAD_SEARCH_QUERY_URL="http://simbad.u-strasbg.fr/simbad/sim-nameresolver?data
 NOTIFICATION_LANGUAGE_MODULE = "astrobin.UserProfile"
 
 ZINNIA_COPYRIGHT = 'AstroBin'
+ZINNIA_MARKUP_LANGUAGE = 'html'
+TINYMCE_JS_URL = MEDIA_URL + 'js/tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = MEDIA_ROOT + '/js/tiny_mce'
 
