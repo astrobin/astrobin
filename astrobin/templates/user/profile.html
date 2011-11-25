@@ -61,6 +61,12 @@
                 {% else %}
                     <a href="?public&sub=gear">{% trans "By gear" %}</a>
                 {% endif %}
+                |
+                {% if subsection == 'nodata' %}
+                    {% trans "Lacking data" %}
+                {% else %}
+                    <a href="?public&sub=nodata">{% trans "Lacking data" %}</a>
+                {% endif %}
             </span>
         {% endifequal %}
 
@@ -87,6 +93,14 @@
                     {% if backlink %}
                         <span><a href="{{backlink}}">{% trans "(go back)" %}</a></span>
                     {% endif %}
+                {% endif %}
+                {% if subsection == 'nodata' %}
+                <p>
+                    {% blocktrans %}These images have no data associated. It's a shame...{% endblocktrans %}
+                    {% if request.user = user %}
+                        {% blocktrans %}If you want your images to be categorized in Smart Albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
+                    {% endif %}
+                </p>
                 {% endif %}
                 {% image_list request image_list %}
             {% endif %}

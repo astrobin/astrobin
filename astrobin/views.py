@@ -1231,6 +1231,9 @@ def user_page(request, username):
         elif subsection == 'subject':
             # Not implemented yet
             pass
+        elif subsection == 'nodata':
+            sqs = sqs.filter(imaging_telescopes = None, imaging_cameras = None, subjects = None, is_wip = False)
+
         section = 'public'
 
     return object_list(
