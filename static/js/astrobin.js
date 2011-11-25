@@ -172,6 +172,7 @@ var image_detail = {
             },
             element  : 'a.upload-revision',
             form_html: '',
+            csrf_token: '',
             url       : '/upload/revision/process/',
             fileDefaultText: '',
             fileBtnText: '',
@@ -362,6 +363,7 @@ var image_detail = {
                     </p>\
                     <form id="upload-revision" action="' + image_detail.config.upload_revision_action.url + '" method="post" enctype="multipart/form-data">\
                         ' + image_detail.config.upload_revision_action.form_html + '\
+                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + image_detail.config.upload_revision_action.csrf_token + '" /> \
                         <input type="hidden" name="image_id" value="' + image_detail.globals.image_id  + '"/>\
                     </form>\
                     </div>\

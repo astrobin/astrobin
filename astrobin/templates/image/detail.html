@@ -486,6 +486,7 @@ $(document).ready(function() {
                     body : "{% blocktrans %}Did you improve the post-processing of your image? Upload the new revision!{% endblocktrans %}"
                 },
                 form_html: '{% autoescape off %}{{upload_revision_form.as_p|append_slash}}{% endautoescape %}',
+                csrf_token: '{{csrf_token}}',
                 fileDefaultText: "{% trans "No file selected" %}",
                 fileBtnText: "{% trans "Choose file" %}",
                 uploadingText: "{% trans "Uploading..." %}"
