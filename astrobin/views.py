@@ -1182,13 +1182,56 @@ def user_page(request, username):
     )
 
     section = 'public'
+    subsection = request.GET.get('sub')
+    if not subsection:
+        subsection = 'uploaded'
+    subtitle = None
+    backlink = None
 
+    smart_albums = []
     sqs = Image.objects.filter(user = user).order_by('-uploaded')
     if 'staging' in request.GET:
         sqs = sqs.filter(is_wip = True)
         section = 'staging'
     else:
-        sqs = sqs.filter(is_wip = False)
+        if subsection == 'uploaded':
+            sqs = sqs.filter(is_wip = False)
+        elif subsection == 'year':
+            if 'year' in request.GET:
+                year = request.GET.get('year')
+                sqs = sqs.filter(acquisition__date__year = year, is_wip = False)
+                subtitle = year
+                backlink = "?public&sub=year"
+            else:
+                sqs = Image.objects.none()
+                acq = Acquisition.objects.filter(image__user = user)
+                years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
+                for y in years:
+                    k_dict = {str(y): []}
+                    smart_albums.append(k_dict)
+                    for i in Image.objects.filter(acquisition__date__year = y, user = user, is_wip = False, is_stored = True).distinct()[:10]:
+                        k_dict[str(y)].append(i)
+        elif subsection == 'gear':
+            if 'gear' in request.GET:
+                gear = request.GET.get('gear')
+                sqs = sqs.filter(Q(imaging_telescopes__name = gear) | Q(imaging_cameras__name = gear), is_wip = False, is_stored = True)
+                subtitle = gear
+                backlink = "?public&sub=gear"
+            else:
+                sqs = Image.objects.none()
+                for qs, filter in {
+                    profile.telescopes.all(): 'imaging_telescopes',
+                    profile.cameras.all(): 'imaging_cameras',
+                }.iteritems():
+                    for k in qs:
+                        k_dict = {k.name: []}
+                        smart_albums.append(k_dict)
+                        for i in Image.objects.filter(user = user, is_wip = False, is_stored = True, **{filter: k}).distinct()[:10]:
+                            k_dict[k.name].append(i)
+        elif subsection == 'subject':
+            # Not implemented yet
+            pass
+        section = 'public'
 
     return object_list(
         request,
@@ -1200,8 +1243,12 @@ def user_page(request, username):
                          's3_url':settings.S3_URL,
                          'user':user,
                          'section':section,
+                         'subsection':subsection,
+                         'subtitle':subtitle,
+                         'backlink':backlink,
                          'gear_list':gear_list,
-                         'stats':stats})
+                         'stats':stats,
+                         'smart_albums':smart_albums})
 
 
 @login_required
