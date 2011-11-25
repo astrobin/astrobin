@@ -26,7 +26,14 @@ from storage import download_from_bucket
 @task()
 def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, lang):
     if solved:
-        print "Image was solved"
+        print "Image was solved."
+    else:
+        print "Solving failed."
+        if did_use_scale:
+            # Try again!
+            print "Trying again."
+            solve_image.delay(image, lang, False, callback=image_solved_callback)
+            return
 
     image.is_solved = solved
     if image.__class__.__name__ == 'Image' and image.is_solved:
