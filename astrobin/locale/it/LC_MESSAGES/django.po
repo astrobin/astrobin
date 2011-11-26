@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 02:25-0500\n"
-"PO-Revision-Date: 2011-11-26 02:25-0500\n"
+"POT-Creation-Date: 2011-11-26 07:18-0500\n"
+"PO-Revision-Date: 2011-11-26 07:19-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -763,8 +763,8 @@ msgid "Hello, <a href=\"%(user_page)s\">%(username)s.</a>"
 msgstr "Ciao, <a href=\"%(user_page)s\">%(username)s.</a>"
 
 #: templates/base.html:123
-#: templates/base.html.py:251
-#: templates/base.html:288
+#: templates/base.html.py:252
+#: templates/base.html:293
 msgid "Home"
 msgstr "Home"
 
@@ -773,141 +773,172 @@ msgid "Blog"
 msgstr "Blog in English"
 
 #: templates/base.html:126
+#: templates/base.html.py:254
 #: templates/leaderboard.html:5
 #: templates/leaderboard.html.py:8
 msgid "Leaderboard"
 msgstr "Classifica"
 
 #: templates/base.html:128
-#: templates/base.html.py:252
+#: templates/base.html.py:256
+msgid "Nightly"
+msgstr "Notte dopo notte"
+
+#: templates/base.html:129
+#: templates/base.html.py:257
 #: templates/help.html:4
 msgid "Help"
 msgstr "Aiuto"
 
-#: templates/base.html:129
-#: templates/base.html.py:253
+#: templates/base.html:130
+#: templates/base.html.py:258
 #: templates/faq.html:4
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/base.html:142
+#: templates/base.html:143
 msgid "View your profile"
 msgstr "Vedi il tuo profilo"
 
-#: templates/base.html:145
+#: templates/base.html:146
 msgid "Edit your profile"
 msgstr "Modifica il tuo profilo"
 
-#: templates/base.html:148
+#: templates/base.html:149
 msgid "Upload an image"
 msgstr "Carica un'immagine"
 
-#: templates/base.html:148
+#: templates/base.html:149
 msgid "Upload!"
 msgstr "Carica!"
 
-#: templates/base.html:151
+#: templates/base.html:152
 #: templates/user/profile.html:126
 #: templates/user/profile.html.py:129
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.html:158
-#: templates/base.html.py:159
+#: templates/base.html:159
+#: templates/base.html.py:160
 msgid "Notifications"
 msgstr "Notifiche"
 
-#: templates/base.html:165
-#: templates/base.html.py:166
+#: templates/base.html:166
+#: templates/base.html.py:167
 msgid "Messages"
 msgstr "Messaggi"
 
-#: templates/base.html:172
-#: templates/base.html.py:173
+#: templates/base.html:173
+#: templates/base.html.py:174
 msgid "Requests"
 msgstr "Richieste"
 
-#: templates/base.html:183
+#: templates/base.html:184
 msgid "Have an invite? Login!"
 msgstr "Hai un invito? Fai il login!"
 
-#: templates/base.html:185
+#: templates/base.html:186
 msgid "Login"
 msgstr "Login"
 
-#: templates/base.html:191
+#: templates/base.html:192
 #: templates/registration/login.html:8
 msgid "Register"
 msgstr "Registrati"
 
-#: templates/base.html:213
-#: templates/base.html.py:223
+#: templates/base.html:214
+#: templates/base.html.py:224
 msgid "Error"
 msgstr "Errore"
 
-#: templates/base.html:215
+#: templates/base.html:216
 #: templates/image/detail.html:15
 msgid "Info"
 msgstr "Informazione"
 
-#: templates/base.html:225
+#: templates/base.html:226
 msgid "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida o nessuna immagine. I formati accettati sono JPG, PNG e GIF."
 
-#: templates/base.html:242
+#: templates/base.html:243
 msgid "About"
 msgstr "Informazioni"
 
-#: templates/base.html:244
+#: templates/base.html:245
 msgid "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers."
 msgstr "AstroBin è un sito di hosting d'immagini pensato specificamente per gli astrofotografi: è il posto finale dove caricare le proprie immagini. Fatto da un astrofotografo, per gli astrofotografi."
 
-#: templates/base.html:248
+#: templates/base.html:249
 msgid "Site links"
 msgstr "Link del sito"
 
-#: templates/base.html:254
+#: templates/base.html:259
 #: templates/tos.html:6
 msgid "Terms of Service"
 msgstr "Condizioni d'uso"
 
-#: templates/base.html:259
+#: templates/base.html:264
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/base.html:268
+#: templates/base.html:273
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:270
+#: templates/base.html:275
 msgid "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
 msgstr "AstroBin è Copyright &copy; 2011 Salvatore Iovene, Tutti i Diritti Riservati. Le immagini su questo sito sono copyright dei loro rispettivi proprietari."
 
-#: templates/base.html:289
+#: templates/base.html:294
 msgid "Follow AstroBin on Twitter"
 msgstr "Segui AstroBin su Twitter"
 
-#: templates/base.html:290
+#: templates/base.html:295
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/base.html:304
+#: templates/base.html:309
 msgid "Feedback"
 msgstr "Feedback"
 
-#: templates/base.html:314
+#: templates/base.html:319
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:361
+#: templates/base.html:378
 #: templates/image/detail.html:490
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:362
+#: templates/base.html:379
 #: templates/image/detail.html:491
 msgid "Choose file"
 msgstr "Scegli file"
+
+#: templates/daily.html:7
+msgid "Images acquired night after night"
+msgstr "Immagini acquisite notte dopo notte"
+
+#: templates/daily.html:10
+msgid "On this page you can see images that were actually taken each night, and not merely uploaded on a particular date."
+msgstr "Qui puoi vedere le immagini realmente scattate ogni notte, e non semplicemente caricate sul sito in una certa data."
+
+#: templates/daily.html:21
+#: templates/user/profile.html:89
+msgid "No images."
+msgstr "Nessuna immagine."
+
+#: templates/daily.html:27
+msgid "current month"
+msgstr "mese corrente"
+
+#: templates/daily.html:31
+msgid "previous month"
+msgstr "mese precedente"
+
+#: templates/daily.html:36
+msgid "next month"
+msgstr "mese seguente"
 
 #: templates/faq.html:8
 msgid "Frequently Asked Questions"
@@ -2360,10 +2391,6 @@ msgstr "Senza dati"
 #: templates/user/profile.html:80
 msgid "(view more...)"
 msgstr "(mostra altre...)"
-
-#: templates/user/profile.html:89
-msgid "No images."
-msgstr "Nessuna immagine."
 
 #: templates/user/profile.html:95
 msgid "(go back)"
