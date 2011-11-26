@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db.models import signals
-from django.utils.translation import ugettext_noop as _
+from django.utils.translation import ugettext_lazy as _
 from notification import models as notification
 
 # Fields:
@@ -12,67 +12,67 @@ NOTICE_TYPES = (
     (
         'new_follower',
         _('You have a new follower'),
-        _(''),
+        '',
         2
     ),
     (
         'follow_success',
         _('Following a user was successful'),
-        _(''),
+        '',
         0
     ),
     (
         'unfollow_success',
         _('Unfollowing a user was successful'),
-        _(''),
+        '',
         0
     ),
     (
         'new_image',
         _('New image from a user you follow'),
-        _(''),
+        '',
         2
     ),
     (
         'attention_request',
         _('Image brought to your attention'),
-        _(''),
+        '',
         2
     ),
     (
         'new_image_revision',
         _('New image revision from a user you follow'),
-        _(''),
+        '',
         2
     ),
     (
         'image_ready',
         _('Your image is ready'),
-        _(''),
+        '',
         0
     ),
     (
         'image_solved',
         _('Your image was plate-solved'),
-        _(''),
+        '',
         2
     ),
     (
         'image_not_solved',
         _('Your image could not be plate-solved'),
-        _(''),
+        '',
         2
     ),
     (
         'request_fulfilled',
         _('Your request was fulfilled'),
-        _(''),
+        '',
         2
     ),
     (
         'image_deleted',
         _('Your image was deleted'),
-        _(''),
+        '',
         0
     ),
 )
