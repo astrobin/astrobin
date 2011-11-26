@@ -35,11 +35,11 @@ var common = {
 
     globals: {
         requests: [],
-        ajax: $.ajax
+        smart_ajax: $.ajax
     },
 
     listen_for_notifications: function(username, last_modified, etag) {
-        common.globals.ajax({
+        common.globals.smart_ajax({
             'beforeSend': function(xhr) {
                 xhr.setRequestHeader("If-None-Match", etag);
                 xhr.setRequestHeader("If-Modified-Since", last_modified);
@@ -67,7 +67,7 @@ var common = {
     },
 
     listen_for_messages: function(username, last_modified, etag) {
-        common.globals.ajax({
+        common.globals.smart_ajax({
             'beforeSend': function(xhr) {
                 xhr.setRequestHeader("If-None-Match", etag);
                 xhr.setRequestHeader("If-Modified-Since", last_modified);
@@ -100,7 +100,7 @@ var common = {
     },
 
     listen_for_requests: function(username, last_modified, etag) {
-        common.globals.ajax({
+        common.globals.smart_ajax({
             'beforeSend': function(xhr) {
                 xhr.setRequestHeader("If-None-Match", etag);
                 xhr.setRequestHeader("If-Modified-Since", last_modified);
@@ -133,7 +133,7 @@ var common = {
 
 
     start_listeners: function(username) {
-        $.ajax = function(settings) {
+        common.globals.smart_ajax = function(settings) {
             // override complete() operation
             var complete = settings.complete;
             settings.complete = function(xhr) {
@@ -153,24 +153,13 @@ var common = {
                 }
             }
 
-            var r = ajax.apply(this, arguments);
+            var r = $.ajax.apply(this, arguments);
             if (r) {
                 // r may be undefined, for example when downloading JavaScript
                 common.globals.requests.push(r);
             }
             return r;
         };
-
-        // 'kill' all pending xhrs
-        $.each(common.globals.requests, function(i, xhr) {
-            try {
-                xhr.abort();
-            } catch(e) {
-                if (console)
-                    console.log('failed to abort xhr');
-            }
-        });
-        common.globals.requests = [];
 
         setTimeout(function() {
             common.listen_for_notifications(username, '', '');

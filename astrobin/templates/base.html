@@ -327,6 +327,18 @@
 
         <!-- javascript -->
         <script type="text/javascript">
+            $(window).bind('beforeunload', function() {
+                $.each(common.globals.requests, function(i, xhr) {
+                    try {
+                        xhr.abort();
+                    } catch(e) {
+                        if (console)
+                            console.log('failed to abort xhr');
+                    }
+                });
+                common.globals.requests = [];
+            });
+
             function getInternetExplorerVersion()
             // Returns the version of Internet Explorer or a -1
             // (indicating the use of another browser).
