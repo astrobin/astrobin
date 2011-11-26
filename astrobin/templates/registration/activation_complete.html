@@ -2,5 +2,5 @@
 {% load i18n %}
 
 {% block content %}
-<p>{% trans "Your profile is now active." %}</p>
+<p>{% trans "Your profile is now active." %} <a href="{% url auth_login %}">{% trans "Login" %}.</a></p>
 {% endblock %}
