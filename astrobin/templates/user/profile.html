@@ -96,9 +96,9 @@
                 {% endif %}
                 {% if subsection == 'nodata' %}
                 <p>
-                    {% blocktrans %}These images have no data associated. It's a shame...{% endblocktrans %}
+                    {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
                     {% if request.user = user %}
-                        {% blocktrans %}If you want your images to be categorized in Smart Albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
+                        {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
                     {% endif %}
                 </p>
                 {% endif %}
