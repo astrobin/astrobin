@@ -6,7 +6,7 @@
 {% block content %}
     <a name="page_anchor"></a>
     <div class="full-box clear">
-        <h2 class="inline">
+        <h2 class="inline profile">
             {% ifequal user request.user %}
                 {% blocktrans %}View your images{% endblocktrans %}
             {% else %}
@@ -14,7 +14,7 @@
             {% endifequal %}
         </h2>
         {% ifequal user request.user %}
-        <span class="gallery-links">
+        <span class="album-links">
             {% if section == 'public' %}
                 {% trans "Public Area" %}
             {% else %}
@@ -42,7 +42,69 @@
         </p>
         {% endifequal %}
 
-        {% image_list request image_list %}
+        {% ifequal section 'public' %}
+            <span class="album-links">
+                {% if subsection == 'uploaded' %}
+                    {% trans "Recently uploaded" %}
+                {% else %}
+                    <a href="?public&sub=uploaded">{% trans "Recently uploaded" %}</a>
+                {% endif %}
+                |
+                {% if subsection == 'year' %}
+                    {% trans "By year" %}
+                {% else %}
+                    <a href="?public&sub=year">{% trans "By year" %}</a>
+                {% endif %}
+                |
+                {% if subsection == 'gear' %}
+                    {% trans "By gear" %}
+                {% else %}
+                    <a href="?public&sub=gear">{% trans "By gear" %}</a>
+                {% endif %}
+                |
+                {% if subsection == 'nodata' %}
+                    {% trans "Lacking data" %}
+                {% else %}
+                    <a href="?public&sub=nodata">{% trans "Lacking data" %}</a>
+                {% endif %}
+            </span>
+        {% endifequal %}
+
+        <div class="album">
+            {% if section == 'public' and not image_list %}
+                {% for album in smart_albums %}
+                    {% for title, images in album.items %}
+                        {% if images %}
+                            <h4>{{title}}</h4>
+                            {% ifequal images|length 10 %}
+                                <span><a href="?public&sub={{subsection}}&{{subsection}}={{title}}">{% trans "(view more...)" %}</a></span>
+                            {% endifequal %}
+                            <div class="fix"></div>
+                            {% image_list request images 0 %} {% comment %}0 is for False (no pagination){% endcomment %}
+                            <div class="fix"></div>
+                        {% endif %}
+                    {% endfor %}
+                {% empty %}
+                    {% blocktrans %}No images.{% endblocktrans %}
+                {% endfor %}
+            {% else %}
+                {% if subtitle %}
+                    <h4 class="inline">{{subtitle}}</h4> 
+                    {% if backlink %}
+                        <span><a href="{{backlink}}">{% trans "(go back)" %}</a></span>
+                    {% endif %}
+                {% endif %}
+                {% if subsection == 'nodata' %}
+                <p>
+                    {% blocktrans %}These images have no data associated. It's a shame...{% endblocktrans %}
+                    {% if request.user = user %}
+                        {% blocktrans %}If you want your images to be categorized in Smart Albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
+                    {% endif %}
+                </p>
+                {% endif %}
+                {% image_list request image_list %}
+            {% endif %}
+        </div>
     </div>
 
     {% if request.user == user %}

@@ -1,4 +1,6 @@
 from datetime import datetime
+import random
+import string
 
 from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
@@ -270,7 +272,7 @@ truncatechars.is_safe = True
 truncatechars = stringfilter(truncatechars)
 
 
-def image_list(context, request, object_list):
+def image_list(context, request, object_list, paginate = True):
     adjacent_pages = 3
 
     paginator = context['paginator']
@@ -304,6 +306,7 @@ def image_list(context, request, object_list):
         'show_first': 1 not in page_numbers,
         'show_last': pages not in page_numbers,
         'image_list': image_list,
+        'paginate': paginate,
         'thumbnail_size':settings.THUMBNAIL_SIZE,
         's3_url':settings.S3_URL,
         'request': request,
@@ -372,4 +375,10 @@ def seconds_to_hours(value):
 
     return "%.1f" % (int(value) / 3600.0)
 
+
+@register.simple_tag(takes_context = True)
+def random_id(context, size = 8, chars = string.ascii_uppercase + string.digits):
+    id = ''.join(random.choice(chars) for x in range(size))
+    context['randomid'] = id
+    return ''
 
