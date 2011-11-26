@@ -96,4 +96,6 @@ urlpatterns = patterns('',
     url(r'^blog/', include('zinnia.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
+
+    url(r'^nightly/', views.nightly, name='nightly'),
 )
