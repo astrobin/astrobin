@@ -172,6 +172,7 @@ var image_detail = {
             },
             element  : 'a.upload-revision',
             form_html: '',
+            csrf_token: '',
             url       : '/upload/revision/process/',
             fileDefaultText: '',
             fileBtnText: '',
@@ -243,6 +244,7 @@ var image_detail = {
             },
             element  : 'a.send-private-message',
             form_html: '',
+            csrf_token: '',
             url      : ''
         },
 
@@ -362,6 +364,7 @@ var image_detail = {
                     </p>\
                     <form id="upload-revision" action="' + image_detail.config.upload_revision_action.url + '" method="post" enctype="multipart/form-data">\
                         ' + image_detail.config.upload_revision_action.form_html + '\
+                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + image_detail.config.upload_revision_action.csrf_token + '" /></div> \
                         <input type="hidden" name="image_id" value="' + image_detail.globals.image_id  + '"/>\
                     </form>\
                     </div>\
@@ -598,6 +601,7 @@ var image_detail = {
                     <div class="sided-main-content-popup">\
                     <form id="private-message" action="" method="post">\
                         ' + image_detail.config.message_action.form_html + '\
+                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + image_detail.config.message_action.csrf_token + '" /></div> \
                         <input type="hidden" name="to_user" value="' + image_detail.globals.image_username  + '"/>\
                         <input id="send" class="button submit-button" type="button" value="' + image_detail.config.message_action.dialog.button  + '" />\
                     </form>\

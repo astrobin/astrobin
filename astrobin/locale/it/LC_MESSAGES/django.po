@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-24 00:38-0500\n"
-"PO-Revision-Date: 2011-11-24 00:38-0500\n"
+"POT-Creation-Date: 2011-11-25 13:56-0500\n"
+"PO-Revision-Date: 2011-11-25 13:58-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -303,7 +303,7 @@ msgstr "Licenza"
 #: models.py:372
 #: templates/image/detail.html:278
 #: templates/image/full.html:54
-#: templates/inclusion_tags/image_list.html:15
+#: templates/inclusion_tags/image_list.html:16
 #: templates/inclusion_tags/search_image_list.html:15
 msgid "(no title)"
 msgstr "(senza titolo)"
@@ -583,17 +583,17 @@ msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
 #: views.py:1158
-#: templatetags/tags.py:125
+#: templatetags/tags.py:127
 msgid "minutes"
 msgstr "minuti"
 
 #: views.py:1159
-#: templatetags/tags.py:126
+#: templatetags/tags.py:128
 msgid "seconds ago"
 msgstr "secondi fa"
 
 #: views.py:1161
-#: templatetags/tags.py:127
+#: templatetags/tags.py:129
 #, python-format
 msgid "%s ago"
 msgstr "%s fa"
@@ -619,16 +619,16 @@ msgstr "Integrazione totale"
 msgid "Average integration time"
 msgstr "Integrazione media"
 
-#: views.py:1643
+#: views.py:1693
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1702
+#: views.py:1752
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1726
+#: views.py:1776
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -806,8 +806,8 @@ msgid "Upload!"
 msgstr "Carica!"
 
 #: templates/base.html:151
-#: templates/user/profile.html:63
-#: templates/user/profile.html.py:66
+#: templates/user/profile.html:126
+#: templates/user/profile.html.py:129
 msgid "Logout"
 msgstr "Logout"
 
@@ -899,12 +899,12 @@ msgid "Cancel"
 msgstr "Annulla"
 
 #: templates/base.html:361
-#: templates/image/detail.html:489
+#: templates/image/detail.html:490
 msgid "No file selected"
 msgstr "Nessun file"
 
 #: templates/base.html:362
-#: templates/image/detail.html:490
+#: templates/image/detail.html:491
 msgid "Choose file"
 msgstr "Scegli file"
 
@@ -1202,7 +1202,7 @@ msgid "Basic Information"
 msgstr "Informazioni di base"
 
 #: templates/profile-edit-menu.html:9
-#: templates/user/profile.html:77
+#: templates/user/profile.html:140
 msgid "Gear"
 msgstr "Strumentazione"
 
@@ -1353,12 +1353,12 @@ msgid "Bring to a user's attention"
 msgstr "Porta all'attenzione di un utente"
 
 #: templates/image/detail.html:111
-#: templates/image/detail.html.py:554
+#: templates/image/detail.html.py:556
 msgid "Request additional information"
 msgstr "Richiedi ulteriori informazioni"
 
 #: templates/image/detail.html:114
-#: templates/image/detail.html.py:560
+#: templates/image/detail.html.py:562
 msgid "Request TIFF/FITS"
 msgstr "Richiedi il TIFF/FITS"
 
@@ -1391,12 +1391,12 @@ msgid "View profile"
 msgstr "Vedi il profilo"
 
 #: templates/image/detail.html:182
-#: templates/image/detail.html.py:520
+#: templates/image/detail.html.py:521
 msgid "Stop following"
 msgstr "Smetti di seguire"
 
 #: templates/image/detail.html:184
-#: templates/image/detail.html.py:528
+#: templates/image/detail.html.py:529
 msgid "Follow"
 msgstr "Segui"
 
@@ -1518,111 +1518,111 @@ msgstr "Fantastico"
 msgid "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr "Hai migliorato l'elaborazione della tua immagine? Carica la nuova versione!"
 
-#: templates/image/detail.html:491
+#: templates/image/detail.html:492
 msgid "Uploading..."
 msgstr "Caricamento in corso..."
 
-#: templates/image/detail.html:495
+#: templates/image/detail.html:496
 msgid "Delete image and all its revisions?"
 msgstr "Cancellare l'immagine e tutte le sue versioni?"
 
-#: templates/image/detail.html:496
+#: templates/image/detail.html:497
 msgid "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?"
 msgstr "L'immagine verrà cancellata permanentemente e non potrà più essere recuperata. Tutte le sue versioni verranno cancellate. Sei sicuro?"
 
-#: templates/image/detail.html:497
+#: templates/image/detail.html:498
 msgid "Yes, delete everything"
 msgstr "Sì, cancella tutto"
 
-#: templates/image/detail.html:502
+#: templates/image/detail.html:503
 msgid "Delete this revision?"
 msgstr "Cancellare questa versione?"
 
-#: templates/image/detail.html:503
+#: templates/image/detail.html:504
 msgid "This revision will be permanently deleted and cannot be recovered. Are you sure?"
 msgstr "Questa versione sarà cancellata permanentemente e non potrà più essere recuperata. Sei sicuro?"
 
-#: templates/image/detail.html:504
+#: templates/image/detail.html:505
 msgid "Yes, delete revision"
 msgstr "Sì, cancella la versione"
 
-#: templates/image/detail.html:509
+#: templates/image/detail.html:510
 msgid "Delete original image?"
 msgstr "Cancellare l'immagine originale?"
 
-#: templates/image/detail.html:510
+#: templates/image/detail.html:511
 msgid "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"
 msgstr "L'immagine verrà cancellata permanentemente e non potrà più essere recuperata. Le sue altre versioni non verranno cancellate. Sei sicuro?"
 
-#: templates/image/detail.html:511
+#: templates/image/detail.html:512
 msgid "Yes, delete image"
 msgstr "Sì, cancella l'immagine"
 
-#: templates/image/detail.html:516
+#: templates/image/detail.html:517
 #, python-format
 msgid "Follow %(username)s?"
 msgstr "Seguire %(username)s?"
 
-#: templates/image/detail.html:517
+#: templates/image/detail.html:518
 #, python-format
 msgid "You will receive a notification every time %(username)s posts a new image. Continue?"
 msgstr "Riceverai una notifica ogni volta che %(username)s carica una nuova immagine. Continuare?"
 
-#: templates/image/detail.html:518
+#: templates/image/detail.html:519
 msgid "Yes, follow!"
 msgstr "Sì, segui!"
 
-#: templates/image/detail.html:524
+#: templates/image/detail.html:525
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr "Smettere di seguire %(username)s?"
 
-#: templates/image/detail.html:525
+#: templates/image/detail.html:526
 #, python-format
 msgid "You will stop receiving notifications when %(username)s posts a new image. Continue?"
 msgstr "Non riceverai più notifiche quando %(username)s carica una nuova immagine. Continuare?"
 
-#: templates/image/detail.html:526
+#: templates/image/detail.html:527
 msgid "Yes, stop following!"
 msgstr "Si, smettere di seguire!"
 
-#: templates/image/detail.html:532
+#: templates/image/detail.html:533
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Manda un messaggio a %(username)s"
 
-#: templates/image/detail.html:534
+#: templates/image/detail.html:535
 #: templates/messages/detail.html:25
 #: templates/messages/new.html:15
 msgid "Send"
 msgstr "Manda"
 
-#: templates/image/detail.html:541
+#: templates/image/detail.html:543
 msgid "Bring image to attention"
 msgstr "Porta immagine all'attenzione"
 
-#: templates/image/detail.html:542
+#: templates/image/detail.html:544
 msgid "By choosing some users and clicking the button below, you will send them a notification prompting them to checkout this image."
 msgstr "Scegliendo degli utenti e cliccando il pulsante qui sotto, manderai loro una notifica che gli chiederà di dare un'occhiata a quest'immagine."
 
-#: templates/image/detail.html:543
+#: templates/image/detail.html:545
 msgid "Continue"
 msgstr "Continua"
 
-#: templates/image/detail.html:547
+#: templates/image/detail.html:549
 msgid "Enter partial name"
 msgstr "Inserire parte del nome"
 
-#: templates/image/detail.html:548
+#: templates/image/detail.html:550
 msgid "User not found. Cannot notify them."
 msgstr "Utente non trovato. Sarà impossibile notificarlo."
 
-#: templates/image/detail.html:555
+#: templates/image/detail.html:557
 #, python-format
 msgid "You will notify %(username)s that you would like them to feed more information in the technical card for this photograph. Continue?"
 msgstr "Manderai a %(username)s una notifica, con la richiesta di inserire ulteriori informazioni nella scheda tecnica di quest'immagine. Continuare?"
 
-#: templates/image/detail.html:561
+#: templates/image/detail.html:563
 #, python-format
 msgid "You will notify %(username)s that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully %(username)s will contact you about how to handle the transaction. Continue?"
 msgstr "Manderai all'utente %(username)s una notifica, con la richiesta di accedere al file TIFF o FITS. AstroBin al momento non offre l'hosting di file così grandi, quindi si spera che %(username)s ti contatterà per organizzarvi con il file. Continuare?"
@@ -1829,13 +1829,13 @@ msgstr "Salvato!"
 msgid "Form saved. Thank you!"
 msgstr "Salvato. Grazie!"
 
-#: templates/inclusion_tags/image_list.html:23
+#: templates/inclusion_tags/image_list.html:24
 #: templates/inclusion_tags/search_image_list.html:41
 #, python-format
 msgid " by <a href=\"%(user_page)s\">%(user)s</a>"
 msgstr " di <a href=\"%(user_page)s\">%(user)s</a>"
 
-#: templates/inclusion_tags/image_list.html:29
+#: templates/inclusion_tags/image_list.html:30
 #: templates/inclusion_tags/search_image_list.html:47
 msgid "No images"
 msgstr "Nessuna immagine"
@@ -2332,25 +2332,65 @@ msgstr "Queste sono le tue immagini pubbliche: tutti possono vederle."
 msgid "These are your \"work in progress\" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu."
 msgstr "Questi sono i tuoi \"lavori in corso\": solo tu puoi vedere questa lista. Puoi dare l'accesso ad una singola immagine tramite i link nel menù <em>Condividi</em>."
 
-#: templates/user/profile.html:51
+#: templates/user/profile.html:48
+#: templates/user/profile.html.py:50
+msgid "Recently uploaded"
+msgstr "Caricate di recente"
+
+#: templates/user/profile.html:54
+#: templates/user/profile.html.py:56
+msgid "By year"
+msgstr "Per anno"
+
+#: templates/user/profile.html:60
+#: templates/user/profile.html.py:62
+msgid "By gear"
+msgstr "Per strumentazione"
+
+#: templates/user/profile.html:66
+#: templates/user/profile.html.py:68
+msgid "Lacking data"
+msgstr "Senza dati"
+
+#: templates/user/profile.html:80
+msgid "(view more...)"
+msgstr "(mostra altre...)"
+
+#: templates/user/profile.html:89
+msgid "No images."
+msgstr "Nessuna immagine."
+
+#: templates/user/profile.html:95
+msgid "(go back)"
+msgstr "(torna indietro)"
+
+#: templates/user/profile.html:100
+msgid "These images have no data associated. It's a shame..."
+msgstr "Queste immagini non hanno alcun dato tecnico. Che peccato..."
+
+#: templates/user/profile.html:102
+msgid "If you want your images to be categorized in Smart Albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too."
+msgstr "Se vuoi che le tue immagini vengano categorizzate in Album Intelligenti, dovresti fornire i dati necessari. Telescopi di acquisizione, camere di acquisizione e soggetti sono il minimo. Anche le date di acquisizione sono molto importanti."
+
+#: templates/user/profile.html:114
 msgid "Tools"
 msgstr "Strumenti"
 
-#: templates/user/profile.html:55
-#: templates/user/profile.html.py:58
+#: templates/user/profile.html:118
+#: templates/user/profile.html.py:121
 msgid "Edit profile"
 msgstr "Modifica profilo"
 
-#: templates/user/profile.html:75
+#: templates/user/profile.html:138
 #, python-format
 msgid "%(username)s's techical card"
 msgstr "Scheda tecnica di %(username)s"
 
-#: templates/user/profile.html:92
+#: templates/user/profile.html:155
 msgid "Stats"
 msgstr "Statistiche"
 
-#: templates/user/profile.html:99
+#: templates/user/profile.html:162
 msgid "Go to the homepage to upload a new image!"
 msgstr "Vai alla home per caricare una nuova foto!"
 
