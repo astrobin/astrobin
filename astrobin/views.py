@@ -1232,7 +1232,7 @@ def user_page(request, username):
             # Not implemented yet
             pass
         elif subsection == 'nodata':
-            sqs = sqs.filter(imaging_telescopes = None, imaging_cameras = None, subjects = None, is_wip = False)
+            sqs = sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None) | Q(subjects = None), is_wip = False).distinct()
 
         section = 'public'
 

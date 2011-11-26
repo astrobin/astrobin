@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 07:18-0500\n"
-"PO-Revision-Date: 2011-11-26 07:19-0500\n"
+"POT-Creation-Date: 2011-11-26 08:03-0500\n"
+"PO-Revision-Date: 2011-11-26 08:04-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -915,31 +915,6 @@ msgstr "Nessun file"
 msgid "Choose file"
 msgstr "Scegli file"
 
-#: templates/daily.html:7
-msgid "Images acquired night after night"
-msgstr "Immagini acquisite notte dopo notte"
-
-#: templates/daily.html:10
-msgid "On this page you can see images that were actually taken each night, and not merely uploaded on a particular date."
-msgstr "Qui puoi vedere le immagini realmente scattate ogni notte, e non semplicemente caricate sul sito in una certa data."
-
-#: templates/daily.html:21
-#: templates/user/profile.html:89
-msgid "No images."
-msgstr "Nessuna immagine."
-
-#: templates/daily.html:27
-msgid "current month"
-msgstr "mese corrente"
-
-#: templates/daily.html:31
-msgid "previous month"
-msgstr "mese precedente"
-
-#: templates/daily.html:36
-msgid "next month"
-msgstr "mese seguente"
-
 #: templates/faq.html:8
 msgid "Frequently Asked Questions"
 msgstr "Domande..."
@@ -1215,6 +1190,31 @@ msgstr "Ore totali di integrazione"
 #: templates/leaderboard.html:24
 msgid "Avg. integration hours"
 msgstr "Ore di integrazione in media"
+
+#: templates/nightly.html:7
+msgid "Images acquired night after night"
+msgstr "Immagini acquisite notte dopo notte"
+
+#: templates/nightly.html:10
+msgid "On this page you can see images that were actually taken each night, and not merely uploaded on a particular date."
+msgstr "Qui puoi vedere le immagini realmente scattate ogni notte, e non semplicemente caricate sul sito in una certa data."
+
+#: templates/nightly.html:21
+#: templates/user/profile.html:89
+msgid "No images."
+msgstr "Nessuna immagine."
+
+#: templates/nightly.html:27
+msgid "current month"
+msgstr "mese corrente"
+
+#: templates/nightly.html:31
+msgid "previous month"
+msgstr "mese precedente"
+
+#: templates/nightly.html:36
+msgid "next month"
+msgstr "mese seguente"
 
 #: templates/object_not_found.html:5
 msgid "Object not found"
@@ -2397,12 +2397,12 @@ msgid "(go back)"
 msgstr "(torna indietro)"
 
 #: templates/user/profile.html:100
-msgid "These images have no data associated. It's a shame..."
-msgstr "Queste immagini non hanno alcun dato tecnico. Che peccato..."
+msgid "These images don't have enough data. It's a shame..."
+msgstr "Queste immagini non hanno abbastanza dati tecnici. Che peccato..."
 
 #: templates/user/profile.html:102
-msgid "If you want your images to be categorized in Smart Albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too."
-msgstr "Se vuoi che le tue immagini vengano categorizzate in Album Intelligenti, dovresti fornire i dati necessari. Telescopi di acquisizione, camere di acquisizione e soggetti sono il minimo. Anche le date di acquisizione sono molto importanti."
+msgid "If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too."
+msgstr "Se vuoi che le tue immagini vengano categorizzate in album, dovresti fornire i dati necessari. Telescopi di acquisizione, camere di acquisizione e soggetti sono il minimo. Anche le date di acquisizione sono molto importanti."
 
 #: templates/user/profile.html:114
 msgid "Tools"
@@ -2418,11 +2418,11 @@ msgstr "Modifica profilo"
 msgid "%(username)s's techical card"
 msgstr "Scheda tecnica di %(username)s"
 
-#: templates/user/profile.html:155
+#: templates/user/profile.html:151
 msgid "Stats"
 msgstr "Statistiche"
 
-#: templates/user/profile.html:162
+#: templates/user/profile.html:158
 msgid "Go to the homepage to upload a new image!"
 msgstr "Vai alla home per caricare una nuova foto!"
 
