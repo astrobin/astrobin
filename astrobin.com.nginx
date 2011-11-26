@@ -81,7 +81,7 @@ server {
         # - last: only the most recent listener request is kept, 409 for others.
         # - first: only the oldest listener request is kept, 409 for others.
         # - broadcast: any number of listener requests may be long-polling.
-        push_subscriber_concurrency broadcast;
+        push_subscriber_concurrency first;
         set $push_channel_id $arg_id;
         default_type  text/plain;
     } 

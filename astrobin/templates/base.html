@@ -125,6 +125,7 @@
                             {% if request.user.is_authenticated %}
                             <li id="{% current request "^/leaderboard/$" %}"><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
                             {% endif %}
+                            <li id="{% current request "^/nightly/$" %}"><a href="{% url nightly %}">{% trans "Nightly" %}</a></li>
                             <li id="{% current request "^/help/$" %}"><a href="{% url help %}">{% trans "Help" %}</a></li>
                             <li id="{% current request "^/faq/$" %}"><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
                         </ul>
@@ -249,6 +250,10 @@
                         <p>
                             <ul>
                                 <li><a href="{% url index %}">{% trans "Home" %}</a></li>
+                                {% if request.user.is_authenticated %}
+                                <li><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
+                                {% endif %}
+                                <li><a href="{% url nightly %}">{% trans "Nightly" %}</a></li>
                                 <li><a href="{% url help %}">{% trans "Help" %}</a></li>
                                 <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
                                 <li><a href="{% url tos %}">{% trans "Terms of Service" %}</a></li>
@@ -327,6 +332,18 @@
 
         <!-- javascript -->
         <script type="text/javascript">
+            $(window).bind('beforeunload', function() {
+                $.each(common.globals.requests, function(i, xhr) {
+                    try {
+                        xhr.abort();
+                    } catch(e) {
+                        if (console)
+                            console.log('failed to abort xhr');
+                    }
+                });
+                common.globals.requests = [];
+            });
+
             function getInternetExplorerVersion()
             // Returns the version of Internet Explorer or a -1
             // (indicating the use of another browser).
