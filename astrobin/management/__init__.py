@@ -49,7 +49,7 @@ NOTICE_TYPES = (
         'image_ready',
         _('Image ready'),
         _('The image has been stored'),
-        1
+        0
     ),
     (
         'image_solved',
@@ -67,7 +67,7 @@ NOTICE_TYPES = (
         'request_fulfilled',
         _('Request fulfilled'),
         _('The user has fulfilled your request'),
-        1
+        2
     ),
     (
         'image_deleted',

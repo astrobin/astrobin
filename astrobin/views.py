@@ -1543,7 +1543,6 @@ def user_profile_edit_preferences(request):
     response_dict = {
         'form': form,
     }
-    prefill_dict = {}
     email_medium = "1" # see NOTICE_MEDIA in notifications/models.py
     email_default = NOTICE_MEDIA_DEFAULTS[email_medium]
     notice_settings = NoticeSetting.objects.filter(
@@ -1555,10 +1554,11 @@ def user_profile_edit_preferences(request):
         stored_settings[setting.notice_type.label] = setting.send
 
     for notice_type in NOTICE_TYPES:
-        label = notice_type[0]
-        value = stored_settings.get(label,
-                                    notice_type[3] >= email_default)
-        form.fields[label].initial = value
+        if notice_type[3] == 2:
+            label = notice_type[0]
+            value = stored_settings.get(label,
+                                        notice_type[3] >= email_default)
+            form.fields[label].initial = value
 
     return render_to_response("user/profile/edit/preferences.html",
         response_dict,
@@ -1587,25 +1587,26 @@ def user_profile_save_preferences(request):
         # save the notification settings
         email_medium = "1" # see NOTICE_MEDIA in notifications/models.py
         for notice_type in NOTICE_TYPES:
-            label = notice_type[0]
-            import notification
-            notice_object = notification.models.NoticeType.objects.get(label=label)
-            value = form.cleaned_data[label]
-            try:
-                setting = NoticeSetting.objects.get(
-                    user=request.user,
-                    notice_type=notice_object,
-                    medium=email_medium
-                )
-                setting.send = value
-            except NoticeSetting.DoesNotExist:
-                setting = NoticeSetting(
-                    user=request.user,
-                    notice_type=notice_object,
-                    medium=email_medium,
-                    send=value
-                )
-            setting.save()
+            if notice_type[3] == 2:
+                label = notice_type[0]
+                import notification
+                notice_object = notification.models.NoticeType.objects.get(label=label)
+                value = form.cleaned_data[label]
+                try:
+                    setting = NoticeSetting.objects.get(
+                        user=request.user,
+                        notice_type=notice_object,
+                        medium=email_medium
+                    )
+                    setting.send = value
+                except NoticeSetting.DoesNotExist:
+                    setting = NoticeSetting(
+                        user=request.user,
+                        notice_type=notice_object,
+                        medium=email_medium,
+                        send=value
+                    )
+                setting.save()
     else:
         return render_to_response("user/profile/edit/preferences.html",
             response_dict,
