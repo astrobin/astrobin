@@ -75,7 +75,6 @@ ln -s ./venv/bin/pip vpip
     django-storages boto \
     simplejson \
     django-compressor \
-    django-registration \
     django-notification \
     flickrapi \
     Pillow \
@@ -89,6 +88,9 @@ ln -s ./venv/bin/pip vpip
     django-staticfiles \
     django-tinymce \
     js.tinymce
+
+Install django registration revision fad7080fe769 from sources:
+https://bitbucket.org/ubernostrum/django-registration/
 
 # NOTE: if you run into this: https://github.com/ask/celery/commit/edf3b3f33acdada9264754068d9c74ee76692cd9
 # then install kombu, celery and django-celery from git master:
