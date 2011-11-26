@@ -1199,7 +1199,7 @@ def user_page(request, username):
         elif subsection == 'year':
             if 'year' in request.GET:
                 year = request.GET.get('year')
-                sqs = sqs.filter(acquisition__date__year = year, is_wip = False)
+                sqs = sqs.filter(acquisition__date__year = year, is_wip = False).distinct()
                 subtitle = year
                 backlink = "?public&sub=year"
             else:
