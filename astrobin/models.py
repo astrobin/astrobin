@@ -34,6 +34,11 @@ LICENSE_CHOICES = (
 )
 
 
+LANGUAGE_CHOICES = (
+    ('en', _("English")),
+    ('it', _("Italian")),
+)
+
 class Gear(models.Model):
     name = models.CharField(_("Name"), max_length=64)
 
@@ -643,7 +648,6 @@ class UserProfile(models.Model):
     website = models.CharField(_("Website"), max_length=128, null=True, blank=True)
     job = models.CharField(_("Job"), max_length=128, null=True, blank=True)
     hobbies = models.CharField(_("Hobbies"), max_length=128, null=True, blank=True)
-    language = models.CharField(_("Language"), max_length=8, null=True, blank=True, editable=False)
     timezone = models.CharField(
         max_length=255,
         choices=PRETTY_TIMEZONE_CHOICES,
@@ -673,6 +677,15 @@ class UserProfile(models.Model):
             "The license you select here is automatically applied to "
             "all your new images."
         ),
+    )
+
+    # Preferences (notification preferences are stored in the django
+    # notification model)
+    language = models.CharField(
+        max_length=8,
+        null=True, blank=True,
+        verbose_name=_("Language"),
+        choices = LANGUAGE_CHOICES,
     )
 
     def __unicode__(self):

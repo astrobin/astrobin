@@ -12,6 +12,8 @@ from search_indexes import xapian_escape
 import string
 import unicodedata
 
+from management import NOTICE_TYPES
+
 class ImageUploadForm(forms.Form):
     file = forms.ImageField()
 
@@ -135,6 +137,21 @@ class UserProfileEditGearForm(forms.Form):
         self.fields['software'].label = _("Software")
         self.fields['filters'].label = _("Filters")
         self.fields['accessories'].label = _("Accessories")
+
+
+class UserProfileEditPreferencesForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('language',)
+
+    def __init__(self, user=None, **kwargs):
+        super(UserProfileEditPreferencesForm, self).__init__(**kwargs)
+        for notice_type in NOTICE_TYPES:
+            self.fields[notice_type[0]] = forms.BooleanField(
+                label=notice_type[1],
+                help_text=notice_type[2],
+                required=False
+            )
 
 
 class PrivateMessageForm(forms.Form):

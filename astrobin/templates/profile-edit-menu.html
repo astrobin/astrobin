@@ -14,6 +14,9 @@
             <li class="last {% current request '^/profile/edit/flickr/$' %}">
                 <a href="{% url profile_flickr_import %}">{% trans "Import from Flickr" %}</a>
             </li>
+            <li class="{% current request '^/profile/(edit|save)/preferences/$' %}">
+                <a href="{% url profile_edit_preferences %}">{% trans "Preferences" %}</a>
+            </li>
         </ul>
     </div>
 

@@ -33,7 +33,9 @@ from datetime import datetime
 
 from models import *
 from forms import *
+from management import NOTICE_TYPES
 from notifications import *
+from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from shortcuts import *
 from tasks import *
 from search_indexes import xapian_escape
@@ -1530,6 +1532,86 @@ def flickr_auth_callback(request):
     request.session['flickr_token'] = token
 
     return HttpResponseRedirect("/profile/edit/flickr/")
+
+
+@login_required
+@require_GET
+def user_profile_edit_preferences(request):
+    """Edits own preferences"""
+    profile = UserProfile.objects.get(user=request.user)
+    form = UserProfileEditPreferencesForm(instance=profile)
+    response_dict = {
+        'form': form,
+    }
+    prefill_dict = {}
+    email_medium = "1" # see NOTICE_MEDIA in notifications/models.py
+    email_default = NOTICE_MEDIA_DEFAULTS[email_medium]
+    notice_settings = NoticeSetting.objects.filter(
+        user=request.user,
+        medium=email_medium,
+    )
+    stored_settings = {}
+    for setting in notice_settings:
+        stored_settings[setting.notice_type.label] = setting.send
+
+    for notice_type in NOTICE_TYPES:
+        label = notice_type[0]
+        value = stored_settings.get(label,
+                                    notice_type[3] >= email_default)
+        form.fields[label].initial = value
+
+    return render_to_response("user/profile/edit/preferences.html",
+        response_dict,
+        context_instance=RequestContext(request))
+
+
+@login_required
+@require_POST
+def user_profile_save_preferences(request):
+    """Saves the form"""
+
+    profile = UserProfile.objects.get(user=request.user)
+    form = UserProfileEditPreferencesForm(data=request.POST, instance=profile)
+    response_dict = {'form': form}
+
+    if form.is_valid():
+        form.save()
+        # Activate the chosen language
+        from django.utils.translation import check_for_language, activate
+        lang = form.cleaned_data['language']
+        if lang and check_for_language(lang):
+            if hasattr(request, 'session'):
+                request.session['django_language'] = lang
+            activate(lang)
+
+        # save the notification settings
+        email_medium = "1" # see NOTICE_MEDIA in notifications/models.py
+        for notice_type in NOTICE_TYPES:
+            label = notice_type[0]
+            import notification
+            notice_object = notification.models.NoticeType.objects.get(label=label)
+            value = form.cleaned_data[label]
+            try:
+                setting = NoticeSetting.objects.get(
+                    user=request.user,
+                    notice_type=notice_object,
+                    medium=email_medium
+                )
+                setting.send = value
+            except NoticeSetting.DoesNotExist:
+                setting = NoticeSetting(
+                    user=request.user,
+                    notice_type=notice_object,
+                    medium=email_medium,
+                    send=value
+                )
+            setting.save()
+    else:
+        return render_to_response("user/profile/edit/preferences.html",
+            response_dict,
+            context_instance=RequestContext(request))
+
+    return HttpResponseRedirect("/profile/edit/preferences/?saved");
 
 
 @login_required
