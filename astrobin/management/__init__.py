@@ -11,68 +11,68 @@ from notification import models as notification
 NOTICE_TYPES = (
     (
         'new_follower',
-        _('A user is following you'),
-        _('Your new images will be notified to them'),
+        _('You have a new follower'),
+        _(''),
         2
     ),
     (
         'follow_success',
-        _('You are now following'),
-        _('Their new images will be notified to you'),
+        _('Following a user was successful'),
+        _(''),
         0
     ),
     (
         'unfollow_success',
-        _('You are not following anymore'),
-        _('Their new images will not be notified to you anymore'),
+        _('Unfollowing a user was successful'),
+        _(''),
         0
     ),
     (
         'new_image',
-        _('New image'),
-        _('A user you follow has published a new image'),
+        _('New image from a user you follow'),
+        _(''),
         2
     ),
     (
         'attention_request',
-        _('Attention request'),
-        _('A user wants to bring an image to your attention'),
+        _('Image brought to your attention'),
+        _(''),
         2
     ),
     (
         'new_image_revision',
-        _('New image revision'),
-        _('A user you follow has uploaded a new image revision'),
+        _('New image revision from a user you follow'),
+        _(''),
         2
     ),
     (
         'image_ready',
-        _('Image ready'),
-        _('The image has been stored'),
+        _('Your image is ready'),
+        _(''),
         0
     ),
     (
         'image_solved',
-        _('Image solved'),
-        _('Plate solving the image has succeeded'),
+        _('Your image was plate-solved'),
+        _(''),
         2
     ),
     (
         'image_not_solved',
-        _('Image not solved'),
-        _('Plate solving the image has failed'),
+        _('Your image could not be plate-solved'),
+        _(''),
         2
     ),
     (
         'request_fulfilled',
-        _('Request fulfilled'),
-        _('The user has fulfilled your request'),
+        _('Your request was fulfilled'),
+        _(''),
         2
     ),
     (
         'image_deleted',
-        _('Image deleted'),
-        _('Your image has been successfully deleted'),
+        _('Your image was deleted'),
+        _(''),
         0
     ),
 )
