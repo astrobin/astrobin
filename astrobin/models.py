@@ -205,12 +205,20 @@ class Location(models.Model):
 def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
     # Before we continue, we must check if the image hasn't been
     # deleted in the meantime.
+    is_revision = False
     try:
-        image = Image.objects.get(id = image.id)
-    except Image.DoesNotExist:
-        # Abort!
-        print "Aborting because image was deleted."
-        return
+        tmp = image.image
+        is_revision = True
+    except:
+        is_revision = False
+
+    if not is_revision:
+        try:
+            image = Image.objects.get(id = image.id)
+        except Image.DoesNotExist:
+            # Abort!
+            print "Aborting because image was deleted."
+            return
 
     if not solved and did_use_scale:
         # Try again!
@@ -265,12 +273,20 @@ def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
 def image_stored_callback(image, stored, solve, lang):
     # Before we continue, we must check if the image hasn't been
     # deleted in the meantime.
+    is_revision = False
     try:
-        image = Image.objects.get(id = image.id)
-    except Image.DoesNotExist:
-        # Abort!
-        print "Aborting because image was deleted."
-        return
+        tmp = image.image
+        is_revision = True
+    except:
+        is_revision = False
+
+    if not is_revision:
+        try:
+            image = Image.objects.get(id = image.id)
+        except Image.DoesNotExist:
+            # Abort!
+            print "Aborting because image was deleted."
+            return
 
     image.is_stored = stored
     image.save()
