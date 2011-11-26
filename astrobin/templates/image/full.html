@@ -56,6 +56,12 @@
                             ({% trans "uploaded" %}: {{image.uploaded|ago}}
                             {% url user_page image.user.username as the_url %}
                             {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %})
+                            -
+                            {% with request.GET.mod as mod %}
+                            <a href="{% url image_detail image.id %}{% query_string "mod=mod" "" %}">
+                            {% blocktrans %}See technical details{% endblocktrans %}
+                            </a>
+                            {% endwith %}
                         </span>
             </div>
             {% if revision_image %}

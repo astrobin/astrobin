@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-25 13:56-0500\n"
-"PO-Revision-Date: 2011-11-25 13:58-0500\n"
+"POT-Creation-Date: 2011-11-26 02:25-0500\n"
+"PO-Revision-Date: 2011-11-26 02:25-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -26,28 +26,28 @@ msgid "The places from which you have taken this image."
 msgstr "Questi sono i luoghi da cui hai acquisito quest'immagine."
 
 #: forms.py:33
-#: models.py:280
+#: models.py:298
 #: templates/image/edit/basic.html:28
 msgid "Title"
 msgstr "Titolo"
 
 #: forms.py:34
-#: models.py:281
+#: models.py:299
 #: templates/image/edit/basic.html:32
 msgid "Subjects"
 msgstr "Soggetti"
 
 #: forms.py:35
 #: forms.py:90
-#: models.py:282
-#: models.py:624
+#: models.py:300
+#: models.py:642
 #: views.py:316
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Luoghi"
 
 #: forms.py:36
-#: models.py:283
+#: models.py:301
 #: templates/image/detail.html:431
 #: templates/image/edit/basic.html:46
 msgid "Description"
@@ -55,58 +55,58 @@ msgstr "Descrizione"
 
 #: forms.py:57
 #: forms.py:189
-#: models.py:331
+#: models.py:349
 msgid "Imaging telescopes"
 msgstr "Telescopi di acquisizione"
 
 #: forms.py:58
-#: models.py:332
+#: models.py:350
 msgid "Guiding telescopes"
 msgstr "Telescopi di guida"
 
 #: forms.py:59
 #: forms.py:132
-#: models.py:333
-#: models.py:641
+#: models.py:351
+#: models.py:659
 msgid "Mounts"
 msgstr "Montature"
 
 #: forms.py:60
 #: forms.py:190
-#: models.py:334
+#: models.py:352
 msgid "Imaging cameras"
 msgstr "Camere di acquisizione"
 
 #: forms.py:61
-#: models.py:335
+#: models.py:353
 msgid "Guiding cameras"
 msgstr "Camere di guida"
 
 #: forms.py:62
 #: forms.py:134
-#: models.py:336
-#: models.py:643
+#: models.py:354
+#: models.py:661
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
 #: forms.py:63
 #: forms.py:135
-#: models.py:337
-#: models.py:644
+#: models.py:355
+#: models.py:662
 msgid "Software"
 msgstr "Software"
 
 #: forms.py:64
 #: forms.py:136
-#: models.py:338
-#: models.py:645
+#: models.py:356
+#: models.py:663
 msgid "Filters"
 msgstr "Filtri"
 
 #: forms.py:65
 #: forms.py:137
-#: models.py:339
-#: models.py:646
+#: models.py:357
+#: models.py:664
 msgid "Accessories"
 msgstr "Accessori"
 
@@ -123,12 +123,12 @@ msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in 
 msgstr "Suggerimento: inserisci i filtri separatamente! Se invece li inserisci tutti assieme, ad esempio LRGB insieme, non potrai aggiungere sessioni di acquisizione separate per ogni filtro."
 
 #: forms.py:131
-#: models.py:640
+#: models.py:658
 msgid "Telescopes"
 msgstr "Telescopi"
 
 #: forms.py:133
-#: models.py:642
+#: models.py:660
 msgid "Cameras"
 msgstr "Camere"
 
@@ -142,7 +142,7 @@ msgstr "Utente"
 #: forms.py:171
 #: forms.py:261
 #: forms.py:290
-#: models.py:459
+#: models.py:477
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Usa il seguente formato: aaaa-mm-gg"
 
@@ -189,8 +189,8 @@ msgstr "Per esempio: -51.25"
 
 #: forms.py:274
 #: forms.py:298
-#: models.py:459
-#: models.py:576
+#: models.py:477
+#: models.py:594
 #: templates/image/detail.html:392
 #: templates/image/edit/acquisition.html:80
 msgid "Date"
@@ -230,8 +230,8 @@ msgid "Name"
 msgstr "Nome"
 
 #: models.py:48
-#: models.py:296
-#: models.py:562
+#: models.py:314
+#: models.py:580
 #: templates/image/detail.html:404
 #: templates/image/edit/acquisition.html:32
 msgid "Focal length"
@@ -257,50 +257,50 @@ msgstr "Longitudine"
 msgid "Altitude"
 msgstr "Altitudine"
 
-#: models.py:292
+#: models.py:310
 msgid "(in mm)"
 msgstr "(in mm)"
 
-#: models.py:294
+#: models.py:312
 msgid "Insert a focal length if you want to plate-solve."
 msgstr "Inserisci la lunghezza focale se vuoi avviare la riduzione astrometrica."
 
-#: models.py:304
+#: models.py:322
 msgid "(in &mu;m)"
 msgstr "(in &mu;m)"
 
-#: models.py:306
+#: models.py:324
 msgid "Insert a pixel size if you want to plate-solve."
 msgstr "Inserisci la dimensione del pixel se vuoi avviare la riduzione astrometrica."
 
-#: models.py:308
+#: models.py:326
 msgid "Pixel size"
 msgstr "Dimensione del pixel"
 
-#: models.py:316
+#: models.py:334
 msgid "This is the smallest of the binning values you used. If you imaged L in 1x1 and RGB in 2x2, put 1x1 here."
 msgstr "Questo è il più piccolo dei valori di bin che hai usato. Se hai fatto L a 1x1 e RGB a 2x2, scegli 1x1."
 
-#: models.py:317
-#: models.py:489
+#: models.py:335
+#: models.py:507
 msgid "Binning"
 msgstr "Bin"
 
-#: models.py:326
+#: models.py:344
 msgid "If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't matter."
 msgstr "Se hai ridimensionato l'immagine prima di caricarla, metti qui la percentuale della nuova dimensione. Per esempio 50, se hai ridimensionato l'immagine della metà. Averla ritagliata (crop), invece, non ha importanza."
 
-#: models.py:327
+#: models.py:345
 msgid "Scaling"
 msgstr "Ridimensionamento"
 
-#: models.py:354
+#: models.py:372
 #: templates/image/detail.html:288
 #: templates/image/detail.html.py:289
 msgid "License"
 msgstr "Licenza"
 
-#: models.py:372
+#: models.py:390
 #: templates/image/detail.html:278
 #: templates/image/full.html:54
 #: templates/inclusion_tags/image_list.html:16
@@ -308,188 +308,188 @@ msgstr "Licenza"
 msgid "(no title)"
 msgstr "(senza titolo)"
 
-#: models.py:460
-#: models.py:575
+#: models.py:478
+#: models.py:593
 msgid "Image"
 msgstr "Immagine"
 
-#: models.py:478
+#: models.py:496
 msgid "Synthetic channel"
 msgstr "Canale sintetico"
 
-#: models.py:483
+#: models.py:501
 msgid "Filter"
 msgstr "Filtro"
 
-#: models.py:492
+#: models.py:510
 msgid "Number"
 msgstr "Numero"
 
-#: models.py:494
+#: models.py:512
 msgid "The number of sub-frames."
 msgstr "Numero di frame."
 
-#: models.py:497
+#: models.py:515
 msgid "Duration"
 msgstr "Durata"
 
-#: models.py:499
+#: models.py:517
 msgid "Duration of each sub-frame, in seconds."
 msgstr "Durata di ogni frame, in secondi."
 
-#: models.py:502
+#: models.py:520
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:506
+#: models.py:524
 msgid "Gain"
 msgstr "Gain"
 
-#: models.py:511
+#: models.py:529
 msgid "Sensor cooling"
 msgstr "Temperatura sensore"
 
-#: models.py:513
+#: models.py:531
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del sensore. Esempio: -20."
 
-#: models.py:516
+#: models.py:534
 #: views.py:319
 msgid "Darks"
 msgstr "Dark"
 
-#: models.py:518
+#: models.py:536
 msgid "The number of dark frames."
 msgstr "Numero di dark."
 
-#: models.py:521
+#: models.py:539
 #: views.py:320
 msgid "Flats"
 msgstr "Flat"
 
-#: models.py:523
+#: models.py:541
 msgid "The number of flat frames."
 msgstr "Numero di flat."
 
-#: models.py:526
+#: models.py:544
 #: views.py:321
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
-#: models.py:528
+#: models.py:546
 msgid "The number of dark flat frames."
 msgstr "Numero di dark dei flat."
 
-#: models.py:531
+#: models.py:549
 #: views.py:322
 msgid "Bias"
 msgstr "Bias"
 
-#: models.py:533
+#: models.py:551
 msgid "The number of bias/offset frames."
 msgstr "Numero di frame bias/offset."
 
-#: models.py:536
+#: models.py:554
 #: views.py:325
 msgid "Mean SQM"
 msgstr "SQM medio"
 
-#: models.py:541
+#: models.py:559
 #: views.py:326
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
-#: models.py:560
+#: models.py:578
 #: views.py:317
 #: templates/image/detail.html:398
 msgid "Frames"
 msgstr "Pose"
 
-#: models.py:561
+#: models.py:579
 #: templates/image/detail.html:401
 #: templates/image/edit/acquisition.html:24
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:563
+#: models.py:581
 #: templates/image/detail.html:407
 #: templates/image/edit/acquisition.html:40
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:564
+#: models.py:582
 #: templates/image/detail.html:410
 #: templates/image/edit/acquisition.html:48
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:565
+#: models.py:583
 #: templates/image/detail.html:413
 #: templates/image/edit/acquisition.html:56
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:566
+#: models.py:584
 #: templates/image/detail.html:416
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:567
+#: models.py:585
 #: templates/image/detail.html:419
 msgid "Transparency"
 msgstr "Trasparenza"
 
-#: models.py:568
+#: models.py:586
 #: templates/image/detail.html:395
 msgid "Time"
 msgstr "Ora"
 
-#: models.py:595
+#: models.py:613
 msgid "Request from"
 msgstr "Richiesta da"
 
-#: models.py:607
+#: models.py:625
 msgid "Additional information"
 msgstr "Ulteriori informazioni"
 
-#: models.py:608
+#: models.py:626
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:609
+#: models.py:627
 msgid "Higher resolution"
 msgstr "Risoluzione superiore"
 
-#: models.py:625
+#: models.py:643
 msgid "Website"
 msgstr "Sito web"
 
-#: models.py:626
+#: models.py:644
 msgid "Job"
 msgstr "Professione"
 
-#: models.py:627
+#: models.py:645
 msgid "Hobbies"
 msgstr "Interessi"
 
-#: models.py:628
+#: models.py:646
 msgid "Language"
 msgstr "Lingua"
 
-#: models.py:633
+#: models.py:651
 msgid "Timezone"
 msgstr "Fusorario"
 
-#: models.py:634
+#: models.py:652
 msgid "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr "Se inserisci questo, AstroBin ti mostrerà tutte le date nel tuo fuso orario."
 
-#: models.py:653
+#: models.py:671
 #: templates/profile-edit-menu.html:12
 msgid "Default license"
 msgstr "Licenza predefinita"
 
-#: models.py:655
+#: models.py:673
 msgid "The license you select here is automatically applied to all your new images."
 msgstr "La licenza che selezioni qui verrà applicata a tutte le tue nuove immagini."
 
@@ -619,16 +619,17 @@ msgstr "Integrazione totale"
 msgid "Average integration time"
 msgstr "Integrazione media"
 
-#: views.py:1693
+#: views.py:1694
+#: views.py:1697
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1752
+#: views.py:1757
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1776
+#: views.py:1781
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -1626,6 +1627,10 @@ msgstr "Manderai a %(username)s una notifica, con la richiesta di inserire ulter
 #, python-format
 msgid "You will notify %(username)s that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully %(username)s will contact you about how to handle the transaction. Continue?"
 msgstr "Manderai all'utente %(username)s una notifica, con la richiesta di accedere al file TIFF o FITS. AstroBin al momento non offre l'hosting di file così grandi, quindi si spera che %(username)s ti contatterà per organizzarvi con il file. Continuare?"
+
+#: templates/image/full.html:62
+msgid "See technical details"
+msgstr "Vai alla scheda tecnica"
 
 #: templates/image/edit/acquisition.html:8
 msgid "Edit your image: acquisition details"
