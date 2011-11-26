@@ -1191,6 +1191,8 @@ def user_page(request, username):
     smart_albums = []
     sqs = Image.objects.filter(user = user).order_by('-uploaded')
     if 'staging' in request.GET:
+        if request.user != user:
+            return HttpResponseForbidden()
         sqs = sqs.filter(is_wip = True)
         section = 'staging'
     else:
