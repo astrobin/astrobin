@@ -336,6 +336,7 @@ div.selector.disabled span {
 div.checker {
   width: 19px;
   height: 19px;
+  padding: 8px 0;
 }
 div.checker input {
   width: 19px;
@@ -519,6 +520,7 @@ div.button span {
 /* Select */
 div.selector {
   width: 190px;
+  margin-top: 4px;
   font-size: 14px;
 }
 div.selector select {
@@ -825,7 +827,7 @@ strong {
 /* form elements */
 form p {
   margin: 0;
-  padding: 6px;
+  padding: 12px 8px;
 }
 form p.hint {
   font-style: italic;
@@ -853,10 +855,19 @@ form label {
   color: #fcfcfc;
   font-weight: bold;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
-  font-size: 14px;
+  display: block;
+  text-indent: -12px;
+  font-size: 12px;
+  float: left;
+  text-align: right;
+  padding: 10px 12px 10px 0;
   width: 150px;
 }
 form input, form select, form textarea {
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  *overflow: hidden;
   font-size: 14px;
   margin: 2px 0;
   padding: 8px 4px;
@@ -865,9 +876,13 @@ form input, form select, form textarea {
   background-color: #333333;
   color: #c9c9c9;
   width: 70%;
+  height: 16px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
+}
+form select[multiple] {
+  height: auto;
 }
 form select:focus {
   color: #333333;
@@ -881,6 +896,7 @@ select[multiple]:focus {
   color: #c9c9c9;
 }
 .button, .button:visited {
+  height: auto;
   font-size: 14px;
   color: #b8b8b8;
   border: 1px solid #cc4b2e;
@@ -1441,11 +1457,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   margin-bottom: 40px;
 }
-.sided-main-content label {
-  float: left;
-  text-align: right;
-  padding: 11px 10px 0 0;
-}
 .sided-main-content .submit-button {
   margin-left: 162px;
   width: 200px;
@@ -1563,11 +1574,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
 }
-.full-box label {
-  float: left;
-  text-align: right;
-  padding: 11px 10px 0 0;
-}
 .full-box .submit-button {
   margin-left: 160px;
   width: 200px;
@@ -1604,11 +1610,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   background-color: #3d3d3d;
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
-}
-.tools-box label {
-  float: left;
-  text-align: right;
-  padding: 11px 10px 0 0;
 }
 .tools-box .submit-button {
   margin-left: 160px;
