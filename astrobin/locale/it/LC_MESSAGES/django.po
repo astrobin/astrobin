@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 14:24-0500\n"
-"PO-Revision-Date: 2011-11-26 14:27-0500\n"
+"POT-Creation-Date: 2011-11-26 15:45-0500\n"
+"PO-Revision-Date: 2011-11-26 15:45-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -2126,6 +2126,10 @@ msgstr "Login"
 #: templates/registration/activate.html:14
 msgid "Account activation failed"
 msgstr "Attivazione dell'account fallita"
+
+#: templates/registration/activation_complete.html:5
+msgid "Your profile is now active."
+msgstr "Il tuo profilo adesso è arrivo."
 
 #: templates/registration/activation_email.txt:2
 msgid "Activate account at"
