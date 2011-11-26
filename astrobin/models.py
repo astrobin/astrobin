@@ -198,6 +198,15 @@ class Location(models.Model):
 
 @task
 def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
+    # Before we continue, we must check if the image hasn't been
+    # deleted in the meantime.
+    try:
+        image = Image.objects.get(id = image.id)
+    except Image.DoesNotExist:
+        # Abort!
+        print "Aborting because image was deleted."
+        return
+
     if not solved and did_use_scale:
         # Try again!
         solve_image.delay(image, lang, False, callback=image_solved_callback)
@@ -249,6 +258,15 @@ def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
 
 @task
 def image_stored_callback(image, stored, solve, lang):
+    # Before we continue, we must check if the image hasn't been
+    # deleted in the meantime.
+    try:
+        image = Image.objects.get(id = image.id)
+    except Image.DoesNotExist:
+        # Abort!
+        print "Aborting because image was deleted."
+        return
+
     image.is_stored = stored
     image.save()
 
