@@ -147,11 +147,11 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
         super(UserProfileEditPreferencesForm, self).__init__(**kwargs)
         for notice_type in NOTICE_TYPES:
-            self.fields[notice_type[0]] = forms.BooleanField(
-                label=notice_type[1],
-                help_text=notice_type[2],
-                required=False
-            )
+            if notice_type[3] == 2:
+                self.fields[notice_type[0]] = forms.BooleanField(
+                    label=notice_type[1],
+                    required=False
+                )
 
 
 class PrivateMessageForm(forms.Form):
