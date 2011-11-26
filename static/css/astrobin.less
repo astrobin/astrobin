@@ -32,6 +32,7 @@
 
 @base-font-size: 14px;
 @spacer-small: 4px;
+@spacer-xsmall: @spacer-small * .5;
 @spacer-medium: @spacer-small * 2;
 @spacer-large: @spacer-small * 3;
 @spacer-xlarge: @spacer-small * 4;
@@ -396,6 +397,7 @@ div.selector.disabled span {
 div.checker {
   width: 19px;
   height: 19px;
+  padding: @spacer-medium 0;
 }
 
 div.checker input {
@@ -649,6 +651,7 @@ div.button span {
 /* Select */
 div.selector {
   width: 190px;
+  margin-top: @spacer-small;
   font-size: @base-font-size;
 }
 
@@ -955,7 +958,7 @@ strong { .strong; }
 form {
     p {
         margin: 0;
-        padding: @spacer-small * 1.5;}
+        padding: @spacer-large @spacer-medium;}
     p.hint {
         font-style: italic;
         width: 70%;
@@ -976,9 +979,18 @@ form {
             margin-right: 15px;}}
     label {
         .strong;
-        font-size: @base-font-size;
+        display: block;
+        text-indent: -@spacer-large;
+        font-size: @base-font-size - 2px;
+        float: left;
+        text-align: right;
+        padding: 10px @spacer-large 10px 0;
         width: 150px;}
     input, select, textarea {
+        vertical-align: bottom;
+        position: relative;
+        top: -1px;
+        *overflow: hidden;
         font-size: @base-font-size;
         margin: 2px 0;
         padding: @spacer-medium @spacer-small;
@@ -986,7 +998,11 @@ form {
         background-color: @input-color;
         color: @text-color + #111;
         width: 70%;
+        height: @spacer-xlarge;
         .rounded-corners;}
+    select[multiple] {
+        height: auto;
+    }
 
     select:focus {
         color: @background-color;}
@@ -999,6 +1015,7 @@ form {
         color: @text-color + #111;}
 
 .button, .button:visited {
+    height: auto;
     font-size: @base-font-size;
     color: @text-color;
     .button-gradient;
@@ -1431,10 +1448,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .rounded-corners;
     .box-shadow;
     margin-bottom: 40px;
-    label {
-        float:left;
-        text-align:right;
-        padding:11px 10px 0 0;}
     .submit-button {
         margin-left: 162px;
         width:200px;}
@@ -1500,10 +1513,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .rounded-corners;
     background-color: @light-panel-color;
     .common-border;
-    label {
-        float:left;
-        text-align:right;
-        padding:11px 10px 0 0;}
     .submit-button {
         margin-left: 160px;
         width:200px;}
