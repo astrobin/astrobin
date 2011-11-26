@@ -1952,3 +1952,39 @@ def set_language(request, lang):
         profile.save()
 
     return response
+
+
+@require_GET
+def nightly(request):
+    def monthdelta(date, delta):
+        m, y = (date.month+delta) % 12, date.year + ((date.month)+delta-1) // 12
+        if not m: m = 12
+        d = min(date.day, [31,
+            29 if y%4==0 and not y%400==0 else 28,31,30,31,30,31,31,30,31,30,31][m-1])
+        return date.replace(day=d,month=m, year=y)
+
+    month_offset = int(request.GET.get('month_offset', 0))
+    start = monthdelta(datetime.datetime.today().date(), -month_offset)
+    sqs = None
+    daily = []
+
+    for date in (start - datetime.timedelta(days = x) for x in range(1, start.day)):
+        k_dict = {date: []}
+        daily.append(k_dict)
+        for i in Image.objects.filter(acquisition__date = date, is_wip = False, is_stored = True).distinct():
+            k_dict[date].append(i)
+
+    return object_list(
+        request,
+        queryset = Image.objects.none(), # Cheating at object_list
+        paginate_by = 1,
+        template_name = 'nightly.html',
+        extra_context = {
+            'thumbnail_size': settings.THUMBNAIL_SIZE,
+            's3_url': settings.S3_URL,
+            'daily': daily,
+            'month_offset': month_offset,
+            'previous_month': month_offset - 1,
+            'next_month': month_offset + 1,
+        })
+
