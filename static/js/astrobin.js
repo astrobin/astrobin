@@ -33,8 +33,13 @@ var common = {
         request_detail_url         : '/requests/detail/'
     },
 
+    globals: {
+        requests: [],
+        ajax: $.ajax
+    },
+
     listen_for_notifications: function(username, last_modified, etag) {
-        $.ajax({
+        common.globals.ajax({
             'beforeSend': function(xhr) {
                 xhr.setRequestHeader("If-None-Match", etag);
                 xhr.setRequestHeader("If-Modified-Since", last_modified);
@@ -62,7 +67,7 @@ var common = {
     },
 
     listen_for_messages: function(username, last_modified, etag) {
-        $.ajax({
+        common.globals.ajax({
             'beforeSend': function(xhr) {
                 xhr.setRequestHeader("If-None-Match", etag);
                 xhr.setRequestHeader("If-Modified-Since", last_modified);
@@ -95,7 +100,7 @@ var common = {
     },
 
     listen_for_requests: function(username, last_modified, etag) {
-        $.ajax({
+        common.globals.ajax({
             'beforeSend': function(xhr) {
                 xhr.setRequestHeader("If-None-Match", etag);
                 xhr.setRequestHeader("If-Modified-Since", last_modified);
@@ -128,6 +133,45 @@ var common = {
 
 
     start_listeners: function(username) {
+        $.ajax = function(settings) {
+            // override complete() operation
+            var complete = settings.complete;
+            settings.complete = function(xhr) {
+                if (xhr) {
+                    // xhr may be undefined, for example when downloading JavaScript
+                    for (var i = 0, len = common.globals.requests.length; i < len; ++i) {
+                        if (common.globals.requests[i] == xhr) {
+                            // drop completed xhr from list
+                            common.globals.requests.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+                // execute base
+                if (complete) {
+                    complete.apply(this, arguments)
+                }
+            }
+
+            var r = ajax.apply(this, arguments);
+            if (r) {
+                // r may be undefined, for example when downloading JavaScript
+                common.globals.requests.push(r);
+            }
+            return r;
+        };
+
+        // 'kill' all pending xhrs
+        $.each(common.globals.requests, function(i, xhr) {
+            try {
+                xhr.abort();
+            } catch(e) {
+                if (console)
+                    console.log('failed to abort xhr');
+            }
+        });
+        common.globals.requests = [];
+
         setTimeout(function() {
             common.listen_for_notifications(username, '', '');
             common.listen_for_messages(username, '', '');
