@@ -983,9 +983,7 @@ form {
         text-indent: -@spacer-large;
         font-size: @base-font-size - 2px;
         float: left;
-        text-align: right;
-        padding: 10px @spacer-large 10px 0;
-        width: 150px;}
+        padding: 10px @spacer-large 10px 0;}
     input, select, textarea {
         vertical-align: bottom;
         position: relative;
@@ -998,7 +996,6 @@ form {
         background-color: @input-color;
         color: @text-color + #111;
         width: 70%;
-        height: @spacer-xlarge;
         .rounded-corners;}
     select[multiple] {
         height: auto;
@@ -1462,6 +1459,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         .button{
             left: 0;}
     }
+    label {
+        height: @spacer-xlarge;
+        text-align: right;
+        width: 150px;}
 }
 
 .sided-main-content-popup {
