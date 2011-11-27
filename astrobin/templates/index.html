@@ -28,7 +28,7 @@
                             <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
                         </form>
                         <p>
-                            {% url profile_flickr_import as flick_url %}
+                            {% url profile_flickr_import as flickr_url %}
                             {% url me as profile_url %}
                             {% blocktrans %}Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href="{{profile_url}}">your profile</a> and here on the home page. You can <a href="{{flickr_url}}">import from Flickr</a> too.{% endblocktrans %}
                         </p>
