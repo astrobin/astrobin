@@ -859,9 +859,7 @@ form label {
   text-indent: -12px;
   font-size: 12px;
   float: left;
-  text-align: right;
   padding: 10px 12px 10px 0;
-  width: 150px;
 }
 form input, form select, form textarea {
   vertical-align: bottom;
@@ -876,7 +874,6 @@ form input, form select, form textarea {
   background-color: #333333;
   color: #c9c9c9;
   width: 70%;
-  height: 16px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -1474,6 +1471,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 .sided-main-content .fieldless .button {
   left: 0;
+}
+.sided-main-content label {
+  height: 16px;
+  text-align: right;
+  width: 150px;
 }
 .sided-main-content-popup {
   width: 240px;

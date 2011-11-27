@@ -286,7 +286,7 @@ var image_detail = {
                 title : '',
                 body  : '',
                 button: '',
-                height: 400
+                height:340 
             },
             element  : 'a.bring-to-attention',
             form_html: '',
