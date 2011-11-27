@@ -368,9 +368,11 @@ var image_detail = {
             onClick: function(score) {
                 $.ajax({
                     url: image_detail.config.rating.rate_url + image_detail.globals.image_id + '/' + score + '/',
+                    dataType: 'json',
                     success: function(data, textStatus, XMLHttpRequst) {
                         $.ajax({
                             url: image_detail.config.rating.get_rating_url + image_detail.config.image_id + '/',
+                            dataType: 'json',
                             success: function(data) {
                                 var rating = $.parseJSON(data).rating
                                 $.fn.raty.start(rating);
@@ -555,6 +557,7 @@ var image_detail = {
                                 var dlg = $(this)
                                 $.ajax({
                                     url: image_detail.config.follow_action.url + image_detail.globals.image_username,
+                                    dataType: 'json',
                                     success: function() {
                                         dlg.dialog('close');
                                         follow_a.remove();
@@ -603,6 +606,7 @@ var image_detail = {
                                 var dlg = $(this)
                                 $.ajax({
                                     url: image_detail.config.unfollow_action.url + image_detail.globals.image_username,
+                                    dataType: 'json',
                                     success: function() {
                                         dlg.dialog('close');
                                         unfollow_a.remove();
@@ -723,6 +727,7 @@ var image_detail = {
                                 $.ajax({
                                     url: image_detail.config.image_request_additional_information_action.url +
                                          image_detail.globals.image_id + '/',
+                                    dataType: 'json',
                                     success: function() {
                                         dlg.dialog('close');
                                     }
@@ -763,6 +768,7 @@ var image_detail = {
                                 $.ajax({
                                     url: image_detail.config.image_request_fits_action.url +
                                          image_detail.globals.image_id + '/',
+                                    dataType: 'json',
                                     success: function() {
                                         dlg.dialog('close');
                                     }
