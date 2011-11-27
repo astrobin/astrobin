@@ -362,6 +362,14 @@ def image_detail(request, id):
         (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
     )
 
+    solved_ext = ''
+    if image.uploaded < datetime.datetime(2011, 11, 13, 5, 3, 1):
+        solved_ext = '.png'
+    elif image.plot_is_overlay:
+        solved_ext = '.png'
+    else:
+        solved_ext = image.original_ext
+
     response_dict = {'s3_url': settings.S3_URL,
                      'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
                      'resized_size': resized_size,
@@ -397,7 +405,7 @@ def image_detail(request, id):
                      # Because of a regression introduced at
                      # revision e1dad12babe5, now we have to
                      # implement this ugly hack.
-                     'solved_ext': '.png' if image.uploaded < datetime.datetime(2011, 11, 13, 5, 3, 1) else image.original_ext,
+                     'solved_ext': solved_ext,
                     }
 
     if 'upload_error' in request.GET:

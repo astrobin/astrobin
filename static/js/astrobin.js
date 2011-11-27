@@ -804,6 +804,14 @@ var image_detail = {
         });          
     },
 
+    setup_plot_overlay: function() {
+        $('img.plot-overlay').mouseover(function() {
+            $(this).animate({opacity: 1.0});
+        }).mouseout(function() {
+            $(this).animate({opacity: 0.0});
+        }); 
+    },
+
     init: function(image_id, revision_id, image_username, current_rating, config) {
         /* Init */
         image_detail.globals.image_id = image_id;
@@ -839,6 +847,9 @@ var image_detail = {
 
         /* View more subjects */
         image_detail.setup_view_more_subjects();
+
+        /* Plot overlay mouse-over */
+        image_detail.setup_plot_overlay();
     }
 };
 

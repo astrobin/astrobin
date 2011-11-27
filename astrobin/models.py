@@ -202,15 +202,17 @@ class Location(models.Model):
 
 
 @task
-def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
+def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, lang):
     # Before we continue, we must check if the image hasn't been
     # deleted in the meantime.
     is_revision = False
     try:
         tmp = image.image
         is_revision = True
+        print "It's a revision."
     except:
         is_revision = False
+        print "It's not a revision."
 
     if not is_revision:
         try:
@@ -225,24 +227,26 @@ def image_solved_callback(image, solved, did_use_scale, clean_path, lang):
         solve_image.delay(image, lang, False, callback=image_solved_callback)
         return
 
+    if solved:
+        print "Image was solved"
+
     image.is_solved = solved
     if image.__class__.__name__ == 'Image' and image.is_solved:
-        # grab objects from list
-        list_fn = settings.UPLOADS_DIRECTORY + image.filename + '_resized-list.txt'
-        try:
-            f = open(list_fn, 'r')
-
-            import simbad
-            for line in f:
-                if line != '':
-                    subjects = simbad.find_subjects(line.partition('/')[0].strip().rstrip('\r\n'))
-                    for s in subjects:
-                        image.subjects.add(s)
-            f.close()
-        except:
+        # grab objects from json
+        import simbad
+        subjects = simplejson.loads(subjects)
+        if subjects['annotations']:
+            print "Subjects found"
+            for i in subjects['annotations']:
+                subjects = simbad.find_subjects(i['names'][0])
+                for s in subjects:
+                    image.subjects.add(s)
+        else:
+            print "No subjects found."
             image.is_solved = False
             solved = False
 
+    image.plot_is_overlay = image.is_solved
     image.save()
 
     user = None
@@ -382,6 +386,7 @@ class Image(models.Model):
 
     is_stored = models.BooleanField(editable=False)
     is_solved = models.BooleanField(editable=False)
+    plot_is_overlay = models.BooleanField(editable=False, default=False)
     is_wip = models.BooleanField(editable=False, default=False)
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)

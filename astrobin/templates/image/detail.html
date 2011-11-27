@@ -233,44 +233,66 @@
                 <li class="rating"><div id="rating"></div></li>
             </ul>
             <div id="main-image">
-            {% if is_ready %}
-                {% if is_revision %}
-                    {% with revision_image as image %}
+                <div id="container">
+                {% if is_ready %}
+                    {% if is_revision %}
+                        {% with revision_image as image %}
+                            {% if inverted %}
+                            <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id, mod='inverted'" "plate_solving_started" %}">
+                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                            </a>
+                            {% endif %}
+                            {% if not inverted and not solved %}
+                            <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id" "mod, plate_solving_started" %}">
+                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                            </a>
+                            {% endif %}
+                        {% endwith %}
+                    {% else %}
                         {% if inverted %}
-                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id, mod='inverted'" "plate_solving_started" %}">
-                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
-                        </a>
+                            <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                            </a>
+                            {% if image.is_solved and image.plot_is_overlay %}
+                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                                    <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
+                                </a>
+                            {% endif %}
                         {% endif %}
-                        {% if not inverted and not solved %}
-                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id" "mod, plate_solving_started" %}">
-                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
-                        </a>
-                        {% endif %}
-                    {% endwith %}
-                {% else %}
-                    {% if inverted %}
-                    <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
-                    </a>
-                    {% endif %}
-                    {% if solved %}
-                    <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
-                    </a>
-                    {% endif %}
-                    {% if not inverted and not solved %}
-                    <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
-                    </a>
-                    {% endif %}
-                {% endif %}
-            {% else %} <!-- not ready -->
-            <p class="info">
-                {% blocktrans %}This image was just uploaded and is still processing. Please try to refresh this page in a few seconds.{% endblocktrans %}
-            </p>
-            {% endif %}
-            </div>
 
+                        {% if solved %}
+                            {% if image.plot_is_overlay %}
+                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                    <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                </a>
+                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                    <img class="fixed-plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
+                                </a>
+                            {% else %}
+                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                    <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
+                                </a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if not inverted and not solved %}
+                            <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                            </a>
+                            {% if image.is_solved and image.plot_is_overlay %}
+                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                    <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% else %} <!-- not ready -->
+                <p class="info">
+                    {% blocktrans %}This image was just uploaded and is still processing. Please try to refresh this page in a few seconds.{% endblocktrans %}
+                </p>
+                {% endif %}
+                </div>
+            </div>
             <div class="main-image-data">
                 <table class="title">
                     <tr>
