@@ -7,6 +7,7 @@ from boto.exception import S3CreateError
 
 from PIL import Image as PILImage
 import subprocess
+from subprocess import PIPE
 
 import StringIO
 import os
@@ -45,15 +46,17 @@ def solve_image(image, lang, use_scale=True, callback=None):
             os.system('killall -9 backend')
             kill_check.set() # tell the main routine that we had to kill
             return
-        p = subprocess.Popen(command)
+        print "Runnind command: %s" % ' '.join(command)
+        p = subprocess.Popen(command, bufsize=1, shell=False,
+                             stdout=PIPE, stderr=PIPE)
         pid = p.pid
         watchdog = threading.Timer(timeout, _kill_process_after_a_timeout, args=(pid, ))
         watchdog.start()
-        p.communicate()
+        (stdout, stderr) = p.communicate()
         watchdog.cancel() # if it's still waiting to run
         success = not kill_check.isSet()
         kill_check.clear()
-        return success
+        return (success, stdout, stderr)
 
     # If the the original image doesn't exist anymore, we need to
     # download it again.
@@ -95,8 +98,8 @@ def solve_image(image, lang, use_scale=True, callback=None):
                '', '',
                '', '',
                '', '',
-               '--verbose',
                '--continue',
+               '--no-plot',
                path + uid + original_ext]
 
     if use_scale:
@@ -111,21 +114,40 @@ def solve_image(image, lang, use_scale=True, callback=None):
         command[2] = '/usr/local/astrometry/etc/backend.blind.cfg'
         del command[3:7]
 
-    print command
-    run_popen_with_timeout(command, 330 if use_scale else 630)
+    (success, stdout, stderr) = run_popen_with_timeout(command, 330 if use_scale else 630)
 
-    solved_filename = settings.UPLOADS_DIRECTORY + uid + '-ngc.png'
+    subjects = ''
     if os.path.exists(settings.UPLOADS_DIRECTORY + uid + '.solved'):
-        solved = True
-        solved_file = open(solved_filename)
-        solved_data = StringIO.StringIO(solved_file.read())
-        solved_image = PILImage.open(solved_data)
+        # Now let's plot
+        solved_filename = path + uid + '-ngc.png'
+        command = [
+            '/usr/local/astrometry/bin/plot-constellations',
+            '-w', path + uid + '.wcs', # input
+            '-o', solved_filename, # outpuy
+            '-N', # plot NGC objects
+            '-C', # plot constellations
+            '-B', # plot named bright stars
+            '-c', # only plot bright stars that have common names
+            '-j', # if a bright star has a common name, only print that
+            '-J', # print JSON output to stderr
+        ]
+        (success, stdout, subjects) = run_popen_with_timeout(command, 60) # should't really take long
+        print subjects
 
-        # Then save to bucket
-        save_to_bucket(image.filename + '_solved' + original_ext, solved_data.getvalue())
+        print solved_filename
+        if os.path.exists(solved_filename):
+            print "Solved."
+            solved = True
+            solved_file = open(solved_filename)
+            solved_data = StringIO.StringIO(solved_file.read())
+            solved_image = PILImage.open(solved_data)
+
+            # Then save to bucket
+            save_to_bucket(image.filename + '_solved.png', solved_data.getvalue())
 
     if callback is not None:
-        subtask(callback).delay(image, solved, use_scale, '%s%s*' % (path, uid), lang)
+        print "Calling solved callback."
+        subtask(callback).delay(image, solved, subjects, use_scale, '%s%s*' % (path, uid), lang)
 
 
 @task()

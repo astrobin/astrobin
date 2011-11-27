@@ -1742,9 +1742,25 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   text-align: center;
   padding-top: 4px;
 }
-#image-detail #main-image img {
+#image-detail #main-image #container {
+  position: relative;
+}
+#image-detail #main-image #container img {
   cursor: -moz-zoom-in;
   border: 1px solid #2b2b2b;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+#image-detail #main-image #container img.plot-overlay, #image-detail #main-image #container img.fixed-plot-overlay {
+  position: absolute;
+  opacity: 0.0;
+  z-index: 2;
+  border: none;
+}
+#image-detail #main-image #container img.fixed-plot-overlay {
+  opacity: 1.0;
 }
 #image-detail p#description {
   margin: 0;

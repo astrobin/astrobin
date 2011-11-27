@@ -1617,9 +1617,22 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     #main-image {
         text-align: center;
         padding-top: @spacer-small;
-        img {
-            cursor: -moz-zoom-in;
-            border: 1px solid @dark-panel-color;}}
+        #container {
+            position: relative;
+            img {
+                cursor: -moz-zoom-in;
+                border: 1px solid @dark-panel-color;
+                position: relative;
+                top: 0;
+                left: 0;
+                z-index: 1;}
+            img.plot-overlay, img.fixed-plot-overlay {
+                position: absolute;
+                opacity: 0.0;
+                z-index: 2; 
+                border: none;}
+            img.fixed-plot-overlay {
+                opacity: 1.0;}}}
     p#description {
         margin: 0;}
     #revisions .image-strip {
