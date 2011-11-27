@@ -8,11 +8,11 @@ def ajax_response(context={}):
 
 
 def ajax_success(context={}):
-    context['status'] = 'success'
+    context['success'] = True
     return ajax_response(context)
 
 
 def ajax_fail(context={}):
-    context['status'] = 'fail'
+    context['success'] = False
     return ajax_response(context)
 

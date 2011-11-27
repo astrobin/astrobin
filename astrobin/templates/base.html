@@ -421,6 +421,7 @@
                     $.ajax(
                     {
                         url: '/notifications/seen/',
+                        dataType: 'json',
                         success: function() {
                             $('img#notifications').attr('src',
                                 '/static/icons/iconic/orange/notifications.png');
@@ -442,6 +443,7 @@
                     $.ajax(
                     {
                         url: '/messages/mark_read/all/',
+                        dataType: 'json',
                         success: function() {
                             $('img#messages').attr('src',
                                 '/static/icons/iconic/orange/messages.png');
