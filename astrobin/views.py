@@ -574,12 +574,17 @@ def image_edit_gear(request, id):
     if request.user != image.user:
         return HttpResponseForbidden()
 
+    no_gear = True
+    if profile.telescopes and profile.cameras:
+        no_gear = False
+
     form = ImageEditGearForm(user=request.user, instance=image)
     response_dict = {
         'form': form,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
         'image':image,
+        'no_gear':no_gear,
     }
 
     return render_to_response('image/edit/gear.html',

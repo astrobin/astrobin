@@ -879,7 +879,7 @@ form input, form select, form textarea {
   border-radius: 6px;
 }
 form select[multiple] {
-  height: auto;
+  width: 730px;
 }
 form select:focus {
   color: #c9c9c9;
@@ -1476,6 +1476,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   height: 16px;
   text-align: right;
   width: 150px;
+}
+.sided-main-content label.multiple {
+  float: none;
+  width: auto;
+  text-align: left;
+  text-indent: 0;
 }
 .sided-main-content-popup {
   width: 240px;

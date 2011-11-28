@@ -23,6 +23,7 @@
         <!-- 3rd party css -->
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery-ui.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/overcast/jquery-ui-1.8.16.custom.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/ui.multiselect.css"/>
         <link rel="stylesheet" href="/static/css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
 
         <!-- site's css -->
@@ -314,6 +315,7 @@
         {% compress js %}
         <script type="text/javascript" src="/static/js/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/static/js/jquery.i18n.js"></script>
+        <script type="text/javascript" src="/static/js/plugins/localization/jquery.localisation.js"></script>
         <script type="text/javascript">
             var dictionary = {
                 'Cancel': '{% trans "Cancel" %}'
@@ -327,6 +329,16 @@
         <script type="text/javascript" src="/static/js/jquery.validationEngine-en.js"></script>
         <script type="text/javascript" src="/static/js/jquery.validationEngine.js"></script>
         <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
+        <script type="text/javascript" src="/static/js/ui.multiselect.js"></script>
+        <script type="text/javascript" src="/static/js/plugins/scrollTo/jquery.scrollTo.js"></script>
+        <script type="text/javascript">
+            $.localise('ui-multiselect', {
+                loadBase: false,
+                language: '{{request.LANGUAGE_CODE}}',
+                path: '/static/js/locale/',
+                timeout: 500
+            });
+        </script>
         <script type="text/javascript" src="/static/js/astrobin.js"></script>
         {% endcompress %}
 
@@ -373,12 +385,13 @@
                 $('input').filter('.timepickerclass').timepicker({});
                 $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
 
-                // popup menus
                 $('select:not([multiple]), input:checkbox, input:radio, input:file').uniform(
                     {fileDefaultText: '{% trans "No file selected" %}',
                      fileBtnText: '{% trans "Choose file" %}'
                     }
                 );
+
+                $("select[multiple]").multiselect();
 
                 var open_popup = 0;
                 var active_a = 0;
