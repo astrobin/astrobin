@@ -2040,35 +2040,6 @@ span.copy-box {
 #footer-bottom a.back-to-top {
   padding-right: 20px;
 }
-/* JQueryy UI */
-.ui-corner-all {
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-}
-.ui-widget-content {
-  border: 1px solid #b8b8b8;
-  border-top: 1px solid #ffffff;
-  background: #b8b8b8;
-  background: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#b8b8b8));
-  background: -moz-linear-gradient(top, #dddddd, #b8b8b8);
-  color: #333333;
-}
-.ui-widget-header {
-  border: 1px solid #cc4b2e;
-  border-top: 1px solid #ff6c42;
-  background: #cc4b2e;
-  background: -webkit-gradient(linear, left top, left bottom, from(#f55a37), to(#cc4b2e));
-  background: -moz-linear-gradient(top, #f55a37, #cc4b2e);
-  color: #fcfcfc;
-}
-.ui-state-hover,
-.ui-widget-content .ui-state-hover,
-.ui-state-focus,
-.ui-widget-content .ui-state-focus {
-  color: #cc4b2e;
-  border-color: #f55a37;
-}
 img.flickr-photo-to-import {
   border: 1px solid #111;
   margin: 1px;
