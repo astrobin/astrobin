@@ -102,5 +102,5 @@ urlpatterns = patterns('',
 
     url(r'^nightly/', views.nightly, name='nightly'),
 
-    url(r'^/hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
+    url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 )
