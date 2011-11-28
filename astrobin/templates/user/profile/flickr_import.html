@@ -95,7 +95,6 @@ $(function() {
             $.ajax({
                     type: 'POST',
                     url: '/profile/edit/flickr/',
-                    data: ({'id_flickr_set': $('select option:selected').val()}),
                     dataType: 'json',
                     data: ({'id_flickr_set': $('select option:selected').val()}),
                     success: function(data) {
