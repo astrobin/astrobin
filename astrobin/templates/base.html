@@ -378,6 +378,8 @@
                     common.start_listeners('{{request.user.username}}');
                 }
                 {%endif %}
+
+                common.init_ajax_csrf_token();
                 
                 $('.capty').capty({animation: 'fade', speed: 150, height: 45});
 
