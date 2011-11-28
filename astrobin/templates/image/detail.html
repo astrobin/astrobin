@@ -304,7 +304,7 @@
                                 {% url user_page image.user.username as the_url %}
                                 {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %}
                                 {% get_hit_count for image as hit_count %}
-                                {% if hit_count != '0' %}, {% blocktrans %}viewed {{hit_count}} times{% endblocktrans %}{% endif %})
+                                {% if hit_count != '0' %}, {% blocktrans count counter=hit_count|add:"0" %}viewed one time{% plural %}viewed {{counter}} times{% endblocktrans %}{% endif %})
                             </span>
                         </td>
                         <td class="license">
