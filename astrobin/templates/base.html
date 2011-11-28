@@ -374,7 +374,7 @@
                 $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
 
                 // popup menus
-                $('select, input:checkbox, input:radio, input:file').uniform(
+                $('select:not([multiple]), input:checkbox, input:radio, input:file').uniform(
                     {fileDefaultText: '{% trans "No file selected" %}',
                      fileBtnText: '{% trans "Choose file" %}'
                     }
