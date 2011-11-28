@@ -5,10 +5,7 @@
 {% for search_result in image_list %}
     {% if search_result.object.is_stored %}
     <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
-        <a href="{% url image_detail search_result.object.id %}{% if search_result.object.is_solved %}?mod=solved{% endif %}">
-            {% if search_result.object.is_solved %}
-            <img class="solved-badge" src="/static/images/solved_badge.gif" alt="" />
-            {% endif %}
+        <a href="{% url image_detail search_result.object.id %}">
             <img src="{% if search_result.object.is_stored %}http://astrobin_images.{{s3_url}}/{{search_result.object.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="capty thumbnail"
                  name="#capty-content-{{search_result.object.id}}"
