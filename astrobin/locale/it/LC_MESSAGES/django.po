@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-28 12:24-0500\n"
-"PO-Revision-Date: 2011-11-28 12:25-0500\n"
+"POT-Creation-Date: 2011-11-28 14:10-0500\n"
+"PO-Revision-Date: 2011-11-28 14:11-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -1428,8 +1428,10 @@ msgstr "da <a href=\"%(the_url)s\">%(user)s</a>"
 
 #: templates/image/detail.html:307
 #, python-format
-msgid "viewed %(hit_count)s times"
-msgstr "vista %(hit_count)s volte"
+msgid "viewed one time"
+msgid_plural "viewed %(counter)s times"
+msgstr[0] "vista una volta"
+msgstr[1] "vista %(counter)s volte"
 
 #: templates/image/detail.html:321
 msgid "Contains"
