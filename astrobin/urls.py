@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 
 from djangoratings.views import AddRatingFromModel
+from hitcount.views import update_hit_count_ajax
 
 admin.autodiscover()
 
@@ -100,4 +101,6 @@ urlpatterns = patterns('',
     url(r'^tinymce/', include('tinymce.urls')),
 
     url(r'^nightly/', views.nightly, name='nightly'),
+
+    url(r'^/hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 )

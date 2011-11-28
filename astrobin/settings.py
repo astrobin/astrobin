@@ -164,6 +164,7 @@ INSTALLED_APPS = (
     'mptt',
     'zinnia',
     'tinymce',
+    'hitcount',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -246,3 +247,5 @@ ZINNIA_MARKUP_LANGUAGE = 'html'
 TINYMCE_JS_URL = MEDIA_URL + 'js/tiny_mce/tiny_mce.js'
 TINYMCE_JS_ROOT = MEDIA_ROOT + '/js/tiny_mce'
 
+HITCOUNT_KEEP_HIT_ACTIVE = { 'hours': 1 }
+HITCOUNT_HITS_PER_IP_LIMIT = 0
