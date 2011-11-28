@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load hitcount_tags %}
 
 {% block extra_gaq_push %}
     {% if image.is_wip %}
@@ -301,7 +302,9 @@
                             <span>
                                 ({% trans "uploaded" %}: {{uploaded_on|ago}}
                                 {% url user_page image.user.username as the_url %}
-                                {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %})
+                                {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %}
+                                {% get_hit_count for image as hit_count %}
+                                {% if hit_count != '0' %}, {% blocktrans %}viewed {{hit_count}} times{% endblocktrans %}{% endif %})
                             </span>
                         </td>
                         <td class="license">
@@ -487,6 +490,8 @@
 <script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    {% get_hit_count_javascript for image %}
+
     image_detail.init(
         {{image.id}},
         {% if is_revision %}{{revision_image.id}}{% else %}0{% endif %},
