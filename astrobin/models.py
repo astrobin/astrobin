@@ -262,10 +262,10 @@ def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, la
     translation.activate(lang)
     if solved:
         push_notification([user], 'image_solved',
-                          {'object_url':img.get_absolute_url() + '?mod=solved'})
+                          {'object_url':'%s%s%s' % (settings.ASTROBIN_BASE_URL, img.get_absolute_url(), '?mod=solved')})
     else:
         push_notification([user], 'image_not_solved',
-                          {'object_url':img.get_absolute_url()})
+                          {'object_url':'%s%s' % (settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
 
     # Clean up!
     clean_list = glob.glob(clean_path)
@@ -306,7 +306,7 @@ def image_stored_callback(image, stored, solve, lang):
         img = image.image
 
     translation.activate(lang)
-    push_notification([user], 'image_ready', {'object_url':img.get_absolute_url()})
+    push_notification([user], 'image_ready', {'object_url':'%s%s' %(settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
 
     if solve:
         solve_image.delay(image, lang, callback=image_solved_callback)
