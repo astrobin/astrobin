@@ -1,6 +1,13 @@
-{% load i18n %}{% blocktrans %}You have received the following notice from {{ current_site }}:
+{% load i18n %}
+{% url profile_edit_preferences as pref_url %}
+{% blocktrans %}Hi! You have a new notification on AstroBin:
 
 {{ message }}
 
-To see other notices or change how you receive notifications, please go to {{ notices_url }}.
+To see all your notifications, please go to {{notices_url}}.
+
+If you don't want to receive emails anymore, edit your preferences by going to {{pref_url %}.
+
+Clear skies,
+AstroBin.
 {% endblocktrans %}
