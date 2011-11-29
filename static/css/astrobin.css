@@ -2349,10 +2349,14 @@ div.capty-caption a {
   text-align: center;
 }
 #full-size-image img {
+  width: 95%;
   margin-top: 8px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+}
+#full-size-image img.real {
+  width: auto;
 }
 #more-subjects .more, #more-subjects .collapse {
   display: none;
