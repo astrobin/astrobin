@@ -444,6 +444,7 @@ def image_full(request, id):
         extra_context = {
             's3_url': settings.S3_URL,
             'revision_image': revision_image,
+            'real': 'real' in request.GET,
         })
 
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-29 12:56-0500\n"
-"PO-Revision-Date: 2011-11-29 12:57-0500\n"
+"POT-Creation-Date: 2011-11-29 13:45-0500\n"
+"PO-Revision-Date: 2011-11-29 13:46-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -41,7 +41,7 @@ msgstr "Soggetti"
 #: forms.py:92
 #: models.py:325
 #: models.py:668
-#: views.py:318
+#: views.py:320
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Luoghi"
@@ -366,7 +366,7 @@ msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del sensore. Esempio: -20."
 
 #: models.py:560
-#: views.py:321
+#: views.py:323
 msgid "Darks"
 msgstr "Dark"
 
@@ -375,7 +375,7 @@ msgid "The number of dark frames."
 msgstr "Numero di dark."
 
 #: models.py:565
-#: views.py:322
+#: views.py:324
 msgid "Flats"
 msgstr "Flat"
 
@@ -384,7 +384,7 @@ msgid "The number of flat frames."
 msgstr "Numero di flat."
 
 #: models.py:570
-#: views.py:323
+#: views.py:325
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
@@ -393,7 +393,7 @@ msgid "The number of dark flat frames."
 msgstr "Numero di dark dei flat."
 
 #: models.py:575
-#: views.py:324
+#: views.py:326
 msgid "Bias"
 msgstr "Bias"
 
@@ -402,17 +402,17 @@ msgid "The number of bias/offset frames."
 msgstr "Numero di frame bias/offset."
 
 #: models.py:580
-#: views.py:327
+#: views.py:329
 msgid "Mean SQM"
 msgstr "SQM medio"
 
 #: models.py:585
-#: views.py:328
+#: views.py:330
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
 #: models.py:604
-#: views.py:319
+#: views.py:321
 #: templates/image/detail.html:423
 msgid "Frames"
 msgstr "Pose"
@@ -506,22 +506,22 @@ msgid "Language"
 msgstr "Lingua"
 
 #: search.py:70
-#: views.py:554
-#: views.py:558
-#: views.py:779
+#: views.py:557
+#: views.py:561
 #: views.py:782
-#: views.py:836
-#: views.py:860
+#: views.py:785
+#: views.py:839
+#: views.py:863
 #: templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
 #: search.py:71
-#: views.py:555
-#: views.py:780
-#: views.py:837
-#: views.py:861
+#: views.py:558
+#: views.py:783
+#: views.py:840
+#: views.py:864
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
@@ -529,109 +529,109 @@ msgstr "Nessun risultato. Spiacente."
 msgid "Matching items:"
 msgstr "Risultati:"
 
-#: views.py:316
+#: views.py:318
 msgid "Resolution"
 msgstr "Risoluzione"
 
-#: views.py:317
-#: views.py:397
+#: views.py:319
+#: views.py:399
 msgid "Dates"
 msgstr "Date"
 
-#: views.py:320
+#: views.py:322
 #: templates/inclusion_tags/search_image_list.html:17
 #: templates/search/search.html:48
 msgid "Integration"
 msgstr "Integrazione"
 
-#: views.py:320
-#: views.py:1195
-#: views.py:1196
+#: views.py:322
+#: views.py:1198
+#: views.py:1199
 #: templates/inclusion_tags/search_image_list.html:17
 msgid "hours"
 msgstr "ore"
 
-#: views.py:325
+#: views.py:327
 msgid "Avg. Moon age"
 msgstr "Giorno lunare medio"
 
-#: views.py:326
+#: views.py:328
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:556
+#: views.py:559
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:559
-#: views.py:783
+#: views.py:562
+#: views.py:786
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:560
+#: views.py:563
 #: templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:962
+#: views.py:965
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:967
-#: views.py:979
-#: views.py:1017
+#: views.py:970
+#: views.py:982
+#: views.py:1020
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1173
+#: views.py:1176
 #: templatetags/tags.py:127
 msgid "minutes"
 msgstr "minuti"
 
-#: views.py:1174
+#: views.py:1177
 #: templatetags/tags.py:128
 msgid "seconds ago"
 msgstr "secondi fa"
 
-#: views.py:1176
+#: views.py:1179
 #: templatetags/tags.py:129
 #, python-format
 msgid "%s ago"
 msgstr "%s fa"
 
-#: views.py:1192
+#: views.py:1195
 msgid "Member since"
 msgstr "Utente da"
 
-#: views.py:1193
+#: views.py:1196
 msgid "Last login"
 msgstr "Ultimo login"
 
-#: views.py:1194
+#: views.py:1197
 #: templates/leaderboard.html:25
 msgid "Images uploaded"
 msgstr "Immagini caricate"
 
-#: views.py:1195
+#: views.py:1198
 msgid "Total integration time"
 msgstr "Integrazione totale"
 
-#: views.py:1196
+#: views.py:1199
 msgid "Average integration time"
 msgstr "Integrazione media"
 
-#: views.py:1792
 #: views.py:1795
+#: views.py:1798
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1855
+#: views.py:1858
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1879
+#: views.py:1882
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -1112,6 +1112,12 @@ msgstr "Caricamento"
 #: templates/index.html.py:69
 msgid "Acquired"
 msgstr "Acquisizione"
+
+#: templates/index.html:73
+#: templates/index.html.py:75
+#: templates/search/search.html:49
+msgid "Views"
+msgstr "Più viste"
 
 #: templates/leaderboard.html:10
 msgid "How productive are the users on AstroBin? Here you can see them all, sorted by total hours of integration time (counting all their images) or number of images."
@@ -1623,6 +1629,14 @@ msgstr "Manderai all'utente %(username)s una notifica, con la richiesta di acced
 #: templates/image/full.html:62
 msgid "See technical details"
 msgstr "Vai alla scheda tecnica"
+
+#: templates/image/full.html:67
+msgid "Fit image's width to window"
+msgstr "Adatta alla larghezza della finestra"
+
+#: templates/image/full.html:71
+msgid "View at full resolution"
+msgstr "Vedi a piena risoluzione"
 
 #: templates/image/edit/acquisition.html:8
 msgid "Edit your image: acquisition details"
@@ -2333,10 +2347,6 @@ msgstr "Data di caricamento"
 #: templates/search/search.html:47
 msgid "Rating"
 msgstr "Voto"
-
-#: templates/search/search.html:49
-msgid "Views"
-msgstr "Più viste"
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
