@@ -45,7 +45,8 @@
             <a href="/search/{% query_string "" "sort" %}">{% trans "Relevance" %}</a>&nbsp;|&nbsp;
             <a href="/search/{% query_string "sort='-uploaded'" "" %}">{% trans "Upload time" %}</a>&nbsp;|&nbsp;
             <a href="/search/{% query_string "sort='-rating'" "" %}">{% trans "Rating" %}</a>&nbsp;|&nbsp;
-            <a href="/search/{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>
+            <a href="/search/{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>&nbsp;|&nbsp;
+            <a href="/search/{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
     </div>
 
     {% search_image_list request page.object_list %}

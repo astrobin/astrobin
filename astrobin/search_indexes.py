@@ -13,6 +13,8 @@ from astrobin.models import Subject, SubjectIdentifier
 from django.contrib.auth.models import User
 from django.db.models import Q
 
+from hitcount.models import HitCount
+
 def xapian_escape(s):
     return ''.join(ch for ch in s if ch not in set(string.punctuation))
 
@@ -98,6 +100,7 @@ class ImageIndex(SearchIndex):
     rating = IntegerField()
     integration = IntegerField()
     uploaded = DateTimeField(model_attr='uploaded')
+    views = IntegerField()
 
     moon_phase = FloatField()
 
@@ -181,6 +184,15 @@ class ImageIndex(SearchIndex):
     def prepare_integration(self, obj):
         return _get_integration(obj)
 
+    def prepare_views(self, obj):
+        views = 0
+        try:
+            views = HitCount.objects.get(object_pk = obj.pk).hits
+        except HitCount.DoesNotExist:
+            pass
+
+        return views
+            
     def prepare_moon_phase(self, obj):
         from moon import MoonPhase
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-29 11:57-0500\n"
-"PO-Revision-Date: 2011-11-29 11:59-0500\n"
+"POT-Creation-Date: 2011-11-29 12:56-0500\n"
+"PO-Revision-Date: 2011-11-29 12:57-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -1824,13 +1824,13 @@ msgid "Form saved. Thank you!"
 msgstr "Salvato. Grazie!"
 
 #: templates/inclusion_tags/image_list.html:21
-#: templates/inclusion_tags/search_image_list.html:38
+#: templates/inclusion_tags/search_image_list.html:44
 #, python-format
 msgid " by <a href=\"%(user_page)s\">%(user)s</a>"
 msgstr " di <a href=\"%(user_page)s\">%(user)s</a>"
 
 #: templates/inclusion_tags/image_list.html:27
-#: templates/inclusion_tags/search_image_list.html:44
+#: templates/inclusion_tags/search_image_list.html:50
 msgid "No images"
 msgstr "Nessuna immagine"
 
@@ -1885,6 +1885,13 @@ msgstr "Mostra tutte le richieste"
 #: templates/inclusion_tags/search_image_list.html:21
 msgid "stars"
 msgstr "stelle"
+
+#: templates/inclusion_tags/search_image_list.html:34
+#, python-format
+msgid "Viewed one time"
+msgid_plural "Viewed %(counter)s times"
+msgstr[0] "Vista una volta"
+msgstr[1] "Vista %(counter)s volte"
 
 #: templates/location/edit.html:8
 msgid "If this location is missing data, or has incorrect data, please fix it."
@@ -1968,7 +1975,7 @@ msgid ""
 "\n"
 "To see all your notifications, please go to %(notices_url)s.\n"
 "\n"
-"If you don't want to receive emails anymore, edit your preferences by going to {{pref_url %%}.\n"
+"If you don't want to receive emails anymore, edit your preferences by going to http://astrobin.com%(pref_url)s.\n"
 "\n"
 "Clear skies,\n"
 "AstroBin.\n"
@@ -1979,7 +1986,7 @@ msgstr ""
 "\n"
 "Per vedere tutte le tue notifiche, vai su %(notices_url)s.\n"
 "\n"
-"Se non vuoi più ricevere email, modifica le opzioni andando su {{pref_url %%}.\n"
+"Se non vuoi più ricevere email, modifica le opzioni andando su http://astrobin.com%(pref_url)s.\n"
 "\n"
 "Cieli sereni,\n"
 "AstroBin.\n"
@@ -2326,6 +2333,10 @@ msgstr "Data di caricamento"
 #: templates/search/search.html:47
 msgid "Rating"
 msgstr "Voto"
+
+#: templates/search/search.html:49
+msgid "Views"
+msgstr "Più viste"
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
