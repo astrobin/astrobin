@@ -29,6 +29,12 @@
                 {{search_result.last_acquisition_date}}
             {% endifequal %}
 
+            {% ifequal sort '-views' %}
+                {% with search_result.views as hit_count %}
+                    {% blocktrans count counter=hit_count|add:"0" %}Viewed one time{% plural %}Viewed {{counter}} times{% endblocktrans %}
+                {% endwith %}
+            {% endifequal %}
+
             {% if not sort %}
                 {{search_result.object.title|escape|truncatechars:23}}
             {% endif %}
