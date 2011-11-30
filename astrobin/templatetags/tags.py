@@ -79,27 +79,27 @@ def request_list(request, show_footer = True):
 def notifications_icon(request):
     basepath = '/static/icons/iconic/orange/'
     if notifications.Notice.objects.filter(user=request.user).filter(unseen=True):
-        return basepath + 'new_notifications.png'
+        return basepath + 'new_notifications.gif'
     else:
-        return basepath + 'notifications.png'
+        return basepath + 'notifications.gif'
 
 
 @register.simple_tag
 def messages_icon(request):
     basepath = '/static/icons/iconic/orange/'
     if messages.Message.objects.filter(user=request.user).filter(read=False):
-        return basepath + 'new_messages.png'
+        return basepath + 'new_messages.gif'
     else:
-        return basepath + 'messages.png'
+        return basepath + 'messages.gif'
 
 
 @register.simple_tag
 def requests_icon(request):
     basepath = '/static/icons/iconic/orange/'
     if Request.objects.filter(to_user=request.user).filter(fulfilled=False):
-        return basepath + 'new_requests.png'
+        return basepath + 'new_requests.gif'
     else:
-        return basepath + 'requests.png'
+        return basepath + 'requests.gif'
 
 
 @register.filter

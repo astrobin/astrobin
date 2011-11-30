@@ -83,9 +83,12 @@ class UserIndex(SearchIndex):
        
 class ImageIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
+
     title = CharField(model_attr='title')
-    username_auto = NgramField()
     description = CharField(model_attr='description')
+    uploaded = DateTimeField(model_attr='uploaded')
+
+    username = CharField()
     subjects = MultiValueField()
     imaging_telescopes = MultiValueField()
     guiding_telescopes = MultiValueField()
@@ -99,16 +102,13 @@ class ImageIndex(SearchIndex):
 
     rating = IntegerField()
     integration = IntegerField()
-    uploaded = DateTimeField(model_attr='uploaded')
-    views = IntegerField()
-
     moon_phase = FloatField()
-
     first_acquisition_date = DateTimeField()
     last_acquisition_date = DateTimeField()
+    views = IntegerField()
 
     def index_queryset(self):
-        return Image.objects.filter(Q(is_stored = True), Q(is_wip = False)).order_by('-uploaded')
+        return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
 
     def get_model(self):
         return Image
@@ -126,7 +126,7 @@ class ImageIndex(SearchIndex):
 
         return value + ' ' + ''.join(value.split())
 
-    def prepare_username_auto(self, obj):
+    def prepare_username(self, obj):
         return str(obj.user.username)
 
     def prepare_subjects(self, obj):
@@ -184,15 +184,6 @@ class ImageIndex(SearchIndex):
     def prepare_integration(self, obj):
         return _get_integration(obj)
 
-    def prepare_views(self, obj):
-        views = 0
-        try:
-            views = HitCount.objects.get(object_pk = obj.pk).hits
-        except HitCount.DoesNotExist:
-            pass
-
-        return views
-            
     def prepare_moon_phase(self, obj):
         from moon import MoonPhase
 
@@ -253,7 +244,16 @@ class ImageIndex(SearchIndex):
 
         return date if date else datetime.datetime.min
 
+    def prepare_views(self, obj):
+        views = 0
+        try:
+            views = HitCount.objects.get(object_pk = obj.pk).hits
+        except HitCount.DoesNotExist:
+            pass
 
+        return views
+            
+ 
 class SubjectIdentifierIndex(SearchIndex):
     text = NgramField(document=True, use_template=True)
 
