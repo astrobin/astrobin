@@ -21,7 +21,6 @@ from storage import *
 from notifications import *
 from storage import download_from_bucket
 
-
 @task()
 def solve_image(image, lang, use_scale=True, callback=None):
     # If solving is disabled in the settings, then we override what we're
@@ -157,6 +156,7 @@ def store_image(image, solve, lang, callback=None):
         image.w = w
         image.h = h
         image.animated = animated
+        image.save()
     except S3CreateError, exc:
         store_image.retry(exc=exc)
 

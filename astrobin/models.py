@@ -275,23 +275,6 @@ def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, la
 
 @task
 def image_stored_callback(image, stored, solve, lang):
-    # Before we continue, we must check if the image hasn't been
-    # deleted in the meantime.
-    is_revision = False
-    try:
-        tmp = image.image
-        is_revision = True
-    except:
-        is_revision = False
-
-    if not is_revision:
-        try:
-            image = Image.objects.get(id = image.id)
-        except Image.DoesNotExist:
-            # Abort!
-            print "Aborting because image was deleted."
-            return
-
     image.is_stored = stored
     image.save()
 
