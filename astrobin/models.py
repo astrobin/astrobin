@@ -33,11 +33,37 @@ LICENSE_CHOICES = (
     (6, _("Attribution-NoDerivs Creative Commons")),
 )
 
-
 LANGUAGE_CHOICES = (
     ('en', _("English")),
     ('it', _("Italian")),
 )
+
+SUBJECT_LABELS = {
+    'PULSAR': _("Pulsars"),
+    'GLOBUL': _("Globular clusters"),
+    'OPENCL': _("Open clusters"),
+    'EMNEBU': _("Emission nebulae"),
+    'PLNEBU': _("Planetary nebulae"),
+    'RENEBU': _("Reflection nebulae"),
+    'GALAXY': _("Galaxies"),
+}
+
+SUBJECT_TYPES = {
+    'Psr': SUBJECT_LABELS['PULSAR'],
+    'GlC': SUBJECT_LABELS['GLOBUL'],
+    'GCl': SUBJECT_LABELS['GLOBUL'],
+    'As*': SUBJECT_LABELS['OPENCL'],
+    'Cl*': SUBJECT_LABELS['OPENCL'],
+    'OpC': SUBJECT_LABELS['OPENCL'],
+    'HII': SUBJECT_LABELS['EMNEBU'],
+    'RNe': SUBJECT_LABELS['RENEBU'],
+    'PN' : SUBJECT_LABELS['PLNEBU'],
+    'LIN': SUBJECT_LABELS['GALAXY'],
+    'IG' : SUBJECT_LABELS['GALAXY'],
+    'GiG': SUBJECT_LABELS['GALAXY'],
+    'Sy2': SUBJECT_LABELS['GALAXY'],
+    'G'  : SUBJECT_LABELS['GALAXY'],
+}
 
 class Gear(models.Model):
     name = models.CharField(_("Name"), max_length=64)

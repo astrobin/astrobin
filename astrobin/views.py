@@ -1202,43 +1202,44 @@ def user_page(request, username):
     section = 'public'
     subsection = request.GET.get('sub')
     if not subsection:
-        subsection = 'uploaded'
+        subsection = 'subject'
     subtitle = None
     backlink = None
 
     smart_albums = []
-    sqs = Image.objects.filter(user = user).order_by('-uploaded')
+    sqs = Image.objects.filter(user = user, is_stored = True).order_by('-uploaded')
     if 'staging' in request.GET:
         if request.user != user:
             return HttpResponseForbidden()
         sqs = sqs.filter(is_wip = True)
         section = 'staging'
     else:
+        sqs = sqs.filter(is_wip = False)
         if subsection == 'uploaded':
-            sqs = sqs.filter(is_wip = False)
+            # All good already
+            pass
         elif subsection == 'year':
             if 'year' in request.GET:
                 year = request.GET.get('year')
-                sqs = sqs.filter(acquisition__date__year = year, is_wip = False).distinct()
+                sqs = sqs.filter(acquisition__date__year = year).distinct()
                 subtitle = year
                 backlink = "?public&sub=year"
             else:
-                sqs = Image.objects.none()
                 acq = Acquisition.objects.filter(image__user = user)
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
                 for y in years:
                     k_dict = {str(y): []}
                     smart_albums.append(k_dict)
-                    for i in Image.objects.filter(acquisition__date__year = y, user = user, is_wip = False, is_stored = True).distinct()[:10]:
+                    for i in sqs.filter(acquisition__date__year = y).distinct()[:10]:
                         k_dict[str(y)].append(i)
+                sqs = Image.objects.none()
         elif subsection == 'gear':
             if 'gear' in request.GET:
                 gear = request.GET.get('gear')
-                sqs = sqs.filter(Q(imaging_telescopes__name = gear) | Q(imaging_cameras__name = gear), is_wip = False, is_stored = True)
+                sqs = sqs.filter(Q(imaging_telescopes__name = gear) | Q(imaging_cameras__name = gear))
                 subtitle = gear
                 backlink = "?public&sub=gear"
             else:
-                sqs = Image.objects.none()
                 for qs, filter in {
                     profile.telescopes.all(): 'imaging_telescopes',
                     profile.cameras.all(): 'imaging_cameras',
@@ -1246,13 +1247,33 @@ def user_page(request, username):
                     for k in qs:
                         k_dict = {k.name: []}
                         smart_albums.append(k_dict)
-                        for i in Image.objects.filter(user = user, is_wip = False, is_stored = True, **{filter: k}).distinct()[:10]:
+                        for i in sqs.filter(**{filter: k}).distinct()[:10]:
                             k_dict[k.name].append(i)
+                sqs = Image.objects.none()
         elif subsection == 'subject':
-            # Not implemented yet
-            pass
+            def reverse_subject_type(label):
+                ret = []
+                for key, value in SUBJECT_TYPES.iteritems():
+                    if value == label:
+                        ret.append(key)
+                return ret
+
+            if 'subject' in request.GET:
+                subject_type = request.GET.get('subject')
+                r = reverse_subject_type(subject_type)
+                sqs = sqs.filter(Q(subjects__otype__in = r)).distinct()
+                subtitle = subject_type
+                backlink = "?public&sub=subject"
+            else:
+                for l in SUBJECT_LABELS.values():
+                    k_dict = {l: []}
+                    smart_albums.append(k_dict)
+                    r = reverse_subject_type(l)
+                    for i in sqs.filter(Q(subjects__otype__in = r)).distinct()[:10]:
+                        k_dict[l].append(i)
+                sqs = Image.objects.none()
         elif subsection == 'nodata':
-            sqs = sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None) | Q(subjects = None), is_wip = False).distinct()
+            sqs = sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None) | Q(subjects = None)).distinct()
 
         section = 'public'
 
