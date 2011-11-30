@@ -157,6 +157,7 @@ def index(request):
         response_dict['sort'] = '-acquired'
         sqs = sqs.order_by('-last_acquisition_date')
     elif request.GET.get('sort') == '-views':
+        response_dict['sort'] = '-views'
         sqs = sqs.order_by('-views');
     else:
         response_dict['sort'] = '-uploaded'
