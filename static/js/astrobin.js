@@ -13,14 +13,14 @@ var common = {
         notifications_element_empty: 'ul#notification-feed li#empty',
         notifications_element_image: 'img#notifications',
         notifications_element_ul   : 'ul#notification-feed',
-        notifications_icon_new     : '/static/icons/iconic/orange/new_notifications.png',
+        notifications_icon_new     : '/static/icons/iconic/orange/new_notifications.gif',
 
         /* Messages */
         messages_base_url          : '/activity?id=message_',
         messages_element_empty     : 'ul#message-feed li#empty',
         messages_element_image     : 'img#messages',
         messages_element_ul        : 'ul#message-feed',
-        messages_icon_new          : '/static/icons/iconic/orange/new_messages.png',
+        messages_icon_new          : '/static/icons/iconic/orange/new_messages.gif',
         message_detail_url         : '/messages/detail/',
 
 
@@ -29,7 +29,7 @@ var common = {
         requests_element_empty     : 'ul#request-feed li#empty',
         requests_element_image     : 'img#requests',
         requests_element_ul        : 'ul#request-feed',
-        requests_icon_new          : '/static/icons/iconic/orange/new_requests.png',
+        requests_icon_new          : '/static/icons/iconic/orange/new_requests.gif',
         request_detail_url         : '/requests/detail/'
     },
 
