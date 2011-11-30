@@ -1,2 +1,2 @@
 #!/bin/sh
-./manage.py update_index --remove -b 5000
+./manage.py update_index --remove

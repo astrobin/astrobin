@@ -218,7 +218,7 @@ def image_detail(request, id):
         related = 'rel_user'
 
     if related == 'rel_user':
-        related_images = SearchQuerySet().filter(username_auto=image.user.username)
+        related_images = SearchQuerySet().filter(username=image.user.username)
     elif related == 'rel_subject':
         subjects = [xapian_escape(s.mainId) for s in image.subjects.all()]
         related_images = SearchQuerySet().filter(SQ(subjects__in=subjects))
@@ -1184,7 +1184,7 @@ def user_page(request, username):
         last_login = to_user_timezone(user.last_login, viewer_profile)
 
     sqs = SearchQuerySet()
-    sqs = sqs.filter(username_auto = user.username).models(Image)
+    sqs = sqs.filter(username = user.username).models(Image)
     sqs = sqs.order_by('-uploaded')
 
     images = len(sqs)
