@@ -113,7 +113,7 @@ def solve_image(image, lang, use_scale=True, callback=None):
         command[2] = '/usr/local/astrometry/etc/backend.blind.cfg'
         del command[3:7]
 
-    (success, stdout, stderr) = run_popen_with_timeout(command, 330 if use_scale else 630)
+    (success, stdout, stderr) = run_popen_with_timeout(command, 630)
 
     subjects = ''
     if os.path.exists(settings.UPLOADS_DIRECTORY + uid + '.solved'):
