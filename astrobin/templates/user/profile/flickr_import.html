@@ -61,6 +61,7 @@ $(function() {
                     url: '/profile/edit/flickr/',
                     dataType: 'json',
                     data: ({'id_flickr_set': $('select option:selected').val()}),
+                    timeout: 5000,
                     success: function(data) {
                         var photos = data.flickr_photos;
                         $('p#flickr_photos').removeClass('hidden');
