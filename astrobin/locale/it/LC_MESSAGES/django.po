@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-30 11:03-0500\n"
-"PO-Revision-Date: 2011-11-30 11:04-0500\n"
+"POT-Creation-Date: 2011-12-01 00:27-0500\n"
+"PO-Revision-Date: 2011-12-01 00:27-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -41,7 +41,7 @@ msgstr "Soggetti"
 #: forms.py:92
 #: models.py:334
 #: models.py:677
-#: views.py:320
+#: views.py:321
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Luoghi"
@@ -394,7 +394,7 @@ msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del sensore. Esempio: -20."
 
 #: models.py:569
-#: views.py:323
+#: views.py:324
 msgid "Darks"
 msgstr "Dark"
 
@@ -403,7 +403,7 @@ msgid "The number of dark frames."
 msgstr "Numero di dark."
 
 #: models.py:574
-#: views.py:324
+#: views.py:325
 msgid "Flats"
 msgstr "Flat"
 
@@ -412,7 +412,7 @@ msgid "The number of flat frames."
 msgstr "Numero di flat."
 
 #: models.py:579
-#: views.py:325
+#: views.py:326
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
@@ -421,7 +421,7 @@ msgid "The number of dark flat frames."
 msgstr "Numero di dark dei flat."
 
 #: models.py:584
-#: views.py:326
+#: views.py:327
 msgid "Bias"
 msgstr "Bias"
 
@@ -430,17 +430,17 @@ msgid "The number of bias/offset frames."
 msgstr "Numero di frame bias/offset."
 
 #: models.py:589
-#: views.py:329
+#: views.py:330
 msgid "Mean SQM"
 msgstr "SQM medio"
 
 #: models.py:594
-#: views.py:330
+#: views.py:331
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
 #: models.py:613
-#: views.py:321
+#: views.py:322
 #: templates/image/detail.html:423
 msgid "Frames"
 msgstr "Pose"
@@ -534,22 +534,22 @@ msgid "Language"
 msgstr "Lingua"
 
 #: search.py:70
-#: views.py:557
-#: views.py:561
-#: views.py:782
-#: views.py:785
-#: views.py:839
-#: views.py:863
+#: views.py:558
+#: views.py:562
+#: views.py:783
+#: views.py:786
+#: views.py:840
+#: views.py:864
 #: templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
 #: search.py:71
-#: views.py:558
-#: views.py:783
-#: views.py:840
-#: views.py:864
+#: views.py:559
+#: views.py:784
+#: views.py:841
+#: views.py:865
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
@@ -557,109 +557,109 @@ msgstr "Nessun risultato. Spiacente."
 msgid "Matching items:"
 msgstr "Risultati:"
 
-#: views.py:318
+#: views.py:319
 msgid "Resolution"
 msgstr "Risoluzione"
 
-#: views.py:319
-#: views.py:399
+#: views.py:320
+#: views.py:400
 msgid "Dates"
 msgstr "Date"
 
-#: views.py:322
+#: views.py:323
 #: templates/inclusion_tags/search_image_list.html:17
 #: templates/search/search.html:48
 msgid "Integration"
 msgstr "Integrazione"
 
-#: views.py:322
-#: views.py:1198
+#: views.py:323
 #: views.py:1199
+#: views.py:1200
 #: templates/inclusion_tags/search_image_list.html:17
 msgid "hours"
 msgstr "ore"
 
-#: views.py:327
+#: views.py:328
 msgid "Avg. Moon age"
 msgstr "Giorno lunare medio"
 
-#: views.py:328
+#: views.py:329
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:559
+#: views.py:560
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:562
-#: views.py:786
+#: views.py:563
+#: views.py:787
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:563
+#: views.py:564
 #: templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:965
+#: views.py:966
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:970
-#: views.py:982
-#: views.py:1020
+#: views.py:971
+#: views.py:983
+#: views.py:1021
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1176
+#: views.py:1177
 #: templatetags/tags.py:127
 msgid "minutes"
 msgstr "minuti"
 
-#: views.py:1177
+#: views.py:1178
 #: templatetags/tags.py:128
 msgid "seconds ago"
 msgstr "secondi fa"
 
-#: views.py:1179
+#: views.py:1180
 #: templatetags/tags.py:129
 #, python-format
 msgid "%s ago"
 msgstr "%s fa"
 
-#: views.py:1195
+#: views.py:1196
 msgid "Member since"
 msgstr "Utente da"
 
-#: views.py:1196
+#: views.py:1197
 msgid "Last login"
 msgstr "Ultimo login"
 
-#: views.py:1197
+#: views.py:1198
 #: templates/leaderboard.html:25
 msgid "Images uploaded"
 msgstr "Immagini caricate"
 
-#: views.py:1198
+#: views.py:1199
 msgid "Total integration time"
 msgstr "Integrazione totale"
 
-#: views.py:1199
+#: views.py:1200
 msgid "Average integration time"
 msgstr "Integrazione media"
 
-#: views.py:1816
-#: views.py:1819
+#: views.py:1817
+#: views.py:1820
 msgid "RE"
 msgstr "RE"
 
-#: views.py:1879
+#: views.py:1880
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1903
+#: views.py:1904
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -1183,20 +1183,19 @@ msgstr "Immagini acquisite notte dopo notte"
 msgid "On this page you can see images that were actually taken each night, and not merely uploaded on a particular date."
 msgstr "Qui puoi vedere le immagini realmente scattate ogni notte, e non semplicemente caricate sul sito in una certa data."
 
-#: templates/nightly.html:21
-#: templates/user/profile.html:95
-msgid "No images."
-msgstr "Nessuna immagine."
+#: templates/nightly.html:23
+msgid "No image acquired in the selected month."
+msgstr "Nessuna immagine acquisita nel mese selezionato."
 
-#: templates/nightly.html:27
+#: templates/nightly.html:30
 msgid "current month"
 msgstr "mese corrente"
 
-#: templates/nightly.html:31
+#: templates/nightly.html:34
 msgid "previous month"
 msgstr "mese precedente"
 
-#: templates/nightly.html:36
+#: templates/nightly.html:39
 msgid "next month"
 msgstr "mese seguente"
 
@@ -2435,6 +2434,10 @@ msgstr "Caricate di recente"
 #: templates/user/profile.html:86
 msgid "(view more...)"
 msgstr "(mostra altre...)"
+
+#: templates/user/profile.html:95
+msgid "No images."
+msgstr "Nessuna immagine."
 
 #: templates/user/profile.html:101
 msgid "(go back)"

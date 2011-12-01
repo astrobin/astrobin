@@ -17,9 +17,12 @@
                 <div class="fix"></div>
             {% endif %}
         {% endfor %}
-    {% empty %}
-        {% blocktrans %}No images.{% endblocktrans %}
     {% endfor %}
+    {% ifequal total 0 %}
+        <p>
+            {% blocktrans %}No image acquired in the selected month.{% endblocktrans %}
+        </p>
+    {% endifequal %}
     <div class="pagination">
         <div class="pager">
             {% if month_offset > 0 %}
