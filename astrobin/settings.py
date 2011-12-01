@@ -237,7 +237,7 @@ PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
 ASTROBIN_USER='astrobin'
 
 
-SIMBAD_QUERY_URL="http://simbad.u-strasbg.fr/simbad/sim-nameresolver?data=@,I.0,J,C.0,T,D,M,I&output.max=1&output=json&Ident="
+SIMBAD_QUERY_URL="http://simbad.u-strasbg.fr/simbad/sim-nameresolver?data=@,I.0,J,C.0,T,D,M,I&output.max=1&output=json&option=strict&Ident="
 SIMBAD_SEARCH_QUERY_URL="http://simbad.u-strasbg.fr/simbad/sim-nameresolver?data=@,I.0,J,C.0,T,D,M,I&output=json&Ident="
 
 NOTIFICATION_LANGUAGE_MODULE = "astrobin.UserProfile"
