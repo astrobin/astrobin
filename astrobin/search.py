@@ -88,9 +88,6 @@ class ImageSearchView(SearchView):
                         k = k[0]
                 if k:
                     prefills[tag].append(k)
-                else:
-                    # Nothing found? We can abort and return empty queryset.
-                    return SearchQuerySet().none()
 
         context = {
             'query': self.query,

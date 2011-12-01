@@ -6,7 +6,7 @@
 {% block content %}
 <div class="full-box advanced-search-box">
     <p><a href="#" onclick="common.showHideAdvancedSearch()">{% trans "Show/hide advanced search box." %}</a></p>
-    <form id="advanced_search" method="get" action="{% url haystack_search %}">{% csrf_token %}
+    <form id="advanced_search" method="get" action="{% url haystack_search %}">
         {{form.as_p}}
         <input class="button submit-button" type="submit" value="{% trans "Search" %} &rarr;" />
     </form>
