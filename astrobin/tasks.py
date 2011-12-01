@@ -97,6 +97,8 @@ def solve_image(image, lang, use_scale=True, callback=None):
                '', '',
                '', '',
                '', '',
+               '--objs', '100',
+               '--downsample', '2',
                '--continue',
                '--no-plot',
                path + uid + original_ext]
@@ -122,7 +124,8 @@ def solve_image(image, lang, use_scale=True, callback=None):
         command = [
             '/usr/local/astrometry/bin/plot-constellations',
             '-w', path + uid + '.wcs', # input
-            '-o', solved_filename, # outpuy
+            '-o', solved_filename, # output
+            '-f', '8', # font size
             '-N', # plot NGC objects
             '-C', # plot constellations
             '-B', # plot named bright stars
