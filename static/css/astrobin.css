@@ -1582,8 +1582,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
 }
+.full-box label {
+  height: 16px;
+  text-align: right;
+  width: 150px;
+}
 .full-box .submit-button {
-  margin-left: 160px;
+  margin-left: 170px;
   width: 200px;
 }
 .full-box .lone-button {
@@ -1619,8 +1624,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
 }
+.tools-box label {
+  height: 16px;
+  text-align: right;
+  width: 150px;
+}
 .tools-box .submit-button {
-  margin-left: 160px;
+  margin-left: 170px;
   width: 200px;
 }
 .tools-box .lone-button {
