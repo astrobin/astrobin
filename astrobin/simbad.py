@@ -8,6 +8,58 @@ from django.utils.encoding import smart_str
 
 from models import Subject, SubjectIdentifier
 
+def find_single_subject(q):
+    q = smart_str(q)
+    url = settings.SIMBAD_QUERY_URL + urllib2.quote(q)
+    print url
+    json_string = ""
+    try:
+        f = urllib2.urlopen(url, timeout=1)
+        json_string = f.read()
+    except:
+        print "Error opening SIMBAD url."
+        return None
+
+    f.close()
+
+    try:
+        # json will be a list of dictionaries with simbad objects.
+        json = simplejson.loads(json_string)
+    except simplejson.JSONDecodeError:
+        # Malformatted query and Simbad didn't accept it. Let's
+        # ignore it
+        print "Malformed SIMBAD query."
+        return None
+
+    for obj in json:
+        # We need to add it to our database first. We
+        # are actally saving this early, because the user might
+        # just disregard this result and select another, or
+        # navigate away from the page. This might not be
+        # optimal, but we need to have an object id in our
+        # database if the user does decide to use this object.
+        s = Subject()
+        s.initFromJSON(obj)
+        try:
+            s.save()
+        except IntegrityError:
+            # Sometimes, for a racecondition somewhere, if the
+            # user tries to lookups names really fast, a name that
+            # is going to the database gets looked up again before
+            # it really is there. So we try to save it again and
+            # get the IntegrityError because of the duplicate key.
+            s = Subject.objects.get(mainId=obj['mainId'])
+
+        # We need to make sure that q is part of the mainId, or the
+        # ui will be very confused. If that's not the case, then
+        # we construct a string that has both the mainId and the id
+        # that was found, just like above.
+        if q == obj['mainId']:
+            return s
+
+    return None 
+
+
 def find_subjects(q):
     q = smart_str(q)
     regex = ".*"
