@@ -151,7 +151,10 @@ def solve_image(image, lang, use_scale=True, callback=None):
 
             if image.w > 0:
                 scale *= (image.w * 1./our_w)
-            print "Scale changed to %f because resized image is (%f, %f) and original is (%f, %f)." % (scale, our_w, our_h, image.w, image.h)
+                print "Scale changed to %f because resized image is (%f, %f) and original is (%f, %f)." % (scale, our_w, our_h, image.w, image.h)
+            else:
+                # Scale was most likely wrong. Let's solve blind.
+                use_scale = False
 
             # Allow a 20% tolerance
             scale_low = scale * 0.95
