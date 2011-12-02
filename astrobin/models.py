@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django import forms
 from django.utils import translation
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 from django.conf import settings
 
 from tasks import *
@@ -231,10 +231,27 @@ class Image(models.Model):
         (4, '4x4'),
     )
 
-    title = models.CharField(_("Title"), max_length=128)
-    subjects = models.ManyToManyField(Subject, verbose_name=_("Subjects"))
-    locations = models.ManyToManyField(Location, null=True, blank=True, verbose_name=_("Locations"))
-    description = models.TextField(_("Description"))
+    title = models.CharField(
+        max_length = 128,
+        verbose_name = _("Title"),
+    )
+    subjects = models.ManyToManyField(
+        Subject,
+    )
+    locations = models.ManyToManyField(
+        Location,
+    )
+    description = models.TextField(
+        null = True,
+        blank = True,
+        verbose_name = _("Description"),
+    )
+    link = models.CharField(
+        max_length = 256,
+        null = True,
+        blank = True,
+     )
+
     filename = models.CharField(max_length=64, editable=False)
     original_ext = models.CharField(max_length=6, editable=False)
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
