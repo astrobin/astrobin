@@ -1,6 +1,5 @@
 import uuid
 from datetime import datetime
-import glob
 import os
 import urllib2
 import simplejson
@@ -13,13 +12,12 @@ from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
-from celery.task import task
+from tasks import *
 
 from djangoratings.fields import RatingField
 from model_utils.managers import InheritanceManager
 from timezones.forms import PRETTY_TIMEZONE_CHOICES
 
-from tasks import store_image, solve_image, delete_image
 from notifications import push_notification
 
 
@@ -225,100 +223,6 @@ class Location(models.Model):
         app_label = 'astrobin'
 
 
-@task
-def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, lang):
-    # Before we continue, we must check if the image hasn't been
-    # deleted in the meantime.
-    is_revision = False
-    try:
-        tmp = image.image
-        is_revision = True
-        print "It's a revision."
-    except:
-        is_revision = False
-        print "It's not a revision."
-
-    if not is_revision:
-        try:
-            image = Image.objects.get(id = image.id)
-        except Image.DoesNotExist:
-            # Abort!
-            print "Aborting because image was deleted."
-            return
-
-    if not solved and did_use_scale:
-        # Try again!
-        solve_image.delay(image, lang, False, callback=image_solved_callback)
-        return
-
-    if solved:
-        print "Image was solved"
-
-    image.is_solved = solved
-    if image.__class__.__name__ == 'Image' and image.is_solved:
-        # grab objects from json
-        import simbad
-        subjects = simplejson.loads(subjects)
-        if subjects['annotations']:
-            print "Subjects found"
-            for i in subjects['annotations']:
-                subjects = simbad.find_subjects(i['names'][0])
-                for s in subjects:
-                    image.subjects.add(s)
-        else:
-            print "No subjects found."
-            image.is_solved = False
-            solved = False
-
-    image.plot_is_overlay = image.is_solved
-    image.save()
-
-    user = None
-    img = None
-    try:
-        user = image.user
-        img = image
-    except AttributeError:
-        # It's a revision
-        user = image.image.user
-        img = image.image
-
-    translation.activate(lang)
-    if solved:
-        push_notification([user], 'image_solved',
-                          {'object_url':'%s%s%s' % (settings.ASTROBIN_BASE_URL, img.get_absolute_url(), '?mod=solved')})
-    else:
-        push_notification([user], 'image_not_solved',
-                          {'object_url':'%s%s' % (settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
-
-    # Clean up!
-    clean_list = glob.glob(clean_path)
-    for f in clean_list:
-        os.remove(f)
-
-
-@task
-def image_stored_callback(image, stored, solve, lang):
-    image.is_stored = stored
-    image.save()
-
-    user = None
-    img = None
-    try:
-        user = image.user
-        img = image
-    except AttributeError:
-        # It's a revision
-        user = image.image.user
-        img = image.image
-
-    translation.activate(lang)
-    push_notification([user], 'image_ready', {'object_url':'%s%s' %(settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
-
-    if solve:
-        solve_image.delay(image, lang, callback=image_solved_callback)
-
-
 class Image(models.Model):
     BINNING_CHOICES = (
         (1, '1x1'),
@@ -415,6 +319,54 @@ class Image(models.Model):
         default = False,
     )
 
+    # astrometry
+    ra_center_hms = models.CharField(
+        null = True,
+        blank = True,
+        max_length = 12,
+        editable = False,
+    )
+    dec_center_dms = models.CharField(
+        null = True,
+        blank = True,
+        max_length = 12,
+        editable = False,
+    )
+    pixscale = models.DecimalField(
+        null = True,
+        blank = True,
+        max_digits = 14,
+        decimal_places = 10,
+        editable = False,
+    )
+    orientation = models.DecimalField(
+        null = True,
+        blank = True,
+        max_digits = 14,
+        decimal_places = 10,
+        editable = False,
+    )
+    fieldw = models.DecimalField(
+        null = True,
+        blank = True,
+        max_digits = 14,
+        decimal_places = 10,
+        editable = False,
+    )
+    fieldh = models.DecimalField(
+        null = True,
+        blank = True,
+        max_digits = 14,
+        decimal_places = 10,
+        editable = False,
+    )
+    fieldunits = models.CharField(
+        null = True,
+        blank = True,
+        max_length = 32,
+        editable = False,
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
@@ -423,6 +375,14 @@ class Image(models.Model):
         return self.title if self.title is not None else _("(no title)")
 
     def save(self, *args, **kwargs):
+        if self.id:
+            try:
+                image = Image.objects.get(id = self.id)
+            except Image.DoesNotExist:
+                # Abort!
+                print "Aborting because image was deleted."
+                return
+
         super(Image, self).save(*args, **kwargs)
 
         # Find requests and mark as fulfilled
@@ -492,6 +452,17 @@ class ImageRevision(models.Model):
         
     def __unicode__(self):
         return 'Revision for %s' % self.image.title
+
+    def save(self, *args, **kwargs):
+        if self.id:
+            try:
+                r = ImageRevision.objects.get(id = self.id)
+            except ImageRevision.DoesNotExist:
+                # Abort!
+                print "Aborting because image revision was deleted."
+                return
+
+        super(ImageRevision, self).save(*args, **kwargs)
 
     def process(self):
         store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)

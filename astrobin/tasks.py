@@ -15,11 +15,83 @@ import os.path
 import signal
 import time
 import threading
+import simplejson
+import glob
 
 from image_utils import *
 from storage import *
 from notifications import *
 from storage import download_from_bucket
+
+@task()
+def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, lang):
+    if solved:
+        print "Image was solved"
+
+    image.is_solved = solved
+    if image.__class__.__name__ == 'Image' and image.is_solved:
+        # grab objects from json
+        import simbad
+        subjects = simplejson.loads(subjects)
+        if subjects['annotations']:
+            print "Subjects found"
+            for i in subjects['annotations']:
+                subjects = simbad.find_subjects(i['names'][0])
+                for s in subjects:
+                    image.subjects.add(s)
+        else:
+            print "No subjects found."
+            image.is_solved = False
+            solved = False
+
+    image.plot_is_overlay = image.is_solved
+    image.save()
+
+    user = None
+    img = None
+    try:
+        user = image.user
+        img = image
+    except AttributeError:
+        # It's a revision
+        user = image.image.user
+        img = image.image
+
+    translation.activate(lang)
+    if solved:
+        push_notification([user], 'image_solved',
+                          {'object_url':'%s%s%s' % (settings.ASTROBIN_BASE_URL, img.get_absolute_url(), '?mod=solved')})
+    else:
+        push_notification([user], 'image_not_solved',
+                          {'object_url':'%s%s' % (settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
+
+    # Clean up!
+    clean_list = glob.glob(clean_path)
+    for f in clean_list:
+        os.remove(f)
+
+
+@task()
+def image_stored_callback(image, stored, solve, lang):
+    image.is_stored = stored
+    image.save()
+
+    user = None
+    img = None
+    try:
+        user = image.user
+        img = image
+    except AttributeError:
+        # It's a revision
+        user = image.image.user
+        img = image.image
+
+    translation.activate(lang)
+    push_notification([user], 'image_ready', {'object_url':'%s%s' %(settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
+
+    if solve:
+        solve_image.delay(image, lang, callback=image_solved_callback)
+
 
 @task()
 def solve_image(image, lang, use_scale=True, callback=None):
@@ -126,6 +198,7 @@ def solve_image(image, lang, use_scale=True, callback=None):
             '-w', path + uid + '.wcs', # input
             '-o', solved_filename, # output
             '-f', '8', # font size
+            '-n', '1', # line width
             '-N', # plot NGC objects
             '-C', # plot constellations
             '-B', # plot named bright stars
@@ -147,6 +220,22 @@ def solve_image(image, lang, use_scale=True, callback=None):
             # Then save to bucket
             save_to_bucket(image.filename + '_solved.png', solved_data.getvalue())
 
+            # Now let's get some data
+            command = [
+                '/usr/local/astrometry/bin/wcsinfo',
+                path + uid + '.wcs'
+            ]
+            (success, info, stderr) = run_popen_with_timeout(command, 5)
+            for line in info.split('\n'):
+                try:
+                    key, value = line.split(' ')
+                except ValueError:
+                    continue
+                if key in ('ra_center_hms', 'dec_center_dms', 'pixscale', 'orientation', 'fieldw', 'fieldh', 'fieldunits'):
+                    print key, value
+                    setattr(image, key, value)
+            image.save()
+
     if callback is not None:
         print "Calling solved callback."
         subtask(callback).delay(image, solved, subjects, use_scale, '%s%s*' % (path, uid), lang)
@@ -167,7 +256,9 @@ def store_image(image, solve, lang, callback=None):
         subtask(callback).delay(image, True, solve, lang)
 
 
-@task
+@task()
 def delete_image(filename, ext):
     delete_image_from_backend(filename, ext)
+
+
 
