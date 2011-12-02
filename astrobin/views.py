@@ -1207,7 +1207,7 @@ def user_page(request, username):
     section = 'public'
     subsection = request.GET.get('sub')
     if not subsection:
-        subsection = 'subject'
+        subsection = 'uploaded'
     subtitle = None
     backlink = None
 
