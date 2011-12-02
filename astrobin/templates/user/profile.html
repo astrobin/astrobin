@@ -44,6 +44,12 @@
 
         {% ifequal section 'public' %}
             <span class="album-links">
+                {% if subsection == 'uploaded' %}
+                    {% trans "Recently uploaded" %}
+                {% else %}
+                    <a href="?public&sub=uploaded">{% trans "Recently uploaded" %}</a>
+                {% endif %}
+                |
                 {% if subsection == 'subject' %}
                     {% trans "By subject type" %}
                 {% else %}
@@ -66,12 +72,6 @@
                     {% trans "Lacking data" %}
                 {% else %}
                     <a href="?public&sub=nodata">{% trans "Lacking data" %}</a>
-                {% endif %}
-                |
-                {% if subsection == 'uploaded' %}
-                    {% trans "Recently uploaded" %}
-                {% else %}
-                    <a href="?public&sub=uploaded">{% trans "Recently uploaded" %}</a>
                 {% endif %}
             </span>
         {% endifequal %}
