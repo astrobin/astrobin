@@ -1774,6 +1774,9 @@ span.copy-box {
     overflow: auto;
     background-color: @light-panel-color;
     .rounded-corners;
+    h3 {
+        display: inline-block;
+        border-bottom: 1px solid (@light-panel-color * @strong-hilight-factor);}
     .gear, .acquisition {
         float: left;
         width: 48%;
@@ -1785,6 +1788,9 @@ span.copy-box {
         padding-left: 5px;
         img {
             border: 1px solid @background-color;}}
+    .astrometry {
+        display: block;
+        border-top: 1px solid (@light-panel-color * @hilight-factor);}
     p {
         margin: 2px 0;}
     hr {

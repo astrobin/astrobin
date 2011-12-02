@@ -1973,6 +1973,10 @@ span.copy-box {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
+#technical-card h3 {
+  display: inline-block;
+  border-bottom: 1px solid #5c5c5c;
+}
 #technical-card .gear, #technical-card .acquisition {
   float: left;
   width: 48%;
@@ -1987,6 +1991,10 @@ span.copy-box {
 }
 #technical-card .acquisition img {
   border: 1px solid #333333;
+}
+#technical-card .astrometry {
+  display: block;
+  border-top: 1px solid #494949;
 }
 #technical-card p {
   margin: 2px 0;
