@@ -42,6 +42,37 @@
         </p>
         {% endifequal %}
 
+        {% if request.user != user and request.user.is_authenticated %}
+        <ul class="bar">
+            <li id="menu">
+                <ul class="topnav">
+                    <li id="user" class="first last">
+                        <span class="text"><a href="#">{% trans "User" %}</a></span>
+                        <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
+                        <div class="sub">
+                            <ul class="subnav">
+                                <li class="bg-icon {% if follows %}icon-unfollow{% else %}icon-follow{% endif %}">
+                                    <span class="text">
+                                        <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
+                                           href="{% if follows %}{% url unfollow user %}{% else %}{% url follow user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
+                                            {% if follows %}
+                                                {% trans "Stop following" %}
+                                            {% else %}
+                                                {% trans "Follow" %}
+                                            {% endif %}
+                                        </a>
+                                    </span>
+                                </li>
+                                <li class="last bg-icon icon-message">
+                                    <span class="text"><a class="send-private-message" href="{% url messages_new user %}">{% trans "Send private message" %}</a></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        {% endif %}
         {% ifequal section 'public' %}
             <span class="album-links">
                 {% if subsection == 'uploaded' %}
@@ -162,6 +193,41 @@
     {% if request.user == user %}
     <p style="text-align: center"><a href="{% url index %}">{% trans "Go to the homepage to upload a new image!" %}</a></p>
     {% endif %}
+{% endblock %}
 
-
+{% block extra_js %}
+<script type="text/javascript">
+$(document).ready(function() {
+    common.init(
+        '{{user.username}}',
+        {
+            follow_action: {
+                dialog: {
+                    title : "{% blocktrans with image.user.username as username %}Follow {{username}}?{% endblocktrans %}",
+                    body  : "{% blocktrans with image.user.username as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}",
+                    button: "{% trans "Yes, follow!" %}"
+                },
+                stop_following: "{% trans "Stop following" %}"
+            },
+            unfollow_action: {
+                dialog: {
+                    title : "{% blocktrans with image.user.username as username %}Stop following {{username}}?{% endblocktrans %}",
+                    body  : "{% blocktrans with image.user.username as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}",
+                    button: "{% trans "Yes, stop following!" %}"
+                },
+                follow: "{% trans "Follow" %}"
+            },
+            message_action: {
+                dialog: {
+                    title : "{% blocktrans with image.user.username as username %}Send {{username}} a message{% endblocktrans %}",
+                    body  : "",
+                    button: "{% trans "Send" %} &rarr;"
+                },
+                form_html: '{% autoescape off %}{{private_message_form.as_p|append_slash}}{% endautoescape %}',
+                csrf_token: '{{csrf_token}}',
+                url      : "{% url send_private_message %}"
+            }
+        });
+});
+</script>
 {% endblock %}

@@ -8,6 +8,7 @@
 var common = {
     config: {
         image_detail_url           : '/',
+
         /* Notifications */
         notifications_base_url     : '/activity?id=notification_',
         notifications_element_empty: 'ul#notification-feed li#empty',
@@ -23,19 +24,55 @@ var common = {
         messages_icon_new          : '/static/icons/iconic/orange/new_messages.gif',
         message_detail_url         : '/messages/detail/',
 
-
         /* Requests */
         requests_base_url          : '/activity/?id=request_',
         requests_element_empty     : 'ul#request-feed li#empty',
         requests_element_image     : 'img#requests',
         requests_element_ul        : 'ul#request-feed',
         requests_icon_new          : '/static/icons/iconic/orange/new_requests.gif',
-        request_detail_url         : '/requests/detail/'
+        request_detail_url         : '/requests/detail/',
+
+        follow_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: '',
+                height: 230
+            },
+            element       : 'a.follow',
+            url           : '/follow/',
+            stop_following: ''
+        },
+
+        unfollow_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: '',
+                height: 230
+            },
+            element       : 'a.unfollow',
+            url           : '/unfollow/',
+            follow        : ''
+        },
+
+        message_action: {
+            dialog: {
+                title : '',
+                body  : '',
+                button: ''
+            },
+            element  : 'a.send-private-message',
+            form_html: '',
+            csrf_token: '',
+            url      : ''
+        }
     },
 
     globals: {
         requests: [],
-        smart_ajax: $.ajax
+        smart_ajax: $.ajax,
+        current_username: ''
     },
 
     listen_for_notifications: function(username, last_modified, etag) {
@@ -131,7 +168,6 @@ var common = {
         });
     },
 
-
     start_listeners: function(username) {
         common.globals.smart_ajax = function(settings) {
             // override complete() operation
@@ -216,6 +252,146 @@ var common = {
                 xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
             }
         });
+    },
+
+    setup_follow: function() {
+        $(common.config.follow_action.element).live('click', function() {
+            var follow_a = $(this);
+            var span = follow_a.parent();
+
+            $('<div id="dialog-confirm"\
+                    title="' + common.config.follow_action.dialog.title + '">\
+               </div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 20px 0;"></span>\
+                            ' + common.config.follow_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    height: common.config.follow_action.dialog.height,
+                    modal: true,
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                var dlg = $(this)
+                                $.ajax({
+                                    url: common.config.follow_action.url + common.globals.current_username,
+                                    dataType: 'json',
+                                    success: function() {
+                                        dlg.dialog('close');
+                                        follow_a.remove();
+                                        span.html('<a class="unfollow" href="#">' +
+                                            common.config.follow_action.stop_following +
+                                            '</a>');
+                                        span.parent().removeClass('icon-follow');
+                                        span.parent().addClass('icon-unfollow');
+                                    }
+                                });
+                            }
+                        },
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
+                        }
+                    ]
+                });
+                return false;
+        });
+    },
+
+    setup_unfollow: function() {
+        $(common.config.unfollow_action.element).live('click', function() {
+            var unfollow_a = $(this);
+            var span = unfollow_a.parent();
+
+            $('<div id="dialog-confirm"\
+                    title="' + common.config.unfollow_action.dialog.title + '">\
+               </div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>\
+                            ' + common.config.unfollow_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    height: common.config.unfollow_action.dialog.height,
+                    modal: true,
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                var dlg = $(this)
+                                $.ajax({
+                                    url: common.config.unfollow_action.url + common.globals.current_username,
+                                    dataType: 'json',
+                                    success: function() {
+                                        dlg.dialog('close');
+                                        unfollow_a.remove();
+                                        span.html('<a class="follow" href="#">' +
+                                            common.config.unfollow_action.follow +
+                                            '</a>');
+                                        span.parent().removeClass('icon-unfollow');
+                                        span.parent().addClass('icon-follow');
+                                    }
+                                });
+                            }
+                        },
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
+                        }
+                    ]
+                });
+            return false;
+        });
+    },
+
+    setup_send_message: function() {
+        $(common.config.message_action.element).click(function() {
+            var dlg = $('<div id="dialog-message" title="' + common.config.message_action.dialog.title + '"></div>')
+                .html('\
+                    <div class="sided-main-content-popup">\
+                    <form id="private-message" action="" method="post">\
+                        ' + common.config.message_action.form_html + '\
+                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + common.config.message_action.csrf_token + '" /></div> \
+                        <input type="hidden" name="to_user" value="' + common.globals.current_username  + '"/>\
+                        <input id="send" class="button submit-button" type="button" value="' + common.config.message_action.dialog.button  + '" />\
+                    </form>\
+                    </div>\
+                ')
+                .dialog({
+                    resizable: true,
+                    modal: true});
+
+                $('form#private-message #send').one('click', function() {
+                    $.post(common.config.message_action.url,
+                           $("form#private-message").serialize(),
+                           function() {
+                                dlg.dialog('close');
+                           },
+                           'json');
+                });
+            return false;
+        });
+    },
+
+    init: function(current_username, config) {
+        /* Init */
+        common.globals.current_username = current_username;
+        $.extend(true, common.config, config);
+
+        /* Following */
+        common.setup_follow();
+        common.setup_unfollow();
+
+        /* Messaging */
+        common.setup_send_message();
     }
 };
 
@@ -284,42 +460,6 @@ var image_detail = {
             },
             element: 'a.delete-original',
             url    : '/delete/original/'
-        },
-
-        follow_action: {
-            dialog: {
-                title : '',
-                body  : '',
-                button: '',
-                height: 230
-            },
-            element       : 'a.follow',
-            url           : '/follow/',
-            stop_following: ''
-        },
-
-        unfollow_action: {
-            dialog: {
-                title : '',
-                body  : '',
-                button: '',
-                height: 230
-            },
-            element       : 'a.unfollow',
-            url           : '/unfollow/',
-            follow        : ''
-        },
-
-        message_action: {
-            dialog: {
-                title : '',
-                body  : '',
-                button: ''
-            },
-            element  : 'a.send-private-message',
-            form_html: '',
-            csrf_token: '',
-            url      : ''
         },
 
         bring_to_attention_action: {
@@ -574,133 +714,6 @@ var image_detail = {
         });
     },
 
-    setup_follow: function() {
-        $(image_detail.config.follow_action.element).live('click', function() {
-            var follow_a = $(this);
-            var span = follow_a.parent();
-
-            $('<div id="dialog-confirm"\
-                    title="' + image_detail.config.follow_action.dialog.title + '">\
-               </div>')
-                .html('\
-                        <p>\
-                            <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 20px 0;"></span>\
-                            ' + image_detail.config.follow_action.dialog.body + '\
-                        </p>')
-                .dialog({
-                    resizable: false,
-                    height: image_detail.config.follow_action.dialog.height,
-                    modal: true,
-                    buttons: [
-                        {
-                            text: 'OK',
-                            click: function() {
-                                var dlg = $(this)
-                                $.ajax({
-                                    url: image_detail.config.follow_action.url + image_detail.globals.image_username,
-                                    dataType: 'json',
-                                    success: function() {
-                                        dlg.dialog('close');
-                                        follow_a.remove();
-                                        span.html('<a class="unfollow" href="#">' +
-                                            image_detail.config.follow_action.stop_following +
-                                            '</a>');
-                                        span.parent().removeClass('icon-follow');
-                                        span.parent().addClass('icon-unfollow');
-                                    }
-                                });
-                            }
-                        },
-                        {
-                            text: $.i18n._('Cancel'),
-                            click: function() {
-                                $(this).dialog('close');
-                            }
-                        }
-                    ]
-                });
-                return false;
-        });
-    },
-
-    setup_unfollow: function() {
-        $(image_detail.config.unfollow_action.element).live('click', function() {
-            var unfollow_a = $(this);
-            var span = unfollow_a.parent();
-
-            $('<div id="dialog-confirm"\
-                    title="' + image_detail.config.unfollow_action.dialog.title + '">\
-               </div>')
-                .html('\
-                        <p>\
-                            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>\
-                            ' + image_detail.config.unfollow_action.dialog.body + '\
-                        </p>')
-                .dialog({
-                    resizable: false,
-                    height: image_detail.config.unfollow_action.dialog.height,
-                    modal: true,
-                    buttons: [
-                        {
-                            text: 'OK',
-                            click: function() {
-                                var dlg = $(this)
-                                $.ajax({
-                                    url: image_detail.config.unfollow_action.url + image_detail.globals.image_username,
-                                    dataType: 'json',
-                                    success: function() {
-                                        dlg.dialog('close');
-                                        unfollow_a.remove();
-                                        span.html('<a class="follow" href="#">' +
-                                            image_detail.config.unfollow_action.follow +
-                                            '</a>');
-                                        span.parent().removeClass('icon-unfollow');
-                                        span.parent().addClass('icon-follow');
-                                    }
-                                });
-                            }
-                        },
-                        {
-                            text: $.i18n._('Cancel'),
-                            click: function() {
-                                $(this).dialog('close');
-                            }
-                        }
-                    ]
-                });
-            return false;
-        });
-    },
-
-    setup_send_message: function() {
-        $(image_detail.config.message_action.element).click(function() {
-            var dlg = $('<div id="dialog-message" title="' + image_detail.config.message_action.dialog.title + '"></div>')
-                .html('\
-                    <div class="sided-main-content-popup">\
-                    <form id="private-message" action="" method="post">\
-                        ' + image_detail.config.message_action.form_html + '\
-                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + image_detail.config.message_action.csrf_token + '" /></div> \
-                        <input type="hidden" name="to_user" value="' + image_detail.globals.image_username  + '"/>\
-                        <input id="send" class="button submit-button" type="button" value="' + image_detail.config.message_action.dialog.button  + '" />\
-                    </form>\
-                    </div>\
-                ')
-                .dialog({
-                    resizable: true,
-                    modal: true});
-
-                $('form#private-message #send').one('click', function() {
-                    $.post(image_detail.config.message_action.url,
-                           $("form#private-message").serialize(),
-                           function() {
-                                dlg.dialog('close');
-                           },
-                           'json');
-                });
-            return false;
-        });
-    },
-
     setup_bring_to_attention: function() {
         $(image_detail.config.bring_to_attention_action.element).click(function() {
             var dlg = $('\
@@ -879,13 +892,6 @@ var image_detail = {
         image_detail.setup_delete();
         image_detail.setup_delete_revision();
         image_detail.setup_delete_original();
-
-        /* Following */
-        image_detail.setup_follow();
-        image_detail.setup_unfollow();
-
-        /* Messaging */
-        image_detail.setup_send_message();
 
         /* Bring to a user's attention */
         image_detail.setup_bring_to_attention();
