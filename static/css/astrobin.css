@@ -1659,28 +1659,20 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   padding: 4px 0;
   display: block;
 }
-#image-detail #main-content {
-  float: left;
-  width: 722px;
-}
-#image-detail #side-pane {
-  width: 204px;
-  float: right;
-}
-#image-detail ul.bar {
+ul.bar {
   list-style: none;
   margin: 0 0 28px 0;
   padding: 0;
 }
-#image-detail ul.bar > li {
+ul.bar > li {
   float: left;
 }
-#image-detail ul.bar > li.rating {
+ul.bar > li.rating {
   padding-top: 4px;
   text-align: right;
   float: right;
 }
-#image-detail ul.topnav {
+ul.topnav {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1696,24 +1688,24 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   display: block;
   height: 24px;
 }
-#image-detail ul.topnav > li {
+ul.topnav > li {
   display: inline-block;
   padding: 2px 10px;
   margin: 0;
   float: left;
   position: relative;
 }
-#image-detail ul.topnav > li > span > a {
+ul.topnav > li > span > a {
   color: #fcfcfc;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
 }
-#image-detail ul.topnav > li > span > a :hover {
+ul.topnav > li > span > a :hover {
   color: #ffffff;
 }
-#image-detail ul.topnav > li.subhover {
+ul.topnav > li.subhover {
   cursor: pointer;
 }
-#image-detail ul.topnav > li:hover {
+ul.topnav > li:hover {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -1722,6 +1714,14 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
   background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
   color: #ffffff;
+}
+#image-detail #main-content {
+  float: left;
+  width: 722px;
+}
+#image-detail #side-pane {
+  width: 204px;
+  float: right;
 }
 #image-detail .main-image-data {
   margin: 10px 0;
@@ -2467,7 +2467,7 @@ table.leaderboard {
   display: inline-block;
 }
 h2.profile {
-  margin-bottom: 0;
+  margin-bottom: 8px;
 }
 p.help {
   margin: 8px 0 28px 4px;

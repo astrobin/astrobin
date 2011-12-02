@@ -1161,6 +1161,14 @@ def user_page(request, username):
     user = get_object_or_404(User, username = username)
     profile = UserProfile.objects.get(user=user)
 
+    follows = False
+    viewer_profile = None
+    if request.user.is_authenticated():
+        viewer_profile = UserProfile.objects.get(user=request.user)
+    if viewer_profile:
+        if UserProfile.objects.get(user=user) in viewer_profile.follows.all():
+            follows = True
+
     gear_list = [('Telescopes'    , profile.telescopes.all(), 'imaging_telescopes'),
                  ('Mounts'        , profile.mounts.all(), 'mounts'),
                  ('Cameras'       , profile.cameras.all(), 'imaging_cameras'),
@@ -1291,6 +1299,8 @@ def user_page(request, username):
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                          's3_url':settings.S3_URL,
                          'user':user,
+                         'follows':follows,
+                         'private_message_form': PrivateMessageForm(),
                          'section':section,
                          'subsection':subsection,
                          'subtitle':subtitle,
