@@ -542,12 +542,7 @@ def image_edit_basic(request, id):
     subjects =  u', '.join(x.mainId for x in image.subjects.all())
     locations = u', '.join(x.name for x in image.locations.all())
 
-    form = ImageEditBasicForm(data={
-        'title': image.title,
-        'description': image.description,
-        'subjects': subjects,
-        'locations': locations,
-    })
+    form = ImageEditBasicForm(instance = image)
 
     return render_to_response('image/edit/basic.html',
         {'image':image,
@@ -765,33 +760,33 @@ def image_edit_save_presolve(request):
 @login_required
 @require_POST
 def image_edit_save_basic(request):
-    form = ImageEditBasicForm(data=request.POST)
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
+    form = ImageEditBasicForm(data=request.POST, instance=image)
     if request.user != image.user:
         return HttpResponseForbidden()
 
-    subjects =  u', '.join(x.mainId for x in image.subjects.all())
-    locations = u', '.join(x.name for x in image.locations.all())
-
-    response_dict = {
-        'image': image,
-        's3_url': settings.S3_URL,
-        'form': form,
-        'prefill_dict': {
-           'subjects': [jsonDumpSubjects(image.subjects.all()),
-                        _("Enter partial name and wait for the suggestions!"),
-                        _("No results. Sorry.")],
-           'locations': [jsonDump(image.locations.all()),
-                         _("Enter partial name and wait for the suggestions!"),
-                         _("No results. Press TAB to create this location!")],
-        },
-        'is_ready': image.is_stored,
-        'subjects': subjects,
-        'locations': locations,
-    }
-
     if not form.is_valid():
+        subjects =  u', '.join(x.mainId for x in image.subjects.all())
+        locations = u', '.join(x.name for x in image.locations.all())
+
+        response_dict = {
+            'image': image,
+            's3_url': settings.S3_URL,
+            'form': form,
+            'prefill_dict': {
+               'subjects': [jsonDumpSubjects(image.subjects.all()),
+                            _("Enter partial name and wait for the suggestions!"),
+                            _("No results. Sorry.")],
+               'locations': [jsonDump(image.locations.all()),
+                             _("Enter partial name and wait for the suggestions!"),
+                             _("No results. Press TAB to create this location!")],
+            },
+            'is_ready': image.is_stored,
+            'subjects': subjects,
+            'locations': locations,
+        }
+
         return render_to_response("image/edit/basic.html",
             response_dict,
             context_instance=RequestContext(request))
@@ -870,9 +865,6 @@ def image_edit_save_basic(request):
 
 
     form.fields['locations'].initial = u', '.join(x.name for x in getattr(image, 'locations').all())
-
-    image.title = form.cleaned_data['title'] 
-    image.description = form.cleaned_data['description']
 
     image.save()
     if not image.is_stored:

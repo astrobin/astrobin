@@ -303,6 +303,11 @@
                     <tr>
                         <td class="data">
                             <h2>{{image.title|escape|default:_("(no title)")}}</h2>
+                            {% if image.link %}
+                                <p class="link">
+                                    <a href="{{image.link}}" target="_blank">{{image.link}}</a>
+                                </p>
+                            {% endif %}
                             <span>
                                 ({% trans "uploaded" %}: {{uploaded_on|ago}}
                                 {% url user_page image.user.username as the_url %}

@@ -24,18 +24,31 @@ class ImageEditPresolveForm(forms.ModelForm):
         fields = ('focal_length', 'pixel_size', 'binning', 'scaling',)
 
 
-class ImageEditBasicForm(forms.Form):
-    title = forms.CharField(max_length=64)
-    subjects = forms.CharField(required=False, help_text="<noscript>*</noscript>" + _("If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."))
-    locations = forms.CharField(required=False, help_text="<noscript>*</noscript>" + _("The places from which you have taken this image."))
-    description = forms.CharField(widget=forms.Textarea, required=False)
+class ImageEditBasicForm(forms.ModelForm):
+    link = forms.RegexField(
+        regex = '^(http|https)://',
+        required = False,
+        help_text = _("If you're hosting a copy of this image on your website, put the address here."),
+        error_messages = {'invalid': "The address must start with http:// or https://."},
+    )
+    subjects = forms.CharField(
+        required = False,
+        help_text="<noscript>*</noscript>" + _("If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."),
+    )
+    locations = forms.CharField(
+        required = False,
+        help_text="<noscript>*</noscript>" + _("The places from which you have taken this image."),
+    )
 
     def __init__(self, user=None, **kwargs):
         super(ImageEditBasicForm, self).__init__(**kwargs)
-        self.fields['title'].label = _("Title")
+        self.fields['link'].label = _("Link")
         self.fields['subjects'].label = _("Subjects")
         self.fields['locations'].label = _("Locations")
-        self.fields['description'].label = _("Description")
+
+    class Meta:
+        model = Image
+        fields = ('title', 'link', 'subjects', 'locations', 'description')
 
 
 class ImageEditGearForm(forms.ModelForm):
