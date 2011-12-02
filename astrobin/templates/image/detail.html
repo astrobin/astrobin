@@ -456,7 +456,7 @@
                     <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
                     {% endif %}
                 </div>
-                {% if image.is_solved %}
+                {% if image.is_solved and image.ra_center_hms %}
                 <div class="fix"></div>
                 <div class="astrometry">
                     <h3>{% trans "Astrometry" %}</h3>
