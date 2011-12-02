@@ -382,3 +382,12 @@ def random_id(context, size = 8, chars = string.ascii_uppercase + string.digits)
     context['randomid'] = id
     return ''
 
+
+@register.filter
+def cut_decimals(value, places):
+    try:
+        value = float(value)
+    except ValueError:
+        return value
+
+    return '{0:.{1}f}'.format(value, places)
