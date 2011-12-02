@@ -462,10 +462,12 @@
                     <h3>{% trans "Astrometry" %}</h3>
                     <p><strong>{% trans "RA center" %}</strong>: {{image.ra_center_hms}}</p>
                     <p><strong>{% trans "DEC center" %}</strong>: {{image.dec_center_dms}}</p>
-                    <p><strong>{% trans "Pixel scale" %}</strong>: {{image.pixscale}} {% trans "arcsec/pixel" %}</p>
-                    <p><strong>{% trans "Orientation" %}</strong>: {{image.orientation}} {% trans "degrees" %}</p>
-                    <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% endif %}</p>
-                    <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% endif %}</p>
+                    {% if image.pixscale != 0 %}
+                        <p><strong>{% trans "Pixel scale" %}</strong>: {{image.pixscale|cut_decimals:"2"}} {% trans "arcsec/pixel" %}</p>
+                    {% endif %}
+                    <p><strong>{% trans "Orientation" %}</strong>: {{image.orientation|cut_decimals:"2"}} {% trans "degrees" %}</p>
+                    <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
+                    <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
                 </div>
                 {% endif %}
             </div>
