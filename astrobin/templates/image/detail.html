@@ -464,8 +464,8 @@
                     <p><strong>{% trans "DEC center" %}</strong>: {{image.dec_center_dms}}</p>
                     <p><strong>{% trans "Pixel scale" %}</strong>: {{image.pixscale}} {% trans "arcsec/pixel" %}</p>
                     <p><strong>{% trans "Orientation" %}</strong>: {{image.orientation}} {% trans "degrees" %}</p>
-                    <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw}} {{image.fieldunits}}</p>
-                    <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh}} {{image.fieldunits}}</p>
+                    <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% endif %}</p>
+                    <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% endif %}</p>
                 </div>
                 {% endif %}
             </div>
