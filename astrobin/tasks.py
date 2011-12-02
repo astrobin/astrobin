@@ -140,6 +140,11 @@ def solve_image(image, lang, use_scale=True, callback=None):
         print "Path doesn't exist: %s" % path + uid + original_ext
         download_from_bucket(uid + original_ext, path)
 
+    our_file = open(path + uid + original_ext)
+    our_data = StringIO.StringIO(our_file.read())
+    our_image = PILImage.open(our_data)
+    (our_w, our_h) = our_image.size
+
     if use_scale:
         print "Using scale."
         # Optimize for most cases
@@ -149,11 +154,6 @@ def solve_image(image, lang, use_scale=True, callback=None):
             scale = float(image.pixel_size) / float(image.focal_length) * 206.3
             print "Setting initial scale to %f." % scale
             # Account for the fact that we're using a resized image
-            our_file = open(path + uid + original_ext)
-            our_data = StringIO.StringIO(our_file.read())
-            our_image = PILImage.open(our_data)
-            (our_w, our_h) = our_image.size
-
             if image.w > 0:
                 scale *= (image.w * 1./our_w)
                 print "Scale changed to %f because resized image is (%f, %f) and original is (%f, %f)." % (scale, our_w, our_h, image.w, image.h)
@@ -241,6 +241,13 @@ def solve_image(image, lang, use_scale=True, callback=None):
                     continue
                 if key in ('ra_center_hms', 'dec_center_dms', 'pixscale', 'orientation', 'fieldw', 'fieldh', 'fieldunits'):
                     print key, value
+                    if key == 'pixscale':
+                        value = float(value)
+                        if image.w > 0 and image.w != our_w:
+                            value *= our_w / float(image.w)
+                        else:
+                            value = 0
+
                     setattr(image, key, value)
             image.save()
 
@@ -267,6 +274,4 @@ def store_image(image, solve, lang, callback=None):
 @task()
 def delete_image(filename, ext):
     delete_image_from_backend(filename, ext)
-
-
 
