@@ -46,6 +46,9 @@ class ImageEditBasicForm(forms.ModelForm):
         self.fields['subjects'].label = _("Subjects")
         self.fields['locations'].label = _("Locations")
 
+    def clean_link(self):
+        return self.cleaned_data['link'].strip()
+
     class Meta:
         model = Image
         fields = ('title', 'link', 'subjects', 'locations', 'description')
