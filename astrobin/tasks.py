@@ -105,6 +105,10 @@ def solve_image(image, lang, use_scale=True, callback=None):
     if not settings.ASTROBIN_ENABLE_SOLVING:
         return
 
+    if image.presolve_information < 2:
+        print "Not solving, as requested."
+        return
+
     # Solve
     path = settings.UPLOADS_DIRECTORY
     uid = image.filename + '_resized'
@@ -148,28 +152,17 @@ def solve_image(image, lang, use_scale=True, callback=None):
     if use_scale:
         print "Using scale."
         # Optimize for most cases
-        scale_low = 0.5
-        scale_high = 5
-        if image.focal_length and image.pixel_size:
-            scale = float(image.pixel_size) / float(image.focal_length) * 206.3
-            print "Setting initial scale to %f." % scale
-            # Account for the fact that we're using a resized image
-            if image.w > 0:
-                scale *= (image.w * 1./our_w)
-                print "Scale changed to %f because resized image is (%f, %f) and original is (%f, %f)." % (scale, our_w, our_h, image.w, image.h)
-            else:
-                # Scale was most likely wrong. Let's solve blind.
-                use_scale = False
-
-            # Allow a 20% tolerance
-            scale_low = scale * 0.95
-            scale_high = scale * 1.05
-            if image.binning:
-                scale_low *= image.binning
-                scale_high *= image.binning
-            if image.scaling:
-                scale_low *= 100.0 / float(image.scaling)
-                scale_high *= 100.0 / float(image.scaling)
+        scale_low = 0.1
+        scale_high = 180
+        if image.presolve_information == 3:
+            scale_low = 10
+            scale_high = 180
+        elif image.presolve_information == 4:
+            scale_low = 0.9
+            scale_high = 10
+        elif image.presolve_information == 5:
+            scale_low = 0.1
+            scale_high = 1.1
         else:
             use_scale = False
 
@@ -184,7 +177,7 @@ def solve_image(image, lang, use_scale=True, callback=None):
 
     if use_scale:
         command[1] = '--scale-units'
-        command[2] = 'arcsecperpix'
+        command[2] = 'degwidth'
         command[3] = '--scale-low'
         command[4] = str(scale_low)
         command[5] = '--scale-high'

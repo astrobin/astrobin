@@ -742,17 +742,17 @@ def image_edit_save_presolve(request):
             },
             context_instance = RequestContext(request))
 
-
-    image = form.save(commit=False)
-    if not form.cleaned_data['scaling']:
-        image.scaling = 100
-    image.save()
+    form.save()
 
     if image.is_stored:
         image.solve()
 
-    if 'done_later' in request.POST:
-        return HttpResponseRedirect('/%s/?plate_solving_started' % image_id);
+    done_later = 'done_later' in request.POST
+    if done_later:
+        if image.presolve_information > 1:
+            return HttpResponseRedirect('/%s/?plate_solving_started' % image_id);
+        else:
+            return HttpResponseRedirect('/%s/' % image_id);
 
     return HttpResponseRedirect('/edit/basic/%s/' % image_id)
 
@@ -868,7 +868,7 @@ def image_edit_save_basic(request):
 
     image.save()
     if not image.is_stored:
-        image.process(True if (image.focal_length and image.pixel_size) else False)
+        image.process(image.presolve_information > 1)
 
     if 'was_not_ready' in request.POST:
         return HttpResponseRedirect(image.get_absolute_url())

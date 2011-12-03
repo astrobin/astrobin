@@ -19,9 +19,13 @@ class ImageUploadForm(forms.Form):
 
 
 class ImageEditPresolveForm(forms.ModelForm):
+    def __init__(self, user = None, **kwargs):
+        super(ImageEditPresolveForm, self).__init__(**kwargs)
+        self.fields['presolve_information'].widget = forms.RadioSelect(choices = Image.SOLVE_CHOICES)
+
     class Meta:
         model = Image
-        fields = ('focal_length', 'pixel_size', 'binning', 'scaling',)
+        fields = ('presolve_information',)
 
 
 class ImageEditBasicForm(forms.ModelForm):
