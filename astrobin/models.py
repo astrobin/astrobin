@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django import forms
 from django.utils import translation
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
 from tasks import *

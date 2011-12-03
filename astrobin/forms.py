@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet, EmptySearchQuerySet
@@ -37,11 +37,11 @@ class ImageEditBasicForm(forms.ModelForm):
     )
     subjects = forms.CharField(
         required = False,
-        help_text="<noscript>*</noscript>" + _("If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."),
+        help_text=_("If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."),
     )
     locations = forms.CharField(
         required = False,
-        help_text="<noscript>*</noscript>" + _("The places from which you have taken this image."),
+        help_text=_("The places from which you have taken this image."),
     )
 
     def __init__(self, user=None, **kwargs):
@@ -115,37 +115,33 @@ class UserProfileEditBasicForm(forms.ModelForm):
 class UserProfileEditGearForm(forms.Form):
     telescopes = forms.CharField(
         max_length=256,
-        help_text="<noscript>*</noscript>" + _("All the telescopes you own, including the ones you use for guiding, go here."),
+        help_text=_("All the telescopes you own, including the ones you use for guiding, go here."),
         required=False)
 
     mounts = forms.CharField(
         max_length=256,
-        help_text="<noscript>*</noscript>",
         required=False)
 
     cameras = forms.CharField(
         max_length=256,
-        help_text="<noscript>*</noscript>" + _("Your DSLRs, CCDs, planetary cameras and guiding cameras go here."),
+        help_text=_("Your DSLRs, CCDs, planetary cameras and guiding cameras go here."),
         required=False)
 
     focal_reducers = forms.CharField(
         max_length=256,
-        help_text="<noscript>*</noscript>",
         required=False)
 
     software = forms.CharField(
         max_length=256,
-        help_text="<noscript>*</noscript>",
         required=False)
 
     filters = forms.CharField(
         max_length=256,
-        help_text="<noscript>*</noscript>" + _("Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."),
+        help_text=_("Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."),
         required=False)
 
     accessories = forms.CharField(
         max_length=256,
-        help_text="<noscript>*</noscript>",
         required=False)
 
     def __init__(self, user=None, **kwargs):
