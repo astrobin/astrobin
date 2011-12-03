@@ -195,6 +195,7 @@ def solve_image(image, lang, use_scale=True, callback=None):
         del command[3:7]
 
     (success, stdout, stderr) = run_popen_with_timeout(command, 630)
+    print stdout
 
     subjects = ''
     if os.path.exists(settings.UPLOADS_DIRECTORY + uid + '.solved'):
