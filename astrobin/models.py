@@ -251,6 +251,8 @@ class Image(models.Model):
         Location,
     )
     description = models.TextField(
+        null = True,
+        blank = True,
         verbose_name = _("Description"),
     )
     link = models.CharField(
@@ -359,7 +361,7 @@ class Image(models.Model):
     dec_center_dms = models.CharField(
         null = True,
         blank = True,
-        max_length = 12,
+        max_length = 13,
         editable = False,
     )
     pixscale = models.DecimalField(
