@@ -466,6 +466,7 @@ div.checker.disabled.active span.checked {
 div.radio {
   width: 18px;
   height: 18px;
+  margin-left: 202px;
 }
 
 div.radio input {
@@ -970,13 +971,6 @@ form {
         margin-left: 162px;
         display: block;
         color: @text-color / @strong-hilight-factor;}
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: @spacer-small * 1.5;
-        li {
-            display: inline;
-            margin-right: 15px;}}
     label {
         .strong;
         display: block;
@@ -984,6 +978,17 @@ form {
         font-size: @base-font-size - 2px;
         float: left;
         padding: 10px @spacer-large 10px 0;}
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: @spacer-small * 1.5;
+        li {
+            display: inline-block;
+            margin-right: 15px;
+            label {
+                text-align: left;
+                width: auto;
+                float: none;}}}
     input, select, textarea {
         vertical-align: bottom;
         position: relative;
@@ -1006,10 +1011,10 @@ form {
     input:focus, textarea:focus {
         border-color: @border-color * @hilight-factor;
         background-color: @input-color * @hilight-factor;
-        color: @strong-text-color;}}
-
+        color: @strong-text-color;}
     select[multiple]:focus {
         color: @text-color + #111;}
+}
 
 .button, .button:visited {
     height: auto;
@@ -1459,7 +1464,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         .button{
             left: 0;}
     }
-    label {
+    > form p label {
         height: @spacer-xlarge;
         text-align: right;
         width: 150px;}

@@ -384,6 +384,7 @@ div.checker.disabled span.checked, div.checker.disabled:active span.checked, div
 div.radio {
   width: 18px;
   height: 18px;
+  margin-left: 202px;
 }
 div.radio input {
   width: 18px;
@@ -842,15 +843,6 @@ form span.helptext {
   display: block;
   color: #7b7b7b;
 }
-form ul {
-  list-style: none;
-  margin: 0;
-  padding: 6px;
-}
-form ul li {
-  display: inline;
-  margin-right: 15px;
-}
 form label {
   color: #fcfcfc;
   font-weight: bold;
@@ -860,6 +852,20 @@ form label {
   font-size: 12px;
   float: left;
   padding: 10px 12px 10px 0;
+}
+form ul {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+}
+form ul li {
+  display: inline-block;
+  margin-right: 15px;
+}
+form ul li label {
+  text-align: left;
+  width: auto;
+  float: none;
 }
 form input, form select, form textarea {
   vertical-align: bottom;
@@ -889,7 +895,7 @@ form input:focus, form textarea:focus {
   background-color: #3d3d3d;
   color: #fcfcfc;
 }
-select[multiple]:focus {
+form select[multiple]:focus {
   color: #c9c9c9;
 }
 .button, .button:visited {
@@ -1472,7 +1478,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 .sided-main-content .fieldless .button {
   left: 0;
 }
-.sided-main-content label {
+.sided-main-content > form p label {
   height: 16px;
   text-align: right;
   width: 150px;

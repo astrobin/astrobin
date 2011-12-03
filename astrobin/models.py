@@ -231,6 +231,15 @@ class Image(models.Model):
         (4, '4x4'),
     )
 
+    SOLVE_CHOICES = (
+        (0, _("I don't want this image plate-solved.")),
+        (1, _("This is not a deep sky image, don't plate-solve it.")),
+        (2, _("I have no idea about the size of field, try a blind solve.")),
+        (3, _("This is a very wide field image (more than 10 degrees).")),
+        (4, _("This is a wide field image (1 to 10 degrees).")),
+        (5, _("This ia narrow field image (less than 1 degree).")),
+    )
+
     title = models.CharField(
         max_length = 128,
         verbose_name = _("Title"),
@@ -242,8 +251,6 @@ class Image(models.Model):
         Location,
     )
     description = models.TextField(
-        null = True,
-        blank = True,
         verbose_name = _("Description"),
     )
     link = models.CharField(
@@ -256,6 +263,12 @@ class Image(models.Model):
     original_ext = models.CharField(max_length=6, editable=False)
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
+
+    presolve_information = models.IntegerField(
+        default = 0,
+        choices = SOLVE_CHOICES,
+        verbose_name = "",
+    )
 
     focal_length = models.IntegerField(
         null = True,
