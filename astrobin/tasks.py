@@ -178,7 +178,6 @@ def solve_image(image, lang, use_scale=True, callback=None):
                '', '',
                '', '',
                '--objs', '100',
-               '--downsample', '2',
                '--continue',
                '--no-plot',
                path + uid + original_ext]
