@@ -1,4 +1,11 @@
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
+.foreground-gradient {
+  border: 1px solid #b8b8b8;
+  background: #fcfcfc;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#d2d2d2));
+  background: -moz-linear-gradient(top, #fcfcfc, #d2d2d2);
+  color: #333333;
+}
 .background-gradient {
   border: 1px solid #222222;
   border-top: 1px solid #292929;
@@ -2337,7 +2344,29 @@ p.error {
 }
 .pagination {
   text-align: center;
-  margin-top: 8px;
+  margin-top: 16px;
+}
+.pagination .page, .pagination .current {
+  display: inline-block;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #b8b8b8;
+  background: #fcfcfc;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#d2d2d2));
+  background: -moz-linear-gradient(top, #fcfcfc, #d2d2d2);
+  color: #333333;
+  padding: 0;
+}
+.pagination .page a, .pagination .current a {
+  display: block;
+  padding: 8px 4px;
+}
+.pagination .current {
+  padding: 12px;
 }
 .hello {
   margin: 8px 40px;
@@ -2459,18 +2488,6 @@ table.title td.license {
 table.leaderboard {
   padding: 0 28px;
   width: 100%;
-}
-.pager {
-  padding-top: 16px;
-}
-.pager .page a {
-  padding-left: 4px;
-  padding-right: 4px;
-  text-decoration: none;
-}
-.pager .current {
-  padding-left: 4px;
-  padding-right: 4px;
 }
 /* Zinnia stuff */
 .hentry {

@@ -45,6 +45,13 @@
 @headers_font: "Droid Sans";
 @regular_font: "Droid Sans";
 
+.foreground-gradient {
+    border: 1px solid @text-color;
+    background: @strong-text-color;
+    background: -webkit-gradient(linear, left top, left bottom, from(@strong-text-color), to(@strong-text-color / @hilight-factor));
+    background: -moz-linear-gradient(top, @strong-text-color, @strong-text-color / @hilight-factor);
+    color: @background-color;}
+
 .background-gradient {
     border: 1px solid @border-color;
     border-top: 1px solid (@border-color * @hilight-factor);
@@ -2130,7 +2137,22 @@ p.error {
 
 .pagination {
     text-align: center;
-    margin-top: @spacer-medium;}
+    margin-top: @spacer-xlarge;
+    .page, .current {
+        display: inline-block;
+        .box-shadow;
+        .rounded-corners(4px);
+        .foreground-gradient;
+        padding: 0;
+        a {
+            display: block;
+            padding: @spacer-medium @spacer-small;
+        }
+    }
+    .current {
+        padding: @spacer-large;
+    }
+}
 
 .hello {
     margin: @spacer-medium 40px;
@@ -2244,19 +2266,6 @@ table.title {
 table.leaderboard {
     padding: 0 @spacer-xxlarge;
     width: 100%;}
-
-.pager {
-  padding-top: @spacer-xlarge;
-  }
-.pager .page a {
-  padding-left: @spacer-small;
-  padding-right: @spacer-small;
-  text-decoration: none;
-  }
-.pager .current {
-  padding-left: @spacer-small;
-  padding-right: @spacer-small;
-  }
 
 
 /* Zinnia stuff */
