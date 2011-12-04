@@ -5,16 +5,18 @@
 {% block title %}AstroBin - {{user}}{% endblock %}
 {% block content %}
     <a name="page_anchor"></a>
-    <div class="full-box clear">
-        <h2 class="inline profile">
+    <div class="full-box clear profile">
+        <h1 class="inline profile">
             {% ifequal user request.user %}
                 {% blocktrans %}View your images{% endblocktrans %}
             {% else %}
                 {% blocktrans with user.username as username %}View {{username}}'s images:{% endblocktrans %}
             {% endifequal %}
-        </h2>
+        </h1>
+
         {% ifequal user request.user %}
-        <span class="album-links">
+        <span class="area-selection">
+        (
             {% if section == 'public' %}
                 {% trans "Public Area" %}
             {% else %}
@@ -26,28 +28,17 @@
             {% else %}
                 <a href="?staging">{% trans "Staging Area" %}</a>
             {% endif %}
+        )
         </span>
         {% endifequal %}
-        <div class="fix"></div>
-        {% ifequal user request.user %}
-        <p>
-            <strong>
-            {% if section == 'public' %}
-                {% blocktrans %}These are your public images: everybody can see them.{% endblocktrans %}
-            {% endif %}
-            {% if section == 'staging' %}
-                {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
-            {% endif %}
-            </strong>
-        </p>
-        {% endifequal %}
 
-        {% if request.user != user and request.user.is_authenticated %}
+        {% if section == 'public' %}
         <ul class="bar">
             <li id="menu">
                 <ul class="topnav">
-                    <li id="user" class="first last">
-                        <span class="text"><a href="#">{% trans "User" %}</a></span>
+                    {% if request.user != user and request.user.is_authenticated %}
+                    <li id="user" class="first">
+                        <span class="text"><a href="#">{% trans "User menu" %}</a></span>
                         <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                         <div class="sub">
                             <ul class="subnav">
@@ -69,43 +60,52 @@
                             </ul>
                         </div>
                     </li>
+                    {% endif %}
+                    <li id="sort" class="last">
+                        <span class="text"><a href="#">{% trans "Sort images by" %}</a></span>
+                        <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
+                        <div class="sub">
+                            <ul class="subnav">
+                                <li>
+                                    <span class="text">
+                                        <a href="?public&sub=uploaded">{% trans "Recently uploaded" %}</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="text">
+                                        <a href="?public&sub=subject">{% trans "By subject type" %}</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="text">
+                                        <a href="?public&sub=year">{% trans "By year" %}</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="text">
+                                        <a href="?public&sub=gear">{% trans "By gear" %}</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="text">
+                                        <a href="?public&sub=nodata">{% trans "Lacking data" %}</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </li>
         </ul>
         {% endif %}
-        {% ifequal section 'public' %}
-            <span class="album-links">
-                {% if subsection == 'uploaded' %}
-                    {% trans "Recently uploaded" %}
-                {% else %}
-                    <a href="?public&sub=uploaded">{% trans "Recently uploaded" %}</a>
-                {% endif %}
-                |
-                {% if subsection == 'subject' %}
-                    {% trans "By subject type" %}
-                {% else %}
-                    <a href="?public&sub=subject">{% trans "By subject type" %}</a>
-                {% endif %}
-                |
-                {% if subsection == 'year' %}
-                    {% trans "By year" %}
-                {% else %}
-                    <a href="?public&sub=year">{% trans "By year" %}</a>
-                {% endif %}
-                |
-                {% if subsection == 'gear' %}
-                    {% trans "By gear" %}
-                {% else %}
-                    <a href="?public&sub=gear">{% trans "By gear" %}</a>
-                {% endif %}
-                |
-                {% if subsection == 'nodata' %}
-                    {% trans "Lacking data" %}
-                {% else %}
-                    <a href="?public&sub=nodata">{% trans "Lacking data" %}</a>
-                {% endif %}
-            </span>
-        {% endifequal %}
+        <div class="fix"></div>
+        <hr/>
+
+        {% if user == request.user and section == 'staging' %}
+        <p>
+            {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
+        </p>
+        {% endif %}
 
         <div class="album">
             {% if section == 'public' and not image_list %}

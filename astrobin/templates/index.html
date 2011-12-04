@@ -53,7 +53,7 @@
     {% endif %}<!-- authenticated -->
 
     <a name="page_anchor"></a>
-    <div class="full-box clear">
+    <div class="full-box clear index">
         <h2 class="inline">{% trans "Recent images" %}</h2>
         <span class="album-links">
             {% trans "Sort by:" %}
@@ -76,7 +76,7 @@
             {% endif %}
 
         </span>
-
+        <hr/>
         {% search_image_list request image_list %}
     </div>
 {% endblock %}
