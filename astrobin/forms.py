@@ -240,7 +240,7 @@ class AdvancedSearchForm(SearchForm):
                 if self.load_all:
                     sqs = sqs.load_all()
             else:
-                sqs = super(AdvancedSearchForm, self).search()
+                sqs = super(AdvancedSearchForm, self).search().models(Image)
 
             if self.cleaned_data['start_date']:
                 sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
