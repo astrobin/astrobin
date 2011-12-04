@@ -3,10 +3,9 @@
 
 <div class="thumbnail-list clear">
 {% for search_result in image_list %}
-    {% if search_result.object.is_stored %}
     <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
         <a href="{% url image_detail search_result.object.id %}">
-            <img src="{% if search_result.object.is_stored %}http://astrobin_images.{{s3_url}}/{{search_result.object.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
+            <img src="http://astrobin_images.{{s3_url}}/{{search_result.object.filename}}_thumb.png"
                  class="capty thumbnail"
                  name="#capty-content-{{search_result.object.id}}"
                  alt="{{search_result.object.title|default:_("(no title)")}}"
@@ -45,7 +44,6 @@
             {% endwith %}
         </div>
     </div>
-    {% endif %}
 {% empty %}
 <p>{% trans "No images" %}.</p>
 {% endfor %}
