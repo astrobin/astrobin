@@ -93,12 +93,12 @@
                                id="q"
                                type="text"
                                name="q"
-                               value="{% trans "Search" %}"
+                               value="{% trans "Quick search" %}"
                                title="{% trans "Start typing and hit ENTER" %}"
                                onfocus="common.clearText(this)"
                                onblur="common.clearText(this)"/>
-                        <input class="btn" alt="{% trans "Search" %}" type="image"
-                               name="searchsubmit" title="{% trans "Search" %}"
+                        <input class="btn" alt="{% trans "Quick search" %}" type="image"
+                               name="searchsubmit" title="{% trans "Quick search" %}"
                                src="/static/icons/iconic/white/magnifying_glass_16x16.png"/>
                         </p>
                     </form>
@@ -124,6 +124,7 @@
                         <ul>
                             <li id="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
                             <li id="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
+                            <li id="{% current request "^/search/$" %}"><a href="{% url haystack_search %}">{% trans "Search" %}</a></li>
                             {% if request.user.is_authenticated %}
                             <li id="{% current request "^/leaderboard/$" %}"><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
                             {% endif %}
@@ -252,6 +253,8 @@
                         <p>
                             <ul>
                                 <li><a href="{% url index %}">{% trans "Home" %}</a></li>
+                                <li><a href="/blog/">{% trans "Blog" %}</a></li>
+                                <li><a href="{% url haystack_search %}">{% trans "Search" %}</a></li>
                                 {% if request.user.is_authenticated %}
                                 <li><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
                                 {% endif %}

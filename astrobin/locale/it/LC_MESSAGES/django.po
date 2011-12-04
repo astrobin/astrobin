@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-04 09:11-0500\n"
-"PO-Revision-Date: 2011-12-04 09:11-0500\n"
+"POT-Creation-Date: 2011-12-04 11:40-0500\n"
+"PO-Revision-Date: 2011-12-04 11:40-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -596,7 +596,7 @@ msgstr "Date"
 
 #: views.py:323
 #: templates/inclusion_tags/search_image_list.html:17
-#: templates/search/search.html:48
+#: templates/search/search.html:23
 msgid "Integration"
 msgstr "Integrazione"
 
@@ -759,9 +759,8 @@ msgstr "Finlandese"
 #: templates/base.html:96
 #: templates/base.html.py:100
 #: templates/base.html:101
-#: templates/search/search.html:11
-msgid "Search"
-msgstr "Cerca"
+msgid "Quick search"
+msgstr "Ricerca veloce"
 
 #: templates/base.html:97
 msgid "Start typing and hit ENTER"
@@ -777,155 +776,162 @@ msgid "Hello, <a href=\"%(user_page)s\">%(username)s.</a>"
 msgstr "Ciao, <a href=\"%(user_page)s\">%(username)s.</a>"
 
 #: templates/base.html:125
-#: templates/base.html.py:254
-#: templates/base.html:295
+#: templates/base.html.py:255
+#: templates/base.html:298
 msgid "Home"
 msgstr "Home"
 
 #: templates/base.html:126
+#: templates/base.html.py:256
 msgid "Blog"
 msgstr "Blog in English"
 
-#: templates/base.html:128
-#: templates/base.html.py:256
+#: templates/base.html:127
+#: templates/base.html.py:257
+#: templates/search/search.html:12
+msgid "Search"
+msgstr "Cerca"
+
+#: templates/base.html:129
+#: templates/base.html.py:259
 #: templates/leaderboard.html:5
 #: templates/leaderboard.html.py:8
 msgid "Leaderboard"
 msgstr "Classifica"
 
-#: templates/base.html:130
-#: templates/base.html.py:258
+#: templates/base.html:131
+#: templates/base.html.py:261
 msgid "Nightly"
 msgstr "Notte dopo notte"
 
-#: templates/base.html:131
-#: templates/base.html.py:259
+#: templates/base.html:132
+#: templates/base.html.py:262
 #: templates/help.html:4
 msgid "Help"
 msgstr "Aiuto"
 
-#: templates/base.html:132
-#: templates/base.html.py:260
+#: templates/base.html:133
+#: templates/base.html.py:263
 #: templates/faq.html:4
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/base.html:145
+#: templates/base.html:146
 msgid "View your profile"
 msgstr "Vedi il tuo profilo"
 
-#: templates/base.html:148
+#: templates/base.html:149
 msgid "Edit your profile"
 msgstr "Modifica il tuo profilo"
 
-#: templates/base.html:151
+#: templates/base.html:152
 msgid "Upload an image"
 msgstr "Carica un'immagine"
 
-#: templates/base.html:151
+#: templates/base.html:152
 msgid "Upload!"
 msgstr "Carica!"
 
-#: templates/base.html:154
+#: templates/base.html:155
 #: templates/user/profile.html:163
 #: templates/user/profile.html.py:166
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.html:161
-#: templates/base.html.py:162
+#: templates/base.html:162
+#: templates/base.html.py:163
 msgid "Notifications"
 msgstr "Notifiche"
 
-#: templates/base.html:168
-#: templates/base.html.py:169
+#: templates/base.html:169
+#: templates/base.html.py:170
 msgid "Messages"
 msgstr "Messaggi"
 
-#: templates/base.html:175
-#: templates/base.html.py:176
+#: templates/base.html:176
+#: templates/base.html.py:177
 msgid "Requests"
 msgstr "Richieste"
 
-#: templates/base.html:186
+#: templates/base.html:187
 msgid "Have an invite? Login!"
 msgstr "Hai un invito? Fai il login!"
 
-#: templates/base.html:188
+#: templates/base.html:189
 #: templates/registration/activation_complete.html:5
 msgid "Login"
 msgstr "Login"
 
-#: templates/base.html:194
+#: templates/base.html:195
 #: templates/registration/login.html:8
 msgid "Register"
 msgstr "Registrati"
 
-#: templates/base.html:216
-#: templates/base.html.py:226
+#: templates/base.html:217
+#: templates/base.html.py:227
 msgid "Error"
 msgstr "Errore"
 
-#: templates/base.html:218
+#: templates/base.html:219
 #: templates/image/detail.html:16
 msgid "Info"
 msgstr "Informazione"
 
-#: templates/base.html:228
+#: templates/base.html:229
 msgid "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida o nessuna immagine. I formati accettati sono JPG, PNG e GIF."
 
-#: templates/base.html:245
+#: templates/base.html:246
 msgid "About"
 msgstr "Informazioni"
 
-#: templates/base.html:247
+#: templates/base.html:248
 msgid "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers."
 msgstr "AstroBin è un sito di hosting d'immagini pensato specificamente per gli astrofotografi: è il posto finale dove caricare le proprie immagini. Fatto da un astrofotografo, per gli astrofotografi."
 
-#: templates/base.html:251
+#: templates/base.html:252
 msgid "Site links"
 msgstr "Link del sito"
 
-#: templates/base.html:261
+#: templates/base.html:264
 #: templates/tos.html:6
 msgid "Terms of Service"
 msgstr "Condizioni d'uso"
 
-#: templates/base.html:266
+#: templates/base.html:269
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/base.html:275
+#: templates/base.html:278
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:277
+#: templates/base.html:280
 msgid "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
 msgstr "AstroBin è Copyright &copy; 2011 Salvatore Iovene, Tutti i Diritti Riservati. Le immagini su questo sito sono copyright dei loro rispettivi proprietari."
 
-#: templates/base.html:296
+#: templates/base.html:299
 msgid "Follow AstroBin on Twitter"
 msgstr "Segui AstroBin su Twitter"
 
-#: templates/base.html:297
+#: templates/base.html:300
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/base.html:311
+#: templates/base.html:314
 msgid "Feedback"
 msgstr "Feedback"
 
-#: templates/base.html:322
+#: templates/base.html:325
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:392
+#: templates/base.html:395
 #: templates/image/detail.html:572
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:393
+#: templates/base.html:396
 #: templates/image/detail.html:573
 msgid "Choose file"
 msgstr "Scegli file"
@@ -1171,7 +1177,7 @@ msgstr "Acquisizione"
 
 #: templates/index.html:73
 #: templates/index.html.py:75
-#: templates/search/search.html:49
+#: templates/search/search.html:24
 msgid "Views"
 msgstr "Più viste"
 
@@ -2413,54 +2419,26 @@ msgstr "Farlo adesso?"
 msgid "You have no requests."
 msgstr "Non hai richieste."
 
-#: templates/search/search.html:8
-msgid "Show/hide advanced search box."
-msgstr "Mostra/nascondi il modulo di ricerca avanzata."
-
 #: templates/search/search.html:19
-msgid "Images matching"
-msgstr "Immagini trovate"
-
-#: templates/search/search.html:21
-msgid "All images"
-msgstr "Tutte le immagini"
-
-#: templates/search/search.html:23
-msgid "(acquired with the selected telescopes or cameras)"
-msgstr "(acquisiti con i telescopi o le camere selezionate)"
-
-#: templates/search/search.html:28
-msgid "acquired on"
-msgstr "Acquisita il"
-
-#: templates/search/search.html:31
-msgid "acquired after"
-msgstr "acquisita dopo il"
-
-#: templates/search/search.html:33
-msgid "and before"
-msgstr "e prima del"
-
-#: templates/search/search.html:37
-msgid "acquired before"
-msgstr "acquisita prima del"
-
-#: templates/search/search.html:44
 msgid "Sort these images by:"
 msgstr "Ordina queste immagini per:"
 
-#: templates/search/search.html:45
+#: templates/search/search.html:20
 msgid "Relevance"
 msgstr "Rilevanza"
 
-#: templates/search/search.html:46
+#: templates/search/search.html:21
 #: templates/user/profile.html:71
 msgid "Upload time"
 msgstr "Data di caricamento"
 
-#: templates/search/search.html:47
+#: templates/search/search.html:22
 msgid "Rating"
 msgstr "Voto"
+
+#: templates/search/search.html:28
+msgid "Please input some search terms!"
+msgstr "Inserisci qualche termine di ricerca!"
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
@@ -2660,6 +2638,30 @@ msgstr "Scegli la lingua usata per questo sito:"
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
 msgstr "Seleziona quali notifiche preferisci ricevere anche come e-mail:"
+
+#~ msgid "Show/hide advanced search box."
+#~ msgstr "Mostra/nascondi il modulo di ricerca avanzata."
+
+#~ msgid "Images matching"
+#~ msgstr "Immagini trovate"
+
+#~ msgid "All images"
+#~ msgstr "Tutte le immagini"
+
+#~ msgid "(acquired with the selected telescopes or cameras)"
+#~ msgstr "(acquisiti con i telescopi o le camere selezionate)"
+
+#~ msgid "acquired on"
+#~ msgstr "Acquisita il"
+
+#~ msgid "acquired after"
+#~ msgstr "acquisita dopo il"
+
+#~ msgid "and before"
+#~ msgstr "e prima del"
+
+#~ msgid "acquired before"
+#~ msgstr "acquisita prima del"
 
 #~ msgid "previous month"
 #~ msgstr "mese precedente"
