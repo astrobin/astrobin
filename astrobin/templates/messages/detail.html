@@ -7,8 +7,8 @@
 </div>
 <div class="sided-main-content">
     <div class="message{% if message.tags %} {{ message.tags }}{% endif %}">
-        {% if message.subject %}<h2>{{ message.subject|escape }}</h2>{% endif %}
-        <p>
+        {% if message.subject %}<h1>{{ message.subject|escape }}</h1>{% endif %}
+        <span>
             {{message.created|date:"D, d M. Y"}} {% trans "at" %} {{message.created|date:"H:i"}}
             {% if message.from_user %}
                 ,&nbsp;{% trans "from" %}
@@ -16,9 +16,9 @@
                     {{message.from_user}}
                 </a>
             {% endif %}
-        </p>
+        </span>
         <p class="body">{{ message.message|escape}}</p>
-        <h3>{% trans "Reply" %}</h3>
+        <h2>{% trans "Reply" %}</h2>
         <form id="private-message" action="{% url messages_save %}" method="post">{% csrf_token %}
             {{private_message_form.as_p}}
             <input type="hidden" name="to_user" value="{{message.from_user}}"/>

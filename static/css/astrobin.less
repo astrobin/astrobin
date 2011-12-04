@@ -879,8 +879,9 @@ body {
     text-align: left;}
 
 hr {
-    color: @border-color;
-    background-color: @border-color;}
+    border: 0;
+    height: 1px;
+    background-color: @border-bottom-color;}
 
 /* links */
 a, a:visited {
@@ -895,20 +896,41 @@ a:hover.danger {
 
 /* headers */
 h1, h2, h3, h4 {
-    margin: 20px 10px 20px 6px;
-    padding-bottom: 10px; 
+    padding: @spacer-medium 0 @spacer-small 0;
     font-family: @headers_font, Georgia, Times New Roman, serif;
     font-weight: bold;
     color: @header-color;
     .text-shadow;}
-h1 { font-size: 2em; border-bottom: 1px solid @border-bottom-color;}
-h2 { font-size: 1.5em; border-bottom: 1px solid @border-bottom-color;}
-h3 { font-size: 1.25em; }
-h4 { font-size: 1em; }
+
+h1 {
+    margin-bottom: @spacer-xlarge;
+    font-size: 2em;
+    border-bottom: 1px solid @border-bottom-color;
+}
+
+h2 {
+    margin-bottom: @spacer-medium;
+    font-size: 1.5em;
+    border-bottom: 1px solid @border-bottom-color;
+}
+
+h3 {
+    margin-bottom: @spacer-small;
+    font-size: 1.25em;
+}
+
+h4 {
+    font-size: 1em;
+}
 
 h2.inline {
     margin-right: @spacer-large;
     display: inline-block; }
+
+.index h2 {
+    border: 0;
+    margin-bottom: 0;
+}
 
 /* Lists */
 ul, ol {
@@ -970,7 +992,7 @@ form {
         font-style: italic;
         font-size: 87.5%;
         width: 70%;
-        margin-left: 162px;
+        margin-left: 170px;
         display: block;
         color: @text-color / @strong-hilight-factor;}
     label {
@@ -983,7 +1005,7 @@ form {
     ul {
         list-style: none;
         margin: 0;
-        padding: @spacer-small * 1.5;
+        padding: @spacer-small 0;
         li {
             display: inline-block;
             margin-right: 15px;
@@ -1453,7 +1475,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .box-shadow;
     margin-bottom: 40px;
     .submit-button {
-        margin-left: 162px;
+        margin-left: 170px;
         width:200px;}
     .lone-button {
         margin: 0 auto;
@@ -1466,7 +1488,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         .button{
             left: 0;}
     }
-    > form p label {
+    form p label {
         height: @spacer-xlarge;
         text-align: right;
         width: 150px;}
@@ -1565,7 +1587,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         padding: @spacer-small 0;
         display: block;}}
 
-ul.bar {
+.bar_mixin {
     list-style: none;
     margin: 0 0 @spacer-xxlarge 0;
     padding: 0;
@@ -1575,6 +1597,30 @@ ul.bar {
         padding-top: @spacer-small;
         text-align: right;
         float: right;}}
+
+ul.bar {
+    .bar_mixin();
+}
+
+.profile {
+    ul.bar {
+        .bar_mixin();
+        float: right;
+        margin: @spacer-medium @spacer-large 0 0;
+    }
+    h1 {
+        margin-bottom: @spacer-medium;
+        float: left;
+        border: none;
+    }
+    .area-selection {
+        float: left;
+        padding-top: @spacer-medium;
+        margin-left: @spacer-large;
+    }
+
+}
+    
 ul.topnav {
     list-style: none;
     margin: 0;
@@ -1783,8 +1829,7 @@ span.copy-box {
     background-color: @light-panel-color;
     .rounded-corners;
     h3 {
-        display: inline-block;
-        border-bottom: 1px solid (@light-panel-color * @strong-hilight-factor);}
+        display: inline-block;}
     .gear, .acquisition {
         float: left;
         width: 48%;
@@ -1800,11 +1845,7 @@ span.copy-box {
         display: block;
         border-top: 1px solid (@light-panel-color * @hilight-factor);}
     p {
-        margin: 2px 0;}
-    hr {
-        border: 0;
-        color: @light-panel-color * @hilight-factor;
-        background-color: @light-panel-color * @hilight-factor;}}
+        margin: 2px 0;}}
 
 /* footer */
 #footer {
@@ -2249,15 +2290,14 @@ table.leaderboard {
 
 .album-links {
     float: right;
+    font-size: 0.9em;
+    padding: @spacer-medium @spacer-xlarge 0 0;
 }
 .album {
-    margin-top: @spacer-xxlarge*1.5;
+    margin-top: @spacer-large;
     h4 {
         display: inline-block;
     }
-}
-h2.profile {
-    margin-bottom: @spacer-medium;
 }
 
 p.help {
