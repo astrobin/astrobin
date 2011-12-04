@@ -4,43 +4,18 @@
 {% load tags %}
 
 {% block content %}
+
+<a name="page_anchor"></a>
 <div class="full-box advanced-search-box">
-    <p><a href="#" onclick="common.showHideAdvancedSearch()">{% trans "Show/hide advanced search box." %}</a></p>
-    <form id="advanced_search" method="get" action="{% url haystack_search %}">
+    <form method="get" action="{% url haystack_search %}">
         {{form.as_p}}
         <input class="button submit-button" type="submit" value="{% trans "Search" %} &rarr;" />
     </form>
 </div>
 
-<a name="page_anchor"></a>
 <div id="search-results" class="full-box clear search">
-    <h2 class="inline">
-        {% if query %}
-            {% trans "Images matching" %} <em>"{{query}}"</em>
-        {% else %}
-            {% trans "All images" %}
-            {% if request.GET.as_values_imaging_telescopes or request.GET.as_values_imaging_cameras %}
-                &nbsp;{% trans "(acquired with the selected telescopes or cameras)" %}
-            {% endif %}
-        {% endif %}
-
-        {% if 'start_date' in request.GET and 'end_date' in request.GET and request.GET.start_date != '' and request.GET.end_date != '' and request.GET.start_date == request.GET.end_date %}
-            &nbsp;{% trans "acquired on" %} {{request.GET.start_date|string_to_date|date:"DATE_FORMAT"}}
-        {% else %}
-            {% if 'start_date' in request.GET and request.GET.start_date != '' %}
-                &nbsp;{% trans "acquired after" %} {{request.GET.start_date|string_to_date|date:"DATE_FORMAT"}}
-                {% if 'end_date' in request.GET and request.GET.end_date != '' %}
-                    &nbsp;{% trans "and before" %} {{request.GET.end_date|string_to_date|date:"DATE_FORMAT"}}
-                {% endif %}
-            {% else %}
-                {% if 'end_date' in request.GET and request.GET.end_date != '' %}
-                    &nbsp;{% trans "acquired before" %} {{request.GET.end_date|string_to_date|date:"DATE_FORMAT"}}
-                {% endif %}
-            {% endif %}
-        {% endif %}
-    </h2>
-
-    <div class="album-links">
+    {% if 'q' in request.GET %}
+    <div class="search-links">
             {% trans "Sort these images by:" %}&nbsp;
             <a href="/search/{% query_string "" "sort" %}">{% trans "Relevance" %}</a>&nbsp;|&nbsp;
             <a href="/search/{% query_string "sort='-uploaded'" "" %}">{% trans "Upload time" %}</a>&nbsp;|&nbsp;
@@ -48,9 +23,10 @@
             <a href="/search/{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>&nbsp;|&nbsp;
             <a href="/search/{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
     </div>
-    <hr />
     {% search_image_list request page.object_list %}
-
+    {% else %}
+    <p class="noterms">{% blocktrans %}Please input some search terms!{% endblocktrans %}</p>
+    {% endif %}
 </div>
 {% endblock %}
 

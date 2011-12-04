@@ -1260,6 +1260,7 @@ ul.as-selections {
         input {
             border: none;
             outline: none;
+            font-size: 87.5%;
             width: 458px;
             height: 18px;
             padding-top: 3px;
@@ -1580,7 +1581,58 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin: 0 auto;}
 
 .advanced-search-box {
-    padding: @spacer-small @spacer-xxlarge;}
+    float: left;
+    width: 272px;
+    height: 964px;
+    padding: @spacer-small @spacer-xxlarge;
+    form {
+        p {
+            padding: 0;
+        }
+        .helptext {
+            margin-left: 0;
+            width: 100%;
+        }
+        label {
+            float: none;
+            text-indent: 0;
+            text-align: left;
+            width: auto;
+        }
+        input {
+            width: 100%;
+        }
+        ul.as-selections {
+            width: 100%;
+        }
+        li.as-original {
+            width: 95%;
+            input {
+                width: 100%;
+            }
+        }
+        ul.as-list {
+            margin-left: 0;
+        }
+        .submit-button {
+            margin-left: 0;
+            margin-top: 52px;
+            width: 100%;
+        }
+    }
+}
+
+#search-results {
+    float: right;
+    width: 548px;
+    height: 964px;
+    padding: @spacer-small @spacer-xxlarge;
+    .noterms {
+        text-align: center;
+        padding: @spacer-medium;
+        font-style: italic;
+    }
+}
 
 .tools-box {
     .full-box;
@@ -2101,9 +2153,6 @@ margin-left: 20px;}
     font-weight: normal;
     text-shadow: 0px 0px 1px @background-color;}
 
-form#advanced_search {
-    display: none;}
-
 form.upload input {
     width: auto;}
 
@@ -2137,7 +2186,7 @@ p.error {
 
 .pagination {
     text-align: center;
-    margin-top: @spacer-xlarge;
+    margin: @spacer-xlarge 0 @spacer-large 0;
     .page, .current {
         display: inline-block;
         .box-shadow;
@@ -2301,6 +2350,12 @@ table.leaderboard {
     float: right;
     font-size: 0.9em;
     padding: @spacer-medium @spacer-xlarge 0 0;
+}
+.search-links {
+    .album-links;
+    float:none;
+    text-align: center;
+    padding: @spacer-medium;
 }
 .album {
     margin-top: @spacer-large;

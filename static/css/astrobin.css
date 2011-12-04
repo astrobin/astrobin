@@ -1226,6 +1226,7 @@ ul.as-selections li.as-original {
 ul.as-selections li.as-original input {
   border: none;
   outline: none;
+  font-size: 87.5%;
   width: 458px;
   height: 18px;
   padding-top: 3px;
@@ -1627,7 +1628,54 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   margin: 0 auto;
 }
 .advanced-search-box {
+  float: left;
+  width: 272px;
+  height: 964px;
   padding: 4px 28px;
+}
+.advanced-search-box form p {
+  padding: 0;
+}
+.advanced-search-box form .helptext {
+  margin-left: 0;
+  width: 100%;
+}
+.advanced-search-box form label {
+  float: none;
+  text-indent: 0;
+  text-align: left;
+  width: auto;
+}
+.advanced-search-box form input {
+  width: 100%;
+}
+.advanced-search-box form ul.as-selections {
+  width: 100%;
+}
+.advanced-search-box form li.as-original {
+  width: 95%;
+}
+.advanced-search-box form li.as-original input {
+  width: 100%;
+}
+.advanced-search-box form ul.as-list {
+  margin-left: 0;
+}
+.advanced-search-box form .submit-button {
+  margin-left: 0;
+  margin-top: 52px;
+  width: 100%;
+}
+#search-results {
+  float: right;
+  width: 548px;
+  height: 964px;
+  padding: 4px 28px;
+}
+#search-results .noterms {
+  text-align: center;
+  padding: 8px;
+  font-style: italic;
 }
 .tools-box {
   width: 880px;
@@ -2300,9 +2348,6 @@ p.info strong {
   font-weight: normal;
   text-shadow: 0px 0px 1px #333333;
 }
-form#advanced_search {
-  display: none;
-}
 form.upload input {
   width: auto;
 }
@@ -2344,7 +2389,7 @@ p.error {
 }
 .pagination {
   text-align: center;
-  margin-top: 16px;
+  margin: 16px 0 12px 0;
 }
 .pagination .page, .pagination .current {
   display: inline-block;
@@ -2519,6 +2564,14 @@ table.leaderboard {
   float: right;
   font-size: 0.9em;
   padding: 8px 16px 0 0;
+}
+.search-links {
+  float: right;
+  font-size: 0.9em;
+  padding: 8px 16px 0 0;
+  float: none;
+  text-align: center;
+  padding: 8px;
 }
 .album {
   margin-top: 12px;

@@ -210,7 +210,6 @@ var common = {
     },
 
     showHideAdvancedSearch: function() {
-        $('form#advanced_search').slideToggle('slow');
     },
 
     init_ajax_csrf_token: function() {
