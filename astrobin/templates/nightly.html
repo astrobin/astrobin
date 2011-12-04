@@ -9,6 +9,7 @@
     <p class="help">
         {% blocktrans %}On this page you can see images that were actually taken each night, and not merely uploaded on a particular date.{% endblocktrans %}
     </p>
+    <h2>{{current_month_label|date:"F Y"}}</h2>
     {% for day in daily %}
         {% for title, images in day.items %}
             {% if images %}
@@ -31,12 +32,12 @@
             </span>
             |
             <span class="page">
-                <a href="{% query_string "month_offset=previous_month" "" %}#page_anchor">&laquo; {% trans "previous month" %}</a>
+                <a href="{% query_string "month_offset=previous_month" "" %}#page_anchor">&laquo; {{previous_month_label|date:"F Y"}}</a>
             </span>
             |
             {% endif %}
             <span class="page">
-                <a href="{% query_string "month_offset=next_month" "" %}#page_anchor">{% trans "next month" %} &raquo;</a>
+                <a href="{% query_string "month_offset=next_month" "" %}#page_anchor">{{next_month_label|date:"F Y"}} &raquo;</a>
             </span>
         </div>
     </div>
