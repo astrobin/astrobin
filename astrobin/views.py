@@ -2119,5 +2119,8 @@ def nightly(request):
             'month_offset': month_offset,
             'previous_month': month_offset - 1,
             'next_month': month_offset + 1,
+            'current_month_label': start,
+            'previous_month_label': monthdelta(start, 1),
+            'next_month_label': monthdelta(start, -1)
         })
 

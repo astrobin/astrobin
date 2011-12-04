@@ -733,6 +733,8 @@ h1,
 h2,
 h3,
 h4 {
+  margin: 20px 10px 20px 6px;
+  padding-bottom: 10px;
   font-family: "Droid Sans", Georgia, Times New Roman, serif;
   font-weight: bold;
   color: #fcfcfc;
@@ -740,23 +742,17 @@ h4 {
 }
 h1 {
   font-size: 2em;
-  margin: 20px 10px 20px 6px;
-  padding-bottom: 10px;
   border-bottom: 1px solid #666666;
 }
 h2 {
   font-size: 1.5em;
-  margin-bottom: 15px;
-  padding-bottom: 8px;
   border-bottom: 1px solid #666666;
 }
 h3 {
   font-size: 1.25em;
-  margin: 20px 0 10px 0;
 }
 h4 {
   font-size: 1em;
-  margin: 10px 0 8px 0;
 }
 h2.inline {
   margin-right: 12px;
