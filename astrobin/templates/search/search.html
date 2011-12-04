@@ -13,8 +13,8 @@
 </div>
 
 <a name="page_anchor"></a>
-<div id="search-results" class="full-box clear">
-    <h2>
+<div id="search-results" class="full-box clear search">
+    <h2 class="inline">
         {% if query %}
             {% trans "Images matching" %} <em>"{{query}}"</em>
         {% else %}
@@ -40,7 +40,7 @@
         {% endif %}
     </h2>
 
-    <div class="sort">
+    <div class="album-links">
             {% trans "Sort these images by:" %}&nbsp;
             <a href="/search/{% query_string "" "sort" %}">{% trans "Relevance" %}</a>&nbsp;|&nbsp;
             <a href="/search/{% query_string "sort='-uploaded'" "" %}">{% trans "Upload time" %}</a>&nbsp;|&nbsp;
@@ -48,7 +48,7 @@
             <a href="/search/{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>&nbsp;|&nbsp;
             <a href="/search/{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
     </div>
-
+    <hr />
     {% search_image_list request page.object_list %}
 
 </div>

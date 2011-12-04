@@ -768,7 +768,7 @@ h2.inline {
   margin-right: 12px;
   display: inline-block;
 }
-.index h2 {
+.index h2, .search h2 {
   border: 0;
   margin-bottom: 0;
 }
