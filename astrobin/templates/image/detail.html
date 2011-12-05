@@ -46,7 +46,7 @@
                                         </strong>
                                     </li>
                                     </noscript>
-                                {% if request.user == image.user %}
+                                {% if request.user == image.user or request.user.is_superuser %}
                                     <li class="first bg-icon icon-edit">
                                         <span class="text"><a href="{% url image_edit_basic image.id %}">{% trans "Edit basic information" %}</a></span>
                                     </li>

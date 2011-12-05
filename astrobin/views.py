@@ -536,7 +536,7 @@ def image_edit_presolve(request, id):
 @require_GET
 def image_edit_basic(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     subjects =  u', '.join(x.mainId for x in image.subjects.all())
@@ -570,7 +570,7 @@ def image_edit_basic(request, id):
 def image_edit_gear(request, id):
     profile = UserProfile.objects.get(user=request.user)
     image = Image.objects.get(pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     no_gear = True
@@ -595,7 +595,7 @@ def image_edit_gear(request, id):
 @require_GET
 def image_edit_acquisition(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
@@ -657,7 +657,7 @@ def image_edit_acquisition(request, id):
 @require_GET
 def image_edit_acquisition_reset(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     DeepSky_Acquisition.objects.filter(image=image).delete()
@@ -677,7 +677,7 @@ def image_edit_acquisition_reset(request, id):
 @require_GET
 def image_edit_make_final(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     revisions = ImageRevision.objects.filter(image = image)
@@ -694,7 +694,7 @@ def image_edit_make_final(request, id):
 @require_GET
 def image_edit_revision_make_final(request, id):
     r = get_object_or_404(ImageRevision, pk=id)
-    if request.user != r.image.user:
+    if request.user != r.image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     other = ImageRevision.objects.filter(image = r.image)
@@ -715,7 +715,7 @@ def image_edit_revision_make_final(request, id):
 @require_GET
 def image_edit_license(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     form = ImageLicenseForm(instance = image)
@@ -732,7 +732,7 @@ def image_edit_save_presolve(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
     form = ImageEditPresolveForm(data=request.POST, instance=image)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     if not form.is_valid():
@@ -763,7 +763,7 @@ def image_edit_save_basic(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
     form = ImageEditBasicForm(data=request.POST, instance=image)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     if not form.is_valid():
@@ -882,7 +882,7 @@ def image_edit_save_gear(request):
     profile = UserProfile.objects.get(user = request.user)
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     image.imaging_telescopes.clear()
@@ -920,7 +920,7 @@ def image_edit_save_gear(request):
 def image_edit_save_acquisition(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     edit_type = request.POST.get('edit_type')
@@ -1028,7 +1028,7 @@ def image_edit_save_acquisition(request):
 def image_edit_save_license(request):
     image_id = request.POST.get('image_id')
     image = get_object_or_404(Image, pk=image_id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     form = ImageLicenseForm(data = request.POST, instance = image)
@@ -1047,7 +1047,7 @@ def image_edit_save_license(request):
 @require_GET
 def image_delete(request, id):
     image = get_object_or_404(Image, pk=id) 
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     image.delete()
@@ -1061,7 +1061,7 @@ def image_delete(request, id):
 def image_delete_revision(request, id):
     revision = get_object_or_404(ImageRevision, pk=id) 
     image = revision.image
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     if revision.is_final:
@@ -1077,7 +1077,7 @@ def image_delete_revision(request, id):
 @require_GET
 def image_delete_original(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     revisions = ImageRevision.objects.filter(image = image).order_by('-uploaded')
@@ -1117,7 +1117,7 @@ def image_delete_original(request, id):
 @require_GET
 def image_promote(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     if image.is_wip:
@@ -1131,7 +1131,7 @@ def image_promote(request, id):
 @require_GET
 def image_demote(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     if not image.is_wip:
