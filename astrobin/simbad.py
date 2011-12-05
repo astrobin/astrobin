@@ -25,12 +25,14 @@ def find_single_subject(q):
     try:
         # json will be a list of dictionaries with simbad objects.
         json = simplejson.loads(json_string)
+        print json
     except simplejson.JSONDecodeError:
         # Malformatted query and Simbad didn't accept it. Let's
         # ignore it
         print "Malformed SIMBAD query."
         return None
 
+    s = None
     for obj in json:
         # We need to add it to our database first. We
         # are actally saving this early, because the user might
@@ -40,6 +42,7 @@ def find_single_subject(q):
         # database if the user does decide to use this object.
         s = Subject()
         s.initFromJSON(obj)
+        print "Found in json: %s" % s.mainId
         try:
             s.save()
         except IntegrityError:
@@ -48,16 +51,15 @@ def find_single_subject(q):
             # is going to the database gets looked up again before
             # it really is there. So we try to save it again and
             # get the IntegrityError because of the duplicate key.
-            s = Subject.objects.get(mainId=obj['mainId'])
+            print "Finding existing: %s" % s.mainId
+            try:
+                s = Subject.objects.get(mainId=obj['mainId'])
+                print "Subject with id %d found." % s.id
+            except Subject.DoesNotExist:
+                print "Nothing found."
+                continue
 
-        # We need to make sure that q is part of the mainId, or the
-        # ui will be very confused. If that's not the case, then
-        # we construct a string that has both the mainId and the id
-        # that was found, just like above.
-        if q == obj['mainId']:
-            return s
-
-    return None 
+    return s
 
 
 def find_subjects(q):

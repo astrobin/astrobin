@@ -43,9 +43,11 @@ def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, la
         if subjects['annotations']:
             print "Subjects found"
             for i in subjects['annotations']:
-                subjects = simbad.find_subjects(i['names'][0])
-                for s in subjects:
+                print "Searching for %s..." % i['names'][0]
+                s = simbad.find_single_subject(i['names'][0])
+                if s:
                     image.subjects.add(s)
+                    print "%s added." % s.mainId
         else:
             print "No subjects found."
 
