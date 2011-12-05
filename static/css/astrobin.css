@@ -2041,6 +2041,21 @@ ul.subnav li.copy-box th, ul.subnav li.copy-box td {
   border: none;
   background: none;
 }
+ul.subnav li.copy-box td.copy {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+ul.subnav li.copy-box .button-container {
+  position: relative;
+  float: right;
+  margin-top: -29px;
+  margin-right: -8px;
+  display: inline-block;
+}
+ul.subnav li.copy-box .button-container img {
+  cursor: hand;
+  cursor: pointer;
+}
 ul.subnav li.separator {
   height: 0;
   margin: 8px 0;
