@@ -233,10 +233,10 @@ def image_detail(request, id):
     related_images = related_images.exclude(django_id=id).models(Image).order_by('-uploaded')
 
     gear_list = (
-        ('Imaging telescopes', image.imaging_telescopes.all(), 'imaging_telescopes'),
+        ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
         ('Imaging cameras'   , image.imaging_cameras.all(), 'imaging_cameras'),
         ('Mounts'            , image.mounts.all(), 'mounts'),
-        ('Guiding telescopes', image.guiding_telescopes.all(), 'guiding_telescopes'),
+        ('Guiding telescopes or lenses', image.guiding_telescopes.all(), 'guiding_telescopes'),
         ('Guiding cameras'   , image.guiding_cameras.all(), 'guiding_cameras'),
         ('Focal reducers'    , image.focal_reducers.all(), 'focal_reducers'),
         ('Software'          , image.software.all(), 'software'),
@@ -1161,7 +1161,7 @@ def user_page(request, username):
         if UserProfile.objects.get(user=user) in viewer_profile.follows.all():
             follows = True
 
-    gear_list = [('Telescopes'    , profile.telescopes.all(), 'imaging_telescopes'),
+    gear_list = [('Telescopes and lenses', profile.telescopes.all(), 'imaging_telescopes'),
                  ('Mounts'        , profile.mounts.all(), 'mounts'),
                  ('Cameras'       , profile.cameras.all(), 'imaging_cameras'),
                  ('Focal reducers', profile.focal_reducers.all(), 'focal_reducers'),

@@ -76,8 +76,8 @@ class ImageEditGearForm(forms.ModelForm):
                     ):
             self.fields[attr].queryset = getattr(profile, attr).all()
 
-        self.fields['imaging_telescopes'].label = _("Imaging telescopes")
-        self.fields['guiding_telescopes'].label = _("Guiding telescopes")
+        self.fields['imaging_telescopes'].label = _("Imaging telescopes or lenses")
+        self.fields['guiding_telescopes'].label = _("Guiding telescopes or lenses")
         self.fields['mounts'].label = _("Mounts")
         self.fields['imaging_cameras'].label = _("Imaging cameras")
         self.fields['guiding_cameras'].label = _("Guiding cameras")
@@ -115,7 +115,7 @@ class UserProfileEditBasicForm(forms.ModelForm):
 class UserProfileEditGearForm(forms.Form):
     telescopes = forms.CharField(
         max_length=256,
-        help_text=_("All the telescopes you own, including the ones you use for guiding, go here."),
+        help_text=_("All the telescopes and lenses you own, including the ones you use for guiding, go here."),
         required=False)
 
     mounts = forms.CharField(
@@ -146,7 +146,7 @@ class UserProfileEditGearForm(forms.Form):
 
     def __init__(self, user=None, **kwargs):
         super(UserProfileEditGearForm, self).__init__(**kwargs)
-        self.fields['telescopes'].label = _("Telescopes")
+        self.fields['telescopes'].label = _("Telescopes and lenses")
         self.fields['mounts'].label = _("Mounts")
         self.fields['cameras'].label = _("Cameras")
         self.fields['focal_reducers'].label = _("Focal reducers")
@@ -217,9 +217,9 @@ class AdvancedSearchForm(SearchForm):
 
     def __init__(self, data=None, **kwargs):
         super(AdvancedSearchForm, self).__init__(data, **kwargs)
-        self.fields['q'].help_text = _("Search for astronomical objects, telescopes, cameras, filters...")
+        self.fields['q'].help_text = _("Search for astronomical objects, telescopes or lenses, cameras, filters...")
 
-        self.fields['imaging_telescopes'].label = _("Imaging telescopes")
+        self.fields['imaging_telescopes'].label = _("Imaging telescopes or lenses")
         self.fields['imaging_cameras'].label = _("Imaging cameras")
         self.fields['start_date'].label = _("Acquired after")
         self.fields['end_date'].label = _("Acquired before")

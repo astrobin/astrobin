@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-04 11:40-0500\n"
-"PO-Revision-Date: 2011-12-04 11:40-0500\n"
+"POT-Creation-Date: 2011-12-05 10:35-0500\n"
+"PO-Revision-Date: 2011-12-05 10:35-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -49,13 +49,13 @@ msgstr "Luoghi"
 #: forms.py:79
 #: forms.py:222
 #: models.py:317
-msgid "Imaging telescopes"
-msgstr "Telescopi di acquisizione"
+msgid "Imaging telescopes or lenses"
+msgstr "Telescopi o obiettivi di acquisizione"
 
 #: forms.py:80
 #: models.py:318
-msgid "Guiding telescopes"
-msgstr "Telescopi di guida"
+msgid "Guiding telescopes or lenses"
+msgstr "Telescopi o obiettivi di guida"
 
 #: forms.py:81
 #: forms.py:150
@@ -104,8 +104,8 @@ msgid "Accessories"
 msgstr "Accessori"
 
 #: forms.py:118
-msgid "All the telescopes you own, including the ones you use for guiding, go here."
-msgstr "Tutti i tuoi telescopi, compresi quelli che usi per guidare, vanno qui."
+msgid "All the telescopes and lenses you own, including the ones you use for guiding, go here."
+msgstr "Tutti i tuoi telescopi ed obiettivi, compresi quelli che usi per guidare, vanno qui."
 
 #: forms.py:127
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
@@ -117,8 +117,8 @@ msgstr "Suggerimento: inserisci i filtri separatamente! Se invece li inserisci t
 
 #: forms.py:149
 #: models.py:693
-msgid "Telescopes"
-msgstr "Telescopi"
+msgid "Telescopes and lenses"
+msgstr "Telescopi ed obiettivi"
 
 #: forms.py:151
 #: models.py:695
@@ -145,8 +145,8 @@ msgid "Express value in hours"
 msgstr "Esprimi il valore in ore"
 
 #: forms.py:220
-msgid "Search for astronomical objects, telescopes, cameras, filters..."
-msgstr "Cerca oggetti astronomici, telescopi, camere, filtri..."
+msgid "Search for astronomical objects, telescopes or lenses, cameras, filters..."
+msgstr "Cerca oggetti astronomici, telescopi o obiettivi, camere, filtri..."
 
 #: forms.py:224
 msgid "Acquired after"
@@ -372,7 +372,7 @@ msgstr "Licenza"
 #: templates/image/detail.html:305
 #: templates/image/full.html:54
 #: templates/inclusion_tags/image_list.html:13
-#: templates/inclusion_tags/search_image_list.html:12
+#: templates/inclusion_tags/search_image_list.html:11
 msgid "(no title)"
 msgstr "(senza titolo)"
 
@@ -595,7 +595,7 @@ msgid "Dates"
 msgstr "Date"
 
 #: views.py:323
-#: templates/inclusion_tags/search_image_list.html:17
+#: templates/inclusion_tags/search_image_list.html:16
 #: templates/search/search.html:23
 msgid "Integration"
 msgstr "Integrazione"
@@ -603,7 +603,7 @@ msgstr "Integrazione"
 #: views.py:323
 #: views.py:1203
 #: views.py:1204
-#: templates/inclusion_tags/search_image_list.html:17
+#: templates/inclusion_tags/search_image_list.html:16
 msgid "hours"
 msgstr "ore"
 
@@ -1162,6 +1162,7 @@ msgstr "Immagini recenti"
 
 #: templates/index.html:59
 #: templates/leaderboard.html:14
+#: templates/search/search.html:19
 msgid "Sort by:"
 msgstr "Ordina per:"
 
@@ -1229,11 +1230,11 @@ msgstr "mese corrente"
 msgid "Object not found"
 msgstr "Oggetto non trovato"
 
-#: templates/pagination.html:8
+#: templates/pagination.html:9
 msgid "previous"
 msgstr "precedenti"
 
-#: templates/pagination.html:29
+#: templates/pagination.html:30
 msgid "next"
 msgstr "successive"
 
@@ -1957,13 +1958,13 @@ msgid "Form saved. Thank you!"
 msgstr "Salvato. Grazie!"
 
 #: templates/inclusion_tags/image_list.html:21
-#: templates/inclusion_tags/search_image_list.html:44
+#: templates/inclusion_tags/search_image_list.html:43
 #, python-format
 msgid " by <a href=\"%(user_page)s\">%(user)s</a>"
 msgstr " di <a href=\"%(user_page)s\">%(user)s</a>"
 
 #: templates/inclusion_tags/image_list.html:27
-#: templates/inclusion_tags/search_image_list.html:50
+#: templates/inclusion_tags/search_image_list.html:48
 msgid "No images"
 msgstr "Nessuna immagine"
 
@@ -2015,11 +2016,11 @@ msgstr "Non hai richieste da soddisfare."
 msgid "Show all requests"
 msgstr "Mostra tutte le richieste"
 
-#: templates/inclusion_tags/search_image_list.html:21
+#: templates/inclusion_tags/search_image_list.html:20
 msgid "stars"
 msgstr "stelle"
 
-#: templates/inclusion_tags/search_image_list.html:34
+#: templates/inclusion_tags/search_image_list.html:33
 #, python-format
 msgid "Viewed one time"
 msgid_plural "Viewed %(counter)s times"
@@ -2419,10 +2420,6 @@ msgstr "Farlo adesso?"
 msgid "You have no requests."
 msgstr "Non hai richieste."
 
-#: templates/search/search.html:19
-msgid "Sort these images by:"
-msgstr "Ordina queste immagini per:"
-
 #: templates/search/search.html:20
 msgid "Relevance"
 msgstr "Rilevanza"
@@ -2638,6 +2635,9 @@ msgstr "Scegli la lingua usata per questo sito:"
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
 msgstr "Seleziona quali notifiche preferisci ricevere anche come e-mail:"
+
+#~ msgid "Sort these images by:"
+#~ msgstr "Ordina queste immagini per:"
 
 #~ msgid "Show/hide advanced search box."
 #~ msgstr "Mostra/nascondi il modulo di ricerca avanzata."
