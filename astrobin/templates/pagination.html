@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load tags %}
 
+{% if has_previous or has_next %}
 <div class="pagination">
     <div class="pager">
        {% if has_previous %}
@@ -30,3 +31,4 @@
        {% endif %}
     </div>
 </div>
+{% endif %}
