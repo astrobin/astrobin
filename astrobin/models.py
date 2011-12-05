@@ -314,8 +314,8 @@ class Image(models.Model):
     )
 
     # gear
-    imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes"))
-    guiding_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes"))
+    imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes or lenses"))
+    guiding_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes or lenses"))
     mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"))
     imaging_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='imaging_cameras', verbose_name=_("Imaging cameras")) 
     guiding_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='guiding_cameras', verbose_name=_("Guiding cameras"))
@@ -690,7 +690,7 @@ class UserProfile(models.Model):
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
 
     # Gear
-    telescopes = models.ManyToManyField(Telescope, null=True, blank=True, verbose_name=_("Telescopes"))
+    telescopes = models.ManyToManyField(Telescope, null=True, blank=True, verbose_name=_("Telescopes and lenses"))
     mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"))
     cameras = models.ManyToManyField(Camera, null=True, blank=True, verbose_name=_("Cameras"))
     focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers"))
