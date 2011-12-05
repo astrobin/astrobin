@@ -521,7 +521,7 @@ def image_upload_process(request):
 @require_GET
 def image_edit_presolve(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     form = ImageEditPresolveForm(instance=image)
