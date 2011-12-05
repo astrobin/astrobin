@@ -2056,6 +2056,9 @@ ul.subnav li.copy-box .button-container img {
   cursor: hand;
   cursor: pointer;
 }
+ul.subnav li.copy-box textarea {
+  overflow: auto;
+}
 ul.subnav li.separator {
   height: 0;
   margin: 8px 0;
