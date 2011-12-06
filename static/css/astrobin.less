@@ -2209,16 +2209,20 @@ p.error {
 .pagination {
     text-align: center;
     margin: @spacer-xlarge 0 @spacer-large 0;
-    .page, .current {
+    .page, .current, .prev, .next {
         display: inline-block;
         .box-shadow;
         .rounded-corners(4px);
         .foreground-gradient;
         padding: 0;
-        a {
-            display: block;
-            padding: @spacer-medium @spacer-small;
-        }
+    }
+    a, a.page, a.prev, a.next {
+        display: inline-block;
+        color: @link-color;
+        padding: @spacer-medium @spacer-small;
+    }
+    .disabled {
+        padding: @spacer-medium @spacer-small;
     }
     .current {
         padding: @spacer-large;

@@ -16,14 +16,6 @@ var common = {
         notifications_element_ul   : 'ul#notification-feed',
         notifications_icon_new     : '/static/icons/iconic/orange/new_notifications.gif',
 
-        /* Messages */
-        messages_base_url          : '/activity?id=message_',
-        messages_element_empty     : 'ul#message-feed li#empty',
-        messages_element_image     : 'img#messages',
-        messages_element_ul        : 'ul#message-feed',
-        messages_icon_new          : '/static/icons/iconic/orange/new_messages.gif',
-        message_detail_url         : '/messages/detail/',
-
         /* Requests */
         requests_base_url          : '/activity/?id=request_',
         requests_element_empty     : 'ul#request-feed li#empty',
@@ -91,39 +83,6 @@ var common = {
         });
     },
 
-    listen_for_messages: function(username, last_modified, etag) {
-        common.globals.smart_ajax({
-            'beforeSend': function(xhr) {
-                xhr.setRequestHeader("If-None-Match", etag);
-                xhr.setRequestHeader("If-Modified-Since", last_modified);
-            },
-            url: common.config.messages_base_url + username,
-            dataType: 'text',
-            type: 'get',
-            cache: 'false',
-            success: function(data, textStatus, xhr) {
-                etag = xhr.getResponseHeader('Etag');
-                last_modified = xhr.getResponseHeader('Last-Modified');
-
-                json = jQuery.parseJSON(data);
-
-                $(common.config.messages_element_empty).remove();
-                $(common.config.messages_element_image)
-                    .attr('src', common.config.messages_icon_new);
-                $(common.config.messages_element_ul).prepend('\
-                    <li class="unread">\
-                        <a href="' + common.config.message_detail_url + json['message_id'] + '">\
-                            <strong>'+json['sender']+'</strong>: "' + json['subject'] + '"\
-                        </a>\
-                    </li>\
-                ');
-
-                /* Start the next long poll. */
-                common.listen_for_messages(username, last_modified, etag);
-            }
-        });
-    },
-
     listen_for_requests: function(username, last_modified, etag) {
         common.globals.smart_ajax({
             'beforeSend': function(xhr) {
@@ -187,7 +146,6 @@ var common = {
 
         setTimeout(function() {
             common.listen_for_notifications(username, '', '');
-            common.listen_for_messages(username, '', '');
             common.listen_for_requests(username, '', '');
         }, 1000);
     },

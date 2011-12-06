@@ -2413,7 +2413,10 @@ p.error {
   text-align: center;
   margin: 16px 0 12px 0;
 }
-.pagination .page, .pagination .current {
+.pagination .page,
+.pagination .current,
+.pagination .prev,
+.pagination .next {
   display: inline-block;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
@@ -2428,8 +2431,15 @@ p.error {
   color: #333333;
   padding: 0;
 }
-.pagination .page a, .pagination .current a {
-  display: block;
+.pagination a,
+.pagination a.page,
+.pagination a.prev,
+.pagination a.next {
+  display: inline-block;
+  color: #cc4b2e;
+  padding: 8px 4px;
+}
+.pagination .disabled {
   padding: 8px 4px;
 }
 .pagination .current {

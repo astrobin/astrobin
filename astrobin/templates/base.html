@@ -167,12 +167,11 @@
                                 <div class="popup" id="notifications-popup">
                                     {% notification_list request 1 10 %}
                                 </div>
-                            </li> <li class="menu">
-                                <a class="icon messages" title="{% trans "Messages" %}" href="FIXME">
-                                    <img id="messages" alt="{% trans "Messages" %}" src="{% messages_icon request %}"/></a>
-                                <div class="popup" id="messages-popup">
-                                    {% message_list request %}
-                                </div>
+                            </li>
+                            <li>
+                                <a class="icon messages" title="{% trans "Messages" %}" href="{% url messages_inbox %}">
+                                    <img id="messages" alt="{% trans "Messages" %}" src="/static/icons/iconic/orange/messages.gif"/>
+                                </a>
                             </li>
                             <li class="menu">
                                 <a class="icon" title="{% trans "Requests" %}" href="{% url requests %}">
@@ -462,24 +461,6 @@
                 $('#user-nav > ul > li.menu > a.notifications').click(function() {
                     notifications_read_timer = window.setTimeout(
                         notifications_mark_seen, 500);
-                });
-
-                var messages_read_timer = 0;
-                var messages_mark_seen = function() {
-                    $.ajax(
-                    {
-                        url: '/messages/mark_read/all/',
-                        dataType: 'json',
-                        success: function() {
-                            $('img#messages').attr('src',
-                                '/static/icons/iconic/orange/messages.gif');
-                            $('ul#message-feed li.unread').removeClass('unread');
-                        }
-                    });
-                };
-                $('#user-nav > ul > li.menu > a.messages').click(function() {
-                    messages_read_timer = window.setTimeout(
-                        messages_mark_seen, 500);
                 });
             });
         </script>
