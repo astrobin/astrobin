@@ -4,7 +4,7 @@
 {% for m in messages %}
     <li {% if not m.read %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>
             <div class="message-link">
-            <a href="{% url message_detail m.id %}">
+            <a href="FIXME">
                 {% autoescape off %}<strong>{{m.from_user}}</strong>: "{{m.subject|escape}}"{% endautoescape %}
             </a>
         </div>
@@ -17,7 +17,7 @@
 {% if messages and show_footer %}
     <li class="footer">
         <div class="message-link">
-            <a href="{% url messages_all %}">{% trans "Show all messages" %}</a>
+            <a href="FIXME">{% trans "Show all messages" %}</a>
         </div>
     </li>
 {% endif %}

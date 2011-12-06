@@ -114,6 +114,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfResponseMiddleware',
 #   'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 #   'astrobin.middlewares.ProfilerMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'privatebeta.middleware.PrivateBetaMiddleware',
@@ -154,7 +155,6 @@ INSTALLED_APPS = (
     'haystack',
     'notification',
     'debug_toolbar',
-    'persistent_messages',
     'djcelery',
     'gunicorn',
     'privatebeta',
@@ -165,6 +165,10 @@ INSTALLED_APPS = (
     'zinnia',
     'tinymce',
     'hitcount',
+    'pagination',
+    'avatar',
+    'uni_form',
+    'threaded_messages',
 )
 
 LOGIN_REDIRECT_URL = '/'
