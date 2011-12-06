@@ -1,0 +1,19 @@
+{% extends 'django_messages/compose.html' %}
+{% load i18n %}
+{% load uni_form_tags %}
+
+{% block content %}
+<div class="full-box">
+    <h1>{% trans "Compose Message"|upper %}</h1>
+    
+    <form action="" method="post" class="uniForm">
+        {% csrf_token %}
+        <fieldset class="inlineLabels">
+            {{ form|as_uni_form }}
+            <input class="button submit-button" type="submit" value="{% trans "Send" %} &raquo;"/>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
+
+
