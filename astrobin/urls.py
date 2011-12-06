@@ -93,26 +93,21 @@ urlpatterns = patterns('',
     url(r'^notifications/seen/$', views.mark_notifications_seen, name='mark_notification_seen'),
     url(r'^notifications/$', views.notifications, name='notifications'),
 
-    url(r'^messages/$', redirect_to, {'url': '/messages/inbox/'}),
-    url(r'^messages/search/$', messages_search, name='messages_search'),
-    url(r'^messages/inbox/$', messages_inbox, name='messages_inbox'),
-    url(r'^messages/outbox/$', messages_outbox, name='messages_outbox'),
+    url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
     url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
     url(r'^messages/compose/(?P<recipient>[\+\w]+)/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose_to'),
-    url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, name='messages_detail'),
+    url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'}, name='messages_detail'),
     url(r'^messages/delete/(?P<thread_id>[\d]+)/$', messages_delete, name='messages_delete'),
-    url(r'^messages/undelete/(?P<thread_id>[\d]+)/$', messages_undelete, name='messages_undelete'),
     url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
-    url(r'^messages/trash/$', messages_trash, name='messages_trash'),
     url(r"^messages/recipient-search/$", messages_recipient_search, name="recipient_search"),
-    url(r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply, name="message_reply"),
+    url(r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply, {'template_name': 'messages/message_list_view.html'}, name="message_reply"),
     # modal composing 
     url(r'^messages/modal-compose/(?P<recipient>[\w.+-_]+)/$', messages_compose, {
-                            "template_name":"django_messages/modal_compose.html",
+                            "template_name":"messages/modal_compose.html",
                             "form_class": MessagesComposeForm
                         }, name='modal_messages_compose_to'),
     url(r'^messages/modal-compose/$', messages_compose, {
-                            "template_name":"django_messages/modal_compose.html",
+                            "template_name":"messages/modal_compose.html",
                             "form_class": MessagesComposeForm
                         }, name='modal_messages_compose'),
 

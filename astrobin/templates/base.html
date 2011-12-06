@@ -29,6 +29,8 @@
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/overcast/jquery-ui-1.8.16.custom.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/ui.multiselect.css"/>
         <link rel="stylesheet" href="/static/css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/facebox.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/token-input.css"/>
 
         <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/static/css/ie6.css"/><![endif]-->
 
@@ -347,6 +349,9 @@
         <script type="text/javascript">
             ZeroClipboard.setMoviePath('/static/flash/ZeroClipboard10.swf');
         </script>
+        <script type="text/javascript" src="/static/js/facebox.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.form.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.tokeninput.js"></script>
 
         <script type="text/javascript" src="/static/js/astrobin.js"></script>
         {% endcompress %}
@@ -389,7 +394,7 @@
                 {%endif %}
 
                 common.init_ajax_csrf_token();
-                
+                $('a[rel*=facebox]').facebox();
                 $('.capty').capty({animation: 'fade', speed: 150, height: 45});
 
                 // date and time pickers

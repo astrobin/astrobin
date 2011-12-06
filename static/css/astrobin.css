@@ -113,6 +113,10 @@
   border: 1px solid #222222;
   border-bottom: 1px solid #666666;
 }
+.common-border-inverted {
+  border: 1px solid #666666;
+  border-bottom: 1px solid #222222;
+}
 .text-shadow {
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
 }
@@ -2599,4 +2603,194 @@ table.leaderboard {
 }
 p.help {
   margin: 8px 0 28px 4px;
+}
+.messages-search {
+  float: right;
+  display: inline-block;
+}
+.messages-search input {
+  width: auto;
+  border: 1px solid #222222;
+  border-bottom: 1px solid #666666;
+  background-color: #2b2b2b;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  color: #5c5c5c;
+}
+.message-form {
+  margin-top: 16px;
+}
+.message-form .submit-button {
+  display: inline-block;
+  margin-left: 0;
+}
+.message-form textarea {
+  width: 99%;
+  height: 200px;
+}
+.back {
+  padding-left: 12px;
+  display: inline;
+}
+.inbox-action-box {
+  text-align: left;
+}
+.message {
+  border: 1px solid #666666;
+  border-bottom: 1px solid #222222;
+  padding: 8px;
+  margin-bottom: 4px;
+  position: relative;
+}
+.message .checkbox {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.message .new,
+.message .sender,
+.message .subject,
+.message .message-tease,
+.message .reply {
+  display: inline;
+}
+.message .date {
+  font-size: 87.5%;
+}
+.message .sender {
+  width: 20%;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #333333;
+  padding: 4px;
+}
+.message .subject {
+  margin-left: 4px;
+}
+.message .body {
+  padding: 12px;
+}
+.message .new {
+  color: #fcfcfc;
+}
+.message .reply {
+  float: right;
+  font-weight: normal;
+  text-align: right;
+}
+.unread {
+  font-weight: bold;
+}
+.asteriskField {
+  display: none;
+}
+ul.token-input-list {
+  list-style-type: none;
+  border: 1px solid #222222;
+  border-bottom: 1px solid #666666;
+  padding: 8px 4px;
+  margin: 4px 0;
+  overflow: auto;
+  background-color: #333333;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  width: 100%;
+}
+ul.token-input-list li.token-input-token {
+  margin: 0;
+  padding: 0;
+  display: -moz-inline-box;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+  height: auto;
+  font-size: 14px;
+  color: #b8b8b8;
+  border: 1px solid #cc4b2e;
+  border-top: 1px solid #ff6c42;
+  background: #cc4b2e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f55a37), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #f55a37, #cc4b2e);
+  color: #fcfcfc;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 6px;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 12px 0;
+  padding: 4px 8px;
+  cursor: pointer;
+  padding: 8px;
+  margin: 2px 0;
+  width: 90%;
+}
+ul.token-input-list li.token-input-token :hover {
+  border-top-color: #ff8753;
+  background: #f55a37;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff6c42), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #ff6c42, #cc4b2e);
+  color: #ffffff;
+}
+ul.token-input-list li.token-input-token :active {
+  border-color: #f55a37;
+  border-top-color: #aa3f26;
+  background: #f55a37;
+  background: -webkit-gradient(linear, left top, left bottom, from(#cc4b2e), to(#f55a37));
+  background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
+  color: #fcfcfc;
+}
+ul.token-input-list li.token-input-input-token {
+  border: none;
+}
+ul.token-input-list li.token-input-input-token input, ul.token-input-list li.token-input-input-token textarea {
+  width: 100%;
+  margin: 4px 0;
+  background: none;
+  background-color: #333333;
+}
+div.token-input-dropdown {
+  width: 300px;
+  z-index: 999;
+  background-color: #3d3d3d;
+  border: 1px solid #222222;
+  border-bottom: 1px solid #666666;
+}
+div.token-input-dropdown li.token-input-selected-dropdown-item {
+  border: 1px solid #cc4b2e;
+  border-top: 1px solid #ff6c42;
+  background: #cc4b2e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f55a37), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #f55a37, #cc4b2e);
+  color: #fcfcfc;
+}
+div.token-input-dropdown p {
+  color: #b8b8b8;
+}
+.facebox-box {
+  padding: 28px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #3d3d3d;
+  border: 1px solid #222222;
+  border-bottom: 1px solid #666666;
+}
+.facebox-box label {
+  text-indent: 0;
+  float: left;
+  text-align: left;
+}
+.facebox-box .submit-button {
+  width: 200px;
+}
+.facebox-box input, .facebox-box textarea {
+  width: 100%;
 }
