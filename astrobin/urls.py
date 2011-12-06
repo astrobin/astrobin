@@ -93,7 +93,7 @@ urlpatterns = patterns('',
     url(r'^notifications/seen/$', views.mark_notifications_seen, name='mark_notification_seen'),
     url(r'^notifications/$', views.notifications, name='notifications'),
 
-    url(r'^messages/$', redirect_to, {'url': 'messages/inbox/'}),
+    url(r'^messages/$', redirect_to, {'url': '/messages/inbox/'}),
     url(r'^messages/search/$', messages_search, name='messages_search'),
     url(r'^messages/inbox/$', messages_inbox, name='messages_inbox'),
     url(r'^messages/outbox/$', messages_outbox, name='messages_outbox'),
