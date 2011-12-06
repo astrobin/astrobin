@@ -1,0 +1,73 @@
+{% extends "django_messages/base.html" %}
+{% load i18n %}
+{% load avatar_tags %}
+
+{% block content %}
+ <div class="full-box">
+    <h2 class="inline">{{ thread.subject }}</h2>
+    <span class="sub-page-header">
+        {% blocktrans with participant.user.get_absolute_url as sender_url %}
+        A message between <a href="{{ sender_url }}">you</a> and
+        {% endblocktrans %}
+         {% for participant in participant.others %}
+            <a href="{{ participant.user.get_absolute_url }}">{{ participant.user }}</a>
+         {% endfor %}
+    </span>
+    {% comment %}
+    <div class="messages-search">
+      <form action="{% url messages_search %}" method="GET">
+        <input type="text" title="{% trans 'Search messages' %}" value="{% trans 'Search messages' %}" id="q" name="q" 
+               onfocus="common.clearText(this)"
+               onblur="common.clearText(this)"/>
+      </form>
+    </div>
+    {% endcomment %}
+    <div class="message-thread">
+        <a href="{% url messages_delete thread.pk %}" class="button dangerous-button">
+           {% trans "Delete conversation" %}
+        </a>
+        <a href="{% url messages_inbox %}" class="back">
+             {% trans "or return to messages" %}
+        </a>
+
+      <div class="message-list">
+        {% for message_tuple in message_list %}
+          {% with message_tuple.0 as message %}
+            {% include "messages/message_list_view.html" %}
+          {% endwith %}
+        {% endfor %}
+      </div>
+      <div class="messageReplyForm message-form">
+        <form method="POST" class="reply-form" action="{% url message_reply thread.pk %}">
+          {% csrf_token %}
+          <a name="reply"></a>
+          <h3>{% trans "Reply" %}</h3>
+          {{ form.body }}
+          <div>
+              <button class="button submit-button">{% trans "Reply" %}</button>
+              <a href="{% url messages_inbox %}" class="back">
+                {% trans "or return to messages" %}
+              </a>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+     <script type="text/javascript">
+         $(document).ready(function(){
+             $('.reply-form').ajaxForm({
+                 resetForm: true,
+                 beforeSubmit: function () {
+                     $('.reply-form').addClass("ajax-form-disabled");
+                 },
+                 success: function(data) {
+                     $('.reply-form').removeClass("ajax-form-disabled");
+                     $('.message-list').append(data);
+                 }
+             })
+         })
+     </script>
+{% endblock %}

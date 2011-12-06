@@ -54,18 +54,6 @@ var common = {
             element       : 'a.unfollow',
             url           : '/unfollow/',
             follow        : ''
-        },
-
-        message_action: {
-            dialog: {
-                title : '',
-                body  : '',
-                button: ''
-            },
-            element  : 'a.send-private-message',
-            form_html: '',
-            csrf_token: '',
-            url      : ''
         }
     },
 
@@ -351,35 +339,6 @@ var common = {
         });
     },
 
-    setup_send_message: function() {
-        $(common.config.message_action.element).click(function() {
-            var dlg = $('<div id="dialog-message" title="' + common.config.message_action.dialog.title + '"></div>')
-                .html('\
-                    <div class="sided-main-content-popup">\
-                    <form id="private-message" action="" method="post">\
-                        ' + common.config.message_action.form_html + '\
-                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + common.config.message_action.csrf_token + '" /></div> \
-                        <input type="hidden" name="to_user" value="' + common.globals.current_username  + '"/>\
-                        <input id="send" class="button submit-button" type="button" value="' + common.config.message_action.dialog.button  + '" />\
-                    </form>\
-                    </div>\
-                ')
-                .dialog({
-                    resizable: true,
-                    modal: true});
-
-                $('form#private-message #send').one('click', function() {
-                    $.post(common.config.message_action.url,
-                           $("form#private-message").serialize(),
-                           function() {
-                                dlg.dialog('close');
-                           },
-                           'json');
-                });
-            return false;
-        });
-    },
-
     init: function(current_username, config) {
         /* Init */
         common.globals.current_username = current_username;
@@ -388,9 +347,6 @@ var common = {
         /* Following */
         common.setup_follow();
         common.setup_unfollow();
-
-        /* Messaging */
-        common.setup_send_message();
     }
 };
 
