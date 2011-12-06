@@ -20,12 +20,6 @@
         {% endcomment %}
     </div>
     <div class="full-box">
-    <div class="album-links">
-          {% trans "Show" %}:
-          {% if only_unread or only_read %}<a href="{% url messages_inbox %}">{% trans "all" %}</a>{% else %}{% trans "all" %}{% endif %} ·
-          {% if not only_read %}<a href="{% url messages_inbox %}?only_read=1">{% trans "read" %}</a>{% else %}{% trans "read" %}{% endif %} ·
-          {% if not only_unread %}<a href="{% url messages_inbox %}?only_unread=1">{% trans "unread" %}</a>{% else %}{% trans "unread" %}{% endif %}
-    </div>
     <div class="inbox-action-box">
           <div class="buttons">
             {% comment %}
