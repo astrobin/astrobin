@@ -7,7 +7,7 @@
     <h2 class="inline">{{ thread.subject }}</h2>
     <span class="sub-page-header">
         {% blocktrans with participant.user.get_absolute_url as sender_url %}
-        A message between <a href="{{ sender_url }}">you</a> and
+        A conversation between <a href="{{ sender_url }}">you</a> and
         {% endblocktrans %}
          {% for participant in participant.others %}
             <a href="{{ participant.user.get_absolute_url }}">{{ participant.user }}</a>
