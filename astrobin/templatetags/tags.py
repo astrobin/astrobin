@@ -61,13 +61,6 @@ def notification_list(request, show_footer = True, limit = 0):
         'show_footer':show_footer}
 
 
-@register.inclusion_tag('inclusion_tags/message_list.html')
-def message_list(request, show_footer = True):
-    return {
-        'messages':messages.Message.objects.filter(user=request.user).order_by('-created')[:10],
-        'show_footer':show_footer}
-
-
 @register.inclusion_tag('inclusion_tags/request_list.html')
 def request_list(request, show_footer = True):
     return {
@@ -82,15 +75,6 @@ def notifications_icon(request):
         return basepath + 'new_notifications.gif'
     else:
         return basepath + 'notifications.gif'
-
-
-@register.simple_tag
-def messages_icon(request):
-    basepath = '/static/icons/iconic/orange/'
-    if messages.Message.objects.filter(user=request.user).filter(read=False):
-        return basepath + 'new_messages.gif'
-    else:
-        return basepath + 'messages.gif'
 
 
 @register.simple_tag
