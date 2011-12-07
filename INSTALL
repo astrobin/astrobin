@@ -29,7 +29,9 @@ sudo apt-get install \
 	gettext \
 	python-egenix-mxdatetime \
 	supervisor \
-	gcc-4.4
+	gcc-4.4 \
+	libxslt1-dev \
+	libxml2-dev
 
 sudo apt-file update
 sudo pip install virtualenv
@@ -87,7 +89,11 @@ ln -s ./venv/bin/pip vpip
     django-blog-zinnia \
     django-staticfiles \
     django-tinymce \
-    js.tinymce
+    js.tinymce \
+    django-avatar \
+    django-pagination \
+    lxml \
+    django-uni-form
 
 Install django registration revision fad7080fe769 from sources:
 https://bitbucket.org/ubernostrum/django-registration/
@@ -119,6 +125,11 @@ cd ..
 . ./venv/bin/activate
 easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
 
+# for the messaging system
+cd django-threaded-messages
+../venv/bin/python setup.py install
+cd ..
+
 
 # Set up Xapian:
 # ==============
@@ -142,10 +153,12 @@ grant all privileges on *.* to 'astrobin'@'localhost' identified by '***REMOVED*
 quit
 
 # Initialize db
+./scripts/syncdb.sh
 ./manage.py migrate astrobin 0001 --fake
 ./manage.py migrate astrobin
-./scripts/syncdb.sh
 ./manage.py migrate zinnia
+./manage.py migrate threaded_messages
+
 (When asked, do create super user astrobin:***REMOVED*** <astrobin@astrobin.com>)
 
 

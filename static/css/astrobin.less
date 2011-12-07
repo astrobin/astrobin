@@ -180,6 +180,10 @@
     border: 1px solid @border-color;
     border-bottom: 1px solid @border-bottom-color;}
 
+.common-border-inverted {
+    border: 1px solid @border-bottom-color;
+    border-bottom: 1px solid @border-color;}
+
 .text-shadow {
     text-shadow: rgba(0,0,0,0.8) 0 1px 1px;}
 
@@ -1573,7 +1577,34 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .fieldless {
         text-align: center;
         .button{
-            left: 0;}}}
+            left: 0;}}
+    ul.token-input-list {
+        display: inline-block;
+        list-style-type: none;
+        .common-border;
+        padding: @spacer-medium @spacer-small;
+        margin: @spacer-small 0;
+        overflow: auto;
+        background-color: @background-color;
+        .rounded-corners;
+        width: 70%;
+        li.token-input-token {
+            .button;
+            padding: @spacer-medium;
+            margin: @spacer-small*.5 0;
+            width: 70%;
+        }
+        li.token-input-input-token {
+            border: none;
+            input, textarea {
+                width: 70%;
+                margin: @spacer-small 0;
+                background: none;
+                background-color: @background-color;
+            }
+        }
+    }
+}
 
 .missing-gear-warning {
     width: 33%;
@@ -1835,7 +1866,6 @@ li:hover >.sub, .sub:hover {
     visibility: visible;}
 
 #notifications-popup,
-#messages-popup,
 #requests-popup {
     width: 250px;
 }
@@ -2028,13 +2058,16 @@ p#flickr_progress_message, p#flickr_progress {
     color: #897876;
 }
 
-form ul.errorlist {
-    margin-left: 166px;
+form ul.errorlist, .errorField {
+    margin-left: 170px;
     position: relative;
     top: 6px;
-    li {
-        font-size: 90%;
-        color: @danger-color;}
+    font-size: 87.5%;
+    color: @danger-color;
+}
+.errorField {
+    margin-left: 162px;
+    padding: @spacer-small 0;
 }
 
 ul.inline {
@@ -2097,7 +2130,6 @@ img.thumbnail {}
         left: 0;}
     padding: 0 10px;}
 
-table.messages,
 table.requests {
     width: 100%;
     td {
@@ -2205,16 +2237,20 @@ p.error {
 .pagination {
     text-align: center;
     margin: @spacer-xlarge 0 @spacer-large 0;
-    .page, .current {
+    .page, .current, .prev, .next {
         display: inline-block;
         .box-shadow;
         .rounded-corners(4px);
         .foreground-gradient;
         padding: 0;
-        a {
-            display: block;
-            padding: @spacer-medium @spacer-small;
-        }
+    }
+    a, a.page, a.prev, a.next {
+        display: inline-block;
+        color: @link-color;
+        padding: @spacer-medium @spacer-small;
+    }
+    .disabled {
+        padding: @spacer-medium @spacer-small;
     }
     .current {
         padding: @spacer-large;
@@ -2385,3 +2421,139 @@ table.leaderboard {
 p.help {
     margin: @spacer-medium  0 @spacer-xxlarge @spacer-small;
 }
+
+.messages-search {
+    float: right;
+    display: inline-block;
+    input {
+        width: auto;
+        .common-border;
+        background-color: @background-color / @hilight-factor;
+        .rounded-corners;
+        color: @text-color / @strongest-hilight-factor;
+    }
+}
+
+.message-form {
+    margin-top: @spacer-xlarge;
+    .submit-button {
+        display: inline-block;
+        margin-left: 0;
+    }
+    textarea {
+        width: 99%;
+        height: 200px;
+    }
+}
+
+.back {
+    padding-left: @spacer-large;
+    display: inline;
+}
+
+.inbox-action-box {
+    text-align: left;
+}
+
+.message {
+    .common-border-inverted;
+    padding: @spacer-medium;
+    margin-bottom: @spacer-small;
+    position: relative;
+    .checkbox {
+        position: absolute;
+        top: @spacer-small;
+        right: @spacer-small;
+    }
+    .new, .sender, .subject, .message-tease, .actions {
+        display: inline;
+    } 
+    .date {
+        font-size: 87.5%;
+    }
+    .sender {
+        width: 20%;
+        .rounded-corners;
+        border: 1px solid @background-color;
+        padding: @spacer-small;
+    }
+    .subject {
+        margin-left: @spacer-small;
+    }
+
+    .body {
+        padding: @spacer-large;
+    }
+    .new {
+        color: @strong-text-color;
+    }
+    .actions {
+        float: right;
+        font-weight: normal;
+        text-align: right;
+    }
+}
+.unread {
+    font-weight: bold;
+}
+.asteriskField {
+    display: none;
+}
+
+
+
+div.token-input-dropdown {
+    width: 300px;
+    z-index: 999;
+    background-color: @light-panel-color;
+    .common-border;
+    li.token-input-selected-dropdown-item {
+        .button-gradient;
+    }
+    p {
+        color: @text-color;
+    }
+}
+
+.facebox-box {
+    padding: @spacer-xxlarge;
+    .rounded-corners;
+    background-color: @light-panel-color;
+    .common-border;
+    label {
+        text-indent: 0;
+        float: left;
+        text-align: left;}
+    .submit-button {
+        width:200px;}
+    input, textarea {
+        width: 100%;
+    }
+    ul.token-input-list {
+        list-style-type: none;
+        .common-border;
+        padding: @spacer-medium @spacer-small;
+        margin: @spacer-small 0;
+        overflow: auto;
+        background-color: @background-color;
+        .rounded-corners;
+        width: 100%;
+        li.token-input-token {
+            .button;
+            padding: @spacer-medium;
+            margin: @spacer-small*.5 0;
+            width: 90%;
+        }
+        li.token-input-input-token {
+            border: none;
+            input, textarea {
+                width: 100%;
+                margin: @spacer-small 0;
+                background: none;
+                background-color: @background-color;
+            }
+        }
+    }
+}
+
+
