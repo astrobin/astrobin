@@ -48,7 +48,7 @@
                     <span class="date">{{ message.thread.latest_msg.sent_at|date:_("SHORT_DATETIME_FORMAT") }}</span>
                   </div>
                   <div class="subject">
-                    <a href="{{message.thread.get_absolute_url }}">{% if message.new %}<b>{% endif %}{{ message.thread.subject|truncchar:45 }}{% if message.new %}</b>{% endif %}</a>
+                    <strong>{{ message.thread.subject|truncchar:45 }}</strong>
                     <span class="message-tease">{{message.thread.latest_msg.body|truncatewords:8}}</span>
                   </div>
                   {% comment %}
