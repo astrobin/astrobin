@@ -56,6 +56,14 @@ def now_timezone():
     return datetime.datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
+def monthdelta(date, delta):
+    m, y = (date.month+delta) % 12, date.year + ((date.month)+delta-1) // 12
+    if not m: m = 12
+    d = [31,
+         29 if y%4==0 and not y%400==0 else 28,
+         31,30,31,30,31,31,30,31,30,31][m-1]
+    return date.replace(day=d,month=m, year=y)
+
 def valueReader(source, field):
     def unicode_truncate(s, length, encoding='utf-8'):
         encoded = s.encode(encoding)[:length]
@@ -1282,6 +1290,11 @@ def user_page(request, username):
 
         section = 'public'
 
+    # Stats
+    import stats as _s
+    (ih_flot_label, ih_flot_data, ih_flot_options) = _s.integration_hours(user, request.GET.get('s_ihp', 'monthly'))
+    (ui_flot_label, ui_flot_data, ui_flot_options) = _s.uploaded_images(user, request.GET.get('s_uip', 'monthly'))
+
     return object_list(
         request,
         queryset=sqs,
@@ -1299,7 +1312,16 @@ def user_page(request, username):
                          'backlink':backlink,
                          'gear_list':gear_list,
                          'stats':stats,
-                         'smart_albums':smart_albums})
+                         'smart_albums':smart_albums,
+
+                         'ih_flot_label':ih_flot_label,
+                         'ih_flot_data':ih_flot_data,
+                         'ih_flot_options':ih_flot_options,
+
+                         'ui_flot_label':ui_flot_label,
+                         'ui_flot_data':ui_flot_data,
+                         'ui_flot_options':ui_flot_options,
+                        })
 
 
 @login_required
@@ -2018,14 +2040,6 @@ def set_language(request, lang):
 
 @require_GET
 def nightly(request):
-    def monthdelta(date, delta):
-        m, y = (date.month+delta) % 12, date.year + ((date.month)+delta-1) // 12
-        if not m: m = 12
-        d = [31,
-             29 if y%4==0 and not y%400==0 else 28,
-             31,30,31,30,31,31,30,31,30,31][m-1]
-        return date.replace(day=d,month=m, year=y)
-
     month_offset = int(request.GET.get('month_offset', 0))
     start = monthdelta(datetime.datetime.today().date(), -month_offset)
     sqs = None

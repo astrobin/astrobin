@@ -1920,6 +1920,13 @@ ul.bar > li.rating {
   padding-top: 8px;
   margin-left: 12px;
 }
+.profile .plots hr {
+  display: inline-block;
+  float: left;
+}
+.profile .plots .plot {
+  margin-top: 52px;
+}
 ul.topnav {
   list-style: none;
   margin: 0;
@@ -2158,7 +2165,7 @@ ul.topnav > li:hover {
 li:hover > .sub, .sub:hover {
   visibility: visible;
 }
-#notifications-popup, #messages-popup, #requests-popup {
+#notifications-popup, #requests-popup {
   width: 250px;
 }
 #profile-popup, #profile-popup li a {
@@ -2434,20 +2441,20 @@ input.date {
   top: 0;
   left: 0;
 }
-table.messages, table.requests {
+table.requests {
   width: 100%;
 }
-table.messages td, table.requests td {
+table.requests td {
   padding: 4px 12px;
 }
-table.messages td, table.requests td {
+table.requests td {
   padding: 4px 12px;
 }
-table.messages td a, table.requests td a {
+table.requests td a {
   padding: 0;
   display: inline;
 }
-table.messages td a :hover, table.requests td a :hover {
+table.requests td a :hover {
   background-color: #333333;
 }
 th {
