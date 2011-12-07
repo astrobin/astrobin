@@ -37,6 +37,7 @@
 @spacer-large: @spacer-small * 3;
 @spacer-xlarge: @spacer-small * 4;
 @spacer-xxlarge: @spacer-small * 7;
+@spacer-xxxlarge: @spacer-small * 13;
 
 @footer-height: 268px;
 @wrap-shadow-offset: 62px;
@@ -1708,7 +1709,15 @@ ul.bar {
         padding-top: @spacer-medium;
         margin-left: @spacer-large;
     }
-
+    .plots {
+        hr {
+            display: inline-block;
+            float: left;
+        }
+        .plot {
+            margin-top: @spacer-xxxlarge;
+        }
+    }
 }
     
 ul.topnav {
