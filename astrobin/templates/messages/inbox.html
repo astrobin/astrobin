@@ -4,6 +4,7 @@
 {% load avatar_tags %}
 {% load pagination_tags %}
 {% load truncchar_tag %}
+{% load tags %}
 
 {% block content %}
     {% autopaginate thread_list 10 %}
@@ -26,7 +27,7 @@
               <button type="submit" name="action" value="read" class="button">{% trans "Mark as read" %}</button>
               <button type="submit" name="action" value="delete" class="button">{% trans "Delete messages" %}</button>
             {% endcomment %}
-            <a class="button"href="{% url modal_messages_compose %}" rel="facebox">
+            <a class="button" href="{% url messages_compose %}{% query_string "next=request.path" "" %}">
                {% trans "Compose message" %}
             </a>
         </div>
