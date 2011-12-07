@@ -1570,11 +1570,15 @@ def flickr_auth_callback(request):
     f = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
                             settings.FLICKR_SECRET, store_token = False)
 
-    frob = request.GET['frob']
-    try:
-        token = f.get_token(frob)
-    except flickrapi.FlickrError:
+    if 'frob' in request.GET:
+        frob = request.GET['frob']
+        try:
+            token = f.get_token(frob)
+        except flickrapi.FlickrError:
+            token = None
+    else:
         token = None
+
     request.session['flickr_token'] = token
 
     return HttpResponseRedirect("/profile/edit/flickr/")
