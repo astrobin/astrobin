@@ -56,8 +56,10 @@
                     <input name="batchupdateids" type="checkbox" value="{{message.thread.pk}}" />
                   </div>
                   {% endcomment %}
-                  <div class="reply">
-                    <a href="{{message.thread.get_absolute_url }}#reply">{% trans "Reply" %}</a>
+                  <div class="actions">
+                    <a href="{{message.thread.get_absolute_url}}">{% trans "Read all" %}</a>
+                    |
+                    <a href="{{message.thread.get_absolute_url}}#reply">{% trans "Reply" %}</a>
                   </div>
                   {% if message.replied %}{% endif %}
               </div>
