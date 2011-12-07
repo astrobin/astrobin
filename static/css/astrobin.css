@@ -2806,7 +2806,7 @@ p.help {
 .message .sender,
 .message .subject,
 .message .message-tease,
-.message .reply {
+.message .actions {
   display: inline;
 }
 .message .date {
@@ -2829,7 +2829,7 @@ p.help {
 .message .new {
   color: #fcfcfc;
 }
-.message .reply {
+.message .actions {
   float: right;
   font-weight: normal;
   text-align: right;
