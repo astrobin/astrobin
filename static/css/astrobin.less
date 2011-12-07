@@ -1577,7 +1577,34 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .fieldless {
         text-align: center;
         .button{
-            left: 0;}}}
+            left: 0;}}
+    ul.token-input-list {
+        display: inline-block;
+        list-style-type: none;
+        .common-border;
+        padding: @spacer-medium @spacer-small;
+        margin: @spacer-small 0;
+        overflow: auto;
+        background-color: @background-color;
+        .rounded-corners;
+        width: 70%;
+        li.token-input-token {
+            .button;
+            padding: @spacer-medium;
+            margin: @spacer-small*.5 0;
+            width: 70%;
+        }
+        li.token-input-input-token {
+            border: none;
+            input, textarea {
+                width: 70%;
+                margin: @spacer-small 0;
+                background: none;
+                background-color: @background-color;
+            }
+        }
+    }
+}
 
 .missing-gear-warning {
     width: 33%;
@@ -2032,13 +2059,16 @@ p#flickr_progress_message, p#flickr_progress {
     color: #897876;
 }
 
-form ul.errorlist {
-    margin-left: 166px;
+form ul.errorlist, .errorField {
+    margin-left: 170px;
     position: relative;
     top: 6px;
-    li {
-        font-size: 90%;
-        color: @danger-color;}
+    font-size: 87.5%;
+    color: @danger-color;
+}
+.errorField {
+    margin-left: 162px;
+    padding: @spacer-small 0;
 }
 
 ul.inline {
@@ -2472,31 +2502,8 @@ p.help {
     display: none;
 }
 
-ul.token-input-list {
-    list-style-type: none;
-    .common-border;
-    padding: @spacer-medium @spacer-small;
-    margin: @spacer-small 0;
-    overflow: auto;
-    background-color: @background-color;
-    .rounded-corners;
-    width: 100%;
-    li.token-input-token {
-        .button;
-        padding: @spacer-medium;
-        margin: @spacer-small*.5 0;
-        width: 90%;
-    }
-    li.token-input-input-token {
-        border: none;
-        input, textarea {
-            width: 100%;
-            margin: @spacer-small 0;
-            background: none;
-            background-color: @background-color;
-        }
-    }
-}
+
+
 div.token-input-dropdown {
     width: 300px;
     z-index: 999;
@@ -2523,6 +2530,31 @@ div.token-input-dropdown {
         width:200px;}
     input, textarea {
         width: 100%;
+    }
+    ul.token-input-list {
+        list-style-type: none;
+        .common-border;
+        padding: @spacer-medium @spacer-small;
+        margin: @spacer-small 0;
+        overflow: auto;
+        background-color: @background-color;
+        .rounded-corners;
+        width: 100%;
+        li.token-input-token {
+            .button;
+            padding: @spacer-medium;
+            margin: @spacer-small*.5 0;
+            width: 90%;
+        }
+        li.token-input-input-token {
+            border: none;
+            input, textarea {
+                width: 100%;
+                margin: @spacer-small 0;
+                background: none;
+                background-color: @background-color;
+            }
+        }
     }
 }
 
