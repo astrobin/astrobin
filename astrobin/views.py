@@ -272,6 +272,7 @@ def image_detail(request, id):
             'bias': [],
             'mean_sqm': [],
             'mean_fwhm': [],
+            'temperature': [],
         }
         for a in deep_sky_acquisitions:
             if a.date is not None and a.date not in dsa_data['dates']:
@@ -310,6 +311,9 @@ def image_detail(request, id):
             if a.mean_fwhm:
                 dsa_data['mean_fwhm'].append(a.mean_fwhm)
 
+            if a.temperature:
+                dsa_data['temperature'].append(a.temperature)
+
         def average(values):
             if not len(values):
                 return 0
@@ -329,6 +333,8 @@ def image_detail(request, id):
             (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list), ) if moon_illuminated_list else None),
             (_('Mean SQM'), "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None),
             (_('Mean FWHM'), "%.2f" % (average([float(x) for x in dsa_data['mean_fwhm']])) if dsa_data['mean_fwhm'] else None),
+            (_('Temperature'),
+             "%.2f" % (average([float(x) for x in dsa_data['temperature']])) if dsa_data['temperature'] else None),
         )
 
     elif ssa:
