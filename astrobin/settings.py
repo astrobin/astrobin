@@ -155,6 +155,7 @@ INSTALLED_APPS = (
     'haystack',
     'notification',
     'debug_toolbar',
+    'persistent_messages',
     'djcelery',
     'gunicorn',
     'privatebeta',
