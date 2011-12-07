@@ -125,6 +125,11 @@ cd ..
 . ./venv/bin/activate
 easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
 
+# for the messaging system
+cd django-threaded-messages
+../venv/bin/python setup.py install
+cd ..
+
 
 # Set up Xapian:
 # ==============
