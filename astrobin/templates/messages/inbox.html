@@ -45,7 +45,7 @@
                   {% endif %}
                   <div class="sender">
                     <a href="{{ message.thread.latest_msg.sender.get_absolute_url }}">{{ message.thread.latest_msg.sender.username|truncchar:12 }}</a>
-                    <span class="date">{{ message.thread.latest_msg.sent_at|date:_("SHORT_DATETIME_FORMAT") }}</span>
+                    <span class="date">{{ message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
                   </div>
                   <div class="subject">
                     <strong>{{ message.thread.subject|truncchar:45 }}</strong>

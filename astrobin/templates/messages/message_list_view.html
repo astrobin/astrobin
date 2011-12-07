@@ -1,7 +1,7 @@
 <div class="message">
     <div class="sender">
         <a href="{{ message.sender.get_absolute_url }}">{{ message.sender }}</a>
-        <span class="date">{{ message.sent_at|date:_("SHORT_DATETIME_FORMAT")}}</span>
+        <span class="date">{{ message.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
     </div>
     <div class="body">
         {{ message.body|linebreaksbr }}
