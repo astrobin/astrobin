@@ -1,0 +1,5 @@
+{% load i18n %}
+{% blocktrans %}You have received a private message on AstroBin!
+Read it at the following link:
+
+http://astrobin.com/messages/inbox/{% endblocktrans %}

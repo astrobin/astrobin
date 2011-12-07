@@ -16,14 +16,6 @@ var common = {
         notifications_element_ul   : 'ul#notification-feed',
         notifications_icon_new     : '/static/icons/iconic/orange/new_notifications.gif',
 
-        /* Messages */
-        messages_base_url          : '/activity?id=message_',
-        messages_element_empty     : 'ul#message-feed li#empty',
-        messages_element_image     : 'img#messages',
-        messages_element_ul        : 'ul#message-feed',
-        messages_icon_new          : '/static/icons/iconic/orange/new_messages.gif',
-        message_detail_url         : '/messages/detail/',
-
         /* Requests */
         requests_base_url          : '/activity/?id=request_',
         requests_element_empty     : 'ul#request-feed li#empty',
@@ -54,18 +46,6 @@ var common = {
             element       : 'a.unfollow',
             url           : '/unfollow/',
             follow        : ''
-        },
-
-        message_action: {
-            dialog: {
-                title : '',
-                body  : '',
-                button: ''
-            },
-            element  : 'a.send-private-message',
-            form_html: '',
-            csrf_token: '',
-            url      : ''
         }
     },
 
@@ -99,39 +79,6 @@ var common = {
 
                 /* Start the next long poll. */
                 common.listen_for_notifications(username, last_modified, etag);
-            }
-        });
-    },
-
-    listen_for_messages: function(username, last_modified, etag) {
-        common.globals.smart_ajax({
-            'beforeSend': function(xhr) {
-                xhr.setRequestHeader("If-None-Match", etag);
-                xhr.setRequestHeader("If-Modified-Since", last_modified);
-            },
-            url: common.config.messages_base_url + username,
-            dataType: 'text',
-            type: 'get',
-            cache: 'false',
-            success: function(data, textStatus, xhr) {
-                etag = xhr.getResponseHeader('Etag');
-                last_modified = xhr.getResponseHeader('Last-Modified');
-
-                json = jQuery.parseJSON(data);
-
-                $(common.config.messages_element_empty).remove();
-                $(common.config.messages_element_image)
-                    .attr('src', common.config.messages_icon_new);
-                $(common.config.messages_element_ul).prepend('\
-                    <li class="unread">\
-                        <a href="' + common.config.message_detail_url + json['message_id'] + '">\
-                            <strong>'+json['sender']+'</strong>: "' + json['subject'] + '"\
-                        </a>\
-                    </li>\
-                ');
-
-                /* Start the next long poll. */
-                common.listen_for_messages(username, last_modified, etag);
             }
         });
     },
@@ -199,7 +146,6 @@ var common = {
 
         setTimeout(function() {
             common.listen_for_notifications(username, '', '');
-            common.listen_for_messages(username, '', '');
             common.listen_for_requests(username, '', '');
         }, 1000);
     },
@@ -351,35 +297,6 @@ var common = {
         });
     },
 
-    setup_send_message: function() {
-        $(common.config.message_action.element).click(function() {
-            var dlg = $('<div id="dialog-message" title="' + common.config.message_action.dialog.title + '"></div>')
-                .html('\
-                    <div class="sided-main-content-popup">\
-                    <form id="private-message" action="" method="post">\
-                        ' + common.config.message_action.form_html + '\
-                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + common.config.message_action.csrf_token + '" /></div> \
-                        <input type="hidden" name="to_user" value="' + common.globals.current_username  + '"/>\
-                        <input id="send" class="button submit-button" type="button" value="' + common.config.message_action.dialog.button  + '" />\
-                    </form>\
-                    </div>\
-                ')
-                .dialog({
-                    resizable: true,
-                    modal: true});
-
-                $('form#private-message #send').one('click', function() {
-                    $.post(common.config.message_action.url,
-                           $("form#private-message").serialize(),
-                           function() {
-                                dlg.dialog('close');
-                           },
-                           'json');
-                });
-            return false;
-        });
-    },
-
     init: function(current_username, config) {
         /* Init */
         common.globals.current_username = current_username;
@@ -388,9 +305,6 @@ var common = {
         /* Following */
         common.setup_follow();
         common.setup_unfollow();
-
-        /* Messaging */
-        common.setup_send_message();
     }
 };
 

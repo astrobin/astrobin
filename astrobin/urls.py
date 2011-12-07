@@ -1,9 +1,24 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib import admin
+from django.views.generic.simple import redirect_to
 
 from djangoratings.views import AddRatingFromModel
 from hitcount.views import update_hit_count_ajax
+
+from threaded_messages.views import search as messages_search
+from threaded_messages.views import inbox as messages_inbox
+from threaded_messages.views import outbox as messages_outbox
+from threaded_messages.views import compose as messages_compose
+from threaded_messages.views import view as messages_view
+from threaded_messages.views import delete as messages_delete
+from threaded_messages.views import undelete as messages_undelete
+from threaded_messages.views import batch_update as messages_batch_update
+from threaded_messages.views import trash as messages_trash
+from threaded_messages.views import recipient_search as messages_recipient_search
+from threaded_messages.views import message_ajax_reply as messages_message_ajax_reply
+
+from threaded_messages.forms import ComposeForm as MessagesComposeForm
 
 admin.autodiscover()
 
@@ -77,11 +92,25 @@ urlpatterns = patterns('',
     url(r'^push_notification/$', views.push_notification, name='push_notification'),
     url(r'^notifications/seen/$', views.mark_notifications_seen, name='mark_notification_seen'),
     url(r'^notifications/$', views.notifications, name='notifications'),
-    url(r'^messages/new/(?P<username>[\w.@+-]+)/$', views.messages_new, name="messages_new"),
-    url(r'^messages/save/$', views.messages_save, name="messages_save"),
-    url(r'^messages/all/$', views.messages_all, name='messages_all'),
-    url(r'^messages/detail/(?P<id>\d+)/$', views.message_detail, name='message_detail'),
-       (r'^messages/', include('persistent_messages.urls')),
+
+    url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
+    url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
+    url(r'^messages/compose/(?P<recipient>[\+\w]+)/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose_to'),
+    url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'}, name='messages_detail'),
+    url(r'^messages/delete/(?P<thread_id>[\d]+)/$', messages_delete, name='messages_delete'),
+    url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
+    url(r"^messages/recipient-search/$", messages_recipient_search, name="recipient_search"),
+    url(r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply, {'template_name': 'messages/message_list_view.html'}, name="message_reply"),
+    # modal composing 
+    url(r'^messages/modal-compose/(?P<recipient>[\w.+-_]+)/$', messages_compose, {
+                            "template_name":"messages/modal_compose.html",
+                            "form_class": MessagesComposeForm
+                        }, name='modal_messages_compose_to'),
+    url(r'^messages/modal-compose/$', messages_compose, {
+                            "template_name":"messages/modal_compose.html",
+                            "form_class": MessagesComposeForm
+                        }, name='modal_messages_compose'),
+
     url(r'^send_private_message/$', views.send_private_message, name='send_private_message'),
     url(r'^bring_to_attention/$', views.bring_to_attention, name='bring_to_attention'),
     url(r'^requests/$', views.requests, name='requests'),

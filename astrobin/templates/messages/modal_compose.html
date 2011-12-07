@@ -1,0 +1,73 @@
+{% load i18n %}
+{% load uni_form_tags %}
+
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/token-input.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css"/>
+<div class="facebox-box">
+<form id="message-modal-form" 
+      action="{% url messages_compose %}" method="post"
+      class="uniForm">
+    {% csrf_token %}
+    <fieldset class="inlineLabels">
+        <input type="hidden" name="attachment_id" id="attachment_id" />
+        {{ form|as_uni_form }}
+    </fieldset>
+    <button id="modal-send-button" class="button submit-button" type="submit">
+        {% trans "Send" %}
+    </button>
+</form>
+</div>
+
+<script type="text/javascript" src="/static/js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/static/js/jquery.form.js"></script>
+<script type="text/javascript" src="/static/js/jquery.tokeninput.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var recipient = $("#id_recipient").val();
+        $("#id_recipient").val("");
+
+        var parameters = {
+            classes: {
+                tokenList: "token-input-list",
+                token: "token-input-token",
+                tokenDelete: "token-input-delete-token",
+                selectedToken: "token-input-selected-token",
+                highlightedToken: "token-input-highlighted-token",
+                dropdown: "token-input-dropdown",
+                dropdownItem: "token-input-dropdown-item",
+                dropdownItem2: "token-input-dropdown-item2",
+                selectedDropdownItem: "token-input-selected-dropdown-item",
+                inputToken: "token-input-input-token"
+            },
+
+            hintText: "{% trans "Type in a search term" %}",
+            noResultsText: "{% trans "No results" %}",
+            searchingText: "{% trans "Searching" %}...",
+            queryParam: "term"
+        };
+
+        if (recipient) {
+            parameters["prePopulate"] = [{id:recipient, name:recipient}];
+        }
+
+        $("#id_recipient").tokenInput("{% url recipient_search %}?format=json", parameters);
+        
+        $('#message-modal-form').ajaxForm({
+            //target: "target",
+            beforeSubmit: function (){
+                $('#message-modal-form').addClass("ajax-form-disabled");
+            },
+            success: function(){
+                $('#message-modal-form').removeClass("ajax-form-disabled");
+                $('#message-modal-form').html("<div id='message'></div>");
+                $('#message-modal-form #message').html("<h2>{% trans "Message sent" %}!</h2>")
+                .append("<p></p>")
+                .hide()
+                .fadeIn(2000, function() {
+                    // hide facebox
+                    $(document).trigger('close.facebox');
+                });
+            }
+        });
+    });
+</script>
