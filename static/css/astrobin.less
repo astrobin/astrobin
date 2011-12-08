@@ -37,6 +37,7 @@
 @spacer-large: @spacer-small * 3;
 @spacer-xlarge: @spacer-small * 4;
 @spacer-xxlarge: @spacer-small * 7;
+@spacer-xxxlarge: @spacer-small * 13;
 
 @footer-height: 268px;
 @wrap-shadow-offset: 62px;
@@ -1693,6 +1694,9 @@ ul.bar {
 }
 
 .profile {
+    a.stats_anchor {
+        margin-bottom: @spacer-xxxlarge;
+    }
     ul.bar {
         .bar_mixin();
         float: right;
@@ -1708,7 +1712,20 @@ ul.bar {
         padding-top: @spacer-medium;
         margin-left: @spacer-large;
     }
-
+    .plots {
+        hr {
+            display: inline-block;
+            float: left;
+        }
+        .plot {
+            margin-top: @spacer-xxxlarge;
+            text-align: center;
+            .loading {
+                font-size: 87.5%;
+                margin-top: 120px;
+            }
+        }
+    }
 }
     
 ul.topnav {
