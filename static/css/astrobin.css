@@ -935,14 +935,14 @@ form select[multiple]:focus {
   padding: 4px 8px;
   cursor: pointer;
 }
-.button :hover {
+.button:hover {
   border-top-color: #ff6940;
   background: #e45434;
   background: -webkit-gradient(linear, left top, left bottom, from(#ff5e3a), to(#cc4b2e));
   background: -moz-linear-gradient(top, #ff5e3a, #cc4b2e);
   color: #ffffff;
 }
-.button :active {
+.button:active {
   border-color: #e45434;
   border-top-color: #b64329;
   background: #e45434;
@@ -950,7 +950,8 @@ form select[multiple]:focus {
   background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
   color: #fcfcfc;
 }
-.dangerous-button {
+.dangerous-button, .dangerous-button:visited {
+  margin: 12px 0;
   border: 1px solid #f9645b;
   border-top: 1px solid #ff7066;
   background: #f9645b;
@@ -958,14 +959,14 @@ form select[multiple]:focus {
   background: -moz-linear-gradient(top, #ff7066, #f9645b);
   color: #fcfcfc;
 }
-.dangerous-button :hover {
+.dangerous-button:hover {
   border-top-color: #ff7d72;
   background: #ff7066;
   background: -webkit-gradient(linear, left top, left bottom, from(#ff7d72), to(#f9645b));
   background: -moz-linear-gradient(top, #ff7d72, #f9645b);
   color: #ffffff;
 }
-.dangerous-button :active {
+.dangerous-button:active {
   border-color: #f9645b;
   border-bottom-color: #ff7066;
   background: #de5951;
@@ -1410,13 +1411,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 #content-wrap {
   clear: both;
   width: 100%;
-  padding-bottom: 268px;
+  padding-bottom: 194px;
   background: #333333 url('/static/images/content-tile.png');
 }
 #content {
   float: left;
   width: 940px;
-  padding: 20px 10px;
+  padding: 12px;
   display: inline;
 }
 .info-side-bar {
@@ -1673,21 +1674,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   margin: 2px 0;
   width: 70%;
 }
-.full-box ul.token-input-list li.token-input-token :hover {
-  border-top-color: #ff6940;
-  background: #e45434;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff5e3a), to(#cc4b2e));
-  background: -moz-linear-gradient(top, #ff5e3a, #cc4b2e);
-  color: #ffffff;
-}
-.full-box ul.token-input-list li.token-input-token :active {
-  border-color: #e45434;
-  border-top-color: #b64329;
-  background: #e45434;
-  background: -webkit-gradient(linear, left top, left bottom, from(#cc4b2e), to(#e45434));
-  background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
-  color: #fcfcfc;
-}
 .full-box ul.token-input-list li.token-input-input-token {
   border: none;
 }
@@ -1832,21 +1818,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   padding: 8px;
   margin: 2px 0;
   width: 70%;
-}
-.tools-box ul.token-input-list li.token-input-token :hover {
-  border-top-color: #ff6940;
-  background: #e45434;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff5e3a), to(#cc4b2e));
-  background: -moz-linear-gradient(top, #ff5e3a, #cc4b2e);
-  color: #ffffff;
-}
-.tools-box ul.token-input-list li.token-input-token :active {
-  border-color: #e45434;
-  border-top-color: #b64329;
-  background: #e45434;
-  background: -webkit-gradient(linear, left top, left bottom, from(#cc4b2e), to(#e45434));
-  background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
-  color: #fcfcfc;
 }
 .tools-box ul.token-input-list li.token-input-input-token {
   border: none;
@@ -2938,21 +2909,6 @@ div.token-input-dropdown p {
   padding: 8px;
   margin: 2px 0;
   width: 90%;
-}
-.facebox-box ul.token-input-list li.token-input-token :hover {
-  border-top-color: #ff6940;
-  background: #e45434;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff5e3a), to(#cc4b2e));
-  background: -moz-linear-gradient(top, #ff5e3a, #cc4b2e);
-  color: #ffffff;
-}
-.facebox-box ul.token-input-list li.token-input-token :active {
-  border-color: #e45434;
-  border-top-color: #b64329;
-  background: #e45434;
-  background: -webkit-gradient(linear, left top, left bottom, from(#cc4b2e), to(#e45434));
-  background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
-  color: #fcfcfc;
 }
 .facebox-box ul.token-input-list li.token-input-input-token {
   border: none;

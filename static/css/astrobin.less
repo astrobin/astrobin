@@ -1066,18 +1066,23 @@ form {
     margin: @spacer-large 0;
     padding: @spacer-small @spacer-medium;
     cursor: pointer;}
-.button {
-    :hover {
-        .button-gradient-hilighted;}
-    :active {
-        .button-gradient-active;}}
+.button:hover {
+    .button-gradient-hilighted;
+}
+.button:active {
+    .button-gradient-active;
+}
 
-.dangerous-button {
+.dangerous-button, .dangerous-button:visited {
+    margin: @spacer-large 0;
     .danger-gradient;
-    :hover {
-        .danger-gradient-hilighted;}
-    :active {
-        .danger-gradient-active;}}
+}
+.dangerous-button:hover {
+    .danger-gradient-hilighted;
+}
+.dangerous-button:active {
+    .danger-gradient-active;
+}
 
 
 /* ------------------------------------------
@@ -1436,14 +1441,14 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 #content-wrap {
     clear: both;
     width: 100%;
-    padding-bottom: @footer-height;
+    padding-bottom: @footer-height - @wrap-shadow-offset - @spacer-large;
     background: (@background-color) url('/static/images/content-tile.png');
 }
 
 #content {
     float: left;
     width: @site-width - 20px;
-    padding: 20px 10px;
+    padding: @spacer-large;
     display: inline;}
 
 .info-side-bar {
@@ -2140,7 +2145,8 @@ input.date {
 .sort {
     margin-bottom: 5px;}
 
-img.thumbnail {}
+img.thumbnail {
+}
 .thumbnail-list {
     img.solved-badge {
         position: absolute;
