@@ -56,6 +56,14 @@ def now_timezone():
     return datetime.datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
+def monthdelta(date, delta):
+    m, y = (date.month+delta) % 12, date.year + ((date.month)+delta-1) // 12
+    if not m: m = 12
+    d = [31,
+         29 if y%4==0 and not y%400==0 else 28,
+         31,30,31,30,31,31,30,31,30,31][m-1]
+    return date.replace(day=d,month=m, year=y)
+
 def valueReader(source, field):
     def unicode_truncate(s, length, encoding='utf-8'):
         encoded = s.encode(encoding)[:length]
@@ -1282,6 +1290,14 @@ def user_page(request, username):
 
         section = 'public'
 
+    # Stats
+    '''
+    import stats as _s
+    (ih_flot_label, ih_flot_data, ih_flot_options) = _s.integration_hours(user, request.GET.get('s_ihp', 'monthly'))
+    (ui_flot_label, ui_flot_data, ui_flot_options) = _s.uploaded_images(user, request.GET.get('s_uip', 'monthly'))
+    (ihg_flot_label, ihg_flot_data, ihg_flot_options) = _s.integration_hours_by_gear(user, request.GET.get('s_ihgp', 'monthly'))
+    '''
+
     return object_list(
         request,
         queryset=sqs,
@@ -1299,7 +1315,52 @@ def user_page(request, username):
                          'backlink':backlink,
                          'gear_list':gear_list,
                          'stats':stats,
-                         'smart_albums':smart_albums})
+                         'smart_albums':smart_albums,
+                        })
+
+
+@require_GET
+def user_profile_stats_get_integration_hours_ajax(request, username, period = 'monthly'):
+    user = User.objects.get(username = username)
+
+    import stats as _s
+    (label, data, options) = _s.integration_hours(user, period)
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, period = 'monthly'):
+    user = User.objects.get(username = username)
+
+    import stats as _s
+    (data, options) = _s.integration_hours_by_gear(user, period)
+    response_dict = {
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def user_profile_stats_get_uploaded_images_ajax(request, username, period = 'monthly'):
+    user = User.objects.get(username = username)
+
+    import stats as _s
+    (label, data, options) = _s.uploaded_images(user, period)
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
 
 
 @login_required
@@ -2018,14 +2079,6 @@ def set_language(request, lang):
 
 @require_GET
 def nightly(request):
-    def monthdelta(date, delta):
-        m, y = (date.month+delta) % 12, date.year + ((date.month)+delta-1) // 12
-        if not m: m = 12
-        d = [31,
-             29 if y%4==0 and not y%400==0 else 28,
-             31,30,31,30,31,31,30,31,30,31][m-1]
-        return date.replace(day=d,month=m, year=y)
-
     month_offset = int(request.GET.get('month_offset', 0))
     start = monthdelta(datetime.datetime.today().date(), -month_offset)
     sqs = None
