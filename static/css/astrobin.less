@@ -158,6 +158,11 @@
     -moz-box-shadow: rgba(0,0,0,0.8) 0 1px 5px;
     box-shadow: rgba(0,0,0,0.8) 0 1px 5px;}
 
+.box-shadow-subtle {
+    -webkit-box-shadow: rgba(0,0,0,0.3) 0 2px 4px;
+    -moz-box-shadow: rgba(0,0,0,0.3) 0 2px 4px;
+    box-shadow: rgba(0,0,0,0.3) 0 2px 4px;}
+
 .bottom-box-shadow {
     -webkit-box-shadow: rgba(0,0,0,0.2) 0 6px 18px;
     -moz-box-shadow: rgba(0,0,0,0.2) 0 6px 18px;
@@ -188,6 +193,8 @@
 }
 .text-shadow {
     text-shadow: rgba(0,0,0,0.8) 0 1px 1px;}
+.text-shadow-subtle {
+    text-shadow: rgba(0,0,0,0.2) 0 3px 3px;}
 
 .strong {
     color: @strong-text-color;
@@ -913,7 +920,7 @@ h1, h2, h3, h4 {
     font-family: @headers_font, Georgia, Times New Roman, serif;
     font-weight: bold;
     color: @header-color;
-    .text-shadow;}
+    .text-shadow-subtle;}
 
 h1 {
     margin-bottom: @spacer-xlarge;
@@ -1741,6 +1748,7 @@ ul.topnav {
     padding: 0;
     .button-gradient;
     .rounded-corners;
+    .box-shadow-subtle;
     display: block;
     height: 24px;
     >li {
