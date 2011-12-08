@@ -89,6 +89,11 @@
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
 }
+.box-shadow-subtle {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+}
 .bottom-box-shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 6px 18px;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 6px 18px;
@@ -119,6 +124,9 @@
 }
 .text-shadow {
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+}
+.text-shadow-subtle {
+  text-shadow: rgba(0, 0, 0, 0.2) 0 3px 3px;
 }
 .strong {
   color: #fcfcfc;
@@ -749,7 +757,7 @@ h4 {
   font-family: "Droid Sans", Georgia, Times New Roman, serif;
   font-weight: bold;
   color: #fcfcfc;
-  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+  text-shadow: rgba(0, 0, 0, 0.2) 0 3px 3px;
 }
 h1 {
   margin-bottom: 16px;
@@ -1919,6 +1927,9 @@ ul.topnav {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   display: block;
   height: 24px;
 }
