@@ -106,14 +106,14 @@ urlpatterns = patterns('',
 
     url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
     url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
-    url(r'^messages/compose/(?P<recipient>[\+\w]+)/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose_to'),
+    url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose_to'),
     url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'}, name='messages_detail'),
     url(r'^messages/delete/(?P<thread_id>[\d]+)/$', messages_delete, name='messages_delete'),
     url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
     url(r"^messages/recipient-search/$", messages_recipient_search, name="recipient_search"),
     url(r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply, {'template_name': 'messages/message_list_view.html'}, name="message_reply"),
     # modal composing 
-    url(r'^messages/modal-compose/(?P<recipient>[\w.+-_]+)/$', messages_compose, {
+    url(r'^messages/modal-compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {
                             "template_name":"messages/modal_compose.html",
                             "form_class": MessagesComposeForm
                         }, name='modal_messages_compose_to'),
