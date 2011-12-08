@@ -12,11 +12,12 @@
 @text-color: @strong-text-color - #444;
 @input-color: @background-color;
 
-@hilight-factor: 1.2;
-@strong-hilight-factor: 1.5;
-@strongest-hilight-factor: 2.0;
-@border-color: @background-color / @strong-hilight-factor;
-@border-bottom-color: @background-color * @strongest-hilight-factor;
+@hilight-factor: 1.12;
+@strong-hilight-factor: 1.25;
+@strongest-hilight-factor: 1.4;
+@border-color: @background-color / @hilight-factor;
+@border-bottom-color: @background-color * @strong-hilight-factor;
+@border-top-color: @background-color * @strongest-hilight-factor;
 @border-color-inverted: @strong-text-color;
 @border-shadow-color: @background-color / @strong-hilight-factor;
 @border-shadow-color-inverted: @text-color + #030303;
@@ -153,9 +154,9 @@
      border-radius: @radius 0 @radius @radius;}
 
 .box-shadow {
-    -webkit-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
-    -moz-box-shadow: rgba(0,0,0,0.8) 0 1px 6px;
-    box-shadow: rgba(0,0,0,0.8) 0 1px 6px;}
+    -webkit-box-shadow: rgba(0,0,0,0.8) 0 1px 5px;
+    -moz-box-shadow: rgba(0,0,0,0.8) 0 1px 5px;
+    box-shadow: rgba(0,0,0,0.8) 0 1px 5px;}
 
 .bottom-box-shadow {
     -webkit-box-shadow: rgba(0,0,0,0.2) 0 6px 18px;
@@ -179,12 +180,12 @@
 
 .common-border {
     border: 1px solid @border-color;
-    border-bottom: 1px solid @border-bottom-color;}
-
+    border-top: 1px solid @border-top-color;
+}
 .common-border-inverted {
-    border: 1px solid @border-bottom-color;
-    border-bottom: 1px solid @border-color;}
-
+    border: 1px solid @border-color;
+    border-bottom: 1px solid @border-top-color;
+}
 .text-shadow {
     text-shadow: rgba(0,0,0,0.8) 0 1px 1px;}
 
@@ -1033,7 +1034,7 @@ form {
         font-size: @base-font-size;
         margin: 2px 0;
         padding: @spacer-medium @spacer-small;
-        .common-border;
+        .common-border-inverted;
         background-color: @input-color;
         color: @text-color + #111;
         width: 70%;
@@ -1169,7 +1170,7 @@ form {
         position: absolute;
         top: 12px; right: 0;
         padding: 0 @spacer-small;
-        .common-border;
+        .common-border-inverted;
         background-color: @background-color / @hilight-factor;
         .rounded-corners;
         p {
@@ -1232,7 +1233,7 @@ form {
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
     list-style-type: none;
-    .common-border;
+    .common-border-inverted;
     padding: 8px 4px;
     margin: 2px 0;
     width: 70%;
@@ -1284,7 +1285,7 @@ ul.as-list {
     background: @text-color;
     background: -moz-linear-gradient(top, @strong-text-color, @text-color);
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@strong-text-color), to(@text-color));
-    .common-border;
+    .common-border-inverted;
     color: @background-color;
     .rounded-corners;
     .box-shadow;
@@ -1436,7 +1437,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     clear: both;
     width: 100%;
     padding-bottom: @footer-height;
-    background: @background-color;}
+    background: (@background-color) url('/static/images/content-tile.png');
+}
 
 #content {
     float: left;
@@ -1451,7 +1453,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: 120px;
     .common-border;
     border-right: none;
-    background-color: @dark-panel-color;
+    background: @dark-panel-color url('/static/images/dark-panel-tile.png');
     img.thumbnail {
         border: 1px solid @link-color;}
     p {
@@ -1482,7 +1484,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: 740px;
     padding: 20px;
     .common-border;
-    background-color: @dark-panel-color;
+    background: @dark-panel-color url('/static/images/dark-panel-tile.png');
     min-height: 135px;
     .rounded-corners;
     .box-shadow;
@@ -1535,7 +1537,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin: 0 auto;
     padding: 10px;
     .rounded-corners(12px);
-    background-color: @light-panel-color;
+    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .common-border;
     max-width: 300px;
     padding: @spacer-large;
@@ -1560,7 +1562,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     padding: @spacer-xxlarge;
     margin: @spacer-large 0;
     .rounded-corners;
-    background-color: @light-panel-color;
+    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .common-border;
     label {
         height: @spacer-xlarge;
@@ -1582,7 +1584,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     ul.token-input-list {
         display: inline-block;
         list-style-type: none;
-        .common-border;
+        .common-border-inverted;
         padding: @spacer-medium @spacer-small;
         margin: @spacer-small 0;
         overflow: auto;
@@ -1868,7 +1870,7 @@ ul.topnav {
         background: url('/static/images/popup-unread-bg.png');
         border-left: 1px solid @strong-text-color;}
     li {
-        border-bottom: 1px dotted (@border-bottom-color * @strongest-hilight-factor);
+        border-bottom: 1px solid #cdcdcd;
         :hover {
             background: url('/static/images/popup-li-bg.png');}}
     li.last {
@@ -1941,7 +1943,7 @@ span.copy-box {
     padding: 6px;
     margin-left: 6px;
     color: @text-color;
-    .common-border;
+    .common-border-inverted;
     background-color: @dark-panel-color;
     .rounded-corners;}
 
@@ -1950,7 +1952,7 @@ span.copy-box {
     padding: 8px 10px;
     .common-border;
     overflow: auto;
-    background-color: @light-panel-color;
+    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .rounded-corners;
     h3 {
         display: inline-block;}
@@ -2123,7 +2125,7 @@ input.date {
 }
 
 .image-strip {
-    background-color: @light-panel-color;
+    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .common-border;
     .rounded-corners;
     list-style: none;
@@ -2444,7 +2446,7 @@ p.help {
     display: inline-block;
     input {
         width: auto;
-        .common-border;
+        .common-border-inverted;
         background-color: @background-color / @hilight-factor;
         .rounded-corners;
         color: @text-color / @strongest-hilight-factor;
@@ -2473,7 +2475,7 @@ p.help {
 }
 
 .message {
-    .common-border-inverted;
+    .common-border;
     padding: @spacer-medium;
     margin-bottom: @spacer-small;
     position: relative;
@@ -2523,7 +2525,7 @@ div.token-input-dropdown {
     width: 300px;
     z-index: 999;
     background-color: @light-panel-color;
-    .common-border;
+    .common-border-inverted;
     li.token-input-selected-dropdown-item {
         .button-gradient;
     }
@@ -2548,7 +2550,7 @@ div.token-input-dropdown {
     }
     ul.token-input-list {
         list-style-type: none;
-        .common-border;
+        .common-border-inverted;
         padding: @spacer-medium @spacer-small;
         margin: @spacer-small 0;
         overflow: auto;
