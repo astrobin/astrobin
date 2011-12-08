@@ -1694,6 +1694,9 @@ ul.bar {
 }
 
 .profile {
+    a.stats_anchor {
+        margin-bottom: @spacer-xxxlarge;
+    }
     ul.bar {
         .bar_mixin();
         float: right;
@@ -1716,6 +1719,11 @@ ul.bar {
         }
         .plot {
             margin-top: @spacer-xxxlarge;
+            text-align: center;
+            .loading {
+                font-size: 87.5%;
+                margin-top: 120px;
+            }
         }
     }
 }
