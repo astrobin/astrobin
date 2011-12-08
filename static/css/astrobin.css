@@ -2225,7 +2225,7 @@ span.copy-box {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-#technical-card {
+#technical-card, #description {
   margin: 0 auto 25px auto;
   padding: 8px 10px;
   border: 1px solid #2e2e2e;
@@ -2236,29 +2236,32 @@ span.copy-box {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-#technical-card h3 {
+#technical-card h3, #description h3 {
   display: inline-block;
 }
-#technical-card .gear, #technical-card .acquisition {
+#technical-card .gear,
+#description .gear,
+#technical-card .acquisition,
+#description .acquisition {
   float: left;
   width: 48%;
   display: inline-block;
 }
-#technical-card .gear {
+#technical-card .gear, #description .gear {
   border-right: 1px solid #404040;
   margin-right: 20px;
 }
-#technical-card .acquisition {
+#technical-card .acquisition, #description .acquisition {
   padding-left: 5px;
 }
-#technical-card .acquisition img {
+#technical-card .acquisition img, #description .acquisition img {
   border: 1px solid #333333;
 }
-#technical-card .astrometry {
+#technical-card .astrometry, #description .astrometry {
   display: block;
   border-top: 1px solid #404040;
 }
-#technical-card p {
+#technical-card p, #description p {
   margin: 2px 0;
 }
 /* footer */
