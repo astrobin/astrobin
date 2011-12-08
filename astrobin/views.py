@@ -1291,9 +1291,12 @@ def user_page(request, username):
         section = 'public'
 
     # Stats
+    '''
     import stats as _s
     (ih_flot_label, ih_flot_data, ih_flot_options) = _s.integration_hours(user, request.GET.get('s_ihp', 'monthly'))
     (ui_flot_label, ui_flot_data, ui_flot_options) = _s.uploaded_images(user, request.GET.get('s_uip', 'monthly'))
+    (ihg_flot_label, ihg_flot_data, ihg_flot_options) = _s.integration_hours_by_gear(user, request.GET.get('s_ihgp', 'monthly'))
+    '''
 
     return object_list(
         request,
@@ -1313,15 +1316,51 @@ def user_page(request, username):
                          'gear_list':gear_list,
                          'stats':stats,
                          'smart_albums':smart_albums,
-
-                         'ih_flot_label':ih_flot_label,
-                         'ih_flot_data':ih_flot_data,
-                         'ih_flot_options':ih_flot_options,
-
-                         'ui_flot_label':ui_flot_label,
-                         'ui_flot_data':ui_flot_data,
-                         'ui_flot_options':ui_flot_options,
                         })
+
+
+@require_GET
+def user_profile_stats_get_integration_hours_ajax(request, username, period = 'monthly'):
+    user = User.objects.get(username = username)
+
+    import stats as _s
+    (label, data, options) = _s.integration_hours(user, period)
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, period = 'monthly'):
+    user = User.objects.get(username = username)
+
+    import stats as _s
+    (data, options) = _s.integration_hours_by_gear(user, period)
+    response_dict = {
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def user_profile_stats_get_uploaded_images_ajax(request, username, period = 'monthly'):
+    user = User.objects.get(username = username)
+
+    import stats as _s
+    (label, data, options) = _s.uploaded_images(user, period)
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
 
 
 @login_required

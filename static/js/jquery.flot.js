@@ -2203,7 +2203,7 @@
             if (fragments.length == 0)
                 return;
 
-            var table = '<table style="font-size:smaller;color:' + options.grid.color + '">' + fragments.join("") + '</table>';
+            var table = '<table style="font-size:smaller;color:' + options.grid.color + ';opacity:' + options.legend.backgroundOpacity + '">' + fragments.join("") + '</table>';
             if (options.legend.container != null)
                 $(options.legend.container).html(table);
             else {
