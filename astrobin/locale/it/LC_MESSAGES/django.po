@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-07 01:43-0500\n"
-"PO-Revision-Date: 2011-12-07 01:43-0500\n"
+"POT-Creation-Date: 2011-12-08 04:05-0500\n"
+"PO-Revision-Date: 2011-12-08 04:09-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -41,7 +41,7 @@ msgstr "Soggetti"
 #: forms.py:51
 #: forms.py:112
 #: models.py:678
-#: views.py:321
+#: views.py:329
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Luoghi"
@@ -422,7 +422,7 @@ msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del sensore. Esempio: -20."
 
 #: models.py:570
-#: views.py:324
+#: views.py:332
 msgid "Darks"
 msgstr "Dark"
 
@@ -431,7 +431,7 @@ msgid "The number of dark frames."
 msgstr "Numero di dark."
 
 #: models.py:575
-#: views.py:325
+#: views.py:333
 msgid "Flats"
 msgstr "Flat"
 
@@ -440,7 +440,7 @@ msgid "The number of flat frames."
 msgstr "Numero di flat."
 
 #: models.py:580
-#: views.py:326
+#: views.py:334
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
@@ -449,7 +449,7 @@ msgid "The number of dark flat frames."
 msgstr "Numero di dark dei flat."
 
 #: models.py:585
-#: views.py:327
+#: views.py:335
 msgid "Bias"
 msgstr "Bias"
 
@@ -458,17 +458,17 @@ msgid "The number of bias/offset frames."
 msgstr "Numero di frame bias/offset."
 
 #: models.py:590
-#: views.py:330
+#: views.py:338
 msgid "Mean SQM"
 msgstr "SQM medio"
 
 #: models.py:595
-#: views.py:331
+#: views.py:339
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
 #: models.py:614
-#: views.py:322
+#: views.py:330
 #: templates/image/detail.html:467
 msgid "Frames"
 msgstr "Pose"
@@ -562,22 +562,22 @@ msgid "Language"
 msgstr "Lingua"
 
 #: search.py:70
-#: views.py:553
-#: views.py:557
-#: views.py:779
-#: views.py:782
-#: views.py:839
-#: views.py:863
+#: views.py:561
+#: views.py:565
+#: views.py:787
+#: views.py:790
+#: views.py:847
+#: views.py:871
 #: templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
 #: search.py:71
-#: views.py:554
-#: views.py:780
-#: views.py:840
-#: views.py:864
+#: views.py:562
+#: views.py:788
+#: views.py:848
+#: views.py:872
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
@@ -585,104 +585,140 @@ msgstr "Nessun risultato. Spiacente."
 msgid "Matching items:"
 msgstr "Risultati:"
 
-#: views.py:319
+#: stats.py:18
+msgid "Integration hours, yearly"
+msgstr "Ore di integrazione, annuali"
+
+#: stats.py:19
+msgid "Integration hours, monthly"
+msgstr "Ore di integrazione, mensili"
+
+#: stats.py:20
+msgid "Integration hours, daily"
+msgstr "Ore di integrazione, giornaliere"
+
+#: stats.py:58
+msgid "Integration hours by gear, yearly"
+msgstr "Ore di integrazione per strumento, annuali"
+
+#: stats.py:59
+msgid "Integration hours by gear, monthly"
+msgstr "Ore di integrazione per strumento, mensili"
+
+#: stats.py:60
+msgid "Integration hours by gear, daily"
+msgstr "Ore di integrazione per strumento, giornaliere"
+
+#: stats.py:108
+msgid "Uploaded images, yearly"
+msgstr "Immagini caricate, annuali"
+
+#: stats.py:109
+msgid "Uploaded images, monthly"
+msgstr "Immagini caricate, mensili"
+
+#: stats.py:110
+msgid "Uploaded images, daily"
+msgstr "Immagini caricate, giornaliere"
+
+#: views.py:327
 msgid "Resolution"
 msgstr "Risoluzione"
 
-#: views.py:320
-#: views.py:400
+#: views.py:328
+#: views.py:408
 msgid "Dates"
 msgstr "Date"
 
-#: views.py:323
+#: views.py:331
 #: templates/inclusion_tags/search_image_list.html:16
 #: templates/search/search.html:23
 msgid "Integration"
 msgstr "Integrazione"
 
-#: views.py:323
-#: views.py:1203
-#: views.py:1204
+#: views.py:331
+#: views.py:1211
+#: views.py:1212
 #: templates/inclusion_tags/search_image_list.html:16
 msgid "hours"
 msgstr "ore"
 
-#: views.py:328
+#: views.py:336
 msgid "Avg. Moon age"
 msgstr "Giorno lunare medio"
 
-#: views.py:329
+#: views.py:337
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:555
+#: views.py:563
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:558
-#: views.py:783
+#: views.py:566
+#: views.py:791
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:559
+#: views.py:567
 #: templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:962
+#: views.py:970
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:967
-#: views.py:979
-#: views.py:1017
+#: views.py:975
+#: views.py:987
+#: views.py:1025
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1181
+#: views.py:1189
 #: templatetags/tags.py:111
 msgid "minutes"
 msgstr "minuti"
 
-#: views.py:1182
+#: views.py:1190
 #: templatetags/tags.py:112
 msgid "seconds ago"
 msgstr "secondi fa"
 
-#: views.py:1184
+#: views.py:1192
 #: templatetags/tags.py:113
 #, python-format
 msgid "%s ago"
 msgstr "%s fa"
 
-#: views.py:1200
+#: views.py:1208
 msgid "Member since"
 msgstr "Utente da"
 
-#: views.py:1201
+#: views.py:1209
 msgid "Last login"
 msgstr "Ultimo login"
 
-#: views.py:1202
+#: views.py:1210
 #: templates/leaderboard.html:25
 msgid "Images uploaded"
 msgstr "Immagini caricate"
 
-#: views.py:1203
+#: views.py:1211
 msgid "Total integration time"
 msgstr "Integrazione totale"
 
-#: views.py:1204
+#: views.py:1212
 msgid "Average integration time"
 msgstr "Integrazione media"
 
-#: views.py:1819
+#: views.py:1880
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1843
+#: views.py:1904
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -828,8 +864,8 @@ msgid "Upload!"
 msgstr "Carica!"
 
 #: templates/base.html:157
-#: templates/user/profile.html:163
-#: templates/user/profile.html.py:166
+#: templates/user/profile.html:272
+#: templates/user/profile.html.py:275
 msgid "Logout"
 msgstr "Logout"
 
@@ -923,12 +959,12 @@ msgstr "Feedback"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:404
+#: templates/base.html:407
 #: templates/image/detail.html:626
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:405
+#: templates/base.html:408
 #: templates/image/detail.html:627
 msgid "Choose file"
 msgstr "Scegli file"
@@ -1242,8 +1278,8 @@ msgstr "Informazioni di base"
 
 #: templates/profile-edit-menu.html:9
 #: templates/image/detail.html:427
-#: templates/user/profile.html:86
-#: templates/user/profile.html.py:177
+#: templates/user/profile.html:87
+#: templates/user/profile.html.py:238
 msgid "Gear"
 msgstr "Strumentazione"
 
@@ -1441,20 +1477,20 @@ msgstr "Vedi il profilo"
 
 #: templates/image/detail.html:187
 #: templates/image/detail.html.py:582
-#: templates/user/profile.html:50
-#: templates/user/profile.html.py:211
+#: templates/user/profile.html:51
+#: templates/user/profile.html.py:298
 msgid "Stop following"
 msgstr "Smetti di seguire"
 
 #: templates/image/detail.html:189
 #: templates/image/detail.html.py:590
-#: templates/user/profile.html:52
-#: templates/user/profile.html.py:219
+#: templates/user/profile.html:53
+#: templates/user/profile.html.py:306
 msgid "Follow"
 msgstr "Segui"
 
 #: templates/image/detail.html:195
-#: templates/user/profile.html:58
+#: templates/user/profile.html:59
 msgid "Send private message"
 msgstr "Manda un messaggio privato"
 
@@ -1611,41 +1647,41 @@ msgid "More: same camera"
 msgstr "Altre: stessa camera"
 
 #: templates/image/detail.html:578
-#: templates/user/profile.html:207
+#: templates/user/profile.html:294
 #, python-format
 msgid "Follow %(username)s?"
 msgstr "Seguire %(username)s?"
 
 #: templates/image/detail.html:579
-#: templates/user/profile.html:208
+#: templates/user/profile.html:295
 #, python-format
 msgid "You will receive a notification every time %(username)s posts a new image. Continue?"
 msgstr "Riceverai una notifica ogni volta che %(username)s carica una nuova immagine. Continuare?"
 
 #: templates/image/detail.html:580
-#: templates/user/profile.html:209
+#: templates/user/profile.html:296
 msgid "Yes, follow!"
 msgstr "Sì, segui!"
 
 #: templates/image/detail.html:586
-#: templates/user/profile.html:215
+#: templates/user/profile.html:302
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr "Smettere di seguire %(username)s?"
 
 #: templates/image/detail.html:587
-#: templates/user/profile.html:216
+#: templates/user/profile.html:303
 #, python-format
 msgid "You will stop receiving notifications when %(username)s posts a new image. Continue?"
 msgstr "Non riceverai più notifiche quando %(username)s carica una nuova immagine. Continuare?"
 
 #: templates/image/detail.html:588
-#: templates/user/profile.html:217
+#: templates/user/profile.html:304
 msgid "Yes, stop following!"
 msgstr "Si, smettere di seguire!"
 
 #: templates/image/detail.html:594
-#: templates/user/profile.html:223
+#: templates/user/profile.html:310
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Manda un messaggio a %(username)s"
@@ -1653,7 +1689,7 @@ msgstr "Manda un messaggio a %(username)s"
 #: templates/image/detail.html:596
 #: templates/messages/compose.html:16
 #: templates/messages/modal_compose.html:16
-#: templates/user/profile.html:225
+#: templates/user/profile.html:312
 msgid "Send"
 msgstr "Manda"
 
@@ -2460,7 +2496,7 @@ msgid "Relevance"
 msgstr "Rilevanza"
 
 #: templates/search/search.html:21
-#: templates/user/profile.html:71
+#: templates/user/profile.html:72
 msgid "Upload time"
 msgstr "Data di caricamento"
 
@@ -2476,90 +2512,136 @@ msgstr "Inserisci qualche termine di ricerca!"
 msgid "User not found:"
 msgstr "Utente non trovato:"
 
-#: templates/user/profile.html:11
+#: templates/user/profile.html:12
 msgid "View your images"
 msgstr "Le tue immagini"
 
-#: templates/user/profile.html:13
+#: templates/user/profile.html:14
 #, python-format
 msgid "View %(username)s's images:"
 msgstr "Le immagini di %(username)s:"
 
-#: templates/user/profile.html:21
-#: templates/user/profile.html.py:23
+#: templates/user/profile.html:22
+#: templates/user/profile.html.py:24
 msgid "Public Area"
 msgstr "Area Pubblica"
 
-#: templates/user/profile.html:27
-#: templates/user/profile.html.py:29
+#: templates/user/profile.html:28
+#: templates/user/profile.html.py:30
 msgid "Staging Area"
 msgstr "Area di Lavoro"
 
-#: templates/user/profile.html:41
+#: templates/user/profile.html:42
 msgid "User menu"
 msgstr "Menù utente"
 
-#: templates/user/profile.html:65
+#: templates/user/profile.html:66
 msgid "Sort images by"
 msgstr "Ordina immagini per:"
 
-#: templates/user/profile.html:76
+#: templates/user/profile.html:77
 msgid "Subject type"
 msgstr "Tipo di soggetto"
 
-#: templates/user/profile.html:81
+#: templates/user/profile.html:82
 msgid "Year"
 msgstr "Anno"
 
-#: templates/user/profile.html:91
+#: templates/user/profile.html:92
 msgid "Lacking data"
 msgstr "Senza dati"
 
-#: templates/user/profile.html:106
+#: templates/user/profile.html:107
 msgid "These are your \"work in progress\" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu."
 msgstr "Questi sono i tuoi \"lavori in corso\": solo tu puoi vedere questa lista. Puoi dare l'accesso ad una singola immagine tramite i link nel menù <em>Condividi</em>."
 
-#: templates/user/profile.html:117
+#: templates/user/profile.html:118
 msgid "(view more...)"
 msgstr "(mostra altre...)"
 
-#: templates/user/profile.html:126
+#: templates/user/profile.html:127
 msgid "No images."
 msgstr "Nessuna immagine."
 
-#: templates/user/profile.html:132
+#: templates/user/profile.html:133
 msgid "(go back)"
 msgstr "(torna indietro)"
 
-#: templates/user/profile.html:137
+#: templates/user/profile.html:138
 msgid "These images don't have enough data. It's a shame..."
 msgstr "Queste immagini non hanno abbastanza dati tecnici. Che peccato..."
 
-#: templates/user/profile.html:139
+#: templates/user/profile.html:140
 msgid "If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too."
 msgstr "Se vuoi che le tue immagini vengano categorizzate in album, dovresti fornire i dati necessari. Telescopi di acquisizione, camere di acquisizione e soggetti sono il minimo. Anche le date di acquisizione sono molto importanti."
 
 #: templates/user/profile.html:151
-msgid "Tools"
-msgstr "Strumenti"
+#, python-format
+msgid "%(user)s's statistics"
+msgstr "Statistiche di %(user)s"
 
-#: templates/user/profile.html:155
-#: templates/user/profile.html.py:158
-msgid "Edit profile"
-msgstr "Modifica profilo"
+#: templates/user/profile.html:154
+#, python-format
+msgid "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href=\"?public&sub=nodata\">here</a>."
+msgstr "Ehi <strong>%(user)s</strong>! Vorrei farti sapere che potresti rendere questo grafici più utili, se aggiungessi tutti i dati alle tue immagini. Assicurati di averlo fatto controllando <a href=\"?public&sub=nodata\">questa pagina</a>."
 
-#: templates/user/profile.html:175
+#: templates/user/profile.html:163
+#: templates/user/profile.html.py:188
+#: templates/user/profile.html:213
+msgid "Show by period"
+msgstr "Mostra per periodo"
+
+#: templates/user/profile.html:167
+#: templates/user/profile.html.py:192
+#: templates/user/profile.html:217
+msgid "Yearly"
+msgstr "Annuale"
+
+#: templates/user/profile.html:168
+#: templates/user/profile.html.py:193
+#: templates/user/profile.html:218
+msgid "Monthly"
+msgstr "Mensile"
+
+#: templates/user/profile.html:169
+#: templates/user/profile.html.py:194
+#: templates/user/profile.html:219
+msgid "Daily"
+msgstr "Giornaliero"
+
+#: templates/user/profile.html:178
+#: templates/user/profile.html.py:203
+#: templates/user/profile.html:228
+msgid "Please wait: the plot is loading..."
+msgstr "Attendere, prego: caricamento del grafico in corso..."
+
+#: templates/user/profile.html:179
+#: templates/user/profile.html.py:204
+#: templates/user/profile.html:229
+msgid "Loading..."
+msgstr "Caricamento in corso..."
+
+#: templates/user/profile.html:236
 #, python-format
 msgid "%(username)s's technical card"
 msgstr "Scheda tecnica di %(username)s"
 
-#: templates/user/profile.html:188
+#: templates/user/profile.html:249
 msgid "Stats"
 msgstr "Statistiche"
 
-#: templates/user/profile.html:195
+#: templates/user/profile.html:256
 msgid "Go to the homepage to upload a new image!"
 msgstr "Vai alla home per caricare una nuova foto!"
+
+#: templates/user/profile.html:260
+msgid "Tools"
+msgstr "Strumenti"
+
+#: templates/user/profile.html:264
+#: templates/user/profile.html.py:267
+msgid "Edit profile"
+msgstr "Modifica profilo"
 
 #: templates/user/profile/flickr_import.html:7
 msgid "Import your photos from Flickr"
