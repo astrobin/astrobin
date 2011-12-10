@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+
+{% block title %}AstroBin - {% trans "Stats" %}{% endblock %}
+{% block content %}
+    <div class="stats full-box clear">
+        <div class="plots">
+            <h2>{% trans "Total integration hours" %}</h2>
+            <a name="stats_integration_hours_anchor"></a>
+            <ul class="bar">
+                <li id="menu">
+                    <ul class="topnav">
+                        <li class="first last">
+                            <span class="text"><a href="#">{% trans "Show by period" %}</a></span>
+                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
+                            <div class="sub">
+                                <ul class="subnav">
+                                    <li><span class="text"><a href="{% query_string "s_ihp='yearly'" "" %}#stats_integration_hours_anchor">{% trans "Yearly" %}</a></span></li>
+                                    <li><span class="text"><a href="{% query_string "s_ihp='monthly'" "" %}#stats_integration_hours_anchor">{% trans "Monthly" %}</a></span></li>
+                                    <li><span class="text"><a href="{% query_string "s_ihp='daily'" "" %}#stats_integration_hours_anchor">{% trans "Daily" %}</a></span></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div id="stats_integration_hours" class="plot" style="width:880px;height:300px;">
+                <div class="loading">
+                    <p>{% trans "Please wait: the plot is loading..." %}</p>
+                    <img alt="{% trans "Loading..." %}" src="/static/images/plot-loading.gif" />
+                </div>
+            </div>
+        </div>
+
+        <div class="leaderboard">
+            <h2>{% trans "Leaderboard" %}</h2>
+            <p>
+            {% blocktrans %}How productive are the users on AstroBin? Here you can see them all, sorted by total hours of integration time (counting all their images) or number of images.{% endblocktrans %}
+            </p>
+
+            <div class=".sort">
+                    {% trans "Sort by:" %}&nbsp;
+                    <a href="{% url stats %}{% query_string "sort='tot_integration'" "" %}">{% trans "Total integration" %}</a>&nbsp;|&nbsp;
+                    <a href="{% url stats %}{% query_string "sort='avg_integration'" "" %}">{% trans "Avg. integration" %}</a>&nbsp;|&nbsp;
+                    <a href="{% url stats %}{% query_string "sort='images'" "" %}">{% trans "Images" %}</a>
+            </div>
+            <table>
+                <tr>
+                    <th>{% trans "Position" %}</th>
+                    <th>{% trans "User" %}</th>
+                    <th>{% trans "Total integration hours" %}</th>
+                    <th>{% trans "Avg. integration hours" %}</th>
+                    <th>{% trans "Images uploaded" %}</th>
+                </tr>
+            {% for u in user_list %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url user_page u.user_name %}">{{u.user_name}}</a></td>
+                    <td>{{u.user_integration|floatformat}}</a></td>
+                    <td>{{u.user_avg_integration|floatformat}}</a></td>
+                    <td>{{u.user_images}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $.ajax({
+        {% if 's_ihp' in request.GET %}
+            url: "{% url stats_integration_hours 'astrobin' request.GET.s_ihp %}",
+        {% else %}
+            url: "{% url stats_integration_hours 'astrobin' 'monthly' %}",
+        {% endif %}
+        method: 'GET',
+        dataType: 'json',
+        timeout: 5000,
+        success: function(series) {
+            $.plot($('#stats_integration_hours'),
+                [{
+                    label: series['flot_label'],
+                    color: "#CC4B2E",
+                    data: series['flot_data'],
+                }],
+                series['flot_options']);
+        }
+    });
+});
+</script>
+{% endblock %}
