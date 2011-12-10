@@ -318,9 +318,9 @@ $(document).ready(function() {
 
         $.ajax({
             {% if 's_ihp' in request.GET %}
-                url: "{% url stats_integration_hours user.username request.GET.s_ihp %}",
+                url: "{% url stats_integration_hours user.username request.GET.s_ihp 0 %}",
             {% else %}
-                url: "{% url stats_integration_hours user.username 'monthly' %}",
+                url: "{% url stats_integration_hours user.username 'monthly' 0 %}",
             {% endif %}
             method: 'GET',
             dataType: 'json',

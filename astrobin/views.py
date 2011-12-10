@@ -1271,14 +1271,6 @@ def user_page(request, username):
 
         section = 'public'
 
-    # Stats
-    '''
-    import stats as _s
-    (ih_flot_label, ih_flot_data, ih_flot_options) = _s.integration_hours(user, request.GET.get('s_ihp', 'monthly'))
-    (ui_flot_label, ui_flot_data, ui_flot_options) = _s.uploaded_images(user, request.GET.get('s_uip', 'monthly'))
-    (ihg_flot_label, ihg_flot_data, ihg_flot_options) = _s.integration_hours_by_gear(user, request.GET.get('s_ihgp', 'monthly'))
-    '''
-
     return object_list(
         request,
         queryset=sqs,
@@ -1301,11 +1293,11 @@ def user_page(request, username):
 
 
 @require_GET
-def user_profile_stats_get_integration_hours_ajax(request, username, period = 'monthly'):
+def user_profile_stats_get_integration_hours_ajax(request, username, period = 'monthly', since = 0):
     user = User.objects.get(username = username)
 
     import stats as _s
-    (label, data, options) = _s.integration_hours(user, period)
+    (label, data, options) = _s.integration_hours(user, period, int(since))
     response_dict = {
         'flot_label': label,
         'flot_data': data,

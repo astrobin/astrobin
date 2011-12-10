@@ -87,7 +87,7 @@ urlpatterns = patterns('',
 
     url(r'^me/$', views.me, name='me'),
     url(r'^users/(?P<username>[\w.@+-]+)/$', views.user_page, name='user_page'),
-    url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours/(?P<period>\w+)/$',
+    url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$',
         views.user_profile_stats_get_integration_hours_ajax,
         name = 'stats_integration_hours'),
     url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours_by_gear/(?P<period>\w+)/$',

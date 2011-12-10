@@ -13,7 +13,7 @@ def daterange(start, end):
     return [start + timedelta(days=i) for i in range(r)]
 
 
-def integration_hours(user, period='monthly'):
+def integration_hours(user, period = 'monthly', since = 0):
     _map = {
         'yearly' : (_("Integration hours, yearly") , '%Y'),
         'monthly': (_("Integration hours, monthly"), '%Y-%m'),
@@ -34,6 +34,10 @@ def integration_hours(user, period='monthly'):
 
     astrobin = User.objects.get(username = 'astrobin')
     all = DeepSky_Acquisition.objects.all().exclude(date = None).order_by('date')
+
+    if since > 0:
+        all = all.filter(date__gte = datetime.today().date() - timedelta(days = since))
+
     if user != astrobin:
         all = all.filter(image__user = user)
     
@@ -49,13 +53,14 @@ def integration_hours(user, period='monthly'):
         else:
             data[key] = integration
 
-    for date in daterange(all[0].date, datetime.today().date()):
-        grouped_date = date.strftime(_map[period][1])
-        t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-        if grouped_date in data.keys():
-            flot_data.append([t, data[grouped_date]])
-        else:
-            flot_data.append([t, 0])
+    if all:
+        for date in daterange(all[0].date, datetime.today().date()):
+            grouped_date = date.strftime(_map[period][1])
+            t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+            if grouped_date in data.keys():
+                flot_data.append([t, data[grouped_date]])
+            else:
+                flot_data.append([t, 0])
 
     return (flot_label, flot_data, flot_options)
 
