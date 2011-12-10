@@ -2712,7 +2712,15 @@ table.leaderboard {
 }
 /* Zinnia stuff */
 .hentry {
-  padding: 8px 28px 28px 28px;
+  padding: 12px 28px 52px 28px;
+  margin: 0 auto 12px auto;
+  width: 600px;
+  background: #393939 url('/static/images/light-panel-tile.png');
+  border: 1px solid #2e2e2e;
+  border-top: 1px solid #474747;
+}
+.hentry h2 a {
+  color: #fcfcfc;
 }
 .hentry p {
   margin: 0;
