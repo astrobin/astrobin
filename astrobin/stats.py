@@ -1,4 +1,4 @@
-from models import DeepSky_Acquisition, Image, UserProfile, Gear
+from models import DeepSky_Acquisition, Image, UserProfile, Gear, User
 
 from django.utils.translation import ugettext as _
 from django.utils.encoding import smart_str
@@ -32,26 +32,33 @@ def integration_hours(user, period='monthly'):
             'backgroundOpacity': 0.75},
     }
 
-    first = DeepSky_Acquisition.objects.filter(image__user = user).exclude(date = None).order_by('date')
+    astrobin = User.objects.get(username = 'astrobin')
+    all = DeepSky_Acquisition.objects.all().exclude(date = None).order_by('date')
+    if user != astrobin:
+        all = all.filter(image__user = user)
+    
     data = {}
-    if first:
-        for date in daterange(first[0].date, datetime.today().date()):
-            integration = 0
-            todays = DeepSky_Acquisition.objects.filter(image__user = user, date = date)
-            for i in todays:
-                if i.duration and i.number:
-                    integration += (i.duration * i.number) / 3600.0
-            key = date.strftime(_map[period][1])
-            if key in data:
-                if integration > 0:
-                    data[key] += integration
-            else:
-                data[key] = integration
+    for i in all:
+        integration = 0
+        if i.duration and i.number:
+            integration += (i.duration * i.number) / 3600.0
+        key = i.date.strftime(_map[period][1])
+        if key in data:
+            if integration > 0:
+                data[key] += integration
+        else:
+            data[key] = integration
 
-        for date, integration in sorted(data.iteritems()):
-            flot_data.append([time.mktime(datetime.strptime(date, _map[period][1]).timetuple()) * 1000, integration])
+    for date in daterange(all[0].date, datetime.today().date()):
+        grouped_date = date.strftime(_map[period][1])
+        t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+        if grouped_date in data.keys():
+            flot_data.append([t, data[grouped_date]])
+        else:
+            flot_data.append([t, 0])
 
     return (flot_label, flot_data, flot_options)
+
 
 def integration_hours_by_gear(user, period='monthly'):
     _map = {
@@ -74,31 +81,37 @@ def integration_hours_by_gear(user, period='monthly'):
 
     profile = UserProfile.objects.get(user = user)
     for g in Gear.objects.filter(Q(telescope__userprofile = profile) | Q(camera__userprofile = profile)):
-        first = DeepSky_Acquisition.objects.filter(image__user = user).exclude(date = None).order_by('date')
-        if first:
-            g_dict = {
-                'label': _map[period][0] + ": " + smart_str(g.name),
-                'stage_data': {},
-                'data': [],
-            }
-            for date in daterange(first[0].date, datetime.today().date()):
-                integration = 0
-                todays = DeepSky_Acquisition.objects.filter(Q(image__user = user), Q(date = date), Q(image__imaging_telescopes = g) | Q(image__imaging_cameras = g))
-                for i in todays:
-                    if i.duration and i.number:
-                        integration += (i.duration * i.number) / 3600.0
-                key = date.strftime(_map[period][1])
-                if key in g_dict['stage_data']:
-                    if integration > 0:
-                        g_dict['stage_data'][key] += integration
+        all = DeepSky_Acquisition.objects.filter(
+            Q(image__user = user),
+            Q(image__imaging_telescopes = g) | Q(image__imaging_cameras = g)).exclude(date = None).order_by('date')
+
+        g_dict = {
+            'label': _map[period][0] + ": " + smart_str(g.name),
+            'stage_data': {},
+            'data': [],
+        }
+
+        for i in all:
+            integration = 0
+            if i.duration and i.number:
+                integration += (i.duration * i.number) / 3600.0
+            key = i.date.strftime(_map[period][1])
+            if key in g_dict['stage_data']:
+                g_dict['stage_data'][key] += integration
+            else:
+                g_dict['stage_data'][key] = integration
+
+        if all:
+            for date in daterange(all[0].date, datetime.today().date()):
+                grouped_date = date.strftime(_map[period][1])
+                t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+                if grouped_date in g_dict['stage_data'].keys():
+                    g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
                 else:
-                    g_dict['stage_data'][key] = integration
+                    g_dict['data'].append([t, 0])
 
-            for date, integration in sorted(g_dict['stage_data'].iteritems()):
-                g_dict['data'].append([time.mktime(datetime.strptime(date, _map[period][1]).timetuple()) * 1000, integration])
-
-            del g_dict['stage_data']
-            flot_data.append(g_dict)
+        del g_dict['stage_data']
+        flot_data.append(g_dict)
 
     return (flot_data, flot_options)
 
@@ -122,23 +135,26 @@ def uploaded_images(user, period='monthly'):
             'backgroundOpacity': 0.75},
     }
 
-    first = Image.objects.filter(user = user).order_by('uploaded')
-    data = {}
-    if first:
-        for date in daterange(first[0].uploaded.date(), datetime.today().date()):
-            total = 0
-            todays = Image.objects.filter(user = user, uploaded__gte = date, uploaded__lte = date + timedelta(days = 1))
-            for i in todays:
-                total += 1
-            key = date.strftime(_map[period][1])
-            if key in data:
-                if total > 0:
-                    data[key] += total
-            else:
-                data[key] = total
+    astrobin = User.objects.get(username = 'astrobin')
+    all = Image.objects.all().order_by('uploaded')
+    if user != astrobin:
+        all = all.filter(user = user)
 
-        for date, total in sorted(data.iteritems()):
-            flot_data.append([time.mktime(datetime.strptime(date, _map[period][1]).timetuple()) * 1000, total])
+    data = {}
+    for i in all:
+        key = i.uploaded.date().strftime(_map[period][1])
+        if key in data:
+            data[key] += 1
+        else:
+            data[key] = 1 
+
+    for date in daterange(all[0].uploaded.date(), datetime.today().date()):
+        grouped_date = date.strftime(_map[period][1])
+        t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+        if grouped_date in data.keys():
+            flot_data.append([t, data[grouped_date]])
+        else:
+            flot_data.append([t, 0])
 
     return (flot_label, flot_data, flot_options)
 
