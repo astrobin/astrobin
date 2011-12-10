@@ -2707,7 +2707,7 @@ table.title td.license {
   margin: 0 0 28px 0;
   padding: 0;
   float: right;
-  margin: 8px 12px 0 0;
+  margin: 8px 0;
 }
 .stats ul.bar > li {
   float: left;
@@ -2719,10 +2719,6 @@ table.title td.license {
 }
 .stats .leaderboard {
   margin-top: 52px;
-}
-.stats .leaderboard .sort {
-  padding: 12px 0 4px 0;
-  margin-top: 12px;
 }
 .stats .leaderboard table {
   padding: 0;

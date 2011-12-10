@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-10 07:25-0500\n"
-"PO-Revision-Date: 2011-12-10 07:27-0500\n"
+"POT-Creation-Date: 2011-12-10 09:33-0500\n"
+"PO-Revision-Date: 2011-12-10 09:33-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -17,178 +17,176 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: forms.py:35
+#: forms.py:34
 msgid "If you're hosting a copy of this image on your website, put the address here."
 msgstr "Se una copia di questa immagine si trova sul tuo sito personale, metti qui l'indirizzo."
 
-#: forms.py:40
+#: forms.py:39
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr "Se possibile, usa nomi da catalogo (per esempio M101, NGC224 o IC1370)."
 
-#: forms.py:44
+#: forms.py:43
 msgid "The places from which you have taken this image."
 msgstr "Questi sono i luoghi da cui hai acquisito quest'immagine."
 
-#: forms.py:49
+#: forms.py:48
 msgid "Link"
 msgstr "Link"
 
-#: forms.py:50
+#: forms.py:49
 #: templates/image/edit/basic.html:32
 msgid "Subjects"
 msgstr "Soggetti"
 
-#: forms.py:51
-#: forms.py:112
+#: forms.py:50
+#: forms.py:111
 #: models.py:755
 #: views.py:333
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Luoghi"
 
-#: forms.py:79
-#: forms.py:222
+#: forms.py:78
+#: forms.py:221
 #: models.py:317
 msgid "Imaging telescopes or lenses"
 msgstr "Telescopi o obiettivi di acquisizione"
 
-#: forms.py:80
+#: forms.py:79
 #: models.py:318
 msgid "Guiding telescopes or lenses"
 msgstr "Telescopi o obiettivi di guida"
 
-#: forms.py:81
-#: forms.py:150
+#: forms.py:80
+#: forms.py:149
 #: models.py:319
 #: models.py:771
 msgid "Mounts"
 msgstr "Montature"
 
-#: forms.py:82
-#: forms.py:223
+#: forms.py:81
+#: forms.py:222
 #: models.py:320
 msgid "Imaging cameras"
 msgstr "Camere di acquisizione"
 
-#: forms.py:83
+#: forms.py:82
 #: models.py:321
 msgid "Guiding cameras"
 msgstr "Camere di guida"
 
-#: forms.py:84
-#: forms.py:152
+#: forms.py:83
+#: forms.py:151
 #: models.py:322
 #: models.py:773
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
-#: forms.py:85
-#: forms.py:153
+#: forms.py:84
+#: forms.py:152
 #: models.py:323
 #: models.py:774
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:86
-#: forms.py:154
+#: forms.py:85
+#: forms.py:153
 #: models.py:324
 #: models.py:775
 msgid "Filters"
 msgstr "Filtri"
 
-#: forms.py:87
-#: forms.py:155
+#: forms.py:86
+#: forms.py:154
 #: models.py:325
 #: models.py:776
 msgid "Accessories"
 msgstr "Accessori"
 
-#: forms.py:118
+#: forms.py:117
 msgid "All the telescopes and lenses you own, including the ones you use for guiding, go here."
 msgstr "Tutti i tuoi telescopi ed obiettivi, compresi quelli che usi per guidare, vanno qui."
 
-#: forms.py:127
+#: forms.py:126
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr "Le tue DSLR, CCD, camere planetarie e camere di guida vanno qui."
 
-#: forms.py:140
+#: forms.py:139
 msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."
 msgstr "Suggerimento: inserisci i filtri separatamente! Se invece li inserisci tutti assieme, ad esempio LRGB insieme, non potrai aggiungere sessioni di acquisizione separate per ogni filtro."
 
-#: forms.py:149
+#: forms.py:148
 #: models.py:770
 msgid "Telescopes and lenses"
 msgstr "Telescopi ed obiettivi"
 
-#: forms.py:151
+#: forms.py:150
 #: models.py:772
 msgid "Cameras"
 msgstr "Camere"
 
-#: forms.py:183
-#: templates/leaderboard.html:22
+#: forms.py:182
+#: templates/stats.html:60
 #: templates/image/detail.html:174
 msgid "User"
 msgstr "Utente"
 
-#: forms.py:200
-#: forms.py:204
-#: forms.py:325
-#: forms.py:354
+#: forms.py:199
+#: forms.py:203
+#: forms.py:324
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Usa il seguente formato: aaaa-mm-gg"
 
-#: forms.py:207
-#: forms.py:210
+#: forms.py:206
+#: forms.py:209
 msgid "Express value in hours"
 msgstr "Esprimi il valore in ore"
 
-#: forms.py:220
+#: forms.py:219
 msgid "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr "Cerca oggetti astronomici, telescopi o obiettivi, camere, filtri..."
 
-#: forms.py:224
+#: forms.py:223
 msgid "Acquired after"
 msgstr "Acquisita dopo il"
 
-#: forms.py:225
+#: forms.py:224
 msgid "Acquired before"
 msgstr "Acquisita prima del"
 
-#: forms.py:226
+#: forms.py:225
 msgid "Min. integration"
 msgstr "Integrazione min."
 
-#: forms.py:227
+#: forms.py:226
 msgid "Max. integration"
 msgstr "Integrazione max."
 
-#: forms.py:228
+#: forms.py:227
 msgid "Min. Moon phase %"
 msgstr "% fase lunare min."
 
-#: forms.py:229
+#: forms.py:228
 msgid "Max. Moon phase %"
 msgstr "% fase lunare max."
 
-#: forms.py:269
+#: forms.py:268
 msgid "For example: +12.44"
 msgstr "Per esempio: +12.44"
 
-#: forms.py:272
+#: forms.py:271
 msgid "For example: -51.25"
 msgstr "Per esempio: -51.25"
 
-#: forms.py:294
+#: forms.py:293
 msgid "Please enter a value between 1 and 5."
 msgstr "Inserire un valore tra 1 e 5."
 
-#: forms.py:299
+#: forms.py:298
 msgid "Please enter a value between 1 and 10."
 msgstr "Inserire un valore tra 1 e 10."
 
-#: forms.py:338
-#: forms.py:362
+#: forms.py:337
 #: models.py:514
 #: models.py:707
 #: templates/image/detail.html:461
@@ -645,27 +643,27 @@ msgstr "Ore di integrazione, mensili"
 msgid "Integration hours, daily"
 msgstr "Ore di integrazione, giornaliere"
 
-#: stats.py:58
+#: stats.py:70
 msgid "Integration hours by gear, yearly"
 msgstr "Ore di integrazione per strumento, annuali"
 
-#: stats.py:59
+#: stats.py:71
 msgid "Integration hours by gear, monthly"
 msgstr "Ore di integrazione per strumento, mensili"
 
-#: stats.py:60
+#: stats.py:72
 msgid "Integration hours by gear, daily"
 msgstr "Ore di integrazione per strumento, giornaliere"
 
-#: stats.py:108
+#: stats.py:126
 msgid "Uploaded images, yearly"
 msgstr "Immagini caricate, annuali"
 
-#: stats.py:109
+#: stats.py:127
 msgid "Uploaded images, monthly"
 msgstr "Immagini caricate, mensili"
 
-#: stats.py:110
+#: stats.py:128
 msgid "Uploaded images, daily"
 msgstr "Immagini caricate, giornaliere"
 
@@ -753,7 +751,7 @@ msgid "Last login"
 msgstr "Ultimo login"
 
 #: views.py:1191
-#: templates/leaderboard.html:25
+#: templates/stats.html:63
 msgid "Images uploaded"
 msgstr "Immagini caricate"
 
@@ -765,12 +763,12 @@ msgstr "Integrazione totale"
 msgid "Average integration time"
 msgstr "Integrazione media"
 
-#: views.py:1861
+#: views.py:1853
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1885
+#: views.py:1877
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -860,7 +858,7 @@ msgstr "Ciao, <a href=\"%(user_page)s\">%(username)s.</a>"
 
 #: templates/base.html:127
 #: templates/base.html.py:256
-#: templates/base.html:299
+#: templates/base.html:297
 msgid "Home"
 msgstr "Home"
 
@@ -876,25 +874,25 @@ msgid "Search"
 msgstr "Cerca"
 
 #: templates/base.html:131
-#: templates/base.html.py:260
-#: templates/leaderboard.html:5
-#: templates/leaderboard.html.py:8
-msgid "Leaderboard"
-msgstr "Classifica"
+#: templates/base.html.py:259
+#: templates/stats.html:5
+#: templates/user/profile.html:249
+msgid "Stats"
+msgstr "Statistiche"
 
 #: templates/base.html:133
-#: templates/base.html.py:262
+#: templates/base.html.py:260
 msgid "Nightly"
 msgstr "Notte dopo notte"
 
 #: templates/base.html:134
-#: templates/base.html.py:263
+#: templates/base.html.py:261
 #: templates/help.html:4
 msgid "Help"
 msgstr "Aiuto"
 
 #: templates/base.html:135
-#: templates/base.html.py:264
+#: templates/base.html.py:262
 #: templates/faq.html:4
 msgid "FAQ"
 msgstr "FAQ"
@@ -977,46 +975,46 @@ msgstr "AstroBin è un sito di hosting d'immagini pensato specificamente per gli
 msgid "Site links"
 msgstr "Link del sito"
 
-#: templates/base.html:265
+#: templates/base.html:263
 #: templates/tos.html:6
 msgid "Terms of Service"
 msgstr "Condizioni d'uso"
 
-#: templates/base.html:270
+#: templates/base.html:268
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/base.html:279
+#: templates/base.html:277
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:281
+#: templates/base.html:279
 msgid "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
 msgstr "AstroBin è Copyright &copy; 2011 Salvatore Iovene, Tutti i Diritti Riservati. Le immagini su questo sito sono copyright dei loro rispettivi proprietari."
 
-#: templates/base.html:300
+#: templates/base.html:298
 msgid "Follow AstroBin on Twitter"
 msgstr "Segui AstroBin su Twitter"
 
-#: templates/base.html:301
+#: templates/base.html:299
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/base.html:315
+#: templates/base.html:313
 msgid "Feedback"
 msgstr "Feedback"
 
-#: templates/base.html:326
+#: templates/base.html:324
 #: templates/messages/compose.html:18
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:407
+#: templates/base.html:405
 #: templates/image/detail.html:626
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:408
+#: templates/base.html:406
 #: templates/image/detail.html:627
 msgid "Choose file"
 msgstr "Scegli file"
@@ -1246,7 +1244,6 @@ msgid "Recent images"
 msgstr "Immagini recenti"
 
 #: templates/index.html:59
-#: templates/leaderboard.html:14
 #: templates/search/search.html:19
 msgid "Sort by:"
 msgstr "Ordina per:"
@@ -1266,34 +1263,6 @@ msgstr "Acquisizione"
 #: templates/search/search.html:24
 msgid "Views"
 msgstr "Più viste"
-
-#: templates/leaderboard.html:10
-msgid "How productive are the users on AstroBin? Here you can see them all, sorted by total hours of integration time (counting all their images) or number of images."
-msgstr "Quanto sono produttivi gli utenti di AstroBin? Qui puoi vederli tutti, ordinati per ore totali di integrazione (calcolando tutte le immagini di ogni utente) oppure numero di immagini."
-
-#: templates/leaderboard.html:15
-msgid "Total integration"
-msgstr "Integrazione totale"
-
-#: templates/leaderboard.html:16
-msgid "Avg. integration"
-msgstr "Integrazione media"
-
-#: templates/leaderboard.html:17
-msgid "Images"
-msgstr "Immagini"
-
-#: templates/leaderboard.html:21
-msgid "Position"
-msgstr "Posizione"
-
-#: templates/leaderboard.html:23
-msgid "Total integration hours"
-msgstr "Ore totali di integrazione"
-
-#: templates/leaderboard.html:24
-msgid "Avg. integration hours"
-msgstr "Ore di integrazione in media"
 
 #: templates/nightly.html:7
 msgid "Images acquired night after night"
@@ -1342,6 +1311,77 @@ msgstr "Importa da Flickr"
 #: templates/profile-edit-menu.html:18
 msgid "Preferences"
 msgstr "Opzioni"
+
+#: templates/stats.html:9
+msgid "Total integration hours in the last 12 months"
+msgstr "Ore totali di integrazione negli ultimi 12 mesi"
+
+#: templates/stats.html:15
+#: templates/user/profile.html:163
+#: templates/user/profile.html.py:188
+#: templates/user/profile.html:213
+msgid "Show by period"
+msgstr "Mostra per periodo"
+
+#: templates/stats.html:19
+#: templates/user/profile.html:168
+#: templates/user/profile.html.py:193
+#: templates/user/profile.html:218
+msgid "Monthly"
+msgstr "Mensile"
+
+#: templates/stats.html:20
+#: templates/user/profile.html:169
+#: templates/user/profile.html.py:194
+#: templates/user/profile.html:219
+msgid "Daily"
+msgstr "Giornaliero"
+
+#: templates/stats.html:29
+#: templates/user/profile.html:178
+#: templates/user/profile.html.py:203
+#: templates/user/profile.html:228
+msgid "Please wait: the plot is loading..."
+msgstr "Attendere, prego: caricamento del grafico in corso..."
+
+#: templates/stats.html:30
+#: templates/user/profile.html:179
+#: templates/user/profile.html.py:204
+#: templates/user/profile.html:229
+msgid "Loading..."
+msgstr "Caricamento in corso..."
+
+#: templates/stats.html:36
+msgid "Leaderboard"
+msgstr "Classifica"
+
+#: templates/stats.html:43
+msgid "Sort by"
+msgstr "Ordina per"
+
+#: templates/stats.html:47
+msgid "Total integration"
+msgstr "Integrazione totale"
+
+#: templates/stats.html:48
+msgid "Avg. integration"
+msgstr "Integrazione media"
+
+#: templates/stats.html:49
+msgid "Images"
+msgstr "Immagini"
+
+#: templates/stats.html:59
+msgid "Position"
+msgstr "Posizione"
+
+#: templates/stats.html:61
+msgid "Total integration hours"
+msgstr "Ore totali di integrazione"
+
+#: templates/stats.html:62
+msgid "Avg. integration hours"
+msgstr "Ore di integrazione in media"
 
 #: templates/tos.html:8
 msgid "AstroBin accounts are meant for members to share original images that they have created."
@@ -2613,50 +2653,16 @@ msgstr "Statistiche di %(user)s"
 msgid "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href=\"?public&sub=nodata\">here</a>."
 msgstr "Ehi <strong>%(user)s</strong>! Vorrei farti sapere che potresti rendere questo grafici più utili, se aggiungessi tutti i dati alle tue immagini. Assicurati di averlo fatto controllando <a href=\"?public&sub=nodata\">questa pagina</a>."
 
-#: templates/user/profile.html:163
-#: templates/user/profile.html.py:188
-#: templates/user/profile.html:213
-msgid "Show by period"
-msgstr "Mostra per periodo"
-
 #: templates/user/profile.html:167
 #: templates/user/profile.html.py:192
 #: templates/user/profile.html:217
 msgid "Yearly"
 msgstr "Annuale"
 
-#: templates/user/profile.html:168
-#: templates/user/profile.html.py:193
-#: templates/user/profile.html:218
-msgid "Monthly"
-msgstr "Mensile"
-
-#: templates/user/profile.html:169
-#: templates/user/profile.html.py:194
-#: templates/user/profile.html:219
-msgid "Daily"
-msgstr "Giornaliero"
-
-#: templates/user/profile.html:178
-#: templates/user/profile.html.py:203
-#: templates/user/profile.html:228
-msgid "Please wait: the plot is loading..."
-msgstr "Attendere, prego: caricamento del grafico in corso..."
-
-#: templates/user/profile.html:179
-#: templates/user/profile.html.py:204
-#: templates/user/profile.html:229
-msgid "Loading..."
-msgstr "Caricamento in corso..."
-
 #: templates/user/profile.html:236
 #, python-format
 msgid "%(username)s's technical card"
 msgstr "Scheda tecnica di %(username)s"
-
-#: templates/user/profile.html:249
-msgid "Stats"
-msgstr "Statistiche"
 
 #: templates/user/profile.html:256
 msgid "Go to the homepage to upload a new image!"
@@ -2780,6 +2786,15 @@ msgstr "Scegli la lingua usata per questo sito:"
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
 msgstr "Seleziona quali notifiche preferisci ricevere anche come e-mail:"
+
+#~ msgid ""
+#~ "How productive are the users on AstroBin? Here you can see them all, "
+#~ "sorted by total hours of integration time (counting all their images) or "
+#~ "number of images."
+#~ msgstr ""
+#~ "Quanto sono produttivi gli utenti di AstroBin? Qui puoi vederli tutti, "
+#~ "ordinati per ore totali di integrazione (calcolando tutte le immagini di "
+#~ "ogni utente) oppure numero di immagini."
 
 #~ msgid "Seeing (0-5)"
 #~ msgstr "Seeing (0-5)"
