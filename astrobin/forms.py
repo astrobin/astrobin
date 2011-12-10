@@ -287,6 +287,37 @@ class LocationEditForm(forms.ModelForm):
         )
 
 
+class SolarSystem_AcquisitionForm(forms.ModelForm):
+    def clean_seeing(self):
+        data = self.cleaned_data['seeing']
+        if data and data not in range(1, 5):
+            raise forms.ValidationError(_("Please enter a value between 1 and 5."))
+
+    def clean_transparency(self):
+        data = self.cleaned_data['transparency']
+        if data and data not in range(1, 10):
+            raise forms.ValidationError(_("Please enter a value between 1 and 10."))
+
+    class Meta:
+        model = SolarSystem_Acquisition
+        fields = (
+            'date',
+            'time',
+            'frames',
+            'fps',
+            'focal_length',
+            'cmi',
+            'cmii',
+            'cmiii',
+            'seeing',
+            'transparency',
+        )
+        widgets = {
+            'date': forms.TextInput(attrs={'class': 'datepickerclass'}),
+            'time': forms.TextInput(attrs={'class': 'timepickerclass'}),
+        }
+
+
 class DeepSky_AcquisitionForm(forms.ModelForm):
     date = forms.DateField(
         required=False,

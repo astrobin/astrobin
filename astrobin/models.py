@@ -510,8 +510,17 @@ class ImageRevision(models.Model):
  
 
 class Acquisition(models.Model):
-    date = models.DateField(_("Date"), null=True, blank=True, help_text=_("Please use the following format: yyyy-mm-dd"))
-    image = models.ForeignKey(Image, verbose_name=_("Image"))
+    date = models.DateField(
+        verbose_name = _("Date"),
+        null = True,
+        blank = True,
+        help_text = _("Please use the following format: yyyy-mm-dd."),
+    )
+
+    image = models.ForeignKey(
+        Image,
+        verbose_name=_("Image"),
+    )
 
     class Meta:
         app_label = 'astrobin'
@@ -617,15 +626,77 @@ class DeepSky_Acquisition(Acquisition):
 
 
 class SolarSystem_Acquisition(Acquisition):
-    frames = models.IntegerField(_("Frames"), null=True, blank=True)
-    fps = models.DecimalField(_("FPS"), max_digits=12, decimal_places=5, null=True, blank=True)
-    focal_length = models.IntegerField(_("Focal length"), null=True, blank=True)
-    cmi = models.DecimalField(_("CMI"), null=True, blank=True, max_digits=5, decimal_places=2)
-    cmii = models.DecimalField(_("CMII"), null=True, blank=True, max_digits=5, decimal_places=2)
-    cmiii = models.DecimalField(_("CMIII"), null=True, blank=True, max_digits=5, decimal_places=2)
-    seeing = models.IntegerField(_("Seeing"), null=True, blank=True)
-    transparency = models.IntegerField(_("Transparency"), null=True, blank=True)
-    time = models.CharField(_("Time"), null=True, blank=True, max_length=5)
+    frames = models.IntegerField(
+        null = True,
+        blank = True,
+        verbose_name = _("Number of frames"),
+        help_text = _("The total number of frames you have stacked."),
+    )
+
+    fps = models.DecimalField(
+        verbose_name = _("FPS"),
+        help_text = _("Frames per second."),
+        max_digits = 12,
+        decimal_places = 5,
+        null = True,
+        blank = True,
+    )
+
+    focal_length = models.IntegerField(
+        verbose_name = _("Focal length"),
+        help_text = _("The focal length of the whole optical train, including barlow lenses or other components."),
+        null = True,
+        blank = True,
+    )
+
+    cmi = models.DecimalField(
+        verbose_name = _("CMI"),
+        help_text = _("Latitude of the first Central Meridian."),
+        null = True,
+        blank = True,
+        max_digits = 5,
+        decimal_places = 2,
+    )
+
+    cmii = models.DecimalField(
+        verbose_name = _("CMII"),
+        help_text = _("Latitude of the second Central Meridian."),
+        null = True,
+        blank = True,
+        max_digits = 5,
+        decimal_places = 2,
+    )
+
+    cmiii = models.DecimalField(
+        verbose_name = _("CMIII"), 
+        help_text = _("Latitude of the third Central Meridian."),
+        null = True,
+        blank = True,
+        max_digits = 5,
+        decimal_places = 2,
+    )
+
+    seeing = models.IntegerField(
+        verbose_name = _("Seeing"),
+        help_text = _("Your estimation of the seeing, on a scale from 1 to 5."),
+        null = True,
+        blank = True,
+    )
+
+    transparency = models.IntegerField(
+        verbose_name = _("Transparency"),
+        help_text = _("Your estimation of the transparency, on a scale from 1 to 10."),
+        null = True,
+        blank = True
+    )
+
+    time = models.CharField(
+        verbose_name = _("Time"),
+        help_text = _("Please use the following format: hh:mm."),
+        null = True,
+        blank = True,
+        max_length = 5,
+    )
 
     class Meta:
         app_label = 'astrobin'
