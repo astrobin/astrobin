@@ -153,13 +153,14 @@ def uploaded_images(user, period='monthly'):
         else:
             data[key] = 1 
 
-    for date in daterange(all[0].uploaded.date(), datetime.today().date()):
-        grouped_date = date.strftime(_map[period][1])
-        t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-        if grouped_date in data.keys():
-            flot_data.append([t, data[grouped_date]])
-        else:
-            flot_data.append([t, 0])
+    if all:
+        for date in daterange(all[0].uploaded.date(), datetime.today().date()):
+            grouped_date = date.strftime(_map[period][1])
+            t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+            if grouped_date in data.keys():
+                flot_data.append([t, data[grouped_date]])
+            else:
+                flot_data.append([t, 0])
 
     return (flot_label, flot_data, flot_options)
 
