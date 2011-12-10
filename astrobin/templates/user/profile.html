@@ -359,7 +359,7 @@ $(document).ready(function() {
                             {% endif %}
                             method: 'GET',
                             dataType: 'json',
-                            timeout: 25000,
+                            timeout: 60000,
                             success: function(series) {
                                 $.plot($('#stats_integration_hours_by_gear'),
                                     series['flot_data'],
