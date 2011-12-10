@@ -1950,7 +1950,7 @@ def image_revision_upload_process(request):
 
 @login_required
 @require_GET
-def leaderboard(request):
+def stats(request):
     response_dict = {}
 
     sort = '-user_integration'
@@ -1968,7 +1968,7 @@ def leaderboard(request):
     return object_list(
         request,
         queryset = queryset,
-        template_name = 'leaderboard.html',
+        template_name = 'stats.html',
         template_object_name = 'user',
         extra_context = response_dict,
     )

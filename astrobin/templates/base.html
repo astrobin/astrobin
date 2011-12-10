@@ -128,7 +128,7 @@
                             <li id="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
                             <li id="{% current request "^/search/$" %}"><a href="{% url haystack_search %}">{% trans "Search" %}</a></li>
                             {% if request.user.is_authenticated %}
-                            <li id="{% current request "^/leaderboard/$" %}"><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
+                            <li id="{% current request "^/stats/$" %}"><a href="{% url stats %}">{% trans "Stats" %}</a></li>
                             {% endif %}
                             <li id="{% current request "^/nightly/$" %}"><a href="{% url nightly %}">{% trans "Nightly" %}</a></li>
                             <li id="{% current request "^/help/$" %}"><a href="{% url help %}">{% trans "Help" %}</a></li>
@@ -256,9 +256,7 @@
                                 <li><a href="{% url index %}">{% trans "Home" %}</a></li>
                                 <li><a href="/blog/">{% trans "Blog" %}</a></li>
                                 <li><a href="{% url haystack_search %}">{% trans "Search" %}</a></li>
-                                {% if request.user.is_authenticated %}
-                                <li><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
-                                {% endif %}
+                                <li><a href="{% url stats %}">{% trans "Stats" %}</a></li>
                                 <li><a href="{% url nightly %}">{% trans "Nightly" %}</a></li>
                                 <li><a href="{% url help %}">{% trans "Help" %}</a></li>
                                 <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
