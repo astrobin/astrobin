@@ -655,6 +655,7 @@ def image_edit_acquisition(request, id):
     response_dict = {
         'image': image,
         'edit_type': edit_type,
+        'ssa_form': SolarSystem_AcquisitionForm(instance = solar_system_acquisition),
         'deep_sky_acquisitions': deep_sky_acquisition_formset,
         'deep_sky_acquisition_basic_form': deep_sky_acquisition_basic_form,
         'advanced': advanced,
@@ -662,6 +663,7 @@ def image_edit_acquisition(request, id):
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
     }
+
     return render_to_response('image/edit/acquisition.html',
                               response_dict,
                               context_instance=RequestContext(request))
@@ -997,42 +999,15 @@ def image_edit_save_acquisition(request):
                                           context_instance=RequestContext(request))
 
     elif edit_type == 'solar_system':
-        date = request.POST.get('date')
-        if date == 'yyyy-mm-dd':
-            date = None
-        try:
-            if date is not None:
-                datetime.datetime.strptime(date, '%Y-%m-%d')
-        except ValueError:
-            date = None
-
-        time = request.POST.get('time')
-        if time == 'hh:mm':
-            time = None
-        try:
-            if time is not None:
-                datetime.datetime.strptime(time, '%H:%M')
-        except ValueError:
-            time = None
-
-        solar_system_acquisition = SolarSystem_Acquisition(
-            image = image,
-            date = date,
-            time = time)
-        for k in ['frames', 'fps', 'focal_length', 'cmi', 'cmii',
-                  'cmiii', 'seeing', 'transparency']:
-            v = request.POST.get(k)
-            if v != '':
-                setattr(solar_system_acquisition, k, v)
-
-        try:
-            solar_system_acquisition.save()
-        except (ValueError, ValidationError):
-            response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
-            response_dict['solar_system_acquisitions'] = solar_system_acquisition
+        ssa =  SolarSystem_Acquisition(image = image)
+        form = SolarSystem_AcquisitionForm(data = request.POST, instance = ssa)
+        response_dict['ssa_form'] = form
+        if not form.is_valid():
+            response_dict['ssa_form'] = form
             return render_to_response('image/edit/acquisition.html',
                                       response_dict,
                                       context_instance=RequestContext(request))
+        form.save()
 
     return HttpResponseRedirect("/edit/acquisition/%s/?saved" % image_id)
 
