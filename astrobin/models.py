@@ -605,6 +605,12 @@ class DeepSky_Acquisition(Acquisition):
         auto_now=True,
         null=True)
 
+    temperature = models.DecimalField(
+        _("Temperature"),
+        null=True, blank=True,
+        max_digits=5, decimal_places=2,
+        help_text=_("Ambient temperature (in Centigrade degrees)."))
+
     class Meta:
         app_label = 'astrobin'
         ordering = ['-saved_on', 'filter']
