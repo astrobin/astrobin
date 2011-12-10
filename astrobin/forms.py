@@ -19,13 +19,12 @@ class ImageUploadForm(forms.Form):
 
 
 class ImageEditPresolveForm(forms.ModelForm):
-    def __init__(self, user = None, **kwargs):
-        super(ImageEditPresolveForm, self).__init__(**kwargs)
-        self.fields['presolve_information'].widget = forms.RadioSelect(choices = Image.SOLVE_CHOICES)
-
     class Meta:
         model = Image
         fields = ('presolve_information',)
+        widgets = {
+            'presolve_information': forms.RadioSelect(choices = Image.SOLVE_CHOICES),
+        }
 
 
 class ImageEditBasicForm(forms.ModelForm):
@@ -348,18 +347,12 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
 
 
 class DeepSky_AcquisitionBasicForm(forms.ModelForm):
-    date = forms.DateField(
-        required=False,
-        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
-        help_text=_("Please use the following format: yyyy-mm-dd"))
-
     class Meta:
         model = DeepSky_Acquisition
         fields = ('date', 'number', 'duration',)
-
-    def __init__(self, user=None, **kwargs):
-        super(DeepSky_AcquisitionBasicForm, self).__init__(**kwargs)
-        self.fields['date'].label = _("Date")
+        widgets = {
+            'date': forms.TextInput(attrs={'class': 'datepickerclass'}),
+        }
 
 
 class DefaultImageLicenseForm(forms.ModelForm):
