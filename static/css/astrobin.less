@@ -2406,7 +2406,16 @@ table.leaderboard {
 
 /* Zinnia stuff */
 .hentry {
-    padding: @spacer-medium @spacer-xxlarge @spacer-xxlarge @spacer-xxlarge;
+    padding: @spacer-large @spacer-xxlarge @spacer-xxxlarge @spacer-xxlarge;
+    margin: 0 auto @spacer-large auto;
+    width: 600px;
+    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+    .common-border;
+    h2 {
+        a {
+           color: @strong-text-color;
+        }
+    }
     p {
         margin: 0;
     }
