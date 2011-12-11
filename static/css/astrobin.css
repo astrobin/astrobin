@@ -1007,7 +1007,7 @@ form select[multiple]:focus {
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 20px;
+  top: 5px;
   left: 0;
   overflow: visible;
 }
@@ -1023,8 +1023,7 @@ form select[multiple]:focus {
 }
 #header #title h4 {
   float: left;
-  margin: 0;
-  padding: 4px;
+  margin: 12px 0 0 6px;
   font-size: 10px;
   color: #3092cf;
 }
