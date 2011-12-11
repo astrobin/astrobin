@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load pagination_tags %}
 
 {% block title %}AstroBin - {% trans "Stats" %}{% endblock %}
 {% block content %}
@@ -62,9 +63,10 @@
                     <th>{% trans "Avg. integration hours" %}</th>
                     <th>{% trans "Images uploaded" %}</th>
                 </tr>
+            {% autopaginate user_list 25 %}
             {% for u in user_list %}
                 <tr>
-                    <td>{{forloop.counter}}</td>
+                    <td>{{page_obj.start_index|add:forloop.counter}}</td>
                     <td><a href="{% url user_page u.user_name %}">{{u.user_name}}</a></td>
                     <td>{{u.user_integration|floatformat}}</a></td>
                     <td>{{u.user_avg_integration|floatformat}}</a></td>
@@ -72,6 +74,7 @@
                 </tr>
             {% endfor %}
             </table>
+            <div class="pagination">{% paginate 4 "#leaderboard" %}</div>
         </div>
     </div>
 {% endblock %}
