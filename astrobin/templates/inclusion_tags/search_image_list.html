@@ -3,6 +3,7 @@
 
 <div class="thumbnail-list clear">
 {% for search_result in image_list %}
+    {% if search_result.object.id %}
     <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
         <a href="{% url image_detail search_result.object.id %}">
             <img src="http://astrobin_images.{{s3_url}}/{{search_result.object.filename}}_thumb.png"
@@ -44,6 +45,7 @@
             {% endwith %}
         </div>
     </div>
+    {% endif %}
 {% empty %}
 <p>{% trans "No images" %}.</p>
 {% endfor %}
