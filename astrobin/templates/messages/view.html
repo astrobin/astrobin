@@ -43,12 +43,10 @@
           <a name="reply"></a>
           <h3>{% trans "Reply" %}</h3>
           {{ form.body }}
-          <div>
-              <button class="button submit-button">{% trans "Reply" %}</button>
-              <a href="{% url messages_inbox %}" class="back">
-                {% trans "or return to messages" %}
-              </a>
-          </div>
+          <input type="submit" class="button submit-button" value="{% trans "Reply" %}"/>
+          <a href="{% url messages_inbox %}" class="back">
+            {% trans "or return to messages" %}
+          </a>
         </form>
       </div>
     </div>
