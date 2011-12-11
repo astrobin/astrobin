@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-11 13:06-0500\n"
-"PO-Revision-Date: 2011-12-11 13:06-0500\n"
+"POT-Creation-Date: 2011-12-11 13:28-0500\n"
+"PO-Revision-Date: 2011-12-11 13:28-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -830,8 +830,8 @@ msgid "Sorry, but the content you were looking for is not here."
 msgstr "Spiacenti, ma quello che cercavi non è qui."
 
 #: templates/base.html:80
-msgid "Hey! It looks like your browser doesn't support Javascript, or you disabled it. AstroBin will provide you with a much more pleasant experience if you enable Javascript."
-msgstr "Ehi! Pare che il tuo browser non supporti Javascript, oppure l'hai disabilitato. Usare AstroBin è molto più piacevole se abiliti Javascript."
+msgid "AstroBin works best with Javascript!"
+msgstr "AstroBin funziona meglio con Javascript!"
 
 #: templates/base.html:88
 msgid "Finnish"
@@ -1009,12 +1009,12 @@ msgstr "Feedback"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:409
+#: templates/base.html:411
 #: templates/image/detail.html:626
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:410
+#: templates/base.html:412
 #: templates/image/detail.html:627
 msgid "Choose file"
 msgstr "Scegli file"
@@ -2791,6 +2791,14 @@ msgstr "Scegli la lingua usata per questo sito:"
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
 msgstr "Seleziona quali notifiche preferisci ricevere anche come e-mail:"
+
+#~ msgid ""
+#~ "Hey! It looks like your browser doesn't support Javascript, or you "
+#~ "disabled it. AstroBin will provide you with a much more pleasant "
+#~ "experience if you enable Javascript."
+#~ msgstr ""
+#~ "Ehi! Pare che il tuo browser non supporti Javascript, oppure l'hai "
+#~ "disabilitato. Usare AstroBin è molto più piacevole se abiliti Javascript."
 
 #~ msgid ""
 #~ "How productive are the users on AstroBin? Here you can see them all, "
