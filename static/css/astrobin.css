@@ -1091,12 +1091,12 @@ form select[multiple]:focus {
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   position: absolute;
-  top: 4px;
-  left: 0;
-  width: 65%;
+  top: 14px;
+  right: 300px;
+  width: 235px;
+  text-align: center;
   padding: 4px 12px;
   font-size: 90%;
-  font-weight: bold;
 }
 #header #noscript p {
   padding: 0;
@@ -2613,6 +2613,9 @@ table.form_saved td, table.form_saved_container td {
   border: none;
   background: none;
   vertical-align: middle;
+}
+.capty-content {
+  display: none;
 }
 div.capty-caption {
   background-color: #FFF;

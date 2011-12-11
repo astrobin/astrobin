@@ -12,7 +12,7 @@
                  alt="{{search_result.object.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
         </a>
-        <div id="capty-content-{{search_result.object.id}}">
+        <div class="capty-content" id="capty-content-{{search_result.object.id}}">
             {% ifequal sort '-integration' %}
                 {% trans "Integration" %}: {{search_result.integration|seconds_to_hours}} {% trans "hours" %}
             {% endifequal %}

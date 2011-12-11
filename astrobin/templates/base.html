@@ -77,7 +77,7 @@
                 <noscript>
                 <div id="noscript">
                     <p>
-                        {% blocktrans %}Hey! It looks like your browser doesn't support Javascript, or you disabled it. AstroBin will provide you with a much more pleasant experience if you enable Javascript.{% endblocktrans %}
+                        {% blocktrans %}AstroBin works best with Javascript!{% endblocktrans %}
                     </p>
                 </div>
                 </noscript>
@@ -399,7 +399,9 @@
 
                 common.init_ajax_csrf_token();
                 $('a[rel*=facebox]').facebox();
+
                 $('.capty').capty({animation: 'fade', speed: 150, height: 45});
+                $('.capty-content').show();
 
                 // date and time pickers
                 $('input').filter('.timepickerclass').timepicker({});

@@ -13,7 +13,7 @@
                  alt="{{image.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
         </a>
-        <div id="capty-content-{{image.id}}-{{randomid}}">
+        <div class="capty-content" id="capty-content-{{image.id}}-{{randomid}}">
             {{image.title|escape|truncatechars:23}}
             <br/>
             {% with image.user.username|truncatechars:24 as user %}
