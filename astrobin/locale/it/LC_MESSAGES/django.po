@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-10 09:33-0500\n"
-"PO-Revision-Date: 2011-12-10 09:33-0500\n"
+"POT-Creation-Date: 2011-12-11 13:06-0500\n"
+"PO-Revision-Date: 2011-12-11 13:06-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -126,7 +126,7 @@ msgid "Cameras"
 msgstr "Camere"
 
 #: forms.py:182
-#: templates/stats.html:60
+#: templates/stats.html:61
 #: templates/image/detail.html:174
 msgid "User"
 msgstr "Utente"
@@ -375,7 +375,7 @@ msgstr "Licenza"
 #: templates/image/detail.html:338
 #: templates/image/full.html:54
 #: templates/inclusion_tags/image_list.html:13
-#: templates/inclusion_tags/search_image_list.html:11
+#: templates/inclusion_tags/search_image_list.html:12
 msgid "(no title)"
 msgstr "(senza titolo)"
 
@@ -682,7 +682,7 @@ msgid "Frames"
 msgstr "Pose"
 
 #: views.py:335
-#: templates/inclusion_tags/search_image_list.html:16
+#: templates/inclusion_tags/search_image_list.html:17
 #: templates/search/search.html:23
 msgid "Integration"
 msgstr "Integrazione"
@@ -690,7 +690,7 @@ msgstr "Integrazione"
 #: views.py:335
 #: views.py:1192
 #: views.py:1193
-#: templates/inclusion_tags/search_image_list.html:16
+#: templates/inclusion_tags/search_image_list.html:17
 msgid "hours"
 msgstr "ore"
 
@@ -751,7 +751,7 @@ msgid "Last login"
 msgstr "Ultimo login"
 
 #: views.py:1191
-#: templates/stats.html:63
+#: templates/stats.html:64
 msgid "Images uploaded"
 msgstr "Immagini caricate"
 
@@ -847,174 +847,174 @@ msgstr "Ricerca veloce"
 msgid "Start typing and hit ENTER"
 msgstr "Inizia a digitare e poi premi INVIO"
 
-#: templates/base.html:111
+#: templates/base.html:115
 msgid "The definitive home for your astrophotography."
 msgstr "Lo spazio migliore per la tua astrofotografia."
 
-#: templates/base.html:120
+#: templates/base.html:124
 #, python-format
 msgid "Hello, <a href=\"%(user_page)s\">%(username)s.</a>"
 msgstr "Ciao, <a href=\"%(user_page)s\">%(username)s.</a>"
 
-#: templates/base.html:127
-#: templates/base.html.py:256
-#: templates/base.html:297
+#: templates/base.html:131
+#: templates/base.html.py:260
+#: templates/base.html:301
 msgid "Home"
 msgstr "Home"
 
-#: templates/base.html:128
-#: templates/base.html.py:257
+#: templates/base.html:132
+#: templates/base.html.py:261
 msgid "Blog"
 msgstr "Blog in English"
 
-#: templates/base.html:129
-#: templates/base.html.py:258
+#: templates/base.html:133
+#: templates/base.html.py:262
 #: templates/search/search.html:12
 msgid "Search"
 msgstr "Cerca"
 
-#: templates/base.html:131
-#: templates/base.html.py:259
-#: templates/stats.html:5
+#: templates/base.html:135
+#: templates/base.html.py:263
+#: templates/stats.html:6
 #: templates/user/profile.html:249
 msgid "Stats"
 msgstr "Statistiche"
 
-#: templates/base.html:133
-#: templates/base.html.py:260
+#: templates/base.html:137
+#: templates/base.html.py:264
 msgid "Nightly"
 msgstr "Notte dopo notte"
 
-#: templates/base.html:134
-#: templates/base.html.py:261
+#: templates/base.html:138
+#: templates/base.html.py:265
 #: templates/help.html:4
 msgid "Help"
 msgstr "Aiuto"
 
-#: templates/base.html:135
-#: templates/base.html.py:262
+#: templates/base.html:139
+#: templates/base.html.py:266
 #: templates/faq.html:4
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/base.html:148
+#: templates/base.html:152
 msgid "View your profile"
 msgstr "Vedi il tuo profilo"
 
-#: templates/base.html:151
+#: templates/base.html:155
 msgid "Edit your profile"
 msgstr "Modifica il tuo profilo"
 
-#: templates/base.html:154
+#: templates/base.html:158
 msgid "Upload an image"
 msgstr "Carica un'immagine"
 
-#: templates/base.html:154
+#: templates/base.html:158
 msgid "Upload!"
 msgstr "Carica!"
 
-#: templates/base.html:157
+#: templates/base.html:161
 #: templates/user/profile.html:272
 #: templates/user/profile.html.py:275
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.html:164
-#: templates/base.html.py:165
+#: templates/base.html:168
+#: templates/base.html.py:169
 msgid "Notifications"
 msgstr "Notifiche"
 
-#: templates/base.html:172
-#: templates/base.html.py:173
+#: templates/base.html:176
+#: templates/base.html.py:177
 #: templates/messages/inbox.html:12
 msgid "Messages"
 msgstr "Messaggi"
 
-#: templates/base.html:177
-#: templates/base.html.py:178
+#: templates/base.html:181
+#: templates/base.html.py:182
 msgid "Requests"
 msgstr "Richieste"
 
-#: templates/base.html:188
+#: templates/base.html:192
 msgid "Have an invite? Login!"
 msgstr "Hai un invito? Fai il login!"
 
-#: templates/base.html:190
+#: templates/base.html:194
 #: templates/registration/activation_complete.html:5
 msgid "Login"
 msgstr "Login"
 
-#: templates/base.html:196
+#: templates/base.html:200
 #: templates/registration/login.html:8
 msgid "Register"
 msgstr "Registrati"
 
-#: templates/base.html:218
-#: templates/base.html.py:228
+#: templates/base.html:222
+#: templates/base.html.py:232
 msgid "Error"
 msgstr "Errore"
 
-#: templates/base.html:220
+#: templates/base.html:224
 #: templates/image/detail.html:16
 msgid "Info"
 msgstr "Informazione"
 
-#: templates/base.html:230
+#: templates/base.html:234
 msgid "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida o nessuna immagine. I formati accettati sono JPG, PNG e GIF."
 
-#: templates/base.html:247
+#: templates/base.html:251
 msgid "About"
 msgstr "Informazioni"
 
-#: templates/base.html:249
+#: templates/base.html:253
 msgid "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers."
 msgstr "AstroBin è un sito di hosting d'immagini pensato specificamente per gli astrofotografi: è il posto finale dove caricare le proprie immagini. Fatto da un astrofotografo, per gli astrofotografi."
 
-#: templates/base.html:253
+#: templates/base.html:257
 msgid "Site links"
 msgstr "Link del sito"
 
-#: templates/base.html:263
+#: templates/base.html:267
 #: templates/tos.html:6
 msgid "Terms of Service"
 msgstr "Condizioni d'uso"
 
-#: templates/base.html:268
+#: templates/base.html:272
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/base.html:277
+#: templates/base.html:281
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:279
+#: templates/base.html:283
 msgid "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
 msgstr "AstroBin è Copyright &copy; 2011 Salvatore Iovene, Tutti i Diritti Riservati. Le immagini su questo sito sono copyright dei loro rispettivi proprietari."
 
-#: templates/base.html:298
+#: templates/base.html:302
 msgid "Follow AstroBin on Twitter"
 msgstr "Segui AstroBin su Twitter"
 
-#: templates/base.html:299
+#: templates/base.html:303
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/base.html:313
+#: templates/base.html:317
 msgid "Feedback"
 msgstr "Feedback"
 
-#: templates/base.html:324
+#: templates/base.html:328
 #: templates/messages/compose.html:18
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:405
+#: templates/base.html:409
 #: templates/image/detail.html:626
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:406
+#: templates/base.html:410
 #: templates/image/detail.html:627
 msgid "Choose file"
 msgstr "Scegli file"
@@ -1264,19 +1264,19 @@ msgstr "Acquisizione"
 msgid "Views"
 msgstr "Più viste"
 
-#: templates/nightly.html:7
+#: templates/nightly.html:8
 msgid "Images acquired night after night"
 msgstr "Immagini acquisite notte dopo notte"
 
-#: templates/nightly.html:10
+#: templates/nightly.html:11
 msgid "On this page you can see images that were actually taken each night, and not merely uploaded on a particular date."
 msgstr "Qui puoi vedere le immagini realmente scattate ogni notte, e non semplicemente caricate sul sito in una certa data."
 
-#: templates/nightly.html:24
+#: templates/nightly.html:25
 msgid "No image acquired in the selected month."
 msgstr "Nessuna immagine acquisita nel mese selezionato."
 
-#: templates/nightly.html:31
+#: templates/nightly.html:32
 msgid "current month"
 msgstr "mese corrente"
 
@@ -1312,74 +1312,74 @@ msgstr "Importa da Flickr"
 msgid "Preferences"
 msgstr "Opzioni"
 
-#: templates/stats.html:9
+#: templates/stats.html:10
 msgid "Total integration hours in the last 12 months"
 msgstr "Ore totali di integrazione negli ultimi 12 mesi"
 
-#: templates/stats.html:15
+#: templates/stats.html:16
 #: templates/user/profile.html:163
 #: templates/user/profile.html.py:188
 #: templates/user/profile.html:213
 msgid "Show by period"
 msgstr "Mostra per periodo"
 
-#: templates/stats.html:19
+#: templates/stats.html:20
 #: templates/user/profile.html:168
 #: templates/user/profile.html.py:193
 #: templates/user/profile.html:218
 msgid "Monthly"
 msgstr "Mensile"
 
-#: templates/stats.html:20
+#: templates/stats.html:21
 #: templates/user/profile.html:169
 #: templates/user/profile.html.py:194
 #: templates/user/profile.html:219
 msgid "Daily"
 msgstr "Giornaliero"
 
-#: templates/stats.html:29
+#: templates/stats.html:30
 #: templates/user/profile.html:178
 #: templates/user/profile.html.py:203
 #: templates/user/profile.html:228
 msgid "Please wait: the plot is loading..."
 msgstr "Attendere, prego: caricamento del grafico in corso..."
 
-#: templates/stats.html:30
+#: templates/stats.html:31
 #: templates/user/profile.html:179
 #: templates/user/profile.html.py:204
 #: templates/user/profile.html:229
 msgid "Loading..."
 msgstr "Caricamento in corso..."
 
-#: templates/stats.html:36
+#: templates/stats.html:37
 msgid "Leaderboard"
 msgstr "Classifica"
 
-#: templates/stats.html:43
+#: templates/stats.html:44
 msgid "Sort by"
 msgstr "Ordina per"
 
-#: templates/stats.html:47
+#: templates/stats.html:48
 msgid "Total integration"
 msgstr "Integrazione totale"
 
-#: templates/stats.html:48
+#: templates/stats.html:49
 msgid "Avg. integration"
 msgstr "Integrazione media"
 
-#: templates/stats.html:49
+#: templates/stats.html:50
 msgid "Images"
 msgstr "Immagini"
 
-#: templates/stats.html:59
+#: templates/stats.html:60
 msgid "Position"
 msgstr "Posizione"
 
-#: templates/stats.html:61
+#: templates/stats.html:62
 msgid "Total integration hours"
 msgstr "Ore totali di integrazione"
 
-#: templates/stats.html:62
+#: templates/stats.html:63
 msgid "Avg. integration hours"
 msgstr "Ore di integrazione in media"
 
@@ -2067,13 +2067,13 @@ msgid "Form saved. Thank you!"
 msgstr "Salvato. Grazie!"
 
 #: templates/inclusion_tags/image_list.html:21
-#: templates/inclusion_tags/search_image_list.html:43
+#: templates/inclusion_tags/search_image_list.html:44
 #, python-format
 msgid " by <a href=\"%(user_page)s\">%(user)s</a>"
 msgstr " di <a href=\"%(user_page)s\">%(user)s</a>"
 
 #: templates/inclusion_tags/image_list.html:27
-#: templates/inclusion_tags/search_image_list.html:48
+#: templates/inclusion_tags/search_image_list.html:50
 msgid "No images"
 msgstr "Nessuna immagine"
 
@@ -2124,11 +2124,11 @@ msgstr "Non hai richieste da soddisfare."
 msgid "Show all requests"
 msgstr "Mostra tutte le richieste"
 
-#: templates/inclusion_tags/search_image_list.html:20
+#: templates/inclusion_tags/search_image_list.html:21
 msgid "stars"
 msgstr "stelle"
 
-#: templates/inclusion_tags/search_image_list.html:33
+#: templates/inclusion_tags/search_image_list.html:34
 #, python-format
 msgid "Viewed one time"
 msgid_plural "Viewed %(counter)s times"
@@ -2173,7 +2173,8 @@ msgstr "Leggi tutto"
 
 #: templates/messages/inbox.html:65
 #: templates/messages/view.html:45
-#: templates/messages/view.html.py:48
+#: templates/messages/view.html.py:47
+#: templates/messages/view.html:75
 msgid "Reply"
 msgstr "Rispondi"
 
@@ -2201,9 +2202,13 @@ msgid "Delete conversation"
 msgstr "Cancella conversazione"
 
 #: templates/messages/view.html:31
-#: templates/messages/view.html.py:50
+#: templates/messages/view.html.py:49
 msgid "or return to messages"
 msgstr "o torna ai messaggi"
+
+#: templates/messages/view.html:67
+msgid "Sending..."
+msgstr "Inviando..."
 
 #: templates/notification/all.html:8
 msgid "Here are your notifications"
