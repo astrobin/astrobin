@@ -94,6 +94,8 @@
     background: -moz-linear-gradient(top, @button-gradient-bottom-color, @button-gradient-bottom-color);
     color: @strong-text-color;}
 
+
+.button-disabled-gradient,
 .button-gradient-inverted {
     border: 1px solid @button-gradient-inverted-bottom-color;
     border-top: 1px solid (@button-gradient-inverted-top-color * @hilight-factor);
@@ -1091,6 +1093,11 @@ form {
     .danger-gradient-active;
 }
 
+.button-disabled, .button-disabled:visited,
+.button-disabled:hover, .button-disabled:active {
+    .button-disabled-gradient;
+    cursor: default;
+}
 
 /* ------------------------------------------
    LAYOUT
