@@ -45,7 +45,7 @@
   background: -moz-linear-gradient(top, #cc4b2e, #cc4b2e);
   color: #fcfcfc;
 }
-.button-gradient-inverted {
+.button-disabled-gradient, .button-gradient-inverted {
   border: 1px solid #b8b8b8;
   border-top: 1px solid #e7e7e7;
   background: #b8b8b8;
@@ -981,6 +981,18 @@ form select[multiple]:focus {
   background: -webkit-gradient(linear, left top, left bottom, from(#f9645b), to(#de5951));
   background: -moz-linear-gradient(top, #f9645b, #de5951);
   color: #ffffff;
+}
+.button-disabled,
+.button-disabled:visited,
+.button-disabled:hover,
+.button-disabled:active {
+  border: 1px solid #b8b8b8;
+  border-top: 1px solid #e7e7e7;
+  background: #b8b8b8;
+  background: -webkit-gradient(linear, left top, left bottom, from(#cecece), to(#b8b8b8));
+  background: -moz-linear-gradient(top, #cecece, #b8b8b8);
+  color: #333333;
+  cursor: default;
 }
 /* ------------------------------------------
    LAYOUT

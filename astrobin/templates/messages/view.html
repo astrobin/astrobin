@@ -59,11 +59,19 @@
              $('.reply-form').ajaxForm({
                  resetForm: true,
                  beforeSubmit: function () {
-                     $('.reply-form').addClass("ajax-form-disabled");
+                     if ($('.reply-form #id_body').val() != '') {
+                         $('.reply-form .submit-button')
+                            .attr('disabled', 'disabled')
+                            .addClass('button-disabled')
+                            .val("{% trans "Sending..." %}");
+                     }
                  },
                  success: function(data) {
-                     $('.reply-form').removeClass("ajax-form-disabled");
                      $('.message-list').append(data);
+                     $('.reply-form .submit-button')
+                        .removeAttr('disabled')
+                        .removeClass('button-disabled')
+                        .val("{% trans "Reply" %}");
                  }
              })
          })
