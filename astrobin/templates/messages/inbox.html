@@ -48,8 +48,8 @@
                     <span class="date">{{ message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
                   </div>
                   <div class="subject">
-                    <strong>{{ message.thread.subject|truncchar:45 }}</strong>
-                    <span class="message-tease">{{message.thread.latest_msg.body|truncatewords:8}}</span>
+                    <strong>{{ message.thread.subject|truncchar:25 }}</strong>
+                    <span class="message-tease">{{message.thread.latest_msg.body|truncchar:35}}</span>
                   </div>
                   {% comment %}
                   <div class="checkbox">
