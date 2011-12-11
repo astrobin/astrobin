@@ -1106,28 +1106,30 @@ form {
 
 #header {
     margin: 0 auto;
-    height: 220px;
+    height: 94px;
     background: transparent url('/static/images/header-bg.png');
     #title {
         margin: 0;
         padding: 0;
         position: absolute;
-        top: 138px;
-        left: @spacer-large;
-        text-align: center;
+        top: 20px;
+        left: 0;
         overflow: visible;
-        width: 184px;
         h1 {
-            font-size: 2em;
-            margin-bottom: 0;
-            padding-bottom: @spacer-small;
+            float: left;
             border: none;
+            margin: 0 @spacer-small 0 0;
+            padding: 0;
+            font-size: 2.5em;
             a {
-                font-size: 1.5em;
-                text-decoration: none;
-                color: @logo-color;}}
+                color: @logo-color;
+            }
+        }
         h4 {
-            margin-top: @spacer-small;
+            float: left;
+            margin: 0;
+            padding: 4px;
+            font-size: 10px;
             color: @logo-color;}}
     #ad {
         position: absolute;

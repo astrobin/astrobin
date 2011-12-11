@@ -998,7 +998,7 @@ form select[multiple]:focus {
 }
 #header {
   margin: 0 auto;
-  height: 220px;
+  height: 94px;
   background: transparent url('/static/images/header-bg.png');
   /*  navigation  */
 
@@ -1007,25 +1007,25 @@ form select[multiple]:focus {
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 138px;
-  left: 12px;
-  text-align: center;
+  top: 20px;
+  left: 0;
   overflow: visible;
-  width: 184px;
 }
 #header #title h1 {
-  font-size: 2em;
-  margin-bottom: 0;
-  padding-bottom: 4px;
+  float: left;
   border: none;
+  margin: 0 4px 0 0;
+  padding: 0;
+  font-size: 2.5em;
 }
 #header #title h1 a {
-  font-size: 1.5em;
-  text-decoration: none;
   color: #3092cf;
 }
 #header #title h4 {
-  margin-top: 4px;
+  float: left;
+  margin: 0;
+  padding: 4px;
+  font-size: 10px;
   color: #3092cf;
 }
 #header #ad {
