@@ -2875,6 +2875,10 @@ div.token-input-dropdown li.token-input-selected-dropdown-item {
   background: -webkit-gradient(linear, left top, left bottom, from(#e45434), to(#cc4b2e));
   background: -moz-linear-gradient(top, #e45434, #cc4b2e);
   color: #fcfcfc;
+  color: #b8b8b8;
+}
+div.token-input-dropdown li.token-input-dropdown-item, div.token-input-dropdown li.token-input-dropdown-item2 {
+  color: #333333;
 }
 div.token-input-dropdown p {
   color: #b8b8b8;
