@@ -1,11 +1,11 @@
 from models import DeepSky_Acquisition, Image, UserProfile, Gear, User
 
 from django.utils.translation import ugettext as _
-from django.utils.encoding import smart_str
 from django.db.models import Q
 
 from datetime import datetime, timedelta
 import time
+import unicodedata
 
 
 def daterange(start, end):
@@ -93,7 +93,7 @@ def integration_hours_by_gear(user, period='monthly'):
             Q(image__imaging_telescopes = g) | Q(image__imaging_cameras = g)).exclude(date = None).order_by('date')
 
         g_dict = {
-            'label': _map[period][0] + ": " + smart_str(g.name),
+            'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', g.name).encode('ascii', 'ignore'),
             'stage_data': {},
             'data': [],
         }
