@@ -82,25 +82,16 @@
 {% block extra_js %}
 <script type="text/javascript">
 $(document).ready(function() {
-    $.ajax({
+    stats.init();
+    stats.plot(
+        '#stats_integration_hours',
         {% if 's_ihp' in request.GET %}
-            url: "{% url stats_integration_hours 'astrobin' request.GET.s_ihp 365 %}",
+        "{% url stats_integration_hours 'astrobin' request.GET.s_ihp 365 %}",
         {% else %}
-            url: "{% url stats_integration_hours 'astrobin' 'monthly' 365 %}",
+        "{% url stats_integration_hours 'astrobin' 'monthly' 365 %}",
         {% endif %}
-        method: 'GET',
-        dataType: 'json',
-        timeout: 5000,
-        success: function(series) {
-            $.plot($('#stats_integration_hours'),
-                [{
-                    label: series['flot_label'],
-                    color: "#CC4B2E",
-                    data: series['flot_data'],
-                }],
-                series['flot_options']);
-        }
-    });
+        5000);
+    stats.enableTooltips("#stats_integration_hours");
 });
 </script>
 {% endblock %}

@@ -316,60 +316,44 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
+        stats.init();
+
+        stats.plot(
+            '#stats_integration_hours',
             {% if 's_ihp' in request.GET %}
-                url: "{% url stats_integration_hours user.username request.GET.s_ihp 0 %}",
+            "{% url stats_integration_hours user.username request.GET.s_ihp 0 %}",
             {% else %}
-                url: "{% url stats_integration_hours user.username 'monthly' 0 %}",
+            "{% url stats_integration_hours user.username 'monthly' 0 %}",
+            {% endif %}
+            5000);
+        stats.enableTooltips("#stats_integration_hours");
+
+        stats.plot(
+            '#stats_uploaded_images',
+            {% if 's_uip' in request.GET %}
+            "{% url stats_uploaded_images user.username request.GET.s_uip %}",
+            {% else %}
+            "{% url stats_uploaded_images user.username 'monthly' %}",
+            {% endif %}
+            5000);
+        stats.enableTooltips("#stats_uploaded_images");
+
+        $.ajax({
+            {% if 's_ihgp' in request.GET %}
+                url: "{% url stats_integration_hours_by_gear user.username request.GET.s_ihgp %}",
+            {% else %}
+                url: "{% url stats_integration_hours_by_gear user.username 'monthly' %}",
             {% endif %}
             method: 'GET',
             dataType: 'json',
-            timeout: 5000,
+            timeout: 60000,
             success: function(series) {
-                $.plot($('#stats_integration_hours'),
-                    [{
-                        label: series['flot_label'],
-                        color: "#CC4B2E",
-                        data: series['flot_data'],
-                    }],
+                $.plot($('#stats_integration_hours_by_gear'),
+                    series['flot_data'],
                     series['flot_options']);
-
-                $.ajax({
-                    {% if 's_uip' in request.GET %}
-                        url: "{% url stats_uploaded_images user.username request.GET.s_uip %}",
-                    {% else %}
-                        url: "{% url stats_uploaded_images user.username 'monthly' %}",
-                    {% endif %}
-                    method: 'GET',
-                    dataType: 'json',
-                    timeout: 5000,
-                    success: function(series) {
-                        $.plot($('#stats_uploaded_images'),
-                            [{
-                                label: series['flot_label'],
-                                color: "#CC4B2E",
-                                data: series['flot_data'],
-                            }],
-                            series['flot_options']);
-                        $.ajax({
-                            {% if 's_ihgp' in request.GET %}
-                                url: "{% url stats_integration_hours_by_gear user.username request.GET.s_ihgp %}",
-                            {% else %}
-                                url: "{% url stats_integration_hours_by_gear user.username 'monthly' %}",
-                            {% endif %}
-                            method: 'GET',
-                            dataType: 'json',
-                            timeout: 60000,
-                            success: function(series) {
-                                $.plot($('#stats_integration_hours_by_gear'),
-                                    series['flot_data'],
-                                    series['flot_options']);
-                            }
-                        });
-                    }
-                });
             }
         });
+        stats.enableTooltips("#stats_integration_hours_by_gear");
 });
 </script>
 {% endblock %}
