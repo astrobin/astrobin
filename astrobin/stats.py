@@ -30,6 +30,7 @@ def integration_hours(user, period = 'monthly', since = 0):
             'position': 'nw',
             'backgroundColor': '#000000',
             'backgroundOpacity': 0.75},
+        'grid': {'hoverable': 'true'},
     }
 
     astrobin = User.objects.get(username = 'astrobin')
@@ -82,6 +83,7 @@ def integration_hours_by_gear(user, period='monthly'):
             'backgroundColor': '#000000',
             'backgroundOpacity': 0.7
         },
+        'grid': {'hoverable': 'true'},
     }
 
     profile = UserProfile.objects.get(user = user)
@@ -138,6 +140,7 @@ def uploaded_images(user, period='monthly'):
             'position': 'nw',
             'backgroundColor': '#000000',
             'backgroundOpacity': 0.75},
+        'grid': {'hoverable': 'true'},
     }
 
     astrobin = User.objects.get(username = 'astrobin')
