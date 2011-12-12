@@ -66,7 +66,7 @@
             {% autopaginate user_list 25 %}
             {% for u in user_list %}
                 <tr>
-                    <td>{{page_obj.start_index|add:forloop.counter}}</td>
+                    <td>{{page_obj.start_index|add:forloop.counter0}}</td>
                     <td><a href="{% url user_page u.user_name %}">{{u.user_name}}</a></td>
                     <td>{{u.user_integration|floatformat}}</a></td>
                     <td>{{u.user_avg_integration|floatformat}}</a></td>
