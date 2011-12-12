@@ -821,3 +821,75 @@ var image_detail = {
     }
 };
 
+/**********************************************************************
+ * Stats
+ *********************************************************************/
+var stats = {
+    config: {
+    },
+
+    globals: {
+        previousPoint: null
+    },
+
+    /* Private */
+    _showTooltip: function(x, y, contents) {
+        $('<div id="stats-tooltip">' + contents + '</div>').css( {
+            position: 'absolute',
+            display: 'none',
+            top: y - 25,
+            left: x,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            color: '#000',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    },
+
+    /* Public */
+    enableTooltips: function(plot) {
+        $(plot).bind("plothover", function (event, pos, item) {
+            if (item) {
+                if (stats.globals.previousPoint != item.dataIndex) {
+                    stats.globals.previousPoint = item.dataIndex;
+
+                    $("#stats-tooltip").remove();
+                    var x = item.datapoint[0].toFixed(2),
+                        y = item.datapoint[1].toFixed(2);
+
+                    stats._showTooltip(item.pageX, item.pageY, y);
+                }
+            }
+            else {
+                $("#stats-tooltip").remove();
+                stats.globals.previousPoint = null;
+            }
+        });
+    },
+
+    plot: function(id, url, timeout, data, options) {
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            timeout: timeout,
+            success: function(series) {
+                $.plot(
+                    $(id),
+                    [{
+                        label: series['flot_label'],
+                        color: "#CC4B2E",
+                        data: series['flot_data'],
+                    }],
+                    series['flot_options']);
+            }
+        });
+    },
+
+    init: function(config) {
+        /* Init */
+        $.extend(true, stats.config, config);
+    }
+};
+
