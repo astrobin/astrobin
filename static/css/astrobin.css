@@ -2973,3 +2973,12 @@ div.token-input-dropdown p {
   background: none;
   background-color: #333333;
 }
+.page-404 h1 {
+  font-size: 8em;
+  line-height: 1em;
+}
+.page-404 .text, .page-404 .image {
+  float: left;
+  width: 50%;
+  text-align: center;
+}

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-11 13:28-0500\n"
-"PO-Revision-Date: 2011-12-11 13:28-0500\n"
+"POT-Creation-Date: 2011-12-13 13:47-0500\n"
+"PO-Revision-Date: 2011-12-13 13:48-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -643,27 +643,27 @@ msgstr "Ore di integrazione, mensili"
 msgid "Integration hours, daily"
 msgstr "Ore di integrazione, giornaliere"
 
-#: stats.py:70
+#: stats.py:71
 msgid "Integration hours by gear, yearly"
 msgstr "Ore di integrazione per strumento, annuali"
 
-#: stats.py:71
+#: stats.py:72
 msgid "Integration hours by gear, monthly"
 msgstr "Ore di integrazione per strumento, mensili"
 
-#: stats.py:72
+#: stats.py:73
 msgid "Integration hours by gear, daily"
 msgstr "Ore di integrazione per strumento, giornaliere"
 
-#: stats.py:126
+#: stats.py:128
 msgid "Uploaded images, yearly"
 msgstr "Immagini caricate, annuali"
 
-#: stats.py:127
+#: stats.py:129
 msgid "Uploaded images, monthly"
 msgstr "Immagini caricate, mensili"
 
-#: stats.py:128
+#: stats.py:130
 msgid "Uploaded images, daily"
 msgstr "Immagini caricate, giornaliere"
 
@@ -821,13 +821,9 @@ msgstr "La tua immagine è stata cancellata"
 msgid "You are not allowed to see this page."
 msgstr "L'accesso a questa pagina non ti è permesso."
 
-#: templates/404.html:5
-msgid "Page not found."
-msgstr "Pagina non trovata."
-
-#: templates/404.html:6
-msgid "Sorry, but the content you were looking for is not here."
-msgstr "Spiacenti, ma quello che cercavi non è qui."
+#: templates/404.html:8
+msgid "Sorry, but the page you are looking for is not here. If you expected an image, this means that the author deleted it."
+msgstr "Spiacenti, ma la pagina che cercavi non è qui. Se ti aspettavi un immagine, questo vuol dire che è stata cancellata dal suo autore."
 
 #: templates/base.html:80
 msgid "AstroBin works best with Javascript!"
@@ -1009,12 +1005,12 @@ msgstr "Feedback"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:411
+#: templates/base.html:412
 #: templates/image/detail.html:626
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:412
+#: templates/base.html:413
 #: templates/image/detail.html:627
 msgid "Choose file"
 msgstr "Scegli file"
@@ -2791,6 +2787,12 @@ msgstr "Scegli la lingua usata per questo sito:"
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
 msgstr "Seleziona quali notifiche preferisci ricevere anche come e-mail:"
+
+#~ msgid "Page not found."
+#~ msgstr "Pagina non trovata."
+
+#~ msgid "Sorry, but the content you were looking for is not here."
+#~ msgstr "Spiacenti, ma quello che cercavi non è qui."
 
 #~ msgid ""
 #~ "Hey! It looks like your browser doesn't support Javascript, or you "

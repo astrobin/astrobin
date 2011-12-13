@@ -2,6 +2,13 @@
 {% load i18n %}
 
 {% block content %}
-    <h2>404 - {% trans "Page not found." %}</h2>
-    <p>{% blocktrans %}Sorry, but the content you were looking for is not here.{% endblocktrans %}
+    <div class="full-box page-404 clear">
+        <div class="text">
+            <h1>404</h1>
+            <p>{% blocktrans %}Sorry, but the page you are looking for is not here. If you expected an image, this means that the author deleted it.{% endblocktrans %}
+        </div>
+        <div class="image">
+            <img src="/static/images/404.png" alt="404" />
+        </div>
+    </div>
 {% endblock %}
