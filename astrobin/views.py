@@ -522,12 +522,6 @@ def image_upload_process(request):
 
     image.save()
 
-    followers = [x.from_userprofile.user
-                 for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
-    push_notification(followers, 'new_image',
-                      {'originator':request.user,
-                       'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url()})
-
     return HttpResponseRedirect("/edit/presolve/%d/" % image.id)
 
 
@@ -1587,12 +1581,6 @@ def user_profile_flickr_import(request):
                     image.save()
                     image.process()
 
-                    followers = [x.from_userprofile.user
-                                 for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
-                    push_notification(followers, 'new_image',
-                                      {'originator':request.user,
-                                       'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url()})
-
         return ajax_response(response_dict)
 
     return render_to_response("user/profile/flickr_import.html",
@@ -1930,12 +1918,6 @@ def image_revision_upload_process(request):
     image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext, is_final=True)
     image_revision.save()
     image_revision.process()
-
-    followers = [x.from_userprofile.user
-                 for x in UserProfile.follows.through.objects.filter(to_userprofile=request.user)]
-    push_notification(followers, 'new_image_revision',
-                      {'originator':request.user,
-                       'object_url':settings.ASTROBIN_BASE_URL + image_revision.get_absolute_url()})
 
     return HttpResponseRedirect(image_revision.get_absolute_url())
 
