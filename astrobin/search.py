@@ -36,6 +36,7 @@ class ImageSearchView(SearchView):
                            'imaging_cameras': Camera}.iteritems():
             ids, value = valueReader(self.request.GET, tag)
             ks = []
+            k = None
             for id in ids:
                 try:
                     id = int(id)
@@ -44,6 +45,9 @@ class ImageSearchView(SearchView):
                     k = klass.objects.filter(name=id)
                     if k:
                         k = k[0]
+                except klass.DoesNotExist:
+                    pass
+
                 if k:
                     ks.append(k)
                 else:
@@ -78,6 +82,7 @@ class ImageSearchView(SearchView):
                            'imaging_cameras': Camera}.iteritems():
             ids, value = valueReader(self.request.GET, tag)
             prefills[tag] = []
+            k = None
             for id in ids:
                 try:
                     id = int(id)
@@ -86,6 +91,9 @@ class ImageSearchView(SearchView):
                     k = klass.objects.filter(name=id)
                     if k:
                         k = k[0]
+                except klass.DoesNotExist:
+                    pass
+
                 if k:
                     prefills[tag].append(k)
 
