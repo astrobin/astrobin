@@ -184,6 +184,10 @@ To the top:
     worker_processes 4;
     worker_rlimit_nofile 20480;
 
+# Configure nginx to start automatically
+sudo cp scripts/init/nginx /etc/init.d/
+sudo update-rc.d nginx defaults
+
 
 # Configure rabbitmq:
 # ===================
