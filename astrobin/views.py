@@ -278,6 +278,7 @@ def image_detail(request, id):
             'flats': [],
             'flat_darks': [],
             'bias': [],
+            'bortle': [],
             'mean_sqm': [],
             'mean_fwhm': [],
             'temperature': [],
@@ -313,6 +314,9 @@ def image_detail(request, id):
                 elif getattr(a, i):
                     dsa_data[i].append(getattr(a, i))
 
+            if a.bortle:
+                dsa_data['bortle'].append(a.bortle)
+
             if a.mean_sqm:
                 dsa_data['mean_sqm'].append(a.mean_sqm)
 
@@ -339,6 +343,7 @@ def image_detail(request, id):
             (_('Bias'), u'\n'.join([smart_unicode(x) for x in dsa_data['bias']])),
             (_('Avg. Moon age'), "%.2f" % (average(moon_age_list), ) if moon_age_list else None),
             (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list), ) if moon_illuminated_list else None),
+            (_('Bortle Dark-Sky Scale'), "%.2f" % (average([float(x) for x in dsa_data['bortle']])) if dsa_data['bortle'] else None),
             (_('Mean SQM'), "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None),
             (_('Mean FWHM'), "%.2f" % (average([float(x) for x in dsa_data['mean_fwhm']])) if dsa_data['mean_fwhm'] else None),
             (_('Temperature'),
