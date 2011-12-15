@@ -537,6 +537,18 @@ class DeepSky_Acquisition(Acquisition):
         (4, '4x4'),
     )
 
+    BORTLE_CHOICES = (
+        (1, _("1 - Excellent dark-site sky (BLACK)")),
+        (2, _("2 - Typical truly dark site (GRAY)")),
+        (3, _("3 - Rural sky (BLUE)")),
+        (4, _("4 - Rural/suburban transition (GREEN/YELLOW)")),
+        (5, _("5 - Suburban sky (ORANGE)")),
+        (6, _("6 - Bright suburban sky (RED)")),
+        (7, _("7 - Suburban/urban transition or Full Moon (RED)")),
+        (8, _("8 - City sky (WHITE)")),
+        (9, _("9 - Inner city sky (WHITE)")),
+    )
+
     is_synthetic = models.BooleanField(
         _("Synthetic channel"))
 
@@ -595,6 +607,14 @@ class DeepSky_Acquisition(Acquisition):
         null=True, blank=True,
         help_text=_("The number of bias/offset frames."))
 
+    bortle = models.IntegerField(
+        verbose_name = _("Bortle Dark-Sky Scale"),
+        null = True,
+        blank = True,
+        choices = BORTLE_CHOICES,
+        help_text = _("Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."),
+    )
+
     mean_sqm = models.DecimalField(
         _("Mean SQM"),
         null=True, blank=True,
@@ -605,6 +625,13 @@ class DeepSky_Acquisition(Acquisition):
         null=True, blank=True,
         max_digits=5, decimal_places=2)
 
+    temperature = models.DecimalField(
+        _("Temperature"),
+        null=True, blank=True,
+        max_digits=5, decimal_places=2,
+        help_text=_("Ambient temperature (in Centigrade degrees)."))
+
+
     advanced = models.BooleanField(
         editable=False,
         default=False)
@@ -613,12 +640,6 @@ class DeepSky_Acquisition(Acquisition):
         editable=False,
         auto_now=True,
         null=True)
-
-    temperature = models.DecimalField(
-        _("Temperature"),
-        null=True, blank=True,
-        max_digits=5, decimal_places=2,
-        help_text=_("Ambient temperature (in Centigrade degrees)."))
 
     class Meta:
         app_label = 'astrobin'

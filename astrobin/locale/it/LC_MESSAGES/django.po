@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-13 13:47-0500\n"
-"PO-Revision-Date: 2011-12-13 13:48-0500\n"
+"POT-Creation-Date: 2011-12-15 13:40-0500\n"
+"PO-Revision-Date: 2011-12-15 13:43-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -40,8 +40,8 @@ msgstr "Soggetti"
 
 #: forms.py:50
 #: forms.py:111
-#: models.py:755
-#: views.py:333
+#: models.py:776
+#: views.py:337
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Luoghi"
@@ -60,7 +60,7 @@ msgstr "Telescopi o obiettivi di guida"
 #: forms.py:80
 #: forms.py:149
 #: models.py:319
-#: models.py:771
+#: models.py:792
 msgid "Mounts"
 msgstr "Montature"
 
@@ -78,28 +78,28 @@ msgstr "Camere di guida"
 #: forms.py:83
 #: forms.py:151
 #: models.py:322
-#: models.py:773
+#: models.py:794
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
 #: forms.py:84
 #: forms.py:152
 #: models.py:323
-#: models.py:774
+#: models.py:795
 msgid "Software"
 msgstr "Software"
 
 #: forms.py:85
 #: forms.py:153
 #: models.py:324
-#: models.py:775
+#: models.py:796
 msgid "Filters"
 msgstr "Filtri"
 
 #: forms.py:86
 #: forms.py:154
 #: models.py:325
-#: models.py:776
+#: models.py:797
 msgid "Accessories"
 msgstr "Accessori"
 
@@ -116,12 +116,12 @@ msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in 
 msgstr "Suggerimento: inserisci i filtri separatamente! Se invece li inserisci tutti assieme, ad esempio LRGB insieme, non potrai aggiungere sessioni di acquisizione separate per ogni filtro."
 
 #: forms.py:148
-#: models.py:770
+#: models.py:791
 msgid "Telescopes and lenses"
 msgstr "Telescopi ed obiettivi"
 
 #: forms.py:150
-#: models.py:772
+#: models.py:793
 msgid "Cameras"
 msgstr "Camere"
 
@@ -188,7 +188,7 @@ msgstr "Inserire un valore tra 1 e 10."
 
 #: forms.py:337
 #: models.py:514
-#: models.py:707
+#: models.py:728
 #: templates/image/detail.html:461
 msgid "Date"
 msgstr "Data"
@@ -268,7 +268,7 @@ msgstr "Nome"
 
 #: models.py:75
 #: models.py:282
-#: models.py:646
+#: models.py:667
 #: templates/image/detail.html:473
 msgid "Focal length"
 msgstr "Lunghezza focale"
@@ -353,7 +353,7 @@ msgid "This is the smallest of the binning values you used. If you imaged L in 1
 msgstr "Questo è il più piccolo dei valori di bin che hai usato. Se hai fatto L a 1x1 e RGB a 2x2, scegli 1x1."
 
 #: models.py:303
-#: models.py:552
+#: models.py:564
 msgid "Binning"
 msgstr "Bin"
 
@@ -384,250 +384,295 @@ msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Usa il seguente formato: aaaa-mm-gg."
 
 #: models.py:522
-#: models.py:706
+#: models.py:727
 msgid "Image"
 msgstr "Immagine"
 
 #: models.py:541
+msgid "1 - Excellent dark-site sky (BLACK)"
+msgstr "1 - Cielo da sito scuro eccellente (NERO)"
+
+#: models.py:542
+msgid "2 - Typical truly dark site (GRAY)"
+msgstr "2 - Cielo veramente scuro (GRIGIO)"
+
+#: models.py:543
+msgid "3 - Rural sky (BLUE)"
+msgstr "3 - Cielo di campagna (BLU)"
+
+#: models.py:544
+msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
+msgstr "4 - Transizione campagna/suburbana (VERDE/GIALLO)"
+
+#: models.py:545
+msgid "5 - Suburban sky (ORANGE)"
+msgstr "5 - Cielo suburbano (ARANCIONE)"
+
+#: models.py:546
+msgid "6 - Bright suburban sky (RED)"
+msgstr "6 - Cielo suburbano inquinato (ROSSO)"
+
+#: models.py:547
+msgid "7 - Suburban/urban transition or Full Moon (RED)"
+msgstr "7 - Transizione suburbana/urbana o Luna Piena (ROSSO)"
+
+#: models.py:548
+msgid "8 - City sky (WHITE)"
+msgstr "8 - Città (BIANCO)"
+
+#: models.py:549
+msgid "9 - Inner city sky (WHITE)"
+msgstr "9 - Centro città (BIANCO)"
+
+#: models.py:553
 msgid "Synthetic channel"
 msgstr "Canale sintetico"
 
-#: models.py:546
+#: models.py:558
 msgid "Filter"
 msgstr "Filtro"
 
-#: models.py:555
+#: models.py:567
 msgid "Number"
 msgstr "Numero"
 
-#: models.py:557
+#: models.py:569
 msgid "The number of sub-frames."
 msgstr "Numero di frame."
 
-#: models.py:560
+#: models.py:572
 msgid "Duration"
 msgstr "Durata"
 
-#: models.py:562
+#: models.py:574
 msgid "Duration of each sub-frame, in seconds."
 msgstr "Durata di ogni frame, in secondi."
 
-#: models.py:565
+#: models.py:577
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:569
+#: models.py:581
 msgid "Gain"
 msgstr "Gain"
 
-#: models.py:574
+#: models.py:586
 msgid "Sensor cooling"
 msgstr "Temperatura sensore"
 
-#: models.py:576
+#: models.py:588
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del sensore. Esempio: -20."
 
-#: models.py:579
-#: views.py:336
+#: models.py:591
+#: views.py:340
 msgid "Darks"
 msgstr "Dark"
 
-#: models.py:581
+#: models.py:593
 msgid "The number of dark frames."
 msgstr "Numero di dark."
 
-#: models.py:584
-#: views.py:337
+#: models.py:596
+#: views.py:341
 msgid "Flats"
 msgstr "Flat"
 
-#: models.py:586
+#: models.py:598
 msgid "The number of flat frames."
 msgstr "Numero di flat."
 
-#: models.py:589
-#: views.py:338
+#: models.py:601
+#: views.py:342
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
-#: models.py:591
+#: models.py:603
 msgid "The number of dark flat frames."
 msgstr "Numero di dark dei flat."
 
-#: models.py:594
-#: views.py:339
+#: models.py:606
+#: views.py:343
 msgid "Bias"
 msgstr "Bias"
 
-#: models.py:596
+#: models.py:608
 msgid "The number of bias/offset frames."
 msgstr "Numero di frame bias/offset."
 
-#: models.py:599
-#: views.py:342
+#: models.py:611
+#: views.py:346
+msgid "Bortle Dark-Sky Scale"
+msgstr "Scala del Cielo Scuro Bortle"
+
+#: models.py:615
+msgid "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
+msgstr "Qualità del cielo secondo <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target=\"_blank\">la Scala di Bortle</a>."
+
+#: models.py:619
+#: views.py:347
 msgid "Mean SQM"
 msgstr "SQM medio"
 
-#: models.py:604
-#: views.py:343
+#: models.py:624
+#: views.py:348
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
-#: models.py:618
-#: views.py:344
+#: models.py:629
+#: views.py:349
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: models.py:621
+#: models.py:632
 msgid "Ambient temperature (in Centigrade degrees)."
 msgstr "Temperatura ambientale (in gradi cenigradi)."
 
-#: models.py:632
+#: models.py:653
 msgid "Number of frames"
 msgstr "Numero di frame"
 
-#: models.py:633
+#: models.py:654
 msgid "The total number of frames you have stacked."
 msgstr "Numero totale di frame che hai sommato."
 
-#: models.py:637
+#: models.py:658
 #: templates/image/detail.html:470
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:638
+#: models.py:659
 msgid "Frames per second."
 msgstr "Frame al secondo."
 
-#: models.py:647
+#: models.py:668
 msgid "The focal length of the whole optical train, including barlow lenses or other components."
 msgstr "La lunghezza focale di tutto il treno ottico, includendo anche lenti di barlow o altri componenti."
 
-#: models.py:653
+#: models.py:674
 #: templates/image/detail.html:476
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:654
+#: models.py:675
 msgid "Latitude of the first Central Meridian."
 msgstr "Latitudine del primo Meridiano Centrale."
 
-#: models.py:662
+#: models.py:683
 #: templates/image/detail.html:479
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:663
+#: models.py:684
 msgid "Latitude of the second Central Meridian."
 msgstr "Latitudine del secondo Meridiano Centrale."
 
-#: models.py:671
+#: models.py:692
 #: templates/image/detail.html:482
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:672
+#: models.py:693
 msgid "Latitude of the third Central Meridian."
 msgstr "Latitudine del terzo Meridiano Centrale."
 
-#: models.py:680
+#: models.py:701
 #: templates/image/detail.html:485
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:681
+#: models.py:702
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "La tua stima per il seeing, in una scala da 1 a 5."
 
-#: models.py:687
+#: models.py:708
 #: templates/image/detail.html:488
 msgid "Transparency"
 msgstr "Trasparenza"
 
-#: models.py:688
+#: models.py:709
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "La tua stima per la trasparenza, in una scala tra 1 e 10."
 
-#: models.py:694
+#: models.py:715
 #: templates/image/detail.html:464
 msgid "Time"
 msgstr "Ora"
 
-#: models.py:695
+#: models.py:716
 msgid "Please use the following format: hh:mm."
 msgstr "Usa il seguente formato: hh:mm."
 
-#: models.py:726
+#: models.py:747
 msgid "Request from"
 msgstr "Richiesta da"
 
-#: models.py:738
+#: models.py:759
 msgid "Additional information"
 msgstr "Ulteriori informazioni"
 
-#: models.py:739
+#: models.py:760
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:740
+#: models.py:761
 msgid "Higher resolution"
 msgstr "Risoluzione superiore"
 
-#: models.py:756
+#: models.py:777
 msgid "Website"
 msgstr "Sito web"
 
-#: models.py:757
+#: models.py:778
 msgid "Job"
 msgstr "Professione"
 
-#: models.py:758
+#: models.py:779
 msgid "Hobbies"
 msgstr "Interessi"
 
-#: models.py:763
+#: models.py:784
 msgid "Timezone"
 msgstr "Fusorario"
 
-#: models.py:764
+#: models.py:785
 msgid "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr "Se inserisci questo, AstroBin ti mostrerà tutte le date nel tuo fuso orario."
 
-#: models.py:783
+#: models.py:804
 #: templates/profile-edit-menu.html:12
 msgid "Default license"
 msgstr "Licenza predefinita"
 
-#: models.py:785
+#: models.py:806
 msgid "The license you select here is automatically applied to all your new images."
 msgstr "La licenza che selezioni qui verrà applicata a tutte le tue nuove immagini."
 
-#: models.py:795
+#: models.py:816
 msgid "Language"
 msgstr "Lingua"
 
-#: search.py:70
-#: views.py:567
-#: views.py:571
-#: views.py:795
-#: views.py:798
-#: views.py:855
-#: views.py:879
+#: search.py:74
+#: views.py:566
+#: views.py:570
+#: views.py:794
+#: views.py:797
+#: views.py:854
+#: views.py:878
 #: templates/user/profile/edit/basic.html:53
 #: templates/user/profile/edit/gear.html:39
 msgid "Enter partial name and wait for the suggestions!"
 msgstr "Inserisci parte del nome ed attendi i suggerimenti!"
 
-#: search.py:71
-#: views.py:568
-#: views.py:796
-#: views.py:856
-#: views.py:880
+#: search.py:75
+#: views.py:567
+#: views.py:795
+#: views.py:855
+#: views.py:879
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
 
-#: search.py:72
+#: search.py:76
 msgid "Matching items:"
 msgstr "Risultati:"
 
@@ -667,108 +712,108 @@ msgstr "Immagini caricate, mensili"
 msgid "Uploaded images, daily"
 msgstr "Immagini caricate, giornaliere"
 
-#: views.py:331
+#: views.py:335
 msgid "Resolution"
 msgstr "Risoluzione"
 
-#: views.py:332
-#: views.py:414
+#: views.py:336
+#: views.py:419
 msgid "Dates"
 msgstr "Date"
 
-#: views.py:334
+#: views.py:338
 #: templates/image/detail.html:467
 msgid "Frames"
 msgstr "Pose"
 
-#: views.py:335
+#: views.py:339
 #: templates/inclusion_tags/search_image_list.html:17
 #: templates/search/search.html:23
 msgid "Integration"
 msgstr "Integrazione"
 
-#: views.py:335
+#: views.py:339
+#: views.py:1191
 #: views.py:1192
-#: views.py:1193
 #: templates/inclusion_tags/search_image_list.html:17
 msgid "hours"
 msgstr "ore"
 
-#: views.py:340
+#: views.py:344
 msgid "Avg. Moon age"
 msgstr "Giorno lunare medio"
 
-#: views.py:341
+#: views.py:345
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:569
+#: views.py:568
 msgid "Subjects found in the SIMBAD database"
 msgstr "Soggetti trovati nel database SIMBAD"
 
-#: views.py:572
-#: views.py:799
+#: views.py:571
+#: views.py:798
 msgid "No results. Press TAB to create this location!"
 msgstr "Nessun risultato. Premi TAB per creare questo luogo!"
 
-#: views.py:573
+#: views.py:572
 #: templates/user/profile/edit/basic.html:55
 #: templates/user/profile/edit/gear.html:41
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr "Oggetti trovati (premi TAB per aggiungere quello che hai scritto, invece):"
 
-#: views.py:978
+#: views.py:977
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:983
-#: views.py:995
+#: views.py:982
+#: views.py:994
 msgid "There was an error. Check your input!"
 msgstr "C'è stato un'errore. Controlla i dati inseriti!"
 
-#: views.py:1170
+#: views.py:1169
 #: templatetags/tags.py:111
 msgid "minutes"
 msgstr "minuti"
 
-#: views.py:1171
+#: views.py:1170
 #: templatetags/tags.py:112
 msgid "seconds ago"
 msgstr "secondi fa"
 
-#: views.py:1173
+#: views.py:1172
 #: templatetags/tags.py:113
 #, python-format
 msgid "%s ago"
 msgstr "%s fa"
 
-#: views.py:1189
+#: views.py:1188
 msgid "Member since"
 msgstr "Utente da"
 
-#: views.py:1190
+#: views.py:1189
 msgid "Last login"
 msgstr "Ultimo login"
 
-#: views.py:1191
+#: views.py:1190
 #: templates/stats.html:64
 msgid "Images uploaded"
 msgstr "Immagini caricate"
 
-#: views.py:1192
+#: views.py:1191
 msgid "Total integration time"
 msgstr "Integrazione totale"
 
-#: views.py:1193
+#: views.py:1192
 msgid "Average integration time"
 msgstr "Integrazione media"
 
-#: views.py:1853
+#: views.py:1846
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha richiesto ulteriori informazioni sulla tua immagine."
 
-#: views.py:1877
+#: views.py:1870
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha richiesto di vedere l'originale TIFF o FITS della tua immagine."
@@ -1000,17 +1045,17 @@ msgstr "Torna su"
 msgid "Feedback"
 msgstr "Feedback"
 
-#: templates/base.html:328
+#: templates/base.html:329
 #: templates/messages/compose.html:18
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:412
+#: templates/base.html:411
 #: templates/image/detail.html:626
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:413
+#: templates/base.html:412
 #: templates/image/detail.html:627
 msgid "Choose file"
 msgstr "Scegli file"
