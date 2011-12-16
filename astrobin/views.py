@@ -176,7 +176,7 @@ def index(request):
         queryset=sqs,
         template_name='index.html',
         template_object_name='image',
-        paginate_by = 20,
+        paginate_by = 20 if request.user.is_authenticated() else 10,
         extra_context = response_dict)
 
 
