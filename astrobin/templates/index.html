@@ -46,10 +46,30 @@
             </div>
         {% endif %} <!-- upload_form -->
     {% else %}<!-- authenticated -->
-        {% url help as help_url %}
-        <p class="hello">
-            {% blocktrans %}<strong>Hello there! Welcome to AstroBin!</strong> <em>AstroBin</em> is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}
-        </p>
+        <div id="why-astrobin-nav-container">
+            <ul id="why-astrobin-nav"></ul>
+        </div>
+
+        <div id="why-astrobin" class="full-box">
+            <div class="why-astrobin-page">
+                <img src="/static/images/slide1.png" alt=""/>
+                <h2>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h2>
+                {% url help as help_url %}
+                <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
+            </div>
+
+            <div class="why-astrobin-page">
+                <img src="/static/images/slide2.png" alt=""/>
+                <h2>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h2>
+                <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free.{% endblocktrans %}</p>
+            </div>
+
+            <div class="why-astrobin-page">
+                <img src="/static/images/slide3.png" alt=""/>
+                <h2>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h2>
+                <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
+            </div>
+        </div>
     {% endif %}<!-- authenticated -->
 
     <a name="page_anchor"></a>
@@ -81,3 +101,24 @@
     </div>
 {% endblock %}
 
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#why-astrobin-nav-container').show();
+        $('#why-astrobin').css('height', '95px');
+        $(function() {
+            $('#why-astrobin').cycle({
+                fx:     'scrollHorz',
+                speed:  'slow',
+                timeout: 7000,
+                pager:  '#why-astrobin-nav',
+                pause: 1,
+                startingSlide: Math.floor(Math.random()*3),
+                pagerAnchorBuilder: function(idx, slide) { 
+                    return '<li><a href="#"></a></li>'; 
+                } 
+            });
+        });
+    });
+</script>
+{% endblock %}

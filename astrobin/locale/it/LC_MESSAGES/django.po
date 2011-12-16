@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-15 13:40-0500\n"
-"PO-Revision-Date: 2011-12-15 13:43-0500\n"
+"POT-Creation-Date: 2011-12-16 13:32-0500\n"
+"PO-Revision-Date: 2011-12-16 13:36-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -1050,12 +1050,12 @@ msgstr "Feedback"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:411
+#: templates/base.html:414
 #: templates/image/detail.html:626
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:412
+#: templates/base.html:415
 #: templates/image/detail.html:627
 msgid "Choose file"
 msgstr "Scegli file"
@@ -1275,32 +1275,52 @@ msgstr "Attenzione!"
 msgid "Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
 msgstr "Prima di poter caricare delle immagini, devi aggiungere almeno un telescopio ed una camera di ripresa alla tua strumentazione. Fallo nel <a href=\"%(the_url)s?initial\">tuo profilo</a>!"
 
-#: templates/index.html:51
-#, python-format
-msgid "<strong>Hello there! Welcome to AstroBin!</strong> <em>AstroBin</em> is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href=\"%(help_url)s\">help page.</a> for more information."
-msgstr "<strong>Ma ciao! Benvenuto su AstroBin!</strong> <em>AstroBin</em> è un servizio di hosting d'immagini creato specificamente per gli astrofotografi. È imbottito di funzionalità che offrono un grosso servizio alla comunità dell'Astrofotografia! Vai alla <a href=\"%(help_url)s\">pagina di aiuto</a> per saperne di più."
+#: templates/index.html:56
+msgid "The perfect home for your astrophotography."
+msgstr "Lo spazio migliore per la tua astrofotografia."
 
-#: templates/index.html:57
+#: templates/index.html:58
+#, python-format
+msgid "AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href=\"%(help_url)s\">help page.</a> for more information."
+msgstr "AstroBin è un servizio di hosting d'immagini creato specificamente per gli astrofotografi. È imbottito di funzionalità che offrono un grosso servizio alla comunità dell'Astrofotografia! Vai alla <a href=\"%(help_url)s\">pagina di aiuto</a> per saperne di più."
+
+#: templates/index.html:63
+msgid "Unlimited uploads, unlimited size."
+msgstr "Upload infiniti, dimensione infinita."
+
+#: templates/index.html:64
+msgid "Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free."
+msgstr "Le fotografie astronomiche hanno valore scientifico che non deve perdersi con la compressione dei file. Su AstroBin puoi (e dovresti!) caricare le immagini a piena risoluzione. Ed hai spazio illimitato e gratis."
+
+#: templates/index.html:69
+msgid "Have your data neatly plotted."
+msgstr "I tuoi dati sistematicamente tracciati."
+
+#: templates/index.html:70
+msgid "Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most."
+msgstr "I dati sono tutto, ed AstroBin ti darà gli strumenti adatti a tenere i tuoi dati bene organizzati. E con i nostri grafici, puoi analizzare la tua produttività e gli strumenti che usi di più."
+
+#: templates/index.html:77
 msgid "Recent images"
 msgstr "Immagini recenti"
 
-#: templates/index.html:59
+#: templates/index.html:79
 #: templates/search/search.html:19
 msgid "Sort by:"
 msgstr "Ordina per:"
 
-#: templates/index.html:61
-#: templates/index.html.py:63
+#: templates/index.html:81
+#: templates/index.html.py:83
 msgid "Uploaded"
 msgstr "Caricamento"
 
-#: templates/index.html:67
-#: templates/index.html.py:69
+#: templates/index.html:87
+#: templates/index.html.py:89
 msgid "Acquired"
 msgstr "Acquisizione"
 
-#: templates/index.html:73
-#: templates/index.html.py:75
+#: templates/index.html:93
+#: templates/index.html.py:95
 #: templates/search/search.html:24
 msgid "Views"
 msgstr "Più viste"

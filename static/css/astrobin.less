@@ -2301,12 +2301,6 @@ p.error {
     }
 }
 
-.hello {
-    margin: @spacer-medium 40px;
-    text-align: center;
-    line-height: 120%;
-    font-size: 140%;}
-
 table.form_saved, table.form_saved_container {
     margin-left: @spacer-large;
     td {
@@ -2637,3 +2631,56 @@ div.token-input-dropdown {
     }
 }
 
+#why-astrobin-nav-container {
+    margin: 0 auto 34px auto;
+    text-align: center!important;
+    width: 210px;
+    display: none;
+}
+
+#why-astrobin-nav {
+    ol, ul {
+        list-style: none;
+    }
+    li {
+        float: left;
+        list-style: none;
+        margin: 0 5px;
+        width: 20px;
+        a {
+            background-image: url('/static/images/slide.png');
+            background-repeat: no-repeat;
+            display: block;
+            width: 17px;
+            height: 17px;
+        }
+    }
+    li.activeSlide {
+        a {
+            background-position: 0 -17px;
+        }
+    }
+}
+
+#why-astrobin {
+    width: 600px;
+    margin: 0 auto;
+    .box-shadow-subtle;
+    .why-astrobin-page {
+        padding: @spacer-large;
+        img {
+            float: left;
+            margin-right: @spacer-xxlarge;
+            width: 130px;
+            height: 130px;
+        }
+        h2 {
+            font-size: 140%;
+            border: 0;
+        }
+        p {
+            font-size: 125%;
+            line-height: 110%;
+        }
+    }
+}

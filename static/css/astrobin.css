@@ -2600,12 +2600,6 @@ p.error {
 .pagination .current {
   padding: 12px;
 }
-.hello {
-  margin: 8px 40px;
-  text-align: center;
-  line-height: 120%;
-  font-size: 140%;
-}
 table.form_saved, table.form_saved_container {
   margin-left: 12px;
 }
@@ -2981,4 +2975,53 @@ div.token-input-dropdown p {
   float: left;
   width: 50%;
   text-align: center;
+}
+#why-astrobin-nav-container {
+  margin: 0 auto 34px auto;
+  text-align: center!important;
+  width: 210px;
+  display: none;
+}
+#why-astrobin-nav ol, #why-astrobin-nav ul {
+  list-style: none;
+}
+#why-astrobin-nav li {
+  float: left;
+  list-style: none;
+  margin: 0 5px;
+  width: 20px;
+}
+#why-astrobin-nav li a {
+  background-image: url('/static/images/slide.png');
+  background-repeat: no-repeat;
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+#why-astrobin-nav li.activeSlide a {
+  background-position: 0 -17px;
+}
+#why-astrobin {
+  width: 600px;
+  margin: 0 auto;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+}
+#why-astrobin .why-astrobin-page {
+  padding: 12px;
+}
+#why-astrobin .why-astrobin-page img {
+  float: left;
+  margin-right: 28px;
+  width: 130px;
+  height: 130px;
+}
+#why-astrobin .why-astrobin-page h2 {
+  font-size: 140%;
+  border: 0;
+}
+#why-astrobin .why-astrobin-page p {
+  font-size: 125%;
+  line-height: 110%;
 }
