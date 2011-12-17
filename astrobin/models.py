@@ -40,9 +40,8 @@ SUBJECT_LABELS = {
     'PULSAR': _("Pulsars"),
     'GLOBUL': _("Globular clusters"),
     'OPENCL': _("Open clusters"),
-    'EMNEBU': _("Emission nebulae"),
+    'NEBULA': _("Nebulae"),
     'PLNEBU': _("Planetary nebulae"),
-    'RENEBU': _("Reflection nebulae"),
     'GALAXY': _("Galaxies"),
 }
 
@@ -51,8 +50,9 @@ SUBJECT_TYPES = {
     'GlC': SUBJECT_LABELS['GLOBUL'],
     'GCl': SUBJECT_LABELS['GLOBUL'],
     'OpC': SUBJECT_LABELS['OPENCL'],
-    'HII': SUBJECT_LABELS['EMNEBU'],
-    'RNe': SUBJECT_LABELS['RENEBU'],
+    'HII': SUBJECT_LABELS['NEBULA'],
+    'RNe': SUBJECT_LABELS['NEBULA'],
+    'ISM': SUBJECT_LABELS['NEBULA'],
     'PN' : SUBJECT_LABELS['PLNEBU'],
     'LIN': SUBJECT_LABELS['GALAXY'],
     'IG' : SUBJECT_LABELS['GALAXY'],
