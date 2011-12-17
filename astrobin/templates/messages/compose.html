@@ -26,6 +26,10 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
+            {% if 'subject' in request.GET %}
+            $('input#id_subject').val("{{request.GET.subject}}");
+            {% endif %}
+
             var recipient =  $("#id_recipient").val();
             $("#id_recipient").val("");
             var parameters = {
