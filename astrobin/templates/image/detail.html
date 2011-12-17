@@ -512,7 +512,7 @@
 
             {% if image.description %}
             <h3>{% trans "Description" %}</h3>
-            <p id="description">{{image.description|escape}}</p>
+            <div id="description">{{image.description|safe|linebreaks}}</div>
             {% endif %}
         </div>
         <div id="side-pane">
