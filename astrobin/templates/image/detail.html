@@ -192,7 +192,7 @@
                                         </span>
                                     </li>
                                     <li class="last bg-icon icon-message">
-                                        <span class="text"><a class="send-private-message" href="{% url messages_compose_to image.user.username %}{% query_string "next=request.path" "" %}">{% trans "Send private message" %}</a></span>
+                                        <span class="text"><a class="send-private-message" href="{% url messages_compose_to image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">{% trans "Send private message" %}</a></span>
                                     </li>
                                     {% endif %}
                                 </ul>
