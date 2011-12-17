@@ -2044,8 +2044,11 @@ ul.topnav > li:hover {
 #image-detail #main-image #container img.fixed-plot-overlay {
   opacity: 1.0;
 }
-#image-detail p#description {
+#image-detail #description {
   margin: 0 0 28px 0;
+}
+#image-detail #description p {
+  padding: 4px;
 }
 #image-detail #revisions .image-strip {
   width: 696px;
