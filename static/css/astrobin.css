@@ -920,6 +920,14 @@ form input:focus, form textarea:focus {
 form select[multiple]:focus {
   color: #c9c9c9;
 }
+form p.error label {
+  color: #f9645b;
+  text-decoration: underline;
+}
+form p.error input, form p.error textarea {
+  border: 1px solid #f9645b;
+  border-bottom: 1px solid #ff7d72;
+}
 .button, .button:visited {
   height: auto;
   font-size: 14px;

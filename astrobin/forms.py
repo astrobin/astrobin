@@ -28,6 +28,8 @@ class ImageEditPresolveForm(forms.ModelForm):
 
 
 class ImageEditBasicForm(forms.ModelForm):
+    error_css_class = 'error'
+
     link = forms.RegexField(
         regex = '^(http|https)://',
         required = False,

@@ -1060,6 +1060,17 @@ form {
         color: @strong-text-color;}
     select[multiple]:focus {
         color: @text-color + #111;}
+
+    p.error {
+        label {
+            color: @danger-color;
+            text-decoration: underline;
+        }
+        input, textarea {
+            border: 1px solid @danger-color;
+            border-bottom: 1px solid (@danger-color * @strong-hilight-factor);
+        }
+    }
 }
 
 .button, .button:visited {

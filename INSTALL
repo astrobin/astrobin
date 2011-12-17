@@ -1,11 +1,6 @@
 # Distribution packages:
 # ======================
 
-# We need Mercurial 1.8+ for git submodule support
-#
-# It's included in Ubuntu 11.10
-# sudo add-apt-repository ppa:mercurial-ppa/releases
-
 sudo apt-get update
 sudo apt-get install \
 	apt-file \
@@ -95,9 +90,6 @@ ln -s ./venv/bin/pip vpip
     lxml \
     django-uni-form
 
-Install django registration revision fad7080fe769 from sources:
-https://bitbucket.org/ubernostrum/django-registration/
-
 Install django-hitcount from sources:
 https://github.com/thornomad/django-hitcount/
 
@@ -112,24 +104,31 @@ https://github.com/thornomad/django-hitcount/
 # cd django-celery; ../astrobin/venv/bin/python setup.py install; cd ..
 
 # for the notifications system
+
+cd submodules
+
 cd django-persistent-messages
-../venv/bin/python setup.py install
+../../venv/bin/python setup.py install
 cd ..
 
 # for the private beta
 cd django-privatebeta
-../venv/bin/python setup.py install
+../../venv/bin/python setup.py install
 cd ..
+
+# for the messaging system
+cd django-threaded-messages
+../../venv/bin/python setup.py install
+cd ..
+
+# registration
+cd django-registration
+../../venv/bin/python setup.py install
+cd ../..
 
 # for the moon phase module
 . ./venv/bin/activate
 easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
-
-# for the messaging system
-cd django-threaded-messages
-../venv/bin/python setup.py install
-cd ..
-
 
 # Set up Xapian:
 # ==============
