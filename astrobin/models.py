@@ -254,6 +254,7 @@ class Image(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Description"),
+        help_text = _("HTML tags are allowed."),
     )
     link = models.CharField(
         max_length = 256,
