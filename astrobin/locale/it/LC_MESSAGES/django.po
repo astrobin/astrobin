@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-18 03:45-0500\n"
-"PO-Revision-Date: 2011-12-18 03:46-0500\n"
+"POT-Creation-Date: 2011-12-18 03:51-0500\n"
+"PO-Revision-Date: 2011-12-18 03:51-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -39,7 +39,7 @@ msgid "Subjects"
 msgstr "Soggetti"
 
 #: forms.py:52
-#: forms.py:117
+#: forms.py:126
 #: models.py:811
 #: views.py:337
 #: templates/image/edit/basic.html:37
@@ -47,7 +47,7 @@ msgid "Locations"
 msgstr "Luoghi"
 
 #: forms.py:80
-#: forms.py:227
+#: forms.py:237
 #: models.py:319
 msgid "Imaging telescopes or lenses"
 msgstr "Telescopi o obiettivi di acquisizione"
@@ -58,14 +58,14 @@ msgid "Guiding telescopes or lenses"
 msgstr "Telescopi o obiettivi di guida"
 
 #: forms.py:82
-#: forms.py:155
+#: forms.py:165
 #: models.py:321
 #: models.py:827
 msgid "Mounts"
 msgstr "Montature"
 
 #: forms.py:83
-#: forms.py:228
+#: forms.py:238
 #: models.py:322
 msgid "Imaging cameras"
 msgstr "Camere di acquisizione"
@@ -76,122 +76,132 @@ msgid "Guiding cameras"
 msgstr "Camere di guida"
 
 #: forms.py:85
-#: forms.py:157
+#: forms.py:167
 #: models.py:324
 #: models.py:829
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
 #: forms.py:86
-#: forms.py:158
+#: forms.py:168
 #: models.py:325
 #: models.py:830
 msgid "Software"
 msgstr "Software"
 
 #: forms.py:87
-#: forms.py:159
+#: forms.py:169
 #: models.py:326
 #: models.py:831
 msgid "Filters"
 msgstr "Filtri"
 
 #: forms.py:88
-#: forms.py:160
+#: forms.py:170
 #: models.py:327
 #: models.py:832
 msgid "Accessories"
 msgstr "Accessori"
 
-#: forms.py:108
+#: forms.py:110
+msgid "If you have a personal website, put the address here."
+msgstr "Se hai un sito web personale, scrivi qui l'indirizzo."
+
+#: forms.py:117
 #: models.py:812
 msgid "These are the cities from which you usually image."
 msgstr "Queste sono le città da cui fotografi di solito."
 
-#: forms.py:123
+#: forms.py:127
+#: models.py:779
+#: templates/user/profile.html:260
+msgid "Website"
+msgstr "Sito web"
+
+#: forms.py:133
 msgid "All the telescopes and lenses you own, including the ones you use for guiding, go here."
 msgstr "Tutti i tuoi telescopi ed obiettivi, compresi quelli che usi per guidare, vanno qui."
 
-#: forms.py:132
+#: forms.py:142
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr "Le tue DSLR, CCD, camere planetarie e camere di guida vanno qui."
 
-#: forms.py:145
+#: forms.py:155
 msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."
 msgstr "Suggerimento: inserisci i filtri separatamente! Se invece li inserisci tutti assieme, ad esempio LRGB insieme, non potrai aggiungere sessioni di acquisizione separate per ogni filtro."
 
-#: forms.py:154
+#: forms.py:164
 #: models.py:826
 msgid "Telescopes and lenses"
 msgstr "Telescopi ed obiettivi"
 
-#: forms.py:156
+#: forms.py:166
 #: models.py:828
 msgid "Cameras"
 msgstr "Camere"
 
-#: forms.py:188
+#: forms.py:198
 #: templates/stats.html:61
 #: templates/image/detail.html:174
 msgid "User"
 msgstr "Utente"
 
-#: forms.py:205
-#: forms.py:209
-#: forms.py:330
+#: forms.py:215
+#: forms.py:219
+#: forms.py:340
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Usa il seguente formato: aaaa-mm-gg"
 
-#: forms.py:212
-#: forms.py:215
+#: forms.py:222
+#: forms.py:225
 msgid "Express value in hours"
 msgstr "Esprimi il valore in ore"
 
-#: forms.py:225
+#: forms.py:235
 msgid "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr "Cerca oggetti astronomici, telescopi o obiettivi, camere, filtri..."
 
-#: forms.py:229
+#: forms.py:239
 msgid "Acquired after"
 msgstr "Acquisita dopo il"
 
-#: forms.py:230
+#: forms.py:240
 msgid "Acquired before"
 msgstr "Acquisita prima del"
 
-#: forms.py:231
+#: forms.py:241
 msgid "Min. integration"
 msgstr "Integrazione min."
 
-#: forms.py:232
+#: forms.py:242
 msgid "Max. integration"
 msgstr "Integrazione max."
 
-#: forms.py:233
+#: forms.py:243
 msgid "Min. Moon phase %"
 msgstr "% fase lunare min."
 
-#: forms.py:234
+#: forms.py:244
 msgid "Max. Moon phase %"
 msgstr "% fase lunare max."
 
-#: forms.py:274
+#: forms.py:284
 msgid "For example: +12.44"
 msgstr "Per esempio: +12.44"
 
-#: forms.py:277
+#: forms.py:287
 msgid "For example: -51.25"
 msgstr "Per esempio: -51.25"
 
-#: forms.py:299
+#: forms.py:309
 msgid "Please enter a value between 1 and 5."
 msgstr "Inserire un valore tra 1 e 5."
 
-#: forms.py:304
+#: forms.py:314
 msgid "Please enter a value between 1 and 10."
 msgstr "Inserire un valore tra 1 e 10."
 
-#: forms.py:343
+#: forms.py:353
 #: models.py:516
 #: models.py:730
 #: templates/image/detail.html:461
@@ -623,11 +633,6 @@ msgstr "TIFF/FITS"
 #: models.py:763
 msgid "Higher resolution"
 msgstr "Risoluzione superiore"
-
-#: models.py:779
-#: templates/user/profile.html:260
-msgid "Website"
-msgstr "Sito web"
 
 #: models.py:786
 #: templates/user/profile.html:264
@@ -2884,6 +2889,9 @@ msgstr "Scegli la lingua usata per questo sito:"
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
 msgstr "Seleziona quali notifiche preferisci ricevere anche come e-mail:"
+
+#~ msgid "Webiste"
+#~ msgstr "Sito web"
 
 #~ msgid "About me"
 #~ msgstr "Qualcosa su di me"

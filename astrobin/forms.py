@@ -102,6 +102,15 @@ class ImageEditGearForm(forms.ModelForm):
 
 
 class UserProfileEditBasicForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    website = forms.RegexField(
+        regex = '^(http|https)://',
+        required = False,
+        help_text = _("If you have a personal website, put the address here."),
+        error_messages = {'invalid': "The address must start with http:// or https://."},
+    )
+
     locations = forms.CharField(
         max_length = 256,
         required = False,
@@ -115,6 +124,7 @@ class UserProfileEditBasicForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
         super(UserProfileEditBasicForm, self).__init__(**kwargs)
         self.fields['locations'].label = _("Locations")
+        self.fields['website'].label = _("Website")
 
 
 class UserProfileEditGearForm(forms.Form):
