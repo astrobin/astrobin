@@ -2,6 +2,8 @@
 {% load tags %}
 {% load i18n %}
 
+{% load hitcount_tags %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -92,6 +94,10 @@
             {% endwith %}
             {% endif %}
         </div>
+        <script type="text/javascript" src="/static/js/jquery-1.7.1.js"></script>
+        <script type="text/javascript">
+            {% get_hit_count_javascript for image %}
+        </script>
     </body>
 </html>
 
