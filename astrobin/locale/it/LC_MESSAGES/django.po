@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-18 03:21-0500\n"
-"PO-Revision-Date: 2011-12-18 03:34-0500\n"
+"POT-Creation-Date: 2011-12-18 03:45-0500\n"
+"PO-Revision-Date: 2011-12-18 03:46-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Team Italian <LL@li.org>\n"
 "Language: \n"
@@ -975,8 +975,8 @@ msgid "Upload!"
 msgstr "Carica!"
 
 #: templates/base.html:161
-#: templates/user/profile.html:294
-#: templates/user/profile.html.py:297
+#: templates/user/profile.html:307
+#: templates/user/profile.html.py:310
 msgid "Logout"
 msgstr "Logout"
 
@@ -1025,6 +1025,7 @@ msgid "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF.
 msgstr "Immagine non valida o nessuna immagine. I formati accettati sono JPG, PNG e GIF."
 
 #: templates/base.html:251
+#: templates/user/profile.html:272
 msgid "About"
 msgstr "Informazioni"
 
@@ -1651,14 +1652,14 @@ msgstr "Vedi il profilo"
 #: templates/image/detail.html:187
 #: templates/image/detail.html.py:582
 #: templates/user/profile.html:51
-#: templates/user/profile.html.py:320
+#: templates/user/profile.html.py:333
 msgid "Stop following"
 msgstr "Smetti di seguire"
 
 #: templates/image/detail.html:189
 #: templates/image/detail.html.py:590
 #: templates/user/profile.html:53
-#: templates/user/profile.html.py:328
+#: templates/user/profile.html.py:341
 msgid "Follow"
 msgstr "Segui"
 
@@ -1820,41 +1821,41 @@ msgid "More: same camera"
 msgstr "Altre: stessa camera"
 
 #: templates/image/detail.html:578
-#: templates/user/profile.html:316
+#: templates/user/profile.html:329
 #, python-format
 msgid "Follow %(username)s?"
 msgstr "Seguire %(username)s?"
 
 #: templates/image/detail.html:579
-#: templates/user/profile.html:317
+#: templates/user/profile.html:330
 #, python-format
 msgid "You will receive a notification every time %(username)s posts a new image. Continue?"
 msgstr "Riceverai una notifica ogni volta che %(username)s carica una nuova immagine. Continuare?"
 
 #: templates/image/detail.html:580
-#: templates/user/profile.html:318
+#: templates/user/profile.html:331
 msgid "Yes, follow!"
 msgstr "Sì, segui!"
 
 #: templates/image/detail.html:586
-#: templates/user/profile.html:324
+#: templates/user/profile.html:337
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr "Smettere di seguire %(username)s?"
 
 #: templates/image/detail.html:587
-#: templates/user/profile.html:325
+#: templates/user/profile.html:338
 #, python-format
 msgid "You will stop receiving notifications when %(username)s posts a new image. Continue?"
 msgstr "Non riceverai più notifiche quando %(username)s carica una nuova immagine. Continuare?"
 
 #: templates/image/detail.html:588
-#: templates/user/profile.html:326
+#: templates/user/profile.html:339
 msgid "Yes, stop following!"
 msgstr "Si, smettere di seguire!"
 
 #: templates/image/detail.html:594
-#: templates/user/profile.html:332
+#: templates/user/profile.html:345
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Manda un messaggio a %(username)s"
@@ -1862,7 +1863,7 @@ msgstr "Manda un messaggio a %(username)s"
 #: templates/image/detail.html:596
 #: templates/messages/compose.html:16
 #: templates/messages/modal_compose.html:16
-#: templates/user/profile.html:334
+#: templates/user/profile.html:347
 msgid "Send"
 msgstr "Manda"
 
@@ -2755,20 +2756,26 @@ msgstr "Scheda tecnica di %(username)s"
 msgid "About %(username)s"
 msgstr "Informazioni su %(username)s"
 
-#: templates/user/profile.html:272
-msgid "About me"
-msgstr "Qualcosa su di me"
+#: templates/user/profile.html:280
+#, python-format
+msgid " You have written nothing about yourself. Why don't you <a href=\"%(the_url)s\">do it now?</a>"
+msgstr "Non hai scritto niente su di te. Perché non <a href=\"%(the_url)s\">farlo adesso?</a>"
 
-#: templates/user/profile.html:278
+#: templates/user/profile.html:284
+#, python-format
+msgid "%(username)s didn't write anything about themselves."
+msgstr "%(username)s non ha scritto niente su di sé."
+
+#: templates/user/profile.html:291
 msgid "Go to the homepage to upload a new image!"
 msgstr "Vai alla home per caricare una nuova foto!"
 
-#: templates/user/profile.html:282
+#: templates/user/profile.html:295
 msgid "Tools"
 msgstr "Strumenti"
 
-#: templates/user/profile.html:286
-#: templates/user/profile.html.py:289
+#: templates/user/profile.html:299
+#: templates/user/profile.html.py:302
 msgid "Edit profile"
 msgstr "Modifica profilo"
 
@@ -2877,6 +2884,9 @@ msgstr "Scegli la lingua usata per questo sito:"
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
 msgstr "Seleziona quali notifiche preferisci ricevere anche come e-mail:"
+
+#~ msgid "About me"
+#~ msgstr "Qualcosa su di me"
 
 #~ msgid "Emission nebulae"
 #~ msgstr "Nebulose ad emissione"
