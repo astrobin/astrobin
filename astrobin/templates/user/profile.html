@@ -228,6 +228,7 @@
                 <img alt="{% trans "Loading..." %}" src="/static/images/plot-loading.gif" />
             </div>
         </div>
+        <div id="stats_integration_hours_by_gear_legend" class="legend"></div>
     </div>
 
     <a name="card"></a>
@@ -383,6 +384,7 @@ $(document).ready(function() {
             dataType: 'json',
             timeout: 60000,
             success: function(series) {
+                series['flot_options']['legend']['container'] = $('#stats_integration_hours_by_gear_legend');
                 $.plot($('#stats_integration_hours_by_gear'),
                     series['flot_data'],
                     series['flot_options']);
