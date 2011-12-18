@@ -251,6 +251,28 @@
             {% endfor %}
         </div>
     </div>
+
+    <a name="about"></a>
+    <div class="user-about full-box clear">
+        <h2>{% blocktrans with user.username as username %}About {{username}}{% endblocktrans %}</h2>
+        {% if profile.website %}
+        <p><strong>{% trans "Website" %}:</strong> <a href="{{profile.website}}" target="_blank">{{profile.website|safe}}</a></p>
+        {% endif %}
+
+        {% if profile.job %}
+        <p><strong>{% trans "Job" %}:</strong> {{profile.job|safe}}</p>
+        {% endif %}
+
+        {% if profile.hobbies %}
+        <p><strong>{% trans "Hobbies" %}:</strong> {{profile.hobbies|safe}}</p>
+        {% endif %}
+
+        {% if profile.about %}
+        <p><strong>{% trans "About" %}:</strong></p>
+        <p>{{profile.about|safe|linebreaks}}</p>
+        {% endif %}
+    </div>
+
     {% if request.user == user %}
     <p style="text-align: center"><a href="{% url index %}">{% trans "Go to the homepage to upload a new image!" %}</a></p>
 

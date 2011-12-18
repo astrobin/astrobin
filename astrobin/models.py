@@ -775,16 +775,49 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, editable=False)
 
     # Basic Information
-    locations = models.ManyToManyField(Location, null=True, blank=True, verbose_name=_("Locations"))
-    website = models.CharField(_("Website"), max_length=128, null=True, blank=True)
-    job = models.CharField(_("Job"), max_length=128, null=True, blank=True)
-    hobbies = models.CharField(_("Hobbies"), max_length=128, null=True, blank=True)
+    website = models.CharField(
+        verbose_name = _("Website"),
+        max_length = 128,
+        null = True,
+        blank = True,
+    )
+
+    job = models.CharField(
+        verbose_name = _("Job"),
+        max_length = 128,
+        null = True,
+        blank = True,
+    )
+
+    hobbies = models.CharField(
+        verbose_name = _("Hobbies"),
+        max_length = 128,
+        null = True,
+        blank = True,
+        help_text = _("Do you have any hobbies other than astrophotography?"),
+    )
+
     timezone = models.CharField(
         max_length=255,
         choices=PRETTY_TIMEZONE_CHOICES,
         blank=True, null=True,
         verbose_name=_("Timezone"),
         help_text=_("By selecting this, you will see all the dates on AstroBin in your timezone."))
+
+    locations = models.ManyToManyField(
+        Location,
+        null = True,
+        blank = True,
+        verbose_name = _("Locations"),
+        help_text = _("These are the cities from which you usually image."),
+    )
+
+    about = models.TextField(
+        null = True,
+        blank = True,
+        verbose_name = _("About you"),
+        help_text = _("Write something about yourself. HTML tags are allowed."),
+    )
 
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)

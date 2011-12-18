@@ -102,11 +102,15 @@ class ImageEditGearForm(forms.ModelForm):
 
 
 class UserProfileEditBasicForm(forms.ModelForm):
-    locations = forms.CharField(max_length=64, required=False, help_text="<noscript>*</noscript>")
+    locations = forms.CharField(
+        max_length = 256,
+        required = False,
+        help_text = _("These are the cities from which you usually image."),
+    )
 
     class Meta:
         model = UserProfile
-        fields = ('website', 'job', 'hobbies', 'timezone',)
+        fields = ('website', 'job', 'hobbies', 'timezone', 'locations', 'about')
 
     def __init__(self, user=None, **kwargs):
         super(UserProfileEditBasicForm, self).__init__(**kwargs)
