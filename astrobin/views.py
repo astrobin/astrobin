@@ -1279,6 +1279,7 @@ def user_page(request, username):
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                          's3_url':settings.S3_URL,
                          'user':user,
+                         'profile':profile,
                          'follows':follows,
                          'private_message_form': PrivateMessageForm(),
                          'section':section,
@@ -1385,6 +1386,7 @@ def user_profile_save_basic(request):
         profile.job      = form.cleaned_data['job']
         profile.hobbies  = form.cleaned_data['hobbies']
         profile.timezone = form.cleaned_data['timezone']
+        profile.about    = form.cleaned_data['about']
 
         profile.save()
     else:
