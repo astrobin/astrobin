@@ -72,6 +72,16 @@
                         .removeAttr('disabled')
                         .removeClass('button-disabled')
                         .val("{% trans "Reply" %}");
+                 },
+                 error: function(data) {
+                    if (data.status == 400) {
+                        // Invalid form, do nothing, as it was surely empty.
+                    } else if (data.status == 500) {
+                        $('.reply-form .submit-button')
+                            .removeAttr('disabled')
+                            .removeClass('button-disabled')
+                            .val("{% trans "Error. Try again!" %}");
+                    }
                  }
              })
          })
