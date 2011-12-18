@@ -271,6 +271,19 @@
         <p><strong>{% trans "About" %}:</strong></p>
         <p>{{profile.about|safe|linebreaks}}</p>
         {% endif %}
+
+        {% if not profile.website and not profile.job and not profile.hobbies and not profile.about %}
+            {% ifequal request.user user %}
+                <p>
+                    {% url profile_edit_basic as the_url %}
+                    {% blocktrans %} You have written nothing about yourself. Why don't you <a href="{{the_url}}">do it now?</a>{% endblocktrans %}
+                </p>
+            {% else %}
+                <p>
+                    {% blocktrans with user.username as username %}{{username}} didn't write anything about themselves.{% endblocktrans %}
+                </p>
+            {% endifequal %}
+        {% endif %}
     </div>
 
     {% if request.user == user %}
