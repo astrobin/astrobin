@@ -79,9 +79,7 @@ def integration_hours_by_gear(user, period='monthly'):
         'lines': {'show': 'true'},
         'points': {'show': 'true'},
         'legend': {
-            'position': 'nw',
-            'backgroundColor': '#000000',
-            'backgroundOpacity': 0.7
+            'noColumns': 3,
         },
         'grid': {'hoverable': 'true'},
     }
