@@ -87,7 +87,9 @@ def integration_hours_by_gear(user, period='monthly'):
     }
 
     profile = UserProfile.objects.get(user = user)
-    for g in Gear.objects.filter(Q(telescope__userprofile = profile) | Q(camera__userprofile = profile)):
+    all_gear = Gear.objects.filter(Q(telescope__userprofile = profile) | Q(camera__userprofile = profile))
+    thickness = all_gear.count()
+    for g in all_gear:
         all = DeepSky_Acquisition.objects.filter(
             Q(image__user = user),
             Q(image__imaging_telescopes = g) | Q(image__imaging_cameras = g)).exclude(date = None).order_by('date')
@@ -96,6 +98,7 @@ def integration_hours_by_gear(user, period='monthly'):
             'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', g.name).encode('ascii', 'ignore'),
             'stage_data': {},
             'data': [],
+            'lines': {'lineWidth': thickness},
         }
 
         for i in all:
@@ -119,6 +122,7 @@ def integration_hours_by_gear(user, period='monthly'):
 
         del g_dict['stage_data']
         flot_data.append(g_dict)
+        thickness -= 1
 
     return (flot_data, flot_options)
 
