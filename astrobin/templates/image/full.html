@@ -95,7 +95,9 @@
             {% endif %}
         </div>
         <script type="text/javascript" src="/static/js/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/static/js/astrobin.js"></script>
         <script type="text/javascript">
+            common.init_ajax_csrf_token();
             {% get_hit_count_javascript for image %}
         </script>
     </body>
