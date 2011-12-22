@@ -1241,6 +1241,7 @@ form {
             list-style: none;
             display: inline;
             >li {
+	        z-index: 1000; /* Thanks, IE7 :/ */
                 padding: 0;
                 position: relative;
                 float: left;
@@ -1778,6 +1779,7 @@ ul.topnav {
     display: block;
     height: 24px;
     >li {
+	z-index: 1000; /* Thanks, IE7 :/ */
         display: inline-block;
         padding: 2px 10px;
         margin: 0;
@@ -1831,6 +1833,7 @@ ul.topnav {
         text-align: center;
         padding-top: @spacer-small;
         #container {
+            z-index: 1;
             position: relative;
             img {
                 cursor: -moz-zoom-in;
@@ -1841,6 +1844,8 @@ ul.topnav {
                 z-index: 1;}
             img.plot-overlay, img.fixed-plot-overlay {
                 position: absolute;
+                top: 0;
+                left: 0;
                 opacity: 0.0;
                 z-index: 2; 
                 border: none;}
@@ -1865,7 +1870,7 @@ ul.topnav {
     background: url('/static/images/popup-bg.png');
     .rounded-corners;
     .box-shadow;
-    z-index: 9999;
+    z-index: 999;
     text-shadow: white 0 1px 0;
     strong {
         color: @background-color / @hilight-factor;
@@ -2186,12 +2191,15 @@ input.date {
 img.thumbnail {
 }
 .thumbnail-list {
+    padding: 0 @spacer-medium;
+    margin-top: @spacer-large;
     img.solved-badge {
         position: absolute;
         z-index: 100;
         top: 0;
-        left: 0;}
-    padding: 0 10px;}
+        left: 0;
+    }
+}
 
 table.requests {
     width: 100%;

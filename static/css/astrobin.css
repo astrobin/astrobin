@@ -1174,6 +1174,9 @@ form p.error input, form p.error textarea {
   display: inline;
 }
 #header #user-nav > ul > li {
+  z-index: 1000;
+  /* Thanks, IE7 :/ */
+
   padding: 0;
   position: relative;
   float: left;
@@ -1957,6 +1960,9 @@ ul.topnav {
   height: 24px;
 }
 ul.topnav > li {
+  z-index: 1000;
+  /* Thanks, IE7 :/ */
+
   display: inline-block;
   padding: 2px 10px;
   margin: 0;
@@ -2029,6 +2035,7 @@ ul.topnav > li:hover {
   padding-top: 4px;
 }
 #image-detail #main-image #container {
+  z-index: 1;
   position: relative;
 }
 #image-detail #main-image #container img {
@@ -2041,6 +2048,8 @@ ul.topnav > li:hover {
 }
 #image-detail #main-image #container img.plot-overlay, #image-detail #main-image #container img.fixed-plot-overlay {
   position: absolute;
+  top: 0;
+  left: 0;
   opacity: 0.0;
   z-index: 2;
   border: none;
@@ -2071,7 +2080,7 @@ ul.topnav > li:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  z-index: 9999;
+  z-index: 999;
   text-shadow: white 0 1px 0;
   left: 0px;
   top: 20px;
@@ -2127,7 +2136,7 @@ ul.topnav > li:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  z-index: 9999;
+  z-index: 999;
   text-shadow: white 0 1px 0;
   -moz-border-radius: 6px 0 6px 6px;
   -webkit-border-radius: 6px 0 6px 6px;
@@ -2452,7 +2461,8 @@ input.date {
   margin-bottom: 5px;
 }
 .thumbnail-list {
-  padding: 0 10px;
+  padding: 0 8px;
+  margin-top: 12px;
 }
 .thumbnail-list img.solved-badge {
   position: absolute;

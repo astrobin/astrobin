@@ -517,7 +517,7 @@
         </div>
         <div id="side-pane">
             <ul class="topnav">
-                <li>
+                <li style="z-index: 1">
                     <span class="text">
                         <a href="#">
                             {% if related == 'rel_user' %}{% trans "More: same user" %}{% endif %}
@@ -664,13 +664,13 @@ $(document).ready(function() {
             image_request_additional_information_action: {
                 dialog: {
                     title : "{% trans "Request additional information" %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like them to feed more information in the technical card for this photograph. Continue?{% endblocktrans %}",
+                    body  : "{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like them to feed more information in the technical card for this photograph. Continue?{% endblocktrans %}"
                 }
             },
             image_request_fits_action: {
                 dialog: {
                     title : "{% trans "Request TIFF/FITS" %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully {{username}} will contact you about how to handle the transaction. Continue?{% endblocktrans %}",
+                    body  : "{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully {{username}} will contact you about how to handle the transaction. Continue?{% endblocktrans %}"
                 }
             }
         });
