@@ -67,27 +67,19 @@
     </head>
 
     <body>
-        <!-- wrap -->
-        <div id="wrap">
-
+        <a name="top"></a>
+        <div id="header-wrap">
             <!-- header -->
             <div id="header">
-                <a name="top"></a>
                 {% block header %}
-                <noscript>
-                <div id="noscript">
-                    <p>
-                        {% blocktrans %}AstroBin works best with Javascript!{% endblocktrans %}
-                    </p>
+                <div id="title">
+                    <h1>
+                        <a href="{% url index %}">
+                            <img src="/static/images/astrobin-logo.png" alt="AstroBin" />
+                        </a>
+                    </h1>
                 </div>
-                </noscript>
-                <div id="languages">
-                    <a href="{% url set_language "en" %}"><img src="/static/icons/flags/16/United-Kingdom.png" alt="{% trans "English" %}"/></a>
-                    <a href="{% url set_language "it" %}"><img src="/static/icons/flags/16/Italy.png" alt="{% trans "Italian" %}"/></a>
-                    <!--
-                    <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="{% trans "Finnish" %}"/></a>
-                    -->
-                </div>
+
                 <div id="search">
                     <form id="quick-search" action="{% url haystack_search %}" method="get" >
                         <p>
@@ -105,18 +97,15 @@
                         </p>
                     </form>
                 </div>
-                <div id="title">
-                    <h1>
-                        <a href="{% url index %}">
-                            <img src="/static/images/astrobin-logo.png" alt="AstroBin" />
-                        </a>
-                    </h1>
-                    <h4>
-                        {% trans "The definitive home for your astrophotography." %}
-                    </h4>
+
+                <div id="languages">
+                    <a href="{% url set_language "en" %}"><img src="/static/icons/flags/16/United-Kingdom.png" alt="{% trans "English" %}"/></a>
+                    <a href="{% url set_language "it" %}"><img src="/static/icons/flags/16/Italy.png" alt="{% trans "Italian" %}"/></a>
+                    <!--
+                    <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="{% trans "Finnish" %}"/></a>
+                    -->
                 </div>
-                <div id="ad">
-                </div>
+
                 <div id="hello">
                     {% if request.user.is_authenticated %}
                         {% with request.user as username %}
@@ -125,6 +114,11 @@
                         {% endwith %}
                     {% endif %}
                 </div>
+            </div> <!-- header -->
+        </div> <!-- header-wrap -->
+
+        <div id="wrap">
+            <div id="navigation">
                 <div id="nav-container">
                     <div id="nav">
                         <ul>
@@ -206,8 +200,7 @@
                     </div>
                 </div>
                {% endblock %}
-            <!-- /header -->
-            </div>
+            </div> <!-- navigation -->
 
             {% if request.user.is_authenticated or not privatebeta_enabled %}
             {% block abpod %}{% endblock %}
