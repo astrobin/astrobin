@@ -41,7 +41,7 @@
 @spacer-xxxlarge: @spacer-small * 13;
 
 @footer-height: 268px;
-@wrap-shadow-offset: 62px;
+@wrap-shadow-offset: 0px;
 @site-width: 960px;
 
 @headers_font: "Droid Sans";
@@ -1119,91 +1119,49 @@ form {
     min-height: 100%;
     height: 100%;
     .wrap-box-shadow;
-    padding-top: 30px;
-    margin: 0 auto;}
+    margin: 0 auto;
+    padding: 0;
+}
+
+#header-wrap {
+    background: @dark-panel-color url('/static/images/dark-panel-tile.png');
+    .box-shadow;
+}
 
 #header {
     margin: 0 auto;
-    height: 94px;
-    background: transparent url('/static/images/header-bg.png');
+    padding: @spacer-medium 0 0 0;
+    width: @site-width;
+    height: 38px;
+
     #title {
         margin: 0;
         padding: 0;
-        position: absolute;
-        top: 5px;
-        left: 0;
         overflow: visible;
+        float: left;
         h1 {
-            float: left;
             border: none;
             margin: 0 @spacer-small 0 0;
             padding: 0;
-            font-size: 2.5em;
-            a {
-                color: @logo-color;
-            }
         }
-        h4 {
-            float: left;
-            margin: 13px 0 0 6px;
-            font-size: 10px;
-            color: @logo-color;}}
-    #ad {
-        position: absolute;
-        top: 138px;
-        right: @spacer-small;}
-    #hello {
-        position: absolute;
-        top: 94px;
-        right: 174px;}
-    /*  navigation  */
-    #nav-container {
-        padding: 16px 0;
     }
-    #nav {
-        margin: 0; padding: 0;
-        overflow: hidden;
-        float: left;
-        ul {
-            float: left;
-            margin: 0;  padding: 0;
-            width: 100%;
-            list-style: none;
-            li {
-                float: left;
-                margin: 0; padding: 0;
-                a, a:visited {
-                    float: left;
-                    margin: 0;
-                    padding: 47px @spacer-xlarge @spacer-medium;
-                    text-align: center;
-                    text-transform: lowercase;}
-                a:hover, a:active {
-                    background: url('/static/images/header-hover-bg.png') no-repeat;}}
-            li#current {
-                >a {
-                    color: @strong-text-color;}}}}
-    #noscript {
-        .notice;
-        position: absolute;
-        top: 14px;
-        right: 300px;
-        width: 235px;
-        text-align: center;
-        padding: @spacer-small @spacer-large;
-        font-size: 90%;
-        p {
-            padding: 0;
-            margin: 0;}}
+
+    #hello {
+        float: right;
+        margin: 8px @spacer-large 0 0;
+    }
+
     #languages {
-        position: absolute;
-        top: 20px; right: 250px;}
+        float: right;
+        margin-top: 8px;
+        margin-right: @spacer-large;
+    }
+
     #search {
-        position: absolute;
-        top: 12px; right: 0;
-        padding: 0 @spacer-small;
+        float: right;
+        margin: 0;
         .common-border-inverted;
-        background-color: @background-color / @hilight-factor;
+        background-color: @light-panel-color;
         .rounded-corners;
         p {
             margin: 0; padding: 0;
@@ -1222,7 +1180,45 @@ form {
             height: 16px;
             padding: @spacer-small @spacer-medium;}
         label {
-            display: none;}}
+            display: none;}
+    }
+}
+
+#navigation {
+    width: @site-width;
+    margin: 0 auto;
+
+    #nav-container {
+        margin-top: 16px;
+        height: 32px;
+        background: (@background-color) url('/static/images/content-tile.png');
+        border-bottom: 1px solid @border-bottom-color;
+    }
+    #nav {
+        margin: 0; padding: 0;
+        float: left;
+
+        ul {
+            float: left;
+            margin: 0;  padding: 0;
+            width: 100%;
+            list-style: none;
+            li {
+                float: left;
+                margin: 0; padding: 0;
+                a, a:visited {
+                    height: 16px;
+                    float: left;
+                    margin: 0;
+                    padding: @spacer-medium @spacer-large;
+                    text-align: center;
+                    text-transform: lowercase;}
+                a:hover, a:active {
+                }
+            }
+            li#current {
+                >a {
+                    color: @strong-text-color;}}}}
 
     #user-nav {
         .icon {
@@ -1241,7 +1237,7 @@ form {
             list-style: none;
             display: inline;
             >li {
-	        z-index: 1000; /* Thanks, IE7 :/ */
+                z-index: 1000; /* Thanks, IE7 :/ */
                 padding: 0;
                 position: relative;
                 float: left;
@@ -1250,18 +1246,21 @@ form {
                 >a.icon, >a:visited.icon {
                     float: left;
                     margin: 0;
-                    padding: 37px 0 8px;
                     text-align: center;
                     text-transform: lowercase;
-                    width: 40px;}
+                    height: 32px;
+                    width: 40px;
+                }
                 >a.active, >a:visited.active {
-                    background: url('/static/images/user-nav-active-bg.png') no-repeat;}}
+                    background: url('/static/images/popup-bg.png');}}
             >li.text {
-                padding-top: 47px;
+                height: 16px;
+                padding: 8px 0;
+
                 a, a, a:visited, a:active {
                     background: none;
                     text-transform: lowercase;
-                    padding: 0 10px;}}}}}
+                    padding: 8px 10px;}}}}}
 
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
@@ -1908,7 +1907,7 @@ ul.topnav {
 .popup {
     .popup-mixin;
     .rounded-corners-bottom-left;
-    right: 0; top: 69px;
+    right: 0; top: 33px;
     .small-bottom-box-shadow;
     ul {
         margin: 0;

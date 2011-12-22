@@ -105,9 +105,9 @@
   box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
 }
 .wrap-box-shadow {
-  -webkit-box-shadow: rgba(0, 0, 0, 0.9) 0 62px 6px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.9) 0 62px 6px;
-  box-shadow: rgba(0, 0, 0, 0.9) 0 62px 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.9) 0 0px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.9) 0 0px 6px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0px 6px;
 }
 .no-box-shadow {
   -webkit-box-shadow: none;
@@ -1010,119 +1010,50 @@ form p.error input, form p.error textarea {
   width: 960px;
   min-height: 100%;
   height: 100%;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.9) 0 62px 6px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.9) 0 62px 6px;
-  box-shadow: rgba(0, 0, 0, 0.9) 0 62px 6px;
-  padding-top: 30px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.9) 0 0px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.9) 0 0px 6px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0px 6px;
   margin: 0 auto;
+  padding: 0;
+}
+#header-wrap {
+  background: #2e2e2e url('/static/images/dark-panel-tile.png');
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
 }
 #header {
   margin: 0 auto;
-  height: 94px;
-  background: transparent url('/static/images/header-bg.png');
-  /*  navigation  */
-
+  padding: 8px 0 0 0;
+  width: 960px;
+  height: 38px;
 }
 #header #title {
   margin: 0;
   padding: 0;
-  position: absolute;
-  top: 5px;
-  left: 0;
   overflow: visible;
+  float: left;
 }
 #header #title h1 {
-  float: left;
   border: none;
   margin: 0 4px 0 0;
   padding: 0;
-  font-size: 2.5em;
-}
-#header #title h1 a {
-  color: #3092cf;
-}
-#header #title h4 {
-  float: left;
-  margin: 13px 0 0 6px;
-  font-size: 10px;
-  color: #3092cf;
-}
-#header #ad {
-  position: absolute;
-  top: 138px;
-  right: 4px;
 }
 #header #hello {
-  position: absolute;
-  top: 94px;
-  right: 174px;
-}
-#header #nav-container {
-  padding: 16px 0;
-}
-#header #nav {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  float: left;
-}
-#header #nav ul {
-  float: left;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  list-style: none;
-}
-#header #nav ul li {
-  float: left;
-  margin: 0;
-  padding: 0;
-}
-#header #nav ul li a, #header #nav ul li a:visited {
-  float: left;
-  margin: 0;
-  padding: 47px 16px 8px;
-  text-align: center;
-  text-transform: lowercase;
-}
-#header #nav ul li a:hover, #header #nav ul li a:active {
-  background: url('/static/images/header-hover-bg.png') no-repeat;
-}
-#header #nav ul li#current > a {
-  color: #fcfcfc;
-}
-#header #noscript {
-  color: #383732;
-  background-color: #f9edbe;
-  border: 1px solid #f0c36d;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  position: absolute;
-  top: 14px;
-  right: 300px;
-  width: 235px;
-  text-align: center;
-  padding: 4px 12px;
-  font-size: 90%;
-}
-#header #noscript p {
-  padding: 0;
-  margin: 0;
+  float: right;
+  margin: 8px 12px 0 0;
 }
 #header #languages {
-  position: absolute;
-  top: 20px;
-  right: 250px;
+  float: right;
+  margin-top: 8px;
+  margin-right: 12px;
 }
 #header #search {
-  position: absolute;
-  top: 12px;
-  right: 0;
-  padding: 0 4px;
+  float: right;
+  margin: 0;
   border: 1px solid #2e2e2e;
   border-bottom: 1px solid #474747;
-  background-color: #2e2e2e;
+  background-color: #393939;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -1151,21 +1082,59 @@ form p.error input, form p.error textarea {
 #header #search label {
   display: none;
 }
-#header #user-nav {
+#navigation {
+  width: 960px;
+  margin: 0 auto;
+}
+#navigation #nav-container {
+  margin-top: 16px;
+  height: 32px;
+  background: #333333 url('/static/images/content-tile.png');
+  border-bottom: 1px solid #404040;
+}
+#navigation #nav {
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+#navigation #nav ul {
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+}
+#navigation #nav ul li {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+#navigation #nav ul li a, #navigation #nav ul li a:visited {
+  height: 16px;
+  float: left;
+  margin: 0;
+  padding: 8px 12px;
+  text-align: center;
+  text-transform: lowercase;
+}
+#navigation #nav ul li#current > a {
+  color: #fcfcfc;
+}
+#navigation #user-nav {
   position: relative;
   float: right;
   margin: 0;
   padding: 0;
 }
-#header #user-nav .icon {
+#navigation #user-nav .icon {
   text-align: center;
   width: 16px;
 }
-#header #user-nav img {
+#navigation #user-nav img {
   height: 26px;
   width: 16px;
 }
-#header #user-nav > ul {
+#navigation #user-nav > ul {
   float: right;
   margin: 0;
   padding: 0;
@@ -1173,7 +1142,7 @@ form p.error input, form p.error textarea {
   list-style: none;
   display: inline;
 }
-#header #user-nav > ul > li {
+#navigation #user-nav > ul > li {
   z-index: 1000;
   /* Thanks, IE7 :/ */
 
@@ -1183,27 +1152,28 @@ form p.error input, form p.error textarea {
   margin: 0;
   display: inline;
 }
-#header #user-nav > ul > li > a.icon, #header #user-nav > ul > li > a:visited.icon {
+#navigation #user-nav > ul > li > a.icon, #navigation #user-nav > ul > li > a:visited.icon {
   float: left;
   margin: 0;
-  padding: 37px 0 8px;
   text-align: center;
   text-transform: lowercase;
+  height: 32px;
   width: 40px;
 }
-#header #user-nav > ul > li > a.active, #header #user-nav > ul > li > a:visited.active {
-  background: url('/static/images/user-nav-active-bg.png') no-repeat;
+#navigation #user-nav > ul > li > a.active, #navigation #user-nav > ul > li > a:visited.active {
+  background: url('/static/images/popup-bg.png');
 }
-#header #user-nav > ul > li.text {
-  padding-top: 47px;
+#navigation #user-nav > ul > li.text {
+  height: 16px;
+  padding: 8px 0;
 }
-#header #user-nav > ul > li.text a,
-#header #user-nav > ul > li.text a,
-#header #user-nav > ul > li.text a:visited,
-#header #user-nav > ul > li.text a:active {
+#navigation #user-nav > ul > li.text a,
+#navigation #user-nav > ul > li.text a,
+#navigation #user-nav > ul > li.text a:visited,
+#navigation #user-nav > ul > li.text a:active {
   background: none;
   text-transform: lowercase;
-  padding: 0 10px;
+  padding: 8px 10px;
 }
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
@@ -1441,7 +1411,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 #content-wrap {
   clear: both;
   width: 100%;
-  padding-bottom: 194px;
+  padding-bottom: 256px;
   background: #333333 url('/static/images/content-tile.png');
 }
 #content {
@@ -2142,7 +2112,7 @@ ul.topnav > li:hover {
   -webkit-border-radius: 6px 0 6px 6px;
   border-radius: 6px 0 6px 6px;
   right: 0;
-  top: 69px;
+  top: 33px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
   box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
@@ -2302,7 +2272,7 @@ span.copy-box {
 /* footer */
 #footer {
   position: absolute;
-  bottom: -62px;
+  bottom: 0px;
   height: 268px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
