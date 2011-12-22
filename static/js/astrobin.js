@@ -880,7 +880,7 @@ var stats = {
                     [{
                         label: series['flot_label'],
                         color: "#CC4B2E",
-                        data: series['flot_data'],
+                        data: series['flot_data']
                     }],
                     series['flot_options']);
             }
