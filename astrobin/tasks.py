@@ -41,8 +41,6 @@ def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, la
                     image.subjects.add(s)
         else:
             print "No subjects found."
-            image.is_solved = False
-            solved = False
 
     image.plot_is_overlay = image.is_solved
     image.save()
