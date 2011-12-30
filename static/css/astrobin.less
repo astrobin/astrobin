@@ -2661,7 +2661,6 @@ div.token-input-dropdown {
     margin: 0 auto 34px auto;
     text-align: center!important;
     width: 210px;
-    display: none;
 }
 
 #why-astrobin-nav {
@@ -2690,10 +2689,14 @@ div.token-input-dropdown {
 
 #why-astrobin {
     width: 600px;
+    height: 95px;
+    position: relative;
     margin: 0 auto;
     .box-shadow-subtle;
     .why-astrobin-page {
         padding: @spacer-large;
+        position: absolute;
+        top: 0; left: 0;
         img {
             float: left;
             margin-right: @spacer-xxlarge;
