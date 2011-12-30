@@ -2273,8 +2273,17 @@ margin-left: 20px;}
     font-weight: normal;
     text-shadow: 0px 0px 1px @background-color;}
 
-form.upload input {
-    width: auto;}
+form.upload {
+    padding: @spacer-medium 0;
+
+    input {
+        width: auto;
+    }
+
+    .submit-button {
+        margin: 0;
+    }
+}
 
 p.error {
     color: red;

@@ -10,7 +10,7 @@
                     <h2>{% trans "Upload as a work in progress" %}</h2>
                     <div class="single-form">
                         <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file" id="id_file"/>
+                            <input type="file" name="file" id="id_file" size="7"/>
                             <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
                             <input type="hidden" name="wip" value="" />
                         </form>
@@ -24,7 +24,7 @@
                     <h2>{% trans "Upload as a finished image" %}</h2>
                     <div class="single-form">
                         <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file" id="id_file"/>
+                            <input type="file" name="file" id="id_file" size="7"/>
                             <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
                         </form>
                         <p>
