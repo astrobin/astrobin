@@ -2975,7 +2975,6 @@ div.token-input-dropdown p {
   margin: 0 auto 34px auto;
   text-align: center!important;
   width: 210px;
-  display: none;
 }
 #why-astrobin-nav ol, #why-astrobin-nav ul {
   list-style: none;
@@ -2998,6 +2997,8 @@ div.token-input-dropdown p {
 }
 #why-astrobin {
   width: 600px;
+  height: 95px;
+  position: relative;
   margin: 0 auto;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
@@ -3005,6 +3006,9 @@ div.token-input-dropdown p {
 }
 #why-astrobin .why-astrobin-page {
   padding: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 #why-astrobin .why-astrobin-page img {
   float: left;
