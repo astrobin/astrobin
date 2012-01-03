@@ -619,7 +619,8 @@ class DeepSky_Acquisition(Acquisition):
     )
 
     mean_sqm = models.DecimalField(
-        _("Mean SQM"),
+        verbose_name = _("Mean mag/arcsec^2"),
+        help_text = _("As measured with your Sky Quality Meter."),
         null=True, blank=True,
         max_digits=5, decimal_places=2)
 
