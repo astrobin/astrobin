@@ -19,12 +19,13 @@
             </ul>
         </form>
     {% else %}
-    {% if edit_type == 'deep_sky' %}
+    {% if edit_type == 'deep_sky' or image.is_solved %}
         {% if advanced or request.GET.advanced == 'true' %}
         <p>
         {% blocktrans %}You can insert as many acquisition sessions as you want, as often images are taken across several nights. An acquisition session is defined primarily by a date and a filter. Fill in your data and then click on <strong>Save</strong> to finish, or on <strong>Add more</strong> to add more acquisition sessions.{% endblocktrans %}
         </p>
         <p>
+        {% url image_edit_acquisition image.id as basic_form_url %}
         {% blocktrans %}Is this too much data for you to handle? Go to the <a href="{{basic_form_url}}?edit_type=deep_sky&advanced=false">basic form</a>.{% endblocktrans %}
         </p>
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
@@ -45,7 +46,7 @@
             </ul>
         </form>
         {% else %}
-        {% url image_edit_acquisition as advanced_form_url %}
+        {% url image_edit_acquisition image.id as advanced_form_url %}
         <p>{% blocktrans %}With this form you can input the basic details for the acquisition of your image. If you want to be more thorough or fill in separate details for each filter, go to the <a href="{{advanced_form_url}}?edit_type=deep_sky&advanced=true">advanced form</a>.{% endblocktrans %}</p>
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
             {{deep_sky_acquisition_basic_form.as_p}}
