@@ -631,7 +631,7 @@ def image_edit_acquisition(request, id):
     deep_sky_acquisition_formset = None
     deep_sky_acquisition_basic_form = None
     advanced = False
-    if edit_type == 'deep_sky':
+    if edit_type == 'deep_sky' or image.is_solved:
         advanced = dsa_qs[0].advanced if dsa_qs else False
         advanced = request.GET['advanced'] if 'advanced' in request.GET else advanced
         advanced = True if advanced == 'true' else advanced
@@ -682,6 +682,7 @@ def image_edit_acquisition_reset(request, id):
         'image': image,
         's3_url':settings.S3_URL,
         'is_ready':image.is_stored,
+        'deep_sky_acquisition_basic_form': DeepSky_AcquisitionBasicForm(),
     }
     return render_to_response('image/edit/acquisition.html',
                               response_dict,
@@ -957,7 +958,7 @@ def image_edit_save_acquisition(request):
     for a in SolarSystem_Acquisition.objects.filter(image=image):
         a.delete()
 
-    if edit_type == 'deep_sky':
+    if edit_type == 'deep_sky' or image.is_solved:
         if advanced:
             DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False, form=DeepSky_AcquisitionForm)
             saving_data = {}
