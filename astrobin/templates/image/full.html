@@ -97,8 +97,16 @@
         <script type="text/javascript" src="/static/js/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/static/js/astrobin.js"></script>
         <script type="text/javascript">
-            common.init_ajax_csrf_token();
-            {% get_hit_count_javascript for image %}
+            $(document).ready(function() {
+                common.init_ajax_csrf_token();
+                {% get_hit_count_javascript for image %}
+
+                {% if image.w > 0 %}
+                if ($(window).width() * .95 > {{image.w}}) {
+                    $('#full-size-image img').addClass('real');
+                }
+                {% endif %}
+            });
         </script>
     </body>
 </html>
