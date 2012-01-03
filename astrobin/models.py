@@ -869,3 +869,18 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 post_save.connect(create_user_profile, sender=User)
 
+
+from zinnia.models import Entry
+def blog_entry_notify(sender, instance, created, **kwargs):
+    if created:
+         push_notification(
+            User.objects.all(),
+            'new_blog_entry',
+            {
+                'object': instance.title,
+                'object_url': instance.get_absolute_url()
+            }
+         )
+
+post_save.connect(blog_entry_notify, sender = Entry)
+
