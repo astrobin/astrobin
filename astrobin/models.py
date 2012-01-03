@@ -34,6 +34,7 @@ LICENSE_CHOICES = (
 LANGUAGE_CHOICES = (
     ('en', _("English")),
     ('it', _("Italian")),
+    ('es', _("Spanish")),
 )
 
 SUBJECT_LABELS = {
