@@ -144,6 +144,8 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
     return (image.size[0], image.size[1], is_animated)
 
 def delete_image_from_backend(filename, ext):
+    # Let's not really delete anything.
+    """
     for suffix in (
         '',
         '_resized',
@@ -163,4 +165,4 @@ def delete_image_from_backend(filename, ext):
         whole_name = filename + suffix + '.png'
         print "Deleting %s." % whole_name
         default_storage.delete(whole_name)
-
+    """
