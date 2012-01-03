@@ -1218,11 +1218,7 @@ def user_page(request, username):
             # All good already
             pass
         elif subsection == 'acquired':
-            sqs = sqs.extra(select = {'last_acquisition_date':
-                                      'SELECT date FROM astrobin_acquisition '
-                                      'WHERE date IS NOT NULL AND image_id = astrobin_image.id '
-                                      'ORDER BY date DESC '
-                                      'LIMIT 1'},
+            sqs = sqs.extra(select = {'last_acquisition_date': lad_sql},
                             order_by = ['-last_acquisition_date'])
         elif subsection == 'year':
             if 'year' in request.GET:
