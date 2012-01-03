@@ -1202,6 +1202,11 @@ def user_page(request, username):
 
     smart_albums = []
     sqs = Image.objects.filter(user = user, is_stored = True).order_by('-uploaded')
+    lad_sql = 'SELECT date FROM astrobin_acquisition '\
+              'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\
+              'ORDER BY date DESC '\
+              'LIMIT 1'
+
     if 'staging' in request.GET:
         if request.user != user:
             return HttpResponseForbidden()
@@ -1222,7 +1227,10 @@ def user_page(request, username):
         elif subsection == 'year':
             if 'year' in request.GET:
                 year = request.GET.get('year')
-                sqs = sqs.filter(acquisition__date__year = year).distinct()
+                sqs = sqs.filter(acquisition__date__year = year).extra(
+                    select = {'last_acquisition_date': lad_sql},
+                    order_by = ['-last_acquisition_date']
+                ).distinct()
                 subtitle = year
                 backlink = "?public&sub=year"
             else:
@@ -1231,7 +1239,10 @@ def user_page(request, username):
                 for y in years:
                     k_dict = {str(y): []}
                     smart_albums.append(k_dict)
-                    for i in sqs.filter(acquisition__date__year = y).distinct()[:10]:
+                    for i in sqs.filter(acquisition__date__year = y).extra(
+                        select = {'last_acquisition_date': lad_sql},
+                        order_by = ['-last_acquisition_date']
+                    ).distinct()[:10]:
                         k_dict[str(y)].append(i)
                 sqs = Image.objects.none()
         elif subsection == 'gear':
