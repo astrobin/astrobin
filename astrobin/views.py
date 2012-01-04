@@ -991,7 +991,6 @@ def image_edit_save_acquisition(request):
             if deep_sky_acquisition_basic_form.is_valid():
                 deep_sky_acquisition_basic_form.save()
             else:
-                response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
                 response_dict['deep_sky_acquisition_basic_form'] = deep_sky_acquisition_basic_form
                 return render_to_response('image/edit/acquisition.html',
                                           response_dict,
