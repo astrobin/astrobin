@@ -365,6 +365,8 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
 
 
 class DeepSky_AcquisitionBasicForm(forms.ModelForm):
+    error_css_class = 'error'
+
     class Meta:
         model = DeepSky_Acquisition
         fields = ('date', 'number', 'duration',)
