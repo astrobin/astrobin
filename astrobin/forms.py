@@ -303,6 +303,14 @@ class LocationEditForm(forms.ModelForm):
 
 
 class SolarSystem_AcquisitionForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    date = forms.DateField(
+        required=False,
+        input_formats = ['%Y-%m-%d'],
+        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+        help_text=_("Please use the following format: yyyy-mm-dd"))
+
     def clean_seeing(self):
         data = self.cleaned_data['seeing']
         if data and data not in range(1, 5):
@@ -338,6 +346,7 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
 
     date = forms.DateField(
         required=False,
+        input_formats = ['%Y-%m-%d'],
         widget=forms.TextInput(attrs={'class':'datepickerclass'}),
         help_text=_("Please use the following format: yyyy-mm-dd"))
 
@@ -366,6 +375,12 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
 
 class DeepSky_AcquisitionBasicForm(forms.ModelForm):
     error_css_class = 'error'
+
+    date = forms.DateField(
+        required=False,
+        input_formats = ['%Y-%m-%d'],
+        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+        help_text=_("Please use the following format: yyyy-mm-dd"))
 
     class Meta:
         model = DeepSky_Acquisition
