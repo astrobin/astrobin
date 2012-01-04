@@ -980,7 +980,6 @@ def image_edit_save_acquisition(request):
                         response_dict,
                         context_instance=RequestContext(request))
             else:
-                response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
                 return render_to_response('image/edit/acquisition.html',
                                           response_dict,
                                           context_instance=RequestContext(request))
