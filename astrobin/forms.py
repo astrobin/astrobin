@@ -334,6 +334,8 @@ class SolarSystem_AcquisitionForm(forms.ModelForm):
 
 
 class DeepSky_AcquisitionForm(forms.ModelForm):
+    error_css_class = 'error'
+
     date = forms.DateField(
         required=False,
         widget=forms.TextInput(attrs={'class':'datepickerclass'}),
