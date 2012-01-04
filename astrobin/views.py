@@ -967,20 +967,19 @@ def image_edit_save_acquisition(request):
             saving_data['advanced'] = advanced
             deep_sky_acquisition_formset = DSAFormSet(saving_data, instance=image)
             response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
+            response_dict['advanced'] = True
             if deep_sky_acquisition_formset.is_valid():
                 deep_sky_acquisition_formset.save()
                 if 'add_more' in request.POST:
                     DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
                     deep_sky_acquisition_formset = DSAFormSet(instance=image)
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
-                    response_dict['advanced'] = True
                     if not dsa_qs:
                         response_dict['context_message'] = {'error': False, 'text': _("Fill in one session, before adding more.")}
                     return render_to_response('image/edit/acquisition.html',
                         response_dict,
                         context_instance=RequestContext(request))
             else:
-                response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
                 return render_to_response('image/edit/acquisition.html',
                                           response_dict,
                                           context_instance=RequestContext(request))
@@ -992,7 +991,6 @@ def image_edit_save_acquisition(request):
             if deep_sky_acquisition_basic_form.is_valid():
                 deep_sky_acquisition_basic_form.save()
             else:
-                response_dict['context_message'] = {'error': True, 'text': _("There was an error. Check your input!")}
                 response_dict['deep_sky_acquisition_basic_form'] = deep_sky_acquisition_basic_form
                 return render_to_response('image/edit/acquisition.html',
                                           response_dict,

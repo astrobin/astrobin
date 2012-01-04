@@ -514,9 +514,9 @@ class ImageRevision(models.Model):
 
 class Acquisition(models.Model):
     date = models.DateField(
-        verbose_name = _("Date"),
         null = True,
         blank = True,
+        verbose_name = _("Date"),
         help_text = _("Please use the following format: yyyy-mm-dd."),
     )
 
