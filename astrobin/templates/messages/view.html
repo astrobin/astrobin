@@ -58,6 +58,7 @@
          $(document).ready(function(){
              $('.reply-form').ajaxForm({
                  resetForm: true,
+                 timeout: 5000,
                  beforeSubmit: function () {
                      if ($('.reply-form #id_body').val() != '') {
                          $('.reply-form .submit-button')
