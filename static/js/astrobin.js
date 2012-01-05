@@ -224,6 +224,7 @@ var common = {
                                 $.ajax({
                                     url: common.config.follow_action.url + common.globals.current_username,
                                     dataType: 'json',
+                                    timeout: 5000,
                                     success: function() {
                                         dlg.dialog('close');
                                         follow_a.remove();
@@ -275,6 +276,7 @@ var common = {
                                 $.ajax({
                                     url: common.config.unfollow_action.url + common.globals.current_username,
                                     dataType: 'json',
+                                    timeout: 5000,
                                     success: function() {
                                         dlg.dialog('close');
                                         unfollow_a.remove();
@@ -467,10 +469,12 @@ var image_detail = {
                 $.ajax({
                     url: image_detail.config.rating.rate_url + image_detail.globals.image_id + '/' + score + '/',
                     dataType: 'json',
+                    timeout: 5000,
                     success: function(data, textStatus, XMLHttpRequst) {
                         $.ajax({
                             url: image_detail.config.rating.get_rating_url + image_detail.config.image_id + '/',
                             dataType: 'json',
+                            timeout: 5000,
                             success: function(data) {
                                 var rating = $.parseJSON(data).rating
                                 $.fn.raty.start(rating);
@@ -701,6 +705,7 @@ var image_detail = {
                                     url: image_detail.config.image_request_additional_information_action.url +
                                          image_detail.globals.image_id + '/',
                                     dataType: 'json',
+                                    timeout: 5000,
                                     success: function() {
                                         dlg.dialog('close');
                                     }
@@ -742,6 +747,7 @@ var image_detail = {
                                     url: image_detail.config.image_request_fits_action.url +
                                          image_detail.globals.image_id + '/',
                                     dataType: 'json',
+                                    timeout: 5000,
                                     success: function() {
                                         dlg.dialog('close');
                                     }
