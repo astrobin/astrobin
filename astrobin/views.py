@@ -580,6 +580,33 @@ def image_edit_basic(request, id):
 
 @login_required
 @require_GET
+def image_edit_watermark(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user or image.is_stored:
+        return HttpResponseForbidden()
+
+    profile = UserProfile.objects.get(user = image.user)
+    if not profile.default_watermark_text or profile.default_watermark_text == '':
+        profile.default_watermark_text = "Copyright %s" % image.user.username
+        profile.save()
+
+    image.watermark = profile.default_watermark
+    image.watermark_text = profile.default_watermark_text
+    image.watermark_position = profile.default_watermark_position
+    image.watermark_opacity = profile.default_watermark_opacity
+
+    form = ImageEditWatermarkForm(instance = image)
+
+    return render_to_response('image/edit/watermark.html',
+        {
+            'image': image,
+            'form': form,
+        },
+        context_instance = RequestContext(request))
+
+
+@login_required
+@require_GET
 def image_edit_gear(request, id):
     profile = UserProfile.objects.get(user=request.user)
     image = Image.objects.get(pk=id)
@@ -883,13 +910,52 @@ def image_edit_save_basic(request):
     form.fields['locations'].initial = u', '.join(x.name for x in getattr(image, 'locations').all())
 
     image.save()
-    if not image.is_stored:
-        image.process(image.presolve_information > 1)
 
     if 'was_not_ready' in request.POST:
+        if 'submit_next' in request.POST:
+            return HttpResponseRedirect('/edit/watermark/%i/' % image.id)
+
+        if not image.is_stored:
+            image.process(image.presolve_information > 1)
+
         return HttpResponseRedirect(image.get_absolute_url())
-    else:
-        return HttpResponseRedirect('/edit/basic/%i/?saved' % image.id)
+
+    return HttpResponseRedirect('/edit/basic/%i/?saved' % image.id)
+
+
+@login_required
+@require_POST
+def image_edit_save_watermark(request):
+    image_id = request.POST.get('image_id')
+    image = get_object_or_404(Image, pk=image_id)
+    if request.user != image.user or image.is_stored:
+        return HttpResponseForbidden()
+
+    form = ImageEditWatermarkForm(data = request.POST, instance = image)
+    if not form.is_valid():
+        return render_to_response(
+            'image/edit/watermark.html',
+            {
+                'image': image,
+                'form': form,
+            },
+            context_instance = RequestContext(request))
+
+    form.save()
+
+    # Save defaults in profile
+    profile = UserProfile.objects.get(user = image.user)
+    profile.default_watermark = form.cleaned_data['watermark']
+    profile.default_watermark_text = form.cleaned_data['watermark_text']
+    profile.default_watermark_position = form.cleaned_data['watermark_position']
+    profile.default_watermark_opacity = form.cleaned_data['watermark_opacity']
+    profile.save()
+
+    if 'submit_next' in request.POST:
+        return HttpResponseRedirect('/edit/gear/%i/' % image.id)
+
+    image.process(image.presolve_information > 1)
+    return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
@@ -927,6 +993,10 @@ def image_edit_save_gear(request):
     form.save()
 
     response_dict['image'] = image
+
+    if 'was_not_ready':
+        image.process(image.presolve_information > 1)
+        return HttpResponseRedirect(image.get_absolute_url())
 
     return HttpResponseRedirect('/edit/gear/%i/?saved' % image.id)
 

@@ -10,6 +10,8 @@ import datetime
 from PIL import Image as PILImage
 from PIL import ImageOps
 from PIL import ImageEnhance
+from PIL import ImageFont
+from PIL import ImageDraw
 
 import StringIO
 
@@ -25,25 +27,74 @@ def download_from_bucket(filename, path):
     output.flush()
     output.close()
 
+
 def save_to_bucket(filename, content):
     default_storage.save(filename, ContentFile(content));
 
-def store_image_in_backend(path, uid, original_ext, mimetype=''):
+
+def watermark_image(image, text, position, opacity):
+    watermark = PILImage.new('RGBA', (image.size[0], image.size[1]))
+    draw = ImageDraw.Draw(watermark, 'RGBA')
+    fontsize = 1
+    ttf = 'static/fonts/arial.ttf'
+
+    img_fraction = 0.33
+
+    font = ImageFont.truetype(ttf, fontsize)
+    while font.getsize(text)[0] < img_fraction*image.size[0]:
+        # iterate until the text size is just larger than the criteria
+        fontsize += 1
+        font = ImageFont.truetype(ttf, fontsize)
+
+    # de-increment to be sure it is less than criteria
+    fontsize -= 1
+    font = ImageFont.truetype(ttf, fontsize)
+
+    if position == 0:
+        pos = (image.size[0] * .5 - font.getsize(text)[0] * .5,
+               image.size[1] * .5 - font.getsize(text)[1] * .5)
+    elif position == 1:
+        pos = (image.size[0] * .02,
+               image.size[1] * .02)
+    elif position == 2:
+        pos = (image.size[0] * .5 - font.getsize(text)[0] * .5,
+               image.size[1] * .02)
+    elif position == 3:
+        pos = (image.size[0] * .98 - font.getsize(text)[0],
+               image.size[1] * .02)
+    elif position == 4:
+        pos = (image.size[0] * .02,
+               image.size[1] * .98 - font.getsize(text)[1])
+    elif position == 5:
+        pos = (image.size[0] * .5 - font.getsize(text)[0] * .5,
+               image.size[1] * .98 - font.getsize(text)[1])
+    elif position == 6:
+        pos = (image.size[0] * .98 - font.getsize(text)[0],
+               image.size[1] * .98 - font.getsize(text)[1])
+
+    draw.text(pos, text, font=font)
+    mask = watermark.convert('L').point(lambda x: min(x, opacity))
+    watermark.putalpha(mask)
+    image.paste(watermark, None, watermark)
+
+    return image
+
+
+def store_image_in_backend(path, image_model):
     format_map = {'image/jpeg':('JPEG', '.jpg'),
                   'image/png' :('PNG', '.png'),
                   'image/gif' :('GIF', '.gif'),
                  }
+    uid = image_model.filename
+    original_ext = image_model.original_ext
 
-    content_type = mimetype if mimetype else mimetypes.guess_type(uid+original_ext)[0]
+    content_type = mimetypes.guess_type(uid+original_ext)[0]
     try:
         file = open(path + uid + original_ext)
     except IOError:
         return (0, 0, False)
 
     data = StringIO.StringIO(file.read())
-
-    # First store the original image
-    save_to_bucket(uid + '' + original_ext, data.getvalue())
 
     image = PILImage.open(data)
 
@@ -55,6 +106,20 @@ def store_image_in_backend(path, uid, original_ext, mimetype=''):
         except:
             image.seek(0)
             is_animated = False
+
+
+    if image_model.watermark and not is_animated:
+        image = watermark_image(
+            image,
+            image_model.watermark_text,
+            image_model.watermark_position,
+            image_model.watermark_opacity)
+        data = StringIO.StringIO()
+        image.save(data, format_map[content_type][0], quality=100)
+        if image.mode != "RGB":
+            image = image.convert("RGB")
+
+    save_to_bucket(uid + original_ext, data.getvalue())
 
     if not is_animated:
         try:
