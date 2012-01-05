@@ -3079,3 +3079,17 @@ div.token-input-dropdown p {
   display: none;
   padding: 14px 0 14px 0;
 }
+.ui-widget-overlay {
+  background: #222;
+}
+.ui-dialog .ui-widget-header {
+  border: 1px solid #cc4b2e;
+  border-top: 1px solid #ff5e3a;
+  background: #cc4b2e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e45434), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #e45434, #cc4b2e);
+  color: #fcfcfc;
+}
+.ui-dialog .ui-button-text {
+  color: #cc4b2e;
+}
