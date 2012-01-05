@@ -3030,3 +3030,29 @@ div.token-input-dropdown p {
   font-size: 115%;
   line-height: 115%;
 }
+.ui-multiselect {
+  border-color: #474747;
+}
+.ui-multiselect div.available {
+  border-color: #474747;
+}
+.ui-multiselect ul.available, .ui-multiselect ul.selected {
+  background: #393939 url('/static/images/light-panel-tile.png');
+}
+.ui-multiselect .ui-state-default {
+  color: #cc4b2e;
+  background: #3f3f3f;
+}
+.ui-multiselect .ui-state-highlight {
+  background: #454545;
+  border-color: #474747;
+}
+.ui-multiselect .ui-widget-header {
+  color: #b8b8b8;
+  background: #454545;
+}
+.ui-multiselect input.search {
+  margin: 7px 4px 0 4px;
+  background: #fcfcfc;
+  color: #333333;
+}

@@ -2722,3 +2722,31 @@ div.token-input-dropdown {
         }
     }
 }
+
+.ui-multiselect {
+    border-color: @border-top-color;
+
+    div.available {
+        border-color: @border-top-color;
+    }
+    ul.available, ul.selected {
+        background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+    }
+    .ui-state-default {
+        color: @link-color;
+        background: @light-panel-color * 1.1;
+    }
+    .ui-state-highlight {
+        background: @light-panel-color * 1.2;
+        border-color: @border-top-color;
+    }
+    .ui-widget-header {
+        color: @text-color;
+        background: @light-panel-color * 1.2;
+    }
+    input.search {
+        margin: 7px 4px 0 4px;
+        background: @strong-text-color;
+        color: @background-color;
+    }
+}
