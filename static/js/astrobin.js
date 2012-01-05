@@ -232,6 +232,8 @@ var common = {
                                             '</a>');
                                         span.parent().removeClass('icon-follow');
                                         span.parent().addClass('icon-unfollow');
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown) {
                                     }
                                 });
                             }
@@ -281,6 +283,8 @@ var common = {
                                             '</a>');
                                         span.parent().removeClass('icon-unfollow');
                                         span.parent().addClass('icon-follow');
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown) {
                                     }
                                 });
                             }
