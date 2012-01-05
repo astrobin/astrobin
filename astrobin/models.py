@@ -63,6 +63,17 @@ SUBJECT_TYPES = {
     'G'  : SUBJECT_LABELS['GALAXY'],
 }
 
+WATERMARK_POSITION_CHOICES = (
+    (0, _("Center")),
+    (1, _("Top left")),
+    (2, _("Top center")),
+    (3, _("Top right")),
+    (4, _("Bottom left")),
+    (5, _("Bottom center")),
+    (6, _("Bottom right")),
+)
+
+
 class Gear(models.Model):
     name = models.CharField(_("Name"), max_length=64)
 
@@ -242,6 +253,7 @@ class Image(models.Model):
         (5, _("This ia narrow field image (less than 1 degree).")),
     )
 
+
     title = models.CharField(
         max_length = 128,
         verbose_name = _("Title"),
@@ -314,6 +326,28 @@ class Image(models.Model):
         default = 100,
         help_text = _("If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't matter."),
         verbose_name = _("Scaling"),
+    )
+
+    watermark_text = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        verbose_name = "Text",
+    )
+
+    watermark = models.BooleanField(
+        default = False,
+        verbose_name = _("Apply watermark to image"),
+    )
+
+    watermark_position = models.IntegerField(
+        verbose_name = _("Position"),
+        default = 0,
+        choices = WATERMARK_POSITION_CHOICES,
+    )
+
+    watermark_opacity = models.IntegerField(
+        default = 10,
     )
 
     # gear
@@ -844,6 +878,30 @@ class UserProfile(models.Model):
             "all your new images."
         ),
     )
+
+    default_watermark_text = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        editable = False,
+    )
+
+    default_watermark = models.BooleanField(
+        default = False,
+        editable = False,
+    )
+
+    default_watermark_position = models.IntegerField(
+        default = 0,
+        choices = WATERMARK_POSITION_CHOICES,
+        editable = False,
+    )
+
+    default_watermark_opacity = models.IntegerField(
+        default = 10,
+        editable = False,
+    )
+
 
     # Preferences (notification preferences are stored in the django
     # notification model)

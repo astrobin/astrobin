@@ -266,7 +266,7 @@ def solve_image(image, lang, use_scale=True, callback=None):
 @task()
 def store_image(image, solve, lang, callback=None):
     try:
-        (w, h, animated) = store_image_in_backend(settings.UPLOADS_DIRECTORY, image.filename, image.original_ext)
+        (w, h, animated) = store_image_in_backend(settings.UPLOADS_DIRECTORY, image)
         image.w = w
         image.h = h
         image.animated = animated
