@@ -2367,39 +2367,61 @@ div.capty-caption a {
     text-shadow: none;
 }
 
-#full-size-header {
-    position: absolute;
-    left: @spacer-medium;
-    top: @spacer-large;
-    margin: 0; padding: 0;
-    h1 {
-        border: none;
-        margin: 0; padding: 0;
-        a {
-            font-size: 1.5em;
-            text-decoration: none;
-            text-shadow: 0 0 2px #000;
-            color: @logo-color;}}
-}
+#full-header-wrap {
+    background: @dark-panel-color url('/static/images/dark-panel-tile.png');
+    .box-shadow;
+    padding-top: @spacer-large;
+    padding-bottom: @spacer-small;
+    margin-bottom: @spacer-medium;
+    height: 42px;
 
-#full-size-image {
-    padding: @spacer-xlarge @spacer-large;
-    text-align: center;
-    .main-image-data {
-        .title {
+    >div {
+        float: left;
+    }
+
+    .logo {
+        margin: 0; padding: 0;
+        width: 20%;
+        h1 {
+            border: none;
+            margin: 0; padding: 0;
+            a {
+                font-size: 1.5em;
+                text-decoration: none;
+                text-shadow: 0 0 2px #000;
+                color: @logo-color;}}
+    }
+
+    .data {
+        width: 59%;
+        text-align: center;
+        h2.title {
             display: block;
             padding: 0 0 @spacer-medium 0;
             margin: 0;
-            text-align: center;
-            width: 100%;
             color: @strong-text-color;
             font-weight: bold;
-            font-size: 28px;
+            font-size: 24px;
             .text-shadow;
-            border: none;}
+            border: none;
+        }
         .subtitle {
             display: block;
-            text-align: center;}}
+        }
+    }
+
+    .links {
+        width: 20%;
+        text-align: right;
+        padding-right: @spacer-medium;
+        span {
+            display: block;
+        }
+    }
+}
+
+#full-size-image {
+    text-align: center;
     img {
         width: 95%;
         margin-top: @spacer-medium;
@@ -2725,3 +2747,50 @@ div.token-input-dropdown {
         }
     }
 }
+
+.ui-multiselect {
+    border-color: @border-top-color;
+
+    div.available {
+        border-color: @border-top-color;
+    }
+    ul.available, ul.selected {
+        background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+    }
+    .ui-state-default {
+        color: @link-color;
+        background: @light-panel-color * 1.1;
+    }
+    .ui-state-highlight {
+        background: @light-panel-color * 1.2;
+        border-color: @border-top-color;
+    }
+    .ui-widget-header {
+        color: @text-color;
+        background: @light-panel-color * 1.2;
+    }
+    input.search {
+        margin: 7px 4px 0 4px;
+        background: @strong-text-color;
+        color: @background-color;
+    }
+}
+
+.progressbar {
+    display: none;
+    padding: 14px 0 14px 0;
+}
+
+.ui-widget-overlay {
+    background: #222;
+}
+
+.ui-dialog {
+    .ui-widget-header {
+        .button-gradient;
+    }
+    .ui-button-text {
+        color: @link-color;
+    }
+}
+
