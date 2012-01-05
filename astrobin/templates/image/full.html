@@ -48,38 +48,44 @@
     </head>
 
     <body style="width: 100%">
-        <div id="full-size-header">
-            <h1>
-                <a href="{% url index %}">
-                    <img src="/static/images/astrobin-logo.png" alt="AstroBin" />
-                </a>
-            </h1>
+        <div id="full-header-wrap">
+            <div class="logo">
+                <h1>
+                    <a href="{% url index %}">
+                        <img src="/static/images/astrobin-logo.png" alt="AstroBin" />
+                    </a>
+                </h1>
+            </div>
+            <div class="data">
+                <h2 class="title">{{image.title|escape|default:_("(no title)")}}</h2>
+                <span class="subtitle">
+                    {% trans "uploaded" %}: {{image.uploaded|ago}}
+                    {% url user_page image.user.username as the_url %}
+                    {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %}
+                </span>
+            </div>
+            <div class="links">
+                {% with request.GET.mod as mod %}
+                <span>
+                    <a href="{% url image_detail image.id %}{% query_string "mod=mod" "" %}">
+                        {% blocktrans %}See technical details{% endblocktrans %}
+                    </a>
+                </span> 
+                <span>
+                {% if real %}
+                    <a href="{% url image_full image.id %}{% query_string "mod=mod" "real" %}">
+                        {% blocktrans %}Fit image's width to window{% endblocktrans %}
+                    </a>
+                {% else %}
+                    <a href="{% url image_full image.id %}{% query_string "mod=mod,real=''" "" %}">
+                        {% blocktrans %}View at full resolution{% endblocktrans %}
+                    </a>
+                {% endif %}
+                </span>
+                {% endwith %}
+            </div>
         </div>
         <div id="full-size-image">
-                <div class="main-image-data">
-                        <h2 class="title">{{image.title|escape|default:_("(no title)")}}</h2>
-                        <span class="subtitle">
-                            {% trans "uploaded" %}: {{image.uploaded|ago}}
-                            {% url user_page image.user.username as the_url %}
-                            {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %}
-                            |
-                            {% with request.GET.mod as mod %}
-                            <a href="{% url image_detail image.id %}{% query_string "mod=mod" "" %}">
-                            {% blocktrans %}See technical details{% endblocktrans %}
-                            </a>
-                            |
-                            {% if real %}
-                                <a href="{% url image_full image.id %}{% query_string "mod=mod" "real" %}">
-                                    {% blocktrans %}Fit image's width to window{% endblocktrans %}
-                                </a>
-                            {% else %}
-                                <a href="{% url image_full image.id %}{% query_string "mod=mod,real=''" "" %}">
-                                    {% blocktrans %}View at full resolution{% endblocktrans %}
-                                </a>
-                            {% endif %}
-                            {% endwith %}
-                        </span>
-            </div>
             {% if revision_image %}
                  {% with revision_image as image %}
                  {% with request.GET.mod as mod %}

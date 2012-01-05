@@ -2364,39 +2364,61 @@ div.capty-caption a {
     text-shadow: none;
 }
 
-#full-size-header {
-    position: absolute;
-    left: @spacer-medium;
-    top: @spacer-large;
-    margin: 0; padding: 0;
-    h1 {
-        border: none;
-        margin: 0; padding: 0;
-        a {
-            font-size: 1.5em;
-            text-decoration: none;
-            text-shadow: 0 0 2px #000;
-            color: @logo-color;}}
-}
+#full-header-wrap {
+    background: @dark-panel-color url('/static/images/dark-panel-tile.png');
+    .box-shadow;
+    padding-top: @spacer-large;
+    padding-bottom: @spacer-small;
+    margin-bottom: @spacer-medium;
+    height: 42px;
 
-#full-size-image {
-    padding: @spacer-xlarge @spacer-large;
-    text-align: center;
-    .main-image-data {
-        .title {
+    >div {
+        float: left;
+    }
+
+    .logo {
+        margin: 0; padding: 0;
+        width: 20%;
+        h1 {
+            border: none;
+            margin: 0; padding: 0;
+            a {
+                font-size: 1.5em;
+                text-decoration: none;
+                text-shadow: 0 0 2px #000;
+                color: @logo-color;}}
+    }
+
+    .data {
+        width: 59%;
+        text-align: center;
+        h2.title {
             display: block;
             padding: 0 0 @spacer-medium 0;
             margin: 0;
-            text-align: center;
-            width: 100%;
             color: @strong-text-color;
             font-weight: bold;
             font-size: 28px;
             .text-shadow;
-            border: none;}
+            border: none;
+        }
         .subtitle {
             display: block;
-            text-align: center;}}
+        }
+    }
+
+    .links {
+        width: 20%;
+        text-align: right;
+        padding-right: @spacer-medium;
+        span {
+            display: block;
+        }
+    }
+}
+
+#full-size-image {
+    text-align: center;
     img {
         width: 95%;
         margin-top: @spacer-medium;
