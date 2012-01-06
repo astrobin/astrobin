@@ -1910,14 +1910,14 @@ def image_revision_upload_process(request):
     if original_ext == '.jpeg':
         original_ext = '.jpg'
     if original_ext not in ('.jpg', '.png', '.gif'):
-        return HttpRenderRedirect('/%i/?upload_error' % image.id)
+        return HttpResponseRedirect('/%i/?upload_error' % image.id)
 
     try:
         from PIL import Image as PILImage
         trial_image = PILImage.open(file)
         trial_image.verify()
     except:
-        return HttpRenderRedirect('/%i/?upload_error' % image.id)
+        return HttpResponseRedirect('/%i/?upload_error' % image.id)
 
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
