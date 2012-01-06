@@ -13,12 +13,13 @@
                 {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your <a href="{{the_url}}">profile</a>!{% endblocktrans %}
             </p>
         {% endif %}
-        <form method="post" action="{% url image_edit_save_gear %}">{% csrf_token %}
+        <form id="gear" method="post" action="{% url image_edit_save_gear %}">{% csrf_token %}
             {{form.non_field_errors}}
             {% for field in form %}
                 <p>
                     {{field.errors}}
                     <label class="multiple" for="id_{{field.name}}">{{field.label}}:</label>
+                    <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
                     {{field}}
                 </p>
             {% endfor %}
@@ -32,3 +33,24 @@
     </div>  
 {% endblock %}
 
+{% block extra_head %}
+<noscript>
+    <style type="text/css">
+        form#gear .loading {
+            display: none;
+        }
+        form#gear select {
+            display: block;
+        }
+    </style>
+</noscript>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('form .loading').hide();
+        $('form .ui-multiselect').show();
+    });
+</script>
+{% endblock %}
