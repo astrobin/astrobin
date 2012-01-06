@@ -9,8 +9,9 @@
                 <div class="wip-form-box">
                     <h2>{% trans "Upload as a work in progress" %}</h2>
                     <div class="single-form">
+                        <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
                         <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file" id="id_file" size="7"/>
+                            <input type="file" name="file" class="file" id="id_file" size="7"/>
                             <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
                             <input type="hidden" name="wip" value="" />
                         </form>
@@ -24,8 +25,9 @@
                 <div class="final-form-box">
                     <h2>{% trans "Upload as a finished image" %}</h2>
                     <div class="single-form">
+                        <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
                         <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file" id="id_file" size="7"/>
+                            <input type="file" name="file" class="file" id="id_file" size="7"/>
                             <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
                         </form>
                         <div class="progressbar"><img src="/static/images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
@@ -131,6 +133,9 @@
 
             return true;
         });
+
+        $('.upload-forms .loading').hide();
+        $('.upload-forms form').show();
     });
 </script>
 {% endblock %}
