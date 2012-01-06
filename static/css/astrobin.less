@@ -1563,7 +1563,18 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 .upload-forms {
     margin: 0 auto;
-    width: 70%;}
+    width: 70%;
+    .loading {
+        padding: 6px 0;
+    }
+    form {
+        display: none;
+    }
+    input.file {
+        width: 210px;
+        margin-bottom: -8px;
+    }
+}
 
 .small-box {
     margin: 0 auto;
