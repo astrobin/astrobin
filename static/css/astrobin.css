@@ -3061,6 +3061,7 @@ div.token-input-dropdown p {
 }
 .ui-multiselect {
   border-color: #474747;
+  display: none;
 }
 .ui-multiselect div.available {
   border-color: #474747;
@@ -3102,4 +3103,7 @@ div.token-input-dropdown p {
 }
 .ui-dialog .ui-button-text {
   color: #cc4b2e;
+}
+form#gear select {
+  display: none;
 }
