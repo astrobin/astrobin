@@ -105,6 +105,19 @@
     </div>
 {% endblock %}
 
+{% block extra_head %}
+<noscript>
+    <style type="text/css">
+        .upload-forms .loading {
+            display: none;
+        }
+        .upload-forms form {
+            display: block;
+        }
+    </style>
+</noscript>
+{% endblock %}
+
 {% block extra_js %}
 <script type="text/javascript">
     $(document).ready(function() {
