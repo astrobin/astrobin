@@ -767,6 +767,7 @@ h1 {
 h2 {
   margin-bottom: 8px;
   font-size: 1.5em;
+  line-height: 1em;
   border-bottom: 1px solid #404040;
 }
 h3 {
@@ -1550,7 +1551,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   max-width: 300px;
   padding: 12px;
   text-align: center;
-  height: 180px;
 }
 .small-box .single-form p {
   margin: 0;
@@ -1571,7 +1571,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   max-width: 300px;
   padding: 12px;
   text-align: center;
-  height: 180px;
   float: left;
 }
 .wip-form-box .single-form p {
@@ -1593,7 +1592,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   max-width: 300px;
   padding: 12px;
   text-align: center;
-  height: 180px;
   float: right;
 }
 .final-form-box .single-form p {
