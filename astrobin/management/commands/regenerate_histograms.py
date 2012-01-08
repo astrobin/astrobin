@@ -34,7 +34,14 @@ class Command(BaseCommand):
 
             f = open(path, 'r')
             image = PILImage.open(f)
-            new_hist = generate_histogram(image)
+            try:
+	        new_hist = generate_histogram(image)
+            except:
+                print i.filename + ": error generating histogram."
+                f.close()
+                os.remove(path)
+                continue
+
             new_hist_f = StringIO.StringIO()
             new_hist.save(new_hist_f, 'PNG')
             save_to_bucket(i.filename + '_hist.png', new_hist_f.getvalue())
