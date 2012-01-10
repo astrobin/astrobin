@@ -432,6 +432,9 @@ def image_detail(request, id):
                      # revision e1dad12babe5, now we have to
                      # implement this ugly hack.
                      'solved_ext': solved_ext,
+
+                     'solar_system_main_subject_id': image.solar_system_main_subject,
+                     'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject else None,
                     }
 
     if 'upload_error' in request.GET:

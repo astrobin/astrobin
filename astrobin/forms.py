@@ -56,7 +56,7 @@ class ImageEditBasicForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('title', 'link', 'subjects', 'locations', 'description')
+        fields = ('title', 'link', 'subjects', 'solar_system_main_subject', 'locations', 'description')
 
 
 class ImageEditWatermarkForm(forms.ModelForm):

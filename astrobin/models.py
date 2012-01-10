@@ -64,6 +64,20 @@ SUBJECT_TYPES = {
     'G'  : SUBJECT_LABELS['GALAXY'],
 }
 
+SOLAR_SYSTEM_SUBJECT_CHOICES = (
+    (0, _("Sun")),
+    (1, _("Earth's Moon")),
+    (2, _("Mercury")),
+    (3, _("Venus")),
+    (4, _("Mars")),
+    (5, _("Jupiter")),
+    (6, _("Saturn")),
+    (7, _("Uranus")),
+    (8, _("Neptune")),
+    (9, _("Minor planet")),
+    (10, _("Comet")),
+)
+
 WATERMARK_POSITION_CHOICES = (
     (0, _("Center")),
     (1, _("Top left")),
@@ -294,18 +308,30 @@ class Image(models.Model):
         max_length = 128,
         verbose_name = _("Title"),
     )
+
     subjects = models.ManyToManyField(
         Subject,
     )
+
+    solar_system_main_subject = models.IntegerField(
+        verbose_name = _("Main solar system subject"),
+        help_text = _("If the main subject of your image is a body in the solar system, please select which (or which type) it is."),
+        null = True,
+        blank = True,
+        choices = SOLAR_SYSTEM_SUBJECT_CHOICES,
+    )
+
     locations = models.ManyToManyField(
         Location,
     )
+
     description = models.TextField(
         null = True,
         blank = True,
         verbose_name = _("Description"),
         help_text = _("HTML tags are allowed."),
     )
+
     link = models.CharField(
         max_length = 256,
         null = True,
