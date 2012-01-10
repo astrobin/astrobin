@@ -149,9 +149,7 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
                     if slave:
                         try:
                             getattr(image, name).add(klass.objects.get(gear_ptr = merge.master))
-                            print "Added master as %s to image: %s." % (name, image.title)
                             getattr(image, name).remove(slave[0])
-                            print "Removed slave as %s from image: %s." % (name, image.title)
                             merge_done = True
                             changed = True
                         except klass.DoesNotExist:
@@ -178,9 +176,7 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
                     if slave:
                         try:
                             getattr(owner, name).add(klass.objects.get(gear_ptr = merge.master))
-                            print "Added master as %s to user: %s." % (name, owner.user.username)
                             getattr(owner, name).remove(slave[0])
-                            print "Removed slave as %s from user: %s." % (name, owner.user.username)
                             merge_done = True
                             changed = True
                         except klass.DoesNotExist:
@@ -190,7 +186,6 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
 
             if merge_done:
                 automerge = GearAutoMerge.objects.get_or_create(master = merge.master, label = merge.slave.name)
-                print "Added auto-merge: %s <- %s." % (merge.master.name, merge.slave.name)
 
         # Only now, delete all the slaves. We must delete at the end because
         # We might have the same slave respond to different masters.
