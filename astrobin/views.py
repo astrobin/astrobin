@@ -147,6 +147,7 @@ def index(request):
     """Main page"""
     form = None
 
+    profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
         if profile and profile.telescopes.all() and profile.cameras.all():
@@ -154,9 +155,12 @@ def index(request):
 
     sqs = SearchQuerySet().all().models(Image)
 
-    response_dict = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                     's3_url':settings.S3_URL,
-                     'upload_form':form,}
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+        'profile': profile,
+        'upload_form': form,
+    }
 
     if 'upload_error' in request.GET:
         response_dict['upload_error'] = True

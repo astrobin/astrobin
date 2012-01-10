@@ -102,11 +102,23 @@
                     <a href="{% url set_language "en" %}"><img src="/static/icons/flags/16/United-Kingdom.png" alt="{% trans "English" %}"/></a>
                     <a href="{% url set_language "it" %}"><img src="/static/icons/flags/16/Italy.png" alt="Italiano"/></a>
                     <a href="{% url set_language "es" %}"><img src="/static/icons/flags/16/Spain.png" alt="Español"/></a>
-                        <a href="{% url set_language "fr" %}"><img src="/static/icons/flags/16/France.png" alt="Français"/></a>
+                    <a href="{% url set_language "fr" %}"><img src="/static/icons/flags/16/France.png" alt="Français"/></a>
                     <!--
                     <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
                     -->
                 </div>
+
+                {% if user.is_authenticated and profile %}
+                    {% if not profile.language %}
+                        <div id="language-prompt">
+                            <div class="bubble">
+                                {% blocktrans %}
+                                    Please select your language from the options above.
+                                {% endblocktrans %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
 
                 <div id="hello">
                     {% if request.user.is_authenticated %}
