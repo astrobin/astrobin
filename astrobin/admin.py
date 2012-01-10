@@ -108,7 +108,7 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
                 pass
             merge.delete()
 
-    delete_gear_items.short_description = "Delete grar items"
+    delete_gear_items.short_description = "Delete gear items"
 
 
     def never_merge(modeladmin, request, queryset):
