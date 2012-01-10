@@ -335,7 +335,7 @@ def image_detail(request, id):
             (_('Resolution'), '%dx%d' % (image.w, image.h) if (image.w and image.h) else None),
             (_('Dates'), dsa_data['dates']),
             (_('Locations'), u', '.join([x.name for x in image.locations.all()])),
-            (_('Frames'), u'\n'.join(dsa_data['frames'])),
+            (_('Frames'), ('\n' if len(dsa_data['frames']) > 1 else '') + u'\n'.join(dsa_data['frames'])),
             (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
             (_('Darks') , u'\n'.join([smart_unicode(x) for x in dsa_data['darks']])),
             (_('Flats'), u'\n'.join([smart_unicode(x) for x in dsa_data['flats']])),
@@ -1571,9 +1571,11 @@ def user_profile_save_gear(request):
                 }.iteritems():
         (names, value) = valueReader(request.POST, k)
         for name in names:
-            gear_item, created = v[0].objects.get_or_create(name = name)
-            if created:
-                gear_item.save()
+            automerge = GearAutoMerge.objects.filter(label = name)
+            if automerge:
+                gear_item = v[0].objects.get(gear_ptr__pk = automerge[0].master.pk)
+            else:
+                gear_item, created = v[0].objects.get_or_create(name = name)
             getattr(profile, k).add(gear_item)
         form.fields[k].initial = value
 
@@ -1983,14 +1985,14 @@ def image_revision_upload_process(request):
     if original_ext == '.jpeg':
         original_ext = '.jpg'
     if original_ext not in ('.jpg', '.png', '.gif'):
-        return HttpRenderRedirect('/%i/?upload_error' % image.id)
+        return HttpResponseRedirect('/%i/?upload_error' % image.id)
 
     try:
         from PIL import Image as PILImage
         trial_image = PILImage.open(file)
         trial_image.verify()
     except:
-        return HttpRenderRedirect('/%i/?upload_error' % image.id)
+        return HttpResponseRedirect('/%i/?upload_error' % image.id)
 
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
