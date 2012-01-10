@@ -421,11 +421,13 @@
                 </div>
             </div>
             {% endif %}
+
             <h3>{% trans "Technical card" %}</h3>
             <div id="technical-card">
                 <div class="gear">
                     <h3>{% trans "Gear" %}</h3>
                     {% for i in gear_list %}
+                        {% if i.1 %}
                         <p>
                             <strong>{% trans i.0 %}:&nbsp;</strong>
                             {% for g in i.1 %}
@@ -437,6 +439,7 @@
                                 {% if not forloop.last %},&nbsp;{% endif %}
                             {% endfor %}
                         </p>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div class="acquisition">
