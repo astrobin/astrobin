@@ -187,6 +187,13 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
                 if changed:
                     owner.save()
 
+            # Find matching slaves in deep sky acquisitions
+            acquisitions = DeepSky_Acquisition.objects.filter(filter__gear_ptr__pk = merge.slave.pk)
+            for acquisition in acquisitions:
+                print "Changing filter for DSA."
+                acquisition.filter = Filter.objects.get(gear_ptr__pk = merge.master.pk)
+                acquisition.save()
+
             if merge_done:
                 automerge = GearAutoMerge.objects.get_or_create(master = merge.master, label = merge.slave.name)
                 print "Added auto-merge: %s <- %s." % (merge.master.name, merge.slave.name)
