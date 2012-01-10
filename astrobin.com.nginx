@@ -12,7 +12,9 @@ server {
     listen 80 default;
     client_max_body_size 4G;
     server_name _;
-    
+
+    rewrite ^/notices/$ /notifications permanent;
+
     access_log /usr/local/nginx/logs/astrobin.com-access.log;
     error_log /usr/local/nginx/logs/astrobin.com-error.log;
 
