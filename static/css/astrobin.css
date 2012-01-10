@@ -230,6 +230,32 @@
 .icon-message {
   background: url('/static/icons/iconic/black/message.png') no-repeat left center;
 }
+.bubble {
+  position: relative;
+  color: #333333;
+  background-color: #f9edbe;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+}
+.bubble:after {
+  position: absolute;
+  display: block;
+  content: "";
+  border-color: transparent transparent #f9edbe transparent;
+  border-style: solid;
+  border-width: 10px;
+  height: 0;
+  width: 0;
+  top: -19px;
+  left: 1em;
+}
 /*
 Uniform Theme: Uniform Default
 Version: 1.6
@@ -1048,6 +1074,18 @@ form p.error input, form p.error textarea {
   float: right;
   margin-top: 8px;
   margin-right: 12px;
+}
+#header #language-prompt {
+  position: absolute;
+  top: 50px;
+  right: 204px;
+  z-index: 1;
+}
+#header #language-prompt .bubble {
+  width: 200px;
+}
+#header #language-prompt .bubble:after {
+  left: 100px;
 }
 #header #search {
   float: right;

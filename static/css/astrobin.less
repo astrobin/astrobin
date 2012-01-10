@@ -278,6 +278,30 @@
 .icon-message {
     background: url('/static/icons/iconic/black/message.png') no-repeat left center;}
 
+.bubble {
+    position: relative;
+    color: @background-color;
+    background-color: @notice-color;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    .rounded-corners;
+    .box-shadow;
+}
+
+.bubble:after {
+    position: absolute;
+    display: block;
+    content: "";
+    border-color: transparent transparent @notice-color transparent;
+    border-style: solid;
+    border-width: 10px;
+    height: 0;
+    width: 0;
+    top: -19px;
+    left: 1em;
+}
+
 /*
 Uniform Theme: Uniform Default
 Version: 1.6
@@ -1156,6 +1180,20 @@ form {
         float: right;
         margin-top: 8px;
         margin-right: @spacer-large;
+    }
+
+    #language-prompt {
+        position: absolute;
+        top: 50px;
+        right: 204px;
+        z-index: 1;
+
+        .bubble {
+            width: 200px;
+        }
+        .bubble:after {
+            left: 100px;
+        }
     }
 
     #search {
