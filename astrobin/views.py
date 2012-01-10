@@ -1498,9 +1498,11 @@ def user_profile_save_gear(request):
                 }.iteritems():
         (names, value) = valueReader(request.POST, k)
         for name in names:
-            gear_item, created = v[0].objects.get_or_create(name = name)
-            if created:
-                gear_item.save()
+            automerge = GearAutoMerge.objects.filter(label = name)
+            if automerge:
+                gear_item = v[0].objects.get(gear_ptr__pk = automerge[0].master.pk)
+            else:
+                gear_item, created = v[0].objects.get_or_create(name = name)
             getattr(profile, k).add(gear_item)
         form.fields[k].initial = value
 
