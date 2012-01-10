@@ -82,8 +82,8 @@ class GearAdmin(admin.ModelAdmin):
 
 class GearAssistedMergeAdmin(admin.ModelAdmin):
     list_display = ('master', 'slave', 'cutoff')
-    ordering = ('-cutoff', 'name')
     list_per_page = 10
+    ordering = ('-cutoff', 'master')
     search_fields = ('master',)
     actions = ['soft_merge', 'hard_merge', 'invert', 'delete_gear_items', 'never_merge']
 
@@ -183,6 +183,13 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
                             continue
                 if changed:
                     owner.save()
+
+            # Find matching slaves in deep sky acquisitions
+            acquisitions = DeepSky_Acquisition.objects.filter(filter__gear_ptr__pk = merge.slave.pk)
+            for acquisition in acquisitions:
+                print "Changing filter for DSA."
+                acquisition.filter = Filter.objects.get(gear_ptr__pk = merge.master.pk)
+                acquisition.save()
 
             if merge_done:
                 automerge = GearAutoMerge.objects.get_or_create(master = merge.master, label = merge.slave.name)
