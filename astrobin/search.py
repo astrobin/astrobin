@@ -28,6 +28,10 @@ class ImageSearchView(SearchView):
         self.query = q
         sqs = super(ImageSearchView, self).get_results()
 
+        ssms = self.request.GET.get('ssms')
+        if ssms:
+            sqs = sqs.filter(solar_system_main_subject = ssms)
+
         search_type = self.request.GET.get('type')
         if search_type:
             sqs = sqs.filter(**{search_type: q})

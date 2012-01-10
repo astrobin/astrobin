@@ -107,6 +107,8 @@ class ImageIndex(SearchIndex):
     last_acquisition_date = DateTimeField()
     views = IntegerField()
 
+    solar_system_main_subject = IntegerField()
+
     def index_queryset(self):
         return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
 
@@ -253,7 +255,10 @@ class ImageIndex(SearchIndex):
 
         return views
             
- 
+    def prepare_solar_system_main_subject(self, obj):
+        return obj.solar_system_main_subject
+
+
 class SubjectIdentifierIndex(SearchIndex):
     text = NgramField(document=True, use_template=True)
 
