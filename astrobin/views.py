@@ -335,7 +335,7 @@ def image_detail(request, id):
             (_('Resolution'), '%dx%d' % (image.w, image.h) if (image.w and image.h) else None),
             (_('Dates'), dsa_data['dates']),
             (_('Locations'), u', '.join([x.name for x in image.locations.all()])),
-            (_('Frames'), u'\n'.join(dsa_data['frames'])),
+            (_('Frames'), ('\n' if len(dsa_data['frames']) > 1 else '') + u'\n'.join(dsa_data['frames'])),
             (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
             (_('Darks') , u'\n'.join([smart_unicode(x) for x in dsa_data['darks']])),
             (_('Flats'), u'\n'.join([smart_unicode(x) for x in dsa_data['flats']])),
