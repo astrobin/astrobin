@@ -767,6 +767,7 @@ h1 {
 h2 {
   margin-bottom: 8px;
   font-size: 1.5em;
+  line-height: 1em;
   border-bottom: 1px solid #404040;
 }
 h3 {
@@ -1530,6 +1531,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   margin: 0 auto;
   width: 70%;
 }
+.upload-forms .loading {
+  padding: 6px 0;
+}
+.upload-forms form {
+  display: none;
+}
+.upload-forms input.file {
+  width: 210px;
+  margin-bottom: -8px;
+}
 .small-box {
   margin: 0 auto;
   padding: 10px;
@@ -1540,9 +1551,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border: 1px solid #2e2e2e;
   border-top: 1px solid #474747;
   max-width: 300px;
+  height: 180px;
   padding: 12px;
   text-align: center;
-  height: 180px;
 }
 .small-box .single-form p {
   margin: 0;
@@ -1561,9 +1572,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border: 1px solid #2e2e2e;
   border-top: 1px solid #474747;
   max-width: 300px;
+  height: 180px;
   padding: 12px;
   text-align: center;
-  height: 180px;
   float: left;
 }
 .wip-form-box .single-form p {
@@ -1583,9 +1594,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   border: 1px solid #2e2e2e;
   border-top: 1px solid #474747;
   max-width: 300px;
+  height: 180px;
   padding: 12px;
   text-align: center;
-  height: 180px;
   float: right;
 }
 .final-form-box .single-form p {
@@ -3053,6 +3064,7 @@ div.token-input-dropdown p {
 }
 .ui-multiselect {
   border-color: #474747;
+  display: none;
 }
 .ui-multiselect div.available {
   border-color: #474747;
@@ -3094,4 +3106,7 @@ div.token-input-dropdown p {
 }
 .ui-dialog .ui-button-text {
   color: #cc4b2e;
+}
+form#gear select {
+  display: none;
 }

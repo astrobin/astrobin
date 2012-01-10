@@ -72,9 +72,9 @@
 
         {% autoescape off %}
         {% for key, value in prefill_dict.items %}
-        var startText = '{{value.1}}';
-        var emptyText = '{{value.2}}';
-        var resultsTitleText = '{{value.3}}';
+        var startText = "{{value.1}}";
+        var emptyText = "{{value.2}}";
+        var resultsTitleText = "{{value.3}}";
         $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
             {asHtmlID: '{{key}}',
             selectedItemProp: 'name',

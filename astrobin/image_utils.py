@@ -39,7 +39,7 @@ def crop_box(w, h):
 def generate_histogram(img):
     histHeight = 120            # Height of the histogram
     histWidth = 256             # Width of the histogram
-    multiplerValue = 1.5        # The multiplier value basically increases
+    multiplerValue = 1.0        # The multiplier value basically increases
                                 # the histogram height so that love values
                                 # are easier to see, this in effect chops off
                                 # the top of the histogram.
@@ -59,6 +59,9 @@ def generate_histogram(img):
     yScale = float((histHeight)*multiplerValue)/histMax     # yScaling 
 
     im = PILImage.new("RGBA", (histWidth, histHeight), backgroundColor)   
+    red_layer = PILImage.new("RGBA", (histWidth, histHeight), red)
+    green_layer = PILImage.new("RGBA", (histWidth, histHeight), green)
+    blue_layer = PILImage.new("RGBA", (histWidth, histHeight), blue)
     draw = ImageDraw.Draw(im)
 
     # Draw Outline is required
@@ -72,17 +75,32 @@ def generate_histogram(img):
         draw.line((0, 0, 0, histHeight), fill=lineColor)
 
     # Draw the RGB histogram lines
-    x=0; c=0;
+    x = 0;
+    c = 0;
     for i in hist:
-        if int(i)==0: pass
+        if int(i) == 0:
+            pass
         else:
             color = red
-            if c>255: color = green
-            if c>511: color = blue
-            draw.line((x, histHeight, x, histHeight-(i*yScale)), fill=color)        
-        if x>255: x=0
-        else: x+=1
-        c+=1
+            if c > 255:
+                color = green
+            if c > 511:
+                color = blue
+            # Wow, we could _not_ be any slower here. :-/
+            alpha_mask = PILImage.new("L", (histWidth, histHeight), 0)
+            alpha_mask_draw = ImageDraw.Draw(alpha_mask)
+            alpha_mask_draw.line((x, histHeight, x, histHeight - (i * yScale)), fill = 128)        
+            if color == red:
+                im = PILImage.composite(red_layer, im, alpha_mask)
+            elif color == green:
+                im = PILImage.composite(green_layer, im, alpha_mask)
+            elif color == blue:
+                im = PILImage.composite(blue_layer, im, alpha_mask)
+        if x > 255:
+            x=0
+        else:
+            x += 1
+        c += 1
 
     return im
 
