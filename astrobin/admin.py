@@ -83,6 +83,7 @@ class GearAdmin(admin.ModelAdmin):
 class GearAssistedMergeAdmin(admin.ModelAdmin):
     list_display = ('master', 'slave', 'cutoff')
     ordering = ('-cutoff', 'name')
+    list_per_page = 10
     search_fields = ('master',)
     actions = ['soft_merge', 'hard_merge', 'invert', 'delete_gear_items', 'never_merge']
 
