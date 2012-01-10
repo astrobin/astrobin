@@ -66,9 +66,44 @@ SUBJECT_TYPES = {
 
 class Gear(models.Model):
     name = models.CharField(_("Name"), max_length=64)
+    master = models.ForeignKey('self', null = True)
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        app_label = 'astrobin'
+
+
+class GearAssistedMerge(models.Model):
+    master = models.ForeignKey(Gear, related_name = 'assisted_master', null = True)
+    slave  = models.ForeignKey(Gear, related_name = 'assisted_slave', null = True)
+    cutoff = models.DecimalField(default = 0, max_digits = 3, decimal_places = 2)
+
+    def __unicode__(self):
+        return self.master.name
+
+    class Meta:
+        app_label = 'astrobin'
+
+
+class GearAutoMerge(models.Model):
+    master = models.ForeignKey(Gear)
+    label = models.CharField(_("Label"), max_length = 64)
+
+    def __unicode__(self):
+        return self.label
+
+    class Meta:
+        app_label = 'astrobin'
+
+
+class GearNeverMerge(models.Model):
+    master = models.ForeignKey(Gear)
+    label = models.CharField(_("Label"), max_length = 64)
+
+    def __unicode__(self):
+        return self.label
 
     class Meta:
         app_label = 'astrobin'
