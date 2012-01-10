@@ -210,7 +210,7 @@
                                                 <th><span class="text">{% trans "Direct link:" %}</span></th>
                                                 <td>
                                                     <form>
-                                                        <textarea rows="1">http://astrob.in/{{image.id}}/</textarea>
+                                                        <textarea rows="2">{% if is_revision %}http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}{% else %}http://astrob.in/{{image.id}}{% endif %}</textarea>
                                                     </form>
                                                     <div id="clip1_container" class="button-container">
                                                         <div id="clip1">
@@ -219,9 +219,12 @@
                                                     </div>
                                                  </td>
                                             </tr>
-                                                                                        <tr>
+                                            <tr>
                                                 <th><span class="text">{% trans "Link for forums:" %}</span></th>
-                                                <td><form><textarea rows="6">[URL=http://astrob.in/{{image.id}}/]{{image.title|escape}}[/URL]</textarea></form>
+                                                <td>
+                                                    <form>
+                                                        <textarea rows="6">{% if is_revision %}[URL=http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}]{{image.title|escape}}[/URL]{% else %}[URL=http://astrob.in/{{image.id}}/]{{image.title|escape}}[/URL]{% endif %}</textarea>
+                                                    </form>
                                                     <div id="clip2_container" class="button-container">
                                                         <div id="clip2">
                                                             <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
@@ -232,7 +235,10 @@
                                             {% if is_ready %}
                                             <tr>
                                                 <th><span class="text">{% trans "...with thumbnail:" %}</span></th>
-                                                <td><form><textarea rows="10">[URL=http://astrob.in/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]</textarea></form>
+                                                <td>
+                                                    <form>
+                                                        <textarea rows="10">{% if is_revision %}[URL=http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]{% else %}[URL=http://astrob.in/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]{% endif %}</textarea>
+                                                    </form>
                                                     <div id="clip3_container" class="button-container">
                                                         <div id="clip3">
                                                             <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
@@ -242,7 +248,10 @@
                                             </tr>
                                             <tr>
                                                 <th><span class="text">{% trans "Full size:" %}</span></th>
-                                                <td><form><textarea rows="2">http://astrob.in/full/{{image.id}}/</textarea></form>
+                                                <td>
+                                                    <form>
+                                                        <textarea rows="2">{% if is_revision %}http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}{% else %}http://astrob.in/full/{{image.id}}/{% endif %}</textarea>
+                                                    </form>
                                                     <div id="clip4_container" class="button-container">
                                                         <div id="clip4">
                                                             <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
@@ -252,7 +261,10 @@
                                             </tr>
                                             <tr>
                                                 <th><span class="text">{% trans "...with thumbnail:" %}</span></th>
-                                                <td><form><textarea rows="10">[URL=http://astrob.in/full/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]</textarea></form>
+                                                <td>
+                                                    <form>
+                                                        <textarea rows="10">{% if is_revision %}[URL=http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]{% else %}[URL=http://astrob.in/full/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]{% endif %}</textarea>
+                                                    </form>
                                                     <div id="clip5_container" class="button-container">
                                                         <div id="clip5">
                                                             <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
@@ -552,23 +564,53 @@
 <script type="text/javascript">
 $(document).ready(function() {
     var clip1 = new ZeroClipboard.Client();
-    clip1.setText("http://astrob.in/{{image.id}}/");
+    clip1.setText(
+        {% if is_revision %}
+            "http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}"
+        {% else %}
+            "http://astrob.in/{{image.id}}/"
+        {% endif %}
+    );
     clip1.glue('clip1', 'clip1_container');
 
     var clip2 = new ZeroClipboard.Client();
-    clip2.setText("[URL=http://astrob.in/{{image.id}}/]{{image.title|escape}}[/URL]");
+    clip2.setText(
+        {% if is_revision %}
+            "[URL=http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}]{{image.title|escape}}[/URL]"
+        {% else %}
+            "[URL=http://astrob.in/{{image.id}}/]{{image.title|escape}}[/URL]"
+        {% endif %}
+    );
     clip2.glue('clip2', 'clip2_container');
 
     var clip3 = new ZeroClipboard.Client();
-    clip3.setText("[URL=http://astrob.in/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]");
+    clip3.setText(
+        {% if is_revision %}
+            "[URL=http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+        {% else %}
+            "[URL=http://astrob.in/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+        {% endif %}
+    );
     clip3.glue('clip3', 'clip3_container');
 
     var clip4 = new ZeroClipboard.Client();
-    clip4.setText("http://astrob.in/full/{{image.id}}/");
+    clip4.setText(
+        {% if is_revision %}
+            "http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}"
+        {% else %}
+            "http://astrob.in/full/{{image.id}}/"
+        {% endif %}
+    );
     clip4.glue('clip4', 'clip4_container');
 
     var clip5 = new ZeroClipboard.Client();
-    clip5.setText("[URL=http://astrob.in/full/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]");
+    clip5.setText(
+        {% if is_revision %}
+            "[URL=http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+        {% else %}
+            "[URL=http://astrob.in/full/{{image.id}}/][IMG]http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+        {% endif %}
+    );
     clip5.glue('clip5', 'clip5_container');
 
     {% get_hit_count_javascript for image %}
