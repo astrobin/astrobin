@@ -80,11 +80,11 @@
     <div class="full-box clear index">
         <h2 class="inline">{% trans "Recent images" %}</h2>
         <span class="album-links">
-            <em>{% trans "Sort by:" %}</em>&nbsp;
+            {% trans "Sort by:" %}
             {% if sort == '-uploaded' %}
                 {% trans "Uploaded" %}
             {% else %}
-                <a href="{% url index %}{% query_string "" "sort" %}">{% trans "Uploaded" %}</a>
+                <a href="{% url index %}">{% trans "Uploaded" %}</a>
             {% endif %}
             |
             {% if sort == '-acquired' %}
@@ -99,65 +99,6 @@
                 <a href="{% url index %}{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
             {% endif %}
 
-            <br/>
-
-            <em>{% trans "Filter by deep sky" %}:</em>&nbsp;
-            {% if filter == 'all_ds' %}
-                {% trans "All" %}
-            {% else %}
-                <a href="{% url index %}{% query_string "filter='all_ds'" "page" %}">{% trans "All" %}</a>
-            {% endif %}
-            |
-            {% if filter == 'clusters' %}
-                {% trans "Clusters" %}
-            {% else %}
-                <a href="{% url index %}{% query_string "filter='clusters'" "page" %}">{% trans "Clusters" %}</a>
-            {% endif %}
-            |
-            {% if filter == 'nebulae' %}
-                {% trans "Nebulae" %}
-            {% else %}
-                <a href="{% url index %}{% query_string "filter='nebulae'" "page" %}">{% trans "Nebulae" %}</a>
-            {% endif %}
-            |
-            {% if filter == 'galaxies' %}
-                {% trans "Galaxies" %}
-            {% else %}
-                <a href="{% url index %}{% query_string "filter='galaxies'" "page" %}">{% trans "Galaxies" %}</a>
-            {% endif %}
-
-            <br />
-
-            <em>{% trans "Filter by solar system" %}:</em>&nbsp;
-            {% if filter == 'all_ss' %}
-                {% trans "All" %}
-            {% else %}
-                <a href="{% url index %}{% query_string "filter='all_ss'" "page" %}">{% trans "All" %}</a>
-            {% endif %}
-            |
-            {% if filter == 'sun' %}
-                {% trans "Sun" %}
-            {% else %}
-                <a href="{% url index %}{% query_string "filter='sun'" "page" %}">{% trans "Sun" %}</a>
-            {% endif %}
-            |
-            {% if filter == 'moon' %}
-                {% trans "Moon" %}
-            {% else %}
-                <a href="{% url index %}{% query_string "filter='moon'" "page" %}">{% trans "Moon" %}</a>
-            {% endif %}
-            |
-            {% if filter == 'planets' %}
-                {% trans "Planets" %}
-            {% else %}
-                <a href="{% url index %}{% query_string "filter='planets'" "page" %}">{% trans "Planets" %}</a>
-            {% endif %}
-            |
-            {% if filter == 'comets' %}
-                {% trans "Comets" %}
-            {% else %}
-                <a href="{% url index %}{% query_string "filter='comets'" "page" %}">{% trans "Comets" %}</a>
-            {% endif %}
         </span>
         <hr/>
         {% search_image_list request image_list %}
