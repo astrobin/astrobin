@@ -1539,6 +1539,15 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   width: 210px;
   margin-bottom: -8px;
 }
+.upload-revision {
+  width: auto;
+}
+.upload-revision label {
+  display: none;
+}
+.upload-revision input.button {
+  width: auto;
+}
 .small-box {
   margin: 0 auto;
   padding: 10px;
