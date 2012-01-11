@@ -175,28 +175,6 @@ def index(request):
         response_dict['sort'] = '-uploaded'
         sqs = sqs.order_by('-uploaded')
 
-    filter = request.GET.get('filter')
-    if filter:
-        response_dict['filter'] = filter
-    if filter == 'all_ds':
-        sqs = sqs.filter(is_deep_sky = True)
-    elif filter == 'clusters':
-        sqs = sqs.filter(is_clusters = True)
-    elif filter == 'nebulae':
-        sqs = sqs.filter(is_nebulae = True)
-    elif filter == 'galaxies':
-        sqs = sqs.filter(is_galaxies = True)
-    elif filter == 'all_ss':
-        sqs = sqs.filter(is_solar_system = True)
-    elif filter == 'sun':
-        sqs = sqs.filter(is_sun = True)
-    elif filter == 'moon':
-        sqs = sqs.filter(is_moon = True)
-    elif filter == 'planets':
-        sqs = sqs.filter(is_planets = True)
-    elif filter == 'comets':
-        sqs = sqs.filter(is_comets = True)
-
     return object_list(
         request, 
         queryset=sqs,
