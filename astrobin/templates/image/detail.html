@@ -583,6 +583,7 @@ $(document).ready(function() {
     );
     clip2.glue('clip2', 'clip2_container');
 
+    {% if is_ready %}
     var clip3 = new ZeroClipboard.Client();
     clip3.setText(
         {% if is_revision %}
@@ -612,6 +613,7 @@ $(document).ready(function() {
         {% endif %}
     );
     clip5.glue('clip5', 'clip5_container');
+    {% endif %}
 
     {% get_hit_count_javascript for image %}
 
@@ -666,7 +668,9 @@ $(document).ready(function() {
                     title: "{% trans "Upload new revision" %}",
                     body : "{% blocktrans %}Did you improve the post-processing of your image? Upload the new revision!{% endblocktrans %}"
                 },
-                form_html: '{% autoescape off %}{{upload_revision_form.as_p|append_slash}}{% endautoescape %}',
+                form_html: '{% autoescape off %}{{upload_revision_form.file}}\
+                            <input class="button submit-button inline-button" type="submit" value="{% trans "Upload" %}" />\
+                            {% endautoescape %}',
                 csrf_token: '{{csrf_token}}',
                 fileDefaultText: "{% trans "No file selected" %}",
                 fileBtnText: "{% trans "Choose file" %}",
