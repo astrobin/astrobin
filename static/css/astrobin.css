@@ -3096,6 +3096,9 @@ div.token-input-dropdown p {
   background: #fcfcfc;
   color: #333333;
 }
+.ui-multiselect .remove-all, .ui-multiselect .add-all {
+  color: #cc4b2e;
+}
 .progressbar {
   display: none;
   padding: 14px 0 14px 0;
