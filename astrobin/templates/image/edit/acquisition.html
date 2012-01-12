@@ -30,9 +30,11 @@
         </p>
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
             {% for form in deep_sky_acquisitions %}
-                <h3>{% trans "Acquisition session" %}:</h3>
-                {{form.as_p}}
-                <div class="hline"></div>
+                <div id="acquisition-session-{{forloop.counter0}}" class="acquisition-session">
+                    <h3>{% trans "Acquisition session" %}{% if forloop.first and deep_sky_acquisitions|length > 1 %} {% trans "(scroll down for more)" %}{% endif %}:</h3>
+                    {{form.as_p}}
+                    <div class="hline"></div>
+                </div>
             {% endfor %}
             {{deep_sky_acquisitions.management_form}}
             <input type="hidden" name="image_id" value="{{image.id}}" />
@@ -74,3 +76,14 @@
     {% endif %}
     {% endif %}
 {% endblock %}
+
+{% block extra_js %}
+{% if next_acquisition_session > 0 %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $(window).scrollTop($('#acquisition-session-{{next_acquisition_session}}').position().top)
+});
+</script>
+{% endif %}
+{% endblock %}
+
