@@ -5,6 +5,9 @@
     {% include 'profile-edit-menu.html' %}
     <div class="sided-main-content">
         <h1>{% trans "Import your photos from Flickr" %}</h1>
+        <p>
+        {% blocktrans %}Please note: when importing from Flickr, automatic watermarking of the images it not supported.{% endblocktrans %}
+        </p>
         <div class="js">
             <form name="flickr_form" action="">{% csrf_token %}
                 {% if flickr_sets %}
