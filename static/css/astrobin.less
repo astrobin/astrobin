@@ -1618,6 +1618,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
 }
 
+.upload-revision {
+    width: auto;
+    label {
+        display: none;
+    }
+    input.button {
+        width: auto;
+    }
+}
+
 .small-box {
     margin: 0 auto;
     padding: 10px;
@@ -2825,6 +2835,9 @@ div.token-input-dropdown {
         background: @strong-text-color;
         color: @background-color;
     }
+    .remove-all, .add-all {
+        color: @link-color;
+    }
 }
 
 .progressbar {
@@ -2860,5 +2873,9 @@ form#gear {
         right: 0;
         text-align: right;
     }
+}
+
+.acquisition-session {
+    margin-bottom: @spacer-xlarge;
 }
 

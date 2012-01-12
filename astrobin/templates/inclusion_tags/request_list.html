@@ -24,13 +24,13 @@
     </li>
 {% empty %}
     <li id="empty">
-        {% trans "You have no unfulfilled requests." %}
+        {% trans "You have no requests." %}
     </li>
 {% endfor %}
 {% if requests and show_footer %}
     <li class="footer">
         <div class="request-link">
-            <a href="{% url requests %}">{% trans "Show all requests" %}</a>
+            <a href="{% url requests %}">{% trans "Manage received requests" %}</a>
         </div>
     </li>
 {% endif %}
