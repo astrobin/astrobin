@@ -1579,6 +1579,15 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   width: 210px;
   margin-bottom: -8px;
 }
+.upload-revision {
+  width: auto;
+}
+.upload-revision label {
+  display: none;
+}
+.upload-revision input.button {
+  width: auto;
+}
 .small-box {
   margin: 0 auto;
   padding: 10px;
@@ -3126,6 +3135,9 @@ div.token-input-dropdown p {
   margin: 7px 4px 0 4px;
   background: #fcfcfc;
   color: #333333;
+}
+.ui-multiselect .remove-all, .ui-multiselect .add-all {
+  color: #cc4b2e;
 }
 .progressbar {
   display: none;

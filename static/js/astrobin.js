@@ -345,7 +345,8 @@ var image_detail = {
             url       : '/upload/revision/process/',
             fileDefaultText: '',
             fileBtnText: '',
-            uploadingText: ''
+            uploadingText: '',
+            width: 300
         },
 
         delete_action: {
@@ -495,7 +496,7 @@ var image_detail = {
             var dlg = $('\
                 <div id="dialog-attention" title="' + image_detail.config.upload_revision_action.dialog.title + '"></div>')
                 .html('\
-                    <div class="sided-main-content-popup">\
+                    <div class="upload-revision">\
                     <p>\
                         ' + image_detail.config.upload_revision_action.dialog.body + '\
                     </p>\
@@ -504,9 +505,11 @@ var image_detail = {
                         <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + image_detail.config.upload_revision_action.csrf_token + '" /></div> \
                         <input type="hidden" name="image_id" value="' + image_detail.globals.image_id  + '"/>\
                     </form>\
+                    <div style="text-align:center" class="progressbar"><img src="/static/images/loading-bar.gif" alt=""/></div>\
                     </div>\
                 ')
                 .dialog({
+                    width: image_detail.config.upload_revision_action.width,
                     resizable: false,
                     modal: true});
 
@@ -515,13 +518,14 @@ var image_detail = {
                 fileBtnText: image_detail.config.upload_revision_action.fileBtnText
                }
             );
-            $('form#upload-revision input').live('change', function() {
-                $('form#upload-revision').append('\
-                    <p style="text-align:center">\
-                        <img style="margin: 10px" alt="' + image_detail.config.upload_revision_action.uploadingText + '" src="/static/images/ajax-loader.gif"/>\
-                    </p>');
+            $('form#upload-revision').live('submit', function() {
+                form = $(this);
+                progressbar = form.parent().find('.progressbar');
 
-                $('form#upload-revision').submit();
+                form.hide();
+                progressbar.show();
+
+                return true;
             });
 
         });

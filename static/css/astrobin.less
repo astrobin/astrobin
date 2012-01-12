@@ -1618,6 +1618,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
 }
 
+.upload-revision {
+    width: auto;
+    label {
+        display: none;
+    }
+    input.button {
+        width: auto;
+    }
+}
+
 .small-box {
     margin: 0 auto;
     padding: 10px;
@@ -2824,6 +2834,9 @@ div.token-input-dropdown {
         margin: 7px 4px 0 4px;
         background: @strong-text-color;
         color: @background-color;
+    }
+    .remove-all, .add-all {
+        color: @link-color;
     }
 }
 

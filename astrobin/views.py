@@ -1049,6 +1049,9 @@ def image_edit_save_acquisition(request):
                 deep_sky_acquisition_formset.save()
                 if 'add_more' in request.POST:
                     DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
+                    profile = UserProfile.objects.get(user=image.user)
+                    filter_queryset = profile.filters.all()
+                    DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
                     deep_sky_acquisition_formset = DSAFormSet(instance=image)
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
                     response_dict['next_acquisition_session'] = deep_sky_acquisition_formset.total_form_count() - 1
