@@ -108,6 +108,10 @@ def store_image_in_backend(path, image_model):
             is_animated = False
 
 
+    try:
+        image_model = image_model.image
+    except AttributeError:
+        pass
     if image_model.watermark and not is_animated:
         image = watermark_image(
             image,

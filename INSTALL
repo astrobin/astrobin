@@ -62,7 +62,7 @@ ln -s ./venv/bin/pip vpip
 ./vpip install \
     yolk \
     django \
-    django-haystack xapian-haystack \
+    django-haystack \
     django-celery celerymon \
     gunicorn gunicorn-console \
     django-debug-toolbar \
@@ -106,6 +106,10 @@ https://github.com/thornomad/django-hitcount/
 # for the notifications system
 
 cd submodules
+
+cd xapian-haystack
+../../venv/bin/python setup.py install
+cd ..
 
 cd django-persistent-messages
 ../../venv/bin/python setup.py install

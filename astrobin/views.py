@@ -1071,8 +1071,12 @@ def image_edit_save_acquisition(request):
                 deep_sky_acquisition_formset.save()
                 if 'add_more' in request.POST:
                     DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
+                    profile = UserProfile.objects.get(user=image.user)
+                    filter_queryset = profile.filters.all()
+                    DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
                     deep_sky_acquisition_formset = DSAFormSet(instance=image)
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
+                    response_dict['next_acquisition_session'] = deep_sky_acquisition_formset.total_form_count() - 1
                     if not dsa_qs:
                         response_dict['context_message'] = {'error': False, 'text': _("Fill in one session, before adding more.")}
                     return render_to_response('image/edit/acquisition.html',
@@ -1995,6 +1999,18 @@ def image_request_fits(request, image_id):
     push_request(image.user, r)
 
     return ajax_success()
+
+@login_required
+@require_GET
+def request_mark_fulfilled(request, request_id):
+    req = get_object_or_404(Request, id=request_id)
+    if req.to_user != request.user:
+        return HttpResponseForbidden()
+
+    req.fulfilled = True
+    req.save()
+
+    return HttpResponseRedirect('/requests/')
 
 
 @login_required

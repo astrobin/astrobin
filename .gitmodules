@@ -13,3 +13,6 @@
 [submodule "submodules/django-registration"]
 	path = submodules/django-registration
 	url = git@bitbucket.org:siovene/django-registration.git
+[submodule "submodules/xapian-haystack"]
+	path = submodules/xapian-haystack
+	url = https://github.com/notanumber/xapian-haystack.git
