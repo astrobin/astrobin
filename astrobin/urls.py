@@ -129,6 +129,7 @@ urlpatterns = patterns('',
     url(r'^requests/$', views.requests, name='requests'),
     url(r'^request/image/additional_information/(?P<image_id>\d+)/$', views.image_request_additional_information, name='image_request_additional_information'),
     url(r'^request/image/fits/(?P<image_id>\d+)/$', views.image_request_fits, name='image_request_fits'),
+    url(r'^request/mark/fulfilled/(?P<request_id>\d+)/$', views.request_mark_fulfilled, name='request_mark_fulfilled'),
 
     url(r'^stats/', views.stats, name='stats'),
     url(r'^help/', views.help, name='help'),

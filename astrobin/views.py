@@ -1975,6 +1975,18 @@ def image_request_fits(request, image_id):
 
     return ajax_success()
 
+@login_required
+@require_GET
+def request_mark_fulfilled(request, request_id):
+    req = get_object_or_404(Request, id=request_id)
+    if req.to_user != request.user:
+        return HttpResponseForbidden()
+
+    req.fulfilled = True
+    req.save()
+
+    return HttpResponseRedirect('/requests/')
+
 
 @login_required
 @require_POST
