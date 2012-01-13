@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 01:47-0500\n"
+"POT-Creation-Date: 2012-01-13 02:10-0500\n"
 "PO-Revision-Date: 2012-01-09 12:10-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Français <LL@li.org>\n"
@@ -1732,6 +1732,16 @@ msgstr ""
 msgid "Comets"
 msgstr ""
 
+#: templates/index.html:164 templates/image/edit/basic.html:58
+#: templates/image/edit/gear.html:48 templates/image/edit/watermark.html:37
+#, fuzzy
+msgid "or"
+msgstr "Passable"
+
+#: templates/index.html:164
+msgid "remove filters"
+msgstr ""
+
 #: templates/nightly.html:8
 msgid "Images acquired night after night"
 msgstr "Images acquises nuit après nuit"
@@ -2563,12 +2573,6 @@ msgstr "Utilisez une virgule pour séparer les valeurs."
 #: templates/image/edit/basic.html:57
 msgid "Next step: watermark"
 msgstr ""
-
-#: templates/image/edit/basic.html:58 templates/image/edit/gear.html:48
-#: templates/image/edit/watermark.html:37
-#, fuzzy
-msgid "or"
-msgstr "Passable"
 
 #: templates/image/edit/gear.html:15
 msgid "Edit your image: gear used"
