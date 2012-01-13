@@ -378,8 +378,6 @@
                     {% endif %}
                     {% for s in subjects_short %}
                         <a href="/search/?q={{s.mainId|escape|cut:" "}}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
-                    {% empty %}
-                        {% trans "(no subjects)" %}
                     {% endfor %}
                     {% if subjects_all|length > 10 %}
                         <span id="more-subjects">
