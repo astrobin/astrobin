@@ -1395,7 +1395,7 @@ def user_page(request, username):
 
                 sqs = Image.objects.none()
         elif subsection == 'nodata':
-            sqs = sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None) | Q(subjects = None)).distinct()
+            sqs = sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None) | (Q(subjects = None) & Q(solar_system_main_subject = None))).distinct()
 
         section = 'public'
 
