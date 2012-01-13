@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 09:28-0500\n"
-"PO-Revision-Date: 2012-01-13 09:30-0500\n"
+"POT-Creation-Date: 2012-01-13 11:09-0500\n"
+"PO-Revision-Date: 2012-01-13 11:13-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: \n"
@@ -41,183 +41,187 @@ msgid "Subjects"
 msgstr "Objets"
 
 #: forms.py:52
-#: forms.py:153
+#: forms.py:162
 #: models.py:909
 #: views.py:363
 #: templates/image/edit/basic.html:37
 msgid "Locations"
 msgstr "Lieux"
 
-#: forms.py:66
+#: forms.py:62
+msgid "Please enter either some subjects or a main solar system subject."
+msgstr "Saisir certains objects ou un object du système solaire."
+
+#: forms.py:75
 msgid "Opacity"
 msgstr "Opacité"
 
-#: forms.py:67
+#: forms.py:76
 msgid "0 means invisible; 100 means completely opaque. Recommended values are: 10 if the watermark will appear on the dark sky background, 50 if on some bright object."
 msgstr "0 correspond à invisible, 100 à totalement opaque. Les valeurs recommandées sont: 10 pour que le filigrane apparaisse sur un fond de ciel sombre, 50 pour des objets brillants."
 
-#: forms.py:80
+#: forms.py:89
 msgid "If you want to watermark this image, you must specify some text."
 msgstr "Si vous désirez ajouter un filigrane à votre image, vous devez définir un texte."
 
-#: forms.py:107
-#: forms.py:264
+#: forms.py:116
+#: forms.py:273
 #: models.py:416
 msgid "Imaging telescopes or lenses"
 msgstr "Instruments d'acquisition"
 
-#: forms.py:108
+#: forms.py:117
 #: models.py:417
 msgid "Guiding telescopes or lenses"
 msgstr "Instruments de guidage"
 
-#: forms.py:109
-#: forms.py:192
+#: forms.py:118
+#: forms.py:201
 #: models.py:418
 #: models.py:925
 msgid "Mounts"
 msgstr "Montures"
 
-#: forms.py:110
-#: forms.py:265
+#: forms.py:119
+#: forms.py:274
 #: models.py:419
 msgid "Imaging cameras"
 msgstr "Caméras d'acquisition"
 
-#: forms.py:111
+#: forms.py:120
 #: models.py:420
 msgid "Guiding cameras"
 msgstr "Caméras de guidage"
 
-#: forms.py:112
-#: forms.py:194
+#: forms.py:121
+#: forms.py:203
 #: models.py:421
 #: models.py:927
 msgid "Focal reducers"
 msgstr "Réducteurs/correcteurs de focale"
 
-#: forms.py:113
-#: forms.py:195
+#: forms.py:122
+#: forms.py:204
 #: models.py:422
 #: models.py:928
 msgid "Software"
 msgstr "Logiciels"
 
-#: forms.py:114
-#: forms.py:196
+#: forms.py:123
+#: forms.py:205
 #: models.py:423
 #: models.py:929
 msgid "Filters"
 msgstr "Filtres"
 
-#: forms.py:115
-#: forms.py:197
+#: forms.py:124
+#: forms.py:206
 #: models.py:424
 #: models.py:930
 msgid "Accessories"
 msgstr "Accessoires"
 
-#: forms.py:137
+#: forms.py:146
 msgid "If you have a personal website, put the address here."
 msgstr "Entrez ici l'adresse de votre site personnel."
 
-#: forms.py:144
+#: forms.py:153
 #: models.py:910
 msgid "These are the cities from which you usually image."
 msgstr "Vos lieux habituels d'acquisition d'images."
 
-#: forms.py:154
+#: forms.py:163
 #: models.py:877
 #: templates/user/profile.html:274
 msgid "Website"
 msgstr "Site internet"
 
-#: forms.py:160
+#: forms.py:169
 msgid "All the telescopes and lenses you own, including the ones you use for guiding, go here."
 msgstr "Indiquez ici les télescopes, lunettes ou objectifs que vous possédez, y compris ceux destinés au guidage."
 
-#: forms.py:169
+#: forms.py:178
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr "Indiquez ici les APN, CCD, Webcam, de capture ou de guidage."
 
-#: forms.py:182
+#: forms.py:191
 msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."
 msgstr "Conseil: entrez les filtres séparément. Si vous introduisez p. ex. LRGB en une fois, vous ne pourrez pas introduire des sessions d'acquisition séparées par filtre."
 
-#: forms.py:191
+#: forms.py:200
 #: models.py:924
 msgid "Telescopes and lenses"
 msgstr "Télescopes et objectifs"
 
-#: forms.py:193
+#: forms.py:202
 #: models.py:926
 msgid "Cameras"
 msgstr "Caméras"
 
-#: forms.py:225
+#: forms.py:234
 #: templates/stats.html:61
 #: templates/image/detail.html:174
 msgid "User"
 msgstr "Utilisateur"
 
-#: forms.py:242
-#: forms.py:246
-#: forms.py:339
-#: forms.py:378
-#: forms.py:410
+#: forms.py:251
+#: forms.py:255
+#: forms.py:348
+#: forms.py:387
+#: forms.py:419
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Utilisez le format suivant: aaaa-mm-jj"
 
-#: forms.py:249
-#: forms.py:252
+#: forms.py:258
+#: forms.py:261
 msgid "Express value in hours"
 msgstr "Exprimez les valeurs en heures"
 
-#: forms.py:262
+#: forms.py:271
 msgid "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr "Cherchez des objets célestes, des télescopes, objectifs, caméras, filtres..."
 
-#: forms.py:266
+#: forms.py:275
 msgid "Acquired after"
 msgstr "Capturé après le"
 
-#: forms.py:267
+#: forms.py:276
 msgid "Acquired before"
 msgstr "Capturé avant le"
 
-#: forms.py:268
+#: forms.py:277
 msgid "Min. integration"
 msgstr "Intégration Min."
 
-#: forms.py:269
+#: forms.py:278
 msgid "Max. integration"
 msgstr "Intégration Max."
 
-#: forms.py:270
+#: forms.py:279
 msgid "Min. Moon phase %"
 msgstr "Phase de Lune Min. en %"
 
-#: forms.py:271
+#: forms.py:280
 msgid "Max. Moon phase %"
 msgstr "Phase de Lune Max. en %"
 
-#: forms.py:311
+#: forms.py:320
 msgid "For example: +12.44"
 msgstr "Exemple: +12.44"
 
-#: forms.py:314
+#: forms.py:323
 msgid "For example: -51.25"
 msgstr "Exemple: -51.25"
 
-#: forms.py:344
+#: forms.py:353
 msgid "Please enter a value between 1 and 5."
 msgstr "Entrez une valeur entre 1 et 5."
 
-#: forms.py:349
+#: forms.py:358
 msgid "Please enter a value between 1 and 10."
 msgstr "Entrez une valeur entre 1 et 10."
 
-#: forms.py:391
+#: forms.py:400
 #: models.py:615
 #: models.py:828
 #: templates/image/detail.html:477
