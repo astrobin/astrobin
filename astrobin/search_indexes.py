@@ -109,6 +109,17 @@ class ImageIndex(SearchIndex):
 
     solar_system_main_subject = IntegerField()
 
+    is_deep_sky = BooleanField()
+    is_clusters = BooleanField()
+    is_nebulae = BooleanField()
+    is_galaxies = BooleanField()
+
+    is_solar_system = BooleanField()
+    is_sun = BooleanField()
+    is_moon = BooleanField()
+    is_planets = BooleanField()
+    is_comets = BooleanField()
+
     def index_queryset(self):
         return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
 
@@ -257,6 +268,52 @@ class ImageIndex(SearchIndex):
             
     def prepare_solar_system_main_subject(self, obj):
         return obj.solar_system_main_subject
+
+
+    def prepare_is_deep_sky(self, obj):
+        return DeepSky_Acquisition.objects.filter(image = obj).count() > 0
+
+    def prepare_is_clusters(self, obj):
+        for subject in obj.subjects.all():
+            if subject.otype in ('GlC', 'GCl', 'OpC'):
+                return True
+
+        return False
+
+    def prepare_is_nebulae(self, obj):
+        for subject in obj.subjects.all():
+            if subject.otype in ('Psr', 'HII', 'RNe', 'ISM', 'sh ', 'PN '):
+                return True
+
+        return False
+
+    def prepare_is_galaxies(self, obj):
+        for subject in obj.subjects.all():
+            if subject.otype in ('LIN', 'IG', 'GiG', 'Sy2', 'G'):
+                return True
+
+        return False
+
+    def prepare_is_solar_system(self, obj):
+        if obj.solar_system_main_subject:
+            return True
+
+        if SolarSystem_Acquisition.objects.filter(image = obj):
+            return True
+
+        return False
+
+    def prepare_is_sun(self, obj):
+        return obj.solar_system_main_subject == 0
+
+    def prepare_is_moon(self, obj):
+        return obj.solar_system_main_subject == 1
+
+    def prepare_is_planet(self, obj):
+        return obj.solar_system_main_subject in range(2, 8)
+
+    def prepare_is_planet(self, obj):
+        return obj.solar_system_main_subject == 10
 
 
 class SubjectIdentifierIndex(SearchIndex):

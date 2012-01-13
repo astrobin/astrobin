@@ -2581,6 +2581,7 @@ table.title {
 .album-links {
     float: right;
     font-size: 0.9em;
+    line-height: 1.15em;
     padding: @spacer-medium @spacer-xlarge 0 0;
 }
 .search-links {
@@ -2861,6 +2862,17 @@ div.token-input-dropdown {
 form#gear {
     select {
         display: none;
+    }
+}
+
+.index {
+    position: relative;
+
+    .album-links {
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-align: right;
     }
 }
 
