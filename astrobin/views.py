@@ -1365,6 +1365,12 @@ def user_page(request, username):
                     r = reverse_subject_type(l)
                     for i in sqs.filter(Q(subjects__otype__in = r)).distinct()[:10]:
                         k_dict[l].append(i)
+
+                k_dict = {_("Solar system"): []}
+                smart_albums.append(k_dict)
+                for i in sqs.filter(solar_system_main_subject__gte = 1):
+                    k_dict[_("Solar system")].append(i)
+
                 sqs = Image.objects.none()
         elif subsection == 'nodata':
             sqs = sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None) | Q(subjects = None)).distinct()
