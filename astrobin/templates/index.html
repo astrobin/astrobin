@@ -158,6 +158,10 @@
             {% else %}
                 <a href="{% url index %}{% query_string "filter='comets'" "page" %}">{% trans "Comets" %}</a>
             {% endif %}
+
+            <br/>
+
+            {% trans "or" %} <a href="{% url index %}{% query_string "" "filter" %}">{% trans "remove filters" %}</a>&nbsp;
         </span>
         <hr/>
         {% search_image_list request image_list %}
