@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-12 01:40-0500\n"
+"POT-Creation-Date: 2012-01-13 01:47-0500\n"
 "PO-Revision-Date: 2011-11-08 16:56+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -855,7 +855,7 @@ msgstr "Frames"
 msgid "Integration"
 msgstr "Valotusaika"
 
-#: views.py:365 views.py:1293 views.py:1294
+#: views.py:365 views.py:1300 views.py:1301
 #: templates/inclusion_tags/search_image_list.html:17
 msgid "hours"
 msgstr ""
@@ -885,54 +885,54 @@ msgstr "Ei tuloksia. Paina TAB luodaksesi tämän paikan!"
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:1081
+#: views.py:1084
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views.py:1271 templatetags/tags.py:111
+#: views.py:1278 templatetags/tags.py:111
 msgid "minutes"
 msgstr ""
 
-#: views.py:1272 templatetags/tags.py:112
+#: views.py:1279 templatetags/tags.py:112
 msgid "seconds ago"
 msgstr ""
 
-#: views.py:1274 templatetags/tags.py:113
+#: views.py:1281 templatetags/tags.py:113
 #, python-format
 msgid "%s ago"
 msgstr ""
 
-#: views.py:1290
+#: views.py:1297
 msgid "Member since"
 msgstr ""
 
-#: views.py:1291
+#: views.py:1298
 #, fuzzy
 msgid "Last login"
 msgstr "Kirjaudu sisään"
 
-#: views.py:1292 templates/stats.html:64
+#: views.py:1299 templates/stats.html:64
 #, fuzzy
 msgid "Images uploaded"
 msgstr "ladattu"
 
-#: views.py:1293
+#: views.py:1300
 #, fuzzy
 msgid "Total integration time"
 msgstr "Max. valotusaika"
 
-#: views.py:1294
+#: views.py:1301
 #, fuzzy
 msgid "Average integration time"
 msgstr "Max. valotusaika"
 
-#: views.py:1966
+#: views.py:1973
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> on pyytänyt lisätietoja kuvastasi."
 
-#: views.py:1990
+#: views.py:1997
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -2371,14 +2371,19 @@ msgstr ""
 msgid "View at full resolution"
 msgstr "Suurempi resoluutio"
 
-#: templates/image/edit/acquisition.html:8
+#: templates/image/edit/acquisition.html:16
 msgid "Edit your image: acquisition details"
 msgstr "Muokkaa kuvaasi: tekniset yksityiskohdat"
 
-#: templates/image/edit/acquisition.html:16
-#: templates/image/edit/acquisition.html:44
-#: templates/image/edit/acquisition.html:59 templates/image/edit/basic.html:54
-#: templates/image/edit/gear.html:46 templates/image/edit/license.html:23
+#: templates/image/edit/acquisition.html:18
+#, fuzzy
+msgid "Step 5 of 5: acquisition details"
+msgstr "Muokkaa teknisiä tietoja"
+
+#: templates/image/edit/acquisition.html:30
+#: templates/image/edit/acquisition.html:63
+#: templates/image/edit/acquisition.html:84 templates/image/edit/basic.html:54
+#: templates/image/edit/gear.html:44 templates/image/edit/license.html:23
 #: templates/location/edit.html:18 templates/user/profile/edit/basic.html:19
 #: templates/user/profile/edit/gear.html:29
 #: templates/user/profile/edit/license.html:18
@@ -2386,21 +2391,29 @@ msgstr "Muokkaa kuvaasi: tekniset yksityiskohdat"
 msgid "Save"
 msgstr "Tallenna"
 
-#: templates/image/edit/acquisition.html:17
-#: templates/image/edit/acquisition.html:46
-#: templates/image/edit/acquisition.html:60
+#: templates/image/edit/acquisition.html:31
+#: templates/image/edit/acquisition.html:65
+#: templates/image/edit/acquisition.html:85
 msgid "Remove data"
 msgstr "Poista tiedot"
 
-#: templates/image/edit/acquisition.html:18
-#: templates/image/edit/acquisition.html:47
-#: templates/image/edit/acquisition.html:61 templates/image/edit/basic.html:55
-#: templates/image/edit/gear.html:48 templates/image/edit/license.html:24
+#: templates/image/edit/acquisition.html:32
+#: templates/image/edit/acquisition.html:66
+#: templates/image/edit/acquisition.html:86 templates/image/edit/basic.html:55
+#: templates/image/edit/gear.html:45 templates/image/edit/license.html:24
 #: templates/image/edit/presolve.html:40
 msgid "Return to image"
 msgstr "Palaa kuvaan"
 
-#: templates/image/edit/acquisition.html:25
+#: templates/image/edit/acquisition.html:35
+#: templates/image/edit/acquisition.html:69
+#: templates/image/edit/acquisition.html:89 templates/image/edit/basic.html:59
+#: templates/image/edit/gear.html:49 templates/image/edit/watermark.html:38
+#, fuzzy
+msgid "Save and finish"
+msgstr "Tallenna ja jatka"
+
+#: templates/image/edit/acquisition.html:43
 msgid ""
 "You can insert as many acquisition sessions as you want, as often images are "
 "taken across several nights. An acquisition session is defined primarily by "
@@ -2413,26 +2426,27 @@ msgstr ""
 "perusteella. Täytä tiedot ja klikkaa <strong>Tallenna</strong> "
 "lopettaaksesi, tai <strong>Lisää</strong> lisätäksesi muita kuvaussessioita."
 
-#: templates/image/edit/acquisition.html:29
+#: templates/image/edit/acquisition.html:47
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a href="
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
 msgstr ""
 
-#: templates/image/edit/acquisition.html:34
+#: templates/image/edit/acquisition.html:52
 msgid "Acquisition session"
 msgstr "Kuvaussessio"
 
-#: templates/image/edit/acquisition.html:34
+#: templates/image/edit/acquisition.html:52
 msgid "(scroll down for more)"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:45
+#: templates/image/edit/acquisition.html:64
+#: templates/image/edit/acquisition.html:70
 msgid "Add more"
 msgstr "Lisää"
 
-#: templates/image/edit/acquisition.html:52
+#: templates/image/edit/acquisition.html:76
 #, python-format
 msgid ""
 "With this form you can input the basic details for the acquisition of your "
@@ -2441,15 +2455,15 @@ msgid ""
 "edit_type=deep_sky&advanced=true\">advanced form</a>."
 msgstr ""
 
-#: templates/image/edit/acquisition.html:67
+#: templates/image/edit/acquisition.html:95
 msgid "What kind of image is this?"
 msgstr "Millainen kuva tämä on?"
 
-#: templates/image/edit/acquisition.html:70
+#: templates/image/edit/acquisition.html:98
 msgid "Solar system"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:73
+#: templates/image/edit/acquisition.html:101
 msgid "Deep sky"
 msgstr ""
 
@@ -2459,7 +2473,7 @@ msgstr "Muokkaa kuvaasi: perustiedot"
 
 #: templates/image/edit/basic.html:17
 #, fuzzy
-msgid "Step 2 of 4: basic information"
+msgid "Step 2 of 5: basic information"
 msgstr "Muokkaa perustietojasi"
 
 #: templates/image/edit/basic.html:21
@@ -2485,16 +2499,11 @@ msgstr "Käytä pilkkua erottaaksesi arvot."
 msgid "Next step: watermark"
 msgstr ""
 
-#: templates/image/edit/basic.html:58 templates/image/edit/watermark.html:37
+#: templates/image/edit/basic.html:58 templates/image/edit/gear.html:48
+#: templates/image/edit/watermark.html:37
 #, fuzzy
 msgid "or"
 msgstr "Heikko"
-
-#: templates/image/edit/basic.html:59 templates/image/edit/gear.html:46
-#: templates/image/edit/watermark.html:38
-#, fuzzy
-msgid "Save and finish"
-msgstr "Tallenna ja jatka"
 
 #: templates/image/edit/gear.html:15
 msgid "Edit your image: gear used"
@@ -2502,7 +2511,7 @@ msgstr "Muokkaa kuvaasi: käytetyt laitteet"
 
 #: templates/image/edit/gear.html:17
 #, fuzzy
-msgid "Step 4 of 4: gear used"
+msgid "Step 4 of 5: gear used"
 msgstr "Muokkaa kuvaasi: käytetyt laitteet"
 
 #: templates/image/edit/gear.html:27
@@ -2513,6 +2522,11 @@ msgid ""
 msgstr ""
 "Onko tämä kohta tyhjä? Sinun täytyy ensin lisätä laitteita <a href="
 "\"%(the_url)s\">profiiliisi</a>!"
+
+#: templates/image/edit/gear.html:47
+#, fuzzy
+msgid "Next step: acquisition"
+msgstr "Muokkaa perustietoja"
 
 #: templates/image/edit/license.html:7
 msgid "This setting only affects the current image."
@@ -2562,7 +2576,7 @@ msgstr ""
 
 #: templates/image/edit/presolve.html:24
 #, fuzzy
-msgid "Step 1 of 4: plate solving scale"
+msgid "Step 1 of 5: plate solving scale"
 msgstr "Muokkaa kuvaasi: käytetyt laitteet"
 
 #: templates/image/edit/presolve.html:26
@@ -2594,8 +2608,9 @@ msgid ""
 msgstr ""
 
 #: templates/image/edit/watermark.html:10
-msgid "Step 3 of 4: watermark"
-msgstr ""
+#, fuzzy
+msgid "Step 3 of 5: watermark"
+msgstr "Muokkaa kuvaasi: käytetyt laitteet"
 
 #: templates/image/edit/watermark.html:13
 msgid ""
