@@ -55,8 +55,11 @@ class ImageEditBasicForm(forms.ModelForm):
         return self.cleaned_data['link'].strip()
 
     def clean(self):
-        subjects = self.data['as_values_subjects'].strip()
-        solar_system = self.cleaned_data['solar_system_main_subject']
+        try:
+            subjects = self.data['as_values_subjects'].strip()
+            solar_system = self.cleaned_data['solar_system_main_subject']
+        except MultiValueDictKeyError:
+            return self.cleaned_data
 
         if solar_system is None and (len(subjects) == 0 or subjects[0] == ''):
             raise forms.ValidationError(_("Please enter either some subjects or a main solar system subject."));
