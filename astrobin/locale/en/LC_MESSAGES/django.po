@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-12 01:40-0500\n"
+"POT-Creation-Date: 2012-01-13 01:47-0500\n"
 "PO-Revision-Date: 2012-01-03 07:36-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
@@ -824,7 +824,7 @@ msgstr ""
 msgid "Integration"
 msgstr ""
 
-#: views.py:365 views.py:1293 views.py:1294
+#: views.py:365 views.py:1300 views.py:1301
 #: templates/inclusion_tags/search_image_list.html:17
 msgid "hours"
 msgstr ""
@@ -854,50 +854,50 @@ msgstr ""
 msgid "Matching items (press TAB to add what you typed instead):"
 msgstr ""
 
-#: views.py:1081
+#: views.py:1084
 msgid "Fill in one session, before adding more."
 msgstr ""
 
-#: views.py:1271 templatetags/tags.py:111
+#: views.py:1278 templatetags/tags.py:111
 msgid "minutes"
 msgstr ""
 
-#: views.py:1272 templatetags/tags.py:112
+#: views.py:1279 templatetags/tags.py:112
 msgid "seconds ago"
 msgstr ""
 
-#: views.py:1274 templatetags/tags.py:113
+#: views.py:1281 templatetags/tags.py:113
 #, python-format
 msgid "%s ago"
 msgstr ""
 
-#: views.py:1290
+#: views.py:1297
 msgid "Member since"
 msgstr ""
 
-#: views.py:1291
+#: views.py:1298
 msgid "Last login"
 msgstr ""
 
-#: views.py:1292 templates/stats.html:64
+#: views.py:1299 templates/stats.html:64
 msgid "Images uploaded"
 msgstr ""
 
-#: views.py:1293
+#: views.py:1300
 msgid "Total integration time"
 msgstr ""
 
-#: views.py:1294
+#: views.py:1301
 msgid "Average integration time"
 msgstr ""
 
-#: views.py:1966
+#: views.py:1973
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr ""
 
-#: views.py:1990
+#: views.py:1997
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -2200,14 +2200,18 @@ msgstr ""
 msgid "View at full resolution"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:8
+#: templates/image/edit/acquisition.html:16
 msgid "Edit your image: acquisition details"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:16
-#: templates/image/edit/acquisition.html:44
-#: templates/image/edit/acquisition.html:59 templates/image/edit/basic.html:54
-#: templates/image/edit/gear.html:46 templates/image/edit/license.html:23
+#: templates/image/edit/acquisition.html:18
+msgid "Step 5 of 5: acquisition details"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:30
+#: templates/image/edit/acquisition.html:63
+#: templates/image/edit/acquisition.html:84 templates/image/edit/basic.html:54
+#: templates/image/edit/gear.html:44 templates/image/edit/license.html:23
 #: templates/location/edit.html:18 templates/user/profile/edit/basic.html:19
 #: templates/user/profile/edit/gear.html:29
 #: templates/user/profile/edit/license.html:18
@@ -2215,21 +2219,28 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:17
-#: templates/image/edit/acquisition.html:46
-#: templates/image/edit/acquisition.html:60
+#: templates/image/edit/acquisition.html:31
+#: templates/image/edit/acquisition.html:65
+#: templates/image/edit/acquisition.html:85
 msgid "Remove data"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:18
-#: templates/image/edit/acquisition.html:47
-#: templates/image/edit/acquisition.html:61 templates/image/edit/basic.html:55
-#: templates/image/edit/gear.html:48 templates/image/edit/license.html:24
+#: templates/image/edit/acquisition.html:32
+#: templates/image/edit/acquisition.html:66
+#: templates/image/edit/acquisition.html:86 templates/image/edit/basic.html:55
+#: templates/image/edit/gear.html:45 templates/image/edit/license.html:24
 #: templates/image/edit/presolve.html:40
 msgid "Return to image"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:25
+#: templates/image/edit/acquisition.html:35
+#: templates/image/edit/acquisition.html:69
+#: templates/image/edit/acquisition.html:89 templates/image/edit/basic.html:59
+#: templates/image/edit/gear.html:49 templates/image/edit/watermark.html:38
+msgid "Save and finish"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:43
 msgid ""
 "You can insert as many acquisition sessions as you want, as often images are "
 "taken across several nights. An acquisition session is defined primarily by "
@@ -2238,26 +2249,27 @@ msgid ""
 "sessions."
 msgstr ""
 
-#: templates/image/edit/acquisition.html:29
+#: templates/image/edit/acquisition.html:47
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a href="
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
 msgstr ""
 
-#: templates/image/edit/acquisition.html:34
+#: templates/image/edit/acquisition.html:52
 msgid "Acquisition session"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:34
+#: templates/image/edit/acquisition.html:52
 msgid "(scroll down for more)"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:45
+#: templates/image/edit/acquisition.html:64
+#: templates/image/edit/acquisition.html:70
 msgid "Add more"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:52
+#: templates/image/edit/acquisition.html:76
 #, python-format
 msgid ""
 "With this form you can input the basic details for the acquisition of your "
@@ -2266,15 +2278,15 @@ msgid ""
 "edit_type=deep_sky&advanced=true\">advanced form</a>."
 msgstr ""
 
-#: templates/image/edit/acquisition.html:67
+#: templates/image/edit/acquisition.html:95
 msgid "What kind of image is this?"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:70
+#: templates/image/edit/acquisition.html:98
 msgid "Solar system"
 msgstr ""
 
-#: templates/image/edit/acquisition.html:73
+#: templates/image/edit/acquisition.html:101
 msgid "Deep sky"
 msgstr ""
 
@@ -2283,7 +2295,7 @@ msgid "Edit your image: basic information"
 msgstr ""
 
 #: templates/image/edit/basic.html:17
-msgid "Step 2 of 4: basic information"
+msgid "Step 2 of 5: basic information"
 msgstr ""
 
 #: templates/image/edit/basic.html:21
@@ -2307,13 +2319,9 @@ msgstr ""
 msgid "Next step: watermark"
 msgstr ""
 
-#: templates/image/edit/basic.html:58 templates/image/edit/watermark.html:37
+#: templates/image/edit/basic.html:58 templates/image/edit/gear.html:48
+#: templates/image/edit/watermark.html:37
 msgid "or"
-msgstr ""
-
-#: templates/image/edit/basic.html:59 templates/image/edit/gear.html:46
-#: templates/image/edit/watermark.html:38
-msgid "Save and finish"
 msgstr ""
 
 #: templates/image/edit/gear.html:15
@@ -2321,7 +2329,7 @@ msgid "Edit your image: gear used"
 msgstr ""
 
 #: templates/image/edit/gear.html:17
-msgid "Step 4 of 4: gear used"
+msgid "Step 4 of 5: gear used"
 msgstr ""
 
 #: templates/image/edit/gear.html:27
@@ -2329,6 +2337,10 @@ msgstr ""
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your <a "
 "href=\"%(the_url)s\">profile</a>!"
+msgstr ""
+
+#: templates/image/edit/gear.html:47
+msgid "Next step: acquisition"
 msgstr ""
 
 #: templates/image/edit/license.html:7
@@ -2377,7 +2389,7 @@ msgid "Knowing the pixel scale will help"
 msgstr ""
 
 #: templates/image/edit/presolve.html:24
-msgid "Step 1 of 4: plate solving scale"
+msgid "Step 1 of 5: plate solving scale"
 msgstr ""
 
 #: templates/image/edit/presolve.html:26
@@ -2407,7 +2419,7 @@ msgid ""
 msgstr ""
 
 #: templates/image/edit/watermark.html:10
-msgid "Step 3 of 4: watermark"
+msgid "Step 3 of 5: watermark"
 msgstr ""
 
 #: templates/image/edit/watermark.html:13
