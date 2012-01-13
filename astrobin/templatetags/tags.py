@@ -375,3 +375,10 @@ def cut_decimals(value, places):
         return value
 
     return '{0:.{1}f}'.format(value, places)
+
+
+@register.filter
+def is_checkbox(value):
+    from django.forms.fields import CheckboxInput
+    return isinstance(value, CheckboxInput)
+

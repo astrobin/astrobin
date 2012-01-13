@@ -64,6 +64,31 @@ SUBJECT_TYPES = {
     'G'  : SUBJECT_LABELS['GALAXY'],
 }
 
+SOLAR_SYSTEM_SUBJECT_CHOICES = (
+    (0, _("Sun")),
+    (1, _("Earth's Moon")),
+    (2, _("Mercury")),
+    (3, _("Venus")),
+    (4, _("Mars")),
+    (5, _("Jupiter")),
+    (6, _("Saturn")),
+    (7, _("Uranus")),
+    (8, _("Neptune")),
+    (9, _("Minor planet")),
+    (10, _("Comet")),
+)
+
+WATERMARK_POSITION_CHOICES = (
+    (0, _("Center")),
+    (1, _("Top left")),
+    (2, _("Top center")),
+    (3, _("Top right")),
+    (4, _("Bottom left")),
+    (5, _("Bottom center")),
+    (6, _("Bottom right")),
+)
+
+
 class Gear(models.Model):
     name = models.CharField(_("Name"), max_length=64)
     master = models.ForeignKey('self', null = True)
@@ -278,22 +303,35 @@ class Image(models.Model):
         (5, _("This ia narrow field image (less than 1 degree).")),
     )
 
+
     title = models.CharField(
         max_length = 128,
         verbose_name = _("Title"),
     )
+
     subjects = models.ManyToManyField(
         Subject,
     )
+
+    solar_system_main_subject = models.IntegerField(
+        verbose_name = _("Main solar system subject"),
+        help_text = _("If the main subject of your image is a body in the solar system, please select which (or which type) it is."),
+        null = True,
+        blank = True,
+        choices = SOLAR_SYSTEM_SUBJECT_CHOICES,
+    )
+
     locations = models.ManyToManyField(
         Location,
     )
+
     description = models.TextField(
         null = True,
         blank = True,
         verbose_name = _("Description"),
         help_text = _("HTML tags are allowed."),
     )
+
     link = models.CharField(
         max_length = 256,
         null = True,
@@ -350,6 +388,28 @@ class Image(models.Model):
         default = 100,
         help_text = _("If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't matter."),
         verbose_name = _("Scaling"),
+    )
+
+    watermark_text = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        verbose_name = "Text",
+    )
+
+    watermark = models.BooleanField(
+        default = False,
+        verbose_name = _("Apply watermark to image"),
+    )
+
+    watermark_position = models.IntegerField(
+        verbose_name = _("Position"),
+        default = 0,
+        choices = WATERMARK_POSITION_CHOICES,
+    )
+
+    watermark_opacity = models.IntegerField(
+        default = 10,
     )
 
     # gear
@@ -655,7 +715,8 @@ class DeepSky_Acquisition(Acquisition):
     )
 
     mean_sqm = models.DecimalField(
-        _("Mean SQM"),
+        verbose_name = _("Mean mag/arcsec^2"),
+        help_text = _("As measured with your Sky Quality Meter."),
         null=True, blank=True,
         max_digits=5, decimal_places=2)
 
@@ -880,6 +941,30 @@ class UserProfile(models.Model):
         ),
     )
 
+    default_watermark_text = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        editable = False,
+    )
+
+    default_watermark = models.BooleanField(
+        default = False,
+        editable = False,
+    )
+
+    default_watermark_position = models.IntegerField(
+        default = 0,
+        choices = WATERMARK_POSITION_CHOICES,
+        editable = False,
+    )
+
+    default_watermark_opacity = models.IntegerField(
+        default = 10,
+        editable = False,
+    )
+
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
@@ -904,4 +989,19 @@ def create_user_profile(sender, instance, created, **kwargs):
         profile, created = UserProfile.objects.get_or_create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
+
+
+from zinnia.models import Entry
+def blog_entry_notify(sender, instance, created, **kwargs):
+    if created:
+         push_notification(
+            User.objects.all(),
+            'new_blog_entry',
+            {
+                'object': instance.title,
+                'object_url': instance.get_absolute_url()
+            }
+         )
+
+post_save.connect(blog_entry_notify, sender = Entry)
 

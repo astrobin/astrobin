@@ -147,6 +147,7 @@ def index(request):
     """Main page"""
     form = None
 
+    profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
         if profile and profile.telescopes.all() and profile.cameras.all():
@@ -154,9 +155,12 @@ def index(request):
 
     sqs = SearchQuerySet().all().models(Image)
 
-    response_dict = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                     's3_url':settings.S3_URL,
-                     'upload_form':form,}
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+        'profile': profile,
+        'upload_form': form,
+    }
 
     if 'upload_error' in request.GET:
         response_dict['upload_error'] = True
@@ -170,6 +174,28 @@ def index(request):
     else:
         response_dict['sort'] = '-uploaded'
         sqs = sqs.order_by('-uploaded')
+
+    filter = request.GET.get('filter')
+    if filter:
+        response_dict['filter'] = filter
+    if filter == 'all_ds':
+        sqs = sqs.filter(is_deep_sky = True)
+    elif filter == 'clusters':
+        sqs = sqs.filter(is_clusters = True)
+    elif filter == 'nebulae':
+        sqs = sqs.filter(is_nebulae = True)
+    elif filter == 'galaxies':
+        sqs = sqs.filter(is_galaxies = True)
+    elif filter == 'all_ss':
+        sqs = sqs.filter(is_solar_system = True)
+    elif filter == 'sun':
+        sqs = sqs.filter(is_sun = True)
+    elif filter == 'moon':
+        sqs = sqs.filter(is_moon = True)
+    elif filter == 'planets':
+        sqs = sqs.filter(is_planets = True)
+    elif filter == 'comets':
+        sqs = sqs.filter(is_comets = True)
 
     return object_list(
         request, 
@@ -428,6 +454,9 @@ def image_detail(request, id):
                      # revision e1dad12babe5, now we have to
                      # implement this ugly hack.
                      'solved_ext': solved_ext,
+
+                     'solar_system_main_subject_id': image.solar_system_main_subject,
+                     'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject else None,
                     }
 
     if 'upload_error' in request.GET:
@@ -576,6 +605,33 @@ def image_edit_basic(request, id):
          'locations': locations,
         },
         context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
+def image_edit_watermark(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.user != image.user or image.is_stored:
+        return HttpResponseForbidden()
+
+    profile = UserProfile.objects.get(user = image.user)
+    if not profile.default_watermark_text or profile.default_watermark_text == '':
+        profile.default_watermark_text = "Copyright %s" % image.user.username
+        profile.save()
+
+    image.watermark = profile.default_watermark
+    image.watermark_text = profile.default_watermark_text
+    image.watermark_position = profile.default_watermark_position
+    image.watermark_opacity = profile.default_watermark_opacity
+
+    form = ImageEditWatermarkForm(instance = image)
+
+    return render_to_response('image/edit/watermark.html',
+        {
+            'image': image,
+            'form': form,
+        },
+        context_instance = RequestContext(request))
 
 
 @login_required
@@ -883,13 +939,50 @@ def image_edit_save_basic(request):
     form.fields['locations'].initial = u', '.join(x.name for x in getattr(image, 'locations').all())
 
     image.save()
-    if not image.is_stored:
-        image.process(image.presolve_information > 1)
 
     if 'was_not_ready' in request.POST:
+        if 'submit_next' in request.POST:
+            return HttpResponseRedirect('/edit/watermark/%i/' % image.id)
+
+        image.process(image.presolve_information > 1)
         return HttpResponseRedirect(image.get_absolute_url())
-    else:
-        return HttpResponseRedirect('/edit/basic/%i/?saved' % image.id)
+
+    return HttpResponseRedirect('/edit/basic/%i/?saved' % image.id)
+
+
+@login_required
+@require_POST
+def image_edit_save_watermark(request):
+    image_id = request.POST.get('image_id')
+    image = get_object_or_404(Image, pk=image_id)
+    if request.user != image.user or image.is_stored:
+        return HttpResponseForbidden()
+
+    form = ImageEditWatermarkForm(data = request.POST, instance = image)
+    if not form.is_valid():
+        return render_to_response(
+            'image/edit/watermark.html',
+            {
+                'image': image,
+                'form': form,
+            },
+            context_instance = RequestContext(request))
+
+    form.save()
+
+    # Save defaults in profile
+    profile = UserProfile.objects.get(user = image.user)
+    profile.default_watermark = form.cleaned_data['watermark']
+    profile.default_watermark_text = form.cleaned_data['watermark_text']
+    profile.default_watermark_position = form.cleaned_data['watermark_position']
+    profile.default_watermark_opacity = form.cleaned_data['watermark_opacity']
+    profile.save()
+
+    if 'submit_next' in request.POST:
+        return HttpResponseRedirect('/edit/gear/%i/' % image.id)
+
+    image.process(image.presolve_information > 1)
+    return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
@@ -927,6 +1020,15 @@ def image_edit_save_gear(request):
     form.save()
 
     response_dict['image'] = image
+
+    if 'was_not_ready' in request.POST:
+        if 'submit_next' in request.POST:
+            return HttpResponseRedirect('/edit/acquisition/%i/' % image.id)
+
+        if not image.is_stored:
+            image.process(image.presolve_information > 1)
+
+        return HttpResponseRedirect(image.get_absolute_url())
 
     return HttpResponseRedirect('/edit/gear/%i/?saved' % image.id)
 
@@ -977,6 +1079,7 @@ def image_edit_save_acquisition(request):
                     DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
                     deep_sky_acquisition_formset = DSAFormSet(instance=image)
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
+                    response_dict['next_acquisition_session'] = deep_sky_acquisition_formset.total_form_count() - 1
                     if not dsa_qs:
                         response_dict['context_message'] = {'error': False, 'text': _("Fill in one session, before adding more.")}
                     return render_to_response('image/edit/acquisition.html',
@@ -1009,6 +1112,10 @@ def image_edit_save_acquisition(request):
                                       response_dict,
                                       context_instance=RequestContext(request))
         form.save()
+
+    if 'was_not_ready' in request.POST and 'add_mode' not in request.POST:
+        image.process(image.presolve_information > 1)
+        return HttpResponseRedirect(image.get_absolute_url())
 
     return HttpResponseRedirect("/edit/acquisition/%s/?saved" % image_id)
 
@@ -1218,6 +1325,9 @@ def user_page(request, username):
         if subsection == 'uploaded':
             # All good already
             pass
+        elif subsection == 'acquired':
+            sqs = sqs.extra(select = {'last_acquisition_date': lad_sql},
+                            order_by = ['-last_acquisition_date'])
         elif subsection == 'year':
             if 'year' in request.GET:
                 year = request.GET.get('year')
@@ -1277,6 +1387,12 @@ def user_page(request, username):
                     r = reverse_subject_type(l)
                     for i in sqs.filter(Q(subjects__otype__in = r)).distinct()[:10]:
                         k_dict[l].append(i)
+
+                k_dict = {_("Solar system"): []}
+                smart_albums.append(k_dict)
+                for i in sqs.filter(solar_system_main_subject__gte = 1):
+                    k_dict[_("Solar system")].append(i)
+
                 sqs = Image.objects.none()
         elif subsection == 'nodata':
             sqs = sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None) | Q(subjects = None)).distinct()
@@ -1896,6 +2012,18 @@ def image_request_fits(request, image_id):
     push_request(image.user, r)
 
     return ajax_success()
+
+@login_required
+@require_GET
+def request_mark_fulfilled(request, request_id):
+    req = get_object_or_404(Request, id=request_id)
+    if req.to_user != request.user:
+        return HttpResponseForbidden()
+
+    req.fulfilled = True
+    req.save()
+
+    return HttpResponseRedirect('/requests/')
 
 
 @login_required

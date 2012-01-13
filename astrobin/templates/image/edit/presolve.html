@@ -21,7 +21,7 @@
     {% else %}
     <h1>
         {% if not image.is_stored %}
-            {% blocktrans %}Step 1 of 2: plate solving scale{% endblocktrans %}
+            {% blocktrans %}Step 1 of 5: plate solving scale{% endblocktrans %}
         {% else %}
             {% blocktrans %}Edit your image: plate-solving scale{% endblocktrans %}
         {% endif %}
@@ -39,8 +39,7 @@
             <li><input class="button submit-button" type="submit" value="{% trans "Start plate-solving" %} &rarr;" /></li>
             <li><a href="{% url image_detail image.id %}">{% trans "Return to image" %}</a></li>
             {% else %}
-            <li><input class="button submit-button" type="submit" value="{% trans "Save and continue" %} &rarr;" /></li>
-            <li><a href="{% url image_edit_basic image.id %}">{% trans "or skip plate-solving for now" %}</a></li>
+            <li><input class="button submit-button" type="submit" value="{% trans "Next step: basic information" %} &rarr;" /></li>
             {% endif %}
         </ul>
     </form>

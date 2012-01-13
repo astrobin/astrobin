@@ -3,10 +3,24 @@
 {% load tags %}
 
 {% block content %}
-    {% include 'image/edit/menu.html' %}
+    {% if image.is_stored %}
+        {% include 'image/edit/menu.html' %}
+    {% else %}
+        {% include 'image/edit/menu_not_ready.html' %}
+    {% endif %}
+
     <div class="sided-main-content" id="image-edit-gear">
-        <h1>{% trans "Edit your image: gear used" %}</h1>
-        {% form_saved request %}
+        <h1>
+        {% if image.is_stored %}
+            {% trans "Edit your image: gear used" %}
+        {% else %}
+            {% trans "Step 4 of 5: gear used" %}
+        {% endif %}
+        </h1>
+        {% if image.is_stored %}
+            {% form_saved request %}
+        {% endif %}
+
         {% if no_gear %}
             <p>
                 {% url profile_edit_gear as the_url %}
@@ -26,8 +40,15 @@
 
             <input type="hidden" name="image_id" value="{{image.id}}" />
             <ul>
-                <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
-                <li><a href="{{image.get_absolute_url}}">{% trans "Return to image" %}</a></li>
+                {% if image.is_stored %}
+                    <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+                    <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+                {% else %}
+                    <li><input class="button submit-button" type="submit" name="submit_next" value="{% trans "Next step: acquisition" %} &rarr;" /></li>
+                    <li>{% trans "or" %}</li>
+                    <li><input class="button submit-button inline-button" type="submit" name="submit_finish" value="{% trans "Save and finish" %} &rarr;" /></li>
+                    <li><input type="hidden" name="was_not_ready" value="true"/></li>
+                {% endif %}
             </ul>
         </form>
     </div>  

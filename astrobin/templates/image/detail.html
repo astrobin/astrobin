@@ -373,10 +373,11 @@
                 <div class="hline"></div>
                 <p>
                     {% trans "Contains" %}:
+                    {% if solar_system_main_subject %}
+                        <a href="/search/?q=&ssms={{solar_system_main_subject_id}}">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
+                    {% endif %}
                     {% for s in subjects_short %}
                         <a href="/search/?q={{s.mainId|escape|cut:" "}}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
-                    {% empty %}
-                        {% trans "(no subjects)" %}
                     {% endfor %}
                     {% if subjects_all|length > 10 %}
                         <span id="more-subjects">
@@ -410,9 +411,9 @@
             <div id="revisions">
                 <h3>
                     {% if is_revision %}
-                        {% trans "This image is a revision. Here are its older versions" %}:
+                        {% trans "This image is a revision. Here are its other versions" %}:
                     {% else %}
-                        {% trans "This image has some later revisions" %}:
+                        {% trans "This image has some other revisions" %}:
                     {% endif %}
                 </h3>
                 <div class="image-strip clear">
