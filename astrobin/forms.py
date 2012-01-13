@@ -1,6 +1,7 @@
 from django import forms
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.datastructures import MultiValueDictKeyError
 
 from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet, EmptySearchQuerySet
