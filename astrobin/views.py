@@ -922,9 +922,7 @@ def image_edit_save_basic(request):
         if 'submit_next' in request.POST:
             return HttpResponseRedirect('/edit/watermark/%i/' % image.id)
 
-        if not image.is_stored:
-            image.process(image.presolve_information > 1)
-
+        image.process(image.presolve_information > 1)
         return HttpResponseRedirect(image.get_absolute_url())
 
     return HttpResponseRedirect('/edit/basic/%i/?saved' % image.id)
@@ -1001,8 +999,13 @@ def image_edit_save_gear(request):
 
     response_dict['image'] = image
 
-    if 'was_not_ready':
-        image.process(image.presolve_information > 1)
+    if 'was_not_ready' in request.POST:
+        if 'submit_next' in request.POST:
+            return HttpResponseRedirect('/edit/acquisition/%i/' % image.id)
+
+        if not image.is_stored:
+            image.process(image.presolve_information > 1)
+
         return HttpResponseRedirect(image.get_absolute_url())
 
     return HttpResponseRedirect('/edit/gear/%i/?saved' % image.id)
@@ -1087,6 +1090,10 @@ def image_edit_save_acquisition(request):
                                       response_dict,
                                       context_instance=RequestContext(request))
         form.save()
+
+    if 'was_not_ready' in request.POST and 'add_mode' not in request.POST:
+        image.process(image.presolve_information > 1)
+        return HttpResponseRedirect(image.get_absolute_url())
 
     return HttpResponseRedirect("/edit/acquisition/%s/?saved" % image_id)
 

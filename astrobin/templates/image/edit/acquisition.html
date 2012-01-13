@@ -3,9 +3,22 @@
 {% load tags %}
 
 {% block content %}
-    {% include 'image/edit/menu.html' %}   
+    {% if image.is_stored %}
+        {% include 'image/edit/menu.html' %}
+    {% else %}
+        {% include 'image/edit/menu_not_ready.html' %}
+    {% endif %}
+
+
     <div class="sided-main-content">
-    <h1>{% trans "Edit your image: acquisition details" %}</h1>
+    <h1>
+    {% if image.is_stored %}
+        {% trans "Edit your image: acquisition details" %}
+    {% else %}
+        {% trans "Step 5 of 5: acquisition details" %}
+    {% endif %}
+    </h1>
+
     {% form_saved request %}
     {% if edit_type == 'solar_system' %}
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
@@ -13,9 +26,14 @@
             <input type="hidden" name="image_id" value="{{image.id}}" />
             <input type="hidden" name="edit_type" value="solar_system" />
             <ul style="clear:both">
-                <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
-                <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
-                <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+                {% if image.is_stored %}
+                    <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+                    <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
+                    <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+                {% else %}
+                    <li><input type="hidden" name="was_not_ready" value="true"/></li>
+                    <li><input class="button submit-button" type="submit" value="{% trans "Save and finish" %} &rarr;" /></li>
+                {% endif %}
             </ul>
         </form>
     {% else %}
@@ -41,10 +59,16 @@
             <input type="hidden" name="edit_type" value="deep_sky" />
             <input type="hidden" name="advanced" value="true"/>
             <ul style="clear:both">
-                <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
-                <li><input class="button inline-button" type="submit" value="{% trans "Add more" %}" name="add_more" /></li>
-                <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
-                <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+                {% if image.is_stored %}
+                    <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+                    <li><input class="button inline-button" type="submit" value="{% trans "Add more" %}" name="add_more" /></li>
+                    <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
+                    <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+                {% else %}
+                    <li><input type="hidden" name="was_not_ready" value="true"/></li>
+                    <li><input class="button submit-button" type="submit" value="{% trans "Save and finish" %} &rarr;" /></li>
+                    <li><input class="button inline-button" type="submit" value="{% trans "Add more" %}" name="add_more" /></li>
+                {% endif %}
             </ul>
         </form>
         {% else %}
@@ -56,12 +80,16 @@
             <input type="hidden" name="edit_type" value="deep_sky" />
             <input type="hidden" name="advanced" value="false"/>
             <ul style="clear:both">
-                <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
-                <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
-                <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+                {% if image.is_stored %}
+                    <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
+                    <li><a class="button dangerous-button inline-button" href="{% url image_edit_acquisition_reset image.id %}">{% trans "Remove data" %}</a></li>
+                    <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+                {% else %}
+                    <li><input type="hidden" name="was_not_ready" value="true"/></li>
+                    <li><input class="button submit-button" type="submit" value="{% trans "Save and finish" %} &rarr;" /></li>
+                {% endif %}
             </ul>
         </form>
-
         {% endif %}
     {% else %}
         <p>{% trans "What kind of image is this?" %}</p>
