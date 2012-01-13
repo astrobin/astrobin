@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 11:09-0500\n"
-"PO-Revision-Date: 2012-01-13 11:10-0500\n"
+"POT-Creation-Date: 2012-01-13 13:03-0500\n"
+"PO-Revision-Date: 2012-01-13 13:05-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: \n"
@@ -1059,184 +1059,178 @@ msgid "Start typing and hit ENTER"
 msgstr "Inizia a digitare e poi premi INVIO"
 
 #: templates/base.html:115
-msgid ""
-"\n"
-"                                    Please select your language from the options above.\n"
-"                                "
-msgstr ""
-"\n"
-"                                    Seleziona la tua lingua tra quelle qui sopra.\n"
-"                                "
+msgid "Please select your language from the options above."
+msgstr "Seleziona la tua lingua tra le scelte qua sopra."
 
-#: templates/base.html:127
+#: templates/base.html:125
 #, python-format
 msgid "Hello, <a href=\"%(user_page)s\">%(username)s.</a>"
 msgstr "Ciao, <a href=\"%(user_page)s\">%(username)s.</a>"
 
-#: templates/base.html:139
-#: templates/base.html.py:267
-#: templates/base.html:309
+#: templates/base.html:137
+#: templates/base.html.py:265
+#: templates/base.html:307
 msgid "Home"
 msgstr "Home"
 
-#: templates/base.html:140
-#: templates/base.html.py:268
+#: templates/base.html:138
+#: templates/base.html.py:266
 msgid "Blog"
 msgstr "Blog in English"
 
-#: templates/base.html:141
-#: templates/base.html.py:269
+#: templates/base.html:139
+#: templates/base.html.py:267
 #: templates/search/search.html:12
 msgid "Search"
 msgstr "Cerca"
 
-#: templates/base.html:143
-#: templates/base.html.py:270
+#: templates/base.html:141
+#: templates/base.html.py:268
 #: templates/stats.html:6
 #: templates/user/profile.html:263
 msgid "Stats"
 msgstr "Statistiche"
 
-#: templates/base.html:145
-#: templates/base.html.py:271
+#: templates/base.html:143
+#: templates/base.html.py:269
 msgid "Nightly"
 msgstr "Notte dopo notte"
 
-#: templates/base.html:146
-#: templates/base.html.py:272
+#: templates/base.html:144
+#: templates/base.html.py:270
 #: templates/help.html:4
 msgid "Help"
 msgstr "Aiuto"
 
-#: templates/base.html:147
-#: templates/base.html.py:273
+#: templates/base.html:145
+#: templates/base.html.py:271
 #: templates/faq.html:4
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/base.html:160
+#: templates/base.html:158
 msgid "View your profile"
 msgstr "Vedi il tuo profilo"
 
-#: templates/base.html:163
+#: templates/base.html:161
 msgid "Edit your profile"
 msgstr "Modifica il tuo profilo"
 
-#: templates/base.html:166
+#: templates/base.html:164
 msgid "Upload an image"
 msgstr "Carica un'immagine"
 
-#: templates/base.html:166
+#: templates/base.html:164
 msgid "Upload!"
 msgstr "Carica!"
 
-#: templates/base.html:169
+#: templates/base.html:167
 #: templates/user/profile.html:321
 #: templates/user/profile.html.py:324
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.html:176
-#: templates/base.html.py:177
+#: templates/base.html:174
+#: templates/base.html.py:175
 msgid "Notifications"
 msgstr "Notifiche"
 
-#: templates/base.html:184
-#: templates/base.html.py:185
+#: templates/base.html:182
+#: templates/base.html.py:183
 #: templates/messages/inbox.html:12
 msgid "Messages"
 msgstr "Messaggi"
 
-#: templates/base.html:189
-#: templates/base.html.py:190
+#: templates/base.html:187
+#: templates/base.html.py:188
 msgid "Requests"
 msgstr "Richieste"
 
-#: templates/base.html:200
+#: templates/base.html:198
 msgid "Have an invite? Login!"
 msgstr "Hai un invito? Fai il login!"
 
-#: templates/base.html:202
+#: templates/base.html:200
 #: templates/registration/activation_complete.html:5
 msgid "Login"
 msgstr "Login"
 
-#: templates/base.html:208
+#: templates/base.html:206
 #: templates/registration/login.html:8
 msgid "Register"
 msgstr "Registrati"
 
-#: templates/base.html:229
-#: templates/base.html.py:239
+#: templates/base.html:227
+#: templates/base.html.py:237
 msgid "Error"
 msgstr "Errore"
 
-#: templates/base.html:231
+#: templates/base.html:229
 #: templates/image/detail.html:16
 msgid "Info"
 msgstr "Informazione"
 
-#: templates/base.html:241
+#: templates/base.html:239
 msgid "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr "Immagine non valida o nessuna immagine. I formati accettati sono JPG, PNG e GIF."
 
-#: templates/base.html:258
+#: templates/base.html:256
 #: templates/user/profile.html:286
 msgid "About"
 msgstr "Informazioni"
 
-#: templates/base.html:260
+#: templates/base.html:258
 msgid "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers."
 msgstr "AstroBin è un sito di hosting d'immagini pensato specificamente per gli astrofotografi: è il posto finale dove caricare le proprie immagini. Fatto da un astrofotografo, per gli astrofotografi."
 
-#: templates/base.html:264
+#: templates/base.html:262
 msgid "Site links"
 msgstr "Link del sito"
 
-#: templates/base.html:274
+#: templates/base.html:272
 #: templates/tos.html:6
 msgid "Terms of Service"
 msgstr "Condizioni d'uso"
 
-#: templates/base.html:279
+#: templates/base.html:277
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/base.html:282
+#: templates/base.html:280
 msgid "The localization team"
 msgstr "Il team di localizzazione"
 
-#: templates/base.html:289
+#: templates/base.html:287
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:291
+#: templates/base.html:289
 msgid "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
 msgstr "AstroBin è Copyright &copy; 2011 Salvatore Iovene, Tutti i Diritti Riservati. Le immagini su questo sito sono copyright dei loro rispettivi proprietari."
 
-#: templates/base.html:310
+#: templates/base.html:308
 msgid "Follow AstroBin on Twitter"
 msgstr "Segui AstroBin su Twitter"
 
-#: templates/base.html:311
+#: templates/base.html:309
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/base.html:325
+#: templates/base.html:323
 msgid "Feedback"
 msgstr "Feedback"
 
-#: templates/base.html:337
+#: templates/base.html:335
 #: templates/messages/compose.html:18
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/base.html:422
+#: templates/base.html:420
 #: templates/image/detail.html:676
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/base.html:423
+#: templates/base.html:421
 #: templates/image/detail.html:677
 msgid "Choose file"
 msgstr "Scegli file"
@@ -1302,9 +1296,8 @@ msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
 msgstr "AstroBin accetta JPEG, PNG e GIF. Anche le GIF animate sono supportate."
 
 #: templates/faq.html:45
-#, python-format
-msgid "Absolutely. There are multiple ways in which AstroBin can store your data very safely. First of all, the images you upload are stored on a highly durable, highly available, redundant backend. The durability of the storage backend is 99.999999999%% over a given year. This means that if you upload 10,000 images, you can expect to lose one image to data corruption once in 10,000,000 year. The images are duplicated across two different physical servers, for protection against natural disasters."
-msgstr "Assolutamente sì. Ci sono diversi modi in cui AstroBin salva i tuoi dati con molta sicurezza. Prima di tutto, le immagini che carichi sono salvate mantendendo un'alta durabilità, un'alta disponibilità, e la ridondanza dei dati. La durabilità del backend è del 99.999999999%% ogni anno. Questo vuol dire che se carichi 10.000 immagini, puoi aspettarti che una sola immagine vada persa ogni 10.000.000 di anni, per via di corruzione dei dati. Le immagini sono duplicate su due server diversi, come garanzia di protezione contro eventuali disastri naturali."
+msgid "Absolutely. There are multiple ways in which AstroBin can store your data very safely. First of all, the images you upload are stored on a highly durable, highly available, redundant backend. The durability of the storage backend is 99.999999999 percent over a given year. This means that if you upload 10,000 images, you can expect to lose one image to data corruption once in 10,000,000 year. The images are duplicated across two different physical servers, for protection against natural disasters."
+msgstr "Assolutamente sì. Ci sono diversi modi in cui AstroBin salva i tuoi dati con molta sicurezza. Prima di tutto, le immagini che carichi sono salvate mantendendo un'alta durabilità, un'alta disponibilità, e la ridondanza dei dati. La durabilità del backend è del 99.999999999% ogni anno. Questo vuol dire che se carichi 10.000 immagini, puoi aspettarti che una sola immagine vada persa ogni 10.000.000 di anni, per via di corruzione dei dati. Le immagini sono duplicate su due server diversi, come garanzia di protezione contro eventuali disastri naturali."
 
 #: templates/faq.html:48
 msgid "The actual website, instead, is hosted on a Virtual Machine, so, in case of severe hardware failure, it can be redeployed to a different server in a matter of 15 minutes."
@@ -3187,6 +3180,17 @@ msgstr "Scegli la lingua usata per questo sito:"
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
 msgstr "Seleziona quali notifiche preferisci ricevere anche come e-mail:"
+
+#~ msgid ""
+#~ "\n"
+#~ "                                    Please select your language from the "
+#~ "options above.\n"
+#~ "                                "
+#~ msgstr ""
+#~ "\n"
+#~ "                                    Seleziona la tua lingua tra quelle "
+#~ "qui sopra.\n"
+#~ "                                "
 
 #~ msgid "(no subjects)"
 #~ msgstr "(nessun soggetto)"
