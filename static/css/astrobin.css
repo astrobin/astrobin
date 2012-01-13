@@ -2849,11 +2849,13 @@ table.title td.license {
 .album-links {
   float: right;
   font-size: 0.9em;
+  line-height: 1.15em;
   padding: 8px 16px 0 0;
 }
 .search-links {
   float: right;
   font-size: 0.9em;
+  line-height: 1.15em;
   padding: 8px 16px 0 0;
   float: none;
   text-align: center;
@@ -3159,6 +3161,15 @@ div.token-input-dropdown p {
 }
 form#gear select {
   display: none;
+}
+.index {
+  position: relative;
+}
+.index .album-links {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
 }
 .acquisition-session {
   margin-bottom: 16px;
