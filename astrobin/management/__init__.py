@@ -75,6 +75,12 @@ NOTICE_TYPES = (
         '',
         0
     ),
+    (
+        'new_blog_entry',
+        _('AstroBin has published a new blog entry'),
+        '',
+        0
+    ),
 )
 
 

@@ -74,6 +74,11 @@
                                 </li>
                                 <li>
                                     <span class="text">
+                                        <a href="?public&sub=acquired">{% trans "Acquisition time" %}</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="text">
                                         <a href="?public&sub=subject">{% trans "Subject type" %}</a>
                                     </span>
                                 </li>
@@ -137,6 +142,14 @@
                     {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
                     {% if request.user = user %}
                         {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
+                    {% endif %}
+                </p>
+                {% endif %}
+                {% if subsection == 'acquired' %}
+                <p>
+                    {% blocktrans %}These images are ordered so that the most recently acquired appear first. Please note: images with no acquisition dates will appear last, and in no particular order.{% endblocktrans %}
+                    {% if request.user == user %}
+                        <strong>{% blocktrans %}Please fill in the missing dates on all your images!{% endblocktrans %}</strong>
                     {% endif %}
                 </p>
                 {% endif %}

@@ -11,7 +11,7 @@
 
         <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
         <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
-        <meta name="description" content="AstroBin is an image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." />
+        <meta name="description" content="AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." />
         <meta name="keywords" content="astrophotography, astronomy, telescopes" />
         <meta name="robots" content="index, follow, noarchive" />
         <meta name="googlebot" content="noarchive" />
@@ -102,11 +102,23 @@
                     <a href="{% url set_language "en" %}"><img src="/static/icons/flags/16/United-Kingdom.png" alt="{% trans "English" %}"/></a>
                     <a href="{% url set_language "it" %}"><img src="/static/icons/flags/16/Italy.png" alt="Italiano"/></a>
                     <a href="{% url set_language "es" %}"><img src="/static/icons/flags/16/Spain.png" alt="Español"/></a>
-                        <a href="{% url set_language "fr" %}"><img src="/static/icons/flags/16/France.png" alt="Français"/></a>
+                    <a href="{% url set_language "fr" %}"><img src="/static/icons/flags/16/France.png" alt="Français"/></a>
                     <!--
                     <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
                     -->
                 </div>
+
+                {% if user.is_authenticated and profile %}
+                    {% if not profile.language %}
+                        <div id="language-prompt">
+                            <div class="bubble">
+                                {% blocktrans %}
+                                    Please select your language from the options above.
+                                {% endblocktrans %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
 
                 <div id="hello">
                     {% if request.user.is_authenticated %}
@@ -245,7 +257,7 @@
                     <div class="col-a">
                         <h3>{% trans "About" %}</h3>
                         <p>
-                        {% trans "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
+                        {% trans "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
                         </p>
                     </div>
                     <div class="col-b">
@@ -267,6 +279,7 @@
                         <h3>{% trans "Thanks to" %}</h3>
                         <p>
                             <ul>
+                                <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">José J. Chambó</a>, <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent Schmitz</a>.
                                 <li><a href="http://simbad.u-strasbg.fr/simbad/" target="_blank">SIMBAD Astronomical Database</a></li>
                                 <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
                             </ul>
