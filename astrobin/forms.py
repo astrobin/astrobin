@@ -54,6 +54,15 @@ class ImageEditBasicForm(forms.ModelForm):
     def clean_link(self):
         return self.cleaned_data['link'].strip()
 
+    def clean(self):
+        subjects = self.data['as_values_subjects'].strip()
+        solar_system = self.cleaned_data['solar_system_main_subject']
+
+        if solar_system is None and (len(subjects) == 0 or subjects[0] == ''):
+            raise forms.ValidationError(_("Please enter either some subjects or a main solar system subject."));
+
+        return self.cleaned_data
+
     class Meta:
         model = Image
         fields = ('title', 'link', 'subjects', 'solar_system_main_subject', 'locations', 'description')
