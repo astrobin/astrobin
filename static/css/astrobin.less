@@ -2593,13 +2593,28 @@ table.title {
 }
 .album {
     margin-top: @spacer-large;
-    h4 {
-        display: inline-block;
+    .album-part {
+        background: (@dark-panel-color) url('/static/images/dark-panel-tile.png');
+        margin: 0 auto;
+        margin-bottom: @spacer-xxxlarge;
+        padding: @spacer-large;
+        .rounded-corners;
+        h4 {
+            display: inline-block;
+            font-size: 1.25em;
+            border-bottom: 1px solid @border-bottom-color;
+        }
+        .thumbnail-list {
+            padding: @spacer-medium 84px;
+        }
+    }
+    .album-part:last-child {
+        margin-bottom: 0;
     }
 }
 
 p.help {
-    margin: @spacer-medium  0 @spacer-xxlarge @spacer-small;
+    margin: @spacer-medium 0 @spacer-xxlarge @spacer-small;
 }
 
 .messages-search {
