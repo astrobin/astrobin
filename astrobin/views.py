@@ -1395,7 +1395,23 @@ def user_page(request, username):
 
                 sqs = Image.objects.none()
         elif subsection == 'nodata':
-            sqs = sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None) | (Q(subjects = None) & Q(solar_system_main_subject = None))).distinct()
+            l = _("Lacking data") + ": " + _("Subjects")
+            k_dict = {l: []}
+            for i in sqs.filter(Q(subjects = None) & (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))):
+                k_dict[l].append(i)
+
+            l = _("Lacking data") + ": " + _("Imaging telescopes or lenses") + ", " + _("Imaging cameras")
+            k_dict[l] = []
+            for i in sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None)):
+                k_dict[l].append(i)
+
+            l = _("Lacking data") + ": " + _("Acquisition details")
+            k_dict[l] = []
+            for i in sqs.filter(Q(acquisition = None)):
+                k_dict[l].append(i)
+
+            smart_albums.append(k_dict)
+            sqs = Image.objects.none()
 
         section = 'public'
 

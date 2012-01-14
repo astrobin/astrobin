@@ -115,6 +115,15 @@
 
         <div class="album">
             {% if section == 'public' and not image_list %}
+                {% if subsection == 'nodata' %}
+                <p>
+                    {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
+                    {% if request.user = user %}
+                        {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
+                    {% endif %}
+                </p>
+                {% endif %}
+
                 {% for album in smart_albums %}
                     {% for title, images in album.items %}
                         {% if images %}
@@ -136,14 +145,6 @@
                     {% if backlink %}
                         <span><a href="{{backlink}}">{% trans "(go back)" %}</a></span>
                     {% endif %}
-                {% endif %}
-                {% if subsection == 'nodata' %}
-                <p>
-                    {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
-                    {% if request.user = user %}
-                        {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
-                    {% endif %}
-                </p>
                 {% endif %}
                 {% if subsection == 'acquired' %}
                 <p>
