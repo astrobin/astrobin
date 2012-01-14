@@ -125,18 +125,20 @@
                 {% endif %}
 
                 {% for album in smart_albums %}
-                    {% for title, images in album.items %}
-                        {% if images %}
-                        <div class="album-part">
-                            <h4>{{title}}</h4>
-                            {% ifequal images|length 16 %}
-                                <span><a href="?public&sub={{subsection}}&{{subsection}}={{title}}">{% trans "(view more...)" %}</a></span>
-                            {% endifequal %}
-                            <div class="fix"></div>
-                            {% image_list request images 0 %} {% comment %}0 is for False (no pagination){% endcomment %}
-                            <div class="fix"></div>
-                        </div>
-                        {% endif %}
+                    {% for item in album %}
+                        {% for title, images in item.items %}
+                            {% if images %}
+                            <div class="album-part">
+                                <h4>{{title}}</h4>
+                                {% ifequal images|length 16 %}
+                                    <span><a href="?public&sub={{subsection}}&{{subsection}}={{title}}">{% trans "(view more...)" %}</a></span>
+                                {% endifequal %}
+                                <div class="fix"></div>
+                                {% image_list request images 0 %} {% comment %}0 is for False (no pagination){% endcomment %}
+                                <div class="fix"></div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
                     {% endfor %}
                 {% empty %}
                     {% blocktrans %}No images.{% endblocktrans %}
