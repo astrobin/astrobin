@@ -373,7 +373,7 @@
                 <div class="hline"></div>
                 <p>
                     {% trans "Contains" %}:
-                    {% if solar_system_main_subject %}
+                    {% if solar_system_main_subject >= 0 %}
                         <a href="/search/?q=&ssms={{solar_system_main_subject_id}}">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
                     {% endif %}
                     {% for s in subjects_short %}

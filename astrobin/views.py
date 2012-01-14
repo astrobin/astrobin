@@ -456,7 +456,7 @@ def image_detail(request, id):
                      'solved_ext': solved_ext,
 
                      'solar_system_main_subject_id': image.solar_system_main_subject,
-                     'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject else None,
+                     'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
                     }
 
     if 'upload_error' in request.GET:
