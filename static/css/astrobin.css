@@ -2790,6 +2790,10 @@ table.title td.license {
   width: 50%;
   float: right;
 }
+.stats .raw-data {
+  text-align: center;
+  margin-bottom: 12px;
+}
 .stats ul.bar {
   list-style: none;
   margin: 0 0 28px 0;

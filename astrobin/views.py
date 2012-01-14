@@ -2071,6 +2071,15 @@ def image_revision_upload_process(request):
 def stats(request):
     response_dict = {}
 
+    sqs = SearchQuerySet()
+
+    response_dict['total_users'] = sqs.filter(user_images__gt = 0).models(User).count() - 1
+    response_dict['total_images'] = sqs.filter().models(Image).count()
+    hours = 0
+    for i in sqs.filter().models(Image):
+        hours += i.integration
+    response_dict['total_integration'] = int(hours / 3600.0)
+
     sort = '-user_integration'
     if 'sort' in request.GET:
         sort = request.GET.get('sort')
@@ -2081,7 +2090,7 @@ def stats(request):
         elif sort == 'images':
             sort = '-user_images'
 
-    queryset = SearchQuerySet().filter().models(User).order_by(sort)
+    queryset = sqs.filter().models(User).order_by(sort)
     
     return object_list(
         request,
