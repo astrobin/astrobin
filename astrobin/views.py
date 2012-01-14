@@ -1309,6 +1309,7 @@ def user_page(request, username):
     backlink = None
 
     smart_albums = []
+    max_items = 16
     sqs = Image.objects.filter(user = user, is_stored = True).order_by('-uploaded')
     lad_sql = 'SELECT date FROM astrobin_acquisition '\
               'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\
@@ -1346,7 +1347,7 @@ def user_page(request, username):
                     for i in sqs.filter(acquisition__date__year = y).extra(
                         select = {'last_acquisition_date': lad_sql},
                         order_by = ['-last_acquisition_date']
-                    ).distinct()[:10]:
+                    ).distinct()[:max_items]:
                         k_dict[str(y)].append(i)
                 sqs = Image.objects.none()
         elif subsection == 'gear':
@@ -1363,7 +1364,7 @@ def user_page(request, username):
                     for k in qs:
                         k_dict = {k.name: []}
                         smart_albums.append(k_dict)
-                        for i in sqs.filter(**{filter: k}).distinct()[:10]:
+                        for i in sqs.filter(**{filter: k}).distinct()[:max_items]:
                             k_dict[k.name].append(i)
                 sqs = Image.objects.none()
         elif subsection == 'subject':
@@ -1385,7 +1386,7 @@ def user_page(request, username):
                     k_dict = {l: []}
                     smart_albums.append(k_dict)
                     r = reverse_subject_type(l)
-                    for i in sqs.filter(Q(subjects__otype__in = r)).distinct()[:10]:
+                    for i in sqs.filter(Q(subjects__otype__in = r)).distinct()[:max_items]:
                         k_dict[l].append(i)
 
                 k_dict = {_("Solar system"): []}

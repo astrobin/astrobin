@@ -2865,8 +2865,25 @@ table.title td.license {
 .album {
   margin-top: 12px;
 }
-.album h4 {
+.album .album-part {
+  background: #2e2e2e url('/static/images/dark-panel-tile.png');
+  margin: 0 auto;
+  margin-bottom: 52px;
+  padding: 12px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.album .album-part h4 {
   display: inline-block;
+  font-size: 1.25em;
+  border-bottom: 1px solid #404040;
+}
+.album .album-part .thumbnail-list {
+  padding: 8px 84px;
+}
+.album .album-part:last-child {
+  margin-bottom: 0;
 }
 p.help {
   margin: 8px 0 28px 4px;
