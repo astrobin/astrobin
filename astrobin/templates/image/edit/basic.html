@@ -100,6 +100,7 @@
 
                 var subjects = $('input[name=subjects]');
                 var subjects_values = $('input[name=as_values_subjects]');
+                var selection_items = $('li.as-selection-item');
                 var split_regex = /([A-Z]+)(\d+)/;
                 var split = split_regex.exec(m[0]);
                 if (split)
@@ -110,7 +111,13 @@
                 var subjects_regex = new RegExp(s + "\\b", "g");
                 var subjects_matches = subjects[0].defaultValue.toUpperCase().search(subjects_regex, "regex");
                 var subjects_values_matches = subjects_values.val().toUpperCase().search(subjects_regex, "regex");
-                if (subjects_matches == -1 && subjects_values_matches == -1) {
+                var selection_items_matches = -1;
+                selection_items.each(function() {
+                    value = this.innerText.toUpperCase();
+                    if (value == s)
+                        selection_items_matches += 1;
+                });
+                if (subjects_matches == -1 && subjects_values_matches == -1 && selection_items_matches == -1) {
                     // Let's add the subject to the auto suggest box
                     if (subjects.val() == startText)
                         subjects.val("");
@@ -127,15 +134,9 @@
             }
         }
 
-        var timer;
         var current_subjects = new Array();
-        $('input[name=title]').keydown(function(e) {
-            if (e.keyCode == 8 ) { //delete
-                // TODO
-            } else {
-                clearTimeout(timer);
-                timer = setTimeout(parse_subjects, 1000);
-            }
+        $('input[name=title]').blur(function(e) {
+                parse_subjects();
         });
 
         $('.submit-button').click(function() {
