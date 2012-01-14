@@ -2865,7 +2865,7 @@ table.title td.license {
 .album {
   margin-top: 12px;
 }
-.album .album-part {
+.album-part {
   background: #2e2e2e url('/static/images/dark-panel-tile.png');
   margin: 0 auto;
   margin-bottom: 52px;
@@ -2874,15 +2874,15 @@ table.title td.license {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-.album .album-part h4 {
+.album-part h4 {
   display: inline-block;
   font-size: 1.25em;
   border-bottom: 1px solid #404040;
 }
-.album .album-part .thumbnail-list {
+.album-part .thumbnail-list {
   padding: 8px 84px;
 }
-.album .album-part:last-child {
+.album-part:last-child {
   margin-bottom: 0;
 }
 p.help {
@@ -3191,4 +3191,10 @@ form#gear select {
 }
 .acquisition-session {
   margin-bottom: 16px;
+}
+.nightly h2 {
+  font-size: 1.5em;
+  text-align: center;
+  padding-bottom: 12px;
+  border: none;
 }
