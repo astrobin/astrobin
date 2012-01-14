@@ -1201,6 +1201,9 @@ form p.error input, form p.error textarea {
   width: 40px;
 }
 #navigation #user-nav > ul > li > a.active, #navigation #user-nav > ul > li > a:visited.active {
+  -moz-border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 6px 6px 0 0;
+  border-radius: 6px 6px 0 0;
   background: url('/static/images/popup-bg.png');
 }
 #navigation #user-nav > ul > li.text {
@@ -2173,7 +2176,7 @@ ul.topnav > li:hover {
   -webkit-border-radius: 6px 0 6px 6px;
   border-radius: 6px 0 6px 6px;
   right: 0;
-  top: 33px;
+  top: 32px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
   -moz-box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;
   box-shadow: rgba(0, 0, 0, 0.4) 0 3px 6px;

@@ -140,6 +140,11 @@
     -webkit-border-radius: @radius;
      border-radius: @radius;}
 
+.rounded-corners-top (@radius: 6px) {
+    -moz-border-radius: @radius @radius 0 0;
+    -webkit-border-radius: @radius @radius 0 0;
+     border-radius: @radius @radius 0 0;}
+
 .rounded-corners-bottom (@radius: 6px) {
     -moz-border-radius: 0 0 @radius @radius;
     -webkit-border-radius: 0 0 @radius @radius;
@@ -1292,6 +1297,7 @@ form {
                     width: 40px;
                 }
                 >a.active, >a:visited.active {
+                    .rounded-corners-top;
                     background: url('/static/images/popup-bg.png');}}
             >li.text {
                 height: 16px;
@@ -1971,7 +1977,7 @@ ul.topnav {
 .popup {
     .popup-mixin;
     .rounded-corners-bottom-left;
-    right: 0; top: 33px;
+    right: 0; top: 32px;
     .small-bottom-box-shadow;
     ul {
         margin: 0;
