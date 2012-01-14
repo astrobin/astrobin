@@ -2593,24 +2593,25 @@ table.title {
 }
 .album {
     margin-top: @spacer-large;
-    .album-part {
-        background: (@dark-panel-color) url('/static/images/dark-panel-tile.png');
-        margin: 0 auto;
-        margin-bottom: @spacer-xxxlarge;
-        padding: @spacer-large;
-        .rounded-corners;
-        h4 {
-            display: inline-block;
-            font-size: 1.25em;
-            border-bottom: 1px solid @border-bottom-color;
-        }
-        .thumbnail-list {
-            padding: @spacer-medium 84px;
-        }
+}
+
+.album-part {
+    background: (@dark-panel-color) url('/static/images/dark-panel-tile.png');
+    margin: 0 auto;
+    margin-bottom: @spacer-xxxlarge;
+    padding: @spacer-large;
+    .rounded-corners;
+    h4 {
+        display: inline-block;
+        font-size: 1.25em;
+        border-bottom: 1px solid @border-bottom-color;
     }
-    .album-part:last-child {
-        margin-bottom: 0;
+    .thumbnail-list {
+        padding: @spacer-medium 84px;
     }
+}
+.album-part:last-child {
+    margin-bottom: 0;
 }
 
 p.help {
@@ -2896,3 +2897,11 @@ form#gear {
     margin-bottom: @spacer-xlarge;
 }
 
+.nightly {
+    h2 {
+        font-size: 1.5em;
+        text-align: center;
+        padding-bottom: @spacer-large;
+        border: none;
+    }
+}
