@@ -62,7 +62,7 @@ class ImageEditBasicForm(forms.ModelForm):
         except MultiValueDictKeyError:
             return self.cleaned_data
 
-        if solar_system is None and (len(subjects) == 0 or subjects[0] in ('', ',')):
+        if solar_system is None and (len(subjects) == 0 or (len(subjects) == 1 and subjects[0] in ('', ','))):
             raise forms.ValidationError(_("Please enter either some subjects or a main solar system subject."));
 
         return self.cleaned_data
