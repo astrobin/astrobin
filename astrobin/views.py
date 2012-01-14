@@ -1342,11 +1342,12 @@ def user_page(request, username):
                 acq = Acquisition.objects.filter(image__user = user)
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
 
-                k_dict = {}
-                smart_albums.append(k_dict)
+                k_list = [] 
+                smart_albums.append(k_list)
 
                 for y in years:
-                    k_dict[str(y)] = []
+                    k_dict = {str(y): []}
+                    k_list.append(k_dict)
                     for i in sqs.filter(acquisition__date__year = y).extra(
                         select = {'last_acquisition_date': lad_sql},
                         order_by = ['-last_acquisition_date']
@@ -1354,7 +1355,8 @@ def user_page(request, username):
                         k_dict[str(y)].append(i)
 
                 l = _("No date specified")
-                k_dict[l] = []
+                k_dict = {l: []}
+                k_list.append(k_dict)
                 for i in sqs.filter(Q(acquisition = None) | Q(acquisition__date = None)).distinct():
                     k_dict[l].append(i)
                
@@ -1366,19 +1368,21 @@ def user_page(request, username):
                 subtitle = gear
                 backlink = "?public&sub=gear"
             else:
-                k_dict = {}
-                smart_albums.append(k_dict)
+                k_list = []
+                smart_albums.append(k_list)
                 for qs, filter in {
                     profile.telescopes.all(): 'imaging_telescopes',
                     profile.cameras.all(): 'imaging_cameras',
                 }.iteritems():
                     for k in qs:
-                        k_dict[k.name] = []
+                        k_dict = {k.name: []}
+                        k_list.append(k_dict)
                         for i in sqs.filter(**{filter: k}).distinct()[:max_items]:
                             k_dict[k.name].append(i)
 
                 l = _("No imaging telescopes or lenses, or no imaging cameras specified")
-                k_dict[l] = []
+                k_dict = {l: []}
+                k_list.append(k_dict)
                 for i in sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None)).distinct():
                     k_dict[l].append(i)
 
@@ -1398,42 +1402,51 @@ def user_page(request, username):
                 subtitle = subject_type
                 backlink = "?public&sub=subject"
             else:
-                k_dict = {}
-                smart_albums.append(k_dict)
+                k_list = []
+                smart_albums.append(k_list)
 
                 for l in SUBJECT_LABELS.values():
-                    k_dict[l] = []
+                    k_dict = {l: []}
+                    k_list.append(k_dict)
                     r = reverse_subject_type(l)
                     for i in sqs.filter(Q(subjects__otype__in = r)).distinct()[:max_items]:
                         k_dict[l].append(i)
 
-                k_dict[_("Solar system")] = []
+                l = _("Solar system")
+                k_dict = {l: []}
+                k_list.append(k_dict)
                 for i in sqs.filter(solar_system_main_subject__gte = 1):
-                    k_dict[_("Solar system")].append(i)
+                    k_dict[l].append(i)
 
                 l = _("No subjects specified")
-                k_dict[l] = []
+                k_dict = {l: []}
+                k_list.append(k_dict)
                 for i in sqs.filter(Q(subjects = None) & (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))).distinct():
                     k_dict[l].append(i)
 
                 sqs = Image.objects.none()
         elif subsection == 'nodata':
+            k_list = []
+            smart_albums.append(k_list)
+
             l = _("No subjects specified")
             k_dict = {l: []}
+            k_list.append(k_dict)
             for i in sqs.filter(Q(subjects = None) & (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))):
                 k_dict[l].append(i)
 
             l = _("No imaging telescopes or lenses, or no imaging cameras specified")
-            k_dict[l] = []
+            k_dict = {l: []}
+            k_list.append(k_dict)
             for i in sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None)):
                 k_dict[l].append(i)
 
             l = _("No acquisition details specified")
-            k_dict[l] = []
+            k_dict = {l: []}
+            k_list.append(k_dict)
             for i in sqs.filter(Q(acquisition = None)):
                 k_dict[l].append(i)
 
-            smart_albums.append(k_dict)
             sqs = Image.objects.none()
 
         section = 'public'
