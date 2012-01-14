@@ -10,18 +10,24 @@
             {% blocktrans %}<strong>{{total_users}}</strong> users uploaded <strong>{{total_images}}</strong> images, reaching <strong>{{total_integration}}</strong> hours of integration time.{% endblocktrans %}
         </div>
         <div class="plots">
-            <h2>{% trans "Total integration hours in the last 12 months" %}</h2>
+            <h2>
+                {% if 's_ihp' in request.GET and request.GET.s_ihp == 'daily' %}
+                    {% trans "Total integration hours in the last 30 days" %}
+                {% else %}
+                    {% trans "Total integration hours in the last 12 months" %}
+                {% endif %}
+            </h2>
             <a name="stats_integration_hours_anchor"></a>
             <ul class="bar">
                 <li id="menu">
                     <ul class="topnav">
                         <li class="first last">
-                            <span class="text"><a href="#">{% trans "Show by period" %}</a></span>
+                            <span class="text"><a href="#">{% trans "Plot by" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
                                 <ul class="subnav">
-                                    <li><span class="text"><a href="{% query_string "s_ihp='monthly'" "" %}#stats_integration_hours_anchor">{% trans "Monthly" %}</a></span></li>
-                                    <li><span class="text"><a href="{% query_string "s_ihp='daily'" "" %}#stats_integration_hours_anchor">{% trans "Daily" %}</a></span></li>
+                                    <li><span class="text"><a href="{% query_string "s_ihp='monthly'" "" %}#stats_integration_hours_anchor">{% trans "Month" %}</a></span></li>
+                                    <li><span class="text"><a href="{% query_string "s_ihp='daily'" "" %}#stats_integration_hours_anchor">{% trans "Day" %}</a></span></li>
                                 </ul>
                             </div>
                         </li>
@@ -89,7 +95,11 @@ $(document).ready(function() {
     stats.plot(
         '#stats_integration_hours',
         {% if 's_ihp' in request.GET %}
-        "{% url stats_integration_hours 'astrobin' request.GET.s_ihp 365 %}",
+            {% if request.GET.s_ihp == 'monthly' %}
+                "{% url stats_integration_hours 'astrobin' 'monthly' 365 %}",
+            {% else %}
+                "{% url stats_integration_hours 'astrobin' 'daily' 30 %}",
+            {% endif %}
         {% else %}
         "{% url stats_integration_hours 'astrobin' 'monthly' 365 %}",
         {% endif %}
