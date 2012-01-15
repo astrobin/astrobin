@@ -40,7 +40,7 @@
 @spacer-xxlarge: @spacer-small * 7;
 @spacer-xxxlarge: @spacer-small * 13;
 
-@footer-height: 268px;
+@footer-height: 274px;
 @wrap-shadow-offset: 0px;
 @site-width: 960px;
 
@@ -2134,6 +2134,7 @@ span.copy-box {
 /* footer */
 #footer {
     position: absolute;
+    z-index: 2;
     bottom: 0 - @wrap-shadow-offset;
     height: @footer-height;
     .box-shadow;
@@ -2150,7 +2151,7 @@ span.copy-box {
 
 #footer-wrap {
     float: left;
-    padding: 20px 30px;
+    padding: 12px 30px;
     display: inline;
     width: 100%;
     h3 {
