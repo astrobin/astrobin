@@ -1066,10 +1066,6 @@ form p.error input, form p.error textarea {
   margin: 0 4px 0 0;
   padding: 0;
 }
-#header #hello {
-  float: right;
-  margin: 8px 12px 0 0;
-}
 #header #languages {
   float: right;
   margin-top: 8px;
@@ -1125,6 +1121,8 @@ form p.error input, form p.error textarea {
 #navigation {
   width: 960px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 #navigation #nav-container {
   margin-top: 16px;
@@ -1183,10 +1181,10 @@ form p.error input, form p.error textarea {
   display: inline;
 }
 #navigation #user-nav > ul > li {
-  z-index: 1001;
+  padding: 0;
+  z-index: 1999;
   /* Thanks, IE7 :/ */
 
-  padding: 0;
   position: relative;
   float: left;
   margin: 0;
@@ -1208,15 +1206,18 @@ form p.error input, form p.error textarea {
 }
 #navigation #user-nav > ul > li.text {
   height: 16px;
-  padding: 8px 0;
+  padding: 8px 0 8px 8px;
 }
-#navigation #user-nav > ul > li.text a,
-#navigation #user-nav > ul > li.text a,
-#navigation #user-nav > ul > li.text a:visited,
-#navigation #user-nav > ul > li.text a:active {
-  background: none;
-  text-transform: lowercase;
-  padding: 8px 10px;
+#navigation #user-nav > ul > li.text a, #navigation #user-nav > ul > li.text a:visited, #navigation #user-nav > ul > li.text a:active {
+  padding: 8px;
+}
+#navigation #user-nav > ul > li.text a .icon img, #navigation #user-nav > ul > li.text a:visited .icon img, #navigation #user-nav > ul > li.text a:active .icon img {
+  height: 8px;
+  width: 8px;
+  visibility: hidden;
+}
+#navigation #user-nav > ul > li.text a:hover .icon img {
+  visibility: visible;
 }
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
@@ -1457,8 +1458,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 #content-wrap {
   clear: both;
   width: 100%;
-  padding-bottom: 256px;
+  padding-bottom: 262px;
   background: #333333 url('/static/images/content-tile.png');
+  position: relative;
+  z-index: 1;
 }
 #content {
   float: left;
@@ -2124,7 +2127,9 @@ ul.topnav > li:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  z-index: 999;
+  z-index: 2000;
+  /* Thanks, IE :-/ */
+
   text-shadow: white 0 1px 0;
   left: 0px;
   top: 20px;
@@ -2180,7 +2185,9 @@ ul.topnav > li:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  z-index: 999;
+  z-index: 2000;
+  /* Thanks, IE :-/ */
+
   text-shadow: white 0 1px 0;
   -moz-border-radius: 6px 0 6px 6px;
   -webkit-border-radius: 6px 0 6px 6px;
@@ -2237,8 +2244,8 @@ li:hover > .sub, .sub:hover {
 #notifications-popup, #requests-popup {
   width: 250px;
 }
-#profile-popup, #profile-popup li a {
-  width: 125px;
+#profile-popup {
+  width: 150px;
 }
 ul.subnav {
   list-style: none;
@@ -2349,8 +2356,9 @@ span.copy-box {
 /* footer */
 #footer {
   position: absolute;
+  z-index: 2;
   bottom: 0px;
-  height: 268px;
+  height: 274px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -2367,7 +2375,7 @@ span.copy-box {
 }
 #footer-wrap {
   float: left;
-  padding: 20px 30px;
+  padding: 12px 30px;
   display: inline;
   width: 100%;
 }
