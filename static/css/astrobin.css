@@ -2094,6 +2094,12 @@ ul.topnav > li:hover {
 }
 #image-detail #description {
   margin: 0 0 28px 0;
+  border: 1px solid #2e2e2e;
+  border-top: 1px solid #474747;
+  background: #393939 url('/static/images/light-panel-tile.png');
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
 }
 #image-detail #description p {
   padding: 8px 4px;
@@ -2295,9 +2301,9 @@ span.copy-box {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-#technical-card, #description {
-  margin: 0 auto 25px auto;
-  padding: 8px 10px;
+#technical-card {
+  margin-bottom: 12px;
+  padding: 12px;
   border: 1px solid #2e2e2e;
   border-top: 1px solid #474747;
   overflow: auto;
@@ -2306,32 +2312,35 @@ span.copy-box {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-#technical-card h3, #description h3 {
+#technical-card h3 {
   display: inline-block;
+}
+#technical-card .left, #technical-card .right {
+  width: 50%;
+  float: left;
+}
+#technical-card .left .container, #technical-card .right .container {
+  padding: 12px;
+}
+#technical-card .right .container {
+  border-left: 1px solid #404040;
 }
 #technical-card .gear,
-#description .gear,
 #technical-card .acquisition,
-#description .acquisition {
-  float: left;
-  width: 48%;
-  display: inline-block;
+#technical-card .histogram,
+#technical-card .astrometry {
+  padding: 4px;
 }
-#technical-card .gear, #description .gear {
-  border-right: 1px solid #404040;
-  margin-right: 20px;
-}
-#technical-card .acquisition, #description .acquisition {
-  padding-left: 5px;
-}
-#technical-card .acquisition img, #description .acquisition img {
-  border: 1px solid #333333;
-}
-#technical-card .astrometry, #description .astrometry {
-  display: block;
+#technical-card .histogram {
   border-top: 1px solid #404040;
 }
-#technical-card p, #description p {
+#technical-card .histogram img {
+  border: 1px solid #333333;
+}
+#technical-card .astrometry {
+  border-top: 1px solid #404040;
+}
+#technical-card p {
   margin: 2px 0;
 }
 /* footer */
