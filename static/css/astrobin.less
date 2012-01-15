@@ -40,7 +40,7 @@
 @spacer-xxlarge: @spacer-small * 7;
 @spacer-xxxlarge: @spacer-small * 13;
 
-@footer-height: 268px;
+@footer-height: 274px;
 @wrap-shadow-offset: 0px;
 @site-width: 960px;
 
@@ -1176,11 +1176,6 @@ form {
         }
     }
 
-    #hello {
-        float: right;
-        margin: 8px @spacer-large 0 0;
-    }
-
     #languages {
         float: right;
         margin-top: 8px;
@@ -1232,6 +1227,8 @@ form {
 #navigation {
     width: @site-width;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 
     #nav-container {
         margin-top: 16px;
@@ -1282,8 +1279,8 @@ form {
             list-style: none;
             display: inline;
             >li {
-                z-index: 1001; /* Thanks, IE7 :/ */
                 padding: 0;
+                z-index: 1999; /* Thanks, IE7 :/ */
                 position: relative;
                 float: left;
                 margin: 0;
@@ -1298,15 +1295,30 @@ form {
                 }
                 >a.active, >a:visited.active {
                     .rounded-corners-top;
-                    background: url('/static/images/popup-bg.png');}}
+                    background: url('/static/images/popup-bg.png');
+                }
+            }
             >li.text {
                 height: 16px;
-                padding: 8px 0;
+                padding: 8px 0 8px 8px;
 
-                a, a, a:visited, a:active {
-                    background: none;
-                    text-transform: lowercase;
-                    padding: 8px 10px;}}}}}
+                a, a:visited, a:active {
+                    padding: 8px;
+                    .icon {
+                        img {
+                            height: 8px;
+                            width: 8px;
+                            visibility: hidden;
+                        }
+                    }
+                }
+                a:hover .icon img {
+                    visibility: visible;
+                }
+            }
+        }
+    }
+}
 
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
@@ -1523,6 +1535,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: 100%;
     padding-bottom: @footer-height - @wrap-shadow-offset - @spacer-large;
     background: (@background-color) url('/static/images/content-tile.png');
+    position: relative;
+    z-index: 1;
 }
 
 #content {
@@ -1951,7 +1965,7 @@ ul.topnav {
     background: url('/static/images/popup-bg.png');
     .rounded-corners;
     .box-shadow;
-    z-index: 999;
+    z-index: 2000; /* Thanks, IE :-/ */
     text-shadow: white 0 1px 0;
     strong {
         color: @background-color / @hilight-factor;
@@ -2017,9 +2031,8 @@ li:hover >.sub, .sub:hover {
 #requests-popup {
     width: 250px;
 }
-#profile-popup,
-#profile-popup li a {
-    width: 125px;}
+#profile-popup {
+    width: 150px;}
 
 ul.subnav {
     list-style: none;
@@ -2128,6 +2141,7 @@ span.copy-box {
 /* footer */
 #footer {
     position: absolute;
+    z-index: 2;
     bottom: 0 - @wrap-shadow-offset;
     height: @footer-height;
     .box-shadow;
@@ -2144,7 +2158,7 @@ span.copy-box {
 
 #footer-wrap {
     float: left;
-    padding: 20px 30px;
+    padding: 12px 30px;
     display: inline;
     width: 100%;
     h3 {
