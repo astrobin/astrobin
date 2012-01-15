@@ -1,6 +1,7 @@
 from django import forms
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.datastructures import MultiValueDictKeyError
 
 from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet, EmptySearchQuerySet
@@ -53,6 +54,18 @@ class ImageEditBasicForm(forms.ModelForm):
 
     def clean_link(self):
         return self.cleaned_data['link'].strip()
+
+    def clean(self):
+        try:
+            subjects = self.data['as_values_subjects'].strip()
+            solar_system = self.cleaned_data['solar_system_main_subject']
+        except MultiValueDictKeyError:
+            return self.cleaned_data
+
+        if solar_system is None and (len(subjects) == 0 or (len(subjects) == 1 and subjects[0] in ('', ','))):
+            raise forms.ValidationError(_("Please enter either some subjects or a main solar system subject."));
+
+        return self.cleaned_data
 
     class Meta:
         model = Image
@@ -230,29 +243,41 @@ class ImageRevisionUploadForm(forms.Form):
 
 
 class AdvancedSearchForm(SearchForm):
+    solar_system_main_subject = forms.ChoiceField(
+        required = False,
+        choices = (('', '---------'),) + SOLAR_SYSTEM_SUBJECT_CHOICES,
+    )
+
     imaging_telescopes = forms.CharField(
         required = False
     )
+
     imaging_cameras = forms.CharField(
         required = False
     )
+
     start_date = forms.DateField(
         required=False,
         widget=forms.TextInput(attrs={'class':'datepickerclass'}),
         help_text=_("Please use the following format: yyyy-mm-dd"))
+
     end_date = forms.DateField(
         required=False,
         widget=forms.TextInput(attrs={'class':'datepickerclass'}),
         help_text=_("Please use the following format: yyyy-mm-dd"))
+
     integration_min = forms.FloatField(
         required=False,
         help_text=_("Express value in hours"))
+
     integration_max = forms.FloatField(
         required=False,
         help_text=_("Express value in hours"))
+
     moon_phase_min = forms.FloatField(
         required=False,
         help_text="0-100")
+
     moon_phase_max = forms.FloatField(
         required=False,
         help_text="0-100")
@@ -261,6 +286,7 @@ class AdvancedSearchForm(SearchForm):
         super(AdvancedSearchForm, self).__init__(data, **kwargs)
         self.fields['q'].help_text = _("Search for astronomical objects, telescopes or lenses, cameras, filters...")
 
+        self.fields['solar_system_main_subject'].label = _("Main solar system subject")
         self.fields['imaging_telescopes'].label = _("Imaging telescopes or lenses")
         self.fields['imaging_cameras'].label = _("Imaging cameras")
         self.fields['start_date'].label = _("Acquired after")
@@ -283,6 +309,9 @@ class AdvancedSearchForm(SearchForm):
                     sqs = sqs.load_all()
             else:
                 sqs = super(AdvancedSearchForm, self).search().models(Image)
+
+            if self.cleaned_data['solar_system_main_subject']:
+                sqs = sqs.filter(solar_system_main_subject = self.cleaned_data['solar_system_main_subject'])
 
             if self.cleaned_data['start_date']:
                 sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
