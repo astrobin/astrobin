@@ -1176,11 +1176,6 @@ form {
         }
     }
 
-    #hello {
-        float: right;
-        margin: 8px @spacer-large 0 0;
-    }
-
     #languages {
         float: right;
         margin-top: 8px;
@@ -1298,15 +1293,30 @@ form {
                 }
                 >a.active, >a:visited.active {
                     .rounded-corners-top;
-                    background: url('/static/images/popup-bg.png');}}
+                    background: url('/static/images/popup-bg.png');
+                }
+            }
             >li.text {
                 height: 16px;
-                padding: 8px 0;
+                padding: 8px 0 8px 8px;
 
-                a, a, a:visited, a:active {
-                    background: none;
-                    text-transform: lowercase;
-                    padding: 8px 10px;}}}}}
+                a, a:visited, a:active {
+                    padding: 8px;
+                    .icon {
+                        img {
+                            height: 8px;
+                            width: 8px;
+                            visibility: hidden;
+                        }
+                    }
+                }
+                a:hover .icon img {
+                    visibility: visible;
+                }
+            }
+        }
+    }
+}
 
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
@@ -2010,9 +2020,8 @@ li:hover >.sub, .sub:hover {
 #requests-popup {
     width: 250px;
 }
-#profile-popup,
-#profile-popup li a {
-    width: 125px;}
+#profile-popup {
+    width: 150px;}
 
 ul.subnav {
     list-style: none;

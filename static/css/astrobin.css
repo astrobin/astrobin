@@ -1066,10 +1066,6 @@ form p.error input, form p.error textarea {
   margin: 0 4px 0 0;
   padding: 0;
 }
-#header #hello {
-  float: right;
-  margin: 8px 12px 0 0;
-}
 #header #languages {
   float: right;
   margin-top: 8px;
@@ -1208,15 +1204,18 @@ form p.error input, form p.error textarea {
 }
 #navigation #user-nav > ul > li.text {
   height: 16px;
-  padding: 8px 0;
+  padding: 8px 0 8px 8px;
 }
-#navigation #user-nav > ul > li.text a,
-#navigation #user-nav > ul > li.text a,
-#navigation #user-nav > ul > li.text a:visited,
-#navigation #user-nav > ul > li.text a:active {
-  background: none;
-  text-transform: lowercase;
-  padding: 8px 10px;
+#navigation #user-nav > ul > li.text a, #navigation #user-nav > ul > li.text a:visited, #navigation #user-nav > ul > li.text a:active {
+  padding: 8px;
+}
+#navigation #user-nav > ul > li.text a .icon img, #navigation #user-nav > ul > li.text a:visited .icon img, #navigation #user-nav > ul > li.text a:active .icon img {
+  height: 8px;
+  width: 8px;
+  visibility: hidden;
+}
+#navigation #user-nav > ul > li.text a:hover .icon img {
+  visibility: visible;
 }
 /* AutoSuggest CSS - Version 1.2 */
 ul.as-selections {
@@ -2234,8 +2233,8 @@ li:hover > .sub, .sub:hover {
 #notifications-popup, #requests-popup {
   width: 250px;
 }
-#profile-popup, #profile-popup li a {
-  width: 125px;
+#profile-popup {
+  width: 150px;
 }
 ul.subnav {
   list-style: none;
