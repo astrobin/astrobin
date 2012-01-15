@@ -1121,6 +1121,8 @@ form p.error input, form p.error textarea {
 #navigation {
   width: 960px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 #navigation #nav-container {
   margin-top: 16px;
@@ -1179,10 +1181,10 @@ form p.error input, form p.error textarea {
   display: inline;
 }
 #navigation #user-nav > ul > li {
-  z-index: 1001;
+  padding: 0;
+  z-index: 1999;
   /* Thanks, IE7 :/ */
 
-  padding: 0;
   position: relative;
   float: left;
   margin: 0;
@@ -1455,6 +1457,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   width: 100%;
   padding-bottom: 256px;
   background: #333333 url('/static/images/content-tile.png');
+  position: relative;
+  z-index: 1;
 }
 #content {
   float: left;
@@ -2120,7 +2124,9 @@ ul.topnav > li:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  z-index: 999;
+  z-index: 2000;
+  /* Thanks, IE :-/ */
+
   text-shadow: white 0 1px 0;
   left: 0px;
   top: 20px;
@@ -2176,7 +2182,9 @@ ul.topnav > li:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  z-index: 999;
+  z-index: 2000;
+  /* Thanks, IE :-/ */
+
   text-shadow: white 0 1px 0;
   -moz-border-radius: 6px 0 6px 6px;
   -webkit-border-radius: 6px 0 6px 6px;

@@ -1227,6 +1227,8 @@ form {
 #navigation {
     width: @site-width;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 
     #nav-container {
         margin-top: 16px;
@@ -1277,8 +1279,8 @@ form {
             list-style: none;
             display: inline;
             >li {
-                z-index: 1001; /* Thanks, IE7 :/ */
                 padding: 0;
+                z-index: 1999; /* Thanks, IE7 :/ */
                 position: relative;
                 float: left;
                 margin: 0;
@@ -1526,6 +1528,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: 100%;
     padding-bottom: @footer-height - @wrap-shadow-offset - @spacer-large;
     background: (@background-color) url('/static/images/content-tile.png');
+    position: relative;
+    z-index: 1;
 }
 
 #content {
@@ -1954,7 +1958,7 @@ ul.topnav {
     background: url('/static/images/popup-bg.png');
     .rounded-corners;
     .box-shadow;
-    z-index: 999;
+    z-index: 2000; /* Thanks, IE :-/ */
     text-shadow: white 0 1px 0;
     strong {
         color: @background-color / @hilight-factor;
