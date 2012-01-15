@@ -1455,7 +1455,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 #content-wrap {
   clear: both;
   width: 100%;
-  padding-bottom: 256px;
+  padding-bottom: 262px;
   background: #333333 url('/static/images/content-tile.png');
   position: relative;
   z-index: 1;
@@ -2353,8 +2353,9 @@ span.copy-box {
 /* footer */
 #footer {
   position: absolute;
+  z-index: 2;
   bottom: 0px;
-  height: 268px;
+  height: 274px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -2371,7 +2372,7 @@ span.copy-box {
 }
 #footer-wrap {
   float: left;
-  padding: 20px 30px;
+  padding: 12px 30px;
   display: inline;
   width: 100%;
 }
