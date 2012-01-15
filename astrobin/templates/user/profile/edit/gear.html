@@ -38,7 +38,7 @@
 
         var startText = "{% trans "Enter partial name and wait for the suggestions!" %}";
         var emptyText = "{% trans "No results. Press TAB to add it!" %}";
-        var resultsTitleText = "{% trans "Matching items (press TAB to add what you typed instead):" %}";
+        var resultsTitleText = "{% trans "Click on a suggestion or press TAB to add what you typed" %}";
         {% autoescape off %}
         {% for key, value in prefill_dict.items %}
         $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',

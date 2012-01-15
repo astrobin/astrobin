@@ -1224,9 +1224,9 @@ ul.as-selections {
   width: 70%;
   overflow: auto;
   background-color: #333333;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
+  -moz-border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 6px 6px 0 0;
+  border-radius: 6px 6px 0 0;
 }
 ul.as-selections li {
   float: left;
@@ -1276,15 +1276,21 @@ ul.as-selections li.as-original input {
   padding-top: 3px;
   background-color: #333333;
 }
+ul.as-selections.loading {
+  background: #333333 url('/static/images/as-loading.gif') no-repeat;
+  background-position: 97.5% center;
+}
 input.as-input {
   background-color: #333333;
   font-size: 14px;
 }
 ul.as-list {
   position: absolute;
+  font-size: 90%;
   list-style-type: none;
-  margin: 2px 0 0 170px;
+  margin: -4px 0 0 162px;
   padding: 8px 4px;
+  width: 506px;
   z-index: 2;
   background: #b8b8b8;
   background: -moz-linear-gradient(top, #fcfcfc, #b8b8b8);
@@ -1292,12 +1298,9 @@ ul.as-list {
   border: 1px solid #2e2e2e;
   border-bottom: 1px solid #474747;
   color: #333333;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
 }
 ul.as-list h1 {
   color: #333333;
