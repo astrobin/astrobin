@@ -158,7 +158,7 @@ def index(request):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
-        'profile': profile,
+        'own_profile': profile,
         'upload_form': form,
     }
 
@@ -456,7 +456,7 @@ def image_detail(request, id):
                      'solved_ext': solved_ext,
 
                      'solar_system_main_subject_id': image.solar_system_main_subject,
-                     'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject else None,
+                     'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
                     }
 
     if 'upload_error' in request.GET:
@@ -1304,11 +1304,12 @@ def user_page(request, username):
     section = 'public'
     subsection = request.GET.get('sub')
     if not subsection:
-        subsection = 'uploaded'
+        subsection = 'year'
     subtitle = None
     backlink = None
 
     smart_albums = []
+    max_items = 16
     sqs = Image.objects.filter(user = user, is_stored = True).order_by('-uploaded')
     lad_sql = 'SELECT date FROM astrobin_acquisition '\
               'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\
@@ -1340,14 +1341,25 @@ def user_page(request, username):
             else:
                 acq = Acquisition.objects.filter(image__user = user)
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
+
+                k_list = [] 
+                smart_albums.append(k_list)
+
                 for y in years:
                     k_dict = {str(y): []}
-                    smart_albums.append(k_dict)
+                    k_list.append(k_dict)
                     for i in sqs.filter(acquisition__date__year = y).extra(
                         select = {'last_acquisition_date': lad_sql},
                         order_by = ['-last_acquisition_date']
-                    ).distinct()[:10]:
+                    ).distinct()[:max_items]:
                         k_dict[str(y)].append(i)
+
+                l = _("No date specified")
+                k_dict = {l: []}
+                k_list.append(k_dict)
+                for i in sqs.filter(Q(acquisition = None) | Q(acquisition__date = None)).distinct():
+                    k_dict[l].append(i)
+               
                 sqs = Image.objects.none()
         elif subsection == 'gear':
             if 'gear' in request.GET:
@@ -1356,15 +1368,24 @@ def user_page(request, username):
                 subtitle = gear
                 backlink = "?public&sub=gear"
             else:
+                k_list = []
+                smart_albums.append(k_list)
                 for qs, filter in {
                     profile.telescopes.all(): 'imaging_telescopes',
                     profile.cameras.all(): 'imaging_cameras',
                 }.iteritems():
                     for k in qs:
                         k_dict = {k.name: []}
-                        smart_albums.append(k_dict)
-                        for i in sqs.filter(**{filter: k}).distinct()[:10]:
+                        k_list.append(k_dict)
+                        for i in sqs.filter(**{filter: k}).distinct()[:max_items]:
                             k_dict[k.name].append(i)
+
+                l = _("No imaging telescopes or lenses, or no imaging cameras specified")
+                k_dict = {l: []}
+                k_list.append(k_dict)
+                for i in sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None)).distinct():
+                    k_dict[l].append(i)
+
                 sqs = Image.objects.none()
         elif subsection == 'subject':
             def reverse_subject_type(label):
@@ -1381,15 +1402,52 @@ def user_page(request, username):
                 subtitle = subject_type
                 backlink = "?public&sub=subject"
             else:
+                k_list = []
+                smart_albums.append(k_list)
+
                 for l in SUBJECT_LABELS.values():
                     k_dict = {l: []}
-                    smart_albums.append(k_dict)
+                    k_list.append(k_dict)
                     r = reverse_subject_type(l)
-                    for i in sqs.filter(Q(subjects__otype__in = r)).distinct()[:10]:
+                    for i in sqs.filter(Q(subjects__otype__in = r)).distinct()[:max_items]:
                         k_dict[l].append(i)
+
+                l = _("Solar system")
+                k_dict = {l: []}
+                k_list.append(k_dict)
+                for i in sqs.filter(solar_system_main_subject__gte = 1):
+                    k_dict[l].append(i)
+
+                l = _("No subjects specified")
+                k_dict = {l: []}
+                k_list.append(k_dict)
+                for i in sqs.filter(Q(subjects = None) & (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))).distinct():
+                    k_dict[l].append(i)
+
                 sqs = Image.objects.none()
         elif subsection == 'nodata':
-            sqs = sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None) | Q(subjects = None)).distinct()
+            k_list = []
+            smart_albums.append(k_list)
+
+            l = _("No subjects specified")
+            k_dict = {l: []}
+            k_list.append(k_dict)
+            for i in sqs.filter(Q(subjects = None) & (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))):
+                k_dict[l].append(i)
+
+            l = _("No imaging telescopes or lenses, or no imaging cameras specified")
+            k_dict = {l: []}
+            k_list.append(k_dict)
+            for i in sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None)):
+                k_dict[l].append(i)
+
+            l = _("No acquisition details specified")
+            k_dict = {l: []}
+            k_list.append(k_dict)
+            for i in sqs.filter(Q(acquisition = None)):
+                k_dict[l].append(i)
+
+            sqs = Image.objects.none()
 
         section = 'public'
 

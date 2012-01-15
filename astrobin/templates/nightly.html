@@ -3,7 +3,7 @@
 {% load tags %}
 
 {% block content %}
-    <div class="full-box clear">
+    <div class="full-box nightly clear">
         <h1>
             {% blocktrans %}Images acquired night after night{% endblocktrans %}
         </h1>
@@ -14,9 +14,12 @@
         {% for day in daily %}
             {% for title, images in day.items %}
                 {% if images %}
+                <div class="album-part">
                     <h4>{{title}}</h4>
+                    <div class="fix"></div>
                     {% image_list request images 0 %}
                     <div class="fix"></div>
+                </div>
                 {% endif %}
             {% endfor %}
         {% endfor %}

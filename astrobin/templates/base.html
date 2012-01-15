@@ -106,19 +106,8 @@
                     <!--
                     <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
                     -->
+                    {% block language_reminder %}{% endblock %}
                 </div>
-
-                {% if user.is_authenticated and profile %}
-                    {% if not profile.language %}
-                        <div id="language-prompt">
-                            <div class="bubble">
-                                {% blocktrans %}
-                                    Please select your language from the options above.
-                                {% endblocktrans %}
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endif %}
 
                 <div id="hello">
                     {% if request.user.is_authenticated %}
@@ -279,7 +268,7 @@
                         <h3>{% trans "Thanks to" %}</h3>
                         <p>
                             <ul>
-                                <li>{% trans "The localization team" %}: <a href="http://cometografia.es/">José J. Chambó</a>, Jean-Charles, Laurent Schmidt.
+                                <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">José J. Chambó</a>, <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent Schmitz</a>.
                                 <li><a href="http://simbad.u-strasbg.fr/simbad/" target="_blank">SIMBAD Astronomical Database</a></li>
                                 <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
                             </ul>

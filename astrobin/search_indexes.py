@@ -309,10 +309,10 @@ class ImageIndex(SearchIndex):
     def prepare_is_moon(self, obj):
         return obj.solar_system_main_subject == 1
 
-    def prepare_is_planet(self, obj):
+    def prepare_is_planets(self, obj):
         return obj.solar_system_main_subject in range(2, 8)
 
-    def prepare_is_planet(self, obj):
+    def prepare_is_comets(self, obj):
         return obj.solar_system_main_subject == 10
 
 

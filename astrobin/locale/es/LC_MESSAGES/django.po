@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 02:10-0500\n"
-"PO-Revision-Date: 2012-01-13 02:11-0500\n"
+"POT-Creation-Date: 2012-01-14 04:58-0500\n"
+"PO-Revision-Date: 2012-01-14 05:02-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: \n"
@@ -18,29 +18,29 @@ msgstr ""
 "X-Poedit-Country: SPAIN\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: forms.py:36
+#: forms.py:37
 msgid "If you're hosting a copy of this image on your website, put the address here."
 msgstr "Si tienes una copia de esta imagen en tu página web, introduce aquí su dirección."
 
-#: forms.py:41
+#: forms.py:42
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr "Si es posible, usa nombres de catálogo (M101, NGC224, IC1370, etc.)."
 
-#: forms.py:45
+#: forms.py:46
 msgid "The places from which you have taken this image."
 msgstr "Lugares desde los que has obtenido esta imagen."
 
-#: forms.py:50
+#: forms.py:51
 msgid "Link"
 msgstr "Enlace"
 
-#: forms.py:51
+#: forms.py:52
 #: templates/image/edit/basic.html:32
 msgid "Subjects"
 msgstr "Objetos"
 
-#: forms.py:52
-#: forms.py:153
+#: forms.py:53
+#: forms.py:166
 #: models.py:909
 #: views.py:363
 #: templates/image/edit/basic.html:37
@@ -48,178 +48,182 @@ msgid "Locations"
 msgstr "Ubicaciones"
 
 #: forms.py:66
+msgid "Please enter either some subjects or a main solar system subject."
+msgstr "Introduzca objetos, o un objeto principal del Sistema Solar."
+
+#: forms.py:79
 msgid "Opacity"
 msgstr "Opacidad"
 
-#: forms.py:67
+#: forms.py:80
 msgid "0 means invisible; 100 means completely opaque. Recommended values are: 10 if the watermark will appear on the dark sky background, 50 if on some bright object."
 msgstr "0 significa invisible, 100 completamente opaco. Valores recomendados: 10 para que la marca sea visible sobre un fondo de cielo oscuro, 50 para que lo sea sobre objetos brillantes."
 
-#: forms.py:80
+#: forms.py:93
 msgid "If you want to watermark this image, you must specify some text."
 msgstr "Si quieres poner una marca de agua a esta imagen, debes especificar algún texto."
 
-#: forms.py:107
-#: forms.py:264
+#: forms.py:120
+#: forms.py:277
 #: models.py:416
 msgid "Imaging telescopes or lenses"
 msgstr "Telescopios u objetivos"
 
-#: forms.py:108
+#: forms.py:121
 #: models.py:417
 msgid "Guiding telescopes or lenses"
 msgstr "Telescopios u objetivos de guiado"
 
-#: forms.py:109
-#: forms.py:192
+#: forms.py:122
+#: forms.py:205
 #: models.py:418
 #: models.py:925
 msgid "Mounts"
 msgstr "Monturas"
 
-#: forms.py:110
-#: forms.py:265
+#: forms.py:123
+#: forms.py:278
 #: models.py:419
 msgid "Imaging cameras"
 msgstr "Cámaras fotográficas o CCD"
 
-#: forms.py:111
+#: forms.py:124
 #: models.py:420
 msgid "Guiding cameras"
 msgstr "Cámaras de guiado"
 
-#: forms.py:112
-#: forms.py:194
+#: forms.py:125
+#: forms.py:207
 #: models.py:421
 #: models.py:927
 msgid "Focal reducers"
 msgstr "Reductores de focal"
 
-#: forms.py:113
-#: forms.py:195
+#: forms.py:126
+#: forms.py:208
 #: models.py:422
 #: models.py:928
 msgid "Software"
 msgstr "Programas"
 
-#: forms.py:114
-#: forms.py:196
+#: forms.py:127
+#: forms.py:209
 #: models.py:423
 #: models.py:929
 msgid "Filters"
 msgstr "Filtros"
 
-#: forms.py:115
-#: forms.py:197
+#: forms.py:128
+#: forms.py:210
 #: models.py:424
 #: models.py:930
 msgid "Accessories"
 msgstr "Accesorios"
 
-#: forms.py:137
+#: forms.py:150
 msgid "If you have a personal website, put the address here."
 msgstr "Si tienes una página web personal, introduce aquí su dirección."
 
-#: forms.py:144
+#: forms.py:157
 #: models.py:910
 msgid "These are the cities from which you usually image."
 msgstr "Estos son los lugares desde donde usualmente fotografías."
 
-#: forms.py:154
+#: forms.py:167
 #: models.py:877
-#: templates/user/profile.html:274
+#: templates/user/profile.html:277
 msgid "Website"
 msgstr "Página web"
 
-#: forms.py:160
+#: forms.py:173
 msgid "All the telescopes and lenses you own, including the ones you use for guiding, go here."
 msgstr "Introduce aquí todos tus telescopios y objetivos, incluyendo los que uses para guiado."
 
-#: forms.py:169
+#: forms.py:182
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr "Introduce aquí tus cámaras reflex, CCD, planetarias y cámaras de guiado."
 
-#: forms.py:182
+#: forms.py:195
 msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."
 msgstr "Consejo: introduce tus filtros por separado. Por ejemplo, si pones LRGB en un campo, no podrás añadir sesiones de adquisición de ellos por separado."
 
-#: forms.py:191
+#: forms.py:204
 #: models.py:924
 msgid "Telescopes and lenses"
 msgstr "Telescopios y objetivos"
 
-#: forms.py:193
+#: forms.py:206
 #: models.py:926
 msgid "Cameras"
 msgstr "Cámaras"
 
-#: forms.py:225
+#: forms.py:238
 #: templates/stats.html:61
 #: templates/image/detail.html:174
 msgid "User"
 msgstr "Usuario"
 
-#: forms.py:242
-#: forms.py:246
-#: forms.py:339
-#: forms.py:378
-#: forms.py:410
+#: forms.py:255
+#: forms.py:259
+#: forms.py:352
+#: forms.py:391
+#: forms.py:423
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Por favor, usa el siguiente formato: aaaa-mm-dd"
 
-#: forms.py:249
-#: forms.py:252
+#: forms.py:262
+#: forms.py:265
 msgid "Express value in hours"
 msgstr "Expresa el valor en horas"
 
-#: forms.py:262
+#: forms.py:275
 msgid "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr "Busca por objetos astronómicos, telescopios u objetivos, cámaras, filtros..."
 
-#: forms.py:266
+#: forms.py:279
 msgid "Acquired after"
 msgstr "Adquiridas después del"
 
-#: forms.py:267
+#: forms.py:280
 msgid "Acquired before"
 msgstr "Adquiridas antes del"
 
-#: forms.py:268
+#: forms.py:281
 msgid "Min. integration"
 msgstr "Tiempo mínimo de integración"
 
-#: forms.py:269
+#: forms.py:282
 msgid "Max. integration"
 msgstr "Tiempo máximo de integración"
 
-#: forms.py:270
+#: forms.py:283
 msgid "Min. Moon phase %"
 msgstr "% Fase lunar mínima"
 
-#: forms.py:271
+#: forms.py:284
 msgid "Max. Moon phase %"
 msgstr "% Fase lunar máxima"
 
-#: forms.py:311
+#: forms.py:324
 msgid "For example: +12.44"
 msgstr "Por ejemplo: +12.44"
 
-#: forms.py:314
+#: forms.py:327
 msgid "For example: -51.25"
 msgstr "Por ejemplo: -51.25"
 
-#: forms.py:344
+#: forms.py:357
 msgid "Please enter a value between 1 and 5."
 msgstr "Por favor, introduce un valor entre 1 y 5."
 
-#: forms.py:349
+#: forms.py:362
 msgid "Please enter a value between 1 and 10."
 msgstr "Por favor, introduce un valor entre 1 y 10."
 
-#: forms.py:391
+#: forms.py:404
 #: models.py:615
 #: models.py:828
-#: templates/image/detail.html:479
+#: templates/image/detail.html:477
 msgid "Date"
 msgstr "Fecha"
 
@@ -297,8 +301,8 @@ msgid "Open clusters"
 msgstr "Cúmulos abiertos"
 
 #: models.py:45
-#: templates/index.html:118
-#: templates/index.html.py:120
+#: templates/index.html:130
+#: templates/index.html.py:132
 msgid "Nebulae"
 msgstr "Nebulosas"
 
@@ -307,14 +311,14 @@ msgid "Planetary nebulae"
 msgstr "Nebulosas planetarias"
 
 #: models.py:47
-#: templates/index.html:124
-#: templates/index.html.py:126
+#: templates/index.html:136
+#: templates/index.html.py:138
 msgid "Galaxies"
 msgstr "Galaxias"
 
 #: models.py:68
-#: templates/index.html:139
-#: templates/index.html.py:141
+#: templates/index.html:151
+#: templates/index.html.py:153
 msgid "Sun"
 msgstr "Sol"
 
@@ -399,7 +403,7 @@ msgstr "Etiqueta"
 #: models.py:138
 #: models.py:359
 #: models.py:767
-#: templates/image/detail.html:491
+#: templates/image/detail.html:489
 msgid "Focal length"
 msgstr "Longitud focal"
 
@@ -461,7 +465,7 @@ msgid "If the main subject of your image is a body in the solar system, please s
 msgstr "Si el objeto principal de tu imagen es un cuerpo del Sistema Solar, por favor selecciona cuál es (o escríbelo)."
 
 #: models.py:331
-#: templates/image/detail.html:532
+#: templates/image/detail.html:530
 #: templates/image/edit/basic.html:46
 msgid "Description"
 msgstr "Descripción"
@@ -691,7 +695,7 @@ msgid "The total number of frames you have stacked."
 msgstr "Número de tomas de luz que has apilado."
 
 #: models.py:758
-#: templates/image/detail.html:488
+#: templates/image/detail.html:486
 msgid "FPS"
 msgstr "FPS"
 
@@ -704,7 +708,7 @@ msgid "The focal length of the whole optical train, including barlow lenses or o
 msgstr "La longitud focal de todo el tren óptico, incluyendo lentes barlow u otros elementos."
 
 #: models.py:774
-#: templates/image/detail.html:494
+#: templates/image/detail.html:492
 msgid "CMI"
 msgstr "CMI"
 
@@ -713,7 +717,7 @@ msgid "Latitude of the first Central Meridian."
 msgstr "Latitud del primer Meridiano Central."
 
 #: models.py:783
-#: templates/image/detail.html:497
+#: templates/image/detail.html:495
 msgid "CMII"
 msgstr "CMII"
 
@@ -722,7 +726,7 @@ msgid "Latitude of the second Central Meridian."
 msgstr "Latitud del segundo Meridiano Central."
 
 #: models.py:792
-#: templates/image/detail.html:500
+#: templates/image/detail.html:498
 msgid "CMIII"
 msgstr "CMIII"
 
@@ -731,7 +735,7 @@ msgid "Latitude of the third Central Meridian."
 msgstr "Latitud del tercer Meridiano Central."
 
 #: models.py:801
-#: templates/image/detail.html:503
+#: templates/image/detail.html:501
 msgid "Seeing"
 msgstr "Seeing"
 
@@ -740,7 +744,7 @@ msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "Tu estimación del seeing, en una escala de 1 a 5."
 
 #: models.py:808
-#: templates/image/detail.html:506
+#: templates/image/detail.html:504
 msgid "Transparency"
 msgstr "Transparencia"
 
@@ -749,7 +753,7 @@ msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "Tu estimación de la transparencia, en una escala de 1 a 10."
 
 #: models.py:815
-#: templates/image/detail.html:482
+#: templates/image/detail.html:480
 msgid "Time"
 msgstr "Hora"
 
@@ -774,12 +778,12 @@ msgid "Higher resolution"
 msgstr "Resolución máxima"
 
 #: models.py:884
-#: templates/user/profile.html:278
+#: templates/user/profile.html:281
 msgid "Job"
 msgstr "Trabajo"
 
 #: models.py:891
-#: templates/user/profile.html:282
+#: templates/user/profile.html:285
 msgid "Hobbies"
 msgstr "Aficiones"
 
@@ -886,7 +890,7 @@ msgid "Dates"
 msgstr "Fechas"
 
 #: views.py:364
-#: templates/image/detail.html:485
+#: templates/image/detail.html:483
 msgid "Frames"
 msgstr "Tomas"
 
@@ -971,12 +975,36 @@ msgstr "Tiempo de integración total"
 msgid "Average integration time"
 msgstr "Tiempo de integración medio"
 
-#: views.py:1973
+#: views.py:1356
+msgid "No date specified"
+msgstr "No hay fecha especificada"
+
+#: views.py:1380
+#: views.py:1426
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "No hay telescopios u objectivos, o no hay cámaras fotográficas especificadas"
+
+#: views.py:1410
+#: views.py:1412
+#: templates/image/edit/acquisition.html:98
+msgid "Solar system"
+msgstr "Sistema Solar"
+
+#: views.py:1414
+#: views.py:1421
+msgid "No subjects specified"
+msgstr "No hay objetos espedificados"
+
+#: views.py:1431
+msgid "No acquisition details specified"
+msgstr "No hay detalles de adquisición especificados"
+
+#: views.py:2018
 #, python-format
 msgid "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> ha pedido información adicional sobre tu imagen."
 
-#: views.py:1997
+#: views.py:2042
 #, python-format
 msgid "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr "<strong>%s</strong> ha solicitado ver tu imagen en formato TIFF o FITS."
@@ -1047,186 +1075,176 @@ msgstr "Búsqueda rápida"
 msgid "Start typing and hit ENTER"
 msgstr "Empieza a escribir y pulsa ENTER"
 
-#: templates/base.html:115
-msgid ""
-"\n"
-"                                    Please select your language from the options above.\n"
-"                                "
-msgstr ""
-"\n"
-"                                    Por favor, selecciona tu idioma de entre las opciones mostradas.\n"
-"                                "
-
-#: templates/base.html:127
+#: templates/base.html:116
 #, python-format
 msgid "Hello, <a href=\"%(user_page)s\">%(username)s.</a>"
 msgstr "Hola <a href=\"%(user_page)s\">%(username)s.</a>"
 
-#: templates/base.html:139
-#: templates/base.html.py:267
-#: templates/base.html:309
+#: templates/base.html:128
+#: templates/base.html.py:256
+#: templates/base.html:298
 msgid "Home"
 msgstr "Inicio"
 
-#: templates/base.html:140
-#: templates/base.html.py:268
+#: templates/base.html:129
+#: templates/base.html.py:257
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/base.html:141
-#: templates/base.html.py:269
+#: templates/base.html:130
+#: templates/base.html.py:258
 #: templates/search/search.html:12
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/base.html:143
-#: templates/base.html.py:270
+#: templates/base.html:132
+#: templates/base.html.py:259
 #: templates/stats.html:6
-#: templates/user/profile.html:263
+#: templates/user/profile.html:266
 msgid "Stats"
 msgstr "Estadísticas"
 
-#: templates/base.html:145
-#: templates/base.html.py:271
+#: templates/base.html:134
+#: templates/base.html.py:260
 msgid "Nightly"
 msgstr "Nocturnario"
 
-#: templates/base.html:146
-#: templates/base.html.py:272
+#: templates/base.html:135
+#: templates/base.html.py:261
 #: templates/help.html:4
 msgid "Help"
 msgstr "Ayuda"
 
-#: templates/base.html:147
-#: templates/base.html.py:273
+#: templates/base.html:136
+#: templates/base.html.py:262
 #: templates/faq.html:4
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/base.html:160
+#: templates/base.html:149
 msgid "View your profile"
 msgstr "Ver tu perfil"
 
-#: templates/base.html:163
+#: templates/base.html:152
 msgid "Edit your profile"
 msgstr "Editar tu perfil"
 
-#: templates/base.html:166
+#: templates/base.html:155
 msgid "Upload an image"
 msgstr "Subir una imagen"
 
-#: templates/base.html:166
+#: templates/base.html:155
 msgid "Upload!"
 msgstr "¡Subir!"
 
-#: templates/base.html:169
-#: templates/user/profile.html:321
-#: templates/user/profile.html.py:324
+#: templates/base.html:158
+#: templates/user/profile.html:324
+#: templates/user/profile.html.py:327
 msgid "Logout"
 msgstr "Desconectar"
 
-#: templates/base.html:176
-#: templates/base.html.py:177
+#: templates/base.html:165
+#: templates/base.html.py:166
 msgid "Notifications"
 msgstr "Avisos"
 
-#: templates/base.html:184
-#: templates/base.html.py:185
+#: templates/base.html:173
+#: templates/base.html.py:174
 #: templates/messages/inbox.html:12
 msgid "Messages"
 msgstr "Mensajes"
 
-#: templates/base.html:189
-#: templates/base.html.py:190
+#: templates/base.html:178
+#: templates/base.html.py:179
 msgid "Requests"
 msgstr "Peticiones"
 
-#: templates/base.html:200
+#: templates/base.html:189
 msgid "Have an invite? Login!"
 msgstr "¿Eres un invitado? ¡Conectate!"
 
-#: templates/base.html:202
+#: templates/base.html:191
 #: templates/registration/activation_complete.html:5
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: templates/base.html:208
+#: templates/base.html:197
 #: templates/registration/login.html:8
 msgid "Register"
 msgstr "Registrarse"
 
-#: templates/base.html:229
-#: templates/base.html.py:239
+#: templates/base.html:218
+#: templates/base.html.py:228
 msgid "Error"
 msgstr "Error"
 
-#: templates/base.html:231
+#: templates/base.html:220
 #: templates/image/detail.html:16
 msgid "Info"
 msgstr "Info"
 
-#: templates/base.html:241
+#: templates/base.html:230
 msgid "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr "Imagen no válida o no disponible. Los formatos permitidos son JPG, PNG y GIF."
 
-#: templates/base.html:258
-#: templates/user/profile.html:286
+#: templates/base.html:247
+#: templates/user/profile.html:289
 msgid "About"
 msgstr "Acerca de"
 
-#: templates/base.html:260
+#: templates/base.html:249
 msgid "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers."
 msgstr "AstroBin es un sitio web para el alojamiento de imágenes específicamente dirigido a los astrofotógrafos: es el primer y último lugar donde necesitarás subir tus imágenes astrofotográficas. Hecho por un astrofotógrafo, para astrofotógrafos."
 
-#: templates/base.html:264
+#: templates/base.html:253
 msgid "Site links"
 msgstr "Enlaces del sitio"
 
-#: templates/base.html:274
+#: templates/base.html:263
 #: templates/tos.html:6
 msgid "Terms of Service"
 msgstr "Condiciones del Servicio"
 
-#: templates/base.html:279
+#: templates/base.html:268
 msgid "Thanks to"
 msgstr "Agradecimientos"
 
-#: templates/base.html:282
+#: templates/base.html:271
 msgid "The localization team"
 msgstr "El equipo de localización"
 
-#: templates/base.html:289
+#: templates/base.html:278
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:291
+#: templates/base.html:280
 msgid "AstroBin is Copyright &copy; 2011 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
 msgstr "AstroBin es Copyright &copy; 2011 Salvatore Iovene, con Todos los Derechos Reservados. Las imágenes de este sitio web tienen derechos de autor de sus respectivos propietarios."
 
-#: templates/base.html:310
+#: templates/base.html:299
 msgid "Follow AstroBin on Twitter"
 msgstr "Sigue AstroBin en Twitter"
 
-#: templates/base.html:311
+#: templates/base.html:300
 msgid "Back to top"
 msgstr "Volver arriba"
 
-#: templates/base.html:325
+#: templates/base.html:314
 msgid "Feedback"
 msgstr "Contactar"
 
-#: templates/base.html:337
+#: templates/base.html:326
 #: templates/messages/compose.html:18
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: templates/base.html:422
-#: templates/image/detail.html:678
+#: templates/base.html:411
+#: templates/image/detail.html:676
 msgid "No file selected"
 msgstr "Ninguno"
 
-#: templates/base.html:423
-#: templates/image/detail.html:679
+#: templates/base.html:412
+#: templates/image/detail.html:677
 msgid "Choose file"
 msgstr "Examinar"
 
@@ -1291,9 +1309,8 @@ msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
 msgstr "AstroBin acepta JPEG, PNG y GIF. Las imágenes en GIF animado son también soportadas."
 
 #: templates/faq.html:45
-#, python-format
-msgid "Absolutely. There are multiple ways in which AstroBin can store your data very safely. First of all, the images you upload are stored on a highly durable, highly available, redundant backend. The durability of the storage backend is 99.999999999%% over a given year. This means that if you upload 10,000 images, you can expect to lose one image to data corruption once in 10,000,000 year. The images are duplicated across two different physical servers, for protection against natural disasters."
-msgstr "Absolutamente. Hay varios sistemas por los cuales AstroBin guarda tus datos verdaderamente seguros. El primero, las imágenes que subes son guardadas en un servidor redundante con alta durabilidad y alta disponibilidad. La durabilidad del servidor de almacenamiento es superior al 99.999999999%% anual, esto significa que si subes 10.000 imágenes puedes esperar perder una imagen por corrupción de datos cada 10.000.000 años. Las imágenes están duplicadas a través de dos servidores físicos distantes para protección contra desastres naturales."
+msgid "Absolutely. There are multiple ways in which AstroBin can store your data very safely. First of all, the images you upload are stored on a highly durable, highly available, redundant backend. The durability of the storage backend is 99.999999999 percent over a given year. This means that if you upload 10,000 images, you can expect to lose one image to data corruption once in 10,000,000 year. The images are duplicated across two different physical servers, for protection against natural disasters."
+msgstr "Absolutamente. Hay varios sistemas por los cuales AstroBin guarda tus datos verdaderamente seguros. El primero, las imágenes que subes son guardadas en un servidor redundante con alta durabilidad y alta disponibilidad. La durabilidad del servidor de almacenamiento es superior al 99.999999999% anual, esto significa que si subes 10.000 imágenes puedes esperar perder una imagen por corrupción de datos cada 10.000.000 años. Las imágenes están duplicadas a través de dos servidores físicos distantes para protección contra desastres naturales."
 
 #: templates/faq.html:48
 msgid "The actual website, instead, is hosted on a Virtual Machine, so, in case of severe hardware failure, it can be redeployed to a different server in a matter of 15 minutes."
@@ -1440,137 +1457,141 @@ msgid "Sign up now!"
 msgstr "¡Registrate ahora!"
 
 #: templates/index.html:10
+msgid "Please select your language from the options above."
+msgstr "Por favor, selecciona tu idioma de entre las opciones mostradas."
+
+#: templates/index.html:22
 msgid "Upload as a work in progress"
 msgstr "Subir como trabajo en curso"
 
-#: templates/index.html:15
-#: templates/index.html.py:31
-#: templates/image/detail.html:675
+#: templates/index.html:27
+#: templates/index.html.py:43
+#: templates/image/detail.html:673
 msgid "Upload"
 msgstr "Subir"
 
-#: templates/index.html:18
-#: templates/index.html.py:33
-#: templates/image/detail.html:680
+#: templates/index.html:30
+#: templates/index.html.py:45
+#: templates/image/detail.html:678
 msgid "Uploading..."
 msgstr "Subiendo..."
 
-#: templates/index.html:21
+#: templates/index.html:33
 #, python-format
 msgid "Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgstr "Usa esta opción para subir una imagen al <strong>Área de Pruebas</strong>. Esta es perfecta para trabajos en curso que quieras compartir en foros de Internet. Más información en las <a href=\"%(faq_url)s#6\">FAQ</a>."
 
-#: templates/index.html:26
+#: templates/index.html:38
 msgid "Upload as a finished image"
 msgstr "Subir una imagen terminada"
 
-#: templates/index.html:37
+#: templates/index.html:49
 #, python-format
 msgid "Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and here on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> too."
 msgstr "Usa esta opción para subir una imagen al <strong>Área Pública</strong>. Se mostrará en <a href=\"%(profile_url)s\">tu perfil</a> y aparecerá aquí en la página de inicio. Puedes también <a href=\"%(flickr_url)s\">importar imágenes desde Flickr</a>."
 
-#: templates/index.html:46
+#: templates/index.html:58
 msgid "Warning!"
 msgstr "¡Atención!"
 
-#: templates/index.html:48
+#: templates/index.html:60
 #, python-format
 msgid "Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
 msgstr "Antes de empezar a subir imágenes, debes añadir al menos un telescopio y una cámara. ¡Puedes hacerlo en <a href=\"%(the_url)s?initial\">tu perfil</a>!"
 
-#: templates/index.html:60
+#: templates/index.html:72
 msgid "The perfect home for your astrophotography."
 msgstr "El hogar perfecto para tus astrofotografías."
 
-#: templates/index.html:62
+#: templates/index.html:74
 #, python-format
 msgid "AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href=\"%(help_url)s\">help page.</a> for more information."
 msgstr "AstroBin es un servicio de alojamiento de imágenes creado específicamente para astrofotógrafos. Viene equipado con características muy provechosas para la comunidad astrofotográfica. Lee la <a href=\"%(help_url)s\">página de ayuda</a> para más información."
 
-#: templates/index.html:67
+#: templates/index.html:79
 msgid "Unlimited uploads, unlimited size."
 msgstr "Número de subidas y tamaño, sin límites."
 
-#: templates/index.html:68
+#: templates/index.html:80
 msgid "Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free."
 msgstr "Las imágenes astrofotográficas tienen un valor científico que no debería perderse comprimiendo archivos. En AstroBin puedes (¡y debes!) subir imágenes a tamaño completo. Tienes espacio ilimitado y gratuito."
 
-#: templates/index.html:73
+#: templates/index.html:85
 msgid "Have your data neatly plotted."
 msgstr "Ten tus datos perfectamente graficados."
 
-#: templates/index.html:74
+#: templates/index.html:86
 msgid "Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most."
 msgstr "Los datos lo son todo, y AstroBin te ofrecerá las herramientas para conservarlos ordenados y organizados. Y con nuestras gráficas, puedes visualizar tu productividad y el uso de tus equipos."
 
-#: templates/index.html:81
+#: templates/index.html:93
 msgid "Recent images"
 msgstr "Imágenes recientes"
 
-#: templates/index.html:83
+#: templates/index.html:95
 #: templates/search/search.html:19
 msgid "Sort by:"
 msgstr "Ordenar por:"
 
-#: templates/index.html:85
-#: templates/index.html.py:87
+#: templates/index.html:97
+#: templates/index.html.py:99
 msgid "Uploaded"
 msgstr "Subidas"
 
-#: templates/index.html:91
-#: templates/index.html.py:93
+#: templates/index.html:103
+#: templates/index.html.py:105
 msgid "Acquired"
 msgstr "Adquiridas"
 
-#: templates/index.html:97
-#: templates/index.html.py:99
+#: templates/index.html:109
+#: templates/index.html.py:111
 #: templates/search/search.html:24
 msgid "Views"
 msgstr "Vistas"
 
-#: templates/index.html:104
+#: templates/index.html:116
 msgid "Filter by deep sky"
 msgstr "Filtrar por Cielo Profundo"
 
-#: templates/index.html:106
-#: templates/index.html.py:108
-#: templates/index.html:133
-#: templates/index.html.py:135
+#: templates/index.html:118
+#: templates/index.html.py:120
+#: templates/index.html:145
+#: templates/index.html.py:147
 msgid "All"
 msgstr "Todos"
 
-#: templates/index.html:112
-#: templates/index.html.py:114
+#: templates/index.html:124
+#: templates/index.html.py:126
 msgid "Clusters"
 msgstr "Cúmulos"
 
-#: templates/index.html:131
+#: templates/index.html:143
 msgid "Filter by solar system"
 msgstr "Filtrar por Sistema Solar"
 
-#: templates/index.html:145
-#: templates/index.html.py:147
+#: templates/index.html:157
+#: templates/index.html.py:159
 msgid "Moon"
 msgstr "Luna"
 
-#: templates/index.html:151
-#: templates/index.html.py:153
+#: templates/index.html:163
+#: templates/index.html.py:165
 msgid "Planets"
 msgstr "Planetas"
 
-#: templates/index.html:157
-#: templates/index.html.py:159
+#: templates/index.html:169
+#: templates/index.html.py:171
 msgid "Comets"
 msgstr "Cometas"
 
-#: templates/index.html:164
+#: templates/index.html:176
 #: templates/image/edit/basic.html:58
 #: templates/image/edit/gear.html:48
 #: templates/image/edit/watermark.html:37
 msgid "or"
 msgstr "o"
 
-#: templates/index.html:164
+#: templates/index.html:176
 msgid "remove filters"
 msgstr "quitar filtros"
 
@@ -1608,9 +1629,9 @@ msgid "Basic Information"
 msgstr "Información Básica"
 
 #: templates/profile-edit-menu.html:9
-#: templates/image/detail.html:443
+#: templates/image/detail.html:441
 #: templates/user/profile.html:92
-#: templates/user/profile.html.py:252
+#: templates/user/profile.html.py:255
 msgid "Gear"
 msgstr "Equipo"
 
@@ -1627,37 +1648,37 @@ msgid "Total integration hours in the last 12 months"
 msgstr "Horas totales de integración en los últimos 12 meses"
 
 #: templates/stats.html:16
-#: templates/user/profile.html:176
-#: templates/user/profile.html.py:201
-#: templates/user/profile.html:226
+#: templates/user/profile.html:179
+#: templates/user/profile.html.py:204
+#: templates/user/profile.html:229
 msgid "Show by period"
 msgstr "Mostrar por período"
 
 #: templates/stats.html:20
-#: templates/user/profile.html:181
-#: templates/user/profile.html.py:206
-#: templates/user/profile.html:231
+#: templates/user/profile.html:184
+#: templates/user/profile.html.py:209
+#: templates/user/profile.html:234
 msgid "Monthly"
 msgstr "Mensualmente"
 
 #: templates/stats.html:21
-#: templates/user/profile.html:182
-#: templates/user/profile.html.py:207
-#: templates/user/profile.html:232
+#: templates/user/profile.html:185
+#: templates/user/profile.html.py:210
+#: templates/user/profile.html:235
 msgid "Daily"
 msgstr "Diariamente"
 
 #: templates/stats.html:30
-#: templates/user/profile.html:191
-#: templates/user/profile.html.py:216
-#: templates/user/profile.html:241
+#: templates/user/profile.html:194
+#: templates/user/profile.html.py:219
+#: templates/user/profile.html:244
 msgid "Please wait: the plot is loading..."
 msgstr "Espera por favor: la gráfica se está cargando..."
 
 #: templates/stats.html:31
-#: templates/user/profile.html:192
-#: templates/user/profile.html.py:217
-#: templates/user/profile.html:242
+#: templates/user/profile.html:195
+#: templates/user/profile.html.py:220
+#: templates/user/profile.html:245
 msgid "Loading..."
 msgstr "Cargando..."
 
@@ -1799,7 +1820,7 @@ msgid "Change license"
 msgstr "Cambiar la licencia"
 
 #: templates/image/detail.html:76
-#: templates/image/detail.html.py:671
+#: templates/image/detail.html.py:669
 msgid "Upload new revision"
 msgstr "Subir una nueva revisión"
 
@@ -1836,12 +1857,12 @@ msgid "Bring to a user's attention"
 msgstr "Enviar a un usuario"
 
 #: templates/image/detail.html:116
-#: templates/image/detail.html.py:718
+#: templates/image/detail.html.py:716
 msgid "Request additional information"
 msgstr "Pedir información adicional"
 
 #: templates/image/detail.html:119
-#: templates/image/detail.html.py:724
+#: templates/image/detail.html.py:722
 msgid "Request TIFF/FITS"
 msgstr "Solicitar versión TIFF/FITS"
 
@@ -1874,16 +1895,16 @@ msgid "View profile"
 msgstr "Ver Perfil"
 
 #: templates/image/detail.html:187
-#: templates/image/detail.html.py:632
+#: templates/image/detail.html.py:630
 #: templates/user/profile.html:51
-#: templates/user/profile.html.py:347
+#: templates/user/profile.html.py:350
 msgid "Stop following"
 msgstr "Dejar de Seguir"
 
 #: templates/image/detail.html:189
-#: templates/image/detail.html.py:640
+#: templates/image/detail.html.py:638
 #: templates/user/profile.html:53
-#: templates/user/profile.html.py:355
+#: templates/user/profile.html.py:358
 msgid "Follow"
 msgstr "Seguirle"
 
@@ -1947,236 +1968,232 @@ msgstr[1] "vista %(counter)s veces"
 msgid "Contains"
 msgstr "Contiene"
 
-#: templates/image/detail.html:382
-msgid "(no subjects)"
-msgstr "(ningún objeto)"
-
-#: templates/image/detail.html:396
+#: templates/image/detail.html:394
 #, python-format
 msgid "and %(number)s more (click to view)."
 msgstr "y %(number)s más (clic para ver)."
 
-#: templates/image/detail.html:404
+#: templates/image/detail.html:402
 msgid "(hide these subjects)"
 msgstr "(ocultar estos objetos)"
 
-#: templates/image/detail.html:416
+#: templates/image/detail.html:414
 msgid "This image is a revision. Here are its other versions"
 msgstr "Esta imagen es una revisión. Aquí están las demás versiones"
 
-#: templates/image/detail.html:418
+#: templates/image/detail.html:416
 msgid "This image has some other revisions"
 msgstr "Esta imagen tiene otras revisiones"
 
-#: templates/image/detail.html:440
+#: templates/image/detail.html:438
 msgid "Technical card"
 msgstr "Ficha Técnica"
 
-#: templates/image/detail.html:461
+#: templates/image/detail.html:459
 msgid "Acquisition"
 msgstr "Adquisición"
 
-#: templates/image/detail.html:511
-#: templates/image/detail.html.py:512
+#: templates/image/detail.html:509
+#: templates/image/detail.html.py:510
 msgid "Histogram"
 msgstr "Histograma"
 
-#: templates/image/detail.html:518
+#: templates/image/detail.html:516
 msgid "Astrometry"
 msgstr "Astrometría"
 
-#: templates/image/detail.html:519
+#: templates/image/detail.html:517
 msgid "RA center"
 msgstr "A.R. (centro)"
 
-#: templates/image/detail.html:520
+#: templates/image/detail.html:518
 msgid "DEC center"
 msgstr "Dec. (centro)"
 
-#: templates/image/detail.html:522
+#: templates/image/detail.html:520
 msgid "Pixel scale"
 msgstr "Escala de píxel"
 
-#: templates/image/detail.html:522
+#: templates/image/detail.html:520
 msgid "arcsec/pixel"
 msgstr "seg.arc/píxel"
 
-#: templates/image/detail.html:524
+#: templates/image/detail.html:522
 msgid "Orientation"
 msgstr "Orientación"
 
+#: templates/image/detail.html:522
+#: templates/image/detail.html.py:523
 #: templates/image/detail.html:524
-#: templates/image/detail.html.py:525
-#: templates/image/detail.html:526
 msgid "degrees"
 msgstr "grados"
 
-#: templates/image/detail.html:525
+#: templates/image/detail.html:523
 msgid "Field width"
 msgstr "Anchura del campo"
 
-#: templates/image/detail.html:525
-#: templates/image/detail.html.py:526
+#: templates/image/detail.html:523
+#: templates/image/detail.html.py:524
 msgid "arcminutes"
 msgstr "minutos de arco"
 
-#: templates/image/detail.html:526
+#: templates/image/detail.html:524
 msgid "Field height"
 msgstr "Altura del campo"
 
-#: templates/image/detail.html:541
-#: templates/image/detail.html.py:550
+#: templates/image/detail.html:539
+#: templates/image/detail.html.py:548
 msgid "More: same user"
 msgstr "Más: del mismo usuario"
 
-#: templates/image/detail.html:542
-#: templates/image/detail.html.py:551
+#: templates/image/detail.html:540
+#: templates/image/detail.html.py:549
 msgid "More: same subjects"
 msgstr "Más: con mismos objetos"
 
-#: templates/image/detail.html:543
-#: templates/image/detail.html.py:552
+#: templates/image/detail.html:541
+#: templates/image/detail.html.py:550
 msgid "More: same telescope"
 msgstr "Más: con mismo telescopio"
 
-#: templates/image/detail.html:544
-#: templates/image/detail.html.py:553
+#: templates/image/detail.html:542
+#: templates/image/detail.html.py:551
 msgid "More: same camera"
 msgstr "Más: con misma cámara"
 
-#: templates/image/detail.html:628
-#: templates/user/profile.html:343
+#: templates/image/detail.html:626
+#: templates/user/profile.html:346
 #, python-format
 msgid "Follow %(username)s?"
 msgstr "¿Quieres seguir a %(username)s?"
 
-#: templates/image/detail.html:629
-#: templates/user/profile.html:344
+#: templates/image/detail.html:627
+#: templates/user/profile.html:347
 #, python-format
 msgid "You will receive a notification every time %(username)s posts a new image. Continue?"
 msgstr "Recibirás un aviso cada vez que %(username)s publique una nueva imagen. ¿Continuar?"
 
-#: templates/image/detail.html:630
-#: templates/user/profile.html:345
+#: templates/image/detail.html:628
+#: templates/user/profile.html:348
 msgid "Yes, follow!"
 msgstr "Sí, ¡seguirle!"
 
-#: templates/image/detail.html:636
-#: templates/user/profile.html:351
+#: templates/image/detail.html:634
+#: templates/user/profile.html:354
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr "¿Quieres dejar de seguir a %(username)s?"
 
-#: templates/image/detail.html:637
-#: templates/user/profile.html:352
+#: templates/image/detail.html:635
+#: templates/user/profile.html:355
 #, python-format
 msgid "You will stop receiving notifications when %(username)s posts a new image. Continue?"
 msgstr "Dejarás de recibir avisos cuando %(username)s publique una nueva imagen. ¿Continuar?"
 
-#: templates/image/detail.html:638
-#: templates/user/profile.html:353
+#: templates/image/detail.html:636
+#: templates/user/profile.html:356
 msgid "Yes, stop following!"
 msgstr "Sí, ¡dejar de seguirle!"
 
-#: templates/image/detail.html:644
-#: templates/user/profile.html:359
+#: templates/image/detail.html:642
+#: templates/user/profile.html:362
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Enviar un mensaje a %(username)s"
 
-#: templates/image/detail.html:646
+#: templates/image/detail.html:644
 #: templates/messages/compose.html:16
 #: templates/messages/modal_compose.html:16
-#: templates/user/profile.html:361
+#: templates/user/profile.html:364
 msgid "Send"
 msgstr "Enviar"
 
-#: templates/image/detail.html:662
+#: templates/image/detail.html:660
 msgid "Bad"
 msgstr "Mala"
 
-#: templates/image/detail.html:663
+#: templates/image/detail.html:661
 msgid "Poor"
 msgstr "Regular"
 
-#: templates/image/detail.html:664
+#: templates/image/detail.html:662
 msgid "Regular"
 msgstr "Aceptable"
 
-#: templates/image/detail.html:665
+#: templates/image/detail.html:663
 msgid "Good"
 msgstr "Buena"
 
-#: templates/image/detail.html:666
+#: templates/image/detail.html:664
 msgid "Gorgeous"
 msgstr "Magnífica"
 
-#: templates/image/detail.html:672
+#: templates/image/detail.html:670
 msgid "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr "¿Has mejorado el procesado de tu imagen? ¡Sube la nueva versión!"
 
-#: templates/image/detail.html:684
+#: templates/image/detail.html:682
 msgid "Delete image and all its revisions?"
 msgstr "¿Borrar la imagen y todas sus revisiones?"
 
-#: templates/image/detail.html:685
+#: templates/image/detail.html:683
 msgid "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?"
 msgstr "La imagen será permanentemente borrada y no podrá ser recuperada. Todas sus revisiones serán borradas también. ¿Estás seguro?"
 
-#: templates/image/detail.html:686
+#: templates/image/detail.html:684
 msgid "Yes, delete everything"
 msgstr "Sí, borrarlo todo"
 
-#: templates/image/detail.html:691
+#: templates/image/detail.html:689
 msgid "Delete this revision?"
 msgstr "¿Borrar esta versión?"
 
-#: templates/image/detail.html:692
+#: templates/image/detail.html:690
 msgid "This revision will be permanently deleted and cannot be recovered. Are you sure?"
 msgstr "Esta revisión será permanentemente borrada y no podrá ser recuperada. ¿Estás seguro?"
 
-#: templates/image/detail.html:693
+#: templates/image/detail.html:691
 msgid "Yes, delete revision"
 msgstr "Sí, borrar esta versión"
 
-#: templates/image/detail.html:698
+#: templates/image/detail.html:696
 msgid "Delete original image?"
 msgstr "¿Borrar la imagen original?"
 
-#: templates/image/detail.html:699
+#: templates/image/detail.html:697
 msgid "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"
 msgstr "La imagen será permanentemente borrada y no podrá ser recuperada, pero sus revisiones no serán borradas. ¿Estás seguro?"
 
-#: templates/image/detail.html:700
+#: templates/image/detail.html:698
 msgid "Yes, delete image"
 msgstr "Sí, borra la imagen"
 
-#: templates/image/detail.html:705
+#: templates/image/detail.html:703
 msgid "Bring image to attention"
 msgstr "Informar sobre una imagen"
 
-#: templates/image/detail.html:706
+#: templates/image/detail.html:704
 msgid "By choosing some users and clicking the button below, you will send them a notification prompting them to checkout this image."
 msgstr "Si eliges algún usuario y haces clic en el botón de abajo, le enviarás un aviso para que eche un vistazo a esta imagen. "
 
-#: templates/image/detail.html:707
+#: templates/image/detail.html:705
 msgid "Continue"
 msgstr "Continuar"
 
-#: templates/image/detail.html:711
+#: templates/image/detail.html:709
 msgid "Enter partial name"
 msgstr "Introduce el nombre parcialmente"
 
-#: templates/image/detail.html:712
+#: templates/image/detail.html:710
 msgid "User not found. Cannot notify them."
 msgstr "Usuario no encontrado. No se le ha podido avisar."
 
-#: templates/image/detail.html:719
+#: templates/image/detail.html:717
 #, python-format
 msgid "You will notify %(username)s that you would like them to feed more information in the technical card for this photograph. Continue?"
 msgstr "Comunicarle a %(username)s que te gustaría disponer de más información en la ficha técnica sobre esta fotografía. ¿Continuar?"
 
-#: templates/image/detail.html:725
+#: templates/image/detail.html:723
 #, python-format
 msgid "You will notify %(username)s that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully %(username)s will contact you about how to handle the transaction. Continue?"
 msgstr "Comunicarle a %(username)s que te gustaría ver el archivo TIFF o FITS. Actualmente AstroBin no ofrece alojamiento de grandes archivos, por lo que esperamos que %(username)s contacte contigo para acordar la transacción. ¿Continuar?"
@@ -2270,10 +2287,6 @@ msgstr "En este formulario puedes introducir los detalles básicos de adquisici�
 #: templates/image/edit/acquisition.html:95
 msgid "What kind of image is this?"
 msgstr "¿Qué tipo de imagen es ésta?"
-
-#: templates/image/edit/acquisition.html:98
-msgid "Solar system"
-msgstr "Sistema Solar"
 
 #: templates/image/edit/acquisition.html:101
 msgid "Deep sky"
@@ -2998,80 +3011,80 @@ msgstr "Datos faltantes"
 msgid "These are your \"work in progress\" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu."
 msgstr "Estas son tus imágenes de \"trabajo en curso\": sólo tú puedes ver este listado. Puedes mostrar a alguien imágenes individuales y compartirlas por medio de la opción <em>Compartir</em>."
 
-#: templates/user/profile.html:123
-msgid "(view more...)"
-msgstr "(ver más...)"
-
-#: templates/user/profile.html:132
-msgid "No images."
-msgstr "No hay imágenes."
-
-#: templates/user/profile.html:138
-msgid "(go back)"
-msgstr "(volver)"
-
-#: templates/user/profile.html:143
+#: templates/user/profile.html:120
 msgid "These images don't have enough data. It's a shame..."
 msgstr "Estas imágenes no tienen suficientes datos. Es una lástima..."
 
-#: templates/user/profile.html:145
+#: templates/user/profile.html:122
 msgid "If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too."
 msgstr "Si quieres que tus imágenes sean organizadas en álbumes, deberías completar algunos datos. Por lo memos telescopios, cámaras y nombres de objetos. También son muy importantes datos sobre su adquisición."
 
-#: templates/user/profile.html:151
+#: templates/user/profile.html:133
+msgid "(view more...)"
+msgstr "(ver más...)"
+
+#: templates/user/profile.html:143
+msgid "No images."
+msgstr "No hay imágenes."
+
+#: templates/user/profile.html:149
+msgid "(go back)"
+msgstr "(volver)"
+
+#: templates/user/profile.html:154
 msgid "These images are ordered so that the most recently acquired appear first. Please note: images with no acquisition dates will appear last, and in no particular order."
 msgstr "Estas imágenes están ordenadas de modo que la adquirida más recientemente aparezca primero. Nota: las imágenes sin datos de adquisición aparecerán al final y sin un orden en particular."
 
-#: templates/user/profile.html:153
+#: templates/user/profile.html:156
 msgid "Please fill in the missing dates on all your images!"
 msgstr "Por favor, ¡rellena las fechas que faltan en tus imágenes!"
 
-#: templates/user/profile.html:164
+#: templates/user/profile.html:167
 #, python-format
 msgid "%(user)s's statistics"
 msgstr "Estadísticas de %(user)s"
 
-#: templates/user/profile.html:167
+#: templates/user/profile.html:170
 #, python-format
 msgid "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href=\"?public&sub=nodata\">here</a>."
 msgstr "¡Hola <strong>%(user)s</strong>! Sólo quería que supieras que puedes hacer que estas gráficas sean más útiles si añades todos los datos a tus imágenes. Por favor, asegúrate de ello comprobando si tienes imágenes con falta de datos <a href=\"?public&sub=nodata\">aquí</a>."
 
-#: templates/user/profile.html:180
-#: templates/user/profile.html.py:205
-#: templates/user/profile.html:230
+#: templates/user/profile.html:183
+#: templates/user/profile.html.py:208
+#: templates/user/profile.html:233
 msgid "Yearly"
 msgstr "Anualmente"
 
-#: templates/user/profile.html:250
+#: templates/user/profile.html:253
 #, python-format
 msgid "%(username)s's technical card"
 msgstr "Ficha Técnica de %(username)s"
 
-#: templates/user/profile.html:272
+#: templates/user/profile.html:275
 #, python-format
 msgid "About %(username)s"
 msgstr "Sobre %(username)s"
 
-#: templates/user/profile.html:294
+#: templates/user/profile.html:297
 #, python-format
 msgid " You have written nothing about yourself. Why don't you <a href=\"%(the_url)s\">do it now?</a>"
 msgstr "No has escrito nada sobre tí mismo. ¿Podrías <a href=\"%(the_url)s\">hacerlo ahora</a>?"
 
-#: templates/user/profile.html:298
+#: templates/user/profile.html:301
 #, python-format
 msgid "%(username)s didn't write anything about themselves."
 msgstr "%(username)s no ha escrito nada sobre sí mismo."
 
-#: templates/user/profile.html:305
+#: templates/user/profile.html:308
 msgid "Go to the homepage to upload a new image!"
 msgstr "Ir a la página de inicio para subir una nueva imagen"
 
-#: templates/user/profile.html:309
+#: templates/user/profile.html:312
 msgid "Tools"
 msgstr "Instrumentos"
 
-#: templates/user/profile.html:313
-#: templates/user/profile.html.py:316
+#: templates/user/profile.html:316
+#: templates/user/profile.html.py:319
 msgid "Edit profile"
 msgstr "Editar Perfil"
 
@@ -3184,6 +3197,20 @@ msgstr "Selecciona el idioma en el que quieres ver este sitio web:"
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
 msgstr "Selecciona qué avisos quieres recibir por correo electrónico:"
+
+#~ msgid ""
+#~ "\n"
+#~ "                                    Please select your language from the "
+#~ "options above.\n"
+#~ "                                "
+#~ msgstr ""
+#~ "\n"
+#~ "                                    Por favor, selecciona tu idioma de "
+#~ "entre las opciones mostradas.\n"
+#~ "                                "
+
+#~ msgid "(no subjects)"
+#~ msgstr "(ningún objeto)"
 
 #~ msgid "There was an error. Check your input!"
 #~ msgstr "Ha ocurrido un error. ¡Comprueba los datos!"

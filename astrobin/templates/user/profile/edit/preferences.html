@@ -11,7 +11,7 @@
         {{form.non_field_errors}}
 
         <p>{% blocktrans %}Select the language in which you would like to see this website:{% endblocktrans %}</p>
-        <p>
+        <p{% if field.errors %} class="error"{% endif %}>
             {{form.language.errors}}
             <label for="id_language">{{form.language.label}}:</label>
             {{form.language}}
@@ -19,10 +19,14 @@
         <p>{% blocktrans %}Select which e-mail notification you would like to receive:{% endblocktrans %}</p>
         {% for field in form %}
             {% ifnotequal field.name 'language' %}
-                <p>
-                    {{field.errors}}
-                    <label for="id_{{field.name}}">{{field.label}}:</label>
-                    {{field}}
+                <p{% if field.errors %} class="error"{% endif %}>
+                    {% if field.field.widget|is_checkbox %}
+                        <label></label>
+                        {{field}}{{field.label}}
+                    {% else %}
+                        {{field.label_tag}}{{field}}
+                    {% endif %}
+                    <span class="helptext">{{field.help_text}}</span>
                 </p>
                 <div class="fix"></div>
             {% endifnotequal %}
