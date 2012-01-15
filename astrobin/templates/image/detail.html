@@ -437,93 +437,103 @@
 
             <h3>{% trans "Technical card" %}</h3>
             <div id="technical-card">
-                <div class="gear">
-                    <h3>{% trans "Gear" %}</h3>
-                    {% for i in gear_list %}
-                        {% if i.1 %}
-                        <p>
-                            <strong>{% trans i.0 %}:&nbsp;</strong>
-                            {% for g in i.1 %}
-                                {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}
-                                    <a href="/search/?q=&as_values_{{i.2}}={{g.id}}">{{g.name|escape}}</a>
-                                {% else %}
-                                    <a href="/search/?q={{g.name|escape}}&type={{i.2}}">{{g.name|escape}}</a>
-                                {% endif %}
-                                {% if not forloop.last %},&nbsp;{% endif %}
-                            {% endfor %}
-                        </p>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div class="acquisition">
-                    <h3>{% trans "Acquisition" %}</h3>
-                    {% if image_type == 'deep_sky' %}
-                        {% for data in deep_sky_data %}
-                            {% if data.1 %}
+                <div class="left">
+                    <div class="container">
+                        <div class="gear">
+                            <h3>{% trans "Gear" %}</h3>
+                            {% for i in gear_list %}
+                                {% if i.1 %}
                                 <p>
-                                    <strong>{{data.0}}</strong>:
-                                    {% if data.0 == dates_label %}
-                                        {% for date in data.1 %}
-                                            <a href="/search/{% query_string "start_date=date, end_date=date" "plate_solving_started, r, mod" %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
-                                        {% endfor %}
-                                    {% else %}
-                                        {{data.1|linebreaksbr}}
-                                    {% endif %}
+                                    <strong>{% trans i.0 %}:&nbsp;</strong>
+                                    {% for g in i.1 %}
+                                        {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}
+                                            <a href="/search/?q=&as_values_{{i.2}}={{g.id}}">{{g.name|escape}}</a>
+                                        {% else %}
+                                            <a href="/search/?q={{g.name|escape}}&type={{i.2}}">{{g.name|escape}}</a>
+                                        {% endif %}
+                                        {% if not forloop.last %},&nbsp;{% endif %}
+                                    {% endfor %}
                                 </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        {% if is_ready and not image.animated %}
+                        <div class="histogram">
+                            <h3>{% trans "Histogram" %}</h3>
+                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
+                        </div>
+                        {% endif %}
+                    </div> <!-- container -->
+                </div> <!-- left -->
+                <div class="right">
+                    <div class="container">
+                        <div class="acquisition">
+                            <h3>{% trans "Acquisition" %}</h3>
+                            {% if image_type == 'deep_sky' %}
+                                {% for data in deep_sky_data %}
+                                    {% if data.1 %}
+                                        <p>
+                                            <strong>{{data.0}}</strong>:
+                                            {% if data.0 == dates_label %}
+                                                {% for date in data.1 %}
+                                                    <a href="/search/{% query_string "start_date=date, end_date=date" "plate_solving_started, r, mod" %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                                {{data.1|linebreaksbr}}
+                                            {% endif %}
+                                        </p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                {% if ssa.date %}
+                                    <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ssa.date|date:"DATE_FORMAT"}}</a>
+                                {% endif %}
+                                {% if ssa.time %}
+                                    <p><strong>{% trans "Time" %}</strong>: {{ssa.time}}
+                                {% endif %}
+                                {% if ssa.frames %}
+                                    <p><strong>{% trans "Frames" %}</strong>: {{ssa.frames}}
+                                {% endif %}
+                                {% if ssa.fps %}
+                                    <p><strong>{% trans "FPS" %}</strong>: {{ssa.fps}}
+                                {% endif %}
+                                {% if ssa.focal_length %}
+                                    <p><strong>{% trans "Focal length" %}</strong>: {{ssa.focal_length}}
+                                {% endif %}
+                                {% if ssa.cmi %}
+                                    <p><strong>{% trans "CMI" %}</strong>: {{ssa.cmi}}
+                                {% endif %}
+                                {% if ssa.cmii %}
+                                    <p><strong>{% trans "CMII" %}</strong>: {{ssa.cmii}}
+                                {% endif %}
+                                {% if ssa.cmiii %}
+                                    <p><strong>{% trans "CMIII" %}</strong>: {{ssa.cmiii}}
+                                {% endif %}
+                                {% if ssa.seeing %}
+                                    <p><strong>{% trans "Seeing" %}</strong>: {{ssa.seeing}}
+                                {% endif %}
+                                {% if ssa.transparency %}
+                                    <p><strong>{% trans "Transparency" %}</strong>: {{ssa.transparency}}
+                                {% endif %}
                             {% endif %}
-                        {% endfor %}
-                    {% else %}
-                        {% if ssa.date %}
-                            <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ssa.date|date:"DATE_FORMAT"}}</a>
+                        </div>
+
+                        {% if image.is_solved and image.ra_center_hms %}
+                        <div class="astrometry">
+                            <h3>{% trans "Astrometry" %}</h3>
+                            <p><strong>{% trans "RA center" %}</strong>: {{image.ra_center_hms}}</p>
+                            <p><strong>{% trans "DEC center" %}</strong>: {{image.dec_center_dms}}</p>
+                            {% if image.pixscale != 0 %}
+                                <p><strong>{% trans "Pixel scale" %}</strong>: {{image.pixscale|cut_decimals:"2"}} {% trans "arcsec/pixel" %}</p>
+                            {% endif %}
+                            <p><strong>{% trans "Orientation" %}</strong>: {{image.orientation|cut_decimals:"2"}} {% trans "degrees" %}</p>
+                            <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
+                            <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
+                        </div>
                         {% endif %}
-                        {% if ssa.time %}
-                            <p><strong>{% trans "Time" %}</strong>: {{ssa.time}}
-                        {% endif %}
-                        {% if ssa.frames %}
-                            <p><strong>{% trans "Frames" %}</strong>: {{ssa.frames}}
-                        {% endif %}
-                        {% if ssa.fps %}
-                            <p><strong>{% trans "FPS" %}</strong>: {{ssa.fps}}
-                        {% endif %}
-                        {% if ssa.focal_length %}
-                            <p><strong>{% trans "Focal length" %}</strong>: {{ssa.focal_length}}
-                        {% endif %}
-                        {% if ssa.cmi %}
-                            <p><strong>{% trans "CMI" %}</strong>: {{ssa.cmi}}
-                        {% endif %}
-                        {% if ssa.cmii %}
-                            <p><strong>{% trans "CMII" %}</strong>: {{ssa.cmii}}
-                        {% endif %}
-                        {% if ssa.cmiii %}
-                            <p><strong>{% trans "CMIII" %}</strong>: {{ssa.cmiii}}
-                        {% endif %}
-                        {% if ssa.seeing %}
-                            <p><strong>{% trans "Seeing" %}</strong>: {{ssa.seeing}}
-                        {% endif %}
-                        {% if ssa.transparency %}
-                            <p><strong>{% trans "Transparency" %}</strong>: {{ssa.transparency}}
-                        {% endif %}
-                    {% endif %}
-                    {% if is_ready and not image.animated %}
-                    <hr/>
-                    <h4>{% trans "Histogram" %}</h4>
-                    <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
-                    {% endif %}
-                </div>
-                {% if image.is_solved and image.ra_center_hms %}
-                <div class="fix"></div>
-                <div class="astrometry">
-                    <h3>{% trans "Astrometry" %}</h3>
-                    <p><strong>{% trans "RA center" %}</strong>: {{image.ra_center_hms}}</p>
-                    <p><strong>{% trans "DEC center" %}</strong>: {{image.dec_center_dms}}</p>
-                    {% if image.pixscale != 0 %}
-                        <p><strong>{% trans "Pixel scale" %}</strong>: {{image.pixscale|cut_decimals:"2"}} {% trans "arcsec/pixel" %}</p>
-                    {% endif %}
-                    <p><strong>{% trans "Orientation" %}</strong>: {{image.orientation|cut_decimals:"2"}} {% trans "degrees" %}</p>
-                    <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
-                    <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
-                </div>
-                {% endif %}
+                    </div> <!-- container -->
+                </div> <!-- right -->
             </div>
 
             {% if image.description %}

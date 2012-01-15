@@ -1923,6 +1923,10 @@ ul.topnav {
                 opacity: 1.0;}}}
     #description {
         margin: 0 0 @spacer-xxlarge 0;
+        .common-border;
+        background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+        .rounded-corners;
+
         p {
             padding: @spacer-medium @spacer-small;
         }
@@ -2065,31 +2069,54 @@ span.copy-box {
     background-color: @dark-panel-color;
     .rounded-corners;}
 
-#technical-card, #description {
-    margin: 0 auto 25px auto;
-    padding: 8px 10px;
+#technical-card {
+    margin-bottom: @spacer-large;
+    padding: @spacer-large;
     .common-border;
     overflow: auto;
     background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .rounded-corners;
+
     h3 {
-        display: inline-block;}
-    .gear, .acquisition {
+        display: inline-block;
+    }
+
+    .left, .right {
+        width: 50%;
         float: left;
-        width: 48%;
-        display: inline-block;}
-    .gear {
-        border-right: 1px solid (@light-panel-color * @hilight-factor);
-        margin-right: 20px;}
-    .acquisition {
-        padding-left: 5px;
+        .container {
+            padding: @spacer-large;
+        }
+    }
+
+    .right {
+        .container {
+            border-left: 1px solid (@light-panel-color * @hilight-factor);
+        }
+    }
+
+    .gear, .acquisition, .histogram, .astrometry {
+        padding: @spacer-small;
+    }
+
+    .histogram {
+        border-top: 1px solid (@light-panel-color * @hilight-factor);
         img {
-            border: 1px solid @background-color;}}
+            border: 1px solid @background-color;
+        }
+    }
+
     .astrometry {
-        display: block;
-        border-top: 1px solid (@light-panel-color * @hilight-factor);}
+        border-top: 1px solid (@light-panel-color * @hilight-factor);
+    }
+
     p {
-        margin: 2px 0;}}
+        margin: 2px 0;
+    }
+}
+
+#description {
+}
 
 /* footer */
 #footer {
