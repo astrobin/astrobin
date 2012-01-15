@@ -35,8 +35,8 @@
             retrieveLimit: false, //number for 'limit' param on ajax request
             extraParams: "",
             matchCase: false,
-            minChars: 1,
-            keyDelay: 50,
+            minChars: 0,
+            keyDelay: 0,
             resultsHighlight: true,
             neverSubmit: true,
             selectionLimit: false,
@@ -172,9 +172,9 @@
                                     org_li.prev().addClass("selected");     
                                 }
                             }
-                            if(input.val().length == 1){
+                            if(input.val().length == 0){
                                 results_holder.hide();
-                                 prev = "";
+                                prev = "";
                             }
                             if($(":visible",results_holder).length > 0){
                                 if (timeout){ clearTimeout(timeout); }
@@ -222,7 +222,8 @@
                 function keyChange() {
                     // ignore if the following keys are pressed: [del] [shift] [capslock]
                     if( lastKeyPressCode == 46 || (lastKeyPressCode > 8 && lastKeyPressCode < 32) ){ return results_holder.hide(); }
-                    var string = input.val().replace(/[\\]+|[\/]+/g,"");
+                    var string = input.val();
+                    var string = string.replace(/[\\]+|[\/]+/g,"");
                     if (string == prev) return;
                     prev = string;
                     if (string.length >= opts.minChars) {
