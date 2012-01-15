@@ -108,15 +108,6 @@
                     -->
                     {% block language_reminder %}{% endblock %}
                 </div>
-
-                <div id="hello">
-                    {% if request.user.is_authenticated %}
-                        {% with request.user as username %}
-                            {% url user_page request.user as user_page %}
-                            {% blocktrans %}Hello, <a href="{{user_page}}">{{username}}.</a>{% endblocktrans %}
-                        {% endwith %}
-                    {% endif %}
-                </div>
             </div> <!-- header -->
         </div> <!-- header-wrap -->
 
@@ -139,9 +130,12 @@
                     <div id="user-nav">
                         <ul>
                         {% if request.user.is_authenticated %}
-                            <li class="menu">
-                                <a class="icon" href="{% url user_page request.user %}">
-                                    <img alt="Account" src="/static/icons/iconic/orange/profile.png"/>
+                            <li class="menu text">
+                                <a href="{% url user_page request.user %}">
+                                    <span class="icon">
+                                        <img src="/static/icons/iconic/orange/open_menu.png" alt="" />
+                                    </span>
+                                    {{request.user}}
                                 </a>
                                 <div class="popup" id="profile-popup">
                                     <ul>
