@@ -837,7 +837,6 @@ div.selector select {
   //filter: alpha(opacity:0);
   height: 25px;
   border: none;
-  background: none;
 }
 
 /* Checker */
@@ -1059,7 +1058,7 @@ form {
         margin: 0;
         padding: @spacer-small 0;
         li {
-            display: inline-block;
+            display: inline;
             margin-right: 15px;
             label {
                 text-align: left;
@@ -1081,9 +1080,11 @@ form {
     select[multiple] {
         width: 730px;
     }
-
-    select:focus {
-        color: @text-color + #111;}
+    select {
+        width: 100%;
+        background: @text-color;
+        color: @background-color;
+    }
     input:focus, textarea:focus {
         border-color: @border-color * @hilight-factor;
         background-color: @input-color * @hilight-factor;
@@ -1338,12 +1339,8 @@ ul.as-selections {
         padding: 2px 7px 2px 10px;
         .rounded-corners;
         .box-shadow;
-        :last-child {
-            margin-left: @spacer-small}
         a.as-close, a.as-edit {
-            float: right;
-            margin: 0;
-            padding: 3px 0 0 0;
+            margin-left: @spacer-small;
             cursor: pointer;
             color: @background-color;
             font-weight: bold;
