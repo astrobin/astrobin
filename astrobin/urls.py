@@ -143,6 +143,7 @@ urlpatterns = patterns('',
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
 
+    url(r'^wall/', views.wall, name='wall'),
     url(r'^nightly/', views.nightly, name='nightly'),
 
     url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),

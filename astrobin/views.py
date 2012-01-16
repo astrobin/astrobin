@@ -165,6 +165,24 @@ def index(request):
     if 'upload_error' in request.GET:
         response_dict['upload_error'] = True
 
+    return object_list(
+        request, 
+        queryset=sqs,
+        template_name='index.html',
+        template_object_name='image',
+        paginate_by = 20,
+        extra_context = response_dict)
+
+
+def wall(request):
+    """The Big Wall"""
+    sqs = SearchQuerySet().all().models(Image)
+
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+    }
+
     if request.GET.get('sort') == '-acquired':
         response_dict['sort'] = '-acquired'
         sqs = sqs.order_by('-last_acquisition_date')
@@ -200,9 +218,9 @@ def index(request):
     return object_list(
         request, 
         queryset=sqs,
-        template_name='index.html',
+        template_name='wall.html',
         template_object_name='image',
-        paginate_by = 20 if request.user.is_authenticated() else 10,
+        paginate_by = 100,
         extra_context = response_dict)
 
 

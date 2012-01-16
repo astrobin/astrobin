@@ -282,6 +282,9 @@
     background: url('/static/icons/iconic/black/profile.png') no-repeat left center;}
 .icon-message {
     background: url('/static/icons/iconic/black/message.png') no-repeat left center;}
+.icon-check {
+    background: url('/static/icons/iconic/black/check_8x7.png') no-repeat left center;
+}
 
 .bubble {
     position: relative;
@@ -1258,6 +1261,27 @@ form {
                 a:hover, a:active {
                 }
             }
+            >li.menu {
+                position: relative;
+                z-index: 2000;
+
+                a.active {
+                    .rounded-corners-top;
+                    background: url('/static/images/popup-bg.png');
+                }
+
+                .popup {
+                    .rounded-corners-bottom;
+                    left: 0;
+                    top: 32px;
+                    width: 125px;
+
+                    a, a:hover {
+                        padding: 4px 0;
+                        text-align: left;
+                    }
+                }
+            }
             li#current {
                 >a {
                     color: @strong-text-color;}}}}
@@ -2014,12 +2038,16 @@ ul.topnav {
         border-left: 1px solid @strong-text-color;}
     li {
         border-bottom: 1px solid #cdcdcd;
+        width: 100%;
+
         :hover {
             background: url('/static/images/popup-li-bg.png');}}
     li.last {
         border-bottom: none;}
     a {
         color: @background-color;
+        width: 100%;
+
         :hover {
             color: @link-color;
             border: none;}}}
@@ -2965,3 +2993,14 @@ form#gear {
         border: none;
     }
 }
+
+.wall {
+    position: relative;
+
+    .bar {
+        position: absolute;
+        top: 28px;
+        right: 42px;
+    }
+}
+

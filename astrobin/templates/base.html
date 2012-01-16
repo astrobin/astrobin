@@ -118,11 +118,19 @@
                         <ul>
                             <li id="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
                             <li id="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
+                            <li class="menu text">
+                                <a href="#">{% trans "Images" %}</a>
+                                <div class="popup">
+                                    <ul>
+                                        <li><a href="{% url wall %}">{% trans "The Big Wall" %}</a></li>
+                                        <li><a href="{% url nightly %}">{% trans "Nightly" %}</a></li>
+                                    </ul>
+                                </div>
+                            </li>
                             <li id="{% current request "^/search/$" %}"><a href="{% url haystack_search %}">{% trans "Search" %}</a></li>
                             {% if request.user.is_authenticated %}
                             <li id="{% current request "^/stats/$" %}"><a href="{% url stats %}">{% trans "Stats" %}</a></li>
                             {% endif %}
-                            <li id="{% current request "^/nightly/$" %}"><a href="{% url nightly %}">{% trans "Nightly" %}</a></li>
                             <li id="{% current request "^/help/$" %}"><a href="{% url help %}">{% trans "Help" %}</a></li>
                             <li id="{% current request "^/faq/$" %}"><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
                         </ul>
@@ -411,7 +419,7 @@
 
                 var open_popup = 0;
                 var active_a = 0;
-                $('#user-nav > ul > li.menu > a').click (function(event) {
+                $('#user-nav > ul > li.menu > a, #nav > ul > li.menu > a').click (function(event) {
                     var a = $(this);
                     var li = a.parent()
                     var popup = li.find('.popup');
