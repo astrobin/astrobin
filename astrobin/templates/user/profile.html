@@ -67,32 +67,32 @@
                         <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                         <div class="sub">
                             <ul class="subnav">
-                                <li>
+                                <li class="bg-icon{% if 'sub' not in request.GET or request.GET.sub == 'uploaded' %} icon-check{% endif %}">
                                     <span class="text">
                                         <a href="?public&sub=uploaded">{% trans "Upload time" %}</a>
                                     </span>
                                 </li>
-                                <li>
+                                <li class="bg-icon{% if request.GET.sub == 'acquired' %} icon-check{% endif %}">
                                     <span class="text">
                                         <a href="?public&sub=acquired">{% trans "Acquisition time" %}</a>
                                     </span>
                                 </li>
-                                <li>
+                                <li class="bg-icon{% if request.GET.sub == 'subject' %} icon-check{% endif %}">
                                     <span class="text">
                                         <a href="?public&sub=subject">{% trans "Subject type" %}</a>
                                     </span>
                                 </li>
-                                <li>
+                                <li class="bg-icon{% if request.GET.sub == 'year' %} icon-check{% endif %}">
                                     <span class="text">
                                         <a href="?public&sub=year">{% trans "Year" %}</a>
                                     </span>
                                 </li>
-                                <li>
+                                <li class="bg-icon{% if request.GET.sub == 'gear' %} icon-check{% endif %}">
                                     <span class="text">
                                         <a href="?public&sub=gear">{% trans "Gear" %}</a>
                                     </span>
                                 </li>
-                                <li>
+                                <li class="bg-icon{% if request.GET.sub == 'nodata' %} icon-check{% endif %}">
                                     <span class="text">
                                         <a href="?public&sub=nodata">{% trans "Lacking data" %}</a>
                                     </span>
