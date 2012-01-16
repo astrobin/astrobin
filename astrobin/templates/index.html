@@ -3,7 +3,7 @@
 {% load tags %}
 
 {% block language_reminder %}
-{% if user.is_authenticated and profile %}
+{% if user.is_authenticated and own_profile %}
     {% if not own_profile.language %}
         <div id="language-prompt">
             <div class="bubble">
