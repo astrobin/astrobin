@@ -682,7 +682,6 @@ div.selector select {
   opacity: 0;
   height: 25px;
   border: none;
-  background: none;
 }
 /* Checker */
 div.checker {
@@ -911,7 +910,7 @@ form ul {
   padding: 4px 0;
 }
 form ul li {
-  display: inline-block;
+  display: inline;
   margin-right: 15px;
 }
 form ul li label {
@@ -939,8 +938,10 @@ form input, form select, form textarea {
 form select[multiple] {
   width: 730px;
 }
-form select:focus {
-  color: #c9c9c9;
+form select {
+  width: 100%;
+  background: #b8b8b8;
+  color: #333333;
 }
 form input:focus, form textarea:focus {
   border-color: #333333;
@@ -1078,7 +1079,7 @@ form p.error input, form p.error textarea {
   position: absolute;
   top: 50px;
   right: 204px;
-  z-index: 1;
+  z-index: 9999;
 }
 #header #language-prompt .bubble {
   width: 200px;
@@ -1277,13 +1278,8 @@ ul.as-selections li.as-selection-item {
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
 }
-ul.as-selections li.as-selection-item :last-child {
-  margin-left: 4px;
-}
 ul.as-selections li.as-selection-item a.as-close, ul.as-selections li.as-selection-item a.as-edit {
-  float: right;
-  margin: 0;
-  padding: 3px 0 0 0;
+  margin-left: 4px;
   cursor: pointer;
   color: #333333;
   font-weight: bold;
