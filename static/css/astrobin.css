@@ -1076,7 +1076,7 @@ form p.error input, form p.error textarea {
   position: absolute;
   top: 50px;
   right: 204px;
-  z-index: 1;
+  z-index: 9999;
 }
 #header #language-prompt .bubble {
   width: 200px;
