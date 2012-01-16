@@ -153,7 +153,7 @@ def index(request):
         if profile and profile.telescopes.all() and profile.cameras.all():
             form = ImageUploadForm()
 
-    sqs = SearchQuerySet().all().models(Image)
+    sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
 
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
