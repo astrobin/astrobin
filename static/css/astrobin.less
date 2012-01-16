@@ -1278,8 +1278,13 @@ form {
                     width: 125px;
 
                     a, a:hover {
-                        padding: 4px 0;
+                        padding: 4px;
                         text-align: left;
+                        width: auto;
+                        float: none;
+                    }
+                    a:hover {
+                        color: @link-color;
                     }
                 }
             }
@@ -1327,7 +1332,7 @@ form {
                 height: 16px;
                 padding: 8px 0 8px 8px;
 
-                a, a:visited, a:active {
+                >a, >a:visited, >a:active {
                     padding: 8px;
                     .icon {
                         img {
@@ -1337,7 +1342,7 @@ form {
                         }
                     }
                 }
-                a:hover .icon img {
+                >a:hover .icon img {
                     visibility: visible;
                 }
             }
@@ -1997,8 +2002,8 @@ ul.topnav {
         border: 1px solid (@border-bottom-color * @strong-hilight-factor);
         background: url('/static/images/popup-footer-bg.png');}
     a {
-        padding: @spacer-small 0 @spacer-small @spacer-medium;
-        margin-left: -@spacer-small;
+        padding: @spacer-small;
+        float: none;
         display: block;}}
 
 .sub {
@@ -2043,11 +2048,13 @@ ul.topnav {
         border-bottom: none;}
     a {
         color: @background-color;
-        width: 100%;
-
-        :hover {
-            color: @link-color;
-            border: none;}}}
+        width: auto;
+        float: none;
+        padding: @spacer-small;
+    }
+    a:hover {
+        color: @link-color;
+        border: none;}}
 
 li:hover >.sub, .sub:hover {
     visibility: visible;}

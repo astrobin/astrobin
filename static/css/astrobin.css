@@ -1178,8 +1178,13 @@ form p.error input, form p.error textarea {
   width: 125px;
 }
 #navigation #nav ul > li.menu .popup a, #navigation #nav ul > li.menu .popup a:hover {
-  padding: 4px 0;
+  padding: 4px;
   text-align: left;
+  width: auto;
+  float: none;
+}
+#navigation #nav ul > li.menu .popup a:hover {
+  color: #cc4b2e;
 }
 #navigation #nav ul li#current > a {
   color: #fcfcfc;
@@ -1234,15 +1239,15 @@ form p.error input, form p.error textarea {
   height: 16px;
   padding: 8px 0 8px 8px;
 }
-#navigation #user-nav > ul > li.text a, #navigation #user-nav > ul > li.text a:visited, #navigation #user-nav > ul > li.text a:active {
+#navigation #user-nav > ul > li.text > a, #navigation #user-nav > ul > li.text > a:visited, #navigation #user-nav > ul > li.text > a:active {
   padding: 8px;
 }
-#navigation #user-nav > ul > li.text a .icon img, #navigation #user-nav > ul > li.text a:visited .icon img, #navigation #user-nav > ul > li.text a:active .icon img {
+#navigation #user-nav > ul > li.text > a .icon img, #navigation #user-nav > ul > li.text > a:visited .icon img, #navigation #user-nav > ul > li.text > a:active .icon img {
   height: 8px;
   width: 8px;
   visibility: hidden;
 }
-#navigation #user-nav > ul > li.text a:hover .icon img {
+#navigation #user-nav > ul > li.text > a:hover .icon img {
   visibility: visible;
 }
 /* AutoSuggest CSS - Version 1.2 */
@@ -2166,8 +2171,8 @@ ul.topnav > li:hover {
   background: url('/static/images/popup-footer-bg.png');
 }
 .sub a {
-  padding: 4px 0 4px 8px;
-  margin-left: -4px;
+  padding: 4px;
+  float: none;
   display: block;
 }
 .sub li {
@@ -2230,8 +2235,8 @@ ul.topnav > li:hover {
   background: url('/static/images/popup-footer-bg.png');
 }
 .popup a {
-  padding: 4px 0 4px 8px;
-  margin-left: -4px;
+  padding: 4px;
+  float: none;
   display: block;
 }
 .popup ul {
@@ -2255,9 +2260,11 @@ ul.topnav > li:hover {
 }
 .popup a {
   color: #333333;
-  width: 100%;
+  width: auto;
+  float: none;
+  padding: 4px;
 }
-.popup a :hover {
+.popup a:hover {
   color: #cc4b2e;
   border: none;
 }
