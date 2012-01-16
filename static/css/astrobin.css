@@ -230,6 +230,9 @@
 .icon-message {
   background: url('/static/icons/iconic/black/message.png') no-repeat left center;
 }
+.icon-check {
+  background: url('/static/icons/iconic/black/check_8x7.png') no-repeat left center;
+}
 .bubble {
   position: relative;
   color: #333333;
@@ -1154,6 +1157,28 @@ form p.error input, form p.error textarea {
   padding: 8px 12px;
   text-align: center;
   text-transform: lowercase;
+}
+#navigation #nav ul > li.menu {
+  position: relative;
+  z-index: 2000;
+}
+#navigation #nav ul > li.menu a.active {
+  -moz-border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 6px 6px 0 0;
+  border-radius: 6px 6px 0 0;
+  background: url('/static/images/popup-bg.png');
+}
+#navigation #nav ul > li.menu .popup {
+  -moz-border-radius: 0 0 6px 6px;
+  -webkit-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  left: 0;
+  top: 32px;
+  width: 125px;
+}
+#navigation #nav ul > li.menu .popup a, #navigation #nav ul > li.menu .popup a:hover {
+  padding: 4px 0;
+  text-align: left;
 }
 #navigation #nav ul li#current > a {
   color: #fcfcfc;
@@ -2224,6 +2249,7 @@ ul.topnav > li:hover {
 }
 .popup li {
   border-bottom: 1px solid #cdcdcd;
+  width: 100%;
 }
 .popup li :hover {
   background: url('/static/images/popup-li-bg.png');
@@ -2233,6 +2259,7 @@ ul.topnav > li:hover {
 }
 .popup a {
   color: #333333;
+  width: 100%;
 }
 .popup a :hover {
   color: #cc4b2e;
@@ -3225,4 +3252,12 @@ form#gear select {
   text-align: center;
   padding-bottom: 12px;
   border: none;
+}
+.wall {
+  position: relative;
+}
+.wall .bar {
+  position: absolute;
+  top: 28px;
+  right: 42px;
 }

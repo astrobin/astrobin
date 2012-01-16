@@ -51,4 +51,6 @@
 {% endfor %}
 </div>
 
-{% include 'pagination.html' %}
+{% if paginate %}
+    {% include 'pagination.html' %}
+{% endif %}

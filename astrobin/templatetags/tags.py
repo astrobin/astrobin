@@ -299,7 +299,7 @@ def image_list(context, request, object_list, paginate = True):
 register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
 
 
-def search_image_list(context, request, object_list):
+def search_image_list(context, request, object_list, paginate = True):
     adjacent_pages = 3
 
     try:
@@ -340,6 +340,7 @@ def search_image_list(context, request, object_list):
         'previous': previous,
         'has_next': has_next,
         'has_previous': has_previous,
+        'paginate': paginate,
         'show_first': 1 not in page_numbers,
         'show_last': pages not in page_numbers,
         'image_list': image_list,
