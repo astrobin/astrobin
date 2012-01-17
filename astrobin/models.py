@@ -834,6 +834,18 @@ class ABPOD(models.Model):
         app_label = 'astrobin'
 
 
+class MessierMarathon(models.Model):
+    messier_number = models.IntegerField(primary_key = True)
+    image = models.ForeignKey(Image)
+    nominations = models.IntegerField(default = 0)
+
+    def __unicode__(self):
+        return 'M %i' % self.messier_number
+
+    class Meta:
+        app_label = 'astrobin'
+
+
 class Request(models.Model):
     from_user = models.ForeignKey(User, editable=False, related_name='requester')
     to_user   = models.ForeignKey(User, editable=False, related_name='requestee')
