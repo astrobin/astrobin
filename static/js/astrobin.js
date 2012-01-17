@@ -414,6 +414,17 @@ var image_detail = {
             },
             element: 'a.image-request-fits',
             url    : '/request/image/fits/'
+        },
+
+        messier_nomination_action: {
+            dialog: {
+                title: '',
+                body: '',
+            },
+            not_messier_title: '',
+            not_messier_body: '',
+            element: 'a.messier-nomination',
+            url: '/messier/nominate/'
         }
     },
 
@@ -770,6 +781,111 @@ var image_detail = {
         });
     },
 
+    setup_messier_nomination: function() {
+        var dlg = $(image_detail.config.messier_nomination_action.element).click(function() {
+            $('<div id="dialog-confirm" title="' +
+              image_detail.config.messier_nomination_action.dialog.title +
+              '"></div>')
+                .html('\
+                        <p>\
+                            <span class="ui-icon ui-icon-info"\
+                                  style="float:left; margin:0 7px 20px 0;">\
+                            </span>' + image_detail.config.messier_nomination_action.dialog.body + '\
+                        </p>')
+                .dialog({
+                    resizable: false,
+                    modal: true,
+                    buttons: [
+                        {
+                            text: 'OK',
+                            click: function() {
+                                $(this).dialog('close');
+                                $.ajax({
+                                    url: image_detail.config.messier_nomination_action.url +
+                                         image_detail.globals.image_id + '/',
+                                    dataType: 'json',
+                                    timeout: 5000,
+                                    success: function(data, textStatus, jqXHR) {
+                                        dlg.dialog('close');
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown) {
+                                        dlg.dialog('close');
+
+                                        /* There no Messier objects in this image. */
+                                        if (jqXHR.status == 412) {
+                                            $('<div id="dialog-confirm" title="' + image_detail.config.messier_nomination_action.not_messier_title + '"></div>')
+                                                    .html('<p>\
+                                                                <span class="ui-icon ui-icon-info"\
+                                                                      style="float:left; margin:0 7px 20px 0;">\
+                                                                </span>' + image_detail.config.messier_nomination_action.not_messier_body + '\
+                                                           </p>')
+                                                    .dialog({
+                                                        resizable: false,
+                                                        modal: true,
+                                                        buttons: [
+                                                            {
+                                                                text: 'OK',
+                                                                click: function() {
+                                                                    $(this).dialog('close');
+                                                                }
+                                                            }
+                                                        ]
+                                                    });
+                                        } // 412
+                                        else if (jqXHR.status == 409) {
+                                            data = $.parseJSON(jqXHR.responseText);
+
+                                            html = '<p>\
+                                                        <span class="ui-icon ui-icon-info"\
+                                                              style="float:left; margin:0 7px 20px 0;">\
+                                                        </span>' + image_detail.config.messier_nomination_action.multiple_messier_body + '\
+                                                        <form id="multiple-messier-form" action="' + image_detail.config.messier_nomination_action.url + '" method="get">\
+                                                            <select>'
+                                            $.each(data['objects'], function() {
+                                                html += '<option value="' + this + '">M ' + this + '</option>';
+                                            });
+                                            html += '\
+                                                            </select>\
+                                                        </form>\
+                                                   </p>'
+
+                                            $('<div id="dialog-confirm" title="' + image_detail.config.messier_nomination_action.multiple_messier_title + '"></div>')
+                                                    .html(html).dialog({
+                                                        resizable: false,
+                                                        modal: true,
+                                                        buttons: [
+                                                            {
+                                                                text: 'OK',
+                                                                click: function() {
+                                                                    $('#multiple-messier-form').submit();
+                                                                    $(this).dialog('close');
+                                                                }
+                                                            },
+                                                            {
+                                                                text: $.i18n._('Cancel'),
+                                                                click: function() {
+                                                                    $(this).dialog('close');
+                                                                }
+                                                            }
+                                                        ]
+                                                    });
+                                        }
+                                    }
+                                });
+                            }
+                        },
+                        {
+                            text: $.i18n._('Cancel'),
+                            click: function() {
+                                $(this).dialog('close');
+                            }
+                        }
+                    ]
+                });
+             return false;
+        });
+    },
+
     setup_view_more_subjects: function() {
         var $hidden = $('#more-subjects .hidden');
         var $more = $('#more-subjects .more');
@@ -826,6 +942,9 @@ var image_detail = {
         /* Requests */
         image_detail.setup_image_request_additional_information();
         image_detail.setup_image_request_fits();
+
+        /* Messier marathon */
+        image_detail.setup_messier_nomination();
 
         /* View more subjects */
         image_detail.setup_view_more_subjects();

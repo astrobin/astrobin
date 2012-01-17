@@ -229,7 +229,31 @@ def wall(request):
 def messier(request):
     """Messier marathon"""
 
+    return HttpResponse(200)
 
+
+@require_GET
+@login_required
+def messier_nomination(request, id):
+    image = get_object_or_404(Image, pk=id)
+    subjects = image.subjects.all()
+    messier = [x.name for x in subjects if x.catalog == 'M']
+    if not messier:
+        # 412 means "Precondition failed"
+        return HttpResponse(status=412)
+
+    if len(messier) == 1:
+        marathon_item, created = MessierMarathon.objects.get(
+            messier_number = int(messier[0]),
+            image = image)
+        marathon_item.nominations += 1
+        marathon_item.save()
+
+        return HttpResponse(status=200)
+
+    return HttpResponse(status=409, content = simplejson.dumps({'objects': messier}))
+
+        
 @require_GET
 def no_javascript(request):
     return render_to_response('no_javascript.html',

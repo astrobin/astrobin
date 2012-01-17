@@ -118,6 +118,10 @@
                                     <li class="last bg-icon icon-file">
                                         <span class="text"><a class="image-request-fits" href="#">{% trans "Request TIFF/FITS" %}</a></span>
                                     </li>
+                                    <li class="separator"></li>
+                                    <li class="last bg-icon icon-book">
+                                        <span class="text"><a class="messier-nomination" href="#">{% trans "Nominate for the Messier Marathon" %}</a></span>
+                                    </li>
                                 {% endif %}
                                 </ul>
                             </div>
@@ -726,6 +730,16 @@ $(document).ready(function() {
                     title : "{% trans "Request TIFF/FITS" %}",
                     body  : "{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully {{username}} will contact you about how to handle the transaction. Continue?{% endblocktrans %}"
                 }
+            },
+            messier_nomination_action: {
+                dialog: {
+                    title: "{% trans "Nominate for the Messier Marathon" %}",
+                    body : "{% url messier as the_url %}{% blocktrans %}You will nominate this image for the <a href=\"{{the_url}}\" target=\"_blank\">Messier Marathon</a>. The Messier Marathon is a list of the Messier objects that features AstroBin images nominated by the users. For each Messier object, the AstroBin image with the most nomination is chosen. Continue?{% endblocktrans %}"
+                },
+                not_messier_title: "{% trans "No Messier objects in this image" %}",
+                not_messier_body: "{% blocktrans %}Sorry, but it doesn't look like this image contains a Messier object. If you think this is a mistake, please contact the author of the image and ask them to add the correct Messier object as a subject.{% endblocktrans %}",
+                multiple_messier_title: "{% trans "Multiple Messier objects in this image" %}",
+                multiple_messier_body: "{% blocktrans %}This image contains multiple Messier objects. Please choose the one for which you are nominating this image.{% endblocktrans %}"
             }
         });
     });
