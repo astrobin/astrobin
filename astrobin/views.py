@@ -174,6 +174,7 @@ def index(request):
         extra_context = response_dict)
 
 
+@require_GET
 def wall(request):
     """The Big Wall"""
     sqs = SearchQuerySet().all().models(Image)
@@ -222,6 +223,11 @@ def wall(request):
         template_object_name='image',
         paginate_by = 100,
         extra_context = response_dict)
+
+
+@require_GET
+def messier(request):
+    """Messier marathon"""
 
 
 @require_GET

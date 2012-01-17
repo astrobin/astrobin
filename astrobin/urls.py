@@ -145,6 +145,7 @@ urlpatterns = patterns('',
 
     url(r'^wall/', views.wall, name='wall'),
     url(r'^nightly/', views.nightly, name='nightly'),
+    url(r'^messier/', views.messier, name='messier'),
 
     url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 )
