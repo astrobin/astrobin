@@ -62,26 +62,26 @@
   color: #393939;
 }
 .danger-gradient {
-  border: 1px solid #f9645b;
-  border-top: 1px solid #ff7066;
-  background: #f9645b;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff7066), to(#f9645b));
-  background: -moz-linear-gradient(top, #ff7066, #f9645b);
+  border: 1px solid #f5271b;
+  border-top: 1px solid #ff2c1e;
+  background: #f5271b;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff2c1e), to(#f5271b));
+  background: -moz-linear-gradient(top, #ff2c1e, #f5271b);
   color: #fcfcfc;
 }
 .danger-gradient-hilighted {
-  border-top-color: #ff7d72;
-  background: #ff7066;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff7d72), to(#f9645b));
-  background: -moz-linear-gradient(top, #ff7d72, #f9645b);
+  border-top-color: #ff3122;
+  background: #ff2c1e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff3122), to(#f5271b));
+  background: -moz-linear-gradient(top, #ff3122, #f5271b);
   color: #ffffff;
 }
 .danger-gradient-active {
-  border-color: #f9645b;
-  border-bottom-color: #ff7066;
-  background: #de5951;
-  background: -webkit-gradient(linear, left top, left bottom, from(#f9645b), to(#de5951));
-  background: -moz-linear-gradient(top, #f9645b, #de5951);
+  border-color: #f5271b;
+  border-bottom-color: #ff2c1e;
+  background: #db2318;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f5271b), to(#db2318));
+  background: -moz-linear-gradient(top, #f5271b, #db2318);
   color: #ffffff;
 }
 .box-shadow {
@@ -774,10 +774,10 @@ a:hover {
   color: #e45434;
 }
 a.danger, a:visited.danger {
-  color: #f9645b;
+  color: #f5271b;
 }
 a:hover.danger {
-  color: #ff7066;
+  color: #ff2c1e;
 }
 /* headers */
 h1,
@@ -955,12 +955,12 @@ form select[multiple]:focus {
   color: #c9c9c9;
 }
 form p.error label {
-  color: #f9645b;
+  color: #f5271b;
   text-decoration: underline;
 }
 form p.error input, form p.error textarea {
-  border: 1px solid #f9645b;
-  border-bottom: 1px solid #ff7d72;
+  border: 1px solid #f5271b;
+  border-bottom: 1px solid #ff3122;
 }
 .button, .button:visited {
   height: auto;
@@ -1002,26 +1002,26 @@ form p.error input, form p.error textarea {
 }
 .dangerous-button, .dangerous-button:visited {
   margin: 12px 0;
-  border: 1px solid #f9645b;
-  border-top: 1px solid #ff7066;
-  background: #f9645b;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff7066), to(#f9645b));
-  background: -moz-linear-gradient(top, #ff7066, #f9645b);
+  border: 1px solid #f5271b;
+  border-top: 1px solid #ff2c1e;
+  background: #f5271b;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff2c1e), to(#f5271b));
+  background: -moz-linear-gradient(top, #ff2c1e, #f5271b);
   color: #fcfcfc;
 }
 .dangerous-button:hover {
-  border-top-color: #ff7d72;
-  background: #ff7066;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff7d72), to(#f9645b));
-  background: -moz-linear-gradient(top, #ff7d72, #f9645b);
+  border-top-color: #ff3122;
+  background: #ff2c1e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff3122), to(#f5271b));
+  background: -moz-linear-gradient(top, #ff3122, #f5271b);
   color: #ffffff;
 }
 .dangerous-button:active {
-  border-color: #f9645b;
-  border-bottom-color: #ff7066;
-  background: #de5951;
-  background: -webkit-gradient(linear, left top, left bottom, from(#f9645b), to(#de5951));
-  background: -moz-linear-gradient(top, #f9645b, #de5951);
+  border-color: #f5271b;
+  border-bottom-color: #ff2c1e;
+  background: #db2318;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f5271b), to(#db2318));
+  background: -moz-linear-gradient(top, #f5271b, #db2318);
   color: #ffffff;
 }
 .button-disabled,
@@ -1229,7 +1229,10 @@ form p.error input, form p.error textarea {
   margin: 0;
   display: inline;
 }
-#navigation #user-nav > ul > li > a.icon, #navigation #user-nav > ul > li > a:visited.icon {
+#navigation #user-nav > ul > li .notice-container > a.icon,
+#navigation #user-nav > ul > li .menu-container > a.icon,
+#navigation #user-nav > ul > li .notice-container > a:visited.icon,
+#navigation #user-nav > ul > li .menu-container > a:visited.icon {
   float: left;
   margin: 0;
   text-align: center;
@@ -1237,11 +1240,39 @@ form p.error input, form p.error textarea {
   height: 32px;
   width: 40px;
 }
-#navigation #user-nav > ul > li > a.active, #navigation #user-nav > ul > li > a:visited.active {
+#navigation #user-nav > ul > li .notice-container > a.active,
+#navigation #user-nav > ul > li .menu-container > a.active,
+#navigation #user-nav > ul > li .notice-container > a:visited.active,
+#navigation #user-nav > ul > li .menu-container > a:visited.active {
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
   background: url('/static/images/popup-bg.png');
+}
+#navigation #user-nav > ul > li .notice-container .notice-count, #navigation #user-nav > ul > li .menu-container .notice-count {
+  position: absolute;
+  top: -2px;
+  left: 22px;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 75%;
+  background-color: #f5271b;
+  color: #fcfcfc;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+  padding: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+}
+#navigation #user-nav > ul > li .menu-container a {
+  padding: 8px;
+}
+#navigation #user-nav > ul > li .menu-container img {
+  width: 8px;
+  height: 8px;
 }
 #navigation #user-nav > ul > li.text {
   height: 16px;
@@ -2198,10 +2229,10 @@ ul.topnav > li:hover {
   color: #cc4b2e;
 }
 .sub li a.danger {
-  color: #f9645b;
+  color: #f5271b;
 }
 .sub li a.danger :hover {
-  color: #ff7066;
+  color: #ff2c1e;
 }
 .sub li > img {
   padding-top: 4px;
@@ -2505,7 +2536,7 @@ form ul.errorlist, .errorField {
   position: relative;
   top: 6px;
   font-size: 87.5%;
-  color: #f9645b;
+  color: #f5271b;
 }
 .errorField {
   margin-left: 162px;
