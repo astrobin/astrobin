@@ -115,7 +115,7 @@
                                         <span class="text"><a href="{% url image_request_additional_information image.id %}">{% trans "Request additional information" %}</a></span>
                                     </li>
                                     <li class="last bg-icon icon-file">
-                                        <span class="text"><a class="image-request-fits" href="#">{% trans "Request TIFF/FITS" %}</a></span>
+                                        <span class="text"><a href="{% url image_request_fits image.id %}">{% trans "Request TIFF/FITS" %}</a></span>
                                     </li>
                                 {% endif %}
                                 {% if is_ready %}
@@ -702,12 +702,6 @@ $(document).ready(function() {
                     title : "{% trans "Delete original image?" %}",
                     body  : "{% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}",
                     button: "{% trans "Yes, delete image" %}"
-                }
-            },
-            image_request_fits_action: {
-                dialog: {
-                    title : "{% trans "Request TIFF/FITS" %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully {{username}} will contact you about how to handle the transaction. Continue?{% endblocktrans %}"
                 }
             }
         });

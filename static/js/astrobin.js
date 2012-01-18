@@ -380,15 +380,6 @@ var image_detail = {
             },
             element: 'a.delete-original',
             url    : '/delete/original/'
-        },
-
-        image_request_fits_action: {
-            dialog: {
-                title: '',
-                body: ''
-            },
-            element: 'a.image-request-fits',
-            url    : '/request/image/fits/'
         }
     },
 
@@ -614,48 +605,6 @@ var image_detail = {
         });
     },
 
-    setup_image_request_fits: function() {
-        var dlg = $(image_detail.config.image_request_fits_action.element).click(function() {
-            $('<div id="dialog-confirm" title="' +
-              image_detail.config.image_request_fits_action.dialog.title +
-              '"></div>')
-                .html('\
-                        <p>\
-                            <span class="ui-icon ui-icon-info"\
-                                  style="float:left; margin:0 7px 20px 0;">\
-                            </span>' + image_detail.config.image_request_fits_action.dialog.body + '\
-                        </p>')
-                .dialog({
-                    resizable: false,
-                    modal: true,
-                    buttons: [
-                        {
-                            text: 'OK',
-                            click: function() {
-                                $(this).dialog('close');
-                                $.ajax({
-                                    url: image_detail.config.image_request_fits_action.url +
-                                         image_detail.globals.image_id + '/',
-                                    dataType: 'json',
-                                    timeout: 5000,
-                                    success: function() {
-                                        dlg.dialog('close');
-                                    }
-                                });
-                            }
-                        },
-                        {
-                            text: $.i18n._('Cancel'),
-                            click: function() {
-                                $(this).dialog('close');
-                            }
-                        }
-                    ]
-                });
-             return false;
-        });
-    },
-
     setup_view_more_subjects: function() {
         var $hidden = $('#more-subjects .hidden');
         var $more = $('#more-subjects .more');
@@ -705,9 +654,6 @@ var image_detail = {
         image_detail.setup_delete();
         image_detail.setup_delete_revision();
         image_detail.setup_delete_original();
-
-        /* Requests */
-        image_detail.setup_image_request_fits();
 
         /* View more subjects */
         image_detail.setup_view_more_subjects();

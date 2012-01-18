@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="info-side-bar">
+        <ul>
+            {% if image.is_stored %}
+            <li class="first last" style="margin: 8px 0;">
+                <a href="{% url image_detail image.id %}">
+                    <img class="thumbnail" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}"/>
+                 </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="sided-main-content">
+        <h1>{% trans "Request TIFF/FITS" %}</h1>
+        <p>
+            {% blocktrans with image.user.username as username %}You will notify {{username}} that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully {{username}} will contact you about how to handle the transaction. Continue?{% endblocktrans %}
+        </p>
+        <form>
+            <ul>
+                <li><a class="button submit-button" href="{% url image_request_fits_process image.id %}">{% trans "Continue" %} &rarr;</a></li>
+                <li><a href="{% url image_detail image.id %}">{% trans "Return to image" %}</a></li>
+            </ul>
+        </form>
+    </div>
+{% endblock %}
