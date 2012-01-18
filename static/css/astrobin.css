@@ -1544,6 +1544,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   background: #2e2e2e url('/static/images/dark-panel-tile.png');
 }
 .info-side-bar img.thumbnail {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
   border: 1px solid #cc4b2e;
 }
 .info-side-bar p {
@@ -2149,6 +2152,9 @@ ul.topnav > li:hover {
 #image-detail #main-image #container img {
   cursor: -moz-zoom-in;
   border: 1px solid #2e2e2e;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
   position: relative;
   top: 0;
   left: 0;
@@ -2582,6 +2588,11 @@ input.date {
   list-style: none;
   margin: 6px 0;
   padding: 12px;
+}
+.image-strip img {
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
 }
 .ic_caption a {
   color: black;
