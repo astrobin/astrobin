@@ -1259,10 +1259,10 @@ form p.error input, form p.error textarea {
   background-color: #f5271b;
   color: #fcfcfc;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
-  padding: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  padding: 3px 4px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
