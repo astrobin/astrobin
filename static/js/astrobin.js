@@ -382,22 +382,6 @@ var image_detail = {
             url    : '/delete/original/'
         },
 
-        bring_to_attention_action: {
-            dialog: {
-                title : '',
-                body  : '',
-                button: '',
-                height:340 
-            },
-            element  : 'a.bring-to-attention',
-            form_html: '',
-            autocomplete: {
-                startText: '',
-                emptyText: ''
-            },
-            url: ''
-        },
-
         image_request_additional_information_action: {
             dialog: {
                 title: '',
@@ -639,53 +623,6 @@ var image_detail = {
         });
     },
 
-    setup_bring_to_attention: function() {
-        $(image_detail.config.bring_to_attention_action.element).click(function() {
-            var dlg = $('\
-                <div id="dialog-attention" title="' + image_detail.config.bring_to_attention_action.dialog.title + '"></div>')
-                .html('\
-                    <div class="sided-main-content-popup">\
-                    <p>\
-                        ' + image_detail.config.bring_to_attention_action.dialog.body + '\
-                    </p>\
-                    <form id="attention" action="" method="post">\
-                        ' + image_detail.config.bring_to_attention_action.form_html + '\
-                        <input type="hidden" name="image_id" value="' + image_detail.globals.image_id  + '"/>\
-                        <input id="submit"\
-                               class="button submit-button"\
-                               type="button"\
-                               value="' + image_detail.config.bring_to_attention_action.dialog.button + '"/>\
-                    </form>\
-                    </div>\
-                ')
-                .dialog({
-                    resizable: false,
-                    height: image_detail.config.bring_to_attention_action.dialog.height,
-                    modal: true});
-
-            $('#id_user').autoSuggest('/autocomplete_usernames/', {
-                asHtmlID: 'user',
-                selectedItemProp: 'name',
-                searchObjProps: 'name',
-                preFill: '',
-                selectedItemProp: 'name',
-                selectedValuesProp: 'name',
-                startText: image_detail.config.bring_to_attention_action.autocomplete.startText,
-                emptyText: image_detail.config.bring_to_attention_action.autocomplete.emptyText
-            });
-
-            $('form#attention #submit').one('click', function() {
-                $.post(image_detail.config.bring_to_attention_action.url,
-                       $("form#attention").serialize(),
-                       function() {
-                            dlg.dialog('close');
-                       },
-                       'json');
-            });
-            return false;
-        });
-    },
-
     setup_image_request_additional_information: function() {
         var dlg = $(image_detail.config.image_request_additional_information_action.element).click(function() {
             $('<div id="dialog-confirm" title="' +
@@ -819,9 +756,6 @@ var image_detail = {
         image_detail.setup_delete();
         image_detail.setup_delete_revision();
         image_detail.setup_delete_original();
-
-        /* Bring to a user's attention */
-        image_detail.setup_bring_to_attention();
 
         /* Requests */
         image_detail.setup_image_request_additional_information();
