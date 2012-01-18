@@ -1188,7 +1188,7 @@ form p.error input, form p.error textarea {
   text-align: left;
   float: none;
   display: block;
-  padding: 4px;
+  padding: 8px 4px;
   width: auto;
 }
 #navigation #nav ul > li.menu .popup a:hover {
@@ -2310,7 +2310,7 @@ ul.topnav > li:hover {
 }
 .popup a {
   color: #333333;
-  padding: 4px;
+  padding: 8px 4px;
   width: auto;
   float: none;
   display: block;
