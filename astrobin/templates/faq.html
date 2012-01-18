@@ -13,8 +13,9 @@
         <li><a href="#4">{% blocktrans %}Is my data safe on AstroBin?{% endblocktrans %}</a></li>
         <li><a href="#5">{% blocktrans %}I've seen beautiful images on this site. I'm not worthy of posting mine!{% endblocktrans %}</a></li>
         <li><a href="#6">{% blocktrans %}What's the deal with the Staging Area and the Public Area?{% endblocktrans %}</a></li>
-        <li><a href="#7">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
-        <li><a href="#8">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
+        <li><a href="#7">{% blocktrans %}How do I get an image featured on the Messier Marathon page?{% endblocktrans %}</a></li>
+        <li><a href="#8">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
+        <li><a href="#9">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
     </ol>
     <br/>
     <h2>{% trans "... and their answers!" %}</h2>
@@ -70,8 +71,17 @@
             <p>
             {% blocktrans %}The Public Area, instead, is for your finished products. After you have received feedback on your favorite forum, you can promote an image from the Staging Area to the Public Area, and it will appear on your profile. Remember that you can also move images back and forth from one Area to the other as many times as you want!{% endblocktrans %}
             </p>
+        </li>
         <li>
             <a name="7"></a>
+            <h4>{% blocktrans %}How do I get an image featured on the Messier Marathon page?{% endblocktrans %}</h4>
+            <p>
+            {% url messier as messier_url %}
+            {% blocktrans %}Images on the <a href="{{messier_url}}">Messier Marathon page</a> are selected via a democratic nomination process. If you see an image of some Messier Object, and you think that it should appear on the Messier Marathon page, nominate it using the <strong>Actions</strong> menu. The image with the most nominations for a certain Messier object will automatically be featured.{% endblocktrans %}
+            </p>
+        </li>
+        <li>
+            <a name="8"></a>
             <h4>{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</h4>
             <p>
             {% blocktrans %}AstroBin was born out of the desire to end something that had been going on for too long: the waste of incredible material to the sea of chaos that the Internet can be. For years, fantastic astrophotographs have beeen uploaded to Internet Forums, often with little or no data, or to general purpose image hosting websites, invariably with no data attached.{% endblocktrans %}
@@ -84,7 +94,7 @@
             </p>
         </li>
         <li>
-            <a name="8"></a>
+            <a name="9"></a>
             <h4>{% blocktrans %}What are the plans for the future?{% endblocktrans %}</h4>
             <p>
             {% blocktrans %}<em>AstroBin</em> is just starting out, and this time we can really say that the sky is the limit! Tons of ideas are in the pipeline. As the user base grows, so does the data. Suddenly, things like automated supernovae search become possible: you could simply upload an image of a galaxy, and AstroBin could compare it to pictures of the same galaxy taken previously.{% endblocktrans %}
