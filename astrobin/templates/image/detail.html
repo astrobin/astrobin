@@ -38,13 +38,6 @@
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
                                 <ul class="subnav">
-                                    <noscript>
-                                    <li style="padding-bottom: 12px;">
-                                        <strong>
-                                            {% blocktrans %}Sorry, but the items in this menu<br/>require Javascript, at this time.{% endblocktrans %}
-                                        </strong>
-                                    </li>
-                                    </noscript>
                                 {% if request.user == image.user or request.user.is_superuser %}
                                     <li class="first bg-icon icon-edit">
                                         <span class="text"><a href="{% url image_edit_basic image.id %}">{% trans "Edit basic information" %}</a></span>
