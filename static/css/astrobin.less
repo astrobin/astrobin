@@ -2189,7 +2189,7 @@ span.copy-box {
     z-index: 1;
     bottom: 0 - @wrap-shadow-offset;
     height: @footer-height;
-    margin-bottom: -(@footer-height - @wrap-shadow-offset);
+    margin-bottom: -(@footer-height - @wrap-shadow-offset + @spacer-large);
     .box-shadow;
     text-align: center;
     background: (@background-color / @strong-hilight-factor) url('/static/images/footer-bg.png');
@@ -2416,6 +2416,7 @@ margin-left: 20px;}
 
 #feedback {
     position: fixed;
+    z-index: 4;
     top: 50%;
     right: 0;
     padding: @spacer-medium @spacer-large;
