@@ -2404,7 +2404,7 @@ span.copy-box {
   z-index: 1;
   bottom: 0px;
   height: 274px;
-  margin-bottom: -274px;
+  margin-bottom: -286px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -2629,6 +2629,7 @@ p.info strong {
 }
 #feedback {
   position: fixed;
+  z-index: 4;
   top: 50%;
   right: 0;
   padding: 8px 12px;
