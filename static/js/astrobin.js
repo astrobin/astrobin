@@ -382,15 +382,6 @@ var image_detail = {
             url    : '/delete/original/'
         },
 
-        image_request_additional_information_action: {
-            dialog: {
-                title: '',
-                body: ''
-            },
-            element: 'a.image-request-additional-information',
-            url    : '/request/image/additional_information/'
-        },
-
         image_request_fits_action: {
             dialog: {
                 title: '',
@@ -623,48 +614,6 @@ var image_detail = {
         });
     },
 
-    setup_image_request_additional_information: function() {
-        var dlg = $(image_detail.config.image_request_additional_information_action.element).click(function() {
-            $('<div id="dialog-confirm" title="' +
-              image_detail.config.image_request_additional_information_action.dialog.title +
-              '"></div>')
-                .html('\
-                        <p>\
-                            <span class="ui-icon ui-icon-info"\
-                                  style="float:left; margin:0 7px 20px 0;">\
-                            </span>' + image_detail.config.image_request_additional_information_action.dialog.body + '\
-                        </p>')
-                .dialog({
-                    resizable: false,
-                    modal: true,
-                    buttons: [
-                        {
-                            text: 'OK',
-                            click: function() {
-                                $(this).dialog('close');
-                                $.ajax({
-                                    url: image_detail.config.image_request_additional_information_action.url +
-                                         image_detail.globals.image_id + '/',
-                                    dataType: 'json',
-                                    timeout: 5000,
-                                    success: function() {
-                                        dlg.dialog('close');
-                                    }
-                                });
-                            }
-                        },
-                        {
-                            text: $.i18n._('Cancel'),
-                            click: function() {
-                                $(this).dialog('close');
-                            }
-                        }
-                    ]
-                });
-            return false;
-        });
-    },
-
     setup_image_request_fits: function() {
         var dlg = $(image_detail.config.image_request_fits_action.element).click(function() {
             $('<div id="dialog-confirm" title="' +
@@ -758,7 +707,6 @@ var image_detail = {
         image_detail.setup_delete_original();
 
         /* Requests */
-        image_detail.setup_image_request_additional_information();
         image_detail.setup_image_request_fits();
 
         /* View more subjects */

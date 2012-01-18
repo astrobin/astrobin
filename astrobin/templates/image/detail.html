@@ -108,11 +108,11 @@
                                     <li class="separator"></li>
                                 {% endif %}
                                     <li class="bg-icon icon-quote">
-                                        <span class="text"><a class="bring-to-attention" href="{% url bring_to_attention image.id %}">{% trans "Bring to a user's attention" %}</a></span>
+                                        <span class="text"><a href="{% url bring_to_attention image.id %}">{% trans "Bring to a user's attention" %}</a></span>
                                     </li>
                                 {% if request.user != image.user %}
                                     <li class="bg-icon icon-info">
-                                        <span class="text"><a class="image-request-additional-information" href="#">{% trans "Request additional information" %}</a></span>
+                                        <span class="text"><a href="{% url image_request_additional_information image.id %}">{% trans "Request additional information" %}</a></span>
                                     </li>
                                     <li class="last bg-icon icon-file">
                                         <span class="text"><a class="image-request-fits" href="#">{% trans "Request TIFF/FITS" %}</a></span>
@@ -702,12 +702,6 @@ $(document).ready(function() {
                     title : "{% trans "Delete original image?" %}",
                     body  : "{% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}",
                     button: "{% trans "Yes, delete image" %}"
-                }
-            },
-            image_request_additional_information_action: {
-                dialog: {
-                    title : "{% trans "Request additional information" %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will notify {{username}} that you would like them to feed more information in the technical card for this photograph. Continue?{% endblocktrans %}"
                 }
             },
             image_request_fits_action: {
