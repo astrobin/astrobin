@@ -67,7 +67,7 @@
                         <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                         <div class="sub">
                             <ul class="subnav">
-                                <li class="bg-icon{% if 'sub' not in request.GET or request.GET.sub == 'uploaded' %} icon-check{% endif %}">
+                                <li class="bg-icon{% if request.GET.sub == 'uploaded' %} icon-check{% endif %}">
                                     <span class="text">
                                         <a href="?public&sub=uploaded">{% trans "Upload time" %}</a>
                                     </span>
@@ -82,7 +82,7 @@
                                         <a href="?public&sub=subject">{% trans "Subject type" %}</a>
                                     </span>
                                 </li>
-                                <li class="bg-icon{% if request.GET.sub == 'year' %} icon-check{% endif %}">
+                                <li class="bg-icon{% if 'sub' not in request.GET or request.GET.sub == 'year' %} icon-check{% endif %}">
                                     <span class="text">
                                         <a href="?public&sub=year">{% trans "Year" %}</a>
                                     </span>
