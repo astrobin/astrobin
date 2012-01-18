@@ -119,7 +119,7 @@
                             <li id="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
                             <li id="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
                             <li class="menu text">
-                                <a href="#">{% trans "Images" %}</a>
+                                <a href="#">{% trans "Explore" %}</a>
                                 <div class="popup">
                                     <ul>
                                         <li><a href="{% url wall %}">{% trans "The Big Wall" %}</a></li>
@@ -402,6 +402,7 @@
                 $('a[rel*=facebox]').facebox();
 
                 $('.capty').capty({animation: 'fade', speed: 150, height: 45});
+                $('.capty-fixed').capty({animation: 'fixed', height: 45, opacity: 0.6});
                 $('.capty-content').show();
 
                 // date and time pickers

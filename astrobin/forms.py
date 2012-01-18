@@ -231,11 +231,11 @@ class PrivateMessageForm(forms.Form):
 
 
 class BringToAttentionForm(forms.Form):
-    user = forms.CharField(max_length=64, required=False)
+    users = forms.CharField(max_length=64, required=False)
 
     def __init__(self, user=None, **kwargs):
         super(BringToAttentionForm, self).__init__(**kwargs)
-        self.fields['user'].label = _("User")
+        self.fields['users'].label = _("Users")
 
 
 class ImageRevisionUploadForm(forms.Form):
@@ -457,4 +457,10 @@ class ImageLicenseForm(forms.ModelForm):
         model = Image
         fields = ('license',)
 
+
+class MultipleMessierForm(forms.Form):
+    def __init__(self, objects=None, **kwargs):
+        super(MultipleMessierForm, self).__init__(**kwargs)
+        self.fields['messier_object'] = forms.ChoiceField(choices = [((x, 'M %s' % x)) for x in objects])
+        self.fields['messier_object'].label = _("Nominate for")
 

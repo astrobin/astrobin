@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.db.models import signals
-from django.utils.translation import ugettext_lazy as _
 from notification import models as notification
+
+def _(s): return s
 
 # Fields:
 # 0 - notice label
@@ -81,11 +82,25 @@ NOTICE_TYPES = (
         '',
         0
     ),
+    (
+        'messier_nomination',
+        _("Nomination for the Messier Marathon"),
+        '',
+        2
+    ),
+    (
+        'messier_top_nomination',
+        _("Top Nomination for the Messier Marathon"),
+        '',
+        2
+    ),
+
 )
 
 
 def create_notice_types(app, created_models, verbosity, **kwargs):
     for notice_type in NOTICE_TYPES:
+        print "Creating notice: %s" % notice_type[0]
         notification.create_notice_type(notice_type[0],
                                         notice_type[1],
                                         notice_type[2],

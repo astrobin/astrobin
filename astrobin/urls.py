@@ -143,10 +143,11 @@ urlpatterns = patterns('',
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
 
-    url(r'^wall/$', views.wall, name='wall'),
-    url(r'^nightly/$', views.nightly, name='nightly'),
-    url(r'^messier/$', views.messier, name='messier'),
-    url(r'^messier/nominate/(?P<id>\d+)/$', views.messier_nomination, name='messier_nomination'),
+    url(r'^explore/wall/$', views.wall, name='wall'),
+    url(r'^explore/nightly/$', views.nightly, name='nightly'),
+    url(r'^explore/messier/$', views.messier, name='messier'),
+    url(r'^explore/messier/nominate/(?P<id>\d+)/$', views.messier_nomination, name='messier_nomination'),
+    url(r'^explore/messier/nominate/process/$', views.messier_nomination_process, name='messier_nomination_process'),
 
     url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 )

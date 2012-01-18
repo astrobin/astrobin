@@ -229,31 +229,111 @@ def wall(request):
 def messier(request):
     """Messier marathon"""
 
-    return HttpResponse(200)
+    queryset = Image.objects.exclude(messiermarathon = None).order_by('messiermarathon__messier_number')
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+    }
+
+    return object_list(
+        request, 
+        queryset=queryset,
+        template_name='messier_marathon.html',
+        template_object_name='image',
+        paginate_by = 55, # Haha, how clever.
+        extra_context = response_dict)
 
 
 @require_GET
 @login_required
 def messier_nomination(request, id):
     image = get_object_or_404(Image, pk=id)
+
+    response_dict = {
+        's3_url': settings.S3_URL,
+        'image': image,
+        'has_messier': False,
+        'has_multiple_messier': False,
+        'messier_object': None,
+        'messier_objects_list': [],
+        'form': None,
+    }
+
     subjects = image.subjects.all()
     messier = [x.name for x in subjects if x.catalog == 'M']
     if not messier:
-        # 412 means "Precondition failed"
-        return HttpResponse(status=412)
+        pass
+    elif len(messier) == 1:
+        response_dict['has_messier'] = True
+        response_dict['messier_object'] = messier[0]
+    else:
+        response_dict['has_messier'] = True
+        response_dict['has_multiple_messier'] = True
+        response_dict['form'] = MultipleMessierForm(messier)
 
-    if len(messier) == 1:
-        marathon_item, created = MessierMarathon.objects.get(
-            messier_number = int(messier[0]),
-            image = image)
-        marathon_item.nominations += 1
-        marathon_item.save()
+    return render_to_response(
+        'messier_nomination.html',
+        response_dict,
+        context_instance = RequestContext(request))
 
-        return HttpResponse(status=200)
 
-    return HttpResponse(status=409, content = simplejson.dumps({'objects': messier}))
+@require_POST
+@login_required
+def messier_nomination_process(request):
+    image = get_object_or_404(Image, pk=request.POST['image_id'])
+    messier_object = request.POST['messier_object']
 
-        
+    response_dict = {
+        's3_url': settings.S3_URL,
+        'image': image,
+        'already_nominated': False,
+    }
+
+    nominations, created = MessierMarathonNominations.objects.get_or_create(
+        messier_number = int(messier_object),
+        image = image)
+    if nominations.nominators.filter(id = request.user.id):
+        response_dict['already_nominated'] = True
+    else:
+        top_for_object = MessierMarathonNominations.objects.filter(messier_number = int(messier_object)).order_by('-nominations')[:1]
+        top_nominations = top_for_object[0].nominations if top_for_object else 0
+
+        nominations.nominators.add(request.user)
+        nominations.nominations += 1
+        nominations.save()
+
+        push_notification(
+            [image.user], 'messier_nomination',
+            {
+                'user': request.user.username,
+                'user_url': request.user.get_absolute_url(),
+                'messier_object': 'M %s' % messier_object,
+                'image_url': image.get_absolute_url(),
+            },
+        )
+
+        if nominations.nominations > top_nominations:
+            try:
+                marathon_item = MessierMarathon.objects.get(messier_number = int(messier_object))
+                marathon_item.image = image
+            except MessierMarathon.DoesNotExist:
+                marathon_item = MessierMarathon(messier_number = int(messier_object), image = image)
+            finally:
+                marathon_item.save()
+                push_notification(
+                    [image.user], 'messier_top_nomination',
+                    {
+                        'messier_object': 'M %s' % messier_object,
+                        'image_url': image.get_absolute_url(),
+                    },
+                )
+
+    return render_to_response(
+        'messier_nomination_finish.html',
+        response_dict,
+        context_instance = RequestContext(request))
+
+
 @require_GET
 def no_javascript(request):
     return render_to_response('no_javascript.html',

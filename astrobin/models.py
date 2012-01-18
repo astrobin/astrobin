@@ -834,16 +834,31 @@ class ABPOD(models.Model):
         app_label = 'astrobin'
 
 
-class MessierMarathon(models.Model):
-    messier_number = models.IntegerField(primary_key = True)
+class MessierMarathonNominations(models.Model):
+    messier_number = models.IntegerField()
     image = models.ForeignKey(Image)
     nominations = models.IntegerField(default = 0)
+    nominators = models.ManyToManyField(User, null=True)
 
     def __unicode__(self):
         return 'M %i' % self.messier_number
 
     class Meta:
         app_label = 'astrobin'
+        unique_together = ('messier_number', 'image')
+        ordering = ('messier_number', 'nominations')
+
+
+class MessierMarathon(models.Model):
+    messier_number = models.IntegerField(primary_key = True)
+    image = models.ForeignKey(Image)
+
+    def __unicode__(self):
+        return 'M %i' % self.messier_number
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ('messier_number',)
 
 
 class Request(models.Model):
