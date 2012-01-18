@@ -2748,18 +2748,15 @@ p.error {
 .pagination .prev,
 .pagination .next {
   display: inline-block;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #b8b8b8;
-  background: #fcfcfc;
-  background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#e1e1e1));
-  background: -moz-linear-gradient(top, #fcfcfc, #e1e1e1);
-  color: #333333;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background: #393939 url('/static/images/light-panel-tile.png');
   padding: 0;
+  margin: 0 2px;
 }
 .pagination a,
 .pagination a.page,
@@ -2767,13 +2764,19 @@ p.error {
 .pagination a.next {
   display: inline-block;
   color: #cc4b2e;
-  padding: 8px 4px;
+  padding: 4px;
+}
+.pagination a:hover,
+.pagination a.page:hover,
+.pagination a.prev:hover,
+.pagination a.next:hover {
+  color: #e45434;
 }
 .pagination .disabled {
-  padding: 8px 4px;
+  padding: 4px;
 }
 .pagination .current {
-  padding: 12px;
+  padding: 8px 4px;
 }
 table.form_saved, table.form_saved_container {
   margin-left: 12px;
