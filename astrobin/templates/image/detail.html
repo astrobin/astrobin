@@ -175,6 +175,7 @@
                                     <li class="first bg-icon icon-profile">
                                         <span class="text"><a href="{{image.user.get_absolute_url}}">{% trans "View profile" %}</a></span>
                                     </li>
+                                    {% if user.is_authenticated %}
                                     <li class="bg-icon {% if follows %}icon-unfollow{% else %}icon-follow{% endif %}">
                                         <span class="text">
                                             <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
@@ -187,6 +188,7 @@
                                             </a>
                                         </span>
                                     </li>
+                                    {% endif %}
                                     <li class="last bg-icon icon-message">
                                         <span class="text"><a class="send-private-message" href="{% url messages_compose_to image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">{% trans "Send private message" %}</a></span>
                                     </li>
