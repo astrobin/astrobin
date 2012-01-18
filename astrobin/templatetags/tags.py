@@ -299,6 +299,49 @@ def image_list(context, request, object_list, paginate = True):
 register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
 
 
+def messier_list(context, request, object_list, paginate = True):
+    adjacent_pages = 3
+
+    paginator = context['paginator']
+    page = int(context['page'])
+    pages = int(context['pages'])
+    page_obj = context['page_obj']
+    next = context['next']
+    previous = context['previous']
+    has_next = context['has_next']
+    has_previous = context['has_previous']
+
+    image_list = object_list
+
+    startPage = max(page - adjacent_pages, 1)
+    if startPage <= 3: startPage = 1
+    endPage = page + adjacent_pages + 1
+    if endPage >= pages - 1: endPage = pages + 1
+    page_numbers = [n for n in range(startPage, endPage) \
+            if n > 0 and n <= pages]
+
+    return {
+        'page_obj': page_obj,
+        'paginator': paginator,
+        'page': page,
+        'pages': pages,
+        'page_numbers': page_numbers,
+        'next': next,
+        'previous': previous,
+        'has_next': has_next,
+        'has_previous': has_previous,
+        'show_first': 1 not in page_numbers,
+        'show_last': pages not in page_numbers,
+        'image_list': image_list,
+        'paginate': paginate,
+        'thumbnail_size':settings.THUMBNAIL_SIZE,
+        's3_url':settings.S3_URL,
+        'request': request,
+        'sort': request.GET.get('sort'),
+    }
+register.inclusion_tag('inclusion_tags/messier_list.html', takes_context=True)(messier_list)
+
+
 def search_image_list(context, request, object_list, paginate = True):
     adjacent_pages = 3
 

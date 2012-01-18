@@ -1,0 +1,9 @@
+{% load i18n %}
+{% blocktrans %}Your image of {{messier_object}} is now featured in the Messier Marathon. Congratulations!
+
+This is the image of yours that is featured: http://astrobin.com{{image_url}}
+
+The Messier Marathon is a list of Messier objects featuring images from AstroBin, chosen by the users via nominations.
+Your image is now the most nominated for the Messier object {{messier_object}}.
+
+You can find the Messier Marathon here: http://astrobin.com/explore/messier/{% endblocktrans %}

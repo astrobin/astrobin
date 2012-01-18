@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="info-side-bar">
+        <ul>
+            {% if image.is_stored %}
+            <li class="first last" style="margin: 8px 0;">
+                <a href="{% url image_detail image.id %}">
+                    <img class="thumbnail" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}"/>
+                 </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="sided-main-content">
+    <h1>{% trans "Nominate for the Messier Marathon" %}</h1>
+    {% if has_messier %}
+        <p>
+            {% url messier as the_url %}
+            {% blocktrans %}You will nominate this image for the <a href="{{the_url}}" target="_blank">Messier Marathon</a>. The Messier Marathon is a list of the Messier objects that features AstroBin images nominated by the users. For each Messier object, the AstroBin image with the most nomination is chosen.{% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans %}Press <em>Continue</em> to nominate this image for <strong>M {{messier_object}}</strong>.{% endblocktrans %}
+        </p>
+    {% endif %}
+
+    {% if not has_messier %}
+        <p>
+        {% blocktrans %}Sorry, but it doesn't look like this image contains a Messier object. If you think this is a mistake, please contact the author of the image and ask them to add the correct Messier object as a subject.{% endblocktrans %}
+        </p>
+        <p>
+            <a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a>
+        </p>
+    {% else %}
+        {% if has_multiple_messier %}
+            <p>
+            {% blocktrans %}This image contains multiple Messier objects. Please choose the one for which you are nominating this image.{% endblocktrans %}
+            </p>
+            <form action="{% url messier_nomination_process %}" method="post">
+                {{form.as_p}}
+                <input type="hidden" name="image_id" value="{{image.id}}" />
+                <ul>
+                    <li><input class="button submit-button" type="submit" value="{% trans "Continue" %} &rarr;" /></li>
+                    <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+                </ul>
+            </form>
+        {% else %}
+            <form action="{% url messier_nomination_process %}" method="post">
+                <input type="hidden" name="image_id" value="{{image.id}}" />
+                <input type="hidden" name="messier_object" value="{{messier_object}}" />
+                <ul>
+                    <li><input class="button submit-button" type="submit" value="{% trans "Continue" %} &rarr;" /></li>
+                    <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+                </ul>
+            </form>
+        {% endif %}
+    {% endif %}
+    </div>
+{% endblock %}

@@ -1129,7 +1129,7 @@ form p.error input, form p.error textarea {
   width: 960px;
   margin: 0 auto;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 #navigation #nav-container {
   margin-top: 16px;
@@ -1180,11 +1180,16 @@ form p.error input, form p.error textarea {
   top: 32px;
   width: 125px;
 }
-#navigation #nav ul > li.menu .popup a, #navigation #nav ul > li.menu .popup a:hover {
-  padding: 4px;
-  text-align: left;
-  width: auto;
+#navigation #nav ul > li.menu .popup li {
+  padding: 0;
   float: none;
+}
+#navigation #nav ul > li.menu .popup a, #navigation #nav ul > li.menu .popup a:hover {
+  text-align: left;
+  float: none;
+  display: block;
+  padding: 4px;
+  width: auto;
 }
 #navigation #nav ul > li.menu .popup a:hover {
   color: #cc4b2e;
@@ -2170,6 +2175,9 @@ ul.topnav > li:hover {
   color: #2e2e2e;
   font-weight: bold;
 }
+.sub li {
+  padding: 4px;
+}
 .sub li.footer {
   margin-top: 4px;
   text-align: center;
@@ -2177,15 +2185,14 @@ ul.topnav > li:hover {
   background: url('/static/images/popup-footer-bg.png');
 }
 .sub a {
-  padding: 4px;
   float: none;
-  display: block;
+  color: #cc4b2e;
+  display: inline;
 }
 .sub li {
   text-align: left;
 }
 .sub li a {
-  padding: 4px;
   color: #333333;
 }
 .sub li a:hover {
@@ -2234,6 +2241,9 @@ ul.topnav > li:hover {
   color: #2e2e2e;
   font-weight: bold;
 }
+.popup li {
+  padding: 4px;
+}
 .popup li.footer {
   margin-top: 4px;
   text-align: center;
@@ -2241,9 +2251,9 @@ ul.topnav > li:hover {
   background: url('/static/images/popup-footer-bg.png');
 }
 .popup a {
-  padding: 4px;
   float: none;
-  display: block;
+  color: #cc4b2e;
+  display: inline;
 }
 .popup ul {
   margin: 0;
@@ -2256,22 +2266,22 @@ ul.topnav > li:hover {
 }
 .popup li {
   border-bottom: 1px solid #cdcdcd;
+  padding: 0;
   width: 100%;
-}
-.popup li :hover {
-  background: url('/static/images/popup-li-bg.png');
 }
 .popup li.last {
   border-bottom: none;
 }
 .popup a {
   color: #333333;
+  padding: 4px;
   width: auto;
   float: none;
-  padding: 4px;
+  display: block;
 }
 .popup a:hover {
   color: #cc4b2e;
+  background: url('/static/images/popup-li-bg.png');
   border: none;
 }
 li:hover > .sub, .sub:hover {
