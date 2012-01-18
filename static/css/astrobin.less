@@ -6,7 +6,7 @@
 @notice-color: #f9edbe;
 @notice-border-color: #f0c36d;
 @notice-text-color: #383732;
-@danger-color: #F9645B;
+@danger-color: #F5271B;
 
 @header-color: @strong-text-color;
 @text-color: @strong-text-color - #444;
@@ -1322,17 +1322,45 @@ form {
                 float: left;
                 margin: 0;
                 display: inline;
-                >a.icon, >a:visited.icon {
-                    float: left;
-                    margin: 0;
-                    text-align: center;
-                    text-transform: lowercase;
-                    height: 32px;
-                    width: 40px;
+
+                .notice-container,
+                .menu-container {
+                    >a.icon, >a:visited.icon {
+                        float: left;
+                        margin: 0;
+                        text-align: center;
+                        text-transform: lowercase;
+                        height: 32px;
+                        width: 40px;
+                    }
+                    >a.active, >a:visited.active {
+                        .rounded-corners-top;
+                        background: url('/static/images/popup-bg.png');
+                    }
+                    .notice-count {
+                        position: absolute;
+                        top: -2px;
+                        left: 22px;
+                        font-size: 75%;
+                        font-weight: bold;
+                        line-height: 75%;
+                        background-color: @danger-color;
+                        color: @strong-text-color;
+                        .text-shadow;
+                        padding: 3px;
+                        .rounded-corners(3px);
+                        .box-shadow;
+                    }
                 }
-                >a.active, >a:visited.active {
-                    .rounded-corners-top;
-                    background: url('/static/images/popup-bg.png');
+
+                .menu-container {
+                    a {
+                        padding: @spacer-medium;
+                    }
+                    img {
+                        width: 8px;
+                        height: 8px;
+                    }
                 }
             }
             >li.text {

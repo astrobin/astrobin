@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load tags %}
 {% load compress %}
+{% load inbox %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -140,48 +141,66 @@
                         <ul>
                         {% if request.user.is_authenticated %}
                             <li class="menu text">
-                                <a href="{% url user_page request.user %}">
-                                    <span class="icon">
-                                        <img src="/static/icons/iconic/orange/open_menu.png" alt="" />
-                                    </span>
-                                    {{request.user}}
-                                </a>
-                                <div class="popup" id="profile-popup">
-                                    <ul>
-                                        <li>
-                                            <a href="{% url user_page request.user %}">{% trans "View your profile" %}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url profile_edit_basic %}">{% trans "Edit your profile" %}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url index %}" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url auth_logout %}">{% trans "Logout" %}</a>
-                                        </li>
+                                <div class="menu-container">
+                                    <a href="{% url user_page request.user %}">
+                                        <span class="icon">
+                                            <img src="/static/icons/iconic/orange/open_menu.png" alt="" />
+                                        </span>
+                                        {{request.user}}
+                                    </a>
+                                    <div class="popup" id="profile-popup">
+                                        <ul>
+                                            <li>
+                                                <a href="{% url user_page request.user %}">{% trans "View your profile" %}</a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url profile_edit_basic %}">{% trans "Edit your profile" %}</a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url index %}" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url auth_logout %}">{% trans "Logout" %}</a>
+                                            </li>
 
-                                    </ul>
-                               </div>
+                                        </ul>
+                                    </div>
+                                </div>
                             </li>
                             <li class="menu">
-                                <a class="icon notifications" title="{% trans "Notifications" %}" href="{% url notifications %}">
-                                    <img id="notifications" alt="{% trans "Notifications" %}" src="{% notifications_icon request %}"/>
-                                </a>
-                                <div class="popup" id="notifications-popup">
-                                    {% notification_list request 1 10 %}
+                                <div class="notice-container">
+                                    {% if notifications_count > 0 %}
+                                        <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
+                                    {% endif %}
+                                    <a class="icon notifications" title="{% trans "Notifications" %}" href="{% url notifications %}">
+                                        <img id="notifications" alt="{% trans "Notifications" %}" src="/static/icons/iconic/orange/notifications.gif"/>
+                                    </a>
+                                    <div class="popup" id="notifications-popup">
+                                        {% notification_list request 1 10 %}
+                                    </div>
                                 </div>
                             </li>
                             <li>
-                                <a class="icon messages" title="{% trans "Messages" %}" href="{% url messages_inbox %}">
-                                    <img id="messages" alt="{% trans "Messages" %}" src="/static/icons/iconic/orange/messages.gif"/>
-                                </a>
+                                <div class="notice-container">
+                                    {% inbox_count as count %}
+                                    {% if count > 0 %}
+                                        <span class="notice-count">{{count}}</span>
+                                    {% endif %}
+                                    <a class="icon messages" title="{% trans "Messages" %}" href="{% url messages_inbox %}">
+                                        <img id="messages" alt="{% trans "Messages" %}" src="/static/icons/iconic/orange/messages.gif"/>
+                                    </a>
+                                </div>
                             </li>
                             <li class="menu">
-                                <a class="icon" title="{% trans "Requests" %}" href="{% url requests %}">
-                                    <img id="requests" alt="{% trans "Requests" %}" src="{% requests_icon request %}"/></a>
-                                <div class="popup" id="requests-popup">
-                                    {% request_list request %}
+                                <div class="notice-container">
+                                    {% if requests_count > 0 %}
+                                        <span class="notice-count">{{requests_count}}</span>
+                                    {% endif %}
+                                    <a class="icon" title="{% trans "Requests" %}" href="{% url requests %}">
+                                        <img id="requests" alt="{% trans "Requests" %}" src="/static/icons/iconic/orange/requests.gif"/></a>
+                                    <div class="popup" id="requests-popup">
+                                        {% request_list request %}
+                                    </div>
                                 </div>
                             </li>
 
@@ -419,7 +438,7 @@
 
                 var open_popup = 0;
                 var active_a = 0;
-                $('#user-nav > ul > li.menu > a, #nav > ul > li.menu > a').click (function(event) {
+                $('#user-nav > ul > li.menu > .notice-container > a, #user-nav > ul > li.menu > .menu-container > a, #nav > ul > li.menu > a').click (function(event) {
                     var a = $(this);
                     var li = a.parent()
                     var popup = li.find('.popup');
@@ -463,11 +482,12 @@
                             $('img#notifications').attr('src',
                                 '/static/icons/iconic/orange/notifications.gif');
                             $('ul#notification-feed li.unread').removeClass('unread');
+                            $('#notifications_count').remove();
                         }
                     });
                 };
 
-                $('#user-nav > ul > li.menu > a.notifications').click(function() {
+                $('#user-nav > ul > li.menu a.notifications').click(function() {
                     notifications_read_timer = window.setTimeout(
                         notifications_mark_seen, 500);
                 });

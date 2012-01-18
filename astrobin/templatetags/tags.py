@@ -9,6 +9,7 @@ from django.template import Library, Node
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.safestring import mark_safe
+from django.db.models import Q
 
 from django.utils.encoding import force_unicode
 from django.utils.functional import allow_lazy
@@ -66,24 +67,6 @@ def request_list(request, show_footer = True):
     return {
         'requests':Request.objects.filter(to_user=request.user).order_by('-created').select_subclasses()[:10],
         'show_footer':show_footer}
-
-
-@register.simple_tag
-def notifications_icon(request):
-    basepath = '/static/icons/iconic/orange/'
-    if notifications.Notice.objects.filter(user=request.user).filter(unseen=True):
-        return basepath + 'new_notifications.gif'
-    else:
-        return basepath + 'notifications.gif'
-
-
-@register.simple_tag
-def requests_icon(request):
-    basepath = '/static/icons/iconic/orange/'
-    if Request.objects.filter(to_user=request.user).filter(fulfilled=False):
-        return basepath + 'new_requests.gif'
-    else:
-        return basepath + 'requests.gif'
 
 
 @register.filter
