@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="info-side-bar">
+        <ul>
+            {% if image.is_stored %}
+            <li class="first last" style="margin: 8px 0;">
+                <a href="{% url image_detail image.id %}">
+                    <img class="thumbnail" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}"/>
+                 </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="sided-main-content">
+        <h1>{% trans "Bring image to attention" %}</h1>
+        <p>
+            {% blocktrans %}By choosing some users and clicking the button below, you will send them a notification prompting them to checkout this image.{% endblocktrans %}
+        </p>
+        <form action="{% url bring_to_attention_process %}" method="post">
+            {{form.as_p}}
+            <input type="hidden" name="image_id" value="{{image.id}}" />
+            <ul>
+                <li><input class="button submit-button" type="submit" value="{% trans "Continue" %} &rarr;" /></li>
+                <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+            </ul>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#id_users').autoSuggest('/autocomplete_usernames/', {
+            asHtmlID: 'users',
+            selectedItemProp: 'name',
+            searchObjProps: 'name',
+            preFill: '',
+            selectedItemProp: 'name',
+            selectedValuesProp: 'name',
+            startText: "{% trans "Enter partial name and wait for the suggestions!" %}",
+            emptyText: "{% trans "No results. Sorry." %}",
+            resultsTitleText: "{% trans "Click on a user below!" %}"
+        });
+    });
+</script>
+{% endblock %}

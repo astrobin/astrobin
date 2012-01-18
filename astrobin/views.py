@@ -2213,12 +2213,6 @@ def image_request_additional_information(request, image_id):
 def image_request_additional_information_process(request, image_id):
     image = get_object_or_404(Image, id=image_id)
 
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-        's3_url': settings.S3_URL,
-        'image': image,
-    }
-
     message = _('<strong>%s</strong> has requested additional information about your image.') % request.user
     r = ImageRequest(
         from_user=request.user,
@@ -2252,11 +2246,23 @@ def image_request_additional_information_complete(request, image_id):
 @login_required
 @require_GET
 def image_request_fits(request, image_id):
-    image = None
-    try:
-        image = Image.objects.get(id=image_id)
-    except:
-        return ajax_fail()
+    image = get_object_or_404(Image, id=image_id)
+
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+        'image': image,
+    }
+    return render_to_response(
+        'image/actions/request_fits.html',
+        response_dict,
+        context_instance = RequestContext(request))
+
+
+@login_required
+@require_GET
+def image_request_fits_process(request, image_id):
+    image = get_object_or_404(Image, id=image_id)
 
     # message not implemented yet, let's hard code it for the notification
     message = _('<strong>%s</strong> has requested to see the TIFF or FITS of your image.') % request.user
@@ -2270,7 +2276,24 @@ def image_request_fits(request, image_id):
     r.save()
     push_request(image.user, r)
 
-    return ajax_success()
+    return HttpResponseRedirect('/request/image/fits/complete/%s/' % image.id)
+
+
+@login_required
+@require_GET
+def image_request_fits_complete(request, image_id):
+    image = get_object_or_404(Image, id=image_id)
+
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+        'image': image,
+    }
+    return render_to_response(
+        'image/actions/request_fits_complete.html',
+        response_dict,
+        context_instance = RequestContext(request))
+
 
 @login_required
 @require_GET
