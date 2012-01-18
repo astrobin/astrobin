@@ -125,7 +125,11 @@ urlpatterns = patterns('',
                         }, name='modal_messages_compose'),
 
     url(r'^send_private_message/$', views.send_private_message, name='send_private_message'),
-    url(r'^bring_to_attention/$', views.bring_to_attention, name='bring_to_attention'),
+
+    url(r'^(?P<id>\d+)/bring-to-attention/$', views.bring_to_attention, name='bring_to_attention'),
+    url(r'^bring-to-attention/process/$', views.bring_to_attention_process, name='bring_to_attention_process'),
+    url(r'^(?P<id>\d+)/bring-to-attention/complete/$', views.bring_to_attention_complete, name='bring_to_attention_complete'),
+
     url(r'^requests/$', views.requests, name='requests'),
     url(r'^request/image/additional_information/(?P<image_id>\d+)/$', views.image_request_additional_information, name='image_request_additional_information'),
     url(r'^request/image/fits/(?P<image_id>\d+)/$', views.image_request_fits, name='image_request_fits'),

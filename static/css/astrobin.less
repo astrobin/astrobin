@@ -1412,7 +1412,7 @@ ul.as-list {
     margin: -4px 0 0 162px;
     padding: @spacer-medium @spacer-small;
     width: 506px;
-    z-index: 2;
+    z-index: 3;
     background: @text-color;
     background: -moz-linear-gradient(top, @strong-text-color, @text-color);
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@strong-text-color), to(@text-color));
@@ -1566,10 +1566,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 #content-wrap {
     clear: both;
     width: 100%;
-    padding-bottom: @footer-height - @wrap-shadow-offset - @spacer-large;
     background: (@background-color) url('/static/images/content-tile.png');
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 #content {
@@ -2187,9 +2186,10 @@ span.copy-box {
 /* footer */
 #footer {
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     bottom: 0 - @wrap-shadow-offset;
     height: @footer-height;
+    margin-bottom: -(@footer-height - @wrap-shadow-offset);
     .box-shadow;
     text-align: center;
     background: (@background-color / @strong-hilight-factor) url('/static/images/footer-bg.png');
@@ -2513,15 +2513,14 @@ table.form_saved, table.form_saved_container {
 }
 
 div.capty-caption {
-    background-color: #FFF;
-    color: #000;
+    background-color: black;
+    color: white;
+    text-shadow: 1px 1px 0 #222;
     padding-left: 10px;
     padding-top: 7px;
-    text-shadow: 1px 1px 0 #AAA;
     .rounded-corners-bottom(24px);
     font-size: @base-font-size * 0.85;
 }
-
 
 div.capty-caption a {
     color: @link-color;

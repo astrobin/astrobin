@@ -33,7 +33,6 @@
             <ul class="bar">
                 <li id="menu">
                     <ul class="topnav">
-                        {% if request.user.is_authenticated %}
                         <li id="actions" class="first">
                             <span class="text"><a href="#">{% trans "Actions" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
@@ -109,7 +108,7 @@
                                     <li class="separator"></li>
                                 {% endif %}
                                     <li class="bg-icon icon-quote">
-                                        <span class="text"><a class="bring-to-attention" href="#">{% trans "Bring to a user's attention" %}</a></span>
+                                        <span class="text"><a class="bring-to-attention" href="{% url bring_to_attention image.id %}">{% trans "Bring to a user's attention" %}</a></span>
                                     </li>
                                 {% if request.user != image.user %}
                                     <li class="bg-icon icon-info">
@@ -128,8 +127,7 @@
                                 </ul>
                             </div>
                         </li>
-                        {% endif %}
-                        <li id="view" {% if not request.user.is_authenticated %}class="first"{% endif %}>
+                        <li id="view">
                             <span class="text"><a href="#">{% trans "View" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
@@ -181,10 +179,9 @@
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
                             <div class="sub">
                                 <ul class="subnav">
-                                    <li class="first {% if not request.user.is_authenticated %}last{% endif %} bg-icon icon-profile">
+                                    <li class="first bg-icon icon-profile">
                                         <span class="text"><a href="{{image.user.get_absolute_url}}">{% trans "View profile" %}</a></span>
                                     </li>
-                                    {% if request.user.is_authenticated %}
                                     <li class="bg-icon {% if follows %}icon-unfollow{% else %}icon-follow{% endif %}">
                                         <span class="text">
                                             <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
@@ -200,7 +197,6 @@
                                     <li class="last bg-icon icon-message">
                                         <span class="text"><a class="send-private-message" href="{% url messages_compose_to image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">{% trans "Send private message" %}</a></span>
                                     </li>
-                                    {% endif %}
                                 </ul>
                             </div>
                         </li>
@@ -707,19 +703,6 @@ $(document).ready(function() {
                     body  : "{% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}",
                     button: "{% trans "Yes, delete image" %}"
                 }
-            },
-            bring_to_attention_action: {
-                dialog: {
-                    title : "{% trans "Bring image to attention" %}",
-                    body  : "{% blocktrans %}By choosing some users and clicking the button below, you will send them a notification prompting them to checkout this image.{% endblocktrans %}",
-                    button: "{% trans "Continue" %} &rarr;"
-                },
-                form_html: '{% autoescape off %}{{bring_to_attention_form.as_p|append_slash}}{% endautoescape %}',
-                autocomplete: {
-                    startText: "{% trans "Enter partial name" %}",
-                    emptyText: "{% trans "User not found. Cannot notify them." %}"
-                },
-                url: "{% url bring_to_attention %}"
             },
             image_request_additional_information_action: {
                 dialog: {

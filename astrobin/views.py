@@ -562,7 +562,6 @@ def image_detail(request, id):
                      'solved': True if 'mod' in request.GET and request.GET['mod'] == 'solved' else False,
                      'follows': follows,
                      'private_message_form': PrivateMessageForm(),
-                     'bring_to_attention_form': BringToAttentionForm(),
                      'upload_revision_form': ImageRevisionUploadForm(),
                      'revisions': revisions,
                      'is_revision': is_revision,
@@ -2114,19 +2113,43 @@ def send_private_message(request):
 
 
 @login_required
+@require_GET
+def bring_to_attention(request, id):
+    image = get_object_or_404(Image, id=id)
+    form = BringToAttentionForm()
+
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+        'form': form,
+        'image': image,
+    }
+    return render_to_response(
+        'image/actions/bring_to_attention.html',
+        response_dict,
+        context_instance = RequestContext(request))
+
+  
+@login_required
 @require_POST
-def bring_to_attention(request):
+def bring_to_attention_process(request):
     form = BringToAttentionForm(data=request.POST)
     image_id = request.POST.get('image_id')
-    try:
-        image = Image.objects.get(id=image_id)
-    except:
-        return ajax_fail()
+    image = get_object_or_404(Image, id=image_id)
 
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+        'form': form,
+        'image': image,
+    }
     if not form.is_valid():
-        return ajax_fail()
+        return render_to_reponse(
+            'image/actions/bring_to_attention.html',
+            response_dict,
+            context_instance = RequestContext(request))
 
-    (usernames, value) = valueReader(request.POST, 'user')
+    (usernames, value) = valueReader(request.POST, 'users')
     recipients = []
     for username in usernames:
         user = User.objects.get(username=username)
@@ -2139,7 +2162,23 @@ def bring_to_attention(request):
                        'originator':request.user,
                        'originator_url': request.user.get_absolute_url()})
 
-    return ajax_success()
+    return HttpResponseRedirect('/%d/bring-to-attention/complete/' % image.id)
+
+
+@login_required
+@require_GET
+def bring_to_attention_complete(request, id):
+    image = get_object_or_404(Image, id=id)
+
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+        'image': image,
+    }
+    return render_to_response(
+        'image/actions/bring_to_attention_complete.html',
+        response_dict,
+        context_instance = RequestContext(request))
 
 
 @login_required
