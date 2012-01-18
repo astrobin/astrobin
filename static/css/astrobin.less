@@ -1614,6 +1614,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     border-right: none;
     background: @dark-panel-color url('/static/images/dark-panel-tile.png');
     img.thumbnail {
+        .rounded-corners;
         border: 1px solid @link-color;}
     p {
         margin: 0;
@@ -1993,6 +1994,7 @@ ul.topnav {
             img {
                 cursor: -moz-zoom-in;
                 border: 1px solid @dark-panel-color;
+                .rounded-corners;
                 position: relative;
                 top: 0;
                 left: 0;
@@ -2370,7 +2372,12 @@ input.date {
     .rounded-corners;
     list-style: none;
     margin: (@spacer-small * 1.5) 0;
-    padding: @spacer-large;}
+    padding: @spacer-large;
+
+    img {
+        .rounded-corners(16px);
+    }
+}
 
 .ic_caption a {
     color: black;
