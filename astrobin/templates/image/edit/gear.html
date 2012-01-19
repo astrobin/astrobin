@@ -26,6 +26,10 @@
                 {% url profile_edit_gear as the_url %}
                 {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your <a href="{{the_url}}">profile</a>!{% endblocktrans %}
             </p>
+        {% else %}
+            <p>
+                {% blocktrans %}To choose the gear used for this image, drag items from the left side to right side, or click the plus sign.{% endblocktrans %}
+            </p>
         {% endif %}
         <form id="gear" method="post" action="{% url image_edit_save_gear %}">{% csrf_token %}
             {{form.non_field_errors}}

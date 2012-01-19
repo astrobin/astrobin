@@ -434,7 +434,11 @@
                     }
                 );
 
-                $("select[multiple]").multiselect();
+                $("select[multiple]").multiselect({
+                    sortable: false,
+                    searchable: false,
+                    dividerLocation: 0.5
+                });
 
                 var open_popup = 0;
                 var active_a = 0;
