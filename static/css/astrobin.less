@@ -1186,20 +1186,20 @@ form {
         float: right;
         margin-top: 8px;
         margin-right: @spacer-large;
-    }
+        position: relative;
 
-    #language-prompt {
-        position: absolute;
-        top: 50px;
-        right: 204px;
-        z-index: 9999;
+        #language-prompt {
+            position: absolute;
+            top: 28px;
+            right: -71px;
+            z-index: 9999;
 
-        .bubble {
-            width: 200px;
-            right: 255px;
-        }
-        .bubble:after {
-            left: 100px;
+            .bubble {
+                width: 200px;
+            }
+            .bubble:after {
+                left: 100px;
+            }
         }
     }
 

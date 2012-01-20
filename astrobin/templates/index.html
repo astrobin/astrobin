@@ -2,18 +2,6 @@
 {% load i18n %}
 {% load tags %}
 
-{% block language_reminder %}
-{% if user.is_authenticated and own_profile %}
-    {% if not own_profile.language %}
-        <div id="language-prompt">
-            <div class="bubble">
-                {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
-            </div>
-        </div>
-    {% endif %}
-{% endif %}
-{% endblock %}
-
 {% block content %}
     {% if request.user.is_authenticated %}
         {% if upload_form %} 

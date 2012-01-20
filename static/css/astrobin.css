@@ -1077,18 +1077,18 @@ form p.error input, form p.error textarea {
   float: right;
   margin-top: 8px;
   margin-right: 12px;
+  position: relative;
 }
-#header #language-prompt {
+#header #languages #language-prompt {
   position: absolute;
-  top: 50px;
-  right: 204px;
+  top: 28px;
+  right: -71px;
   z-index: 9999;
 }
-#header #language-prompt .bubble {
+#header #languages #language-prompt .bubble {
   width: 200px;
-  right: 255px;
 }
-#header #language-prompt .bubble:after {
+#header #languages #language-prompt .bubble:after {
   left: 100px;
 }
 #header #search {

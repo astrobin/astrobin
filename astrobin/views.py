@@ -158,7 +158,6 @@ def index(request):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
-        'own_profile': profile,
         'upload_form': form,
     }
 

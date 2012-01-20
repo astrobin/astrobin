@@ -107,7 +107,14 @@
                     <!--
                     <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
                     -->
-                    {% block language_reminder %}{% endblock %}
+                    {% if user.is_authenticated and not user_language %}
+                    <div id="language-prompt">
+                        <div class="bubble">
+                            {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
+                        </div>
+                    </div>
+                    {% endif %}
+
                 </div>
             </div> <!-- header -->
         </div> <!-- header-wrap -->
