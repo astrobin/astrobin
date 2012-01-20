@@ -74,11 +74,13 @@ def valueReader(source, field):
             yield line.encode('utf-8')
 
     as_field = 'as_values_' + field
+    value = ''
     if as_field in source:
-        value = source[as_field]
-    elif field in source:
-        value = source[field]
-    else:
+        value += source[as_field]
+    if field in source:
+        value += ',' + source[field]
+        
+    if not (as_field in source or field in source):
         return [], ""
 
     items = []
@@ -718,11 +720,11 @@ def image_edit_basic(request, id):
          'form':form,
          'prefill_dict': {
             'subjects': [jsonDumpSubjects(image.subjects.all()),
-                         _("Enter partial name and wait for the suggestions!"),
+                         "",
                          _("No results. Sorry."),
                          _("Click on a suggestion or press TAB to add what you typed")],
             'locations': [jsonDump(image.locations.all()),
-                          _("Enter partial name and wait for the suggestions!"),
+                          "",
                           _("No results. Press TAB to create this location!"),
                           _("Click on a suggestion or press TAB to add what you typed")],
          },
@@ -958,6 +960,43 @@ def image_edit_save_presolve(request):
 @login_required
 @require_POST
 def image_edit_save_basic(request):
+    def find_subject(id):
+        def find_in_simbad(id):
+            import simbad
+            subject = simbad.find_single_subject(id.strip())
+            if subject:
+                return subject
+            else:
+                subjects = simbad.find_subjects(id.strip())
+                if subjects:
+                    return subjects[0]
+
+        try:
+            return Subject.objects.get(id = float(id))
+        except ValueError:
+            subject = Subject.objects.filter(mainId = id)
+            if subject:
+               return subject[0]
+            else:
+                identifier = SubjectIdentifier.objects.filter(identifier = id)
+                if identifier:
+                    return identifier.subject
+                else:
+                    subject = find_in_simbad(id)
+                    if subject:
+                        return subject
+        except Subject.DoesNotExist:
+            return None
+
+        '''Alright fine, I give up. Let's look for it in
+        our database.'''
+        subject = Subject()
+        subject.oid = -999
+        subject.mainId = id.strip()
+        subject.save()
+
+        return subject
+
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
     form = ImageEditBasicForm(data=request.POST, instance=image)
@@ -974,10 +1013,10 @@ def image_edit_save_basic(request):
             'form': form,
             'prefill_dict': {
                'subjects': [jsonDumpSubjects(image.subjects.all()),
-                            _("Enter partial name and wait for the suggestions!"),
+                            "",
                             _("No results. Sorry.")],
                'locations': [jsonDump(image.locations.all()),
-                             _("Enter partial name and wait for the suggestions!"),
+                             "",
                              _("No results. Press TAB to create this location!")],
             },
             'is_ready': image.is_stored,
@@ -995,46 +1034,13 @@ def image_edit_save_basic(request):
     image.locations.clear()
 
     (ids, value) = valueReader(request.POST, 'subjects')
-    if ids:
-        for id in ids:
-            k = None
-            try:
-                k = Subject.objects.get(Q(id=id))
-            except (Subject.DoesNotExist, ValueError):
-                '''User pressed TAB without waiting for autocomplete,
-                or on something that didn't find a match in Simbad.
-                Let's try to match it once more, in case it indeed
-                was a case of premature TAB.'''
-                import simbad
-                subject = simbad.find_single_subject(id.strip())
-                if subject:
-                    k = subject
-                else:
-                    subjects = simbad.find_subjects(id.strip())
-                    if subjects:
-                        k = subjects[0]
-                    else:
-                        '''Alright fine, I give up. Let's look for it in
-                        our database.'''
-                        k = Subject.objects.filter(mainId = id.strip())
-                        if k:
-                            k = k[0]
-                        else:
-                            # How about the SubjectIdentifiers?
-                            k = SubjectIdentifier.objects.filter(identifier = id.strip())
-                            if k:
-                                k = k[0].subject
-                            else:
-                                # You win this time. I'll create one.
-                                k = Subject()
-                                k.oid = -999
-                                k.mainId = id.strip()
-                                k.save()
+    for id in ids:
+        subject = find_subject(id)
+        if subject:
+            image.subjects.add(subject)
 
-            if k:
-                image.subjects.add(k)
     prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
-                                _("Enter partial name and wait for the suggestions!"),
+                                "",
                                 _("No results. Sorry.")]
 
     form.fields['subjects'].initial = u', '.join(x.mainId for x in getattr(image, 'subjects').all())
@@ -1058,7 +1064,7 @@ def image_edit_save_basic(request):
 
             image.locations.add(k)
     prefill_dict['locations'] = [jsonDump(image.locations.all()),
-                                 _("Enter partial name and wait for the suggestions!"),
+                                 "",
                                  _("No results. Sorry.")]
 
 
@@ -1656,10 +1662,12 @@ def user_profile_edit_basic(request):
     profile = UserProfile.objects.get(user = request.user)
     form = UserProfileEditBasicForm(instance = profile)
 
-    form.fields['locations'].initial = u', '.join(x.name for x in profile.locations.all())
+    locations = u', '.join(x.name for x in profile.locations.all())
+
     response_dict = {
         'form': form,
         'prefill_dict': {'locations': jsonDump(profile.locations.all())},
+        'locations_value': locations,
     }
     return render_to_response("user/profile/edit/basic.html",
         response_dict,

@@ -56,13 +56,18 @@ class ImageEditBasicForm(forms.ModelForm):
         return self.cleaned_data['link'].strip()
 
     def clean(self):
+        skip_as = False
         try:
             subjects = self.data['as_values_subjects'].strip()
-            solar_system = self.cleaned_data['solar_system_main_subject']
         except MultiValueDictKeyError:
-            return self.cleaned_data
+            skip_as = True
 
-        if solar_system is None and (len(subjects) == 0 or (len(subjects) == 1 and subjects[0] in ('', ','))):
+        solar_system = self.cleaned_data['solar_system_main_subject']
+        nojs_subjects = self.data['subjects'].strip()
+
+        if solar_system is None and\
+             (skip_as or (len(subjects) == 0 or (len(subjects) == 1 and subjects[0] in ('', ',')))) and\
+             (len(nojs_subjects) == 0 or (len(nojs_subjects) == 1 and nojs_subjects[0] in ('', ','))):
             raise forms.ValidationError(_("Please enter either some subjects or a main solar system subject."));
 
         return self.cleaned_data
@@ -161,12 +166,12 @@ class UserProfileEditBasicForm(forms.ModelForm):
         model = UserProfile
         fields = ('website', 'job', 'hobbies', 'timezone', 'locations', 'about')
 
-    def __init__(self, user=None, **kwargs):
+    def __init__(self, **kwargs):
         super(UserProfileEditBasicForm, self).__init__(**kwargs)
         self.fields['locations'].label = _("Locations")
         self.fields['website'].label = _("Website")
 
-
+            
 class UserProfileEditGearForm(forms.Form):
     telescopes = forms.CharField(
         max_length=256,
