@@ -18,29 +18,51 @@
         {% endif %}
     </h1>
     {% form_saved request %}
-    <p id="form_help_text" style="display:none">{% blocktrans %}Remember that the locations and subjects fields autocomplete, and you need to press TAB to add something to your list. If it's not in a white box, it doesn't get saved!{% endblocktrans %}
     <form action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
         <div id="js_form" style="display:none">
             {{form.as_p}}
         </div>
 
         <noscript>
-            <p><label for="id_title">{% trans "Title" %}:</label>
-               <input id="id_title" type="text" name="title" value="{{image.title}}" maxlength="64" />
+            {{form.non_field_errors}}
+
+            {{form.title.errors}}
+            <p{% if form.title.errors %} class="error"{% endif %}>
+                {{form.title.label_tag}}
+                {{form.title}}
+            </p>
+
+            {{form.link.errors}}
+            <p{% if form.link.errors %} class="error"{% endif %}>
+                {{form.link.label_tag}}
+                {{form.link}}
+            </p>
+
+            <p>
+                {{form.subjects.label_tag}}
+                <input type="text" name="subjects" id="id_subjects" value="{{subjects}}"/>
+                <span class="helptext">
+                    {% trans "Use a <strong>comma</strong> to separate the values." %}
+                </span>
             </p>
             <p>
-                <label for="id_subjects">{% trans "Subjects" %}:</label>
-                <input type="text" name="subjects" id="id_subjects" value="{{subjects}}" disabled="disabled" />
-                <span class="helptext">{% trans "You can't edit this field without Javascript. Please enable it in your Internet browser." %}</span>
+                {{form.solar_system_main_subject.label_tag}}
+                {{form.solar_system_main_subject}}
+                <span class="helptext">
+                    {{form.solar_system_main_subject.help_text}}
+                </span>
+            </p>
+
+            <p>
+                {{form.locations.label_tag}}
+                <input type="text" name="locations" id="id_locations" value="{{locations}}"/>
+                <span class="helptext">
+                    {% trans "Use a <strong>comma</strong> to separate the values." %}
+                </span>
             </p>
             <p>
-                <label for="id_locations">{% trans "Locations" %}:</label>
-                <input type="text" name="locations" value="{{locations}}" id="id_locations" disabled="disabled" />
-                <span class="helptext">{% trans "You can't edit this field without Javascript. Please enable it in your Internet browser." %}</span>
-            </p>
-            <p>
-                <label for="id_description">{% trans "Description" %}:</label>
-                <textarea id="id_description" rows="10" cols="40" name="description">{{image.description}}</textarea>
+                {{form.description.label_tag}}
+                {{form.description}}
             </p>
         </noscript>
 
@@ -63,7 +85,6 @@
 {% block extra_js %}
 <script language="javascript">
     $(document).ready(function() {
-        $('p#form_help_text').show();
         $('#js_form').show();
 
         {% autoescape off %}
@@ -109,7 +130,7 @@
                 var subjects_values_matches = subjects_values.val().toUpperCase().search(subjects_regex, "regex");
                 var selection_items_matches = -1;
                 selection_items.each(function() {
-                    value = this.innerText.toUpperCase();
+                    value = $.trim(this.innerText.toUpperCase());
                     if (value == s)
                         selection_items_matches += 1;
                 });

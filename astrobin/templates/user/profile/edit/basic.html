@@ -7,9 +7,34 @@
     <div class="sided-main-content">
         <h1>{% trans "Edit your basic information" %}</h1>
         {% form_saved request %}
-        <p id="form_help_text" style="display:none">{% blocktrans %}Remember that the location field autocompletes, and you need to press TAB to add something to your list. If it's not in a white box, it doesn't get saved!{% endblocktrans %}
         <form method="post" action="{% url profile_save_basic %}">{% csrf_token %}
-        {{form.as_p}}
+
+        <div id="js_form" style="display:none">
+            {{form.as_p}}
+        </div>
+
+        <noscript>
+            {{form.non_field_errors}}
+
+            {% for field in form %}
+                {{field.errors}}
+                <p{% if field.errors %} class="error"{% endif %}>
+                    {{field.label_tag}}
+                    {% ifequal field.name 'locations' %}
+                        <input type="text" name="locations" id="id_locations" value="{{locations_value}}"/>
+                        <span class="helptext">
+                            {% trans "Use a <strong>comma</strong> to separate the values." %}
+                        </span>
+                    {% else %}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endifequal %}
+
+                    </p>
+            {% endfor %}
+
+        </noscript>
+
         <ul>
             <li><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></li>
             {% comment %}We should use {% url password_cchange %} or something.{% endcomment %}
@@ -22,6 +47,8 @@
 {% block extra_js %}
     <script language="javascript">
         $(document).ready(function() {
+            $('#js_form').show();
+
             var selects = $("select#id_timezone");
             if (selects.length > 0 && selects.val() == "") {  
              var offset_minutes = new Date().getTimezoneOffset();
@@ -41,9 +68,7 @@
              return match;
             }
 
-            $('p#form_help_text').show();
-
-            var startText = '{% trans "Enter partial name and wait for the suggestions!" %}';
+            var startText = '';
             var emptyText = '{% trans "No results. Press TAB to add it!" %}';
             var resultsTitleText = "{% trans "Click on a suggestion or press TAB to add what you typed" %}";
             {% autoescape off %}

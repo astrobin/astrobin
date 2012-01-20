@@ -938,6 +938,9 @@ form input, form select, form textarea {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
+form input[type="checkbox"] {
+  width: auto;
+}
 form select[multiple] {
   width: 730px;
 }
