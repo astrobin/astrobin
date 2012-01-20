@@ -10,11 +10,6 @@
         <p id="form_help_text" style="display:none">{% blocktrans %}Remember that the location field autocompletes, and you need to press TAB to add something to your list. If it's not in a white box, it doesn't get saved!{% endblocktrans %}
         <form method="post" action="{% url profile_save_basic %}">{% csrf_token %}
         {{form.as_p}}
-        <noscript>
-            <p class="hint">
-            {% blocktrans %}* use a comma to separate the values.{% endblocktrans %}
-            </p>
-        </noscript>
         <ul>
             <li><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></li>
             {% comment %}We should use {% url password_cchange %} or something.{% endcomment %}

@@ -31,16 +31,12 @@
             <p>
                 <label for="id_subjects">{% trans "Subjects" %}:</label>
                 <input type="text" name="subjects" id="id_subjects" value="{{subjects}}" disabled="disabled" />
-                <span class="helptext">{% trans "You can't edit Subjects without Javascript. Please enable it in your Internet browser." %}</span>
+                <span class="helptext">{% trans "You can't edit this field without Javascript. Please enable it in your Internet browser." %}</span>
             </p>
             <p>
                 <label for="id_locations">{% trans "Locations" %}:</label>
-                <input type="text" name="locations" value="{{locations}}" id="id_locations" />
-                <span class="helptext">
-                    <p class="hint">
-                        {% blocktrans %}Use a comma to separate the values.{% endblocktrans %}
-                    </p>
-                </span>
+                <input type="text" name="locations" value="{{locations}}" id="id_locations" disabled="disabled" />
+                <span class="helptext">{% trans "You can't edit this field without Javascript. Please enable it in your Internet browser." %}</span>
             </p>
             <p>
                 <label for="id_description">{% trans "Description" %}:</label>
