@@ -1655,6 +1655,7 @@ def user_profile_edit_basic(request):
     """Edits own profile"""
     profile = UserProfile.objects.get(user = request.user)
     form = UserProfileEditBasicForm(instance = profile)
+
     form.fields['locations'].initial = u', '.join(x.name for x in profile.locations.all())
     response_dict = {
         'form': form,
