@@ -4,7 +4,7 @@
 <div class="image-strip clear">
 {% for i in images.object_list %}
     <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
-        <a href="{{i.object.get_absolute_url}}{% query_string "related=related_type" "r, mod, plate_solving_started" %}">
+        <a href="{{i.object.get_absolute_url}}{% query_string "related=related_type" "r, mod, plate_solving_started" %}" title="{{i.object.title}}">
             <img src="{% if i.object.is_stored %}http://astrobin_images.{{s3_url}}/{{i.object.filename}}_small_thumb{{i.object.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
         </a>
     </div>
