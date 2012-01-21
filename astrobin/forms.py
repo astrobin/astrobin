@@ -37,6 +37,12 @@ class ImageEditBasicForm(forms.ModelForm):
         help_text = _("If you're hosting a copy of this image on your website, put the address here."),
         error_messages = {'invalid': "The address must start with http:// or https://."},
     )
+    link_to_fits = forms.RegexField(
+        regex = '^(http|https)://',
+        required = False,
+        help_text = _("If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."),
+        error_messages = {'invalid': "The address must start with http:// or https://."},
+    )
     subjects = forms.CharField(
         required = False,
         help_text=_("If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."),
@@ -49,6 +55,7 @@ class ImageEditBasicForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
         super(ImageEditBasicForm, self).__init__(**kwargs)
         self.fields['link'].label = _("Link")
+        self.fields['link_to_fits'].label = _("Link to TIFF/FITS")
         self.fields['subjects'].label = _("Subjects")
         self.fields['locations'].label = _("Locations")
 
@@ -74,7 +81,7 @@ class ImageEditBasicForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('title', 'link', 'subjects', 'solar_system_main_subject', 'locations', 'description')
+        fields = ('title', 'link', 'link_to_fits', 'solar_system_main_subject', 'subjects', 'locations', 'description')
 
 
 class ImageEditWatermarkForm(forms.ModelForm):

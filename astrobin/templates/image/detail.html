@@ -345,11 +345,6 @@
                     <tr>
                         <td class="data">
                             <h2>{{image.title|escape|default:_("(no title)")}}</h2>
-                            {% if image.link %}
-                                <p class="link">
-                                    <a href="{{image.link}}" target="_blank">{{image.link}}</a>
-                                </p>
-                            {% endif %}
                             <span>
                                 ({% trans "uploaded" %}: {{uploaded_on|ago}}
                                 {% url user_page image.user.username as the_url %}
@@ -357,6 +352,17 @@
                                 {% get_hit_count for image as hit_count %}
                                 {% if hit_count != '0' %}, {% blocktrans count counter=hit_count|add:"0" %}viewed one time{% plural %}viewed {{counter}} times{% endblocktrans %}{% endif %})
                             </span>
+
+                            {% if image.link %}
+                                <p class="link">
+                                    <strong>{% trans "Link" %}</strong>: <a href="{{image.link}}" target="_blank">{{image.link}}</a>
+                                </p>
+                            {% endif %}
+                            {% if image.link_to_fits %}
+                                <p class="link">
+                                    <strong>{% trans "Link to TIFF/FITS" %}</strong>: <a href="{{image.link_to_fits}}" target="_blank">{{image.link_to_fits}}</a>
+                                </p>
+                            {% endif %}
                         </td>
                         <td class="license">
                             <a target="_blank" href="http://creativecommons.org/licenses/">
