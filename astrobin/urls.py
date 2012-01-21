@@ -154,6 +154,7 @@ urlpatterns = patterns('',
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
 
+    url(r'^explore/choose/$', views.expore_choose, name='explore_choose'),
     url(r'^explore/wall/$', views.wall, name='wall'),
     url(r'^explore/nightly/$', views.nightly, name='nightly'),
     url(r'^explore/messier/$', views.messier, name='messier'),

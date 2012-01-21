@@ -133,7 +133,7 @@
                             <li id="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
                             <li id="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
                             <li class="menu text">
-                                <a href="#">{% trans "Explore" %}</a>
+                                <a href="{% url explore_choose %}">{% trans "Explore" %}</a>
                                 <div class="popup">
                                     <ul>
                                         <li><a href="{% url wall %}">{% trans "The Big Wall" %}</a></li>
