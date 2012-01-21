@@ -489,6 +489,12 @@
                     return false;
                 });
 
+                $('.notice-container a.notifications').click(function(event) {
+                    $(document).one('click', function() {
+                        notifications_mark_seen();
+                    });
+                });
+
                 var notifications_read_timer = 0;
                 var notifications_mark_seen = function() {
                     $.ajax(
@@ -503,11 +509,6 @@
                         }
                     });
                 };
-
-                $('#user-nav > ul > li.menu a.notifications').click(function() {
-                    notifications_read_timer = window.setTimeout(
-                        notifications_mark_seen, 500);
-                });
             });
         </script>
 
