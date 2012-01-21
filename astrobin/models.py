@@ -338,6 +338,12 @@ class Image(models.Model):
         blank = True,
      )
 
+    link_to_fits = models.CharField(
+        max_length = 256,
+        null = True,
+        blank = True,
+     )
+
     filename = models.CharField(max_length=64, editable=False)
     original_ext = models.CharField(max_length=6, editable=False)
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
