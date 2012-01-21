@@ -266,4 +266,6 @@ kill -HUP `cat astrobin.pid`
 
 # Update images index
 */10 * * * * (cd ~/Code/astrobin; ./scripts/update_index.sh) 2>&1 >/dev/null
+# Send weekly reminders
+59 23 * * 6 (cd ~/Code/astrobin; ./manage.py lacking_data_reminder) 2>&1 >/dev/null
 

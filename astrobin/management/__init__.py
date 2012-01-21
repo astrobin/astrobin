@@ -94,7 +94,12 @@ NOTICE_TYPES = (
         '',
         2
     ),
-
+    (
+        'lacking_data_reminder',
+        _("You have some images that are lacking data"),
+        '',
+        0
+    ),
 )
 
 
