@@ -1,0 +1,9 @@
+{% load i18n %}
+{% blocktrans %}You have {{number}} images with insufficient data.
+
+AstroBin relies on data to be a great service for you and every other user.
+Please fill in the data for your images at the following URL:
+
+{{url}}
+
+Thank you!{% endblocktrans %}
