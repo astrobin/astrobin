@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+
+{% block content %}
+    <h1>{% trans "Explore" %}</h1>
+    <p>
+        <a href="{% url wall %}">{% trans "The Big Wall" %}</a> - 
+        {% blocktrans %}The best way to see what's new on AstroBin: a big wall with 100 images per page, that you can sort and filter to your liking.{% endblocktrans %}
+    </p>
+    <p>
+        <a href="{% url nightly %}">{% trans "Nightly" %}</a> - 
+        {% blocktrans %}A list of all images acquired every night.{% endblocktrans %}
+    </p>
+    <p>
+        <a href="{% url messier %}">{% trans "Messier marathon" %}</a> - 
+        {% blocktrans %}A list of objects from the Messier catalog, each one represented by an AstroBin image chosen by the users via a democratic nomination process.{% endblocktrans %}
+    </p>
+{% endblock %}
