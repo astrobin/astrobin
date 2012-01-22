@@ -198,6 +198,12 @@ def wall(request):
     elif request.GET.get('sort') == '-views':
         response_dict['sort'] = '-views'
         sqs = sqs.order_by('-views');
+    elif request.GET.get('sort') == '-rating':
+        response_dict['sort'] = '-views'
+        sqs = sqs.order_by('-rating')
+    elif request.GET.get('sort') == '-integration':
+        response_dict['sort'] = '-integration'
+        sqs = sqs.order_by('-integration')
     else:
         response_dict['sort'] = '-uploaded'
         sqs = sqs.order_by('-uploaded')

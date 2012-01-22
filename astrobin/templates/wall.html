@@ -29,6 +29,16 @@
                                         <a href="{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
                                     </span>
                                 </li>
+                                <li class="bg-icon{% if sort == '-rating' %} icon-check{% endif %}">
+                                    <span class="text">
+                                        <a href="{% query_string "sort='-rating'" "" %}">{% trans "Rating" %}</a>
+                                    </span>
+                                </li>
+                                <li class="bg-icon{% if sort == '-integration' %} icon-check{% endif %}">
+                                    <span class="text">
+                                        <a href="{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>
+                                    </span>
+                                </li>
                             </ul>
                         </div>
                     </li>
