@@ -100,7 +100,7 @@ class ImageIndex(SearchIndex):
     filters = MultiValueField()
     accessories = MultiValueField()
 
-    rating = IntegerField()
+    rating = FloatField()
     integration = IntegerField()
     moon_phase = FloatField()
     first_acquisition_date = DateTimeField()
