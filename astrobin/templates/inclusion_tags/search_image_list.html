@@ -18,7 +18,7 @@
             {% endifequal %}
 
             {% ifequal sort '-rating' %}
-                {{search_result.rating}} {% trans "stars" %}
+                {{search_result.rating|cut_decimals:2}} {% trans "stars" %}
             {% endifequal %}
 
             {% ifequal sort '-uploaded' %}
