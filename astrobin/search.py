@@ -75,7 +75,7 @@ class ImageSearchView(SearchView):
         (paginator, page) = self.build_page()
         
         strings = [
-            _("Enter partial name and wait for the suggestions!"),
+            "",
             _("No results. Sorry."),
             _("Matching items:"),
         ]
