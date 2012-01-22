@@ -565,7 +565,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.raty.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     var clip1 = new ZeroClipboard.Client();
@@ -660,13 +660,22 @@ $(document).ready(function() {
         "{{current_rating}}",
         {
             rating: {
+                {% if already_voted %}
+                hint_list: [
+                    {{current_rating}},
+                    {{current_rating}},
+                    {{current_rating}},
+                    {{current_rating}},
+                    {{current_rating}}],
+                {% else %}
                 hint_list: [
                     "{% trans "Bad" %}",
                     "{% trans "Poor" %}",
                     "{% trans "Regular" %}",
                     "{% trans "Good" %}",
                     "{% trans "Gorgeous" %}"],
-                read_only: {% if request.user.is_authenticated %} false {% else %} true {% endif %}
+                {% endif %}
+                read_only: {% if request.user.is_authenticated and not already_voted %} false {% else %} true {% endif %}
             },
             upload_revision_action: {
                 dialog: {
