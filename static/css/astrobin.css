@@ -1989,8 +1989,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 .bar_mixin > li {
   float: left;
 }
-.bar_mixin > li.rating {
+.bar_mixin > li.rating, .bar_mixin > li.rating-hint {
   padding-top: 4px;
+  margin-left: 8px;
   text-align: right;
   float: right;
 }
@@ -2002,8 +2003,9 @@ ul.bar {
 ul.bar > li {
   float: left;
 }
-ul.bar > li.rating {
+ul.bar > li.rating, ul.bar > li.rating-hint {
   padding-top: 4px;
+  margin-left: 8px;
   text-align: right;
   float: right;
 }
@@ -2020,8 +2022,9 @@ ul.bar > li.rating {
 .profile ul.bar > li {
   float: left;
 }
-.profile ul.bar > li.rating {
+.profile ul.bar > li.rating, .profile ul.bar > li.rating-hint {
   padding-top: 4px;
+  margin-left: 8px;
   text-align: right;
   float: right;
 }
@@ -2924,8 +2927,9 @@ table.title td.license {
 .stats ul.bar > li {
   float: left;
 }
-.stats ul.bar > li.rating {
+.stats ul.bar > li.rating, .stats ul.bar > li.rating-hint {
   padding-top: 4px;
+  margin-left: 8px;
   text-align: right;
   float: right;
 }

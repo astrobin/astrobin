@@ -433,6 +433,7 @@ var image_detail = {
             half: false,
             showHalf: true,
             hintList: image_detail.config.rating.hint_list,
+            target: '#rating-hint',
             click: function(score) {
                 $.ajax({
                     url: image_detail.config.rating.rate_url + image_detail.globals.image_id + '/' + score + '/',
