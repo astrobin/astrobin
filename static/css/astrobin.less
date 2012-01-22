@@ -1874,11 +1874,18 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     padding: 0;
     >li {
         float: left;}
-    >li.rating, >li.rating-hint {
+    >li.rating, >li.rating-hint, >li.rating-current {
         padding-top: @spacer-small;
         margin-left: @spacer-medium;
         text-align: right;
-        float: right;}}
+        float: right;
+        font-size: 0.8em;
+    }
+    >li.rating-hint {
+        font-weight: bold;
+        color: @strong-text-color;
+    }
+}
 
 ul.bar {
     .bar_mixin();

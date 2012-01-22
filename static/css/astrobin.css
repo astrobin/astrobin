@@ -1989,11 +1989,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 .bar_mixin > li {
   float: left;
 }
-.bar_mixin > li.rating, .bar_mixin > li.rating-hint {
+.bar_mixin > li.rating, .bar_mixin > li.rating-hint, .bar_mixin > li.rating-current {
   padding-top: 4px;
   margin-left: 8px;
   text-align: right;
   float: right;
+  font-size: 0.8em;
+}
+.bar_mixin > li.rating-hint {
+  font-weight: bold;
+  color: #fcfcfc;
 }
 ul.bar {
   list-style: none;
@@ -2003,11 +2008,16 @@ ul.bar {
 ul.bar > li {
   float: left;
 }
-ul.bar > li.rating, ul.bar > li.rating-hint {
+ul.bar > li.rating, ul.bar > li.rating-hint, ul.bar > li.rating-current {
   padding-top: 4px;
   margin-left: 8px;
   text-align: right;
   float: right;
+  font-size: 0.8em;
+}
+ul.bar > li.rating-hint {
+  font-weight: bold;
+  color: #fcfcfc;
 }
 .profile a.stats_anchor {
   margin-bottom: 52px;
@@ -2022,11 +2032,16 @@ ul.bar > li.rating, ul.bar > li.rating-hint {
 .profile ul.bar > li {
   float: left;
 }
-.profile ul.bar > li.rating, .profile ul.bar > li.rating-hint {
+.profile ul.bar > li.rating, .profile ul.bar > li.rating-hint, .profile ul.bar > li.rating-current {
   padding-top: 4px;
   margin-left: 8px;
   text-align: right;
   float: right;
+  font-size: 0.8em;
+}
+.profile ul.bar > li.rating-hint {
+  font-weight: bold;
+  color: #fcfcfc;
 }
 .profile h1 {
   margin-bottom: 8px;
@@ -2927,11 +2942,16 @@ table.title td.license {
 .stats ul.bar > li {
   float: left;
 }
-.stats ul.bar > li.rating, .stats ul.bar > li.rating-hint {
+.stats ul.bar > li.rating, .stats ul.bar > li.rating-hint, .stats ul.bar > li.rating-current {
   padding-top: 4px;
   margin-left: 8px;
   text-align: right;
   float: right;
+  font-size: 0.8em;
+}
+.stats ul.bar > li.rating-hint {
+  font-weight: bold;
+  color: #fcfcfc;
 }
 .stats .leaderboard {
   margin-top: 52px;
