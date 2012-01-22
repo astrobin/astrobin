@@ -448,6 +448,8 @@ var image_detail = {
                                 $(image_detail.config.rating.element).raty('start', rating);
                                 $(image_detail.config.rating.element).raty('readOnly', true);
                                 $(image_detail.config.rating.element).raty('fixHint');
+                                $('.rating-current .rating').text(rating);
+                                $('.rating-current .number').text(parseInt($('.rating-current .number').text()) + 1);
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) {
                             }
