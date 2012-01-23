@@ -541,6 +541,61 @@
             <h3>{% trans "Description" %}</h3>
             <div id="description">{{image.description|safe|linebreaks}}</div>
             {% endif %}
+
+            <h3>{% trans "Comments" %}</h3>
+            <div id="comments">
+                {% if user.is_authenticated %}
+                <div id="top-level-form">
+                    <form action="{% url comment_save %}" method="post">
+                        {{comment_form.as_p}}
+                        <input type="hidden" name="author" value="{{user.id}}" />
+                        <input type="hidden" name="image" value="{{image.id}}" />
+                        <input type="hidden" name="parent_id" value="" />
+                        <input type="hidden" name="level" value="0" />
+                        <p>
+                            <input class="button" type="submit" value="{% trans "Add comment" %} &rarr;" />
+                            <span class="loader">
+                                <img src="/static/images/ajax-loader.gif" alt=""/> 
+                            </span>
+                        </p>
+                    </form>
+                </div>
+                {% endif %}
+
+                {% load mptt_tags %}
+                {% recursetree comments %}
+                    <div style="margin-left: {{node.get_level}}0px">
+                        <div id="comment-{{node.id}}" class="comment">
+                            <div class="meta">
+                                <a class="author" href="#">{{node.author}}</a> {{node.added|ago}}
+                            </div>
+                            {{node.comment|linebreaks}}
+                            <div class="links">
+                                {% if user.is_authenticated %}
+                                <a class="reply" href="#">{% trans "Reply" %}</a>
+                                {% endif %}
+                            </div>
+                            <form action="{% url comment_save %}" method="post">
+                                {{comment_form.as_p}}
+                                <input type="hidden" name="author" value="{{user.id}}" />
+                                <input type="hidden" name="image" value="{{image.id}}" />
+                                <input type="hidden" name="parent_id" value="{{node.id}}" />
+                                <input type="hidden" name="level" value="{{node.get_level}}" />
+                                <p>
+                                    <input class="button" type="submit" value="{% trans "Add comment" %} &rarr;" />
+                                    <input class="button cancel" type="reset" value="{% trans "Cancel" %}" />
+                                    <span class="loader">
+                                        <img src="/static/images/ajax-loader.gif" alt=""/> 
+                                    </span>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                    {% if not node.is_leaf_node %}
+                        {{children}}
+                    {% endif %}
+                {% endrecursetree %}
+            </div>
         </div>
         <div id="side-pane">
             <ul class="topnav">
@@ -628,6 +683,107 @@ $(document).ready(function() {
     {% endif %}
 
     {% get_hit_count_javascript for image %}
+
+    var ajaxFormOptions = {
+        dataType: 'json',
+        beforeSubmit: function(formData, $form, options) {
+            $loader = $form.find('.loader');
+            $button = $form.find('.button:first-child');
+            $textarea = $form.find('textarea');
+
+            if ($textarea.val() == '')
+                return false;
+
+            $button.attr('disabled', 'disabled').addClass('button-disabled');
+            $loader.css('visibility', 'visible');
+        },
+        success: function(responseJson, statusText, xhr, $form) {
+            var $loader = $form.find('.loader');
+            var $button = $form.find('.button:first-child');
+            var $textarea = $form.find('textarea');
+            if ($form.parent().attr('id') == 'top-level-form') {
+                var $parent = $('#top-level-form');
+                var is_top_level = true;
+                var level = 0;
+            } else {
+                var $parent = $form.closest('.comment').parent();
+                var is_top_level = false;
+                var level = parseInt($form.find('input:hidden[name="level"]').val()) + 1;
+            }
+            var parent_id = responseJson['comment_id']
+
+            $button.removeAttr('disabled').removeClass('button-disabled');
+            $loader.css('visibility', 'hidden');
+
+            $container = $('<div/>').css('margin-left', level + '0px');
+            $new_comment = $('<div/>').addClass('comment');
+            $container.append($new_comment);
+
+            $meta = $('<div/>').addClass('meta');
+            $author = $('<a/>').addClass('author').text('{{user.username}}');
+            $meta.append($author).append('{% trans "just now" %}');
+
+            $links = $('<div/>').addClass('links');
+            $reply = $('<a/>').addClass('reply').attr('href', '#').text('{% trans "Reply" %}');
+            $links.append($reply);
+
+            $content = $('<p/>').html($textarea.val().replace(/\n\r?/g, '<br />'));
+
+            new_form_template = "\
+                <form action=\"{% url comment_save %}\" method=\"post\">\
+                    {{comment_form.as_p|escapejs}}\
+                    <input type=\"hidden\" id=\"csrfmiddlewaretoken\" name=\"csrfmiddlewaretoken\" value=\"{{csrf_token}}\" />\
+                    <input type=\"hidden\" name=\"author\" value=\"{{user.id}}\" />\
+                    <input type=\"hidden\" name=\"image\" value=\"{{image.id}}\" />\
+                    <input type=\"hidden\" name=\"parent_id\" value=\"" + parent_id + "\" />\
+                    <input type=\"hidden\" name=\"level\" value=\"" + level + "\" />\
+                    <p>\
+                        <input class=\"button\" type=\"submit\" value=\"{% trans "Add comment" %} &rarr;\" />\
+                        <input class=\"button cancel\" type=\"reset\" value=\"{% trans "Cancel" %}\" />\
+                        <span class=\"loader\">\
+                            <img src=\"/static/images/ajax-loader.gif\" alt=\"\"/>\
+                        </span>\
+                    </p>\
+                </form>"
+
+            $new_form = $(new_form_template);
+            $new_form.ajaxForm(ajaxFormOptions);
+
+            $new_comment.append($meta)
+                        .append($content)
+                        .append($links)
+                        .append($new_form);
+
+            $textarea.val('');
+            if (!is_top_level)
+                $form.hide();
+
+            $container.insertAfter($parent);
+        },
+        error: function(responseText, statusText, xhr, $form) {
+            $loader = $form.find('.loader');
+            $button = $form.find('.button:first-child');
+
+            $button.removeAttr('disabled').removeClass('button-disabled');
+            $loader.css('visibility', 'hidden');
+            alert("Error");
+        }
+    };
+
+    $('#top-level-form form, .comment form').ajaxForm(ajaxFormOptions);
+    $('.comment form .cancel').click(function() {
+        var $form = $(this).closest('form');
+        $form.hide();
+        return true;
+    });
+    $('.comment .reply').live('click', function() {
+        var $comment = $(this).closest('.comment');
+        var $form = $comment.find('form');
+
+        $form.show();
+
+        return false;
+    });
 
     common.init(
         '{{image.user.username}}',

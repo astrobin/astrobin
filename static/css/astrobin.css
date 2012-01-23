@@ -2192,7 +2192,7 @@ ul.topnav > li:hover {
 #image-detail #main-image #container img.fixed-plot-overlay {
   opacity: 1.0;
 }
-#image-detail #description {
+#image-detail #description, #image-detail #comments {
   margin: 0 0 28px 0;
   border: 1px solid #2e2e2e;
   border-top: 1px solid #474747;
@@ -2201,8 +2201,57 @@ ul.topnav > li:hover {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-#image-detail #description p {
+#image-detail #description p, #image-detail #comments p {
   padding: 8px 4px;
+}
+#image-detail #comments {
+  padding: 12px;
+  font-size: 0.95em;
+  line-height: 90%;
+  color: #939393;
+}
+#image-detail #comments a {
+  color: #a33c25;
+}
+#image-detail #comments a.author {
+  margin-right: 8px;
+}
+#image-detail #comments p {
+  margin: 0;
+  padding: 0;
+}
+#image-detail #comments #top-level-form textarea {
+  width: 682px;
+}
+#image-detail #comments form ul {
+  padding: 0;
+}
+#image-detail #comments .button {
+  width: auto;
+  margin: 0 0 26px 0;
+  font-size: 1em;
+}
+#image-detail #comments .comment {
+  padding: 12px 8px;
+  border-left: 1px dotted #474747;
+}
+#image-detail #comments .comment p {
+  padding: 2px 0;
+  color: #fcfcfc;
+  line-height: 1.5em;
+}
+#image-detail #comments .comment .meta, #image-detail #comments .comment .links {
+  font-size: 0.85em;
+}
+#image-detail #comments .comment .links a {
+  text-transform: lowercase;
+}
+#image-detail #comments .comment form {
+  display: none;
+}
+#image-detail #comments .loader {
+  display: inline-block;
+  visibility: hidden;
 }
 #image-detail #revisions .image-strip {
   width: 696px;

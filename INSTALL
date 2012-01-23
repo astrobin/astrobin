@@ -130,6 +130,11 @@ cd django-registration
 ../../venv/bin/python setup.py install
 cd ../..
 
+# for the threaded comments
+cd django-mptt
+../../venv/bin/python setup.py install
+cd ../..
+
 # for the moon phase module
 . ./venv/bin/activate
 easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
