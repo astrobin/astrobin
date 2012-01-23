@@ -599,6 +599,8 @@ def image_detail(request, id):
 
                      'solar_system_main_subject_id': image.solar_system_main_subject,
                      'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
+                     'comment_form': CommentForm(),
+                     'comments': Comment.objects.filter(image = image),
                     }
 
     if 'upload_error' in request.GET:
@@ -2527,4 +2529,35 @@ def nightly(request):
             'previous_month_label': monthdelta(start, 1),
             'next_month_label': monthdelta(start, -1)
         })
+
+
+@require_POST
+@login_required
+def comment_save(request):
+    form = CommentForm(data = request.POST)
+
+    if form.is_valid():
+        author = User.objects.get(id = form.data['author'])
+        image = Image.objects.get(id = form.data['image'])
+        if request.user != author:
+            return HttpResponseForbidden()
+
+        comment = form.save(commit = False)
+        comment.author = author
+        comment.image = image
+        if form.data['parent_id'] != '':
+            comment.parent = Comment.objects.get(id = form.data['parent_id'])
+
+        comment.save()
+
+        response_dict = {
+            'success': True,
+            'comment_id': comment.id,
+        }
+        return HttpResponse(
+            simplejson.dumps(response_dict),
+            mimetype = 'application/javascript')
+
+    return ajax_fail()
+
 

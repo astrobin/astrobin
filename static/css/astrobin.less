@@ -2020,7 +2020,7 @@ ul.topnav {
                 border: none;}
             img.fixed-plot-overlay {
                 opacity: 1.0;}}}
-    #description {
+    #description, #comments {
         margin: 0 0 @spacer-xxlarge 0;
         .common-border;
         background: (@light-panel-color) url('/static/images/light-panel-tile.png');
@@ -2028,6 +2028,63 @@ ul.topnav {
 
         p {
             padding: @spacer-medium @spacer-small;
+        }
+    }
+    #comments {
+        padding: @spacer-large;
+        font-size: 0.95em;
+        line-height: 90%;
+        color: @text-color / @strong-hilight-factor;
+
+        a {
+            color: @link-color / @strong-hilight-factor;
+        }
+        a.author {
+            margin-right: @spacer-medium;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+        }
+        #top-level-form {
+            textarea {
+                width: 682px;
+            }
+        }
+        form {
+            ul {
+                padding: 0;
+            }
+        }
+        .button {
+            width: auto;
+            margin: 0 0 26px 0;
+            font-size: 1em;
+        }
+        .comment {
+            padding: @spacer-large @spacer-medium;
+            border-left: 1px dotted @border-top-color;
+
+            p {
+                padding: 2px 0;
+                color: @strong-text-color;
+                line-height: 1.5em;
+            }
+            .meta, .links {
+                font-size: 0.85em;
+            }
+            .links {
+                a {
+                    text-transform: lowercase;
+                }
+            }
+            form {
+                display: none;
+            }
+        }
+        .loader {
+            display: inline-block;
+            visibility: hidden;
         }
     }
     #revisions .image-strip {
@@ -2222,8 +2279,6 @@ span.copy-box {
     }
 }
 
-#description {
-}
 
 /* footer */
 #footer {

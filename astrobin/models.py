@@ -20,6 +20,7 @@ from timezones.forms import PRETTY_TIMEZONE_CHOICES
 
 from notifications import push_notification
 
+from mptt.models import MPTTModel, TreeForeignKey
 
 LICENSE_CHOICES = (
     (0, _("None (All rights reserved)")),
@@ -1012,6 +1013,43 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         return '/users/%s' % self.user.username
+
+    class Meta:
+        app_label = 'astrobin'
+
+
+class Comment(MPTTModel):
+    image = models.ForeignKey(
+        Image,
+    )
+    author = models.ForeignKey(
+        User,
+    )
+    comment = models.TextField(
+        verbose_name = "",
+    )
+    added  = models.DateTimeField(
+        auto_now_add = True,
+        editable = False,
+    )
+    parent = TreeForeignKey(
+        'self',
+        null = True,
+        blank = True,
+        editable = False,
+        related_name = 'children'
+    )
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            Comment.tree.insert_node(self, self.parent)
+            super(Comment, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.comment
+
+    class MPTTMeta:
+        order_insertion_by = ['added']
 
     class Meta:
         app_label = 'astrobin'
