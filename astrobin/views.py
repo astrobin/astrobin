@@ -199,7 +199,7 @@ def wall(request):
         response_dict['sort'] = '-views'
         sqs = sqs.order_by('-views');
     elif request.GET.get('sort') == '-rating':
-        response_dict['sort'] = '-views'
+        response_dict['sort'] = '-rating'
         sqs = sqs.order_by('-rating')
     elif request.GET.get('sort') == '-integration':
         response_dict['sort'] = '-integration'
