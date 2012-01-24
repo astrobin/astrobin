@@ -864,16 +864,6 @@ acronym {
   cursor: help;
   border-bottom: 1px dotted #555;
 }
-blockquote {
-  margin: 10px 20px;
-  padding: 15px 15px 15px 32px;
-  border: 1px solid #2e2e2e;
-  border-top: 1px solid #474747;
-  background: #130d0a url(../images/quote.gif) no-repeat 12px 12px;
-  font-weight: normal;
-  line-height: 1.5em;
-  font-style: italic;
-}
 strong {
   color: #fcfcfc;
   font-weight: bold;
@@ -2220,6 +2210,11 @@ ul.topnav > li:hover {
   margin: 0;
   padding: 4px 0;
 }
+#image-detail #comments .formatting-help {
+  font-size: 0.8em;
+  float: right;
+  margin-right: 12px;
+}
 #image-detail #comments #top-level-form textarea {
   width: 682px;
 }
@@ -2235,12 +2230,25 @@ ul.topnav > li:hover {
   padding: 12px 8px;
   border-left: 1px dotted #474747;
 }
-#image-detail #comments .comment p {
+#image-detail #comments .comment .content p {
   padding: 4px 0;
   color: #fcfcfc;
   line-height: 1.5em;
 }
-#image-detail #comments .comment p.deleted {
+#image-detail #comments .comment .content blockquote {
+  margin: 0;
+  padding: 0 0 0 4px;
+  font-style: italic;
+  border-left: 2px solid #505050;
+}
+#image-detail #comments .comment .content blockquote p {
+  color: #b8b8b8;
+}
+#image-detail #comments .comment .content blockquote br {
+  display: none;
+}
+#image-detail #comments .comment .content.deleted p {
+  padding: 4px 0;
   color: #b8b8b8;
   font-size: 0.9em;
 }
@@ -2253,6 +2261,12 @@ ul.topnav > li:hover {
 }
 #image-detail #comments .comment form {
   display: none;
+}
+#image-detail #comments .comment form textarea {
+  width: 100%;
+}
+#image-detail #comments .comment form .formatting-help {
+  margin: 0;
 }
 #image-detail #comments .comment.hilight {
   background-color: #404040;
@@ -3409,4 +3423,7 @@ form#gear select {
   position: absolute;
   top: 28px;
   right: 42px;
+}
+ol.faq table {
+  padding-left: 28px;
 }

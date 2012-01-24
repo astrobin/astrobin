@@ -16,10 +16,11 @@
         <li><a href="#7">{% blocktrans %}How do I get an image featured on the Messier Marathon page?{% endblocktrans %}</a></li>
         <li><a href="#8">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
         <li><a href="#9">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
+        <li><a href="#10">{% blocktrans %}How can I format my comments?{% endblocktrans %}</a></li>
     </ol>
     <br/>
     <h2>{% trans "... and their answers!" %}</h2>
-    <ol>
+    <ol class="faq">
         <li>
             <a name="1"></a>
             <h4>{% blocktrans %}Is this website for free?{% endblocktrans %}</h4>
@@ -105,6 +106,22 @@
             <p>
             {% blocktrans %}Thanks to the input from the community, more ideas are flowing in and the list get bigger and bigger.{% endblocktrans %}
             </p>
+        </li>
+        <li>
+            <a name="10"></a>
+            <h4>{% blocktrans %}How can I format my comments?{% endblocktrans %}</h4>
+            <p>
+            {% blocktrans %}AstroBin uses the Markdown syntax. Please use the following reference table:{% endblocktrans %}
+            </p>
+            <table>
+                <tr><td><strong>{% trans "You type:" %}</strong</td><td><strong>{% trans "You see:" %}</strong></td></tr>
+                <tr><td>*{% trans "italics" %}*</td><td><i>{% trans "italics" %}</i></td></tr>
+                <tr><td>**{% trans "bold" %}**</td><td><strong>{% trans "bold" %}</strong></td></tr>
+                <tr><td>~{% trans "strikethrough" %}~</td><td><del>{% trans "strikethrough" %}</del></td></tr>
+                <tr><td>[AstroBin!](http://astrobin.com)</td><td><a href="http://astrobin.com">AstroBin!</a></td></tr>
+                <tr><td><i>{% trans "(TAB or 4 spaces)" %}</i> {% trans "preformatted text" %}</td><td><tt>{% trans "preformatted text" %}</tt></td></tr>
+                <tr><td>\*{% trans "escape the formatting syntax" %}\*</td><td>*{% trans "escape the formatting syntax" %}*</td></tr>
+            </table>
         </li>
     </ol>
     <br/>
