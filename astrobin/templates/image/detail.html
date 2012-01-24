@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load tags %}
 {% load hitcount_tags %}
+{% load markup %}
 
 {% block extra_gaq_push %}
     {% if image.is_wip %}
@@ -557,6 +558,9 @@
                         <input type="hidden" name="level" value="0" />
                         <p>
                             <input class="button" type="submit" value="{% trans "Save" %}" />
+                            <span class="formatting-help">
+                                <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+                            </span>
                             <span class="loader">
                                 <img src="/static/images/ajax-loader.gif" alt=""/> 
                             </span>
@@ -573,11 +577,13 @@
                                 <div class="meta">
                                     <a class="author" href="#">{{node.author}}</a> {{node.added|ago}}
                                 </div>
-                                {% if node.is_deleted %}
-                                    <p class="deleted">{% trans "(comment deleted)" %}</p>
-                                {% else %}
-                                    {{node.comment|linebreaks}}
-                                {% endif %}
+                                <div class="content{% if node.is_deleted %} deleted{% endif %}">
+                                    {% if node.is_deleted %}
+                                        <p>{% trans "(comment deleted)" %}</p>
+                                    {% else %}
+                                        {{node.comment|markdown|linebreaks}}
+                                    {% endif %}
+                                </div>
                                 <div class="links">
                                     <a class="permalink" href="{% url image_detail image.id %}#c{{node.id}}">{% trans "Permalink" %}</a>
                                     {% if user.is_authenticated %}
@@ -602,6 +608,9 @@
                                     <p>
                                         <input class="button" type="submit" value="{% trans "Save" %}" />
                                         <input class="button cancel" type="reset" value="{% trans "Cancel" %}" />
+                                        <span class="formatting-help">
+                                            <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+                                        </span>
                                         <span class="loader">
                                             <img src="/static/images/ajax-loader.gif" alt=""/> 
                                         </span>
@@ -759,7 +768,8 @@ $(document).ready(function() {
 
             $links.append($permalink).append($delete).append($reply);
 
-            $content = $('<p/>').html($textarea.val().replace(/\n\r?/g, '<br />'));
+            var converter = Markdown.getSanitizingConverter();
+            $content = $('<div/>').addClass('content').append($('<p/>').html(converter.makeHtml($textarea.val()).replace(/\n\r?/g, '<br />')));
 
             new_form_template = "\
                 <form action=\"{% url image_comment_save %}\" method=\"post\">\
@@ -774,6 +784,9 @@ $(document).ready(function() {
                         <input class=\"button cancel\" type=\"reset\" value=\"{% trans "Cancel" %}\" />\
                         <span class=\"loader\">\
                             <img src=\"/static/images/ajax-loader.gif\" alt=\"\"/>\
+                        </span>\
+                        <span class=\"formatting-help\">\
+                            <a href=\"{% url faq %}#10\" target=\"_blank\">{% trans "Formatting help" %}</a>\
                         </span>\
                     </p>\
                 </form>"
@@ -819,22 +832,27 @@ $(document).ready(function() {
 
     $('.comment .delete').live('click', function() {
         var id = $(this).closest('.comment').find('input:hidden[name="parent_id"]').val()
-        var $comment = $(this).closest('.comment').find('>p');
+        var $content = $(this).closest('.comment').find('> .content');
+        var $self = $(this);
+
         $.ajax({
             url: '/image_comments/delete/' + id + '/',
             dataType: 'json',
             timeout: 5000,
             success: function(data, status, xhr) {
                 if (data.deleted) {
-                    $comment.addClass('deleted');
-                    $comment.text('{% trans "(comment deleted)" %}');
+                    $content.addClass('deleted');
+                    $content.html('<p>{% trans "(comment deleted)" %}</p>');
+                    $self.text('{% trans 'Undelete' %}');
                 } else {
-                    $comment.removeClass('deleted');
-                    $comment.html(data.comment.replace(/\n\r?/g, '<br />'));
+                    var converter = Markdown.getSanitizingConverter();
+
+                    $content.removeClass('deleted');
+                    $content.html(converter.makeHtml(data.comment).replace(/\n\r?/g, '<br />'));
+                    $self.text('{% trans 'Delete' %}');
                 }
             }
         });
-        $(this).text('{% trans 'Undelete' %}');
         return false;
     });
 

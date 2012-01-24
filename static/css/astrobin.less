@@ -1024,14 +1024,6 @@ acronym {
   cursor: help;
   border-bottom: 1px dotted #555;}
 
-blockquote {
-    margin: 10px 20px;
-    padding: 15px 15px 15px 32px;
-    .common-border;
-    background: #130d0a url(../images/quote.gif) no-repeat 12px 12px;
-    font-weight: normal;
-    line-height: 1.5em;
-    font-style: italic;}
 
 strong { .strong; }
 
@@ -2046,6 +2038,11 @@ ul.topnav {
             margin: 0;
             padding: @spacer-small 0;
         }
+        .formatting-help {
+            font-size: 0.8em;
+            float: right;
+            margin-right: @spacer-large;
+        }
         #top-level-form {
             textarea {
                 width: 682px;
@@ -2065,14 +2062,33 @@ ul.topnav {
             padding: @spacer-large @spacer-medium;
             border-left: 1px dotted @border-top-color;
 
-            p {
-                padding: @spacer-small 0;
-                color: @strong-text-color;
-                line-height: 1.5em;
+            .content {
+                p {
+                    padding: @spacer-small 0;
+                    color: @strong-text-color;
+                    line-height: 1.5em;
+                }
+                blockquote {
+                    margin: 0;
+                    padding: 0 0 0 @spacer-small;
+                    font-style: italic;
+                    border-left: 2px solid (@border-top-color * @hilight-factor);
+
+                    p {
+                        color: @text-color;
+                    }
+
+                    br {
+                        display: none;
+                    }
+                }
             }
-            p.deleted {
-                color: @text-color;
-                font-size: 0.9em;
+            .content.deleted {
+                p {
+                    padding: @spacer-small 0;
+                    color: @text-color;
+                    font-size: 0.9em;
+                }
             }
             .meta, .links {
                 font-size: 0.85em;
@@ -2085,6 +2101,13 @@ ul.topnav {
             }
             form {
                 display: none;
+
+                textarea {
+                    width: 100%;
+                }
+                .formatting-help {
+                    margin: 0;
+                }
             }
         }
         .comment.hilight {
@@ -3137,3 +3160,8 @@ form#gear {
     }
 }
 
+ol.faq {
+    table {
+        padding-left: @spacer-xxlarge;
+    }
+}
