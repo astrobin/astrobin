@@ -163,5 +163,6 @@ urlpatterns = patterns('',
 
     url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 
-    url(r'^comments/save/$', views.comment_save, name='comment_save'),
+    url(r'^image_comments/save/$', views.image_comment_save, name='image_comment_save'),
+    url(r'^image_comments/delete/(?P<id>\d+)/$', views.image_comment_delete, name='image_comment_delete'),
 )

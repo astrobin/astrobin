@@ -2034,17 +2034,17 @@ ul.topnav {
         padding: @spacer-large;
         font-size: 0.95em;
         line-height: 90%;
-        color: @text-color / @strong-hilight-factor;
+        color: @text-color / @strongest-hilight-factor;
 
         a {
-            color: @link-color / @strong-hilight-factor;
+            color: @link-color / @hilight-factor;
         }
         a.author {
             margin-right: @spacer-medium;
         }
         p {
             margin: 0;
-            padding: 0;
+            padding: @spacer-small 0;
         }
         #top-level-form {
             textarea {
@@ -2066,9 +2066,13 @@ ul.topnav {
             border-left: 1px dotted @border-top-color;
 
             p {
-                padding: 2px 0;
+                padding: @spacer-small 0;
                 color: @strong-text-color;
                 line-height: 1.5em;
+            }
+            p.deleted {
+                color: @text-color;
+                font-size: 0.9em;
             }
             .meta, .links {
                 font-size: 0.85em;
@@ -2076,11 +2080,15 @@ ul.topnav {
             .links {
                 a {
                     text-transform: lowercase;
+                    margin-right: @spacer-medium;
                 }
             }
             form {
                 display: none;
             }
+        }
+        .comment.hilight {
+            background-color: @light-panel-color * @hilight-factor;
         }
         .loader {
             display: inline-block;

@@ -1028,6 +1028,9 @@ class Comment(MPTTModel):
     comment = models.TextField(
         verbose_name = "",
     )
+    is_deleted = models.BooleanField(
+        default = False,
+    )
     added  = models.DateTimeField(
         auto_now_add = True,
         editable = False,
@@ -1043,7 +1046,7 @@ class Comment(MPTTModel):
     def save(self, *args, **kwargs):
         if not self.id:
             Comment.tree.insert_node(self, self.parent)
-            super(Comment, self).save(*args, **kwargs)
+        super(Comment, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.comment
