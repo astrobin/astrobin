@@ -2553,6 +2553,7 @@ def image_comment_save(request):
         response_dict = {
             'success': True,
             'comment_id': comment.id,
+            'action': 'save',
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
@@ -2580,4 +2581,47 @@ def image_comment_delete(request, id):
     return HttpResponse(
         simplejson.dumps(response_dict),
         mimetype = 'application/javascript')
+
+
+@require_GET
+@login_required
+def image_comment_get(request, id):
+    comment = get_object_or_404(Comment, id = id)
+
+    response_dict = {
+        'success': True,
+        'comment': comment.comment,
+    }
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
+
+
+@require_POST
+@login_required
+def image_comment_edit(request):
+    form = CommentForm(data = request.POST)
+
+    if form.is_valid():
+        author = User.objects.get(id = form.data['author'])
+        image = Image.objects.get(id = form.data['image'])
+        if request.user != author:
+            return HttpResponseForbidden()
+
+        comment = Comment.objects.get(id = form.data['parent_id'])
+        comment.comment = form.cleaned_data['comment']
+        comment.save()
+
+        response_dict = {
+            'success': True,
+            'comment_id': comment.id,
+            'comment': comment.comment,
+            'action': 'edit',
+        }
+        return HttpResponse(
+            simplejson.dumps(response_dict),
+            mimetype = 'application/javascript')
+
+    return ajax_fail()
+
 
