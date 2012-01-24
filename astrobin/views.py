@@ -199,8 +199,8 @@ def wall(request):
         response_dict['sort'] = '-views'
         sqs = sqs.order_by('-views');
     elif request.GET.get('sort') == '-rating':
-        response_dict['sort'] = '-views'
-        sqs = sqs.order_by('-rating')
+        response_dict['sort'] = '-rating'
+        sqs = sqs.order_by('-rating', '-votes')
     elif request.GET.get('sort') == '-integration':
         response_dict['sort'] = '-integration'
         sqs = sqs.order_by('-integration')
@@ -648,7 +648,7 @@ def image_get_rating(request, image_id):
     score = image.rating.score
     rating = float(score)/votes if votes > 0 else 0
 
-    response_dict = {'rating': rating}
+    response_dict = {'rating': '%.2f' % rating}
     return ajax_response(response_dict)
 
 

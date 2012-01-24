@@ -232,7 +232,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
         for notice_type in NOTICE_TYPES:
             if notice_type[3] == 2:
                 self.fields[notice_type[0]] = forms.BooleanField(
-                    label=notice_type[1],
+                    label=_(notice_type[1]),
                     required=False
                 )
 
