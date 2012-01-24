@@ -646,7 +646,7 @@ def image_get_rating(request, image_id):
     score = image.rating.score
     rating = float(score)/votes if votes > 0 else 0
 
-    response_dict = {'rating': rating}
+    response_dict = {'rating': '%.2f' % rating}
     return ajax_response(response_dict)
 
 
