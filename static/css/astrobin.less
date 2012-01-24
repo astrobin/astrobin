@@ -2024,12 +2024,13 @@ ul.topnav {
     }
     #comments {
         padding: @spacer-large;
-        font-size: 0.95em;
+        font-size: 1em;
         line-height: 90%;
         color: @text-color / @strongest-hilight-factor;
 
         a {
             color: @link-color / @hilight-factor;
+            .text-shadow-subtle;
         }
         a.author {
             margin-right: @spacer-medium;
@@ -2042,6 +2043,7 @@ ul.topnav {
             font-size: 0.8em;
             float: right;
             margin-right: @spacer-large;
+            text-transform: lowercase;
         }
         #top-level-form {
             textarea {
@@ -2060,13 +2062,18 @@ ul.topnav {
         }
         .comment {
             padding: @spacer-medium;
+            margin-bottom: @spacer-small;
             border: 1px dashed @border-top-color;
+            background-color: @background-color;
+            .box-shadow-subtle;
 
             .content {
+                padding: @spacer-medium 0;
+
                 p {
-                    padding: @spacer-small 0;
                     color: @strong-text-color;
                     line-height: 1.5em;
+                    padding: 0;
                 }
                 blockquote {
                     margin: 0;
@@ -2085,9 +2092,8 @@ ul.topnav {
             }
             .content.deleted {
                 p {
-                    padding: @spacer-small 0;
-                    color: @text-color;
-                    font-size: 0.9em;
+                    color: @text-color / @hilight-factor;
+                    font-style: italic;
                 }
             }
             .meta, .links {
