@@ -101,6 +101,7 @@ class ImageIndex(SearchIndex):
     accessories = MultiValueField()
 
     rating = FloatField()
+    votes = IntegerField()
     integration = IntegerField()
     moon_phase = FloatField()
     first_acquisition_date = DateTimeField()
@@ -193,6 +194,9 @@ class ImageIndex(SearchIndex):
         votes = obj.rating.votes
         score = obj.rating.score
         return float(score)/votes if votes > 0 else 0
+
+    def prepare_votes(self, obj):
+        return obj.rating.votes
 
     def prepare_integration(self, obj):
         return _get_integration(obj)
