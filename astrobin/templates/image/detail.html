@@ -827,7 +827,7 @@ $(document).ready(function() {
         var id = $(this).closest('.comment').find('input:hidden[name="parent_id"]').val()
         $('.comment.hilight').removeClass('hilight');
         $('#c' + id).addClass('hilight');
-        return false;
+        return true;
     });
 
     $('.comment .delete').live('click', function() {
