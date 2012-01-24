@@ -2196,12 +2196,13 @@ ul.topnav > li:hover {
 }
 #image-detail #comments {
   padding: 12px;
-  font-size: 0.95em;
+  font-size: 1em;
   line-height: 90%;
   color: #838383;
 }
 #image-detail #comments a {
   color: #b64329;
+  text-shadow: rgba(0, 0, 0, 0.2) 0 3px 3px;
 }
 #image-detail #comments a.author {
   margin-right: 8px;
@@ -2214,6 +2215,7 @@ ul.topnav > li:hover {
   font-size: 0.8em;
   float: right;
   margin-right: 12px;
+  text-transform: lowercase;
 }
 #image-detail #comments #top-level-form textarea {
   width: 682px;
@@ -2228,12 +2230,20 @@ ul.topnav > li:hover {
 }
 #image-detail #comments .comment {
   padding: 8px;
+  margin-bottom: 4px;
   border: 1px dashed #474747;
+  background-color: #333333;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+}
+#image-detail #comments .comment .content {
+  padding: 8px 0;
 }
 #image-detail #comments .comment .content p {
-  padding: 4px 0;
   color: #fcfcfc;
   line-height: 1.5em;
+  padding: 0;
 }
 #image-detail #comments .comment .content blockquote {
   margin: 0;
@@ -2248,9 +2258,8 @@ ul.topnav > li:hover {
   display: none;
 }
 #image-detail #comments .comment .content.deleted p {
-  padding: 4px 0;
-  color: #b8b8b8;
-  font-size: 0.9em;
+  color: #a4a4a4;
+  font-style: italic;
 }
 #image-detail #comments .comment .meta, #image-detail #comments .comment .links {
   font-size: 0.85em;
