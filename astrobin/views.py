@@ -2533,7 +2533,7 @@ def nightly(request):
 
 @require_POST
 @login_required
-def comment_save(request):
+def image_comment_save(request):
     form = CommentForm(data = request.POST)
 
     if form.is_valid():
@@ -2560,4 +2560,24 @@ def comment_save(request):
 
     return ajax_fail()
 
+
+@require_GET
+@login_required
+def image_comment_delete(request, id):
+    comment = get_object_or_404(Comment, id = id)
+    if comment.author != request.user:
+        return HttpResponseForbidden()
+
+    # NOTE: this function undeletes too!
+    comment.is_deleted = not comment.is_deleted
+    comment.save()
+
+    response_dict = {
+        'success': True,
+        'deleted': comment.is_deleted,
+        'comment': comment.comment,
+    }
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
 

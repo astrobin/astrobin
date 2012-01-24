@@ -545,15 +545,18 @@
             <h3>{% trans "Comments" %}</h3>
             <div id="comments">
                 {% if user.is_authenticated %}
+                <p>
+                    {% blocktrans %}Leave a comment.{% endblocktrans %}
+                </p>
                 <div id="top-level-form">
-                    <form action="{% url comment_save %}" method="post">
+                    <form action="{% url image_comment_save %}" method="post">
                         {{comment_form.as_p}}
                         <input type="hidden" name="author" value="{{user.id}}" />
                         <input type="hidden" name="image" value="{{image.id}}" />
                         <input type="hidden" name="parent_id" value="" />
                         <input type="hidden" name="level" value="0" />
                         <p>
-                            <input class="button" type="submit" value="{% trans "Add comment" %} &rarr;" />
+                            <input class="button" type="submit" value="{% trans "Save" %}" />
                             <span class="loader">
                                 <img src="/static/images/ajax-loader.gif" alt=""/> 
                             </span>
@@ -562,39 +565,59 @@
                 </div>
                 {% endif %}
 
-                {% load mptt_tags %}
-                {% recursetree comments %}
-                    <div style="margin-left: {{node.get_level}}0px">
-                        <div id="comment-{{node.id}}" class="comment">
-                            <div class="meta">
-                                <a class="author" href="#">{{node.author}}</a> {{node.added|ago}}
-                            </div>
-                            {{node.comment|linebreaks}}
-                            <div class="links">
-                                {% if user.is_authenticated %}
-                                <a class="reply" href="#">{% trans "Reply" %}</a>
+                {% if comments %}
+                    {% load mptt_tags %}
+                    {% recursetree comments %}
+                        <div style="margin-left: {{node.get_level}}0px">
+                            <div id="c{{node.id}}" class="comment">
+                                <div class="meta">
+                                    <a class="author" href="#">{{node.author}}</a> {{node.added|ago}}
+                                </div>
+                                {% if node.is_deleted %}
+                                    <p class="deleted">{% trans "(comment deleted)" %}</p>
+                                {% else %}
+                                    {{node.comment|linebreaks}}
                                 {% endif %}
+                                <div class="links">
+                                    <a class="permalink" href="{% url image_detail image.id %}#c{{node.id}}">{% trans "Permalink" %}</a>
+                                    {% if user.is_authenticated %}
+                                        {% if user == node.author %}
+                                            <a class="delete" href="#">
+                                                {% if node.is_deleted %}
+                                                    {% trans "Undelete" %}
+                                                {% else %}
+                                                    {% trans "Delete" %}
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+                                        <a class="reply" href="#">{% trans "Reply" %}</a>
+                                    {% endif %}
+                                </div>
+                                <form action="{% url image_comment_save %}" method="post">
+                                    {{comment_form.as_p}}
+                                    <input type="hidden" name="author" value="{{user.id}}" />
+                                    <input type="hidden" name="image" value="{{image.id}}" />
+                                    <input type="hidden" name="parent_id" value="{{node.id}}" />
+                                    <input type="hidden" name="level" value="{{node.get_level}}" />
+                                    <p>
+                                        <input class="button" type="submit" value="{% trans "Save" %}" />
+                                        <input class="button cancel" type="reset" value="{% trans "Cancel" %}" />
+                                        <span class="loader">
+                                            <img src="/static/images/ajax-loader.gif" alt=""/> 
+                                        </span>
+                                    </p>
+                                </form>
                             </div>
-                            <form action="{% url comment_save %}" method="post">
-                                {{comment_form.as_p}}
-                                <input type="hidden" name="author" value="{{user.id}}" />
-                                <input type="hidden" name="image" value="{{image.id}}" />
-                                <input type="hidden" name="parent_id" value="{{node.id}}" />
-                                <input type="hidden" name="level" value="{{node.get_level}}" />
-                                <p>
-                                    <input class="button" type="submit" value="{% trans "Add comment" %} &rarr;" />
-                                    <input class="button cancel" type="reset" value="{% trans "Cancel" %}" />
-                                    <span class="loader">
-                                        <img src="/static/images/ajax-loader.gif" alt=""/> 
-                                    </span>
-                                </p>
-                            </form>
                         </div>
-                    </div>
-                    {% if not node.is_leaf_node %}
-                        {{children}}
-                    {% endif %}
-                {% endrecursetree %}
+                        {% if not node.is_leaf_node %}
+                            {{children}}
+                        {% endif %}
+                    {% endrecursetree %}
+                {% else %}
+                    <p class="nocomments">
+                        {% blocktrans %}There are no comments yet.{% endblocktrans %}
+                    </p>
+                {% endif %}
             </div>
         </div>
         <div id="side-pane">
@@ -684,6 +707,11 @@ $(document).ready(function() {
 
     {% get_hit_count_javascript for image %}
 
+    var hilighted_comment = location.hash.substr(1);
+    if (hilighted_comment) {
+        $('#' + hilighted_comment).addClass('hilight');
+    }
+
     var ajaxFormOptions = {
         dataType: 'json',
         beforeSubmit: function(formData, $form, options) {
@@ -711,12 +739,13 @@ $(document).ready(function() {
                 var level = parseInt($form.find('input:hidden[name="level"]').val()) + 1;
             }
             var parent_id = responseJson['comment_id']
+            var $nocomments = $('p.nocomments');
 
             $button.removeAttr('disabled').removeClass('button-disabled');
             $loader.css('visibility', 'hidden');
 
             $container = $('<div/>').css('margin-left', level + '0px');
-            $new_comment = $('<div/>').addClass('comment');
+            $new_comment = $('<div/>').addClass('comment').attr('id', 'c' + parent_id);
             $container.append($new_comment);
 
             $meta = $('<div/>').addClass('meta');
@@ -724,13 +753,16 @@ $(document).ready(function() {
             $meta.append($author).append('{% trans "just now" %}');
 
             $links = $('<div/>').addClass('links');
+            $permalink = $('<a/>').addClass('permalink').attr('href', '{% url image_detail image.id %}#c' + parent_id).text('{% trans "Permalink" %}');
+            $delete = $('<a/>').addClass('delete').attr('href', '/image_comments/delete/' + parent_id + '/').text('{% trans "Delete" %}');
             $reply = $('<a/>').addClass('reply').attr('href', '#').text('{% trans "Reply" %}');
-            $links.append($reply);
+
+            $links.append($permalink).append($delete).append($reply);
 
             $content = $('<p/>').html($textarea.val().replace(/\n\r?/g, '<br />'));
 
             new_form_template = "\
-                <form action=\"{% url comment_save %}\" method=\"post\">\
+                <form action=\"{% url image_comment_save %}\" method=\"post\">\
                     {{comment_form.as_p|escapejs}}\
                     <input type=\"hidden\" id=\"csrfmiddlewaretoken\" name=\"csrfmiddlewaretoken\" value=\"{{csrf_token}}\" />\
                     <input type=\"hidden\" name=\"author\" value=\"{{user.id}}\" />\
@@ -738,7 +770,7 @@ $(document).ready(function() {
                     <input type=\"hidden\" name=\"parent_id\" value=\"" + parent_id + "\" />\
                     <input type=\"hidden\" name=\"level\" value=\"" + level + "\" />\
                     <p>\
-                        <input class=\"button\" type=\"submit\" value=\"{% trans "Add comment" %} &rarr;\" />\
+                        <input class=\"button\" type=\"submit\" value=\"{% trans "Save" %}\" />\
                         <input class=\"button cancel\" type=\"reset\" value=\"{% trans "Cancel" %}\" />\
                         <span class=\"loader\">\
                             <img src=\"/static/images/ajax-loader.gif\" alt=\"\"/>\
@@ -758,6 +790,7 @@ $(document).ready(function() {
             if (!is_top_level)
                 $form.hide();
 
+            $nocomments.remove();
             $container.insertAfter($parent);
         },
         error: function(responseText, statusText, xhr, $form) {
@@ -774,8 +807,37 @@ $(document).ready(function() {
     $('.comment form .cancel').click(function() {
         var $form = $(this).closest('form');
         $form.hide();
-        return true;
+        return false;
     });
+
+    $('.comment .permalink').live('click', function() {
+        var id = $(this).closest('.comment').find('input:hidden[name="parent_id"]').val()
+        $('.comment.hilight').removeClass('hilight');
+        $('#c' + id).addClass('hilight');
+        return false;
+    });
+
+    $('.comment .delete').live('click', function() {
+        var id = $(this).closest('.comment').find('input:hidden[name="parent_id"]').val()
+        var $comment = $(this).closest('.comment').find('>p');
+        $.ajax({
+            url: '/image_comments/delete/' + id + '/',
+            dataType: 'json',
+            timeout: 5000,
+            success: function(data, status, xhr) {
+                if (data.deleted) {
+                    $comment.addClass('deleted');
+                    $comment.text('{% trans "(comment deleted)" %}');
+                } else {
+                    $comment.removeClass('deleted');
+                    $comment.html(data.comment.replace(/\n\r?/g, '<br />'));
+                }
+            }
+        });
+        $(this).text('{% trans 'Undelete' %}');
+        return false;
+    });
+
     $('.comment .reply').live('click', function() {
         var $comment = $(this).closest('.comment');
         var $form = $comment.find('form');
