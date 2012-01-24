@@ -572,7 +572,7 @@
                 {% if comments %}
                     {% load mptt_tags %}
                     {% recursetree comments %}
-                        <div style="margin-left: {{node.get_level}}0px">
+                        <div style="margin-left: {{node.get_level|add:node.get_level}}em">
                             <div id="c{{node.id}}" class="comment">
                                 <div class="meta">
                                     <a class="author" href="#">{{node.author}}</a> {{node.added|ago}}
@@ -756,7 +756,7 @@ $(document).ready(function() {
                 var parent_id = responseJson['comment_id']
                 var $nocomments = $('p.nocomments');
 
-                $container = $('<div/>').css('margin-left', level + '0px');
+                $container = $('<div/>').css('margin-left', level*2 + 'em');
                 $new_comment = $('<div/>').addClass('comment').attr('id', 'c' + parent_id);
                 $container.append($new_comment);
 
