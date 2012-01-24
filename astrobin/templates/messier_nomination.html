@@ -20,9 +20,11 @@
             {% url messier as the_url %}
             {% blocktrans %}You will nominate this image for the <a href="{{the_url}}" target="_blank">Messier Marathon</a>. The Messier Marathon is a list of the Messier objects that features AstroBin images nominated by the users. For each Messier object, the AstroBin image with the most nomination is chosen.{% endblocktrans %}
         </p>
+        {% if not has_multiple_messier %}
         <p>
             {% blocktrans %}Press <em>Continue</em> to nominate this image for <strong>M {{messier_object}}</strong>.{% endblocktrans %}
         </p>
+        {% endif %}
     {% endif %}
 
     {% if not has_messier %}
