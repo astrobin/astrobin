@@ -3067,6 +3067,9 @@ p.help {
 .inbox-action-box {
   text-align: left;
 }
+.inbox .message {
+  width: 100%;
+}
 .message-container {
   margin-bottom: 12px;
   overflow: hidden;
