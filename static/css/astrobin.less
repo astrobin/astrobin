@@ -2810,10 +2810,13 @@ p.help {
 }
 
 .message {
-    .common-border;
-    padding: @spacer-medium;
-    margin-bottom: @spacer-small;
     position: relative;
+    margin-bottom: @spacer-small;
+    padding: @spacer-medium;
+    border: 1px dashed @border-top-color;
+    background-color: @background-color;
+    .box-shadow-subtle;
+
     .checkbox {
         position: absolute;
         top: @spacer-small;
@@ -2823,13 +2826,11 @@ p.help {
         display: inline;
     } 
     .date {
-        font-size: 87.5%;
+        color: @text-color / @hilight-factor;
     }
     .sender {
-        width: 20%;
-        .rounded-corners;
-        border: 1px solid @background-color;
         padding: @spacer-small;
+        font-size: 0.9em;
     }
     .subject {
         margin-left: @spacer-small;
