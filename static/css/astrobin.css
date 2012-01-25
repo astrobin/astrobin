@@ -3067,6 +3067,13 @@ p.help {
 .inbox-action-box {
   text-align: left;
 }
+.message-container {
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.message-container.other .message {
+  float: right;
+}
 .message {
   position: relative;
   margin-bottom: 4px;
@@ -3076,7 +3083,8 @@ p.help {
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  color: #fcfcfc;
+  width: 90%;
+  text-align: left;
 }
 .message .checkbox {
   position: absolute;
@@ -3096,6 +3104,7 @@ p.help {
 .message .sender {
   padding: 4px;
   font-size: 0.9em;
+  border-bottom: 1px dashed #474747;
 }
 .message .subject {
   margin-left: 4px;
@@ -3116,6 +3125,9 @@ p.help {
 }
 .asteriskField {
   display: none;
+}
+.message-container.own .message {
+  background-color: #2b2b2b;
 }
 div.token-input-dropdown {
   width: 300px;

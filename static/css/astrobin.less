@@ -2809,6 +2809,14 @@ p.help {
     text-align: left;
 }
 
+.message-container {
+    margin-bottom: @spacer-large;
+    overflow: hidden;
+}
+.message-container.other .message{
+    float: right;
+}
+
 .message {
     position: relative;
     margin-bottom: @spacer-small;
@@ -2816,6 +2824,8 @@ p.help {
     border: 1px dashed @border-top-color;
     background-color: @background-color;
     .box-shadow-subtle;
+    width: 90%;
+    text-align: left;
 
     .checkbox {
         position: absolute;
@@ -2831,6 +2841,7 @@ p.help {
     .sender {
         padding: @spacer-small;
         font-size: 0.9em;
+        border-bottom: 1px dashed @border-top-color;
     }
     .subject {
         margin-left: @spacer-small;
@@ -2855,6 +2866,9 @@ p.help {
     display: none;
 }
 
+.message-container.own .message {
+    background-color: @background-color * (@hilight-factor * 0.75);
+}
 
 
 div.token-input-dropdown {
