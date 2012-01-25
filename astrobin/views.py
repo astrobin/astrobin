@@ -994,7 +994,7 @@ def image_edit_save_basic(request):
             else:
                 identifier = SubjectIdentifier.objects.filter(identifier = id)
                 if identifier:
-                    return identifier.subject
+                    return identifier[0].subject
                 else:
                     subject = find_in_simbad(id)
                     if subject:
