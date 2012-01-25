@@ -294,8 +294,6 @@ def messier_list(context, request, object_list, paginate = True):
     has_next = context['has_next']
     has_previous = context['has_previous']
 
-    image_list = object_list
-
     startPage = max(page - adjacent_pages, 1)
     if startPage <= 3: startPage = 1
     endPage = page + adjacent_pages + 1
@@ -315,7 +313,7 @@ def messier_list(context, request, object_list, paginate = True):
         'has_previous': has_previous,
         'show_first': 1 not in page_numbers,
         'show_last': pages not in page_numbers,
-        'image_list': image_list,
+        'object_list': object_list,
         'paginate': paginate,
         'thumbnail_size':settings.THUMBNAIL_SIZE,
         's3_url':settings.S3_URL,
