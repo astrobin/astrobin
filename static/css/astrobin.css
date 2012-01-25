@@ -3148,11 +3148,15 @@ p.help {
   text-align: left;
 }
 .message {
-  border: 1px solid #2e2e2e;
-  border-top: 1px solid #474747;
-  padding: 8px;
-  margin-bottom: 4px;
   position: relative;
+  margin-bottom: 4px;
+  padding: 8px;
+  border: 1px dashed #474747;
+  background-color: #333333;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  color: #fcfcfc;
 }
 .message .checkbox {
   position: absolute;
@@ -3167,15 +3171,11 @@ p.help {
   display: inline;
 }
 .message .date {
-  font-size: 87.5%;
+  color: #a4a4a4;
 }
 .message .sender {
-  width: 20%;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-  border: 1px solid #333333;
   padding: 4px;
+  font-size: 0.9em;
 }
 .message .subject {
   margin-left: 4px;
