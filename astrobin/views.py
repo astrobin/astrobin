@@ -243,7 +243,7 @@ def wall(request):
 def messier(request):
     """Messier marathon"""
 
-    queryset = Image.objects.exclude(messiermarathon = None).order_by('messiermarathon__messier_number')
+    queryset = MessierMarathon.objects.all().order_by('messier_number')
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
@@ -253,7 +253,7 @@ def messier(request):
         request, 
         queryset=queryset,
         template_name='messier_marathon.html',
-        template_object_name='image',
+        template_object_name='object',
         paginate_by = 55, # Haha, how clever.
         extra_context = response_dict)
 

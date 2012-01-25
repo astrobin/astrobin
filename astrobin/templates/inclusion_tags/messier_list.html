@@ -2,22 +2,22 @@
 {% load tags %}
 
 <div class="thumbnail-list messier clear">
-{% for image in image_list %}
+{% for object in object_list %}
     {% random_id %}
-    {% if image.is_stored %}
+    {% if object.image.is_stored %}
 
     <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
-        <a href="{% url image_detail image.id %}">
-            <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
+        <a href="{% url image_detail object.image.id %}">
+            <img src="{% if object.image.is_stored %}http://astrobin_images.{{s3_url}}/{{object.image.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="capty-fixed thumbnail"
-                 name="#capty-content-{{image.id}}-{{randomid}}"
-                 alt="{{image.title|default:_("(no title)")}}"
+                 name="#capty-content-{{object.image.id}}-{{randomid}}"
+                 alt="{{object.image.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
         </a>
-        <div class="capty-content" id="capty-content-{{image.id}}-{{randomid}}">
-            {{image.messiermarathon_set.all.0}}
+        <div class="capty-content" id="capty-content-{{object.image.id}}-{{randomid}}">
+            M {{object.messier_number}}
             <br/>
-            {% with image.user.username|truncatechars:24 as user %}
+            {% with object.image.user.username|truncatechars:24 as user %}
             {% url user_page user as user_page %}
             {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
             {% endwith %}
