@@ -269,3 +269,17 @@ kill -HUP `cat astrobin.pid`
 # Send weekly reminders
 59 23 * * 6 (cd ~/Code/astrobin; ./manage.py lacking_data_reminder) 2>&1 >/dev/null
 
+
+# Pootle
+# ======
+install translate-toolkit 1.9 from sources
+install pootle 2.1.6 from sources
+place Pootle-2.1.6 into ~/Code
+install python-Levenshtein via pip
+install flup via pip
+
+create database pootle character set utf8;
+venv/bin/Pootleserver
+
+~/Code/Pootle-2.1.6$ ../astrobin/venv/bin/python ./manage.py runfcgi host=127.0.0.1 port=8080
+
