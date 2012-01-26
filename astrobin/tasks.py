@@ -99,14 +99,15 @@ def image_stored_callback(image, stored, solve, lang):
     translation.activate(lang)
     push_notification([user], 'image_ready', {'object_url':'%s%s' %(settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
 
-    followers = [x.from_userprofile.user
-                 for x in UserProfile.follows.through.objects.filter(to_userprofile=user)]
-    notification = 'new_image_revision' if is_revision else 'new_image'
-    push_notification(followers, notification,
-                      {'originator':user,
-                       'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url()
-                      }
-                     )
+    if not img.is_wip:
+        followers = [x.from_userprofile.user
+                     for x in UserProfile.follows.through.objects.filter(to_userprofile=user)]
+        notification = 'new_image_revision' if is_revision else 'new_image'
+        push_notification(followers, notification,
+                          {'originator':user,
+                           'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+                          }
+                         )
 
     if solve:
         solve_image.delay(image, lang, callback=image_solved_callback)
