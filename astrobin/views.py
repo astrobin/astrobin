@@ -1367,6 +1367,17 @@ def image_promote(request, id):
         image.is_wip = False
         image.save()
 
+        followers = [x.from_userprofile.user
+                     for x in
+                     UserProfile.follows.through.objects.filter(
+                        to_userprofile = request.user)]
+        push_notification(followers, 'new_image',
+            {
+                'originator': request.user,
+                'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+            })
+
+
     return HttpResponseRedirect('/%i/' % image.id);
 
 
