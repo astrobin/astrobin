@@ -1,0 +1,3586 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-26 01:28-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: forms.py:37
+msgid ""
+"If you're hosting a copy of this image on your website, put the address here."
+msgstr ""
+
+#: forms.py:43
+msgid ""
+"If you want to share the TIFF or FITS file of your image, put a link to the "
+"file here. Unfortunately, AstroBin cannot offer to store these files at the "
+"moment, so you will have to host them on your personal space."
+msgstr ""
+
+#: forms.py:48
+msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
+msgstr ""
+
+#: forms.py:52
+msgid "The places from which you have taken this image."
+msgstr ""
+
+#: forms.py:57 templates/image/detail.html:362
+msgid "Link"
+msgstr ""
+
+#: forms.py:58 templates/image/detail.html:367
+msgid "Link to TIFF/FITS"
+msgstr ""
+
+#: forms.py:59
+msgid "Subjects"
+msgstr ""
+
+#: forms.py:60 forms.py:178 models.py:942 views.py:505
+msgid "Locations"
+msgstr ""
+
+#: forms.py:78
+msgid "Please enter either some subjects or a main solar system subject."
+msgstr ""
+
+#: forms.py:91
+msgid "Opacity"
+msgstr ""
+
+#: forms.py:92
+msgid ""
+"0 means invisible; 100 means completely opaque. Recommended values are: 10 "
+"if the watermark will appear on the dark sky background, 50 if on some "
+"bright object."
+msgstr ""
+
+#: forms.py:105
+msgid "If you want to watermark this image, you must specify some text."
+msgstr ""
+
+#: forms.py:132 forms.py:302 models.py:422
+msgid "Imaging telescopes or lenses"
+msgstr ""
+
+#: forms.py:133 models.py:423
+msgid "Guiding telescopes or lenses"
+msgstr ""
+
+#: forms.py:134 forms.py:217 models.py:424 models.py:958
+msgid "Mounts"
+msgstr ""
+
+#: forms.py:135 forms.py:303 models.py:425
+msgid "Imaging cameras"
+msgstr ""
+
+#: forms.py:136 models.py:426
+msgid "Guiding cameras"
+msgstr ""
+
+#: forms.py:137 forms.py:219 models.py:427 models.py:960
+msgid "Focal reducers"
+msgstr ""
+
+#: forms.py:138 forms.py:220 models.py:428 models.py:961
+msgid "Software"
+msgstr ""
+
+#: forms.py:139 forms.py:221 models.py:429 models.py:962
+msgid "Filters"
+msgstr ""
+
+#: forms.py:140 forms.py:222 models.py:430 models.py:963
+msgid "Accessories"
+msgstr ""
+
+#: forms.py:162
+msgid "If you have a personal website, put the address here."
+msgstr ""
+
+#: forms.py:169 models.py:943
+msgid "These are the cities from which you usually image."
+msgstr ""
+
+#: forms.py:179 models.py:910 templates/user/profile.html:284
+msgid "Website"
+msgstr ""
+
+#: forms.py:185
+msgid ""
+"All the telescopes and lenses you own, including the ones you use for "
+"guiding, go here."
+msgstr ""
+
+#: forms.py:194
+msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
+msgstr ""
+
+#: forms.py:207
+msgid ""
+"Hint: enter your filters separately! If you enter, for instance, LRGB in one "
+"box, you won't be able to add separate acquisition sessions for them."
+msgstr ""
+
+#: forms.py:216 models.py:957
+msgid "Telescopes and lenses"
+msgstr ""
+
+#: forms.py:218 models.py:959
+msgid "Cameras"
+msgstr ""
+
+#: forms.py:250
+msgid "Users"
+msgstr ""
+
+#: forms.py:274 forms.py:279 forms.py:380 forms.py:419 forms.py:451
+msgid "Please use the following format: yyyy-mm-dd"
+msgstr ""
+
+#: forms.py:283 forms.py:287
+msgid "Express value in hours"
+msgstr ""
+
+#: forms.py:299
+msgid ""
+"Search for astronomical objects, telescopes or lenses, cameras, filters..."
+msgstr ""
+
+#: forms.py:301 models.py:317
+msgid "Main solar system subject"
+msgstr ""
+
+#: forms.py:304
+msgid "Acquired after"
+msgstr ""
+
+#: forms.py:305
+msgid "Acquired before"
+msgstr ""
+
+#: forms.py:306
+msgid "Min. integration"
+msgstr ""
+
+#: forms.py:307
+msgid "Max. integration"
+msgstr ""
+
+#: forms.py:308
+msgid "Min. Moon phase %"
+msgstr ""
+
+#: forms.py:309
+msgid "Max. Moon phase %"
+msgstr ""
+
+#: forms.py:352
+msgid "For example: +12.44"
+msgstr ""
+
+#: forms.py:355
+msgid "For example: -51.25"
+msgstr ""
+
+#: forms.py:385
+msgid "Please enter a value between 1 and 5."
+msgstr ""
+
+#: forms.py:390
+msgid "Please enter a value between 1 and 10."
+msgstr ""
+
+#: forms.py:432 models.py:621 models.py:834 templates/image/detail.html:491
+msgid "Date"
+msgstr ""
+
+#: forms.py:477
+msgid "Nominate for"
+msgstr ""
+
+#: locale_extras.py:4
+msgid "Recipient"
+msgstr ""
+
+#: locale_extras.py:5
+msgid "Subject"
+msgstr ""
+
+#: locale_extras.py:6
+msgid "Body"
+msgstr ""
+
+#: models.py:25
+msgid "None (All rights reserved)"
+msgstr ""
+
+#: models.py:26
+msgid "Attribution-NonCommercial-ShareAlike Creative Commons"
+msgstr ""
+
+#: models.py:27
+msgid "Attribution-NonCommercial Creative Commons"
+msgstr ""
+
+#: models.py:28
+msgid "Attribution-NonCommercial-NoDerivs Creative Commons"
+msgstr ""
+
+#: models.py:29
+msgid "Attribution Creative Commons"
+msgstr ""
+
+#: models.py:30
+msgid "Attribution-ShareAlike Creative Commons"
+msgstr ""
+
+#: models.py:31
+msgid "Attribution-NoDerivs Creative Commons"
+msgstr ""
+
+#: models.py:35 settings.py:49 templates/base.html:109
+msgid "English"
+msgstr ""
+
+#: models.py:36 settings.py:50
+msgid "Italian"
+msgstr ""
+
+#: models.py:37 settings.py:51
+msgid "Spanish"
+msgstr ""
+
+#: models.py:38 settings.py:52
+msgid "French"
+msgstr ""
+
+#: models.py:42
+msgid "Pulsars"
+msgstr ""
+
+#: models.py:43
+msgid "Globular clusters"
+msgstr ""
+
+#: models.py:44
+msgid "Open clusters"
+msgstr ""
+
+#: models.py:45 templates/wall.html:62
+msgid "Nebulae"
+msgstr ""
+
+#: models.py:46
+msgid "Planetary nebulae"
+msgstr ""
+
+#: models.py:47 templates/wall.html:67
+msgid "Galaxies"
+msgstr ""
+
+#: models.py:68 templates/wall.html:78
+msgid "Sun"
+msgstr ""
+
+#: models.py:69
+msgid "Earth's Moon"
+msgstr ""
+
+#: models.py:70
+msgid "Mercury"
+msgstr ""
+
+#: models.py:71
+msgid "Venus"
+msgstr ""
+
+#: models.py:72
+msgid "Mars"
+msgstr ""
+
+#: models.py:73
+msgid "Jupiter"
+msgstr ""
+
+#: models.py:74
+msgid "Saturn"
+msgstr ""
+
+#: models.py:75
+msgid "Uranus"
+msgstr ""
+
+#: models.py:76
+msgid "Neptune"
+msgstr ""
+
+#: models.py:77
+msgid "Minor planet"
+msgstr ""
+
+#: models.py:78
+msgid "Comet"
+msgstr ""
+
+#: models.py:82
+msgid "Center"
+msgstr ""
+
+#: models.py:83
+msgid "Top left"
+msgstr ""
+
+#: models.py:84
+msgid "Top center"
+msgstr ""
+
+#: models.py:85
+msgid "Top right"
+msgstr ""
+
+#: models.py:86
+msgid "Bottom left"
+msgstr ""
+
+#: models.py:87
+msgid "Bottom center"
+msgstr ""
+
+#: models.py:88
+msgid "Bottom right"
+msgstr ""
+
+#: models.py:93 models.py:276
+msgid "Name"
+msgstr ""
+
+#: models.py:117 models.py:128
+msgid "Label"
+msgstr ""
+
+#: models.py:138 models.py:365 models.py:773 templates/image/detail.html:503
+msgid "Focal length"
+msgstr ""
+
+#: models.py:139
+msgid "Aperture"
+msgstr ""
+
+#: models.py:160
+msgid "Ratio"
+msgstr ""
+
+#: models.py:277
+msgid "Latitude"
+msgstr ""
+
+#: models.py:278
+msgid "Longitude"
+msgstr ""
+
+#: models.py:279
+msgid "Altitude"
+msgstr ""
+
+#: models.py:298
+msgid "I don't want this image plate-solved."
+msgstr ""
+
+#: models.py:299
+msgid "This is not a deep sky image, don't plate-solve it."
+msgstr ""
+
+#: models.py:300
+msgid "I have no idea about the size of field, try a blind solve."
+msgstr ""
+
+#: models.py:301
+msgid "This is a very wide field image (more than 10 degrees)."
+msgstr ""
+
+#: models.py:302
+msgid "This is a wide field image (1 to 10 degrees)."
+msgstr ""
+
+#: models.py:303
+msgid "This ia narrow field image (less than 1 degree)."
+msgstr ""
+
+#: models.py:309
+msgid "Title"
+msgstr ""
+
+#: models.py:318
+msgid ""
+"If the main subject of your image is a body in the solar system, please "
+"select which (or which type) it is."
+msgstr ""
+
+#: models.py:331 templates/image/detail.html:541
+msgid "Description"
+msgstr ""
+
+#: models.py:332
+msgid "HTML tags are allowed."
+msgstr ""
+
+#: models.py:361
+msgid "(in mm)"
+msgstr ""
+
+#: models.py:363
+msgid "Insert a focal length if you want to plate-solve."
+msgstr ""
+
+#: models.py:373
+msgid "(in &mu;m)"
+msgstr ""
+
+#: models.py:375
+msgid "Insert a pixel size if you want to plate-solve."
+msgstr ""
+
+#: models.py:377
+msgid "Pixel size"
+msgstr ""
+
+#: models.py:385
+msgid ""
+"This is the smallest of the binning values you used. If you imaged L in 1x1 "
+"and RGB in 2x2, put 1x1 here."
+msgstr ""
+
+#: models.py:386 models.py:669
+msgid "Binning"
+msgstr ""
+
+#: models.py:395
+msgid ""
+"If you scaled your image before uploading, enter here the percentage of the "
+"new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't "
+"matter."
+msgstr ""
+
+#: models.py:396
+msgid "Scaling"
+msgstr ""
+
+#: models.py:408
+msgid "Apply watermark to image"
+msgstr ""
+
+#: models.py:412 templates/stats.html:69
+msgid "Position"
+msgstr ""
+
+#: models.py:446 templates/image/detail.html:374
+#: templates/image/detail.html.py:375
+msgid "License"
+msgstr ""
+
+#: models.py:512 templates/image/detail.html:351 templates/image/full.html:60
+#: templates/inclusion_tags/image_list.html:13
+#: templates/inclusion_tags/messier_list.html:14
+#: templates/inclusion_tags/search_image_list.html:12
+msgid "(no title)"
+msgstr ""
+
+#: models.py:622
+msgid "Please use the following format: yyyy-mm-dd."
+msgstr ""
+
+#: models.py:627 models.py:833
+msgid "Image"
+msgstr ""
+
+#: models.py:646
+msgid "1 - Excellent dark-site sky (BLACK)"
+msgstr ""
+
+#: models.py:647
+msgid "2 - Typical truly dark site (GRAY)"
+msgstr ""
+
+#: models.py:648
+msgid "3 - Rural sky (BLUE)"
+msgstr ""
+
+#: models.py:649
+msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
+msgstr ""
+
+#: models.py:650
+msgid "5 - Suburban sky (ORANGE)"
+msgstr ""
+
+#: models.py:651
+msgid "6 - Bright suburban sky (RED)"
+msgstr ""
+
+#: models.py:652
+msgid "7 - Suburban/urban transition or Full Moon (RED)"
+msgstr ""
+
+#: models.py:653
+msgid "8 - City sky (WHITE)"
+msgstr ""
+
+#: models.py:654
+msgid "9 - Inner city sky (WHITE)"
+msgstr ""
+
+#: models.py:658
+msgid "Synthetic channel"
+msgstr ""
+
+#: models.py:663
+msgid "Filter"
+msgstr ""
+
+#: models.py:672
+msgid "Number"
+msgstr ""
+
+#: models.py:674
+msgid "The number of sub-frames."
+msgstr ""
+
+#: models.py:677
+msgid "Duration"
+msgstr ""
+
+#: models.py:679
+msgid "Duration of each sub-frame, in seconds."
+msgstr ""
+
+#: models.py:682
+msgid "ISO"
+msgstr ""
+
+#: models.py:686
+msgid "Gain"
+msgstr ""
+
+#: models.py:691
+msgid "Sensor cooling"
+msgstr ""
+
+#: models.py:693
+msgid "The temperature of the chip. E.g.: -20."
+msgstr ""
+
+#: models.py:696 views.py:508
+msgid "Darks"
+msgstr ""
+
+#: models.py:698
+msgid "The number of dark frames."
+msgstr ""
+
+#: models.py:701 views.py:509
+msgid "Flats"
+msgstr ""
+
+#: models.py:703
+msgid "The number of flat frames."
+msgstr ""
+
+#: models.py:706 views.py:510
+msgid "Flat darks"
+msgstr ""
+
+#: models.py:708
+msgid "The number of dark flat frames."
+msgstr ""
+
+#: models.py:711 views.py:511
+msgid "Bias"
+msgstr ""
+
+#: models.py:713
+msgid "The number of bias/offset frames."
+msgstr ""
+
+#: models.py:716 views.py:514
+msgid "Bortle Dark-Sky Scale"
+msgstr ""
+
+#: models.py:720
+msgid ""
+"Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
+"Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
+msgstr ""
+
+#: models.py:724
+msgid "Mean mag/arcsec^2"
+msgstr ""
+
+#: models.py:725
+msgid "As measured with your Sky Quality Meter."
+msgstr ""
+
+#: models.py:730 views.py:516
+msgid "Mean FWHM"
+msgstr ""
+
+#: models.py:735 views.py:517
+msgid "Temperature"
+msgstr ""
+
+#: models.py:738
+msgid "Ambient temperature (in Centigrade degrees)."
+msgstr ""
+
+#: models.py:759
+msgid "Number of frames"
+msgstr ""
+
+#: models.py:760
+msgid "The total number of frames you have stacked."
+msgstr ""
+
+#: models.py:764 templates/image/detail.html:500
+msgid "FPS"
+msgstr ""
+
+#: models.py:765
+msgid "Frames per second."
+msgstr ""
+
+#: models.py:774
+msgid ""
+"The focal length of the whole optical train, including barlow lenses or "
+"other components."
+msgstr ""
+
+#: models.py:780 templates/image/detail.html:506
+msgid "CMI"
+msgstr ""
+
+#: models.py:781
+msgid "Latitude of the first Central Meridian."
+msgstr ""
+
+#: models.py:789 templates/image/detail.html:509
+msgid "CMII"
+msgstr ""
+
+#: models.py:790
+msgid "Latitude of the second Central Meridian."
+msgstr ""
+
+#: models.py:798 templates/image/detail.html:512
+msgid "CMIII"
+msgstr ""
+
+#: models.py:799
+msgid "Latitude of the third Central Meridian."
+msgstr ""
+
+#: models.py:807 templates/image/detail.html:515
+msgid "Seeing"
+msgstr ""
+
+#: models.py:808
+msgid "Your estimation of the seeing, on a scale from 1 to 5."
+msgstr ""
+
+#: models.py:814 templates/image/detail.html:518
+msgid "Transparency"
+msgstr ""
+
+#: models.py:815
+msgid "Your estimation of the transparency, on a scale from 1 to 10."
+msgstr ""
+
+#: models.py:821 templates/image/detail.html:494
+msgid "Time"
+msgstr ""
+
+#: models.py:822
+msgid "Please use the following format: hh:mm."
+msgstr ""
+
+#: models.py:880
+msgid "Request from"
+msgstr ""
+
+#: models.py:892
+msgid "Additional information"
+msgstr ""
+
+#: models.py:893
+msgid "TIFF/FITS"
+msgstr ""
+
+#: models.py:894
+msgid "Higher resolution"
+msgstr ""
+
+#: models.py:917 templates/user/profile.html:288
+msgid "Job"
+msgstr ""
+
+#: models.py:924 templates/user/profile.html:292
+msgid "Hobbies"
+msgstr ""
+
+#: models.py:928
+msgid "Do you have any hobbies other than astrophotography?"
+msgstr ""
+
+#: models.py:935
+msgid "Timezone"
+msgstr ""
+
+#: models.py:936
+msgid ""
+"By selecting this, you will see all the dates on AstroBin in your timezone."
+msgstr ""
+
+#: models.py:949
+msgid "About you"
+msgstr ""
+
+#: models.py:950
+msgid "Write something about yourself. HTML tags are allowed."
+msgstr ""
+
+#: models.py:970 templates/profile-edit-menu.html:12
+msgid "Default license"
+msgstr ""
+
+#: models.py:972
+msgid ""
+"The license you select here is automatically applied to all your new images."
+msgstr ""
+
+#: models.py:1006
+msgid "Language"
+msgstr ""
+
+#: search.py:79 views.py:738 views.py:1031 views.py:1058 views.py:1082
+#: templates/image/actions/bring_to_attention.html:44
+msgid "No results. Sorry."
+msgstr ""
+
+#: search.py:80
+msgid "Matching items:"
+msgstr ""
+
+#: stats.py:18
+msgid "Integration hours, yearly"
+msgstr ""
+
+#: stats.py:19
+msgid "Integration hours, monthly"
+msgstr ""
+
+#: stats.py:20
+msgid "Integration hours, daily"
+msgstr ""
+
+#: stats.py:71
+msgid "Integration hours by gear, yearly"
+msgstr ""
+
+#: stats.py:72
+msgid "Integration hours by gear, monthly"
+msgstr ""
+
+#: stats.py:73
+msgid "Integration hours by gear, daily"
+msgstr ""
+
+#: stats.py:130
+msgid "Uploaded images, yearly"
+msgstr ""
+
+#: stats.py:131
+msgid "Uploaded images, monthly"
+msgstr ""
+
+#: stats.py:132
+msgid "Uploaded images, daily"
+msgstr ""
+
+#: views.py:503
+msgid "Resolution"
+msgstr ""
+
+#: views.py:504 views.py:587
+msgid "Dates"
+msgstr ""
+
+#: views.py:506 templates/image/detail.html:497
+msgid "Frames"
+msgstr ""
+
+#: views.py:507 templates/wall.html:39
+#: templates/inclusion_tags/search_image_list.html:17
+#: templates/search/search.html:23
+msgid "Integration"
+msgstr ""
+
+#: views.py:507 views.py:1457 views.py:1458
+#: templates/inclusion_tags/search_image_list.html:17
+msgid "hours"
+msgstr ""
+
+#: views.py:512
+msgid "Avg. Moon age"
+msgstr ""
+
+#: views.py:513
+msgid "Avg. Moon phase"
+msgstr ""
+
+#: views.py:515
+msgid "Mean SQM"
+msgstr ""
+
+#: views.py:739 views.py:743 templates/user/profile/edit/basic.html:74
+#: templates/user/profile/edit/gear.html:41
+msgid "Click on a suggestion or press TAB to add what you typed"
+msgstr ""
+
+#: views.py:742 views.py:1034
+msgid "No results. Press TAB to create this location!"
+msgstr ""
+
+#: views.py:1230
+msgid "Fill in one session, before adding more."
+msgstr ""
+
+#: views.py:1435 templatetags/tags.py:94
+msgid "minutes"
+msgstr ""
+
+#: views.py:1436 templatetags/tags.py:95
+msgid "seconds ago"
+msgstr ""
+
+#: views.py:1438 templatetags/tags.py:96
+#, python-format
+msgid "%s ago"
+msgstr ""
+
+#: views.py:1454
+msgid "Member since"
+msgstr ""
+
+#: views.py:1455
+msgid "Last login"
+msgstr ""
+
+#: views.py:1456 templates/stats.html:73
+msgid "Images uploaded"
+msgstr ""
+
+#: views.py:1457
+msgid "Total integration time"
+msgstr ""
+
+#: views.py:1458
+msgid "Average integration time"
+msgstr ""
+
+#: views.py:1514
+msgid "No date specified"
+msgstr ""
+
+#: views.py:1516
+msgid ""
+"To fill in the missing dates, use the <strong>Edit acquisition details</"
+"strong> entry in the <strong>Actions</strong> menu for each image."
+msgstr ""
+
+#: views.py:1541 views.py:1599
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr ""
+
+#: views.py:1543 views.py:1602
+msgid ""
+"To fill in the missing gear, use the <strong>Edit gear used</strong> entry "
+"in the <strong>Actions</strong> menu for each image."
+msgstr ""
+
+#: views.py:1574 templates/image/edit/acquisition.html:98
+msgid "Solar system"
+msgstr ""
+
+#: views.py:1580 views.py:1592
+msgid "No subjects specified"
+msgstr ""
+
+#: views.py:1582 views.py:1594
+msgid ""
+"To fill in the missing subjects, use the <strong>Edit basic information</"
+"strong> entry in the <strong>Actions</strong> menu for each image."
+msgstr ""
+
+#: views.py:1606
+msgid "No acquisition details specified"
+msgstr ""
+
+#: views.py:1609
+msgid ""
+"To fill in the missing acquisition details, use the <strong>Edit acquisition "
+"details</strong> entry in the <strong>Actions</strong> menu for each image."
+msgstr ""
+
+#: views.py:2249
+#, python-format
+msgid ""
+"<strong>%s</strong> has requested additional information about your image."
+msgstr ""
+
+#: views.py:2301
+#, python-format
+msgid ""
+"<strong>%s</strong> has requested to see the TIFF or FITS of your image."
+msgstr ""
+
+#: management/__init__.py:15
+msgid "You have a new follower"
+msgstr ""
+
+#: management/__init__.py:21
+msgid "Following a user was successful"
+msgstr ""
+
+#: management/__init__.py:27
+msgid "Unfollowing a user was successful"
+msgstr ""
+
+#: management/__init__.py:33
+msgid "New image from a user you follow"
+msgstr ""
+
+#: management/__init__.py:39
+msgid "Image brought to your attention"
+msgstr ""
+
+#: management/__init__.py:45
+msgid "New image revision from a user you follow"
+msgstr ""
+
+#: management/__init__.py:51
+msgid "Your image is ready"
+msgstr ""
+
+#: management/__init__.py:57
+msgid "Your image was plate-solved"
+msgstr ""
+
+#: management/__init__.py:63
+msgid "Your image could not be plate-solved"
+msgstr ""
+
+#: management/__init__.py:69
+msgid "Your request was fulfilled"
+msgstr ""
+
+#: management/__init__.py:75
+msgid "Your image was deleted"
+msgstr ""
+
+#: management/__init__.py:81
+msgid "AstroBin has published a new blog entry"
+msgstr ""
+
+#: management/__init__.py:87
+msgid "Nomination for the Messier Marathon"
+msgstr ""
+
+#: management/__init__.py:93
+msgid "Top Nomination for the Messier Marathon"
+msgstr ""
+
+#: management/__init__.py:99
+msgid "You have some images that are lacking data"
+msgstr ""
+
+#: templates/403.html:5
+msgid "You are not allowed to see this page."
+msgstr ""
+
+#: templates/404.html:8
+msgid ""
+"Sorry, but the page you are looking for is not here. If you expected an "
+"image, this means that the author deleted it."
+msgstr ""
+
+#: templates/base.html:97 templates/base.html.py:101 templates/base.html:102
+msgid "Quick search"
+msgstr ""
+
+#: templates/base.html:98
+msgid "Start typing and hit ENTER"
+msgstr ""
+
+#: templates/base.html:119
+msgid "Please select your language from the options above."
+msgstr ""
+
+#: templates/base.html:133 templates/base.html.py:291 templates/base.html:333
+msgid "Home"
+msgstr ""
+
+#: templates/base.html:134 templates/base.html.py:292
+msgid "Blog"
+msgstr ""
+
+#: templates/base.html:136 templates/explore_choose.html:6
+msgid "Explore"
+msgstr ""
+
+#: templates/base.html:139 templates/explore_choose.html:8
+#: templates/wall.html:8
+msgid "The Big Wall"
+msgstr ""
+
+#: templates/base.html:140
+msgid "Night after night"
+msgstr ""
+
+#: templates/base.html:141 templates/explore_choose.html:16
+msgid "Messier marathon"
+msgstr ""
+
+#: templates/base.html:145 templates/base.html.py:293
+#: templates/search/search.html:12
+msgid "Search"
+msgstr ""
+
+#: templates/base.html:147 templates/base.html.py:294 templates/stats.html:6
+#: templates/user/profile.html:273
+msgid "Stats"
+msgstr ""
+
+#: templates/base.html:149 templates/base.html.py:296 templates/help.html:4
+msgid "Help"
+msgstr ""
+
+#: templates/base.html:150 templates/base.html.py:297 templates/faq.html:4
+msgid "FAQ"
+msgstr ""
+
+#: templates/base.html:167
+msgid "View your profile"
+msgstr ""
+
+#: templates/base.html:170
+msgid "Edit your profile"
+msgstr ""
+
+#: templates/base.html:173
+msgid "Upload an image"
+msgstr ""
+
+#: templates/base.html:173
+msgid "Upload!"
+msgstr ""
+
+#: templates/base.html:176 templates/user/profile.html:331
+#: templates/user/profile.html.py:334
+msgid "Logout"
+msgstr ""
+
+#: templates/base.html:188 templates/base.html.py:189
+msgid "Notifications"
+msgstr ""
+
+#: templates/base.html:202 templates/base.html.py:203
+#: templates/messages/inbox.html:12
+msgid "Messages"
+msgstr ""
+
+#: templates/base.html:212 templates/base.html.py:213
+msgid "Requests"
+msgstr ""
+
+#: templates/base.html:224
+msgid "Have an invite? Login!"
+msgstr ""
+
+#: templates/base.html:226 templates/registration/activation_complete.html:5
+msgid "Login"
+msgstr ""
+
+#: templates/base.html:232 templates/registration/login.html:8
+msgid "Register"
+msgstr ""
+
+#: templates/base.html:253 templates/base.html.py:263
+msgid "Error"
+msgstr ""
+
+#: templates/base.html:255 templates/image/detail.html:16
+msgid "Info"
+msgstr ""
+
+#: templates/base.html:265
+msgid ""
+"Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
+msgstr ""
+
+#: templates/base.html:282 templates/user/profile.html:296
+msgid "About"
+msgstr ""
+
+#: templates/base.html:284
+msgid ""
+"AstroBin is an image hosting website specifically targeted to "
+"astrophotographers: it's the first and the last place where you need to "
+"upload your astrophotography images. Made by an astrophotographer, for the "
+"astrophotographers."
+msgstr ""
+
+#: templates/base.html:288
+msgid "Site links"
+msgstr ""
+
+#: templates/base.html:295 templates/explore_choose.html:12
+msgid "Nightly"
+msgstr ""
+
+#: templates/base.html:298 templates/tos.html:6
+msgid "Terms of Service"
+msgstr ""
+
+#: templates/base.html:303
+msgid "Thanks to"
+msgstr ""
+
+#: templates/base.html:306
+msgid "The localization team"
+msgstr ""
+
+#: templates/base.html:313
+msgid "Copyright"
+msgstr ""
+
+#: templates/base.html:315
+msgid ""
+"AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
+"Reserved. The images on this websites are copyright of their respective "
+"owners."
+msgstr ""
+
+#: templates/base.html:334
+msgid "Follow AstroBin on Twitter"
+msgstr ""
+
+#: templates/base.html:335
+msgid "Back to top"
+msgstr ""
+
+#: templates/base.html:349
+msgid "Feedback"
+msgstr ""
+
+#: templates/base.html:360 templates/messages/compose.html:18
+msgid "Cancel"
+msgstr ""
+
+#: templates/base.html:445 templates/image/detail.html:696
+msgid "No file selected"
+msgstr ""
+
+#: templates/base.html:446 templates/image/detail.html:697
+msgid "Choose file"
+msgstr ""
+
+#: templates/explore_choose.html:9
+msgid ""
+"The best way to see what's new on AstroBin: a big wall with 100 images per "
+"page, that you can sort and filter to your liking."
+msgstr ""
+
+#: templates/explore_choose.html:13
+msgid "A list of all images acquired every night."
+msgstr ""
+
+#: templates/explore_choose.html:17
+msgid ""
+"A list of objects from the Messier catalog, each one represented by an "
+"AstroBin image chosen by the users via a democratic nomination process."
+msgstr ""
+
+#: templates/faq.html:8
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: templates/faq.html:10 templates/faq.html.py:25
+msgid "Is this website for free?"
+msgstr ""
+
+#: templates/faq.html:11 templates/faq.html.py:30
+msgid "Are there any limits on how large and how many images I can upload?"
+msgstr ""
+
+#: templates/faq.html:12 templates/faq.html.py:37
+msgid "What image formats are supported?"
+msgstr ""
+
+#: templates/faq.html:13 templates/faq.html.py:44
+msgid "Is my data safe on AstroBin?"
+msgstr ""
+
+#: templates/faq.html:14 templates/faq.html.py:60
+msgid ""
+"I've seen beautiful images on this site. I'm not worthy of posting mine!"
+msgstr ""
+
+#: templates/faq.html:15 templates/faq.html.py:67
+msgid "What's the deal with the Staging Area and the Public Area?"
+msgstr ""
+
+#: templates/faq.html:16 templates/faq.html.py:77
+msgid "How do I get an image featured on the Messier Marathon page?"
+msgstr ""
+
+#: templates/faq.html:17 templates/faq.html.py:85
+msgid "Why was AstroBin created?"
+msgstr ""
+
+#: templates/faq.html:18 templates/faq.html.py:98
+msgid "What are the plans for the future?"
+msgstr ""
+
+#: templates/faq.html:21
+msgid "... and their answers!"
+msgstr ""
+
+#: templates/faq.html:26
+msgid "Yes. AstroBin is completely free!"
+msgstr ""
+
+#: templates/faq.html:32
+msgid ""
+"<strong>NO!</strong> On AstroBin you can upload as many images as you want, "
+"and as large as you want. In fact, full size images are encouraged!"
+msgstr ""
+
+#: templates/faq.html:39
+msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
+msgstr ""
+
+#: templates/faq.html:46
+msgid ""
+"Absolutely. There are multiple ways in which AstroBin can store your data "
+"very safely. First of all, the images you upload are stored on a highly "
+"durable, highly available, redundant backend. The durability of the storage "
+"backend is 99.999999999 percent over a given year. This means that if you "
+"upload 10,000 images, you can expect to lose one image to data corruption "
+"once in 10,000,000 year. The images are duplicated across two different "
+"physical servers, for protection against natural disasters."
+msgstr ""
+
+#: templates/faq.html:49
+msgid ""
+"The actual website, instead, is hosted on a Virtual Machine, so, in case of "
+"severe hardware failure, it can be redeployed to a different server in a "
+"matter of 15 minutes."
+msgstr ""
+
+#: templates/faq.html:52
+msgid ""
+"Finally, the database that powers AstroBin (in fact, the whole Virtual "
+"Machine) is backed up daily. In case of severe data loss, the website will "
+"be quickly restored to a snapshot that's never older than 24 hours."
+msgstr ""
+
+#: templates/faq.html:55
+msgid ""
+"That said, you should be aware that AstroBin is not a backup service, and "
+"although your data is very safe in our hands, we cannot legally take "
+"responsibility in the event of loss, however unlikely it is. Always keep a "
+"copy of your image on your computer."
+msgstr ""
+
+#: templates/faq.html:62
+msgid ""
+"Nonsense. AstroBin has <strong>not</strong> been made to showcase beautiful "
+"image, but to give everybody an opportunity to contribute to a vast and "
+"evergrowing effort of centralization and indexing of important data. That 30 "
+"minute picture of M31 you took last night between the clouds <em>belongs</"
+"em> here! Don't be shy and post it!"
+msgstr ""
+
+#: templates/faq.html:69
+msgid ""
+"On AstroBin you have two places for our images. The Staging Area is where "
+"you can upload images that you want to quickly share on forums, mailing "
+"lists or social networks. The days of scaling down and compressing your "
+"image so you can upload it to a forum for feedback and critique are over! "
+"Just upload to AstroBin's Staging Area, and send the link to anyone you "
+"want. The image will be visible only to the intended recipients, and won't "
+"appear on your profile or AstroBin's home page."
+msgstr ""
+
+#: templates/faq.html:72
+msgid ""
+"The Public Area, instead, is for your finished products. After you have "
+"received feedback on your favorite forum, you can promote an image from the "
+"Staging Area to the Public Area, and it will appear on your profile. "
+"Remember that you can also move images back and forth from one Area to the "
+"other as many times as you want!"
+msgstr ""
+
+#: templates/faq.html:80
+#, python-format
+msgid ""
+"Images on the <a href=\"%(messier_url)s\">Messier Marathon page</a> are "
+"selected via a democratic nomination process. If you see an image of some "
+"Messier Object, and you think that it should appear on the Messier Marathon "
+"page, nominate it using the <strong>Actions</strong> menu. The image with "
+"the most nominations for a certain Messier object will automatically be "
+"featured."
+msgstr ""
+
+#: templates/faq.html:87
+msgid ""
+"AstroBin was born out of the desire to end something that had been going on "
+"for too long: the waste of incredible material to the sea of chaos that the "
+"Internet can be. For years, fantastic astrophotographs have beeen uploaded "
+"to Internet Forums, often with little or no data, or to general purpose "
+"image hosting websites, invariably with no data attached."
+msgstr ""
+
+#: templates/faq.html:90
+msgid ""
+"Such an image would be seen by some people, then quickly forgotten, and "
+"reduced to nothing more than a bunch of pixel in the giant wasteland of the "
+"Internet."
+msgstr ""
+
+#: templates/faq.html:93
+msgid ""
+"This should not be allowed to happen. AstroBin is the response: an effort to "
+"host, collect, index and categorize the output of the astrophotographers all "
+"over the world, so that their precious data would serve a purpose, and have "
+"a meaning forever."
+msgstr ""
+
+#: templates/faq.html:100
+msgid ""
+"<em>AstroBin</em> is just starting out, and this time we can really say that "
+"the sky is the limit! Tons of ideas are in the pipeline. As the user base "
+"grows, so does the data. Suddenly, things like automated supernovae search "
+"become possible: you could simply upload an image of a galaxy, and AstroBin "
+"could compare it to pictures of the same galaxy taken previously."
+msgstr ""
+
+#: templates/faq.html:103
+msgid ""
+"AstroBin could also recommend subjects for you to image! Knowing your "
+"equipment, your location, and comparing what you have imaged to what users "
+"similar to you have, AstroBin could suggest your next challenge!"
+msgstr ""
+
+#: templates/faq.html:106
+msgid ""
+"Thanks to the input from the community, more ideas are flowing in and the "
+"list get bigger and bigger."
+msgstr ""
+
+#: templates/faq.html:112
+msgid "Do you have a question not covered here! Please send us an email at:"
+msgstr ""
+
+#: templates/help.html:9
+msgid "What is this site?"
+msgstr ""
+
+#: templates/help.html:10
+msgid "Hey!"
+msgstr ""
+
+#: templates/help.html:12
+msgid ""
+"Are you an astrophotographer? Do you like to share the outcome of your hard "
+"work with others? As an astrophotographer myself, and a subscriber to "
+"numerous Astrophotography forums, I have found that the Internet is lacking "
+"a centralized place where astrophotographers can share their work."
+msgstr ""
+
+#: templates/help.html:14
+msgid "Well, this is finally over!"
+msgstr ""
+
+#: templates/help.html:16
+msgid ""
+"<em>AstroBin</em> comes to fill the gap. It's a website built from the "
+"ground up by an astrophotographer, and it provides means to people who want "
+"to share their astrophotographs."
+msgstr ""
+
+#: templates/help.html:18
+msgid "So how is this different from any other image sharing websites?"
+msgstr ""
+
+#: templates/help.html:20
+msgid ""
+"<em>AstroBin</em> provides a number of features that are tailored "
+"specificlly to astrophotography. Here's a quick run down of the main ones:"
+msgstr ""
+
+#: templates/help.html:23
+msgid "Dedication to data"
+msgstr ""
+
+#: templates/help.html:25
+msgid ""
+"On a general purpose image sharing site, you would upload your image and be "
+"done with it. <em>AstroBin</em>, instead, has a user interface specifically "
+"designed to enable you to input all the technical data of your image."
+msgstr ""
+
+#: templates/help.html:26
+msgid ""
+"<em>AstroBin</em> will autocomplete your input using a vast database: "
+"everything from telescopes, CCDs and filters to astronomical objects in many "
+"catalogues will show in popup dialogs for easy selection when you start "
+"typing their names. <em>AstroBin</em> is connected to the SIMBAD "
+"Astronomical Database, which contains over 5 million objects under over 15 "
+"million names!"
+msgstr ""
+
+#: templates/help.html:30
+msgid "Data is strongly interconnected"
+msgstr ""
+
+#: templates/help.html:32
+msgid ""
+"Have you ever wanted to see how your next image is going to look like? On "
+"<em>AstroBin</em>, you can search for all images of a certain target that "
+"were taken with a certain telescope and a certain CCD or camera. Or a "
+"certain filter. How about all the images between 6 and 8 hours of "
+"integration? Or with a certain Moon phase? You can do that!"
+msgstr ""
+
+#: templates/help.html:36
+msgid "All the data at a glance"
+msgstr ""
+
+#: templates/help.html:38
+msgid ""
+"Each image on <em>AstroBin</em> is annotated of all the technical details "
+"about its acquisition. Telescopes involved, cameras, mounts, filters, "
+"everything is visible at a glance in the Technical Card. Even the Moon age "
+"at the time of the acquisition is displayed."
+msgstr ""
+
+#: templates/help.html:42
+msgid "More than just an image"
+msgstr ""
+
+#: templates/help.html:44
+msgid ""
+"<em>AstroBin</em> will do more than just host a copy of your image: when you "
+"upload a photograph, a histogram and a black &amp; white inverted version of "
+"the image will be generated on the fly, so it's easier to spot faint "
+"nebulosity regions or spiral arms. Images will also be plate solved, and an "
+"annotated version will appear on the site. <em>AstroBin</em> will know what "
+"are the astronomical objects in your image without you telling!"
+msgstr ""
+
+#: templates/help.html:48
+msgid "Protection from theft with aumatic watermarking"
+msgstr ""
+
+#: templates/help.html:50
+msgid ""
+"<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
+"with the text of your choosing. All it takes is a click!"
+msgstr ""
+
+#: templates/help.html:54
+msgid "AstroBin supports multiple image revisions"
+msgstr ""
+
+#: templates/help.html:56
+msgid ""
+"Don't tell me you have never gone back to revise the processing of an image "
+"<em>after</em> you had published it. <em>AstroBin</em> embraces this concept "
+"and lets you publish several revisions of the same image easily and "
+"intuitively! Now it's going to be really easy to tell whether your "
+"processing has improved."
+msgstr ""
+
+#: templates/help.html:60
+msgid "AstroBin is social!"
+msgstr ""
+
+#: templates/help.html:62
+msgid ""
+"On <em>AstroBin</em> you can message other astrophotographer, follow them "
+"and be notified when they post new images, or perform requests for more "
+"data. You can also vote on images."
+msgstr ""
+
+#: templates/help.html:67
+msgid ""
+"As you have undoubtly realized by now, <em>AstroBin</em> is way more than an "
+"image hosting service. It's what the Astrophotography community has needed "
+"for a long time. For years, I have seen amazing images scattered all over "
+"the Internet: general purpose image hosting sites, forums, personal websites "
+"and even temporary places. Some of those images contain data that is too "
+"precious to go wasted in a sea of chaos. <em>AstroBin</em> comes to the "
+"rescue to provide a home and a central hub for astrophotographers all over "
+"the world."
+msgstr ""
+
+#: templates/help.html:69
+msgid "So, what are you waiting for?"
+msgstr ""
+
+#: templates/help.html:70
+msgid "Sign up now!"
+msgstr ""
+
+#: templates/index.html:10
+msgid "Upload as a work in progress"
+msgstr ""
+
+#: templates/index.html:15 templates/index.html.py:31
+#: templates/image/detail.html:693
+msgid "Upload"
+msgstr ""
+
+#: templates/index.html:18 templates/index.html.py:33
+#: templates/image/detail.html:698
+msgid "Uploading..."
+msgstr ""
+
+#: templates/index.html:21
+#, python-format
+msgid ""
+"Use this button to upload an image to the <strong>Staging Area</strong>. "
+"It's perfect for works in progress that you want to share on Internet "
+"forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
+msgstr ""
+
+#: templates/index.html:26
+msgid "Upload as a finished image"
+msgstr ""
+
+#: templates/index.html:37
+#, python-format
+msgid ""
+"Use this button to upload an image to the <strong>Public Area</strong>. It "
+"will be displayed in <a href=\"%(profile_url)s\">your profile</a> and here "
+"on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
+"too."
+msgstr ""
+
+#: templates/index.html:46
+msgid "Warning!"
+msgstr ""
+
+#: templates/index.html:48
+#, python-format
+msgid ""
+"Before you start uploading images, you have to add at least one telescope "
+"and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
+msgstr ""
+
+#: templates/index.html:60
+msgid "The perfect home for your astrophotography."
+msgstr ""
+
+#: templates/index.html:62
+#, python-format
+msgid ""
+"AstroBin is an image hosting service made specifically for "
+"astrophotographers. It comes packed with features that benefit the "
+"astrophotography community greatly! See the <a href=\"%(help_url)s\">help "
+"page.</a> for more information."
+msgstr ""
+
+#: templates/index.html:67
+msgid "Unlimited uploads, unlimited size."
+msgstr ""
+
+#: templates/index.html:68
+msgid ""
+"Astrophotography images have scientific value that shouldn't be lost in file "
+"compression. On AstroBin you can (and should!) upload full size images. And "
+"you have unlimited space for free."
+msgstr ""
+
+#: templates/index.html:73
+msgid "Have your data neatly plotted."
+msgstr ""
+
+#: templates/index.html:74
+msgid ""
+"Data is everything, and AstroBin will give you the tools to keep your data "
+"neat and organized. And with our plots, you can get insights on your "
+"productivity and on the gear you use the most."
+msgstr ""
+
+#: templates/index.html:81
+msgid "Recent images"
+msgstr ""
+
+#: templates/index.html:84
+msgid "(view more)"
+msgstr ""
+
+#: templates/messier_marathon.html:8
+msgid "Messier Marathon"
+msgstr ""
+
+#: templates/messier_marathon.html:10
+msgid ""
+"This is a list of Messier objects featuring images on AstroBin. You can "
+"nominate any image (as long as it contains a Messier object), by opening the "
+"<strong>Actions</strong> menu and selecting <strong>Nominate for the Messier "
+"Marathon</strong>."
+msgstr ""
+
+#: templates/messier_marathon.html:14
+#, python-format
+msgid ""
+"What about <a href=\"%(search_url)s\">doing a search</a> and nominating some "
+"images now?"
+msgstr ""
+
+#: templates/messier_nomination.html:17 templates/image/detail.html:117
+msgid "Nominate for the Messier Marathon"
+msgstr ""
+
+#: templates/messier_nomination.html:21
+#, python-format
+msgid ""
+"You will nominate this image for the <a href=\"%(the_url)s\" target=\"_blank"
+"\">Messier Marathon</a>. The Messier Marathon is a list of the Messier "
+"objects that features AstroBin images nominated by the users. For each "
+"Messier object, the AstroBin image with the most nomination is chosen."
+msgstr ""
+
+#: templates/messier_nomination.html:25
+#, python-format
+msgid ""
+"Press <em>Continue</em> to nominate this image for <strong>M "
+"%(messier_object)s</strong>."
+msgstr ""
+
+#: templates/messier_nomination.html:32
+msgid ""
+"Sorry, but it doesn't look like this image contains a Messier object. If you "
+"think this is a mistake, please contact the author of the image and ask them "
+"to add the correct Messier object as a subject."
+msgstr ""
+
+#: templates/messier_nomination.html:35 templates/messier_nomination.html:47
+#: templates/messier_nomination.html:56
+#: templates/messier_nomination_finish.html:29
+#: templates/image/actions/bring_to_attention.html:27
+#: templates/image/actions/request_additional_information.html:25
+#: templates/image/actions/request_additional_information_complete.html:24
+#: templates/image/actions/request_fits.html:25
+#: templates/image/actions/request_fits_complete.html:24
+#: templates/image/edit/acquisition.html:32
+#: templates/image/edit/acquisition.html:66
+#: templates/image/edit/acquisition.html:86 templates/image/edit/basic.html:73
+#: templates/image/edit/gear.html:50 templates/image/edit/license.html:24
+#: templates/image/edit/presolve.html:40
+msgid "Return to image"
+msgstr ""
+
+#: templates/messier_nomination.html:40
+msgid ""
+"This image contains multiple Messier objects. Please choose the one for "
+"which you are nominating this image."
+msgstr ""
+
+#: templates/messier_nomination.html:46 templates/messier_nomination.html:55
+#: templates/image/actions/bring_to_attention.html:26
+#: templates/image/actions/request_additional_information.html:24
+#: templates/image/actions/request_fits.html:24
+msgid "Continue"
+msgstr ""
+
+#: templates/messier_nomination_finish.html:18
+msgid "You have already nominated this image"
+msgstr ""
+
+#: templates/messier_nomination_finish.html:19
+msgid "You can't nominate the same image more than once."
+msgstr ""
+
+#: templates/messier_nomination_finish.html:21
+msgid "Thanks for your nomination"
+msgstr ""
+
+#: templates/messier_nomination_finish.html:22
+msgid "Your nomination has been recorded, thank you!"
+msgstr ""
+
+#: templates/messier_nomination_finish.html:28
+msgid "Visit the Messier Marathon"
+msgstr ""
+
+#: templates/nightly.html:8
+msgid "Images acquired night after night"
+msgstr ""
+
+#: templates/nightly.html:11
+msgid ""
+"On this page you can see images that were actually taken each night, and not "
+"merely uploaded on a particular date."
+msgstr ""
+
+#: templates/nightly.html:28
+msgid "No image acquired in the selected month."
+msgstr ""
+
+#: templates/nightly.html:35
+msgid "current month"
+msgstr ""
+
+#: templates/object_not_found.html:5
+msgid "Object not found"
+msgstr ""
+
+#: templates/pagination.html:9
+msgid "previous"
+msgstr ""
+
+#: templates/pagination.html:30
+msgid "next"
+msgstr ""
+
+#: templates/profile-edit-menu.html:6 templates/image/edit/menu.html:5
+msgid "Basic Information"
+msgstr ""
+
+#: templates/profile-edit-menu.html:9 templates/image/detail.html:450
+#: templates/user/profile.html:92 templates/user/profile.html.py:262
+msgid "Gear"
+msgstr ""
+
+#: templates/profile-edit-menu.html:15
+msgid "Import from Flickr"
+msgstr ""
+
+#: templates/profile-edit-menu.html:18
+msgid "Preferences"
+msgstr ""
+
+#: templates/stats.html:10
+#, python-format
+msgid ""
+"<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
+"strong> images, reaching <strong>%(total_integration)s</strong> hours of "
+"integration time."
+msgstr ""
+
+#: templates/stats.html:15
+msgid "Total integration hours in the last 30 days"
+msgstr ""
+
+#: templates/stats.html:17
+msgid "Total integration hours in the last 12 months"
+msgstr ""
+
+#: templates/stats.html:25
+msgid "Plot by"
+msgstr ""
+
+#: templates/stats.html:29
+msgid "Month"
+msgstr ""
+
+#: templates/stats.html:30
+msgid "Day"
+msgstr ""
+
+#: templates/stats.html:39 templates/user/profile.html:201
+#: templates/user/profile.html.py:226 templates/user/profile.html:251
+msgid "Please wait: the plot is loading..."
+msgstr ""
+
+#: templates/stats.html:40 templates/user/profile.html:202
+#: templates/user/profile.html.py:227 templates/user/profile.html:252
+msgid "Loading..."
+msgstr ""
+
+#: templates/stats.html:46
+msgid "Leaderboard"
+msgstr ""
+
+#: templates/stats.html:53 templates/wall.html:13
+msgid "Sort by"
+msgstr ""
+
+#: templates/stats.html:57
+msgid "Total integration"
+msgstr ""
+
+#: templates/stats.html:58
+msgid "Avg. integration"
+msgstr ""
+
+#: templates/stats.html:59
+msgid "Images"
+msgstr ""
+
+#: templates/stats.html:70 templates/image/detail.html:171
+msgid "User"
+msgstr ""
+
+#: templates/stats.html:71
+msgid "Total integration hours"
+msgstr ""
+
+#: templates/stats.html:72
+msgid "Avg. integration hours"
+msgstr ""
+
+#: templates/tos.html:8
+msgid ""
+"AstroBin accounts are meant for members to share original images that they "
+"have created."
+msgstr ""
+
+#: templates/tos.html:10
+msgid "What is allowed"
+msgstr ""
+
+#: templates/tos.html:13
+msgid "Do upload content you have created yourself."
+msgstr ""
+
+#: templates/tos.html:14
+msgid ""
+"Respect the copyright of others. Stealing images from other people and "
+"trying to pass them off as yours is not allowed on AstroBin."
+msgstr ""
+
+#: templates/tos.html:17
+msgid "Do fill in all the technical details you can."
+msgstr ""
+
+#: templates/tos.html:18
+msgid ""
+"AstroBin is founded on the idea that data is important and can't go wasted "
+"in a sea of chaos. As much as you can, please fill in the technical details "
+"of your images."
+msgstr ""
+
+#: templates/tos.html:21
+msgid "Be respectful of other users."
+msgstr ""
+
+#: templates/tos.html:22
+msgid "Be nice and friendly to other users when you send them messages."
+msgstr ""
+
+#: templates/tos.html:25
+msgid "What is forbidden"
+msgstr ""
+
+#: templates/tos.html:28
+msgid "Don't upload anything that you don't hold the copyright for."
+msgstr ""
+
+#: templates/tos.html:29
+msgid ""
+"It's simple: if you didn't take an image yourself, then don't upload it. "
+"Images taken with remote equipment and images taken with borrowed equipment "
+"are fine of course. What matters is that it was your work."
+msgstr ""
+
+#: templates/tos.html:32
+msgid "No nudity, no explicitly sexual content, no illegal content."
+msgstr ""
+
+#: templates/tos.html:33
+msgid ""
+"Your account will be permanently deleted, and so will all your content, if "
+"you upload any content that is illegal, porn or nudity. We also reserve the "
+"right to report you to the authorities, if we find it necessary."
+msgstr ""
+
+#: templates/tos.html:36
+msgid "Don't upload images that have nothing to do with astronomy."
+msgstr ""
+
+#: templates/tos.html:37
+msgid ""
+"Images of your equipment are fine, but don't use AstroBin to upload pictures "
+"from your last vacation. Your account won't be deleted, but we will ask you "
+"to remove those pictures."
+msgstr ""
+
+#: templates/tos.html:40
+msgid "Don't use your account to host images for websites, banners or logos."
+msgstr ""
+
+#: templates/tos.html:41
+msgid ""
+"Banners, logos, icons or other graphic elements that are not "
+"astrophotography are not allowed on AstroBin."
+msgstr ""
+
+#: templates/tos.html:45
+msgid ""
+"In conclusion, these terms are just a way to say \"please be nice and use "
+"common sense\". If you feel you can't abide by them, please let us know what "
+"you feel is wrong."
+msgstr ""
+
+#: templates/wall.html:19
+msgid "Uploaded"
+msgstr ""
+
+#: templates/wall.html:24
+msgid "Acquired"
+msgstr ""
+
+#: templates/wall.html:29 templates/search/search.html:24
+msgid "Views"
+msgstr ""
+
+#: templates/wall.html:34 templates/inclusion_tags/search_image_list.html:21
+#: templates/search/search.html:22
+msgid "Rating"
+msgstr ""
+
+#: templates/wall.html:46
+msgid "Filter by"
+msgstr ""
+
+#: templates/wall.html:52
+msgid "All deep sky objects"
+msgstr ""
+
+#: templates/wall.html:57
+msgid "Clusters"
+msgstr ""
+
+#: templates/wall.html:73
+msgid "All Solar System objects"
+msgstr ""
+
+#: templates/wall.html:83
+msgid "Moon"
+msgstr ""
+
+#: templates/wall.html:88
+msgid "Planets"
+msgstr ""
+
+#: templates/wall.html:93
+msgid "Comets"
+msgstr ""
+
+#: templates/wall.html:99
+msgid "Remove filter"
+msgstr ""
+
+#: templates/image/detail.html:17
+msgid ""
+"Plate-solving has started in the background. It might take a while, so "
+"please don't request it again! You will be notified when the job has "
+"completed. Thanks!"
+msgstr ""
+
+#: templates/image/detail.html:27
+#, python-format
+msgid ""
+"This image is a <strong>work in progress</strong> from your <a href="
+"\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
+"unless you give them one of the links you can find in the <em>Share</em> "
+"menu below. Use that link to post this image to Internet forums and get "
+"feedback on it. When you are satisfied, perhaps after uploading some "
+"revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
+"\"%(profile_url)s\">Public Area</a>."
+msgstr ""
+
+#: templates/image/detail.html:37
+msgid "Actions"
+msgstr ""
+
+#: templates/image/detail.html:43
+msgid "Edit basic information"
+msgstr ""
+
+#: templates/image/detail.html:46
+msgid "Edit gear used"
+msgstr ""
+
+#: templates/image/detail.html:49
+msgid "Edit acquisition details"
+msgstr ""
+
+#: templates/image/detail.html:59
+msgid "Mark this revision as final"
+msgstr ""
+
+#: templates/image/detail.html:65
+msgid "Change license"
+msgstr ""
+
+#: templates/image/detail.html:68 templates/image/detail.html.py:689
+msgid "Upload new revision"
+msgstr ""
+
+#: templates/image/detail.html:72
+msgid "Plate-solve"
+msgstr ""
+
+#: templates/image/detail.html:76
+msgid "Plate-solve again"
+msgstr ""
+
+#: templates/image/detail.html:81
+msgid "Promote to public area"
+msgstr ""
+
+#: templates/image/detail.html:85
+msgid "Move to staging area"
+msgstr ""
+
+#: templates/image/detail.html:92
+msgid "Delete original image"
+msgstr ""
+
+#: templates/image/detail.html:94
+msgid "Delete everything"
+msgstr ""
+
+#: templates/image/detail.html:97
+msgid "Delete this revision"
+msgstr ""
+
+#: templates/image/detail.html:104
+msgid "Bring to a user's attention"
+msgstr ""
+
+#: templates/image/detail.html:108
+#: templates/image/actions/request_additional_information.html:18
+msgid "Request additional information"
+msgstr ""
+
+#: templates/image/detail.html:111
+#: templates/image/actions/request_fits.html:18
+msgid "Request TIFF/FITS"
+msgstr ""
+
+#: templates/image/detail.html:124
+msgid "View"
+msgstr ""
+
+#: templates/image/detail.html:130 templates/image/detail.html.py:163
+msgid "Inverted monochrome"
+msgstr ""
+
+#: templates/image/detail.html:135 templates/image/detail.html.py:150
+msgid "Annotatad (original version)"
+msgstr ""
+
+#: templates/image/detail.html:137 templates/image/detail.html.py:152
+msgid "Annotated"
+msgstr ""
+
+#: templates/image/detail.html:145 templates/image/detail.html.py:160
+msgid "Normal"
+msgstr ""
+
+#: templates/image/detail.html:176
+msgid "View profile"
+msgstr ""
+
+#: templates/image/detail.html:184 templates/image/detail.html.py:641
+#: templates/user/profile.html:51 templates/user/profile.html.py:357
+msgid "Stop following"
+msgstr ""
+
+#: templates/image/detail.html:186 templates/image/detail.html.py:649
+#: templates/user/profile.html:53 templates/user/profile.html.py:365
+msgid "Follow"
+msgstr ""
+
+#: templates/image/detail.html:193 templates/user/profile.html:59
+msgid "Send private message"
+msgstr ""
+
+#: templates/image/detail.html:200
+msgid "Share"
+msgstr ""
+
+#: templates/image/detail.html:207
+msgid "Direct link:"
+msgstr ""
+
+#: templates/image/detail.html:214 templates/image/detail.html.py:227
+#: templates/image/detail.html:241 templates/image/detail.html.py:254
+#: templates/image/detail.html:267
+msgid "Copy"
+msgstr ""
+
+#: templates/image/detail.html:220
+msgid "Link for forums:"
+msgstr ""
+
+#: templates/image/detail.html:234 templates/image/detail.html.py:260
+msgid "...with thumbnail:"
+msgstr ""
+
+#: templates/image/detail.html:247
+msgid "Full size:"
+msgstr ""
+
+#: templates/image/detail.html:342
+msgid ""
+"This image was just uploaded and is still processing. Please try to refresh "
+"this page in a few seconds."
+msgstr ""
+
+#: templates/image/detail.html:353 templates/image/full.html:62
+msgid "uploaded"
+msgstr ""
+
+#: templates/image/detail.html:355 templates/image/full.html:64
+#, python-format
+msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
+msgstr ""
+
+#: templates/image/detail.html:357
+#, python-format
+msgid "viewed one time"
+msgid_plural "viewed %(counter)s times"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/image/detail.html:382
+msgid "Contains"
+msgstr ""
+
+#: templates/image/detail.html:401
+#, python-format
+msgid "and %(number)s more (click to view)."
+msgstr ""
+
+#: templates/image/detail.html:409
+msgid "(hide these subjects)"
+msgstr ""
+
+#: templates/image/detail.html:421
+msgid "This image is a revision. Here are its other versions"
+msgstr ""
+
+#: templates/image/detail.html:423
+msgid "This image has some other revisions"
+msgstr ""
+
+#: templates/image/detail.html:445
+msgid "Technical card"
+msgstr ""
+
+#: templates/image/detail.html:464 templates/image/detail.html.py:465
+msgid "Histogram"
+msgstr ""
+
+#: templates/image/detail.html:473
+msgid "Acquisition"
+msgstr ""
+
+#: templates/image/detail.html:525
+msgid "Astrometry"
+msgstr ""
+
+#: templates/image/detail.html:526
+msgid "RA center"
+msgstr ""
+
+#: templates/image/detail.html:527
+msgid "DEC center"
+msgstr ""
+
+#: templates/image/detail.html:529
+msgid "Pixel scale"
+msgstr ""
+
+#: templates/image/detail.html:529
+msgid "arcsec/pixel"
+msgstr ""
+
+#: templates/image/detail.html:531
+msgid "Orientation"
+msgstr ""
+
+#: templates/image/detail.html:531 templates/image/detail.html.py:532
+#: templates/image/detail.html:533
+msgid "degrees"
+msgstr ""
+
+#: templates/image/detail.html:532
+msgid "Field width"
+msgstr ""
+
+#: templates/image/detail.html:532 templates/image/detail.html.py:533
+msgid "arcminutes"
+msgstr ""
+
+#: templates/image/detail.html:533
+msgid "Field height"
+msgstr ""
+
+#: templates/image/detail.html:550 templates/image/detail.html.py:559
+msgid "More: same user"
+msgstr ""
+
+#: templates/image/detail.html:551 templates/image/detail.html.py:560
+msgid "More: same subjects"
+msgstr ""
+
+#: templates/image/detail.html:552 templates/image/detail.html.py:561
+msgid "More: same telescope"
+msgstr ""
+
+#: templates/image/detail.html:553 templates/image/detail.html.py:562
+msgid "More: same camera"
+msgstr ""
+
+#: templates/image/detail.html:637 templates/user/profile.html:353
+#, python-format
+msgid "Follow %(username)s?"
+msgstr ""
+
+#: templates/image/detail.html:638 templates/user/profile.html:354
+#, python-format
+msgid ""
+"You will receive a notification every time %(username)s posts a new image. "
+"Continue?"
+msgstr ""
+
+#: templates/image/detail.html:639 templates/user/profile.html:355
+msgid "Yes, follow!"
+msgstr ""
+
+#: templates/image/detail.html:645 templates/user/profile.html:361
+#, python-format
+msgid "Stop following %(username)s?"
+msgstr ""
+
+#: templates/image/detail.html:646 templates/user/profile.html:362
+#, python-format
+msgid ""
+"You will stop receiving notifications when %(username)s posts a new image. "
+"Continue?"
+msgstr ""
+
+#: templates/image/detail.html:647 templates/user/profile.html:363
+msgid "Yes, stop following!"
+msgstr ""
+
+#: templates/image/detail.html:653 templates/user/profile.html:369
+#, python-format
+msgid "Send %(username)s a message"
+msgstr ""
+
+#: templates/image/detail.html:655 templates/messages/compose.html:16
+#: templates/messages/modal_compose.html:16 templates/user/profile.html:371
+msgid "Send"
+msgstr ""
+
+#: templates/image/detail.html:679
+msgid "Bad"
+msgstr ""
+
+#: templates/image/detail.html:680
+msgid "Poor"
+msgstr ""
+
+#: templates/image/detail.html:681
+msgid "Regular"
+msgstr ""
+
+#: templates/image/detail.html:682
+msgid "Good"
+msgstr ""
+
+#: templates/image/detail.html:683
+msgid "Gorgeous"
+msgstr ""
+
+#: templates/image/detail.html:690
+msgid ""
+"Did you improve the post-processing of your image? Upload the new revision!"
+msgstr ""
+
+#: templates/image/detail.html:702
+msgid "Delete image and all its revisions?"
+msgstr ""
+
+#: templates/image/detail.html:703
+msgid ""
+"The image will be permanently deleted and cannot be recovered. All its "
+"revisions will be deleted too. Are you sure?"
+msgstr ""
+
+#: templates/image/detail.html:704
+msgid "Yes, delete everything"
+msgstr ""
+
+#: templates/image/detail.html:709
+msgid "Delete this revision?"
+msgstr ""
+
+#: templates/image/detail.html:710
+msgid ""
+"This revision will be permanently deleted and cannot be recovered. Are you "
+"sure?"
+msgstr ""
+
+#: templates/image/detail.html:711
+msgid "Yes, delete revision"
+msgstr ""
+
+#: templates/image/detail.html:716
+msgid "Delete original image?"
+msgstr ""
+
+#: templates/image/detail.html:717
+msgid ""
+"The image will be permanently deleted and cannot be recovered. Its revisions "
+"will not be deleted. Are you sure?"
+msgstr ""
+
+#: templates/image/detail.html:718
+msgid "Yes, delete image"
+msgstr ""
+
+#: templates/image/full.html:71
+msgid "See technical details"
+msgstr ""
+
+#: templates/image/full.html:77
+msgid "Fit image's width to window"
+msgstr ""
+
+#: templates/image/full.html:81
+msgid "View at full resolution"
+msgstr ""
+
+#: templates/image/actions/bring_to_attention.html:18
+msgid "Bring image to attention"
+msgstr ""
+
+#: templates/image/actions/bring_to_attention.html:20
+msgid ""
+"By choosing some users and clicking the button below, you will send them a "
+"notification prompting them to checkout this image."
+msgstr ""
+
+#: templates/image/actions/bring_to_attention.html:45
+msgid "Click on a user below!"
+msgstr ""
+
+#: templates/image/actions/bring_to_attention_complete.html:18
+msgid "Done!"
+msgstr ""
+
+#: templates/image/actions/bring_to_attention_complete.html:20
+msgid "The image was brought to the attention of the selected users."
+msgstr ""
+
+#: templates/image/actions/request_additional_information.html:20
+#, python-format
+msgid ""
+"You will notify <strong>%(username)s</strong> that you would like them to "
+"feed more information in the technical card for this image. Continue?"
+msgstr ""
+
+#: templates/image/actions/request_additional_information_complete.html:18
+msgid "Additional information requested"
+msgstr ""
+
+#: templates/image/actions/request_additional_information_complete.html:21
+#, python-format
+msgid ""
+"<strong>%(username)s</strong> has been notified. Hopefully they will update "
+"the image soon. Remember that you can also <a href=\"%(message_url)s\">send "
+"them a message</a>. "
+msgstr ""
+
+#: templates/image/actions/request_fits.html:20
+#, python-format
+msgid ""
+"You will notify %(username)s that you would like to see the TIFF or FITS "
+"file. AstroBin doesn't currently offer to host such large files, so "
+"hopefully %(username)s will contact you about how to handle the transaction. "
+"Continue?"
+msgstr ""
+
+#: templates/image/actions/request_fits_complete.html:18
+msgid "TIFF/FITS requested"
+msgstr ""
+
+#: templates/image/actions/request_fits_complete.html:21
+#, python-format
+msgid ""
+"<strong>%(username)s</strong> has been notified. Hopefully they will get in "
+"touch with you and send you the TIFF/FITS files. AstroBin doesn't currently "
+"offer to host these files, unfortunately."
+msgstr ""
+
+#: templates/image/edit/acquisition.html:16
+msgid "Edit your image: acquisition details"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:18
+msgid "Step 5 of 5: acquisition details"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:30
+#: templates/image/edit/acquisition.html:63
+#: templates/image/edit/acquisition.html:84 templates/image/edit/basic.html:72
+#: templates/image/edit/gear.html:49 templates/image/edit/license.html:23
+#: templates/location/edit.html:18 templates/user/profile/edit/basic.html:39
+#: templates/user/profile/edit/gear.html:29
+#: templates/user/profile/edit/license.html:18
+#: templates/user/profile/edit/preferences.html:35
+msgid "Save"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:31
+#: templates/image/edit/acquisition.html:65
+#: templates/image/edit/acquisition.html:85
+msgid "Remove data"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:35
+#: templates/image/edit/acquisition.html:69
+#: templates/image/edit/acquisition.html:89 templates/image/edit/basic.html:77
+#: templates/image/edit/gear.html:54 templates/image/edit/watermark.html:38
+msgid "Save and finish"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:43
+msgid ""
+"You can insert as many acquisition sessions as you want, as often images are "
+"taken across several nights. An acquisition session is defined primarily by "
+"a date and a filter. Fill in your data and then click on <strong>Save</"
+"strong> to finish, or on <strong>Add more</strong> to add more acquisition "
+"sessions."
+msgstr ""
+
+#: templates/image/edit/acquisition.html:47
+#, python-format
+msgid ""
+"Is this too much data for you to handle? Go to the <a href="
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+msgstr ""
+
+#: templates/image/edit/acquisition.html:52
+msgid "Acquisition session"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:52
+msgid "(scroll down for more)"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:64
+#: templates/image/edit/acquisition.html:70
+msgid "Add more"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:76
+#, python-format
+msgid ""
+"With this form you can input the basic details for the acquisition of your "
+"image. If you want to be more thorough or fill in separate details for each "
+"filter, go to the <a href=\"%(advanced_form_url)s?"
+"edit_type=deep_sky&advanced=true\">advanced form</a>."
+msgstr ""
+
+#: templates/image/edit/acquisition.html:95
+msgid "What kind of image is this?"
+msgstr ""
+
+#: templates/image/edit/acquisition.html:101
+msgid "Deep sky"
+msgstr ""
+
+#: templates/image/edit/basic.html:15
+msgid "Edit your image: basic information"
+msgstr ""
+
+#: templates/image/edit/basic.html:17
+msgid "Step 2 of 5: basic information"
+msgstr ""
+
+#: templates/image/edit/basic.html:45 templates/image/edit/basic.html.py:60
+#: templates/user/profile/edit/basic.html:26
+msgid "Use a <strong>comma</strong> to separate the values."
+msgstr ""
+
+#: templates/image/edit/basic.html:75
+msgid "Next step: watermark"
+msgstr ""
+
+#: templates/image/edit/basic.html:76 templates/image/edit/gear.html:53
+#: templates/image/edit/watermark.html:37
+msgid "or"
+msgstr ""
+
+#: templates/image/edit/gear.html:15
+msgid "Edit your image: gear used"
+msgstr ""
+
+#: templates/image/edit/gear.html:17
+msgid "Step 4 of 5: gear used"
+msgstr ""
+
+#: templates/image/edit/gear.html:27
+#, python-format
+msgid ""
+"Can't see anything here? Perhaps you should first add some gear in your <a "
+"href=\"%(the_url)s\">profile</a>!"
+msgstr ""
+
+#: templates/image/edit/gear.html:31
+msgid ""
+"To choose the gear used for this image, drag items from the left side to "
+"right side, or click the plus sign."
+msgstr ""
+
+#: templates/image/edit/gear.html:52
+msgid "Next step: acquisition"
+msgstr ""
+
+#: templates/image/edit/license.html:7
+msgid "This setting only affects the current image."
+msgstr ""
+
+#: templates/image/edit/license.html:11
+msgid "Change the license for this image"
+msgstr ""
+
+#: templates/image/edit/license.html:14
+#: templates/user/profile/edit/license.html:11
+msgid ""
+"You can associate a Creative Commons license with your content if you wish, "
+"to grant people the right to use your work under certain circumstances. For "
+"more information on what your options are, please visit the <a target="
+"\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons "
+"website</a>."
+msgstr ""
+
+#: templates/image/edit/license.html:18
+#, python-format
+msgid ""
+"Remember that you can change your default license <a href="
+"\"%(change_default_url)s\">here</a>."
+msgstr ""
+
+#: templates/image/edit/menu.html:6
+msgid "Gear used"
+msgstr ""
+
+#: templates/image/edit/menu.html:7
+msgid "Acquisition details"
+msgstr ""
+
+#: templates/image/edit/menu_not_ready.html:4
+msgid "You're almost there. Now AstroBin needs some data about your image."
+msgstr ""
+
+#: templates/image/edit/presolve.html:8
+msgid "A little help might be useful!"
+msgstr ""
+
+#: templates/image/edit/presolve.html:20
+msgid "Knowing the pixel scale will help"
+msgstr ""
+
+#: templates/image/edit/presolve.html:24
+msgid "Step 1 of 5: plate solving scale"
+msgstr ""
+
+#: templates/image/edit/presolve.html:26
+msgid "Edit your image: plate-solving scale"
+msgstr ""
+
+#: templates/image/edit/presolve.html:31
+msgid ""
+"AstroBin <em>could</em> plate-solve your image without knowing anything "
+"about it, but that could be a long process. If you know the approximate size "
+"of the field of your image, plate-solving will be much faster and will have "
+"a better chance of success!"
+msgstr ""
+
+#: templates/image/edit/presolve.html:39
+msgid "Start plate-solving"
+msgstr ""
+
+#: templates/image/edit/presolve.html:42
+msgid "Next step: basic information"
+msgstr ""
+
+#: templates/image/edit/presolve.html:47
+msgid ""
+"<strong>Note</strong>: if you didn't upload a full resolution image, the "
+"pixel scale will be wrong!"
+msgstr ""
+
+#: templates/image/edit/watermark.html:10
+msgid "Step 3 of 5: watermark"
+msgstr ""
+
+#: templates/image/edit/watermark.html:13
+msgid ""
+"AstroBin can protect your images from theft by applying a watermark to them. "
+"Be careful with your settings though: once a watermark has been applied, it "
+"cannot be removed (AstroBin won't store the non-watermarked version of your "
+"image, for your safety). If you don't like the watermark resulting from the "
+"following settings, your only choice is to delete the image and start over."
+msgstr ""
+
+#: templates/image/edit/watermark.html:16
+msgid "Please note: animated GIFs cannot be watermarked at this time."
+msgstr ""
+
+#: templates/image/edit/watermark.html:36
+msgid "Next step: gear used"
+msgstr ""
+
+#: templates/inclusion_tags/form_saved.html:5
+msgid "Saved!"
+msgstr ""
+
+#: templates/inclusion_tags/form_saved.html:6
+msgid "Form saved. Thank you!"
+msgstr ""
+
+#: templates/inclusion_tags/image_list.html:21
+#: templates/inclusion_tags/messier_list.html:22
+#: templates/inclusion_tags/search_image_list.html:44
+#, python-format
+msgid " by <a href=\"%(user_page)s\">%(user)s</a>"
+msgstr ""
+
+#: templates/inclusion_tags/image_list.html:27
+#: templates/inclusion_tags/messier_list.html:28
+#: templates/inclusion_tags/search_image_list.html:50
+msgid "No images"
+msgstr ""
+
+#: templates/inclusion_tags/message_list.html:14
+msgid "You have no messages."
+msgstr ""
+
+#: templates/inclusion_tags/message_list.html:20
+msgid "Show all messages"
+msgstr ""
+
+#: templates/inclusion_tags/notification_list.html:15
+msgid "Show all notifications"
+msgstr ""
+
+#: templates/inclusion_tags/notification_list.html:21
+msgid "You have no new notifications."
+msgstr ""
+
+#: templates/inclusion_tags/related_images.html:16
+msgid "newer"
+msgstr ""
+
+#: templates/inclusion_tags/related_images.html:20
+msgid "older"
+msgstr ""
+
+#: templates/inclusion_tags/request_list.html:10
+#, python-format
+msgid ""
+"<strong>%(username)s</strong> has requested additional information about "
+"your image."
+msgstr ""
+
+#: templates/inclusion_tags/request_list.html:13
+#, python-format
+msgid ""
+"<strong>%(username)s</strong> has requested to see the TIFF of FITS of your "
+"image."
+msgstr ""
+
+#: templates/inclusion_tags/request_list.html:20
+#, python-format
+msgid ""
+"You should insert data for the location you have created: <strong>"
+"%(location)s</strong>"
+msgstr ""
+
+#: templates/inclusion_tags/request_list.html:27
+#: templates/requests/all.html:46
+msgid "You have no requests."
+msgstr ""
+
+#: templates/inclusion_tags/request_list.html:33
+msgid "Manage received requests"
+msgstr ""
+
+#: templates/inclusion_tags/search_image_list.html:34
+#, python-format
+msgid "Viewed one time"
+msgid_plural "Viewed %(counter)s times"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/location/edit.html:8
+msgid "If this location is missing data, or has incorrect data, please fix it."
+msgstr ""
+
+#: templates/location/edit.html:12
+msgid "Edit your location"
+msgstr ""
+
+#: templates/messages/compose.html:9 templates/messages/inbox.html:33
+msgid "Compose message"
+msgstr ""
+
+#: templates/messages/compose.html:48 templates/messages/modal_compose.html:43
+msgid "Type in a search term"
+msgstr ""
+
+#: templates/messages/compose.html:49 templates/messages/modal_compose.html:44
+msgid "No results"
+msgstr ""
+
+#: templates/messages/compose.html:50 templates/messages/modal_compose.html:45
+msgid "Searching"
+msgstr ""
+
+#: templates/messages/inbox.html:45
+msgid "New!"
+msgstr ""
+
+#: templates/messages/inbox.html:63
+msgid "Read all"
+msgstr ""
+
+#: templates/messages/inbox.html:65 templates/messages/view.html:48
+#: templates/messages/view.html.py:50 templates/messages/view.html:79
+msgid "Reply"
+msgstr ""
+
+#: templates/messages/inbox.html:71
+msgid "No messages"
+msgstr ""
+
+#: templates/messages/modal_compose.html:63
+msgid "Message sent"
+msgstr ""
+
+#: templates/messages/view.html:9
+#, python-format
+msgid ""
+"\n"
+"        A conversation between <a href=\"%(sender_url)s\">you</a> and\n"
+"        "
+msgstr ""
+
+#: templates/messages/view.html:28
+msgid "Delete conversation"
+msgstr ""
+
+#: templates/messages/view.html:31 templates/messages/view.html.py:52
+msgid "or return to messages"
+msgstr ""
+
+#: templates/messages/view.html:71
+msgid "Sending..."
+msgstr ""
+
+#: templates/messages/view.html:88
+msgid "Error. Try again!"
+msgstr ""
+
+#: templates/notification/all.html:8
+msgid "Here are your notifications"
+msgstr ""
+
+#: templates/notification/email_body.txt:3
+#, python-format
+msgid ""
+"Hi! You have a new notification on AstroBin:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"To see all your notifications, please go to %(notices_url)s.\n"
+"\n"
+"If you don't want to receive emails anymore, edit your preferences by going "
+"to http://astrobin.com%(pref_url)s.\n"
+"\n"
+"Clear skies,\n"
+"AstroBin.\n"
+msgstr ""
+
+#: templates/notification/attention_request/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s would like to bring the following image to your attention: "
+"%(object_url)s"
+msgstr ""
+
+#: templates/notification/attention_request/notice.html:2
+#: templates/notification/attention_request/short.html:1
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
+"image to your attention.</a>"
+msgstr ""
+
+#: templates/notification/attention_request/short.txt:2
+#, python-format
+msgid "%(originator)s wants to bring an image to your attention"
+msgstr ""
+
+#: templates/notification/follow_success/notice.html:2
+#: templates/notification/follow_success/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\">You are now following <strong>%(object)s</strong>."
+"</a>"
+msgstr ""
+
+#: templates/notification/image_deleted/full.html:2
+#: templates/notification/image_deleted/full.txt:2
+#: templates/notification/image_deleted/notice.html:2
+#: templates/notification/image_deleted/short.html:2
+#: templates/notification/image_deleted/short.txt:2
+msgid "Your image has been deleted."
+msgstr ""
+
+#: templates/notification/image_not_solved/full.txt:2
+#, python-format
+msgid "Your image at %(object_url)s could not be plate-solved."
+msgstr ""
+
+#: templates/notification/image_not_solved/notice.html:2
+#: templates/notification/image_not_solved/short.html:2
+#, python-format
+msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
+msgstr ""
+
+#: templates/notification/image_not_solved/short.txt:2
+msgid "Your image could not be plate-solved."
+msgstr ""
+
+#: templates/notification/image_ready/notice.html:2
+#: templates/notification/image_ready/short.html:2
+#, python-format
+msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
+msgstr ""
+
+#: templates/notification/image_solved/full.txt:2
+#, python-format
+msgid "Your image at %(object_url)s was plate-solved."
+msgstr ""
+
+#: templates/notification/image_solved/notice.html:2
+#: templates/notification/image_solved/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
+msgstr ""
+
+#: templates/notification/image_solved/short.txt:2
+msgid "Your image has been successfully plate-solved."
+msgstr ""
+
+#: templates/notification/lacking_data_reminder/full.txt:2
+#, python-format
+msgid ""
+"You have %(number)s images with insufficient data.\n"
+"\n"
+"AstroBin relies on data to be a great service for you and every other user.\n"
+"Please fill in the data for your images at the following URL:\n"
+"\n"
+"%(url)s\n"
+"\n"
+"Thank you!"
+msgstr ""
+
+#: templates/notification/lacking_data_reminder/notice.html:2
+#: templates/notification/lacking_data_reminder/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(url)s\">You have <strong>%(number)s</strong> images with "
+"insufficient data!</a>"
+msgstr ""
+
+#: templates/notification/lacking_data_reminder/short.txt:2
+#, python-format
+msgid "You have %(number)s images with insufficient data!"
+msgstr ""
+
+#: templates/notification/messier_nomination/full.txt:2
+#, python-format
+msgid ""
+"%(user)s has nominated your image of %(messier_object)s for the Messier "
+"Marathon. Congratulations!\n"
+"\n"
+"This is the image of yours that was nominated: http://astrobin.com"
+"%(image_url)s\n"
+"\n"
+"The Messier Marathon is a list of Messier objects featuring images from "
+"AstroBin, chosen by the users via nominations.\n"
+"\n"
+"You can find the Messier Marathon here: http://astrobin.com/explore/messier/"
+msgstr ""
+
+#: templates/notification/messier_nomination/notice.html:2
+#: templates/notification/messier_nomination/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(image_url)s\"><strong>%(user)s</strong> has nominated your image "
+"of <strong>%(messier_object)s</strong> for the Messier Marathon. "
+"Congratulations!</a>"
+msgstr ""
+
+#: templates/notification/messier_nomination/short.txt:2
+#, python-format
+msgid ""
+"Your image of %(messier_object)s has been nominated for the Messier Marathon!"
+msgstr ""
+
+#: templates/notification/messier_top_nomination/full.txt:2
+#, python-format
+msgid ""
+"Your image of %(messier_object)s is now featured in the Messier Marathon. "
+"Congratulations!\n"
+"\n"
+"This is the image of yours that is featured: http://astrobin.com"
+"%(image_url)s\n"
+"\n"
+"The Messier Marathon is a list of Messier objects featuring images from "
+"AstroBin, chosen by the users via nominations.\n"
+"Your image is now the most nominated for the Messier object "
+"%(messier_object)s.\n"
+"\n"
+"You can find the Messier Marathon here: http://astrobin.com/explore/messier/"
+msgstr ""
+
+#: templates/notification/messier_top_nomination/notice.html:2
+#: templates/notification/messier_top_nomination/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(image_url)s\">Your image of <strong>%(messier_object)s</strong> "
+"is now featured in the Messier Marathon. Congratulations!</a>"
+msgstr ""
+
+#: templates/notification/messier_top_nomination/short.txt:2
+#, python-format
+msgid ""
+"Your image of %(messier_object)s is now featured in the Messier Marathon!"
+msgstr ""
+
+#: templates/notification/new_blog_entry/full.txt:2
+#, python-format
+msgid ""
+"AstroBin has published a new blog entry: \"%(object)s\".\n"
+"\n"
+"Check it out at the following url: %(object_url)s"
+msgstr ""
+
+#: templates/notification/new_blog_entry/notice.html:2
+#: templates/notification/new_blog_entry/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
+"\"%(object)s\"</a>"
+msgstr ""
+
+#: templates/notification/new_blog_entry/short.txt:2
+#, python-format
+msgid "AstroBin has publushed a new blog entry: %(object)s"
+msgstr ""
+
+#: templates/notification/new_follower/full.txt:2
+#, python-format
+msgid ""
+"User %(object)s is now following you. They will be notified when you publish "
+"new images."
+msgstr ""
+
+#: templates/notification/new_follower/notice.html:2
+#: templates/notification/new_follower/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you."
+"</a>"
+msgstr ""
+
+#: templates/notification/new_follower/short.txt:2
+msgid "You have a new follower!"
+msgstr ""
+
+#: templates/notification/new_image/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image! Check it out at the following url: "
+"%(object_url)s"
+msgstr ""
+
+#: templates/notification/new_image/notice.html:2
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
+"new image.</a>"
+msgstr ""
+
+#: templates/notification/new_image/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
+"new image</a>"
+msgstr ""
+
+#: templates/notification/new_image/short.txt:2
+#, python-format
+msgid "New image by %(originator)s"
+msgstr ""
+
+#: templates/notification/new_image_revision/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has published a new image revision! Check it out at the "
+"following url: %(object_url)s"
+msgstr ""
+
+#: templates/notification/new_image_revision/notice.html:2
+#: templates/notification/new_image_revision/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
+"new image revision.</a>"
+msgstr ""
+
+#: templates/notification/new_image_revision/short.txt:2
+#, python-format
+msgid "New image revision by %(originator)s"
+msgstr ""
+
+#: templates/notification/received_email/full.txt:2
+msgid ""
+"You have received a private message on AstroBin!\n"
+"Read it at the following link:\n"
+"\n"
+"http://astrobin.com/messages/inbox/"
+msgstr ""
+
+#: templates/notification/received_email/notice.html:2
+#: templates/notification/received_email/short.html:2
+#: templates/notification/received_email/short.txt:2
+msgid "You have received a new private message."
+msgstr ""
+
+#: templates/notification/request_fulfilled/full.txt:2
+#, python-format
+msgid ""
+"%(originator)s has fulfilled your request! Check it out at the following "
+"url: %(object_url)s"
+msgstr ""
+
+#: templates/notification/request_fulfilled/notice.html:2
+#: templates/notification/request_fulfilled/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
+"your request</a>"
+msgstr ""
+
+#: templates/notification/request_fulfilled/short.txt:2
+#, python-format
+msgid "%(originator)s has fulfilled your request."
+msgstr ""
+
+#: templates/notification/unfollow_success/notice.html:2
+#: templates/notification/unfollow_success/short.html:2
+#, python-format
+msgid ""
+"<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
+"strong>.</a>"
+msgstr ""
+
+#: templates/privatebeta/invite.html:7
+msgid "What is AstroBin?"
+msgstr ""
+
+#: templates/privatebeta/invite.html:11
+msgid "AstroBin is currently in closed beta"
+msgstr ""
+
+#: templates/privatebeta/invite.html:14
+#, python-format
+msgid ""
+"and it will be open for everybody soon. If you've been invited, you can <a "
+"href=\"%(login_url)s\">login</a>, otherwise you can leave us your email "
+"address and we will notify you when the website is up!"
+msgstr ""
+
+#: templates/registration/activate.html:8
+msgid "Account successfully activated"
+msgstr ""
+
+#: templates/registration/activate.html:10
+#: templates/registration/login.html:16
+#: templates/registration/password_reset_complete.html:8
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/activate.html:14
+msgid "Account activation failed"
+msgstr ""
+
+#: templates/registration/activation_complete.html:5
+msgid "Your profile is now active."
+msgstr ""
+
+#: templates/registration/activation_email.txt:2
+msgid "Activate account at"
+msgstr ""
+
+#: templates/registration/activation_email.txt:6
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr ""
+
+#: templates/registration/activation_email_subject.txt:1
+msgid "Account activation on"
+msgstr ""
+
+#: templates/registration/login.html:7
+#: templates/registration/password_reset_form.html:9
+msgid "Reset password"
+msgstr ""
+
+#: templates/registration/login.html:13
+msgid "Login with AstroBin"
+msgstr ""
+
+#: templates/registration/logout.html:5
+msgid "Logged out"
+msgstr ""
+
+#: templates/registration/password_change_done.html:5
+msgid "Password changed"
+msgstr ""
+
+#: templates/registration/password_change_form.html:6
+#: templates/registration/password_change_form.html:10
+msgid "Change your password"
+msgstr ""
+
+#: templates/registration/password_change_form.html:13
+#: templates/registration/password_reset_confirm.html:15
+#: templates/registration/password_reset_form.html:13
+#: templates/registration/registration_form.html:18
+msgid "Submit"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:6
+msgid "Password reset successfully"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:6
+msgid "Password reset"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:10
+msgid "Password reset confirmation"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:18
+msgid "Password reset failed"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:5
+msgid "Email with password reset instructions has been sent."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:2
+#, python-format
+msgid "Reset password at %(site_name)s"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:6
+msgid "Fill the form to receive instructions."
+msgstr ""
+
+#: templates/registration/registration_complete.html:5
+msgid "You are now registered. Activation email sent."
+msgstr ""
+
+#: templates/registration/registration_form.html:6
+msgid "Fill the form to join AstroBin!"
+msgstr ""
+
+#: templates/registration/registration_form.html:10
+msgid "Register with AstroBin"
+msgstr ""
+
+#: templates/registration/registration_form.html:13
+#, python-format
+msgid ""
+"By registering with AstroBin, you agree to our <a href=\"%(tos_url)s\">terms "
+"of service</a>."
+msgstr ""
+
+#: templates/requests/all.html:6
+msgid "Here are your requests"
+msgstr ""
+
+#: templates/requests/all.html:10
+msgid "When"
+msgstr ""
+
+#: templates/requests/all.html:11
+msgid "From"
+msgstr ""
+
+#: templates/requests/all.html:12
+msgid "Action needed"
+msgstr ""
+
+#: templates/requests/all.html:13
+msgid "Object affected"
+msgstr ""
+
+#: templates/requests/all.html:14
+msgid "Fulfilled"
+msgstr ""
+
+#: templates/requests/all.html:18
+msgid "at"
+msgstr ""
+
+#: templates/requests/all.html:25
+msgid "Location details missing."
+msgstr ""
+
+#: templates/requests/all.html:30
+msgid "Yes."
+msgstr ""
+
+#: templates/requests/all.html:32
+msgid "No."
+msgstr ""
+
+#: templates/requests/all.html:34
+msgid "Do it now?"
+msgstr ""
+
+#: templates/requests/all.html:37
+msgid "Mark as done."
+msgstr ""
+
+#: templates/search/search.html:19
+msgid "Sort by:"
+msgstr ""
+
+#: templates/search/search.html:20
+msgid "Relevance"
+msgstr ""
+
+#: templates/search/search.html:21 templates/user/profile.html:72
+msgid "Upload time"
+msgstr ""
+
+#: templates/search/search.html:28
+msgid "Please input some search terms!"
+msgstr ""
+
+#: templates/user/not_found.html:5
+msgid "User not found:"
+msgstr ""
+
+#: templates/user/profile.html:12
+msgid "View your images"
+msgstr ""
+
+#: templates/user/profile.html:14
+#, python-format
+msgid "View %(username)s's images:"
+msgstr ""
+
+#: templates/user/profile.html:22 templates/user/profile.html.py:24
+msgid "Public Area"
+msgstr ""
+
+#: templates/user/profile.html:28 templates/user/profile.html.py:30
+msgid "Staging Area"
+msgstr ""
+
+#: templates/user/profile.html:42
+msgid "User menu"
+msgstr ""
+
+#: templates/user/profile.html:66
+msgid "Sort images by"
+msgstr ""
+
+#: templates/user/profile.html:77
+msgid "Acquisition time"
+msgstr ""
+
+#: templates/user/profile.html:82
+msgid "Subject type"
+msgstr ""
+
+#: templates/user/profile.html:87
+msgid "Year"
+msgstr ""
+
+#: templates/user/profile.html:97
+msgid "Lacking data"
+msgstr ""
+
+#: templates/user/profile.html:112
+msgid ""
+"These are your \"work in progress\" images: only you can see this list. You "
+"can show people individual images by sharing them using the <em>Share</em> "
+"menu."
+msgstr ""
+
+#: templates/user/profile.html:120
+msgid "These images don't have enough data. It's a shame..."
+msgstr ""
+
+#: templates/user/profile.html:122
+msgid ""
+"If you want your images to be categorized in albums, you should really fill "
+"in some data. Imaging telescopes, imaging cameras and subjects are the bare "
+"minimum. Dates of acquisitions are very important too."
+msgstr ""
+
+#: templates/user/profile.html:134
+msgid "(view more...)"
+msgstr ""
+
+#: templates/user/profile.html:150
+msgid "No images."
+msgstr ""
+
+#: templates/user/profile.html:156
+msgid "(go back)"
+msgstr ""
+
+#: templates/user/profile.html:161
+msgid ""
+"These images are ordered so that the most recently acquired appear first. "
+"Please note: images with no acquisition dates will appear last, and in no "
+"particular order."
+msgstr ""
+
+#: templates/user/profile.html:163
+msgid "Please fill in the missing dates on all your images!"
+msgstr ""
+
+#: templates/user/profile.html:174
+#, python-format
+msgid "%(user)s's statistics"
+msgstr ""
+
+#: templates/user/profile.html:177
+#, python-format
+msgid ""
+"Hey <strong>%(user)s</strong>! I just wanted to let you know that you could "
+"make these plots more useful if you added all data to your images. Please "
+"make sure by checking whether you have images which lack data <a href=\"?"
+"public&sub=nodata\">here</a>."
+msgstr ""
+
+#: templates/user/profile.html:186 templates/user/profile.html.py:211
+#: templates/user/profile.html:236
+msgid "Show by period"
+msgstr ""
+
+#: templates/user/profile.html:190 templates/user/profile.html.py:215
+#: templates/user/profile.html:240
+msgid "Yearly"
+msgstr ""
+
+#: templates/user/profile.html:191 templates/user/profile.html.py:216
+#: templates/user/profile.html:241
+msgid "Monthly"
+msgstr ""
+
+#: templates/user/profile.html:192 templates/user/profile.html.py:217
+#: templates/user/profile.html:242
+msgid "Daily"
+msgstr ""
+
+#: templates/user/profile.html:260
+#, python-format
+msgid "%(username)s's technical card"
+msgstr ""
+
+#: templates/user/profile.html:282
+#, python-format
+msgid "About %(username)s"
+msgstr ""
+
+#: templates/user/profile.html:304
+#, python-format
+msgid ""
+" You have written nothing about yourself. Why don't you <a href=\"%(the_url)s"
+"\">do it now?</a>"
+msgstr ""
+
+#: templates/user/profile.html:308
+#, python-format
+msgid "%(username)s didn't write anything about themselves."
+msgstr ""
+
+#: templates/user/profile.html:315
+msgid "Go to the homepage to upload a new image!"
+msgstr ""
+
+#: templates/user/profile.html:319
+msgid "Tools"
+msgstr ""
+
+#: templates/user/profile.html:323 templates/user/profile.html.py:326
+msgid "Edit profile"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:7
+msgid "Import your photos from Flickr"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:9
+msgid ""
+"Please note: when importing from Flickr, automatic watermarking of the "
+"images it not supported."
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:15
+msgid "Which set"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:29
+msgid "Import photos"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:31
+msgid "Authenticate with Flickr"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:38
+msgid ""
+"Unfortunately you need to enable Javascript to be able to import photos from "
+"Flickr at this time."
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:73
+msgid "Click to select the photos you want to import"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:75
+msgid "Select all"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:76
+msgid "Select none"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:89
+msgid "Import selected photos"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:101
+msgid "Importing images."
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:101
+msgid "Do not navigate away from this window: this might take a while!"
+msgstr ""
+
+#: templates/user/profile/flickr_import.html:110
+msgid ""
+"Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
+"(and keep an eye on your notifications)!"
+msgstr ""
+
+#: templates/user/profile/edit/basic.html:8
+msgid "Edit your basic information"
+msgstr ""
+
+#: templates/user/profile/edit/basic.html:42
+msgid "or click here to change your password"
+msgstr ""
+
+#: templates/user/profile/edit/basic.html:73
+#: templates/user/profile/edit/gear.html:40
+msgid "No results. Press TAB to add it!"
+msgstr ""
+
+#: templates/user/profile/edit/gear.html:8
+msgid "Edit your astrophotography gear"
+msgstr ""
+
+#: templates/user/profile/edit/gear.html:13
+msgid "Go back to the home page."
+msgstr ""
+
+#: templates/user/profile/edit/gear.html:17
+msgid ""
+"Remember that these items autocomplete, and you need to press TAB to add "
+"something to your list. If it's not in a white box, it doesn't get saved!"
+msgstr ""
+
+#: templates/user/profile/edit/gear.html:18
+msgid "Please use full names (make and model) for all your gear items!"
+msgstr ""
+
+#: templates/user/profile/edit/gear.html:26
+msgid "* use a comma to separate the values."
+msgstr ""
+
+#: templates/user/profile/edit/license.html:8
+msgid "Set your default image license"
+msgstr ""
+
+#: templates/user/profile/edit/license.html:13
+msgid ""
+"You can set a default type of license for everything you upload into "
+"AstroBin. Change your default here."
+msgstr ""
+
+#: templates/user/profile/edit/preferences.html:8
+msgid "Edit your site preferences"
+msgstr ""
+
+#: templates/user/profile/edit/preferences.html:13
+msgid "Select the language in which you would like to see this website:"
+msgstr ""
+
+#: templates/user/profile/edit/preferences.html:19
+msgid "Select which e-mail notification you would like to receive:"
+msgstr ""
