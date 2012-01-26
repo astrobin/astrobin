@@ -28,7 +28,7 @@
             </p>
         {% else %}
             <p>
-                {% blocktrans %}To choose the gear used for this image, drag items from the left side to right side, or click the plus sign.{% endblocktrans %}
+                {% blocktrans %}To choose the gear used for this image, drag items from the right side to left side, or click the plus sign.{% endblocktrans %}
             </p>
         {% endif %}
         <form id="gear" method="post" action="{% url image_edit_save_gear %}">{% csrf_token %}
