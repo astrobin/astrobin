@@ -100,6 +100,18 @@ NOTICE_TYPES = (
         '',
         0
     ),
+    (
+        'new_comment',
+        _("Your image received a new comment"),
+        '',
+        2
+    ),
+    (
+        'new_comment_reply',
+        _("There was a reply to your comment"),
+        '',
+        2
+    ),
 )
 
 

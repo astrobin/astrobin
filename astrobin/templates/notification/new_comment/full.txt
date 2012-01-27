@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}{{user}} commented on your image! Check it out at the following url: {{url}}{% endblocktrans %}

@@ -2562,6 +2562,21 @@ def image_comment_save(request):
 
         comment.save()
 
+        notification = 'new_comment'
+        recipient = image.user
+        url = '%s/%d#c%d' % (settings.ASTROBIN_BASE_URL, image.id, comment.id)
+        if comment.parent:
+            notification = 'new_comment_reply'
+            recipient = comment.parent.author
+
+        push_notification(
+            [recipient], notification,
+            {
+                'url': url,
+                'user': author,
+            }
+        )
+            
         response_dict = {
             'success': True,
             'comment_id': comment.id,
