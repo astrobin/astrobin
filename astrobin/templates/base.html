@@ -114,7 +114,7 @@
                     <!--
                     <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
                     -->
-                    {% if user.is_authenticated and not user_language %}
+                    {% if request.user.is_authenticated and not user_language %}
                     <div id="language-prompt">
                         <div class="bubble">
                             {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
