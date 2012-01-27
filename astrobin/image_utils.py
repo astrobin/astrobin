@@ -5,8 +5,6 @@ from PIL import ImageDraw
 def scale_dimensions(w, h, longest_side):
     if w > longest_side:
         ratio = longest_side*1./w
-    elif h > longest_side:
-        ratio = longest_side*1./h
     else:
         ratio = 1
 

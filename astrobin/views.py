@@ -243,7 +243,7 @@ def wall(request):
 def messier(request):
     """Messier marathon"""
 
-    queryset = Image.objects.exclude(messiermarathon = None).order_by('messiermarathon__messier_number')
+    queryset = MessierMarathon.objects.all().order_by('messier_number')
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
@@ -253,7 +253,7 @@ def messier(request):
         request, 
         queryset=queryset,
         template_name='messier_marathon.html',
-        template_object_name='image',
+        template_object_name='object',
         paginate_by = 55, # Haha, how clever.
         extra_context = response_dict)
 
@@ -996,7 +996,7 @@ def image_edit_save_basic(request):
             else:
                 identifier = SubjectIdentifier.objects.filter(identifier = id)
                 if identifier:
-                    return identifier.subject
+                    return identifier[0].subject
                 else:
                     subject = find_in_simbad(id)
                     if subject:
@@ -1368,6 +1368,17 @@ def image_promote(request, id):
     if image.is_wip:
         image.is_wip = False
         image.save()
+
+        followers = [x.from_userprofile.user
+                     for x in
+                     UserProfile.follows.through.objects.filter(
+                        to_userprofile = request.user)]
+        push_notification(followers, 'new_image',
+            {
+                'originator': request.user,
+                'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+            })
+
 
     return HttpResponseRedirect('/%i/' % image.id);
 
