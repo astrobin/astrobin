@@ -2569,14 +2569,15 @@ def image_comment_save(request):
             notification = 'new_comment_reply'
             recipient = comment.parent.author
 
-        push_notification(
-            [recipient], notification,
-            {
-                'url': url,
-                'user': author,
-            }
-        )
-            
+        if recipient != author:
+            push_notification(
+                [recipient], notification,
+                {
+                    'url': url,
+                    'user': author,
+                }
+            )
+                
         response_dict = {
             'success': True,
             'comment_id': comment.id,
