@@ -2025,7 +2025,6 @@ ul.topnav {
     #comments {
         padding: @spacer-large;
         font-size: 1em;
-        line-height: 90%;
         color: @text-color / @strongest-hilight-factor;
 
         a {
@@ -2038,6 +2037,15 @@ ul.topnav {
         p {
             margin: 0;
             padding: @spacer-small 0;
+        }
+        p.instructions {
+            font-size: 0.9em;
+
+            strong {
+                color: @strong-text-color;
+                font-weight: normal;
+                text-shadow: none;
+            }
         }
         .formatting-help {
             font-size: 0.8em;

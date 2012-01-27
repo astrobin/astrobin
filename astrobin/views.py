@@ -601,6 +601,7 @@ def image_detail(request, id):
                      'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
                      'comment_form': CommentForm(),
                      'comments': Comment.objects.filter(image = image),
+                     'user_language': LANGUAGES[UserProfile.objects.get(user = image.user).language],
                     }
 
     if 'upload_error' in request.GET:

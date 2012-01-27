@@ -39,6 +39,13 @@ LANGUAGE_CHOICES = (
     ('fr', _("French")),
 )
 
+LANGUAGES = {
+    'en': _("English"),
+    'it': _("Italian"),
+    'es': _("Spanish"),
+    'fr': _("French"),
+}
+
 SUBJECT_LABELS = {
     'PULSAR': _("Pulsars"),
     'GLOBUL': _("Globular clusters"),

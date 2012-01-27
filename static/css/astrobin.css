@@ -2197,7 +2197,6 @@ ul.topnav > li:hover {
 #image-detail #comments {
   padding: 12px;
   font-size: 1em;
-  line-height: 90%;
   color: #838383;
 }
 #image-detail #comments a {
@@ -2210,6 +2209,14 @@ ul.topnav > li:hover {
 #image-detail #comments p {
   margin: 0;
   padding: 4px 0;
+}
+#image-detail #comments p.instructions {
+  font-size: 0.9em;
+}
+#image-detail #comments p.instructions strong {
+  color: #fcfcfc;
+  font-weight: normal;
+  text-shadow: none;
 }
 #image-detail #comments .formatting-help {
   font-size: 0.8em;
