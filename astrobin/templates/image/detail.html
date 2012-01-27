@@ -546,8 +546,8 @@
             <h3>{% trans "Comments" %}</h3>
             <div id="comments">
                 {% if user.is_authenticated %}
-                <p>
-                    {% blocktrans %}Leave a comment.{% endblocktrans %}
+                <p class="instructions">
+                    {% blocktrans with user=image.user lang=user_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
                 </p>
                 <div id="top-level-form">
                     <form action="{% url image_comment_save %}" method="post">
