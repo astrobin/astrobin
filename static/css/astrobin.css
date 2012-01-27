@@ -2286,6 +2286,7 @@ ul.topnav > li:hover {
 }
 #image-detail #comments .comment.hilight {
   background-color: #404040;
+  border: 1px dashed #fcfcfc;
 }
 #image-detail #comments .loader {
   display: inline-block;
