@@ -16,7 +16,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.db import IntegrityError
 from django.utils.translation import ugettext as _
-from django.forms.models import inlineformset_factory
+from django.forms.models import formset_factory, inlineformset_factory
 from django.utils.functional import curry
 from django.utils.encoding import smart_str, smart_unicode
 
@@ -1690,12 +1690,8 @@ def user_profile_edit_basic(request):
     profile = UserProfile.objects.get(user = request.user)
     form = UserProfileEditBasicForm(instance = profile)
 
-    locations = u', '.join(x.name for x in profile.locations.all())
-
     response_dict = {
         'form': form,
-        'prefill_dict': {'locations': jsonDump(profile.locations.all())},
-        'locations_value': locations,
     }
     return render_to_response("user/profile/edit/basic.html",
         response_dict,
@@ -1711,39 +1707,12 @@ def user_profile_save_basic(request):
     profile = UserProfile.objects.get(user = request.user)
     response_dict = {'form': form}
 
-    if form.is_valid():
-        profile.locations.clear()
-        (ids, value) = valueReader(request.POST, 'locations')
-        for id in ids:
-            k = None
-            try:
-                try:
-                    id = float(id)
-                    k = Location.objects.get(Q(id=id))
-                except ValueError:
-                    k = Location.objects.filter(Q(name=id))
-                    if k:
-                        k = k[0]
-            except (Location.DoesNotExist, ValueError, TypeError):
-                k = new_location(id, request.user)
-
-            if not k:
-                k = new_location(id, request.user)
-
-            profile.locations.add(k)
-
-        profile.website  = form.cleaned_data['website']
-        profile.job      = form.cleaned_data['job']
-        profile.hobbies  = form.cleaned_data['hobbies']
-        profile.timezone = form.cleaned_data['timezone']
-        profile.about    = form.cleaned_data['about']
-
-        profile.save()
-    else:
-        response_dict['prefill_dict'] = {'locations': jsonDump(profile.locations.all()) }
+    if not form.is_valid():
         return render_to_response("user/profile/edit/basic.html",
             response_dict,
             context_instance=RequestContext(request))
+
+    form.save()
 
     return HttpResponseRedirect("/profile/edit/basic/?saved");
 
@@ -1798,6 +1767,42 @@ def user_profile_edit_gear(request):
     return render_to_response("user/profile/edit/gear.html",
                               response_dict,
                               context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
+def user_profile_edit_locations(request):
+    profile = UserProfile.objects.get(user = request.user)
+    LocationsFormset = inlineformset_factory(
+        UserProfile, Location, form = LocationEditForm, extra = 1)
+
+    return render_to_response(
+        'user/profile/edit/locations.html',
+        {
+            'formset': LocationsFormset(instance = profile),
+            'profile': profile,
+        },
+        context_instance = RequestContext(request))
+
+
+@login_required
+@require_POST
+def user_profile_save_locations(request):
+    profile = UserProfile.objects.get(user = request.user)
+    LocationsFormset = inlineformset_factory(
+        UserProfile, Location, form = LocationEditForm, extra = 1)
+    formset = LocationsFormset(data = request.POST, instance = profile)
+    if not formset.is_valid():
+        return render_to_response(
+            'user/profile/edit/locations.html',
+            {
+                'formset': formset,
+                'profile': profile,
+            },
+            context_instance = RequestContext(request))
+
+    formset.save()
+    return HttpResponseRedirect('/profile/edit/locations/?saved');
 
 
 @login_required

@@ -19,6 +19,7 @@ from model_utils.managers import InheritanceManager
 from timezones.forms import PRETTY_TIMEZONE_CHOICES
 
 from notifications import push_notification
+from fields import *
 
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -280,20 +281,6 @@ class SubjectIdentifier(models.Model):
         super(SubjectIdentifier, self).save(*args, **kwargs)
 
 
-class Location(models.Model):
-    name = models.CharField(_("Name"), max_length=255)
-    latitude = models.DecimalField(_("Latitude"), max_digits=7, decimal_places=4, null=True, blank=True)
-    longitude = models.DecimalField(_("Longitude"), max_digits=7, decimal_places=4, null=True, blank=True)
-    altitude = models.IntegerField(_("Altitude"), null=True, blank=True)
-    user_generated = models.BooleanField()
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        app_label = 'astrobin'
-
-
 class Image(models.Model):
     BINNING_CHOICES = (
         (1, '1x1'),
@@ -330,7 +317,9 @@ class Image(models.Model):
     )
 
     locations = models.ManyToManyField(
-        Location,
+        'astrobin.Location',
+        verbose_name = _("Locations"),
+        help_text = _("Drag items from the right side to the left side, or click on the plus sign."),
     )
 
     description = models.TextField(
@@ -907,7 +896,7 @@ class ImageRequest(Request):
 
 
 class LocationRequest(Request):
-    location = models.ForeignKey(Location, editable=False)
+    location = models.ForeignKey('astrobin.Location', editable=False)
 
 
 class UserProfile(models.Model):
@@ -942,14 +931,6 @@ class UserProfile(models.Model):
         blank=True, null=True,
         verbose_name=_("Timezone"),
         help_text=_("By selecting this, you will see all the dates on AstroBin in your timezone."))
-
-    locations = models.ManyToManyField(
-        Location,
-        null = True,
-        blank = True,
-        verbose_name = _("Locations"),
-        help_text = _("These are the cities from which you usually image."),
-    )
 
     about = models.TextField(
         null = True,
@@ -1070,6 +1051,70 @@ def create_user_profile(sender, instance, created, **kwargs):
         profile, created = UserProfile.objects.get_or_create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
+
+
+class Location(models.Model):
+    name = models.CharField(
+        verbose_name = _("Name"),
+        help_text = _("An optional friendly name, e.g. 'Home observatory' or 'Mount Whitney'."),
+        max_length = 255,
+        null = True, blank = True,
+    )
+    city = models.CharField(
+        verbose_name = _("City"),
+        help_text = _("If this location is not in a city, use the name of the closest city."),
+        max_length = 255,
+        null = True,
+    )
+    state = models.CharField(
+        verbose_name = _("State or province"),
+        max_length = 255,
+        null = True, blank = True,
+    )
+    country = CountryField(
+        verbose_name = _("Country"),
+        null = True,
+    )
+    lat_deg = models.IntegerField(
+        _("Latitude (degrees)"), 
+        null = True
+    )
+    lat_min = models.IntegerField(
+        _("Latitude (minutes)"), 
+        null = True, blank = True
+    )
+    lat_sec = models.IntegerField(
+        _("Latitude (seconds)"), 
+        null = True, blank = True
+    )
+    lon_deg = models.IntegerField(
+        _("Longitude (degrees)"), 
+        null = True
+    )
+    lon_min = models.IntegerField(
+        _("Longitude (minutes)"), 
+        null = True, blank = True
+    )
+    lon_sec = models.IntegerField(
+        _("Longitude (seconds)"), 
+        null = True, blank = True)
+
+    altitude = models.IntegerField(
+        verbose_name = _("Altitude"),
+        help_text = _("In meters."),
+        null = True, blank = True)
+
+    user = models.ForeignKey(
+        UserProfile,
+        editable = False,
+        null = True,
+    )
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        app_label = 'astrobin'
 
 
 from zinnia.models import Entry
