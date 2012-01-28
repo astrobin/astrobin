@@ -18,7 +18,7 @@
         {% endif %}
     </h1>
     {% form_saved request %}
-    <form action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
+    <form id="basic" action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
         <div id="js_form" style="display:none">
             {{form.as_p}}
         </div>
@@ -55,10 +55,7 @@
 
             <p>
                 {{form.locations.label_tag}}
-                <input type="text" name="locations" id="id_locations" value="{{locations}}"/>
-                <span class="helptext">
-                    {% trans "Use a <strong>comma</strong> to separate the values." %}
-                </span>
+                {{form.locations}}
             </p>
             <p>
                 {{form.description.label_tag}}
@@ -86,6 +83,9 @@
 <script language="javascript">
     $(document).ready(function() {
         $('#js_form').show();
+        $('#js_form form .loading').hide();
+        $('#js_form .ui-multiselect').show();
+        $('#js_form .ui-multiselect').next('.helptext').hide();
 
         {% autoescape off %}
         {% for key, value in prefill_dict.items %}
