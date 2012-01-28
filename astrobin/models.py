@@ -323,6 +323,8 @@ class Image(models.Model):
 
     locations = models.ManyToManyField(
         Location,
+        verbose_name = _("Locations"),
+        help_text = _("Drag items from the right side to the left side, or click on the plus sign."),
     )
 
     description = models.TextField(
