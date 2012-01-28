@@ -724,9 +724,8 @@ def image_edit_basic(request, id):
         return HttpResponseForbidden()
 
     subjects =  u', '.join(x.mainId for x in image.subjects.all())
-    locations = u', '.join(x.name for x in image.locations.all())
 
-    form = ImageEditBasicForm(instance = image)
+    form = ImageEditBasicForm(user = image.user, instance = image)
 
     return render_to_response('image/edit/basic.html',
         {'image':image,
@@ -737,14 +736,9 @@ def image_edit_basic(request, id):
                          "",
                          _("No results. Sorry."),
                          _("Click on a suggestion or press TAB to add what you typed")],
-            'locations': [jsonDump(image.locations.all()),
-                          "",
-                          _("No results. Press TAB to create this location!"),
-                          _("Click on a suggestion or press TAB to add what you typed")],
          },
          'is_ready': image.is_stored,
          'subjects': subjects,
-         'locations': locations,
         },
         context_instance=RequestContext(request))
 
@@ -1013,13 +1007,12 @@ def image_edit_save_basic(request):
 
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
-    form = ImageEditBasicForm(data=request.POST, instance=image)
+    form = ImageEditBasicForm(user = image.user, data=request.POST, instance=image)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     if not form.is_valid():
         subjects =  u', '.join(x.mainId for x in image.subjects.all())
-        locations = u', '.join(x.name for x in image.locations.all())
 
         response_dict = {
             'image': image,
@@ -1029,13 +1022,9 @@ def image_edit_save_basic(request):
                'subjects': [jsonDumpSubjects(image.subjects.all()),
                             "",
                             _("No results. Sorry.")],
-               'locations': [jsonDump(image.locations.all()),
-                             "",
-                             _("No results. Press TAB to create this location!")],
             },
             'is_ready': image.is_stored,
             'subjects': subjects,
-            'locations': locations,
         }
 
         return render_to_response("image/edit/basic.html",
@@ -1045,7 +1034,6 @@ def image_edit_save_basic(request):
     prefill_dict = {}
 
     image.subjects.clear()
-    image.locations.clear()
 
     (ids, value) = valueReader(request.POST, 'subjects')
     for id in ids:
@@ -1056,34 +1044,9 @@ def image_edit_save_basic(request):
     prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
                                 "",
                                 _("No results. Sorry.")]
-
     form.fields['subjects'].initial = u', '.join(x.mainId for x in getattr(image, 'subjects').all())
 
-    (ids, value) = valueReader(request.POST, 'locations')
-    if ids:
-        for id in ids:
-            try:
-                try:
-                    id = float(id)
-                    k = Location.objects.get(Q(id=id))
-                except ValueError:
-                    k = Location.objects.filter(Q(name=id))
-                    if k:
-                        k = k[0]
-            except (Location.DoesNotExist, ValueError):
-                k = new_location(id, image.user)
-
-            if not k:
-                k = new_location(id, image.user)
-
-            image.locations.add(k)
-    prefill_dict['locations'] = [jsonDump(image.locations.all()),
-                                 "",
-                                 _("No results. Sorry.")]
-
-
-    form.fields['locations'].initial = u', '.join(x.name for x in getattr(image, 'locations').all())
-
+    form.save()
     image.save()
 
     if 'was_not_ready' in request.POST:
@@ -1704,8 +1667,8 @@ def user_profile_edit_basic(request):
 def user_profile_save_basic(request):
     """Saves the form"""
 
-    form = UserProfileEditBasicForm(data=request.POST)
     profile = UserProfile.objects.get(user = request.user)
+    form = UserProfileEditBasicForm(data=request.POST)
     response_dict = {'form': form}
 
     if form.is_valid():
