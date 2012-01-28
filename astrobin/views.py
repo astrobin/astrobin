@@ -92,22 +92,6 @@ def valueReader(source, field):
     return items, value
 
 
-def new_location(name, user):
-    k = Location(name=name)
-    k.save();
-
-    r = LocationRequest(
-        from_user=User.objects.get(username=settings.ASTROBIN_USER),
-        to_user=user,
-        location=k,
-        fulfilled=False,
-        message='') # not implemented yet
-    r.save()
-    push_request(user, r)
-
-    return k
-
-
 def get_or_create_location(prop, value):
     k = None
     created = False
@@ -2422,34 +2406,6 @@ def location_edit(request, id):
          'id'  : id,
         },
         context_instance=RequestContext(request))
-
-
-@login_required
-@require_POST
-def location_save(request):
-    id = request.POST.get('location_id')
-    location = Location.objects.get(pk=id)
-    form = LocationEditForm(data=request.POST, instance=location)
-    if not form.is_valid():
-        return render_to_response('location/edit.html',
-            {'form': form,
-             'id': id},
-            context_instance=RequestContext(request))
-
-    form.save()
-
-    # Now let's mark the request as fullfilled, if it exists.
-    try:
-        req = LocationRequest.objects.get(
-            to_user = request.user,
-            location = id,
-            fulfilled = False)
-        req.fulfilled = True
-        req.save()
-    except:
-        pass
-
-    return HttpResponseRedirect('/locations/edit/%d/?saved' % location.id)
 
 
 @require_GET
