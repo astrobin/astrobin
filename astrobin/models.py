@@ -1072,27 +1072,21 @@ class Location(models.Model):
         null = True,
     )
     lat_deg = models.IntegerField(
-        _("Latitude (degrees)"), 
         null = True
     )
     lat_min = models.IntegerField(
-        _("Latitude (minutes)"), 
         null = True, blank = True
     )
     lat_sec = models.IntegerField(
-        _("Latitude (seconds)"), 
         null = True, blank = True
     )
     lon_deg = models.IntegerField(
-        _("Longitude (degrees)"), 
         null = True
     )
     lon_min = models.IntegerField(
-        _("Longitude (minutes)"), 
         null = True, blank = True
     )
     lon_sec = models.IntegerField(
-        _("Longitude (seconds)"), 
         null = True, blank = True)
 
     altitude = models.IntegerField(
