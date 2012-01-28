@@ -895,10 +895,6 @@ class ImageRequest(Request):
     type  = models.CharField(max_length=8, choices=TYPE_CHOICES)
 
 
-class LocationRequest(Request):
-    location = models.ForeignKey('astrobin.Location', editable=False)
-
-
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, editable=False)
 

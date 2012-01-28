@@ -148,8 +148,6 @@ urlpatterns = patterns('',
     url(r'^help/', views.help, name='help'),
     url(r'^faq/', views.faq, name='faq'),
     url(r'^tos/', views.tos, name='tos'),
-    url(r'^locations/edit/(?P<id>\d+)/$', views.location_edit, name='location_edit'),
-    url(r'^locations/save/$', views.location_save, name='location_save'),
     url(r'^language/set/(?P<lang>\w+)/$', views.set_language, name='set_language'),
 
     url(r'^blog/', include('zinnia.urls')),
