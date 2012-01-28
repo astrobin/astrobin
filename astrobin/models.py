@@ -1052,9 +1052,9 @@ post_save.connect(create_user_profile, sender=User)
 class Location(models.Model):
     name = models.CharField(
         verbose_name = _("Name"),
-        help_text = _("An optional friendly name, e.g. 'Home observatory' or 'Mount Whitney'."),
+        help_text = _("A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."),
         max_length = 255,
-        null = True, blank = True,
+        null = True,
     )
     city = models.CharField(
         verbose_name = _("City"),
