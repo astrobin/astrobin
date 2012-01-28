@@ -921,10 +921,7 @@ form ul li label {
   width: auto;
   float: none;
 }
-form input,
-form select,
-form select[multiple],
-form textarea {
+form input, form select, form textarea {
   vertical-align: bottom;
   position: relative;
   top: -1px;
@@ -934,7 +931,7 @@ form textarea {
   padding: 8px 4px;
   border: 1px solid #2e2e2e;
   border-bottom: 1px solid #474747;
-  background: #393939 url('/static/images/light-panel-tile.png');
+  background-color: #333333;
   color: #c9c9c9;
   width: 70%;
   -moz-border-radius: 6px;
@@ -944,9 +941,12 @@ form textarea {
 form input[type="checkbox"] {
   width: auto;
 }
+form select[multiple] {
+  width: 730px;
+}
 form select {
   width: 100%;
-  background: #fcfcfc;
+  background: #b8b8b8;
   color: #333333;
 }
 form input:focus, form textarea:focus {
@@ -1304,7 +1304,7 @@ ul.as-selections {
   margin: 2px 0;
   width: 70%;
   overflow: auto;
-  background: #393939 url('/static/images/light-panel-tile.png');
+  background-color: #333333;
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -1623,6 +1623,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   text-align: right;
   width: 150px;
 }
+.sided-main-content label.multiple {
+  float: none;
+  width: auto;
+  text-align: left;
+  text-indent: 0;
+}
 .sided-main-content-popup {
   width: 240px;
 }
@@ -1830,7 +1836,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   width: 272px;
   height: 964px;
   padding: 4px 28px;
-  background: #2e2e2e url('/static/images/dark-panel-tile.png');
 }
 .advanced-search-box form p {
   padding: 0;
@@ -3290,9 +3295,8 @@ div.token-input-dropdown p {
   line-height: 115%;
 }
 .ui-multiselect {
+  border-color: #474747;
   display: none;
-  border: none;
-  margin-left: 164px;
 }
 .ui-multiselect div.available {
   border-color: #474747;

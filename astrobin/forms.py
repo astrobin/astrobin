@@ -47,6 +47,10 @@ class ImageEditBasicForm(forms.ModelForm):
         required = False,
         help_text=_("If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."),
     )
+    locations = forms.CharField(
+        required = False,
+        help_text=_("The places from which you have taken this image."),
+    )
 
     def __init__(self, user=None, **kwargs):
         super(ImageEditBasicForm, self).__init__(**kwargs)
@@ -54,10 +58,6 @@ class ImageEditBasicForm(forms.ModelForm):
         self.fields['link_to_fits'].label = _("Link to TIFF/FITS")
         self.fields['subjects'].label = _("Subjects")
         self.fields['locations'].label = _("Locations")
-
-        profile = UserProfile.objects.get(user=user)
-        locations = profile.locations.all()
-        self.fields['locations'].queryset = locations
 
     def clean_link(self):
         return self.cleaned_data['link'].strip()

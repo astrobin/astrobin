@@ -1069,7 +1069,7 @@ form {
                 text-align: left;
                 width: auto;
                 float: none;}}}
-    input, select, select[multiple], textarea {
+    input, select, textarea {
         vertical-align: bottom;
         position: relative;
         top: -1px;
@@ -1078,16 +1078,19 @@ form {
         margin: 2px 0;
         padding: @spacer-medium @spacer-small;
         .common-border-inverted;
-        background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+        background-color: @input-color;
         color: @text-color + #111;
         width: 70%;
         .rounded-corners;}
     input[type="checkbox"] {
         width: auto;
     }
+    select[multiple] {
+        width: 730px;
+    }
     select {
         width: 100%;
-        background: @strong-text-color;
+        background: @text-color;
         color: @background-color;
     }
     input:focus, textarea:focus {
@@ -1395,7 +1398,7 @@ ul.as-selections {
     margin: 2px 0;
     width: 70%;
     overflow: auto;
-    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+    background-color: @background-color;
     .rounded-corners-top;
 
     li {
@@ -1672,6 +1675,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         height: @spacer-xlarge;
         text-align: right;
         width: 150px;}
+    label.multiple {
+        float: none;
+        width: auto;
+        text-align: left;
+        text-indent: 0;
+    }
 }
 
 .sided-main-content-popup {
@@ -1799,8 +1808,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: 272px;
     height: 964px;
     padding: @spacer-small @spacer-xxlarge;
-    background: (@dark-panel-color) url('/static/images/dark-panel-tile.png');
-
     form {
         p {
             padding: 0;
@@ -2999,9 +3006,8 @@ div.token-input-dropdown {
 }
 
 .ui-multiselect {
+    border-color: @border-top-color;
     display: none;
-    border: none;
-    margin-left: 164px;
 
     div.available {
         border-color: @border-top-color;
@@ -3088,5 +3094,4 @@ form#gear {
         right: 42px;
     }
 }
-
 
