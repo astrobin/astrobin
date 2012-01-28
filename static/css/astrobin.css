@@ -1175,6 +1175,7 @@ form p.error input, form p.error textarea {
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
   background: url('/static/images/popup-bg.png');
+  text-shadow: none;
 }
 #navigation #nav ul > li.menu .popup {
   -moz-border-radius: 0 0 6px 6px;
@@ -1194,6 +1195,7 @@ form p.error input, form p.error textarea {
   display: block;
   padding: 8px 4px;
   width: auto;
+  text-shadow: none;
 }
 #navigation #nav ul > li.menu .popup a:hover {
   color: #cc4b2e;

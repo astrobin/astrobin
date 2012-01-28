@@ -1266,8 +1266,6 @@ form {
                     text-transform: lowercase;
                     text-shadow: 0 -1px (@background-color / @strongest-hilight-factor);
                 }
-                a:hover, a:active {
-                }
             }
             >li.menu {
                 position: relative;
@@ -1276,6 +1274,7 @@ form {
                 a.active {
                     .rounded-corners-top;
                     background: url('/static/images/popup-bg.png');
+                    text-shadow: none;
                 }
 
                 .popup {
@@ -1294,6 +1293,7 @@ form {
                         display: block;
                         padding: @spacer-medium @spacer-small;
                         width: auto;
+                        text-shadow: none;
                     }
                     a:hover {
                         color: @link-color;
