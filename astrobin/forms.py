@@ -58,6 +58,7 @@ class ImageEditBasicForm(forms.ModelForm):
         profile = UserProfile.objects.get(user = user)
         locations = Location.objects.filter(user = profile)
         self.fields['locations'].queryset = locations
+        self.fields['locations'].required = False
 
     def clean_link(self):
         return self.cleaned_data['link'].strip()
