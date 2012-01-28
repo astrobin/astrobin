@@ -36,10 +36,11 @@
             {% for field in form %}
                 <p>
                     {{field.errors}}
-                    <label for="id_{{field.name}}">{{field.label}}:</label>
+                    <label class="multiple" for="id_{{field.name}}">{{field.label}}:</label>
                     <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
                     {{field}}
                 </p>
+                <div class="fix"></div>
             {% endfor %}
 
             <input type="hidden" name="image_id" value="{{image.id}}" />
