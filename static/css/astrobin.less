@@ -22,6 +22,7 @@
 @border-shadow-color: @background-color / @strong-hilight-factor;
 @border-shadow-color-inverted: @text-color + #030303;
 @dark-panel-color: @background-color / @hilight-factor;
+@regular-panel-color: @background-color / ((1 + @hilight-factor) / 2);
 @light-panel-color: @background-color * @hilight-factor;
 @light-panel-border-color: @background-color / @strong-hilight-factor;
 
@@ -222,6 +223,13 @@
     height: 0;
     border-top: 1px solid (@border-color / @strong-hilight-factor);
     border-bottom: 1px solid (@border-color * @hilight-factor);}
+
+.stitched-box {
+    margin-bottom: @spacer-small;
+    padding: @spacer-medium;
+    border: 1px dashed @border-top-color;
+    .box-shadow-subtle;
+}
 
 /* clearing */
 .fix {
@@ -2069,11 +2077,7 @@ ul.topnav {
             font-size: 1em;
         }
         .comment {
-            padding: @spacer-medium;
-            margin-bottom: @spacer-small;
-            border: 1px dashed @border-top-color;
-            background-color: @background-color;
-            .box-shadow-subtle;
+            .stitched-box;
 
             .content {
                 padding: @spacer-medium 0;
@@ -2920,15 +2924,12 @@ p.help {
 }
 .message-container.other .message{
     float: right;
+    background: @dark-panel-color url('/static/images/dark-panel-tile.png');
 }
 
 .message {
     position: relative;
-    margin-bottom: @spacer-small;
-    padding: @spacer-medium;
-    border: 1px dashed @border-top-color;
-    background-color: @background-color;
-    .box-shadow-subtle;
+    .stitched-box;
     width: 90%;
     text-align: left;
 
@@ -3198,4 +3199,11 @@ ol.faq {
     table {
         padding-left: @spacer-xxlarge;
     }
+}
+
+.form_in_set {
+    .stitched-box;
+    background: (@regular-panel-color) url('/static/images/regular-panel-tile.png');
+    margin-bottom: @spacer-large;
+    .box-shadow;
 }

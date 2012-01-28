@@ -163,19 +163,12 @@ class UserProfileEditBasicForm(forms.ModelForm):
         error_messages = {'invalid': "The address must start with http:// or https://."},
     )
 
-    locations = forms.CharField(
-        max_length = 256,
-        required = False,
-        help_text = _("These are the cities from which you usually image."),
-    )
-
     class Meta:
         model = UserProfile
-        fields = ('website', 'job', 'hobbies', 'timezone', 'locations', 'about')
+        fields = ('website', 'job', 'hobbies', 'timezone', 'about')
 
     def __init__(self, **kwargs):
         super(UserProfileEditBasicForm, self).__init__(**kwargs)
-        self.fields['locations'].label = _("Locations")
         self.fields['website'].label = _("Website")
 
             
@@ -347,27 +340,10 @@ class AdvancedSearchForm(SearchForm):
 
 
 class LocationEditForm(forms.ModelForm):
-    latitude = forms.FloatField(
-        required=False,
-        help_text=_("For example: +12.44"))
-    longitude = forms.FloatField(
-        required=False,
-        help_text=_("For example: -51.25"))
-
-    def __init__(self, *args, **kwargs):
-        super(LocationEditForm, self).__init__(*args, **kwargs)
-        instance = getattr(self, 'instance', None)
-        if instance and instance.id:
-            self.fields['name'].widget.attrs['readonly'] = True
+    error_css_class = 'error'
 
     class Meta:
         model = Location
-        fields = (
-            'name',
-            'latitude',
-            'longitude',
-            'altitude',
-        )
 
 
 class SolarSystem_AcquisitionForm(forms.ModelForm):

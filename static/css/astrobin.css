@@ -150,6 +150,14 @@
   border-top: 1px solid #242424;
   border-bottom: 1px solid #333333;
 }
+.stitched-box {
+  margin-bottom: 4px;
+  padding: 8px;
+  border: 1px dashed #474747;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+}
 /* clearing */
 .fix {
   clear: both;
@@ -2236,10 +2244,9 @@ ul.topnav > li:hover {
   font-size: 1em;
 }
 #image-detail #comments .comment {
-  padding: 8px;
   margin-bottom: 4px;
+  padding: 8px;
   border: 1px dashed #474747;
-  background-color: #333333;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
@@ -3164,13 +3171,13 @@ p.help {
 }
 .message-container.other .message {
   float: right;
+  background: #2e2e2e url('/static/images/dark-panel-tile.png');
 }
 .message {
   position: relative;
   margin-bottom: 4px;
   padding: 8px;
   border: 1px dashed #474747;
-  background-color: #333333;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
@@ -3458,4 +3465,17 @@ form#gear select {
 }
 ol.faq table {
   padding-left: 28px;
+}
+.form_in_set {
+  margin-bottom: 4px;
+  padding: 8px;
+  border: 1px dashed #474747;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  background: #303030 url('/static/images/regular-panel-tile.png');
+  margin-bottom: 12px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
 }
