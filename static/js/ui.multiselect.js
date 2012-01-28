@@ -57,9 +57,10 @@ $.widget("ui.multiselect", {
 		var that = this;
 
 		// set dimensions
-		this.container.width(this.element.width()+1);
-		this.selectedContainer.width(Math.floor(this.element.width()*this.options.dividerLocation));
-		this.availableContainer.width(Math.floor(this.element.width()*(1-this.options.dividerLocation)));
+		//this.container.width(this.element.width()+1);
+		this.container.width(520);
+		this.selectedContainer.width(256);
+		this.availableContainer.width(256);
 
 		// fix list height to match <option> depending on their individual header's heights
 		this.selectedList.height(100);
