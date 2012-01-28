@@ -353,6 +353,7 @@
         </div>
 
         <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="/static/js/flashcanvas.js"></script><![endif]-->
+        {% compress js %}
         <script type="text/javascript" src="/static/js/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/static/js/jquery.i18n.js"></script>
         <script type="text/javascript" src="/static/js/plugins/localization/jquery.localisation.js"></script>
@@ -393,6 +394,7 @@
         <script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
 
         <script type="text/javascript" src="/static/js/astrobin.js"></script>
+        {% endcompress %}
 
         <!-- javascript -->
         <script type="text/javascript">
