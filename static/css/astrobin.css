@@ -1299,17 +1299,17 @@ ul.as-selections {
   border: 1px solid #2e2e2e;
   border-bottom: 1px solid #474747;
   padding: 8px 4px;
-  margin: 2px 0;
+  margin: 4px 0;
   width: 70%;
   overflow: auto;
-  background: #393939 url('/static/images/light-panel-tile.png');
+  background: #393939;
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
 }
 ul.as-selections li {
   float: left;
-  margin: 1px 4px 1px 0;
+  margin: 0 4px 4px 0;
 }
 ul.as-selections li.as-selection-item {
   border: 1px solid #b8b8b8;
@@ -1318,25 +1318,30 @@ ul.as-selections li.as-selection-item {
   background: -webkit-gradient(linear, left top, left bottom, from(#cecece), to(#b8b8b8));
   background: -moz-linear-gradient(top, #cecece, #b8b8b8);
   color: #333333;
-  padding: 2px 7px 2px 10px;
+  padding: 4px 8px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  text-shadow: #fcfcfc 0 -1px 1px;
+}
+ul.as-selections li.as-selection-item .data {
+  margin-right: 4px;
 }
 ul.as-selections li.as-selection-item a.as-close, ul.as-selections li.as-selection-item a.as-edit {
-  margin-left: 4px;
+  padding: 2px 4px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
   cursor: pointer;
-  color: #333333;
-  font-weight: bold;
 }
-ul.as-selections li.as-selection-item a.as-close :hover, ul.as-selections li.as-selection-item a.as-edit :hover {
-  color: #cc4b2e;
+ul.as-selections li.as-selection-item a.as-close {
+  padding-left: 0;
 }
-ul.as-selections li.as-selection-item a.as-edit {
-  padding-left: 8px;
+ul.as-selections li.as-selection-item a.as-close:hover, ul.as-selections li.as-selection-item a.as-edit:hover {
+  background-color: #b8b8b8;
 }
 ul.as-selections li.as-original {
   margin-left: 0;
@@ -1347,11 +1352,12 @@ ul.as-selections li.as-original input {
   font-size: 87.5%;
   width: 458px;
   height: 18px;
-  padding-top: 3px;
-  background-color: #333333;
+  padding-top: 4px;
+  background: #393939;
 }
 ul.as-selections.loading {
-  background: #333333 url('/static/images/as-loading.gif') no-repeat;
+  background: #393939 url('/static/images/as-loading.gif');
+  background-repeat: no-repeat;
   background-position: 97.5% center;
 }
 input.as-input {
@@ -1418,7 +1424,8 @@ li.as-result-item em {
         padding-top: 3px;
         padding-bottom: 3px;
     }
-    ul.as-selections li.as-selection-item a.as-close a.as-edit {
+    ul.as-selections li.as-selection-item a.as-close,
+    ul.as-selections li.as-selection-item a.as-edit {
         margin-top: -1px;
     }
     ul.as-selections li.as-original input {
@@ -1430,8 +1437,9 @@ li.as-result-item em {
     ul.as-list {
         border: 1px solid #888;
     }
-    ul.as-selections li.as-selection-item a.as-close a.as-edit {
-        margin-left: 4px;
+    ul.as-selections li.as-selection-item a.as-close,
+    ul.as-selections li.as-selection-item a.as-edit {
+        margin-left: 0;
         margin-top: 0;
     }
 }*/
@@ -1439,8 +1447,8 @@ li.as-result-item em {
 ul.as-list {
   border: 1px solid #2e2e2e;
 }
-ul.as-selections li.as-selection-item a.as-close a.as-edit {
-  margin-left: 4px;
+ul.as-selections li.as-selection-item a.as-close, ul.as-selections li.as-selection-item a.as-edit {
+  margin-left: 0;
   margin-top: 0;
 }
 /* Firefox 3.0 Hacks */

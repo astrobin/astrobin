@@ -1020,20 +1020,20 @@ def image_edit_save_basic(request):
 
     prefill_dict = {}
 
-    image.subjects.clear()
+    try:
+        form.save()
+    except ValueError:
+        pass
 
+    image.subjects.clear()
     (ids, value) = valueReader(request.POST, 'subjects')
     for id in ids:
         subject = find_subject(id)
         if subject:
             image.subjects.add(subject)
-
     prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
                                 "",
                                 _("No results. Sorry.")]
-    form.fields['subjects'].initial = u', '.join(x.mainId for x in getattr(image, 'subjects').all())
-
-    form.save()
     image.save()
 
     if 'was_not_ready' in request.POST:
@@ -1790,11 +1790,18 @@ def user_profile_save_gear(request):
                 }.iteritems():
         (names, value) = valueReader(request.POST, k)
         for name in names:
-            automerge = GearAutoMerge.objects.filter(label = name)
-            if automerge:
-                gear_item = v[0].objects.get(gear_ptr__pk = automerge[0].master.pk)
-            else:
-                gear_item, created = v[0].objects.get_or_create(name = name)
+            try:
+                id = float(name)
+                gear_item = v[0].objects.get(id = id)
+                automerge = GearAutoMerge.objects.filter(label = gear_item.name)
+                if automerge:
+                    gear_item = v[0].objects.get(gear_ptr__pk = automerge[0].master.pk)
+            except ValueError:
+                automerge = GearAutoMerge.objects.filter(label = name)
+                if automerge:
+                    gear_item = v[0].objects.get(gear_ptr__pk = automerge[0].master.pk)
+                else:
+                    gear_item, created = v[0].objects.get_or_create(name = name)
             getattr(profile, k).add(gear_item)
         form.fields[k].initial = value
 

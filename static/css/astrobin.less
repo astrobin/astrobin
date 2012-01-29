@@ -1392,29 +1392,37 @@ ul.as-selections {
     list-style-type: none;
     .common-border-inverted;
     padding: @spacer-medium @spacer-small;
-    margin: 2px 0;
+    margin: @spacer-small 0;
     width: 70%;
     overflow: auto;
-    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+    background: @light-panel-color;
     .rounded-corners-top;
 
     li {
         float: left;
-        margin: 1px 4px 1px 0;}
+        margin: 0 @spacer-small @spacer-small 0;
+    }
     li.as-selection-item {
         .button-gradient-inverted;
-        padding: 2px 7px 2px 10px;
+        padding: @spacer-small @spacer-medium;
         .rounded-corners;
-        .box-shadow;
+        .box-shadow-subtle;
+        text-shadow: @strong-text-color 0 -1px 1px;
+        .data {
+            margin-right: @spacer-small;
+        }
         a.as-close, a.as-edit {
-            margin-left: @spacer-small;
+            padding: (@spacer-small / 2) @spacer-small;
+            .rounded-corners;
             cursor: pointer;
-            color: @background-color;
-            font-weight: bold;
-            :hover {
-                color: @link-color;}}
-        a.as-edit {
-            padding-left: @spacer-medium;}}
+        }
+        a.as-close {
+            padding-left: 0;
+        }
+        a.as-close:hover, a.as-edit:hover {
+            background-color: @text-color;
+        }
+    }
     li.as-original {
         margin-left: 0;
         input {
@@ -1423,11 +1431,15 @@ ul.as-selections {
             font-size: 87.5%;
             width: 458px;
             height: 18px;
-            padding-top: 3px;
-            background-color: @background-color;}}}
+            padding-top: @spacer-small;
+            background: @light-panel-color;
+        }
+    }
+}
 
 ul.as-selections.loading {
-    background: @background-color url('/static/images/as-loading.gif') no-repeat;
+    background: @light-panel-color url('/static/images/as-loading.gif');
+    background-repeat: no-repeat;
     background-position: 97.5% center;
 }
 
@@ -1488,7 +1500,8 @@ li.as-result-item em {
         padding-top: 3px;
         padding-bottom: 3px;
     }
-    ul.as-selections li.as-selection-item a.as-close a.as-edit {
+    ul.as-selections li.as-selection-item a.as-close,
+    ul.as-selections li.as-selection-item a.as-edit {
         margin-top: -1px;
     }
     ul.as-selections li.as-original input {
@@ -1501,8 +1514,9 @@ li.as-result-item em {
     ul.as-list {
         border: 1px solid #888;
     }
-    ul.as-selections li.as-selection-item a.as-close a.as-edit {
-        margin-left: 4px;
+    ul.as-selections li.as-selection-item a.as-close,
+    ul.as-selections li.as-selection-item a.as-edit {
+        margin-left: 0;
         margin-top: 0;
     }
 }*/
@@ -1510,8 +1524,9 @@ li.as-result-item em {
 /* IE Hacks  */
 ul.as-list {
     border: 1px solid @border-color; }
-ul.as-selections li.as-selection-item a.as-close a.as-edit {
-    margin-left: 4px;
+ul.as-selections li.as-selection-item a.as-close,
+ul.as-selections li.as-selection-item a.as-edit {
+    margin-left: 0;
     margin-top: 0;}
 
 /* Firefox 3.0 Hacks */
