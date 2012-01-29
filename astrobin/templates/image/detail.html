@@ -567,6 +567,8 @@
                         </p>
                     </form>
                 </div>
+                {% else %}
+                    {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
                 {% endif %}
 
                 {% if comments %}
