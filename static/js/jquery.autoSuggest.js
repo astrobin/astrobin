@@ -41,6 +41,7 @@
             neverSubmit: true,
             selectionLimit: false,
             showResultList: true,
+            allowEdit: false,
             start: function(){},
             selectionClick: function(elem){},
             selectionAdded: function(elem){},
@@ -308,10 +309,10 @@
                             }
 
                             if(opts.resultsHighlight){
-                                this_data[opts.selectedItemProp] = this_data[opts.selectedItemProp].replace(regx,"<em>$1</em>");
+                                this_data[opts.selectedValuesProp] = this_data[opts.selectedValuesProp].replace(regx,"<em>$1</em>");
                             }
                             if(!opts.formatList){
-                                formatted = formatted.html(this_data[opts.selectedItemProp]);
+                                formatted = formatted.html(this_data[opts.selectedValuesProp]);
                             } else {
                                 formatted = opts.formatList.call(this, this_data, formatted);   
                             }
@@ -330,7 +331,7 @@
                 }
 
                 function add_selected_item(data, num){
-                    hidden_value = data[opts.selectedValuesProp];
+                    hidden_value = data[opts.selectedItemProp];
                     values_input.val(values_input.val() + hidden_value + ",");
                     var item = $('<li class="as-selection-item" id="as-selection-'+num+'"></li>').click(function(){
                             opts.selectionClick.call(this, $(this));
@@ -339,12 +340,12 @@
                         }).mousedown(function(){ input_focus = false; });
 
                     var edit;
-                    if (data[opts.selectedValuesProp] !== -1) {
-                        var edit_url = '/' + opts.asHtmlID + '/edit/' + data[opts.selectedValuesProp];
-                        edit = $('<a href="' + edit_url + '" class="as-edit"><img alt="&rarr;" src="/static/icons/iconic/black/edit.png"/></a>');
-                        // TODO: this should also be done in a jQuery dialog.
+                    if (opts.allowEdit) {
+                        if (data[opts.selectedItemProp] !== -1) {
+                            edit = $('<a href="#" class="as-edit"><img alt="&rarr;" src="/static/icons/iconic/black/edit.png"/></a>');
+                            edit.data('id', data[opts.selectedItemProp]);
+                        }
                     }
-
                     var close = $('<a href="#" class="as-close">' +
                                   '    <img alt="&times;"' +
                                   '         src="/static/icons/iconic/black/trash_fill_8x8.png"/>' +
@@ -356,10 +357,10 @@
                         input.focus();
                         return false;
                     });
-                    //if (edit !== undefined)
-                    //    org_li.before(item.html(data[opts.selectedItemProp]).append(close).append(edit));
-                    //else
-                        org_li.before(item.html(data[opts.selectedItemProp]).append(close));
+                    if (edit !== undefined)
+                        org_li.before(item.html('<span class="data">' + data[opts.selectedValuesProp] + '</span>').append(close).append(edit));
+                    else
+                        org_li.before(item.html('<span class="data">' + data[opts.selectedValuesProp] + '</span>').append(close));
                     opts.selectionAdded.call(this, org_li.prev());
                 }
 

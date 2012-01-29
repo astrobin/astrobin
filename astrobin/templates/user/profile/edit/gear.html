@@ -43,16 +43,40 @@
         {% for key, value in prefill_dict.items %}
         $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
             {asHtmlID: '{{key}}',
-            selectedItemProp: 'name',
             searchObjProps: 'name',
             preFill: {{value}},
-            selectedItemProp: 'name',
+            selectedItemProp: 'id',
             selectedValuesProp: 'name',
             startText: startText,
             emptyText: emptyText,
-            resultsTitleText: resultsTitleText});
+            resultsTitleText: resultsTitleText,
+            allowEdit: true});
         {% endfor %}
         {% endautoescape %}
+
+        $('.as-edit').live('click', function() {
+            var id = $(this).data('id');
+            var dlg = $('<div/>').attr('title', '{% trans "Edit gear item" %}');
+
+            dlg.dialog({
+                resizable: true,
+                modal: true,
+                buttons: [
+                    {
+                        text: '{% trans "Save" %}',
+                        click: function() {
+                            $(this).dialog('close');
+                        }
+                    },
+                    {
+                        text: '{% trans "Cancel" %}',
+                        click: function() {
+                            $(this).dialog('close');
+                        }
+                    }
+                ]
+            });
+        });
     });
     </script>
 {% endblock %}
