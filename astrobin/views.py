@@ -1702,6 +1702,7 @@ def user_profile_edit_gear(request):
     response_dict = {
         "form": form,
         'initial': 'initial' in request.GET,
+        'telescope_edit_form': TelescopeEditForm(),
     }
     prefill_dict = {}
     for attr in ["telescopes", "mounts", "cameras", "focal_reducers",

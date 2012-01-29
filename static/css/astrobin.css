@@ -3441,6 +3441,15 @@ div.token-input-dropdown p {
 .ui-dialog .ui-button-text {
   color: #cc4b2e;
 }
+.ui-dialog form label {
+  color: #333333;
+  text-shadow: none;
+  float: none;
+  text-indent: 0;
+}
+.ui-dialog form input {
+  width: 100%;
+}
 form#gear select {
   display: none;
 }
