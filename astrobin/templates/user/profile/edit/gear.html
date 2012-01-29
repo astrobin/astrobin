@@ -57,7 +57,20 @@
         $('.as-edit').live('click', function() {
             var id = $(this).data('id');
             var dlg = $('<div/>').attr('title', '{% trans "Edit gear item" %}');
+            var type = $(this).closest('ul.as-selections').attr('id').replace('as-selections-', '');
 
+            var form_code;
+            switch (type) {
+                case 'telescopes':
+                    form_code = '{{telescope_edit_form|escapejs}}';
+                    break;
+            }
+
+            dlg.append("\
+                <form action=\"#\" method=\"post\">" +
+                    form_code + "\
+                </form>\
+            ");
             dlg.dialog({
                 resizable: true,
                 modal: true,

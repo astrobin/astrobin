@@ -100,7 +100,7 @@ WATERMARK_POSITION_CHOICES = (
 
 class Gear(models.Model):
     name = models.CharField(_("Name"), max_length=64)
-    master = models.ForeignKey('self', null = True)
+    master = models.ForeignKey('self', null = True, editable = False)
 
     def __unicode__(self):
         return self.name

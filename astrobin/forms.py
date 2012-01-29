@@ -505,3 +505,8 @@ class CommentForm(forms.ModelForm):
             })
         }
 
+
+class TelescopeEditForm(forms.ModelForm):
+    class Meta:
+        model = Telescope
+        exclude = ('name')
