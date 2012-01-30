@@ -367,7 +367,11 @@ def image_detail(request, id):
     is_ready = image.is_stored
     if 'r' in request.GET and request.GET.get('r') != '0':
         is_revision = True
-        revision_id = int(request.GET['r'])
+        try:
+            revision_id = int(request.GET['r'])
+        except ValueError:
+            from django.http import Http404
+            raise Http404
         revision_image = get_object_or_404(ImageRevision, id=revision_id)
         is_final = revision_image.is_final
         revisions = revisions.exclude(id=revision_id)
