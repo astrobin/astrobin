@@ -99,6 +99,12 @@ WATERMARK_POSITION_CHOICES = (
 
 
 class Gear(models.Model):
+    brand = models.CharField(
+        verbose_name = _("Brand"),
+        max_length = 128,
+        null = True,
+        blank = False
+    )
     name = models.CharField(_("Name"), max_length=64)
     master = models.ForeignKey('self', null = True, editable = False)
 
