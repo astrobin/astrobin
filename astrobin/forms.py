@@ -507,6 +507,8 @@ class CommentForm(forms.ModelForm):
 
 
 class TelescopeEditForm(forms.ModelForm):
+    error_css_class = 'error'
+
     class Meta:
         model = Telescope
         exclude = ('name')

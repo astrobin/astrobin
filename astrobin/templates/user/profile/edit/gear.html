@@ -64,44 +64,44 @@
                 dataType: 'json',
                 timeout: 5000,
                 success: function(data, textStatus, XMLHttpRequest) {
-                    $dlg.append("\
-                        <form action=\"{% url save_gear_details %}\" method=\"post\">" +
-                            data['form'] + "\
-                            <input type=\"hidden\" name=\"gear_id\" value=\"" + id + "\"/>\
-                        </form>\
-                    ");
+                    var $form;
 
-                    var $form = $dlg.find('form')
                     var ajaxFormOptions = {
                         dataType: 'json',
                         beforeSubmit: function(formData, $form, options) {
+                            $dlg.find('button').addClass('ui-state-disabled');
                         },
                         success: function(responseJson, statusText, xhr, $form) {
-                            $dlg.dialog('close');
+                            if (responseJson['success']) {
+                                $dlg.dialog('close');
+                            } else {
+                                $form = createForm(responseJson, id); 
+                            }
                         },
                         error: function(responseText, statusText, xhr, $form) {
-                            alert("Error");
+                            $dlg.find('button').removeClass('ui-state-disabled');
                         }
                     };
-                    $form.ajaxForm(ajaxFormOptions);
+
+                    var createForm = function(data, id) {
+                        var $form = $dlg.find('form').remove();
+                        $dlg.append("\
+                            <form action=\"{% url save_gear_details %}\" method=\"post\">" +
+                                data['form'] + "\
+                                <input type=\"hidden\" name=\"gear_id\" value=\"" + id + "\"/>\
+                                <input type=\"submit\" class=\"button\" value=\"{% trans "Save" %}\"/>\
+                            </form>\
+                        ");
+                        $form = $dlg.find('form');
+                        $form.ajaxForm(ajaxFormOptions);
+                        return $form;
+                    };
+
+                    $form = createForm(data, id);
 
                     $dlg.dialog({
                         resizable: true,
-                        modal: true,
-                        buttons: [
-                            {
-                                text: '{% trans "Save" %}',
-                                click: function() {
-                                    $form.submit();
-                                }
-                            },
-                            {
-                                text: '{% trans "Cancel" %}',
-                                click: function() {
-                                    $dlg.dialog('close');
-                                }
-                            }
-                        ]
+                        modal: true
                     });
                 },
                 error: function(XmlHttpRequest, textStatus, errorThrown) {

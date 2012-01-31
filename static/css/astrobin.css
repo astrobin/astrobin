@@ -3459,6 +3459,10 @@ div.token-input-dropdown p {
   width: auto;
   margin-left: 0;
 }
+.ui-dialog form .errorlist {
+  margin-left: 0;
+  margin-bottom: 8px;
+}
 form#gear select {
   display: none;
 }
