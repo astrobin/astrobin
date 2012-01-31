@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-21 11:00-0500\n"
-"PO-Revision-Date: 2012-01-22 03:52-0500\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2012-01-29 12:38+0100\n"
+"Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
-"Language: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.1.6\n"
 
 #: forms.py:37
 msgid "If you're hosting a copy of this image on your website, put the address here."
-msgstr "Se una copia di questa immagine si trova sul tuo sito personale, metti qui l'indirizzo."
+msgstr ""
+"Se hai una copia di questa immagine sul tuo sito personale, metti qui "
+"l'indirizzo."
 
 #: forms.py:43
 msgid "If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."
@@ -3809,7 +3810,6 @@ msgstr "Seleziona quali notifiche preferisci ricevere anche come e-mail:"
 
 #, fuzzy
 #~ msgid "Please correct following error."
-
 #~ msgid_plural "Please correct following errors."
 #~ msgstr[0] "Non stai più seguendo"
 #~ msgstr[1] "Non stai più seguendo"
