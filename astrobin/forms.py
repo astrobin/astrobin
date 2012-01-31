@@ -546,3 +546,11 @@ class SoftwareEditForm(forms.ModelForm):
         exclude = ('name')
 
 
+class FilterEditForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Filter
+        exclude = ('name')
+
+

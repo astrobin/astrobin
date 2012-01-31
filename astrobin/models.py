@@ -297,8 +297,42 @@ class Software(Gear):
 
 
 class Filter(Gear):
-    pass
+    FILTER_TYPES = (
+        (0, _("Clear or color")),
 
+        (1, _("Broadband: H-Alpha")),
+        (2, _("Broadband: H-Beta")),
+        (3, _("Broadband: S-II")),
+        (4, _("Broadband: O-III")),
+        (5, _("Broadband: N-II")),
+
+        (6, _("Narrowband: H-Alpha")),
+        (7, _("Narrowband: H-Beta")),
+        (8, _("Narrowband: S-II")),
+        (9, _("Narrowband: O-III")),
+        (10, _("Narrowband: N-II")),
+
+        (11, _("Light pollution suppression")),
+        (12, _("Planetary")),
+        (13, _("Other")),
+    )
+
+    type = models.IntegerField(
+        verbose_name = _("Type"),
+        null = True,
+        blank = False,
+        choices = FILTER_TYPES,
+    )
+
+    bandwidth = models.DecimalField(
+        verbose_name = _("Bandwidth"),
+        help_text = _("(in &mu;m)"),
+        null = True,
+        blank = True,
+        max_digits = 6,
+        decimal_places = 2,
+    )
+  
     class Meta:
         app_label = 'astrobin'
 
