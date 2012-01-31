@@ -160,6 +160,8 @@ def is_gear_complete(id):
     elif gear_type == 'Filter':
         ret = (gear.type != None and
                gear.bandwidth != None)
+    elif gear_type == 'Accessory':
+        ret = True
 
     ret = ret and (gear.make != None)
     return ret
@@ -2656,6 +2658,8 @@ def get_edit_gear_form(request, id):
         form = SoftwareEditForm(instance = gear)
     elif gear_type == 'Filter':
         form = FilterEditForm(instance = gear)
+    elif gear_type == 'Accessory':
+        form = AccessoryEditForm(instance = gear)
 
     response_dict = {
         'form': form.as_p() if form else '',
@@ -2685,6 +2689,8 @@ def save_gear_details(request):
         form = SoftwareEditForm(data = request.POST, instance = gear)
     elif gear_type == 'Filter':
         form = FilterEditForm(data = request.POST, instance = gear)
+    elif gear_type == 'Accessory':
+        form = AccessoryEditForm(data = request.POST, instance = gear)
 
     if not form or not form.is_valid():
         response_dict = {
