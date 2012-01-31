@@ -142,8 +142,11 @@ def is_gear_complete(id):
     
     ret = False
     if gear_type == 'Telescope':
-        ret = (gear.aperture != None and gear.focal_length != None)
+        ret = (gear.aperture != None and
+               gear.focal_length != None and
+               gear.type != None)
 
+    ret = ret and (gear.brand != None)
     return ret
 
 
