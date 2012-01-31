@@ -7,16 +7,15 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-21 11:00-0500\n"
-"PO-Revision-Date: 2012-01-24 01:27-0500\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2012-01-26 19:54+0100\n"
+"Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 2.1.6\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: forms.py:37
@@ -58,7 +57,8 @@ msgstr "Lieux"
 
 #: forms.py:78
 msgid "Please enter either some subjects or a main solar system subject."
-msgstr "S'il vous plaît entrer soit des objets ou un objet du système solaire principale."
+msgstr ""
+"S'il vous plaît, indiquez soit des objets soit un corps du système solaire."
 
 #: forms.py:91
 msgid "Opacity"
@@ -154,7 +154,10 @@ msgstr "Indiquez ici les APN, CCD, Webcam, de capture ou de guidage."
 
 #: forms.py:207
 msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."
-msgstr "Conseil: entrez les filtres séparément. Si vous introduisez p. ex. LRGB en une fois, vous ne pourrez pas introduire des sessions d'acquisition séparées par filtre."
+msgstr ""
+"Conseil: entrez les filtres séparément. Si vous introduisez, par exemple, "
+"les données LRGB en une fois, vous ne pourrez pas ajouter des sessions "
+"d'acquisition séparées par filtre."
 
 #: forms.py:216
 #: models.py:957
@@ -925,7 +928,9 @@ msgstr "SQM moyenne"
 #: templates/user/profile/edit/basic.html:74
 #: templates/user/profile/edit/gear.html:41
 msgid "Click on a suggestion or press TAB to add what you typed"
-msgstr "Cliquez une suggestion ou appuyez sur TAB pour ajouter ce que vous avez saisi:"
+msgstr ""
+"Cliquez sur une suggestion ou appuyez sur TAB pour ajouter ce que vous avez "
+"saisi"
 
 #: views.py:735
 #: views.py:1027
@@ -1004,7 +1009,10 @@ msgstr "Aucun objet spécifié"
 #: views.py:1564
 #: views.py:1576
 msgid "To fill in the missing subjects, use the <strong>Edit basic information</strong> entry in the <strong>Actions</strong> menu for each image."
-msgstr "Pour compléter les sujets manquants, utilisez l'option <strong>Modifier l'information de base</strong> dans le menu <strong>Actions</strong> de chaque image."
+msgstr ""
+"Pour compléter les objets manquants, utilisez l'option <strong>Modifier les "
+"informations de base</strong> dans le menu <strong>Actions</strong> de "
+"chaque image."
 
 #: views.py:1588
 msgid "No acquisition details specified"
@@ -1104,7 +1112,7 @@ msgstr "Ecrivez puis pressez ENTREE"
 
 #: templates/base.html:119
 msgid "Please select your language from the options above."
-msgstr "S'il vous plaît sélectionnez votre langue dans les options ci-dessus."
+msgstr "Sélectionnez s'il vous plaît votre langue dans les options ci-dessus."
 
 #: templates/base.html:133
 #: templates/base.html.py:291
@@ -1265,7 +1273,10 @@ msgstr "Copyright"
 
 #: templates/base.html:315
 msgid "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
-msgstr "AstroBin est protégé par Copyright &copy; 2011 Salvatore Iovene, tous droits réservés. Le copyright des images publiées sur ce site appartient aux auteurs respectifs."
+msgstr ""
+"AstroBin est protégé par Copyright &copy; 2011 Salvatore Iovene, tous droits "
+"réservés. Les images publiées sur ce site sont sous copyright de leurs "
+"auteurs respectifs."
 
 #: templates/base.html:334
 msgid "Follow AstroBin on Twitter"
@@ -1296,7 +1307,10 @@ msgstr "Choisir un fichier"
 
 #: templates/explore_choose.html:9
 msgid "The best way to see what's new on AstroBin: a big wall with 100 images per page, that you can sort and filter to your liking."
-msgstr "La meilleure façon de découvrir les nouveautés sur AstroBin: un grand mur de 100 images par page, que vous pouvez trier comme bon vous semble."
+msgstr ""
+"La meilleure façon de découvrir les nouvelles publications sur AstroBin: un "
+"grand mur de 100 images par page, que vous pouvez classer et filtrer à votre "
+"guise."
 
 #: templates/explore_choose.html:13
 msgid "A list of all images acquired every night."
@@ -1304,7 +1318,9 @@ msgstr "Liste des images acquises chaque nuit."
 
 #: templates/explore_choose.html:17
 msgid "A list of objects from the Messier catalog, each one represented by an AstroBin image chosen by the users via a democratic nomination process."
-msgstr "Liste des objets du catalogue Messier illustrée d'images issues d'AstroBin et choisies démocratiquement par les utilisateurs du site."
+msgstr ""
+"Liste des objets du catalogue Messier, chacun illustré par une image publiée "
+"sur AstroBin et choisie démocratiquement par les utilisateurs du site."
 
 #: templates/faq.html:8
 msgid "Frequently Asked Questions"
@@ -1318,7 +1334,8 @@ msgstr "Ce site est-il gratuit?"
 #: templates/faq.html:11
 #: templates/faq.html.py:30
 msgid "Are there any limits on how large and how many images I can upload?"
-msgstr "Y a-t-il une limite au nombre et à la taille des images que je peux publier?"
+msgstr ""
+"Y a-t-il une limite au nombre et à la taille des images que je peux publier?"
 
 #: templates/faq.html:12
 #: templates/faq.html.py:37
@@ -1402,7 +1419,12 @@ msgstr "La zone publique d'AstroBin est par contre destinée aux images finales.
 #: templates/faq.html:80
 #, python-format
 msgid "Images on the <a href=\"%(messier_url)s\">Messier Marathon page</a> are selected via a democratic nomination process. If you see an image of some Messier Object, and you think that it should appear on the Messier Marathon page, nominate it using the <strong>Actions</strong> menu. The image with the most nominations for a certain Messier object will automatically be featured."
-msgstr "Les images de la page <a href=\"%(messier_url)s\">Marathon Messier</a> sont choisies démocratiquement. Si vous voyez une image d'un objet Messier et que vous pensez qu'elle devrait figurer sur la page du Marathon Messier, pour pouvez la nominer en utilisant le menu <strong>Actions</strong>. L'image d'un objet Messier remportant le plus de suffrages est automatiquement affichée."
+msgstr ""
+"Les images de la page <a href=\"%(messier_url)s\">Marathon Messier</a> sont "
+"choisies démocratiquement. Si vous estimez qu'une image d'un objet Messier "
+"devrait figurer sur la page du Marathon Messier, vous pouvez la nominer en "
+"utilisant le menu <strong>Actions</strong>. L'image d'un objet Messier "
+"remportant le plus de suffrages est ainsi automatiquement affichée."
 
 #: templates/faq.html:87
 msgid "AstroBin was born out of the desire to end something that had been going on for too long: the waste of incredible material to the sea of chaos that the Internet can be. For years, fantastic astrophotographs have beeen uploaded to Internet Forums, often with little or no data, or to general purpose image hosting websites, invariably with no data attached."
@@ -1502,7 +1524,10 @@ msgstr "Protection antivol par filigrane."
 
 #: templates/help.html:50
 msgid "<em>AstroBin</em>'s upload wizard will offer you to watermark your image with the text of your choosing. All it takes is a click!"
-msgstr "L'assistant de chargement d'<em>AstroBin</em> vous proposera d'insérer un filigrane sur votre image avec le texte de votre choix, en un seul clic!"
+msgstr ""
+"L'assistant de publication d'<em>AstroBin</em> vous proposera d'insérer un "
+"filigrane sur votre image avec le texte de votre choix, et ce, en un seul "
+"clic!"
 
 #: templates/help.html:54
 msgid "AstroBin supports multiple image revisions"
@@ -1606,12 +1631,18 @@ msgstr "Marathon Messier"
 
 #: templates/messier_marathon.html:10
 msgid "This is a list of Messier objects featuring images on AstroBin. You can nominate any image (as long as it contains a Messier object), by opening the <strong>Actions</strong> menu and selecting <strong>Nominate for the Messier Marathon</strong>."
-msgstr "Voici une liste d'objets Messier illustrée par des images d'AstroBin. Vous pouvez nominer une image montrant un objet Messier en ouvrant le menu <strong>Actions</strong> et en sélectionnant <strong>Nominer pour le Marathon Messier</strong>."
+msgstr ""
+"Voici une liste d'objets Messier, chacun illustré par une image d'AstroBin. "
+"Vous pouvez nominer une image contenant un objet Messier en ouvrant le menu "
+"<strong>Actions</strong> et en sélectionnant <strong>Nominer pour le "
+"Marathon Messier</strong>."
 
 #: templates/messier_marathon.html:14
 #, python-format
 msgid "What about <a href=\"%(search_url)s\">doing a search</a> and nominating some images now?"
-msgstr "Alors, pourquoi pas <a href=\"%(search_url)s\">lancer une recherche</a> et nominer une image maintenant?"
+msgstr ""
+"Alors, pourquoi ne pas <a href=\"%(search_url)s\">lancer une recherche</a> et "
+"nominer une image dès à présent?"
 
 #: templates/messier_nomination.html:17
 #: templates/image/detail.html:117
@@ -1621,12 +1652,19 @@ msgstr "Nominer pour le Marathon Messier"
 #: templates/messier_nomination.html:21
 #, python-format
 msgid "You will nominate this image for the <a href=\"%(the_url)s\" target=\"_blank\">Messier Marathon</a>. The Messier Marathon is a list of the Messier objects that features AstroBin images nominated by the users. For each Messier object, the AstroBin image with the most nomination is chosen."
-msgstr "Nominer cette image pour le <a href=\"%(the_url)s\" target=\"_blank\">Marathon Messier</a>. Le Marathon Messier est une liste d'objets Messier illustrée par des images provenant d'AstroBin et nominées par les utilisateurs. Pour chaque objet Messier, l'image AstroBin avec le plus de nominations est affichée."
+msgstr ""
+"Vous désirez nominer cette image pour le <a href=\"%(the_url)s\" "
+"target=\"_blank\">Marathon Messier</a>. Le Marathon Messier est une liste "
+"d'objets Messier illustrée par des images provenant d'AstroBin et nominées "
+"par les utilisateurs. Pour chaque objet Messier, l'image AstroBin ayant le "
+"plus de nominations est affichée."
 
 #: templates/messier_nomination.html:24
 #, python-format
 msgid "Press <em>Continue</em> to nominate this image for <strong>M %(messier_object)s</strong>."
-msgstr "Appuyez sur <em>Continuer</em> pour nominer cette image pour <strong>M %(messier_object)s</strong>. "
+msgstr ""
+"Appuyez sur <em>Continuer</em> afin de nominer cette image pour <strong>M %"
+"(messier_object)s</strong>."
 
 #: templates/messier_nomination.html:30
 msgid "Sorry, but it doesn't look like this image contains a Messier object. If you think this is a mistake, please contact the author of the image and ask them to add the correct Messier object as a subject."
@@ -1665,7 +1703,7 @@ msgstr "Continuer"
 
 #: templates/messier_nomination_finish.html:18
 msgid "You have already nominated this image"
-msgstr "Vous avez déjà nominé cette page."
+msgstr "Vous avez déjà nominé cette image"
 
 #: templates/messier_nomination_finish.html:19
 msgid "You can't nominate the same image more than once."
@@ -1681,7 +1719,7 @@ msgstr "La nomination a été enregistrée, merci!"
 
 #: templates/messier_nomination_finish.html:28
 msgid "Visit the Messier Marathon"
-msgstr "Visitez le Marathon Messier"
+msgstr "Visiter le Marathon Messier"
 
 #: templates/nightly.html:8
 msgid "Images acquired night after night"
@@ -1734,7 +1772,10 @@ msgstr "Préférences"
 #: templates/stats.html:10
 #, python-format
 msgid "<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</strong> images, reaching <strong>%(total_integration)s</strong> hours of integration time."
-msgstr "<strong>%(total_users)s</strong> utilisateurs ont chargé <strong>%(total_images)s</strong> images, pour un total de <strong>%(total_integration)s</strong> d'heures de pose."
+msgstr ""
+"<strong>%(total_users)s</strong> utilisateurs ont publié <strong>%"
+"(total_images)s</strong> images, pour un total de <strong>%"
+"(total_integration)s</strong> d'heures de pose."
 
 #: templates/stats.html:15
 msgid "Total integration hours in the last 30 days"
@@ -1940,7 +1981,7 @@ msgstr "Modifier les informations de base"
 
 #: templates/image/detail.html:46
 msgid "Edit gear used"
-msgstr "Modifier le matériel utilisé"
+msgstr "Modifier le matériel d'acquisition"
 
 #: templates/image/detail.html:49
 msgid "Edit acquisition details"
@@ -2257,7 +2298,7 @@ msgstr "Correct"
 
 #: templates/image/detail.html:670
 msgid "Good"
-msgstr "Bon"
+msgstr "Bien"
 
 #: templates/image/detail.html:671
 msgid "Gorgeous"
@@ -2338,7 +2379,9 @@ msgstr "Cette image a été recommandée aux utilisateurs sélectionnés."
 #: templates/image/actions/request_additional_information.html:20
 #, python-format
 msgid "You will notify <strong>%(username)s</strong> that you would like them to feed more information in the technical card for this image. Continue?"
-msgstr "Vous voulez avertir %(username)s que cette photo manque d'informations techniques. Continuer?"
+msgstr ""
+"Vous voulez informer %(username)s que cette image nécessiterait davantage "
+"d'informations techniques. Continuer?"
 
 #: templates/image/actions/request_additional_information_complete.html:18
 msgid "Additional information requested"
@@ -2347,12 +2390,19 @@ msgstr "Informations supplémentaires requises"
 #: templates/image/actions/request_additional_information_complete.html:21
 #, python-format
 msgid "<strong>%(username)s</strong> has been notified. Hopefully they will update the image soon. Remember that you can also <a href=\"%(message_url)s\">send them a message</a>. "
-msgstr "<strong>%(username)s</strong> a été notifié. L'image devrait être mise à jour prochainement. N'oubliez pas que vous pouvez aussi <a href=\"%(message_url)s\">envoyer un message</a>."
+msgstr ""
+"<strong>%(username)s</strong> a été prévenu. L'image sera peut-être mise à "
+"jour prochainement. N'oubliez pas que vous pouvez aussi <a href=\"%"
+"(message_url)s\">envoyer un message</a>."
 
 #: templates/image/actions/request_fits.html:20
 #, python-format
 msgid "You will notify %(username)s that you would like to see the TIFF or FITS file. AstroBin doesn't currently offer to host such large files, so hopefully %(username)s will contact you about how to handle the transaction. Continue?"
-msgstr "Vous voulez avertir %(username)s que vous désirez examiner les fichiers TIFF ou FITS de l'image. AstroBin ne pouvant héberger des fichiers si lourds, %(username)s vous contactera peut-être pour effectuer la transaction par un autre moyen. Continuer?"
+msgstr ""
+"Vous voulez informer %(username)s que vous désirez examiner les fichiers "
+"TIFF ou FITS de l'image. AstroBin ne pouvant héberger des fichiers si "
+"lourds, %(username)s vous contactera peut-être pour effectuer la transaction "
+"d'une autre manière. Continuer?"
 
 #: templates/image/actions/request_fits_complete.html:18
 msgid "TIFF/FITS requested"
@@ -2361,7 +2411,11 @@ msgstr "TIFF/FITS requis"
 #: templates/image/actions/request_fits_complete.html:21
 #, python-format
 msgid "<strong>%(username)s</strong> has been notified. Hopefully they will get in touch with you and send you the TIFF/FITS files. AstroBin doesn't currently offer to host these files, unfortunately."
-msgstr "<strong>%(username)s</strong> a été notifié. Vous devriez recevoir l'image TIFF/FITS prochainement. Malheureusement, AstroBin ne propose pas encore l'hébergement de ce type de fichiers."
+msgstr ""
+"<strong>%(username)s</strong> a été prévenu. Peut-être vous contactera-t-il "
+"prochainement pour vous transmettre les fichiers TIFF/FITS... "
+"Malheureusement, AstroBin ne propose pas encore l'hébergement de ce type de "
+"fichiers."
 
 #: templates/image/edit/acquisition.html:16
 msgid "Edit your image: acquisition details"
@@ -2415,7 +2469,7 @@ msgstr "Session d'acquisition"
 
 #: templates/image/edit/acquisition.html:52
 msgid "(scroll down for more)"
-msgstr "(faire défiler pour davantage)"
+msgstr "(faire défiler)"
 
 #: templates/image/edit/acquisition.html:64
 #: templates/image/edit/acquisition.html:70
@@ -2474,7 +2528,9 @@ msgstr "Vous ne voyez rien ici? Peut-être devriez-vous d'abord ajouter du maté
 
 #: templates/image/edit/gear.html:31
 msgid "To choose the gear used for this image, drag items from the left side to right side, or click the plus sign."
-msgstr "Pour choisir le matériel utilisé pour cette image, glissez-le depuis la partie gauche vers la partie droite, ou cliquez le signe 'plus'."
+msgstr ""
+"Pour choisir le matériel utilisé pour cette image, glissez-le depuis la "
+"partie gauche vers la partie droite, ou cliquez sur le signe 'plus'."
 
 #: templates/image/edit/gear.html:52
 msgid "Next step: acquisition"
@@ -2824,14 +2880,15 @@ msgid ""
 "\n"
 "Thank you!"
 msgstr ""
-"Vous avez  %(number)s images avec trop peu de données.\n"
+"Vous avez %(number)s images ayant trop peu de données.\n"
 "\n"
-"AstroBin a besoin des données pour servir la communauté.\n"
-"Merci de remplir les données de vos images à l'adresse suivante:\n"
+"AstroBin se base sur ces données afin de proposer un outil fonctionnel à la "
+"communauté.\n"
+"Merci de renseigner les données de vos images à l'adresse suivante:\n"
 "\n"
 "%(url)s\n"
 "\n"
-"Merci! "
+"Encore merci!"
 
 #: templates/notification/lacking_data_reminder/notice.html:2
 #: templates/notification/lacking_data_reminder/short.html:2
@@ -2842,7 +2899,7 @@ msgstr "<a href=\"%(url)s\">Vous avez <strong>%(number)s</strong> images avec de
 #: templates/notification/lacking_data_reminder/short.txt:2
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
-msgstr "Vous avez  %(number)s images avec trop peu de données!"
+msgstr "Vous avez %(number)s images avec trop peu de données!"
 
 #: templates/notification/messier_nomination/full.txt:2
 #, python-format
@@ -2855,19 +2912,25 @@ msgid ""
 "\n"
 "You can find the Messier Marathon here: http://astrobin.com/explore/messier/"
 msgstr ""
-"%(user)s a nominé votre image de %(messier_object)s pour le Marathon Messier. Félicitations!\n"
+"%(user)s a nominé votre image de %(messier_object)s pour le Marathon "
+"Messier. Félicitations!\n"
 "\n"
-"Voici votre image nominée:  http://astrobin.com%(image_url)s\n"
+"Voici votre image nominée: http://astrobin.com%(image_url)s\n"
 "\n"
-"Le Marathon Messier est une liste d'objets Messier illustrée par des images d'AstroBin nominées par les utilisateurs.\n"
+"Le Marathon Messier est une liste d'objets Messier illustrée par des images "
+"d'AstroBin, chacune nominée par les utilisateurs.\n"
 "\n"
-"Vous pouvez trouver le Marathon Messier ici: http://astrobin.com/explore/messier/"
+"Vous pouvez visiter le Marathon Messier ici: "
+"http://astrobin.com/explore/messier/"
 
 #: templates/notification/messier_nomination/notice.html:2
 #: templates/notification/messier_nomination/short.html:2
 #, python-format
 msgid "<a href=\"%(image_url)s\"><strong>%(user)s</strong> has nominated your image of <strong>%(messier_object)s</strong> for the Messier Marathon. Congratulations!</a>"
-msgstr "<a href=\"%(image_url)s\"><strong>%(user)s</strong> a nominé votre image de  <strong>%(messier_object)s</strong> pour le Marathon Messier. Félicitations!</a>"
+msgstr ""
+"<a href=\"%(image_url)s\"><strong>%(user)s</strong> a nominé votre image de "
+"<strong>%(messier_object)s</strong> pour le Marathon Messier. "
+"Félicitations!</a>"
 
 #: templates/notification/messier_nomination/short.txt:2
 #, python-format
@@ -2886,14 +2949,17 @@ msgid ""
 "\n"
 "You can find the Messier Marathon here: http://astrobin.com/explore/messier/"
 msgstr ""
-"Votre image du %(messier_object)s est affichée dans le Marathon Messier. Félicitations!\n"
+"Votre image de %(messier_object)s est à présent affichée dans le Marathon "
+"Messier. Félicitations!\n"
 "\n"
-"Voici votre image qui a été nominée: http://astrobin.com%(image_url)s\n"
+"Voici votre image qui a été sélectionnée: http://astrobin.com%(image_url)s\n"
 "\n"
-"Le Marathon Messier est une liste d'objets Messier illustrée par des images d'AstroBin nominées par les utilisateurs..\n"
+"Le Marathon Messier est une liste d'objets Messier illustrée par des images "
+"d'AstroBin, chacune nominée par les utilisateurs..\n"
 "Votre image est désormais la plus nominée pour l'objet %(messier_object)s.\n"
 "\n"
-"Vous pouvez trouver le Marathon Messier ici: http://astrobin.com/explore/messier/"
+"Vous pouvez visiter le Marathon Messier ici: "
+"http://astrobin.com/explore/messier/"
 
 #: templates/notification/messier_top_nomination/notice.html:2
 #: templates/notification/messier_top_nomination/short.html:2
@@ -3256,7 +3322,10 @@ msgstr "Données manquantes"
 
 #: templates/user/profile.html:112
 msgid "These are your \"work in progress\" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu."
-msgstr "Voici vos images  \"travail en cours\": vous seul pouvez voir cette liste. Vous pouvez poster chaque image ailleurs sur Internet en utilisant le menu <em>Partager</em>."
+msgstr ""
+"Voici vos images \"travail en cours\": vous seul pouvez voir cette liste. Vous "
+"pouvez poster chaque image ailleurs sur Internet en utilisant le menu "
+"<em>Partager</em>."
 
 #: templates/user/profile.html:120
 msgid "These images don't have enough data. It's a shame..."
