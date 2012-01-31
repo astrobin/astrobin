@@ -2639,7 +2639,12 @@ def save_gear_details(request):
         form = TelescopeEditForm(data = request.POST, instance = gear)
 
     if not form or not form.is_valid():
-        return ajax_fail()
+        response_dict = {
+            'form': form.as_p() if form else '',
+        }
+        return HttpResponse(
+            simplejson.dumps(response_dict),
+            mimetype = 'application/javascript')
 
     form.save()
     return ajax_success()
