@@ -167,4 +167,7 @@ urlpatterns = patterns('',
     url(r'^image_comments/delete/(?P<id>\d+)/$', views.image_comment_delete, name='image_comment_delete'),
     url(r'^image_comments/get/(?P<id>\d+)/$', views.image_comment_get, name='image_comment_get'),
     url(r'^image_comments/edit/$', views.image_comment_edit, name='image_comment_edit'),
+
+    url(r'^get_edit_gear_form/(?P<id>\d+)/$', views.get_edit_gear_form, name='get_edit_gear_form'),
+    url(r'^save_gear_details/$', views.save_gear_details, name='save_gear_details'),
 )
