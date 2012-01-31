@@ -345,7 +345,7 @@
                     };
 
                     var edit;
-                    if (opts.allowEdit) {
+                    if (opts.allowEdit && !isNaN(hidden_value)) {
                         if (data[opts.selectedItemProp] !== -1) {
                             edit = $('<a href="#" class="as-edit"><img alt="&rarr;" src="/static/icons/iconic/black/edit.png"/></a>');
                             edit.data('id', data[opts.selectedItemProp]);
