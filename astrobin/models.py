@@ -150,17 +150,55 @@ class GearNeverMerge(models.Model):
 
 
 class Telescope(Gear):
-    aperture = models.IntegerField(
+    TELESCOPE_TYPES = (
+        (0, _("Refractor: achromatic")),
+        (1, _("Refractor: semi-apochromatic")),
+        (2, _("Refractor: apochromatic")),
+        (3, _("Refractor: non-achromatic Galilean")),
+        (4, _("Refractor: non-achromatic Keplerian")),
+        (5, _("Refractor: superachromat")),
+
+        (6, _("Reflector: Dall-Kirkham")),
+        (7, _("Reflector: Nasmyth")),
+        (8, _("Reflector: Ritchey Chretien")),
+        (9, _("Reflector: Gregorian")),
+        (10, _("Reflector: Herschellian")),
+        (11, _("Reflector: Newtornian")),
+
+        (12, _("Catadioptric: Argunov-Cassegrain")),
+        (13, _("Catadioptric: Klevtsov-Cassegrain")),
+        (14, _("Catadioptric: Lurie-Houghton")),
+        (15, _("Catadioptric: Maksutov")),
+        (16, _("Catadioptric: Maksutov-Cassegrain")),
+        (17, _("Catadioptric: modified Dall-Kirkham")),
+        (18, _("Catadioptric: Schmidt camera")),
+        (19, _("Catadioptric: Schmidt-Cassegrain")),
+        (20, _("Catadioptric: ACF Schmidt-Cassegrain")),
+    )
+
+    aperture = models.DecimalField(
         verbose_name = _("Aperture"),
         help_text = _("(in mm)"),
         null = True,
-        blank = True
+        blank = False,
+        max_digits = 8,
+        decimal_places = 2,
+
     )
-    focal_length = models.IntegerField(
+    focal_length = models.DecimalField(
         verbose_name = _("Focal length"),
         help_text = _("(in mm)"),
         null = True,
-        blank = True
+        blank = False,
+        max_digits = 8,
+        decimal_places = 2,
+    )
+
+    type = models.IntegerField(
+        verbose_name = _("Type"),
+        null = True,
+        blank = False,
+        choices = TELESCOPE_TYPES,
     )
 
     class Meta:
