@@ -554,3 +554,11 @@ class FilterEditForm(forms.ModelForm):
         exclude = ('name')
 
 
+class AccessoryEditForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Accessory
+        exclude = ('name')
+
+
