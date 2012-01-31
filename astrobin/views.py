@@ -114,9 +114,42 @@ def get_or_create_location(prop, value):
     return k
 
 
+def get_correct_gear(id):
+    types = (
+        Telescope,
+        Mount,
+        Camera,
+        FocalReducer,
+        Software,
+        Filter,
+        Accessory,
+    )
+    gear = None
+    gear_type = None
+    for type in types:
+        try:
+            gear = type.objects.get(id = id)
+            gear_type = gear.__class__.__name__
+            return (gear, gear_type)
+        except type.DoesNotExist:
+            continue
+
+    return (None, None)
+
+
+def is_gear_complete(id):
+    gear, gear_type = get_correct_gear(id)
+    
+    ret = False
+    if gear_type == 'Telescope':
+        ret = (gear.aperture != None and gear.focal_length != None)
+
+    return ret
+
+
 def jsonDump(all):
     if len(all) > 0:
-        return simplejson.dumps([{'id': i.id, 'name': i.name} for i in all])
+        return simplejson.dumps([{'id': i.id, 'name': i.name, 'complete': is_gear_complete(i.id)} for i in all])
     else:
         return []
 
@@ -2585,29 +2618,6 @@ def image_comment_edit(request):
     return ajax_fail()
 
 
-def get_correct_gear(id):
-    types = (
-        Telescope,
-        Mount,
-        Camera,
-        FocalReducer,
-        Software,
-        Filter,
-        Accessory,
-    )
-    gear = None
-    gear_type = None
-    for type in types:
-        try:
-            gear = type.objects.get(id = id)
-            gear_type = gear.__class__.__name__
-            return (gear, gear_type)
-        except type.DoesNotExist:
-            continue
-
-    retirn (None, None)
-
-
 @require_GET
 @login_required
 def get_edit_gear_form(request, id):
@@ -2648,4 +2658,12 @@ def save_gear_details(request):
 
     form.save()
     return ajax_success()
+
+
+@require_GET
+@login_required
+def get_is_gear_complete(request, id):
+    return HttpResponse(
+        simplejson.dumps({'complete': is_gear_complete(id)}),
+        mimetype = 'application/javascript')
 

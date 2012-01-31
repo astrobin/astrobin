@@ -170,4 +170,5 @@ urlpatterns = patterns('',
 
     url(r'^get_edit_gear_form/(?P<id>\d+)/$', views.get_edit_gear_form, name='get_edit_gear_form'),
     url(r'^save_gear_details/$', views.save_gear_details, name='save_gear_details'),
+    url(r'^get_is_gear_complete/(?P<id>\d+)/$', views.get_is_gear_complete, name='get_is_gear_complete'),
 )
