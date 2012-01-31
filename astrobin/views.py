@@ -149,7 +149,7 @@ def is_gear_complete(id):
         ret = (gear.max_payload != None and
                gear.pe != None)
 
-    ret = ret and (gear.brand != None)
+    ret = ret and (gear.make != None)
     return ret
 
 
