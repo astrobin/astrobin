@@ -103,7 +103,7 @@ class Gear(models.Model):
         verbose_name = _("Make"),
         max_length = 128,
         null = True,
-        blank = False
+        blank = True,
     )
     name = models.CharField(_("Name"), max_length=64)
     master = models.ForeignKey('self', null = True, editable = False)
@@ -229,21 +229,68 @@ class Mount(Gear):
 
 
 class Camera(Gear):
-    pass
+    CAMERA_TYPES = (
+        (0, ("CCD")),
+        (1, ("DSLR")),
+        (2, ("Guider/Planetary")),
+        (3, ("Film")),
+    )
+
+    pixel_size = models.DecimalField(
+        verbose_name = _("Pixel size"),
+        help_text = _("(in &mu;m)"),
+        null = True,
+        blank = True,
+        max_digits = 6,
+        decimal_places = 2,
+    )
+
+    sensor_width = models.DecimalField(
+        verbose_name = _("Sensor width"),
+        help_text = _("(in mm)"),
+        null = True,
+        blank = True,
+        max_digits = 6,
+        decimal_places = 2,
+    )
+
+    sensor_height = models.DecimalField(
+        verbose_name = _("Sensor height"),
+        help_text = _("(in mm)"),
+        null = True,
+        blank = True,
+        max_digits = 6,
+        decimal_places = 2,
+    )
+
+    type = models.IntegerField(
+        verbose_name = _("Type"),
+        null = True,
+        blank = False,
+        choices = CAMERA_TYPES,
+    )
 
     class Meta:
         app_label = 'astrobin'
 
 
 class FocalReducer(Gear):
-    ratio = models.DecimalField(_("Ratio"), max_digits=3, decimal_places=2, null=True, blank=True)
-
     class Meta:
         app_label = 'astrobin'
 
 
 class Software(Gear):
-    pass
+    SOFTWARE_TYPES = (
+        (0, _("Open source or freeware")),
+        (1, _("Paid")),
+    )
+
+    type = models.IntegerField(
+        verbose_name = _("Type"),
+        null = True,
+        blank = False,
+        choices = SOFTWARE_TYPES,
+    )
 
     class Meta:
         app_label = 'astrobin'

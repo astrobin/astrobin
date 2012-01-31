@@ -521,3 +521,28 @@ class MountEditForm(forms.ModelForm):
         model = Mount
         exclude = ('name')
 
+
+class CameraEditForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Camera
+        exclude = ('name')
+
+
+class FocalReducerEditForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = FocalReducer
+        exclude = ('name')
+
+
+class SoftwareEditForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Software
+        exclude = ('name')
+
+

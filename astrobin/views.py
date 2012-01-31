@@ -148,6 +148,15 @@ def is_gear_complete(id):
     elif gear_type == 'Mount':
         ret = (gear.max_payload != None and
                gear.pe != None)
+    elif gear_type == 'Camera':
+        ret = (gear.pixel_size != None and
+               gear.sensor_width != None and
+               gear.sendor_height != None and
+               gear.type != None)
+    elif gear_type == 'FocalReducer':
+        ret = True
+    elif gear_type == 'Software':
+        ret = (gear.type != None)
 
     ret = ret and (gear.make != None)
     return ret
@@ -2636,6 +2645,12 @@ def get_edit_gear_form(request, id):
         form = TelescopeEditForm(instance = gear)
     elif gear_type == 'Mount':
         form = MountEditForm(instance = gear)
+    elif gear_type == 'Camera':
+        form = CameraEditForm(instance = gear)
+    elif gear_type == 'FocalReducer':
+        form = FocalReducerEditForm(instance = gear)
+    elif gear_type == 'Software':
+        form = SoftwareEditForm(instance = gear)
 
     response_dict = {
         'form': form.as_p() if form else '',
@@ -2657,6 +2672,12 @@ def save_gear_details(request):
         form = TelescopeEditForm(data = request.POST, instance = gear)
     elif gear_type == 'Mount':
         form = MountEditForm(data = request.POST, instance = gear)
+    elif gear_type == 'Camera':
+        form = CameraEditForm(data = request.POST, instance = gear)
+    elif gear_type == 'FocalReducer':
+        form = FocalReducerEditForm(data = request.POST, instance = gear)
+    elif gear_type == 'Software':
+        form = SoftwareEditForm(data = request.POST, instance = gear)
 
     if not form or not form.is_valid():
         response_dict = {
