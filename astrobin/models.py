@@ -480,6 +480,11 @@ class Image(models.Model):
         help_text = _("HTML tags are allowed."),
     )
 
+    allow_rating = models.BooleanField(
+        verbose_name = _("Allow rating"),
+        default = True,
+    )
+
     link = models.CharField(
         max_length = 256,
         null = True,
