@@ -54,7 +54,8 @@
 
         $('.as-edit').live('click', function() {
             var id = $(this).data('id');
-            var $dlg = $('<div/>').attr('title', '{% trans "Edit gear item" %}');
+            var name = $(this).siblings('.data').text();
+            var $dlg = $('<div/>').attr('title', name);
             var type = $(this).closest('ul.as-selections').attr('id').replace('as-selections-', '');
             var $item_li = $(this).closest('li.as-selection-item');
 
