@@ -49,8 +49,6 @@
                     <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
                 {% else %}
                     <li><input class="button submit-button" type="submit" name="submit_next" value="{% trans "Next step: acquisition" %} &rarr;" /></li>
-                    <li>{% trans "or" %}</li>
-                    <li><input class="button submit-button inline-button" type="submit" name="submit_finish" value="{% trans "Save and finish" %} &rarr;" /></li>
                     <li><input type="hidden" name="was_not_ready" value="true"/></li>
                 {% endif %}
             </ul>

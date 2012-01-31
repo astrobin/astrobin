@@ -14,7 +14,7 @@
         {% if image.is_stored %}
             {% blocktrans %}Edit your image: basic information{% endblocktrans %}
         {% else %}
-            {% blocktrans %}Step 2 of 5: basic information{% endblocktrans %}
+            {% blocktrans %}Step 3 of 5: basic information{% endblocktrans %}
         {% endif %}
     </h1>
     {% form_saved request %}
@@ -69,9 +69,7 @@
             <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
             <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
             {% else %}
-            <li><input class="button submit-button" type="submit" name="submit_next" value="{% trans "Next step: watermark" %} &rarr;" /></li>
-            <li>{% trans "or" %}</li>
-            <li><input class="button submit-button inline-button" type="submit" name="submit_finish" value="{% trans "Save and finish" %} &rarr;" /></li>
+            <li><input class="button submit-button" type="submit" name="submit_next" value="{% trans "Next step: gear used" %} &rarr;" /></li>
             <li><input type="hidden" name="was_not_ready" value="true"/></li>
             {% endif %}
         </ul>

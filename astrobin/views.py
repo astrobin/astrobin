@@ -1003,7 +1003,7 @@ def image_edit_save_presolve(request):
         else:
             return HttpResponseRedirect('/%s/' % image_id);
 
-    return HttpResponseRedirect('/edit/basic/%s/' % image_id)
+    return HttpResponseRedirect('/edit/watermark/%s/' % image_id)
 
 
 @login_required
@@ -1092,7 +1092,7 @@ def image_edit_save_basic(request):
 
     if 'was_not_ready' in request.POST:
         if 'submit_next' in request.POST:
-            return HttpResponseRedirect('/edit/watermark/%i/' % image.id)
+            return HttpResponseRedirect('/edit/gear/%i/' % image.id)
 
         image.process(image.presolve_information > 1)
         return HttpResponseRedirect(image.get_absolute_url())
@@ -1129,7 +1129,7 @@ def image_edit_save_watermark(request):
     profile.save()
 
     if 'submit_next' in request.POST:
-        return HttpResponseRedirect('/edit/gear/%i/' % image.id)
+        return HttpResponseRedirect('/edit/basic/%i/' % image.id)
 
     image.process(image.presolve_information > 1)
     return HttpResponseRedirect(image.get_absolute_url())
