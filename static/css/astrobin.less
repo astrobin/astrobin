@@ -1407,7 +1407,7 @@ ul.as-selections {
         padding: @spacer-small @spacer-medium;
         .rounded-corners;
         .box-shadow-subtle;
-        text-shadow: @strong-text-color 0 -1px 1px;
+        text-shadow: @strong-text-color 0 1px 1px;
         .data {
             margin-right: @spacer-small;
         }
@@ -1421,6 +1421,14 @@ ul.as-selections {
         }
         a.as-close:hover, a.as-edit:hover {
             background-color: @text-color;
+        }
+    }
+    li.as-selection-item.need-data {
+        .button-gradient;
+        text-shadow: @background-color 0 -1px 1px;
+
+        a.as-close:hover, a.as-edit:hover {
+            background-color: @button-gradient-top-color;
         }
     }
     li.as-original {

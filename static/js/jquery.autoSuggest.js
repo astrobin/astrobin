@@ -30,6 +30,7 @@
             limitText: "No More Selections Are Allowed",
             selectedItemProp: "value", //name of object property
             selectedValuesProp: "value", //name of object property
+            completeProp: "complete",
             searchObjProps: "value", //comma separated list of object property names
             queryParam: "q",
             retrieveLimit: false, //number for 'limit' param on ajax request
@@ -338,6 +339,10 @@
                             selections_holder.children().removeClass("selected");
                             $(this).addClass("selected");
                         }).mousedown(function(){ input_focus = false; });
+
+                    if (data[opts.completeProp] == false) {
+                        item.addClass('need-data');
+                    };
 
                     var edit;
                     if (opts.allowEdit) {

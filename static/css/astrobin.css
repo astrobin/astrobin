@@ -1325,7 +1325,7 @@ ul.as-selections li.as-selection-item {
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  text-shadow: #fcfcfc 0 -1px 1px;
+  text-shadow: #fcfcfc 0 1px 1px;
 }
 ul.as-selections li.as-selection-item .data {
   margin-right: 4px;
@@ -1342,6 +1342,18 @@ ul.as-selections li.as-selection-item a.as-close {
 }
 ul.as-selections li.as-selection-item a.as-close:hover, ul.as-selections li.as-selection-item a.as-edit:hover {
   background-color: #b8b8b8;
+}
+ul.as-selections li.as-selection-item.need-data {
+  border: 1px solid #cc4b2e;
+  border-top: 1px solid #ff5e3a;
+  background: #cc4b2e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e45434), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #e45434, #cc4b2e);
+  color: #fcfcfc;
+  text-shadow: #333333 0 -1px 1px;
+}
+ul.as-selections li.as-selection-item.need-data a.as-close:hover, ul.as-selections li.as-selection-item.need-data a.as-edit:hover {
+  background-color: #e45434;
 }
 ul.as-selections li.as-original {
   margin-left: 0;
