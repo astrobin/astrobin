@@ -52,7 +52,9 @@
         {% endfor %}
         {% endautoescape %}
 
-        $('.as-edit').live('click', function() {
+        $('.as-edit').live('click', function(event) {
+            event.preventDefault();
+
             var id = $(this).data('id');
             var name = $(this).siblings('.data').text();
             var $dlg = $('<div/>').attr('title', name);
