@@ -547,7 +547,7 @@ def image_detail(request, id):
             (_('Flats'), ('\n' if len(dsa_data['flats']) > 1 else '') + u'\n'.join([smart_unicode(x) for x in dsa_data['flats']])),
             (_('Flat darks'), ('\n' if len(dsa_data['flat_darks']) > 1 else '') + u'\n'.join([smart_unicode(x) for x in dsa_data['flat_darks']])),
             (_('Bias'), ('\n' if len(dsa_data['bias']) > 1 else '') + u'\n'.join([smart_unicode(x) for x in dsa_data['bias']])),
-            (_('Avg. Moon age'), "%.2f" % (average(moon_age_list), ) if moon_age_list else None),
+            (_('Avg. Moon age'), ("%.2f " % (average(moon_age_list), ) + _("days")) if moon_age_list else None),
             (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list), ) if moon_illuminated_list else None),
             (_('Bortle Dark-Sky Scale'), "%.2f" % (average([float(x) for x in dsa_data['bortle']])) if dsa_data['bortle'] else None),
             (_('Mean SQM'), "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None),
