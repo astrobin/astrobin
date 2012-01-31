@@ -387,6 +387,24 @@ def messier_nomination_process(request):
 
 
 @require_GET
+def fits(request):
+    qs = Image.objects.exclude(Q(link_to_fits = None) | Q(link_to_fits = ''))
+
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+    }
+
+    return object_list(
+        request, 
+        queryset=qs,
+        template_name='fits.html',
+        template_object_name='image',
+        paginate_by = 20,
+        extra_context = response_dict)
+
+
+@require_GET
 def no_javascript(request):
     return render_to_response('no_javascript.html',
         context_instance=RequestContext(request))
