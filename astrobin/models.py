@@ -183,8 +183,8 @@ class Telescope(Gear):
         blank = False,
         max_digits = 8,
         decimal_places = 2,
-
     )
+
     focal_length = models.DecimalField(
         verbose_name = _("Focal length"),
         help_text = _("(in mm)"),
@@ -206,7 +206,23 @@ class Telescope(Gear):
 
 
 class Mount(Gear):
-    pass
+    max_payload = models.DecimalField(
+        verbose_name = _("Max. payload"),
+        help_text = _("(in kg)"),
+        null = True,
+        blank = False,
+        max_digits = 6,
+        decimal_places = 2,
+    )
+
+    pe = models.DecimalField(
+        verbose_name = _("Periodic error"),
+        help_text = _("(peak to peak, in arcseconds)"),
+        null = True,
+        blank = True,
+        max_digits = 6,
+        decimal_places = 2,
+    )
 
     class Meta:
         app_label = 'astrobin'

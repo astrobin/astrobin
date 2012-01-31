@@ -512,3 +512,12 @@ class TelescopeEditForm(forms.ModelForm):
     class Meta:
         model = Telescope
         exclude = ('name')
+
+
+class MountEditForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Mount
+        exclude = ('name')
+

@@ -145,6 +145,9 @@ def is_gear_complete(id):
         ret = (gear.aperture != None and
                gear.focal_length != None and
                gear.type != None)
+    elif gear_type == 'Mount':
+        ret = (gear.max_payload != None and
+               gear.pe != None)
 
     ret = ret and (gear.brand != None)
     return ret
@@ -2631,6 +2634,8 @@ def get_edit_gear_form(request, id):
     form = None
     if gear_type == 'Telescope':
         form = TelescopeEditForm(instance = gear)
+    elif gear_type == 'Mount':
+        form = MountEditForm(instance = gear)
 
     response_dict = {
         'form': form.as_p() if form else '',
@@ -2650,6 +2655,8 @@ def save_gear_details(request):
     form = None
     if gear_type == 'Telescope':
         form = TelescopeEditForm(data = request.POST, instance = gear)
+    elif gear_type == 'Mount':
+        form = MountEditForm(data = request.POST, instance = gear)
 
     if not form or not form.is_valid():
         response_dict = {
