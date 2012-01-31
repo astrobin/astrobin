@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseForbidden
+from django.http import Http404
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.views.generic.list_detail import object_list
@@ -1702,7 +1703,6 @@ def user_profile_edit_gear(request):
     response_dict = {
         "form": form,
         'initial': 'initial' in request.GET,
-        'telescope_edit_form': TelescopeEditForm(),
     }
     prefill_dict = {}
     for attr in ["telescopes", "mounts", "cameras", "focal_reducers",
@@ -2584,4 +2584,63 @@ def image_comment_edit(request):
 
     return ajax_fail()
 
+
+def get_correct_gear(id):
+    types = (
+        Telescope,
+        Mount,
+        Camera,
+        FocalReducer,
+        Software,
+        Filter,
+        Accessory,
+    )
+    gear = None
+    gear_type = None
+    for type in types:
+        try:
+            gear = type.objects.get(id = id)
+            gear_type = gear.__class__.__name__
+            return (gear, gear_type)
+        except type.DoesNotExist:
+            continue
+
+    retirn (None, None)
+
+
+@require_GET
+@login_required
+def get_edit_gear_form(request, id):
+    gear, gear_type = get_correct_gear(id)
+    if not gear:
+        raise Http404
+
+    form = None
+    if gear_type == 'Telescope':
+        form = TelescopeEditForm(instance = gear)
+
+    response_dict = {
+        'form': form.as_p() if form else '',
+    }
+
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
+
+
+@require_POST
+@login_required
+def save_gear_details(request):
+    id = request.POST.get('gear_id')
+    gear, gear_type = get_correct_gear(id)
+
+    form = None
+    if gear_type == 'Telescope':
+        form = TelescopeEditForm(data = request.POST, instance = gear)
+
+    if not form or not form.is_valid():
+        return ajax_fail()
+
+    form.save()
+    return ajax_success()
 

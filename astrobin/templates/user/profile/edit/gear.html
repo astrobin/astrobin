@@ -56,38 +56,57 @@
 
         $('.as-edit').live('click', function() {
             var id = $(this).data('id');
-            var dlg = $('<div/>').attr('title', '{% trans "Edit gear item" %}');
+            var $dlg = $('<div/>').attr('title', '{% trans "Edit gear item" %}');
             var type = $(this).closest('ul.as-selections').attr('id').replace('as-selections-', '');
 
-            var form_code;
-            switch (type) {
-                case 'telescopes':
-                    form_code = '{{telescope_edit_form|escapejs}}';
-                    break;
-            }
+            $.ajax({
+                url: '/get_edit_gear_form/' + id + '/',
+                dataType: 'json',
+                timeout: 5000,
+                success: function(data, textStatus, XMLHttpRequest) {
+                    $dlg.append("\
+                        <form action=\"{% url save_gear_details %}\" method=\"post\">" +
+                            data['form'] + "\
+                            <input type=\"hidden\" name=\"gear_id\" value=\"" + id + "\"/>\
+                        </form>\
+                    ");
 
-            dlg.append("\
-                <form action=\"#\" method=\"post\">" +
-                    form_code + "\
-                </form>\
-            ");
-            dlg.dialog({
-                resizable: true,
-                modal: true,
-                buttons: [
-                    {
-                        text: '{% trans "Save" %}',
-                        click: function() {
-                            $(this).dialog('close');
+                    var $form = $dlg.find('form')
+                    var ajaxFormOptions = {
+                        dataType: 'json',
+                        beforeSubmit: function(formData, $form, options) {
+                        },
+                        success: function(responseJson, statusText, xhr, $form) {
+                            $dlg.dialog('close');
+                        },
+                        error: function(responseText, statusText, xhr, $form) {
+                            alert("Error");
                         }
-                    },
-                    {
-                        text: '{% trans "Cancel" %}',
-                        click: function() {
-                            $(this).dialog('close');
-                        }
-                    }
-                ]
+                    };
+                    $form.ajaxForm(ajaxFormOptions);
+
+                    $dlg.dialog({
+                        resizable: true,
+                        modal: true,
+                        buttons: [
+                            {
+                                text: '{% trans "Save" %}',
+                                click: function() {
+                                    $form.submit();
+                                }
+                            },
+                            {
+                                text: '{% trans "Cancel" %}',
+                                click: function() {
+                                    $dlg.dialog('close');
+                                }
+                            }
+                        ]
+                    });
+                },
+                error: function(XmlHttpRequest, textStatus, errorThrown) {
+                    alert("Error: " + textStatus);
+                }
             });
         });
     });

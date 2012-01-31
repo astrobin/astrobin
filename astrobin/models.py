@@ -144,8 +144,18 @@ class GearNeverMerge(models.Model):
 
 
 class Telescope(Gear):
-    focal_length = models.IntegerField(_("Focal length"), null=True, blank=True)
-    aperture = models.IntegerField(_("Aperture"), null=True, blank=True)
+    aperture = models.IntegerField(
+        verbose_name = _("Aperture"),
+        help_text = _("(in mm)"),
+        null = True,
+        blank = True
+    )
+    focal_length = models.IntegerField(
+        verbose_name = _("Focal length"),
+        help_text = _("(in mm)"),
+        null = True,
+        blank = True
+    )
 
     class Meta:
         app_label = 'astrobin'
