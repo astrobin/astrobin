@@ -1362,7 +1362,6 @@ def image_delete_original(request, id):
         # You can't delete just the original if you have no revisions.
         return HttpResponseForbidden()
 
-    image.delete_data()
     image.filename = final.filename
     image.original_ext = final.original_ext
     image.uploaded = final.uploaded
