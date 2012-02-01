@@ -163,7 +163,7 @@ def is_gear_complete(id):
     elif gear_type == 'Accessory':
         ret = True
 
-    ret = ret and (gear.make != None)
+    ret = ret and (gear.make != None) and (gear.make != '')
     return ret
 
 
