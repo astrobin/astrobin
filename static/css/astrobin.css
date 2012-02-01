@@ -2225,6 +2225,9 @@ ul.topnav > li:hover {
   font-size: 1em;
   color: #838383;
 }
+#image-detail #comments textarea {
+  background: #2e2e2e url('/static/images/dark-panel-tile.png');
+}
 #image-detail #comments a {
   color: #b64329;
   text-shadow: rgba(0, 0, 0, 0.2) 0 3px 3px;
