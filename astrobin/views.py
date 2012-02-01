@@ -2587,6 +2587,7 @@ def image_comment_save(request):
         response_dict = {
             'success': True,
             'comment_id': comment.id,
+            'comment': comment.comment,
             'action': 'save',
         }
         return HttpResponse(

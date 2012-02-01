@@ -822,7 +822,7 @@ $(document).ready(function() {
                 var $links = $comment.find('.links');
 
                 var converter = Markdown.getSanitizingConverter();
-                $content.html(converter.makeHtml(responseJson.comment.replace(/\n\r?/g, '<br />')));
+                $content.html($('<div/>').addClass('content').append($('<p/>').html(converter.makeHtml(responseJson.comment).replace(/\n\r?/g, '<br />'))));
                 $content.show();
                 $links.show();
 
