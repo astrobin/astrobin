@@ -40,11 +40,11 @@
         var resultsTitleText = '{{value.3}}';
         $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
             {asHtmlID: '{{key}}',
-            selectedItemProp: 'name',
+            selectedItemProp: 'id',
             searchObjProps: 'name',
             preFill: {{value.0}},
             selectedItemProp: 'name',
-            selectedValuesProp: 'id',
+            selectedValuesProp: 'name',
             startText: startText,
             emptyText: emptyText,
             resultsTitleText: resultsTitleText});
