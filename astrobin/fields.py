@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 from south.modelsinspector import add_introspection_rules
@@ -253,6 +253,13 @@ COUNTRIES = (
     ('ZM', _('Zambia')), 
     ('ZW', _('Zimbabwe')), 
 )
+
+def get_country_name(code):
+    for country in COUNTRIES:
+        if country[0] == code:
+            return country[1]
+    return None
+
 
 class CountryField(models.CharField):
     

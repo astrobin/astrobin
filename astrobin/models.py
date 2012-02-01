@@ -1211,12 +1211,14 @@ class Location(models.Model):
         help_text = _("A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."),
         max_length = 255,
         null = True,
+        blank = False,
     )
     city = models.CharField(
         verbose_name = _("City"),
         help_text = _("If this location is not in a city, use the name of the closest city."),
         max_length = 255,
         null = True,
+        blank = False,
     )
     state = models.CharField(
         verbose_name = _("State or province"),
@@ -1226,9 +1228,11 @@ class Location(models.Model):
     country = CountryField(
         verbose_name = _("Country"),
         null = True,
+        blank = False,
     )
     lat_deg = models.IntegerField(
-        null = True
+        null = True,
+        blank = False,
     )
     lat_min = models.IntegerField(
         null = True, blank = True
@@ -1237,7 +1241,8 @@ class Location(models.Model):
         null = True, blank = True
     )
     lon_deg = models.IntegerField(
-        null = True
+        null = True,
+        blank = False,
     )
     lon_min = models.IntegerField(
         null = True, blank = True
@@ -1257,7 +1262,10 @@ class Location(models.Model):
     )
 
     def __unicode__(self):
-        return self.name
+        if self.state:
+            return '%s, %s (%s), %s' % (self.name, self.city, self.state, get_country_name(self.country))
+        else:
+            return '%s, %s, %s' % (self.name, self.city, get_country_name(self.country))
 
     class Meta:
         app_label = 'astrobin'
