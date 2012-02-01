@@ -840,7 +840,7 @@ $(document).ready(function() {
     };
 
     $('#top-level-form form, .comment form').ajaxForm(ajaxFormOptions);
-    $('.comment form .cancel').click(function() {
+    $('.comment form .cancel').live('click', function() {
         var $comment = $(this).closest('.comment');
         var $content = $comment.find('.content');
         var $links = $comment.find('.links');
