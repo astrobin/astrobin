@@ -35,7 +35,7 @@ INTERESTING_CATALOGS = (
     'SH',
 )
 
-@login_required
+
 @require_GET
 def autocomplete(request, what):
     values = []
