@@ -734,6 +734,7 @@ $(document).ready(function() {
 
     var ajaxFormOptions = {
         dataType: 'json',
+        timeout: 5000,
         beforeSubmit: function(formData, $form, options) {
             $loader = $form.find('.loader');
             $button = $form.find('.button:first-child');
@@ -832,14 +833,6 @@ $(document).ready(function() {
 
                 $form.hide();
             }
-        },
-        error: function(responseText, statusText, xhr, $form) {
-            $loader = $form.find('.loader');
-            $button = $form.find('.button:first-child');
-
-            $button.removeAttr('disabled').removeClass('button-disabled');
-            $loader.css('visibility', 'hidden');
-            alert("Error");
         }
     };
 
