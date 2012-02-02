@@ -71,8 +71,13 @@
                      }
                  },
                  success: function(data) {
-                     $('.message-list').append(data);
-                     $('.reply-form .submit-button')
+                    var $new_message = $(data);
+                    var $container = $('<div/>').addClass('message-container own');
+
+                    $container.append($new_message);
+                    $('.message-list').append($container);
+
+                    $('.reply-form .submit-button')
                         .removeAttr('disabled')
                         .removeClass('button-disabled')
                         .val("{% trans "Reply" %}");
