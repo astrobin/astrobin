@@ -773,7 +773,7 @@ $(document).ready(function() {
 
                 $meta = $('<div/>').addClass('meta');
                 $author = $('<a/>').addClass('author').text('{{user.username}}');
-                $meta.append($author).append('{% trans "just now" %}');
+                $meta.append($author).append("{% trans "just now" %}");
 
                 $links = $('<div/>').addClass('links');
                 $permalink = $('<a/>').addClass('permalink').attr('href', '{% url image_detail image.id %}#c' + parent_id).text('{% trans "Link" %}');
