@@ -553,7 +553,7 @@
             <div id="comments">
                 {% if user.is_authenticated %}
                 <p class="instructions">
-                    {% blocktrans with user=image.user lang=user_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
+                    {% blocktrans with user=image.user lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
                 </p>
                 <div id="top-level-form">
                     <form action="{% url image_comment_save %}" method="post">
