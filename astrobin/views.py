@@ -620,6 +620,12 @@ def image_detail(request, id):
     else:
         solved_ext = image.original_ext
 
+    preferred_language = UserProfile.objects.get(user = image.user).language
+    if preferred_language:
+        preferred_language = LANGUAGES[preferred_language]
+    else:
+        preferred_language = _("English")
+
     response_dict = {'s3_url': settings.S3_URL,
                      'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
                      'resized_size': resized_size,
@@ -661,7 +667,7 @@ def image_detail(request, id):
                      'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
                      'comment_form': CommentForm(),
                      'comments': Comment.objects.filter(image = image),
-                     'user_language': LANGUAGES[UserProfile.objects.get(user = image.user).language] if UserProfile.objects.get(user = image.user).language else _("English"),
+                     'preferred_language': preferred_language,
                     }
 
     if 'upload_error' in request.GET:
