@@ -151,7 +151,7 @@ def is_gear_complete(id):
     elif gear_type == 'Camera':
         ret = (gear.pixel_size != None and
                gear.sensor_width != None and
-               gear.sendor_height != None and
+               gear.sensor_height != None and
                gear.type != None)
     elif gear_type == 'FocalReducer':
         ret = True
@@ -661,7 +661,7 @@ def image_detail(request, id):
                      'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
                      'comment_form': CommentForm(),
                      'comments': Comment.objects.filter(image = image),
-                     'user_language': LANGUAGES[UserProfile.objects.get(user = image.user).language],
+                     'user_language': LANGUAGES[UserProfile.objects.get(user = image.user).language] if UserProfile.objects.get(user = image.user).language else _("English"),
                     }
 
     if 'upload_error' in request.GET:
@@ -1726,7 +1726,7 @@ def user_profile_save_basic(request):
     """Saves the form"""
 
     profile = UserProfile.objects.get(user = request.user)
-    form = UserProfileEditBasicForm(data=request.POST)
+    form = UserProfileEditBasicForm(data=request.POST, instance = profile)
     response_dict = {'form': form}
 
     if not form.is_valid():
