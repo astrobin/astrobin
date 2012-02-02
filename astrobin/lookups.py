@@ -39,6 +39,9 @@ INTERESTING_CATALOGS = (
 @require_GET
 def autocomplete(request, what):
     values = []
+    if 'q' not in request.GET:
+        return []
+
     q = smart_str(request.GET['q'])
     limit = 10
 
