@@ -174,13 +174,14 @@ class Telescope(Gear):
         (18, _("Catadioptric: Schmidt camera")),
         (19, _("Catadioptric: Schmidt-Cassegrain")),
         (20, _("Catadioptric: ACF Schmidt-Cassegrain")),
+        (21, _("Camera lens")),
     )
 
     aperture = models.DecimalField(
         verbose_name = _("Aperture"),
         help_text = _("(in mm)"),
         null = True,
-        blank = False,
+        blank = True,
         max_digits = 8,
         decimal_places = 2,
     )
@@ -189,7 +190,7 @@ class Telescope(Gear):
         verbose_name = _("Focal length"),
         help_text = _("(in mm)"),
         null = True,
-        blank = False,
+        blank = True,
         max_digits = 8,
         decimal_places = 2,
     )
@@ -197,7 +198,7 @@ class Telescope(Gear):
     type = models.IntegerField(
         verbose_name = _("Type"),
         null = True,
-        blank = False,
+        blank = True,
         choices = TELESCOPE_TYPES,
     )
 
@@ -210,7 +211,7 @@ class Mount(Gear):
         verbose_name = _("Max. payload"),
         help_text = _("(in kg)"),
         null = True,
-        blank = False,
+        blank = True,
         max_digits = 6,
         decimal_places = 2,
     )
@@ -266,7 +267,7 @@ class Camera(Gear):
     type = models.IntegerField(
         verbose_name = _("Type"),
         null = True,
-        blank = False,
+        blank = True,
         choices = CAMERA_TYPES,
     )
 
@@ -288,7 +289,7 @@ class Software(Gear):
     type = models.IntegerField(
         verbose_name = _("Type"),
         null = True,
-        blank = False,
+        blank = True,
         choices = SOFTWARE_TYPES,
     )
 
@@ -315,12 +316,13 @@ class Filter(Gear):
         (11, _("Light pollution suppression")),
         (12, _("Planetary")),
         (13, _("Other")),
+        (14, _("UHC: Ultra High Contrast")),
     )
 
     type = models.IntegerField(
         verbose_name = _("Type"),
         null = True,
-        blank = False,
+        blank = True,
         choices = FILTER_TYPES,
     )
 
