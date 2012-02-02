@@ -364,8 +364,8 @@ class LocationEditForm(forms.ModelForm):
     lon_deg = forms.IntegerField(
         label = _("Longitude (degrees)"),
         help_text = "-180 - +180.",
-        max_value = 90,
-        min_value = -90)
+        max_value = 180,
+        min_value = -180)
     lon_min = forms.IntegerField(
         label = _("Longitude (minutes)"),
         help_text = "0 - 60.",
