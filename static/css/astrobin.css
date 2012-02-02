@@ -1998,6 +1998,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   display: block;
 }
 .bar_mixin {
+  z-index: 2;
   list-style: none;
   margin: 0 0 28px 0;
   padding: 0;
@@ -2017,6 +2018,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   color: #fcfcfc;
 }
 ul.bar {
+  z-index: 2;
   list-style: none;
   margin: 0 0 28px 0;
   padding: 0;
@@ -2039,6 +2041,7 @@ ul.bar > li.rating-hint {
   margin-bottom: 52px;
 }
 .profile ul.bar {
+  z-index: 2;
   list-style: none;
   margin: 0 0 28px 0;
   padding: 0;
@@ -3049,6 +3052,7 @@ table.title td.license {
   margin-bottom: 28px;
 }
 .stats ul.bar {
+  z-index: 2;
   list-style: none;
   margin: 0 0 28px 0;
   padding: 0;
