@@ -1520,10 +1520,15 @@ def user_page(request, username):
         elif subsection == 'year':
             if 'year' in request.GET:
                 year = request.GET.get('year')
-                sqs = sqs.filter(acquisition__date__year = year).extra(
-                    select = {'last_acquisition_date': lad_sql},
-                    order_by = ['-last_acquisition_date']
-                ).distinct()
+                try:
+                    year = int(year)
+                    sqs = sqs.filter(acquisition__date__year = year).extra(
+                        select = {'last_acquisition_date': lad_sql},
+                        order_by = ['-last_acquisition_date']
+                    ).distinct()
+                except ValueError:
+                    sqs = Image.objects.none()
+
                 subtitle = year
                 backlink = "?public&sub=year"
             else:
