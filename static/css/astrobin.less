@@ -173,24 +173,24 @@
     box-shadow: none;
 }
 .button-hilight {
-    -webkit-box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
-    -moz-box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
-    box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
+    -webkit-box-shadow: inset rgba(255,255,255,0.35) 0 1px 2px;
+    -moz-box-shadow: inset rgba(255,255,255,0.35) 0 1px 2px;
+    box-shadow: inset rgba(255,255,255,0.35) 0 1px 2px;
 }
 .button-hilight-subtle {
-    -webkit-box-shadow: inset rgba(255,255,255,0.1) 0 1px 0;
-    -moz-box-shadow: inset rgba(255,255,255,0.1) 0 1px 0;
-    box-shadow: inset rgba(255,255,255,0.1) 0 1px 0;
+    -webkit-box-shadow: inset rgba(255,255,255,0.1) 0 1px 2px;
+    -moz-box-shadow: inset rgba(255,255,255,0.1) 0 1px 2px;
+    box-shadow: inset rgba(255,255,255,0.1) 0 1px 2px;
 }
 .button-hilight-input {
-    -webkit-box-shadow: inset rgba(255,255,255,0.15) 0 -1px 0;
-    -moz-box-shadow: inset rgba(255,255,255,0.15) 0 -1px 0;
-    box-shadow: inset rgba(255,255,255,0.15) 0 -1px 0;
+    -webkit-box-shadow: inset rgba(255,255,255,0.15) 0 -1px 2px;
+    -moz-box-shadow: inset rgba(255,255,255,0.15) 0 -1px 2px;
+    box-shadow: inset rgba(255,255,255,0.15) 0 -1px 2px;
 }
 .button-hilight-strong {
-    -webkit-box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
-    -moz-box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
-    box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
+    -webkit-box-shadow: inset rgba(255,255,255,0.35) 0 1px 2px;
+    -moz-box-shadow: inset rgba(255,255,255,0.35) 0 1px 2px;
+    box-shadow: inset rgba(255,255,255,0.35) 0 1px 2px;
 }
 
 .box-shadow {
@@ -1112,6 +1112,10 @@ form {
         .common-border-inverted;
         background: (@regular-panel-color) url('/static/images/regular-panel-tile.png');
         color: @text-color + #111;
+        box-sizing: border-box;
+        -mz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -ms-box-sizing: border-box;
         width: 70%;
         .rounded-corners;}
     input[type="checkbox"] {
@@ -2116,12 +2120,11 @@ ul.topnav {
         .formatting-help {
             font-size: 0.8em;
             float: right;
-            margin-right: @spacer-large;
             text-transform: lowercase;
         }
         #top-level-form {
             textarea {
-                width: 682px;
+                width: 100%;
             }
         }
         form {
@@ -2179,10 +2182,9 @@ ul.topnav {
                 display: none;
 
                 textarea {
-                    width: 98%;
+                    width: 100%;
                 }
                 .formatting-help {
-                    margin: 0;
                 }
             }
         }
