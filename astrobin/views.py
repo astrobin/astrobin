@@ -2487,6 +2487,11 @@ def tos(request):
     return render_to_response('tos.html',
         context_instance=RequestContext(request))
 
+@require_GET
+def guidelines(request):
+    return render_to_response('guidelines.html',
+        context_instance=RequestContext(request))
+
 
 @login_required
 @require_GET
