@@ -73,21 +73,23 @@
 
 
 .button-gradient {
-    border: 1px solid @button-gradient-bottom-color;
-    border-top: 1px solid (@button-gradient-top-color * @hilight-factor);
+    border: 1px solid @button-gradient-bottom-color / @hilight-factor;
     background: @button-gradient-bottom-color;
     background: -webkit-gradient(linear, left top, left bottom, from(@button-gradient-top-color), to(@button-gradient-bottom-color));
     background: -moz-linear-gradient(top, @button-gradient-top-color, @button-gradient-bottom-color);
+    .box-shadow-subtle;
+    .button-hilight;
     color: @strong-text-color;}
 
 .button-gradient-hilighted {
-    border-top-color: @button-gradient-top-color * @strong-hilight-factor;
+    .button-gradient;
     background: @button-gradient-bottom-color * @hilight-factor;
     background: -webkit-gradient(linear, left top, left bottom, from(@button-gradient-top-color * @hilight-factor), to(@button-gradient-bottom-color));
     background: -moz-linear-gradient(top, @button-gradient-top-color * @hilight-factor, @button-gradient-bottom-color);
     color: @strong-text-color * @hilight-factor;}
 
 .button-gradient-active {
+    .button-gradient;
     border-color: @button-gradient-top-color;
     border-top-color: @button-gradient-bottom-color / @hilight-factor;
     background: @button-gradient-top-color;
@@ -98,30 +100,33 @@
 
 .button-disabled-gradient,
 .button-gradient-inverted {
-    border: 1px solid @button-gradient-inverted-bottom-color;
-    border-top: 1px solid (@button-gradient-inverted-top-color * @hilight-factor);
+    border: 1px solid @button-gradient-inverted-bottom-color / @hilight-factor;
     background: @button-gradient-inverted-bottom-color;
     background: -webkit-gradient(linear, left top, left bottom, from(@button-gradient-inverted-top-color), to(@button-gradient-inverted-bottom-color));
     background: -moz-linear-gradient(top, @button-gradient-inverted-top-color, @button-gradient-inverted-bottom-color);
+    .box-shadow-subtle;
+    .button-hilight-strong;
     color: @background-color;}
 
 .button-gradient-inverted-hilighted {
+    .button-gradient-inverted;
     border-color: @button-gradient-inverted-bottom-color;
-    border-top-color: @button-gradient-inverted-top-color * @strong-hilight-factor;
     background: @button-gradient-inverted-bottom-color * @hilight-factor;
     background: -webkit-gradient(linear, left top, left bottom, from(@button-gradient-inverted-top-color * @hilight-factor), to(@button-gradient-inverted-bottom-color));
     background: -moz-linear-gradient(top, @button-gradient-inverted-top-color * @hilight-factor, @button-gradient-inverted-bottom-color);
     color: @background-color * @hilight-factor;}
 
 .danger-gradient {
-    border: 1px solid @danger-color;
-    border-top: 1px solid (@danger-color * @hilight-factor);
+    border: 1px solid @danger-color / @hilight-factor;
     background: @danger-color;
     background: -webkit-gradient(linear, left top, left bottom, from(@danger-color * @hilight-factor), to(@danger-color));
     background: -moz-linear-gradient(top, @danger-color * @hilight-factor, @danger-color);
+    .box-shadow-subtle;
+    .button-hilight;
     color: @strong-text-color;}
 
 .danger-gradient-hilighted {
+    .danger-gradient;
     border-top-color: @danger-color * @strong-hilight-factor;
     background: @danger-color * @hilight-factor;
     background: -webkit-gradient(linear, left top, left bottom, from(@danger-color * @strong-hilight-factor), to(@danger-color));
@@ -129,6 +134,7 @@
     color: @strong-text-color * @hilight-factor;}
 
 .danger-gradient-active {
+    .danger-gradient;
     border-color: @danger-color;
     border-bottom-color: @danger-color * @hilight-factor;
     background: @danger-color / @hilight-factor;
@@ -160,6 +166,32 @@
     -moz-border-radius: @radius 0 @radius @radius;
     -webkit-border-radius: @radius 0 @radius @radius;
      border-radius: @radius 0 @radius @radius;}
+
+.button-hilight-none {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.button-hilight {
+    -webkit-box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
+    -moz-box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
+    box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
+}
+.button-hilight-subtle {
+    -webkit-box-shadow: inset rgba(255,255,255,0.1) 0 1px 0;
+    -moz-box-shadow: inset rgba(255,255,255,0.1) 0 1px 0;
+    box-shadow: inset rgba(255,255,255,0.1) 0 1px 0;
+}
+.button-hilight-input {
+    -webkit-box-shadow: inset rgba(255,255,255,0.15) 0 -1px 0;
+    -moz-box-shadow: inset rgba(255,255,255,0.15) 0 -1px 0;
+    box-shadow: inset rgba(255,255,255,0.15) 0 -1px 0;
+}
+.button-hilight-strong {
+    -webkit-box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
+    -moz-box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
+    box-shadow: inset rgba(255,255,255,0.35) 0 1px 0;
+}
 
 .box-shadow {
     -webkit-box-shadow: rgba(0,0,0,0.8) 0 1px 5px;
@@ -193,11 +225,11 @@
 
 .common-border {
     border: 1px solid @border-color;
-    border-top: 1px solid @border-top-color;
+    .button-hilight-subtle;
 }
 .common-border-inverted {
     border: 1px solid @border-color;
-    border-bottom: 1px solid @border-top-color;
+    .button-hilight-input;
 }
 .text-shadow {
     text-shadow: rgba(0,0,0,0.8) 0 1px 1px;}
@@ -227,7 +259,7 @@
 .stitched-box {
     margin-bottom: @spacer-small;
     padding: @spacer-medium;
-    border: 1px dashed @border-top-color;
+    border: 1px dashed @border-top-color * @hilight-factor;
     .box-shadow-subtle;
 }
 
@@ -1115,7 +1147,6 @@ form {
     color: @text-color;
     .button-gradient;
     .rounded-corners;
-    .box-shadow;
     .text-shadow;
     text-align: center;
     vertical-align: middle;
@@ -1215,6 +1246,7 @@ form {
         input {
             float: left;
             border: none;
+            .button-hilight-none;
             background: transparent;
             color: @text-color / @strongest-hilight-factor;}
         .tbox {
@@ -1406,7 +1438,6 @@ ul.as-selections {
         .button-gradient-inverted;
         padding: @spacer-small @spacer-medium;
         .rounded-corners;
-        .box-shadow-subtle;
         text-shadow: @strong-text-color 0 1px 1px;
         .data {
             margin-right: @spacer-small;
@@ -1453,6 +1484,7 @@ ul.as-selections.loading {
 
 input.as-input {
     background-color: @background-color;
+    .button-hilight-none;
     font-size: @base-font-size;}
 
 ul.as-list {
@@ -1635,6 +1667,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     text-align: right;
     margin-top: 10px;
     width: 120px;
+    .rounded-corners;
     .common-border;
     border-right: none;
     background: @dark-panel-color url('/static/images/dark-panel-tile.png');
@@ -1668,11 +1701,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     float: left;
     width: 740px;
     padding: 20px;
+    .box-shadow;
     .common-border;
     background: @dark-panel-color url('/static/images/dark-panel-tile.png');
     min-height: 135px;
     .rounded-corners;
-    .box-shadow;
     margin-bottom: 40px;
     .submit-button {
         margin-left: 170px;
@@ -1961,11 +1994,10 @@ ul.topnav {
     padding: 0;
     .button-gradient;
     .rounded-corners;
-    .box-shadow-subtle;
     display: block;
     height: 24px;
     >li {
-	z-index: 1000; /* Thanks, IE7 :/ */
+        z-index: 1000; /* Thanks, IE7 :/ */
         display: inline-block;
         padding: 2px 10px;
         margin: 0;
@@ -1980,7 +2012,10 @@ ul.topnav {
         cursor: pointer;}
     >li:hover {
         .rounded-corners;
-        .button-gradient-hilighted;}}
+        .button-gradient-hilighted;
+        border: none;
+    }
+}
 
 #image-detail {
     #main-content {
@@ -3252,5 +3287,5 @@ ol.faq {
     .stitched-box;
     background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     margin-bottom: @spacer-large;
-    .box-shadow;
+    .box-shadow-subtle;
 }
