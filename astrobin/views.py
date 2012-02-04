@@ -454,19 +454,20 @@ def image_detail(request, id):
     else:
         related = 'rel_user'
 
+    related_images = SearchQuerySet().models(Image)
     if related == 'rel_user':
-        related_images = SearchQuerySet().filter(username=image.user.username)
+        related_images = related_images.filter(username__exact=image.user.username)
     elif related == 'rel_subject':
         subjects = [xapian_escape(s.mainId) for s in image.subjects.all()]
-        related_images = SearchQuerySet().filter(SQ(subjects__in=subjects))
+        related_images = related_images.filter(SQ(subjects__in=subjects))
     elif related == 'rel_imaging_telescope':
         telescopes = [xapian_escape(t.name) for t in image.imaging_telescopes.all()]
-        related_images = SearchQuerySet().filter(SQ(imaging_telescopes__in=telescopes))
+        related_images = related_images.filter(SQ(imaging_telescopes__in=telescopes))
     elif related == 'rel_imaging_camera':
         cameras = [xapian_escape(c.name) for c in image.imaging_cameras.all()]
-        related_images = SearchQuerySet().filter(SQ(imaging_cameras__in=cameras))
+        related_images = related_images.filter(SQ(imaging_cameras__in=cameras))
 
-    related_images = related_images.exclude(django_id=id).models(Image).order_by('-uploaded')
+    related_images = related_images.exclude(django_id=id).order_by('-uploaded')
 
     gear_list = (
         ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
