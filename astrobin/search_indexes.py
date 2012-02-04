@@ -121,6 +121,8 @@ class ImageIndex(SearchIndex):
     is_planets = BooleanField()
     is_comets = BooleanField()
 
+    license = CharField(model_attr = 'license')
+
     def index_queryset(self):
         return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
 

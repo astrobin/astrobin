@@ -5,6 +5,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 
 from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet, EmptySearchQuerySet
+from haystack.query import SQ
 
 from models import *
 
@@ -12,6 +13,7 @@ from search_indexes import xapian_escape
 
 import string
 import unicodedata
+import operator
 
 from management import NOTICE_TYPES
 
@@ -288,6 +290,14 @@ class AdvancedSearchForm(SearchForm):
         required=False,
         help_text="0-100")
 
+    license = forms.MultipleChoiceField(
+        required = False,
+        label = _("License"),
+        choices = LICENSE_CHOICES,
+        widget=forms.CheckboxSelectMultiple(),
+        initial = [x[0] for x in LICENSE_CHOICES],
+    )
+
     def __init__(self, data=None, **kwargs):
         super(AdvancedSearchForm, self).__init__(data, **kwargs)
         self.fields['q'].help_text = _("Search for astronomical objects, telescopes or lenses, cameras, filters...")
@@ -337,6 +347,12 @@ class AdvancedSearchForm(SearchForm):
             if self.cleaned_data['moon_phase_max']:
                 sqs = sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
 
+            if self.cleaned_data['license']:
+                filters = reduce(operator.or_, [SQ(**{'license': x}) for x in self.cleaned_data['license']])
+                sqs = sqs.filter(filters)
+            else:
+                sqs = EmptySearchQuerySet()
+                
         return sqs
 
 
