@@ -1858,7 +1858,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 .advanced-search-box {
     float: left;
     width: 272px;
-    height: 964px;
     padding: @spacer-small @spacer-xxlarge;
     background: (@light-panel-color) url('/static/images/light-panel-tile.png');
 
@@ -1893,9 +1892,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         ul.as-list {
             margin-left: 0;
         }
+        .slider {
+            margin: @spacer-large;
+        }
         .submit-button {
             margin-left: 0;
-            margin-top: 80px;
             width: 100%;
         }
     }
@@ -3299,3 +3300,4 @@ ol.faq {
         margin: @spacer-large 0;
     }
 }
+
