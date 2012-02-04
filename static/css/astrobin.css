@@ -1843,6 +1843,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 .sided-main-content-popup ul.as-selections {
   width: 100%;
+  box-sizing: border-box;
 }
 .sided-main-content-popup ul.as-selections li.as-original input {
   width: 220px;
@@ -2054,7 +2055,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   width: 272px;
   height: 964px;
   padding: 4px 28px;
-  background: #2e2e2e url('/static/images/dark-panel-tile.png');
+  background: #393939 url('/static/images/light-panel-tile.png');
 }
 .advanced-search-box form p {
   padding: 0;
@@ -2075,9 +2076,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 .advanced-search-box form ul.as-selections {
   width: 100%;
+  box-sizing: border-box;
 }
 .advanced-search-box form li.as-original {
-  width: 95%;
+  width: 100%;
 }
 .advanced-search-box form li.as-original input {
   width: 100%;

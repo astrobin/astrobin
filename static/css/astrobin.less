@@ -1740,6 +1740,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         width: 220px;}
     ul.as-selections {
         width: 100%;
+        box-sizing: border-box;
         li.as-original input {
             width: 220px;}}
     ul.as-list {
@@ -1859,7 +1860,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: 272px;
     height: 964px;
     padding: @spacer-small @spacer-xxlarge;
-    background: (@dark-panel-color) url('/static/images/dark-panel-tile.png');
+    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
 
     form {
         p {
@@ -1881,9 +1882,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         }
         ul.as-selections {
             width: 100%;
+            box-sizing: border-box;
         }
         li.as-original {
-            width: 95%;
+            width: 100%;
             input {
                 width: 100%;
             }
