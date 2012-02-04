@@ -2057,7 +2057,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   background: #393939 url('/static/images/light-panel-tile.png');
 }
 .advanced-search-box form p {
-  padding: 0;
+  padding: 4px 0;
 }
 .advanced-search-box form .helptext {
   margin-left: 0;
@@ -2069,6 +2069,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   text-align: left;
   width: auto;
   padding: 12px 0 2px 0;
+}
+.advanced-search-box form ul li label {
+  height: auto;
+  color: #b8b8b8;
+  font-weight: normal;
+  padding-top: 0;
+  font-size: 100%;
 }
 .advanced-search-box form input {
   width: 100%;

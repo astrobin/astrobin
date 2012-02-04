@@ -1863,7 +1863,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
     form {
         p {
-            padding: 0;
+            padding: @spacer-small 0;
         }
         .helptext {
             margin-left: 0;
@@ -1875,6 +1875,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
             text-align: left;
             width: auto;
             padding: @spacer-large 0 2px 0;
+        }
+        ul li label {
+            height: auto;
+            color: @text-color;
+            font-weight: normal;
+            padding-top: 0;
+            font-size: 100%;
         }
         input {
             width: 100%;
