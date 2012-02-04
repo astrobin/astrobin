@@ -33,6 +33,52 @@
 {% block extra_js %}
 <script language="javascript">
     $(document).ready(function() {
+        var range = function($input_min, $input_max, min, max, label, unit, help_text) {
+            var $first_p = $input_min.closest('p');
+
+            $input_min.closest('p').hide();
+            $input_max.closest('p').hide();
+
+            var template = '\
+                <label>' + label + ' <span class="min"></span> - <span class="max"></span> ' + unit + '</label>\
+                <div class="slider"></div>\
+                <span class="helptext">' + help_text + '</span>\
+            ';
+            var $container = $('<p/>').html(template);
+            $container.find('label .min').text($input_min.val() || min);
+            $container.find('label .max').text($input_max.val() || max);
+
+            $container.insertBefore($first_p);
+
+            $container.find('.slider').slider({
+                range: true,
+                min: min,
+                max: max,
+                values: [$input_min.val() || min, $input_max.val() || max],
+                slide: function(event, ui) {
+                    $container.find('label .min').text(ui.values[0]);
+                    $input_min.val(ui.values[0]);
+
+                    $container.find('label .max').text(ui.values[1]);
+                    $input_max.val(ui.values[1]);
+                }
+            });
+        };
+        range($('input[name="integration_min"]'),
+              $('input[name="integration_max"]'),
+              0, 100,
+              "{% trans "Integration" %}:",
+              "{% trans "hours" %}:",
+              ""
+        );
+        range($('input[name="moon_phase_min"]'),
+              $('input[name="moon_phase_max"]'),
+              0, 100,
+              "{% trans "Avg. Moon phase" %}:",
+              "{% trans "%" %}:",
+              ""
+        );
+
         {% autoescape off %}
         {% for key, value in prefill_dict.items %}
         var startText = '{{value.1}}';
