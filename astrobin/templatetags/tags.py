@@ -138,32 +138,44 @@ class QueryStringNode(Node):
         self.remove = remove
         
     def render(self, context):
-        p = {}
-        for k, v in context["request"].GET.items():
-            p[k]=v
-        return get_query_string(p,self.add,self.remove,context)
+        p_list = []
+        p_dict = {}
+        query = context["request"].GET
+        for k in query:
+            p_list.append([k, query.getlist(k)])
+            p_dict[k] = query.getlist(k)
 
-def get_query_string(p, new_params, remove, context):
+        return get_query_string(p_list,p_dict,self.add,self.remove,context)
+
+def get_query_string(p_list, p_dict, new_params, remove, context):
     """
     Add and remove query parameters. From `django.contrib.admin`.
     """
     for r in remove:
-        for k in p.keys():
-            if k.startswith(r):
-                del p[k]
+        p_list = [[x[0], x[1]] for x in p_list if not x[0].startswith(r)]
     for k, v in new_params.items():
-        if k in p and v is None:
-            del p[k]
+        if k in p_dict and v is None:
+            p_list = [[x[0], x[1]] for x in p_list if not x[0] == k]
+        elif k in p_dict and v is not None:
+            for i in range(0, len(p_list)):
+                if p_list[i][0] == k:
+                    p_list[i][1] = [v]
+
         elif v is not None:
-            p[k] = v
-            
-    for k, v in p.items():
+            p_list.append([k, [v]])
+
+    for i in range(0, len(p_list)):
+        if len(p_list[i][1]) == 1:
+            p_list[i][1] = p_list[i][1][0]
+        else:
+            p_list[i][1] = mark_safe('&amp;'.join([u'%s=%s' % (p_list[i][0], k) for k in p_list[i][1]]))
+            p_list[i][0] = ''
         try:
-            p[k] = template.Variable(v).resolve(context)
+            p_list[i][1] = template.Variable(p_list[i][1]).resolve(context)
         except:
-            p[k]=v
-                
-    return mark_safe('?' + '&amp;'.join([u'%s=%s' % (k, v) for k, v in p.items()]).replace(' ', '%20'))
+            pass
+
+    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], k[1]) for k in p_list]).replace(' ', '%20'))
 
 # Taken from lib/utils.py   
 def string_to_dict(string):
