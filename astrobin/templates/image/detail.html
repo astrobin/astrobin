@@ -388,17 +388,17 @@
                 <p>
                     {% trans "Contains" %}:
                     {% if solar_system_main_subject >= 0 %}
-                        <a href="/search/?q=&ssms={{solar_system_main_subject_id}}">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
+                        <a href="/search/?q=&ssms={{solar_system_main_subject_id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
                     {% endif %}
                     {% for s in subjects_short %}
-                        <a href="/search/?q={{s.mainId|escape|cut:" "}}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                        <a href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                     {% endfor %}
                     {% if subjects_all|length > 10 %}
                         <span id="more-subjects">
                             <span class="hidden">
                                 ,&nbsp;
                                 {% for s in subjects_reminder %}
-                                    <a href="/search/?q={{s.mainId|escape|cut:" "}}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                                    <a href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                                 {% endfor %}
                             </span>
                             <span class="more">
@@ -460,7 +460,7 @@
                                 <p>
                                     <strong>{% trans i.0 %}:</strong>
                                     {% for g in i.1 %}
-                                        {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}<a href="/search/?q=&as_values_{{i.2}}={{g.id}}">{{g.name|escape}}</a>{% else %}<a href="/search/?q={{g.name|escape}}&type={{i.2}}">{{g.name|escape}}</a>{% endif %}{% if not forloop.last %},&nbsp;{% endif %} {% endfor %}
+                                        {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}<a href="/search/?q=&as_values_{{i.2}}={{g.id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>{% else %}<a href="/search/?q={{g.name|escape}}&type={{i.2}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>{% endif %}{% if not forloop.last %},&nbsp;{% endif %} {% endfor %}
                                 </p>
                                 {% endif %}
                             {% endfor %}
@@ -485,7 +485,7 @@
                                             <strong>{{data.0}}</strong>:
                                             {% if data.0 == dates_label %}
                                                 {% for date in data.1 %}
-                                                    <a href="/search/{% query_string "start_date=date, end_date=date" "plate_solving_started, r, mod" %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                                    <a href="/search/{% query_string "start_date=date, end_date=date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
                                                 {% endfor %}
                                             {% else %}
                                                 {{data.1|linebreaksbr}}
@@ -495,7 +495,7 @@
                                 {% endfor %}
                             {% else %}
                                 {% if ssa.date %}
-                                    <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ssa.date|date:"DATE_FORMAT"}}</a>
+                                    <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{ssa.date|date:"DATE_FORMAT"}}</a>
                                 {% endif %}
                                 {% if ssa.time %}
                                     <p><strong>{% trans "Time" %}</strong>: {{ssa.time}}
