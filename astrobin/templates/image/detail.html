@@ -285,7 +285,7 @@
                 {% if image.allow_rating %}
                 <li class="rating"><div id="rating"></div></li>
                 {% if current_rating > 0 %}
-                <li class="rating-current"><div>Rating: <span class="rating">{{current_rating}}</span> x <span class="number">{{votes_number}}</span></div></li>
+                <li class="rating-current"><div>{% trans "Rating" %}: <span class="rating">{{current_rating}}</span> x <span class="number">{{votes_number}}</span></div></li>
                 {% endif %}
                 <li class="rating-hint"><div id="rating-hint"></div></li>
                 {% endif %}
