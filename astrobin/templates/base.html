@@ -118,9 +118,7 @@
                     <a href="{% url set_language "it" %}"><img src="/static/icons/flags/16/Italy.png" alt="Italiano"/></a>
                     <a href="{% url set_language "es" %}"><img src="/static/icons/flags/16/Spain.png" alt="Español"/></a>
                     <a href="{% url set_language "fr" %}"><img src="/static/icons/flags/16/France.png" alt="Français"/></a>
-                    <!--
                     <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
-                    -->
                     {% if request.user.is_authenticated and not user_language %}
                     <div id="language-prompt">
                         <div class="bubble">
