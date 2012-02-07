@@ -233,10 +233,11 @@ class Mount(Gear):
 
 class Camera(Gear):
     CAMERA_TYPES = (
-        (0, ("CCD")),
-        (1, ("DSLR")),
-        (2, ("Guider/Planetary")),
-        (3, ("Film")),
+        (0, _("CCD")),
+        (1, _("DSLR")),
+        (2, _("Guider/Planetary")),
+        (3, _("Film")),
+        (4, _("Compact")),
     )
 
     pixel_size = models.DecimalField(
