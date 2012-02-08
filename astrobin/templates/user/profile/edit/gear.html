@@ -52,6 +52,12 @@
         {% endfor %}
         {% endautoescape %}
 
+        // returns a timestamp. Used to avoid IE caching Ajax requests
+        function myTimestamp() {
+            tstmp = new Date();    
+            return tstmp.getTime();
+        }
+
         $('.as-edit').live('click', function(event) {
             event.preventDefault();
 
@@ -62,7 +68,7 @@
             var $item_li = $(this).closest('li.as-selection-item');
 
             $.ajax({
-                url: '/get_edit_gear_form/' + id + '/',
+                url: '/get_edit_gear_form/' + id + '/?nocache=' + myTimestamp(),
                 dataType: 'json',
                 timeout: 5000,
                 success: function(data, textStatus, XMLHttpRequest) {
@@ -77,7 +83,7 @@
                             if (responseJson['success']) {
                                 $dlg.dialog('close');
                                 $.ajax({
-                                    url: '/get_is_gear_complete/' + id + '/',
+                                    url: '/get_is_gear_complete/' + id + '/?nocache=' + myTimestamp(),
                                     dataType: 'json',
                                     timeout: 5000,
                                     success: function(data, textStatus, XMLHttpRequest) {

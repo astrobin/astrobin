@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import create_object
+from django.views.decorators.cache import never_cache
 from django.core.urlresolvers import reverse
 from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.conf import settings
@@ -2679,6 +2680,7 @@ def image_comment_edit(request):
 
 @require_GET
 @login_required
+@never_cache
 def get_edit_gear_form(request, id):
     gear, gear_type = get_correct_gear(id)
     if not gear:
@@ -2745,6 +2747,7 @@ def save_gear_details(request):
 
 @require_GET
 @login_required
+@never_cache
 def get_is_gear_complete(request, id):
     return HttpResponse(
         simplejson.dumps({'complete': is_gear_complete(id)}),
