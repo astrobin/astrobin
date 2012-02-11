@@ -1246,6 +1246,12 @@ class Location(models.Model):
     lat_sec = models.IntegerField(
         null = True, blank = True
     )
+    lat_side = models.CharField(
+        default = 'N',
+        max_length = 1,
+        choices = (('N', _("North")), ('S', _("South"))),
+        verbose_name = 'North or south',
+    )
     lon_deg = models.IntegerField(
         null = True,
         blank = False,
@@ -1254,7 +1260,14 @@ class Location(models.Model):
         null = True, blank = True
     )
     lon_sec = models.IntegerField(
-        null = True, blank = True)
+        null = True, blank = True
+    )
+    lon_side = models.CharField(
+        default = 'E',
+        max_length = 1,
+        choices = (('E', _("East")), ('W', _("West"))),
+        verbose_name = 'East or West',
+    )
 
     altitude = models.IntegerField(
         verbose_name = _("Altitude"),
