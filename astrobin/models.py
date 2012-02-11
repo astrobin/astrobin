@@ -177,6 +177,7 @@ class Telescope(Gear):
         (19, _("Catadioptric: Schmidt-Cassegrain")),
         (20, _("Catadioptric: ACF Schmidt-Cassegrain")),
         (21, _("Camera lens")),
+        (22, _("Binoculars")),
     )
 
     aperture = models.DecimalField(
