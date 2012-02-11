@@ -171,13 +171,10 @@
                                     <div class="popup" id="profile-popup">
                                         <ul>
                                             <li>
-                                                <a href="{% url user_page request.user %}">{% trans "View your profile" %}</a>
+                                                <a href="{% url user_page request.user %}">{% trans "My page" %}</a>
                                             </li>
                                             <li>
-                                                <a href="{% url profile_edit_basic %}">{% trans "Edit your profile" %}</a>
-                                            </li>
-                                            <li>
-                                                <a href="{% url index %}" title="{% trans "Upload an image" %}">{% trans "Upload!" %}</a>
+                                                <a href="{% url profile_edit_basic %}">{% trans "Edit my profile" %}</a>
                                             </li>
                                             <li>
                                                 <a href="{% url auth_logout %}">{% trans "Logout" %}</a>
