@@ -397,6 +397,7 @@ class LocationEditForm(forms.ModelForm):
 
     def __init__(self, **kwargs):
         super(LocationEditForm, self).__init__(**kwargs)
+        self.fields['country'].choices = sorted(COUNTRIES, key = lambda c: c[1])
 
     class Meta:
         model = Location
