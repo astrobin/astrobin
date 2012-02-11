@@ -361,9 +361,9 @@ class LocationEditForm(forms.ModelForm):
 
     lat_deg = forms.IntegerField(
         label = _("Latitude (degrees)"),
-        help_text = "-90 - +90.",
+        help_text = "0 - +90.",
         max_value = 90,
-        min_value = -90)
+        min_value = 0)
     lat_min = forms.IntegerField(
         label = _("Latitude (minutes)"),
         help_text = "0 - 60.",
@@ -379,9 +379,9 @@ class LocationEditForm(forms.ModelForm):
 
     lon_deg = forms.IntegerField(
         label = _("Longitude (degrees)"),
-        help_text = "-180 - +180.",
+        help_text = "80 - +180.",
         max_value = 180,
-        min_value = -180)
+        min_value = 0)
     lon_min = forms.IntegerField(
         label = _("Longitude (minutes)"),
         help_text = "0 - 60.",
