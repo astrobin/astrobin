@@ -44,7 +44,7 @@
         </p>
         <p>
         {% url image_edit_acquisition image.id as basic_form_url %}
-        {% blocktrans %}Is this too much data for you to handle? Go to the <a href="{{basic_form_url}}?edit_type=deep_sky&advanced=false">basic form</a>.{% endblocktrans %}
+        {% blocktrans %}Is this too much data for you to handle? Go to the <a class="button" href="{{basic_form_url}}?edit_type=deep_sky&advanced=false">basic form</a>.{% endblocktrans %}
         </p>
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
             {% for form in deep_sky_acquisitions %}
@@ -73,7 +73,7 @@
         </form>
         {% else %}
         {% url image_edit_acquisition image.id as advanced_form_url %}
-        <p>{% blocktrans %}With this form you can input the basic details for the acquisition of your image. If you want to be more thorough or fill in separate details for each filter, go to the <a href="{{advanced_form_url}}?edit_type=deep_sky&advanced=true">advanced form</a>.{% endblocktrans %}</p>
+        <p>{% blocktrans %}With this form you can input the basic details for the acquisition of your image. If you want to be more thorough or fill in separate details for each filter, go to the <a class="button" href="{{advanced_form_url}}?edit_type=deep_sky&advanced=true">advanced form</a>.{% endblocktrans %}</p>
         <form id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">{% csrf_token %}
             {{deep_sky_acquisition_basic_form.as_p}}
             <input type="hidden" name="image_id" value="{{image.id}}" />
