@@ -1718,6 +1718,21 @@ def user_profile_stats_get_uploaded_images_ajax(request, username, period = 'mon
     return ajax_response(response_dict)
 
 
+@require_GET
+def user_profile_stats_get_views_ajax(request, username, period = 'daily'):
+    user = User.objects.get(username = username)
+
+    import stats as _s
+    (label, data, options) = _s.views(user, period)
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
 @login_required
 @require_GET
 def user_profile_edit_basic(request):
