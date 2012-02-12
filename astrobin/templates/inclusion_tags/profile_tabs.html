@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<div class="tabs">
+    <ul>
+        {% if active_tab == 'gallery' %}
+        <li class="active">{% trans "Gallery" %}</li>
+        {% else %}
+        <li class="inactive"><a href="{% url user_page user %}">{% trans "Gallery" %}</a></li>
+        {% endif %}
+
+        {% if active_tab == 'card' %}
+        <li class="active">{% trans "Technical card" %}</li>
+        {% else %}
+        <li class="inactive"><a href="{% url user_page_card user %}">{% trans "Technical card" %}</a></li>
+        {% endif %}
+
+        {% if active_tab == 'plots' %}
+        <li class="active">{% trans "Plots" %}</li>
+        {% else %}
+        <li class="inactive"><a href="{% url user_page_plots user %}">{% trans "Plots" %}</a></li>
+        {% endif %}
+    </ul>
+</div>

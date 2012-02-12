@@ -1448,49 +1448,6 @@ def user_page(request, username):
         if UserProfile.objects.get(user=user) in viewer_profile.follows.all():
             follows = True
 
-    gear_list = [('Telescopes and lenses', profile.telescopes.all(), 'imaging_telescopes'),
-                 ('Mounts'        , profile.mounts.all(), 'mounts'),
-                 ('Cameras'       , profile.cameras.all(), 'imaging_cameras'),
-                 ('Focal reducers', profile.focal_reducers.all(), 'focal_reducers'),
-                 ('Software'      , profile.software.all(), 'software'),
-                 ('Filters'       , profile.filters.all(), 'filters'),
-                 ('Accessories'   , profile.accessories.all(), 'accessories'),
-                ]
-
-    # Calculate some stats
-    from django.template.defaultfilters import timesince
-
-    member_since = None
-    date_time = user.date_joined.replace(tzinfo = None)
-    diff = abs(date_time - datetime.datetime.today())
-    span = timesince(date_time)
-    span = span.split(",")[0] # just the most significant digit
-    if span == "0 " + _("minutes"):
-        member_since = _("seconds ago")
-    else:
-        member_since = _("%s ago") % span 
-
-    last_login = user.last_login
-    if request.user.is_authenticated():
-        viewer_profile = UserProfile.objects.get(user = request.user)
-        last_login = to_user_timezone(user.last_login, viewer_profile)
-
-    sqs = SearchQuerySet()
-    sqs = sqs.filter(username = user.username).models(Image)
-    sqs = sqs.order_by('-uploaded')
-
-    images = len(sqs)
-    integrated_images = len(sqs.filter(integration__gt = 0))
-    integration = sum([x.integration for x in sqs]) / 3600.0
-    avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
-    stats = (
-        (_('Member since'), member_since),
-        (_('Last login'), last_login),
-        (_('Images uploaded'), len(sqs)),
-        (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
-        (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
-    )
-
     section = 'public'
     subsection = request.GET.get('sub')
     if not subsection:
@@ -1668,10 +1625,83 @@ def user_page(request, username):
                          'subsection':subsection,
                          'subtitle':subtitle,
                          'backlink':backlink,
-                         'gear_list':gear_list,
-                         'stats':stats,
                          'smart_albums':smart_albums,
                         })
+
+
+@require_GET
+def user_page_card(request, username):
+    """Shows the user's public page"""
+    user = get_object_or_404(User, username = username)
+    profile = UserProfile.objects.get(user=user)
+
+    gear_list = [('Telescopes and lenses', profile.telescopes.all(), 'imaging_telescopes'),
+                 ('Mounts'        , profile.mounts.all(), 'mounts'),
+                 ('Cameras'       , profile.cameras.all(), 'imaging_cameras'),
+                 ('Focal reducers', profile.focal_reducers.all(), 'focal_reducers'),
+                 ('Software'      , profile.software.all(), 'software'),
+                 ('Filters'       , profile.filters.all(), 'filters'),
+                 ('Accessories'   , profile.accessories.all(), 'accessories'),
+                ]
+
+    # Calculate some stats
+    from django.template.defaultfilters import timesince
+
+    member_since = None
+    date_time = user.date_joined.replace(tzinfo = None)
+    diff = abs(date_time - datetime.datetime.today())
+    span = timesince(date_time)
+    span = span.split(",")[0] # just the most significant digit
+    if span == "0 " + _("minutes"):
+        member_since = _("seconds ago")
+    else:
+        member_since = _("%s ago") % span 
+
+    last_login = user.last_login
+    if request.user.is_authenticated():
+        viewer_profile = UserProfile.objects.get(user = request.user)
+        last_login = to_user_timezone(user.last_login, viewer_profile)
+
+    sqs = SearchQuerySet()
+    sqs = sqs.filter(username = user.username).models(Image)
+    sqs = sqs.order_by('-uploaded')
+
+    images = len(sqs)
+    integrated_images = len(sqs.filter(integration__gt = 0))
+    integration = sum([x.integration for x in sqs]) / 3600.0
+    avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
+    stats = (
+        (_('Member since'), member_since),
+        (_('Last login'), last_login),
+        (_('Images uploaded'), len(sqs)),
+        (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
+        (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+    )
+
+    return render_to_response(
+        'user/card.html',
+        {
+            'user':user,
+            'profile':profile,
+            'gear_list':gear_list,
+            'stats':stats,
+        },
+        context_instance = RequestContext(request))
+
+
+@require_GET
+def user_page_plots(request, username):
+    """Shows the user's public page"""
+    user = get_object_or_404(User, username = username)
+    profile = UserProfile.objects.get(user=user)
+
+    return render_to_response(
+        'user/plots.html',
+        {
+            'user':user,
+            'profile':profile,
+        },
+        context_instance = RequestContext(request))
 
 
 @require_GET

@@ -1850,6 +1850,34 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
 }
 
+.tabs {
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            float: left;
+            padding: @spacer-medium @spacer-large;
+            background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+            .rounded-corners-top;
+            .common-border;
+        }
+        li.active {
+            border-bottom: none;
+            padding-bottom: @spacer-medium + 1px;
+        }
+    }
+}
+
+.tabbed-box {
+    .full-box;
+    .rounded-corners-bottom;
+    .button-hilight-none;
+    border-top: none;
+    margin-top: 0;
+}
+
 .missing-gear-warning {
     width: 33%;
     text-align: center;
@@ -1983,6 +2011,13 @@ ul.bar {
     hr {
         display: inline-block;
         float: left;
+    }
+    h1 {
+        float: none;
+        margin-bottom: @spacer-xxlarge;
+    }
+    .plot-container {
+        margin: @spacer-xxlarge 0;
     }
     .plot {
         margin-top: @spacer-xxxlarge;
@@ -2845,6 +2880,10 @@ table.title {
         width: 90px;}}
 
 .user-card {
+    h1 {
+        float: none;
+        margin-bottom: @spacer-xxlarge;
+    }
     .gear {
         width: 50%;
         float: left;}
@@ -3308,3 +3347,6 @@ ol.faq {
     }
 }
 
+.user-about {
+    margin-top: @spacer-xxxlarge;
+}
