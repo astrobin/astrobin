@@ -252,6 +252,31 @@
             </div>
         </div>
         <div id="stats_integration_hours_by_gear_legend" class="legend"></div>
+
+        <a name="stats_views_anchor"></a>
+        <ul class="bar">
+            <li id="menu">
+                <ul class="topnav">
+                    <li class="first last">
+                        <span class="text"><a href="#">{% trans "Show by period" %}</a></span>
+                        <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
+                        <div class="sub">
+                            <ul class="subnav">
+                                <li><span class="text"><a href="{% query_string "s_vp='yearly'" "" %}#stats_views_anchor">{% trans "Yearly" %}</a></span></li>
+                                <li><span class="text"><a href="{% query_string "s_vp='monthly'" "" %}#stats_views_anchor">{% trans "Monthly" %}</a></span></li>
+                                <li><span class="text"><a href="{% query_string "s_vp='daily'" "" %}#stats_views_anchor">{% trans "Daily" %}</a></span></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div id="stats_views" class="plot" style="width:880px;height:300px;">
+            <div class="loading">
+                <p>{% trans "Please wait: the plot is loading..." %}</p>
+                <img alt="{% trans "Loading..." %}" src="/static/images/plot-loading.gif" />
+            </div>
+        </div>
     </div>
 
     <a name="card"></a>
@@ -414,6 +439,17 @@ $(document).ready(function() {
             }
         });
         stats.enableTooltips("#stats_integration_hours_by_gear");
+
+        stats.plot(
+            '#stats_views',
+            {% if 's_vp' in request.GET %}
+            "{% url stats_views user.username request.GET.s_vp %}",
+            {% else %}
+            "{% url stats_views user.username 'daily' %}",
+            {% endif %}
+            5000);
+        stats.enableTooltips("#stats_views");
+
 });
 </script>
 {% endblock %}
