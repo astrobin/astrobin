@@ -2489,8 +2489,8 @@ def stats(request):
 
     sqs = SearchQuerySet()
 
-    response_dict['total_users'] = sqs.filter(user_images__gt = 0).models(User).count() - 1
-    response_dict['total_images'] = sqs.filter().models(Image).count()
+    response_dict['total_users'] = sqs.models(User).filter(user_images__gt = 0).count()
+    response_dict['total_images'] = sqs.models(Image).all().count()
     hours = 0
     for i in sqs.filter().models(Image):
         hours += i.integration
@@ -2506,8 +2506,8 @@ def stats(request):
         elif sort == 'images':
             sort = '-user_images'
 
-    queryset = sqs.filter().models(User).order_by(sort)
-    
+    queryset = sqs.filter(user_images__gt = 0).models(User).order_by(sort)
+
     return object_list(
         request,
         queryset = queryset,
