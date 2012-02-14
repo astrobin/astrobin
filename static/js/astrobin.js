@@ -55,6 +55,44 @@ var common = {
         current_username: ''
     },
 
+    utils: {
+       getParameterByName: function(name) {
+           name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+           var regexS = "[\\?&]" + name + "=([^&#]*)";
+           var regex = new RegExp(regexS);
+           var results = regex.exec(window.location.search);
+           if(results == null)
+               return "";
+           else
+               return decodeURIComponent(results[1].replace(/\+/g, " "));
+       },
+       checkParameterExists: function(parameter) {
+           //Get Query String from url
+           fullQString = window.location.search.substring(1);
+
+           paramCount = 0;
+           queryStringComplete = "?";
+
+           if(fullQString.length > 0)
+           {
+               //Split Query String into separate parameters
+               paramArray = fullQString.split("&");
+
+               //Loop through params, check if parameter exists.  
+               for (i=0;i<paramArray.length;i++)
+               {
+                   currentParameter = paramArray[i].split("=");
+                   if(currentParameter[0] == parameter) //Parameter already exists in current url
+                   {
+                       return true;
+                   }
+               }
+           }
+
+           return false;
+       }
+    },
+
     listen_for_notifications: function(username, last_modified, etag) {
         common.globals.smart_ajax({
             'beforeSend': function(xhr) {

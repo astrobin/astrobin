@@ -6,9 +6,131 @@
 {% block content %}
 
 <a name="page_anchor"></a>
-<div class="full-box advanced-search-box">
+<div class="advanced-search-box">
     <form method="get" action="{% url haystack_search %}">
-        {{form.as_p}}
+        <div class="search-category">
+            <div class="header">
+                <span class="title">{% trans "Basic criteria" %}</span>
+            </div>
+            <div class="content">
+                <p>
+                    {% with form.q as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+                <p>
+                    {% with form.solar_system_main_subject as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+            </div>
+        </div>
+
+        <div class="search-category">
+            <div class="header">
+                <span class="title">{% trans "Gear used" %}</span>
+                <span class="control"></span>
+            </div>
+            <div class="content">
+                <p>
+                    {% with form.imaging_telescopes as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+                <p>
+                    {% with form.imaging_cameras as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+            </div>
+        </div>
+
+        <div class="search-category">
+            <div class="header">
+                <span class="title">{% trans "Acquisition details" %}</span>
+                <span class="control"></span>
+            </div>
+            <div class="content">
+                <p>
+                    {% with form.start_date as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+                <p>
+                    {% with form.end_date as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+                <p>
+                    {% with form.integration_min as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+                <p>
+                    {% with form.integration_max as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+                <p>
+                    {% with form.moon_phase_min as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+                <p>
+                    {% with form.moon_phase_max as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+            </div>
+        </div>
+
+        <div class="search-category">
+            <div class="header">
+                <span class="title">{% trans "License" %}</span>
+                <span class="control"></span>
+            </div>
+            <div class="content">
+                <p>
+                    {% with form.license as field %}
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                    {% endwith %}
+                </p>
+            </div>
+        </div>
+
         <input class="button submit-button" type="submit" value="{% trans "Search" %} &rarr;" />
     </form>
 </div>
@@ -96,6 +218,27 @@
             resultsTitleText: resultsTitleText});
         {% endfor %}
         {% endautoescape %}
+
+        var $controls = $('.search-category .header .control');
+        if (!common.utils.checkParameterExists('q')) {
+            $controls.closest('.search-category').find('.content').hide();
+            $controls.html('<a class="expand" href="#">[+]</a>');
+        } else {
+            $controls.html('<a class="collapse" href="#">[-]</a>');
+        }
+        $controls.find('a').click(function() {
+            if ($(this).hasClass('expand')) {
+                $(this).closest('.search-category').find('.content').show('fast');
+                $(this).text('[-]')
+                       .removeClass('expand')
+                       .addClass('collapse');
+            } else if ($(this).hasClass('collapse')) {
+                $(this).closest('.search-category').find('.content').hide('fast');
+                $(this).text('[+]')
+                       .removeClass('collapse')
+                       .addClass('expand');
+            }
+        });
     });
 </script>
 {% endblock %}

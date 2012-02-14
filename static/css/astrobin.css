@@ -2178,8 +2178,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 .advanced-search-box {
   float: left;
   width: 272px;
-  padding: 4px 28px;
-  background: #393939 url('/static/images/light-panel-tile.png');
+  padding: 6px 0;
+}
+.advanced-search-box form {
+  margin: 0;
+  padding: 0;
 }
 .advanced-search-box form p {
   padding: 4px 0;
@@ -2225,11 +2228,41 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   margin-left: 0;
   width: 100%;
 }
+.advanced-search-box form .search-category {
+  margin-bottom: 4px;
+  padding: 8px;
+  border: 1px dashed #505050;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  background: #393939 url('/static/images/light-panel-tile.png');
+  margin: 8px 0;
+  padding: 0;
+}
+.advanced-search-box form .search-category .header {
+  color: #fcfcfc;
+  background: #2e2e2e url('/static/images/dark-panel-tile.png');
+  padding: 8px 4px;
+  border-bottom: 1px dashed #505050;
+}
+.advanced-search-box form .search-category .header .title {
+  font-weight: bold;
+}
+.advanced-search-box form .search-category .header .control {
+  font-family: Mono;
+  letter-spacing: -2px;
+  float: right;
+  font-size: 80%;
+  margin-right: 8px;
+}
+.advanced-search-box form .search-category .content {
+  padding: 8px;
+}
 #search-results {
   float: right;
-  width: 548px;
-  height: 964px;
-  padding: 4px 28px;
+  width: 656px;
+  padding: 12px 61px;
+  box-sizing: border-box;
 }
 #search-results .noterms {
   text-align: center;
