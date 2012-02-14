@@ -2221,6 +2221,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 .advanced-search-box form ul.as-list {
   margin-left: 0;
 }
+.advanced-search-box form ul.errorlist {
+  margin-left: 0;
+}
 .advanced-search-box form .slider {
   margin: 12px;
 }

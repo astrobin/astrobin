@@ -259,9 +259,18 @@ class AdvancedSearchForm(SearchForm):
     imaging_telescopes = forms.CharField(
         required = False
     )
-
     imaging_cameras = forms.CharField(
         required = False
+    )
+    aperture_min = forms.IntegerField(
+        required = False,
+        help_text = _("Express value in mm"),
+        min_value = 0,
+    )
+    aperture_max = forms.IntegerField(
+        required = False,
+        help_text = _("Express value in mm"),
+        min_value = 0,
     )
 
     start_date = forms.DateField(
@@ -305,6 +314,8 @@ class AdvancedSearchForm(SearchForm):
         self.fields['solar_system_main_subject'].label = _("Main solar system subject")
         self.fields['imaging_telescopes'].label = _("Imaging telescopes or lenses")
         self.fields['imaging_cameras'].label = _("Imaging cameras")
+        self.fields['aperture_min'].label = _("Min. telescope aperture")
+        self.fields['aperture_max'].label = _("Max. telescope aperture")
         self.fields['start_date'].label = _("Acquired after")
         self.fields['end_date'].label = _("Acquired before")
         self.fields['integration_min'].label = _("Min. integration")
@@ -334,6 +345,12 @@ class AdvancedSearchForm(SearchForm):
 
             if self.cleaned_data['end_date']:
                 sqs = sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
+
+            if self.cleaned_data['aperture_min'] is not None:
+                sqs = sqs.filter(min_aperture__gte = self.cleaned_data['aperture_min'])
+
+            if self.cleaned_data['aperture_max'] is not None:
+                sqs = sqs.filter(max_aperture__lte = self.cleaned_data['aperture_max'])
 
             if self.cleaned_data['integration_min']:
                 sqs = sqs.filter(integration__gte=int(self.cleaned_data['integration_min'] * 3600))

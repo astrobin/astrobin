@@ -123,6 +123,9 @@ class ImageIndex(SearchIndex):
 
     license = IntegerField(model_attr = 'license')
 
+    min_aperture = IntegerField()
+    max_aperture = IntegerField()
+
     def index_queryset(self):
         return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
 
@@ -320,6 +323,21 @@ class ImageIndex(SearchIndex):
 
     def prepare_is_comets(self, obj):
         return obj.solar_system_main_subject == 10
+
+    def prepare_min_aperture(self, obj):
+        d = 0
+        for telescope in obj.imaging_telescopes.all():
+            if telescope.aperture is not None and (d == 0 or telescope.aperture < d):
+                d = int(telescope.aperture)
+        return d
+
+    def prepare_max_aperture(self, obj):
+        import sys
+        d = sys.maxint
+        for telescope in obj.imaging_telescopes.all():
+            if telescope.aperture is not None and (d == sys.maxint or telescope.aperture > d):
+                d = int(telescope.aperture)
+        return d
 
 
 class SubjectIdentifierIndex(SearchIndex):

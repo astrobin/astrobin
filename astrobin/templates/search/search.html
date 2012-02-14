@@ -13,22 +13,23 @@
                 <span class="title">{% trans "Basic criteria" %}</span>
             </div>
             <div class="content">
-                <p>
-                    {% with form.q as field %}
+                {% with form.q as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
-                <p>
-                    {% with form.solar_system_main_subject as field %}
+                {% endwith %}
+
+                {% with form.solar_system_main_subject as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
+                {% endwith %}
             </div>
         </div>
 
@@ -38,22 +39,41 @@
                 <span class="control"></span>
             </div>
             <div class="content">
-                <p>
-                    {% with form.imaging_telescopes as field %}
+                {% with form.imaging_telescopes as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
-                <p>
-                    {% with form.imaging_cameras as field %}
+                {% endwith %}
+
+                {% with form.imaging_cameras as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
+                {% endwith %}
+
+                {% with form.aperture_min as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                </p>
+                {% endwith %}
+
+                {% with form.aperture_max as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
+                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <span class="helptext">{{field.help_text}}</span>
+                </p>
+                {% endwith %}
             </div>
         </div>
 
@@ -63,54 +83,59 @@
                 <span class="control"></span>
             </div>
             <div class="content">
-                <p>
-                    {% with form.start_date as field %}
+                {% with form.start_date as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
-                <p>
-                    {% with form.end_date as field %}
+                {% endwith %}
+
+                {% with form.end_date as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
-                <p>
-                    {% with form.integration_min as field %}
+                {% endwith %}
+
+                {% with form.integration_min as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
-                <p>
-                    {% with form.integration_max as field %}
+                {% endwith %}
+
+                {% with form.integration_max as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
-                <p>
-                    {% with form.moon_phase_min as field %}
+                {% endwith %}
+
+                {% with form.moon_phase_min as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
-                <p>
-                    {% with form.moon_phase_max as field %}
+                {% endwith %}
+
+                {% with form.moon_phase_max as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
+                {% endwith %}
             </div>
         </div>
 
@@ -120,14 +145,14 @@
                 <span class="control"></span>
             </div>
             <div class="content">
-                <p>
-                    {% with form.license as field %}
+                {% with form.license as field %}
+                <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
                         {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
-                    {% endwith %}
                 </p>
+                {% endwith %}
             </div>
         </div>
 
@@ -198,6 +223,14 @@
               0, 100,
               "{% trans "Avg. Moon phase" %}:",
               "%:",
+              ""
+        );
+
+        range($('input[name="aperture_min"]'),
+              $('input[name="aperture_max"]'),
+              0, 1000,
+              "{% trans "Telescope's aperture" %}:",
+              "{% trans "mm" %}:",
               ""
         );
 
