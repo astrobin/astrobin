@@ -72,7 +72,7 @@
                     <th>{% trans "Avg. integration hours" %}</th>
                     <th>{% trans "Images uploaded" %}</th>
                 </tr>
-            {% autopaginate user_list 25 %}
+            {% autopaginate user_list 100 %}
             {% for u in user_list %}
                 <tr>
                     <td>{{page_obj.start_index|add:forloop.counter0}}</td>
