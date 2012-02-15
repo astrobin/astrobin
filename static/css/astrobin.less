@@ -1851,23 +1851,54 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .tabs {
+    /* Override some annoying jquery.ui stuff. */
+    background: transparent;
+    border-width: 0px 0px 1px 0px;
+    border-radius: 0px;
+   
+    .ui-tabs-nav {
+        padding-left: 0px;
+        background: transparent;
+        border-width: 0px;
+        border-radius: 0px;
+        -moz-border-radius: 0px;
+        -webkit-border-radius: 0px;
+    }
+    .ui-tabs-panel {
+        background: transparent;
+        border-width: 0px 1px 1px 1px;
+    } 
+    .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+        color: @link-color;
+    }
+    .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+        color: @text-color;
+    }
+
     ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
 
-        li {
+        li, li.ui-state-default {
             float: left;
             padding: @spacer-medium @spacer-large;
-            background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+            background: (@dark-panel-color) url('/static/images/dark-panel-tile.png');
             .rounded-corners-top;
             .common-border;
         }
-        li.active {
+        li.active, li.ui-state-active {
             border-bottom: none;
+            padding-bottom: @spacer-medium;
+            background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+        }
+        li.active {
             padding-bottom: @spacer-medium + 1px;
         }
     }
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+    padding-bottom: @spacer-medium;
 }
 
 .tabbed-box {
@@ -2166,6 +2197,15 @@ ul.topnav {
             padding: @spacer-medium @spacer-small;
         }
     }
+    #description {
+       .tabbed-box;
+        width: auto;
+        a, a:visited {
+            text-decoration: none;
+            color: @link-color;}
+        a:hover {
+            color: @link-color * @hilight-factor;}
+    }
     #comments {
         padding: @spacer-large;
         font-size: 1em;
@@ -2427,6 +2467,8 @@ span.copy-box {
     overflow: auto;
     background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .rounded-corners;
+    .tabbed-box;
+    width: auto;
 
     h3 {
         display: inline-block;
@@ -2464,6 +2506,12 @@ span.copy-box {
     p {
         margin: 2px 0;
     }
+
+    a, a:visited {
+        text-decoration: none;
+        color: @link-color;}
+    a:hover {
+        color: @link-color * @hilight-factor;}
 }
 
 
