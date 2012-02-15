@@ -9,7 +9,7 @@
     {% include 'inclusion_tags/profile_tabs.html' with active_tab='plots' %}
     <div class="tabbed-box clear">
         <div class="plots">
-            <h1>{% blocktrans with user.username as user %}{{user}}'s plots {% endblocktrans %}</h1>
+            <h1>{% blocktrans with user.username as user %}{{user}}'s plots{% endblocktrans %}</h1>
             <div class="plot-container">
                 {% ifequal request.user user %}
                 <p>
