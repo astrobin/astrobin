@@ -303,7 +303,6 @@ class AdvancedSearchForm(SearchForm):
         required = False,
         label = _("License"),
         choices = LICENSE_CHOICES,
-        widget=forms.CheckboxSelectMultiple(),
         initial = [x[0] for x in LICENSE_CHOICES],
     )
 
