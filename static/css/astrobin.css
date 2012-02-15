@@ -2185,7 +2185,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   padding: 0;
 }
 .advanced-search-box form p {
-  padding: 4px 0;
+  padding: 8px 0;
 }
 .advanced-search-box form .helptext {
   margin-left: 0;
@@ -2196,7 +2196,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   text-indent: 0;
   text-align: left;
   width: auto;
-  padding: 12px 0 2px 0;
+  padding: 0;
 }
 .advanced-search-box form ul li label {
   height: auto;
@@ -3967,4 +3967,8 @@ ol.faq table {
 }
 .user-about {
   margin-top: 52px;
+}
+.ui-simplemultiselect.ui-state-default, .ui-simplemultiselect.ui-state-focus, .ui-simplemultiselect.ui-state-hover {
+  font-weight: normal;
+  color: #333333;
 }

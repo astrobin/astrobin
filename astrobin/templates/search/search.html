@@ -148,7 +148,6 @@
                 {% with form.license as field %}
                 <p{% if field.errors %} class="error"{% endif %}>
                         {{field.errors}}
-                        {{field.label_tag}}
                         {{field}}
                         <span class="helptext">{{field.help_text}}</span>
                 </p>
@@ -271,6 +270,14 @@
                        .removeClass('collapse')
                        .addClass('expand');
             }
+        });
+
+        $('select[name="license"]').simplemultiselect({
+            maxWidth: 254,
+            checkAllText: "{% trans "Select all" %}",
+            uncheckAllText: "{% trans "Select none" %}",
+            noneSelectedText: "{% trans "Select licenses" %}",
+            selectedText: "{% trans "# selected" %}"
         });
     });
 </script>

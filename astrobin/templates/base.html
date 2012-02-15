@@ -28,10 +28,12 @@
         <link rel="stylesheet" href="/static/css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/facebox.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/token-input.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery.multiselect.css"/>
 
         <!-- site's css -->
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css"/>
+
 
         <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/static/css/ie6.css"/><![endif]-->
 
@@ -398,6 +400,8 @@
         <script type="text/javascript" src="/static/js/Markdown.Converter.js"></script>
         <script type="text/javascript" src="/static/js/Markdown.Sanitizer.js"></script>
 
+        <script type="text/javascript" src="/static/js/jquery.multiselect.js"></script>
+
         <script type="text/javascript" src="/static/js/astrobin.js"></script>
         {% endcompress %}
 
@@ -455,7 +459,7 @@
                     }
                 );
 
-                $("select[multiple]").multiselect({
+                $("select[multiple]").not('*[name="license"]').multiselect({
                     searchable: false,
                     dividerLocation: 0.5
                 });
