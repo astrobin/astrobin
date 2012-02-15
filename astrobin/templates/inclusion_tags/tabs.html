@@ -1,0 +1,9 @@
+{% load i18n %}
+{% if saved %}
+    <table class="form_saved">
+        <tr>
+            <td><img src="/static/icons/iconic/white/check_alt_24x24.png" alt="{% trans "Saved!" %}"/></td>
+            <td><strong>{% blocktrans %}Form saved. Thank you!{% endblocktrans %}</strong></td>
+        </tr>
+    </table>
+{% endif %}
