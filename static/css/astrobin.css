@@ -2045,15 +2045,40 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   background: none;
   background-color: #333333;
 }
+.tabs {
+  /* Override some annoying jquery.ui stuff. */
+
+  background: transparent;
+  border-width: 0px 0px 1px 0px;
+  border-radius: 0px;
+}
+.tabs .ui-tabs-nav {
+  padding-left: 0px;
+  background: transparent;
+  border-width: 0px;
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+}
+.tabs .ui-tabs-panel {
+  background: transparent;
+  border-width: 0px 1px 1px 1px;
+}
+.tabs .ui-state-default a, .tabs .ui-state-default a:link, .tabs .ui-state-default a:visited {
+  color: #cc4b2e;
+}
+.tabs .ui-state-active a, .tabs .ui-state-active a:link, .tabs .ui-state-active a:visited {
+  color: #b8b8b8;
+}
 .tabs ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-.tabs ul li {
+.tabs ul li, .tabs ul li.ui-state-default {
   float: left;
   padding: 8px 12px;
-  background: #393939 url('/static/images/light-panel-tile.png');
+  background: #2e2e2e url('/static/images/dark-panel-tile.png');
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -2062,9 +2087,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
 }
-.tabs ul li.active {
+.tabs ul li.active, .tabs ul li.ui-state-active {
   border-bottom: none;
+  padding-bottom: 8px;
+  background: #393939 url('/static/images/light-panel-tile.png');
+}
+.tabs ul li.active {
   padding-bottom: 9px;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+  padding-bottom: 8px;
 }
 .tabbed-box {
   width: 880px;
@@ -2628,6 +2660,118 @@ ul.topnav > li:hover {
 #image-detail #description p, #image-detail #comments p {
   padding: 8px 4px;
 }
+#image-detail #description {
+  width: 880px;
+  padding: 28px;
+  margin: 12px 0;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background: #393939 url('/static/images/light-panel-tile.png');
+  border: 1px solid #2e2e2e;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  -moz-border-radius: 0 0 6px 6px;
+  -webkit-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-top: none;
+  margin-top: 0;
+  width: auto;
+}
+#image-detail #description label {
+  height: 16px;
+  text-align: right;
+  width: 150px;
+}
+#image-detail #description .submit-button {
+  margin-left: 170px;
+  width: 200px;
+}
+#image-detail #description .lone-button {
+  margin: 0 auto;
+  width: 200px;
+}
+#image-detail #description .inline-button {
+  width: auto;
+  margin: 0;
+}
+#image-detail #description .fieldless {
+  text-align: center;
+}
+#image-detail #description .fieldless .button {
+  left: 0;
+}
+#image-detail #description ul.token-input-list {
+  display: inline-block;
+  list-style-type: none;
+  border: 1px solid #2e2e2e;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.15) 0 -1px 2px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.15) 0 -1px 2px;
+  box-shadow: inset rgba(255, 255, 255, 0.15) 0 -1px 2px;
+  padding: 8px 4px;
+  margin: 4px 0;
+  overflow: auto;
+  background-color: #333333;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  width: 70%;
+}
+#image-detail #description ul.token-input-list li.token-input-token {
+  margin: 0;
+  padding: 0;
+  display: -moz-inline-box;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+  height: auto;
+  font-size: 14px;
+  color: #b8b8b8;
+  border: 1px solid #b64329;
+  background: #cc4b2e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e45434), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #e45434, #cc4b2e);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.35) 0 1px 2px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.35) 0 1px 2px;
+  box-shadow: inset rgba(255, 255, 255, 0.35) 0 1px 2px;
+  color: #fcfcfc;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 12px 0;
+  padding: 4px 8px;
+  cursor: pointer;
+  padding: 8px;
+  margin: 2px 0;
+  width: 70%;
+}
+#image-detail #description ul.token-input-list li.token-input-input-token {
+  border: none;
+}
+#image-detail #description ul.token-input-list li.token-input-input-token input, #image-detail #description ul.token-input-list li.token-input-input-token textarea {
+  width: 70%;
+  margin: 4px 0;
+  background: none;
+  background-color: #333333;
+}
+#image-detail #description a, #image-detail #description a:visited {
+  text-decoration: none;
+  color: #cc4b2e;
+}
+#image-detail #description a:hover {
+  color: #e45434;
+}
 #image-detail #comments {
   padding: 12px;
   font-size: 1em;
@@ -2948,6 +3092,109 @@ span.copy-box {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
+  width: 880px;
+  padding: 28px;
+  margin: 12px 0;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background: #393939 url('/static/images/light-panel-tile.png');
+  border: 1px solid #2e2e2e;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  -moz-border-radius: 0 0 6px 6px;
+  -webkit-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-top: none;
+  margin-top: 0;
+  width: auto;
+}
+#technical-card label {
+  height: 16px;
+  text-align: right;
+  width: 150px;
+}
+#technical-card .submit-button {
+  margin-left: 170px;
+  width: 200px;
+}
+#technical-card .lone-button {
+  margin: 0 auto;
+  width: 200px;
+}
+#technical-card .inline-button {
+  width: auto;
+  margin: 0;
+}
+#technical-card .fieldless {
+  text-align: center;
+}
+#technical-card .fieldless .button {
+  left: 0;
+}
+#technical-card ul.token-input-list {
+  display: inline-block;
+  list-style-type: none;
+  border: 1px solid #2e2e2e;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.15) 0 -1px 2px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.15) 0 -1px 2px;
+  box-shadow: inset rgba(255, 255, 255, 0.15) 0 -1px 2px;
+  padding: 8px 4px;
+  margin: 4px 0;
+  overflow: auto;
+  background-color: #333333;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  width: 70%;
+}
+#technical-card ul.token-input-list li.token-input-token {
+  margin: 0;
+  padding: 0;
+  display: -moz-inline-box;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+  height: auto;
+  font-size: 14px;
+  color: #b8b8b8;
+  border: 1px solid #b64329;
+  background: #cc4b2e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e45434), to(#cc4b2e));
+  background: -moz-linear-gradient(top, #e45434, #cc4b2e);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.35) 0 1px 2px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.35) 0 1px 2px;
+  box-shadow: inset rgba(255, 255, 255, 0.35) 0 1px 2px;
+  color: #fcfcfc;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 12px 0;
+  padding: 4px 8px;
+  cursor: pointer;
+  padding: 8px;
+  margin: 2px 0;
+  width: 70%;
+}
+#technical-card ul.token-input-list li.token-input-input-token {
+  border: none;
+}
+#technical-card ul.token-input-list li.token-input-input-token input, #technical-card ul.token-input-list li.token-input-input-token textarea {
+  width: 70%;
+  margin: 4px 0;
+  background: none;
+  background-color: #333333;
 }
 #technical-card h3 {
   display: inline-block;
@@ -2979,6 +3226,13 @@ span.copy-box {
 }
 #technical-card p {
   margin: 2px 0;
+}
+#technical-card a, #technical-card a:visited {
+  text-decoration: none;
+  color: #cc4b2e;
+}
+#technical-card a:hover {
+  color: #e45434;
 }
 /* footer */
 #footer {
@@ -3967,8 +4221,4 @@ ol.faq table {
 }
 .user-about {
   margin-top: 52px;
-}
-.ui-simplemultiselect.ui-state-default, .ui-simplemultiselect.ui-state-focus, .ui-simplemultiselect.ui-state-hover {
-  font-weight: normal;
-  color: #333333;
 }
