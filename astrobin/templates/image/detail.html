@@ -452,7 +452,10 @@
             <div class="tabs clear">
                 <ul style="display:none">
                     <li><a href="#technical-card">{% trans "Technical card" %}</a></li>
+                    {% if image.description %}
                     <li><a href="#description">{% trans "Description" %}</a></li>
+                    {% endif %}
+                    <li><a href="#views">{% trans "Views" %}</a></li>
                 </ul>
 
                 <div id="technical-card">
@@ -552,6 +555,12 @@
                 {% if image.description %}
                 <div id="description">{{image.description|safe|linebreaks}}</div>
                 {% endif %}
+
+                <div id="views" class="plots">
+                    <div class="plot-container">
+                        <div class="plot" style="width:662px; height: 180px;"></div>
+                    </div>
+                </div>
             </div> <!-- tabs -->
 
             <h3>{% trans "Comments" %}</h3>
@@ -1015,8 +1024,16 @@ $(document).ready(function() {
             }
         });
 
-        $('.tabs').tabs();
         $('.tabs ul').show();
+
+        stats.init();
+        stats.plot(
+            '#views .plot',
+            '{% url stats_image_views image.id 'daily' %}',
+            5000);
+        stats.enableTooltips('#views .plot');
+
+        $('.tabs').tabs();
     });
 </script>
 {% endblock %}

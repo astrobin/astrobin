@@ -213,3 +213,43 @@ def views(user, period='daily'):
 
     return (flot_label, flot_data, flot_options)
 
+def image_views(image_id, period='daily'):
+    _map = {
+        'yearly' : (_("Views, yearly") , '%Y'),
+        'monthly': (_("Views, monthly"), '%Y-%m'),
+        'daily'  : (_("Views, daily")  , '%Y-%m-%d'),
+    }
+
+    flot_label = _map[period][0]
+    flot_data = []
+    flot_options = {
+        'xaxis': {'mode': 'time'},
+        'lines': {'show': 'true', 'fill': 'true'},
+        'points': {'show': 'true'},
+        'legend': {
+            'position': 'nw',
+            'backgroundColor': '#000000',
+            'backgroundOpacity': 0.75},
+        'grid': {'hoverable': 'true'},
+    }
+
+    all = Hit.objects.filter(hitcount__object_pk = image_id).order_by('created')
+    data = {}
+    for i in all:
+        key = i.created.date().strftime(_map[period][1])
+        if key in data:
+            data[key] += 1
+        else:
+            data[key] = 1 
+
+    if all:
+        for date in daterange(all[0].created.date(), datetime.today().date()):
+            grouped_date = date.strftime(_map[period][1])
+            t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+            if grouped_date in data.keys():
+                flot_data.append([t, data[grouped_date]])
+            else:
+                flot_data.append([t, 0])
+
+    return (flot_label, flot_data, flot_options)
+
