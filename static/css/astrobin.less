@@ -1662,7 +1662,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 #content {
     float: left;
-    width: @site-width - 20px;
+    width: 100%;
+    box-sizing: border-box;
     padding: @spacer-large;
     display: inline;}
 
@@ -1799,7 +1800,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     float: right;}
 
 .full-box {
-    width: @site-width - 80px;
     padding: @spacer-xxlarge;
     margin: @spacer-large 0;
     .rounded-corners;
@@ -1918,6 +1918,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     float: left;
     width: 272px;
     padding: 6px 0;
+    margin-right: @spacer-medium;
 
     form {
         margin: 0;
@@ -2187,7 +2188,7 @@ ul.topnav {
                 border: none;}
             img.fixed-plot-overlay {
                 opacity: 1.0;}}}
-    #description, #comments {
+    #description, #comments, #views {
         margin: 0 0 @spacer-xxlarge 0;
         .common-border;
         background: (@light-panel-color) url('/static/images/light-panel-tile.png');
@@ -2197,14 +2198,22 @@ ul.topnav {
             padding: @spacer-medium @spacer-small;
         }
     }
-    #description {
-       .tabbed-box;
-        width: auto;
+    #description, #views {
+        .tabbed-box;
+        padding: 12px;
         a, a:visited {
             text-decoration: none;
             color: @link-color;}
         a:hover {
             color: @link-color * @hilight-factor;}
+    }
+    #views {
+        .plot-container {
+            margin: 0;
+            .plot {
+                margin: @spacer-large;
+            }
+        }
     }
     #comments {
         padding: @spacer-large;
@@ -2460,15 +2469,15 @@ span.copy-box {
     background-color: @dark-panel-color;
     .rounded-corners;}
 
-#technical-card {
-    margin-bottom: @spacer-large;
-    padding: @spacer-large;
+#technical-card, #description, #views {
     .common-border;
     overflow: auto;
     background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .rounded-corners;
     .tabbed-box;
-    width: auto;
+    margin-bottom: @spacer-large;
+    padding: @spacer-large;
+    width: 694px; /* Why?!? */
 
     h3 {
         display: inline-block;
@@ -2530,7 +2539,6 @@ span.copy-box {
 #footer-outer {
     clear: both;
     margin: 0 auto;
-    width: @site-width;
     font-size: .9em;
     text-align: left;}
 
@@ -2997,7 +3005,6 @@ table.title {
 .hentry {
     padding: @spacer-large @spacer-xxlarge @spacer-xxxlarge @spacer-xxlarge;
     margin: 0 auto @spacer-large auto;
-    width: 600px;
     background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .common-border;
     h2 {
@@ -3059,7 +3066,7 @@ table.title {
         border-bottom: 1px solid @border-bottom-color;
     }
     .thumbnail-list {
-        padding: @spacer-medium 84px;
+        padding: @spacer-medium 83px;
     }
 }
 .album-part:last-child {
