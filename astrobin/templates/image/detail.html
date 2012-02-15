@@ -585,7 +585,7 @@
                         <div style="margin-left: {{node.get_level|add:node.get_level}}em">
                             <div id="c{{node.id}}" class="comment">
                                 <div class="meta">
-                                    <a class="author" href="#">{{node.author}}</a> {{node.added|ago}}
+                                    <a class="author" href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
                                 </div>
                                 <div class="content{% if node.is_deleted %} deleted{% endif %}">
                                     {% if node.is_deleted %}
@@ -772,7 +772,7 @@ $(document).ready(function() {
                 $container.append($new_comment);
 
                 $meta = $('<div/>').addClass('meta');
-                $author = $('<a/>').addClass('author').text('{{user.username}}');
+                $author = $('<a/>').attr('href', '{% url user_page user %}').addClass('author').text('{{user.username}}');
                 $meta.append($author).append("{% trans "just now" %}");
 
                 $links = $('<div/>').addClass('links');
