@@ -153,8 +153,15 @@
                             {% if request.user.is_authenticated %}
                             <li id="{% current request "^/stats/$" %}"><a href="{% url stats %}">{% trans "Stats" %}</a></li>
                             {% endif %}
-                            <li id="{% current request "^/help/$" %}"><a href="{% url help %}">{% trans "Help" %}</a></li>
-                            <li id="{% current request "^/faq/$" %}"><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
+                            <li class="menu text">
+                                <a href="{% url help %}">{% trans "Help" %}</a>
+                                <div class="popup">
+                                    <ul>
+                                        <li><a href="{% url help %}">{% trans "What is this site?" %}</a></li>
+                                        <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <div id="user-nav">
