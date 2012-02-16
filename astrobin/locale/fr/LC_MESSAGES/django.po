@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-15 10:21-0500\n"
-"PO-Revision-Date: 2012-02-08 18:39+0100\n"
+"PO-Revision-Date: 2012-02-15 16:35+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -1144,9 +1144,8 @@ msgid "Users"
 msgstr "Utilisateurs"
 
 #: forms.py:267 forms.py:272
-#, fuzzy
 msgid "Express value in mm"
-msgstr "Exprimez les valeurs en heures"
+msgstr "Exprimez les valeurs en mm"
 
 #: forms.py:279 forms.py:284 forms.py:429 forms.py:468 forms.py:500
 msgid "Please use the following format: yyyy-mm-dd"
@@ -1173,11 +1172,11 @@ msgstr "Objet du système solaire"
 
 #: forms.py:316
 msgid "Min. telescope aperture"
-msgstr ""
+msgstr "Diamètre instrument min."
 
 #: forms.py:317
 msgid "Max. telescope aperture"
-msgstr ""
+msgstr "Diamètre instrument max."
 
 #: forms.py:318
 msgid "Acquired after"
@@ -1507,7 +1506,7 @@ msgstr "Objectif"
 
 #: models.py:180
 msgid "Binoculars"
-msgstr ""
+msgstr "Jumelles"
 
 #: models.py:184
 msgid "Aperture"
@@ -2066,19 +2065,19 @@ msgstr "Pays"
 
 #: models.py:1252
 msgid "North"
-msgstr ""
+msgstr "Nord"
 
 #: models.py:1252
 msgid "South"
-msgstr ""
+msgstr "Sud"
 
 #: models.py:1268
 msgid "East"
-msgstr ""
+msgstr "Est"
 
 #: models.py:1268
 msgid "West"
-msgstr ""
+msgstr "Ouest"
 
 #: models.py:1273
 msgid "Altitude"
@@ -2134,18 +2133,16 @@ msgid "Uploaded images, daily"
 msgstr "Images publiées, par jour"
 
 #: stats.py:177 stats.py:218
-#, fuzzy
 msgid "Views, yearly"
-msgstr "Images publiées, par année"
+msgstr "Vues, par année"
 
 #: stats.py:178 stats.py:219
-#, fuzzy
 msgid "Views, monthly"
-msgstr "Images publiées, par mois"
+msgstr "Vues, par mois"
 
 #: stats.py:179 stats.py:220
 msgid "Views, daily"
-msgstr ""
+msgstr "Vues, par jour"
 
 #: views.py:565
 msgid "Resolution"
@@ -2441,12 +2438,11 @@ msgstr "FAQ"
 
 #: templates/base.html:183
 msgid "My page"
-msgstr ""
+msgstr "Ma page"
 
 #: templates/base.html:186
-#, fuzzy
 msgid "Edit my profile"
-msgstr "Modifier le profil"
+msgstr "Modifier mon profil"
 
 #: templates/base.html:189 templates/user/profile.html:188
 #: templates/user/profile.html.py:191
@@ -4215,14 +4211,14 @@ msgstr ""
 "d'acquisition supplémentaires."
 
 #: templates/image/edit/acquisition.html:47
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
 msgstr ""
-"Il y a trop de données à gérer? Vous pouvez retourner au <a href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">formulaire de base</"
-"a>."
+"Il y a trop de données à gérer? Vous pouvez retourner au <a class=\"button\" "
+"href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">formulaire de "
+"base</a>."
 
 #: templates/image/edit/acquisition.html:52
 msgid "Acquisition session"
@@ -4238,7 +4234,7 @@ msgid "Add more"
 msgstr "Davantage"
 
 #: templates/image/edit/acquisition.html:76
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
@@ -4247,8 +4243,8 @@ msgid ""
 msgstr ""
 "A l'aide de ce formulaire, vous pouvez indiquer les détails de base "
 "concernant l'acquisition de votre image. Si vous désirez être plus précis ou "
-"indiquer les détails pour chaque filtre, utilisez le <a href="
-"\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">formulaire "
+"indiquer les détails pour chaque filtre, utilisez le <a class=\"button\" "
+"href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">formulaire "
 "avancé</a>."
 
 #: templates/image/edit/acquisition.html:95
@@ -4461,13 +4457,12 @@ msgstr "Vous n'avez pas de nouvelles notifications."
 #: templates/inclusion_tags/profile_tabs.html:6
 #: templates/inclusion_tags/profile_tabs.html:8
 msgid "Gallery"
-msgstr ""
+msgstr "Galerie"
 
 #: templates/inclusion_tags/profile_tabs.html:18
 #: templates/inclusion_tags/profile_tabs.html:20
-#, fuzzy
 msgid "Plots"
-msgstr "Tracer par"
+msgstr "Graphiques"
 
 #: templates/inclusion_tags/related_images.html:16
 msgid "newer"
@@ -5210,7 +5205,7 @@ msgstr "Noter comme effectué."
 
 #: templates/search/search.html:13
 msgid "Basic criteria"
-msgstr ""
+msgstr "Critère de base"
 
 #: templates/search/search.html:165
 msgid "Sort by:"
@@ -5229,13 +5224,12 @@ msgid "Please input some search terms!"
 msgstr "S'il vous plaît, entrez des termes de recherche!"
 
 #: templates/search/search.html:231
-#, fuzzy
 msgid "Telescope's aperture"
-msgstr "Télescopes et objectifs"
+msgstr "Diamètre de l'instrument"
 
 #: templates/search/search.html:232
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: templates/search/search.html:278
 #: templates/user/profile/flickr_import.html:75
@@ -5248,14 +5242,12 @@ msgid "Select none"
 msgstr "Ne rien sélectionner"
 
 #: templates/search/search.html:280
-#, fuzzy
 msgid "Select licenses"
-msgstr "Licence par défaut"
+msgstr "Sélection des licences"
 
 #: templates/search/search.html:281
-#, fuzzy
 msgid "# selected"
-msgstr "Aucun fichier sélectionné"
+msgstr "# sélectionné"
 
 #: templates/user/card.html:12
 #, python-format
@@ -5286,9 +5278,9 @@ msgid "User not found:"
 msgstr "Utilisateur inconnu:"
 
 #: templates/user/plots.html:5 templates/user/plots.html.py:12
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's plots"
-msgstr "Statistiques de %(user)s"
+msgstr "Graphiques de %(user)s"
 
 #: templates/user/plots.html:16
 #, python-format
@@ -5304,14 +5296,12 @@ msgstr ""
 "public&sub=nodata\">ici</a>."
 
 #: templates/user/plots.html:21
-#, fuzzy
 msgid "Integration hours"
-msgstr "Heures d'intégration, par jour"
+msgstr "Heures d'intégration"
 
 #: templates/user/plots.html:22
-#, fuzzy
 msgid "Total integration hours, plotted against time."
-msgstr "Intégration totale durant les 12 derniers mois"
+msgstr "Intégration totale, par période."
 
 #: templates/user/plots.html:27 templates/user/plots.html.py:56
 #: templates/user/plots.html:86 templates/user/plots.html.py:115
@@ -5334,34 +5324,31 @@ msgid "Daily"
 msgstr "Jour"
 
 #: templates/user/plots.html:50
-#, fuzzy
 msgid "Integration hours by gear"
-msgstr "Heures d'intégration, par an"
+msgstr "Heures d'intégration, par instrument"
 
 #: templates/user/plots.html:51
 msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
-msgstr ""
+msgstr "Intégration totale, par période, instruments et objectifs."
 
 #: templates/user/plots.html:81
 msgid "Combined view count for all the user's images, plotted against time."
-msgstr ""
+msgstr "Nombre de vues pour l'ensemble des images publiées, par période."
 
 #: templates/user/plots.html:109
-#, fuzzy
 msgid "Uploaded images"
-msgstr "Images publiées, par jour"
+msgstr "Images publiées"
 
 #: templates/user/plots.html:110
-#, fuzzy
 msgid "Image uploads, plotted against time."
-msgstr "Chargements illimités, taille illimitée."
+msgstr "Publications d'images, par période."
 
 #: templates/user/profile.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's gallery"
-msgstr "Statistiques de %(user)s"
+msgstr "Galerie de %(user)s"
 
 #: templates/user/profile.html:13
 msgid "View your images"
