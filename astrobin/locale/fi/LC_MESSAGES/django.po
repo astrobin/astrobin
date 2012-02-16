@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-15 10:20-0500\n"
-"PO-Revision-Date: 2012-02-07 10:42+0100\n"
+"PO-Revision-Date: 2012-02-16 11:25+0100\n"
 "Last-Translator: vostok <vostok@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
@@ -1138,9 +1138,8 @@ msgid "Users"
 msgstr "Käyttäjät"
 
 #: forms.py:267 forms.py:272
-#, fuzzy
 msgid "Express value in mm"
-msgstr "Ilmaise arvo tunneissa"
+msgstr "Ilmaise arvo millimetreissä"
 
 #: forms.py:279 forms.py:284 forms.py:429 forms.py:468 forms.py:500
 msgid "Please use the following format: yyyy-mm-dd"
@@ -1166,11 +1165,11 @@ msgstr "Aurinkokunnan kohde"
 
 #: forms.py:316
 msgid "Min. telescope aperture"
-msgstr ""
+msgstr "Kaukoputken minimiapertuuri"
 
 #: forms.py:317
 msgid "Max. telescope aperture"
-msgstr ""
+msgstr "Kaukoputken maksimiapertuuri"
 
 #: forms.py:318
 msgid "Acquired after"
@@ -1497,7 +1496,7 @@ msgstr "Kameran linssi"
 
 #: models.py:180
 msgid "Binoculars"
-msgstr ""
+msgstr "Kiikarit"
 
 #: models.py:184
 msgid "Aperture"
@@ -2041,19 +2040,19 @@ msgstr "Valtio"
 
 #: models.py:1252
 msgid "North"
-msgstr ""
+msgstr "Pohjoinen"
 
 #: models.py:1252
 msgid "South"
-msgstr ""
+msgstr "Etelä"
 
 #: models.py:1268
 msgid "East"
-msgstr ""
+msgstr "Itä"
 
 #: models.py:1268
 msgid "West"
-msgstr ""
+msgstr "Länsi"
 
 #: models.py:1273
 msgid "Altitude"
@@ -2109,18 +2108,16 @@ msgid "Uploaded images, daily"
 msgstr "Ladatut kuvat, päivittäin"
 
 #: stats.py:177 stats.py:218
-#, fuzzy
 msgid "Views, yearly"
 msgstr "Ladatut kuvat, vuosittain"
 
 #: stats.py:178 stats.py:219
-#, fuzzy
 msgid "Views, monthly"
 msgstr "Ladatut kuvat, kuukausittain"
 
 #: stats.py:179 stats.py:220
 msgid "Views, daily"
-msgstr ""
+msgstr "Ladatut kuvat, päivittäin"
 
 #: views.py:565
 msgid "Resolution"
@@ -2408,12 +2405,11 @@ msgstr "UKK"
 
 #: templates/base.html:183
 msgid "My page"
-msgstr ""
+msgstr "Minun sivuni"
 
 #: templates/base.html:186
-#, fuzzy
 msgid "Edit my profile"
-msgstr "Muokka profiilia"
+msgstr "Muokkaa profiilia"
 
 #: templates/base.html:189 templates/user/profile.html:188
 #: templates/user/profile.html.py:191
@@ -4135,13 +4131,13 @@ msgstr ""
 "lopettaaksesi, tai <strong>Lisää</strong> lisätäksesi muita kuvaussessioita."
 
 #: templates/image/edit/acquisition.html:47
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
 msgstr ""
-"Onko dataa tarpeettoman paljon? Kokeile <a href=\"%(basic_form_url)s?"
-"edit_type=deep_sky&advanced=false\">peruslomaketta</a>."
+"Onko dataa tarpeettoman paljon? Kokeile <a class=\"button\" href=\"%"
+"(basic_form_url)s?edit_type=deep_sky&advanced=false\">peruslomaketta</a>."
 
 #: templates/image/edit/acquisition.html:52
 msgid "Acquisition session"
@@ -4157,7 +4153,7 @@ msgid "Add more"
 msgstr "Lisää"
 
 #: templates/image/edit/acquisition.html:76
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
@@ -4165,8 +4161,9 @@ msgid ""
 "edit_type=deep_sky&advanced=true\">advanced form</a>."
 msgstr ""
 "Tällä lomakkeella voit syöttää kuvasi perustiedot. Jos haluat merkitä "
-"kattavampia tietoja tai yksittäisten suodattimien tietoja, kokeile <a href="
-"\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">kattavampaa "
+"kattavampia tietoja tai yksittäisten suodattimien tietoja, kokeile <a "
+"class=\"button\" href=\"%"
+"(advanced_form_url)s?edit_type=deep_sky&advanced=true\">kattavampaa "
 "lomaketta</a>."
 
 #: templates/image/edit/acquisition.html:95
@@ -4375,13 +4372,12 @@ msgstr "Sinulle ei ole uusia ilmoituksia."
 #: templates/inclusion_tags/profile_tabs.html:6
 #: templates/inclusion_tags/profile_tabs.html:8
 msgid "Gallery"
-msgstr ""
+msgstr "Galleria"
 
 #: templates/inclusion_tags/profile_tabs.html:18
 #: templates/inclusion_tags/profile_tabs.html:20
-#, fuzzy
 msgid "Plots"
-msgstr "Piirrä"
+msgstr "Kuvaajat"
 
 #: templates/inclusion_tags/related_images.html:16
 msgid "newer"
@@ -5110,7 +5106,7 @@ msgstr "Merkitse valmiiksi."
 
 #: templates/search/search.html:13
 msgid "Basic criteria"
-msgstr ""
+msgstr "Peruskriteerit"
 
 #: templates/search/search.html:165
 msgid "Sort by:"
@@ -5129,13 +5125,12 @@ msgid "Please input some search terms!"
 msgstr "Syötä hakusanoja!"
 
 #: templates/search/search.html:231
-#, fuzzy
 msgid "Telescope's aperture"
-msgstr "Kaukoputket ja linssit"
+msgstr "Kaukoputken apertuuri"
 
 #: templates/search/search.html:232
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: templates/search/search.html:278
 #: templates/user/profile/flickr_import.html:75
@@ -5148,14 +5143,13 @@ msgid "Select none"
 msgstr "Poista valinnat"
 
 #: templates/search/search.html:280
-#, fuzzy
 msgid "Select licenses"
-msgstr "Oletuslisenssi"
+msgstr "Valitse lisenssit"
 
+# Leave the # sign the same! This refers to the number of selected item in a list.
 #: templates/search/search.html:281
-#, fuzzy
 msgid "# selected"
-msgstr "Yhtään tiedostoa ei ole valittu"
+msgstr "# valittu"
 
 #: templates/user/card.html:12
 #, python-format
@@ -5186,7 +5180,7 @@ msgid "User not found:"
 msgstr "Käyttäjää ei löytynyt:"
 
 #: templates/user/plots.html:5 templates/user/plots.html.py:12
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's plots"
 msgstr "Käyttäjän %(user)s tilastot"
 
@@ -5203,14 +5197,12 @@ msgstr ""
 "kuvistasi tietoja <a href=\"?public&sub=nodata\">täällä</a>."
 
 #: templates/user/plots.html:21
-#, fuzzy
 msgid "Integration hours"
-msgstr "Valotusaika, päivittäin"
+msgstr "Valotusaika"
 
 #: templates/user/plots.html:22
-#, fuzzy
 msgid "Total integration hours, plotted against time."
-msgstr "Kokonaisvalotusaika viime vuonna"
+msgstr "Kokonaisvalotusaika."
 
 #: templates/user/plots.html:27 templates/user/plots.html.py:56
 #: templates/user/plots.html:86 templates/user/plots.html.py:115
@@ -5233,34 +5225,33 @@ msgid "Daily"
 msgstr "Päivittäin"
 
 #: templates/user/plots.html:50
-#, fuzzy
 msgid "Integration hours by gear"
-msgstr "Valotusaika, vuosittain"
+msgstr "Valotusaika kuvauslaitteittain"
 
 #: templates/user/plots.html:51
 msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
 msgstr ""
+"Kokonaisvalotusaika tunneissa ajan funktiona, järjestettynä optiikan ja "
+"kameran mukaan."
 
 #: templates/user/plots.html:81
 msgid "Combined view count for all the user's images, plotted against time."
-msgstr ""
+msgstr "Käyttäjän kaikkien kuvien yhteenlasketut näyttökerrat ajan funktiona."
 
 #: templates/user/plots.html:109
-#, fuzzy
 msgid "Uploaded images"
-msgstr "Ladatut kuvat, päivittäin"
+msgstr "Ladatut kuvat"
 
 #: templates/user/plots.html:110
-#, fuzzy
 msgid "Image uploads, plotted against time."
-msgstr "Rajaton määrä rajattoman kokoisia latauksia."
+msgstr "Ladattujen kuvien määrä ajan funktiona."
 
 #: templates/user/profile.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's gallery"
-msgstr "Käyttäjän %(user)s tilastot"
+msgstr "Käyttäjän %(user)s galleria"
 
 #: templates/user/profile.html:13
 msgid "View your images"
