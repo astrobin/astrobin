@@ -1113,7 +1113,7 @@ form {
         background: (@regular-panel-color) url('/static/images/regular-panel-tile.png');
         color: @text-color + #111;
         box-sizing: border-box;
-        -mz-box-sizing: border-box;
+        -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         -ms-box-sizing: border-box;
         width: 70%;
@@ -1664,7 +1664,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     float: left;
     width: 100%;
     box-sizing: border-box;
-    padding: @spacer-large;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+   padding: @spacer-large;
     display: inline;}
 
 .info-side-bar {
@@ -1742,6 +1745,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     ul.as-selections {
         width: 100%;
         box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+
         li.as-original input {
             width: 220px;}}
     ul.as-list {
@@ -1805,6 +1812,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .rounded-corners;
     background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .common-border;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+
+    width: 100%;
+
     label {
         height: @spacer-xlarge;
         text-align: right;
@@ -1951,6 +1965,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         ul.as-selections {
             width: 100%;
             box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -ms-box-sizing: border-box;
         }
         li.as-original {
             width: 100%;
@@ -1988,7 +2005,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
                 }
                 .control {
                     font-family: Mono;
-                    letter-spacing: -2px;
+                    letter-spacing: 2px;
                     float: right;
                     font-size: 80%;
                     margin-right: @spacer-medium;
@@ -2006,6 +2023,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: 656px;
     padding: @spacer-large 61px;
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
 
     .noterms {
         text-align: center;
@@ -2200,6 +2220,7 @@ ul.topnav {
     }
     #description, #views {
         .tabbed-box;
+        width: 720px;
         padding: 12px;
         a, a:visited {
             text-decoration: none;
@@ -2477,7 +2498,7 @@ span.copy-box {
     .tabbed-box;
     margin-bottom: @spacer-large;
     padding: @spacer-large;
-    width: 694px; /* Why?!? */
+    width: 720px; /* Why?!? */
 
     h3 {
         display: inline-block;
@@ -3276,7 +3297,12 @@ div.token-input-dropdown {
 
 #why-astrobin {
     width: 600px;
-    height: 95px;
+    height: 154px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+
     position: relative;
     margin: 0 auto;
     .box-shadow-subtle;

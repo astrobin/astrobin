@@ -1042,7 +1042,7 @@ form textarea {
   background: #303030 url('/static/images/regular-panel-tile.png');
   color: #c9c9c9;
   box-sizing: border-box;
-  -mz-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
   width: 70%;
@@ -1742,6 +1742,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   float: left;
   width: 100%;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
   padding: 12px;
   display: inline;
 }
@@ -1845,6 +1848,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 .sided-main-content-popup ul.as-selections {
   width: 100%;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
 }
 .sided-main-content-popup ul.as-selections li.as-original input {
   width: 220px;
@@ -1961,6 +1967,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  width: 100%;
 }
 .full-box label {
   height: 16px;
@@ -2109,6 +2120,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  width: 100%;
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
@@ -2243,6 +2259,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 .advanced-search-box form ul.as-selections {
   width: 100%;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
 }
 .advanced-search-box form li.as-original {
   width: 100%;
@@ -2285,7 +2304,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 .advanced-search-box form .search-category .header .control {
   font-family: Mono;
-  letter-spacing: -2px;
+  letter-spacing: 2px;
   float: right;
   font-size: 80%;
   margin-right: 8px;
@@ -2298,6 +2317,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   width: 656px;
   padding: 12px 61px;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
 }
 #search-results .noterms {
   text-align: center;
@@ -2315,6 +2337,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  width: 100%;
 }
 .tools-box label {
   height: 16px;
@@ -2670,6 +2697,11 @@ ul.topnav > li:hover {
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  width: 100%;
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
@@ -2678,6 +2710,7 @@ ul.topnav > li:hover {
   box-shadow: none;
   border-top: none;
   margin-top: 0;
+  width: 720px;
   padding: 12px;
 }
 #image-detail #description label, #image-detail #views label {
@@ -3110,6 +3143,11 @@ span.copy-box {
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  width: 100%;
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
@@ -3120,7 +3158,7 @@ span.copy-box {
   margin-top: 0;
   margin-bottom: 12px;
   padding: 12px;
-  width: 694px;
+  width: 720px;
   /* Why?!? */
 
 }
@@ -4105,7 +4143,11 @@ div.token-input-dropdown p {
 }
 #why-astrobin {
   width: 600px;
-  height: 95px;
+  height: 154px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
   position: relative;
   margin: 0 auto;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
