@@ -8,64 +8,66 @@
 <div class="profile">
     {% include 'inclusion_tags/profile_tabs.html' with active_tab='card' %}
     <div class="tabbed-box clear">
-        <div class="user-card">
-            <h1>{% blocktrans with user.username as username %}{{username}}'s technical card{% endblocktrans %}</h1>
-            <div class="gear">
-                <h3>{% trans "Gear" %}</h3>
-                {% for i in gear_list %}
-                    <p>
-                        <strong>{% trans i.0 %}:&nbsp;</strong>
-                        {% for g in i.1 %}
-                            {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}<a href="/search/?q=&as_values_{{i.2}}={{g.id}}">{{g.name|escape}}</a>{% else %}<a href="/search/?q={{g.name|escape}}&type={{i.2}}">{{g.name|escape}}</a>{% endif %}{% if not forloop.last %},{% endif %}
-                        {% endfor %}
-                    </p>
-                {% endfor %}
+        <div class="container">
+            <div class="user-card">
+                <h1>{% blocktrans with user.username as username %}{{username}}'s technical card{% endblocktrans %}</h1>
+                <div class="gear">
+                    <h3>{% trans "Gear" %}</h3>
+                    {% for i in gear_list %}
+                        <p>
+                            <strong>{% trans i.0 %}:&nbsp;</strong>
+                            {% for g in i.1 %}
+                                {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}<a href="/search/?q=&as_values_{{i.2}}={{g.id}}">{{g.name|escape}}</a>{% else %}<a href="/search/?q={{g.name|escape}}&type={{i.2}}">{{g.name|escape}}</a>{% endif %}{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </p>
+                    {% endfor %}
+                </div>
+                {% if stats %}
+                <div class="stats">
+                    <h3>{% trans "Stats" %}</h3>
+                    {% for i in stats %}
+                        {% if i.1 %}<p><strong>{{i.0}}</strong>: {{i.1}}</p>{% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
-            {% if stats %}
-            <div class="stats">
-                <h3>{% trans "Stats" %}</h3>
-                {% for i in stats %}
-                    {% if i.1 %}<p><strong>{{i.0}}</strong>: {{i.1}}</p>{% endif %}
-                {% endfor %}
+
+            <div class="fix"></div>
+
+            <div class="user-about clear">
+                <h2>{% blocktrans with user.username as username %}About {{username}}{% endblocktrans %}</h2>
+                {% if profile.website %}
+                <p><strong>{% trans "Website" %}:</strong> <a href="{{profile.website}}" target="_blank">{{profile.website|safe}}</a></p>
+                {% endif %}
+
+                {% if profile.job %}
+                <p><strong>{% trans "Job" %}:</strong> {{profile.job|safe}}</p>
+                {% endif %}
+
+                {% if profile.hobbies %}
+                <p><strong>{% trans "Hobbies" %}:</strong> {{profile.hobbies|safe}}</p>
+                {% endif %}
+
+                {% if profile.about %}
+                <p><strong>{% trans "About" %}:</strong></p>
+                <p>{{profile.about|safe|linebreaks}}</p>
+                {% endif %}
+
+                {% if not profile.website and not profile.job and not profile.hobbies and not profile.about %}
+                    {% ifequal request.user user %}
+                        <p>
+                            {% url profile_edit_basic as the_url %}
+                            {% blocktrans %} You have written nothing about yourself. Why don't you <a href="{{the_url}}">do it now?</a>{% endblocktrans %}
+                        </p>
+                    {% else %}
+                        <p>
+                            {% blocktrans with user.username as username %}{{username}} didn't write anything about themselves.{% endblocktrans %}
+                        </p>
+                    {% endifequal %}
+                {% endif %}
             </div>
-            {% endif %}
-        </div>
-
-        <div class="fix"></div>
-
-        <div class="user-about clear">
-            <h2>{% blocktrans with user.username as username %}About {{username}}{% endblocktrans %}</h2>
-            {% if profile.website %}
-            <p><strong>{% trans "Website" %}:</strong> <a href="{{profile.website}}" target="_blank">{{profile.website|safe}}</a></p>
-            {% endif %}
-
-            {% if profile.job %}
-            <p><strong>{% trans "Job" %}:</strong> {{profile.job|safe}}</p>
-            {% endif %}
-
-            {% if profile.hobbies %}
-            <p><strong>{% trans "Hobbies" %}:</strong> {{profile.hobbies|safe}}</p>
-            {% endif %}
-
-            {% if profile.about %}
-            <p><strong>{% trans "About" %}:</strong></p>
-            <p>{{profile.about|safe|linebreaks}}</p>
-            {% endif %}
-
-            {% if not profile.website and not profile.job and not profile.hobbies and not profile.about %}
-                {% ifequal request.user user %}
-                    <p>
-                        {% url profile_edit_basic as the_url %}
-                        {% blocktrans %} You have written nothing about yourself. Why don't you <a href="{{the_url}}">do it now?</a>{% endblocktrans %}
-                    </p>
-                {% else %}
-                    <p>
-                        {% blocktrans with user.username as username %}{{username}} didn't write anything about themselves.{% endblocktrans %}
-                    </p>
-                {% endifequal %}
-            {% endif %}
-        </div>
-    </div>
+        </div> <!-- container -->
+    </div> <!-- tabbed-box -->
 </div> <!-- profile -->
 {% endblock %}
 

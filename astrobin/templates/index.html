@@ -41,12 +41,14 @@
             </div>
         {% else %} <!-- upload_form -->
             <div class="full-box missing-gear-warning">
-                {% url profile_edit_gear as the_url %}
-                <img src="/static/images/dim_upload.png" />
-                <h3>{% trans "Warning!" %}</h3>
-                <p>
-                {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}?initial">your profile</a>!{% endblocktrans %}
-                </p>
+                <div class="container">
+                    {% url profile_edit_gear as the_url %}
+                    <img src="/static/images/dim_upload.png" />
+                    <h3>{% trans "Warning!" %}</h3>
+                    <p>
+                    {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}?initial">your profile</a>!{% endblocktrans %}
+                    </p>
+                </div>
             </div>
         {% endif %} <!-- upload_form -->
     {% else %}<!-- authenticated -->
@@ -55,33 +57,37 @@
         </div>
 
         <div id="why-astrobin" class="full-box">
-            <div class="why-astrobin-page">
-                <img src="/static/images/slide1.png" alt=""/>
-                <h2>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h2>
-                {% url help as help_url %}
-                <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
-            </div>
+            <div class="container">
+                <div class="why-astrobin-page">
+                    <img src="/static/images/slide1.png" alt=""/>
+                    <h2>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h2>
+                    {% url help as help_url %}
+                    <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
+                </div>
 
-            <div class="why-astrobin-page" style="display: none">
-                <img src="/static/images/slide2.png" alt=""/>
-                <h2>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h2>
-                <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free.{% endblocktrans %}</p>
-            </div>
+                <div class="why-astrobin-page" style="display: none">
+                    <img src="/static/images/slide2.png" alt=""/>
+                    <h2>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h2>
+                    <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free.{% endblocktrans %}</p>
+                </div>
 
-            <div class="why-astrobin-page" style="display: none">
-                <img src="/static/images/slide3.png" alt=""/>
-                <h2>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h2>
-                <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
+                <div class="why-astrobin-page" style="display: none">
+                    <img src="/static/images/slide3.png" alt=""/>
+                    <h2>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h2>
+                    <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
+                </div>
             </div>
         </div>
     {% endif %}<!-- authenticated -->
 
     <a name="page_anchor"></a>
     <div class="full-box clear index">
-        <h2 class="inline">{% trans "Recent images" %}</h2>
-        {% search_image_list request image_list 0 %}
-        <div class="pagination">
-            <a href="{% url wall %}">{% trans "(view more)" %}</a>
+        <div class="container">
+            <h2 class="inline">{% trans "Recent images" %}</h2>
+            {% search_image_list request image_list 0 %}
+            <div class="pagination">
+                <a href="{% url wall %}">{% trans "(view more)" %}</a>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -103,9 +109,9 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#why-astrobin-nav-container').show();
-        $('#why-astrobin').css('height', '154px');
+        $('#why-astrobin .container').css('height', '165px');
         $(function() {
-            $('#why-astrobin').cycle({
+            $('#why-astrobin .container').cycle({
                 fx:     'scrollHorz',
                 speed:  'slow',
                 timeout: 7000,

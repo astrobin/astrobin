@@ -21,55 +21,57 @@
         {% endcomment %}
     </div>
     <div class="full-box">
-    <div class="inbox-action-box">
-          <div class="buttons">
-            {% comment %}
-              <button type="submit" name="action" value="read" class="button">{% trans "Mark as read" %}</button>
-              <button type="submit" name="action" value="delete" class="button">{% trans "Delete messages" %}</button>
-            {% endcomment %}
-            <a class="button" href="{% url messages_compose %}{% query_string "next=request.path" "" %}">
-               {% trans "Compose message" %}
-            </a>
-        </div>
-    </div>
-
-    <form action="{% url messages_batch_update %}" method="post">
-        {% csrf_token %}
-        <div class="inbox">
-            {% for message in thread_list %}
-              <div class="message {% if message.new %}unread{% endif %}">
-                  {% if message.new %}
-                  <div class="new">
-                  {% trans "New!" %}
-                  </div>
-                  {% endif %}
-                  <div class="sender">
-                    <a href="{{ message.thread.latest_msg.sender.get_absolute_url }}">{{ message.thread.latest_msg.sender.username|truncchar:12 }}</a>
-                    <span class="date">{{ message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
-                  </div>
-                  <div class="subject">
-                    <strong>{{ message.thread.subject|truncchar:25 }}</strong>
-                    <span class="message-tease">{{message.thread.latest_msg.body|truncchar:35}}</span>
-                  </div>
-                  {% comment %}
-                  <div class="checkbox">
-                    <input name="batchupdateids" type="checkbox" value="{{message.thread.pk}}" />
-                  </div>
-                  {% endcomment %}
-                  <div class="actions">
-                    <a href="{{message.thread.get_absolute_url}}">{% trans "Read all" %}</a>
-                    |
-                    <a href="{{message.thread.get_absolute_url}}#reply">{% trans "Reply" %}</a>
-                  </div>
-                  {% if message.replied %}{% endif %}
-              </div>
-            {% empty %}
-                <div class="message unread">
-                    <p>{% trans "No messages" %}</p>
+        <div class="container">
+            <div class="inbox-action-box">
+                  <div class="buttons">
+                    {% comment %}
+                      <button type="submit" name="action" value="read" class="button">{% trans "Mark as read" %}</button>
+                      <button type="submit" name="action" value="delete" class="button">{% trans "Delete messages" %}</button>
+                    {% endcomment %}
+                    <a class="button" href="{% url messages_compose %}{% query_string "next=request.path" "" %}">
+                       {% trans "Compose message" %}
+                    </a>
                 </div>
-            {% endfor %}
-        </div>
-    </form>
-    </div>
+            </div>
+
+            <form action="{% url messages_batch_update %}" method="post">
+                {% csrf_token %}
+                <div class="inbox">
+                    {% for message in thread_list %}
+                      <div class="message {% if message.new %}unread{% endif %}">
+                          {% if message.new %}
+                          <div class="new">
+                          {% trans "New!" %}
+                          </div>
+                          {% endif %}
+                          <div class="sender">
+                            <a href="{{ message.thread.latest_msg.sender.get_absolute_url }}">{{ message.thread.latest_msg.sender.username|truncchar:12 }}</a>
+                            <span class="date">{{ message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
+                          </div>
+                          <div class="subject">
+                            <strong>{{ message.thread.subject|truncchar:25 }}</strong>
+                            <span class="message-tease">{{message.thread.latest_msg.body|truncchar:35}}</span>
+                          </div>
+                          {% comment %}
+                          <div class="checkbox">
+                            <input name="batchupdateids" type="checkbox" value="{{message.thread.pk}}" />
+                          </div>
+                          {% endcomment %}
+                          <div class="actions">
+                            <a href="{{message.thread.get_absolute_url}}">{% trans "Read all" %}</a>
+                            |
+                            <a href="{{message.thread.get_absolute_url}}#reply">{% trans "Reply" %}</a>
+                          </div>
+                          {% if message.replied %}{% endif %}
+                      </div>
+                    {% empty %}
+                        <div class="message unread">
+                            <p>{% trans "No messages" %}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </form>
+        </div> <!-- container -->
+    </div> <!-- full-box -->
     <div class="pagination">{% paginate %}</div>
 {% endblock %}
