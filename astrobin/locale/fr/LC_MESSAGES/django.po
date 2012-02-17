@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-15 10:21-0500\n"
-"PO-Revision-Date: 2012-02-15 16:35+0100\n"
+"PO-Revision-Date: 2012-02-16 18:59+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -1510,7 +1510,7 @@ msgstr "Jumelles"
 
 #: models.py:184
 msgid "Aperture"
-msgstr "Ouverture"
+msgstr "Diamètre"
 
 #: models.py:185 models.py:194 models.py:255 models.py:264 models.py:520
 msgid "(in mm)"
@@ -3272,10 +3272,10 @@ msgid ""
 "astrophotography community greatly! See the <a href=\"%(help_url)s\">help "
 "page.</a> for more information."
 msgstr ""
-"AstroBin est un service d'hébergement conçu spécifiquement pour "
-"l'astrophotographie et propose des fonctionnalités très utiles pour la "
-"communauté des astrophotographes! Consultez l'<a href=\"%(help_url)s\">aide "
-"en ligne</a> pour plus d'informations."
+"AstroBin est un service d'hébergement consacré exclusivement à "
+"l'astrophotographie et propose des fonctionnalités pensées pour la "
+"communauté des astrophotographes. Consultez l'<a href=\"%(help_url)s\">aide en "
+"ligne</a> pour plus d'informations."
 
 #: templates/index.html:67
 msgid "Unlimited uploads, unlimited size."
@@ -3287,8 +3287,8 @@ msgid ""
 "compression. On AstroBin you can (and should!) upload full size images. And "
 "you have unlimited space for free."
 msgstr ""
-"Les images astronomiques ont une valeur scientifique qui ne devrait pas être "
-"dilapidée lors d'une compression. AstroBin vous autorise (vous encourage!) à "
+"Les images astronomiques ont une valeur scientifique qu'il serait dommage de "
+"gâcher lors d'une compression. AstroBin vous autorise (vous encourage!) à "
 "publier les images à leur taille d'acquisition. L'espace de stockage est "
 "gratuit et illimité."
 
@@ -3303,8 +3303,8 @@ msgid ""
 "productivity and on the gear you use the most."
 msgstr ""
 "AstroBin vous offre les outils pour organiser soigneusement vos données. Des "
-"graphiques vous permettent de visualiser votre productivité et d'évaluer "
-"l'usage de votre matériel d'un seul coup d'oeil."
+"graphiques vous permettent ainsi de visualiser votre productivité et "
+"d'évaluer l'usage de votre matériel d'un seul coup d'oeil."
 
 #: templates/index.html:81
 msgid "Recent images"
@@ -5247,7 +5247,7 @@ msgstr "Sélection des licences"
 
 #: templates/search/search.html:281
 msgid "# selected"
-msgstr "# sélectionné"
+msgstr "# sélectionnée(s)"
 
 #: templates/user/card.html:12
 #, python-format
