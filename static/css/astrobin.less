@@ -263,6 +263,13 @@
     .box-shadow-subtle;
 }
 
+.box-sizing {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+
 /* clearing */
 .fix {
     clear: both;
@@ -1112,10 +1119,7 @@ form {
         .common-border-inverted;
         background: (@regular-panel-color) url('/static/images/regular-panel-tile.png');
         color: @text-color + #111;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -ms-box-sizing: border-box;
+        .box-sizing;
         width: 70%;
         .rounded-corners;}
     input[type="checkbox"] {
@@ -1663,11 +1667,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 #content {
     float: left;
     width: 100%;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-   padding: @spacer-large;
+    .box-sizing;
+    padding: @spacer-large;
     display: inline;}
 
 .info-side-bar {
@@ -1744,10 +1745,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         width: 220px;}
     ul.as-selections {
         width: 100%;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -ms-box-sizing: border-box;
+        .box-sizing;
 
         li.as-original input {
             width: 220px;}}
@@ -1812,10 +1810,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .rounded-corners;
     background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .common-border;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -ms-box-sizing: border-box;
+    .box-sizing;
 
     width: 100%;
 
@@ -1964,10 +1959,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         }
         ul.as-selections {
             width: 100%;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -ms-box-sizing: border-box;
+            .box-sizing;
         }
         li.as-original {
             width: 100%;
@@ -2022,10 +2014,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     float: right;
     width: 656px;
     padding: @spacer-large 61px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -ms-box-sizing: border-box;
+    .box-sizing;
 
     .noterms {
         text-align: center;
@@ -3298,10 +3287,7 @@ div.token-input-dropdown {
 #why-astrobin {
     width: 600px;
     height: 154px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -ms-box-sizing: border-box;
+    .box-sizing;
 
     position: relative;
     margin: 0 auto;
