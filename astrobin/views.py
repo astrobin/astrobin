@@ -1053,7 +1053,7 @@ def image_edit_save_basic(request):
         try:
             return Subject.objects.get(id = float(id))
         except ValueError:
-            subject = Subject.objects.filter(mainId = id)
+            subject = Subject.objects.filter(Q(mainId = id) | Q(name = id))
             if subject:
                return subject[0]
             else:
