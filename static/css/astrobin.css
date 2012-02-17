@@ -1335,7 +1335,6 @@ form p.error input, form p.error textarea {
   padding: 0;
 }
 #navigation #nav ul li a, #navigation #nav ul li a:visited {
-  height: 16px;
   float: left;
   margin: 0;
   padding: 8px 12px;
@@ -1891,7 +1890,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 .small-box {
   margin: 0 auto;
-  padding: 10px;
+  padding: 4px;
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   border-radius: 12px;
@@ -1901,20 +1900,22 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   max-width: 300px;
-  height: 180px;
+  height: 190px;
   padding: 12px;
   text-align: center;
 }
 .small-box .single-form p {
   margin: 0;
-  padding: 12px 0;
+  padding: 4px 0;
+  font-size: 13px;
+  line-height: 13px;
 }
 .small-box .single-form h1 {
   text-align: center;
 }
 .wip-form-box {
   margin: 0 auto;
-  padding: 10px;
+  padding: 4px;
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   border-radius: 12px;
@@ -1924,21 +1925,23 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   max-width: 300px;
-  height: 180px;
+  height: 190px;
   padding: 12px;
   text-align: center;
   float: left;
 }
 .wip-form-box .single-form p {
   margin: 0;
-  padding: 12px 0;
+  padding: 4px 0;
+  font-size: 13px;
+  line-height: 13px;
 }
 .wip-form-box .single-form h1 {
   text-align: center;
 }
 .final-form-box {
   margin: 0 auto;
-  padding: 10px;
+  padding: 4px;
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   border-radius: 12px;
@@ -1948,14 +1951,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   max-width: 300px;
-  height: 180px;
+  height: 190px;
   padding: 12px;
   text-align: center;
   float: right;
 }
 .final-form-box .single-form p {
   margin: 0;
-  padding: 12px 0;
+  padding: 4px 0;
+  font-size: 13px;
+  line-height: 13px;
 }
 .final-form-box .single-form h1 {
   text-align: center;

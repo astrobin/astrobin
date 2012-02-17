@@ -1296,7 +1296,6 @@ form {
                 float: left;
                 margin: 0; padding: 0;
                 a, a:visited {
-                    height: 16px;
                     float: left;
                     margin: 0;
                     padding: @spacer-medium @spacer-large;
@@ -1781,23 +1780,28 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 .small-box {
     margin: 0 auto;
-    padding: 10px;
+    padding: @spacer-small;
     .rounded-corners(12px);
     background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .common-border;
     max-width: 300px;
-    height: 180px;
+    height: 190px;
     padding: @spacer-large;
     text-align: center;
     .single-form {
         p {
-            margin: 0; padding: @spacer-large 0;}
+            margin: 0;
+            padding: @spacer-small 0;
+            font-size: @base-font-size - 1px;
+            line-height: @base-font-size - 1px;
+        }
         h1 {
             text-align: center;}}}
 
 .wip-form-box {
     .small-box;
-    float: left;}
+    float: left;
+}
 
 .final-form-box {
     .small-box;
