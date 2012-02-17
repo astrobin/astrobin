@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-15 10:28-0500\n"
-"PO-Revision-Date: 2012-02-15 17:12+0100\n"
+"PO-Revision-Date: 2012-02-17 08:28+0100\n"
 "Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
@@ -1065,7 +1065,7 @@ msgstr ""
 
 #: forms.py:135 forms.py:314 models.py:581
 msgid "Imaging telescopes or lenses"
-msgstr "Telescopios u objetivos"
+msgstr "Telescopios o objetivos"
 
 #: forms.py:136 models.py:582
 msgid "Guiding telescopes or lenses"
@@ -1146,7 +1146,7 @@ msgstr "Expresa el valor en mm."
 
 #: forms.py:279 forms.py:284 forms.py:429 forms.py:468 forms.py:500
 msgid "Please use the following format: yyyy-mm-dd"
-msgstr "Por favor, usa el siguiente formato: aaaa-mm-dd"
+msgstr "Por favor, utiliza el formato: aaaa-mm-dd"
 
 #: forms.py:288 forms.py:292
 msgid "Express value in hours"
@@ -1747,7 +1747,7 @@ msgstr "(sin título)"
 
 #: models.py:781
 msgid "Please use the following format: yyyy-mm-dd."
-msgstr "Por favor, usa el siguiente formato: aaaa-mm-dd."
+msgstr "Por favor, utiliza el formato: aaaa-mm-dd."
 
 #: models.py:786 models.py:992
 msgid "Image"
@@ -2096,15 +2096,15 @@ msgstr "Horas de integración por día"
 
 #: stats.py:73
 msgid "Integration hours by gear, yearly"
-msgstr "Horas de integración anuales con"
+msgstr "Horas anuales con"
 
 #: stats.py:74
 msgid "Integration hours by gear, monthly"
-msgstr "Horas de integración mensuales con"
+msgstr "Horas mensuales con"
 
 #: stats.py:75
 msgid "Integration hours by gear, daily"
-msgstr "Horas de integración diarias con"
+msgstr "Horas diarias con"
 
 #: stats.py:132
 msgid "Uploaded images, yearly"
@@ -3558,7 +3558,7 @@ msgstr "Adquiridas"
 #: templates/wall.html:29 templates/image/detail.html:458
 #: templates/search/search.html:170 templates/user/plots.html:80
 msgid "Views"
-msgstr "Vistas"
+msgstr "Imágenes vistas"
 
 #: templates/wall.html:34 templates/image/detail.html:288
 #: templates/inclusion_tags/search_image_list.html:21
@@ -5224,7 +5224,7 @@ msgstr "Selecciona licencias"
 
 #: templates/search/search.html:281
 msgid "# selected"
-msgstr "# seleccionada"
+msgstr "# seleccionadas"
 
 #: templates/user/card.html:12
 #, python-format
@@ -5257,7 +5257,7 @@ msgstr "Usuario no encontrado:"
 #: templates/user/plots.html:5 templates/user/plots.html.py:12
 #, python-format
 msgid "%(user)s's plots"
-msgstr "Estadísticas de %(user)s"
+msgstr "Gráficas de %(user)s"
 
 #: templates/user/plots.html:16
 #, python-format
@@ -5309,13 +5309,12 @@ msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
 msgstr ""
-"Horas totales de integración, en función del tiempo y ordenadas según "
-"telescopios, objetivos y cámaras."
+"Horas de integración, en función del tiempo y ordenadas según telescopios o "
+"teleobjetivos y cámaras."
 
 #: templates/user/plots.html:81
 msgid "Combined view count for all the user's images, plotted against time."
-msgstr ""
-"Vista combinada de recuento de imágenes de usuarios, en función del tiempo."
+msgstr "Conteo de visitas a todas sus imágenes, en función del tiempo."
 
 #: templates/user/plots.html:109
 msgid "Uploaded images"
