@@ -82,7 +82,9 @@
 
 {% if object.comments_are_open %}
 <div class="full-box commentForm span-16 last">
-  {% render_comment_form for object %}
+    <div class="container">
+      {% render_comment_form for object %}
+    </div>
 </div>
 {% endif %}
 

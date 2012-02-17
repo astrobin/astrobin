@@ -5,9 +5,11 @@
 {% block content %}
     <a name="page_anchor"></a>
     <div class="full-box clear wall">
-        <h1 class="inline">{% trans "TIFF/FITS" %}</h1>
-        <p>{% blocktrans %}The authors of these images have been generous, and provided a link to the TIFF or FITS original files.{% endblocktrans %}</p>
-        {% image_list request image_list %}
+        <div class="container">
+            <h1 class="inline">{% trans "TIFF/FITS" %}</h1>
+            <p>{% blocktrans %}The authors of these images have been generous, and provided a link to the TIFF or FITS original files.{% endblocktrans %}</p>
+            {% image_list request image_list %}
+        </div>
     </div>
 {% endblock %}
 

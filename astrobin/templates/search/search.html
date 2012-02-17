@@ -160,19 +160,21 @@
 </div>
 
 <div id="search-results" class="full-box clear search">
-    {% if 'q' in request.GET %}
-    <div class="search-links">
-            {% trans "Sort by:" %}&nbsp;
-            <a href="/search/{% query_string "" "sort" %}">{% trans "Relevance" %}</a>&nbsp;|&nbsp;
-            <a href="/search/{% query_string "sort='-uploaded'" "" %}">{% trans "Upload time" %}</a>&nbsp;|&nbsp;
-            <a href="/search/{% query_string "sort='-rating'" "" %}">{% trans "Rating" %}</a>&nbsp;|&nbsp;
-            <a href="/search/{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>&nbsp;|&nbsp;
-            <a href="/search/{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
+    <div class="container">
+        {% if 'q' in request.GET %}
+        <div class="search-links">
+                {% trans "Sort by:" %}&nbsp;
+                <a href="/search/{% query_string "" "sort" %}">{% trans "Relevance" %}</a>&nbsp;|&nbsp;
+                <a href="/search/{% query_string "sort='-uploaded'" "" %}">{% trans "Upload time" %}</a>&nbsp;|&nbsp;
+                <a href="/search/{% query_string "sort='-rating'" "" %}">{% trans "Rating" %}</a>&nbsp;|&nbsp;
+                <a href="/search/{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>&nbsp;|&nbsp;
+                <a href="/search/{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
+        </div>
+        {% search_image_list request page.object_list %}
+        {% else %}
+        <p class="noterms">{% blocktrans %}Please input some search terms!{% endblocktrans %}</p>
+        {% endif %}
     </div>
-    {% search_image_list request page.object_list %}
-    {% else %}
-    <p class="noterms">{% blocktrans %}Please input some search terms!{% endblocktrans %}</p>
-    {% endif %}
 </div>
 {% endblock %}
 
