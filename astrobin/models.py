@@ -1250,7 +1250,7 @@ class Location(models.Model):
         default = 'N',
         max_length = 1,
         choices = (('N', _("North")), ('S', _("South"))),
-        verbose_name = 'North or south',
+        verbose_name = _('North or south'),
     )
     lon_deg = models.IntegerField(
         null = True,
@@ -1266,7 +1266,7 @@ class Location(models.Model):
         default = 'E',
         max_length = 1,
         choices = (('E', _("East")), ('W', _("West"))),
-        verbose_name = 'East or West',
+        verbose_name = _('East or West'),
     )
 
     altitude = models.IntegerField(
