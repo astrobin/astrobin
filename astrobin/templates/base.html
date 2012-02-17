@@ -116,12 +116,12 @@
 
                 <div id="languages">
                     <a href="http://translate.astrobin.com/" target="_blank"><img src="/static/icons/flags/16/yours.png" alt="Help with translations!"/></a>
-                    <a href="{% url set_language "en" %}"><img src="/static/icons/flags/16/United-Kingdom.png" alt="{% trans "English" %}"/></a>
-                    <a href="{% url set_language "it" %}"><img src="/static/icons/flags/16/Italy.png" alt="Italiano"/></a>
-                    <a href="{% url set_language "es" %}"><img src="/static/icons/flags/16/Spain.png" alt="Español"/></a>
-                    <a href="{% url set_language "fr" %}"><img src="/static/icons/flags/16/France.png" alt="Français"/></a>
-                    <a href="{% url set_language "fi" %}"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
-                    <a href="{% url set_language "de" %}"><img src="/static/icons/flags/16/Germany.png" alt="Deutsch"/></a>
+                    <a href="{% url set_language "en" %}" title="English"><img src="/static/icons/flags/16/United-Kingdom.png" alt="English"/></a>
+                    <a href="{% url set_language "it" %}" title="Italiano"><img src="/static/icons/flags/16/Italy.png" alt="Italiano"/></a>
+                    <a href="{% url set_language "es" %}" title="Español"><img src="/static/icons/flags/16/Spain.png" alt="Español"/></a>
+                    <a href="{% url set_language "fr" %}" title="Français"><img src="/static/icons/flags/16/France.png" alt="Français"/></a>
+                    <a href="{% url set_language "fi" %}" title="Suomi"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
+                    <a href="{% url set_language "de" %}" title="Deutsch"><img src="/static/icons/flags/16/Germany.png" alt="Deutsch"/></a>
                     {% if request.user.is_authenticated and not user_language %}
                     <div id="language-prompt">
                         <div class="bubble">
