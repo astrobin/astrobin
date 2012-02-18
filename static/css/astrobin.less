@@ -1754,8 +1754,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         width:100px;}}
 
 .upload-forms {
+    .small-box;
     margin: 0 auto;
     width: 70%;
+    overflow: hidden;
+
     .loading {
         padding: 6px 0;
     }
@@ -1780,32 +1783,41 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 .small-box {
     margin: 0 auto;
-    padding: @spacer-small;
+    padding: @spacer-medium;
+
     .rounded-corners(12px);
-    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
     .common-border;
-    max-width: 300px;
-    height: 190px;
-    padding: @spacer-large;
+    background: (@light-panel-color) url('/static/images/light-panel-tile.png');
+
     text-align: center;
+
     .single-form {
-        p {
-            margin: 0;
-            padding: @spacer-small 0;
-            font-size: @base-font-size - 1px;
-            line-height: @base-font-size - 1px;
+        float: left;
+        width: 50%;
+
+        .container {
+            padding: @spacer-medium;
+
+            p {
+                margin: 0;
+                padding: @spacer-small 0;
+                font-size: @base-font-size - 1px;
+                line-height: @base-font-size - 1px;
+            }
+            h2 {
+                border-bottom: none;
+                font-size: 1.4em;
+                line-height: 1.2em;
+            }
         }
-        h1 {
-            text-align: center;}}}
-
-.wip-form-box {
-    .small-box;
-    float: left;
+    }
+    .single-form:nth-child(even) .container {
+        border-left: 1px solid @dark-panel-color * @hilight-factor;
+    }
+    .single-form:nth-child(odd) .container {
+        border-right: 1px solid @light-panel-color * @strong-hilight-factor;
+    }
 }
-
-.final-form-box {
-    .small-box;
-    float: right;}
 
 .full-box {
     margin: 0;
