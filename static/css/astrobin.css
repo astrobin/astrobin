@@ -1867,7 +1867,43 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 .upload-forms {
   margin: 0 auto;
+  padding: 8px;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+  border: 1px solid #2e2e2e;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
+  background: #393939 url('/static/images/light-panel-tile.png');
+  text-align: center;
+  margin: 0 auto;
   width: 70%;
+  overflow: hidden;
+}
+.upload-forms .single-form {
+  float: left;
+  width: 50%;
+}
+.upload-forms .single-form .container {
+  padding: 8px;
+}
+.upload-forms .single-form .container p {
+  margin: 0;
+  padding: 4px 0;
+  font-size: 13px;
+  line-height: 13px;
+}
+.upload-forms .single-form .container h2 {
+  border-bottom: none;
+  font-size: 1.4em;
+  line-height: 1.2em;
+}
+.upload-forms .single-form:nth-child(even) .container {
+  border-left: 1px solid #333333;
+}
+.upload-forms .single-form:nth-child(odd) .container {
+  border-right: 1px solid #474747;
 }
 .upload-forms .loading {
   padding: 6px 0;
@@ -1890,80 +1926,40 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default {
 }
 .small-box {
   margin: 0 auto;
-  padding: 4px;
+  padding: 8px;
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   border-radius: 12px;
-  background: #393939 url('/static/images/light-panel-tile.png');
   border: 1px solid #2e2e2e;
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
-  max-width: 300px;
-  height: 190px;
-  padding: 12px;
-  text-align: center;
-}
-.small-box .single-form p {
-  margin: 0;
-  padding: 4px 0;
-  font-size: 13px;
-  line-height: 13px;
-}
-.small-box .single-form h1 {
-  text-align: center;
-}
-.wip-form-box {
-  margin: 0 auto;
-  padding: 4px;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
   background: #393939 url('/static/images/light-panel-tile.png');
-  border: 1px solid #2e2e2e;
-  -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
-  -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
-  box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
-  max-width: 300px;
-  height: 190px;
-  padding: 12px;
   text-align: center;
+}
+.small-box .single-form {
   float: left;
+  width: 50%;
 }
-.wip-form-box .single-form p {
+.small-box .single-form .container {
+  padding: 8px;
+}
+.small-box .single-form .container p {
   margin: 0;
   padding: 4px 0;
   font-size: 13px;
   line-height: 13px;
 }
-.wip-form-box .single-form h1 {
-  text-align: center;
+.small-box .single-form .container h2 {
+  border-bottom: none;
+  font-size: 1.4em;
+  line-height: 1.2em;
 }
-.final-form-box {
-  margin: 0 auto;
-  padding: 4px;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
-  background: #393939 url('/static/images/light-panel-tile.png');
-  border: 1px solid #2e2e2e;
-  -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
-  -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
-  box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
-  max-width: 300px;
-  height: 190px;
-  padding: 12px;
-  text-align: center;
-  float: right;
+.small-box .single-form:nth-child(even) .container {
+  border-left: 1px solid #333333;
 }
-.final-form-box .single-form p {
-  margin: 0;
-  padding: 4px 0;
-  font-size: 13px;
-  line-height: 13px;
-}
-.final-form-box .single-form h1 {
-  text-align: center;
+.small-box .single-form:nth-child(odd) .container {
+  border-right: 1px solid #474747;
 }
 .full-box {
   margin: 0;
