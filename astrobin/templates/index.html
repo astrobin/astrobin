@@ -6,9 +6,9 @@
     {% if request.user.is_authenticated %}
         {% if upload_form %} 
             <div class="upload-forms">
-                <div class="wip-form-box">
-                    <h2>{% trans "Upload as a work in progress" %}</h2>
-                    <div class="single-form">
+                <div class="wip-form-box single-form">
+                    <div class="container">
+                        <h2>{% trans "Upload as a work in progress" %}</h2>
                         <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
                         <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
                             <input type="file" name="file" class="file" id="id_file" />
@@ -22,9 +22,9 @@
                         </p>
                     </div>
                 </div>
-                <div class="final-form-box">
-                    <h2>{% trans "Upload as a finished image" %}</h2>
-                    <div class="single-form">
+                <div class="final-form-box single-form">
+                    <div class="container">
+                        <h2>{% trans "Upload as a finished image" %}</h2>
                         <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
                         <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
                             <input type="file" name="file" class="file" id="id_file" />
@@ -40,15 +40,24 @@
                 </div>
             </div>
         {% else %} <!-- upload_form -->
-            <div class="full-box missing-gear-warning">
-                <div class="container">
-                    {% url profile_edit_gear as the_url %}
-                    <img src="/static/images/dim_upload.png" />
-                    <h3>{% trans "Warning!" %}</h3>
-                    <p>
-                    {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}?initial">your profile</a>!{% endblocktrans %}
-                    </p>
+            <div class="upload-forms">
+                <div class="single-form">
+                    <div class="container">
+                        {% url profile_edit_gear as the_url %}
+                        <img src="/static/images/dim_upload.png" />
+                        <h2>{% trans "Warning!" %}</h2>
+                        <p>
+                            {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}?initial">your profile</a>!{% endblocktrans %}
+                        </p>
+                    </div>
                 </div>
+                <div class="single-form">
+                    <div class="container">
+                        {% url profile_edit_gear as the_url %}
+                        <img src="/static/images/dim_upload.png" />
+                    </div>
+                </div>
+
             </div>
         {% endif %} <!-- upload_form -->
     {% else %}<!-- authenticated -->
