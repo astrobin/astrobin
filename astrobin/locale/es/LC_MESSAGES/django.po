@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-17 08:04-0500\n"
-"PO-Revision-Date: 2012-02-17 08:07-0500\n"
+"POT-Creation-Date: 2012-02-20 01:28-0500\n"
+"PO-Revision-Date: 2012-02-20 01:31-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
@@ -1153,8 +1153,8 @@ msgstr "Expresa el valor en mm."
 #: forms.py:279
 #: forms.py:284
 #: forms.py:429
-#: forms.py:468
-#: forms.py:500
+#: forms.py:470
+#: forms.py:503
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Por favor, utiliza el formato: aaaa-mm-dd"
 
@@ -1236,22 +1236,24 @@ msgstr "Longitud (minutos)"
 msgid "Longitude (seconds)"
 msgstr "Longitud (segundos)"
 
-#: forms.py:434
-msgid "Please enter a value between 1 and 5."
-msgstr "Por favor, introduce un valor entre 1 y 5."
-
-#: forms.py:439
-msgid "Please enter a value between 1 and 10."
-msgstr "Por favor, introduce un valor entre 1 y 10."
-
-#: forms.py:481
+#: forms.py:430
+#: forms.py:471
+#: forms.py:504
 #: models.py:782
 #: models.py:995
 #: templates/image/detail.html:506
 msgid "Date"
 msgstr "Fecha"
 
-#: forms.py:526
+#: forms.py:436
+msgid "Please enter a value between 1 and 5."
+msgstr "Por favor, introduce un valor entre 1 y 5."
+
+#: forms.py:441
+msgid "Please enter a value between 1 and 10."
+msgstr "Por favor, introduce un valor entre 1 y 10."
+
+#: forms.py:531
 msgid "Nominate for"
 msgstr "Nominar para"
 
@@ -1299,7 +1301,6 @@ msgstr "CC Reconocimiento-SinObraDerivada"
 #: models.py:46
 #: settings.py:49
 #: views.py:629
-#: templates/base.html:119
 msgid "English"
 msgstr "Inglés"
 
@@ -2587,7 +2588,7 @@ msgstr "Contactar"
 #: templates/base.html:374
 #: templates/image/detail.html:635
 #: templates/image/detail.html.py:813
-#: templates/messages/compose.html:18
+#: templates/messages/compose.html:19
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -2956,7 +2957,7 @@ msgstr "Entonces, ¿a qué estás esperando?"
 msgid "Sign up now!"
 msgstr "¡Registrate ahora!"
 
-#: templates/index.html:10
+#: templates/index.html:11
 msgid "Upload as a work in progress"
 msgstr "Subir como trabajo en curso"
 
@@ -2977,7 +2978,7 @@ msgstr "Subiendo..."
 msgid "Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgstr "Usa esta opción para subir una imagen al <strong>Área de Pruebas</strong>. Esta es perfecta para trabajos en curso que quieras compartir en foros de Internet. Más información en las <a href=\"%(faq_url)s#6\">FAQ</a>."
 
-#: templates/index.html:26
+#: templates/index.html:27
 msgid "Upload as a finished image"
 msgstr "Subir una imagen terminada"
 
@@ -2986,45 +2987,45 @@ msgstr "Subir una imagen terminada"
 msgid "Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and here on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> too."
 msgstr "Usa esta opción para subir una imagen al <strong>Área Pública</strong>. Se mostrará en <a href=\"%(profile_url)s\">tu perfil</a> y aparecerá aquí en la página de inicio. Puedes también <a href=\"%(flickr_url)s\">importar imágenes desde Flickr</a>."
 
-#: templates/index.html:47
+#: templates/index.html:48
 msgid "Warning!"
 msgstr "¡Atención!"
 
-#: templates/index.html:49
+#: templates/index.html:50
 #, python-format
 msgid "Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
 msgstr "Antes de empezar a subir imágenes, debes añadir al menos un telescopio y una cámara. ¡Puedes hacerlo en <a href=\"%(the_url)s?initial\">tu perfil</a>!"
 
-#: templates/index.html:63
+#: templates/index.html:72
 msgid "The perfect home for your astrophotography."
 msgstr "El hogar perfecto para tus astrofotografías."
 
-#: templates/index.html:65
+#: templates/index.html:74
 #, python-format
 msgid "AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href=\"%(help_url)s\">help page.</a> for more information."
 msgstr "AstroBin es un servicio de alojamiento de imágenes creado específicamente para astrofotógrafos. Viene equipado con características muy provechosas para la comunidad astrofotográfica. Lee la <a href=\"%(help_url)s\">página de ayuda</a> para más información."
 
-#: templates/index.html:70
+#: templates/index.html:79
 msgid "Unlimited uploads, unlimited size."
 msgstr "Número de subidas y tamaño, sin límites."
 
-#: templates/index.html:71
+#: templates/index.html:80
 msgid "Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free."
 msgstr "Las imágenes astrofotográficas tienen un valor científico que no debería perderse comprimiendo archivos. En AstroBin puedes (¡y debes!) subir imágenes a tamaño completo. Tienes espacio ilimitado y gratuito."
 
-#: templates/index.html:76
+#: templates/index.html:85
 msgid "Have your data neatly plotted."
 msgstr "Ten tus datos perfectamente graficados."
 
-#: templates/index.html:77
+#: templates/index.html:86
 msgid "Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most."
 msgstr "Los datos lo son todo, y AstroBin te ofrecerá las herramientas para conservarlos ordenados y organizados. Y con nuestras gráficas estadísticas, puedes visualizar tu productividad y el uso de tus equipos."
 
-#: templates/index.html:86
+#: templates/index.html:95
 msgid "Recent images"
 msgstr "Imágenes recientes"
 
-#: templates/index.html:89
+#: templates/index.html:98
 msgid "(view more)"
 msgstr "(ver más...)"
 
@@ -3185,18 +3186,18 @@ msgid "Day"
 msgstr "Día"
 
 #: templates/stats.html:40
-#: templates/user/plots.html:43
-#: templates/user/plots.html.py:72
-#: templates/user/plots.html:102
-#: templates/user/plots.html.py:131
-msgid "Please wait: the plot is loading..."
-msgstr "Espera por favor: la gráfica se está cargando..."
-
-#: templates/stats.html:41
 #: templates/user/plots.html:44
 #: templates/user/plots.html.py:73
 #: templates/user/plots.html:103
 #: templates/user/plots.html.py:132
+msgid "Please wait: the plot is loading..."
+msgstr "Espera por favor: la gráfica se está cargando..."
+
+#: templates/stats.html:41
+#: templates/user/plots.html:45
+#: templates/user/plots.html.py:74
+#: templates/user/plots.html:104
+#: templates/user/plots.html.py:133
 msgid "Loading..."
 msgstr "Cargando..."
 
@@ -3249,7 +3250,7 @@ msgstr "Adquiridas"
 #: templates/wall.html:30
 #: templates/image/detail.html:458
 #: templates/search/search.html:171
-#: templates/user/plots.html:81
+#: templates/user/plots.html:82
 msgid "Views"
 msgstr "Imágenes vistas"
 
@@ -3612,9 +3613,9 @@ msgstr "Editar"
 #: templates/image/detail.html:624
 #: templates/image/detail.html.py:796
 #: templates/messages/inbox.html:66
-#: templates/messages/view.html:49
-#: templates/messages/view.html.py:51
-#: templates/messages/view.html:86
+#: templates/messages/view.html:47
+#: templates/messages/view.html.py:49
+#: templates/messages/view.html:84
 msgid "Reply"
 msgstr "Responder"
 
@@ -3687,7 +3688,7 @@ msgid "Send %(username)s a message"
 msgstr "Enviar un mensaje a %(username)s"
 
 #: templates/image/detail.html:959
-#: templates/messages/compose.html:16
+#: templates/messages/compose.html:17
 #: templates/messages/modal_compose.html:16
 #: templates/user/profile.html:229
 msgid "Send"
@@ -4079,22 +4080,22 @@ msgstr "Si faltan datos para esta ubicación, o éstos son incorrectos, por favo
 msgid "Edit your location"
 msgstr "Editar tu ublicación"
 
-#: templates/messages/compose.html:9
+#: templates/messages/compose.html:10
 #: templates/messages/inbox.html:34
 msgid "Compose message"
 msgstr "Redacta un mensaje"
 
-#: templates/messages/compose.html:48
+#: templates/messages/compose.html:50
 #: templates/messages/modal_compose.html:43
 msgid "Type in a search term"
 msgstr "Escribe un término de búsqueda"
 
-#: templates/messages/compose.html:49
+#: templates/messages/compose.html:51
 #: templates/messages/modal_compose.html:44
 msgid "No results"
 msgstr "Sin resultados"
 
-#: templates/messages/compose.html:50
+#: templates/messages/compose.html:52
 #: templates/messages/modal_compose.html:45
 msgid "Searching"
 msgstr "Buscando"
@@ -4117,29 +4118,23 @@ msgstr "Mensaje enviado"
 
 #: templates/messages/view.html:10
 #, python-format
-msgid ""
-"\n"
-"            A conversation between <a href=\"%(sender_url)s\">you</a> and\n"
-"            "
-msgstr ""
-"\n"
-"        Una conversación entre <a href=\"%(sender_url)s\">tí</a> y\n"
-"        "
+msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
+msgstr "Una conversación entre <a href=\"%(sender_url)s\">tí</a> y"
 
-#: templates/messages/view.html:29
+#: templates/messages/view.html:27
 msgid "Delete conversation"
 msgstr "Borrar conversación"
 
-#: templates/messages/view.html:32
-#: templates/messages/view.html.py:53
+#: templates/messages/view.html:30
+#: templates/messages/view.html.py:51
 msgid "or return to messages"
 msgstr "o volver a los mensajes"
 
-#: templates/messages/view.html:73
+#: templates/messages/view.html:71
 msgid "Sending..."
 msgstr "Enviando..."
 
-#: templates/messages/view.html:95
+#: templates/messages/view.html:93
 msgid "Error. Try again!"
 msgstr "Error. ¡Inténtalo de nuevo!"
 
@@ -4721,64 +4716,64 @@ msgstr "Usuario no encontrado:"
 msgid "%(user)s's plots"
 msgstr "Gráficas de %(user)s"
 
-#: templates/user/plots.html:17
+#: templates/user/plots.html:18
 #, python-format
-msgid "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href=\"?public&sub=nodata\">here</a>."
-msgstr "¡Hola <strong>%(user)s</strong>! Sólo quería que supieras que puedes hacer que estas gráficas sean más útiles si añades todos los datos a tus imágenes. Por favor, asegúrate de ello comprobando si tienes imágenes con falta de datos <a href=\"?public&sub=nodata\">aquí</a>."
+msgid "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href=\"%(user_page)s?public&sub=nodata\">here</a>."
+msgstr "¡Hola <strong>%(user)s</strong>! Sólo quería que supieras que puedes hacer que estas gráficas sean más útiles si añades todos los datos a tus imágenes. Por favor, asegúrate de ello comprobando si tienes imágenes con falta de datos <a href=\"%(user_page)s?public&sub=nodata\">aquí</a>."
 
-#: templates/user/plots.html:22
+#: templates/user/plots.html:23
 msgid "Integration hours"
 msgstr "Horas de integración"
 
-#: templates/user/plots.html:23
+#: templates/user/plots.html:24
 msgid "Total integration hours, plotted against time."
 msgstr "Horas totales de integración, en función del tiempo."
 
-#: templates/user/plots.html:28
-#: templates/user/plots.html.py:57
-#: templates/user/plots.html:87
-#: templates/user/plots.html.py:116
+#: templates/user/plots.html:29
+#: templates/user/plots.html.py:58
+#: templates/user/plots.html:88
+#: templates/user/plots.html.py:117
 msgid "Show by period"
 msgstr "Mostrar por período"
-
-#: templates/user/plots.html:32
-#: templates/user/plots.html.py:61
-#: templates/user/plots.html:91
-#: templates/user/plots.html.py:120
-msgid "Yearly"
-msgstr "Anualmente"
 
 #: templates/user/plots.html:33
 #: templates/user/plots.html.py:62
 #: templates/user/plots.html:92
 #: templates/user/plots.html.py:121
-msgid "Monthly"
-msgstr "Mensualmente"
+msgid "Yearly"
+msgstr "Anualmente"
 
 #: templates/user/plots.html:34
 #: templates/user/plots.html.py:63
 #: templates/user/plots.html:93
 #: templates/user/plots.html.py:122
+msgid "Monthly"
+msgstr "Mensualmente"
+
+#: templates/user/plots.html:35
+#: templates/user/plots.html.py:64
+#: templates/user/plots.html:94
+#: templates/user/plots.html.py:123
 msgid "Daily"
 msgstr "Diariamente"
 
-#: templates/user/plots.html:51
+#: templates/user/plots.html:52
 msgid "Integration hours by gear"
 msgstr "Horas de integración por equipo"
 
-#: templates/user/plots.html:52
+#: templates/user/plots.html:53
 msgid "Total integration hours, plotted against time and arranged by imaging telescopes and lenses, and imaging cameras."
 msgstr "Horas de integración, en función del tiempo y ordenadas según telescopios o teleobjetivos y cámaras."
 
-#: templates/user/plots.html:82
+#: templates/user/plots.html:83
 msgid "Combined view count for all the user's images, plotted against time."
 msgstr "Conteo de visitas a todas sus imágenes, en función del tiempo."
 
-#: templates/user/plots.html:110
+#: templates/user/plots.html:111
 msgid "Uploaded images"
 msgstr "Imágenes subidas"
 
-#: templates/user/plots.html:111
+#: templates/user/plots.html:112
 msgid "Image uploads, plotted against time."
 msgstr "Imágenes subidas, en función del tiempo."
 
