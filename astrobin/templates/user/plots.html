@@ -14,7 +14,8 @@
                 <div class="plot-container">
                     {% ifequal request.user user %}
                     <p>
-                        {% blocktrans with user.username as user %}Hey <strong>{{user}}</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href="?public&sub=nodata">here</a>.{% endblocktrans %}
+                        {% url user_page user as user_page %}
+                        {% blocktrans with user.username as user %}Hey <strong>{{user}}</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href="{{user_page}}?public&sub=nodata">here</a>.{% endblocktrans %}
                     </p>
                     {% endifequal %}
 

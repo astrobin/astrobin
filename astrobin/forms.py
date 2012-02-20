@@ -426,7 +426,9 @@ class SolarSystem_AcquisitionForm(forms.ModelForm):
         required=False,
         input_formats = ['%Y-%m-%d'],
         widget=forms.TextInput(attrs={'class':'datepickerclass'}),
-        help_text=_("Please use the following format: yyyy-mm-dd"))
+        help_text=_("Please use the following format: yyyy-mm-dd"),
+        label = _("Date"),
+    )
 
     def clean_seeing(self):
         data = self.cleaned_data['seeing']
@@ -465,7 +467,9 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
         required=False,
         input_formats = ['%Y-%m-%d'],
         widget=forms.TextInput(attrs={'class':'datepickerclass'}),
-        help_text=_("Please use the following format: yyyy-mm-dd"))
+        help_text=_("Please use the following format: yyyy-mm-dd"),
+        label = _("Date"),
+    )
 
     class Meta:
         model = DeepSky_Acquisition
@@ -478,7 +482,6 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
             pass
 
         super(DeepSky_AcquisitionForm, self).__init__(**kwargs)
-        self.fields['date'].label = _("Date")
         if queryset:
             self.fields['filter'].queryset = queryset
 
@@ -497,7 +500,9 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
         required=False,
         input_formats = ['%Y-%m-%d'],
         widget=forms.TextInput(attrs={'class':'datepickerclass'}),
-        help_text=_("Please use the following format: yyyy-mm-dd"))
+        help_text=_("Please use the following format: yyyy-mm-dd"),
+        label = _("Date"),
+    )
 
     class Meta:
         model = DeepSky_Acquisition
