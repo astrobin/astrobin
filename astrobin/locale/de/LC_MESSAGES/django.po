@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-17 08:04-0500\n"
-"PO-Revision-Date: 2012-02-17 08:11-0500\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2012-02-18 19:45+0100\n"
+"Last-Translator: kalle66 <rkalle66@googlemail.com>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: Germany\n"
 
 #: fields.py:9
 msgid "United Kingdom"
@@ -1037,7 +1035,7 @@ msgstr "Motive"
 #: views.py:567
 #: templates/profile-edit-menu.html:12
 msgid "Locations"
-msgstr "Standorte"
+msgstr "Standort(e)"
 
 #: forms.py:81
 msgid "Please enter either some subjects or a main solar system subject."
@@ -2157,15 +2155,15 @@ msgstr "Aufnahmedauer in Stunden, täglich"
 
 #: stats.py:73
 msgid "Integration hours by gear, yearly"
-msgstr "Aufnahmedauer in Stunden nach Ausrüstung, jährlich"
+msgstr "Aufnahmedauer (in h) nach Ausrüstung, jährlich"
 
 #: stats.py:74
 msgid "Integration hours by gear, monthly"
-msgstr "Aufnahmedauer in Stunden nach Ausrüstung, monatlich"
+msgstr "Aufnahmedauer (in h) nach Ausrüstung, monatlich"
 
 #: stats.py:75
 msgid "Integration hours by gear, daily"
-msgstr "Aufnahmedauer in Stunden nach Ausrüstung, täglich"
+msgstr "Aufnahmedauer (in h) nach Ausrüstung, täglich"
 
 #: stats.py:132
 msgid "Uploaded images, yearly"
@@ -2266,7 +2264,9 @@ msgstr "Kein Teleskop / Objektiv, oder keine Kamera definiert"
 #: views.py:1538
 #: views.py:1597
 msgid "To fill in the missing gear, use the <strong>Edit gear used</strong> entry in the <strong>Actions</strong> menu for each image."
-msgstr "Fehlende Angaben zur Ausrüstung können mit <strong>Ausrüstung ändern</strong> im <strong>Bearbeiten</strong>-Menü ergänzt werden."
+msgstr ""
+"Fehlende Angaben zur Ausrüstung können mit <strong>Ausrüstung "
+"ändern</strong> im Menü <strong>Bearbeiten</strong> ergänzt werden."
 
 #: views.py:1569
 #: templates/image/edit/acquisition.html:98
@@ -2556,7 +2556,7 @@ msgstr "AstroBin ist eine speziell auf Astrofotografen ausgerichtete Plattform z
 
 #: templates/base.html:302
 msgid "Site links"
-msgstr "Site link"
+msgstr "AstroBin Links"
 
 #: templates/base.html:309
 #: templates/tos.html:7
@@ -2583,7 +2583,10 @@ msgstr "Copyright"
 
 #: templates/base.html:327
 msgid "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners."
-msgstr "AstroBin ist Copyright &copy; 2010-2012 Salvatore Iovene, alle Recht vorbehalten. Das Copyright auf die Bilder dieser Webseite liegt bei den jeweiligen Erstellern."
+msgstr ""
+"AstroBin ist urheberrechtlich geschützt. &copy; 2010-2012 Salvatore Iovene. "
+"Alle Recht vorbehalten./nDas Copyright auf die Bilder dieser Webseite liegt "
+"bei den jeweiligen Erstellern."
 
 #: templates/base.html:348
 msgid "Back to top"
@@ -2699,7 +2702,16 @@ msgstr "AstroBin akzeptiert JPEG, PNG und GIF. Animierte GIFS werden ebenfalls u
 
 #: templates/faq.html:48
 msgid "Absolutely. There are multiple ways in which AstroBin can store your data very safely. First of all, the images you upload are stored on a highly durable, highly available, redundant backend. The durability of the storage backend is 99.999999999 percent over a given year. This means that if you upload 10,000 images, you can expect to lose one image to data corruption once in 10,000,000 year. The images are duplicated across two different physical servers, for protection against natural disasters."
-msgstr "Absolut. Es gibt viele Arten wie AstroBin Deine Daten sicher speichert. Als Erstes werden alle Bilder, die du hochlädst, auf einem sehr langlebigen, hochgradig verfügbaren und redundanten Back-End der Webseite gespeichert. Die Haltbarkeit des Back-End-Speichers beträgt 99,99999999 Prozent in einem Jahr. Das bedeutet: Wenn Du 10.000 Bilder hochlädst, wirst Du erwartungsgemäß ein Bild innerhalb von 10.000.000 Jahren auf Grund von Datenfehlern verlieren. Dabei werden die Bilder auf zwei verschiedene physikalische Server dupliziert, um sie vor Naturkatastrophen zu schützen."
+msgstr ""
+"Absolut. Es gibt viele Arten, wie AstroBin Ihre Daten sicher speichert. "
+"Zunächst werden alle Bilder, die Sie hochladen, auf einem sehr langlebigen, "
+"hoch-verfügbaren und redundanten Back-End der Webseite gespeichert. Die "
+"Haltbarkeit des Back-End-Speichers beträgt 99,999999999 Prozent bezogen auf "
+"ein Jahr. Das heißt, wenn Sie jährlich 10.000 Bilder hochladen, werden Sie "
+"im Mittel nur ein Bild innerhalb von 10 Mio. Jahren auf Grund von "
+"Datenfehlern verlieren. Dabei werden die Bilder auf zwei verschiedene "
+"physikalische Server dupliziert, um sie vor natürlichen Schadensereignissen "
+"zu schützen."
 
 #: templates/faq.html:51
 msgid "The actual website, instead, is hosted on a Virtual Machine, so, in case of severe hardware failure, it can be redeployed to a different server in a matter of 15 minutes."
@@ -2715,7 +2727,13 @@ msgstr "Davon abgesehen solltest Du bedenken, dass AstroBin kein Backup-Service 
 
 #: templates/faq.html:64
 msgid "Nonsense. AstroBin has <strong>not</strong> been made to showcase beautiful image, but to give everybody an opportunity to contribute to a vast and evergrowing effort of centralization and indexing of important data. That 30 minute picture of M31 you took last night between the clouds <em>belongs</em> here! Don't be shy and post it!"
-msgstr "Unsinn. Astrobin wurde <strong>nicht</strong> als Schaukasten für hübsche Bilder geschaffen, sondern um jedem die Möglichkeit zu geben, an dem großen und ständig Wachsenden Bemühen der Zentralisierung und Indizierung wichtiger Daten teilzuhaben. Das 30 Minuten belichtete Bild von M31, dass Du letzte Nacht zwischen den Wolken aufgenommen hast,  <em>gehört</em> hier her! Sei nicht schüchtern und poste es!"
+msgstr ""
+"Unsinn. Astrobin wurde <strong>nicht</strong> als Schaukasten für hübsche "
+"Bilder geschaffen, sondern um jedem die Möglichkeit zu geben, an dem großen "
+"und ständig Wachsenden Bemühen der Zentralisierung und Indizierung wichtiger "
+"Daten teilzuhaben. Das 30 Minuten belichtete Bild von M31, dass Du letzte "
+"Nacht zwischen den Wolken aufgenommen hast, <em>gehört</em> hier her! Sei "
+"nicht schüchtern und poste es!"
 
 #: templates/faq.html:71
 msgid "On AstroBin you have two places for our images. The Staging Area is where you can upload images that you want to quickly share on forums, mailing lists or social networks. The days of scaling down and compressing your image so you can upload it to a forum for feedback and critique are over! Just upload to AstroBin's Staging Area, and send the link to anyone you want. The image will be visible only to the intended recipients, and won't appear on your profile or AstroBin's home page."
@@ -2732,7 +2750,13 @@ msgstr "Bilder auf der <a href=\"%(messier_url)s\">Messier-Marathon-Seite</a> we
 
 #: templates/faq.html:89
 msgid "AstroBin was born out of the desire to end something that had been going on for too long: the waste of incredible material to the sea of chaos that the Internet can be. For years, fantastic astrophotographs have beeen uploaded to Internet Forums, often with little or no data, or to general purpose image hosting websites, invariably with no data attached."
-msgstr "AstroBin wurde aus dem Verlangen geboren, etwas zu beenden was für zu lange Zeit passierte: Die Verschwendung von unglaublichem Material im Meer des Chaos, das das Internet sein kann. Viele Jahre lang wurden fantastische Astrofotografien in Internet-Foren hochgeladen - meist mit wenig oder gar keinen Aufnahmedaten - oder sie landeten gleich grundsätzlich ohne Aufnahmedetails bei normalen Image-.Hostern."
+msgstr ""
+"AstroBin wurde aus dem Verlangen geboren, etwas zu beenden was zu lange "
+"andauerte: Die Verschwendung von unglaublichem Material im Meer des Chaos, "
+"welche das Internet sein kann. Viele Jahre lang wurden fantastische "
+"Astrofotografien in Internet-Foren hochgeladen - meist mit wenig oder gar "
+"keinen Aufnahmedaten - oder sie landeten gleich grundsätzlich ohne "
+"Aufnahmedetails bei normalen Image-Hostern."
 
 #: templates/faq.html:92
 msgid "Such an image would be seen by some people, then quickly forgotten, and reduced to nothing more than a bunch of pixel in the giant wasteland of the Internet."
@@ -2744,7 +2768,13 @@ msgstr "Das sollte nicht passieren. AstroBin ist die Antwort: eine Bemühen das 
 
 #: templates/faq.html:102
 msgid "<em>AstroBin</em> is just starting out, and this time we can really say that the sky is the limit! Tons of ideas are in the pipeline. As the user base grows, so does the data. Suddenly, things like automated supernovae search become possible: you could simply upload an image of a galaxy, and AstroBin could compare it to pictures of the same galaxy taken previously."
-msgstr "<em>AstroBin</em> hat gerade erst begonnen und dieses Mal dürfen wir zurecht sagen: Der Himmel ist das Limit! Tonnen von Ideen sind in der Pipeline. Mit der wachsenden Zahl der Benutzer, vermehren sich auch die Daten. Plötzlich werden Dinge wie eine automatisierte Suche nach Supernovae möglich: Du könntest einfach ein Bild einer Galaxie hochladen und AstroBin kann sie mit älteren Aufnahmen der selben Galaxie vergleichen. "
+msgstr ""
+"<em>AstroBin</em> hat gerade erst begonnen und dieses Mal dürfen wir zurecht "
+"sagen: Der Himmel ist das Limit! Unzählige Ideen sind in der Pipeline. Mit "
+"wachsender Zahl der Benutzer, vermehren sich auch die Daten. Plötzlich "
+"werden Dinge wie eine automatische Suche nach Supernovae möglich: Sie "
+"könnten einfach das Bild einer Galaxie hochladen und AstroBin kann sie mit "
+"älteren Aufnahmen der selben Galaxie vergleichen."
 
 #: templates/faq.html:105
 msgid "AstroBin could also recommend subjects for you to image! Knowing your equipment, your location, and comparing what you have imaged to what users similar to you have, AstroBin could suggest your next challenge!"
@@ -2752,7 +2782,9 @@ msgstr "AstroBin könnte Dir auch Objekte zum Fotografieren empfehlen! Ausgehend
 
 #: templates/faq.html:108
 msgid "Thanks to the input from the community, more ideas are flowing in and the list get bigger and bigger."
-msgstr "Aufgrund der Beiträge der Community kommen immer mehr Ideen zustande und die Liste wird länger und länger. "
+msgstr ""
+"Dank der Einfälle der Community kommen immer mehr Ideen auf und die Liste "
+"wird länger und länger."
 
 #: templates/faq.html:115
 msgid "AstroBin uses the Markdown syntax. Please use the following reference table:"
@@ -2812,7 +2844,9 @@ msgstr "Veröffentliche nur Inhalt, den Du selber erstellt hast."
 
 #: templates/guidelines.html:15
 msgid "Respect the copyright of others. Stealing images from other people and trying to pass them off as yours is not allowed on AstroBin."
-msgstr "Respektiere das Urheberrecht anderer. Bilder zu stehlen und als seine eigene zu präsentieren ist auf AstroBin nicht erlaubt."
+msgstr ""
+"Respektieren Sie das Urheberrecht anderer. Bilder zu stehlen und als eigene "
+"Bilder zu präsentieren ist auf AstroBin nicht erlaubt."
 
 #: templates/guidelines.html:18
 msgid "Do fill in all the technical details you can."
@@ -2848,7 +2882,11 @@ msgstr "Keine Nacktbilder, sexueller Inhalt, kein illegaler Inhalt."
 
 #: templates/guidelines.html:34
 msgid "Your account will be permanently deleted, and so will all your content, if you upload any content that is illegal, porn or nudity. We also reserve the right to report you to the authorities, if we find it necessary."
-msgstr "Dein Account und Dein Inhalt wird wird permanent gelöscht, falls Du illegale Inhalte oder pornografisches Material hochlädst. Wir behalten uns das Recht vor, die entsprechenden Behörden in Kentnis zu setzen. "
+msgstr ""
+"Ihr Account wird dauerhaft gelöscht und Ihre gesamten Daten gehen verloren, "
+"falls Sie illegale Inhalte, anzügliches oder pornografisches Material "
+"hochladen. Wir behalten uns das Recht vor, die zuständigen Behörden davon in "
+"Kenntnis zu setzen."
 
 #: templates/guidelines.html:37
 msgid "Don't upload images that have nothing to do with astronomy."
@@ -2900,7 +2938,11 @@ msgstr "Den Daten verplichtet"
 
 #: templates/help.html:26
 msgid "On a general purpose image sharing site, you would upload your image and be done with it. <em>AstroBin</em>, instead, has a user interface specifically designed to enable you to input all the technical data of your image."
-msgstr "Auf einer allgemeinen Bilderplattform kannst Du Deine Bilder ausschliesslich hochladen. Bei <em>AstroBin</em> steht Dir ein User Interface zur Verfügung, so dass Du alle technischen zu Deinem Bild hinterlegene kannst."
+msgstr ""
+"Auf einer allgemeinen Bilderplattform können Sie Bilder ausschließlich "
+"hochladen. <em>AstroBin</em> dagegen stellt Ihnen ein Benutzerschnittstelle "
+"zur Verfügung, mit der Sie alle technischen Details zu Ihrem Bild "
+"hinterlegen können."
 
 #: templates/help.html:27
 msgid "<em>AstroBin</em> will autocomplete your input using a vast database: everything from telescopes, CCDs and filters to astronomical objects in many catalogues will show in popup dialogs for easy selection when you start typing their names. <em>AstroBin</em> is connected to the SIMBAD Astronomical Database, which contains over 5 million objects under over 15 million names!"
@@ -2928,15 +2970,24 @@ msgstr "Mehr als nur ein Bild"
 
 #: templates/help.html:45
 msgid "<em>AstroBin</em> will do more than just host a copy of your image: when you upload a photograph, a histogram and a black &amp; white inverted version of the image will be generated on the fly, so it's easier to spot faint nebulosity regions or spiral arms. Images will also be plate solved, and an annotated version will appear on the site. <em>AstroBin</em> will know what are the astronomical objects in your image without you telling!"
-msgstr "<em>AstroBin</em> kann mehr als nur eine Kopie Deines Bildes hosten; ein Histogramm und eine invertierte s/w werden automatisch erzeugt und Deinem Bild hinterlegt. So wird es einfacher, unklare Objekte oder Spiralarme zu identifizeren. Bilder werden automatische plate-solved und eine kommentierte Version erscheint automatisch auf der Site. <em>AstroBin</em> wird -ohne Dein Zutun- automatisch astronomische Objekte identfizieren."
+msgstr ""
+"<em>AstroBin</em> kann mehr als nur eine Kopie Ihres Bildes hosten: Ein "
+"Histogramm und eine invertierte s/w-Version Ihrer Aufnahme werden "
+"automatisch erzeugt und zu Ihrem Bild hinterlegt. So ist es einfacher, "
+"lichtschwache Objekte oder Spiralarme zu identifizieren. Bilder werden "
+"automatische astrometrisch vermessen und eine kommentierte Version erscheint "
+"automatisch auf der Webseite. <em>AstroBin</em> erkennt - ohne Ihr Zutun - "
+"automatisch die astronomischen Objekte auf Ihrem Bild."
 
 #: templates/help.html:49
 msgid "Protection from theft with automatic watermarking"
-msgstr "Automatische Wasserzeichen zum Schutz vor Diebstahl."
+msgstr "Automatische Wasserzeichen zum Schutz vor Diebstahl"
 
 #: templates/help.html:51
 msgid "<em>AstroBin</em>'s upload wizard will offer you to watermark your image with the text of your choosing. All it takes is a click!"
-msgstr "Mit nur einem Klick kann der Upload-Assistent von <em>AstroBin</em> Dein Bild mit einem Wasserzeichen Deiner Wahl versehen."
+msgstr ""
+"Mit nur einem Klick kann der Upload-Assistent von <em>AstroBin</em> Ihr Bild "
+"mit einem Wasserzeichen Ihrer Wahl versehen."
 
 #: templates/help.html:55
 msgid "AstroBin supports multiple image revisions"
@@ -2944,7 +2995,12 @@ msgstr "AstroBin unterstützt mehrere Versionen eines Bildes"
 
 #: templates/help.html:57
 msgid "Don't tell me you have never gone back to revise the processing of an image <em>after</em> you had published it. <em>AstroBin</em> embraces this concept and lets you publish several revisions of the same image easily and intuitively! Now it's going to be really easy to tell whether your processing has improved."
-msgstr "Sicher hast auch Du bereits Bilder überarbeitet, <em>nachdem</em> Du diese veröffentlicht hast. <em>AstroBin</em> unterstützt Dich auf einfache Art und Weise, mehrere Versionen Deines Bildes zu veröffentlichen, und dabei die Veränderungen zu dokumentieren."
+msgstr ""
+"Sicher haben auch Sie schon mal Bilder nachträglich überarbeitet, "
+"<em>nachdem</em> sie bereits veröffentlicht waren. <em>AstroBin</em> "
+"unterstützt Sie auch hierbei und ermöglicht es Ihnen, mehrere Versionen "
+"Ihres Bildes zu veröffentlichen. Von nun ist es einfach zu sagen, ob die "
+"Überarbeitung eine Verbesserung mit sich bringt."
 
 #: templates/help.html:61
 msgid "AstroBin is social!"
@@ -2957,19 +3013,29 @@ msgstr "Auf <em>AstroBin</em> kann man Nachrichten an andere Astrofotografen sch
 # in german there are 2 ways for adressing people: "Du" and 'Sie" (friendllike you or professional/polite/bussinesslike you)
 #: templates/help.html:68
 msgid "As you have undoubtly realized by now, <em>AstroBin</em> is way more than an image hosting service. It's what the Astrophotography community has needed for a long time. For years, I have seen amazing images scattered all over the Internet: general purpose image hosting sites, forums, personal websites and even temporary places. Some of those images contain data that is too precious to go wasted in a sea of chaos. <em>AstroBin</em> comes to the rescue to provide a home and a central hub for astrophotographers all over the world."
-msgstr "Wie Du inzwischen sicher bemerkt hast, leistet <em> AstroBin </em> deutlich mehr als ein Bilder-Online/Hosting-Service. Es ist das, was die Astrofotografen-Community schon seit langem braucht. Seit Jahren sehe ich nun schon hervorragende Bilder verstreut über das Internet: Auf allgemeinen Bilder-Service-Webseiten, in Foren, auf privaten Homepages und sogar auf temporär eingerichteten Verzeichnissen. Einige dieser Bilder beinhalten Informationen, welche zu schade sind, als dass man sie im im Webchaos untergehen lassen darf. <em> AstroBin </em> will diese retten, indem es ihnen eine Heimat bietet und für die Astrofotografen weltweit als zentrale Anlaufstelle fungiert."
+msgstr ""
+"Wie Sie inzwischen sicher bemerkt haben, leistet <em> AstroBin </em> "
+"deutlich mehr als ein Bilder-Online/Hosting-Service. Es ist das, was die "
+"Astrofotografen-Community schon seit langem braucht. Seit Jahren sieht man "
+"schon erstklassige Bilder verstreut über das Internet: Auf allgemeinen "
+"Bilder-Service-Webseiten, in Foren, auf privaten Homepages und sogar auf "
+"temporär eingerichteten Verzeichnissen. Einige dieser Bilder enthalten "
+"Informationen, welche zu schade sind, als dass man sie im Webchaos "
+"untergehen lassen darf. <em> AstroBin </em> will diese Bilder erhalten, "
+"indem es diesen ein Zuhause bietet und für die Astrofotografen weltweit als "
+"zentrale Anlaufstelle fungiert."
 
 #: templates/help.html:70
 msgid "So, what are you waiting for?"
-msgstr "Auf was wartest Du noch?"
+msgstr "Worauf warten Sie noch?"
 
 #: templates/help.html:71
 msgid "Sign up now!"
-msgstr "Registriere Dich jetzt!"
+msgstr "Registrieren Sie sich jetzt!"
 
 #: templates/index.html:10
 msgid "Upload as a work in progress"
-msgstr "Als in Bearbeitung befindliches Bild hochladen"
+msgstr "Als ein in Bearbeitung befindliches Bild hochladen"
 
 #: templates/index.html:15
 #: templates/index.html.py:31
@@ -2981,7 +3047,7 @@ msgstr "Hochladen"
 #: templates/index.html.py:33
 #: templates/image/detail.html:1002
 msgid "Uploading..."
-msgstr "Hochladen in Bearbeitung..."
+msgstr "Es wird hochgeladen ..."
 
 #: templates/index.html:21
 #, python-format
@@ -2996,7 +3062,11 @@ msgstr "Als fertig bearbeitetes Bild hochladen"
 #: templates/index.html:37
 #, python-format
 msgid "Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and here on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> too."
-msgstr "Mit dieser Schaltfläche können Bilder in den <strong>Public-Bereich</strong> hochgeladen werden. Sie werden in Deinem <a href=\"%(profile_url)s\">Profil</a> angezeigt sowie auf der Startseite. Man kann auch von <a href=\"%(flickr_url)s\">Flickr importieren</a>."
+msgstr ""
+"Mit dieser Schaltfläche können Bilder in den <strong>öffentlichen "
+"Bereich</strong> hochgeladen werden. Sie werden in Ihrem <a href=\"%"
+"(profile_url)s\">Profil</a> angezeigt sowie auf der Startseite. Sie können "
+"Bilder auch aus<a href=\"%(flickr_url)s\">Flickr importieren</a>."
 
 #: templates/index.html:47
 msgid "Warning!"
@@ -3005,16 +3075,22 @@ msgstr "Warnung!"
 #: templates/index.html:49
 #, python-format
 msgid "Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
-msgstr "Vor dem Upload des ersten Bildes sollte mindestens ein Teleskop und eine Kamera im <a href=\"%(the_url)s?initial\">Profil</a> hinzugefügt werden."
+msgstr ""
+"Vor dem Upload des ersten Bildes <em>muss</em> mindestens ein Teleskop und "
+"eine Kamera im <a href=\"%(the_url)s?initial\">Profil</a> hinterlegt sein."
 
 #: templates/index.html:63
 msgid "The perfect home for your astrophotography."
-msgstr "Das perfekte Zuhause für Deine Astro-Bilder."
+msgstr "Das perfekte Zuhause für Ihre Astro-Bilder."
 
 #: templates/index.html:65
 #, python-format
 msgid "AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href=\"%(help_url)s\">help page.</a> for more information."
-msgstr "AstroBin ist ein Bilderdienst, der eigens für Astrofotografen gemacht wurde. Der Dienst ist voller Funktionen von denen die Astrofotografen-Gemeinschaft profitieren kann. Mehr Informationen dazu auf der <a href=\"%(help_url)s\">Hilfe-Seite</a>."
+msgstr ""
+"AstroBin ist ein Bilderdienst, der eigens für Astrofotografen gemacht wurde. "
+"Der Dienst ist voller Funktionen von denen die Astrofotografen-Gemeinschaft "
+"profitieren werden. Mehr Informationen dazu auf der <a href=\"%(help_url)s"
+"\">Hilfe-Seite</a>."
 
 #: templates/index.html:70
 msgid "Unlimited uploads, unlimited size."
@@ -3022,15 +3098,22 @@ msgstr "Unbegrenzte Uploads, unbegrenzte Grösse."
 
 #: templates/index.html:71
 msgid "Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free."
-msgstr "Astronomische Fotografien haben einen wissenschaftlichen Wert, der nicht durch (verlustbehaftete) Dateikompression verloren gehen soll. Hier auf AstroBin kannst (und sollst) Du die Bilder in voller Größe hochladen. Du hast unbegrenzten kostenlosen Speicherplatz."
+msgstr ""
+"Astronomische Fotografien haben einen wissenschaftlichen Wert, der nicht "
+"durch (verlustbehaftete) Dateikompression verloren gehen soll. Hier auf "
+"AstroBin können (und sollen) Sie die Bilder in voller Größe hochladen. Sie "
+"haben unbegrenzten kostenlosen Speicherplatz."
 
 #: templates/index.html:76
 msgid "Have your data neatly plotted."
-msgstr "Deine Daten werden sauber dargestellt."
+msgstr "Ihre Daten werden übersichtlich dargestellt."
 
 #: templates/index.html:77
 msgid "Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most."
-msgstr "Information ist Alles und AstroBin stellt die notwendigen Tools bereit, um diese sauber zu organisieren. Unsere Plots ermöglichen Dir Einsichten in Deine Arbeit, dort wo Du sie am meisten brauchst."
+msgstr ""
+"Information ist Alles. AstroBin stellt die notwendigen Tools bereit, um "
+"diese übersichtlich zu organisieren. Und mit unseren Statistiken gewinnt man "
+"Einsichten in die Arbeit und über die am meisten genutzte Ausrüstung."
 
 #: templates/index.html:86
 msgid "Recent images"
@@ -3061,7 +3144,12 @@ msgstr "Für den Messier Marathon nominieren"
 #: templates/messier_nomination.html:21
 #, python-format
 msgid "You will nominate this image for the <a href=\"%(the_url)s\" target=\"_blank\">Messier Marathon</a>. The Messier Marathon is a list of the Messier objects that features AstroBin images nominated by the users. For each Messier object, the AstroBin image with the most nomination is chosen."
-msgstr "Du möchtest dieses Bild für den  <a href=\"%(the_url)s\" target=\"_blank\">Messier Marathon</a> nominieren. Der Messier Marathon umfasst von Benutzer nominierte Bilder auf AstroBin zu den Messierobjekten. Zu jedem Messierobjekt wird das Bild ausgewählt, das die meisten Nominierungen hat."
+msgstr ""
+"Du möchtest dieses Bild für den <a href=\"%(the_url)s\" "
+"target=\"_blank\">Messier Marathon</a> nominieren. Der Messier Marathon "
+"umfasst von Benutzer nominierte Bilder auf AstroBin zu den Messierobjekten. "
+"Zu jedem Messierobjekt wird das Bild ausgewählt, das die meisten "
+"Nominierungen hat."
 
 #: templates/messier_nomination.html:25
 #, python-format
@@ -3485,8 +3573,8 @@ msgstr "von <a href=\"%(the_url)s\">%(user)s</a>"
 #, python-format
 msgid "viewed one time"
 msgid_plural "viewed %(counter)s times"
-msgstr[0] "ein Mal angezeigt"
-msgstr[1] "%(counter)s-mal angezeigt"
+msgstr[0] "einmal betrachtet"
+msgstr[1] "%(counter)s-mal betrachtet"
 
 #: templates/image/detail.html:389
 msgid "Contains"
@@ -3810,7 +3898,10 @@ msgstr "Weitere Informationen angefordert"
 #: templates/image/actions/request_additional_information_complete.html:21
 #, python-format
 msgid "<strong>%(username)s</strong> has been notified. Hopefully they will update the image soon. Remember that you can also <a href=\"%(message_url)s\">send them a message</a>. "
-msgstr "<strong>%(username)s</strong> erhielt eine Benachrichtigung zum Ergänzen der Bilddaten. Du kannst auch eine  <a href=\"%(message_url)s\">Nachricht schicken</a>."
+msgstr ""
+"<strong>%(username)s</strong> erhielt eine Benachrichtigung. Hoffentlich "
+"werden die Daten angepasst.Denken Sie daran, Sie können auch eine "
+"gewöhnliche <a href=\"%(message_url)s\">Nachricht schicken</a>."
 
 #: templates/image/actions/request_fits.html:20
 #, python-format
@@ -3908,11 +3999,15 @@ msgstr "Schritt 4 von 5: verwendete Ausrüstung"
 #: templates/image/edit/gear.html:27
 #, python-format
 msgid "Can't see anything here? Perhaps you should first add some gear in your <a href=\"%(the_url)s\">profile</a>!"
-msgstr "Du siehst keine Angaben? Vielleicht solltest Du zuerst Deine Ausrüstung in Deinem <a href=\"%(the_url)s\">Profil</a> erfassen!"
+msgstr ""
+"Sind keine Angaben sichtbar? Bitte erfassen Sie zuerst die Ausrüstung in "
+"Ihrem <a href=\"%(the_url)s\">Profil</a>!"
 
 #: templates/image/edit/gear.html:31
 msgid "To choose the gear used for this image, drag items from the right side to left side, or click the plus sign."
-msgstr "Um die verwendete Ausrüstung auszuwählen, ziehe die Gegenstände von rechts nach links, oder verwende das Plus-Zeichen."
+msgstr ""
+"Um die verwendete Ausrüstung auszuwählen, ziehen Sie Ihre Ausrüstung aus der "
+"rechten Fensterhälfte nach links oder verwenden Sie das Plus-Zeichen."
 
 #: templates/image/edit/gear.html:51
 msgid "Next step: acquisition"
@@ -3929,12 +4024,19 @@ msgstr "Lizenz für dieses Bild ändern"
 #: templates/image/edit/license.html:14
 #: templates/user/profile/edit/license.html:11
 msgid "You can associate a Creative Commons license with your content if you wish, to grant people the right to use your work under certain circumstances. For more information on what your options are, please visit the <a target=\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons website</a>."
-msgstr "Du kannst Deine Inhalte unter die Creative Commons Lizenz lizensieren, wenn Du willst, um Leuten das Recht zu geben, deine Arbeit unter bestimmten Voraussetzungen zu nutzen. Für weitere Informationen zu den Möglichkeiten, die du hast, besuche bitte die <a target=\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons Webseite</a>. "
+msgstr ""
+"Sie können optional ihre Inhalte unter eine Creative Commons Licence "
+"lizenzieren, welche Anderen das Recht einräumt, Ihre Inhalte unter "
+"bestimmten Voraussetzungen zu nutzen. Für weitere Informationen zu den "
+"Möglichkeiten der Lizenzierung besuchen Sie bitte die <a target=\"_blank\" "
+"href=\"http://www.creativecommons.org/\">Creative Commons Webseite</a>."
 
 #: templates/image/edit/license.html:18
 #, python-format
 msgid "Remember that you can change your default license <a href=\"%(change_default_url)s\">here</a>."
-msgstr "Denke daran, dass Du Deine Standard-Lizenz  <a href=\"%(change_default_url)s\">hier</a> ändern kannst."
+msgstr ""
+"Denke daran, dass Du Deine Standard-Lizenz <a href=\"%"
+"(change_default_url)s\">hier</a> ändern kannst."
 
 #: templates/image/edit/menu.html:6
 #: templates/search/search.html:38
@@ -4081,7 +4183,7 @@ msgstr "Empfangene Anfragen verwalten"
 #, python-format
 msgid "Viewed one time"
 msgid_plural "Viewed %(counter)s times"
-msgstr[0] "Ein Mal betrachtet"
+msgstr[0] "Einmal betrachtet"
 msgstr[1] "%(counter)s-mal betrachtet"
 
 #: templates/location/edit.html:8
@@ -4136,7 +4238,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"Eine Unterhaltung zwischen <a href=\"%(sender_url)s\">Dir</a> und\n"
+"Eine Unterhaltung zwischen <a href=\"%(sender_url)s\">Ihnen</a> und\n"
 "        "
 
 #: templates/messages/view.html:29
@@ -4457,8 +4559,8 @@ msgid ""
 "\n"
 "http://astrobin.com/messages/inbox/"
 msgstr ""
-"Du hast eine private nachricht auf AstroBin bekommen!\n"
-"Lese sie auf folgendem link:n\n"
+"Sie haben eine private Nachricht auf AstroBin erhalten!\n"
+"Folgen Sie diesem  Link um sie zu lesen:\n"
 "http://astrobin.com/messages/inbox/"
 
 #: templates/notification/received_email/notice.html:2
@@ -4707,7 +4809,7 @@ msgstr "# ausgewählt"
 #: templates/user/card.html:13
 #, python-format
 msgid "%(username)s's technical card"
-msgstr "%(username)s's technische Karte"
+msgstr "%(username)ss technische Karte"
 
 #: templates/user/card.html:38
 #, python-format
@@ -4733,7 +4835,7 @@ msgstr "Benutzer nicht gefunden:"
 #: templates/user/plots.html.py:13
 #, python-format
 msgid "%(user)s's plots"
-msgstr "%(user)s's Plots"
+msgstr "%(user)ss Statistik"
 
 #: templates/user/plots.html:17
 #, python-format
@@ -4847,7 +4949,10 @@ msgstr "Fehlende Daten"
 
 #: templates/user/profile.html:114
 msgid "These are your \"work in progress\" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu."
-msgstr "Das sind Deine \"in Bearbeitung\" Bilder: nur Du kannst die Liste sehen. Du kannst Deine Bilder mit anderen Personen teilen, indem Du das das <em>Share</em> Menu verwendest."
+msgstr ""
+"Hier sind Ihre Bilder mit Status \"in Bearbeitung\": Nur Sie können diese "
+"Liste sehen. Sie können einzelne Bilder anderen Personen zeigen, indem Sie "
+"das Menu <em>Teilen</em> verwenden."
 
 #: templates/user/profile.html:122
 msgid "These images don't have enough data. It's a shame..."
@@ -4940,7 +5045,7 @@ msgstr "oder klicke hier, um Dein Passwort zu ändern"
 
 #: templates/user/profile/edit/gear.html:8
 msgid "Edit your astrophotography gear"
-msgstr "Deine Astrofotografie Ausrüstung bearbeiten"
+msgstr "Astrofotografie Ausrüstung bearbeiten"
 
 #: templates/user/profile/edit/gear.html:13
 msgid "Go back to the home page."
@@ -4948,11 +5053,15 @@ msgstr "Zurück zur Homepage."
 
 #: templates/user/profile/edit/gear.html:17
 msgid "Please use full names (make and model) for all your gear items!"
-msgstr "Bitte benutze vollständige Namen (Hersteller und Modell) für Deine gesamte Ausrüstung!"
+msgstr ""
+"Bitte benutzen Sie vollständige Namen (Hersteller und Modell) für Ihre "
+"Ausrüstungen!"
 
 #: templates/user/profile/edit/gear.html:18
 msgid "<span class=\"button\">Orange</span> bubbles mean that you need to edit the properties of that gear item!"
-msgstr "<span class=\"button\">Orange</span> Blatern bedeuten, dass Du die Eigenschaften der Ausrüstung überarbeiten musst."
+msgstr ""
+"<span class=\"button\">Orange</span>-farbige Hinweise bedeuten, dass Sie die "
+"Eigenschaften der Ausrüstung überarbeiten müssen."
 
 #: templates/user/profile/edit/gear.html:26
 msgid "* use a comma to separate the values."
@@ -4976,7 +5085,10 @@ msgstr "Standortdaten bearbeiten"
 
 #: templates/user/profile/edit/locations.html:13
 msgid "Use the form below to add a new location. After you add one, a new empty form will be created at the bottom, in case you want to add more."
-msgstr "Benutze das Formular, um einen neuen Standort einzugeben. Man kann beliebig viele Standorte angeben."
+msgstr ""
+"Benutzen sie dieses Formular, um einen neuen Standort einzugeben. Wenn Sie "
+"einen Standort eingeben haben, können sie ein weiteres Formular öffnen um "
+"weitere Standorte einzugeben."
 
 #: templates/user/profile/edit/locations.html:16
 msgid "AstroBin will not share your location details with other users."
