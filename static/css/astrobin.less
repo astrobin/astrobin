@@ -2569,7 +2569,8 @@ span.copy-box {
 #footer-outer {
     clear: both;
     margin: 0 auto;
-    font-size: .9em;
+    font-size: .85em;
+    line-height: 1.15em;
     text-align: left;}
 
 #footer-wrap {
@@ -2594,12 +2595,15 @@ span.copy-box {
 
 /* footer-bottom */
 #footer-bottom {
-    margin-top: @spacer-xlarge;
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%;
+
     .bottom-left {
         float: left;}
     .bottom-right {
         position: absolute;
-        right: 30px;
+        right: 0;
         text-align: right;
         padding-right: 0;
         p {
