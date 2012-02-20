@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-17 08:04-0500\n"
-"PO-Revision-Date: 2012-02-19 15:32+0100\n"
-"Last-Translator: naavis <svnaavis@gmail.com>\n"
+"POT-Creation-Date: 2012-02-20 01:29-0500\n"
+"PO-Revision-Date: 2012-02-20 01:32-0500\n"
+"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -1154,8 +1154,8 @@ msgstr "Ilmaise arvo millimetreissä"
 #: forms.py:279
 #: forms.py:284
 #: forms.py:429
-#: forms.py:468
-#: forms.py:500
+#: forms.py:470
+#: forms.py:503
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Käytä seuraavaa muotoa: vvvv-kk-pp"
 
@@ -1237,22 +1237,24 @@ msgstr "Pituusaste (minuuttia)"
 msgid "Longitude (seconds)"
 msgstr "Pituusaste (sekuntia)"
 
-#: forms.py:434
-msgid "Please enter a value between 1 and 5."
-msgstr "Syötä arvo väliltä 1 .. 5."
-
-#: forms.py:439
-msgid "Please enter a value between 1 and 10."
-msgstr "Syötä arvo väliltä 1 .. 10."
-
-#: forms.py:481
+#: forms.py:430
+#: forms.py:471
+#: forms.py:504
 #: models.py:782
 #: models.py:995
 #: templates/image/detail.html:506
 msgid "Date"
 msgstr "Päivämäärä"
 
-#: forms.py:526
+#: forms.py:436
+msgid "Please enter a value between 1 and 5."
+msgstr "Syötä arvo väliltä 1 .. 5."
+
+#: forms.py:441
+msgid "Please enter a value between 1 and 10."
+msgstr "Syötä arvo väliltä 1 .. 10."
+
+#: forms.py:531
 msgid "Nominate for"
 msgstr "Ehdota"
 
@@ -1302,7 +1304,6 @@ msgstr "Nimeä-Ei muutoksia Creative Commons"
 #: models.py:46
 #: settings.py:49
 #: views.py:629
-#: templates/base.html:119
 msgid "English"
 msgstr "Englanti"
 
@@ -2591,7 +2592,7 @@ msgstr "Palaute"
 #: templates/base.html:374
 #: templates/image/detail.html:635
 #: templates/image/detail.html.py:813
-#: templates/messages/compose.html:18
+#: templates/messages/compose.html:19
 msgid "Cancel"
 msgstr "Peruuta"
 
@@ -2960,7 +2961,7 @@ msgstr "Mitä siis vielä odotat?"
 msgid "Sign up now!"
 msgstr "Rekisteröidy nyt!"
 
-#: templates/index.html:10
+#: templates/index.html:11
 msgid "Upload as a work in progress"
 msgstr "Lataa keskeneräisenä vedoksena"
 
@@ -2981,7 +2982,7 @@ msgstr "Ladataan..."
 msgid "Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgstr "Lataa kuva tällä napilla Tilapäiselle alueelle. Se on oivallinen keskeneräisille projekteille joita haluat jakaa foorumeilla. Lue lisää <a href=\"%(faq_url)s#6\">UKK:sta</a>."
 
-#: templates/index.html:26
+#: templates/index.html:27
 msgid "Upload as a finished image"
 msgstr "Lataa valmis kuva"
 
@@ -2990,45 +2991,45 @@ msgstr "Lataa valmis kuva"
 msgid "Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and here on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> too."
 msgstr "Lataa kuva tällä napilla Julkiselle alueelle. Kuva näytetään  <a href=\"%(profile_url)s\">profiilissasi</a> ja etusivulla. Voit myös <a href=\"%(flickr_url)s\">tuoda kuvia Flickristä</a>."
 
-#: templates/index.html:47
+#: templates/index.html:48
 msgid "Warning!"
 msgstr "Huomio!"
 
-#: templates/index.html:49
+#: templates/index.html:50
 #, python-format
 msgid "Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
 msgstr "Ennen kuin aloitat kuvien lataamisen sinun tulee lisätä ainakin yksi kaukoputki ja yksi kamera. Tämän voit tehdä <a href=\"%(the_url)s\">profiilissasi</a>!"
 
-#: templates/index.html:63
+#: templates/index.html:72
 msgid "The perfect home for your astrophotography."
 msgstr "Paras paikka tähtikuvillesi."
 
-#: templates/index.html:65
+#: templates/index.html:74
 #, python-format
 msgid "AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href=\"%(help_url)s\">help page.</a> for more information."
 msgstr "AstroBin on kuvienjakosivusto, joka on suunniteltu erityisesti tähtikuvaajille. Se sisältää paljon tähtikuvaajayhteisölle hyödyllisiä toimintoja! Lue lisää <a href=\"%(help_url)s\">ohjeita-sivulta</a>."
 
-#: templates/index.html:70
+#: templates/index.html:79
 msgid "Unlimited uploads, unlimited size."
 msgstr "Rajaton määrä rajattoman kokoisia latauksia."
 
-#: templates/index.html:71
+#: templates/index.html:80
 msgid "Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free."
 msgstr "Tähtikuvilla on tieteellistä arvoa jonka ei kannata hukkua pakkauksessa. AstroBinissä voit (ja kannattaa!) ladata täyskokoisia kuvia. Saat rajattoman määrän tilaa ilmaiseksi."
 
-#: templates/index.html:76
+#: templates/index.html:85
 msgid "Have your data neatly plotted."
 msgstr "Piirrä datasta kuvaaja."
 
-#: templates/index.html:77
+#: templates/index.html:86
 msgid "Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most."
 msgstr "Data on kaikki kaikessa, ja AstroBin tarjoaa työkalut jolla data pysyy siistissä järjestyksessä. Käppyröillämme näet yhdellä silmäyksellä milloin tuottavuus on huipussaan ja mitä laitteita käytät eniten."
 
-#: templates/index.html:86
+#: templates/index.html:95
 msgid "Recent images"
 msgstr "Uusimpia kuvia"
 
-#: templates/index.html:89
+#: templates/index.html:98
 msgid "(view more)"
 msgstr "(näytä lisää...)"
 
@@ -3189,18 +3190,18 @@ msgid "Day"
 msgstr "Päivittäin"
 
 #: templates/stats.html:40
-#: templates/user/plots.html:43
-#: templates/user/plots.html.py:72
-#: templates/user/plots.html:102
-#: templates/user/plots.html.py:131
-msgid "Please wait: the plot is loading..."
-msgstr "Odota: Kuvaajaa ladataan..."
-
-#: templates/stats.html:41
 #: templates/user/plots.html:44
 #: templates/user/plots.html.py:73
 #: templates/user/plots.html:103
 #: templates/user/plots.html.py:132
+msgid "Please wait: the plot is loading..."
+msgstr "Odota: Kuvaajaa ladataan..."
+
+#: templates/stats.html:41
+#: templates/user/plots.html:45
+#: templates/user/plots.html.py:74
+#: templates/user/plots.html:104
+#: templates/user/plots.html.py:133
 msgid "Loading..."
 msgstr "Ladataan..."
 
@@ -3253,7 +3254,7 @@ msgstr "Kuvattu"
 #: templates/wall.html:30
 #: templates/image/detail.html:458
 #: templates/search/search.html:171
-#: templates/user/plots.html:81
+#: templates/user/plots.html:82
 msgid "Views"
 msgstr "Katselukerrat"
 
@@ -3616,9 +3617,9 @@ msgstr "Muokkaa"
 #: templates/image/detail.html:624
 #: templates/image/detail.html.py:796
 #: templates/messages/inbox.html:66
-#: templates/messages/view.html:49
-#: templates/messages/view.html.py:51
-#: templates/messages/view.html:86
+#: templates/messages/view.html:47
+#: templates/messages/view.html.py:49
+#: templates/messages/view.html:84
 msgid "Reply"
 msgstr "Vastaa"
 
@@ -3691,7 +3692,7 @@ msgid "Send %(username)s a message"
 msgstr "Lähetä viesti käyttäjälle %(username)s"
 
 #: templates/image/detail.html:959
-#: templates/messages/compose.html:16
+#: templates/messages/compose.html:17
 #: templates/messages/modal_compose.html:16
 #: templates/user/profile.html:229
 msgid "Send"
@@ -4083,22 +4084,22 @@ msgstr "Jos tältä kohteelta puuttuu tietoja, tai siinä on vääriä tietoja, 
 msgid "Edit your location"
 msgstr "Muokkaa sijaintiasi"
 
-#: templates/messages/compose.html:9
+#: templates/messages/compose.html:10
 #: templates/messages/inbox.html:34
 msgid "Compose message"
 msgstr "Kirjoita viesti"
 
-#: templates/messages/compose.html:48
+#: templates/messages/compose.html:50
 #: templates/messages/modal_compose.html:43
 msgid "Type in a search term"
 msgstr "Syötä hakusana"
 
-#: templates/messages/compose.html:49
+#: templates/messages/compose.html:51
 #: templates/messages/modal_compose.html:44
 msgid "No results"
 msgstr "Ei tuloksia"
 
-#: templates/messages/compose.html:50
+#: templates/messages/compose.html:52
 #: templates/messages/modal_compose.html:45
 msgid "Searching"
 msgstr "Etsitään"
@@ -4121,29 +4122,23 @@ msgstr "Viesti lähetetty"
 
 #: templates/messages/view.html:10
 #, python-format
-msgid ""
-"\n"
-"            A conversation between <a href=\"%(sender_url)s\">you</a> and\n"
-"            "
-msgstr ""
-"\n"
-"       Keskustelijat: <a href=\"%(sender_url)s\">sinä</a> ja\n"
-"        "
+msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
+msgstr "Keskustelijat: <a href=\"%(sender_url)s\">sinä</a> ja"
 
-#: templates/messages/view.html:29
+#: templates/messages/view.html:27
 msgid "Delete conversation"
 msgstr "Poista keskustelu"
 
-#: templates/messages/view.html:32
-#: templates/messages/view.html.py:53
+#: templates/messages/view.html:30
+#: templates/messages/view.html.py:51
 msgid "or return to messages"
 msgstr "tai palaa takaisin viesteihin"
 
-#: templates/messages/view.html:73
+#: templates/messages/view.html:71
 msgid "Sending..."
 msgstr "Lähetetään..."
 
-#: templates/messages/view.html:95
+#: templates/messages/view.html:93
 msgid "Error. Try again!"
 msgstr "Virhe! Yritä uudestaan!"
 
@@ -4726,64 +4721,64 @@ msgstr "Käyttäjää ei löytynyt:"
 msgid "%(user)s's plots"
 msgstr "Käyttäjän %(user)s tilastot"
 
-#: templates/user/plots.html:17
+#: templates/user/plots.html:18
 #, python-format
-msgid "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href=\"?public&sub=nodata\">here</a>."
-msgstr "Hei <strong>%(user)s</strong>! Ajattelin vain huomauttaa että käppyröistä tulisi paljon hyödykkäämpiä jos lisäät dataa kuviisi. Tarkista puuttuuko kuvistasi tietoja <a href=\"?public&sub=nodata\">täällä</a>."
+msgid "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href=\"%(user_page)s?public&sub=nodata\">here</a>."
+msgstr "Hei <strong>%(user)s</strong>! Ajattelin vain huomauttaa että käppyröistä tulisi paljon hyödykkäämpiä jos lisäät dataa kuviisi. Tarkista puuttuuko kuvistasi tietoja <a href=\"%(user_page)s?public&sub=nodata\">täällä</a>."
 
-#: templates/user/plots.html:22
+#: templates/user/plots.html:23
 msgid "Integration hours"
 msgstr "Valotusaika"
 
-#: templates/user/plots.html:23
+#: templates/user/plots.html:24
 msgid "Total integration hours, plotted against time."
 msgstr "Kokonaisvalotusaika."
 
-#: templates/user/plots.html:28
-#: templates/user/plots.html.py:57
-#: templates/user/plots.html:87
-#: templates/user/plots.html.py:116
+#: templates/user/plots.html:29
+#: templates/user/plots.html.py:58
+#: templates/user/plots.html:88
+#: templates/user/plots.html.py:117
 msgid "Show by period"
 msgstr "Näytä vaiheen mukaan"
-
-#: templates/user/plots.html:32
-#: templates/user/plots.html.py:61
-#: templates/user/plots.html:91
-#: templates/user/plots.html.py:120
-msgid "Yearly"
-msgstr "Vuosittain"
 
 #: templates/user/plots.html:33
 #: templates/user/plots.html.py:62
 #: templates/user/plots.html:92
 #: templates/user/plots.html.py:121
-msgid "Monthly"
-msgstr "Kuukausittain"
+msgid "Yearly"
+msgstr "Vuosittain"
 
 #: templates/user/plots.html:34
 #: templates/user/plots.html.py:63
 #: templates/user/plots.html:93
 #: templates/user/plots.html.py:122
+msgid "Monthly"
+msgstr "Kuukausittain"
+
+#: templates/user/plots.html:35
+#: templates/user/plots.html.py:64
+#: templates/user/plots.html:94
+#: templates/user/plots.html.py:123
 msgid "Daily"
 msgstr "Päivittäin"
 
-#: templates/user/plots.html:51
+#: templates/user/plots.html:52
 msgid "Integration hours by gear"
 msgstr "Valotusaika kuvauslaitteittain"
 
-#: templates/user/plots.html:52
+#: templates/user/plots.html:53
 msgid "Total integration hours, plotted against time and arranged by imaging telescopes and lenses, and imaging cameras."
 msgstr "Kokonaisvalotusaika tunneissa ajan funktiona, järjestettynä optiikan ja kameran mukaan."
 
-#: templates/user/plots.html:82
+#: templates/user/plots.html:83
 msgid "Combined view count for all the user's images, plotted against time."
 msgstr "Käyttäjän kaikkien kuvien yhteenlasketut näyttökerrat ajan funktiona."
 
-#: templates/user/plots.html:110
+#: templates/user/plots.html:111
 msgid "Uploaded images"
 msgstr "Ladatut kuvat"
 
-#: templates/user/plots.html:111
+#: templates/user/plots.html:112
 msgid "Image uploads, plotted against time."
 msgstr "Ladattujen kuvien määrä ajan funktiona."
 
