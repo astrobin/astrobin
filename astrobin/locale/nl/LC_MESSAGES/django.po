@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-20 01:28-0500\n"
-"PO-Revision-Date: 2012-02-20 01:34-0500\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2012-02-20 09:30+0100\n"
+"Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
 
 #: fields.py:9
 msgid "United Kingdom"
@@ -4770,213 +4768,237 @@ msgstr "Totaal aantal uren integratie over de tijd heen en geschikt volgens tele
 
 #: templates/user/plots.html:83
 msgid "Combined view count for all the user's images, plotted against time."
-msgstr ""
+msgstr "Overzicht van het totaal aantal foto's over de tijd heen geschikt."
 
 #: templates/user/plots.html:111
-#, fuzzy
 msgid "Uploaded images"
-msgstr "Geupload aantal beelden, dagelijks"
+msgstr "Aantal geposte beelden"
 
 #: templates/user/plots.html:112
 msgid "Image uploads, plotted against time."
-msgstr ""
+msgstr "Foto-uploads, over de tijd heen geschikt."
 
 #: templates/user/profile.html:5
 #, python-format
 msgid "%(user)s's gallery"
-msgstr ""
+msgstr "%(user)s's gallerij"
 
 #: templates/user/profile.html:14
 msgid "View your images"
-msgstr ""
+msgstr "Bekijk je foto's"
 
 #: templates/user/profile.html:16
 #, python-format
 msgid "View %(username)s's images:"
-msgstr ""
+msgstr "Bekijk de foto's van %(username)s"
 
 #: templates/user/profile.html:24
 #: templates/user/profile.html.py:26
 msgid "Public Area"
-msgstr ""
+msgstr "Publieke Zone"
 
 #: templates/user/profile.html:30
 #: templates/user/profile.html.py:32
 msgid "Staging Area"
-msgstr ""
+msgstr "Ontwikkelingszone"
 
 #: templates/user/profile.html:44
 msgid "User menu"
-msgstr ""
+msgstr "Gebruikersmenu"
 
 #: templates/user/profile.html:68
 msgid "Sort images by"
-msgstr ""
+msgstr "Rangschik de foto's volgens"
 
 #: templates/user/profile.html:79
 msgid "Acquisition time"
-msgstr ""
+msgstr "Belichtingstijd"
 
 #: templates/user/profile.html:84
 msgid "Subject type"
-msgstr ""
+msgstr "Type onderwerp"
 
 #: templates/user/profile.html:89
 msgid "Year"
-msgstr ""
+msgstr "Jaar"
 
 #: templates/user/profile.html:99
 msgid "Lacking data"
-msgstr ""
+msgstr "Data onvolledig"
 
 #: templates/user/profile.html:114
 msgid "These are your \"work in progress\" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu."
 msgstr ""
+"Dit zijn je onafgewerkte foto's. Jij bent de enige die deze lijst kan zien, "
+"maar je kan elke individuele foto met andere mensen delen via het "
+"<em>Delen</em>-menu."
 
 #: templates/user/profile.html:122
 msgid "These images don't have enough data. It's a shame..."
-msgstr ""
+msgstr "Deze foto's hebben niet voldoende ingevulde data. Zonde..."
 
 #: templates/user/profile.html:124
 msgid "If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too."
 msgstr ""
+"Als je je foto's in albums wil onderverdelen dan moet je zoveel mogelijk "
+"gegevens verstrekken. Telescoop waarmee de foto is gemaakt en gebruikte "
+"camera is het absolute minimum. De datums waarop de belichting is gebeurd "
+"zijn ook erg belangrijk."
 
 #: templates/user/profile.html:136
 msgid "(view more...)"
-msgstr ""
+msgstr "(meer zien...)"
 
 #: templates/user/profile.html:152
 msgid "No images."
-msgstr ""
+msgstr "Geen foto's"
 
 #: templates/user/profile.html:158
 msgid "(go back)"
-msgstr ""
+msgstr "(terug)"
 
 #: templates/user/profile.html:163
 msgid "These images are ordered so that the most recently acquired appear first. Please note: images with no acquisition dates will appear last, and in no particular order."
 msgstr ""
+"Deze foto's zijn gerangschikt zodat de meest recent genomen eerst "
+"verschijnt. Bemerk dat beelden zonder ingevulde tijd zullen ongeordend en "
+"als laatste verschijnen."
 
 #: templates/user/profile.html:165
 msgid "Please fill in the missing dates on all your images!"
-msgstr ""
+msgstr "Gelieve alle ontbrekende datums toe te voegen!"
 
 #: templates/user/profile.html:178
 msgid "Tools"
-msgstr ""
+msgstr "Hulpmiddelen"
 
 #: templates/user/profile.html:182
 #: templates/user/profile.html.py:185
 msgid "Edit profile"
-msgstr ""
+msgstr "Wijzig profiel"
 
 #: templates/user/profile/flickr_import.html:7
 msgid "Import your photos from Flickr"
-msgstr ""
+msgstr "Importeer je foto's vanuit Flickr"
 
 #: templates/user/profile/flickr_import.html:9
 msgid "Please note: when importing from Flickr, automatic watermarking of the images it not supported."
 msgstr ""
+"Noot: als je van Flickr importeert, is het automatisch watermerken niet "
+"actief."
 
 #: templates/user/profile/flickr_import.html:15
 msgid "Which set"
-msgstr ""
+msgstr "Welke serie"
 
 #: templates/user/profile/flickr_import.html:29
 msgid "Import photos"
-msgstr ""
+msgstr "Importeer foto's"
 
 #: templates/user/profile/flickr_import.html:31
 msgid "Authenticate with Flickr"
-msgstr ""
+msgstr "Zich identificeren bij Flickr"
 
 #: templates/user/profile/flickr_import.html:38
 msgid "Unfortunately you need to enable Javascript to be able to import photos from Flickr at this time."
 msgstr ""
+"Spijtig genoeg moet je momenteel Javascript activeren als je foto's van "
+"Flickr wil importeren."
 
 #: templates/user/profile/flickr_import.html:73
 msgid "Click to select the photos you want to import"
-msgstr ""
+msgstr "Klik op de gewenste foto's om ze te importeren"
 
 #: templates/user/profile/flickr_import.html:89
 msgid "Import selected photos"
-msgstr ""
+msgstr "Importeer de geselecteerde foto's"
 
 #: templates/user/profile/flickr_import.html:101
 msgid "Importing images."
-msgstr ""
+msgstr "Bezig met importeren van de foto's."
 
 #: templates/user/profile/flickr_import.html:101
 msgid "Do not navigate away from this window: this might take a while!"
 msgstr ""
+"Laat dit venster onberoerd. deze procedure kan wel wat tijd in beslag nemen!"
 
 #: templates/user/profile/flickr_import.html:110
 msgid "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures (and keep an eye on your notifications)!"
 msgstr ""
+"Klaar! Ga naar <a href=\\\"/me\\\">je profiel</a> om je nieuwe foto's te "
+"bekijken (en hou een oogje op je kennisgevingen)!"
 
 #: templates/user/profile/edit/basic.html:8
 msgid "Edit your basic information"
-msgstr ""
+msgstr "Wijzig je basisinformatie"
 
 #: templates/user/profile/edit/basic.html:16
 msgid "or click here to change your password"
-msgstr ""
+msgstr "of klik hier om je paswoord te veranderen"
 
 #: templates/user/profile/edit/gear.html:8
 msgid "Edit your astrophotography gear"
-msgstr ""
+msgstr "Wijzig je astrofoto materiaal"
 
 #: templates/user/profile/edit/gear.html:13
 msgid "Go back to the home page."
-msgstr ""
+msgstr "Terug naar de homepagina."
 
 #: templates/user/profile/edit/gear.html:17
 msgid "Please use full names (make and model) for all your gear items!"
 msgstr ""
+"Gelieve volledige namen te gebruiken (merk en model) voor al je materiaal!"
 
 #: templates/user/profile/edit/gear.html:18
 msgid "<span class=\"button\">Orange</span> bubbles mean that you need to edit the properties of that gear item!"
 msgstr ""
+"<span class=\"button\">Oranje</span> kaders zijn een indicatie dat je de "
+"eigenschappen van dat toestel moet nagekeken worden!"
 
 #: templates/user/profile/edit/gear.html:26
 msgid "* use a comma to separate the values."
-msgstr ""
+msgstr "* gebruik komma's tussen de verschillende waarden."
 
 #: templates/user/profile/edit/gear.html:38
 msgid "No results. Press TAB to add it!"
-msgstr ""
+msgstr "Geen resultaat. Druk TAB om je woord toe te voegen!"
 
 #: templates/user/profile/edit/license.html:8
 msgid "Set your default image license"
-msgstr ""
+msgstr "Definieer je standaard fotolicentie"
 
 #: templates/user/profile/edit/license.html:13
 msgid "You can set a default type of license for everything you upload into AstroBin. Change your default here."
 msgstr ""
+"Je kan een standaard type licentie vastleggen voor elke foto die op AstroBin "
+"wordt geplaatst. Je kan dit type hier wijzigen."
 
 #: templates/user/profile/edit/locations.html:8
 msgid "Edit your locations"
-msgstr ""
+msgstr "Wijzig je locaties"
 
 #: templates/user/profile/edit/locations.html:13
 msgid "Use the form below to add a new location. After you add one, a new empty form will be created at the bottom, in case you want to add more."
 msgstr ""
+"Gebruik onderstaand formulier om een nieuwe locatie toe te voegen. Van zodra "
+"je er een toevoegt, verschijnt er een nieuw leeg invulveld dat je toelaat "
+"om facultatief bijkomende plaatsen toe te voegen."
 
 #: templates/user/profile/edit/locations.html:16
 msgid "AstroBin will not share your location details with other users."
-msgstr ""
+msgstr "AstroBin zal je locatie-details tonen aan andere gebruikers."
 
 #: templates/user/profile/edit/preferences.html:8
 msgid "Edit your site preferences"
-msgstr ""
+msgstr "Wijzig je voorkeuren voor deze site"
 
 #: templates/user/profile/edit/preferences.html:13
 msgid "Select the language in which you would like to see this website:"
-msgstr ""
+msgstr "Kies de taal waarin deze site moet worden weergegeven:"
 
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
-msgstr ""
+msgstr "Kies welk type berichten je wenst te onvangen per mail:"
 
 #~ msgid "The places from which you have taken this image."
 #~ msgstr "De locaties van data acquisitie van het beeld."
