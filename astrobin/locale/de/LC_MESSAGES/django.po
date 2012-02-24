@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-20 04:46-0500\n"
-"PO-Revision-Date: 2012-02-20 14:18+0100\n"
+"PO-Revision-Date: 2012-02-23 19:57+0100\n"
 "Last-Translator: Michlll <astrobin.com@darkchamber.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -1040,7 +1040,7 @@ msgstr "Motive"
 
 #: forms.py:58 models.py:482 views.py:567 templates/profile-edit-menu.html:12
 msgid "Locations"
-msgstr "Standort(e)"
+msgstr "Standort"
 
 #: forms.py:81
 msgid "Please enter either some subjects or a main solar system subject."
@@ -1081,15 +1081,15 @@ msgstr "Montierungen"
 
 #: forms.py:138 forms.py:315 models.py:588
 msgid "Imaging cameras"
-msgstr "Aufnahmekameras"
+msgstr "Aufnahmekamera"
 
 #: forms.py:139 models.py:589
 msgid "Guiding cameras"
-msgstr "Nachführkameras"
+msgstr "Nachführkamera"
 
 #: forms.py:140 forms.py:215 models.py:590 models.py:1111
 msgid "Focal reducers"
-msgstr "Brennweitenverkürzung"
+msgstr "Brennweitenreduzierung"
 
 #: forms.py:141 forms.py:216 models.py:591 models.py:1112
 msgid "Software"
@@ -1561,7 +1561,7 @@ msgstr "DSLR"
 
 #: models.py:243
 msgid "Guider/Planetary"
-msgstr "planetarische Nachführung"
+msgstr "Guider/Planetenkamera"
 
 #: models.py:244
 msgid "Film"
@@ -1570,7 +1570,7 @@ msgstr "Film"
 # Ist damit eine Kompaktkamera gemeint?
 #: models.py:245
 msgid "Compact"
-msgstr "kompakt"
+msgstr "Kompaktkamera"
 
 #: models.py:249 models.py:540
 msgid "Pixel size"
@@ -1684,7 +1684,7 @@ msgstr "Es handelt sich um eine Weitwinkelaufnahme (1 bis 10 Grad)."
 
 #: models.py:459
 msgid "This ia narrow field image (less than 1 degree)."
-msgstr "Es handelt sich um eine Nahaufnahme (weniger als 1 Grad)"
+msgstr "Es handelt sich um eine Nahaufnahme (weniger als 1 Grad)."
 
 #: models.py:465
 msgid "Title"
@@ -1937,7 +1937,7 @@ msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
 msgstr ""
-"Gesamt-Brennweite, inkl. Barlowlinsen und anderen optischen Komponenten"
+"Gesamt-Brennweite, inkl. Barlowlinsen und anderen optischen Komponenten."
 
 #: models.py:943 templates/image/detail.html:521
 msgid "CMI"
@@ -1945,7 +1945,7 @@ msgstr "CMI"
 
 #: models.py:944
 msgid "Latitude of the first Central Meridian."
-msgstr "Breitengrad des ersten, zentralen Meridians"
+msgstr "Breitengrad des ersten, zentralen Meridians."
 
 #: models.py:952 templates/image/detail.html:524
 msgid "CMII"
@@ -1953,7 +1953,7 @@ msgstr "CMII"
 
 #: models.py:953
 msgid "Latitude of the second Central Meridian."
-msgstr "Breitengrad des 2. zentralen Meridians"
+msgstr "Breitengrad des 2. zentralen Meridians."
 
 #: models.py:961 templates/image/detail.html:527
 msgid "CMIII"
@@ -1961,7 +1961,7 @@ msgstr "CMIII"
 
 #: models.py:962
 msgid "Latitude of the third Central Meridian."
-msgstr "Breitengrad des dritten Zentralmerideians"
+msgstr "Breitengrad des dritten zentralen Meridians."
 
 #: models.py:970 templates/image/detail.html:530
 msgid "Seeing"
@@ -2049,7 +2049,7 @@ msgstr "Sprache"
 
 #: models.py:1221
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
-msgstr "Beschreibender Name, z.B. \"Heimsternwarte\" oder \"Watzmann\""
+msgstr "Beschreibender Name, z.B. \"Heimsternwarte\" oder \"Watzmann\"."
 
 #: models.py:1227
 msgid "City"
@@ -2164,7 +2164,7 @@ msgstr "Auflösung"
 
 #: views.py:566 views.py:655
 msgid "Dates"
-msgstr "Daten"
+msgstr "Datum"
 
 #: views.py:568 templates/image/detail.html:512
 msgid "Frames"
@@ -2217,8 +2217,8 @@ msgid ""
 "To fill in the missing dates, use the <strong>Edit acquisition details</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
-"Fehlende Datumsangaben können mit <strong>Aufnahmedaten bearbeiten</strong> "
-"im <strong>Bearbeiten</strong>-Menü ergänzt werden."
+"Fehlende Datumsangaben können mit <strong>Aufnahmedetails "
+"bearbeiten</strong> im <strong>Bearbeiten</strong>-Menü ergänzt werden."
 
 #: views.py:1536 views.py:1594
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
@@ -2266,7 +2266,7 @@ msgstr "Minuten"
 
 #: views.py:1656 templatetags/tags.py:95
 msgid "seconds ago"
-msgstr "vor $sec Sekunden"
+msgstr "vor wenigen Sekunden"
 
 #: views.py:1658 templatetags/tags.py:96
 #, python-format
@@ -2314,11 +2314,11 @@ msgstr "Du hast einen neuen Follower"
 
 #: management/__init__.py:21
 msgid "Following a user was successful"
-msgstr "Du folgst jetzt dem Benutzer."
+msgstr "Du folgst jetzt dem Benutzer"
 
 #: management/__init__.py:27
 msgid "Unfollowing a user was successful"
-msgstr "Du folgst diesem Benutzer nicht mehr."
+msgstr "Du folgst diesem Benutzer nicht mehr"
 
 #: management/__init__.py:33
 msgid "New image from a user you follow"
@@ -2582,7 +2582,7 @@ msgstr "Nächtlich"
 
 #: templates/explore_choose.html:13
 msgid "A list of all images acquired every night."
-msgstr "Eine Liste aller Bilder, welche jede Nacht aufgenommen wurden"
+msgstr "Eine Liste aller Bilder, welche jede Nacht aufgenommen wurden."
 
 #: templates/explore_choose.html:17
 msgid ""
@@ -2717,7 +2717,7 @@ msgstr ""
 "und obwohl Deine Daten in unseren Händen sehr sicher sind, können wir keine "
 "Verantwortung übernehmen, sollte es zu einem Datenverlust kommen - so "
 "unwahrscheinlich dies auch sein mag. Behalte also immer eine Kopie Deines "
-"Bildes auf Deinem Computer!"
+"Bildes auf Deinem Computer."
 
 #: templates/faq.html:64
 msgid ""
@@ -3005,7 +3005,7 @@ msgstr ""
 #: templates/guidelines.html:41
 msgid "Don't use your account to host images for websites, banners or logos."
 msgstr ""
-"Benuzte Deinen Account nicht, um Bilder, Banner oder Logos für anderen "
+"Benutze Deinen Account nicht, um Bilder, Banner oder Logos für anderen "
 "Webseiten zu hosten."
 
 #: templates/guidelines.html:42
@@ -3097,7 +3097,7 @@ msgstr ""
 "vielen Katalogen werden während der Eingabe in Pop-Ups angezeigt und können "
 "dort angewählt werden. <em>AstroBin</em> ist mit der astronomischen "
 "Datenbank SIMBAD verbunden, die über 5 Millionen Objekte unter mehr als 15 "
-"Millionen Namen kennt."
+"Millionen Namen kennt!"
 
 #: templates/help.html:31
 msgid "Data is strongly interconnected"
@@ -3153,7 +3153,7 @@ msgstr ""
 "lichtschwache Objekte oder Spiralarme zu identifizieren. Bilder werden "
 "automatische astrometrisch vermessen und eine kommentierte Version erscheint "
 "automatisch auf der Webseite. <em>AstroBin</em> erkennt - ohne Ihr Zutun - "
-"automatisch die astronomischen Objekte auf Ihrem Bild."
+"automatisch die astronomischen Objekte auf Ihrem Bild!"
 
 #: templates/help.html:49
 msgid "Protection from theft with automatic watermarking"
@@ -3233,7 +3233,7 @@ msgstr "Registrieren Sie sich jetzt!"
 
 #: templates/index.html:11
 msgid "Upload as a work in progress"
-msgstr "Als ein in Bearbeitung befindliches Bild hochladen"
+msgstr "Ein in Bearbeitung befindliches Bild hochladen"
 
 #: templates/index.html:15 templates/index.html.py:31
 #: templates/image/detail.html:997
@@ -3260,7 +3260,7 @@ msgstr ""
 # Wer macht diese Übersetzungen???
 #: templates/index.html:27
 msgid "Upload as a finished image"
-msgstr "Als fertig bearbeitetes Bild hochladen"
+msgstr "Ein fertig bearbeitetes Bild hochladen"
 
 #: templates/index.html:37
 #, python-format
@@ -3270,10 +3270,10 @@ msgid ""
 "on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
 "too."
 msgstr ""
-"Mit dieser Schaltfläche können Bilder in den <strong>öffentlichen Bereich</"
-"strong> hochgeladen werden. Sie werden in Ihrem <a href=\"%(profile_url)s"
-"\">Profil</a> angezeigt sowie auf der Startseite. Sie können Bilder auch "
-"aus<a href=\"%(flickr_url)s\">Flickr importieren</a>."
+"Mit dieser Schaltfläche können Bilder in den <strong>öffentlichen "
+"Bereich</strong> hochgeladen werden. Sie werden in Ihrem <a href=\"%"
+"(profile_url)s\">Profil</a> angezeigt sowie auf der Startseite. Sie können "
+"Bilder auch aus <a href=\"%(flickr_url)s\">Flickr importieren</a>."
 
 #: templates/index.html:48
 msgid "Warning!"
@@ -3285,8 +3285,8 @@ msgid ""
 "Before you start uploading images, you have to add at least one telescope "
 "and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
 msgstr ""
-"Vor dem Upload des ersten Bildes <em>muss</em> mindestens ein Teleskop und "
-"eine Kamera im <a href=\"%(the_url)s?initial\">Profil</a> hinterlegt sein."
+"Vor dem Upload des ersten Bildes muss mindestens ein Teleskop und eine "
+"Kamera im <a href=\"%(the_url)s?initial\">Profil</a> hinterlegt sein!"
 
 #: templates/index.html:72
 msgid "The perfect home for your astrophotography."
@@ -3831,7 +3831,7 @@ msgstr[1] "%(counter)s-mal betrachtet"
 
 #: templates/image/detail.html:389
 msgid "Contains"
-msgstr "beinhaltet"
+msgstr "Beinhaltet"
 
 #: templates/image/detail.html:408
 #, python-format
@@ -4166,7 +4166,7 @@ msgid ""
 "them a message</a>. "
 msgstr ""
 "<strong>%(username)s</strong> erhielt eine Benachrichtigung. Hoffentlich "
-"werden die Daten angepasst.Denken Sie daran, Sie können auch eine "
+"werden die Daten angepasst. Denken Sie daran, Sie können auch eine "
 "gewöhnliche <a href=\"%(message_url)s\">Nachricht schicken</a>."
 
 #: templates/image/actions/request_fits.html:20
@@ -4375,7 +4375,7 @@ msgstr "Das Pixel Verhälnis zu kennen, ist hilfreich"
 
 #: templates/image/edit/presolve.html:24
 msgid "Step 1 of 5: plate solving scale"
-msgstr "Plate Solving Verhältnis"
+msgstr "Schritt 1 von 5: Plate Solving Größe"
 
 #: templates/image/edit/presolve.html:26
 msgid "Edit your image: plate-solving scale"
@@ -4468,7 +4468,7 @@ msgstr "Alle Nachrichten anzeigen"
 
 #: templates/inclusion_tags/notification_list.html:15
 msgid "Show all notifications"
-msgstr "Alle Benachritigungen anzeigen"
+msgstr "Alle Benachrichtigungen anzeigen"
 
 #: templates/inclusion_tags/notification_list.html:21
 msgid "You have no new notifications."
@@ -4579,8 +4579,7 @@ msgstr "Nachricht verschickt"
 #: templates/messages/view.html:10
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
-msgstr ""
-"Eine Unterhaltung zwischen <a href=\"%(sender_url)s\">Ihnen</a> und       "
+msgstr "Eine Unterhaltung zwischen <a href=\"%(sender_url)s\">Ihnen</a> und"
 
 #: templates/messages/view.html:27
 msgid "Delete conversation"
@@ -4617,11 +4616,11 @@ msgid ""
 "Clear skies,\n"
 "AstroBin.\n"
 msgstr ""
-"Hi! Du hast neue Benachrichtigungenbei AstroBin:\n"
+"Hi! Du hast neue Benachrichtigungen bei AstroBin:\n"
 "\n"
 "%(message)s\n"
 "\n"
-"Um alle Benachritigungen zu sehen, gehe zu %(notices_url)s.\n"
+"Um alle Benachrichtigungen zu sehen, gehe zu %(notices_url)s.\n"
 "\n"
 "Wenn Du keine EMails mehr erhalten möchtest, editiere Deine persönlichen "
 "Einstellungen unter http://astrobin.com%(pref_url)s.\n"
@@ -4987,7 +4986,8 @@ msgid ""
 "http://astrobin.com/messages/inbox/"
 msgstr ""
 "Sie haben eine private Nachricht auf AstroBin erhalten!\n"
-"Folgen Sie diesem  Link um sie zu lesen:\n"
+"Folgen Sie diesem Link um sie zu lesen:\n"
+"\n"
 "http://astrobin.com/messages/inbox/"
 
 #: templates/notification/received_email/notice.html:2
@@ -5048,7 +5048,7 @@ msgstr ""
 "und wird bald für jeden zugänglich sein. Wenn Du eingeladen wurdest, kannst "
 "Du Dich <a href=\"%(login_url)s\">einloggen</a>. Ansonsten kannst Du eine "
 "Email-Adresse hinterlassen und erhälst eine Benachrichtigung , wenn AstroBin "
-"für alle benutzbar ist."
+"für alle benutzbar ist!"
 
 # "Account" würde auch im Deutschen gehen, oder nicht?
 #: templates/registration/activate.html:8
@@ -5131,7 +5131,7 @@ msgstr "Zurücksetzen des Passworts nicht möglich"
 msgid "Email with password reset instructions has been sent."
 msgstr ""
 "Eine E-Mal mit einer Anleitung zum Zurücksetzen Ihres Passworts wurde "
-"versendet"
+"versandt."
 
 #: templates/registration/password_reset_email.html:2
 #, python-format
@@ -5140,7 +5140,7 @@ msgstr "Passwort für %(site_name)s zurücksetzen"
 
 #: templates/registration/password_reset_form.html:6
 msgid "Fill the form to receive instructions."
-msgstr "Fülle das Formular aus um eine Anleitung zu erhalten"
+msgstr "Fülle das Formular aus um eine Anleitung zu erhalten."
 
 #: templates/registration/registration_complete.html:5
 msgid "You are now registered. Activation email sent."
@@ -5185,7 +5185,7 @@ msgstr "Betroffenes Objekt"
 
 #: templates/requests/all.html:15
 msgid "Fulfilled"
-msgstr "erledigt"
+msgstr "Erledigt"
 
 #: templates/requests/all.html:19
 msgid "at"
@@ -5193,7 +5193,7 @@ msgstr "bei"
 
 #: templates/requests/all.html:26
 msgid "Location details missing."
-msgstr "Ortsangabe fehlt"
+msgstr "Ortsangabe fehlt."
 
 #: templates/requests/all.html:31
 msgid "Yes."
@@ -5310,7 +5310,7 @@ msgstr "Aufnahmedauer in Stunden"
 
 #: templates/user/plots.html:24
 msgid "Total integration hours, plotted against time."
-msgstr "Gesamte Aufnahmedauer; Entwicklung im Zeitablauf"
+msgstr "Gesamte Aufnahmedauer; Entwicklung im Zeitablauf."
 
 #: templates/user/plots.html:29 templates/user/plots.html.py:58
 #: templates/user/plots.html:88 templates/user/plots.html.py:117
@@ -5352,12 +5352,12 @@ msgstr ""
 
 #: templates/user/plots.html:111
 msgid "Uploaded images"
-msgstr "hochgeladene Bilder"
+msgstr "Hochgeladene Bilder"
 
 # kumuliert oder je Zeitintervall?
 #: templates/user/plots.html:112
 msgid "Image uploads, plotted against time."
-msgstr "Bilderuploads im Zeitablauf"
+msgstr "Bilderuploads im Zeitablauf."
 
 #: templates/user/profile.html:5
 #, python-format
@@ -5516,8 +5516,8 @@ msgid ""
 "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
 "(and keep an eye on your notifications)!"
 msgstr ""
-"Fertig! Gehen zu <a href=\\\"/me\\\">Deinem Profil</a> um die Bilder "
-"anzusehen (und eine Uebersicht über Deine Benachritigungen zu erhalten)!"
+"Fertig! Gehen zu <a href=\\\"/me\\\">Deinem Profil</a> um die Bilder anzusehen "
+"(und eine Übersicht über Deine Benachrichtigungen zu erhalten)!"
 
 #: templates/user/profile/edit/basic.html:8
 msgid "Edit your basic information"
@@ -5555,7 +5555,7 @@ msgstr "* benutze Kommas, um die Werte zu trennen."
 
 #: templates/user/profile/edit/gear.html:38
 msgid "No results. Press TAB to add it!"
-msgstr "Kein Resultat. Zum hinzuzufügen TAB drücken."
+msgstr "Kein Resultat. Zum Hinzufügen TAB drücken."
 
 #: templates/user/profile/edit/license.html:8
 msgid "Set your default image license"
