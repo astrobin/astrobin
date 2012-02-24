@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-20 01:28-0500\n"
-"PO-Revision-Date: 2012-02-20 10:08+0100\n"
+"PO-Revision-Date: 2012-02-22 14:55+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
@@ -1004,7 +1004,9 @@ msgstr "Zimbabwe"
 
 #: forms.py:39
 msgid "If you're hosting a copy of this image on your website, put the address here."
-msgstr "Als je een kopie van dit beeld elders host vermeld dan hier het adres."
+msgstr ""
+"Als je een kopie van dit beeld op een andere website toont, vermeld dan hier "
+"het adres."
 
 #: forms.py:45
 msgid "If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."
@@ -1012,7 +1014,7 @@ msgstr "Als je een TIFF of FITS bestand wil delen, zet dan hier de link naar het
 
 #: forms.py:50
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
-msgstr "Gebruik waar mogelijk catalogus namen zoals M101, of NGC224 of IC1370"
+msgstr "Gebruik waar mogelijk catalogus namen zoals M101, of NGC224 of IC1370."
 
 #: forms.py:55
 #: templates/image/detail.html:369
@@ -1051,13 +1053,13 @@ msgstr "0 betekent onzichtbaar, 100 is volledig ondoorzichtig. Aanbevolen waarde
 
 #: forms.py:108
 msgid "If you want to watermark this image, you must specify some text."
-msgstr "Voeg tekst toe als je een watermerk wil laten maken"
+msgstr "Voeg tekst toe als je de foto wil markeren met een watermerk."
 
 #: forms.py:135
 #: forms.py:314
 #: models.py:583
 msgid "Imaging telescopes or lenses"
-msgstr "Hoofd telescopen en/of lenzen"
+msgstr "Telescopen en/of lenzen die je gebruikt om te fotograferen"
 
 #: forms.py:136
 #: models.py:584
@@ -1112,7 +1114,7 @@ msgstr "Accessoires"
 
 #: forms.py:165
 msgid "If you have a personal website, put the address here."
-msgstr "Als je een eigen website hebt vermeld dat dan hier"
+msgstr "Als je een eigen website hebt, vermeld dat dan hier."
 
 #: forms.py:175
 #: models.py:1067
@@ -1126,7 +1128,9 @@ msgstr "Alle telescopen en lenzen die je bezit, inclusief die waar je mee volgt"
 
 #: forms.py:190
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
-msgstr "Al je spiegelreflex camera's, CCD camera's, planeet camera's, volg camera's"
+msgstr ""
+"Al je spiegelreflex camera's, CCD camera's, planeet camera's en "
+"volgcamera's."
 
 #: forms.py:203
 msgid "Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."
@@ -1268,7 +1272,7 @@ msgstr "Onderwerp"
 
 #: locale_extras.py:6
 msgid "Body"
-msgstr "Hoofd tekst"
+msgstr "Bericht"
 
 #: models.py:27
 msgid "None (All rights reserved)"
@@ -1341,7 +1345,7 @@ msgstr "Pulsars"
 
 #: models.py:56
 msgid "Globular clusters"
-msgstr "Glubulaire clusters"
+msgstr "Globulaire clusters"
 
 #: models.py:57
 msgid "Open clusters"
@@ -1368,7 +1372,7 @@ msgstr "Zon"
 
 #: models.py:82
 msgid "Earth's Moon"
-msgstr "de Maan van de Aarde"
+msgstr "Onze Maan"
 
 #: models.py:83
 msgid "Mercury"
@@ -1400,7 +1404,7 @@ msgstr "Neptunus"
 
 #: models.py:90
 msgid "Minor planet"
-msgstr "dwergplaneet"
+msgstr "Dwergplaneet"
 
 #: models.py:91
 msgid "Comet"
@@ -1412,19 +1416,19 @@ msgstr "Midden"
 
 #: models.py:96
 msgid "Top left"
-msgstr "Boven Links"
+msgstr "Boven links"
 
 #: models.py:97
 msgid "Top center"
-msgstr "Boven Midden"
+msgstr "Boven midden"
 
 #: models.py:98
 msgid "Top right"
-msgstr "Boven Rechts"
+msgstr "Boven rechts"
 
 #: models.py:99
 msgid "Bottom left"
-msgstr "Onderkant Links"
+msgstr "Onderkant links"
 
 #: models.py:100
 msgid "Bottom center"
@@ -1635,7 +1639,7 @@ msgstr "Helder of gekleurd"
 
 #: models.py:310
 msgid "Broadband: H-Alpha"
-msgstr "Breedband: H-alpha "
+msgstr "Breedband: H-alpha"
 
 #: models.py:311
 msgid "Broadband: H-Beta"
@@ -1695,7 +1699,7 @@ msgstr "Bandbreedte"
 
 #: models.py:452
 msgid "I don't want this image plate-solved."
-msgstr "Dit beeld hoeft niet ge-plate-solved te worden"
+msgstr "Dit beeld hoeft niet ge-plate-solved te worden."
 
 #: models.py:453
 msgid "This is not a deep sky image, don't plate-solve it."
@@ -1744,11 +1748,11 @@ msgstr "Laat beoordeling toe."
 
 #: models.py:524
 msgid "Insert a focal length if you want to plate-solve."
-msgstr "Noem de brandpuntsafstand als je wil laten plate-solven."
+msgstr "Voer de brandpuntsafstand in als je wil laten plate-solven."
 
 #: models.py:536
 msgid "Insert a pixel size if you want to plate-solve."
-msgstr "Noem de pixel grootte als je wil laten plate-solven"
+msgstr "Voer de pixelgrootte in als je wil laten plate-solven."
 
 #: models.py:546
 msgid "This is the smallest of the binning values you used. If you imaged L in 1x1 and RGB in 2x2, put 1x1 here."
@@ -1796,11 +1800,11 @@ msgstr "Beeld"
 
 #: models.py:807
 msgid "1 - Excellent dark-site sky (BLACK)"
-msgstr "1 - Uitstekende donkere plaats hemel (ZWART)"
+msgstr "1 - Uitstekende donkere plaats (ZWART)"
 
 #: models.py:808
 msgid "2 - Typical truly dark site (GRAY)"
-msgstr "2 - Typische goed donkere plaats hemel (GRIJS)"
+msgstr "2 - Typische goed donkere plaats (GRIJS)"
 
 #: models.py:809
 msgid "3 - Rural sky (BLUE)"
@@ -1812,27 +1816,29 @@ msgstr "4 - Landelijke/Stedelijke overgang (GROEN/GEEL)"
 
 #: models.py:811
 msgid "5 - Suburban sky (ORANGE)"
-msgstr "5 - Voorstad/Dorps hemel (ORANJE)"
+msgstr "5 - Voorstad/Dorpshemel (ORANJE)"
 
 #: models.py:812
 msgid "6 - Bright suburban sky (RED)"
-msgstr "6 - Heldere voorstad/dorps hemel (ROOD)"
+msgstr "6 - Velichte voorstad/dorpshemel (ROOD)"
 
 #: models.py:813
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
-msgstr "7 - Voorstad/dorps naar stedelijke hemel overgang of volle maan (ROOD)"
+msgstr ""
+"7 - Voorstad/dorpshemel met overgang naar stedelijk gebied of volle maan "
+"(ROOD)"
 
 #: models.py:814
 msgid "8 - City sky (WHITE)"
-msgstr "8 - Stads hemel (WIT)"
+msgstr "8 - Stadshemel (WIT)"
 
 #: models.py:815
 msgid "9 - Inner city sky (WHITE)"
-msgstr "9 - Stads centrum hemel (WIT)"
+msgstr "9 - Hemel in stadscentrum (WIT)"
 
 #: models.py:819
 msgid "Synthetic channel"
-msgstr "Synthetische hemel"
+msgstr "Synthetisch kanaal"
 
 #: models.py:824
 msgid "Filter"
@@ -1844,7 +1850,7 @@ msgstr "Getal"
 
 #: models.py:835
 msgid "The number of sub-frames."
-msgstr "Het aantal subframes"
+msgstr "Het aantal subframes."
 
 #: models.py:838
 msgid "Duration"
@@ -1852,7 +1858,7 @@ msgstr "Tijdsduur"
 
 #: models.py:840
 msgid "Duration of each sub-frame, in seconds."
-msgstr "Tijdsduur van ieder subframe, in seconden"
+msgstr "Tijdsduur van ieder subframe, in seconden."
 
 #: models.py:843
 msgid "ISO"
@@ -1864,11 +1870,11 @@ msgstr "Versterking"
 
 #: models.py:852
 msgid "Sensor cooling"
-msgstr "Sensor koeling"
+msgstr "Sensorkoeling"
 
 #: models.py:854
 msgid "The temperature of the chip. E.g.: -20."
-msgstr "De temperatuur van de chip, bv -20"
+msgstr "De temperatuur van de chip, bv -20."
 
 #: models.py:857
 #: views.py:570
@@ -1877,7 +1883,7 @@ msgstr "Darks"
 
 #: models.py:859
 msgid "The number of dark frames."
-msgstr "Het aantal dark frames"
+msgstr "Het aantal dark frames."
 
 #: models.py:862
 #: views.py:571
@@ -1886,7 +1892,7 @@ msgstr "Flats"
 
 #: models.py:864
 msgid "The number of flat frames."
-msgstr "Het aantal flat frames"
+msgstr "Het aantal flat frames."
 
 #: models.py:867
 #: views.py:572
@@ -1895,7 +1901,7 @@ msgstr "Flat darks"
 
 #: models.py:869
 msgid "The number of dark flat frames."
-msgstr "Het aantal flat dark frames"
+msgstr "Het aantal flat dark frames."
 
 #: models.py:872
 #: views.py:573
@@ -1904,7 +1910,7 @@ msgstr "Bias"
 
 #: models.py:874
 msgid "The number of bias/offset frames."
-msgstr "Het aantal bias/offset frames"
+msgstr "Het aantal bias/offset frames."
 
 #: models.py:877
 #: views.py:576
@@ -1935,7 +1941,7 @@ msgstr "Temperatuur"
 
 #: models.py:899
 msgid "Ambient temperature (in Centigrade degrees)."
-msgstr "Omgevings temperatuur in graden Celsius"
+msgstr "Omgevingstemperatuur in graden Celsius."
 
 #: models.py:920
 msgid "Number of frames"
@@ -1943,7 +1949,7 @@ msgstr "Aantal frames"
 
 #: models.py:921
 msgid "The total number of frames you have stacked."
-msgstr "Het totaal aantal frames in de stack"
+msgstr "Het totaal aantal frames in de stack."
 
 #: models.py:925
 #: templates/image/detail.html:515
@@ -1952,11 +1958,13 @@ msgstr "FPS"
 
 #: models.py:926
 msgid "Frames per second."
-msgstr "Beelden per seconde"
+msgstr "Beelden per seconde."
 
 #: models.py:935
 msgid "The focal length of the whole optical train, including barlow lenses or other components."
-msgstr "De brandpuntsafstand van de volledige optische trein, inclusief barlows en andere componenten"
+msgstr ""
+"De brandpuntsafstand van de volledige optische trein, inclusief barlows en "
+"andere componenten."
 
 #: models.py:941
 #: templates/image/detail.html:521
@@ -1992,16 +2000,17 @@ msgstr "Seeing"
 
 #: models.py:969
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
-msgstr "Schatting van de seeing, op een schaal van 1 tot 5 "
+msgstr "Schatting van de seeing, op een schaal van 1 tot 5."
 
 #: models.py:975
 #: templates/image/detail.html:533
 msgid "Transparency"
-msgstr "Transparantheid"
+msgstr "Transparency"
 
 #: models.py:976
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
-msgstr "Schatting van de transparantheid, op een schaal van 1 tot 10"
+msgstr ""
+"Schatting van de doorzichtigheid van de lucht, op een schaal van 1 tot 10."
 
 #: models.py:982
 #: templates/image/detail.html:509
@@ -2010,11 +2019,11 @@ msgstr "Tijd"
 
 #: models.py:983
 msgid "Please use the following format: hh:mm."
-msgstr "Gebruik hh:mm"
+msgstr "Gebruik hh:mm."
 
 #: models.py:1041
 msgid "Request from"
-msgstr "Vraag van "
+msgstr "Vraag van"
 
 #: models.py:1053
 msgid "Additional information"
@@ -2050,11 +2059,12 @@ msgstr "Tijdzone"
 
 #: models.py:1093
 msgid "By selecting this, you will see all the dates on AstroBin in your timezone."
-msgstr "Selecteer dit om alle tijden op AstroBin naar jouw tijdzone te vertalen"
+msgstr ""
+"Selecteer dit om alle tijden op AstroBin naar jouw tijdzone te vertalen."
 
 #: models.py:1098
 msgid "About you"
-msgstr "Over jou"
+msgstr "Over jezelf"
 
 #: models.py:1099
 msgid "Write something about yourself. HTML tags are allowed."
@@ -2067,7 +2077,7 @@ msgstr "Standaard licentie"
 
 #: models.py:1121
 msgid "The license you select here is automatically applied to all your new images."
-msgstr "Deze licentie wordt automatisch toegepast op al je nieuwe uploads"
+msgstr "Deze licentie wordt automatisch toegepast op al je nieuwe uploads."
 
 #: models.py:1155
 msgid "Language"
@@ -2075,7 +2085,8 @@ msgstr "Taal"
 
 #: models.py:1219
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
-msgstr "Een goed omschrijvende naam, zoals \"Observatorium thuis\" of \"Mont Blanc\""
+msgstr ""
+"Een goed omschrijvende naam, zoals \"Observatorium thuis\" of \"Mont Blanc\"."
 
 #: models.py:1225
 msgid "City"
@@ -2135,19 +2146,19 @@ msgstr "Geen resultaten, sorry."
 
 #: search.py:80
 msgid "Matching items:"
-msgstr "Kandidaten :"
+msgstr "Kandidaten:"
 
 #: stats.py:20
 msgid "Integration hours, yearly"
-msgstr "Integratie uren, jaarlijks"
+msgstr "Integratieuren, jaarlijks"
 
 #: stats.py:21
 msgid "Integration hours, monthly"
-msgstr "Integratie uren, maandelijks"
+msgstr "Integratieuren, maandelijks"
 
 #: stats.py:22
 msgid "Integration hours, daily"
-msgstr "Integratie uren, dagelijks"
+msgstr "Integratieuren, dagelijks"
 
 #: stats.py:73
 msgid "Integration hours by gear, yearly"
@@ -2255,7 +2266,7 @@ msgstr "Om ontbrekende data in te geven, gebruik de optie <strong>Wijzig opnamed
 #: views.py:1536
 #: views.py:1594
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Er werden geen telescopen of lensen ingevoerd waarmee je beelden maakt."
+msgstr "Er werden geen telescopen of lenzen ingevoerd waarmee je beelden maakt."
 
 #: views.py:1538
 #: views.py:1597
@@ -2431,7 +2442,7 @@ msgstr "Home"
 #: templates/base.html:143
 #: templates/base.html.py:306
 msgid "Blog"
-msgstr "Blog in English"
+msgstr "Blog (Engelstalig)"
 
 #: templates/base.html:145
 #: templates/explore_choose.html:6
@@ -2678,7 +2689,7 @@ msgstr "Hoe kan ik een opmaak meegeven aan mijn commentaren?"
 
 #: templates/faq.html:23
 msgid "... and their answers!"
-msgstr "... en aan hun antwoorden!"
+msgstr "... en hun antwoorden!"
 
 #: templates/faq.html:28
 msgid "Yes. AstroBin is completely free!"
@@ -3316,7 +3327,7 @@ msgstr "Wijzigen van de basisinformatie"
 
 #: templates/image/detail.html:47
 msgid "Edit gear used"
-msgstr "Wijsigen van het aangepaste materiaal"
+msgstr "Wijzigen van het materiaal"
 
 #: templates/image/detail.html:50
 msgid "Edit acquisition details"
@@ -3370,7 +3381,7 @@ msgstr "Aan een gebruiker aanbevelen"
 #: templates/image/detail.html:109
 #: templates/image/actions/request_additional_information.html:18
 msgid "Request additional information"
-msgstr "Verozek bijkomende informatie"
+msgstr "Verzoek bijkomende informatie"
 
 #: templates/image/detail.html:112
 #: templates/image/actions/request_fits.html:18
@@ -3447,7 +3458,7 @@ msgstr "Link voor fora:"
 #: templates/image/detail.html:235
 #: templates/image/detail.html.py:261
 msgid "...with thumbnail:"
-msgstr "... met voorbeeld"
+msgstr "... met voorbeeld:"
 
 #: templates/image/detail.html:248
 msgid "Full size:"
@@ -3591,7 +3602,9 @@ msgstr "Hulp ivm het formatteren van je tekst"
 
 #: templates/image/detail.html:592
 msgid "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/register/\">register</a> to leave a comment."
-msgstr "Gelieve <a href=\"/accounts/login/\">in te loggen</a> of jezelf te <a href=\"/accounts/register/\">registreren</a>  om commentaar te kunnen geven."
+msgstr ""
+"Gelieve <a href=\"/accounts/login/\">in te loggen</a> of jezelf te <a "
+"href=\"/accounts/register/\">registreren</a> om commentaar te kunnen geven."
 
 #: templates/image/detail.html:606
 #: templates/image/detail.html.py:886
@@ -3661,7 +3674,9 @@ msgstr "Volg gebruiker %(username)s?"
 #: templates/user/profile.html:212
 #, python-format
 msgid "You will receive a notification every time %(username)s posts a new image. Continue?"
-msgstr "Elke keer dat %(username)s een nieuwe foto post, zal je op de hoogte worden gebracht. Verder gaan? "
+msgstr ""
+"Elke keer dat %(username)s een nieuwe foto post, zal je op de hoogte worden "
+"gebracht. Verder gaan?"
 
 #: templates/image/detail.html:943
 #: templates/user/profile.html:213
@@ -3972,7 +3987,9 @@ msgstr "Volgende stap: watermerk"
 
 #: templates/image/edit/presolve.html:47
 msgid "<strong>Note</strong>: if you didn't upload a full resolution image, the pixel scale will be wrong!"
-msgstr "<strong>Noot</strong>: als je je foto niet in de oorspronkelijk resolutie hebt opgeladen, dan zal je pixel schaal niet correct zijn!"
+msgstr ""
+"<strong>Noot</strong>: als je je foto niet in de oorspronkelijke resolutie "
+"hebt opgeladen, dan zal je pixel schaal niet correct zijn!"
 
 #: templates/image/edit/watermark.html:10
 msgid "Step 2 of 5: watermark"
@@ -4580,7 +4597,7 @@ msgstr "Vul het formulier in om de instructies te verkrijgen."
 
 #: templates/registration/registration_complete.html:5
 msgid "You are now registered. Activation email sent."
-msgstr "Je bent nu ingeschreven. Er werd een email naar je gestuurd. "
+msgstr "Je bent nu ingeschreven. Er werd een email naar je gestuurd."
 
 #: templates/registration/registration_form.html:6
 msgid "Fill the form to join AstroBin!"
@@ -4723,11 +4740,15 @@ msgstr "%(user)s's grafieken"
 #: templates/user/plots.html:18
 #, python-format
 msgid "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href=\"%(user_page)s?public&sub=nodata\">here</a>."
-msgstr "Joehoe, beste <strong>%(user)s</strong>! Ik wilde je enkel laten weten dat je deze grafieken beter bruikbaar kan maken als je alle gegevens invulde over je foto's. Kijk <a href=\"%(user_page)s?public&sub=nodata\">hier</a>even na of je beelden hebt ge-upload waarvan data ontbreekt."
+msgstr ""
+"Joehoe, beste <strong>%(user)s</strong>! Ik wilde je enkel laten weten dat "
+"je deze grafieken beter bruikbaar kan maken als je alle gegevens van je "
+"foto's zou invullen. Kijk <a href=\"%(user_page)s?public&sub=nodata\">hier</a> "
+"even na of je beelden hebt ge-upload waarvan data ontbreekt."
 
 #: templates/user/plots.html:23
 msgid "Integration hours"
-msgstr "Integratie uren"
+msgstr "Integratieuren"
 
 #: templates/user/plots.html:24
 msgid "Total integration hours, plotted against time."
@@ -4763,7 +4784,7 @@ msgstr "Per dag"
 
 #: templates/user/plots.html:52
 msgid "Integration hours by gear"
-msgstr "Integratie uren per toestel"
+msgstr "Integratieuren per toestel"
 
 #: templates/user/plots.html:53
 msgid "Total integration hours, plotted against time and arranged by imaging telescopes and lenses, and imaging cameras."
@@ -4793,7 +4814,7 @@ msgstr "Bekijk je foto's"
 #: templates/user/profile.html:16
 #, python-format
 msgid "View %(username)s's images:"
-msgstr "Bekijk de foto's van %(username)s"
+msgstr "Bekijk de foto's van %(username)s:"
 
 #: templates/user/profile.html:24
 #: templates/user/profile.html.py:26
@@ -4989,7 +5010,7 @@ msgstr ""
 
 #: templates/user/profile/edit/locations.html:16
 msgid "AstroBin will not share your location details with other users."
-msgstr "AstroBin zal je locatie-details tonen aan andere gebruikers."
+msgstr "AstroBin zal je locatie-details niet tonen aan andere gebruikers."
 
 #: templates/user/profile/edit/preferences.html:8
 msgid "Edit your site preferences"
@@ -5001,7 +5022,7 @@ msgstr "Kies de taal waarin deze site moet worden weergegeven:"
 
 #: templates/user/profile/edit/preferences.html:19
 msgid "Select which e-mail notification you would like to receive:"
-msgstr "Kies welk type berichten je wenst te onvangen per mail:"
+msgstr "Kies welk type berichten je wenst te onvangen in je AstroBin mailbox:"
 
 #~ msgid "The places from which you have taken this image."
 #~ msgstr "De locaties van data acquisitie van het beeld."

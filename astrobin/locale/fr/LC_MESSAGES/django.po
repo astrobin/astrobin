@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-20 04:47-0500\n"
-"PO-Revision-Date: 2012-02-20 01:31-0500\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2012-02-20 15:27+0100\n"
+"Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1309,11 +1309,11 @@ msgstr "Finlandais"
 
 #: models.py:42 models.py:52 settings.py:54
 msgid "German"
-msgstr "allemand"
+msgstr "Allemand"
 
 #: models.py:43 models.py:53 settings.py:55
 msgid "Dutch"
-msgstr ""
+msgstr "Néerlandais"
 
 #: models.py:57
 msgid "Pulsars"
@@ -3834,7 +3834,7 @@ msgstr "(cacher ces objets)"
 
 #: templates/image/detail.html:428
 msgid "This image is a revision. Here are its other versions"
-msgstr "Cette image est une nouvelle version. Voici les autres versions"
+msgstr "Cette image est une nouvelle version. Voici les autres traitements"
 
 #: templates/image/detail.html:430
 msgid "This image has some other revisions"
