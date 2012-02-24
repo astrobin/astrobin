@@ -475,10 +475,17 @@
 
                 var open_popup = 0;
                 var active_a = 0;
-                $('#user-nav > ul > li.menu > .notice-container > a, #user-nav > ul > li.menu > .menu-container > a, #nav > ul > li.menu > a').click (function(event) {
+                $('#user-nav > ul > li.menu > .notice-container > a,\
+                   #user-nav > ul > li.menu > .menu-container > a,\
+                   #nav > ul > li.menu > a,\
+                   ul.topnav > li > span.text > a').click (function(event) {
                     var a = $(this);
-                    var li = a.parent()
+                    var li = a.closest('li')
                     var popup = li.find('.popup');
+
+                    if (popup.length == 0) {
+                        popup = li.find('.sub');
+                    }
 
                     if (open_popup && active_a) {
                         var old_open_popup = open_popup;
@@ -486,6 +493,7 @@
 
                         open_popup.css('visibility', 'hidden');
                         active_a.removeClass('active');
+                        active_a.closest('li').removeClass('active');
                         open_popup = 0;
                         active_a = 0;
                         if (old_open_popup.get(0) == popup.get(0) &&
@@ -495,12 +503,19 @@
                     }
 
                     a.addClass('active');
+                    li.addClass('active');
+
                     popup.css('visibility', 'visible');
                     open_popup = popup;
                     active_a = a;
                     event.stopPropagation();
-                    $(document).one('click', function() {
+                    $(document).one('click', function(event) {
+                        var li = $(event.target).closest('li');
+                        if (li.hasClass('active'))
+                            return;
+
                         a.removeClass('active');
+                        a.closest('li').removeClass('active');
                         activa_a = 0;
                         popup.css('visibility', 'hidden');
                         open_popup = 0;
