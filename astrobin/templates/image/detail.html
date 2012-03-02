@@ -134,7 +134,7 @@
                                     {% if image.is_solved and not solved %}
                                     <li class="last bg-icon icon-solved">
                                         {% if is_revision %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">{% trans "Annotatad (original version)" %}</a></span>
+                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">{% trans "Annotated (original version)" %}</a></span>
                                         {% else %}
                                         <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "plate_solving_started" %}">{% trans "Annotated" %}</a></span>
                                         {% endif %}
