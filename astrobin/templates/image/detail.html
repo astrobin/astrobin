@@ -201,52 +201,60 @@
                         <li id="share" class="last">
                             <span class="text"><a href="#">{% trans "Share" %}</a></span>
                             <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                            <div class="sub copy-box">
-                                <form>
-                                    <p>
-                                        <label for="sharing_mode">{% trans "Sharing mode" %}:</label>
-                                        <select name="sharing_mode">
-                                            <option selected="selected" value="0">{% trans "Simple link" %}</option>
-                                            <option value="1">{% trans "Forums" %}</option>
-                                            <option value="2">HTML</option>
-                                        </select>
-                                    </p>
+                            <div class="sub">
+                                <div class="social">
+                                    <h2>{% trans "Share on social networks" %}</h2>
+                                    <span class='st_facebook' displayText='Facebook'></span>
+                                    <span class='st_twitter' displayText='Tweet'></span>
+                                </div>
+                                <div class="copy-box">
+                                    <h2>{% trans "Get the code" %}</h2>
+                                    <form>
+                                        <p>
+                                            <label for="sharing_mode">{% trans "Sharing mode" %}:</label>
+                                            <select name="sharing_mode">
+                                                <option selected="selected" value="0">{% trans "Simple link" %}</option>
+                                                <option value="1">{% trans "Forums" %}</option>
+                                                <option value="2">HTML</option>
+                                            </select>
+                                        </p>
 
-                                    <p>
-                                        <label for="sharing_image_size">{% trans "Image size" %}:</label>
-                                        <select name="sharing_image_size">
-                                            <option selected="selected" value="0">{% trans "Regular" %}</option>
-                                            <option value="1">{% trans "Full" %}</option>
-                                        </select>
-                                    </p>
+                                        <p>
+                                            <label for="sharing_image_size">{% trans "Image size" %}:</label>
+                                            <select name="sharing_image_size">
+                                                <option selected="selected" value="0">{% trans "Regular" %}</option>
+                                                <option value="1">{% trans "Full" %}</option>
+                                            </select>
+                                        </p>
 
-                                    <p>
-                                        <label for="sharing_image_mode">{% trans "Image mode" %}:</label>
-                                        <select name="sharing_image_mode">
-                                            <option selected="selected" value="0">{% trans "Normal" %}</option>
-                                            <option value="1">{% trans "Inverted monochrome" %}</option>
-                                        </select>
-                                    </p>
+                                        <p>
+                                            <label for="sharing_image_mode">{% trans "Image mode" %}:</label>
+                                            <select name="sharing_image_mode">
+                                                <option selected="selected" value="0">{% trans "Normal" %}</option>
+                                                <option value="1">{% trans "Inverted monochrome" %}</option>
+                                            </select>
+                                        </p>
 
-                                    <p>
-                                        <label for="sharing_thumbnail">{% trans "Thumbnail" %}:</label>
-                                        <select name="sharing_thumbnail" disabled="disabled">
-                                            <option selected="selected" value="0">{% trans "Yes" %}</option>
-                                            <option value="1">{% trans "No" %}</option>
-                                        </select>
-                                    </p>
+                                        <p>
+                                            <label for="sharing_thumbnail">{% trans "Thumbnail" %}:</label>
+                                            <select name="sharing_thumbnail" disabled="disabled">
+                                                <option selected="selected" value="0">{% trans "Yes" %}</option>
+                                                <option value="1">{% trans "No" %}</option>
+                                            </select>
+                                        </p>
 
-                                    <p>
-                                        <label for="sharing_code">{% trans "Copy this" %}:</label>
-                                        <textarea name="sharing_code" rows=6>{% if is_revision %}http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}{% else %}http://astrob.in/{{image.id}}/{% endif %}</textarea>
-                                        <div id="clip-container" class="button-container">
-                                            <div class="clip-status">{% trans "Copy" %}</div>
-                                            <div id="clip" class="clip">
-                                                <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <p>
+                                            <label for="sharing_code">{% trans "Copy this" %}:</label>
+                                            <textarea name="sharing_code" rows=6>{% if is_revision %}http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}{% else %}http://astrob.in/{{image.id}}/{% endif %}</textarea>
+                                            <div id="clip-container" class="button-container">
+                                                <div class="clip-status">{% trans "Copy" %}</div>
+                                                <div id="clip" class="clip">
+                                                    <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                </div>
                                             </div>
-                                        </div>
-                                    </p>
-                                </form>
+                                        </p>
+                                    </form>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -654,6 +662,9 @@
 
 {% block extra_js %}
 <script type="text/javascript" src="/static/js/jquery.raty.js"></script>
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "ur-15649ecb-6f21-a004-8032-7cf8416c478c"}); </script>
 <script type="text/javascript">
 $(document).ready(function() {
     var clip = new ZeroClipboard.Client();
