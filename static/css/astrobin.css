@@ -3654,14 +3654,18 @@ p.error {
   width: 50%;
   float: right;
 }
-.pagination {
+.pagination, .paginator {
   text-align: center;
   margin: 16px 0 12px 0;
 }
 .pagination .page,
+.paginator .page,
 .pagination .current,
+.paginator .current,
 .pagination .prev,
-.pagination .next {
+.paginator .prev,
+.pagination .next,
+.paginator .next {
   display: inline-block;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
@@ -3674,23 +3678,31 @@ p.error {
   margin: 0 2px;
 }
 .pagination a,
+.paginator a,
 .pagination a.page,
+.paginator a.page,
 .pagination a.prev,
-.pagination a.next {
+.paginator a.prev,
+.pagination a.next,
+.paginator a.next {
   display: inline-block;
   color: #cc4b2e;
   padding: 4px;
 }
 .pagination a:hover,
+.paginator a:hover,
 .pagination a.page:hover,
+.paginator a.page:hover,
 .pagination a.prev:hover,
-.pagination a.next:hover {
+.paginator a.prev:hover,
+.pagination a.next:hover,
+.paginator a.next:hover {
   color: #e45434;
 }
-.pagination .disabled {
+.pagination .disabled, .paginator .disabled {
   padding: 4px;
 }
-.pagination .current {
+.pagination .current, .paginator .current {
   padding: 8px 4px;
 }
 table.form_saved, table.form_saved_container {
