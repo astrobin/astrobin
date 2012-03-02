@@ -2995,6 +2995,14 @@ ul.topnav > li.active:last-child:hover {
   color: #cc4b2e;
   display: inline;
 }
+.sub h2 {
+  color: #333333;
+  margin-top: 12px;
+  border-bottom: 1px solid #b8b8b8;
+}
+.sub h2:last-child {
+  margin-top: 0;
+}
 .sub li {
   text-align: left;
 }
