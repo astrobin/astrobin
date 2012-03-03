@@ -261,16 +261,20 @@
                 </li>
                 <li>
                     <div class="favorite-container">
-                        {% if already_favorited %}
-                            <img src="/static/icons/iconic/red/heart_fill_12x11.png" alt="{% trans "Favorited" %}"/>
-                        {% else %}
-                            <a href="#" class="favorite">
+                        <a href="#" class="favorite">
+                            {% if already_favorited %}
+                                <img src="/static/icons/iconic/red/heart_fill_12x11.png" alt="{% trans "Favorited" %}"/>
+                            {% else %}
                                 <img src="/static/icons/iconic/white/heart_fill_12x11.png" alt="{% trans "Favorite" %}"/>
-                                <span class="favorite-hint">
-                                    {% trans "Mark as favorite" %}
-                                </span>
-                            </a>
-                        {% endif %}
+                            {% endif %}
+                            <span class="favorite-hint">
+                            {% if already_favorited %}
+                                {% trans "Already favorited" %}
+                            {% else %}
+                                {% trans "Mark as favorite" %}
+                            {% endif %}
+                            </span>
+                        </a>
                     </div>
                 </li>
                 {% if image.allow_rating %}

@@ -2652,19 +2652,16 @@ ul.topnav > li.active:last-child:hover {
   position: relative;
 }
 #image-detail #main-content div.favorite-container a.favorite .favorite-hint {
-  color: #383732;
-  background-color: #f9edbe;
-  border: 1px solid #f0c36d;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  padding: 2px 4px;
   position: absolute;
-  top: -4px;
-  left: 28px;
-  width: 74px;
-  font-size: 70%;
+  top: -1px;
+  left: 20px;
+  width: 275px;
+  font-size: 0.8em;
   visibility: hidden;
+  color: #fcfcfc;
+  color: #fcfcfc;
+  font-weight: bold;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
 }
 #image-detail #main-content div.favorite-container a.favorite:hover .favorite-hint {
   visibility: visible;
