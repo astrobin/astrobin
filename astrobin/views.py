@@ -2846,6 +2846,14 @@ def favorite_ajax(request, id):
     profile.favorites.add(image)
     profile.save()
 
+    if image.user != request.user:
+        push_notification(
+            [image.user], 'new_favorite',
+            {
+                'url': settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
+                'user': request.user,
+            }
+        )
+
     return ajax_success();
 
-        

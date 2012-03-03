@@ -112,6 +112,12 @@ NOTICE_TYPES = (
         '',
         2
     ),
+    (
+        'new_favorite',
+        '',
+        '',
+        2,
+    ),
 )
 
 
