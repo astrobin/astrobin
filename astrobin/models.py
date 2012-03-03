@@ -1148,6 +1148,11 @@ class UserProfile(models.Model):
         editable = False,
     )
 
+    favorites = models.ManyToManyField(
+        Image,
+        null = True,
+        editable = False,
+    )
 
     # Preferences (notification preferences are stored in the django
     # notification model)
