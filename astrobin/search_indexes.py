@@ -9,6 +9,7 @@ from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 from astrobin.models import Subject, SubjectIdentifier
+from astrobin.models import UserProfile
 
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -125,6 +126,8 @@ class ImageIndex(SearchIndex):
 
     min_aperture = IntegerField()
     max_aperture = IntegerField()
+
+    favorited = IntegerField()
 
     def index_queryset(self):
         return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
@@ -338,6 +341,9 @@ class ImageIndex(SearchIndex):
             if telescope.aperture is not None and (d == sys.maxint or telescope.aperture > d):
                 d = int(telescope.aperture)
         return d
+
+    def prepare_favorited(self, obj):
+        return UserProfile.objects.filter(favorites = obj).count()
 
 
 class SubjectIdentifierIndex(SearchIndex):

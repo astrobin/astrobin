@@ -240,6 +240,9 @@ def wall(request):
     elif request.GET.get('sort') == '-rating':
         response_dict['sort'] = '-rating'
         sqs = sqs.order_by('-rating', '-votes')
+    elif request.GET.get('sort') == '-favorited':
+        response_dict['sort'] = '-favorited'
+        sqs = sqs.order_by('-favorited')
     elif request.GET.get('sort') == '-integration':
         response_dict['sort'] = '-integration'
         sqs = sqs.order_by('-integration')
