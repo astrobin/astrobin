@@ -259,6 +259,20 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <div class="favorite-container">
+                        {% if already_favorited %}
+                            <img src="/static/icons/iconic/red/heart_fill_12x11.png" alt="{% trans "Favorited" %}"/>
+                        {% else %}
+                            <a href="#" class="favorite">
+                                <img src="/static/icons/iconic/white/heart_fill_12x11.png" alt="{% trans "Favorite" %}"/>
+                                <span class="favorite-hint">
+                                    {% trans "Mark as favorite" %}
+                                </span>
+                            </a>
+                        {% endif %}
+                    </div>
+                </li>
                 {% if image.allow_rating %}
                 <li class="rating"><div id="rating"></div></li>
                 {% if current_rating > 0 %}
@@ -667,6 +681,26 @@
 <script type="text/javascript">stLight.options({publisher: "ur-15649ecb-6f21-a004-8032-7cf8416c478c"}); </script>
 <script type="text/javascript">
 $(document).ready(function() {
+    $('a.favorite').click(function() {
+        var $link = $(this),
+            $heart = $link.find('img'),
+            $hint = $link.find('.favorite-hint');
+
+        $.ajax({
+            url: '{% url favorite_ajax image.id %}',
+            dataType: 'json',
+            timeout: 5000,
+            success: function(data, textStatus, XMLHttpRequest) {
+                $heart.attr('src', '/static/icons/iconic/red/heart_fill_12x11.png');
+                $hint.text("{% trans "Favorited!" %}");
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+
+        return false;
+    });
+
     var clip = new ZeroClipboard.Client();
     clip.setCSSEffects(false);
 

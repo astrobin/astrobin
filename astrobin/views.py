@@ -670,6 +670,7 @@ def image_detail(request, id):
                      'comment_form': CommentForm(),
                      'comments': Comment.objects.filter(image = image),
                      'preferred_language': preferred_language,
+                     'already_favorited': image in profile.favorites.all(),
                     }
 
     if 'upload_error' in request.GET:
@@ -2811,3 +2812,20 @@ def get_is_gear_complete(request, id):
         simplejson.dumps({'complete': is_gear_complete(id)}),
         mimetype = 'application/javascript')
 
+
+@require_GET
+@login_required
+@never_cache
+def favorite_ajax(request, id):
+    profile = UserProfile.objects.get(user = request.user)
+    image = get_object_or_404(Image, pk=id)
+
+    if image in profile.favorites.all():
+        return HttpResponseForbidden()
+
+    profile.favorites.add(image)
+    profile.save()
+
+    return ajax_success();
+
+        

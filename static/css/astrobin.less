@@ -2210,7 +2210,39 @@ ul.topnav {
     #main-content {
         float: left;
         margin-right: @spacer-medium;
-        width: 722px;}
+        width: 722px;
+
+        div.favorite-container {
+            margin-left: @spacer-medium;
+            padding: @spacer-small;
+
+            a.favorite {
+                position: relative;
+
+                .favorite-hint {
+                    .notice;
+                    padding: 2px @spacer-small;
+                    position: absolute;
+                    top: -@spacer-small;
+                    left: @spacer-xxlarge;
+                    width: 74px;
+                    font-size: 70%;
+                    visibility: hidden;
+                }
+
+                &:hover {
+                    .favorite-hint {
+                        visibility: visible;
+                    }
+                }
+            }
+
+            img {
+                margin-top: @spacer-small; 
+            }
+        }
+    }
+
     #side-pane {
         width: 204px;
         float: right;}
@@ -2240,7 +2272,10 @@ ul.topnav {
                 font-size: 2em;}
             li.contains {
                 float: right;
-                text-align: right;}}}
+                text-align: right;
+            }
+        }
+    }
     #main-image {
         text-align: center;
         padding-top: @spacer-small;
