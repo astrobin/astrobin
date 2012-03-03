@@ -35,6 +35,11 @@
                                             <a href="{% query_string "sort='-rating'" "" %}">{% trans "Rating" %}</a>
                                         </span>
                                     </li>
+                                    <li class="bg-icon{% if sort == '-favorited' %} icon-check{% endif %}">
+                                        <span class="text">
+                                            <a href="{% query_string "sort='-favorited'" "" %}">{% trans "Favorited" %}</a>
+                                        </span>
+                                    </li>
                                     <li class="bg-icon{% if sort == '-integration' %} icon-check{% endif %}">
                                         <span class="text">
                                             <a href="{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>

@@ -21,6 +21,16 @@
                 {% trans "Rating" %}: {{search_result.rating|cut_decimals:2}} x {{search_result.votes}}
             {% endifequal %}
 
+            {% ifequal sort '-favorited' %}
+                {% with search_result.favorited as favorited_count %}
+                    {% if favorited_count > 0 %}
+                        {% blocktrans count counter=favorited_count %}Favorited one time{% plural %}Favorited {{counter}} times{% endblocktrans %}
+                    {% else %}
+                        {% trans "Never favorited" %}
+                    {% endif %}
+                {% endwith %}
+            {% endifequal %}
+
             {% ifequal sort '-uploaded' %}
                 {{search_result.object.uploaded|ago}}
             {% endifequal %}
