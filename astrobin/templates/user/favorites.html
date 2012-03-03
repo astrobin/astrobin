@@ -5,11 +5,11 @@
 {% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s favorites{% endblocktrans %}{% endblock %}
 {% block content %}
 <a name="page_anchor"></a>
-<div class="profile">
-    {% include 'inclusion_tags/profile_tabs.html' with active_tab='gallery' %}
+<div class="favorites">
+    {% include 'inclusion_tags/profile_tabs.html' with active_tab='favorites' %}
     <div class="tabbed-box clear">
         <div class="container">
-            <h1 class="profile">
+            <h1>
                 {% ifequal user request.user %}
                     {% blocktrans %}View your favorites{% endblocktrans %}
                 {% else %}
@@ -52,7 +52,7 @@
         </div>
     </noscript>
     {% endif %}
-</div> <!-- profile -->
+</div> <!-- favorites -->
 {% endblock %}
 
 {% block extra_js %}
