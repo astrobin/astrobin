@@ -1631,6 +1631,26 @@ def user_page(request, username):
 
 
 @require_GET
+def user_page_favorites(request, username):
+    user = get_object_or_404(User, username = username)
+    profile  = UserProfile.objects.get(user = user)
+
+    return object_list(
+        request,
+        queryset = profile.favorites.all(),
+        template_name = 'user/favorites.html',
+        template_object_name = 'image',
+        paginate_by = 20,
+        extra_context = {
+            'thumbnail_size': settings.THUMBNAIL_SIZE,
+             's3_url': settings.S3_URL,
+             'user': user,
+             'private_message_form': PrivateMessageForm(),
+         }
+     )
+
+
+@require_GET
 def user_page_card(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(User, username = username)
