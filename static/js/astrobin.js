@@ -14,14 +14,12 @@ var common = {
         notifications_element_empty: 'ul#notification-feed li#empty',
         notifications_element_image: 'img#notifications',
         notifications_element_ul   : 'ul#notification-feed',
-        notifications_icon_new     : '/static/icons/iconic/orange/new_notifications.gif',
 
         /* Requests */
         requests_base_url          : '/activity/?id=request_',
         requests_element_empty     : 'ul#request-feed li#empty',
         requests_element_image     : 'img#requests',
         requests_element_ul        : 'ul#request-feed',
-        requests_icon_new          : '/static/icons/iconic/orange/new_requests.gif',
         request_detail_url         : '/requests/detail/',
 
         follow_action: {
@@ -110,8 +108,6 @@ var common = {
                 json = jQuery.parseJSON(data);
 
                 $(common.config.notifications_element_empty).remove();
-                $(common.config.notifications_element_image)
-                    .attr('src', common.config.notifications_icon_new);
                 $(common.config.notifications_element_ul)
                     .prepend('<li class="unread">'+json['message']+'</li>');
 
@@ -138,8 +134,6 @@ var common = {
                 json = jQuery.parseJSON(data);
 
                 $(common.config.requests_element_empty).remove();
-                $(common.config.requests_element_image)
-                    .attr('src', common.config.requests_icon_new);
                 $(common.config.requests_element_ul).prepend('\
                     <li class="unread">\
                         <a href="' + common.config.image_detail_url + json['image_id'] + '/">' + json['message'] + '\
