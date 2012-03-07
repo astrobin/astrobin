@@ -488,7 +488,7 @@
                                                 <strong>{{data.0}}</strong>:
                                                 {% if data.0 == dates_label %}
                                                     {% for date in data.1 %}
-                                                        <a href="/search/{% query_string "start_date=date, end_date=date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                                        <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
                                                     {% endfor %}
                                                 {% else %}
                                                     {{data.1|linebreaksbr}}
@@ -498,7 +498,7 @@
                                     {% endfor %}
                                 {% else %}
                                     {% if ssa.date %}
-                                        <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{ssa.date|date:"DATE_FORMAT"}}</a>
+                                        <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{ssa.date|date:"DATE_FORMAT"}}</a>
                                     {% endif %}
                                     {% if ssa.time %}
                                         <p><strong>{% trans "Time" %}</strong>: {{ssa.time}}
