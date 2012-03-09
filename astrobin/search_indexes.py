@@ -10,6 +10,7 @@ from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 from astrobin.models import Subject, SubjectIdentifier
 from astrobin.models import UserProfile
+from astrobin.models import Favorite
 
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -343,7 +344,7 @@ class ImageIndex(SearchIndex):
         return d
 
     def prepare_favorited(self, obj):
-        return UserProfile.objects.filter(favorites = obj).count()
+        return Favorite.objects.filter(image = obj).count()
 
 
 class SubjectIdentifierIndex(SearchIndex):

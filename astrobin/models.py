@@ -1148,12 +1148,6 @@ class UserProfile(models.Model):
         editable = False,
     )
 
-    favorites = models.ManyToManyField(
-        Image,
-        null = True,
-        editable = False,
-    )
-
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
@@ -1297,6 +1291,16 @@ class Location(models.Model):
 
     class Meta:
         app_label = 'astrobin'
+
+
+class Favorite(models.Model):
+    image = models.ForeignKey(Image)
+    user = models.ForeignKey(User)
+    created = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ('-created',)
 
 
 from zinnia.models import Entry
