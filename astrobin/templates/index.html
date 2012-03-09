@@ -92,8 +92,10 @@
     <a name="page_anchor"></a>
     <div class="full-box clear index">
         <div class="container">
-            <h2 class="inline">{% trans "Recent images" %}</h2>
+            <h2>{% trans "Recently uploaded" %}</h2>
             {% search_image_list request image_list 0 %}
+            <h2>{% trans "Recently favorited" %}</h2>
+            {% image_list request recently_favorited 0 %}
             <div class="pagination">
                 <a href="{% url wall %}">{% trans "(view more)" %}</a>
             </div>

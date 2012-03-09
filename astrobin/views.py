@@ -188,14 +188,6 @@ def index(request):
     """Main page"""
     form = None
 
-    profile = None
-    if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user=request.user)
-        if profile and profile.telescopes.all() and profile.cameras.all():
-            form = ImageUploadForm()
-
-    sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
-
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
@@ -205,12 +197,23 @@ def index(request):
     if 'upload_error' in request.GET:
         response_dict['upload_error'] = True
 
+    profile = None
+    if request.user.is_authenticated():
+        profile = UserProfile.objects.get(user=request.user)
+        if profile and profile.telescopes.all() and profile.cameras.all():
+            form = ImageUploadForm()
+
+        response_dict['recently_favorited'] = Image.objects.annotate(last_favorited = models.Max('favorite__created')).exclude(last_favorited = None).order_by('-last_favorited')[:10]
+
+    sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
+
+
     return object_list(
         request, 
         queryset=sqs,
         template_name='index.html',
         template_object_name='image',
-        paginate_by = 20,
+        paginate_by = 10,
         extra_context = response_dict)
 
 
@@ -673,7 +676,7 @@ def image_detail(request, id):
                      'comment_form': CommentForm(),
                      'comments': Comment.objects.filter(image = image),
                      'preferred_language': preferred_language,
-                     'already_favorited': image in profile.favorites.all(),
+                     'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0,
                     }
 
     if 'upload_error' in request.GET:
@@ -1636,19 +1639,18 @@ def user_page(request, username):
 @require_GET
 def user_page_favorites(request, username):
     user = get_object_or_404(User, username = username)
-    profile  = UserProfile.objects.get(user = user)
 
     return object_list(
         request,
-        queryset = profile.favorites.all(),
+        queryset = Image.objects.filter(favorite__user = user),
         template_name = 'user/favorites.html',
         template_object_name = 'image',
         paginate_by = 20,
         extra_context = {
             'thumbnail_size': settings.THUMBNAIL_SIZE,
-             's3_url': settings.S3_URL,
-             'user': user,
-             'private_message_form': PrivateMessageForm(),
+            's3_url': settings.S3_URL,
+            'user': user,
+            'private_message_form': PrivateMessageForm(),
          }
      )
 
@@ -2840,14 +2842,13 @@ def get_is_gear_complete(request, id):
 @login_required
 @never_cache
 def favorite_ajax(request, id):
-    profile = UserProfile.objects.get(user = request.user)
     image = get_object_or_404(Image, pk=id)
 
-    if image in profile.favorites.all():
+    if image in Image.objects.filter(favorite__user = request.user):
         return HttpResponseForbidden()
 
-    profile.favorites.add(image)
-    profile.save()
+    f = Favorite(image = image, user = request.user)
+    f.save()
 
     if image.user != request.user:
         push_notification(
