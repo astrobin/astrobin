@@ -41,6 +41,7 @@ LANGUAGE_CHOICES = (
     ('fi', _("Finnish")),
     ('de', _("German")),
     ('nl', _("Dutch")),
+    ('tr', _("Turkish")),
 )
 
 LANGUAGES = {
@@ -51,6 +52,7 @@ LANGUAGES = {
     'fi': _("Finnish"),
     'de': _("German"),
     'nl': _("Dutch"),
+    'tr': _("Turkish"),
 }
 
 SUBJECT_LABELS = {
