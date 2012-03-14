@@ -123,6 +123,7 @@
                     <a href="{% url set_language "fi" %}" title="Suomi"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
                     <a href="{% url set_language "de" %}" title="Deutsch"><img src="/static/icons/flags/16/Germany.png" alt="Deutsch"/></a>
                     <a href="{% url set_language "nl" %}" title="Nederlands"><img src="/static/icons/flags/16/Netherlands.png" alt="Nederlands"/></a>
+                    <a href="{% url set_language "tr" %}" title="Türk"><img src="/static/icons/flags/16/Turkey.png" alt="Türk"/></a>
                     {% if request.user.is_authenticated and not user_language %}
                     <div id="language-prompt">
                         <div class="bubble">
@@ -316,7 +317,7 @@
                         <h3>{% trans "Thanks to" %}</h3>
                         <p>
                             <ul>
-                                <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">José J. Chambó</a>, <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent Schmitz</a>, <a href="/users/Vostok/">Lauri Kangas</a>, <a href="/users/naavis/">Samuli Vuorinen</a>, <a href="/users/ketarax/">Jussi Kantola</a>, <a href="/users/KoenDierckens/">Koen Dierckens</a>, <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>, <a href="http://strehl1.de" target="_blank">Michael Wilk</a>, <a href="/users/stimpy/">Marc Demierre</a>, <a href="/users/kalle66/">Rinke Kallenkoot</a>.
+                                <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">José J. Chambó</a>, <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent Schmitz</a>, <a href="/users/Vostok/">Lauri Kangas</a>, <a href="/users/naavis/">Samuli Vuorinen</a>, <a href="/users/ketarax/">Jussi Kantola</a>, <a href="/users/KoenDierckens/">Koen Dierckens</a>, <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>, <a href="http://strehl1.de" target="_blank">Michael Wilk</a>, <a href="/users/stimpy/">Marc Demierre</a>, <a href="/users/kalle66/">Rinke Kallenkoot</a>, <a href="/users/bilgebay/">Sedat Bilgebay</a>, <a href="/users/onuratilgan/">Onur Atilgan</a>, <a href="/users/guvenozkan/">Güven Özkan</a>, <a href="/users/castle/">Ahmet Kale</a>.
                                 <li><a href="http://simbad.u-strasbg.fr/simbad/" target="_blank">SIMBAD Astronomical Database</a></li>
                                 <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
                             </ul>
