@@ -11,10 +11,13 @@ from django import forms
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.contrib.contenttypes import generic
 
 from tasks import *
 
 from djangoratings.fields import RatingField
+from djangoratings.models import Vote
+
 from model_utils.managers import InheritanceManager
 from timezones.forms import PRETTY_TIMEZONE_CHOICES
 
@@ -595,6 +598,7 @@ class Image(models.Model):
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
 
     rating = RatingField(range=5)
+    votes = generic.GenericRelation(Vote)
     user = models.ForeignKey(User)
 
     is_stored = models.BooleanField(editable=False)

@@ -24,6 +24,7 @@ from django.utils.encoding import smart_str, smart_unicode
 
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
+from djangoratings.models import Vote
 
 from uuid import uuid4
 import os
@@ -204,6 +205,8 @@ def index(request):
             form = ImageUploadForm()
 
         response_dict['recently_favorited'] = Image.objects.annotate(last_favorited = models.Max('favorite__created')).exclude(last_favorited = None).order_by('-last_favorited')[:10]
+
+        response_dict['recently_five_starred'] = Image.objects.filter(votes__score = 5).distinct().order_by('-votes__date_added')[:5]
 
     sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
 
