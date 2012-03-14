@@ -96,6 +96,9 @@
             {% search_image_list request image_list 0 %}
             <h2>{% trans "Recently favorited" %}</h2>
             {% image_list request recently_favorited 0 %}
+            <h2>{% trans "Recently voted 5 stars" %}</h2>
+            {% image_list request recently_five_starred 0 %}
+
             <div class="pagination">
                 <a href="{% url wall %}">{% trans "(view more)" %}</a>
             </div>
