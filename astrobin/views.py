@@ -190,8 +190,6 @@ def index(request):
     form = None
 
     response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-        's3_url': settings.S3_URL,
         'upload_form': form,
     }
 
@@ -204,9 +202,16 @@ def index(request):
         if profile and profile.telescopes.all() and profile.cameras.all():
             form = ImageUploadForm()
 
-        response_dict['recently_favorited'] = Image.objects.annotate(last_favorited = models.Max('favorite__created')).exclude(last_favorited = None).order_by('-last_favorited')[:10]
-
-        response_dict['recently_five_starred'] = Image.objects.filter(votes__score = 5).distinct().order_by('-votes__date_added')[:5]
+        response_dict['recently_favorited'] = \
+            Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
+                         .exclude(last_favorited = None) \
+                         .order_by('-last_favorited')[:10]
+        response_dict['recently_five_starred'] = \
+            Image.objects.filter(votes__score = 5) \
+                         .distinct() \
+                         .order_by('-votes__date_added')[:5]
+        response_dict['recent_from_followees'] = \
+            Image.objects.filter(user__in = profile.follows.all())[:5]
 
     sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
 

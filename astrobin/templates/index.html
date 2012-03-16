@@ -94,10 +94,15 @@
         <div class="container">
             <h2>{% trans "Recently uploaded" %}</h2>
             {% search_image_list request image_list 0 %}
+
             <h2>{% trans "Recently favorited" %}</h2>
             {% image_list request recently_favorited 0 %}
+
             <h2>{% trans "Recently voted 5 stars" %}</h2>
             {% image_list request recently_five_starred 0 %}
+
+            <h2>{% trans "Recently uploaded by the users you follow" %}</h2>
+            {% image_list request recent_from_followees 0 %}
 
             <div class="pagination">
                 <a href="{% url wall %}">{% trans "(view more)" %}</a>
