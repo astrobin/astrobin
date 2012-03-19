@@ -92,12 +92,38 @@
     <a name="page_anchor"></a>
     <div class="full-box clear index">
         <div class="container">
+            {% if user.is_authenticated %}
+            <div class="image-of-the-day thumbnail-list clear">
+                <h2>{% trans "Image of the day" %}</h2>
+                {% with image_of_the_day as image %}
+                <div class="image">
+                    <a href="{% url image_detail image.id %}">
+                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}"
+                             class="thumbnail" width="424"
+                             alt="{{image.title|default:_("(no title)")}}"/>
+                    </a>
+                </div>
+                <div class="data" style="height: {{image_of_the_day_scaled_height}}px">
+                    <div class="technical-card">
+                        <h3>&larr; {{image.title}} by <a href="{% url user_page image.user %}">{{image.user}}</a></h3>
+                        {% for i in gear_list %}
+                            {% if i.1 %}
+                            <p>
+                                <strong>{% trans i.0 %}:</strong>
+                                {% for g in i.1 %}
+                                    {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}<a href="/search/?q=&as_values_{{i.2}}={{g.id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>{% else %}<a href="/search/?q={{g.name|escape}}&type={{i.2}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>{% endif %}{% if not forloop.last %},&nbsp;{% endif %} {% endfor %}
+                            </p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endwith %}
+            </div>
+            {% endif %}
+
             <div class="recent">
                 <h2>{% trans "Recently uploaded" %}</h2>
                 {% search_image_list request image_list 0 %}
-            </div>
-            <div class="pagination">
-                <a href="{% url wall %}">{% trans "(view more)" %}</a>
             </div>
 
             {% if user.is_authenticated %}
@@ -116,6 +142,10 @@
                 {% image_list request recently_five_starred 0 small_size %}
             </div>
             {% endif %}
+
+            <div class="pagination">
+                <a href="{% url wall %}">{% trans "(view more)" %}</a>
+            </div>
         </div>
     </div>
 {% endblock %}
