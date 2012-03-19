@@ -4384,6 +4384,13 @@ form#gear select {
 .index .recent .thumbnail-list {
   margin-top: 4px;
 }
+.index .recent .left, .index .recent .right {
+  float: left;
+  width: 50%;
+}
+.index .recent .left .thumbnail-list, .index .recent .right .thumbnail-list {
+  padding: 0;
+}
 .acquisition-session {
   margin-bottom: 16px;
 }
