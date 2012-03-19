@@ -133,15 +133,18 @@
             </div>
 
             <div class="recent">
-                <h3>{% trans "Recently favorited" %}</h3>
-                {% image_list request recently_favorited 0 small_size %}
-            </div>
-
-            <div class="recent">
-                <h3>{% trans "Recently voted 5 stars" %}</h3>
-                {% image_list request recently_five_starred 0 small_size %}
+                <div class="left">
+                    <h3>{% trans "Recently voted 5 stars" %}</h3>
+                    {% image_list request recently_five_starred 0 small_size %}
+                </div>
+                <div class="right">
+                    <h3>{% trans "Recently favorited" %}</h3>
+                    {% image_list request recently_favorited 0 small_size %}
+                </div>
             </div>
             {% endif %}
+
+            <div class="fix"></div>
 
             <div class="pagination">
                 <a href="{% url wall %}">{% trans "(view more)" %}</a>
