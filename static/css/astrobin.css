@@ -4336,6 +4336,21 @@ form#gear select {
   right: 0;
   text-align: right;
 }
+.index .recent {
+  margin-bottom: 28px;
+}
+.index .recent h2, .index .recent h3 {
+  font-size: 1.3em;
+  margin-left: 8px;
+}
+.index .recent h3 {
+  font-size: 1em;
+  color: #b8b8b8;
+  text-shadow: none;
+}
+.index .recent .thumbnail-list {
+  margin-top: 4px;
+}
 .acquisition-session {
   margin-bottom: 16px;
 }
