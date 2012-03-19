@@ -251,7 +251,7 @@ truncatechars.is_safe = True
 truncatechars = stringfilter(truncatechars)
 
 
-def image_list(context, request, object_list, paginate = True):
+def image_list(context, request, object_list, paginate = True, size = settings.THUMBNAIL_SIZE):
     adjacent_pages = 3
 
     paginator = context['paginator']
@@ -286,7 +286,7 @@ def image_list(context, request, object_list, paginate = True):
         'show_last': pages not in page_numbers,
         'image_list': image_list,
         'paginate': paginate,
-        'thumbnail_size':settings.THUMBNAIL_SIZE,
+        'thumbnail_size': size,
         's3_url':settings.S3_URL,
         'request': request,
         'sort': request.GET.get('sort'),

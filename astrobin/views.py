@@ -191,6 +191,7 @@ def index(request):
 
     response_dict = {
         'upload_form': form,
+        'small_size': settings.SMALL_THUMBNAIL_SIZE,
     }
 
     if 'upload_error' in request.GET:
@@ -202,16 +203,18 @@ def index(request):
         if profile and profile.telescopes.all() and profile.cameras.all():
             form = ImageUploadForm()
 
+        response_dict['recent_from_followees'] = \
+            Image.objects.filter(user__in = profile.follows.all())[:20]
+
         response_dict['recently_favorited'] = \
             Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
                          .exclude(last_favorited = None) \
-                         .order_by('-last_favorited')[:10]
+                         .order_by('-last_favorited')[:20]
+
         response_dict['recently_five_starred'] = \
             Image.objects.filter(votes__score = 5) \
                          .distinct() \
-                         .order_by('-votes__date_added')[:5]
-        response_dict['recent_from_followees'] = \
-            Image.objects.filter(user__in = profile.follows.all())[:5]
+                         .order_by('-votes__date_added')[:20]
 
     sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
 
