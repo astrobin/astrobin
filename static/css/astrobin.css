@@ -881,7 +881,7 @@ body {
 hr {
   border: 0;
   height: 1px;
-  background-color: #404040;
+  background-color: #474747;
 }
 /* links */
 a, a:visited {
@@ -3549,6 +3549,11 @@ input.date {
 .sort {
   margin-bottom: 5px;
 }
+img.thumbnail {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
 .thumbnail-list {
   padding: 0 8px;
   margin-top: 12px;
@@ -4330,11 +4335,37 @@ form#gear select {
   position: relative;
   margin-top: 12px;
 }
+.index .container {
+  padding: 12px 28px;
+}
 .index .album-links {
   position: absolute;
   top: 0;
   right: 0;
   text-align: right;
+}
+.index .image-of-the-day {
+  margin-bottom: 28px;
+}
+.index .image-of-the-day h2 {
+  margin-bottom: 8px;
+  border-bottom: 1px solid #474747;
+}
+.index .image-of-the-day .image {
+  float: left;
+}
+.index .image-of-the-day .image img {
+  padding: 2px;
+}
+.index .image-of-the-day .data {
+  float: left;
+  margin-left: 12px;
+  width: 395px;
+  padding: 12px;
+  overflow: hidden;
+}
+.index .image-of-the-day .data p {
+  margin: 2px 28px;
 }
 .index .recent {
   margin-bottom: 28px;
@@ -4342,6 +4373,8 @@ form#gear select {
 .index .recent h2, .index .recent h3 {
   font-size: 1.3em;
   margin-left: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #474747;
 }
 .index .recent h3 {
   font-size: 1em;

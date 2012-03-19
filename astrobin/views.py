@@ -32,7 +32,7 @@ import simplejson
 import csv
 import flickrapi
 import urllib2
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 from models import *
 from forms import *
@@ -187,11 +187,9 @@ def jsonDumpSubjects(all):
 
 def index(request):
     """Main page"""
-    form = None
-
     response_dict = {
-        'upload_form': form,
         'small_size': settings.SMALL_THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
     }
 
     if 'upload_error' in request.GET:
@@ -201,7 +199,7 @@ def index(request):
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
         if profile and profile.telescopes.all() and profile.cameras.all():
-            form = ImageUploadForm()
+            response_dict['upload_form'] = ImageUploadForm()
 
         response_dict['recent_from_followees'] = \
             Image.objects.filter(user__in = profile.follows.all())[:20]
@@ -216,8 +214,43 @@ def index(request):
                          .distinct() \
                          .order_by('-votes__date_added')[:20]
 
-    sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
+        # Compute picture of the day.
+        yesterday = date.today() - timedelta(1)
+        yesterdays_images = Image.objects.filter(acquisition__date = yesterday)
+        coolest_image = yesterdays_images[0]
+        current_coolness = 0
+        for image in yesterdays_images:
+            score = 0
+            for vote in image.votes.all():
+                score += vote.score 
 
+            times_favorited = Favorite.objects.filter(image = image).count()
+            comments = Comment.objects.filter(image = image).count()
+
+            coolness = score + (times_favorited * 2) + comments
+            if coolness > current_coolness:
+                coolest_image = image
+                current_coolness = coolness
+
+        gear_list = (
+            ('Imaging telescopes or lenses', coolest_image.imaging_telescopes.all(), 'imaging_telescopes'),
+            ('Imaging cameras'   , coolest_image.imaging_cameras.all(), 'imaging_cameras'),
+            ('Mounts'            , coolest_image.mounts.all(), 'mounts'),
+            ('Guiding telescopes or lenses', coolest_image.guiding_telescopes.all(), 'guiding_telescopes'),
+            ('Guiding cameras'   , coolest_image.guiding_cameras.all(), 'guiding_cameras'),
+            ('Focal reducers'    , coolest_image.focal_reducers.all(), 'focal_reducers'),
+            ('Software'          , coolest_image.software.all(), 'software'),
+            ('Filters'           , coolest_image.filters.all(), 'filters'),
+            ('Accessories'       , coolest_image.accessories.all(), 'accessories'),
+        )
+
+        response_dict['image_of_the_day'] = coolest_image
+        # Ugliest thing ever: 424 is the width of the scaled image on the front page; 24 is the padding
+        # of the technical card box. Yikes.
+        response_dict['image_of_the_day_scaled_height'] = (coolest_image.h * 424 / coolest_image.w) - 24
+        response_dict['gear_list'] = gear_list
+
+    sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
 
     return object_list(
         request, 

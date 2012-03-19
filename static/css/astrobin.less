@@ -994,7 +994,7 @@ body {
 hr {
     border: 0;
     height: 1px;
-    background-color: @border-bottom-color;}
+    background-color: @border-top-color;}
 
 /* links */
 a, a:visited {
@@ -2827,6 +2827,7 @@ input.date {
     margin-bottom: 5px;}
 
 img.thumbnail {
+    .rounded-corners;
 }
 .thumbnail-list {
     padding: 0 @spacer-medium;
@@ -3513,6 +3514,10 @@ form#gear {
     position: relative;
     margin-top: @spacer-large;
 
+    .container {
+        padding: @spacer-large @spacer-xxlarge;
+    }
+
     .album-links {
         position: absolute;
         top: 0;
@@ -3520,12 +3525,40 @@ form#gear {
         text-align: right;
     }
 
+    .image-of-the-day {
+        margin-bottom: @spacer-xxlarge;
+
+        h2 {
+            margin-bottom: @spacer-medium;
+            border-bottom: 1px solid @border-top-color;
+        }
+        .image {
+            float: left;
+
+            img {
+                padding: 2px;
+            }
+        }
+        .data {
+            float: left;
+            margin-left: @spacer-large;
+            width: 395px;
+            padding: @spacer-large;
+            overflow: hidden;
+
+            p {
+                margin: 2px @spacer-xxlarge;
+            }
+        }
+    }
     .recent {
         margin-bottom: @spacer-xxlarge;
 
         h2, h3 {
             font-size: 1.3em;
             margin-left: @spacer-medium;
+            margin-bottom: @spacer-medium;
+            border-bottom: 1px solid @border-top-color;
         }
         h3 {
             font-size: 1em;
