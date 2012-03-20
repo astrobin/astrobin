@@ -92,7 +92,7 @@
     <a name="page_anchor"></a>
     <div class="full-box clear index">
         <div class="container">
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and image_of_the_day %}
             <div class="image-of-the-day thumbnail-list clear">
                 <h2>{% trans "Hot today" %}</h2>
                 {% with image_of_the_day as image %}
