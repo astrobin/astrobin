@@ -1,34 +1,42 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load bootstrap_toolkit %}
 
 {% block content %}
     {% include 'profile-edit-menu.html' %}
-    <div class="sided-main-content">
-        <h1>{% trans "Edit your astrophotography gear" %}</h1>
-        <table class="form_saved_container">
-            <tr>
-                <td>{% form_saved request %}</td>
-                {% if request.GET.initial == 'true' %}
-                <td><a href="/">{% trans "Go back to the home page." %}</a></td>
+    <div class="row">
+        <div class="span12">
+            <h1>{% trans "Edit your astrophotography gear" %}</h1>
+            <table class="form_saved_container">
+                <tr>
+                    <td>{% form_saved request %}</td>
+                    {% if request.GET.initial == 'true' %}
+                    <td><a href="/">{% trans "Go back to the home page." %}</a></td>
+                    {% endif %}
+                </tr>
+            </table>
+            <div class="well">
+                {% blocktrans %}Please use full names (make and model) for all your gear items!{% endblocktrans %}<br/>
+                {% blocktrans %}<span class="btn btn-primary">Orange</span> bubbles mean that you need to edit the properties of that gear item!{% endblocktrans %}
+            </div>
+
+            <form class="form-horizontal" method="post" action="{% url profile_save_gear %}">
+                {{form|as_bootstrap}}
+                {% if initial %}
+                <input type="hidden" name="initial"/>
                 {% endif %}
-            </tr>
-        </table>
-        <p><strong>{% blocktrans %}Please use full names (make and model) for all your gear items!{% endblocktrans %}</strong></p>
-        <p>{% blocktrans %}<span class="button">Orange</span> bubbles mean that you need to edit the properties of that gear item!{% endblocktrans %}</p>
-        <form method="post" action="{% url profile_save_gear %}">{% csrf_token %}
-            {{form.as_p}}
-            {% if initial %}
-            <input type="hidden" name="initial"/>
-            {% endif %}
-            <noscript>
-                <p class="hint">
-                {% blocktrans %}* use a comma to separate the values.{% endblocktrans %}
-                </p>
-            </noscript>
-            <p><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></p>
-        </form>
-    </div>  
+                <noscript>
+                    <p class="hint">
+                    {% blocktrans %}* use a comma to separate the values.{% endblocktrans %}
+                    </p>
+                </noscript>
+                <div class="form-actions">
+                    <input class="btn btn-primary" type="submit" value="{% trans "Save" %}" />
+                </div>
+            </form>
+        </div> <!-- span12 -->
+    </div> <!-- row -->
 {% endblock %}
 
 {% block extra_js %}
@@ -88,9 +96,9 @@
                                     timeout: 5000,
                                     success: function(data, textStatus, XMLHttpRequest) {
                                         if (data['complete'])
-                                            $item_li.removeClass('need-data');
+                                            $item_li.removeClass('need-data btn-primary');
                                         else
-                                            $item_li.addClass('need-data');
+                                            $item_li.addClass('need-data btn-primary');
                                     }
                                 });
                             } else {

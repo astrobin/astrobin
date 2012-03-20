@@ -45,14 +45,15 @@
 			$elem = $this.parent();
 		}
 
-		var $image		= $elem.wrap('<div class="' + options.cImage + '"/>').parent(),
-			$wrapper	= $image.wrap('<div class="' + options.cWrapper + '"/>').parent();
+		var $image		 = $elem.wrap('<div class="' + options.cImage + '"/>').parent(),
+			$actualImage = $image.find('img'),
+			$wrapper	 = $image.wrap('<div class="' + options.cWrapper + '"/>').parent();
 
 		$wrapper.css({
-			height:		$this.height(),
+			width:		$actualImage.attr('width'),
+			height:		$actualImage.attr('height'),
 			overflow:	'hidden',
-			position:	'relative',
-			width:		$this.width()
+			position:	'relative'
 		});
 
 		$caption.css({

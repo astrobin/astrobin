@@ -1,77 +1,55 @@
 {% extends 'django_messages/inbox.html' %}
 
 {% load i18n %}
-{% load avatar_tags %}
 {% load pagination_tags %}
 {% load truncchar_tag %}
 {% load tags %}
 
 {% block content %}
     {% autopaginate thread_list 25 %}
-    <div class="inbox">
-        <h1>{% trans "Messages" %}</h1>
-        {% comment %}
-        <div class="messages-search">
-            <form id="inbox-search" action="{% url messages_search %}" method="GET">
-                <input type="text" title="{% trans 'Search messages' %}" value="{% trans 'Search messages' %}" id="q" name="q" 
-                       onfocus="common.clearText(this)"
-                       onblur="common.clearText(this)"/>
-            </form>
-        </div>
-        {% endcomment %}
-    </div>
-    <div class="full-box">
-        <div class="container">
-            <div class="inbox-action-box">
-                  <div class="buttons">
-                    {% comment %}
-                      <button type="submit" name="action" value="read" class="button">{% trans "Mark as read" %}</button>
-                      <button type="submit" name="action" value="delete" class="button">{% trans "Delete messages" %}</button>
-                    {% endcomment %}
-                    <a class="button" href="{% url messages_compose %}{% query_string "next=request.path" "" %}">
-                       {% trans "Compose message" %}
-                    </a>
-                </div>
+    <div class="row">
+        <div class="span12">
+            <h1>{% trans "Messages" %}</h1>
+            
+            <div class="well">
+                <a class="btn" href="{% url messages_compose %}{% query_string "next=request.path" "" %}">
+                   {% trans "Compose message" %}
+                </a>
             </div>
 
-            <form action="{% url messages_batch_update %}" method="post">
-                {% csrf_token %}
-                <div class="inbox">
-                    {% for message in thread_list %}
-                      <div class="message {% if message.new %}unread{% endif %}">
-                          {% if message.new %}
-                          <div class="new">
-                          {% trans "New!" %}
-                          </div>
-                          {% endif %}
-                          <div class="sender">
-                            <a href="{{ message.thread.latest_msg.sender.get_absolute_url }}">{{ message.thread.latest_msg.sender.username|truncchar:12 }}</a>
-                            <span class="date">{{ message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
-                          </div>
-                          <div class="subject">
-                            <strong>{{ message.thread.subject|truncchar:25 }}</strong>
-                            <span class="message-tease">{{message.thread.latest_msg.body|truncchar:35}}</span>
-                          </div>
-                          {% comment %}
-                          <div class="checkbox">
-                            <input name="batchupdateids" type="checkbox" value="{{message.thread.pk}}" />
-                          </div>
-                          {% endcomment %}
-                          <div class="actions">
+            <table class="table">
+                <tr>
+                    <th>{% trans "Status" %}</th>
+                    <th>{% trans "Last sender" %}</th>
+                    <th>{% trans "Date and time" %}</th>
+                    <th>{% trans "Subject" %}</th>
+                    <th>{% trans "Excerpt" %}</th>
+                    <th>{% trans "Actions" %}</th>
+                </tr>
+                {% for message in thread_list %}
+                    <tr>
+                        <td>{% if message.new %}<strong>{% trans "New!" %}</strong>{% endif %}</td>
+                        <td><a href="{{ message.thread.latest_msg.sender.get_absolute_url }}">{{ message.thread.latest_msg.sender.username|truncchar:12 }}</a></td>
+                        <td>{{message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</td>
+                        <td>{{message.thread.subject|truncchar:25}}</td>
+                        <td>{{message.thread.latest_msg.body|truncchar:35}}</td>
+                        <td>
                             <a href="{{message.thread.get_absolute_url}}">{% trans "Read all" %}</a>
                             |
                             <a href="{{message.thread.get_absolute_url}}#reply">{% trans "Reply" %}</a>
-                          </div>
-                          {% if message.replied %}{% endif %}
-                      </div>
-                    {% empty %}
-                        <div class="message unread">
-                            <p>{% trans "No messages" %}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </form>
-        </div> <!-- container -->
-    </div> <!-- full-box -->
-    <div class="pagination">{% paginate %}</div>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">
+                            {% trans "No messages" %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="pagination pagination-centered">
+        {% paginate %}
+    </div>
 {% endblock %}

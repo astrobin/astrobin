@@ -5,233 +5,106 @@
 {% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 {% block content %}
 <a name="page_anchor"></a>
-<div class="profile">
-    {% include 'inclusion_tags/profile_tabs.html' with active_tab='gallery' %}
-    <div class="tabbed-box clear">
-        <div class="container">
-            <h1 class="inline profile">
-                {% ifequal user request.user %}
-                    {% blocktrans %}View your images{% endblocktrans %}
-                {% else %}
-                    {% blocktrans with user.username as username %}View {{username}}'s images:{% endblocktrans %}
-                {% endifequal %}
-            </h1>
+{% include 'user/profile-subnav.html' %}
 
-            {% ifequal user request.user %}
-            <span class="area-selection">
-            (
-                {% if section == 'public' %}
-                    {% trans "Public Area" %}
-                {% else %}
-                    <a href="{% url me %}">{% trans "Public Area" %}</a>
-                {% endif %}
-                |
-                {% if section == 'staging' %}
-                    {% trans "Staging Area" %}
-                {% else %}
-                    <a href="?staging">{% trans "Staging Area" %}</a>
-                {% endif %}
-            )
-            </span>
-            {% endifequal %}
+<h1>
+    {% ifequal user request.user %}
+        {% blocktrans %}View your images{% endblocktrans %}
+    {% else %}
+        {% blocktrans with user.username as username %}View {{username}}'s images:{% endblocktrans %}
+    {% endifequal %}
+</h1>
 
-            {% if section == 'public' %}
-            <ul class="bar">
-                <li id="menu">
-                    <ul class="topnav">
-                        {% if request.user != user and request.user.is_authenticated %}
-                        <li id="user" class="first">
-                            <span class="text"><a href="#">{% trans "User menu" %}</a></span>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                            <div class="sub">
-                                <ul class="subnav">
-                                    <li class="bg-icon {% if follows %}icon-unfollow{% else %}icon-follow{% endif %}">
-                                        <span class="text">
-                                            <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
-                                               href="{% if follows %}{% url unfollow user %}{% else %}{% url follow user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
-                                                {% if follows %}
-                                                    {% trans "Stop following" %}
-                                                {% else %}
-                                                    {% trans "Follow" %}
-                                                {% endif %}
-                                            </a>
-                                        </span>
-                                    </li>
-                                    <li class="last bg-icon icon-message">
-                                        <span class="text"><a class="send-private-message" href="{% url messages_compose_to user %}{% query_string "next=request.path" "" %}">{% trans "Send private message" %}</a></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        {% endif %}
-                        <li id="sort" class="last">
-                            <span class="text"><a href="#">{% trans "Sort images by" %}</a></span>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                            <div class="sub">
-                                <ul class="subnav">
-                                    <li class="bg-icon{% if request.GET.sub == 'uploaded' %} icon-check{% endif %}">
-                                        <span class="text">
-                                            <a href="?public&sub=uploaded">{% trans "Upload time" %}</a>
-                                        </span>
-                                    </li>
-                                    <li class="bg-icon{% if request.GET.sub == 'acquired' %} icon-check{% endif %}">
-                                        <span class="text">
-                                            <a href="?public&sub=acquired">{% trans "Acquisition time" %}</a>
-                                        </span>
-                                    </li>
-                                    <li class="bg-icon{% if request.GET.sub == 'subject' %} icon-check{% endif %}">
-                                        <span class="text">
-                                            <a href="?public&sub=subject">{% trans "Subject type" %}</a>
-                                        </span>
-                                    </li>
-                                    <li class="bg-icon{% if 'sub' not in request.GET or request.GET.sub == 'year' %} icon-check{% endif %}">
-                                        <span class="text">
-                                            <a href="?public&sub=year">{% trans "Year" %}</a>
-                                        </span>
-                                    </li>
-                                    <li class="bg-icon{% if request.GET.sub == 'gear' %} icon-check{% endif %}">
-                                        <span class="text">
-                                            <a href="?public&sub=gear">{% trans "Gear" %}</a>
-                                        </span>
-                                    </li>
-                                    <li class="bg-icon{% if request.GET.sub == 'nodata' %} icon-check{% endif %}">
-                                        <span class="text">
-                                            <a href="?public&sub=nodata">{% trans "Lacking data" %}</a>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+{% if user == request.user and section == 'staging' %}
+<div class="well">
+    {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
+</div>
+{% endif %}
+
+<div class="album">
+    {% if section == 'public' and not image_list %}
+        {% if subsection == 'nodata' %}
+        <div class="well">
+            {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
+            {% if request.user = user %}
+                {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
             {% endif %}
-            <div class="fix"></div>
-            <hr/>
+        </div>
+        {% endif %}
 
-            {% if user == request.user and section == 'staging' %}
-            <p>
-                {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
-            </p>
-            {% endif %}
-
-            <div class="album">
-                {% if section == 'public' and not image_list %}
-                    {% if subsection == 'nodata' %}
-                    <p>
-                        {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
-                        {% if request.user = user %}
-                            {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
+        {% for album in smart_albums %}
+            {% for item in album %}
+                {% for title, content in item.items %}
+                    {% if content.images %}
+                    <div class="album-part">
+                        <div class="well">
+                            <strong>{{title}}</strong>
+                            {% ifequal content.images|length 15 %}
+                                <span class="more"><a href="?public&sub={{subsection}}&{{subsection}}={{title}}">{% trans "(view more...)" %}</a></span>
+                            {% endifequal %}
+                        </div>
+                        {% if user == request.user and content.message %}
+                        <p>
+                            {{content.message|safe}}
+                        </p>
                         {% endif %}
-                    </p>
+                        {% image_list request content.images 0 %} {% comment %}0 is for False (no pagination){% endcomment %}
+                    </div>
                     {% endif %}
-
-                    {% for album in smart_albums %}
-                        {% for item in album %}
-                            {% for title, content in item.items %}
-                                {% if content.images %}
-                                <div class="album-part">
-                                    <h4>{{title}}</h4>
-                                    {% ifequal content.images|length 16 %}
-                                        <span><a href="?public&sub={{subsection}}&{{subsection}}={{title}}">{% trans "(view more...)" %}</a></span>
-                                    {% endifequal %}
-                                    {% if user == request.user and content.message %}
-                                    <p>
-                                        {{content.message|safe}}
-                                    </p>
-                                    {% endif %}
-                                    <div class="fix"></div>
-                                    {% image_list request content.images 0 %} {% comment %}0 is for False (no pagination){% endcomment %}
-                                    <div class="fix"></div>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                    {% empty %}
-                        {% blocktrans %}No images.{% endblocktrans %}
-                    {% endfor %}
-                {% else %}
-                    {% if subtitle %}
-                        <h4 class="inline">{{subtitle}}</h4> 
-                        {% if backlink %}
-                            <span><a href="{{backlink}}">{% trans "(go back)" %}</a></span>
-                        {% endif %}
-                    {% endif %}
-                    {% if subsection == 'acquired' %}
-                    <p>
-                        {% blocktrans %}These images are ordered so that the most recently acquired appear first. Please note: images with no acquisition dates will appear last, and in no particular order.{% endblocktrans %}
-                        {% if request.user == user %}
-                            <strong>{% blocktrans %}Please fill in the missing dates on all your images!{% endblocktrans %}</strong>
-                        {% endif %}
-                    </p>
-                    {% endif %}
-                    {% image_list request image_list %}
+                {% endfor %}
+            {% endfor %}
+        {% empty %}
+            {% blocktrans %}No images.{% endblocktrans %}
+        {% endfor %}
+    {% else %}
+        {% if subtitle %}
+            <div class="well">
+                <strong>{{subtitle}}</strong> 
+                {% if backlink %}
+                    <span class="back"><a href="{{backlink}}">{% trans "(go back)" %}</a></span>
                 {% endif %}
             </div>
-        </div> <!-- container -->
-    </div> <!-- tabbed-box -->
-
-    {% if request.user == user %}
-    <noscript>
-        <div class="tools-box clear">
-            <h2>{% trans "Tools" %}</h2>
-            <ul>
-                <li>
-                    <a href="{% url profile_edit_basic %}">
-                        <img src="/static/icons/iconic/orange/edit_profile.png" alt="{% trans "Edit profile" %}"/>
-                    </a>
-                    <a href="{% url profile_edit_basic %}">
-                        {% trans "Edit profile" %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url auth_logout %}">
-                        <img src="/static/icons/iconic/orange/logout.png" alt="{% trans "Logout" %}"/>
-                    </a>
-                    <a href="{% url auth_logout %}">
-                        {% trans "Logout" %}
-                    </a>
-                </li>
-            </ul>
+        {% endif %}
+        {% if subsection == 'acquired' %}
+        <div class="well">
+            {% blocktrans %}These images are ordered so that the most recently acquired appear first. Please note: images with no acquisition dates will appear last, and in no particular order.{% endblocktrans %}
+            {% if request.user == user %}
+                <strong>{% blocktrans %}Please fill in the missing dates on all your images!{% endblocktrans %}</strong>
+            {% endif %}
         </div>
-    </noscript>
+        {% endif %}
+        {% image_list request image_list %}
     {% endif %}
+</div>
+
+{% if request.user == user %}
+<noscript>
+<div class="tools-box clear">
+    <h2>{% trans "Tools" %}</h2>
+    <ul>
+        <li>
+            <a href="{% url profile_edit_basic %}">
+                <img src="/static/icons/iconic/orange/edit_profile.png" alt="{% trans "Edit profile" %}"/>
+            </a>
+            <a href="{% url profile_edit_basic %}">
+                {% trans "Edit profile" %}
+            </a>
+        </li>
+        <li>
+            <a href="{% url auth_logout %}">
+                <img src="/static/icons/iconic/orange/logout.png" alt="{% trans "Logout" %}"/>
+            </a>
+            <a href="{% url auth_logout %}">
+                {% trans "Logout" %}
+            </a>
+        </li>
+    </ul>
+</div>
+</noscript>
+{% endif %}
 </div> <!-- profile -->
 {% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript">
-$(document).ready(function() {
-    common.init(
-        '{{user.username}}',
-        {
-            follow_action: {
-                dialog: {
-                    title : "{% blocktrans with image.user.username as username %}Follow {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}",
-                    button: "{% trans "Yes, follow!" %}"
-                },
-                stop_following: "{% trans "Stop following" %}"
-            },
-            unfollow_action: {
-                dialog: {
-                    title : "{% blocktrans with image.user.username as username %}Stop following {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}",
-                    button: "{% trans "Yes, stop following!" %}"
-                },
-                follow: "{% trans "Follow" %}"
-            },
-            message_action: {
-                dialog: {
-                    title : "{% blocktrans with image.user.username as username %}Send {{username}} a message{% endblocktrans %}",
-                    body  : "",
-                    button: "{% trans "Send" %} &rarr;"
-                },
-                form_html: '{% autoescape off %}{{private_message_form.as_p|append_slash}}{% endautoescape %}',
-                csrf_token: '{{csrf_token}}',
-                url      : "{% url send_private_message %}"
-            }
-        });
-});
-</script>
+    {% include 'user/profile-js.html' %}
 {% endblock %}

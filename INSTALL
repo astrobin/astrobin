@@ -89,7 +89,8 @@ ln -s ./venv/bin/pip vpip
     django-pagination \
     lxml \
     django-uni-form \
-    Markdown
+    Markdown \
+    django-bootstrap-toolkit
 
 Install django-hitcount from sources:
 https://github.com/thornomad/django-hitcount/

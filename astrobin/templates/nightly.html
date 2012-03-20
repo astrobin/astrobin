@@ -3,50 +3,44 @@
 {% load tags %}
 
 {% block content %}
-    <div class="full-box nightly clear">
-        <div class="container">
-            <h1>
-                {% blocktrans %}Images acquired night after night{% endblocktrans %}
-            </h1>
-            <p class="help">
-                {% blocktrans %}On this page you can see images that were actually taken each night, and not merely uploaded on a particular date.{% endblocktrans %}
-            </p>
-            <h2>{{current_month_label|date:"F Y"}}</h2>
-            {% for day in daily %}
-                {% for title, images in day.items %}
-                    {% if images %}
-                    <div class="album-part">
-                        <h4>{{title}}</h4>
-                        <div class="fix"></div>
-                        {% image_list request images 0 %}
-                        <div class="fix"></div>
-                    </div>
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-            {% ifequal total 0 %}
-                <p>
-                    {% blocktrans %}No image acquired in the selected month.{% endblocktrans %}
-                </p>
-            {% endifequal %}
-            <div class="pagination">
-                <div class="pager">
-                    {% if month_offset > 0 %}
-                    <span class="page">
-                        <a href="{% query_string "month_offset='0'" "" %}#page_anchor">&laquo; {% trans "current month" %}</a>
-                    </span>
-                    |
-                    <span class="page">
-                        <a href="{% query_string "month_offset=previous_month" "" %}#page_anchor">&laquo; {{previous_month_label|date:"F Y"}}</a>
-                    </span>
-                    |
-                    {% endif %}
-                    <span class="page">
-                        <a href="{% query_string "month_offset=next_month" "" %}#page_anchor">{{next_month_label|date:"F Y"}} &raquo;</a>
-                    </span>
+    <h1>
+        {% blocktrans %}Images acquired night after night{% endblocktrans %}
+    </h1>
+    
+    <div class="well">
+        {% blocktrans %}On this page you can see images that were actually taken each night, and not merely uploaded on a particular date.{% endblocktrans %}
+    </div>
+    
+    <h2>{{current_month_label|date:"F Y"}}</h2>
+    {% for day in daily %}
+        {% for title, images in day.items %}
+            {% if images %}
+                <div class="well">
+                    <h4>{{title}}</h4>
                 </div>
-            </div>
-        </div> <!-- container -->
+                {% image_list request images 0 %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    {% ifequal total 0 %}
+        <p>
+            {% blocktrans %}No image acquired in the selected month.{% endblocktrans %}
+        </p>
+    {% endifequal %}
+    <div class="pagination pagination-centered">
+        <ul>
+            {% if month_offset > 0 %}
+            <li>
+                <a href="{% query_string "month_offset='0'" "" %}#page_anchor">&laquo; {% trans "current month" %}</a>
+            </li>
+            <li>
+                <a href="{% query_string "month_offset=previous_month" "" %}#page_anchor">&laquo; {{previous_month_label|date:"F Y"}}</a>
+            </li>
+            {% endif %}
+            <li>
+                <a href="{% query_string "month_offset=next_month" "" %}#page_anchor">{{next_month_label|date:"F Y"}} &raquo;</a>
+            </li>
+        </ul>
     </div>
 {% endblock %}
 

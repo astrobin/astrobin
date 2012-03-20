@@ -3,677 +3,770 @@
 {% load tags %}
 {% load hitcount_tags %}
 {% load markup %}
+{% load bootstrap_toolkit %}
 
 {% block extra_gaq_push %}
     {% if image.is_wip %}
-          _gaq.push(['_setCustomVar', 3, 'Staging Image', 'Yes']);
+        _gaq.push(['_setCustomVar', 3, 'Staging Image', 'Yes']);
     {% endif %}
 {% endblock %}
 
 {% block title %}AstroBin - {{image.title}} ({{image.user}}){% endblock %}
 {% block content %}
     {% if 'plate_solving_started' in request.GET %}
-    <div class="context_message">
-        <img src="/static/icons/iconic/black/info_8x16.png" alt="{% trans "Info" %}" />
+    <div class="alert alert-info">
+        <a class="close" data-dismiss="alert">&times;</a>
         <p>{% blocktrans %}Plate-solving has started in the background. It might take a while, so please don't request it again! You will be notified when the job has completed. Thanks!{% endblocktrans %}</p>
     </div>
     {% endif %}
 
-    <a name="related_anchor"></a>
     {% ifequal request.user image.user %}
     {% if image.is_wip %}
-    <p class="info">
+    <div class="alert alert-info">
+        <p>
         {% url image_promote image.id as promote_url %}
         {% url me as profile_url %}
         {% blocktrans %}This image is a <strong>work in progress</strong> from your <a href="{{profile_url}}?staging">Staging Area</a>. This means nobody can see it unless you give them one of the links you can find in the <em>Share</em> menu below. Use that link to post this image to Internet forums and get feedback on it. When you are satisfied, perhaps after uploading some revisions, <a href="{{promote_url}}">promote it</a> to the <a href="{{profile_url}}">Public Area</a>.{% endblocktrans %}
-    </p>
+        </p>
+    </div>
     {% endif %}
     {% endifequal %}
 
-    <div id="image-detail">
-        <div id="main-content">
-            <ul class="bar">
-                <li id="menu">
-                    <ul class="topnav">
-                        <li id="actions" class="first">
-                            <span class="text"><a href="#">{% trans "Actions" %}</a></span>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                            <div class="sub">
-                                <ul class="subnav">
-                                {% if request.user == image.user or request.user.is_superuser %}
-                                    <li class="first bg-icon icon-edit">
-                                        <span class="text"><a href="{% url image_edit_basic image.id %}">{% trans "Edit basic information" %}</a></span>
-                                    </li>
-                                    <li class="bg-icon icon-edit-gear">
-                                        <span class="text"><a href="{% url image_edit_gear image.id %}">{% trans "Edit gear used" %}</a></span>
-                                    </li>
-                                    <li class="bg-icon icon-edit-acquisition">
-                                        <span class="text"><a href="{% url image_edit_acquisition image.id %}">{% trans "Edit acquisition details" %}</a></span>
-                                    </li>
-                                    {% if not is_final %}
-                                    <li class="bg-icon icon-make-final">
-                                        <span class="text">
-                                            {% if is_revision %}
-                                            <a href="{% url image_edit_revision_make_final revision_image.id %}">
-                                            {% else %}
-                                            <a href="{% url image_edit_make_final image.id %}">
-                                            {% endif %}
-                                                {% trans "Mark this revision as final" %}
-                                            </a>
-                                        </span>
-                                    </li>
-                                    {% endif %}
-                                    <li class="bg-icon icon-change-license">
-                                        <span class="text"><a href="{% url image_edit_license image.id %}">{% trans "Change license" %}</a></span>
-                                    </li>
-                                    <li class="bg-icon icon-upload">
-                                        <span class="text"><a class="upload-revision" href="#">{% trans "Upload new revision" %}</a></span>
-                                    </li>
-                                    {% if not image.is_solved and not is_revision %}
-                                    <li class="bg-icon icon-plate-solve">
-                                        <span class="text"><a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "plate_solving_started" %}">{% trans "Plate-solve" %}</a></span>
-                                    </li>
-                                    {% else %}
-                                    <li class="bg-icon icon-plate-solve">
-                                        <span class="text"><a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "plate_solving_started" %}">{% trans "Plate-solve again" %}</a></span>
-                                    </li>
-                                    {% endif %}
-                                    {% if image.is_wip %}
-                                    <li class="bg-icon icon-promote">
-                                        <span class="text"><a href="{% url image_promote image.id %}{% query_string "" "plate_solving_started" %}">{% trans "Promote to public area" %}</a></span>
-                                    </li>
-                                    {% else %}
-                                    <li class="bg-icon icon-demote">
-                                        <span class="text"><a href="{% url image_demote image.id %}{% query_string "" "plate_solving_started" %}">{% trans "Move to staging area" %}</a></span>
-                                    </li>
-                                    {% endif %}
-                                    <li class="bg-icon icon-delete">
-                                        <span class="text">
-                                        {% if not is_revision %}
-                                            {% if revisions %}
-                                            <a class="delete-original danger" href="{% url image_delete_original image.id %}">{% trans "Delete original image" %}</a>
-                                            {% else %}
-                                            <a class="delete-everything danger" href="{% url image_delete image.id %}">{% trans "Delete everything" %}</a>
-                                            {% endif %}
-                                        {% else %}
-                                            <a class="delete-revision danger" href="{% url image_delete_revision image.id %}">{% trans "Delete this revision" %}</a>
-                                        {% endif %}
-                                        </span>
-                                    </li>
-                                    <li class="separator"></li>
-                                {% endif %}
-                                    <li class="bg-icon icon-quote">
-                                        <span class="text"><a href="{% url bring_to_attention image.id %}">{% trans "Bring to a user's attention" %}</a></span>
-                                    </li>
-                                {% if request.user != image.user %}
-                                    <li class="bg-icon icon-info">
-                                        <span class="text"><a href="{% url image_request_additional_information image.id %}">{% trans "Request additional information" %}</a></span>
-                                    </li>
-                                    <li class="last bg-icon icon-file">
-                                        <span class="text"><a href="{% url image_request_fits image.id %}">{% trans "Request TIFF/FITS" %}</a></span>
-                                    </li>
-                                {% endif %}
-                                {% if is_ready %}
-                                    <li class="separator"></li>
-                                    <li class="last bg-icon icon-book">
-                                        <span class="text"><a class="messier-nomination" href="{% url messier_nomination image.id %}">{% trans "Nominate for the Messier Marathon" %}</a></span>
-                                    </li>
-                                {% endif %}
-                                </ul>
-                            </div>
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {% trans "Actions" %}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if request.user == image.user or request.user.is_superuser %}
+                    <li>
+                        <a href="{% url image_edit_basic image.id %}">
+                            <i class="icon-edit"></i>
+                            {% trans "Edit basic information" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url image_edit_gear image.id %}">
+                            <i class="icon-edit-gear"></i>
+                            {% trans "Edit gear used" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url image_edit_acquisition image.id %}">
+                            <i class="icon-edit-acquisition"></i>
+                            {% trans "Edit acquisition details" %}
+                        </a>
+                    </li>
+                    {% if not is_final %}
+                    <li>
+                        {% if is_revision %}
+                        <a href="{% url image_edit_revision_make_final revision_image.id %}">
+                        {% else %}
+                        <a href="{% url image_edit_make_final image.id %}">
+                        {% endif %}
+                            <i class="icon-make-final"></i>
+                            {% trans "Mark this revision as final" %}
+                        </a>
+                    </li>
+                    {% endif %} <!-- not is_final -->
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{% url image_edit_license image.id %}">
+                            <i class="icon-change-license"></i>
+                            {% trans "Change license" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="upload-revision" href="#">
+                            <i class="icon-upload"></i>
+                            {% trans "Upload new revision" %}
+                        </a>
+                    </li>
+                    {% if not image.is_solved and not is_revision %}
+                    <li>
+                        <a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "plate_solving_started" %}">
+                            <i class="icon-plate-solve"></i>
+                            {% trans "Plate-solve" %}
+                        </a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "plate_solving_started" %}">
+                            <i class="icon-plate-solve"></i>
+                            {% trans "Plate-solve again" %}
+                        </a>
+                    </li>
+                    {% endif %} <!-- not image.is_solved and not is_revision -->
+                    {% if image.is_wip %}
+                    <li>
+                        <a href="{% url image_promote image.id %}{% query_string "" "plate_solving_started" %}">
+                            <i class="icon-promote"></i>
+                            {% trans "Promote to public area" %}
+                        </a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url image_demote image.id %}{% query_string "" "plate_solving_started" %}">
+                            <i class="icon-demote"></i>
+                            {% trans "Move to staging area" %}
+                        </a>
+                    </li>
+                    {% endif %} <!-- image.is_wip -->
+                    <li class="divider"></li>
+                    <li>
+                    {% if not is_revision %}
+                        {% if revisions %}
+                        <a class="delete-original danger" href="{% url image_delete_original image.id %}">
+                            <i class="icon-delete"></i>
+                            {% trans "Delete original image" %}
+                        </a>
+                        {% else %}
+                        <a class="delete-everything danger" href="{% url image_delete image.id %}">
+                            <i class="icon-delete"></i>
+                            {% trans "Delete everything" %}
+                        </a>
+                        {% endif %} <!-- revisions -->
+                    {% else %}
+                        <a class="delete-revision danger" href="{% url image_delete_revision image.id %}">
+                            <i class="icon-delete"></i>
+                            {% trans "Delete this revision" %}
+                        </a>
+                    {% endif %} <!-- not is_revision -->
+                    </li>
+                    {% endif %} <!-- owner or superuser -->
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{% url bring_to_attention image.id %}">
+                            <i class="icon-quote"></i>
+                            {% trans "Bring to a user's attention" %}
+                        </a>
+                    </li>
+                    {% if request.user != image.user %}
+                    <li>
+                        <a href="{% url image_request_additional_information image.id %}">
+                            <i class="icon-info"></i>
+                            {% trans "Request additional information" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url image_request_fits image.id %}">
+                            <i class="icon-file"></i>
+                            {% trans "Request TIFF/FITS" %}
+                        </a>
+                    </li>
+                    {% endif %} <!-- not owner -->
+                    {% if is_ready %}
+                    <li class="divider"></li>
+                    <li>
+                        <a class="messier-nomination" href="{% url messier_nomination image.id %}">
+                            <i class="icon-book"></i>
+                            {% trans "Nominate for the Messier Marathon" %}
+                        </a>
+                    </li>
+                    {% endif %} <!-- is_ready -->
+                 </ul>
+             </li> <!-- actions -->
+             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {% trans "View" %}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if not inverted and not solved %}
+                        <li>
+                            <a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                                <i class="icon-inverted"></i>
+                                {% trans "Inverted monochrome" %}
+                            </a>
                         </li>
-                        <li id="view">
-                            <span class="text"><a href="#">{% trans "View" %}</a></span>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                            <div class="sub">
-                                <ul class="subnav">
-                                    {% if not inverted and not solved %}
-                                    <li class="first bg-icon icon-inverted">
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "plate_solving_started" %}">{% trans "Inverted monochrome" %}</a></span>
-                                    </li>
-                                    {% if image.is_solved and not solved %}
-                                    <li class="last bg-icon icon-solved">
-                                        {% if is_revision %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">{% trans "Annotated (original version)" %}</a></span>
-                                        {% else %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "plate_solving_started" %}">{% trans "Annotated" %}</a></span>
-                                        {% endif %}
-                                    </li>
-                                    {% endif %}
-                                    {% endif %}
+                        {% if image.is_solved and not solved %}
+                        <li>
+                            {% if is_revision %}
+                            <a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">
+                                <i class="icon-solved"></i>
+                                {% trans "Annotated (original version)" %}
+                            </a>
+                            {% else %} <!-- is_revision -->
+                            <a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "plate_solving_started" %}">
+                                <i class="icon-solved"></i>
+                                {% trans "Annotated" %}
+                            </a>
+                            {% endif %} <!-- is_revision -->
+                        </li>
+                        {% endif %} <!-- is_solved and not showing solved -->
+                    {% endif %} <!-- not showing inverted and not showing solved -->
 
-                                    {% if inverted %}
-                                    <li class="first bg-icon icon-normal">
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='none'" "plate_solving_started" %}">{% trans "Normal" %}</a></span>
-                                    </li>
-                                    {% if image.is_solved and not solved %}
-                                    <li class="last bg-icon icon-solved">
-                                        {% if is_revision %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">{% trans "Annotatad (original version)" %}</a></span>
-                                        {% else %}
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "plate_solving_started" %}">{% trans "Annotated" %}</a></span>
+                    {% if inverted %}
+                        <li>
+                            <a href="{{image.get_absolute_url}}{% query_string "mod='none'" "plate_solving_started" %}">
+                                <i class="icon-normal"></i>
+                                {% trans "Normal" %}
+                            </a>
+                        </li>
+                        {% if image.is_solved and not solved %}
+                        <li>
+                            {% if is_revision %}
+                            <a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">
+                                <i class="icon-solved"></i>
+                                {% trans "Annotated (original version)" %}
+                            </a>
+                            {% else %} <!-- is_revision -->
+                            <a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "plate_solving_started" %}">
+                                <i class="icon-solved"></i>
+                                {% trans "Annotated" %}
+                            </a>
+                            {% endif %} <!-- is_revision -->
+                        </li>
+                        {% endif %} <!-- is_solved and not showing solved -->
+                    {% endif %} <!-- showing inverted -->
+
+                    {% if solved %}
+                        <li>
+                            <a href="{{image.get_absolute_url}}{% query_string "mod='none'" "plate_solving_started" %}">
+                                <i class="icon-normal"></i>
+                                {% trans "Normal" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                                <i class="icon-inverted"></i>
+                                {% trans "Inverted monochrome" %}
+                            </a>
+                        </li>
+                    {% endif %} <!-- showing solved -->
+                </ul>
+            </li> <!-- view -->
+
+            {% if request.user != image.user %}
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {% trans "User" %}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url user_page image.user %}">
+                            <i class="icon-profile"></i>
+                            {% trans "View profile" %}
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
+                           href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
+                            {% if follows %}
+                                <i class="icon-unfollow"></i>
+                                {% trans "Stop following" %}
+                            {% else %}
+                                <i class="icon-follow"></i>
+                                {% trans "Follow" %}
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% endif %} <!-- authenticated -->
+                    <li>
+                        <a class="send-private-message" href="{% url messages_compose_to image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">
+                            <i class="icon-message"></i>
+                            {% trans "Send private message" %}
+                        </a>
+                    </li>
+                </ul>
+            </li> <!-- user -->
+            {% endif %} <!-- not owner -->
+
+            <li>
+                <a data-toggle="modal" href="#share-modal">{% trans "Share" %}</a>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+
+    <div class="row"> <!-- main pane -->
+        <div class="span8">
+            <div class="row"> <!-- the image's row -->
+                <div class="span8">
+                    <div class="main-image">
+                        <div class="main-image-inner">
+                            {% if is_ready %}
+                                {% if is_revision %}
+                                    {% with revision_image as image %}
+                                        {% if inverted %}
+                                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id, mod='inverted'" "plate_solving_started" %}">
+                                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                                        </a>
                                         {% endif %}
-                                    </li>
-                                    {% endif %}
+                                        {% if not inverted and not solved %}
+                                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id" "mod, plate_solving_started" %}">
+                                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                        </a>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% else %}
+                                    {% if inverted %}
+                                        <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                        </a>
+                                        {% if image.is_solved and image.plot_is_overlay %}
+                                            <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                                                <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" />
+                                            </a>
+                                        {% endif %}
                                     {% endif %}
 
                                     {% if solved %}
-                                    <li class="first bg-icon icon-normal">
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='none'" "plate_solving_started" %}">{% trans "Normal" %}</a></span>
-                                    </li>
-                                    <li class="first bg-icon icon-inverted">
-                                        <span class="text"><a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "plate_solving_started" %}">{% trans "Inverted monochrome" %}</a></span>
-                                    </li>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                        </li>
-                        {% if request.user != image.user %}
-                        <li id="user">
-                            <span class="text"><a href="#">{% trans "User" %}</a></span>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                            <div class="sub">
-                                <ul class="subnav">
-                                    <li class="first bg-icon icon-profile">
-                                        <span class="text"><a href="{{image.user.get_absolute_url}}">{% trans "View profile" %}</a></span>
-                                    </li>
-                                    {% if user.is_authenticated %}
-                                    <li class="bg-icon {% if follows %}icon-unfollow{% else %}icon-follow{% endif %}">
-                                        <span class="text">
-                                            <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
-                                               href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
-                                                {% if follows %}
-                                                    {% trans "Stop following" %}
-                                                {% else %}
-                                                    {% trans "Follow" %}
-                                                {% endif %}
+                                        {% if image.plot_is_overlay %}
+                                            <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                             </a>
-                                        </span>
-                                    </li>
+                                            <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                                <img class="fixed-plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
+                                            </a>
+                                        {% else %}
+                                            <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" />
+                                            </a>
+                                        {% endif %}
                                     {% endif %}
-                                    <li class="last bg-icon icon-message">
-                                        <span class="text"><a class="send-private-message" href="{% url messages_compose_to image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">{% trans "Send private message" %}</a></span>
-                                    </li>
-                                </ul>
+
+                                    {% if not inverted and not solved %}
+                                        <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                            <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                        </a>
+                                        {% if image.is_solved and image.plot_is_overlay %}
+                                            <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
+                                                <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" />
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% else %} <!-- not ready -->
+                            <div class="alert alert-warning">
+                                {% blocktrans %}This image was just uploaded and is still processing. Please try to refresh this page in a few seconds.{% endblocktrans %}
                             </div>
-                        </li>
-                        {% endif %}
-                        <li id="share" class="last">
-                            <span class="text"><a href="#">{% trans "Share" %}</a></span>
-                            <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                            <div class="sub">
-                                <div class="social">
-                                    <h2>{% trans "Share on social networks" %}</h2>
-                                    <span class='st_facebook' displayText='Facebook'></span>
-                                    <span class='st_twitter' displayText='Tweet'></span>
-                                </div>
-                                <div class="copy-box">
-                                    <h2>{% trans "Get the code" %}</h2>
-                                    <form>
-                                        <p>
-                                            <label for="sharing_mode">{% trans "Sharing mode" %}:</label>
-                                            <select name="sharing_mode">
-                                                <option selected="selected" value="0">{% trans "Simple link" %}</option>
-                                                <option value="1">{% trans "Forums" %}</option>
-                                                <option value="2">HTML</option>
-                                            </select>
-                                        </p>
-
-                                        <p>
-                                            <label for="sharing_image_size">{% trans "Image size" %}:</label>
-                                            <select name="sharing_image_size">
-                                                <option selected="selected" value="0">{% trans "Regular" %}</option>
-                                                <option value="1">{% trans "Full" %}</option>
-                                            </select>
-                                        </p>
-
-                                        <p>
-                                            <label for="sharing_image_mode">{% trans "Image mode" %}:</label>
-                                            <select name="sharing_image_mode">
-                                                <option selected="selected" value="0">{% trans "Normal" %}</option>
-                                                <option value="1">{% trans "Inverted monochrome" %}</option>
-                                            </select>
-                                        </p>
-
-                                        <p>
-                                            <label for="sharing_thumbnail">{% trans "Thumbnail" %}:</label>
-                                            <select name="sharing_thumbnail" disabled="disabled">
-                                                <option selected="selected" value="0">{% trans "Yes" %}</option>
-                                                <option value="1">{% trans "No" %}</option>
-                                            </select>
-                                        </p>
-
-                                        <p>
-                                            <label for="sharing_code">{% trans "Copy this" %}:</label>
-                                            <textarea name="sharing_code" rows=6>{% if is_revision %}http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}{% else %}http://astrob.in/{{image.id}}/{% endif %}</textarea>
-                                            <div id="clip-container" class="button-container">
-                                                <div class="clip-status">{% trans "Copy" %}</div>
-                                                <div id="clip" class="clip">
-                                                    <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
-                                                </div>
-                                            </div>
-                                        </p>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="favorite-container">
-                        <a href="#" class="favorite">
-                            {% if already_favorited %}
-                                <img src="/static/icons/iconic/red/heart_fill_12x11.png" alt="{% trans "Favorited" %}"/>
-                            {% else %}
-                                <img src="/static/icons/iconic/white/heart_fill_12x11.png" alt="{% trans "Favorite" %}"/>
                             {% endif %}
-                            <span class="favorite-hint">
-                            {% if already_favorited %}
-                                {% trans "Already favorited" %}
-                            {% else %}
-                                {% trans "Mark as favorite" %}
-                            {% endif %}
-                            </span>
-                        </a>
+                        </div> <!-- main-image-inner -->
+                    </div> <!-- main-image -->
+                </div> <!-- span8 -->
+            </div> <!-- the image's row -->
+
+            <div class="image-title">
+                <div class="row">
+                    <div class="span8">
+                        <h2 class="image-title">{{image.title|escape|default:_("(no title)")}}</h2>
                     </div>
-                </li>
-                {% if image.allow_rating %}
-                <li class="rating"><div id="rating"></div></li>
-                {% if current_rating > 0 %}
-                <li class="rating-current"><div>{% trans "Rating" %}: <span class="rating">{{current_rating}}</span> x <span class="number">{{votes_number}}</span></div></li>
-                {% endif %}
-                <li class="rating-hint"><div id="rating-hint"></div></li>
-                {% endif %}
-            </ul>
-            <div id="main-image">
-                <div id="container">
-                {% if is_ready %}
-                    {% if is_revision %}
-                        {% with revision_image as image %}
-                            {% if inverted %}
-                            <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id, mod='inverted'" "plate_solving_started" %}">
-                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
-                            </a>
-                            {% endif %}
-                            {% if not inverted and not solved %}
-                            <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id" "mod, plate_solving_started" %}">
-                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
-                            </a>
-                            {% endif %}
-                        {% endwith %}
-                    {% else %}
-                        {% if inverted %}
-                            <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
-                            </a>
-                            {% if image.is_solved and image.plot_is_overlay %}
-                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                    <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
-                                </a>
-                            {% endif %}
-                        {% endif %}
+                </div>
 
-                        {% if solved %}
-                            {% if image.plot_is_overlay %}
-                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                    <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
-                                </a>
-                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                    <img class="fixed-plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
-                                </a>
-                            {% else %}
-                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                    <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
-                                </a>
-                            {% endif %}
-                        {% endif %}
-
-                        {% if not inverted and not solved %}
-                            <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
-                            </a>
-                            {% if image.is_solved and image.plot_is_overlay %}
-                                <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                    <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
-                                </a>
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
-                {% else %} <!-- not ready -->
-                <p class="info">
-                    {% blocktrans %}This image was just uploaded and is still processing. Please try to refresh this page in a few seconds.{% endblocktrans %}
-                </p>
+                {% if image.link %}
+                <div class="row">
+                    <div class="span8">
+                        <strong>{% trans "Link" %}</strong>: <a href="{{image.link}}" target="_blank">{{image.link}}</a>
+                    </div>
+                </div>
                 {% endif %}
+
+                {% if image.link_to_fits %}
+                <div class="row">
+                    <div class="span8">
+                        <strong>{% trans "Link to TIFF/FITS" %}</strong>: <a href="{{image.link_to_fits}}" target="_blank">{{image.link_to_fits}}</a>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="span8">
+                        {% trans "Contains" %}:
+                        {% if solar_system_main_subject >= 0 %}
+                            <a href="/search/?q=&ssms={{solar_system_main_subject_id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
+                        {% endif %}
+                        {% for s in subjects_short %}
+                            <a href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                        {% if subjects_all|length > 10 %}
+                            <span id="more-subjects">
+                                <span class="hidden">
+                                    ,&nbsp;
+                                    {% for s in subjects_reminder %}
+                                        <a href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                                </span>
+                                <span class="more">
+                                    &#8230;&nbsp; 
+                                    <a href="#">
+                                        <em>
+                                           {% blocktrans with subjects_all|length|add:subjects_limit as number %}and {{number}} more (click to view).{% endblocktrans %}
+                                        </em>
+                                    </a>
+                                </span>
+                                <span class="collapse">
+                                    <a href="#">
+                                        &nbsp;
+                                        <em>
+                                           {% blocktrans %}(hide these subjects){% endblocktrans %}
+                                        </em>
+                                    </a>
+                                </span>
+                            </span>
+                        {% endif %}
+                    </div> <!-- span8 -->
                 </div>
             </div>
-            <div class="main-image-data">
-                <table class="title">
-                    <tr>
-                        <td class="data">
-                            <h2>{{image.title|escape|default:_("(no title)")}}</h2>
-                            <span>
-                                ({% trans "uploaded" %}: {{uploaded_on|ago}}
-                                {% url user_page image.user.username as the_url %}
-                                {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %}
-                                {% get_hit_count for image as hit_count %}
-                                {% if hit_count != '0' %}, {% blocktrans count counter=hit_count|add:"0" %}viewed one time{% plural %}viewed {{counter}} times{% endblocktrans %}{% endif %})
-                            </span>
 
-                            {% if image.link %}
-                                <p class="link">
-                                    <strong>{% trans "Link" %}</strong>: <a href="{{image.link}}" target="_blank">{{image.link}}</a>
-                                </p>
+            {% if revisions or is_revision %}
+            <div class="row">
+                <div class="span8">
+                    <div class="subtle-container">
+                        <h4>
+                            {% if is_revision %}
+                                {% trans "This image is a revision. Here are its other versions" %}:
+                            {% else %}
+                                {% trans "This image has some other revisions" %}:
                             {% endif %}
-                            {% if image.link_to_fits %}
-                                <p class="link">
-                                    <strong>{% trans "Link to TIFF/FITS" %}</strong>: <a href="{{image.link_to_fits}}" target="_blank">{{image.link_to_fits}}</a>
-                                </p>
+                        </h4>
+                        <ul class="thumbnails astrobin-thumbnails">
+                            {% if is_revision %}
+                            <li class="thumbnail astrobin-thumbnail">
+                                <a href="{% url image_detail image.id %}{% query_string "r=0" "plate_solving_started, mod" %}">
+                                    <img {% if image.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+                                </a>
+                            </li>
                             {% endif %}
-                        </td>
-                        <td class="license">
+                            {% for i in revisions %}
+                            <li class="thumbnail astrobin-thumbnail">
+                                <a href="{% url image_detail i.image.id %}{% query_string "r=i.id" "plate_solving_started, mod" %}">
+                                    <img {% if i.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul> <!-- thumbnails -->
+                    </div> <!-- subtle-container -->
+                </div> <!-- span8 -->
+            </div> <!-- row -->
+            {% endif %}
+
+            <div class="row image-detail">
+                <div class="span8">
+                    <div class="subtle-container image-detail-inner">
+                        <ul class="nav nav-pills">
+                            <li class="active"><a href="#image-pill-card" data-toggle="pill">{% trans "Technical card" %}</a></li>
+                            <li><a href="#image-pill-views" data-toggle="pill">{% trans "Views" %}</a></li>
+                        </ul>
+                        <div class="pill-content">
+                            <div class="pill-pane fade in active" id="image-pill-card">
+                                <div class="gear">
+                                    <div class="gear-inner">
+                                        {% for i in gear_list %}
+                                            {% if i.1 %}
+                                                <p>
+                                                  <strong>{% trans i.0 %}:</strong>
+                                                  {% for g in i.1 %}
+                                                  {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}<a href="/search/?q=&as_values_{{i.2}}={{g.id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>{% else %}<a href="/search/?q={{g.name|escape}}&type={{i.2}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>{% endif %}{% if not forloop.last %},&nbsp;{% endif %} {% endfor %}
+                                                </p>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if is_ready and not image.animated %}
+                                            <div class="image-histogram">
+                                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div> <!-- gear -->
+    
+                                <div class="acquisition">
+                                    <div class="acquisition-inner">
+                                        {% if image_type == 'deep_sky' %}
+                                            {% for data in deep_sky_data %}
+                                                {% if data.1 %}
+                                                    <p>
+                                                        <strong>{{data.0}}</strong>:
+                                                        {% if data.0 == dates_label %}
+                                                            {% for date in data.1 %}
+                                                                <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            {{data.1|linebreaksbr}}
+                                                        {% endif %}
+                                                    </p>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            {% if ssa.date %}
+                                                <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{ssa.date|date:"DATE_FORMAT"}}</a></p>
+                                            {% endif %}
+                                            {% if ssa.time %}
+                                                <p><strong>{% trans "Time" %}</strong>: {{ssa.time}}</p>
+                                            {% endif %}
+                                            {% if ssa.frames %}
+                                                <p><strong>{% trans "Frames" %}</strong>: {{ssa.frames}}</p>
+                                            {% endif %}
+                                            {% if ssa.fps %}
+                                                <p><strong>{% trans "FPS" %}</strong>: {{ssa.fps}}</p>
+                                            {% endif %}
+                                            {% if ssa.focal_length %}
+                                                <p><strong>{% trans "Focal length" %}</strong>: {{ssa.focal_length}}</p>
+                                            {% endif %}
+                                            {% if ssa.cmi %}
+                                                <p><strong>{% trans "CMI" %}</strong>: {{ssa.cmi}}</p>
+                                            {% endif %}
+                                            {% if ssa.cmii %}
+                                                <p><strong>{% trans "CMII" %}</strong>: {{ssa.cmii}}</p>
+                                            {% endif %}
+                                            {% if ssa.cmiii %}
+                                                <p><strong>{% trans "CMIII" %}</strong>: {{ssa.cmiii}}</p>
+                                            {% endif %}
+                                            {% if ssa.seeing %}
+                                                <p><strong>{% trans "Seeing" %}</strong>: {{ssa.seeing}}</p>
+                                            {% endif %}
+                                            {% if ssa.transparency %}
+                                                <p><strong>{% trans "Transparency" %}</strong>: {{ssa.transparency}}</p>
+                                            {% endif %}
+                                        {% endif %}
+        
+                                        {% if image.is_solved and image.ra_center_hms %}
+                                            <p><strong>{% trans "RA center" %}</strong>: {{image.ra_center_hms}}</p>
+                                            <p><strong>{% trans "DEC center" %}</strong>: {{image.dec_center_dms}}</p>
+                                            {% if image.pixscale != 0 %}
+                                                <p><strong>{% trans "Pixel scale" %}</strong>: {{image.pixscale|cut_decimals:"2"}} {% trans "arcsec/pixel" %}</p>
+                                            {% endif %}
+                                            <p><strong>{% trans "Orientation" %}</strong>: {{image.orientation|cut_decimals:"2"}} {% trans "degrees" %}</p>
+                                            <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
+                                            <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
+                                        {% endif %}
+                                    </div> <!-- acquisition-inner -->
+                                </div> <!-- acquisition -->
+                            </div> <!-- image-pill-card -->
+    
+                            <div class="pill-pane fade in" id="image-pill-views">
+                                <div class="plot" style="width:580px; height: 150px;"></div>
+                            </div>
+                        </div> <!-- pill-content -->
+                    </div> <!-- image-detail-inner -->
+                </div> <!-- span8 -->
+            </div> <!-- row image-detail -->
+                
+            {% if image.description %}
+            <div class="image-description row">
+                <div class="span8">
+                    <h3>{% trans "Description" %}</h3>
+                    {{image.description|safe|linebreaks}}
+                </div>
+            </div>
+            {% endif %}
+            <div class="row comment-container">
+                <div class="span8">
+                    <div class="subtle-container">
+                        <h3>{% trans "Comments" %}</h3>
+                        {% if user.is_authenticated %}
+                        <p>
+                            {% blocktrans with user=image.user lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
+                        </p>
+                        <div class="top-level-form">
+                            <form class="form-horizontal" action="{% url image_comment_save %}" method="post">
+                                {{comment_form|as_bootstrap}}
+                                <input type="hidden" name="author" value="{{user.id}}" />
+                                <input type="hidden" name="image" value="{{image.id}}" />
+                                <input type="hidden" name="parent_id" value="" />
+                                <input type="hidden" name="level" value="0" />
+                                <div>
+                                    <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
+                                    <span class="help-inline">
+                                        <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+                                    </span>
+                                    <span class="loader">
+                                        <img src="/static/images/ajax-loader.gif" alt=""/> 
+                                    </span>
+                                </div>
+                            </form>
+                        </div> <!-- top-level-form -->
+                        {% else %}
+                            <p>
+                                {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
+                            </p>
+                        {% endif %}
+    
+                        {% if comments %}
+                            {% load mptt_tags %}
+                            {% recursetree comments %}
+                                <div style="margin-left: {{node.get_level|add:node.get_level}}em">
+                                    <div id="c{{node.id}}" class="comment">
+                                        <div class="meta">
+                                            <a class="author" href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
+                                        </div>
+                                        <div class="content{% if node.is_deleted %} deleted{% endif %}">
+                                            {% if node.is_deleted %}
+                                                <p>{% trans "(comment deleted)" %}</p>
+                                            {% else %}
+                                                {{node.comment|markdown|linebreaks}}
+                                            {% endif %}
+                                        </div>
+                                        <div class="links">
+                                            <a class="permalink" href="{% url image_detail image.id %}#c{{node.id}}">{% trans "Link" %}</a>
+                                            {% if user.is_authenticated %}
+                                                {% if user == node.author %}
+                                                    <a class="delete" href="#">
+                                                        {% if node.is_deleted %}
+                                                            {% trans "Undelete" %}
+                                                        {% else %}
+                                                            {% trans "Delete" %}
+                                                        {% endif %}
+                                                    </a>
+                                                    <a class="edit" href="#">{% trans "Edit" %}</a>
+                                                {% endif %}
+                                                <a class="reply" href="#">{% trans "Reply" %}</a>
+                                            {% endif %}
+                                        </div>
+                                        <form action="{% url image_comment_save %}" method="post">
+                                            {{comment_form.as_p}}
+                                            <input type="hidden" name="author" value="{{user.id}}" />
+                                            <input type="hidden" name="image" value="{{image.id}}" />
+                                            <input type="hidden" name="parent_id" value="{{node.id}}" />
+                                            <input type="hidden" name="level" value="{{node.get_level}}" />
+                                            <p>
+                                                <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
+                                                <input class="btn btn-mini cancel" type="reset" value="{% trans "Cancel" %}" />
+                                                <span class="formatting-help">
+                                                    <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+                                                </span>
+                                                <span class="loader">
+                                                    <img src="/static/images/ajax-loader.gif" alt=""/> 
+                                                </span>
+                                            </p>
+                                        </form>
+                                    </div>
+                                </div>
+                                {% if not node.is_leaf_node %}
+                                    {{children}}
+                                {% endif %}
+                            {% endrecursetree %}
+                        {% else %}
+                            <div class="no-comments-yet">
+                                {% blocktrans %}There are no comments yet.{% endblocktrans %}
+                            </div>
+                        {% endif %}
+                    </div> <!-- subtle-container -->
+                </div> <!-- span8 -->
+            </div> <!-- row  comments-->
+        </div> <!-- span8 -->
+        
+        <div class="span4"> <!-- right pane -->
+            <div class="subtle-container">
+                {% if image.allow_rating %}
+                    <div id="rating"></div>
+                {% endif %}
+                <div class="favorite-container">
+                    <a href="#" class="favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Already favorited" %}{% else %}{% trans "Mark as favorite" %}{% endif %}"0>
+                        {% if already_favorited %}
+                            <img src="/static/icons/iconic/red/heart_fill_24x21.png" alt="{% trans "Favorited" %}"/>
+                        {% else %}
+                            <img src="/static/icons/iconic/white/heart_fill_24x21.png" alt="{% trans "Favorite" %}"/>
+                        {% endif %}
+                    </a>
+                </div>
+            </div> <!-- subtle-container -->
+
+            <div class="subtle-container image-basic-data">
+                <table class="table">
+                    <tr>
+                        <td><img alt="{% trans "Author" %}" src="/static/icons/iconic/white/user_12x16.png"/></td>
+                        <td><a href="{% url user_page image.user %}">{{image.user}}</a></td>
+                    </tr>
+                    <tr>
+                        <td><img alt="{% trans "License" %}" src="/static/icons/iconic/white/key_stroke_16x16.png"/></td>
+                        <td>
                             <a target="_blank" href="http://creativecommons.org/licenses/">
-                                <img src="/static/icons/{{license_icon}}"
+                                <img class="license"
+                                     src="/static/icons/{{license_icon}}"
                                      alt="{% trans "License" %}: {{license_title}}"
-                                     title="{% trans "License" %}: {{license_title}}" />
+                                     title="{% trans "License" %}: {{license_title}}" />                    </div>
                             </a>
                         </td>
                     </tr>
+                    <tr>
+                        <td><img alt="{% trans "Date" %}" src="/static/icons/iconic/white/calendar_alt_stroke_16x16.png"/></td>
+                        <td>{{uploaded_on|ago}}</td>
+                    </tr>
+                    <tr>
+                        {% get_hit_count for image as hit_count %}
+                        <td><img alt="{% trans "Views" %}" src="/static/icons/iconic/white/image_16x16.png"/></td>
+                        <td>{{hit_count}}</td>
+                    </tr>
+                    <tr>
+                        <td><img alt="{% trans "Favorites" %}" src="/static/icons/iconic/white/heart_stroke_16x14.png"/></td>
+                        <td>{{times_favorited}}</td>
+                    </tr>
+                    <tr>
+                        <td><img alt="{% trans "Votes" %}" src="/static/icons/iconic/white/star_16x16.png"/></td>
+                        <td>{{votes_number}}</td>
+                    </tr>
                 </table>
-                <div class="hline"></div>
-                <p>
-                    {% trans "Contains" %}:
-                    {% if solar_system_main_subject >= 0 %}
-                        <a href="/search/?q=&ssms={{solar_system_main_subject_id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
-                    {% endif %}
-                    {% for s in subjects_short %}
-                        <a href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
-                    {% endfor %}
-                    {% if subjects_all|length > 10 %}
-                        <span id="more-subjects">
-                            <span class="hidden">
-                                ,&nbsp;
-                                {% for s in subjects_reminder %}
-                                    <a href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
-                                {% endfor %}
-                            </span>
-                            <span class="more">
-                                &#8230;&nbsp; 
-                                <a href="#">
-                                    <em>
-                                       {% blocktrans with subjects_all|length|add:subjects_limit as number %}and {{number}} more (click to view).{% endblocktrans %}
-                                    </em>
-                                </a>
-                            </span>
-                            <span class="collapse">
-                                <a href="#">
-                                    &nbsp;
-                                    <em>
-                                       {% blocktrans %}(hide these subjects){% endblocktrans %}
-                                    </em>
-                                </a>
-                            </span>
-                        </span>
-                    {% endif %}
-                </p>
             </div>
-            {% if revisions or is_revision %}
-            <div id="revisions">
-                <h3>
-                    {% if is_revision %}
-                        {% trans "This image is a revision. Here are its other versions" %}:
-                    {% else %}
-                        {% trans "This image has some other revisions" %}:
-                    {% endif %}
-                </h3>
-                <div class="image-strip clear">
-                    {% if is_revision %}
-                    <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
-                        <a href="{% url image_detail image.id %}{% query_string "r=0" "plate_solving_started, mod" %}">
-                            <img {% if image.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
-                        </a>
-                    </div>
-                    {% endif %}
-                    {% for i in revisions %}
-                    <div style="float:left; width:{{small_thumbnail_size}}; height:{{small_thumbnail_size}}; padding: 2px">
-                        <a href="{% url image_detail i.image.id %}{% query_string "r=i.id" "plate_solving_started, mod" %}">
-                            <img {% if i.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
-                        </a>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            <div class="tabs clear">
-                <ul style="display:none">
-                    <li><a href="#technical-card">{% trans "Technical card" %}</a></li>
-                    {% if image.description %}
-                    <li><a href="#description">{% trans "Description" %}</a></li>
-                    {% endif %}
-                    <li><a href="#views">{% trans "Views" %}</a></li>
-                </ul>
-
-                <div id="technical-card">
-                    <div class="left">
-                        <div class="container">
-                            <div class="gear">
-                                <h3>{% trans "Gear" %}</h3>
-                                {% for i in gear_list %}
-                                    {% if i.1 %}
-                                    <p>
-                                        <strong>{% trans i.0 %}:</strong>
-                                        {% for g in i.1 %}
-                                            {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}<a href="/search/?q=&as_values_{{i.2}}={{g.id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>{% else %}<a href="/search/?q={{g.name|escape}}&type={{i.2}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>{% endif %}{% if not forloop.last %},&nbsp;{% endif %} {% endfor %}
-                                    </p>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-
-                            {% if is_ready and not image.animated %}
-                            <div class="histogram">
-                                <h3>{% trans "Histogram" %}</h3>
-                                <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
-                            </div>
-                            {% endif %}
-                        </div> <!-- container -->
-                    </div> <!-- left -->
-                    <div class="right">
-                        <div class="container">
-                            <div class="acquisition">
-                                <h3>{% trans "Acquisition" %}</h3>
-                                {% if image_type == 'deep_sky' %}
-                                    {% for data in deep_sky_data %}
-                                        {% if data.1 %}
-                                            <p>
-                                                <strong>{{data.0}}</strong>:
-                                                {% if data.0 == dates_label %}
-                                                    {% for date in data.1 %}
-                                                        <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
-                                                    {% endfor %}
-                                                {% else %}
-                                                    {{data.1|linebreaksbr}}
-                                                {% endif %}
-                                            </p>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% else %}
-                                    {% if ssa.date %}
-                                        <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{ssa.date|date:"DATE_FORMAT"}}</a>
-                                    {% endif %}
-                                    {% if ssa.time %}
-                                        <p><strong>{% trans "Time" %}</strong>: {{ssa.time}}
-                                    {% endif %}
-                                    {% if ssa.frames %}
-                                        <p><strong>{% trans "Frames" %}</strong>: {{ssa.frames}}
-                                    {% endif %}
-                                    {% if ssa.fps %}
-                                        <p><strong>{% trans "FPS" %}</strong>: {{ssa.fps}}
-                                    {% endif %}
-                                    {% if ssa.focal_length %}
-                                        <p><strong>{% trans "Focal length" %}</strong>: {{ssa.focal_length}}
-                                    {% endif %}
-                                    {% if ssa.cmi %}
-                                        <p><strong>{% trans "CMI" %}</strong>: {{ssa.cmi}}
-                                    {% endif %}
-                                    {% if ssa.cmii %}
-                                        <p><strong>{% trans "CMII" %}</strong>: {{ssa.cmii}}
-                                    {% endif %}
-                                    {% if ssa.cmiii %}
-                                        <p><strong>{% trans "CMIII" %}</strong>: {{ssa.cmiii}}
-                                    {% endif %}
-                                    {% if ssa.seeing %}
-                                        <p><strong>{% trans "Seeing" %}</strong>: {{ssa.seeing}}
-                                    {% endif %}
-                                    {% if ssa.transparency %}
-                                        <p><strong>{% trans "Transparency" %}</strong>: {{ssa.transparency}}
-                                    {% endif %}
-                                {% endif %}
-                            </div>
-
-                            {% if image.is_solved and image.ra_center_hms %}
-                            <div class="astrometry">
-                                <h3>{% trans "Astrometry" %}</h3>
-                                <p><strong>{% trans "RA center" %}</strong>: {{image.ra_center_hms}}</p>
-                                <p><strong>{% trans "DEC center" %}</strong>: {{image.dec_center_dms}}</p>
-                                {% if image.pixscale != 0 %}
-                                    <p><strong>{% trans "Pixel scale" %}</strong>: {{image.pixscale|cut_decimals:"2"}} {% trans "arcsec/pixel" %}</p>
-                                {% endif %}
-                                <p><strong>{% trans "Orientation" %}</strong>: {{image.orientation|cut_decimals:"2"}} {% trans "degrees" %}</p>
-                                <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
-                                <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
-                            </div>
-                            {% endif %}
-                        </div> <!-- container -->
-                    </div> <!-- right -->
-                </div>
-
-                {% if image.description %}
-                <div id="description">{{image.description|safe|linebreaks}}</div>
-                {% endif %}
-
-                <div id="views" class="plots">
-                    <div class="plot-container">
-                        <div class="plot" style="width:650px; height: 180px;"></div>
-                    </div>
-                </div>
-            </div> <!-- tabs -->
-
-            <h3>{% trans "Comments" %}</h3>
-            <div id="comments">
-                {% if user.is_authenticated %}
-                <p class="instructions">
-                    {% blocktrans with user=image.user lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
-                </p>
-                <div id="top-level-form">
-                    <form action="{% url image_comment_save %}" method="post">
-                        {{comment_form.as_p}}
-                        <input type="hidden" name="author" value="{{user.id}}" />
-                        <input type="hidden" name="image" value="{{image.id}}" />
-                        <input type="hidden" name="parent_id" value="" />
-                        <input type="hidden" name="level" value="0" />
-                        <p>
-                            <input class="button" type="submit" value="{% trans "Save" %}" />
-                            <span class="formatting-help">
-                                <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-                            </span>
-                            <span class="loader">
-                                <img src="/static/images/ajax-loader.gif" alt=""/> 
-                            </span>
-                        </p>
-                    </form>
-                </div>
-                {% else %}
-                    <p>
-                        {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
-                    </p>
-                {% endif %}
-
-                {% if comments %}
-                    {% load mptt_tags %}
-                    {% recursetree comments %}
-                        <div style="margin-left: {{node.get_level|add:node.get_level}}em">
-                            <div id="c{{node.id}}" class="comment">
-                                <div class="meta">
-                                    <a class="author" href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
-                                </div>
-                                <div class="content{% if node.is_deleted %} deleted{% endif %}">
-                                    {% if node.is_deleted %}
-                                        <p>{% trans "(comment deleted)" %}</p>
-                                    {% else %}
-                                        {{node.comment|markdown|linebreaks}}
-                                    {% endif %}
-                                </div>
-                                <div class="links">
-                                    <a class="permalink" href="{% url image_detail image.id %}#c{{node.id}}">{% trans "Link" %}</a>
-                                    {% if user.is_authenticated %}
-                                        {% if user == node.author %}
-                                            <a class="delete" href="#">
-                                                {% if node.is_deleted %}
-                                                    {% trans "Undelete" %}
-                                                {% else %}
-                                                    {% trans "Delete" %}
-                                                {% endif %}
-                                            </a>
-                                            <a class="edit" href="#">{% trans "Edit" %}</a>
-                                        {% endif %}
-                                        <a class="reply" href="#">{% trans "Reply" %}</a>
-                                    {% endif %}
-                                </div>
-                                <form action="{% url image_comment_save %}" method="post">
-                                    {{comment_form.as_p}}
-                                    <input type="hidden" name="author" value="{{user.id}}" />
-                                    <input type="hidden" name="image" value="{{image.id}}" />
-                                    <input type="hidden" name="parent_id" value="{{node.id}}" />
-                                    <input type="hidden" name="level" value="{{node.get_level}}" />
-                                    <p>
-                                        <input class="button" type="submit" value="{% trans "Save" %}" />
-                                        <input class="button cancel" type="reset" value="{% trans "Cancel" %}" />
-                                        <span class="formatting-help">
-                                            <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-                                        </span>
-                                        <span class="loader">
-                                            <img src="/static/images/ajax-loader.gif" alt=""/> 
-                                        </span>
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
-                        {% if not node.is_leaf_node %}
-                            {{children}}
-                        {% endif %}
-                    {% endrecursetree %}
-                {% else %}
-                    <p class="nocomments">
-                        {% blocktrans %}There are no comments yet.{% endblocktrans %}
-                    </p>
-                {% endif %}
-            </div>
+        </div> <!-- span -->
+    </div> <!-- row  (main pane) -->
+    
+    <div class="modal hide fade" id="share-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Share" %}</h3>
         </div>
-        <div id="side-pane">
-            <ul class="topnav">
-                <li style="z-index: 1">
-                    <span class="text">
-                        <a href="#">
-                            {% if related == 'rel_user' %}{% trans "More: same user" %}{% endif %}
-                            {% if related == 'rel_subject' %}{% trans "More: same subjects" %}{% endif %}
-                            {% if related == 'rel_imaging_telescope' %}{% trans "More: same telescope" %}{% endif %}
-                            {% if related == 'rel_imaging_camera' %}{% trans "More: same camera" %}{% endif %}
-                        </a>
-                    </span>
-                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                    <div class="sub">
-                        <ul class="subnav">
-                            <li><a href="{{image.get_absolute_url}}{% query_string "related='rel_user', mod=mod" "plate_solving_started" %}">{% trans "More: same user"%}</a></li>
-                            <li><a href="{{image.get_absolute_url}}{% query_string "related='rel_subject', mod=mod" "plate_solving_started" %}">{% trans "More: same subjects" %}</a></li>
-                            <li><a href="{{image.get_absolute_url}}{% query_string "related='rel_imaging_telescope', mod=mod" "plate_solving_started" %}">{% trans "More: same telescope" %}</a></li>
-                            <li><a href="{{image.get_absolute_url}}{% query_string "related='rel_imaging_camera', mod=mod" "plate_solving_started" %}">{% trans "More: same camera" %}</a></li>
-                        </ul>
-                    </div>
-                </ul>
-            </ul>
-            {% if related_images.count > 1 %} 
-            {% related_images request related_images related %}
-            {% endif %}
+        <div class="modal-body">
+            <div class="well">
+                <span class='st_googleplus' displayText='Google Plus'></span>
+                <span class='st_facebook' displayText='Facebook'></span>
+                <span class='st_twitter' displayText='Twitter'></span>
+            </div>
+            
+            <div class="well">
+                <form class="copy">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <label for="sharing_mode">{% trans "Sharing mode" %}:</label>
+                                <select name="sharing_mode">
+                                    <option selected="selected" value="0">{% trans "Simple link" %}</option>
+                                    <option value="1">{% trans "Forums" %}</option>
+                                    <option value="2">HTML</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label for="sharing_thumbnail">{% trans "Thumbnail" %}:</label>
+                                <select name="sharing_thumbnail" disabled="disabled">
+                                    <option selected="selected" value="0">{% trans "Yes" %}</option>
+                                    <option value="1">{% trans "No" %}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="sharing_image_size">{% trans "Image size" %}:</label>
+                                <select name="sharing_image_size">
+                                    <option selected="selected" value="0">{% trans "Regular" %}</option>
+                                    <option value="1">{% trans "Full" %}</option>
+                                </select>
+                            </td>
+                            <td rowspan=2>
+                                <label for="sharing_code">{% trans "Copy this" %}</label>
+                                </label>
+                                <div id="clip-container">
+                                    <div id="clip" class="clip">
+                                        <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                    <div class="flash-container"></div>
+                                </div>
+                                <textarea name="sharing_code" rows=6>{% if is_revision %}http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}{% else %}http://astrob.in/{{image.id}}/{% endif %}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="sharing_image_mode">{% trans "Image mode" %}:</label>
+                                <select name="sharing_image_mode">
+                                    <option selected="selected" value="0">{% trans "Normal" %}</option>
+                                    <option value="1">{% trans "Inverted monochrome" %}</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -687,16 +780,15 @@
 $(document).ready(function() {
     $('a.favorite').click(function() {
         var $link = $(this),
-            $heart = $link.find('img'),
-            $hint = $link.find('.favorite-hint');
+            $heart = $link.find('img');
 
         $.ajax({
             url: '{% url favorite_ajax image.id %}',
             dataType: 'json',
             timeout: 5000,
             success: function(data, textStatus, XMLHttpRequest) {
-                $heart.attr('src', '/static/icons/iconic/red/heart_fill_12x11.png');
-                $hint.text("{% trans "Favorited!" %}");
+                $heart.attr('src', '/static/icons/iconic/red/heart_fill_24x21.png');
+                $link.attr('title', "{% trans "Favorited!" %}");
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
             }
@@ -726,14 +818,16 @@ $(document).ready(function() {
             "http://astrob.in/{{image.id}}/"
         {% endif %}
     );
-    clip.glue('clip', 'clip-container');
+    
+    var clip_html = clip.getHTML(16, 16);
+    $('#clip-container .flash-container').append(clip_html);
 
-    $('div.copy-box select').change(function() {
+    $('form.copy select').change(function() {
         var sharing_mode = parseInt($('select[name=sharing_mode] option:selected').val());
         var image_size = parseInt($('select[name=sharing_image_size] option:selected').val());
         var image_mode = parseInt($('select[name=sharing_image_mode] option:selected').val());
         var thumbnail = parseInt($('select[name=sharing_thumbnail] option:selected').val());
-        var textarea = $('div.copy-box textarea');
+        var textarea = $('form.copy textarea');
         var content = '';
 
         if (sharing_mode == 0) {
@@ -924,26 +1018,26 @@ $(document).ready(function() {
         timeout: 5000,
         beforeSubmit: function(formData, $form, options) {
             $loader = $form.find('.loader');
-            $button = $form.find('.button:first-child');
+            $button = $form.find('.btn:first-child');
             $textarea = $form.find('textarea');
 
             if ($textarea.val() == '')
                 return false;
 
-            $button.attr('disabled', 'disabled').addClass('button-disabled');
+            $button.attr('disabled', 'disabled').addClass('disabled');
             $loader.css('visibility', 'visible');
         },
         success: function(responseJson, statusText, xhr, $form) {
             var $loader = $form.find('.loader');
-            var $button = $form.find('.button:first-child');
+            var $button = $form.find('.btn:first-child');
 
-            $button.removeAttr('disabled').removeClass('button-disabled');
+            $button.removeAttr('disabled').removeClass('disabled');
             $loader.css('visibility', 'hidden');
 
             if (responseJson.action == 'save') {
                 var $textarea = $form.find('textarea');
-                if ($form.parent().attr('id') == 'top-level-form') {
-                    var $parent = $('#top-level-form');
+                if ($form.parent().hasClass('top-level-form')) {
+                    var $parent = $('.top-level-form');
                     var is_top_level = true;
                     var level = 0;
                 } else {
@@ -952,7 +1046,7 @@ $(document).ready(function() {
                     var level = parseInt($form.find('input:hidden[name="level"]').val()) + 1;
                 }
                 var parent_id = responseJson['comment_id']
-                var $nocomments = $('p.nocomments');
+                var $nocomments = $('.no-comments-yet');
 
                 $container = $('<div/>').css('margin-left', level*2 + 'em');
                 $new_comment = $('<div/>').addClass('comment').attr('id', 'c' + parent_id);
@@ -982,8 +1076,8 @@ $(document).ready(function() {
                         <input type=\"hidden\" name=\"parent_id\" value=\"" + parent_id + "\" />\
                         <input type=\"hidden\" name=\"level\" value=\"" + level + "\" />\
                         <p>\
-                            <input class=\"button\" type=\"submit\" value=\"{% trans "Save" %}\" />\
-                            <input class=\"button cancel\" type=\"reset\" value=\"{% trans "Cancel" %}\" />\
+                            <input class=\"btn btn-mini btn-primary\" type=\"submit\" value=\"{% trans "Save" %}\" />\
+                            <input class=\"btn btn-mini cancel\" type=\"reset\" value=\"{% trans "Cancel" %}\" />\
                             <span class=\"loader\">\
                                 <img src=\"/static/images/ajax-loader.gif\" alt=\"\"/>\
                             </span>\
@@ -1023,7 +1117,7 @@ $(document).ready(function() {
         }
     };
 
-    $('#top-level-form form, .comment form').ajaxForm(ajaxFormOptions);
+    $('.top-level-form form, .comment form').ajaxForm(ajaxFormOptions);
     $('.comment form .cancel').live('click', function() {
         var $comment = $(this).closest('.comment');
         var $content = $comment.find('.content');
@@ -1102,6 +1196,7 @@ $(document).ready(function() {
         $form.attr('action', '{% url image_comment_save %}');
         $textarea.val('');
         $form.show();
+        $textarea.focus();
 
         return false;
     });
@@ -1167,7 +1262,7 @@ $(document).ready(function() {
                     body : "{% blocktrans %}Did you improve the post-processing of your image? Upload the new revision!{% endblocktrans %}"
                 },
                 form_html: '{% autoescape off %}{{upload_revision_form.file}}\
-                            <input class="button submit-button inline-button" type="submit" value="{% trans "Upload" %}" />\
+                            <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />\
                             {% endautoescape %}',
                 csrf_token: '{{csrf_token}}',
                 fileDefaultText: "{% trans "No file selected" %}",
@@ -1197,16 +1292,12 @@ $(document).ready(function() {
             }
         });
 
-        $('.tabs ul').show();
-
         stats.init();
         stats.plot(
-            '#views .plot',
+            '#image-pill-views .plot',
             '{% url stats_image_views image.id 'daily' %}',
             5000);
         stats.enableTooltips('#views .plot');
-
-        $('.tabs').tabs();
     });
 </script>
 {% endblock %}

@@ -2,28 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="info-side-bar">
-        <ul>
-            {% if image.is_stored %}
-            <li class="first last" style="margin: 8px 0;">
-                <a href="{% url image_detail image.id %}">
-                    <img class="thumbnail" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}"/>
-                 </a>
-            </li>
-            {% endif %}
-        </ul>
+    <h1>{% trans "Request additional information" %}</h1>
+    <div class="well">
+        {% blocktrans with image.user.username as username %}You will notify <strong>{{username}}</strong> that you would like them to feed more information in the technical card for this image. Continue?{% endblocktrans %}
     </div>
-
-    <div class="sided-main-content">
-        <h1>{% trans "Request additional information" %}</h1>
-        <p>
-            {% blocktrans with image.user.username as username %}You will notify <strong>{{username}}</strong> that you would like them to feed more information in the technical card for this image. Continue?{% endblocktrans %}
-        </p>
-        <form>
-            <ul>
-                <li><a class="button submit-button" href="{% url image_request_additional_information_process image.id %}">{% trans "Continue" %} &rarr;</a></li>
-                <li><a href="{% url image_detail image.id %}">{% trans "Return to image" %}</a></li>
-            </ul>
-        </form>
-    </div>
+    
+    <a class="btn btn-primary" href="{% url image_request_additional_information_process image.id %}">{% trans "Continue" %} &rarr;</a>
+    <a class="btn" href="{% url image_detail image.id %}">{% trans "Return to image" %}</a>
 {% endblock %}

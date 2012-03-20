@@ -1,25 +1,25 @@
-    {% load i18n %}
-    {% load tags %}
-    <div class="info-side-bar">
-        <ul>
-            <li class="{% current request '^/profile/(edit|save)/basic/$' %}">
-                <a href="{% url profile_edit_basic %}">{% trans "Basic Information" %}</a>
-            </li>
-            <li class="{% current request '^/profile/(edit|save)/gear/$' %}">
-                <a href="{% url profile_edit_gear %}">{% trans "Gear" %}</a>
-            </li>
-            <li class="{% current request '^/profile/(edit|save)/locations/$' %}">
-                <a href="{% url profile_edit_locations %}">{% trans "Locations" %}</a>
-            </li>
-            <li class="{% current request '^/profile/(edit|save)/license/$' %}">
-                <a href="{% url profile_edit_license %}">{% trans "Default license" %}</a>
-            </li>
-            <li class="last {% current request '^/profile/edit/flickr/$' %}">
-                <a href="{% url profile_flickr_import %}">{% trans "Import from Flickr" %}</a>
-            </li>
-            <li class="{% current request '^/profile/(edit|save)/preferences/$' %}">
-                <a href="{% url profile_edit_preferences %}">{% trans "Preferences" %}</a>
-            </li>
-        </ul>
-    </div>
+{% load i18n %}
+{% load tags %}
+<div class="subnav subnav-fixed">
+    <ul class="nav nav-pills">
+        <li class="{% current request '^/profile/(edit|save)/basic/$' %}">
+            <a href="{% url profile_edit_basic %}">{% trans "Basic Information" %}</a>
+        </li>
+        <li class="{% current request '^/profile/(edit|save)/gear/$' %}">
+            <a href="{% url profile_edit_gear %}">{% trans "Gear" %}</a>
+        </li>
+        <li class="{% current request '^/profile/(edit|save)/locations/$' %}">
+            <a href="{% url profile_edit_locations %}">{% trans "Locations" %}</a>
+        </li>
+        <li class="{% current request '^/profile/(edit|save)/license/$' %}">
+            <a href="{% url profile_edit_license %}">{% trans "Default license" %}</a>
+        </li>
+        <li class="last {% current request '^/profile/edit/flickr/$' %}">
+            <a href="{% url profile_flickr_import %}">{% trans "Import from Flickr" %}</a>
+        </li>
+        <li class="{% current request '^/profile/(edit|save)/preferences/$' %}">
+            <a href="{% url profile_edit_preferences %}">{% trans "Preferences" %}</a>
+        </li>
+    </ul>
+</div>
 

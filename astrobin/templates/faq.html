@@ -4,8 +4,8 @@
 {% block title %}AstroBin - {% trans "FAQ" %}{% endblock %}
 
 {% block content %}
-    <div class="full-box clear">
-        <div class="container">
+    <div class="row">
+        <div class="span12">
             <h2>{% trans "Frequently Asked Questions" %}</h2>
             <ol>
                 <li><a href="#1">{% blocktrans %}Is this website for free?{% endblocktrans %}</a></li>
@@ -114,7 +114,7 @@
                     <p>
                     {% blocktrans %}AstroBin uses the Markdown syntax. Please use the following reference table:{% endblocktrans %}
                     </p>
-                    <table>
+                    <table class="table table-condensed">
                         <tr><td><strong>{% trans "You type:" %}</strong</td><td><strong>{% trans "You see:" %}</strong></td></tr>
                         <tr><td>*{% trans "italics" %}*</td><td><i>{% trans "italics" %}</i></td></tr>
                         <tr><td>**{% trans "bold" %}**</td><td><strong>{% trans "bold" %}</strong></td></tr>
@@ -129,7 +129,7 @@
             <p>
                 {% blocktrans %}Do you have a question not covered here! Please send us an email at:{% endblocktrans %} <a href="mailto:astrobin@astrobin.com">astrobin@astrobin.com</a>.
             </p>
-        </div> <!-- container -->
-    </div>
+        </div> <!-- span -->
+    </div> <!-- row -->
 {% endblock %}
 

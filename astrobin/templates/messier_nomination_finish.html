@@ -2,32 +2,14 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="info-side-bar">
-        <ul>
-            {% if image.is_stored %}
-            <li class="first last" style="margin: 8px 0;">
-                <a href="{% url image_detail image.id %}">
-                    <img class="thumbnail" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}"/>
-                 </a>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
-    <div class="sided-main-content">
-            {% if already_nominated %}
-                <h1>{% trans "You have already nominated this image" %}</h1>
-                <p>{% blocktrans %}You can't nominate the same image more than once.{% endblocktrans %}</p>
-            {% else %}
-                <h1>{% trans "Thanks for your nomination" %}</h1>
-                <p>{% blocktrans %}Your nomination has been recorded, thank you!{% endblocktrans %}</p>
-            {% endif %}
-        <p>
-        </p>
-        <form>
-            <ul>
-                <li><a class="button submit-button" href="{% url messier %}">{% trans "Visit the Messier Marathon" %} &rarr;<a/></li>
-                <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
-            </ul>
-        </form>
-    </div>
+    {% if already_nominated %}
+        <h1>{% trans "You have already nominated this image" %}</h1>
+        <div class="well">{% blocktrans %}You can't nominate the same image more than once.{% endblocktrans %}</div>
+    {% else %}
+        <h1>{% trans "Thanks for your nomination" %}</h1>
+        <div class="well">{% blocktrans %}Your nomination has been recorded, thank you!{% endblocktrans %}</div>
+    {% endif %}
+    
+    <a class="btn btn-primary" href="{% url messier %}">{% trans "Visit the Messier Marathon" %} &rarr;<a/>
+    <a class="btn" href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a>
 {% endblock %}

@@ -1,41 +1,24 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load bootstrap_toolkit %}
 
 {% block content %}
-    {% include 'image/edit/menu_not_ready.html' %}
-
-    <div class="sided-main-content">
     <h1>
         {% blocktrans %}Step 2 of 5: watermark{% endblocktrans %}
     </h1>
-    <p>
+    
+    <div class="well">
         {% blocktrans %}AstroBin can protect your images from theft by applying a watermark to them. Be careful with your settings though: once a watermark has been applied, it cannot be removed (AstroBin won't store the non-watermarked version of your image, for your safety). If you don't like the watermark resulting from the following settings, your only choice is to delete the image and start over.{% endblocktrans %}
-    </p>
-    <p>
         {% blocktrans %}Please note: animated GIFs cannot be watermarked at this time.{% endblocktrans %}
-    </p>
-    <form action="{% url image_edit_save_watermark %}" method="post">{% csrf_token %}
-        {{form.non_field_errors}}
- 
-        {% for field in form %}
-            {{field.errors}}
-            <p{% if field.errors %} class="error"{% endif %}>
-                {% if field.field.widget|is_checkbox %}
-                    <label></label>
-                    {{field}}{{field.label}}
-                {% else %}
-                    {{field.label_tag}}{{field}}
-                {% endif %}
-                <span class="helptext">{{field.help_text}}</span>
-            </p>
-        {% endfor %}
-
-        <input type="hidden" name="image_id" value="{{image.id}}" />
-        <ul>
-            <li><input class="button submit-button" type="submit" name="submit_next" value="{% trans "Next step: basic information" %} &rarr;" /></li>
-        </ul>
-    </form>
     </div>
+    
+    <form class="form-horizontal" action="{% url image_edit_save_watermark %}" method="post">{% csrf_token %}
+        {{form|as_bootstrap}}
+        <input type="hidden" name="image_id" value="{{image.id}}" />
+        
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" name="submit_next" value="{% trans "Next step: basic information" %} &rarr;" /></li>
+        </div>
+    </form>
 {% endblock %}
-

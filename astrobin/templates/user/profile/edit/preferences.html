@@ -1,40 +1,25 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load bootstrap_toolkit %}
 
 {% block content %}
     {% include 'profile-edit-menu.html' %}
-    <div class="sided-main-content">
-        <h1>{% trans "Edit your site preferences" %}</h1>
-        {% form_saved request %}
-        <form method="post" action="{% url profile_save_preferences %}">{% csrf_token %}
-        {{form.non_field_errors}}
 
-        <p>{% blocktrans %}Select the language in which you would like to see this website:{% endblocktrans %}</p>
-        <p{% if field.errors %} class="error"{% endif %}>
-            {{form.language.errors}}
-            <label for="id_language">{{form.language.label}}:</label>
-            {{form.language}}
-        </p>
-        <p>{% blocktrans %}Select which e-mail notification you would like to receive:{% endblocktrans %}</p>
-        {% for field in form %}
-            {% ifnotequal field.name 'language' %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                    {% if field.field.widget|is_checkbox %}
-                        <label></label>
-                        {{field}}{{field.label}}
-                    {% else %}
-                        {{field.label_tag}}{{field}}
-                    {% endif %}
-                    <span class="helptext">{{field.help_text}}</span>
-                </p>
-                <div class="fix"></div>
-            {% endifnotequal %}
-        {% endfor %}
-        <ul>
-            <li><input class="button submit-button" type="submit" value="{% trans "Save" %}" /></li>
-        </ul>
-        </form>
+    <h1>{% trans "Edit your site preferences" %}</h1>
+
+    {% form_saved request %}
+
+    <div class="well">
+        {% blocktrans %}Select your language, and which e-mail notification you would like to receive:{% endblocktrans %}
     </div>
+
+    <form class="form-horizontal" method="post" action="{% url profile_save_preferences %}">{% csrf_token %}
+        {{form|as_bootstrap}}
+
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="{% trans "Save" %}" />
+        </div>
+    </form>
 {% endblock %}
 

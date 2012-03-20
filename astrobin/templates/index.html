@@ -5,40 +5,44 @@
 {% block content %}
     {% if request.user.is_authenticated %}
         {% if upload_form %} 
-            <div class="upload-forms">
-                <div class="wip-form-box single-form">
-                    <div class="container">
-                        <h2>{% trans "Upload as a work in progress" %}</h2>
-                        <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
-                        <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file" class="file" id="id_file" />
-                            <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
-                            <input type="hidden" name="wip" value="" />
-                        </form>
-                        <div class="progressbar"><img src="/static/images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
-                        <p>
-                            {% url faq as faq_url %}
-                            {% blocktrans %}Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href="{{faq_url}}#6">FAQ</a>.{% endblocktrans %}
-                        </p>
-                    </div>
-                </div>
-                <div class="final-form-box single-form">
-                    <div class="container">
-                        <h2>{% trans "Upload as a finished image" %}</h2>
-                        <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
-                        <form class="upload" action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file" class="file" id="id_file" />
-                            <input class="button submit-button" type="submit" value="{% trans "Upload" %}" />
-                        </form>
-                        <div class="progressbar"><img src="/static/images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
-                        <p>
-                            {% url profile_flickr_import as flickr_url %}
-                            {% url me as profile_url %}
-                            {% blocktrans %}Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href="{{profile_url}}">your profile</a> and here on the home page. You can <a href="{{flickr_url}}">import from Flickr</a> too.{% endblocktrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <div class="row">
+                <div class="span10 offset1">
+                    <div class="upload-forms">
+                        <div class="upload-form wip-form-box">
+                            <div class="upload-form-inner">
+                                <h3>{% trans "Upload as a work in progress" %}</h3>
+                                <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
+                                <form action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="file" class="file" id="id_file" />
+                                    <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                                    <input type="hidden" name="wip" value="" />
+                                </form>
+                                <div class="progressbar"><img src="/static/images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
+                                <p>
+                                    {% url faq as faq_url %}
+                                    {% blocktrans %}Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href="{{faq_url}}#6">FAQ</a>.{% endblocktrans %}
+                                </p>
+                            </div> <!-- upload-form-inner -->
+                        </div> <!-- wip-form-box -->
+                        <div class="upload-form final-form-box">
+                            <div class="upload-form-inner">
+                                <h3>{% trans "Upload as a finished image" %}</h3>
+                                <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
+                                <form action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="file" class="file" id="id_file" />
+                                    <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                                </form>
+                                <div class="progressbar"><img src="/static/images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
+                                <p>
+                                    {% url profile_flickr_import as flickr_url %}
+                                    {% url me as profile_url %}
+                                    {% blocktrans %}Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href="{{profile_url}}">your profile</a> and here on the home page. You can <a href="{{flickr_url}}">import from Flickr</a> too.{% endblocktrans %}
+                                </p>
+                            </div> <!-- upload-form-inner -->
+                        </div> <!-- final-form-box -->
+                    </div> <!-- upload-forms -->
+                </div> <!-- span10 -->
+            </div> <!-- row -->
         {% else %} <!-- upload_form -->
             <div class="upload-forms">
                 <div class="single-form">
@@ -61,50 +65,57 @@
             </div>
         {% endif %} <!-- upload_form -->
     {% else %}<!-- authenticated -->
-        <div id="why-astrobin-nav-container">
-            <ul id="why-astrobin-nav"></ul>
-        </div>
-
-        <div id="why-astrobin" class="full-box">
-            <div class="container">
-                <div class="why-astrobin-page">
-                    <img src="/static/images/slide1.png" alt=""/>
-                    <h2>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h2>
-                    {% url help as help_url %}
-                    <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
+        <div id="why-astrobin" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="active item">
+                    <img src="/static/images/M81_astrojoe.jpg" />
+                    <div class="carousel-caption">
+                        <h4>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h4>
+                        {% url help as help_url %}
+                        <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
+                    </div>
                 </div>
 
-                <div class="why-astrobin-page" style="display: none">
-                    <img src="/static/images/slide2.png" alt=""/>
-                    <h2>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h2>
-                    <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free.{% endblocktrans %}</p>
+                <div class="item">
+                    <img src="/static/images/M42_astrojoe.jpg" />
+                    <div class="carousel-caption">
+                        <h4>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h4>
+                        <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free.{% endblocktrans %}</p>
+                    </div>
                 </div>
 
-                <div class="why-astrobin-page" style="display: none">
-                    <img src="/static/images/slide3.png" alt=""/>
-                    <h2>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h2>
-                    <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
+                <div class="item">
+                    <img src="/static/images/M45_astrojoe.jpg" />
+                    <div class="carousel-caption">
+                        <h4>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h4>
+                        <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div> <!-- carousel-inner -->
+
+            <a class="carousel-control left" href="#why-astrobin" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#why-astrobin" data-slide="next">&rsaquo;</a>
+        </div> <!-- carousel -->
     {% endif %}<!-- authenticated -->
 
-    <a name="page_anchor"></a>
-    <div class="full-box clear index">
-        <div class="container">
-            {% if user.is_authenticated and image_of_the_day %}
-            <div class="image-of-the-day thumbnail-list clear">
-                <h2>{% trans "Hot today" %}</h2>
-                {% with image_of_the_day as image %}
-                <div class="image">
+    {% if user.is_authenticated and image_of_the_day %}
+        {% with image_of_the_day as image %}
+            <div class="row">
+                <div class="span12">
+                    <h2>{% trans "Hot today" %}</h2>
+                </div>
+            </div>
+            <div class="row index-section">
+                <div class="span6">
                     <a href="{% url image_detail image.id %}">
                         <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}"
-                             class="thumbnail" width="424"
-                             alt="{{image.title|default:_("(no title)")}}"/>
+                                width="460"
+                                alt="{{image.title|default:_("(no title)")}}"/>
                     </a>
                 </div>
-                <div class="data" style="height: {{image_of_the_day_scaled_height}}px">
-                    <div class="technical-card">
+                
+                <div class="span6">
+                    <div class="subtle-container" style="height:{{image_of_the_day_scaled_height}}px;">
                         <h3>&larr; {{image.title}} by <a href="{% url user_page image.user %}">{{image.user}}</a></h3>
                         {% for i in gear_list %}
                             {% if i.1 %}
@@ -117,40 +128,37 @@
                         {% endfor %}
                     </div>
                 </div>
-                {% endwith %}
             </div>
-            {% endif %}
+        {% endwith %}
+    {% endif %}
 
-            <div class="recent">
-                <h2>{% trans "Recently uploaded" %}</h2>
-                {% search_image_list request image_list 0 %}
-            </div>
+    <div class="row index-section">
+        <div class="span12">
+            <h2>{% trans "Recently uploaded" %}</h2>
+            {% search_image_list request image_list 0 %}
+        </div>
+    </div> <!-- recently uploaded row -->
 
-            {% if user.is_authenticated %}
-            <div class="recent">
-                <h3>{% trans "Recently uploaded by the users you follow" %}</h3>
-                {% image_list request recent_from_followees 0 small_size %}
-            </div>
-
-            <div class="recent">
-                <div class="left">
-                    <h3>{% trans "Recently voted 5 stars" %}</h3>
-                    {% image_list request recently_five_starred 0 small_size %}
-                </div>
-                <div class="right">
-                    <h3>{% trans "Recently favorited" %}</h3>
-                    {% image_list request recently_favorited 0 small_size %}
-                </div>
-            </div>
-            {% endif %}
-
-            <div class="fix"></div>
-
-            <div class="pagination">
-                <a href="{% url wall %}">{% trans "(view more)" %}</a>
-            </div>
+    {% if user.is_authenticated %}
+    <div class="row index-section">
+        <div class="span12">
+            <h3>{% trans "Recently uploaded by the users you follow" %}</h3>
+            {% image_list request recent_from_followees 0 small_size %}
         </div>
     </div>
+
+    <div class="row">
+        <div class="span6">
+            <h3>{% trans "Recently voted 5 stars" %}</h3>
+            {% image_list request recently_five_starred 0 small_size %}
+        </div>
+
+        <div class="span6">
+            <h3>{% trans "Recently favorited" %}</h3>
+            {% image_list request recently_favorited 0 small_size %}
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}
 
 {% block extra_head %}
@@ -169,22 +177,6 @@
 {% block extra_js %}
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#why-astrobin-nav-container').show();
-        $('#why-astrobin .container').css('height', '165px');
-        $(function() {
-            $('#why-astrobin .container').cycle({
-                fx:     'scrollHorz',
-                speed:  'slow',
-                timeout: 7000,
-                pager:  '#why-astrobin-nav',
-                pause: 1,
-                startingSlide: Math.floor(Math.random()*3),
-                pagerAnchorBuilder: function(idx, slide) { 
-                    return '<li><a href="#"></a></li>'; 
-                } 
-            });
-        });
-
         $('.upload-forms form').submit(function() {
             form = $(this);
             progressbar = form.parent().find('.progressbar');

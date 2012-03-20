@@ -2,26 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="info-side-bar">
-        <ul>
-            {% if image.is_stored %}
-            <li class="first last" style="margin: 8px 0;">
-                <a href="{% url image_detail image.id %}">
-                    <img class="thumbnail" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}"/>
-                 </a>
-            </li>
-            {% endif %}
-        </ul>
+    <h1>{% trans "TIFF/FITS requested" %}</h1>
+    <div class="well">
+        {% url messages_compose image.user.username as message_url %}
+        {% blocktrans with image.user.username as username %}<strong>{{username}}</strong> has been notified. Hopefully they will get in touch with you and send you the TIFF/FITS files. AstroBin doesn't currently offer to host these files, unfortunately.{% endblocktrans %}
     </div>
-
-    <div class="sided-main-content">
-        <h1>{% trans "TIFF/FITS requested" %}</h1>
-        <p>
-            {% url messages_compose image.user.username as message_url %}
-            {% blocktrans with image.user.username as username %}<strong>{{username}}</strong> has been notified. Hopefully they will get in touch with you and send you the TIFF/FITS files. AstroBin doesn't currently offer to host these files, unfortunately.{% endblocktrans %}
-        </p>
-        <p>
-            <a href="{% url image_detail image.id %}">{% trans "Return to image" %}</a>
-        </p>
-    </div>
+    
+    <a class="btn" href="{% url image_detail image.id %}">{% trans "Return to image" %}</a>
 {% endblock %}

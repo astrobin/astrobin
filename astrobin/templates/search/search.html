@@ -6,173 +6,197 @@
 {% block content %}
 
 <a name="page_anchor"></a>
-<div class="advanced-search-box">
-    <form method="get" action="{% url haystack_search %}">
-        <div class="search-category">
-            <div class="header">
-                <span class="title">{% trans "Basic criteria" %}</span>
+{% if 'q' in request.GET %}
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {% trans "Sort" %}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/search/{% query_string "" "sort" %}">{% trans "Relevance" %}</a>
+                    </li>
+                    <li>
+                        <a href="/search/{% query_string "sort='-uploaded'" "" %}">{% trans "Upload time" %}</a>
+                    </li>
+                    <li>
+                        <a href="/search/{% query_string "sort='-rating'" "" %}">{% trans "Rating" %}</a>
+                    </li>
+                    <li>
+                        <a href="/search/{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>
+                    </li>
+                    <li>
+                        <a href="/search/{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+    {% endif %}
+    
+<div class="row">
+    <div class="span3 advanced-search-box">
+        <form method="get" action="{% url haystack_search %}">
+            <div class="search-category">
+                <div class="header">
+                    <span class="title">{% trans "Basic criteria" %}</span>
+                </div>
+                <div class="content">
+                    {% with form.q as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.solar_system_main_subject as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+                </div>
             </div>
-            <div class="content">
-                {% with form.q as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-
-                {% with form.solar_system_main_subject as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
+    
+            <div class="search-category">
+                <div class="header">
+                    <span class="title">{% trans "Gear used" %}</span>
+                    <span class="control"></span>
+                </div>
+                <div class="content">
+                    {% with form.imaging_telescopes as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.imaging_cameras as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.aperture_min as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.aperture_max as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+                </div>
             </div>
-        </div>
-
-        <div class="search-category">
-            <div class="header">
-                <span class="title">{% trans "Gear used" %}</span>
-                <span class="control"></span>
+    
+            <div class="search-category">
+                <div class="header">
+                    <span class="title">{% trans "Acquisition details" %}</span>
+                    <span class="control"></span>
+                </div>
+                <div class="content">
+                    {% with form.start_date as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.end_date as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.integration_min as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.integration_max as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.moon_phase_min as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.moon_phase_max as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+                </div>
             </div>
-            <div class="content">
-                {% with form.imaging_telescopes as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-
-                {% with form.imaging_cameras as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-
-                {% with form.aperture_min as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-
-                {% with form.aperture_max as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
+    
+            <div class="search-category">
+                <div class="header">
+                    <span class="title">{% trans "License" %}</span>
+                    <span class="control"></span>
+                </div>
+                <div class="content">
+                    {% with form.license as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+                </div>
             </div>
-        </div>
+    
+            <input class="btn btn-primary search-button" type="submit" value="{% trans "Search" %} &rarr;" />
+        </form>
+    </div> <!-- span3 -->
 
-        <div class="search-category">
-            <div class="header">
-                <span class="title">{% trans "Acquisition details" %}</span>
-                <span class="control"></span>
-            </div>
-            <div class="content">
-                {% with form.start_date as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-
-                {% with form.end_date as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-
-                {% with form.integration_min as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-
-                {% with form.integration_max as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-
-                {% with form.moon_phase_min as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-
-                {% with form.moon_phase_max as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field.label_tag}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-            </div>
-        </div>
-
-        <div class="search-category">
-            <div class="header">
-                <span class="title">{% trans "License" %}</span>
-                <span class="control"></span>
-            </div>
-            <div class="content">
-                {% with form.license as field %}
-                <p{% if field.errors %} class="error"{% endif %}>
-                        {{field.errors}}
-                        {{field}}
-                        <span class="helptext">{{field.help_text}}</span>
-                </p>
-                {% endwith %}
-            </div>
-        </div>
-
-        <input class="button submit-button" type="submit" value="{% trans "Search" %} &rarr;" />
-    </form>
-</div>
-
-<div id="search-results" class="full-box clear search">
-    <div class="container">
+    <div class="span9">
         {% if 'q' in request.GET %}
-        <div class="search-links">
-                {% trans "Sort by:" %}&nbsp;
-                <a href="/search/{% query_string "" "sort" %}">{% trans "Relevance" %}</a>&nbsp;|&nbsp;
-                <a href="/search/{% query_string "sort='-uploaded'" "" %}">{% trans "Upload time" %}</a>&nbsp;|&nbsp;
-                <a href="/search/{% query_string "sort='-rating'" "" %}">{% trans "Rating" %}</a>&nbsp;|&nbsp;
-                <a href="/search/{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>&nbsp;|&nbsp;
-                <a href="/search/{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
-        </div>
-        {% search_image_list request page.object_list %}
+            <div class="search-results">
+                {% search_image_list request page.object_list %}
+            </div>
         {% else %}
-        <p class="noterms">{% blocktrans %}Please input some search terms!{% endblocktrans %}</p>
+            <div class="well">{% blocktrans %}Please input some search terms!{% endblocktrans %}</div>
         {% endif %}
     </div>
 </div>
@@ -276,7 +300,7 @@
         });
 
         $('select[name="license"]').simplemultiselect({
-            maxWidth: 254,
+            maxWidth: 201,
             checkAllText: "{% trans "Select all" %}",
             uncheckAllText: "{% trans "Select none" %}",
             noneSelectedText: "{% trans "Select licenses" %}",

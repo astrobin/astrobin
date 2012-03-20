@@ -4,19 +4,18 @@
 
 {% block content %}
     <a name="page_anchor"></a>
-    <div class="full-box clear index">
-        <div class="container">
+    <div class="row">
+        <div class="span12">
             <h1>{% trans "Messier Marathon" %}</h1>
-            <p>
+            <div class="well">
                 {% blocktrans %}This is a list of Messier objects featuring images on AstroBin. You can nominate any image (as long as it contains a Messier object), by opening the <strong>Actions</strong> menu and selecting <strong>Nominate for the Messier Marathon</strong>.{% endblocktrans %}
-            </p>
-            <p>
+                <br/><br/>
                 {% url haystack_search as search_url %}
                 {% blocktrans %}What about <a href="{{search_url}}">doing a search</a> and nominating some images now?{% endblocktrans %}
-            </p>
-
+            </div>
+            
             {% messier_list request object_list %}
-        </div> <!-- container -->
+        </div>
     </div>
 {% endblock %}
 

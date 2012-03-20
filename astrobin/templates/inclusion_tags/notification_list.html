@@ -1,22 +1,18 @@
 {% load i18n %}
 
 {% if notifications %}
-    <ul id="notification-feed">
     {% for n in notifications %}
     <li {% if n.unseen %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>
-        <div class="notification-link">
-            {% autoescape off %}{{n.message}}{% endautoescape %}
-        </div>
+        {% autoescape off %}{{n.message}}{% endautoescape %}
     </li>
     {% endfor %}
+
     {% if show_footer %}
-    <li class="footer">
-        <div class="notification-link">
-            <a href="{% url notifications %}">{% trans "Show all notifications" %}</a>
-        </div>
+    <li class="divider"></li>
+    <li>
+        <a href="{% url notifications %}">{% trans "Show all notifications" %}</a>
     </li>
     {% endif %}
-    </ul>
 {% else %}
-    <p>{% trans "You have no new notifications." %}</p>
+    <li>{% trans "You have no new notifications." %}</li>
 {% endif %}

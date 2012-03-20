@@ -1,37 +1,32 @@
 {% load i18n %}
 
-<ul id="request-feed">
 {% for r in requests %}
     <li {% if not r.fulfilled %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>
-        <div class="request-link">
-            {% if r.image %}
-            <a href="{{r.image.get_absolute_url}}">
-                {% if r.type == 'INFO' %}
-                {% blocktrans with r.from_user.username as username %}<strong>{{username}}</strong> has requested additional information about your image.{% endblocktrans %}
-                {% else %}
-                {% if r.type == 'FITS' %}
-                {% blocktrans with r.from_user.username as username %}<strong>{{username}}</strong> has requested to see the TIFF of FITS of your image.{% endblocktrans %}
-                {% endif %}
-                {% endif %}
-            </a>
+        {% if r.image %}
+        <a href="{{r.image.get_absolute_url}}">
+            {% if r.type == 'INFO' %}
+            {% blocktrans with r.from_user.username as username %}<strong>{{username}}</strong> has requested additional information about your image.{% endblocktrans %}
+            {% else %}
+            {% if r.type == 'FITS' %}
+            {% blocktrans with r.from_user.username as username %}<strong>{{username}}</strong> has requested to see the TIFF of FITS of your image.{% endblocktrans %}
             {% endif %}
-            {% if r.location %}
-            <a href="{% url location_edit r.location.id %}">
-                {% blocktrans with r.location as location %}You should insert data for the location you have created: <strong>{{location}}</strong>{% endblocktrans %}
-            </a>
             {% endif %}
-        </div>
+        </a>
+        {% endif %}
+        {% if r.location %}
+        <a href="{% url location_edit r.location.id %}">
+            {% blocktrans with r.location as location %}You should insert data for the location you have created: <strong>{{location}}</strong>{% endblocktrans %}
+        </a>
+        {% endif %}
     </li>
 {% empty %}
-    <li id="empty">
+    <li>
         {% trans "You have no requests." %}
     </li>
 {% endfor %}
 {% if requests and show_footer %}
-    <li class="footer">
-        <div class="request-link">
-            <a href="{% url requests %}">{% trans "Manage received requests" %}</a>
-        </div>
+    <li class="divider"></li>
+    <li>
+        <a href="{% url requests %}">{% trans "Manage received requests" %}</a>
     </li>
 {% endif %}
-</ul>

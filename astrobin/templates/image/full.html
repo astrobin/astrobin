@@ -24,6 +24,8 @@
         {% compress css %}
         <!-- site's css -->
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.astrobin.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css"/>
         <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/static/css/ie6.css"/><![endif]-->
         {% endcompress %}
@@ -47,44 +49,57 @@
         </script>
     </head>
 
-    <body style="width: 100%">
-        <div id="full-header-wrap">
-            <div class="logo">
-                <h1>
-                    <a href="{% url index %}">
-                        <img src="/static/images/astrobin-logo.png" alt="AstroBin" />
-                    </a>
-                </h1>
-            </div>
-            <div class="data">
-                <h2 class="title">{{image.title|escape|default:_("(no title)")}}</h2>
-                <span class="subtitle">
-                    {% trans "uploaded" %}: {{image.uploaded|ago}}
-                    {% url user_page image.user.username as the_url %}
-                    {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %}
-                </span>
-            </div>
-            <div class="links">
-                {% with request.GET.mod as mod %}
-                <span>
-                    <a href="{% url image_detail image.id %}{% query_string "mod=mod" "" %}">
-                        {% blocktrans %}See technical details{% endblocktrans %}
-                    </a>
-                </span> 
-                <span>
-                {% if real %}
-                    <a href="{% url image_full image.id %}{% query_string "mod=mod" "real" %}">
-                        {% blocktrans %}Fit image's width to window{% endblocktrans %}
-                    </a>
-                {% else %}
-                    <a href="{% url image_full image.id %}{% query_string "mod=mod,real=''" "" %}">
-                        {% blocktrans %}View at full resolution{% endblocktrans %}
-                    </a>
-                {% endif %}
-                </span>
-                {% endwith %}
+    <body class="full">
+        <div class="navbar navbar-fixed-top" id="top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <a class="brand" href="{% url index %}">
+                            <img src="/static/images/astrobin-logo-square-mini.png" alt="AstroBin" />
+                        </a>
+                        <li>
+                            <div class="full-title">
+                                <span class="title">{{image.title|escape|default:_("(no title)")}}</span>
+                                <span class="subtitle">
+                                    ({% trans "uploaded" %}: {{image.uploaded|ago}}
+                                    {% url user_page image.user.username as the_url %}
+                                    {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %})
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {% trans "View" %}
+                                <span class="caret"></span>
+                            </a>
+                            {% with request.GET.mod as mod %}
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{% url image_detail image.id %}{% query_string "mod=mod" "" %}">
+                                            {% blocktrans %}Technical card{% endblocktrans %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        {% if real %}
+                                            <a href="{% url image_full image.id %}{% query_string "mod=mod" "real" %}">
+                                                {% blocktrans %}Fit to window{% endblocktrans %}
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url image_full image.id %}{% query_string "mod=mod,real=''" "" %}">
+                                                {% blocktrans %}Full resolution{% endblocktrans %}
+                                            </a>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            {% endwith %}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+  
         <div id="full-size-image">
             {% if revision_image %}
                  {% with revision_image as image %}
@@ -105,6 +120,7 @@
             {% endif %}
         </div>
         <script type="text/javascript" src="/static/js/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/static/js/astrobin.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
