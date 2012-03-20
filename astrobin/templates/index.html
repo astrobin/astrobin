@@ -94,7 +94,7 @@
         <div class="container">
             {% if user.is_authenticated %}
             <div class="image-of-the-day thumbnail-list clear">
-                <h2>{% trans "Image of the day" %}</h2>
+                <h2>{% trans "Hot today" %}</h2>
                 {% with image_of_the_day as image %}
                 <div class="image">
                     <a href="{% url image_detail image.id %}">
