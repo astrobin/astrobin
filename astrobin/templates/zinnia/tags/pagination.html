@@ -1,0 +1,41 @@
+{% load i18n %}
+<div class="pagination pagination-centered">
+    <ul>
+        <li class="previous{% if not page.has_previous %} disabled {% endif %}">
+            <a href="?page={{ page.previous_page_number }}{{ GET_string }}"
+               title="{% trans "More recent entries" %}">&laquo;</a>
+       </li>
+
+  {% for page_number in begin %}
+    <li class="page {% ifequal page.number page_number %}active{% endifequal %}">
+        <a href="?page={{ page_number }}{{ GET_string }}"
+           title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
+    </li>
+  {% endfor %}
+
+  {% if middle %}
+  <li class="ellipsis disabled"><a href="#">&hellip;</a></li>
+  {% for page_number in middle %}
+  <li class="page {% ifequal page.number page_number %}active{% endifequal %}">
+    <a href="?page={{ page_number }}{{ GET_string }}"
+       title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
+  </span>
+  {% endfor %}
+  {% endif %}
+
+  {% if end %}
+  <li class="ellipsis"><a href="#">&hellip;</a></li>
+  {% for page_number in end %}
+  <li class="page {% ifequal page.number page_number %}active{% endifequal %}">
+    <a href="?page={{ page_number }}{{ GET_string }}"
+       title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
+  </li>
+  {% endfor %}
+  {% endif %}
+
+  
+  <li class="next{% if not page.has_next %} disabled{% endif %}">
+    <a href="?page={{ page.next_page_number }}{{ GET_string }}"
+       title="{% trans "More old entries" %}">&raquo;</a>
+  </li>
+</div>

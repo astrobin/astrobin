@@ -3,10 +3,8 @@
 {% load compress %}
 {% load inbox %}
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
     <head>
         <title>{% block title %}AstroBin{% endblock %}</title>
 
@@ -32,6 +30,8 @@
 
         <!-- site's css -->
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.astrobin.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css"/>
 
 
@@ -76,33 +76,155 @@
     </head>
 
     <body>
-        <a name="top"></a>
-        <div id="header-wrap">
-            <!-- header -->
-            <div id="header">
-                {% block header %}
-                <div id="title">
-                    <h1>
-                        <a href="{% url index %}">
-                            <img src="/static/images/astrobin-logo.png" alt="AstroBin" />
+        <div class="navbar navbar-fixed-top" id="top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <a class="brand" href="{% url index %}">
+                            <img src="/static/images/astrobin-logo-square-mini.png" alt="AstroBin" />
                         </a>
-                    </h1>
-                </div>
 
-                <div id="search">
-                    <form id="quick-search" action="{% url haystack_search %}" method="get" >
-                        <p>
+                        <li class="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
+                        <li class="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
+                        <li class="dropdown {% current request "^/explore/|^/search/|^/stats/" %}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {% trans "Explore" %}
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url wall %}">{% trans "The Big Wall" %}</a></li>
+                                <li><a href="{% url nightly %}">{% trans "Night after night" %}</a></li>
+                                <li><a href="{% url messier %}">{% trans "Messier marathon" %}</a></li>
+                                <li><a href="{% url fits %}">{% trans "TIFF/FITS" %}</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url haystack_search %}">{% trans "Advanced search" %}</a></li>
+                                <li><a href="{% url stats %}">{% trans "Stats" %}</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown {% current request "^/help/|^/faq/" %}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {% trans "Help" %}
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url help %}">{% trans "What is this site?" %}</a></li>
+                                <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {% trans "Language" %}
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{% url set_language "en" %}" title="English">
+                                        <img src="/static/icons/flags/16/United-Kingdom.png" alt="English"/> English
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url set_language "it" %}" title="Italiano">
+                                        <img src="/static/icons/flags/16/Italy.png" alt="Italiano"/> Italiano
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url set_language "es" %}" title="Español">
+                                        <img src="/static/icons/flags/16/Spain.png" alt="Español"/> Español
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url set_language "fr" %}" title="Français">
+                                        <img src="/static/icons/flags/16/France.png" alt="Français"/> Français
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url set_language "fi" %}" title="Suomi">
+                                        <img src="/static/icons/flags/16/Finland.png" alt="Suomi"/> Suomi
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url set_language "de" %}" title="Deutsch">
+                                        <img src="/static/icons/flags/16/Germany.png" alt="Deutsch"/> Deutsh
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url set_language "nl" %}" title="Nederlands">
+                                        <img src="/static/icons/flags/16/Netherlands.png" alt="Nederlands"/> Nederlands
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url set_language "tr" %}" title="Türk">
+                                        <img src="/static/icons/flags/16/Turkey.png" alt="Türk"/> Türk
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="http://translate.astrobin.com/" target="_blank">
+                                        {% trans "Help with translations!" %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> <!-- languages -->
+
+                        <li class="divider-vertical"></li>
+
+                        {% if request.user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{request.user}}
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url user_page request.user %}">{% trans "My page" %}</a></li>
+                                <li><a href="{% url messages_inbox %}">{% trans "My messages" %}</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url profile_edit_basic %}">{% trans "Edit my profile" %}</a></li>
+                                <li><a href="{% url auth_logout %}">{% trans "Logout" %}</a></li>
+                            </ul>
+                        </li> <!-- user menu -->
+
+                        <li class="divider-vertical"></li>
+
+                        <li class="dropdown notice-container">
+                            {% if notifications_count > 0 %}
+                                <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
+                            {% endif %}
+                            <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
+                                <img alt="{% trans "Notifications" %}" src="/static/icons/iconic/orange/notifications.gif"/>
+                            </a>
+                            <ul class="dropdown-menu" id="notifications-popup">
+                                {% notification_list request 1 10 %}
+                            </ul>
+                        </li> <!-- notifications -->
+                        {% else %} <!-- request.user.is_authenticated -->
+                        <li class="{% current request "^/accounts/login/" %}">
+                            <a href="{% url auth_login %}">
+                                {% if privatebeta_enabled %}
+                                    {% trans "Have an invite? Login!" %}
+                                {% else %}
+                                    {% trans "Login" %}
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% if not privatebeta_enabled %}
+                        <li class="{% current request "^/accounts/register/" %}">
+                            <a href="{% url registration_register %}">{% trans "Register" %}</a>
+                        </li>
+                        {% endif %}
+                    {% endif %} <!-- request.user.is_authenticated -->
+                    </ul>
+
+                    <form class="navbar-search pull-right" id="quick-search" action="{% url haystack_search %}" method="get" >
                         <input class="tbox"
                                id="q"
                                type="text"
                                name="q"
                                value="{% trans "Quick search" %}"
-                               title="{% trans "Start typing and hit ENTER" %}"
                                onfocus="common.clearText(this)"
                                onblur="common.clearText(this)"/>
-                        <input class="btn" alt="{% trans "Quick search" %}" type="image"
-                               name="searchsubmit" title="{% trans "Quick search" %}"
-                               src="/static/icons/iconic/white/magnifying_glass_16x16.png"/>
                         <input type="hidden" name="license" value="0"/>
                         <input type="hidden" name="license" value="1"/>
                         <input type="hidden" name="license" value="2"/>
@@ -110,261 +232,91 @@
                         <input type="hidden" name="license" value="4"/>
                         <input type="hidden" name="license" value="5"/>
                         <input type="hidden" name="license" value="6"/>
-                        </p>
                     </form>
-                </div>
 
-                <div id="languages">
-                    <a href="http://translate.astrobin.com/" target="_blank"><img src="/static/icons/flags/16/yours.png" alt="Help with translations!"/></a>
-                    <a href="{% url set_language "en" %}" title="English"><img src="/static/icons/flags/16/United-Kingdom.png" alt="English"/></a>
-                    <a href="{% url set_language "it" %}" title="Italiano"><img src="/static/icons/flags/16/Italy.png" alt="Italiano"/></a>
-                    <a href="{% url set_language "es" %}" title="Español"><img src="/static/icons/flags/16/Spain.png" alt="Español"/></a>
-                    <a href="{% url set_language "fr" %}" title="Français"><img src="/static/icons/flags/16/France.png" alt="Français"/></a>
-                    <a href="{% url set_language "fi" %}" title="Suomi"><img src="/static/icons/flags/16/Finland.png" alt="Suomi"/></a>
-                    <a href="{% url set_language "de" %}" title="Deutsch"><img src="/static/icons/flags/16/Germany.png" alt="Deutsch"/></a>
-                    <a href="{% url set_language "nl" %}" title="Nederlands"><img src="/static/icons/flags/16/Netherlands.png" alt="Nederlands"/></a>
-                    <a href="{% url set_language "tr" %}" title="Türk"><img src="/static/icons/flags/16/Turkey.png" alt="Türk"/></a>
-                    {% if request.user.is_authenticated and not user_language %}
-                    <div id="language-prompt">
-                        <div class="bubble">
-                            {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
-                        </div>
-                    </div>
-                    {% endif %}
 
-                </div>
-            </div> <!-- header -->
-        </div> <!-- header-wrap -->
-
-        <div id="wrap">
-            <div id="navigation">
-                <div id="nav-container">
-                    <div id="nav">
-                        <ul>
-                            <li id="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
-                            <li id="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
-                            <li class="menu text">
-                                <a href="{% url explore_choose %}">{% trans "Explore" %}</a>
-                                <div class="popup">
-                                    <ul>
-                                        <li><a href="{% url wall %}">{% trans "The Big Wall" %}</a></li>
-                                        <li><a href="{% url nightly %}">{% trans "Night after night" %}</a></li>
-                                        <li><a href="{% url messier %}">{% trans "Messier marathon" %}</a></li>
-                                        <li><a href="{% url fits %}">{% trans "TIFF/FITS" %}</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li id="{% current request "^/search/$" %}"><a href="{% url haystack_search %}">{% trans "Search" %}</a></li>
-                            {% if request.user.is_authenticated %}
-                            <li id="{% current request "^/stats/$" %}"><a href="{% url stats %}">{% trans "Stats" %}</a></li>
-                            {% endif %}
-                            <li class="menu text">
-                                <a href="{% url help %}">{% trans "Help" %}</a>
-                                <div class="popup">
-                                    <ul>
-                                        <li><a href="{% url help %}">{% trans "What is this site?" %}</a></li>
-                                        <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="user-nav">
-                        <ul>
-                        {% if request.user.is_authenticated %}
-                            <li class="menu text">
-                                <div class="menu-container">
-                                    <a href="{% url user_page request.user %}">
-                                        <span class="icon">
-                                            <img src="/static/icons/iconic/orange/open_menu.png" alt="" />
-                                        </span>
-                                        {{request.user}}
-                                    </a>
-                                    <div class="popup" id="profile-popup">
-                                        <ul>
-                                            <li>
-                                                <a href="{% url user_page request.user %}">{% trans "My page" %}</a>
-                                            </li>
-                                            <li>
-                                                <a href="{% url profile_edit_basic %}">{% trans "Edit my profile" %}</a>
-                                            </li>
-                                            <li>
-                                                <a href="{% url auth_logout %}">{% trans "Logout" %}</a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="menu">
-                                <div class="notice-container">
-                                    {% if notifications_count > 0 %}
-                                        <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
-                                    {% endif %}
-                                    <a class="icon notifications" title="{% trans "Notifications" %}" href="{% url notifications %}">
-                                        <img id="notifications" alt="{% trans "Notifications" %}" src="/static/icons/iconic/orange/notifications.gif"/>
-                                    </a>
-                                    <div class="popup" id="notifications-popup">
-                                        {% notification_list request 1 10 %}
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="notice-container">
-                                    {% inbox_count as count %}
-                                    {% if count > 0 %}
-                                        <span class="notice-count">{{count}}</span>
-                                    {% endif %}
-                                    <a class="icon messages" title="{% trans "Messages" %}" href="{% url messages_inbox %}">
-                                        <img id="messages" alt="{% trans "Messages" %}" src="/static/icons/iconic/orange/messages.gif"/>
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="menu">
-                                <div class="notice-container">
-                                    {% if requests_count > 0 %}
-                                        <span class="notice-count">{{requests_count}}</span>
-                                    {% endif %}
-                                    <a class="icon" title="{% trans "Requests" %}" href="{% url requests %}">
-                                        <img id="requests" alt="{% trans "Requests" %}" src="/static/icons/iconic/orange/requests.gif"/></a>
-                                    <div class="popup" id="requests-popup">
-                                        {% request_list request %}
-                                    </div>
-                                </div>
-                            </li>
-
-                        {% else %}
-                            <li class="text" id="{% current request "^/accounts/login/" %}">
-                                <a href="{% url auth_login %}">
-                                    {% if privatebeta_enabled %}
-                                        {% trans "Have an invite? Login!" %}
-                                    {% else %}
-                                        {% trans "Login" %}
-                                    {% endif %}
-                                </a>
-                            </li>
-                            {% if not privatebeta_enabled %}
-                            <li class="text" id="{% current request "^/accounts/register/" %}">
-                                <a href="{% url registration_register %}">{% trans "Register" %}</a>
-                            </li>
-                            {% endif %}
-                        {% endif %}
-
-                        </ul>
-                    </div>
-                </div>
-               {% endblock %}
-            </div> <!-- navigation -->
-
-            {% if request.user.is_authenticated or not privatebeta_enabled %}
-            {% block abpod %}{% endblock %}
-            {% endif %}
-
-            <!-- content -->
-            <div id="content-wrap" class="clear">
-                <div id="content" class="clear">
-                    {% if context_message %}
-                    <div class="context_message">
-                        {% if context_message.error %}
-                        <img src="/static/icons/iconic/black/x_alt_16x16.png" alt="{% trans "Error" %}" />
-                        {% else %}
-                        <img src="/static/icons/iconic/black/info_8x16.png" alt="{% trans "Info" %}" />
-                        {% endif %}
-                        <p>{{context_message.text}}</p>
-                    </div>
-                    {% endif %}
-
-                    {% if upload_error %}
-                    <div class="context_message">
-                        <img src="/static/icons/iconic/black/x_alt_16x16.png" alt="{% trans "Error" %}" />
-                        <p>
-                            {% blocktrans %}Invalid image or no image provided. Allowed formats are JPG, PNG and GIF.{% endblocktrans %}
-                        </p>
-                    </div>
-                    {% endif %}
-
-                    {% block content %}{% endblock %}
                 </div>
             </div>
+        </div>
 
-            <!-- footer -->
-            <div class="horizontal-separator"></div>
-            <div id="footer">
-                {% block footer %}
-                <!-- footer-outer -->
-                <div id="footer-outer" class="clear"><div id="footer-wrap">
+        {% comment %}
+        {% if request.user.is_authenticated and not user_language %}
+        <div id="language-prompt">
+            <div class="bubble">
+                {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
+            </div>
+        </div>
+        {% endif %}
+        {% endcomment %}
 
-                    <div class="col-a">
+        <div class="container astrobin-container">
+            {% if context_message %}
+            <div class="alert {% if context_message.error %}alert-error{% endif %}">
+                <p>{{context_message.text}}</p>
+            </div>
+            {% endif %}
+
+            {% if upload_error %}
+            <div class="alert alert-error">
+                <p>
+                    {% blocktrans %}Invalid image or no image provided. Allowed formats are JPG, PNG and GIF.{% endblocktrans %}
+                </p>
+            </div>
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </div> <!-- container -->
+
+        <footer>
+            {% block footer %}
+            <div class="container">
+                <div class="row">
+                    <div class="span3">
                         <h3>{% trans "About" %}</h3>
                         <p>
                         {% trans "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
                         </p>
                     </div>
-                    <div class="col-b">
+                    <div class="span3">
                         <h3>{% trans "Site links" %}</h3>
-                        <p>
-                            <ul>
-                                <li><a href="{% url index %}">{% trans "Home" %}</a></li>
-                                <li><a href="/blog/">{% trans "Blog" %}</a></li>
-                                <li><a href="{% url help %}">{% trans "Help" %}</a></li>
-                                <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
-                                <li><a href="{% url tos %}">{% trans "Terms of Service" %}</a></li>
-                                <li><a href="{% url guidelines %}">{% trans "Guidelines" %}</a></li>
-                            </ul>
-                        </p>
+                        <ul>
+                            <li><a href="{% url index %}">{% trans "Home" %}</a></li>
+                            <li><a href="/blog/">{% trans "Blog" %}</a></li>
+                            <li><a href="{% url help %}">{% trans "Help" %}</a></li>
+                            <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
+                            <li><a href="{% url tos %}">{% trans "Terms of Service" %}</a></li>
+                            <li><a href="{% url guidelines %}">{% trans "Guidelines" %}</a></li>
+                        </ul>
                     </div>
-                    <div class="col-b">
+                    <div class="span3">
                         <h3>{% trans "Thanks to" %}</h3>
-                        <p>
-                            <ul>
-                                <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">José J. Chambó</a>, <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent Schmitz</a>, <a href="/users/Vostok/">Lauri Kangas</a>, <a href="/users/naavis/">Samuli Vuorinen</a>, <a href="/users/ketarax/">Jussi Kantola</a>, <a href="/users/KoenDierckens/">Koen Dierckens</a>, <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>, <a href="http://strehl1.de" target="_blank">Michael Wilk</a>, <a href="/users/stimpy/">Marc Demierre</a>, <a href="/users/kalle66/">Rinke Kallenkoot</a>, <a href="/users/bilgebay/">Sedat Bilgebay</a>, <a href="/users/onuratilgan/">Onur Atilgan</a>, <a href="/users/guvenozkan/">Güven Özkan</a>, <a href="/users/castle/">Ahmet Kale</a>.
-                                <li><a href="http://simbad.u-strasbg.fr/simbad/" target="_blank">SIMBAD Astronomical Database</a></li>
-                                <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
-                            </ul>
-                        </p>
+                        <ul>
+                            <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">José J. Chambó</a>, <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent Schmitz</a>, <a href="/users/Vostok/">Lauri Kangas</a>, <a href="/users/naavis/">Samuli Vuorinen</a>, <a href="/users/ketarax/">Jussi Kantola</a>, <a href="/users/KoenDierckens/">Koen Dierckens</a>, <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>, <a href="http://strehl1.de" target="_blank">Michael Wilk</a>, <a href="/users/stimpy/">Marc Demierre</a>, <a href="/users/kalle66/">Rinke Kallenkoot</a>, <a href="/users/bilgebay/">Sedat Bilgebay</a>, <a href="/users/onuratilgan/">Onur Atilgan</a>, <a href="/users/guvenozkan/">Güven Özkan</a>, <a href="/users/castle/">Ahmet Kale</a>.
+                            <li><a href="http://simbad.u-strasbg.fr/simbad/" target="_blank">SIMBAD Astronomical Database</a></li>
+                            <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
+                        </ul>
                     </div>
-                    <div class="col-b">
+                    <div class="span3">
                         <h3>{% trans "Copyright" %}</h3>
                         <p>
                         {% blocktrans %}AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners.{% endblocktrans %}
                         </p>
                     </div>
-
-
-                    <div class="fix"></div>
-
-                    <!-- footer-bottom -->
-                    <div id="footer-bottom">
-
-                        <div class="bottom-left">
-                            <p>
-                            &copy; 2010-2012 <a href="/users/siovene/">Salvatore Iovene</a>
-                            </p>
-                        </div>
-
-                        <div class="bottom-right">
-                            <p>
-                                <a href="{% url index %}">{% trans "Home" %}</a> |
-                                <a href="https://plus.google.com/u/0/b/105764284631954214838/" target="_blank">Google+</a> |
-                                <a href="http://twitter.com/astrobin_com" target="_blank">Twitter</a> |
-                                <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
-                            </p>
-                        </div>
-
-                    <!-- /footer-bottom -->
+                </div> <!-- row -->
+                <div class="row bottom">
+                    <div class="span9">
+                        &copy; 2010-2012 <a href="/users/siovene/">Salvatore Iovene</a>
                     </div>
-
-                <!-- /footer-outer -->
-                </div></div>
-                {% endblock %}
-            <!-- /footer -->
-            </div>
-
-            <div id="feedback">
-                <a href="mailto:astrobin@astrobin.com">{% trans "Feedback" %}</a>
-            </div> <!-- /feedback -->
-        <!-- wrap -->
-        </div>
+                    <div class="span3">
+                        <a href="{% url index %}">{% trans "Home" %}</a> /
+                        <a href="https://plus.google.com/u/0/b/105764284631954214838/" target="_blank">Google+</a> /
+                        <a href="http://twitter.com/astrobin_com" target="_blank">Twitter</a> /
+                        <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+            {% endblock %}
+        </footer>
 
         <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="/static/js/flashcanvas.js"></script><![endif]-->
         {% compress js %}
@@ -379,6 +331,7 @@
         </script>
         <script type="text/javascript" src="/static/js/jquery.uniform.js"></script>
         <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
+
         <script type="text/javascript" src="/static/js/jquery.capty.js"></script>
         <script type="text/javascript" src="/static/js/jquery-ui-timepicker-addon.js"></script>
         <script type="text/javascript" src="/static/js/jquery.validationEngine-en.js"></script>
@@ -412,6 +365,7 @@
 
         <script type="text/javascript" src="/static/js/jquery.multiselect.js"></script>
 
+        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/static/js/astrobin.js"></script>
         {% endcompress %}
 
@@ -453,7 +407,11 @@
                 {%endif %}
 
                 common.init_ajax_csrf_token();
-                $('a[rel*=facebox]').facebox();
+
+                $('.dropdown-toggle').dropdown();
+                $('.carousel').carousel();
+                $('.nav-tabs').tab();
+                $('[rel=tooltip]').tooltip();
 
                 $('.capty').capty({animation: 'fade', speed: 150, height: 45});
                 $('.capty-fixed').capty({animation: 'fixed', height: 45, opacity: 0.6});
@@ -463,7 +421,7 @@
                 $('input').filter('.timepickerclass').timepicker({});
                 $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
 
-                $('select:not([multiple]), input:checkbox, input:radio, input:file').uniform(
+                $('input:checkbox, input:radio, input:file').uniform(
                     {fileDefaultText: '{% trans "No file selected" %}',
                      fileBtnText: '{% trans "Choose file" %}'
                     }
@@ -472,57 +430,6 @@
                 $("select[multiple]").not('*[name="license"]').multiselect({
                     searchable: false,
                     dividerLocation: 0.5
-                });
-
-                var open_popup = 0;
-                var active_a = 0;
-                $('#user-nav > ul > li.menu > .notice-container > a,\
-                   #user-nav > ul > li.menu > .menu-container > a,\
-                   #nav > ul > li.menu > a,\
-                   ul.topnav > li > span.text > a').click (function(event) {
-                    var a = $(this);
-                    var li = a.closest('li')
-                    var popup = li.find('.popup');
-
-                    if (popup.length == 0) {
-                        popup = li.find('.sub');
-                    }
-
-                    if (open_popup && active_a) {
-                        var old_open_popup = open_popup;
-                        var old_active_a = active_a;
-
-                        open_popup.css('visibility', 'hidden');
-                        active_a.removeClass('active');
-                        active_a.closest('li').removeClass('active');
-                        open_popup = 0;
-                        active_a = 0;
-                        if (old_open_popup.get(0) == popup.get(0) &&
-                            old_active_a.get(0) == a.get(0)) {
-                            return false;
-                        }
-                    }
-
-                    a.addClass('active');
-                    li.addClass('active');
-
-                    popup.css('visibility', 'visible');
-                    open_popup = popup;
-                    active_a = a;
-                    event.stopPropagation();
-                    $(document).one('click', function(event) {
-                        var li = $(event.target).closest('li');
-                        if (li.hasClass('active'))
-                            return;
-
-                        a.removeClass('active');
-                        a.closest('li').removeClass('active');
-                        activa_a = 0;
-                        popup.css('visibility', 'hidden');
-                        open_popup = 0;
-                    });
-
-                    return false;
                 });
 
                 $('.notice-container a.notifications').click(function(event) {

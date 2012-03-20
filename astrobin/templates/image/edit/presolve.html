@@ -1,51 +1,47 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load bootstrap_toolkit %}
 
 {% block content %}
-    {% if 'done_later' in request.GET %}
-    <div class="info-side-bar">
-        <p>{% blocktrans %}A little help might be useful!{% endblocktrans %}</p>
-    </div>
-    {% else %}
+    {% if 'done_later' not in request.GET %}
         {% if image.is_stored %}
             {% include 'image/edit/menu.html' %}   
-        {% else %}
-            {% include 'image/edit/menu_not_ready.html' %}
         {% endif %}
     {% endif %}
 
-    <div class="sided-main-content">
     {% if 'done_later' in request.GET %}
-    <h1>{% trans "Knowing the pixel scale will help" %}</h1>
+        <h1>{% trans "Knowing the pixel scale will help" %}</h1>
     {% else %}
-    <h1>
-        {% if not image.is_stored %}
-            {% blocktrans %}Step 1 of 5: plate solving scale{% endblocktrans %}
-        {% else %}
-            {% blocktrans %}Edit your image: plate-solving scale{% endblocktrans %}
-        {% endif %}
-    </h1>
-    {% endif %}
-    <p>
-    {% blocktrans %}AstroBin <em>could</em> plate-solve your image without knowing anything about it, but that could be a long process. If you know the approximate size of the field of your image, plate-solving will be much faster and will have a better chance of success!{% endblocktrans %}
-    </p>
-    <form action="{% url image_edit_save_presolve %}" method="post">{% csrf_token %}
-        {{form.as_p}}
-        <input type="hidden" name="image_id" value="{{image.id}}" />
-        <ul>
-            {% if 'done_later' in request.GET %}
-            <li><input type="hidden" name="done_later" value="" /></li>
-            <li><input class="button submit-button" type="submit" value="{% trans "Start plate-solving" %} &rarr;" /></li>
-            <li><a href="{% url image_detail image.id %}">{% trans "Return to image" %}</a></li>
+        <h1>
+            {% if not image.is_stored %}
+                {% blocktrans %}Step 1 of 5: plate solving scale{% endblocktrans %}
             {% else %}
-            <li><input class="button submit-button" type="submit" value="{% trans "Next step: watermark" %} &rarr;" /></li>
+                {% blocktrans %}Edit your image: plate-solving scale{% endblocktrans %}
             {% endif %}
-        </ul>
+        </h1>
+    {% endif %}
+    
+    <div class="well">
+        {% blocktrans %}AstroBin <em>could</em> plate-solve your image without knowing anything about it, but that could be a long process. If you know the approximate size of the field of your image, plate-solving will be much faster and will have a better chance of success!{% endblocktrans %}
+    </div>
+    
+    <form class="form-horizontal" action="{% url image_edit_save_presolve %}" method="post">
+        {{form|as_bootstrap}}
+        <input type="hidden" name="image_id" value="{{image.id}}" />
+        <div class="form-actions">
+            {% if 'done_later' in request.GET %}
+                <input type="hidden" name="done_later" value="" />
+                <input class="btn btn-primary" type="submit" value="{% trans "Start plate-solving" %} &rarr;" />
+                <a class="btn" href="{% url image_detail image.id %}">{% trans "Return to image" %}</a>
+            {% else %}
+                <input class="btn btn-primary" type="submit" value="{% trans "Next step: watermark" %} &rarr;" />
+            {% endif %}
+        </div>
     </form>
-    <p>
+    <div class="well">
         {% blocktrans %}<strong>Note</strong>: if you didn't upload a full resolution image, the pixel scale will be wrong!{% endblocktrans %}
-    </p>
     </div>
 {% endblock %}
+
 

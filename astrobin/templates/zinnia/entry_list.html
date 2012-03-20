@@ -35,7 +35,7 @@
 {% endif %}
 
 {% for object in object_list %}
-<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %} span-16 last">
+<div id="entry-{{ object.pk }}" class="{% if object.featured %} featured{% endif %}">
   {% with object.html_content|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}

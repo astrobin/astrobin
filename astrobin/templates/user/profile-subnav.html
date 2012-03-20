@@ -1,0 +1,91 @@
+{% load i18n %}
+{% load tags %}
+
+<div class="subnav subnav-fixed">
+    <ul class="nav nav-pills">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {% trans "View" %}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{% url user_page user %}">
+                        {% trans "Gallery" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url user_page_favorites user %}">
+                        {% trans "Favorites" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url user_page_card user %}">
+                        {% trans "Technical card" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url user_page_plots user %}">
+                        {% trans "Plots" %}
+                    </a>
+                </li>
+
+                {% ifequal user request.user %}
+                <li class="divider"></li>
+                <li>
+                    <a href="{% url me %}">
+                        {% trans "Public Area" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url me %}?staging">
+                        {% trans "Staging Area" %}
+                    </a>
+                </li>
+                {% endifequal %}
+            </ul>
+        </li>
+
+        {% if request.user != user and request.user.is_authenticated %}
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {% trans "User" %}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
+                       href="{% if follows %}{% url unfollow user %}{% else %}{% url follow user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
+                        {% if follows %}
+                            {% trans "Stop following" %}
+                        {% else %}
+                            {% trans "Follow" %}
+                        {% endif %}
+                    </a>
+                </li>
+                <li>
+                    <a class="send-private-message" href="{% url messages_compose_to user %}{% query_string "next=request.path" "" %}">{% trans "Send private message" %}</a>
+                </li>
+            </ul> 
+        </li>
+        {% endif %}
+
+        <li class="dropdown" style="visibility: {% in_gallery request %}">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {% trans "Sort" %}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="?public&sub=uploaded">{% trans "Upload time" %}</a></li>
+                <li><a href="?public&sub=acquired">{% trans "Acquisition time" %}</a></li>
+                <li><a href="?public&sub=subject">{% trans "Subject type" %}</a></li>
+                <li><a href="?public&sub=year">{% trans "Year" %}</a></li>
+                <li><a href="?public&sub=gear">{% trans "Gear" %}</a></li>
+                <li class="divider"></li>
+                <li><a href="?public&sub=nodata">{% trans "Lacking data" %}</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+

@@ -334,14 +334,14 @@
                 function add_selected_item(data, num){
                     hidden_value = data[opts.selectedItemProp];
                     values_input.val(values_input.val() + hidden_value + ",");
-                    var item = $('<li class="as-selection-item" id="as-selection-'+num+'"></li>').click(function(){
+                    var item = $('<li class="as-selection-item btn" id="as-selection-'+num+'"></li>').click(function(){
                             opts.selectionClick.call(this, $(this));
                             selections_holder.children().removeClass("selected");
                             $(this).addClass("selected");
                         }).mousedown(function(){ input_focus = false; });
 
                     if (data[opts.completeProp] == false) {
-                        item.addClass('need-data');
+                        item.addClass('need-data btn-primary');
                     };
 
                     var edit;

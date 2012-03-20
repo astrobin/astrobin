@@ -1,33 +1,34 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load bootstrap_toolkit %}
 
 {% block content %}
     {% include 'profile-edit-menu.html' %}
-    <div class="sided-main-content">
-        <h1>{% trans "Edit your locations" %}</h1>
+    <h1>{% trans "Edit your locations" %}</h1>
 
-        {% form_saved request %}
+    {% form_saved request %}
 
-        <p>
-            {% blocktrans %}Use the form below to add a new location. After you add one, a new empty form will be created at the bottom, in case you want to add more.{% endblocktrans %}
-        </p>
-        <p>
-            {% blocktrans %}AstroBin will not share your location details with other users.{% endblocktrans %}
-        </p>
-        <form method="post" action="{% url profile_save_locations %}">
-            {% for form in formset %}
-                <div class="form_in_set">
-                    {{form.as_p}}
-                </div>
-            {% endfor %}
-            {{formset.management_form}}
-            <p>
-                <input class="button submit-button"
-                       type="submit"
-                       value="{% trans "Save" %}" />
-            </p>
-        </form>
-    </div>  
+    <div class="well">
+        {% blocktrans %}Use the form below to add a new location. After you add one, a new empty form will be created at the bottom, in case you want to add more.{% endblocktrans %}
+        <br/>
+        {% blocktrans %}AstroBin will not share your location details with other users.{% endblocktrans %}
+    </div>
+
+    <form class="form-horizontal" method="post" action="{% url profile_save_locations %}">
+        {% for form in formset %}
+            <div class="well">
+                {{form|as_bootstrap}}
+            </div>
+        {% endfor %}
+
+        {{formset.management_form}}
+
+        <div class="form-actions">
+            <input class="btn btn-primary"
+                   type="submit"
+                   value="{% trans "Save" %}" />
+        </div>
+    </form>
 {% endblock %}
 

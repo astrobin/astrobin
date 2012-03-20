@@ -234,7 +234,6 @@ var common = {
     setup_follow: function() {
         $(common.config.follow_action.element).live('click', function() {
             var follow_a = $(this);
-            var span = follow_a.parent();
 
             $('<div id="dialog-confirm"\
                     title="' + common.config.follow_action.dialog.title + '">\
@@ -251,6 +250,7 @@ var common = {
                     buttons: [
                         {
                             text: 'OK',
+                            class: 'btn btn-primary',
                             click: function() {
                                 var dlg = $(this)
                                 $.ajax({
@@ -259,12 +259,8 @@ var common = {
                                     timeout: 5000,
                                     success: function() {
                                         dlg.dialog('close');
-                                        follow_a.remove();
-                                        span.html('<a class="unfollow" href="#">' +
-                                            common.config.follow_action.stop_following +
-                                            '</a>');
-                                        span.parent().removeClass('icon-follow');
-                                        span.parent().addClass('icon-unfollow');
+                                        follow_a.html('<i class="icon-unfollow"></i> ' + common.config.follow_action.stop_following);
+                                        follow_a.removeClass('follow').addClass('unfollow');
                                     },
                                     error: function(jqXHR, textStatus, errorThrown) {
                                     }
@@ -273,6 +269,7 @@ var common = {
                         },
                         {
                             text: $.i18n._('Cancel'),
+                            class: 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }
@@ -286,7 +283,6 @@ var common = {
     setup_unfollow: function() {
         $(common.config.unfollow_action.element).live('click', function() {
             var unfollow_a = $(this);
-            var span = unfollow_a.parent();
 
             $('<div id="dialog-confirm"\
                     title="' + common.config.unfollow_action.dialog.title + '">\
@@ -303,6 +299,7 @@ var common = {
                     buttons: [
                         {
                             text: 'OK',
+                            class: 'btn btn-primary',
                             click: function() {
                                 var dlg = $(this)
                                 $.ajax({
@@ -311,12 +308,8 @@ var common = {
                                     timeout: 5000,
                                     success: function() {
                                         dlg.dialog('close');
-                                        unfollow_a.remove();
-                                        span.html('<a class="follow" href="#">' +
-                                            common.config.unfollow_action.follow +
-                                            '</a>');
-                                        span.parent().removeClass('icon-unfollow');
-                                        span.parent().addClass('icon-follow');
+                                        unfollow_a.html('<i class="icon-follow"></i> ' + common.config.unfollow_action.follow);
+                                        unfollow_a.removeClass('unfollow').addClass('follow');
                                     },
                                     error: function(jqXHR, textStatus, errorThrown) {
                                     }
@@ -325,6 +318,7 @@ var common = {
                         },
                         {
                             text: $.i18n._('Cancel'),
+                            class: 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }
@@ -465,7 +459,11 @@ var image_detail = {
             half: false,
             showHalf: true,
             hintList: image_detail.config.rating.hint_list,
-            target: '#rating-hint',
+            space: false,
+            size: 24,
+            starHalf: 'star-half-big.png',
+            starOff:  'star-off-big.png',
+            starOn:   'star-on-big.png',
             click: function(score) {
                 $.ajax({
                     url: image_detail.config.rating.rate_url + image_detail.globals.image_id + '/' + score + '/',
@@ -552,6 +550,7 @@ var image_detail = {
                     buttons: [
                         {
                             text: 'OK',
+                            class: 'btn btn-primary',
                             click: function() {
                                 $(this).dialog('close');
                                 window.location = image_detail.config.delete_action.url + image_detail.globals.image_id;
@@ -559,6 +558,7 @@ var image_detail = {
                         },
                         {
                             text: $.i18n._('Cancel'),
+                            class: 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }
@@ -588,6 +588,7 @@ var image_detail = {
                     buttons: [
                         {
                             text: 'OK',
+                            class: 'btn btn-primary',
                             click: function() {
                                 $(this).dialog('close');
                                 window.location = image_detail.config.delete_revision_action.url + image_detail.globals.revision_id;
@@ -595,6 +596,7 @@ var image_detail = {
                         },
                         {
                             text: $.i18n._('Cancel'),
+                            class: 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }
@@ -624,6 +626,7 @@ var image_detail = {
                     buttons: [
                         {
                             text: 'OK',
+                            class: 'btn btn-primary',
                             click: function() {
                                 $(this).dialog('close');
                                 window.location = image_detail.config.delete_original_action.url + image_detail.globals.image_id;
@@ -631,6 +634,7 @@ var image_detail = {
                         },
                         {
                             text: $.i18n._('Cancel'),
+                            class: 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }

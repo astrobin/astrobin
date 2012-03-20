@@ -3,42 +3,42 @@
 
 {% block content %}
     {% include 'profile-edit-menu.html' %}
-    <div class="sided-main-content">
-        <h1>{% trans "Import your photos from Flickr" %}</h1>
-        <p>
-        {% blocktrans %}Please note: when importing from Flickr, automatic watermarking of the images it not supported.{% endblocktrans %}
-        </p>
-        <div class="js">
-            <form name="flickr_form" action="">{% csrf_token %}
-                {% if flickr_sets %}
-                <p id="flickr_sets">
-                    <label for="id_flickr_sets">{% trans "Which set" %}:</label>
-                    <select id="id_flickr_sets">
-                    {% for title, id in flickr_sets.items %}
-                        <option value="{{id}}">{{title}}</option>
-                    {% endfor %}
-                    </select>
-                </p>
-                <p id="flickr_photos" class="hidden"></p>
-                <p id="flickr_progress" class="hidden"></p>
-                <p id="flickr_progress_message" class="hidden"></p>
-                {% endif %}
 
-                <p id="button">
-                    {% if flickr_sets %}
-                    <input class="button submit-button" type="submit" value="{% trans "Import photos" %} &rarr;"/>
-                    {% else %}
-                    <input class="button lone-button" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
-                    {% endif %}
-                </p>
-            </form>
-        </div>
-        <noscript>
-            <p>
-                {% blocktrans %}Unfortunately you need to enable Javascript to be able to import photos from Flickr at this time.{% endblocktrans %}
+    <h1>{% trans "Import your photos from Flickr" %}</h1>
+
+    <div class="well">
+        {% blocktrans %}Please note: when importing from Flickr, automatic watermarking of the images it not supported.{% endblocktrans %}
+    </div>
+    <div class="js">
+        <form class="form-horizontal" name="flickr_form" action="">{% csrf_token %}
+            {% if flickr_sets %}
+            <p id="flickr_sets">
+                <label for="id_flickr_sets">{% trans "Which set" %}:</label>
+                <select id="id_flickr_sets">
+                {% for title, id in flickr_sets.items %}
+                    <option value="{{id}}">{{title}}</option>
+                {% endfor %}
+                </select>
             </p>
-        </noscript>
-    </div>  
+            <p id="flickr_photos" class="hidden"></p>
+            <p id="flickr_progress" class="hidden"></p>
+            <p id="flickr_progress_message" class="hidden"></p>
+            {% endif %}
+
+            <div class="form-actions">
+                {% if flickr_sets %}
+                <input class="btn btn-primary" type="submit" value="{% trans "Import photos" %} &rarr;"/>
+                {% else %}
+                <input class="btn btn-primary" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+    <noscript>
+        <p>
+            {% blocktrans %}Unfortunately you need to enable Javascript to be able to import photos from Flickr at this time.{% endblocktrans %}
+        </p>
+    </noscript>
 {% endblock %}
 
 {% block extra_js %}
@@ -55,7 +55,7 @@ $(function() {
         // we have passed the user authentication phase
         phase++;
     }
-    $('.button').click(function() {
+    $('.btn').click(function() {
         if (phase == 0) {
                 window.location = link;
         } else if (phase == 1) { // Time to ask for the photos in the set.
@@ -86,9 +86,7 @@ $(function() {
                                 return ret +
                                        '<div style="clear:both"></div>';
                         });
-                        $('.button').val('{% trans "Import selected photos" %} \u2192');
-                        $('.button').addClass('lone-button');
-                        $('.button').removeClass('submit-button');
+                        $('.btn').val('{% trans "Import selected photos" %} \u2192');
                         $('p#flickr_sets').hide();
                         phase++;
                     }
@@ -97,7 +95,7 @@ $(function() {
             $('p#flickr_progress').removeClass('hidden');
             $('p#flickr_progress').html('<img src="/static/images/loading-bar.gif" alt="Loading..."/>');
             $('p#flickr_progress_message').removeClass('hidden');
-            $('.button').hide();
+            $('.btn').hide();
             $('p#flickr_progress_message').html("<strong>{% trans "Importing images." %}</strong> {% trans "Do not navigate away from this window: this might take a while!" %}");
             
             $.ajax({

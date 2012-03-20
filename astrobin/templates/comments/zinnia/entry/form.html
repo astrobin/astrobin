@@ -1,21 +1,10 @@
 {% load comments i18n %}
+{% load bootstrap_toolkit %}
 
-<form action="{% comment_form_target %}" method="post">
-  {% csrf_token %}
-  <fieldset>
+<form class="form-horizontal" action="{% comment_form_target %}" method="post">
+    {{form|as_bootstrap}}
     <input type="hidden" name="next" value="{% url zinnia_discussion_success %}"/>
-    {% for field in form %}
-    {% if field.is_hidden %}{{ field }}{% else %}
-    <div{% if field.errors %} class="error"{% endif %}{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-      {{ field.label_tag }}
-      {% if field.errors %}{{ field.errors }}{% endif %}
-      {{ field }}
+    <div class="form-actions">
+      <input class="btn btn-primary" type="submit" name="submit" value="{% trans "Post" %}" />
     </div>
-    {% endif %}
-    {% endfor %}
-    <p class="submit">
-      <input type="submit" name="submit" class="submit-post submit-button button" value="{% trans "Post" %}" />
-      <input type="submit" name="preview" class="submit-preview inline-button button" value="{% trans "Preview" %}" />
-    </p>
-  </fieldset>
 </form>

@@ -98,10 +98,9 @@ AWS_HEADERS = {
     }
 S3_URL = 's3.amazonaws.com'
 
-RESIZED_IMAGE_SIZE = 720
-THUMBNAIL_SIZE = 168 
-SMALL_THUMBNAIL_SIZE = 84
-ABPOD_SIZE = 350
+RESIZED_IMAGE_SIZE = 620 
+THUMBNAIL_SIZE = 184
+SMALL_THUMBNAIL_SIZE = 90
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -179,6 +178,7 @@ INSTALLED_APPS = (
     'avatar',
     'uni_form',
     'threaded_messages',
+    'bootstrap_toolkit',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -208,7 +208,7 @@ HAYSTACK_SITECONF = 'astrobin.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
 HAYSTACK_XAPIAN_PATH = ASTROBIN_BASE_PATH + '/xapian_indexes'
 HAYSTACK_DEFAULT_OPERATOR = 'AND'
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 15
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 18
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
 INTERNAL_IPS = ('',)

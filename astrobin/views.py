@@ -215,41 +215,45 @@ def index(request):
                          .order_by('-votes__date_added')[:20]
 
         # Compute picture of the day.
+        coolest_image = None
         yesterday = date.today() - timedelta(1)
-        yesterdays_images = Image.objects.filter(acquisition__date = yesterday)
-        if yesterdays_images:
-            coolest_image = yesterdays_images[0]
-            current_coolness = 0
-            for image in yesterdays_images:
-                score = 0
-                for vote in image.votes.all():
-                    score += vote.score 
-
-                times_favorited = Favorite.objects.filter(image = image).count()
-                comments = Comment.objects.filter(image = image).count()
-
-                coolness = score + (times_favorited * 2) + comments
-                if coolness > current_coolness:
-                    coolest_image = image
-                    current_coolness = coolness
-
-            gear_list = (
-                ('Imaging telescopes or lenses', coolest_image.imaging_telescopes.all(), 'imaging_telescopes'),
-                ('Imaging cameras'   , coolest_image.imaging_cameras.all(), 'imaging_cameras'),
-                ('Mounts'            , coolest_image.mounts.all(), 'mounts'),
-                ('Guiding telescopes or lenses', coolest_image.guiding_telescopes.all(), 'guiding_telescopes'),
-                ('Guiding cameras'   , coolest_image.guiding_cameras.all(), 'guiding_cameras'),
-                ('Focal reducers'    , coolest_image.focal_reducers.all(), 'focal_reducers'),
-                ('Software'          , coolest_image.software.all(), 'software'),
-                ('Filters'           , coolest_image.filters.all(), 'filters'),
-                ('Accessories'       , coolest_image.accessories.all(), 'accessories'),
-            )
-
-            response_dict['image_of_the_day'] = coolest_image
-            # Ugliest thing ever: 424 is the width of the scaled image on the front page; 24 is the padding
-            # of the technical card box. Yikes.
-            response_dict['image_of_the_day_scaled_height'] = (coolest_image.h * 424 / coolest_image.w) - 24
-            response_dict['gear_list'] = gear_list
+        while coolest_image is None:
+            yesterdays_images = Image.objects.filter(acquisition__date = yesterday)
+            if yesterdays_images:
+                coolest_image = yesterdays_images[0]
+                current_coolness = 0
+                for image in yesterdays_images:
+                    score = 0
+                    for vote in image.votes.all():
+                        score += vote.score 
+    
+                    times_favorited = Favorite.objects.filter(image = image).count()
+                    comments = Comment.objects.filter(image = image).count()
+    
+                    coolness = score + (times_favorited * 2) + comments
+                    if coolness > current_coolness:
+                        coolest_image = image
+                        current_coolness = coolness
+    
+                gear_list = (
+                    ('Imaging telescopes or lenses', coolest_image.imaging_telescopes.all(), 'imaging_telescopes'),
+                    ('Imaging cameras'   , coolest_image.imaging_cameras.all(), 'imaging_cameras'),
+                    ('Mounts'            , coolest_image.mounts.all(), 'mounts'),
+                    ('Guiding telescopes or lenses', coolest_image.guiding_telescopes.all(), 'guiding_telescopes'),
+                    ('Guiding cameras'   , coolest_image.guiding_cameras.all(), 'guiding_cameras'),
+                    ('Focal reducers'    , coolest_image.focal_reducers.all(), 'focal_reducers'),
+                    ('Software'          , coolest_image.software.all(), 'software'),
+                    ('Filters'           , coolest_image.filters.all(), 'filters'),
+                    ('Accessories'       , coolest_image.accessories.all(), 'accessories'),
+                )
+    
+                response_dict['image_of_the_day'] = coolest_image
+                # Ugliest thing ever: 460 is the width of the scaled image on the front page; 24 is the padding
+                # of the technical card box. Yikes.
+                response_dict['image_of_the_day_scaled_height'] = (coolest_image.h * 460 / coolest_image.w) - 24
+                response_dict['gear_list'] = gear_list
+            else:
+                yesterday = yesterday - timedelta(1)
 
     sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
 
@@ -721,7 +725,8 @@ def image_detail(request, id):
                      'comment_form': CommentForm(),
                      'comments': Comment.objects.filter(image = image),
                      'preferred_language': preferred_language,
-                     'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0,
+                     'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0 if request.user.is_authenticated() else False,
+                     'times_favorited': Favorite.objects.filter(image = image).count(),
                     }
 
     if 'upload_error' in request.GET:
@@ -1508,7 +1513,7 @@ def user_page(request, username):
     backlink = None
 
     smart_albums = []
-    max_items = 16
+    max_items = 15
     sqs = Image.objects.filter(user = user, is_stored = True).order_by('-uploaded')
     lad_sql = 'SELECT date FROM astrobin_acquisition '\
               'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\

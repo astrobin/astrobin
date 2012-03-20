@@ -4,15 +4,10 @@
 {% block content %}
 
 {% if account %}
-
-<p>{% trans "Account successfully activated" %}</p>
-
-<p><a href="{% url auth_login %}">{% trans "Log in" %}</a></p>
-
+    <p>{% trans "Account successfully activated" %}</p>
+    <p><a class="btn btn-primary" href="{% url auth_login %}">{% trans "Log in" %}</a></p>
 {% else %}
-
-<p>{% trans "Account activation failed" %}</p>
-
+    <p>{% trans "Account activation failed" %}</p>
 {% endif %}
 
 {% endblock %}

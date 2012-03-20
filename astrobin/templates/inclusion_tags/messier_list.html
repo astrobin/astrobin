@@ -1,15 +1,14 @@
 {% load i18n %}
 {% load tags %}
 
-<div class="thumbnail-list messier clear">
+<ul class="thumbnails astrobin-thumbnails">
 {% for object in object_list %}
     {% random_id %}
     {% if object.image.is_stored %}
-
-    <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
+    <li class="thumbnail astrobin-thumbnail">
         <a href="{% url image_detail object.image.id %}">
             <img src="{% if object.image.is_stored %}http://astrobin_images.{{s3_url}}/{{object.image.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
-                 class="capty-fixed thumbnail"
+                 class="capty-fixed"
                  name="#capty-content-{{object.image.id}}-{{randomid}}"
                  alt="{{object.image.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
@@ -22,12 +21,12 @@
             {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
             {% endwith %}
         </div>
-    </div>
+    </li>
     {% endif %}
 {% empty %}
-<p>{% trans "No images" %}.</p>
+    <li>{% trans "No images" %}.</li>
 {% endfor %}
-</div>
+</ul>
 
 {% if paginate %}
     {% include 'pagination.html' %}

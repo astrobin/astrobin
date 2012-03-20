@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load bootstrap_toolkit %}
 
 {% block content %}
     {% if image.is_stored %}
         {% include 'image/edit/menu.html' %}   
-    {% else %}
-        {% include 'image/edit/menu_not_ready.html' %}
     {% endif %}
 
-    <div class="sided-main-content">
     <h1>
         {% if image.is_stored %}
             {% blocktrans %}Edit your image: basic information{% endblocktrans %}
@@ -18,9 +16,9 @@
         {% endif %}
     </h1>
     {% form_saved request %}
-    <form id="basic" action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
+    <form class="form-horizontal" id="basic" action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
         <div id="js_form" style="display:none">
-            {{form.as_p}}
+            {{form|as_bootstrap}}
         </div>
 
         <noscript>
@@ -64,17 +62,17 @@
         </noscript>
 
         <input type="hidden" name="image_id" value="{{image.id}}" />
-        <ul>
+
+        <div class="form-actions">
             {% if image.is_stored %}
-            <li><input class="button submit-button" type="submit" value="{% trans "Save" %} &rarr;" /></li>
-            <li><a href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a></li>
+            <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
+            <a class="btn" href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a>
             {% else %}
-            <li><input class="button submit-button" type="submit" name="submit_next" value="{% trans "Next step: gear used" %} &rarr;" /></li>
-            <li><input type="hidden" name="was_not_ready" value="true"/></li>
+            <input class="btn btn-primary" type="submit" name="submit_next" value="{% trans "Next step: gear used" %} &rarr;" />
+            <input type="hidden" name="was_not_ready" value="true"/>
             {% endif %}
-        </ul>
+        </div>
     </form>
-    </div>
 {% endblock %}
 
 {% block extra_js %}

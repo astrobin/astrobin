@@ -27,13 +27,19 @@ register = Library()
 def current(request, pattern):
     import re
     if re.search(pattern, request.path):
-        return 'current'
+        return 'active'
     return ''
 
+@register.simple_tag
+def in_gallery(request):
+    import re
+    if re.search('/users/[\w.@+-]+/$', request.path):
+        return 'visible'
+    return 'hidden'
 
 @register.inclusion_tag('inclusion_tags/related_images.html')
 def related_images(request, object_list, type):
-    paginator = Paginator(object_list, 10)
+    paginator = Paginator(object_list, 12)
 
     page = request.GET.get('p')
     try:

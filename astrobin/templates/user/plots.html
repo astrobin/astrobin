@@ -4,143 +4,66 @@
 
 {% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s plots{% endblocktrans %}{% endblock %}
 {% block content %}
-<a name="page_anchor"></a>
-<div class="profile">
-    {% include 'inclusion_tags/profile_tabs.html' with active_tab='plots' %}
-    <div class="tabbed-box clear">
-        <div class="container">
-            <div class="plots">
-                <h1>{% blocktrans with user.username as user %}{{user}}'s plots{% endblocktrans %}</h1>
-                <div class="plot-container">
-                    {% ifequal request.user user %}
-                    <p>
-                        {% url user_page user as user_page %}
-                        {% blocktrans with user.username as user %}Hey <strong>{{user}}</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href="{{user_page}}?public&sub=nodata">here</a>.{% endblocktrans %}
-                    </p>
-                    {% endifequal %}
+    <a name="page_anchor"></a>
+    {% include 'user/profile-subnav.html' %}
 
-                    <a name="stats_integration_hours_anchor"></a>
-                    <h2>{% trans "Integration hours" %}</h2>
-                    <p>{% trans "Total integration hours, plotted against time." %}</p>
-                    <ul class="bar">
-                        <li id="menu">
-                            <ul class="topnav">
-                                <li class="first last">
-                                    <span class="text"><a href="#">{% trans "Show by period" %}</a></span>
-                                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                                    <div class="sub">
-                                        <ul class="subnav">
-                                            <li><span class="text"><a href="{% query_string "s_ihp='yearly'" "" %}#stats_integration_hours_anchor">{% trans "Yearly" %}</a></span></li>
-                                            <li><span class="text"><a href="{% query_string "s_ihp='monthly'" "" %}#stats_integration_hours_anchor">{% trans "Monthly" %}</a></span></li>
-                                            <li><span class="text"><a href="{% query_string "s_ihp='daily'" "" %}#stats_integration_hours_anchor">{% trans "Daily" %}</a></span></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div id="stats_integration_hours" class="plot" style="width:880px;height:300px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="/static/images/plot-loading.gif" />
-                        </div>
-                    </div>
-                </div>
+    <h1>{% blocktrans with user.username as user %}{{user}}'s plots{% endblocktrans %}</h1>
+    <div class="plot-container">
+        {% ifequal request.user user %}
+        <p>
+            {% url user_page user as user_page %}
+            {% blocktrans with user.username as user %}Hey <strong>{{user}}</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href="{{user_page}}?public&sub=nodata">here</a>.{% endblocktrans %}
+        </p>
+        {% endifequal %}
 
-                <div class="plot-container">
-                    <a name="stats_integration_hours_by_gear_anchor"></a>
-                    <h2>{% trans "Integration hours by gear" %}</h2>
-                    <p>{% trans "Total integration hours, plotted against time and arranged by imaging telescopes and lenses, and imaging cameras." %}</p>
-                    <ul class="bar">
-                        <li id="menu">
-                            <ul class="topnav">
-                                <li class="first last">
-                                    <span class="text"><a href="#">{% trans "Show by period" %}</a></span>
-                                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                                    <div class="sub">
-                                        <ul class="subnav">
-                                            <li><span class="text"><a href="{% query_string "s_ihgp='yearly'" "" %}#stats_integration_hours_by_gear_anchor">{% trans "Yearly" %}</a></span></li>
-                                            <li><span class="text"><a href="{% query_string "s_ihgp='monthly'" "" %}#stats_integration_hours_by_gear_anchor">{% trans "Monthly" %}</a></span></li>
-                                            <li><span class="text"><a href="{% query_string "s_ihgp='daily'" "" %}#stats_integration_hours_by_gear_anchor">{% trans "Daily" %}</a></span></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div id="stats_integration_hours_by_gear" class="plot" style="width:880px;height:300px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="/static/images/plot-loading.gif" />
-                        </div>
-                    </div>
-                    <div id="stats_integration_hours_by_gear_legend" class="legend"></div>
-                </div>
+        <a name="stats_integration_hours_anchor"></a>
+        <div class="well">{% trans "Total integration hours, plotted against time." %}</div>
+        <div id="stats_integration_hours" class="plot" style="width:940px;height:300px;">
+            <div class="loading">
+                <p>{% trans "Please wait: the plot is loading..." %}</p>
+                <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+            </div>
+        </div>
+    </div>
 
-                <div class="plot-container">
-                    <a name="stats_views_anchor"></a>
-                    <h2>{% trans "Views" %}</h2>
-                    <p>{% trans "Combined view count for all the user's images, plotted against time." %}</p>
-                    <ul class="bar">
-                        <li id="menu">
-                            <ul class="topnav">
-                                <li class="first last">
-                                    <span class="text"><a href="#">{% trans "Show by period" %}</a></span>
-                                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                                    <div class="sub">
-                                        <ul class="subnav">
-                                            <li><span class="text"><a href="{% query_string "s_vp='yearly'" "" %}#stats_views_anchor">{% trans "Yearly" %}</a></span></li>
-                                            <li><span class="text"><a href="{% query_string "s_vp='monthly'" "" %}#stats_views_anchor">{% trans "Monthly" %}</a></span></li>
-                                            <li><span class="text"><a href="{% query_string "s_vp='daily'" "" %}#stats_views_anchor">{% trans "Daily" %}</a></span></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div id="stats_views" class="plot" style="width:880px;height:300px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="/static/images/plot-loading.gif" />
-                        </div>
-                    </div>
-                </div>
+    <div class="plot-container">
+        <a name="stats_integration_hours_by_gear_anchor"></a>
+        <div class="well">{% trans "Total integration hours, plotted against time and arranged by imaging telescopes and lenses, and imaging cameras." %}</div>
+        <div id="stats_integration_hours_by_gear" class="plot" style="width:940px;height:300px;">
+            <div class="loading">
+                <p>{% trans "Please wait: the plot is loading..." %}</p>
+                <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+            </div>
+        </div>
+        <div id="stats_integration_hours_by_gear_legend" class="legend"></div>
+    </div>
 
-                <div class="plot-container">
-                    <a name="stats_uploaded_images_anchor"></a>
-                    <h2>{% trans "Uploaded images" %}</h2>
-                    <p>{% trans "Image uploads, plotted against time." %}</p>
-                    <ul class="bar">
-                        <li id="menu">
-                            <ul class="topnav">
-                                <li class="first last">
-                                    <span class="text"><a href="#">{% trans "Show by period" %}</a></span>
-                                    <span class="small-icon"><a href="#"><img alt="" src="/static/icons/iconic/white/menu.png"/></a></span>
-                                    <div class="sub">
-                                        <ul class="subnav">
-                                            <li><span class="text"><a href="{% query_string "s_uip='yearly'" "" %}#stats_uploaded_images_anchor">{% trans "Yearly" %}</a></span></li>
-                                            <li><span class="text"><a href="{% query_string "s_uip='monthly'" "" %}#stats_uploaded_images_anchor">{% trans "Monthly" %}</a></span></li>
-                                            <li><span class="text"><a href="{% query_string "s_uip='daily'" "" %}#stats_uploaded_images_anchor">{% trans "Daily" %}</a></span></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div id="stats_uploaded_images" class="plot" style="width:880px;height:300px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="/static/images/plot-loading.gif" />
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- plots -->
-        </div> <!-- container -->
-    </div> <!-- tabbed-box -->
-</div> <!-- profile -->
+    <div class="plot-container">
+        <a name="stats_views_anchor"></a>
+        <div class="well">{% trans "Combined view count for all the user's images, plotted against time." %}</div>
+        <div id="stats_views" class="plot" style="width:940px;height:300px;">
+            <div class="loading">
+                <p>{% trans "Please wait: the plot is loading..." %}</p>
+                <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+            </div>
+        </div>
+    </div>
+
+    <div class="plot-container">
+        <a name="stats_uploaded_images_anchor"></a>
+        <div class="well">{% trans "Image uploads, plotted against time." %}</div>
+        <div id="stats_uploaded_images" class="plot" style="width:940px;height:300px;">
+            <div class="loading">
+                <p>{% trans "Please wait: the plot is loading..." %}</p>
+                <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_js %}
+{% include 'user/profile-js.html' %}
+
 <script type="text/javascript">
 $(document).ready(function() {
     stats.init();

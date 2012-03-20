@@ -36,54 +36,57 @@
 {% endblock %}
 
 {% block content %}
-<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %} span-16 last">
-  {% with object.html_content|safe as object_content %}
-  {% include "zinnia/_entry_detail.html" %}
-  {% endwith %}
+<div id="entry-{{ object.pk }}" class="row">
+  <div class="span12">
+	{% with object.html_content|safe as object_content %}
+	  {% include "zinnia/_entry_detail.html" %}
+	{% endwith %}
+  </div>
 </div>
 
-<div id="comments" class="span-16 last">
-  <h3>{% trans "Comments" %}</h3>
-  {% with object.comments as comment_list %}
-  {% if comment_list.count %}
-  <ol id="comment-list" class="span-15 last">
-    {% for comment in comment_list %}
-    <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %} span-15 last">
-      <div class="comment-body span-13 last">
-	<div class="comment-author span-13 last">
-	  {% if comment.url %}
-	  <a href="{{ comment.url }}" class="fn url">{{ comment.user_name }}</a>
+<div id="comments" class="row">
+  <div class="span12">
+	<h3>{% trans "Comments" %}</h3>
+	{% with object.comments as comment_list %}
+	  {% if comment_list.count %}
+		<ol id="comment-list" class="span-15 last">
+		  {% for comment in comment_list %}
+			<li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
+			  <div class="comment-body subtle-container">
+				<div class="comment-author">
+				  {% if comment.url %}
+					<a href="{{ comment.url }}" class="fn url">{{ comment.user_name }}</a>
+				  {% else %}
+					<strong>{{ comment.user_name }}</strong>
+				  {% endif %}
+				  {% trans "on" %} <em>{{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}</em>
+				</div>
+				<cite>
+				  {{ comment.comment|linebreaks }}
+				</cite>
+			  </div>
+			</li>
+		  {% endfor %}
+		</ol>
+		{% if not object.comments_are_open %}
+		  <p>{% trans "Comments are closed." %}</p>
+		{% endif %}
 	  {% else %}
-	  {{ comment.user_name }}
+		{% if object.comments_are_open %}
+		  <p>{% trans "No comments yet." %}</p>
+		{% else %}
+		  <p>{% trans "Comments are closed." %}</p>
+		{% endif %}
 	  {% endif %}
-	  {% trans "on" %} {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-	</div>
-	<div class="span-13 last">
-	  <cite>
-	    {{ comment.comment|linebreaks }}
-	  </cite>
-	</div>
-      </div>
-    </li>
-    {% endfor %}
-  </ol>
-    {% if not object.comments_are_open %}
-  <p>{% trans "Comments are closed." %}</p>
-    {% endif %}
-  {% else %}
-    {% if object.comments_are_open %}
-  <p>{% trans "No comments yet." %}</p>
-    {% else %}
-  <p>{% trans "Comments are closed." %}</p>
-    {% endif %}
-  {% endif %}
-  {% endwith %}
+	{% endwith %}
+  </div>
 </div>
 
 {% if object.comments_are_open %}
-<div class="full-box commentForm span-16 last">
-    <div class="container">
-      {% render_comment_form for object %}
+<div class="row">
+    <div class="span12">
+      <h3>{% trans "Add a comment" %}</h3>
+	  {% render_comment_form for object %}
     </div>
 </div>
 {% endif %}

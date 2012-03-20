@@ -1,13 +1,13 @@
 {% load i18n %}
 {% load tags %}
 
-<div class="thumbnail-list clear">
+<ul class="thumbnails astrobin-thumbnails">
 {% for search_result in image_list %}
     {% if search_result.object.id %}
-    <div style="float:left; width: {{thumbnail_size}}px; height: {{thumbnail_size}}px; padding:2px;">
+    <li class="thumbnail astrobin-thumbnail">
         <a href="{% url image_detail search_result.object.id %}">
             <img src="http://astrobin_images.{{s3_url}}/{{search_result.object.filename}}_thumb.png"
-                 class="capty thumbnail"
+                 class="capty"
                  name="#capty-content-{{search_result.object.id}}"
                  alt="{{search_result.object.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
@@ -54,12 +54,12 @@
             {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
             {% endwith %}
         </div>
-    </div>
+     </li>
     {% endif %}
 {% empty %}
-<p>{% trans "No images" %}.</p>
+    <li>{% trans "No images" %}.</li>
 {% endfor %}
-</div>
+</ul>
 
 {% if paginate %}
     {% include 'pagination.html' %}
