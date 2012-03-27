@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-23 06:47+0000\n"
-"PO-Revision-Date: 2012-03-24 10:34+0100\n"
-"Last-Translator: Astroalb <europarquet@live.it>\n"
+"PO-Revision-Date: 2012-03-27 05:29+0100\n"
+"Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sq\n"
 "MIME-Version: 1.0\n"
@@ -980,7 +980,7 @@ msgstr "Ishujt Virgin, Britani"
 
 #: fields.py:249
 msgid "Virgin Islands, U.S."
-msgstr "Ishujt Virgin,Sh.B.A."
+msgstr "Ishujt Virgin, Sh.B.A."
 
 #: fields.py:250
 msgid "Wallis and Futuna"
@@ -1021,7 +1021,7 @@ msgstr ""
 #: forms.py:50
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr ""
-"Nese eshte e mundur,perdor emertimet e katalogeve (p.sh. M101, ose NGC224 "
+"Nese eshte e mundur, perdor emertimet e katalogeve (p.sh. M101, ose NGC224 "
 "ose IC 1370)."
 
 #: forms.py:55 templates/image/detail.html:369
@@ -1172,7 +1172,7 @@ msgstr "Objekt kryesor i sistemit diellor"
 
 #: forms.py:316
 msgid "Min. telescope aperture"
-msgstr "Min. hapja e teleskopit "
+msgstr "Min. hapja e teleskopit"
 
 #: forms.py:317
 msgid "Max. telescope aperture"
@@ -1349,7 +1349,7 @@ msgstr "Dielli"
 
 #: models.py:88
 msgid "Earth's Moon"
-msgstr "Hena "
+msgstr "Hena"
 
 #: models.py:89
 msgid "Mercury"
@@ -1734,11 +1734,11 @@ msgid ""
 "and RGB in 2x2, put 1x1 here."
 msgstr ""
 "Kjo eshte vlera me e ulet e shumzimit te nje  pikseli.Nëse keni fotografuar "
-"L në 1x1 dhe RGB në 2x2, këtu vendos 1x1 "
+"L në 1x1 dhe RGB në 2x2, këtu vendos 1x1."
 
 #: models.py:553 models.py:836
 msgid "Binning"
-msgstr "Binning "
+msgstr "Binning"
 
 #: models.py:562
 msgid ""
@@ -1779,15 +1779,15 @@ msgstr "Imazhi"
 
 #: models.py:813
 msgid "1 - Excellent dark-site sky (BLACK)"
-msgstr "1-Sit me Qiell te erret te Shkelqyer (Zezë)"
+msgstr "1 - Sit me Qiell te erret te Shkelqyer (Zezë)"
 
 #: models.py:814
 msgid "2 - Typical truly dark site (GRAY)"
-msgstr "2- Sit tipik me nje qiell te erret  vertete (GRI)"
+msgstr "2 - Sit tipik me nje qiell te erret  vertete (GRI)"
 
 #: models.py:815
 msgid "3 - Rural sky (BLUE)"
-msgstr "3- Qiell fshati (Blu)"
+msgstr "3 - Qiell fshati (Blu)"
 
 #: models.py:816
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
@@ -1859,7 +1859,7 @@ msgstr "Dark-et"
 
 #: models.py:865
 msgid "The number of dark frames."
-msgstr "Numri i fotove dark. "
+msgstr "Numri i fotove dark."
 
 #: models.py:868 views.py:571
 msgid "Flats"
@@ -1894,7 +1894,7 @@ msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
 msgstr ""
-"  Cilesia e qiellit sipas <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-"
+"Cilesia e qiellit sipas <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-"
 "Sky_Scale\" target=\"_blank\">vlersimit Bortle</a>."
 
 #: models.py:891
@@ -2090,7 +2090,7 @@ msgstr "Lindje"
 
 #: models.py:1276
 msgid "West"
-msgstr "Perëndim "
+msgstr "Perëndim"
 
 #: models.py:1277
 msgid "East or West"
@@ -2102,7 +2102,7 @@ msgstr "Lartësia"
 
 #: models.py:1282
 msgid "In meters."
-msgstr "ne metra."
+msgstr "Ne metra."
 
 #: search.py:79 views.py:808 views.py:1095 views.py:1120
 #: templates/image/actions/bring_to_attention.html:44
@@ -2616,7 +2616,7 @@ msgid ""
 "I've seen beautiful images on this site. I'm not worthy of posting mine!"
 msgstr ""
 "Kam parë fotografi shumë të bukura në këtë sit. Nuk me vjen keq të postoj "
-"edhe te mijat."
+"edhe te mijat!"
 
 #: templates/faq.html:16 templates/faq.html.py:69
 msgid "What's the deal with the Staging Area and the Public Area?"
@@ -2772,8 +2772,8 @@ msgid ""
 msgstr ""
 "Fotot ne <a href=\"%(messier_url)s\">Faqja e Maratones Messier</a> zgjidhen "
 "nga nje proçes automatik emertimi. Nese shikoni fotografi te Objekteve "
-"Messier,dhe mendoni qe duhet te shfaqet ne faqen e Maratones Messier,"
-"emertoje ate duke perdorur menune e <strong>Veprime</strong> . Fotografia me "
+"Messier, dhe mendoni qe duhet te shfaqet ne faqen e Maratones Messier, "
+"emertoje ate duke perdorur menune e <strong>Veprime</strong>. Fotografia me "
 "me shume emertime per nje objekt Messieri do shfaqet automatikisht."
 
 #: templates/faq.html:89
@@ -4012,7 +4012,7 @@ msgstr "Po, ndalo ndjekjen!"
 #: templates/image/detail.html:957 templates/user/profile.html:227
 #, python-format
 msgid "Send %(username)s a message"
-msgstr "Dergo nje mesazh tek %(username)s "
+msgstr "Dergo nje mesazh tek %(username)s"
 
 #: templates/image/detail.html:959 templates/messages/compose.html:17
 #: templates/messages/modal_compose.html:16 templates/user/profile.html:229
@@ -4160,7 +4160,7 @@ msgid ""
 "hopefully %(username)s will contact you about how to handle the transaction. "
 "Continue?"
 msgstr ""
-"Ju do të njoftoni  %(username)s që do të deshironit të shihnit kartelën TIFF "
+"Ju do të njoftoni %(username)s që do të deshironit të shihnit kartelën TIFF "
 "ose FIT. AstroBin aktualisht nuk ofrojn dot hapesire per te pritur fotografi "
 "të tilla të mëdha, kështu që shpresojmë qe %(username)s do të kontaktoj me "
 "ju për mënyrën se si të kalohen dosjet. Vazhdo?"
@@ -4511,7 +4511,7 @@ msgstr "Menaxhoni kerkeset qe moret"
 msgid "Viewed one time"
 msgid_plural "Viewed %(counter)s times"
 msgstr[0] "E pare nje here"
-msgstr[1] "e pare %(counter)s here"
+msgstr[1] "E pare %(counter)s here"
 
 #: templates/location/edit.html:8
 msgid "If this location is missing data, or has incorrect data, please fix it."
@@ -4595,13 +4595,14 @@ msgid ""
 msgstr ""
 "Tung! Juve keni nje njoftim te ri ne AstroBin:\n"
 "\n"
-"%(message)s\\n\n"
+"%(message)s\n"
+"\n"
 "Per te pare te gjitha njoftimet ju lutemi shkoni te %(notices_url)s. \n"
 "\n"
 "Nese nuk deshironi me te merrni e-mail,modifiko preferencat e juaja duke "
 "shkuar te http://astrobin.com%(pref_url)s.\n"
 "\n"
-"Qiej te erret, \n"
+"Qiej te erret,\n"
 "AstroBin.\n"
 
 #: templates/notification/attention_request/full.txt:2
@@ -4754,8 +4755,8 @@ msgid ""
 "of <strong>%(messier_object)s</strong> for the Messier Marathon. "
 "Congratulations!</a>"
 msgstr ""
-"<a href=\"%(image_url)s\">%(user)s</strong>ka percaktuar foton tuaj te "
-"<strong>%(messier_object)s</strong> per Maratonen Messier. Urime!</a>"
+"<a href=\"%(image_url)s\"><strong>%(user)s</strong> ka percaktuar foton tuaj "
+"te <strong>%(messier_object)s</strong> per Maratonen Messier. Urime!</a>"
 
 #: templates/notification/messier_nomination/short.txt:2
 #, python-format
@@ -5182,7 +5183,7 @@ msgstr "Do e beni tani?"
 
 #: templates/requests/all.html:38
 msgid "Mark as done."
-msgstr "Shëno si e bërë. "
+msgstr "Shëno si e bërë."
 
 #: templates/search/search.html:13
 msgid "Basic criteria"
@@ -5233,7 +5234,7 @@ msgstr "# e zgjedhur"
 #: templates/user/card.html:13
 #, python-format
 msgid "%(username)s's technical card"
-msgstr " Skeda teknike e %(username)s"
+msgstr "Skeda teknike e %(username)s"
 
 #: templates/user/card.html:38
 #, python-format
@@ -5319,7 +5320,7 @@ msgstr ""
 #: templates/user/plots.html:83
 msgid "Combined view count for all the user's images, plotted against time."
 msgstr ""
-"  Numerator i kombinuar i shikimeve për të gjitha imazhet e përdoruesit, te "
+"Numerator i kombinuar i shikimeve për të gjitha imazhet e përdoruesit, te "
 "sistemuar kundër kohës."
 
 #: templates/user/plots.html:111
@@ -5333,11 +5334,11 @@ msgstr "Ngarkimet e fotove,te sistemuara kunder kohes."
 #: templates/user/profile.html:5
 #, python-format
 msgid "%(user)s's gallery"
-msgstr "Galeria e %(user)s "
+msgstr "Galeria e %(user)s"
 
 #: templates/user/profile.html:14
 msgid "View your images"
-msgstr "Shikoni astrofotot e juaja "
+msgstr "Shikoni astrofotot e juaja"
 
 #: templates/user/profile.html:16
 #, python-format
