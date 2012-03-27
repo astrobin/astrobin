@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-20 04:47-0500\n"
-"PO-Revision-Date: 2012-02-20 13:03+0100\n"
+"PO-Revision-Date: 2012-03-27 06:10+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -2638,7 +2638,7 @@ msgstr "... e risposte!"
 
 #: templates/faq.html:28
 msgid "Yes. AstroBin is completely free!"
-msgstr "Sì. AstroBin è completamente gratuito."
+msgstr "Sì. AstroBin è completamente gratuito!"
 
 #: templates/faq.html:34
 msgid ""
@@ -2718,8 +2718,8 @@ msgstr ""
 "solo le immagini bellissime, ma per dare a tutti un'opportunità di "
 "contribuire ad un vasto (e sempre in crescita) impegno di centralizzazione e "
 "catalogazione di importanti dati. Quello scatto veloce di M31 che hai "
-"ottenuto ieri fra le nuvole è perfettamente al suo posto, su AstroBin. Non "
-"essere timido e pubblicalo qui!"
+"ottenuto ieri fra le nuvole è <em>perfettamente</em> al suo posto, su "
+"AstroBin. Non essere timido e pubblicalo qui!"
 
 #: templates/faq.html:71
 msgid ""
@@ -3356,11 +3356,11 @@ msgid ""
 "objects that features AstroBin images nominated by the users. For each "
 "Messier object, the AstroBin image with the most nomination is chosen."
 msgstr ""
-"Stai per nominare questa immagine per la <a href=\"%(the_url)s\" target="
-"\"_blank\">Maratona Messier</a>.  La Maratona Messier è una lista di oggetti "
-"Messier composta usando immagini su AstroBin nominate dagli utenti. Per ogni "
-"oggetto Messier, l'immagine di AstroBin con il maggior numero di nomine "
-"viene scelta."
+"Stai per nominare questa immagine per la <a href=\"%(the_url)s\" "
+"target=\"_blank\">Maratona Messier</a>. La Maratona Messier è una lista di "
+"oggetti Messier composta usando immagini su AstroBin nominate dagli utenti. "
+"Per ogni oggetto Messier, l'immagine di AstroBin con il maggior numero di "
+"nomine viene scelta."
 
 #: templates/messier_nomination.html:25
 #, python-format
@@ -4131,8 +4131,9 @@ msgid ""
 "You will notify <strong>%(username)s</strong> that you would like them to "
 "feed more information in the technical card for this image. Continue?"
 msgstr ""
-"Manderai a %(username)s una notifica, con la richiesta di inserire ulteriori "
-"informazioni nella scheda tecnica di quest'immagine. Continuare?"
+"Manderai a <strong>%(username)s</strong> una notifica, con la richiesta di "
+"inserire ulteriori informazioni nella scheda tecnica di quest'immagine. "
+"Continuare?"
 
 #: templates/image/actions/request_additional_information_complete.html:18
 msgid "Additional information requested"
@@ -4534,11 +4535,11 @@ msgstr "Nuovo messaggio"
 
 #: templates/messages/compose.html:50 templates/messages/modal_compose.html:43
 msgid "Type in a search term"
-msgstr "Inserisci un termine di ricerca!"
+msgstr "Inserisci un termine di ricerca"
 
 #: templates/messages/compose.html:51 templates/messages/modal_compose.html:44
 msgid "No results"
-msgstr "Nessun risultato."
+msgstr "Nessun risultato"
 
 #: templates/messages/compose.html:52 templates/messages/modal_compose.html:45
 msgid "Searching"
@@ -4628,7 +4629,7 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
 "image to your attention.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\"<strong>%(originator)s</strong> vuole portare "
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> vuole portare "
 "un'immagine alla tua attenzione.</a>"
 
 #: templates/notification/attention_request/short.txt:2
@@ -4652,14 +4653,14 @@ msgstr ""
 #: templates/notification/image_deleted/short.html:2
 #: templates/notification/image_deleted/short.txt:2
 msgid "Your image has been deleted."
-msgstr "La tua immagine è stata cancellata"
+msgstr "La tua immagine è stata cancellata."
 
 #: templates/notification/image_not_solved/full.txt:2
 #, python-format
 msgid "Your image at %(object_url)s could not be plate-solved."
 msgstr ""
 "La tua immagine all'indirizzo %(object_url)s non è stata ridotta "
-"astrometricamente"
+"astrometricamente."
 
 #: templates/notification/image_not_solved/notice.html:2
 #: templates/notification/image_not_solved/short.html:2
@@ -4671,7 +4672,7 @@ msgstr ""
 
 #: templates/notification/image_not_solved/short.txt:2
 msgid "Your image could not be plate-solved."
-msgstr "La tua immagine non è stata ridotta astrometricamente"
+msgstr "La tua immagine non è stata ridotta astrometricamente."
 
 #: templates/notification/image_ready/notice.html:2
 #: templates/notification/image_ready/short.html:2
@@ -4684,7 +4685,7 @@ msgstr "<a href=\"%(object_url)s\">La tua immagine è stata processata.</a>"
 msgid "Your image at %(object_url)s was plate-solved."
 msgstr ""
 "La tua immagine all'indirizzo %(object_url)s è stata ridotta "
-"astrometricamente"
+"astrometricamente."
 
 #: templates/notification/image_solved/notice.html:2
 #: templates/notification/image_solved/short.html:2
@@ -4697,7 +4698,7 @@ msgstr ""
 
 #: templates/notification/image_solved/short.txt:2
 msgid "Your image has been successfully plate-solved."
-msgstr "La tua immagine è ridotta astrometricamente"
+msgstr "La tua immagine è ridotta astrometricamente."
 
 #: templates/notification/lacking_data_reminder/full.txt:2
 #, python-format
@@ -4867,7 +4868,8 @@ msgstr ""
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
 msgstr ""
-"<a href=\"%(url)s\">%(user)s</strong> ha commentato la tua immagine!</a>"
+"<a href=\"%(url)s\"><strong>%(user)s</strong> ha commentato la tua "
+"immagine!</a>"
 
 #: templates/notification/new_comment/short.txt:2
 #, python-format
@@ -5377,7 +5379,7 @@ msgstr "Menù utente"
 
 #: templates/user/profile.html:68
 msgid "Sort images by"
-msgstr "Ordina immagini per:"
+msgstr "Ordina immagini per"
 
 #: templates/user/profile.html:79
 msgid "Acquisition time"
