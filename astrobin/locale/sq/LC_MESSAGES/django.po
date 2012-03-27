@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-23 06:47+0000\n"
-"PO-Revision-Date: 2012-03-27 05:29+0100\n"
+"PO-Revision-Date: 2012-03-27 05:57+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sq\n"
@@ -1014,7 +1014,7 @@ msgid ""
 "file here. Unfortunately, AstroBin cannot offer to store these files at the "
 "moment, so you will have to host them on your personal space."
 msgstr ""
-"Nese deshironi ta shperndani ne TIFF ose FITS  dokumentin e fotos,vendosni "
+"Nese deshironi ta shperndani ne TIFF ose FITS dokumentin e fotos,vendosni "
 "linkun ketu.Fatkeqesisht.Astrobin nuk mundet ti permbaje keto file,keshtuqe "
 "do ju duhet ti zoteroni ne hapsiren tuaj personale."
 
@@ -1044,7 +1044,7 @@ msgstr "Vendndodhjet"
 #: forms.py:81
 msgid "Please enter either some subjects or a main solar system subject."
 msgstr ""
-"Ju lutem shkruani apo veconi  subjektin ose  nje subjekt kryesor te sistemit "
+"Ju lutem shkruani apo veconi subjektin ose nje subjekt kryesor te sistemit "
 "diellor."
 
 #: forms.py:94
@@ -1057,14 +1057,14 @@ msgid ""
 "if the watermark will appear on the dark sky background, 50 if on some "
 "bright object."
 msgstr ""
-"0 do te thote e padukshme;100 do te thote teresisht e pertejdukshme.Vlerat e "
-"keshilluara jane: 10 nese watermark do vendoset mbi nje sfond qielli te "
-"erret,50 nese vendoset mbi sfonde te hapur ne ngjyre."
+"0 do te thote e padukshme; 100 do te thote teresisht e pertejdukshme. Vlerat "
+"e keshilluara jane: 10 nese watermark do vendoset mbi nje sfond qielli te "
+"erret, 50 nese vendoset mbi sfonde te hapur ne ngjyre."
 
 #: forms.py:108
 msgid "If you want to watermark this image, you must specify some text."
 msgstr ""
-"Nese deshiron te perdoresh watermark per kete foto,duhet te specifikonsh  "
+"Nese deshiron te perdoresh watermark per kete foto, duhet te specifikonsh "
 "tekstin."
 
 #: forms.py:135 forms.py:314 models.py:589
@@ -1105,7 +1105,7 @@ msgstr "Paisje"
 
 #: forms.py:165
 msgid "If you have a personal website, put the address here."
-msgstr "Nese ke nje website personal,vendosni adresen ketu."
+msgstr "Nese ke nje website personal, vendosni adresen ketu."
 
 #: forms.py:175 models.py:1073 templates/user/card.html:40
 msgid "Website"
@@ -1116,12 +1116,12 @@ msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
-"Te gjithe teleskopet dhe lentet qe zoteroni,duke perfshire edhe ato  per "
-"ndjekjen,shko ketu."
+"Te gjithe teleskopet dhe lentet qe zoteroni, duke perfshire edhe ato per "
+"ndjekjen, shko ketu."
 
 #: forms.py:190
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
-msgstr "DSLR-te,CCD-te, kamerat planetare dhe kamerat e ndjekjes shko ketu."
+msgstr "DSLR-te, CCD-te, kamerat planetare dhe kamerat e ndjekjes shko ketu."
 
 #: forms.py:203
 msgid ""
@@ -1164,7 +1164,7 @@ msgstr "Liçense"
 #: forms.py:311
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
-msgstr "Kerko per objekte astronomik,teleskop ose lente,kamera,filtra..."
+msgstr "Kerko per objekte astronomik, teleskop ose lente, kamera, filtra..."
 
 #: forms.py:313 models.py:477
 msgid "Main solar system subject"
@@ -1176,7 +1176,7 @@ msgstr "Min. hapja e teleskopit"
 
 #: forms.py:317
 msgid "Max. telescope aperture"
-msgstr "Max.hapja teleskopit"
+msgstr "Max. hapja teleskopit"
 
 #: forms.py:318
 msgid "Acquired after"
@@ -1269,7 +1269,7 @@ msgstr "Atributim-JoKomercial Creative Commons"
 
 #: models.py:30
 msgid "Attribution-NonCommercial-NoDerivs Creative Commons"
-msgstr "Atributim-JoKomercial-JoPerfitues  Creative commons"
+msgstr "Atributim-JoKomercial-JoPerfitues Creative Commons"
 
 #: models.py:31
 msgid "Attribution Creative Commons"
@@ -1281,7 +1281,7 @@ msgstr "Atributim-ShperndaEpelqe Creative Commons"
 
 #: models.py:33
 msgid "Attribution-NoDerivs Creative Commons"
-msgstr "Atributim-JoPerfitues  Creative Commons"
+msgstr "Atributim-JoPerfitues Creative Commons"
 
 #: models.py:37 models.py:49 settings.py:49 views.py:629
 msgid "English"
@@ -1549,7 +1549,7 @@ msgstr "Gabimi periodik"
 
 #: models.py:232
 msgid "(peak to peak, in arcseconds)"
-msgstr "(kulm në kulm,ne arkosekonda)"
+msgstr "(kulm në kulm, ne arkosekonda)"
 
 #: models.py:245
 msgid "CCD"
@@ -1686,7 +1686,7 @@ msgstr "Kjo është një foto me fushë te gjërë shikimi (1 deri 10 gradë)."
 #: models.py:463
 msgid "This ia narrow field image (less than 1 degree)."
 msgstr ""
-"Kjo është nje fotografi me fushe të ngushtë  shikimi (me pak se 1 gradë)."
+"Kjo është nje fotografi me fushe të ngushtë shikimi (me pak se 1 gradë)."
 
 #: models.py:469
 msgid "Title"
@@ -1697,14 +1697,15 @@ msgid ""
 "If the main subject of your image is a body in the solar system, please "
 "select which (or which type) it is."
 msgstr ""
-"Nese subjekti i fotos tuaj është nje trup i sistemit diellor,ju lutem "
+"Nese subjekti i fotos tuaj është nje trup i sistemit diellor, ju lutem "
 "zgjidhni ate (ose tipin) që është."
 
 #: models.py:487
 msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr ""
-"Zvarrit artikullin nga krahu i djathte ne te majte,ose klikoni shenjen plus."
+"Zvarrit artikullin nga krahu i djathte ne te majte, ose klikoni shenjen "
+"plus."
 
 #: models.py:493 templates/image/detail.html:456
 msgid "Description"
@@ -1733,7 +1734,7 @@ msgid ""
 "This is the smallest of the binning values you used. If you imaged L in 1x1 "
 "and RGB in 2x2, put 1x1 here."
 msgstr ""
-"Kjo eshte vlera me e ulet e shumzimit te nje  pikseli.Nëse keni fotografuar "
+"Kjo eshte vlera me e ulet e shumzimit te nje pikseli. Nëse keni fotografuar "
 "L në 1x1 dhe RGB në 2x2, këtu vendos 1x1."
 
 #: models.py:553 models.py:836
@@ -1746,9 +1747,9 @@ msgid ""
 "new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't "
 "matter."
 msgstr ""
-"Nese e keni zvogeluar fotografine perpara se ta ngarkonit ,vendos perqindjen "
-"e permasave te reja ketu.P.sh. 50 nese keni vene gjysmen e permasave.Prerja "
-"e fotografise,nuk ka rendesi."
+"Nese e keni zvogeluar fotografine perpara se ta ngarkonit, vendos perqindjen "
+"e permasave te reja ketu. P.sh. 50 nese keni vene gjysmen e permasave. "
+"Prerja e fotografise,nuk ka rendesi."
 
 #: models.py:563
 msgid "Scaling"
@@ -1783,7 +1784,7 @@ msgstr "1 - Sit me Qiell te erret te Shkelqyer (Zezë)"
 
 #: models.py:814
 msgid "2 - Typical truly dark site (GRAY)"
-msgstr "2 - Sit tipik me nje qiell te erret  vertete (GRI)"
+msgstr "2 - Sit tipik me nje qiell te erret vertete (GRI)"
 
 #: models.py:815
 msgid "3 - Rural sky (BLUE)"
@@ -1827,7 +1828,7 @@ msgstr "Numri"
 
 #: models.py:841
 msgid "The number of sub-frames."
-msgstr "Numri i  nën-fotove."
+msgstr "Numri i nën-fotove."
 
 #: models.py:844
 msgid "Duration"
@@ -1835,7 +1836,7 @@ msgstr "Kohezgjatja"
 
 #: models.py:846
 msgid "Duration of each sub-frame, in seconds."
-msgstr "Kohezgjatja e çdo nen-fotoje,në sekonda."
+msgstr "Kohezgjatja e çdo nen-fotoje, në sekonda."
 
 #: models.py:849
 msgid "ISO"
@@ -1883,11 +1884,11 @@ msgstr "Bias"
 
 #: models.py:880
 msgid "The number of bias/offset frames."
-msgstr "Numeri i fotove  bias/offset."
+msgstr "Numeri i fotove bias/offset."
 
 #: models.py:883 views.py:576
 msgid "Bortle Dark-Sky Scale"
-msgstr "Erresira Bortle - Renditja qiellit"
+msgstr "Erresira Bortle-Renditja qiellit"
 
 #: models.py:887
 msgid ""
@@ -1938,7 +1939,7 @@ msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
 msgstr ""
-"Gjatësia fokale e tërë trenit optik,duke perfshire lentet barlow apo paisje "
+"Gjatësia fokale e tërë trenit optik, duke perfshire lentet barlow apo paisje "
 "te tjera shtesë."
 
 #: models.py:947 templates/image/detail.html:521
@@ -1971,7 +1972,7 @@ msgstr "Seeing"
 
 #: models.py:975
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
-msgstr "Vleresimi yt per seeing,ne nje shkalle nga 1 ne 5."
+msgstr "Vleresimi yt per seeing, ne nje shkalle nga 1 ne 5."
 
 #: models.py:981 templates/image/detail.html:533
 msgid "Transparency"
@@ -1979,7 +1980,7 @@ msgstr "Transparenca"
 
 #: models.py:982
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
-msgstr "Vleresimi yt per transparencen,ne nje shkalle nga 1 ne 10."
+msgstr "Vleresimi yt per transparencen, ne nje shkalle nga 1 ne 10."
 
 #: models.py:988 templates/image/detail.html:509
 msgid "Time"
@@ -2015,7 +2016,7 @@ msgstr "Hobit"
 
 #: models.py:1091
 msgid "Do you have any hobbies other than astrophotography?"
-msgstr "Keni te tjere hobi  perveç astrofotografise?"
+msgstr "Keni te tjere hobi perveç astrofotografise?"
 
 #: models.py:1098
 msgid "Timezone"
@@ -2025,7 +2026,7 @@ msgstr "Orari zones"
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
-"Mbasi te keni zgjedhur kete,do te shikoni cdo te dhene ne AstroBin sipas "
+"Mbasi te keni zgjedhur kete, do te shikoni cdo te dhene ne AstroBin sipas "
 "Orarit te zones te ciles i perkisni."
 
 #: models.py:1104
@@ -2034,7 +2035,7 @@ msgstr "Persa ju perket ju"
 
 #: models.py:1105
 msgid "Write something about yourself. HTML tags are allowed."
-msgstr "Shkruani dicka per veten.Kodet HTML lejohen."
+msgstr "Shkruani dicka per veten. Kodet HTML lejohen."
 
 #: models.py:1125 templates/profile-edit-menu.html:15
 msgid "Default license"
@@ -2062,7 +2063,7 @@ msgstr "Qyteti"
 #: models.py:1232
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr ""
-"Nese ky vend nuk eshte ne nje qytet,perdorni emrin e qytetit me te afert."
+"Nese ky vend nuk eshte ne nje qytet, perdorni emrin e qytetit me te afert."
 
 #: models.py:1238
 msgid "State or province"
@@ -2107,7 +2108,7 @@ msgstr "Ne metra."
 #: search.py:79 views.py:808 views.py:1095 views.py:1120
 #: templates/image/actions/bring_to_attention.html:44
 msgid "No results. Sorry."
-msgstr "Asnje rezultat.Me vjen keq."
+msgstr "Asnje rezultat. Me vjen keq."
 
 #: search.py:80
 msgid "Matching items:"
@@ -2115,51 +2116,51 @@ msgstr "Duke bashkrenditur artikujt:"
 
 #: stats.py:20
 msgid "Integration hours, yearly"
-msgstr "Integrimi orëve,vjetor"
+msgstr "Integrimi orëve, vjetor"
 
 #: stats.py:21
 msgid "Integration hours, monthly"
-msgstr "Integrimi orëve,mujor"
+msgstr "Integrimi orëve, mujor"
 
 #: stats.py:22
 msgid "Integration hours, daily"
-msgstr "Integrimi orëve,ditor"
+msgstr "Integrimi orëve, ditor"
 
 #: stats.py:73
 msgid "Integration hours by gear, yearly"
-msgstr "Integrimi orëve për mekanizem,vjetor"
+msgstr "Integrimi orëve për mekanizem, vjetor"
 
 #: stats.py:74
 msgid "Integration hours by gear, monthly"
-msgstr "Integrimi orëve për mekanizem,mujor"
+msgstr "Integrimi orëve për mekanizem, mujor"
 
 #: stats.py:75
 msgid "Integration hours by gear, daily"
-msgstr "Integrimi orëve për mekanizem,ditor"
+msgstr "Integrimi orëve për mekanizem, ditor"
 
 #: stats.py:132
 msgid "Uploaded images, yearly"
-msgstr "Fotot e ngarkuara,vjetor"
+msgstr "Fotot e ngarkuara, vjetor"
 
 #: stats.py:133
 msgid "Uploaded images, monthly"
-msgstr "Fotot e ngarkuara,mujor"
+msgstr "Fotot e ngarkuara, mujor"
 
 #: stats.py:134
 msgid "Uploaded images, daily"
-msgstr "Fotot e ngarkuara,ditor"
+msgstr "Fotot e ngarkuara, ditor"
 
 #: stats.py:177 stats.py:218
 msgid "Views, yearly"
-msgstr "Shikime,vjetore"
+msgstr "Shikime, vjetore"
 
 #: stats.py:178 stats.py:219
 msgid "Views, monthly"
-msgstr "Shikime,mujore"
+msgstr "Shikime, mujore"
 
 #: stats.py:179 stats.py:220
 msgid "Views, daily"
-msgstr "Shikime,perdite"
+msgstr "Shikime, perdite"
 
 #: views.py:565
 msgid "Resolution"
@@ -2207,7 +2208,7 @@ msgstr "Kliko mbi sygjerim ose shtyp TAB per te shtuar ate qe shkruat"
 
 #: views.py:1264
 msgid "Fill in one session, before adding more."
-msgstr "Ploteso ne nje seance,para se te shtoni me shume."
+msgstr "Ploteso ne nje seance, para se te shtoni me shume."
 
 #: views.py:1509
 msgid "No date specified"
@@ -2218,21 +2219,21 @@ msgid ""
 "To fill in the missing dates, use the <strong>Edit acquisition details</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
-"Per te plotesuar te dhenat qe mungojne, perdor<strong> Nderro detajet e "
-"fotos</strong>hyni ne<strong>Veprimet</strong>menuja per cdo foto."
+"Per te plotesuar te dhenat qe mungojne, perdor <strong>Nderro detajet e "
+"fotos</strong> hyni ne <strong>Veprimet</strong> menuja per cdo foto."
 
 #: views.py:1536 views.py:1594
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
-"Asnje teleskop per foto apo lente,ose asnje aparat apo kamer e specifikuar"
+"Asnje teleskop per foto apo lente, ose asnje aparat apo kamer e specifikuar"
 
 #: views.py:1538 views.py:1597
 msgid ""
 "To fill in the missing gear, use the <strong>Edit gear used</strong> entry "
 "in the <strong>Actions</strong> menu for each image."
 msgstr ""
-"Per te plotesuar mekanizmin qe mungon,perdor<strong>Nderro mekanizmin e "
-"perdorur</strong>hyni ne<strong>Veprime</strong>menuper cdo foto."
+"Per te plotesuar mekanizmin qe mungon, perdor<strong>Nderro mekanizmin e "
+"perdorur</strong> hyni ne <strong>Veprime</strong> menuper cdo foto."
 
 #: views.py:1569 templates/image/edit/acquisition.html:98
 msgid "Solar system"
@@ -2247,8 +2248,9 @@ msgid ""
 "To fill in the missing subjects, use the <strong>Edit basic information</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
-"Per te plotesuar subjektet qe mungojne,perdor <strong>Modifiko informacionet "
-"baze</strong> hyni ne <strong>Veprime</strong> menuja per cdo foto."
+"Per te plotesuar subjektet qe mungojne, perdor <strong>Modifiko "
+"informacionet baze</strong> hyni ne <strong>Veprime</strong> menuja per cdo "
+"foto."
 
 #: views.py:1601
 msgid "No acquisition details specified"
@@ -2259,8 +2261,8 @@ msgid ""
 "To fill in the missing acquisition details, use the <strong>Edit acquisition "
 "details</strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
-"Per te plotesuar detajet e filmimit qe mungojne,perdor <strong>Modifiko "
-"detajet e filmimit</strong> hyni ne <strong>Veprime</strong>menu per cdo "
+"Per te plotesuar detajet e filmimit qe mungojne, perdor <strong>Modifiko "
+"detajet e filmimit</strong> hyni ne <strong>Veprime</strong> menu per cdo "
 "foto."
 
 #: views.py:1655 templatetags/tags.py:94
@@ -2387,8 +2389,8 @@ msgid ""
 "Sorry, but the page you are looking for is not here. If you expected an "
 "image, this means that the author deleted it."
 msgstr ""
-"Na vjen keq,por faqja qe po kerkoni nuk eshte këtu.Nese  prisnit nje "
-"fotografi,kjo do te thote qe autori e ka fshire atë."
+"Na vjen keq, por faqja qe po kerkoni nuk eshte këtu. Nese prisnit nje "
+"fotografi, kjo do te thote qe autori e ka fshire atë."
 
 #: templates/base.html:99 templates/base.html.py:103 templates/base.html:104
 msgid "Quick search"
@@ -2496,7 +2498,7 @@ msgstr "Info"
 #: templates/base.html:282
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
-msgstr "Fotografi jo e vlefshme.Formatet e lejuara jane JPG,PNG dhe GIF."
+msgstr "Fotografi jo e vlefshme. Formatet e lejuara jane JPG, PNG dhe GIF."
 
 #: templates/base.html:299 templates/user/card.html:52
 msgid "About"
@@ -2509,9 +2511,9 @@ msgid ""
 "upload your astrophotography images. Made by an astrophotographer, for the "
 "astrophotographers."
 msgstr ""
-"AstroBin eshte nje sit bartës fotografishë,i synuar per astrofotografët: "
+"AstroBin eshte nje sit bartës fotografishë, i synuar per astrofotografët: "
 "është vendi i parë dhe i fundit ku ju do keni nevojë të ngarkoni astrofotot "
-"tuaja.I krijuar nga një astrofotograf, për astrofotografët."
+"tuaja. I krijuar nga një astrofotograf, për astrofotografët."
 
 #: templates/base.html:305
 msgid "Site links"
@@ -2573,7 +2575,7 @@ msgid ""
 "page, that you can sort and filter to your liking."
 msgstr ""
 "Mënyra më e mirë për të parë të rejat në AstroBin: një mur i madh me 100 "
-"foto per faqe,qe mund ti zgjidhni apo filtroni sipas dëshirës."
+"foto per faqe, qe mund ti zgjidhni apo filtroni sipas dëshirës."
 
 #: templates/explore_choose.html:12
 msgid "Nightly"
@@ -2588,8 +2590,8 @@ msgid ""
 "A list of objects from the Messier catalog, each one represented by an "
 "AstroBin image chosen by the users via a democratic nomination process."
 msgstr ""
-"Një listë objektesh nga katalogu Messier,secila e përfaqësuar nga një foto e "
-"AstroBin e zgjedhur ne mënyrë demokratike nga proçesi emërtimit."
+"Një listë objektesh nga katalogu Messier, secila e përfaqësuar nga një foto "
+"e AstroBin e zgjedhur ne mënyrë demokratike nga proçesi emërtimit."
 
 #: templates/faq.html:9
 msgid "Frequently Asked Questions"
@@ -2651,9 +2653,9 @@ msgid ""
 "<strong>NO!</strong> On AstroBin you can upload as many images as you want, "
 "and as large as you want. In fact, full size images are encouraged!"
 msgstr ""
-"<strong>JO!</strong> Ne AstroBin ju mund te ngarkoni sa foto te "
-"deshironi,dhe me permasa te pakufizuara.Ne fakt keshillojme gjithmone,foto "
-"me permasa sa me te plota!"
+"<strong>JO!</strong> Ne AstroBin ju mund te ngarkoni sa foto te deshironi, "
+"dhe me permasa te pakufizuara. Ne fakt keshillojme gjithmone, foto me "
+"permasa sa me te plota!"
 
 #: templates/faq.html:41
 msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
@@ -2671,13 +2673,13 @@ msgid ""
 "physical servers, for protection against natural disasters."
 msgstr ""
 "Absolutisht. Ka shume menyra ne te cilat AstroBin mund te ruaj informacionet "
-"tuaja ne menyre te sigurte.Mbi te gjitha,fotografite qe ju ngarkoni jane te "
-"ruajtura ne nje hapsire me kohezgjatje shume te larte,shume te bollshme,te "
-"nje magazine te tepert. Kohezgjatja dhe hapsira ku ruhen eshte 99.999999999 "
-"perqind permbi nje viti te caktuar.Kjo do te thote qe nese ngarkoni 10,000 "
-"foto,juve mbase mund te humbni per demtim informacioni 1 foto cdo 10,000,000 "
-"vjet.Fotot duplikohen dhe ruhen ne dy server te ndryshem,kunder demtimeve "
-"natyrale."
+"tuaja ne menyre te sigurte. Mbi te gjitha, fotografite qe ju ngarkoni jane "
+"te ruajtura ne nje hapsire me kohezgjatje shume te larte,shume te bollshme, "
+"te nje magazine te tepert. Kohezgjatja dhe hapsira ku ruhen eshte "
+"99.999999999 perqind permbi nje viti te caktuar. Kjo do te thote qe nese "
+"ngarkoni 10,000 foto, juve mbase mund te humbni per demtim informacioni 1 "
+"foto cdo 10,000,000 vjet. Fotot duplikohen dhe ruhen ne dy server te "
+"ndryshem, kunder demtimeve natyrale."
 
 #: templates/faq.html:51
 msgid ""
@@ -2695,9 +2697,9 @@ msgid ""
 "Machine) is backed up daily. In case of severe data loss, the website will "
 "be quickly restored to a snapshot that's never older than 24 hours."
 msgstr ""
-"Si perfundim,databaza qe ushqen AstroBin (ne fakt,komplet Makina Virtuale) "
-"krijon nje kopje rezerve cdo dite.Ne rast te ndonje humbje informatash te "
-"rendesishme,siti ueb do riparohet nga nje snapshot qe nuk eshte kurre me i "
+"Si perfundim, databaza qe ushqen AstroBin (ne fakt, komplet Makina Virtuale) "
+"krijon nje kopje rezerve cdo dite. Ne rast te ndonje humbje informatash te "
+"rendesishme, siti ueb do riparohet nga nje snapshot qe nuk eshte kurre me i "
 "vjeter se 24 ore."
 
 #: templates/faq.html:57
@@ -2707,10 +2709,10 @@ msgid ""
 "responsibility in the event of loss, however unlikely it is. Always keep a "
 "copy of your image on your computer."
 msgstr ""
-"Thene kjo,juve duhet te keni kujdes pasi AstroBin nuk eshte nje sherbim i "
-"ruajtjeve te kopjeve rezerve,dhe ndonese te dhenat e juaja jane te sigurta "
-"ne duart tona,ne nuk mund te mbajme pergjegjesi ligjerisht ne rast humbje te "
-"tyre,sado te na vije keq.Eshte mire te ruani gjithmone nje kopje ne "
+"Thene kjo, juve duhet te keni kujdes pasi AstroBin nuk eshte nje sherbim i "
+"ruajtjeve te kopjeve rezerve, dhe ndonese te dhenat e juaja jane te sigurta "
+"ne duart tona, ne nuk mund te mbajme pergjegjesi ligjerisht ne rast humbje "
+"te tyre, sado te na vije keq. Eshte mire te ruani gjithmone nje kopje ne "
 "kompjuterin tuaj."
 
 #: templates/faq.html:64
@@ -2725,7 +2727,7 @@ msgstr ""
 "fotografive me te bukura, por per ti dhene nje mundesi kontributi cdokujt "
 "per te marre pjese ne nje perpjekje per rritjen e perqendrimit dhe renditjen "
 "e informacioneve te rendesishme. Ajo fotografi qe keni bere te M31 naten e "
-"kaluar mes reve vendi i saj <em> i perket</em> ketu! Mos kini turp por "
+"kaluar mes reve vendi i saj <em>i perket</em> ketu! Mos kini turp por "
 "ngarkoheni ate!"
 
 #: templates/faq.html:71
@@ -2738,11 +2740,11 @@ msgid ""
 "want. The image will be visible only to the intended recipients, and won't "
 "appear on your profile or AstroBin's home page."
 msgstr ""
-"Në AstroBin keni dy vende për imazhet tona.Zona Punës është ajo ku ju mund "
+"Në AstroBin keni dy vende për imazhet tona. Zona Punës është ajo ku ju mund "
 "të ngarkoni fotot që ju doni te ndani në forume, lista e postimesh apo "
 "rrjeteve sociale. Kështu që ju mund të ngarkoni atë në një forum për "
 "reagimet dhe kritikat dhe bisedime te gjata! Vetëm të ngarkoheni në Zonën e "
-"Punes ne AstroBin, dhe dërgoni lidhje për këdo që ju dëshironi.Foto do të "
+"Punes ne AstroBin, dhe dërgoni lidhje për këdo që ju dëshironi. Foto do të "
 "jetë e dukshme vetem per ato vende ku keni postuar, dhe nuk do të shfaqet në "
 "profilin tuaj ose faqen kryesore te AstroBin-it."
 
@@ -2787,9 +2789,9 @@ msgstr ""
 "AstroBin ka lindur nga deshira per te perfunduar dicka qe zgjaste per shume "
 "kohe: Humbjen e materialeve te tilla ne detin e kaosit qe eshte interneti "
 "vete. Per vite astrofotografe te afte kane ngarkuar foto ne Forume, "
-"shpeshhere me pak informacion,ose pa to plotesisht,ose ne  ndonje sit qe "
-"fton fotot tuaja,pa pasur mundesine te nderroni informacionet,apo ti shtoni "
-"ato."
+"shpeshhere me pak informacion, ose pa to plotesisht,ose ne ndonje sit qe "
+"fton fotot tuaja, pa pasur mundesine te nderroni informacionet, apo ti "
+"shtoni ato."
 
 #: templates/faq.html:92
 msgid ""
@@ -2821,9 +2823,9 @@ msgid ""
 "become possible: you could simply upload an image of a galaxy, and AstroBin "
 "could compare it to pictures of the same galaxy taken previously."
 msgstr ""
-"<em>AstroBin</em> sapo filloj,dhe kete here mund te themi me te vertete qe "
+"<em>AstroBin</em> sapo filloj, dhe kete here mund te themi me te vertete qe "
 "vetem qielli eshte kufiri! Nje sasi ideshë jane ne inkubim. Sa me shume "
-"shtohen perdoruesit,aq me shume infomacione ka. Papritmas,gjera si "
+"shtohen perdoruesit, aq me shume infomacione ka. Papritmas, gjera si "
 "automatizimi i kerkimit te supernovave do jete i mundur: Juve mund te "
 "ngarkoni foton e nje galaksie, dhe AstroBin do ta krahasoj ate me foto te "
 "tjera te marra me parë."
@@ -2896,7 +2898,7 @@ msgid ""
 "The authors of these images have been generous, and provided a link to the "
 "TIFF or FITS original files."
 msgstr ""
-"Autoret e ketyre fotove kane qene bujar,dhe kane shtuar linkun per tek "
+"Autoret e ketyre fotove kane qene bujar, dhe kane shtuar linkun per tek "
 "dosjet origjinale TIFF ose FITS."
 
 #: templates/guidelines.html:9
@@ -2934,7 +2936,7 @@ msgid ""
 "of your images."
 msgstr ""
 "AstroBin eshte themeluar me idene qe informacionet mos humbin ne detin e "
-"kaosit. Plotesoni detajet teknike te fotos,sa me shume te mundeni."
+"kaosit. Plotesoni detajet teknike te fotos, sa me shume te mundeni."
 
 #: templates/guidelines.html:22
 msgid "Be respectful of other users."
@@ -2975,9 +2977,9 @@ msgid ""
 "you upload any content that is illegal, porn or nudity. We also reserve the "
 "right to report you to the authorities, if we find it necessary."
 msgstr ""
-"Llogaria juaj do mbyllet perfundimisht,dhe gjithashtu dhe permbajtja e "
-"saj,nese ngarkoni permbajtje te paligjshme,porno ose lakuriqesi. Ne kemi "
-"gjithashtu te drejten te lajmerojme autoritet,nese e shohim te nevojshme."
+"Llogaria juaj do mbyllet perfundimisht, dhe gjithashtu dhe permbajtja e saj, "
+"nese ngarkoni permbajtje te paligjshme, porno ose lakuriqesi. Ne kemi "
+"gjithashtu te drejten te lajmerojme autoritet, nese e shohim te nevojshme."
 
 #: templates/guidelines.html:37
 msgid "Don't upload images that have nothing to do with astronomy."
@@ -2989,21 +2991,21 @@ msgid ""
 "from your last vacation. Your account won't be deleted, but we will ask you "
 "to remove those pictures."
 msgstr ""
-"Foto te paisjeve tuaja jane sigurisht te bukura,por mos perdorni AstroBin "
-"per te ngarkuar foto nga pushimet tuaja. Llogaria juaj nuk do mbyllet,por do "
-"ju kerkohet ti fshini ato."
+"Foto te paisjeve tuaja jane sigurisht te bukura, por mos perdorni AstroBin "
+"per te ngarkuar foto nga pushimet tuaja. Llogaria juaj nuk do mbyllet, por "
+"do ju kerkohet ti fshini ato."
 
 #: templates/guidelines.html:41
 msgid "Don't use your account to host images for websites, banners or logos."
 msgstr ""
-"Mos perdor llogarine tende per te mikpritur foto per site,banner apo logo."
+"Mos perdor llogarine tende per te mikpritur foto per site, banner apo logo."
 
 #: templates/guidelines.html:42
 msgid ""
 "Banners, logos, icons or other graphic elements that are not "
 "astrophotography are not allowed on AstroBin."
 msgstr ""
-"Banner,logo,ikona apo elemente te tjere grafik qe nuk jane astrofotografi "
+"Banner, logo, ikona apo elemente te tjere grafik qe nuk jane astrofotografi "
 "nuk lejohen ne AstroBin."
 
 #: templates/guidelines.html:46
@@ -3029,13 +3031,13 @@ msgid ""
 "a centralized place where astrophotographers can share their work."
 msgstr ""
 "Jeni astrofotograf? Deshironi te ndani rezultatet e lodhshme te punes suaj "
-"me te tjeret? Si astrofotograf qe jam,dhe pjesmarres ne forume "
-"astrofotografie te ndryshme,kam kuptuar qe internetit i mungon nje vend "
+"me te tjeret? Si astrofotograf qe jam, dhe pjesmarres ne forume "
+"astrofotografie te ndryshme, kam kuptuar qe internetit i mungon nje vend "
 "qendror ku astrofotografet mund te ndajne punimet e tyre."
 
 #: templates/help.html:15
 msgid "Well, this is finally over!"
-msgstr "Pra,kjo eshte me ne fund!"
+msgstr "Pra, kjo eshte me ne fund!"
 
 #: templates/help.html:17
 msgid ""
@@ -3045,7 +3047,7 @@ msgid ""
 msgstr ""
 "<em>AstroBin</em> vjen për të mbushur boshllëkun. Ky është një websit i "
 "ndërtuar nga baza nga një astrofotograf, dhe siguron mjetet për ata njerëz "
-"që duan të ndajnë astrofotot e  tyre."
+"që duan të ndajnë astrofotot e tyre."
 
 #: templates/help.html:19
 msgid "So how is this different from any other image sharing websites?"
@@ -3071,9 +3073,9 @@ msgid ""
 "done with it. <em>AstroBin</em>, instead, has a user interface specifically "
 "designed to enable you to input all the technical data of your image."
 msgstr ""
-"Në një vend të përgjithshm siti per ndarje fotosh,ju do ngarkonit ate dhe "
+"Në një vend të përgjithshm siti per ndarje fotosh, ju do ngarkonit ate dhe "
 "cdo gje do mbaronte me kaq. <em>AstroBin</em>, ka nje interface llogarie "
-"specifike,ku ju mund te shtoni te dhenat teknike te fotos tuaj."
+"specifike, ku ju mund te shtoni te dhenat teknike te fotos tuaj."
 
 #: templates/help.html:27
 msgid ""
@@ -3085,10 +3087,10 @@ msgid ""
 "million names!"
 msgstr ""
 "<em>AstroBin</em> do autokompletoj te dhenat tuaja duke perdorur nja "
-"database te gjere: cdo gje nga teleskopet,CCD-te dhe filtrat deri tek "
-"objektet astronomike qe do ju shfaqen ne nje dritare popup-i,kur te filloni "
-"te shkruani  per tju ndihmuar ne nje zgjedhje te shpejte te emrave. "
-"<em>AstroBin</em> eshte i lidhur me Databazen Astronomike SIMBAD,e cila "
+"database te gjere: cdo gje nga teleskopet, CCD-te dhe filtrat deri tek "
+"objektet astronomike qe do ju shfaqen ne nje dritare popup-i, kur te filloni "
+"te shkruani per tju ndihmuar ne nje zgjedhje te shpejte te emrave. "
+"<em>AstroBin</em> eshte i lidhur me Databazen Astronomike SIMBAD, e cila "
 "permban mbi 5 milion objekte dhe mbi 15 milion emertime!"
 
 #: templates/help.html:31
@@ -3121,7 +3123,7 @@ msgid ""
 "at the time of the acquisition is displayed."
 msgstr ""
 "Secila foto ne <em>AstroBin</em> eshte e shenuar me te gjitha detajet qe i "
-"perkasin sesionit fotografik.Perfshire teleskopet, kamerat, montatura, "
+"perkasin sesionit fotografik. Perfshire teleskopet, kamerat, montatura, "
 "filtrat, cdo gje e ke nen shikim tek Skeda Teknike. Edhe mosha e Henes, ne "
 "kohen qe po fotografonit do ju jepet ne dukje."
 
@@ -3139,11 +3141,12 @@ msgid ""
 "are the astronomical objects in your image without you telling!"
 msgstr ""
 "<em>AstroBin</em> do bej me shume se thjesht mbartjen e fotos tuaj: Kur ju "
-"do ngarkoni fotografine,nje histogram dhe nje version bardh e zi i invertuar "
-"do krijohet sa hap e mbyll syte,keshtu do te jete me e lehte te vecojme "
-"mjegullnaja te dobeta apo deri ku zgjaten krahet spirale te nje galaksie. "
-"Fotot gjithashtu do zberthehen,dhe shenime te ndryshme do duken mbi te. "
-"<em>AstroBin</em> do ti gjej objektet astronomike edhe pa i thene ju!"
+"do ngarkoni fotografine, nje histogram dhe nje version bardh e zi i "
+"invertuar do krijohet sa hap e mbyll syte, keshtu do te jete me e lehte te "
+"vecojme mjegullnaja te dobeta apo deri ku zgjaten krahet spirale te nje "
+"galaksie. Fotot gjithashtu do zberthehen, dhe shenime te ndryshme do duken "
+"mbi te. <em>AstroBin</em> do ti gjej objektet astronomike edhe pa i thene "
+"ju!"
 
 #: templates/help.html:49
 msgid "Protection from theft with automatic watermarking"
@@ -3171,9 +3174,9 @@ msgid ""
 "processing has improved."
 msgstr ""
 "Mos me thuaj qe nuk jeni kthyer kurre mbrapsht per te ndryshuar perpunimin e "
-"nje fotoje <em>mbasi</em> e keni publikuar.<em>AstroBin</em> përqafon këtë "
+"nje fotoje <em>mbasi</em> e keni publikuar. <em>AstroBin</em> përqafon këtë "
 "koncept dhe ju lejon të publikoni disa rishikime të se njëjtës foto ne "
-"menyre të lehtë dhe intuitive! Tani do të jetë me të vërtetë e lehtë për  të "
+"menyre të lehtë dhe intuitive! Tani do të jetë me të vërtetë e lehtë për të "
 "treguar nëse përpunimi juaj është përmirësuar."
 
 #: templates/help.html:61
@@ -3186,8 +3189,8 @@ msgid ""
 "and be notified when they post new images, or perform requests for more "
 "data. You can also vote on images."
 msgstr ""
-"Ne <em>AstroBin</em> ju mund te mesazhoni me fotografe te tjere,mund ti "
-"ndiqni ata dhe do lajmeroheni nese postojne foto te reja,apo mund te "
+"Ne <em>AstroBin</em> ju mund te mesazhoni me fotografe te tjere, mund ti "
+"ndiqni ata dhe do lajmeroheni nese postojne foto te reja, apo mund te "
 "permirsosh kerkesat per me shume te dhena."
 
 #: templates/help.html:68
@@ -3201,18 +3204,18 @@ msgid ""
 "rescue to provide a home and a central hub for astrophotographers all over "
 "the world."
 msgstr ""
-"Padyshim me sa keni kuptuar deri tani,<em>AstroBin</em> eshte me shume se "
+"Padyshim me sa keni kuptuar deri tani, <em>AstroBin</em> eshte me shume se "
 "nje sherbim magazinimi fotografishe. Eshte ajo qe komuniteti i "
 "astrofotografeve kishte nevoje nga shume kohe. Per vite te tera kam pare ne "
 "internet foto fantastike te shkrepura anembane: ne site mbajtes fotosh te "
-"pergjithshme,neper forume,neper site personale apo vende perkohore. Disa nga "
-"keto foto permbajne informacione shume te cmuara per tu humbur ne detin e "
-"kaosit. <em>AstroBin</em>  vjen në shpëtim për të siguruar një shtëpi dhe "
+"pergjithshme, neper forume, neper site personale apo vende perkohore. Disa "
+"nga keto foto permbajne informacione shume te cmuara per tu humbur ne detin "
+"e kaosit. <em>AstroBin</em> vjen në shpëtim për të siguruar një shtëpi dhe "
 "një pikë qëndrore për astrofotografet në të gjithë botën."
 
 #: templates/help.html:70
 msgid "So, what are you waiting for?"
-msgstr "Pra,çfare po pret?"
+msgstr "Pra, çfare po pret?"
 
 #: templates/help.html:71
 msgid "Sign up now!"
@@ -3271,8 +3274,8 @@ msgid ""
 "Before you start uploading images, you have to add at least one telescope "
 "and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
 msgstr ""
-"Para se te filloni ngarkimin e fotove,ju duhet te shtoni te pakten nje "
-"teleskop dhe nje aparat. Beje kete ne<a href=\"%(the_url)s?initial\">profili "
+"Para se te filloni ngarkimin e fotove, ju duhet te shtoni te pakten nje "
+"teleskop dhe nje aparat. Beje kete ne <a href=\"%(the_url)s?initial\">profili "
 "yt</a>!"
 
 #: templates/index.html:72
@@ -3294,7 +3297,7 @@ msgstr ""
 
 #: templates/index.html:79
 msgid "Unlimited uploads, unlimited size."
-msgstr "Ngarkime te pakufizuara,permasa te pakufizuara."
+msgstr "Ngarkime te pakufizuara, permasa te pakufizuara."
 
 #: templates/index.html:80
 msgid ""
@@ -3316,8 +3319,8 @@ msgid ""
 "neat and organized. And with our plots, you can get insights on your "
 "productivity and on the gear you use the most."
 msgstr ""
-"Te dhenat teknike jane gjithçka,dhe AstroBin do ju jape juve paisjet qe ti "
-"mbani ato te organizuara.Dhe me te dhenat tona mund te thelloni "
+"Te dhenat teknike jane gjithçka, dhe AstroBin do ju jape juve paisjet qe ti "
+"mbani ato te organizuara. Dhe me te dhenat tona mund te thelloni "
 "produktivitetin tuaj dhe cili mekanizem funksionon me mire."
 
 #: templates/index.html:95
@@ -3365,10 +3368,10 @@ msgid ""
 "objects that features AstroBin images nominated by the users. For each "
 "Messier object, the AstroBin image with the most nomination is chosen."
 msgstr ""
-"Ju do percaktoni kete foto per <a href=\"%(the_url)s\" target=\"_blank"
-"\">Maratonen Messier</a>.Maratona Messier eshte nje liste e objekteve "
-"Messier qe shfaqen ne AstroBin te percaktuar nga perdoruesit. Per cdo objekt "
-"Messier, foto e AstroBin me percaktime me te shumta u zgjodh."
+"Ju do percaktoni kete foto per <a href=\"%(the_url)s\" "
+"target=\"_blank\">Maratonen Messier</a>. Maratona Messier eshte nje liste e "
+"objekteve Messier qe shfaqen ne AstroBin te percaktuar nga perdoruesit. Per "
+"cdo objekt Messier, foto e AstroBin me percaktime me te shumta u zgjodh."
 
 #: templates/messier_nomination.html:25
 #, python-format
@@ -3385,8 +3388,8 @@ msgid ""
 "think this is a mistake, please contact the author of the image and ask them "
 "to add the correct Messier object as a subject."
 msgstr ""
-"Na vjen keq,por fotografia nuk permban objekte Messier. Nese mendoni qe ky "
-"eshte nje gabim,ju lutemi kontaktoni autorin e fotos dhe pyeteni ate per te "
+"Na vjen keq, por fotografia nuk permban objekte Messier. Nese mendoni qe ky "
+"eshte nje gabim, ju lutemi kontaktoni autorin e fotos dhe pyeteni ate per te "
 "shtuar objektin korrekt si subjekt."
 
 #: templates/messier_nomination.html:35 templates/messier_nomination.html:47
@@ -3434,7 +3437,7 @@ msgstr "Faleminderit per percaktimin"
 
 #: templates/messier_nomination_finish.html:22
 msgid "Your nomination has been recorded, thank you!"
-msgstr "Percaktimi juaj u rregjistrua,ju faleminderit!"
+msgstr "Percaktimi juaj u rregjistrua, ju faleminderit!"
 
 #: templates/messier_nomination_finish.html:28
 msgid "Visit the Messier Marathon"
@@ -3449,8 +3452,8 @@ msgid ""
 "On this page you can see images that were actually taken each night, and not "
 "merely uploaded on a particular date."
 msgstr ""
-"Ne këtë faqe ju mund të shihni foto qe jane marrë cdo natë,dhe jo thjesht te "
-"ngarkuara në një datë të veçantë."
+"Ne këtë faqe ju mund të shihni foto qe jane marrë cdo natë, dhe jo thjesht "
+"te ngarkuara në një datë të veçantë."
 
 #: templates/nightly.html:29
 msgid "No image acquired in the selected month."
@@ -3496,9 +3499,9 @@ msgid ""
 "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
 "integration time."
 msgstr ""
-"<strong>%(total_users)s</strong> ngarkimet e perdoruesve<strong>"
-"%(total_images)s</strong>foto te arritura<strong>%(total_integration)s</"
-"strong> oret e kohes se integrimit."
+"<strong>%(total_users)s</strong> ngarkimet e perdoruesve <strong>%"
+"(total_images)s</strong> foto te arritura <strong>%"
+"(total_integration)s</strong> oret e kohes se integrimit."
 
 #: templates/stats.html:16
 msgid "Total integration hours in the last 30 days"
@@ -3630,7 +3633,7 @@ msgid ""
 "completed. Thanks!"
 msgstr ""
 "Zberthimi ka filluar ne sfond. Do duhet pak kohe, lutemi mos kerkoni akoma "
-"ate! Do lajmeroheni sapo te mbaroj.Faleminderit!"
+"ate! Do lajmeroheni sapo te mbaroj. Faleminderit!"
 
 #: templates/image/detail.html:28
 #, python-format
@@ -3647,7 +3650,7 @@ msgstr ""
 "(profile_url)s?staging\">Zona Punes</a>. Kjo do te thote qe asnjeri nuk e "
 "shikon dot ate,derisa ju nuk i jepni kodin e lidhjes qe gjendet ne menune "
 "<em>Shpernda</em>. Perdor ate link per te postuar foton neper forume qe te "
-"marresh vleresime mbi te. Kur te jeni i kenaqur,mbase duke ngarkuar "
+"marresh vleresime mbi te. Kur te jeni i kenaqur, mbase duke ngarkuar "
 "riperpunimet, beji reklam <a href=\"%(promote_url)s\">nxite ate</a> tek <a "
 "href=\"%(profile_url)s\">Zona Publike</a>."
 
@@ -3925,8 +3928,8 @@ msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment."
 msgstr ""
-"Lutemi <a href=\"/accounts/login/\">hyni</a>ose<a href=\"/accounts/register/"
-"\">rregjistrohuni</a>qe te komentoni."
+"Lutemi <a href=\"/accounts/login/\">hyni</a> ose <a "
+"href=\"/accounts/register/\">rregjistrohuni</a> qe te komentoni."
 
 #: templates/image/detail.html:606 templates/image/detail.html.py:886
 msgid "(comment deleted)"
@@ -4074,7 +4077,7 @@ msgstr ""
 
 #: templates/image/detail.html:1015
 msgid "Yes, delete revision"
-msgstr "Po,fshi rishikimin"
+msgstr "Po, fshi rishikimin"
 
 #: templates/image/detail.html:1020
 msgid "Delete original image?"
@@ -4090,7 +4093,7 @@ msgstr ""
 
 #: templates/image/detail.html:1022
 msgid "Yes, delete image"
-msgstr "Po,fshi foton"
+msgstr "Po, fshi foton"
 
 #: templates/image/full.html:71
 msgid "See technical details"
@@ -4113,7 +4116,7 @@ msgid ""
 "By choosing some users and clicking the button below, you will send them a "
 "notification prompting them to checkout this image."
 msgstr ""
-"Duke zgjedhur disa perdorues dhe klikuar butonin poshte,do i dergoni atyre "
+"Duke zgjedhur disa perdorues dhe klikuar butonin poshte, do i dergoni atyre "
 "nje lajmerim per te vrojtuar foton tuaj."
 
 #: templates/image/actions/bring_to_attention.html:45
@@ -4208,10 +4211,10 @@ msgid ""
 "strong> to finish, or on <strong>Add more</strong> to add more acquisition "
 "sessions."
 msgstr ""
-"Ju mund te vendosni sesionet fotografike qe deshironi,pasi shpeshhere fotot "
-"jane te marra ne netë te ndryshme. Nje sesion fotografik zakonisht paiset me "
-"nje datë dhe nje filter. Permbush te dhenat e sesionit dhe kliko "
-"<strong>Shpëto</strong> per te mbaruar,ose <strong>Shto me shumë</strong> "
+"Ju mund te vendosni sesionet fotografike qe deshironi, pasi shpeshhere fotot "
+"jane te marra ne netë te ndryshme. Nje sesion fotografik zakonisht paiset "
+"me nje datë dhe nje filter. Permbush te dhenat e sesionit dhe kliko "
+"<strong>Shpëto</strong> per te mbaruar, ose <strong>Shto me shumë</strong> "
 "per te shtuar sesione te tjera fotografie."
 
 #: templates/image/edit/acquisition.html:47
@@ -4295,7 +4298,7 @@ msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or click the plus sign."
 msgstr ""
-"Per te zgjedhur mekanizmin e perdorur per kete foto,zvarrit artikujt nga e "
+"Per te zgjedhur mekanizmin e perdorur per kete foto, zvarrit artikujt nga e "
 "djathta ne te majte, ose kliko mbi shenjen plus."
 
 #: templates/image/edit/gear.html:51
@@ -4319,11 +4322,11 @@ msgid ""
 "\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons "
 "website</a>."
 msgstr ""
-"Ju mund ta shoqëroni foton me një licence Creative Commons  nëse ju "
+"Ju mund ta shoqëroni foton me një licence Creative Commons nëse ju "
 "dëshironi, për t'i dhënë njerëzve të drejtën për të përdorur punën tuaj në "
-"rrethana të caktuara. Për më shumë informacion mbi cilat jane opsionet  "
-"tuaja, ju lutem vizitoni <a target=\"_blank\" href=\"http://www."
-"creativecommons.org/\">Sitin e Creative Commons</a>."
+"rrethana të caktuara. Për më shumë informacion mbi cilat jane opsionet "
+"tuaja, ju lutem vizitoni <a target=\"_blank\" "
+"href=\"http://www.creativecommons.org/\">Sitin e Creative Commons</a>."
 
 #: templates/image/edit/license.html:18
 #, python-format
@@ -4371,8 +4374,8 @@ msgid ""
 "a better chance of success!"
 msgstr ""
 "AstroBin <em>mund</em> te zberthej ne info foton tuaj pa ditur asgje rreth "
-"saj,por do zgjase si proces. Nese dini perafersisht masen e fushes fizive te "
-"fotos,zberthimi do jete me i shpejte dhe i sakte!"
+"saj, por do zgjase si proces. Nese dini perafersisht masen e fushes fizive "
+"te fotos, zberthimi do jete me i shpejte dhe i sakte!"
 
 #: templates/image/edit/presolve.html:39
 msgid "Start plate-solving"
@@ -4388,7 +4391,7 @@ msgid ""
 "pixel scale will be wrong!"
 msgstr ""
 "<strong>Vini re</strong>: nese nuk keni ngarkuar nje foto me risoluzion te "
-"larte,shkalla e pikselave do jete e gabuar!"
+"larte, shkalla e pikselave do jete e gabuar!"
 
 #: templates/image/edit/watermark.html:10
 msgid "Step 2 of 5: watermark"
@@ -4403,8 +4406,8 @@ msgid ""
 "following settings, your only choice is to delete the image and start over."
 msgstr ""
 "AstroBin mund të mbrojë fotot tuaja nga vjedhja duke aplikuar një watermark. "
-"Kini kujdes me parametrat tuaj pasi: një herë qe aplikoni watermarkun , ajo "
-"nuk mund të hiqet me( AstroBin nuk e ruan versionin jo-watermarked te fotos "
+"Kini kujdes me parametrat tuaj pasi: një herë qe aplikoni watermarkun, ajo "
+"nuk mund të hiqet me (AstroBin nuk e ruan versionin jo-watermarked te fotos "
 "tuaj, për sigurinë tuaj). Nëse nuk ju pëlqen watermark-u i mëposhtem, "
 "zgjedhja juaj e vetme është të fshini foton dhe ta filloni nga e para."
 
@@ -4597,9 +4600,9 @@ msgstr ""
 "\n"
 "%(message)s\n"
 "\n"
-"Per te pare te gjitha njoftimet ju lutemi shkoni te %(notices_url)s. \n"
+"Per te pare te gjitha njoftimet ju lutemi shkoni te %(notices_url)s.\n"
 "\n"
-"Nese nuk deshironi me te merrni e-mail,modifiko preferencat e juaja duke "
+"Nese nuk deshironi me te merrni e-mail, modifiko preferencat e juaja duke "
 "shkuar te http://astrobin.com%(pref_url)s.\n"
 "\n"
 "Qiej te erret,\n"
@@ -4696,7 +4699,7 @@ msgid ""
 "\n"
 "Thank you!"
 msgstr ""
-"Juve keni %(number)s foto me te dhena te pamjaftueshme. \n"
+"Juve keni %(number)s foto me te dhena te pamjaftueshme.\n"
 "\n"
 "AstroBin mbështetet që të dhënat të jane një shërbim i madh për ju dhe çdo "
 "përdorues tjetër.\n"
@@ -4713,8 +4716,8 @@ msgid ""
 "<a href=\"%(url)s\">You have <strong>%(number)s</strong> images with "
 "insufficient data!</a>"
 msgstr ""
-"<a href=\"%(url)s\">Juve keni <strong>%(number)s</strong>foto ku mungojne te "
-"dhenat</a>"
+"<a href=\"%(url)s\">Juve keni <strong>%(number)s</strong> foto ku mungojne te "
+"dhenat!</a>"
 
 #: templates/notification/lacking_data_reminder/short.txt:2
 #, python-format
@@ -4738,14 +4741,14 @@ msgstr ""
 "%(user)s ka percaktuar foton tuaj te %(messier_object)s per Maratonen "
 "Messier. Urime!\n"
 "\n"
-"Kjo eshte fotografia e juaj qe kane percaktuar: http://astrobin.com"
-"%(image_url)s\n"
+"Kjo eshte fotografia e juaj qe kane percaktuar: http://astrobin.com%"
+"(image_url)s\n"
 "\n"
-"Maratona Messier eshte nje liste e objekteve Messier qe shfaqen ne AstoBin,"
+"Maratona Messier eshte nje liste e objekteve Messier qe shfaqen ne AstoBin, "
 "te zgjedhur nga perdoruesit me percaktimin e tyre personal.\n"
 "\n"
-"Juve mund ta gjeni Maratonen Messier ketu: http://astrobin.com/explore/"
-"messier/"
+"Juve mund ta gjeni Maratonen Messier ketu: "
+"http://astrobin.com/explore/messier/"
 
 #: templates/notification/messier_nomination/notice.html:2
 #: templates/notification/messier_nomination/short.html:2
@@ -4801,8 +4804,8 @@ msgid ""
 "<a href=\"%(image_url)s\">Your image of <strong>%(messier_object)s</strong> "
 "is now featured in the Messier Marathon. Congratulations!</a>"
 msgstr ""
-"<a href=\"%(image_url)s\">Foto juaj e <strong>%(messier_object)s</strong> "
-"tani eshte shfaqur ne Maratonen Messier.Urime!</a>"
+"<a href=\"%(image_url)s\">Foto juaj e <strong>%(messier_object)s</strong> tani "
+"eshte shfaqur ne Maratonen Messier. Urime!</a>"
 
 #: templates/notification/messier_top_nomination/short.txt:2
 #, python-format
@@ -5024,8 +5027,8 @@ msgid ""
 "address and we will notify you when the website is up!"
 msgstr ""
 "dhe do hapet se shpejti per te gjithe. Nëse ju keni qenë të ftuar, ju mund "
-"të  <a href=\"%(login_url)s\">login</a>, përndryshe ju mund të na lini "
-"adresën tuaj e-mail dhe ne do t'ju njoftojë kur websiti te jete ne rregull!"
+"të <a href=\"%(login_url)s\">login</a>, përndryshe ju mund të na lini adresën "
+"tuaj e-mail dhe ne do t'ju njoftojë kur websiti te jete ne rregull!"
 
 #: templates/registration/activate.html:8
 msgid "Account successfully activated"
@@ -5283,7 +5286,7 @@ msgstr "Orët e integrimit"
 
 #: templates/user/plots.html:24
 msgid "Total integration hours, plotted against time."
-msgstr "Totali i orëve te integracionit,ne funksion te kohës."
+msgstr "Totali i orëve te integracionit, ne funksion te kohës."
 
 #: templates/user/plots.html:29 templates/user/plots.html.py:58
 #: templates/user/plots.html:88 templates/user/plots.html.py:117
@@ -5314,8 +5317,8 @@ msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
 msgstr ""
-"Oret totale te integrimit,rilevuar kunder kohes dhe rregulluar sipas "
-"teleskopit dhe lenteve,dhe te aparatit fotografik."
+"Oret totale te integrimit, rilevuar kunder kohes dhe rregulluar sipas "
+"teleskopit dhe lenteve, dhe te aparatit fotografik."
 
 #: templates/user/plots.html:83
 msgid "Combined view count for all the user's images, plotted against time."
@@ -5329,7 +5332,7 @@ msgstr "Fotot e ngarkuara"
 
 #: templates/user/plots.html:112
 msgid "Image uploads, plotted against time."
-msgstr "Ngarkimet e fotove,te sistemuara kunder kohes."
+msgstr "Ngarkimet e fotove, te sistemuara kunder kohes."
 
 #: templates/user/profile.html:5
 #, python-format
@@ -5397,9 +5400,10 @@ msgid ""
 "in some data. Imaging telescopes, imaging cameras and subjects are the bare "
 "minimum. Dates of acquisitions are very important too."
 msgstr ""
-"Nese deshironi qe fotot e juaja te kategorizohen ne albume,ju duhet me te "
-"vertete te shtoni disa te dhena. Teleskopin e filmimit,kamerat dhe subjektet "
-"jane minimumi. Te dhenat e fotografimit jane gjithashtu te rendesishme."
+"Nese deshironi qe fotot e juaja te kategorizohen ne albume, ju duhet me te "
+"vertete te shtoni disa te dhena. Teleskopin e filmimit, kamerat dhe "
+"subjektet jane minimumi. Te dhenat e fotografimit jane gjithashtu te "
+"rendesishme."
 
 #: templates/user/profile.html:136
 msgid "(view more...)"
@@ -5420,7 +5424,7 @@ msgid ""
 "particular order."
 msgstr ""
 "Keto foto jane te renditura qe me te rejat e marra duken te parat. Te lutem "
-"vini re:fotot pa detaje fotografimi do duken te fundit,dhe jo ne nje "
+"vini re: fotot pa detaje fotografimi do duken te fundit, dhe jo ne nje "
 "renditje te vecante."
 
 #: templates/user/profile.html:165
@@ -5444,7 +5448,7 @@ msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
 "images it not supported."
 msgstr ""
-"Vini re: kur importoni nga Flickr,watermarku automatik i fotove nuk "
+"Vini re: kur importoni nga Flickr, watermarku automatik i fotove nuk "
 "suportohet."
 
 #: templates/user/profile/flickr_import.html:15
@@ -5481,7 +5485,7 @@ msgstr "Duke importuar fotot."
 
 #: templates/user/profile/flickr_import.html:101
 msgid "Do not navigate away from this window: this might take a while!"
-msgstr "Mos u largo nga kjo dritare:do duhet vetem pak!"
+msgstr "Mos u largo nga kjo dritare: do duhet vetem pak!"
 
 #: templates/user/profile/flickr_import.html:110
 msgid ""
@@ -5550,8 +5554,8 @@ msgid ""
 "Use the form below to add a new location. After you add one, a new empty "
 "form will be created at the bottom, in case you want to add more."
 msgstr ""
-"Perdor formen poshte per te shtuar nje vendndodhje te re. pasi te keni "
-"shtuar nje, nje forme e re bosh do krijohet poshte,ne rast se deshironi te "
+"Perdor formen poshte per te shtuar nje vendndodhje te re. Pasi te keni "
+"shtuar nje, nje forme e re bosh do krijohet poshte, ne rast se deshironi te "
 "shtoni akoma."
 
 #: templates/user/profile/edit/locations.html:16
