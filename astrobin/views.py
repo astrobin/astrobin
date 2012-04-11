@@ -207,12 +207,12 @@ def index(request):
         response_dict['recently_favorited'] = \
             Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
                          .exclude(last_favorited = None) \
-                         .order_by('-last_favorited')[:20]
+                         .order_by('-last_favorited')[:16]
 
         response_dict['recently_five_starred'] = \
             Image.objects.filter(votes__score = 5) \
                          .distinct() \
-                         .order_by('-votes__date_added')[:20]
+                         .order_by('-votes__date_added')[:16]
 
         # Compute picture of the day.
         coolest_image = None
