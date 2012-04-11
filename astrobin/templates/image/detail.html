@@ -547,8 +547,10 @@
             {% if image.description %}
             <div class="image-description row">
                 <div class="span8">
-                    <h3>{% trans "Description" %}</h3>
-                    {{image.description|safe|linebreaks}}
+                    <div class="subtle-container">
+                        <h3>{% trans "Description" %}</h3>
+                        {{image.description|safe|linebreaks}}
+                    </div>
                 </div>
             </div>
             {% endif %}
