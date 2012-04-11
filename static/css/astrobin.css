@@ -844,9 +844,12 @@ ul.astrobin-thumbnails {
   margin-left: 0;
 }
 li.astrobin-thumbnail {
-  padding: 1px;
+  padding: 2px;
   margin: 0;
   border: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 li.astrobin-thumbnail img {
   -moz-border-radius: 12px;
