@@ -309,7 +309,7 @@
                                         </a>
                                         {% if image.is_solved and image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                                <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" />
+                                                <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
                                             </a>
                                         {% endif %}
                                     {% endif %}
@@ -320,7 +320,7 @@
                                                 <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                             </a>
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img class="fixed-plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}"/>
+                                                <img class="fixed-plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" style="left:{{plot_overlay_left}}px"/>
                                             </a>
                                         {% else %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
@@ -335,7 +335,7 @@
                                         </a>
                                         {% if image.is_solved and image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" />
+                                                <img class="plot-overlay" src="http://astrobin_images.{{s3_url}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
                                             </a>
                                         {% endif %}
                                     {% endif %}
