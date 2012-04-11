@@ -727,6 +727,7 @@ def image_detail(request, id):
                      'preferred_language': preferred_language,
                      'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0 if request.user.is_authenticated() else False,
                      'times_favorited': Favorite.objects.filter(image = image).count(),
+                     'plot_overlay_left' : (settings.RESIZED_IMAGE_SIZE - image.w) / 2 if image.w < settings.RESIZED_IMAGE_SIZE else 0,
                     }
 
     if 'upload_error' in request.GET:
