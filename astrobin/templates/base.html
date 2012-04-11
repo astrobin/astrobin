@@ -199,6 +199,19 @@
                                 {% notification_list request 1 10 %}
                             </ul>
                         </li> <!-- notifications -->
+                        
+                        <li class="dropdown notice-container"">
+                            {% if requests_count > 0 %}
+                                <span class="notice-count">{{requests_count}}</span>
+                            {% endif %}
+                            <a class="dropdown requests" data-toggle="dropdown" title="{% trans "Requests" %}" href="#">
+                                <img alt="{% trans "Requests" %}" src="/static/icons/iconic/orange/requests.gif"/>
+                            </a>
+                            <ul class="dropdown-menu" id="requests-popup">
+                                {% request_list request %}
+                            </ul>
+                        </li> <!-- requests -->
+                                                    
                         {% else %} <!-- request.user.is_authenticated -->
                         <li class="{% current request "^/accounts/login/" %}">
                             <a href="{% url auth_login %}">
