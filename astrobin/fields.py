@@ -6,6 +6,7 @@ add_introspection_rules([], ["^astrobin\.fields\.CountryField"])
 
 # ISO 3166-1 country names and codes adapted from http://opencountrycodes.appspot.com/python/
 COUNTRIES = (
+    ('', '---------'),
     ('GB', _('United Kingdom')), 
     ('AF', _('Afghanistan')), 
     ('AX', _('Aland Islands')), 
@@ -262,7 +263,6 @@ def get_country_name(code):
 
 
 class CountryField(models.CharField):
-    
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('max_length', 2)
         kwargs.setdefault('choices', COUNTRIES)
