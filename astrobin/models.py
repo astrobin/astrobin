@@ -1242,7 +1242,7 @@ class Location(models.Model):
     country = CountryField(
         verbose_name = _("Country"),
         null = True,
-        blank = False,
+        blank = True,
     )
     lat_deg = models.IntegerField(
         null = True,
