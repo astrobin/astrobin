@@ -100,7 +100,8 @@
         {% blocktrans %}These are the most popular subjects on AstroBin, month by month. For each subject, one image has been chosen. Use the menu to limit the images to those acquired from a certain latitude on Earth.{% endblocktrans %}
     </div>
 
-    {% cache 10 months_cache %}
+    <!-- cached for one week -->
+    {% cache 604800 popular_monthly min_lat max_lat hem %}
         {% for month in months %}
             <div class="well">
                 <strong>{{month.0}}</strong>
