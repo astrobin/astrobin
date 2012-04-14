@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<h3>{{gear.name}}</h3>
+<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>
+<p><strong>{% trans "Aperture" %}</strong>: {{gear.aperture}} mm</p>
+<p><strong>{% trans "Focal length" %}</strong>: {{gear.focal_length}} mm</p>
+
+<div class="actions">
+    <a class="btn btn-mini btn-primary" href="/search/?q=&as_values_imaging_telescopes={{gear.id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{% trans "Find images" %}</a>
+</div>
+

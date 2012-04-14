@@ -185,5 +185,7 @@ urlpatterns = patterns('',
     url(r'^get_is_gear_complete/(?P<id>\d+)/$', views.get_is_gear_complete, name='get_is_gear_complete'),
 
     url(r'^favorite_ajax/(?P<id>\d+)/$', views.favorite_ajax, name='favorite_ajax'),
+
+    url(r'^gear_popover_ajax/(?P<id>\d+)/$', views.gear_popover_ajax, name='gear_popover_ajax'),
 )
 
