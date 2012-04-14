@@ -21,6 +21,8 @@ from django.utils.translation import ugettext as _
 from django.forms.models import formset_factory, inlineformset_factory
 from django.utils.functional import curry
 from django.utils.encoding import smart_str, smart_unicode
+from django.utils.hashcompat import md5_constructor
+from django.utils.http import urlquote
 
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
@@ -356,9 +358,6 @@ def popular(request):
     response_dict['min_lat'] = min_lat
     response_dict['max_lat'] = max_lat
     response_dict['hem'] = hem
-
-    from django.utils.hashcompat import md5_constructor
-    from django.utils.http import urlquote
 
     variables = [min_lat, max_lat, hem]
     hash = md5_constructor(u':'.join([urlquote(var) for var in variables]))
@@ -1964,7 +1963,9 @@ def user_profile_stats_get_views_ajax(request, username, period = 'daily'):
 @require_GET
 def stats_get_image_views_ajax(request, id, period = 'daily'):
     import stats as _s
+
     (label, data, options) = _s.image_views(id, period)
+
     response_dict = {
         'flot_label': label,
         'flot_data': data,
@@ -2700,12 +2701,17 @@ def stats(request):
 
     sqs = SearchQuerySet()
 
-    response_dict['total_users'] = sqs.models(User).filter(user_images__gt = 0).count()
-    response_dict['total_images'] = sqs.models(Image).all().count()
-    hours = 0
-    for i in sqs.filter().models(Image):
-        hours += i.integration
-    response_dict['total_integration'] = int(hours / 3600.0)
+    variables = []
+    hash = md5_constructor(u':'.join([urlquote(var) for var in variables]))
+    cache_key = 'template.cache.%s.%s' % ('global_stats', hash.hexdigest())
+
+    if not cache.has_key(cache_key):
+        response_dict['total_users'] = sqs.models(User).filter(user_images__gt = 0).count()
+        response_dict['total_images'] = sqs.models(Image).all().count()
+        hours = 0
+        for i in sqs.filter().models(Image):
+            hours += i.integration
+        response_dict['total_integration'] = int(hours / 3600.0)
 
     sort = '-user_integration'
     if 'sort' in request.GET:
