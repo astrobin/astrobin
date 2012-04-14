@@ -166,6 +166,7 @@ urlpatterns = patterns('',
 
     url(r'^explore/choose/$', views.expore_choose, name='explore_choose'),
     url(r'^explore/wall/$', views.wall, name='wall'),
+    url(r'^explore/popular/$', views.popular, name='popular'),
     url(r'^explore/nightly/$', views.nightly, name='nightly'),
     url(r'^explore/messier/$', views.messier, name='messier'),
     url(r'^explore/messier/nominate/(?P<id>\d+)/$', views.messier_nomination, name='messier_nomination'),

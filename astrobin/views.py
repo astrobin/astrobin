@@ -15,7 +15,7 @@ from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.db import IntegrityError
 from django.utils.translation import ugettext as _
 from django.forms.models import formset_factory, inlineformset_factory
@@ -33,6 +33,8 @@ import csv
 import flickrapi
 import urllib2
 from datetime import datetime, date, timedelta
+from calendar import month_name
+import operator
 
 from models import *
 from forms import *
@@ -332,6 +334,116 @@ def wall(request):
         paginate_by = 100,
         extra_context = response_dict)
 
+
+def popular(request):
+    response_dict = {
+        'thumbnail_size': settings.THUMBNAIL_SIZE,
+        's3_url': settings.S3_URL,
+
+        'min_lat': 0,
+        'max_lat': 90,
+        'hem': 'B',
+
+        'months': [],
+        'has_previous': None,
+    }
+
+    all_images = []
+    ignore_list = (
+        'Moon',
+        'Luna',
+        'Jupiter',
+        'Mars',
+
+        'M42', # mispelled
+
+        'M 32',
+        'M 43',
+        'M 110',
+
+        'CCDM J05408-0156AB',
+        '* 43 Ori',
+        '* iot Ori',
+        '* del Ori a',
+        'V* eps Ori',
+
+        'NGC 1432', # Nebulosity in M45
+        'NGC 1435', # Nebulosity in M45
+        'NGC 1976a', # Part of Orion nebula
+        'NGC 1976b', # Part of Orion nebula
+        'NGC 1976c', # Part of Orion nebula
+        'NGC 1973',
+        'NGC 1975',
+        'NGC 1977',
+        'NGC 1980',
+        'NGC 1981',
+        'NGC 1990',
+        'NGC 2023',
+        'NGC 2024',
+        'NGC 2237',
+        'NGC 2252',
+        'NGC 5195',
+        'NGC 6350', # cluster in M8
+        'NGC 6997', # cluster in NGC7000
+
+        'IC 431',
+        'IC 432',
+        'IC 435',
+
+        'NAME ALNILAM A',
+        'NAME TAYGETA',
+        'NAME ELECTRA',
+        'NAME ATLAS',
+        'NAME PLEIONE',
+        'NAME CELENO',
+        'NAME MEROPE',
+    )
+
+    min_lat = request.GET.get('min_lat') if 'min_lat' in request.GET else 0
+    max_lat = request.GET.get('max_lat') if 'max_lat' in request.GET else 90
+    hem = request.GET.get('hem') if 'hem' in request.GET else 'B'
+
+    response_dict['min_lat'] = min_lat
+    response_dict['max_lat'] = max_lat
+    response_dict['hem'] = hem
+
+    for month in range(1, 13):
+        subject_filters = Q(image__acquisition__date__month = month) | \
+                          Q(image__locations__lat_deg__gte = min_lat) |  \
+                          Q(image__locations__lat_deg__lte = max_lat)
+        if hem != 'B':
+            subject_filters = subject_filters & \
+                          Q(image__locations__lat_side = hem)
+
+        subjects = Subject.objects \
+            .filter(subject_filters) \
+            .exclude(reduce(operator.or_, [Q(**{'mainId': x}) for x in ignore_list])) \
+            .annotate(popularity=Count('image')) \
+            .order_by('-popularity')[:10]
+
+        images = []
+        for subject in subjects:
+            subjects_images = Image.objects \
+                    .filter(subjects__mainId = subject.mainId) \
+                    .order_by('-rating_score')
+
+            for subjects_image in subjects_images:
+                pk = subjects_image.pk
+                if not images or (pk not in images and pk not in all_images):
+                    images.append(pk)
+                    all_images.append(pk) # don't care about order here
+                    break
+
+        if images:
+            filters = reduce(operator.or_, [Q(**{'pk': x}) for x in images])
+            images_sqs = Image.objects.filter(filters)
+            response_dict['months'].append((month_name[month], subjects, reversed(images_sqs)))
+
+    return render_to_response(
+        'most_popular.html',
+        response_dict,
+        context_instance = RequestContext(request))
+    
 
 @require_GET
 def messier(request):

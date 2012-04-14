@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+{% load cache %}
+
+{% block content %}
+    <a name="page_anchor"></a>
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {% trans "Select latitude" %}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="nav-header">
+                        {% trans "From latitude:" %}
+                    </li>
+                    <li>
+                        <a href="{% query_string "min_lat=0" "" %}">
+                            <span class="bg-icon{% if min_lat == 0 %} icon-check{% endif %}"></span>
+                            0
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "min_lat=20" "" %}">
+                            <span class="bg-icon{% if min_lat == 20 %} icon-check{% endif %}"></span>
+                            20
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "min_lat=40" "" %}">
+                            <span class="bg-icon{% if min_lat == 40 %} icon-check{% endif %}"></span>
+                            40
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "min_lat=60" "" %}">
+                            <span class="bg-icon{% if min_lat == 60 %} icon-check{% endif %}"></span>
+                            60
+                        </a>
+                    </li>
+
+                    <li class="nav-header">
+                        {% trans "To latitude:" %}
+                    </li>
+                    <li>
+                        <a href="{% query_string "max_lat=20" "" %}">
+                            <span class="bg-icon{% if max_lat == 20 %} icon-check{% endif %}"></span>
+                            20
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "max_lat=40" "" %}">
+                            <span class="bg-icon{% if max_lat == 40 %} icon-check{% endif %}"></span>
+                            40
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "max_lat=60" "" %}">
+                            <span class="bg-icon{% if max_lat == 60 %} icon-check{% endif %}"></span>
+                            60
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "max_lat=90" "" %}">
+                            <span class="bg-icon{% if max_lat == 90 %} icon-check{% endif %}"></span>
+                            90
+                        </a>
+                    </li>
+
+                    <li class="nav-header">
+                        {% trans "Hemisphere:" %}
+                    </li>
+                    <li>
+                        <a href="{% query_string "hem='N'" "" %}">
+                            <span class="bg-icon{% if hem == 'N' %} icon-check{% endif %}"></span>
+                            {% trans "North" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "hem='S'" "" %}">
+                            <span class="bg-icon{% if hem == 'S' %} icon-check{% endif %}"></span>
+                            {% trans "South" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "hem='B'" "" %}">
+                            <span class="bg-icon{% if hem == 'B' %} icon-check{% endif %}"></span>
+                            {% trans "Both" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+
+    <h1>{% trans "Most popular subjects" %}</h1>
+    <div class="well">
+        {% blocktrans %}These are the most popular subjects on AstroBin, month by month. For each subject, one image has been chosen. Use the menu to limit the images to those acquired from a certain latitude on Earth.{% endblocktrans %}
+    </div>
+
+    {% cache 10 months_cache %}
+        {% for month in months %}
+            <div class="well">
+                <strong>{{month.0}}</strong>
+            </div>
+            {% image_list request month.2 0 %}
+        {% endfor %}
+    {% endcache %}
+{% endblock %}
