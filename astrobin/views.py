@@ -4,6 +4,7 @@ from django.http import HttpResponseForbidden
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
+from django.template.loader import render_to_string
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import create_object
@@ -3038,4 +3039,37 @@ def favorite_ajax(request, id):
         )
 
     return ajax_success();
+
+
+@require_GET
+@never_cache
+def gear_popover_ajax(request, id):
+    gear, gear_type = get_correct_gear(id)
+    template = 'popover/gear.html'
+
+    if gear_type == 'Telescope':
+        template = 'popover/gear_telescope.html'
+    elif gear_type == 'Mount':
+        template = 'popover/gear_mount.html'
+    elif gear_type == 'Camera':
+        template = 'popover/gear_camera.html'
+    elif gear_type == 'FocalReducer':
+        pass
+    elif gear_type == 'Software':
+        pass
+    elif gear_type == 'Filter':
+        template = 'popover/gear_filter.html'
+    elif gear_type == 'Accessory':
+        pass
+ 
+    html = render_to_string(template, {'gear': gear})
+
+    response_dict = {
+        'success': True,
+        'html': html,
+    }
+
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
 

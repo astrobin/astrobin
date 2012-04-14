@@ -34,7 +34,7 @@
 @headers_font: "Droid Sans";
 @regular_font: "Droid Sans";
 
-.strong {
+strong, .strong {
     color: @strong-text-color;
     font-weight: bold;
 }
@@ -789,7 +789,7 @@ body.full {
     padding-top: 81px;
 }
 .modal {
-    background: @dark-panel-color url('/static/images/dark-background-tile.png');
+    background: @dark-panel-color url('/static/images/dark-panel-tile.png');
     border: none;
     .box-shadow;
     .rounded-corners;
@@ -1945,4 +1945,41 @@ p.small {
     font-size: 87.5%;
     padding: 0;
     margin: 0;
+}
+
+*[rel="popover"] {
+    position: relative;
+}
+
+.ui-tooltip, .qtip {
+    max-width: 400px;
+}
+
+.ui-tooltip-default .ui-tooltip-titlebar,
+.ui-tooltip-default .ui-tooltip-content {
+    background: #303030 url('/static/images/darker-panel-tile.png');
+    border-color: #111;
+    .box-shadow-subtle;
+    color: @text-color;
+
+    h3 {
+        color: @strong-text-color;
+        border-bottom: 1px solid #232323;
+    }
+    p {
+        margin-bottom: 2px;
+    }
+
+    .actions {
+        margin-top: @spacer-large;
+        padding-top: @spacer-large;
+        padding-bottom: @spacer-medium;
+        border-top: 1px solid #232323;
+        text-align: right;
+    }
+}
+
+.ui-tooltip .ui-tooltip-tip,
+.ui-tooltip .ui-tooltip-tip *{
+    display: none;
 }

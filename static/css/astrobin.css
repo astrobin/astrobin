@@ -1,4 +1,5 @@
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
+strong,
 .strong {
   color: #fcfcfc;
   font-weight: bold;
@@ -644,7 +645,7 @@ body.full {
   padding-top: 81px;
 }
 .modal {
-  background: #2e2e2e url('/static/images/dark-background-tile.png');
+  background: #2e2e2e url('/static/images/dark-panel-tile.png');
   border: none;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -1785,4 +1786,41 @@ p.small {
   font-size: 87.5%;
   padding: 0;
   margin: 0;
+}
+*[rel="popover"] {
+  position: relative;
+}
+.ui-tooltip,
+.qtip {
+  max-width: 400px;
+}
+.ui-tooltip-default .ui-tooltip-titlebar,
+.ui-tooltip-default .ui-tooltip-content {
+  background: #303030 url('/static/images/darker-panel-tile.png');
+  border-color: #111;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  color: #b8b8b8;
+}
+.ui-tooltip-default .ui-tooltip-titlebar h3,
+.ui-tooltip-default .ui-tooltip-content h3 {
+  color: #fcfcfc;
+  border-bottom: 1px solid #232323;
+}
+.ui-tooltip-default .ui-tooltip-titlebar p,
+.ui-tooltip-default .ui-tooltip-content p {
+  margin-bottom: 2px;
+}
+.ui-tooltip-default .ui-tooltip-titlebar .actions,
+.ui-tooltip-default .ui-tooltip-content .actions {
+  margin-top: 12px;
+  padding-top: 12px;
+  padding-bottom: 8px;
+  border-top: 1px solid #232323;
+  text-align: right;
+}
+.ui-tooltip .ui-tooltip-tip,
+.ui-tooltip .ui-tooltip-tip * {
+  display: none;
 }
