@@ -349,56 +349,6 @@ def popular(request):
     }
 
     all_images = []
-    ignore_list = (
-        'Moon',
-        'Luna',
-        'Jupiter',
-        'Mars',
-
-        'M42', # mispelled
-
-        'M 32',
-        'M 43',
-        'M 110',
-
-        'CCDM J05408-0156AB',
-        '* 43 Ori',
-        '* iot Ori',
-        '* del Ori a',
-        'V* eps Ori',
-
-        'NGC 1432', # Nebulosity in M45
-        'NGC 1435', # Nebulosity in M45
-        'NGC 1976a', # Part of Orion nebula
-        'NGC 1976b', # Part of Orion nebula
-        'NGC 1976c', # Part of Orion nebula
-        'NGC 1973',
-        'NGC 1975',
-        'NGC 1977',
-        'NGC 1980',
-        'NGC 1981',
-        'NGC 1990',
-        'NGC 2023',
-        'NGC 2024',
-        'NGC 2237',
-        'NGC 2252',
-        'NGC 5195',
-        'NGC 6350', # cluster in M8
-        'NGC 6997', # cluster in NGC7000
-
-        'IC 431',
-        'IC 432',
-        'IC 435',
-
-        'NAME ALNILAM A',
-        'NAME TAYGETA',
-        'NAME ELECTRA',
-        'NAME ATLAS',
-        'NAME PLEIONE',
-        'NAME CELENO',
-        'NAME MEROPE',
-    )
-
     min_lat = request.GET.get('min_lat') if 'min_lat' in request.GET else 0
     max_lat = request.GET.get('max_lat') if 'max_lat' in request.GET else 90
     hem = request.GET.get('hem') if 'hem' in request.GET else 'B'
@@ -407,37 +357,96 @@ def popular(request):
     response_dict['max_lat'] = max_lat
     response_dict['hem'] = hem
 
-    for month in range(1, 13):
-        subject_filters = Q(image__acquisition__date__month = month) | \
-                          Q(image__locations__lat_deg__gte = min_lat) |  \
-                          Q(image__locations__lat_deg__lte = max_lat)
-        if hem != 'B':
-            subject_filters = subject_filters & \
-                          Q(image__locations__lat_side = hem)
+    from django.utils.hashcompat import md5_constructor
+    from django.utils.http import urlquote
 
-        subjects = Subject.objects \
-            .filter(subject_filters) \
-            .exclude(reduce(operator.or_, [Q(**{'mainId': x}) for x in ignore_list])) \
-            .annotate(popularity=Count('image')) \
-            .order_by('-popularity')[:10]
+    variables = [min_lat, max_lat, hem]
+    hash = md5_constructor(u':'.join([urlquote(var) for var in variables]))
+    cache_key = 'template.cache.%s.%s' % ('popular_monthly', hash.hexdigest())
 
-        images = []
-        for subject in subjects:
-            subjects_images = Image.objects \
-                    .filter(subjects__mainId = subject.mainId) \
-                    .order_by('-rating_score')
+    if not cache.has_key(cache_key):
+        ignore_list = (
+            'Moon',
+            'Luna',
+            'Jupiter',
+            'Mars',
 
-            for subjects_image in subjects_images:
-                pk = subjects_image.pk
-                if not images or (pk not in images and pk not in all_images):
-                    images.append(pk)
-                    all_images.append(pk) # don't care about order here
-                    break
+            'M42', # mispelled
 
-        if images:
-            filters = reduce(operator.or_, [Q(**{'pk': x}) for x in images])
-            images_sqs = Image.objects.filter(filters)
-            response_dict['months'].append((month_name[month], subjects, reversed(images_sqs)))
+            'M 32',
+            'M 43',
+            'M 110',
+
+            'CCDM J05408-0156AB',
+            '* 43 Ori',
+            '* iot Ori',
+            '* del Ori a',
+            'V* eps Ori',
+
+            'NGC 1432', # Nebulosity in M45
+            'NGC 1435', # Nebulosity in M45
+            'NGC 1976a', # Part of Orion nebula
+            'NGC 1976b', # Part of Orion nebula
+            'NGC 1976c', # Part of Orion nebula
+            'NGC 1973',
+            'NGC 1975',
+            'NGC 1977',
+            'NGC 1980',
+            'NGC 1981',
+            'NGC 1990',
+            'NGC 2023',
+            'NGC 2024',
+            'NGC 2237',
+            'NGC 2252',
+            'NGC 5195',
+            'NGC 6350', # cluster in M8
+            'NGC 6997', # cluster in NGC7000
+
+            'IC 431',
+            'IC 432',
+            'IC 435',
+
+            'NAME ALNILAM A',
+            'NAME TAYGETA',
+            'NAME ELECTRA',
+            'NAME ATLAS',
+            'NAME PLEIONE',
+            'NAME CELENO',
+            'NAME MEROPE',
+        )
+
+
+        for month in range(1, 13):
+            subject_filters = Q(image__acquisition__date__month = month) | \
+                              Q(image__locations__lat_deg__gte = min_lat) |  \
+                              Q(image__locations__lat_deg__lte = max_lat)
+            if hem != 'B':
+                subject_filters = subject_filters & \
+                              Q(image__locations__lat_side = hem)
+
+            subjects = Subject.objects \
+                .filter(subject_filters) \
+                .exclude(reduce(operator.or_, [Q(**{'mainId': x}) for x in ignore_list])) \
+                .annotate(popularity=Count('image')) \
+                .order_by('-popularity')[:10]
+
+            images = []
+            for subject in subjects:
+                subjects_images = Image.objects \
+                        .filter(subjects__mainId = subject.mainId) \
+                        .order_by('-rating_score')
+
+                for subjects_image in subjects_images:
+                    pk = subjects_image.pk
+                    if not images or (pk not in images and pk not in all_images):
+                        images.append(pk)
+                        all_images.append(pk) # don't care about order here
+                        break
+
+            if images:
+                filters = reduce(operator.or_, [Q(**{'pk': x}) for x in images])
+                images_sqs = Image.objects.filter(filters)
+                response_dict['months'].append((month_name[month], subjects, reversed(images_sqs)))
 
     return render_to_response(
         'most_popular.html',
