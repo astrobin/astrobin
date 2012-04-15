@@ -3054,14 +3054,14 @@ def gear_popover_ajax(request, id):
     elif gear_type == 'Camera':
         template = 'popover/gear_camera.html'
     elif gear_type == 'FocalReducer':
-        pass
+        template = 'popover/gear_focal_reducers.html'
     elif gear_type == 'Software':
-        pass
+        template = 'popover/gear_software.html'
     elif gear_type == 'Filter':
         template = 'popover/gear_filter.html'
     elif gear_type == 'Accessory':
-        pass
- 
+        template = 'popover/gear_accessory.html'
+
     html = render_to_string(template, {'gear': gear})
 
     response_dict = {

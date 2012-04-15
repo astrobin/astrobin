@@ -329,6 +329,36 @@ var common = {
         });
     },
 
+    setup_gear_popovers: function() {
+        $('.gear-popover').each(function() {
+            $(this).qtip({
+                position: {
+                    my: "left center",
+                    at: "right center"
+                },
+                show: {
+                    solo: true
+                },
+                hide: {
+                    fixed: true,
+                    delay: 1000
+                },
+                content: {
+                    text: "...",
+                    ajax: {
+                        loading: false,
+                        url:  $(this).attr('data-load'),
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data, status) {
+                            this.set('content.text', data.html);
+                        }
+                    }
+                }
+            });
+        });
+    },
+
     init: function(current_username, config) {
         /* Init */
         common.globals.current_username = current_username;
@@ -337,7 +367,10 @@ var common = {
         /* Following */
         common.setup_follow();
         common.setup_unfollow();
-    }
+ 
+        /* Gear popovers */
+        common.setup_gear_popovers();
+   }
 };
 
 /**********************************************************************
@@ -677,37 +710,6 @@ var image_detail = {
         }); 
     },
 
-    setup_gear_popovers: function() {
-
-        $('.gear-popover').each(function() {
-            $(this).qtip({
-                position: {
-                    my: "left center",
-                    at: "right center"
-                },
-                show: {
-                    solo: true
-                },
-                hide: {
-                    fixed: true,
-                    delay: 1000
-                },
-                content: {
-                    text: "...",
-                    ajax: {
-                        loading: false,
-                        url:  $(this).attr('data-load'),
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data, status) {
-                            this.set('content.text', data.html);
-                        }
-                    }
-                }
-            });
-        });
-    },
-
     init: function(image_id, revision_id, image_username, current_rating, config) {
         /* Init */
         image_detail.globals.image_id = image_id;
@@ -732,9 +734,6 @@ var image_detail = {
 
         /* Plot overlay mouse-over */
         image_detail.setup_plot_overlay();
-
-        /* Gear popovers */
-        image_detail.setup_gear_popovers();
     }
 };
 

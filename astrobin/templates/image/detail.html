@@ -460,9 +460,13 @@
                                                 <p>
                                                   <strong>{% trans i.0 %}:</strong>
                                                   {% for g in i.1 %}
-                                                    <a href="#" rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}">{{g.name|escape}}</a>
-                                                    {% if not forloop.last %},&nbsp;{% endif %}
-                                                  {% endfor %}
+                                                        {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}
+                                                            <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q=&as_values_{{i.2}}={{g.id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>
+                                                        {% else %}
+                                                            <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q={{g.name|escape}}&type={{i.2}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{g.name|escape}}</a>
+                                                        {% endif %}
+                                                        {% if not forloop.last %},&nbsp;{% endif %}
+                                                    {% endfor %}
                                                 </p>
                                             {% endif %}
                                         {% endfor %}
