@@ -684,6 +684,9 @@ body.full {
 .dropdown-menu > li > a {
   color: #333333;
 }
+.dropdown-menu > li > a strong {
+  color: #333333;
+}
 .navbar .nav .dropdown-toggle .caret,
 .navbar .nav .open.dropdown .caret {
   border-top-color: #cc4b2e;
