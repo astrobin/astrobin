@@ -95,7 +95,7 @@ def image_stored_callback(image, stored, solve, lang):
         user = image.image.user
         img = image.image
 
-    from models import UserProfile
+    from models import UserProfile, Gear
     translation.activate(lang)
     push_notification([user], 'image_ready', {'object_url':'%s%s' %(settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
 
@@ -108,6 +108,18 @@ def image_stored_callback(image, stored, solve, lang):
                            'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url()
                           }
                          )
+        for gear_type in ('imaging_telescopes', 'guiding_telescopes', 'mounts',
+                          'imaging_cameras', 'guiding_cameras', 'focal_reducers',
+                          'software', 'filters', 'accessories'):
+            for gear_item in getattr(image, gear_type).all():
+                gear_followers = [x.user for x in UserProfile.objects.filter(follows_gear = Gear.objects.get(id = gear_item.id))]
+                push_notification(
+                    gear_followers, 'new_image_from_gear',
+                    {
+                        'gear': gear_item.name,
+                        'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+                    })
+
 
     if solve:
         solve_image.delay(image, lang, callback=image_solved_callback)
