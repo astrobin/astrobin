@@ -329,7 +329,7 @@ var common = {
         });
     },
 
-    setup_gear_popovers: function() {
+    setup_gear_popovers: function(follow_text, unfollow_text) {
         $('.gear-popover').each(function() {
             $(this).qtip({
                 position: {
@@ -357,6 +357,53 @@ var common = {
                 }
             });
         });
+
+        $('.follow-gear').live('click', function() {
+            var $link = $(this);
+            $.ajax({
+                url: $link.attr('href'),
+                timeout: 5000,
+                dataType: 'json',
+                beforeSend: function() {
+                    $link.text("...");
+                    $link.addClass('disabled');
+                },
+                success: function(data) {
+                    $link.text(unfollow_text);
+                    $link.attr('href', '/unfollow_gear/' + $link.attr('data-gear') + '/');
+                    $link.removeClass('follow-gear').addClass('unfollow-gear');
+                    $link.removeClass('disabled');
+                },
+                error: function() {
+                }
+            });
+
+            return false;
+        });
+
+        $('.unfollow-gear').live('click', function() {
+            var $link = $(this);
+            $.ajax({
+                url: $link.attr('href'),
+                timeout: 5000,
+                dataType: 'json',
+                beforeSend: function() {
+                    $link.text("...");
+                    $link.addClass('disabled');
+                },
+                success: function(data) {
+                    $link.text(follow_text);
+                    $link.attr('href', '/follow_gear/' + $link.attr('data-gear') + '/');
+                    $link.removeClass('unfollow-gear').addClass('follow-gear');
+                    $link.removeClass('disabled');
+                },
+                error: function() {
+                    alert("error");
+                }
+            });
+
+            return false;
+        });
     },
 
     init: function(current_username, config) {
@@ -367,9 +414,6 @@ var common = {
         /* Following */
         common.setup_follow();
         common.setup_unfollow();
- 
-        /* Gear popovers */
-        common.setup_gear_popovers();
    }
 };
 
