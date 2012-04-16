@@ -118,6 +118,12 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'new_image_from_gear',
+        '',
+        '',
+        2,
+    ),
 )
 
 
