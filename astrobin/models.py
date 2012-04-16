@@ -1113,15 +1113,16 @@ class UserProfile(models.Model):
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
 
     # Gear
-    telescopes = models.ManyToManyField(Telescope, null=True, blank=True, verbose_name=_("Telescopes and lenses"))
-    mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"))
-    cameras = models.ManyToManyField(Camera, null=True, blank=True, verbose_name=_("Cameras"))
-    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers"))
-    software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"))
-    filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"))
-    accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
+    telescopes = models.ManyToManyField(Telescope, null=True, blank=True, verbose_name=_("Telescopes and lenses"), related_name='telescopes')
+    mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"), related_name='mounts')
+    cameras = models.ManyToManyField(Camera, null=True, blank=True, verbose_name=_("Cameras"), related_name='cameras')
+    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers"), related_name='focal_reducers')
+    software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"), related_name='software')
+    filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"), related_name='filters')
+    accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"), related_name='accessories')
 
     follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers', symmetrical=False)
+    follows_gear = models.ManyToManyField('gear', null=True, blank=True)
 
     default_license = models.IntegerField(
         choices = LICENSE_CHOICES,

@@ -2402,6 +2402,46 @@ def unfollow(request, username):
 
 @login_required
 @require_GET
+def follow_gear(request, id):
+    gear = get_object_or_404(Gear, id = id)
+    profile = UserProfile.objects.get(user = request.user)
+
+    if gear not in profile.follows_gear.all():
+        profile.follows_gear.add(gear)
+        profile.save()
+        if request.is_ajax():
+            return ajax_success()
+        else:
+            next_page = '/'
+            if 'next' in request.GET:
+                next_page = request.GET.get('next')
+            return HttpResponseRedirect(next_page)
+
+    return ajax_fail()
+
+
+@login_required
+@require_GET
+def unfollow_gear(request, id):
+    gear = get_object_or_404(Gear, id = id)
+    profile = UserProfile.objects.get(user = request.user)
+
+    if gear in profile.follows_gear.all():
+        profile.follows_gear.remove(gear)
+        profile.save()
+        if request.is_ajax():
+            return ajax_success()
+        else:
+            next_page = '/'
+            if 'next' in request.GET:
+                next_page = request.GET.get('next')
+            return HttpResponseRedirect(next_page)
+
+    return ajax_fail()
+
+
+@login_required
+@require_GET
 def mark_notifications_seen(request):
     for n in notification.Notice.objects.filter(user=request.user):
         n.is_unseen()
@@ -3045,6 +3085,9 @@ def favorite_ajax(request, id):
 @never_cache
 def gear_popover_ajax(request, id):
     gear, gear_type = get_correct_gear(id)
+    profile = UserProfile.objects.get(user = request.user) \
+              if request.user.is_authenticated() \
+              else None
     template = 'popover/gear.html'
 
     if gear_type == 'Telescope':
@@ -3062,7 +3105,15 @@ def gear_popover_ajax(request, id):
     elif gear_type == 'Accessory':
         template = 'popover/gear_accessory.html'
 
-    html = render_to_string(template, {'gear': gear})
+    follows = Gear.objects.get(id = gear.id) in profile.follows_gear.all() \
+              if profile \
+              else False
+    html = render_to_string(template,
+        {
+            'gear': gear,
+            'follows': follows,
+            'is_authenticated': request.user.is_authenticated(),
+        })
 
     response_dict = {
         'success': True,
