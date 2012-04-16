@@ -3124,3 +3124,24 @@ def gear_popover_ajax(request, id):
         simplejson.dumps(response_dict),
         mimetype = 'application/javascript')
 
+
+@require_GET
+@never_cache
+def subject_popover_ajax(request, id):
+    subject = get_object_or_404(Subject, id = id)
+    template = 'popover/subject.html'
+
+    html = render_to_string(template,
+        {
+            'subject': subject,
+        })
+
+    response_dict = {
+        'success': True,
+        'html': html,
+    }
+
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
+

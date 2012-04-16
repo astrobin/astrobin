@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<h3>{{subject.mainId}}</h3>
+<p><strong>{% trans "RA" %}</strong>: {{subject.ra}}</p>
+<p><strong>{% trans "Dec" %}</strong>: {{subject.dec}}</p>
+<p><strong>{% trans "Type" %}</strong>: {{subject.otype}} {{subject.mtype}}</p>
+<p><strong>{% trans "Size" %}</strong>: {{subject.dim_majaxis}}&times;{{subject.dim_minaxis}}'</p>
+
+<div class="actions">
+    <a class="btn btn-mini btn-primary" href="/search/?q={{subject.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{% trans "Find images" %}</a>
+</div>
+
