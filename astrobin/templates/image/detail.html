@@ -380,14 +380,14 @@
                             <a href="/search/?q=&ssms={{solar_system_main_subject_id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
                         {% endif %}
                         {% for s in subjects_short %}
-                            <a href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                            <a rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}" href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                         {% endfor %}
                         {% if subjects_all|length > 10 %}
                             <span id="more-subjects">
                                 <span class="hidden">
                                     ,&nbsp;
                                     {% for s in subjects_reminder %}
-                                        <a href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                                        <a rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}" href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                                     {% endfor %}
                                 </span>
                                 <span class="more">
@@ -1241,6 +1241,7 @@ $(document).ready(function() {
         });
 
     common.setup_gear_popovers('{% trans "Follow" %}', '{% trans "Unfollow" %}');
+    common.setup_subject_popovers('{% trans "Follow" %}', '{% trans "Unfollow" %}');
 
     image_detail.init(
         {{image.id}},

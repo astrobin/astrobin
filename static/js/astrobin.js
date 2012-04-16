@@ -406,6 +406,83 @@ var common = {
         });
     },
 
+    setup_subject_popovers: function(follow_text, unfollow_text) {
+        $('.subject-popover').each(function() {
+            $(this).qtip({
+                position: {
+                    my: "left center",
+                    at: "right center"
+                },
+                show: {
+                    solo: true
+                },
+                hide: {
+                    fixed: true,
+                    delay: 1000
+                },
+                content: {
+                    text: "...",
+                    ajax: {
+                        loading: false,
+                        url:  $(this).attr('data-load'),
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data, status) {
+                            this.set('content.text', data.html);
+                        }
+                    }
+                }
+            });
+        });
+
+        $('.follow-subject').live('click', function() {
+            var $link = $(this);
+            $.ajax({
+                url: $link.attr('href'),
+                timeout: 5000,
+                dataType: 'json',
+                beforeSend: function() {
+                    $link.text("...");
+                    $link.addClass('disabled');
+                },
+                success: function(data) {
+                    $link.text(unfollow_text);
+                    $link.attr('href', '/unfollow_subject/' + $link.attr('data-subject') + '/');
+                    $link.removeClass('follow-subject').addClass('unfollow-subject');
+                    $link.removeClass('disabled');
+                },
+                error: function() {
+                }
+            });
+
+            return false;
+        });
+
+        $('.unfollow-subject').live('click', function() {
+            var $link = $(this);
+            $.ajax({
+                url: $link.attr('href'),
+                timeout: 5000,
+                dataType: 'json',
+                beforeSend: function() {
+                    $link.text("...");
+                    $link.addClass('disabled');
+                },
+                success: function(data) {
+                    $link.text(follow_text);
+                    $link.attr('href', '/follow_subject/' + $link.attr('data-subject') + '/');
+                    $link.removeClass('unfollow-subject').addClass('follow-subject');
+                    $link.removeClass('disabled');
+                },
+                error: function() {
+                    alert("error");
+                }
+            });
+
+            return false;
+        });
+    },
+
     init: function(current_username, config) {
         /* Init */
         common.globals.current_username = current_username;
