@@ -7,23 +7,23 @@ $(document).ready(function() {
         {
             follow_action: {
                 dialog: {
-                    title : "{% blocktrans with image.user.username as username %}Follow {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}",
+                    title : "{% blocktrans with user.username as username %}Follow {{username}}?{% endblocktrans %}",
+                    body  : "{% blocktrans with user.username as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}",
                     button: "{% trans "Yes, follow!" %}"
                 },
                 stop_following: "{% trans "Stop following" %}"
             },
             unfollow_action: {
                 dialog: {
-                    title : "{% blocktrans with image.user.username as username %}Stop following {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}",
+                    title : "{% blocktrans with user.username as username %}Stop following {{username}}?{% endblocktrans %}",
+                    body  : "{% blocktrans with user.username as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}",
                     button: "{% trans "Yes, stop following!" %}"
                 },
                 follow: "{% trans "Follow" %}"
             },
             message_action: {
                 dialog: {
-                    title : "{% blocktrans with image.user.username as username %}Send {{username}} a message{% endblocktrans %}",
+                    title : "{% blocktrans with user.username as username %}Send {{username}} a message{% endblocktrans %}",
                     body  : "",
                     button: "{% trans "Send" %} &rarr;"
                 },
