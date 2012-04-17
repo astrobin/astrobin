@@ -3,7 +3,11 @@
 {% load bootstrap_toolkit %}
 
 {% block content %}
-<h1>{% trans "Contact Form" %}</h1>
+<h1>{% trans "Contact" %}</h1>
+
+<div class="well">
+    {% blocktrans %}Please contact us if you need any assistance, or want to report a problem, give some feedback or suggestions, or simply want to get in touch!{% endblocktrans %}
+</div>
 
 <form class="form-horizontal" action="" method="post">
     {{form|as_bootstrap}}
