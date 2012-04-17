@@ -87,42 +87,46 @@ def integration_hours_by_gear(user, period='monthly'):
     }
 
     profile = UserProfile.objects.get(user = user)
-    all_gear = Gear.objects.filter(Q(telescope__userprofile = profile) | Q(camera__userprofile = profile))
-    thickness = all_gear.count()
-    for g in all_gear:
-        all = DeepSky_Acquisition.objects.filter(
-            Q(image__user = user),
-            Q(image__imaging_telescopes = g) | Q(image__imaging_cameras = g)).exclude(date = None).order_by('date')
+    all_telescopes = profile.telescopes.all()
+    all_cameras = profile.cameras.all()
 
-        g_dict = {
-            'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', g.name).encode('ascii', 'ignore'),
-            'stage_data': {},
-            'data': [],
-            'lines': {'lineWidth': thickness},
-        }
+    thickness = all_telescopes.count() + all_cameras.count()
 
-        for i in all:
-            integration = 0
-            if i.duration and i.number:
-                integration += (i.duration * i.number) / 3600.0
-            key = i.date.strftime(_map[period][1])
-            if key in g_dict['stage_data']:
-                g_dict['stage_data'][key] += integration
-            else:
-                g_dict['stage_data'][key] = integration
+    for t in (all_telescopes, all_cameras):
+        for g in t:
+            all = DeepSky_Acquisition.objects.filter(
+                Q(image__user = user),
+                Q(image__imaging_telescopes = g) | Q(image__imaging_cameras = g)).exclude(date = None).order_by('date')
 
-        if all:
-            for date in daterange(all[0].date, datetime.today().date()):
-                grouped_date = date.strftime(_map[period][1])
-                t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-                if grouped_date in g_dict['stage_data'].keys():
-                    g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
+            g_dict = {
+                'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', g.name).encode('ascii', 'ignore'),
+                'stage_data': {},
+                'data': [],
+                'lines': {'lineWidth': thickness},
+            }
+
+            for i in all:
+                integration = 0
+                if i.duration and i.number:
+                    integration += (i.duration * i.number) / 3600.0
+                key = i.date.strftime(_map[period][1])
+                if key in g_dict['stage_data']:
+                    g_dict['stage_data'][key] += integration
                 else:
-                    g_dict['data'].append([t, 0])
+                    g_dict['stage_data'][key] = integration
 
-        del g_dict['stage_data']
-        flot_data.append(g_dict)
-        thickness -= 1
+            if all:
+                for date in daterange(all[0].date, datetime.today().date()):
+                    grouped_date = date.strftime(_map[period][1])
+                    t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+                    if grouped_date in g_dict['stage_data'].keys():
+                        g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
+                    else:
+                        g_dict['data'].append([t, 0])
+
+            del g_dict['stage_data']
+            flot_data.append(g_dict)
+            thickness -= 1
 
     return (flot_data, flot_options)
 
