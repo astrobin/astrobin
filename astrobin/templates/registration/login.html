@@ -10,7 +10,7 @@
     <div class="form-actions">
         <input class="btn btn-primary" type="submit" value="{% trans 'Log in' %}" />
         <a class="btn" href="{% url auth_password_reset %}">{% trans "Reset password" %}</a>
-        <a class="btn" href="{% url registration_register %}">{% trans "Register" %}</a
+        <a class="btn" href="{% url registration_register %}">{% trans "Register" %}</a>
         <input type="hidden" name="next" value="{{ next }}" />
     </div>
 </form>
