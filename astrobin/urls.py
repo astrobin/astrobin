@@ -110,6 +110,13 @@ urlpatterns = patterns('',
         views.stats_get_image_views_ajax,
         name = 'stats_image_views'),
 
+    url(r'^subject/stats/images-monthly/(?P<id>\d+)/$',
+        views.stats_subject_images_monthly_ajax,
+        name = 'stats_subject_images_monthly'),
+     url(r'^subject/stats/integration-monthly/(?P<id>\d+)/$',
+        views.stats_subject_integration_monthly_ajax,
+        name = 'stats_subject_integration_monthly'),
+  
     url(r'^follow/(?P<username>[\w.@+-]+)/$', views.follow, name='follow'),
     url(r'^unfollow/(?P<username>[\w.@+-]+)/$', views.unfollow, name='unfollow'),
     url(r'^follow_gear/(?P<id>\d+)/$', views.follow_gear, name='follow_gear'),
@@ -193,5 +200,7 @@ urlpatterns = patterns('',
 
     url(r'^gear_popover_ajax/(?P<id>\d+)/$', views.gear_popover_ajax, name='gear_popover_ajax'),
     url(r'^subject_popover_ajax/(?P<id>\d+)/$', views.subject_popover_ajax, name='subject_popover_ajax'),
+
+    url(r'^subject/(?P<id>\d+)/$', views.subject_page, name='subject_page'),
 )
 

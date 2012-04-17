@@ -712,7 +712,6 @@ def image_detail(request, id):
 
                 dsa_data['frames'].append(f)
                 dsa_data['integration'] += (a.duration * a.number / 3600.0)
-                print dsa_data['integration']
 
             for i in ['darks', 'flats', 'flat_darks', 'bias']:
                 if a.filter and getattr(a, i):
@@ -3193,4 +3192,63 @@ def subject_popover_ajax(request, id):
     return HttpResponse(
         simplejson.dumps(response_dict),
         mimetype = 'application/javascript')
+
+
+@require_GET
+def subject_page(request, id):
+    subject = get_object_or_404(Subject, id = id)
+
+    all_images = Image.objects.filter(subjects = subject)
+
+    integration_list = DeepSky_Acquisition.objects \
+        .filter(image__subjects = subject) \
+        .exclude(Q(number = None) | Q(duration = None)) \
+        .values_list('number', 'duration')
+
+    total_integration = '%.2f' % \
+        (reduce(lambda x, y: x+y,
+                [x[0]*x[1] for x in integration_list]) \
+        / 3600.00)
+
+    return object_detail(
+        request,
+        queryset = Subject.objects.all(),
+        object_id = id,
+        template_name = 'subject/page.html',
+        template_object_name = 'subject',
+        extra_context = {
+            'examples': all_images.order_by('-rating_score')[:10],
+            'total_images': all_images.count(),
+            'total_integration': total_integration,
+        })
+
+
+@require_GET
+def stats_subject_images_monthly_ajax(request, id):
+    import stats as _s
+
+    (label, data, options) = _s.subject_images_monthly(id)
+
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def stats_subject_integration_monthly_ajax(request, id):
+    import stats as _s
+
+    (label, data, options) = _s.subject_integration_monthly(id)
+
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
 

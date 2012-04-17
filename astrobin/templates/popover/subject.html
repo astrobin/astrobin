@@ -15,5 +15,6 @@
             <a class="btn btn-mini btn-primary follow-subject" data-subject="{{subject.id}}" href="{% url follow_subject subject.id %}">{% trans "Follow" %}</a>
         {% endif %}
     {% endif %}
+    <a class="btn btn-mini" href="{% url subject_page subject.id %}">{% trans "View page" %}</a>
 </div>
 
