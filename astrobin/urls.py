@@ -202,5 +202,7 @@ urlpatterns = patterns('',
     url(r'^subject_popover_ajax/(?P<id>\d+)/$', views.subject_popover_ajax, name='subject_popover_ajax'),
 
     url(r'^subject/(?P<id>\d+)/$', views.subject_page, name='subject_page'),
+
+    url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
 )
 

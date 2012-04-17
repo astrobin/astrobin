@@ -180,6 +180,7 @@ INSTALLED_APPS = (
     'uni_form',
     'threaded_messages',
     'bootstrap_toolkit',
+    'contact_form',
 )
 
 LOGIN_REDIRECT_URL = '/'
