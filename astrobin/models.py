@@ -1123,6 +1123,7 @@ class UserProfile(models.Model):
 
     follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers', symmetrical=False)
     follows_gear = models.ManyToManyField('gear', null=True, blank=True)
+    follows_subjects = models.ManyToManyField('Subject', null=True, blank=True)
 
     default_license = models.IntegerField(
         choices = LICENSE_CHOICES,

@@ -257,6 +257,7 @@ var common = {
                                     url: common.config.follow_action.url + common.globals.current_username,
                                     dataType: 'json',
                                     timeout: 5000,
+                                    cache: false,
                                     success: function() {
                                         dlg.dialog('close');
                                         follow_a.html('<i class="icon-unfollow"></i> ' + common.config.follow_action.stop_following);
@@ -306,6 +307,7 @@ var common = {
                                     url: common.config.unfollow_action.url + common.globals.current_username,
                                     dataType: 'json',
                                     timeout: 5000,
+                                    cache: false,
                                     success: function() {
                                         dlg.dialog('close');
                                         unfollow_a.html('<i class="icon-follow"></i> ' + common.config.unfollow_action.follow);
@@ -363,6 +365,7 @@ var common = {
             $.ajax({
                 url: $link.attr('href'),
                 timeout: 5000,
+                cache: false,
                 dataType: 'json',
                 beforeSend: function() {
                     $link.text("...");
@@ -386,6 +389,7 @@ var common = {
             $.ajax({
                 url: $link.attr('href'),
                 timeout: 5000,
+                cache: false,
                 dataType: 'json',
                 beforeSend: function() {
                     $link.text("...");
@@ -440,6 +444,7 @@ var common = {
             $.ajax({
                 url: $link.attr('href'),
                 timeout: 5000,
+                cache: false,
                 dataType: 'json',
                 beforeSend: function() {
                     $link.text("...");
@@ -463,6 +468,7 @@ var common = {
             $.ajax({
                 url: $link.attr('href'),
                 timeout: 5000,
+                cache: false,
                 dataType: 'json',
                 beforeSend: function() {
                     $link.text("...");

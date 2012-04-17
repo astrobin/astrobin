@@ -124,6 +124,12 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'new_image_of_subject',
+        '',
+        '',
+        2,
+    ),
 )
 
 
