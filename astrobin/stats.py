@@ -213,6 +213,7 @@ def views(user, period='daily'):
 
     return (flot_label, flot_data, flot_options)
 
+
 def image_views(image_id, period='daily'):
     _map = {
         'yearly' : (_("Views, yearly") , '%Y'),
@@ -250,6 +251,82 @@ def image_views(image_id, period='daily'):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
+
+    return (flot_label, flot_data, flot_options)
+
+
+def subject_images_monthly(subject_id):
+    flot_label = _("Uploaded images, monthly")
+    flot_data = []
+    flot_options = {
+        'bars': {
+            'show': 'true',
+            'fill': 'true',
+            'barWidth': 0.9,
+            'align': 'center',
+        },
+        'legend': {
+            'show': False,
+        },
+        'grid': {'hoverable': 'true'},
+    }
+
+    all = Image.objects.filter(subjects__id = subject_id).order_by('uploaded')
+    data = {}
+    for i in all:
+        key = i.uploaded.date().strftime('%m')
+        if key in data:
+            data[key] += 1
+        else:
+            data[key] = 1 
+
+    if all:
+        for date in daterange(all[0].uploaded.date(), datetime.today().date()):
+            grouped_date = date.strftime('%m')
+            if grouped_date in data.keys():
+                flot_data.append([grouped_date, data[grouped_date]])
+            else:
+                flot_data.append([grouped_date, 0])
+
+    return (flot_label, flot_data, flot_options)
+
+
+def subject_integration_monthly(subject_id):
+    flot_label = _("Integration hours, monthly")
+    flot_data = []
+    flot_options = {
+        'bars': {
+            'show': 'true',
+            'fill': 'true',
+            'barWidth': 0.9,
+            'align': 'center',
+        },
+        'legend': {
+            'show': False,
+        },
+        'grid': {'hoverable': 'true'},
+    }
+
+    all = DeepSky_Acquisition.objects \
+        .filter(image__subjects__id = subject_id) \
+        .exclude(Q(number = None) | Q(duration = None) | Q(date = None)) \
+        .order_by('date')
+
+    data = {}
+    for i in all:
+        key = i.date.strftime('%m')
+        if key in data:
+            data[key] += (i.number * i.duration / 3600.00)
+        else:
+            data[key] = 0
+
+    if all:
+        for date in daterange(all[0].date, datetime.today().date()):
+            grouped_date = date.strftime('%m')
+            if grouped_date in data.keys():
+                flot_data.append([grouped_date, data[grouped_date]])
+            else:
+                flot_data.append([grouped_date, 0])
 
     return (flot_label, flot_data, flot_options)
 

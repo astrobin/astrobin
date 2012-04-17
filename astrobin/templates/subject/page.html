@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% load i18n tags %}
+
+{% block title %}AstroBin - {{subject.mainId}}{% endblock %}
+
+{% block content %}
+    <h1>{{subject.mainId}}</h1>
+
+    <div class="row section">
+        <div class="span4">
+            <div class="subtle-container">
+                <h4>{% trans "Basic information" %}</h4>
+                <table class="table">
+                    <tr>
+                        <th><strong>{% trans "RA" %}</strong></th>
+                        <td>{{subject.ra}}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>{% trans "Dec" %}</strong></th>
+                        <td>{{subject.dec}}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>{% trans "Type" %}</strong></th>
+                        <td>{{subject.otype}} {{subject.mtype}}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>{% trans "Size" %}</strong></th>
+                        <td>{{subject.dim_majaxis}}&times;{{subject.dim_minaxis}}'</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="span4">
+            <div class="subtle-container">
+                <h4>{% trans "Interesting links" %}</h4>
+                <ul>
+                    <li>
+                        <a href="http://simbad.u-strasbg.fr/simbad/sim-basic?Ident={{subject.mainId}}" target="_blank">
+                            {% trans "SIMBAD page" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://simbad.u-strasbg.fr/simbad/sim-plot?target=_BLANK&ident={{subject.mainId}}" target="_blank">
+                            {% trans "SIMBAD clickable map" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-mini btn-primary" href="/search/?q={{subject.mainId}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{% trans "Find images" %}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="span4">
+            <div class="subtle-container">
+                <h4>{% trans "Stats" %}</h4>
+                <table class="table">
+                    <tr>
+                        <th>{% trans "Total images" %}</th>
+                        <td>{{total_images}}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Total integration" %}</th>
+                        <td>{{total_integration}} {% trans "hours" %}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row section">
+        <div class="span12">
+            <div class="well"><strong>{% trans "Some images" %}</strong></div>
+            {% image_list request examples 0 %}
+        </div>
+    </div>
+
+    <div class="well"><strong>{% trans "Integration hours, monthly" %}</strong></div>
+    <div id="stats_integration_monthly" class="plot" style="width:940px; height: 200px;">
+        <div class="loading">
+            <p>{% trans "Please wait: the plot is loading..." %}</p>
+            <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+        </div>
+    </div>
+
+    <div class="well"><strong>{% trans "Uploaded images, monthly" %}</strong></div>
+    <div id="stats_images_monthly" class="plot" style="width:940px; height: 200px;">
+        <div class="loading">
+            <p>{% trans "Please wait: the plot is loading..." %}</p>
+            <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+$(document).ready(function() {
+    stats.init();
+    stats.plot(
+        '#stats_images_monthly',
+        "{% url stats_subject_images_monthly subject.id %}",
+        5000);
+    stats.enableTooltips("#stats_images_monthly");
+
+    stats.plot(
+        '#stats_integration_monthly',
+        "{% url stats_subject_integration_monthly subject.id %}",
+        5000);
+    stats.enableTooltips("#stats_integration_monthly");
+});
+</script>
+{% endblock %}
+
