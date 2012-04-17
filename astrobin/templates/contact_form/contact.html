@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap_toolkit %}
+
+{% block content %}
+<h1>{% trans "Contact Form" %}</h1>
+
+<form class="form-horizontal" action="" method="post">
+    {{form|as_bootstrap}}
+    <div class="form-actions">
+        <input class="btn btn-primary" type="submit" value="{% trans "Send" %}" />
+    </div>
+</form>
+{% endblock %}
+
