@@ -2442,6 +2442,46 @@ def unfollow_gear(request, id):
 
 @login_required
 @require_GET
+def follow_subject(request, id):
+    subject = get_object_or_404(Subject, id = id)
+    profile = UserProfile.objects.get(user = request.user)
+
+    if subject not in profile.follows_subjects.all():
+        profile.follows_subjects.add(subject)
+        profile.save()
+        if request.is_ajax():
+            return ajax_success()
+        else:
+            next_page = '/'
+            if 'next' in request.GET:
+                next_page = request.GET.get('next')
+            return HttpResponseRedirect(next_page)
+
+    return ajax_fail()
+
+
+@login_required
+@require_GET
+def unfollow_subject(request, id):
+    subject = get_object_or_404(Subject, id = id)
+    profile = UserProfile.objects.get(user = request.user)
+
+    if subject in profile.follows_subjects.all():
+        profile.follows_subjects.remove(subject)
+        profile.save()
+        if request.is_ajax():
+            return ajax_success()
+        else:
+            next_page = '/'
+            if 'next' in request.GET:
+                next_page = request.GET.get('next')
+            return HttpResponseRedirect(next_page)
+
+    return ajax_fail()
+
+
+@login_required
+@require_GET
 def mark_notifications_seen(request):
     for n in notification.Notice.objects.filter(user=request.user):
         n.is_unseen()
@@ -3130,10 +3170,19 @@ def gear_popover_ajax(request, id):
 def subject_popover_ajax(request, id):
     subject = get_object_or_404(Subject, id = id)
     template = 'popover/subject.html'
+    profile = UserProfile.objects.get(user = request.user) \
+              if request.user.is_authenticated() \
+              else None
+
+    follows = subject in profile.follows_subjects.all() \
+              if profile \
+              else False
 
     html = render_to_string(template,
         {
             'subject': subject,
+            'follows': follows,
+            'is_authenticated': request.user.is_authenticated(),
         })
 
     response_dict = {

@@ -120,6 +120,17 @@ def image_stored_callback(image, stored, solve, lang):
                         'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
                     })
 
+        for subject in image.subjects.all():
+            print subject
+            subject_followers = [x.user for x in UserProfile.objects.filter(follows_subjects = subject)]
+            print subject_followers
+            push_notification(
+                subject_followers, 'new_image_of_subject',
+                {
+                    'subject': subject.mainId,
+                    'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+                })
+
 
     if solve:
         solve_image.delay(image, lang, callback=image_solved_callback)

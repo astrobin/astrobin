@@ -8,5 +8,12 @@
 
 <div class="actions">
     <a class="btn btn-mini btn-primary" href="/search/?q={{subject.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{% trans "Find images" %}</a>
+    {% if is_authenticated %}
+        {% if follows %}
+            <a class="btn btn-mini btn-primary unfollow-subject" data-subject="{{subject.id}}" href="{% url unfollow_subject subject.id %}">{% trans "Unfollow" %}</a>
+        {% else %}
+            <a class="btn btn-mini btn-primary follow-subject" data-subject="{{subject.id}}" href="{% url follow_subject subject.id %}">{% trans "Follow" %}</a>
+        {% endif %}
+    {% endif %}
 </div>
 
