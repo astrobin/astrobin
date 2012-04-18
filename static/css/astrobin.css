@@ -1271,6 +1271,11 @@ div.capty-caption a {
 .upload-forms .upload-form:last-child .upload-form-inner {
   padding-right: 0;
 }
+div.favorite-container {
+  display: inline;
+  margin-right: 50px;
+  padding-left: 4px;
+}
 div.favorite-container a.favorite {
   position: relative;
 }
@@ -1286,11 +1291,8 @@ div.favorite-container a.favorite .favorite-hint {
 div.favorite-container a.favorite:hover .favorite-hint {
   visibility: visible;
 }
-div.favorite-container img {
-  margin-top: 4px;
-}
 #rating {
-  float: right;
+  display: inline;
 }
 .rating-current {
   float: right;
@@ -1379,6 +1381,14 @@ div.favorite-container img {
 .image-detail .image-detail-inner #image-pill-views .plot {
   padding: 12px;
 }
+.avatar-block .avatar,
+.avatar-block .username {
+  display: inline;
+}
+.avatar-block .username {
+  font-size: 1.5em;
+  margin-left: 12px;
+}
 .comment-container {
   margin-top: 16px;
   font-size: 1em;
@@ -1432,6 +1442,12 @@ div.favorite-container img {
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  position: relative;
+}
+.comment-container .comment .avatar {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .comment-container .comment .content {
   padding: 8px 0;

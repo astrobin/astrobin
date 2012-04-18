@@ -20,6 +20,9 @@
         <li class="{% current request '^/profile/(edit|save)/preferences/$' %}">
             <a href="{% url profile_edit_preferences %}">{% trans "Preferences" %}</a>
         </li>
+        <li class="{% current request '^/avatar/' %}">
+            <a href="{% url avatar_change %}">{% trans "Avatar" %}</a>
+        </li>
     </ul>
 </div>
 

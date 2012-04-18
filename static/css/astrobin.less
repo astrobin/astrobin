@@ -1401,6 +1401,10 @@ div.capty-caption a {
 }
 
 div.favorite-container {
+    display: inline;
+    margin-right: 50px;
+    padding-left: 4px;
+
     a.favorite {
         position: relative;
 
@@ -1419,14 +1423,10 @@ div.favorite-container {
             }
         }
     }
-
-    img {
-        margin-top: @spacer-small; 
-    }
 }
 
 #rating {
-    float: right;
+    display: inline;
 }
 .rating-current {
     float: right;
@@ -1526,6 +1526,16 @@ div.favorite-container {
     }
 }
 
+.avatar-block {
+    .avatar, .username {
+        display: inline;
+    }
+
+    .username {
+        font-size: 1.5em;
+        margin-left: @spacer-large;
+    }
+}
 .comment-container {
     margin-top: @spacer-xlarge;
     font-size: 1em;
@@ -1578,6 +1588,13 @@ div.favorite-container {
     }
     .comment {
         .stitched-box;
+        position: relative;
+
+        .avatar {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
 
         .content {
             padding: @spacer-medium 0;

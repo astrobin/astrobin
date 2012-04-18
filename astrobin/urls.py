@@ -204,5 +204,6 @@ urlpatterns = patterns('',
     url(r'^subject/(?P<id>\d+)/$', views.subject_page, name='subject_page'),
 
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
+    url(r'^avatar/', include('avatar.urls')),
 )
 

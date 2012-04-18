@@ -271,3 +271,6 @@ TINYMCE_JS_ROOT = MEDIA_ROOT + '/js/tiny_mce'
 
 HITCOUNT_KEEP_HIT_ACTIVE = { 'hours': 1 }
 HITCOUNT_HITS_PER_IP_LIMIT = 0
+
+AVATAR_GRAVATAR_BACKUP = False
+AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png'
