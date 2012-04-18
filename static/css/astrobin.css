@@ -1800,6 +1800,19 @@ form.copy #clip-container .flash-container {
   position: absolute;
   top: -3px;
   opacity: 0;
+  cursoer: hand;
+  cursor: pointer;
+}
+form.copy #clip-container .clip-status {
+  position: absolute;
+  left: 25px;
+  top: -1px;
+  display: none;
+  padding: 0 6px;
+  background: #222;
+  border: 1px solid #111;
+  color: #b8b8b8;
+  font-size: 80%;
 }
 .stButton .chicklets {
   color: #b8b8b8;
