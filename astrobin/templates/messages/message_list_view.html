@@ -1,4 +1,10 @@
+{% load avatar_tags %}
+
 <div class="message">
+    <div class="avatar">
+        {% avatar message.sender 32 %}
+    </div>
+
     <div class="sender">
         <a href="{{ message.sender.get_absolute_url }}">{{ message.sender }}</a>
         <span class="date">{{ message.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
