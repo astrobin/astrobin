@@ -381,14 +381,14 @@
                             <a href="/search/?q=&ssms={{solar_system_main_subject_id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
                         {% endif %}
                         {% for s in subjects_short %}
-                            <a rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}" href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                            <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                         {% endfor %}
                         {% if subjects_all|length > 10 %}
                             <span id="more-subjects">
                                 <span class="hidden">
                                     ,&nbsp;
                                     {% for s in subjects_reminder %}
-                                        <a rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}" href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                                        <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId|escape|cut:" "}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                                     {% endfor %}
                                 </span>
                                 <span class="more">
@@ -772,6 +772,7 @@
                                         <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
                                     </div>
                                     <div class="flash-container"></div>
+                                    <div class="clip-status">{% trans "Copy" %}</div>
                                 </div>
                                 <textarea name="sharing_code" rows=6>{% if is_revision %}http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}{% else %}http://astrob.in/{{image.id}}/{% endif %}</textarea>
                             </td>

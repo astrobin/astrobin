@@ -12,22 +12,36 @@
             <div class="subtle-container">
                 <h4>{% trans "Basic information" %}</h4>
                 <table class="table">
-                    <tr>
-                        <th><strong>{% trans "RA" %}</strong></th>
-                        <td>{{subject.ra}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>{% trans "Dec" %}</strong></th>
-                        <td>{{subject.dec}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>{% trans "Type" %}</strong></th>
-                        <td>{{subject.otype}} {{subject.mtype}}</td>
-                    </tr>
-                    <tr>
-                        <th><strong>{% trans "Size" %}</strong></th>
-                        <td>{{subject.dim_majaxis}}&times;{{subject.dim_minaxis}}'</td>
-                    </tr>
+                    {% if subject.ra %}
+                        <tr>
+                            <th><strong>{% trans "RA" %}</strong></th>
+                            <td>{{subject.ra}}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if subject.dec %}
+                        <tr>
+                            <th><strong>{% trans "Dec" %}</strong></th>
+                            <td>{{subject.dec}}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if subject.otype or subject.mtype %}
+                        <tr>
+                            <th><strong>{% trans "Type" %}</strong></th>
+                            <td>
+                                {% if subject.otype %}{{subject.otype}}{% endif %}
+                                {% if subject.mtype %}{{subject.mtype}}{% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    {% if subject.dim_majaxis and subject.dim_minaxis %}
+                        <tr>
+                            <th><strong>{% trans "Size" %}</strong></th>
+                            <td>{{subject.dim_majaxis}}&times;{{subject.dim_minaxis}}'</td>
+                        </tr>
+                    {% endif %}
                 </table>
             </div>
         </div>
