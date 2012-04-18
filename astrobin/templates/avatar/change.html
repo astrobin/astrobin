@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load avatar_tags %}
+{% load bootstrap_toolkit %}
+
+{% block content %}
+    <h1>{% trans "Change your avatar" %}</h1>
+    {% if not avatars %}
+        <div class="alert alert-warning">{% trans "You do not yet have an avatar. Please upload one now." %}</div>
+    {% else %}
+        <div class="row section">
+            <div class="span12">
+                <div class="well"><strong>{% trans "Current avatar" %}</strong></div>
+                {% avatar user %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row section">
+        {% if avatars %}
+            <div class="span6">
+                <div class="well"><strong>{% trans "Choose among your previous avatars" %}</div>
+                <form class="form-horizontal" method="POST" action="">
+                    {{primary_avatar_form|as_bootstrap}}
+                    <div class="form-actions">
+                        <input class="btn btn-primary" type="submit" value="{% trans "Choose new default" %}" />
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+
+        <div class="{% if avatars %}span6{% else %}span12{% endif %}">
+            <div class="well"><strong>{% trans "Upload a new image" %}</div>
+            <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="">
+                <div class="control-group">
+                    <label class="control-label" for="avatar">{% trans "Choose file" %}</label>
+                    <div class="controls">
+                        <input type="file" name="avatar" value="{% trans "Avatar image" %}" />
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

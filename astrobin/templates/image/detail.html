@@ -4,6 +4,7 @@
 {% load hitcount_tags %}
 {% load markup %}
 {% load bootstrap_toolkit %}
+{% load avatar_tags %}
 
 {% block extra_gaq_push %}
     {% if image.is_wip %}
@@ -597,6 +598,9 @@
                             {% recursetree comments %}
                                 <div style="margin-left: {{node.get_level|add:node.get_level}}em">
                                     <div id="c{{node.id}}" class="comment">
+                                        <div class="avatar">
+                                            {% avatar node.author 32 %}
+                                        </div>
                                         <div class="meta">
                                             <a class="author" href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
                                         </div>
@@ -657,10 +661,18 @@
         </div> <!-- span8 -->
         
         <div class="span4"> <!-- right pane -->
+            <div class="subtle-container avatar-block">
+                <div class="avatar">
+                    <a href="{% url user_page image.user %}">
+                        {% avatar image.user 64 %}
+                    </a>
+                </div>
+                <div class="username">
+                    <a rel="tooltip" title="{{image.user.username}}" href="{% url user_page image.user %}">{{image.user.username|truncatechars:18}}</a>
+                </div>
+            </div>
+
             <div class="subtle-container">
-                {% if image.allow_rating %}
-                    <div id="rating"></div>
-                {% endif %}
                 <div class="favorite-container">
                     <a href="#" class="favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Already favorited" %}{% else %}{% trans "Mark as favorite" %}{% endif %}"0>
                         {% if already_favorited %}
@@ -670,14 +682,15 @@
                         {% endif %}
                     </a>
                 </div>
+
+                {% if image.allow_rating %}
+                    <div id="rating"></div>
+                {% endif %}
+
             </div> <!-- subtle-container -->
 
             <div class="subtle-container image-basic-data">
                 <table class="table">
-                    <tr>
-                        <td><img alt="{% trans "Author" %}" src="/static/icons/iconic/white/user_12x16.png"/></td>
-                        <td><a href="{% url user_page image.user %}">{{image.user}}</a></td>
-                    </tr>
                     <tr>
                         <td><img alt="{% trans "License" %}" src="/static/icons/iconic/white/key_stroke_16x16.png"/></td>
                         <td>

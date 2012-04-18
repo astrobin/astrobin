@@ -2,6 +2,7 @@
 {% load tags %}
 {% load compress %}
 {% load inbox %}
+{% load avatar_tags %}
 
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
@@ -179,6 +180,7 @@
                         {% if request.user.is_authenticated %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {% avatar request.user 20 %}
                                 {{request.user}}
                                 <b class="caret"></b>
                             </a>
