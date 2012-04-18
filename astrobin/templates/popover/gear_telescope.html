@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load tags %}
 
 <h3>{{gear.name}}</h3>
 <p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>
@@ -6,7 +7,7 @@
 <p><strong>{% trans "Focal length" %}</strong>: {{gear.focal_length}} mm</p>
 
 <div class="actions">
-    <a class="btn btn-mini btn-primary" href="/search/?q=&as_values_imaging_telescopes={{gear.id}}&license=0&license=1&license=2&license=3&license=4&license=5&license=6">{% trans "Find images" %}</a>
+    <a class="btn btn-mini btn-primary" href="/search/?q=&as_values_imaging_telescopes={{gear.id}}{% search_form_query %}">{% trans "Find images" %}</a>
     {% if is_authenticated %}
         {% if follows %}
             <a class="btn btn-mini btn-primary unfollow-gear" data-gear="{{gear.id}}" href="{% url unfollow_gear gear.id %}">{% trans "Unfollow" %}</a>
