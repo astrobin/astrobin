@@ -599,7 +599,9 @@
                                 <div style="margin-left: {{node.get_level|add:node.get_level}}em">
                                     <div id="c{{node.id}}" class="comment">
                                         <div class="avatar">
-                                            {% avatar node.author 32 %}
+                                            <a href="{% url user_page node.author %}">
+                                                {% avatar node.author 32 %}
+                                            </a>
                                         </div>
                                         <div class="meta">
                                             <a class="author" href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
