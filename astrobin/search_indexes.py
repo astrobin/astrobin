@@ -130,6 +130,9 @@ class ImageIndex(SearchIndex):
 
     favorited = IntegerField()
 
+    telescope_types = MultiValueField()
+    camera_types = MultiValueField()
+
     def index_queryset(self):
         return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
 
@@ -345,6 +348,12 @@ class ImageIndex(SearchIndex):
 
     def prepare_favorited(self, obj):
         return Favorite.objects.filter(image = obj).count()
+
+    def prepare_telescope_types(self, obj):
+        return [x.type for x in obj.imaging_telescopes.all()]
+
+    def prepare_camera_types(self, obj):
+        return [x.type for x in obj.imaging_cameras.all()]
 
 
 class SubjectIdentifierIndex(SearchIndex):

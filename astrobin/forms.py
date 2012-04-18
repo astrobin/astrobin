@@ -256,6 +256,19 @@ class AdvancedSearchForm(SearchForm):
         choices = (('', '---------'),) + SOLAR_SYSTEM_SUBJECT_CHOICES,
     )
 
+    telescope_type = forms.MultipleChoiceField(
+        required = False,
+        label = _("Telescope type"),
+        choices = (('any', _("Any")),) + Telescope.TELESCOPE_TYPES,
+        initial = [('any', _("Any")),] + [x[0] for x in Telescope.TELESCOPE_TYPES],
+    )
+    camera_type = forms.MultipleChoiceField(
+        required = False,
+        label = _("Camera type"),
+        choices = (('any', _("Any")),) + Camera.CAMERA_TYPES,
+        initial = [('any', _("Any")),] + [x[0] for x in Camera.CAMERA_TYPES],
+    )
+
     imaging_telescopes = forms.CharField(
         required = False
     )
@@ -345,6 +358,19 @@ class AdvancedSearchForm(SearchForm):
             if self.cleaned_data['end_date']:
                 sqs = sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
 
+            if self.cleaned_data['telescope_type'] and 'any' not in self.cleaned_data['telescope_type']:
+                filters = reduce(operator.or_, [SQ(**{'telescope_types': x}) for x in self.cleaned_data['telescope_type']])
+                sqs = sqs.filter(filters)
+            elif not self.cleaned_data['telescope_type']:
+                sqs = EmptySearchQuerySet()
+
+            if self.cleaned_data['camera_type'] and 'any' not in self.cleaned_data['camera_type']:
+                filters = reduce(operator.or_, [SQ(**{'camera_types': x}) for x in self.cleaned_data['camera_type']])
+                print filters
+                sqs = sqs.filter(filters)
+            elif not self.cleaned_data['camera_type']:
+                sqs = EmptySearchQuerySet()
+ 
             if self.cleaned_data['aperture_min'] is not None:
                 sqs = sqs.filter(min_aperture__gte = self.cleaned_data['aperture_min'])
 

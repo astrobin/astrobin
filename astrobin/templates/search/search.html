@@ -70,6 +70,25 @@
                     <span class="control"></span>
                 </div>
                 <div class="content">
+                    {% with form.telescope_type as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+
+                    {% with form.camera_type as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+
+
                     {% with form.imaging_telescopes as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -299,6 +318,22 @@
             return false;
         });
 
+        $('select[name="telescope_type"]').simplemultiselect({
+            maxWidth: 201,
+            checkAllText: "{% trans "Select all" %}",
+            uncheckAllText: "{% trans "Select none" %}",
+            noneSelectedText: "{% trans "Select types" %}",
+            selectedText: "{% trans "# selected" %}"
+        });
+        $('select[name="camera_type"]').simplemultiselect({
+            maxWidth: 201,
+            checkAllText: "{% trans "Select all" %}",
+            uncheckAllText: "{% trans "Select none" %}",
+            noneSelectedText: "{% trans "Select types" %}",
+            selectedText: "{% trans "# selected" %}"
+        });
+
+
         $('select[name="license"]').simplemultiselect({
             maxWidth: 201,
             checkAllText: "{% trans "Select all" %}",
@@ -306,6 +341,7 @@
             noneSelectedText: "{% trans "Select licenses" %}",
             selectedText: "{% trans "# selected" %}"
         });
+
     });
 </script>
 {% endblock %}

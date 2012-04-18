@@ -1230,6 +1230,10 @@ div.capty-caption a {
   padding: 0;
 }
 .ui-dialog form input {
+  width: 96%;
+}
+.ui-dialog form .btn,
+.ui-dialog form select {
   width: 100%;
 }
 .ui-dialog form .helptext {

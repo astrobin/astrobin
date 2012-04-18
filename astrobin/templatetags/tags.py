@@ -437,3 +437,20 @@ def is_checkbox(value):
     from django.forms.fields import CheckboxInput
     return isinstance(value, CheckboxInput)
 
+
+@register.simple_tag
+def search_form_query():
+    query = ''
+
+    for i in range(0, 7):
+        query += '&license=%d' % i
+
+    query += '&telescope_type=any'
+    for i in range(0, 23):
+        query += '&telescope_type=%d' % i
+
+    query += '&camera_type=any'
+    for i in range(0, 5):
+        query += '&camera_type=%d' % i
+
+    return query
