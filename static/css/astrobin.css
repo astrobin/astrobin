@@ -1660,6 +1660,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
   width: 90%;
   text-align: left;
 }
+.message .avatar {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .message .new,
 .message .sender,
 .message .subject,
