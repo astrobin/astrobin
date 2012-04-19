@@ -182,6 +182,7 @@ urlpatterns = patterns('',
     url(r'^request/mark/fulfilled/(?P<request_id>\d+)/$', views.request_mark_fulfilled, name='request_mark_fulfilled'),
 
     url(r'^stats/', views.stats, name='stats'),
+    url(r'^leaderboard/', views.leaderboard, name='leaderboard'),
     url(r'^help/', views.help, name='help'),
     url(r'^faq/', views.faq, name='faq'),
     url(r'^tos/', views.tos, name='tos'),
