@@ -1757,11 +1757,19 @@ div.token-input-dropdown p {
 .plot .legend {
   margin: -28px auto 52px auto;
 }
+.plot td {
+  padding: 0 4px;
+}
 .plot td.legendColorBox {
   padding-right: 8px;
+  vertical-align: middle;
+}
+.plot-container td {
+  padding: 0 4px;
 }
 .plot-container td.legendColorBox {
   padding-right: 8px;
+  vertical-align: middle;
 }
 .full-title {
   padding: 24px 0 12px 22px;

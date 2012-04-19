@@ -24,7 +24,72 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div class="row plot-container">
+        <div class="span6">
+            <div class="well"><strong>{% trans "Global distribution of camera types" %}</strong></div>
+            <div class="row">
+                <div class="span3">
+                    <div id="stats_camera_types" class="plot" style="width:200px; height: 200px;">
+                        <div class="loading">
+                            <p>{% trans "Please wait: the plot is loading..." %}</p>
+                            <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div id="stats_camera_types_legend" class="legend"></div>
+                    <div id="stats_camera_types_hover"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="span6">
+            <div class="well"><strong>{% trans "Global distribution of telescope types" %}</strong></div>
+            <div class="row">
+                <div class="span3">
+                    <div id="stats_telescope_types" class="plot" style="width:200px; height: 200px;">
+                        <div class="loading">
+                            <p>{% trans "Please wait: the plot is loading..." %}</p>
+                            <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div id="stats_telescope_types_legend" class="legend"></div>
+                    <div id="stats_telescope_types_hover"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row plot-container">
+        <div class="span6">
+            <div class="well"><strong>{% trans "CCD vs DLSR: the global trend" %}</strong></div>
+            <div id="stats_camera_types_trend" class="plot" style="width:460px; height: 200px;">
+                <div class="loading">
+                    <p>{% trans "Please wait: the plot is loading..." %}</p>
+                    <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+        <div class="span6">
+            <div class="well"><strong>{% trans "Global trend of telescope types" %}</strong></div>
+            <div id="stats_telescope_types_trend" class="plot" style="width:460px; height: 200px;">
+                <div class="loading">
+                    <p>{% trans "Please wait: the plot is loading..." %}</p>
+                    <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="span12">
             <div class="leaderboard">
                 <h2>{% trans "Leaderboard" %}</h2>
 
@@ -85,6 +150,52 @@ $(document).ready(function() {
         {% endif %}
         5000);
     stats.enableTooltips("#stats_integration_hours");
+
+    stats.plot_pie(
+        '#stats_camera_types',
+        "{% url stats_subject_camera_types 0 %}",
+        30000);
+    $('#stats_camera_types').bind('plothover', function(event, pos, obj) {
+        if (!obj) return;
+        percent = parseFloat(obj.series.percent).toFixed(2);
+        $('#stats_camera_types_hover').html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
+    });
+
+    stats.plot_pie(
+        '#stats_telescope_types',
+        "{% url stats_subject_telescope_types 0 %}",
+        30000);
+    $('#stats_telescope_types').bind('plothover', function(event, pos, obj) {
+        if (!obj) return;
+        percent = parseFloat(obj.series.percent).toFixed(2);
+        $('#stats_telescope_types_hover').html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
+    });
+
+    $.ajax({
+        url: "{% url stats_camera_types_trend %}",
+        method: 'GET',
+        dataType: 'json',
+        timeout: 60000,
+        success: function(series) {
+            $.plot($('#stats_camera_types_trend'),
+                series['flot_data'],
+                series['flot_options']);
+        }
+    });
+    stats.enableTooltips("#stats_camera_types_trend");
+
+    $.ajax({
+        url: "{% url stats_telescope_types_trend %}",
+        method: 'GET',
+        dataType: 'json',
+        timeout: 60000,
+        success: function(series) {
+            $.plot($('#stats_telescope_types_trend'),
+                series['flot_data'],
+                series['flot_options']);
+        }
+    });
+    stats.enableTooltips("#stats_telescope_types_trend");
 });
 </script>
 {% endblock %}
