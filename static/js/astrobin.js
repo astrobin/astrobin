@@ -930,6 +930,22 @@ var stats = {
         });
     },
 
+    plot_pie: function(id, url, timeout, data, options) {
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            timeout: timeout,
+            success: function(series) {
+                $.plot(
+                    $(id),
+                    series['flot_data'],
+                    series['flot_options']);
+            }
+        });
+    },
+
+
     init: function(config) {
         /* Init */
         $.extend(true, stats.config, config);

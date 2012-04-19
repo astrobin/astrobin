@@ -3252,3 +3252,76 @@ def stats_subject_integration_monthly_ajax(request, id):
 
     return ajax_response(response_dict)
 
+
+@require_GET
+def stats_subject_total_images_ajax(request, id):
+    import stats as _s
+
+    (label, data, options) = _s.subject_total_images(id)
+
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def stats_subject_camera_types_ajax(request, id):
+    import stats as _s
+
+    (label, data, options) = _s.subject_camera_types(id)
+
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def stats_subject_telescope_types_ajax(request, id):
+    import stats as _s
+
+    (label, data, options) = _s.subject_telescope_types(id)
+
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def stats_camera_types_trend_ajax(request):
+    import stats as _s
+
+    (data, options) = _s.camera_types_trend()
+
+    response_dict = {
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def stats_telescope_types_trend_ajax(request):
+    import stats as _s
+
+    (data, options) = _s.telescope_types_trend()
+
+    response_dict = {
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+

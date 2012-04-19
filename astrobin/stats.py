@@ -1,13 +1,15 @@
-from models import DeepSky_Acquisition, Image, UserProfile, Gear, User
+from models import DeepSky_Acquisition, Image, UserProfile, Gear, User, Camera, Telescope
 
 from django.utils.translation import ugettext as _
 from django.db.models import Q
+from django.core.cache import cache
 
 from hitcount.models import Hit
 
 from datetime import datetime, timedelta
 import time
 import unicodedata
+from collections import defaultdict
 
 
 def daterange(start, end):
@@ -333,4 +335,274 @@ def subject_integration_monthly(subject_id):
                 flot_data.append([grouped_date, 0])
 
     return (flot_label, flot_data, flot_options)
+
+
+def subject_total_images(subject_id):
+    period = 'monthly'
+    _map = {
+        'monthly': (_("Total images"), '%Y-%m'),
+    }
+
+    flot_label = _map[period][0]
+    flot_data = []
+    flot_options = {
+        'xaxis': {'mode': 'time'},
+        'lines': {'show': 'true', 'fill': 'true'},
+        'points': {'show': 'true'},
+        'legend': {
+            'position': 'nw',
+            'backgroundColor': '#000000',
+            'backgroundOpacity': 0.75},
+        'grid': {'hoverable': 'true'},
+    }
+
+    all = Image.objects.filter(subjects__id = subject_id).order_by('uploaded')
+
+    data = {}
+    total = 0
+    for i in all:
+        key = i.uploaded.date().strftime(_map[period][1])
+        if key in data:
+            total += 1
+            data[key] = total
+        else:
+            total += 1
+            data[key] = total
+
+    if all:
+        for date in daterange(all[0].uploaded.date(), datetime.today().date()):
+            grouped_date = date.strftime(_map[period][1])
+            t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+            if grouped_date in data.keys():
+                flot_data.append([t, data[grouped_date]])
+            else:
+                flot_data.append([t, 0])
+
+    return (flot_label, flot_data, flot_options)
+
+
+def subject_camera_types(subject_id):
+    flot_label = None 
+    flot_data = []
+    flot_options = {
+        'series': {
+            'pie': {
+                'show': True,
+            },
+        },
+        'legend': {
+            'show': True,
+            'container': '#stats_camera_types_legend',
+        },
+        'grid': {
+            'hoverable': True,
+        },
+    }
+
+    cache_key = 'stats.subjects.camera_types.%d' % int(subject_id)
+    if not cache.has_key(cache_key):
+        all = Image.objects.all() \
+                           .exclude(imaging_cameras__type = None) \
+                           .order_by('uploaded')
+
+        if subject_id != '0':
+            all = all.filter(subjects__id = subject_id)
+
+        data = {}
+        for i in all:
+            for c in i.imaging_cameras.all():
+                key = unicode(Camera.CAMERA_TYPES[c.type][1])
+                if key in data:
+                    data[key] += 1
+                else:
+                    data[key] = 1
+
+        for label, value in data.iteritems():
+            flot_data.append({'label': label, 'data': value * 100.0 / all.count()})
+
+        flot_data = cache.set(cache_key, flot_data, 7*24*60*60)
+    else:
+        flot_data = cache.get(cache_key)
+
+    return (flot_label, flot_data, flot_options)
+
+
+def subject_telescope_types(subject_id):
+    flot_label = None 
+    flot_data = []
+    flot_options = {
+        'series': {
+            'pie': {
+                'show': True,
+            },
+        },
+        'legend': {
+            'show': True,
+            'container': '#stats_telescope_types_legend',
+        },
+        'grid': {
+            'hoverable': True,
+        },
+    }
+
+    cache_key = 'stats.subjects.telescope_types.%d' % int(subject_id)
+    if not cache.has_key(cache_key):
+        all = Image.objects.all() \
+                           .exclude(imaging_telescopes__type = None) \
+                           .order_by('uploaded')
+
+        if subject_id != '0':
+            all = all.filter(subjects__id = subject_id)
+
+        data = {}
+        for i in all:
+            for c in i.imaging_telescopes.all():
+                key = unicode(Telescope.TELESCOPE_TYPES[c.type][1])
+                if key in data:
+                    data[key] += 1
+                else:
+                    data[key] = 1
+
+        for label, value in data.iteritems():
+            flot_data.append({'label': label, 'data': value * 100.0 / all.count()})
+
+        flot_data = cache.set(cache_key, flot_data, 7*24*60*60)
+    else:
+        flot_data = cache.get(cache_key)
+
+    return (flot_label, flot_data, flot_options)
+
+
+def camera_types_trend():
+    period = 'monthly'
+    _map = {
+        'monthly': (_("Integration hours by camera type"), '%Y-%m'),
+    }
+
+    flot_data = []
+    flot_options = {
+        'xaxis': {'mode': 'time'},
+        'lines': {'show': 'true'},
+        'legend': {
+            'position': 'nw',
+            'backgroundColor': '#000000',
+            'backgroundOpacity': 0.75,
+        },
+        'grid': {
+            'hoverable': True,
+        },
+    }
+
+    for g in Camera.CAMERA_TYPES:
+        if g[0] > 1: 
+            # Limit to CCD and DSLR
+            continue
+
+        all = DeepSky_Acquisition.objects \
+            .filter(Q(image__imaging_cameras__type = g[0]) & Q(date__gte = '2005-01-01')) \
+            .exclude(date = None) \
+            .order_by('date')
+
+        g_dict = {
+            'label': unicode(g[1]),
+            'stage_data': {},
+            'data': [],
+        }
+
+        for i in all:
+            integration = 0
+            if i.duration and i.number:
+                integration += (i.duration * i.number) / 3600.0
+            key = i.date.strftime(_map[period][1])
+            if key in g_dict['stage_data']:
+                g_dict['stage_data'][key] += integration
+            else:
+                g_dict['stage_data'][key] = integration
+
+        if all:
+            for date in daterange(all[0].date, datetime.today().date()):
+                grouped_date = date.strftime(_map[period][1])
+                t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+                if grouped_date in g_dict['stage_data'].keys():
+                    g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
+                else:
+                    g_dict['data'].append([t, 0])
+
+        del g_dict['stage_data']
+        flot_data.append(g_dict)
+
+    return (flot_data, flot_options)
+
+
+def telescope_types_trend():
+    period = 'yearly'
+    _map = {
+        'yearly': (_("Integration hours by camera type"), '%Y'),
+    }
+
+    flot_data = []
+    flot_options = {
+        'xaxis': {'mode': 'time'},
+        'lines': {'show': 'true'},
+        'legend': {
+            'show': True,
+            'position': 'nw',
+            'backgroundColor': '#000000',
+            'backgroundOpacity': 0.75,
+        },
+        'grid': {
+            'hoverable': True,
+        }
+    }
+
+    combined_dict = {}
+    for g in Telescope.TELESCOPE_TYPES:
+        if g[0] > 21:
+            continue
+
+        all = DeepSky_Acquisition.objects \
+            .filter(Q(image__imaging_telescopes__type = g[0]) & Q(date__gte = '2005-01-01')) \
+            .exclude(date = None) \
+            .order_by('date')
+
+        g_dict = {
+            'stage_data': {},
+            'data': [],
+        }
+
+        if g[0] < 6:
+            g_dict['label'] = _("Refractor")
+        elif g[0] >= 6 and g[0] < 12:
+            g_dict['label'] = _("Reflector")
+        elif g[0] >= 12 and g[0] < 21:
+            g_dict['label'] = _("Catadioptric")
+        elif g[0] == 21:
+            g_dict['label'] = _("Camera lens")
+
+        for i in all:
+            integration = 0
+            if i.duration and i.number:
+                integration += (i.duration * i.number) / 3600.0
+            key = i.date.strftime(_map[period][1])
+            if key in g_dict['stage_data']:
+                g_dict['stage_data'][key] += integration
+            else:
+                g_dict['stage_data'][key] = integration
+
+        if all:
+            for date in daterange(all[0].date, datetime.today().date()):
+                grouped_date = date.strftime(_map[period][1])
+                t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+                if grouped_date in g_dict['stage_data'].keys():
+                    g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
+                else:
+                    g_dict['data'].append([t, 0])
+
+        del g_dict['stage_data']
+        combined_dict[g_dict['label']] = g_dict['data']
+
+    for key, value in combined_dict.items():
+        flot_data.append({'label': key, 'data': value})
+
+    return (flot_data, flot_options)
 
