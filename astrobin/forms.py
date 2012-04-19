@@ -260,13 +260,13 @@ class AdvancedSearchForm(SearchForm):
         required = False,
         label = _("Telescope type"),
         choices = (('any', _("Any")),) + Telescope.TELESCOPE_TYPES,
-        initial = [('any', _("Any")),] + [x[0] for x in Telescope.TELESCOPE_TYPES],
+        initial = ['any'] + [x[0] for x in Telescope.TELESCOPE_TYPES],
     )
     camera_type = forms.MultipleChoiceField(
         required = False,
         label = _("Camera type"),
         choices = (('any', _("Any")),) + Camera.CAMERA_TYPES,
-        initial = [('any', _("Any")),] + [x[0] for x in Camera.CAMERA_TYPES],
+        initial = ['any'] + [x[0] for x in Camera.CAMERA_TYPES],
     )
 
     imaging_telescopes = forms.CharField(
