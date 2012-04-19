@@ -2774,7 +2774,6 @@ def image_revision_upload_process(request):
     return HttpResponseRedirect(image_revision.get_absolute_url())
 
 
-@login_required
 @require_GET
 def stats(request):
     response_dict = {}
@@ -2809,6 +2808,32 @@ def stats(request):
         request,
         queryset = queryset,
         template_name = 'stats.html',
+        template_object_name = 'user',
+        extra_context = response_dict,
+    )
+
+
+@require_GET
+def leaderboard(request):
+    response_dict = {}
+
+    sqs = SearchQuerySet()
+    sort = '-user_integration'
+    if 'sort' in request.GET:
+        sort = request.GET.get('sort')
+        if sort == 'tot_integration':
+            sort = '-user_integration'
+        elif sort == 'avg_integration':
+            sort = '-user_avg_integration'
+        elif sort == 'images':
+            sort = '-user_images'
+
+    queryset = sqs.filter(user_images__gt = 0).models(User).order_by(sort)
+
+    return object_list(
+        request,
+        queryset = queryset,
+        template_name = 'leaderboard.html',
         template_object_name = 'user',
         extra_context = response_dict,
     )

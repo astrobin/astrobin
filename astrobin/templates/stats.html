@@ -86,51 +86,6 @@
             </div>
         </div>
     </div>
-
-
-    <div class="row">
-        <div class="span12">
-            <div class="leaderboard">
-                <h2>{% trans "Leaderboard" %}</h2>
-
-                <a name="leaderboard"></a>
-                <table class="table">
-                    <tr>
-                        <th>{% trans "Position" %}</th>
-                        <th>{% trans "User" %}</th>
-                        <th>
-                            <a href="{% url stats %}{% query_string "sort='tot_integration'" "" %}#leaderboard">
-                                {% trans "Total integration" %} &#9660;
-                            </a>
-                        </th>
-                        <th>
-                            <a href="{% url stats %}{% query_string "sort='avg_integration'" "" %}#leaderboard">
-                                {% trans "Avg. integration hours" %} &#9660;
-                            </a>
-                        </th>
-                        <th>
-                            <a href="{% url stats %}{% query_string "sort='images'" "" %}#leaderboard">
-                                {% trans "Images" %} &#9660;
-                            </a>
-                        </th>
-                    </tr>
-                    {% autopaginate user_list 100 %}
-                    {% for u in user_list %}
-                        <tr>
-                            <td>{{page_obj.start_index|add:forloop.counter0}}</td>
-                            <td><a href="{% url user_page u.user_name %}">{{u.user_name}}</a></td>
-                            <td>{{u.user_integration|floatformat}}</a></td>
-                            <td>{{u.user_avg_integration|floatformat}}</a></td>
-                            <td>{{u.user_images}}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-                <div class="pagination pagination-centered">
-                    {% paginate 4 "#leaderboard" %}
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 
 {% block extra_js %}
