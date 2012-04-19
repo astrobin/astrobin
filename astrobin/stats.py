@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 import time
 import unicodedata
 from collections import defaultdict
+import operator
 
 
 def daterange(start, end):
@@ -499,7 +500,7 @@ def camera_types_trend():
             continue
 
         all = DeepSky_Acquisition.objects \
-            .filter(Q(image__imaging_cameras__type = g[0]) & Q(date__gte = '2005-01-01')) \
+            .filter(Q(image__imaging_cameras__type = g[0]) & Q(date__gte = '2011-01-01')) \
             .exclude(date = None) \
             .order_by('date')
 
@@ -535,9 +536,9 @@ def camera_types_trend():
 
 
 def telescope_types_trend():
-    period = 'yearly'
+    period = 'monthly'
     _map = {
-        'yearly': (_("Integration hours by camera type"), '%Y'),
+        'monthly': (_("Integration hours by camera type"), '%Y-%m'),
     }
 
     flot_data = []
@@ -555,29 +556,23 @@ def telescope_types_trend():
         }
     }
 
-    combined_dict = {}
-    for g in Telescope.TELESCOPE_TYPES:
-        if g[0] > 21:
-            continue
-
+    telescope_types = {
+        _('Refractor'): range(0, 6),
+        _('Reflector'): range(6, 12),
+        _('Catadioptric'): range(12, 21),
+        _('Camera lens'): [21,],
+    }
+    for key, value in telescope_types.items():
+        filters = reduce(operator.or_, [Q(**{'image__imaging_telescopes__type': x}) for x in value])
         all = DeepSky_Acquisition.objects \
-            .filter(Q(image__imaging_telescopes__type = g[0]) & Q(date__gte = '2005-01-01')) \
-            .exclude(date = None) \
+            .filter(filters & Q(date__gte = '2011-01-01')) \
             .order_by('date')
 
         g_dict = {
+            'label': key,
             'stage_data': {},
             'data': [],
         }
-
-        if g[0] < 6:
-            g_dict['label'] = _("Refractor")
-        elif g[0] >= 6 and g[0] < 12:
-            g_dict['label'] = _("Reflector")
-        elif g[0] >= 12 and g[0] < 21:
-            g_dict['label'] = _("Catadioptric")
-        elif g[0] == 21:
-            g_dict['label'] = _("Camera lens")
 
         for i in all:
             integration = 0
@@ -599,10 +594,7 @@ def telescope_types_trend():
                     g_dict['data'].append([t, 0])
 
         del g_dict['stage_data']
-        combined_dict[g_dict['label']] = g_dict['data']
-
-    for key, value in combined_dict.items():
-        flot_data.append({'label': key, 'data': value})
+        flot_data.append(g_dict)
 
     return (flot_data, flot_options)
 
