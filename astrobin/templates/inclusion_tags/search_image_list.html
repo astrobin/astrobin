@@ -8,7 +8,7 @@
         <a href="{% url image_detail search_result.object.id %}">
             <img src="http://astrobin_images.{{s3_url}}/{{search_result.object.filename}}_thumb.png"
                  class="capty"
-                 name="#capty-content-{{search_result.object.id}}"
+                 id="#capty-content-{{search_result.object.id}}"
                  alt="{{search_result.object.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
         </a>

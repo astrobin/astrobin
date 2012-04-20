@@ -37,7 +37,7 @@
 		}
 
 		var $this		= $(this),
-			name		= $this.attr('name'),
+			name		= $this.attr('id'),
 			$caption	= $('<div class="' + options.cCaption + '"/>'),
 			$elem		= $this;
 

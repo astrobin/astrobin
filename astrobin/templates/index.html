@@ -123,9 +123,9 @@
                                 <strong>{% trans i.0 %}:</strong>
                                 {% for g in i.1 %}
                                     {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}
-                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q=&as_values_{{i.2}}={{g.id}}{% search_form_query %}">{{g.name|escape}}</a>
+                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q=&amp;as_values_{{i.2}}={{g.id}}{% search_form_query %}">{{g.name|escape}}</a>
                                     {% else %}
-                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q={{g.name|escape}}&type={{i.2}}{% search_form_query %}">{{g.name|escape}}</a>
+                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q={{g.name|escape|urlencode}}&amp;type={{i.2}}{% search_form_query %}">{{g.name|escape}}</a>
                                     {% endif %}{% if not forloop.last %},&nbsp;{% endif %}
                                 {% endfor %}
                             </p>
