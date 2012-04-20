@@ -917,6 +917,7 @@ var stats = {
             method: 'GET',
             dataType: 'json',
             timeout: timeout,
+            cache: false,
             success: function(series) {
                 $.plot(
                     $(id),
@@ -936,6 +937,7 @@ var stats = {
             method: 'GET',
             dataType: 'json',
             timeout: timeout,
+            cache: false,
             success: function(series) {
                 $.plot(
                     $(id),
