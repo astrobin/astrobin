@@ -9,7 +9,7 @@
         <a href="{% url image_detail image.id %}">
             <img src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}{% if thumbnail_size == 90 %}_small_thumb{{image.original_ext}}{% else %}_thumb.png{% endif %}{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="{% if thumbnail_size == 184 %}capty {% endif %}"
-                 name="#capty-content-{{image.id}}-{{randomid}}"
+                 id="#capty-content-{{image.id}}-{{randomid}}"
                  alt="{{image.title|default:_("(no title)")}}"
                  width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
         </a>
