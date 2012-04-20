@@ -114,19 +114,19 @@ NOTICE_TYPES = (
     ),
     (
         'new_favorite',
-        '',
+        _("Your image was favorited"),
         '',
         2,
     ),
     (
         'new_image_from_gear',
-        '',
+        _("New image with some gear you follow"),
         '',
         2,
     ),
     (
         'new_image_of_subject',
-        '',
+        _("New image of a subject you follow"),
         '',
         2,
     ),
