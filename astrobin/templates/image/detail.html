@@ -1252,7 +1252,7 @@ $(document).ready(function() {
                 form_html: '{% autoescape off %}{{private_message_form.as_p|append_slash}}{% endautoescape %}',
                 csrf_token: '{{csrf_token}}',
                 url      : "{% url send_private_message %}"
-            },
+            }
         });
 
     common.setup_gear_popovers('{% trans "Follow" %}', '{% trans "Unfollow" %}');
