@@ -1204,6 +1204,7 @@ div.capty-caption a {
 .ui-multiselect ul.available,
 .ui-multiselect ul.selected {
   background: #393939 url('/static/images/light-panel-tile.png');
+  min-height: 75px;
 }
 .ui-multiselect .ui-state-default {
   color: #cc4b2e;
