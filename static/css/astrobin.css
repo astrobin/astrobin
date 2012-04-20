@@ -1281,6 +1281,9 @@ div.capty-caption a {
   border-left: 1px solid #333;
   border-right: none;
 }
+.upload-forms .upload-form .upload-form-inner form {
+  display: none;
+}
 .upload-forms .upload-form:first-child .upload-form-inner {
   border-right: 1px solid #484848;
   border-left: none;
