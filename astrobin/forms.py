@@ -633,5 +633,5 @@ class CopyGearForm(forms.Form):
 
     def __init__(self, user, **kwargs):
         super(CopyGearForm, self).__init__(**kwargs)
-        self.fields['image'].queryset = Image.objects.filter(user = user)
+        self.fields['image'].queryset = Image.objects.filter(user = user, is_stored = True)
 
