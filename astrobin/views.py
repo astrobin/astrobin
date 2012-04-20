@@ -1038,6 +1038,7 @@ def image_edit_gear(request, id):
         'is_ready':image.is_stored,
         'image':image,
         'no_gear':no_gear,
+        'copy_gear_form': CopyGearForm(request.user),
     }
 
     return render_to_response('image/edit/gear.html',
@@ -3349,4 +3350,24 @@ def stats_telescope_types_trend_ajax(request):
     }
 
     return ajax_response(response_dict)
+
+
+@require_GET
+def get_gear_ajax(request, image_id):
+    image = get_object_or_404(Image, id = image_id)
+
+    attrs = ('imaging_telescopes', 'guiding_telescopes', 'mounts',
+             'imaging_cameras', 'guiding_cameras', 'focal_reducers',
+             'software', 'filters', 'accessories',)
+    response_dict = {}
+
+    for attr in attrs:
+        ids = [int(x) for x in getattr(image, attr).all().values_list('id', flat = True)]
+        response_dict[attr] = ids
+
+    print response_dict
+
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
 

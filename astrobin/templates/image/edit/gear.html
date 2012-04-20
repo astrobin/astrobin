@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load bootstrap_toolkit %}
 
 {% block content %}
     {% if image.is_stored %}
@@ -28,6 +29,12 @@
         {% endif %}
     </div>
 
+    <form class="form-horizontal">
+        <div class="form-actions">
+            <a class="btn btn-primary" href="#copy-gear-modal" rel="tooltip" title="{% trans "Use this button to import the gear settings from another image of yours." %}" data-toggle="modal">{% trans "Copy from another image" %}</a>
+        </div>
+    </form>
+
     <form class="form-horizontal" id="gear" method="post" action="{% url image_edit_save_gear %}">{% csrf_token %}
         {{form.non_field_errors}}
         {% for field in form %}
@@ -53,6 +60,22 @@
             {% endif %}
         </div>
     </form>
+
+    <div class="modal hide fade" id="copy-gear-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Copy gear" %}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="well">
+                {% blocktrans %}Copying the gear from another image will populate the gear selection form for you, but you will still need to save it in the end.{% endblocktrans %}
+            </div>
+            <form class="form-inline copy-gear-form">
+                {{copy_gear_form}}
+                <a class="btn btn-primary" href="#">{% trans "Copy" %}</a>
+            </form>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_head %}
@@ -73,6 +96,37 @@
     $(document).ready(function() {
         $('form .loading').hide();
         $('form .ui-multiselect').show();
+
+        function selectGearItem($select, text) {
+            $select.multiselect('select', text);
+        };
+        $('.copy-gear-form .btn').click(function() {
+            var $modal = $(this).closest('.modal');
+
+            $.ajax({
+                url: '/get-gear-ajax/' + $('.copy-gear-form select#id_image').val() + '/',
+                dataType: 'json',
+                timeout: 5000,
+                cache: false,
+                success: function(data) {
+                    for (var attr in data) {
+                        var $select = $('form#gear select[name=' + attr + ']');
+                        $select.multiselect('selectNone');
+
+                        var ids = data[attr];
+                        for (var i in ids) {
+                            var text = $select.find('option[value=' + ids[i] +']').text();
+                            (function(a, b) {
+                                setTimeout(function() {
+                                    selectGearItem(a, b);
+                                }, 100);
+                            })($select, text);
+                        }
+                    }
+                    $modal.modal('hide');
+                }
+            });
+        });
     });
 </script>
 {% endblock %}
