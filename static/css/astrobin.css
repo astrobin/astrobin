@@ -1891,3 +1891,42 @@ p.small {
 .row.section {
   margin-bottom: 16px;
 }
+.bubble {
+  position: relative;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+}
+.bubble:after {
+  position: absolute;
+  display: block;
+  content: "";
+  border-color: transparent transparent #FCF8E3 transparent;
+  border-style: solid;
+  border-width: 10px;
+  height: 0;
+  width: 0;
+  top: -19px;
+  left: 1em;
+}
+#language-prompt {
+  position: absolute;
+  top: 45px;
+  right: 5px;
+  z-index: 999;
+}
+#language-prompt .bubble {
+  width: 105px;
+  color: #C09853;
+  background-color: #FCF8E3;
+  border: 1px solid #FBEED5;
+}
+#language-prompt .bubble:after {
+  left: 100px;
+}

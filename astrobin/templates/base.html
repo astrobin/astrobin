@@ -175,6 +175,14 @@
                                     </a>
                                 </li>
                             </ul>
+
+                            {% if request.user.is_authenticated and not user_language %}
+                            <div id="language-prompt">
+                                <div class="bubble">
+                                    {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
+                                </div>
+                            </div>
+                            {% endif %} 
                         </li> <!-- languages -->
 
                         <li class="divider-vertical"></li>
