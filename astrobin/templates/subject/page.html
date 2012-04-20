@@ -162,25 +162,25 @@ $(document).ready(function() {
     stats.plot(
         '#stats_images_monthly',
         "{% url stats_subject_images_monthly subject.id %}",
-        5000);
+        30000);
     stats.enableTooltips("#stats_images_monthly");
 
     stats.plot(
         '#stats_integration_monthly',
         "{% url stats_subject_integration_monthly subject.id %}",
-        5000);
+        30000);
     stats.enableTooltips("#stats_integration_monthly");
 
     stats.plot(
         '#stats_total_images',
         "{% url stats_subject_total_images subject.id %}",
-        5000);
+        30000);
     stats.enableTooltips("#stats_total_images");
 
     stats.plot_pie(
         '#stats_camera_types',
         "{% url stats_subject_camera_types subject.id %}",
-        5000);
+        30000);
     $('#stats_camera_types').bind('plothover', function(event, pos, obj) {
         if (!obj) return;
         percent = parseFloat(obj.series.percent).toFixed(2);
@@ -190,7 +190,7 @@ $(document).ready(function() {
     stats.plot_pie(
         '#stats_telescope_types',
         "{% url stats_subject_telescope_types subject.id %}",
-        5000);
+        30000);
     $('#stats_telescope_types').bind('plothover', function(event, pos, obj) {
         if (!obj) return;
         percent = parseFloat(obj.series.percent).toFixed(2);
