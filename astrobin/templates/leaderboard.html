@@ -17,17 +17,17 @@
                         <th>{% trans "Position" %}</th>
                         <th>{% trans "User" %}</th>
                         <th>
-                            <a href="{% url stats %}{% query_string "sort='tot_integration'" "" %}#leaderboard">
+                            <a href="{% url leaderboard %}{% query_string "sort='tot_integration'" "" %}">
                                 {% trans "Total integration" %} &#9660;
                             </a>
                         </th>
                         <th>
-                            <a href="{% url stats %}{% query_string "sort='avg_integration'" "" %}#leaderboard">
+                            <a href="{% url leaderboard %}{% query_string "sort='avg_integration'" "" %}">
                                 {% trans "Avg. integration hours" %} &#9660;
                             </a>
                         </th>
                         <th>
-                            <a href="{% url stats %}{% query_string "sort='images'" "" %}#leaderboard">
+                            <a href="{% url leaderboard %}{% query_string "sort='images'" "" %}">
                                 {% trans "Images" %} &#9660;
                             </a>
                         </th>
@@ -44,7 +44,7 @@
                     {% endfor %}
                 </table>
                 <div class="pagination pagination-centered">
-                    {% paginate 4 "#leaderboard" %}
+                    {% paginate 4 %}
                 </div>
             </div>
         </div>
