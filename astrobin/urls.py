@@ -222,5 +222,7 @@ urlpatterns = patterns('',
 
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
     url(r'^avatar/', include('avatar.urls')),
+
+    url(r'^get-gear-ajax/(?P<image_id>\d+)/$', views.get_gear_ajax, name='get_gear_ajax'),
 )
 

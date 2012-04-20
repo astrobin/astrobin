@@ -668,6 +668,11 @@ body.full {
 .modal .modal-header .close {
   color: white;
 }
+.modal .form-inline {
+  display: table;
+  width: auto;
+  margin: 0 auto;
+}
 .navbar .navbar-inner {
   border-top: 4px solid #3092cf;
   background: #303030 url('/static/images/darker-panel-tile.png');
@@ -915,6 +920,12 @@ textarea:focus {
 }
 .form-horizontal select {
   width: 620px;
+}
+.form-inline label {
+  margin-right: 8px;
+}
+.form-inline .btn {
+  margin-left: 8px;
 }
 footer {
   -webkit-box-shadow: 0 0 12px black;
