@@ -250,7 +250,7 @@ var common = {
                     buttons: [
                         {
                             text: 'OK',
-                            class: 'btn btn-primary',
+                            'class': 'btn btn-primary',
                             click: function() {
                                 var dlg = $(this)
                                 $.ajax({
@@ -270,7 +270,7 @@ var common = {
                         },
                         {
                             text: $.i18n._('Cancel'),
-                            class: 'btn',
+                            'class': 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }
@@ -300,7 +300,7 @@ var common = {
                     buttons: [
                         {
                             text: 'OK',
-                            class: 'btn btn-primary',
+                            'class': 'btn btn-primary',
                             click: function() {
                                 var dlg = $(this)
                                 $.ajax({
@@ -320,7 +320,7 @@ var common = {
                         },
                         {
                             text: $.i18n._('Cancel'),
-                            class: 'btn',
+                            'class': 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }
@@ -710,7 +710,7 @@ var image_detail = {
                     buttons: [
                         {
                             text: 'OK',
-                            class: 'btn btn-primary',
+                            'class': 'btn btn-primary',
                             click: function() {
                                 $(this).dialog('close');
                                 window.location = image_detail.config.delete_action.url + image_detail.globals.image_id;
@@ -718,7 +718,7 @@ var image_detail = {
                         },
                         {
                             text: $.i18n._('Cancel'),
-                            class: 'btn',
+                            'class': 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }
@@ -748,7 +748,7 @@ var image_detail = {
                     buttons: [
                         {
                             text: 'OK',
-                            class: 'btn btn-primary',
+                            'class': 'btn btn-primary',
                             click: function() {
                                 $(this).dialog('close');
                                 window.location = image_detail.config.delete_revision_action.url + image_detail.globals.revision_id;
@@ -756,7 +756,7 @@ var image_detail = {
                         },
                         {
                             text: $.i18n._('Cancel'),
-                            class: 'btn',
+                            'class': 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }
@@ -786,7 +786,7 @@ var image_detail = {
                     buttons: [
                         {
                             text: 'OK',
-                            class: 'btn btn-primary',
+                            'class': 'btn btn-primary',
                             click: function() {
                                 $(this).dialog('close');
                                 window.location = image_detail.config.delete_original_action.url + image_detail.globals.image_id;
@@ -794,7 +794,7 @@ var image_detail = {
                         },
                         {
                             text: $.i18n._('Cancel'),
-                            class: 'btn',
+                            'class': 'btn',
                             click: function() {
                                 $(this).dialog('close');
                             }
