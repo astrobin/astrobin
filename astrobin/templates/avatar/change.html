@@ -23,7 +23,7 @@
 
     {% if avatars %}
         <div class="span3">
-            <div class="well"><strong>{% trans "Choose among your previous avatars" %}</div>
+            <div class="well"><strong>{% trans "Previously uploaded" %}</div>
             <form method="POST" action="">
                 {{primary_avatar_form|as_bootstrap}}
                 <input class="btn btn-primary" type="submit" value="{% trans "Choose new default" %}" />
@@ -33,12 +33,8 @@
 
         <div class="span6">
             <div class="well"><strong>{% trans "Upload a new image" %}</div>
-            <form enctype="multipart/form-data" method="POST" action="">
-                <div class="control-group">
-                    <div class="controls">
-                        <input type="file" name="avatar" value="{% trans "Avatar image" %}" />
-                    </div>
-                </div>
+            <form enctype="multipart/form-data" method="POST" action="" class="form-inline">
+                <input type="file" name="avatar" value="{% trans "Avatar image" %}" />
                 <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
             </form>
         </div>
