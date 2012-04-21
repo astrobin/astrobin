@@ -53,70 +53,70 @@ strong,
   display: none;
 }
 .icon-edit {
-  background: url('/static/icons/iconic/black/edit.png') no-repeat left center;
+  background: url('../icons/iconic/black/edit.png') no-repeat left center;
 }
 .icon-edit-gear {
-  background: url('/static/icons/iconic/black/edit-gear.png') no-repeat left center;
+  background: url('../icons/iconic/black/edit-gear.png') no-repeat left center;
 }
 .icon-edit-acquisition {
-  background: url('/static/icons/iconic/black/edit-acquisition.png') no-repeat left center;
+  background: url('../icons/iconic/black/edit-acquisition.png') no-repeat left center;
 }
 .icon-make-final {
-  background: url('/static/icons/iconic/black/check_8x7.png') no-repeat left center;
+  background: url('../icons/iconic/black/check_8x7.png') no-repeat left center;
 }
 .icon-promote {
-  background: url('/static/icons/iconic/black/arrow_right_8x8.png') no-repeat left center;
+  background: url('../icons/iconic/black/arrow_right_8x8.png') no-repeat left center;
 }
 .icon-demote {
-  background: url('/static/icons/iconic/black/arrow_left_8x8.png') no-repeat left center;
+  background: url('../icons/iconic/black/arrow_left_8x8.png') no-repeat left center;
 }
 .icon-change-license {
-  background: url('/static/icons/iconic/black/copy_8x8.png') no-repeat left center;
+  background: url('../icons/iconic/black/copy_8x8.png') no-repeat left center;
 }
 .icon-plate-solve {
-  background: url('/static/icons/iconic/black/read_more_8x8.png') no-repeat left center;
+  background: url('../icons/iconic/black/read_more_8x8.png') no-repeat left center;
 }
 .icon-upload {
-  background: url('/static/icons/iconic/black/upload.png') no-repeat left center;
+  background: url('../icons/iconic/black/upload.png') no-repeat left center;
 }
 .icon-delete {
-  background: url('/static/icons/iconic/black/delete.png') no-repeat left center;
+  background: url('../icons/iconic/black/delete.png') no-repeat left center;
 }
 .icon-quote {
-  background: url('/static/icons/iconic/black/quote.png') no-repeat left center;
+  background: url('../icons/iconic/black/quote.png') no-repeat left center;
 }
 .icon-info {
-  background: url('/static/icons/iconic/black/info.png') no-repeat left center;
+  background: url('../icons/iconic/black/info.png') no-repeat left center;
 }
 .icon-file {
-  background: url('/static/icons/iconic/black/file.png') no-repeat left center;
+  background: url('../icons/iconic/black/file.png') no-repeat left center;
 }
 .icon-follow {
-  background: url('/static/icons/iconic/black/follow.png') no-repeat left center;
+  background: url('../icons/iconic/black/follow.png') no-repeat left center;
 }
 .icon-unfollow {
-  background: url('/static/icons/iconic/black/unfollow.png') no-repeat left center;
+  background: url('../icons/iconic/black/unfollow.png') no-repeat left center;
 }
 .icon-normal {
-  background: url('/static/icons/iconic/black/normal.png') no-repeat left center;
+  background: url('../icons/iconic/black/normal.png') no-repeat left center;
 }
 .icon-inverted {
-  background: url('/static/icons/iconic/black/inverted.png') no-repeat left center;
+  background: url('../icons/iconic/black/inverted.png') no-repeat left center;
 }
 .icon-solved {
-  background: url('/static/icons/iconic/black/solved.png') no-repeat left center;
+  background: url('../icons/iconic/black/solved.png') no-repeat left center;
 }
 .icon-profile {
-  background: url('/static/icons/iconic/black/profile.png') no-repeat left center;
+  background: url('../icons/iconic/black/profile.png') no-repeat left center;
 }
 .icon-message {
-  background: url('/static/icons/iconic/black/message.png') no-repeat left center;
+  background: url('../icons/iconic/black/message.png') no-repeat left center;
 }
 .icon-check {
-  background: url('/static/icons/iconic/black/check_8x7.png') no-repeat left center;
+  background: url('../icons/iconic/black/check_8x7.png') no-repeat left center;
 }
 .icon-book {
-  background: url('/static/icons/iconic/black/book_8x8.png') no-repeat left center;
+  background: url('../icons/iconic/black/book_8x8.png') no-repeat left center;
 }
 /*
 Uniform Theme: Uniform Default
@@ -639,13 +639,13 @@ div.uploader input {
 ------------------------------------------------- */
 body {
   padding-top: 55px;
-  background: #393939 url('/static/images/background-tile.png');
+  background: #393939 url('../images/background-tile.png');
 }
 body.full {
   padding-top: 81px;
 }
 .modal {
-  background: #2e2e2e url('/static/images/dark-panel-tile.png');
+  background: #2e2e2e url('../images/dark-panel-tile.png');
   border: none;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -655,7 +655,7 @@ body.full {
   border-radius: 6px;
 }
 .modal .modal-header {
-  background: #303030 url('/static/images/darker-panel-tile.png');
+  background: #303030 url('../images/darker-panel-tile.png');
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -675,7 +675,7 @@ body.full {
 }
 .navbar .navbar-inner {
   border-top: 4px solid #3092cf;
-  background: #303030 url('/static/images/darker-panel-tile.png');
+  background: #303030 url('../images/darker-panel-tile.png');
   -webkit-box-shadow: 0 0 12px #000000;
   -moz-box-shadow: 0 0 12px #000000;
   box-shadow: 0 0 12px #000000;
@@ -725,7 +725,7 @@ body.full {
 .subnav {
   width: 100%;
   height: 24px;
-  background: #cc4b2e url('/static/images/orange-panel-tile.png');
+  background: #cc4b2e url('../images/orange-panel-tile.png');
   border-top: 1px solid #b74329;
   border-bottom: 1px solid #b74329;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
@@ -849,7 +849,7 @@ body.full {
   -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
-  background: #333333 url('/static/images/dark-panel-tile.png');
+  background: #333333 url('../images/dark-panel-tile.png');
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -914,7 +914,7 @@ textarea:focus {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(204, 75, 46, 0.6);
 }
 .form-horizontal .form-actions {
-  background: #333333 url('/static/images/dark-panel-tile.png');
+  background: #333333 url('../images/dark-panel-tile.png');
   border-color: #393939;
 }
 .form-horizontal input[type=text],
@@ -940,7 +940,7 @@ footer {
   padding-bottom: 10px;
   width: 1000px;
   margin: 0 auto;
-  background: #303030 url('/static/images/darker-panel-tile.png');
+  background: #303030 url('../images/darker-panel-tile.png');
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -1156,7 +1156,7 @@ x:default {
 .tabs ul li.ui-state-default {
   float: left;
   padding: 8px 12px;
-  background: #2e2e2e url('/static/images/dark-panel-tile.png');
+  background: #2e2e2e url('../images/dark-panel-tile.png');
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -1165,7 +1165,7 @@ x:default {
 .tabs ul li.ui-state-active {
   border-bottom: none;
   padding-bottom: 8px;
-  background: #393939 url('/static/images/light-panel-tile.png');
+  background: #393939 url('../images/light-panel-tile.png');
 }
 .tabs ul li.active {
   padding-bottom: 9px;
@@ -1208,7 +1208,7 @@ div.capty-caption a {
 }
 .ui-multiselect ul.available,
 .ui-multiselect ul.selected {
-  background: #393939 url('/static/images/light-panel-tile.png');
+  background: #393939 url('../images/light-panel-tile.png');
   min-height: 75px;
 }
 .ui-multiselect .ui-state-default {
@@ -1267,7 +1267,7 @@ div.capty-caption a {
 .upload-forms {
   text-align: center;
   padding: 10px;
-  background: #393939 url('/static/images/subtle-panel-tile.png');
+  background: #393939 url('../images/subtle-panel-tile.png');
   border: 1px solid #2e2e2e;
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
@@ -1342,7 +1342,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
   position: relative;
 }
 .main-image .main-image-inner img {
-  cursor: url('/static/cursors/magnify.cur'), -moz-zoom-in, pointer;
+  cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
   border: 1px solid #2e2e2e;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -1354,7 +1354,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .main-image .main-image-inner img.plot-overlay,
 .main-image .main-image-inner img.fixed-plot-overlay {
-  cursor: url('/static/cursors/magnify.cur'), -moz-zoom-in, pointer;
+  cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
   position: absolute;
   top: 0;
   left: 0;
@@ -1526,11 +1526,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
   margin-bottom: 52px;
 }
 .well {
-  background: url('/static/images/subtle-panel-tile.png');
+  background: url('../images/subtle-panel-tile.png');
   border: 0;
 }
 .subtle-container {
-  background: url('/static/images/subtle-panel-tile.png');
+  background: url('../images/subtle-panel-tile.png');
   border: 1px solid #2e2e2e;
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
@@ -1622,7 +1622,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  background: #393939 url('/static/images/light-panel-tile.png');
+  background: #393939 url('../images/light-panel-tile.png');
   margin: 0 0 8px 0;
   padding: 0;
 }
@@ -1719,11 +1719,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
   overflow: hidden;
 }
 .message-container .message {
-  background: #393939 url('/static/images/light-panel-tile.png');
+  background: #393939 url('../images/light-panel-tile.png');
 }
 .message-container.other .message {
   float: right;
-  background: #2e2e2e url('/static/images/dark-panel-tile.png');
+  background: #2e2e2e url('../images/dark-panel-tile.png');
 }
 .message-form {
   margin-top: 52px;
@@ -1873,7 +1873,7 @@ p.small {
 }
 .ui-tooltip-default .ui-tooltip-titlebar,
 .ui-tooltip-default .ui-tooltip-content {
-  background: #303030 url('/static/images/darker-panel-tile.png');
+  background: #303030 url('../images/darker-panel-tile.png');
   border-color: #111;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;

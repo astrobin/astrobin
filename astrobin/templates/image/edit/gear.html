@@ -40,7 +40,7 @@
         {% for field in form %}
             <div class="control-group">
                 <label class="control-label" for="id_{{field.name}}">{{field.label}}:</label>
-                <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
+                <div class="loading"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></div>
                 <div class="controls">
                     {{field}}
                 </div>

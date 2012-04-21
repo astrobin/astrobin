@@ -71,7 +71,6 @@ ln -s ./venv/bin/pip vpip
     django-memcached \
     django-storages boto \
     simplejson \
-    django-compressor \
     django-notification \
     flickrapi \
     Pillow \
@@ -89,7 +88,10 @@ ln -s ./venv/bin/pip vpip
     lxml \
     django-uni-form \
     Markdown \
-    django-bootstrap-toolkit
+    django-bootstrap-toolkit \
+    django-pipeline \
+    jsmin \
+    cssmin
 
 Install django-hitcount from sources:
 https://github.com/thornomad/django-hitcount/

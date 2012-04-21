@@ -11,13 +11,13 @@
                         <div class="upload-form wip-form-box">
                             <div class="upload-form-inner">
                                 <h3>{% trans "Upload as a work in progress" %}</h3>
-                                <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
+                                <div class="loading"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></div>
                                 <form action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
                                     <input type="file" name="file" class="file" id="id_file" />
                                     <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
                                     <input type="hidden" name="wip" value="" />
                                 </form>
-                                <div class="progressbar"><img src="/static/images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
+                                <div class="progressbar"><img src="{{STATIC_URL}}images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
                                 <p>
                                     {% url faq as faq_url %}
                                     {% blocktrans %}Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href="{{faq_url}}#6">FAQ</a>.{% endblocktrans %}
@@ -27,12 +27,12 @@
                         <div class="upload-form final-form-box">
                             <div class="upload-form-inner">
                                 <h3>{% trans "Upload as a finished image" %}</h3>
-                                <div class="loading"><img src="/static/images/ajax-loader.gif" alt=""/></div>
+                                <div class="loading"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></div>
                                 <form action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
                                     <input type="file" name="file" class="file" id="id_file" />
                                     <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
                                 </form>
-                                <div class="progressbar"><img src="/static/images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
+                                <div class="progressbar"><img src="{{STATIC_URL}}images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
                                 <p>
                                     {% url profile_flickr_import as flickr_url %}
                                     {% url me as profile_url %}
@@ -48,7 +48,7 @@
                 <div class="single-form">
                     <div class="container">
                         {% url profile_edit_gear as the_url %}
-                        <img src="/static/images/dim_upload.png" />
+                        <img src="{{STATIC_URL}}images/dim_upload.png" />
                         <h2>{% trans "Warning!" %}</h2>
                         <p>
                             {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}?initial">your profile</a>!{% endblocktrans %}
@@ -58,7 +58,7 @@
                 <div class="single-form">
                     <div class="container">
                         {% url profile_edit_gear as the_url %}
-                        <img src="/static/images/dim_upload.png" />
+                        <img src="{{STATIC_URL}}images/dim_upload.png" />
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@
         <div id="why-astrobin" class="carousel slide">
             <div class="carousel-inner">
                 <div class="active item">
-                    <img src="/static/images/M81_astrojoe.jpg" />
+                    <img src="{{STATIC_URL}}images/M81_astrojoe.jpg" />
                     <div class="carousel-caption">
                         <h4>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h4>
                         {% url help as help_url %}
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="/static/images/M42_astrojoe.jpg" />
+                    <img src="{{STATIC_URL}}images/M42_astrojoe.jpg" />
                     <div class="carousel-caption">
                         <h4>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h4>
                         <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free.{% endblocktrans %}</p>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="/static/images/M45_astrojoe.jpg" />
+                    <img src="{{STATIC_URL}}images/M45_astrojoe.jpg" />
                     <div class="carousel-caption">
                         <h4>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h4>
                         <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
@@ -195,7 +195,7 @@
         $('.upload-forms .loading').hide();
         $('.upload-forms form').show();
 
-        common.setup_gear_popovers('{% trans "Follow" %}', '{% trans "Unfollow" %}');
+        astrobin_common.setup_gear_popovers('{% trans "Follow" %}', '{% trans "Unfollow" %}');
     });
 </script>
 {% endblock %}

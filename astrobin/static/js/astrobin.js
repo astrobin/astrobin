@@ -5,7 +5,7 @@
 /**********************************************************************
  * Common
  *********************************************************************/
-var common = {
+astrobin_common = {
     config: {
         image_detail_url           : '/',
 
@@ -92,12 +92,12 @@ var common = {
     },
 
     listen_for_notifications: function(username, last_modified, etag) {
-        common.globals.smart_ajax({
+        astrobin_common.globals.smart_ajax({
             'beforeSend': function(xhr) {
                 xhr.setRequestHeader("If-None-Match", etag);
                 xhr.setRequestHeader("If-Modified-Since", last_modified);
             },
-            url: common.config.notifications_base_url + username,
+            url: astrobin_common.config.notifications_base_url + username,
             dataType: 'text',
             type: 'get',
             cache: 'false',
@@ -107,23 +107,23 @@ var common = {
 
                 json = jQuery.parseJSON(data);
 
-                $(common.config.notifications_element_empty).remove();
-                $(common.config.notifications_element_ul)
+                $(astrobin_common.config.notifications_element_empty).remove();
+                $(astrobin_common.config.notifications_element_ul)
                     .prepend('<li class="unread">'+json['message']+'</li>');
 
                 /* Start the next long poll. */
-                common.listen_for_notifications(username, last_modified, etag);
+                astrobin_common.listen_for_notifications(username, last_modified, etag);
             }
         });
     },
 
     listen_for_requests: function(username, last_modified, etag) {
-        common.globals.smart_ajax({
+        astrobin_common.globals.smart_ajax({
             'beforeSend': function(xhr) {
                 xhr.setRequestHeader("If-None-Match", etag);
                 xhr.setRequestHeader("If-Modified-Since", last_modified);
             },
-            url: common.config.requests_base_url + username,
+            url: astrobin_common.config.requests_base_url + username,
             dataType: 'text',
             type: 'get',
             cache: 'false',
@@ -133,31 +133,31 @@ var common = {
 
                 json = jQuery.parseJSON(data);
 
-                $(common.config.requests_element_empty).remove();
-                $(common.config.requests_element_ul).prepend('\
+                $(astrobin_common.config.requests_element_empty).remove();
+                $(astrobin_common.config.requests_element_ul).prepend('\
                     <li class="unread">\
-                        <a href="' + common.config.image_detail_url + json['image_id'] + '/">' + json['message'] + '\
+                        <a href="' + astrobin_common.config.image_detail_url + json['image_id'] + '/">' + json['message'] + '\
                         </a>\
                     </li>\
                 ');
 
                 /* Start the next long poll. */
-                common.listen_for_requests(username, last_modified, etag);
+                astrobin_common.listen_for_requests(username, last_modified, etag);
             }
         });
     },
 
     start_listeners: function(username) {
-        common.globals.smart_ajax = function(settings) {
+        astrobin_common.globals.smart_ajax = function(settings) {
             // override complete() operation
             var complete = settings.complete;
             settings.complete = function(xhr) {
                 if (xhr) {
                     // xhr may be undefined, for example when downloading JavaScript
-                    for (var i = 0, len = common.globals.requests.length; i < len; ++i) {
-                        if (common.globals.requests[i] == xhr) {
+                    for (var i = 0, len = astrobin_common.globals.requests.length; i < len; ++i) {
+                        if (astrobin_common.globals.requests[i] == xhr) {
                             // drop completed xhr from list
-                            common.globals.requests.splice(i, 1);
+                            astrobin_common.globals.requests.splice(i, 1);
                             break;
                         }
                     }
@@ -171,14 +171,14 @@ var common = {
             var r = $.ajax.apply(this, arguments);
             if (r) {
                 // r may be undefined, for example when downloading JavaScript
-                common.globals.requests.push(r);
+                astrobin_common.globals.requests.push(r);
             }
             return r;
         };
 
         setTimeout(function() {
-            common.listen_for_notifications(username, '', '');
-            common.listen_for_requests(username, '', '');
+            astrobin_common.listen_for_notifications(username, '', '');
+            astrobin_common.listen_for_requests(username, '', '');
         }, 1000);
     },
 
@@ -232,20 +232,20 @@ var common = {
     },
 
     setup_follow: function() {
-        $(common.config.follow_action.element).live('click', function() {
+        $(astrobin_common.config.follow_action.element).live('click', function() {
             var follow_a = $(this);
 
             $('<div id="dialog-confirm"\
-                    title="' + common.config.follow_action.dialog.title + '">\
+                    title="' + astrobin_common.config.follow_action.dialog.title + '">\
                </div>')
                 .html('\
                         <p>\
                             <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 20px 0;"></span>\
-                            ' + common.config.follow_action.dialog.body + '\
+                            ' + astrobin_common.config.follow_action.dialog.body + '\
                         </p>')
                 .dialog({
                     resizable: false,
-                    height: common.config.follow_action.dialog.height,
+                    height: astrobin_common.config.follow_action.dialog.height,
                     modal: true,
                     buttons: [
                         {
@@ -254,13 +254,13 @@ var common = {
                             click: function() {
                                 var dlg = $(this)
                                 $.ajax({
-                                    url: common.config.follow_action.url + common.globals.current_username,
+                                    url: astrobin_common.config.follow_action.url + astrobin_common.globals.current_username,
                                     dataType: 'json',
                                     timeout: 5000,
                                     cache: false,
                                     success: function() {
                                         dlg.dialog('close');
-                                        follow_a.html('<i class="icon-unfollow"></i> ' + common.config.follow_action.stop_following);
+                                        follow_a.html('<i class="icon-unfollow"></i> ' + astrobin_common.config.follow_action.stop_following);
                                         follow_a.removeClass('follow').addClass('unfollow');
                                     },
                                     error: function(jqXHR, textStatus, errorThrown) {
@@ -282,20 +282,20 @@ var common = {
     },
 
     setup_unfollow: function() {
-        $(common.config.unfollow_action.element).live('click', function() {
+        $(astrobin_common.config.unfollow_action.element).live('click', function() {
             var unfollow_a = $(this);
 
             $('<div id="dialog-confirm"\
-                    title="' + common.config.unfollow_action.dialog.title + '">\
+                    title="' + astrobin_common.config.unfollow_action.dialog.title + '">\
                </div>')
                 .html('\
                         <p>\
                             <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>\
-                            ' + common.config.unfollow_action.dialog.body + '\
+                            ' + astrobin_common.config.unfollow_action.dialog.body + '\
                         </p>')
                 .dialog({
                     resizable: false,
-                    height: common.config.unfollow_action.dialog.height,
+                    height: astrobin_common.config.unfollow_action.dialog.height,
                     modal: true,
                     buttons: [
                         {
@@ -304,13 +304,13 @@ var common = {
                             click: function() {
                                 var dlg = $(this)
                                 $.ajax({
-                                    url: common.config.unfollow_action.url + common.globals.current_username,
+                                    url: astrobin_common.config.unfollow_action.url + astrobin_common.globals.current_username,
                                     dataType: 'json',
                                     timeout: 5000,
                                     cache: false,
                                     success: function() {
                                         dlg.dialog('close');
-                                        unfollow_a.html('<i class="icon-follow"></i> ' + common.config.unfollow_action.follow);
+                                        unfollow_a.html('<i class="icon-follow"></i> ' + astrobin_common.config.unfollow_action.follow);
                                         unfollow_a.removeClass('unfollow').addClass('follow');
                                     },
                                     error: function(jqXHR, textStatus, errorThrown) {
@@ -491,19 +491,19 @@ var common = {
 
     init: function(current_username, config) {
         /* Init */
-        common.globals.current_username = current_username;
-        $.extend(true, common.config, config);
+        astrobin_common.globals.current_username = current_username;
+        $.extend(true, astrobin_common.config, config);
 
         /* Following */
-        common.setup_follow();
-        common.setup_unfollow();
+        astrobin_common.setup_follow();
+        astrobin_common.setup_unfollow();
    }
 };
 
 /**********************************************************************
  * Image detail
  *********************************************************************/
-var image_detail = {
+astrobin_image_detail = {
     config: {
         /* Menus */
         topmenu   : '.topnav',
@@ -513,7 +513,7 @@ var image_detail = {
         /* Rating */
         rating: {
             element       : '#rating',
-            icons_path    : '/static/images/raty/',
+            icons_path    : '/sitestatic/images/raty/',
             rate_url      : '/rate/',
             get_rating_url: '/get_rating/',
             hint_list     : ['bad', 'poor', 'regular', 'good', 'gorgeous'],
@@ -586,39 +586,39 @@ var image_detail = {
     },
 
     top_close: function() {
-        if (image_detail.globals.currentItem) {
-            image_detail.globals.currentItem.css('visibility', 'hidden');
+        if (astrobin_image_detail.globals.currentItem) {
+            astrobin_image_detail.globals.currentItem.css('visibility', 'hidden');
         }
     },
 
     top_open: function(_parent, _klass) {
-        image_detail.top_canceltimer();
-        image_detail.top_close();
-        image_detail.globals.currentItem =
+        astrobin_image_detail.top_canceltimer();
+        astrobin_image_detail.top_close();
+        astrobin_image_detail.globals.currentItem =
             _parent.find(_klass).css('visibility', 'visible');
     },
 
     top_timer: function() {
-        image_detail.globals.closetimer =
-            window.setTimeout(image_detail.top_close,
-                              image_detail.config.timeout);
+        astrobin_image_detail.globals.closetimer =
+            window.setTimeout(astrobin_image_detail.top_close,
+                              astrobin_image_detail.config.timeout);
     },
 
     top_canceltimer: function() {
-        if(image_detail.globals.closetimer) {
-            window.clearTimeout(image_detail.globals.closetimer);
-            image_detail.globals.closetimer = 0;
+        if(astrobin_image_detail.globals.closetimer) {
+            window.clearTimeout(astrobin_image_detail.globals.closetimer);
+            astrobin_image_detail.globals.closetimer = 0;
         }
     },
 
     setup_raty: function() {
-        $(image_detail.config.rating.element).raty({
-            start: image_detail.globals.rating.current,
-            path: image_detail.config.rating.icons_path,
-            readOnly: image_detail.config.rating.read_only,
+        $(astrobin_image_detail.config.rating.element).raty({
+            start: astrobin_image_detail.globals.rating.current,
+            path: astrobin_image_detail.config.rating.icons_path,
+            readOnly: astrobin_image_detail.config.rating.read_only,
             half: false,
             showHalf: true,
-            hintList: image_detail.config.rating.hint_list,
+            hintList: astrobin_image_detail.config.rating.hint_list,
             space: false,
             size: 24,
             starHalf: 'star-half-big.png',
@@ -626,18 +626,18 @@ var image_detail = {
             starOn:   'star-on-big.png',
             click: function(score) {
                 $.ajax({
-                    url: image_detail.config.rating.rate_url + image_detail.globals.image_id + '/' + score + '/',
+                    url: astrobin_image_detail.config.rating.rate_url + astrobin_image_detail.globals.image_id + '/' + score + '/',
                     timeout: 5000,
                     success: function(data, textStatus, XMLHttpRequst) {
                         $.ajax({
-                            url: image_detail.config.rating.get_rating_url + image_detail.globals.image_id + '/',
+                            url: astrobin_image_detail.config.rating.get_rating_url + astrobin_image_detail.globals.image_id + '/',
                             timeout: 5000,
                             dataType: 'json',
                             success: function(data) {
                                 var rating = data.rating
-                                $(image_detail.config.rating.element).raty('start', rating);
-                                $(image_detail.config.rating.element).raty('readOnly', true);
-                                $(image_detail.config.rating.element).raty('fixHint');
+                                $(astrobin_image_detail.config.rating.element).raty('start', rating);
+                                $(astrobin_image_detail.config.rating.element).raty('readOnly', true);
+                                $(astrobin_image_detail.config.rating.element).raty('fixHint');
                                 $('.rating-current .rating').text(rating);
                                 $('.rating-current .number').text(parseInt($('.rating-current .number').text()) + 1);
                             },
@@ -653,30 +653,30 @@ var image_detail = {
     },
 
     setup_upload_revision: function() {
-        $(image_detail.config.upload_revision_action.element).click(function() {
+        $(astrobin_image_detail.config.upload_revision_action.element).click(function() {
             var dlg = $('\
-                <div id="dialog-attention" title="' + image_detail.config.upload_revision_action.dialog.title + '"></div>')
+                <div id="dialog-attention" title="' + astrobin_image_detail.config.upload_revision_action.dialog.title + '"></div>')
                 .html('\
                     <div class="upload-revision">\
                     <p>\
-                        ' + image_detail.config.upload_revision_action.dialog.body + '\
+                        ' + astrobin_image_detail.config.upload_revision_action.dialog.body + '\
                     </p>\
-                    <form id="upload-revision" action="' + image_detail.config.upload_revision_action.url + '" method="post" enctype="multipart/form-data">\
-                        ' + image_detail.config.upload_revision_action.form_html + '\
-                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + image_detail.config.upload_revision_action.csrf_token + '" /></div> \
-                        <input type="hidden" name="image_id" value="' + image_detail.globals.image_id  + '"/>\
+                    <form id="upload-revision" action="' + astrobin_image_detail.config.upload_revision_action.url + '" method="post" enctype="multipart/form-data">\
+                        ' + astrobin_image_detail.config.upload_revision_action.form_html + '\
+                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + astrobin_image_detail.config.upload_revision_action.csrf_token + '" /></div> \
+                        <input type="hidden" name="image_id" value="' + astrobin_image_detail.globals.image_id  + '"/>\
                     </form>\
                     <div style="text-align:center" class="progressbar"><img src="/static/images/loading-bar.gif" alt=""/></div>\
                     </div>\
                 ')
                 .dialog({
-                    width: image_detail.config.upload_revision_action.width,
+                    width: astrobin_image_detail.config.upload_revision_action.width,
                     resizable: false,
                     modal: true});
 
             $('input:file').uniform(
-               {fileDefaultText: image_detail.config.upload_revision_action.fileDefaultText,
-                fileBtnText: image_detail.config.upload_revision_action.fileBtnText
+               {fileDefaultText: astrobin_image_detail.config.upload_revision_action.fileDefaultText,
+                fileBtnText: astrobin_image_detail.config.upload_revision_action.fileBtnText
                }
             );
             $('form#upload-revision').live('submit', function() {
@@ -693,19 +693,19 @@ var image_detail = {
     },
 
     setup_delete: function() {
-        $(image_detail.config.delete_action.element).click(function() {
+        $(astrobin_image_detail.config.delete_action.element).click(function() {
             $('<div id="dialog-confirm" title="' +
-              image_detail.config.delete_action.dialog.title +
+              astrobin_image_detail.config.delete_action.dialog.title +
               '"></div>')
                 .html('\
                         <p>\
                             <span class="ui-icon ui-icon-alert"\
                                   style="float:left; margin:0 7px 20px 0;">\
-                            </span>' + image_detail.config.delete_action.dialog.body + '\
+                            </span>' + astrobin_image_detail.config.delete_action.dialog.body + '\
                         </p>')
                 .dialog({
                     resizable: false,
-                    height: image_detail.config.delete_action.dialog.height,
+                    height: astrobin_image_detail.config.delete_action.dialog.height,
                     modal: true,
                     buttons: [
                         {
@@ -713,7 +713,7 @@ var image_detail = {
                             'class': 'btn btn-primary',
                             click: function() {
                                 $(this).dialog('close');
-                                window.location = image_detail.config.delete_action.url + image_detail.globals.image_id;
+                                window.location = astrobin_image_detail.config.delete_action.url + astrobin_image_detail.globals.image_id;
                             }
                         },
                         {
@@ -731,19 +731,19 @@ var image_detail = {
     },
 
     setup_delete_revision: function() {
-        $(image_detail.config.delete_revision_action.element).click(function() {
+        $(astrobin_image_detail.config.delete_revision_action.element).click(function() {
             $('<div id="dialog-confirm" title="' +
-              image_detail.config.delete_revision_action.dialog.title +
+              astrobin_image_detail.config.delete_revision_action.dialog.title +
               '"></div>')
                 .html('\
                         <p>\
                             <span class="ui-icon ui-icon-alert"\
                                   style="float:left; margin:0 7px 20px 0;">\
-                            </span>' + image_detail.config.delete_revision_action.dialog.body + '\
+                            </span>' + astrobin_image_detail.config.delete_revision_action.dialog.body + '\
                         </p>')
                 .dialog({
                     resizable: false,
-                    height: image_detail.config.delete_revision_action.dialog.height,
+                    height: astrobin_image_detail.config.delete_revision_action.dialog.height,
                     modal: true,
                     buttons: [
                         {
@@ -751,7 +751,7 @@ var image_detail = {
                             'class': 'btn btn-primary',
                             click: function() {
                                 $(this).dialog('close');
-                                window.location = image_detail.config.delete_revision_action.url + image_detail.globals.revision_id;
+                                window.location = astrobin_image_detail.config.delete_revision_action.url + astrobin_image_detail.globals.revision_id;
                             }
                         },
                         {
@@ -769,19 +769,19 @@ var image_detail = {
     },
 
     setup_delete_original: function() {
-        $(image_detail.config.delete_original_action.element).click(function() {
+        $(astrobin_image_detail.config.delete_original_action.element).click(function() {
             $('<div id="dialog-confirm" title="' +
-              image_detail.config.delete_original_action.dialog.title +
+              astrobin_image_detail.config.delete_original_action.dialog.title +
               '"></div>')
                 .html('\
                         <p>\
                             <span class="ui-icon ui-icon-alert"\
                                   style="float:left; margin:0 7px 20px 0;">\
-                            </span>' + image_detail.config.delete_original_action.dialog.body + '\
+                            </span>' + astrobin_image_detail.config.delete_original_action.dialog.body + '\
                         </p>')
                 .dialog({
                     resizable: false,
-                    height: image_detail.config.delete_original_action.dialog.height,
+                    height: astrobin_image_detail.config.delete_original_action.dialog.height,
                     modal: true,
                     buttons: [
                         {
@@ -789,7 +789,7 @@ var image_detail = {
                             'class': 'btn btn-primary',
                             click: function() {
                                 $(this).dialog('close');
-                                window.location = image_detail.config.delete_original_action.url + image_detail.globals.image_id;
+                                window.location = astrobin_image_detail.config.delete_original_action.url + astrobin_image_detail.globals.image_id;
                             }
                         },
                         {
@@ -839,35 +839,35 @@ var image_detail = {
 
     init: function(image_id, revision_id, image_username, current_rating, config) {
         /* Init */
-        image_detail.globals.image_id = image_id;
-        image_detail.globals.revision_id = revision_id;
-        image_detail.globals.image_username = image_username;
-        image_detail.globals.rating.current = parseInt(current_rating);
-        $.extend(true, image_detail.config, config);
+        astrobin_image_detail.globals.image_id = image_id;
+        astrobin_image_detail.globals.revision_id = revision_id;
+        astrobin_image_detail.globals.image_username = image_username;
+        astrobin_image_detail.globals.rating.current = parseInt(current_rating);
+        $.extend(true, astrobin_image_detail.config, config);
 
         /* Rating */
-        image_detail.setup_raty();
+        astrobin_image_detail.setup_raty();
 
         /* Revisions */
-        image_detail.setup_upload_revision();
+        astrobin_image_detail.setup_upload_revision();
 
         /* Delete */
-        image_detail.setup_delete();
-        image_detail.setup_delete_revision();
-        image_detail.setup_delete_original();
+        astrobin_image_detail.setup_delete();
+        astrobin_image_detail.setup_delete_revision();
+        astrobin_image_detail.setup_delete_original();
 
         /* View more subjects */
-        image_detail.setup_view_more_subjects();
+        astrobin_image_detail.setup_view_more_subjects();
 
         /* Plot overlay mouse-over */
-        image_detail.setup_plot_overlay();
+        astrobin_image_detail.setup_plot_overlay();
     }
 };
 
 /**********************************************************************
  * Stats
  *********************************************************************/
-var stats = {
+astrobin_stats = {
     config: {
     },
 
@@ -894,19 +894,19 @@ var stats = {
     enableTooltips: function(plot) {
         $(plot).bind("plothover", function (event, pos, item) {
             if (item) {
-                if (stats.globals.previousPoint != item.dataIndex) {
-                    stats.globals.previousPoint = item.dataIndex;
+                if (astrobin_stats.globals.previousPoint != item.dataIndex) {
+                    astrobin_stats.globals.previousPoint = item.dataIndex;
 
                     $("#stats-tooltip").remove();
                     var x = item.datapoint[0].toFixed(2),
                         y = item.datapoint[1].toFixed(2);
 
-                    stats._showTooltip(item.pageX, item.pageY, y);
+                    astrobin_stats._showTooltip(item.pageX, item.pageY, y);
                 }
             }
             else {
                 $("#stats-tooltip").remove();
-                stats.globals.previousPoint = null;
+                astrobin_stats.globals.previousPoint = null;
             }
         });
     },
@@ -950,7 +950,6 @@ var stats = {
 
     init: function(config) {
         /* Init */
-        $.extend(true, stats.config, config);
+        $.extend(true, astrobin_stats.config, config);
     }
 };
-

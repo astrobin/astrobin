@@ -36,7 +36,7 @@ def watermark_image(image, text, position, opacity):
     watermark = PILImage.new('RGBA', (image.size[0], image.size[1]))
     draw = ImageDraw.Draw(watermark, 'RGBA')
     fontsize = 1
-    ttf = 'static/fonts/arial.ttf'
+    ttf = 'sitestatic/fonts/arial.ttf'
 
     img_fraction = 0.33
 

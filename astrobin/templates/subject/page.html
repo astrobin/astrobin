@@ -95,7 +95,7 @@
     <div id="stats_integration_monthly" class="plot" style="width:940px; height: 200px;">
         <div class="loading">
             <p>{% trans "Please wait: the plot is loading..." %}</p>
-            <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
         </div>
     </div>
 
@@ -103,7 +103,7 @@
     <div id="stats_images_monthly" class="plot" style="width:940px; height: 200px;">
         <div class="loading">
             <p>{% trans "Please wait: the plot is loading..." %}</p>
-            <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
         </div>
     </div>
 
@@ -111,7 +111,7 @@
     <div id="stats_total_images" class="plot" style="width:940px; height: 200px;">
         <div class="loading">
             <p>{% trans "Please wait: the plot is loading..." %}</p>
-            <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
         </div>
     </div>
 
@@ -123,7 +123,7 @@
                     <div id="stats_camera_types" class="plot" style="width:200px; height: 200px;">
                         <div class="loading">
                             <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
                         </div>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                     <div id="stats_telescope_types" class="plot" style="width:200px; height: 200px;">
                         <div class="loading">
                             <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
                         </div>
                     </div>
                 </div>
@@ -158,26 +158,26 @@
 {% block extra_js %}
 <script type="text/javascript">
 $(document).ready(function() {
-    stats.init();
-    stats.plot(
+    astrobin_stats.init();
+    astrobin_stats.plot(
         '#stats_images_monthly',
         "{% url stats_subject_images_monthly subject.id %}",
         30000);
-    stats.enableTooltips("#stats_images_monthly");
+    astrobin_stats.enableTooltips("#stats_images_monthly");
 
-    stats.plot(
+    astrobin_stats.plot(
         '#stats_integration_monthly',
         "{% url stats_subject_integration_monthly subject.id %}",
         30000);
-    stats.enableTooltips("#stats_integration_monthly");
+    astrobin_stats.enableTooltips("#stats_integration_monthly");
 
-    stats.plot(
+    astrobin_stats.plot(
         '#stats_total_images',
         "{% url stats_subject_total_images subject.id %}",
         30000);
-    stats.enableTooltips("#stats_total_images");
+    astrobin_stats.enableTooltips("#stats_total_images");
 
-    stats.plot_pie(
+    astrobin_stats.plot_pie(
         '#stats_camera_types',
         "{% url stats_subject_camera_types subject.id %}",
         30000);
@@ -187,7 +187,7 @@ $(document).ready(function() {
         $('#stats_camera_types_hover').html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
     });
 
-    stats.plot_pie(
+    astrobin_stats.plot_pie(
         '#stats_telescope_types',
         "{% url stats_subject_telescope_types subject.id %}",
         30000);

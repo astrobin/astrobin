@@ -16,9 +16,9 @@
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
 
         <!-- site's css -->
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css"/>
-        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/static/css/ie6.css"/><![endif]-->
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/reset.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/astrobin.css"/>
+        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/ie6.css"/><![endif]-->
     </head>
 
     <body style="width: 100%">
@@ -30,7 +30,7 @@
             We have received an email with the details of this error and we'll fix it in no time!
         </p>
         <p>
-            <img src="/static/images/broken_mirror.jpg" />
+            <img src="{{STATIC_URL}}images/broken_mirror.jpg" />
         </p>
     </body>
 </html>
