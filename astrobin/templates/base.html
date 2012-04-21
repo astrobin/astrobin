@@ -375,6 +375,8 @@
             {% endblock %}
         </footer>
 
+        {% block modals %}{% endblock %}
+
         <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/flashcanvas.js"></script><![endif]-->
 
         {% compressed_js 'scripts' %}
