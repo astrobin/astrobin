@@ -33,7 +33,7 @@
 
         <div class="span6">
             <div class="well"><strong>{% trans "Upload a new image" %}</div>
-            <form enctype="multipart/form-data" method="POST" action="" class="form-inline">
+            <form enctype="multipart/form-data" method="POST" action="{% url avatar_add %}" class="form-inline">
                 <input type="file" name="avatar" value="{% trans "Avatar image" %}" />
                 <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
             </form>
