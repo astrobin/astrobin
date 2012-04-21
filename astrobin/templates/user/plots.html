@@ -21,7 +21,7 @@
         <div id="stats_integration_hours" class="plot" style="width:940px;height:300px;">
             <div class="loading">
                 <p>{% trans "Please wait: the plot is loading..." %}</p>
-                <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
         <div id="stats_integration_hours_by_gear" class="plot" style="width:940px;height:300px;">
             <div class="loading">
                 <p>{% trans "Please wait: the plot is loading..." %}</p>
-                <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
             </div>
         </div>
         <div id="stats_integration_hours_by_gear_legend" class="legend"></div>
@@ -44,7 +44,7 @@
         <div id="stats_views" class="plot" style="width:940px;height:300px;">
             <div class="loading">
                 <p>{% trans "Please wait: the plot is loading..." %}</p>
-                <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
         <div id="stats_uploaded_images" class="plot" style="width:940px;height:300px;">
             <div class="loading">
                 <p>{% trans "Please wait: the plot is loading..." %}</p>
-                <img alt="{% trans "Loading..." %}" src="/static/images/ajax-loader.gif" />
+                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
             </div>
         </div>
     </div>
@@ -66,9 +66,9 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    stats.init();
+    astrobin_stats.init();
 
-    stats.plot(
+    astrobin_stats.plot(
         '#stats_integration_hours',
         {% if 's_ihp' in request.GET %}
         "{% url stats_integration_hours user.username request.GET.s_ihp 0 %}",
@@ -76,9 +76,9 @@ $(document).ready(function() {
         "{% url stats_integration_hours user.username 'monthly' 0 %}",
         {% endif %}
         5000);
-    stats.enableTooltips("#stats_integration_hours");
+    astrobin_stats.enableTooltips("#stats_integration_hours");
 
-    stats.plot(
+    astrobin_stats.plot(
         '#stats_uploaded_images',
         {% if 's_uip' in request.GET %}
         "{% url stats_uploaded_images user.username request.GET.s_uip %}",
@@ -86,7 +86,7 @@ $(document).ready(function() {
         "{% url stats_uploaded_images user.username 'monthly' %}",
         {% endif %}
         5000);
-    stats.enableTooltips("#stats_uploaded_images");
+    astrobin_stats.enableTooltips("#stats_uploaded_images");
 
     $.ajax({
         {% if 's_ihgp' in request.GET %}
@@ -104,9 +104,9 @@ $(document).ready(function() {
                 series['flot_options']);
         }
     });
-    stats.enableTooltips("#stats_integration_hours_by_gear");
+    astrobin_stats.enableTooltips("#stats_integration_hours_by_gear");
 
-    stats.plot(
+    astrobin_stats.plot(
         '#stats_views',
         {% if 's_vp' in request.GET %}
         "{% url stats_views user.username request.GET.s_vp %}",
@@ -114,7 +114,7 @@ $(document).ready(function() {
         "{% url stats_views user.username 'daily' %}",
         {% endif %}
         5000);
-    stats.enableTooltips("#stats_views");
+    astrobin_stats.enableTooltips("#stats_views");
 });
 </script>
 {% endblock %}

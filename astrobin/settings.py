@@ -1,6 +1,8 @@
 # Django settings for astrobin project.
-
+import os
 from django.conf import global_settings
+
+local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -59,6 +61,9 @@ LANGUAGES = (
 
 SITE_ID = 1
 
+STATIC_ROOT = ASTROBIN_BASE_PATH + '/sitestatic'
+STATIC_URL = '/sitestatic/'
+
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
@@ -66,17 +71,17 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ASTROBIN_BASE_PATH + '/static'
+MEDIA_ROOT = ASTROBIN_BASE_PATH + '/media'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/static/'
+MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/admin-media/admin/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10g'
@@ -111,11 +116,14 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfResponseMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.csrf.CsrfResponseMiddleware',
 #   'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -125,6 +133,7 @@ MIDDLEWARE_CLASSES = (
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
+#    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
@@ -134,7 +143,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    ASTROBIN_BASE_PATH + '/astrobin/templates',
+    local_path('/templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -156,11 +165,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
+    'staticfiles',
     'astrobin',
     'django.contrib.admin',
     'registration',
     'djangoratings',
-    'compressor',
     'haystack',
     'notification',
     'debug_toolbar',
@@ -181,6 +190,7 @@ INSTALLED_APPS = (
     'threaded_messages',
     'bootstrap_toolkit',
     'contact_form',
+    'pipeline',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -190,15 +200,6 @@ AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 FLICKR_API_KEY = '1f44b18e230b8c9816a39d9b34c3318d'
 FLICKR_SECRET  = 'd5fdb83e9aa995fc'
 
-# Turn COMPRESS to True for deployment
-COMPRESS = False
-COMPRESS_URL = '/static/'
-COMPILER_FORMATS = {
-    '.less': {
-        'binary_path':'lessc',
-        'arguments': '*.less'
-    },
-}
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -274,3 +275,72 @@ HITCOUNT_HITS_PER_IP_LIMIT = 0
 
 AVATAR_GRAVATAR_BACKUP = False
 AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png'
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+STATICFILES_FINDERS = (
+    'staticfiles.finders.FileSystemFinder',
+    'staticfiles.finders.AppDirectoriesFinder',
+)
+STATICFILES_DIRS = (local_path('static/'),)
+
+PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
+
+PIPELINE_CSS = {
+    'screen': {
+        'source_filenames': (
+            'css/jquery-ui.css',
+            'css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css',
+            'css/ui.multiselect.css',
+            'css/validationEngine.jquery.css',
+            'css/facebox.css',
+            'css/token-input.css',
+            'css/jquery.multiselect.css',
+            'css/jquery.qtip.css',
+
+            'css/reset.css',
+            'css/bootstrap.css',
+            'css/bootstrap.astrobin.css',
+            'css/astrobin.css',
+        ),
+        'output_filename': 'css/astrobin_pipeline_screen.css',
+        'extra_content':  {
+            'media': 'screen, projection',
+        },
+    },
+}
+
+PIPELINE_JS = {
+    'scripts': {
+        'source_filenames': (
+            'js/jquery-1.7.1.js',
+            'js/jquery.i18n.js',
+            'js/plugins/localization/jquery.localisation.js',
+            'js/jquery.uniform.js',
+            'js/jquery-ui-1.8.16.custom.min.js',
+            'js/jquery.capty.js',
+            'js/jquery-ui-timepicker-addon.js',
+            'js/jquery.validationEngine-en.js',
+            'js/jquery.validationEngine.js',
+            'js/jquery.autoSuggest.js',
+            'js/jquery.blockUI.js',
+            'js/jquery.tmpl.1.1.1.js',
+            'js/ui.multiselect.js',
+            'js/plugins/scrollTo/jquery.scrollTo.js',
+            'js/facebox.js',
+            'js/jquery.form.js',
+            'js/jquery.tokeninput.js',
+            'js/jquery.flot.js',
+            'js/jquery.flot.pie.min.js',
+            'js/jquery.cycle.all.js',
+            'js/jquery.easing.1.3.js',
+            'js/jquery.multiselect.js',
+            'js/jquery.qtip.js',
+            'js/bootstrap.min.js',
+            'js/astrobin.js',
+        ),
+        'output_filename': 'js/astrobin_pipeline.js',
+    },
+}
+

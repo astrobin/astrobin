@@ -40,7 +40,7 @@ server {
     gzip_vary on;
     ## /Compression
 
-    location /static/  {
+    location /sitestatic/  {
         root /home/astrobin/Code/astrobin;
         expires 30d;
     }

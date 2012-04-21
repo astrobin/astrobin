@@ -23,11 +23,11 @@
 
         {% compress css %}
         <!-- site's css -->
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.astrobin.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css"/>
-        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/static/css/ie6.css"/><![endif]-->
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/reset.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/bootstrap.astrobin.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/astrobin.css"/>
+        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/ie6.css"/><![endif]-->
         {% endcompress %}
 
         <script type="text/javascript">
@@ -55,7 +55,7 @@
                 <div class="container">
                     <ul class="nav">
                         <a class="brand" href="{% url index %}">
-                            <img src="/static/images/astrobin-logo-square-mini.png" alt="AstroBin" />
+                            <img src="{{STATIC_URL}}images/astrobin-logo-square-mini.png" alt="AstroBin" />
                         </a>
                         <li>
                             <div class="full-title">
@@ -119,12 +119,12 @@
             {% endwith %}
             {% endif %}
         </div>
-        <script type="text/javascript" src="/static/js/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/static/js/astrobin.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/astrobin.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                common.init_ajax_csrf_token();
+                astrobin_common.init_ajax_csrf_token();
                 {% get_hit_count_javascript for image %}
 
                 {% if image.w > 0 %}

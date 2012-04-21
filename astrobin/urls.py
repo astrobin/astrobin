@@ -64,8 +64,7 @@ urlpatterns = patterns('',
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
        (r'^admin/', include(admin.site.urls)),
-
-       (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+       (r'^sitestatic/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 
     url(r'^profile/edit/$', views.user_profile_edit_basic, name='profile_edit_basic'),
     url(r'^profile/edit/basic/$', views.user_profile_edit_basic, name='profile_edit_basic'),

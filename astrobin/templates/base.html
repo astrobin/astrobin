@@ -1,8 +1,8 @@
 {% load i18n %}
 {% load tags %}
-{% load compress %}
 {% load inbox %}
 {% load avatar_tags %}
+{% load compressed %}
 
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
@@ -16,6 +16,7 @@
         <meta name="robots" content="index, follow, noarchive" />
         <meta name="googlebot" content="noarchive" />
 
+
         <!--[if lte IE 8]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -23,28 +24,11 @@
         <!-- font -->
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
 
-        {% compress css %}
-        <!-- 3rd party css -->
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery-ui.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/ui.multiselect.css"/>
-        <link rel="stylesheet" href="/static/css/validationEngine.jquery.css" type="text/css" media="screen" />
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/facebox.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/token-input.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery.multiselect.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery.qtip.css"/>
+        {% compressed_css 'screen' %}
 
-        <!-- site's css -->
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/reset.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.astrobin.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="/static/css/astrobin.css"/>
-
-
-        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/static/css/ie6.css"/><![endif]-->
+        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/ie6.css"/><![endif]-->
 
         {% block extra_css %}{% endblock %}
-        {% endcompress %}
 
         {% block extra_head %}{% endblock %}
 
@@ -88,7 +72,7 @@
                     <ul class="nav">
                         <li>
                             <a class="brand" href="{% url index %}">
-                                <img src="/static/images/astrobin-logo-square-mini.png" alt="AstroBin" />
+                                <img src="{{STATIC_URL}}images/astrobin-logo-square-mini.png" alt="AstroBin" />
                             </a>
                         </li>
 
@@ -136,42 +120,42 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="{% url set_language "en" %}" title="English">
-                                        <img src="/static/icons/flags/16/United-Kingdom.png" alt="English"/> English
+                                        <img src="{{STATIC_URL}}icons/flags/16/United-Kingdom.png" alt="English"/> English
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{% url set_language "it" %}" title="Italiano">
-                                        <img src="/static/icons/flags/16/Italy.png" alt="Italiano"/> Italiano
+                                        <img src="{{STATIC_URL}}icons/flags/16/Italy.png" alt="Italiano"/> Italiano
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{% url set_language "es" %}" title="Español">
-                                        <img src="/static/icons/flags/16/Spain.png" alt="Español"/> Español
+                                        <img src="{{STATIC_URL}}icons/flags/16/Spain.png" alt="Español"/> Español
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{% url set_language "fr" %}" title="Français">
-                                        <img src="/static/icons/flags/16/France.png" alt="Français"/> Français
+                                        <img src="{{STATIC_URL}}icons/flags/16/France.png" alt="Français"/> Français
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{% url set_language "fi" %}" title="Suomi">
-                                        <img src="/static/icons/flags/16/Finland.png" alt="Suomi"/> Suomi
+                                        <img src="{{STATIC_URL}}icons/flags/16/Finland.png" alt="Suomi"/> Suomi
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{% url set_language "de" %}" title="Deutsch">
-                                        <img src="/static/icons/flags/16/Germany.png" alt="Deutsch"/> Deutsh
+                                        <img src="{{STATIC_URL}}icons/flags/16/Germany.png" alt="Deutsch"/> Deutsh
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{% url set_language "nl" %}" title="Nederlands">
-                                        <img src="/static/icons/flags/16/Netherlands.png" alt="Nederlands"/> Nederlands
+                                        <img src="{{STATIC_URL}}icons/flags/16/Netherlands.png" alt="Nederlands"/> Nederlands
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{% url set_language "tr" %}" title="Türk">
-                                        <img src="/static/icons/flags/16/Turkey.png" alt="Türk"/> Türk
+                                        <img src="{{STATIC_URL}}icons/flags/16/Turkey.png" alt="Türk"/> Türk
                                     </a>
                                 </li>
                                 <li class="divider"></li>
@@ -223,7 +207,7 @@
                                 <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
                             {% endif %}
                             <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
-                                <img alt="{% trans "Notifications" %}" src="/static/icons/iconic/orange/notifications.gif"/>
+                                <img alt="{% trans "Notifications" %}" src="{{STATIC_URL}}icons/iconic/orange/notifications.gif"/>
                             </a>
                             <ul class="dropdown-menu" id="notifications-popup">
                                 {% notification_list request 1 10 %}
@@ -235,7 +219,7 @@
                                 <span class="notice-count">{{requests_count}}</span>
                             {% endif %}
                             <a class="dropdown requests" data-toggle="dropdown" title="{% trans "Requests" %}" href="#">
-                                <img alt="{% trans "Requests" %}" src="/static/icons/iconic/orange/requests.gif"/>
+                                <img alt="{% trans "Requests" %}" src="{{STATIC_URL}}icons/iconic/orange/requests.gif"/>
                             </a>
                             <ul class="dropdown-menu" id="requests-popup">
                                 {% request_list request %}
@@ -266,8 +250,8 @@
                                type="text"
                                name="q"
                                value="{% trans "Quick search" %}"
-                               onfocus="common.clearText(this)"
-                               onblur="common.clearText(this)"/>
+                               onfocus="astrobin_common.clearText(this)"
+                               onblur="astrobin_common.clearText(this)"/>
                         <input type="hidden" name="license" value="0"/>
                         <input type="hidden" name="license" value="1"/>
                         <input type="hidden" name="license" value="2"/>
@@ -391,66 +375,17 @@
             {% endblock %}
         </footer>
 
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="/static/js/flashcanvas.js"></script><![endif]-->
-        {% compress js %}
-        <script type="text/javascript" src="/static/js/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.i18n.js"></script>
-        <script type="text/javascript" src="/static/js/plugins/localization/jquery.localisation.js"></script>
-        <script type="text/javascript">
-            var dictionary = {
-                'Cancel': '{% trans "Cancel" %}'
-            }
-            $.i18n.setDictionary(dictionary);
-        </script>
-        <script type="text/javascript" src="/static/js/jquery.uniform.js"></script>
-        <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/flashcanvas.js"></script><![endif]-->
 
-        <script type="text/javascript" src="/static/js/jquery.capty.js"></script>
-        <script type="text/javascript" src="/static/js/jquery-ui-timepicker-addon.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.validationEngine-en.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.validationEngine.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.blockUI.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.tmpl.1.1.1.js"></script>
-        <script type="text/javascript" src="/static/js/ui.multiselect.js"></script>
-        <script type="text/javascript" src="/static/js/plugins/scrollTo/jquery.scrollTo.js"></script>
-        <script type="text/javascript">
-            $.localise('ui-multiselect', {
-                loadBase: false,
-                language: '{{request.LANGUAGE_CODE}}',
-                path: '/static/js/locale/',
-                timeout: 500
-            });
-        </script>
-        <script type="text/javascript" src="/static/js/ZeroClipboard.js"></script>
-        <script type="text/javascript">
-            ZeroClipboard.setMoviePath('/static/flash/ZeroClipboard10.swf');
-        </script>
-        <script type="text/javascript" src="/static/js/facebox.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.form.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.tokeninput.js"></script>
-
-        <script type="text/javascript" src="/static/js/jquery.flot.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.flot.pie.min.js"></script>
-
-        <script type="text/javascript" src="/static/js/jquery.cycle.all.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
-
-        <script type="text/javascript" src="/static/js/Markdown.Converter.js"></script>
-        <script type="text/javascript" src="/static/js/Markdown.Sanitizer.js"></script>
-
-        <script type="text/javascript" src="/static/js/jquery.multiselect.js"></script>
-
-        <script type="text/javascript" src="/static/js/jquery.qtip.js"></script>
-
-        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/static/js/astrobin.js"></script>
-        {% endcompress %}
+        {% compressed_js 'scripts' %}
+        <script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/Markdown.Converter.js"></script>
+        <script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/Markdown.Sanitizer.js"></script>
+        <script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/ZeroClipboard.js"></script>
 
         <!-- javascript -->
         <script type="text/javascript">
             $(window).bind('beforeunload', function() {
-                $.each(common.globals.requests, function(i, xhr) {
+                $.each(astrobin_common.globals.requests, function(i, xhr) {
                     try {
                         xhr.abort();
                     } catch(e) {
@@ -458,7 +393,7 @@
                             console.log('failed to abort xhr');
                     }
                 });
-                common.globals.requests = [];
+                astrobin_common.globals.requests = [];
             });
 
             function getInternetExplorerVersion()
@@ -476,15 +411,30 @@
               return rv;
             }
 
+            var dictionary = {
+                'Cancel': '{% trans "Cancel" %}'
+            }
+            $.i18n.setDictionary(dictionary);
+
+            $.localise('ui-multiselect', {
+                loadBase: false,
+                language: '{{request.LANGUAGE_CODE}}',
+                path: '{{STATIC_URL}}js/locale/',
+                timeout: 500
+            });
+
+            ZeroClipboard.setMoviePath('{{STATIC_URL}}flash/ZeroClipboard10.swf');
+
+
             $(document).ready(function() {
                 {% if request.user.is_authenticated %}
                 var ver = getInternetExplorerVersion();
                 if (ver == -1) {
-                    common.start_listeners('{{request.user.username}}');
+                    astrobin_common.start_listeners('{{request.user.username}}');
                 }
                 {%endif %}
 
-                common.init_ajax_csrf_token();
+                astrobin_common.init_ajax_csrf_token();
 
                 $('.dropdown-toggle').dropdown();
                 $('.carousel').carousel();
@@ -524,7 +474,7 @@
                         dataType: 'json',
                         success: function() {
                             $('img#notifications').attr('src',
-                                '/static/icons/iconic/orange/notifications.gif');
+                                '{{STATIC_URL}}icons/iconic/orange/notifications.gif');
                             $('ul#notification-feed li.unread').removeClass('unread');
                             $('#notifications_count').remove();
                         }

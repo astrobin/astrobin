@@ -428,14 +428,14 @@
                             {% if is_revision %}
                             <li class="thumbnail astrobin-thumbnail">
                                 <a href="{% url image_detail image.id %}{% query_string "r=0" "plate_solving_started, mod" %}">
-                                    <img {% if image.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+                                    <img {% if image.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
                                 </a>
                             </li>
                             {% endif %}
                             {% for i in revisions %}
                             <li class="thumbnail astrobin-thumbnail">
                                 <a href="{% url image_detail i.image.id %}{% query_string "r=i.id" "plate_solving_started, mod" %}">
-                                    <img {% if i.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}/static/icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+                                    <img {% if i.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://astrobin_images.{{s3_url}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
                                 </a>
                             </li>
                             {% endfor %}
@@ -582,7 +582,7 @@
                                         <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
                                     </span>
                                     <span class="loader">
-                                        <img src="/static/images/ajax-loader.gif" alt=""/> 
+                                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
                                     </span>
                                 </div>
                             </form>
@@ -642,7 +642,7 @@
                                                     <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
                                                 </span>
                                                 <span class="loader">
-                                                    <img src="/static/images/ajax-loader.gif" alt=""/> 
+                                                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
                                                 </span>
                                             </p>
                                         </form>
@@ -678,9 +678,9 @@
                 <div class="favorite-container">
                     <a href="#" class="favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Already favorited" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
                         {% if already_favorited %}
-                            <img src="/static/icons/iconic/red/heart_fill_24x21.png" alt="{% trans "Favorited" %}"/>
+                            <img src="{{STATIC_URL}}icons/iconic/red/heart_fill_24x21.png" alt="{% trans "Favorited" %}"/>
                         {% else %}
-                            <img src="/static/icons/iconic/white/heart_fill_24x21.png" alt="{% trans "Favorite" %}"/>
+                            <img src="{{STATIC_URL}}icons/iconic/white/heart_fill_24x21.png" alt="{% trans "Favorite" %}"/>
                         {% endif %}
                     </a>
                 </div>
@@ -694,31 +694,31 @@
             <div class="subtle-container image-basic-data">
                 <table class="table">
                     <tr>
-                        <td><img alt="{% trans "License" %}" src="/static/icons/iconic/white/key_stroke_16x16.png"/></td>
+                        <td><img alt="{% trans "License" %}" src="{{STATIC_URL}}icons/iconic/white/key_stroke_16x16.png"/></td>
                         <td>
                             <a target="_blank" href="http://creativecommons.org/licenses/">
                                 <img class="license"
-                                     src="/static/icons/{{license_icon}}"
+                                     src="{{STATIC_URL}}icons/{{license_icon}}"
                                      alt="{% trans "License" %}: {{license_title}}"
                                      title="{% trans "License" %}: {{license_title}}" />
                             </a>
                         </td>
                     </tr>
                     <tr>
-                        <td><img alt="{% trans "Date" %}" src="/static/icons/iconic/white/calendar_alt_stroke_16x16.png"/></td>
+                        <td><img alt="{% trans "Date" %}" src="{{STATIC_URL}}icons/iconic/white/calendar_alt_stroke_16x16.png"/></td>
                         <td>{{uploaded_on|ago}}</td>
                     </tr>
                     <tr>
                         {% get_hit_count for image as hit_count %}
-                        <td><img alt="{% trans "Views" %}" src="/static/icons/iconic/white/image_16x16.png"/></td>
+                        <td><img alt="{% trans "Views" %}" src="{{STATIC_URL}}icons/iconic/white/image_16x16.png"/></td>
                         <td>{{hit_count}}</td>
                     </tr>
                     <tr>
-                        <td><img alt="{% trans "Favorites" %}" src="/static/icons/iconic/white/heart_stroke_16x14.png"/></td>
+                        <td><img alt="{% trans "Favorites" %}" src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png"/></td>
                         <td>{{times_favorited}}</td>
                     </tr>
                     <tr>
-                        <td><img alt="{% trans "Votes" %}" src="/static/icons/iconic/white/star_16x16.png"/></td>
+                        <td><img alt="{% trans "Votes" %}" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/></td>
                         <td>{{votes_number}}</td>
                     </tr>
                 </table>
@@ -770,7 +770,7 @@
                                 <label for="sharing_code">{% trans "Copy this" %}</label>
                                 <div id="clip-container">
                                     <div id="clip" class="clip">
-                                        <img alt="{% trans "Copy" %}" src="/static/icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <img alt="{% trans "Copy" %}" src="{{STATIC_URL}}icons/copy.png" />&nbsp;&nbsp;&nbsp;&nbsp;
                                     </div>
                                     <div class="flash-container"></div>
                                     <div class="clip-status">{% trans "Copy" %}</div>
@@ -795,7 +795,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript" src="/static/js/jquery.raty.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.raty.js"></script>
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "ur-15649ecb-6f21-a004-8032-7cf8416c478c"}); </script>
@@ -810,7 +810,7 @@ $(document).ready(function() {
             dataType: 'json',
             timeout: 5000,
             success: function(data, textStatus, XMLHttpRequest) {
-                $heart.attr('src', '/static/icons/iconic/red/heart_fill_24x21.png');
+                $heart.attr('src', '{{STATIC_URL}}icons/iconic/red/heart_fill_24x21.png');
                 $link.attr('title', "{% trans "Favorited!" %}");
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -1102,7 +1102,7 @@ $(document).ready(function() {
                             <input class=\"btn btn-mini btn-primary\" type=\"submit\" value=\"{% trans "Save" %}\" />\
                             <input class=\"btn btn-mini cancel\" type=\"reset\" value=\"{% trans "Cancel" %}\" />\
                             <span class=\"loader\">\
-                                <img src=\"/static/images/ajax-loader.gif\" alt=\"\"/>\
+                                <img src=\"{{STATIC_URL}}images/ajax-loader.gif\" alt=\"\"/>\
                             </span>\
                             <span class=\"formatting-help\">\
                                 <a href=\"{% url faq %}#10\" target=\"_blank\">{% trans "Formatting help" %}</a>\
@@ -1224,7 +1224,7 @@ $(document).ready(function() {
         return false;
     });
 
-    common.init(
+    astrobin_common.init(
         '{{image.user.username}}',
         {
             follow_action: {
@@ -1255,10 +1255,10 @@ $(document).ready(function() {
             }
         });
 
-    common.setup_gear_popovers('{% trans "Follow" %}', '{% trans "Unfollow" %}');
-    common.setup_subject_popovers('{% trans "Follow" %}', '{% trans "Unfollow" %}');
+    astrobin_common.setup_gear_popovers('{% trans "Follow" %}', '{% trans "Unfollow" %}');
+    astrobin_common.setup_subject_popovers('{% trans "Follow" %}', '{% trans "Unfollow" %}');
 
-    image_detail.init(
+    astrobin_image_detail.init(
         {{image.id}},
         {% if is_revision %}{{revision_image.id}}{% else %}0{% endif %},
         "{{image.user.username}}",
@@ -1318,12 +1318,12 @@ $(document).ready(function() {
             }
         });
 
-        stats.init();
-        stats.plot(
+        astrobin_stats.init();
+        astrobin_stats.plot(
             '#image-pill-views .plot',
             '{% url stats_image_views image.id 'daily' %}',
             5000);
-        stats.enableTooltips('#views .plot');
+        astrobin_stats.enableTooltips('#views .plot');
     });
 </script>
 {% endblock %}

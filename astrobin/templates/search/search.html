@@ -297,7 +297,7 @@
         {% endautoescape %}
 
         var $controls = $('.search-category .header .control');
-        if (!common.utils.checkParameterExists('q')) {
+        if (!astrobin_common.utils.checkParameterExists('q')) {
             $controls.closest('.search-category').find('.content').hide();
             $controls.html('<a class="expand" href="#">[+]</a>');
         } else {

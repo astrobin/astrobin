@@ -7,7 +7,7 @@
     {% if object.image.is_stored %}
     <li class="thumbnail astrobin-thumbnail">
         <a href="{% url image_detail object.image.id %}">
-            <img src="{% if object.image.is_stored %}http://astrobin_images.{{s3_url}}/{{object.image.filename}}_thumb.png{% else %}/static/icons/iconic/orange/waiting_thumbnail.png{% endif %}"
+            <img src="{% if object.image.is_stored %}http://astrobin_images.{{s3_url}}/{{object.image.filename}}_thumb.png{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="capty-fixed"
                  id="#capty-content-{{object.image.id}}-{{randomid}}"
                  alt="{{object.image.title|default:_("(no title)")}}"
