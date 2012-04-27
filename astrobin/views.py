@@ -3162,7 +3162,7 @@ def gear_popover_ajax(request, id):
     elif gear_type == 'Camera':
         template = 'popover/gear_camera.html'
     elif gear_type == 'FocalReducer':
-        template = 'popover/gear_focal_reducers.html'
+        template = 'popover/gear_focal_reducer.html'
     elif gear_type == 'Software':
         template = 'popover/gear_software.html'
     elif gear_type == 'Filter':
