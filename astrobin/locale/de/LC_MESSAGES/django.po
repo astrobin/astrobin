@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-21 14:06-0400\n"
-"PO-Revision-Date: 2012-02-24 09:06+0100\n"
-"Last-Translator: Michlll <astrobin.com@darkchamber.de>\n"
+"PO-Revision-Date: 2012-04-22 10:00+0100\n"
+"Last-Translator: leonh <leonh@ndreke.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -1023,7 +1023,7 @@ msgstr ""
 #: forms.py:50
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr ""
-"Wenn möglich bitte Katalognamen (z.B. M101, NGC224 oder IC1370) benutzen."
+"Wenn möglich bitte Katalognamen (z.B. M101, NGC224 oder IC1370) verwenden."
 
 #: forms.py:55 templates/image/detail.html:364
 #: templates/image/detail.html.py:617 templates/image/detail.html:1085
@@ -1336,14 +1336,12 @@ msgid "Dutch"
 msgstr "Niederländisch"
 
 #: models.py:47 models.py:59 settings.py:58
-#, fuzzy
 msgid "Turkish"
-msgstr "Turkmenistan"
+msgstr "Türkisch"
 
 #: models.py:48 models.py:60 settings.py:59
-#, fuzzy
 msgid "Albanian"
-msgstr "Albanien"
+msgstr "Albanisch"
 
 #: models.py:64
 msgid "Pulsars"
@@ -2193,9 +2191,8 @@ msgstr "Ansichten, täglich"
 
 #: stats.py:344 templates/subject/page.html:75
 #: templates/subject/page.html.py:110
-#, fuzzy
 msgid "Total images"
-msgstr "Keine Bilder"
+msgstr "Anzahl Bilder"
 
 #: stats.py:480 stats.py:541
 #, fuzzy
@@ -2675,7 +2672,7 @@ msgid ""
 "page, that you can sort and filter to your liking."
 msgstr ""
 "Der beste Weg sich über Neuigkeiten auf AstroBin zu informieren: Eine große "
-"Übersicht mit 100 Fotos pro Seite, welche nach Deinen Bedürfnissen gefiltert "
+"Übersicht mit 100 Fotos pro Seite, welche nach deinen Bedürfnissen gefiltert "
 "und sortiert werden können."
 
 #: templates/explore_choose.html:12
