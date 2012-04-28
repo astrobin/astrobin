@@ -2,10 +2,10 @@
 {% load tags %}
 
 <h3>{{gear.name}}</h3>
-<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>
-<p><strong>{% trans "Pixel size" %}</strong>: {{gear.pixel_size}} &mu;m</p>
-<p><strong>{% trans "Sensor width" %}</strong>: {{gear.sensor_width}} mm</p>
-<p><strong>{% trans "Sensor height" %}</strong>: {{gear.sensor_height}} mm</p>
+{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
+{% if gear.pixel_size %}<p><strong>{% trans "Pixel size" %}</strong>: {{gear.pixel_size}} &mu;m</p>{% endif %}
+{% if gear.sensor_width %}<p><strong>{% trans "Sensor width" %}</strong>: {{gear.sensor_width}} mm</p>{% endif %}
+{% if gear.sensor_height %}<p><strong>{% trans "Sensor height" %}</strong>: {{gear.sensor_height}} mm</p>{% endif %}
 
 <div class="actions">
     <a class="btn btn-mini btn-primary" href="/search/?q=&as_values_imaging_cameras={{gear.id}}{% search_form_query %}">{% trans "Find images" %}</a>
