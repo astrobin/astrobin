@@ -33,7 +33,7 @@
          </div>
          
          <div class="message-form">
-            <form class="form-horizontal" method="POST" class="reply-form" action="{% url message_reply thread.pk %}">
+            <form class="reply-form form-horizontal" method="POST" action="{% url message_reply thread.pk %}">
                <a name="reply"></a>
                {{ form|as_bootstrap }}
                <div class="form-actions">
@@ -58,7 +58,7 @@
                      if ($('.reply-form #id_body').val() != '') {
                          $('.reply-form .submit-button')
                             .attr('disabled', 'disabled')
-                            .addClass('button-disabled')
+                            .addClass('btn-disabled')
                             .val("{% trans "Sending..." %}");
                      }
                  },
@@ -71,7 +71,7 @@
 
                     $('.reply-form .submit-button')
                         .removeAttr('disabled')
-                        .removeClass('button-disabled')
+                        .removeClass('btn-disabled')
                         .val("{% trans "Reply" %}");
                  },
                  error: function(data) {
