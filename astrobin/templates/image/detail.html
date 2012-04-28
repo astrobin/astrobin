@@ -1282,7 +1282,7 @@ $(document).ready(function() {
                     "{% trans "Good" %}",
                     "{% trans "Gorgeous" %}"],
                 {% endif %}
-                read_only: {% if request.user.is_authenticated and not already_voted %} false {% else %} true {% endif %}
+                read_only: {% if request.user.is_authenticated and not already_voted and request.user != image.user %} false {% else %} true {% endif %}
             },
             upload_revision_action: {
                 dialog: {
