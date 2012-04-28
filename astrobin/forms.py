@@ -458,13 +458,17 @@ class SolarSystem_AcquisitionForm(forms.ModelForm):
 
     def clean_seeing(self):
         data = self.cleaned_data['seeing']
-        if data and data not in range(1, 5):
+        if data and data not in range(1, 6):
             raise forms.ValidationError(_("Please enter a value between 1 and 5."))
+
+        return data
 
     def clean_transparency(self):
         data = self.cleaned_data['transparency']
-        if data and data not in range(1, 10):
+        if data and data not in range(1, 11):
             raise forms.ValidationError(_("Please enter a value between 1 and 10."))
+
+        return data
 
     class Meta:
         model = SolarSystem_Acquisition
