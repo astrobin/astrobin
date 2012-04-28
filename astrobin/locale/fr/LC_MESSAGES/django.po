@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-21 14:07-0400\n"
-"PO-Revision-Date: 2012-04-24 17:42+0100\n"
+"PO-Revision-Date: 2012-04-28 19:14+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -1146,7 +1146,7 @@ msgstr "Utilisateurs"
 
 #: forms.py:261
 msgid "Telescope type"
-msgstr "Type du télescope"
+msgstr "Type d'instrument"
 
 #: forms.py:262 forms.py:268
 msgid "Any"
@@ -1172,7 +1172,7 @@ msgstr "Exprimez les valeurs en heures"
 #: templates/image/detail.html.py:702 templates/image/detail.html:703
 #: templates/search/search.html:194
 msgid "License"
-msgstr "Licence"
+msgstr "Type de licence"
 
 #: forms.py:324
 msgid ""
@@ -2527,7 +2527,7 @@ msgstr "Sélectionnez s'il vous plaît votre langue dans les options ci-dessus."
 
 #: templates/base.html:186
 msgid "My places"
-msgstr "Mes lieux"
+msgstr "Mon compte"
 
 #: templates/base.html:187
 msgid "My page"
@@ -3157,9 +3157,9 @@ msgid ""
 "done with it. <em>AstroBin</em>, instead, has a user interface specifically "
 "designed to enable you to input all the technical data of your image."
 msgstr ""
-"Sur un site d'hébergement, on se contente de charger l'image et c'est "
-"terminé. <em>AstroBin</em>, en revanche, possède une interface permettant de "
-"lier les données techniques et l'image."
+"Sur un site d'hébergement généraliste, on se contente seulement de charger "
+"une image. <em>AstroBin</em>, en revanche, possède une interface permettant "
+"de lier les données techniques et l'image."
 
 #: templates/help.html:26
 msgid ""
@@ -3172,7 +3172,7 @@ msgid ""
 msgstr ""
 "<em>AstroBin</em> complète vos entrées en se basant sur une vaste base de "
 "données: télescopes, CCD, filtres, objets astronomiques issus de nombreux "
-"catalogues, apparaissent dans des listes prédéfinies. Une simple sélection "
+"catalogues, apparaissent dans des listes prédéfinies: une simple sélection "
 "permet alors de taper rapidement leur noms. <em>AstroBin</em> est également "
 "relié à la base de données astronomiques SIMBAD contenant plus de 5 millions "
 "d'objets sous 15 millions de noms!"
@@ -3215,12 +3215,13 @@ msgid ""
 "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
 "want, you can search by telescope diameter too!"
 msgstr ""
-"Astrobin peut vous aider pour l'achat de votre prochain télescope ou "
-"imageur, en comparant les configurations matérielles des autres "
+"Astrobin peut également vous aider pour l'achat de votre prochain instrument "
+"ou imageur, en comparant les configurations matérielles des autres "
 "utilisateurs. Par exemple, vous pouvez rechercher toutes les images prises "
 "avec un Canon 5D et n'importe quelle lunette apochromatique, ou une SBIG "
 "ST-8300 avec n'importe quel Richtey-Chrétien. Et si vous le désirez, vous "
-"pouvez également filtrer la recherche par diamètre de télescope !"
+"pouvez également filtrer la recherche en indiquant le diamètre de "
+"l'instrument !"
 
 #: templates/help.html:41
 msgid ""
@@ -3668,9 +3669,10 @@ msgid ""
 "subject, one image has been chosen. Use the menu to limit the images to "
 "those acquired from a certain latitude on Earth."
 msgstr ""
-"Voici les objets les plus populaires sur AstroBin, mois par mois. Pour "
-"chaque objet, une image a été sélectionnée. Utilisez le menu pour "
-"restreindre aux images acquises depuis une latitude terrestre donnée."
+"Voici les cibles les plus populaires sur AstroBin, classées par mois. Pour "
+"chaque objet, une image a été sélectionnée parmi les différentes "
+"publications. Utilisez le menu \"Latitude\" pour restreindre la sélection aux "
+"images acquises depuis une latitude terrestre donnée."
 
 #: templates/nightly.html:7
 msgid "Images acquired night after night"
@@ -3681,8 +3683,8 @@ msgid ""
 "On this page you can see images that were actually taken each night, and not "
 "merely uploaded on a particular date."
 msgstr ""
-"Sur cette page, vous pouvez consulter les images prises chaque nuit, et pas "
-"simplement en fonction de leur date de publication."
+"Sur cette page, vous pouvez consulter les images prises chaque nuit, et ce, "
+"indépendamment de leur date de publication."
 
 #: templates/nightly.html:27
 msgid "No image acquired in the selected month."
@@ -3749,11 +3751,11 @@ msgstr "Chargement en cours..."
 
 #: templates/stats.html:32
 msgid "Global distribution of camera types"
-msgstr "Répartition globale des types d'imageur"
+msgstr "Répartition globale des types d'imageurs"
 
 #: templates/stats.html:50
 msgid "Global distribution of telescope types"
-msgstr "Répartition globale des types de télescope"
+msgstr "Répartition globale des types d'instruments"
 
 #: templates/stats.html:70
 msgid "CCD vs DLSR: the global trend"
@@ -3761,7 +3763,7 @@ msgstr "CCD vs APN: tendance globale"
 
 #: templates/stats.html:80
 msgid "Global trend of telescope types"
-msgstr "Tendance globale de types de télescope"
+msgstr "Tendance globale des types d'instruments"
 
 #: templates/tos.html:9
 msgid ""
@@ -3795,7 +3797,7 @@ msgstr "Note"
 
 #: templates/wall.html:42 templates/image/detail.html:681
 msgid "Favorited"
-msgstr "Marquée comme favori"
+msgstr "Ajouts favoris"
 
 #: templates/wall.html:55
 msgid "Filter by"
@@ -3897,7 +3899,7 @@ msgid ""
 "revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
 "\"%(profile_url)s\">Public Area</a>."
 msgstr ""
-"Cette image est encore une <strong>ébauche</strong> situé dans votre <a "
+"Cette image est encore une <strong>ébauche</strong> située dans votre <a "
 "href=\"%(profile_url)s?staging\">Zone d'attente</a>. Cela signifie que "
 "personne ne peut la consulter, à moins que vous ne communiquiez un des liens "
 "du menu <em>Partager</em> ci-dessous. Utilisez ces liens pour poster "
@@ -4858,7 +4860,7 @@ msgstr "Message envoyé"
 #: templates/messages/view.html:10
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
-msgstr "Une discussion entre <a href=\"%(sender_url)s\">vous</a> and"
+msgstr "Une discussion entre <a href=\"%(sender_url)s\">vous</a> et"
 
 #: templates/messages/view.html:18
 msgid "Delete conversation"
@@ -5463,11 +5465,11 @@ msgstr "Réinitialiser le mot de passe"
 
 #: templates/registration/logout.html:5
 msgid "Good bye!"
-msgstr "Au revoir!"
+msgstr "A bientôt!"
 
 #: templates/registration/logout.html:6
 msgid "You have been logged out. Come back soon!"
-msgstr "Vous êtes à présent déconnecté. A bientôt!"
+msgstr "Vous êtes à présent déconnecté."
 
 #: templates/registration/password_change_done.html:5
 msgid "Password changed"
@@ -5625,7 +5627,7 @@ msgstr "Sélectionner types"
 #: templates/search/search.html:326 templates/search/search.html.py:333
 #: templates/search/search.html:342
 msgid "# selected"
-msgstr "# sélectionnée(s)"
+msgstr "# sélectionné(s)"
 
 #: templates/search/search.html:341
 msgid "Select licenses"
