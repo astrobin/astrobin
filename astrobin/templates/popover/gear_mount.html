@@ -2,9 +2,9 @@
 {% load tags %}
 
 <h3>{{gear.name}}</h3>
-<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>
-<p><strong>{% trans "Max. payload" %}</strong>: {{gear.max_payload}} kg</p>
-<p><strong>{% trans "Periodic error" %}</strong>: {{gear.pe}}"</p>
+{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
+{% if gear.max_payload %}<p><strong>{% trans "Max. payload" %}</strong>: {{gear.max_payload}} kg</p>{% endif %}
+{% if gear.pe %}<p><strong>{% trans "Periodic error" %}</strong>: {{gear.pe}}"</p>{% endif %}
 
 <div class="actions">
     <a class="btn btn-mini btn-primary" href="/search/?q={{gear.name}}&type=mounts{% search_form_query %}">{% trans "Find images" %}</a>
