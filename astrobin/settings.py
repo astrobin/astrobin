@@ -191,6 +191,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'contact_form',
     'pipeline',
+    'tastypie',
 )
 
 LOGIN_REDIRECT_URL = '/'
