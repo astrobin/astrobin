@@ -1902,7 +1902,7 @@ p.small {
   display: none;
 }
 .row.section {
-  margin-bottom: 16px;
+  margin-bottom: 52px;
 }
 .bubble {
   position: relative;
@@ -1945,4 +1945,7 @@ p.small {
 }
 .alert-info strong {
   color: #333333;
+}
+code {
+  display: block;
 }
