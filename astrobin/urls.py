@@ -28,6 +28,18 @@ from astrobin.models import Image
 from astrobin.search import ImageSearchView
 from astrobin.forms import AdvancedSearchForm
 
+from tastypie.api import Api
+from astrobin.api import ImageResource, ImageRevisionResource,\
+                         SubjectResource, SubjectIdentifierResource, \
+                         CommentResource
+
+v1_api = Api(api_name = 'v1')
+v1_api.register(ImageResource())
+v1_api.register(ImageRevisionResource())
+v1_api.register(SubjectResource())
+v1_api.register(SubjectIdentifierResource())
+v1_api.register(CommentResource())
+
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^(?P<id>\d+)/$', views.image_detail, name='image_detail'),
@@ -223,5 +235,7 @@ urlpatterns = patterns('',
     url(r'^avatar/', include('avatar.urls')),
 
     url(r'^get-gear-ajax/(?P<image_id>\d+)/$', views.get_gear_ajax, name='get_gear_ajax'),
+
+    url(r'^api/', include(v1_api.urls)),
 )
 

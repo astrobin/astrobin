@@ -89,9 +89,10 @@ ln -s ./venv/bin/pip vpip
     django-uni-form \
     Markdown \
     django-bootstrap-toolkit \
-    django-pipeline \
+    django-pipeline==1.2.1 \
     jsmin \
-    cssmin
+    cssmin \
+    django-tastypie
 
 Install django-hitcount from sources:
 https://github.com/thornomad/django-hitcount/
