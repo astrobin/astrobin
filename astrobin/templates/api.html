@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}AstroBin - API (beta){% endblock %}
+
+{% block content %}
+    <h1>AstroBin API documentation (beta)</h1>
+
+    <div class="alert alert-info">
+        <strong>Note:</strong> API documentation is only available in English.
+    </div>
+
+    <div class="row section">
+        <div class="span4">
+            <div class="subtle-container">
+                <h2>Step 1 &rarr;</h2>
+                <p>
+                    Get your <a href="#">API Key</a> <strong>for free!</strong>
+                </p>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="subtle-container">
+                <h2>Step 2 &rarr;</h2>
+                <p>
+                    <strong>Perform queries:</strong>
+                    <ul>
+                        <li>Get image data</li>
+                        <li>Search images</li>
+                        <li>Filter and order</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="subtle-container">
+                <h2>Step 3</h2>
+                <p>
+                    <strong>Build amazing apps!</strong>
+                    <ul>
+                        <li>Websites</li>
+                        <li>Desktop applications</li>
+                        <li>Mobile apps for any platform</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row section">
+        <div class="span6">
+            <h2>In short.</h2>
+            <p>
+                AstroBin implements a basic set of <strong>REST</strong>ful APIs. Currently the APIs are
+                read-only, and they allow you to get data about images, and perform some
+                basic searches.
+            </p>
+            <p>
+                Using AstroBin's APIs you will be able to create your own website, desktop
+                application of mobile app that can use some content from AstroBin.
+            </p>
+            <p>
+                Some possibilities:
+                <ul>
+                    <li>A web widget that displays the recent images of a certain user.</li>
+                    <li>A web widget that displays the <em>Hot right now</em> image.</li>
+                    <li>An iPhone/Android/other app for browsing AstroBin effectively.</li>
+                    <li>... and many more!</li>
+                </ul>
+            </p>
+
+            <h2>Availability and limitations.</h2>
+            <p>
+                AstroBin's API currently are limited to retrieving basic information and
+                perform simple search on images.
+            </p>
+            <p>
+                The supported response types are XML and JSON.
+            </p>
+        </div>
+        <div class="span6">
+            <h2>How to get started.</h2>
+            <p>
+                The first thing you will need is an <strong>API Key</strong>. Please use the
+                <a href="#">API Key request form</a> to get one.
+            </p>
+
+            <h2>How to display images.</h2>
+            <p>
+                If you get an Image object using the APIs, it will have a <em>filename</em>
+                and <em>original_ext</em> field. To display the image, you must append them
+                to <strong>http://astrobin_images.s3.amazonaws.com/</strong>.
+            </p>
+            <p>
+                This will give you the full size image. If you want a smaller version, you can
+                append <em>_resized</em> to the filename.
+            </p>
+            <p>
+                For a thumbnail, append <em>_thumbnail</em> and use the .png extension.
+            </p>
+            <h2>Fair use.</h2>
+            <p>
+                For good measures, the API usage is throttled to a maximum of 500 requests per
+                hour.
+            </p>
+            <p>
+                Using the APIs to merciless scrape all the available content is not allowed.
+                Failure to respect this requirement will incur in the permanent revocation of
+                one's API Key.
+            </p>
+        </div>
+    </div>
+{% endblock %}
+

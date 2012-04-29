@@ -2847,6 +2847,12 @@ def help(request):
 
 
 @require_GET
+def api(request):
+    return render_to_response('api.html',
+        context_instance=RequestContext(request))
+
+
+@require_GET
 def faq(request):
     return render_to_response('faq.html',
         context_instance=RequestContext(request))
