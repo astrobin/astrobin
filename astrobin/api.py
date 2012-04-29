@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from tastypie.resources import ModelResource, ALL
 from tastypie import fields
 
@@ -54,7 +56,7 @@ class ImageRevisionResource(ModelResource):
     
 
 class ImageResource(ModelResource):
-    author = fields.CharField()
+    user = fields.CharField('user__username')
     revisions = fields.ToManyField(ImageRevisionResource, 'imagerevision_set')
 
     subjects = fields.ToManyField(SubjectResource, 'subjects')
@@ -62,16 +64,19 @@ class ImageResource(ModelResource):
     imaging_telescopes = fields.ListField()
     imaging_cameras = fields.ListField()
 
+    uploaded = fields.DateField('uploaded')
+    updated = fields.DateField('updated')
+
     comments = fields.ToManyField(CommentResource, 'comment_set')
 
     class Meta:
         queryset = Image.objects.filter(is_stored = True, is_wip = False)
         fields = [
             'id',
-            'author',
             'title',
-            'uploaded',
-            'updated',
+
+            'filename',
+            'original_ext',
             'description',
             'h',
             'w',
@@ -97,12 +102,13 @@ class ImageResource(ModelResource):
         filtering = {
             'title': ALL,
             'is_solved': ('exact',),
-            'author': ALL,
+            'user': ALL,
             'uploaded': ALL,
             'fieldw': ALL,
             'fieldh': ALL,
             'fieldunits': ALL,
         }
+        ordering = ['rating_score', 'rating_votes']
 
     def dehydrate_imaging_telescopes(self, bundle):
         telescopes = bundle.obj.imaging_telescopes.all()
@@ -112,17 +118,16 @@ class ImageResource(ModelResource):
         cameras = bundle.obj.imaging_cameras.all()
         return [x.name for x in cameras]
 
-    def dehydrate_author(self, bundle):
-        return bundle.obj.user.username
-
     def build_filters(self, filters = None):
         if filters is None:
             filters = {}
 
         orm_filters = super(ImageResource, self).build_filters(filters)
 
-        #if 'author' in filters:
-        #   qs = Image.objects.filter(user__username = filters['author'])
-        #   orm_filters['pk__in'] = [i.pk for i in qs]
+        if 'subject' in filters:
+            qs = Image.objects.filter(
+                Q(subjects__mainId = filters['subject']) |
+                Q(subjects__idlist__identifier = filters['subject']))
+            orm_filters['pk__in'] = [i.pk for i in qs]
 
         return orm_filters
