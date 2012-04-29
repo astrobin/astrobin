@@ -2,6 +2,7 @@ from django.db.models import Q
 
 from tastypie.resources import ModelResource, ALL
 from tastypie import fields
+from tastypie.authentication import ApiKeyAuthentication
 
 from astrobin.models import Image, ImageRevision, Subject, SubjectIdentifier, \
                             Comment
@@ -10,6 +11,7 @@ class SubjectResource(ModelResource):
     identifiers = fields.ToManyField('astrobin.api.SubjectIdentifierResource', 'idlist')
 
     class Meta:
+        authentication = ApiKeyAuthentication()
         queryset = Subject.objects.all()
         allowed_methods = ['get']
 
@@ -18,6 +20,7 @@ class SubjectIdentifierResource(ModelResource):
     subject = fields.ForeignKey(SubjectResource, 'subject')
 
     class Meta:
+        authentication = ApiKeyAuthentication()
         queryset = SubjectIdentifier.objects.all()
         allowed_methods = ['get']
 
@@ -28,6 +31,7 @@ class CommentResource(ModelResource):
     replies = fields.ToManyField('self', 'children')
 
     class Meta:
+        authentication = ApiKeyAuthentication()
         queryset = Comment.objects.all()
         fields = ['comment', 'added']
 
@@ -44,6 +48,7 @@ class ImageRevisionResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
 
     class Meta:
+        authentication = ApiKeyAuthentication()
         queryset = ImageRevision.objects.all()
         fields = [
             'uploaded',
@@ -70,6 +75,7 @@ class ImageResource(ModelResource):
     comments = fields.ToManyField(CommentResource, 'comment_set')
 
     class Meta:
+        authentication = ApiKeyAuthentication()
         queryset = Image.objects.filter(is_stored = True, is_wip = False)
         fields = [
             'id',
