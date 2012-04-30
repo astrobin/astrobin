@@ -159,6 +159,12 @@
                                         <img src="{{STATIC_URL}}icons/flags/16/Turkey.png" alt="Türk"/> Türk
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{% url set_language "sq" %}" title="shqipe">
+                                        <img src="{{STATIC_URL}}icons/flags/16/Albania.png" alt="shqipe"/> shqipe
+                                    </a>
+                                </li>
+
                                 <li class="divider"></li>
                                 <li>
                                     <a href="http://translate.astrobin.com/" target="_blank">
@@ -429,13 +435,14 @@
 
 
             $(document).ready(function() {
-                {% if request.user.is_authenticated %}
-                var ver = getInternetExplorerVersion();
-                if (ver == -1) {
-                    astrobin_common.start_listeners('{{request.user.username}}');
-                }
-                {%endif %}
-
+                {% comment %}
+                    {% if request.user.is_authenticated %}
+                    var ver = getInternetExplorerVersion();
+                    if (ver == -1) {
+                        astrobin_common.start_listeners('{{request.user.username}}');
+                    }
+                    {%endif %}
+                {% endcomment %}
                 astrobin_common.init_ajax_csrf_token();
 
                 $('.dropdown-toggle').dropdown();
