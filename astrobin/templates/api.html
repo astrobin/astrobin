@@ -15,7 +15,7 @@
             <div class="subtle-container">
                 <h2>Step 1 &rarr;</h2>
                 <p>
-                    Get your <a href="#">API Key</a> <strong>for free!</strong>
+                    Get your <a href="{% url app_api_key_request %}">API Key</a> <strong>for free!</strong>
                 </p>
             </div>
         </div>
@@ -25,8 +25,8 @@
                 <p>
                     <strong>Perform queries:</strong>
                     <ul>
-                        <li>Get image data</li>
                         <li>Search images</li>
+                        <li>Get image data</li>
                         <li>Filter and order</li>
                     </ul>
                 </p>
@@ -82,7 +82,7 @@
             <h2>How to get started.</h2>
             <p>
                 The first thing you will need is an <strong>API Key</strong>. Please use the
-                <a href="#">API Key request form</a> to get one.
+                <a href="{% url app_api_key_request %}">API Key request form</a> to get one.
             </p>
 
             <h2>How to display images.</h2>
@@ -100,7 +100,7 @@
             </p>
             <h2>Fair use.</h2>
             <p>
-                For good measures, the API usage is throttled to a maximum of 500 requests per
+                For good measure, the API usage is throttled to a maximum of 500 requests per
                 hour.
             </p>
             <p>
