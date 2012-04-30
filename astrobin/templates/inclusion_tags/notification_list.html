@@ -2,7 +2,7 @@
 
 {% if notifications %}
     {% for n in notifications %}
-    <li {% if n.unseen %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>
+    <li {% if n.unseen %}class="unread"{% endif %}>
         {% autoescape off %}{{n.message}}{% endautoescape %}
     </li>
     {% endfor %}
