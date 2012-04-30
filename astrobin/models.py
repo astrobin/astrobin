@@ -3,6 +3,12 @@ from datetime import datetime
 import os
 import urllib2
 import simplejson
+import hmac
+try:
+    from hashlib import sha1
+except ImportError:
+    import sha
+    sha1 = sha.sha
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -1327,3 +1333,110 @@ def blog_entry_notify(sender, instance, created, **kwargs):
 
 post_save.connect(blog_entry_notify, sender = Entry)
 
+
+class App(models.Model):
+    registrar = models.OneToOneField(
+        User,
+        editable = False,
+        related_name = 'app_api_key')
+
+    name = models.CharField(
+        max_length = 256,
+        blank = False)
+
+    description = models.TextField(
+        null = True,
+        blank = True)
+
+    key = models.CharField(
+        max_length = 256,
+        editable = False,
+        blank = True,
+        default = '')
+
+    secret = models.CharField(
+        max_length = 256,
+        editable = False,
+        blank = True,
+        default = '')
+
+    active = models.BooleanField(
+        editable = False,
+        default = True)
+
+    created = models.DateTimeField(
+        editable = False,
+        auto_now_add = True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def __unicode__(self):
+        return u"%s for %s" % (self.key, self.registrar)
+    
+    def save(self, *args, **kwargs):
+        if not self.key:
+            self.key = self.generate_key()
+        if not self.secret:
+            self.secret = self.generate_key()
+        
+        return super(App, self).save(*args, **kwargs)
+    
+    def generate_key(self):
+        # Get a random UUID.
+        new_uuid = uuid.uuid4()
+        # Hmac that beast.
+        return hmac.new(str(new_uuid), digestmod=sha1).hexdigest()
+
+
+class AppApiKeyRequest(models.Model):
+    registrar = models.OneToOneField(
+        User,
+        editable = False,
+        related_name = 'app_api_key_request')
+
+    name = models.CharField(
+        verbose_name = _("Name"),
+        help_text = _("The name of the website or app that wishes to use the APIs."),
+        max_length = 256,
+        blank = False)
+
+    description = models.TextField(
+        null = True,
+        blank = True,
+        verbose_name = _("Description"),
+        help_text = _("Please explain the purpose of your application, and how you intend to use the API."))
+
+    approved = models.BooleanField(
+        editable = False,
+        default = False)
+
+    created = models.DateTimeField(
+        editable = False,
+        auto_now_add = True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def __unicode__(self):
+        return 'API request: %s' % self.name
+
+    def save(self, *args, **kwargs):
+        return super(AppApiKeyRequest, self).save(*args, **kwargs)
+
+        from django.core.mail.message import EmailMessage
+        message = {
+            'from_email': 'astrobin@astrobin.com',
+            'to': 'astrobin@astrobin.com',
+            'subject': 'App API Key request from %s' % self.registrar.username,
+            'body': 'Check the site\'s admin.',
+        }
+        EmailMessage(**message).send(fail_silently = False)
+    
+    def approve(self):
+        app = App(registrar = self.registrar, name = self.name,
+                  description = self.description)
+        app.save()
+
+        self.approved = True
+        self.save()

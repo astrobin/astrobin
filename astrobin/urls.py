@@ -238,5 +238,8 @@ urlpatterns = patterns('',
     url(r'^get-gear-ajax/(?P<image_id>\d+)/$', views.get_gear_ajax, name='get_gear_ajax'),
 
     url(r'^api/', include(v1_api.urls)),
+    url(r'^api/request-key/$', views.app_api_key_request, name = 'app_api_key_request'),
+    url(r'^api/request-key/process/$', views.app_api_key_request_process, name = 'app_api_key_request_process'),
+    url(r'^api/request-key/complete/$', views.app_api_key_request_complete, name = 'app_api_key_request_complete'),
 )
 

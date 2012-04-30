@@ -3371,9 +3371,46 @@ def get_gear_ajax(request, image_id):
         ids = [int(x) for x in getattr(image, attr).all().values_list('id', flat = True)]
         response_dict[attr] = ids
 
-    print response_dict
-
     return HttpResponse(
         simplejson.dumps(response_dict),
         mimetype = 'application/javascript')
+
+
+@require_GET
+@login_required
+def app_api_key_request(request):
+    form = AppApiKeyRequestForm()
+
+    return render_to_response(
+        'app_api_key_request.html',
+        {
+            'form': form,
+        },
+        context_instance = RequestContext(request))
+
+
+@require_POST
+@login_required
+def app_api_key_request_process(request):
+    key_request = AppApiKeyRequest(registrar = request.user)
+    form = AppApiKeyRequestForm(data = request.POST, instance = key_request)
+    if not form.is_valid():
+        return render_to_response(
+            'app_api_key_request.html',
+            {
+                'form': form,
+            },
+            context_instance = RequestContext(request))
+
+    form.save()
+    return HttpResponseRedirect('/api/request-key/complete/');
+
+
+@require_GET
+@login_required
+def app_api_key_request_complete(request):
+    return render_to_response(
+        'app_api_key_request_complete.html',
+        {},
+        context_instance = RequestContext(request))
 
