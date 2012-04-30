@@ -237,7 +237,7 @@ ZeroClipboard.Client.prototype = {
 				// movie claims it is ready, but in IE this isn't always the case...
 				// bug fix: Cannot extend EMBED DOM elements in Firefox, must use traditional function
 				this.movie = document.getElementById(this.movieId);
-				if (!this.movie) {
+				if (!this.movie || this.movie === undefined) {
 					var self = this;
 					setTimeout( function() { self.receiveEvent('load', null); }, 1 );
 					return;
