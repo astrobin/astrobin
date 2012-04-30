@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% for r in requests %}
-    <li {% if not r.fulfilled %}class="unread"{% endif %}{% if forloop.last %}class="last"{% endif %}>
+    <li {% if not r.fulfilled %}class="unread"{% endif %}>
         {% if r.image %}
         <a href="{{r.image.get_absolute_url}}">
             {% if r.type == 'INFO' %}
