@@ -381,12 +381,12 @@
 
         {% block modals %}{% endblock %}
 
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/flashcanvas.js"></script><![endif]-->
+        <!--[if lte IE 8]><script type="text/javascript" src="{{STATIC_URL}}js/flashcanvas.js"></script><![endif]-->
 
         {% compressed_js 'scripts' %}
-        <script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/Markdown.Converter.js"></script>
-        <script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/Markdown.Sanitizer.js"></script>
-        <script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/ZeroClipboard.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Converter.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Sanitizer.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/ZeroClipboard.js"></script>
 
         <!-- javascript -->
         <script type="text/javascript">
