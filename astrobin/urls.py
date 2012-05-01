@@ -30,14 +30,11 @@ from astrobin.forms import AdvancedSearchForm
 
 from tastypie.api import Api
 from astrobin.api import ImageResource, ImageRevisionResource,\
-                         SubjectResource, SubjectIdentifierResource, \
                          CommentResource
 
 v1_api = Api(api_name = 'v1')
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
-v1_api.register(SubjectResource())
-v1_api.register(SubjectIdentifierResource())
 v1_api.register(CommentResource())
 
 urlpatterns = patterns('',

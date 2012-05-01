@@ -4,8 +4,8 @@ from tastypie.resources import ModelResource, ALL
 from tastypie import fields
 from tastypie.authentication import Authentication
 
-from astrobin.models import Image, ImageRevision, Subject, SubjectIdentifier, \
-                            Comment, App
+from astrobin.models import Image, ImageRevision, Comment, App
+from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
 
 
 class AppAuthentication(Authentication):
@@ -25,24 +25,6 @@ class AppAuthentication(Authentication):
             return False
 
         return True
-
-
-class SubjectResource(ModelResource):
-    identifiers = fields.ToManyField('astrobin.api.SubjectIdentifierResource', 'idlist')
-
-    class Meta:
-        authentication = AppAuthentication()
-        queryset = Subject.objects.all()
-        allowed_methods = ['get']
-
-
-class SubjectIdentifierResource(ModelResource):
-    subject = fields.ForeignKey(SubjectResource, 'subject')
-
-    class Meta:
-        authentication = AppAuthentication()
-        queryset = SubjectIdentifier.objects.all()
-        allowed_methods = ['get']
 
 
 class CommentResource(ModelResource):
@@ -84,7 +66,7 @@ class ImageResource(ModelResource):
     user = fields.CharField('user__username')
     revisions = fields.ToManyField(ImageRevisionResource, 'imagerevision_set')
 
-    subjects = fields.ToManyField(SubjectResource, 'subjects')
+    subjects = fields.ListField()
 
     imaging_telescopes = fields.ListField()
     imaging_cameras = fields.ListField()
@@ -135,6 +117,17 @@ class ImageResource(ModelResource):
             'fieldunits': ALL,
         }
         ordering = ['rating_score', 'rating_votes']
+
+    def dehydrate_subjects(self, bundle):
+        subjects = bundle.obj.subjects.all()
+        ssms = bundle.obj.solar_system_main_subject
+
+        ret = [x.mainId for x in subjects]
+
+        if ssms:
+            ret.append(SOLAR_SYSTEM_SUBJECT_CHOICES[ssms][1])
+
+        return ret
 
     def dehydrate_imaging_telescopes(self, bundle):
         telescopes = bundle.obj.imaging_telescopes.all()
