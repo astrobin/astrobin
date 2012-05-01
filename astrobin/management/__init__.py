@@ -130,6 +130,12 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'api_key_request_approved',
+        _("Your API Key request has been approved"),
+        '',
+        2,
+    ),
 )
 
 

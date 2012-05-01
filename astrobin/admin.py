@@ -205,6 +205,37 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
     hard_merge.short_description = 'Hard merge'
 
 
+class AppApiRequestAdmin(admin.ModelAdmin):
+    list_display = (
+        'registrar',
+        'name',
+        'created',
+        'approved',
+    )
+    list_filter = ('approved',)
+    ordering = ('-created',)
+    actions = ['approve']
+
+    def approve(modeladmin, request, queryset):
+        for api_request in queryset:
+            api_request.approve()
+
+    approve.short_description = 'Approve'
+
+
+class AppAdmin(admin.ModelAdmin):
+    list_display = (
+        'registrar',
+        'name',
+        'key',
+        'secret',
+        'created',
+        'active',
+    )
+    list_filter = ('active',)
+    ordering = ('-created',)
+
+
 admin.site.register(Gear, GearAdmin)
 admin.site.register(GearAssistedMerge, GearAssistedMergeAdmin)
 admin.site.register(Telescope)
@@ -228,3 +259,5 @@ admin.site.register(Location)
 admin.site.register(MessierMarathon)
 admin.site.register(MessierMarathonNominations)
 admin.site.register(Comment)
+admin.site.register(AppApiKeyRequest, AppApiRequestAdmin)
+admin.site.register(App, AppAdmin)

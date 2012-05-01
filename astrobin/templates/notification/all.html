@@ -4,10 +4,6 @@
 {% load tags %}
 
 {% block content %}
-    <div class="full-box clear">
-        <div class="container">
-            <h2>{% trans "Here are your notifications" %}</h2>
-            {% notification_list request 0 0 %}
-        </div>
-    </div>
+    <h1>{% trans "Here are your notifications" %}</h1>
+    {% notification_list request 0 0 %}
 {% endblock %}

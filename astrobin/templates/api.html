@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}AstroBin - API (beta){% endblock %}
+
+{% block content %}
+    <h1>AstroBin API documentation (beta)</h1>
+
+    <div class="alert alert-info">
+        <strong>Note:</strong> API documentation is only available in English.
+    </div>
+
+    <div class="row section">
+        <div class="span4">
+            <div class="subtle-container">
+                <h2>Step 1 &rarr;</h2>
+                <p>
+                    Get your <a href="{% url app_api_key_request %}">API Key</a> <strong>for free!</strong>
+                </p>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="subtle-container">
+                <h2>Step 2 &rarr;</h2>
+                <p>
+                    <strong>Perform queries:</strong>
+                    <ul>
+                        <li>Search images</li>
+                        <li>Get image data</li>
+                        <li>Filter and order</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="subtle-container">
+                <h2>Step 3</h2>
+                <p>
+                    <strong>Build amazing apps!</strong>
+                    <ul>
+                        <li>Websites</li>
+                        <li>Desktop applications</li>
+                        <li>Mobile apps for any platform</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row section">
+        <div class="span6">
+            <h2>In short.</h2>
+            <p>
+                AstroBin implements a basic set of <strong>REST</strong>ful APIs. Currently the APIs are
+                read-only, and they allow you to get data about images, and perform some
+                basic searches.
+            </p>
+            <p>
+                Using AstroBin's APIs you will be able to create your own website, desktop
+                application of mobile app that can use some content from AstroBin.
+            </p>
+            <p>
+                Some possibilities:
+                <ul>
+                    <li>A web widget that displays the recent images of a certain user.</li>
+                    <li>A web widget that displays the <em>Hot right now</em> image.</li>
+                    <li>An iPhone/Android/other app for browsing AstroBin effectively.</li>
+                    <li>... and many more!</li>
+                </ul>
+            </p>
+
+            <h2>Availability and limitations.</h2>
+            <p>
+                AstroBin's API currently are limited to retrieving basic information and
+                perform simple search on images.
+            </p>
+            <p>
+                The supported response types are XML and JSON.
+            </p>
+        </div>
+        <div class="span6">
+            <h2>How to get started.</h2>
+            <p>
+                The first thing you will need is an <strong>API Key</strong>. Please use the
+                <a href="{% url app_api_key_request %}">API Key request form</a> to get one.
+            </p>
+
+            <h2>How to display images.</h2>
+            <p>
+                If you get an Image object using the APIs, it will have a <em>filename</em>
+                and <em>original_ext</em> field. To display the image, you must append them
+                to <strong>http://astrobin_images.s3.amazonaws.com/</strong>.
+            </p>
+            <p>
+                This will give you the full size image. If you want a smaller version, you can
+                append <em>_resized</em> to the filename.
+            </p>
+            <p>
+                For a thumbnail, append <em>_thumbnail</em> and use the .png extension.
+            </p>
+            <h2>Fair use.</h2>
+            <p>
+                Using the APIs to merciless scrape all the available content is not allowed.
+                Failure to respect this requirement will incur in the permanent revocation of
+                one's API Key.
+            </p>
+            <p>
+                Please read the API section in the <a href="{% url tos %}">Terms of Service</a>.
+            </p>
+        </div>
+    </div>
+
+    <div class="row section">
+        <div class="span12">
+            <h2>Some examples</h2>
+            <div class="alert alert-info">
+                All examples omit the base URL <strong>/api/v1</strong> and the
+                <strong>api_key</strong>, <strong>api_secret</strong> and <strong>format</strong>
+                URL arguments, for brevity.<br/>
+                You must add them in real usage, e.g.:<br/>
+                <a href="#">http://astrobin.com/api/v1/.../?...&amp;api_key=123456790&amp;api_secret=0987654321&amp;format=json</a>
+            </div>
+            <p>Remember that you can combine most of these queries, so feel free to experiment!</p>
+            <table class="table">
+                <tr>
+                    <th>Get the 5 top-rated images:</th>
+                    <td><code>image/?order_by=-rating_score&amp;limit=5</code></td>
+                </tr>
+                <tr>
+                    <th>Get a single image by ID:</th>
+                    <td><code>image/1234/</code></td>
+                </tr>
+                <tr>
+                    <th>Search by subject:</th>
+                    <td><code>image/?subject=M31</code></td>
+                </tr>
+                <tr>
+                    <th>Search by author:</th>
+                    <td><code>image/?author=siovene</code></td>
+                </tr>
+                <tr>
+                    <th>Search by case-insensitive, partial title:</th>
+                    <td><code>image/?title__icontains=andromeda</code></td>
+                </tr>
+                <tr>
+                    <th>Search by case-insensitive, partial description:</th>
+                    <td><code>image/?description__icontains=wind</code></td>
+                </tr>
+                <tr>
+                    <th>Other useful partial tricks:</th>
+                    <td><code>__startswith=</code> <code>__endswith=</code>
+                        <code>__contains=</code> <code>__istartswith=</code>
+                        <code>__iendswith</code></td>
+                </tr>
+                <tr>
+                    <th>Search by upload date range:</th>
+                    <td><code>image/?uploaded__gte=2012-04-10%200:00:00&amp;uploaded__lt=2012-04-11%200:00:00</code></td>
+                </tr>
+                <tr>
+                    <th>Comparison operators:</th>
+                    <td><code>__lt=</code> <code>__lte=</code> <code>__gt=</code> <code>__gte=</code></td>
+                </tr>
+                <tr>
+                    <th>Search only plate-solved images</th>
+                    <td><code>image/?is_solved=True</code></td>
+                </tr>
+                <tr>
+                    <th>Search by field size:</th>
+                    <td><code>image/?fieldw__gte=2&amp;fieldh__gte=2&amp;fieldunits=degrees</code>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

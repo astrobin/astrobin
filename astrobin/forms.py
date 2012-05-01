@@ -639,3 +639,10 @@ class CopyGearForm(forms.Form):
         super(CopyGearForm, self).__init__(**kwargs)
         self.fields['image'].queryset = Image.objects.filter(user = user, is_stored = True)
 
+
+class AppApiKeyRequestForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = AppApiKeyRequest
+

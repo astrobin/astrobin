@@ -2,27 +2,29 @@ from django.db.models import Q
 
 from tastypie.resources import ModelResource, ALL
 from tastypie import fields
-from tastypie.authentication import ApiKeyAuthentication
+from tastypie.authentication import Authentication
 
-from astrobin.models import Image, ImageRevision, Subject, SubjectIdentifier, \
-                            Comment
-
-class SubjectResource(ModelResource):
-    identifiers = fields.ToManyField('astrobin.api.SubjectIdentifierResource', 'idlist')
-
-    class Meta:
-        authentication = ApiKeyAuthentication()
-        queryset = Subject.objects.all()
-        allowed_methods = ['get']
+from astrobin.models import Image, ImageRevision, Comment, App
+from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
 
 
-class SubjectIdentifierResource(ModelResource):
-    subject = fields.ForeignKey(SubjectResource, 'subject')
+class AppAuthentication(Authentication):
+    def is_authenticated(self, request, **kwargs):
+        try:
+            app_key = request.GET.get('api_key')
+            app_secret = request.GET.get('api_secret')
+        except:
+            return False
 
-    class Meta:
-        authentication = ApiKeyAuthentication()
-        queryset = SubjectIdentifier.objects.all()
-        allowed_methods = ['get']
+        if app_key == '' or app_secret == '':
+            return False
+
+        try:
+            app = App.objects.get(secret = app_secret, key = app_key)
+        except App.DoesNotExist:
+            return False
+
+        return True
 
 
 class CommentResource(ModelResource):
@@ -31,7 +33,7 @@ class CommentResource(ModelResource):
     replies = fields.ToManyField('self', 'children')
 
     class Meta:
-        authentication = ApiKeyAuthentication()
+        authentication = AppAuthentication()
         queryset = Comment.objects.all()
         fields = ['comment', 'added']
 
@@ -48,7 +50,7 @@ class ImageRevisionResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
 
     class Meta:
-        authentication = ApiKeyAuthentication()
+        authentication = AppAuthentication()
         queryset = ImageRevision.objects.all()
         fields = [
             'uploaded',
@@ -64,7 +66,7 @@ class ImageResource(ModelResource):
     user = fields.CharField('user__username')
     revisions = fields.ToManyField(ImageRevisionResource, 'imagerevision_set')
 
-    subjects = fields.ToManyField(SubjectResource, 'subjects')
+    subjects = fields.ListField()
 
     imaging_telescopes = fields.ListField()
     imaging_cameras = fields.ListField()
@@ -75,7 +77,7 @@ class ImageResource(ModelResource):
     comments = fields.ToManyField(CommentResource, 'comment_set')
 
     class Meta:
-        authentication = ApiKeyAuthentication()
+        authentication = AppAuthentication()
         queryset = Image.objects.filter(is_stored = True, is_wip = False)
         fields = [
             'id',
@@ -107,6 +109,7 @@ class ImageResource(ModelResource):
         allowed_methods = ['get']
         filtering = {
             'title': ALL,
+            'description': ALL,
             'is_solved': ('exact',),
             'user': ALL,
             'uploaded': ALL,
@@ -115,6 +118,17 @@ class ImageResource(ModelResource):
             'fieldunits': ALL,
         }
         ordering = ['rating_score', 'rating_votes']
+
+    def dehydrate_subjects(self, bundle):
+        subjects = bundle.obj.subjects.all()
+        ssms = bundle.obj.solar_system_main_subject
+
+        ret = [x.mainId for x in subjects]
+
+        if ssms:
+            ret.append(SOLAR_SYSTEM_SUBJECT_CHOICES[ssms][1])
+
+        return ret
 
     def dehydrate_imaging_telescopes(self, bundle):
         telescopes = bundle.obj.imaging_telescopes.all()
