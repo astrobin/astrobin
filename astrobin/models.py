@@ -1422,8 +1422,6 @@ class AppApiKeyRequest(models.Model):
         return 'API request: %s' % self.name
 
     def save(self, *args, **kwargs):
-        return super(AppApiKeyRequest, self).save(*args, **kwargs)
-
         from django.core.mail.message import EmailMessage
         message = {
             'from_email': 'astrobin@astrobin.com',
@@ -1432,6 +1430,8 @@ class AppApiKeyRequest(models.Model):
             'body': 'Check the site\'s admin.',
         }
         EmailMessage(**message).send(fail_silently = False)
+
+        return super(AppApiKeyRequest, self).save(*args, **kwargs)
     
     def approve(self):
         app, created = App.objects.get_or_create(
