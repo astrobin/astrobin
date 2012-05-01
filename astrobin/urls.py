@@ -30,14 +30,11 @@ from astrobin.forms import AdvancedSearchForm
 
 from tastypie.api import Api
 from astrobin.api import ImageResource, ImageRevisionResource,\
-                         SubjectResource, SubjectIdentifierResource, \
                          CommentResource
 
 v1_api = Api(api_name = 'v1')
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
-v1_api.register(SubjectResource())
-v1_api.register(SubjectIdentifierResource())
 v1_api.register(CommentResource())
 
 urlpatterns = patterns('',
@@ -105,6 +102,7 @@ urlpatterns = patterns('',
     url(r'^users/(?P<username>[\w.@+-]+)/favorites/$', views.user_page_favorites, name='user_page_favorites'),
     url(r'^users/(?P<username>[\w.@+-]+)/card/$', views.user_page_card, name='user_page_card'),
     url(r'^users/(?P<username>[\w.@+-]+)/plots/$', views.user_page_plots, name='user_page_plots'),
+    url(r'^users/(?P<username>[\w.@+-]+)/apikeys/$', views.user_page_api_keys, name='user_page_api_keys'),
     url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$',
         views.user_profile_stats_get_integration_hours_ajax,
         name = 'stats_integration_hours'),
@@ -194,7 +192,8 @@ urlpatterns = patterns('',
 
     url(r'^stats/', views.stats, name='stats'),
     url(r'^leaderboard/', views.leaderboard, name='leaderboard'),
-    url(r'^help/', views.help, name='help'),
+    url(r'^help/$', views.help, name='help'),
+    url(r'^help/api/$', views.api, name='api'),
     url(r'^faq/', views.faq, name='faq'),
     url(r'^tos/', views.tos, name='tos'),
     url(r'^guidelines/', views.guidelines, name='guidelines'),
@@ -237,5 +236,8 @@ urlpatterns = patterns('',
     url(r'^get-gear-ajax/(?P<image_id>\d+)/$', views.get_gear_ajax, name='get_gear_ajax'),
 
     url(r'^api/', include(v1_api.urls)),
+    url(r'^api/request-key/$', views.app_api_key_request, name = 'app_api_key_request'),
+    url(r'^api/request-key/process/$', views.app_api_key_request_process, name = 'app_api_key_request_process'),
+    url(r'^api/request-key/complete/$', views.app_api_key_request_complete, name = 'app_api_key_request_complete'),
 )
 

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+
+{% block title %}AstroBin - {% blocktrans %}Your API Keys{% endblocktrans %}{% endblock %}
+{% block content %}
+    {% include 'user/profile-subnav.html' %}
+
+    <div class="row section">
+        <div class="span12">
+            <h1>{% blocktrans %}Your API Keys{% endblocktrans %}</h1>
+            {% if api_keys %}
+                <table class="table">
+                        <tr>
+                            <th>{% trans "Name" %}</th>
+                            <th>Key</th>
+                            <th>Secret</th>
+                            <th>{% trans "Created on" %}</th>
+                            <th>{% trans "Active" %}</th>
+                        </tr>
+                    {% for key in api_keys %}
+                        <tr>
+                            <td>{{key.name}}</td>
+                            <td>{{key.key}}</td>
+                            <td>{{key.secret}}</td>
+                            <td>{{key.created}}</td>
+                            <td>
+                                {% if key.active %}
+                                    <img src="{{STATIC_URL}}icons/iconic/white/check_alt_16x16.png" alt="{% trans "Yes" %}"/>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>
+                    {% url api as api_docs_url %}
+                    {% blocktrans %}You don't have any API Keys. Please read the <a href="{{api_docs_url}}">API documentation</a>.{% endblocktrans %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span12">
+            <a class="btn btn-primary" href="{% url app_api_key_request %}">
+                {% trans "Request an API Key" %} &rarr;
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+{% include 'user/profile-js.html' %}
+{% endblock %}

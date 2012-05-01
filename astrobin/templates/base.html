@@ -105,6 +105,8 @@
                                 <li><a href="{% url help %}">{% trans "What is this site?" %}</a></li>
                                 <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
                                 <li class="divider"></li>
+                                <li><a href="{% url api %}">API (beta)</a></li>
+                                <li class="divider"></li>
                                 <li><a href="/contact/">{% trans "Contact" %}</a></li>
                             </ul>
                         </li>
@@ -190,8 +192,37 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-header">{% trans "My places" %}</li>
-                                <li><a href="{% url user_page request.user %}">{% trans "My page" %}</a></li>
+                                <li>
+                                    <a href="{% url user_page request.user %}">
+                                        {% trans "Gallery" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url user_page_favorites request.user %}">
+                                        {% trans "Favorites" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url user_page_card request.user %}">
+                                        {% trans "Technical card" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url user_page_plots request.user %}">
+                                        {% trans "Plots" %}
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{% url user_page_api_keys request.user %}">
+                                        {% trans "API Keys" %}
+                                    </a>
+                                </li>
+
+                                <li class="divider"></li>
                                 <li><a href="{% url messages_inbox %}">{% trans "My messages" %}</a></li>
+                                <li class="divider"></li>
+
                                 <li class="nav-header">{% trans "My settings" %}</li>
                                 <li><a href="{% url profile_edit_basic %}">{% trans "Basic information" %}</a></li>
                                 <li><a href="{% url profile_edit_gear %}">{% trans "Gear" %}</a></li>

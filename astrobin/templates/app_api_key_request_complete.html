@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap_toolkit %}
+
+{% block content %}
+    <h1>{% trans "Your API key request has been submitted" %}</h1>
+    <div class="well">
+    {% blocktrans %}You will receive a reply within 24 hours. Thanks for your interest in using AstroBin's APIs!{% endblocktrans %}
+    </div>
+{% endblock %}
+
