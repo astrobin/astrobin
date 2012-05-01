@@ -1903,6 +1903,23 @@ def user_page_plots(request, username):
 
 
 @require_GET
+def user_page_api_keys(request, username):
+    """Shows the user's API Keys"""
+    user = get_object_or_404(User, username = username)
+    profile = UserProfile.objects.get(user=user)
+    keys = App.objects.filter(registrar = user)
+
+    return render_to_response(
+        'user/api_keys.html',
+        {
+            'user': user,
+            'profile': profile,
+            'api_keys': keys,
+        },
+        context_instance = RequestContext(request))
+
+
+@require_GET
 def user_profile_stats_get_integration_hours_ajax(request, username, period = 'monthly', since = 0):
     user = User.objects.get(username = username)
 

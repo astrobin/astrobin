@@ -1335,7 +1335,7 @@ post_save.connect(blog_entry_notify, sender = Entry)
 
 
 class App(models.Model):
-    registrar = models.OneToOneField(
+    registrar = models.ForeignKey(
         User,
         editable = False,
         related_name = 'app_api_key')
@@ -1390,7 +1390,7 @@ class App(models.Model):
 
 
 class AppApiKeyRequest(models.Model):
-    registrar = models.OneToOneField(
+    registrar = models.ForeignKey(
         User,
         editable = False,
         related_name = 'app_api_key_request')
@@ -1440,3 +1440,11 @@ class AppApiKeyRequest(models.Model):
 
         self.approved = True
         self.save()
+
+        push_notification(
+            [self.registrar], 'api_key_request_approved',
+            {'api_docs_url': settings.ASTROBIN_BASE_URL + '/help/api/',
+             'api_keys_url': settings.ASTROBIN_BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
+             'key': app.key,
+             'secret': app.secret})
+
