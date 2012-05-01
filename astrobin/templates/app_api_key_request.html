@@ -8,6 +8,10 @@
     {% blocktrans %}Thanks for your interest in using AstroBin's APIs! You need a <strong>key</strong> and a <strong>secret</strong> if you want to access AstroBin's data in your own app or website.{% endblocktrans %}<br/>
     {% blocktrans %}After you submit a request, you will receive a reply within 24 hours.{% endblocktrans %}
     </div>
+    <div class="alert alert-warning">
+        {% url tos as tos_url %}
+        {% blocktrans %}Please make sure you have read the section about APIs in the <a href="{{tos_url}}">Terms of Service</a>.{% endblocktrans %}
+    </div>
     <form class="form-horizontal" action="{% url app_api_key_request_process %}" method="post">
         {{form|as_bootstrap}}
         <div class="form-actions">
