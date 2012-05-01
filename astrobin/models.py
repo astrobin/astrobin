@@ -1425,7 +1425,7 @@ class AppApiKeyRequest(models.Model):
         from django.core.mail.message import EmailMessage
         message = {
             'from_email': 'astrobin@astrobin.com',
-            'to': 'astrobin@astrobin.com',
+            'to': ['astrobin@astrobin.com'],
             'subject': 'App API Key request from %s' % self.registrar.username,
             'body': 'Check the site\'s admin.',
         }
