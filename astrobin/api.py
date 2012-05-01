@@ -109,6 +109,7 @@ class ImageResource(ModelResource):
         allowed_methods = ['get']
         filtering = {
             'title': ALL,
+            'description': ALL,
             'is_solved': ('exact',),
             'user': ALL,
             'uploaded': ALL,
