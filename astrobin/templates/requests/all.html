@@ -2,50 +2,46 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="full-box clear">
-        <div class="container">
-            <h2>{% trans "Here are your requests" %}</h2>
-            {% if req_list %}
-                <table class="requests">
-                    <tr>
-                        <th>{% trans "When" %}</th>
-                        <th>{% trans "From" %}</th>
-                        <th>{% trans "Action needed" %}</th>
-                        <th>{% trans "Object affected" %}</th>
-                        <th>{% trans "Fulfilled" %}</th>
-                    </tr>
-                {% for req in req_list %}
-                    <tr>
-                        <td class="when">{{req.created|date:"D, d M. Y"}} {% trans "at" %} {{req.created|date:"H:i" }}</td>
-                        <td><a href="{% url user_page req.from_user %}">{{req.from_user}}</a></td>
-                        {% if req.image %}
-                        <td>{{req.get_type_display}}</td>
-                        <td><a href="{% url image_detail req.image.id %}">{{req.image.title|escape}}</a></td>
-                        {% endif %}
+    <h1>{% trans "Here are your requests" %}</h1>
+    {% if req_list %}
+        <table class="table">
+            <tr>
+                <th>{% trans "When" %}</th>
+                <th>{% trans "From" %}</th>
+                <th>{% trans "Action needed" %}</th>
+                <th>{% trans "Object affected" %}</th>
+                <th>{% trans "Fulfilled" %}</th>
+            </tr>
+        {% for req in req_list %}
+            <tr>
+                <td class="when">{{req.created|date:"D, d M. Y"}} {% trans "at" %} {{req.created|date:"H:i" }}</td>
+                <td><a href="{% url user_page req.from_user %}">{{req.from_user}}</a></td>
+                {% if req.image %}
+                <td>{{req.get_type_display}}</td>
+                <td><a href="{% url image_detail req.image.id %}">{{req.image.title|escape}}</a></td>
+                {% endif %}
+                {% if req.location %}
+                <td>{% trans "Location details missing." %}</td>
+                <td><a href="/search/?q={{req.location.name}}">{{req.location.name|escape}}</a></td>
+                {% endif %}
+                <td>
+                {% if req.fulfilled %}
+                    {% trans "Yes." %}
+                {% else %}
+                        {% trans "No." %}
                         {% if req.location %}
-                        <td>{% trans "Location details missing." %}</td>
-                        <td><a href="/search/?q={{req.location.name}}">{{req.location.name|escape}}</a></td>
-                        {% endif %}
-                        <td>
-                        {% if req.fulfilled %}
-                            {% trans "Yes." %}
+                        <a href="{% url location_edit req.location.id %}">{% trans "Do it now?" %}</a>
                         {% else %}
-                                {% trans "No." %}
-                                {% if req.location %}
-                                <a href="{% url location_edit req.location.id %}">{% trans "Do it now?" %}</a>
-                                {% else %}
-                                {% if req.image %}
-                                <a href="{% url request_mark_fulfilled req.id %}">{% trans "Mark as done." %}</a>
-                                {% endif %}
-                                {% endif %}
+                        {% if req.image %}
+                        <a href="{% url request_mark_fulfilled req.id %}">{% trans "Mark as done." %}</a>
                         {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </table>
-            {% else %}
-                <p>{% trans "You have no requests." %}</p>
-            {% endif %}
-        </div> <!-- container -->
-    </div>
+                        {% endif %}
+                {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "You have no requests." %}</p>
+    {% endif %}
 {% endblock %}
