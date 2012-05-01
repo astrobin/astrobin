@@ -906,6 +906,9 @@ h1,
 h2 {
   border-bottom: 1px solid #404040;
 }
+h2 {
+  margin-top: 28px;
+}
 input:focus,
 textarea:focus {
   border-color: rgba(204, 75, 46, 0.8);
