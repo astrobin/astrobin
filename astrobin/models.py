@@ -1434,17 +1434,21 @@ class AppApiKeyRequest(models.Model):
         EmailMessage(**message).send(fail_silently = False)
     
     def approve(self):
-        app = App(registrar = self.registrar, name = self.name,
-                  description = self.description)
-        app.save()
+        app, created = App.objects.get_or_create(
+            registrar = self.registrar, name = self.name,
+            description = self.description)
 
         self.approved = True
         self.save()
 
-        push_notification(
-            [self.registrar], 'api_key_request_approved',
-            {'api_docs_url': settings.ASTROBIN_BASE_URL + '/help/api/',
-             'api_keys_url': settings.ASTROBIN_BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
-             'key': app.key,
-             'secret': app.secret})
+        if created:
+            push_notification(
+                [self.registrar], 'api_key_request_approved',
+                {'api_docs_url': settings.ASTROBIN_BASE_URL + '/help/api/',
+                 'api_keys_url': settings.ASTROBIN_BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
+                 'key': app.key,
+                 'secret': app.secret})
+        else:
+            app.active = True
 
+        app.save()
