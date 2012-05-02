@@ -223,7 +223,7 @@ def index(request):
         coolest_image = None
         yesterday = date.today() - timedelta(1)
         while coolest_image is None:
-            yesterdays_images = Image.objects.filter(acquisition__date = yesterday)
+            yesterdays_images = Image.objects.filter(Q(uploaded__gte = yesterday))
             if yesterdays_images:
                 coolest_image = yesterdays_images[0]
                 current_coolness = 0
