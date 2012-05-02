@@ -694,7 +694,7 @@
             <div class="subtle-container image-basic-data">
                 <table class="table">
                     <tr>
-                        <td><img alt="{% trans "License" %}" src="{{STATIC_URL}}icons/iconic/white/key_stroke_16x16.png"/></td>
+                        <td><img rel="tooltip" title="{% trans "License" %}" alt="{% trans "License" %}" src="{{STATIC_URL}}icons/iconic/white/key_stroke_16x16.png"/></td>
                         <td>
                             <a target="_blank" href="http://creativecommons.org/licenses/">
                                 <img class="license"
@@ -705,20 +705,20 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><img alt="{% trans "Date" %}" src="{{STATIC_URL}}icons/iconic/white/calendar_alt_stroke_16x16.png"/></td>
+                        <td><img rel="tooltip" title="{% trans "Date" %}" alt="{% trans "Date" %}" src="{{STATIC_URL}}icons/iconic/white/calendar_alt_stroke_16x16.png"/></td>
                         <td>{{uploaded_on|ago}}</td>
                     </tr>
                     <tr>
                         {% get_hit_count for image as hit_count %}
-                        <td><img alt="{% trans "Views" %}" src="{{STATIC_URL}}icons/iconic/white/image_16x16.png"/></td>
+                        <td><img rel="tooltip" title="{% trans "Views" %}" alt="{% trans "Views" %}" src="{{STATIC_URL}}icons/iconic/white/image_16x16.png"/></td>
                         <td>{{hit_count}}</td>
                     </tr>
                     <tr>
-                        <td><img alt="{% trans "Favorites" %}" src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png"/></td>
+                        <td><img rel="tooltip" title="{% trans "Favorites" %}" alt="{% trans "Favorites" %}" src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png"/></td>
                         <td>{{times_favorited}}</td>
                     </tr>
                     <tr>
-                        <td><img alt="{% trans "Votes" %}" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/></td>
+                        <td><img rel="tooltip" title="{% trans "Votes" %}" alt="{% trans "Votes" %}" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/></td>
                         <td>{{votes_number}}</td>
                     </tr>
                 </table>
