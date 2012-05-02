@@ -1906,6 +1906,9 @@ def user_page_plots(request, username):
 def user_page_api_keys(request, username):
     """Shows the user's API Keys"""
     user = get_object_or_404(User, username = username)
+    if user != request.user:
+        return HttpResponseForbidden()
+
     profile = UserProfile.objects.get(user=user)
     keys = App.objects.filter(registrar = user)
 
