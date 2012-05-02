@@ -65,7 +65,7 @@
     </head>
 
     <body>
-        <div class="navbar navbar-fixed-top" id="top">
+        <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
                     <ul class="nav">
@@ -341,7 +341,7 @@
         {% endif %}
         {% endcomment %}
 
-        <div class="container astrobin-container">
+        <div id="top" class="container astrobin-container">
             {% if context_message %}
             <div class="alert {% if context_message.error %}alert-error{% endif %}">
                 <p>{{context_message.text}}</p>
