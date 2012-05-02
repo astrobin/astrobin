@@ -108,7 +108,7 @@
             <div class="row">
                 <div class="span6">
                     <a href="{% url image_detail image.id %}">
-                        <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}"
+                        <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_resized{{image.original_ext}}"
                                 width="460"
                                 alt="{{image.title|default:_("(no title)")}}"/>
                     </a>
