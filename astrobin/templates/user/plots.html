@@ -75,7 +75,7 @@ $(document).ready(function() {
         {% else %}
         "{% url stats_integration_hours user.username 'monthly' 0 %}",
         {% endif %}
-        5000);
+        30000);
     astrobin_stats.enableTooltips("#stats_integration_hours");
 
     astrobin_stats.plot(
@@ -85,7 +85,7 @@ $(document).ready(function() {
         {% else %}
         "{% url stats_uploaded_images user.username 'monthly' %}",
         {% endif %}
-        5000);
+        30000);
     astrobin_stats.enableTooltips("#stats_uploaded_images");
 
     $.ajax({
@@ -113,7 +113,7 @@ $(document).ready(function() {
         {% else %}
         "{% url stats_views user.username 'daily' %}",
         {% endif %}
-        5000);
+        30000);
     astrobin_stats.enableTooltips("#stats_views");
 });
 </script>
