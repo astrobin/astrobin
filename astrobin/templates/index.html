@@ -105,7 +105,7 @@
                     <h2>{% trans "Hot right now" %}</h2>
                 </div>
             </div>
-            <div class="row index-section">
+            <div class="row">
                 <div class="span6">
                     <a href="{% url image_detail image.id %}">
                         <img src="http://astrobin_images.{{s3_url}}/{{image.filename}}_resized{{image.original_ext}}"
@@ -137,7 +137,7 @@
         {% endwith %}
     {% endif %}
 
-    <div class="row index-section">
+    <div class="row">
         <div class="span12">
             <h2>{% trans "Recently uploaded" %}</h2>
             {% search_image_list request image_list 0 %}
@@ -145,21 +145,21 @@
     </div> <!-- recently uploaded row -->
 
     {% if user.is_authenticated %}
-    <div class="row index-section">
+    <div class="row">
         <div class="span12">
-            <h3>{% trans "Recently uploaded by the users you follow" %}</h3>
+            <h2>{% trans "Recently uploaded by the users you follow" %}</h2>
             {% image_list request recent_from_followees 0 small_size %}
         </div>
     </div>
 
     <div class="row">
         <div class="span6">
-            <h3>{% trans "Recently voted 5 stars" %}</h3>
+            <h2>{% trans "Recently voted 5 stars" %}</h2>
             {% image_list request recently_five_starred 0 small_size %}
         </div>
 
         <div class="span6">
-            <h3>{% trans "Recently favorited" %}</h3>
+            <h2>{% trans "Recently favorited" %}</h2>
             {% image_list request recently_favorited 0 small_size %}
         </div>
     </div>

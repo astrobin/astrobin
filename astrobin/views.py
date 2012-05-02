@@ -267,7 +267,7 @@ def index(request):
         queryset=sqs,
         template_name='index.html',
         template_object_name='image',
-        paginate_by = 10,
+        paginate_by = 15,
         extra_context = response_dict)
 
 
