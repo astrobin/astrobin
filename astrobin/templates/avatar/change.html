@@ -4,6 +4,8 @@
 {% load bootstrap_toolkit %}
 
 {% block content %}
+    {% include 'profile-edit-menu.html' %}
+
     <h1>{% trans "Change your avatar" %}</h1>
 
     <div class="row">
@@ -23,8 +25,8 @@
 
     {% if avatars %}
         <div class="span3">
-            <div class="well"><strong>{% trans "Previously uploaded" %}</div>
-            <form method="POST" action="">
+            <div class="well"><strong>{% trans "Previously uploaded" %}</strong></div>
+            <form method="POST" action="{% url avatar_change %}" class="avatar-change">
                 {{primary_avatar_form|as_bootstrap}}
                 <input class="btn btn-primary" type="submit" value="{% trans "Choose new default" %}" />
             </form>
