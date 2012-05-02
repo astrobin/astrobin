@@ -20,9 +20,12 @@ def notices_count(request):
 
 
 def user_language(request):
+    d = {
+        'user_language': request.LANGUAGE_CODE,
+    }
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user = request.user)
-        return {'user_language': profile.language}
+        d['user_language'] = profile.language
 
-    return {}
+    return d
 
