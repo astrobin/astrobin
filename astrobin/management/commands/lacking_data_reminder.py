@@ -11,7 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for user in User.objects.all():
             number = 0
-            qs = Image.objects.filter(user = user, is_stored = True)
+            qs = Image.objects.filter(user = user, is_stored = True, is_wip = False)
 
             number += qs.filter(Q(subjects = None) & (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))).count()
             number += qs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None)).count()
