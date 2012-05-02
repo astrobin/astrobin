@@ -231,11 +231,11 @@ def index(request):
                     score = 0
                     for vote in image.votes.all():
                         score += vote.score 
-    
+ 
                     times_favorited = Favorite.objects.filter(image = image).count()
                     comments = Comment.objects.filter(image = image).count()
     
-                    coolness = score + (times_favorited * 2) + comments
+                    coolness = score + (times_favorited * 3) + (comments * 5)
                     if coolness > current_coolness:
                         coolest_image = image
                         current_coolness = coolness
