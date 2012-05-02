@@ -3257,10 +3257,12 @@ def subject_page(request, id):
         .exclude(Q(number = None) | Q(duration = None)) \
         .values_list('number', 'duration')
 
-    total_integration = '%.2f' % \
-        (reduce(lambda x, y: x+y,
-                [x[0]*x[1] for x in integration_list]) \
-        / 3600.00)
+    total_integration = '0'
+    if integration_list:
+        total_integration = '%.2f' % \
+            (reduce(lambda x, y: x+y,
+                    [x[0]*x[1] for x in integration_list]) \
+            / 3600.00)
 
     return object_detail(
         request,
