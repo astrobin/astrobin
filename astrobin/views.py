@@ -2798,7 +2798,7 @@ def stats(request):
 
     sqs = SearchQuerySet()
 
-    variables = []
+    variables = [request.LANGUAGE_CODE]
     hash = md5_constructor(u':'.join([urlquote(var) for var in variables]))
     cache_key = 'template.cache.%s.%s' % ('global_stats', hash.hexdigest())
 
