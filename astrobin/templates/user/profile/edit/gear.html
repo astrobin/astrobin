@@ -76,24 +76,32 @@
             var $item_li = $(this).closest('li.as-selection-item');
 
             $.ajax({
-                url: '/get_edit_gear_form/' + id + '/?nocache=' + myTimestamp(),
+                url: '/get_edit_gear_form/' + id + '/',
                 dataType: 'json',
-                timeout: 5000,
+                timeout: 10000,
+                cache: false,
                 success: function(data, textStatus, XMLHttpRequest) {
                     var $form;
 
                     var ajaxFormOptions = {
                         dataType: 'json',
                         beforeSubmit: function(formData, $form, options) {
-                            $dlg.find('button').addClass('ui-state-disabled');
+                            var $btn = $dlg.find('.btn-primary')
+                            $btn.addClass('disabled');
+                            $btn.val("...");
                         },
                         success: function(responseJson, statusText, xhr, $form) {
                             if (responseJson['success']) {
+                                var $btn = $dlg.find('.btn-primary')
+                                $btn.removeClass('disabled');
+                                $btn.val("{% trans "Save" %}");
                                 $dlg.dialog('close');
+
                                 $.ajax({
-                                    url: '/get_is_gear_complete/' + id + '/?nocache=' + myTimestamp(),
+                                    url: '/get_is_gear_complete/' + id + '/',
                                     dataType: 'json',
-                                    timeout: 5000,
+                                    timeout: 10000,
+                                    cache: false,
                                     success: function(data, textStatus, XMLHttpRequest) {
                                         if (data['complete'])
                                             $item_li.removeClass('need-data btn-primary');
@@ -106,7 +114,9 @@
                             }
                         },
                         error: function(responseText, statusText, xhr, $form) {
-                            $dlg.find('button').removeClass('ui-state-disabled');
+                            var $btn = $dlg.find('.btn-primary')
+                            $btn.removeClass('disabled');
+                            $btn.val("{% trans "Save" %}");
                         }
                     };
 
