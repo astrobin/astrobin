@@ -36,7 +36,6 @@ import csv
 import flickrapi
 import urllib2
 from datetime import datetime, date, timedelta
-from calendar import month_name
 import operator
 
 from models import *
@@ -360,7 +359,7 @@ def popular(request):
     response_dict['max_lat'] = max_lat
     response_dict['hem'] = hem
 
-    variables = [min_lat, max_lat, hem]
+    variables = [min_lat, max_lat, hem, request.LANGUAGE_CODE]
     hash = md5_constructor(u':'.join([urlquote(var) for var in variables]))
     cache_key = 'template.cache.%s.%s' % ('popular_monthly', hash.hexdigest())
 
@@ -417,6 +416,7 @@ def popular(request):
 
 
         for month in range(1, 13):
+            fake_date = datetime.datetime(1970, month, 1, 0, 0, 0)
             subject_filters = Q(image__acquisition__date__month = month) | \
                               Q(image__locations__lat_deg__gte = min_lat) |  \
                               Q(image__locations__lat_deg__lte = max_lat)
@@ -446,7 +446,7 @@ def popular(request):
             if images:
                 filters = reduce(operator.or_, [Q(**{'pk': x}) for x in images])
                 images_sqs = Image.objects.filter(filters)
-                response_dict['months'].append((month_name[month], subjects, reversed(images_sqs)))
+                response_dict['months'].append((fake_date, subjects, reversed(images_sqs)))
 
     return render_to_response(
         'most_popular.html',

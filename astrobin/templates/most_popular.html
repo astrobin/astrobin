@@ -101,10 +101,10 @@
     </div>
 
     <!-- cached for one week -->
-    {% cache 604800 popular_monthly min_lat max_lat hem %}
+    {% cache 604800 popular_monthly min_lat max_lat hem user_language %}
         {% for month in months %}
             <div class="well">
-                <strong>{{month.0}}</strong>
+                <strong>{{month.0|date:"F"}}</strong>
             </div>
             {% image_list request month.2 0 %}
         {% endfor %}
