@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
         tempdir = tempfile.mkdtemp()
         for i in images:
-            url = 'http://astrobin_images.s3.amazonaws.com/%s%s' % (i.filename, i.original_ext)
+            url = 'http://s3.amazonaws.com/astrobin_images/%s%s' % (i.filename, i.original_ext)
             path = os.path.join(tempdir, i.filename + i.original_ext)
 
             try:

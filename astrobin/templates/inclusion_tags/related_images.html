@@ -5,7 +5,7 @@
 {% for i in images.object_list %}
     <li class="thumbnail astrobin-thumbnail">
         <a href="{{i.object.get_absolute_url}}{% query_string "related=related_type" "r, mod, plate_solving_started" %}" title="{{i.object.title}}">
-            <img src="{% if i.object.is_stored %}http://astrobin_images.{{s3_url}}/{{i.object.filename}}_small_thumb{{i.object.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+            <img src="{% if i.object.is_stored %}http://{{s3_url}}/astrobin_images/{{i.object.filename}}_small_thumb{{i.object.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="{{i.object.title|escape}}" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
         </a>
     </li>
 {% endfor %}
