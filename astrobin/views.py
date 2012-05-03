@@ -229,13 +229,13 @@ def index(request):
 
         # Compute picture of the day.
         coolest_image = None
-        yesterday = date.today() - timedelta(1)
+        today = date.today()
         while coolest_image is None:
-            yesterdays_images = Image.objects.filter(Q(uploaded__gte = yesterday))
-            if yesterdays_images:
-                coolest_image = yesterdays_images[0]
+            todays_images = Image.objects.filter(Q(uploaded__gte = today))
+            if todays_images:
+                coolest_image = todays_images[0]
                 current_coolness = 0
-                for image in yesterdays_images:
+                for image in todays_images:
                     score = 0
                     for vote in image.votes.all():
                         score += vote.score 
@@ -266,7 +266,7 @@ def index(request):
                 response_dict['image_of_the_day_scaled_height'] = (coolest_image.h * 460 / coolest_image.w) - 24
                 response_dict['gear_list'] = gear_list
             else:
-                yesterday = yesterday - timedelta(1)
+                today = today - timedelta(1)
 
     sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
 
