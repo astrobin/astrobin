@@ -213,10 +213,19 @@ def index(request):
                          .exclude(last_favorited = None) \
                          .order_by('-last_favorited')[:16]
 
-        response_dict['recently_five_starred'] = \
-            Image.objects.filter(votes__score = 5) \
-                         .distinct() \
-                         .order_by('-votes__date_added')[:16]
+        recent_fives_list = []
+        l = 0
+        while l < 16:
+            recent_fives_qs = \
+                Image.objects.filter(votes__score = 5) \
+                             .distinct() \
+                             .order_by('-votes__date_added')[l:l+10]
+            for i in recent_fives_qs:
+                if i not in recent_fives_list:
+                    recent_fives_list.append(i)
+                    l += 1
+
+        response_dict['recently_five_starred'] = recent_fives_list
 
         # Compute picture of the day.
         coolest_image = None
