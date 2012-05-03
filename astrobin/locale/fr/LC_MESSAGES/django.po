@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-21 14:07-0400\n"
-"PO-Revision-Date: 2012-04-28 19:14+0100\n"
+"PO-Revision-Date: 2012-05-02 16:49+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -1116,7 +1116,7 @@ msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
-"Indiquez ici les télescopes, lunettes ou objectifs que vous possédez, y "
+"Indiquez ici les télescopes, lunettes et objectifs que vous possédez, y "
 "compris ceux destinés au guidage."
 
 #: forms.py:190
@@ -1134,7 +1134,7 @@ msgstr ""
 
 #: forms.py:212 models.py:1116
 msgid "Telescopes and lenses"
-msgstr "Télescopes et objectifs"
+msgstr "Instruments et objectifs"
 
 #: forms.py:214 models.py:1118
 msgid "Cameras"
@@ -2543,7 +2543,7 @@ msgstr "Mes paramètres"
 
 #: templates/base.html:190 templates/subject/page.html:13
 msgid "Basic information"
-msgstr "Information de base"
+msgstr "Informations de base"
 
 #: templates/base.html:191 templates/profile-edit-menu.html:9
 #: templates/user/card.html:13 templates/user/profile-subnav.html:83
@@ -3320,11 +3320,11 @@ msgid ""
 "there's a new image from a certain CCD, or telescope, or filter, and so on. "
 "Or you can monitor all the new images of a certain galaxy or nebula."
 msgstr ""
-"Vous pouvez marquer un matériel spécifique ou un objet astronomique, et "
-"ainsi être averti lors de la publication d'une nouvelle image capturée à "
-"l'aide d'une CDD précise, d'un télescope, d'un filtre, etc. De la même "
-"manière, vous pouvez suivre les publications de toutes les nouvelles images "
-"d'une galaxie ou d'une nébuleuse préalablement spécifiée."
+"Il est aussi possible de \"marquer\" un matériel spécifique ou un objet "
+"astronomique, et ainsi être averti lors de la publication d'une nouvelle "
+"image capturée à l'aide d'une CDD précise, d'un télescope, d'un filtre, etc. "
+"De la même manière, vous pouvez suivre les publications de toutes les "
+"nouvelles images d'une galaxie ou d'une nébuleuse préalablement spécifiée."
 
 #: templates/help.html:77
 msgid ""
@@ -3332,9 +3332,10 @@ msgid ""
 "might be chosen to appear in the site's <em>Messier Marathon</em>, or as "
 "<em>Currently hot</em> on the front page."
 msgstr ""
-"Vous pouvez voter pour des images, et les marquer comme favori. Vos images "
-"peuvent être sélectionnées pour le <em>Marathon Messier</em>, ou dans la "
-"section <em>A la Une</em> sur la page d'accueil."
+"Enfin, vous pouvez voter pour des images, et les marquer comme favori. "
+"Ainsi, vos images pourront éventuellement être sélectionnées pour le "
+"<em>Marathon Messier</em>, ou dans la section <em>A la Une</em> sur la page "
+"d'accueil."
 
 #: templates/help.html:81
 msgid ""
@@ -3348,13 +3349,13 @@ msgid ""
 "the world."
 msgstr ""
 "Vous l'aurez compris, <em>AstroBin</em> est bien plus qu'un simple hébergeur "
-"d'images. C'est l'outil que la communauté attendait depuis longtemps. Durant "
-"des années, les images ont été dispersées un peu partout sur le Net: sur des "
-"sites généralistes d'hébergement, des forums, des pages personnelles et "
-"parfois même des serveurs temporaires. Ces images contiennent des données "
-"trop importantes pour être noyées dans le chaos d'Internet. <em>AstroBin</"
-"em> vient à la rescousse des astrophotographes partout dans le monde en leur "
-"offrant une 'banque centrale' pour leurs précieux documents."
+"d'images. C'est l'outil que la communauté attendait depuis longtemps. "
+"Durant des années, les images ont été dispersées un peu partout sur le Net: "
+"sur des sites généralistes d'hébergement, des forums, des pages personnelles "
+"et parfois même des serveurs temporaires. Ces images contiennent des "
+"données trop importantes pour être noyées dans le chaos d'Internet. "
+"<em>AstroBin</em> vient à la rescousse des astrophotographes partout dans le "
+"monde en leur offrant une \"banque centrale\" pour leurs précieux documents."
 
 #: templates/help.html:83
 msgid "So, what are you waiting for?"
@@ -3849,7 +3850,7 @@ msgstr "Images déjà publiées"
 
 #: templates/avatar/change.html:29
 msgid "Choose new default"
-msgstr "Choisir par défaut"
+msgstr "Choisir comme avatar"
 
 #: templates/avatar/change.html:35
 msgid "Upload a new image"
@@ -4103,10 +4104,10 @@ msgid ""
 "international community: using English is preferred. PS: <strong>%(user)s</"
 "strong>'s preferred language is <strong>%(lang)s</strong>."
 msgstr ""
-"<strong>Entrez votre commentaire ci-dessous</strong>, en vous rappelant que "
-"la communauté d'AstroBin est internationale: l'anglais est donc la langue la "
-"plus adéquate. PS: la langue de <strong>%(user)s</strong> est: <strong>"
-"%(lang)s</strong>."
+"<strong>Postez votre commentaire ci-dessous</strong>, en ayant à l'esprit "
+"que la communauté d'AstroBin est internationale: l'anglais est donc la "
+"langue la plus adéquate. PS: la langue de <strong>%(user)s</strong> est "
+"<strong>%(lang)s</strong>."
 
 #: templates/image/detail.html:580 templates/image/detail.html.py:639
 #: templates/image/detail.html:1104 templates/image/edit/acquisition.html:27
@@ -4574,7 +4575,7 @@ msgstr ""
 msgid ""
 "Use this button to import the gear settings from another image of yours."
 msgstr ""
-"Utiliser ce bouton pour importer la configuration matérielle d'une autre de "
+"Utilisez ce bouton pour importer la configuration matérielle d'une autre de "
 "vos images."
 
 #: templates/image/edit/gear.html:34
@@ -5697,7 +5698,7 @@ msgstr "Voir les favoris de %(username)s"
 
 #: templates/user/favorites.html:19
 msgid "These are the images you marked as favorite."
-msgstr "Voici les images que vous avez marquées comme favoris"
+msgstr "Voici les images que vous avez marquées comme favoris."
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
@@ -5797,7 +5798,7 @@ msgstr ""
 
 #: templates/user/profile.html:28
 msgid "These images don't have enough data. It's a shame..."
-msgstr "Il n'y a pas assez de données pour ces images. C'est dommage..."
+msgstr "Il n'y a pas assez de données pour ces images. Dommage..."
 
 #: templates/user/profile.html:30
 msgid ""
@@ -5806,9 +5807,9 @@ msgid ""
 "minimum. Dates of acquisitions are very important too."
 msgstr ""
 "Si vous désirez que vos images soient classées par album, renseignez le "
-"maximum de données. L' instrument, le matériel d'acquisition ainsi que "
-"l'objet photographié constituent les données minimum. Les dates "
-"d'acquisition sont très importantes également."
+"maximum de données. L'instrument, l'imageur ainsi que l'objet photographié "
+"constituent les données minimum. Les dates d'acquisition sont très "
+"importantes également."
 
 #: templates/user/profile.html:43
 msgid "(view more...)"
