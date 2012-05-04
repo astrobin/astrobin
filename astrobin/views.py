@@ -278,6 +278,9 @@ def wall(request):
     elif request.GET.get('sort') == '-integration':
         response_dict['sort'] = '-integration'
         sqs = sqs.order_by('-integration')
+    elif request.GET.get('sort') == '-comments':
+        response_dict['sort'] = '-comments'
+        sqs = sqs.order_by('-comments')
     else:
         response_dict['sort'] = '-uploaded'
         sqs = sqs.order_by('-uploaded')

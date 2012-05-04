@@ -11,6 +11,7 @@ from astrobin.models import SolarSystem_Acquisition
 from astrobin.models import Subject, SubjectIdentifier
 from astrobin.models import UserProfile
 from astrobin.models import Favorite
+from astrobin.models import Comment
 
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -132,6 +133,8 @@ class ImageIndex(SearchIndex):
 
     telescope_types = MultiValueField()
     camera_types = MultiValueField()
+
+    comments = IntegerField()
 
     def index_queryset(self):
         return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
@@ -354,6 +357,9 @@ class ImageIndex(SearchIndex):
 
     def prepare_camera_types(self, obj):
         return [x.type for x in obj.imaging_cameras.all()]
+
+    def prepare_comments(self, obj):
+        return Comment.objects.filter(image = obj).count()
 
 
 class SubjectIdentifierIndex(SearchIndex):

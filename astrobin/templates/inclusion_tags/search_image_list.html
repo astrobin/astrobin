@@ -45,6 +45,10 @@
                 {% endwith %}
             {% endifequal %}
 
+            {% ifequal sort '-comments' %}
+                {% trans "Comments" %}: {{search_result.comments}}
+            {% endifequal %}
+
             {% if not sort %}
                 {{search_result.object.title|escape|truncatechars:23}}
             {% endif %}
