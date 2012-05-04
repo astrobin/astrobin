@@ -697,6 +697,11 @@ body.full {
   border-top-color: #cc4b2e;
   border-bottom-color: #cc4b2e;
 }
+.navbar .nav .dropdown-toggle.btn-primary .caret,
+.navbar .nav .open.dropdown.btn-primary .caret {
+  border-top-color: #fcfcfc;
+  border-bottom-color: #fcfcfc;
+}
 .navbar .nav .open.dropdown .dropdown-toggle,
 .navbar .nav .open.dropdown .dropdown-toggle:hover {
   background-color: #222;
@@ -717,6 +722,10 @@ body.full {
   -moz-border-radius: 8px;
   border-radius: 8px;
   width: 120px;
+}
+navbar .btn,
+.navbar .btn-group {
+  margin-top: 6px;
 }
 .navbar-fixed-top .container {
   width: 1000px;
