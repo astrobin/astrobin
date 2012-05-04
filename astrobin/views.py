@@ -900,7 +900,7 @@ def image_upload(request):
 def image_upload_process(request):
     """Process the form"""
     if 'file' not in request.FILES:
-        return HttpResponseRedirect('/?upload_error')
+        return HttpResponseRedirect('/upload/?upload_error')
 
     form = ImageUploadForm(request.POST, request.FILES)
     file = request.FILES["file"]
@@ -916,7 +916,7 @@ def image_upload_process(request):
         trial_image = PILImage.open(file)
         trial_image.verify()
     except:
-        return HttpResponseRedirect('/?upload_error')
+        return HttpResponseRedirect('/upload/?upload_error')
 
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
