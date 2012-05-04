@@ -231,7 +231,7 @@ def index(request):
         coolest_image = None
         today = date.today()
         while coolest_image is None:
-            todays_images = Image.objects.filter(Q(uploaded__gte = today))
+            todays_images = Image.objects.filter(Q(uploaded__gte = today) & Q(is_stored = True) & Q(is_wip = False))
             if todays_images:
                 coolest_image = todays_images[0]
                 current_coolness = 0
@@ -263,7 +263,8 @@ def index(request):
                 response_dict['image_of_the_day'] = coolest_image
                 # Ugliest thing ever: 460 is the width of the scaled image on the front page; 24 is the padding
                 # of the technical card box. Yikes.
-                response_dict['image_of_the_day_scaled_height'] = (coolest_image.h * 460 / coolest_image.w) - 24
+                if coolest_image.w > 0:
+                    response_dict['image_of_the_day_scaled_height'] = (coolest_image.h * 460 / coolest_image.w) - 24
                 response_dict['gear_list'] = gear_list
             else:
                 today = today - timedelta(1)
