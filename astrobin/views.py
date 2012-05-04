@@ -215,7 +215,7 @@ def index(request):
 
         recent_fives_list = []
         l = 0
-        while l < 16:
+        while len(recent_fives_list) < 16:
             recent_fives_qs = \
                 Image.objects.filter(votes__score = 5) \
                              .distinct() \
@@ -223,7 +223,7 @@ def index(request):
             for i in recent_fives_qs:
                 if i not in recent_fives_list:
                     recent_fives_list.append(i)
-                    l += 1
+            l += 1
 
         response_dict['recently_five_starred'] = recent_fives_list[:16]
 
