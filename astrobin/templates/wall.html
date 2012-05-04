@@ -25,11 +25,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "sort='-views'" "" %}">
-                            <span class="bg-icon{% if sort == '-views' %} icon-check{% endif %}"></span>
-                            {% trans "Views" %}
+                        <a href="{% query_string "sort='-integration'" "" %}">
+                            <span class="bg-icon{% if sort == '-integration' %} icon-check{% endif %}"></span>
+                            {% trans "Integration" %}
                         </a>
                     </li>
+                    <li class="divider"></li>
                     <li>
                         <a href="{% query_string "sort='-rating'" "" %}">
                             <span class="bg-icon{% if sort == '-rating' %} icon-check{% endif %}"></span>
@@ -43,9 +44,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "sort='-integration'" "" %}">
-                            <span class="bg-icon{% if sort == '-integration' %} icon-check{% endif %}"></span>
-                            {% trans "Integration" %}
+                        <a href="{% query_string "sort='-views'" "" %}">
+                            <span class="bg-icon{% if sort == '-views' %} icon-check{% endif %}"></span>
+                            {% trans "Views" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "sort='-comments'" "" %}">
+                            <span class="bg-icon{% if sort == '-favorited' %} icon-check{% endif %}"></span>
+                            {% trans "Comments" %}
                         </a>
                     </li>
                 </ul>
