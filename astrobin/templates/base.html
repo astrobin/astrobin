@@ -191,6 +191,9 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{% url image_upload %}">{% trans "Upload" %}</a>
+                                </li>
                                 <li class="nav-header">{% trans "My places" %}</li>
                                 <li>
                                     <a href="{% url user_page request.user %}">
@@ -213,15 +216,13 @@
                                     </a>
                                 </li>
                                 <li class="divider"></li>
+
+                                <li><a href="{% url messages_inbox %}">{% trans "My messages" %}</a></li>
                                 <li>
                                     <a href="{% url user_page_api_keys request.user %}">
                                         {% trans "API Keys" %}
                                     </a>
                                 </li>
-
-                                <li class="divider"></li>
-                                <li><a href="{% url messages_inbox %}">{% trans "My messages" %}</a></li>
-                                <li class="divider"></li>
 
                                 <li class="nav-header">{% trans "My settings" %}</li>
                                 <li><a href="{% url profile_edit_basic %}">{% trans "Basic information" %}</a></li>

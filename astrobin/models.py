@@ -1452,3 +1452,22 @@ class AppApiKeyRequest(models.Model):
             app.active = True
 
         app.save()
+
+
+class ImageOfTheDay(models.Model):
+    image = models.ForeignKey(
+        Image,
+        editable = False,
+        related_name = 'image_of_the_day')
+
+    date = models.DateField(
+        editable = False,
+        auto_now_add = True)
+
+    class Meta:
+        ordering = ['-date']
+        app_label = 'astrobin'
+
+    def __unicode__(self):
+        return u"%s as an Image of the Day" % self.image.title
+
