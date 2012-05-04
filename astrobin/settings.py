@@ -107,6 +107,8 @@ S3_URL = 's3.amazonaws.com'
 RESIZED_IMAGE_SIZE = 620 
 THUMBNAIL_SIZE = 184
 SMALL_THUMBNAIL_SIZE = 90
+IMAGE_OF_THE_DAY_WIDTH = 780
+IMAGE_OF_THE_DAY_HEIGHT = 180
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

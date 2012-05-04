@@ -3,68 +3,7 @@
 {% load tags %}
 
 {% block content %}
-    {% if request.user.is_authenticated %}
-        {% if upload_form %} 
-            <div class="row">
-                <div class="span10 offset1">
-                    <div class="upload-forms">
-                        <div class="upload-form wip-form-box">
-                            <div class="upload-form-inner">
-                                <h3>{% trans "Upload as a work in progress" %}</h3>
-                                <div class="loading"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></div>
-                                <form action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="file" class="file" id="id_file" />
-                                    <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
-                                    <input type="hidden" name="wip" value="" />
-                                </form>
-                                <div class="progressbar"><img src="{{STATIC_URL}}images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
-                                <p>
-                                    {% url faq as faq_url %}
-                                    {% blocktrans %}Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href="{{faq_url}}#6">FAQ</a>.{% endblocktrans %}
-                                </p>
-                            </div> <!-- upload-form-inner -->
-                        </div> <!-- wip-form-box -->
-                        <div class="upload-form final-form-box">
-                            <div class="upload-form-inner">
-                                <h3>{% trans "Upload as a finished image" %}</h3>
-                                <div class="loading"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></div>
-                                <form action="{% url image_upload_process %}" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="file" class="file" id="id_file" />
-                                    <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
-                                </form>
-                                <div class="progressbar"><img src="{{STATIC_URL}}images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>
-                                <p>
-                                    {% url profile_flickr_import as flickr_url %}
-                                    {% url me as profile_url %}
-                                    {% blocktrans %}Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href="{{profile_url}}">your profile</a> and here on the home page. You can <a href="{{flickr_url}}">import from Flickr</a> too.{% endblocktrans %}
-                                </p>
-                            </div> <!-- upload-form-inner -->
-                        </div> <!-- final-form-box -->
-                    </div> <!-- upload-forms -->
-                </div> <!-- span10 -->
-            </div> <!-- row -->
-        {% else %} <!-- upload_form -->
-            <div class="upload-forms">
-                <div class="single-form">
-                    <div class="container">
-                        {% url profile_edit_gear as the_url %}
-                        <img src="{{STATIC_URL}}images/dim_upload.png" />
-                        <h2>{% trans "Warning!" %}</h2>
-                        <p>
-                            {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}?initial">your profile</a>!{% endblocktrans %}
-                        </p>
-                    </div>
-                </div>
-                <div class="single-form">
-                    <div class="container">
-                        {% url profile_edit_gear as the_url %}
-                        <img src="{{STATIC_URL}}images/dim_upload.png" />
-                    </div>
-                </div>
-
-            </div>
-        {% endif %} <!-- upload_form -->
-    {% else %}<!-- authenticated -->
+    {% if not request.user.is_authenticated %}
         <div id="why-astrobin" class="carousel slide">
             <div class="carousel-inner">
                 <div class="active item">
@@ -101,37 +40,41 @@
     {% if user.is_authenticated and image_of_the_day %}
         {% with image_of_the_day as image %}
             <div class="row">
-                <div class="span12">
-                    <h2>{% trans "Hot right now" %}</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span6">
-                    <a href="{% url image_detail image.id %}">
-                        <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_resized{{image.original_ext}}"
-                                width="460"
-                                alt="{{image.title|default:_("(no title)")}}"/>
-                    </a>
-                </div>
-                
-                <div class="span6">
-                    <div class="subtle-container" style="height:{{image_of_the_day_scaled_height}}px;">
-                        <h3>&larr; {{image.title}} by <a href="{% url user_page image.user %}">{{image.user}}</a></h3>
-                        {% for i in gear_list %}
-                            {% if i.1 %}
-                            <p>
-                                <strong>{% trans i.0 %}:</strong>
-                                {% for g in i.1 %}
-                                    {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}
-                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q=&amp;as_values_{{i.2}}={{g.id}}{% search_form_query %}">{{g.name|escape}}</a>
-                                    {% else %}
-                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q={{g.name|escape|urlencode}}&amp;type={{i.2}}{% search_form_query %}">{{g.name|escape}}</a>
-                                    {% endif %}{% if not forloop.last %},&nbsp;{% endif %}
-                                {% endfor %}
-                            </p>
-                            {% endif %}
-                        {% endfor %}
+                <div class="span10">
+                    <div class="image-of-the-day">
+                        <h2>{% trans "Hot right now" %}!</h2>
+                        <a href="{% url image_detail image.id %}">
+                            <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_iotd.jpg"
+                                 alt="{{image.title|default:_("(no title)")}}"/>
+                        </a>
+                        <div class="info">
+                            <h3>{{image.title|truncatechars:"60"}}</h3>
+                            <span class="by">
+                                by <a href="{% url user_page image.user %}">{{image.user}}</a>
+                            </span>
+                            {% for i in gear_list %}
+                                {% if i.1 %}
+                                <p>
+                                    <strong>{% trans i.0 %}:</strong>
+                                    {% for g in i.1 %}
+                                        {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}
+                                            <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q=&amp;as_values_{{i.2}}={{g.id}}{% search_form_query %}">{{g.name|escape}}</a>
+                                        {% else %}
+                                            <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="/search/?q={{g.name|escape|urlencode}}&amp;type={{i.2}}{% search_form_query %}">{{g.name|escape}}</a>{% endif %}{% if not forloop.last %},&nbsp;{% endif %}
+                                    {% endfor %}
+                                </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
+                </div>
+                <div class="span2">
+                    <a class="btn btn-primary btn-upload" href="{% url image_upload %}">
+                        <img alt="&uarr;" src="{{STATIC_URL}}icons/upload.png"/>
+                        <span class="text">
+                            {% trans "Upload" %}
+                        </span>
+                    </a>
                 </div>
             </div>
         {% endwith %}
@@ -139,62 +82,68 @@
 
     <div class="row">
         <div class="span12">
-            <h2>{% trans "Recently uploaded" %}</h2>
-            {% search_image_list request image_list 0 %}
+            <div class="home-strip-container">
+                <div class="title">
+                    <h3>{% trans "Recent" %}</h3>
+                </div>
+                <div class="thumbs">
+                    {% image_list request image_list 0 small_size %}
+                </div>
+            </div>
         </div>
     </div> <!-- recently uploaded row -->
 
     {% if user.is_authenticated %}
     <div class="row">
         <div class="span12">
-            <h2>{% trans "Recently uploaded by the users you follow" %}</h2>
-            {% image_list request recent_from_followees 0 small_size %}
+            <div class="home-strip-container">
+                <div class="title">
+                    <h3>{% trans "Followed" %}</h3>
+                </div>
+                <div class="thumbs">
+                    {% image_list request recent_from_followees 0 small_size %}
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="row">
         <div class="span6">
-            <h2>{% trans "Recently voted 5 stars" %}</h2>
-            {% image_list request recently_five_starred 0 small_size %}
+            <div class="home-strip-container">
+                <div class="title">
+                    <h3>
+                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                    </h3>
+                </div>
+                <div class="thumbs">
+                    {% image_list request recently_five_starred 0 small_size %}
+                </div>
+            </div>
         </div>
 
         <div class="span6">
-            <h2>{% trans "Recently favorited" %}</h2>
-            {% image_list request recently_favorited 0 small_size %}
+            <div class="home-strip-container">
+                <div class="title">
+                    <h3>
+                        <img src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png" alt="{% trans "Recently favorited" %}"/>
+                    </h3>
+                </div>
+                <div class="thumbs">
+                    {% image_list request recently_favorited 0 small_size %}
+                </div>
+            </div>
         </div>
     </div>
     {% endif %}
 {% endblock %}
 
-{% block extra_head %}
-<noscript>
-    <style type="text/css">
-        .upload-forms .loading {
-            display: none;
-        }
-        .upload-forms form {
-            display: block;
-        }
-    </style>
-</noscript>
-{% endblock %}
-
 {% block extra_js %}
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.upload-forms form').submit(function() {
-            form = $(this);
-            progressbar = form.parent().find('.progressbar');
-
-            form.hide();
-            progressbar.show();
-
-            return true;
-        });
-
-        $('.upload-forms .loading').hide();
-        $('.upload-forms form').show();
-
         astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
     });
 </script>

@@ -27,6 +27,17 @@ def crop_box(w, h):
         return (0, (h-w)/2, w, (h+w)/2)
     return (0, 0, w, h)
 
+def crop_box_max(w, h, max_w, max_h):
+    if max_w > w and max_h > h:
+        return (0, 0, w, h)
+
+    mid_w = w * .5
+    mid_h = h * .5
+
+    return (int(mid_w - max_w * .5), int(mid_h - max_h * .5),
+            int(mid_w + max_w * .5), int(mid_h + max_h * .5))
+
+
 # RGB Hitogram
 # This script will create a histogram image based on the RGB content of
 # an image. It uses PIL to do most of the donkey work but then we just

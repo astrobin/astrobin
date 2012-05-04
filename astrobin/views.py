@@ -196,86 +196,54 @@ def index(request):
         's3_url': settings.S3_URL,
     }
 
-    if 'upload_error' in request.GET:
-        response_dict['upload_error'] = True
-
     profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
-        if profile and profile.telescopes.all() and profile.cameras.all():
-            response_dict['upload_form'] = ImageUploadForm()
 
         response_dict['recent_from_followees'] = \
-            Image.objects.filter(user__in = profile.follows.all())[:20]
+            Image.objects.filter(user__in = profile.follows.all())[:18]
 
         response_dict['recently_favorited'] = \
             Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
                          .exclude(last_favorited = None) \
-                         .order_by('-last_favorited')[:16]
+                         .order_by('-last_favorited')[:8]
 
         recent_fives_list = []
         l = 0
-        while len(recent_fives_list) < 16:
+        while len(recent_fives_list) < 8:
             recent_fives_qs = \
                 Image.objects.filter(votes__score = 5) \
                              .distinct() \
-                             .order_by('-votes__date_added')[l:l+16]
+                             .order_by('-votes__date_added')[l:l+8]
             for i in recent_fives_qs:
                 if i not in recent_fives_list:
                     recent_fives_list.append(i)
             l += 1
 
-        response_dict['recently_five_starred'] = recent_fives_list[:16]
+        response_dict['recently_five_starred'] = recent_fives_list[:8]
 
-        # Compute picture of the day.
-        coolest_image = None
-        today = date.today()
-        while coolest_image is None:
-            todays_images = Image.objects.filter(Q(uploaded__gte = today))
-            if todays_images:
-                coolest_image = todays_images[0]
-                current_coolness = 0
-                for image in todays_images:
-                    score = 0
-                    for vote in image.votes.all():
-                        score += vote.score 
- 
-                    times_favorited = Favorite.objects.filter(image = image).count()
-                    comments = Comment.objects.filter(image = image).count()
-    
-                    coolness = score + (times_favorited * 3) + (comments * 5)
-                    if coolness > current_coolness:
-                        coolest_image = image
-                        current_coolness = coolness
-    
-                gear_list = (
-                    ('Imaging telescopes or lenses', coolest_image.imaging_telescopes.all(), 'imaging_telescopes'),
-                    ('Imaging cameras'   , coolest_image.imaging_cameras.all(), 'imaging_cameras'),
-                    ('Mounts'            , coolest_image.mounts.all(), 'mounts'),
-                    ('Guiding telescopes or lenses', coolest_image.guiding_telescopes.all(), 'guiding_telescopes'),
-                    ('Guiding cameras'   , coolest_image.guiding_cameras.all(), 'guiding_cameras'),
-                    ('Focal reducers'    , coolest_image.focal_reducers.all(), 'focal_reducers'),
-                    ('Software'          , coolest_image.software.all(), 'software'),
-                    ('Filters'           , coolest_image.filters.all(), 'filters'),
-                    ('Accessories'       , coolest_image.accessories.all(), 'accessories'),
-                )
-    
-                response_dict['image_of_the_day'] = coolest_image
-                # Ugliest thing ever: 460 is the width of the scaled image on the front page; 24 is the padding
-                # of the technical card box. Yikes.
-                response_dict['image_of_the_day_scaled_height'] = (coolest_image.h * 460 / coolest_image.w) - 24
-                response_dict['gear_list'] = gear_list
-            else:
-                today = today - timedelta(1)
+        coolest_image = ImageOfTheDay.objects.all()[0].image
+        gear_list = (
+            ('Imaging telescopes or lenses', coolest_image.imaging_telescopes.all(), 'imaging_telescopes'),
+            ('Imaging cameras'   , coolest_image.imaging_cameras.all(), 'imaging_cameras'),
+            ('Mounts'            , coolest_image.mounts.all(), 'mounts'),
+            ('Guiding telescopes or lenses', coolest_image.guiding_telescopes.all(), 'guiding_telescopes'),
+            ('Guiding cameras'   , coolest_image.guiding_cameras.all(), 'guiding_cameras'),
+            ('Focal reducers'    , coolest_image.focal_reducers.all(), 'focal_reducers'),
+            ('Software'          , coolest_image.software.all(), 'software'),
+            ('Filters'           , coolest_image.filters.all(), 'filters'),
+            ('Accessories'       , coolest_image.accessories.all(), 'accessories'),
+        )
 
-    sqs = SearchQuerySet().all().models(Image).order_by('-uploaded')
+        response_dict['image_of_the_day'] = coolest_image
+        response_dict['gear_list'] = gear_list
 
     return object_list(
         request, 
-        queryset=sqs,
-        template_name='index.html',
-        template_object_name='image',
-        paginate_by = 15,
+        queryset = Image.objects.filter(is_stored = True, is_wip = False).order_by('-uploaded'),
+        template_name = 'index.html',
+        template_object_name = 'image',
+        paginate_by = 18,
         extra_context = response_dict)
 
 
@@ -911,10 +879,20 @@ def image_get_rating(request, image_id):
 @login_required
 def image_upload(request):
     """Create new image"""
+    response_dict = {}
+
+    if 'upload_error' in request.GET:
+        response_dict['upload_error'] = True
+
+    profile = None
+    if request.user.is_authenticated():
+        profile = UserProfile.objects.get(user=request.user)
+        if profile and profile.telescopes.all() and profile.cameras.all():
+            response_dict['upload_form'] = ImageUploadForm()
 
     return render_to_response(
-        "image_upload.html",
-        {"form":ImageUploadForm()},
+        "upload.html",
+        response_dict,
         context_instance=RequestContext(request))
 
 
