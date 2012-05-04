@@ -6,7 +6,7 @@
     {% random_id %}
     {% if image.is_stored %}
     <li class="thumbnail astrobin-thumbnail">
-        <a {% if thumbnail_size < 184 %}rel="tooltip" title="{{image.title|escape}}" style="display:block;"{% endif %} href="{% url image_detail image.id %}">
+        <a {% if thumbnail_size < 184 %}rel="tooltip" title="{{image.title|escape}}<br/>{% trans "by" %} {{image.user.username}}" style="display:block;"{% endif %} href="{% url image_detail image.id %}">
             <img src="{% if image.is_stored %}http://{{s3_url}}/astrobin_images/{{image.filename}}{% if thumbnail_size == 90 %}_small_thumb{{image.original_ext}}{% else %}_thumb.png{% endif %}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="{% if thumbnail_size == 184 %}capty {% endif %}"
                  id="#capty-content-{{image.id}}-{{randomid}}"
