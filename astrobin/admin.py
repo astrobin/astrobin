@@ -236,6 +236,14 @@ class AppAdmin(admin.ModelAdmin):
     ordering = ('-created',)
 
 
+class ImageOfTheDayAdmin(admin.ModelAdmin):
+    list_display = (
+        'image',
+        'date',
+    )
+    ordering = ('-date',)
+
+
 admin.site.register(Gear, GearAdmin)
 admin.site.register(GearAssistedMerge, GearAssistedMergeAdmin)
 admin.site.register(Telescope)
@@ -261,3 +269,4 @@ admin.site.register(MessierMarathonNominations)
 admin.site.register(Comment)
 admin.site.register(AppApiKeyRequest, AppApiRequestAdmin)
 admin.site.register(App, AppAdmin)
+admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)
