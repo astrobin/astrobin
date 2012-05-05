@@ -256,6 +256,7 @@ class Camera(Gear):
         (2, _("Guider/Planetary")),
         (3, _("Film")),
         (4, _("Compact")),
+        (5, _("Video camera")),
     )
 
     pixel_size = models.DecimalField(
