@@ -2157,6 +2157,8 @@ def user_profile_save_gear(request):
                     gear_item = v[0].objects.get(gear_ptr__pk = automerge[0].master.pk)
                 else:
                     gear_item, created = v[0].objects.get_or_create(name = name)
+            except v[0].DoesNotExist:
+                continue
             getattr(profile, k).add(gear_item)
         form.fields[k].initial = value
 
