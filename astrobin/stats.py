@@ -382,7 +382,7 @@ def subject_total_images(subject_id):
     return (flot_label, flot_data, flot_options)
 
 
-def subject_camera_types(subject_id):
+def subject_camera_types(subject_id, lang = 'en'):
     flot_label = None 
     flot_data = []
     flot_options = {
@@ -400,7 +400,7 @@ def subject_camera_types(subject_id):
         },
     }
 
-    cache_key = 'stats.subjects.camera_types.%d' % int(subject_id)
+    cache_key = 'stats.subjects.camera_types.%d.%s' % (int(subject_id), lang)
     if not cache.has_key(cache_key):
         all = Image.objects.all() \
                            .exclude(imaging_cameras__type = None) \
@@ -428,7 +428,7 @@ def subject_camera_types(subject_id):
     return (flot_label, flot_data, flot_options)
 
 
-def subject_telescope_types(subject_id):
+def subject_telescope_types(subject_id, lang='en'):
     flot_label = None 
     flot_data = []
     flot_options = {
@@ -446,7 +446,7 @@ def subject_telescope_types(subject_id):
         },
     }
 
-    cache_key = 'stats.subjects.telescope_types.%d' % int(subject_id)
+    cache_key = 'stats.subjects.telescope_types.%d.%s' % (int(subject_id), lang)
     if not cache.has_key(cache_key):
         all = Image.objects.all() \
                            .exclude(imaging_telescopes__type = None) \
