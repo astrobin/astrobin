@@ -3372,6 +3372,20 @@ def stats_telescope_types_trend_ajax(request):
 
 
 @require_GET
+def stats_subject_type_trend_ajax(request):
+    import stats as _s
+
+    (data, options) = _s.subject_type_trend()
+
+    response_dict = {
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
 def get_gear_ajax(request, image_id):
     image = get_object_or_404(Image, id = image_id)
 
