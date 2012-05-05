@@ -3317,7 +3317,7 @@ def stats_subject_total_images_ajax(request, id):
 def stats_subject_camera_types_ajax(request, id):
     import stats as _s
 
-    (label, data, options) = _s.subject_camera_types(id)
+    (label, data, options) = _s.subject_camera_types(id, request.LANGUAGE_CODE)
 
     response_dict = {
         'flot_label': label,
@@ -3332,7 +3332,7 @@ def stats_subject_camera_types_ajax(request, id):
 def stats_subject_telescope_types_ajax(request, id):
     import stats as _s
 
-    (label, data, options) = _s.subject_telescope_types(id)
+    (label, data, options) = _s.subject_telescope_types(id, request.LANGUAGE_CODE)
 
     response_dict = {
         'flot_label': label,
