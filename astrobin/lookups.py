@@ -40,7 +40,7 @@ INTERESTING_CATALOGS = (
 def autocomplete(request, what):
     values = []
     if 'q' not in request.GET:
-        return []
+        return HttpResponse(simplejson.dumps([{}]))
 
     q = smart_str(request.GET['q'])
     limit = 10
