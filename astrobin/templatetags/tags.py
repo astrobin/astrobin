@@ -450,7 +450,7 @@ def search_form_query():
         query += '&amp;telescope_type=%d' % i
 
     query += '&amp;camera_type=any'
-    for i in range(0, 5):
+    for i in range(0, 6):
         query += '&amp;camera_type=%d' % i
 
     return query
