@@ -104,6 +104,7 @@ SOLAR_SYSTEM_SUBJECT_CHOICES = (
     (8, _("Neptune")),
     (9, _("Minor planet")),
     (10, _("Comet")),
+    (11, _("Other")),
 )
 
 WATERMARK_POSITION_CHOICES = (
@@ -473,10 +474,24 @@ class Image(models.Model):
         (5, _("This ia narrow field image (less than 1 degree).")),
     )
 
+    SUBJECT_TYPE_CHOICES = (
+        (100, _("Deep sky object")),
+        (200, _("Solar system body or event")),
+        (300, _("Extremely wide field")),
+        (400, _("Star trails")),
+        (500, _("Gear")),
+        (600, _("Other")),
+    )
 
     title = models.CharField(
         max_length = 128,
         verbose_name = _("Title"),
+    )
+
+    subject_type = models.IntegerField(
+        verbose_name = _("Subject type"),
+        null = True,
+        choices = SUBJECT_TYPE_CHOICES,
     )
 
     subjects = models.ManyToManyField(

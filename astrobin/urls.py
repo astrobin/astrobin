@@ -125,7 +125,10 @@ urlpatterns = patterns('',
      url(r'^stats/telescope-types-trend/$',
         views.stats_telescope_types_trend_ajax,
         name = 'stats_telescope_types_trend'),
- 
+     url(r'^stats/subject-type-trend/$',
+        views.stats_subject_type_trend_ajax,
+        name = 'stats_subject_type_trend'),
+
     url(r'^subject/stats/images-monthly/(?P<id>\d+)/$',
         views.stats_subject_images_monthly_ajax,
         name = 'stats_subject_images_monthly'),

@@ -12,6 +12,14 @@ import unicodedata
 from collections import defaultdict
 import operator
 
+def unique_items(l):
+    found = []
+    for i in l:
+        if i not in found:
+            found.append(i)
+
+    return found
+
 
 def daterange(start, end):
     r = (end + timedelta(days=1) - start).days
@@ -67,6 +75,7 @@ def integration_hours(user, period = 'monthly', since = 0):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
+        flot_data = unique_items(flot_data)
 
     return (flot_label, flot_data, flot_options)
 
@@ -126,6 +135,7 @@ def integration_hours_by_gear(user, period='monthly'):
                         g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
                     else:
                         g_dict['data'].append([t, 0])
+                g_dict['data'] = unique_items(g_dict['data'])
 
             del g_dict['stage_data']
             flot_data.append(g_dict)
@@ -175,6 +185,7 @@ def uploaded_images(user, period='monthly'):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
+        flot_data = unique_items(flot_data)
 
     return (flot_label, flot_data, flot_options)
 
@@ -217,6 +228,7 @@ def views(user, period='daily'):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
+        flot_data = unique_items(flot_data)
 
     return (flot_label, flot_data, flot_options)
 
@@ -258,6 +270,8 @@ def image_views(image_id, period='daily'):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
+        flot_data = unique_items(flot_data)
+
 
     return (flot_label, flot_data, flot_options)
 
@@ -294,6 +308,7 @@ def subject_images_monthly(subject_id):
                 flot_data.append([grouped_date, data[grouped_date]])
             else:
                 flot_data.append([grouped_date, 0])
+        flot_data = unique_items(flot_data)
 
     return (flot_label, flot_data, flot_options)
 
@@ -334,6 +349,7 @@ def subject_integration_monthly(subject_id):
                 flot_data.append([grouped_date, data[grouped_date]])
             else:
                 flot_data.append([grouped_date, 0])
+        flot_data = unique_items(flot_data)
 
     return (flot_label, flot_data, flot_options)
 
@@ -378,6 +394,7 @@ def subject_total_images(subject_id):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
+        flot_data = unique_items(flot_data)
 
     return (flot_label, flot_data, flot_options)
 
@@ -528,6 +545,7 @@ def camera_types_trend():
                     g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
                 else:
                     g_dict['data'].append([t, 0])
+            g_dict['data'] = unique_items(g_dict['data'])
 
         del g_dict['stage_data']
         flot_data.append(g_dict)
@@ -592,6 +610,61 @@ def telescope_types_trend():
                     g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
                 else:
                     g_dict['data'].append([t, 0])
+
+        del g_dict['stage_data']
+        flot_data.append(g_dict)
+
+    return (flot_data, flot_options)
+
+
+def subject_type_trend():
+    period = 'monthly'
+    _map = {
+        'monthly': (_("Number of images by subject type"), '%Y-%m'),
+    }
+
+    flot_data = []
+    flot_options = {
+        'xaxis': {'mode': 'time'},
+        'lines': {'show': 'true'},
+        'legend': {
+            'position': 'nw',
+            'backgroundColor': '#000000',
+            'backgroundOpacity': 0.75,
+        },
+        'grid': {
+            'hoverable': True,
+        },
+    }
+
+    for g in Image.SUBJECT_TYPE_CHOICES:
+        all = Image.objects \
+            .filter(Q(subject_type = g[0])) \
+            .order_by('uploaded')
+
+        g_dict = {
+            'label': unicode(g[1]),
+            'stage_data': {},
+            'data': [],
+        }
+
+        for i in all:
+            key = i.uploaded.strftime(_map[period][1])
+            if key in g_dict['stage_data']:
+                g_dict['stage_data'][key] += 1
+            else:
+                g_dict['stage_data'][key] = 1
+
+        if all:
+            for date in daterange(all[0].uploaded.date(), datetime.today().date()):
+                grouped_date = date.strftime(_map[period][1])
+                t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+                if grouped_date in g_dict['stage_data'].keys():
+                    g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
+                else:
+                    g_dict['data'].append([t, 0])
+
+            g_dict['data'] = unique_items(g_dict['data'])
 
         del g_dict['stage_data']
         flot_data.append(g_dict)

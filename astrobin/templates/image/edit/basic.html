@@ -43,6 +43,15 @@
                     {% trans "Use a <strong>comma</strong> to separate the values." %}
                 </span>
             </p>
+
+            <p>
+                {{form.subject_type.label_tag}}
+                {{form.subject_type}}
+                <span class="helptext">
+                    {{form.subject_type.help_text}}
+                </span>
+            </p>
+
             <p>
                 {{form.solar_system_main_subject.label_tag}}
                 {{form.solar_system_main_subject}}
@@ -83,6 +92,8 @@
         $('#js_form .ui-multiselect').show();
         $('#js_form .ui-multiselect').next('.helptext').hide();
 
+        prepare_subject_fields();
+
         {% autoescape off %}
         {% for key, value in prefill_dict.items %}
         var startText = "{{value.1}}";
@@ -99,6 +110,48 @@
             resultsTitleText: resultsTitleText});
         {% endfor %}
         {% endautoescape %}
+
+        function prepare_subject_fields() {
+            function reset_ss() {
+                $('select[name=solar_system_main_subject]').val('');
+            }
+
+            function reset_ds() {
+                var $input = $('input[name=subjects]');
+                var $input_values = $('input[name=as_values_subjects]');
+                var $ul = $input.closest('ul.as-selections');
+
+                $ul.find('li.as-selection-item').remove();
+                $input.val('');
+                $input_values.val('');
+            }
+
+            var selected = $('select[name=subject_type]').find('option:selected');
+            var $ss = $('select[name=solar_system_main_subject]').closest('.control-group');
+            var $ds = $('input[name=subjects]').closest('.control-group');
+
+            if (selected.val() == 100) {
+                $ss.hide();
+                reset_ss();
+
+                $ds.show();
+            } else if (selected.val() == 200) {
+                $ds.hide();
+                reset_ds();
+
+                $ss.show();
+            } else {
+                $ss.hide();
+                $ds.hide();
+
+                reset_ss();
+                reset_ds();
+            }
+        }
+
+        $('select[name=subject_type]').change(function() {
+            prepare_subject_fields();
+        });
 
         // Perform some magic as the user types the title
         var parse_subjects = function() {

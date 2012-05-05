@@ -28,6 +28,20 @@
     </div>
 
     <div class="row plot-container">
+        <div class="span12">
+            <h2>
+                {% trans "Number of images by subject type" %}
+            </h2>
+            <div id="stats_subject_type_trend" class="plot" style="width:940px;height:200px;">
+                <div class="loading">
+                    <p>{% trans "Please wait: the plot is loading..." %}</p>
+                    <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row plot-container">
         <div class="span6">
             <div class="well"><strong>{% trans "Global distribution of camera types" %}</strong></div>
             <div class="row">
@@ -105,6 +119,19 @@ $(document).ready(function() {
         {% endif %}
         5000);
     astrobin_stats.enableTooltips("#stats_integration_hours");
+
+    $.ajax({
+        url: "{% url stats_subject_type_trend %}",
+        method: 'GET',
+        dataType: 'json',
+        timeout: 5000,
+        success: function(series) {
+            $.plot($('#stats_subject_type_trend'),
+                series['flot_data'],
+                series['flot_options']);
+        }
+    });
+    astrobin_stats.enableTooltips("#stats_subject_type_trend");
 
     astrobin_stats.plot_pie(
         '#stats_camera_types',
