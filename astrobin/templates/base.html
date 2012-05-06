@@ -506,9 +506,9 @@
                 });
 
                 $('.notice-container a.notifications').click(function(event) {
-                    $(document).one('click', function() {
+                    setTimeout(function() {
                         notifications_mark_seen();
-                    });
+                    }, 1000);
                 });
 
                 var notifications_read_timer = 0;
@@ -518,9 +518,7 @@
                         url: '/notifications/seen/',
                         dataType: 'json',
                         success: function() {
-                            $('img#notifications').attr('src',
-                                '{{STATIC_URL}}icons/iconic/orange/notifications.gif');
-                            $('ul#notification-feed li.unread').removeClass('unread');
+                            $('#notifications-popup li.unread').removeClass('unread');
                             $('#notifications_count').remove();
                         }
                     });

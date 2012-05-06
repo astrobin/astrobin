@@ -5,5 +5,7 @@
 
 {% block content %}
     <h1>{% trans "Here are your notifications" %}</h1>
-    {% notification_list request 0 0 %}
+    <ul>
+        {% notification_list request 0 0 %}
+    </ul>
 {% endblock %}

@@ -1,11 +1,20 @@
 {% load i18n %}
 
-{% if notifications %}
-    {% for n in notifications %}
-    <li {% if n.unseen %}class="unread"{% endif %}>
+{% if unseen or seen %}
+    {% for n in unseen %}
+    <li class="unread">
         {% autoescape off %}{{n.message}}{% endautoescape %}
     </li>
     {% endfor %}
+
+    {% if seen %}
+        {% if unseen %}
+            <li class="divider"></li>
+        {% endif %}
+        {% for n in seen %}
+        <li>{% autoescape off %}{{n.message}}{% endautoescape %}</li>
+        {% endfor %}
+    {% endif %}
 
     {% if show_footer %}
     <li class="divider"></li>
@@ -14,5 +23,5 @@
     </li>
     {% endif %}
 {% else %}
-    <li>{% trans "You have no new notifications." %}</li>
+    <li><a href="#">{% trans "You have no new notifications." %}</a></li>
 {% endif %}
