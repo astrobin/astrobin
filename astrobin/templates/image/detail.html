@@ -374,9 +374,9 @@
                 </div>
                 {% endif %}
 
-                {% if image.subject_type == 100 or image.subject_type == 200 %}
-                    <div class="row">
-                        <div class="span8">
+                <div class="row">
+                    <div class="span8">
+                        {% if image.subject_type == 100 or image.subject_type == 200 %}
                             {% trans "Contains" %}:
                             {% if solar_system_main_subject >= 0 %}
                                 <a href="/search/?q=&amp;ssms={{solar_system_main_subject_id}}{% search_form_query %}">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
@@ -410,10 +410,10 @@
                                     </span>
                                 </span>
                             {% endif %}
-                        </div> <!-- span8 -->
-                    </div>
+                        {% endif %}
+                    </div> <!-- span8 -->
                 </div>
-            {% endif %}
+            </div>
 
             {% if revisions or is_revision %}
             <div class="row">
