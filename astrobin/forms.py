@@ -66,19 +66,21 @@ class ImageEditBasicForm(forms.ModelForm):
         return self.cleaned_data['link'].strip()
 
     def clean(self):
-        skip_as = False
-        try:
-            subjects = self.data['as_values_subjects'].strip()
-        except MultiValueDictKeyError:
-            skip_as = True
+        subject_type = self.cleaned_data['subject_type']
+        if subject_type in (100, 200):
+            skip_as = False
+            try:
+                subjects = self.data['as_values_subjects'].strip()
+            except MultiValueDictKeyError:
+                skip_as = True
 
-        solar_system = self.cleaned_data['solar_system_main_subject']
-        nojs_subjects = self.data['subjects'].strip()
+            solar_system = self.cleaned_data['solar_system_main_subject']
+            nojs_subjects = self.data['subjects'].strip()
 
-        if solar_system is None and\
-             (skip_as or (len(subjects) == 0 or (len(subjects) == 1 and subjects[0] in ('', ',')))) and\
-             (len(nojs_subjects) == 0 or (len(nojs_subjects) == 1 and nojs_subjects[0] in ('', ','))):
-            raise forms.ValidationError(_("Please enter either some subjects or a main solar system subject."));
+            if solar_system is None and\
+                 (skip_as or (len(subjects) == 0 or (len(subjects) == 1 and subjects[0] in ('', ',')))) and\
+                 (len(nojs_subjects) == 0 or (len(nojs_subjects) == 1 and nojs_subjects[0] in ('', ','))):
+                raise forms.ValidationError(_("Please enter either some subjects or a main solar system subject."));
 
         return self.cleaned_data
 
