@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:02+0000\n"
-"PO-Revision-Date: 2012-04-22 10:00+0100\n"
+"PO-Revision-Date: 2012-05-06 11:53+0100\n"
 "Last-Translator: leonh <leonh@ndreke.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -1145,18 +1145,16 @@ msgid "Users"
 msgstr "Benutzer"
 
 #: forms.py:263
-#, fuzzy
 msgid "Telescope type"
-msgstr "Teleskopöffnung"
+msgstr "Teleskoptyp"
 
 #: forms.py:264 forms.py:270
 msgid "Any"
-msgstr ""
+msgstr "Beliebig"
 
 #: forms.py:269
-#, fuzzy
 msgid "Camera type"
-msgstr "Objektiv"
+msgstr "Kameratyp"
 
 #: forms.py:282 forms.py:287
 msgid "Express value in mm"
@@ -1609,9 +1607,8 @@ msgid "Compact"
 msgstr "Kompaktkamera"
 
 #: models.py:260
-#, fuzzy
 msgid "Video camera"
-msgstr "Nachführkamera"
+msgstr "Videokamera"
 
 #: models.py:264 models.py:569 templates/popover/gear_camera.html:6
 msgid "Pixel size"
@@ -1724,22 +1721,20 @@ msgid "This ia narrow field image (less than 1 degree)."
 msgstr "Es handelt sich um eine Nahaufnahme (weniger als 1 Grad)."
 
 #: models.py:478
-#, fuzzy
 msgid "Deep sky object"
-msgstr "Alle Deep-Sky-Objekte"
+msgstr "Deep-Sky-Objekte"
 
 #: models.py:479
-#, fuzzy
 msgid "Solar system body or event"
-msgstr "Sonnensystem"
+msgstr "Sonnensystemkörper oder -ereignis"
 
 #: models.py:480 views.py:1757 templates/wall.html:127
 msgid "Extremely wide field"
-msgstr ""
+msgstr "\"Extremely wide field\""
 
 #: models.py:481 views.py:1763 templates/wall.html:133
 msgid "Star trails"
-msgstr ""
+msgstr "Startrails"
 
 #: models.py:482 views.py:1769 templates/base.html:233
 #: templates/profile-edit-menu.html:9 templates/wall.html:139
@@ -2239,29 +2234,24 @@ msgid "Total images"
 msgstr "Anzahl Bilder"
 
 #: stats.py:497 stats.py:559
-#, fuzzy
 msgid "Integration hours by camera type"
-msgstr "Aufnahmedauer (in h) nach Ausrüstung"
+msgstr "Aufnahmedauer in Stunden nach Kameratyp"
 
 #: stats.py:578
-#, fuzzy
 msgid "Refractor"
-msgstr "Refraktor: Achromat"
+msgstr "Refraktor"
 
 #: stats.py:579
-#, fuzzy
 msgid "Reflector"
-msgstr "Reflektor: Nasmyth"
+msgstr "Reflektor"
 
 #: stats.py:580
-#, fuzzy
 msgid "Catadioptric"
-msgstr "Katadiopter: Maksutov"
+msgstr "Katadiopter"
 
 #: stats.py:623 templates/stats.html:33
-#, fuzzy
 msgid "Number of images by subject type"
-msgstr "Neues Bild von %(originator)s"
+msgstr "Anzahl Bilder nach Objekttyp"
 
 #: views.py:727
 msgid "Resolution"
@@ -2338,9 +2328,8 @@ msgstr ""
 "strong> im Menü <strong>Bearbeiten</strong> ergänzt werden."
 
 #: views.py:1719
-#, fuzzy
 msgid "Gear images"
-msgstr "Keine Bilder"
+msgstr "Bilder der Ausrüstung"
 
 #: views.py:1751 templates/image/edit/acquisition.html:99
 msgid "Solar system"
@@ -2487,23 +2476,20 @@ msgid "There was a reply to your comment"
 msgstr "Es gibt eine Antwort zu deinem Kommentar"
 
 #: management/__init__.py:117
-#, fuzzy
 msgid "Your image was favorited"
-msgstr "Dein Bild wurde gelöscht"
+msgstr "Dein Bild wurde zu Favoriten hinzugefügt"
 
 #: management/__init__.py:123
-#, fuzzy
 msgid "New image with some gear you follow"
-msgstr "Neues Bild eines Benutzers, dem Du folgst"
+msgstr "Neues Bild mit Ausrüstung, der du folgst"
 
 #: management/__init__.py:129
-#, fuzzy
 msgid "New image of a subject you follow"
-msgstr "Neues Bild eines Benutzers, dem Du folgst"
+msgstr "Neues Bild eines Objektes, dem du folgst"
 
 #: management/__init__.py:135
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "Die API-Key Anfrage wurde bestätigt"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2519,7 +2505,7 @@ msgstr ""
 
 #: templates/app_api_key_request.html:6
 msgid "Request an API key"
-msgstr ""
+msgstr "API-Key beantragen"
 
 #: templates/app_api_key_request.html:8
 msgid ""
@@ -2573,9 +2559,8 @@ msgid "Explore"
 msgstr "Durchsuchen"
 
 #: templates/base.html:86
-#, fuzzy
 msgid "Popular subjects"
-msgstr "Mehr: selber Betreff"
+msgstr "Beliebte Objekte"
 
 #: templates/base.html:88 templates/explore_choose.html:8
 #: templates/wall.html:159
@@ -2592,7 +2577,7 @@ msgstr "Messier Marathon"
 
 #: templates/base.html:93
 msgid "Advanced search"
-msgstr ""
+msgstr "Erweiterte Suche"
 
 #: templates/base.html:95 templates/stats.html:7
 #: templates/subject/page.html:72 templates/user/card.html:27
@@ -2617,13 +2602,12 @@ msgid "FAQ"
 msgstr "FAQ"
 
 #: templates/base.html:110 templates/contact_form/contact.html:6
-#, fuzzy
 msgid "Contact"
-msgstr "Beinhaltet"
+msgstr "Kontakt"
 
 #: templates/base.html:171
 msgid "Help with translations!"
-msgstr ""
+msgstr "Helfe mit beim Übersetzen!"
 
 #: templates/base.html:179
 msgid "Please select your language from the options above."
@@ -2636,9 +2620,8 @@ msgid "Upload"
 msgstr "Hochladen"
 
 #: templates/base.html:201
-#, fuzzy
 msgid "My places"
-msgstr "Meine Seite"
+msgstr "Meine Seiten"
 
 #: templates/base.html:204 templates/user/profile-subnav.html:14
 msgid "Gallery"
@@ -2647,7 +2630,7 @@ msgstr "Gallerie"
 #: templates/base.html:209 templates/image/detail.html:719
 #: templates/user/profile-subnav.html:19
 msgid "Favorites"
-msgstr ""
+msgstr "Favoriten"
 
 #: templates/base.html:214 templates/image/detail.html:454
 #: templates/image/full.html:73 templates/user/profile-subnav.html:24
@@ -2659,9 +2642,8 @@ msgid "Plots"
 msgstr "Aufnahmepunkte"
 
 #: templates/base.html:224
-#, fuzzy
 msgid "My messages"
-msgstr "Nachrichten"
+msgstr "Meine Nachrichten"
 
 #: templates/base.html:227 templates/user/profile-subnav.html:48
 msgid "API Keys"
@@ -2669,10 +2651,9 @@ msgstr ""
 
 #: templates/base.html:231
 msgid "My settings"
-msgstr ""
+msgstr "Meine Einstellungen"
 
 #: templates/base.html:232 templates/subject/page.html:13
-#, fuzzy
 msgid "Basic information"
 msgstr "Grundlegende Information"
 
@@ -2681,9 +2662,8 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 #: templates/base.html:237 templates/profile-edit-menu.html:24
-#, fuzzy
 msgid "Avatar"
-msgstr "Katar"
+msgstr "Profilbild"
 
 #: templates/base.html:239 templates/user/profile.html:96
 #: templates/user/profile.html.py:99
@@ -3325,6 +3305,10 @@ msgid ""
 "interesting statistics. There is also a page that shows the most popular "
 "subjects organized by month and latitude!"
 msgstr ""
+"Auf <em>AstroBin</em> hat jedes astronomische Objekt seine eigene Seite, auf "
+"der du die besten Bilder sowie Graphen mit interessanten Trends und "
+"Statistiken findest. Es gibt außerdem eine Seite, auf der die beliebtesten "
+"Objekte nach Monat und Breitengrad geordnet angezeigt werden."
 
 #: templates/help.html:33
 msgid "Data is strongly interconnected"
@@ -3353,12 +3337,20 @@ msgid ""
 "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
 "want, you can search by telescope diameter too!"
 msgstr ""
+"AstroBin erlaubt die Suche nach Bildern, die mit einer bestimmten Ausrüstung "
+"erstellt wurden und kann dir damit beim Kauf eines neuen Teleskops oder "
+"einer neuen Kamera helfen. So kannst du beispielsweise nach allen Bildern "
+"suchen, die mit einer Canon 5D  und einem Apochromat-Reflektor oder einer "
+"SBIG ST-8300 mit einem Richtey-Chretien-Teleskop aufgenommen wurden. Sogar "
+"eine Suche anhand des Teleskopdurchmessers ist möglich!"
 
 #: templates/help.html:41
 msgid ""
 "Finally, all this information is collected in interesting plots, that can "
 "help you figure out how some gear items are trending."
 msgstr ""
+"All diese Information wird in interessanten Graphen gesammelt, die dir dabei "
+"helfen können, neue Ausrüstungstrends zu erkennen."
 
 #: templates/help.html:45
 msgid "All the data at a glance"
@@ -3432,15 +3424,13 @@ msgid "AstroBin is social!"
 msgstr "AstroBin ist sozial!"
 
 #: templates/help.html:71
-#, fuzzy
 msgid ""
 "On <em>AstroBin</em> you can message other astrophotographer, follow them "
 "and be notified when they post new images, or perform requests for more data."
 msgstr ""
 "Auf <em>AstroBin</em> kann man Nachrichten an andere Astrofotografen "
-"schicken, ihnen folgen (follow), um mitzubekommen, wenn sie ein neues Bild "
-"hochgeladen haben, oder mehr Daten dazu anfordern. Man kann auch über Bilder "
-"abstimmen."
+"schicken und ihnen folgen, um mitzubekommen, wenn sie ein neues Bild "
+"hochgeladen haben, oder mehr Daten dazu anfordern."
 
 #: templates/help.html:74
 msgid ""
@@ -3448,6 +3438,11 @@ msgid ""
 "there's a new image from a certain CCD, or telescope, or filter, and so on. "
 "Or you can monitor all the new images of a certain galaxy or nebula."
 msgstr ""
+"Du kannst Ausrüstungsgegenständen oder astronomischen Objekten folgen, um "
+"benachrichtigt zu werden, sobald ein neues Bild, welches mit einem "
+"bestimmten CCD, Teleskop oder Filter erstellt wurde, hochgeladen wird. So "
+"kannst du auch den Überblick über alle Bilder einer bestimmten Galaxie oder "
+"eines bestimmten Nebels behalten, die hochgeladen werden."
 
 #: templates/help.html:77
 msgid ""
@@ -3455,6 +3450,9 @@ msgid ""
 "might be chosen to appear in the site's <em>Messier Marathon</em>, or as "
 "<em>Currently hot</em> on the front page."
 msgstr ""
+"Du kannst über Bilder abstimmen oder sie zu deinen Favoriten hinzufügen. "
+"Deine Bilder können ausgewählt werden, um dann im <em>Messier Marathon</em> "
+"oder direkt auf der Hauptseite ausgestellt zu werden."
 
 # in german there are 2 ways for adressing people: "Du" and 'Sie" (friendllike you or professional/polite/bussinesslike you)
 #: templates/help.html:81
@@ -3534,29 +3532,26 @@ msgstr ""
 "Einsichten in die Arbeit und über die am meisten genutzte Ausrüstung."
 
 #: templates/index.html:45
-#, fuzzy
 msgid "Image of the day"
-msgstr "Hochgeladene Bilder"
+msgstr "Bild des Tages"
 
 #: templates/index.html:87
-#, fuzzy
 msgid "Recent"
-msgstr "RA Zentrum"
+msgstr "Neuste"
 
 #: templates/index.html:101
-#, fuzzy
 msgid "Followed"
-msgstr "Follow"
+msgstr "Gefolgt"
 
 #: templates/index.html:115 templates/index.html.py:116
 #: templates/index.html:117 templates/index.html.py:118
 #: templates/index.html:119
 msgid "Recently voted 5 stars"
-msgstr ""
+msgstr "Kürzlich mit 5 Sternen bewertet"
 
 #: templates/index.html:132
 msgid "Recently favorited"
-msgstr ""
+msgstr "Kürzlich zu Favoriten hinzugefügt"
 
 #: templates/index.html:147 templates/image/detail.html:265
 #: templates/image/detail.html.py:1248 templates/image/detail.html:1262
@@ -3571,6 +3566,7 @@ msgstr ""
 msgid "Follow"
 msgstr "Follow"
 
+# This is the "official" translation of the term that Twitter also uses.
 #: templates/index.html:147 templates/image/detail.html:1262
 #: templates/image/detail.html.py:1263
 #: templates/popover/gear_accessory.html:12
@@ -3579,9 +3575,8 @@ msgstr "Follow"
 #: templates/popover/gear_mount.html:13
 #: templates/popover/gear_software.html:11
 #: templates/popover/gear_telescope.html:13 templates/popover/subject.html:21
-#, fuzzy
 msgid "Unfollow"
-msgstr "Follow"
+msgstr "Entfolgen"
 
 #: templates/leaderboard.html:17 templates/image/detail.html:246
 #: templates/user/profile-subnav.html:58
@@ -3713,32 +3708,28 @@ msgid "Visit the Messier Marathon"
 msgstr "Den Messier Marathon besuchen"
 
 #: templates/most_popular.html:12
-#, fuzzy
 msgid "Select latitude"
-msgstr "Lizenz auswählen"
+msgstr "Breitengrad auswählen"
 
 #: templates/most_popular.html:17
-#, fuzzy
 msgid "From latitude:"
-msgstr "Höhe"
+msgstr "Von Breitengrad:"
 
 #: templates/most_popular.html:45
-#, fuzzy
 msgid "To latitude:"
-msgstr "Höhe"
+msgstr "Bis Breitengrad:"
 
 #: templates/most_popular.html:73
 msgid "Hemisphere:"
-msgstr ""
+msgstr "Halbkugel"
 
 #: templates/most_popular.html:90
 msgid "Both"
-msgstr ""
+msgstr "Beide"
 
 #: templates/most_popular.html:98
-#, fuzzy
 msgid "Most popular subjects"
-msgstr "Mehr: selber Betreff"
+msgstr "Beliebteste Objekte"
 
 #: templates/most_popular.html:100
 msgid ""
@@ -3746,6 +3737,9 @@ msgid ""
 "subject, one image has been chosen. Use the menu to limit the images to "
 "those acquired from a certain latitude on Earth."
 msgstr ""
+"Dies sind die beliebtesten Objekte auf AstroBin. Für jedes Objekt wurde ein "
+"Bild ausgewählt. Im Menü kannst du die angezeigten Bilder auf solche "
+"eingrenzen, die von einem bestimmten Breitengrad aufgenommen wurden."
 
 #: templates/nightly.html:7
 msgid "Images acquired night after night"
@@ -3824,19 +3818,19 @@ msgstr "Lädt..."
 
 #: templates/stats.html:46
 msgid "Global distribution of camera types"
-msgstr ""
+msgstr "Globale Verteilung des Kameratyps"
 
 #: templates/stats.html:64
 msgid "Global distribution of telescope types"
-msgstr ""
+msgstr "Globale Verteilung des Teleskoptyps"
 
 #: templates/stats.html:84
 msgid "CCD vs DLSR: the global trend"
-msgstr ""
+msgstr "CCD vs. DSLR: der globale Trend"
 
 #: templates/stats.html:94
 msgid "Global trend of telescope types"
-msgstr ""
+msgstr "Globaler Trend von Teleskoptypen"
 
 #: templates/tos.html:9
 msgid ""
@@ -3917,7 +3911,7 @@ msgstr "Bewertung"
 
 #: templates/wall.html:43 templates/image/detail.html:683
 msgid "Favorited"
-msgstr ""
+msgstr "Zu Favoriten hinzugefügt"
 
 #: templates/wall.html:49 templates/image/detail.html:455
 #: templates/image/detail.html.py:715 templates/search/search.html:31
@@ -3962,43 +3956,40 @@ msgid "Remove filter"
 msgstr "Filter entfernen"
 
 #: templates/avatar/change.html:9
-#, fuzzy
 msgid "Change your avatar"
-msgstr "Ändere Dein Passwort"
+msgstr "Ändere dein Avatar"
 
 #: templates/avatar/change.html:16
 msgid "You do not yet have an avatar. Please upload one now."
-msgstr ""
+msgstr "Du hast noch keinen Avatar. Bitte lade jetzt einen hoch."
 
 #: templates/avatar/change.html:21
 msgid "Current avatar"
-msgstr ""
+msgstr "Aktueller Avatar"
 
 #: templates/avatar/change.html:28
-#, fuzzy
 msgid "Previously uploaded"
-msgstr "Hochgeladene Bilder"
+msgstr "Bereits hochgeladen"
 
 #: templates/avatar/change.html:31
-#, fuzzy
 msgid "Choose new default"
-msgstr "Datei auswählen"
+msgstr "Wähle eine neue Vorgabe aus"
 
 #: templates/avatar/change.html:37
-#, fuzzy
 msgid "Upload a new image"
 msgstr "Bild hochladen"
 
 #: templates/avatar/change.html:39
-#, fuzzy
 msgid "Avatar image"
-msgstr "Wasserzeichen hinzufügen"
+msgstr "Profilbild"
 
 #: templates/contact_form/contact.html:9
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
+"Wenn du Hilfe brauchst, ein Problem melden, Feedback oder Vorschläge geben, "
+"oder einfach nur Hallo sagen willst, dann schreib uns!"
 
 #: templates/contact_form/contact.html:15 templates/image/detail.html:1254
 #: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
@@ -4007,9 +3998,8 @@ msgid "Send"
 msgstr "Senden"
 
 #: templates/contact_form/contact_completed.html:5
-#, fuzzy
 msgid "Thank you! Your message was sent successfully."
-msgstr "Dein Bild wurde erfolgreich plate-solved."
+msgstr "Danke! Deine Nachricht wurde versendet."
 
 #: templates/image/detail.html:20
 msgid ""
@@ -4120,9 +4110,8 @@ msgid "Inverted monochrome"
 msgstr "Monochromes Negativ"
 
 #: templates/image/detail.html:190 templates/image/detail.html.py:214
-#, fuzzy
 msgid "Annotated (original version)"
-msgstr "Anmerkungen (originale Version)"
+msgstr "Annotiert (originale Version)"
 
 #: templates/image/detail.html:195 templates/image/detail.html.py:219
 msgid "Annotated"
@@ -4289,52 +4278,47 @@ msgstr "Noch keine Kommentare."
 
 #: templates/image/detail.html:681
 msgid "Already favorited"
-msgstr ""
+msgstr "Bereits zu Favoriten hinzugefügt"
 
 #: templates/image/detail.html:681
-#, fuzzy
 msgid "Mark as favorite"
-msgstr "Als erledigt markieren."
+msgstr "Zu Favoriten hinzufügen"
 
 #: templates/image/detail.html:685
 msgid "Favorite"
-msgstr ""
+msgstr "Favorit"
 
 #: templates/image/detail.html:723
 msgid "Votes"
-msgstr ""
+msgstr "Stimmen"
 
 #: templates/image/detail.html:750
 msgid "Sharing mode"
-msgstr ""
+msgstr "Teilen-Modus"
 
 #: templates/image/detail.html:752
-#, fuzzy
 msgid "Simple link"
-msgstr "AstroBin Links"
+msgstr "Einfacher Link"
 
 #: templates/image/detail.html:753
 msgid "Forums"
-msgstr ""
+msgstr "Foren"
 
 #: templates/image/detail.html:758
 msgid "Thumbnail"
-msgstr ""
+msgstr "Vorschau"
 
 #: templates/image/detail.html:760 templates/user/api_keys.html:29
-#, fuzzy
 msgid "Yes"
-msgstr "Ja."
+msgstr "Ja"
 
 #: templates/image/detail.html:761
-#, fuzzy
 msgid "No"
-msgstr "Nein."
+msgstr "Nein"
 
 #: templates/image/detail.html:767
-#, fuzzy
 msgid "Image size"
-msgstr "Bilder"
+msgstr "Bildgröße"
 
 #: templates/image/detail.html:769 templates/image/detail.html.py:1283
 msgid "Regular"
@@ -4342,10 +4326,9 @@ msgstr "Durchschnittlich"
 
 #: templates/image/detail.html:770
 msgid "Full"
-msgstr ""
+msgstr "Voll"
 
 #: templates/image/detail.html:774
-#, fuzzy
 msgid "Copy this"
 msgstr "Kopieren"
 
@@ -4355,17 +4338,16 @@ msgid "Copy"
 msgstr "Kopieren"
 
 #: templates/image/detail.html:787
-#, fuzzy
 msgid "Image mode"
-msgstr "Hochgeladene Bilder"
+msgstr "Bildmodus"
 
 #: templates/image/detail.html:818
 msgid "Favorited!"
-msgstr ""
+msgstr "Zu Favoriten hinzugefügt!"
 
 #: templates/image/detail.html:838
 msgid "Copied!"
-msgstr ""
+msgstr "Kopiert!"
 
 #: templates/image/detail.html:1084
 msgid "just now"
@@ -4491,14 +4473,12 @@ msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "von <a href=\"%(the_url)s\">%(user)s</a>"
 
 #: templates/image/full.html:79
-#, fuzzy
 msgid "Fit to window"
-msgstr "Bild- an Fenstergrösse anpassen"
+msgstr "An Fenstergrösse anpassen"
 
 #: templates/image/full.html:83
-#, fuzzy
 msgid "Full resolution"
-msgstr "Volle Auflösung anzeigen"
+msgstr "Volle Auflösung"
 
 #: templates/image/actions/bring_to_attention.html:6
 msgid "Bring image to attention"
@@ -4700,25 +4680,28 @@ msgstr ""
 msgid ""
 "Use this button to import the gear settings from another image of yours."
 msgstr ""
+"Verwende diesen Knopf, um die Ausrüstungseinstellungen von einem deiner "
+"anderen Bilder zu übernehmen."
 
 #: templates/image/edit/gear.html:34
 msgid "Copy from another image"
-msgstr ""
+msgstr "Von einem anderen Bild kopieren"
 
 #: templates/image/edit/gear.html:58
 msgid "Next step: acquisition"
-msgstr "Nächster Schriit: Aufnahme"
+msgstr "Nächster Schritt: Aufnahme"
 
 #: templates/image/edit/gear.html:69
-#, fuzzy
 msgid "Copy gear"
-msgstr "Kopieren"
+msgstr "Ausrüstung übernehmen"
 
 #: templates/image/edit/gear.html:73
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
 "for you, but you will still need to save it in the end."
 msgstr ""
+"Das Übernehmen der Ausrüstung von einem anderen Bild füllt das "
+"Ausrüstungsformular automatisch aus. Trotzdem musst du es am Ende speichern."
 
 #: templates/image/edit/license.html:7
 msgid "Change the license for this image"
@@ -4830,7 +4813,7 @@ msgstr "Formular gespeichert: Danke!"
 
 #: templates/inclusion_tags/image_list.html:9
 msgid "by"
-msgstr ""
+msgstr "von"
 
 #: templates/inclusion_tags/image_list.html:22
 #: templates/inclusion_tags/messier_list.html:21
@@ -4907,15 +4890,15 @@ msgstr "Empfangene Anfragen verwalten"
 
 # einmal: auch einst. Bei Ziffern: x-mal, nicht x mal.
 #: templates/inclusion_tags/search_image_list.html:27
-#, fuzzy, python-format
+#, python-format
 msgid "Favorited one time"
 msgid_plural "Favorited %(counter)s times"
-msgstr[0] "einmal betrachtet"
-msgstr[1] "%(counter)s-mal betrachtet"
+msgstr[0] "Einmal zu Favoriten hinzugefügt"
+msgstr[1] "%(counter)s-mal zu Favoriten hinzugefügt"
 
 #: templates/inclusion_tags/search_image_list.html:29
 msgid "Never favorited"
-msgstr ""
+msgstr "Nie zu Favoriten hinzugefügt"
 
 #: templates/inclusion_tags/search_image_list.html:44
 #, python-format
@@ -4954,21 +4937,20 @@ msgid "Messages"
 msgstr "Nachrichten"
 
 #: templates/messages/inbox.html:22
-#, fuzzy
 msgid "Status"
-msgstr "Statistik"
+msgstr "Status"
 
 #: templates/messages/inbox.html:23
 msgid "Last sender"
-msgstr ""
+msgstr "Letzter Absender"
 
 #: templates/messages/inbox.html:24
 msgid "Date and time"
-msgstr ""
+msgstr "Datum und Uhrzeit"
 
 #: templates/messages/inbox.html:26
 msgid "Excerpt"
-msgstr ""
+msgstr "Ausschnitt"
 
 #: templates/messages/inbox.html:31
 msgid "New!"
@@ -6142,11 +6124,10 @@ msgid "Edit your site preferences"
 msgstr "Deine Site-Einstellungen bearbeiten"
 
 #: templates/user/profile/edit/preferences.html:14
-#, fuzzy
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
-msgstr "Wähle welche EMail Benachritigung Du erhalten möchtest:"
+msgstr "Wähle welche E-Mail Benachrichtigung du erhalten möchtest:"
 
 #, fuzzy
 #~ msgid "Hot right now"
