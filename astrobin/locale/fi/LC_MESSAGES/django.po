@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:03+0000\n"
-"PO-Revision-Date: 2012-05-06 11:45+0100\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2012-05-06 12:43+0100\n"
+"Last-Translator: Jussi <jussi.kantola@gmail.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -4220,7 +4220,7 @@ msgstr "Annetut äänet"
 
 #: templates/image/detail.html:750
 msgid "Sharing mode"
-msgstr ""
+msgstr "Jakamistapa"
 
 #: templates/image/detail.html:752
 msgid "Simple link"
@@ -4265,9 +4265,8 @@ msgid "Copy"
 msgstr "Kopioi"
 
 #: templates/image/detail.html:787
-#, fuzzy
 msgid "Image mode"
-msgstr "Astrometrinen ratkaisu tehty"
+msgstr "Kuvan tila"
 
 #: templates/image/detail.html:818
 msgid "Favorited!"
@@ -4851,9 +4850,8 @@ msgid "Messages"
 msgstr "Viestit"
 
 #: templates/messages/inbox.html:22
-#, fuzzy
 msgid "Status"
-msgstr "Tilastot"
+msgstr "Status"
 
 #: templates/messages/inbox.html:23
 msgid "Last sender"
@@ -4949,14 +4947,24 @@ msgid ""
 "    \n"
 "    Thank you for using AstroBin's APIs!"
 msgstr ""
+"Rajapinta-avainpyyntösi on hyväksytty!\n"
+"\n"
+"API-avain: %(key)s\n"
+"Salasana: %(secret)s\n"
+"\n"
+"Luethan API-dokumenaation %(api_docs_url)s\n"
+"\n"
+"Voit katsella API-avaimiasi osoitteessa %(api_keys_url)s\n"
+"\n"
+"Kiitos kun käytät AstroBin'in rajapintoja!"
 
 #: templates/notification/api_key_request_approved/notice.html:2
 #: templates/notification/api_key_request_approved/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
 "a>"
-msgstr "<a href=\"%(object_url)s\">Kuvasi on käsitelty.</a>"
+msgstr "<a href=\"%(api_keys_url)s\">Rajapinta-avainpyyntösi on hyväksytty!</a>"
 
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
@@ -5678,9 +5686,8 @@ msgid "Interesting links"
 msgstr ""
 
 #: templates/subject/page.html:55
-#, fuzzy
 msgid "SIMBAD page"
-msgstr "Oma sivu"
+msgstr "SIMBAD -sivu"
 
 #: templates/subject/page.html:60
 msgid "SIMBAD clickable map"
