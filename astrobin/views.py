@@ -306,6 +306,14 @@ def wall(request):
         sqs = sqs.filter(is_planets = True)
     elif filter == 'comets':
         sqs = sqs.filter(is_comets = True)
+    elif filter == 'wide':
+        sqs = sqs.filter(subject_type = 300)
+    elif filter == 'trails':
+        sqs = sqs.filter(subject_type = 400)
+    elif filter == 'gear':
+        sqs = sqs.filter(subject_type = 500)
+    elif filter == 'other':
+        sqs = sqs.filter(subject_type = 600)
 
     return object_list(
         request, 
@@ -1708,6 +1716,12 @@ def user_page(request, username):
                 for i in sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None)).distinct():
                     k_dict[l]['images'].append(i)
 
+                l = _("Gear images")
+                k_dict = {l: {'message': None, 'images': []}}
+                k_list.append(k_dict)
+                for i in sqs.filter(Q(subject_type = 500)).distinct():
+                    k_dict[l]['images'].append(i)
+
                 sqs = Image.objects.none()
         elif subsection == 'subject':
             def reverse_subject_type(label):
@@ -1740,11 +1754,39 @@ def user_page(request, username):
                 for i in sqs.filter(solar_system_main_subject__gte = 1):
                     k_dict[l]['images'].append(i)
 
+                l = _("Extremely wide field")
+                k_dict = {l: {'message': None, 'images': []}}
+                k_list.append(k_dict)
+                for i in sqs.filter(subject_type = 300):
+                    k_dict[l]['images'].append(i)
+
+                l = _("Star trails")
+                k_dict = {l: {'message': None, 'images': []}}
+                k_list.append(k_dict)
+                for i in sqs.filter(subject_type = 400):
+                    k_dict[l]['images'].append(i)
+
+                l = _("Gear")
+                k_dict = {l: {'message': None, 'images': []}}
+                k_list.append(k_dict)
+                for i in sqs.filter(subject_type = 500):
+                    k_dict[l]['images'].append(i)
+
+                l = _("Other")
+                k_dict = {l: {'message': None, 'images': []}}
+                k_list.append(k_dict)
+                for i in sqs.filter(subject_type = 600):
+                    k_dict[l]['images'].append(i)
+
                 l = _("No subjects specified")
                 k_dict = {l: {'message': None, 'images': []}}
                 k_dict[l]['message'] = _("To fill in the missing subjects, use the <strong>Edit basic information</strong> entry in the <strong>Actions</strong> menu for each image.")
                 k_list.append(k_dict)
-                for i in sqs.filter(Q(subjects = None) & (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))).distinct():
+                for i in sqs.filter(
+                    (Q(subject_type = 100) | Q(subject_type = 200)) &
+                    (Q(subjects = None)) &
+                    (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))).distinct():
+
                     k_dict[l]['images'].append(i)
 
                 sqs = Image.objects.none()

@@ -118,7 +118,36 @@
                             {% trans "Comets" %}
                         </a>
                     </li>
+
                     <li class="divider"></li>
+
+                    <li>
+                        <a href="{% query_string "filter='wide'" "" %}">
+                            <span class="bg-icon{% if filter == 'wide' %} icon-check{% endif %}"></span>
+                            {% trans "Extremely wide field" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "filter='trails'" "" %}">
+                            <span class="bg-icon{% if filter == 'trails' %} icon-check{% endif %}"></span>
+                            {% trans "Star trails" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "filter='gear'" "" %}">
+                            <span class="bg-icon{% if filter == 'gear' %} icon-check{% endif %}"></span>
+                            {% trans "Gear" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% query_string "filter='other'" "" %}">
+                            <span class="bg-icon{% if filter == 'other' %} icon-check{% endif %}"></span>
+                            {% trans "Other" %}
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+
                     <li class="bg-icon">
                         <a href="{% query_string "" "filter" %}">{% trans "Remove filter" %}</a>
                     </li>

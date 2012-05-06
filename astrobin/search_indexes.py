@@ -136,6 +136,8 @@ class ImageIndex(SearchIndex):
 
     comments = IntegerField()
 
+    subject_type = IntegerField(model_attr = 'subject_type')
+
     def index_queryset(self):
         return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
 
