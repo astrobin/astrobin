@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-21 14:06-0400\n"
-"PO-Revision-Date: 2012-03-07 07:25+0100\n"
+"PO-Revision-Date: 2012-04-30 14:02+0100\n"
 "Last-Translator: Cre3p <Creep_gr29@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -381,7 +381,7 @@ msgstr "Γουατεμάλα"
 
 #: fields.py:100
 msgid "Guernsey"
-msgstr "Γκέρνσει "
+msgstr "Γκέρνσεϊ"
 
 #: fields.py:101
 msgid "Guinea"
@@ -397,7 +397,7 @@ msgstr "Γκουιάνα"
 
 #: fields.py:104
 msgid "Haiti"
-msgstr ""
+msgstr "Αϊτή"
 
 #: fields.py:105
 msgid "Heard Island and McDonald Islands"
@@ -1073,11 +1073,11 @@ msgstr ""
 
 #: forms.py:135 forms.py:327 models.py:592
 msgid "Imaging telescopes or lenses"
-msgstr "Τηλεσκόπιο καταγραφής ή φακοί."
+msgstr "Τηλεσκόπιο καταγραφής ή φακοί"
 
 #: forms.py:136 models.py:593
 msgid "Guiding telescopes or lenses"
-msgstr "Οδηγητικό τηλεσκόπιο ή φακοί."
+msgstr "Οδηγητικό τηλεσκόπιο ή φακοί"
 
 #: forms.py:137 forms.py:213 models.py:594 models.py:1117
 msgid "Mounts"
@@ -1150,23 +1150,20 @@ msgid "Users"
 msgstr "Χρήστες"
 
 #: forms.py:261
-#, fuzzy
 msgid "Telescope type"
-msgstr "Τηλεσκόπια και φακοί"
+msgstr "Τύπος τηλεσκοπίου"
 
 #: forms.py:262 forms.py:268
 msgid "Any"
-msgstr ""
+msgstr "Όλα"
 
 #: forms.py:267
-#, fuzzy
 msgid "Camera type"
-msgstr "Φακός κάμερας"
+msgstr "Τύπος κάμερας"
 
 #: forms.py:280 forms.py:285
-#, fuzzy
 msgid "Express value in mm"
-msgstr "Εκφράστε την τιμή σε ώρες."
+msgstr "Εκφράστε την τιμή σε μμ"
 
 #: forms.py:292 forms.py:297 forms.py:455 forms.py:496 forms.py:529
 msgid "Please use the following format: yyyy-mm-dd"
@@ -1335,12 +1332,11 @@ msgstr ""
 
 #: models.py:47 models.py:59 settings.py:58
 msgid "Turkish"
-msgstr ""
+msgstr "Τούρκικα"
 
 #: models.py:48 models.py:60 settings.py:59
-#, fuzzy
 msgid "Albanian"
-msgstr "Αλβανία"
+msgstr "Αλβανικά"
 
 #: models.py:64
 msgid "Pulsars"
@@ -4495,69 +4491,68 @@ msgstr ""
 
 #: templates/messages/compose.html:44 templates/messages/modal_compose.html:45
 msgid "Searching"
-msgstr ""
+msgstr "Ερευνά"
 
 #: templates/messages/inbox.html:12
 msgid "Messages"
 msgstr "Μηνύματα"
 
 #: templates/messages/inbox.html:22
-#, fuzzy
 msgid "Status"
-msgstr "Στατιστικά"
+msgstr "Κατάσταση"
 
 #: templates/messages/inbox.html:23
 msgid "Last sender"
-msgstr ""
+msgstr "Τελευταίος αποστολέας"
 
 #: templates/messages/inbox.html:24
 msgid "Date and time"
-msgstr ""
+msgstr "Ημερομηνία και ώρα"
 
 #: templates/messages/inbox.html:26
 msgid "Excerpt"
-msgstr ""
+msgstr "Απόκομμα"
 
 #: templates/messages/inbox.html:31
 msgid "New!"
-msgstr ""
+msgstr "Νέο!"
 
 #: templates/messages/inbox.html:37
 msgid "Read all"
-msgstr ""
+msgstr "Ανάγνωση όλων"
 
 #: templates/messages/inbox.html:45
 msgid "No messages"
-msgstr ""
+msgstr "Κανένα μήνυμα"
 
 #: templates/messages/modal_compose.html:63
 msgid "Message sent"
-msgstr ""
+msgstr "Το μήνυμα εστάλη"
 
 #: templates/messages/view.html:10
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
-msgstr ""
+msgstr "Μία συζήτηση μεταξύ <a href=\"%(sender_url)s\">εσένα</a> και "
 
 #: templates/messages/view.html:18
 msgid "Delete conversation"
-msgstr ""
+msgstr "Διαγραφή συζήτησης"
 
 #: templates/messages/view.html:21 templates/messages/view.html.py:42
 msgid "or return to messages"
-msgstr ""
+msgstr "ή επέστρεψε στα μηνύματα"
 
 #: templates/messages/view.html:62
 msgid "Sending..."
-msgstr ""
+msgstr "Αποστολή..."
 
 #: templates/messages/view.html:84
 msgid "Error. Try again!"
-msgstr ""
+msgstr "Σφάλμα, προσπαθείστε ξανά! "
 
 #: templates/notification/all.html:9
 msgid "Here are your notifications"
-msgstr ""
+msgstr "Οι ειδοποιήσεις σας"
 
 #: templates/notification/email_body.txt:3
 #, python-format
@@ -4574,6 +4569,18 @@ msgid ""
 "Clear skies,\n"
 "AstroBin.\n"
 msgstr ""
+"Γεια! έχετε μία νέα ειδοποίηση από το AstroBin:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"Για να δείτε όλες τις ειδοποιήσεις σας παρακαλώ πηγαίντε στο %"
+"(notices_url)s. \n"
+"\n"
+"Εάν δεν επιθυμείτε να λαμβάνετε email διορθώστε την επιλογή στις ρυθμίσεις "
+"σας πηγαίνοντας στο http://astrobin.com%(pref_url)s. \n"
+"\n"
+"Σας ευχόμαστε καθαρούς ουρανούς,\n"
+"Η ομάδα του AstroBin. \n"
 
 #: templates/notification/attention_request/full.txt:2
 #, python-format
@@ -5054,12 +5061,12 @@ msgstr ""
 
 #: templates/registration/password_change_done.html:5
 msgid "Password changed"
-msgstr ""
+msgstr "Ο κωδικός σας έχει αλλάξει"
 
 #: templates/registration/password_change_form.html:6
 #: templates/user/profile/edit/basic.html:18
 msgid "Change your password"
-msgstr ""
+msgstr "Αλλάξτε τον κωδικό σας"
 
 #: templates/registration/password_change_form.html:10
 #: templates/registration/password_reset_confirm.html:13
@@ -5409,6 +5416,8 @@ msgstr ""
 #: templates/user/profile.html:73
 msgid "Please fill in the missing dates on all your images!"
 msgstr ""
+"Παρακαλώ συμπληρώστε τις ημερομηνίες που λείπουν σε όλες σας τις "
+"φωτογραφίες!"
 
 #: templates/user/profile.html:84
 msgid "Tools"
@@ -5438,17 +5447,19 @@ msgstr "Εισάγετε φωτογραφίες"
 
 #: templates/user/profile/flickr_import.html:32
 msgid "Authenticate with Flickr"
-msgstr ""
+msgstr "Συνδεθείτε με το Flickr"
 
 #: templates/user/profile/flickr_import.html:39
 msgid ""
 "Unfortunately you need to enable Javascript to be able to import photos from "
 "Flickr at this time."
 msgstr ""
+"Δυστυχώς πρέπει να ενεργοποιήσετε τις εντολές Javascript για να μπορέσετε να "
+"εισάγετε φωτογραφίες από το Flickr."
 
 #: templates/user/profile/flickr_import.html:73
 msgid "Click to select the photos you want to import"
-msgstr ""
+msgstr "Επιλέξτε με κλίκ τις φωτογραφίες που θέλετε να εισάγετε"
 
 #: templates/user/profile/flickr_import.html:89
 msgid "Import selected photos"
@@ -5543,11 +5554,12 @@ msgid "Edit your site preferences"
 msgstr "Καθορίστε τις επιλογές της ιστοσελίδας"
 
 #: templates/user/profile/edit/preferences.html:14
-#, fuzzy
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
-msgstr "Επιλέξτε ποιόν τρόπο ενημέρωσης μέσω e-mail επιθυμείτε:"
+msgstr ""
+"Επιλέξτε την γλώσσα της προτίμησής σας, καθώς και ποιον τρόπο ενημέρωσης "
+"μέσω e-mail επιθυμείτε να λαμβάνετε:"
 
 #~ msgid "Start typing and hit ENTER"
 #~ msgstr "Αρχίστε την πληκτρολόγηση και πατήστε ENTER"
