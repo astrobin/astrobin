@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:01+0000\n"
-"PO-Revision-Date: 2012-04-24 10:33+0100\n"
+"PO-Revision-Date: 2012-05-06 10:03+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
@@ -1597,9 +1597,8 @@ msgid "Compact"
 msgstr "Compact"
 
 #: models.py:260
-#, fuzzy
 msgid "Video camera"
-msgstr "Volgcamera's"
+msgstr "Videocamera"
 
 #: models.py:264 models.py:569 templates/popover/gear_camera.html:6
 msgid "Pixel size"
@@ -1710,22 +1709,20 @@ msgid "This ia narrow field image (less than 1 degree)."
 msgstr "Dit is een smalbeeld opname (minder dan 1 graad)"
 
 #: models.py:478
-#, fuzzy
 msgid "Deep sky object"
-msgstr "Alle deep-sky objecten"
+msgstr "Deep-sky object"
 
 #: models.py:479
-#, fuzzy
 msgid "Solar system body or event"
-msgstr "Zonnestelsel"
+msgstr "Hemellichaam uit of gebeurtenis in het Zonnestelsel"
 
 #: models.py:480 views.py:1757 templates/wall.html:127
 msgid "Extremely wide field"
-msgstr ""
+msgstr "Extreem breedbeeld"
 
 #: models.py:481 views.py:1763 templates/wall.html:133
 msgid "Star trails"
-msgstr ""
+msgstr "Sterrensporen"
 
 #: models.py:482 views.py:1769 templates/base.html:233
 #: templates/profile-edit-menu.html:9 templates/wall.html:139
@@ -2154,13 +2151,15 @@ msgstr "in meter."
 
 #: models.py:1416
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr ""
+msgstr "De naam van de website of app die de API's wenst te gebruiken."
 
 #: models.py:1424
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr ""
+"Gelieve het doel van je toepassing te verduidelijken en hoe je de API gaat "
+"gebruiken."
 
 #: search.py:79 views.py:983 views.py:1271 views.py:1296
 #: templates/image/actions/bring_to_attention.html:30
@@ -2241,9 +2240,8 @@ msgid "Catadioptric"
 msgstr "Catadioptrisch"
 
 #: stats.py:623 templates/stats.html:33
-#, fuzzy
 msgid "Number of images by subject type"
-msgstr "Nieuwe foto van %(subject)s"
+msgstr "Aantal beelden volgens type onderwerp"
 
 #: views.py:727
 msgid "Resolution"
@@ -2322,9 +2320,8 @@ msgstr ""
 "beeld."
 
 #: views.py:1719
-#, fuzzy
 msgid "Gear images"
-msgstr "Enkele foto's"
+msgstr "Foto's van apparatuur"
 
 #: views.py:1751 templates/image/edit/acquisition.html:99
 msgid "Solar system"
@@ -2485,7 +2482,7 @@ msgstr "Nieuwe foto van een onderwerp dat je volgt"
 
 #: management/__init__.py:135
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "Je aanvraag om een API Key te krijgen, is goedgekeurd"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2501,7 +2498,7 @@ msgstr ""
 
 #: templates/app_api_key_request.html:6
 msgid "Request an API key"
-msgstr ""
+msgstr "Aanvragen van een API Key"
 
 #: templates/app_api_key_request.html:8
 msgid ""
@@ -2509,19 +2506,24 @@ msgid ""
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
 "in your own app or website."
 msgstr ""
+"Dank voor je interesse in het gebruik van AstroBin's API's! Je hebt een "
+"<strong>Key</strong> en een <strong>paswoord</strong> nodig als je de data "
+"van AstroBin wil raadplegen vanuit je eigen app of website."
 
 #: templates/app_api_key_request.html:9
 msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr ""
+"Nadat je je aanvraag hebt verstuurd, zal je binnen 24 uur een antwoord "
+"krijgen."
 
 #: templates/app_api_key_request.html:13
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"%(tos_url)s\">Terms of Service</a>."
 msgstr ""
-"Door je bij AstroBin te registreren, ga je akkoord met onze <a href="
-"\"%(tos_url)s\">gebruiksvoorwaarden</a>."
+"Vergewis je ervan dat je de sectie over API's in de <a href=\"%"
+"(tos_url)s\">Gebruiksvoorwaarden</a> hebt gelezen."
 
 #: templates/app_api_key_request.html:18
 #: templates/registration/password_change_form.html:10
@@ -2532,15 +2534,16 @@ msgid "Submit"
 msgstr "Toepassen"
 
 #: templates/app_api_key_request_complete.html:6
-#, fuzzy
 msgid "Your API key request has been submitted"
-msgstr "Je vraag werd voldaan"
+msgstr "Je aanvraag voor een API Key werd ingediend"
 
 #: templates/app_api_key_request_complete.html:8
 msgid ""
 "You will receive a reply within 24 hours. Thanks for your interest in using "
 "AstroBin's APIs!"
 msgstr ""
+"Je zal een antwoord krijgen binnen de 24 uur. Alvast bedankt voor je "
+"interesse om AstroBin's API's te gebruiken!"
 
 #: templates/base.html:78 templates/base.html.py:383 templates/base.html:411
 msgid "Home"
@@ -2643,7 +2646,7 @@ msgstr "Mijn berichten"
 
 #: templates/base.html:227 templates/user/profile-subnav.html:48
 msgid "API Keys"
-msgstr ""
+msgstr "API Keys"
 
 #: templates/base.html:231
 msgid "My settings"
@@ -3528,19 +3531,16 @@ msgstr ""
 "productiviteit en op het materiaal dat je het meest regelmatig gebruikt."
 
 #: templates/index.html:45
-#, fuzzy
 msgid "Image of the day"
-msgstr "Beeldmodus"
+msgstr "Foto van de dag"
 
 #: templates/index.html:87
-#, fuzzy
 msgid "Recent"
-msgstr "RK centrum"
+msgstr "Recent"
 
 #: templates/index.html:101
-#, fuzzy
 msgid "Followed"
-msgstr "Volgen"
+msgstr "Gevolgd"
 
 #: templates/index.html:115 templates/index.html.py:116
 #: templates/index.html:117 templates/index.html.py:118
@@ -4819,7 +4819,7 @@ msgstr "Het formulier is opgeslagen. Hartelijk dank!"
 
 #: templates/inclusion_tags/image_list.html:9
 msgid "by"
-msgstr ""
+msgstr "door"
 
 #: templates/inclusion_tags/image_list.html:22
 #: templates/inclusion_tags/messier_list.html:21
@@ -5040,6 +5040,16 @@ msgid ""
 "    \n"
 "    Thank you for using AstroBin's APIs!"
 msgstr ""
+"Je aanvraag voor een API Key werd goedgekeurd!\n"
+"\n"
+"Je Key: %(key)s\n"
+"Je paswoord: %(secret)s\n"
+"\n"
+"Gelieve de API documentatie te lezen op %(api_docs_url)s\n"
+"\n"
+"Je kan je API keys herbekijken op %(api_keys_url)s\n"
+"\n"
+"Bedankt om AstroBin's API's te gebruiken!"
 
 #: templates/notification/api_key_request_approved/notice.html:2
 #: templates/notification/api_key_request_approved/short.html:2
