@@ -1011,8 +1011,8 @@ def image_edit_watermark(request, id):
 @login_required
 @require_GET
 def image_edit_gear(request, id):
-    profile = UserProfile.objects.get(user=request.user)
     image = Image.objects.get(pk=id)
+    profile = UserProfile.objects.get(user=image.user)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1020,7 +1020,7 @@ def image_edit_gear(request, id):
     if profile.telescopes and profile.cameras:
         no_gear = False
 
-    form = ImageEditGearForm(user=request.user, instance=image)
+    form = ImageEditGearForm(user=image.user, instance=image)
     response_dict = {
         'form': form,
         's3_url':settings.S3_URL,
