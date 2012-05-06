@@ -1798,7 +1798,10 @@ def user_page(request, username):
             k_dict = {l: {'message': None, 'images': []}}
             k_dict[l]['message'] = _("To fill in the missing subjects, use the <strong>Edit basic information</strong> entry in the <strong>Actions</strong> menu for each image.")
             k_list.append(k_dict)
-            for i in sqs.filter(Q(subjects = None) & (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))):
+            for i in sqs.filter(
+                (Q(subject_type = 100) | Q(subject_type = 200)) &
+                (Q(subjects = None)) &
+                ((Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None)))):
                 k_dict[l]['images'].append(i)
 
             l = _("No imaging telescopes or lenses, or no imaging cameras specified")
