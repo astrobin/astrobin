@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 07:42+0000\n"
-"PO-Revision-Date: 2012-05-04 12:36+0100\n"
+"PO-Revision-Date: 2012-05-06 08:53+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -1596,9 +1596,8 @@ msgid "Compact"
 msgstr "Compatta"
 
 #: models.py:260
-#, fuzzy
 msgid "Video camera"
-msgstr "Camere di guida"
+msgstr "Video camera"
 
 #: models.py:264 models.py:569 templates/popover/gear_camera.html:6
 msgid "Pixel size"
@@ -1709,22 +1708,20 @@ msgid "This ia narrow field image (less than 1 degree)."
 msgstr "Questo è un campo stretto (meno di 1 grado)."
 
 #: models.py:478
-#, fuzzy
 msgid "Deep sky object"
-msgstr "Tutti gli oggetti del cielo profondo"
+msgstr "Oggetto del cielo profondo"
 
 #: models.py:479
-#, fuzzy
 msgid "Solar system body or event"
-msgstr "Sistema solare"
+msgstr "Corpo o evento del sistema solare"
 
 #: models.py:480 views.py:1757 templates/wall.html:127
 msgid "Extremely wide field"
-msgstr ""
+msgstr "Campo molto esteso"
 
 #: models.py:481 views.py:1763 templates/wall.html:133
 msgid "Star trails"
-msgstr ""
+msgstr "Tracce stellari"
 
 #: models.py:482 views.py:1769 templates/base.html:233
 #: templates/profile-edit-menu.html:9 templates/wall.html:139
@@ -2154,13 +2151,15 @@ msgstr "In metri."
 
 #: models.py:1416
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr ""
+msgstr "Il nome del sito o app che desidera usare le API."
 
 #: models.py:1424
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr ""
+"Per favore spiega lo scopo della tua applicazione, e come intendi usare le "
+"API."
 
 #: search.py:79 views.py:983 views.py:1271 views.py:1296
 #: templates/image/actions/bring_to_attention.html:30
@@ -2241,9 +2240,8 @@ msgid "Catadioptric"
 msgstr "Catadiottrico"
 
 #: stats.py:623 templates/stats.html:33
-#, fuzzy
 msgid "Number of images by subject type"
-msgstr "Cerca immagini per soggetto o strumentazione"
+msgstr "Numero di immagini per tipo di soggetto"
 
 #: views.py:727
 msgid "Resolution"
@@ -2321,9 +2319,8 @@ msgstr ""
 "immagine."
 
 #: views.py:1719
-#, fuzzy
 msgid "Gear images"
-msgstr "Alcune immagini"
+msgstr "Immagini della strumentazione"
 
 #: views.py:1751 templates/image/edit/acquisition.html:99
 msgid "Solar system"
@@ -2485,7 +2482,7 @@ msgstr "Nuova immagine di un soggetto che segui"
 
 #: management/__init__.py:135
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "La tua richiesta di API Key è stata approvata"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2501,7 +2498,7 @@ msgstr ""
 
 #: templates/app_api_key_request.html:6
 msgid "Request an API key"
-msgstr ""
+msgstr "Richiedi una API key"
 
 #: templates/app_api_key_request.html:8
 msgid ""
@@ -2509,19 +2506,23 @@ msgid ""
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
 "in your own app or website."
 msgstr ""
+"Grazie per il tuo interesse nell'usare le API di AstroBin! Per accedere ai "
+"dati di AstroBin nella tua app o sito, hai bisogno di una "
+"<strong>key</strong> e di un <strong>secret</strong>."
 
 #: templates/app_api_key_request.html:9
 msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr ""
+"Dopo che avrai effettuato una richiesta, riceverai risposta entro 24 ore."
 
 #: templates/app_api_key_request.html:13
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"%(tos_url)s\">Terms of Service</a>."
 msgstr ""
-"Iscrivendoti ad AstroBin, accetti le nostre <a href=\"%(tos_url)s"
-"\">condizioni d'uso</a>."
+"Assicurati di aver letto la sezione riguardante le API nelle <a href=\"%"
+"(tos_url)s\">Condizioni d'Uso</a>."
 
 #: templates/app_api_key_request.html:18
 #: templates/registration/password_change_form.html:10
@@ -2532,15 +2533,16 @@ msgid "Submit"
 msgstr "Vai"
 
 #: templates/app_api_key_request_complete.html:6
-#, fuzzy
 msgid "Your API key request has been submitted"
-msgstr "La tua richiesta è stata soddisfatta"
+msgstr "La tua richiesta di API key è stata inoltrata"
 
 #: templates/app_api_key_request_complete.html:8
 msgid ""
 "You will receive a reply within 24 hours. Thanks for your interest in using "
 "AstroBin's APIs!"
 msgstr ""
+"Riceverai una risposta entro 24 ore. Grazie per il tuo interesse nell'usare "
+"le API di AstroBin!"
 
 #: templates/base.html:78 templates/base.html.py:383 templates/base.html:411
 msgid "Home"
@@ -2643,7 +2645,7 @@ msgstr "La mia posta"
 
 #: templates/base.html:227 templates/user/profile-subnav.html:48
 msgid "API Keys"
-msgstr ""
+msgstr "API Keys"
 
 #: templates/base.html:231
 msgid "My settings"
@@ -3520,14 +3522,12 @@ msgid "Hot right now"
 msgstr "In vetrina"
 
 #: templates/index.html:87
-#, fuzzy
 msgid "Recent"
-msgstr "Centro AR"
+msgstr "Recenti"
 
 #: templates/index.html:101
-#, fuzzy
 msgid "Followed"
-msgstr "Segui"
+msgstr "Seguite"
 
 #: templates/index.html:115 templates/index.html.py:116
 #: templates/index.html:117 templates/index.html.py:118
@@ -5023,18 +5023,30 @@ msgid ""
 "    \n"
 "    Thank you for using AstroBin's APIs!"
 msgstr ""
+"La tua richiesta per una API Key è stata approvata!\n"
+"\n"
+"La tua key: %(key)s\n"
+"Il tuo secret: %(secret)s\n"
+"\n"
+"Leggi la documentazione sulle API qui: %(api_docs_url)s\n"
+"\n"
+"Puoi vedere le tue API key qui: %(api_keys_url)s\n"
+"\n"
+"Grazie per usare le API di AstroBin!"
 
 #: templates/notification/api_key_request_approved/notice.html:2
 #: templates/notification/api_key_request_approved/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
 "a>"
-msgstr "<a href=\"%(object_url)s\">La tua immagine è stata processata.</a>"
+msgstr ""
+"<a href=\"%(api_keys_url)s\">La tua richiesta per una API Key è stata "
+"approvata!</a>"
 
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
-msgstr ""
+msgstr "Richiesta di API Key approvata"
 
 #: templates/notification/attention_request/full.txt:2
 #, python-format
@@ -5784,16 +5796,15 @@ msgstr "Tipi di telescopio"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:11
 msgid "Your API Keys"
-msgstr ""
+msgstr "Le tue API Keys"
 
 #: templates/user/api_keys.html:18
 msgid "Created on"
-msgstr ""
+msgstr "Creata il"
 
 #: templates/user/api_keys.html:19
-#, fuzzy
 msgid "Active"
-msgstr "Azioni"
+msgstr "Attiva"
 
 #: templates/user/api_keys.html:38
 #, python-format
@@ -5801,10 +5812,12 @@ msgid ""
 "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
 "\">API documentation</a>."
 msgstr ""
+"Non hai alcuna API Key. Letti la <a href=\"%(api_docs_url)s\">documentazione "
+"sulle API</a>."
 
 #: templates/user/api_keys.html:46
 msgid "Request an API Key"
-msgstr ""
+msgstr "Richiedi una API Key"
 
 #: templates/user/card.html:8
 #, python-format
