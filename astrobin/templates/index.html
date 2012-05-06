@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="span10">
                     <div class="image-of-the-day">
-                        <h2>{% trans "Hot right now" %}!</h2>
+                        <h2>{% trans "Image of the day" %}!</h2>
                         <a href="{% url image_detail image.id %}">
                             <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_iotd.jpg"
                                  alt="{{image.title|default:_("(no title)")}}"/>
