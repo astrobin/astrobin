@@ -857,10 +857,14 @@ def image_full(request, id):
     revision_id = 0
     revision_image = None
     if 'r' in request.GET and request.GET.get('r') != '0':
-            is_revision = True
+        is_revision = True
+        try:
             revision_id = int(request.GET['r'])
-            revision_image = get_object_or_404(ImageRevision, id=revision_id)
-            
+        except ValueError:
+            from django.http import Http404
+            raise Http404
+
+        revision_image = get_object_or_404(ImageRevision, id=revision_id)
 
     return object_detail(
         request,
