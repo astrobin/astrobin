@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:03+0000\n"
-"PO-Revision-Date: 2012-04-27 12:36+0100\n"
-"Last-Translator: naavis <svnaavis@gmail.com>\n"
+"PO-Revision-Date: 2012-05-06 11:45+0100\n"
+"Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -1593,9 +1593,8 @@ msgid "Compact"
 msgstr "Pokkari"
 
 #: models.py:260
-#, fuzzy
 msgid "Video camera"
-msgstr "Seurantakamerat"
+msgstr "Videokamera"
 
 #: models.py:264 models.py:569 templates/popover/gear_camera.html:6
 msgid "Pixel size"
@@ -1706,22 +1705,20 @@ msgid "This ia narrow field image (less than 1 degree)."
 msgstr "Kuvakenttä on kapea (alle asteen)."
 
 #: models.py:478
-#, fuzzy
 msgid "Deep sky object"
-msgstr "Kaikki syvän taivaan kohteet"
+msgstr "Syvän taivaan kohde"
 
 #: models.py:479
-#, fuzzy
 msgid "Solar system body or event"
-msgstr "Aurinkokunta"
+msgstr "Aurinkokunnan kohde"
 
 #: models.py:480 views.py:1757 templates/wall.html:127
 msgid "Extremely wide field"
-msgstr ""
+msgstr "Erittäin laaja kuvakenttä"
 
 #: models.py:481 views.py:1763 templates/wall.html:133
 msgid "Star trails"
-msgstr ""
+msgstr "Tähtiviirut"
 
 #: models.py:482 views.py:1769 templates/base.html:233
 #: templates/profile-edit-menu.html:9 templates/wall.html:139
@@ -2143,13 +2140,14 @@ msgstr "Metreissä."
 
 #: models.py:1416
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr ""
+msgstr "Rajapinnan käyttöä toivovan sivuston tai ohjelman nimi."
 
 #: models.py:1424
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr ""
+"Selitä ohjelman tarkoitus, ja miten aiot hyödyntää AstroBinin rajapintoja."
 
 #: search.py:79 views.py:983 views.py:1271 views.py:1296
 #: templates/image/actions/bring_to_attention.html:30
@@ -2230,9 +2228,8 @@ msgid "Catadioptric"
 msgstr "Katadioptrinen"
 
 #: stats.py:623 templates/stats.html:33
-#, fuzzy
 msgid "Number of images by subject type"
-msgstr "Etsi kuvia kohteen tai laitteen perusteella"
+msgstr "Kuvien määrä kohdetyypeittäin"
 
 #: views.py:727
 msgid "Resolution"
@@ -2308,9 +2305,8 @@ msgstr ""
 "kuvalle."
 
 #: views.py:1719
-#, fuzzy
 msgid "Gear images"
-msgstr "Ei kuvia"
+msgstr "Kalustokuvia"
 
 #: views.py:1751 templates/image/edit/acquisition.html:99
 msgid "Solar system"
@@ -2468,7 +2464,7 @@ msgstr "Uusi kuva seuraamastasi kohteesta"
 
 #: management/__init__.py:135
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "Pyyntösi API-Avaimen saamiseksi on hyväksytty."
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2484,7 +2480,7 @@ msgstr ""
 
 #: templates/app_api_key_request.html:6
 msgid "Request an API key"
-msgstr ""
+msgstr "Pyydä API-Avainta"
 
 #: templates/app_api_key_request.html:8
 msgid ""
@@ -2492,19 +2488,22 @@ msgid ""
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
 "in your own app or website."
 msgstr ""
+"Kiitos kiinnostuksestasi AstroBin'in ohjelmointirajapintaan!  Tarvitset "
+"<strong>API-Avaimen</strong sekä <strong>salasanan</strong> jos haluat "
+"käyttää AstroBin'in tietoja omassa applikaatiossa tai websaitiilla."
 
 #: templates/app_api_key_request.html:9
 msgid "After you submit a request, you will receive a reply within 24 hours."
-msgstr ""
+msgstr "Kun lähetät pyynnön, saat vastauksen 24 tunnin sisällä."
 
 #: templates/app_api_key_request.html:13
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"%(tos_url)s\">Terms of Service</a>."
 msgstr ""
-"Rekisteröitymällä AstroBiniin hyväksyt <a href=\"%(tos_url)s\">käyttöehdot</"
-"a>."
+"Varmista, että olet lukenut rajapintaosion <a href=\"%"
+"(tos_url)s\">Käyttöehdoista</a>."
 
 #: templates/app_api_key_request.html:18
 #: templates/registration/password_change_form.html:10
@@ -2515,15 +2514,16 @@ msgid "Submit"
 msgstr "Lähetä"
 
 #: templates/app_api_key_request_complete.html:6
-#, fuzzy
 msgid "Your API key request has been submitted"
-msgstr "Pyyntö toteutettu"
+msgstr "API-avainpyyntösi on lähetetty."
 
 #: templates/app_api_key_request_complete.html:8
 msgid ""
 "You will receive a reply within 24 hours. Thanks for your interest in using "
 "AstroBin's APIs!"
 msgstr ""
+"Saat vastauksen 24 tunnin sisällä. Kiitos mielenkiinnosta AstroBinin "
+"rajapinta-avainta kohtaan!"
 
 #: templates/base.html:78 templates/base.html.py:383 templates/base.html:411
 msgid "Home"
@@ -2599,9 +2599,8 @@ msgid "Upload"
 msgstr "Lataa"
 
 #: templates/base.html:201
-#, fuzzy
 msgid "My places"
-msgstr "Oma sivu"
+msgstr "Omat paikat"
 
 #: templates/base.html:204 templates/user/profile-subnav.html:14
 msgid "Gallery"
@@ -2610,7 +2609,7 @@ msgstr "Galleria"
 #: templates/base.html:209 templates/image/detail.html:719
 #: templates/user/profile-subnav.html:19
 msgid "Favorites"
-msgstr ""
+msgstr "Suosikit"
 
 #: templates/base.html:214 templates/image/detail.html:454
 #: templates/image/full.html:73 templates/user/profile-subnav.html:24
@@ -2627,7 +2626,7 @@ msgstr "Viestini"
 
 #: templates/base.html:227 templates/user/profile-subnav.html:48
 msgid "API Keys"
-msgstr ""
+msgstr "Rajapinta-avaimet"
 
 #: templates/base.html:231
 msgid "My settings"
@@ -3365,14 +3364,13 @@ msgid "AstroBin is social!"
 msgstr "AstroBin on sosiaalinen!"
 
 #: templates/help.html:71
-#, fuzzy
 msgid ""
 "On <em>AstroBin</em> you can message other astrophotographer, follow them "
 "and be notified when they post new images, or perform requests for more data."
 msgstr ""
 "<em>AstroBinissa</em> voit lähettää viestejä toisille tähtikuvaajille, "
-"seurata heitä ja saada ilmoituksia kun he julkaisevat uusia kuvia tai "
-"pyytävät lisätietoja. Voit myös äänestää kuvia."
+"seurata heitä ja saada ilmoituksia kun he julkaisevat uusia kuvia, tai "
+"pyyntöjä lisätiedoista."
 
 #: templates/help.html:74
 msgid ""
@@ -3380,6 +3378,10 @@ msgid ""
 "there's a new image from a certain CCD, or telescope, or filter, and so on. "
 "Or you can monitor all the new images of a certain galaxy or nebula."
 msgstr ""
+"Voit seurata kaluston komponenttien tai astronomisten kohteiden perusteella, "
+"ja saada ilmoituksen aina kuin tietyllä CCD:llä, tai teleskoopilla, tai "
+"filtterillä otettu kuva julkaistaan.  Tai voit saada ilmoituksen kaikista "
+"uusista kuvista jotka on otettu tietystä galaksista tai sumusta."
 
 #: templates/help.html:77
 msgid ""
@@ -3387,6 +3389,9 @@ msgid ""
 "might be chosen to appear in the site's <em>Messier Marathon</em>, or as "
 "<em>Currently hot</em> on the front page."
 msgstr ""
+"Voit äänestää kuvia, ja merkata niitä suosikeiksisi.  Kuvasi saattaa tulla "
+"valituksi Astrobinin <em>Messier-maratooniin</em>, tai etusivulla "
+"näytettäväksi <em>Kuumaksi</em> kuvaksi."
 
 #: templates/help.html:81
 msgid ""
@@ -3461,31 +3466,26 @@ msgstr ""
 "tuottavuus on huipussaan ja mitä laitteita käytät eniten."
 
 #: templates/index.html:45
-#, fuzzy
 msgid "Image of the day"
-msgstr "Astrometristä ratkaisua ei tehty"
+msgstr "Päivän kuva"
 
 #: templates/index.html:87
-#, fuzzy
 msgid "Recent"
-msgstr "RA keskus"
+msgstr "Uusimmat"
 
 #: templates/index.html:101
-#, fuzzy
 msgid "Followed"
-msgstr "Seuraa"
+msgstr "Seuratut"
 
 #: templates/index.html:115 templates/index.html.py:116
 #: templates/index.html:117 templates/index.html.py:118
 #: templates/index.html:119
-#, fuzzy
 msgid "Recently voted 5 stars"
-msgstr "ladattu"
+msgstr "Uusimmat 5 tähden kuvat"
 
 #: templates/index.html:132
-#, fuzzy
 msgid "Recently favorited"
-msgstr "ladattu"
+msgstr "Uusimmat suosikit"
 
 #: templates/index.html:147 templates/image/detail.html:265
 #: templates/image/detail.html.py:1248 templates/image/detail.html:1262
@@ -3508,9 +3508,8 @@ msgstr "Seuraa"
 #: templates/popover/gear_mount.html:13
 #: templates/popover/gear_software.html:11
 #: templates/popover/gear_telescope.html:13 templates/popover/subject.html:21
-#, fuzzy
 msgid "Unfollow"
-msgstr "Seuraa"
+msgstr "Lopeta seuraaminen"
 
 #: templates/leaderboard.html:17 templates/image/detail.html:246
 #: templates/user/profile-subnav.html:58
@@ -3640,32 +3639,28 @@ msgid "Visit the Messier Marathon"
 msgstr "Katsele Messier-maratonia"
 
 #: templates/most_popular.html:12
-#, fuzzy
 msgid "Select latitude"
-msgstr "Valitse lisenssit"
+msgstr "Valitse leveyspiiri (latitudi)"
 
 #: templates/most_popular.html:17
-#, fuzzy
 msgid "From latitude:"
-msgstr "Korkeus"
+msgstr "Leveyspiiriltä:"
 
 #: templates/most_popular.html:45
-#, fuzzy
 msgid "To latitude:"
-msgstr "Korkeus"
+msgstr "Leveyspiirille (latitudille):"
 
 #: templates/most_popular.html:73
 msgid "Hemisphere:"
-msgstr ""
+msgstr "Pallonpuolisko (E tai P):"
 
 #: templates/most_popular.html:90
 msgid "Both"
-msgstr ""
+msgstr "Molemmat"
 
 #: templates/most_popular.html:98
-#, fuzzy
 msgid "Most popular subjects"
-msgstr "Sama kohde"
+msgstr "Suosituimmat kohteet"
 
 #: templates/most_popular.html:100
 msgid ""
@@ -3673,6 +3668,9 @@ msgid ""
 "subject, one image has been chosen. Use the menu to limit the images to "
 "those acquired from a certain latitude on Earth."
 msgstr ""
+"Nämä ovat AstroBinin suosituimmat kohteet kuukausittain.  Jokaisesta "
+"kohteesta on valittu yksi kuva.  Valikosta voit rajoittaa näytettäviä kuvia "
+"kuvauspaikan leveyspiirin perusteella."
 
 #: templates/nightly.html:7
 msgid "Images acquired night after night"
@@ -3749,19 +3747,19 @@ msgstr "Ladataan..."
 
 #: templates/stats.html:46
 msgid "Global distribution of camera types"
-msgstr ""
+msgstr "Kameratyyppien maantieteellinen jakauma"
 
 #: templates/stats.html:64
 msgid "Global distribution of telescope types"
-msgstr ""
+msgstr "Maailmanlaajuinen kaukoputkityyppien jakautuma."
 
 #: templates/stats.html:84
 msgid "CCD vs DLSR: the global trend"
-msgstr ""
+msgstr "CCD vs DSLR: maailmanlaajuinen kehityssuunta"
 
 #: templates/stats.html:94
 msgid "Global trend of telescope types"
-msgstr ""
+msgstr "Maailmanlaajuinen kehityssuunta kaukoputkityypeissä"
 
 #: templates/tos.html:9
 msgid ""
@@ -3840,7 +3838,7 @@ msgstr "Arviointi"
 
 #: templates/wall.html:43 templates/image/detail.html:683
 msgid "Favorited"
-msgstr ""
+msgstr "Merkitty suosiksi."
 
 #: templates/wall.html:49 templates/image/detail.html:455
 #: templates/image/detail.html.py:715 templates/search/search.html:31
@@ -3885,43 +3883,41 @@ msgid "Remove filter"
 msgstr "Poista suodatus"
 
 #: templates/avatar/change.html:9
-#, fuzzy
 msgid "Change your avatar"
-msgstr "Vaihda salasana"
+msgstr "Vaihda avataria."
 
 #: templates/avatar/change.html:16
 msgid "You do not yet have an avatar. Please upload one now."
-msgstr ""
+msgstr "Sinulla ei vielä ole avataria.  Ole hyvä ja lataa avatar."
 
 #: templates/avatar/change.html:21
 msgid "Current avatar"
-msgstr ""
+msgstr "Tämänhetkinen avatar"
 
 #: templates/avatar/change.html:28
-#, fuzzy
 msgid "Previously uploaded"
-msgstr "ladattu"
+msgstr "Aiemmin ladattuja"
 
 #: templates/avatar/change.html:31
-#, fuzzy
 msgid "Choose new default"
-msgstr "Valitse tiedosto"
+msgstr "Valitse uusi oletusarvo"
 
 #: templates/avatar/change.html:37
-#, fuzzy
 msgid "Upload a new image"
-msgstr "Lataa kuva"
+msgstr "Lataa uusi kuva"
 
 #: templates/avatar/change.html:39
-#, fuzzy
 msgid "Avatar image"
-msgstr "Ei kuvia"
+msgstr "Avatar-kuva"
 
 #: templates/contact_form/contact.html:9
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
+"Ota meihin yhteyttä jos tarvitset apua, tai haluat ilmoittaa ongelmasta, "
+"antaa palautetta tai ehdotuksia, tai jos sinulla on mitä tahansa muuta "
+"asiaa!"
 
 #: templates/contact_form/contact.html:15 templates/image/detail.html:1254
 #: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
@@ -3930,9 +3926,8 @@ msgid "Send"
 msgstr "Lähetä"
 
 #: templates/contact_form/contact_completed.html:5
-#, fuzzy
 msgid "Thank you! Your message was sent successfully."
-msgstr "Viestisi on lähetetty onnistuneesti."
+msgstr "Kiitos!  Viestisi lähetettiin onnistuneesti."
 
 #: templates/image/detail.html:20
 msgid ""
@@ -4041,7 +4036,6 @@ msgid "Inverted monochrome"
 msgstr "Negatiivinen mustavalkokuva"
 
 #: templates/image/detail.html:190 templates/image/detail.html.py:214
-#, fuzzy
 msgid "Annotated (original version)"
 msgstr "Merkitty (alkuperäinen versio)"
 
@@ -4210,52 +4204,47 @@ msgstr "Ei kommentteja."
 
 #: templates/image/detail.html:681
 msgid "Already favorited"
-msgstr ""
+msgstr "Merkitty jo suosikiksi"
 
 #: templates/image/detail.html:681
-#, fuzzy
 msgid "Mark as favorite"
-msgstr "Merkitse valmiiksi."
+msgstr "Merkitse suosikiksi"
 
 #: templates/image/detail.html:685
 msgid "Favorite"
-msgstr ""
+msgstr "Suosikki"
 
 #: templates/image/detail.html:723
 msgid "Votes"
-msgstr ""
+msgstr "Annetut äänet"
 
 #: templates/image/detail.html:750
 msgid "Sharing mode"
 msgstr ""
 
 #: templates/image/detail.html:752
-#, fuzzy
 msgid "Simple link"
-msgstr "Linkit"
+msgstr "Yksinkertainen linkki"
 
 #: templates/image/detail.html:753
 msgid "Forums"
-msgstr ""
+msgstr "Foorumi"
 
 #: templates/image/detail.html:758
 msgid "Thumbnail"
-msgstr ""
+msgstr "Pienkuva"
 
 #: templates/image/detail.html:760 templates/user/api_keys.html:29
-#, fuzzy
 msgid "Yes"
-msgstr "Kyllä."
+msgstr "Kyllä"
 
 #: templates/image/detail.html:761
-#, fuzzy
 msgid "No"
-msgstr "Ei."
+msgstr "Ei"
 
 #: templates/image/detail.html:767
-#, fuzzy
 msgid "Image size"
-msgstr "Kuvia"
+msgstr "Kuvan koko"
 
 #: templates/image/detail.html:769 templates/image/detail.html.py:1283
 msgid "Regular"
@@ -4263,7 +4252,7 @@ msgstr "Normaali"
 
 #: templates/image/detail.html:770
 msgid "Full"
-msgstr ""
+msgstr "Täysi"
 
 #: templates/image/detail.html:774
 #, fuzzy
@@ -4282,11 +4271,11 @@ msgstr "Astrometrinen ratkaisu tehty"
 
 #: templates/image/detail.html:818
 msgid "Favorited!"
-msgstr ""
+msgstr "Mekitty suosikiksi!"
 
 #: templates/image/detail.html:838
 msgid "Copied!"
-msgstr ""
+msgstr "Kopioitu!"
 
 #: templates/image/detail.html:1084
 msgid "just now"
@@ -4408,12 +4397,10 @@ msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "käyttäjältä <a href=\"%(the_url)s\">%(user)s</a>"
 
 #: templates/image/full.html:79
-#, fuzzy
 msgid "Fit to window"
-msgstr "Sovita kuvan leveys ikkunaan"
+msgstr "Sovita kuva ikkunaan"
 
 #: templates/image/full.html:83
-#, fuzzy
 msgid "Full resolution"
 msgstr "Katso täydessä koossa"
 
@@ -4613,26 +4600,27 @@ msgstr ""
 #: templates/image/edit/gear.html:34
 msgid ""
 "Use this button to import the gear settings from another image of yours."
-msgstr ""
+msgstr "Voit hakea kuvauslaitetiedot toisesta kuvasta painamalla tätä nappia."
 
 #: templates/image/edit/gear.html:34
 msgid "Copy from another image"
-msgstr ""
+msgstr "Kopioi toisesta kuvasta"
 
 #: templates/image/edit/gear.html:58
 msgid "Next step: acquisition"
 msgstr "Seuraava vaihe: kuvaustiedot"
 
 #: templates/image/edit/gear.html:69
-#, fuzzy
 msgid "Copy gear"
-msgstr "Kopioi"
+msgstr "Kopioi kalusto"
 
 #: templates/image/edit/gear.html:73
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
 "for you, but you will still need to save it in the end."
 msgstr ""
+"Kuvauslaitetietojen kopiointi toisesta kuvasta täyttää laitekentät "
+"puolestasi, mutta lomake täytyy silti tallentaa lopuksi."
 
 #: templates/image/edit/license.html:7
 msgid "Change the license for this image"
@@ -4815,15 +4803,15 @@ msgid "Manage received requests"
 msgstr "Hallinnoi vastaanotettuja pyyntöjä"
 
 #: templates/inclusion_tags/search_image_list.html:27
-#, fuzzy, python-format
+#, python-format
 msgid "Favorited one time"
 msgid_plural "Favorited %(counter)s times"
-msgstr[0] "katsottu kerran"
-msgstr[1] "katsottu %(counter)s kertaa"
+msgstr[0] "Merkitty suosikiksi kerran"
+msgstr[1] "Merkitty suosikiksi %(counter)s kertaa"
 
 #: templates/inclusion_tags/search_image_list.html:29
 msgid "Never favorited"
-msgstr ""
+msgstr "Ei merkitty suosikiksi vielä kertaakaan"
 
 #: templates/inclusion_tags/search_image_list.html:44
 #, python-format
@@ -4869,11 +4857,11 @@ msgstr "Tilastot"
 
 #: templates/messages/inbox.html:23
 msgid "Last sender"
-msgstr ""
+msgstr "Viimeisin lähettäjä"
 
 #: templates/messages/inbox.html:24
 msgid "Date and time"
-msgstr ""
+msgstr "Päivämäärä ja kellonaika"
 
 #: templates/messages/inbox.html:26
 msgid "Excerpt"
