@@ -66,7 +66,11 @@ class ImageEditBasicForm(forms.ModelForm):
         return self.cleaned_data['link'].strip()
 
     def clean(self):
-        subject_type = self.cleaned_data['subject_type']
+        try:
+            subject_type = self.cleaned_data['subject_type']
+        except KeyError:
+            raise forms.ValidationError('');
+
         if subject_type in (100, 200):
             skip_as = False
             try:
