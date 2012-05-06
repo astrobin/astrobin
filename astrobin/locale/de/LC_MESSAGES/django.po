@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 07:42+0000\n"
+"POT-Creation-Date: 2012-05-06 08:02+0000\n"
 "PO-Revision-Date: 2012-04-22 10:00+0100\n"
 "Last-Translator: leonh <leonh@ndreke.de>\n"
 "Language-Team: German <LL@li.org>\n"
@@ -1026,7 +1026,7 @@ msgstr ""
 "Wenn möglich bitte Katalognamen (z.B. M101, NGC224 oder IC1370) verwenden."
 
 #: forms.py:55 templates/image/detail.html:364
-#: templates/image/detail.html.py:617 templates/image/detail.html:1085
+#: templates/image/detail.html.py:619 templates/image/detail.html:1087
 msgid "Link"
 msgstr "Link"
 
@@ -1170,8 +1170,8 @@ msgstr "Bitte im Format JJJJ-MM-TT eingeben"
 msgid "Express value in hours"
 msgstr "Gib den Wert in Stunden an"
 
-#: forms.py:319 models.py:639 templates/image/detail.html:697
-#: templates/image/detail.html.py:702 templates/image/detail.html:703
+#: forms.py:319 models.py:639 templates/image/detail.html:699
+#: templates/image/detail.html.py:704 templates/image/detail.html:705
 #: templates/search/search.html:194
 msgid "License"
 msgstr "Lizenz"
@@ -1242,7 +1242,7 @@ msgid "Longitude (seconds)"
 msgstr "Längengrad (Sekunden)"
 
 #: forms.py:458 forms.py:503 forms.py:536 models.py:814 models.py:1027
-#: templates/image/detail.html:501 templates/image/detail.html.py:708
+#: templates/image/detail.html:503 templates/image/detail.html.py:710
 msgid "Date"
 msgstr "Datum"
 
@@ -1561,7 +1561,7 @@ msgstr "Öffnung"
 msgid "(in mm)"
 msgstr "(in mm)"
 
-#: models.py:211 models.py:557 models.py:966 templates/image/detail.html:513
+#: models.py:211 models.py:557 models.py:966 templates/image/detail.html:515
 #: templates/popover/gear_telescope.html:7
 msgid "Focal length"
 msgstr "Brennweite"
@@ -1770,7 +1770,7 @@ msgstr ""
 "Ziehe die Auswahl von der rechten auf die linke Seite oder klicke auf das "
 "Plus-Symbol."
 
-#: models.py:518 models.py:1423 templates/image/detail.html:558
+#: models.py:518 models.py:1423 templates/image/detail.html:560
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -1989,7 +1989,7 @@ msgstr "Anzahl der Frames"
 msgid "The total number of frames you have stacked."
 msgstr "Gesamtanzahl der gestackten Frames."
 
-#: models.py:957 templates/image/detail.html:510
+#: models.py:957 templates/image/detail.html:512
 msgid "FPS"
 msgstr "FPS"
 
@@ -2004,7 +2004,7 @@ msgid ""
 msgstr ""
 "Gesamt-Brennweite, inkl. Barlowlinsen und anderen optischen Komponenten."
 
-#: models.py:973 templates/image/detail.html:516
+#: models.py:973 templates/image/detail.html:518
 msgid "CMI"
 msgstr "CMI"
 
@@ -2012,7 +2012,7 @@ msgstr "CMI"
 msgid "Latitude of the first Central Meridian."
 msgstr "Breitengrad des ersten, zentralen Meridians."
 
-#: models.py:982 templates/image/detail.html:519
+#: models.py:982 templates/image/detail.html:521
 msgid "CMII"
 msgstr "CMII"
 
@@ -2020,7 +2020,7 @@ msgstr "CMII"
 msgid "Latitude of the second Central Meridian."
 msgstr "Breitengrad des 2. zentralen Meridians."
 
-#: models.py:991 templates/image/detail.html:522
+#: models.py:991 templates/image/detail.html:524
 msgid "CMIII"
 msgstr "CMIII"
 
@@ -2028,7 +2028,7 @@ msgstr "CMIII"
 msgid "Latitude of the third Central Meridian."
 msgstr "Breitengrad des dritten zentralen Meridians."
 
-#: models.py:1000 templates/image/detail.html:525
+#: models.py:1000 templates/image/detail.html:527
 msgid "Seeing"
 msgstr "Seeing"
 
@@ -2036,7 +2036,7 @@ msgstr "Seeing"
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "Geschätztes Seeing auf einer Skala von 1 bis 5."
 
-#: models.py:1007 templates/image/detail.html:528
+#: models.py:1007 templates/image/detail.html:530
 msgid "Transparency"
 msgstr "Transparenz"
 
@@ -2044,7 +2044,7 @@ msgstr "Transparenz"
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "Geschätzte Transparenz auf einer Skala von 1 bis 10."
 
-#: models.py:1014 templates/image/detail.html:504
+#: models.py:1014 templates/image/detail.html:506
 msgid "Time"
 msgstr "Uhrzeit"
 
@@ -2271,7 +2271,7 @@ msgstr "Auflösung"
 msgid "Dates"
 msgstr "Datum"
 
-#: views.py:730 templates/image/detail.html:507
+#: views.py:730 templates/image/detail.html:509
 msgid "Frames"
 msgstr "Frames"
 
@@ -2631,7 +2631,7 @@ msgstr "Bitte aus den obenstehenden Optionen die Sprache auswählen."
 
 #: templates/base.html:199 templates/index.html:75 templates/upload.html:16
 #: templates/upload.html.py:32 templates/avatar/change.html:40
-#: templates/image/detail.html:1293
+#: templates/image/detail.html:1295
 msgid "Upload"
 msgstr "Hochladen"
 
@@ -2644,12 +2644,12 @@ msgstr "Meine Seite"
 msgid "Gallery"
 msgstr "Gallerie"
 
-#: templates/base.html:209 templates/image/detail.html:717
+#: templates/base.html:209 templates/image/detail.html:719
 #: templates/user/profile-subnav.html:19
 msgid "Favorites"
 msgstr ""
 
-#: templates/base.html:214 templates/image/detail.html:452
+#: templates/base.html:214 templates/image/detail.html:454
 #: templates/image/full.html:73 templates/user/profile-subnav.html:24
 msgid "Technical card"
 msgstr "Technische Karte"
@@ -2773,16 +2773,16 @@ msgstr ""
 msgid "Back to top"
 msgstr "Nach oben"
 
-#: templates/base.html:460 templates/image/detail.html:640
-#: templates/image/detail.html.py:1105 templates/messages/compose.html:14
+#: templates/base.html:460 templates/image/detail.html:642
+#: templates/image/detail.html.py:1107 templates/messages/compose.html:14
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: templates/base.html:500 templates/image/detail.html:1296
+#: templates/base.html:500 templates/image/detail.html:1298
 msgid "No file selected"
 msgstr "Keine Datei ausgewählt"
 
-#: templates/base.html:501 templates/image/detail.html:1297
+#: templates/base.html:501 templates/image/detail.html:1299
 msgid "Choose file"
 msgstr "Datei auswählen"
 
@@ -3535,8 +3535,8 @@ msgstr ""
 
 #: templates/index.html:45
 #, fuzzy
-msgid "Hot right now"
-msgstr "Jetzt ausführen?"
+msgid "Image of the day"
+msgstr "Hochgeladene Bilder"
 
 #: templates/index.html:87
 #, fuzzy
@@ -3559,8 +3559,8 @@ msgid "Recently favorited"
 msgstr ""
 
 #: templates/index.html:147 templates/image/detail.html:265
-#: templates/image/detail.html.py:1246 templates/image/detail.html:1260
-#: templates/image/detail.html.py:1261
+#: templates/image/detail.html.py:1248 templates/image/detail.html:1262
+#: templates/image/detail.html.py:1263
 #: templates/popover/gear_accessory.html:14
 #: templates/popover/gear_camera.html:16 templates/popover/gear_filter.html:14
 #: templates/popover/gear_focal_reducer.html:13
@@ -3571,8 +3571,8 @@ msgstr ""
 msgid "Follow"
 msgstr "Follow"
 
-#: templates/index.html:147 templates/image/detail.html:1260
-#: templates/image/detail.html.py:1261
+#: templates/index.html:147 templates/image/detail.html:1262
+#: templates/image/detail.html.py:1263
 #: templates/popover/gear_accessory.html:12
 #: templates/popover/gear_camera.html:14 templates/popover/gear_filter.html:12
 #: templates/popover/gear_focal_reducer.html:11
@@ -3851,7 +3851,7 @@ msgid "Upload as a work in progress"
 msgstr "Ein in Bearbeitung befindliches Bild hochladen"
 
 #: templates/upload.html:19 templates/upload.html.py:34
-#: templates/image/detail.html:1298
+#: templates/image/detail.html:1300
 msgid "Uploading..."
 msgstr "Es wird hochgeladen ..."
 
@@ -3915,16 +3915,16 @@ msgstr "Aufgenommen"
 msgid "Rating"
 msgstr "Bewertung"
 
-#: templates/wall.html:43 templates/image/detail.html:681
+#: templates/wall.html:43 templates/image/detail.html:683
 msgid "Favorited"
 msgstr ""
 
-#: templates/wall.html:49 templates/image/detail.html:453
-#: templates/image/detail.html.py:713 templates/search/search.html:31
+#: templates/wall.html:49 templates/image/detail.html:455
+#: templates/image/detail.html.py:715 templates/search/search.html:31
 msgid "Views"
 msgstr "Angezeigt"
 
-#: templates/wall.html:55 templates/image/detail.html:567
+#: templates/wall.html:55 templates/image/detail.html:569
 #: templates/inclusion_tags/search_image_list.html:49
 msgid "Comments"
 msgstr "Kommentare"
@@ -4000,7 +4000,7 @@ msgid ""
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
 
-#: templates/contact_form/contact.html:15 templates/image/detail.html:1252
+#: templates/contact_form/contact.html:15 templates/image/detail.html:1254
 #: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
 #: templates/user/profile-js.html:28
 msgid "Send"
@@ -4064,7 +4064,7 @@ msgstr "Diese Version als \"final\" markieren"
 msgid "Change license"
 msgstr "Lizenz ändern"
 
-#: templates/image/detail.html:85 templates/image/detail.html.py:1289
+#: templates/image/detail.html:85 templates/image/detail.html.py:1291
 msgid "Upload new revision"
 msgstr "Neue Version hochladen"
 
@@ -4115,7 +4115,7 @@ msgid "View"
 msgstr "Anzeigen"
 
 #: templates/image/detail.html:182 templates/image/detail.html.py:236
-#: templates/image/detail.html:788
+#: templates/image/detail.html:790
 msgid "Inverted monochrome"
 msgstr "Monochromes Negativ"
 
@@ -4129,7 +4129,7 @@ msgid "Annotated"
 msgstr "Bemerkungen"
 
 #: templates/image/detail.html:206 templates/image/detail.html.py:230
-#: templates/image/detail.html:787
+#: templates/image/detail.html:789
 msgid "Normal"
 msgstr "Normal"
 
@@ -4137,7 +4137,7 @@ msgstr "Normal"
 msgid "View profile"
 msgstr "Profil anzeigen"
 
-#: templates/image/detail.html:262 templates/image/detail.html.py:1238
+#: templates/image/detail.html:262 templates/image/detail.html.py:1240
 #: templates/user/profile-js.html:14 templates/user/profile-subnav.html:66
 msgid "Stop following"
 msgstr "Follow beenden"
@@ -4146,7 +4146,7 @@ msgstr "Follow beenden"
 msgid "Send private message"
 msgstr "Private Nachricht senden"
 
-#: templates/image/detail.html:281 templates/image/detail.html.py:734
+#: templates/image/detail.html:281 templates/image/detail.html.py:736
 msgid "Share"
 msgstr "Teilen"
 
@@ -4158,69 +4158,69 @@ msgstr ""
 "Das Bild wurde erfolgreich hochgeladen und wird gerade bearbeitet. Versuche "
 "die Seite in ein paar Sekunden nochmals anzufordern."
 
-#: templates/image/detail.html:379
+#: templates/image/detail.html:380
 msgid "Contains"
 msgstr "Beinhaltet"
 
-#: templates/image/detail.html:398
+#: templates/image/detail.html:399
 #, python-format
 msgid "and %(number)s more (click to view)."
 msgstr "und %(number)s mehr (klicken um anzuzeigen)."
 
-#: templates/image/detail.html:406
+#: templates/image/detail.html:407
 msgid "(hide these subjects)"
 msgstr "(Betreff ausblenden)"
 
-#: templates/image/detail.html:422
+#: templates/image/detail.html:424
 msgid "This image is a revision. Here are its other versions"
 msgstr "Dieses Bild ist eine Überarbeitung. Hier sind die anderen Versionen"
 
-#: templates/image/detail.html:424
+#: templates/image/detail.html:426
 msgid "This image has some other revisions"
 msgstr "Von diesem Bild gibt es noch andere Versionen"
 
-#: templates/image/detail.html:476
+#: templates/image/detail.html:478
 msgid "Histogram"
 msgstr "Histogramm"
 
-#: templates/image/detail.html:533
+#: templates/image/detail.html:535
 msgid "RA center"
 msgstr "RA Zentrum"
 
-#: templates/image/detail.html:534
+#: templates/image/detail.html:536
 msgid "DEC center"
 msgstr "DEC Zentrum"
 
-#: templates/image/detail.html:536
+#: templates/image/detail.html:538
 msgid "Pixel scale"
 msgstr "Pixel Skala"
 
-#: templates/image/detail.html:536
+#: templates/image/detail.html:538
 msgid "arcsec/pixel"
 msgstr "Bogensekunden / Pixel"
 
-#: templates/image/detail.html:538
+#: templates/image/detail.html:540
 msgid "Orientation"
 msgstr "Ausrichtung"
 
-#: templates/image/detail.html:538 templates/image/detail.html.py:539
-#: templates/image/detail.html:540
+#: templates/image/detail.html:540 templates/image/detail.html.py:541
+#: templates/image/detail.html:542
 msgid "degrees"
 msgstr "Grad"
 
-#: templates/image/detail.html:539
+#: templates/image/detail.html:541
 msgid "Field width"
 msgstr "Feldgrösse"
 
-#: templates/image/detail.html:539 templates/image/detail.html.py:540
+#: templates/image/detail.html:541 templates/image/detail.html.py:542
 msgid "arcminutes"
 msgstr "Bogenminuten"
 
-#: templates/image/detail.html:540
+#: templates/image/detail.html:542
 msgid "Field height"
 msgstr "Feldhöhe"
 
-#: templates/image/detail.html:570
+#: templates/image/detail.html:572
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -4231,8 +4231,8 @@ msgstr ""
 "internationales Publikum anspricht: Englisch bevorzugt. PS: die bevorzugte "
 "Sprache von <strong>%(user)s</strong> ist <strong>%(lang)s</strong>."
 
-#: templates/image/detail.html:580 templates/image/detail.html.py:639
-#: templates/image/detail.html:1104 templates/image/edit/acquisition.html:27
+#: templates/image/detail.html:582 templates/image/detail.html.py:641
+#: templates/image/detail.html:1106 templates/image/edit/acquisition.html:27
 #: templates/image/edit/acquisition.html:62
 #: templates/image/edit/acquisition.html:84 templates/image/edit/basic.html:77
 #: templates/image/edit/gear.html:55 templates/image/edit/license.html:20
@@ -4247,12 +4247,12 @@ msgstr ""
 msgid "Save"
 msgstr "Speichern"
 
-#: templates/image/detail.html:582 templates/image/detail.html.py:642
-#: templates/image/detail.html:1110
+#: templates/image/detail.html:584 templates/image/detail.html.py:644
+#: templates/image/detail.html:1112
 msgid "Formatting help"
 msgstr "Hilfe zur Formatierung"
 
-#: templates/image/detail.html:592
+#: templates/image/detail.html:594
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment."
@@ -4260,123 +4260,123 @@ msgstr ""
 "Bitte <a href=\"/accounts/login/\">einloggen</a> oder <a href=\"/accounts/"
 "register/\">registrieren</a>, um einen Kommentar abzugeben."
 
-#: templates/image/detail.html:611 templates/image/detail.html.py:1178
+#: templates/image/detail.html:613 templates/image/detail.html.py:1180
 msgid "(comment deleted)"
 msgstr "(Kommentar gelöscht)"
 
-#: templates/image/detail.html:622 templates/image/detail.html.py:1179
+#: templates/image/detail.html:624 templates/image/detail.html.py:1181
 msgid "Undelete"
 msgstr "Wiederherstellen"
 
-#: templates/image/detail.html:624 templates/image/detail.html.py:1086
-#: templates/image/detail.html:1185
+#: templates/image/detail.html:626 templates/image/detail.html.py:1088
+#: templates/image/detail.html:1187
 msgid "Delete"
 msgstr "Löschen"
 
-#: templates/image/detail.html:627 templates/image/detail.html.py:1087
+#: templates/image/detail.html:629 templates/image/detail.html.py:1089
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: templates/image/detail.html:629 templates/image/detail.html.py:1088
+#: templates/image/detail.html:631 templates/image/detail.html.py:1090
 #: templates/messages/inbox.html:39 templates/messages/view.html:40
 #: templates/messages/view.html.py:75
 msgid "Reply"
 msgstr "Antworten"
 
-#: templates/image/detail.html:657
+#: templates/image/detail.html:659
 msgid "There are no comments yet."
 msgstr "Noch keine Kommentare."
 
-#: templates/image/detail.html:679
+#: templates/image/detail.html:681
 msgid "Already favorited"
 msgstr ""
 
-#: templates/image/detail.html:679
+#: templates/image/detail.html:681
 #, fuzzy
 msgid "Mark as favorite"
 msgstr "Als erledigt markieren."
 
-#: templates/image/detail.html:683
+#: templates/image/detail.html:685
 msgid "Favorite"
 msgstr ""
 
-#: templates/image/detail.html:721
+#: templates/image/detail.html:723
 msgid "Votes"
 msgstr ""
 
-#: templates/image/detail.html:748
+#: templates/image/detail.html:750
 msgid "Sharing mode"
 msgstr ""
 
-#: templates/image/detail.html:750
+#: templates/image/detail.html:752
 #, fuzzy
 msgid "Simple link"
 msgstr "AstroBin Links"
 
-#: templates/image/detail.html:751
+#: templates/image/detail.html:753
 msgid "Forums"
 msgstr ""
 
-#: templates/image/detail.html:756
+#: templates/image/detail.html:758
 msgid "Thumbnail"
 msgstr ""
 
-#: templates/image/detail.html:758 templates/user/api_keys.html:29
+#: templates/image/detail.html:760 templates/user/api_keys.html:29
 #, fuzzy
 msgid "Yes"
 msgstr "Ja."
 
-#: templates/image/detail.html:759
+#: templates/image/detail.html:761
 #, fuzzy
 msgid "No"
 msgstr "Nein."
 
-#: templates/image/detail.html:765
+#: templates/image/detail.html:767
 #, fuzzy
 msgid "Image size"
 msgstr "Bilder"
 
-#: templates/image/detail.html:767 templates/image/detail.html.py:1281
+#: templates/image/detail.html:769 templates/image/detail.html.py:1283
 msgid "Regular"
 msgstr "Durchschnittlich"
 
-#: templates/image/detail.html:768
+#: templates/image/detail.html:770
 msgid "Full"
 msgstr ""
 
-#: templates/image/detail.html:772
+#: templates/image/detail.html:774
 #, fuzzy
 msgid "Copy this"
 msgstr "Kopieren"
 
-#: templates/image/detail.html:775 templates/image/detail.html.py:778
-#: templates/image/detail.html:833 templates/image/edit/gear.html:77
+#: templates/image/detail.html:777 templates/image/detail.html.py:780
+#: templates/image/detail.html:835 templates/image/edit/gear.html:77
 msgid "Copy"
 msgstr "Kopieren"
 
-#: templates/image/detail.html:785
+#: templates/image/detail.html:787
 #, fuzzy
 msgid "Image mode"
 msgstr "Hochgeladene Bilder"
 
-#: templates/image/detail.html:816
+#: templates/image/detail.html:818
 msgid "Favorited!"
 msgstr ""
 
-#: templates/image/detail.html:836
+#: templates/image/detail.html:838
 msgid "Copied!"
 msgstr ""
 
-#: templates/image/detail.html:1082
+#: templates/image/detail.html:1084
 msgid "just now"
 msgstr "gerade jetzt"
 
-#: templates/image/detail.html:1234 templates/user/profile-js.html:10
+#: templates/image/detail.html:1236 templates/user/profile-js.html:10
 #, python-format
 msgid "Follow %(username)s?"
 msgstr "Follow %(username)s?"
 
-#: templates/image/detail.html:1235 templates/user/profile-js.html:11
+#: templates/image/detail.html:1237 templates/user/profile-js.html:11
 #, python-format
 msgid ""
 "You will receive a notification every time %(username)s posts a new image. "
@@ -4385,16 +4385,16 @@ msgstr ""
 "Du erhältst jedes eine Benachrichtungen, jedes Mal wenn %(username)s eine "
 "neues Bild veröffentlicht. Weiter?"
 
-#: templates/image/detail.html:1236 templates/user/profile-js.html:12
+#: templates/image/detail.html:1238 templates/user/profile-js.html:12
 msgid "Yes, follow!"
 msgstr "Ja, follow!"
 
-#: templates/image/detail.html:1242 templates/user/profile-js.html:18
+#: templates/image/detail.html:1244 templates/user/profile-js.html:18
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr "Following %(username)s beenden?"
 
-#: templates/image/detail.html:1243 templates/user/profile-js.html:19
+#: templates/image/detail.html:1245 templates/user/profile-js.html:19
 #, python-format
 msgid ""
 "You will stop receiving notifications when %(username)s posts a new image. "
@@ -4403,41 +4403,41 @@ msgstr ""
 "Du wirst keine Benachrichtigungen mehr erhalten, wenn %(username)s ein neues "
 "Bild veröffentlicht. Weiter?"
 
-#: templates/image/detail.html:1244 templates/user/profile-js.html:20
+#: templates/image/detail.html:1246 templates/user/profile-js.html:20
 msgid "Yes, stop following!"
 msgstr "Ja! Following beenden!"
 
-#: templates/image/detail.html:1250 templates/user/profile-js.html:26
+#: templates/image/detail.html:1252 templates/user/profile-js.html:26
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "%(username)s eine Nachricht senden"
 
-#: templates/image/detail.html:1279
+#: templates/image/detail.html:1281
 msgid "Bad"
 msgstr "Schlecht"
 
-#: templates/image/detail.html:1280
+#: templates/image/detail.html:1282
 msgid "Poor"
 msgstr "Mangelhaft"
 
-#: templates/image/detail.html:1282
+#: templates/image/detail.html:1284
 msgid "Good"
 msgstr "Gut"
 
-#: templates/image/detail.html:1283
+#: templates/image/detail.html:1285
 msgid "Gorgeous"
 msgstr "Hervorragend"
 
-#: templates/image/detail.html:1290
+#: templates/image/detail.html:1292
 msgid ""
 "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr "Bildbearbeitung verbessert? Lade die neue Version hoch!"
 
-#: templates/image/detail.html:1302
+#: templates/image/detail.html:1304
 msgid "Delete image and all its revisions?"
 msgstr "Bild inkl. allen Versionen löschen?"
 
-#: templates/image/detail.html:1303
+#: templates/image/detail.html:1305
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
@@ -4445,15 +4445,15 @@ msgstr ""
 "Das Bild wird permanent gelöscht und kann nicht wiederhergestellt werden. "
 "Alle Versionen werden ebenfalls gelöscht. Bist Du sicher?"
 
-#: templates/image/detail.html:1304
+#: templates/image/detail.html:1306
 msgid "Yes, delete everything"
 msgstr "Ja, alles löschen"
 
-#: templates/image/detail.html:1309
+#: templates/image/detail.html:1311
 msgid "Delete this revision?"
 msgstr "Diese Version löschen?"
 
-#: templates/image/detail.html:1310
+#: templates/image/detail.html:1312
 msgid ""
 "This revision will be permanently deleted and cannot be recovered. Are you "
 "sure?"
@@ -4461,15 +4461,15 @@ msgstr ""
 "Diese Version wird permanent gelöscht und kann nicht wieder hergestellt "
 "werden. Bist Du sicher?"
 
-#: templates/image/detail.html:1311
+#: templates/image/detail.html:1313
 msgid "Yes, delete revision"
 msgstr "Ja, diese Version löschen"
 
-#: templates/image/detail.html:1316
+#: templates/image/detail.html:1318
 msgid "Delete original image?"
 msgstr "Original-Bild löschen?"
 
-#: templates/image/detail.html:1317
+#: templates/image/detail.html:1319
 msgid ""
 "The image will be permanently deleted and cannot be recovered. Its revisions "
 "will not be deleted. Are you sure?"
@@ -4477,7 +4477,7 @@ msgstr ""
 "Das Bild wird permanent gelöscht und kann nicht wieder hergestellt werden. "
 "Die Versionen werden nicht gelöscht. Bist Du sicher?"
 
-#: templates/image/detail.html:1318
+#: templates/image/detail.html:1320
 msgid "Yes, delete image"
 msgstr "Ja, Bild löschen"
 
@@ -6147,6 +6147,10 @@ msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
 msgstr "Wähle welche EMail Benachritigung Du erhalten möchtest:"
+
+#, fuzzy
+#~ msgid "Hot right now"
+#~ msgstr "Jetzt ausführen?"
 
 #~ msgid "My page"
 #~ msgstr "Meine Seite"
