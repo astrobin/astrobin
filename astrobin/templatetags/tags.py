@@ -60,12 +60,14 @@ def related_images(request, object_list, type):
 
 @register.inclusion_tag('inclusion_tags/notification_list.html')
 def notification_list(request, show_footer = True, limit = 0):
-    ret = notifications.Notice.objects.filter(user=request.user)
+    unseen = notifications.Notice.objects.filter(user = request.user, unseen = True)
+    seen = notifications.Notice.objects.filter(user = request.user, unseen = False)
     if limit > 0:
-        ret = ret[:limit]
+        seen = seen[:limit]
     return {
-        'notifications':ret,
-        'show_footer':show_footer}
+        'unseen': unseen,
+        'seen': seen,
+        'show_footer': show_footer}
 
 
 @register.inclusion_tag('inclusion_tags/request_list.html')
