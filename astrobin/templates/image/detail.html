@@ -721,11 +721,11 @@
                     </tr>
                     <tr>
                         <td><img rel="tooltip" title="{% trans "Favorites" %}" alt="{% trans "Favorites" %}" src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png"/></td>
-                        <td>{{times_favorited}}</td>
+                        <td><span class="favorites-number">{{times_favorited}}</span></td>
                     </tr>
                     <tr>
                         <td><img rel="tooltip" title="{% trans "Votes" %}" alt="{% trans "Votes" %}" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/></td>
-                        <td>{{votes_number}}</td>
+                        <td><span class="votes-number">{{votes_number}}</span></td>
                     </tr>
                 </table>
             </div>
@@ -820,6 +820,7 @@ $(document).ready(function() {
             success: function(data, textStatus, XMLHttpRequest) {
                 $heart.attr('src', '{{STATIC_URL}}icons/iconic/red/heart_fill_24x21.png');
                 $link.attr('title', "{% trans "Favorited!" %}");
+                $('.favorites-number').text(parseInt($('.favorites-number').text()) + 1);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
             }
