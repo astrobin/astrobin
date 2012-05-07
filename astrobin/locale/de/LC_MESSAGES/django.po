@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:02+0000\n"
-"PO-Revision-Date: 2012-05-06 14:50+0100\n"
+"PO-Revision-Date: 2012-05-06 15:21+0100\n"
 "Last-Translator: leonh <leonh@ndreke.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -1177,7 +1177,7 @@ msgstr "Lizenz"
 #: forms.py:326
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
-msgstr "Suche nach Objekten, Optiken, Kameras, Filter..."
+msgstr "Suceh nach astromischen Objekten, Optiken, Kameras, Filtern, ..."
 
 #: forms.py:328 models.py:502
 msgid "Main solar system subject"
@@ -1185,11 +1185,11 @@ msgstr "Objekt im Sonnensystem"
 
 #: forms.py:331
 msgid "Min. telescope aperture"
-msgstr "Minimale Teleskop Öffnung"
+msgstr "Minimale Teleskopöffnung"
 
 #: forms.py:332
 msgid "Max. telescope aperture"
-msgstr "Maximale Teleskop Öffnung"
+msgstr "Maximale Teleskopöffnung"
 
 #: forms.py:333
 msgid "Acquired after"
@@ -2170,6 +2170,8 @@ msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr ""
+"Bitte beschreibe die Funktionalität deines Programms sowie die beabsichtigte "
+"Nutzung der API."
 
 #: search.py:79 views.py:983 views.py:1271 views.py:1296
 #: templates/image/actions/bring_to_attention.html:30
@@ -2513,19 +2515,25 @@ msgid ""
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
 "in your own app or website."
 msgstr ""
+"Danke für dein Interesse an den AstroBin APIs! Du benötigst einen "
+"<strong>Key</strong> sowie ein <strong>Secret</strong> um die Daten von "
+"AstroBin auf auf deiner eigenen Webseite oder in deiner eigenen App "
+"verwenden zu können."
 
 #: templates/app_api_key_request.html:9
 msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr ""
+"Du wirst innerhalb von 24 Stunden nach Stellung deiner Anfrage eine Antwort "
+"erhalten."
 
 #: templates/app_api_key_request.html:13
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"%(tos_url)s\">Terms of Service</a>."
 msgstr ""
-"Wenn Du Dich bei AstroBin registrierst, bestätigst Du unsere <a href="
-"\"%(tos_url)s\">Geschäftsbedingungen</a>."
+"Bitte stelle sicher, dass du den Absatz bezüglich APIs in unseren <a href=\"%"
+"(tos_url)s\">Geschäftsbedingungen</a> gelesen hast."
 
 #: templates/app_api_key_request.html:18
 #: templates/registration/password_change_form.html:10
@@ -2536,15 +2544,16 @@ msgid "Submit"
 msgstr "Absenden"
 
 #: templates/app_api_key_request_complete.html:6
-#, fuzzy
 msgid "Your API key request has been submitted"
-msgstr "Deine Anfrage wurde abgearbeitet"
+msgstr "Deine API-Key Anfrage wurde gestellt"
 
 #: templates/app_api_key_request_complete.html:8
 msgid ""
 "You will receive a reply within 24 hours. Thanks for your interest in using "
 "AstroBin's APIs!"
 msgstr ""
+"Du wirst innerhalb von 24 Stunden ein Antwort erhalten. Wir danken dir für "
+"dein Interesse an den AstroBin APIs!"
 
 #: templates/base.html:78 templates/base.html.py:383 templates/base.html:411
 msgid "Home"
@@ -2647,7 +2656,7 @@ msgstr "Meine Nachrichten"
 
 #: templates/base.html:227 templates/user/profile-subnav.html:48
 msgid "API Keys"
-msgstr ""
+msgstr "API-Keys"
 
 #: templates/base.html:231
 msgid "My settings"
@@ -3058,7 +3067,8 @@ msgstr ""
 msgid ""
 "AstroBin uses the Markdown syntax. Please use the following reference table:"
 msgstr ""
-"AstroBin verwendet das Markdown-Format. Bitte folgende Tabelle beachten:"
+"AstroBin verwendet das Markdown-Format. Bitte verwende die folgende "
+"Referenztabelle:"
 
 #: templates/faq.html:118
 msgid "You type:"
@@ -3564,7 +3574,7 @@ msgstr "Kürzlich als Favorit markiert"
 #: templates/popover/gear_telescope.html:15 templates/popover/subject.html:23
 #: templates/user/profile-js.html:22 templates/user/profile-subnav.html:68
 msgid "Follow"
-msgstr "Follow"
+msgstr "Folgen"
 
 # This is the "official" translation of the term that Twitter also uses.
 #: templates/index.html:147 templates/image/detail.html:1262
@@ -4129,7 +4139,7 @@ msgstr "Profil anzeigen"
 #: templates/image/detail.html:262 templates/image/detail.html.py:1240
 #: templates/user/profile-js.html:14 templates/user/profile-subnav.html:66
 msgid "Stop following"
-msgstr "Follow beenden"
+msgstr "Entfolgen"
 
 #: templates/image/detail.html:273 templates/user/profile-subnav.html:73
 msgid "Send private message"
@@ -4356,7 +4366,7 @@ msgstr "gerade jetzt"
 #: templates/image/detail.html:1236 templates/user/profile-js.html:10
 #, python-format
 msgid "Follow %(username)s?"
-msgstr "Follow %(username)s?"
+msgstr "%(username)s folgen?"
 
 #: templates/image/detail.html:1237 templates/user/profile-js.html:11
 #, python-format
@@ -4369,12 +4379,12 @@ msgstr ""
 
 #: templates/image/detail.html:1238 templates/user/profile-js.html:12
 msgid "Yes, follow!"
-msgstr "Ja, follow!"
+msgstr "Ja, folgen!"
 
 #: templates/image/detail.html:1244 templates/user/profile-js.html:18
 #, python-format
 msgid "Stop following %(username)s?"
-msgstr "Following %(username)s beenden?"
+msgstr "%(username)s entfolgen?"
 
 #: templates/image/detail.html:1245 templates/user/profile-js.html:19
 #, python-format
@@ -4387,7 +4397,7 @@ msgstr ""
 
 #: templates/image/detail.html:1246 templates/user/profile-js.html:20
 msgid "Yes, stop following!"
-msgstr "Ja! Following beenden!"
+msgstr "Ja, entfolgen!!"
 
 #: templates/image/detail.html:1252 templates/user/profile-js.html:26
 #, python-format
@@ -5014,7 +5024,7 @@ msgstr ""
 "\n"
 "Um alle Benachrichtigungen zu sehen, gehe zu %(notices_url)s.\n"
 "\n"
-"Wenn Du keine EMails mehr erhalten möchtest, editiere Deine persönlichen "
+"Wenn Du keine E-Mails mehr erhalten möchtest, ändere deine persönlichen "
 "Einstellungen unter http://astrobin.com%(pref_url)s.\n"
 "\n"
 "Clear skies,\n"
@@ -5034,18 +5044,28 @@ msgid ""
 "    \n"
 "    Thank you for using AstroBin's APIs!"
 msgstr ""
+"Deine API-Key Anfrage wurde bestätigt!\n"
+"\n"
+"Dein Key: %(key)s\n"
+"Dein Secret: %(secret)s\n"
+"\n"
+"Die API-Dokumentation findest du unter %(api_docs_url)s\n"
+"\n"
+"Deine API-Keys kannst du jederzeit unter %(api_keys_url)s einsehen.\n"
+"\n"
+"Danke, dass du die AstroBin APIs verwendest!"
 
 #: templates/notification/api_key_request_approved/notice.html:2
 #: templates/notification/api_key_request_approved/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
 "a>"
-msgstr "<a href=\"%(object_url)s\">Dein Bild wurde verarbeitet.</a>"
+msgstr "<a href=\"%(api_keys_url)s\">Deine API-Key Anfrage wurde bestätigt!!</a>"
 
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
-msgstr ""
+msgstr "API-Key Anfrage bestätigt"
 
 #: templates/notification/attention_request/full.txt:2
 #, python-format
@@ -5077,8 +5097,7 @@ msgstr "%(originator)s möchte Dich auf ein Bild aufmerksam machen"
 msgid ""
 "<a href=\"%(object_url)s\">You are now following <strong>%(object)s</strong>."
 "</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">Du verfolgst nun <strong>%(object)s</strong>.</a>"
+msgstr "<a href=\"%(object_url)s\">Du folgst nun <strong>%(object)s</strong>.</a>"
 
 #: templates/notification/image_deleted/full.html:2
 #: templates/notification/image_deleted/full.txt:2
@@ -5302,7 +5321,8 @@ msgstr "%(user)s hat Dein Bild kommentiert!"
 msgid ""
 "%(user)s replied to your comment. Check it out at the following url: %(url)s"
 msgstr ""
-"%(user)s hat auf Deinen Kommentar geantwortet. Du findest sie unter: %(url)s"
+"%(user)s hat auf Deinen Kommentar geantwortet. Du findest die Antwort unter: "
+"%(url)s"
 
 #: templates/notification/new_comment_reply/notice.html:2
 #: templates/notification/new_comment_reply/short.html:2
@@ -5509,8 +5529,8 @@ msgid ""
 "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
 "strong>.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Du hast das Following für<strong>%(object)s</"
-"strong> beendet.</a>"
+"<a href=\"%(object_url)s\">Du folgst <strong>%(object)s</strong> nicht "
+"mehr.</a>"
 
 #: templates/popover/gear.html:9 templates/popover/gear_accessory.html:8
 #: templates/popover/gear_camera.html:11 templates/popover/gear_filter.html:9
@@ -5785,16 +5805,15 @@ msgstr "Teleskoptypen"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:11
 msgid "Your API Keys"
-msgstr ""
+msgstr "Deine API-Keys"
 
 #: templates/user/api_keys.html:18
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
 #: templates/user/api_keys.html:19
-#, fuzzy
 msgid "Active"
-msgstr "Bearbeiten"
+msgstr "Aktiv"
 
 #: templates/user/api_keys.html:38
 #, python-format
@@ -5802,10 +5821,12 @@ msgid ""
 "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
 "\">API documentation</a>."
 msgstr ""
+"Du besitzt keine API-Keys. Bitte lese die <a href=\"%(api_docs_url)s\">API-"
+"Dokumentation</a>."
 
 #: templates/user/api_keys.html:46
 msgid "Request an API Key"
-msgstr ""
+msgstr "Beantrage einen API-Key"
 
 #: templates/user/card.html:8
 #, python-format
