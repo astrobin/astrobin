@@ -1302,7 +1302,7 @@ def image_edit_save_basic(request):
     image.save()
 
     if 'was_not_ready' in request.POST:
-        if 'submit_next' in request.POST:
+        if 'submit_next' in request.POST and 'skip_rest' not in request.POST:
             return HttpResponseRedirect('/edit/gear/%i/' % image.id)
 
         image.process(image.presolve_information > 1)

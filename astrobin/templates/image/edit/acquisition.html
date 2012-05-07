@@ -95,10 +95,10 @@
         <div class="well">{% trans "What kind of image is this?" %}</div>
         <form class="form-horizontal">
             <div class="form-actions">
-                <a class="btn" href="{% url image_edit_acquisition image.id %}?edit_type=solar_system">
+                <a class="btn btn-primary" href="{% url image_edit_acquisition image.id %}?edit_type=solar_system">
                     {% trans "Solar system" %}
                 </a>
-                <a class="btn" href="{% url image_edit_acquisition image.id %}?edit_type=deep_sky">
+                <a class="btn btn-primary" href="{% url image_edit_acquisition image.id %}?edit_type=deep_sky">
                     {% trans "Deep sky" %}
                 </a>
             </div>
