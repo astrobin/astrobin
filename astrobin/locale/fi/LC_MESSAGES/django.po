@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:03+0000\n"
-"PO-Revision-Date: 2012-05-06 12:43+0100\n"
+"PO-Revision-Date: 2012-05-06 18:23+0100\n"
 "Last-Translator: Jussi <jussi.kantola@gmail.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
@@ -4968,7 +4968,7 @@ msgstr "<a href=\"%(api_keys_url)s\">Rajapinta-avainpyyntösi on hyväksytty!</a
 
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
-msgstr ""
+msgstr "Rajapinta-avain myönnetty"
 
 #: templates/notification/attention_request/full.txt:2
 #, python-format
@@ -5239,18 +5239,19 @@ msgstr "%(user)s vastasi kommenttiisi."
 
 #: templates/notification/new_favorite/full.txt:2
 #: templates/notification/new_favorite/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has marked your image as a favorite: %(url)s"
-msgstr ""
-"%(user)s kommentoi kuvaasi! Lue kommentti seuraavassa osoitteessa: %(url)s"
+msgstr "%(user)s merkkasi kuvasi suosikikseen: %(url)s"
 
 #: templates/notification/new_favorite/notice.html:2
 #: templates/notification/new_favorite/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> has marked your image as a "
 "favorite!</a>"
-msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> kommentoi kuvaasi!</a>"
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi "
+"suosikikseen!</a>"
 
 #: templates/notification/new_follower/full.txt:2
 #, python-format
@@ -5307,28 +5308,28 @@ msgid "New image by %(originator)s"
 msgstr "%(originator)s julkaisi uuden kuvan"
 
 #: templates/notification/new_image_from_gear/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
 "Check it out at the following url: %(object_url)s"
 msgstr ""
-"%(originator)s on toteuttanut pyyntösi! Voit käydä katsomassa sen "
-"osoitteesta: %(object_url)s"
+"Seuraamallasi kalustokomponentilla <strong>%(gear)s</strong> otettiin uusi "
+"kuva.  Voit katsoa sen osoitteessa: %(object_url)s"
 
 #: templates/notification/new_image_from_gear/notice.html:2
 #: templates/notification/new_image_from_gear/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
 "</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Seuraat nyt käyttäjää <strong>%(object)s</strong>."
-"</a>"
+"<a href=\"%(object_url)s\">Kalustolla <strong>%(gear)s</strong> otettiin uusi "
+"kuva.</a>"
 
 #: templates/notification/new_image_from_gear/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "New image taken with a %(gear)s"
-msgstr "%(originator)s julkaisi kuvasta uuden version"
+msgstr "Uusi kuva kalustolla %(gear)s"
 
 #: templates/notification/new_image_of_subject/full.txt:2
 #, fuzzy, python-format

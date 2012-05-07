@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:01+0000\n"
-"PO-Revision-Date: 2012-05-06 14:46+0100\n"
+"PO-Revision-Date: 2012-05-06 15:16+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -1045,7 +1045,8 @@ msgstr "Lieux"
 #: forms.py:83
 msgid "Please enter either some subjects or a main solar system subject."
 msgstr ""
-"S'il vous plaît, indiquez soit des objets soit un corps du système solaire."
+"S'il vous plaît, indiquez soit des objets du ciel profond, soit un corps du "
+"système solaire."
 
 #: forms.py:96
 msgid "Opacity"
@@ -1726,7 +1727,7 @@ msgstr "Objets du ciel profond"
 
 #: models.py:479
 msgid "Solar system body or event"
-msgstr "Corps du Système Solaire ou évènement"
+msgstr "Corps du système solaire ou phénomène"
 
 #: models.py:480 views.py:1757 templates/wall.html:127
 msgid "Extremely wide field"
@@ -3927,7 +3928,7 @@ msgstr "Filtrer par"
 
 #: templates/wall.html:69
 msgid "All deep sky objects"
-msgstr "Tous les objets du ciel profond"
+msgstr "Objets du ciel profond"
 
 #: templates/wall.html:75
 msgid "Clusters"
@@ -4950,7 +4951,7 @@ msgstr "Dernier expéditeur"
 
 #: templates/messages/inbox.html:24
 msgid "Date and time"
-msgstr "Jour et heure"
+msgstr "Date et heure"
 
 #: templates/messages/inbox.html:26
 msgid "Excerpt"
@@ -5827,7 +5828,7 @@ msgstr ""
 
 #: templates/user/api_keys.html:46
 msgid "Request an API Key"
-msgstr "Demandez une clé API"
+msgstr "Demander une clé API"
 
 #: templates/user/card.html:8
 #, python-format

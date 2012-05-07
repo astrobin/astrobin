@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:01+0000\n"
-"PO-Revision-Date: 2012-05-06 10:03+0100\n"
+"PO-Revision-Date: 2012-05-06 15:52+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
@@ -4625,9 +4625,9 @@ msgid ""
 "edit_type=deep_sky&advanced=true\">advanced form</a>."
 msgstr ""
 "Met dit formulier kan je de basisdetails ingeven met betrekking tot de "
-"realistatie van je foto. Als je alle details w<enst te registreren (oa. info "
-"per filter), ga dan naar het <a class=\"button\" href="
-"\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">geavanceerde "
+"realistatie van je foto. Als je alle details wenst te registreren (oa. info "
+"per filter), ga dan naar het <a class=\"button\" href=\"%"
+"(advanced_form_url)s?edit_type=deep_sky&advanced=true\">geavanceerde "
 "formulier</a>."
 
 #: templates/image/edit/acquisition.html:95
@@ -5053,15 +5053,16 @@ msgstr ""
 
 #: templates/notification/api_key_request_approved/notice.html:2
 #: templates/notification/api_key_request_approved/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
 "a>"
-msgstr "<a href=\"%(object_url)s\">Je beeld is verwerkt.</a>"
+msgstr ""
+"<a href=\"%(api_keys_url)s\">Je aanvraag voor een API Key is goedgekeurd!</a>"
 
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
-msgstr ""
+msgstr "API Key aanvraag goedgekeurd"
 
 #: templates/notification/attention_request/full.txt:2
 #, python-format
@@ -5805,16 +5806,15 @@ msgstr "Telescoop-types"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:11
 msgid "Your API Keys"
-msgstr ""
+msgstr "Je API Keys"
 
 #: templates/user/api_keys.html:18
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #: templates/user/api_keys.html:19
-#, fuzzy
 msgid "Active"
-msgstr "Acties"
+msgstr "Actief"
 
 #: templates/user/api_keys.html:38
 #, python-format
@@ -5822,10 +5822,12 @@ msgid ""
 "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
 "\">API documentation</a>."
 msgstr ""
+"Je hebt geen API Keys. Gelieve de <a href=\"%(api_docs_url)s\">API "
+"documentatie</a> te lezen."
 
 #: templates/user/api_keys.html:46
 msgid "Request an API Key"
-msgstr ""
+msgstr "Aanvraag van een API Key"
 
 #: templates/user/card.html:8
 #, python-format
