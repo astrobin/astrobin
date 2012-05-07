@@ -638,8 +638,7 @@ astrobin_image_detail = {
                                 $(astrobin_image_detail.config.rating.element).raty('start', rating);
                                 $(astrobin_image_detail.config.rating.element).raty('readOnly', true);
                                 $(astrobin_image_detail.config.rating.element).raty('fixHint');
-                                $('.rating-current .rating').text(rating);
-                                $('.rating-current .number').text(parseInt($('.rating-current .number').text()) + 1);
+                                $('.votes-number').text(parseInt($('.votes-number').text()) + 1);
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) {
                             }
