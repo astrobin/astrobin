@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:01+0000\n"
-"PO-Revision-Date: 2012-03-27 14:00+0100\n"
-"Last-Translator: milosz <milosz.wasilewski@gmail.com>\n"
+"PO-Revision-Date: 2012-05-07 10:57+0100\n"
+"Last-Translator: scyth <scyth1@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -1009,15 +1009,14 @@ msgid ""
 msgstr "Jeśli hostujesz to zdjęcie na swojej stronie, wpisz tutaj jej adres."
 
 #: forms.py:45
-#, fuzzy
 msgid ""
 "If you want to share the TIFF or FITS file of your image, put a link to the "
 "file here. Unfortunately, AstroBin cannot offer to store these files at the "
 "moment, so you will have to host them on your personal space."
 msgstr ""
-"Jeśli chcesz udostępnić plik TIFF lub FITS , umieść tutaj linka. Niestety w "
-"tym momencie AstroBin nie może zaoferować miejsca na te pliki, więc musisz "
-"je udostępnić z innego serwisu."
+"Jeśli chcesz się podzielić twoim zdjęciem w postaci pliku TIFF lub FITS "
+"umieść link ze zdjęciem w tym pliku. Niestety, Astrobin nie oferuje "
+"przechowywania plików, więc trzeba je przechowywać we własnym zakresie."
 
 #: forms.py:50
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
@@ -6055,7 +6054,7 @@ msgstr ""
 
 #: templates/user/profile/edit/locations.html:15
 msgid "AstroBin will not share your location details with other users."
-msgstr "AstroBin nie ujawni Twojej lokalizacio innym użytkownikom."
+msgstr "AstroBin nie ujawni Twojej lokalizacji innym użytkownikom."
 
 #: templates/user/profile/edit/preferences.html:9
 msgid "Edit your site preferences"

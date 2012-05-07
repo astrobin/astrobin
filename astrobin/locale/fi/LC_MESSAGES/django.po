@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:03+0000\n"
-"PO-Revision-Date: 2012-05-06 18:23+0100\n"
-"Last-Translator: Jussi <jussi.kantola@gmail.com>\n"
+"PO-Revision-Date: 2012-05-07 11:58+0100\n"
+"Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -5332,23 +5332,23 @@ msgid "New image taken with a %(gear)s"
 msgstr "Uusi kuva kalustolla %(gear)s"
 
 #: templates/notification/new_image_of_subject/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
 "out at the following url: %(object_url)s"
 msgstr ""
-"AstroBin on julkaissut uuden blogikirjoituksen: \"%(object)s\".\n"
+"Uusi kuva seuraamastasi kohteesta: \"%(subject)s\".\n"
 "\n"
-"Lue kirjoitus osoitteessa: %(object_url)s"
+"Katso kuva osoitteessa: %(object_url)s"
 
 #: templates/notification/new_image_of_subject/notice.html:2
 #: templates/notification/new_image_of_subject/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Seuraat nyt käyttäjää <strong>%(object)s</strong>."
-"</a>"
+"<a href=\"%(object_url)s\">Uusi kuva kohteesta <strong>%"
+"(subject)s</strong>.</a>"
 
 #: templates/notification/new_image_of_subject/short.txt:2
 #, fuzzy, python-format
