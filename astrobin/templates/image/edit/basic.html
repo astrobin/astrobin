@@ -71,14 +71,17 @@
         </noscript>
 
         <input type="hidden" name="image_id" value="{{image.id}}" />
+        {% if image.subject_type and image.subject_type == 500 or image.subject_type == 600 %}
+            <input type="hidden" name="skip_rest" value="true"/>
+        {% endif %}
 
         <div class="form-actions">
             {% if image.is_stored %}
-            <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
-            <a class="btn" href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a>
+                <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
+                <a class="btn" href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a>
             {% else %}
-            <input class="btn btn-primary" type="submit" name="submit_next" value="{% trans "Next step: gear used" %} &rarr;" />
-            <input type="hidden" name="was_not_ready" value="true"/>
+                <input class="btn btn-primary" type="submit" name="submit_next" value="{% trans "Next step: gear used" %} &rarr;" />
+                <input type="hidden" name="was_not_ready" value="true"/>
             {% endif %}
         </div>
     </form>
@@ -147,6 +150,19 @@
                 reset_ss();
                 reset_ds();
             }
+
+            {% if not image.is_stored %}
+            if (selected.val() == 500 || selected.val() == 600) {
+                // For Gear and Other we don't need to edit gear or acquisition.
+                $('form#basic .form-actions input[name=submit_next]').val("{% trans "Save and finish" %} →");
+                $('form#basic .form-actions').append(
+                    '<input type="hidden" name="skip_rest" value="true"/>');
+            } else {
+                $('form#basic .form-actions input[name=submit_next]').val(
+                    "{% trans "Next step: gear used" %} →");
+                $('form#basic .form-actions input[name=skip_rest]').remove();
+            }
+            {% endif %}
         }
 
         $('select[name=subject_type]').change(function() {
