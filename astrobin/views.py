@@ -820,6 +820,7 @@ def image_detail(request, id):
                      'subjects_reminder': subjects[subjects_limit:],
                      'subjects_all': subjects,
                      'subjects_limit': subjects_limit,
+                     'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][0],
                      'license_icon': licenses[image.license][1],
                      'license_title': licenses[image.license][2],
                      # Because of a regression introduced at
