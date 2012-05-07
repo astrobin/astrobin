@@ -201,7 +201,7 @@ def index(request):
         profile = UserProfile.objects.get(user=request.user)
 
         response_dict['recent_from_followees'] = \
-            Image.objects.filter(user__in = profile.follows.all())[:18]
+            Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:18]
 
         response_dict['recently_favorited'] = \
             Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
