@@ -105,22 +105,22 @@ def image_stored_callback(image, stored, solve, lang):
         notification = 'new_image_revision' if is_revision else 'new_image'
         push_notification(followers, notification,
                           {'originator':user,
-                           'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+                           'object_url':settings.ASTROBIN_BASE_URL + img.get_absolute_url()
                           }
                          )
         for gear_type in ('imaging_telescopes', 'guiding_telescopes', 'mounts',
                           'imaging_cameras', 'guiding_cameras', 'focal_reducers',
                           'software', 'filters', 'accessories'):
-            for gear_item in getattr(image, gear_type).all():
+            for gear_item in getattr(img, gear_type).all():
                 gear_followers = [x.user for x in UserProfile.objects.filter(follows_gear = Gear.objects.get(id = gear_item.id))]
                 push_notification(
                     gear_followers, 'new_image_from_gear',
                     {
                         'gear': gear_item.name,
-                        'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+                        'object_url': settings.ASTROBIN_BASE_URL + img.get_absolute_url()
                     })
 
-        for subject in image.subjects.all():
+        for subject in img.subjects.all():
             print subject
             subject_followers = [x.user for x in UserProfile.objects.filter(follows_subjects = subject)]
             print subject_followers
@@ -128,7 +128,7 @@ def image_stored_callback(image, stored, solve, lang):
                 subject_followers, 'new_image_of_subject',
                 {
                     'subject': subject.mainId,
-                    'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+                    'object_url': settings.ASTROBIN_BASE_URL + img.get_absolute_url()
                 })
 
 
