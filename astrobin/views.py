@@ -201,7 +201,7 @@ def index(request):
         profile = UserProfile.objects.get(user=request.user)
 
         response_dict['recent_from_followees'] = \
-            Image.objects.filter(user__in = profile.follows.all())[:18]
+            Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:18]
 
         response_dict['recently_favorited'] = \
             Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
@@ -820,7 +820,7 @@ def image_detail(request, id):
                      'subjects_reminder': subjects[subjects_limit:],
                      'subjects_all': subjects,
                      'subjects_limit': subjects_limit,
-                     'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][0],
+                     'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][0] if image.subject_type else 0,
                      'license_icon': licenses[image.license][1],
                      'license_title': licenses[image.license][2],
                      # Because of a regression introduced at
