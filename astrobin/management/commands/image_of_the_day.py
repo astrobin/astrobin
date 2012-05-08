@@ -37,6 +37,8 @@ class Command(BaseCommand):
                     comments = Comment.objects.filter(image = image).count()
     
                     coolness = score + (times_favorited * 3) + (comments * 5)
+
+                    print "Examining: [%s] [%d]" % (image.title, coolness)
                     if coolness > current_coolness:
                         coolest_image = image
                         current_coolness = coolness
@@ -44,5 +46,5 @@ class Command(BaseCommand):
             else:
                 yesterday = yesterday - timedelta(1)
 
-        make_image_of_the_day(image)
+        make_image_of_the_day(coolest_image)
 
