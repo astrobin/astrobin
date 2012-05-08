@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:02+0000\n"
-"PO-Revision-Date: 2012-05-07 11:57+0100\n"
+"PO-Revision-Date: 2012-05-08 08:59+0100\n"
 "Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
@@ -1066,7 +1066,7 @@ msgstr ""
 
 #: forms.py:137 forms.py:329 models.py:614
 msgid "Imaging telescopes or lenses"
-msgstr "Telescopios o objetivos"
+msgstr "Telescopios u objetivos"
 
 #: forms.py:138 models.py:615
 msgid "Guiding telescopes or lenses"
@@ -2207,15 +2207,15 @@ msgstr "Imágenes subidas por día"
 
 #: stats.py:195 stats.py:238
 msgid "Views, yearly"
-msgstr "Imágenes vistas por año"
+msgstr "Visitas por año"
 
 #: stats.py:196 stats.py:239
 msgid "Views, monthly"
-msgstr "Imágenes vistas por mes"
+msgstr "Visitas por mes"
 
 #: stats.py:197 stats.py:240
 msgid "Views, daily"
-msgstr "Imágenes vistas por día"
+msgstr "Visitas por día"
 
 #: stats.py:360 templates/subject/page.html:75
 #: templates/subject/page.html.py:110
@@ -2258,7 +2258,7 @@ msgstr "Tomas"
 #: templates/inclusion_tags/search_image_list.html:17
 #: templates/search/search.html:28 templates/search/search.html.py:261
 msgid "Integration"
-msgstr "Integración"
+msgstr "Tiempo de integración"
 
 #: views.py:731 views.py:1906 views.py:1907
 #: templates/inclusion_tags/search_image_list.html:17
@@ -2292,7 +2292,7 @@ msgstr "Completar una sesión antes de añadir más."
 
 #: views.py:1685
 msgid "No date specified"
-msgstr "No hay fecha especificada"
+msgstr "Sin fecha especificada"
 
 #: views.py:1687
 msgid ""
@@ -2613,7 +2613,7 @@ msgstr "Subir"
 
 #: templates/base.html:201
 msgid "My places"
-msgstr "Mis ubicaciones"
+msgstr "Mis imágenes"
 
 #: templates/base.html:204 templates/user/profile-subnav.html:14
 msgid "Gallery"
@@ -3879,11 +3879,11 @@ msgstr "Ordenar por"
 
 #: templates/wall.html:18
 msgid "Uploaded"
-msgstr "Subidas"
+msgstr "Fecha de subida"
 
 #: templates/wall.html:24
 msgid "Acquired"
-msgstr "Adquiridas"
+msgstr "Fecha de adquisición"
 
 #: templates/wall.html:37 templates/inclusion_tags/search_image_list.html:21
 #: templates/search/search.html:25
@@ -3897,7 +3897,7 @@ msgstr "Favoritas"
 #: templates/wall.html:49 templates/image/detail.html:455
 #: templates/image/detail.html.py:715 templates/search/search.html:31
 msgid "Views"
-msgstr "Imágenes vistas"
+msgstr "Número de visitas"
 
 #: templates/wall.html:55 templates/image/detail.html:569
 #: templates/inclusion_tags/search_image_list.html:49
