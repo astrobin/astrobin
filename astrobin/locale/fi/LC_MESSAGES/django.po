@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:03+0000\n"
-"PO-Revision-Date: 2012-05-06 18:23+0100\n"
+"PO-Revision-Date: 2012-05-08 09:57+0100\n"
 "Last-Translator: Jussi <jussi.kantola@gmail.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
@@ -4255,7 +4255,6 @@ msgid "Full"
 msgstr "Täysi"
 
 #: templates/image/detail.html:774
-#, fuzzy
 msgid "Copy this"
 msgstr "Kopioi"
 
@@ -4728,7 +4727,7 @@ msgstr "Tallennettu. Kiitos!"
 
 #: templates/inclusion_tags/image_list.html:9
 msgid "by"
-msgstr ""
+msgstr "käyttäjältä"
 
 #: templates/inclusion_tags/image_list.html:22
 #: templates/inclusion_tags/messier_list.html:21
@@ -4863,7 +4862,7 @@ msgstr "Päivämäärä ja kellonaika"
 
 #: templates/messages/inbox.html:26
 msgid "Excerpt"
-msgstr ""
+msgstr "Ote"
 
 #: templates/messages/inbox.html:31
 msgid "New!"
@@ -5332,28 +5331,28 @@ msgid "New image taken with a %(gear)s"
 msgstr "Uusi kuva kalustolla %(gear)s"
 
 #: templates/notification/new_image_of_subject/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
 "out at the following url: %(object_url)s"
 msgstr ""
-"AstroBin on julkaissut uuden blogikirjoituksen: \"%(object)s\".\n"
+"Uusi kuva seuraamastasi kohteesta: \"%(subject)s\".\n"
 "\n"
-"Lue kirjoitus osoitteessa: %(object_url)s"
+"Katso kuva osoitteessa: %(object_url)s"
 
 #: templates/notification/new_image_of_subject/notice.html:2
 #: templates/notification/new_image_of_subject/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Seuraat nyt käyttäjää <strong>%(object)s</strong>."
-"</a>"
+"<a href=\"%(object_url)s\">Uusi kuva kohteesta <strong>%"
+"(subject)s</strong>.</a>"
 
 #: templates/notification/new_image_of_subject/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "New image of %(subject)s"
-msgstr "%(originator)s julkaisi uuden kuvan"
+msgstr "Uusi kuva kohteesta %(subject)s"
 
 #: templates/notification/new_image_revision/full.txt:2
 #, python-format
@@ -5436,26 +5435,24 @@ msgstr ""
 #: templates/popover/gear_mount.html:10 templates/popover/gear_software.html:8
 #: templates/popover/gear_telescope.html:10 templates/popover/subject.html:18
 #: templates/subject/page.html:64
-#, fuzzy
 msgid "Find images"
-msgstr "Ei kuvia"
+msgstr "Etsi kuvia"
 
 #: templates/popover/subject.html:5 templates/subject/page.html:17
 msgid "RA"
-msgstr ""
+msgstr "RA"
 
 #: templates/popover/subject.html:6 templates/subject/page.html:24
 msgid "Dec"
-msgstr ""
+msgstr "Dec"
 
 #: templates/popover/subject.html:14 templates/subject/page.html:41
 msgid "Size"
-msgstr ""
+msgstr "Koko"
 
 #: templates/popover/subject.html:26
-#, fuzzy
 msgid "View page"
-msgstr "Katsele profiilia"
+msgstr "Katso sivu"
 
 #: templates/privatebeta/invite.html:7
 msgid "What is AstroBin?"
@@ -5517,13 +5514,12 @@ msgid "Reset password"
 msgstr "Hanki uusi salasana"
 
 #: templates/registration/logout.html:5
-#, fuzzy
 msgid "Good bye!"
-msgstr "Hyvä"
+msgstr "Näkemiin!"
 
 #: templates/registration/logout.html:6
 msgid "You have been logged out. Come back soon!"
-msgstr ""
+msgstr "Kirjauduit ulos.  Tule pian takaisin!"
 
 #: templates/registration/password_change_done.html:5
 msgid "Password changed"
@@ -5623,7 +5619,6 @@ msgid "Mark as done."
 msgstr "Merkitse valmiiksi."
 
 #: templates/search/search.html:14 templates/user/profile-subnav.html:81
-#, fuzzy
 msgid "Sort"
 msgstr "Järjestä"
 
@@ -5668,9 +5663,8 @@ msgid "Select none"
 msgstr "Poista valinnat"
 
 #: templates/search/search.html:325 templates/search/search.html.py:332
-#, fuzzy
 msgid "Select types"
-msgstr "Kohdetyyppi"
+msgstr "Valitse kohdetyypit"
 
 # Leave the # sign the same! This refers to the number of selected item in a list.
 #: templates/search/search.html:326 templates/search/search.html.py:333
@@ -5684,7 +5678,7 @@ msgstr "Valitse lisenssit"
 
 #: templates/subject/page.html:51
 msgid "Interesting links"
-msgstr ""
+msgstr "Kiinnostavia linkkejä"
 
 #: templates/subject/page.html:55
 msgid "SIMBAD page"
@@ -5692,35 +5686,31 @@ msgstr "SIMBAD -sivu"
 
 #: templates/subject/page.html:60
 msgid "SIMBAD clickable map"
-msgstr ""
+msgstr "SIMBADin klikattava kartta"
 
 #: templates/subject/page.html:89
-#, fuzzy
 msgid "Some images"
-msgstr "Ei kuvia"
+msgstr "Kuvia"
 
 #: templates/subject/page.html:120
-#, fuzzy
 msgid "Camera types"
-msgstr "Kameran linssi"
+msgstr "Kameratyypit"
 
 #: templates/subject/page.html:138
-#, fuzzy
 msgid "Telescope types"
-msgstr "Kaukoputken apertuuri"
+msgstr "Kaukoputkityypit"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:11
 msgid "Your API Keys"
-msgstr ""
+msgstr "Rajapinta-avaimesi"
 
 #: templates/user/api_keys.html:18
 msgid "Created on"
-msgstr ""
+msgstr "Luotu"
 
 #: templates/user/api_keys.html:19
-#, fuzzy
 msgid "Active"
-msgstr "Toiminnot"
+msgstr "Aktiivinen"
 
 #: templates/user/api_keys.html:38
 #, python-format
@@ -5728,10 +5718,12 @@ msgid ""
 "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
 "\">API documentation</a>."
 msgstr ""
+"Sinulla ei ole rajapinta-avaimia.  Lue <a href=\"%(api_docs_url)s\">API-"
+"dokumentaatio</a>."
 
 #: templates/user/api_keys.html:46
 msgid "Request an API Key"
-msgstr ""
+msgstr "Pyydä rajapinta-avainta."
 
 #: templates/user/card.html:8
 #, python-format
@@ -5758,23 +5750,22 @@ msgid "%(username)s didn't write anything about themselves."
 msgstr "%(username)s ei ole kirjoittanut mitään itsestään."
 
 #: templates/user/favorites.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's favorites"
-msgstr "Käyttäjän %(user)s tilastot"
+msgstr "Käyttäjän %(user)s suosikit"
 
 #: templates/user/favorites.html:11
-#, fuzzy
 msgid "View your favorites"
-msgstr "Katso kuviasi"
+msgstr "Katso suosikkejasi"
 
 #: templates/user/favorites.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "View %(username)s's favorites"
-msgstr "Katso käyttäjän %(username)s kuvia:"
+msgstr "Katso käyttäjän %(username)s suosikit:"
 
 #: templates/user/favorites.html:19
 msgid "These are the images you marked as favorite."
-msgstr ""
+msgstr "Olet merkinnyt nämä kuvat suosikeiksisi."
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
@@ -5980,13 +5971,12 @@ msgid "Please use full names (make and model) for all your gear items!"
 msgstr "Käytä täydellisiä nimiä (merkki ja malli) kaikista laitteistasi!"
 
 #: templates/user/profile/edit/gear.html:21
-#, fuzzy
 msgid ""
 "<span class=\"btn btn-primary\">Orange</span> bubbles mean that you need to "
 "edit the properties of that gear item!"
 msgstr ""
-"<span class=\"button\">Oranssit</span> kuplat tarkoittavat, että sinun "
-"täytyy muokata laitteen ominaisuuksia!"
+"<span class=\"btn btn-primary\">Oranssit</span> kuplat tarkoittavat, että "
+"sinun täytyy muokata laitteen ominaisuuksia!"
 
 #: templates/user/profile/edit/gear.html:31
 msgid "* use a comma to separate the values."
@@ -6030,11 +6020,10 @@ msgid "Edit your site preferences"
 msgstr "Muokkaa asetuksiasi"
 
 #: templates/user/profile/edit/preferences.html:14
-#, fuzzy
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
-msgstr "Valitse, mitä ilmoituksia haluat vastaanottaa sähköpostiisi:"
+msgstr "Valitse kieli sekä mitä ilmoituksia haluat vastaanottaa sähköpostiisi:"
 
 #, fuzzy
 #~ msgid "Hot right now"
