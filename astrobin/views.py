@@ -46,6 +46,7 @@ from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from shortcuts import *
 from tasks import *
 from search_indexes import xapian_escape
+from image_utils import make_image_of_the_day
 
 import settings
 import pytz
@@ -1566,6 +1567,14 @@ def image_delete_original(request, id):
 
     image.save()
     final.delete(dont_delete_data = True)
+
+    # Update ImageOfTheDay
+    today = date.today()
+    try:
+        iotd = ImageOfTheDay.objects.get(date = today, image = image)
+        make_image_of_the_day(image)
+    except ImageOfTheDay.DoesNotExist:
+        pass
 
     return HttpResponseRedirect("/%i/" % image.id);
 
