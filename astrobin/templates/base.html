@@ -129,7 +129,7 @@
 
                     <div class="user-nav nav-collapse collapse pull-right">
                         <ul class="nav pull-right">
-                            <li class="dropdown">
+                            <li class="dropdown visible-desktop">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     {% trans "Language" %}
                                     <b class="caret"></b>
@@ -259,7 +259,7 @@
 
                             <li class="divider-vertical"></li>
 
-                            <li class="dropdown notice-container">
+                            <li class="dropdown notice-container visible-desktop">
                                 {% if notifications_count > 0 %}
                                     <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
                                 {% endif %}
@@ -271,7 +271,7 @@
                                 </ul>
                             </li> <!-- notifications -->
                             
-                            <li class="dropdown notice-container">
+                            <li class="dropdown notice-container visible-desktop">
                                 {% if requests_count > 0 %}
                                     <span class="notice-count">{{requests_count}}</span>
                                 {% endif %}
