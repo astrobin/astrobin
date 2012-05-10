@@ -659,10 +659,8 @@ body.full {
   }
   .navbar .btn-navbar {
     position: relative;
-    display: block;
-    float: none;
-    margin: 4px auto;
-    width: 80%;
+    width: 50%;
+    float: left;
   }
   .navbar .btn-navbar .text {
     color: #fcfcfc;
