@@ -304,7 +304,7 @@ PIPELINE_CSS = {
 
             'css/reset.css',
             'css/bootstrap.css',
-            'css/bootstrap.astrobin.css',
+            'css/bootstrap-responsive.css',
             'css/astrobin.css',
         ),
         'output_filename': 'css/astrobin_pipeline_screen_v2.css',
@@ -340,7 +340,8 @@ PIPELINE_JS = {
             'js/jquery.easing.1.3.js',
             'js/jquery.multiselect.js',
             'js/jquery.qtip.js',
-            'js/bootstrap.min.js',
+            'js/respond.src.js',
+            'js/bootstrap.js',
             'js/astrobin.js',
         ),
         'output_filename': 'js/astrobin_pipeline.js',

@@ -39,6 +39,7 @@
 
     {% if user.is_authenticated and image_of_the_day %}
         {% with image_of_the_day as image %}
+        <div class="visible-desktop">
             <div class="row">
                 <div class="span10">
                     <div class="image-of-the-day">
@@ -47,7 +48,7 @@
                             <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_iotd.jpg"
                                  alt="{{image.title|default:_("(no title)")}}"/>
                         </a>
-                        <div class="info">
+                        <div class="info visible-desktop">
                             <h3>{{image.title|truncatechars:"60"}}</h3>
                             <span class="by">
                                 by <a href="{% url user_page image.user %}">{{image.user}}</a>
@@ -77,6 +78,7 @@
                     </a>
                 </div>
             </div>
+        </div>
         {% endwith %}
     {% endif %}
 
