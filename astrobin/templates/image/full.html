@@ -42,13 +42,14 @@
     </head>
 
     <body class="full">
-        <div class="navbar navbar-fixed-top" id="top">
+        <div class="navbar" id="top">
             <div class="navbar-inner">
                 <div class="container">
+                    <a class="brand" href="{% url index %}">
+                        <img src="{{STATIC_URL}}images/astrobin-logo-square-mini.png" alt="AstroBin" />
+                    </a>
+
                     <ul class="nav">
-                        <a class="brand" href="{% url index %}">
-                            <img src="{{STATIC_URL}}images/astrobin-logo-square-mini.png" alt="AstroBin" />
-                        </a>
                         <li>
                             <div class="full-title">
                                 <span class="title">{{image.title|escape|default:_("(no title)")}}</span>

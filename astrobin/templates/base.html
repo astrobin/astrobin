@@ -8,6 +8,7 @@
     <head>
         <title>{% block title %}AstroBin{% endblock %}</title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
         <meta name="description" content="AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." />
@@ -18,6 +19,7 @@
 
         <!--[if lte IE 8]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="{{STATIC_URL}}js/selectivizr.js"></script>
         <![endif]-->
 
         <!-- font -->
@@ -64,228 +66,243 @@
         </script>
     </head>
 
-    <body>
+    <body data-offset="55">
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <ul class="nav">
-                        <li>
-                            <a class="brand" href="{% url index %}">
-                                <img src="{{STATIC_URL}}images/astrobin-logo-square-mini.png" alt="AstroBin" />
-                            </a>
-                        </li>
+                    <a class="brand" href="{% url index %}">
+                        <img src="{{STATIC_URL}}images/astrobin-logo-square-mini.png" alt="AstroBin" />
+                    </a>
 
-                        <li class="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
-                        <li class="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
-                        <li class="dropdown {% current request "^/explore/|^/search/|^/stats/|^/leaderboard/" %}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {% trans "Explore" %}
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url popular %}">{% trans "Popular subjects" %}</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{% url wall %}">{% trans "The Big Wall" %}</a></li>
-                                <li><a href="{% url nightly %}">{% trans "Night after night" %}</a></li>
-                                <li><a href="{% url messier %}">{% trans "Messier marathon" %}</a></li>
-                                <li><a href="{% url fits %}">{% trans "TIFF/FITS" %}</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{% url haystack_search %}">{% trans "Advanced search" %}</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{% url stats %}">{% trans "Stats" %}</a></li>
-                                <li><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown {% current request "^/help/|^/faq/" %}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {% trans "Help" %}
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url help %}">{% trans "What is this site?" %}</a></li>
-                                <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{% url api %}">API (beta)</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/contact/">{% trans "Contact" %}</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <ul class="nav pull-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {% trans "Language" %}
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="{% url set_language "en" %}" title="English">
-                                        <img src="{{STATIC_URL}}icons/flags/16/United-Kingdom.png" alt="English"/> English
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url set_language "it" %}" title="Italiano">
-                                        <img src="{{STATIC_URL}}icons/flags/16/Italy.png" alt="Italiano"/> Italiano
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url set_language "es" %}" title="Español">
-                                        <img src="{{STATIC_URL}}icons/flags/16/Spain.png" alt="Español"/> Español
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url set_language "fr" %}" title="Français">
-                                        <img src="{{STATIC_URL}}icons/flags/16/France.png" alt="Français"/> Français
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url set_language "fi" %}" title="Suomi">
-                                        <img src="{{STATIC_URL}}icons/flags/16/Finland.png" alt="Suomi"/> Suomi
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url set_language "de" %}" title="Deutsch">
-                                        <img src="{{STATIC_URL}}icons/flags/16/Germany.png" alt="Deutsch"/> Deutsh
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url set_language "nl" %}" title="Nederlands">
-                                        <img src="{{STATIC_URL}}icons/flags/16/Netherlands.png" alt="Nederlands"/> Nederlands
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url set_language "tr" %}" title="Türk">
-                                        <img src="{{STATIC_URL}}icons/flags/16/Turkey.png" alt="Türk"/> Türk
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url set_language "sq" %}" title="shqipe">
-                                        <img src="{{STATIC_URL}}icons/flags/16/Albania.png" alt="shqipe"/> shqipe
-                                    </a>
-                                </li>
-
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="http://translate.astrobin.com/" target="_blank">
-                                        {% trans "Help with translations!" %}
-                                    </a>
-                                </li>
-                            </ul>
-
-                            {% if request.user.is_authenticated and not user_language %}
-                            <div id="language-prompt">
-                                <div class="bubble">
-                                    {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
-                                </div>
-                            </div>
-                            {% endif %} 
-                        </li> <!-- languages -->
-
-                        <li class="divider-vertical"></li>
-
-                        {% if request.user.is_authenticated %}
-                        <li class="dropdown">
-                            <div class="btn-group">
-                                <a href="{% url user_page request.user %}" class="btn btn-primary">
-                                    <i class="icon-user icon-white"></i>
-                                    {{request.user}}
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="text">{% trans "Site links" %}</span>
+                    </a>
+                    <div class="site-nav nav-collapse collapse pull-left">
+                        <ul class="nav">
+                            <li class="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
+                            <li class="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
+                            <li class="dropdown {% current request "^/explore/|^/search/|^/stats/|^/leaderboard/" %}">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    {% trans "Explore" %}
+                                    <b class="caret"></b>
                                 </a>
-                                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url popular %}">{% trans "Popular subjects" %}</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url wall %}">{% trans "The Big Wall" %}</a></li>
+                                    <li><a href="{% url nightly %}">{% trans "Night after night" %}</a></li>
+                                    <li><a href="{% url messier %}">{% trans "Messier marathon" %}</a></li>
+                                    <li><a href="{% url fits %}">{% trans "TIFF/FITS" %}</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url haystack_search %}">{% trans "Advanced search" %}</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url stats %}">{% trans "Stats" %}</a></li>
+                                    <li><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown {% current request "^/help/|^/faq/" %}">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    {% trans "Help" %}
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url help %}">{% trans "What is this site?" %}</a></li>
+                                    <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url api %}">API (beta)</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/contact/">{% trans "Contact" %}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div> <!-- nav-collapse -->
+
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".user-nav">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="text">{% trans "User" %}</span>
+                    </a>
+
+                    <div class="user-nav nav-collapse collapse pull-right">
+                        <ul class="nav pull-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    {% trans "Language" %}
+                                    <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{% url image_upload %}">{% trans "Upload" %}</a>
-                                    </li>
-                                    <li class="nav-header">{% trans "My places" %}</li>
-                                    <li>
-                                        <a href="{% url user_page request.user %}">
-                                            {% trans "Gallery" %}
+                                        <a href="{% url set_language "en" %}" title="English">
+                                            <img src="{{STATIC_URL}}icons/flags/16/United-Kingdom.png" alt="English"/> English
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{% url user_page_favorites request.user %}">
-                                            {% trans "Favorites" %}
+                                        <a href="{% url set_language "it" %}" title="Italiano">
+                                            <img src="{{STATIC_URL}}icons/flags/16/Italy.png" alt="Italiano"/> Italiano
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{% url user_page_card request.user %}">
-                                            {% trans "Technical card" %}
+                                        <a href="{% url set_language "es" %}" title="Español">
+                                            <img src="{{STATIC_URL}}icons/flags/16/Spain.png" alt="Español"/> Español
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{% url user_page_plots request.user %}">
-                                            {% trans "Plots" %}
+                                        <a href="{% url set_language "fr" %}" title="Français">
+                                            <img src="{{STATIC_URL}}icons/flags/16/France.png" alt="Français"/> Français
                                         </a>
                                     </li>
-                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{% url set_language "fi" %}" title="Suomi">
+                                            <img src="{{STATIC_URL}}icons/flags/16/Finland.png" alt="Suomi"/> Suomi
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url set_language "de" %}" title="Deutsch">
+                                            <img src="{{STATIC_URL}}icons/flags/16/Germany.png" alt="Deutsch"/> Deutsh
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url set_language "nl" %}" title="Nederlands">
+                                            <img src="{{STATIC_URL}}icons/flags/16/Netherlands.png" alt="Nederlands"/> Nederlands
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url set_language "tr" %}" title="Türk">
+                                            <img src="{{STATIC_URL}}icons/flags/16/Turkey.png" alt="Türk"/> Türk
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url set_language "sq" %}" title="shqipe">
+                                            <img src="{{STATIC_URL}}icons/flags/16/Albania.png" alt="shqipe"/> shqipe
+                                        </a>
+                                    </li>
 
-                                    <li><a href="{% url messages_inbox %}">{% trans "My messages" %}</a></li>
+                                    <li class="divider"></li>
                                     <li>
-                                        <a href="{% url user_page_api_keys request.user %}">
-                                            {% trans "API Keys" %}
+                                        <a href="http://translate.astrobin.com/" target="_blank">
+                                            {% trans "Help with translations!" %}
                                         </a>
                                     </li>
-
-                                    <li class="nav-header">{% trans "My settings" %}</li>
-                                    <li><a href="{% url profile_edit_basic %}">{% trans "Basic information" %}</a></li>
-                                    <li><a href="{% url profile_edit_gear %}">{% trans "Gear" %}</a></li>
-                                    <li><a href="{% url profile_edit_locations %}">{% trans "Locations" %}</a></li>
-                                    <li><a href="{% url profile_edit_license %}">{% trans "Default license" %}</a></li>
-                                    <li><a href="{% url profile_edit_preferences %}">{% trans "Preferences" %}</a></li>
-                                    <li><a href="{% url avatar_change %}">{% trans "Avatar" %}</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="{% url auth_logout %}">{% trans "Logout" %}</a></li>
                                 </ul>
-                            </div> <!-- btn-group -->
-                        </li> <!-- user menu -->
 
-                        <li class="divider-vertical"></li>
+                                {% if request.user.is_authenticated and not user_language %}
+                                <div id="language-prompt">
+                                    <div class="bubble">
+                                        {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
+                                    </div>
+                                </div>
+                                {% endif %} 
+                            </li> <!-- languages -->
 
-                        <li class="dropdown notice-container">
-                            {% if notifications_count > 0 %}
-                                <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
-                            {% endif %}
-                            <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
-                                <img alt="{% trans "Notifications" %}" src="{{STATIC_URL}}icons/iconic/orange/notifications.gif"/>
-                            </a>
-                            <ul class="dropdown-menu" id="notifications-popup">
-                                {% notification_list request 1 10 %}
-                            </ul>
-                        </li> <!-- notifications -->
-                        
-                        <li class="dropdown notice-container">
-                            {% if requests_count > 0 %}
-                                <span class="notice-count">{{requests_count}}</span>
-                            {% endif %}
-                            <a class="dropdown requests" data-toggle="dropdown" title="{% trans "Requests" %}" href="#">
-                                <img alt="{% trans "Requests" %}" src="{{STATIC_URL}}icons/iconic/orange/requests.gif"/>
-                            </a>
-                            <ul class="dropdown-menu" id="requests-popup">
-                                {% request_list request %}
-                            </ul>
-                        </li> <!-- requests -->
-                                                    
-                        {% else %} <!-- request.user.is_authenticated -->
-                        <li class="{% current request "^/accounts/login/" %}">
-                            <a href="{% url auth_login %}">
-                                {% if privatebeta_enabled %}
-                                    {% trans "Have an invite? Login!" %}
-                                {% else %}
-                                    {% trans "Login" %}
+                            <li class="divider-vertical"></li>
+
+                            {% if request.user.is_authenticated %}
+                            <li class="dropdown">
+                                <div class="btn-group">
+                                    <a href="{% url user_page request.user %}" class="btn btn-primary">
+                                        <i class="icon-user icon-white"></i>
+                                        {{request.user}}
+                                    </a>
+                                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="{% url image_upload %}">{% trans "Upload" %}</a>
+                                        </li>
+                                        <li class="nav-header">{% trans "My places" %}</li>
+                                        <li>
+                                            <a href="{% url user_page request.user %}">
+                                                {% trans "Gallery" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url user_page_favorites request.user %}">
+                                                {% trans "Favorites" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url user_page_card request.user %}">
+                                                {% trans "Technical card" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url user_page_plots request.user %}">
+                                                {% trans "Plots" %}
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+
+                                        <li><a href="{% url messages_inbox %}">{% trans "My messages" %}</a></li>
+                                        <li>
+                                            <a href="{% url user_page_api_keys request.user %}">
+                                                {% trans "API Keys" %}
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-header">{% trans "My settings" %}</li>
+                                        <li><a href="{% url profile_edit_basic %}">{% trans "Basic information" %}</a></li>
+                                        <li><a href="{% url profile_edit_gear %}">{% trans "Gear" %}</a></li>
+                                        <li><a href="{% url profile_edit_locations %}">{% trans "Locations" %}</a></li>
+                                        <li><a href="{% url profile_edit_license %}">{% trans "Default license" %}</a></li>
+                                        <li><a href="{% url profile_edit_preferences %}">{% trans "Preferences" %}</a></li>
+                                        <li><a href="{% url avatar_change %}">{% trans "Avatar" %}</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="{% url auth_logout %}">{% trans "Logout" %}</a></li>
+                                    </ul>
+                                </div> <!-- btn-group -->
+                            </li> <!-- user menu -->
+
+                            <li class="divider-vertical"></li>
+
+                            <li class="dropdown notice-container">
+                                {% if notifications_count > 0 %}
+                                    <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
                                 {% endif %}
-                            </a>
-                        </li>
-                        {% if not privatebeta_enabled %}
-                        <li class="{% current request "^/accounts/register/" %}">
-                            <a href="{% url registration_register %}">{% trans "Register" %}</a>
-                        </li>
-                        {% endif %}
-                    {% endif %} <!-- request.user.is_authenticated -->
-                    </ul>
-
-                    <form class="navbar-search pull-right" id="quick-search" action="{% url haystack_search %}" method="get" >
+                                <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
+                                    <img alt="{% trans "Notifications" %}" src="{{STATIC_URL}}icons/iconic/orange/notifications.gif"/>
+                                </a>
+                                <ul class="dropdown-menu" id="notifications-popup">
+                                    {% notification_list request 1 10 %}
+                                </ul>
+                            </li> <!-- notifications -->
+                            
+                            <li class="dropdown notice-container">
+                                {% if requests_count > 0 %}
+                                    <span class="notice-count">{{requests_count}}</span>
+                                {% endif %}
+                                <a class="dropdown requests" data-toggle="dropdown" title="{% trans "Requests" %}" href="#">
+                                    <img alt="{% trans "Requests" %}" src="{{STATIC_URL}}icons/iconic/orange/requests.gif"/>
+                                </a>
+                                <ul class="dropdown-menu" id="requests-popup">
+                                    {% request_list request %}
+                                </ul>
+                            </li> <!-- requests -->
+                                                        
+                            {% else %} <!-- request.user.is_authenticated -->
+                            <li class="{% current request "^/accounts/login/" %}">
+                                <a href="{% url auth_login %}">
+                                    {% if privatebeta_enabled %}
+                                        {% trans "Have an invite? Login!" %}
+                                    {% else %}
+                                        {% trans "Login" %}
+                                    {% endif %}
+                                </a>
+                            </li>
+                            {% if not privatebeta_enabled %}
+                            <li class="{% current request "^/accounts/register/" %}">
+                                <a href="{% url registration_register %}">{% trans "Register" %}</a>
+                            </li>
+                            {% endif %}
+                        {% endif %} <!-- request.user.is_authenticated -->
+                        </ul>
+                    </div> <!-- user-nav -->
+                    
+                    <form class="navbar-search pull-right visible-desktop" id="quick-search" action="{% url haystack_search %}" method="get" >
                         <input class="tbox"
                                id="q"
                                type="text"
@@ -338,16 +355,6 @@
             </div>
         </div>
 
-        {% comment %}
-        {% if request.user.is_authenticated and not user_language %}
-        <div id="language-prompt">
-            <div class="bubble">
-                {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
-            </div>
-        </div>
-        {% endif %}
-        {% endcomment %}
-
         <div id="top" class="container astrobin-container">
             {% if context_message %}
             <div class="alert {% if context_message.error %}alert-error{% endif %}">
@@ -369,7 +376,7 @@
         <footer>
             {% block footer %}
             <div class="container">
-                <div class="row">
+                <div class="row hidden-phone">
                     <div class="span3">
                         <h3>{% trans "About" %}</h3>
                         <p>
@@ -402,6 +409,7 @@
                         </p>
                     </div>
                 </div> <!-- row -->
+
                 <div class="row bottom">
                     <div class="span9">
                         &copy; 2010-2012 <a href="/users/siovene/">Salvatore Iovene</a>

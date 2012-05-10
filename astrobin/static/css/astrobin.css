@@ -638,11 +638,64 @@ div.uploader input {
    HTML ELEMENTS
 ------------------------------------------------- */
 body {
-  padding-top: 55px;
   background: #393939 url('../images/background-tile.png');
+  padding-top: 55px;
 }
 body.full {
-  padding-top: 81px;
+  padding-top: 0;
+}
+.navbar .brand {
+  display: none;
+}
+@media screen and (max-width: 979px) {
+  body {
+    padding-top: 0;
+  }
+  .navbar .nav {
+    margin: 5px;
+  }
+  .navbar input {
+    width: 100%;
+  }
+  .navbar .btn-navbar {
+    position: relative;
+    display: block;
+    float: none;
+    margin: 4px auto;
+    width: 80%;
+  }
+  .navbar .btn-navbar .text {
+    color: #fcfcfc;
+    text-shadow: none;
+    position: absolute;
+    top: 4px;
+    left: 34px;
+  }
+  .navbar .btn-navbar:last-child {
+    margin-bottom: 10px;
+  }
+  body:not(.full) .brand {
+    display: none;
+  }
+}
+@media screen and (min-width: 980px) and (max-width: 1159px) {
+  body:not(.full) .navbar .brand {
+    display: none;
+  }
+  body.full .navbar .brand {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+@media screen and (min-width: 1160px) {
+  .navbar .brand {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
 .modal {
   background: #2e2e2e url('../images/dark-panel-tile.png');
@@ -706,11 +759,6 @@ body.full {
 .navbar .nav .open.dropdown .dropdown-toggle:hover {
   background-color: #222;
 }
-.navbar .brand {
-  position: absolute;
-  top: 0;
-  left: -84px;
-}
 .navbar-search {
   margin-bottom: -6px;
 }
@@ -722,13 +770,6 @@ body.full {
   -moz-border-radius: 8px;
   border-radius: 8px;
   width: 120px;
-}
-navbar .btn,
-.navbar .btn-group {
-  margin-top: 6px;
-}
-.navbar-fixed-top .container {
-  width: 1000px;
 }
 /* Subnav */
 .subnav {
@@ -820,7 +861,6 @@ navbar .btn,
 /* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
 .subnav-fixed {
   position: absolute;
-  width: 1000px;
   margin: 0 auto;
   top: 0;
   left: 0;
@@ -833,9 +873,8 @@ navbar .btn,
   border-radius: 6px 6px 0 0;
 }
 .subnav-fixed .nav {
-  width: 940px;
   margin: 0 auto;
-  padding: 0 1px;
+  padding: 0 31px;
 }
 .subnav .nav > li:first-child > a,
 .subnav .nav > li:first-child > a:hover {
@@ -934,9 +973,11 @@ textarea:focus {
 .form-horizontal textarea,
 .form-horizontal .help-block {
   width: 610px;
+  max-width: 96%;
 }
 .form-horizontal select {
   width: 620px;
+  max-width: 96%;
 }
 .form-inline label {
   margin-right: 8px;
@@ -944,14 +985,13 @@ textarea:focus {
 .form-inline .btn {
   margin-left: 8px;
 }
-footer {
+footer .container {
   -webkit-box-shadow: 0 0 12px black;
   -moz-box-shadow: 0 0 12px black;
   box-shadow: 0 0 12px black;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  width: 1000px;
   margin: 0 auto;
+  padding: 20px 30px 10px 30px;
+  max-width: 940px;
   background: #303030 url('../images/darker-panel-tile.png');
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
@@ -976,6 +1016,7 @@ ul.as-selections {
   padding: 8px 4px;
   margin: 4px 0;
   width: 610px;
+  max-width: 100%;
   overflow: auto;
   background: #404040;
   border: 1px solid #282828;
@@ -1007,6 +1048,7 @@ ul.as-selections li.as-selection-item.need-data {
 }
 ul.as-selections li.as-original {
   margin-left: 0;
+  max-width: 100%;
 }
 ul.as-selections li.as-original input {
   border: none;
@@ -1015,6 +1057,7 @@ ul.as-selections li.as-original input {
   box-shadow: none;
   outline: none;
   width: 600px;
+  max-width: 96%;
   height: 18px;
   padding-top: 4px;
   background: #404040;
@@ -1361,6 +1404,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
   position: relative;
   top: 0;
   left: 0;
+  max-width: 100%;
   z-index: 1;
 }
 .main-image .main-image-inner img.plot-overlay,
@@ -1370,6 +1414,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
   top: 0;
   left: 0;
   opacity: 0.0;
+  max-width: 100%;
   z-index: 2;
   border: none;
 }
@@ -1567,9 +1612,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .subtle-container .form-horizontal textarea,
 .subtle-container .form-horizontal .help-block {
   width: 584px;
+  max-width: 96%;
 }
 .subtle-container .form-horizontal select {
   width: 594px;
+  max-width: 96%;
 }
 .comment-author {
   padding-bottom: 8px;
@@ -1807,7 +1854,7 @@ div.token-input-dropdown p {
   vertical-align: middle;
 }
 .full-title {
-  padding: 24px 0 12px 22px;
+  padding: 16px 80px;
 }
 .full-title .title {
   color: #fcfcfc;
@@ -1833,6 +1880,7 @@ div.token-input-dropdown p {
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
 }
 #full-size-image img.real {
+  max-width: initial !important;
   width: auto;
 }
 form.copy label {
