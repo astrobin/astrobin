@@ -1476,6 +1476,12 @@ class ImageOfTheDay(models.Model):
         editable = False,
         related_name = 'image_of_the_day')
 
+    filename = models.CharField(
+        max_length = 64,
+        null = True,
+        blank = False,
+        editable = False)
+
     date = models.DateField(
         editable = False,
         auto_now_add = True)
