@@ -239,6 +239,7 @@ class AppAdmin(admin.ModelAdmin):
 class ImageOfTheDayAdmin(admin.ModelAdmin):
     list_display = (
         'image',
+        'filename',
         'date',
     )
     ordering = ('-date',)
