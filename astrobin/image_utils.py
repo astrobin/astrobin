@@ -192,6 +192,7 @@ def make_image_of_the_day(image):
         iotd = ImageOfTheDay(image = image)
         print "Created new entry."
 
+    iotd.filename = filename + '_iotd'
     iotd.save()
 
     print "Cleaning up..."

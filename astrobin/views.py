@@ -222,20 +222,20 @@ def index(request):
             l += 1
         response_dict['recently_five_starred'] = recent_fives_list[:8]
 
-        coolest_image = ImageOfTheDay.objects.all()[0].image
+        iotd = ImageOfTheDay.objects.all()[0]
         gear_list = (
-            ('Imaging telescopes or lenses', coolest_image.imaging_telescopes.all(), 'imaging_telescopes'),
-            ('Imaging cameras'   , coolest_image.imaging_cameras.all(), 'imaging_cameras'),
-            ('Mounts'            , coolest_image.mounts.all(), 'mounts'),
-            ('Guiding telescopes or lenses', coolest_image.guiding_telescopes.all(), 'guiding_telescopes'),
-            ('Guiding cameras'   , coolest_image.guiding_cameras.all(), 'guiding_cameras'),
-            ('Focal reducers'    , coolest_image.focal_reducers.all(), 'focal_reducers'),
-            ('Software'          , coolest_image.software.all(), 'software'),
-            ('Filters'           , coolest_image.filters.all(), 'filters'),
-            ('Accessories'       , coolest_image.accessories.all(), 'accessories'),
+            ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
+            ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
+            ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
+            ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
+            ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
+            ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
+            ('Software'          , iotd.image.software.all(), 'software'),
+            ('Filters'           , iotd.image.filters.all(), 'filters'),
+            ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
         )
 
-        response_dict['image_of_the_day'] = coolest_image
+        response_dict['image_of_the_day'] = iotd
         response_dict['gear_list'] = gear_list
 
     return object_list(

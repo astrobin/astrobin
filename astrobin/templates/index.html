@@ -38,20 +38,20 @@
     {% endif %}<!-- authenticated -->
 
     {% if user.is_authenticated and image_of_the_day %}
-        {% with image_of_the_day as image %}
+        {% with image_of_the_day as iotd %}
         <div class="visible-desktop">
             <div class="row">
                 <div class="span10">
                     <div class="image-of-the-day">
                         <h2>{% trans "Image of the day" %}!</h2>
-                        <a href="{% url image_detail image.id %}">
-                            <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_iotd.jpg"
-                                 alt="{{image.title|default:_("(no title)")}}"/>
+                        <a href="{% url image_detail iotd.image.id %}">
+                            <img src="http://{{s3_url}}/astrobin_images/{{iotd.filename}}.jpg"
+                                 alt="{{iotd.image.title|default:_("(no title)")}}"/>
                         </a>
                         <div class="info visible-desktop">
-                            <h3>{{image.title|truncatechars:"60"}}</h3>
+                            <h3>{{iotd.image.title|truncatechars:"60"}}</h3>
                             <span class="by">
-                                by <a href="{% url user_page image.user %}">{{image.user}}</a>
+                                by <a href="{% url user_page iotd.image.user %}">{{iotd.image.user}}</a>
                             </span>
                             {% for i in gear_list %}
                                 {% if i.1 %}
