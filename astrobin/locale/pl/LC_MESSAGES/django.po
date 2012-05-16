@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:01+0000\n"
-"PO-Revision-Date: 2012-05-07 10:57+0100\n"
-"Last-Translator: scyth <scyth1@gmail.com>\n"
+"PO-Revision-Date: 2012-05-15 20:50+0100\n"
+"Last-Translator: milosz <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -1143,18 +1143,16 @@ msgid "Users"
 msgstr "Użytkownicy"
 
 #: forms.py:263
-#, fuzzy
 msgid "Telescope type"
-msgstr "Apertura teleskopu"
+msgstr "Typ teleskopu"
 
 #: forms.py:264 forms.py:270
 msgid "Any"
-msgstr ""
+msgstr "Jakikolwiek"
 
 #: forms.py:269
-#, fuzzy
 msgid "Camera type"
-msgstr "Obiektyw"
+msgstr "Typ kamery"
 
 #: forms.py:282 forms.py:287
 msgid "Express value in mm"
@@ -1323,17 +1321,15 @@ msgstr "Niemiecki"
 
 #: models.py:52 models.py:64 settings.py:57
 msgid "Dutch"
-msgstr ""
+msgstr "Holenderski"
 
 #: models.py:53 models.py:65 settings.py:58
-#, fuzzy
 msgid "Turkish"
-msgstr "Turkmenistan"
+msgstr "Turecki"
 
 #: models.py:54 models.py:66 settings.py:59
-#, fuzzy
 msgid "Albanian"
-msgstr "Albania"
+msgstr "Albański"
 
 #: models.py:70
 msgid "Pulsars"
@@ -1600,9 +1596,8 @@ msgid "Compact"
 msgstr "Kompakt"
 
 #: models.py:260
-#, fuzzy
 msgid "Video camera"
-msgstr "Kamery prowadzące"
+msgstr "Kamera video"
 
 #: models.py:264 models.py:569 templates/popover/gear_camera.html:6
 msgid "Pixel size"
@@ -1690,15 +1685,19 @@ msgstr "Szerokość pasma"
 
 #: models.py:469
 msgid "I don't want this image plate-solved."
-msgstr ""
+msgstr "Nie chcę wykonywać automatycznej fotoastrometrii"
 
 #: models.py:470
 msgid "This is not a deep sky image, don't plate-solve it."
 msgstr ""
+"To nie jest zdjęcie obiektu głębokiego nieba, nie wykonuj automatycznej "
+"fotoastrometrii."
 
 #: models.py:471
 msgid "I have no idea about the size of field, try a blind solve."
 msgstr ""
+"Nie wiem, jak duże pole obejmuje zdjęcie. Spróbuj dopasować parametry "
+"automatycznej fotoastrometrii."
 
 #: models.py:472
 msgid "This is a very wide field image (more than 10 degrees)."
@@ -1713,22 +1712,20 @@ msgid "This ia narrow field image (less than 1 degree)."
 msgstr "To zdjęcie pokrywa wąskie pole (mniej niż 1 stopień)"
 
 #: models.py:478
-#, fuzzy
 msgid "Deep sky object"
-msgstr "Wszystkie obiekty głebokiego nieba."
+msgstr "Obiekt głębokiego nieba."
 
 #: models.py:479
-#, fuzzy
 msgid "Solar system body or event"
-msgstr "Układ Słoneczny"
+msgstr "Obiekt lub wydarzenie Układu Słonecznego"
 
 #: models.py:480 views.py:1757 templates/wall.html:127
 msgid "Extremely wide field"
-msgstr ""
+msgstr "Bardzo szerokie pole"
 
 #: models.py:481 views.py:1763 templates/wall.html:133
 msgid "Star trails"
-msgstr ""
+msgstr "Ślady gwiazd"
 
 #: models.py:482 views.py:1769 templates/base.html:233
 #: templates/profile-edit-menu.html:9 templates/wall.html:139
@@ -1772,10 +1769,11 @@ msgstr "Dopuść oceny"
 #: models.py:555
 msgid "Insert a focal length if you want to plate-solve."
 msgstr ""
+"Jeżeli chcesz przeprowadzić fotoastrometrię, wprowadź długość ogniskowej."
 
 #: models.py:567
 msgid "Insert a pixel size if you want to plate-solve."
-msgstr ""
+msgstr "Jeżeli chcesz przeprowadzić fotoastrometrię, wprowadź rozmiar piksela."
 
 #: models.py:577
 msgid ""
@@ -1950,7 +1948,7 @@ msgstr ""
 
 #: models.py:917
 msgid "Mean mag/arcsec^2"
-msgstr ""
+msgstr "Średnie mag/arcsec^2"
 
 #: models.py:918
 msgid "As measured with your Sky Quality Meter."
@@ -2155,13 +2153,13 @@ msgstr "W metrach."
 
 #: models.py:1416
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr ""
+msgstr "Nazwa strony lub aplikacji, która chce używać API."
 
 #: models.py:1424
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
-msgstr ""
+msgstr "Proszę opisać powód i sposób, w jaki API będzie wykorzystywane."
 
 #: search.py:79 views.py:983 views.py:1271 views.py:1296
 #: templates/image/actions/bring_to_attention.html:30
@@ -2222,34 +2220,28 @@ msgstr "Wyświetleń, dziennie"
 
 #: stats.py:360 templates/subject/page.html:75
 #: templates/subject/page.html.py:110
-#, fuzzy
 msgid "Total images"
-msgstr "Brak zdjęć"
+msgstr "W sumie zdjęć"
 
 #: stats.py:497 stats.py:559
-#, fuzzy
 msgid "Integration hours by camera type"
-msgstr "Sumaryczny czas naświetlania, według sprzętu"
+msgstr "Sumaryczny czas naświetlania, według typu kamery"
 
 #: stats.py:578
-#, fuzzy
 msgid "Refractor"
-msgstr "Refraktor: achromatyczny"
+msgstr "Refraktor"
 
 #: stats.py:579
-#, fuzzy
 msgid "Reflector"
-msgstr "Reflektor: Nasmyth"
+msgstr "Reflektor"
 
 #: stats.py:580
-#, fuzzy
 msgid "Catadioptric"
-msgstr "Katadioptryk: Maksutow"
+msgstr "Katadioptryk"
 
 #: stats.py:623 templates/stats.html:33
-#, fuzzy
 msgid "Number of images by subject type"
-msgstr "Nowe zdjęcie opublikowane przez %(originator)s"
+msgstr "Liczba zdjęć według typu obiektu"
 
 #: views.py:727
 msgid "Resolution"
@@ -2324,9 +2316,8 @@ msgstr ""
 "strong> w menu <strong>Akcje</strong>. Możesz to zrobić dla każdego zdjęcia."
 
 #: views.py:1719
-#, fuzzy
 msgid "Gear images"
-msgstr "Brak zdjęć"
+msgstr "Zdjęcia sprzętu"
 
 #: views.py:1751 templates/image/edit/acquisition.html:99
 msgid "Solar system"
@@ -2437,11 +2428,11 @@ msgstr "Twój obraz jest gotowy"
 
 #: management/__init__.py:57
 msgid "Your image was plate-solved"
-msgstr ""
+msgstr "Fotoastrometria się powiodła."
 
 #: management/__init__.py:63
 msgid "Your image could not be plate-solved"
-msgstr ""
+msgstr "Fotoastrometria się nie powiodła"
 
 #: management/__init__.py:69
 msgid "Your request was fulfilled"
@@ -2476,23 +2467,20 @@ msgid "There was a reply to your comment"
 msgstr "Otrzymałeś odpowiedź na swój komentarz"
 
 #: management/__init__.py:117
-#, fuzzy
 msgid "Your image was favorited"
-msgstr "Twój obraz został usunięty"
+msgstr "Twoje zdjęcie zostało dodane do ulubionych"
 
 #: management/__init__.py:123
-#, fuzzy
 msgid "New image with some gear you follow"
-msgstr "Nowe zdjęcie opublikowane przez użytkownika, którego obserwujesz"
+msgstr "Nowe zdjęcie wykonane za pomocą sprzętu, który obserwujesz"
 
 #: management/__init__.py:129
-#, fuzzy
 msgid "New image of a subject you follow"
-msgstr "Nowe zdjęcie opublikowane przez użytkownika, którego obserwujesz"
+msgstr "Nowe zdjęcie obiektu, który obserwujesz"
 
 #: management/__init__.py:135
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "Twoja aplikacja o klucz do API została zaakceptowana."
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2508,7 +2496,7 @@ msgstr ""
 
 #: templates/app_api_key_request.html:6
 msgid "Request an API key"
-msgstr ""
+msgstr "Zaaplikuj o klucz do API."
 
 #: templates/app_api_key_request.html:8
 msgid ""
@@ -2516,19 +2504,22 @@ msgid ""
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
 "in your own app or website."
 msgstr ""
+"Dziękujemy za zainteresowanie w używaniu API AstroBin! Aby używać danych z "
+"AstroBin w swoim serwisie będziesz potrzebować <strong>klucza</strong> i "
+"<strong>hasła</strong>."
 
 #: templates/app_api_key_request.html:9
 msgid "After you submit a request, you will receive a reply within 24 hours."
-msgstr ""
+msgstr "Aplikacja zostanie rozpatrzona w ciągu 24 godzin."
 
 #: templates/app_api_key_request.html:13
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"%(tos_url)s\">Terms of Service</a>."
 msgstr ""
-"Rejestrując konto w AstroBin, zgadzasz się na <a href=\"%(tos_url)s"
-"\">warunki korzystania z serwisu</a>."
+"Koniecznie przeczytaj sekcję dotyczącą API w <a href=\"%(tos_url)s\">warunkach "
+"korzystania z serwisu</a>."
 
 #: templates/app_api_key_request.html:18
 #: templates/registration/password_change_form.html:10
@@ -2539,15 +2530,16 @@ msgid "Submit"
 msgstr "Wyślij"
 
 #: templates/app_api_key_request_complete.html:6
-#, fuzzy
 msgid "Your API key request has been submitted"
-msgstr "Twoja prośba została spełniona"
+msgstr "Twoja aplikazja o klucz API została wysłana"
 
 #: templates/app_api_key_request_complete.html:8
 msgid ""
 "You will receive a reply within 24 hours. Thanks for your interest in using "
 "AstroBin's APIs!"
 msgstr ""
+"Aplikacja zostanie obsłużona w ciągu 24 godzin. Dziękujemy za "
+"zainteresowanie API AstroBin!"
 
 #: templates/base.html:78 templates/base.html.py:383 templates/base.html:411
 msgid "Home"
@@ -2562,9 +2554,8 @@ msgid "Explore"
 msgstr "Eksploruj"
 
 #: templates/base.html:86
-#, fuzzy
 msgid "Popular subjects"
-msgstr "Więcej: te same obiekty"
+msgstr "Popularne obiekty"
 
 #: templates/base.html:88 templates/explore_choose.html:8
 #: templates/wall.html:159
@@ -2581,7 +2572,7 @@ msgstr "Maraton Messier"
 
 #: templates/base.html:93
 msgid "Advanced search"
-msgstr ""
+msgstr "Zaawansowane wyszukiwanie"
 
 #: templates/base.html:95 templates/stats.html:7
 #: templates/subject/page.html:72 templates/user/card.html:27
@@ -2606,13 +2597,12 @@ msgid "FAQ"
 msgstr "FAQ"
 
 #: templates/base.html:110 templates/contact_form/contact.html:6
-#, fuzzy
 msgid "Contact"
-msgstr "Zawiera"
+msgstr "Kontakt"
 
 #: templates/base.html:171
 msgid "Help with translations!"
-msgstr ""
+msgstr "Pomóż w tłumaczeniu!"
 
 #: templates/base.html:179
 msgid "Please select your language from the options above."
@@ -2625,9 +2615,8 @@ msgid "Upload"
 msgstr "Ładuj"
 
 #: templates/base.html:201
-#, fuzzy
 msgid "My places"
-msgstr "Moja strona"
+msgstr "Moje miejsca"
 
 #: templates/base.html:204 templates/user/profile-subnav.html:14
 msgid "Gallery"
@@ -2636,7 +2625,7 @@ msgstr "Galeria"
 #: templates/base.html:209 templates/image/detail.html:719
 #: templates/user/profile-subnav.html:19
 msgid "Favorites"
-msgstr ""
+msgstr "Ulubione"
 
 #: templates/base.html:214 templates/image/detail.html:454
 #: templates/image/full.html:73 templates/user/profile-subnav.html:24
@@ -2648,20 +2637,18 @@ msgid "Plots"
 msgstr "Wykresy"
 
 #: templates/base.html:224
-#, fuzzy
 msgid "My messages"
-msgstr "Wiadomości"
+msgstr "Moje wiadomości"
 
 #: templates/base.html:227 templates/user/profile-subnav.html:48
 msgid "API Keys"
-msgstr ""
+msgstr "Klucze API"
 
 #: templates/base.html:231
 msgid "My settings"
-msgstr ""
+msgstr "Moje ustawienia"
 
 #: templates/base.html:232 templates/subject/page.html:13
-#, fuzzy
 msgid "Basic information"
 msgstr "Informacje podstawowe"
 
@@ -2670,9 +2657,8 @@ msgid "Preferences"
 msgstr "Ustawienia"
 
 #: templates/base.html:237 templates/profile-edit-menu.html:24
-#, fuzzy
 msgid "Avatar"
-msgstr "Katar"
+msgstr "Avatar"
 
 #: templates/base.html:239 templates/user/profile.html:96
 #: templates/user/profile.html.py:99
@@ -2877,6 +2863,13 @@ msgid ""
 "once in 10,000,000 year. The images are duplicated across two different "
 "physical servers, for protection against natural disasters."
 msgstr ""
+"Absolutnie tak. AstroBin ma wiele sposobów na zapewnienie bezpieczeństwa "
+"przechowywanych danych. Po pierwsze wszystkie załadowane zdjęcia są "
+"przechowywane na wytrzymałych nośnikach z duplikacją. Usługa, z której "
+"korzysta AstroBin gwarantuje 99.999999999 procent dostępności danych w ciągu "
+"roku. To oznacza średnio utratę jednego zdjęcia w ciągu 10 000 000 lat w "
+"przypadku publikacji 10 000 zdjęć. Dane sa przechowywane na dwóch fizycznych "
+"serwerach aby uchronić sie przed naturalnymi katastrowami."
 
 #: templates/faq.html:51
 msgid ""
@@ -3258,7 +3251,7 @@ msgstr ""
 
 #: templates/help.html:23
 msgid "Dedication to data"
-msgstr ""
+msgstr "Dane przede wszystkim"
 
 #: templates/help.html:25
 msgid ""
@@ -3291,6 +3284,10 @@ msgid ""
 "interesting statistics. There is also a page that shows the most popular "
 "subjects organized by month and latitude!"
 msgstr ""
+"W <em>AstroBin</em> obiekty mają swoje własne strony, gdzie można zobaczyć "
+"najlepsze zdjęcia, wykresy i tabele pokazujące ciekawe statystyki. Istnieje "
+"również strona pokazująca najpopularniejsze obiekty posortowane według "
+"miesiąca i szerokości geograficznej!"
 
 #: templates/help.html:33
 msgid "Data is strongly interconnected"
@@ -3319,12 +3316,19 @@ msgid ""
 "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
 "want, you can search by telescope diameter too!"
 msgstr ""
+"AstroBin może pomóc Ci w wyborze następnego teleskopu lub kamery poprzez "
+"możliwość wyszukania zdjęć zrobionych przez innych użytkowników tym "
+"sprzętem. Na przykład istnieje możliwość wyszukania zdjęć zrobionych Canonem "
+"5D i refraktorem API lub kamerą SBIG ST-8300 teleskopem Richtey-Chretien. "
+"Można również wyszukiwać zdjęć definiując aperturę teleskopu!"
 
 #: templates/help.html:41
 msgid ""
 "Finally, all this information is collected in interesting plots, that can "
 "help you figure out how some gear items are trending."
 msgstr ""
+"W końcu wszystkie informacje są zbieranie i prezentowane w postaci wykresów, "
+"które mogą pomóc ustalić trendy w używaniu sprzętu."
 
 #: templates/help.html:45
 msgid "All the data at a glance"
@@ -3389,13 +3393,16 @@ msgid ""
 "intuitively! Now it's going to be really easy to tell whether your "
 "processing has improved."
 msgstr ""
+"Czyżbyś nigdy nie próbował ponownej obróbki zdjęcia <em>po tym</em>, jak już "
+"je opublikujesz? <em>AstroBin</em> umożliwia publikację wielu wersji tego "
+"samego materiału w bardzo intuicyjny sposób! Stąd już tyko krok aby ktoś "
+"mógł zobaczyć, jak poprawiła się Twoja technika obróbki."
 
 #: templates/help.html:69
 msgid "AstroBin is social!"
 msgstr "AstroBin jest społecznościowy!"
 
 #: templates/help.html:71
-#, fuzzy
 msgid ""
 "On <em>AstroBin</em> you can message other astrophotographer, follow them "
 "and be notified when they post new images, or perform requests for more data."
@@ -3410,6 +3417,10 @@ msgid ""
 "there's a new image from a certain CCD, or telescope, or filter, and so on. "
 "Or you can monitor all the new images of a certain galaxy or nebula."
 msgstr ""
+"Możesz śledzić sprzęt lub obiekty astronomiczne i otrzymywać powiadomienia, "
+"kiedy nowe zdjęcia wykonane przy użyciu interesującej kamery, teleskopu lub "
+"filtra pojawią się w serwisie. Możesz też monitorować zdjęcia wybranej "
+"galaktyki lub mgławicy. "
 
 #: templates/help.html:77
 msgid ""
@@ -3417,6 +3428,9 @@ msgid ""
 "might be chosen to appear in the site's <em>Messier Marathon</em>, or as "
 "<em>Currently hot</em> on the front page."
 msgstr ""
+"Możesz głosować na zdjęcia i zaznaczać je jako ulubione. Twoje zdjęcie może "
+"zostać wybrane do wyświetlania w <em>Maratonie Messiera</em> lub jako "
+"<em>Gorący temat</em> na stronie głównej."
 
 #: templates/help.html:81
 msgid ""
@@ -3429,6 +3443,14 @@ msgid ""
 "rescue to provide a home and a central hub for astrophotographers all over "
 "the world."
 msgstr ""
+"Jak już pewnie się zorientowałeś, <em>AstroBin</em> to o wiele więcej niż "
+"galeria zdjęć. <em>AstroBin</em> jest serwisem, na który społeczność "
+"astrofotografów czekała przez długi czas. Przez lata widziałem wspaniałe "
+"zdjęcia rozproszone po Internecie: w galeriach, na forach, na stronach "
+"prywatnych, czy nawet w tymczasowych lokalizacjach. Wiele z tych zdjęć "
+"zawiera dane, które są zbyt cenne aby zniknęły w morzu chaosu. "
+"<em>AstroBin</em> przychodzi na ratunek i zapewnia zarówno dom jak i "
+"centralny hub dla astrofotografów z całego świata."
 
 #: templates/help.html:83
 msgid "So, what are you waiting for?"
@@ -3484,29 +3506,26 @@ msgstr ""
 "używania sprzętu."
 
 #: templates/index.html:45
-#, fuzzy
 msgid "Image of the day"
-msgstr "Załadowane obrazy"
+msgstr "Zdjęcie dnia"
 
 #: templates/index.html:87
-#, fuzzy
 msgid "Recent"
-msgstr "Środek RA"
+msgstr "Najnowsze"
 
 #: templates/index.html:101
-#, fuzzy
 msgid "Followed"
-msgstr "Śledź"
+msgstr "Obserwowane"
 
 #: templates/index.html:115 templates/index.html.py:116
 #: templates/index.html:117 templates/index.html.py:118
 #: templates/index.html:119
 msgid "Recently voted 5 stars"
-msgstr ""
+msgstr "Ostatnio oznaczone 5 gwiazdkami"
 
 #: templates/index.html:132
 msgid "Recently favorited"
-msgstr ""
+msgstr "Ostatnio oznaczone jako ulubione"
 
 #: templates/index.html:147 templates/image/detail.html:265
 #: templates/image/detail.html.py:1248 templates/image/detail.html:1262
@@ -3529,9 +3548,8 @@ msgstr "Śledź"
 #: templates/popover/gear_mount.html:13
 #: templates/popover/gear_software.html:11
 #: templates/popover/gear_telescope.html:13 templates/popover/subject.html:21
-#, fuzzy
 msgid "Unfollow"
-msgstr "Śledź"
+msgstr "Przestań śledzić"
 
 #: templates/leaderboard.html:17 templates/image/detail.html:246
 #: templates/user/profile-subnav.html:58
@@ -3561,6 +3579,10 @@ msgid ""
 "<strong>Actions</strong> menu and selecting <strong>Nominate for the Messier "
 "Marathon</strong>."
 msgstr ""
+"To jest lista zdjęć pokazujących obiekty z katalogu Messiera. Możesz "
+"nominować każde zdjęcie (pod warunkiem, że zawiera obiekt z katalogu "
+"Messiera) używając menu <strong>Akcje</strong> i wybierając <strong>Nominuj "
+"do Maratonu Messiera</strong>."
 
 #: templates/messier_marathon.html:14
 #, python-format
@@ -3659,32 +3681,28 @@ msgid "Visit the Messier Marathon"
 msgstr "Odwiedź Maraton Messiera"
 
 #: templates/most_popular.html:12
-#, fuzzy
 msgid "Select latitude"
-msgstr "Wybrane licencje"
+msgstr "Okreść szerokość geograficzną"
 
 #: templates/most_popular.html:17
-#, fuzzy
 msgid "From latitude:"
-msgstr "Wysokość n.p.m."
+msgstr "Od szerokości geograficznej:"
 
 #: templates/most_popular.html:45
-#, fuzzy
 msgid "To latitude:"
-msgstr "Wysokość n.p.m."
+msgstr "Do szerokości geograficznej:"
 
 #: templates/most_popular.html:73
 msgid "Hemisphere:"
-msgstr ""
+msgstr "Półkula"
 
 #: templates/most_popular.html:90
 msgid "Both"
-msgstr ""
+msgstr "Obie"
 
 #: templates/most_popular.html:98
-#, fuzzy
 msgid "Most popular subjects"
-msgstr "Więcej: te same obiekty"
+msgstr "Najpopularniejsze obiekty"
 
 #: templates/most_popular.html:100
 msgid ""
@@ -3692,6 +3710,10 @@ msgid ""
 "subject, one image has been chosen. Use the menu to limit the images to "
 "those acquired from a certain latitude on Earth."
 msgstr ""
+"Oto najpopularniejsze obiekty na AstroBin prezentowane miesiąc po miesiącu. "
+"Dla każdego obiektu zostało wybrane jedno zdjęcie. Aby ograniczyć "
+"wyświetlanie do zdjęć wykonanych z określonej szerokości geograficznej użyj "
+"menu. "
 
 #: templates/nightly.html:7
 msgid "Images acquired night after night"
@@ -3702,6 +3724,8 @@ msgid ""
 "On this page you can see images that were actually taken each night, and not "
 "merely uploaded on a particular date."
 msgstr ""
+"Na tej stronie możesz zobaczyć zdjęcia zrobione wybranej nocy, a nie "
+"opublikowane w wybranym dniu."
 
 #: templates/nightly.html:27
 msgid "No image acquired in the selected month."
@@ -3768,19 +3792,19 @@ msgstr "Ładowanie..."
 
 #: templates/stats.html:46
 msgid "Global distribution of camera types"
-msgstr ""
+msgstr "Globalny rozkład typów kamer"
 
 #: templates/stats.html:64
 msgid "Global distribution of telescope types"
-msgstr ""
+msgstr "Globalny rozkład typów teleskopów"
 
 #: templates/stats.html:84
 msgid "CCD vs DLSR: the global trend"
-msgstr ""
+msgstr "CCD vs DSLR: globalny trend"
 
 #: templates/stats.html:94
 msgid "Global trend of telescope types"
-msgstr ""
+msgstr "Globalny trend w używanych typach teleskopów"
 
 #: templates/tos.html:9
 msgid ""
@@ -3861,7 +3885,7 @@ msgstr "Ocena"
 
 #: templates/wall.html:43 templates/image/detail.html:683
 msgid "Favorited"
-msgstr ""
+msgstr "Oznaczone jako ulubione"
 
 #: templates/wall.html:49 templates/image/detail.html:455
 #: templates/image/detail.html.py:715 templates/search/search.html:31
@@ -3906,43 +3930,40 @@ msgid "Remove filter"
 msgstr "Usuń filtr"
 
 #: templates/avatar/change.html:9
-#, fuzzy
 msgid "Change your avatar"
-msgstr "Zmień hasło"
+msgstr "Zmień avatar"
 
 #: templates/avatar/change.html:16
 msgid "You do not yet have an avatar. Please upload one now."
-msgstr ""
+msgstr "Nie masz jeszcze avatara. Załaduj go teraz."
 
 #: templates/avatar/change.html:21
 msgid "Current avatar"
-msgstr ""
+msgstr "Obecny avatar."
 
 #: templates/avatar/change.html:28
-#, fuzzy
 msgid "Previously uploaded"
-msgstr "Załadowane obrazy"
+msgstr "Poprzednio załadowany"
 
 #: templates/avatar/change.html:31
-#, fuzzy
 msgid "Choose new default"
-msgstr "Zaznacz plik"
+msgstr "Wybierz nową wartość domyślną"
 
 #: templates/avatar/change.html:37
-#, fuzzy
 msgid "Upload a new image"
-msgstr "Załaduj obraz"
+msgstr "Opublikuj nowe zdjęcie"
 
 #: templates/avatar/change.html:39
-#, fuzzy
 msgid "Avatar image"
-msgstr "Wstaw znako wodny do zdjęcia"
+msgstr "Avatar"
 
 #: templates/contact_form/contact.html:9
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
+"Skontaktuj się z nami jeżeli potrzebujesz pomocy, chcesz zgłosić problem, "
+"wysłać opinię lub sugestię."
 
 #: templates/contact_form/contact.html:15 templates/image/detail.html:1254
 #: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
@@ -3952,7 +3973,7 @@ msgstr "Wyślij"
 
 #: templates/contact_form/contact_completed.html:5
 msgid "Thank you! Your message was sent successfully."
-msgstr ""
+msgstr "Dziękujemy! Twoja wiadomość została wysłana."
 
 #: templates/image/detail.html:20
 msgid ""
@@ -3960,6 +3981,9 @@ msgid ""
 "please don't request it again! You will be notified when the job has "
 "completed. Thanks!"
 msgstr ""
+"Automatyczna fotoastrometria została rozpoczęta. Ten proces może chwilę "
+"potrwać, więc prosimy na razie nie uruchamiać go ponownie! Po zakończeniu "
+"zostanie wysłana automatyczna notyfikacja. Dziękujemy!"
 
 #: templates/image/detail.html:30
 #, python-format
@@ -4010,11 +4034,11 @@ msgstr "Załaduj nową wersję"
 
 #: templates/image/detail.html:92
 msgid "Plate-solve"
-msgstr ""
+msgstr "Rozpocznij automatyczną fotoastrometię"
 
 #: templates/image/detail.html:99
 msgid "Plate-solve again"
-msgstr ""
+msgstr "Ponownie rozpocznij automatyczną fotoastrometię"
 
 #: templates/image/detail.html:107
 msgid "Promote to public area"
@@ -4060,7 +4084,6 @@ msgid "Inverted monochrome"
 msgstr "Odwrócony czarno-biały"
 
 #: templates/image/detail.html:190 templates/image/detail.html.py:214
-#, fuzzy
 msgid "Annotated (original version)"
 msgstr "Podpisane (wersja oryginalna)"
 
@@ -4230,52 +4253,47 @@ msgstr "Nie ma jeszcze żadnych komentarzy."
 
 #: templates/image/detail.html:681
 msgid "Already favorited"
-msgstr ""
+msgstr "Już oznaczone jako ulubione"
 
 #: templates/image/detail.html:681
-#, fuzzy
 msgid "Mark as favorite"
-msgstr "Zaznacz jako wykonane."
+msgstr "Zaznacz jako ulubione"
 
 #: templates/image/detail.html:685
 msgid "Favorite"
-msgstr ""
+msgstr "Ulubione"
 
 #: templates/image/detail.html:723
 msgid "Votes"
-msgstr ""
+msgstr "Głosy"
 
 #: templates/image/detail.html:750
 msgid "Sharing mode"
-msgstr ""
+msgstr "Tryb udostępniania"
 
 #: templates/image/detail.html:752
-#, fuzzy
 msgid "Simple link"
-msgstr "Odnośniki"
+msgstr "Prosty odnośnik"
 
 #: templates/image/detail.html:753
 msgid "Forums"
-msgstr ""
+msgstr "Fora"
 
 #: templates/image/detail.html:758
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatura"
 
 #: templates/image/detail.html:760 templates/user/api_keys.html:29
-#, fuzzy
 msgid "Yes"
 msgstr "Tak."
 
 #: templates/image/detail.html:761
-#, fuzzy
 msgid "No"
 msgstr "Nie."
 
 #: templates/image/detail.html:767
-#, fuzzy
 msgid "Image size"
-msgstr "Zdjęcia"
+msgstr "Rozmiar zdjęcia"
 
 #: templates/image/detail.html:769 templates/image/detail.html.py:1283
 msgid "Regular"
@@ -4283,10 +4301,9 @@ msgstr "Przeciętny"
 
 #: templates/image/detail.html:770
 msgid "Full"
-msgstr ""
+msgstr "Pełny"
 
 #: templates/image/detail.html:774
-#, fuzzy
 msgid "Copy this"
 msgstr "Kopiuj"
 
@@ -4296,17 +4313,16 @@ msgid "Copy"
 msgstr "Kopiuj"
 
 #: templates/image/detail.html:787
-#, fuzzy
 msgid "Image mode"
-msgstr "Załadowane obrazy"
+msgstr "Tryb zdjęcia"
 
 #: templates/image/detail.html:818
 msgid "Favorited!"
-msgstr ""
+msgstr "Oznaczone jako ulubione!"
 
 #: templates/image/detail.html:838
 msgid "Copied!"
-msgstr ""
+msgstr "Skopiowane!"
 
 #: templates/image/detail.html:1084
 msgid "just now"
@@ -4433,14 +4449,12 @@ msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "przez <a href=\"%(the_url)s\">%(user)s</a>"
 
 #: templates/image/full.html:79
-#, fuzzy
 msgid "Fit to window"
-msgstr "Dopasuj szerokość"
+msgstr "Dopasuj do szerokości ekranu"
 
 #: templates/image/full.html:83
-#, fuzzy
 msgid "Full resolution"
-msgstr "Zobacz pełną rozdzielczość"
+msgstr "Pełna rozdzielczość"
 
 #: templates/image/actions/bring_to_attention.html:6
 msgid "Bring image to attention"
@@ -4639,26 +4653,27 @@ msgstr ""
 #: templates/image/edit/gear.html:34
 msgid ""
 "Use this button to import the gear settings from another image of yours."
-msgstr ""
+msgstr "Użyj tego przycisku żeby zaimportować opis sprzętu z innego zdjęcia."
 
 #: templates/image/edit/gear.html:34
 msgid "Copy from another image"
-msgstr ""
+msgstr "Skopiuj z innego zdjęcia"
 
 #: templates/image/edit/gear.html:58
 msgid "Next step: acquisition"
 msgstr "Następny krok: naświetlanie"
 
 #: templates/image/edit/gear.html:69
-#, fuzzy
 msgid "Copy gear"
-msgstr "Kopiuj"
+msgstr "Kopiuj sprzęt"
 
 #: templates/image/edit/gear.html:73
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
 "for you, but you will still need to save it in the end."
 msgstr ""
+"Kopiowanie ustawień sprzętu z innego zdjęcia uzupełni formularz za Ciebie, "
+"jednak nadal będzie trzeba na końcu zapisać zmiany."
 
 #: templates/image/edit/license.html:7
 msgid "Change the license for this image"
@@ -4702,11 +4717,11 @@ msgstr "Znajomość rozmiaru piksela będzie pomocna"
 
 #: templates/image/edit/presolve.html:18
 msgid "Step 1 of 5: plate solving scale"
-msgstr ""
+msgstr "Krok 1 z 5: skala zdjęcia do automatycznej fotoastrometrii"
 
 #: templates/image/edit/presolve.html:20
 msgid "Edit your image: plate-solving scale"
-msgstr ""
+msgstr "Edytuj zdjęcie: skala zdjęcia do automatycznej fotoastrometrii"
 
 #: templates/image/edit/presolve.html:26
 msgid ""
@@ -4715,10 +4730,14 @@ msgid ""
 "of the field of your image, plate-solving will be much faster and will have "
 "a better chance of success!"
 msgstr ""
+"AstroBin <em>potrafi</em> dokonać automatycznej fotoastrometrii Twojego "
+"zdjęcia bez znajomości jego parametrów. Jednak jest to długi proces i wymaga "
+"wielu zasobów. Jeżeli znasz przybliżona wielkośc sfotografowanego pola, "
+"fotoastrometria będzie szybsza i szanse na jej powodzenie będą większe!"
 
 #: templates/image/edit/presolve.html:35
 msgid "Start plate-solving"
-msgstr ""
+msgstr "Rozpocznij automatyczną fotoastrometrię"
 
 #: templates/image/edit/presolve.html:38
 msgid "Next step: watermark"
@@ -4764,7 +4783,7 @@ msgstr "Zapisane!. Dziękujemy!"
 
 #: templates/inclusion_tags/image_list.html:9
 msgid "by"
-msgstr ""
+msgstr "przez"
 
 #: templates/inclusion_tags/image_list.html:22
 #: templates/inclusion_tags/messier_list.html:21
@@ -4840,16 +4859,16 @@ msgid "Manage received requests"
 msgstr "Zarządzaj otrzymanymi prośbami"
 
 #: templates/inclusion_tags/search_image_list.html:27
-#, fuzzy, python-format
+#, python-format
 msgid "Favorited one time"
 msgid_plural "Favorited %(counter)s times"
-msgstr[0] "wyświetlone jeden raz"
-msgstr[1] "wyświetlone %(counter)s razy"
+msgstr[0] "Dodane raz do ulubionych"
+msgstr[1] "Dodane do ulubionych %(counter)s razy"
 msgstr[2] ""
 
 #: templates/inclusion_tags/search_image_list.html:29
 msgid "Never favorited"
-msgstr ""
+msgstr "Nigdy nie dodane do ulubionych"
 
 #: templates/inclusion_tags/search_image_list.html:44
 #, python-format
@@ -4890,21 +4909,20 @@ msgid "Messages"
 msgstr "Wiadomości"
 
 #: templates/messages/inbox.html:22
-#, fuzzy
 msgid "Status"
-msgstr "Statystyki"
+msgstr "Status"
 
 #: templates/messages/inbox.html:23
 msgid "Last sender"
-msgstr ""
+msgstr "Ostatni nadawca"
 
 #: templates/messages/inbox.html:24
 msgid "Date and time"
-msgstr ""
+msgstr "Data i godzina"
 
 #: templates/messages/inbox.html:26
 msgid "Excerpt"
-msgstr ""
+msgstr "Fragment"
 
 #: templates/messages/inbox.html:31
 msgid "New!"
@@ -4988,18 +5006,30 @@ msgid ""
 "    \n"
 "    Thank you for using AstroBin's APIs!"
 msgstr ""
+"Twoja aplikacja o klucz API została zaakceptowana!\n"
+"\n"
+"Twój klucz: %(key)s\n"
+"Twoje hasło: %(secret)s\n"
+"\n"
+"Zapoznaj się z dokumentacją API na %(api_docs_url)s\n"
+"\n"
+"Możesz sprawdzić swój klucz do API na %(api_keys_url)s\n"
+"\n"
+"Dziękujemy za używanie API AstroBin!"
 
 #: templates/notification/api_key_request_approved/notice.html:2
 #: templates/notification/api_key_request_approved/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
 "a>"
-msgstr "<a href=\"%(object_url)s\">Twoje zdjęcie zostało przetworzone.</a>"
+msgstr ""
+"<a href=\"%(api_keys_url)s\">Twoja aplikacja o klucz API została "
+"zaakceptowana!</a>"
 
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
-msgstr ""
+msgstr "Aplikacja o klucz API została zaakceptowana"
 
 #: templates/notification/attention_request/full.txt:2
 #, python-format
@@ -5046,16 +5076,19 @@ msgstr "Twój obraz został usunięty."
 #, python-format
 msgid "Your image at %(object_url)s could not be plate-solved."
 msgstr ""
+"Automatyczna fotoastrometria Twojego zdjęcia %(object_url)s nie powiodła się"
 
 #: templates/notification/image_not_solved/notice.html:2
 #: templates/notification/image_not_solved/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
 msgstr ""
+"<a href=\"%(object_url)s\">Automatyczna fotoastrometria Twojego zdjęcia nie "
+"powiodła się.</a>"
 
 #: templates/notification/image_not_solved/short.txt:2
 msgid "Your image could not be plate-solved."
-msgstr ""
+msgstr "Automatyczna fotoastrometria Twojego zdjęcia nie powiodła się."
 
 #: templates/notification/image_ready/notice.html:2
 #: templates/notification/image_ready/short.html:2
@@ -5067,6 +5100,7 @@ msgstr "<a href=\"%(object_url)s\">Twoje zdjęcie zostało przetworzone.</a>"
 #, python-format
 msgid "Your image at %(object_url)s was plate-solved."
 msgstr ""
+"Automatyczna fotoastrometria Twojego zdjęcia %(object_url)s powiodła się."
 
 #: templates/notification/image_solved/notice.html:2
 #: templates/notification/image_solved/short.html:2
@@ -5074,10 +5108,12 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr ""
+"<a href=\"%(object_url)s\">Automatyczna fotoastrometria Twojego zdjęcia "
+"powiodła się.</a>"
 
 #: templates/notification/image_solved/short.txt:2
 msgid "Your image has been successfully plate-solved."
-msgstr ""
+msgstr "Automatyczna fotoastrometria Twojego zdjęcia powiodła się."
 
 #: templates/notification/lacking_data_reminder/full.txt:2
 #, python-format
@@ -5277,19 +5313,19 @@ msgstr "%(user)s odpowiedział na Twoj komentarz"
 
 #: templates/notification/new_favorite/full.txt:2
 #: templates/notification/new_favorite/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has marked your image as a favorite: %(url)s"
-msgstr ""
-"%(user)s skomentował Twoje zdjęcie! Komentarz możesz zobaczyć tu: %(url)s"
+msgstr "%(user)s dodał Twoje zdjęcie do ulubionych: %(url)s"
 
 #: templates/notification/new_favorite/notice.html:2
 #: templates/notification/new_favorite/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> has marked your image as a "
 "favorite!</a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> skomentował Twoje zdjęcie!</a>"
+"<a href=\"%(url)s\"><strong>%(user)s</strong> dodał Twoje zdjęcie do "
+"ulubionych!</a>"
 
 #: templates/notification/new_follower/full.txt:2
 #, python-format
@@ -5346,50 +5382,49 @@ msgid "New image by %(originator)s"
 msgstr "Nowe zdjęcie opublikowane przez %(originator)s"
 
 #: templates/notification/new_image_from_gear/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
 "Check it out at the following url: %(object_url)s"
 msgstr ""
-"%(originator)s spełnił Twoją prośbę! Sprawdź klikając ten link: "
-"%(object_url)s"
+"Nowe zdjęcie zrobione przy pomocy sprzętu, kótry obserwujesz: <strong>%"
+"(gear)s</strong>. Sprawdź klikając ten link: %(object_url)s"
 
 #: templates/notification/new_image_from_gear/notice.html:2
 #: templates/notification/new_image_from_gear/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
 "</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Obserwujesz <strong>%(object)s</strong>.</a>"
+"<a href=\"%(object_url)s\">Nowe zdjęcie zrobione przy pomocy <strong>%"
+"(gear)s</strong>.</a>"
 
 #: templates/notification/new_image_from_gear/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "New image taken with a %(gear)s"
-msgstr "Nowa wersja opublikowana przez %(originator)s"
+msgstr "Nowe zdjęcie zrobione przy pomocy %(gear)s"
 
 #: templates/notification/new_image_of_subject/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
 "out at the following url: %(object_url)s"
 msgstr ""
-"AstroBin opublikował nowy wpis na blogu: \"%(object)s\".\n"
-"\n"
-"Możesz go przeczytać tutaj: %(object_url)s"
+"Nowe zdjęcie zrobione obiektu, kótry obserwujesz: <strong>%"
+"(subject)s</strong>. Sprawdź klikając ten link: %(object_url)s"
 
 #: templates/notification/new_image_of_subject/notice.html:2
 #: templates/notification/new_image_of_subject/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">Obserwujesz <strong>%(object)s</strong>.</a>"
+msgstr "<a href=\"%(object_url)s\">Nowe zdjęcie <strong>%(subject)s</strong>.</a>"
 
 #: templates/notification/new_image_of_subject/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "New image of %(subject)s"
-msgstr "Nowe zdjęcie opublikowane przez %(originator)s"
+msgstr "Nowe zdjęcie %(subject)s"
 
 #: templates/notification/new_image_revision/full.txt:2
 #, python-format
@@ -5473,26 +5508,24 @@ msgstr ""
 #: templates/popover/gear_mount.html:10 templates/popover/gear_software.html:8
 #: templates/popover/gear_telescope.html:10 templates/popover/subject.html:18
 #: templates/subject/page.html:64
-#, fuzzy
 msgid "Find images"
-msgstr "Brak zdjęć"
+msgstr "Znajdź zdjęcia"
 
 #: templates/popover/subject.html:5 templates/subject/page.html:17
 msgid "RA"
-msgstr ""
+msgstr "RA"
 
 #: templates/popover/subject.html:6 templates/subject/page.html:24
 msgid "Dec"
-msgstr ""
+msgstr "DEC"
 
 #: templates/popover/subject.html:14 templates/subject/page.html:41
 msgid "Size"
-msgstr ""
+msgstr "Rozmiar"
 
 #: templates/popover/subject.html:26
-#, fuzzy
 msgid "View page"
-msgstr "Zobacz profil"
+msgstr "Zobacz stronę"
 
 #: templates/privatebeta/invite.html:7
 msgid "What is AstroBin?"
@@ -5554,13 +5587,12 @@ msgid "Reset password"
 msgstr "Zresetuj hasło"
 
 #: templates/registration/logout.html:5
-#, fuzzy
 msgid "Good bye!"
-msgstr "Dobry"
+msgstr "Do widzenia!"
 
 #: templates/registration/logout.html:6
 msgid "You have been logged out. Come back soon!"
-msgstr ""
+msgstr "Zostałeś wylogowany. Wracaj prędko!"
 
 #: templates/registration/password_change_done.html:5
 msgid "Password changed"
@@ -5613,7 +5645,7 @@ msgstr ""
 
 #: templates/requests/all.html:5
 msgid "Here are your requests"
-msgstr ""
+msgstr "Oto lista Twoich próśb"
 
 #: templates/requests/all.html:9
 msgid "When"
@@ -5625,19 +5657,19 @@ msgstr "Z"
 
 #: templates/requests/all.html:11
 msgid "Action needed"
-msgstr ""
+msgstr "Akcja wymagana"
 
 #: templates/requests/all.html:12
 msgid "Object affected"
-msgstr ""
+msgstr "Dotyczy obiektu"
 
 #: templates/requests/all.html:13
 msgid "Fulfilled"
-msgstr ""
+msgstr "Wypełnione"
 
 #: templates/requests/all.html:17
 msgid "at"
-msgstr ""
+msgstr "przy"
 
 #: templates/requests/all.html:24
 msgid "Location details missing."
@@ -5660,9 +5692,8 @@ msgid "Mark as done."
 msgstr "Zaznacz jako wykonane."
 
 #: templates/search/search.html:14 templates/user/profile-subnav.html:81
-#, fuzzy
 msgid "Sort"
-msgstr "Sortuj po"
+msgstr "Sortuj"
 
 #: templates/search/search.html:19
 msgid "Relevance"
@@ -5705,9 +5736,8 @@ msgid "Select none"
 msgstr "Odznacz wszystkie"
 
 #: templates/search/search.html:325 templates/search/search.html.py:332
-#, fuzzy
 msgid "Select types"
-msgstr "Typ obiektu"
+msgstr "Wybrane typy"
 
 #: templates/search/search.html:326 templates/search/search.html.py:333
 #: templates/search/search.html:342
@@ -5720,44 +5750,39 @@ msgstr "Wybrane licencje"
 
 #: templates/subject/page.html:51
 msgid "Interesting links"
-msgstr ""
+msgstr "Interesujące odnośniki"
 
 #: templates/subject/page.html:55
-#, fuzzy
 msgid "SIMBAD page"
-msgstr "Moja strona"
+msgstr "Strona SIMBAD"
 
 #: templates/subject/page.html:60
 msgid "SIMBAD clickable map"
-msgstr ""
+msgstr "Interaktywna mapa SIMBAD"
 
 #: templates/subject/page.html:89
-#, fuzzy
 msgid "Some images"
-msgstr "Brak zdjęć"
+msgstr "Kilka zdjęć"
 
 #: templates/subject/page.html:120
-#, fuzzy
 msgid "Camera types"
-msgstr "Obiektyw"
+msgstr "Typy kamer"
 
 #: templates/subject/page.html:138
-#, fuzzy
 msgid "Telescope types"
-msgstr "Apertura teleskopu"
+msgstr "Typy teleskopów"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:11
 msgid "Your API Keys"
-msgstr ""
+msgstr "Twoje klucze API"
 
 #: templates/user/api_keys.html:18
 msgid "Created on"
-msgstr ""
+msgstr "Utworzone w"
 
 #: templates/user/api_keys.html:19
-#, fuzzy
 msgid "Active"
-msgstr "Akcje"
+msgstr "Aktywny"
 
 #: templates/user/api_keys.html:38
 #, python-format
@@ -5765,10 +5790,12 @@ msgid ""
 "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
 "\">API documentation</a>."
 msgstr ""
+"Nie masz żadnych kluczy API. Przeczytaj <a href=\"%"
+"(api_docs_url)s\">dokumentację API</a>."
 
 #: templates/user/api_keys.html:46
 msgid "Request an API Key"
-msgstr ""
+msgstr "Zaaplikuj o klucz API."
 
 #: templates/user/card.html:8
 #, python-format
@@ -5795,23 +5822,22 @@ msgid "%(username)s didn't write anything about themselves."
 msgstr "Użytkownik %(username)s nie napisał nic o sobie."
 
 #: templates/user/favorites.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's favorites"
-msgstr "wykresy użytkownika %(user)s"
+msgstr "Ulubione zdjęcia użytkownika %(user)s"
 
 #: templates/user/favorites.html:11
-#, fuzzy
 msgid "View your favorites"
-msgstr "Przeglądaj swoje zdjęcia"
+msgstr "Przeglądaj swoje ulubione"
 
 #: templates/user/favorites.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "View %(username)s's favorites"
-msgstr "Przeglądaj zdjęcia użytkownika %(username)s:"
+msgstr "Przeglądaj ulubione zdjęcia użytkownika %(username)s:"
 
 #: templates/user/favorites.html:19
 msgid "These are the images you marked as favorite."
-msgstr ""
+msgstr "To są zdjęcia, które dodałeś do ulubionych"
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
@@ -5832,7 +5858,7 @@ msgid ""
 msgstr ""
 "Hej <strong>%(user)s</strong>! Żeby wykresy były bardziej użyteczne musisz "
 "uzupełnić dane na temat swoich zdjęć. Aby uzupełnić brakujące dane możesz "
-"klinkąć <a href=\"?public&sub=nodata\">tutaj</a>."
+"klinkąć <a href=\"%(user_page)s?public&sub=nodata\">tutaj</a>."
 
 #: templates/user/plots.html:20
 msgid "Total integration hours, plotted against time."
@@ -5843,10 +5869,12 @@ msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
 msgstr ""
+"Całkowity czas naświetlania względem czasu posotrowany względem użytego "
+"sprzętu (teleskopy, obiektywy, kamery)."
 
 #: templates/user/plots.html:43
 msgid "Combined view count for all the user's images, plotted against time."
-msgstr ""
+msgstr "Wykres wyświetleń wszystkich zdjęć użytkownika względem czasu."
 
 #: templates/user/plots.html:54
 msgid "Image uploads, plotted against time."
@@ -5906,6 +5934,9 @@ msgid ""
 "in some data. Imaging telescopes, imaging cameras and subjects are the bare "
 "minimum. Dates of acquisitions are very important too."
 msgstr ""
+"Jeżeli chcesz aby Twoje zdjęcia zostały posortowane w albumy, powinieneś "
+"dodać do nich opisy. Należy podać przynajmniej teleskop, kamerę i "
+"fotografowane obiekty. Data zbierania materiału też jest bardzo istotna."
 
 #: templates/user/profile.html:43
 msgid "(view more...)"
@@ -5955,7 +5986,7 @@ msgstr ""
 
 #: templates/user/profile/flickr_import.html:16
 msgid "Which set"
-msgstr ""
+msgstr "Który zestaw"
 
 #: templates/user/profile/flickr_import.html:30
 msgid "Import photos"
@@ -6012,7 +6043,6 @@ msgid "Please use full names (make and model) for all your gear items!"
 msgstr "Używaj pełnych nazw (marek i modeli) swojego sprzętu!"
 
 #: templates/user/profile/edit/gear.html:21
-#, fuzzy
 msgid ""
 "<span class=\"btn btn-primary\">Orange</span> bubbles mean that you need to "
 "edit the properties of that gear item!"
@@ -6061,11 +6091,10 @@ msgid "Edit your site preferences"
 msgstr "Edytuj ustawienia strony"
 
 #: templates/user/profile/edit/preferences.html:14
-#, fuzzy
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
-msgstr "Wybierz, które powiadomienie e-mail chciałbyś/abyś otrzymać:"
+msgstr "Wybierz język oraz które powiadomienie e-mail chciałbyś/abyś otrzymać:"
 
 #, fuzzy
 #~ msgid "Hot right now"
