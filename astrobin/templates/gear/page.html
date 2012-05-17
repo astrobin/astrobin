@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load i18n tags %}
+
+{% block title %}AstroBin - {% gear_name gear %}{% endblock %}
+
+{% block content %}
+    <h1>{% gear_name gear %}</h1>
+
+    <div class="row section">
+        <div class="span12">
+            <div class="well">
+                <strong>{% trans "Some images" %}</strong>
+                <a href="/search/?q={% gear_name gear %}{% search_form_query %}">
+                    {% trans "(view more)" %}
+                </a>
+            </div>
+            {% image_list request examples 0 %}
+        </div>
+    </div>
+
+    <div class="well"><strong>{% trans "Total images" %}</strong></div>
+    <div id="stats_total_images" class="plot" style="width:940px; height: 200px;">
+        <div class="loading">
+            <p>{% trans "Please wait: the plot is loading..." %}</p>
+            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+$(document).ready(function() {
+    astrobin_stats.init();
+
+    astrobin_stats.plot(
+        '#stats_total_images',
+        "{% url stats_gear_total_images gear.id %}",
+        30000);
+    astrobin_stats.enableTooltips("#stats_total_images");
+});
+</script>
+{% endblock %}
+

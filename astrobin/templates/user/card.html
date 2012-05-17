@@ -15,7 +15,7 @@
                     <p>
                         <strong>{% trans i.0 %}:&nbsp;</strong>
                         {% for g in i.1 %}
-                            {% if i.2 == 'imaging_telescopes' or i.2 == 'imaging_cameras' %}<a href="/search/?q=&as_values_{{i.2}}={{g.id}}">{{g.name|escape}}</a>{% else %}<a href="/search/?q={{g.name|escape}}&type={{i.2}}">{{g.name|escape}}</a>{% endif %}{% if not forloop.last %},{% endif %}
+                            <a href="{% url gear_page g.id %}">{% gear_name g %}</a>{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </p>
                 {% endfor %}

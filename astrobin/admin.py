@@ -49,10 +49,10 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class GearAdmin(admin.ModelAdmin):
-    list_display = ('name', 'master')
-    search_fields = ('name',)
+    list_display = ('make', 'name', 'master')
+    search_fields = ('make', 'name',)
     list_filter = ('master',)
-    actions = ['assisted_merge']
+    actions = ['assisted_merge',]
 
     def assisted_merge(modeladmin, request, queryset):
         GearAssistedMerge.objects.all().delete()
