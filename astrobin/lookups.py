@@ -111,8 +111,12 @@ def autocomplete(request, what):
                  'filters':Filter,
                  'accessories':Accessory}.iteritems():
         if what == k:
-            values = v.objects.filter(Q(name__iregex=r'%s'%regex))[:limit]
-            return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.name} for v in values]))
+            values = v.objects.filter(Q(make__iregex=r'%s'%regex) | Q(name__iregex=r'%s'%regex))[:limit]
+            if k == 'locations':
+                return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.name} for v in values]))
+            else:
+                from templatetags.tags import gear_name
+                return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': gear_name(v)} for v in values]))
 
     return HttpResponse(simplejson.dumps([{}]))
 

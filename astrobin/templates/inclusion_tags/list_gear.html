@@ -1,0 +1,39 @@
+{% load tags %}
+{% load i18n %}
+
+<div class="list-gear">
+    <div class="header">
+        <span class="title">{{label}}</span>
+    </div>
+    <div class="content">
+        {% for item in gear %}
+            <div id="{{item.id}}" class="btn btn-gear {% gear_complete_class item %}">
+                <div class="labels">
+                    <div class="make">{{item.make}}</div>
+                    <div class="name">{{item.name}}</div>
+                    <div class="alias">({% gear_alias item user %})</div>
+                </div>
+                <div class="actions">
+                    <a href="#" class="remove" rel="tooltip" title="{% trans "Remove" %}">
+                        <i class="icon-trash"></i>
+                    </a>
+
+                    <a href="#edit-gear-modal" class="edit" data-toggle="modal" rel="tooltip" title="{% trans "Edit" %}">
+                        <i class="icon-pencil"></i>
+                    </a>
+
+                    <a href="#" class="page" rel="tooltip" title="{% trans "View page" %}">
+                        <i class="icon-info-sign"></i>
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <span class="no-gear">
+                {% trans "No gear yet." %}
+            </span>
+        {% endfor %}
+    </div>
+    <div class="actions">
+        <a href="#add-gear-modal" class="btn btn-primary add-gear" data-toggle="modal" data-klass="{{klass}}">{% trans "Add" %}</a>
+    </div>
+</div>

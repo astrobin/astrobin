@@ -580,60 +580,73 @@ class CommentForm(forms.ModelForm):
         }
 
 
-class TelescopeEditForm(forms.ModelForm):
+class GearEditForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(GearEditForm, self).__init__(*args, **kwargs)
+        instance = getattr(self, 'instance', None)
+        if instance and instance.id:
+            self.fields['name'].widget.attrs['readonly'] = True
+            self.fields['name'].widget.attrs['disabled'] = True
+            self.fields['name'].help_text = _("You cannot edit this property for an existing gear item. Consider deleting this item and creating a new one.")
+
+            self.fields['make'].widget.attrs['readonly'] = True
+            self.fields['make'].widget.attrs['disabled'] = True
+            self.fields['make'].help_text = _("You cannot edit this property for an existing gear item. Consider deleting this item and creating a new one.")
+
+    def clean_name(self):
+        return self.instance.name
+
+    def clean_make(self):
+        return self.instance.make
+
+
+class TelescopeEditForm(GearEditForm):
     error_css_class = 'error'
 
     class Meta:
         model = Telescope
-        exclude = ('name')
 
 
-class MountEditForm(forms.ModelForm):
+class MountEditForm(GearEditForm):
     error_css_class = 'error'
 
     class Meta:
         model = Mount
-        exclude = ('name')
 
 
-class CameraEditForm(forms.ModelForm):
+class CameraEditForm(GearEditForm):
     error_css_class = 'error'
 
     class Meta:
         model = Camera
-        exclude = ('name')
 
 
-class FocalReducerEditForm(forms.ModelForm):
+class FocalReducerEditForm(GearEditForm):
     error_css_class = 'error'
 
     class Meta:
         model = FocalReducer
-        exclude = ('name')
 
 
-class SoftwareEditForm(forms.ModelForm):
+class SoftwareEditForm(GearEditForm):
     error_css_class = 'error'
 
     class Meta:
         model = Software
-        exclude = ('name')
 
 
-class FilterEditForm(forms.ModelForm):
+class FilterEditForm(GearEditForm):
     error_css_class = 'error'
 
     class Meta:
         model = Filter
-        exclude = ('name')
 
 
-class AccessoryEditForm(forms.ModelForm):
+class AccessoryEditForm(GearEditForm):
     error_css_class = 'error'
 
     class Meta:
         model = Accessory
-        exclude = ('name')
 
 
 class CopyGearForm(forms.Form):
@@ -651,4 +664,11 @@ class AppApiKeyRequestForm(forms.ModelForm):
 
     class Meta:
         model = AppApiKeyRequest
+
+
+class GearUserInfoForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = GearUserInfo
 

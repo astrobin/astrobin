@@ -79,6 +79,7 @@ urlpatterns = patterns('',
     url(r'^profile/edit/basic/$', views.user_profile_edit_basic, name='profile_edit_basic'),
     url(r'^profile/save/basic/$', views.user_profile_save_basic, name='profile_save_basic'),
     url(r'^profile/edit/gear/$', views.user_profile_edit_gear, name='profile_edit_gear'),
+    url(r'^profile/edit/gear/remove/(?P<id>\d+)/$', views.user_profile_edit_gear_remove, name='profile_edit_gear_remove'),
     url(r'^profile/save/gear/$', views.user_profile_save_gear, name='profile_save_gear'),
     url(r'^profile/edit/locations/$', views.user_profile_edit_locations, name='profile_edit_locations'),
     url(r'^profile/save/locations/$', views.user_profile_save_locations, name='profile_save_locations'),
@@ -144,7 +145,11 @@ urlpatterns = patterns('',
      url(r'^subject/stats/telescope-types/(?P<id>\d+)/$',
         views.stats_subject_telescope_types_ajax,
         name = 'stats_subject_telescope_types'),
-  
+
+      url(r'^gear/stats/total-images/(?P<id>\d+)/$',
+        views.stats_gear_total_images_ajax,
+        name = 'stats_gear_total_images'),
+ 
     url(r'^follow/(?P<username>[\w.@+-]+)/$', views.follow, name='follow'),
     url(r'^unfollow/(?P<username>[\w.@+-]+)/$', views.unfollow, name='unfollow'),
     url(r'^follow_gear/(?P<id>\d+)/$', views.follow_gear, name='follow_gear'),
@@ -223,8 +228,12 @@ urlpatterns = patterns('',
     url(r'^image_comments/edit/$', views.image_comment_edit, name='image_comment_edit'),
 
     url(r'^get_edit_gear_form/(?P<id>\d+)/$', views.get_edit_gear_form, name='get_edit_gear_form'),
+    url(r'^get_empty_edit_gear_form/(?P<gear_type>\w+)/$', views.get_empty_edit_gear_form, name='get_empty_edit_gear_form'),
     url(r'^save_gear_details/$', views.save_gear_details, name='save_gear_details'),
     url(r'^get_is_gear_complete/(?P<id>\d+)/$', views.get_is_gear_complete, name='get_is_gear_complete'),
+
+    url(r'^get_gear_user_info_form/(?P<id>\d+)/$', views.get_gear_user_info_form, name='get_gear_user_info_form'),
+    url(r'^save_gear_user_info/$', views.save_gear_user_info, name='save_gear_user_info'),
 
     url(r'^favorite_ajax/(?P<id>\d+)/$', views.favorite_ajax, name='favorite_ajax'),
 
@@ -232,6 +241,7 @@ urlpatterns = patterns('',
     url(r'^subject_popover_ajax/(?P<id>\d+)/$', views.subject_popover_ajax, name='subject_popover_ajax'),
 
     url(r'^subject/(?P<id>\d+)/$', views.subject_page, name='subject_page'),
+    url(r'^gear/(?P<id>\d+)/$', views.gear_page, name='gear_page'),
 
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
     url(r'^avatar/', include('avatar.urls')),

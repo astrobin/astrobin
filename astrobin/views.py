@@ -47,6 +47,7 @@ from shortcuts import *
 from tasks import *
 from search_indexes import xapian_escape
 from image_utils import make_image_of_the_day
+from gear import *
 
 import settings
 import pytz
@@ -120,58 +121,6 @@ def get_or_create_location(prop, value):
 
     return k
 
-
-def get_correct_gear(id):
-    types = (
-        Telescope,
-        Mount,
-        Camera,
-        FocalReducer,
-        Software,
-        Filter,
-        Accessory,
-    )
-    gear = None
-    gear_type = None
-    for type in types:
-        try:
-            gear = type.objects.get(id = id)
-            gear_type = gear.__class__.__name__
-            return (gear, gear_type)
-        except type.DoesNotExist:
-            continue
-
-    return (None, None)
-
-
-def is_gear_complete(id):
-    gear, gear_type = get_correct_gear(id)
-    
-    ret = False
-    if gear_type == 'Telescope':
-        ret = (gear.aperture != None and
-               gear.focal_length != None and
-               gear.type != None)
-    elif gear_type == 'Mount':
-        ret = (gear.max_payload != None and
-               gear.pe != None)
-    elif gear_type == 'Camera':
-        ret = (gear.pixel_size != None and
-               gear.sensor_width != None and
-               gear.sensor_height != None and
-               gear.type != None)
-    elif gear_type == 'FocalReducer':
-        ret = True
-    elif gear_type == 'Software':
-        ret = (gear.type != None)
-    elif gear_type == 'Filter':
-        ret = (gear.type != None and
-               gear.bandwidth != None)
-    elif gear_type == 'Accessory':
-        ret = True
-
-    ret = ret and (gear.make != None) and (gear.make != '')
-    return ret
 
 
 def jsonDump(all):
@@ -2112,22 +2061,50 @@ def user_profile_edit_gear(request):
     """Edits own profile"""
     profile = UserProfile.objects.get(user=request.user)
 
-    form = UserProfileEditGearForm()
-    response_dict = {
-        "form": form,
-        'initial': 'initial' in request.GET,
-    }
-    prefill_dict = {}
-    for attr in ["telescopes", "mounts", "cameras", "focal_reducers",
-                 "software", "filters", "accessories"]:
-        allGear = getattr(profile, attr).all()
-        prefill_dict[attr] = jsonDump(allGear)
-        form.fields[attr].initial = u', '.join(x.name for x in getattr(profile, attr).all())
+    def uniq(seq):
+       # Not order preserving
+       keys = {}
+       for e in seq:
+           keys[e] = 1
+       return keys.keys()
 
-    response_dict['prefill_dict'] = prefill_dict
+    response_dict = {
+        'initial': 'initial' in request.GET,
+        'all_gear_makes': simplejson.dumps(
+            uniq([x.make for x in Gear.objects.exclude(make = None).exclude(make = '')])),
+        'all_gear_names': simplejson.dumps(
+            uniq([x.name for x in Gear.objects.exclude(name = None).exclude(name = '')])),
+    }
+
+    prefill = {}
+    for attr, label, klass in (
+        ['telescopes', _("Telescopes and lenses"), 'Telescope'],
+        ['cameras', _("Cameras"), 'Camera'],
+        ['mounts', _("Mounts"), 'Mount'],
+        ['focal_reducers', _("Focal reducers"), 'FocalReducer'],
+        ['software', _("Software"), 'Software'],
+        ['filters', _("Filters"), 'Filter'],
+        ['accessories', _("Accessories"), 'Accessory']):
+        all_gear = getattr(profile, attr).all()
+        prefill[label] = [all_gear, klass]
+
+    response_dict['prefill'] = prefill
     return render_to_response("user/profile/edit/gear.html",
                               response_dict,
                               context_instance=RequestContext(request))
+
+
+@login_required
+@require_POST
+def user_profile_edit_gear_remove(request, id):
+    profile = UserProfile.objects.get(user = request.user)
+    gear, gear_type = get_correct_gear(id)
+    if not gear:
+        raise Http404
+
+    profile.remove_gear(gear, gear_type)
+
+    return ajax_success()
 
 
 @login_required
@@ -3146,8 +3123,34 @@ def get_edit_gear_form(request, id):
     elif gear_type == 'Accessory':
         form = AccessoryEditForm(instance = gear)
 
+    from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
     response_dict = {
-        'form': form.as_p() if form else '',
+        'form': as_bootstrap(form, 'horizontal') if form else '',
+    }
+
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
+
+
+@require_GET
+@login_required
+def get_empty_edit_gear_form(request, gear_type):
+    form_lookup = {
+        'Telescope': TelescopeEditForm,
+        'Mount': MountEditForm,
+        'Camera': CameraEditForm,
+        'FocalReducer': FocalReducerEditForm,
+        'Software': SoftwareEditForm,
+        'Filter': FilterEditForm,
+        'Accessory': AccessoryEditForm,
+    }
+
+    form = form_lookup[gear_type]()
+
+    from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
+    response_dict = {
+        'form': as_bootstrap(form, 'horizontal') if form else '',
     }
 
     return HttpResponse(
@@ -3158,35 +3161,83 @@ def get_edit_gear_form(request, id):
 @require_POST
 @login_required
 def save_gear_details(request):
-    id = request.POST.get('gear_id')
-    gear, gear_type = get_correct_gear(id)
+    gear = None
+    if 'gear_id' in request.POST:
+        id = request.POST.get('gear_id')
+        gear, gear_type = get_correct_gear(id)
+    else:
+        gear_type = request.POST.get('gear_type')
 
-    form = None
-    if gear_type == 'Telescope':
-        form = TelescopeEditForm(data = request.POST, instance = gear)
-    elif gear_type == 'Mount':
-        form = MountEditForm(data = request.POST, instance = gear)
-    elif gear_type == 'Camera':
-        form = CameraEditForm(data = request.POST, instance = gear)
-    elif gear_type == 'FocalReducer':
-        form = FocalReducerEditForm(data = request.POST, instance = gear)
-    elif gear_type == 'Software':
-        form = SoftwareEditForm(data = request.POST, instance = gear)
-    elif gear_type == 'Filter':
-        form = FilterEditForm(data = request.POST, instance = gear)
-    elif gear_type == 'Accessory':
-        form = AccessoryEditForm(data = request.POST, instance = gear)
 
-    if not form or not form.is_valid():
+    class_lookup = {
+        'Telescope': Telescope,
+        'Mount': Mount,
+        'Camera': Camera,
+        'FocalReducer': FocalReducer,
+        'Software': Software,
+        'Filter': Filter,
+        'Accessory': Accessory,
+    }
+
+    form_lookup = {
+        'Telescope': TelescopeEditForm,
+        'Mount': MountEditForm,
+        'Camera': CameraEditForm,
+        'FocalReducer': FocalReducerEditForm,
+        'Software': SoftwareEditForm,
+        'Filter': FilterEditForm,
+        'Accessory': AccessoryEditForm,
+    }
+
+    user_gear_lookup = {
+        'Telescope': 'telescopes',
+        'Mount': 'mounts',
+        'Camera': 'cameras',
+        'FocalReducer': 'focal_reducers',
+        'Software': 'software',
+        'Filter': 'filters',
+        'Accessory': 'accessories',
+    }
+
+    if not gear:
+        gear, created = class_lookup[gear_type].objects.get_or_create(
+            make = request.POST.get('make'),
+            name = request.POST.get('name'))
+
+    form = form_lookup[gear_type](data = request.POST, instance = gear)
+    if not form.is_valid():
+        from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
         response_dict = {
-            'form': form.as_p() if form else '',
+            'form': as_bootstrap(form, 'horizontal') if form else '',
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
             mimetype = 'application/javascript')
 
     form.save()
-    return ajax_success()
+
+    profile = UserProfile.objects.get(user = request.user)
+    user_gear = getattr(profile, user_gear_lookup[gear_type])
+    if gear not in user_gear.all():
+        user_gear.add(gear)
+
+    alias = _("no alias")
+    gear_user_info = GearUserInfo(gear = gear, user = request.user)
+    if gear_user_info.alias is not None and gear_user_info.alias != '':
+        alias = gear_user_info.alias
+
+    response_dict = {
+        'success': True,
+        'id': gear.id,
+        'make': gear.make,
+        'name': gear.name,
+        'alias': alias,
+        'complete': is_gear_complete(gear.id),
+    }
+
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
 
 
 @require_GET
@@ -3196,6 +3247,51 @@ def get_is_gear_complete(request, id):
     return HttpResponse(
         simplejson.dumps({'complete': is_gear_complete(id)}),
         mimetype = 'application/javascript')
+
+
+@require_GET
+@login_required
+@never_cache
+def get_gear_user_info_form(request, id):
+    gear = get_object_or_404(Gear, id = id)
+    gear_user_info, created = GearUserInfo.objects.get_or_create(
+        gear = gear,
+        user = request.user,
+    )
+
+    form = GearUserInfoForm(instance = gear_user_info)
+
+    from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
+    response_dict = {
+        'form': as_bootstrap(form, 'horizontal') if form else '',
+    }
+
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
+
+
+@require_POST
+@login_required
+def save_gear_user_info(request):
+    gear = get_object_or_404(Gear, id = request.POST.get('gear_id'))
+    gear_user_info, created = GearUserInfo.objects.get_or_create(
+        gear = gear,
+        user = request.user,
+    )
+
+    form = GearUserInfoForm(data = request.POST, instance = gear_user_info)
+    if not form.is_valid():
+        from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
+        response_dict = {
+            'form': as_bootstrap(form, 'horizontal') if form else '',
+        }
+        return HttpResponse(
+            simplejson.dumps(response_dict),
+            mimetype = 'application/javascript')
+
+    form.save()
+    return ajax_success()
 
 
 @require_GET
@@ -3328,6 +3424,35 @@ def subject_page(request, id):
 
 
 @require_GET
+def gear_page(request, id):
+    gear, gear_type = get_correct_gear(id)
+    if not gear:
+        raise Http404
+
+    image_attr_lookup = {
+        'Telescope': 'imaging_telescopes',
+        'Camera': 'imaging_cameras',
+        'Mount': 'mounts',
+        'FocalReducer': 'focal_reducers',
+        'Software': 'software',
+        'Filter': 'filters',
+        'Accessory': 'accessories',
+    }
+
+    all_images = Image.objects.filter(**{image_attr_lookup[gear_type]: gear})
+
+    return object_detail(
+        request,
+        queryset = Gear.objects.all(),
+        object_id = id,
+        template_name = 'gear/page.html',
+        template_object_name = 'gear',
+        extra_context = {
+            'examples': all_images.order_by('-rating_score')[:10],
+        })
+
+
+@require_GET
 def stats_subject_images_monthly_ajax(request, id):
     import stats as _s
 
@@ -3437,6 +3562,21 @@ def stats_subject_type_trend_ajax(request):
     (data, options) = _s.subject_type_trend()
 
     response_dict = {
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def stats_gear_total_images_ajax(request, id):
+    import stats as _s
+
+    (label, data, options) = _s.gear_total_images(id)
+
+    response_dict = {
+        'flot_label': label,
         'flot_data': data,
         'flot_options': options,
     }

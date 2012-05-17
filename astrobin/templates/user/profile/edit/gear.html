@@ -16,64 +16,96 @@
                     {% endif %}
                 </tr>
             </table>
-            <div class="well">
-                {% blocktrans %}Please use full names (make and model) for all your gear items!{% endblocktrans %}<br/>
-                {% blocktrans %}<span class="btn btn-primary">Orange</span> bubbles mean that you need to edit the properties of that gear item!{% endblocktrans %}
-            </div>
 
-            <form class="form-horizontal" method="post" action="{% url profile_save_gear %}">
-                {{form|as_bootstrap}}
-                {% if initial %}
-                <input type="hidden" name="initial"/>
-                {% endif %}
-                <noscript>
-                    <p class="hint">
-                    {% blocktrans %}* use a comma to separate the values.{% endblocktrans %}
-                    </p>
-                </noscript>
-                <div class="form-actions">
-                    <input class="btn btn-primary" type="submit" value="{% trans "Save" %}" />
-                </div>
-            </form>
+            {% for label, gear_items in prefill.items %}
+                {% list_gear label gear_items.0 gear_items.1 request.user %}
+            {% endfor %}
         </div> <!-- span12 -->
     </div> <!-- row -->
+{% endblock %}
+
+{% block modals %}
+    <div class="modal hide fade" id="edit-gear-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Edit gear item" %}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="well">
+                <strong>{% trans "Please note!" %}</strong>
+                {% blocktrans %}When you add or edit the make, the name, and the properties of this product, the data is global and shared between all AstroBin users. Do not write any information in there that refers to your personal copy of this product, like "modded", "sold", "broken", "a present from my aunt" and so on. {% endblocktrans %}
+            </div>
+
+            <form class="form-horizontal global" action="{% url save_gear_details %}" method="post">
+                <div class="form-content"></div>
+                <input type="hidden" name="gear_id" value="" />
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-primary" value="{% trans "Save" %}"/>
+                    <input type="button" class="btn close-modal" value="{% trans "Close" %}"/>
+                </div>
+            </form>
+
+            <div class="well">
+                {% blocktrans %}The following information, instead, is personal, and may refer to your copy of this product.{% endblocktrans %}
+            </div>
+
+            <form class="form-horizontal custom" action="{% url save_gear_user_info %}" method="post">
+                <div class="form-content"></div>
+                <input type="hidden" name="gear_id" value="" />
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-primary" value="{% trans "Save" %}"/>
+                    <input type="button" class="btn close-modal" value="{% trans "Close" %}"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="add-gear-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Add gear item" %}</h3>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" action="{% url save_gear_details %}" method="post">
+                <div class="form-content"></div>
+                <div class="form-actions">
+                    <input type="submit" name="save" class="btn btn-primary" value="{% trans "Save" %}" />
+                </div>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block extra_js %}
     <script language="javascript">
     $(document).ready(function() {
-        var startText = "";
-        var emptyText = "{% trans "No results. Press TAB to add it!" %}";
-        var resultsTitleText = "{% trans "Click on a suggestion or press TAB to add what you typed" %}";
-        {% autoescape off %}
-        {% for key, value in prefill_dict.items %}
-        $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
-            {asHtmlID: '{{key}}',
-            searchObjProps: 'name',
-            preFill: {{value}},
-            selectedItemProp: 'id',
-            selectedValuesProp: 'name',
-            startText: startText,
-            emptyText: emptyText,
-            resultsTitleText: resultsTitleText,
-            allowEdit: true});
-        {% endfor %}
-        {% endautoescape %}
-
-        // returns a timestamp. Used to avoid IE caching Ajax requests
-        function myTimestamp() {
-            tstmp = new Date();    
-            return tstmp.getTime();
-        }
-
-        $('.as-edit').live('click', function(event) {
+        $('.btn-gear .remove').live('click', function(event) {
             event.preventDefault();
 
-            var id = $(this).data('id');
-            var name = $(this).siblings('.data').text();
-            var $dlg = $('<div/>').attr('title', name);
-            var type = $(this).closest('ul.as-selections').attr('id').replace('as-selections-', '');
-            var $item_li = $(this).closest('li.as-selection-item');
+            var $link = $(this);
+            var $btn = $link.closest('.btn-gear');
+            var id = $btn.attr('id');
+
+            $.ajax({
+                url: '/profile/edit/gear/remove/' + id + '/',
+                dataType: 'json',
+                timeout: 10000,
+                cache: false,
+                type: 'POST',
+                success: function() {
+                    $link.tooltip('hide');
+                    $btn.remove();
+                }
+            });
+        });
+
+        $('.btn-gear .edit').live('click', function(event) {
+            event.preventDefault();
+
+            var $btn_gear = $(this).closest('.btn-gear');
+            var id = $btn_gear.attr('id');
 
             $.ajax({
                 url: '/get_edit_gear_form/' + id + '/',
@@ -81,21 +113,36 @@
                 timeout: 10000,
                 cache: false,
                 success: function(data, textStatus, XMLHttpRequest) {
-                    var $form;
+                    var $dlg = $('#edit-gear-modal');
+                    var $form = $dlg.find('form.global');
+
+                    $form.find('.form-content').html(data['form']);
+                    $form.find('input[name=gear_id]').val(id);
+
+                    $form.find('input, select').bind('change keyup', function(event) {
+                        var $btn = $form.find('.btn-primary')
+                        $btn.val("Save");
+                    });
+
+                    $form.find('.close-modal').click(function(event) {
+                        $dlg.modal('hide');
+                    });
 
                     var ajaxFormOptions = {
                         dataType: 'json',
                         beforeSubmit: function(formData, $form, options) {
-                            var $btn = $dlg.find('.btn-primary')
+                            var $btn = $form.find('.btn-primary')
                             $btn.addClass('disabled');
                             $btn.val("...");
                         },
                         success: function(responseJson, statusText, xhr, $form) {
+                            var $btn = $form.find('.btn-primary')
+                            $btn.removeClass('disabled');
+                            $btn.val("{% trans "Form saved. Thank you!" %}");
+
                             if (responseJson['success']) {
-                                var $btn = $dlg.find('.btn-primary')
-                                $btn.removeClass('disabled');
-                                $btn.val("{% trans "Save" %}");
-                                $dlg.dialog('close');
+                                $btn_gear.find('.make').text($form.find('input[name=make]').val());
+                                $btn_gear.find('.name').text($form.find('input[name=name]').val());
 
                                 $.ajax({
                                     url: '/get_is_gear_complete/' + id + '/',
@@ -104,42 +151,171 @@
                                     cache: false,
                                     success: function(data, textStatus, XMLHttpRequest) {
                                         if (data['complete'])
-                                            $item_li.removeClass('need-data btn-primary');
+                                            $btn_gear.removeClass('incomplete');
                                         else
-                                            $item_li.addClass('need-data btn-primary');
+                                            $btn_gear.addClass('incomplete');
                                     }
                                 });
                             } else {
-                                $form = createForm(responseJson, id); 
+                                $form.find('.form-content').html(responseJson['form']);
                             }
+
                         },
                         error: function(responseText, statusText, xhr, $form) {
-                            var $btn = $dlg.find('.btn-primary')
+                            var $btn = $form.find('.btn-primary')
                             $btn.removeClass('disabled');
                             $btn.val("{% trans "Save" %}");
                         }
                     };
 
-                    var createForm = function(data, id) {
-                        var $form = $dlg.find('form').remove();
-                        $dlg.append("\
-                            <form action=\"{% url save_gear_details %}\" method=\"post\">" +
-                                data['form'] + "\
-                                <input type=\"hidden\" name=\"gear_id\" value=\"" + id + "\"/>\
-                                <input type=\"submit\" class=\"btn btn-primary\" value=\"{% trans "Save" %}\"/>\
-                            </form>\
-                        ");
-                        $form = $dlg.find('form');
-                        $form.ajaxForm(ajaxFormOptions);
-                        return $form;
+                    $form.ajaxForm(ajaxFormOptions);
+                },
+                error: function(XmlHttpRequest, textStatus, errorThrown) {
+                    alert("Error: " + textStatus);
+                }
+            });
+
+            $.ajax({
+                url: '/get_gear_user_info_form/' + id + '/',
+                dataType: 'json',
+                timeout: 10000,
+                cache: false,
+                success: function(data, textStatus, XMLHttpRequest) {
+                    var $dlg = $('#edit-gear-modal');
+                    var $form = $dlg.find('form.custom');
+
+                    $form.find('.form-content').html(data['form']);
+                    $form.find('input[name=gear_id]').val(id);
+
+                    $form.find('input, select').bind('change keyup', function(event) {
+                        var $btn = $form.find('.btn-primary')
+                        $btn.val("Save");
+                    });
+
+                    $form.find('.close-modal').click(function(event) {
+                        $dlg.modal('hide');
+                    });
+
+                    var ajaxFormOptions = {
+                        dataType: 'json',
+                        beforeSubmit: function(formData, $form, options) {
+                            var $btn = $form.find('.btn-primary')
+                            $btn.addClass('disabled');
+                            $btn.val("...");
+                        },
+                        success: function(responseJson, statusText, xhr, $form) {
+                            var $btn = $form.find('.btn-primary')
+                            $btn.removeClass('disabled');
+                            $btn.val("{% trans "Form saved. Thank you!" %}");
+
+                            if (responseJson['success']) {
+                                var alias = $form.find('input[name=alias]').val();
+                                if (alias != '')
+                                    $btn_gear.find('.alias').text('(' + alias + ')');
+                            } else {
+                                $form.find('.form-content').html(responseJson['form']);
+                            }
+                        },
+                        error: function(responseText, statusText, xhr, $form) {
+                            var $btn = $form.find('.btn-primary')
+                            $btn.removeClass('disabled');
+                            $btn.val("{% trans "Save" %}");
+                        }
                     };
 
-                    $form = createForm(data, id);
+                    $form.ajaxForm(ajaxFormOptions);
+                },
+                error: function(XmlHttpRequest, textStatus, errorThrown) {
+                    alert("Error: " + textStatus);
+                }
+            })
 
-                    $dlg.dialog({
-                        resizable: true,
-                        modal: true
-                    });
+            return false;
+        });
+
+        $('.add-gear').click(function(event) {
+            var $add_btn = $(this);
+            var gear_type = $add_btn.attr('data-klass');
+
+            $.ajax({
+                url: '/get_empty_edit_gear_form/' + gear_type + '/',
+                dataType: 'json',
+                timeout: 10000,
+                cache: false,
+                success: function(data, textStatus, XMLHttpRequest) {
+                    var $dlg = $('#add-gear-modal');
+                    var $form = $dlg.find('form');
+
+                    $form.find('.form-content').html(data['form']);
+
+                    $form.find('.form-content').append(
+                        '<input type="hidden" name="gear_type" value="' + gear_type + '" />');
+                    $form.find('input[name=make]').attr('data-provide', 'typeahead');
+                    $form.find('input[name=make]').attr('data-source', '{{all_gear_makes|safe|addslashes}}');
+
+                    $form.find('input[name=name]').attr('data-provide', 'typeahead');
+                    $form.find('input[name=name]').attr('data-source', '{{all_gear_names|safe|addslashes}}');
+
+                    var ajaxFormOptions = {
+                        dataType: 'json',
+                        beforeSubmit: function(formData, $form, options) {
+                            var $btn = $form.find('input[name=save]')
+                            $btn.addClass('disabled');
+                            $btn.val("...");
+                        },
+                        success: function(responseJson, statusText, xhr, $form) {
+                            var $btn = $form.find('input[name=save]')
+                            $btn.removeClass('disabled');
+                            $btn.val("{% trans "Save" %}");
+
+                            if (responseJson['success']) {
+                                $dlg.modal('hide');
+
+                                var template = '\
+                                    <div class="btn btn-gear">\
+                                        <div class="labels">\
+                                            <div class="make"></div>\
+                                            <div class="name"></div>\
+                                            <div class="alias"></div>\
+                                        </div>\
+                                        <div class="actions">\
+                                            <a href="#" class="remove" rel="tooltip" title="{% trans "Remove" %}">\
+                                                <i class="icon-trash"></i>\
+                                            </a>\
+                                            <a href="#edit-gear-modal" class="edit" data-toggle="modal" rel="tooltip" title="{% trans "Edit" %}">\
+                                                <i class="icon-pencil"></i>\
+                                            </a>\
+                                            <a href="#" class="page" rel="tooltip" title="{% trans "View page" %}">\
+                                                <i class="icon-info-sign"></i>\
+                                            </a>\
+                                        </div>\
+                                    </div>'
+                                var $new_button = $(template);
+                                $new_button.attr('id', responseJson['id']);
+                                $new_button.find('.make').text(responseJson['make']);
+                                $new_button.find('.name').text(responseJson['name']);
+                                $new_button.find('.alias').text('(' + responseJson['alias'] + ')');
+
+                                if(responseJson['complete'] == false) {
+                                    $new_button.addClass('incomplete');
+                                }
+
+                                var $content = $add_btn.closest('.list-gear').find('.content');
+                                $content.find('.no-gear').remove();
+                                $content.append($new_button);
+                            } else {
+                                $form.find('.form-content').html(responseJson['form']);
+                            }
+
+                        },
+                        error: function(responseText, statusText, xhr, $form) {
+                            var $btn = $form.find('input[name=save]')
+                            $btn.removeClass('disabled');
+                            $btn.val("{% trans "Save" %}");
+                        }
+                    };
+
+                    $form.ajaxForm(ajaxFormOptions);
                 },
                 error: function(XmlHttpRequest, textStatus, errorThrown) {
                     alert("Error: " + textStatus);
@@ -149,4 +325,4 @@
     });
     </script>
 {% endblock %}
-
+e

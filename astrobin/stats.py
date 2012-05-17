@@ -671,3 +671,59 @@ def subject_type_trend():
 
     return (flot_data, flot_options)
 
+
+def gear_total_images(gear_id):
+    period = 'monthly'
+    _map = {
+        'monthly': (_("Total images"), '%Y-%m'),
+    }
+
+    flot_label = _map[period][0]
+    flot_data = []
+    flot_options = {
+        'xaxis': {'mode': 'time'},
+        'lines': {'show': 'true', 'fill': 'true'},
+        'points': {'show': 'true'},
+        'legend': {
+            'position': 'nw',
+            'backgroundColor': '#000000',
+            'backgroundOpacity': 0.75},
+        'grid': {'hoverable': 'true'},
+    }
+
+    gear = Gear.objects.get(id = gear_id)
+    all = Image.objects.filter(
+        Q(imaging_telescopes = gear) |
+        Q(guiding_telescopes = gear) |
+        Q(imaging_cameras = gear) |
+        Q(guiding_cameras = gear) |
+        Q(mounts = gear) |
+        Q(focal_reducers = gear) |
+        Q(filters = gear) |
+        Q(software = gear) |
+        Q(accessories = gear)).order_by('uploaded')
+
+    data = {}
+    total = 0
+    for i in all:
+        key = i.uploaded.date().strftime(_map[period][1])
+        if key in data:
+            total += 1
+            data[key] = total
+        else:
+            total += 1
+            data[key] = total
+
+    if all:
+        for date in daterange(all[0].uploaded.date(), datetime.today().date()):
+            grouped_date = date.strftime(_map[period][1])
+            t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+            if grouped_date in data.keys():
+                flot_data.append([t, data[grouped_date]])
+            else:
+                flot_data.append([t, 0])
+        flot_data = unique_items(flot_data)
+
+    return (flot_label, flot_data, flot_options)
+
+

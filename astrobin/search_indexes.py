@@ -13,6 +13,8 @@ from astrobin.models import UserProfile
 from astrobin.models import Favorite
 from astrobin.models import Comment
 
+from astrobin.templatetags.tags import gear_name
+
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -145,6 +147,8 @@ class ImageIndex(SearchIndex):
         return Image
 
     def prepare_title(self, obj):
+        print "Indexing image %d: %s" % (obj.id, obj.title)
+
         value = obj.title
 
         match = re.match(r'.*\s+m\s*(?P<id>\d+).*', obj.title.lower())
@@ -181,31 +185,31 @@ class ImageIndex(SearchIndex):
         return _join_stripped(subjects)
 
     def prepare_imaging_telescopes(self, obj):
-        return _join_stripped([i.name for i in obj.imaging_telescopes.all()])
+        return _join_stripped(["%s" % gear_name(i) for i in obj.imaging_telescopes.all()])
 
     def prepare_guiding_telescopes(self, obj):
-        return _join_stripped([i.name for i in obj.guiding_telescopes.all()])
+        return _join_stripped(["%s" % gear_name(i) for i in obj.guiding_telescopes.all()])
 
     def prepare_mounts(self, obj):
-        return _join_stripped([i.name for i in obj.mounts.all()])
+        return _join_stripped(["%s" % gear_name(i) for i in obj.mounts.all()])
 
     def prepare_imaging_cameras(self, obj):
-        return _join_stripped([i.name for i in obj.imaging_cameras.all()])
+        return _join_stripped(["%s" % gear_name(i) for i in obj.imaging_cameras.all()])
 
     def prepare_guiding_cameras(self, obj):
-        return _join_stripped([i.name for i in obj.guiding_cameras.all()])
+        return _join_stripped(["%s" % gear_name(i) for i in obj.guiding_cameras.all()])
 
     def prepare_focal_reducers(self, obj):
-        return _join_stripped([i.name for i in obj.focal_reducers.all()])
+        return _join_stripped(["%s" % gear_name(i) for i in obj.focal_reducers.all()])
 
     def prepare_software(self, obj):
-        return _join_stripped([i.name for i in obj.software.all()])
+        return _join_stripped(["%s" % gear_name(i) for i in obj.software.all()])
 
     def prepare_filters(self, obj):
-        return _join_stripped([i.name for i in obj.filters.all()])
+        return _join_stripped(["%s" % gear_name(i) for i in obj.filters.all()])
 
     def prepare_accessories(self, obj):
-        return _join_stripped([i.name for i in obj.accessories.all()])
+        return _join_stripped(["%s" % gear_name(i) for i in obj.accessories.all()])
 
     def prepare_rating(self, obj):
         votes = obj.rating.votes

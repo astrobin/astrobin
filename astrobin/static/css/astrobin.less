@@ -1121,6 +1121,9 @@ input:focus, textarea:focus {
     width: 620px;
     max-width: 96%;
 }
+.form-horizontal label {
+    font-weight: bold;
+}
 
 .form-inline {
     label {
@@ -1847,34 +1850,82 @@ div.favorite-container {
         .search-button {
             width: 100%;
         }
-        
-        .search-category {
-            .stitched-box;
-            background: @light-panel-color url('../images/light-panel-tile.png');
-            margin: 0 0 @spacer-medium 0;
-            padding: 0;
+    }
+}
 
-            .header {
-                color: @strong-text-color;
-                background: @dark-panel-color;
-                padding: @spacer-medium @spacer-small;
-                border-bottom: 1px dashed @border-top-color * @hilight-factor;
+.search-category, .list-gear {
+    .stitched-box;
+    background: @light-panel-color url('../images/light-panel-tile.png');
+    margin: 0 0 @spacer-medium 0;
+    padding: 0;
 
-                .title {
-                    font-weight: bold;
-                }
-                .control {
-                    font-family: Mono;
-                    letter-spacing: 2px;
-                    float: right;
-                    font-size: 80%;
-                    margin-right: @spacer-medium;
-                }
-            }
-            .content {
-                padding: @spacer-medium;
-            }
+    .header {
+        color: @strong-text-color;
+        background: @dark-panel-color;
+        padding: @spacer-medium @spacer-small;
+        border-bottom: 1px dashed @border-top-color * @hilight-factor;
+
+        .title {
+            font-weight: bold;
+            text-transform: uppercase;
         }
+        .control {
+            font-family: Mono;
+            letter-spacing: 2px;
+            float: right;
+            font-size: 80%;
+            margin-right: @spacer-medium;
+        }
+    }
+    .content {
+        padding: @spacer-medium;
+    }
+
+    .actions {
+        padding: @spacer-medium;
+        text-align: right;
+        border-top: 1px solid #4a4a4a;
+    }
+}
+
+.btn-gear {
+    text-align: left;
+    cursor: default;
+    margin: 2px;
+
+    .labels {
+        float: left;
+        padding-right: 8px;
+        border-right: 1px solid white;
+
+        .make {
+        }
+
+        .name {
+            font-weight: bold;
+        }
+
+        .alias {
+            font-size: 85%;
+            font-style: italic;
+            color: #555;
+        }
+    }
+
+    .actions {
+        float: right;
+        width: 16px;
+        padding: 0 0 0 @spacer-medium;
+        border-left: 1px solid #ddd;
+        border-top: 0;
+    }
+}
+
+.btn-gear.incomplete {
+    .labels {
+        color: @link-color;
+        border-left: 12px solid @link-color;
+        padding-left: 4px;
     }
 }
 
@@ -2379,3 +2430,9 @@ form.avatar-change label.control-label {display: none;}
         background-color: #FADDD6;
     }
 }
+
+.help-block {
+    font-size: 90%;
+    font-style: italic;
+}
+

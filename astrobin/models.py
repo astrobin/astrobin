@@ -123,18 +123,68 @@ WATERMARK_POSITION_CHOICES = (
 class Gear(models.Model):
     make = models.CharField(
         verbose_name = _("Make"),
+        help_text = _("The make, brand, producer or developer of this product."),
         max_length = 128,
         null = True,
         blank = True,
     )
-    name = models.CharField(_("Name"), max_length=64)
+
+    name = models.CharField(
+        verbose_name = _("Name"),
+        help_text = _("Just the name of this product, without any properties or personal customizations. Try to use the international name, in English language, if applicable. This name is shared among all users on AstroBin."),
+        max_length = 64,
+        null = False,
+        blank = False,
+    )
+
     master = models.ForeignKey('self', null = True, editable = False)
+
+    updated = models.DateTimeField(
+        editable = False,
+        auto_now = True,
+        null = True,
+        blank = True,
+    )
 
     def __unicode__(self):
         return self.name
 
     class Meta:
         app_label = 'astrobin'
+
+
+class GearUserInfo(models.Model):
+    gear = models.ForeignKey(
+        Gear,
+        editable = False,
+    )
+
+    user = models.ForeignKey(
+        User,
+        editable = False,
+    )
+
+    alias = models.CharField(
+        verbose_name = _("Alias"),
+        help_text = _("A descriptive name, alias or nickname for your own copy of this product."),
+        max_length = 128,
+        null = True,
+        blank = True,
+    )
+
+    comment = models.TextField(
+        verbose_name = _("Comment"),
+        help_text = _("Information, description or comment about your own copy of this product."),
+        null = True,
+        blank = True,
+    )
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        app_label = 'astrobin'
+        unique_together = ('gear', 'user')
 
 
 class GearAssistedMerge(models.Model):
@@ -1196,6 +1246,18 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         return '/users/%s' % self.user.username
+
+    def remove_gear(self, gear, gear_type):
+        resolve = {
+            'Telescope': 'telescopes',
+            'Mount': 'mounts',
+            'Camera': 'cameras',
+            'FocalReducer': 'focal_reducers',
+            'Software': 'software',
+            'Filter': 'filters',
+            'Accessory': 'accessories',
+        }
+        getattr(self, resolve[gear_type]).remove(gear)
 
     class Meta:
         app_label = 'astrobin'

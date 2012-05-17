@@ -977,6 +977,9 @@ textarea:focus {
   width: 620px;
   max-width: 96%;
 }
+.form-horizontal label {
+  font-weight: bold;
+}
 .form-inline label {
   margin-right: 8px;
 }
@@ -1671,7 +1674,8 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .advanced-search-box form .search-button {
   width: 100%;
 }
-.advanced-search-box form .search-category {
+.search-category,
+.list-gear {
   margin-bottom: 4px;
   padding: 8px;
   border: 1px dashed #505050;
@@ -1682,24 +1686,65 @@ div.favorite-container a.favorite:hover .favorite-hint {
   margin: 0 0 8px 0;
   padding: 0;
 }
-.advanced-search-box form .search-category .header {
+.search-category .header,
+.list-gear .header {
   color: #fcfcfc;
   background: #2e2e2e;
   padding: 8px 4px;
   border-bottom: 1px dashed #505050;
 }
-.advanced-search-box form .search-category .header .title {
+.search-category .header .title,
+.list-gear .header .title {
   font-weight: bold;
+  text-transform: uppercase;
 }
-.advanced-search-box form .search-category .header .control {
+.search-category .header .control,
+.list-gear .header .control {
   font-family: Mono;
   letter-spacing: 2px;
   float: right;
   font-size: 80%;
   margin-right: 8px;
 }
-.advanced-search-box form .search-category .content {
+.search-category .content,
+.list-gear .content {
   padding: 8px;
+}
+.search-category .actions,
+.list-gear .actions {
+  padding: 8px;
+  text-align: right;
+  border-top: 1px solid #4a4a4a;
+}
+.btn-gear {
+  text-align: left;
+  cursor: default;
+  margin: 2px;
+}
+.btn-gear .labels {
+  float: left;
+  padding-right: 8px;
+  border-right: 1px solid white;
+}
+.btn-gear .labels .name {
+  font-weight: bold;
+}
+.btn-gear .labels .alias {
+  font-size: 85%;
+  font-style: italic;
+  color: #555;
+}
+.btn-gear .actions {
+  float: right;
+  width: 16px;
+  padding: 0 0 0 8px;
+  border-left: 1px solid #ddd;
+  border-top: 0;
+}
+.btn-gear.incomplete .labels {
+  color: #cc4b2e;
+  border-left: 12px solid #cc4b2e;
+  padding-left: 4px;
 }
 .search-results {
   padding: 0 68px;
@@ -2187,4 +2232,8 @@ form.avatar-change label.control-label {
 }
 .notice-container .unread {
   background-color: #FADDD6;
+}
+.help-block {
+  font-size: 90%;
+  font-style: italic;
 }

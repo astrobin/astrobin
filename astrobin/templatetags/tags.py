@@ -20,6 +20,7 @@ from persistent_messages import models as messages
 from celery.result import AsyncResult
 
 from astrobin.models import Request
+from astrobin.gear import *
 
 register = Library() 
 
@@ -95,14 +96,14 @@ def form_saved(request):
 @register.filter
 def ago(date_time):
     date_time = date_time.replace(tzinfo = None)
-    diff = abs(date_time - datetime.today())
+    diff = abs(date_time - datetime.datetime.today())
     if diff.days <= 0:
         span = timesince(date_time)
         span = span.split(",")[0] # just the most significant digit
         if span == "0 " + _("minutes"):
             return _("seconds ago")
         return _("%s ago") % span 
-    return datetime.date(date_time)  
+    return datetime.datetime.date(date_time)  
 
 
 @register.tag
@@ -456,3 +457,42 @@ def search_form_query():
         query += '&amp;camera_type=%d' % i
 
     return query
+
+
+@register.inclusion_tag('inclusion_tags/list_gear.html')
+def list_gear(label, gear, klass, user):
+    return {
+        'label': label,
+        'gear': gear,
+        'klass': klass,
+        'user': user,
+    }
+
+
+@register.simple_tag
+def gear_complete_class(gear):
+    return 'incomplete' if not is_gear_complete(gear.id) else ''
+
+
+@register.simple_tag
+def gear_alias(gear, user):
+    default = _("no alias")
+
+    try:
+        gear_user_info = GearUserInfo.objects.get(gear = gear, user = user)
+        if gear_user_info.alias:
+            return gear_user_info.alias
+    except GearUserInfo.DoesNotExist:
+        pass
+
+    return default
+
+
+@register.simple_tag
+def gear_name(gear):
+    if gear.make and gear.make.lower() in gear.name.lower():
+        return gear.name
+    if not gear.make or gear.make == '':
+        return gear.name
+    return "%s %s" % (gear.make, gear.name)
+
