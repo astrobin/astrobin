@@ -15,8 +15,6 @@ from PIL import ImageDraw
 
 import StringIO
 
-from image_utils import *
-
 
 def download_from_bucket(filename, path):
     import urllib2
@@ -81,6 +79,10 @@ def watermark_image(image, text, position, opacity):
 
 
 def store_image_in_backend(path, image_model):
+    from image_utils import scale_dimensions_for_cropping, scale_dimensions,\
+                            crop_box, crop_box_max, generate_histogram
+
+
     format_map = {'image/jpeg':('JPEG', '.jpg'),
                   'image/png' :('PNG', '.png'),
                   'image/gif' :('GIF', '.gif'),
