@@ -12,13 +12,6 @@ import tempfile
 import StringIO
 from datetime import datetime
 
-def scale_dimensions(w, h, longest_side):
-    if w > longest_side:
-        ratio = longest_side*1./w
-    else:
-        ratio = 1
-
-    return (int(w*ratio), int(h*ratio))
 
 def scale_dimensions_for_cropping(w, h, shortest_side):
     if w < shortest_side and h < shortest_side:
@@ -29,6 +22,16 @@ def scale_dimensions_for_cropping(w, h, shortest_side):
         ratio = shortest_side*1./w
 
     return (int(w*ratio), int(h*ratio))
+
+
+def scale_dimensions(w, h, longest_side):
+    if w > longest_side:
+        ratio = longest_side*1./w
+    else:
+        ratio = 1
+
+    return (int(w*ratio), int(h*ratio))
+
 
 def crop_box(w, h):
     if w > h:
