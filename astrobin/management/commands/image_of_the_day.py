@@ -32,17 +32,17 @@ class Command(BaseCommand):
                     score = 0
                     for vote in image.votes.all():
                         score += vote.score 
- 
+
                     times_favorited = Favorite.objects.filter(image = image).count()
                     comments = Comment.objects.filter(image = image).count()
-    
+
                     coolness = score + (times_favorited * 3) + (comments * 5)
 
-                    print "Examining: [%s] [%d]" % (image.title, coolness)
+                    print "Examining: [%s] [%d/%d]" % (image.title.encode('utf-8'), coolness, current_coolness)
                     if coolness > current_coolness:
                         coolest_image = image
                         current_coolness = coolness
-                        print "Coolest image: [%s] [%d]" % (image.title, coolness)
+                        print "\tCoolest image: [%s] [%d]" % (image.title.encode('utf-8'), coolness)
             else:
                 yesterday = yesterday - timedelta(1)
 
