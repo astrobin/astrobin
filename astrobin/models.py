@@ -494,7 +494,6 @@ class Image(models.Model):
         verbose_name = _("Subject type"),
         null = True,
         choices = SUBJECT_TYPE_CHOICES,
-        default = 600,
     )
 
     subjects = models.ManyToManyField(

@@ -2311,6 +2311,7 @@ def user_profile_flickr_import(request):
                                   user=request.user,
                                   title=title if title is not None else '',
                                   description=description if description is not None else '',
+                                  subject_type = 600, # Default to Other only when doing a Flickr import
                                   license = profile.default_license)
                     image.save()
                     image.process()
