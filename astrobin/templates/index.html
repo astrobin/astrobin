@@ -45,7 +45,7 @@
                     <div class="image-of-the-day">
                         <h2>{% trans "Image of the day" %}!</h2>
                         <a href="{% url image_detail iotd.image.id %}">
-                            <img src="http://{{s3_url}}/astrobin_images/{{iotd.filename}}.jpg"
+                            <img src="http://{{s3_url}}/{{bucket_name}}/{{iotd.filename}}.jpg"
                                  alt="{{iotd.image.title|default:_("(no title)")}}"/>
                         </a>
                         <div class="info visible-desktop">

@@ -294,23 +294,23 @@
                                     {% with revision_image as image %}
                                         {% if inverted %}
                                         <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id, mod='inverted'" "plate_solving_started" %}">
-                                            <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
+                                            <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                                         </a>
                                         {% endif %}
                                         {% if not inverted and not solved %}
                                         <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id" "mod, plate_solving_started" %}">
-                                            <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                            <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                         </a>
                                         {% endif %}
                                     {% endwith %}
                                 {% else %}
                                     {% if inverted %}
                                         <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                            <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                            <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_resized_inverted{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                         </a>
                                         {% if image.is_solved and image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                                <img class="plot-overlay" src="http://{{s3_url}}/astrobin_images/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
+                                                <img class="plot-overlay" src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
                                             </a>
                                         {% endif %}
                                     {% endif %}
@@ -318,25 +318,25 @@
                                     {% if solved %}
                                         {% if image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                                <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                             </a>
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img class="fixed-plot-overlay" src="http://{{s3_url}}/astrobin_images/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" style="left:{{plot_overlay_left}}px"/>
+                                                <img class="fixed-plot-overlay" src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" style="left:{{plot_overlay_left}}px"/>
                                             </a>
                                         {% else %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" />
+                                                <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" />
                                             </a>
                                         {% endif %}
                                     {% endif %}
 
                                     {% if not inverted and not solved %}
                                         <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                            <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                            <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                         </a>
                                         {% if image.is_solved and image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img class="plot-overlay" src="http://{{s3_url}}/astrobin_images/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
+                                                <img class="plot-overlay" src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
                                             </a>
                                         {% endif %}
                                     {% endif %}
@@ -434,14 +434,14 @@
                             {% if is_revision %}
                             <li class="thumbnail astrobin-thumbnail">
                                 <a href="{% url image_detail image.id %}{% query_string "r=0" "plate_solving_started, mod" %}">
-                                    <img {% if image.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://{{s3_url}}/astrobin_images/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+                                    <img {% if image.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
                                 </a>
                             </li>
                             {% endif %}
                             {% for i in revisions %}
                             <li class="thumbnail astrobin-thumbnail">
                                 <a href="{% url image_detail i.image.id %}{% query_string "r=i.id" "plate_solving_started, mod" %}">
-                                    <img {% if i.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://{{s3_url}}/astrobin_images/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+                                    <img {% if i.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
                                 </a>
                             </li>
                             {% endfor %}
@@ -475,7 +475,7 @@
                                         {% endfor %}
                                         {% if is_ready and not image.animated %}
                                             <div class="image-histogram">
-                                                <img src="http://{{s3_url}}/astrobin_images/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
+                                                <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
                                             </div>
                                         {% endif %}
                                     </div>
@@ -902,33 +902,33 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}][IMG]http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
-                    "[URL=http://astrob.in/{{image.id}}/][IMG]http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{image.id}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
         } else
         if (sharing_mode == 1 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}&mod=inverted][IMG]http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}&mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
-                    "[URL=http://astrob.in/{{image.id}}/?mod=inverted][IMG]http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{image.id}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
         } else
         if (sharing_mode == 1 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}][IMG]http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
-                    "[URL=http://astrob.in/full/{{image.id}}/][IMG]http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{image.id}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
         } else
         if (sharing_mode == 1 && image_size == 1 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}&mod=inverted][IMG]http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}&mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
-                    "[URL=http://astrob.in/full/{{image.id}}/?mod=inverted][IMG]http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{image.id}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
         } else
         if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 1) {
@@ -967,33 +967,33 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}\"><img src=\"http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% else %}
-                    "<a href=\"http://astrob.in/{{image.id}}/\"><img src=\"http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/{{image.id}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% endif %}
         } else
         if (sharing_mode == 2 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}&mod=inverted\"><img src=\"http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/?r={{revision_image.id}}&mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% else %}
-                    "<a href=\"http://astrob.in/{{image.id}}/?mod=inverted\"><img src=\"http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png\"/><a>"
+                    "<a href=\"http://astrob.in/{{image.id}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/><a>"
                 {% endif %}
         } else
         if (sharing_mode == 2 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}\"><img src=\"http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% else %}
-                    "<a href=\"http://astrob.in/full/{{image.id}}/\"><img src=\"http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{image.id}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% endif %}
         } else
         if (sharing_mode == 2 && image_size == 1 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}&mod=inverted\"><img src=\"http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/?r={{revision_image.id}}&mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% else %}
-                    "<a href=\"http://astrob.in/full/{{image.id}}/?mod=inverted\"><img src=\"http://{{s3_url}}/astrobin_images/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{image.id}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% endif %}
         } else
         if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 1) {

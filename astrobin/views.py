@@ -144,6 +144,7 @@ def index(request):
     response_dict = {
         'small_size': settings.SMALL_THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
     }
 
     profile = None
@@ -211,6 +212,7 @@ def wall(request):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
     }
 
     if request.GET.get('sort') == '-acquired':
@@ -278,6 +280,7 @@ def popular(request):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
 
         'min_lat': 0,
         'max_lat': 90,
@@ -399,6 +402,7 @@ def messier(request):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
     }
 
     return object_list(
@@ -417,6 +421,7 @@ def messier_nomination(request, id):
 
     response_dict = {
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'image': image,
         'has_messier': False,
         'has_multiple_messier': False,
@@ -451,6 +456,7 @@ def messier_nomination_process(request):
 
     response_dict = {
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'image': image,
         'already_nominated': False,
     }
@@ -507,6 +513,7 @@ def fits(request):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
     }
 
     return object_list(
@@ -741,6 +748,7 @@ def image_detail(request, id):
         preferred_language = _("English")
 
     response_dict = {'s3_url': settings.S3_URL,
+                     'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
                      'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
                      'resized_size': resized_size,
                      'already_voted': already_voted,
@@ -825,6 +833,7 @@ def image_full(request, id):
         template_object_name = 'image',
         extra_context = {
             's3_url': settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
             'revision_image': revision_image,
             'real': 'real' in request.GET,
         })
@@ -931,6 +940,7 @@ def image_edit_basic(request, id):
     return render_to_response('image/edit/basic.html',
         {'image':image,
          's3_url':settings.S3_URL,
+         'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
          'form':form,
          'prefill_dict': {
             'subjects': [jsonDumpSubjects(image.subjects.all()),
@@ -987,6 +997,7 @@ def image_edit_gear(request, id):
     response_dict = {
         'form': form,
         's3_url':settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'is_ready':image.is_stored,
         'image':image,
         'no_gear':no_gear,
@@ -1054,6 +1065,7 @@ def image_edit_acquisition(request, id):
         'advanced': advanced,
         'solar_system_acquisition': solar_system_acquisition,
         's3_url':settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'is_ready':image.is_stored,
     }
 
@@ -1075,6 +1087,7 @@ def image_edit_acquisition_reset(request, id):
     response_dict = {
         'image': image,
         's3_url':settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'is_ready':image.is_stored,
         'deep_sky_acquisition_basic_form': DeepSky_AcquisitionBasicForm(),
     }
@@ -1219,6 +1232,7 @@ def image_edit_save_basic(request):
         response_dict = {
             'image': image,
             's3_url': settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
             'form': form,
             'prefill_dict': {
                'subjects': [jsonDumpSubjects(image.subjects.all()),
@@ -1321,6 +1335,7 @@ def image_edit_save_gear(request):
     response_dict = {
         'image': image,
         's3_url':settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'is_ready':image.is_stored,
     }
 
@@ -1360,6 +1375,7 @@ def image_edit_save_acquisition(request):
         'image': image,
         'edit_type': edit_type,
         's3_url':settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'is_ready':image.is_stored,
     }
 
@@ -1793,6 +1809,7 @@ def user_page(request, username):
         paginate_by = 20,
         extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
                          's3_url':settings.S3_URL,
+                         'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
                          'user':user,
                          'profile':profile,
                          'follows':follows,
@@ -1818,6 +1835,7 @@ def user_page_favorites(request, username):
         extra_context = {
             'thumbnail_size': settings.THUMBNAIL_SIZE,
             's3_url': settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
             'user': user,
             'private_message_form': PrivateMessageForm(),
          }
@@ -2589,6 +2607,7 @@ def bring_to_attention(request, id):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'form': form,
         'image': image,
     }
@@ -2608,6 +2627,7 @@ def bring_to_attention_process(request):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'form': form,
         'image': image,
     }
@@ -2641,6 +2661,7 @@ def bring_to_attention_complete(request, id):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'image': image,
     }
     return render_to_response(
@@ -2668,6 +2689,7 @@ def image_request_additional_information(request, image_id):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'image': image,
     }
     return render_to_response(
@@ -2703,6 +2725,7 @@ def image_request_additional_information_complete(request, image_id):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'image': image,
     }
     return render_to_response(
@@ -2719,6 +2742,7 @@ def image_request_fits(request, image_id):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'image': image,
     }
     return render_to_response(
@@ -2755,6 +2779,7 @@ def image_request_fits_complete(request, image_id):
     response_dict = {
         'thumbnail_size': settings.THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'image': image,
     }
     return render_to_response(
@@ -2896,6 +2921,10 @@ def help(request):
 @require_GET
 def api(request):
     return render_to_response('api.html',
+        {
+            's3_url': settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
+        },
         context_instance=RequestContext(request))
 
 
@@ -2977,6 +3006,7 @@ def nightly(request):
         extra_context = {
             'thumbnail_size': settings.THUMBNAIL_SIZE,
             's3_url': settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
             'daily': daily,
             'total': total,
             'month_offset': month_offset,
