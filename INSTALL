@@ -144,6 +144,11 @@ cd django-contact-form
 ../../venv/bin/python setup.py install
 cd ../..
 
+# for the reviews
+cd django-reviews
+../../venv/bin/python setup.py install
+cd ../..
+
 # for the moon phase module
 . ./venv/bin/activate
 easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base

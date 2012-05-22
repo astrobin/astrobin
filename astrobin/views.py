@@ -28,6 +28,7 @@ from django.utils.http import urlquote
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
 from djangoratings.models import Vote
+from reviews.forms import ReviewedItemForm
 
 from uuid import uuid4
 import os
@@ -3469,8 +3470,19 @@ def gear_page(request, id):
         'Accessory': 'accessories',
     }
 
+    user_attr_lookup = {
+        'Telescope': 'telescopes',
+        'Camera': 'cameras',
+        'Mount': 'mounts',
+        'FocalReducer': 'focal_reducers',
+        'Software': 'software',
+        'Filter': 'filters',
+        'Accessory': 'accessories',
+    }
+
     all_images = Image.objects.filter(**{image_attr_lookup[gear_type]: gear})
 
+    from django.contrib.contenttypes.models import ContentType
     return object_detail(
         request,
         queryset = Gear.objects.all(),
@@ -3479,6 +3491,12 @@ def gear_page(request, id):
         template_object_name = 'gear',
         extra_context = {
             'examples': all_images.order_by('-rating_score')[:10],
+            'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
+            'reviews': ReviewedItem.objects.filter(content_type = ContentType.objects.get_for_model(Gear),
+                                                   object_id = gear.id),
+            'comment_form': CommentForm(),
+            'comments': GearComment.objects.filter(gear = gear),
+            'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
         })
 
 
@@ -3720,4 +3738,141 @@ def gear_fix_thanks(request):
     return render_to_response(
         'gear/fix_thanks.html',
         context_instance = RequestContext(request))
+
+
+@require_POST
+@login_required
+def gear_review_save(request):
+    form = ReviewedItemForm(data = request.POST)
+
+    if form.is_valid():
+        gear = Gear.objects.get(id = request.POST.get('gear_id'))
+        review = form.save(commit = False)
+        review.content_object = gear
+        review.user = request.user
+        review.save()
+                
+        response_dict = {
+            'success': True,
+            'score': review.score,
+            'content': review.content,
+        }
+        return HttpResponse(
+            simplejson.dumps(response_dict),
+            mimetype = 'application/javascript')
+
+    return ajax_fail()
+
+
+@require_POST
+@login_required
+def gear_comment_save(request):
+    form = GearCommentForm(data = request.POST)
+
+    if form.is_valid():
+        author = User.objects.get(id = form.data['author'])
+        gear = Gear.objects.get(id = form.data['gear_id'])
+        if request.user != author:
+            return HttpResponseForbidden()
+
+        comment = form.save(commit = False)
+        comment.author = author
+        comment.gear = gear
+        if form.data['parent_id'] != '':
+            comment.parent = GearComment.objects.get(id = form.data['parent_id'])
+
+        comment.save()
+
+        url = '%s/gear/%d#c%d' % (settings.ASTROBIN_BASE_URL, gear.id, comment.id)
+        recipient = None
+        notification = None
+        if comment.parent:
+            notification = 'new_comment_reply'
+            recipient = comment.parent.author
+
+        if recipient and notification:
+            if recipient != author:
+                push_notification(
+                    [recipient], notification,
+                    {
+                        'url': url,
+                        'user': author,
+                    }
+                )
+                
+        response_dict = {
+            'success': True,
+            'comment_id': comment.id,
+            'comment': comment.comment,
+            'action': 'save',
+        }
+        return HttpResponse(
+            simplejson.dumps(response_dict),
+            mimetype = 'application/javascript')
+
+    return ajax_fail()
+
+
+@require_GET
+@login_required
+def gear_comment_delete(request, id):
+    comment = get_object_or_404(GearComment, id = id)
+    if comment.author != request.user:
+        return HttpResponseForbidden()
+
+    # NOTE: this function undeletes too!
+    comment.is_deleted = not comment.is_deleted
+    comment.save()
+
+    response_dict = {
+        'success': True,
+        'deleted': comment.is_deleted,
+        'comment': comment.comment,
+    }
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
+
+
+@require_GET
+@login_required
+def gear_comment_get(request, id):
+    comment = get_object_or_404(GearComment, id = id)
+
+    response_dict = {
+        'success': True,
+        'comment': comment.comment,
+    }
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
+
+
+@require_POST
+@login_required
+def gear_comment_edit(request):
+    form = GearCommentForm(data = request.POST)
+
+    if form.is_valid():
+        author = User.objects.get(id = form.data['author'])
+        gear = Gear.objects.get(id = form.data['gear_id'])
+        if request.user != author:
+            return HttpResponseForbidden()
+
+        comment = GearComment.objects.get(id = form.data['parent_id'])
+        comment.comment = form.cleaned_data['comment']
+        comment.save()
+
+        response_dict = {
+            'success': True,
+            'comment_id': comment.id,
+            'comment': comment.comment,
+            'action': 'edit',
+        }
+        return HttpResponse(
+            simplejson.dumps(response_dict),
+            mimetype = 'application/javascript')
+
+    return ajax_fail()
+
 

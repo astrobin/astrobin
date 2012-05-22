@@ -196,6 +196,7 @@ INSTALLED_APPS = (
     'contact_form',
     'pipeline',
     'tastypie',
+    'reviews',
 )
 
 LOGIN_REDIRECT_URL = '/'

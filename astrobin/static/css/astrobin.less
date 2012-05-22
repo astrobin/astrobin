@@ -1686,71 +1686,107 @@ div.favorite-container {
             border: none;
         }
     }
-    .comment {
-        .stitched-box;
-        position: relative;
 
-        .avatar {
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-
-        .content {
-            padding: @spacer-medium 0;
-
-            p {
-                color: @strong-text-color;
-                line-height: 1.5em;
-                padding: 0;
-            }
-            blockquote {
-                margin: 0;
-                padding: 0 0 0 @spacer-small;
-                font-style: italic;
-                border-left: 2px solid (@border-top-color * @hilight-factor);
-
-                p {
-                    color: @text-color;
-                }
-
-                br {
-                    display: none;
-                }
-            }
-        }
-        .content.deleted {
-            p {
-                color: @text-color / @hilight-factor;
-                font-style: italic;
-            }
-        }
-        .meta, .links {
-            font-size: 0.85em;
-        }
-        .links {
-            a {
-                text-transform: lowercase;
-                margin-right: @spacer-medium;
-            }
-        }
-        form {
-            display: none;
-            textarea {
-                width: 98.75%;
-            }
-        }
-    }
-    .comment.hilight {
-        background-color: @light-panel-color * @hilight-factor;
-        border: 1px dashed @strong-text-color;
-    }
     .loader {
         display: inline-block;
         visibility: hidden;
     }
 }
 
+.reviews, .discussions {
+    margin-bottom: @spacer-xxlarge;
+}
+
+.formatting-help {
+    font-size: 0.8em;
+    float: right;
+    text-transform: lowercase;
+}
+
+.top-level-form {
+    .control-group {
+        margin-bottom: 0;
+    }
+    .controls {
+        margin-left: 0;
+    }
+    .form-actions {
+        margin-top: @spacer-small;
+        padding: 0;
+        border: none;
+    }
+}
+
+.loader {
+    display: inline-block;
+    visibility: hidden;
+}
+
+.comment, .review {
+    .stitched-box;
+    position: relative;
+
+    .avatar {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .content {
+        padding: @spacer-medium 0;
+
+        p {
+            color: @strong-text-color;
+            line-height: 1.5em;
+            padding: 0;
+        }
+        blockquote {
+            margin: 0;
+            padding: 0 0 0 @spacer-small;
+            font-style: italic;
+            border-left: 2px solid (@border-top-color * @hilight-factor);
+
+            p {
+                color: @text-color;
+            }
+
+            br {
+                display: none;
+            }
+        }
+    }
+    .content.deleted {
+        p {
+            color: @text-color / @hilight-factor;
+            font-style: italic;
+        }
+    }
+    .meta, .links {
+        font-size: 0.85em;
+    }
+    .links {
+        a {
+            text-transform: lowercase;
+            margin-right: @spacer-medium;
+        }
+    }
+    form {
+        display: none;
+        textarea {
+            width: 98.75%;
+        }
+    }
+}
+
+.review-form {
+    textarea, select {
+        width: 96%;
+    }
+}
+.comment.hilight {
+    background-color: @light-panel-color * @hilight-factor;
+    border: 1px dashed @strong-text-color;
+}
 .index-section {
     margin-bottom: @spacer-xxxlarge;
 }
