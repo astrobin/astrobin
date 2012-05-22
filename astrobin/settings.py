@@ -156,6 +156,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'astrobin.context_processors.privatebeta_enabled',
     'astrobin.context_processors.notices_count',
     'astrobin.context_processors.user_language',
+    'astrobin.context_processors.common_variables',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.static',

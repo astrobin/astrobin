@@ -4,6 +4,7 @@ from notification import models as notifications
 
 from astrobin.models import Request
 from astrobin.models import UserProfile
+from astrobin.models import Gear
 
 
 def privatebeta_enabled(request):
@@ -26,6 +27,14 @@ def user_language(request):
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user = request.user)
         d['user_language'] = profile.language
+
+    return d
+
+
+def common_variables(request):
+    d = {
+        'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
+    }
 
     return d
 

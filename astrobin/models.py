@@ -146,6 +146,12 @@ class Gear(models.Model):
         blank = True,
     )
 
+    moderator_fixed =  models.DateTimeField(
+        editable = False,
+        null = True,
+        blank = True,
+    )
+
     def __unicode__(self):
         return self.name
 

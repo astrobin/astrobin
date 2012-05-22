@@ -242,6 +242,9 @@ urlpatterns = patterns('',
 
     url(r'^subject/(?P<id>\d+)/$', views.subject_page, name='subject_page'),
     url(r'^gear/(?P<id>\d+)/$', views.gear_page, name='gear_page'),
+    url(r'^gear/fix/(?P<id>\d+)/$', views.gear_fix, name='gear_fix'),
+    url(r'^gear/fix/save/$', views.gear_fix_save, name='gear_fix_save'),
+    url(r'^gear/fix/thanks/$', views.gear_fix_thanks, name='gear_fix_thanks'),
 
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
     url(r'^avatar/', include('avatar.urls')),

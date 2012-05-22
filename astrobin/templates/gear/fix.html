@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% load i18n tags bootstrap_toolkit %}
+
+{% block title %}AstroBin - {% gear_name gear %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span6">
+            <h1>{% trans "Instructions and examples" %}</h1>
+            <div class="well">
+                <p>
+                    {% blocktrans %}AstroBin's gear database is a little messy: many users have used different names for the same object, ignoring the suggestions. But don't worry, we can fix it, and after it's fixed, it shouldn't get very messy in the future.{% endblocktrans %}
+                </p>
+                <p>
+                    <strong>{% blocktrans %}Please read the instructions and the example below, they are important!{% endblocktrans %}</strong>
+                </p>
+                <p>
+                    {% blocktrans %}In a wiki-style collaborative effort, we can all work together, a few items at a time, to improve the situation. It's very simple! This is what you need to do:{% endblocktrans %}
+                </p>
+                <ul>
+                    <li>{% blocktrans %}Make sure both the make and the name are in English.{% endblocktrans %}</li>
+                    <li>{% blocktrans %}Make sure the make is not written again in the name field.{% endblocktrans %}</li>
+                    <li>{% blocktrans %}Make sure there are no words other than the simple make and name of the product.{% endblocktrans %}</li>
+                    <li>{% blocktrans %}Make sure the words are properly capitalized.{% endblocktrans %}</li>
+                </ul>
+                <p>
+                    {% blocktrans %}Here's some good examples:{% endblocktrans %}
+                </p>
+                <p>
+                    <code>
+                        <em>{% trans "Make" %}</em>: Meade, <em>{% trans "Name" %}</em>: LX200<br/>
+                        <em>{% trans "Make" %}</em>: Celestron, <em>{% trans "Name" %}</em>: C8<br/>
+                        <em>{% trans "Make" %}</em>: Atik, <em>{% trans "Name" %}</em>: 314L+<br/>
+                    </code>
+                </p>
+                <p>
+                    {% blocktrans %}And here's some bad examples, that need fixing, and why:{% endblocktrans %}
+                </p>
+
+                <p>
+                    <code><em>{% trans "Make" %}</em>: meade, <em>{% trans "Name" %}</em>: lx200</code>
+                    {% blocktrans %}The words are not properly capitalized. It should be "Meade" and "LX200".{% endblocktrans %}
+                </p>
+
+                <p>
+                    <code><em>{% trans "Make" %}</em>: Celestron, <em>{% trans "Name" %}</em>: Celestron C8</code>
+                    {% blocktrans %}The word "Celestron" appears also in the name of the product. That should just be the name of the model, not the make name too.{% endblocktrans %}
+                </p>
+
+                <p>
+                    <code><em>{% trans "Make" %}</em>: Atik, <em>{% trans "Name" %}</em>: 314L+ (sold)</code>
+                    {% blocktrans %}"sold" is an information that refers only to a particular user. Gear objects are shared among everyone, in the database. The word "(sold)" should be removed.{% endblocktrans %}
+                </p>
+
+                <p>
+                    <code><em>{% trans "Make" %}</em>: Canon, <em>{% trans "Name" %}</em>: 60D (modified)</code>
+                    {% blocktrans %}"modified" is an information that refers only to a particular user. Gear objects are shared among everyone, in the database. The word "(modified)" should be removed.{% endblocktrans %}
+                </p>
+
+                <p>
+                    <code><em>{% trans "Make" %}</em>: SkyWatcher, <em>{% trans "Name" %}</em>: NEQ-6 on a fixed pier</code>
+                    {% blocktrans %}Obviously, the user who created this mount in the database, has it on a fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you can only buy on a pier! "on a fixed pier" should be removed.{% endblocktrans %}
+                </p>
+
+                <p>
+                    <code><em>{% trans "Make" %}</em>: Skywatcher, <em>{% trans "Name" %}</em>: Tubo semi-apocromatico 80mm</code>
+                    {% blocktrans %}The name of the telescope is not written in English, and that is a description, not the actual product name. Here I would assume "80ED". Moreover, "80mm" is a property of the telescope, not part of its name.{% endblocktrans %}
+                </p>
+
+                <p>
+                    <code><em>{% trans "Make" %}</em>: SBIG, <em>{% trans "Name" %}</em>: ST-8300 5.4&mu;</code>
+                    {% blocktrans %}"5.4&mu;" is a property of the CCD, not part of its name. It should be removed. But sometimes a property can be part of the name of the object, because it's such a generic name: for example, Newton 8" f/6 would be okay, because just "Newton" would not be enough.{% endblocktrans %}
+                </p>
+
+                <p>
+                    <code><em>{% trans "Make" %}</em>: Adobe, <em>{% trans "Name" %}</em>: Photoshop CS5</code>
+                    {% blocktrans %}"CS5" is the version of Photoshop, but the procut name is just "Photoshop". "CS5" should be removed.{% endblocktrans %}
+                </p>
+
+                <hr/>
+
+                <p>
+                    {% blocktrans %}Thanks for reading so far. If you are not sure about how to fix a gear item, just make assumptions and hope you are right. Mistakes will surface eventually.{% endblocktrans %}
+                </p>
+                <p>
+                    {% blocktrans %}Now let's get to work, good luck and thank you on behalf of the whole AstroBin community!{% endblocktrans %}
+                </p>
+            </div>
+        </div>
+
+        <div class="span6">
+            <h1>{% gear_name gear %}</h1>
+            <div class="well">
+                <p>
+                    {% blocktrans %}After you fix an item, another one at random will be offered.{% endblocktrans %}
+                </p>
+                <p>
+                    {% blocktrans %}Already fixed:{% endblocktrans %} {{already_fixed}}<br/>
+                    {% blocktrans %}Remaining:{% endblocktrans %} {{remaining}}
+                </p>
+            </div>
+            <form class="form-vertical" method="post" action="{% url gear_fix_save %}">
+                {{form|as_bootstrap}}
+                <input type="hidden" name="gear_id" value="{{gear.id}}" />
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-primary" name="fix" value="{% trans "Fix" %}" />
+                    <input type="submit" class="btn btn-primary" name="good" value="{% trans "Mark as good" %}" />
+                    <a class="btn" href="{% url gear_fix next_gear.id %}">{% trans "Skip" %}</a>
+                    <a class="btn" href="{% url gear_fix_thanks %}">{% trans "Enough for now" %}</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

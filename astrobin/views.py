@@ -3670,3 +3670,54 @@ def app_api_key_request_complete(request):
         {},
         context_instance = RequestContext(request))
 
+
+@require_GET
+@login_required
+def gear_fix(request, id):
+    gear = get_object_or_404(Gear, id = id)
+    form = ModeratorGearFixForm(instance = gear)
+    next_gear = Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get()
+
+    return render_to_response(
+        'gear/fix.html',
+        {
+            'form': form,
+            'gear': gear,
+            'next_gear': next_gear,
+            'already_fixed': Gear.objects.exclude(moderator_fixed = None).count(),
+            'remaining': Gear.objects.filter(moderator_fixed = None).count(),
+        },
+        context_instance = RequestContext(request))
+
+
+@require_POST
+@login_required
+def gear_fix_save(request):
+    id = request.POST.get('gear_id')
+    gear = get_object_or_404(Gear, id = id)
+    form = ModeratorGearFixForm(data = request.POST, instance = gear)
+    next_gear = Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get()
+
+    if not form.is_valid():
+        return render_to_response(
+            'gear/fix.html',
+            {
+                'form': form,
+                'gear': gear,
+                'next_gear': next_gear,
+                'already_fixed': Gear.objects.exclude(moderator_fixed = None).count(),
+                'remaining': Gear.objects.filter(moderator_fixed = None).count(),
+            },
+            context_instance = RequestContext(request))
+
+    form.save()
+    return HttpResponseRedirect('/gear/fix/%d/' % next_gear.id)
+
+
+@require_GET
+@login_required
+def gear_fix_thanks(request):
+    return render_to_response(
+        'gear/fix_thanks.html',
+        context_instance = RequestContext(request))
+
