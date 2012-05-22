@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
+from django.conf import settings
 
 from astrobin.models import Image
 from astrobin.image_utils import generate_histogram
@@ -19,7 +20,7 @@ class Command(BaseCommand):
 
         tempdir = tempfile.mkdtemp()
         for i in images:
-            url = 'http://s3.amazonaws.com/astrobin_images/%s%s' % (i.filename, i.original_ext)
+            url = 'http://s3.amazonaws.com/%s/%s%s' % (settings.AWS_STORAGE_BUCKET_NAME, i.filename, i.original_ext)
             path = os.path.join(tempdir, i.filename + i.original_ext)
 
             try:

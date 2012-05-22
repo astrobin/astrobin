@@ -55,6 +55,7 @@ def related_images(request, object_list, type):
             'images': images,
             'small_thumbnail_size':settings.SMALL_THUMBNAIL_SIZE,
             's3_url':settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
             'related_type': type,
            }
 
@@ -307,6 +308,7 @@ def image_list(context, request, object_list, paginate = True, size = settings.T
         'paginate': paginate,
         'thumbnail_size': size,
         's3_url':settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'request': request,
         'sort': request.GET.get('sort'),
     }.items())
@@ -350,6 +352,7 @@ def messier_list(context, request, object_list, paginate = True):
         'paginate': paginate,
         'thumbnail_size':settings.THUMBNAIL_SIZE,
         's3_url':settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'request': request,
         'sort': request.GET.get('sort'),
     }
@@ -403,6 +406,7 @@ def search_image_list(context, request, object_list, paginate = True):
         'image_list': image_list,
         'thumbnail_size':settings.THUMBNAIL_SIZE,
         's3_url':settings.S3_URL,
+        'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'request': request,
         'sort': request.GET.get('sort'),
     }

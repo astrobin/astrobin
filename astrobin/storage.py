@@ -18,7 +18,7 @@ import StringIO
 
 def download_from_bucket(filename, path):
     import urllib2
-    s3_path = 'http://%s/astrobin_images/%s' % (settings.S3_URL, filename)
+    s3_path = 'http://%s/%s/%s' % (settings.S3_URL, settings.AWS_STORAGE_BUCKET_NAME, filename)
     image = urllib2.urlopen(s3_path)
     output = open(path + filename, 'wb')
     output.write(image.read())
