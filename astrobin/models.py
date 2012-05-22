@@ -32,6 +32,9 @@ from fields import *
 
 from mptt.models import MPTTModel, TreeForeignKey
 
+from reviews.models import ReviewedItem
+
+
 LICENSE_CHOICES = (
     (0, _("None (All rights reserved)")),
     (1, _("Attribution-NonCommercial-ShareAlike Creative Commons")),
@@ -151,6 +154,8 @@ class Gear(models.Model):
         null = True,
         blank = True,
     )
+ 
+    reviews = generic.GenericRelation(ReviewedItem)
 
     def __unicode__(self):
         return self.name
@@ -1298,6 +1303,46 @@ class Comment(MPTTModel):
         if not self.id:
             Comment.tree.insert_node(self, self.parent)
         super(Comment, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.comment
+
+    class MPTTMeta:
+        order_insertion_by = ['added']
+
+    class Meta:
+        app_label = 'astrobin'
+
+
+class GearComment(MPTTModel):
+    gear = models.ForeignKey(
+        Gear,
+    )
+    author = models.ForeignKey(
+        User,
+    )
+    comment = models.TextField(
+        verbose_name = "",
+    )
+    is_deleted = models.BooleanField(
+        default = False,
+    )
+    added  = models.DateTimeField(
+        auto_now_add = True,
+        editable = False,
+    )
+    parent = TreeForeignKey(
+        'self',
+        null = True,
+        blank = True,
+        editable = False,
+        related_name = 'children'
+    )
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            GearComment.tree.insert_node(self, self.parent)
+        super(GearComment, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.comment

@@ -1520,7 +1520,36 @@ div.favorite-container a.favorite:hover .favorite-hint {
   padding: 0;
   border: none;
 }
-.comment-container .comment {
+.comment-container .loader {
+  display: inline-block;
+  visibility: hidden;
+}
+.reviews,
+.discussions {
+  margin-bottom: 28px;
+}
+.formatting-help {
+  font-size: 0.8em;
+  float: right;
+  text-transform: lowercase;
+}
+.top-level-form .control-group {
+  margin-bottom: 0;
+}
+.top-level-form .controls {
+  margin-left: 0;
+}
+.top-level-form .form-actions {
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+}
+.loader {
+  display: inline-block;
+  visibility: hidden;
+}
+.comment,
+.review {
   margin-bottom: 4px;
   padding: 8px;
   border: 1px dashed #505050;
@@ -1529,56 +1558,68 @@ div.favorite-container a.favorite:hover .favorite-hint {
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   position: relative;
 }
-.comment-container .comment .avatar {
+.comment .avatar,
+.review .avatar {
   position: absolute;
   top: 0;
   right: 0;
 }
-.comment-container .comment .content {
+.comment .content,
+.review .content {
   padding: 8px 0;
 }
-.comment-container .comment .content p {
+.comment .content p,
+.review .content p {
   color: #fcfcfc;
   line-height: 1.5em;
   padding: 0;
 }
-.comment-container .comment .content blockquote {
+.comment .content blockquote,
+.review .content blockquote {
   margin: 0;
   padding: 0 0 0 4px;
   font-style: italic;
   border-left: 2px solid #505050;
 }
-.comment-container .comment .content blockquote p {
+.comment .content blockquote p,
+.review .content blockquote p {
   color: #b8b8b8;
 }
-.comment-container .comment .content blockquote br {
+.comment .content blockquote br,
+.review .content blockquote br {
   display: none;
 }
-.comment-container .comment .content.deleted p {
+.comment .content.deleted p,
+.review .content.deleted p {
   color: #a4a4a4;
   font-style: italic;
 }
-.comment-container .comment .meta,
-.comment-container .comment .links {
+.comment .meta,
+.review .meta,
+.comment .links,
+.review .links {
   font-size: 0.85em;
 }
-.comment-container .comment .links a {
+.comment .links a,
+.review .links a {
   text-transform: lowercase;
   margin-right: 8px;
 }
-.comment-container .comment form {
+.comment form,
+.review form {
   display: none;
 }
-.comment-container .comment form textarea {
+.comment form textarea,
+.review form textarea {
   width: 98.75%;
 }
-.comment-container .comment.hilight {
+.review-form textarea,
+.review-form select {
+  width: 96%;
+}
+.comment.hilight {
   background-color: #404040;
   border: 1px dashed #fcfcfc;
-}
-.comment-container .loader {
-  display: inline-block;
-  visibility: hidden;
 }
 .index-section {
   margin-bottom: 52px;

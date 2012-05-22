@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
-{% load i18n tags %}
+{% load i18n tags bootstrap_toolkit avatar_tags markup %}
 
 {% block title %}AstroBin - {% gear_name gear %}{% endblock %}
 
 {% block content %}
     <h1>{% gear_name gear %}</h1>
+    <h4>{% blocktrans with reviews|length as reviews_count and comments|length as comments_count %}{{owners_count}} owners, {{reviews_count}} reviews, {{comments_count}} discussion messages.{% endblocktrans %}</h4>
 
     <div class="row section">
         <div class="span12">
@@ -26,13 +27,409 @@
             <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
         </div>
     </div>
+
+    <div class="row section">
+        <div class="span6">
+            <h2>{% trans "Reviews" %}</h2>
+            <div class="reviews subtle-container">
+                {% if request.user.is_authenticated %}
+                    <p>
+                        {% blocktrans %}Please be fair, honest and polite when writing a review. Many people will read your review: all the users on AstroBin who own this piece of gear, will be notified of your review.{% endblocktrans %}
+                    </p>
+                {% endif %}
+
+
+                {% for review in reviews %}
+                    <div class="review">
+                        <div class="avatar">
+                            <a href="{% url user_page review.user %}">
+                                {% avatar review.user 32 %}
+                            </a>
+                        </div>
+
+                        <div class="meta">
+                            <a class="author" href="{% url user_page review.user %}">
+                                {{review.user}}
+                            </a>
+                            {{review.date_added|ago}}
+                        </div>
+
+                        <div class="content">
+                            {{review.content|markdown|linebreaks}}
+                        </div>
+
+                        <div class="score">
+                            <strong>{% trans "Rating" %}: {{review.score}}/5</strong>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="empty">{% trans "There are no reviews yet." %}</p>
+                {% endfor %}
+            </div>
+
+            {% if request.user.is_authenticated %}
+                <div class="subtle-container">
+                    <h3>{% trans "Add your review" %}</h3>
+                    <form class="form-vertical review-form" method="post" action="{% url gear_review_save %}">
+                        {{review_form|as_bootstrap}}
+                        <input type="hidden" name="gear_id" value="{{gear.id}}" />
+                        <input type="submit" class="btn btn-mini btn-primary" value="{% trans "Submit" %} &rarr;" />
+                        <input type="reset" class="btn btn-mini" value="{% trans "Cancel" %}" />
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="span6">
+            <h2>{% trans "Discussions" %}</h2>
+
+            <div class="discussions subtle-container">
+                <p>
+                    {% blocktrans %}Use this space to start a discussion or ask a question about this piece of gear. All the users on AstroBin who own one, will be notified and can join the discussion.{% endblocktrans %}
+                </p>
+
+                {% if comments %}
+                    {% load mptt_tags %}
+                    {% recursetree comments %}
+                        <div style="margin-left: {{node.get_level|add:node.get_level}}em">
+                            <div id="c{{node.id}}" class="comment">
+                                <div class="avatar">
+                                    <a href="{% url user_page node.author %}">
+                                        {% avatar node.author 32 %}
+                                    </a>
+                                </div>
+                                <div class="meta">
+                                    <a class="author" href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
+                                </div>
+                                <div class="content{% if node.is_deleted %} deleted{% endif %}">
+                                    {% if node.is_deleted %}
+                                        <p>{% trans "(comment deleted)" %}</p>
+                                    {% else %}
+                                        {{node.comment|markdown|linebreaks}}
+                                    {% endif %}
+                                </div>
+                                <div class="links">
+                                    <a class="permalink" href="{% url gear_page gear.id %}#c{{node.id}}">{% trans "Link" %}</a>
+                                    {% if user.is_authenticated %}
+                                        {% if user == node.author %}
+                                            <a class="delete" href="#">
+                                                {% if node.is_deleted %}
+                                                    {% trans "Undelete" %}
+                                                {% else %}
+                                                    {% trans "Delete" %}
+                                                {% endif %}
+                                            </a>
+                                            <a class="edit" href="#">{% trans "Edit" %}</a>
+                                        {% endif %}
+                                        <a class="reply" href="#">{% trans "Reply" %}</a>
+                                    {% endif %}
+                                </div>
+                                <form action="{% url image_comment_save %}" method="post">
+                                    {{comment_form.as_p}}
+                                    <input type="hidden" name="author" value="{{user.id}}" />
+                                    <input type="hidden" name="gear_id" value="{{gear.id}}" />
+                                    <input type="hidden" name="parent_id" value="{{node.id}}" />
+                                    <input type="hidden" name="level" value="{{node.get_level}}" />
+                                    <p>
+                                        <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
+                                        <input class="btn btn-mini cancel" type="reset" value="{% trans "Cancel" %}" />
+                                        <span class="formatting-help">
+                                            <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+                                        </span>
+                                        <span class="loader">
+                                            <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
+                                        </span>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                        {% if not node.is_leaf_node %}
+                            {{children}}
+                        {% endif %}
+                    {% endrecursetree %}
+                {% else %}
+                    <p class="no-comments-yet">
+                        {% blocktrans %}There are no discussions yet.{% endblocktrans %}
+                    </p>
+                {% endif %}
+            </div>
+
+            {% if request.user.is_authenticated %}
+                <div class="top-level-form subtle-container">
+                    {% trans "Start a discussion or ask a question." %}
+                    <form class="form-horizontal" action="{% url gear_comment_save %}" method="post">
+                        {{comment_form|as_bootstrap}}
+                        <input type="hidden" name="author" value="{{request.user.id}}" />
+                        <input type="hidden" name="gear_id" value="{{gear.id}}" />
+                        <input type="hidden" name="parent_id" value="" />
+                        <input type="hidden" name="level" value="0" />
+                        <div>
+                            <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Submit" %} &rarr;" />
+                            <span class="help-inline">
+                                <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+                            </span>
+                            <span class="loader">
+                                <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
+                            </span>
+                        </div>
+                    </form>
+                </div> <!-- top-level-form -->
+            {% else %}
+                <p>
+                    {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
+                </p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_js %}
 <script type="text/javascript">
 $(document).ready(function() {
-    astrobin_stats.init();
+    var reviewFormOptions = {
+        dataType: 'json',
+        timeout: 10000,
+        beforeSubmit: function(data, $form, options) {
+            var $btn = $form.find('input[type=submit]');
+            var $textarea = $form.find('textarea');
 
+            if ($textarea.val() == '')
+                return false;
+
+            $btn.attr('disabled', 'disabled').addClass('disabled');
+        },
+        success: function(response, statusText, xhr, $form) {
+            var $btn = $form.find('input[type=submit]');
+
+            if (response.success) {
+                var $container = $('<div/>').addClass('review');
+
+                var $avatar = $('<div/>').addClass('avatar');
+                var $avatar_link = $('<a/>').attr('href', '{% url user_page request.user %}');
+
+                var $meta = $('<div/>').addClass('meta');
+                var $author = $('<a/>').attr('href', '{% url user_page request.user %}').text('{{request.user}}');
+
+                var $content = $('<div/>').addClass('content');
+                var $score = $('<div/>').addClass('score');
+
+                
+                $content.text(response.content);
+                $score.text(response.score);
+
+                $meta
+                    .append($author)
+                    .append("&nbsp;{% trans "just now" %}");
+
+                $container
+                    .append($avatar)
+                    .append($meta)
+                    .append($content)
+                    .append($score);
+
+                $('p.empty').remove();
+                $('.reviews').append($container);
+            }
+
+            $btn.removeAttr('disabled').removeClass('disabled');
+        }
+    };
+    $('.review-form').ajaxForm(reviewFormOptions);
+
+    var hilighted_comment = location.hash.substr(1);
+    if (hilighted_comment) {
+        $('#' + hilighted_comment).addClass('hilight');
+    }
+
+    var discussionFormOptions = {
+        dataType: 'json',
+        timeout: 10000,
+        beforeSubmit: function(formData, $form, options) {
+            $loader = $form.find('.loader');
+            $button = $form.find('.btn:first-child');
+            $textarea = $form.find('textarea');
+
+            if ($textarea.val() == '')
+                return false;
+
+            $button.attr('disabled', 'disabled').addClass('disabled');
+            $loader.css('visibility', 'visible');
+        },
+        success: function(responseJson, statusText, xhr, $form) {
+            var $loader = $form.find('.loader');
+            var $button = $form.find('.btn:first-child');
+
+            $button.removeAttr('disabled').removeClass('disabled');
+            $loader.css('visibility', 'hidden');
+
+            if (responseJson.action == 'save') {
+                var $textarea = $form.find('textarea');
+                if ($form.parent().hasClass('top-level-form')) {
+                    var $parent = $('.discussions');
+                    var is_top_level = true;
+                    var level = 0;
+                } else {
+                    var $parent = $form.closest('.comment').parent();
+                    var is_top_level = false;
+                    var level = parseInt($form.find('input:hidden[name="level"]').val()) + 1;
+                }
+                var parent_id = responseJson['comment_id']
+                var $nocomments = $('.no-comments-yet');
+
+                $container = $('<div/>').css('margin-left', level*2 + 'em');
+                $new_comment = $('<div/>').addClass('comment').attr('id', 'c' + parent_id);
+                $container.append($new_comment);
+
+                $meta = $('<div/>').addClass('meta');
+                $author = $('<a/>').attr('href', '{% url user_page user %}').addClass('author').text('{{user.username}}');
+                $meta.append($author).append("{% trans "just now" %}");
+
+                $links = $('<div/>').addClass('links');
+                $permalink = $('<a/>').addClass('permalink').attr('href', '{% url gear_page gear.id %}#c' + parent_id).text('{% trans "Link" %}');
+                $delete = $('<a/>').addClass('delete').attr('href', '#').text('{% trans "Delete" %}');
+                $edit = $('<a/>').addClass('edit').attr('href', '#').text('{% trans "Edit" %}');
+                $reply = $('<a/>').addClass('reply').attr('href', '#').text('{% trans "Reply" %}');
+
+                $links.append($permalink).append($delete).append($edit).append($reply);
+
+                var converter = Markdown.getSanitizingConverter();
+                $content = $('<div/>').addClass('content').append($('<p/>').html(converter.makeHtml($textarea.val()).replace(/\n\r?/g, '<br />')));
+
+                new_form_template = "\
+                    <form action=\"{% url image_comment_save %}\" method=\"post\">\
+                        {{comment_form.as_p|escapejs}}\
+                        <input type=\"hidden\" id=\"csrfmiddlewaretoken\" name=\"csrfmiddlewaretoken\" value=\"{{csrf_token}}\" />\
+                        <input type=\"hidden\" name=\"author\" value=\"{{user.id}}\" />\
+                        <input type=\"hidden\" name=\"gear_id\" value=\"{{gear.id}}\" />\
+                        <input type=\"hidden\" name=\"parent_id\" value=\"" + parent_id + "\" />\
+                        <input type=\"hidden\" name=\"level\" value=\"" + level + "\" />\
+                        <p>\
+                            <input class=\"btn btn-mini btn-primary\" type=\"submit\" value=\"{% trans "Save" %}\" />\
+                            <input class=\"btn btn-mini cancel\" type=\"reset\" value=\"{% trans "Cancel" %}\" />\
+                            <span class=\"loader\">\
+                                <img src=\"{{STATIC_URL}}images/ajax-loader.gif\" alt=\"\"/>\
+                            </span>\
+                            <span class=\"formatting-help\">\
+                                <a href=\"{% url faq %}#10\" target=\"_blank\">{% trans "Formatting help" %}</a>\
+                            </span>\
+                        </p>\
+                    </form>"
+
+                $new_form = $(new_form_template);
+                $new_form.ajaxForm(discussionFormOptions);
+
+                $new_comment.append($meta)
+                            .append($content)
+                            .append($links)
+                            .append($new_form);
+
+                $textarea.val('');
+                if (!is_top_level)
+                    $form.hide();
+
+                $nocomments.remove();
+                $parent.append($container);
+            }
+            else if (responseJson.action == 'edit') {
+                var $comment = $form.closest('.comment');
+                var $content = $comment.find('.content');
+                var $links = $comment.find('.links');
+
+                var converter = Markdown.getSanitizingConverter();
+                $content.html($('<div/>').addClass('content').append($('<p/>').html(converter.makeHtml(responseJson.comment).replace(/\n\r?/g, '<br />'))));
+                $content.show();
+                $links.show();
+
+                $form.hide();
+            }
+        }
+    };
+
+    $('.top-level-form form, .comment form').ajaxForm(discussionFormOptions);
+    $('.comment form .cancel').live('click', function() {
+        var $comment = $(this).closest('.comment');
+        var $content = $comment.find('.content');
+        var $links = $comment.find('.links');
+        var $form = $(this).closest('form');
+
+        $form.hide();
+        $content.show();
+        $links.show();
+
+        return false;
+    });
+
+    $('.comment .permalink').live('click', function() {
+        var id = $(this).closest('.comment').find('input:hidden[name="parent_id"]').val()
+        $('.comment.hilight').removeClass('hilight');
+        $('#c' + id).addClass('hilight');
+        return true;
+    });
+
+    $('.comment .delete').live('click', function() {
+        var id = $(this).closest('.comment').find('input:hidden[name="parent_id"]').val()
+        var $content = $(this).closest('.comment').find('> .content');
+        var $self = $(this);
+
+        $.ajax({
+            url: '/gear/comment/delete/' + id + '/',
+            dataType: 'json',
+            timeout: 5000,
+            success: function(data, status, xhr) {
+                if (data.deleted) {
+                    $content.addClass('deleted');
+                    $content.html('<p>{% trans "(comment deleted)" %}</p>');
+                    $self.text('{% trans 'Undelete' %}');
+                } else {
+                    var converter = Markdown.getSanitizingConverter();
+
+                    $content.removeClass('deleted');
+                    $content.html(converter.makeHtml(data.comment).replace(/\n\r?/g, '<br />'));
+                    $self.text('{% trans 'Delete' %}');
+                }
+            }
+        });
+        return false;
+    });
+
+    $('.comment .edit').live('click', function() {
+        var $comment = $(this).closest('.comment');
+        var $content = $comment.find('.content');
+        var $links = $comment.find('.links');
+        var $form = $comment.find('form');
+        var $textarea = $form.find('textarea');
+        var id = $form.find('input:hidden[name="parent_id"]').val()
+
+        $.ajax({
+            url: '/gear/comment/get/' + id + '/',
+            dataType: 'json',
+            timeout: 5000,
+            success: function(data, status, xhr) {
+                $content.hide();
+                $links.hide();
+                $textarea.val(data.comment);
+                $form.attr('action', '{% url gear_comment_edit %}');
+                $form.show();
+            }
+        });
+
+        return false;
+    });
+
+    $('.comment .reply').live('click', function() {
+        var $comment = $(this).closest('.comment');
+        var $form = $comment.find('form');
+        var $textarea = $form.find('textarea');
+
+        $form.attr('action', '{% url gear_comment_save %}');
+        $textarea.val('');
+        $form.show();
+        $textarea.focus();
+
+        return false;
+    });
+
+    astrobin_stats.init();
     astrobin_stats.plot(
         '#stats_total_images',
         "{% url stats_gear_total_images gear.id %}",

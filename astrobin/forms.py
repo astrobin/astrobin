@@ -589,6 +589,19 @@ class CommentForm(forms.ModelForm):
         }
 
 
+class GearCommentForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = GearComment
+        fields = ('comment',)
+        widgets = {
+            'comment': forms.Textarea(attrs = {
+                'rows': 4,
+            })
+        }
+
+
 class GearEditForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(GearEditForm, self).__init__(*args, **kwargs)
