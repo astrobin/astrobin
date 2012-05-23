@@ -160,6 +160,9 @@ class Gear(models.Model):
     def __unicode__(self):
         return self.name
 
+    def attributes(self):
+        return [('make', None), ('name', None)]
+
     class Meta:
         app_label = 'astrobin'
 
@@ -286,6 +289,10 @@ class Telescope(Gear):
         choices = TELESCOPE_TYPES,
     )
 
+    def attributes(self):
+        return super(Telescope, self).attributes() +\
+               [('aperture', _("mm")), ('focal_length', _("mm"))]
+
     class Meta:
         app_label = 'astrobin'
 
@@ -308,6 +315,10 @@ class Mount(Gear):
         max_digits = 6,
         decimal_places = 2,
     )
+
+    def attributes(self):
+        return super(Mount, self).attributes() +\
+               [('max_payload', _("kg")), ('pe', "\"")]
 
     class Meta:
         app_label = 'astrobin'
@@ -356,6 +367,10 @@ class Camera(Gear):
         blank = True,
         choices = CAMERA_TYPES,
     )
+
+    def attributes(self):
+        return super(Camera, self).attributes() +\
+               [('sensor_width', _("mm")), ('sensor_height', _("mm")), ('pixel_size', _("&mu;m"))]
 
     class Meta:
         app_label = 'astrobin'
@@ -421,6 +436,10 @@ class Filter(Gear):
         decimal_places = 2,
     )
   
+    def attributes(self):
+        return super(Filter, self).attributes() +\
+               [('bandwidth', _("&mu;m"))]
+
     class Meta:
         app_label = 'astrobin'
 
