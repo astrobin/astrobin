@@ -156,7 +156,7 @@
 
             {% if request.user.is_authenticated %}
                 <div class="top-level-form subtle-container">
-                    {% trans "Start a discussion or ask a question." %}
+                    <h3>{% trans "Start a discussion or ask a question." %}</h3>
                     <form class="form-horizontal" action="{% url gear_comment_save %}" method="post">
                         {{comment_form|as_bootstrap}}
                         <input type="hidden" name="author" value="{{request.user.id}}" />
