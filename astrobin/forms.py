@@ -606,7 +606,7 @@ class GearEditForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(GearEditForm, self).__init__(*args, **kwargs)
         instance = getattr(self, 'instance', None)
-        if instance and instance.id:
+        if instance and instance.id and instance.name:
             self.fields['name'].widget.attrs['readonly'] = True
             self.fields['name'].widget.attrs['disabled'] = True
             self.fields['name'].help_text = _("You cannot edit this property for an existing gear item. Consider deleting this item and creating a new one.")
