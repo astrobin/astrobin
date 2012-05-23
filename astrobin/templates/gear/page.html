@@ -410,6 +410,7 @@ $(document).ready(function() {
             url: '/gear/comment/delete/' + id + '/',
             dataType: 'json',
             timeout: 30000,
+            cache: false,
             success: function(data, status, xhr) {
                 if (data.deleted) {
                     $content.addClass('deleted');

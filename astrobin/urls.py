@@ -249,6 +249,7 @@ urlpatterns = patterns('',
     url(r'^gear/comment/save/$', views.gear_comment_save, name='gear_comment_save'),
     url(r'^gear/comment/edit/$', views.gear_comment_edit, name='gear_comment_edit'),
     url(r'^gear/comment/get/(?P<id>\d+)/$', views.gear_comment_get, name='gear_comment_get'),
+    url(r'^gear/comment/delete/(?P<id>\d+)/$', views.gear_comment_delete, name='gear_comment_delete'),
 
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
     url(r'^avatar/', include('avatar.urls')),

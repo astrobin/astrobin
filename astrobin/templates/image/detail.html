@@ -1175,6 +1175,7 @@ $(document).ready(function() {
             url: '/image_comments/delete/' + id + '/',
             dataType: 'json',
             timeout: 5000,
+            cache: false,
             success: function(data, status, xhr) {
                 if (data.deleted) {
                     $content.addClass('deleted');
