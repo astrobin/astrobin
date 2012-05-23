@@ -3480,6 +3480,16 @@ def gear_page(request, id):
         'Accessory': 'accessories',
     }
 
+    class_lookup = {
+        'Telescope': Telescope,
+        'Camera': Camera,
+        'Mount': Mount,
+        'FocalReducer': FocalReducer,
+        'Software': Software,
+        'Filter': Filter,
+        'Accessory': Accessory,
+    }
+
     all_images = Image.objects.filter(**{image_attr_lookup[gear_type]: gear})
 
     from django.contrib.contenttypes.models import ContentType
@@ -3490,12 +3500,17 @@ def gear_page(request, id):
         template_name = 'gear/page.html',
         template_object_name = 'gear',
         extra_context = {
-            'examples': all_images.order_by('-rating_score')[:10],
+            'examples': all_images.order_by('-rating_score')[:21],
+            'small_size': settings.SMALL_THUMBNAIL_SIZE,
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
             'reviews': gear.reviews.all(),
             'comment_form': CommentForm(),
             'comments': GearComment.objects.filter(gear = gear),
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
+            'attributes': [
+                (_(class_lookup[gear_type]._meta.get_field(k[0]).verbose_name),
+                 getattr(gear, k[0]),
+                 k[1]) for k in gear.attributes()],
         })
 
 
