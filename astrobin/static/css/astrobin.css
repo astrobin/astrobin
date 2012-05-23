@@ -1617,7 +1617,8 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .review-form select {
   width: 96%;
 }
-.comment.hilight {
+.comment.hilight,
+.review.hilight {
   background-color: #404040;
   border: 1px dashed #fcfcfc;
 }

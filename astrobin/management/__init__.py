@@ -136,6 +136,18 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'new_gear_discussion',
+        _("New discussion about a gear item you own"),
+        '',
+        2,
+    ),
+    (
+        'new_gear_review',
+        _("New review of a gear item you own"),
+        '',
+        2,
+    ),
 )
 
 
