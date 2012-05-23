@@ -3492,8 +3492,7 @@ def gear_page(request, id):
         extra_context = {
             'examples': all_images.order_by('-rating_score')[:10],
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
-            'reviews': ReviewedItem.objects.filter(content_type = ContentType.objects.get_for_model(Gear),
-                                                   object_id = gear.id),
+            'reviews': gear.reviews.all(),
             'comment_form': CommentForm(),
             'comments': GearComment.objects.filter(gear = gear),
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
@@ -3746,12 +3745,35 @@ def gear_review_save(request):
     form = ReviewedItemForm(data = request.POST)
 
     if form.is_valid():
-        gear = Gear.objects.get(id = request.POST.get('gear_id'))
+        gear, gear_type = get_correct_gear(form.data['gear_id'])
         review = form.save(commit = False)
         review.content_object = gear
         review.user = request.user
         review.save()
-                
+
+        user_attr_lookup = {
+            'Telescope': 'telescopes',
+            'Camera': 'cameras',
+            'Mount': 'mounts',
+            'FocalReducer': 'focal_reducers',
+            'Software': 'software',
+            'Filter': 'filters',
+            'Accessory': 'accessories',
+        }
+
+        url = '%s/gear/%d#r%d' % (settings.ASTROBIN_BASE_URL, gear.id, review.id)
+        recipients = [x.user for x in UserProfile.objects.filter(
+            **{user_attr_lookup[gear_type]: gear})]
+        notification = 'new_gear_review'
+
+        push_notification(
+            recipients, notification,
+            {
+                'url': url,
+                'user': review.user,
+            }
+        )
+       
         response_dict = {
             'success': True,
             'score': review.score,
@@ -3771,7 +3793,7 @@ def gear_comment_save(request):
 
     if form.is_valid():
         author = User.objects.get(id = form.data['author'])
-        gear = Gear.objects.get(id = form.data['gear_id'])
+        gear, gear_type = get_correct_gear(form.data['gear_id'])
         if request.user != author:
             return HttpResponseForbidden()
 
@@ -3783,22 +3805,32 @@ def gear_comment_save(request):
 
         comment.save()
 
-        url = '%s/gear/%d#c%d' % (settings.ASTROBIN_BASE_URL, gear.id, comment.id)
-        recipient = None
-        notification = None
-        if comment.parent:
-            notification = 'new_comment_reply'
-            recipient = comment.parent.author
+        user_attr_lookup = {
+            'Telescope': 'telescopes',
+            'Camera': 'cameras',
+            'Mount': 'mounts',
+            'FocalReducer': 'focal_reducers',
+            'Software': 'software',
+            'Filter': 'filters',
+            'Accessory': 'accessories',
+        }
 
-        if recipient and notification:
-            if recipient != author:
-                push_notification(
-                    [recipient], notification,
-                    {
-                        'url': url,
-                        'user': author,
-                    }
-                )
+        url = '%s/gear/%d#c%d' % (settings.ASTROBIN_BASE_URL, gear.id, comment.id)
+        if not comment.parent:
+            recipients = [x.user for x in UserProfile.objects.filter(
+                **{user_attr_lookup[gear_type]: gear})]
+            notification = 'new_gear_discussion'
+        else:
+            notification = 'new_comment_reply'
+            recipients = [comment.parent.author]
+
+        push_notification(
+            recipients, notification,
+            {
+                'url': url,
+                'user': author,
+            }
+        )
                 
         response_dict = {
             'success': True,

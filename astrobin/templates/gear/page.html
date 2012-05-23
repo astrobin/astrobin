@@ -8,17 +8,19 @@
     <h1>{% gear_name gear %}</h1>
     <h4>{% blocktrans with reviews|length as reviews_count and comments|length as comments_count %}{{owners_count}} owners, {{reviews_count}} reviews, {{comments_count}} discussion messages.{% endblocktrans %}</h4>
 
-    <div class="row section">
-        <div class="span12">
-            <div class="well">
-                <strong>{% trans "Some images" %}</strong>
-                <a href="/search/?q={% gear_name gear %}{% search_form_query %}">
-                    {% trans "(view more)" %}
-                </a>
+    {% if examples %}
+        <div class="row section">
+            <div class="span12">
+                <div class="well">
+                    <strong>{% trans "Some images" %}</strong>
+                    <a href="/search/?q={% gear_name gear %}{% search_form_query %}">
+                        {% trans "(view more)" %}
+                    </a>
+                </div>
+                {% image_list request examples 0 %}
             </div>
-            {% image_list request examples 0 %}
         </div>
-    </div>
+    {% endif %}
 
     <div class="well"><strong>{% trans "Total images" %}</strong></div>
     <div id="stats_total_images" class="plot" style="width:940px; height: 200px;">
@@ -40,7 +42,7 @@
 
 
                 {% for review in reviews %}
-                    <div class="review">
+                    <div id="r{{review.id}}" class="review">
                         <div class="avatar">
                             <a href="{% url user_page review.user %}">
                                 {% avatar review.user 32 %}
@@ -188,7 +190,7 @@
 $(document).ready(function() {
     var reviewFormOptions = {
         dataType: 'json',
-        timeout: 10000,
+        timeout: 30000,
         beforeSubmit: function(data, $form, options) {
             var $btn = $form.find('input[type=submit]');
             var $textarea = $form.find('textarea');
@@ -243,7 +245,7 @@ $(document).ready(function() {
 
     var discussionFormOptions = {
         dataType: 'json',
-        timeout: 10000,
+        timeout: 30000,
         beforeSubmit: function(formData, $form, options) {
             $loader = $form.find('.loader');
             $button = $form.find('.btn:first-child');
@@ -374,7 +376,7 @@ $(document).ready(function() {
         $.ajax({
             url: '/gear/comment/delete/' + id + '/',
             dataType: 'json',
-            timeout: 5000,
+            timeout: 30000,
             success: function(data, status, xhr) {
                 if (data.deleted) {
                     $content.addClass('deleted');
@@ -403,7 +405,7 @@ $(document).ready(function() {
         $.ajax({
             url: '/gear/comment/get/' + id + '/',
             dataType: 'json',
-            timeout: 5000,
+            timeout: 30000,
             success: function(data, status, xhr) {
                 $content.hide();
                 $links.hide();
