@@ -23,7 +23,8 @@ class Command(BaseCommand):
                                                      Q(w__gte = settings.IMAGE_OF_THE_DAY_WIDTH) &
                                                      Q(h__gte = settings.IMAGE_OF_THE_DAY_HEIGHT) &
                                                      Q(is_stored = True) &
-                                                     Q(is_wip = False))
+                                                     Q(is_wip = False) &
+                                                     Q(original_ext__in = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG']))
 
             if yesterdays_images:
                 coolest_image = yesterdays_images[0]
@@ -32,17 +33,17 @@ class Command(BaseCommand):
                     score = 0
                     for vote in image.votes.all():
                         score += vote.score 
- 
+
                     times_favorited = Favorite.objects.filter(image = image).count()
                     comments = Comment.objects.filter(image = image).count()
-    
+
                     coolness = score + (times_favorited * 3) + (comments * 5)
 
-                    print "Examining: [%s] [%d]" % (image.title, coolness)
+                    print "Examining: [%s] [%d/%d]" % (image.title.encode('utf-8'), coolness, current_coolness)
                     if coolness > current_coolness:
                         coolest_image = image
                         current_coolness = coolness
-                        print "Coolest image: [%s] [%d]" % (image.title, coolness)
+                        print "\tCoolest image: [%s] [%d]" % (image.title.encode('utf-8'), coolness)
             else:
                 yesterday = yesterday - timedelta(1)
 

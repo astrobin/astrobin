@@ -85,6 +85,7 @@ class ImageResource(ModelResource):
 
             'filename',
             'original_ext',
+            'uploaded',
             'description',
             'h',
             'w',
@@ -117,7 +118,7 @@ class ImageResource(ModelResource):
             'fieldh': ALL,
             'fieldunits': ALL,
         }
-        ordering = ['rating_score', 'rating_votes']
+        ordering = ['rating_score', 'rating_votes', 'uploaded']
 
     def dehydrate_subjects(self, bundle):
         subjects = bundle.obj.subjects.all()
