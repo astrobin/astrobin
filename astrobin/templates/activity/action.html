@@ -1,0 +1,31 @@
+{% load i18n avatar_tags %}
+<div class="action">
+    {% if action.actor.get_absolute_url %}
+        <div class="avatar">
+            <a href="{{action.actor.get_absolute_url}}">{% avatar action.actor 32 %}</a>
+        </div>
+    {% endif %}
+
+    <div class="content">
+        {% if action.actor.get_absolute_url %}
+            <a href="{{action.actor.get_absolute_url}}">{{action.actor}}</a>
+        {% else %}
+            <a href="{{action.actor_url}}">{{action.actor}}</a>
+        {% endif %}
+
+        {% trans action.verb %}
+
+        {% if action.target %}
+            {% if action.target.get_absolute_url %}
+                <a href="{{action.target.get_absolute_url}}">{{action.target}}</a>
+            {% else %}
+                <a href="{{action.target_url}}">{{action.target}}</a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="when">
+        {{action.timestamp|timesince}} {% trans "ago" %}
+    </div>
+</div>
+

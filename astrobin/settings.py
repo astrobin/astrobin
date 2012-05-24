@@ -197,6 +197,7 @@ INSTALLED_APPS = (
     'pipeline',
     'tastypie',
     'reviews',
+    'actstream',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -351,3 +352,15 @@ PIPELINE_JS = {
     },
 }
 
+ACTSTREAM_ACTION_MODELS = (
+    'auth.user',
+    'astrobin.gear',
+    'astrobin.telescope',
+    'astrobin.camera',
+    'astrobin.mount',
+    'astrobin.filter',
+    'astrobin.software',
+    'astrobin.accessory',
+    'astrobin.image',
+    'astrobin.imagerevision',
+)

@@ -2237,7 +2237,8 @@ form.avatar-change label.control-label {
   padding-top: 4px;
   display: block;
 }
-.home-strip-container {
+.home-strip-container,
+.activity-stream {
   margin-bottom: 4px;
   padding: 8px;
   border: 1px dashed #505050;
@@ -2248,7 +2249,8 @@ form.avatar-change label.control-label {
   padding: 8px 0 0 0;
   position: relative;
 }
-.home-strip-container .title {
+.home-strip-container .title,
+.activity-stream .title {
   background: #303030 url('../images/darker-panel-tile.png');
   width: 205px;
   margin: 0;
@@ -2266,12 +2268,56 @@ form.avatar-change label.control-label {
   -o-transform-origin: 103px 102px;
   -ms-transform-origin: 103px 102px;
 }
-.home-strip-container .title h3 {
+.home-strip-container .title h3,
+.activity-stream .title h3 {
   text-transform: uppercase;
   font-size: 2em;
 }
-.home-strip-container .thumbs {
-  margin-left: 68px;
+.home-strip-container .thumbs,
+.activity-stream .thumbs {
+  margin-left: 58px;
+}
+.activity-stream {
+  padding-top: 0;
+  min-height: 922px;
+  max-height: 922px;
+  overflow-y: hidden;
+}
+.activity-stream h3 {
+  background: #303030 url('../images/darker-panel-tile.png');
+  text-transform: uppercase;
+  font-size: 1.75em;
+  padding: 4px 12px;
+  margin-top: 0;
+  text-align: center;
+}
+.activity-actions {
+  padding: 8px;
+  margin-bottom: 12px;
+}
+.activity-actions .action {
+  border-bottom: 1px solid #393939;
+  padding: 8px 0;
+  position: relative;
+  min-height: 32px;
+}
+.activity-actions .action:last-child {
+  border-bottom: 0;
+}
+.activity-actions .action .avatar {
+  float: left;
+  margin-right: 8px;
+  clear: both;
+}
+.activity-actions .action .content {
+  font-size: 90%;
+}
+.activity-actions .action .when {
+  color: #525252;
+  font-size: 60%;
+  position: absolute;
+  bottom: -4px;
+  right: 2px;
 }
 .notice-container .unread {
   background-color: #FADDD6;

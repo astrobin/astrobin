@@ -2424,7 +2424,7 @@ form.avatar-change label.control-label {display: none;}
     }
 }
 
-.home-strip-container {
+.home-strip-container, .activity-stream {
     .stitched-box;
     margin-top: @spacer-xxlarge;
     padding: @spacer-medium 0 0 0;
@@ -2457,7 +2457,57 @@ form.avatar-change label.control-label {display: none;}
     }
 
     .thumbs {
-        margin-left: 68px;
+        margin-left: 58px;
+    }
+}
+
+.activity-stream {
+    padding-top: 0;
+    min-height: 922px;
+    max-height: 922px;
+    overflow-y: hidden;
+
+    h3 {
+        background: #303030 url('../images/darker-panel-tile.png');
+        text-transform: uppercase;
+        font-size: 1.75em;
+        padding: @spacer-small @spacer-large;
+        margin-top: 0;
+        text-align: center;
+    }
+}
+
+.activity-actions {
+    padding: @spacer-medium;
+    margin-bottom: @spacer-large;
+
+    .action {
+        border-bottom: 1px solid #393939;
+        padding: @spacer-medium 0;
+        position: relative;
+        min-height: 32px;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        .avatar {
+            float: left;
+            margin-right: @spacer-medium;
+            clear: both;
+        }
+
+        .content {
+            font-size: 90%;
+        }
+
+        .when {
+            color: darken(@text-color, 40%);
+            font-size: 60%;
+            position: absolute;
+            bottom: -4px;
+            right: 2px;
+        }
     }
 }
 

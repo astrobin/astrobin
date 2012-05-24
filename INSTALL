@@ -92,7 +92,8 @@ ln -s ./venv/bin/pip vpip
     django-pipeline==1.2.1 \
     jsmin \
     cssmin \
-    django-tastypie
+    django-tastypie \
+    django-activity-stream
 
 Install django-hitcount from sources:
 https://github.com/thornomad/django-hitcount/

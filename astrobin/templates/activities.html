@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load tags %}
+{% load activity_tags %}
+
+{% block content %}
+    <h1>{% trans "Activity stream" %}</h1>
+    <div class="activity-actions">
+        {% for action in global_action_list %}
+            {% display_action action %}
+        {% empty %}
+            <p>{% trans "There is no activity yet." %}</p>
+        {% endfor %}
+    </div>
+
+    {% include 'pagination.html' %}
+{% endblock %}
