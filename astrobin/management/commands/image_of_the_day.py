@@ -23,7 +23,8 @@ class Command(BaseCommand):
                                                      Q(w__gte = settings.IMAGE_OF_THE_DAY_WIDTH) &
                                                      Q(h__gte = settings.IMAGE_OF_THE_DAY_HEIGHT) &
                                                      Q(is_stored = True) &
-                                                     Q(is_wip = False))
+                                                     Q(is_wip = False) &
+                                                     Q(original_ext__in = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG']))
 
             if yesterdays_images:
                 coolest_image = yesterdays_images[0]
