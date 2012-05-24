@@ -29,6 +29,7 @@ from haystack.query import SearchQuerySet, SQ
 import persistent_messages
 from djangoratings.models import Vote
 from reviews.forms import ReviewedItemForm
+from actstream.models import Action
 
 from uuid import uuid4
 import os
@@ -146,6 +147,7 @@ def index(request):
         'small_size': settings.SMALL_THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
         'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
+        'global_actions': Action.objects.all()[:16],
     }
 
     profile = None
@@ -153,25 +155,25 @@ def index(request):
         profile = UserProfile.objects.get(user=request.user)
 
         response_dict['recent_from_followees'] = \
-            Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:18]
+            Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:10]
 
         response_dict['recently_favorited'] = \
             Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
                          .exclude(last_favorited = None) \
-                         .order_by('-last_favorited')[:8]
+                         .order_by('-last_favorited')[:10]
 
         recent_fives_list = []
         l = 0
-        while len(recent_fives_list) < 8:
+        while len(recent_fives_list) < 10:
             recent_fives_qs = \
                 Image.objects.filter(votes__score = 5) \
                              .distinct() \
-                             .order_by('-votes__date_added')[l:l+8]
+                             .order_by('-votes__date_added')[l:l+10]
             for i in recent_fives_qs:
                 if i not in recent_fives_list:
                     recent_fives_list.append(i)
             l += 1
-        response_dict['recently_five_starred'] = recent_fives_list[:8]
+        response_dict['recently_five_starred'] = recent_fives_list[:10]
 
         iotd = ImageOfTheDay.objects.all()[0]
         gear_list = (
@@ -194,7 +196,7 @@ def index(request):
         queryset = Image.objects.filter(is_stored = True, is_wip = False).order_by('-uploaded'),
         template_name = 'index.html',
         template_object_name = 'image',
-        paginate_by = 18,
+        paginate_by = 10,
         extra_context = response_dict)
 
 
@@ -3922,4 +3924,14 @@ def gear_comment_edit(request):
 
     return ajax_fail()
 
+
+@require_GET
+def activities(request):
+    return object_list(
+        request, 
+        queryset = Action.objects.all(),
+        template_name = 'activities.html',
+        template_object_name = 'global_action',
+        paginate_by = 100,
+        extra_context = {})
 

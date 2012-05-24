@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
+{% load activity_tags %}
 
 {% block content %}
     {% if not request.user.is_authenticated %}
@@ -80,67 +81,93 @@
     {% endif %}
 
     <div class="row">
-        <div class="span12">
-            <div class="home-strip-container">
-                <div class="title">
-                    <h3>{% trans "Recent" %}</h3>
-                </div>
-                <div class="thumbs">
-                    {% image_list request image_list 0 small_size %}
-                </div>
+        <div class="span7">
+
+            <div class="row">
+                <div class="span7">
+                    <div class="home-strip-container">
+                        <div class="title">
+                            <h3>{% trans "Recent" %}</h3>
+                        </div>
+                        <div class="thumbs">
+                            {% image_list request image_list 0 small_size %}
+                        </div>
+                    </div>
+                </div> <!-- recently uploaded row -->
             </div>
-        </div>
-    </div> <!-- recently uploaded row -->
 
     {% if user.is_authenticated %}
-
-    {% if recent_from_followees %}
-    <div class="row">
-        <div class="span12">
-            <div class="home-strip-container">
-                <div class="title">
-                    <h3>{% trans "Followed" %}</h3>
-                </div>
-                <div class="thumbs">
-                    {% image_list request recent_from_followees 0 small_size %}
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-
-    <div class="row">
-        <div class="span6">
-            <div class="home-strip-container">
-                <div class="title">
-                    <h3>
-                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                        <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                    </h3>
-                </div>
-                <div class="thumbs">
-                    {% image_list request recently_five_starred 0 small_size %}
+        {% if recent_from_followees %}
+            <div class="row">
+                <div class="span7">
+                    <div class="home-strip-container">
+                        <div class="title">
+                            <h3>{% trans "Followed" %}</h3>
+                        </div>
+                        <div class="thumbs">
+                            {% image_list request recent_from_followees 0 small_size %}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
 
-        <div class="span6">
-            <div class="home-strip-container">
-                <div class="title">
-                    <h3>
-                        <img src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png" alt="{% trans "Recently favorited" %}"/>
-                    </h3>
-                </div>
-                <div class="thumbs">
-                    {% image_list request recently_favorited 0 small_size %}
+            <div class="row">
+                <div class="span7">
+                    <div class="home-strip-container">
+                        <div class="title">
+                            <h3>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            </h3>
+                        </div>
+                        <div class="thumbs">
+                            {% image_list request recently_five_starred 0 small_size %}
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="span7">
+                    <div class="home-strip-container">
+                        <div class="title">
+                            <h3>
+                                <img src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png" alt="{% trans "Recently favorited" %}"/>
+                            </h3>
+                        </div>
+                        <div class="thumbs">
+                            {% image_list request recently_favorited 0 small_size %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endif %} <!-- authenticated -->
+
+        </div> <!-- span7 -->
+
+        <div class="span5"> <!-- activity stream -->
+            <div class="activity-stream">
+                <h3>{% trans "Activity stream" %}</h3>
+                <div class="activity-actions">
+                    {% for action in global_actions %}
+                        {% display_action action %}
+                    {% empty %}
+                        <p>{% trans "There is no activity yet." %}</p>
+                    {% endfor %}
+                </div>
+
+                {% if global_actions|length == 16 %}
+                    <div class="pagination-centered">
+                        <a href="{% url activities %}">{% trans "(view more)" %}</a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-    </div>
-    {% endif %}
+    </div> <!-- row -->
 {% endblock %}
 
 {% block extra_js %}

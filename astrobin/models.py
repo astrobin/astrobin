@@ -31,8 +31,8 @@ from notifications import push_notification
 from fields import *
 
 from mptt.models import MPTTModel, TreeForeignKey
-
 from reviews.models import ReviewedItem
+from actstream import action
 
 
 LICENSE_CHOICES = (
@@ -158,10 +158,17 @@ class Gear(models.Model):
     reviews = generic.GenericRelation(ReviewedItem)
 
     def __unicode__(self):
-        return self.name
+        if self.make and self.make.lower() in self.name.lower():
+            return self.name
+        if not self.make or self.make == '':
+            return self.name
+        return "%s %s" % (self.make, self.name)
 
     def attributes(self):
         return [('make', None), ('name', None)]
+
+    def get_absolute_url(self):
+        return '/gear/%i/' % self.id
 
     class Meta:
         app_label = 'astrobin'
@@ -296,6 +303,11 @@ class Telescope(Gear):
     class Meta:
         app_label = 'astrobin'
 
+def telescope_post_save(sender, instance, created, **kwargs):
+    if created:
+        action.send(instance, verb = _("was added to the gear database"))
+post_save.connect(telescope_post_save, sender = Telescope)
+
 
 class Mount(Gear):
     max_payload = models.DecimalField(
@@ -322,6 +334,11 @@ class Mount(Gear):
 
     class Meta:
         app_label = 'astrobin'
+
+def mount_post_save(sender, instance, created, **kwargs):
+    if created:
+        action.send(instance, verb = _("was added to the gear database"))
+post_save.connect(mount_post_save, sender = Mount)
 
 
 class Camera(Gear):
@@ -375,10 +392,20 @@ class Camera(Gear):
     class Meta:
         app_label = 'astrobin'
 
+def camera_post_save(sender, instance, created, **kwargs):
+    if created:
+        action.send(instance, verb = _("was added to the gear database"))
+post_save.connect(camera_post_save, sender = Camera)
+
 
 class FocalReducer(Gear):
     class Meta:
         app_label = 'astrobin'
+
+def focal_reducer_post_save(sender, instance, created, **kwargs):
+    if created:
+        action.send(instance, verb = _("was added to the gear database"))
+post_save.connect(focal_reducer_post_save, sender = FocalReducer)
 
 
 class Software(Gear):
@@ -396,6 +423,11 @@ class Software(Gear):
 
     class Meta:
         app_label = 'astrobin'
+
+def software_post_save(sender, instance, created, **kwargs):
+    if created:
+        action.send(instance, verb = _("was added to the gear database"))
+post_save.connect(software_post_save, sender = Software)
 
 
 class Filter(Gear):
@@ -443,12 +475,22 @@ class Filter(Gear):
     class Meta:
         app_label = 'astrobin'
 
+def filter_post_save(sender, instance, created, **kwargs):
+    if created:
+        action.send(instance, verb = _("was added to the gear database"))
+post_save.connect(filter_post_save, sender = Filter)
+
 
 class Accessory(Gear):
     pass
 
     class Meta:
         app_label = 'astrobin'
+
+def accessory_post_save(sender, instance, created, **kwargs):
+    if created:
+        action.send(instance, verb = _("was added to the gear database"))
+post_save.connect(accessory_post_save, sender = Accessory)
 
 
 def build_catalog_and_name(obj, name):
@@ -840,6 +882,11 @@ class Image(models.Model):
     def get_absolute_url(self):
         return '/%i' % self.id
 
+def image_post_save(sender, instance, created, **kwargs):
+    if created and not instance.is_wip:
+        action.send(instance.user, verb = _("uploaded"), target = instance)
+post_save.connect(image_post_save, sender = Image)
+
 
 class ImageRevision(models.Model):
     image = models.ForeignKey(Image)
@@ -863,7 +910,7 @@ class ImageRevision(models.Model):
         ordering = ('uploaded', '-id')
         
     def __unicode__(self):
-        return 'Revision for %s' % self.image.title
+        return self.image.title
 
     def save(self, *args, **kwargs):
         if self.id:
@@ -888,6 +935,11 @@ class ImageRevision(models.Model):
     def get_absolute_url(self):
         return '/%i?r=%i' % (self.image.id, self.id)
  
+def image_revision_post_save(sender, instance, created, **kwargs):
+    if created and not instance.image.is_wip:
+        action.send(instance.image.user, verb = _("uploaded a new revision of"), target = instance)
+post_save.connect(image_revision_post_save, sender = ImageRevision)
+
 
 class Acquisition(models.Model):
     date = models.DateField(
@@ -1292,6 +1344,12 @@ class UserProfile(models.Model):
     class Meta:
         app_label = 'astrobin'
 
+def create_user_profile(sender, instance, created, **kwargs):  
+    if created:
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)
+
 
 class Comment(MPTTModel):
     image = models.ForeignKey(
@@ -1331,6 +1389,12 @@ class Comment(MPTTModel):
 
     class Meta:
         app_label = 'astrobin'
+
+def comment_post_save(sender, instance, created, **kwargs):
+    if created:
+        action.send(instance.author, verb = _("commented on"),
+                    target = instance.image)
+post_save.connect(comment_post_save, sender = Comment)
 
 
 class GearComment(MPTTModel):
@@ -1372,12 +1436,11 @@ class GearComment(MPTTModel):
     class Meta:
         app_label = 'astrobin'
 
-
-def create_user_profile(sender, instance, created, **kwargs):  
+def gear_comment_post_save(sender, instance, created, **kwargs):
     if created:
-        profile, created = UserProfile.objects.get_or_create(user=instance)
-
-post_save.connect(create_user_profile, sender=User)
+        action.send(instance.author, verb = _("has left a comment on the gear item"),
+                    target = instance.gear)
+post_save.connect(gear_comment_post_save, sender = GearComment)
 
 
 class Location(models.Model):
@@ -1468,20 +1531,11 @@ class Favorite(models.Model):
         app_label = 'astrobin'
         ordering = ('-created',)
 
-
-from zinnia.models import Entry
-def blog_entry_notify(sender, instance, created, **kwargs):
+def favorite_post_save(sender, instance, created, **kwargs):
     if created:
-         push_notification(
-            User.objects.all(),
-            'new_blog_entry',
-            {
-                'object': instance.title,
-                'object_url': instance.get_absolute_url()
-            }
-         )
-
-post_save.connect(blog_entry_notify, sender = Entry)
+        action.send(instance.user, verb = _("has favorited"),
+                    target = instance.image)
+post_save.connect(favorite_post_save, sender = Favorite)
 
 
 class App(models.Model):
@@ -1626,4 +1680,27 @@ class ImageOfTheDay(models.Model):
 
     def __unicode__(self):
         return u"%s as an Image of the Day" % self.image.title
+
+
+from zinnia.models import Entry
+def blog_entry_notify(sender, instance, created, **kwargs):
+    if created:
+         push_notification(
+            User.objects.all(),
+            'new_blog_entry',
+            {
+                'object': instance.title,
+                'object_url': instance.get_absolute_url()
+            }
+         )
+post_save.connect(blog_entry_notify, sender = Entry)
+
+
+from reviews.models import ReviewedItem
+def reviewed_item_post_save(sender, instance, created, **kwargs):
+    if created:
+         action.send(instance.user,
+                     verb = _("has written a review on"),
+                     target = instance.content_object)
+post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
 

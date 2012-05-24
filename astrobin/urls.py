@@ -260,5 +260,8 @@ urlpatterns = patterns('',
     url(r'^api/request-key/$', views.app_api_key_request, name = 'app_api_key_request'),
     url(r'^api/request-key/process/$', views.app_api_key_request_process, name = 'app_api_key_request_process'),
     url(r'^api/request-key/complete/$', views.app_api_key_request_complete, name = 'app_api_key_request_complete'),
+
+    url('^activity/', include('actstream.urls')),
+    url('^activities/$', views.activities, name = 'activities'),
 )
 
