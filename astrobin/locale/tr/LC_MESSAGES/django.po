@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-06 08:02+0000\n"
-"PO-Revision-Date: 2012-03-12 18:07+0100\n"
+"PO-Revision-Date: 2012-05-20 10:43+0100\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: tr\n"
@@ -1143,18 +1143,16 @@ msgid "Users"
 msgstr "Kullanıcılar"
 
 #: forms.py:263
-#, fuzzy
 msgid "Telescope type"
-msgstr "Teleskobun açıklığı"
+msgstr "Teleskop türü"
 
 #: forms.py:264 forms.py:270
 msgid "Any"
-msgstr ""
+msgstr "Her hangi biri"
 
 #: forms.py:269
-#, fuzzy
 msgid "Camera type"
-msgstr "Kamera lens"
+msgstr "Kamera türü"
 
 #: forms.py:282 forms.py:287
 msgid "Express value in mm"
@@ -1326,14 +1324,12 @@ msgid "Dutch"
 msgstr "Flemenkçe"
 
 #: models.py:53 models.py:65 settings.py:58
-#, fuzzy
 msgid "Turkish"
-msgstr "Türkmenistan"
+msgstr "Türkçe"
 
 #: models.py:54 models.py:66 settings.py:59
-#, fuzzy
 msgid "Albanian"
-msgstr "Arnavutluk"
+msgstr "Arnavutça"
 
 #: models.py:70
 msgid "Pulsars"
@@ -1600,9 +1596,8 @@ msgid "Compact"
 msgstr "Kompakt"
 
 #: models.py:260
-#, fuzzy
 msgid "Video camera"
-msgstr "Rehber Kameralar"
+msgstr "Video kamera"
 
 #: models.py:264 models.py:569 templates/popover/gear_camera.html:6
 msgid "Pixel size"
@@ -1713,28 +1708,26 @@ msgid "This ia narrow field image (less than 1 degree)."
 msgstr "Bu bir dar alan fotoğrafı (1 dereceden ufak)"
 
 #: models.py:478
-#, fuzzy
 msgid "Deep sky object"
-msgstr "Tüm derin uzay cisimleri"
+msgstr "Derin uzay cisimleri"
 
 #: models.py:479
-#, fuzzy
 msgid "Solar system body or event"
-msgstr "Güneş sistemi"
+msgstr "Güneş sistemi nesnesi yada olayı"
 
 #: models.py:480 views.py:1757 templates/wall.html:127
 msgid "Extremely wide field"
-msgstr ""
+msgstr "Çok geniş alan"
 
 #: models.py:481 views.py:1763 templates/wall.html:133
 msgid "Star trails"
-msgstr ""
+msgstr "Yıldız izleri"
 
 #: models.py:482 views.py:1769 templates/base.html:233
 #: templates/profile-edit-menu.html:9 templates/wall.html:139
 #: templates/user/card.html:13 templates/user/profile-subnav.html:89
 msgid "Gear"
-msgstr "Ekipman"
+msgstr "Donanım"
 
 #: models.py:488
 msgid "Title"
@@ -2155,13 +2148,13 @@ msgstr "Metre cinsinden."
 
 #: models.py:1416
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr ""
+msgstr "API'leri kullanmak isteyen uygulama yada web sitesinin adı"
 
 #: models.py:1424
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
-msgstr ""
+msgstr "Uygulamanızın amacını ve API'yi nasıl kullanmak istediğinizi belirtin."
 
 #: search.py:79 views.py:983 views.py:1271 views.py:1296
 #: templates/image/actions/bring_to_attention.html:30
@@ -2222,34 +2215,28 @@ msgstr "Görüntülenme, günlük"
 
 #: stats.py:360 templates/subject/page.html:75
 #: templates/subject/page.html.py:110
-#, fuzzy
 msgid "Total images"
-msgstr "Resim yok"
+msgstr "Toplam resim"
 
 #: stats.py:497 stats.py:559
-#, fuzzy
 msgid "Integration hours by camera type"
-msgstr "Ekipmana göre toplam pozlama süreleri"
+msgstr "Kamera türüne göre toplam pozlama süreleri"
 
 #: stats.py:578
-#, fuzzy
 msgid "Refractor"
-msgstr "Refraktör: akromatik"
+msgstr "Refraktör"
 
 #: stats.py:579
-#, fuzzy
 msgid "Reflector"
-msgstr "Reflektör: Nasmyth"
+msgstr "Reflektör"
 
 #: stats.py:580
-#, fuzzy
 msgid "Catadioptric"
-msgstr "Katadioptrik: Maksutov"
+msgstr "Katadioptrik"
 
 #: stats.py:623 templates/stats.html:33
-#, fuzzy
 msgid "Number of images by subject type"
-msgstr "%(originator)s kullanıcısından yeni bir fotoğraf"
+msgstr "Nesne türüne göre resim sayısı"
 
 #: views.py:727
 msgid "Resolution"
@@ -2328,9 +2315,8 @@ msgstr ""
 "strong> alt başlığını kullanın."
 
 #: views.py:1719
-#, fuzzy
 msgid "Gear images"
-msgstr "Resim yok"
+msgstr "Ekipman resimleri"
 
 #: views.py:1751 templates/image/edit/acquisition.html:99
 msgid "Solar system"
@@ -2477,23 +2463,20 @@ msgid "There was a reply to your comment"
 msgstr "Yorumunuza bir yanıt yazıldı"
 
 #: management/__init__.py:117
-#, fuzzy
 msgid "Your image was favorited"
-msgstr "Fotoğrafınız silindi"
+msgstr "Fotoğrafınız favori yapıldı"
 
 #: management/__init__.py:123
-#, fuzzy
 msgid "New image with some gear you follow"
-msgstr "Takip ettiğiniz bir kullanıcıdan yeni resim"
+msgstr "Takip ettiğiniz bir ekipmandan yeni resim"
 
 #: management/__init__.py:129
-#, fuzzy
 msgid "New image of a subject you follow"
-msgstr "Takip ettiğiniz bir kullanıcıdan yeni resim"
+msgstr "Takip ettiğiniz bir obje ile ilgili yeni resim"
 
 #: management/__init__.py:135
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "API Anahtar isteğiniz onaylandı"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2509,7 +2492,7 @@ msgstr ""
 
 #: templates/app_api_key_request.html:6
 msgid "Request an API key"
-msgstr ""
+msgstr "API anahtarı isteği gönder"
 
 #: templates/app_api_key_request.html:8
 msgid ""
@@ -2517,19 +2500,24 @@ msgid ""
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
 "in your own app or website."
 msgstr ""
+"AstroBin API'lerini kullanmak istediğiniz için teşekkürler! Uygulamanızda "
+"yada web sitenizde AstroBin verilerine erişmek isterseniz bir "
+"<strong>anahtar</strong>'a ve <strong>gizli kod (secret)</strong>'a "
+"ihtiyacınız olacak."
 
 #: templates/app_api_key_request.html:9
 msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr ""
+"İsteğinizi gönderdikten sonra, 24 saat içerisinde bir yanıt alacaksınız."
 
 #: templates/app_api_key_request.html:13
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"%(tos_url)s\">Terms of Service</a>."
 msgstr ""
-"AstroBin'e kayıt olarak, <a href=\"%(tos_url)s\">kullanım koşullarımızı</a> "
-"kabul etmiş bulunuyorsunuz."
+"Lütfen <a href=\"%(tos_url)s\">Kullanım koşullarımız</a> içinde API'ler "
+"bölümünü okuduğunuzdan emin olun."
 
 #: templates/app_api_key_request.html:18
 #: templates/registration/password_change_form.html:10
@@ -2537,18 +2525,19 @@ msgstr ""
 #: templates/registration/password_reset_form.html:12
 #: templates/registration/registration_form.html:17
 msgid "Submit"
-msgstr "Uygula"
+msgstr "Gönder"
 
 #: templates/app_api_key_request_complete.html:6
-#, fuzzy
 msgid "Your API key request has been submitted"
-msgstr "İsteğiniz yerine getirildi"
+msgstr "API anahtar isteğiniz gönderildi"
 
 #: templates/app_api_key_request_complete.html:8
 msgid ""
 "You will receive a reply within 24 hours. Thanks for your interest in using "
 "AstroBin's APIs!"
 msgstr ""
+"24 saat içerisinde bir yanıt alacaksınız. AstronBin API'lerinin kullanımıyla "
+"ilgilendiğiniz için teşekkürler"
 
 #: templates/base.html:78 templates/base.html.py:383 templates/base.html:411
 msgid "Home"
@@ -2563,9 +2552,8 @@ msgid "Explore"
 msgstr "Araştır"
 
 #: templates/base.html:86
-#, fuzzy
 msgid "Popular subjects"
-msgstr "Daha fazla resim: Aynı obje"
+msgstr "Popüler objeler"
 
 #: templates/base.html:88 templates/explore_choose.html:8
 #: templates/wall.html:159
@@ -2582,7 +2570,7 @@ msgstr "Messier maratonu"
 
 #: templates/base.html:93
 msgid "Advanced search"
-msgstr ""
+msgstr "Gelişmiş arama"
 
 #: templates/base.html:95 templates/stats.html:7
 #: templates/subject/page.html:72 templates/user/card.html:27
@@ -2607,13 +2595,12 @@ msgid "FAQ"
 msgstr "SSS"
 
 #: templates/base.html:110 templates/contact_form/contact.html:6
-#, fuzzy
 msgid "Contact"
-msgstr "İçeriyor"
+msgstr "Bağlantı"
 
 #: templates/base.html:171
 msgid "Help with translations!"
-msgstr ""
+msgstr "Çeviri yardımı!"
 
 #: templates/base.html:179
 msgid "Please select your language from the options above."
@@ -2626,9 +2613,8 @@ msgid "Upload"
 msgstr "Yükleme"
 
 #: templates/base.html:201
-#, fuzzy
 msgid "My places"
-msgstr "Sayfam"
+msgstr "Mekanlarım"
 
 #: templates/base.html:204 templates/user/profile-subnav.html:14
 msgid "Gallery"
@@ -2637,7 +2623,7 @@ msgstr "Galeri"
 #: templates/base.html:209 templates/image/detail.html:719
 #: templates/user/profile-subnav.html:19
 msgid "Favorites"
-msgstr ""
+msgstr "Favoriler"
 
 #: templates/base.html:214 templates/image/detail.html:454
 #: templates/image/full.html:73 templates/user/profile-subnav.html:24
@@ -2649,31 +2635,28 @@ msgid "Plots"
 msgstr "Grafikler"
 
 #: templates/base.html:224
-#, fuzzy
 msgid "My messages"
-msgstr "Mesajlar"
+msgstr "Mesajlarım"
 
 #: templates/base.html:227 templates/user/profile-subnav.html:48
 msgid "API Keys"
-msgstr ""
+msgstr "API anahtarları"
 
 #: templates/base.html:231
 msgid "My settings"
-msgstr ""
+msgstr "Ayarlarım"
 
 #: templates/base.html:232 templates/subject/page.html:13
-#, fuzzy
 msgid "Basic information"
 msgstr "Temel bilgiler"
 
 #: templates/base.html:236 templates/profile-edit-menu.html:21
 msgid "Preferences"
-msgstr "Özellikler"
+msgstr "Tercihler"
 
 #: templates/base.html:237 templates/profile-edit-menu.html:24
-#, fuzzy
 msgid "Avatar"
-msgstr "Katar"
+msgstr "Profil Resmi"
 
 #: templates/base.html:239 templates/user/profile.html:96
 #: templates/user/profile.html.py:99
@@ -2744,7 +2727,7 @@ msgstr "Teşekkürler"
 
 #: templates/base.html:394
 msgid "The localization team"
-msgstr "Yerelleştirme takımı"
+msgstr "Çeviri takımı"
 
 #: templates/base.html:400
 msgid "Copyright"
@@ -3308,6 +3291,10 @@ msgid ""
 "interesting statistics. There is also a page that shows the most popular "
 "subjects organized by month and latitude!"
 msgstr ""
+"<em>AstroBın</em>'de astronomik objelerin kendi sayfaları vardır ve burada "
+"objelerin en iyi resimlerini, çizimleri ve trendleri gösteren ilginç "
+"istatistiksel tablolar bulabilirsiniz. Ayrıca, en popüler objelerin aydan "
+"aya ve enleme göre sıralandığı bir sayfa da mevcuttur."
 
 #: templates/help.html:33
 msgid "Data is strongly interconnected"
@@ -3335,12 +3322,20 @@ msgid ""
 "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
 "want, you can search by telescope diameter too!"
 msgstr ""
+"AstroBin, diğer kullanıcıların sahip olduğu ekipman kombinasyonlarını "
+"araştırarak gelecek teleskop ya da kamera alımlarınızda size yardımcı "
+"olacaktır. Örnek olarak, Canon 5D ve herhangi bir apochromatic refraktör ile "
+"veya SBIG ST-8300 ve herhangi bir Richtey-Chretien teleskop ile çekilmiş "
+"tüm fotoğrafları arayabilirsizin. Ya da isterseniz, teleskop çapına göre "
+"arama da yapabilirsiniz."
 
 #: templates/help.html:41
 msgid ""
 "Finally, all this information is collected in interesting plots, that can "
 "help you figure out how some gear items are trending."
 msgstr ""
+"Sonuç olarak, tüm bu bilgiler bazı ekipmanların eğilimini anlamanıza "
+"yardımcı olabilecek grafiklerden toplanmıştır."
 
 #: templates/help.html:45
 msgid "All the data at a glance"
@@ -3413,14 +3408,13 @@ msgid "AstroBin is social!"
 msgstr "AstroBin sosyal bir platformdur."
 
 #: templates/help.html:71
-#, fuzzy
 msgid ""
 "On <em>AstroBin</em> you can message other astrophotographer, follow them "
 "and be notified when they post new images, or perform requests for more data."
 msgstr ""
 "<em>AstroBin</em> de diğer astrofotoğrafçılara mesaj gönderebilir, takip "
 "edebilir, yeni fotoğraf yüklediklerinde haberdar olabilir ya da daha fazla "
-"veri için istekte bulunabilirsiniz. Ayrıca resimleri oylayada bilirsiniz."
+"veri için istekte bulunabilirsiniz."
 
 #: templates/help.html:74
 msgid ""
@@ -3428,6 +3422,10 @@ msgid ""
 "there's a new image from a certain CCD, or telescope, or filter, and so on. "
 "Or you can monitor all the new images of a certain galaxy or nebula."
 msgstr ""
+"Donanım ekipmanlarını ya da çeşitli astronomik konuları takip edebilir ve "
+"her ne zaman belirli bir CCD, teleskop ya da filtreden yeni bir resim "
+"eklenirse bilgilendirilirsiniz. Ya da belirli bir gök ada veya bulutsunun "
+"tüm yeni resimlerini izleyebilirsiniz."
 
 #: templates/help.html:77
 msgid ""
@@ -3511,29 +3509,26 @@ msgstr ""
 "elde edebilirsiniz."
 
 #: templates/index.html:45
-#, fuzzy
 msgid "Image of the day"
-msgstr "Yüklenen fotoğraflar"
+msgstr "Günün fotoğrafı"
 
 #: templates/index.html:87
-#, fuzzy
 msgid "Recent"
-msgstr "RA merkezi"
+msgstr "En yeniler"
 
 #: templates/index.html:101
-#, fuzzy
 msgid "Followed"
-msgstr "Takip et"
+msgstr "Takip ediliyor"
 
 #: templates/index.html:115 templates/index.html.py:116
 #: templates/index.html:117 templates/index.html.py:118
 #: templates/index.html:119
 msgid "Recently voted 5 stars"
-msgstr ""
+msgstr "En son 5 yıldız verilenler"
 
 #: templates/index.html:132
 msgid "Recently favorited"
-msgstr ""
+msgstr "En son favorilere eklenen"
 
 #: templates/index.html:147 templates/image/detail.html:265
 #: templates/image/detail.html.py:1248 templates/image/detail.html:1262
@@ -3556,9 +3551,8 @@ msgstr "Takip et"
 #: templates/popover/gear_mount.html:13
 #: templates/popover/gear_software.html:11
 #: templates/popover/gear_telescope.html:13 templates/popover/subject.html:21
-#, fuzzy
 msgid "Unfollow"
-msgstr "Takip et"
+msgstr "Takip etmeyi bırak"
 
 #: templates/leaderboard.html:17 templates/image/detail.html:246
 #: templates/user/profile-subnav.html:58
@@ -3691,32 +3685,28 @@ msgid "Visit the Messier Marathon"
 msgstr "Messier Maratonunu ziyaret ediniz"
 
 #: templates/most_popular.html:12
-#, fuzzy
 msgid "Select latitude"
-msgstr "Lisanaları seçin"
+msgstr "Enlemi seçin"
 
 #: templates/most_popular.html:17
-#, fuzzy
 msgid "From latitude:"
-msgstr "Rakım"
+msgstr "Enlemden:"
 
 #: templates/most_popular.html:45
-#, fuzzy
 msgid "To latitude:"
-msgstr "Rakım"
+msgstr "Enleme:"
 
 #: templates/most_popular.html:73
 msgid "Hemisphere:"
-msgstr ""
+msgstr "Yarıküre"
 
 #: templates/most_popular.html:90
 msgid "Both"
-msgstr ""
+msgstr "Her ikisi"
 
 #: templates/most_popular.html:98
-#, fuzzy
 msgid "Most popular subjects"
-msgstr "Daha fazla resim: Aynı obje"
+msgstr "En popüler objeler"
 
 #: templates/most_popular.html:100
 msgid ""
@@ -3724,6 +3714,9 @@ msgid ""
 "subject, one image has been chosen. Use the menu to limit the images to "
 "those acquired from a certain latitude on Earth."
 msgstr ""
+"Bunlar AstroBin'de aydan aya takip edilen en popüler objelerdir. Her bir "
+"obje için tek bir resim seçilmiştir. Dünyanın sadece belirli bir enleminden "
+"çekilen fotoğrafları görüntülemek için menüyü kullanın."
 
 #: templates/nightly.html:7
 msgid "Images acquired night after night"
@@ -3802,19 +3795,19 @@ msgstr "Yükleniyor..."
 
 #: templates/stats.html:46
 msgid "Global distribution of camera types"
-msgstr ""
+msgstr "Kamera türlerinin dünya çapındaki dağılımı"
 
 #: templates/stats.html:64
 msgid "Global distribution of telescope types"
-msgstr ""
+msgstr "Teleskop türlerinin dünya çapındaki dağılımı"
 
 #: templates/stats.html:84
 msgid "CCD vs DLSR: the global trend"
-msgstr ""
+msgstr "CCD vs DSLR: Dünya çapındaki gidişat"
 
 #: templates/stats.html:94
 msgid "Global trend of telescope types"
-msgstr ""
+msgstr "Teleskop türlerinin dünya çapındaki gidişatı"
 
 #: templates/tos.html:9
 msgid ""
@@ -3895,7 +3888,7 @@ msgstr "Derecelendirme"
 
 #: templates/wall.html:43 templates/image/detail.html:683
 msgid "Favorited"
-msgstr ""
+msgstr "Favorilere eklendi"
 
 #: templates/wall.html:49 templates/image/detail.html:455
 #: templates/image/detail.html.py:715 templates/search/search.html:31
@@ -3940,43 +3933,41 @@ msgid "Remove filter"
 msgstr "Filtreyi çıkarın"
 
 #: templates/avatar/change.html:9
-#, fuzzy
 msgid "Change your avatar"
-msgstr "Şifrenizi değiştirin"
+msgstr "Profil resminizi değiştirin"
 
 #: templates/avatar/change.html:16
 msgid "You do not yet have an avatar. Please upload one now."
-msgstr ""
+msgstr "Profil resminiz yok. Lütfen şimdi bir tane yükleyin."
 
 #: templates/avatar/change.html:21
 msgid "Current avatar"
-msgstr ""
+msgstr "Şu anki profil resminiz"
 
 #: templates/avatar/change.html:28
-#, fuzzy
 msgid "Previously uploaded"
-msgstr "Yüklenen fotoğraflar"
+msgstr "En son yüklenen"
 
 #: templates/avatar/change.html:31
-#, fuzzy
 msgid "Choose new default"
-msgstr "Dosya seçiniz"
+msgstr "Yeni varsayılan seçin"
 
 #: templates/avatar/change.html:37
-#, fuzzy
 msgid "Upload a new image"
-msgstr "Yüklenmiş resimler"
+msgstr "Yeni resim yükleyin"
 
 #: templates/avatar/change.html:39
-#, fuzzy
 msgid "Avatar image"
-msgstr "Resme watermark uygula"
+msgstr "Profil resmi"
 
 #: templates/contact_form/contact.html:9
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
+"Her hangi bir desteğe ihtiyacınız varsa ya da bir problem raporlamak, geri "
+"bildirim ya da öneri vermek ya da basitçe temasa geçmek istiyorsanız, lütfen "
+"bizimle iletişime geçin."
 
 #: templates/contact_form/contact.html:15 templates/image/detail.html:1254
 #: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
@@ -3985,9 +3976,8 @@ msgid "Send"
 msgstr "Gönder"
 
 #: templates/contact_form/contact_completed.html:5
-#, fuzzy
 msgid "Thank you! Your message was sent successfully."
-msgstr "Fotoğrafınızın levha çözümleme işlemi başarıyla gerçekleştirildi."
+msgstr "Teşekkürler! Mesajınız başarıyla iletildi."
 
 #: templates/image/detail.html:20
 msgid ""
@@ -4028,7 +4018,7 @@ msgstr "Temel bilgileri düzenle"
 
 #: templates/image/detail.html:54
 msgid "Edit gear used"
-msgstr "Kullanılan ekipmanları düzenle"
+msgstr "Kullanılan donanımları düzenle"
 
 #: templates/image/detail.html:60
 msgid "Edit acquisition details"
@@ -4098,7 +4088,6 @@ msgid "Inverted monochrome"
 msgstr "Monokrom'a çevrilmiş"
 
 #: templates/image/detail.html:190 templates/image/detail.html.py:214
-#, fuzzy
 msgid "Annotated (original version)"
 msgstr "Ek açıklamalı (orjinal versiyon)"
 
@@ -4267,65 +4256,59 @@ msgstr "Henüz bir yorum yapılmamaış."
 
 #: templates/image/detail.html:681
 msgid "Already favorited"
-msgstr ""
+msgstr "Zaten favorilere eklendi"
 
 #: templates/image/detail.html:681
-#, fuzzy
 msgid "Mark as favorite"
-msgstr "Tamamlandı olarak işaretle."
+msgstr "Favori olarak işaretle."
 
 #: templates/image/detail.html:685
 msgid "Favorite"
-msgstr ""
+msgstr "Favori"
 
 #: templates/image/detail.html:723
 msgid "Votes"
-msgstr ""
+msgstr "Oylamalar"
 
 #: templates/image/detail.html:750
 msgid "Sharing mode"
-msgstr ""
+msgstr "Paylaşım modu"
 
 #: templates/image/detail.html:752
-#, fuzzy
 msgid "Simple link"
-msgstr "Site linkleri"
+msgstr "Temel bağlantı"
 
 #: templates/image/detail.html:753
 msgid "Forums"
-msgstr ""
+msgstr "Forumlar"
 
 #: templates/image/detail.html:758
 msgid "Thumbnail"
-msgstr ""
+msgstr "Küçük resim"
 
 #: templates/image/detail.html:760 templates/user/api_keys.html:29
-#, fuzzy
 msgid "Yes"
-msgstr "Evet."
+msgstr "Evet"
 
 #: templates/image/detail.html:761
-#, fuzzy
 msgid "No"
-msgstr "Hayır."
+msgstr "Hayır"
 
 #: templates/image/detail.html:767
-#, fuzzy
 msgid "Image size"
-msgstr "Resim sayısı"
+msgstr "Resim boyutu"
 
 #: templates/image/detail.html:769 templates/image/detail.html.py:1283
 msgid "Regular"
-msgstr "Sıradan"
+msgstr "Her zamanki"
 
 #: templates/image/detail.html:770
 msgid "Full"
-msgstr ""
+msgstr "Dolu"
 
 #: templates/image/detail.html:774
-#, fuzzy
 msgid "Copy this"
-msgstr "Kopyala"
+msgstr "Bunu kopyala"
 
 #: templates/image/detail.html:777 templates/image/detail.html.py:780
 #: templates/image/detail.html:835 templates/image/edit/gear.html:77
@@ -4333,17 +4316,16 @@ msgid "Copy"
 msgstr "Kopyala"
 
 #: templates/image/detail.html:787
-#, fuzzy
 msgid "Image mode"
-msgstr "Yüklenen fotoğraflar"
+msgstr "Resim modu"
 
 #: templates/image/detail.html:818
 msgid "Favorited!"
-msgstr ""
+msgstr "Favorilere eklendi!"
 
 #: templates/image/detail.html:838
 msgid "Copied!"
-msgstr ""
+msgstr "Kopyalandı!"
 
 #: templates/image/detail.html:1084
 msgid "just now"
@@ -4471,14 +4453,12 @@ msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "<a href=\"%(the_url)s\">%(user)s</a> kullanıcısı tarafından"
 
 #: templates/image/full.html:79
-#, fuzzy
 msgid "Fit to window"
-msgstr "Resmin genişliğini pencereye sığdır"
+msgstr "Pencereye sığdır"
 
 #: templates/image/full.html:83
-#, fuzzy
 msgid "Full resolution"
-msgstr "Tam çözünürlükte bak"
+msgstr "Tam çözünürlük"
 
 #: templates/image/actions/bring_to_attention.html:6
 msgid "Bring image to attention"
@@ -4649,15 +4629,15 @@ msgstr "Değerleri birbirinden ayırmak için <strong>virgül</strong> kullanın
 
 #: templates/image/edit/basic.html:80
 msgid "Next step: gear used"
-msgstr "Sonraki adım: kullanılan ekipmanlar"
+msgstr "Sonraki adım: kullanılan donanımlar"
 
 #: templates/image/edit/gear.html:13
 msgid "Edit your image: gear used"
-msgstr "Resminizi düzenleyin: kullanılan ekipmanlar"
+msgstr "Resminizi düzenleyin: kullanılan donanımlar"
 
 #: templates/image/edit/gear.html:15
 msgid "Step 4 of 5: gear used"
-msgstr "Adım 4/5: kullanılan ekipmanlar"
+msgstr "Adım 4/5: kullanılan donanımlar"
 
 #: templates/image/edit/gear.html:26
 #, python-format
@@ -4665,40 +4645,43 @@ msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your <a "
 "href=\"%(the_url)s\">profile</a>!"
 msgstr ""
-"Hiç birşey göremiyor musunuz? Belkide önce <a href=\"%(the_url)s"
-"\">profilinize</a> bazı ekipmanlar eklemeniz gerekmektedir!"
+"Hiç birşey göremiyor musunuz? Belkide önce <a href=\"%"
+"(the_url)s\">profilinize</a> bazı donanımlar eklemeniz gerekmektedir!"
 
 #: templates/image/edit/gear.html:28
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or click the plus sign."
 msgstr ""
-"Bu fotoğrafta kullanılan ekipmanları seçmek için, parçaları sağ taraftan sol "
+"Bu fotoğrafta kullanılan donanımları seçmek için, parçaları sağ taraftan sol "
 "tarafa sürükleyin ya da artı işaretine tıklayın."
 
 #: templates/image/edit/gear.html:34
 msgid ""
 "Use this button to import the gear settings from another image of yours."
 msgstr ""
+"Diğer fotoğraflarınızdan donanım ayarlarınızı import etmek için bu butonu "
+"kullanın."
 
 #: templates/image/edit/gear.html:34
 msgid "Copy from another image"
-msgstr ""
+msgstr "Diğer fotoğraftan kopyala"
 
 #: templates/image/edit/gear.html:58
 msgid "Next step: acquisition"
 msgstr "Sonraki adım: çekim"
 
 #: templates/image/edit/gear.html:69
-#, fuzzy
 msgid "Copy gear"
-msgstr "Kopyala"
+msgstr "Donanımı kopyala"
 
 #: templates/image/edit/gear.html:73
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
 "for you, but you will still need to save it in the end."
 msgstr ""
+"Başka bir resimden donanım kopyalamak, donanım seçim formunu sizin için "
+"dolduracak fakat, yine de formu kaydetmeniz gerekecek."
 
 #: templates/image/edit/license.html:7
 msgid "Change the license for this image"
@@ -4730,7 +4713,7 @@ msgstr ""
 
 #: templates/image/edit/menu.html:7 templates/search/search.html:69
 msgid "Gear used"
-msgstr "Kullanılan ekipmanlar"
+msgstr "Kullanılan donanımlar"
 
 #: templates/image/edit/menu.html:8 templates/search/search.html:132
 msgid "Acquisition details"
@@ -4884,15 +4867,15 @@ msgid "Manage received requests"
 msgstr "Gelen istekleri yönet"
 
 #: templates/inclusion_tags/search_image_list.html:27
-#, fuzzy, python-format
+#, python-format
 msgid "Favorited one time"
 msgid_plural "Favorited %(counter)s times"
-msgstr[0] "bir kez görüntülendi"
-msgstr[1] "%(counter)s kez görüntülendi"
+msgstr[0] "Bir kez favorilere eklendi"
+msgstr[1] "%(counter)s kez favorilere eklendi"
 
 #: templates/inclusion_tags/search_image_list.html:29
 msgid "Never favorited"
-msgstr ""
+msgstr "Hiç favorilere eklenmedi"
 
 #: templates/inclusion_tags/search_image_list.html:44
 #, python-format
@@ -4930,21 +4913,20 @@ msgid "Messages"
 msgstr "Mesajlar"
 
 #: templates/messages/inbox.html:22
-#, fuzzy
 msgid "Status"
-msgstr "İstatistikler"
+msgstr "Durum"
 
 #: templates/messages/inbox.html:23
 msgid "Last sender"
-msgstr ""
+msgstr "Son gönderen"
 
 #: templates/messages/inbox.html:24
 msgid "Date and time"
-msgstr ""
+msgstr "Tarih ve zaman"
 
 #: templates/messages/inbox.html:26
 msgid "Excerpt"
-msgstr ""
+msgstr "Alıntı"
 
 #: templates/messages/inbox.html:31
 msgid "New!"
@@ -5029,18 +5011,28 @@ msgid ""
 "    \n"
 "    Thank you for using AstroBin's APIs!"
 msgstr ""
+"API Anahtarı isteğiniz onaylandı!\n"
+"\n"
+"Anahtarınız: %(key)s\n"
+"Gizli kodunuz: %(secret)s\n"
+"\n"
+"Lütfen %(api_docs_url)s' linkindeki API dokümanını okuyunuz\n"
+"\n"
+"API anahtarlarınızı %(api_keys_url)s linkinden inceleyebilirsiniz\n"
+"\n"
+"AstroBin API'lerini kullandığınız için teşekkürler!"
 
 #: templates/notification/api_key_request_approved/notice.html:2
 #: templates/notification/api_key_request_approved/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
 "a>"
-msgstr "<a href=\"%(object_url)s\">Fotoğrafınız işlendi.</a>"
+msgstr "<a href=\"%(api_keys_url)s\">API Anahtarı isteğiniz onaylandı!</a>"
 
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
-msgstr ""
+msgstr "API Anahtar isteği onaylandı"
 
 #: templates/notification/attention_request/full.txt:2
 #, python-format
@@ -5322,21 +5314,19 @@ msgstr "%(user)s kullanıcısı yorumunuza yanıt verdi."
 
 #: templates/notification/new_favorite/full.txt:2
 #: templates/notification/new_favorite/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has marked your image as a favorite: %(url)s"
-msgstr ""
-"%(user)s kullanıcısı fotoğrafınıza yorum yaptı! Şu adresten kontrol "
-"edebilirsiniz: %(url)s"
+msgstr "%(user)s kullanıcısı fotoğrafınızı favorilerine ekledi: %(url)s"
 
 #: templates/notification/new_favorite/notice.html:2
 #: templates/notification/new_favorite/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> has marked your image as a "
 "favorite!</a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınıza "
-"yorum yaptı!</a>"
+"<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
+"favorilerine ekledi!</a>"
 
 #: templates/notification/new_follower/full.txt:2
 #, python-format
@@ -5394,52 +5384,51 @@ msgid "New image by %(originator)s"
 msgstr "%(originator)s kullanıcısından yeni bir fotoğraf"
 
 #: templates/notification/new_image_from_gear/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
 "Check it out at the following url: %(object_url)s"
 msgstr ""
-"%(originator)s isteğinizi yerine getirdi. Şu linkten kontrol edebilirsiniz: "
-"%(object_url)s"
+"Takip ettiğiniz bir donanımdan yeni fotoğraf: <strong>%(gear)s</strong>. Şu "
+"linkten kontrol edebilirsiniz: %(object_url)s"
 
 #: templates/notification/new_image_from_gear/notice.html:2
 #: templates/notification/new_image_from_gear/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
 "</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Artık <strong>%(object)s</strong> kullanıcısını "
-"takip ediyorsunuz.</a>"
+"<a href=\"%(object_url)s\"><strong>%(gear)s</strong> ile çekilmiş yeni bir "
+"fotoğraf.</a>"
 
 #: templates/notification/new_image_from_gear/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "New image taken with a %(gear)s"
-msgstr "%(originator)s tarafından yeni bir fotoğraf revizyonu"
+msgstr "%(gear)s ile çekilmiş yeni bir fotoğraf"
 
 #: templates/notification/new_image_of_subject/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
 "out at the following url: %(object_url)s"
 msgstr ""
-"AstroBin yeni bir blog yazısı yayınladı: \"%(object)s\".\n"
-"\n"
-"Şu adresten kontrol edebilirsiniz: %(object_url)s"
+"Takip ettiğiniz bir konu ile ilgili yeni fotoğraf: <strong>%"
+"(subject)s</strong>. Şu linkten kontrol edebilirsiniz: %(object_url)s"
 
 #: templates/notification/new_image_of_subject/notice.html:2
 #: templates/notification/new_image_of_subject/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Artık <strong>%(object)s</strong> kullanıcısını "
-"takip ediyorsunuz.</a>"
+"<a href=\"%(object_url)s\"><strong>%(subject)s</strong> ile ilgili yeni bir "
+"fotoğraf.</a>"
 
 #: templates/notification/new_image_of_subject/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "New image of %(subject)s"
-msgstr "%(originator)s kullanıcısından yeni bir fotoğraf"
+msgstr " %(subject)s ile ilgili yeni bir fotoğraf"
 
 #: templates/notification/new_image_revision/full.txt:2
 #, python-format
@@ -5523,26 +5512,24 @@ msgstr ""
 #: templates/popover/gear_mount.html:10 templates/popover/gear_software.html:8
 #: templates/popover/gear_telescope.html:10 templates/popover/subject.html:18
 #: templates/subject/page.html:64
-#, fuzzy
 msgid "Find images"
-msgstr "Resim yok"
+msgstr "Resim ara"
 
 #: templates/popover/subject.html:5 templates/subject/page.html:17
 msgid "RA"
-msgstr ""
+msgstr "RA"
 
 #: templates/popover/subject.html:6 templates/subject/page.html:24
 msgid "Dec"
-msgstr ""
+msgstr "Dec"
 
 #: templates/popover/subject.html:14 templates/subject/page.html:41
 msgid "Size"
-msgstr ""
+msgstr "Boyut"
 
 #: templates/popover/subject.html:26
-#, fuzzy
 msgid "View page"
-msgstr "Profile gözat"
+msgstr "Sayfaya gözat"
 
 #: templates/privatebeta/invite.html:7
 msgid "What is AstroBin?"
@@ -5603,13 +5590,12 @@ msgid "Reset password"
 msgstr "Şifreyi sıfırla"
 
 #: templates/registration/logout.html:5
-#, fuzzy
 msgid "Good bye!"
-msgstr "İyi"
+msgstr "Hoşça kalın!"
 
 #: templates/registration/logout.html:6
 msgid "You have been logged out. Come back soon!"
-msgstr ""
+msgstr "Oturumunuzu kapattınız. En kısa zamanda tekrar bekliyoruz!"
 
 #: templates/registration/password_change_done.html:5
 msgid "Password changed"
@@ -5707,9 +5693,8 @@ msgid "Mark as done."
 msgstr "Tamamlandı olarak işaretle."
 
 #: templates/search/search.html:14 templates/user/profile-subnav.html:81
-#, fuzzy
 msgid "Sort"
-msgstr "Şuna göre sırala:"
+msgstr "Sırala"
 
 #: templates/search/search.html:19
 msgid "Relevance"
@@ -5752,9 +5737,8 @@ msgid "Select none"
 msgstr "Seçimi kaldır"
 
 #: templates/search/search.html:325 templates/search/search.html.py:332
-#, fuzzy
 msgid "Select types"
-msgstr "Obje tipi"
+msgstr "Türü seçin"
 
 #: templates/search/search.html:326 templates/search/search.html.py:333
 #: templates/search/search.html:342
@@ -5767,44 +5751,39 @@ msgstr "Lisanaları seçin"
 
 #: templates/subject/page.html:51
 msgid "Interesting links"
-msgstr ""
+msgstr "İlginç bağlantılar"
 
 #: templates/subject/page.html:55
-#, fuzzy
 msgid "SIMBAD page"
-msgstr "Sayfam"
+msgstr "SIMBAD sayfası"
 
 #: templates/subject/page.html:60
 msgid "SIMBAD clickable map"
-msgstr ""
+msgstr "SIMBAD tıklanabilir harita"
 
 #: templates/subject/page.html:89
-#, fuzzy
 msgid "Some images"
-msgstr "Resim yok"
+msgstr "Bazı resimler"
 
 #: templates/subject/page.html:120
-#, fuzzy
 msgid "Camera types"
-msgstr "Kamera lens"
+msgstr "Kamera türleri"
 
 #: templates/subject/page.html:138
-#, fuzzy
 msgid "Telescope types"
-msgstr "Teleskobun açıklığı"
+msgstr "Teleskop türleri"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:11
 msgid "Your API Keys"
-msgstr ""
+msgstr "API Anahtarlarınız"
 
 #: templates/user/api_keys.html:18
 msgid "Created on"
-msgstr ""
+msgstr "Oluşturma tarihi:"
 
 #: templates/user/api_keys.html:19
-#, fuzzy
 msgid "Active"
-msgstr "Eylemler"
+msgstr "Aktif"
 
 #: templates/user/api_keys.html:38
 #, python-format
@@ -5812,10 +5791,12 @@ msgid ""
 "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
 "\">API documentation</a>."
 msgstr ""
+"API Anahtarınız yok. Lütfen <a href=\"%(api_docs_url)s\">API dokümanını</a> "
+"okuyunuz."
 
 #: templates/user/api_keys.html:46
 msgid "Request an API Key"
-msgstr ""
+msgstr "API Anahtar isteği gönder"
 
 #: templates/user/card.html:8
 #, python-format
@@ -5842,23 +5823,22 @@ msgid "%(username)s didn't write anything about themselves."
 msgstr "%(username)s kullanıcıları kendileri hakkında hiç bir şey yazmadılar."
 
 #: templates/user/favorites.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's favorites"
-msgstr "%(user)s kullanıcısının grafikleri"
+msgstr "%(user)s kullanıcısının favorileri"
 
 #: templates/user/favorites.html:11
-#, fuzzy
 msgid "View your favorites"
-msgstr "Resimlerinize göz atın"
+msgstr "Favorilerinize göz atın"
 
 #: templates/user/favorites.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "View %(username)s's favorites"
-msgstr "%(username)s kullanıcısının resimlerine göz at:"
+msgstr "%(username)s kullanıcısının favorilerine göz at:"
 
 #: templates/user/favorites.html:19
 msgid "These are the images you marked as favorite."
-msgstr ""
+msgstr "Bunlar favori olarak işaretlediğiniz resimlerdir."
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
@@ -6068,13 +6048,12 @@ msgid "Please use full names (make and model) for all your gear items!"
 msgstr "Lütfen tüm ekipmanlarınızın tam adlarını (marka ve model) kullanın!"
 
 #: templates/user/profile/edit/gear.html:21
-#, fuzzy
 msgid ""
 "<span class=\"btn btn-primary\">Orange</span> bubbles mean that you need to "
 "edit the properties of that gear item!"
 msgstr ""
-"<span class=\"button\">Turuncu</span> balonlar ilgili ekipman özelliklerini "
-"düzenlemeniz gerektiği manasına gelmektedir!"
+"<span class=\"btn btn-primary\">Turuncu</span> balonlar ilgili ekipman "
+"özelliklerini düzenlemeniz gerektiği manasına gelmektedir!"
 
 #: templates/user/profile/edit/gear.html:31
 msgid "* use a comma to separate the values."
@@ -6118,11 +6097,10 @@ msgid "Edit your site preferences"
 msgstr "Konum tercihlerinizi düzenleyin"
 
 #: templates/user/profile/edit/preferences.html:14
-#, fuzzy
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
-msgstr "Hangi e-mail bilgilendirmesini almak istediğinizi seçin:"
+msgstr "Dilinizi ve hangi e-mail bilgilendirmesini almak istediğinizi seçin:"
 
 #, fuzzy
 #~ msgid "Hot right now"
