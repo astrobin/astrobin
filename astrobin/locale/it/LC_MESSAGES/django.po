@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-25 04:05-0400\n"
+"POT-Creation-Date: 2012-05-25 06:58-0400\n"
 "PO-Revision-Date: 2012-05-24 11:04-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
@@ -2175,11 +2175,13 @@ msgid "Language"
 msgstr "Lingua"
 
 #: models.py:1395
-msgid "commented on"
+#, fuzzy
+msgid "commented on image"
 msgstr "ha commentato"
 
 #: models.py:1441
-msgid "has left a comment on the gear item"
+#, fuzzy
+msgid "comment on gear item"
 msgstr "ha lasciato un commento sullo strumento"
 
 #: models.py:1449

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-25 04:05-0400\n"
+"POT-Creation-Date: 2012-05-25 06:58-0400\n"
 "PO-Revision-Date: 2012-03-27 05:57+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2185,12 +2185,13 @@ msgstr "Gjuha"
 
 #: models.py:1395
 #, fuzzy
-msgid "commented on"
+msgid "commented on image"
 msgstr "(komenti u fshi)"
 
 #: models.py:1441
-msgid "has left a comment on the gear item"
-msgstr ""
+#, fuzzy
+msgid "comment on gear item"
+msgstr "Modifiko mekanizmin e perdorur"
 
 #: models.py:1449
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."

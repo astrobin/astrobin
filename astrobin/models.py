@@ -1392,7 +1392,7 @@ class Comment(MPTTModel):
 
 def comment_post_save(sender, instance, created, **kwargs):
     if created:
-        action.send(instance.author, verb = _("commented on"),
+        action.send(instance.author, verb = _("commented on image"),
                     target = instance.image)
 post_save.connect(comment_post_save, sender = Comment)
 
@@ -1438,7 +1438,7 @@ class GearComment(MPTTModel):
 
 def gear_comment_post_save(sender, instance, created, **kwargs):
     if created:
-        action.send(instance.author, verb = _("has left a comment on the gear item"),
+        action.send(instance.author, verb = _("comment on gear item"),
                     target = instance.gear)
 post_save.connect(gear_comment_post_save, sender = GearComment)
 
