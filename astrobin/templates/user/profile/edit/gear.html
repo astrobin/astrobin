@@ -138,9 +138,10 @@
                         success: function(responseJson, statusText, xhr, $form) {
                             var $btn = $form.find('.btn-primary')
                             $btn.removeClass('disabled');
-                            $btn.val("{% trans "Form saved. Thank you!" %}");
 
                             if (responseJson['success']) {
+                                $btn.val("{% trans "Form saved. Thank you!" %}");
+
                                 $btn_gear.find('.make').text($form.find('input[name=make]').val());
                                 $btn_gear.find('.name').text($form.find('input[name=name]').val());
 
@@ -158,6 +159,7 @@
                                 });
                             } else {
                                 $form.find('.form-content').html(responseJson['form']);
+                                $btn.val("{% trans "Save" %}");
                             }
 
                         },
