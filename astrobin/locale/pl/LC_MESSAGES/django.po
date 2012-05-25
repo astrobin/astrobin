@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-24 11:39-0400\n"
+"POT-Creation-Date: 2012-05-25 04:05-0400\n"
 "PO-Revision-Date: 2012-05-15 20:50+0100\n"
 "Last-Translator: milosz <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1255,12 +1255,6 @@ msgstr "Wprowadź wartość pomiędzy 1 i 10"
 #: forms.py:576
 msgid "Nominate for"
 msgstr "Nominacja za"
-
-#: forms.py:612 forms.py:616
-msgid ""
-"You cannot edit this property for an existing gear item. Consider deleting "
-"this item and creating a new one."
-msgstr ""
 
 #: locale_extras.py:4
 msgid "Recipient"
@@ -4351,7 +4345,7 @@ msgstr "Usuń"
 #: templates/gear/page.html:159 templates/gear/page.html.py:325
 #: templates/image/detail.html:629 templates/image/detail.html.py:1090
 #: templates/inclusion_tags/list_gear.html:21
-#: templates/user/profile/edit/gear.html:285
+#: templates/user/profile/edit/gear.html:287
 msgid "Edit"
 msgstr "Edytuj"
 
@@ -4372,10 +4366,13 @@ msgstr "Odpowiedz"
 #: templates/user/profile/edit/gear.html:43
 #: templates/user/profile/edit/gear.html:56
 #: templates/user/profile/edit/gear.html:73
-#: templates/user/profile/edit/gear.html:167
-#: templates/user/profile/edit/gear.html:222
-#: templates/user/profile/edit/gear.html:269
-#: templates/user/profile/edit/gear.html:315
+#: templates/user/profile/edit/gear.html:124
+#: templates/user/profile/edit/gear.html:162
+#: templates/user/profile/edit/gear.html:169
+#: templates/user/profile/edit/gear.html:194
+#: templates/user/profile/edit/gear.html:224
+#: templates/user/profile/edit/gear.html:271
+#: templates/user/profile/edit/gear.html:317
 #: templates/user/profile/edit/license.html:21
 #: templates/user/profile/edit/locations.html:30
 #: templates/user/profile/edit/preferences.html:21
@@ -5141,8 +5138,8 @@ msgid "Next step: basic information"
 msgstr "Następny krok: podstawowe informacje"
 
 #: templates/inclusion_tags/form_saved.html:5
-#: templates/user/profile/edit/gear.html:141
-#: templates/user/profile/edit/gear.html:209
+#: templates/user/profile/edit/gear.html:143
+#: templates/user/profile/edit/gear.html:211
 msgid "Form saved. Thank you!"
 msgstr "Zapisane!. Dziękujemy!"
 
@@ -5164,7 +5161,7 @@ msgid "No images"
 msgstr "Brak zdjęć"
 
 #: templates/inclusion_tags/list_gear.html:17
-#: templates/user/profile/edit/gear.html:282
+#: templates/user/profile/edit/gear.html:284
 #, fuzzy
 msgid "Remove"
 msgstr "Usuń dane"
@@ -5176,7 +5173,7 @@ msgstr "Usuń dane"
 #: templates/popover/gear_mount.html:18
 #: templates/popover/gear_software.html:16
 #: templates/popover/gear_telescope.html:18 templates/popover/subject.html:26
-#: templates/user/profile/edit/gear.html:288
+#: templates/user/profile/edit/gear.html:290
 msgid "View page"
 msgstr "Zobacz stronę"
 
