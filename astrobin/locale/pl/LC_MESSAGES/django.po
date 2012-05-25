@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-25 04:05-0400\n"
+"POT-Creation-Date: 2012-05-25 06:58-0400\n"
 "PO-Revision-Date: 2012-05-15 20:50+0100\n"
 "Last-Translator: milosz <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2175,12 +2175,13 @@ msgstr "Język"
 
 #: models.py:1395
 #, fuzzy
-msgid "commented on"
+msgid "commented on image"
 msgstr "Utworzone w"
 
 #: models.py:1441
-msgid "has left a comment on the gear item"
-msgstr ""
+#, fuzzy
+msgid "comment on gear item"
+msgstr "Edytuj informacje o użytym sprzęcie"
 
 #: models.py:1449
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
