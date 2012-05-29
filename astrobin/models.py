@@ -256,7 +256,7 @@ class Telescope(Gear):
         (8, _("Reflector: Ritchey Chretien")),
         (9, _("Reflector: Gregorian")),
         (10, _("Reflector: Herschellian")),
-        (11, _("Reflector: Newtornian")),
+        (11, _("Reflector: Newtonian")),
 
         (12, _("Catadioptric: Argunov-Cassegrain")),
         (13, _("Catadioptric: Klevtsov-Cassegrain")),
