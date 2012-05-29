@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-25 06:58-0400\n"
-"PO-Revision-Date: 2012-05-16 11:03+0100\n"
-"Last-Translator: Michlll <astrobin.com@darkchamber.de>\n"
+"PO-Revision-Date: 2012-05-28 19:39+0100\n"
+"Last-Translator: Niels <astrobin.com@n13l5.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -1075,7 +1075,7 @@ msgstr "Teleskop oder Objektiv (Aufnahme)"
 
 #: forms.py:151 models.py:739
 msgid "Guiding telescopes or lenses"
-msgstr "Teleskop oder Objektiv (Nachführung)"
+msgstr "Guiding-Teleskop oder Objektiv (Nachführung)"
 
 #: forms.py:152 forms.py:228 models.py:740 models.py:1273 views.py:2104
 msgid "Mounts"
@@ -1107,7 +1107,7 @@ msgstr "Zubehör"
 
 #: forms.py:180
 msgid "If you have a personal website, put the address here."
-msgstr "Die Adresse Deiner Homepage, falls vorhanden."
+msgstr "Die Adresse deiner Homepage, falls vorhanden."
 
 #: forms.py:190 models.py:1233 templates/user/card.html:41
 msgid "Website"
@@ -1178,7 +1178,7 @@ msgstr "Lizenz"
 #: forms.py:339
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
-msgstr "Suceh nach astromischen Objekten, Optiken, Kameras, Filtern, ..."
+msgstr "Suche nach astromischen Objekten, Optiken, Kameras, Filtern, ..."
 
 #: forms.py:341 models.py:626
 msgid "Main solar system subject"
@@ -1343,9 +1343,8 @@ msgid "Albanian"
 msgstr "Albanisch"
 
 #: models.py:58 models.py:71 settings.py:60
-#, fuzzy
 msgid "Polish"
-msgstr "Englisch"
+msgstr "Polnisch"
 
 #: models.py:75
 msgid "Pulsars"
@@ -1464,7 +1463,7 @@ msgstr "Hersteller"
 
 #: models.py:129
 msgid "The make, brand, producer or developer of this product."
-msgstr ""
+msgstr "Der Hersteller, die Marke oder der Entwickler des Produkts."
 
 #: models.py:136 models.py:1448 models.py:1603 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
@@ -1482,25 +1481,27 @@ msgid ""
 "customizations. Try to use the international name, in English language, if "
 "applicable. This name is shared among all users on AstroBin."
 msgstr ""
+"Einfach den Namen des Produktes, ohne Eigenschaften oder Änderungen. "
+"Versuche einen internationalen, passenden Namen auf Englisch zu finden. "
+"Dieser wird für alle AstroBin-Nutzer verwendet."
 
 #: models.py:189
 msgid "Alias"
-msgstr ""
+msgstr "Alias"
 
 #: models.py:190
 msgid ""
 "A descriptive name, alias or nickname for your own copy of this product."
-msgstr ""
+msgstr "Eine Beschreibung, Alias oder Spitznamen für dein Produkt."
 
 #: models.py:197
-#, fuzzy
 msgid "Comment"
-msgstr "Kommentare"
+msgstr "Kommentar"
 
 #: models.py:198
 msgid ""
 "Information, description or comment about your own copy of this product."
-msgstr ""
+msgstr "Informationen, Beschreibung oder Kommentar zur deinem Produkt."
 
 #: models.py:225 models.py:236
 msgid "Label"
@@ -1623,7 +1624,7 @@ msgstr "mm"
 #: models.py:308 models.py:340 models.py:397 models.py:407 models.py:429
 #: models.py:480 models.py:492
 msgid "was added to the gear database"
-msgstr ""
+msgstr "wurde der Ausrüstungsdatenbank hinzugefügt"
 
 #: models.py:314 templates/popover/gear_mount.html:6
 msgid "Max. payload"
@@ -1643,7 +1644,7 @@ msgstr "(peak-to-peak, in Winkelsekunden)"
 
 #: models.py:333
 msgid "kg"
-msgstr ""
+msgstr "kg"
 
 #: models.py:346
 msgid "CCD"
@@ -1687,9 +1688,8 @@ msgid "Sensor height"
 msgstr "Höhe des Sensors"
 
 #: models.py:390 models.py:473
-#, fuzzy
 msgid "&mu;m"
-msgstr "(in &mu;m)"
+msgstr "&mu;m"
 
 #: models.py:413
 msgid "Open source or freeware"
@@ -1897,9 +1897,8 @@ msgid "uploaded"
 msgstr "hochgeladen"
 
 #: models.py:940
-#, fuzzy
 msgid "uploaded a new revision of"
-msgstr "Neue Version hochladen"
+msgstr "Eine neue Version hochgeladen:"
 
 #: models.py:949
 msgid "Please use the following format: yyyy-mm-dd."
@@ -2183,14 +2182,12 @@ msgid "Language"
 msgstr "Sprache"
 
 #: models.py:1395
-#, fuzzy
 msgid "commented on image"
-msgstr "Erstellt am"
+msgstr "Bild kommentiert"
 
 #: models.py:1441
-#, fuzzy
 msgid "comment on gear item"
-msgstr "Benutzte Ausrüstung bearbeiten"
+msgstr "Ausrüstung kommentieren"
 
 #: models.py:1449
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
@@ -2247,9 +2244,8 @@ msgid "In meters."
 msgstr "In Metern."
 
 #: models.py:1536
-#, fuzzy
 msgid "has favorited"
-msgstr "Als Favorit markieren"
+msgstr "hat markiert"
 
 #: models.py:1604
 msgid "The name of the website or app that wishes to use the APIs."
@@ -2265,7 +2261,7 @@ msgstr ""
 
 #: models.py:1703
 msgid "has written a review on"
-msgstr ""
+msgstr "hat einen Bericht geschrieben zu"
 
 #: search.py:79 views.py:951 views.py:1243 views.py:1268
 #: templates/image/actions/bring_to_attention.html:30
@@ -2504,9 +2500,8 @@ msgstr ""
 "sehen."
 
 #: views.py:3258 templatetags/tags.py:483
-#, fuzzy
 msgid "no alias"
-msgstr "Somalia"
+msgstr "kein Alias"
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -2594,12 +2589,11 @@ msgstr "Die API-Key Anfrage wurde bestätigt"
 
 #: management/__init__.py:141
 msgid "New discussion about a gear item you own"
-msgstr ""
+msgstr "Neue Diskussion zu einem deiner Ausrüstungsgegenstände"
 
 #: management/__init__.py:147
-#, fuzzy
 msgid "New review of a gear item you own"
-msgstr "Neues Bild eines Objektes, dem du folgst"
+msgstr "Neuer Bericht zur einem Teil deiner Ausrüstung"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2615,10 +2609,9 @@ msgstr ""
 
 #: templates/activities.html:8 templates/index.html:154
 msgid "Activity stream"
-msgstr ""
+msgstr "Aktivitäten-Stream"
 
 #: templates/activities.html:13 templates/index.html:159
-#, fuzzy
 msgid "There is no activity yet."
 msgstr "Noch keine Kommentare."
 
@@ -2835,10 +2828,12 @@ msgid ""
 "AstroBin is running a campaign to collectively improve the consistency of "
 "the gear database."
 msgstr ""
+"AstroBin hat eine Kampagne um gemeinschaftlich die Konsistenz der "
+"Ausrüstungsdatenbank zu verbessern."
 
 #: templates/base.html:368
 msgid "Click here to help!"
-msgstr ""
+msgstr "Klick hier für Hilfe!"
 
 #: templates/base.html:381
 msgid ""
@@ -4104,9 +4099,8 @@ msgid "Remove filter"
 msgstr "Filter entfernen"
 
 #: templates/activity/action.html:28
-#, fuzzy
 msgid "ago"
-msgstr "vor %s"
+msgstr "vor"
 
 #: templates/avatar/change.html:9
 msgid "Change your avatar"
@@ -4156,7 +4150,7 @@ msgstr "Danke! Deine Nachricht wurde versendet."
 
 #: templates/gear/fix.html:10
 msgid "Instructions and examples"
-msgstr ""
+msgstr "Anleitung und Beispiele"
 
 #: templates/gear/fix.html:13
 msgid ""
@@ -4164,10 +4158,14 @@ msgid ""
 "names for the same object, ignoring the suggestions. But don't worry, we can "
 "fix it, and after it's fixed, it shouldn't get very messy in the future."
 msgstr ""
+"Die AstroBin Datenbank ist ein wenig durcheinander. Viele Nutzer haben "
+"verschiedene Namen für die gleichen Objekte verwendet und dabei die "
+"Vorschläge ignoriert. Aber keine Sorge, wir können dies korrigieren. Wenn "
+"dies geschehen ist, sollte es in Zukunft in Ordnung bleiben."
 
 #: templates/gear/fix.html:16
 msgid "Please read the instructions and the example below, they are important!"
-msgstr ""
+msgstr "Bitte beachten der Anleitungen und Beispiele unten, sie sind wichtig!"
 
 #: templates/gear/fix.html:19
 msgid ""
@@ -4175,43 +4173,58 @@ msgid ""
 "at a time, to improve the situation. It's very simple! This is what you need "
 "to do:"
 msgstr ""
+"In einem Wiki-Stil können wir alle zusammen die aktuelle Situation "
+"verbessern und gleichzeitig mehrere Artikel ändern. Das ist einfach! Und "
+"dies müssen wir tun:"
 
 #: templates/gear/fix.html:22
 msgid "Make sure both the make and the name are in English."
 msgstr ""
+"Bitte achte darauf, sowohl die Marke als auch den Produktnamen in Englisch "
+"anzugeben."
 
 #: templates/gear/fix.html:23
 msgid "Make sure the make is not written again in the name field."
 msgstr ""
+"Bitte darauf achten, daß der Hersteller nicht im Produktnamen enthalten ist."
 
 #: templates/gear/fix.html:24
 msgid ""
 "Make sure there are no words other than the simple make and name of the "
 "product."
 msgstr ""
+"Stell sicher, dass hier keine Begriffe außer dem einfachen Marken- und dem "
+"Produktnamen enthalten sind."
 
 #: templates/gear/fix.html:25
 msgid "Make sure the words are properly capitalized."
 msgstr ""
+"Bitte stelle sicher, das die Worte richtig groß- und kleingeschrieben sind."
 
 #: templates/gear/fix.html:28
 msgid "Here's some good examples:"
-msgstr ""
+msgstr "Hier sind ein paar gute Beispiele:"
 
 #: templates/gear/fix.html:38
 msgid "And here's some bad examples, that need fixing, and why:"
 msgstr ""
+"Und hier sind ein paar schlechte Beispiele, die korrigiert werden müssen. "
+"Weil:"
 
 #: templates/gear/fix.html:43
 msgid ""
 "The words are not properly capitalized. It should be \"Meade\" and \"LX200\"."
 msgstr ""
+"Die Begriffe sind nicht richtig groß- und kleingeschrieben. Zum Beispiel wie "
+"\"Meade\" oder \"LX200\"."
 
 #: templates/gear/fix.html:48
 msgid ""
 "The word \"Celestron\" appears also in the name of the product. That should "
 "just be the name of the model, not the make name too."
 msgstr ""
+"Das Wort \"Celestron\" erscheint auch im Produktnamen. Dieser sollte aber nur "
+"den Namen des Modells enthalten und nicht den Markennamen."
 
 #: templates/gear/fix.html:53
 msgid ""
@@ -4219,6 +4232,9 @@ msgid ""
 "objects are shared among everyone, in the database. The word \"(sold)\" "
 "should be removed."
 msgstr ""
+"\"verkauft\" ist eine Information, die nur auf wenige Nutzer zutrifft. "
+"Gegenstände werden in der Datenbank für jeden bereit gestellt. Das Wort "
+"\"verkauft\" sollte gelöscht werden."
 
 #: templates/gear/fix.html:58
 msgid ""
@@ -4226,6 +4242,9 @@ msgid ""
 "objects are shared among everyone, in the database. The word \"(modified)\" "
 "should be removed."
 msgstr ""
+"\"modifiziert\" ist eine Information, die nur auf wenige Nutzer zutrifft. "
+"Gegenstände werden in der Datenbank für jeden bereit gestellt. Das Wort "
+"\"modifiziert\" sollte gelöscht werden."
 
 #: templates/gear/fix.html:63
 msgid ""
@@ -4233,6 +4252,10 @@ msgid ""
 "fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you can "
 "only buy on a pier! \"on a fixed pier\" should be removed."
 msgstr ""
+"Der Nutzer dies diese Montierung in der Datenbank angelegt hat, hat diese "
+"auf einer festen Säule. Dies heißt aber nicht, dass SkyWatcher die NEQ-6 "
+"ausschließlich für eine Säule verkauft. \"on a fixed pier\" sollte also "
+"gelöscht werden. "
 
 #: templates/gear/fix.html:68
 msgid ""
@@ -4240,6 +4263,9 @@ msgid ""
 "description, not the actual product name. Here I would assume \"80ED\". "
 "Moreover, \"80mm\" is a property of the telescope, not part of its name."
 msgstr ""
+"Die Bezeichnung des Teleskops ist nicht in Englisch und eine Beschreibung, "
+"nicht der richtige Produktname. Hier ist \"80ED\" besser, außerdem ist \"80mm\" "
+"eine Eigenschaft des Teleskops und nicht Teil den Namens."
 
 #: templates/gear/fix.html:73
 msgid ""
@@ -4248,12 +4274,18 @@ msgid ""
 "because it's such a generic name: for example, Newton 8\" f/6 would be okay, "
 "because just \"Newton\" would not be enough."
 msgstr ""
+"\"5.4&mu;\" ist eine Eigenschaft der CCD, aber nicht Teil des Namens. dies "
+"sollte entfernt werden. Manchmal kommt es aber vor, dass eine Eigenschaft "
+"Teil den Namens wird, weil dieser generisch ist. Zum Beispiel: Newton 8\" f/6 "
+"ist OK. \"Newton\" allein würde hier nicht ausreichen."
 
 #: templates/gear/fix.html:78
 msgid ""
 "\"CS5\" is the version of Photoshop, but the procut name is just \"Photoshop"
 "\". \"CS5\" should be removed."
 msgstr ""
+"\"CS5\" ist dier Version von Photoshop, aber nicht der Name, dieser ist nur "
+"\"Photoshop\". \"CS5\" sollte gelöscht werden."
 
 #: templates/gear/fix.html:84
 msgid ""
@@ -4261,53 +4293,59 @@ msgid ""
 "just make assumptions and hope you are right. Mistakes will surface "
 "eventually."
 msgstr ""
+"Danke, dass du bis hierher gelesen hast. Wenn du dir nicht sicher bist, wie "
+"du einen Gegenstand korrigieren kannst, triff einfach eine Annahme. Fehler "
+"werden wahrscheinlich auftreten."
 
 #: templates/gear/fix.html:87
 msgid ""
 "Now let's get to work, good luck and thank you on behalf of the whole "
 "AstroBin community!"
 msgstr ""
+"Nun auf zur Arbeit, viel Glück und vielen Dank im Namen der gesamten "
+"AstroBin Community!"
 
 #: templates/gear/fix.html:96
 msgid "After you fix an item, another one at random will be offered."
 msgstr ""
+"Nachdem du ein Objekt korrigiert hast, wird dir ein zufällig weiteres "
+"angeboten."
 
 #: templates/gear/fix.html:99
-#, fuzzy
 msgid "Already fixed:"
-msgstr "Bereits als Favorit markiert"
+msgstr "Bereits bereinigt:"
 
 #: templates/gear/fix.html:100
 msgid "Remaining:"
-msgstr ""
+msgstr "Verbleibend:"
 
 #: templates/gear/fix.html:107
 msgid "Fix"
-msgstr ""
+msgstr "Bereinigen"
 
 #: templates/gear/fix.html:108
-#, fuzzy
 msgid "Mark as good"
-msgstr "Als erledigt markieren."
+msgstr "Als bereinigt markieren."
 
 #: templates/gear/fix.html:109
 msgid "Skip"
-msgstr ""
+msgstr "Überspringen"
 
 #: templates/gear/fix.html:110
 msgid "Enough for now"
-msgstr ""
+msgstr "Genug für heute"
 
 #: templates/gear/fix_thanks.html:5 templates/gear/fix_thanks.html.py:8
-#, fuzzy
 msgid "Thanks!"
-msgstr "Danke an"
+msgstr "Vielen Dank!"
 
 #: templates/gear/fix_thanks.html:10
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
 "grateful."
 msgstr ""
+"Dein Beitrag war sehr wichtig und die gesamte AstroBin Community ist dir "
+"dankbar."
 
 #: templates/gear/page.html:14 templates/subject/page.html:89
 msgid "Some images"
@@ -4315,12 +4353,11 @@ msgstr "Einige Bilder"
 
 #: templates/gear/page.html:35
 msgid "Owners"
-msgstr ""
+msgstr "Eigentümer"
 
 #: templates/gear/page.html:39 templates/gear/page.html.py:65
-#, fuzzy
 msgid "Reviews"
-msgstr "Angezeigt"
+msgstr "Brichte"
 
 #: templates/gear/page.html:69
 msgid ""
@@ -4328,25 +4365,25 @@ msgid ""
 "read your review: all the users on AstroBin who own this piece of gear, will "
 "be notified of your review."
 msgstr ""
+"Bitte sei fair, ehrlich und höflich, wenn du einen Bericht schreibst. Viele "
+"Menschen werden ihn lesen: Alle AstroBin User, die diesen Gegenstand "
+"besitzen, werden über deinen Bericht informiert."
 
 #: templates/gear/page.html:71
-#, fuzzy
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to write a review."
 msgstr ""
-"Bitte <a href=\"/accounts/login/\">einloggen</a> oder <a href=\"/accounts/"
-"register/\">registrieren</a>, um einen Kommentar abzugeben."
+"Bitte <a href=\"/accounts/login/\">einloggen</a> oder <a "
+"href=\"/accounts/register/\">registrieren</a>, um einen Kommentar abzugeben. "
 
 #: templates/gear/page.html:99
-#, fuzzy
 msgid "There are no reviews yet."
 msgstr "Noch keine Kommentare."
 
 #: templates/gear/page.html:105
-#, fuzzy
 msgid "Add your review"
-msgstr "Profil ändern"
+msgstr "Bericht hinzufügen"
 
 #: templates/gear/page.html:122
 msgid ""
@@ -4354,6 +4391,10 @@ msgid ""
 "about this piece of gear. All the users on AstroBin who own one, will be "
 "notified and can join the discussion."
 msgstr ""
+"Nutze diesen Platz um eine Diskussion zu starten, hinterlasse einen "
+"Kommentar oder stell eine Frage zu diesem Gegenstand. Alle AstroBin-Nutzer "
+"die es besitzen, werden darüber informiert und können sich an der Diskussion "
+"beteiligen."
 
 #: templates/gear/page.html:124 templates/image/detail.html:594
 msgid ""
@@ -4420,7 +4461,7 @@ msgstr "Speichern"
 #: templates/gear/page.html:348 templates/image/detail.html:584
 #: templates/image/detail.html.py:644 templates/image/detail.html:1113
 msgid "Formatting help"
-msgstr "Hilfe zur Formatierung"
+msgstr "Formatierungshilfe"
 
 #: templates/gear/page.html:189 templates/image/detail.html:659
 msgid "There are no comments yet."
@@ -4429,6 +4470,7 @@ msgstr "Noch keine Kommentare."
 #: templates/gear/page.html:197
 msgid "Start a discussion, leave a comment or ask a question."
 msgstr ""
+"Starte eine Diskussion, hinterlasse einen Kommentar oder stelle eine Frage."
 
 #: templates/gear/page.html:257 templates/gear/page.html.py:320
 #: templates/image/detail.html:1085
@@ -4470,7 +4512,7 @@ msgstr "Bearbeiten"
 
 #: templates/image/detail.html:48
 msgid "Edit basic information"
-msgstr "Grundlegende Informationen bearbeiten"
+msgstr "Grundinformationen bearbeiten"
 
 #: templates/image/detail.html:54
 msgid "Edit gear used"
@@ -5203,9 +5245,8 @@ msgstr "Keine Bilder"
 
 #: templates/inclusion_tags/list_gear.html:17
 #: templates/user/profile/edit/gear.html:284
-#, fuzzy
 msgid "Remove"
-msgstr "Daten entfernen"
+msgstr "Entfernen"
 
 #: templates/inclusion_tags/list_gear.html:25
 #: templates/popover/gear_accessory.html:17
@@ -5220,11 +5261,11 @@ msgstr "Seite anzeigen"
 
 #: templates/inclusion_tags/list_gear.html:32
 msgid "No gear yet."
-msgstr ""
+msgstr "Bisher keine Ausrüstung eingetragen."
 
 #: templates/inclusion_tags/list_gear.html:37
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 #: templates/inclusion_tags/message_list.html:14
 msgid "You have no messages."
@@ -5768,50 +5809,53 @@ msgid "You have a new follower!"
 msgstr "Du hast einen neuen Follower!"
 
 #: templates/notification/new_gear_discussion/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user)s started a new discussion about a gear item you own! Read it at "
 "following url: %(url)s"
 msgstr ""
-"%(user)s hat Dein Bild kommentiert! Den Kommentar findest Du unter: %(url)s"
+"%(user)s hat eine Diskussion zu einem Teil deiner Ausrüstung gestartet. Lies "
+"ihn nach unter: %(url)s"
 
 #: templates/notification/new_gear_discussion/notice.html:2
 #: templates/notification/new_gear_discussion/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion about "
 "a gear item you own!</a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> hat dein Bild als Favorit "
-"markiert!</a>"
+"<a href=\"%(url)s\"><strong>%(user)s</strong> hat eine Diskussion zu einem "
+"Teil deiner Ausrüstung gestartet.</a>"
 
 #: templates/notification/new_gear_discussion/short.txt:2
 #, python-format
 msgid "%(user)s started a new discussion about a gear item you own!"
-msgstr ""
+msgstr "%(user)s hat eine Diskussion zu einem Teil deiner Ausrüstung gestartet."
 
 #: templates/notification/new_gear_review/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user)s wrote a review of a gear item you own! Read it at following url: "
 "%(url)s"
 msgstr ""
-"%(user)s hat Dein Bild kommentiert! Den Kommentar findest Du unter: %(url)s"
+"%(user)s hat einen Bericht zu einem Teil deiner Ausrüstung geschrieben. Lies "
+"ihn nach unter: %(url)s"
 
 #: templates/notification/new_gear_review/notice.html:2
 #: templates/notification/new_gear_review/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
 "you own!</a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> hat auf Deinen Kommentar "
-"geantwortet.</a>"
+"<a href=\"%(url)s\"><strong>%(user)s</strong> hat einen Bericht zu einem Teil "
+"deiner Ausrüstung geschrieben.</a>"
 
 #: templates/notification/new_gear_review/short.txt:2
 #, python-format
 msgid "%(user)s wrote a review of a gear item you own!"
 msgstr ""
+"%(user)s hat einen Bericht zu einem Teil deiner Ausrüstung geschrieben. "
 
 #: templates/notification/new_image/full.txt:2
 #, python-format
@@ -5861,13 +5905,13 @@ msgid ""
 "<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
 "</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Ein neues Bild wurde mit der Ausrüstung <strong>"
-"%(gear)s</strong> augenommen.</a>"
+"<a href=\"%(object_url)s\">Ein neues Bild wurde mit der Ausrüstung <strong>%"
+"(gear)s</strong> aufgenommen.</a>"
 
 #: templates/notification/new_image_from_gear/short.txt:2
 #, python-format
 msgid "New image taken with a %(gear)s"
-msgstr "Ein neues Bild wurde mit der Ausrüstung %(gear)s aufgenommen"
+msgstr "Ein neues Bild wurde mit %(gear)s aufgenommen"
 
 #: templates/notification/new_image_of_subject/full.txt:2
 #, python-format
@@ -5875,7 +5919,7 @@ msgid ""
 "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
 "out at the following url: %(object_url)s"
 msgstr ""
-"Neues Bild eines Objektes, dem du folgst: <strong>%(subject)s</strong>. "
+"Neues Bild eines Objektes, das du beobachtest: <strong>%(subject)s</strong>. "
 "Schau es dir hier an: %(object_url)s"
 
 #: templates/notification/new_image_of_subject/notice.html:2
@@ -5884,13 +5928,12 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Neues Bild des Objektes <strong>%(subject)s</"
-"strong>.</a>"
+"<a href=\"%(object_url)s\">Neues Bild von <strong>%(subject)s</strong>.</a>"
 
 #: templates/notification/new_image_of_subject/short.txt:2
 #, python-format
 msgid "New image of %(subject)s"
-msgstr "Neues Bild des Objektes %(subject)s"
+msgstr "Neues Bild von %(subject)s"
 
 #: templates/notification/new_image_revision/full.txt:2
 #, python-format
@@ -5898,7 +5941,7 @@ msgid ""
 "%(originator)s has published a new image revision! Check it out at the "
 "following url: %(object_url)s"
 msgstr ""
-"%(originator)s hat eine neue Bilder-Revision veröffentlicht. Du findest es "
+"%(originator)s hat eine neue Bild-Version veröffentlicht. Du findest es "
 "unter folgender URL: %(object_url)s"
 
 #: templates/notification/new_image_revision/notice.html:2
@@ -5908,13 +5951,13 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image revision.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> hat eine neue "
-"Bild-Überarbeitung veröffentlicht. </a>"
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> hat eine neue Bild-"
+"Version veröffentlicht.</a>"
 
 #: templates/notification/new_image_revision/short.txt:2
 #, python-format
 msgid "New image revision by %(originator)s"
-msgstr "Neue Bild-Bearbeitung durch %(originator)s"
+msgstr "Neue Bild-Version durch %(originator)s"
 
 #: templates/notification/received_email/full.txt:2
 msgid ""
@@ -5932,7 +5975,7 @@ msgstr ""
 #: templates/notification/received_email/short.html:2
 #: templates/notification/received_email/short.txt:2
 msgid "You have received a new private message."
-msgstr "Du haste eine neue private Nachricht."
+msgstr "Du hast eine neue private Nachricht."
 
 #: templates/notification/request_fulfilled/full.txt:2
 #, python-format
@@ -6502,13 +6545,12 @@ msgid "Go back to the home page."
 msgstr "Zurück zur Homepage."
 
 #: templates/user/profile/edit/gear.html:31
-#, fuzzy
 msgid "Edit gear item"
-msgstr "Benutzte Ausrüstung bearbeiten"
+msgstr "Ausrüstung bearbeiten"
 
 #: templates/user/profile/edit/gear.html:35
 msgid "Please note!"
-msgstr ""
+msgstr "Bitte beachten!"
 
 #: templates/user/profile/edit/gear.html:36
 msgid ""
@@ -6517,21 +6559,28 @@ msgid ""
 "information in there that refers to your personal copy of this product, like "
 "\"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
 msgstr ""
+"Wenn du den Hersteller, den Namen oder die Eigenschaften dieses Produktes "
+"änderst, wird die Änderung für alle Nutzer bereitgestellt. Es handelt sich "
+"um globale Daten. Füge keine Informationen hinzu, die sich auf deine private "
+"Ausrüstung beziehen, wie zum Beispiel \"modifiziert\", \"verkauft\", \"defekt\", "
+"\"Geschenk meiner Tante\" oder ähnliches."
 
 #: templates/user/profile/edit/gear.html:44
 #: templates/user/profile/edit/gear.html:57
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #: templates/user/profile/edit/gear.html:49
 msgid ""
 "The following information, instead, is personal, and may refer to your copy "
 "of this product."
 msgstr ""
+"Die folgenden Informationen sind jedoch privat und können sich auf deine "
+"Ausrüstung beziehen."
 
 #: templates/user/profile/edit/gear.html:67
 msgid "Add gear item"
-msgstr ""
+msgstr "Ausrüstung hinzufügen"
 
 #: templates/user/profile/edit/license.html:8
 msgid "Set your default image license"
