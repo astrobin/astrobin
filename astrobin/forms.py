@@ -381,7 +381,6 @@ class AdvancedSearchForm(SearchForm):
 
             if self.cleaned_data['camera_type'] and 'any' not in self.cleaned_data['camera_type']:
                 filters = reduce(operator.or_, [SQ(**{'camera_types': x}) for x in self.cleaned_data['camera_type']])
-                print filters
                 sqs = sqs.filter(filters)
             elif not self.cleaned_data['camera_type']:
                 sqs = EmptySearchQuerySet()
@@ -713,8 +712,6 @@ class ModeratorGearFixForm(forms.ModelForm):
         old_make = Gear.objects.get(id = instance.id).make
         old_name = Gear.objects.get(id = instance.id).name
 
-        print "Old make: %s" % old_make
-
         m = super(ModeratorGearFixForm, self).save(commit = False)
 
         # Update the time
@@ -723,13 +720,10 @@ class ModeratorGearFixForm(forms.ModelForm):
         if commit:
             m.save()
 
-        print "New make: %s" % m.make
-
         if old_make and m.make != old_make:
             # Fix all with the same make
             same_make = Gear.objects.filter(make = old_make)
             for i in same_make:
-                print "Updating gear %d from %s to %s..." % (i.id, i.make, m.make)
                 i.make = m.make
                 i.save()
 
