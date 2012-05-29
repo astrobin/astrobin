@@ -361,6 +361,7 @@ ACTSTREAM_ACTION_MODELS = (
     'astrobin.filter',
     'astrobin.software',
     'astrobin.accessory',
+    'astrobin.focalreducer',
     'astrobin.image',
     'astrobin.imagerevision',
 )
