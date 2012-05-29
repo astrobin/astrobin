@@ -3234,9 +3234,15 @@ def save_gear_details(request):
     }
 
     if not gear:
-        gear, created = class_lookup[gear_type].objects.get_or_create(
-            make = request.POST.get('make'),
-            name = request.POST.get('name'))
+        try:
+            gear, created = class_lookup[gear_type].objects.get_or_create(
+                make = request.POST.get('make'),
+                name = request.POST.get('name'))
+        except class_lookup[gear_type].MultipleObjectsReturned:
+            gear = class_lookup[gear_type].objects.filter(
+                make = request.POST.get('make'),
+                name = request.POST.get('name'))[0]
+            created = false
 
     form = form_lookup[gear_type](data = request.POST, instance = gear)
     if not form.is_valid():
