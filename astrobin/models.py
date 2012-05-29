@@ -304,7 +304,7 @@ class Telescope(Gear):
         app_label = 'astrobin'
 
 def telescope_post_save(sender, instance, created, **kwargs):
-    verb = "was added to the gear_database"
+    verb = "was added to the gear database"
     l10n_verb = _(verb)
     if created:
         action.send(instance, verb = verb)
@@ -341,7 +341,7 @@ def mount_post_save(sender, instance, created, **kwargs):
     verb = "was added to the gear database"
     l10n_verb = _(verb)
     if created:
-        action.send(instance, verb = l10n_verb)
+        action.send(instance, verb = verb)
 post_save.connect(mount_post_save, sender = Mount)
 
 
