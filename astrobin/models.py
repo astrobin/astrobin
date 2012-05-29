@@ -450,6 +450,12 @@ class Filter(Gear):
     class Meta:
         app_label = 'astrobin'
 
+class Accessory(Gear):
+    pass
+
+    class Meta:
+        app_label = 'astrobin'
+
 
 def build_catalog_and_name(obj, name):
     split = name.split(' ')
