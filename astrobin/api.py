@@ -4,7 +4,7 @@ from tastypie.resources import ModelResource, ALL
 from tastypie import fields
 from tastypie.authentication import Authentication
 
-from astrobin.models import Image, ImageRevision, Comment, App
+from astrobin.models import Image, ImageRevision, ImageOfTheDay, Comment, App
 from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
 
 
@@ -152,3 +152,14 @@ class ImageResource(ModelResource):
             orm_filters['pk__in'] = [i.pk for i in qs]
 
         return orm_filters
+
+
+class ImageOfTheDayResource(ModelResource):
+    class Meta:
+        authentication = AppAuthentication()
+        queryset = ImageOfTheDay.objects.all()
+        fields = [
+            'image',
+            'filename',
+            'date',
+        ]
