@@ -303,13 +303,6 @@ class Telescope(Gear):
     class Meta:
         app_label = 'astrobin'
 
-def telescope_post_save(sender, instance, created, **kwargs):
-    verb = "was added to the gear database"
-    l10n_verb = _(verb)
-    if created:
-        action.send(instance, verb = verb)
-post_save.connect(telescope_post_save, sender = Telescope)
-
 
 class Mount(Gear):
     max_payload = models.DecimalField(
@@ -336,13 +329,6 @@ class Mount(Gear):
 
     class Meta:
         app_label = 'astrobin'
-
-def mount_post_save(sender, instance, created, **kwargs):
-    verb = "was added to the gear database"
-    l10n_verb = _(verb)
-    if created:
-        action.send(instance, verb = verb)
-post_save.connect(mount_post_save, sender = Mount)
 
 
 class Camera(Gear):
@@ -396,24 +382,10 @@ class Camera(Gear):
     class Meta:
         app_label = 'astrobin'
 
-def camera_post_save(sender, instance, created, **kwargs):
-    verb = "was added to the gear database"
-    l10n_verb = _(verb)
-    if created:
-        action.send(instance, verb = verb)
-post_save.connect(camera_post_save, sender = Camera)
-
 
 class FocalReducer(Gear):
     class Meta:
         app_label = 'astrobin'
-
-def focal_reducer_post_save(sender, instance, created, **kwargs):
-    verb = "was added to the gear database"
-    l10n_verb = _(verb)
-    if created:
-        action.send(instance, verb = verb)
-post_save.connect(focal_reducer_post_save, sender = FocalReducer)
 
 
 class Software(Gear):
@@ -431,13 +403,6 @@ class Software(Gear):
 
     class Meta:
         app_label = 'astrobin'
-
-def software_post_save(sender, instance, created, **kwargs):
-    verb = "was added to the gear database"
-    l10n_verb = _(verb)
-    if created:
-        action.send(instance, verb = verb)
-post_save.connect(software_post_save, sender = Software)
 
 
 class Filter(Gear):
@@ -484,27 +449,6 @@ class Filter(Gear):
 
     class Meta:
         app_label = 'astrobin'
-
-def filter_post_save(sender, instance, created, **kwargs):
-    verb = "was added to the gear database"
-    l10n_verb = _(verb)
-    if created:
-        action.send(instance, verb = verb)
-post_save.connect(filter_post_save, sender = Filter)
-
-
-class Accessory(Gear):
-    pass
-
-    class Meta:
-        app_label = 'astrobin'
-
-def accessory_post_save(sender, instance, created, **kwargs):
-    verb = "was added to the gear database"
-    l10n_verb = _(verb)
-    if created:
-        action.send(instance, verb = verb)
-post_save.connect(accessory_post_save, sender = Accessory)
 
 
 def build_catalog_and_name(obj, name):
