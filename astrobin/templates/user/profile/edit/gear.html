@@ -200,6 +200,8 @@
 
                     var ajaxFormOptions = {
                         dataType: 'json',
+                        timeout: 10000,
+                        cache: false,
                         beforeSubmit: function(formData, $form, options) {
                             var $btn = $form.find('.btn-primary')
                             $btn.addClass('disabled');
@@ -260,6 +262,8 @@
 
                     var ajaxFormOptions = {
                         dataType: 'json',
+                        timeout: 10000,
+                        cache: false,
                         beforeSubmit: function(formData, $form, options) {
                             var $btn = $form.find('input[name=save]')
                             $btn.addClass('disabled');
