@@ -348,7 +348,7 @@ PIPELINE_JS = {
             'js/bootstrap.js',
             'js/astrobin.js',
         ),
-        'output_filename': 'js/astrobin_pipeline_v3.js',
+        'output_filename': 'js/astrobin_pipeline_v4.js',
     },
 }
 
