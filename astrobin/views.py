@@ -3512,7 +3512,7 @@ def gear_page(request, id):
             'examples': all_images.order_by('-rating_score')[:21],
             'small_size': settings.SMALL_THUMBNAIL_SIZE,
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
-            'reviews': gear.reviews.all(),
+            'reviews': ReviewedItem.objects.filter(gear = gear),
             'comment_form': CommentForm(),
             'comments': GearComment.objects.filter(gear = gear),
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
