@@ -304,8 +304,10 @@ class Telescope(Gear):
         app_label = 'astrobin'
 
 def telescope_post_save(sender, instance, created, **kwargs):
+    verb = "was added to the gear_database"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance, verb = _("was added to the gear database"))
+        action.send(instance, verb = verb)
 post_save.connect(telescope_post_save, sender = Telescope)
 
 
@@ -336,8 +338,10 @@ class Mount(Gear):
         app_label = 'astrobin'
 
 def mount_post_save(sender, instance, created, **kwargs):
+    verb = "was added to the gear database"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance, verb = _("was added to the gear database"))
+        action.send(instance, verb = l10n_verb)
 post_save.connect(mount_post_save, sender = Mount)
 
 
@@ -393,8 +397,10 @@ class Camera(Gear):
         app_label = 'astrobin'
 
 def camera_post_save(sender, instance, created, **kwargs):
+    verb = "was added to the gear database"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance, verb = _("was added to the gear database"))
+        action.send(instance, verb = verb)
 post_save.connect(camera_post_save, sender = Camera)
 
 
@@ -403,8 +409,10 @@ class FocalReducer(Gear):
         app_label = 'astrobin'
 
 def focal_reducer_post_save(sender, instance, created, **kwargs):
+    verb = "was added to the gear database"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance, verb = _("was added to the gear database"))
+        action.send(instance, verb = verb)
 post_save.connect(focal_reducer_post_save, sender = FocalReducer)
 
 
@@ -425,8 +433,10 @@ class Software(Gear):
         app_label = 'astrobin'
 
 def software_post_save(sender, instance, created, **kwargs):
+    verb = "was added to the gear database"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance, verb = _("was added to the gear database"))
+        action.send(instance, verb = verb)
 post_save.connect(software_post_save, sender = Software)
 
 
@@ -476,8 +486,10 @@ class Filter(Gear):
         app_label = 'astrobin'
 
 def filter_post_save(sender, instance, created, **kwargs):
+    verb = "was added to the gear database"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance, verb = _("was added to the gear database"))
+        action.send(instance, verb = verb)
 post_save.connect(filter_post_save, sender = Filter)
 
 
@@ -488,8 +500,10 @@ class Accessory(Gear):
         app_label = 'astrobin'
 
 def accessory_post_save(sender, instance, created, **kwargs):
+    verb = "was added to the gear database"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance, verb = _("was added to the gear database"))
+        action.send(instance, verb = verb)
 post_save.connect(accessory_post_save, sender = Accessory)
 
 
@@ -883,8 +897,10 @@ class Image(models.Model):
         return '/%i' % self.id
 
 def image_post_save(sender, instance, created, **kwargs):
+    verb = "uploaded"
+    l10n_verb = _(verb)
     if created and not instance.is_wip:
-        action.send(instance.user, verb = _("uploaded"), target = instance)
+        action.send(instance.user, verb = verb, target = instance)
 post_save.connect(image_post_save, sender = Image)
 
 
@@ -936,8 +952,10 @@ class ImageRevision(models.Model):
         return '/%i?r=%i' % (self.image.id, self.id)
  
 def image_revision_post_save(sender, instance, created, **kwargs):
+    verb = "uploaded a new revision of"
+    l10n_verb = _(verb)
     if created and not instance.image.is_wip:
-        action.send(instance.image.user, verb = _("uploaded a new revision of"), target = instance)
+        action.send(instance.image.user, verb = verb, target = instance)
 post_save.connect(image_revision_post_save, sender = ImageRevision)
 
 
@@ -1391,8 +1409,10 @@ class Comment(MPTTModel):
         app_label = 'astrobin'
 
 def comment_post_save(sender, instance, created, **kwargs):
+    verb = "commented on image"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance.author, verb = _("commented on image"),
+        action.send(instance.author, verb = verb,
                     target = instance.image)
 post_save.connect(comment_post_save, sender = Comment)
 
@@ -1437,8 +1457,10 @@ class GearComment(MPTTModel):
         app_label = 'astrobin'
 
 def gear_comment_post_save(sender, instance, created, **kwargs):
+    verb = "commented on gear item"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance.author, verb = _("comment on gear item"),
+        action.send(instance.author, verb = verb,
                     target = instance.gear)
 post_save.connect(gear_comment_post_save, sender = GearComment)
 
@@ -1532,8 +1554,10 @@ class Favorite(models.Model):
         ordering = ('-created',)
 
 def favorite_post_save(sender, instance, created, **kwargs):
+    verb = "has favorited"
+    l10n_verb = _(verb)
     if created:
-        action.send(instance.user, verb = _("has favorited"),
+        action.send(instance.user, verb = verb,
                     target = instance.image)
 post_save.connect(favorite_post_save, sender = Favorite)
 
@@ -1698,9 +1722,11 @@ post_save.connect(blog_entry_notify, sender = Entry)
 
 from reviews.models import ReviewedItem
 def reviewed_item_post_save(sender, instance, created, **kwargs):
+    verb = "has written a review on"
+    l10n_verb = _(verb)
     if created:
          action.send(instance.user,
-                     verb = _("has written a review on"),
+                     verb = verb,
                      target = instance.content_object)
 post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
 
