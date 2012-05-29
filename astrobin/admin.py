@@ -192,6 +192,22 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
                 acquisition.filter = Filter.objects.get(gear_ptr__pk = merge.master.pk)
                 acquisition.save()
 
+            # Find matching gear comments and move them to the master
+            comments = GearComment.objects.filter(gear = merge.slave)
+            for comment in comments:
+                print "Changing comment."
+                comment.gear = merge.master
+                comment.save()
+
+            # Find matching gear reviews and move them to the master
+            from django.contrib.contenttypes.models import ContentType
+            reviews = ReviewedItem.objects.filter(gear = merge.slave)
+            for review in reviews:
+                print "Changing review."
+                review.content_object = merge.master
+                review.object_id = merge.master.id
+                review.save()
+
             if merge_done:
                 automerge = GearAutoMerge.objects.get_or_create(master = merge.master, label = merge.slave.name)
 
@@ -269,6 +285,7 @@ admin.site.register(Location)
 admin.site.register(MessierMarathon)
 admin.site.register(MessierMarathonNominations)
 admin.site.register(Comment)
+admin.site.register(GearComment)
 admin.site.register(AppApiKeyRequest, AppApiRequestAdmin)
 admin.site.register(App, AppAdmin)
 admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)
