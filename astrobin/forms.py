@@ -720,12 +720,5 @@ class ModeratorGearFixForm(forms.ModelForm):
         if commit:
             m.save()
 
-        if old_make and m.make != old_make:
-            # Fix all with the same make
-            same_make = Gear.objects.filter(make = old_make)
-            for i in same_make:
-                i.make = m.make
-                i.save()
-
         return m
 

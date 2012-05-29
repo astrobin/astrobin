@@ -29,6 +29,11 @@
         </div>
 
         <div class="span3">
+            {% if request.user.is_superuser %}
+                <div class="subtle-container">
+                    <a class="btn btn-primary" href="/admin/astrobin/gear/{{gear.id}}/">Edit</a>
+                </div>
+            {% endif %}
             <div class="subtle-container">
                 <table class="table">
                     <tr>
