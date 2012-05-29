@@ -81,10 +81,10 @@
     {% endif %}
 
     <div class="row">
-        <div class="span7">
+        <div class="span{% if request.user.is_authenticated %}7{% else %}12{% endif %}">
 
             <div class="row">
-                <div class="span7">
+                <div class="span{% if request.user.is_authenticated %}7{% else %}12{% endif %}">
                     <div class="home-strip-container">
                         <div class="title">
                             <h3>{% trans "Recent" %}</h3>
@@ -149,24 +149,26 @@
 
         </div> <!-- span7 -->
 
-        <div class="span5"> <!-- activity stream -->
-            <div class="activity-stream">
-                <h3>{% trans "Activity stream" %}</h3>
-                <div class="activity-actions">
-                    {% for action in global_actions %}
-                        {% display_action action %}
-                    {% empty %}
-                        <p>{% trans "There is no activity yet." %}</p>
-                    {% endfor %}
-                </div>
-
-                {% if global_actions|length == 16 %}
-                    <div class="pagination-centered">
-                        <a href="{% url activities %}">{% trans "(view more)" %}</a>
+        {% if request.user.is_authenticated %}
+            <div class="span5"> <!-- activity stream -->
+                <div class="activity-stream">
+                    <h3>{% trans "Activity stream" %}</h3>
+                    <div class="activity-actions">
+                        {% for action in global_actions %}
+                            {% display_action action %}
+                        {% empty %}
+                            <p>{% trans "There is no activity yet." %}</p>
+                        {% endfor %}
                     </div>
-                {% endif %}
+
+                    {% if global_actions|length == 16 %}
+                        <div class="pagination-centered">
+                            <a href="{% url activities %}">{% trans "(view more)" %}</a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div> <!-- row -->
 {% endblock %}
 

@@ -196,7 +196,7 @@ def index(request):
         queryset = Image.objects.filter(is_stored = True, is_wip = False).order_by('-uploaded'),
         template_name = 'index.html',
         template_object_name = 'image',
-        paginate_by = 10,
+        paginate_by = 10 if request.user.is_authenticated() else 18,
         extra_context = response_dict)
 
 
