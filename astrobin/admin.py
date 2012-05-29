@@ -186,27 +186,18 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
                     owner.save()
 
             # Find matching slaves in deep sky acquisitions
-            acquisitions = DeepSky_Acquisition.objects.filter(filter__gear_ptr__pk = merge.slave.pk)
-            for acquisition in acquisitions:
-                print "Changing filter for DSA."
-                acquisition.filter = Filter.objects.get(gear_ptr__pk = merge.master.pk)
-                acquisition.save()
+            try:
+                filter = Filter.objects.get(gear_ptr__pk = merge.master.pk)
+                DeepSky_Acquisition.objects.filter(filter__gear_ptr__pk = merge.slave.pk).update(
+                    filter = filter)
+            except Filter.DoesNotExist:
+                pass
 
             # Find matching gear comments and move them to the master
-            comments = GearComment.objects.filter(gear = merge.slave)
-            for comment in comments:
-                print "Changing comment."
-                comment.gear = merge.master
-                comment.save()
+            GearComment.objects.filter(gear = merge.slave).update(gear = merge.master)
 
             # Find matching gear reviews and move them to the master
-            from django.contrib.contenttypes.models import ContentType
-            reviews = ReviewedItem.objects.filter(gear = merge.slave)
-            for review in reviews:
-                print "Changing review."
-                review.content_object = merge.master
-                review.object_id = merge.master.id
-                review.save()
+            reviews = ReviewedItem.objects.filter(gear = merge.slave).update(object_id = merge.master.id)
 
             if merge_done:
                 automerge = GearAutoMerge.objects.get_or_create(master = merge.master, label = merge.slave.name)
