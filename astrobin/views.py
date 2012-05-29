@@ -3242,7 +3242,7 @@ def save_gear_details(request):
             gear = class_lookup[gear_type].objects.filter(
                 make = request.POST.get('make'),
                 name = request.POST.get('name'))[0]
-            created = false
+            created = False
 
     form = form_lookup[gear_type](data = request.POST, instance = gear)
     if not form.is_valid():
