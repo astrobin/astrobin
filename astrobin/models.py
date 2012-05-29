@@ -172,7 +172,7 @@ class Gear(models.Model):
 
     class Meta:
         app_label = 'astrobin'
-
+        ordering = ('updated',)
 
 class GearUserInfo(models.Model):
     gear = models.ForeignKey(

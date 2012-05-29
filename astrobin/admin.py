@@ -49,8 +49,9 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class GearAdmin(admin.ModelAdmin):
-    list_display = ('make', 'name', 'master', 'updated', 'moderator_fixed')
-    search_fields = ('make', 'name',)
+    list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
+    list_editable = ('make', 'name',)
+    search_fields = ('id', 'make', 'name',)
     list_filter = ('master',)
     actions = ['assisted_merge',]
 
