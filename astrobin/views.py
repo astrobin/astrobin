@@ -3206,7 +3206,7 @@ def save_gear_details(request):
                 simplejson.dumps({
                     'success': False,
                     'type': 'gear_type_missing',
-                    'error': 'Unable to find gear type. Please contact the staff!',
+                    'error': 'Unable to find gear type. IMPORTANT: contact the staff!',
                 }),
                 mimetype = 'application/javascript')
 
