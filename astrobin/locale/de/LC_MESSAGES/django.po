@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-25 06:58-0400\n"
-"PO-Revision-Date: 2012-05-28 19:39+0100\n"
-"Last-Translator: Niels <astrobin.com@n13l5.de>\n"
+"PO-Revision-Date: 2012-05-30 12:56+0100\n"
+"Last-Translator: docMario <mario@schubert.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "Afghanistan"
 
 #: fields.py:12
 msgid "Aland Islands"
-msgstr "Aland"
+msgstr "Aland Inseln"
 
 #: fields.py:13
 msgid "Albania"
@@ -1042,13 +1042,12 @@ msgstr "Motive"
 #: forms.py:67 models.py:635 views.py:689 templates/base.html:257
 #: templates/profile-edit-menu.html:12
 msgid "Locations"
-msgstr "Standort"
+msgstr "Standorte"
 
 #: forms.py:96
 msgid "Please enter either some subjects or a main solar system subject."
 msgstr ""
-"Bitte geben Sie entweder mehrere Objekte oder ein Objekt des Sonnensystems "
-"an."
+"Bitte gib entweder mehrere Objekte oder ein Objekt des Sonnensystems an."
 
 #: forms.py:109
 msgid "Opacity"
@@ -1107,7 +1106,7 @@ msgstr "Zubehör"
 
 #: forms.py:180
 msgid "If you have a personal website, put the address here."
-msgstr "Die Adresse deiner Homepage, falls vorhanden."
+msgstr "Die Adresse Deiner Homepage, falls vorhanden."
 
 #: forms.py:190 models.py:1233 templates/user/card.html:41
 msgid "Website"
@@ -1129,7 +1128,7 @@ msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
 msgstr ""
-"Hinweis: Gib deine Filter getrennt ein! Wenn z.B. LRGB in einem Feld "
+"Hinweis: Gib Deine Filter getrennt ein! Wenn z.B. LRGB in einem Feld "
 "eingegeben wird, ist es nicht mehr möglich, für einzelne Filter verschiedene "
 "Aufnahme-Serien hinzuzufügen."
 
@@ -1247,7 +1246,7 @@ msgstr "Datum"
 
 #: forms.py:477
 msgid "Please enter a value between 1 and 5."
-msgstr "Bitte Wert zwischen 1-5 eingeben."
+msgstr "Bitte Wert zwischen 1 und 5 eingeben."
 
 #: forms.py:484
 msgid "Please enter a value between 1 and 10."
@@ -1761,11 +1760,11 @@ msgstr "Bandbreite"
 
 #: models.py:593
 msgid "I don't want this image plate-solved."
-msgstr "Ich möchte dieses Bild nicht plate-solven."
+msgstr "Dieses Bild soll nicht astrometriert werden."
 
 #: models.py:594
 msgid "This is not a deep sky image, don't plate-solve it."
-msgstr "Dies ist eine Deepsky Aufnahme, nicht plate-solven."
+msgstr "Dies ist keine Deepsky Aufnahme, nicht astrometrieren."
 
 #: models.py:595
 msgid "I have no idea about the size of field, try a blind solve."
@@ -1845,11 +1844,11 @@ msgstr "Bewertungen erlauben"
 
 #: models.py:679
 msgid "Insert a focal length if you want to plate-solve."
-msgstr "Gib eine Brennweite an wenn astrometriert werden soll."
+msgstr "Gib eine Brennweite an, falls das Bild astrometriert werden soll."
 
 #: models.py:691
 msgid "Insert a pixel size if you want to plate-solve."
-msgstr "Gib die Pixelgröße ein wenn astrometriert werden soll."
+msgstr "Gib eine Pixelgröße an, falls astrometriert werden soll."
 
 #: models.py:701
 msgid ""
@@ -1871,7 +1870,7 @@ msgid ""
 msgstr ""
 "Wenn Du das Bild vor dem Upload skaliert hast, gib hier bitte die "
 "prozentuale Verkleinerung an. Z.Bsp. 50 wenn das Du Bild in der Grösse "
-"halbiert hast. Cropping hingegen spielt hier eine Rolle."
+"halbiert hast. Cropping hingegen spielt hier keine Rolle."
 
 #: models.py:712
 msgid "Scaling"
@@ -1974,7 +1973,7 @@ msgstr "ISO"
 
 #: models.py:1013
 msgid "Gain"
-msgstr "Empfindlichkeit"
+msgstr "Empfindlichkeit (Gain)"
 
 #: models.py:1018
 msgid "Sensor cooling"
@@ -2035,7 +2034,7 @@ msgstr "Durchschnittliche mag/arcsec^2"
 
 #: models.py:1052
 msgid "As measured with your Sky Quality Meter."
-msgstr "Wie gemessen mit dem SQM."
+msgstr "Wie mit dem Sky Quality Meter gemessen."
 
 #: models.py:1057 views.py:700
 msgid "Mean FWHM"
@@ -2200,8 +2199,8 @@ msgstr "Stadt"
 #: models.py:1456
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr ""
-"Wenn der Standort außerhalb der Stadt liegt, bitte die nächst gelegene Stadt "
-"angeben."
+"Wenn dieser Standort außerhalb einer Stadt liegt, bitte die nächstgelegene "
+"Stadt angeben."
 
 #: models.py:1462
 msgid "State or province"
@@ -2314,7 +2313,7 @@ msgstr "Anzahl der gesehenen Bilder, pro Jahr"
 
 #: stats.py:196 stats.py:239
 msgid "Views, monthly"
-msgstr "Anzahl der gesehenen Bilder, pro Monat"
+msgstr "Bildbetrachtungen, pro Monat"
 
 #: stats.py:197 stats.py:240
 msgid "Views, daily"
@@ -2577,11 +2576,11 @@ msgstr "Dein Bild wurde als Favorit markiert"
 
 #: management/__init__.py:123
 msgid "New image with some gear you follow"
-msgstr "Neues Bild mit Ausrüstung, der du folgst"
+msgstr "Neues Bild mit Ausrüstung, der Du folgst"
 
 #: management/__init__.py:129
 msgid "New image of a subject you follow"
-msgstr "Neues Bild eines Objektes, dem du folgst"
+msgstr "Neues Bild eines Objektes, dem Du folgst"
 
 #: management/__init__.py:135
 msgid "Your API Key request has been approved"
@@ -2589,11 +2588,11 @@ msgstr "Die API-Key Anfrage wurde bestätigt"
 
 #: management/__init__.py:141
 msgid "New discussion about a gear item you own"
-msgstr "Neue Diskussion zu einem deiner Ausrüstungsgegenstände"
+msgstr "Neue Diskussion zu einem Deiner Ausrüstungsgegenstände"
 
 #: management/__init__.py:147
 msgid "New review of a gear item you own"
-msgstr "Neuer Bericht zur einem Teil deiner Ausrüstung"
+msgstr "Neuer Bericht zur einem Teil Deiner Ausrüstung"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2625,9 +2624,9 @@ msgid ""
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
 "in your own app or website."
 msgstr ""
-"Danke für dein Interesse an den AstroBin APIs! Du benötigst einen "
+"Danke für Dein Interesse an den AstroBin APIs! Du benötigst einen "
 "<strong>Key</strong> sowie ein <strong>Secret</strong> um die Daten von "
-"AstroBin auf auf deiner eigenen Webseite oder in deiner eigenen App "
+"AstroBin auf auf Deiner eigenen Webseite oder in deiner eigenen App "
 "verwenden zu können."
 
 #: templates/app_api_key_request.html:9
@@ -2828,12 +2827,12 @@ msgid ""
 "AstroBin is running a campaign to collectively improve the consistency of "
 "the gear database."
 msgstr ""
-"AstroBin hat eine Kampagne um gemeinschaftlich die Konsistenz der "
+"AstroBin hat eine Kampagne gestartet, um gemeinschaftlich die Konsistenz der "
 "Ausrüstungsdatenbank zu verbessern."
 
 #: templates/base.html:368
 msgid "Click here to help!"
-msgstr "Klick hier für Hilfe!"
+msgstr "Klicke hier, um mitzuhelfen!"
 
 #: templates/base.html:381
 msgid ""
@@ -2947,7 +2946,7 @@ msgstr ""
 
 #: templates/faq.html:13 templates/faq.html.py:39
 msgid "What image formats are supported?"
-msgstr "Welche Bildformat werden unterstützt?"
+msgstr "Welche Bildformate werden unterstützt?"
 
 #: templates/faq.html:14 templates/faq.html.py:46
 msgid "Is my data safe on AstroBin?"
@@ -3361,9 +3360,10 @@ msgid ""
 "common sense\". If you feel you can't abide by them, please let us know what "
 "you feel is wrong."
 msgstr ""
-"Zusammenfassend sagen die Benutzungsbedingungen aus, daß man nett sein "
-"sollte und den gesunden Menschenverstand benutzend. Wenn Du das Gefühl hast, "
-"dass Du gewisse Regeln nicht einhalten kannst, lass' es uns bitten wissen."
+"Zusammenfassend wollen Dir diese Nutzungsbedingungen folgendes sagen: \"Sei "
+"nett, und nutze den gesunden Menschenverstand\". Wenn Du das Gefühl hast, "
+"dass Du gewissen Regeln nicht Folge leisten kannst, lass' es uns bitten "
+"wissen."
 
 #: templates/help.html:10
 msgid "Hey!"
@@ -3889,8 +3889,8 @@ msgid ""
 "On this page you can see images that were actually taken each night, and not "
 "merely uploaded on a particular date."
 msgstr ""
-"Auf dieser Seite finden sich Bilder nach Aufnahmedatum statt nach "
-"Uploaddatum sortiert werden."
+"Auf dieser Seite finden sich Bilder, die an einem bestimmten Aufnahmedatum "
+"angefertigt wurden; unabhängig davon, wann sie hochgeladen wurden."
 
 #: templates/nightly.html:27
 msgid "No image acquired in the selected month."
@@ -3914,7 +3914,7 @@ msgstr "weiter"
 
 #: templates/profile-edit-menu.html:6 templates/image/edit/menu.html:6
 msgid "Basic Information"
-msgstr "Grundlegende Information"
+msgstr "Grundlegende Informationen"
 
 #: templates/profile-edit-menu.html:18
 msgid "Import from Flickr"
@@ -4232,7 +4232,7 @@ msgid ""
 "objects are shared among everyone, in the database. The word \"(sold)\" "
 "should be removed."
 msgstr ""
-"\"verkauft\" ist eine Information, die nur auf wenige Nutzer zutrifft. "
+"\"verkauft\" (sold) ist eine Information, die nur auf wenige Nutzer zutrifft. "
 "Gegenstände werden in der Datenbank für jeden bereit gestellt. Das Wort "
 "\"verkauft\" sollte gelöscht werden."
 
@@ -4357,7 +4357,7 @@ msgstr "Eigentümer"
 
 #: templates/gear/page.html:39 templates/gear/page.html.py:65
 msgid "Reviews"
-msgstr "Brichte"
+msgstr "Berichte"
 
 #: templates/gear/page.html:69
 msgid ""
@@ -4508,7 +4508,7 @@ msgstr ""
 
 #: templates/image/detail.html:40 templates/messages/inbox.html:27
 msgid "Actions"
-msgstr "Bearbeiten"
+msgstr "Aktionen"
 
 #: templates/image/detail.html:48
 msgid "Edit basic information"
@@ -4833,7 +4833,7 @@ msgstr "Bildbearbeitung verbessert? Lade die neue Version hoch!"
 
 #: templates/image/detail.html:1306
 msgid "Delete image and all its revisions?"
-msgstr "Bild inkl. allen Versionen löschen?"
+msgstr "Bild inkl. aller Versionen löschen?"
 
 #: templates/image/detail.html:1307
 msgid ""
@@ -5895,8 +5895,8 @@ msgid ""
 "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
 "Check it out at the following url: %(object_url)s"
 msgstr ""
-"Ein neues Bild wurde mit Ausrüstung aufgenommen, der du folgst: <strong>"
-"%(gear)s</strong>. Schau es dir hier an: %(object_url)s"
+"Ein neues Bild wurde mit Ausrüstung aufgenommen, der Du folgst: <strong>%"
+"(gear)s</strong>. Schau es dir hier an: %(object_url)s"
 
 #: templates/notification/new_image_from_gear/notice.html:2
 #: templates/notification/new_image_from_gear/short.html:2
@@ -6460,9 +6460,9 @@ msgid ""
 "Please note: images with no acquisition dates will appear last, and in no "
 "particular order."
 msgstr ""
-"Diese Bilder sind nach aufsteigendem Aufnahmezeitpunkt sortiert. Beachte: "
-"Bilder ohne Aufnahmezeitpunk werden als letztes gelistet, ohne spezifische "
-"Sortierung."
+"Diese Bilder sind nach Aufnahmezeitpunkt sortiert (neueste zuerst). Beachte: "
+"Bilder ohne Zeitangaben werden am Ende und ohne bestimmte Reihenfolge "
+"angezeigt."
 
 #: templates/user/profile.html:73
 msgid "Please fill in the missing dates on all your images!"
@@ -6575,8 +6575,8 @@ msgid ""
 "The following information, instead, is personal, and may refer to your copy "
 "of this product."
 msgstr ""
-"Die folgenden Informationen sind jedoch privat und können sich auf deine "
-"Ausrüstung beziehen."
+"Die folgenden Informationen sind jedoch individuell und können sich auf "
+"Deine spezielle Ausrüstung beziehen."
 
 #: templates/user/profile/edit/gear.html:67
 msgid "Add gear item"
@@ -6592,7 +6592,7 @@ msgid ""
 "AstroBin. Change your default here."
 msgstr ""
 "Du kannst eine Default-Lizenz für Deine Inhalte setzen, welche Du bei "
-"AstroBin hinauflädst. Aender Deine Default-Einstellung hier."
+"AstroBin hinauflädst. Ändere Deine Default-Einstellung hier."
 
 #: templates/user/profile/edit/locations.html:8
 msgid "Edit your locations"
@@ -6603,9 +6603,9 @@ msgid ""
 "Use the form below to add a new location. After you add one, a new empty "
 "form will be created at the bottom, in case you want to add more."
 msgstr ""
-"Benutzen sie dieses Formular, um einen neuen Standort einzugeben. Wenn Sie "
-"einen Standort eingeben haben, können sie ein weiteres Formular öffnen um "
-"weitere Standorte einzugeben."
+"Benutze dieses Formular, um einen neuen Standort einzugeben. Wenn Du einen "
+"Standort eingeben hast, wird am Ende ein leeres Formular eingefügt, falls Du "
+"weitere Standorte eingeben möchtest."
 
 #: templates/user/profile/edit/locations.html:15
 msgid "AstroBin will not share your location details with other users."
@@ -6621,7 +6621,9 @@ msgstr "Deine Site-Einstellungen bearbeiten"
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
-msgstr "Wähle welche E-Mail Benachrichtigung du erhalten möchtest:"
+msgstr ""
+"Wähle die bevorzugte Sprache und welche E-Mail Benachrichtigung Du erhalten "
+"möchtest:"
 
 #~ msgid "Please use full names (make and model) for all your gear items!"
 #~ msgstr ""

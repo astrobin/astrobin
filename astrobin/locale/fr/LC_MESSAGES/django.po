@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-25 06:58-0400\n"
-"PO-Revision-Date: 2012-05-25 19:19+0100\n"
+"PO-Revision-Date: 2012-05-29 16:46+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -1492,8 +1492,8 @@ msgstr "Alias"
 msgid ""
 "A descriptive name, alias or nickname for your own copy of this product."
 msgstr ""
-"Un nom descriptif, un surnom ou un sobriquet pour votre propre exemplaire de "
-"ce matériel."
+"Un nom descriptif, un surnom ou un sobriquet concernant votre propre "
+"exemplaire de ce matériel."
 
 #: models.py:197
 msgid "Comment"
@@ -1503,8 +1503,8 @@ msgstr "Commentaire"
 msgid ""
 "Information, description or comment about your own copy of this product."
 msgstr ""
-"Informations, description ou commentaire à propos de votre propre exemplaire "
-"de ce matériel."
+"Description ou commentaire à propos de votre propre exemplaire de ce "
+"matériel."
 
 #: models.py:225 models.py:236
 msgid "Label"
@@ -1900,7 +1900,7 @@ msgstr "(sans titre)"
 
 #: models.py:887 templates/image/full.html:57
 msgid "uploaded"
-msgstr "publiée"
+msgstr "a publié"
 
 #: models.py:940
 msgid "uploaded a new revision of"
@@ -2839,7 +2839,7 @@ msgid ""
 "AstroBin is running a campaign to collectively improve the consistency of "
 "the gear database."
 msgstr ""
-"AstroBin mène actuellement une opération collective afin d'améliorer la base "
+"AstroBin mène actuellement une campagne collective d'amélioration de la base "
 "de données concernant le matériel."
 
 #: templates/base.html:368
@@ -4094,12 +4094,12 @@ msgstr "Comètes"
 msgid "Remove filter"
 msgstr "Supprimer le filtre"
 
-# Problème: la variable a disparu. Par exemple, sous une image, on a "postée il y a 3 jours" (en anglais, c'était "%s ago")
-# Ce "ago" correspond à l'information du fil d'activité. Problème > sans la variable "2 hours ago" donnera en français "2 heures il y a". !!
-# Vu avec Salvatore. L'ancienne expression sera prise en compte lors de la MAJ.
+# Problème: la variable a disparu. Par exemple, sous une image, on trouve "postée il y a 3 jours" (en anglais, c'était "%s ago")
+# Ce "ago" correspond à l'information du fil d'activité. Problème > sans la variable, "2 hours ago" donnera en français "2 heures il y a". !!
+# Vu avec Salvatore. L'ancienne expression (ligne 576) doit être prise en compte lors de la MAJ.
 #: templates/activity/action.html:28
 msgid "ago"
-msgstr "il y a %s"
+msgstr "ago"
 
 #: templates/avatar/change.html:9
 msgid "Change your avatar"
@@ -4161,8 +4161,8 @@ msgstr ""
 "La base de données d'AstroBin concernant le matériel est quelque peu "
 "chaotique: de nombreux utilisateurs ont indiqué des noms différents pour un "
 "même équipement, ignorant les suggestions des listes prédéfinies. Mais pas "
-"d'inquiétude, nous pouvons résoudre ce problème, pour faire en sorte que la "
-"base de données soit plus cohérente à l'avenir."
+"d'inquiétude, nous pouvons résoudre ce problème afin que la base de données "
+"soit plus cohérente à l'avenir."
 
 #: templates/gear/fix.html:16
 msgid "Please read the instructions and the example below, they are important!"
@@ -4176,8 +4176,8 @@ msgid ""
 "to do:"
 msgstr ""
 "Dans un effort collectif de style wiki, nous pouvons agir ensemble, petit à "
-"petit, pour redresser la situation. Ce sera très simple! Voilà ce que vous "
-"devrez faire:"
+"petit, pour rétablir la situation. Ce sera très simple! Voici les points à "
+"respecter:"
 
 #: templates/gear/fix.html:22
 msgid "Make sure both the make and the name are in English."
@@ -4208,8 +4208,8 @@ msgstr "Voici quelques exemples conformes:"
 #: templates/gear/fix.html:38
 msgid "And here's some bad examples, that need fixing, and why:"
 msgstr ""
-"Et voici quelques exemples incorrects, nécessitant une rectification, et "
-"pourquoi:"
+"Et voici quelques exemples incorrects, nécessitant une rectification, et la "
+"raison:"
 
 #: templates/gear/fix.html:43
 msgid ""
@@ -4336,7 +4336,7 @@ msgstr "Passer"
 
 #: templates/gear/fix.html:110
 msgid "Enough for now"
-msgstr "Assez pour aujourd'hui"
+msgstr "Assez pour l'instant"
 
 #: templates/gear/fix_thanks.html:5 templates/gear/fix_thanks.html.py:8
 msgid "Thanks!"
@@ -4368,10 +4368,9 @@ msgid ""
 "read your review: all the users on AstroBin who own this piece of gear, will "
 "be notified of your review."
 msgstr ""
-"S'il vous plaît, soyez objectif, honnête et respectueux lorsque vous rédigez "
-"une critique. De nombreuses personnes liront votre avis: tous les membres "
-"d'AstroBin possédant ce matériel, seront informés de la publication de votre "
-"test."
+"Soyez objectif, honnête et respectueux lorsque vous rédigez une critique. De "
+"nombreuses personnes liront votre avis: tous les membres d'AstroBin "
+"possédant ce matériel seront informés de la publication de votre test."
 
 #: templates/gear/page.html:71
 msgid ""
@@ -6559,7 +6558,7 @@ msgstr "Modifier le matériel"
 
 #: templates/user/profile/edit/gear.html:35
 msgid "Please note!"
-msgstr "Donnez une note!"
+msgstr "Note:"
 
 #: templates/user/profile/edit/gear.html:36
 msgid ""
