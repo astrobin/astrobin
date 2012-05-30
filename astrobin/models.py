@@ -846,13 +846,6 @@ class Image(models.Model):
     def get_absolute_url(self):
         return '/%i' % self.id
 
-def image_post_save(sender, instance, created, **kwargs):
-    verb = "uploaded"
-    l10n_verb = _(verb)
-    if created and not instance.is_wip:
-        action.send(instance.user, verb = verb, target = instance)
-post_save.connect(image_post_save, sender = Image)
-
 
 class ImageRevision(models.Model):
     image = models.ForeignKey(Image)
