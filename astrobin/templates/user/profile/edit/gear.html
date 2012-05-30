@@ -312,6 +312,9 @@
                                 $content.append($new_button);
                             } else {
                                 $form.find('.form-content').html(responseJson['form']);
+                                if (responseJson.type == 'gear_type_missing') {
+                                    alert(responseJson.error);
+                                }
                             }
 
                         },
