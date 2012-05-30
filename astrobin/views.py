@@ -3201,6 +3201,15 @@ def save_gear_details(request):
         gear, gear_type = get_correct_gear(id)
     else:
         gear_type = request.POST.get('gear_type')
+        if gear_type is None:
+            return HttpResponse(
+                simplejson.dumps({
+                    'success': False,
+                    'type': 'gear_type_missing',
+                    'error': 'Unable to find gear type. IMPORTANT: contact the staff!',
+                }),
+                mimetype = 'application/javascript')
+
 
 
     class_lookup = {
