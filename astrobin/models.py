@@ -201,7 +201,7 @@ class GearUserInfo(models.Model):
     )
 
     def __unicode__(self):
-        return self.alias
+        return "%s (%s)" % (self.alias, self.gear.name)
 
     class Meta:
         app_label = 'astrobin'
