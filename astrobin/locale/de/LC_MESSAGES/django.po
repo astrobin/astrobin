@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-25 06:58-0400\n"
-"PO-Revision-Date: 2012-05-30 12:56+0100\n"
+"PO-Revision-Date: 2012-06-01 10:46+0100\n"
 "Last-Translator: docMario <mario@schubert.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -1848,7 +1848,7 @@ msgstr "Gib eine Brennweite an, falls das Bild astrometriert werden soll."
 
 #: models.py:691
 msgid "Insert a pixel size if you want to plate-solve."
-msgstr "Gib eine Pixelgröße an, falls astrometriert werden soll."
+msgstr "Gib eine Pixelgröße an, falls das Bild astrometriert werden soll."
 
 #: models.py:701
 msgid ""
@@ -2568,7 +2568,7 @@ msgstr "Es wurde ein neuer Kommentar zu Deinem Bild abgegeben"
 
 #: management/__init__.py:111
 msgid "There was a reply to your comment"
-msgstr "Es gibt eine Antwort zu deinem Kommentar"
+msgstr "Es gibt eine Antwort zu Deinem Kommentar"
 
 #: management/__init__.py:117
 msgid "Your image was favorited"
@@ -2753,7 +2753,7 @@ msgstr "Meine Seiten"
 
 #: templates/base.html:227 templates/user/profile-subnav.html:14
 msgid "Gallery"
-msgstr "Gallerie"
+msgstr "Galerie"
 
 #: templates/base.html:232 templates/image/detail.html:719
 #: templates/user/profile-subnav.html:19
@@ -5171,10 +5171,10 @@ msgid ""
 "of the field of your image, plate-solving will be much faster and will have "
 "a better chance of success!"
 msgstr ""
-"AstroBin <em>könnte</em> Dein Bild plate-solven, ohne etwas darüber zu "
-"wissen; allerdings wäre dies ein aufwendiger Prozess. Wenn Du die ungefähre "
-"Grösse des Ausschnitts Deine Bildes kennst, wird der Plate-Solving Prozess "
-"wesentlich schneller und genauer!"
+"AstroBin <em>könnte</em> Dein Bild astrometrieren, ohne etwas darüber zu "
+"wissen; allerdings könnte dies lange dauern. Wenn Du die ungefähre Größe des "
+"Bildausschnittes kennst, wird der Astrometrierungs-Prozess wesentlich "
+"schneller und genauer!"
 
 #: templates/image/edit/presolve.html:35
 msgid "Start plate-solving"
@@ -5966,8 +5966,8 @@ msgid ""
 "\n"
 "http://astrobin.com/messages/inbox/"
 msgstr ""
-"Sie haben eine private Nachricht auf AstroBin erhalten!\n"
-"Folgen Sie diesem Link um sie zu lesen:\n"
+"Du hast eine private Nachricht auf AstroBin erhalten!\n"
+"Folge diesem Link um sie zu lesen:\n"
 "\n"
 "http://astrobin.com/messages/inbox/"
 
@@ -6303,7 +6303,7 @@ msgstr "%(username)ss technische Karte"
 #: templates/user/card.html:39
 #, python-format
 msgid "About %(username)s"
-msgstr "Ueber %(username)s"
+msgstr "Über %(username)s"
 
 #: templates/user/card.html:61
 #, python-format
@@ -6317,7 +6317,7 @@ msgstr ""
 #: templates/user/card.html:65
 #, python-format
 msgid "%(username)s didn't write anything about themselves."
-msgstr "%(username)s hat nichts über sich selber geschrieben."
+msgstr "%(username)s hat nichts über sich selbst geschrieben."
 
 # plots in welchem Zusammenhang?
 #: templates/user/favorites.html:5
@@ -6336,7 +6336,7 @@ msgstr "%(username)ss Favoriten anzeigen"
 
 #: templates/user/favorites.html:19
 msgid "These are the images you marked as favorite."
-msgstr "Diese Bilder wurden von dir als Favoriten markiert"
+msgstr "Diese Bilder wurden von Dir als Favoriten markiert"
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
@@ -6359,7 +6359,7 @@ msgstr ""
 "Hi <strong>%(user)s</strong>! Ich wollte Dir nur mitteilen, dass Deine "
 "Bilder viel besser dargstellt werden könnten, wenn Du alle Daten hinterlegt "
 "hättest. <a href=\"%(user_page)s?public&sub=nodata\">Hier kannst Du "
-"sicherstellen</a>, welche Deiner Bilder noch fehlende Informationen haben."
+"überprüfen</a>, welche Deiner Bilder noch fehlende Informationen haben."
 
 #: templates/user/plots.html:20
 msgid "Total integration hours, plotted against time."
@@ -6407,7 +6407,7 @@ msgstr "Fehlende Daten"
 #: templates/user/profile.html:5
 #, python-format
 msgid "%(user)s's gallery"
-msgstr "Gallerie von %(user)s"
+msgstr "Galerie von %(user)s"
 
 #: templates/user/profile.html:12
 msgid "View your images"
@@ -6424,9 +6424,9 @@ msgid ""
 "can show people individual images by sharing them using the <em>Share</em> "
 "menu."
 msgstr ""
-"Hier sind Ihre Bilder mit Status \"in Bearbeitung\": Nur Sie können diese "
-"Liste sehen. Sie können einzelne Bilder anderen Personen zeigen, indem Sie "
-"das Menu <em>Teilen</em> verwenden."
+"Hier sind Deine Bilder mit Status \"in Bearbeitung\": Nur Du kannst diese "
+"Liste sehen. Du kannst einzelne Bilder anderen Personen zeigen, indem Du das "
+"Menu <em>Teilen</em> verwendest."
 
 #: templates/user/profile.html:28
 msgid "These images don't have enough data. It's a shame..."
@@ -6439,7 +6439,7 @@ msgid ""
 "minimum. Dates of acquisitions are very important too."
 msgstr ""
 "Wenn Du Deine Bilder in Alben kategorisieren möchtest, solltest Du weitere "
-"Daten hinzuügen. Bildgebendes Teleskop, Kamera und Betreff sind das absoltue "
+"Daten hinzufügen. Aufnahme-Teleskop, Kamera und Betreff sind das absolute "
 "Minimum. Ebenso wichtig ist der Aufnahmezeitpunkt."
 
 #: templates/user/profile.html:43
@@ -6510,7 +6510,7 @@ msgstr ""
 
 #: templates/user/profile/flickr_import.html:73
 msgid "Click to select the photos you want to import"
-msgstr "Wähle die Bilder durch klicken aus, die Du importieren möchtest"
+msgstr "Klicke die Bilder an, die Du importieren möchtest"
 
 #: templates/user/profile/flickr_import.html:89
 msgid "Import selected photos"
@@ -6522,15 +6522,15 @@ msgstr "Bilder importieren."
 
 #: templates/user/profile/flickr_import.html:99
 msgid "Do not navigate away from this window: this might take a while!"
-msgstr "Bitte nicht navigieren; der Import könnte eine Weile dauern!"
+msgstr "Bitte diese Seite nicht verlassen: der Import könnte eine Weile dauern!"
 
 #: templates/user/profile/flickr_import.html:108
 msgid ""
 "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
 "(and keep an eye on your notifications)!"
 msgstr ""
-"Fertig! Gehen zu <a href=\\\"/me\\\">Deinem Profil</a> um die Bilder "
-"anzusehen (und eine Übersicht über Deine Benachrichtigungen zu erhalten)!"
+"Fertig! Gehe zu <a href=\\\"/me\\\">Deinem Profil</a> um die Bilder anzusehen "
+"(und eine Übersicht über Deine Benachrichtigungen zu erhalten)!"
 
 #: templates/user/profile/edit/basic.html:10
 msgid "Edit your basic information"
@@ -6591,7 +6591,7 @@ msgid ""
 "You can set a default type of license for everything you upload into "
 "AstroBin. Change your default here."
 msgstr ""
-"Du kannst eine Default-Lizenz für Deine Inhalte setzen, welche Du bei "
+"Du kannst eine Default-Lizenz für alle Deine Inhalte setzen, welche Du bei "
 "AstroBin hinauflädst. Ändere Deine Default-Einstellung hier."
 
 #: templates/user/profile/edit/locations.html:8
