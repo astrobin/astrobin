@@ -321,6 +321,11 @@
                                 $form.find('input[name=name]').attr('data-provide', 'typeahead');
                                 $form.find('input[name=name]').attr('data-source', '{{all_gear_names|safe|addslashes}}');
 
+                                if (responseJson.gear_id) {
+                                    $form.find('.form-content').append(
+                                        '<input type="hidden" name="gear_id" value="' + responseJson.gear_id + '" />');
+                                }
+
                                 if (responseJson.type == 'gear_type_missing') {
                                     alert(responseJson.error);
                                 }
