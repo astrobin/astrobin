@@ -312,6 +312,15 @@
                                 $content.append($new_button);
                             } else {
                                 $form.find('.form-content').html(responseJson['form']);
+
+                                $form.find('.form-content').append(
+                                    '<input type="hidden" name="gear_type" value="' + gear_type + '" />');
+                                $form.find('input[name=make]').attr('data-provide', 'typeahead');
+                                $form.find('input[name=make]').attr('data-source', '{{all_gear_makes|safe|addslashes}}');
+
+                                $form.find('input[name=name]').attr('data-provide', 'typeahead');
+                                $form.find('input[name=name]').attr('data-source', '{{all_gear_names|safe|addslashes}}');
+
                                 if (responseJson.type == 'gear_type_missing') {
                                     alert(responseJson.error);
                                 }
