@@ -3242,6 +3242,14 @@ def save_gear_details(request):
                 make = request.POST.get('make'),
                 name = request.POST.get('name'))[0]
             created = False
+        except IntegrityError:
+            from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
+            response_dict = {
+                'form': as_bootstrap(form, 'horizontal') if form else '',
+            }
+            return HttpResponse(
+                simplejson.dumps(response_dict),
+                mimetype = 'application/javascript')
 
     form = form_lookup[gear_type](data = request.POST, instance = gear)
     if not form.is_valid():
