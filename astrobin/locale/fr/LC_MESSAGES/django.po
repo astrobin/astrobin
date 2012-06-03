@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-25 06:58-0400\n"
-"PO-Revision-Date: 2012-05-29 16:46+0100\n"
+"PO-Revision-Date: 2012-05-30 15:38+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -1461,7 +1461,7 @@ msgstr "Fabricant"
 
 #: models.py:129
 msgid "The make, brand, producer or developer of this product."
-msgstr "Le fabricant ou la marque du matériel."
+msgstr "Le fabricant, la marque, ou le développeur du produit."
 
 #: models.py:136 models.py:1448 models.py:1603 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
@@ -1479,10 +1479,10 @@ msgid ""
 "customizations. Try to use the international name, in English language, if "
 "applicable. This name is shared among all users on AstroBin."
 msgstr ""
-"Uniquement le nom du matériel, sans ses caractéristiques techniques ou "
-"d'éventuelles modifications personnelles. Veuillez indiquer la dénomination "
-"internationale du modèle, en anglais le cas échéant, car ce nom sera partagé "
-"via la base de données parmi tous les utilisateurs d'AstroBin."
+"Uniquement le nom du produit, sans ses caractéristiques techniques ou "
+"d'éventuelles modifications personnelles. Veuillez indiquer de préférence la "
+"dénomination internationale, en anglais le cas échéant, car ce nom sera "
+"partagé via la base de données parmi tous les utilisateurs d'AstroBin."
 
 #: models.py:189
 msgid "Alias"
