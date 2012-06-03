@@ -256,6 +256,7 @@ urlpatterns = patterns('',
     url(r'^avatar/', include('avatar.urls')),
 
     url(r'^get-gear-ajax/(?P<image_id>\d+)/$', views.get_gear_ajax, name='get_gear_ajax'),
+    url(r'^get-gear-by-make/(?P<make>[\w+ ?]*)/$', views.get_gear_by_make, name='get_gear_by_make'),
 
     url(r'^api/', include(v1_api.urls)),
     url(r'^api/request-key/$', views.app_api_key_request, name = 'app_api_key_request'),

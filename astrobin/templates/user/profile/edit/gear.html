@@ -247,18 +247,38 @@
                 timeout: 10000,
                 cache: false,
                 success: function(data, textStatus, XMLHttpRequest) {
-                    var $dlg = $('#add-gear-modal');
-                    var $form = $dlg.find('form');
+                    var $dlg = $('#add-gear-modal'),
+                        $form = $dlg.find('form');
 
                     $form.find('.form-content').html(data['form']);
 
+                    var $make = $form.find('input[name=make]'),
+                        $name = $form.find('input[name=name]');
+
                     $form.find('.form-content').append(
                         '<input type="hidden" name="gear_type" value="' + gear_type + '" />');
-                    $form.find('input[name=make]').attr('data-provide', 'typeahead');
-                    $form.find('input[name=make]').attr('data-source', '{{all_gear_makes|safe|addslashes}}');
 
-                    $form.find('input[name=name]').attr('data-provide', 'typeahead');
-                    $form.find('input[name=name]').attr('data-source', '{{all_gear_names|safe|addslashes}}');
+                    $make.attr('data-provide', 'typeahead');
+                    $make.attr('data-source', '{{all_gear_makes|safe|addslashes}}');
+
+                    $name.attr('data-provide', 'typeahead');
+                    $name.attr('data-source', '{{all_gear_names|safe|addslashes}}');
+
+                    $name.focus(function(e) {
+                        var make = $.trim($make.val());
+                        if (make != '') {
+                            $.ajax({
+                                url: '/get-gear-by-make/' + make + '/',
+                                dataType: 'json',
+                                timeout: 10000,
+                                cache: true,
+                                success: function(data, textStatus, XMLHttpRequest) {
+                                    var typeahead = $name.typeahead();
+                                    typeahead.data('typeahead').source = data;
+                                }
+                            });
+                        }
+                    });
 
                     var ajaxFormOptions = {
                         dataType: 'json',
