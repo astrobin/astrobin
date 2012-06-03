@@ -39,9 +39,6 @@
                     <div class="album-part">
                         <div class="well">
                             <strong>{{title}}</strong>
-                            {% ifequal content.images|length 15 %}
-                                <span class="more"><a href="?public&sub={{subsection}}&{{subsection}}={{title}}">{% trans "(view more...)" %}</a></span>
-                            {% endifequal %}
                         </div>
                         {% if user == request.user and content.message %}
                         <p>

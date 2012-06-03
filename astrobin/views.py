@@ -1614,7 +1614,6 @@ def user_page(request, username):
     backlink = None
 
     smart_albums = []
-    max_items = 15
     sqs = Image.objects.filter(user = user, is_stored = True).order_by('-uploaded')
     lad_sql = 'SELECT date FROM astrobin_acquisition '\
               'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\
@@ -1661,7 +1660,7 @@ def user_page(request, username):
                     for i in sqs.filter(acquisition__date__year = y).extra(
                         select = {'last_acquisition_date': lad_sql},
                         order_by = ['-last_acquisition_date']
-                    ).distinct()[:max_items]:
+                    ).distinct():
                         k_dict[str(y)]['images'].append(i)
 
                 l = _("No date specified")
@@ -1673,10 +1672,13 @@ def user_page(request, username):
                
                 sqs = Image.objects.none()
         elif subsection == 'gear':
+            from templatetags.tags import gear_name
+
             if 'gear' in request.GET:
                 gear = request.GET.get('gear')
-                sqs = sqs.filter(Q(imaging_telescopes__name = gear) | Q(imaging_cameras__name = gear))
-                subtitle = gear
+                sqs = sqs.filter(Q(imaging_telescopes__id = gear) | Q(imaging_cameras__id = gear))
+
+                subtitle = gear_name(Gear.objects.get(id=gear))
                 backlink = "?public&sub=gear"
             else:
                 k_list = []
@@ -1686,10 +1688,11 @@ def user_page(request, username):
                     profile.cameras.all(): 'imaging_cameras',
                 }.iteritems():
                     for k in qs:
-                        k_dict = {k.name: {'message': None, 'images': []}}
+                        name = gear_name(k)
+                        k_dict = {name: {'message': None, 'images': []}}
                         k_list.append(k_dict)
-                        for i in sqs.filter(**{filter: k}).distinct()[:max_items]:
-                            k_dict[k.name]['images'].append(i)
+                        for i in sqs.filter(**{filter: k}).distinct():
+                            k_dict[name]['images'].append(i)
 
                 l = _("No imaging telescopes or lenses, or no imaging cameras specified")
                 k_dict = {l: {'message': None, 'images': []}}
@@ -1727,7 +1730,7 @@ def user_page(request, username):
                     k_dict = {l: {'message': None, 'images': []}}
                     k_list.append(k_dict)
                     r = reverse_subject_type(l)
-                    for i in sqs.filter(Q(subjects__otype__in = r)).distinct()[:max_items]:
+                    for i in sqs.filter(Q(subjects__otype__in = r)).distinct():
                         k_dict[l]['images'].append(i)
 
                 l = _("Solar system")
