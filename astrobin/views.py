@@ -1733,7 +1733,7 @@ def user_page(request, username):
                 l = _("Solar system")
                 k_dict = {l: {'message': None, 'images': []}}
                 k_list.append(k_dict)
-                for i in sqs.filter(solar_system_main_subject__gte = 1):
+                for i in sqs.filter(solar_system_main_subject__gte = 0):
                     k_dict[l]['images'].append(i)
 
                 l = _("Extremely wide field")
