@@ -500,3 +500,10 @@ def gear_name(gear):
         return gear.name
     return "%s %s" % (gear.make, gear.name)
 
+
+@register.simple_tag
+def gear_type(gear):
+    from astrobin.gear import get_correct_gear, TYPES_LOOKUP
+    real_gear, gear_type = get_correct_gear(gear.id)
+
+    return TYPES_LOOKUP[gear_type][gear.type][1]
