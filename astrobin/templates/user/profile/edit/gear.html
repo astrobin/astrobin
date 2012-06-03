@@ -260,9 +260,11 @@
 
                     $make.attr('data-provide', 'typeahead');
                     $make.attr('data-source', '{{all_gear_makes|safe|addslashes}}');
+                    $make.attr('autocomplete', 'off');
 
                     $name.attr('data-provide', 'typeahead');
                     $name.attr('data-source', '{{all_gear_names|safe|addslashes}}');
+                    $name.attr('autocomplete', 'off');
 
                     $name.focus(function(e) {
                         var make = $.trim($make.val());
