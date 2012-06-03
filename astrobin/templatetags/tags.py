@@ -506,4 +506,8 @@ def gear_type(gear):
     from astrobin.gear import get_correct_gear, TYPES_LOOKUP
     real_gear, gear_type = get_correct_gear(gear.id)
 
-    return TYPES_LOOKUP[gear_type][gear.type][1]
+    try:
+        t = TYPES_LOOKUP[gear_type][real_gear.type][1]
+        return t
+    except KeyError:
+        return '-'

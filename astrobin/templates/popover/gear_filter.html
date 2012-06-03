@@ -2,8 +2,8 @@
 {% load tags %}
 
 <h3>{{gear.name}}</h3>
-{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
 {% if gear.type %}<p><strong>{% trans "Type" %}</strong>: {% gear_type gear %}</p>{% endif %}
+{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
 {% if gear.bandwidth %}<p><strong>{% trans "Bandwidth" %}</strong>: {{gear.bandwidth}} &mu;m</p>{% endif %}
 
 <div class="actions">
