@@ -1,5 +1,13 @@
 from astrobin.models import *
 
+TYPES_LOOKUP = {
+    'Telescope': Telescope.TELESCOPE_TYPES,
+    'Camera': Camera.CAMERA_TYPES,
+    'Software': Software.SOFTWARE_TYPES,
+    'Filter': Filter.FILTER_TYPES,
+}
+
+
 def get_correct_gear(id):
     types = (
         Telescope,
