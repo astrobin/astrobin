@@ -52,6 +52,10 @@
             </div>
             <div class="subtle-container">
                 <table class="table">
+                    <tr>
+                        <th>{% trans "Type" %}</th>
+                        <td>{% gear_type gear %}</td>
+                    </tr>
                     {% for attribute in attributes %}
                         {% if attribute.1 %}
                             <tr>

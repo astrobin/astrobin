@@ -2,8 +2,8 @@
 {% load tags %}
 
 <h3>{{gear.name}}</h3>
-{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
 {% if gear.type %}<p><strong>{% trans "Type" %}</strong>: {% gear_type gear %}</p>{% endif %}
+{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
 {% if gear.pixel_size %}<p><strong>{% trans "Pixel size" %}</strong>: {{gear.pixel_size}} &mu;m</p>{% endif %}
 {% if gear.sensor_width %}<p><strong>{% trans "Sensor width" %}</strong>: {{gear.sensor_width}} mm</p>{% endif %}
 {% if gear.sensor_height %}<p><strong>{% trans "Sensor height" %}</strong>: {{gear.sensor_height}} mm</p>{% endif %}

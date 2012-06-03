@@ -2,8 +2,8 @@
 {% load tags %}
 
 <h3>{{gear.name}}</h3>
-{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
 {% if gear.type %}<p><strong>{% trans "Type" %}</strong>: {% gear_type gear %}</p>{% endif %}
+{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
 {% if gear.aperture %}<p><strong>{% trans "Aperture" %}</strong>: {{gear.aperture}} mm</p>{% endif %}
 {% if gear.focal_length %}<p><strong>{% trans "Focal length" %}</strong>: {{gear.focal_length}} mm</p>{% endif %}
 
