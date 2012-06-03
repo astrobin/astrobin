@@ -1783,7 +1783,7 @@ def user_page(request, username):
             for i in sqs.filter(
                 (Q(subject_type = 100) | Q(subject_type = 200)) &
                 (Q(subjects = None)) &
-                ((Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None)))):
+                (Q(solar_system_main_subject = None))):
                 k_dict[l]['images'].append(i)
 
             l = _("No imaging telescopes or lenses, or no imaging cameras specified")
