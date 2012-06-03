@@ -1767,7 +1767,7 @@ def user_page(request, username):
                 for i in sqs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
                     (Q(subjects = None)) &
-                    (Q(solar_system_main_subject = 0) | Q(solar_system_main_subject = None))).distinct():
+                    (Q(solar_system_main_subject = None))).distinct():
 
                     k_dict[l]['images'].append(i)
 
