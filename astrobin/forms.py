@@ -611,6 +611,10 @@ class GearEditForm(forms.ModelForm):
 
     class Meta:
         model = Gear
+        widgets = {
+            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+        }
 
 
 class TelescopeEditForm(GearEditForm):
