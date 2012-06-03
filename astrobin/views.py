@@ -3248,6 +3248,7 @@ def save_gear_details(request):
         from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
         response_dict = {
             'form': as_bootstrap(form, 'horizontal') if form else '',
+            'gear_id': gear.id,
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
