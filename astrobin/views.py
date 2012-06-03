@@ -1675,10 +1675,20 @@ def user_page(request, username):
             from templatetags.tags import gear_name
 
             if 'gear' in request.GET:
-                gear = request.GET.get('gear')
+                try:
+                    gear = int(request.GET.get('gear'))
+                except ValueError:
+                    # Probably the Google bot is following some old links, from the time when
+                    # the 'gear' argument was the name of the gear item.
+                    raise Http404
+
                 sqs = sqs.filter(Q(imaging_telescopes__id = gear) | Q(imaging_cameras__id = gear))
 
-                subtitle = gear_name(Gear.objects.get(id=gear))
+                try:
+                    subtitle = gear_name(Gear.objects.get(id=gear))
+                except Gear.DoesNotExist:
+                    subtitle = ''
+
                 backlink = "?public&sub=gear"
             else:
                 k_list = []
