@@ -117,11 +117,13 @@
                     var $form = $dlg.find('form.global');
 
                     $form.find('.form-content').html(data['form']);
+                    $form.find('.btn-primary').removeClass('disabled');
                     $form.find('.btn-primary').val("{% trans "Save" %}");
                     $form.find('input[name=gear_id]').val(id);
 
                     $form.find('input, select').bind('change keyup', function(event) {
                         var $btn = $form.find('.btn-primary')
+                        $btn.removeClass('disabled');
                         $btn.val("{% trans "Save" %}");
                     });
 
@@ -161,6 +163,7 @@
                                 });
                             } else {
                                 $form.find('.form-content').html(responseJson['form']);
+                                $btn.removeClass('disabled');
                                 $btn.val("{% trans "Save" %}");
                             }
 
@@ -193,6 +196,7 @@
 
                     $form.find('input, select').bind('change keyup', function(event) {
                         var $btn = $form.find('.btn-primary')
+                        $btn.removeClass('disabled');
                         $btn.val("{% trans "Save" %}");
                     });
 
@@ -253,6 +257,7 @@
                         $form = $dlg.find('form');
 
                     $form.find('.form-content').html(data['form']);
+                    $form.find('.btn-primary').removeClass('disabled');
                     $form.find('.btn-primary').val("{% trans "Save" %}");
 
                     var $make = $form.find('input[name=make]'),
