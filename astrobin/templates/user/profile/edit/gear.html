@@ -117,6 +117,7 @@
                     var $form = $dlg.find('form.global');
 
                     $form.find('.form-content').html(data['form']);
+                    $form.find('.btn-primary').val("{% trans "Save" %}");
                     $form.find('input[name=gear_id]').val(id);
 
                     $form.find('input, select').bind('change keyup', function(event) {
@@ -251,6 +252,7 @@
                         $form = $dlg.find('form');
 
                     $form.find('.form-content').html(data['form']);
+                    $form.find('.btn-primary').val("{% trans "Save" %}");
 
                     var $make = $form.find('input[name=make]'),
                         $name = $form.find('input[name=name]');
