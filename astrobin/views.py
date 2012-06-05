@@ -3688,9 +3688,22 @@ def get_gear_ajax(request, image_id):
 
 @require_GET
 def get_gear_by_make(request, make):
-    gear = Gear.objects.filter(make = make)
+    ret = {
+        'make': make,
+        'gear': []
+    }
+
+    try:
+        autorename = GearMakeAutoRename.objects.get(rename_from = make)
+        print autorename
+        ret['make'] = autorename.rename_to
+    except:
+        print "pass"
+        pass
+
+    ret['gear'] = [x.name for x in Gear.objects.filter(make = ret['make'])]
     return HttpResponse(
-        simplejson.dumps([x.name for x in gear]),
+        simplejson.dumps(ret),
         mimetype = 'application/javascript')
 
 
