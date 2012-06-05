@@ -52,7 +52,7 @@ class GearAdmin(admin.ModelAdmin):
     list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
     list_editable = ('make', 'name',)
     search_fields = ('id', 'make', 'name',)
-    actions = ['assisted_merge',]
+    actions = ['assisted_merge', 'soft_merge',]
 
     def assisted_merge(modeladmin, request, queryset):
         GearAssistedMerge.objects.all().delete()
@@ -75,40 +75,7 @@ class GearAdmin(admin.ModelAdmin):
                         merge.save()
 
         return HttpResponseRedirect('/admin/astrobin/gearassistedmerge/')
-
-    assisted_merge.short_description = 'Assisted merge'
-
-
-class GearAssistedMergeAdmin(admin.ModelAdmin):
-    list_display = ('master', 'slave', 'cutoff')
-    list_per_page = 10
-    ordering = ('-cutoff', 'master')
-    search_fields = ('master',)
-    actions = ['soft_merge', 'hard_merge', 'invert', 'delete_gear_items',]
-
-
-    def invert(modeladmin, request, queryset):
-        for merge in queryset:
-            master = merge.master
-            slave = merge.slave
-            merge.master = slave
-            merge.slave = master
-            merge.save()
-
-    invert.short_description = 'Invert'
-
-
-    def delete_gear_items(modeladmin, request, queryset):
-        for merge in queryset:
-            try:
-                merge.master.delete()
-                merge.slave.delete()
-            except Gear.DoesNotExist:
-                pass
-            merge.delete()
-
-    delete_gear_items.short_description = "Delete gear items"
-
+    assisted_merge.short_description = 'Assisted hard merge'
 
     def soft_merge(modeladmin, request, queryset):
         masters = [x.master for x in queryset]
@@ -135,6 +102,38 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
             slave.save()
     soft_merge.short_description = 'Soft merge'
 
+
+class GearAssistedMergeAdmin(admin.ModelAdmin):
+    list_display = ('master', 'slave', 'cutoff')
+    list_per_page = 10
+    ordering = ('-cutoff', 'master')
+    search_fields = ('master',)
+    actions = ['hard_merge', 'invert', 'delete_gear_items',]
+
+
+    def invert(modeladmin, request, queryset):
+        for merge in queryset:
+            master = merge.master
+            slave = merge.slave
+            merge.master = slave
+            merge.slave = master
+            merge.save()
+
+    invert.short_description = 'Invert'
+
+
+    def delete_gear_items(modeladmin, request, queryset):
+        for merge in queryset:
+            try:
+                merge.master.delete()
+                merge.slave.delete()
+            except Gear.DoesNotExist:
+                pass
+            merge.delete()
+
+    delete_gear_items.short_description = "Delete gear items"
+
+
     def hard_merge(modeladmin, request, queryset):
         from utils import unique_items
         masters = unique_items([x.master for x in queryset])
@@ -148,6 +147,7 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
         # Finally, clear up the temporary model
         queryset.delete()
 
+        return HttpResponseRedirect('/admin/astrobin/gear/')
     hard_merge.short_description = 'Hard merge'
 
 
