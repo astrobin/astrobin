@@ -691,7 +691,11 @@ def gear_total_images(gear_id):
         'grid': {'hoverable': 'true'},
     }
 
-    gear = Gear.objects.get(id = gear_id)
+    try:
+        gear = Gear.objects.get(id = gear_id)
+    except Gear.DoesNotExist:
+        return (flot_label, flot_data, flot_options)
+
     all = Image.objects.filter(
         Q(imaging_telescopes = gear) |
         Q(guiding_telescopes = gear) |
