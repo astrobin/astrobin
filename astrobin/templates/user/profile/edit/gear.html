@@ -281,10 +281,12 @@
                                 url: '/get-gear-by-make/' + make + '/',
                                 dataType: 'json',
                                 timeout: 10000,
-                                cache: true,
+                                cache: false,
                                 success: function(data, textStatus, XMLHttpRequest) {
+                                    $make.val(data.make);
+
                                     var typeahead = $name.typeahead();
-                                    typeahead.data('typeahead').source = data;
+                                    typeahead.data('typeahead').source = data.gear;
                                 }
                             });
                         }
