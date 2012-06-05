@@ -213,6 +213,13 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
     hard_merge.short_description = 'Hard merge'
 
 
+class GearAutoMergeAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'master',
+        'label',
+    )
+
 class AppApiRequestAdmin(admin.ModelAdmin):
     list_display = (
         'registrar',
@@ -255,6 +262,8 @@ class ImageOfTheDayAdmin(admin.ModelAdmin):
 
 admin.site.register(Gear, GearAdmin)
 admin.site.register(GearAssistedMerge, GearAssistedMergeAdmin)
+admin.site.register(GearMakeAutoRename)
+admin.site.register(GearAutoMerge, GearAutoMergeAdmin)
 admin.site.register(Telescope)
 admin.site.register(Mount)
 admin.site.register(Camera)

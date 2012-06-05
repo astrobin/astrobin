@@ -123,6 +123,28 @@ WATERMARK_POSITION_CHOICES = (
 )
 
 
+class GearMakeAutoRename(models.Model):
+    rename_from = models.CharField(
+        verbose_name = "Rename form",
+        max_length = 128,
+        primary_key = True,
+        blank = False,
+    )
+
+    rename_to = models.CharField(
+        verbose_name = "Rename to",
+        max_length = 128,
+        blank = False,
+        null = False,
+    )
+
+    def __unicode__(self):
+        return "%s --> %s" % (self.rename_from, self.rename_to)
+
+    class Meta:
+        app_label = 'astrobin'
+
+
 class Gear(models.Model):
     make = models.CharField(
         verbose_name = _("Make"),
@@ -169,6 +191,15 @@ class Gear(models.Model):
 
     def get_absolute_url(self):
         return '/gear/%i/' % self.id
+
+    def save(self, *args, **kwargs):
+        try:
+            autorename = GearMakeAutoRename.objects.get(rename_from = self.make)
+            self.make = autorename.rename_to
+        except:
+            pass
+
+        super(Gear, self).save(*args, **kwargs)
 
     class Meta:
         app_label = 'astrobin'
