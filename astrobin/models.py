@@ -203,7 +203,7 @@ class Gear(models.Model):
                 s = getattr(image, name).filter(pk = slave.pk)
                 if s:
                     try:
-                        getattr(image, name).add(klass.objects.get(gear_ptr = self))
+                        getattr(image, name).add(klass.objects.get(pk = self.pk))
                         getattr(image, name).remove(s[0])
                     except klass.DoesNotExist:
                         continue
@@ -216,15 +216,16 @@ class Gear(models.Model):
                 s = getattr(owner, name).filter(pk = slave.pk)
                 if s:
                     try:
-                        getattr(owner, name).add(klass.objects.get(gear_ptr = self))
+                        getattr(owner, name).add(klass.objects.get(pk = self.pk))
                         getattr(owner, name).remove(s[0])
+                        print "\t\tFixed user %s: %d -> %d" % (owner, s[0].pk, self.pk)
                     except klass.DoesNotExist:
                         continue
 
         # Find matching slaves in deep sky acquisitions
         try:
-            filter = Filter.objects.get(gear_ptr__pk = self.pk)
-            DeepSky_Acquisition.objects.filter(filter__gear_ptr__pk = slave.pk).update(
+            filter = Filter.objects.get(pk = self.pk)
+            DeepSky_Acquisition.objects.filter(filter__pk = slave.pk).update(
                 filter = filter)
         except Filter.DoesNotExist:
             pass
