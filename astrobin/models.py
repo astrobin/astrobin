@@ -123,6 +123,28 @@ WATERMARK_POSITION_CHOICES = (
 )
 
 
+class GearMakeAutoRename(models.Model):
+    rename_from = models.CharField(
+        verbose_name = "Rename form",
+        max_length = 128,
+        primary_key = True,
+        blank = False,
+    )
+
+    rename_to = models.CharField(
+        verbose_name = "Rename to",
+        max_length = 128,
+        blank = False,
+        null = False,
+    )
+
+    def __unicode__(self):
+        return "%s --> %s" % (self.rename_from, self.rename_to)
+
+    class Meta:
+        app_label = 'astrobin'
+
+
 class Gear(models.Model):
     make = models.CharField(
         verbose_name = _("Make"),
@@ -135,7 +157,7 @@ class Gear(models.Model):
     name = models.CharField(
         verbose_name = _("Name"),
         help_text = _("Just the name of this product, without any properties or personal customizations. Try to use the international name, in English language, if applicable. This name is shared among all users on AstroBin."),
-        max_length = 64,
+        max_length = 128,
         null = False,
         blank = False,
     )
@@ -169,6 +191,15 @@ class Gear(models.Model):
 
     def get_absolute_url(self):
         return '/gear/%i/' % self.id
+
+    def save(self, *args, **kwargs):
+        try:
+            autorename = GearMakeAutoRename.objects.get(rename_from = self.make)
+            self.make = autorename.rename_to
+        except:
+            pass
+
+        super(Gear, self).save(*args, **kwargs)
 
     class Meta:
         app_label = 'astrobin'
@@ -215,28 +246,6 @@ class GearAssistedMerge(models.Model):
 
     def __unicode__(self):
         return self.master.name
-
-    class Meta:
-        app_label = 'astrobin'
-
-
-class GearAutoMerge(models.Model):
-    master = models.ForeignKey(Gear)
-    label = models.CharField(_("Label"), max_length = 64)
-
-    def __unicode__(self):
-        return self.label
-
-    class Meta:
-        app_label = 'astrobin'
-
-
-class GearNeverMerge(models.Model):
-    master = models.ForeignKey(Gear)
-    label = models.CharField(_("Label"), max_length = 64)
-
-    def __unicode__(self):
-        return self.label
 
     class Meta:
         app_label = 'astrobin'

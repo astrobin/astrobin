@@ -69,8 +69,7 @@ class GearAdmin(admin.ModelAdmin):
                     # relationship (like a -> b and b -> a).
                     # With the second Q(), I exclude dependencies that generate
                     # a tree deeper than 2 level (a -> b -> c).
-                    if not GearAssistedMerge.objects.filter(Q(slave = orphan) | Q(master = slave)) \
-                       and not GearNeverMerge.objects.filter(Q(master = orphan) & Q(label = match)):
+                    if not GearAssistedMerge.objects.filter(Q(slave = orphan) | Q(master = slave)):
                         s = difflib.SequenceMatcher(None, orphan.name, match)
                         merge, created = GearAssistedMerge.objects.get_or_create(master = orphan, slave = slave)
                         merge.cutoff = s.quick_ratio()
@@ -86,7 +85,7 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
     list_per_page = 10
     ordering = ('-cutoff', 'master')
     search_fields = ('master',)
-    actions = ['soft_merge', 'hard_merge', 'invert', 'delete_gear_items', 'never_merge']
+    actions = ['soft_merge', 'hard_merge', 'invert', 'delete_gear_items',]
 
 
     def invert(modeladmin, request, queryset):
@@ -112,16 +111,29 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
     delete_gear_items.short_description = "Delete gear items"
 
 
-    def never_merge(modeladmin, request, queryset):
-        for merge in queryset:
-            nevermerge = GearNeverMerge.objects.get_or_create(master = merge.master, label = merge.slave.name)
-            merge.delete()
-
-    never_merge.short_description = "Never merge"
-
-
     def soft_merge(modeladmin, request, queryset):
-        pass
+        masters = [x.master for x in queryset]
+        if not all(x == masters[0] for x in masters):
+            # They're not all the same!
+            return
+
+        master = masters[0]
+        slaves = [x.slave for x in queryset if x != master]
+
+        for slave in slaves:
+            # These are all the items that are slave to this slave.
+            slaves_slaves = Gear.objects.filter(master = slave)
+
+            if slave.master:
+                slave.master.master = master
+                slave.master.master.save()
+
+            for slaves_slave in slaves_slaves:
+                slaves_slave.master = master
+                slaves_slave.save()
+
+            slave.master = master
+            slave.save()
     soft_merge.short_description = 'Soft merge'
 
     def hard_merge(modeladmin, request, queryset):
@@ -199,8 +211,9 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
             # Find matching gear reviews and move them to the master
             reviews = ReviewedItem.objects.filter(gear = merge.slave).update(object_id = merge.master.id)
 
-            if merge_done:
-                automerge = GearAutoMerge.objects.get_or_create(master = merge.master, label = merge.slave.name)
+            # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
+            if not merge.master.master:
+                merge.master.master = merge.slave.master
 
         # Only now, delete all the slaves. We must delete at the end because
         # We might have the same slave respond to different masters.
@@ -256,6 +269,7 @@ class ImageOfTheDayAdmin(admin.ModelAdmin):
 admin.site.register(Gear, GearAdmin)
 admin.site.register(GearUserInfo)
 admin.site.register(GearAssistedMerge, GearAssistedMergeAdmin)
+admin.site.register(GearMakeAutoRename)
 admin.site.register(Telescope)
 admin.site.register(Mount)
 admin.site.register(Camera)
