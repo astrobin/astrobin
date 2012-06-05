@@ -1,6 +1,6 @@
 from django.db.models import Q
 
-from tastypie.resources import ModelResource, ALL
+from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields
 from tastypie.authentication import Authentication
 
@@ -112,7 +112,7 @@ class ImageResource(ModelResource):
             'title': ALL,
             'description': ALL,
             'is_solved': ('exact',),
-            'user': ALL,
+            'user': ALL_WITH_RELATIONS,
             'uploaded': ALL,
             'fieldw': ALL,
             'fieldh': ALL,
