@@ -226,6 +226,12 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
     hard_merge.short_description = 'Hard merge'
 
 
+class MountAdmin(admin.ModelAdmin):
+    list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
+    list_editable = ('make', 'name',)
+    search_fields = ('id', 'make', 'name',)
+
+
 class AppApiRequestAdmin(admin.ModelAdmin):
     list_display = (
         'registrar',
@@ -270,7 +276,7 @@ admin.site.register(Gear, GearAdmin)
 admin.site.register(GearAssistedMerge, GearAssistedMergeAdmin)
 admin.site.register(GearMakeAutoRename)
 admin.site.register(Telescope)
-admin.site.register(Mount)
+admin.site.register(Mount, MountAdmin)
 admin.site.register(Camera)
 admin.site.register(FocalReducer)
 admin.site.register(Software)

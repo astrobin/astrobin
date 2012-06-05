@@ -192,6 +192,78 @@ class Gear(models.Model):
     def get_absolute_url(self):
         return '/gear/%i/' % self.id
 
+    def hard_merge(self, slave):
+        import operator 
+        from django.db.models import Q
+
+        # Find matching slaves in images
+        types = {
+            'imaging_telescopes': Telescope,
+            'guiding_telescopes': Telescope,
+            'mounts': Mount,
+            'imaging_cameras': Camera,
+            'guiding_cameras': Camera,
+            'focal_reducers': FocalReducer,
+            'software': Software,
+            'filters': Filter,
+            'accessories': Accessory,
+        }
+        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: slave.pk}) for t in types])
+        images = Image.objects.filter(filters).distinct()
+        for image in images:
+            for name, klass in types.iteritems():
+                s = getattr(image, name).filter(pk = slave.pk)
+                if s:
+                    try:
+                        getattr(image, name).add(klass.objects.get(gear_ptr = self))
+                        getattr(image, name).remove(s[0])
+                    except klass.DoesNotExist:
+                        continue
+
+        # Find matching slaves in user profiles
+        types = {
+            'telescopes': Telescope,
+            'mounts': Mount,
+            'cameras': Camera,
+            'focal_reducers': FocalReducer,
+            'software': Software,
+            'filters': Filter,
+            'accessories': Accessory,
+        }
+        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: slave.pk}) for t in types])
+        owners = UserProfile.objects.filter(filters).distinct()
+        for owner in owners:
+            for name, klass in types.iteritems():
+                s = getattr(owner, name).filter(pk = slave.pk)
+                if s:
+                    try:
+                        getattr(owner, name).add(klass.objects.get(gear_ptr = self))
+                        getattr(owner, name).remove(s[0])
+                    except klass.DoesNotExist:
+                        continue
+
+        # Find matching slaves in deep sky acquisitions
+        try:
+            filter = Filter.objects.get(gear_ptr__pk = self.pk)
+            DeepSky_Acquisition.objects.filter(filter__gear_ptr__pk = slave.pk).update(
+                filter = filter)
+        except Filter.DoesNotExist:
+            pass
+
+        # Find matching gear comments and move them to the master
+        GearComment.objects.filter(gear = slave).update(gear = self)
+
+        # Find matching gear reviews and move them to the master
+        reviews = ReviewedItem.objects.filter(gear = slave).update(object_id = self.id)
+
+        # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
+        if not self.master:
+            self.master = slave.master
+            self.save()
+
+        slave.delete()
+
+
     def save(self, *args, **kwargs):
         try:
             autorename = GearMakeAutoRename.objects.get(rename_from = self.make)
