@@ -254,6 +254,7 @@ class ImageOfTheDayAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Gear, GearAdmin)
+admin.site.register(GearUserInfo)
 admin.site.register(GearAssistedMerge, GearAssistedMergeAdmin)
 admin.site.register(Telescope)
 admin.site.register(Mount)
