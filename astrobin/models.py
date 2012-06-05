@@ -196,23 +196,10 @@ class Gear(models.Model):
         return '/gear/%i/' % self.id
 
     def hard_merge(self, slave):
-
         # Find matching slaves in images
-        types = {
-            'imaging_telescopes': Telescope,
-            'guiding_telescopes': Telescope,
-            'mounts': Mount,
-            'imaging_cameras': Camera,
-            'guiding_cameras': Camera,
-            'focal_reducers': FocalReducer,
-            'software': Software,
-            'filters': Filter,
-            'accessories': Accessory,
-        }
-        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: slave.pk}) for t in types])
-        images = Image.objects.filter(filters).distinct()
+        images = Image.by_gear(slave)
         for image in images:
-            for name, klass in types.iteritems():
+            for name, klass in Image.GEAR_CLASS_LOOKUP.iteritems():
                 s = getattr(image, name).filter(pk = slave.pk)
                 if s:
                     try:
@@ -222,19 +209,10 @@ class Gear(models.Model):
                         continue
 
         # Find matching slaves in user profiles
-        types = {
-            'telescopes': Telescope,
-            'mounts': Mount,
-            'cameras': Camera,
-            'focal_reducers': FocalReducer,
-            'software': Software,
-            'filters': Filter,
-            'accessories': Accessory,
-        }
-        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: slave.pk}) for t in types])
+        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: slave.pk}) for t in UserProfile.GEAR_CLASS_LOOKUP])
         owners = UserProfile.objects.filter(filters).distinct()
         for owner in owners:
-            for name, klass in types.iteritems():
+            for name, klass in UserProfile.GEAR_CLASS_LOOKUP.iteritems():
                 s = getattr(owner, name).filter(pk = slave.pk)
                 if s:
                     try:
@@ -652,6 +630,18 @@ class Image(models.Model):
         (500, _("Gear")),
         (600, _("Other")),
     )
+
+    GEAR_CLASS_LOOKUP = {
+        'imaging_telescopes': Telescope,
+        'guiding_telescopes': Telescope,
+        'mounts': Mount,
+        'imaging_cameras': Camera,
+        'guiding_cameras': Camera,
+        'focal_reducers': FocalReducer,
+        'software': Software,
+        'filters': Filter,
+        'accessories': Accessory,
+    }
 
     title = models.CharField(
         max_length = 128,
@@ -1287,6 +1277,16 @@ class ImageRequest(Request):
 
 
 class UserProfile(models.Model):
+    GEAR_CLASS_LOOKUP = {
+        'telescopes': Telescope,
+        'mounts': Mount,
+        'cameras': Camera,
+        'focal_reducers': FocalReducer,
+        'software': Software,
+        'filters': Filter,
+        'accessories': Accessory,
+    }
+
     user = models.ForeignKey(User, unique=True, editable=False)
 
     # Basic Information
