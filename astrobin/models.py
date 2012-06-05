@@ -4,6 +4,8 @@ import os
 import urllib2
 import simplejson
 import hmac
+import operator
+
 try:
     from hashlib import sha1
 except ImportError:
@@ -11,6 +13,7 @@ except ImportError:
     sha1 = sha.sha
 
 from django.db import models
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django import forms
@@ -193,8 +196,6 @@ class Gear(models.Model):
         return '/gear/%i/' % self.id
 
     def hard_merge(self, slave):
-        import operator 
-        from django.db.models import Q
 
         # Find matching slaves in images
         types = {
@@ -926,6 +927,24 @@ class Image(models.Model):
 
     def get_absolute_url(self):
         return '/%i' % self.id
+
+    @staticmethod
+    def by_gear(gear):
+        types = {
+            'imaging_telescopes': Telescope,
+            'guiding_telescopes': Telescope,
+            'mounts': Mount,
+            'imaging_cameras': Camera,
+            'guiding_cameras': Camera,
+            'focal_reducers': FocalReducer,
+            'software': Software,
+            'filters': Filter,
+            'accessories': Accessory,
+        }
+        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: gear.pk}) for t in types])
+        images = Image.objects.filter(filters).distinct()
+
+        return images
 
 
 class ImageRevision(models.Model):
