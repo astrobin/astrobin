@@ -33,9 +33,14 @@ class Command(BaseCommand):
             print "... found %d twins." % twins.count()
 
             for twin in twins:
+                if twin in seen:
+                    continue
+
                 print "\tMerging [%d]..." % twin.id
                 item.hard_merge(twin)
                 total_merges += 1
+                if twin not in seen:
+                    seen.append(twin)
 
             current += 1
 
