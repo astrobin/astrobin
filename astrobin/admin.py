@@ -52,7 +52,6 @@ class GearAdmin(admin.ModelAdmin):
     list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
     list_editable = ('make', 'name',)
     search_fields = ('id', 'make', 'name',)
-    list_filter = ('master',)
     actions = ['assisted_merge',]
 
     def assisted_merge(modeladmin, request, queryset):
