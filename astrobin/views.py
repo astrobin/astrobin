@@ -3529,6 +3529,7 @@ def gear_page(request, id):
             'comment_form': CommentForm(),
             'comments': GearComment.objects.filter(gear = gear),
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
+            'images_count': Image.by_gear(gear).count(),
             'attributes': [
                 (_(class_lookup[gear_type]._meta.get_field(k[0]).verbose_name),
                  getattr(gear, k[0]),
