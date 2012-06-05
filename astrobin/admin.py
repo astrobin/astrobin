@@ -52,8 +52,7 @@ class GearAdmin(admin.ModelAdmin):
     list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
     list_editable = ('make', 'name',)
     search_fields = ('id', 'make', 'name',)
-    list_filter = ('master',)
-    actions = ['assisted_merge',]
+    actions = ['assisted_merge', 'soft_merge',]
 
     def assisted_merge(modeladmin, request, queryset):
         GearAssistedMerge.objects.all().delete()
@@ -76,40 +75,7 @@ class GearAdmin(admin.ModelAdmin):
                         merge.save()
 
         return HttpResponseRedirect('/admin/astrobin/gearassistedmerge/')
-
-    assisted_merge.short_description = 'Assisted merge'
-
-
-class GearAssistedMergeAdmin(admin.ModelAdmin):
-    list_display = ('master', 'slave', 'cutoff')
-    list_per_page = 10
-    ordering = ('-cutoff', 'master')
-    search_fields = ('master',)
-    actions = ['soft_merge', 'hard_merge', 'invert', 'delete_gear_items',]
-
-
-    def invert(modeladmin, request, queryset):
-        for merge in queryset:
-            master = merge.master
-            slave = merge.slave
-            merge.master = slave
-            merge.slave = master
-            merge.save()
-
-    invert.short_description = 'Invert'
-
-
-    def delete_gear_items(modeladmin, request, queryset):
-        for merge in queryset:
-            try:
-                merge.master.delete()
-                merge.slave.delete()
-            except Gear.DoesNotExist:
-                pass
-            merge.delete()
-
-    delete_gear_items.short_description = "Delete gear items"
-
+    assisted_merge.short_description = 'Assisted hard merge'
 
     def soft_merge(modeladmin, request, queryset):
         masters = [x.master for x in queryset]
@@ -136,93 +102,52 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
             slave.save()
     soft_merge.short_description = 'Soft merge'
 
-    def hard_merge(modeladmin, request, queryset):
-        import operator
 
+class GearAssistedMergeAdmin(admin.ModelAdmin):
+    list_display = ('master', 'slave', 'cutoff')
+    list_per_page = 10
+    ordering = ('-cutoff', 'master')
+    search_fields = ('master',)
+    actions = ['hard_merge', 'invert', 'delete_gear_items',]
+
+
+    def invert(modeladmin, request, queryset):
         for merge in queryset:
-            merge_done = False
-            # Find matching slaves in images
-            types = {
-                'imaging_telescopes': Telescope,
-                'guiding_telescopes': Telescope,
-                'mounts': Mount,
-                'imaging_cameras': Camera,
-                'guiding_cameras': Camera,
-                'focal_reducers': FocalReducer,
-                'software': Software,
-                'filters': Filter,
-                'accessories': Accessory,
-            }
-            filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: merge.slave.pk}) for t in types])
-            images = Image.objects.filter(filters).distinct()
-            for image in images:
-                changed = False
-                for name, klass in types.iteritems():
-                    slave = getattr(image, name).filter(pk = merge.slave.pk)
-                    if slave:
-                        try:
-                            getattr(image, name).add(klass.objects.get(gear_ptr = merge.master))
-                            getattr(image, name).remove(slave[0])
-                            merge_done = True
-                            changed = True
-                        except klass.DoesNotExist:
-                            continue
-                if changed:
-                    image.save()
+            master = merge.master
+            slave = merge.slave
+            merge.master = slave
+            merge.slave = master
+            merge.save()
 
-            # Find matching slaves in user profiles
-            types = {
-                'telescopes': Telescope,
-                'mounts': Mount,
-                'cameras': Camera,
-                'focal_reducers': FocalReducer,
-                'software': Software,
-                'filters': Filter,
-                'accessories': Accessory,
-            }
-            filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: merge.slave.pk}) for t in types])
-            owners = UserProfile.objects.filter(filters).distinct()
-            for owner in owners:
-                changed = False
-                for name, klass in types.iteritems():
-                    slave = getattr(owner, name).filter(pk = merge.slave.pk)
-                    if slave:
-                        try:
-                            getattr(owner, name).add(klass.objects.get(gear_ptr = merge.master))
-                            getattr(owner, name).remove(slave[0])
-                            merge_done = True
-                            changed = True
-                        except klass.DoesNotExist:
-                            continue
-                if changed:
-                    owner.save()
+    invert.short_description = 'Invert'
 
-            # Find matching slaves in deep sky acquisitions
+
+    def delete_gear_items(modeladmin, request, queryset):
+        for merge in queryset:
             try:
-                filter = Filter.objects.get(gear_ptr__pk = merge.master.pk)
-                DeepSky_Acquisition.objects.filter(filter__gear_ptr__pk = merge.slave.pk).update(
-                    filter = filter)
-            except Filter.DoesNotExist:
+                merge.master.delete()
+                merge.slave.delete()
+            except Gear.DoesNotExist:
                 pass
+            merge.delete()
 
-            # Find matching gear comments and move them to the master
-            GearComment.objects.filter(gear = merge.slave).update(gear = merge.master)
+    delete_gear_items.short_description = "Delete gear items"
 
-            # Find matching gear reviews and move them to the master
-            reviews = ReviewedItem.objects.filter(gear = merge.slave).update(object_id = merge.master.id)
 
-            # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
-            if not merge.master.master:
-                merge.master.master = merge.slave.master
+    def hard_merge(modeladmin, request, queryset):
+        from utils import unique_items
+        masters = unique_items([x.master for x in queryset])
+        if len(masters) > 1:
+            return
 
-        # Only now, delete all the slaves. We must delete at the end because
-        # We might have the same slave respond to different masters.
+        master = masters[0]
         for merge in queryset:
-            merge.slave.delete()
+            master.hard_merge(merge.slave)
 
         # Finally, clear up the temporary model
         queryset.delete()
 
+        return HttpResponseRedirect('/admin/astrobin/gear/')
     hard_merge.short_description = 'Hard merge'
 
 
