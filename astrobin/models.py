@@ -157,7 +157,7 @@ class Gear(models.Model):
     name = models.CharField(
         verbose_name = _("Name"),
         help_text = _("Just the name of this product, without any properties or personal customizations. Try to use the international name, in English language, if applicable. This name is shared among all users on AstroBin."),
-        max_length = 64,
+        max_length = 128,
         null = False,
         blank = False,
     )
@@ -246,28 +246,6 @@ class GearAssistedMerge(models.Model):
 
     def __unicode__(self):
         return self.master.name
-
-    class Meta:
-        app_label = 'astrobin'
-
-
-class GearAutoMerge(models.Model):
-    master = models.ForeignKey(Gear)
-    label = models.CharField(_("Label"), max_length = 64)
-
-    def __unicode__(self):
-        return self.label
-
-    class Meta:
-        app_label = 'astrobin'
-
-
-class GearNeverMerge(models.Model):
-    master = models.ForeignKey(Gear)
-    label = models.CharField(_("Label"), max_length = 64)
-
-    def __unicode__(self):
-        return self.label
 
     class Meta:
         app_label = 'astrobin'
