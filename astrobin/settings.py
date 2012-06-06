@@ -6,7 +6,7 @@ local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-MAINTENANCE_MODE = False
+MAINTENANCE_MODE = DEBUG
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@iovene.com'),
