@@ -3750,6 +3750,9 @@ def app_api_key_request_complete(request):
 @require_GET
 @login_required
 def gear_fix(request, id):
+    # Disable this view for now. We're good.
+    return HttpResponseForbidden()
+
     gear = get_object_or_404(Gear, id = id)
     form = ModeratorGearFixForm(instance = gear)
     next_gear = Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get()
@@ -3769,6 +3772,9 @@ def gear_fix(request, id):
 @require_POST
 @login_required
 def gear_fix_save(request):
+    # Disable this view for now. We're good.
+    return HttpResponseForbidden()
+
     id = request.POST.get('gear_id')
     gear = get_object_or_404(Gear, id = id)
     form = ModeratorGearFixForm(data = request.POST, instance = gear)
@@ -3793,6 +3799,9 @@ def gear_fix_save(request):
 @require_GET
 @login_required
 def gear_fix_thanks(request):
+    # Disable this view for now. We're good.
+    return HttpResponseForbidden()
+
     return render_to_response(
         'gear/fix_thanks.html',
         context_instance = RequestContext(request))

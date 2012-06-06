@@ -363,11 +363,13 @@
         </div>
 
         <div id="top" class="container astrobin-container">
+            {% comment %}
             {% if request.user.is_authenticated %}
                 <div class="alert">
                     {% blocktrans %}AstroBin is running a campaign to collectively improve the consistency of the gear database.{% endblocktrans %} <a href="{% url gear_fix random_gear_item.id %}">{% trans "Click here to help!" %}</a>
                 </div>
             {% endif %}
+            {% endcomment %}
 
             {% if context_message %}
             <div class="alert {% if context_message.error %}alert-error{% endif %}">
