@@ -497,7 +497,7 @@ class Filter(Gear):
 
     bandwidth = models.DecimalField(
         verbose_name = _("Bandwidth"),
-        help_text = _("(in &mu;m)"),
+        help_text = _("(in nm)"),
         null = True,
         blank = True,
         max_digits = 6,
@@ -506,7 +506,7 @@ class Filter(Gear):
   
     def attributes(self):
         return super(Filter, self).attributes() +\
-               [('bandwidth', _("&mu;m"))]
+               [('bandwidth', _("nm"))]
 
     class Meta:
         app_label = 'astrobin'
