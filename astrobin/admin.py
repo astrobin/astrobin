@@ -57,6 +57,9 @@ class GearAdmin(admin.ModelAdmin):
     def assisted_merge(modeladmin, request, queryset):
         GearAssistedMerge.objects.all().delete()
 
+        if queryset.count() > 1:
+            return
+
         orphans = queryset.filter(master = None)
         for orphan in orphans:
             matches = difflib.get_close_matches(orphan.name, [x.name for x in queryset], cutoff = 0.6)
@@ -104,7 +107,7 @@ class GearAdmin(admin.ModelAdmin):
 
 
 class GearAssistedMergeAdmin(admin.ModelAdmin):
-    list_display = ('master', 'slave', 'cutoff')
+    list_display = ('id', 'master',  'slave', 'cutoff')
     list_per_page = 10
     ordering = ('-cutoff', 'master')
     search_fields = ('master',)
