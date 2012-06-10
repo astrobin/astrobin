@@ -14,7 +14,7 @@ class Command(BaseCommand):
                     found.append(i)
             return found
 
-        queryset = Gear.objects.all()
+        queryset = Gear.objects.all().order_by('id')
         current = 0
         count = queryset.count()
         total_merges = 0
@@ -24,13 +24,15 @@ class Command(BaseCommand):
             if item in seen:
                 continue
 
-            print "Examining item %d/%d: [%d] %s" % (current, count, item.id, item),
             seen.append(item)
 
             twins = Gear.objects\
                 .filter(Q(make = item.make) & Q(name = item.name))\
                 .exclude(id = item.id)
-            print "... found %d twins." % twins.count()
+
+            if twins:
+                print "Examining item %d/%d: [%d] %s" % (current, count, item.id, item),
+                print "... found %d twins." % twins.count()
 
             for twin in twins:
                 if twin in seen:
