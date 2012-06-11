@@ -3688,21 +3688,36 @@ def get_gear_ajax(request, image_id):
 
 
 @require_GET
-def get_gear_by_make(request, make):
+def get_gear_by_make(request, klass, make):
     ret = {
         'make': make,
         'gear': []
     }
 
+    from gear import CLASS_LOOKUP
+
     try:
         autorename = GearMakeAutoRename.objects.get(rename_from = make)
-        print autorename
         ret['make'] = autorename.rename_to
     except:
-        print "pass"
         pass
 
-    ret['gear'] = [x.name for x in Gear.objects.filter(make = ret['make'])]
+    ret['gear'] = [x.name for x in CLASS_LOOKUP[klass].objects.filter(make = ret['make'])]
+    return HttpResponse(
+        simplejson.dumps(ret),
+        mimetype = 'application/javascript')
+
+
+@require_GET
+def get_makes_by_type(request, klass):
+    ret = {
+        'makes': []
+    }
+
+    from gear import CLASS_LOOKUP
+    from utils import unique_items
+
+    ret['makes'] = unique_items([x.make for x in CLASS_LOOKUP[klass].objects.exclude(make = '').exclude(make = None)])
     return HttpResponse(
         simplejson.dumps(ret),
         mimetype = 'application/javascript')

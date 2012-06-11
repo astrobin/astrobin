@@ -7,6 +7,15 @@ TYPES_LOOKUP = {
     'Filter': Filter.FILTER_TYPES,
 }
 
+CLASS_LOOKUP = {
+    'Telescope': Telescope,
+    'Camera': Camera,
+    'Mount': Mount,
+    'Filter': Filter,
+    'Software': Software,
+    'Acceossory': Accessory,
+    'FocalReducer': FocalReducer,
+}
 
 def get_correct_gear(id):
     types = (

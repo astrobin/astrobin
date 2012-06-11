@@ -267,18 +267,29 @@
                         '<input type="hidden" name="gear_type" value="' + gear_type + '" />');
 
                     $make.attr('data-provide', 'typeahead');
-                    $make.attr('data-source', '{{all_gear_makes|safe|addslashes}}');
                     $make.attr('autocomplete', 'off');
 
                     $name.attr('data-provide', 'typeahead');
-                    $name.attr('data-source', '{{all_gear_names|safe|addslashes}}');
                     $name.attr('autocomplete', 'off');
+
+                    // Init autocomplete for appropriate gear type
+                    $.ajax({
+                        url: '/get-makes-by-type/' + gear_type + '/',
+                        dataType: 'json',
+                        timeout: 10000,
+                        cache: false,
+                        success: function(data, textStatus, XMLHttpRequest) {
+                            console.log(data.makes);
+                            var typeahead = $make.typeahead();
+                            typeahead.data('typeahead').source = data.makes;
+                        }
+                    });
 
                     $name.focus(function(e) {
                         var make = $.trim($make.val());
                         if (make != '') {
                             $.ajax({
-                                url: '/get-gear-by-make/' + make + '/',
+                                url: '/get-gear-by-make/' + gear_type + '/' + make + '/',
                                 dataType: 'json',
                                 timeout: 10000,
                                 cache: false,
