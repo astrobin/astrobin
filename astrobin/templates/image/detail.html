@@ -432,7 +432,7 @@
                         </h4>
                         <ul class="thumbnails astrobin-thumbnails">
                             {% if is_revision %}
-                            <li class="thumbnail astrobin-thumbnail">
+                            <li class="thumbnail astrobin-thumbnail" style="width:{{small_thumbnail_size}}px">
                                 <a href="{% url image_detail image.id %}{% query_string "r=0" "plate_solving_started, mod" %}">
                                     <img {% if image.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
                                 </a>
