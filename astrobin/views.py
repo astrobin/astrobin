@@ -3215,16 +3215,7 @@ def save_gear_details(request):
     else:
         gear_type = request.POST.get('gear_type')
 
-    class_lookup = {
-        'Telescope': Telescope,
-        'Mount': Mount,
-        'Camera': Camera,
-        'FocalReducer': FocalReducer,
-        'Software': Software,
-        'Filter': Filter,
-        'Accessory': Accessory,
-    }
-
+    from gear import CLASS_LOOKUP
     form_lookup = {
         'Telescope': TelescopeEditForm,
         'Mount': MountEditForm,
@@ -3247,11 +3238,11 @@ def save_gear_details(request):
 
     if not gear:
         try:
-            gear, created = class_lookup[gear_type].objects.get_or_create(
+            gear, created = CLASS_LOOKUP[gear_type].objects.get_or_create(
                 make = request.POST.get('make'),
                 name = request.POST.get('name'))
-        except class_lookup[gear_type].MultipleObjectsReturned:
-            gear = class_lookup[gear_type].objects.filter(
+        except CLASS_LOOKUP[gear_type].MultipleObjectsReturned:
+            gear = CLASS_LOOKUP[gear_type].objects.filter(
                 make = request.POST.get('make'),
                 name = request.POST.get('name'))[0]
             created = False
@@ -3502,15 +3493,7 @@ def gear_page(request, id):
         'Accessory': 'accessories',
     }
 
-    class_lookup = {
-        'Telescope': Telescope,
-        'Camera': Camera,
-        'Mount': Mount,
-        'FocalReducer': FocalReducer,
-        'Software': Software,
-        'Filter': Filter,
-        'Accessory': Accessory,
-    }
+    from gear import CLASS_LOOKUP
 
     all_images = Image.objects.filter(**{image_attr_lookup[gear_type]: gear})
 
@@ -3531,7 +3514,7 @@ def gear_page(request, id):
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
             'images_count': Image.by_gear(gear).count(),
             'attributes': [
-                (_(class_lookup[gear_type]._meta.get_field(k[0]).verbose_name),
+                (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
                  getattr(gear, k[0]),
                  k[1]) for k in gear.attributes()],
         })

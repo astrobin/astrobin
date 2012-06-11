@@ -196,6 +196,14 @@ class Gear(models.Model):
         return '/gear/%i/' % self.id
 
     def hard_merge(self, slave):
+        from gear import get_correct_gear
+        unused, master_gear_type = get_correct_gear(self.id)
+        unused, slave_gear_type = get_correct_gear(slave.id)
+
+        if master_gear_type != slave_gear_type:
+            print "\t\tCannot merge gear items of different types."
+            return
+
         # Find matching slaves in images
         images = Image.by_gear(slave)
         for image in images:
