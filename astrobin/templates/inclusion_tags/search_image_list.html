@@ -6,7 +6,7 @@
     {% if search_result.object.id %}
     <li class="thumbnail astrobin-thumbnail">
         <a href="{% url image_detail search_result.object.id %}">
-            <img src="http://{{s3_url}}/{{bucket_name}}/{{search_result.object.filename}}_thumb.png"
+            <img src="http://{{s3_url}}/{{bucket_name}}/{% get_final_filename search_result.object %}_thumb.png"
                  class="capty"
                  id="#capty-content-{{search_result.object.id}}"
                  alt="{{search_result.object.title|default:_("(no title)")}}"

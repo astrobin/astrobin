@@ -514,3 +514,13 @@ def gear_type(gear):
             pass
 
     return '-'
+
+
+@register.simple_tag
+def get_final_filename(image):
+    revisions = ImageRevision.objects.filter(image = image)
+    for r in revisions:
+        if r.is_final:
+            return r.filename
+
+    return image.filename
