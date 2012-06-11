@@ -205,6 +205,7 @@ class Gear(models.Model):
                     try:
                         getattr(image, name).add(klass.objects.get(pk = self.pk))
                         getattr(image, name).remove(s[0])
+                        print "\t\tFixed image %d: " % image.id
                     except klass.DoesNotExist:
                         continue
 
