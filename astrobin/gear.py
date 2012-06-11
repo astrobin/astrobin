@@ -13,7 +13,7 @@ CLASS_LOOKUP = {
     'Mount': Mount,
     'Filter': Filter,
     'Software': Software,
-    'Acceossory': Accessory,
+    'Accessory': Accessory,
     'FocalReducer': FocalReducer,
 }
 
