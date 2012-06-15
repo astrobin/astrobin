@@ -1357,11 +1357,11 @@ div.capty-caption a {
 }
 div.favorite-container {
   display: inline;
-  margin-right: 50px;
-  padding-left: 4px;
+  margin-right: 12px;
 }
 div.favorite-container a.favorite {
   position: relative;
+  padding: 8px 30px;
 }
 div.favorite-container a.favorite .favorite-hint {
   position: absolute;
@@ -1435,6 +1435,10 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .image-basic-data img.license {
   padding: 0 0 2px 2px;
 }
+.image-basic-data table th {
+  padding-left: 35px;
+  width: 50px;
+}
 .image-description {
   margin-top: 16px;
 }
@@ -1469,6 +1473,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .avatar-block .avatar,
 .avatar-block .username {
   display: inline;
+}
+.avatar-block img {
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
 }
 .avatar-block .username {
   font-size: 1.5em;
@@ -2329,15 +2338,18 @@ form.avatar-change label.control-label {
   font-style: italic;
 }
 li.revisions {
-  margin-right: 8px;
-  margin-bottom: 8px;
+  margin-right: 5px;
+  margin-bottom: 4px;
 }
 .revision .overlay {
   background-color: rgba(255, 255, 255, 0.2);
   filter: progid:dximagetransform.microsoft.gradient(GradientType=0, startColorstr='#4cffffff', endColorstr='#4cffffff');
   position: absolute;
-  height: 126px;
-  width: 90px;
+  height: 120px;
+  width: 86px;
+  -moz-border-radius: 12px 12px 3px 3px;
+  -webkit-border-radius: 12px 12px 3px 3px;
+  border-radius: 12px 12px 3px 3px;
 }
 .revision .final {
   position: relative;
@@ -2372,5 +2384,5 @@ li.revisions {
   background: #303030 url('../images/darker-panel-tile.png');
   text-align: center;
   font-weight: bold;
-  margin-top: 4px;
+  margin-top: 2px;
 }

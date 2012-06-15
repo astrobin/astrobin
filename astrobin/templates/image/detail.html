@@ -419,76 +419,6 @@
                 </div>
             </div>
 
-            {% if revisions or is_revision %}
-            <div class="row">
-                <div class="span8">
-                    <div class="subtle-container">
-                        <h4>
-                            {% if is_revision %}
-                                {% trans "This image is a revision. Here are its other versions" %}:
-                            {% else %}
-                                {% trans "This image has some other revisions" %}:
-                            {% endif %}
-                        </h4>
-                        <ul class="thumbnails astrobin-thumbnails">
-                            <li class="thumbnail astrobin-thumbnail revisions" style="width:{{small_thumbnail_size}}px">
-                                <div class="revision">
-                                    {% if is_revision %}
-                                        <a href="{% url image_detail image.id 0 %}">
-                                    {% else %}
-                                        <div class="overlay"></div>
-                                    {% endif %}
-                                        {% if image.is_final %}
-                                            <div class="final">
-                                                <span class="text">
-                                                    {% trans "Final" %}
-                                                </span>
-                                            </div>
-                                        {% endif %}
-                                        <div class="image">
-                                            <img src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
-                                        </div>
-                                        <div class="label">
-                                            {% trans "Original" %}
-                                        </div>
-                                    </div>
-                                {% if is_revision %}
-                                    </a>
-                                {% endif %}
-                            </li>
-                            {% for i in revisions %}
-                            <li class="thumbnail astrobin-thumbnail revisions" style="width:{{small_thumbnail_size}}px">
-                                <div class="revision">
-                                    {% if i != revision_image %}
-                                        <a href="{% url image_detail i.image.id i.label %}">
-                                    {% else %}
-                                        <div class="overlay"></div>
-                                    {% endif %}
-                                        {% if i.is_final %}
-                                            <div class="final">
-                                                <span class="text">
-                                                    {% trans "Final" %}
-                                                </span>
-                                            </div>
-                                        {% endif %}
-                                        <div class="image">
-                                            <img src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
-                                        </div>
-                                        <div class="label">
-                                            {{i.label}}
-                                        </div>
-                                    {% if i != revision_image %}
-                                        </a>
-                                    {% endif %}
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul> <!-- thumbnails -->
-                    </div> <!-- subtle-container -->
-                </div> <!-- span8 -->
-            </div> <!-- row -->
-            {% endif %}
-
             <div class="row image-detail">
                 <div class="span8">
                     <div class="subtle-container image-detail-inner">
@@ -703,10 +633,71 @@
         </div> <!-- span8 -->
         
         <div class="span4"> <!-- right pane -->
+            {% if revisions or is_revision %}
+            <div class="subtle-container">
+                <ul class="thumbnails astrobin-thumbnails">
+                    <li class="thumbnail astrobin-thumbnail revisions" style="width:86px">
+                        <div class="revision">
+                            {% if is_revision %}
+                                <a href="{% url image_detail image.id 0 %}">
+                            {% else %}
+                                <div class="overlay"></div>
+                            {% endif %}
+                                {% if image.is_final %}
+                                    <div class="final">
+                                        <span class="text">
+                                            {% trans "Final" %}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                                <div class="image">
+                                    <img src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="86" height="86"/>
+                                </div>
+                                <div class="label">
+                                    {% trans "Original" %}
+                                </div>
+                            </div>
+                        {% if is_revision %}
+                            </a>
+                        {% endif %}
+                    </li>
+                    {% for i in revisions %}
+                    <li class="thumbnail astrobin-thumbnail revisions" style="width:86px">
+                        <div class="revision">
+                            {% if i != revision_image %}
+                                <a href="{% url image_detail i.image.id i.label %}">
+                            {% else %}
+                                <div class="overlay"></div>
+                            {% endif %}
+                                {% if i.is_final %}
+                                    <div class="final">
+                                        <span class="text">
+                                            {% trans "Final" %}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                                <div class="image">
+                                    <img src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="86" height="86"/>
+                                </div>
+                                <div class="label">
+                                    {{i.label}}
+                                </div>
+                            {% if i != revision_image %}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul> <!-- thumbnails -->
+            </div> <!-- subtle-container -->
+            {% endif %}
+
+
+
             <div class="subtle-container avatar-block">
                 <div class="avatar">
                     <a href="{% url user_page image.user %}">
-                        {% avatar image.user 64 %}
+                        {% avatar image.user 86 %}
                     </a>
                 </div>
                 <div class="username">
@@ -716,7 +707,7 @@
 
             <div class="subtle-container">
                 <div class="favorite-container">
-                    <a href="#" class="favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Already favorited" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
+                    <a href="#" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Already favorited" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
                         {% if already_favorited %}
                             <img src="{{STATIC_URL}}icons/iconic/red/heart_fill_24x21.png" alt="{% trans "Favorited" %}"/>
                         {% else %}
@@ -728,13 +719,12 @@
                 {% if image.allow_rating %}
                     <div id="rating"></div>
                 {% endif %}
-
             </div> <!-- subtle-container -->
 
             <div class="subtle-container image-basic-data">
                 <table class="table">
                     <tr>
-                        <td><img rel="tooltip" title="{% trans "License" %}" alt="{% trans "License" %}" src="{{STATIC_URL}}icons/iconic/white/key_stroke_16x16.png"/></td>
+                        <th><img rel="tooltip" title="{% trans "License" %}" alt="{% trans "License" %}" src="{{STATIC_URL}}icons/iconic/white/key_stroke_16x16.png"/></th>
                         <td>
                             <a target="_blank" href="http://creativecommons.org/licenses/">
                                 <img class="license"
@@ -745,20 +735,20 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><img rel="tooltip" title="{% trans "Date" %}" alt="{% trans "Date" %}" src="{{STATIC_URL}}icons/iconic/white/calendar_alt_stroke_16x16.png"/></td>
+                        <th><img rel="tooltip" title="{% trans "Date" %}" alt="{% trans "Date" %}" src="{{STATIC_URL}}icons/iconic/white/calendar_alt_stroke_16x16.png"/></th>
                         <td>{{uploaded_on|ago}}</td>
                     </tr>
                     <tr>
                         {% get_hit_count for image as hit_count %}
-                        <td><img rel="tooltip" title="{% trans "Views" %}" alt="{% trans "Views" %}" src="{{STATIC_URL}}icons/iconic/white/image_16x16.png"/></td>
+                        <th><img rel="tooltip" title="{% trans "Views" %}" alt="{% trans "Views" %}" src="{{STATIC_URL}}icons/iconic/white/image_16x16.png"/></th>
                         <td>{{hit_count}}</td>
                     </tr>
                     <tr>
-                        <td><img rel="tooltip" title="{% trans "Favorites" %}" alt="{% trans "Favorites" %}" src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png"/></td>
+                        <th><img rel="tooltip" title="{% trans "Favorites" %}" alt="{% trans "Favorites" %}" src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png"/></th>
                         <td><span class="favorites-number">{{times_favorited}}</span></td>
                     </tr>
                     <tr>
-                        <td><img rel="tooltip" title="{% trans "Votes" %}" alt="{% trans "Votes" %}" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/></td>
+                        <th><img rel="tooltip" title="{% trans "Votes" %}" alt="{% trans "Votes" %}" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/></th>
                         <td><span class="votes-number">{{votes_number}}</span></td>
                     </tr>
                 </table>
