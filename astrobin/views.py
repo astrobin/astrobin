@@ -3184,17 +3184,16 @@ def get_edit_gear_form(request, id):
 @login_required
 def get_empty_edit_gear_form(request, gear_type):
     form_lookup = {
-        'Telescope': TelescopeEditForm,
-        'Mount': MountEditForm,
-        'Camera': CameraEditForm,
-        'FocalReducer': FocalReducerEditForm,
-        'Software': SoftwareEditForm,
-        'Filter': FilterEditForm,
-        'Accessory': AccessoryEditForm,
+        'Telescope': TelescopeEditNewForm,
+        'Mount': MountEditNewForm,
+        'Camera': CameraEditNewForm,
+        'FocalReducer': FocalReducerEditNewForm,
+        'Software': SoftwareEditNewForm,
+        'Filter': FilterEditNewForm,
+        'Accessory': AccessoryEditNewForm,
     }
 
     form = form_lookup[gear_type]()
-
     from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
     response_dict = {
         'form': as_bootstrap(form, 'horizontal') if form else '',
@@ -3236,15 +3235,22 @@ def save_gear_details(request):
         'Accessory': 'accessories',
     }
 
+    created = False
+    filters = Q(name = request.POST.get('name'))
+    if request.POST.get('make'):
+        filters = filters & Q(make = request.POST.get('make'))
+
     if not gear:
         try:
-            gear, created = CLASS_LOOKUP[gear_type].objects.get_or_create(
-                make = request.POST.get('make'),
-                name = request.POST.get('name'))
+            if request.POST.get('make'):
+                gear, created = CLASS_LOOKUP[gear_type].objects.get_or_create(
+                    make = request.POST.get('make'),
+                    name = request.POST.get('name'))
+            else:
+                gear, created = CLASS_LOOKUP[gear_type].objects.get_or_create(
+                    name = request.POST.get('name'))
         except CLASS_LOOKUP[gear_type].MultipleObjectsReturned:
-            gear = CLASS_LOOKUP[gear_type].objects.filter(
-                make = request.POST.get('make'),
-                name = request.POST.get('name'))[0]
+            gear = CLASS_LOOKUP[gear_type].objects.filter(filters)[0]
             created = False
 
     form = form_lookup[gear_type](data = request.POST, instance = gear)
@@ -3258,7 +3264,8 @@ def save_gear_details(request):
             simplejson.dumps(response_dict),
             mimetype = 'application/javascript')
 
-    form.save()
+    if created:
+        form.save()
 
     profile = UserProfile.objects.get(user = request.user)
     user_gear = getattr(profile, user_gear_lookup[gear_type])

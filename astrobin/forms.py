@@ -601,16 +601,20 @@ class GearCommentForm(forms.ModelForm):
         }
 
 
-class GearEditForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(GearEditForm, self).__init__(*args, **kwargs)
-        instance = getattr(self, 'instance', None)
-        if instance and instance.id and instance.name:
-            del self.fields['name']
-            del self.fields['make']
-
+class GearEditNewForm(forms.ModelForm):
     class Meta:
         model = Gear
+        fields = ('make', 'name')
+        widgets = {
+            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+        }
+
+
+class GearEditForm(forms.ModelForm):
+    class Meta:
+        model = Gear
+        exclude = ('make', 'name')
         widgets = {
             'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
             'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
@@ -622,13 +626,14 @@ class TelescopeEditForm(GearEditForm):
 
     class Meta:
         model = Telescope
-
+        exclude = ('make', 'name')
 
 class MountEditForm(GearEditForm):
     error_css_class = 'error'
 
     class Meta:
         model = Mount
+        exclude = ('make', 'name')
 
 
 class CameraEditForm(GearEditForm):
@@ -636,6 +641,7 @@ class CameraEditForm(GearEditForm):
 
     class Meta:
         model = Camera
+        exclude = ('make', 'name')
 
 
 class FocalReducerEditForm(GearEditForm):
@@ -643,6 +649,7 @@ class FocalReducerEditForm(GearEditForm):
 
     class Meta:
         model = FocalReducer
+        exclude = ('make', 'name')
 
 
 class SoftwareEditForm(GearEditForm):
@@ -650,6 +657,7 @@ class SoftwareEditForm(GearEditForm):
 
     class Meta:
         model = Software
+        exclude = ('make', 'name')
 
 
 class FilterEditForm(GearEditForm):
@@ -657,6 +665,7 @@ class FilterEditForm(GearEditForm):
 
     class Meta:
         model = Filter
+        exclude = ('make', 'name')
 
 
 class AccessoryEditForm(GearEditForm):
@@ -664,6 +673,63 @@ class AccessoryEditForm(GearEditForm):
 
     class Meta:
         model = Accessory
+        exclude = ('make', 'name')
+
+
+class TelescopeEditNewForm(GearEditNewForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Telescope
+        fields = ('make', 'name')
+
+
+class MountEditNewForm(GearEditNewForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Mount
+        fields = ('make', 'name')
+
+
+class CameraEditNewForm(GearEditNewForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Camera
+        fields = ('make', 'name')
+
+
+class FocalReducerEditNewForm(GearEditNewForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = FocalReducer
+        fields = ('make', 'name')
+
+
+class SoftwareEditNewForm(GearEditNewForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Software
+        fields = ('make', 'name')
+
+
+class FilterEditNewForm(GearEditNewForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Filter
+        fields = ('make', 'name')
+
+
+class AccessoryEditNewForm(GearEditNewForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Accessory
+        fields = ('make', 'name')
 
 
 class CopyGearForm(forms.Form):
