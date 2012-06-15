@@ -2328,3 +2328,48 @@ form.avatar-change label.control-label {
   font-size: 90%;
   font-style: italic;
 }
+li.revisions {
+  margin-right: 8px;
+}
+.revision .overlay {
+  background-color: rgba(255, 255, 255, 0.2);
+  filter: progid:dximagetransform.microsoft.gradient(GradientType=0, startColorstr='#4cffffff', endColorstr='#4cffffff');
+  position: absolute;
+  height: 126px;
+  width: 90px;
+}
+.revision .final {
+  position: relative;
+}
+.revision .final .text {
+  position: absolute;
+  border: 0;
+  margin: 0;
+  padding: 4px 8px;
+  background-color: #111;
+  background-color: rgba(0, 0, 0, 0.6);
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  top: -10px;
+  right: -4px;
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  -o-transform: rotate(8deg);
+  -ms-transform: rotate(8deg);
+  transform: rotate(8deg);
+  -ms-filter: progid:dximagetransform.microsoft.matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand');
+  filter: progid:dximagetransform.microsoft.matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand');
+}
+.revision .label {
+  margin-bottom: 4px;
+  padding: 8px;
+  border: 1px dashed #505050;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  background: #303030 url('../images/darker-panel-tile.png');
+  text-align: center;
+  font-weight: bold;
+  margin-top: 4px;
+}

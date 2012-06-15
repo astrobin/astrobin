@@ -964,6 +964,10 @@ class ImageRevision(models.Model):
         default = False
     )
 
+    label = models.CharField(
+        max_length = 1,
+        editable = False)
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('uploaded', '-id')

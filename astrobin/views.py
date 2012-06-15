@@ -50,6 +50,7 @@ from tasks import *
 from search_indexes import xapian_escape
 from image_utils import make_image_of_the_day
 from gear import *
+from utils import *
 
 import settings
 import pytz
@@ -550,11 +551,10 @@ def image_detail(request, id):
         try:
             revision_id = int(request.GET['r'])
         except ValueError:
-            from django.http import Http404
-            raise Http404
-        revision_image = get_object_or_404(ImageRevision, id=revision_id)
+            revision_image = get_object_or_404(ImageRevision, image = image, label = request.GET.get('r'))
+        if not revision_image:
+            revision_image = get_object_or_404(ImageRevision, id=revision_id)
         is_final = revision_image.is_final
-        revisions = revisions.exclude(id=revision_id)
         is_ready = revision_image.is_stored
     elif 'r' not in request.GET:
         if not is_final:
@@ -2849,15 +2849,23 @@ def image_revision_upload_process(request):
         destination.write(chunk)
     destination.close()
 
-    revisions = ImageRevision.objects.filter(image = image)
+    revisions = ImageRevision.objects.filter(image = image).order_by('id')
+    highest_label = 'A'
     for r in revisions:
         r.is_final = False
         r.save()
+        highest_label = r.label
 
     image.is_final = False
     image.save()
 
-    image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext, is_final=True)
+    image_revision = ImageRevision(
+        image = image,
+        filename = filename,
+        original_ext = original_ext,
+        is_final = True,
+        label = base26_encode(ord(highest_label) - ord('A') + 1),
+    )
     image_revision.save()
     image_revision.process()
 

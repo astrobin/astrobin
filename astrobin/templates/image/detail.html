@@ -431,18 +431,56 @@
                             {% endif %}
                         </h4>
                         <ul class="thumbnails astrobin-thumbnails">
-                            {% if is_revision %}
-                            <li class="thumbnail astrobin-thumbnail" style="width:{{small_thumbnail_size}}px">
-                                <a href="{% url image_detail image.id %}{% query_string "r=0" "plate_solving_started, mod" %}">
-                                    <img {% if image.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
-                                </a>
+                            <li class="thumbnail astrobin-thumbnail revisions" style="width:{{small_thumbnail_size}}px">
+                                <div class="revision">
+                                    {% if is_revision %}
+                                        <a href="{% url image_detail image.id %}{% query_string "r=0" "plate_solving_started, mod" %}">
+                                    {% else %}
+                                        <div class="overlay"></div>
+                                    {% endif %}
+                                        {% if image.is_final %}
+                                            <div class="final">
+                                                <span class="text">
+                                                    {% trans "Final" %}
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                        <div class="image">
+                                            <img src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+                                        </div>
+                                        <div class="label">
+                                            {% trans "Original" %}
+                                        </div>
+                                    </div>
+                                {% if is_revision %}
+                                    </a>
+                                {% endif %}
                             </li>
-                            {% endif %}
                             {% for i in revisions %}
-                            <li class="thumbnail astrobin-thumbnail" style="width:{{small_thumbnail_size}}px">
-                                <a href="{% url image_detail i.image.id %}{% query_string "r=i.id" "plate_solving_started, mod" %}">
-                                    <img {% if i.is_final %}style="border: 2px solid white"{% endif %} src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
-                                </a>
+                            <li class="thumbnail astrobin-thumbnail revisions" style="width:{{small_thumbnail_size}}px">
+                                <div class="revision">
+                                    {% if i != revision_image %}
+                                        <a href="{% url image_detail i.image.id %}{% query_string "r=i.label" "plate_solving_started, mod" %}">
+                                    {% else %}
+                                        <div class="overlay"></div>
+                                    {% endif %}
+                                        {% if i.is_final %}
+                                            <div class="final">
+                                                <span class="text">
+                                                    {% trans "Final" %}
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                        <div class="image">
+                                            <img src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="{{small_thumbnail_size}}" height="{{small_thumbnail_size}}"/>
+                                        </div>
+                                        <div class="label">
+                                            {{i.label}}
+                                        </div>
+                                    {% if i != revision_image %}
+                                        </a>
+                                    {% endif %}
+                                </div>
                             </li>
                             {% endfor %}
                         </ul> <!-- thumbnails -->
