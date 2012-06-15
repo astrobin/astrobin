@@ -536,7 +536,7 @@ def no_javascript(request):
 
 
 @require_GET
-def image_detail(request, id):
+def image_detail(request, id, r):
     """ Show details of an image"""
     image = get_object_or_404(Image, pk=id)
 
@@ -546,23 +546,27 @@ def image_detail(request, id):
     revisions = ImageRevision.objects.filter(image=image)
     is_final = image.is_final
     is_ready = image.is_stored
-    if 'r' in request.GET and request.GET.get('r') != '0':
+
+    if 'r' in request.GET:
+        r = request.GET.get('r')
+
+    if r and r != '0':
         is_revision = True
         try:
-            revision_id = int(request.GET['r'])
+            revision_id = int(r)
         except ValueError:
-            revision_image = get_object_or_404(ImageRevision, image = image, label = request.GET.get('r'))
+            revision_image = get_object_or_404(ImageRevision, image = image, label = r)
         if not revision_image:
             revision_image = get_object_or_404(ImageRevision, id=revision_id)
         is_final = revision_image.is_final
         is_ready = revision_image.is_stored
-    elif 'r' not in request.GET:
+    elif not r:
         if not is_final:
             final_revs = revisions.filter(is_final = True)
             # We should only have one
             if final_revs:
                 final = revisions.filter(is_final = True)[0]
-                return HttpResponseRedirect('/%i/?r=%s' % (image.id, final.label))
+                return HttpResponseRedirect('/%i/%s/' % (image.id, final.label))
 
     from moon import MoonPhase;
 

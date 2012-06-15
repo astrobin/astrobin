@@ -434,7 +434,7 @@
                             <li class="thumbnail astrobin-thumbnail revisions" style="width:{{small_thumbnail_size}}px">
                                 <div class="revision">
                                     {% if is_revision %}
-                                        <a href="{% url image_detail image.id %}{% query_string "r=0" "plate_solving_started, mod" %}">
+                                        <a href="{% url image_detail image.id 0 %}">
                                     {% else %}
                                         <div class="overlay"></div>
                                     {% endif %}
@@ -460,7 +460,7 @@
                             <li class="thumbnail astrobin-thumbnail revisions" style="width:{{small_thumbnail_size}}px">
                                 <div class="revision">
                                     {% if i != revision_image %}
-                                        <a href="{% url image_detail i.image.id %}{% query_string "r=i.label" "plate_solving_started, mod" %}">
+                                        <a href="{% url image_detail i.image.id i.label %}">
                                     {% else %}
                                         <div class="overlay"></div>
                                     {% endif %}
