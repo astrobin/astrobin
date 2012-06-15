@@ -996,7 +996,7 @@ class ImageRevision(models.Model):
         super(ImageRevision, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
-        return '/%i?r=%i' % (self.image.id, self.id)
+        return '/%i/%s/' % (self.image.id, self.label)
  
 def image_revision_post_save(sender, instance, created, **kwargs):
     verb = "uploaded a new revision of"
