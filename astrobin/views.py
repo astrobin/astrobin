@@ -562,7 +562,7 @@ def image_detail(request, id):
             # We should only have one
             if final_revs:
                 final = revisions.filter(is_final = True)[0]
-                return HttpResponseRedirect('/%i/?r=%i' % (image.id, final.id))
+                return HttpResponseRedirect('/%i/?r=%s' % (image.id, final.label))
 
     from moon import MoonPhase;
 
