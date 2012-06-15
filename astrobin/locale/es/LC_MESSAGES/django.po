@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-15 19:30+0000\n"
-"PO-Revision-Date: 2012-05-29 08:12+0100\n"
-"Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
+"PO-Revision-Date: 2012-06-15 20:40+0100\n"
+"Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -1540,9 +1540,8 @@ msgid "Reflector: Herschellian"
 msgstr "Reflector: Herscheliano"
 
 #: models.py:329
-#, fuzzy
 msgid "Reflector: Newtonian"
-msgstr "Reflector: Newtorniano"
+msgstr "Reflector: Newtoniano"
 
 #: models.py:331
 msgid "Catadioptric: Argunov-Cassegrain"
@@ -1746,13 +1745,12 @@ msgid "Bandwidth"
 msgstr "Ancho de banda"
 
 #: models.py:509
-#, fuzzy
 msgid "(in nm)"
-msgstr "(en mm.)"
+msgstr "(en nm)"
 
 #: models.py:518
 msgid "nm"
-msgstr ""
+msgstr "nm"
 
 #: models.py:627
 msgid "I don't want this image plate-solved."
@@ -4626,11 +4624,11 @@ msgstr ""
 
 #: templates/image/detail.html:649 templates/image/detail.html.py:675
 msgid "Final"
-msgstr ""
+msgstr "Final"
 
 #: templates/image/detail.html:657
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: templates/image/detail.html:710
 msgid "Already favorited"
