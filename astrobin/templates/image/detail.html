@@ -751,6 +751,10 @@
                         <th><img rel="tooltip" title="{% trans "Votes" %}" alt="{% trans "Votes" %}" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/></th>
                         <td><span class="votes-number">{{votes_number}}</span></td>
                     </tr>
+                    <tr>
+                        <th><img rel="tooltip" title="{% trans "Comments" %}" alt="{% trans "Comments" %}" src="{{STATIC_URL}}icons/iconic/white/comment_stroke_16x14.png"/></th>
+                        <td><span class="comments-number">{{comments|length}}</span></td>
+                    </tr>
                 </table>
             </div>
         </div> <!-- span -->
