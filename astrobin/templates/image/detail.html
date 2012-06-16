@@ -1161,6 +1161,9 @@ $(document).ready(function() {
 
                 $nocomments.remove();
                 $container.insertAfter($parent);
+
+                // Updates comment count.
+                $('.comments-number').text(parseInt($('.comments-number').text()) + 1);
             }
             else if (responseJson.action == 'edit') {
                 var $comment = $form.closest('.comment');
