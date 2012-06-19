@@ -1000,7 +1000,6 @@ class ImageRevision(models.Model):
  
 def image_revision_post_save(sender, instance, created, **kwargs):
     verb = "uploaded a new revision of"
-    l10n_verb = _(verb)
     if created and not instance.image.is_wip:
         action.send(instance.image.user, verb = verb, target = instance)
 post_save.connect(image_revision_post_save, sender = ImageRevision)
@@ -1467,7 +1466,6 @@ class Comment(MPTTModel):
 
 def comment_post_save(sender, instance, created, **kwargs):
     verb = "commented on image"
-    l10n_verb = _(verb)
     if created:
         action.send(instance.author, verb = verb,
                     target = instance.image)
@@ -1515,7 +1513,6 @@ class GearComment(MPTTModel):
 
 def gear_comment_post_save(sender, instance, created, **kwargs):
     verb = "commented on gear item"
-    l10n_verb = _(verb)
     if created:
         action.send(instance.author, verb = verb,
                     target = instance.gear)
@@ -1612,7 +1609,6 @@ class Favorite(models.Model):
 
 def favorite_post_save(sender, instance, created, **kwargs):
     verb = "has favorited"
-    l10n_verb = _(verb)
     if created:
         action.send(instance.user, verb = verb,
                     target = instance.image)
@@ -1780,7 +1776,6 @@ post_save.connect(blog_entry_notify, sender = Entry)
 from reviews.models import ReviewedItem
 def reviewed_item_post_save(sender, instance, created, **kwargs):
     verb = "has written a review on"
-    l10n_verb = _(verb)
     if created:
          action.send(instance.user,
                      verb = verb,
