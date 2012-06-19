@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block title %}AstroBin - {% trans "Your profile is now active." %}{% endblock %}
 {% block content %}
 <p>{% trans "Your profile is now active." %} <a class="btn btn-primary" href="{% url auth_login %}">{% trans "Login" %}.</a></p>
 {% endblock %}
