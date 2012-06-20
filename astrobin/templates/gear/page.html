@@ -248,6 +248,7 @@ $(document).ready(function() {
         },
         success: function(response, statusText, xhr, $form) {
             var $btn = $form.find('input[type=submit]');
+            var $textarea = $form.find('textarea');
 
             if (response.success) {
                 var $container = $('<div/>').addClass('review');
@@ -260,7 +261,6 @@ $(document).ready(function() {
 
                 var $content = $('<div/>').addClass('content');
                 var $score = $('<div/>').addClass('score');
-
                 
                 $content.text(response.content);
                 $score.text(response.score);
@@ -277,6 +277,8 @@ $(document).ready(function() {
 
                 $('p.empty').remove();
                 $('.reviews').append($container);
+
+                $textarea.val('');
             }
 
             $btn.removeAttr('disabled').removeClass('disabled');
