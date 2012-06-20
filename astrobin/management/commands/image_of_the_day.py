@@ -20,6 +20,7 @@ class Command(BaseCommand):
 
             yesterdays_images = Image.objects.filter(Q(uploaded__gte = yesterday) &
                                                      Q(uploaded__lt = date.today()) &
+                                                     Q(subject_type__lt = 500) &
                                                      Q(w__gte = settings.IMAGE_OF_THE_DAY_WIDTH) &
                                                      Q(h__gte = settings.IMAGE_OF_THE_DAY_HEIGHT) &
                                                      Q(is_stored = True) &
