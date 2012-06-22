@@ -601,34 +601,14 @@ class GearCommentForm(forms.ModelForm):
         }
 
 
-class GearEditNewForm(forms.ModelForm):
-    class Meta:
-        model = Gear
-        fields = ('make', 'name')
-        widgets = {
-            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
-            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
-        }
-
-
-class GearEditForm(forms.ModelForm):
-    class Meta:
-        model = Gear
-        exclude = ('make', 'name')
-        widgets = {
-            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
-            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
-        }
-
-
-class TelescopeEditForm(GearEditForm):
+class TelescopeEditForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = Telescope
         exclude = ('make', 'name')
 
-class MountEditForm(GearEditForm):
+class MountEditForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
@@ -636,7 +616,7 @@ class MountEditForm(GearEditForm):
         exclude = ('make', 'name')
 
 
-class CameraEditForm(GearEditForm):
+class CameraEditForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
@@ -644,7 +624,7 @@ class CameraEditForm(GearEditForm):
         exclude = ('make', 'name')
 
 
-class FocalReducerEditForm(GearEditForm):
+class FocalReducerEditForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
@@ -652,7 +632,7 @@ class FocalReducerEditForm(GearEditForm):
         exclude = ('make', 'name')
 
 
-class SoftwareEditForm(GearEditForm):
+class SoftwareEditForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
@@ -660,7 +640,7 @@ class SoftwareEditForm(GearEditForm):
         exclude = ('make', 'name')
 
 
-class FilterEditForm(GearEditForm):
+class FilterEditForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
@@ -668,7 +648,7 @@ class FilterEditForm(GearEditForm):
         exclude = ('make', 'name')
 
 
-class AccessoryEditForm(GearEditForm):
+class AccessoryEditForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
@@ -676,60 +656,95 @@ class AccessoryEditForm(GearEditForm):
         exclude = ('make', 'name')
 
 
-class TelescopeEditNewForm(GearEditNewForm):
+class TelescopeEditNewForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = Telescope
         fields = ('make', 'name')
+        widgets = {
+            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+        }
 
 
-class MountEditNewForm(GearEditNewForm):
+
+class MountEditNewForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = Mount
         fields = ('make', 'name')
+        widgets = {
+            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+        }
 
 
-class CameraEditNewForm(GearEditNewForm):
+
+class CameraEditNewForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = Camera
         fields = ('make', 'name')
+        widgets = {
+            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+        }
 
 
-class FocalReducerEditNewForm(GearEditNewForm):
+
+class FocalReducerEditNewForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = FocalReducer
         fields = ('make', 'name')
+        widgets = {
+            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+        }
 
 
-class SoftwareEditNewForm(GearEditNewForm):
+
+class SoftwareEditNewForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = Software
         fields = ('make', 'name')
+        widgets = {
+            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+        }
 
 
-class FilterEditNewForm(GearEditNewForm):
+
+class FilterEditNewForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = Filter
         fields = ('make', 'name')
+        widgets = {
+            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+        }
 
 
-class AccessoryEditNewForm(GearEditNewForm):
+
+class AccessoryEditNewForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = Accessory
         fields = ('make', 'name')
+        widgets = {
+            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+        }
+
 
 
 class CopyGearForm(forms.Form):

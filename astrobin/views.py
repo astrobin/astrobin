@@ -3227,15 +3227,27 @@ def save_gear_details(request):
         gear_type = request.POST.get('gear_type')
 
     from gear import CLASS_LOOKUP
+
     form_lookup = {
-        'Telescope': TelescopeEditForm,
-        'Mount': MountEditForm,
-        'Camera': CameraEditForm,
-        'FocalReducer': FocalReducerEditForm,
-        'Software': SoftwareEditForm,
-        'Filter': FilterEditForm,
-        'Accessory': AccessoryEditForm,
+        'Telescope': TelescopeEditNewForm,
+        'Mount': MountEditNewForm,
+        'Camera': CameraEditNewForm,
+        'FocalReducer': FocalReducerEditNewForm,
+        'Software': SoftwareEditNewForm,
+        'Filter': FilterEditNewForm,
+        'Accessory': AccessoryEditNewForm,
     }
+
+    if gear and gear.name != '':
+        form_lookup = {
+            'Telescope': TelescopeEditForm,
+            'Mount': MountEditForm,
+            'Camera': CameraEditForm,
+            'FocalReducer': FocalReducerEditForm,
+            'Software': SoftwareEditForm,
+            'Filter': FilterEditForm,
+            'Accessory': AccessoryEditForm,
+        }
 
     user_gear_lookup = {
         'Telescope': 'telescopes',
@@ -3248,7 +3260,8 @@ def save_gear_details(request):
     }
 
     created = False
-    filters = Q(name = request.POST.get('name'))
+    name = request.POST.get('name')
+    filters = Q(name = name)
     if request.POST.get('make'):
         filters = filters & Q(make = request.POST.get('make'))
 
