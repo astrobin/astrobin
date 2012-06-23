@@ -50,6 +50,7 @@ from tasks import *
 from search_indexes import xapian_escape
 from image_utils import make_image_of_the_day
 from gear import *
+from utils import *
 
 import settings
 import pytz
@@ -535,7 +536,7 @@ def no_javascript(request):
 
 
 @require_GET
-def image_detail(request, id):
+def image_detail(request, id, r):
     """ Show details of an image"""
     image = get_object_or_404(Image, pk=id)
 
@@ -545,24 +546,27 @@ def image_detail(request, id):
     revisions = ImageRevision.objects.filter(image=image)
     is_final = image.is_final
     is_ready = image.is_stored
-    if 'r' in request.GET and request.GET.get('r') != '0':
+
+    if 'r' in request.GET:
+        r = request.GET.get('r')
+
+    if r and r != '0':
         is_revision = True
         try:
-            revision_id = int(request.GET['r'])
+            revision_id = int(r)
         except ValueError:
-            from django.http import Http404
-            raise Http404
-        revision_image = get_object_or_404(ImageRevision, id=revision_id)
+            revision_image = get_object_or_404(ImageRevision, image = image, label = r)
+        if not revision_image:
+            revision_image = get_object_or_404(ImageRevision, id=revision_id)
         is_final = revision_image.is_final
-        revisions = revisions.exclude(id=revision_id)
         is_ready = revision_image.is_stored
-    elif 'r' not in request.GET:
+    elif not r:
         if not is_final:
             final_revs = revisions.filter(is_final = True)
             # We should only have one
             if final_revs:
                 final = revisions.filter(is_final = True)[0]
-                return HttpResponseRedirect('/%i/?r=%i' % (image.id, final.id))
+                return HttpResponseRedirect('/%i/%s/' % (image.id, final.label))
 
     from moon import MoonPhase;
 
@@ -2849,15 +2853,23 @@ def image_revision_upload_process(request):
         destination.write(chunk)
     destination.close()
 
-    revisions = ImageRevision.objects.filter(image = image)
+    revisions = ImageRevision.objects.filter(image = image).order_by('id')
+    highest_label = 'A'
     for r in revisions:
         r.is_final = False
         r.save()
+        highest_label = r.label
 
     image.is_final = False
     image.save()
 
-    image_revision = ImageRevision(image=image, filename=filename, original_ext=original_ext, is_final=True)
+    image_revision = ImageRevision(
+        image = image,
+        filename = filename,
+        original_ext = original_ext,
+        is_final = True,
+        label = base26_encode(ord(highest_label) - ord('A') + 1),
+    )
     image_revision.save()
     image_revision.process()
 
@@ -3184,17 +3196,16 @@ def get_edit_gear_form(request, id):
 @login_required
 def get_empty_edit_gear_form(request, gear_type):
     form_lookup = {
-        'Telescope': TelescopeEditForm,
-        'Mount': MountEditForm,
-        'Camera': CameraEditForm,
-        'FocalReducer': FocalReducerEditForm,
-        'Software': SoftwareEditForm,
-        'Filter': FilterEditForm,
-        'Accessory': AccessoryEditForm,
+        'Telescope': TelescopeEditNewForm,
+        'Mount': MountEditNewForm,
+        'Camera': CameraEditNewForm,
+        'FocalReducer': FocalReducerEditNewForm,
+        'Software': SoftwareEditNewForm,
+        'Filter': FilterEditNewForm,
+        'Accessory': AccessoryEditNewForm,
     }
 
     form = form_lookup[gear_type]()
-
     from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
     response_dict = {
         'form': as_bootstrap(form, 'horizontal') if form else '',
@@ -3215,25 +3226,28 @@ def save_gear_details(request):
     else:
         gear_type = request.POST.get('gear_type')
 
-    class_lookup = {
-        'Telescope': Telescope,
-        'Mount': Mount,
-        'Camera': Camera,
-        'FocalReducer': FocalReducer,
-        'Software': Software,
-        'Filter': Filter,
-        'Accessory': Accessory,
-    }
+    from gear import CLASS_LOOKUP
 
     form_lookup = {
-        'Telescope': TelescopeEditForm,
-        'Mount': MountEditForm,
-        'Camera': CameraEditForm,
-        'FocalReducer': FocalReducerEditForm,
-        'Software': SoftwareEditForm,
-        'Filter': FilterEditForm,
-        'Accessory': AccessoryEditForm,
+        'Telescope': TelescopeEditNewForm,
+        'Mount': MountEditNewForm,
+        'Camera': CameraEditNewForm,
+        'FocalReducer': FocalReducerEditNewForm,
+        'Software': SoftwareEditNewForm,
+        'Filter': FilterEditNewForm,
+        'Accessory': AccessoryEditNewForm,
     }
+
+    if gear and gear.name != '':
+        form_lookup = {
+            'Telescope': TelescopeEditForm,
+            'Mount': MountEditForm,
+            'Camera': CameraEditForm,
+            'FocalReducer': FocalReducerEditForm,
+            'Software': SoftwareEditForm,
+            'Filter': FilterEditForm,
+            'Accessory': AccessoryEditForm,
+        }
 
     user_gear_lookup = {
         'Telescope': 'telescopes',
@@ -3245,15 +3259,23 @@ def save_gear_details(request):
         'Accessory': 'accessories',
     }
 
+    created = False
+    name = request.POST.get('name')
+    filters = Q(name = name)
+    if request.POST.get('make'):
+        filters = filters & Q(make = request.POST.get('make'))
+
     if not gear:
         try:
-            gear, created = class_lookup[gear_type].objects.get_or_create(
-                make = request.POST.get('make'),
-                name = request.POST.get('name'))
-        except class_lookup[gear_type].MultipleObjectsReturned:
-            gear = class_lookup[gear_type].objects.filter(
-                make = request.POST.get('make'),
-                name = request.POST.get('name'))[0]
+            if request.POST.get('make'):
+                gear, created = CLASS_LOOKUP[gear_type].objects.get_or_create(
+                    make = request.POST.get('make'),
+                    name = request.POST.get('name'))
+            else:
+                gear, created = CLASS_LOOKUP[gear_type].objects.get_or_create(
+                    name = request.POST.get('name'))
+        except CLASS_LOOKUP[gear_type].MultipleObjectsReturned:
+            gear = CLASS_LOOKUP[gear_type].objects.filter(filters)[0]
             created = False
 
     form = form_lookup[gear_type](data = request.POST, instance = gear)
@@ -3267,7 +3289,8 @@ def save_gear_details(request):
             simplejson.dumps(response_dict),
             mimetype = 'application/javascript')
 
-    form.save()
+    if created:
+        form.save()
 
     profile = UserProfile.objects.get(user = request.user)
     user_gear = getattr(profile, user_gear_lookup[gear_type])
@@ -3502,15 +3525,7 @@ def gear_page(request, id):
         'Accessory': 'accessories',
     }
 
-    class_lookup = {
-        'Telescope': Telescope,
-        'Camera': Camera,
-        'Mount': Mount,
-        'FocalReducer': FocalReducer,
-        'Software': Software,
-        'Filter': Filter,
-        'Accessory': Accessory,
-    }
+    from gear import CLASS_LOOKUP
 
     all_images = Image.objects.filter(**{image_attr_lookup[gear_type]: gear})
 
@@ -3531,7 +3546,7 @@ def gear_page(request, id):
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
             'images_count': Image.by_gear(gear).count(),
             'attributes': [
-                (_(class_lookup[gear_type]._meta.get_field(k[0]).verbose_name),
+                (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
                  getattr(gear, k[0]),
                  k[1]) for k in gear.attributes()],
         })
@@ -3688,21 +3703,36 @@ def get_gear_ajax(request, image_id):
 
 
 @require_GET
-def get_gear_by_make(request, make):
+def get_gear_by_make(request, klass, make):
     ret = {
         'make': make,
         'gear': []
     }
 
+    from gear import CLASS_LOOKUP
+
     try:
         autorename = GearMakeAutoRename.objects.get(rename_from = make)
-        print autorename
         ret['make'] = autorename.rename_to
     except:
-        print "pass"
         pass
 
-    ret['gear'] = [x.name for x in Gear.objects.filter(make = ret['make'])]
+    ret['gear'] = [x.name for x in CLASS_LOOKUP[klass].objects.filter(make = ret['make'])]
+    return HttpResponse(
+        simplejson.dumps(ret),
+        mimetype = 'application/javascript')
+
+
+@require_GET
+def get_makes_by_type(request, klass):
+    ret = {
+        'makes': []
+    }
+
+    from gear import CLASS_LOOKUP
+    from utils import unique_items
+
+    ret['makes'] = unique_items([x.make for x in CLASS_LOOKUP[klass].objects.exclude(make = '').exclude(make = None)])
     return HttpResponse(
         simplejson.dumps(ret),
         mimetype = 'application/javascript')

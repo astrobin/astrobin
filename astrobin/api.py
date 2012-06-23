@@ -6,6 +6,7 @@ from tastypie.authentication import Authentication
 
 from astrobin.models import Image, ImageRevision, ImageOfTheDay, Comment, App
 from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
+from astrobin.templatetags.tags import gear_name
 
 
 class AppAuthentication(Authentication):
@@ -117,6 +118,8 @@ class ImageResource(ModelResource):
             'fieldw': ALL,
             'fieldh': ALL,
             'fieldunits': ALL,
+            'imaging_telescopes': ALL,
+            'imaging_cameras': ALL,
         }
         ordering = ['rating_score', 'rating_votes', 'uploaded']
 
@@ -133,11 +136,11 @@ class ImageResource(ModelResource):
 
     def dehydrate_imaging_telescopes(self, bundle):
         telescopes = bundle.obj.imaging_telescopes.all()
-        return [x.name for x in telescopes]
+        return [gear_name(x) for x in telescopes]
 
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
-        return [x.name for x in cameras]
+        return [gear_name(x) for x in cameras]
 
     def build_filters(self, filters = None):
         if filters is None:
