@@ -3,6 +3,8 @@
 {% load tags %}
 {% load bootstrap_toolkit %}
 
+{% block title %}AstroBin - {% trans "Plate-solve" %}{% endblock %}
+
 {% block content %}
     {% if 'done_later' not in request.GET %}
         {% if image.is_stored %}

@@ -8,6 +8,7 @@ from django.utils.translation import ugettext as _
 from search_indexes import xapian_escape
 from views import jsonDump, valueReader
 from models import Telescope, Camera
+from templatetags.tags import gear_name
 
 import operator
 import unicodedata
@@ -59,7 +60,7 @@ class ImageSearchView(SearchView):
                     return SearchQuerySet().none()
 
             if ks:
-                filters = reduce(operator.or_, [SQ(**{tag: xapian_escape(k.name).replace(' ', '')}) for k in ks])
+                filters = reduce(operator.or_, [SQ(**{tag: xapian_escape(gear_name(k)).replace(' ', '')}) for k in ks])
                 sqs = sqs.filter(filters).exclude(**{tag: None})
 
         if 'sort' in self.request.GET:

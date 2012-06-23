@@ -196,6 +196,14 @@ class Gear(models.Model):
         return '/gear/%i/' % self.id
 
     def hard_merge(self, slave):
+        from gear import get_correct_gear
+        unused, master_gear_type = get_correct_gear(self.id)
+        unused, slave_gear_type = get_correct_gear(slave.id)
+
+        if master_gear_type != slave_gear_type:
+            print "\t\tCannot merge gear items of different types."
+            return
+
         # Find matching slaves in images
         images = Image.by_gear(slave)
         for image in images:
@@ -205,6 +213,7 @@ class Gear(models.Model):
                     try:
                         getattr(image, name).add(klass.objects.get(pk = self.pk))
                         getattr(image, name).remove(s[0])
+                        print "\t\tFixed image %d: " % image.id
                     except klass.DoesNotExist:
                         continue
 
@@ -955,6 +964,10 @@ class ImageRevision(models.Model):
         default = False
     )
 
+    label = models.CharField(
+        max_length = 1,
+        editable = False)
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('uploaded', '-id')
@@ -983,11 +996,10 @@ class ImageRevision(models.Model):
         super(ImageRevision, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
-        return '/%i?r=%i' % (self.image.id, self.id)
+        return '/%i/%s/' % (self.image.id, self.label)
  
 def image_revision_post_save(sender, instance, created, **kwargs):
     verb = "uploaded a new revision of"
-    l10n_verb = _(verb)
     if created and not instance.image.is_wip:
         action.send(instance.image.user, verb = verb, target = instance)
 post_save.connect(image_revision_post_save, sender = ImageRevision)
@@ -1454,7 +1466,6 @@ class Comment(MPTTModel):
 
 def comment_post_save(sender, instance, created, **kwargs):
     verb = "commented on image"
-    l10n_verb = _(verb)
     if created:
         action.send(instance.author, verb = verb,
                     target = instance.image)
@@ -1502,7 +1513,6 @@ class GearComment(MPTTModel):
 
 def gear_comment_post_save(sender, instance, created, **kwargs):
     verb = "commented on gear item"
-    l10n_verb = _(verb)
     if created:
         action.send(instance.author, verb = verb,
                     target = instance.gear)
@@ -1599,7 +1609,6 @@ class Favorite(models.Model):
 
 def favorite_post_save(sender, instance, created, **kwargs):
     verb = "has favorited"
-    l10n_verb = _(verb)
     if created:
         action.send(instance.user, verb = verb,
                     target = instance.image)
@@ -1767,7 +1776,6 @@ post_save.connect(blog_entry_notify, sender = Entry)
 from reviews.models import ReviewedItem
 def reviewed_item_post_save(sender, instance, created, **kwargs):
     verb = "has written a review on"
-    l10n_verb = _(verb)
     if created:
          action.send(instance.user,
                      verb = verb,

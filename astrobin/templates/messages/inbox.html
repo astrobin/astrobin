@@ -5,6 +5,7 @@
 {% load truncchar_tag %}
 {% load tags %}
 
+{% block title %}AstroBin - {% trans "My messages" %}{% endblock %}
 {% block content %}
     {% autopaginate thread_list 25 %}
     <div class="row">

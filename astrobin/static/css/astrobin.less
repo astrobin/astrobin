@@ -1501,11 +1501,11 @@ div.capty-caption a {
 
 div.favorite-container {
     display: inline;
-    margin-right: 50px;
-    padding-left: 4px;
+    margin-right: 12px;
 
     a.favorite {
         position: relative;
+        padding: 8px 30px;
 
         .favorite-hint {
             position: absolute;
@@ -1582,6 +1582,11 @@ div.favorite-container {
     img.license {
         padding: 0 0 2px 2px;
     }
+
+    table th {
+        padding-left: 35px;
+        width: 50px;
+    }
 }
 
 .image-description {
@@ -1629,6 +1634,10 @@ div.favorite-container {
 .avatar-block {
     .avatar, .username {
         display: inline;
+    }
+
+    img {
+        .rounded-corners(12px);
     }
 
     .username {
@@ -2522,3 +2531,51 @@ form.avatar-change label.control-label {display: none;}
     font-style: italic;
 }
 
+li.revisions {
+    margin-right: 5px;
+    margin-bottom: 4px;
+}
+
+.revision {
+    .overlay {
+        background-color: rgba(255, 255, 255, 0.2);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff');
+        position: absolute;
+        height: 120px;
+        width: 86px;
+        .rounded-corners(12px 12px 3px 3px);
+    }
+
+    .final {
+        position: relative;
+
+        .text {
+            position: absolute;
+            border: 0;
+            margin: 0;
+            padding: @spacer-small @spacer-medium;
+            background-color: #111;
+            background-color: rgba(0,0,0,0.6);
+            .rounded-corners;
+            top: -10px;
+            right: -4px;
+            -webkit-transform: rotate(8deg);
+            -moz-transform: rotate(8deg);
+            -o-transform: rotate(8deg);
+            -ms-transform: rotate(8deg);
+            transform: rotate(8deg);
+
+            -ms-filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand');
+            filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand');
+
+        }
+    }
+
+    .label {
+        .stitched-box;
+        background: #303030 url('../images/darker-panel-tile.png');
+        text-align: center;
+        font-weight: bold;
+        margin-top: 2px;
+    }
+}

@@ -40,7 +40,7 @@ v1_api.register(ImageOfTheDayResource())
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
-    url(r'^(?P<id>\d+)/$', views.image_detail, name='image_detail'),
+    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
     url(r'^full/(?P<id>\d+)/$', views.image_full, name='image_full'),
     url(r'^upload/$', views.image_upload, name='image_upload'),
     url(r'^upload/process$', views.image_upload_process, name='image_upload_process'),
@@ -256,7 +256,8 @@ urlpatterns = patterns('',
     url(r'^avatar/', include('avatar.urls')),
 
     url(r'^get-gear-ajax/(?P<image_id>\d+)/$', views.get_gear_ajax, name='get_gear_ajax'),
-    url(r'^get-gear-by-make/(?P<make>[\w+ ?]*)/$', views.get_gear_by_make, name='get_gear_by_make'),
+    url(r'^get-gear-by-make/(?P<klass>\w+)/(?P<make>[\w+ ?]*)/$', views.get_gear_by_make, name='get_gear_by_make'),
+    url(r'^get-makes-by-type/(?P<klass>\w+)/$', views.get_makes_by_type, name='get_makes_by_type'),
 
     url(r'^api/', include(v1_api.urls)),
     url(r'^api/request-key/$', views.app_api_key_request, name = 'app_api_key_request'),

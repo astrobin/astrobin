@@ -3,6 +3,8 @@
 {% load tags %}
 {% load bootstrap_toolkit %}
 
+
+{% block title %}AstroBin - {% trans "Edit your image: basic information" %}{% endblock %}
 {% block content %}
     {% if image.is_stored %}
         {% include 'image/edit/menu.html' %}   
