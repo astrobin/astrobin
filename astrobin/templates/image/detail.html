@@ -293,12 +293,12 @@
                                 {% if is_revision %}
                                     {% with revision_image as image %}
                                         {% if inverted %}
-                                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id, mod='inverted'" "plate_solving_started" %}">
+                                        <a class="zoomable" href="{% url image_full image.image.id image.label %}{% query_string "mod='inverted'" "plate_solving_started" %}">
                                             <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{% if not full %}_resized{% endif %}_inverted{{image.original_ext}}" alt="{{image.title|escape}}"/>
                                         </a>
                                         {% endif %}
                                         {% if not inverted and not solved %}
-                                        <a class="zoomable" href="{% url image_full image.image.id %}{% query_string "r=image.id" "mod, plate_solving_started" %}">
+                                        <a class="zoomable" href="{% url image_full image.image.id image.label %}{% query_string "" "mod, plate_solving_started" %}">
                                             <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_resized{{image.original_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                         </a>
                                         {% endif %}
