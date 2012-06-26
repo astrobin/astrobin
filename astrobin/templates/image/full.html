@@ -70,17 +70,29 @@
                             {% with request.GET.mod as mod %}
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{% url image_detail image.id %}{% query_string "mod=mod" "" %}">
+                                        {% if is_revision %}
+                                            <a href="{% url image_detail revision_image.image.id revision_image.label %}{% query_string "mod=mod" "" %}">
+                                        {% else %}
+                                            <a href="{% url image_detail image.id 0 %}{% query_string "mod=mod" "" %}">
+                                        {% endif %}
                                             {% blocktrans %}Technical card{% endblocktrans %}
                                         </a>
                                     </li>
                                     <li>
                                         {% if real %}
-                                            <a href="{% url image_full image.id %}{% query_string "mod=mod" "real" %}">
+                                            {% if is_revision %}
+                                                <a href="{% url image_full revision_image.image.id revision_image.label %}{% query_string "mod=mod" "real" %}">
+                                            {% else %}
+                                                <a href="{% url image_full image.id 0 %}{% query_string "mod=mod" "real" %}">
+                                            {% endif %}
                                                 {% blocktrans %}Fit to window{% endblocktrans %}
                                             </a>
                                         {% else %}
-                                            <a href="{% url image_full image.id %}{% query_string "mod=mod,real=''" "" %}">
+                                            {% if is_revision %}
+                                                <a href="{% url image_full revision_image.image.id revision_image.label %}{% query_string "mod=mod,real=''" "" %}">
+                                            {% else %}
+                                                <a href="{% url image_full image.id 0 %}{% query_string "mod=mod,real=''" "" %}">
+                                            {% endif %}
                                                 {% blocktrans %}Full resolution{% endblocktrans %}
                                             </a>
                                         {% endif %}
@@ -97,7 +109,7 @@
             {% if revision_image %}
                  {% with revision_image as image %}
                  {% with request.GET.mod as mod %}
-                 <a href="{% url image_detail image.image.id %}{% query_string "mod=mod" "" %}">
+                 <a href="{% url image_detail image.image.id image.label %}{% query_string "mod=mod" "" %}">
                       <img {% if real %}class="real"{% endif %} src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{% ifequal request.GET.mod 'inverted' %}_inverted{% endifequal %}{{image.original_ext}}"
                            alt="{{image.title|escape}}">
                  </a>
@@ -105,7 +117,7 @@
                  {% endwith %}
             {% else %}
             {% with request.GET.mod as mod %}
-            <a href="{% url image_detail image.id %}{% query_string "mod=mod" "" %}">
+            <a href="{% url image_detail image.id 0 %}{% query_string "mod=mod" "" %}">
                 <img {% if real %}class="real"{% endif %} src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{% ifequal request.GET.mod 'inverted' %}_inverted{% endifequal %}{{image.original_ext}}"
                      alt="{{image.title|escape}}">
             </a>
