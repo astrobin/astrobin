@@ -816,21 +816,23 @@ def image_detail(request, id, r):
 
 
 @require_GET
-def image_full(request, id):
+def image_full(request, id, r):
     image = get_object_or_404(Image, pk=id)
 
     is_revision = False
     revision_id = 0
     revision_image = None
-    if 'r' in request.GET and request.GET.get('r') != '0':
+    if 'r' in request.GET:
+        r = request.GET.get('r')
+
+    if r and r != '0':
         is_revision = True
         try:
-            revision_id = int(request.GET['r'])
+            revision_id = int(r)
         except ValueError:
-            from django.http import Http404
-            raise Http404
-
-        revision_image = get_object_or_404(ImageRevision, id=revision_id)
+            revision_image = get_object_or_404(ImageRevision, image = image, label = r)
+        if not revision_image:
+            revision_image = get_object_or_404(ImageRevision, id=revision_id)
 
     return object_detail(
         request,
@@ -842,6 +844,7 @@ def image_full(request, id):
             's3_url': settings.S3_URL,
             'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
             'revision_image': revision_image,
+            'is_revision': is_revision,
             'real': 'real' in request.GET,
         })
 
@@ -1138,7 +1141,7 @@ def image_edit_revision_make_final(request, id):
     r.is_final = True
     r.save()
 
-    return HttpResponseRedirect('/%i/?r=%i' % (r.image.id, r.id))
+    return HttpResponseRedirect('/%i/%s/' % (r.image.id, r.label))
 
 
 @login_required
