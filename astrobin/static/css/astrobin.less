@@ -2375,7 +2375,7 @@ form.avatar-change label.control-label {display: none;}
         transform: rate(-8deg);
 
         -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.99026807, M12=0.13917310, M21=-0.13917310, M22=0.99026807,sizingMethod='auto expand')";
-        filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.99026807, M12=0.13917310, M21=-0.13917310, M22=0.99026807,sizingMethod='auto expand');
+        filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.99026807, M12=0.13917310, M21=-0.13917310, M22=0.99026807,sizingMethod='auto expand')";
 
     }
     img {
@@ -2448,16 +2448,17 @@ form.avatar-change label.control-label {display: none;}
         top: 0;
         left: 0;
 
+
         -moz-transform:rotate(-90deg); 
         -webkit-transform: rotate(-90deg);
         -o-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 
         -moz-transform-origin: 103px 102px;
         -webkit-transform-origin: 103px 102px;
         -o-transform-origin: 103px 102px;
-        -ms-transform-origin: 103px 102px;
+
+        filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\9";
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\9";
 
         h3 {
             text-transform: uppercase;
@@ -2539,7 +2540,7 @@ li.revisions {
 .revision {
     .overlay {
         background-color: rgba(255, 255, 255, 0.2);
-        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff');
+        filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff')";
         position: absolute;
         height: 120px;
         width: 86px;
@@ -2565,8 +2566,8 @@ li.revisions {
             -ms-transform: rotate(8deg);
             transform: rotate(8deg);
 
-            -ms-filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand');
-            filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand');
+            -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand')";
+            filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand')";
 
         }
     }
