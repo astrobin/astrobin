@@ -1846,6 +1846,23 @@ def user_page(request, username):
 
 
 @require_GET
+def user_page_commercial_products(request, username):
+    user = get_object_or_404(User, username = username)
+
+    return object_list(
+        request,
+        queryset = CommercialGear.objects.filter(producer = user),
+        template_name = 'user/profile/commercial/products.html',
+        template_object_name = 'product',
+        paginate_by = 50,
+        extra_context = {
+            'user': user,
+            'claim_commercial_gear_form': ClaimCommercialGearForm(),
+        },
+     )
+
+
+@require_GET
 def user_page_favorites(request, username):
     user = get_object_or_404(User, username = username)
 

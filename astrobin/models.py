@@ -1782,3 +1782,90 @@ def reviewed_item_post_save(sender, instance, created, **kwargs):
                      target = instance.content_object)
 post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
 
+
+###############################################################################
+# Commercial models.                                                          #
+###############################################################################
+class CommercialGear(models.Model):
+    product = models.ForeignKey(
+        Gear,
+        null = False,
+        verbose_name = _("Product"),
+    )
+
+    producer = models.ForeignKey(
+        User,
+        null = False,
+        verbose_name = _("Producer"),
+        related_name = 'commercial_grar',
+    )
+
+    description = models.TextField(
+        null = True,
+        blank = True,
+        verbose_name = _("Description"),
+    )
+
+    image = models.ForeignKey(
+        Image,
+        null = True,
+        verbose_name = _("Primary image"),
+        related_name = 'featured_gear',
+    )
+
+    created = models.DateTimeField(
+        auto_now_add = True,
+    )
+
+    updated = models.DateTimeField(
+        auto_now = True,
+    )
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ['-updated']
+        verbose_name_plural = _("Commercial gear items")
+
+
+class CommercialGearProperty(models.Model):
+    product = models.ForeignKey(
+        CommercialGear,
+        null = False,
+        verbose_name = _("Product"),
+        related_name = 'properties',
+    )
+
+    name = models.CharField(
+        max_length = 128,
+        null = False,
+        blank = False,
+        verbose_name = _("Name"),
+    )
+
+    value = models.CharField(
+        max_length = 128,
+        null = False,
+        blank = False,
+        verbose_name = _("Value"),
+    )
+
+    unit = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        verbose_name = _("Unit"),
+    )
+
+    created = models.DateTimeField(
+        auto_now_add = True,
+    )
+
+    updated = models.DateTimeField(
+        auto_now = True,
+    )
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ['-updated']
+        verbose_name_plural = _("Commercial gear properties")
+
