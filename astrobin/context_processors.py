@@ -34,6 +34,8 @@ def user_language(request):
 def common_variables(request):
     d = {
         'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
+        'is_producer': request.user.groups.filter(name='Producers'),
+        'is_retailer': request.user.groups.filter(name='Retailers'),
     }
 
     return d

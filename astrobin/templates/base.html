@@ -222,6 +222,15 @@
                                             <a href="{% url image_upload %}">{% trans "Upload" %}</a>
                                         </li>
                                         <li class="nav-header">{% trans "My places" %}</li>
+
+                                        {% if is_producer or is_retailer %}
+                                            <li>
+                                                <a href="{% url user_page_commercial_products request.user %}">
+                                                    {% trans "Commercial products" %}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+
                                         <li>
                                             <a href="{% url user_page request.user %}">
                                                 {% trans "Gallery" %}

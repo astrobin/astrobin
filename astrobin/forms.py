@@ -668,7 +668,6 @@ class TelescopeEditNewForm(forms.ModelForm):
         }
 
 
-
 class MountEditNewForm(forms.ModelForm):
     error_css_class = 'error'
 
@@ -806,4 +805,18 @@ class ModeratorGearFixForm(forms.ModelForm):
             m.save()
 
         return m
+
+
+class ClaimCommercialGearForm(forms.Form):
+    error_css_class = 'error'
+
+    make = forms.ChoiceField(
+        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make'))),
+        help_text = _("The make, brand, producer or developer of this product."),
+        required = True)
+
+    name = forms.ChoiceField(
+        choices = [('', '---------')],
+        required = True)
+
 
