@@ -19,7 +19,7 @@ server {
     error_log /usr/local/nginx/logs/astrobin.com-error.log;
 
     keepalive_timeout 5;
-    proxy_read_timeout 300;
+    proxy_read_timeout 600;
 
     ## Compression
     # src: http://www.ruby-forum.com/topic/141251
