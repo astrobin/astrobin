@@ -9,9 +9,7 @@
     <div class="row">
         <div class="span12">
             <div class="well">
-                {% cache 86400 global_stats user_language %}
-                    {% blocktrans %}<strong>{{total_users}}</strong> users uploaded <strong>{{total_images}}</strong> images, reaching <strong>{{total_integration}}</strong> hours of integration time.{% endblocktrans %}
-                {% endcache %}
+                {% blocktrans %}<strong>{{total_users}}</strong> users uploaded <strong>{{total_images}}</strong> images, reaching <strong>{{total_integration}}</strong> hours of integration time.{% endblocktrans %}
             </div>
             <div class="plots">
                 <h2>
