@@ -2884,18 +2884,11 @@ def stats(request):
     response_dict = {}
 
     sqs = SearchQuerySet()
+    gs = GlobalStat.objects.all()[0]
 
-    variables = [request.LANGUAGE_CODE]
-    hash = md5_constructor(u':'.join([urlquote(var) for var in variables]))
-    cache_key = 'template.cache.%s.%s' % ('global_stats', hash.hexdigest())
-
-    if not cache.has_key(cache_key):
-        response_dict['total_users'] = sqs.models(User).filter(user_images__gt = 0).count()
-        response_dict['total_images'] = sqs.models(Image).all().count()
-        hours = 0
-        for i in sqs.filter().models(Image):
-            hours += i.integration
-        response_dict['total_integration'] = int(hours / 3600.0)
+    response_dict['total_users'] = gs.users
+    response_dict['total_images'] = gs.images
+    response_dict['total_integration'] = gs.integration
 
     sort = '-user_integration'
     if 'sort' in request.GET:
