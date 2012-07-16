@@ -79,6 +79,11 @@ def watermark_image(image, text, position, opacity):
 
 
 def store_image_in_backend(path, image_model):
+    def fix_image_mode(im):
+        if im.mode != "RGB" and im.mode != "I":
+            im = im.convert("RGB")
+        return im
+
     from image_utils import scale_dimensions_for_cropping, scale_dimensions,\
                             crop_box, crop_box_max, generate_histogram
 
@@ -122,8 +127,7 @@ def store_image_in_backend(path, image_model):
             image_model.watermark_opacity)
         data = StringIO.StringIO()
         image.save(data, format_map[content_type][0], quality=100)
-        if image.mode != "RGB":
-            image = image.convert("RGB")
+        image = fix_image_mode(image)
 
     save_to_bucket(uid + original_ext, data.getvalue())
 
@@ -145,12 +149,11 @@ def store_image_in_backend(path, image_model):
 
         # Then save to bucket
         resizedFile = StringIO.StringIO()
-        if resizedImage.mode != "RGB":
-            resizedImage = resizedImage.convert("RGB")
+        resizedImage = fix_image_mode(resizedImage)
         resizedImage.save(resizedFile, format_map[content_type][0], quality=100)
         save_to_bucket(uid + '_resized' + format_map[content_type][1],
                        resizedFile.getvalue())
-        # Also, save this to uploads/ so can the solver can pick it up
+        # Also, save this to uploads/ so the solver can pick it up
         resizedImage.save(path + uid + '_resized' + format_map[content_type][1],
                           format_map[content_type][0], quality=100)
 
@@ -160,8 +163,7 @@ def store_image_in_backend(path, image_model):
         enhancer = ImageEnhance.Contrast(inverted)
         inverted = enhancer.enhance(2.5)
         invertedFile = StringIO.StringIO()
-        if inverted.mode != "RGB":
-            inverted = inverted.convert("RGB")
+        inverted = fix_image_mode(inverted)
         inverted.save(invertedFile, format_map[content_type][0])
         save_to_bucket(uid + '_inverted' + format_map[content_type][1],
                        invertedFile.getvalue())
@@ -170,8 +172,7 @@ def store_image_in_backend(path, image_model):
         enhancer = ImageEnhance.Contrast(inverted)
         inverted = enhancer.enhance(2.5)
         invertedFile = StringIO.StringIO()
-        if inverted.mode != "RGB":
-            inverted = inverted.convert("RGB")
+        inverted = inverted.convert("RGB")
         inverted.save(invertedFile, format_map[content_type][0])
         save_to_bucket(uid + '_resized_inverted' + format_map[content_type][1],
                        invertedFile.getvalue())
@@ -206,8 +207,8 @@ def store_image_in_backend(path, image_model):
 
     # To the final bucket
     thumbnailFile = StringIO.StringIO()
-    if croppedImage.mode != "RGB":
-        croppedImage = croppedImage.convert("RGB")
+    print croppedImage.mode
+    croppedImage = fix_image_mode(croppedImage)
     croppedImage.save(thumbnailFile, format_map[content_type][0])
     save_to_bucket(uid + '_small_thumb' + format_map[content_type][1],
                    thumbnailFile.getvalue())

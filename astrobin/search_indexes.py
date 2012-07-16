@@ -150,8 +150,6 @@ class ImageIndex(SearchIndex):
         return Image
 
     def prepare_title(self, obj):
-        print "Indexing image %d: %s" % (obj.id, obj.title.encode('utf-8'))
-
         value = obj.title
 
         match = re.match(r'.*\s+m\s*(?P<id>\d+).*', obj.title.lower())
