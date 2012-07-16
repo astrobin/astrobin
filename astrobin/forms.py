@@ -290,6 +290,7 @@ class AdvancedSearchForm(SearchForm):
     imaging_cameras = forms.CharField(
         required = False
     )
+
     aperture_min = forms.IntegerField(
         required = False,
         help_text = _("Express value in mm"),
@@ -298,6 +299,17 @@ class AdvancedSearchForm(SearchForm):
     aperture_max = forms.IntegerField(
         required = False,
         help_text = _("Express value in mm"),
+        min_value = 0,
+    )
+
+    pixel_size_min = forms.IntegerField(
+        required = False,
+        help_text = _("Express value in &mu;m"),
+        min_value = 0,
+    )
+    pixel_size_max = forms.IntegerField(
+        required = False,
+        help_text = _("Express value in &mu;m"),
         min_value = 0,
     )
 
@@ -390,6 +402,12 @@ class AdvancedSearchForm(SearchForm):
 
             if self.cleaned_data['aperture_max'] is not None:
                 sqs = sqs.filter(max_aperture__lte = self.cleaned_data['aperture_max'])
+
+            if self.cleaned_data['pixel_size_min'] is not None:
+                sqs = sqs.filter(min_pixel_size__gte = self.cleaned_data['pixel_size_min'])
+
+            if self.cleaned_data['pixel_size_max'] is not None:
+                sqs = sqs.filter(max_pixel_size__lte = self.cleaned_data['pixel_size_max'])
 
             if self.cleaned_data['integration_min']:
                 sqs = sqs.filter(integration__gte=int(self.cleaned_data['integration_min'] * 3600))

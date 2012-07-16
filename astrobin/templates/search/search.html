@@ -125,6 +125,25 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
+
+                    {% with form.pixel_size_min as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+    
+                    {% with form.pixel_size_max as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+
                 </div>
             </div>
     
@@ -278,6 +297,15 @@
               "{% trans "mm" %}:",
               ""
         );
+
+        range($('input[name="pixel_size_min"]'),
+              $('input[name="pixel_size_max"]'),
+              1, 24,
+              "{% trans "Pixel size" %}:",
+              "{% trans "&mu;m" %}:",
+              ""
+        );
+
 
         {% autoescape off %}
         {% for key, value in prefill_dict.items %}
