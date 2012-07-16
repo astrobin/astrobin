@@ -81,6 +81,7 @@ def integration_hours(user, period = 'monthly', since = 0):
 
 
 def integration_hours_by_gear(user, period='monthly'):
+    from templatetags.tags import gear_name
     _map = {
         'yearly' : (_("Integration hours by gear, yearly") , '%Y'),
         'monthly': (_("Integration hours by gear, monthly"), '%Y-%m'),
@@ -111,7 +112,7 @@ def integration_hours_by_gear(user, period='monthly'):
                 Q(image__imaging_telescopes = g) | Q(image__imaging_cameras = g)).exclude(date = None).order_by('date')
 
             g_dict = {
-                'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', g.name).encode('ascii', 'ignore'),
+                'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', gear_name(g)).encode('ascii', 'ignore'),
                 'stage_data': {},
                 'data': [],
                 'lines': {'lineWidth': thickness},
