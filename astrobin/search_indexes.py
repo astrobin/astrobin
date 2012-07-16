@@ -131,6 +131,9 @@ class ImageIndex(SearchIndex):
     min_aperture = IntegerField()
     max_aperture = IntegerField()
 
+    min_pixel_size = IntegerField()
+    max_pixel_size = IntegerField()
+
     favorited = IntegerField()
 
     telescope_types = MultiValueField()
@@ -354,6 +357,22 @@ class ImageIndex(SearchIndex):
             if telescope.aperture is not None and (d == sys.maxint or telescope.aperture > d):
                 d = int(telescope.aperture)
         return d
+
+    def prepare_min_pixel_size(self, obj):
+        s = 0
+        for camera in obj.imaging_cameras.all():
+            if camera.pixel_size is not None and (s == 0 or camera.pixel_size < s):
+                s = int(camera.pixel_size)
+        print "Pixel size min: %d" % s
+        return s
+
+    def prepare_max_pixel_size(self, obj):
+        import sys
+        s = sys.maxint
+        for camera in obj.imaging_cameras.all():
+            if camera.pixel_size is not None and (s == sys.maxint or camera.pixel_size > s):
+                s = int(camera.pixel_size)
+        return s
 
     def prepare_favorited(self, obj):
         return Favorite.objects.filter(image = obj).count()
