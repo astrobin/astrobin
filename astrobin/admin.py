@@ -229,6 +229,7 @@ admin.site.register(GearComment)
 admin.site.register(AppApiKeyRequest, AppApiRequestAdmin)
 admin.site.register(App, AppAdmin)
 admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)
+admin.site.register(GlobalStat)
 
 ###############################################################################
 # Commercial models.                                                          #
