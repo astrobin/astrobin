@@ -1759,6 +1759,24 @@ class ImageOfTheDay(models.Model):
         return u"%s as an Image of the Day" % self.image.title
 
 
+class GlobalStat(models.Model):
+    date = models.DateField(
+        editable = False,
+        auto_now_add = True)
+
+    users = models.IntegerField()
+    images = models.IntegerField()
+    integration = models.IntegerField()
+
+    class Meta:
+        ordering = ['-date']
+        app_label = 'astrobin'
+
+    def __unicode__(self):
+        return u"%d users, %d images, %d hours of integration time" % (
+            self.users, self.images, self.integration)
+
+
 from zinnia.models import Entry
 def blog_entry_notify(sender, instance, created, **kwargs):
     if created:
