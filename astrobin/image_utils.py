@@ -180,6 +180,8 @@ def make_image_of_the_day(image):
 
     print "Dumping content..."
     f2 = StringIO.StringIO()
+    if pil_image.mode != 'RGB' and pil_image.mode != 'I':
+        pil_image = pil_image.convert('RGB')
     pil_image.save(f2, 'JPEG', quality=100)
 
     print "Saving to S3..."
