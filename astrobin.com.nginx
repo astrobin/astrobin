@@ -9,9 +9,21 @@ server {
 }
 
 server {
+        listen   80;
+        server_name www.astrob.in;
+        rewrite ^/(.*) http://www.astrobin.com/$1 permanent;
+}
+
+server {
+        listen   80;
+        server_name astrobin.com;
+        rewrite ^/(.*) http://www.astrobin.com/$1 permanent;
+}
+
+server {
     listen 80 default;
     client_max_body_size 4G;
-    server_name _;
+    server_name www.astrobin.com;
 
     rewrite ^/notices/$ /notifications permanent;
 
