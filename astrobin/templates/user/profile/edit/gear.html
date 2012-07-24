@@ -290,16 +290,19 @@
                         var make = $.trim($make.val());
                         if (make != '') {
                             $.ajax({
-                                url: '/gear/by-make/' + make + '/' + gear_type + '/',
+                                url: '/gear/by-make/' + make + '/?klass=' + gear_type,
                                 dataType: 'json',
                                 timeout: 10000,
                                 cache: false,
-                                success: function(data, textStatus, XMLHttpRequest) {
-                                    $make.val(data.make);
+                                success: function(response, textStatus, XMLHttpRequest) {
+                                    $make.val(response.make);
 
                                     var typeahead = $name.typeahead();
-                                    // FIXME: data.gear is now {id, name}
-                                    typeahead.data('typeahead').source = data.gear;
+                                    var gear_names = [];
+                                    for (var i = 0; i < response.gear.length; i++) {
+                                        gear_names.push(response.gear[i].name);
+                                    }
+                                    typeahead.data('typeahead').source = gear_names;
                                 }
                             });
                         }
