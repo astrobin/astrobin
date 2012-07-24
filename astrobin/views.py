@@ -3720,7 +3720,6 @@ def gear_by_make(request, make):
     klass = request.GET.get('klass', Gear)
     unclaimed = request.GET.get('unclaimed', False)
 
-    print make, klass, unclaimed
     ret = {
         'make': make,
         'gear': []
