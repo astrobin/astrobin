@@ -108,7 +108,7 @@
             var $modal = $(this).closest('.modal');
 
             $.ajax({
-                url: '/get-gear-ajax/' + $('.copy-gear-form select#id_image').val() + '/',
+                url: '/gear/by-image/' + $('.copy-gear-form select#id_image').val() + '/',
                 dataType: 'json',
                 timeout: 5000,
                 cache: false,

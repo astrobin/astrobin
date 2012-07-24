@@ -42,3 +42,16 @@ def base26_decode(string, alphabet=ALPHABET):
         idx += 1
 
     return num
+
+
+def user_is_producer(user):
+    is_producer = False
+    if user:
+        is_producer = user.groups.filter(name = 'Producers').count() > 0
+    return is_producer
+
+
+def user_is_retailer(user):
+    if user:
+        return user.groups.filter(name = 'Retailers').count() > 0
+    return False 

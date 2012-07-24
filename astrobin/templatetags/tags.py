@@ -502,6 +502,18 @@ def gear_name(gear):
 
 
 @register.simple_tag
+def gear_owners(gear):
+    gear, gear_type = get_correct_gear(gear.id)
+    return UserProfile.objects.filter(
+        **{UserProfile.GEAR_ATTR_LOOKUP[gear_type]: gear}).count()
+
+
+@register.simple_tag
+def gear_images(gear):
+    return Image.by_gear(gear).count()
+
+
+@register.simple_tag
 def gear_type(gear):
     from astrobin.gear import get_correct_gear, TYPES_LOOKUP
     real_gear, gear_type = get_correct_gear(gear.id)

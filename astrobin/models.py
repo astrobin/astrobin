@@ -1300,6 +1300,16 @@ class UserProfile(models.Model):
         'accessories': Accessory,
     }
 
+    GEAR_ATTR_LOOKUP = {
+        'Telescope': 'telescopes',
+        'Camera': 'cameras',
+        'Mount': 'mounts',
+        'FocalReducer': 'focal_reducers',
+        'Software': 'software',
+        'Filter': 'filters',
+        'Accessory': 'accessories',
+    }
+
     user = models.ForeignKey(User, unique=True, editable=False)
 
     # Basic Information
@@ -1815,7 +1825,7 @@ class CommercialGear(models.Model):
         User,
         null = False,
         verbose_name = _("Producer"),
-        related_name = 'commercial_grar',
+        related_name = 'commercial_gear',
     )
 
     description = models.TextField(
@@ -1841,7 +1851,7 @@ class CommercialGear(models.Model):
 
     class Meta:
         app_label = 'astrobin'
-        ordering = ['-updated']
+        ordering = ['created']
         verbose_name_plural = _("Commercial gear items")
 
 
