@@ -101,7 +101,12 @@ urlpatterns = patterns('',
 
     url(r'^me/$', views.me, name='me'),
     url(r'^users/(?P<username>[\w.@+-]+)/$', views.user_page, name='user_page'),
+
     url(r'^users/(?P<username>[\w.@+-]+)/commercial/products/$', views.user_page_commercial_products, name='user_page_commercial_products'),
+
+    url(r'^commercial/products/claim/(?P<id>\d+)/$', views.commercial_products_claim, name='commercial_products_claim'),
+    url(r'^commercial/products/unclaim/(?P<id>\d+)/$', views.commercial_products_unclaim, name='commercial_products_unclaim'),
+
     url(r'^users/(?P<username>[\w.@+-]+)/favorites/$', views.user_page_favorites, name='user_page_favorites'),
     url(r'^users/(?P<username>[\w.@+-]+)/card/$', views.user_page_card, name='user_page_card'),
     url(r'^users/(?P<username>[\w.@+-]+)/plots/$', views.user_page_plots, name='user_page_plots'),
@@ -252,12 +257,12 @@ urlpatterns = patterns('',
     url(r'^gear/comment/edit/$', views.gear_comment_edit, name='gear_comment_edit'),
     url(r'^gear/comment/get/(?P<id>\d+)/$', views.gear_comment_get, name='gear_comment_get'),
     url(r'^gear/comment/delete/(?P<id>\d+)/$', views.gear_comment_delete, name='gear_comment_delete'),
+    url(r'^gear/by-image/(?P<image_id>\d+)/$', views.gear_by_image, name='gear_by_image'),
+    url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$', views.gear_by_make, name='gear_by_make'),
 
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
     url(r'^avatar/', include('avatar.urls')),
 
-    url(r'^get-gear-ajax/(?P<image_id>\d+)/$', views.get_gear_ajax, name='get_gear_ajax'),
-    url(r'^get-gear-by-make/(?P<klass>\w+)/(?P<make>[\w+ ?]*)/$', views.get_gear_by_make, name='get_gear_by_make'),
     url(r'^get-makes-by-type/(?P<klass>\w+)/$', views.get_makes_by_type, name='get_makes_by_type'),
 
     url(r'^api/', include(v1_api.urls)),

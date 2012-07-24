@@ -14,7 +14,7 @@ from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.conf import settings
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.db.models import Q, Count
 from django.db import IntegrityError
@@ -1853,7 +1853,7 @@ def user_page_commercial_products(request, username):
         request,
         queryset = CommercialGear.objects.filter(producer = user),
         template_name = 'user/profile/commercial/products.html',
-        template_object_name = 'product',
+        template_object_name = 'commercial_gear',
         paginate_by = 50,
         extra_context = {
             'user': user,
@@ -3698,7 +3698,7 @@ def stats_gear_total_images_ajax(request, id):
 
 
 @require_GET
-def get_gear_ajax(request, image_id):
+def gear_by_image(request, image_id):
     image = get_object_or_404(Image, id = image_id)
 
     attrs = ('imaging_telescopes', 'guiding_telescopes', 'mounts',
@@ -3716,7 +3716,11 @@ def get_gear_ajax(request, image_id):
 
 
 @require_GET
-def get_gear_by_make(request, klass, make):
+def gear_by_make(request, make):
+    klass = request.GET.get('klass', Gear)
+    unclaimed = request.GET.get('unclaimed', False)
+
+    print make, klass, unclaimed
     ret = {
         'make': make,
         'gear': []
@@ -3730,7 +3734,16 @@ def get_gear_by_make(request, klass, make):
     except:
         pass
 
-    ret['gear'] = [x.name for x in CLASS_LOOKUP[klass].objects.filter(make = ret['make'])]
+    if klass != Gear:
+        klass = CLASS_LOOKUP[klass]
+
+    gear = klass.objects.filter(make = ret['make'])
+
+    if unclaimed == 'true':
+        gear = gear.filter(commercialgear = None)
+
+    ret['gear'] = [{'id': x.id, 'name': x.name} for x in gear]
+
     return HttpResponse(
         simplejson.dumps(ret),
         mimetype = 'application/javascript')
@@ -4029,3 +4042,66 @@ def activities(request):
         paginate_by = 100,
         extra_context = {})
 
+
+@require_POST
+@login_required
+@user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
+def commercial_products_claim(request, id):
+    from templatetags.tags import gear_owners, gear_images
+
+    def error(form):
+        from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
+        response_dict = {
+            'form': as_bootstrap(form, 'horizontal') if form else '',
+            'success': False,
+        }
+        return HttpResponse(
+            simplejson.dumps(response_dict),
+            mimetype = 'application/javascript')
+
+    form = ClaimCommercialGearForm(data = request.POST)
+    try:
+        gear = Gear.objects.get(id = id)
+    except Gear.DoesNotExist:
+        return error(form);
+
+    # We need to add the choice to the field so that the form will validate.
+    # If we don't, it won't validate because the selected option, which was
+    # added via AJAX, is not among those available.
+    form.fields['name'].choices += [(gear.id, gear.name)]
+
+    if not form.is_valid():
+        return error(form)
+
+    commercial_gear = CommercialGear(
+        product = gear,
+        producer = request.user)
+    commercial_gear.save()
+
+    return HttpResponse(
+        simplejson.dumps({
+            'success': True,
+            'id': gear.id,
+            'make': gear.make,
+            'name': gear.name,
+            'owners': gear_owners(gear),
+            'images': gear_images(gear),
+        }),
+        mimetype = 'application/javascript')
+
+
+
+@require_GET
+@login_required
+@user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
+def commercial_products_unclaim(request, id):
+    try:
+        gear = Gear.objects.get(id = id)
+    except Gear.DoesNotExist:
+        return HttpResponseForbidden()
+
+    commercial_gear = CommercialGear.objects.get(
+        product = gear,
+        producer = request.user).delete()
+
+    return ajax_success()

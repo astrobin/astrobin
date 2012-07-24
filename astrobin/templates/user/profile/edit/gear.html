@@ -290,7 +290,7 @@
                         var make = $.trim($make.val());
                         if (make != '') {
                             $.ajax({
-                                url: '/get-gear-by-make/' + gear_type + '/' + make + '/',
+                                url: '/gear/by-make/' + make + '/' + gear_type + '/',
                                 dataType: 'json',
                                 timeout: 10000,
                                 cache: false,
@@ -298,6 +298,7 @@
                                     $make.val(data.make);
 
                                     var typeahead = $name.typeahead();
+                                    // FIXME: data.gear is now {id, name}
                                     typeahead.data('typeahead').source = data.gear;
                                 }
                             });
