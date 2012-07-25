@@ -17,19 +17,34 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="/search/{% query_string "" "sort" %}">{% trans "Relevance" %}</a>
+                        <a href="/search/{% query_string "" "sort" %}">
+                            <i class="icon-search"></i>
+                            {% trans "Relevance" %}
+                        </a>
                     </li>
                     <li>
-                        <a href="/search/{% query_string "sort='-uploaded'" "" %}">{% trans "Upload time" %}</a>
+                        <a href="/search/{% query_string "sort='-uploaded'" "" %}">
+                            <i class="icon-upload"></i>
+                            {% trans "Upload time" %}
+                        </a>
                     </li>
                     <li>
-                        <a href="/search/{% query_string "sort='-rating'" "" %}">{% trans "Rating" %}</a>
+                        <a href="/search/{% query_string "sort='-rating'" "" %}">
+                            <i class="icon-star"></i>
+                            {% trans "Rating" %}
+                        </a>
                     </li>
                     <li>
-                        <a href="/search/{% query_string "sort='-integration'" "" %}">{% trans "Integration" %}</a>
+                        <a href="/search/{% query_string "sort='-integration'" "" %}">
+                            <i class="icon-time"></i>
+                            {% trans "Integration" %}
+                        </a>
                     </li>
                     <li>
-                        <a href="/search/{% query_string "sort='-views'" "" %}">{% trans "Views" %}</a>
+                        <a href="/search/{% query_string "sort='-views'" "" %}">
+                            <i class="icon-eye-open"></i>
+                            {% trans "Views" %}
+                        </a>
                     </li>
                 </ul>
             </li>

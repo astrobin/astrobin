@@ -92,17 +92,57 @@
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{% url popular %}">{% trans "Popular subjects" %}</a></li>
+                                    <li>
+                                        <a href="{% url popular %}">
+                                            <i class="icon-fire"></i>
+                                            {% trans "Popular subjects" %}
+                                        </a>
+                                    </li>
                                     <li class="divider"></li>
-                                    <li><a href="{% url wall %}">{% trans "The Big Wall" %}</a></li>
-                                    <li><a href="{% url nightly %}">{% trans "Night after night" %}</a></li>
-                                    <li><a href="{% url messier %}">{% trans "Messier marathon" %}</a></li>
-                                    <li><a href="{% url fits %}">{% trans "TIFF/FITS" %}</a></li>
+                                    <li>
+                                        <a href="{% url wall %}">
+                                            <i class="icon-th"></i>
+                                            {% trans "The Big Wall" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url nightly %}">
+                                            <i class="icon-time"></i>
+                                            {% trans "Night after night" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url messier %}">
+                                            <i class="icon-book"></i>
+                                            {% trans "Messier marathon" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url fits %}">
+                                            <i class="icon-file"></i>
+                                            {% trans "TIFF/FITS" %}
+                                        </a>
+                                    </li>
                                     <li class="divider"></li>
-                                    <li><a href="{% url haystack_search %}">{% trans "Advanced search" %}</a></li>
+                                    <li>
+                                        <a href="{% url haystack_search %}">
+                                            <i class="icon-search"></i>
+                                            {% trans "Advanced search" %}
+                                        </a>
+                                    </li>
                                     <li class="divider"></li>
-                                    <li><a href="{% url stats %}">{% trans "Stats" %}</a></li>
-                                    <li><a href="{% url leaderboard %}">{% trans "Leaderboard" %}</a></li>
+                                    <li>
+                                        <a href="{% url stats %}">
+                                            <i class="icon-align-left"></i>
+                                            {% trans "Stats" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url leaderboard %}">
+                                            <i class="icon-tasks"></i>
+                                            {% trans "Leaderboard" %}
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="dropdown {% current request "^/help/|^/faq/" %}">
@@ -111,12 +151,32 @@
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{% url help %}">{% trans "What is this site?" %}</a></li>
-                                    <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
+                                    <li>
+                                        <a href="{% url help %}">
+                                            <i class="icon-info-sign"></i>
+                                            {% trans "What is this site?" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url faq %}">
+                                            <i class="icon-question-sign"></i>
+                                            {% trans "FAQ" %}
+                                        </a>
+                                    </li>
                                     <li class="divider"></li>
-                                    <li><a href="{% url api %}">API (beta)</a></li>
+                                    <li>
+                                        <a href="{% url api %}">
+                                            <i class="icon-list"></i>
+                                            API (beta)
+                                        </a>
+                                    </li>
                                     <li class="divider"></li>
-                                    <li><a href="/contact/">{% trans "Contact" %}</a></li>
+                                    <li>
+                                        <a href="/contact/">
+                                            <i class="icon-envelope"></i>
+                                            {% trans "Contact" %}
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -191,6 +251,7 @@
                                     <li class="divider"></li>
                                     <li>
                                         <a href="http://translate.astrobin.com/" target="_blank">
+                                            <i class="icon-tasks"></i>
                                             {% trans "Help with translations!" %}
                                         </a>
                                     </li>
@@ -219,13 +280,17 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="{% url image_upload %}">{% trans "Upload" %}</a>
+                                            <a href="{% url image_upload %}">
+                                                <i class="icon-upload"></i>
+                                                {% trans "Upload" %}
+                                            </a>
                                         </li>
                                         <li class="nav-header">{% trans "My places" %}</li>
 
                                         {% if is_producer or is_retailer %}
                                             <li>
                                                 <a href="{% url user_page_commercial_products request.user %}">
+                                                    <i class="icon-barcode"></i>
                                                     {% trans "Commercial products" %}
                                                 </a>
                                             </li>
@@ -233,42 +298,87 @@
 
                                         <li>
                                             <a href="{% url user_page request.user %}">
+                                                <i class="icon-picture"></i>
                                                 {% trans "Gallery" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{% url user_page_favorites request.user %}">
+                                                <i class="icon-heart"></i>
                                                 {% trans "Favorites" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{% url user_page_card request.user %}">
+                                                <i class="icon-list-alt"></i>
                                                 {% trans "Technical card" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{% url user_page_plots request.user %}">
+                                                <i class="icon-align-left"></i>
                                                 {% trans "Plots" %}
                                             </a>
                                         </li>
                                         <li class="divider"></li>
 
-                                        <li><a href="{% url messages_inbox %}">{% trans "My messages" %}</a></li>
+                                        <li>
+                                            <a href="{% url messages_inbox %}">
+                                                <i class="icon-inbox"></i>
+                                                {% trans "My messages" %}
+                                            </a>
+                                        </li>
                                         <li>
                                             <a href="{% url user_page_api_keys request.user %}">
+                                                <i class="icon-list"></i>
                                                 {% trans "API Keys" %}
                                             </a>
                                         </li>
 
                                         <li class="nav-header">{% trans "My settings" %}</li>
-                                        <li><a href="{% url profile_edit_basic %}">{% trans "Basic information" %}</a></li>
-                                        <li><a href="{% url profile_edit_gear %}">{% trans "Gear" %}</a></li>
-                                        <li><a href="{% url profile_edit_locations %}">{% trans "Locations" %}</a></li>
-                                        <li><a href="{% url profile_edit_license %}">{% trans "Default license" %}</a></li>
-                                        <li><a href="{% url profile_edit_preferences %}">{% trans "Preferences" %}</a></li>
-                                        <li><a href="{% url avatar_change %}">{% trans "Avatar" %}</a></li>
+                                        <li>
+                                            <a href="{% url profile_edit_basic %}">
+                                                <i class="icon-pencil"></i>
+                                                {% trans "Basic information" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url profile_edit_gear %}">
+                                                <i class="icon-cog"></i>
+                                                {% trans "Gear" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url profile_edit_locations %}">
+                                                <i class="icon-globe"></i>
+                                                {% trans "Locations" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url profile_edit_license %}">
+                                                <i class="icon-briefcase"></i>
+                                                {% trans "Default license" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url profile_edit_preferences %}">
+                                                <i class="icon-wrench"></i>
+                                                {% trans "Preferences" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url avatar_change %}">
+                                                <i class="icon-user"></i>
+                                                {% trans "Avatar" %}
+                                            </a>
+                                        </li>
                                         <li class="divider"></li>
-                                        <li><a href="{% url auth_logout %}">{% trans "Logout" %}</a></li>
+                                        <li>
+                                            <a href="{% url auth_logout %}">
+                                                <i class="icon-hand-right"></i>
+                                                {% trans "Logout" %}
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div> <!-- btn-group -->
                             </li> <!-- user menu -->

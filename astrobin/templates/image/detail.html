@@ -50,13 +50,13 @@
                     </li>
                     <li>
                         <a href="{% url image_edit_gear image.id %}">
-                            <i class="icon-edit-gear"></i>
+                            <i class="icon-cog"></i>
                             {% trans "Edit gear used" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% url image_edit_acquisition image.id %}">
-                            <i class="icon-edit-acquisition"></i>
+                            <i class="icon-time"></i>
                             {% trans "Edit acquisition details" %}
                         </a>
                     </li>
@@ -67,7 +67,7 @@
                         {% else %}
                         <a href="{% url image_edit_make_final image.id %}">
                         {% endif %}
-                            <i class="icon-make-final"></i>
+                            <i class="icon-ok"></i>
                             {% trans "Mark this revision as final" %}
                         </a>
                     </li>
@@ -75,7 +75,7 @@
                     <li class="divider"></li>
                     <li>
                         <a href="{% url image_edit_license image.id %}">
-                            <i class="icon-change-license"></i>
+                            <i class="icon-briefcase"></i>
                             {% trans "Change license" %}
                         </a>
                     </li>
@@ -88,14 +88,14 @@
                     {% if not image.is_solved and not is_revision %}
                     <li>
                         <a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "plate_solving_started" %}">
-                            <i class="icon-plate-solve"></i>
+                            <i class="icon-screenshot"></i>
                             {% trans "Plate-solve" %}
                         </a>
                     </li>
                     {% else %}
                     <li>
                         <a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "plate_solving_started" %}">
-                            <i class="icon-plate-solve"></i>
+                            <i class="icon-screenshot"></i>
                             {% trans "Plate-solve again" %}
                         </a>
                     </li>
@@ -103,14 +103,14 @@
                     {% if image.is_wip %}
                     <li>
                         <a href="{% url image_promote image.id %}{% query_string "" "plate_solving_started" %}">
-                            <i class="icon-promote"></i>
+                            <i class="icon-arrow-right"></i>
                             {% trans "Promote to public area" %}
                         </a>
                     </li>
                     {% else %}
                     <li>
                         <a href="{% url image_demote image.id %}{% query_string "" "plate_solving_started" %}">
-                            <i class="icon-demote"></i>
+                            <i class="icon-arrow-left"></i>
                             {% trans "Move to staging area" %}
                         </a>
                     </li>
@@ -120,18 +120,18 @@
                     {% if not is_revision %}
                         {% if revisions %}
                         <a class="delete-original danger" href="{% url image_delete_original image.id %}">
-                            <i class="icon-delete"></i>
+                            <i class="icon-remove"></i>
                             {% trans "Delete original image" %}
                         </a>
                         {% else %}
                         <a class="delete-everything danger" href="{% url image_delete image.id %}">
-                            <i class="icon-delete"></i>
+                            <i class="icon-remove"></i>
                             {% trans "Delete everything" %}
                         </a>
                         {% endif %} <!-- revisions -->
                     {% else %}
                         <a class="delete-revision danger" href="{% url image_delete_revision image.id %}">
-                            <i class="icon-delete"></i>
+                            <i class="icon-remove"></i>
                             {% trans "Delete this revision" %}
                         </a>
                     {% endif %} <!-- not is_revision -->
@@ -140,14 +140,14 @@
                     <li class="divider"></li>
                     <li>
                         <a href="{% url bring_to_attention image.id %}">
-                            <i class="icon-quote"></i>
+                            <i class="icon-retweet"></i>
                             {% trans "Bring to a user's attention" %}
                         </a>
                     </li>
                     {% if request.user != image.user %}
                     <li>
                         <a href="{% url image_request_additional_information image.id %}">
-                            <i class="icon-info"></i>
+                            <i class="icon-info-sign"></i>
                             {% trans "Request additional information" %}
                         </a>
                     </li>
@@ -178,7 +178,7 @@
                     {% if not inverted and not solved %}
                         <li>
                             <a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                <i class="icon-inverted"></i>
+                                <i class="icon-adjust"></i>
                                 {% trans "Inverted monochrome" %}
                             </a>
                         </li>
@@ -186,12 +186,12 @@
                         <li>
                             {% if is_revision %}
                             <a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">
-                                <i class="icon-solved"></i>
+                                <i class="icon-screenshot"></i>
                                 {% trans "Annotated (original version)" %}
                             </a>
                             {% else %} <!-- is_revision -->
                             <a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "plate_solving_started" %}">
-                                <i class="icon-solved"></i>
+                                <i class="icon-screenshot"></i>
                                 {% trans "Annotated" %}
                             </a>
                             {% endif %} <!-- is_revision -->
@@ -202,7 +202,7 @@
                     {% if inverted %}
                         <li>
                             <a href="{{image.get_absolute_url}}{% query_string "mod='none'" "plate_solving_started" %}">
-                                <i class="icon-normal"></i>
+                                <i class="icon-picture"></i>
                                 {% trans "Normal" %}
                             </a>
                         </li>
@@ -210,12 +210,12 @@
                         <li>
                             {% if is_revision %}
                             <a href="{{image.get_absolute_url}}{% query_string "mod='solved', r=0" "plate_solving_started" %}">
-                                <i class="icon-solved"></i>
+                                <i class="icon-screenshot"></i>
                                 {% trans "Annotated (original version)" %}
                             </a>
                             {% else %} <!-- is_revision -->
                             <a href="{{image.get_absolute_url}}{% query_string "mod='solved'" "plate_solving_started" %}">
-                                <i class="icon-solved"></i>
+                                <i class="icon-screenshot"></i>
                                 {% trans "Annotated" %}
                             </a>
                             {% endif %} <!-- is_revision -->
@@ -226,13 +226,13 @@
                     {% if solved %}
                         <li>
                             <a href="{{image.get_absolute_url}}{% query_string "mod='none'" "plate_solving_started" %}">
-                                <i class="icon-normal"></i>
+                                <i class="icon-picture"></i>
                                 {% trans "Normal" %}
                             </a>
                         </li>
                         <li>
                             <a href="{{image.get_absolute_url}}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                <i class="icon-inverted"></i>
+                                <i class="icon-adjust"></i>
                                 {% trans "Inverted monochrome" %}
                             </a>
                         </li>
@@ -249,7 +249,7 @@
                 <ul class="dropdown-menu">
                     <li>
                         <a href="{% url user_page image.user %}">
-                            <i class="icon-profile"></i>
+                            <i class="icon-user"></i>
                             {% trans "View profile" %}
                         </a>
                     </li>
@@ -258,10 +258,10 @@
                         <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
                            href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
                             {% if follows %}
-                                <i class="icon-unfollow"></i>
+                                <i class="icon-eye-open"></i>
                                 {% trans "Stop following" %}
                             {% else %}
-                                <i class="icon-follow"></i>
+                                <i class="icon-eye-close"></i>
                                 {% trans "Follow" %}
                             {% endif %}
                         </a>
@@ -269,7 +269,7 @@
                     {% endif %} <!-- authenticated -->
                     <li>
                         <a class="send-private-message" href="{% url messages_compose_to image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">
-                            <i class="icon-message"></i>
+                            <i class="icon-envelope"></i>
                             {% trans "Send private message" %}
                         </a>
                     </li>
