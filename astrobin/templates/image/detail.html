@@ -934,7 +934,7 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
                     "[URL=http://astrob.in/{{image.id}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
@@ -942,7 +942,7 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
                     "[URL=http://astrob.in/{{image.id}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
@@ -950,7 +950,7 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
                     "[URL=http://astrob.in/full/{{image.id}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
@@ -958,7 +958,7 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 1 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
                     "[URL=http://astrob.in/full/{{image.id}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
@@ -966,7 +966,7 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 1) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/]{{image.title}}[/URL]"
+                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/]{{image.title}} ({{revision_image.label}})[/URL]"
                 {% else %}
                     "[URL=http://astrob.in/{{image.id}}/]{{image.title}}[/URL]"
                 {% endif %}
@@ -974,7 +974,7 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 0 && image_mode == 1 && thumbnail == 1) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted]{{image.title}}[/URL]"
+                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted]{{image.title}} ({{revision_image.label}})[/URL]"
                 {% else %}
                     "[URL=http://astrob.in/{{image.id}}/?mod=inverted]{{image.title}}[/URL]"
                 {% endif %}
@@ -982,7 +982,7 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 1 && image_mode == 0 && thumbnail == 1) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/]{{image.title}}[/URL]"
+                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/]{{image.title}} ({{revision_image.label}})[/URL]"
                 {% else %}
                     "[URL=http://astrob.in/full/{{image.id}}/]{{image.title}}[/URL]"
                 {% endif %}
@@ -990,7 +990,7 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 1 && image_mode == 1 && thumbnail == 1) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted]{{image.title}}[/URL]"
+                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted]{{image.title}} ({{revision_image.label}})[/URL]"
                 {% else %}
                     "[URL=http://astrob.in/full/{{image.id}}/?mod=inverted]{{image.title}}[/URL]"
                 {% endif %}
@@ -999,7 +999,7 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png\"/></a>"
                 {% else %}
                     "<a href=\"http://astrob.in/{{image.id}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% endif %}
@@ -1007,7 +1007,7 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png\"/></a>"
                 {% else %}
                     "<a href=\"http://astrob.in/{{image.id}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/><a>"
                 {% endif %}
@@ -1015,7 +1015,7 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png\"/></a>"
                 {% else %}
                     "<a href=\"http://astrob.in/full/{{image.id}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% endif %}
@@ -1023,7 +1023,7 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 1 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png\"/></a>"
                 {% else %}
                     "<a href=\"http://astrob.in/full/{{image.id}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
                 {% endif %}
@@ -1031,7 +1031,7 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 1) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/\">{{image.title}}</a>"
+                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/\">{{image.title}} ({{revision_image.label}})</a>"
                 {% else %}
                     "<a href=\"http://astrob.in/{{image.id}}/\">{{image.title}}</a>"
                 {% endif %}
@@ -1039,7 +1039,7 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 0 && image_mode == 1 && thumbnail == 1) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\">{{image.title}}</a>"
+                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\">{{image.title}} ({{revision_image.label}})</a>"
                 {% else %}
                     "<a href=\"http://astrob.in/{{image.id}}/?mod=inverted\">{{image.title}}</a>"
                 {% endif %}
@@ -1047,7 +1047,7 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 1 && image_mode == 0 && thumbnail == 1) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/\">{{image.title}}</a>"
+                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/\">{{image.title}} ({{revision_image.label}})</a>"
                 {% else %}
                     "<a href=\"http://astrob.in/full/{{image.id}}/\">{{image.title}}</a>"
                 {% endif %}
@@ -1055,7 +1055,7 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 1 && image_mode == 1 && thumbnail == 1) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\">{{image.title}}</a>"
+                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\">{{image.title}} ({{revision_image.label}})</a>"
                 {% else %}
                     "<a href=\"http://astrob.in/full/{{image.id}}/?mod=inverted\">{{image.title}}</a>"
                 {% endif %}
