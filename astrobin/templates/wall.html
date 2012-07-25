@@ -15,44 +15,44 @@
                 <ul class="dropdown-menu">
                     <li>
                         <a href="{% query_string "" "sort" %}">
-                            <span class="bg-icon{% if sort == '-uploaded' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if sort == '-uploaded' %} icon-ok{% endif %}"></span>
                             {% trans "Uploaded" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "sort='-acquired'" "" %}">
-                            <span class="bg-icon{% if sort == '-acquired' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if sort == '-acquired' %} icon-ok{% endif %}"></span>
                             {% trans "Acquired" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "sort='-integration'" "" %}">
-                            <span class="bg-icon{% if sort == '-integration' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if sort == '-integration' %} icon-ok{% endif %}"></span>
                             {% trans "Integration" %}
                         </a>
                     </li>
                     <li class="divider"></li>
                     <li>
                         <a href="{% query_string "sort='-rating'" "" %}">
-                            <span class="bg-icon{% if sort == '-rating' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if sort == '-rating' %} icon-ok{% endif %}"></span>
                             {% trans "Rating" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "sort='-favorited'" "" %}">
-                            <span class="bg-icon{% if sort == '-favorited' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if sort == '-favorited' %} icon-ok{% endif %}"></span>
                             {% trans "Favorited" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "sort='-views'" "" %}">
-                            <span class="bg-icon{% if sort == '-views' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if sort == '-views' %} icon-ok{% endif %}"></span>
                             {% trans "Views" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "sort='-comments'" "" %}">
-                            <span class="bg-icon{% if sort == '-comments' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if sort == '-comments' %} icon-ok{% endif %}"></span>
                             {% trans "Comments" %}
                         </a>
                     </li>
@@ -66,56 +66,56 @@
                 <ul class="dropdown-menu">
                     <li>
                         <a href="{% query_string "filter='all_ds'" "" %}">
-                            <span class="bg-icon{% if filter == 'all_ds' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'all_ds' %} icon-ok{% endif %}"></span>
                             {% trans "All deep sky objects" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='clusters'" "" %}">
-                            <span class="bg-icon{% if filter == 'clusters' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'clusters' %} icon-ok{% endif %}"></span>
                             {% trans "Clusters" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='nebulae'" "" %}">
-                            <span class="bg-icon{% if filter == 'nebulae' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'nebulae' %} icon-ok{% endif %}"></span>
                             {% trans "Nebulae" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='galaxies'" "" %}">
-                            <span class="bg-icon{% if filter == 'galaxies' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'galaxies' %} icon-ok{% endif %}"></span>
                             {% trans "Galaxies" %}
                         </a>
                     </li>
                     <li class="divider"></li>
                     <li>
                         <a href="{% query_string "filter='all_ss'" "" %}">
-                            <span class="bg-icon{% if filter == 'all_ss' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'all_ss' %} icon-ok{% endif %}"></span>
                             {% trans "All Solar System objects" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='sun'" "" %}">
-                            <span class="bg-icon{% if filter == 'sun' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'sun' %} icon-ok{% endif %}"></span>
                             {% trans "Sun" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='moon'" "" %}">
-                            <span class="bg-icon{% if filter == 'moon' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'moon' %} icon-ok{% endif %}"></span>
                             {% trans "Moon" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='planets'" "" %}">
-                            <span class="bg-icon{% if filter == 'planets' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'planets' %} icon-ok{% endif %}"></span>
                             {% trans "Planets" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='comets'" "" %}">
-                            <span class="bg-icon{% if filter == 'comets' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'comets' %} icon-ok{% endif %}"></span>
                             {% trans "Comets" %}
                         </a>
                     </li>
@@ -124,25 +124,25 @@
 
                     <li>
                         <a href="{% query_string "filter='wide'" "" %}">
-                            <span class="bg-icon{% if filter == 'wide' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'wide' %} icon-ok{% endif %}"></span>
                             {% trans "Extremely wide field" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='trails'" "" %}">
-                            <span class="bg-icon{% if filter == 'trails' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'trails' %} icon-ok{% endif %}"></span>
                             {% trans "Star trails" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='gear'" "" %}">
-                            <span class="bg-icon{% if filter == 'gear' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'gear' %} icon-ok{% endif %}"></span>
                             {% trans "Gear" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% query_string "filter='other'" "" %}">
-                            <span class="bg-icon{% if filter == 'other' %} icon-check{% endif %}"></span>
+                            <span class="bg-icon{% if filter == 'other' %} icon-ok{% endif %}"></span>
                             {% trans "Other" %}
                         </a>
                     </li>
