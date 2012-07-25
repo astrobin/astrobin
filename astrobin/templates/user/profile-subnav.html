@@ -11,21 +11,25 @@
             <ul class="dropdown-menu">
                 <li>
                     <a href="{% url user_page user %}">
+                        <i class="icon-picture"></i>
                         {% trans "Gallery" %}
                     </a>
                 </li>
                 <li>
                     <a href="{% url user_page_favorites user %}">
+                        <i class="icon-heart"></i>
                         {% trans "Favorites" %}
                     </a>
                 </li>
                 <li>
                     <a href="{% url user_page_card user %}">
+                        <i class="icon-list-alt"></i>
                         {% trans "Technical card" %}
                     </a>
                 </li>
                 <li>
                     <a href="{% url user_page_plots user %}">
+                        <i class="icon-align-left"></i>
                         {% trans "Plots" %}
                     </a>
                 </li>
@@ -34,17 +38,20 @@
                 <li class="divider"></li>
                 <li>
                     <a href="{% url me %}">
+                        <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                     </a>
                 </li>
                 <li>
                     <a href="{% url me %}?staging">
+                        <i class="icon-lock"></i>
                         {% trans "Staging Area" %}
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                     <a href="{% url user_page_api_keys user %}">
+                        <i class="icon-list"></i>
                         {% trans "API Keys" %}
                     </a>
                 </li>
@@ -63,14 +70,19 @@
                     <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
                        href="{% if follows %}{% url unfollow user %}{% else %}{% url follow user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
                         {% if follows %}
+                            <i class="icon-eye-close"></i>
                             {% trans "Stop following" %}
                         {% else %}
+                            <i class="icon-eye-open"></i>
                             {% trans "Follow" %}
                         {% endif %}
                     </a>
                 </li>
                 <li>
-                    <a class="send-private-message" href="{% url messages_compose_to user %}{% query_string "next=request.path" "" %}">{% trans "Send private message" %}</a>
+                    <a class="send-private-message" href="{% url messages_compose_to user %}{% query_string "next=request.path" "" %}">
+                        <i class="icon-envelope"></i>
+                        {% trans "Send private message" %}
+                    </a>
                 </li>
             </ul> 
         </li>
@@ -82,13 +94,25 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="?public&sub=uploaded">{% trans "Upload time" %}</a></li>
-                <li><a href="?public&sub=acquired">{% trans "Acquisition time" %}</a></li>
-                <li><a href="?public&sub=subject">{% trans "Subject type" %}</a></li>
-                <li><a href="?public&sub=year">{% trans "Year" %}</a></li>
-                <li><a href="?public&sub=gear">{% trans "Gear" %}</a></li>
+                <li><a href="?public&sub=uploaded">
+                    <i class="icon-upload"></i>
+                    {% trans "Upload time" %}</a></li>
+                <li><a href="?public&sub=acquired">
+                    <i class="icon-time"></i>
+                    {% trans "Acquisition time" %}</a></li>
+                <li><a href="?public&sub=subject">
+                    <i class="icon-tags"></i>
+                    {% trans "Subject type" %}</a></li>
+                <li><a href="?public&sub=year">
+                    <i class="icon-calendar"></i>
+                    {% trans "Year" %}</a></li>
+                <li><a href="?public&sub=gear">
+                    <i class="icon-cog"></i>
+                    {% trans "Gear" %}</a></li>
                 <li class="divider"></li>
-                <li><a href="?public&sub=nodata">{% trans "Lacking data" %}</a></li>
+                <li><a href="?public&sub=nodata">
+                    <i class="icon-warning-sign"></i>
+                    {% trans "Lacking data" %}</a></li>
             </ul>
         </li>
     </ul>
