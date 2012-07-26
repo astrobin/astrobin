@@ -221,6 +221,7 @@ urlpatterns = patterns('',
     url(r'^explore/messier/nominate/process/$', views.messier_nomination_process, name='messier_nomination_process'),
     url(r'^explore/fits/$', views.fits, name='fits'),
     url(r'^explore/comments/$', views.comments, name='comments'),
+    url(r'^explore/reviews/$', views.reviews, name='reviews'),
 
     url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 

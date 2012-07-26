@@ -4028,3 +4028,15 @@ def comments(request):
             'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         })
 
+
+@require_GET
+def reviews(request):
+    return object_list(
+        request, 
+        queryset = ReviewedItem.objects.all(),
+        template_name = 'reviews.html',
+        template_object_name = 'review',
+        paginate_by = 100,
+        extra_context = {
+        })
+
