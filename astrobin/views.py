@@ -4012,3 +4012,17 @@ def activities(request):
         paginate_by = 100,
         extra_context = {})
 
+
+@require_GET
+def comments(request):
+    return object_list(
+        request, 
+        queryset = Comment.objects.all().filter(is_deleted = False).order_by('-added'),
+        template_name = 'comments.html',
+        template_object_name = 'comment',
+        paginate_by = 100,
+        extra_context = {
+            's3_url': settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
+        })
+

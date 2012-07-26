@@ -220,6 +220,7 @@ urlpatterns = patterns('',
     url(r'^explore/messier/nominate/(?P<id>\d+)/$', views.messier_nomination, name='messier_nomination'),
     url(r'^explore/messier/nominate/process/$', views.messier_nomination_process, name='messier_nomination_process'),
     url(r'^explore/fits/$', views.fits, name='fits'),
+    url(r'^explore/comments/$', views.comments, name='comments'),
 
     url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 
