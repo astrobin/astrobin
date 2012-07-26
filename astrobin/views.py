@@ -4033,7 +4033,7 @@ def comments(request):
 def reviews(request):
     return object_list(
         request, 
-        queryset = ReviewedItem.objects.all(),
+        queryset = ReviewedItem.objects.all().order_by('-date_added'),
         template_name = 'reviews.html',
         template_object_name = 'review',
         paginate_by = 100,
