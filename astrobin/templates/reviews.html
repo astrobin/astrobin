@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+{% load markup %}
+
+{% block title %}AstroBin - {% trans "Reviews" %}{% endblock %}
+{% block content %}
+    <h1>{% trans "Reviews" %}</h1>
+
+    {% for review in review_list %}
+        <div class="explore-review-container">
+            <div class="header">
+                {% gear_name review.content_object %}
+            </div>
+
+            <div class="review">
+                <div class="avatar">
+                    <a href="{% url user_page review.user %}">
+                        {% avatar review.user 32 %}
+                    </a>
+                </div>
+
+                <div class="meta">
+                    <a class="reviewed-item" href="#"></a>
+                    <a class="author" href="{% url user_page review.user %}">
+                        {{review.user}}
+                    </a>{{review.date_added|ago}}
+                </div>
+
+                <div class="content">
+                    {{review.content|truncatechars:"45"}}
+                </div>
+
+                <div class="score">
+                    <strong>{% trans "Rating" %}: {{review.score}}/5</strong>
+                </div>
+
+                <div class="links">
+                    <a class="permalink" href="{% url gear_page review.object_id %}#r{{review.id}}">{% trans "Link" %}</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="pagination pagination-centered">
+        {% paginate 4 %}
+    </div>
+
+{% endblock %}
+
