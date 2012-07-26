@@ -2925,6 +2925,8 @@ def leaderboard(request):
             sort = '-user_avg_integration'
         elif sort == 'images':
             sort = '-user_images'
+        elif sort == 'comments':
+            sort = '-user_comments'
 
     queryset = sqs.filter(user_images__gt = 0).models(User).order_by(sort)
 
