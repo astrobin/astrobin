@@ -1417,6 +1417,20 @@ div.favorite-container a.favorite:hover .favorite-hint {
   font-size: 1.5em;
   margin-left: 12px;
 }
+.explore-comment-container {
+  width: 468px;
+  display: inline-block;
+}
+.explore-comment-container .thumbnail {
+  float: left;
+  margin-right: 8px;
+  clear: both;
+  border: 0;
+  padding: 3px;
+}
+.explore-comment-container .comment {
+  height: 78px;
+}
 .comment-container {
   margin-top: 16px;
   font-size: 1em;
