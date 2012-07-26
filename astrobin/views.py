@@ -1323,9 +1323,9 @@ def image_edit_save_watermark(request):
 @login_required
 @require_POST
 def image_edit_save_gear(request):
-    profile = UserProfile.objects.get(user = request.user)
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
+    profile = UserProfile.objects.get(user = image.user)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1340,7 +1340,7 @@ def image_edit_save_gear(request):
     image.accessories.clear()
 
     form = ImageEditGearForm(data=request.POST,
-                             user=request.user,
+                             user=image.user,
                              instance=image)
     response_dict = {
         'image': image,
