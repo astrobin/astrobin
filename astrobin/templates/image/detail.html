@@ -1068,11 +1068,6 @@ $(document).ready(function() {
 
     {% get_hit_count_javascript for image %}
 
-    var hilighted_comment = location.hash.substr(1);
-    if (hilighted_comment) {
-        $('#' + hilighted_comment).addClass('hilight');
-    }
-
     var ajaxFormOptions = {
         dataType: 'json',
         timeout: 5000,
@@ -1365,6 +1360,14 @@ $(document).ready(function() {
             '{% url stats_image_views image.id 'daily' %}',
             5000);
         astrobin_stats.enableTooltips('#views .plot');
+
+        var hilighted_comment = location.hash.substr(1);
+        if (hilighted_comment) {
+            $('#' + hilighted_comment).addClass('hilight');
+            setTimeout(function() {
+                $('html, body').animate({scrollTop: $("#" + hilighted_comment).offset().top - 54}, 500);
+            }, 1000);
+        }
     });
 </script>
 {% endblock %}

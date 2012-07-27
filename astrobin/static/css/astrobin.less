@@ -1598,6 +1598,37 @@ div.favorite-container {
         margin-left: @spacer-large;
     }
 }
+.explore-comment-container, .explore-review-container {
+    width: 460px;
+    padding: @spacer-small;
+    display: inline-block;
+
+    .header {
+        color: @strong-text-color;
+        background: #303030 url('../images/darker-panel-tile.png');
+        padding: @spacer-medium @spacer-small;
+        .stitched-box;
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .thumbnail {
+        float: left;
+        margin-right: @spacer-medium;
+        clear: both;
+        border: 0;
+        padding: 3px;
+    }
+
+    .comment {
+        height: 78px;
+    }
+}
+
+.explore-review-container {
+    width: 302px;
+}
+
 .comment-container {
     margin-top: @spacer-xlarge;
     font-size: 1em;
@@ -1861,7 +1892,7 @@ div.favorite-container {
         color: @strong-text-color;
         background: @dark-panel-color;
         padding: @spacer-medium @spacer-small;
-        border-bottom: 1px dashed @border-top-color * @hilight-factor;
+        .stitched-box;
 
         .title {
             font-weight: bold;

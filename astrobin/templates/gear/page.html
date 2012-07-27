@@ -286,11 +286,6 @@ $(document).ready(function() {
     };
     $('.review-form').ajaxForm(reviewFormOptions);
 
-    var hilighted_comment = location.hash.substr(1);
-    if (hilighted_comment) {
-        $('#' + hilighted_comment).addClass('hilight');
-    }
-
     var commentsFormOptions = {
         dataType: 'json',
         timeout: 30000,
@@ -486,6 +481,14 @@ $(document).ready(function() {
         "{% url stats_gear_total_images gear.id %}",
         30000);
     astrobin_stats.enableTooltips("#stats_total_images");
+
+    var hilighted_comment = location.hash.substr(1);
+    if (hilighted_comment) {
+        $('#' + hilighted_comment).addClass('hilight');
+        setTimeout(function() {
+            $('html, body').animate({scrollTop: $("#" + hilighted_comment).offset().top - 54}, 500);
+        }, 1000);
+    }
 });
 </script>
 {% endblock %}

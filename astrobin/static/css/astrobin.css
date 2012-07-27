@@ -1417,6 +1417,41 @@ div.favorite-container a.favorite:hover .favorite-hint {
   font-size: 1.5em;
   margin-left: 12px;
 }
+.explore-comment-container,
+.explore-review-container {
+  width: 460px;
+  padding: 4px;
+  display: inline-block;
+}
+.explore-comment-container .header,
+.explore-review-container .header {
+  color: #fcfcfc;
+  background: #303030 url('../images/darker-panel-tile.png');
+  padding: 8px 4px;
+  margin-bottom: 4px;
+  padding: 8px;
+  border: 1px dashed #505050;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+.explore-comment-container .thumbnail,
+.explore-review-container .thumbnail {
+  float: left;
+  margin-right: 8px;
+  clear: both;
+  border: 0;
+  padding: 3px;
+}
+.explore-comment-container .comment,
+.explore-review-container .comment {
+  height: 78px;
+}
+.explore-review-container {
+  width: 302px;
+}
 .comment-container {
   margin-top: 16px;
   font-size: 1em;
@@ -1677,7 +1712,12 @@ div.favorite-container a.favorite:hover .favorite-hint {
   color: #fcfcfc;
   background: #2e2e2e;
   padding: 8px 4px;
-  border-bottom: 1px dashed #505050;
+  margin-bottom: 4px;
+  padding: 8px;
+  border: 1px dashed #505050;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
 }
 .search-category .header .title,
 .list-gear .header .title {

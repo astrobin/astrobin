@@ -1323,9 +1323,9 @@ def image_edit_save_watermark(request):
 @login_required
 @require_POST
 def image_edit_save_gear(request):
-    profile = UserProfile.objects.get(user = request.user)
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
+    profile = UserProfile.objects.get(user = image.user)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1340,7 +1340,7 @@ def image_edit_save_gear(request):
     image.accessories.clear()
 
     form = ImageEditGearForm(data=request.POST,
-                             user=request.user,
+                             user=image.user,
                              instance=image)
     response_dict = {
         'image': image,
@@ -2942,6 +2942,8 @@ def leaderboard(request):
             sort = '-user_avg_integration'
         elif sort == 'images':
             sort = '-user_images'
+        elif sort == 'comments':
+            sort = '-user_comments'
 
     queryset = sqs.filter(user_images__gt = 0).models(User).order_by(sort)
 
@@ -4104,3 +4106,30 @@ def commercial_products_unclaim(request, id):
         producer = request.user).delete()
 
     return ajax_success()
+
+
+@require_GET
+def comments(request):
+    return object_list(
+        request, 
+        queryset = Comment.objects.all().filter(is_deleted = False).order_by('-added'),
+        template_name = 'comments.html',
+        template_object_name = 'comment',
+        paginate_by = 100,
+        extra_context = {
+            's3_url': settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
+        })
+
+
+@require_GET
+def reviews(request):
+    return object_list(
+        request, 
+        queryset = ReviewedItem.objects.all().order_by('-date_added'),
+        template_name = 'reviews.html',
+        template_object_name = 'review',
+        paginate_by = 100,
+        extra_context = {
+        })
+
