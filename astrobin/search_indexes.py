@@ -57,6 +57,7 @@ class UserIndex(SearchIndex):
     user_images = IntegerField()
     user_integration = IntegerField()
     user_avg_integration = IntegerField()
+    user_comments = IntegerField()
 
     def index_queryset(self):
         return User.objects.all()
@@ -84,6 +85,9 @@ class UserIndex(SearchIndex):
                 integration += image_integration
 
         return (integration / 3600.0) / images if images else 0
+
+    def prepare_user_comments(self, obj):
+        return Comment.objects.filter(author = obj, is_deleted = False).count()
 
        
 class ImageIndex(SearchIndex):

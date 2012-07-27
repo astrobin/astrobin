@@ -1474,6 +1474,7 @@ class Comment(MPTTModel):
     class Meta:
         app_label = 'astrobin'
 
+
 def comment_post_save(sender, instance, created, **kwargs):
     verb = "commented on image"
     if created:

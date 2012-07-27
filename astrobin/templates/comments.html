@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+{% load markup %}
+
+{% block title %}AstroBin - {% trans "Comments" %}{% endblock %}
+{% block content %}
+    <h1>{% trans "Comments" %}</h1>
+
+    {% for comment in comment_list %}
+        {% if not comment.is_deleted %}
+            <div class="explore-comment-container">
+                <div class="thumbnail">
+                    <a rel="tooltip" title="{{comment.image.title|escape}}<br/>{% trans "by" %} {{comment.image.user.username}}" href="{% url image_detail comment.image.id %}" style="display:block;">
+                        <img src="{% if comment.image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{% get_final_filename comment.image %}_small_thumb{{comment.image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail.png{% endif %}" width="90" heigh="90"/>
+                    </a>
+                </div>
+                <div class="comment">
+                    <div class="avatar">
+                        <a href="{% url user_page comment.author %}">
+                            {% avatar comment.author 32 %}
+                        </a>
+                    </div>
+
+                    <div class="meta">
+                        <a class="author" href="{% url user_page comment.author %}">
+                            {{comment.author}}
+                        </a>{{comment.added|ago}}
+                    </div>
+
+                    <div class="content">
+                        {{comment.comment|truncatechars:"55"}}
+                    </div>
+
+                    <div class="links">
+                        <a class="permalink" href="{% url image_detail comment.image.id %}#c{{comment.id}}">{% trans "Link" %}</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <div class="pagination pagination-centered">
+        {% paginate 4 %}
+    </div>
+
+{% endblock %}
+

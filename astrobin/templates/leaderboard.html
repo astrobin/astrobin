@@ -30,6 +30,11 @@
                                 {% trans "Images" %} &#9660;
                             </a>
                         </th>
+                        <th>
+                            <a href="{% url leaderboard %}{% query_string "sort='comments'" "" %}">
+                                {% trans "Comments" %} &#9660;
+                            </a>
+                        </th>
                     </tr>
                     {% autopaginate user_list 100 %}
                     {% for u in user_list %}
@@ -39,6 +44,7 @@
                             <td>{{u.user_integration|floatformat}}</a></td>
                             <td>{{u.user_avg_integration|floatformat}}</a></td>
                             <td>{{u.user_images}}</td>
+                            <td>{{u.user_comments}}</td>
                         </tr>
                     {% endfor %}
                 </table>

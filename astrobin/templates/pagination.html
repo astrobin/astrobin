@@ -12,7 +12,7 @@
 
        {% if show_first %}
           <li>a href="{% query_string "page=1" "" %}#page_anchor">1</a></li>
-          <span class="ellipsis">...</span>
+          <li classs="ellipsis disabled"><a href="#">...</a></li>
        {% endif %}
        {% for linkpage in page_numbers %}
              <li{% ifequal linkpage page %} class="active"{% endifequal %}>
