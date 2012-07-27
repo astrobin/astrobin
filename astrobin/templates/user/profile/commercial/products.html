@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+{% load pagination_tags %}
+{% load bootstrap_toolkit %}
+
+{% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s commercial products{% endblocktrans %}{% endblock %}
+
+{% block content %}
+    {% include 'user/profile-subnav.html' %}
+    <h1>
+        {% ifequal user request.user %}
+            {% blocktrans %}Your commercial products{% endblocktrans %}
+        {% else %}
+            {% blocktrans with user as user %}{{user}}'s commercial products{% endblocktrans %}
+        {% endifequal %}
+    </h1>
+
+    <div class="row section">
+        <div class="span12">
+            <table class="table commercial-gear-items">
+                <tr>
+                    <th>{% trans "Product ID" %}</th>
+                    <th>{% trans "Make" %}</th>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Owners" %}</th>
+                    <th>{% trans "Images" %}</th>
+                    <th>{% trans "Actions" %}</th>
+                </tr>
+                {% for item in commercial_gear_list %}
+                    <tr>
+                        <td class="product-id">{{item.product.id}}</td>
+                        <td>{{item.product.make}}</td>
+                        <td>{{item.product.name}}</td>
+                        <td>{% gear_owners item.product %}</td>
+                        <td>{% gear_images item.product %}</td>
+                        <td>
+                            <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.product.id %}">
+                                <i class="icon-eye-open icon-white"></i>
+                            </a>
+                            <a rel="tooltip" title="{% trans "Edit" %}" href="#">
+                                <i class="icon-edit icon-white"></i>
+                            </a>
+                            <a class="item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">
+                                <i class="icon-remove icon-white"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                {% empty %}
+                    <tr class="empty">
+                        <td colspan="6">
+                            {% ifequal user request.user %}
+                                {% trans "You haven't claimed any commercial products yet." %}
+                            {% else %}
+                                {% blocktrans with user as user %}{{user}} hasn't claimed any commercial products yet.{% endblocktrans %}
+                            {% endifequal %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    {% if is_producer or is_retailer %}
+        <a href="#claim-commercial-product-modal"
+           class="btn btn-primary claim-commercial-product"
+           data-toggle="modal">{% trans "Claim commercial product" %}</a>
+    {% endif %}
+{% endblock %}
+
+{% block modals %}
+    <div class="modal hide fade" id="claim-commercial-product-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Claim commercial product" %}</h3>
+        </div>
+        <div class="modal-body">
+            <form id="claim-commercial-product" class="form-horizontal" action="{% url commercial_products_claim 0 %}" method="post">
+                <div class="form-content">
+                    {{claim_commercial_gear_form|as_bootstrap}}
+                </div>
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-primary" value="{% trans "Claim" %}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {% include 'user/profile-js.html' %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $form = $('form#claim-commercial-product'),
+                $makes = undefined,
+                $names = undefined,
+                $btn = undefined;
+
+            var reset_form_vars = function() {
+                $makes = $form.find('select[name=make]');
+                $names = $form.find('select[name=name]');
+                $btn = $form.find('input[type=submit]');
+            }
+
+            var reset_form_btn = function() {
+                $btn.removeClass('disabled');
+                $btn.val("{% trans "Claim" %}");
+            }
+
+            var disable_form_btn = function() {
+                $btn.addClass('disabled');
+                $btn.val("{% trans "Please wait..." %}");
+            }
+
+            var on_makes_changed = function() {
+                var make = $.trim($(this).val());
+                if (make != '') {
+                    $.ajax({
+                        url: '/gear/by-make/' + make + '/?unclaimed=true',
+                        dataType: 'json',
+                        timeout: 10000,
+                        cache: false,
+                        success: function(data, status, request) {
+                            $names.find('option').remove();
+
+                            $.each(data.gear, function(index, value) {
+                                var $opt = $('<option/>');
+                                $opt.attr('value', value.id);
+                                $opt.text(value.name);
+                                $names.append($opt);
+                            });
+
+                            var id = $names.find('option:first').val();
+                            $form.attr('action', '/commercial/products/claim/' + id  + '/');
+                        }
+                    });
+                }
+            }
+
+            var on_names_changed = function() {
+                var id = $(this).val();
+                $form.attr('action', '/commercial/products/claim/' + id + '/');
+            }
+
+            var ajaxFormOptions = {
+                dataType: 'json',
+                timeout: 10000,
+                beforeSubmit: function(formData, $form, options) {
+                    disable_form_btn();
+                },
+                success: function(response) {
+                    reset_form_vars();
+                    if (response.success) {
+                        $('#claim-commercial-product-modal').modal('hide');
+
+                        var $table = $('table.commercial-gear-items');
+                        var $row = $('<tr/>');
+
+                        $table.find('tr.empty').remove();
+                        
+                        $row.append('<td class="product-id">' + response.id + '</td>');
+                        $row.append('<td>' + response.make + '</td>');
+                        $row.append('<td>' + response.name + '</td>');
+                        $row.append('<td>' + response.owners + '</td>');
+                        $row.append('<td>' + response.images + '</td>');
+
+                        $row.append('\
+                        <td>\
+                            <a rel="tooltip" title="{% trans "View" %}" href="/gear/' + response.id + '">\
+                                <i class="icon-eye-open icon-white"></i>\
+                            </a>\
+                            <a rel="tooltip" title="{% trans "Edit" %}" href="#">\
+                                <i class="icon-edit icon-white"></i>\
+                            </a>\
+                            <a class="item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">\
+                                <i class="icon-remove icon-white"></i>\
+                            </a>\
+                        </td>');
+
+                        $table.append($row);
+                    } else {
+                        $form.find('.form-content').html(response.form);
+                        reset_form_vars();
+                        on_makes_changed.apply($makes);
+                        $makes.change(on_makes_changed);
+                        $names.change(on_names_changed);
+                    }
+
+                    reset_form_btn();
+                },
+                error: function(response, statusText, xhr) {
+                    reset_form_vars();
+                    $makes.change(on_makes_changed);
+                    $names.change(on_names_changed);
+                    $form.find('.form-content').html(response.form);
+                    reset_form_btn();
+                }
+            };
+
+            reset_form_vars();
+            $form.ajaxForm(ajaxFormOptions);
+            $makes.change(on_makes_changed);
+            $names.change(on_names_changed);
+
+            $('#claim-commercial-product-modal').on('show', function() {
+                $makes.val($makes.find('option:first').val()); 
+                $names.find('option').remove();
+
+                var $opt = $('<option/>');
+                $opt.attr('value', '');
+                $opt.text('---------');
+                $names.append($opt);
+
+                $form.attr('action', '{% url commercial_products_claim 0 %}');
+
+                $form.find('.control-group.error').removeClass('error');
+                $form.find('.help-block.error').remove();
+                reset_form_btn();
+            });
+
+            $('.item-remove').live('click', function() {
+                var $link = $(this);
+                var $table_row = $(this).closest('tr');
+                var id = $table_row.find('td.product-id').text();
+                $.ajax({
+                    url: '/commercial/products/unclaim/' + id + '/',
+                    dataType: 'json',
+                    timeout: 10000,
+                    cache: false,
+                    success: function(data, status, request) {
+                        $table_row.find('a[rel=tooltip]').tooltip('hide');
+                        $table_row.remove();
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
