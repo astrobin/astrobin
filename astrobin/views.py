@@ -1857,7 +1857,8 @@ def user_page_commercial_products(request, username):
         paginate_by = 50,
         extra_context = {
             'user': user,
-            'claim_commercial_gear_form': ClaimCommercialGearForm(user = request.user),
+            'claim_commercial_gear_form': ClaimCommercialGearForm(user = user),
+            'merge_commercial_gear_form': MergeCommercialGearForm(user = user),
         },
      )
 
@@ -4161,6 +4162,34 @@ def commercial_products_unclaim(request, id):
         mimetype = 'application/javascript')
 
 
+@require_GET
+@login_required
+@user_passes_test(lambda u: user_is_producer(u))
+def commercial_products_merge(request, from_id, to_id):
+    if from_id != to_id:
+        try:
+            from_cg = CommercialGear.objects.get(id = int(from_id))
+            to_cg = CommercialGear.objects.get(id = int(to_id))
+        except CommercialGear.DoesNotExist:
+            return HttpResponseForbindden()
+
+        if from_cg.producer != request.user or to_cg.producer != request.user:
+            return HttpResponseForbudden()
+
+        Gear.objects.filter(commercial = from_cg).update(commercial = to_cg)
+        from_cg.delete()
+
+    claimed_gear = Gear.objects.filter(commercial = to_cg).values_list('id', flat = True)
+
+    return HttpResponse(
+        simplejson.dumps({
+            'success': True,
+            'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
+            'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
+        }),
+        mimetype = 'application/javascript')
+
+            
 @require_GET
 @login_required
 @user_passes_test(lambda u: user_is_producer(u))

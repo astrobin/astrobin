@@ -106,6 +106,7 @@ urlpatterns = patterns('',
 
     url(r'^commercial/products/claim/(?P<id>\d+)/$', views.commercial_products_claim, name='commercial_products_claim'),
     url(r'^commercial/products/unclaim/(?P<id>\d+)/$', views.commercial_products_unclaim, name='commercial_products_unclaim'),
+    url(r'^commercial/products/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$', views.commercial_products_merge, name='commercial_products_merge'),
     url(r'^commercial/products/edit/(?P<id>\d+)/$', views.commercial_products_edit, name='commercial_products_edit'),
     url(r'^commercial/products/save/(?P<id>\d+)/$', views.commercial_products_save, name='commercial_products_save'),
 
