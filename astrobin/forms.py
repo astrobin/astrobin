@@ -838,12 +838,25 @@ class ClaimCommercialGearForm(forms.Form):
         required = True)
 
     merge_with = forms.ChoiceField(
-        choices = [('', _("*** Don't merge ***"))],
+        choices = [('', '---------')],
         help_text = _("Use this field to mark that the item you are claiming really is the same product (or a variation thereof) or something you have claimed before."),
         required = False)
 
     def __init__(self, user, **kwargs):
         super(ClaimCommercialGearForm, self).__init__(**kwargs)
+        self.fields['merge_with'].choices = [('', '---------')] + uniq(CommercialGear.objects.filter(producer = user).values_list('id', 'proper_name'))
+
+
+class MergeCommercialGearForm(forms.Form):
+    error_css_class = 'error'
+
+    merge_with = forms.ChoiceField(
+        choices = [('', '---------')],
+        help_text = _("Use this field to mark that the item you are merging really is the same product (or a variation thereof) or something you have claimed before."),
+        required = False)
+
+    def __init__(self, user, **kwargs):
+        super(MergeCommercialGearForm, self).__init__(**kwargs)
         self.fields['merge_with'].choices = [('', '---------')] + uniq(CommercialGear.objects.filter(producer = user).values_list('id', 'proper_name'))
 
 
