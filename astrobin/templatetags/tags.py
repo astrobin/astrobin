@@ -509,6 +509,24 @@ def gear_owners(gear):
 
 
 @register.simple_tag
+def gear_set_images(gear_set):
+    images = 0
+    for g in gear_set.all():
+        images += gear_images(g)
+
+    return images
+
+
+@register.simple_tag
+def gear_set_owners(gear_set):
+    owners = 0
+    for g in gear_set.all():
+        owners += gear_owners(g)
+
+    return owners
+
+
+@register.simple_tag
 def gear_images(gear):
     return Image.by_gear(gear).count()
 

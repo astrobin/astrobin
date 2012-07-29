@@ -166,6 +166,12 @@ class Gear(models.Model):
     )
 
     master = models.ForeignKey('self', null = True, editable = False)
+    commercial = models.ForeignKey(
+        'CommercialGear',
+        null = True,
+        editable = False,
+        on_delete = models.SET_NULL,
+    )
 
     updated = models.DateTimeField(
         editable = False,
@@ -1816,38 +1822,54 @@ post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
 # Commercial models.                                                          #
 ###############################################################################
 class CommercialGear(models.Model):
-    product = models.ForeignKey(
-        Gear,
-        null = False,
-        verbose_name = _("Product"),
-    )
-
     producer = models.ForeignKey(
         User,
         null = False,
         verbose_name = _("Producer"),
         related_name = 'commercial_gear',
+        editable = False
+    )
+
+    proper_make = models.CharField(
+        null = True,
+        blank = True,
+        max_length = 128,
+        verbose_name = _("Proper make"),
+        help_text = _("Sometimes, product make/brand/producer/developer names are not written properly by the users. Write here the proper make/brand/producer/developer name."),
+    )
+
+    proper_name = models.CharField(
+        null = True,
+        blank = True,
+        max_length = 128,
+        verbose_name = _("Proper name"),
+        help_text = _("Sometimes, product names are not written properly by the users. Write here the proper product name, not including the make/brand/producer/developer name.<br/>It is recommended that you try to group as many items as possible, so try to use a generic version of your product's name."),
     )
 
     description = models.TextField(
         null = True,
         blank = True,
         verbose_name = _("Description"),
+        help_text = _("Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#10\">formatting rules</a>."),
     )
 
     image = models.ForeignKey(
         Image,
         null = True,
-        verbose_name = _("Primary image"),
+        blank = True,
+        verbose_name = _("Image"),
+        help_text = _("The official, commercial image for this product. Upload an image via the regular uploading interface, set its subject type to \"Gear\", and then choose it from this list."),
         related_name = 'featured_gear',
     )
 
     created = models.DateTimeField(
         auto_now_add = True,
+        editable = False,
     )
 
     updated = models.DateTimeField(
         auto_now = True,
+        editable = False,
     )
 
     class Meta:
