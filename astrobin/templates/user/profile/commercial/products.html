@@ -20,7 +20,7 @@
         <div class="span12">
             <table class="table commercial-gear-items">
                 <tr>
-                    <th>{% trans "Product ID" %}</th>
+                    <th>{% trans "Gear IDs" %}</th>
                     <th>{% trans "Make" %}</th>
                     <th>{% trans "Name" %}</th>
                     <th>{% trans "Owners" %}</th>
@@ -28,17 +28,33 @@
                     <th>{% trans "Actions" %}</th>
                 </tr>
                 {% for item in commercial_gear_list %}
-                    <tr>
-                        <td class="product-id">{{item.product.id}}</td>
-                        <td>{{item.product.make}}</td>
-                        <td>{{item.product.name}}</td>
-                        <td>{% gear_owners item.product %}</td>
-                        <td>{% gear_images item.product %}</td>
+                    <tr data-id="{{item.id}}">
+                        <td class="gear-ids" data-gear-ids="{% for g in item.gear_set.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
+                            {% for g in item.gear_set.all %}
+                                <a href="/gear/{{g.id}}/">{{g.id}}</a>{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
                         <td>
-                            <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.product.id %}">
+                            {% if item.proper_make %}
+                                {{item.proper_make}}
+                            {% else %}
+                                {{item.gear_set.all.0.make}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item.proper_name %}
+                                {{item.proper_name}}
+                            {% else %}
+                                {{item.gear_set.all.0.name}}
+                            {% endif %}
+                        </td>
+                        <td>{% gear_set_owners item.gear_set %}</td>
+                        <td>{% gear_set_images item.gear_set %}</td>
+                        <td>
+                            <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
                                 <i class="icon-eye-open icon-white"></i>
                             </a>
-                            <a rel="tooltip" title="{% trans "Edit" %}" href="#">
+                            <a rel="tooltip" title="{% trans "Edit" %}" href="{% url commercial_products_edit item.id %}">
                                 <i class="icon-edit icon-white"></i>
                             </a>
                             <a class="item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">
@@ -86,6 +102,23 @@
             </form>
         </div>
     </div>
+
+    <div class="modal hide fade" id="remove-commercial-products-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Select items to remove" %}</h3>
+        </div>
+        <div class="modal-body">
+            <form id="remove-commercial-product" class="form-inline">
+                <div class="form-content">
+                    <div class="loading"><img src="{{STATIC_URL}}images/loading-bar.gif" alt=""/></div>
+                </div>
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-primary" value="{% trans "Remove" %}"/>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_js %}
@@ -96,11 +129,13 @@
             var $form = $('form#claim-commercial-product'),
                 $makes = undefined,
                 $names = undefined,
+                $merge_with = undefined,
                 $btn = undefined;
 
             var reset_form_vars = function() {
                 $makes = $form.find('select[name=make]');
                 $names = $form.find('select[name=name]');
+                $merge_with = $form.find('select[name=merge_with]');
                 $btn = $form.find('input[type=submit]');
             }
 
@@ -155,31 +190,42 @@
                     if (response.success) {
                         $('#claim-commercial-product-modal').modal('hide');
 
-                        var $table = $('table.commercial-gear-items');
-                        var $row = $('<tr/>');
+                        if (response.is_merge) {
+                            $('tr[data-id=' + response.id + '] td.gear-ids').html(response.gear_ids_links);
+                            $('tr[data-id=' + response.id + '] td.gear-ids').attr('data-gear-ids', response.gear_ids);
+                        } else {
+                            var $table = $('table.commercial-gear-items');
+                            var $row = $('<tr/>');
 
-                        $table.find('tr.empty').remove();
-                        
-                        $row.append('<td class="product-id">' + response.id + '</td>');
-                        $row.append('<td>' + response.make + '</td>');
-                        $row.append('<td>' + response.name + '</td>');
-                        $row.append('<td>' + response.owners + '</td>');
-                        $row.append('<td>' + response.images + '</td>');
+                            $table.find('tr.empty').remove();
+                            
+                            $row.append('<td class="gear-ids" data-gear-ids="' + response.gear_ids + '">' + response.gear_ids_links + '</td>');
+                            $row.append('<td>' + response.make + '</td>');
+                            $row.append('<td>' + response.name + '</td>');
+                            $row.append('<td>' + response.owners + '</td>');
+                            $row.append('<td>' + response.images + '</td>');
 
-                        $row.append('\
-                        <td>\
-                            <a rel="tooltip" title="{% trans "View" %}" href="/gear/' + response.id + '">\
-                                <i class="icon-eye-open icon-white"></i>\
-                            </a>\
-                            <a rel="tooltip" title="{% trans "Edit" %}" href="#">\
-                                <i class="icon-edit icon-white"></i>\
-                            </a>\
-                            <a class="item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">\
-                                <i class="icon-remove icon-white"></i>\
-                            </a>\
-                        </td>');
+                            $row.append('\
+                            <td>\
+                                <a rel="tooltip" title="{% trans "View" %}" href="/gear/' + response.gear_ids + '">\
+                                    <i class="icon-eye-open icon-white"></i>\
+                                </a>\
+                                <a rel="tooltip" title="{% trans "Edit" %}" href="/commercial/products/edit/' + response.id + '">\
+                                    <i class="icon-edit icon-white"></i>\
+                                </a>\
+                                <a class="item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">\
+                                    <i class="icon-remove icon-white"></i>\
+                                </a>\
+                            </td>');
 
-                        $table.append($row);
+                            $table.append($row);
+
+                            // Add this to the merge_with field.
+                            $merge_with.append($('<option/>')
+                                .val(response.id)
+                                .text(response.name)
+                            );
+                        }
                     } else {
                         $form.find('.form-content').html(response.form);
                         reset_form_vars();
@@ -213,6 +259,8 @@
                 $opt.text('---------');
                 $names.append($opt);
 
+                $merge_with.val(0);
+
                 $form.attr('action', '{% url commercial_products_claim 0 %}');
 
                 $form.find('.control-group.error').removeClass('error');
@@ -220,20 +268,98 @@
                 reset_form_btn();
             });
 
+            $('#remove-commercial-products-modal').find('form').submit(function() {
+                var promises = [];
+                var $modal = $(this).closest('.modal');
+
+                $(this).find('input:checkbox:checked').each(function() {
+                    promises.push(
+                        $.ajax({
+                            url: '/commercial/products/unclaim/' + $(this).val() + '/',
+                            dataType: 'json',
+                            timeout: 10000,
+                            cache: false
+                        }));
+                });
+
+                $.when.apply($, promises).done(function(result) {
+                    var l = arguments.length,
+                        response;
+
+                    if (promises.length === 1) {
+                        response = $.parseJSON(arguments[2].responseText);
+                    } else {
+                        // We only care about the last one.
+                        response = $.parseJSON(arguments[l - 1][2].responseText);
+                    }
+
+                    $table_row = $('tr[data-id=' + response.commercial_id + ']');
+                    if (response.commercial_was_removed) {
+                        $table_row.remove();
+                        $merge_with.find('option[value=' + response.commercial_id + ']').remove();
+                    } else {
+                        $table_row.find('td.gear-ids').html(response.claimed_gear_ids_links);
+                        $table_row.find('td.gear-ids').attr('data-gear-ids', response.claimed_gear_ids);
+                    }
+                    
+                    $modal.modal('hide');
+                });
+
+                return false;
+            });
+
             $('.item-remove').live('click', function() {
                 var $link = $(this);
                 var $table_row = $(this).closest('tr');
-                var id = $table_row.find('td.product-id').text();
-                $.ajax({
-                    url: '/commercial/products/unclaim/' + id + '/',
-                    dataType: 'json',
-                    timeout: 10000,
-                    cache: false,
-                    success: function(data, status, request) {
-                        $table_row.find('a[rel=tooltip]').tooltip('hide');
-                        $table_row.remove();
-                    }
-                });
+                var ids = $table_row.find('td.gear-ids').attr('data-gear-ids');
+                var id_list = ids.split(',');
+
+                if (id_list.length == 1) {
+                    $.ajax({
+                        url: '/commercial/products/unclaim/' + id_list[0] + '/',
+                        dataType: 'json',
+                        timeout: 10000,
+                        cache: false,
+                        success: function(data, status, request) {
+                            $table_row.find('a[rel=tooltip]').tooltip('hide');
+                            $table_row.remove();
+                            $merge_with.find('option[value=' + data.commercial_id + ']').remove();
+                        }
+                    });
+                 } else {
+                    var $modal = $('#remove-commercial-products-modal');
+                    var $form_content = $modal.find('.form-content');
+                    $modal.modal('show');
+
+                    $.ajax({
+                        url: '/gear/by-ids/' + ids + '/',
+                        dataType: 'json',
+                        timeout: 10000,
+                        cache: false,
+                        success: function(data, status, request) {
+                            $form_content.html('');
+                            for (var i = 0; i < data.length; i++) {
+                                var $template = $('\
+                                    <div class="control-group">\
+                                        <div class="controls">\
+                                            <label class="checkbox">\
+                                                <input type="checkbox" />' + '(' + data[i][0] + ') ' + data[i][1] + ' ' + data[i][2] + '\
+                                            </label>\
+                                        </div>\
+                                    </div>');
+
+                                var $input = $template.find('input');
+                                $input
+                                    .attr('id', 'id_remove_' + data[i][0])
+                                    .attr('name', 'remove_' + data[i][0])
+                                    .val(data[i][0]);
+
+                                $form_content.append($template);
+                                $input.uniform();
+                            }
+                        }
+                    });
+                 }
             });
         });
     </script>

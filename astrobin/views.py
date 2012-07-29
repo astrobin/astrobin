@@ -1851,13 +1851,13 @@ def user_page_commercial_products(request, username):
 
     return object_list(
         request,
-        queryset = CommercialGear.objects.filter(producer = user),
+        queryset = CommercialGear.objects.filter(producer = user).exclude(gear = None),
         template_name = 'user/profile/commercial/products.html',
         template_object_name = 'commercial_gear',
         paginate_by = 50,
         extra_context = {
             'user': user,
-            'claim_commercial_gear_form': ClaimCommercialGearForm(),
+            'claim_commercial_gear_form': ClaimCommercialGearForm(user = request.user),
         },
      )
 
@@ -3738,15 +3738,24 @@ def gear_by_make(request, make):
     if klass != Gear:
         klass = CLASS_LOOKUP[klass]
 
-    gear = klass.objects.filter(make = ret['make'])
+    gear = klass.objects.filter(make = ret['make']).order_by('name')
 
     if unclaimed == 'true':
-        gear = gear.filter(commercialgear = None)
+        gear = gear.filter(commercial = None)
 
     ret['gear'] = [{'id': x.id, 'name': x.name} for x in gear]
 
     return HttpResponse(
         simplejson.dumps(ret),
+        mimetype = 'application/javascript')
+
+
+@require_GET
+def gear_by_ids(request, ids):
+    filters = reduce(operator.or_, [Q(**{'id': x}) for x in ids.split(',')])
+    gear = [[str(x.id), x.make, x.name] for x in Gear.objects.filter(filters)]
+    return HttpResponse(
+        simplejson.dumps(gear),
         mimetype = 'application/javascript')
 
 
@@ -4060,9 +4069,12 @@ def commercial_products_claim(request, id):
             simplejson.dumps(response_dict),
             mimetype = 'application/javascript')
 
-    form = ClaimCommercialGearForm(data = request.POST)
+    form = ClaimCommercialGearForm(data = request.POST, user = request.user)
     try:
         gear = Gear.objects.get(id = id)
+        # Can't claim something that's already claimed:
+        if gear.commercial:
+            return error(form)
     except Gear.DoesNotExist:
         return error(form);
 
@@ -4070,23 +4082,39 @@ def commercial_products_claim(request, id):
     # If we don't, it won't validate because the selected option, which was
     # added via AJAX, is not among those available.
     form.fields['name'].choices += [(gear.id, gear.name)]
+    if request.POST.get('merge_with'):
+        merge_with = CommercialGear.objects.get(id = int(request.POST.get('merge_with')))
+        proper_name = merge_with.proper_name if merge_with.proper_name else merge_with.gear_set.all()[0].name
+        form.fields['merge_with'].choices += [(merge_with.id, proper_name)]
 
     if not form.is_valid():
         return error(form)
 
-    commercial_gear = CommercialGear(
-        product = gear,
-        producer = request.user)
-    commercial_gear.save()
+    if form.cleaned_data['merge_with'] != '':
+        commercial_gear = CommercialGear.objects.get(id = int(form.cleaned_data['merge_with']))
+    else:
+        commercial_gear = CommercialGear(
+            producer = request.user,
+            proper_name = gear.name,
+        )
+        commercial_gear.save()
 
+    gear.commercial = commercial_gear
+    gear.save()
+
+    claimed_gear = Gear.objects.filter(commercial = commercial_gear).values_list('id', flat = True)
     return HttpResponse(
         simplejson.dumps({
             'success': True,
-            'id': gear.id,
+            'id': commercial_gear.id,
+            'claimed_gear_id': gear.id,
+            'gear_ids': u','.join(str(x) for x in claimed_gear),
+            'gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
             'make': gear.make,
             'name': gear.name,
             'owners': gear_owners(gear),
             'images': gear_images(gear),
+            'is_merge': form.cleaned_data['merge_with'] != '',
         }),
         mimetype = 'application/javascript')
 
@@ -4101,13 +4129,85 @@ def commercial_products_unclaim(request, id):
     except Gear.DoesNotExist:
         return HttpResponseForbidden()
 
-    commercial_gear = CommercialGear.objects.get(
-        product = gear,
-        producer = request.user).delete()
+    commercial = gear.commercial
+    commercial_id = commercial.id
+    commercial_was_removed = False
 
-    return ajax_success()
+    if commercial is None or commercial.producer != request.user:
+        return HttpResponseForbidden()
+
+    all_gear = Gear.objects.filter(commercial = commercial)
+    if all_gear.count() == 1:
+        commercial.delete()
+        commercial_was_removed = True
+
+    gear.commercial = None
+    gear.save()
+
+    if commercial_was_removed:
+        claimed_gear = []
+    else:
+        claimed_gear = Gear.objects.filter(commercial = commercial).values_list('id', flat = True)
+
+    return HttpResponse(
+        simplejson.dumps({
+            'success': True,
+            'gear_id': id,
+            'commercial_id': commercial_id,
+            'commercial_was_removed': commercial_was_removed,
+            'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
+            'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
+        }),
+        mimetype = 'application/javascript')
 
 
+@require_GET
+@login_required
+@user_passes_test(lambda u: user_is_producer(u))
+def commercial_products_edit(request, id):
+    product = get_object_or_404(CommercialGear, id = id)
+    if product.producer != request.user:
+        return HttpResponseForbidden()
+
+    form = CommercialGearForm(instance = product, user = request.user)
+
+    return render_to_response(
+        'commercial/products/edit.html',
+        {
+            'form': form,
+            'product': product,
+            'gear': Gear.objects.filter(commercial = product)[0],
+        },
+        context_instance = RequestContext(request))
+
+
+@require_POST
+@login_required
+@user_passes_test(lambda u: user_is_producer(u))
+def commercial_products_save(request, id):
+    product = get_object_or_404(CommercialGear, id = id)
+    if product.producer != request.user:
+        return HttpResponseForbidden()
+
+    form = CommercialGearForm(
+        data = request.POST,
+        instance = product,
+        user = request.user)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/commercial/products/edit/%i/?saved' % product.id)
+
+    return render_to_response(
+        'commercial/products/edit.html',
+        {
+            'form': form,
+            'product': product,
+            'gear': Gear.object.get(commercial = product),
+        },
+        context_instance = RequestContext(request))
+
+    
 @require_GET
 def comments(request):
     return object_list(

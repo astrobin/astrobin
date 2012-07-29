@@ -106,6 +106,8 @@ urlpatterns = patterns('',
 
     url(r'^commercial/products/claim/(?P<id>\d+)/$', views.commercial_products_claim, name='commercial_products_claim'),
     url(r'^commercial/products/unclaim/(?P<id>\d+)/$', views.commercial_products_unclaim, name='commercial_products_unclaim'),
+    url(r'^commercial/products/edit/(?P<id>\d+)/$', views.commercial_products_edit, name='commercial_products_edit'),
+    url(r'^commercial/products/save/(?P<id>\d+)/$', views.commercial_products_save, name='commercial_products_save'),
 
     url(r'^users/(?P<username>[\w.@+-]+)/favorites/$', views.user_page_favorites, name='user_page_favorites'),
     url(r'^users/(?P<username>[\w.@+-]+)/card/$', views.user_page_card, name='user_page_card'),
@@ -261,6 +263,7 @@ urlpatterns = patterns('',
     url(r'^gear/comment/delete/(?P<id>\d+)/$', views.gear_comment_delete, name='gear_comment_delete'),
     url(r'^gear/by-image/(?P<image_id>\d+)/$', views.gear_by_image, name='gear_by_image'),
     url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$', views.gear_by_make, name='gear_by_make'),
+    url(r'^gear/by-ids/(?P<ids>([0-9]+,?)+)/$', views.gear_by_ids, name='gear_by_ids'),
 
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
     url(r'^avatar/', include('avatar.urls')),
