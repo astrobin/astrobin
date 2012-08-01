@@ -196,7 +196,7 @@ class Gear(models.Model):
         return "%s %s" % (self.make, self.name)
 
     def attributes(self):
-        return [('make', None), ('name', None)]
+        return []
 
     def get_absolute_url(self):
         return '/gear/%i/' % self.id
@@ -268,9 +268,20 @@ class Gear(models.Model):
 
         super(Gear, self).save(*args, **kwargs)
 
+    def get_make(self):
+        if self.commercial and self.commercial.proper_make:
+            return self.commercial.proper_make
+        return self.make
+
+    def get_name(self):
+        if self.commercial and self.commercial.proper_name:
+            return self.commercial.proper_name
+        return self.name
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-updated',)
+
 
 class GearUserInfo(models.Model):
     gear = models.ForeignKey(
@@ -1845,6 +1856,22 @@ class CommercialGear(models.Model):
         verbose_name = _("Proper name"),
         help_text = _("Sometimes, product names are not written properly by the users. Write here the proper product name, not including the make/brand/producer/developer name.<br/>It is recommended that you try to group as many items as possible, so try to use a generic version of your product's name."),
     )
+
+    tagline = models.CharField(
+        max_length = 256,
+        null = True,
+        blank = True,
+        verbose_name = _("Tagline"),
+        help_text = _("A memorable phrase that will sum up this product, for marketing purposes."),
+    )
+
+    link = models.URLField(
+        max_length = 256,
+        null = True,
+        blank = True,
+        verbose_name = _("Link"),
+        help_text = _("The link to this product's page on your website."),
+     )
 
     description = models.TextField(
         null = True,

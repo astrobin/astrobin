@@ -1997,11 +1997,6 @@ p.small {
 *[rel="popover"] {
   position: relative;
 }
-.ui-tooltip,
-.qtip {
-  max-width: 400px;
-  min-width: 250px;
-}
 .ui-tooltip-default .ui-tooltip-titlebar,
 .ui-tooltip-default .ui-tooltip-content {
   background: #303030 url('../images/darker-panel-tile.png');
@@ -2359,4 +2354,17 @@ li.revisions {
   text-align: center;
   font-weight: bold;
   margin-top: 2px;
+}
+.gear-popover .thumbnail {
+  border: 0;
+}
+.gear-page h1 {
+  margin-bottom: 4px;
+}
+.gear-page h4 {
+  margin: 0;
+}
+.gear-page .commercial-link {
+  display: block;
+  margin-bottom: 8px;
 }

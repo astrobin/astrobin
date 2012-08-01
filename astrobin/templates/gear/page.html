@@ -5,230 +5,254 @@
 {% block title %}AstroBin - {% gear_name gear %}{% endblock %}
 
 {% block content %}
-    <h1>{% gear_name gear %}</h1>
+    <div class="gear-page">
+        <h1>{% gear_name gear %}</h1>
+        {% if gear.commercial and gear.commercial.tagline %}
+            <h4>{{gear.commercial.tagline}}</h4>
+        {% endif %}
+        {% if gear.commercial and gear.commercial.link %}
+            <a class="commercial-link" href="{{gear.commercial.link}}" target="_blank">{{gear.commercial.link}}</a>
+        {% endif %}
 
-    <div class="row">
-        <div class="span9">
-            {% if examples %}
-                <div class="well">
-                    <strong>{% trans "Some images" %}</strong>
-                    <a href="/search/?q={% gear_name gear %}{% search_form_query %}">
-                        {% trans "(view more)" %}
-                    </a>
-                </div>
-                {% image_list request examples 0 96 %}
-            {% endif %}
-
-            <div class="well"><strong>{% trans "Total images" %}</strong></div>
-            <div id="stats_total_images" class="plot" style="width:700px; height: 200px;">
-                <div class="loading">
-                    <p>{% trans "Please wait: the plot is loading..." %}</p>
-                    <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
-                </div>
-            </div>
-        </div>
-
-        <div class="span3">
-            {% if request.user.is_superuser %}
-                <div class="subtle-container">
-                    <a class="btn btn-primary" href="/admin/astrobin/gear/{{gear.id}}/">Edit</a>
-                </div>
-            {% endif %}
-            <div class="subtle-container">
-                <table class="table">
-                    <tr>
-                        <th>{% trans "Owners" %}</th>
-                        <td>{{owners_count}}</td>
-                    </tr>
-                    <tr>
-                        <th>{% trans "Images" %}</th>
-                        <td>{{images_count}}</td>
-                    </tr>
-                    <tr>
-                        <th>{% trans "Reviews" %}</th>
-                        <td>{{reviews|length}}</td>
-                    </tr>
-                     <tr>
-                        <th>{% trans "Comments" %}</th>
-                        <td>{{comments|length}}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="subtle-container">
-                <table class="table">
-                    <tr>
-                        <th>{% trans "Type" %}</th>
-                        <td>{% gear_type gear %}</td>
-                    </tr>
-                    {% for attribute in attributes %}
-                        {% if attribute.1 %}
-                            <tr>
-                                <th>{{attribute.0}}</th>
-                                <td>{{attribute.1}}{% if attribute.2 %} {{attribute.2|safe}}{% endif %}</td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="row section">
-        <div class="span6">
-            <h2>{% trans "Reviews" %}</h2>
-            <div class="reviews subtle-container">
-                <p>
-                    {% if request.user.is_authenticated %}
-                        {% blocktrans %}Please be fair, honest and polite when writing a review. Many people will read your review: all the users on AstroBin who own this piece of gear, will be notified of your review.{% endblocktrans %}
-                    {% else %}
-                        {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to write a review.{% endblocktrans %}
+        {% if gear.commercial %}
+            <div class="commercial">
+                <div class="row section">
+                    {% if gear.commercial.image %}
+                        {% with gear.commercial.image as image %}
+                        <div class="span8">
+                            <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{{image.original_ext}}"
+                                 alt="{{image.title|escape}}"/>
+                        </div>
+                        {% endwith %}
                     {% endif %}
-                </p>
-
-                {% for review in reviews %}
-                    <div id="r{{review.id}}" class="review">
-                        <div class="avatar">
-                            <a href="{% url user_page review.user %}">
-                                {% avatar review.user 32 %}
-                            </a>
-                        </div>
-
-                        <div class="meta">
-                            <a class="author" href="{% url user_page review.user %}">
-                                {{review.user}}
-                            </a>
-                            {{review.date_added|ago}}
-                        </div>
-
-                        <div class="content">
-                            {{review.content|markdown|linebreaks}}
-                        </div>
-
-                        <div class="score">
-                            <strong>{% trans "Rating" %}: {{review.score}}/5</strong>
+                    <div class="span4">
+                        <div class="subtle-container">
+                            <table class="table">
+                                <tr>
+                                    <th>{% trans "Type" %}</th>
+                                    <td>{% gear_type gear %}</td>
+                                </tr>
+                                {% for attribute in attributes %}
+                                    {% if attribute.1 %}
+                                        <tr>
+                                            <th>{{attribute.0}}</th>
+                                            <td>{{attribute.1}}{% if attribute.2 %} {{attribute.2|safe}}{% endif %}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                <tr>
+                                    <th>{% trans "Owners" %}</th>
+                                    <td>{{owners_count}}</td>
+                                </tr>
+                                <tr>
+                                    <th>{% trans "Images" %}</th>
+                                    <td>{{images_count}}</td>
+                                </tr>
+                                <tr>
+                                    <th>{% trans "Reviews" %}</th>
+                                    <td>{{reviews|length}}</td>
+                                </tr>
+                                 <tr>
+                                    <th>{% trans "Comments" %}</th>
+                                    <td>{{comments|length}}</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                {% empty %}
-                    <p class="empty">{% trans "There are no reviews yet." %}</p>
-                {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if gear.commercial.description %}
+        <div class="row section">
+            <div class="span8">
+                <div class="subtle-container">
+                    {{gear.commercial.description|markdown|linebreaks}}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="span12">
+                {% if examples %}
+                    <div class="well">
+                        <strong>{% trans "Some images" %}</strong>
+                        <a href="/search/?q={% gear_name gear %}{% search_form_query %}">
+                            {% trans "(view more)" %}
+                        </a>
+                    </div>
+                    {% image_list request examples 0 90 %}
+                {% endif %}
+
+                <div class="well"><strong>{% trans "Total images" %}</strong></div>
+                <div id="stats_total_images" class="plot" style="width:940px; height: 200px;">
+                    <div class="loading">
+                        <p>{% trans "Please wait: the plot is loading..." %}</p>
+                        <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                    </div>
+                </div>
             </div>
 
-            {% if request.user.is_authenticated %}
-                <div class="subtle-container">
-                    <h3>{% trans "Add your review" %}</h3>
-                    <form class="form-vertical review-form" method="post" action="{% url gear_review_save %}">
-                        {{review_form|as_bootstrap}}
-                        <input type="hidden" name="gear_id" value="{{gear.id}}" />
-                        <input type="submit" class="btn btn-mini btn-primary" value="{% trans "Submit" %} &rarr;" />
-                        <input type="reset" class="btn btn-mini" value="{% trans "Cancel" %}" />
-                    </form>
-                </div>
-            {% endif %}
         </div>
 
-        <div class="span6">
-            <h2>{% trans "Comments" %}</h2>
+        <div class="row section">
+            <div class="span6">
+                <h2>{% trans "Reviews" %}</h2>
+                <div class="reviews subtle-container">
+                    <p>
+                        {% if request.user.is_authenticated %}
+                            {% blocktrans %}Please be fair, honest and polite when writing a review. Many people will read your review: all the users on AstroBin who own this piece of gear, will be notified of your review.{% endblocktrans %}
+                        {% else %}
+                            {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to write a review.{% endblocktrans %}
+                        {% endif %}
+                    </p>
 
-            <div class="comments subtle-container">
-                <p>
-                    {% if request.user.is_authenticated %}
-                        {% blocktrans %}Use this space to start a discussion, leave a comment or ask a question about this piece of gear. All the users on AstroBin who own one, will be notified and can join the discussion.{% endblocktrans %}
-                    {% else %}
-                        {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
-                     {% endif %}
-                </p>
+                    {% for review in reviews %}
+                        <div id="r{{review.id}}" class="review">
+                            <div class="avatar">
+                                <a href="{% url user_page review.user %}">
+                                    {% avatar review.user 32 %}
+                                </a>
+                            </div>
 
-                {% if comments %}
-                    {% load mptt_tags %}
-                    {% recursetree comments %}
-                        <div style="margin-left: {{node.get_level|add:node.get_level}}em">
-                            <div id="c{{node.id}}" class="comment">
-                                <div class="avatar">
-                                    <a href="{% url user_page node.author %}">
-                                        {% avatar node.author 32 %}
-                                    </a>
-                                </div>
-                                <div class="meta">
-                                    <a class="author" href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
-                                </div>
-                                <div class="content{% if node.is_deleted %} deleted{% endif %}">
-                                    {% if node.is_deleted %}
-                                        <p>{% trans "(comment deleted)" %}</p>
-                                    {% else %}
-                                        {{node.comment|markdown|linebreaks}}
-                                    {% endif %}
-                                </div>
-                                <div class="links">
-                                    <a class="permalink" href="{% url gear_page gear.id %}#c{{node.id}}">{% trans "Link" %}</a>
-                                    {% if user.is_authenticated %}
-                                        {% if user == node.author %}
-                                            <a class="delete" href="#">
-                                                {% if node.is_deleted %}
-                                                    {% trans "Undelete" %}
-                                                {% else %}
-                                                    {% trans "Delete" %}
-                                                {% endif %}
-                                            </a>
-                                            <a class="edit" href="#">{% trans "Edit" %}</a>
-                                        {% endif %}
-                                        <a class="reply" href="#">{% trans "Reply" %}</a>
-                                    {% endif %}
-                                </div>
-                                <form action="{% url image_comment_save %}" method="post">
-                                    {{comment_form.as_p}}
-                                    <input type="hidden" name="author" value="{{user.id}}" />
-                                    <input type="hidden" name="gear_id" value="{{gear.id}}" />
-                                    <input type="hidden" name="parent_id" value="{{node.id}}" />
-                                    <input type="hidden" name="level" value="{{node.get_level}}" />
-                                    <p>
-                                        <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
-                                        <input class="btn btn-mini cancel" type="reset" value="{% trans "Cancel" %}" />
-                                        <span class="formatting-help">
-                                            <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-                                        </span>
-                                        <span class="loader">
-                                            <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
-                                        </span>
-                                    </p>
-                                </form>
+                            <div class="meta">
+                                <a class="author" href="{% url user_page review.user %}">
+                                    {{review.user}}
+                                </a>
+                                {{review.date_added|ago}}
+                            </div>
+
+                            <div class="content">
+                                {{review.content|markdown|linebreaks}}
+                            </div>
+
+                            <div class="score">
+                                <strong>{% trans "Rating" %}: {{review.score}}/5</strong>
                             </div>
                         </div>
-                        {% if not node.is_leaf_node %}
-                            {{children}}
-                        {% endif %}
-                    {% endrecursetree %}
-                {% else %}
-                    <p class="no-comments-yet">
-                        {% blocktrans %}There are no comments yet.{% endblocktrans %}
-                    </p>
+                    {% empty %}
+                        <p class="empty">{% trans "There are no reviews yet." %}</p>
+                    {% endfor %}
+                </div>
+
+                {% if request.user.is_authenticated %}
+                    <div class="subtle-container">
+                        <h3>{% trans "Add your review" %}</h3>
+                        <form class="form-vertical review-form" method="post" action="{% url gear_review_save %}">
+                            {{review_form|as_bootstrap}}
+                            <input type="hidden" name="gear_id" value="{{gear.id}}" />
+                            <input type="submit" class="btn btn-mini btn-primary" value="{% trans "Submit" %} &rarr;" />
+                            <input type="reset" class="btn btn-mini" value="{% trans "Cancel" %}" />
+                        </form>
+                    </div>
                 {% endif %}
             </div>
 
-            {% if request.user.is_authenticated %}
-                <div class="subtle-container">
-                    <div class="top-level-form">
-                        <h3>{% trans "Start a discussion, leave a comment or ask a question." %}</h3>
-                        <form class="form-horizontal" action="{% url gear_comment_save %}" method="post">
-                            {{comment_form|as_bootstrap}}
-                            <input type="hidden" name="author" value="{{request.user.id}}" />
-                            <input type="hidden" name="gear_id" value="{{gear.id}}" />
-                            <input type="hidden" name="parent_id" value="" />
-                            <input type="hidden" name="level" value="0" />
-                            <div>
-                                <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Submit" %} &rarr;" />
-                                <span class="help-inline">
-                                    <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-                                </span>
-                                <span class="loader">
-                                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
-                                </span>
+            <div class="span6">
+                <h2>{% trans "Comments" %}</h2>
+
+                <div class="comments subtle-container">
+                    <p>
+                        {% if request.user.is_authenticated %}
+                            {% blocktrans %}Use this space to start a discussion, leave a comment or ask a question about this piece of gear. All the users on AstroBin who own one, will be notified and can join the discussion.{% endblocktrans %}
+                        {% else %}
+                            {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
+                         {% endif %}
+                    </p>
+
+                    {% if comments %}
+                        {% load mptt_tags %}
+                        {% recursetree comments %}
+                            <div style="margin-left: {{node.get_level|add:node.get_level}}em">
+                                <div id="c{{node.id}}" class="comment">
+                                    <div class="avatar">
+                                        <a href="{% url user_page node.author %}">
+                                            {% avatar node.author 32 %}
+                                        </a>
+                                    </div>
+                                    <div class="meta">
+                                        <a class="author" href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
+                                    </div>
+                                    <div class="content{% if node.is_deleted %} deleted{% endif %}">
+                                        {% if node.is_deleted %}
+                                            <p>{% trans "(comment deleted)" %}</p>
+                                        {% else %}
+                                            {{node.comment|markdown|linebreaks}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="links">
+                                        <a class="permalink" href="{% url gear_page gear.id %}#c{{node.id}}">{% trans "Link" %}</a>
+                                        {% if user.is_authenticated %}
+                                            {% if user == node.author %}
+                                                <a class="delete" href="#">
+                                                    {% if node.is_deleted %}
+                                                        {% trans "Undelete" %}
+                                                    {% else %}
+                                                        {% trans "Delete" %}
+                                                    {% endif %}
+                                                </a>
+                                                <a class="edit" href="#">{% trans "Edit" %}</a>
+                                            {% endif %}
+                                            <a class="reply" href="#">{% trans "Reply" %}</a>
+                                        {% endif %}
+                                    </div>
+                                    <form action="{% url image_comment_save %}" method="post">
+                                        {{comment_form.as_p}}
+                                        <input type="hidden" name="author" value="{{user.id}}" />
+                                        <input type="hidden" name="gear_id" value="{{gear.id}}" />
+                                        <input type="hidden" name="parent_id" value="{{node.id}}" />
+                                        <input type="hidden" name="level" value="{{node.get_level}}" />
+                                        <p>
+                                            <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
+                                            <input class="btn btn-mini cancel" type="reset" value="{% trans "Cancel" %}" />
+                                            <span class="formatting-help">
+                                                <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+                                            </span>
+                                            <span class="loader">
+                                                <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
+                                            </span>
+                                        </p>
+                                    </form>
+                                </div>
                             </div>
-                        </form>
-                    </div> <!-- top-level-form -->
-                </div> <!-- subtle-container -->
-            {% endif %}
+                            {% if not node.is_leaf_node %}
+                                {{children}}
+                            {% endif %}
+                        {% endrecursetree %}
+                    {% else %}
+                        <p class="no-comments-yet">
+                            {% blocktrans %}There are no comments yet.{% endblocktrans %}
+                        </p>
+                    {% endif %}
+                </div>
+
+                {% if request.user.is_authenticated %}
+                    <div class="subtle-container">
+                        <div class="top-level-form">
+                            <h3>{% trans "Start a discussion, leave a comment or ask a question." %}</h3>
+                            <form class="form-horizontal" action="{% url gear_comment_save %}" method="post">
+                                {{comment_form|as_bootstrap}}
+                                <input type="hidden" name="author" value="{{request.user.id}}" />
+                                <input type="hidden" name="gear_id" value="{{gear.id}}" />
+                                <input type="hidden" name="parent_id" value="" />
+                                <input type="hidden" name="level" value="0" />
+                                <div>
+                                    <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Submit" %} &rarr;" />
+                                    <span class="help-inline">
+                                        <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+                                    </span>
+                                    <span class="loader">
+                                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
+                                    </span>
+                                </div>
+                            </form>
+                        </div> <!-- top-level-form -->
+                    </div> <!-- subtle-container -->
+                {% endif %}
+            </div>
         </div>
-    </div>
+    </div> <!-- gear-page -->
 {% endblock %}
 
 {% block extra_js %}

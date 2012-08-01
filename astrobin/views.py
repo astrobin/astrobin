@@ -128,7 +128,7 @@ def get_or_create_location(prop, value):
 
 def jsonDump(all):
     if len(all) > 0:
-        return simplejson.dumps([{'id': i.id, 'name': i.name, 'complete': is_gear_complete(i.id)} for i in all])
+        return simplejson.dumps([{'id': i.id, 'name': i.get_name(), 'complete': is_gear_complete(i.id)} for i in all])
     else:
         return []
 
@@ -589,10 +589,10 @@ def image_detail(request, id, r):
         subjects = [xapian_escape(s.mainId) for s in image.subjects.all()]
         related_images = related_images.filter(SQ(subjects__in=subjects))
     elif related == 'rel_imaging_telescope':
-        telescopes = [xapian_escape(t.name) for t in image.imaging_telescopes.all()]
+        telescopes = [xapian_escape(t.get_name()) for t in image.imaging_telescopes.all()]
         related_images = related_images.filter(SQ(imaging_telescopes__in=telescopes))
     elif related == 'rel_imaging_camera':
-        cameras = [xapian_escape(c.name) for c in image.imaging_cameras.all()]
+        cameras = [xapian_escape(c.get_name()) for c in image.imaging_cameras.all()]
         related_images = related_images.filter(SQ(imaging_cameras__in=cameras))
 
     related_images = related_images.exclude(django_id=id).order_by('-uploaded')
@@ -650,7 +650,7 @@ def image_detail(request, id, r):
             if a.number and a.duration:
                 f = ""
                 if a.filter:
-                    f = "%s " % a.filter.name
+                    f = "%s " % a.filter.get_name()
                     if a.is_synthetic:
                         f += "(S) "
                 f += '%sx%s"' % (a.number, a.duration)
@@ -666,7 +666,7 @@ def image_detail(request, id, r):
 
             for i in ['darks', 'flats', 'flat_darks', 'bias']:
                 if a.filter and getattr(a, i):
-                    dsa_data[i].append("%s: %s" % (a.filter.name, getattr(a, i)))
+                    dsa_data[i].append("%s: %s" % (a.filter.get_name(), getattr(a, i)))
                 elif getattr(a, i):
                     dsa_data[i].append(getattr(a, i))
 
@@ -2130,9 +2130,9 @@ def user_profile_edit_gear(request):
     response_dict = {
         'initial': 'initial' in request.GET,
         'all_gear_makes': simplejson.dumps(
-            uniq([x.make for x in Gear.objects.exclude(make = None).exclude(make = '')])),
+            uniq([x.get_make() for x in Gear.objects.exclude(make = None).exclude(make = '')])),
         'all_gear_names': simplejson.dumps(
-            uniq([x.name for x in Gear.objects.exclude(name = None).exclude(name = '')])),
+            uniq([x.get_name() for x in Gear.objects.exclude(name = None).exclude(name = '')])),
     }
 
     prefill = {}
@@ -2243,7 +2243,7 @@ def user_profile_save_gear(request):
             try:
                 id = float(name)
                 gear_item = v[0].objects.get(id = id)
-                automerge = GearAutoMerge.objects.filter(label = gear_item.name)
+                automerge = GearAutoMerge.objects.filter(label = gear_item.get_name())
                 if automerge:
                     gear_item = v[0].objects.get(gear_ptr__pk = automerge[0].master.pk)
             except ValueError:
@@ -3254,7 +3254,7 @@ def save_gear_details(request):
         'Accessory': AccessoryEditNewForm,
     }
 
-    if gear and gear.name != '':
+    if gear and gear.get_name() != '':
         form_lookup = {
             'Telescope': TelescopeEditForm,
             'Mount': MountEditForm,
@@ -3321,8 +3321,8 @@ def save_gear_details(request):
     response_dict = {
         'success': True,
         'id': gear.id,
-        'make': gear.make,
-        'name': gear.name,
+        'make': gear.get_make(),
+        'name': gear.get_name(),
         'alias': alias,
         'complete': is_gear_complete(gear.id),
     }
@@ -3442,6 +3442,8 @@ def gear_popover_ajax(request, id):
             'gear': gear,
             'follows': follows,
             'is_authenticated': request.user.is_authenticated(),
+            's3_url': settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         })
 
     response_dict = {
@@ -3553,7 +3555,9 @@ def gear_page(request, id):
         template_name = 'gear/page.html',
         template_object_name = 'gear',
         extra_context = {
-            'examples': all_images.order_by('-rating_score')[:21],
+            's3_url': settings.S3_URL,
+            'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
+            'examples': all_images.order_by('-rating_score')[:30],
             'small_size': settings.SMALL_THUMBNAIL_SIZE,
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
             'reviews': ReviewedItem.objects.filter(gear = gear),
@@ -3744,7 +3748,7 @@ def gear_by_make(request, make):
     if unclaimed == 'true':
         gear = gear.filter(commercial = None)
 
-    ret['gear'] = [{'id': x.id, 'name': x.name} for x in gear]
+    ret['gear'] = [{'id': x.id, 'name': x.get_name()} for x in gear]
 
     return HttpResponse(
         simplejson.dumps(ret),
@@ -3754,7 +3758,7 @@ def gear_by_make(request, make):
 @require_GET
 def gear_by_ids(request, ids):
     filters = reduce(operator.or_, [Q(**{'id': x}) for x in ids.split(',')])
-    gear = [[str(x.id), x.make, x.name] for x in Gear.objects.filter(filters)]
+    gear = [[str(x.id), x.get_make(), x.get_name()] for x in Gear.objects.filter(filters)]
     return HttpResponse(
         simplejson.dumps(gear),
         mimetype = 'application/javascript')
@@ -3769,7 +3773,7 @@ def get_makes_by_type(request, klass):
     from gear import CLASS_LOOKUP
     from utils import unique_items
 
-    ret['makes'] = unique_items([x.make for x in CLASS_LOOKUP[klass].objects.exclude(make = '').exclude(make = None)])
+    ret['makes'] = unique_items([x.get_make() for x in CLASS_LOOKUP[klass].objects.exclude(make = '').exclude(make = None)])
     return HttpResponse(
         simplejson.dumps(ret),
         mimetype = 'application/javascript')
@@ -4082,10 +4086,10 @@ def commercial_products_claim(request, id):
     # We need to add the choice to the field so that the form will validate.
     # If we don't, it won't validate because the selected option, which was
     # added via AJAX, is not among those available.
-    form.fields['name'].choices += [(gear.id, gear.name)]
+    form.fields['name'].choices += [(gear.id, gear.get_name())]
     if request.POST.get('merge_with'):
         merge_with = CommercialGear.objects.get(id = int(request.POST.get('merge_with')))
-        proper_name = merge_with.proper_name if merge_with.proper_name else merge_with.gear_set.all()[0].name
+        proper_name = merge_with.proper_name if merge_with.proper_name else merge_with.gear_set.all()[0].get_name()
         form.fields['merge_with'].choices += [(merge_with.id, proper_name)]
 
     if not form.is_valid():
@@ -4096,7 +4100,7 @@ def commercial_products_claim(request, id):
     else:
         commercial_gear = CommercialGear(
             producer = request.user,
-            proper_name = gear.name,
+            proper_name = gear.get_name(),
         )
         commercial_gear.save()
 
@@ -4111,8 +4115,8 @@ def commercial_products_claim(request, id):
             'claimed_gear_id': gear.id,
             'gear_ids': u','.join(str(x) for x in claimed_gear),
             'gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
-            'make': gear.make,
-            'name': gear.name,
+            'make': gear.get_make(),
+            'name': gear.get_name(),
             'owners': gear_owners(gear),
             'images': gear_images(gear),
             'is_merge': form.cleaned_data['merge_with'] != '',
@@ -4232,7 +4236,7 @@ def commercial_products_save(request, id):
         {
             'form': form,
             'product': product,
-            'gear': Gear.object.get(commercial = product),
+            'gear': Gear.objects.filter(commercial = product)[0],
         },
         context_instance = RequestContext(request))
 
