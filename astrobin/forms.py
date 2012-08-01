@@ -870,4 +870,3 @@ class CommercialGearForm(forms.ModelForm):
         super(CommercialGearForm, self).__init__(**kwargs)
         self.fields['image'].queryset = Image.objects.filter(user = user, is_stored = True, subject_type = 500)
 
-

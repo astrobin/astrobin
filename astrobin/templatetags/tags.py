@@ -494,11 +494,7 @@ def gear_alias(gear, user):
 
 @register.simple_tag
 def gear_name(gear):
-    if gear.make and gear.make.lower() in gear.name.lower():
-        return gear.name
-    if not gear.make or gear.make == '':
-        return gear.name
-    return "%s %s" % (gear.make, gear.name)
+    return "%s %s" % (gear.get_make(), gear.get_name())
 
 
 @register.simple_tag
