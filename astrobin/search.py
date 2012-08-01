@@ -13,9 +13,9 @@ from templatetags.tags import gear_name
 import operator
 import unicodedata
 
-class ImageSearchView(SearchView):
+class SearchView(SearchView):
     def __name__(self):
-        return 'ImageSearchView'
+        return 'SearchView'
 
     def get_results(self):
         q = self.request.GET.get('q')
@@ -27,7 +27,7 @@ class ImageSearchView(SearchView):
             pass
 
         self.query = q
-        sqs = super(ImageSearchView, self).get_results()
+        sqs = super(SearchView, self).get_results()
 
         ssms = self.request.GET.get('ssms')
         if ssms:

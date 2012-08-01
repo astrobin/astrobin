@@ -25,7 +25,7 @@ admin.autodiscover()
 from astrobin import views
 from astrobin import lookups
 from astrobin.models import Image
-from astrobin.search import ImageSearchView
+from astrobin.search import SearchView
 from astrobin.forms import AdvancedSearchForm
 
 from tastypie.api import Api
@@ -66,7 +66,7 @@ urlpatterns = patterns('',
     url(r'^promote/(?P<id>\d+)/$', views.image_promote, name='image_promote'),
     url(r'^demote/(?P<id>\d+)/$', views.image_demote, name='image_demote'),
 
-    url(r'^search/', ImageSearchView(form_class=AdvancedSearchForm), name='haystack_search'),
+    url(r'^search/', SearchView(form_class=AdvancedSearchForm), name='haystack_search'),
 
        (r'^accounts/', include('registration.urls')),
 

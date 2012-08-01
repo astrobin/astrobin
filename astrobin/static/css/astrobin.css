@@ -2368,3 +2368,55 @@ li.revisions {
   display: block;
   margin-bottom: 8px;
 }
+.user-business-card,
+.gear-business-card {
+  margin-bottom: 4px;
+  padding: 8px;
+  border: 1px dashed #505050;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  position: relative;
+  height: 182px;
+  width: 182px;
+  margin: 0;
+  padding: 0;
+}
+.user-business-card .header,
+.gear-business-card .header {
+  background: #303030 url('../images/darker-panel-tile.png');
+  height: 22px;
+  width: 174px;
+  padding: 8px 4px 0;
+  font-size: 110%;
+  font-weight: bold;
+}
+.user-business-card .avatar,
+.gear-business-card .avatar {
+  position: absolute;
+  top: 38px;
+  left: 8px;
+  width: 83px;
+}
+.user-business-card .quick-data,
+.gear-business-card .quick-data {
+  position: absolute;
+  top: 38px;
+  left: 99px;
+}
+.user-business-card .quick-data th,
+.gear-business-card .quick-data th {
+  padding: 4px 4px 4px 0;
+}
+.user-business-card .quick-data td,
+.gear-business-card .quick-data td {
+  padding: 4px;
+}
+.user-business-card .data,
+.gear-business-card .data {
+  position: absolute;
+  top: 128px;
+  left: 8px;
+  font-size: 82%;
+  width: 166px;
+}

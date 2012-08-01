@@ -68,7 +68,16 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
-    
+
+                    {% with form.search_type as field %}
+                    <p{% if field.errors %} class="error"{% endif %}>
+                            {{field.errors}}
+                            {{field.label_tag}}
+                            {{field}}
+                            <span class="helptext">{{field.help_text}}</span>
+                    </p>
+                    {% endwith %}
+   
                     {% with form.solar_system_main_subject as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -77,6 +86,8 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
+
+                    <input class="btn btn-primary search-button" type="submit" value="{% trans "Search" %} &rarr;" />
                 </div>
             </div>
     

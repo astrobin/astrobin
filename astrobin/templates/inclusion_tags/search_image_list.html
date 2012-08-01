@@ -1,69 +1,180 @@
 {% load i18n %}
 {% load tags %}
+{% load avatar_tags %}
+
+{% if multiple %}
+<em>{% blocktrans %}This search found results of multiple types. If you want, you can refine your search using the <strong>Search type</strong> field in the <strong>Basic criteria</strong> box.{% endblocktrans %}</em>
+{% endif %}
+
+{% if gear_list %}
+<h2>{% trans "Gear" %}</h2>
+
+<ul class="thumbnails astrobin-thumbnails">
+{% for search_result in gear_list %}
+    {% if search_result.object.id %}
+        <li class="thumbnail astrobin-thumbnail">
+            <div class="gear-business-card">
+                <div class="header">
+                    <i class="icon-cog icon-white"></i>
+                    <a href="{% url gear_page search_result.object.id %}">
+                        {% if search_result.object.make %}{{search_result.object.make}}{% endif %}
+                        {{search_result.object.name}}
+                    </a>
+                </div>
+                {% if search_result.object.commercial and search_result.object.commercial.image  %}
+                    {% with search_result.object.commercial.image as image %}
+                        <div class="avatar">
+                            <a href="{% url gear_page search_result.object.id %}">
+                                <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}" alt="{{image.title|escape}}" />
+                            </a>
+                        </div>
+                    {% endwith %}
+                {% endif %}
+                <div class="quick-data">
+                    <table class="table">
+                        <tr>
+                            <th><i class="icon-time icon-white" rel="tooltip" title="{% trans "Integration" %}"></i></th>
+                            <td>{{search_result.integration|floatformat}}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="icon-star icon-white" rel="tooltip" title="{% trans "Votes" %}"></i></th>
+                            <td>{{search_result.votes}}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Favorites" %}"></i></th>
+                            <td>{{search_result.favorited}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="data">
+                    {% trans "Images" %}: <strong>{{search_result.images}}</strong><br/>
+                    {% trans "Comments" %}: <strong>{{search_result.comments}}</strong><br/>
+                    {% trans "Views" %}: <strong>{{search_result.views}}</strong>.
+                </div>
+            </div>
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if user_list %}
+<h2>{% trans "Users" %}</h2>
+<p>
+    <em>{% blocktrans %}If you searched for a gear item, the following users own one, or have imaged with one.{% endblocktrans %}</em>
+</p>
+
+<ul class="thumbnails astrobin-thumbnails">
+{% for search_result in user_list %}
+    {% if search_result.object.id %}
+        <li class="thumbnail astrobin-thumbnail">
+            <div class="user-business-card">
+                <div class="header">
+                    <i class="icon-user icon-white"></i>
+                    <a href="{% url user_page search_result.object.username %}">
+                        {{search_result.object.username}}
+                    </a>
+                </div>
+                <div class="avatar">
+                    <a href="{% url user_page search_result.object.username %}">
+                        {% avatar search_result.object 83 %}
+                    </a>
+                </div>
+                <div class="quick-data">
+                    <table class="table">
+                        <tr>
+                            <th><i class="icon-time icon-white" rel="tooltip" title="{% trans "Integration" %}"></i></th>
+                            <td>{{search_result.integration|floatformat}}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="icon-star icon-white" rel="tooltip" title="{% trans "Votes" %}"></i></th>
+                            <td>{{search_result.votes}}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Favorites" %}"></i></th>
+                            <td>{{search_result.favorited}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="data">
+                    {% trans "Date joined" %}: <strong>{{search_result.object.date_joined|ago}}</strong><br/>
+                    {% trans "Images" %}: <strong>{{search_result.images}}</strong><br/>
+                    {% trans "Comments" %}: <strong>{{search_result.comments_written}}/{{search_result.comments}}</strong><br/>
+                    {% trans "Views" %}: <strong>{{search_result.views}}</strong>.
+                </div>
+            </div>
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if image_list %}
+<h2>{% trans "Images" %}</h2>
 
 <ul class="thumbnails astrobin-thumbnails">
 {% for search_result in image_list %}
     {% if search_result.object.id %}
-    <li class="thumbnail astrobin-thumbnail">
-        <a href="{% url image_detail search_result.object.id %}">
-            <img src="http://{{s3_url}}/{{bucket_name}}/{% get_final_filename search_result.object %}_thumb.png"
-                 class="capty"
-                 id="#capty-content-{{search_result.object.id}}"
-                 alt="{{search_result.object.title|default:_("(no title)")}}"
-                 width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
-        </a>
-        <div class="capty-content" id="capty-content-{{search_result.object.id}}">
-            {% ifequal sort '-integration' %}
-                {% trans "Integration" %}: {{search_result.integration|seconds_to_hours}} {% trans "hours" %}
-            {% endifequal %}
+        <li class="thumbnail astrobin-thumbnail">
+            <a href="{% url image_detail search_result.object.id %}">
+                <img src="http://{{s3_url}}/{{bucket_name}}/{% get_final_filename search_result.object %}_thumb.png"
+                     class="capty"
+                     id="#capty-content-{{search_result.object.id}}"
+                     alt="{{search_result.object.title|default:_("(no title)")}}"
+                     width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
+            </a>
+            <div class="capty-content" id="capty-content-{{search_result.object.id}}">
+                {% ifequal sort '-integration' %}
+                    {% trans "Integration" %}: {{search_result.integration|seconds_to_hours}} {% trans "hours" %}
+                {% endifequal %}
 
-            {% ifequal sort '-rating' %}
-                {% trans "Rating" %}: {{search_result.rating|cut_decimals:2}} x {{search_result.votes}}
-            {% endifequal %}
+                {% ifequal sort '-rating' %}
+                    {% trans "Rating" %}: {{search_result.rating|cut_decimals:2}} x {{search_result.votes}}
+                {% endifequal %}
 
-            {% ifequal sort '-favorited' %}
-                {% with search_result.favorited as favorited_count %}
-                    {% if favorited_count > 0 %}
-                        {% blocktrans count counter=favorited_count %}Favorited one time{% plural %}Favorited {{counter}} times{% endblocktrans %}
-                    {% else %}
-                        {% trans "Never favorited" %}
-                    {% endif %}
+                {% ifequal sort '-favorited' %}
+                    {% with search_result.favorited as favorited_count %}
+                        {% if favorited_count > 0 %}
+                            {% blocktrans count counter=favorited_count %}Favorited one time{% plural %}Favorited {{counter}} times{% endblocktrans %}
+                        {% else %}
+                            {% trans "Never favorited" %}
+                        {% endif %}
+                    {% endwith %}
+                {% endifequal %}
+
+                {% ifequal sort '-uploaded' %}
+                    {{search_result.object.uploaded|ago}}
+                {% endifequal %}
+
+                {% ifequal sort '-acquired' %}
+                    {{search_result.last_acquisition_date}}
+                {% endifequal %}
+
+                {% ifequal sort '-views' %}
+                    {% with search_result.views as hit_count %}
+                        {% blocktrans count counter=hit_count|add:"0" %}Viewed one time{% plural %}Viewed {{counter}} times{% endblocktrans %}
+                    {% endwith %}
+                {% endifequal %}
+
+                {% ifequal sort '-comments' %}
+                    {% trans "Comments" %}: {{search_result.comments}}
+                {% endifequal %}
+
+                {% if not sort %}
+                    {{search_result.object.title|escape|truncatechars:23}}
+                {% endif %}
+                <br/>
+                {% with search_result.object.user.username|truncatechars:24 as user %}
+                {% url user_page user as user_page %}
+                {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
                 {% endwith %}
-            {% endifequal %}
-
-            {% ifequal sort '-uploaded' %}
-                {{search_result.object.uploaded|ago}}
-            {% endifequal %}
-
-            {% ifequal sort '-acquired' %}
-                {{search_result.last_acquisition_date}}
-            {% endifequal %}
-
-            {% ifequal sort '-views' %}
-                {% with search_result.views as hit_count %}
-                    {% blocktrans count counter=hit_count|add:"0" %}Viewed one time{% plural %}Viewed {{counter}} times{% endblocktrans %}
-                {% endwith %}
-            {% endifequal %}
-
-            {% ifequal sort '-comments' %}
-                {% trans "Comments" %}: {{search_result.comments}}
-            {% endifequal %}
-
-            {% if not sort %}
-                {{search_result.object.title|escape|truncatechars:23}}
-            {% endif %}
-            <br/>
-            {% with search_result.object.user.username|truncatechars:24 as user %}
-            {% url user_page user as user_page %}
-            {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
-            {% endwith %}
-        </div>
-     </li>
+            </div>
+        </li>
     {% endif %}
-{% empty %}
-    <li>{% trans "No images" %}.</li>
 {% endfor %}
 </ul>
+{% endif %}
 
 {% if paginate %}
     {% include 'pagination.html' %}
