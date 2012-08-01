@@ -266,6 +266,18 @@ class ImageRevisionUploadForm(forms.Form):
 
 
 class AdvancedSearchForm(SearchForm):
+    search_type = forms.ChoiceField(
+        required = True,
+        label = _("Search type"),
+        choices = (
+            (0, _("All")),
+            (1, _("Images")),
+            (2, _("Users")),
+            (3, _("Gear")),
+        ),
+        initial = 1,
+    )
+
     solar_system_main_subject = forms.ChoiceField(
         required = False,
         choices = (('', '---------'),) + SOLAR_SYSTEM_SUBJECT_CHOICES,
@@ -364,69 +376,104 @@ class AdvancedSearchForm(SearchForm):
 
     def search(self):
         sqs = EmptySearchQuerySet()
+        user_sqs = EmptySearchQuerySet()
+        image_sqs = EmptySearchQuerySet()
+        gear_sqs = EmptySearchQuerySet()
 
-        if self.is_valid():
-            q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
-            self.cleaned_data['q'] = q
+        if not self.is_valid():
+            return EmptySearchQuerySet()
 
-            if self.cleaned_data['q'] == '':
-                sqs = SearchQuerySet().all().models(Image)
-                if self.load_all:
-                    sqs = sqs.load_all()
-            else:
-                sqs = super(AdvancedSearchForm, self).search().models(Image)
+        q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
+        self.cleaned_data['q'] = q
 
-            if self.cleaned_data['solar_system_main_subject']:
-                sqs = sqs.filter(solar_system_main_subject = self.cleaned_data['solar_system_main_subject'])
+        if self.cleaned_data['q'] == '':
+            sqs = SearchQuerySet().all()
+            user_sqs = SearchQuerySet().all()
+            image_sqs = SearchQuerySet().all()
+            gear_sqs = SearchQuerySet().all()
+            if self.load_all:
+                sqs = sqs.load_all()
+                user_sqs = user_sqs.load_all()
+                image_sqs = image_sqs.load_all()
+                gear_sqs = gear_sqs.load_all()
+        else:
+            sqs = super(AdvancedSearchForm, self).search()
+            user_sqs = super(AdvancedSearchForm, self).search().models(User)
+            image_sqs = super(AdvancedSearchForm, self).search().models(Image)
+            gear_sqs = super(AdvancedSearchForm, self).search().models(Gear)
 
-            if self.cleaned_data['start_date']:
-                sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
+        # This section deals with properties common to all the search indexes.
+        if self.cleaned_data['start_date']:
+            sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
 
-            if self.cleaned_data['end_date']:
-                sqs = sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
+        if self.cleaned_data['end_date']:
+            sqs = sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
 
-            if self.cleaned_data['telescope_type'] and 'any' not in self.cleaned_data['telescope_type']:
-                filters = reduce(operator.or_, [SQ(**{'telescope_types': x}) for x in self.cleaned_data['telescope_type']])
-                sqs = sqs.filter(filters)
-            elif not self.cleaned_data['telescope_type']:
-                sqs = EmptySearchQuerySet()
+        if self.cleaned_data['telescope_type'] and 'any' not in self.cleaned_data['telescope_type']:
+            filters = reduce(operator.or_, [SQ(**{'telescope_types': x}) for x in self.cleaned_data['telescope_type']])
+            sqs = sqs.filter(filters)
+        elif not self.cleaned_data['telescope_type']:
+            sqs = EmptySearchQuerySet()
 
-            if self.cleaned_data['camera_type'] and 'any' not in self.cleaned_data['camera_type']:
-                filters = reduce(operator.or_, [SQ(**{'camera_types': x}) for x in self.cleaned_data['camera_type']])
-                sqs = sqs.filter(filters)
-            elif not self.cleaned_data['camera_type']:
-                sqs = EmptySearchQuerySet()
- 
-            if self.cleaned_data['aperture_min'] is not None:
-                sqs = sqs.filter(min_aperture__gte = self.cleaned_data['aperture_min'])
+        if self.cleaned_data['camera_type'] and 'any' not in self.cleaned_data['camera_type']:
+            filters = reduce(operator.or_, [SQ(**{'camera_types': x}) for x in self.cleaned_data['camera_type']])
+            sqs = sqs.filter(filters)
+        elif not self.cleaned_data['camera_type']:
+            sqs = EmptySearchQuerySet()
 
-            if self.cleaned_data['aperture_max'] is not None:
-                sqs = sqs.filter(max_aperture__lte = self.cleaned_data['aperture_max'])
+        if self.cleaned_data['aperture_min'] is not None:
+            sqs = sqs.filter(min_aperture__gte = self.cleaned_data['aperture_min'])
 
-            if self.cleaned_data['pixel_size_min'] is not None:
-                sqs = sqs.filter(min_pixel_size__gte = self.cleaned_data['pixel_size_min'])
+        if self.cleaned_data['aperture_max'] is not None:
+            sqs = sqs.filter(max_aperture__lte = self.cleaned_data['aperture_max'])
 
-            if self.cleaned_data['pixel_size_max'] is not None:
-                sqs = sqs.filter(max_pixel_size__lte = self.cleaned_data['pixel_size_max'])
+        if self.cleaned_data['pixel_size_min'] is not None:
+            sqs = sqs.filter(min_pixel_size__gte = self.cleaned_data['pixel_size_min'])
 
-            if self.cleaned_data['integration_min']:
-                sqs = sqs.filter(integration__gte=int(self.cleaned_data['integration_min'] * 3600))
+        if self.cleaned_data['pixel_size_max'] is not None:
+            sqs = sqs.filter(max_pixel_size__lte = self.cleaned_data['pixel_size_max'])
 
-            if self.cleaned_data['integration_max']:
-                sqs = sqs.filter(integration__lte=int(self.cleaned_data['integration_max'] * 3600))
+        if self.cleaned_data['integration_min']:
+            sqs = sqs.filter(integration__gte=int(self.cleaned_data['integration_min'] * 3600))
 
-            if self.cleaned_data['moon_phase_min']:
-                sqs = sqs.filter(moon_phase__gte=self.cleaned_data['moon_phase_min'])
+        if self.cleaned_data['integration_max']:
+            sqs = sqs.filter(integration__lte=int(self.cleaned_data['integration_max'] * 3600))
 
-            if self.cleaned_data['moon_phase_max']:
-                sqs = sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
+        if self.cleaned_data['moon_phase_min']:
+            sqs = sqs.filter(moon_phase__gte=self.cleaned_data['moon_phase_min'])
 
-            if self.cleaned_data['license']:
-                filters = reduce(operator.or_, [SQ(**{'license': x}) for x in self.cleaned_data['license']])
-                sqs = sqs.filter(filters)
-            else:
-                sqs = EmptySearchQuerySet()
-                
+        if self.cleaned_data['moon_phase_max']:
+            sqs = sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
+
+        # This section deals with properties of the Image search index:
+        if self.cleaned_data['solar_system_main_subject']:
+            image_sqs = image_sqs.filter(solar_system_main_subject = self.cleaned_data['solar_system_main_subject'])
+
+        if self.cleaned_data['license']:
+            filters = reduce(operator.or_, [SQ(**{'license': x}) for x in self.cleaned_data['license']])
+            image_sqs = image_sqs.filter(filters)
+        else:
+            image_sqs = EmptySearchQuerySet()
+
+
+        # This section deals with properties of the User search index.
+        # TODO
+
+        # This section deals with properties of the Gear search index.
+        # TODO
+
+        from itertools import chain
+        ids = [x.id for x in list(chain(sqs, user_sqs, image_sqs, gear_sqs))]
+        sqs = SearchQuerySet().filter(id__in = ids).order_by('model_weight')
+
+        search_type = self.cleaned_data['search_type']
+        if search_type == '1':
+            sqs = sqs.filter(django_ct = 'astrobin.image')
+        elif search_type == '2':
+            sqs = sqs.filter(django_ct = 'auth.user')
+        elif search_type == '3':
+            sqs = sqs.filter(django_ct = 'astrobin.gear')
+
         return sqs
 
 

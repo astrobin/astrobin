@@ -271,7 +271,9 @@ class Gear(models.Model):
     def get_make(self):
         if self.commercial and self.commercial.proper_make:
             return self.commercial.proper_make
-        return self.make
+        if self.make:
+            return self.make
+        return ''
 
     def get_name(self):
         if self.commercial and self.commercial.proper_name:

@@ -2583,3 +2583,47 @@ li.revisions {
         margin-bottom: @spacer-medium;
     }
 }
+
+.user-business-card, .gear-business-card {
+    .stitched-box;
+    position: relative;
+    height: 182px;
+    width: 182px;
+    margin: 0;
+    padding: 0;
+
+    .header {
+        background: #303030 url('../images/darker-panel-tile.png');
+        height: 22px;
+        width: 174px;
+        padding: @spacer-medium @spacer-small 0;
+        font-size: 110%;
+        font-weight: bold;
+    }
+
+    .avatar {
+        position: absolute;
+        top: (@spacer-medium * 2) + 22px;
+        left: @spacer-medium;
+        width: 83px;
+    }
+    .quick-data {
+        position: absolute;
+        top: (@spacer-medium * 2) + 22px;
+        left: (@spacer-medium * 2) + 83px;
+
+        th {
+            padding: 4px 4px 4px 0;
+        }
+        td {
+            padding: 4px;
+        }
+    }
+    .data {
+        position: absolute;
+        top: 128px;
+        left: @spacer-medium;
+        font-size: 82%;
+        width: 166px;
+    }
+}

@@ -40,11 +40,11 @@
                     {% for u in user_list %}
                         <tr>
                             <td>{{page_obj.start_index|add:forloop.counter0}}</td>
-                            <td><a href="{% url user_page u.user_name %}">{{u.user_name}}</a></td>
-                            <td>{{u.user_integration|floatformat}}</a></td>
-                            <td>{{u.user_avg_integration|floatformat}}</a></td>
-                            <td>{{u.user_images}}</td>
-                            <td>{{u.user_comments}}</td>
+                            <td><a href="{% url user_page u.username %}">{{u.username}}</a></td>
+                            <td>{{u.integration|floatformat}}</a></td>
+                            <td>{{u.avg_integration|floatformat}}</a></td>
+                            <td>{{u.images}}</td>
+                            <td>{{u.comments_written}}</td>
                         </tr>
                     {% endfor %}
                 </table>

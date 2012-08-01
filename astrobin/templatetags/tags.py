@@ -381,7 +381,20 @@ def search_image_list(context, request, object_list, paginate = True):
         has_next = page_obj.has_next
         has_previous = page_obj.has_previous
 
-    image_list = object_list
+    user_list  = [x for x in object_list if x.django_ct == 'auth.user']
+    gear_list  = [x for x in object_list if x.django_ct == 'astrobin.gear']
+    image_list = [x for x in object_list if x.django_ct == 'astrobin.image']
+
+    multiple = 0
+    if len(user_list) > 0:
+        multiple += 1
+    if len(gear_list) > 0:
+        multiple += 1
+    if len(image_list) > 0:
+        multiple += 1
+
+    if multiple > 1:
+        multiple = True
 
     startPage = max(page - adjacent_pages, 1)
     if startPage <= 3: startPage = 1
@@ -403,12 +416,16 @@ def search_image_list(context, request, object_list, paginate = True):
         'paginate': paginate,
         'show_first': 1 not in page_numbers,
         'show_last': pages not in page_numbers,
+        'user_list': user_list,
+        'gear_list': gear_list,
         'image_list': image_list,
         'thumbnail_size':settings.THUMBNAIL_SIZE,
         's3_url':settings.S3_URL,
         'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'request': request,
         'sort': request.GET.get('sort'),
+        'search_type': request.GET.get('search_type', 0),
+        'multiple': multiple,
     }
 register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context=True)(search_image_list)
 
@@ -447,7 +464,7 @@ def is_checkbox(value):
 
 @register.simple_tag
 def search_form_query():
-    query = ''
+    query = '&amp;search_type=0'
 
     for i in range(0, 7):
         query += '&amp;license=%d' % i

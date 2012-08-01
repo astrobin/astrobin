@@ -2938,15 +2938,15 @@ def leaderboard(request):
     if 'sort' in request.GET:
         sort = request.GET.get('sort')
         if sort == 'tot_integration':
-            sort = '-user_integration'
+            sort = '-integration'
         elif sort == 'avg_integration':
-            sort = '-user_avg_integration'
+            sort = '-avg_integration'
         elif sort == 'images':
-            sort = '-user_images'
+            sort = '-images'
         elif sort == 'comments':
-            sort = '-user_comments'
+            sort = '-comments_written'
 
-    queryset = sqs.filter(user_images__gt = 0).models(User).order_by(sort)
+    queryset = sqs.models(User).order_by(sort)
 
     return object_list(
         request,
