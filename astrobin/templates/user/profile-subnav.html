@@ -5,6 +5,7 @@
     <ul class="nav nav-pills">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-eye-open icon-white"></i>
                 {% trans "View" %}
                 <span class="caret"></span>
             </a>
@@ -62,6 +63,7 @@
         {% if request.user != user and request.user.is_authenticated %}
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-user icon-white"></i>
                 {% trans "User" %}
                 <span class="caret"></span>
             </a>
@@ -90,6 +92,7 @@
 
         <li class="dropdown" style="visibility: {% in_gallery request %}">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-sort icon-white"></i>
                 {% trans "Sort" %}
                 <span class="caret"></span>
             </a>

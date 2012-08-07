@@ -84,10 +84,11 @@
                     </a>
                     <div class="site-nav nav-collapse collapse pull-left">
                         <ul class="nav">
-                            <li class="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
-                            <li class="{% current request "^/blog/$" %}"><a href="/blog/">{% trans "Blog" %}</a></li>
+                            <li class="{% current request "^/$" %}"><a href="{% url index %}"><i class="icon-home"></i> {% trans "Home" %}</a></li>
+                            <li class="{% current request "^/blog/$" %}"><a href="/blog/"><i class="icon-pencil"></i> {% trans "Blog" %}</a></li>
                             <li class="dropdown {% current request "^/explore/|^/search/|^/stats/|^/leaderboard/" %}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-folder-open"></i>
                                     {% trans "Explore" %}
                                     <b class="caret"></b>
                                 </a>
@@ -149,13 +150,13 @@
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{% url stats %}">
-                                            <i class="icon-align-left"></i>
+                                            <i class="icon-bar-chart"></i>
                                             {% trans "Stats" %}
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{% url leaderboard %}">
-                                            <i class="icon-tasks"></i>
+                                            <i class="icon-list-ol"></i>
                                             {% trans "Leaderboard" %}
                                         </a>
                                     </li>
@@ -163,6 +164,7 @@
                             </li>
                             <li class="dropdown {% current request "^/help/|^/faq/" %}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-question-sign"></i>
                                     {% trans "Help" %}
                                     <b class="caret"></b>
                                 </a>
@@ -182,7 +184,7 @@
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{% url api %}">
-                                            <i class="icon-list"></i>
+                                            <i class="icon-key"></i>
                                             API (beta)
                                         </a>
                                     </li>
@@ -209,6 +211,7 @@
                         <ul class="nav pull-right">
                             <li class="dropdown visible-desktop">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-flag"></i>
                                     {% trans "Language" %}
                                     <b class="caret"></b>
                                 </a>
@@ -297,7 +300,7 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="{% url image_upload %}">
-                                                <i class="icon-upload"></i>
+                                                <i class="icon-upload-alt"></i>
                                                 {% trans "Upload" %}
                                             </a>
                                         </li>
@@ -322,7 +325,7 @@
                                         </li>
                                         <li>
                                             <a href="{% url user_page_plots request.user %}">
-                                                <i class="icon-align-left"></i>
+                                                <i class="icon-bar-chart"></i>
                                                 {% trans "Plots" %}
                                             </a>
                                         </li>
@@ -336,7 +339,7 @@
                                         </li>
                                         <li>
                                             <a href="{% url user_page_api_keys request.user %}">
-                                                <i class="icon-list"></i>
+                                                <i class="icon-key"></i>
                                                 {% trans "API Keys" %}
                                             </a>
                                         </li>
@@ -344,7 +347,7 @@
                                         <li class="nav-header">{% trans "My settings" %}</li>
                                         <li>
                                             <a href="{% url profile_edit_basic %}">
-                                                <i class="icon-pencil"></i>
+                                                <i class="icon-edit"></i>
                                                 {% trans "Basic information" %}
                                             </a>
                                         </li>
@@ -362,7 +365,7 @@
                                         </li>
                                         <li>
                                             <a href="{% url profile_edit_license %}">
-                                                <i class="icon-briefcase"></i>
+                                                <i class="icon-legal"></i>
                                                 {% trans "Default license" %}
                                             </a>
                                         </li>
@@ -381,7 +384,7 @@
                                         <li class="divider"></li>
                                         <li>
                                             <a href="{% url auth_logout %}">
-                                                <i class="icon-hand-right"></i>
+                                                <i class="icon-signout"></i>
                                                 {% trans "Logout" %}
                                             </a>
                                         </li>
@@ -442,6 +445,7 @@
                                value="{% trans "Quick search" %}"
                                onfocus="astrobin_common.clearText(this)"
                                onblur="astrobin_common.clearText(this)"/>
+
                         <input type="hidden" name="license" value="0"/>
                         <input type="hidden" name="license" value="1"/>
                         <input type="hidden" name="license" value="2"/>

@@ -37,6 +37,7 @@
         <ul class="nav nav-pills">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-bolt icon-white"></i>
                     {% trans "Actions" %}
                     <span class="caret"></span>
                 </a>
@@ -75,7 +76,7 @@
                     <li class="divider"></li>
                     <li>
                         <a href="{% url image_edit_license image.id %}">
-                            <i class="icon-briefcase"></i>
+                            <i class="icon-legal"></i>
                             {% trans "Change license" %}
                         </a>
                     </li>
@@ -171,6 +172,7 @@
              </li> <!-- actions -->
              <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-eye-open icon-white"></i>
                     {% trans "View" %}
                     <span class="caret"></span>
                 </a>
@@ -243,6 +245,7 @@
             {% if request.user != image.user %}
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user icon-white"></i>
                     {% trans "User" %}
                     <span class="caret"></span>
                 </a>
@@ -258,10 +261,10 @@
                         <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
                            href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
                             {% if follows %}
-                                <i class="icon-eye-open"></i>
+                                <i class="icon-eye-close"></i>
                                 {% trans "Stop following" %}
                             {% else %}
-                                <i class="icon-eye-close"></i>
+                                <i class="icon-eye-open"></i>
                                 {% trans "Follow" %}
                             {% endif %}
                         </a>
@@ -278,7 +281,10 @@
             {% endif %} <!-- not owner -->
 
             <li>
-                <a data-toggle="modal" href="#share-modal">{% trans "Share" %}</a>
+                <a data-toggle="modal" href="#share-modal">
+                    <i class="icon-share icon-white"></i>
+                    {% trans "Share" %}
+                </a>
             </li>
         </ul> <!-- nav -->
     </div> <!-- subnav -->
