@@ -3,25 +3,25 @@
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
         <li class="{% current request '^/profile/(edit|save)/basic/$' %}">
-            <a href="{% url profile_edit_basic %}">{% trans "Basic Information" %}</a>
+            <a href="{% url profile_edit_basic %}"><i class="icon-edit"></i> {% trans "Basic Information" %}</a>
         </li>
         <li class="{% current request '^/profile/(edit|save)/gear/$' %}">
-            <a href="{% url profile_edit_gear %}">{% trans "Gear" %}</a>
+            <a href="{% url profile_edit_gear %}"><i class="icon-cog"></i> {% trans "Gear" %}</a>
         </li>
         <li class="{% current request '^/profile/(edit|save)/locations/$' %}">
-            <a href="{% url profile_edit_locations %}">{% trans "Locations" %}</a>
+            <a href="{% url profile_edit_locations %}"><i class="icon-globe"></i> {% trans "Locations" %}</a>
         </li>
         <li class="{% current request '^/profile/(edit|save)/license/$' %}">
-            <a href="{% url profile_edit_license %}">{% trans "Default license" %}</a>
+            <a href="{% url profile_edit_license %}"><i class="icon-legal"></i> {% trans "Default license" %}</a>
         </li>
         <li class="last {% current request '^/profile/edit/flickr/$' %}">
-            <a href="{% url profile_flickr_import %}">{% trans "Import from Flickr" %}</a>
+            <a href="{% url profile_flickr_import %}"><i class="icon-download-alt"></i> {% trans "Import from Flickr" %}</a>
         </li>
         <li class="{% current request '^/profile/(edit|save)/preferences/$' %}">
-            <a href="{% url profile_edit_preferences %}">{% trans "Preferences" %}</a>
+            <a href="{% url profile_edit_preferences %}"><i class="icon-wrench"></i> {% trans "Preferences" %}</a>
         </li>
         <li class="{% current request '^/avatar/' %}">
-            <a href="{% url avatar_change %}">{% trans "Avatar" %}</a>
+            <a href="{% url avatar_change %}"><i class="icon-user"></i> {% trans "Avatar" %}</a>
         </li>
     </ul>
 </div>
