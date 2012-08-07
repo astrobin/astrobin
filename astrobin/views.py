@@ -3546,6 +3546,9 @@ def gear_page(request, id):
     from gear import CLASS_LOOKUP
 
     all_images = Image.objects.filter(**{image_attr_lookup[gear_type]: gear})
+    commercial_image_revisions = None
+    if gear.commercial and gear.commercial.image:
+        commercial_image_revisions = ImageRevision.objects.filter(image = gear.commercial.image)
 
     from django.contrib.contenttypes.models import ContentType
     return object_detail(
@@ -3569,6 +3572,7 @@ def gear_page(request, id):
                 (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
                  getattr(gear, k[0]),
                  k[1]) for k in gear.attributes()],
+            'commercial_image_revisions': commercial_image_revisions,
         })
 
 
