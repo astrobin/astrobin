@@ -12,7 +12,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         sqs = SearchQuerySet()
 
-        users = sqs.models(User).filter(user_images__gt = 0).count()
+        users = sqs.models(User).all().count()
         images = sqs.models(Image).all().count()
 
         integration = 0
