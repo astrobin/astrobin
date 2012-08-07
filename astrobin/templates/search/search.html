@@ -12,6 +12,7 @@
         <ul class="nav nav-pills">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-sort icon-white"></i>
                     {% trans "Sort" %}
                     <span class="caret"></span>
                 </a>
@@ -57,7 +58,10 @@
         <form method="get" action="{% url haystack_search %}">
             <div class="search-category">
                 <div class="header">
-                    <span class="title">{% trans "Basic criteria" %}</span>
+                    <span class="title">
+                        <i class="icon-search icon-white"></i>
+                        {% trans "Basic criteria" %}
+                    </span>
                 </div>
                 <div class="content">
                     {% with form.q as field %}
@@ -82,7 +86,7 @@
     
             <div class="search-category">
                 <div class="header">
-                    <span class="title">{% trans "Gear used" %}</span>
+                    <span class="title"><i class="icon-cog icon-white"></i> {% trans "Gear used" %}</span>
                     <span class="control"></span>
                 </div>
                 <div class="content">
@@ -164,7 +168,7 @@
     
             <div class="search-category">
                 <div class="header">
-                    <span class="title">{% trans "Acquisition details" %}</span>
+                    <span class="title"><i class="icon-time icon-white"></i> {% trans "Acquisition details" %}</span>
                     <span class="control"></span>
                 </div>
                 <div class="content">
@@ -226,7 +230,7 @@
     
             <div class="search-category">
                 <div class="header">
-                    <span class="title">{% trans "License" %}</span>
+                    <span class="title"><i class="icon-legal icon-white"></i> {% trans "License" %}</span>
                     <span class="control"></span>
                 </div>
                 <div class="content">
