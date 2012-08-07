@@ -19,10 +19,10 @@
                 <div class="row section">
                     {% if gear.commercial.image %}
                         {% with gear.commercial.image as image %}
-                        <div class="span8">
-                            <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{{image.original_ext}}"
-                                 alt="{{image.title|escape}}"/>
-                        </div>
+                            <div class="span8">
+                                <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{{image.original_ext}}"
+                                     alt="{{image.title|escape}}"/>
+                            </div>
                         {% endwith %}
                     {% endif %}
                     <div class="span4">
@@ -60,6 +60,20 @@
                         </div>
                     </div>
                 </div>
+                {% if commercial_image_revisions %}
+                <div class="row section">
+                    <div class="span8">
+                        <div class="subtle-container">
+                            {% for r in commercial_image_revisions %}
+                                <a href="{% url image_detail r.image.id r.label %}" target="{{r.image.id}}_{{r.label}}">
+                                    <img src="http://{{s3_url}}/{{bucket_name}}/{{r.filename}}_small_thumb{{r.original_ext}}"
+                                         alt="{{r.image.title|escape}}"/>
+                                 </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         {% endif %}
 
