@@ -1742,6 +1742,10 @@ div.favorite-container a.favorite:hover .favorite-hint {
   text-align: right;
   border-top: 1px solid #4a4a4a;
 }
+.list-gear .content [class^="icon-"],
+.list-gear .content [class*=" icon-"] {
+  color: #333333;
+}
 .btn-gear {
   text-align: left;
   cursor: default;
