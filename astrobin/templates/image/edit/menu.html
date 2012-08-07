@@ -3,8 +3,8 @@
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
-        <li class="{% current request '^/edit(/save)?/basic/' %}"><a href="{% url image_edit_basic image.id %}">{% trans "Basic Information" %}</a></li>
-        <li class="{% current request '^/edit(/save)?/gear/' %}"><a href="{% url image_edit_gear image.id %}">{% trans "Gear used" %}</a></li>
-        <li class="{% current request '^/edit(/save)?/acquisition/' %}{% if not is_ready %} last {% endif %}"><a href="{% url image_edit_acquisition image.id %}">{% trans "Acquisition details" %}</a></li>
+        <li class="{% current request '^/edit(/save)?/basic/' %}"><a href="{% url image_edit_basic image.id %}"><i class="icon-edit"></i> {% trans "Basic Information" %}</a></li>
+        <li class="{% current request '^/edit(/save)?/gear/' %}"><a href="{% url image_edit_gear image.id %}"><i class="icon-cog"></i> {% trans "Gear used" %}</a></li>
+        <li class="{% current request '^/edit(/save)?/acquisition/' %}{% if not is_ready %} last {% endif %}"><a href="{% url image_edit_acquisition image.id %}"><i class="icon-time"></i> {% trans "Acquisition details" %}</a></li>
     </ul>
 </div>
