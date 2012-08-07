@@ -1887,7 +1887,7 @@ class CommercialGear(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Image"),
-        help_text = _("The official, commercial image for this product. Upload an image via the regular uploading interface, set its subject type to \"Gear\", and then choose it from this list."),
+        help_text = _("The official, commercial image for this product. Upload an image via the regular uploading interface, set its subject type to \"Gear\", and then choose it from this list. If you upload several revisions, they will also appear in the commercial page."),
         related_name = 'featured_gear',
     )
 
