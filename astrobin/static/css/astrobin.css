@@ -706,7 +706,7 @@ body.full {
 /* Subnav */
 .subnav {
   width: 100%;
-  height: 24px;
+  height: 25px;
   background: #cc4b2e url('../images/orange-panel-tile.png');
   border-top: 1px solid #b74329;
   border-bottom: 1px solid #b74329;
@@ -1742,6 +1742,10 @@ div.favorite-container a.favorite:hover .favorite-hint {
   padding: 8px;
   text-align: right;
   border-top: 1px solid #4a4a4a;
+}
+.list-gear .content [class^="icon-"],
+.list-gear .content [class*=" icon-"] {
+  color: #333333;
 }
 .btn-gear {
   text-align: left;

@@ -883,7 +883,7 @@ body.full {
 /* Subnav */
 .subnav {
   width: 100%;
-  height: 24px;
+  height: 25px;
   background: @link-color url('../images/orange-panel-tile.png');
   border-top: 1px solid darken(@link-color, 5%);
   border-bottom: 1px solid darken(@link-color, 5%);
@@ -1914,6 +1914,14 @@ div.favorite-container {
         padding: @spacer-medium;
         text-align: right;
         border-top: 1px solid #4a4a4a;
+    }
+}
+
+.list-gear {
+    .content {
+        [class^="icon-"], [class*=" icon-"] {
+            color: @background-color;
+        }
     }
 }
 

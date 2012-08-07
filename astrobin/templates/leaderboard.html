@@ -17,22 +17,22 @@
                         <th>{% trans "User" %}</th>
                         <th>
                             <a href="{% url leaderboard %}{% query_string "sort='tot_integration'" "" %}">
-                                {% trans "Total integration" %} &#9660;
+                                {% trans "Total integration" %} <i class="icon-sort"></i>
                             </a>
                         </th>
                         <th>
                             <a href="{% url leaderboard %}{% query_string "sort='avg_integration'" "" %}">
-                                {% trans "Avg. integration hours" %} &#9660;
+                                {% trans "Avg. integration hours" %} <i class="icon-sort"></i>
                             </a>
                         </th>
                         <th>
                             <a href="{% url leaderboard %}{% query_string "sort='images'" "" %}">
-                                {% trans "Images" %} &#9660;
+                                {% trans "Images" %} <i class="icon-sort"></i>
                             </a>
                         </th>
                         <th>
                             <a href="{% url leaderboard %}{% query_string "sort='comments'" "" %}">
-                                {% trans "Comments" %} &#9660;
+                                {% trans "Comments" %} <i class="icon-sort"></i>
                             </a>
                         </th>
                     </tr>

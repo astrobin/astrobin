@@ -5,6 +5,7 @@
     <ul class="nav nav-pills">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-eye-open icon-white"></i>
                 {% trans "View" %}
                 <span class="caret"></span>
             </a>
@@ -39,7 +40,7 @@
                 </li>
                 <li>
                     <a href="{% url user_page_plots user %}">
-                        <i class="icon-align-left"></i>
+                        <i class="icon-bar-chart"></i>
                         {% trans "Plots" %}
                     </a>
                 </li>
@@ -61,7 +62,7 @@
                 <li class="divider"></li>
                 <li>
                     <a href="{% url user_page_api_keys user %}">
-                        <i class="icon-list"></i>
+                        <i class="icon-key"></i>
                         {% trans "API Keys" %}
                     </a>
                 </li>
@@ -72,6 +73,7 @@
         {% if request.user != user and request.user.is_authenticated %}
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-user icon-white"></i>
                 {% trans "User" %}
                 <span class="caret"></span>
             </a>
@@ -100,6 +102,7 @@
 
         <li class="dropdown" style="visibility: {% in_gallery request %}">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-sort icon-white"></i>
                 {% trans "Sort" %}
                 <span class="caret"></span>
             </a>
