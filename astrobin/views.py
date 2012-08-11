@@ -16,6 +16,7 @@ from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.db.models import Q, Count
 from django.db import IntegrityError
 from django.utils.translation import ugettext as _
@@ -2084,6 +2085,27 @@ def user_profile_save_basic(request):
     form.save()
 
     return HttpResponseRedirect("/profile/edit/basic/?saved");
+
+
+@login_required
+@user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
+def user_profile_edit_commercial(request):
+    profile = UserProfile.objects.get(user = request.user)
+    if request.method == 'POST':
+        form = UserProfileEditCommercialForm(data=request.POST, instance = profile)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Form saved. Thank you!"))
+            return HttpResponseRedirect('/profile/edit/commercial/');
+    else:
+        form = UserProfileEditCommercialForm(instance = profile)
+
+    return render_to_response("user/profile/edit/commercial.html",
+        {
+            'form': form,
+        },
+        context_instance=RequestContext(request))
 
 
 @login_required
