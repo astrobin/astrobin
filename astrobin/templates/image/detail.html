@@ -719,10 +719,12 @@
                 <div class="favorite-container">
                     <a href="#" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Already favorited" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
                         {% if already_favorited %}
-                            <img src="{{STATIC_URL}}icons/iconic/red/heart_fill_24x21.png" alt="{% trans "Favorited" %}"/>
+                            <div style="font-size: 32px; color: #FFA040;">
                         {% else %}
-                            <img src="{{STATIC_URL}}icons/iconic/white/heart_fill_24x21.png" alt="{% trans "Favorite" %}"/>
+                            <div style="font-size: 32px;">
                         {% endif %}
+                            <i class="icon-heart"></i>
+                        </div>
                     </a>
                 </div>
 
@@ -734,7 +736,7 @@
             <div class="subtle-container image-basic-data">
                 <table class="table">
                     <tr>
-                        <th><img rel="tooltip" title="{% trans "License" %}" alt="{% trans "License" %}" src="{{STATIC_URL}}icons/iconic/white/key_stroke_16x16.png"/></th>
+                        <th><div style="font-size: 16px"><i class="icon-legal"></i></div></th>
                         <td>
                             <a target="_blank" href="http://creativecommons.org/licenses/">
                                 <img class="license"
@@ -745,24 +747,24 @@
                         </td>
                     </tr>
                     <tr>
-                        <th><img rel="tooltip" title="{% trans "Date" %}" alt="{% trans "Date" %}" src="{{STATIC_URL}}icons/iconic/white/calendar_alt_stroke_16x16.png"/></th>
+                        <th><div style="font-size: 16px"><i class="icon-calendar"></i></div></th>
                         <td>{{uploaded_on|ago}}</td>
                     </tr>
                     <tr>
                         {% get_hit_count for image as hit_count %}
-                        <th><img rel="tooltip" title="{% trans "Views" %}" alt="{% trans "Views" %}" src="{{STATIC_URL}}icons/iconic/white/image_16x16.png"/></th>
+                        <th><div style="font-size: 16px"><i class="icon-eye-open"></i></div></th>
                         <td>{{hit_count}}</td>
                     </tr>
                     <tr>
-                        <th><img rel="tooltip" title="{% trans "Favorites" %}" alt="{% trans "Favorites" %}" src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png"/></th>
+                        <th><div style="font-size: 16px"><i class="icon-heart"></i></div></th>
                         <td><span class="favorites-number">{{times_favorited}}</span></td>
                     </tr>
                     <tr>
-                        <th><img rel="tooltip" title="{% trans "Votes" %}" alt="{% trans "Votes" %}" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/></th>
+                        <th><div style="font-size: 16px"><i class="icon-star"></i></div></th>
                         <td><span class="votes-number">{{votes_number}}</span></td>
                     </tr>
                     <tr>
-                        <th><img rel="tooltip" title="{% trans "Comments" %}" alt="{% trans "Comments" %}" src="{{STATIC_URL}}icons/iconic/white/comment_stroke_16x14.png"/></th>
+                        <th><div style="font-size: 16px"><i class="icon-comments"></i></div></th>
                         <td><span class="comments-number">{{comments|length}}</span></td>
                     </tr>
                 </table>
@@ -849,14 +851,14 @@
 $(document).ready(function() {
     $('a.favorite').click(function() {
         var $link = $(this),
-            $heart = $link.find('img');
+            $heart = $link.find('i.icon-heart');
 
         $.ajax({
             url: '{% url favorite_ajax image.id %}',
             dataType: 'json',
             timeout: 5000,
             success: function(data, textStatus, XMLHttpRequest) {
-                $heart.attr('src', '{{STATIC_URL}}icons/iconic/red/heart_fill_24x21.png');
+                $heart.parent().css('color', '#FFA040');
                 $link.attr('title', "{% trans "Favorited!" %}");
                 $('.favorites-number').text(parseInt($('.favorites-number').text()) + 1);
             },
