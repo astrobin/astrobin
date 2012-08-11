@@ -10,7 +10,7 @@
     </div>
     <div class="sided-main-content">
         <h1>{% trans "Edit your location" %}</h1>
-        {% form_saved request %}
+
         <form action="{% url location_save %}" method="post">{% csrf_token %}
         {{form.as_p}}
         <input type="hidden" name="location_id" value="{{id}}"/>

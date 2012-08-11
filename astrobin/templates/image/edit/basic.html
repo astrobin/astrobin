@@ -17,7 +17,7 @@
             {% blocktrans %}Step 3 of 5: basic information{% endblocktrans %}
         {% endif %}
     </h1>
-    {% form_saved request %}
+
     <form class="form-horizontal" id="basic" action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
         <div id="js_form" style="display:none">
             {{form|as_bootstrap}}

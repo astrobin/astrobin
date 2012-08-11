@@ -18,10 +18,6 @@
     {% endif %}
     </h1>
     
-    {% if image.is_stored %}
-        {% form_saved request %}
-    {% endif %}
-
     <div class="well">
         {% if no_gear %}
             {% url profile_edit_gear as the_url %}
