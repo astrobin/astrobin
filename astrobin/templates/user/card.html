@@ -15,7 +15,7 @@
                     <p>
                         <strong>{% trans i.0 %}:&nbsp;</strong>
                         {% for g in i.1 %}
-                            <a href="{% url gear_page g.id %}">{% gear_name g %}</a>{% if not forloop.last %},{% endif %}
+                            <a rel="popover" class="gear-popover{% if g.commercial %} btn btn-mini btn-warning{% endif %}" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id %}">{% gear_name g %}</a>{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </p>
                 {% endfor %}
@@ -73,4 +73,10 @@
 
 {% block extra_js %}
     {% include 'user/profile-js.html' %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+        });
+    </script>
 {% endblock %}
