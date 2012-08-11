@@ -189,7 +189,15 @@ class UserProfileEditBasicForm(forms.ModelForm):
         super(UserProfileEditBasicForm, self).__init__(**kwargs)
         self.fields['website'].label = _("Website")
 
-            
+
+class UserProfileEditCommercialForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = UserProfile
+        fields = ('company_name', 'company_description', 'company_website',)
+
+
 class UserProfileEditGearForm(forms.Form):
     telescopes = forms.CharField(
         max_length=256,

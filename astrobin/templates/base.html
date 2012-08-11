@@ -361,6 +361,16 @@
                                                 {% trans "Basic information" %}
                                             </a>
                                         </li>
+
+                                        {% if is_producer or is_retailer %}
+                                        <li>
+                                            <a href="{% url profile_edit_basic %}">
+                                                <i class="icon-briefcase"></i>
+                                                {% trans "Commercial information" %}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+
                                         <li>
                                             <a href="{% url profile_edit_gear %}">
                                                 <i class="icon-cog"></i>
@@ -523,6 +533,15 @@
                     {% blocktrans %}Invalid image or no image provided. Allowed formats are JPG, PNG and GIF.{% endblocktrans %}
                 </p>
             </div>
+            {% endif %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            </ul>
             {% endif %}
 
             {% block content %}{% endblock %}

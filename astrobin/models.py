@@ -21,6 +21,7 @@ from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.contrib.contenttypes import generic
+from django.core.validators import MaxLengthValidator
 
 from tasks import *
 
@@ -1366,6 +1367,31 @@ class UserProfile(models.Model):
         blank = True,
         verbose_name = _("About you"),
         help_text = _("Write something about yourself. HTML tags are allowed."),
+    )
+
+    # Commercial information
+    company_name = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        verbose_name = _("Company name"),
+        help_text = _("The name of the company you represent on AstroBin."),
+    )
+
+    company_description = models.TextField(
+        null = True,
+        blank = True,
+        verbose_name = _("Company description"),
+        help_text = _("A short description of the company you represent on AstroBin."),
+        validators = [MaxLengthValidator(1000)],
+    )
+
+    company_website = models.URLField(
+        max_length = 512,
+        null = True,
+        blank = True,
+        verbose_name = _("Company website"),
+        help_text = _("The website of the company you represent on AstroBin."),
     )
 
     # Avatar
