@@ -14,13 +14,6 @@
 
 {% block title %}AstroBin - {{image.title}} ({{image.user}}){% endblock %}
 {% block content %}
-    {% if 'plate_solving_started' in request.GET %}
-    <div class="alert alert-info">
-        <a class="close" data-dismiss="alert">&times;</a>
-        <p>{% blocktrans %}Plate-solving has started in the background. It might take a while, so please don't request it again! You will be notified when the job has completed. Thanks!{% endblocktrans %}</p>
-    </div>
-    {% endif %}
-
     {% ifequal request.user image.user %}
     {% if image.is_wip %}
     <div class="alert alert-info">

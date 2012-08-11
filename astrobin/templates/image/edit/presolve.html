@@ -28,7 +28,7 @@
         {% blocktrans %}AstroBin <em>could</em> plate-solve your image without knowing anything about it, but that could be a long process. If you know the approximate size of the field of your image, plate-solving will be much faster and will have a better chance of success!{% endblocktrans %}
     </div>
     
-    <form class="form-horizontal" action="{% url image_edit_save_presolve %}" method="post">
+    <form class="form-horizontal" action="{% url image_edit_presolve image.id %}" method="post">
         {{form|as_bootstrap}}
         <input type="hidden" name="image_id" value="{{image.id}}" />
         <div class="form-actions">
