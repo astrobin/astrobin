@@ -521,18 +521,23 @@
             {% endif %}
             {% endcomment %}
 
-            {% if context_message %}
-            <div class="alert {% if context_message.error %}alert-error{% endif %}">
-                <p>{{context_message.text}}</p>
-            </div>
-            {% endif %}
-
-            {% if upload_error %}
-            <div class="alert alert-error">
-                <p>
-                    {% blocktrans %}Invalid image or no image provided. Allowed formats are JPG, PNG and GIF.{% endblocktrans %}
-                </p>
-            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert 
+                        {% if message.level == 20 %}alert-info{% endif %}
+                        {% if message.level == 25 %}alert-success{% endif %}
+                        {% if message.level == 30 %}alert-warning{% endif %}
+                        {% if message.level == 40 %}alert-error{% endif %}">
+                        <button class="close" data-dismiss="alert">&times;</button> 
+                        <h4 class="alert-heading">
+                            {% if message.level == 20 %}<i class="icon-info-sign"></i> {% trans "Hey!" %}{% endif %}
+                            {% if message.level == 25 %}<i class="icon-ok-sign"></i> {% trans "Success!" %}{% endif %}
+                            {% if message.level == 30 %}<i class="icon-warning-sign"></i> {% trans "Warning!" %}{% endif %}
+                            {% if message.level == 40 %}<i class="icon-fire"></i> {% trans "Error!" %}{% endif %}
+                        </h4>
+                        {{message}}
+                    </div>
+                {% endfor %}
             {% endif %}
 
             {% if messages %}

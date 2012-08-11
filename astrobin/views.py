@@ -804,9 +804,6 @@ def image_detail(request, id, r):
                      'plot_overlay_left' : (settings.RESIZED_IMAGE_SIZE - image.w) / 2 if image.w < settings.RESIZED_IMAGE_SIZE else 0,
                     }
 
-    if 'upload_error' in request.GET:
-        response_dict['upload_error'] = True
-
     return object_detail(
         request,
         queryset = Image.objects.all(),
@@ -866,9 +863,6 @@ def image_upload(request):
     """Create new image"""
     response_dict = {}
 
-    if 'upload_error' in request.GET:
-        response_dict['upload_error'] = True
-
     profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
@@ -885,8 +879,12 @@ def image_upload(request):
 @require_POST
 def image_upload_process(request):
     """Process the form"""
+    def upload_error():
+        messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
+        return HttpResponseRedirect('/upload/')
+
     if 'file' not in request.FILES:
-        return HttpResponseRedirect('/upload/?upload_error')
+        return upload_error()
 
     form = ImageUploadForm(request.POST, request.FILES)
     file = request.FILES["file"]
@@ -895,14 +893,14 @@ def image_upload_process(request):
     if original_ext == '.jpeg':
         original_ext = '.jpg'
     if original_ext not in ('.jpg', '.png', '.gif'):
-        return HttpResponseRedirect('/?upload_error')
+        return upload_error()
 
     try:
         from PIL import Image as PILImage
         trial_image = PILImage.open(file)
         trial_image.verify()
     except:
-        return HttpResponseRedirect('/upload/?upload_error')
+        return upload_error()
 
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
@@ -923,16 +921,34 @@ def image_upload_process(request):
 
 
 @login_required
-@require_GET
 def image_edit_presolve(request, id):
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(Image, pk = id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    form = ImageEditPresolveForm(instance=image)
+    if request.method == 'POST':
+        form = ImageEditPresolveForm(data=request.POST, instance=image)
+        if form.is_valid():
+            form.save()
+
+            if image.is_stored:
+                image.solve()
+
+            done_later = 'done_later' in request.POST
+            if done_later:
+                if image.presolve_information > 1:
+                    messages.info(request, _("Plate-solving has started in the background. It might take a while, so please don't request it again! You will be notified when the job has completed. Thanks!"))
+
+                return HttpResponseRedirect(image.get_absolute_url());
+
+            return HttpResponseRedirect('/edit/watermark/%s/' % image.id)
+    else:
+        form = ImageEditPresolveForm(instance=image)
+
     return render_to_response('image/edit/presolve.html',
-        {'image': image,
-         'form': form,
+        {
+            'image': image,
+             'form': form,
         },
         context_instance = RequestContext(request))
 
@@ -1162,37 +1178,6 @@ def image_edit_license(request, id):
 
 @login_required
 @require_POST
-def image_edit_save_presolve(request):
-    image_id = request.POST.get('image_id')
-    image = Image.objects.get(pk=image_id)
-    form = ImageEditPresolveForm(data=request.POST, instance=image)
-    if request.user != image.user and not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    if not form.is_valid():
-        return render_to_response("image/edit/presolve.html",
-            {'image': image,
-             'form': form,
-            },
-            context_instance = RequestContext(request))
-
-    form.save()
-
-    if image.is_stored:
-        image.solve()
-
-    done_later = 'done_later' in request.POST
-    if done_later:
-        if image.presolve_information > 1:
-            return HttpResponseRedirect('/%s/?plate_solving_started' % image_id);
-        else:
-            return HttpResponseRedirect('/%s/' % image_id);
-
-    return HttpResponseRedirect('/edit/watermark/%s/' % image_id)
-
-
-@login_required
-@require_POST
 def image_edit_save_basic(request):
     def find_subject(id):
         def find_in_simbad(id):
@@ -1283,7 +1268,8 @@ def image_edit_save_basic(request):
         image.process(image.presolve_information > 1)
         return HttpResponseRedirect(image.get_absolute_url())
 
-    return HttpResponseRedirect('/edit/basic/%i/?saved' % image.id)
+    messages.success(request, _("Form saved. Thank you!"))
+    return HttpResponseRedirect('/edit/basic/%i/' % image.id)
 
 
 @login_required
@@ -1367,7 +1353,8 @@ def image_edit_save_gear(request):
 
         return HttpResponseRedirect(image.get_absolute_url())
 
-    return HttpResponseRedirect('/edit/gear/%i/?saved' % image.id)
+    messages.success(request, _("Form saved. Thank you!"))
+    return HttpResponseRedirect('/edit/gear/%i/' % image.id)
 
 
 @login_required
@@ -1393,8 +1380,6 @@ def image_edit_save_acquisition(request):
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
 
-    context_message = None
-
     for a in SolarSystem_Acquisition.objects.filter(image=image):
         a.delete()
 
@@ -1419,7 +1404,7 @@ def image_edit_save_acquisition(request):
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
                     response_dict['next_acquisition_session'] = deep_sky_acquisition_formset.total_form_count() - 1
                     if not dsa_qs:
-                        response_dict['context_message'] = {'error': False, 'text': _("Fill in one session, before adding more.")}
+                        messages.info(request, _("Fill in one session, before adding more."))
                     return render_to_response('image/edit/acquisition.html',
                         response_dict,
                         context_instance=RequestContext(request))
@@ -1455,7 +1440,8 @@ def image_edit_save_acquisition(request):
         image.process(image.presolve_information > 1)
         return HttpResponseRedirect(image.get_absolute_url())
 
-    return HttpResponseRedirect("/edit/acquisition/%s/?saved" % image_id)
+    messages.success(request, _("Form saved. Thank you!"))
+    return HttpResponseRedirect("/edit/acquisition/%s/" % image_id)
 
 
 @login_required
@@ -1476,7 +1462,8 @@ def image_edit_save_license(request):
 
     form.save()
 
-    return HttpResponseRedirect('/edit/license/%s/?saved' % image_id)
+    messages.success(request, _("Form saved. Thank you!"))
+    return HttpResponseRedirect('/edit/license/%s/' % image_id)
 
 @login_required
 @require_GET
@@ -2084,7 +2071,8 @@ def user_profile_save_basic(request):
 
     form.save()
 
-    return HttpResponseRedirect("/profile/edit/basic/?saved");
+    messages.success(request, _("Form saved. Thank you!"))
+    return HttpResponseRedirect("/profile/edit/basic/");
 
 
 @login_required
@@ -2133,7 +2121,8 @@ def user_profile_save_license(request):
 
     form.save()
 
-    return HttpResponseRedirect('/profile/edit/license/?saved')
+    messages.success(request, _("Form saved. Thank you!"))
+    return HttpResponseRedirect('/profile/edit/license/')
 
 
 @login_required
@@ -2221,7 +2210,8 @@ def user_profile_save_locations(request):
             context_instance = RequestContext(request))
 
     formset.save()
-    return HttpResponseRedirect('/profile/edit/locations/?saved');
+    messages.success(request, _("Form saved. Thank you!"))
+    return HttpResponseRedirect('/profile/edit/locations/');
 
 
 @login_required
@@ -2282,7 +2272,8 @@ def user_profile_save_gear(request):
     profile.save()
 
     initial = "&initial=true" if "initial" in request.POST else ""
-    return HttpResponseRedirect("/profile/edit/gear/?saved" + initial);
+    messages.success(request, _("Form saved. Thank you!"))
+    return HttpResponseRedirect("/profile/edit/gear/" + initial);
 
 
 @login_required
@@ -2477,7 +2468,8 @@ def user_profile_save_preferences(request):
             response_dict,
             context_instance=RequestContext(request))
 
-    return HttpResponseRedirect("/profile/edit/preferences/?saved");
+    messages.success(request, _("Form saved. Thank you!"))
+    return HttpResponseRedirect("/profile/edit/preferences/");
 
 
 @login_required
@@ -2868,13 +2860,17 @@ def request_mark_fulfilled(request, request_id):
 @login_required
 @require_POST
 def image_revision_upload_process(request):
+    def upload_error(image):
+        messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
+        return HttpResponseRedirect(image.get_absolute_url())
+
     file = None
     image_id = request.POST['image_id']
     image = Image.objects.get(id=image_id)
 
     form = ImageRevisionUploadForm(request.POST, request.FILES)
     if not form.is_valid():
-        return HttpResponseRedirect('/%i/?upload_error' % image.id)
+        return upload_error(image)
     file = request.FILES["file"]
 
     filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
@@ -2882,14 +2878,14 @@ def image_revision_upload_process(request):
     if original_ext == '.jpeg':
         original_ext = '.jpg'
     if original_ext not in ('.jpg', '.png', '.gif'):
-        return HttpResponseRedirect('/%i/?upload_error' % image.id)
+        return upload_error(image)
 
     try:
         from PIL import Image as PILImage
         trial_image = PILImage.open(file)
         trial_image.verify()
     except:
-        return HttpResponseRedirect('/%i/?upload_error' % image.id)
+        return upload_error(image)
 
     destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
     for chunk in file.chunks():
