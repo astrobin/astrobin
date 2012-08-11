@@ -55,3 +55,21 @@ def user_is_retailer(user):
     if user:
         return user.groups.filter(name = 'Retailers').count() > 0
     return False 
+
+def affiliate_limit(user):
+    if not user:
+        return 0
+
+    if user.groups.filter(name = 'affiliate-'):
+        return 1
+    if user.groups.filter(name = 'affiliate-10'):
+        return 10
+    if user.groups.filter(name = 'affiliate-50'):
+        return 50
+    if user.groups.filter(name = 'affiliate-100'):
+        return 100
+    if user.groups.filter(name = 'affiliate-100'):
+        return sys.maxint
+
+    return 0
+

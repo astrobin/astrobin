@@ -8,6 +8,7 @@ from haystack.query import SearchQuerySet, EmptySearchQuerySet
 from haystack.query import SQ
 
 from models import *
+from utils import affiliate_limit
 
 from search_indexes import xapian_escape
 
@@ -899,7 +900,18 @@ class ClaimCommercialGearForm(forms.Form):
 
     def __init__(self, user, **kwargs):
         super(ClaimCommercialGearForm, self).__init__(**kwargs)
+        self.user = user
         self.fields['merge_with'].choices = [('', '---------')] + uniq(CommercialGear.objects.filter(producer = user).values_list('id', 'proper_name'))
+
+    def clean (self):
+        cleaned_data = super(ClaimCommercialGearForm, self).clean()
+
+        max_items = affiliate_limit(self.user)
+        current_items = CommercialGear.objects.filter(producer = self.user).count()
+        if current_items >= max_items:
+            raise forms.ValidationError(_("You can't create more than %d claims." % max_items))
+
+        return self.cleaned_data
 
 
 class MergeCommercialGearForm(forms.Form):
