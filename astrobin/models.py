@@ -1382,7 +1382,7 @@ class UserProfile(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Company description"),
-        help_text = _("A short description of the company you represent on AstroBin."),
+        help_text = _("A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#10\">formatting rules</a>."),
         validators = [MaxLengthValidator(1000)],
     )
 

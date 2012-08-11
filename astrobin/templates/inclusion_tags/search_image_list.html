@@ -3,7 +3,7 @@
 {% load avatar_tags %}
 
 {% if multiple %}
-<em>{% blocktrans %}This search found results of multiple types. If you want, you can refine your search using the <strong>Search type</strong> field in the <strong>Basic criteria</strong> box.{% endblocktrans %}</em>
+<div class="alert alert-info">{% blocktrans %}This search found results of multiple types. If you want, you can refine your search using the <strong>Search type</strong> field in the <strong>Basic criteria</strong> box.{% endblocktrans %}</div>
 {% endif %}
 
 {% if gear_list %}

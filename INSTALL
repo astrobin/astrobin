@@ -268,6 +268,20 @@ Go to: http://localhost/admin/sites/site/1/
 
 and set site's properties.
 
+# Create groups:
+# ==============
+
+AstroBin needs some groups for the affiliate program:
+
+    * Producers
+    * Retailers
+    * affiliate-1   (EUR 9.90) / 9.90
+    * affiliate-10  (EUR 19.90) / 1.99
+    * affiliate-50  (EUR 39.90) / 0.79
+    * affiliate-100 (EUR 59.90) / 0.59
+    * affiliate-inf (EUR 99.90) / j0.00
+
+
 # (replace gunicorn.sh with run.sh if you want to debug)
 sudo supervisorctl stop gunicorn
 ./scripts/run.sh
