@@ -1841,6 +1841,7 @@ def user_page(request, username):
 @require_GET
 def user_page_commercial_products(request, username):
     user = get_object_or_404(User, username = username)
+    profile = get_object_or_404(UserProfile, user = user)
 
     return object_list(
         request,
@@ -1850,6 +1851,7 @@ def user_page_commercial_products(request, username):
         paginate_by = 50,
         extra_context = {
             'user': user,
+            'profile': profile,
             'claim_commercial_gear_form': ClaimCommercialGearForm(user = user),
             'merge_commercial_gear_form': MergeCommercialGearForm(user = user),
         },
@@ -3006,7 +3008,7 @@ def affiliates(request):
                 Q(user__groups__name = 'Retailers'))
             .exclude(
                 Q(company_name = None) |
-                Q(company_name = "")),
+                Q(company_name = "")).distinct(),
         template_name = 'affiliates.html',
         template_object_name = 'affiliate',
         paginate_by = 100,

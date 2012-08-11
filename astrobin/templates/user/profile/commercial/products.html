@@ -16,6 +16,11 @@
         {% endifequal %}
     </h1>
 
+    <div class="alert alert-info">
+        <i class="icon-info-sign"></i>
+        {% blocktrans %}Please remember that you are only allowed to claim items that you really produce and/or retail.{% endblocktrans %}
+    </div>
+
     <div class="row section">
         <div class="span12">
             <table class="table commercial-gear-items">
@@ -25,7 +30,9 @@
                     <th>{% trans "Name" %}</th>
                     <th>{% trans "Owners" %}</th>
                     <th>{% trans "Images" %}</th>
-                    <th>{% trans "Actions" %}</th>
+                    {% ifequal user request.user %}
+                        <th>{% trans "Actions" %}</th>
+                    {% endifequal %}
                 </tr>
                 {% for item in commercial_gear_list %}
                     <tr data-id="{{item.id}}">
@@ -50,6 +57,8 @@
                         </td>
                         <td>{% gear_set_owners item.gear_set %}</td>
                         <td>{% gear_set_images item.gear_set %}</td>
+
+                        {% ifequal user user.request %}
                         <td>
                             <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
                                 <i class="icon-eye-open icon-white"></i>
@@ -64,6 +73,7 @@
                                 <i class="icon-remove icon-white"></i>
                             </a>
                         </td>
+                        {% endifequal %}
                     </tr>
                 {% empty %}
                     <tr class="empty">
@@ -80,90 +90,95 @@
         </div>
     </div>
 
-    {% if is_producer or is_retailer %}
-        <a href="#claim-commercial-product-modal"
-           class="btn btn-primary claim-commercial-product"
-           data-toggle="modal">{% trans "Claim commercial product" %}</a>
-    {% endif %}
+    {% ifequal user request.user %}
+        {% if is_producer or is_retailer %}
+            <a href="#claim-commercial-product-modal"
+               class="btn btn-primary claim-commercial-product"
+               data-toggle="modal">{% trans "Claim commercial product" %}</a>
+        {% endif %}
+    {% endifequal %}
 {% endblock %}
 
-{% block modals %}
-    <div class="modal hide fade" id="claim-commercial-product-modal">
-        <div class="modal-header">
-            <a class="close" data-dismiss="modal">&times;</a>
-            <h3>{% trans "Claim commercial product" %}</h3>
-        </div>
-        <div class="modal-body">
-            <form id="claim-commercial-product" class="form-horizontal" action="{% url commercial_products_claim 0 %}" method="post">
-                <div class="form-content">
-                    {{claim_commercial_gear_form|as_bootstrap}}
-                </div>
-                <div class="form-actions">
-                    <input type="submit" class="btn btn-primary" value="{% trans "Claim" %}"/>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal hide fade" id="remove-commercial-products-modal">
-        <div class="modal-header">
-            <a class="close" data-dismiss="modal">&times;</a>
-            <h3>{% trans "Select items to remove" %}</h3>
-        </div>
-        <div class="modal-body">
-            <div class="alert alert-warning">
-                {% blocktrans %}Be careful if you try to remove all of these!{% endblocktrans %}
-                {% blocktrans %}All the properties, including the commercial description, of this claim will be deleted and cannot be recovered!{% endblocktrans %}
+{% ifequal user request.user %}
+    {% block modals %}
+        <div class="modal hide fade" id="claim-commercial-product-modal">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h3>{% trans "Claim commercial product" %}</h3>
             </div>
-            <form id="remove-commercial-product" class="form-inline">
-                <div class="form-content">
-                    <div class="loading"><img src="{{STATIC_URL}}images/loading-bar.gif" alt=""/></div>
-                </div>
-            </form>
+            <div class="modal-body">
+                <form id="claim-commercial-product" class="form-horizontal" action="{% url commercial_products_claim 0 %}" method="post">
+                    <div class="form-content">
+                        {{claim_commercial_gear_form|as_bootstrap}}
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-primary" value="{% trans "Claim" %}"/>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-            <a href="#" class="remove btn btn-primary">{% trans "Remove" %}</a>
-        </div>
-    </div>
 
-    <div class="modal hide fade" id="merge-commercial-products-modal">
-        <div class="modal-header">
-            <a class="close" data-dismiss="modal">&times;</a>
-            <h3>{% trans "Select the product you want to merge to" %}</h3>
-        </div>
-        <div class="modal-body">
-            <form id="merge-commercial-product" class="form-horizontal">
-                <div class="form-content">
-                    {{merge_commercial_gear_form|as_bootstrap}}
+        <div class="modal hide fade" id="remove-commercial-products-modal">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h3>{% trans "Select items to remove" %}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    {% blocktrans %}Be careful if you try to remove all of these!{% endblocktrans %}
+                    {% blocktrans %}All the properties, including the commercial description, of this claim will be deleted and cannot be recovered!{% endblocktrans %}
                 </div>
-            </form>
+                <form id="remove-commercial-product" class="form-inline">
+                    <div class="form-content">
+                        <div class="loading"><img src="{{STATIC_URL}}images/loading-bar.gif" alt=""/></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+                <a href="#" class="remove btn btn-primary">{% trans "Remove" %}</a>
+            </div>
         </div>
-        <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-            <a href="#" class="merge btn btn-primary">{% trans "Merge" %}</a>
-        </div>
-    </div>
 
-    <div class="modal hide fade" id="remove-commercial-products-confirmation-modal">
-        <div class="modal-header">
-            <a class="close" data-dismiss="modal">&times;</a>
-            <h3>{% trans "Are you sure?" %}</h3>
+        <div class="modal hide fade" id="merge-commercial-products-modal">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h3>{% trans "Select the product you want to merge to" %}</h3>
+            </div>
+            <div class="modal-body">
+                <form id="merge-commercial-product" class="form-horizontal">
+                    <div class="form-content">
+                        {{merge_commercial_gear_form|as_bootstrap}}
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+                <a href="#" class="merge btn btn-primary">{% trans "Merge" %}</a>
+            </div>
         </div>
-        <div class="modal-body">
-            {% blocktrans %}All the properties, including the commercial description, of this claim will be deleted and cannot be recovered!{% endblocktrans %}
-            <strong>{% blocktrans %}Are you sure?{% endblocktrans %}</strong>
+
+        <div class="modal hide fade" id="remove-commercial-products-confirmation-modal">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h3>{% trans "Are you sure?" %}</h3>
+            </div>
+            <div class="modal-body">
+                {% blocktrans %}All the properties, including the commercial description, of this claim will be deleted and cannot be recovered!{% endblocktrans %}
+                <strong>{% blocktrans %}Are you sure?{% endblocktrans %}</strong>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-primary">Continue</a>
+            </div>
         </div>
-        <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-            <a href="#" class="btn btn-primary">Continue</a>
-        </div>
-    </div>
-{% endblock %}
+    {% endblock %}
+{% endifequal %} {# user == request.user #}
 
 {% block extra_js %}
     {% include 'user/profile-js.html' %}
 
+    {% ifequal user request.user %}
     <script type="text/javascript">
         $(document).ready(function() {
             var $form = $('form#claim-commercial-product'),
@@ -472,4 +487,5 @@
             });
         });
     </script>
+    {% endifequal %} {# user == request.user #}
 {% endblock %}
