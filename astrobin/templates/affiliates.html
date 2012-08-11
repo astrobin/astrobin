@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+{% load markup %}
+
+{% block title %}AstroBin - {% trans "Affiliates" %}{% endblock %}
+{% block content %}
+    <h1>{% trans "Affiliates" %}</h1>
+    <div class="well">
+        {% blocktrans %}The following companies support AstroBin.{% endblocktrans %}
+    </div>
+
+    {% for affiliate in affiliate_list %}
+        <div class="affiliate">
+            <div class="content">
+                <h3>{{affiliate.company_name}}</h3>
+                {% if affiliate.company_website %}
+                    <a target="_blank" href={{affiliate.company_website}}">{{affiliate.company_website}}</a>
+                {% endif %}
+                {{ affiliate.company_description|markdown|linebreaks }}
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="pagination pagination-centered">
+        {% paginate 4 %}
+    </div>
+
+{% endblock %}
+

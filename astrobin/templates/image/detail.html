@@ -422,6 +422,7 @@
                 </div>
             </div>
 
+            {% if image.subject_type < 500 %}
             <div class="row image-detail">
                 <div class="span8">
                     <div class="subtle-container image-detail-inner">
@@ -438,8 +439,7 @@
                                                 <p>
                                                   <strong>{% trans i.0 %}:</strong>
                                                   {% for g in i.1 %}
-                                                        <a rel="popover" class="gear-popover{% if g.commercial %} btn btn-mini btn-warning{% endif %}" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id %}">{% gear_name g %}</a>
-                                                        {% if not forloop.last %},&nbsp;{% endif %}
+                                                        <a rel="popover" class="gear-popover{% if g.commercial %} btn btn-mini btn-warning{% endif %}" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id %}">{% gear_name g %}</a>{% if not forloop.last %},&nbsp;{% endif %}
                                                     {% endfor %}
                                                 </p>
                                             {% endif %}
@@ -523,6 +523,7 @@
                     </div> <!-- image-detail-inner -->
                 </div> <!-- span8 -->
             </div> <!-- row image-detail -->
+            {% endif %} {# image.subject_type < 500 #}
                 
             {% if image.description %}
             <div class="image-description row">
@@ -762,6 +763,24 @@
                     </tr>
                 </table>
             </div>
+
+            {% if gear_list_has_commercial %}
+                <div class="subtle-container">
+                    <h4>{% trans "Made possible by:" %}</h4>
+                    {% for i in gear_list %}
+                        {% if i.1 %}
+                            {% for g in i.1 %}
+                                {% if g.commercial %}
+                                    <a rel="popover"
+                                       class="gear-popover btn btn-mini btn-warning"
+                                       data-load="{% url gear_popover_ajax g.id %}"
+                                       href="{% url gear_page g.id %}">{% gear_name g %}</a>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %} {# gear_list_has_commercial #}
         </div> <!-- span -->
     </div> <!-- row  (main pane) -->
 {% endblock %}

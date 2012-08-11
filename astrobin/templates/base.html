@@ -181,14 +181,24 @@
                                             {% trans "FAQ" %}
                                         </a>
                                     </li>
+
                                     <li class="divider"></li>
+
                                     <li>
                                         <a href="{% url api %}">
                                             <i class="icon-key"></i>
                                             API (beta)
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{% url affiliates %}">
+                                            <i class="icon-group"></i>
+                                            {% trans "Affiliates" %}
+                                        </a>
+                                    </li>
+
                                     <li class="divider"></li>
+
                                     <li>
                                         <a href="/contact/">
                                             <i class="icon-envelope"></i>
@@ -364,7 +374,7 @@
 
                                         {% if is_producer or is_retailer %}
                                         <li>
-                                            <a href="{% url profile_edit_basic %}">
+                                            <a href="{% url profile_edit_commercial %}">
                                                 <i class="icon-briefcase"></i>
                                                 {% trans "Commercial information" %}
                                             </a>

@@ -609,7 +609,11 @@ def image_detail(request, id, r):
         ('Filters'           , image.filters.all(), 'filters'),
         ('Accessories'       , image.accessories.all(), 'accessories'),
     )
-
+    gear_list_has_commercial = False
+    for g in gear_list:
+        if g[1].exclude(commercial = None).count() > 0:
+            gear_list_has_commercial = True
+            break
 
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
     ssa = None
@@ -765,6 +769,7 @@ def image_detail(request, id, r):
                      'related': related,
                      'related_images': related_images,
                      'gear_list': gear_list,
+                     'gear_list_has_commercial': gear_list_has_commercial,
                      'image_type': image_type,
                      'ssa': ssa,
                      'deep_sky_data': deep_sky_data,
@@ -2989,6 +2994,23 @@ def api(request):
             'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         },
         context_instance=RequestContext(request))
+
+
+@require_GET
+def affiliates(request):
+    return object_list(
+        request,
+        queryset = UserProfile.objects
+            .filter(
+                Q(user__groups__name = 'Producers') |
+                Q(user__groups__name = 'Retailers'))
+            .exclude(
+                Q(company_name = None) |
+                Q(company_name = "")),
+        template_name = 'affiliates.html',
+        template_object_name = 'affiliate',
+        paginate_by = 100,
+    )
 
 
 @require_GET

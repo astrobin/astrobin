@@ -17,14 +17,16 @@
         {% if gear.commercial %}
             <div class="commercial">
                 <div class="row section">
-                    {% if gear.commercial.image %}
-                        {% with gear.commercial.image as image %}
-                            <div class="span8">
+                    <div class="span8">
+                        {% if gear.commercial.image %}
+                            {% with gear.commercial.image as image %}
                                 <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{{image.original_ext}}"
                                      alt="{{image.title|escape}}"/>
-                            </div>
-                        {% endwith %}
-                    {% endif %}
+                            {% endwith %}
+                        {% else %}
+                            <img src="{{STATIC_URL}}images/gear-no-image.jpg" />
+                        {% endif %}
+                    </div>
                     <div class="span4">
                         <div class="subtle-container">
                             <table class="table">
