@@ -111,14 +111,19 @@
             <h3>{% trans "Select items to remove" %}</h3>
         </div>
         <div class="modal-body">
+            <div class="alert alert-warning">
+                {% blocktrans %}Be careful if you try to remove all of these!{% endblocktrans %}
+                {% blocktrans %}All the properties, including the commercial description, of this claim will be deleted and cannot be recovered!{% endblocktrans %}
+            </div>
             <form id="remove-commercial-product" class="form-inline">
                 <div class="form-content">
                     <div class="loading"><img src="{{STATIC_URL}}images/loading-bar.gif" alt=""/></div>
                 </div>
-                <div class="form-actions">
-                    <input type="submit" class="btn btn-primary" value="{% trans "Remove" %}"/>
-                </div>
             </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+            <a href="#" class="remove btn btn-primary">{% trans "Remove" %}</a>
         </div>
     </div>
 
@@ -132,10 +137,26 @@
                 <div class="form-content">
                     {{merge_commercial_gear_form|as_bootstrap}}
                 </div>
-                <div class="form-actions">
-                    <input type="submit" class="btn btn-primary" value="{% trans "Merge" %}"/>
-                </div>
             </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+            <a href="#" class="merge btn btn-primary">{% trans "Merge" %}</a>
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="remove-commercial-products-confirmation-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Are you sure?" %}</h3>
+        </div>
+        <div class="modal-body">
+            {% blocktrans %}All the properties, including the commercial description, of this claim will be deleted and cannot be recovered!{% endblocktrans %}
+            <strong>{% blocktrans %}Are you sure?{% endblocktrans %}</strong>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+            <a href="#" class="btn btn-primary">Continue</a>
         </div>
     </div>
 {% endblock %}
@@ -304,6 +325,10 @@
                 $merge_with_later.val(0);
             });
 
+            $('#remove-commercial-products-modal').find('a.remove').click(function() {
+                $('#remove-commercial-products-modal').find('form').submit();
+            });
+
             $('#remove-commercial-products-modal').find('form').submit(function() {
                 var promises = [];
                 var $modal = $(this).closest('.modal');
@@ -352,18 +377,23 @@
                 var id_list = ids.split(',');
 
                 if (id_list.length == 1) {
-                    $.ajax({
-                        url: '/commercial/products/unclaim/' + id_list[0] + '/',
-                        dataType: 'json',
-                        timeout: 10000,
-                        cache: false,
-                        success: function(data, status, request) {
-                            $table_row.find('a[rel=tooltip]').tooltip('hide');
-                            $table_row.remove();
-                            $merge_with.find('option[value=' + data.commercial_id + ']').remove();
-                            $merge_with_later.find('option[value=' + data.commercial_id + ']').remove();
-                        }
+                    var $modal = $('#remove-commercial-products-confirmation-modal');
+                    $modal.find('a.btn-primary').click(function() {
+                        $.ajax({
+                            url: '/commercial/products/unclaim/' + id_list[0] + '/',
+                            dataType: 'json',
+                            timeout: 10000,
+                            cache: false,
+                            success: function(data, status, request) {
+                                $table_row.find('a[rel=tooltip]').tooltip('hide');
+                                $table_row.remove();
+                                $merge_with.find('option[value=' + data.commercial_id + ']').remove();
+                                $merge_with_later.find('option[value=' + data.commercial_id + ']').remove();
+                                $modal.modal('hide');
+                            }
+                        });
                     });
+                    $modal.modal('show');
                  } else {
                     var $modal = $('#remove-commercial-products-modal');
                     var $form_content = $modal.find('.form-content');
@@ -410,6 +440,10 @@
                 return false;
             });
 
+
+            $('#merge-commercial-products-modal').find('a.merge').click(function() {
+                $('#merge-commercial-products-modal').find('form').submit();
+            });
 
             $('#merge-commercial-products-modal').find('form').submit(function() {
                 var from_id = $(this).closest('.modal').data('from_id'),

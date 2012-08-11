@@ -909,7 +909,7 @@ class ClaimCommercialGearForm(forms.Form):
         max_items = affiliate_limit(self.user)
         current_items = CommercialGear.objects.filter(producer = self.user).count()
         if current_items >= max_items:
-            raise forms.ValidationError(_("You can't create more than %d claims." % max_items))
+            raise forms.ValidationError(_("You can't create more than %d claims. Consider upgrading your affiliation!" % max_items))
 
         return self.cleaned_data
 

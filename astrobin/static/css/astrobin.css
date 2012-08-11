@@ -653,6 +653,13 @@ body.full {
 .modal .modal-header .close {
   color: white;
 }
+.modal .modal-footer {
+  background: #303030 url('../images/darker-panel-tile.png');
+  border-top: 1px solid #303030;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
 .modal .form-inline {
   display: table;
   width: auto;
