@@ -9,14 +9,6 @@
     <div class="row">
         <div class="span12">
             <h1>{% trans "Edit your astrophotography gear" %}</h1>
-            <table class="form_saved_container">
-                <tr>
-                    <td>{% form_saved request %}</td>
-                    {% if request.GET.initial == 'true' %}
-                    <td><a href="/">{% trans "Go back to the home page." %}</a></td>
-                    {% endif %}
-                </tr>
-            </table>
 
             {% for label, gear_items in prefill.items %}
                 {% list_gear label gear_items.0 gear_items.1 request.user %}

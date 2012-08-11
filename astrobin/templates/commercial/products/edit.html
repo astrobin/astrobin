@@ -7,7 +7,6 @@
 {% block title %}AstroBin - {% trans "Edit commercial product" %}: {% gear_name gear %}{% endblock %}
 {% block content %}
     <h1>{% blocktrans %}Edit commercial product{% endblocktrans %}: {% gear_name gear %}</h1>
-    {% form_saved request %}
     <form class="form-horizontal" id="basic" action="{% url commercial_products_save product.id %}" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
 

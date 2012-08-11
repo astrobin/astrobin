@@ -18,7 +18,6 @@
     {% endif %}
     </h1>
 
-    {% form_saved request %}
     {% if edit_type == 'solar_system' %}
         <form class="form-horizontal" id="image_acquisition" action="{% url image_edit_save_acquisition %}" method="post">
             {{ssa_form|as_bootstrap}}
