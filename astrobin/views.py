@@ -4251,7 +4251,8 @@ def commercial_products_save(request, id):
 
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect('/commercial/products/edit/%i/?saved' % product.id)
+        messages.success(request, _("Form saved. Thank you!"))
+        return HttpResponseRedirect('/commercial/products/edit/%i/' % product.id)
 
     return render_to_response(
         'commercial/products/edit.html',
