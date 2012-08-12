@@ -562,3 +562,4 @@ def get_final_filename(image):
             return r.filename
 
     return image.filename
+

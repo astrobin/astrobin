@@ -990,3 +990,10 @@ class MergeRetailedGearForm(forms.Form):
     def __init__(self, user, **kwargs):
         super(MergeRetailedGearForm, self).__init__(**kwargs)
         self.fields['merge_with'].choices = [('', '---------')] + uniq(RetailedGear.objects.filter(retailer = user).values_list('id', 'proper_name'))
+
+
+class RetailedGearForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = RetailedGear

@@ -4250,7 +4250,7 @@ def commercial_products_merge(request, from_id, to_id):
             'message': _("You can't merge a product to itself."),
         }),
         mimetype = 'application/javascript')
-    
+
             
 @require_GET
 @login_required
@@ -4444,6 +4444,33 @@ def retailed_products_merge(request, from_id, to_id):
             'message': _("You can't merge a product to itself."),
         }),
         mimetype = 'application/javascript')
+
+
+@login_required
+@user_passes_test(lambda u: user_is_retailer(u))
+def retailed_products_edit(request, id):
+    product = get_object_or_404(RetailedGear, id = id)
+    if product.retailer != request.user:
+        return HttpResponseForbidden()
+
+    if request.method == 'POST':
+        form = RetailedGearForm(data = request.POST, instance = product)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Form saved. Thank you!"))
+            return HttpResponseRedirect('/commercial/products/retailed/edit/%i/' % product.id)
+    else:
+        form = RetailedGearForm(instance = product)
+
+    return render_to_response(
+        'commercial/products/retailed/edit.html',
+        {
+            'form': form,
+            'product': product,
+            'gear': Gear.objects.filter(retailers = product)[0],
+        },
+        context_instance = RequestContext(request))
 
 
 @require_GET
