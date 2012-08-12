@@ -1853,6 +1853,7 @@ def user_page_commercial_products(request, username):
         'claim_commercial_gear_form': ClaimCommercialGearForm(user = user),
         'merge_commercial_gear_form': MergeCommercialGearForm(user = user),
         'claim_retailed_gear_form': ClaimRetailedGearForm(user = user),
+        'merge_retailed_gear_form': MergeRetailedGearForm(user = user),
     }
 
     return render_to_response(
@@ -4225,24 +4226,31 @@ def commercial_products_merge(request, from_id, to_id):
             from_cg = CommercialGear.objects.get(id = int(from_id))
             to_cg = CommercialGear.objects.get(id = int(to_id))
         except CommercialGear.DoesNotExist:
-            return HttpResponseForbindden()
+            return HttpResponseForbidden()
 
         if from_cg.producer != request.user or to_cg.producer != request.user:
-            return HttpResponseForbudden()
+            return HttpResponseForbidden()
 
         Gear.objects.filter(commercial = from_cg).update(commercial = to_cg)
         from_cg.delete()
 
-    claimed_gear = Gear.objects.filter(commercial = to_cg).values_list('id', flat = True)
+        claimed_gear = Gear.objects.filter(commercial = to_cg).values_list('id', flat = True)
+
+        return HttpResponse(
+            simplejson.dumps({
+                'success': True,
+                'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
+                'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
+            }),
+            mimetype = 'application/javascript')
 
     return HttpResponse(
         simplejson.dumps({
-            'success': True,
-            'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
-            'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
+            'success': False,
+            'message': _("You can't merge a product to itself."),
         }),
         mimetype = 'application/javascript')
-
+    
             
 @require_GET
 @login_required
@@ -4368,7 +4376,7 @@ def retailed_products_unclaim(request, id):
     try:
         retailed = RetailedGear.objects.get(retailer = request.user, gear = gear)
     except RetailedGear.DoesNotExist:
-            return HttpResponseForbidden()
+        return HttpResponseForbidden()
 
     retailed_id = retailed.id
     retailed_was_removed = False
@@ -4396,6 +4404,44 @@ def retailed_products_unclaim(request, id):
             'retailed_was_removed': retailed_was_removed,
             'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
             'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
+        }),
+        mimetype = 'application/javascript')
+
+
+@require_GET
+@login_required
+@user_passes_test(lambda u: user_is_retailer(u))
+def retailed_products_merge(request, from_id, to_id):
+    if from_id != to_id:
+        try:
+            from_rg = RetailedGear.objects.get(id = int(from_id))
+            to_rg = RetailedGear.objects.get(id = int(to_id))
+        except RetailedGear.DoesNotExist:
+            return HttpResponseForbidden()
+
+        if from_rg.retailer != request.user or to_rg.retailer != request.user:
+            return HttpResponseForbidden()
+
+        all_gear = Gear.objects.filter(retailers = from_rg)
+        for g in all_gear:
+            g.retailers.add(to_rg)
+
+        from_rg.delete()
+
+        claimed_gear = Gear.objects.filter(retailers = to_rg).values_list('id', flat = True)
+
+        return HttpResponse(
+            simplejson.dumps({
+                'success': True,
+                'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
+                'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
+            }),
+            mimetype = 'application/javascript')
+
+    return HttpResponse(
+        simplejson.dumps({
+            'success': False,
+            'message': _("You can't merge a product to itself."),
         }),
         mimetype = 'application/javascript')
 
