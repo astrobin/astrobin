@@ -8,7 +8,7 @@ from haystack.query import SearchQuerySet, EmptySearchQuerySet
 from haystack.query import SQ
 
 from models import *
-from utils import affiliate_limit
+from utils import affiliate_limit, retailer_affiliate_limit
 
 from search_indexes import xapian_escape
 
@@ -895,7 +895,7 @@ class ClaimCommercialGearForm(forms.Form):
 
     merge_with = forms.ChoiceField(
         choices = [('', '---------')],
-        help_text = _("Use this field to mark that the item you are claiming really is the same product (or a variation thereof) or something you have claimed before."),
+        help_text = _("Use this field to mark that the item you are claiming really is the same product (or a variation thereof) of something you have claimed before."),
         required = False)
 
     def __init__(self, user, **kwargs):
@@ -936,4 +936,45 @@ class CommercialGearForm(forms.ModelForm):
     def __init__(self, user, **kwargs):
         super(CommercialGearForm, self).__init__(**kwargs)
         self.fields['image'].queryset = Image.objects.filter(user = user, is_stored = True, subject_type = 500)
+
+
+class ClaimRetailedGearForm(forms.Form):
+    error_css_class = 'error'
+
+    make = forms.ChoiceField(
+        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make'))),
+        help_text = _("The make, brand, producer or developer of this product."),
+        required = True)
+
+    name = forms.ChoiceField(
+        choices = [('', '---------')],
+        required = True)
+
+    merge_with = forms.ChoiceField(
+        choices = [('', '---------')],
+        help_text = _("Use this field to mark that the item you are claiming really is the same product (or a variation thereof) of something you have claimed before."),
+        required = False)
+
+    def __init__(self, user, **kwargs):
+        super(ClaimRetailedGearForm, self).__init__(**kwargs)
+        self.user = user
+        self.fields['merge_with'].choices = [('', '---------')] + uniq(RetailedGear.objects.filter(retailer = user).values_list('id', 'proper_name'))
+
+    def clean (self):
+        cleaned_data = super(ClaimRetailedGearForm, self).clean()
+
+        max_items = retailer_affiliate_limit(self.user)
+        current_items = RetailedGear.objects.filter(gear = self.user).count()
+        if current_items >= max_items:
+            raise forms.ValidationError(_("You can't create more than %d claims. Consider upgrading your affiliation!" % max_items))
+
+        already_claimed = set(
+            item.id
+                for sublist in [x.gear_set.all() for x in RetailedGear.objects.filter(retailer = self.user)]
+            for item in sublist)
+
+        if int(cleaned_data['name']) in already_claimed:
+            raise forms.ValidationError(_("You have already claimed this product."))
+
+        return self.cleaned_data
 

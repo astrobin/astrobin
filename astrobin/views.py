@@ -1843,19 +1843,23 @@ def user_page_commercial_products(request, username):
     user = get_object_or_404(User, username = username)
     profile = get_object_or_404(UserProfile, user = user)
 
-    return object_list(
-        request,
-        queryset = CommercialGear.objects.filter(producer = user).exclude(gear = None),
-        template_name = 'user/profile/commercial/products.html',
-        template_object_name = 'commercial_gear',
-        paginate_by = 50,
-        extra_context = {
-            'user': user,
-            'profile': profile,
-            'claim_commercial_gear_form': ClaimCommercialGearForm(user = user),
-            'merge_commercial_gear_form': MergeCommercialGearForm(user = user),
-        },
-     )
+    response_dict = {
+        'user': user,
+        'profile': profile,
+        'user_is_producer': user_is_producer(user),
+        'user_is_retailer': user_is_retailer(user),
+        'commercial_gear_list': CommercialGear.objects.filter(producer = user).exclude(gear = None),
+        'retailed_gear_list': RetailedGear.objects.filter(retailer = user).exclude(gear = None),
+        'claim_commercial_gear_form': ClaimCommercialGearForm(user = user),
+        'merge_commercial_gear_form': MergeCommercialGearForm(user = user),
+        'claim_retailed_gear_form': ClaimRetailedGearForm(user = user),
+    }
+
+    return render_to_response(
+        'user/profile/commercial/products.html',
+        response_dict,
+        context_instance = RequestContext(request)
+    )
 
 
 @require_GET
@@ -4106,7 +4110,7 @@ def activities(request):
 
 @require_POST
 @login_required
-@user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
+@user_passes_test(lambda u: user_is_producer(u))
 def commercial_products_claim(request, id):
     from templatetags.tags import gear_owners, gear_images
 
@@ -4173,7 +4177,7 @@ def commercial_products_claim(request, id):
 
 @require_GET
 @login_required
-@user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
+@user_passes_test(lambda u: user_is_producer(u))
 def commercial_products_unclaim(request, id):
     try:
         gear = Gear.objects.get(id = id)
@@ -4287,7 +4291,115 @@ def commercial_products_save(request, id):
         },
         context_instance = RequestContext(request))
 
-    
+
+@require_POST
+@login_required
+@user_passes_test(lambda u: user_is_retailer(u))
+def retailed_products_claim(request, id):
+    from templatetags.tags import gear_owners, gear_images
+
+    def error(form):
+        from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
+        response_dict = {
+            'form': as_bootstrap(form, 'horizontal') if form else '',
+            'success': False,
+        }
+        return HttpResponse(
+            simplejson.dumps(response_dict),
+            mimetype = 'application/javascript')
+
+    form = ClaimRetailedGearForm(data = request.POST, user = request.user)
+    try:
+        gear = Gear.objects.get(id = id)
+        # Here, instead, we can claim something that's already claimed!
+    except Gear.DoesNotExist:
+        return error(form);
+
+    # We need to add the choice to the field so that the form will validate.
+    # If we don't, it won't validate because the selected option, which was
+    # added via AJAX, is not among those available.
+    form.fields['name'].choices += [(gear.id, gear.get_name())]
+    if request.POST.get('merge_with'):
+        merge_with = RetailedGear.objects.get(id = int(request.POST.get('merge_with')))
+        proper_name = merge_with.proper_name if merge_with.proper_name else merge_with.gear_set.all()[0].get_name()
+        form.fields['merge_with'].choices += [(merge_with.id, proper_name)]
+
+    if not form.is_valid():
+        return error(form)
+
+    if form.cleaned_data['merge_with'] != '':
+        retailed_gear = RetailedGear.objects.get(id = int(form.cleaned_data['merge_with']))
+    else:
+        retailed_gear = RetailedGear(
+            retailer = request.user,
+            proper_name = gear.get_name(),
+        )
+        retailed_gear.save()
+
+    gear.retailers.add(retailed_gear)
+    gear.save()
+
+    claimed_gear = Gear.objects.filter(retailers = retailed_gear).values_list('id', flat = True)
+    return HttpResponse(
+        simplejson.dumps({
+            'success': True,
+            'id': retailed_gear.id,
+            'claimed_gear_id': gear.id,
+            'gear_ids': u','.join(str(x) for x in claimed_gear),
+            'gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
+            'make': gear.get_make(),
+            'name': gear.get_name(),
+            'owners': gear_owners(gear),
+            'images': gear_images(gear),
+            'is_merge': form.cleaned_data['merge_with'] != '',
+        }),
+        mimetype = 'application/javascript')   
+
+
+@require_GET
+@login_required
+@user_passes_test(lambda u: user_is_retailer(u))
+def retailed_products_unclaim(request, id):
+    try:
+        gear = Gear.objects.get(id = id)
+    except Gear.DoesNotExist:
+        return HttpResponseForbidden()
+
+    try:
+        retailed = RetailedGear.objects.get(retailer = request.user, gear = gear)
+    except RetailedGear.DoesNotExist:
+            return HttpResponseForbidden()
+
+    retailed_id = retailed.id
+    retailed_was_removed = False
+
+    if retailed is None or retailed.retailer != request.user:
+        return HttpResponseForbidden()
+
+    all_gear = Gear.objects.filter(retailers = retailed)
+    if all_gear.count() == 1:
+        retailed.delete()
+        retailed_was_removed = True
+
+    gear.retailers.remove(retailed)
+
+    if retailed_was_removed:
+        claimed_gear = []
+    else:
+        claimed_gear = Gear.objects.filter(retailers = retailed).values_list('id', flat = True)
+
+    return HttpResponse(
+        simplejson.dumps({
+            'success': True,
+            'gear_id': id,
+            'retailed_id': retailed_id,
+            'retailed_was_removed': retailed_was_removed,
+            'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
+            'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
+        }),
+        mimetype = 'application/javascript')
+
+
 @require_GET
 def comments(request):
     return object_list(
