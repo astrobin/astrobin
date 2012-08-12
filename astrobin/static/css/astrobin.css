@@ -658,6 +658,12 @@ body.full {
   width: auto;
   margin: 0 auto;
 }
+.navbar-fixed-top .container {
+  max-height: 40px;
+}
+.navbar-search {
+  width: 120px;
+}
 .navbar .navbar-inner {
   border-top: 4px solid #3092cf;
   background: #303030 url('../images/darker-panel-tile.png');
