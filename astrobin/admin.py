@@ -236,3 +236,4 @@ admin.site.register(GlobalStat)
 ###############################################################################
 admin.site.register(CommercialGear)
 admin.site.register(CommercialGearProperty)
+admin.site.register(RetailedGear)

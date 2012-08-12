@@ -110,6 +110,9 @@ urlpatterns = patterns('',
     url(r'^commercial/products/edit/(?P<id>\d+)/$', views.commercial_products_edit, name='commercial_products_edit'),
     url(r'^commercial/products/save/(?P<id>\d+)/$', views.commercial_products_save, name='commercial_products_save'),
 
+    url(r'^commercial/products/retailed/claim/(?P<id>\d+)/$', views.retailed_products_claim, name='retailed_products_claim'),
+    url(r'^commercial/products/retailed/unclaim/(?P<id>\d+)/$', views.retailed_products_unclaim, name='retailed_products_unclaim'),
+
     url(r'^users/(?P<username>[\w.@+-]+)/favorites/$', views.user_page_favorites, name='user_page_favorites'),
     url(r'^users/(?P<username>[\w.@+-]+)/card/$', views.user_page_card, name='user_page_card'),
     url(r'^users/(?P<username>[\w.@+-]+)/plots/$', views.user_page_plots, name='user_page_plots'),

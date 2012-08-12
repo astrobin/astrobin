@@ -167,6 +167,7 @@ class Gear(models.Model):
     )
 
     master = models.ForeignKey('self', null = True, editable = False)
+
     commercial = models.ForeignKey(
         'CommercialGear',
         null = True,
@@ -174,6 +175,10 @@ class Gear(models.Model):
         on_delete = models.SET_NULL,
     )
 
+    retailers = models.ManyToManyField(
+        'RetailedGear',
+    )
+    
     updated = models.DateTimeField(
         editable = False,
         auto_now = True,
@@ -1860,6 +1865,82 @@ post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
 ###############################################################################
 # Commercial models.                                                          #
 ###############################################################################
+class RetailedGear(models.Model):
+    CURRENCY_CHOICES = (
+        ('AUD', _('AUD - Australian dollars')),
+        ('CAD', _('CAD - Canadian dollars')),
+        ('CHF', _('CHF - Swiss francs')),
+        ('EUR', _('EUR - Euros')),
+        ('GBP', _('GPB - Pound stelings')),
+        ('PLN', _('PLN - Polish zloty')),
+        ('SEK', _('SEK - Swedish krona')),
+        ('USD', _('USD - American dollars')),
+    )
+
+    retailer = models.ForeignKey(
+        User,
+        null = False,
+        verbose_name = _("Producer"),
+        related_name = 'retailed_gear',
+        editable = False
+    )
+
+    proper_make = models.CharField(
+        null = True,
+        blank = True,
+        max_length = 128,
+        verbose_name = _("Proper make"),
+        help_text = _("Sometimes, product make/brand/producer/developer names are not written properly by the users. Write here the proper make/brand/producer/developer name."),
+    )
+
+    proper_name = models.CharField(
+        null = True,
+        blank = True,
+        max_length = 128,
+        verbose_name = _("Proper name"),
+        help_text = _("Sometimes, product names are not written properly by the users. Write here the proper product name, not including the make/brand/producer/developer name.<br/>It is recommended that you try to group as many items as possible, so try to use a generic version of your product's name."),
+    )
+
+    link = models.URLField(
+        max_length = 512,
+        null = True,
+        blank = True,
+        verbose_name = _("Link"),
+        help_text = _("The link to this product's page on your website."),
+    )
+
+    price = models.DecimalField(
+        max_digits = 10,
+        decimal_places = 2,
+        null = True,
+        blank = True,
+        verbose_name = _("Price"),
+    )
+
+    currency = models.CharField(
+        max_length = 3,
+        choices = CURRENCY_CHOICES,
+        default = 'EUR',
+        blank = False,
+        verbose_name = _("Currency"),
+    )
+
+    created = models.DateTimeField(
+        auto_now_add = True,
+        editable = False,
+    )
+
+    updated = models.DateTimeField(
+        auto_now = True,
+        editable = False,
+    )
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ['created']
+        verbose_name_plural = _("Retailed gear items")
+
+
 class CommercialGear(models.Model):
     producer = models.ForeignKey(
         User,

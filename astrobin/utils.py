@@ -60,7 +60,7 @@ def affiliate_limit(user):
     if not user:
         return 0
 
-    if user.groups.filter(name = 'affiliate-'):
+    if user.groups.filter(name = 'affiliate-1'):
         return 1
     if user.groups.filter(name = 'affiliate-10'):
         return 10
@@ -68,8 +68,25 @@ def affiliate_limit(user):
         return 50
     if user.groups.filter(name = 'affiliate-100'):
         return 100
-    if user.groups.filter(name = 'affiliate-100'):
+    if user.groups.filter(name = 'affiliate-inf'):
         return sys.maxint
 
     return 0
 
+
+def retailer_affiliate_limit(user):
+    if not user:
+        return 0
+
+    if user.groups.filter(name = 'retailer-affiliate-1'):
+        return 1
+    if user.groups.filter(name = 'retailer-affiliate-10'):
+        return 10
+    if user.groups.filter(name = 'retailer-affiliate-50'):
+        return 50
+    if user.groups.filter(name = 'retailer-affiliate-100'):
+        return 100
+    if user.groups.filter(name = 'retailer-affiliate-inf'):
+        return sys.maxint
+
+    return 0
