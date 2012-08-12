@@ -199,6 +199,16 @@ class UserProfileEditCommercialForm(forms.ModelForm):
         fields = ('company_name', 'company_description', 'company_website',)
 
 
+class UserProfileEditRetailerForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = UserProfile
+        fields = (
+            'retailer_country',
+        )
+
+
 class UserProfileEditGearForm(forms.Form):
     telescopes = forms.CharField(
         max_length=256,
