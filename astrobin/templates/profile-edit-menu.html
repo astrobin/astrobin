@@ -11,6 +11,11 @@
             <a href="{% url profile_edit_commercial %}"><i class="icon-briefcase"></i> {% trans "Commercial" %}</a>
         </li>
         {% endif %}
+        {% if is_retailer %}
+        <li class="{% current request '^/profile/edit/retailer/$' %}">
+            <a href="{% url profile_edit_retailer %}"><i class="icon-truck"></i> {% trans "Retailer" %}</a>
+        </li>
+        {% endif %}
         <li class="{% current request '^/profile/(edit|save)/gear/$' %}">
             <a href="{% url profile_edit_gear %}"><i class="icon-cog"></i> {% trans "Gear" %}</a>
         </li>

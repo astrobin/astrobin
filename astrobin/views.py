@@ -2088,7 +2088,7 @@ def user_profile_save_basic(request):
 
 
 @login_required
-@user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
+@user_passes_test(lambda u: user_is_producer(u))
 def user_profile_edit_commercial(request):
     profile = UserProfile.objects.get(user = request.user)
     if request.method == 'POST':
@@ -2102,6 +2102,27 @@ def user_profile_edit_commercial(request):
         form = UserProfileEditCommercialForm(instance = profile)
 
     return render_to_response("user/profile/edit/commercial.html",
+        {
+            'form': form,
+        },
+        context_instance=RequestContext(request))
+
+
+@login_required
+@user_passes_test(lambda u: user_is_retailer(u))
+def user_profile_edit_retailer(request):
+    profile = UserProfile.objects.get(user = request.user)
+    if request.method == 'POST':
+        form = UserProfileEditRetailerForm(data=request.POST, instance = profile)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Form saved. Thank you!"))
+            return HttpResponseRedirect('/profile/edit/retailer/');
+    else:
+        form = UserProfileEditRetailerForm(instance = profile)
+
+    return render_to_response("user/profile/edit/retailer.html",
         {
             'form': form,
         },

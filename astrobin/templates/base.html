@@ -381,6 +381,15 @@
                                         </li>
                                         {% endif %}
 
+                                        {% if is_retailer %}
+                                        <li>
+                                            <a href="{% url profile_edit_retailer %}">
+                                                <i class="icon-truck"></i>
+                                                {% trans "Retailer information" %}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+
                                         <li>
                                             <a href="{% url profile_edit_gear %}">
                                                 <i class="icon-cog"></i>

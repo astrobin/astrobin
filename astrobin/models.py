@@ -1399,6 +1399,12 @@ class UserProfile(models.Model):
         help_text = _("The website of the company you represent on AstroBin."),
     )
 
+    retailer_country = CountryField(
+        verbose_name = _("Country of operation"),
+        null = True,
+        blank = True,
+    )
+    
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
 
