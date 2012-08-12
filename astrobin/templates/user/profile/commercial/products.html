@@ -58,7 +58,7 @@
                         <td>{% gear_set_owners item.gear_set %}</td>
                         <td>{% gear_set_images item.gear_set %}</td>
 
-                        {% ifequal user user.request %}
+                        {% ifequal user request.user %}
                         <td>
                             <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
                                 <i class="icon-eye-open icon-white"></i>
