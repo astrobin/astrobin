@@ -919,7 +919,7 @@ class MergeCommercialGearForm(forms.Form):
 
     merge_with = forms.ChoiceField(
         choices = [('', '---------')],
-        help_text = _("Use this field to mark that the item you are merging really is the same product (or a variation thereof) or something you have claimed before."),
+        help_text = _("Use this field to mark that the item you are merging really is the same product (or a variation thereof) of something you have claimed before."),
         required = False)
 
     def __init__(self, user, **kwargs):
@@ -978,3 +978,15 @@ class ClaimRetailedGearForm(forms.Form):
 
         return self.cleaned_data
 
+
+class MergeRetailedGearForm(forms.Form):
+    error_css_class = 'error'
+
+    merge_with = forms.ChoiceField(
+        choices = [('', '---------')],
+        help_text = _("Use this field to mark that the item you are merging really is the same product (or a variation thereof) of something you have claimed before."),
+        required = False)
+
+    def __init__(self, user, **kwargs):
+        super(MergeRetailedGearForm, self).__init__(**kwargs)
+        self.fields['merge_with'].choices = [('', '---------')] + uniq(RetailedGear.objects.filter(retailer = user).values_list('id', 'proper_name'))

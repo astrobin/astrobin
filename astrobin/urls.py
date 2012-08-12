@@ -112,6 +112,7 @@ urlpatterns = patterns('',
 
     url(r'^commercial/products/retailed/claim/(?P<id>\d+)/$', views.retailed_products_claim, name='retailed_products_claim'),
     url(r'^commercial/products/retailed/unclaim/(?P<id>\d+)/$', views.retailed_products_unclaim, name='retailed_products_unclaim'),
+    url(r'^commercial/products/retailed/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$', views.retailed_products_merge, name='retailedgg_products_merge'),
 
     url(r'^users/(?P<username>[\w.@+-]+)/favorites/$', views.user_page_favorites, name='user_page_favorites'),
     url(r'^users/(?P<username>[\w.@+-]+)/card/$', views.user_page_card, name='user_page_card'),

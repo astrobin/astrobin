@@ -297,6 +297,24 @@
                 </div>
             </div>
 
+            <div class="modal hide fade" id="merge-retailed-products-modal">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3>{% trans "Select the product you want to merge to" %}</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="merge-retailed-product" class="form-horizontal">
+                        <div class="form-content">
+                            {{merge_retailed_gear_form|as_bootstrap}}
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+                    <a href="#" class="merge btn btn-primary">{% trans "Merge" %}</a>
+                </div>
+            </div>
+
             <div class="modal hide fade" id="remove-retailed-products-confirmation-modal">
                 <div class="modal-header">
                     <a class="close" data-dismiss="modal">&times;</a>
@@ -604,6 +622,10 @@
                         $('#merge-commercial-products-modal').find('form').submit();
                     });
 
+                    $('#merge-commercial-products-modal').on('show', function() {
+                        $(this).find('.alert').remove();
+                    });
+
                     $('#merge-commercial-products-modal').find('form').submit(function() {
                         var from_id = $(this).closest('.modal').data('from_id'),
                             to_id = $(this).find('select option:selected').val(),
@@ -615,15 +637,24 @@
                             timeout: 10000,
                             cache: false,
                             success: function(response, status, request) {
-                                $('tr[data-id=' + from_id + ']').remove();
-                                $merge_with.find('option[value=' + from_id + ']').remove();
-                                $merge_with_later.find('option[value=' + from_id + ']').remove();
+                                if (response.success) {
+                                    $('tr[data-id=' + from_id + ']').remove();
+                                    $merge_with.find('option[value=' + from_id + ']').remove();
+                                    $merge_with_later.find('option[value=' + from_id + ']').remove();
 
-                                var $gear_ids_td = $('tr[data-id=' + to_id + '] td.gear-ids');
-                                $gear_ids_td.html(response.claimed_gear_ids_links);
-                                $gear_ids_td.attr('data-gear-ids', response.claimed_gear_ids);
+                                    var $gear_ids_td = $('tr[data-id=' + to_id + '] td.gear-ids');
+                                    $gear_ids_td.html(response.claimed_gear_ids_links);
+                                    $gear_ids_td.attr('data-gear-ids', response.claimed_gear_ids);
 
-                                $modal.modal('hide');
+                                    $modal.modal('hide');
+                                } else {
+                                    $modal.find('.form-content .alert').remove();
+                                    $modal.find('.form-content').prepend('\
+                                        <div class="alert alert-block alert-error">\
+                                            <p>' + response.message + '<p>\
+                                        </div>\
+                                    ');
+                                }
                             }
                         });
 
@@ -918,6 +949,10 @@
                         $('#merge-retailed-products-modal').find('form').submit();
                     });
 
+                    $('#merge-retailed-products-modal').on('show', function() {
+                        $(this).find('.alert').remove();
+                    });
+
                     $('#merge-retailed-products-modal').find('form').submit(function() {
                         var from_id = $(this).closest('.modal').data('from_id'),
                             to_id = $(this).find('select option:selected').val(),
@@ -929,15 +964,23 @@
                             timeout: 10000,
                             cache: false,
                             success: function(response, status, request) {
-                                $('tr[data-id=' + from_id + ']').remove();
-                                $rmerge_with.find('option[value=' + from_id + ']').remove();
-                                $rmerge_with_later.find('option[value=' + from_id + ']').remove();
+                                if(response.success) {
+                                    $('tr[data-id=' + from_id + ']').remove();
+                                    $rmerge_with.find('option[value=' + from_id + ']').remove();
+                                    $rmerge_with_later.find('option[value=' + from_id + ']').remove();
 
-                                var $gear_ids_td = $('tr[data-id=' + to_id + '] td.gear-ids');
-                                $gear_ids_td.html(response.claimed_gear_ids_links);
-                                $gear_ids_td.attr('data-gear-ids', response.claimed_gear_ids);
-
-                                $modal.modal('hide');
+                                    var $gear_ids_td = $('tr[data-id=' + to_id + '] td.gear-ids');
+                                    $gear_ids_td.html(response.claimed_gear_ids_links);
+                                    $gear_ids_td.attr('data-gear-ids', response.claimed_gear_ids);
+                                    $modal.modal('hide');
+                                } else {
+                                    $modal.find('.form-content .alert').remove();
+                                    $modal.find('.form-content').prepend('\
+                                        <div class="alert alert-block alert-error">\
+                                            <p>' + response.message + '<p>\
+                                        </div>\
+                                    ');
+                                }
                             }
                         });
 
