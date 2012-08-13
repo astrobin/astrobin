@@ -262,6 +262,15 @@ class Gear(models.Model):
             self.master = slave.master
             self.save()
 
+        # Steal the commercial gear and all the retailers
+        if not self.commercial:
+            self.commercial = slave.commercial
+            self.save()
+
+        for retailed in slave.retailed.all():
+            if retailed not in self.retailed.all():
+                self.retailed.add(retailed)
+
         slave.delete()
 
 
