@@ -59,6 +59,7 @@ LANGUAGES = (
     ('sq', gettext('Albanian')),
     ('pl', gettext('Polish')),
 )
+MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 
 SITE_ID = 1
 
@@ -198,6 +199,7 @@ INSTALLED_APPS = (
     'tastypie',
     'reviews',
     'actstream',
+    'modeltranslation',
 )
 
 LOGIN_REDIRECT_URL = '/'
