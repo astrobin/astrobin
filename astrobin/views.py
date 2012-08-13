@@ -2088,7 +2088,7 @@ def user_profile_save_basic(request):
 
 
 @login_required
-@user_passes_test(lambda u: user_is_producer(u))
+@user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
 def user_profile_edit_commercial(request):
     profile = UserProfile.objects.get(user = request.user)
     if request.method == 'POST':
@@ -4350,7 +4350,7 @@ def retailed_products_claim(request, id):
     form.fields['name'].choices += [(gear.id, gear.get_name())]
     if request.POST.get('merge_with'):
         merge_with = RetailedGear.objects.get(id = int(request.POST.get('merge_with')))
-        proper_name = merge_with.proper_name if merge_with.proper_name else merge_with.gear_set.all()[0].get_name()
+        proper_name = merge_with.gear_set.all()[0].get_name()
         form.fields['merge_with'].choices += [(merge_with.id, proper_name)]
 
     if not form.is_valid():
@@ -4361,14 +4361,13 @@ def retailed_products_claim(request, id):
     else:
         retailed_gear = RetailedGear(
             retailer = request.user,
-            proper_name = gear.get_name(),
         )
         retailed_gear.save()
 
-    gear.retailers.add(retailed_gear)
+    gear.retailed.add(retailed_gear)
     gear.save()
 
-    claimed_gear = Gear.objects.filter(retailers = retailed_gear).values_list('id', flat = True)
+    claimed_gear = Gear.objects.filter(retailed = retailed_gear).values_list('id', flat = True)
     return HttpResponse(
         simplejson.dumps({
             'success': True,
@@ -4405,17 +4404,17 @@ def retailed_products_unclaim(request, id):
     if retailed is None or retailed.retailer != request.user:
         return HttpResponseForbidden()
 
-    all_gear = Gear.objects.filter(retailers = retailed)
+    all_gear = Gear.objects.filter(retailed = retailed)
     if all_gear.count() == 1:
         retailed.delete()
         retailed_was_removed = True
 
-    gear.retailers.remove(retailed)
+    gear.retailed.remove(retailed)
 
     if retailed_was_removed:
         claimed_gear = []
     else:
-        claimed_gear = Gear.objects.filter(retailers = retailed).values_list('id', flat = True)
+        claimed_gear = Gear.objects.filter(retailed = retailed).values_list('id', flat = True)
 
     return HttpResponse(
         simplejson.dumps({
@@ -4443,13 +4442,13 @@ def retailed_products_merge(request, from_id, to_id):
         if from_rg.retailer != request.user or to_rg.retailer != request.user:
             return HttpResponseForbidden()
 
-        all_gear = Gear.objects.filter(retailers = from_rg)
+        all_gear = Gear.objects.filter(retailed = from_rg)
         for g in all_gear:
-            g.retailers.add(to_rg)
+            g.retailed.add(to_rg)
 
         from_rg.delete()
 
-        claimed_gear = Gear.objects.filter(retailers = to_rg).values_list('id', flat = True)
+        claimed_gear = Gear.objects.filter(retailed = to_rg).values_list('id', flat = True)
 
         return HttpResponse(
             simplejson.dumps({
@@ -4489,7 +4488,7 @@ def retailed_products_edit(request, id):
         {
             'form': form,
             'product': product,
-            'gear': Gear.objects.filter(retailers = product)[0],
+            'gear': Gear.objects.filter(retailed = product)[0],
         },
         context_instance = RequestContext(request))
 

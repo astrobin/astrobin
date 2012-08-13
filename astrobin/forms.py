@@ -20,11 +20,21 @@ import datetime
 from management import NOTICE_TYPES
 
 def uniq(seq):
-   # Not order preserving
-   keys = {}
-   for e in seq:
-       keys[e] = 1
-   return keys.keys()
+    # Not order preserving
+    keys = {}
+    for e in seq:
+        keys[e] = 1
+    return keys.keys()
+
+def uniq_id_tuple(seq):
+    seen = set()
+    ret = []
+    for e in seq:
+        id = e[0]
+        if id not in seen:
+            seen.add(id)
+            ret.append(e)
+    return ret
 
 
 class ImageUploadForm(forms.Form):
@@ -294,7 +304,7 @@ class AdvancedSearchForm(SearchForm):
             (2, _("Users")),
             (3, _("Gear")),
         ),
-        initial = 1,
+        initial = 0,
     )
 
     solar_system_main_subject = forms.ChoiceField(
@@ -968,7 +978,9 @@ class ClaimRetailedGearForm(forms.Form):
     def __init__(self, user, **kwargs):
         super(ClaimRetailedGearForm, self).__init__(**kwargs)
         self.user = user
-        self.fields['merge_with'].choices = [('', '---------')] + uniq(RetailedGear.objects.filter(retailer = user).values_list('id', 'proper_name'))
+        self.fields['merge_with'].choices =\
+            [('', '---------')] +\
+            uniq_id_tuple(RetailedGear.objects.filter(retailer = user).exclude(gear__name = None).values_list('id', 'gear__name'))
 
     def clean (self):
         cleaned_data = super(ClaimRetailedGearForm, self).clean()
@@ -999,7 +1011,9 @@ class MergeRetailedGearForm(forms.Form):
 
     def __init__(self, user, **kwargs):
         super(MergeRetailedGearForm, self).__init__(**kwargs)
-        self.fields['merge_with'].choices = [('', '---------')] + uniq(RetailedGear.objects.filter(retailer = user).values_list('id', 'proper_name'))
+        self.fields['merge_with'].choices =\
+            [('', '---------')] +\
+            uniq_id_tuple(RetailedGear.objects.filter(retailer = user).exclude(gear__name = None).values_list('id', 'gear__name'))
 
 
 class RetailedGearForm(forms.ModelForm):

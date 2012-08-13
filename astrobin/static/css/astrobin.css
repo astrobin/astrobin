@@ -1387,9 +1387,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
   padding-left: 35px;
   width: 50px;
 }
-.image-description {
-  margin-top: 16px;
-}
 .image-detail .image-detail-inner {
   padding: 12px;
 }
@@ -1644,8 +1641,20 @@ div.favorite-container a.favorite:hover .favorite-hint {
   -webkit-border-radius: 6px;
   border-radius: 6px;
   padding: 12px;
-  margin: 2px 0;
+  margin-bottom: 12px;
   overflow: hidden;
+}
+.subtle-container .header {
+  background: #303030 url('../images/darker-panel-tile.png');
+  -moz-border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 6px 6px 0 0;
+  border-radius: 6px 6px 0 0;
+  border-bottom: #404040;
+  margin: -12px -12px 12px;
+  padding: 8px 12px;
+}
+.subtle-container .header h4 {
+  margin: 0;
 }
 .subtle-container .astrobin-thumbnail {
   padding: 0;
@@ -1738,7 +1747,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .search-category .header,
 .list-gear .header {
   color: #fcfcfc;
-  background: #2e2e2e;
+  background: #303030 url('../images/darker-panel-tile.png');
   padding: 8px 4px;
   margin-bottom: 4px;
   padding: 8px;
@@ -2059,7 +2068,7 @@ p.small {
   display: none;
 }
 .row.section {
-  margin-bottom: 52px;
+  margin-bottom: 16px;
 }
 .bubble {
   position: relative;
@@ -2394,9 +2403,6 @@ li.revisions {
 }
 .gear-page h1 {
   margin-bottom: 8px;
-}
-.gear-page h4 {
-  margin: 0;
 }
 .gear-page .commercial-link {
   display: block;
