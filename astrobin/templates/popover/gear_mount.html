@@ -2,7 +2,7 @@
 {% load tags %}
 
 <div class="gear-popover">
-    {% if gear.commercial %}
+    {% if gear.commercial and gear.commercial.image %}
         <div class="thumbnail astrobin-thumbnail">
             {% with gear.commercial.image as image %}
                 <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png"
@@ -17,7 +17,7 @@
         {% if gear.pe %}<p><strong>{% trans "Periodic error" %}</strong>: {{gear.pe}}"</p>{% endif %}
 
         <div class="actions">
-            <a class="btn btn-mini btn-primary" href="/search/?q={{gear.get_name}}&type=mounts{% search_form_query %}">{% trans "Find images" %}</a>
+            <a class="btn btn-mini btn-primary" href="/search/?q={{gear.get_name}}&amp;type=mounts{% search_form_query %}">{% trans "Find images" %}</a>
             {% if is_authenticated %}
                 {% if follows %}
                     <a class="btn btn-mini btn-primary unfollow-gear" data-gear="{{gear.id}}" href="{% url unfollow_gear gear.id %}">{% trans "Unfollow" %}</a>
