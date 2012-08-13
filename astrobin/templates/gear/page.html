@@ -79,24 +79,33 @@
                                         {% if profile.company_name %}
                                             <tr>
                                                 <th>
-                                                    {% if profile.company_website %}
-                                                        <a href="{{profile.company_website}}" target="_blank">
-                                                    {% endif %}
-                                                        {{retailed.retailer.userprofile_set.all.0.company_name}}
-                                                    {% if profile.company_website %}
-                                                        </a>
-                                                    {% endif %}
+                                                    <div class="company-name">
+                                                        {% if profile.company_website %}
+                                                            <a href="{{profile.company_website}}" target="_blank"
+                                                               rel="tooltip" title="{{profile.company_website}}">
+                                                        {% endif %}
+                                                            {{profile.company_name}}
+                                                        {% if profile.company_website %}
+                                                            </a>
+                                                        {% endif %}
+                                                    <div class="reailer-country">
+                                                        {% if profile.retailer_country %}
+                                                            {% trans profile.get_retailer_country_display %}
+                                                        {% endif %}
+                                                    </div>
                                                 </th>
                                                 <td>
-                                                    {% if profile.retailer_country %}
-                                                        {{profile.get_retailer_country_display}}
+                                                    {{retailed.price|default:"-"}}
+                                                    {% if reatiled.price %}
+                                                        {{retailed.currency}}
                                                     {% endif %}
                                                 </td>
-                                                <td>{% if retailed.price %}{{retailed.price}} {{retailed.currency}}{% endif %}</td>
                                                 <td>
                                                     {% if retailed.link %}
-                                                        <a href="{{retailed.link}}" target="_blank">
-                                                            <i class="icon-link"></i>
+                                                        <a href="{{retailed.link}}" target="_blank" rel="tooltip" title="{{retailed.link}}">
+                                                    {% endif %}
+                                                        <i class="icon-link"></i>
+                                                    {% if retailed.link %}
                                                         </a>
                                                     {% endif %}
                                                 </td>
