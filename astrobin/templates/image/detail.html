@@ -101,14 +101,14 @@
                     {% if image.is_wip %}
                     <li>
                         <a href="{% url image_promote image.id %}{% query_string "" "plate_solving_started" %}">
-                            <i class="icon-arrow-right"></i>
+                            <i class="icon-unlock"></i>
                             {% trans "Promote to public area" %}
                         </a>
                     </li>
                     {% else %}
                     <li>
                         <a href="{% url image_demote image.id %}{% query_string "" "plate_solving_started" %}">
-                            <i class="icon-arrow-left"></i>
+                            <i class="icon-lock"></i>
                             {% trans "Move to staging area" %}
                         </a>
                     </li>
