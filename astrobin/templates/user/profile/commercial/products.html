@@ -42,7 +42,11 @@
                         <tr data-id="{{item.id}}">
                             <td class="gear-ids" data-gear-ids="{% for g in item.gear_set.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
                                 {% for g in item.gear_set.all %}
-                                    <a href="/gear/{{g.id}}/">{{g.id}}</a>{% if not forloop.last %}, {% endif %}
+                                    <a rel="popover" class="gear-popover" 
+                                       data-load="{% url gear_popover_ajax g.id %}"
+                                       href="/gear/{{g.id}}/">
+                                        {{g.id}}
+                                    </a>{% if not forloop.last %}, {% endif %}
                                 {% endfor %}
                             </td>
                             <td>
@@ -65,16 +69,16 @@
                             {% ifequal user request.user %}
                             <td>
                                 <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
-                                    <i class="icon-eye-open icon-white"></i>
+                                    <i class="icon-eye-open"></i>
                                 </a>
                                 <a rel="tooltip" title="{% trans "Edit" %}" href="{% url commercial_products_edit item.id %}">
-                                    <i class="icon-edit icon-white"></i>
+                                    <i class="icon-edit"></i>
                                 </a>
                                 <a class="item-merge" rel="tooltip" title="{% trans "Merge" %}" href="#">
-                                    <i class="icon-plus-sign icon-white"></i>
+                                    <i class="icon-plus-sign"></i>
                                 </a>
                                 <a class="item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">
-                                    <i class="icon-remove icon-white"></i>
+                                    <i class="icon-remove"></i>
                                 </a>
                             </td>
                             {% endifequal %}
@@ -139,16 +143,16 @@
                             {% ifequal user request.user %}
                             <td>
                                 <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
-                                    <i class="icon-eye-open icon-white"></i>
+                                    <i class="icon-eye-open"></i>
                                 </a>
                                 <a rel="tooltip" title="{% trans "Edit" %}" href="{% url retailed_products_edit item.id %}">
-                                    <i class="icon-edit icon-white"></i>
+                                    <i class="icon-edit"></i>
                                 </a>
                                 <a class="retailed-item-merge" rel="tooltip" title="{% trans "Merge" %}" href="#">
-                                    <i class="icon-plus-sign icon-white"></i>
+                                    <i class="icon-plus-sign"></i>
                                 </a>
                                 <a class="retailed-item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">
-                                    <i class="icon-remove icon-white"></i>
+                                    <i class="icon-remove"></i>
                                 </a>
                             </td>
                             {% endifequal %}
@@ -336,6 +340,10 @@
 {% block extra_js %}
     {% include 'user/profile-js.html' %}
 
+    <script type="text/javascript">
+        astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+    </script>
+    
     {% ifequal user request.user %}
         {% if user_is_producer %}
             <script type="text/javascript">
@@ -426,16 +434,16 @@
                                     $row.append('\
                                     <td>\
                                         <a rel="tooltip" title="{% trans "View" %}" href="/gear/' + response.gear_ids + '">\
-                                            <i class="icon-eye-open icon-white"></i>\
+                                            <i class="icon-eye-open"></i>\
                                         </a>\
                                         <a rel="tooltip" title="{% trans "Edit" %}" href="/commercial/products/edit/' + response.id + '">\
-                                            <i class="icon-edit icon-white"></i>\
+                                            <i class="icon-edit"></i>\
                                         </a>\
                                         <a class="item-merge" rel="tooltip" title="{% trans "Merge" %}" href="#">\
-                                            <i class="icon-plus-sign icon-white"></i>\
+                                            <i class="icon-plus-sign"></i>\
                                         </a>\
                                         <a class="item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">\
-                                            <i class="icon-remove icon-white"></i>\
+                                            <i class="icon-remove"></i>\
                                         </a>\
                                     </td>');
 
@@ -753,16 +761,16 @@
                                     $row.append('\
                                     <td>\
                                         <a rel="tooltip" title="{% trans "View" %}" href="/gear/' + response.gear_ids + '">\
-                                            <i class="icon-eye-open icon-white"></i>\
+                                            <i class="icon-eye-open"></i>\
                                         </a>\
                                         <a rel="tooltip" title="{% trans "Edit" %}" href="/commercial/products/retailed/edit/' + response.id + '">\
-                                            <i class="icon-edit icon-white"></i>\
+                                            <i class="icon-edit"></i>\
                                         </a>\
                                         <a class="retailed-item-merge" rel="tooltip" title="{% trans "Merge" %}" href="#">\
-                                            <i class="icon-plus-sign icon-white"></i>\
+                                            <i class="icon-plus-sign"></i>\
                                         </a>\
                                         <a class="retailed-item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">\
-                                            <i class="icon-remove icon-white"></i>\
+                                            <i class="icon-remove"></i>\
                                         </a>\
                                     </td>');
 
