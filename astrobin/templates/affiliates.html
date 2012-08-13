@@ -13,14 +13,15 @@
     </div>
 
     {% for affiliate in affiliate_list %}
-        <div class="affiliate">
-            <div class="content">
-                <h3>{{affiliate.company_name}}</h3>
-                {% if affiliate.company_website %}
-                    <a target="_blank" href={{affiliate.company_website}}">{{affiliate.company_website}}</a>
-                {% endif %}
-                {{ affiliate.company_description|markdown|linebreaks }}
+        <div class="subtle-container">
+            <div class="header">
+                <h4>{{affiliate.company_name}}</h4>
             </div>
+
+            {% if affiliate.company_website %}
+                <a target="_blank" href={{affiliate.company_website}}">{{affiliate.company_website}}</a>
+            {% endif %}
+            {{ affiliate.company_description|markdown|linebreaks }}
         </div>
     {% endfor %}
 
