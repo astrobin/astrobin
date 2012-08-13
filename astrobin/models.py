@@ -175,7 +175,7 @@ class Gear(models.Model):
         on_delete = models.SET_NULL,
     )
 
-    retailers = models.ManyToManyField(
+    retailed = models.ManyToManyField(
         'RetailedGear',
     )
     
@@ -1891,21 +1891,6 @@ class RetailedGear(models.Model):
         editable = False
     )
 
-    proper_make = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 128,
-        verbose_name = _("Proper make"),
-        help_text = _("Sometimes, product make/brand/producer/developer names are not written properly by the users. Write here the proper make/brand/producer/developer name."),
-    )
-
-    proper_name = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 128,
-        verbose_name = _("Proper name"),
-        help_text = _("Sometimes, product names are not written properly by the users. Write here the proper product name, not including the make/brand/producer/developer name.<br/>It is recommended that you try to group as many items as possible, so try to use a generic version of your product's name."),
-    )
 
     link = models.URLField(
         max_length = 512,

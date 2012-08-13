@@ -1556,10 +1556,6 @@ div.favorite-container {
     }
 }
 
-.image-description {
-    margin-top: @spacer-xlarge;
-}
-
 .image-detail {
     .image-detail-inner {
         padding: @spacer-large;
@@ -1808,9 +1804,21 @@ div.favorite-container {
     .common-border;
     .rounded-corners;
     padding: @spacer-large;
-    margin: 2px 0;
+    margin-bottom: @spacer-large;
     overflow: hidden;
     
+    .header {
+        background: #303030 url('../images/darker-panel-tile.png');
+        .rounded-corners-top;
+        border-bottom: #404040;
+        margin: -12px -12px 12px;
+        padding: @spacer-medium @spacer-large;
+
+        h4 {
+          margin: 0;
+        }
+    }
+
     .astrobin-thumbnail {
         padding: 0;
     }
@@ -1905,7 +1913,7 @@ div.favorite-container {
 
     .header {
         color: @strong-text-color;
-        background: @dark-panel-color;
+        background: #303030 url('../images/darker-panel-tile.png');
         padding: @spacer-medium @spacer-small;
         .stitched-box;
 
@@ -2244,7 +2252,7 @@ p.small {
 }
 
 .row.section {
-    margin-bottom: @spacer-xxxlarge;
+    margin-bottom: @spacer-xlarge;
 }
 
 .bubble {
@@ -2601,9 +2609,6 @@ li.revisions {
 .gear-page {
     h1 {
         margin-bottom: @spacer-medium;
-    }
-    h4 {
-        margin: 0;
     }
     .commercial-link {
         display: block;

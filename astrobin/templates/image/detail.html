@@ -529,7 +529,7 @@
             <div class="image-description row">
                 <div class="span8">
                     <div class="subtle-container">
-                        <h3>{% trans "Description" %}</h3>
+                        <div class="header"><h4>{% trans "Description" %}</h4></div>
                         {{image.description|safe|linebreaks}}
                     </div>
                 </div>
@@ -538,7 +538,7 @@
             <div class="row comment-container">
                 <div class="span8">
                     <div class="subtle-container">
-                        <h3>{% trans "Comments" %}</h3>
+                        <div class="header"><h4>{% trans "Comments" %}</h4></div>
                         {% if user.is_authenticated %}
                         <p>
                             {% blocktrans with user=image.user lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
@@ -766,7 +766,7 @@
 
             {% if gear_list_has_commercial %}
                 <div class="subtle-container">
-                    <h4>{% trans "Made possible by:" %}</h4>
+                    <div class="header"><h4>{% trans "Made possible by" %}</h4></div>
                     {% for i in gear_list %}
                         {% if i.1 %}
                             {% for g in i.1 %}
