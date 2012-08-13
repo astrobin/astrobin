@@ -24,77 +24,81 @@
     {% if user_is_producer %}
         <div class="row section">
             <div class="span12">
-                {% if user_is_retailer %}
-                    <h3>{% trans "As producer" %}</h3>
-                {% endif %}
-                <table class="table commercial-gear-items">
-                    <tr>
-                        <th>{% trans "Gear IDs" %}</th>
-                        <th>{% trans "Make" %}</th>
-                        <th>{% trans "Name" %}</th>
-                        <th>{% trans "Owners" %}</th>
-                        <th>{% trans "Images" %}</th>
-                        {% ifequal user request.user %}
-                            <th>{% trans "Actions" %}</th>
-                        {% endifequal %}
-                    </tr>
-                    {% for item in commercial_gear_list %}
-                        <tr data-id="{{item.id}}">
-                            <td class="gear-ids" data-gear-ids="{% for g in item.gear_set.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
-                                {% for g in item.gear_set.all %}
-                                    <a rel="popover" class="gear-popover" 
-                                       data-load="{% url gear_popover_ajax g.id %}"
-                                       href="/gear/{{g.id}}/">
-                                        {{g.id}}
-                                    </a>{% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                            </td>
-                            <td>
-                                {% if item.proper_make %}
-                                    {{item.proper_make}}
-                                {% else %}
-                                    {{item.gear_set.all.0.make}}
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if item.proper_name %}
-                                    {{item.proper_name}}
-                                {% else %}
-                                    {{item.gear_set.all.0.name}}
-                                {% endif %}
-                            </td>
-                            <td>{% gear_set_owners item.gear_set %}</td>
-                            <td>{% gear_set_images item.gear_set %}</td>
-
+                <div class="subtle-container">
+                    {% if user_is_retailer %}
+                        <div class="header">
+                            <h4>{% trans "As producer" %}</h4>
+                        </div>
+                    {% endif %}
+                    <table class="table commercial-gear-items">
+                        <tr>
+                            <th>{% trans "Gear IDs" %}</th>
+                            <th>{% trans "Make" %}</th>
+                            <th>{% trans "Name" %}</th>
+                            <th>{% trans "Owners" %}</th>
+                            <th>{% trans "Images" %}</th>
                             {% ifequal user request.user %}
-                            <td>
-                                <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
-                                    <i class="icon-eye-open"></i>
-                                </a>
-                                <a rel="tooltip" title="{% trans "Edit" %}" href="{% url commercial_products_edit item.id %}">
-                                    <i class="icon-edit"></i>
-                                </a>
-                                <a class="item-merge" rel="tooltip" title="{% trans "Merge" %}" href="#">
-                                    <i class="icon-plus-sign"></i>
-                                </a>
-                                <a class="item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">
-                                    <i class="icon-remove"></i>
-                                </a>
-                            </td>
+                                <th>{% trans "Actions" %}</th>
                             {% endifequal %}
                         </tr>
-                    {% empty %}
-                        <tr class="empty">
-                            <td colspan="6">
+                        {% for item in commercial_gear_list %}
+                            <tr data-id="{{item.id}}">
+                                <td class="gear-ids" data-gear-ids="{% for g in item.gear_set.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
+                                    {% for g in item.gear_set.all %}
+                                        <a rel="popover" class="gear-popover" 
+                                           data-load="{% url gear_popover_ajax g.id %}"
+                                           href="{% url gear_page g.id %}">
+                                            {{g.id}}
+                                        </a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% if item.proper_make %}
+                                        {{item.proper_make}}
+                                    {% else %}
+                                        {{item.gear_set.all.0.make}}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if item.proper_name %}
+                                        {{item.proper_name}}
+                                    {% else %}
+                                        {{item.gear_set.all.0.name}}
+                                    {% endif %}
+                                </td>
+                                <td>{% gear_set_owners item.gear_set %}</td>
+                                <td>{% gear_set_images item.gear_set %}</td>
+
                                 {% ifequal user request.user %}
-                                    {% trans "You haven't claimed any commercial products yet." %}
-                                {% else %}
-                                    {% blocktrans with user as user %}{{user}} hasn't claimed any commercial products yet.{% endblocktrans %}
+                                <td>
+                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
+                                        <i class="icon-eye-open"></i>
+                                    </a>
+                                    <a rel="tooltip" title="{% trans "Edit" %}" href="{% url commercial_products_edit item.id %}">
+                                        <i class="icon-edit"></i>
+                                    </a>
+                                    <a class="item-merge" rel="tooltip" title="{% trans "Merge" %}" href="#">
+                                        <i class="icon-plus-sign"></i>
+                                    </a>
+                                    <a class="item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">
+                                        <i class="icon-remove"></i>
+                                    </a>
+                                </td>
                                 {% endifequal %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                            </tr>
+                        {% empty %}
+                            <tr class="empty">
+                                <td colspan="6">
+                                    {% ifequal user request.user %}
+                                        {% trans "You haven't claimed any commercial products yet." %}
+                                    {% else %}
+                                        {% blocktrans with user as user %}{{user}} hasn't claimed any commercial products yet.{% endblocktrans %}
+                                    {% endifequal %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </div>
     {% endif %} {# user_is_producer #}
@@ -102,73 +106,81 @@
     {% if user_is_retailer %}
         <div class="row section">
             <div class="span12">
-                {% if user_is_producer %}
-                    <h3>{% trans "As retailer" %}</h3>
-                {% endif %}
-                <table class="table retailed-gear-items">
-                    <tr>
-                        <th>{% trans "Gear IDs" %}</th>
-                        <th>{% trans "Make" %}</th>
-                        <th>{% trans "Name" %}</th>
-                        <th>{% trans "Owners" %}</th>
-                        <th>{% trans "Images" %}</th>
-                        {% ifequal user request.user %}
-                            <th>{% trans "Actions" %}</th>
-                        {% endifequal %}
-                    </tr>
-                    {% for item in retailed_gear_list %}
-                        <tr data-id="{{item.id}}">
-                            <td class="gear-ids" data-gear-ids="{% for g in item.gear_set.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
-                                {% for g in item.gear_set.all %}
-                                    <a href="/gear/{{g.id}}/">{{g.id}}</a>{% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                            </td>
-                            <td>
-                                {% if item.proper_make %}
-                                    {{item.proper_make}}
-                                {% else %}
-                                    {{item.gear_set.all.0.make}}
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if item.proper_name %}
-                                    {{item.proper_name}}
-                                {% else %}
-                                    {{item.gear_set.all.0.name}}
-                                {% endif %}
-                            </td>
-                            <td>{% gear_set_owners item.gear_set %}</td>
-                            <td>{% gear_set_images item.gear_set %}</td>
-
+                <div class="subtle-container">
+                    {% if user_is_producer %}
+                        <div class="header">
+                            <h4>{% trans "As retailer" %}</h4>
+                        </div>
+                    {% endif %}
+                    <table class="table retailed-gear-items">
+                        <tr>
+                            <th>{% trans "Gear IDs" %}</th>
+                            <th>{% trans "Make" %}</th>
+                            <th>{% trans "Name" %}</th>
+                            <th>{% trans "Owners" %}</th>
+                            <th>{% trans "Images" %}</th>
                             {% ifequal user request.user %}
-                            <td>
-                                <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
-                                    <i class="icon-eye-open"></i>
-                                </a>
-                                <a rel="tooltip" title="{% trans "Edit" %}" href="{% url retailed_products_edit item.id %}">
-                                    <i class="icon-edit"></i>
-                                </a>
-                                <a class="retailed-item-merge" rel="tooltip" title="{% trans "Merge" %}" href="#">
-                                    <i class="icon-plus-sign"></i>
-                                </a>
-                                <a class="retailed-item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">
-                                    <i class="icon-remove"></i>
-                                </a>
-                            </td>
+                                <th>{% trans "Actions" %}</th>
                             {% endifequal %}
                         </tr>
-                    {% empty %}
-                        <tr class="empty">
-                            <td colspan="6">
+                        {% for item in retailed_gear_list %}
+                            <tr data-id="{{item.id}}">
+                                <td class="gear-ids" data-gear-ids="{% for g in item.gear_set.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
+                                    {% for g in item.gear_set.all %}
+                                        <a rel="popover" class="gear-popover"
+                                           data-load="{% url gear_popover_ajax g.id %}"
+                                           href="{% url gear_page g.id %}">
+                                            {{g.id}}
+                                        </a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% if item.proper_make %}
+                                        {{item.proper_make}}
+                                    {% else %}
+                                        {{item.gear_set.all.0.make}}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if item.proper_name %}
+                                        {{item.proper_name}}
+                                    {% else %}
+                                        {{item.gear_set.all.0.name}}
+                                    {% endif %}
+                                </td>
+                                <td>{% gear_set_owners item.gear_set %}</td>
+                                <td>{% gear_set_images item.gear_set %}</td>
+
                                 {% ifequal user request.user %}
-                                    {% trans "You haven't claimed any retailed products yet." %}
-                                {% else %}
-                                    {% blocktrans with user as user %}{{user}} hasn't claimed any retailed products yet.{% endblocktrans %}
+                                <td>
+                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
+                                        <i class="icon-eye-open"></i>
+                                    </a>
+                                    <a rel="tooltip" title="{% trans "Edit" %}" href="{% url retailed_products_edit item.id %}">
+                                        <i class="icon-edit"></i>
+                                    </a>
+                                    <a class="retailed-item-merge" rel="tooltip" title="{% trans "Merge" %}" href="#">
+                                        <i class="icon-plus-sign"></i>
+                                    </a>
+                                    <a class="retailed-item-remove" rel="tooltip" title="{% trans "Remove" %}" href="#">
+                                        <i class="icon-remove"></i>
+                                    </a>
+                                </td>
                                 {% endifequal %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                            </tr>
+                        {% empty %}
+                            <tr class="empty">
+                                <td colspan="6">
+                                    {% ifequal user request.user %}
+                                        {% trans "You haven't claimed any retailed products yet." %}
+                                    {% else %}
+                                        {% blocktrans with user as user %}{{user}} hasn't claimed any retailed products yet.{% endblocktrans %}
+                                    {% endifequal %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </div>
     {% endif %} {# user_is_retailer #}
@@ -178,13 +190,13 @@
         {% if user_is_producer %}
             <a href="#claim-commercial-product-modal"
                class="btn btn-primary claim-commercial-product"
-               data-toggle="modal">{% trans "Claim commercial product" %}</a>
+               data-toggle="modal">{% trans "Claim as producer" %}</a>
         {% endif %}
 
         {% if user_is_retailer %}
             <a href="#claim-retailed-product-modal"
                class="btn btn-primary claim-retailed-product"
-               data-toggle="modal">{% trans "Claim retailed product" %}</a>
+               data-toggle="modal">{% trans "Claim as retailer" %}</a>
         {% endif %}
     {% endifequal %}
 {% endblock %}

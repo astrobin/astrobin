@@ -2460,3 +2460,7 @@ li.revisions {
   font-size: 82%;
   width: 166px;
 }
+.commercial-gear-items.table,
+.retailed-gear-items.table {
+  table-layout: fixed;
+}
