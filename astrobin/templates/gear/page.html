@@ -41,6 +41,10 @@
                                 <th>{% trans "Type" %}</th>
                                 <td>{% gear_type gear %}</td>
                             </tr>
+                            <tr>
+                                <th>{% trans "Make" %}</th>
+                                <td><a href="/search/?q={{gear.make}}{% search_form_query %}&amp;search_type=3">{{gear.make}}</a></td>
+                            </tr>
                             {% for attribute in attributes %}
                                 {% if attribute.1 %}
                                     <tr>
