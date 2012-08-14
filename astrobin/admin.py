@@ -235,5 +235,4 @@ admin.site.register(GlobalStat)
 # Commercial models.                                                          #
 ###############################################################################
 admin.site.register(CommercialGear)
-admin.site.register(CommercialGearProperty)
 admin.site.register(RetailedGear)
