@@ -12,7 +12,7 @@
     {% endif %}
     <div class="data">
         <h3>{{gear.get_name}}</h3>
-        {% if gear.get_make %}<p><strong>{% trans "Make" %}</strong>: {{gear.get_make}}</p>{% endif %}
+        {% if gear.get_make %}<p><strong>{% trans "Make" %}</strong>: <a href="/search/?q={{gear.get_make}}{% search_form_query %}&amp;search_type=3">{{gear.get_make}}</a></p>{% endif %}
         {% if gear.max_payload %}<p><strong>{% trans "Max. payload" %}</strong>: {{gear.max_payload}} kg</p>{% endif %}
         {% if gear.pe %}<p><strong>{% trans "Periodic error" %}</strong>: {{gear.pe}}"</p>{% endif %}
 
