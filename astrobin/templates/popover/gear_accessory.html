@@ -12,7 +12,7 @@
     {% endif %}
     <div class="data">
 		<h3>{{gear.name}}</h3>
-		{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
+		{% if gear.get_make %}<p><strong>{% trans "Make" %}</strong>: <a href="/search/?q={{gear.make}}{% search_form_query %}&amp;search_type=3">{{gear.get_make}}</a></p>{% endif %}
 
 		<div class="actions">
 		    <a class="btn btn-mini btn-primary" href="/search/?q={{gear.name}}{% search_form_query %}">{% trans "Find images" %}</a>

@@ -13,7 +13,7 @@
     <div class="data">
 		<h3>{{gear.name}}</h3>
 		{% if gear.type %}<p><strong>{% trans "Type" %}</strong>: {% gear_type gear %}</p>{% endif %}
-		{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>{% endif %}
+		{% if gear.get_make %}<p><strong>{% trans "Make" %}</strong>: <a href="/search/?q={{gear.get_make}}{% search_form_query %}&amp;search_type=3">{{gear.get_make}}</a></p>{% endif %}
 		{% if gear.bandwidth %}<p><strong>{% trans "Bandwidth" %}</strong>: {{gear.bandwidth}} nm</p>{% endif %}
 
 		<div class="actions">
