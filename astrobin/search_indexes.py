@@ -12,7 +12,7 @@ from astrobin.models import Subject, SubjectIdentifier
 from astrobin.models import UserProfile
 from astrobin.models import Favorite
 from astrobin.models import Comment
-from astrobin.models import Gear
+from astrobin.models import Gear, CommercialGear, RetailedGear
 
 from astrobin.templatetags.tags import gear_name
 from astrobin.utils import unique_items
@@ -32,7 +32,6 @@ def _join_stripped(a):
     for i in a:
         x = xapian_escape(''.join(i.split()))
         escaped.append(x)
-
     return a + escaped 
 
 
@@ -245,6 +244,9 @@ class GearIndex(SearchIndex):
     # Number of comments on images taken with this item.
     comments = IntegerField()
 
+    producers = MultiValueField()
+    retailers = MultiValueField()
+
     def index_queryset(self):
         return Gear.objects.exclude(commercial = None)
 
@@ -314,6 +316,18 @@ class GearIndex(SearchIndex):
         for i in self.get_images(obj):
             comments += _prepare_comments(i)
         return comments
+
+    def prepare_producers(self, obj):
+        producers = CommercialGear.objects\
+            .filter(gear = obj)\
+            .exclude(Q(producer__userprofile__company_name = None) | Q(producer__userprofile__company_name = ""))
+        return _join_stripped(["%s" % x.producer.userprofile_set.all()[0].company_name for x in producers])
+
+    def prepare_retailers(self, obj):
+        retailers = RetailedGear.objects\
+            .filter(gear = obj)\
+            .exclude(Q(retailer__userprofile__company_name = None) | Q(retailer__userprofile__company_name = ""))
+        return _join_stripped(["%s" % x.retailer.userprofile_set.all()[0].company_name for x in retailers])
 
 
 class UserIndex(SearchIndex):
