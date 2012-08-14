@@ -1966,6 +1966,15 @@ class CommercialGear(models.Model):
         help_text = _("Sometimes, product names are not written properly by the users. Write here the proper product name, not including the make/brand/producer/developer name.<br/>It is recommended that you try to group as many items as possible, so try to use a generic version of your product's name."),
     )
 
+    image = models.ForeignKey(
+        Image,
+        null = True,
+        blank = True,
+        verbose_name = _("Image"),
+        help_text = _("The official, commercial image for this product. Upload an image via the regular uploading interface, set its subject type to \"Gear\", and then choose it from this list. If you upload several revisions, they will also appear in the commercial page."),
+        related_name = 'featured_gear',
+    )
+
     tagline = models.CharField(
         max_length = 256,
         null = True,
@@ -1987,15 +1996,6 @@ class CommercialGear(models.Model):
         blank = True,
         verbose_name = _("Description"),
         help_text = _("Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#10\">formatting rules</a>."),
-    )
-
-    image = models.ForeignKey(
-        Image,
-        null = True,
-        blank = True,
-        verbose_name = _("Image"),
-        help_text = _("The official, commercial image for this product. Upload an image via the regular uploading interface, set its subject type to \"Gear\", and then choose it from this list. If you upload several revisions, they will also appear in the commercial page."),
-        related_name = 'featured_gear',
     )
 
     created = models.DateTimeField(
