@@ -15,7 +15,7 @@
     {% for affiliate in affiliate_list %}
         <div class="subtle-container">
             <div class="header">
-                <h4>{{affiliate.company_name}}</h4>
+                <a href="/search/?q={{affiliate.company_name}}{% search_form_query %}&amp;search_type=3"><h4>{{affiliate.company_name}}</h4></a>
             </div>
 
             {% if affiliate.company_website %}
