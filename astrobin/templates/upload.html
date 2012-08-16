@@ -83,11 +83,11 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('.upload-forms form').submit(function() {
-            form = $(this);
-            progressbar = form.parent().find('.progressbar');
+            var $form = $(this);
+            var $progressbar = $form.parent().find('.progressbar');
 
-            form.hide();
-            progressbar.show();
+            $form.hide();
+            $progressbar.show();
 
             return true;
         });

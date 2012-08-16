@@ -31,7 +31,7 @@ server {
     error_log /usr/local/nginx/logs/astrobin.com-error.log;
 
     keepalive_timeout 5;
-    proxy_read_timeout 600;
+    proxy_read_timeout 1200;
 
     ## Compression
     # src: http://www.ruby-forum.com/topic/141251
@@ -125,6 +125,6 @@ server {
         fastcgi_param SERVER_NAME $server_name;
         fastcgi_pass_header Authorization;
         fastcgi_intercept_errors off;
-        fastcgi_read_timeout 600;
+        fastcgi_read_timeout 1200;
     }
 }

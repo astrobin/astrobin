@@ -668,6 +668,14 @@ body.full {
 .navbar-fixed-top .container {
   max-height: 40px;
 }
+.user-nav {
+  max-width: 400px;
+}
+@media screen and (max-width: 979px) {
+  .navbar-fixed-top .container {
+    max-height: inherit;
+  }
+}
 .navbar-search {
   width: 120px;
 }
