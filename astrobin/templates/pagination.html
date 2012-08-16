@@ -6,12 +6,12 @@
     <ul>
        {% if has_previous %}
           <li>
-          <a href="{% query_string "page=previous" "" %}#page_anchor">&laquo; {% trans "previous" %}</a>
+            <a href="{% query_string "page=previous" "" %}#page_anchor">&laquo; {% trans "previous" %}</a>
           </li>
        {% endif %}
 
        {% if show_first %}
-          <li>a href="{% query_string "page=1" "" %}#page_anchor">1</a></li>
+          <li><a href="{% query_string "page=1" "" %}#page_anchor">1</a></li>
           <li classs="ellipsis disabled"><a href="#">...</a></li>
        {% endif %}
        {% for linkpage in page_numbers %}
