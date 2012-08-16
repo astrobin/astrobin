@@ -619,6 +619,7 @@ astrobin_image_detail = {
             half: false,
             showHalf: true,
             hintList: astrobin_image_detail.config.rating.hint_list,
+            redirectUrl: astrobin_image_detail.config.rating.redirectUrl,
             space: false,
             size: 24,
             starHalf: 'star-half-big.png',
