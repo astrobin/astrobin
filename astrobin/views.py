@@ -3589,7 +3589,16 @@ def subject_page(request, id):
 def gear_page(request, id, slug):
     gear, gear_type = get_correct_gear(id)
     if not gear:
-        raise Http404
+        try:
+            redirect = GearHardMergeRedirect.objects.get(fro = id)
+        except GearHardMergeRedirect.DoesNotExist:
+            raise Http404
+
+        gear, gear_type = get_correct_gear(redirect.to)
+        if not gear:
+            raise Http404
+        else:
+            return HttpResponseRedirect(gear.get_absolute_url())
 
     image_attr_lookup = {
         'Telescope': 'imaging_telescopes',

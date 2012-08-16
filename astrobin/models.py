@@ -206,7 +206,7 @@ class Gear(models.Model):
         return []
 
     def get_absolute_url(self):
-        return '/gear/%i/' % self.id
+        return '/gear/%i/%s/' % (self.id, self.slug())
 
     def slug(self):
         return slugify("%s %s" % (self.get_make(), self.get_name()))
@@ -275,6 +275,7 @@ class Gear(models.Model):
             if retailed not in self.retailed.all():
                 self.retailed.add(retailed)
 
+        GearHardMergeRedirect(fro = slave.pk, to = self.pk).save()
         slave.delete()
 
 
@@ -345,6 +346,18 @@ class GearAssistedMerge(models.Model):
 
     def __unicode__(self):
         return self.master.name
+
+    class Meta:
+        app_label = 'astrobin'
+
+
+class GearHardMergeRedirect(models.Model):
+    # Remembers what gears we merged, so we can perform URL redirects.
+    fro = models.IntegerField()
+    to = models.IntegerField()
+
+    def __unicode__(self):
+        return "%s -> %s" % (self.fro, self.to)
 
     class Meta:
         app_label = 'astrobin'
