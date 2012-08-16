@@ -540,7 +540,7 @@
             {% endif %}
             {% endcomment %}
 
-            {% if messages %}
+            {% if request.user.is_authenticated and messages %}
                 {% for message in messages %}
                     <div class="alert 
                         {% if message.level == 20 %}alert-info{% endif %}
