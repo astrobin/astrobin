@@ -1667,7 +1667,9 @@ def user_page(request, username):
                 k_dict = {l: {'message': None, 'images': []}}
                 k_dict[l]['message'] = _("To fill in the missing dates, use the <strong>Edit acquisition details</strong> entry in the <strong>Actions</strong> menu for each image.")
                 k_list.append(k_dict)
-                for i in sqs.filter(Q(acquisition = None) | Q(acquisition__date = None)).distinct():
+                for i in sqs.filter(
+                    Q(subject_type__lt = 500) &
+                    (Q(acquisition = None) | Q(acquisition__date = None))).distinct():
                     k_dict[l]['images'].append(i)
                
                 sqs = Image.objects.none()
@@ -1803,14 +1805,18 @@ def user_page(request, username):
             k_dict = {l: {'message': None, 'images': []}}
             k_list.append(k_dict)
             k_dict[l]['message'] = _("To fill in the missing gear, use the <strong>Edit gear used</strong> entry in the <strong>Actions</strong> menu for each image.")
-            for i in sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None)):
+            for i in sqs.filter(
+                Q(subject_type__lt = 500) &
+                (Q(imaging_telescopes = None) | Q(imaging_cameras = None))):
                 k_dict[l]['images'].append(i)
 
             l = _("No acquisition details specified")
             k_dict = {l: {'message': None, 'images': []}}
             k_list.append(k_dict)
             k_dict[l]['message'] = _("To fill in the missing acquisition details, use the <strong>Edit acquisition details</strong> entry in the <strong>Actions</strong> menu for each image.")
-            for i in sqs.filter(Q(acquisition = None)):
+            for i in sqs.filter(
+                Q(subject_type__lt = 500) &
+                Q(acquisition = None)):
                 k_dict[l]['images'].append(i)
 
             sqs = Image.objects.none()
