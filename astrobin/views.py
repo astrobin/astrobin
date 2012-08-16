@@ -543,6 +543,10 @@ def image_detail(request, id, r):
     """ Show details of an image"""
     image = get_object_or_404(Image, pk=id)
 
+    def missing_revision(image):
+        messages.warning(request, _("The revision you are looking for is invalid, or was deleted. This is the original image."))
+        return HttpResponseRedirect(image.get_absolute_url())
+
     is_revision = False
     revision_id = 0
     revision_image = None
@@ -558,9 +562,16 @@ def image_detail(request, id, r):
         try:
             revision_id = int(r)
         except ValueError:
-            revision_image = get_object_or_404(ImageRevision, image = image, label = r)
+            try:
+                revision_image = ImageRevision.objects.get(image = image, label = r)
+            except ImageRevision.DoesNotExist:
+                return missing_revision(image)
         if not revision_image:
-            revision_image = get_object_or_404(ImageRevision, id=revision_id)
+            try:
+                revision_image = ImageRevision.objects.get(image = image, id = revision_id)
+            except ImageRevision.DoesNotExist:
+                return missing_revision(image)
+
         is_final = revision_image.is_final
         is_ready = revision_image.is_stored
     elif not r:
