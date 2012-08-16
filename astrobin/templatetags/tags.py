@@ -388,8 +388,7 @@ def search_image_list(context, request, object_list, paginate = True):
     if len(image_list) > 0:
         multiple += 1
 
-    if multiple > 1:
-        multiple = True
+    multiple = multiple > 1
 
     startPage = max(page - adjacent_pages, 1)
     if startPage <= 3: startPage = 1
