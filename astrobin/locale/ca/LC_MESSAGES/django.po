@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-19 17:58+0000\n"
-"PO-Revision-Date: 2012-06-12 18:52+0100\n"
+"PO-Revision-Date: 2012-07-03 17:59+0100\n"
 "Last-Translator: alegret <alex.alegret@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ca\n"
@@ -1271,24 +1271,23 @@ msgstr "Cos"
 
 #: locale_extras.py:7
 msgid "uploaded a new revision of"
-msgstr ""
+msgstr "S'ha pujat una nova revisió de"
 
 #: locale_extras.py:8
 msgid "commented on image"
-msgstr ""
+msgstr "ha comentat la imatge"
 
 #: locale_extras.py:9
 msgid "commented on gear item"
-msgstr ""
+msgstr "ha comentat un aparell"
 
 #: locale_extras.py:10
-#, fuzzy
 msgid "has favorited"
 msgstr "Han marcat una de les teves imatges com a favorita"
 
 #: locale_extras.py:11
 msgid "has written a review on"
-msgstr ""
+msgstr "ha fet una anàlisi de"
 
 #: models.py:42
 msgid "None (All rights reserved)"
@@ -1766,13 +1765,12 @@ msgid "Bandwidth"
 msgstr "Ample de banda"
 
 #: models.py:509
-#, fuzzy
 msgid "(in nm)"
-msgstr "(en mm)"
+msgstr "(en nm)"
 
 #: models.py:518
 msgid "nm"
-msgstr ""
+msgstr "nm"
 
 #: models.py:627
 msgid "I don't want this image plate-solved."
@@ -3521,6 +3519,9 @@ msgid ""
 "there's a new image from a certain CCD, or telescope, or filter, and so on. "
 "Or you can monitor all the new images of a certain galaxy or nebula."
 msgstr ""
+"Pots seguir aparells o objectes astronòmics, i rebre un avís quan hi ha una "
+"nova imatge d'una CCD, telescopi, filtre etc. Pots seguir totes les noves "
+"imatges d'una galàxia o nebulosa concreta."
 
 #: templates/help.html:77
 msgid ""
@@ -3528,6 +3529,9 @@ msgid ""
 "might be chosen to appear in the site's <em>Messier Marathon</em>, or as "
 "<em>Currently hot</em> on the front page."
 msgstr ""
+"Pots votar imatges i marcar-les com a favorites. Les teves imatges poden ser "
+"escollides per aparèixer al <em>Marató Messier</em> o com "
+"<em>D'Actualidad</em> a la pàgina principal."
 
 #: templates/help.html:81
 msgid ""
@@ -3540,18 +3544,26 @@ msgid ""
 "rescue to provide a home and a central hub for astrophotographers all over "
 "the world."
 msgstr ""
+"Sens dubte a hores d'ara t'hauràs adonat que <em>AstroBin</em> és més que un "
+"servei d'allotjament d'imatges. És el que la comunitat astrofotogràfica "
+"necessitava des de feia temps. Durant anys he vist imatges impactants "
+"disperses per tota la xarxa: serveis d'allotjament de propòsit general, "
+"fòrumas, webs personals i inclús llocs temporals. Algunes d'aquestes imatges "
+"contenen dades massa importants com per perdre´s en un caos. "
+"<em>AstroBin</em> arriba al recat per proporcionar una base central pels "
+"astrofotògrafs de tot el món."
 
 #: templates/help.html:83
 msgid "So, what are you waiting for?"
-msgstr ""
+msgstr "A què estàs esperant?"
 
 #: templates/help.html:84
 msgid "Sign up now!"
-msgstr ""
+msgstr "Registra't ara!"
 
 #: templates/index.html:13
 msgid "The perfect home for your astrophotography."
-msgstr ""
+msgstr "El lloc perfecte per a les teves astrogotografies."
 
 #: templates/index.html:15
 #, python-format
@@ -3561,10 +3573,14 @@ msgid ""
 "astrophotography community greatly! See the <a href=\"%(help_url)s\">help "
 "page.</a> for more information."
 msgstr ""
+"AstroBin is un servei d'allotjament fet específicament per astrofotògrafs. "
+"Té característiques que beneficiaran la comunitat astrofotogràfica. Fés un "
+"cop d'ull a la <a href=\"%(help_url)s\">pàgina d'ajuda.</a> per a més "
+"informació."
 
 #: templates/index.html:22
 msgid "Unlimited uploads, unlimited size."
-msgstr ""
+msgstr "Sense límit de mida ni nombre d'imatges"
 
 #: templates/index.html:23
 msgid ""
@@ -3572,10 +3588,13 @@ msgid ""
 "compression. On AstroBin you can (and should!) upload full size images. And "
 "you have unlimited space for free."
 msgstr ""
+"Les imatges astrofotogràfiques tenen un valor científic que no s'hauria de "
+"perdre comprimint arxius. A AstroBin pots i hauries de pujar imatges de mida "
+"completa. Tens espai il·limitat de franc"
 
 #: templates/index.html:30
 msgid "Have your data neatly plotted."
-msgstr ""
+msgstr "Tens les teves dades perfectament analitzades."
 
 #: templates/index.html:31
 msgid ""
@@ -3583,32 +3602,35 @@ msgid ""
 "neat and organized. And with our plots, you can get insights on your "
 "productivity and on the gear you use the most."
 msgstr ""
+"Les dades ho són tot, AstroBin et dóna eines per mantenir-les organitzades. "
+"Amb els nostres gràfics pots fer-te una idea de la teva productivitat i de "
+"l'instrumental que utilitzes més."
 
 #: templates/index.html:47
 msgid "Image of the day"
-msgstr ""
+msgstr "Imatge del dia"
 
 #: templates/index.html:90
 msgid "Recent"
-msgstr ""
+msgstr "Recents"
 
 #: templates/index.html:105
 msgid "Followed"
-msgstr ""
+msgstr "Seguides"
 
 #: templates/index.html:120 templates/index.html.py:121
 #: templates/index.html:122 templates/index.html.py:123
 #: templates/index.html:124
 msgid "Recently voted 5 stars"
-msgstr ""
+msgstr "Fotografies recents amb 5 estrelles"
 
 #: templates/index.html:139
 msgid "Recently favorited"
-msgstr ""
+msgstr "Darreres marcades com a preferides"
 
 #: templates/index.html:166 templates/gear/page.html:16
 msgid "(view more)"
-msgstr ""
+msgstr "(veure més)"
 
 #: templates/index.html:178 templates/image/detail.html:265
 #: templates/image/detail.html.py:1285 templates/image/detail.html:1299
@@ -3621,7 +3643,7 @@ msgstr ""
 #: templates/popover/gear_telescope.html:16 templates/popover/subject.html:23
 #: templates/user/profile-js.html:22 templates/user/profile-subnav.html:68
 msgid "Follow"
-msgstr ""
+msgstr "Seguir"
 
 #: templates/index.html:178 templates/image/detail.html:1299
 #: templates/image/detail.html.py:1300
@@ -3632,23 +3654,23 @@ msgstr ""
 #: templates/popover/gear_software.html:12
 #: templates/popover/gear_telescope.html:14 templates/popover/subject.html:21
 msgid "Unfollow"
-msgstr ""
+msgstr "Deixar de seguir"
 
 #: templates/leaderboard.html:20 templates/subject/page.html:79
 msgid "Total integration"
-msgstr ""
+msgstr "Temps d'integració total"
 
 #: templates/leaderboard.html:25
 msgid "Avg. integration hours"
-msgstr ""
+msgstr "Mitjana d'hores d'integració"
 
 #: templates/leaderboard.html:30 templates/gear/page.html:44
 msgid "Images"
-msgstr ""
+msgstr "Imatges"
 
 #: templates/messier_marathon.html:9
 msgid "Messier Marathon"
-msgstr ""
+msgstr "Marató Messier"
 
 #: templates/messier_marathon.html:11
 msgid ""
@@ -3657,6 +3679,10 @@ msgid ""
 "<strong>Actions</strong> menu and selecting <strong>Nominate for the Messier "
 "Marathon</strong>."
 msgstr ""
+"Aquesta és una llista d'objectes Messier a AstroBin. Pots nominar qualsevol "
+"imatge (que contingui un objecte Messier) desplegant el menú "
+"<strong>Accions</strong> i seleccionant <strong>Nominar per al Marató "
+"Messier</strong>."
 
 #: templates/messier_marathon.html:14
 #, python-format
@@ -3664,19 +3690,25 @@ msgid ""
 "What about <a href=\"%(search_url)s\">doing a search</a> and nominating some "
 "images now?"
 msgstr ""
+"Què et sembla si <a href=\"%(search_url)s\">fas una cerca</a> i nomines "
+"algunes imatges ara?"
 
 #: templates/messier_nomination.html:6 templates/image/detail.html:166
 msgid "Nominate for the Messier Marathon"
-msgstr ""
+msgstr "Nominar per a la Marató Messier"
 
 #: templates/messier_nomination.html:10
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You will nominate this image for the <a href=\"%(the_url)s\" target=\"_blank"
 "\">Messier Marathon</a>. The Messier Marathon is a list of the Messier "
 "objects that features AstroBin images nominated by the users. For each "
 "Messier object, the AstroBin image with the most nomination is chosen."
 msgstr ""
+"Nominaràs aquesta imatge per al <a href=\"%(the_url)s\" target=\"_blank\">Marató "
+"Messier</a>. El Marató Messier és una llista d'objectes Messier que "
+"apareixen en les imatges d'AstroBin nominades pels usuaris. Per a cada "
+"objecte Messier s'escull la imatge amb més nominacions."
 
 #: templates/messier_nomination.html:14
 #, python-format
@@ -3684,6 +3716,8 @@ msgid ""
 "Press <em>Continue</em> to nominate this image for <strong>M "
 "%(messier_object)s</strong>."
 msgstr ""
+"Polsa <em>Continuar</em> per a nominar aquesta imatge per <strong>M %"
+"(messier_object)s</strong>."
 
 #: templates/messier_nomination.html:21
 msgid ""
@@ -3691,6 +3725,10 @@ msgid ""
 "think this is a mistake, please contact the author of the image and ask them "
 "to add the correct Messier object as a subject."
 msgstr ""
+"Ho sentim, però sembla que aquesta imatge no conté un objecte Messier. Si "
+"creus que és un error, si us plau contacta amb l'autor de la imatge i "
+"demana-li que afegeixi l'objecte Messier correcte com a objecte de la "
+"imatge."
 
 #: templates/messier_nomination.html:24 templates/messier_nomination.html:35
 #: templates/messier_nomination.html:44
@@ -3706,64 +3744,66 @@ msgstr ""
 #: templates/image/edit/gear.html:56 templates/image/edit/license.html:21
 #: templates/image/edit/presolve.html:36
 msgid "Return to image"
-msgstr ""
+msgstr "Tornar a la imatge"
 
 #: templates/messier_nomination.html:28
 msgid ""
 "This image contains multiple Messier objects. Please choose the one for "
 "which you are nominating this image."
 msgstr ""
+"Aquesta imatge conté varis objectes Messier. Si us plau escull-ne un pel "
+"qual nomines la imatge."
 
 #: templates/messier_nomination.html:34 templates/messier_nomination.html:43
 #: templates/image/actions/bring_to_attention.html:14
 #: templates/image/actions/request_additional_information.html:10
 #: templates/image/actions/request_fits.html:10
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
 
 #: templates/messier_nomination_finish.html:6
 msgid "You have already nominated this image"
-msgstr ""
+msgstr "Ja has nominat aquesta imatge"
 
 #: templates/messier_nomination_finish.html:7
 msgid "You can't nominate the same image more than once."
-msgstr ""
+msgstr "No pots nominar la mateixa imatge més d'una vegada."
 
 #: templates/messier_nomination_finish.html:9
 msgid "Thanks for your nomination"
-msgstr ""
+msgstr "Gràcies per la nominació"
 
 #: templates/messier_nomination_finish.html:10
 msgid "Your nomination has been recorded, thank you!"
-msgstr ""
+msgstr "La teva nominació s'ha enregistrat, gràcies!"
 
 #: templates/messier_nomination_finish.html:13
 msgid "Visit the Messier Marathon"
-msgstr ""
+msgstr "Visita el Marató Messier"
 
 #: templates/most_popular.html:12
 msgid "Select latitude"
-msgstr ""
+msgstr "Selecciona latitud"
 
 #: templates/most_popular.html:17
 msgid "From latitude:"
-msgstr ""
+msgstr "Des de latitud:"
 
 #: templates/most_popular.html:45
 msgid "To latitude:"
-msgstr ""
+msgstr "Fins a latitud:"
 
 #: templates/most_popular.html:73
 msgid "Hemisphere:"
-msgstr ""
+msgstr "Hemisferi:"
 
 #: templates/most_popular.html:90
 msgid "Both"
-msgstr ""
+msgstr "Ambdós"
 
 #: templates/most_popular.html:98
 msgid "Most popular subjects"
-msgstr ""
+msgstr "Objectes més populars"
 
 #: templates/most_popular.html:100
 msgid ""
@@ -3771,44 +3811,49 @@ msgid ""
 "subject, one image has been chosen. Use the menu to limit the images to "
 "those acquired from a certain latitude on Earth."
 msgstr ""
+"Aquests són, mes per mes, els objectes més populars a AstroBin. Per casa "
+"objecte s'ha escollit una imatge. Utilitza el menu per a limitar les imatges "
+"a aquelles que hagin sigut adquirides des d'una latitud concreta."
 
 #: templates/nightly.html:7
 msgid "Images acquired night after night"
-msgstr ""
+msgstr "Imatges adquirides nit rera nit"
 
 #: templates/nightly.html:11
 msgid ""
 "On this page you can see images that were actually taken each night, and not "
 "merely uploaded on a particular date."
 msgstr ""
+"En aquesta pàgina pots veure les imatges que s'han pres cada nit, i no només "
+"les que s'hagin pujat en una data concreta."
 
 #: templates/nightly.html:27
 msgid "No image acquired in the selected month."
-msgstr ""
+msgstr "No s'ha adquirit cap imatge el mes seleccionat."
 
 #: templates/nightly.html:34
 msgid "current month"
-msgstr ""
+msgstr "mes actual"
 
 #: templates/object_not_found.html:5
 msgid "Object not found"
-msgstr ""
+msgstr "No s'ha trobat l'objecte"
 
 #: templates/pagination.html:9 templates/pagination/pagination.html:6
 msgid "previous"
-msgstr ""
+msgstr "anterior"
 
 #: templates/pagination.html:27 templates/pagination/pagination.html:22
 msgid "next"
-msgstr ""
+msgstr "següent"
 
 #: templates/profile-edit-menu.html:6 templates/image/edit/menu.html:6
 msgid "Basic Information"
-msgstr ""
+msgstr "Informació Bàsica"
 
 #: templates/profile-edit-menu.html:18
 msgid "Import from Flickr"
-msgstr ""
+msgstr "Importar des de Flickr"
 
 #: templates/stats.html:13
 #, python-format
