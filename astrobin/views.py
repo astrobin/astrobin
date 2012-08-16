@@ -31,6 +31,7 @@ import persistent_messages
 from djangoratings.models import Vote
 from reviews.forms import ReviewedItemForm
 from actstream.models import Action
+from registration.forms import RegistrationForm
 
 from uuid import uuid4
 import os
@@ -150,6 +151,7 @@ def index(request):
         's3_url': settings.S3_URL,
         'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'global_actions': Action.objects.all()[:16],
+        'registration_form': RegistrationForm(),
     }
 
     profile = None
@@ -198,7 +200,7 @@ def index(request):
         queryset = Image.objects.filter(is_stored = True, is_wip = False).order_by('-uploaded'),
         template_name = 'index.html',
         template_object_name = 'image',
-        paginate_by = 10 if request.user.is_authenticated() else 18,
+        paginate_by = 10 if request.user.is_authenticated() else 16,
         extra_context = response_dict)
 
 

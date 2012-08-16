@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load tags %}
 {% load activity_tags %}
+{% load bootstrap_toolkit %}
 
 {% block content %}
     {% if not request.user.is_authenticated %}
@@ -36,70 +37,90 @@
             <a class="carousel-control left" href="#why-astrobin" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#why-astrobin" data-slide="next">&rsaquo;</a>
         </div> <!-- carousel -->
-    {% endif %}<!-- authenticated -->
 
-    {% if user.is_authenticated and image_of_the_day %}
-        {% with image_of_the_day as iotd %}
-        <div class="visible-desktop">
-            <div class="row">
-                <div class="span10">
-                    <div class="image-of-the-day">
-                        <h2>{% trans "Image of the day" %}!</h2>
-                        <a href="{% url image_detail iotd.image.id %}">
-                            <img src="http://{{s3_url}}/{{bucket_name}}/{{iotd.filename}}.jpg"
-                                 alt="{{iotd.image.title|default:_("(no title)")}}"/>
-                        </a>
-                        <div class="info visible-desktop">
-                            <h3>{{iotd.image.title|truncatechars:"60"}}</h3>
-                            <span class="by">
-                                by <a href="{% url user_page iotd.image.user %}">{{iotd.image.user}}</a>
-                            </span>
-                            {% for i in gear_list %}
-                                {% if i.1 %}
-                                <p>
-                                    <strong>{% trans i.0 %}:</strong>
-                                    {% for g in i.1 %}
-                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id g.slug %}">{% gear_name g %}</a>{% if not forloop.last %},&nbsp;{% endif %}
-                                    {% endfor %}
-                                </p>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
+        <div class="row">
+            <div class="span5">
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>{% trans "Recent images" %}</h4>
                     </div>
+                    {% image_list request image_list 0 80 %}
                 </div>
-                <div class="span2">
-                    <a class="btn btn-primary btn-upload" href="{% url image_upload %}">
-                        <div style="font-size: 92px;"><i class="icon-upload-alt icon-white"></i></div>
-                        <span class="text">
-                            {% trans "Upload" %}
-                        </span>
-                    </a>
+            </div> <!-- recently uploaded row -->
+            <div class="span7">
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>{% trans "Register with AstroBin" %}</h4>
+                    </div>
+                    <div class="well">
+                        {% url tos as tos_url %}
+                        {% blocktrans %}By registering with AstroBin, you agree to our <a href="{{tos_url}}">terms of service</a>.{% endblocktrans %}
+                    </div> 
+                    <form class="form-horizontal" method="post" action="/accounts/register/"}>
+                        {{ registration_form|as_bootstrap }}
+                        <div class="form-actions">
+                            <input class="btn btn-primary" type="submit" value="{% trans 'Submit' %}" />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        {% endwith %}
-    {% endif %}
 
-    <div class="row">
-        <div class="span{% if request.user.is_authenticated %}7{% else %}12{% endif %}">
+    {% else %}<!-- authenticated -->
 
-            <div class="row">
-                <div class="span{% if request.user.is_authenticated %}7{% else %}12{% endif %}">
-                    <div class="home-strip-container">
-                        <div class="title">
-                            <h3>{% trans "Recent" %}</h3>
-                        </div>
-                        <div class="thumbs">
-                            {% image_list request image_list 0 small_size %}
+        {% with image_of_the_day as iotd %}
+            <div class="visible-desktop">
+                <div class="row">
+                    <div class="span10">
+                        <div class="image-of-the-day">
+                            <h2>{% trans "Image of the day" %}!</h2>
+                            <a href="{% url image_detail iotd.image.id %}">
+                                <img src="http://{{s3_url}}/{{bucket_name}}/{{iotd.filename}}.jpg"
+                                     alt="{{iotd.image.title|default:_("(no title)")}}"/>
+                            </a>
+                            <div class="info visible-desktop">
+                                <h3>{{iotd.image.title|truncatechars:"60"}}</h3>
+                                <span class="by">
+                                    by <a href="{% url user_page iotd.image.user %}">{{iotd.image.user}}</a>
+                                </span>
+                                {% for i in gear_list %}
+                                    {% if i.1 %}
+                                    <p>
+                                        <strong>{% trans i.0 %}:</strong>
+                                        {% for g in i.1 %}
+                                            <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id g.slug %}">{% gear_name g %}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                        {% endfor %}
+                                    </p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
-                </div> <!-- recently uploaded row -->
+                    <div class="span2">
+                        <a class="btn btn-primary btn-upload" href="{% url image_upload %}">
+                            <div style="font-size: 92px;"><i class="icon-upload-alt icon-white"></i></div>
+                            <span class="text">
+                                {% trans "Upload" %}
+                            </span>
+                        </a>
+                    </div>
+                </div>
             </div>
+        {% endwith %}
 
-    {% if user.is_authenticated %}
-        {% if recent_from_followees %}
-            <div class="row">
-                <div class="span7">
+        <div class="row">
+            <div class="span7"> <!-- all the recent images -->
+
+                <div class="home-strip-container">
+                    <div class="title">
+                        <h3>{% trans "Recent" %}</h3>
+                    </div>
+                    <div class="thumbs">
+                        {% image_list request image_list 0 small_size %}
+                    </div>
+                </div>
+
+                {% if recent_from_followees %}
                     <div class="home-strip-container">
                         <div class="title">
                             <h3>{% trans "Followed" %}</h3>
@@ -108,48 +129,35 @@
                             {% image_list request recent_from_followees 0 small_size %}
                         </div>
                     </div>
-                </div>
-            </div>
-        {% endif %}
+                {% endif %}
 
-            <div class="row">
-                <div class="span7">
-                    <div class="home-strip-container">
-                        <div class="title">
-                            <h3>
-                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                            </h3>
-                        </div>
-                        <div class="thumbs">
-                            {% image_list request recently_five_starred 0 small_size %}
-                        </div>
+                <div class="home-strip-container">
+                    <div class="title">
+                        <h3>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                        </h3>
+                    </div>
+                    <div class="thumbs">
+                        {% image_list request recently_five_starred 0 small_size %}
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="span7">
-                    <div class="home-strip-container">
-                        <div class="title">
-                            <h3>
-                                <img src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png" alt="{% trans "Recently favorited" %}"/>
-                            </h3>
-                        </div>
-                        <div class="thumbs">
-                            {% image_list request recently_favorited 0 small_size %}
-                        </div>
+                <div class="home-strip-container">
+                    <div class="title">
+                        <h3>
+                            <img src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png" alt="{% trans "Recently favorited" %}"/>
+                        </h3>
+                    </div>
+                    <div class="thumbs">
+                        {% image_list request recently_favorited 0 small_size %}
                     </div>
                 </div>
-            </div>
-    {% endif %} <!-- authenticated -->
+            </div> <!-- span7 -->
 
-        </div> <!-- span7 -->
-
-        {% if request.user.is_authenticated %}
             <div class="span5"> <!-- activity stream -->
                 <div class="activity-stream">
                     <h3>{% trans "Activity stream" %}</h3>
@@ -157,19 +165,20 @@
                         {% for action in global_actions %}
                             {% display_action action %}
                         {% empty %}
-                            <p>{% trans "There is no activity yet." %}</p>
-                        {% endfor %}
-                    </div>
-
-                    {% if global_actions|length == 16 %}
-                        <div class="pagination-centered">
-                            <a href="{% url activities %}">{% trans "(view more)" %}</a>
+                                <p>{% trans "There is no activity yet." %}</p>
+                            {% endfor %}
                         </div>
-                    {% endif %}
+
+                        {% if global_actions|length == 16 %}
+                            <div class="pagination-centered">
+                                <a href="{% url activities %}">{% trans "(view more)" %}</a>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-        {% endif %}
-    </div> <!-- row -->
+            </div> <!-- span5 -->
+        </div> <!-- row -->
+    {% endif %} {# authenticated #}
 {% endblock %}
 
 {% block extra_js %}
