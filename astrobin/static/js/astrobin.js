@@ -640,6 +640,7 @@ astrobin_image_detail = {
                                 $(astrobin_image_detail.config.rating.element).raty('readOnly', true);
                                 $(astrobin_image_detail.config.rating.element).raty('fixHint');
                                 $('.votes-number').text(parseInt($('.votes-number').text()) + 1);
+                                $('.current-rating').text(rating);
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) {
                             }
