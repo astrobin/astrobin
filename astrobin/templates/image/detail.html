@@ -711,7 +711,7 @@
 
             <div class="subtle-container">
                 <div class="favorite-container">
-                    <a href="#" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Already favorited" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
+                    <a href="{% if request.user.is_authenticated %}#{% else %}/accounts/login/?next={{request.path}}{% endif %}" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Already favorited" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
                         {% if already_favorited %}
                             <div style="font-size: 32px; color: #FFA040;">
                         {% else %}
@@ -861,6 +861,7 @@
 <script type="text/javascript">stLight.options({publisher: "ur-15649ecb-6f21-a004-8032-7cf8416c478c"}); </script>
 <script type="text/javascript">
 $(document).ready(function() {
+    {% if request.user.is_authenticated %}
     $('a.favorite').click(function() {
         var $link = $(this),
             $heart = $link.find('i.icon-heart');
@@ -880,6 +881,7 @@ $(document).ready(function() {
 
         return false;
     });
+    {% endif %}
 
     var clip = new ZeroClipboard.Client();
     clip.setCSSEffects(false);
@@ -1325,6 +1327,9 @@ $(document).ready(function() {
         "{{current_rating}}",
         {
             rating: {
+                {% if not request.user.is_authenticated %}
+                redirectUrl: "/accounts/login/?next={{request.path}}",
+                {% endif %}
                 {% if already_voted %}
                 hint_list: [
                     {{current_rating}},

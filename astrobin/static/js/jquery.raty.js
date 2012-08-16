@@ -58,14 +58,24 @@
 
 				var starFile	= opt.starOn,
 					space		= (opt.space) ? 4 : 0,
-					hint		= '';
+					hint		= '',
+					redirectOpen = '',
+					redirectClose = '';
 
 				for (var i = 1; i <= opt.number; i++) {
 					starFile = (start < i) ? opt.starOff : opt.starOn;
 
 					hint = (i <= opt.hintList.length && opt.hintList[i - 1] !== null) ? opt.hintList[i - 1] : i;
 
-					$this.append('<img src="' + opt.path + starFile + '" alt="' + i + '" title="' + hint + '" />');
+					if (opt.redirectUrl) {
+						redirectOpen = '<a href="' + opt.redirectUrl + '">';
+						redirectClose = '</a>';
+					}
+
+					$this.append(
+						redirectOpen +
+						'<img src="' + opt.path + starFile + '" alt="' + i + '" title="' + hint + '" />' +
+						redirectClose);
 
 					if (opt.space) {
 						$this.append((i < opt.number) ? '&nbsp;' : '');
@@ -453,7 +463,8 @@
 		targetKeep:		false,
 		targetText:		'',
 		targetType:		'hint',
-		width:			undefined
+		width:			undefined,
+		redirectUrl:    undefined
 	};
 
 })(jQuery);
