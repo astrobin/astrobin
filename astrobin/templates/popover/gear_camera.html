@@ -27,7 +27,7 @@
 		            <a class="btn btn-mini btn-primary follow-gear" data-gear="{{gear.id}}" href="{% url follow_gear gear.id %}">{% trans "Follow" %}</a>
 		        {% endif %}
 		    {% endif %}
-		    <a class="btn btn-mini" href="{% url gear_page gear.id %}">{% trans "View page" %}</a>
+		    <a class="btn btn-mini" href="{% url gear_page gear.id gear.slug %}">{% trans "View page" %}</a>
 		</div>
 	</div>
 </div>

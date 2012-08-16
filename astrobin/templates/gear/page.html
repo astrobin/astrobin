@@ -270,7 +270,7 @@
                                         {% endif %}
                                     </div>
                                     <div class="links">
-                                        <a class="permalink" href="{% url gear_page gear.id %}#c{{node.id}}">{% trans "Link" %}</a>
+                                        <a class="permalink" href="{% url gear_page gear.id gear.slug %}#c{{node.id}}">{% trans "Link" %}</a>
                                         {% if user.is_authenticated %}
                                             {% if user == node.author %}
                                                 <a class="delete" href="#">
@@ -442,7 +442,7 @@ $(document).ready(function() {
                 $meta.append($author).append("{% trans "just now" %}");
 
                 $links = $('<div/>').addClass('links');
-                $permalink = $('<a/>').addClass('permalink').attr('href', '{% url gear_page gear.id %}#c' + parent_id).text('{% trans "Link" %}');
+                $permalink = $('<a/>').addClass('permalink').attr('href', '{% url gear_page gear.id gear.slug %}#c' + parent_id).text('{% trans "Link" %}');
                 $delete = $('<a/>').addClass('delete').attr('href', '#').text('{% trans "Delete" %}');
                 $edit = $('<a/>').addClass('edit').attr('href', '#').text('{% trans "Edit" %}');
                 $reply = $('<a/>').addClass('reply').attr('href', '#').text('{% trans "Reply" %}');

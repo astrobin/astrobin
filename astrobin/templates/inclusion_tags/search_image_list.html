@@ -16,7 +16,7 @@
             <div class="gear-business-card">
                 <div class="header">
                     <i class="icon-cog icon-white"></i>
-                    <a href="{% url gear_page search_result.object.id %}">
+                    <a href="{% url gear_page search_result.object.id search_result.object.slug %}">
                         {% if search_result.object.make %}{{search_result.object.make}}{% endif %}
                         {{search_result.object.name}}
                     </a>
@@ -24,7 +24,7 @@
                 {% if search_result.object.commercial and search_result.object.commercial.image  %}
                     {% with search_result.object.commercial.image as image %}
                         <div class="avatar">
-                            <a href="{% url gear_page search_result.object.id %}">
+                            <a href="{% url gear_page search_result.object.id search_result.object.slug %}">
                                 <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}" alt="{{image.title|escape}}" />
                             </a>
                         </div>

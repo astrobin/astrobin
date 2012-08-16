@@ -260,7 +260,8 @@ urlpatterns = patterns('',
     url(r'^subject_popover_ajax/(?P<id>\d+)/$', views.subject_popover_ajax, name='subject_popover_ajax'),
 
     url(r'^subject/(?P<id>\d+)/$', views.subject_page, name='subject_page'),
-    url(r'^gear/(?P<id>\d+)/$', views.gear_page, name='gear_page'),
+
+    url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-]+)/)?$', views.gear_page, name='gear_page'),
     url(r'^gear/fix/(?P<id>\d+)/$', views.gear_fix, name='gear_fix'),
     url(r'^gear/fix/save/$', views.gear_fix_save, name='gear_fix_save'),
     url(r'^gear/fix/thanks/$', views.gear_fix_thanks, name='gear_fix_thanks'),
