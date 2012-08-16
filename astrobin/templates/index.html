@@ -59,7 +59,7 @@
                                 <p>
                                     <strong>{% trans i.0 %}:</strong>
                                     {% for g in i.1 %}
-                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id %}">{% gear_name g %}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id g.slug %}">{% gear_name g %}</a>{% if not forloop.last %},&nbsp;{% endif %}
                                     {% endfor %}
                                 </p>
                                 {% endif %}

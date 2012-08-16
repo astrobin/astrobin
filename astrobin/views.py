@@ -3586,7 +3586,7 @@ def subject_page(request, id):
 
 
 @require_GET
-def gear_page(request, id):
+def gear_page(request, id, slug):
     gear, gear_type = get_correct_gear(id)
     if not gear:
         raise Http404

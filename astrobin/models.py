@@ -22,6 +22,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.contrib.contenttypes import generic
 from django.core.validators import MaxLengthValidator
+from django.template.defaultfilters import slugify
 
 from tasks import *
 
@@ -207,6 +208,9 @@ class Gear(models.Model):
     def get_absolute_url(self):
         return '/gear/%i/' % self.id
 
+    def slug(self):
+        return slugify("%s %s" % (self.get_make(), self.get_name()))
+        
     def hard_merge(self, slave):
         from gear import get_correct_gear
         unused, master_gear_type = get_correct_gear(self.id)

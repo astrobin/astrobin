@@ -47,7 +47,7 @@
                                     {% for g in item.gear_set.all %}
                                         <a rel="popover" class="gear-popover" 
                                            data-load="{% url gear_popover_ajax g.id %}"
-                                           href="{% url gear_page g.id %}">
+                                           href="{% url gear_page g.id g.slug %}">
                                             {{g.id}}
                                         </a>{% if not forloop.last %}, {% endif %}
                                     {% endfor %}
@@ -71,7 +71,7 @@
 
                                 {% ifequal user request.user %}
                                 <td>
-                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
+                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id item.gear_set.all.0.slug %}">
                                         <i class="icon-eye-open"></i>
                                     </a>
                                     <a rel="tooltip" title="{% trans "Edit" %}" href="{% url commercial_products_edit item.id %}">
@@ -129,7 +129,7 @@
                                     {% for g in item.gear_set.all %}
                                         <a rel="popover" class="gear-popover"
                                            data-load="{% url gear_popover_ajax g.id %}"
-                                           href="{% url gear_page g.id %}">
+                                           href="{% url gear_page g.id g.slug %}">
                                             {{g.id}}
                                         </a>{% if not forloop.last %}, {% endif %}
                                     {% endfor %}
@@ -153,7 +153,7 @@
 
                                 {% ifequal user request.user %}
                                 <td>
-                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id %}">
+                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id item.gear_set.all.0.slug %}">
                                         <i class="icon-eye-open"></i>
                                     </a>
                                     <a rel="tooltip" title="{% trans "Edit" %}" href="{% url retailed_products_edit item.id %}">
