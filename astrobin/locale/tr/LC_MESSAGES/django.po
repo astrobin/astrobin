@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-19 17:57+0000\n"
-"PO-Revision-Date: 2012-05-20 10:43+0100\n"
+"PO-Revision-Date: 2012-07-19 18:56+0100\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: tr\n"
@@ -1269,28 +1269,24 @@ msgid "Body"
 msgstr "Mesaj"
 
 #: locale_extras.py:7
-#, fuzzy
 msgid "uploaded a new revision of"
 msgstr "Yeni revizyon yükle"
 
 #: locale_extras.py:8
-#, fuzzy
 msgid "commented on image"
 msgstr "Oluşturma tarihi:"
 
 #: locale_extras.py:9
-#, fuzzy
 msgid "commented on gear item"
-msgstr "Kullanılan donanımları düzenle"
+msgstr "şu ekipmana yorum yazdı:"
 
 #: locale_extras.py:10
-#, fuzzy
 msgid "has favorited"
 msgstr "Favori olarak işaretle."
 
 #: locale_extras.py:11
 msgid "has written a review on"
-msgstr ""
+msgstr "şununla ilgili eleştiri yazdı:"
 
 #: models.py:42
 msgid "None (All rights reserved)"
@@ -1357,9 +1353,8 @@ msgid "Albanian"
 msgstr "Arnavutça"
 
 #: models.py:61 models.py:74 settings.py:60
-#, fuzzy
 msgid "Polish"
-msgstr "İngilizce"
+msgstr "Lehçe"
 
 #: models.py:78
 msgid "Pulsars"
@@ -1478,7 +1473,7 @@ msgstr "Marka"
 
 #: models.py:154
 msgid "The make, brand, producer or developer of this product."
-msgstr ""
+msgstr "Bu ürünün üretimi, markası, üreticisi yada geliştiricisi."
 
 #: models.py:161 models.py:1524 models.py:1680 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
@@ -1499,22 +1494,22 @@ msgstr ""
 
 #: models.py:281
 msgid "Alias"
-msgstr ""
+msgstr "Takma adı"
 
 #: models.py:282
 msgid ""
 "A descriptive name, alias or nickname for your own copy of this product."
 msgstr ""
+"Bu ürünün kendi kopyanız için tanımlayıcı bir isim, sahte yada takma isim."
 
 #: models.py:289
-#, fuzzy
 msgid "Comment"
-msgstr "Yorumlar"
+msgstr "Yorum"
 
 #: models.py:290
 msgid ""
 "Information, description or comment about your own copy of this product."
-msgstr ""
+msgstr "Bu ürünün kendi kopyanız hakkında bilgi, tanım yada yorum. "
 
 #: models.py:317
 msgid "Refractor: achromatic"
@@ -1561,9 +1556,8 @@ msgid "Reflector: Herschellian"
 msgstr "Reflektör: Herschellian"
 
 #: models.py:329
-#, fuzzy
 msgid "Reflector: Newtonian"
-msgstr "Reflektör: Newton"
+msgstr "Reflektör: Newtonian"
 
 #: models.py:331
 msgid "Catadioptric: Argunov-Cassegrain"
@@ -1652,7 +1646,7 @@ msgstr "(tepeden tepeye, yaysaniye)"
 
 #: models.py:398
 msgid "kg"
-msgstr ""
+msgstr "kg"
 
 #: models.py:406
 msgid "CCD"
@@ -1695,7 +1689,6 @@ msgid "Sensor height"
 msgstr "Sensör yüksekliği"
 
 #: models.py:450
-#, fuzzy
 msgid "&mu;m"
 msgstr "(&mu;m cinsinden)"
 
@@ -1768,13 +1761,12 @@ msgid "Bandwidth"
 msgstr "Bant genişliği"
 
 #: models.py:509
-#, fuzzy
 msgid "(in nm)"
-msgstr "(mm)"
+msgstr "(nm cinsinden)"
 
 #: models.py:518
 msgid "nm"
-msgstr ""
+msgstr "nm"
 
 #: models.py:627
 msgid "I don't want this image plate-solved."
@@ -2489,9 +2481,8 @@ msgstr ""
 "gönderdi."
 
 #: views.py:3287 templatetags/tags.py:483
-#, fuzzy
 msgid "no alias"
-msgstr "Somali"
+msgstr "takma ad yok"
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -2579,12 +2570,11 @@ msgstr "API Anahtar isteğiniz onaylandı"
 
 #: management/__init__.py:141
 msgid "New discussion about a gear item you own"
-msgstr ""
+msgstr "Sahip olduğunuz bir donanım hakkında yeni görüş"
 
 #: management/__init__.py:147
-#, fuzzy
 msgid "New review of a gear item you own"
-msgstr "Takip ettiğiniz bir obje ile ilgili yeni resim"
+msgstr "Sahip olduğunuz bir donanım hakkında yeni eleştiri"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2600,12 +2590,11 @@ msgstr ""
 
 #: templates/activities.html:8 templates/index.html:155
 msgid "Activity stream"
-msgstr ""
+msgstr "Aktivite akışı"
 
 #: templates/activities.html:13 templates/index.html:160
-#, fuzzy
 msgid "There is no activity yet."
-msgstr "Henüz bir yorum yapılmamaış."
+msgstr "Henüz herhangi bir aktivite yok."
 
 #: templates/app_api_key_request.html:6
 msgid "Request an API key"
@@ -3558,6 +3547,9 @@ msgid ""
 "might be chosen to appear in the site's <em>Messier Marathon</em>, or as "
 "<em>Currently hot</em> on the front page."
 msgstr ""
+"Fotoğraflara oy verebilir ve onları favori olarak işaretleyebilirsiniz. "
+"Fotoğrafınız sitenin <em>Messier Marathon</em> bölümünde yada ön sayfada "
+"<em>Şu an beğenilen</em> bölümünde görüntülenmek üzere seçilmiş olabilir. "
 
 #: templates/help.html:81
 msgid ""
@@ -4062,9 +4054,8 @@ msgid "Remove filter"
 msgstr "Filtreyi çıkarın"
 
 #: templates/activity/action.html:28
-#, fuzzy
 msgid "ago"
-msgstr "%s önce"
+msgstr "önce"
 
 #: templates/avatar/change.html:9
 msgid "Change your avatar"
@@ -4115,7 +4106,7 @@ msgstr "Teşekkürler! Mesajınız başarıyla iletildi."
 
 #: templates/gear/fix.html:10
 msgid "Instructions and examples"
-msgstr ""
+msgstr "Talimatlar ve örnekler"
 
 #: templates/gear/fix.html:13
 msgid ""
@@ -4126,7 +4117,7 @@ msgstr ""
 
 #: templates/gear/fix.html:16
 msgid "Please read the instructions and the example below, they are important!"
-msgstr ""
+msgstr "Lütfen aşağıdaki talimatları ve örneği okuyun, bunlar önemli!"
 
 #: templates/gear/fix.html:19
 msgid ""
@@ -4137,11 +4128,11 @@ msgstr ""
 
 #: templates/gear/fix.html:22
 msgid "Make sure both the make and the name are in English."
-msgstr ""
+msgstr "Üretim ve Adı bölümlerinin İngilizce olduğundan emin olun."
 
 #: templates/gear/fix.html:23
 msgid "Make sure the make is not written again in the name field."
-msgstr ""
+msgstr "Üretim adının Adı (isim) alanına yeniden yazılmadığından emin olun."
 
 #: templates/gear/fix.html:24
 msgid ""
@@ -4232,41 +4223,38 @@ msgid "After you fix an item, another one at random will be offered."
 msgstr ""
 
 #: templates/gear/fix.html:99
-#, fuzzy
 msgid "Already fixed:"
-msgstr "Zaten favorilere eklendi"
+msgstr "Zaten düzeltildi:"
 
 #: templates/gear/fix.html:100
 msgid "Remaining:"
-msgstr ""
+msgstr "Geriye kalan:"
 
 #: templates/gear/fix.html:107
 msgid "Fix"
-msgstr ""
+msgstr "Düzelt"
 
 #: templates/gear/fix.html:108
-#, fuzzy
 msgid "Mark as good"
-msgstr "Tamamlandı olarak işaretle."
+msgstr "Sağlam (iyi) olarak işaretle."
 
 #: templates/gear/fix.html:109
 msgid "Skip"
-msgstr ""
+msgstr "Atla"
 
 #: templates/gear/fix.html:110
 msgid "Enough for now"
-msgstr ""
+msgstr "Şimdilik yeterli"
 
 #: templates/gear/fix_thanks.html:5 templates/gear/fix_thanks.html.py:8
-#, fuzzy
 msgid "Thanks!"
-msgstr "Teşekkürler"
+msgstr "Teşekkürler!"
 
 #: templates/gear/fix_thanks.html:10
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
 "grateful."
-msgstr ""
+msgstr "Katkınız çok önemliydi ve tüm AstroBin camiası müteşekkir. "
 
 #: templates/gear/page.html:14 templates/subject/page.html:89
 msgid "Some images"
@@ -4298,14 +4286,12 @@ msgstr ""
 "a> ya da <a href=\"/accounts/login/\">giriş yapın</a>."
 
 #: templates/gear/page.html:112
-#, fuzzy
 msgid "There are no reviews yet."
-msgstr "Henüz bir yorum yapılmamaış."
+msgstr "Henüz bir yorum yapılmamış."
 
 #: templates/gear/page.html:118
-#, fuzzy
 msgid "Add your review"
-msgstr "Daha fazlasını ekleyin"
+msgstr "Eleştirinizi ekleyin"
 
 #: templates/gear/page.html:135
 msgid ""
