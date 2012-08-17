@@ -2390,7 +2390,8 @@ li.revisions {
   font-weight: bold;
   margin-top: 2px;
 }
-.gear-popover .thumbnail {
+.gear-popover .thumbnail,
+.user-popover .thumbnail {
   border: 0;
 }
 .gear-page h1 {

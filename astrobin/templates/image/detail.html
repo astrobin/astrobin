@@ -578,7 +578,9 @@
                                             </a>
                                         </div>
                                         <div class="meta">
-                                            <a class="author" href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
+                                            <a rel="popover" class="author user-popover"
+                                               data-load="{% url user_popover_ajax node.author %}"
+                                               href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
                                         </div>
                                         <div class="content{% if node.is_deleted %} deleted{% endif %}">
                                             {% if node.is_deleted %}
@@ -1331,6 +1333,7 @@ $(document).ready(function() {
 
     astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
     astrobin_common.setup_subject_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+    astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
 
     astrobin_image_detail.init(
         {{image.id}},

@@ -352,6 +352,7 @@ astrobin_common = {
                         url:  $(this).attr('data-load'),
                         type: 'GET',
                         dataType: 'json',
+                        timeout: 5000,
                         success: function(data, status) {
                             this.set('content.text', data.html);
                         }
@@ -431,6 +432,7 @@ astrobin_common = {
                         url:  $(this).attr('data-load'),
                         type: 'GET',
                         dataType: 'json',
+                        timeout: 5000,
                         success: function(data, status) {
                             this.set('content.text', data.html);
                         }
@@ -478,6 +480,86 @@ astrobin_common = {
                     $link.text(follow_text);
                     $link.attr('href', '/follow_subject/' + $link.attr('data-subject') + '/');
                     $link.removeClass('unfollow-subject').addClass('follow-subject');
+                    $link.removeClass('disabled');
+                },
+                error: function() {
+                    alert("error");
+                }
+            });
+
+            return false;
+        });
+    },
+
+    setup_user_popovers: function(follow_text, unfollow_text) {
+        $('.user-popover').each(function() {
+            $(this).qtip({
+                position: {
+                    my: "left center",
+                    at: "right center"
+                },
+                show: {
+                    solo: true
+                },
+                hide: {
+                    fixed: true,
+                    delay: 1000
+                },
+                content: {
+                    text: "...",
+                    ajax: {
+                        loading: false,
+                        url:  $(this).attr('data-load'),
+                        type: 'GET',
+                        dataType: 'json',
+                        timeout: 5000,
+                        success: function(data, status) {
+                            this.set('content.text', data.html);
+                        }
+                    }
+                }
+            });
+        });
+
+        $('.follow-user').live('click', function() {
+            var $link = $(this);
+            $.ajax({
+                url: $link.attr('href'),
+                timeout: 5000,
+                cache: false,
+                dataType: 'json',
+                beforeSend: function() {
+                    $link.text("...");
+                    $link.addClass('disabled');
+                },
+                success: function(data) {
+                    $link.text(unfollow_text);
+                    $link.attr('href', '/unfollow/' + $link.attr('data-user') + '/');
+                    $link.removeClass('follow-user').addClass('unfollow-user');
+                    $link.removeClass('disabled');
+                },
+                error: function() {
+                }
+            });
+
+            return false;
+        });
+
+        $('.unfollow-user').live('click', function() {
+            var $link = $(this);
+            $.ajax({
+                url: $link.attr('href'),
+                timeout: 5000,
+                cache: false,
+                dataType: 'json',
+                beforeSend: function() {
+                    $link.text("...");
+                    $link.addClass('disabled');
+                },
+                success: function(data) {
+                    $link.text(follow_text);
+                    $link.attr('href', '/follow/' + $link.attr('data-user') + '/');
+                    $link.removeClass('unfollow-user').addClass('follow-user');
                     $link.removeClass('disabled');
                 },
                 error: function() {

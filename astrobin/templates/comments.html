@@ -25,7 +25,8 @@
                     </div>
 
                     <div class="meta">
-                        <a class="author" href="{% url user_page comment.author %}">
+                        <a rel="popover" class="author user-popover" data-load="{% url user_popover_ajax comment.author %}"
+                           href="{% url user_page comment.author %}">
                             {{comment.author}}
                         </a>{{comment.added|ago}}
                     </div>
@@ -48,3 +49,10 @@
 
 {% endblock %}
 
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+    });
+</script>
+{% endblock %}

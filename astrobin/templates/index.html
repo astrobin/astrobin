@@ -81,7 +81,8 @@
                             <div class="info visible-desktop">
                                 <h3>{{iotd.image.title|truncatechars:"60"}}</h3>
                                 <span class="by">
-                                    by <a href="{% url user_page iotd.image.user %}">{{iotd.image.user}}</a>
+                                    by <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax iotd.image.user %}"
+                                          href="{% url user_page iotd.image.user %}">{{iotd.image.user}}</a>
                                 </span>
                                 {% for i in gear_list %}
                                     {% if i.1 %}
@@ -185,6 +186,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+        astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
     });
 </script>
 {% endblock %}

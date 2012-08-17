@@ -3579,6 +3579,50 @@ def subject_popover_ajax(request, id):
 
 
 @require_GET
+@never_cache
+def user_popover_ajax(request, username):
+    user = get_object_or_404(User, username = username)
+    template = 'popover/user.html'
+    profile = UserProfile.objects.get(user = request.user) \
+              if request.user.is_authenticated() \
+              else None
+
+    follows = user in profile.follows.all() \
+              if profile \
+              else False
+
+    from django.template.defaultfilters import timesince
+
+    member_since = None
+    date_time = user.date_joined.replace(tzinfo = None)
+    diff = abs(date_time - datetime.datetime.today())
+    span = timesince(date_time)
+    span = span.split(",")[0] # just the most significant digit
+    if span == "0 " + _("minutes"):
+        member_since = _("seconds ago")
+    else:
+        member_since = _("%s ago") % span 
+
+    html = render_to_string(template,
+        {
+            'user': user,
+            'images': Image.objects.filter(user = user).count(),
+            'member_since': member_since,
+            'follows': follows,
+            'is_authenticated': request.user.is_authenticated(),
+        })
+
+    response_dict = {
+        'success': True,
+        'html': html,
+    }
+
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
+
+
+@require_GET
 def subject_page(request, id):
     subject = get_object_or_404(Subject, id = id)
 
