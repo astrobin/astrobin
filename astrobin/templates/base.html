@@ -459,7 +459,7 @@
                                                         
                             {% else %} <!-- request.user.is_authenticated -->
                             <li class="{% current request "^/accounts/login/" %}">
-                                <a href="{% url auth_login %}">
+                                <a href="{% url auth_login %}?next={{request.path}}">
                                     {% if privatebeta_enabled %}
                                         {% trans "Have an invite? Login!" %}
                                     {% else %}
