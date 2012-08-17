@@ -632,7 +632,13 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
             m.save()
         return m
 
-
+    def clean_date(self):
+        date = self.cleaned_data['date']
+        if date > datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the future.")
+        return date
+ 
+ 
 class DeepSky_AcquisitionBasicForm(forms.ModelForm):
     error_css_class = 'error'
 
@@ -643,6 +649,12 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
         help_text=_("Please use the following format: yyyy-mm-dd"),
         label = _("Date"),
     )
+
+    def clean_date(self):
+        date = self.cleaned_data['date']
+        if date > datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the future.")
+        return date
 
     class Meta:
         model = DeepSky_Acquisition
