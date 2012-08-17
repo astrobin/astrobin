@@ -2456,3 +2456,7 @@ li.revisions {
 .retailed-gear-items.table {
   table-layout: fixed;
 }
+#more-subjects .hide,
+#more-subjects .reminder {
+  display: none;
+}
