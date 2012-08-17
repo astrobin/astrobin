@@ -3479,13 +3479,13 @@ def save_gear_user_info(request):
 def favorite_ajax(request, id):
     image = get_object_or_404(Image, pk=id)
 
-    if image in Image.objects.filter(favorite__user = request.user):
-        return HttpResponseForbidden()
+    f, created = Favorite.objects.get_or_create(image = image, user = request.user)
+    if not created:
+        f.delete()
+    else:
+        f.save()
 
-    f = Favorite(image = image, user = request.user)
-    f.save()
-
-    if image.user != request.user:
+    if image.user != request.user and created:
         push_notification(
             [image.user], 'new_favorite',
             {
@@ -3494,7 +3494,12 @@ def favorite_ajax(request, id):
             }
         )
 
-    return ajax_success();
+    return HttpResponse(
+        simplejson.dumps({
+            'created': created,
+            'favorites': Favorite.objects.filter(image = image).count(),
+        }),
+        mimetype = 'application/javascript')
 
 
 @require_GET

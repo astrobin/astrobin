@@ -711,7 +711,7 @@
 
             <div class="subtle-container">
                 <div class="favorite-container">
-                    <a href="{% if request.user.is_authenticated %}#{% else %}/accounts/login/?next={{request.path}}{% endif %}" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Already favorited" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
+                    <a href="{% if request.user.is_authenticated %}#{% else %}/accounts/login/?next={{request.path}}{% endif %}" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Remove from favorites" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
                         {% if already_favorited %}
                             <div style="font-size: 32px; color: #FFA040;">
                         {% else %}
@@ -874,9 +874,18 @@ $(document).ready(function() {
             dataType: 'json',
             timeout: 5000,
             success: function(data, textStatus, XMLHttpRequest) {
-                $heart.parent().css('color', '#FFA040');
-                $link.attr('title', "{% trans "Favorited!" %}");
-                $('.favorites-number').text(parseInt($('.favorites-number').text()) + 1);
+                var color, title;
+                if (data.created) {
+                    color = '#FFA040';
+                    title = "{% trans "Remove from favorites" %}";
+                } else {
+                    color = "#FFFFFF";
+                    title = "{% trans "Mark as favorite" %}";
+                }
+
+                $heart.parent().css('color', color);
+                $link.attr('data-original-title', title);
+                $('.favorites-number').text(data.favorites);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
             }
