@@ -622,6 +622,8 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
         super(DeepSky_AcquisitionForm, self).__init__(**kwargs)
         if queryset:
             self.fields['filter'].queryset = queryset
+        self.fields['number'].required = True
+        self.fields['duration'].required = True
 
     def save(self, force_insert=False, force_update=False, commit=True):
         m = super(DeepSky_AcquisitionForm, self).save(commit=False)
