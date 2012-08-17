@@ -662,12 +662,12 @@ astrobin_image_detail = {
                     <p>\
                         ' + astrobin_image_detail.config.upload_revision_action.dialog.body + '\
                     </p>\
-                    <form id="upload-revision" action="' + astrobin_image_detail.config.upload_revision_action.url + '" method="post" enctype="multipart/form-data">\
+                    <form id="upload-revision" class="form-horizontal" action="' + astrobin_image_detail.config.upload_revision_action.url + '" method="post" enctype="multipart/form-data">\
                         ' + astrobin_image_detail.config.upload_revision_action.form_html + '\
                         <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + astrobin_image_detail.config.upload_revision_action.csrf_token + '" /></div> \
                         <input type="hidden" name="image_id" value="' + astrobin_image_detail.globals.image_id  + '"/>\
                     </form>\
-                    <div style="text-align:center" class="progressbar"><img src="/static/images/loading-bar.gif" alt=""/></div>\
+                    <div style="text-align:center" class="progressbar"><img src="/sitestatic/images/loading-bar.gif" alt=""/></div>\
                     </div>\
                 ')
                 .dialog({
