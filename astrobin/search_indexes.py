@@ -248,7 +248,9 @@ class GearIndex(SearchIndex):
     retailers = MultiValueField()
 
     def index_queryset(self):
-        return Gear.objects.exclude(commercial = None)
+        return Gear.objects\
+            .exclude(commercial = None)\
+            .filter(commercial__producer__groups__name = 'Paying')
 
     def get_model(self):
         return Gear

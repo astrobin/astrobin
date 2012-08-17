@@ -56,6 +56,12 @@ def user_is_retailer(user):
         return user.groups.filter(name = 'Retailers').count() > 0
     return False 
 
+def user_is_paying(user):
+    if user:
+        return user.groups.filter(name = 'Paying').count() > 0
+    return False 
+
+
 def affiliate_limit(user):
     if not user:
         return 0

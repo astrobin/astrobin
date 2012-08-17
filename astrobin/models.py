@@ -34,6 +34,7 @@ from timezones.forms import PRETTY_TIMEZONE_CHOICES
 
 from notifications import push_notification
 from fields import *
+from utils import user_is_paying
 
 from mptt.models import MPTTModel, TreeForeignKey
 from reviews.models import ReviewedItem
@@ -2024,6 +2025,9 @@ class CommercialGear(models.Model):
         auto_now = True,
         editable = False,
     )
+
+    def is_paid(self):
+        return user_is_paying(self.producer)
 
     class Meta:
         app_label = 'astrobin'

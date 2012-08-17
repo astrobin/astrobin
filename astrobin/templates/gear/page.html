@@ -7,17 +7,17 @@
 {% block content %}
     <div class="gear-page">
         <h1>{% gear_name gear %}</h1>
-        {% if gear.commercial and gear.commercial.tagline %}
+        {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and gear.commercial.tagline %}
             <h4>{{gear.commercial.tagline}}</h4>
         {% endif %}
-        {% if gear.commercial and gear.commercial.link %}
+        {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and gear.commercial.link %}
             <a class="commercial-link" href="{{gear.commercial.link}}" target="_blank">{{gear.commercial.link}}</a>
         {% endif %}
 
         <div class="commercial">
             <div class="row section">
                 <div class="span8">
-                    {% if gear.commercial and gear.commercial.image %}
+                    {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and gear.commercial.image %}
                         {% with gear.commercial.image as image %}
                             <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{{image.original_ext}}"
                                  alt="{{image.title|escape}}"/>
@@ -43,7 +43,15 @@
                             </tr>
                             <tr>
                                 <th>{% trans "Make" %}</th>
-                                <td><a href="/search/?q={{gear.make}}{% search_form_query %}&amp;search_type=3">{{gear.make}}</a></td>
+                                <td>
+                                    {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user  %}
+                                        <a href="/search/?q={{gear.make}}{% search_form_query %}&amp;search_type=3">
+                                    {% endif %}
+                                        {{gear.make}}
+                                    {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user %}
+                                        </a>
+                                    {% endif %}
+                                </td>
                             </tr>
                             {% for attribute in attributes %}
                                 {% if attribute.1 %}
@@ -122,7 +130,7 @@
                     {% endif %}
                 </div>
             </div>
-            {% if gear.commercial and commercial_image_revisions %}
+            {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and commercial_image_revisions %}
             <div class="row">
                 <div class="span8">
                     <div class="subtle-container">
@@ -141,7 +149,7 @@
             {% endif %}
         </div>
 
-        {% if gear.commercial and gear.commercial.description %}
+        {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and gear.commercial.description %}
         <div class="row">
             <div class="span8">
                 <div class="subtle-container">
