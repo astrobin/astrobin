@@ -63,7 +63,13 @@
 					redirectClose = '';
 
 				for (var i = 1; i <= opt.number; i++) {
-					starFile = (start < i) ? opt.starOff : opt.starOn;
+					diff = start - i;
+					if (diff > -0.26)
+						starFile = opt.starOn;
+					else if (diff < -0.25 && diff > -0.75)
+						starFile = opt.starHalf
+					else
+						starFile = opt.starOff
 
 					hint = (i <= opt.hintList.length && opt.hintList[i - 1] !== null) ? opt.hintList[i - 1] : i;
 

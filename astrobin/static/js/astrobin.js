@@ -925,7 +925,7 @@ astrobin_image_detail = {
         astrobin_image_detail.globals.image_id = image_id;
         astrobin_image_detail.globals.revision_id = revision_id;
         astrobin_image_detail.globals.image_username = image_username;
-        astrobin_image_detail.globals.rating.current = parseInt(current_rating);
+        astrobin_image_detail.globals.rating.current = parseFloat(current_rating);
         $.extend(true, astrobin_image_detail.config, config);
 
         /* Rating */
