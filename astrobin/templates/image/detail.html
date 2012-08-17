@@ -1346,11 +1346,12 @@ $(document).ready(function() {
                 {% endif %}
                 {% if already_voted %}
                 hint_list: [
-                    {{current_rating}},
-                    {{current_rating}},
-                    {{current_rating}},
-                    {{current_rating}},
-                    {{current_rating}}],
+                    "{% trans "You have already voted." %}",
+                    "{% trans "You have already voted." %}",
+                    "{% trans "You have already voted." %}",
+                    "{% trans "You have already voted." %}",
+                    "{% trans "You have already voted." %}",
+                ],
                 {% else %}
                 hint_list: [
                     "{% trans "It's a start, but it needs better data." %}",
