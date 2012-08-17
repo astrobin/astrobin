@@ -8,7 +8,8 @@
 
     <div class="content">
         {% if action.actor.get_absolute_url %}
-            <a href="{{action.actor.get_absolute_url}}">{{action.actor}}</a>
+            <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax action.actor %}"
+               href="{{action.actor.get_absolute_url}}">{{action.actor}}</a>
         {% else %}
             <a href="{{action.actor_url}}">{{action.actor}}</a>
         {% endif %}

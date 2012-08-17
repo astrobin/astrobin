@@ -40,7 +40,13 @@
                     {% for u in user_list %}
                         <tr>
                             <td>{{page_obj.start_index|add:forloop.counter0}}</td>
-                            <td><a href="{% url user_page u.username %}">{{u.username}}</a></td>
+                            <td>
+                                <a rel="popover" class="user-popover"
+                                   data-load="{% url user_popover_ajax u.username %}"
+                                   href="{% url user_page u.username %}">
+                                    {{u.username}}
+                                </a>
+                            </td>
                             <td>{{u.integration|floatformat}}</a></td>
                             <td>{{u.avg_integration|floatformat}}</a></td>
                             <td>{{u.images}}</td>
@@ -56,3 +62,10 @@
     </div>
 {% endblock %}
 
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+    });
+</script>
+{% endblock %}
