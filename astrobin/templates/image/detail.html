@@ -387,9 +387,9 @@
                             {% for s in subjects_short %}
                                 <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId|escape|cut:" "}}{% search_form_query %}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                             {% endfor %}
-                            {% if subjects_all|length > 10 %}
+                            {% if subjects_all|length > subjects_limit %}
                                 <span id="more-subjects">
-                                    <span class="hidden">
+                                    <span class="reminder">
                                         ,&nbsp;
                                         {% for s in subjects_reminder %}
                                             <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId|escape|cut:" "}}{% search_form_query %}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
@@ -399,11 +399,11 @@
                                         &#8230;&nbsp; 
                                         <a href="#">
                                             <em>
-                                               {% blocktrans with subjects_all|length|add:subjects_limit as number %}and {{number}} more (click to view).{% endblocktrans %}
+                                               {% blocktrans with subjects_reminder|length as number %}and {{number}} more (click to view).{% endblocktrans %}
                                             </em>
                                         </a>
                                     </span>
-                                    <span class="collapse">
+                                    <span class="hide">
                                         <a href="#">
                                             &nbsp;
                                             <em>

@@ -808,23 +808,23 @@ astrobin_image_detail = {
     },
 
     setup_view_more_subjects: function() {
-        var $hidden = $('#more-subjects .hidden');
+        var $reminder = $('#more-subjects .reminder');
         var $more = $('#more-subjects .more');
-        var $collapse = $('#more-subjects .collapse');
+        var $hide = $('#more-subjects .hide');
 
-        $hidden.hide();
+        $reminder.hide();
         $more.show();
 
         $more.find('a').click(function() {
-            $hidden.slideDown();
+            $reminder.show();
             $more.hide();
-            $collapse.show();
+            $hide.show();
             return false;
         });          
 
-        $collapse.find('a').click(function() {
-            $hidden.slideUp();
-            $collapse.hide();
+        $hide.find('a').click(function() {
+            $reminder.hide();
+            $hide.hide();
             $more.show();
             return false;
         });          
