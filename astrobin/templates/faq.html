@@ -18,6 +18,7 @@
                 <li><a href="#8">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
                 <li><a href="#9">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
                 <li><a href="#10">{% blocktrans %}How can I format my comments?{% endblocktrans %}</a></li>
+                <li><a href="#11">{% blocktrans %}What is the correct way to vote images?{% endblocktrans %}</a></li>
             </ol>
             <br/>
             <h2>{% trans "... and their answers!" %}</h2>
@@ -124,10 +125,57 @@
                         <tr><td>\*{% trans "escape the formatting syntax" %}\*</td><td>*{% trans "escape the formatting syntax" %}*</td></tr>
                     </table>
                 </li>
+                <li>
+                    <a name="11"></a>
+                    <h4>{% blocktrans %}What is the correct way to vote images?{% endblocktrans %}</h4>
+                    <p>
+                    {% blocktrans %}You can vote each image from 1 to 5 stars, and they are defined like this:{% endblocktrans %}
+                    </p>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th><i class="icon-star"></i></th>
+                            <td>{% trans "It's a start, but it needs better data." %}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                            </th>
+                            <td>{% trans "It looks good, but it needs better processing." %}</td>
+                        </tr>                       
+                        <tr>
+                            <th>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                            </th>
+                            <td>{% trans "Good data, good processing." %}</td>
+                        </tr>                       
+                        <tr>
+                            <th>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                            </th>
+                            <td>{% trans "Great result!" %}</td>
+                        </tr>                       
+                        <tr>
+                            <th>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                            </th>
+                            <td>{% trans "Top quality!" %}</td>
+                        </tr>                       
+                    </table>
+                </li>
             </ol>
             <br/>
             <p>
-                {% blocktrans %}Do you have a question not covered here! Please send us an email at:{% endblocktrans %} <a href="mailto:astrobin@astrobin.com">astrobin@astrobin.com</a>.
+                {% blocktrans %}Do you have a question not covered here! Please <a href="/contact/">contact us</a>!{% endblocktrans %}
             </p>
         </div> <!-- span -->
     </div> <!-- row -->
