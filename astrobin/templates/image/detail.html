@@ -1353,11 +1353,11 @@ $(document).ready(function() {
                     {{current_rating}}],
                 {% else %}
                 hint_list: [
-                    "{% trans "Bad" %}",
-                    "{% trans "Poor" %}",
-                    "{% trans "Regular" %}",
-                    "{% trans "Good" %}",
-                    "{% trans "Gorgeous" %}"],
+                    "{% trans "It's a start, but it needs better data." %}",
+                    "{% trans "It looks good, but it needs better processing." %}",
+                    "{% trans "Good data, good processing." %}",
+                    "{% trans "Great result!" %}",
+                    "{% trans "Top quality!" %}"],
                 {% endif %}
                 read_only: {% if request.user.is_authenticated and not already_voted and request.user != image.user %} false {% else %} true {% endif %}
             },
