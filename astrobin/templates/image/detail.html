@@ -1365,7 +1365,9 @@ $(document).ready(function() {
                     body : "{% blocktrans %}Did you improve the post-processing of your image? Upload the new revision!{% endblocktrans %}"
                 },
                 form_html: '{% autoescape off %}{{upload_revision_form.file}}\
-                            <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />\
+                            <div class="form-actions">\
+                                <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />\
+                            </div>\
                             {% endautoescape %}',
                 csrf_token: '{{csrf_token}}',
                 fileDefaultText: "{% trans "No file selected" %}",
