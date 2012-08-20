@@ -289,8 +289,9 @@
                                                     {% endif %}
                                                 </a>
                                                 <a class="edit" href="#">{% trans "Edit" %}</a>
+                                            {% else %}
+                                                <a class="reply btn btn-mini btn-primary" href="#">{% trans "Reply" %}</a>
                                             {% endif %}
-                                            <a class="reply" href="#">{% trans "Reply" %}</a>
                                         {% endif %}
                                     </div>
                                     <form action="{% url image_comment_save %}" method="post">
@@ -453,9 +454,8 @@ $(document).ready(function() {
                 $permalink = $('<a/>').addClass('permalink').attr('href', '{% url gear_page gear.id gear.slug %}#c' + parent_id).text('{% trans "Link" %}');
                 $delete = $('<a/>').addClass('delete').attr('href', '#').text('{% trans "Delete" %}');
                 $edit = $('<a/>').addClass('edit').attr('href', '#').text('{% trans "Edit" %}');
-                $reply = $('<a/>').addClass('reply').attr('href', '#').text('{% trans "Reply" %}');
 
-                $links.append($permalink).append($delete).append($edit).append($reply);
+                $links.append($permalink).append($delete).append($edit);
 
                 var converter = Markdown.getSanitizingConverter();
                 $content = $('<div/>').addClass('content').append($('<p/>').html(converter.makeHtml($textarea.val()).replace(/\n\r?/g, '<br />')));
