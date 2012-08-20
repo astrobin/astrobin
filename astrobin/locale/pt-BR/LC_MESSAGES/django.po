@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-18 05:48-0400\n"
+"POT-Creation-Date: 2012-08-20 12:09+0000\n"
 "PO-Revision-Date: 2012-08-19 03:01+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1026,8 +1026,8 @@ msgstr "Se possível, use nomes de catálogo (ex. M101, ou NGC224 ou IC1370)."
 
 #: forms.py:75 models.py:1926 models.py:2008 templates/comments.html:39
 #: templates/reviews.html:43 templates/gear/page.html:281
-#: templates/gear/page.html.py:453 templates/image/detail.html:367
-#: templates/image/detail.html.py:593 templates/image/detail.html:1154
+#: templates/gear/page.html.py:454 templates/image/detail.html:367
+#: templates/image/detail.html.py:593 templates/image/detail.html:1155
 msgid "Link"
 msgstr "Link"
 
@@ -1039,7 +1039,7 @@ msgstr "Link para TIFF/FITS"
 msgid "Subjects"
 msgstr "Assuntos"
 
-#: forms.py:78 models.py:733 views.py:719 templates/base.html:402
+#: forms.py:78 models.py:733 views.py:719 templates/base.html:403
 #: templates/profile-edit-menu.html:23
 msgid "Locations"
 msgstr "Locais"
@@ -1165,7 +1165,7 @@ msgstr "Tudo"
 msgid "Images"
 msgstr "Imagens"
 
-#: forms.py:305 models.py:692 views.py:1788 templates/base.html:396
+#: forms.py:305 models.py:692 views.py:1788 templates/base.html:397
 #: templates/profile-edit-menu.html:20 templates/wall.html:142
 #: templates/inclusion_tags/search_image_list.html:10
 #: templates/user/card.html:13 templates/user/profile-subnav.html:124
@@ -1201,7 +1201,7 @@ msgid "Express value in hours"
 msgstr "Expresse o valor em horas"
 
 #: forms.py:385 models.py:861 templates/profile-edit-menu.html:26
-#: templates/image/detail.html:740 templates/image/detail.html.py:741
+#: templates/image/detail.html:741 templates/image/detail.html.py:742
 #: templates/search/search.html:244
 msgid "License"
 msgstr "Licença"
@@ -1284,6 +1284,10 @@ msgstr "Por favor, entre com um valor entre 1 e 5."
 #: forms.py:577
 msgid "Please enter a value between 1 and 10."
 msgstr "Por favor, entre com um valor entre 1 e 10."
+
+#: forms.py:638 forms.py:656
+msgid "The date cannot be in the future."
+msgstr ""
 
 #: forms.py:683
 msgid "Nominate for"
@@ -2090,8 +2094,8 @@ msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
 msgstr ""
-"Qualidade do céu de acordo com a <a href=\"http://en.wikipedia.org/wiki"
-"/Bortle_Dark-Sky_Scale\" target=\"_blank\">escala de Bortle</a>."
+"Qualidade do céu de acordo com a <a href=\"http://en.wikipedia.org/wiki/"
+"Bortle_Dark-Sky_Scale\" target=\"_blank\">escala de Bortle</a>."
 
 #: models.py:1167
 msgid "Mean mag/arcsec^2"
@@ -2267,7 +2271,7 @@ msgstr "Site da empresa que você representa no AstroBin."
 msgid "Country of operation"
 msgstr "País de atuação"
 
-#: models.py:1454 templates/base.html:408
+#: models.py:1454 templates/base.html:409
 msgid "Default license"
 msgstr "Licença padrão."
 
@@ -2278,7 +2282,7 @@ msgstr ""
 "A licença escolhida será aplicada automaticamente a todas as suas novas "
 "imagens."
 
-#: models.py:1489 templates/base.html:225
+#: models.py:1489 templates/base.html:226
 msgid "Language"
 msgstr "Idioma"
 
@@ -2847,7 +2851,6 @@ msgid "There is no activity yet."
 msgstr "Sem atividades."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:10
-#: templates/base.html:196
 msgid "Affiliates"
 msgstr ""
 
@@ -2881,7 +2884,7 @@ msgstr ""
 "\">Termos de Serviço</a>."
 
 #: templates/app_api_key_request.html:18 templates/index.html:62
-#: templates/gear/page.html:243 templates/gear/page.html.py:337
+#: templates/gear/page.html:243 templates/gear/page.html.py:338
 #: templates/registration/password_change_form.html:11
 #: templates/registration/password_reset_confirm.html:14
 #: templates/registration/password_reset_form.html:12
@@ -2901,15 +2904,15 @@ msgstr ""
 "Você receberá uma resposta em até 24 horas. Agradecemos o seu interesse em "
 "utilizar as APIs do AstroBin!"
 
-#: templates/base.html:83 templates/base.html.py:601
+#: templates/base.html:83 templates/base.html.py:602
 msgid "Site links"
 msgstr "Áreas do site"
 
-#: templates/base.html:87 templates/base.html.py:603 templates/base.html:632
+#: templates/base.html:87 templates/base.html.py:604 templates/base.html:633
 msgid "Home"
 msgstr "Início"
 
-#: templates/base.html:88 templates/base.html.py:604
+#: templates/base.html:88 templates/base.html.py:605
 msgid "Blog"
 msgstr "Blog"
 
@@ -2964,7 +2967,7 @@ msgstr "Estatísticas"
 msgid "Leaderboard"
 msgstr "Os melhores"
 
-#: templates/base.html:168 templates/base.html.py:605 templates/help.html:4
+#: templates/base.html:168 templates/base.html.py:606 templates/help.html:4
 msgid "Help"
 msgstr "Ajuda"
 
@@ -2972,141 +2975,141 @@ msgstr "Ajuda"
 msgid "What is this site?"
 msgstr "O que é este site?"
 
-#: templates/base.html:181 templates/base.html.py:606 templates/faq.html:4
+#: templates/base.html:181 templates/base.html.py:607 templates/faq.html:4
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/base.html:205 templates/contact_form/contact.html:5
+#: templates/base.html:206 templates/contact_form/contact.html:5
 #: templates/contact_form/contact.html:7
 msgid "Contact"
 msgstr "Contato"
 
-#: templates/base.html:217 templates/leaderboard.html:17
+#: templates/base.html:218 templates/leaderboard.html:17
 #: templates/image/detail.html:246 templates/user/profile-subnav.html:77
 msgid "User"
 msgstr "Usuário"
 
-#: templates/base.html:284
+#: templates/base.html:285
 msgid "Help with translations!"
 msgstr "Ajude com as traduções!"
 
-#: templates/base.html:292
+#: templates/base.html:293
 msgid "Please select your language from the options above."
 msgstr "Por favor, selecione seu idioma das opções acima."
 
-#: templates/base.html:314 templates/index.html:104 templates/upload.html:5
+#: templates/base.html:315 templates/index.html:104 templates/upload.html:5
 #: templates/upload.html.py:17 templates/upload.html:33
 #: templates/avatar/change.html:40 templates/image/detail.html:1372
 msgid "Upload"
 msgstr "Enviar"
 
-#: templates/base.html:317
+#: templates/base.html:318
 msgid "My places"
 msgstr "Meus lugares"
 
-#: templates/base.html:323 templates/user/profile-subnav.html:18
+#: templates/base.html:324 templates/user/profile-subnav.html:18
 msgid "Commercial products"
 msgstr ""
 
-#: templates/base.html:331 templates/popover/user.html:39
+#: templates/base.html:332 templates/popover/user.html:39
 #: templates/user/profile-subnav.html:26
 msgid "Gallery"
 msgstr "Galeria"
 
-#: templates/base.html:337 templates/inclusion_tags/search_image_list.html:44
+#: templates/base.html:338 templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:95
 #: templates/user/profile-subnav.html:32
 msgid "Favorites"
 msgstr "Favoritos"
 
-#: templates/base.html:343 templates/image/detail.html:430
+#: templates/base.html:344 templates/image/detail.html:430
 #: templates/image/full.html:78 templates/user/profile-subnav.html:38
 msgid "Technical card"
 msgstr "Informações técnicas"
 
-#: templates/base.html:349 templates/user/profile-subnav.html:44
+#: templates/base.html:350 templates/user/profile-subnav.html:44
 msgid "Plots"
 msgstr "Estatísticas"
 
-#: templates/base.html:357 templates/messages/inbox.html:8
+#: templates/base.html:358 templates/messages/inbox.html:8
 msgid "My messages"
 msgstr "Minhas mensagens"
 
-#: templates/base.html:363 templates/user/profile-subnav.html:66
+#: templates/base.html:364 templates/user/profile-subnav.html:66
 msgid "API Keys"
 msgstr ""
 
-#: templates/base.html:367
+#: templates/base.html:368
 msgid "My settings"
 msgstr "Minhas configurações"
 
-#: templates/base.html:371 templates/subject/page.html:13
+#: templates/base.html:372 templates/subject/page.html:13
 msgid "Basic information"
 msgstr "Informações básicas"
 
-#: templates/base.html:379
+#: templates/base.html:380
 msgid "Commercial information"
 msgstr "Informações comerciais"
 
-#: templates/base.html:388
+#: templates/base.html:389
 msgid "Retailer information"
 msgstr "Informações de venda"
 
-#: templates/base.html:414 templates/profile-edit-menu.html:32
+#: templates/base.html:415 templates/profile-edit-menu.html:32
 msgid "Preferences"
 msgstr "Preferências"
 
-#: templates/base.html:420 templates/profile-edit-menu.html:35
+#: templates/base.html:421 templates/profile-edit-menu.html:35
 msgid "Avatar"
 msgstr "Avatar"
 
-#: templates/base.html:427 templates/user/profile.html:93
+#: templates/base.html:428 templates/user/profile.html:93
 #: templates/user/profile.html.py:96
 msgid "Logout"
 msgstr "Sair"
 
-#: templates/base.html:440 templates/base.html.py:441
+#: templates/base.html:441 templates/base.html.py:442
 msgid "Notifications"
 msgstr "Notificações"
 
-#: templates/base.html:452 templates/base.html.py:453
+#: templates/base.html:453 templates/base.html.py:454
 msgid "Requests"
 msgstr "Pedidos"
 
-#: templates/base.html:464
+#: templates/base.html:465
 msgid "Have an invite? Login!"
 msgstr ""
 
-#: templates/base.html:466 templates/registration/activation_complete.html:6
+#: templates/base.html:467 templates/registration/activation_complete.html:6
 msgid "Login"
 msgstr ""
 
-#: templates/base.html:472 templates/registration/login.html:15
+#: templates/base.html:473 templates/registration/login.html:15
 msgid "Register"
 msgstr "Cadastre-se"
 
-#: templates/base.html:484
+#: templates/base.html:485
 msgid "Quick search"
 msgstr "Busca rápida"
 
-#: templates/base.html:553 templates/help.html:10
+#: templates/base.html:554 templates/help.html:10
 msgid "Hey!"
 msgstr "Olá!"
 
-#: templates/base.html:554
+#: templates/base.html:555
 msgid "Success!"
 msgstr "Sucesso!"
 
-#: templates/base.html:555 templates/base.html.py:567 templates/base.html:579
+#: templates/base.html:556 templates/base.html.py:568 templates/base.html:580
 #: templates/upload.html:52
 msgid "Warning!"
 msgstr "Aviso!"
 
-#: templates/base.html:556
+#: templates/base.html:557
 msgid "Error!"
 msgstr "Erro!"
 
-#: templates/base.html:569
+#: templates/base.html:570
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -3117,7 +3120,7 @@ msgstr ""
 "preencha todos dados da sua empresa. Clique <a href=\"%(the_url)s\">aqui</a> "
 "para fazer isso agora."
 
-#: templates/base.html:581
+#: templates/base.html:582
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
@@ -3126,11 +3129,11 @@ msgstr ""
 "Como um vendedor no AstroBin, é muito importante que você informe o seu país "
 "de atuação. Clique <a href=\"%(the_url)s\">aqui</a> para fazer isso agora."
 
-#: templates/base.html:595 templates/user/card.html:53
+#: templates/base.html:596 templates/user/card.html:53
 msgid "About"
 msgstr "Sobre"
 
-#: templates/base.html:597
+#: templates/base.html:598
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -3142,27 +3145,27 @@ msgstr ""
 "astrofotografia para nenhum outro lugar. Desenvolvido por um astrofotógrafo, "
 "para astrofotógrafos."
 
-#: templates/base.html:607 templates/tos.html:7
+#: templates/base.html:608 templates/tos.html:7
 msgid "Terms of Service"
 msgstr "Termos de serviço"
 
-#: templates/base.html:608 templates/guidelines.html:7
+#: templates/base.html:609 templates/guidelines.html:7
 msgid "Guidelines"
 msgstr "Regras"
 
-#: templates/base.html:612
+#: templates/base.html:613
 msgid "Thanks to"
 msgstr "Agradecimentos"
 
-#: templates/base.html:614
+#: templates/base.html:615
 msgid "The localization team"
 msgstr "O time de traduções"
 
-#: templates/base.html:620
+#: templates/base.html:621
 msgid "Copyright"
 msgstr "Direitos autorais"
 
-#: templates/base.html:622
+#: templates/base.html:623
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -3172,21 +3175,21 @@ msgstr ""
 "direitos reservados. Os direitos autorais das imagens hospedadas neste site "
 "são dos seus respectivos proprietários."
 
-#: templates/base.html:635
+#: templates/base.html:636
 msgid "Back to top"
 msgstr "Voltar ao topo"
 
-#: templates/base.html:681 templates/gear/page.html:304
-#: templates/gear/page.html.py:473 templates/image/detail.html:616
+#: templates/base.html:682 templates/gear/page.html:305
+#: templates/gear/page.html.py:473 templates/image/detail.html:617
 #: templates/image/detail.html.py:1174 templates/messages/compose.html:14
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: templates/base.html:721 templates/image/detail.html:1376
+#: templates/base.html:722 templates/image/detail.html:1376
 msgid "No file selected"
 msgstr "Nenhum arquivo selecionado"
 
-#: templates/base.html:722 templates/image/detail.html:1377
+#: templates/base.html:723 templates/image/detail.html:1377
 msgid "Choose file"
 msgstr "Escolha um arquivo"
 
@@ -3578,8 +3581,8 @@ msgid ""
 "Do you have a question not covered here! Please <a href=\"/contact/"
 "\">contact us</a>!"
 msgstr ""
-"Você tem alguma pergunta não respondida aqui? Por favor, <a "
-"href=\"/contact/\">entre em contato</a>!"
+"Você tem alguma pergunta não respondida aqui? Por favor, <a href=\"/contact/"
+"\">entre em contato</a>!"
 
 #: templates/fits.html:12
 msgid ""
@@ -3703,9 +3706,9 @@ msgid ""
 "common sense\". If you feel you can't abide by them, please let us know what "
 "you feel is wrong."
 msgstr ""
-"Concluindo, estes termos são apenas uma maneira de dizer \"seja legal e use o "
-"bom senso\". Se você acredita que não consegue se adequar a eles, por favor, "
-"entre em contato e nos diga o que achou de errado."
+"Concluindo, estes termos são apenas uma maneira de dizer \"seja legal e use "
+"o bom senso\". Se você acredita que não consegue se adequar a eles, por "
+"favor, entre em contato e nos diga o que achou de errado."
 
 #: templates/help.html:12
 msgid ""
@@ -4376,8 +4379,8 @@ msgstr ""
 
 #: templates/commercial/products/edit.html:14
 #: templates/commercial/products/retailed/edit.html:14
-#: templates/gear/page.html:303 templates/gear/page.html.py:472
-#: templates/image/detail.html:554 templates/image/detail.html.py:615
+#: templates/gear/page.html:304 templates/gear/page.html.py:472
+#: templates/image/detail.html:554 templates/image/detail.html.py:616
 #: templates/image/detail.html:1173 templates/image/edit/acquisition.html:28
 #: templates/image/edit/acquisition.html:63
 #: templates/image/edit/acquisition.html:85 templates/image/edit/basic.html:82
@@ -4663,14 +4666,14 @@ msgstr ""
 msgid "Undelete"
 msgstr ""
 
-#: templates/gear/page.html:288 templates/gear/page.html.py:454
+#: templates/gear/page.html:288 templates/gear/page.html.py:455
 #: templates/gear/page.html:554 templates/image/detail.html:600
-#: templates/image/detail.html.py:1155 templates/image/detail.html:1258
+#: templates/image/detail.html.py:1156 templates/image/detail.html:1258
 msgid "Delete"
 msgstr ""
 
-#: templates/gear/page.html:291 templates/gear/page.html.py:455
-#: templates/image/detail.html:603 templates/image/detail.html.py:1156
+#: templates/gear/page.html:291 templates/gear/page.html.py:456
+#: templates/image/detail.html:603 templates/image/detail.html.py:1157
 #: templates/inclusion_tags/list_gear.html:21
 #: templates/user/profile/commercial/products.html:77
 #: templates/user/profile/commercial/products.html:159
@@ -4680,29 +4683,28 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: templates/gear/page.html:293 templates/gear/page.html.py:456
-#: templates/image/detail.html:605 templates/image/detail.html.py:1157
+#: templates/gear/page.html:293 templates/image/detail.html:605
 #: templates/messages/inbox.html:40 templates/messages/view.html:40
 #: templates/messages/view.html.py:75
 msgid "Reply"
 msgstr ""
 
-#: templates/gear/page.html:306 templates/gear/page.html.py:339
+#: templates/gear/page.html:307 templates/gear/page.html.py:340
 #: templates/gear/page.html:478 templates/image/detail.html:556
-#: templates/image/detail.html.py:618 templates/image/detail.html:1179
+#: templates/image/detail.html.py:619 templates/image/detail.html:1179
 msgid "Formatting help"
 msgstr ""
 
-#: templates/gear/page.html:321 templates/image/detail.html:633
+#: templates/gear/page.html:322 templates/image/detail.html:634
 msgid "There are no comments yet."
 msgstr ""
 
-#: templates/gear/page.html:328
+#: templates/gear/page.html:329
 msgid "Start a discussion, leave a comment or ask a question"
 msgstr ""
 
-#: templates/gear/page.html:390 templates/gear/page.html.py:450
-#: templates/image/detail.html:1151
+#: templates/gear/page.html:391 templates/gear/page.html.py:451
+#: templates/image/detail.html:1152
 msgid "just now"
 msgstr ""
 
@@ -4799,7 +4801,7 @@ msgid "View"
 msgstr ""
 
 #: templates/image/detail.html:181 templates/image/detail.html.py:235
-#: templates/image/detail.html:851
+#: templates/image/detail.html:852
 msgid "Inverted monochrome"
 msgstr ""
 
@@ -4812,7 +4814,7 @@ msgid "Annotated"
 msgstr ""
 
 #: templates/image/detail.html:205 templates/image/detail.html.py:229
-#: templates/image/detail.html:850
+#: templates/image/detail.html:851
 msgid "Normal"
 msgstr ""
 
@@ -4829,7 +4831,7 @@ msgstr ""
 msgid "Send private message"
 msgstr ""
 
-#: templates/image/detail.html:283 templates/image/detail.html.py:797
+#: templates/image/detail.html:283 templates/image/detail.html.py:798
 msgid "Share"
 msgstr ""
 
@@ -4901,76 +4903,76 @@ msgid ""
 "strong>'s preferred language is <strong>%(lang)s</strong>."
 msgstr ""
 
-#: templates/image/detail.html:655 templates/image/detail.html.py:681
+#: templates/image/detail.html:656 templates/image/detail.html.py:682
 msgid "Final"
 msgstr ""
 
-#: templates/image/detail.html:663
+#: templates/image/detail.html:664
 msgid "Original"
 msgstr ""
 
-#: templates/image/detail.html:716 templates/image/detail.html.py:881
+#: templates/image/detail.html:717 templates/image/detail.html.py:882
 msgid "Remove from favorites"
 msgstr ""
 
-#: templates/image/detail.html:716 templates/image/detail.html.py:884
+#: templates/image/detail.html:717 templates/image/detail.html.py:885
 msgid "Mark as favorite"
 msgstr ""
 
-#: templates/image/detail.html:774
+#: templates/image/detail.html:775
 msgid "Made possible by"
 msgstr ""
 
-#: templates/image/detail.html:811
+#: templates/image/detail.html:812
 msgid "Sharing mode"
 msgstr ""
 
-#: templates/image/detail.html:813
+#: templates/image/detail.html:814
 msgid "Simple link"
 msgstr ""
 
-#: templates/image/detail.html:814
+#: templates/image/detail.html:815
 msgid "Forums"
 msgstr ""
 
-#: templates/image/detail.html:819
+#: templates/image/detail.html:820
 msgid "Thumbnail"
 msgstr ""
 
-#: templates/image/detail.html:821 templates/user/api_keys.html:29
+#: templates/image/detail.html:822 templates/user/api_keys.html:29
 msgid "Yes"
 msgstr ""
 
-#: templates/image/detail.html:822
+#: templates/image/detail.html:823
 msgid "No"
 msgstr ""
 
-#: templates/image/detail.html:828
+#: templates/image/detail.html:829
 msgid "Image size"
 msgstr ""
 
-#: templates/image/detail.html:830
+#: templates/image/detail.html:831
 msgid "Regular"
 msgstr ""
 
-#: templates/image/detail.html:831
+#: templates/image/detail.html:832
 msgid "Full"
 msgstr ""
 
-#: templates/image/detail.html:835
+#: templates/image/detail.html:836
 msgid "Copy this"
 msgstr ""
 
-#: templates/image/detail.html:838 templates/image/detail.html.py:841
-#: templates/image/detail.html:907 templates/image/edit/gear.html:75
+#: templates/image/detail.html:839 templates/image/detail.html.py:842
+#: templates/image/detail.html:908 templates/image/edit/gear.html:75
 msgid "Copy"
 msgstr ""
 
-#: templates/image/detail.html:848
+#: templates/image/detail.html:849
 msgid "Image mode"
 msgstr ""
 
-#: templates/image/detail.html:910
+#: templates/image/detail.html:911
 msgid "Copied!"
 msgstr ""
 
@@ -6524,8 +6526,8 @@ msgid ""
 "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
 "(and keep an eye on your notifications)!"
 msgstr ""
-"Pronto! Agora vá para o <a href=\\\"/me\\\">seu perfil</a> e veja as novas fotos "
-"(e fique de olho nas suas notificações)!"
+"Pronto! Agora vá para o <a href=\\\"/me\\\">seu perfil</a> e veja as novas "
+"fotos (e fique de olho nas suas notificações)!"
 
 #: templates/user/profile/commercial/products.html:7
 #: templates/user/profile/commercial/products.html:15
@@ -6738,8 +6740,8 @@ msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
 msgstr ""
-"Selecione seu idioma e quais notificações você gostaria de receber por "
-"e-mail:"
+"Selecione seu idioma e quais notificações você gostaria de receber por e-"
+"mail:"
 
 #: templates/user/profile/edit/retailer.html:6
 #: templates/user/profile/edit/retailer.html:11
