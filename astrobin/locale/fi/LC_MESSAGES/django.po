@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-17 07:11-0400\n"
-"PO-Revision-Date: 2012-05-29 19:58+0100\n"
-"Last-Translator: Jussi <jussi.kantola@gmail.com>\n"
+"PO-Revision-Date: 2012-08-18 20:09+0100\n"
+"Last-Translator: MarkoT <mtoastro@gmail.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -1142,13 +1142,12 @@ msgid "Users"
 msgstr "Käyttäjät"
 
 #: forms.py:300
-#, fuzzy
 msgid "Search type"
-msgstr "Etsi"
+msgstr "Hakutyyppi"
 
 #: forms.py:302
 msgid "All"
-msgstr ""
+msgstr "Kaikki"
 
 #: forms.py:303 templates/leaderboard.html:30 templates/gear/page.html:61
 #: templates/inclusion_tags/search_image_list.html:51
@@ -1184,9 +1183,8 @@ msgid "Express value in mm"
 msgstr "Ilmaise arvo millimetreissä"
 
 #: forms.py:348 forms.py:353
-#, fuzzy
 msgid "Express value in &mu;m"
-msgstr "Ilmaise arvo millimetreissä"
+msgstr "Ilmaise arvo mikrometreinä"
 
 #: forms.py:360 forms.py:365 forms.py:563 forms.py:608 forms.py:649
 msgid "Please use the following format: yyyy-mm-dd"
@@ -2249,7 +2247,7 @@ msgstr ""
 
 #: models.py:1425
 msgid "The website of the company you represent on AstroBin."
-msgstr ""
+msgstr "AstroBin:ssa edustamasi yrityksen sivusto."
 
 #: models.py:1429
 msgid "Country of operation"
@@ -2360,13 +2358,12 @@ msgid "SEK - Swedish krona"
 msgstr ""
 
 #: models.py:1909
-#, fuzzy
 msgid "USD - American dollars"
-msgstr "Amerikan Samoa"
+msgstr "USD - Amerikan dollari"
 
 #: models.py:1915 models.py:1965
 msgid "Producer"
-msgstr ""
+msgstr "Valmistaja"
 
 #: models.py:1926 models.py:2008
 msgid "The link to this product's page on your website."
@@ -2374,12 +2371,11 @@ msgstr ""
 
 #: models.py:1934
 msgid "Price"
-msgstr ""
+msgstr "Hinta"
 
 #: models.py:1942
-#, fuzzy
 msgid "Currency"
-msgstr "Läpinäkyvyys"
+msgstr "Valuutta"
 
 #: models.py:1958
 #, fuzzy

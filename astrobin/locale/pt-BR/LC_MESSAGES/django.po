@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-18 05:48-0400\n"
-"PO-Revision-Date: 2012-08-17 05:55+0100\n"
+"PO-Revision-Date: 2012-08-19 03:01+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt-BR\n"
@@ -1018,7 +1018,7 @@ msgstr ""
 "Se você quiser compartilhar os arquivos TIFF ou FITS da sua imagem, coloque "
 "um link para o arquivo aqui. Infelizmente, o AstroBin não pode oferecer o "
 "armazenamento destes arquivos no momento, portanto você terá que hospedá-los "
-"na sua área pessoal."
+"em outro servidor."
 
 #: forms.py:70
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
@@ -1153,7 +1153,7 @@ msgstr "Assunto"
 
 #: forms.py:302
 msgid "All"
-msgstr ""
+msgstr "Tudo"
 
 #: forms.py:303 templates/leaderboard.html:30 templates/gear/page.html:69
 #: templates/inclusion_tags/search_image_list.html:51
@@ -1163,7 +1163,7 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:39
 #: templates/user/profile/commercial/products.html:121
 msgid "Images"
-msgstr ""
+msgstr "Imagens"
 
 #: forms.py:305 models.py:692 views.py:1788 templates/base.html:396
 #: templates/profile-edit-menu.html:20 templates/wall.html:142
@@ -2090,8 +2090,8 @@ msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
 msgstr ""
-"Qualidade do céu de acordo com <a href=\"http://en.wikipedia.org/wiki/"
-"Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
+"Qualidade do céu de acordo com a <a href=\"http://en.wikipedia.org/wiki"
+"/Bortle_Dark-Sky_Scale\" target=\"_blank\">escala de Bortle</a>."
 
 #: models.py:1167
 msgid "Mean mag/arcsec^2"
@@ -2140,7 +2140,7 @@ msgstr ""
 
 #: models.py:1223 templates/image/detail.html:489
 msgid "CMI"
-msgstr ""
+msgstr "CMI"
 
 #: models.py:1224
 msgid "Latitude of the first Central Meridian."
@@ -2241,30 +2241,31 @@ msgstr ""
 
 #: models.py:1410
 msgid "The name of the company you represent on AstroBin."
-msgstr ""
+msgstr "O nome da empresa que você representa no AstroBin"
 
 #: models.py:1416
-#, fuzzy
 msgid "Company description"
-msgstr "Descrição"
+msgstr "Descrição da empresa"
 
 #: models.py:1417
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#10\">formatting rules</a>."
 msgstr ""
+"Uma breve descrição da empresa que você representa no AstroBin. É possível "
+"usar <a href=\"/faq/#10\">formatação de texto</a>."
 
 #: models.py:1425
 msgid "Company website"
-msgstr ""
+msgstr "Site da empresa"
 
 #: models.py:1426
 msgid "The website of the company you represent on AstroBin."
-msgstr ""
+msgstr "Site da empresa que você representa no AstroBin."
 
 #: models.py:1430
 msgid "Country of operation"
-msgstr ""
+msgstr "País de atuação"
 
 #: models.py:1454 templates/base.html:408
 msgid "Default license"
@@ -2347,62 +2348,59 @@ msgstr ""
 
 #: models.py:1903
 msgid "AUD - Australian dollars"
-msgstr ""
+msgstr "AUD - Dólares australianos"
 
 #: models.py:1904
 msgid "CAD - Canadian dollars"
-msgstr ""
+msgstr "CAD - Dólares canadenses"
 
 #: models.py:1905
 msgid "CHF - Swiss francs"
-msgstr ""
+msgstr "CHF - Francos suíços"
 
 #: models.py:1906
 msgid "EUR - Euros"
-msgstr ""
+msgstr "EUR - Euros"
 
 #: models.py:1907
 msgid "GPB - Pound stelings"
-msgstr ""
+msgstr "GPB - Libras esterlinas"
 
 #: models.py:1908
 msgid "PLN - Polish zloty"
-msgstr ""
+msgstr "PLN - Zloty polonês"
 
 #: models.py:1909
 msgid "SEK - Swedish krona"
-msgstr ""
+msgstr "SEK - Coroa sueca"
 
 #: models.py:1910
-#, fuzzy
 msgid "USD - American dollars"
-msgstr "Samoa Americana"
+msgstr "USD - Dólares americanos"
 
 #: models.py:1916 models.py:1966
 msgid "Producer"
-msgstr ""
+msgstr "Fabricante"
 
 #: models.py:1927 models.py:2009
 msgid "The link to this product's page on your website."
-msgstr ""
+msgstr "Link para a página deste produto no seu site."
 
 #: models.py:1935
 msgid "Price"
-msgstr ""
+msgstr "Preço"
 
 #: models.py:1943
-#, fuzzy
 msgid "Currency"
-msgstr "Transparência"
+msgstr "Moeda"
 
 #: models.py:1959
-#, fuzzy
 msgid "Retailed gear items"
-msgstr "comentado no item de equipamento"
+msgstr "Equipamentos à venda"
 
 #: models.py:1975
 msgid "Proper make"
-msgstr ""
+msgstr "Nome correto do fabricante"
 
 #: models.py:1976
 msgid ""
@@ -2410,10 +2408,12 @@ msgid ""
 "properly by the users. Write here the proper make/brand/producer/developer "
 "name."
 msgstr ""
+"Algumas vezes, o nome do fabricante/desenvolvedor não é escrito corretamente "
+"pelos usuários. Escreva aqui o nome correto."
 
 #: models.py:1983
 msgid "Proper name"
-msgstr ""
+msgstr "Nome correto do produto"
 
 #: models.py:1984
 msgid ""
@@ -2422,6 +2422,10 @@ msgid ""
 "name.<br/>It is recommended that you try to group as many items as possible, "
 "so try to use a generic version of your product's name."
 msgstr ""
+"Algumas vezes, o nome do produto não é escrito corretamente pelos usuários. "
+"Escreva aqui o nome correto, sem incluir o fabricante/desenvolvedor.<br />É "
+"recomendável que você tente agrupar a maior quantidade de produtos possível, "
+"então procure utilizar o nome mais abrangente."
 
 #: models.py:1992
 msgid ""
@@ -2430,26 +2434,32 @@ msgid ""
 "choose it from this list. If you upload several revisions, they will also "
 "appear in the commercial page."
 msgstr ""
+"A imagem comercial oficial deste produto. Envie uma imagem através da "
+"ferramenta padrão, defina o tópico como \"Equipamento\" e então a selecione "
+"desta lista. Se você enviar várias versões da imagem, todas aparecerão na "
+"página comercial."
 
 #: models.py:2000
 msgid "Tagline"
-msgstr ""
+msgstr "Mote/Slogan do produto"
 
 #: models.py:2001
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
+"Uma frase memorável que defina este produto, com propósito de marketing."
 
 #: models.py:2016
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#10\">formatting rules</a>."
 msgstr ""
+"Aqui você escrever uma descrição comercial completa do seu produto. É "
+"possível usar <a href=\"/faq/#10\">formatação de texto</a>."
 
 #: models.py:2035
-#, fuzzy
 msgid "Commercial gear items"
-msgstr "comentado no item de equipamento"
+msgstr "Equipamentos comercializados"
 
 #: search.py:80 views.py:1002 views.py:1263 views.py:1288
 #: templates/image/actions/bring_to_attention.html:30
@@ -2538,6 +2548,8 @@ msgid ""
 "The revision you are looking for is invalid, or was deleted. This is the "
 "original image."
 msgstr ""
+"A versão que você procura é inválida ou foi excluída. Esta é a imagem "
+"original."
 
 #: views.py:717
 msgid "Resolution"
@@ -2720,7 +2732,7 @@ msgstr "sem apelido"
 
 #: views.py:4358 views.py:4551
 msgid "You can't merge a product to itself."
-msgstr ""
+msgstr "Você não pode unificar um produto com ele mesmo."
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -3033,14 +3045,12 @@ msgid "Basic information"
 msgstr "Informações básicas"
 
 #: templates/base.html:379
-#, fuzzy
 msgid "Commercial information"
-msgstr "Informações adicionais"
+msgstr "Informações comerciais"
 
 #: templates/base.html:388
-#, fuzzy
 msgid "Retailer information"
-msgstr "Informações básicas"
+msgstr "Informações de venda"
 
 #: templates/base.html:414 templates/profile-edit-menu.html:32
 msgid "Preferences"
@@ -3073,28 +3083,28 @@ msgstr ""
 
 #: templates/base.html:472 templates/registration/login.html:15
 msgid "Register"
-msgstr ""
+msgstr "Cadastre-se"
 
 #: templates/base.html:484
 msgid "Quick search"
-msgstr ""
+msgstr "Busca rápida"
 
 #: templates/base.html:553 templates/help.html:10
 msgid "Hey!"
-msgstr ""
+msgstr "Olá!"
 
 #: templates/base.html:554
 msgid "Success!"
-msgstr ""
+msgstr "Sucesso!"
 
 #: templates/base.html:555 templates/base.html.py:567 templates/base.html:579
 #: templates/upload.html:52
 msgid "Warning!"
-msgstr ""
+msgstr "Aviso!"
 
 #: templates/base.html:556
 msgid "Error!"
-msgstr ""
+msgstr "Erro!"
 
 #: templates/base.html:569
 #, python-format
@@ -3103,6 +3113,9 @@ msgid ""
 "fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
 "to do it now."
 msgstr ""
+"Como fabricante ou vendedor no AstroBin, é muito importante que você "
+"preencha todos dados da sua empresa. Clique <a href=\"%(the_url)s\">aqui</a> "
+"para fazer isso agora."
 
 #: templates/base.html:581
 #, python-format
@@ -3110,6 +3123,8 @@ msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
 "of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
 msgstr ""
+"Como um vendedor no AstroBin, é muito importante que você informe o seu país "
+"de atuação. Clique <a href=\"%(the_url)s\">aqui</a> para fazer isso agora."
 
 #: templates/base.html:595 templates/user/card.html:53
 msgid "About"
@@ -3122,6 +3137,10 @@ msgid ""
 "upload your astrophotography images. Made by an astrophotographer, for the "
 "astrophotographers."
 msgstr ""
+"AstroBin é um site de hospedagem de imagens direcionado especificamente para "
+"astrofotógrafos: você não sentirá necessidade de enviar suas imagens de "
+"astrofotografia para nenhum outro lugar. Desenvolvido por um astrofotógrafo, "
+"para astrofotógrafos."
 
 #: templates/base.html:607 templates/tos.html:7
 msgid "Terms of Service"
@@ -3190,7 +3209,7 @@ msgstr "por"
 #: templates/user/profile-js.html:22 templates/user/profile-subnav.html:89
 #: templates/user/profile/commercial/products.html:356
 msgid "Follow"
-msgstr ""
+msgstr "Seguir"
 
 #: templates/comments.html:55 templates/index.html:188
 #: templates/index.html.py:189 templates/leaderboard.html:68
@@ -3205,7 +3224,7 @@ msgstr ""
 #: templates/popover/user.html:28 templates/user/card.html:79
 #: templates/user/profile/commercial/products.html:356
 msgid "Unfollow"
-msgstr ""
+msgstr "Deixar de seguir"
 
 #: templates/explore_choose.html:9
 msgid ""
@@ -3261,7 +3280,7 @@ msgstr ""
 
 #: templates/faq.html:16 templates/faq.html.py:70
 msgid "What's the deal with the Staging Area and the Public Area?"
-msgstr "Como funcionam as áreas Pública e de Ensaio?"
+msgstr "Como funcionam as áreas Pública e de Testes?"
 
 #: templates/faq.html:17 templates/faq.html.py:80
 msgid "How do I get an image featured on the Messier Marathon page?"
@@ -3363,6 +3382,11 @@ msgid ""
 "minute picture of M31 you took last night between the clouds <em>belongs</"
 "em> here! Don't be shy and post it!"
 msgstr ""
+"Absurdo. O AstroBin <strong>não</strong> foi feito para ser um catálogo de "
+"belas imagens, mas sim para dar oportunidade a todos de contribuir para um "
+"vasto e crescente esforço de agrupar e indexar informações importantes. "
+"Aquela captura de M31 que você vez ontem à noite, com 30 minutos de "
+"exposição, entre as nuvens, <em>precisa</em> ser enviada. Não se acanhe!"
 
 #: templates/faq.html:72
 msgid ""
@@ -3374,6 +3398,14 @@ msgid ""
 "want. The image will be visible only to the intended recipients, and won't "
 "appear on your profile or AstroBin's home page."
 msgstr ""
+"No AstroBin, você pode enviar suas imagens para dois lugares. A Área de "
+"Testes é onde você envia as imagens que você quer compartilhar rapidamente "
+"em fóruns, listas de e-mails e redes sociais. Chegaram ao fim os dias de "
+"redimensionar e compactar suas imagens, obedecendo aos limites dos fóruns, "
+"para só então receber feedback e críticas. Simplesmente envie o arquivo para "
+"a Área de Testes do AstroBin e compartilhe o link com quem você quiser. A "
+"imagem será visível apenas nos lugares que você desejar, sem aparecer no seu "
+"perfil ou na página inicial do AstroBin."
 
 #: templates/faq.html:75
 msgid ""
@@ -3385,7 +3417,7 @@ msgid ""
 msgstr ""
 "A Área Pública, entretanto, é para os seus produtos finais. Depois que "
 "receber feedback no seu fórum favorito, você poderá promover a imagem da "
-"Área de Ensaio para a Área Pública, quando ela passará a ser exibida no seu "
+"Área de Testes para a Área Pública, quando ela passará a ser exibida no seu "
 "perfil. Lembre-se que você pode mover as imagens entre as áreas, quantas "
 "vezes quiser!"
 
@@ -3399,6 +3431,12 @@ msgid ""
 "the most nominations for a certain Messier object will automatically be "
 "featured."
 msgstr ""
+"Imagens na <a href=\"%(messier_url)s\">página da Maratona Messier</a> são "
+"escolhidas em um processo democrático de indicações. Se você ver uma imagem "
+"de algum objeto do catálogo Messier e achar que ela deva aparecer na página "
+"da Maratona Messier, faça a indicação usando o menu <strong>Ações</strong>. "
+"A imagem com a maior quantidade de indicações para um determinado objeto, "
+"será automaticamente selecionada."
 
 #: templates/faq.html:90
 msgid ""
@@ -3408,6 +3446,11 @@ msgid ""
 "to Internet Forums, often with little or no data, or to general purpose "
 "image hosting websites, invariably with no data attached."
 msgstr ""
+"AstroBin nasceu do desejo de acabar com algo que vinha acontecendo há muito "
+"tempo: desperdício de materiais incríveis no caos da Internet. Por anos, "
+"astrofotógrafos brilhantes têm enviado suas imagens para fóruns na Internet, "
+"com pouca ou nenhuma informação, ou para sites de hospedagem de imagens sem "
+"propósito definido, invariavelmente sem nenhuma informação."
 
 #: templates/faq.html:93
 msgid ""
@@ -3415,6 +3458,8 @@ msgid ""
 "reduced to nothing more than a bunch of pixel in the giant wasteland of the "
 "Internet."
 msgstr ""
+"Estas imagens seriam vistas por algumas pessoas e rapidamente esquecidas, "
+"reduzidas a mais um punhado de pixels no gigantesco mundo da Internet."
 
 #: templates/faq.html:96
 msgid ""
@@ -3423,6 +3468,10 @@ msgid ""
 "over the world, so that their precious data would serve a purpose, and have "
 "a meaning forever."
 msgstr ""
+"Isso não deve ser permitido. AstroBin é a resposta: um esforço para "
+"hospedar, indexar e categorizar o trabalho dos astrofotógrafos de todo o "
+"mundo, para que suas informações valiosas tenham um propósito, um sentido, "
+"para sempre."
 
 #: templates/faq.html:103
 msgid ""
@@ -3432,6 +3481,12 @@ msgid ""
 "become possible: you could simply upload an image of a galaxy, and AstroBin "
 "could compare it to pictures of the same galaxy taken previously."
 msgstr ""
+"<em>AstroBin</em> está apenas começando e dessa vez, nós podemos dizer que "
+"realmente o céu é o limite! Toneladas de ideias estão previstas. Assim como "
+"a base de usuários cresce, também aumenta a quantidade de informações. De "
+"repente, ideias como busca automatizada de supernovas se torna possível: "
+"você simplesmente envia uma imagem de uma galáxia e o AstroBin a compara com "
+"outras imagens anteriores da mesma galáxia."
 
 #: templates/faq.html:106
 msgid ""
@@ -3439,54 +3494,64 @@ msgid ""
 "equipment, your location, and comparing what you have imaged to what users "
 "similar to you have, AstroBin could suggest your next challenge!"
 msgstr ""
+"AstroBin também pode recomendar objetos para você fotografar! Sabendo o seu "
+"equipamento, sua localização e comparando o que você já fotografou com o os "
+"objetos de outros usuários em condição semelhante, AstroBin pode sugerir o "
+"seu próximo desafio!"
 
 #: templates/faq.html:109
 msgid ""
 "Thanks to the input from the community, more ideas are flowing in and the "
 "list get bigger and bigger."
 msgstr ""
+"Agradeço às sugestões da comunidade, mais ideias estão surgindo e a lista só "
+"cresce."
 
 #: templates/faq.html:116
 msgid ""
 "AstroBin uses the Markdown syntax. Please use the following reference table:"
 msgstr ""
+"O AstroBIn usa a sintaxe Markdown. Por favor, use a seguinte tabela de "
+"referência:"
 
 #: templates/faq.html:119
 msgid "You type:"
-msgstr ""
+msgstr "Você escreve:"
 
 #: templates/faq.html:119
 msgid "You see:"
-msgstr ""
+msgstr "Você vê:"
 
 #: templates/faq.html:120
 msgid "italics"
-msgstr ""
+msgstr "itálico"
 
 #: templates/faq.html:121
 msgid "bold"
-msgstr ""
+msgstr "negrito"
 
 #: templates/faq.html:123
 msgid "(TAB or 4 spaces)"
-msgstr ""
+msgstr "(TAB ou 4 espaços)"
 
 #: templates/faq.html:123
 msgid "preformatted text"
-msgstr ""
+msgstr "Texto monoespaçado"
 
 #: templates/faq.html:124
 msgid "quoted text"
-msgstr ""
+msgstr "Citação"
 
 #: templates/faq.html:125
 msgid "escape the formatting syntax"
-msgstr ""
+msgstr "Inserir texto não formatado em texto formatado"
 
 #: templates/faq.html:132
 msgid ""
 "You can vote each image from 1 to 5 stars, and they are defined like this:"
 msgstr ""
+"Você pode votar nas imagens usando de 1 a 5 estrelas e elas serão definidas "
+"dessa maneira:"
 
 #: templates/faq.html:137 templates/image/detail.html:1357
 msgid "It's a start, but it needs better data."
@@ -3494,7 +3559,7 @@ msgstr ""
 
 #: templates/faq.html:144 templates/image/detail.html:1358
 msgid "It looks good, but it needs better processing."
-msgstr ""
+msgstr "Está bom, mas precisa processamento melhor."
 
 #: templates/faq.html:152 templates/image/detail.html:1359
 msgid "Good data, good processing."
@@ -3502,48 +3567,55 @@ msgstr ""
 
 #: templates/faq.html:161 templates/image/detail.html:1360
 msgid "Great result!"
-msgstr ""
+msgstr "Grande resultado!"
 
 #: templates/faq.html:171 templates/image/detail.html:1361
-#, fuzzy
 msgid "Top quality!"
-msgstr "Superior esquerdo"
+msgstr "Qualidade excelente!"
 
 #: templates/faq.html:178
 msgid ""
 "Do you have a question not covered here! Please <a href=\"/contact/"
 "\">contact us</a>!"
 msgstr ""
+"Você tem alguma pergunta não respondida aqui? Por favor, <a "
+"href=\"/contact/\">entre em contato</a>!"
 
 #: templates/fits.html:12
 msgid ""
 "The authors of these images have been generous, and provided a link to the "
 "TIFF or FITS original files."
 msgstr ""
+"Os autores destas imagens foram generosos e disponibilizaram um link para os "
+"arquivos originais em TIFF ou FITS."
 
 #: templates/guidelines.html:9
 msgid ""
 "AstroBin accounts are meant for members to share original images that they "
 "have created."
 msgstr ""
+"O propósito de se cadastrar no AstroBin é permitir que os usuários "
+"compartilhem suas imagens originais."
 
 #: templates/guidelines.html:11
 msgid "What is allowed"
-msgstr ""
+msgstr "O que é permitido"
 
 #: templates/guidelines.html:14
 msgid "Do upload content you have created yourself."
-msgstr ""
+msgstr "Enviar material criado por você mesmo."
 
 #: templates/guidelines.html:15
 msgid ""
 "Respect the copyright of others. Stealing images from other people and "
 "trying to pass them off as yours is not allowed on AstroBin."
 msgstr ""
+"Respeitar os direitos autoriais dos outros. Roubar imagens de outras pessoas "
+"e publicá-las como se fossem suas não é permitido no AstroBin."
 
 #: templates/guidelines.html:18
 msgid "Do fill in all the technical details you can."
-msgstr ""
+msgstr "Preencha a maior quantidade de detalhes técnicos que você puder."
 
 #: templates/guidelines.html:19
 msgid ""
@@ -3551,22 +3623,27 @@ msgid ""
 "in a sea of chaos. As much as you can, please fill in the technical details "
 "of your images."
 msgstr ""
+"AstroBin foi fundado com a ideia de que informações são importantes e não "
+"devem ser desperdiçadas no caos da Internet. Preencha os detalhes técnicos "
+"das suas imagens, com o máximo de informações que você puder."
 
 #: templates/guidelines.html:22
 msgid "Be respectful of other users."
-msgstr ""
+msgstr "Respeite os outros usuários."
 
 #: templates/guidelines.html:23
 msgid "Be nice and friendly to other users when you send them messages."
 msgstr ""
+"Seja cordial e amigável com os outros usuários, quando enviar mensagens."
 
 #: templates/guidelines.html:26
 msgid "What is forbidden"
-msgstr ""
+msgstr "O que é proibido"
 
 #: templates/guidelines.html:29
 msgid "Don't upload anything that you don't hold the copyright for."
 msgstr ""
+"Não envie nenhuma imagem, se você não detém os direitos autorais sobre elas."
 
 #: templates/guidelines.html:30
 msgid ""
@@ -3574,10 +3651,13 @@ msgid ""
 "Images taken with remote equipment and images taken with borrowed equipment "
 "are fine of course. What matters is that it was your work."
 msgstr ""
+"É simples: se você mesmo não fotografou, não envie. Imagens obtidas com "
+"equipamentos remotos ou emprestados, não tem problema, obviamente. O que "
+"importa é que seja o seu trabalho."
 
 #: templates/guidelines.html:33
 msgid "No nudity, no explicitly sexual content, no illegal content."
-msgstr ""
+msgstr "Sem nudez, conteúdo sexual explícito ou ilegal."
 
 #: templates/guidelines.html:34
 msgid ""
@@ -3585,10 +3665,14 @@ msgid ""
 "you upload any content that is illegal, porn or nudity. We also reserve the "
 "right to report you to the authorities, if we find it necessary."
 msgstr ""
+"Sua conta será permanentemente excluída, bem como todo o seu conteúdo, se "
+"você enviar qualquer material ilegal ou contendo nudez/pornografia. "
+"Reservamo-nos o direito de denunciá-lo às autoridades, se acharmos "
+"necessário."
 
 #: templates/guidelines.html:37
 msgid "Don't upload images that have nothing to do with astronomy."
-msgstr ""
+msgstr "Não envie nenhuma imagem que não seja relacionada com astronomia."
 
 #: templates/guidelines.html:38
 msgid ""
@@ -3596,16 +3680,22 @@ msgid ""
 "from your last vacation. Your account won't be deleted, but we will ask you "
 "to remove those pictures."
 msgstr ""
+"Imagens de equipamentos são permitidas, mas não use o AstroBin para enviar "
+"fotos das suas últimas férias. Sua conta não será excluída, mas "
+"solicitaremos a exclusão desse material."
 
 #: templates/guidelines.html:41
 msgid "Don't use your account to host images for websites, banners or logos."
 msgstr ""
+"Não use sua conta para hospedar imagens para sites, banners ou logotipos."
 
 #: templates/guidelines.html:42
 msgid ""
 "Banners, logos, icons or other graphic elements that are not "
 "astrophotography are not allowed on AstroBin."
 msgstr ""
+"Banners, logotipos, ícones ou outros materiais gráficos que não pertençam à "
+"astrofotografia, são proibidos no AstroBin."
 
 #: templates/guidelines.html:46
 msgid ""
@@ -3613,6 +3703,9 @@ msgid ""
 "common sense\". If you feel you can't abide by them, please let us know what "
 "you feel is wrong."
 msgstr ""
+"Concluindo, estes termos são apenas uma maneira de dizer \"seja legal e use o "
+"bom senso\". Se você acredita que não consegue se adequar a eles, por favor, "
+"entre em contato e nos diga o que achou de errado."
 
 #: templates/help.html:12
 msgid ""
@@ -3621,10 +3714,14 @@ msgid ""
 "numerous Astrophotography forums, I have found that the Internet is lacking "
 "a centralized place where astrophotographers can share their work."
 msgstr ""
+"Você é um astrofotógrafo? Gosta de compartilhar o resultado do seu trabalho "
+"árduo com os outros? Sendo eu mesmo um astrofotógrafo e inscrito em inúmeros "
+"fóruns de astrofotografia, percebi que faltava um lugar onde pudéssemos "
+"compartilhar nossos trabalhos de forma centralizada."
 
 #: templates/help.html:14
 msgid "Well, this is finally over!"
-msgstr ""
+msgstr "Pois bem, isso finalmente acabou!"
 
 #: templates/help.html:16
 msgid ""
@@ -3632,20 +3729,27 @@ msgid ""
 "ground up by an astrophotographer, and it provides means to people who want "
 "to share their astrophotographs."
 msgstr ""
+"<em>AstroBin</em> veio para suprir essa necessidade. É um site construído do "
+"zero, por um astrofotógrafo, disponibilizando meios para as pessoas "
+"compartilharem suas astrofotografias."
 
 #: templates/help.html:18
 msgid "So how is this different from any other image sharing websites?"
 msgstr ""
+"Então, como isso aqui é diferente dos outros sites de compartilhamento de "
+"imagens?"
 
 #: templates/help.html:20
 msgid ""
 "<em>AstroBin</em> provides a number of features that are tailored "
 "specificlly to astrophotography. Here's a quick run down of the main ones:"
 msgstr ""
+"<em>AstroBin</em> proporciona ferramentas desenvolvidas especialmente para a "
+"astrofotografia. Veja uma lista das principais:"
 
 #: templates/help.html:23
 msgid "Dedication to data"
-msgstr ""
+msgstr "Dedicação à informação"
 
 #: templates/help.html:25
 msgid ""
@@ -3653,6 +3757,10 @@ msgid ""
 "done with it. <em>AstroBin</em>, instead, has a user interface specifically "
 "designed to enable you to input all the technical data of your image."
 msgstr ""
+"Em sites de compartilhamento de imagem sem propósito específico, você envia "
+"sua imagem e pronto. No <em>AstroBin</em>, você tem uma interface desenhada "
+"especificamente para permitir que você informe todos os dados técnicos da "
+"sua imagem."
 
 #: templates/help.html:26
 msgid ""
@@ -3663,6 +3771,11 @@ msgid ""
 "Astronomical Database, which contains over 5 million objects under over 15 "
 "million names!"
 msgstr ""
+"<em>AstroBin</em> sugere dados técnicos a partir de um grande banco de "
+"dados: telescópios, CCDs e filtros astronômicos de diversos catálogos vão "
+"aparecer em uma lista de sugestões, assim que você começar a digitá-los. "
+"<em>AstroBin</em> está conectado ao banco de dados astronômico SIMBAD, o "
+"qual contém mais de 5 milhões de objetos, com quase 15 milhões de nomes!"
 
 #: templates/help.html:29
 msgid ""
@@ -3671,10 +3784,14 @@ msgid ""
 "interesting statistics. There is also a page that shows the most popular "
 "subjects organized by month and latitude!"
 msgstr ""
+"No <em>AstroBin</em>, objetos astronômicos possuem suas próprias páginas, "
+"onde você pode ver as melhores imagens, com gráficos sobre tendências e "
+"estatísticas interessantes. Também existe uma página que mostra os objetos "
+"mais populares, organizados por mês e latitude!"
 
 #: templates/help.html:33
 msgid "Data is strongly interconnected"
-msgstr ""
+msgstr "Informações estão completamente conectadas entre si"
 
 #: templates/help.html:35
 msgid ""
@@ -3684,6 +3801,11 @@ msgid ""
 "certain filter. How about all the images between 6 and 8 hours of "
 "integration? Or with a certain Moon phase? You can do that!"
 msgstr ""
+"Você já quis saber como sua próxima imagem ficaria? No <em>AstroBin</em>, é "
+"possível pesquisar por todas as imagens de um determinado objeto, obtidas "
+"com um determinado telescópio e com determinado CCD ou câmera. Ou um filtro "
+"específico. Que tal todas as imagens entre 6 e 8 horas de exposição? Ou "
+"aquelas obtidas em uma determinada fase da Lua? Aqui é possível!"
 
 #: templates/help.html:38
 msgid ""
@@ -3693,16 +3815,25 @@ msgid ""
 "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
 "want, you can search by telescope diameter too!"
 msgstr ""
+"AstroBin pode te ajudar com a compra do seu próximo telescópio ou câmera, "
+"permitindo que você pesquise por combinações de equipamentos que outros "
+"usuários possuam. Por exemplo, você pode pesquisar por todas as imagens "
+"obtidas com uma Canon 5D em um refrator apocromático qualquer, ou uma SBIG "
+"ST-8300 em um telescópio Ritchey-Chretien. Ou, se você quiser, também pode "
+"pesquisar pelo diâmetro do telescópio!"
 
 #: templates/help.html:41
 msgid ""
 "Finally, all this information is collected in interesting plots, that can "
 "help you figure out how some gear items are trending."
 msgstr ""
+"Finalmente, toda essa informação está disponível em gráficos interessantes, "
+"que podem te ajudar a ver o quanto um equipamento está sendo usado no "
+"momento."
 
 #: templates/help.html:45
 msgid "All the data at a glance"
-msgstr ""
+msgstr "Um resumo de todas as informações"
 
 #: templates/help.html:47
 msgid ""
@@ -6330,91 +6461,98 @@ msgstr ""
 
 #: templates/user/profile.html:70
 msgid "Please fill in the missing dates on all your images!"
-msgstr ""
+msgstr "Por favor, preencha as datas faltantes em todas as suas imagens!"
 
 #: templates/user/profile.html:81
 msgid "Tools"
-msgstr ""
+msgstr "Ferramentas"
 
 #: templates/user/profile.html:85 templates/user/profile.html.py:88
 msgid "Edit profile"
-msgstr ""
+msgstr "Editar perfil"
 
 #: templates/user/profile/flickr_import.html:7
 msgid "Import your photos from Flickr"
-msgstr ""
+msgstr "Importar fotos do Flickr"
 
 #: templates/user/profile/flickr_import.html:10
 msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
 "images it not supported."
 msgstr ""
+"Atenção: importando do Flickr, as marcas d'água não serão aplicadas "
+"automaticamente."
 
 #: templates/user/profile/flickr_import.html:16
 msgid "Which set"
-msgstr ""
+msgstr "Qual álbum"
 
 #: templates/user/profile/flickr_import.html:30
 msgid "Import photos"
-msgstr ""
+msgstr "Importar fotos"
 
 #: templates/user/profile/flickr_import.html:32
 msgid "Authenticate with Flickr"
-msgstr ""
+msgstr "Autentique-se no Flickr"
 
 #: templates/user/profile/flickr_import.html:39
 msgid ""
 "Unfortunately you need to enable Javascript to be able to import photos from "
 "Flickr at this time."
 msgstr ""
+"Infelizmente, neste momento, é necessário que você habilite o Javascript no "
+"seu navegador para importar fotos do Flickr."
 
 #: templates/user/profile/flickr_import.html:73
 msgid "Click to select the photos you want to import"
-msgstr ""
+msgstr "Clique para selecionar as fotos que deseja importar"
 
 #: templates/user/profile/flickr_import.html:89
 msgid "Import selected photos"
-msgstr ""
+msgstr "Importar fotos selecionadas"
 
 #: templates/user/profile/flickr_import.html:99
 msgid "Importing images."
-msgstr ""
+msgstr "Importando imagens."
 
 #: templates/user/profile/flickr_import.html:99
 msgid "Do not navigate away from this window: this might take a while!"
-msgstr ""
+msgstr "Não saia desta janela: isto pode demorar um pouco!"
 
 #: templates/user/profile/flickr_import.html:108
 msgid ""
 "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
 "(and keep an eye on your notifications)!"
 msgstr ""
+"Pronto! Agora vá para o <a href=\\\"/me\\\">seu perfil</a> e veja as novas fotos "
+"(e fique de olho nas suas notificações)!"
 
 #: templates/user/profile/commercial/products.html:7
 #: templates/user/profile/commercial/products.html:15
 #, python-format
 msgid "%(user)s's commercial products"
-msgstr ""
+msgstr "Produtos comerciais de %(user)s"
 
 #: templates/user/profile/commercial/products.html:13
 msgid "Your commercial products"
-msgstr ""
+msgstr "Seus produtos comerciais"
 
 #: templates/user/profile/commercial/products.html:21
 msgid ""
 "Please remember that you are only allowed to claim items that you really "
 "produce and/or retail."
 msgstr ""
+"Por favor, lembre-se de que você só pode reivindicar os produtos que você "
+"realmente produz e/ou vende."
 
 #: templates/user/profile/commercial/products.html:30
 msgid "As producer"
-msgstr ""
+msgstr "Como fabricante"
 
 #: templates/user/profile/commercial/products.html:35
 #: templates/user/profile/commercial/products.html:117
-#, fuzzy
 msgid "Gear IDs"
-msgstr "Equipamento"
+msgstr "Identificação dos equipamentos"
 
 #: templates/user/profile/commercial/products.html:80
 #: templates/user/profile/commercial/products.html:162
@@ -6423,57 +6561,57 @@ msgstr "Equipamento"
 #: templates/user/profile/commercial/products.html:454
 #: templates/user/profile/commercial/products.html:781
 msgid "Merge"
-msgstr ""
+msgstr "Unificar"
 
 #: templates/user/profile/commercial/products.html:93
 msgid "You haven't claimed any commercial products yet."
-msgstr ""
+msgstr "Você ainda não reivindicou nenhum produto comercial."
 
 #: templates/user/profile/commercial/products.html:95
 #, python-format
 msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr ""
+msgstr "%(user)s ainda não reivindicou nenhum produto comercial."
 
 #: templates/user/profile/commercial/products.html:112
 msgid "As retailer"
-msgstr ""
+msgstr "Como vendedor"
 
 #: templates/user/profile/commercial/products.html:175
 msgid "You haven't claimed any retailed products yet."
-msgstr ""
+msgstr "Você ainda não reivindicou nenhum produto como vendedor."
 
 #: templates/user/profile/commercial/products.html:177
 #, python-format
 msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr ""
+msgstr "%(user)s ainda não reivindicou nenhum produto como vendedor."
 
 #: templates/user/profile/commercial/products.html:193
 msgid "Claim as producer"
-msgstr ""
+msgstr "Reivindicar como fabricante"
 
 #: templates/user/profile/commercial/products.html:199
 msgid "Claim as retailer"
-msgstr ""
+msgstr "Reivindicar como vendedor"
 
 #: templates/user/profile/commercial/products.html:210
 msgid "Claim commercial product"
-msgstr ""
+msgstr "Reivindicar produto comercial"
 
 #: templates/user/profile/commercial/products.html:218
 #: templates/user/profile/commercial/products.html:292
 #: templates/user/profile/commercial/products.html:381
 #: templates/user/profile/commercial/products.html:708
 msgid "Claim"
-msgstr ""
+msgstr "Reivindicar"
 
 #: templates/user/profile/commercial/products.html:227
 #: templates/user/profile/commercial/products.html:301
 msgid "Select items to remove"
-msgstr ""
+msgstr "Selecione os itens que serão removidos"
 
 #: templates/user/profile/commercial/products.html:231
 msgid "Be careful if you try to remove all of these!"
-msgstr ""
+msgstr "Seja cuidadoso, se tentar remover todos eles!"
 
 #: templates/user/profile/commercial/products.html:232
 #: templates/user/profile/commercial/products.html:270
@@ -6481,18 +6619,20 @@ msgid ""
 "All the properties, including the commercial description, of this claim will "
 "be deleted and cannot be recovered!"
 msgstr ""
+"Todas as propriedades, incluindo a descrição comercial desta reivindicação, "
+"serão excluídas e não poderão ser restauradas!"
 
 #: templates/user/profile/commercial/products.html:249
 #: templates/user/profile/commercial/products.html:319
 msgid "Select the product you want to merge to"
-msgstr ""
+msgstr "Selecione com o qual produto deseja unificar"
 
 #: templates/user/profile/commercial/products.html:267
 #: templates/user/profile/commercial/products.html:271
 #: templates/user/profile/commercial/products.html:337
 #: templates/user/profile/commercial/products.html:341
 msgid "Are you sure?"
-msgstr ""
+msgstr "Tem certeza?"
 
 #: templates/user/profile/commercial/products.html:284
 msgid "Claim retailed product"
@@ -6553,47 +6693,55 @@ msgstr ""
 
 #: templates/user/profile/edit/gear.html:60
 msgid "Add gear item"
-msgstr ""
+msgstr "Adicionar equipamento"
 
 #: templates/user/profile/edit/license.html:6
 #: templates/user/profile/edit/license.html:9
 msgid "Set your default image license"
-msgstr ""
+msgstr "Defina sua licença padrão para as imagens"
 
 #: templates/user/profile/edit/license.html:14
 msgid ""
 "You can set a default type of license for everything you upload into "
 "AstroBin. Change your default here."
 msgstr ""
+"Você pode definir a licença padrão para tudo o que você enviar para o "
+"AstroBin. Mude este padrão aqui."
 
 #: templates/user/profile/edit/locations.html:6
 #: templates/user/profile/edit/locations.html:9
 msgid "Edit your locations"
-msgstr ""
+msgstr "Editar seus locais"
 
 #: templates/user/profile/edit/locations.html:12
 msgid ""
 "Use the form below to add a new location. After you add one, a new empty "
 "form will be created at the bottom, in case you want to add more."
 msgstr ""
+"Use o formulário abaixo para adicionar um novo local. Assim que você "
+"adicioná-lo, um novo formulário vazio será criado logo abaixo, caso você "
+"queira adicionar mais."
 
 #: templates/user/profile/edit/locations.html:14
 msgid "AstroBin will not share your location details with other users."
 msgstr ""
+"O AstroBin não compartilhará os detalhes da sua localização com outros "
+"usuários."
 
 #: templates/user/profile/edit/preferences.html:6
 #: templates/user/profile/edit/preferences.html:10
 msgid "Edit your site preferences"
-msgstr ""
+msgstr "Edite suas preferências para o site"
 
 #: templates/user/profile/edit/preferences.html:13
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
 msgstr ""
+"Selecione seu idioma e quais notificações você gostaria de receber por "
+"e-mail:"
 
 #: templates/user/profile/edit/retailer.html:6
 #: templates/user/profile/edit/retailer.html:11
-#, fuzzy
 msgid "Edit your retailer information"
-msgstr "Informações adicionais"
+msgstr "Edite suas informações de vendedor"
