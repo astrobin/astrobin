@@ -635,7 +635,7 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
     def clean_date(self):
         date = self.cleaned_data['date']
         if date > datetime.date.today():
-            raise forms.ValidationError("The date cannot be in the future.")
+            raise forms.ValidationError(_("The date cannot be in the future."))
         return date
  
  
@@ -653,7 +653,7 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
     def clean_date(self):
         date = self.cleaned_data['date']
         if date > datetime.date.today():
-            raise forms.ValidationError("The date cannot be in the future.")
+            raise forms.ValidationError(_("The date cannot be in the future."))
         return date
 
     class Meta:
@@ -714,14 +714,14 @@ class TelescopeEditForm(forms.ModelForm):
 
     class Meta:
         model = Telescope
-        exclude = ('make', 'name')
+        exclude = ('make', 'name', 'retailed')
 
 class MountEditForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = Mount
-        exclude = ('make', 'name')
+        exclude = ('make', 'name', 'retailed')
 
 
 class CameraEditForm(forms.ModelForm):
@@ -729,7 +729,7 @@ class CameraEditForm(forms.ModelForm):
 
     class Meta:
         model = Camera
-        exclude = ('make', 'name')
+        exclude = ('make', 'name', 'retailed')
 
 
 class FocalReducerEditForm(forms.ModelForm):
@@ -737,7 +737,7 @@ class FocalReducerEditForm(forms.ModelForm):
 
     class Meta:
         model = FocalReducer
-        exclude = ('make', 'name')
+        exclude = ('make', 'name', 'retailed')
 
 
 class SoftwareEditForm(forms.ModelForm):
@@ -745,7 +745,7 @@ class SoftwareEditForm(forms.ModelForm):
 
     class Meta:
         model = Software
-        exclude = ('make', 'name')
+        exclude = ('make', 'name', 'retailed')
 
 
 class FilterEditForm(forms.ModelForm):
@@ -753,7 +753,7 @@ class FilterEditForm(forms.ModelForm):
 
     class Meta:
         model = Filter
-        exclude = ('make', 'name')
+        exclude = ('make', 'name', 'retailed')
 
 
 class AccessoryEditForm(forms.ModelForm):
@@ -761,7 +761,7 @@ class AccessoryEditForm(forms.ModelForm):
 
     class Meta:
         model = Accessory
-        exclude = ('make', 'name')
+        exclude = ('make', 'name', 'retailed')
 
 
 class TelescopeEditNewForm(forms.ModelForm):
