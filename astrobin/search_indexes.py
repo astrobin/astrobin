@@ -274,7 +274,6 @@ class GearIndex(SearchIndex):
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
-        print "%d: %s %s" % (obj.id, obj.make if obj.make else '', obj.name)
         return 100;
 
     def prepare_images(self, obj):
@@ -396,7 +395,6 @@ class UserIndex(SearchIndex):
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
-        print "%d: %s" % (obj.id, obj.username)
         return 200;
 
     def prepare_images(self, obj):
@@ -642,7 +640,6 @@ class ImageIndex(SearchIndex):
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
-        print "%d: %s" % (obj.id, obj.title)
         return 300;
 
     def prepare_title(self, obj):
