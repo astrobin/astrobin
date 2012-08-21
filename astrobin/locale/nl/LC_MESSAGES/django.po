@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-20 12:08+0000\n"
-"PO-Revision-Date: 2012-05-27 19:37+0100\n"
+"PO-Revision-Date: 2012-08-20 22:26+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
@@ -1145,13 +1145,12 @@ msgid "Users"
 msgstr "Gebruikers"
 
 #: forms.py:300
-#, fuzzy
 msgid "Search type"
-msgstr "Zoeken"
+msgstr "Zoek categorie"
 
 #: forms.py:302
 msgid "All"
-msgstr ""
+msgstr "Alles"
 
 #: forms.py:303 templates/leaderboard.html:30 templates/gear/page.html:69
 #: templates/inclusion_tags/search_image_list.html:51
@@ -1187,9 +1186,8 @@ msgid "Express value in mm"
 msgstr "Waarde in mm"
 
 #: forms.py:348 forms.py:353
-#, fuzzy
 msgid "Express value in &mu;m"
-msgstr "Waarde in mm"
+msgstr "Geef waarde in &mu;m"
 
 #: forms.py:360 forms.py:365 forms.py:563 forms.py:608 forms.py:649
 msgid "Please use the following format: yyyy-mm-dd"
@@ -1287,7 +1285,7 @@ msgstr "Vul een waarde in tussen 1 en 10"
 
 #: forms.py:638 forms.py:656
 msgid "The date cannot be in the future."
-msgstr ""
+msgstr "De datum kan niet in de toekomst liggen."
 
 #: forms.py:683
 msgid "Nominate for"
@@ -1302,23 +1300,28 @@ msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
+"Gebruik dit veld om aan te geven dat het produkt dat je claimt effectief "
+"hetzelfde (of een variatie ervan) is van iets dat je eerder hebt geclaimd."
 
 #: forms.py:946 forms.py:1005
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
 msgstr ""
+"Je kan niet meer dan %d claims aanmaken. Overweeg om je peterschap up te "
+"graden."
 
 #: forms.py:956 forms.py:1023
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
+"Gebruik dit veld om aan te geven dat het produkt dat je samenvoegt effectief "
+"hetzelfde (of een variatie) is van iets dat je eerder hebt geclaimd."
 
 #: forms.py:1013
-#, fuzzy
 msgid "You have already claimed this product."
-msgstr "Je hebt deze foto al genomineerd"
+msgstr "Je hebt dit produkt al geclaimd."
 
 #: locale_extras.py:4
 msgid "Recipient"
@@ -1341,9 +1344,8 @@ msgid "commented on image"
 msgstr "heeft een commentaar achtergelaten op volgende foto:"
 
 #: locale_extras.py:9
-#, fuzzy
 msgid "commented on gear item"
-msgstr "gaf commentaar op dit materiaal:"
+msgstr "gaf commentaar op dit materiaal"
 
 #: locale_extras.py:10
 msgid "has favorited"
@@ -1630,7 +1632,6 @@ msgid "Reflector: Herschellian"
 msgstr "Reflector: Herschelliaans"
 
 #: models.py:381
-#, fuzzy
 msgid "Reflector: Newtonian"
 msgstr "Reflector: Newton"
 
@@ -1838,13 +1839,12 @@ msgid "Bandwidth"
 msgstr "Bandbreedte"
 
 #: models.py:561
-#, fuzzy
 msgid "(in nm)"
-msgstr "(in mm)"
+msgstr "(in nm)"
 
 #: models.py:570
 msgid "nm"
-msgstr ""
+msgstr "nm"
 
 #: models.py:679
 msgid "I don't want this image plate-solved."
@@ -2241,34 +2241,35 @@ msgstr "Vertel wat over jezelf. HTML tags zijn toegestaan."
 
 #: models.py:1409
 msgid "Company name"
-msgstr ""
+msgstr "Bedrijfsnaam"
 
 #: models.py:1410
 msgid "The name of the company you represent on AstroBin."
-msgstr ""
+msgstr "De naam van het bedrijf dat je op AstroBin vertegenwoordigt."
 
 #: models.py:1416
-#, fuzzy
 msgid "Company description"
-msgstr "Beschrijving"
+msgstr "Beschrijving bedrijf"
 
 #: models.py:1417
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#10\">formatting rules</a>."
 msgstr ""
+"Een korte beschrijving van het bedrijf dat je op AstroBin vertegenwoordigt. "
+"Je kan gebruik maken van enkele <a href=\"/faq/#10\">formatteringsregels</a>."
 
 #: models.py:1425
 msgid "Company website"
-msgstr ""
+msgstr "Bedrijfswebsite"
 
 #: models.py:1426
 msgid "The website of the company you represent on AstroBin."
-msgstr ""
+msgstr "De website van het bedrijf dat je vertegenwoordigt op AstroBin."
 
 #: models.py:1430
 msgid "Country of operation"
-msgstr ""
+msgstr "Land van de bedrijfszetel"
 
 #: models.py:1454 templates/base.html:409
 msgid "Default license"
@@ -2352,62 +2353,59 @@ msgstr ""
 
 #: models.py:1903
 msgid "AUD - Australian dollars"
-msgstr ""
+msgstr "AUD - Australische dollar"
 
 #: models.py:1904
 msgid "CAD - Canadian dollars"
-msgstr ""
+msgstr "CAD - Canadese dollar"
 
 #: models.py:1905
 msgid "CHF - Swiss francs"
-msgstr ""
+msgstr "CHF - Zwitserse frank"
 
 #: models.py:1906
 msgid "EUR - Euros"
-msgstr ""
+msgstr "EUR - Euro"
 
 #: models.py:1907
 msgid "GPB - Pound stelings"
-msgstr ""
+msgstr "GBP - Britse pond"
 
 #: models.py:1908
 msgid "PLN - Polish zloty"
-msgstr ""
+msgstr "PLN - Poolse zloty"
 
 #: models.py:1909
 msgid "SEK - Swedish krona"
-msgstr ""
+msgstr "SEK - Zweedse kroon"
 
 #: models.py:1910
-#, fuzzy
 msgid "USD - American dollars"
-msgstr "Amerikaans-Samoa"
+msgstr "USD - Amerikaanse dollar"
 
 #: models.py:1916 models.py:1966
 msgid "Producer"
-msgstr ""
+msgstr "Producent"
 
 #: models.py:1927 models.py:2009
 msgid "The link to this product's page on your website."
-msgstr ""
+msgstr "De link van dit produkt op je website."
 
 #: models.py:1935
 msgid "Price"
-msgstr ""
+msgstr "Prijs"
 
 #: models.py:1943
-#, fuzzy
 msgid "Currency"
-msgstr "Transparency"
+msgstr "Munteenheid"
 
 #: models.py:1959
-#, fuzzy
 msgid "Retailed gear items"
-msgstr "Toevoegen materiaal"
+msgstr "Verkocht produkt"
 
 #: models.py:1975
 msgid "Proper make"
-msgstr ""
+msgstr "Correct merk"
 
 #: models.py:1976
 msgid ""
@@ -2415,10 +2413,12 @@ msgid ""
 "properly by the users. Write here the proper make/brand/producer/developer "
 "name."
 msgstr ""
+"Soms wordt het merk/type/producent/ontwikkelaar van het produkt niet correct "
+"gespeld door de gebruikers. Schrijf hier de juiste manier."
 
 #: models.py:1983
 msgid "Proper name"
-msgstr ""
+msgstr "Correcte naam"
 
 #: models.py:1984
 msgid ""
@@ -2427,6 +2427,11 @@ msgid ""
 "name.<br/>It is recommended that you try to group as many items as possible, "
 "so try to use a generic version of your product's name."
 msgstr ""
+"Soms word de produktnaam niet correct geschreven door de gebruikers. Schrijf "
+"hier de juiste produktnaam zonder vermelding van het "
+"merk/type/producent/ontwikkelaar. <br/>Het is aanbevolen dat je zoveel "
+"mogelijk artikelen groepeert, dus tracht een generieke versie van je "
+"produktnaam te gebruiken."
 
 #: models.py:1992
 msgid ""
@@ -2435,26 +2440,33 @@ msgid ""
 "choose it from this list. If you upload several revisions, they will also "
 "appear in the commercial page."
 msgstr ""
+"De officiële commerciële foto van dit produkt. Upload de foto via de gewone "
+"interface maar gebruik \"materiaal\" als type onderwerp en kies ze van deze "
+"lijst. Als je verschillende revisies uploadt dan zullen deze ook verschijnen "
+"op de commerciële pagina."
 
 #: models.py:2000
 msgid "Tagline"
-msgstr ""
+msgstr "Slagzin"
 
 #: models.py:2001
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
+"Een catchy zin die je produkt goed omschrijft. Voor marketing doeleinden."
 
 #: models.py:2016
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#10\">formatting rules</a>."
 msgstr ""
+"Hier kan je de volledige commerciële omschrijving van je produkt "
+"neerschrijven. Je kan enkele <a href=\"/faq/#10\">formatteringsregels</a> "
+"gebruiken."
 
 #: models.py:2035
-#, fuzzy
 msgid "Commercial gear items"
-msgstr "gaf commentaar op dit materiaal:"
+msgstr "Commercieel materiaal"
 
 #: search.py:80 views.py:1002 views.py:1263 views.py:1288
 #: templates/image/actions/bring_to_attention.html:30
@@ -2543,6 +2555,8 @@ msgid ""
 "The revision you are looking for is invalid, or was deleted. This is the "
 "original image."
 msgstr ""
+"De revisie die je zoekt is corrupt of werd verwijderd. Dit is het originele "
+"beeld."
 
 #: views.py:717
 msgid "Resolution"
@@ -2734,7 +2748,7 @@ msgstr "geen alias"
 
 #: views.py:4358 views.py:4551
 msgid "You can't merge a product to itself."
-msgstr ""
+msgstr "Je kan een produkt niet met zichzelf samenvoegen."
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -2850,11 +2864,11 @@ msgstr "Tot nu toe is er nog geen activiteit geregistreerd."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:10
 msgid "Affiliates"
-msgstr ""
+msgstr "Peters"
 
 #: templates/affiliates.html:12
 msgid "The following companies support AstroBin."
-msgstr ""
+msgstr "De volgende bedrijven sponsoren AstroBin."
 
 #: templates/app_api_key_request.html:6
 msgid "Request an API key"
@@ -3011,7 +3025,7 @@ msgstr "Mijn paginas"
 
 #: templates/base.html:324 templates/user/profile-subnav.html:18
 msgid "Commercial products"
-msgstr ""
+msgstr "Commerciële produkten"
 
 #: templates/base.html:332 templates/popover/user.html:39
 #: templates/user/profile-subnav.html:26
@@ -3050,14 +3064,12 @@ msgid "Basic information"
 msgstr "Basisinformatie"
 
 #: templates/base.html:380
-#, fuzzy
 msgid "Commercial information"
-msgstr "Extra informatie"
+msgstr "Commerciële informatie"
 
 #: templates/base.html:389
-#, fuzzy
 msgid "Retailer information"
-msgstr "Basisinformatie"
+msgstr "Informatie distributeur"
 
 #: templates/base.html:415 templates/profile-edit-menu.html:32
 msgid "Preferences"
@@ -3102,7 +3114,7 @@ msgstr "Hé daar!"
 
 #: templates/base.html:555
 msgid "Success!"
-msgstr ""
+msgstr "Gelukt!"
 
 #: templates/base.html:556 templates/base.html.py:568 templates/base.html:580
 #: templates/upload.html:52
@@ -3110,9 +3122,8 @@ msgid "Warning!"
 msgstr "Waarschuwing!"
 
 #: templates/base.html:557
-#, fuzzy
 msgid "Error!"
-msgstr "Fout"
+msgstr "Fout!"
 
 #: templates/base.html:570
 #, python-format
@@ -3121,6 +3132,9 @@ msgid ""
 "fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
 "to do it now."
 msgstr ""
+"Als fabrikant en/of distributeur op AstroBin is het belangrijk dat je alle "
+"bedrijfsdetails invult! Klik <a href=\"%(the_url)s\">hier</a> om dit nu te "
+"doen."
 
 #: templates/base.html:582
 #, python-format
@@ -3128,6 +3142,8 @@ msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
 "of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
 msgstr ""
+"Als distributeur op AstroBin is het erg belangrijk dat je het land waar je "
+"opereert invult! Klik <a href=\"%(the_url)s\">hier</a> om dit nu te doen."
 
 #: templates/base.html:596 templates/user/card.html:53
 msgid "About"
@@ -3305,7 +3321,7 @@ msgstr "Hoe kan ik een opmaak meegeven aan mijn commentaren?"
 
 #: templates/faq.html:21 templates/faq.html.py:130
 msgid "What is the correct way to vote images?"
-msgstr ""
+msgstr "Hoe correct stemmen op foto's?"
 
 #: templates/faq.html:24
 msgid "... and their answers!"
@@ -3563,35 +3579,36 @@ msgstr "keer weer uit de formatterende syntax"
 msgid ""
 "You can vote each image from 1 to 5 stars, and they are defined like this:"
 msgstr ""
+"Je kan elke foto waarderen met 1 tot 5 sterren en ze worden als volgt "
+"gedefinieerd:"
 
 #: templates/faq.html:137 templates/image/detail.html:1357
 msgid "It's a start, but it needs better data."
-msgstr ""
+msgstr "Het is een begin, maar je hebt betere data nodig."
 
 #: templates/faq.html:144 templates/image/detail.html:1358
 msgid "It looks good, but it needs better processing."
-msgstr ""
+msgstr "Het ziet er goed uit, maar de bewerking kan beter."
 
 #: templates/faq.html:152 templates/image/detail.html:1359
 msgid "Good data, good processing."
-msgstr ""
+msgstr "Goeie data en goede bewerking."
 
 #: templates/faq.html:161 templates/image/detail.html:1360
-#, fuzzy
 msgid "Great result!"
-msgstr "Geen resultaten"
+msgstr "Geweldig resultaat!"
 
 #: templates/faq.html:171 templates/image/detail.html:1361
-#, fuzzy
 msgid "Top quality!"
-msgstr "Boven links"
+msgstr "Topkwaliteit!"
 
 #: templates/faq.html:178
-#, fuzzy
 msgid ""
 "Do you have a question not covered here! Please <a href=\"/contact/"
 "\">contact us</a>!"
-msgstr "Heb je nog een vraag die hier niet bijstaat? Zend ons gerust een mail:"
+msgstr ""
+"Heb je nog een vraag die hier niet bijstaat? Zend ons gerust een <a "
+"href=\"/contact/\">mail</a>!"
 
 #: templates/fits.html:12
 msgid ""
@@ -4257,19 +4274,19 @@ msgstr "volgende"
 
 #: templates/profile-edit-menu.html:7
 msgid "Basic"
-msgstr ""
+msgstr "Basisch"
 
 #: templates/profile-edit-menu.html:11
 msgid "Commercial"
-msgstr ""
+msgstr "Commerciëel"
 
 #: templates/profile-edit-menu.html:16
 msgid "Retailer"
-msgstr ""
+msgstr "Distributeur"
 
 #: templates/profile-edit-menu.html:29
 msgid "Flickr"
-msgstr ""
+msgstr "Flickr"
 
 #: templates/reviews.html:39 templates/wall.html:39
 #: templates/gear/page.html:229
@@ -4285,9 +4302,9 @@ msgid ""
 "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
 "integration time."
 msgstr ""
-"<strong>%(total_users)s</strong> gebruikers deelden <strong>"
-"%(total_images)s</strong> foto's, resulterend in een totaal van <strong>"
-"%(total_integration)s</strong> integratietijd."
+"<strong>%(total_users)s</strong> gebruikers deelden <strong>%"
+"(total_images)s</strong> foto's, resulterend in een totaal van <strong>%"
+"(total_integration)s</strong> uur integratietijd."
 
 #: templates/stats.html:16
 msgid "Total integration hours in the last 12 months"
@@ -4477,7 +4494,7 @@ msgstr "Avatar afbeelding"
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:9
 msgid "Edit commercial product"
-msgstr ""
+msgstr "Bewerk commerciëel produkt"
 
 #: templates/commercial/products/edit.html:14
 #: templates/commercial/products/retailed/edit.html:14
@@ -4510,19 +4527,18 @@ msgstr "Bewaren"
 
 #: templates/commercial/products/edit.html:15
 #: templates/commercial/products/retailed/edit.html:15
-#, fuzzy
 msgid "Return to list"
-msgstr "Ga terug naar de foto"
+msgstr "Ga terug naar de lijst"
 
 #: templates/commercial/products/edit.html:16
 #: templates/commercial/products/retailed/edit.html:16
 msgid "View in new window"
-msgstr ""
+msgstr "Bekijk in een nieuw venster"
 
 #: templates/commercial/products/retailed/edit.html:7
 #: templates/commercial/products/retailed/edit.html:9
 msgid "Edit retailed product"
-msgstr ""
+msgstr "Bewerk te koop aangeboden produkt"
 
 #: templates/contact_form/contact.html:10
 msgid ""
@@ -4743,13 +4759,12 @@ msgstr ""
 "Uw bijdrage was erg belangrijk en daarom dankt de hele AstroBin cummunity u!"
 
 #: templates/gear/page.html:29
-#, fuzzy
 msgid "No image"
 msgstr "Geen foto's"
 
 #: templates/gear/page.html:37
 msgid "Properties"
-msgstr ""
+msgstr "Eigenschappen"
 
 #: templates/gear/page.html:65
 #: templates/user/profile/commercial/products.html:38
@@ -4759,17 +4774,15 @@ msgstr "Eigenaars"
 
 #: templates/gear/page.html:86
 msgid "Buy it here"
-msgstr ""
+msgstr "Koop hier"
 
 #: templates/gear/page.html:138
-#, fuzzy
 msgid "Other images"
-msgstr "Foto's van apparatuur"
+msgstr "Andere beelden"
 
 #: templates/gear/page.html:157
-#, fuzzy
 msgid "Producer's description"
-msgstr "Beschrijving"
+msgstr "Beschrijving van de fabrikant"
 
 #: templates/gear/page.html:172 templates/subject/page.html:89
 msgid "Some images"
@@ -4865,9 +4878,8 @@ msgid "There are no comments yet."
 msgstr "Tot nu toe heeft niemand commentaar gegeven."
 
 #: templates/gear/page.html:329
-#, fuzzy
 msgid "Start a discussion, leave a comment or ask a question"
-msgstr "Een discussie starten, commentaar achterlaten of een vraag stellen."
+msgstr "Een discussie starten, commentaar achterlaten of een vraag stellen"
 
 #: templates/gear/page.html:391 templates/gear/page.html.py:451
 #: templates/image/detail.html:1152
@@ -5085,16 +5097,15 @@ msgstr ""
 
 #: templates/image/detail.html:656 templates/image/detail.html.py:682
 msgid "Final"
-msgstr ""
+msgstr "Finaal"
 
 #: templates/image/detail.html:664
 msgid "Original"
-msgstr ""
+msgstr "Origineel"
 
 #: templates/image/detail.html:717 templates/image/detail.html.py:882
-#, fuzzy
 msgid "Remove from favorites"
-msgstr "Nog niet als favoriet gemarkeerd"
+msgstr "Verwijder van favorieten"
 
 #: templates/image/detail.html:717 templates/image/detail.html.py:885
 msgid "Mark as favorite"
@@ -5102,7 +5113,7 @@ msgstr "Markeren als favoriet"
 
 #: templates/image/detail.html:775
 msgid "Made possible by"
-msgstr ""
+msgstr "Mogelijk gemaakt door"
 
 #: templates/image/detail.html:812
 msgid "Sharing mode"
@@ -5201,9 +5212,8 @@ msgstr "Zend %(username)s een bericht."
 #: templates/image/detail.html:1349 templates/image/detail.html.py:1350
 #: templates/image/detail.html:1351 templates/image/detail.html.py:1352
 #: templates/image/detail.html:1353
-#, fuzzy
 msgid "You have already voted."
-msgstr "Je hebt deze foto al genomineerd"
+msgstr "Je hebt al gestemd."
 
 #: templates/image/detail.html:1368
 msgid ""
@@ -5582,7 +5592,6 @@ msgstr ""
 "hebt opgeladen, dan zal je pixel schaal niet correct zijn!"
 
 #: templates/image/edit/watermark.html:6
-#, fuzzy
 msgid "Apply a watermark to image"
 msgstr "Pas watermerk toe"
 
@@ -5723,6 +5732,9 @@ msgid ""
 "your search using the <strong>Search type</strong> field in the "
 "<strong>Basic criteria</strong> box."
 msgstr ""
+"De zoekactie resulteerde in resultaten van verschillende types. Indien "
+"gewenst, kan je je zoekresultaat verfijnen in het <strong>Zoek type</strong> "
+"veld in de menu <strong>Basiscriteria</strong>."
 
 #: templates/inclusion_tags/search_image_list.html:40
 #: templates/inclusion_tags/search_image_list.html:91
@@ -5734,10 +5746,12 @@ msgid ""
 "If you searched for a gear item, the following users own one, or have imaged "
 "with one."
 msgstr ""
+"Als je zocht naar materiaal; de volgende gebruikers bezitten dit of hebben "
+"het gebruikt om er beelden mee te maken."
 
 #: templates/inclusion_tags/search_image_list.html:101
 msgid "Date joined"
-msgstr ""
+msgstr "Lid sinds"
 
 #: templates/inclusion_tags/search_image_list.html:139
 #, python-format
@@ -6939,29 +6953,30 @@ msgstr ""
 
 #: templates/user/profile/commercial/products.html:7
 #: templates/user/profile/commercial/products.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's commercial products"
-msgstr "%(user)s's grafieken"
+msgstr "%(user)s's commerciële produkten"
 
 #: templates/user/profile/commercial/products.html:13
 msgid "Your commercial products"
-msgstr ""
+msgstr "Jouw commerciële produkten"
 
 #: templates/user/profile/commercial/products.html:21
 msgid ""
 "Please remember that you are only allowed to claim items that you really "
 "produce and/or retail."
 msgstr ""
+"Denk eraan dat je enkel produkten mag claimen die je effectief produceert of "
+"distribueert."
 
 #: templates/user/profile/commercial/products.html:30
 msgid "As producer"
-msgstr ""
+msgstr "Als producent"
 
 #: templates/user/profile/commercial/products.html:35
 #: templates/user/profile/commercial/products.html:117
-#, fuzzy
 msgid "Gear IDs"
-msgstr "Gebruikt materiaal"
+msgstr "Materiaal identificaties"
 
 #: templates/user/profile/commercial/products.html:80
 #: templates/user/profile/commercial/products.html:162
@@ -6970,57 +6985,57 @@ msgstr "Gebruikt materiaal"
 #: templates/user/profile/commercial/products.html:454
 #: templates/user/profile/commercial/products.html:781
 msgid "Merge"
-msgstr ""
+msgstr "Samenvoegen"
 
 #: templates/user/profile/commercial/products.html:93
 msgid "You haven't claimed any commercial products yet."
-msgstr ""
+msgstr "Je hebt nog geen commerciële produkten geclaimd."
 
 #: templates/user/profile/commercial/products.html:95
 #, python-format
 msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr ""
+msgstr "%(user)s heeft nog geen commerciële produkten geclaimd."
 
 #: templates/user/profile/commercial/products.html:112
 msgid "As retailer"
-msgstr ""
+msgstr "Als distributeur"
 
 #: templates/user/profile/commercial/products.html:175
 msgid "You haven't claimed any retailed products yet."
-msgstr ""
+msgstr "Je hebt nog geen produkten als distributeur geclaimd."
 
 #: templates/user/profile/commercial/products.html:177
 #, python-format
 msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr ""
+msgstr "%(user)s heeft nog geen gedistribueerde producten geclaimd."
 
 #: templates/user/profile/commercial/products.html:193
 msgid "Claim as producer"
-msgstr ""
+msgstr "Claim als fabrikant"
 
 #: templates/user/profile/commercial/products.html:199
 msgid "Claim as retailer"
-msgstr ""
+msgstr "Claim als distributeur"
 
 #: templates/user/profile/commercial/products.html:210
 msgid "Claim commercial product"
-msgstr ""
+msgstr "Claim commercieel produkt"
 
 #: templates/user/profile/commercial/products.html:218
 #: templates/user/profile/commercial/products.html:292
 #: templates/user/profile/commercial/products.html:381
 #: templates/user/profile/commercial/products.html:708
 msgid "Claim"
-msgstr ""
+msgstr "Claim"
 
 #: templates/user/profile/commercial/products.html:227
 #: templates/user/profile/commercial/products.html:301
 msgid "Select items to remove"
-msgstr ""
+msgstr "Selecteer artikelen die verwijderd dienen te worden"
 
 #: templates/user/profile/commercial/products.html:231
 msgid "Be careful if you try to remove all of these!"
-msgstr ""
+msgstr "Wees voorzichtig als je al deze zaken tracht te verwijderen!"
 
 #: templates/user/profile/commercial/products.html:232
 #: templates/user/profile/commercial/products.html:270
@@ -7028,35 +7043,34 @@ msgid ""
 "All the properties, including the commercial description, of this claim will "
 "be deleted and cannot be recovered!"
 msgstr ""
+"Al de eigenschappen, inclusief de commerciële omschrijving van deze claim, "
+"zullen voorgoed worden verwijderd!"
 
 #: templates/user/profile/commercial/products.html:249
 #: templates/user/profile/commercial/products.html:319
-#, fuzzy
 msgid "Select the product you want to merge to"
-msgstr "Klik op de gewenste foto's om ze te importeren"
+msgstr "Selecteer het product waarmee je wil samenvoegen"
 
 #: templates/user/profile/commercial/products.html:267
 #: templates/user/profile/commercial/products.html:271
 #: templates/user/profile/commercial/products.html:337
 #: templates/user/profile/commercial/products.html:341
 msgid "Are you sure?"
-msgstr ""
+msgstr "Ben je zeker?"
 
 #: templates/user/profile/commercial/products.html:284
 msgid "Claim retailed product"
-msgstr ""
+msgstr "Claim produkt als distributeur"
 
 #: templates/user/profile/commercial/products.html:340
-#, fuzzy
 msgid ""
 "All the properties of this claim will be deleted and cannot be recovered!"
-msgstr "Deze revisie wordt onherroepelijk gewist. Ben je zeker?"
+msgstr "Alle eigenschappen van deze claim worden onherroepelijk gewist!"
 
 #: templates/user/profile/commercial/products.html:386
 #: templates/user/profile/commercial/products.html:713
-#, fuzzy
 msgid "Please wait..."
-msgstr "Attentie!"
+msgstr "Gelieve te wachten..."
 
 #: templates/user/profile/edit/basic.html:6
 #: templates/user/profile/edit/basic.html:11
@@ -7065,9 +7079,8 @@ msgstr "Wijzig je basisinformatie"
 
 #: templates/user/profile/edit/commercial.html:6
 #: templates/user/profile/edit/commercial.html:11
-#, fuzzy
 msgid "Edit your commercial information"
-msgstr "Wijzig je basisinformatie"
+msgstr "Wijzig je commerciële informatie"
 
 #: templates/user/profile/edit/gear.html:6
 #: templates/user/profile/edit/gear.html:11
@@ -7156,9 +7169,8 @@ msgstr "Kies je taal en welke berichtgeving je via e-mail wil ontvangen:"
 
 #: templates/user/profile/edit/retailer.html:6
 #: templates/user/profile/edit/retailer.html:11
-#, fuzzy
 msgid "Edit your retailer information"
-msgstr "Wijzig je basisinformatie"
+msgstr "Wijzig je informatie als distributeur"
 
 #~ msgid "Import from Flickr"
 #~ msgstr "Importeren vanuit Flickr"

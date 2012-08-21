@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-20 12:09+0000\n"
-"PO-Revision-Date: 2012-08-19 07:26+0100\n"
+"PO-Revision-Date: 2012-08-20 21:03+0100\n"
 "Last-Translator: Niels <astrobin.com@n13l5.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -1147,12 +1147,10 @@ msgid "Users"
 msgstr "Benutzer"
 
 #: forms.py:300
-#, fuzzy
 msgid "Search type"
-msgstr "Suchweise"
+msgstr "Suchtyp"
 
 #: forms.py:302
-#, fuzzy
 msgid "All"
 msgstr "Alles"
 
@@ -1287,7 +1285,7 @@ msgstr "Bitte einen Wert zwischen 1 und 10 eingeben."
 
 #: forms.py:638 forms.py:656
 msgid "The date cannot be in the future."
-msgstr ""
+msgstr "Das Datum kann nicht in der Zukunft liegen."
 
 #: forms.py:683
 msgid "Nominate for"
@@ -1302,13 +1300,15 @@ msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
+"Markier dieses Feld, wenn der Gegenstand identisch zu einem Produkt (oder "
+"eine Variante) ist, die du bereits beansprucht hast."
 
 #: forms.py:946 forms.py:1005
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
 msgstr ""
-"Du kannst nicht mehr als %d beanspruchen. Bitte erweitere deine Affiliation!"
+"Du kannst nicht mehr als %d beantragen. Bitte erweitere deine Affiliation!"
 
 #: forms.py:956 forms.py:1023
 msgid ""
@@ -2377,7 +2377,7 @@ msgstr "EUR - Euro"
 
 #: models.py:1907
 msgid "GPB - Pound stelings"
-msgstr ""
+msgstr "GBP - Britische Pfund"
 
 #: models.py:1908
 msgid "PLN - Polish zloty"
@@ -2408,25 +2408,22 @@ msgid "Currency"
 msgstr "Währung"
 
 #: models.py:1959
-#, fuzzy
 msgid "Retailed gear items"
-msgstr "Ausrüstung hinzufügen"
+msgstr "Verkaufte Artikel"
 
 #: models.py:1975
-#, fuzzy
 msgid "Proper make"
 msgstr "Eigentlicher Hersteller"
 
 #: models.py:1976
-#, fuzzy
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
 "name."
 msgstr ""
 "Manchmal sind Produkt-, Hersteller-, Entwicklernamen von den Usern nicht "
-"richtig geschrieben worden. Schreib hier den richtigen Produkt-, "
-"Hersteller-, Entwicklernamen hinein."
+"richtig geschrieben worden. Nenne hier den richtigen Produkt-, Hersteller-, "
+"Entwicklernamen."
 
 #: models.py:1983
 msgid "Proper name"
@@ -2457,7 +2454,6 @@ msgstr ""
 "auf der Artikel Seite."
 
 #: models.py:2000
-#, fuzzy
 msgid "Tagline"
 msgstr "Untertitel"
 
@@ -2475,7 +2471,6 @@ msgstr ""
 "#10\">Formatierungen</a> verwenden."
 
 #: models.py:2035
-#, fuzzy
 msgid "Commercial gear items"
 msgstr "gewerbliche Artikel"
 
@@ -2705,7 +2700,6 @@ msgid "minutes"
 msgstr "Minuten"
 
 #: views.py:1938 views.py:3612 templatetags/tags.py:100
-#, fuzzy
 msgid "seconds ago"
 msgstr "vor wenigen Sekunden"
 
@@ -3332,7 +3326,7 @@ msgstr "Wie kann ich meine Kommentare formatieren?"
 
 #: templates/faq.html:21 templates/faq.html.py:130
 msgid "What is the correct way to vote images?"
-msgstr ""
+msgstr "Wie kann ich ein Bild bewerten?"
 
 #: templates/faq.html:24
 msgid "... and their answers!"
@@ -3589,21 +3583,22 @@ msgstr "Format umgehen"
 msgid ""
 "You can vote each image from 1 to 5 stars, and they are defined like this:"
 msgstr ""
+"Du kannst für jedes Bild 1 bis 5 Sterne vergeben. Sie sind wie folgt "
+"definiert:"
 
 #: templates/faq.html:137 templates/image/detail.html:1357
 msgid "It's a start, but it needs better data."
-msgstr ""
+msgstr "Es ist ein Anfang, aber benötigt noch mehr Daten."
 
 #: templates/faq.html:144 templates/image/detail.html:1358
 msgid "It looks good, but it needs better processing."
-msgstr ""
+msgstr "Sieht gut aus, benötigt aber bessere Verarbeitung."
 
 #: templates/faq.html:152 templates/image/detail.html:1359
 msgid "Good data, good processing."
-msgstr ""
+msgstr "Gute Daten, gute Verarbeitung."
 
 #: templates/faq.html:161 templates/image/detail.html:1360
-#, fuzzy
 msgid "Great result!"
 msgstr "Großartiges Ergebnis!"
 
@@ -4281,7 +4276,7 @@ msgstr "weiter"
 
 #: templates/profile-edit-menu.html:7
 msgid "Basic"
-msgstr ""
+msgstr "Grundlegend"
 
 #: templates/profile-edit-menu.html:11
 msgid "Commercial"
@@ -4501,7 +4496,7 @@ msgstr "Profilbild"
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:9
 msgid "Edit commercial product"
-msgstr ""
+msgstr "Ändere das Produkt"
 
 #: templates/commercial/products/edit.html:14
 #: templates/commercial/products/retailed/edit.html:14
@@ -4534,19 +4529,18 @@ msgstr "Speichern"
 
 #: templates/commercial/products/edit.html:15
 #: templates/commercial/products/retailed/edit.html:15
-#, fuzzy
 msgid "Return to list"
-msgstr "Zurück zum Bild"
+msgstr "Zurück zur Liste"
 
 #: templates/commercial/products/edit.html:16
 #: templates/commercial/products/retailed/edit.html:16
 msgid "View in new window"
-msgstr ""
+msgstr "In neuem Fenster anzeigen"
 
 #: templates/commercial/products/retailed/edit.html:7
 #: templates/commercial/products/retailed/edit.html:9
 msgid "Edit retailed product"
-msgstr ""
+msgstr "Produkt editieren"
 
 #: templates/contact_form/contact.html:10
 msgid ""
@@ -4781,16 +4775,15 @@ msgstr "Eigentümer"
 
 #: templates/gear/page.html:86
 msgid "Buy it here"
-msgstr ""
+msgstr "Hier kaufen"
 
 #: templates/gear/page.html:138
 msgid "Other images"
 msgstr "Weitere Bilder"
 
 #: templates/gear/page.html:157
-#, fuzzy
 msgid "Producer's description"
-msgstr "Beschreibung"
+msgstr "Beschreibung des Herstellers"
 
 #: templates/gear/page.html:172 templates/subject/page.html:89
 msgid "Some images"
@@ -5047,7 +5040,6 @@ msgstr "und %(number)s mehr (klicken um anzuzeigen)."
 
 # Kann auch was anderes heißen!
 #: templates/image/detail.html:410
-#, fuzzy
 msgid "(hide these subjects)"
 msgstr "(Betreff ausblenden)"
 
@@ -5112,9 +5104,8 @@ msgid "Original"
 msgstr "Original"
 
 #: templates/image/detail.html:717 templates/image/detail.html.py:882
-#, fuzzy
 msgid "Remove from favorites"
-msgstr "Nie als Favorit markiert"
+msgstr "Als Favorit löschen"
 
 #: templates/image/detail.html:717 templates/image/detail.html.py:885
 msgid "Mark as favorite"
@@ -5122,7 +5113,7 @@ msgstr "Als Favorit markieren"
 
 #: templates/image/detail.html:775
 msgid "Made possible by"
-msgstr ""
+msgstr "Möglich gemacht durch"
 
 #: templates/image/detail.html:812
 msgid "Sharing mode"
@@ -5154,7 +5145,6 @@ msgstr "Bildgröße"
 
 # Zu Prüfen
 #: templates/image/detail.html:831
-#, fuzzy
 msgid "Regular"
 msgstr "Durchschnittlich"
 
@@ -5223,9 +5213,8 @@ msgstr "%(username)s eine Nachricht senden"
 #: templates/image/detail.html:1349 templates/image/detail.html.py:1350
 #: templates/image/detail.html:1351 templates/image/detail.html.py:1352
 #: templates/image/detail.html:1353
-#, fuzzy
 msgid "You have already voted."
-msgstr "Du hast dieses Bild bereits nominiert"
+msgstr "Du hast bereits bewertet."
 
 #: templates/image/detail.html:1368
 msgid ""
@@ -5742,6 +5731,8 @@ msgid ""
 "your search using the <strong>Search type</strong> field in the "
 "<strong>Basic criteria</strong> box."
 msgstr ""
+"Diese Suche hat mehrere Ergebnisse geliefert. Du kannst die Suche mit dem "
+"<strong>Suchtyp</strong> anpassen."
 
 #: templates/inclusion_tags/search_image_list.html:40
 #: templates/inclusion_tags/search_image_list.html:91
@@ -5753,10 +5744,12 @@ msgid ""
 "If you searched for a gear item, the following users own one, or have imaged "
 "with one."
 msgstr ""
+"Du hast nach einem Teil der Ausrüstung gesucht, die folgenden Nutzer "
+"besitzen dieses oder haben ein Bild damit aufgenommen."
 
 #: templates/inclusion_tags/search_image_list.html:101
 msgid "Date joined"
-msgstr ""
+msgstr "Mitglied seit"
 
 # einmal: auch einst. Bei Ziffern: x-mal, nicht x mal.
 #: templates/inclusion_tags/search_image_list.html:139
@@ -5856,7 +5849,6 @@ msgid "Sending..."
 msgstr "Sende ..."
 
 #: templates/messages/view.html:84
-#, fuzzy
 msgid "Error. Try again!"
 msgstr "Fehler. Nochmals versuchen!"
 
@@ -6961,29 +6953,30 @@ msgstr ""
 # plots in welchem Zusammenhang?
 #: templates/user/profile/commercial/products.html:7
 #: templates/user/profile/commercial/products.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's commercial products"
-msgstr "%(user)ss Statistik"
+msgstr "%(user)ss Produkte"
 
 #: templates/user/profile/commercial/products.html:13
 msgid "Your commercial products"
-msgstr ""
+msgstr "Deine gewerblichen Produkte"
 
 #: templates/user/profile/commercial/products.html:21
 msgid ""
 "Please remember that you are only allowed to claim items that you really "
 "produce and/or retail."
 msgstr ""
+"Bitte beachte, dass es nur erlaubt ist, Produkte zu beantragen, die du "
+"wirklich produzierst oder verkaufst."
 
 #: templates/user/profile/commercial/products.html:30
 msgid "As producer"
-msgstr ""
+msgstr "Als Produzent"
 
 #: templates/user/profile/commercial/products.html:35
 #: templates/user/profile/commercial/products.html:117
-#, fuzzy
 msgid "Gear IDs"
-msgstr "Verwendete Ausrüstung"
+msgstr "Ausrüstungs IDs"
 
 #: templates/user/profile/commercial/products.html:80
 #: templates/user/profile/commercial/products.html:162
@@ -6992,37 +6985,37 @@ msgstr "Verwendete Ausrüstung"
 #: templates/user/profile/commercial/products.html:454
 #: templates/user/profile/commercial/products.html:781
 msgid "Merge"
-msgstr ""
+msgstr "Zusammenfügen"
 
 #: templates/user/profile/commercial/products.html:93
 msgid "You haven't claimed any commercial products yet."
-msgstr ""
+msgstr "Du hast noch kein Produkt hinzu gefügt."
 
 #: templates/user/profile/commercial/products.html:95
 #, python-format
 msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr ""
+msgstr "%(user)s hat noch keine gewerblichen Produkte hinzu gefügt."
 
 #: templates/user/profile/commercial/products.html:112
 msgid "As retailer"
-msgstr ""
+msgstr "Als Verkäufer"
 
 #: templates/user/profile/commercial/products.html:175
 msgid "You haven't claimed any retailed products yet."
-msgstr ""
+msgstr "Du hast noch keine gewerblichen Produkt hinzu gefügt."
 
 #: templates/user/profile/commercial/products.html:177
 #, python-format
 msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr ""
+msgstr "%(user)s hat noch keine Produkte zum Verkauf beantragt."
 
 #: templates/user/profile/commercial/products.html:193
 msgid "Claim as producer"
-msgstr ""
+msgstr "Als Hersteller beantragen"
 
 #: templates/user/profile/commercial/products.html:199
 msgid "Claim as retailer"
-msgstr ""
+msgstr "Als Verkäufer beantragen"
 
 #: templates/user/profile/commercial/products.html:210
 msgid "Claim commercial product"
@@ -7038,11 +7031,11 @@ msgstr "Beantragen"
 #: templates/user/profile/commercial/products.html:227
 #: templates/user/profile/commercial/products.html:301
 msgid "Select items to remove"
-msgstr ""
+msgstr "Zum Entfernen markieren"
 
 #: templates/user/profile/commercial/products.html:231
 msgid "Be careful if you try to remove all of these!"
-msgstr ""
+msgstr "Sei vorsichtig, wenn du versuchst dies alles zu entfernen!"
 
 #: templates/user/profile/commercial/products.html:232
 #: templates/user/profile/commercial/products.html:270
@@ -7050,12 +7043,13 @@ msgid ""
 "All the properties, including the commercial description, of this claim will "
 "be deleted and cannot be recovered!"
 msgstr ""
+"Alle Eigenschaften, incl. der Beschreibungen, dieses Produktes wird gelöscht "
+"und kann nicht wieder hergestellt werden."
 
 #: templates/user/profile/commercial/products.html:249
 #: templates/user/profile/commercial/products.html:319
-#, fuzzy
 msgid "Select the product you want to merge to"
-msgstr "Klicke die Bilder an, die Du importieren möchtest"
+msgstr "Markiere die Produkte, die zu zusammenfügen möchtest"
 
 #: templates/user/profile/commercial/products.html:267
 #: templates/user/profile/commercial/products.html:271
@@ -7066,10 +7060,9 @@ msgstr "Bist du sicher?"
 
 #: templates/user/profile/commercial/products.html:284
 msgid "Claim retailed product"
-msgstr ""
+msgstr "Beantrage ein gewerbliches Produkt"
 
 #: templates/user/profile/commercial/products.html:340
-#, fuzzy
 msgid ""
 "All the properties of this claim will be deleted and cannot be recovered!"
 msgstr ""
@@ -7088,7 +7081,6 @@ msgstr "Deine grundlegenden Informationen bearbeiten"
 
 #: templates/user/profile/edit/commercial.html:6
 #: templates/user/profile/edit/commercial.html:11
-#, fuzzy
 msgid "Edit your commercial information"
 msgstr "Deine gewerblichen Informationen bearbeiten"
 
