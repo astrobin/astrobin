@@ -426,7 +426,7 @@ class AdvancedSearchForm(SearchForm):
                 image_sqs = image_sqs.load_all()
                 gear_sqs = gear_sqs.load_all()
         else:
-            sqs = super(AdvancedSearchForm, self).search()
+            sqs = super(AdvancedSearchForm, self).search().models(User, Image, Gear)
             user_sqs = super(AdvancedSearchForm, self).search().models(User)
             image_sqs = super(AdvancedSearchForm, self).search().models(Image)
             gear_sqs = super(AdvancedSearchForm, self).search().models(Gear)
@@ -434,45 +434,73 @@ class AdvancedSearchForm(SearchForm):
         # This section deals with properties common to all the search indexes.
         if self.cleaned_data['start_date']:
             sqs = sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
+            user_sqs = user_sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
+            image_sqs = image_sqs.filter(last_acquisition_date__gte=self.cleaned_data['start_date'])
 
         if self.cleaned_data['end_date']:
             sqs = sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
+            user_sqs = user_sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
+            image_sqs = image_sqs.filter(first_acquisition_date__lte=self.cleaned_data['end_date'])
 
         if self.cleaned_data['telescope_type'] and 'any' not in self.cleaned_data['telescope_type']:
             filters = reduce(operator.or_, [SQ(**{'telescope_types': x}) for x in self.cleaned_data['telescope_type']])
             sqs = sqs.filter(filters)
+            user_sqs = user_sqs.filter(filters)
+            image_sqs = image_sqs.filter(filters)
         elif not self.cleaned_data['telescope_type']:
             sqs = EmptySearchQuerySet()
+            user_sqs = EmptySearchQuerySet()
+            image_sqs = EmptySearchQuerySet()
 
         if self.cleaned_data['camera_type'] and 'any' not in self.cleaned_data['camera_type']:
             filters = reduce(operator.or_, [SQ(**{'camera_types': x}) for x in self.cleaned_data['camera_type']])
             sqs = sqs.filter(filters)
+            user_sqs = user_sqs.filter(filters)
+            image_sqs = image_sqs.filter(filters)
         elif not self.cleaned_data['camera_type']:
             sqs = EmptySearchQuerySet()
+            user_sqs = EmptySearchQuerySet()
+            image_sqs = EmptySearchQuerySet()
 
         if self.cleaned_data['aperture_min'] is not None:
             sqs = sqs.filter(min_aperture__gte = self.cleaned_data['aperture_min'])
+            user_sqs = user_sqs.filter(min_aperture__gte = self.cleaned_data['aperture_min'])
+            image_sqs = image_sqs.filter(min_aperture__gte = self.cleaned_data['aperture_min'])
 
         if self.cleaned_data['aperture_max'] is not None:
             sqs = sqs.filter(max_aperture__lte = self.cleaned_data['aperture_max'])
+            user_sqs = user_sqs.filter(max_aperture__lte = self.cleaned_data['aperture_max'])
+            image_sqs = image_sqs.filter(max_aperture__lte = self.cleaned_data['aperture_max'])
 
         if self.cleaned_data['pixel_size_min'] is not None:
             sqs = sqs.filter(min_pixel_size__gte = self.cleaned_data['pixel_size_min'])
+            user_sqs = user_sqs.filter(min_pixel_size__gte = self.cleaned_data['pixel_size_min'])
+            image_sqs = image_sqs.filter(min_pixel_size__gte = self.cleaned_data['pixel_size_min'])
 
         if self.cleaned_data['pixel_size_max'] is not None:
             sqs = sqs.filter(max_pixel_size__lte = self.cleaned_data['pixel_size_max'])
+            user_sqs = user_sqs.filter(max_pixel_size__lte = self.cleaned_data['pixel_size_max'])
+            image_sqs = image_sqs.filter(max_pixel_size__lte = self.cleaned_data['pixel_size_max'])
 
         if self.cleaned_data['integration_min']:
             sqs = sqs.filter(integration__gte=int(self.cleaned_data['integration_min'] * 3600))
+            user_sqs = user_sqs.filter(integration__gte=int(self.cleaned_data['integration_min'] * 3600))
+            image_sqs = image_sqs.filter(integration__gte=int(self.cleaned_data['integration_min'] * 3600))
 
         if self.cleaned_data['integration_max']:
             sqs = sqs.filter(integration__lte=int(self.cleaned_data['integration_max'] * 3600))
+            user_sqs = user_sqs.filter(integration__lte=int(self.cleaned_data['integration_max'] * 3600))
+            image_sqs = image_sqs.filter(integration__lte=int(self.cleaned_data['integration_max'] * 3600))
 
         if self.cleaned_data['moon_phase_min']:
             sqs = sqs.filter(moon_phase__gte=self.cleaned_data['moon_phase_min'])
+            user_sqs = user_sqs.filter(moon_phase__gte=self.cleaned_data['moon_phase_min'])
+            image_sqs = image_sqs.filter(moon_phase__gte=self.cleaned_data['moon_phase_min'])
 
         if self.cleaned_data['moon_phase_max']:
             sqs = sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
+            user_sqs = user_sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
+            image_sqs = image_sqs.filter(moon_phase__lte=self.cleaned_data['moon_phase_max'])
 
         # This section deals with properties of the Image search index:
         if self.cleaned_data['solar_system_main_subject']:
