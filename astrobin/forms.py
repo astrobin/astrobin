@@ -416,12 +416,20 @@ class AdvancedSearchForm(SearchForm):
         self.cleaned_data['q'] = q
 
         if self.cleaned_data['q'] == '':
-            return EmptySearchQuerySet()
-
-        sqs = super(AdvancedSearchForm, self).search().models(User, Image, Gear)
-        user_sqs = super(AdvancedSearchForm, self).search().models(User)
-        image_sqs = super(AdvancedSearchForm, self).search().models(Image)
-        gear_sqs = super(AdvancedSearchForm, self).search().models(Gear)
+            sqs = SearchQuerySet().all()
+            user_sqs = SearchQuerySet().all()
+            image_sqs = SearchQuerySet().all()
+            gear_sqs = SearchQuerySet().all()
+            if self.load_all:
+                sqs = sqs.load_all()
+                user_sqs = user_sqs.load_all()
+                image_sqs = image_sqs.load_all()
+                gear_sqs = gear_sqs.load_all()
+        else:
+            sqs = super(AdvancedSearchForm, self).search().models(User, Image, Gear)
+            user_sqs = super(AdvancedSearchForm, self).search().models(User)
+            image_sqs = super(AdvancedSearchForm, self).search().models(Image)
+            gear_sqs = super(AdvancedSearchForm, self).search().models(Gear)
 
         # This section deals with properties common to all the search indexes.
         if self.cleaned_data['start_date']:
