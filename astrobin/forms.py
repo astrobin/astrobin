@@ -416,10 +416,10 @@ class AdvancedSearchForm(SearchForm):
         self.cleaned_data['q'] = q
 
         if self.cleaned_data['q'] == '':
-            sqs = SearchQuerySet().all()
-            user_sqs = SearchQuerySet().all()
-            image_sqs = SearchQuerySet().all()
-            gear_sqs = SearchQuerySet().all()
+            sqs = SearchQuerySet().models(User, Image, Gear).all()
+            user_sqs = SearchQuerySet().models(User).all()
+            image_sqs = SearchQuerySet().models(Image).all()
+            gear_sqs = SearchQuerySet().models(Gear).all()
             if self.load_all:
                 sqs = sqs.load_all()
                 user_sqs = user_sqs.load_all()
@@ -519,9 +519,12 @@ class AdvancedSearchForm(SearchForm):
         # This section deals with properties of the Gear search index.
         # TODO
 
-        from itertools import chain
-        ids = [x.id for x in list(chain(sqs, user_sqs, image_sqs, gear_sqs))]
-        sqs = SearchQuerySet().filter(id__in = ids).order_by('model_weight')
+        if q == '':
+            sqs = SearchQuerySet().models(Image, User, Gear).all()
+        else:
+            from itertools import chain
+            ids = [x.id for x in list(chain(sqs, user_sqs, image_sqs, gear_sqs))]
+            sqs = SearchQuerySet().filter(id__in = ids).order_by('model_weight')
 
         search_type = self.cleaned_data['search_type']
         if search_type == '1':
