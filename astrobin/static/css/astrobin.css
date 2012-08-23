@@ -843,6 +843,17 @@ body.full {
 .dropdown-menu .active > a:hover {
   background-color: #CC4B2E;
 }
+.nav li.disabled {
+  pointer-events: none;
+}
+.nav li.disabled a {
+  color: #ccc;
+}
+.nav li.disabled > a:hover {
+  cursor: default;
+  text-decoration: none;
+  background-color: inherit;
+}
 .astrobin-container {
   position: relative;
   padding: 34px 30px 30px 30px;
