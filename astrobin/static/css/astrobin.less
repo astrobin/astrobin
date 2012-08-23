@@ -1017,6 +1017,21 @@ body.full {
     background-color: #CC4B2E;
 }
 
+// Won't be needed anymore in bootstrap 2.1.0
+// https://github.com/twitter/bootstrap/issues/2764
+.nav li.disabled {
+  pointer-events: none;
+
+  a {
+    color: #ccc;
+  }
+}
+.nav li.disabled > a:hover {
+  cursor: default;
+  text-decoration: none;
+  background-color: inherit;
+} 
+
 .astrobin-container {
     position: relative;
     padding: 34px 30px 30px 30px;
