@@ -701,7 +701,7 @@ def image_detail(request, id, r):
                 dsa_data['frames'][key]['filter'] = a.filter if a.filter else ''
                 dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso else ''
                 dsa_data['frames'][key]['sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling else ''
-                dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else 'bin 1x1'
+                dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else ''
                 dsa_data['frames'][key]['integration'] = '%sx%s"' % (current_number + a.number, a.duration)
 
                 dsa_data['integration'] += (a.duration * a.number / 3600.0)
