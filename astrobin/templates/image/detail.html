@@ -75,7 +75,7 @@
                             {% trans "Change license" %}
                         </a>
                     </li>
-                    <li>
+                    <li{% if not image.is_stored %} class="disabled"{% endif %}>
                         <a class="upload-revision" href="#">
                             <i class="icon-upload-alt"></i>
                             {% trans "Upload new revision" %}
