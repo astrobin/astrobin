@@ -9,7 +9,7 @@ TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = DEBUG
 
 ADMINS = (
-    ('Salvatore Iovene', 'salvatore@iovene.com'),
+    ('Salvatore Iovene at AstroBin', 'astrobin@astrobin.com'),
 )
 
 MANAGERS = ADMINS
