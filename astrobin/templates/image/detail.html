@@ -464,7 +464,7 @@
                                                                 <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}{% search_form_query %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
                                                             {% endfor %}
                                                         {% else %}
-                                                            {{data.1|linebreaksbr}}
+                                                            {{data.1|safe|linebreaksbr}}
                                                         {% endif %}
                                                     </p>
                                                 {% endif %}

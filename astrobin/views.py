@@ -41,6 +41,8 @@ import flickrapi
 import urllib2
 from datetime import datetime, date, timedelta
 import operator
+import re
+import unicodedata
 
 from models import *
 from forms import *
@@ -655,7 +657,7 @@ def image_detail(request, id, r):
 
         dsa_data = {
             'dates': [],
-            'frames': [],
+            'frames': {},
             'integration': 0,
             'darks': [],
             'flats': [],
@@ -674,25 +676,39 @@ def image_detail(request, id, r):
                 moon_illuminated_list.append(m.illuminated * 100.0)
 
             if a.number and a.duration:
-                f = ""
+                key = ""
                 if a.filter:
-                    f = "%s " % a.filter.get_name()
-                    if a.is_synthetic:
-                        f += "(S) "
-                f += '%sx%s"' % (a.number, a.duration)
+                    key = "filter(%s)" % a.filter.get_name()
                 if a.iso:
-                    f += ' @ ISO%s' % a.iso 
+                    key += '-ISO(%d)' % a.iso 
                 if a.sensor_cooling:
-                    f += ' @ %s\'C' % a.sensor_cooling
+                    key += '-temp(%d)' % a.sensor_cooling
                 if a.binning:
-                    f+= ' bin %dx%d' % (a.binning, a.binning)
+                    key += '-bin(%d)' % a.binning
+                key += '-duration(%d)' % a.duration
 
-                dsa_data['frames'].append(f)
+                try:
+                    current_frames = dsa_data['frames'][key]['integration']
+                except KeyError:
+                    current_frames = '0x0"'
+
+                integration_re = re.match(r'^(\d+)x(\d+)"$', current_frames)
+                current_number = int(integration_re.group(1))
+                current_duration = int(integration_re.group(2))
+
+                dsa_data['frames'][key] = {}
+                dsa_data['frames'][key]['filter_url'] = a.filter.get_absolute_url() if a.filter else '#'
+                dsa_data['frames'][key]['filter'] = a.filter if a.filter else ''
+                dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso else ''
+                dsa_data['frames'][key]['sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling else ''
+                dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else 'bin 1x1'
+                dsa_data['frames'][key]['integration'] = '%sx%s"' % (current_number + a.number, a.duration)
+
                 dsa_data['integration'] += (a.duration * a.number / 3600.0)
 
             for i in ['darks', 'flats', 'flat_darks', 'bias']:
                 if a.filter and getattr(a, i):
-                    dsa_data[i].append("%s: %s" % (a.filter.get_name(), getattr(a, i)))
+                    dsa_data[i].append("%d" % getattr(a, i))
                 elif getattr(a, i):
                     dsa_data[i].append(getattr(a, i))
 
@@ -713,16 +729,23 @@ def image_detail(request, id, r):
                 return 0
             return float(sum(values)) / len(values)
 
+        frames_list = sorted(dsa_data['frames'].items())
+
         deep_sky_data = (
             (_('Resolution'), '%dx%d' % (image.w, image.h) if (image.w and image.h) else None),
             (_('Dates'), dsa_data['dates']),
             (_('Locations'), u', '.join([x.name for x in image.locations.all()])),
-            (_('Frames'), ('\n' if len(dsa_data['frames']) > 1 else '') + u'\n'.join(dsa_data['frames'])),
+            (_('Frames'),
+                ('\n' if len(frames_list) > 1 else '') +
+                u'\n'.join("%s %s" % (
+                    '<a href="\"%s\">%s</a>:' % (f[1]['filter_url'][0], f[1]['filter']) if f[1]['filter'] else '',
+                    "%s %s %s %s" % (f[1]['integration'], f[1]['iso'], f[1]['sensor_cooling'], f[1]['binning']),
+                ) for f in frames_list)),
             (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
-            (_('Darks') , ('\n' if len(dsa_data['darks']) > 1 else '') + u'\n'.join([smart_unicode(x) for x in dsa_data['darks']])),
-            (_('Flats'), ('\n' if len(dsa_data['flats']) > 1 else '') + u'\n'.join([smart_unicode(x) for x in dsa_data['flats']])),
-            (_('Flat darks'), ('\n' if len(dsa_data['flat_darks']) > 1 else '') + u'\n'.join([smart_unicode(x) for x in dsa_data['flat_darks']])),
-            (_('Bias'), ('\n' if len(dsa_data['bias']) > 1 else '') + u'\n'.join([smart_unicode(x) for x in dsa_data['bias']])),
+            (_('Darks'), '~%d' % (reduce(lambda x, y: x + y, dsa_data['darks']) / len(dsa_data['darks'])) if dsa_data['darks'] else 0),
+            (_('Flats'), '~%d' % (reduce(lambda x, y: x + y, dsa_data['flats']) / len(dsa_data['flats'])) if dsa_data['flats'] else 0),
+            (_('Flat darks'), '~%d' % (reduce(lambda x, y: x + y, dsa_data['flat_darks']) / len(dsa_data['flat_darks'])) if dsa_data['flat_darks'] else 0),
+            (_('Bias'), '~%d' % (reduce(lambda x, y: x + y, dsa_data['bias']) / len(dsa_data['bias'])) if dsa_data['bias'] else 0),
             (_('Avg. Moon age'), ("%.2f " % (average(moon_age_list), ) + _("days")) if moon_age_list else None),
             (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list), ) if moon_illuminated_list else None),
             (_('Bortle Dark-Sky Scale'), "%.2f" % (average([float(x) for x in dsa_data['bortle']])) if dsa_data['bortle'] else None),
