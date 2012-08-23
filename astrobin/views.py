@@ -738,7 +738,7 @@ def image_detail(request, id, r):
             (_('Frames'),
                 ('\n' if len(frames_list) > 1 else '') +
                 u'\n'.join("%s %s" % (
-                    '<a href="\"%s\">%s</a>:' % (f[1]['filter_url'][0], f[1]['filter']) if f[1]['filter'] else '',
+                    "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
                     "%s %s %s %s" % (f[1]['integration'], f[1]['iso'], f[1]['sensor_cooling'], f[1]['binning']),
                 ) for f in frames_list)),
             (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
