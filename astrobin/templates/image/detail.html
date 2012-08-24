@@ -444,11 +444,6 @@
                                                 </p>
                                             {% endif %}
                                         {% endfor %}
-                                        {% if is_ready and not image.animated %}
-                                            <div class="image-histogram">
-                                                <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
-                                            </div>
-                                        {% endif %}
                                     </div>
                                 </div> <!-- gear -->
     
@@ -769,6 +764,13 @@
                     </tr>
                 </table>
             </div>
+
+            {% if is_ready and not image.animated %}
+                <div class="subtle-container">
+                    <div class="header"><h4><i class="icon-bar-chart"></i> {% trans "Histogram" %}</h4></div>
+                    <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
+                </div>
+            {% endif %}
 
             {% if gear_list_has_commercial and gear_list_has_paid_commercial %}
                 <div class="subtle-container">
