@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-20 12:09+0000\n"
-"PO-Revision-Date: 2012-08-25 05:21+0100\n"
+"PO-Revision-Date: 2012-08-25 17:18+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt-BR\n"
@@ -1047,7 +1047,7 @@ msgstr "Locais"
 #: forms.py:107
 msgid "Please enter either some subjects or a main solar system subject."
 msgstr ""
-"Por favor, indique alguns assuntos ou um assunto principal do sistema solar."
+"Por favor, informe alguns objetos ou um objeto principal do sistema solar."
 
 #: forms.py:120
 msgid "Opacity"
@@ -1070,7 +1070,7 @@ msgstr ""
 
 #: forms.py:161 forms.py:395 models.py:836
 msgid "Imaging telescopes or lenses"
-msgstr "Telescópios ou lentes de imagem"
+msgstr "Telescópios ou lentes utilizados"
 
 #: forms.py:162 models.py:837
 msgid "Guiding telescopes or lenses"
@@ -1082,7 +1082,7 @@ msgstr "Montagem"
 
 #: forms.py:164 forms.py:396 models.py:839
 msgid "Imaging cameras"
-msgstr "Câmeras de captura"
+msgstr "Câmeras utilizadas na captura"
 
 #: forms.py:165 models.py:840
 msgid "Guiding cameras"
@@ -1213,7 +1213,7 @@ msgstr ""
 
 #: forms.py:394 models.py:724
 msgid "Main solar system subject"
-msgstr "Assunto principal do sistema solar"
+msgstr "Principais objetos do sistema solar"
 
 #: forms.py:397
 msgid "Min. telescope aperture"
@@ -1338,11 +1338,11 @@ msgstr "Corpo"
 
 #: locale_extras.py:7
 msgid "uploaded a new revision of"
-msgstr "adicionada nova revisão de"
+msgstr "enviou uma nova versão de"
 
 #: locale_extras.py:8
 msgid "commented on image"
-msgstr "comentado na imagem"
+msgstr "comentou a imagem"
 
 #: locale_extras.py:9
 msgid "commented on gear item"
@@ -2776,11 +2776,11 @@ msgstr "Sua imagem está pronta"
 
 #: management/__init__.py:57
 msgid "Your image was plate-solved"
-msgstr "Identificação bem sucedida de objetos na sua imagem"
+msgstr "Sucesso na identificação de objetos da sua imagem"
 
 #: management/__init__.py:63
 msgid "Your image could not be plate-solved"
-msgstr "Identificação mal sucedida de objetos na sua imagem"
+msgstr "Falha na identificação de objetos da sua imagem"
 
 #: management/__init__.py:69
 msgid "Your request was fulfilled"
@@ -2933,7 +2933,7 @@ msgstr "Explorar"
 
 #: templates/base.html:99 templates/most_popular.html:6
 msgid "Popular subjects"
-msgstr "Tópicos populares"
+msgstr "Objetos populares"
 
 #: templates/base.html:106 templates/explore_choose.html:8
 #: templates/wall.html:5 templates/wall.html.py:162
@@ -3089,7 +3089,7 @@ msgstr "Pedidos"
 
 #: templates/base.html:465
 msgid "Have an invite? Login!"
-msgstr "Recebeu um convite? Registre-se!"
+msgstr "Recebeu um convite? Autentique-se!"
 
 #: templates/base.html:467 templates/registration/activation_complete.html:6
 msgid "Login"
@@ -3413,13 +3413,13 @@ msgid ""
 "appear on your profile or AstroBin's home page."
 msgstr ""
 "No AstroBin, você pode enviar suas imagens para dois lugares. A Área de "
-"Testes é onde você envia as imagens que você quer compartilhar rapidamente "
-"em fóruns, listas de e-mails e redes sociais. Chegaram ao fim os dias de "
-"redimensionar e compactar suas imagens, obedecendo aos limites dos fóruns, "
-"para só então receber feedback e críticas. Simplesmente envie o arquivo para "
-"a Área de Testes do AstroBin e compartilhe o link com quem você quiser. A "
-"imagem será visível apenas nos lugares que você desejar, sem aparecer no seu "
-"perfil ou na página inicial do AstroBin."
+"Testes é para onde você envia as imagens que você quer compartilhar "
+"rapidamente em fóruns, listas de e-mails e redes sociais. Chegaram ao fim os "
+"dias de redimensionar e compactar suas imagens, obedecendo aos limites dos "
+"fóruns, para só então receber feedback e críticas. Simplesmente envie o "
+"arquivo para a Área de Testes do AstroBin e compartilhe o link com quem você "
+"quiser. A imagem será visível apenas nos lugares que você desejar, sem "
+"aparecer no seu perfil ou na página inicial do AstroBin."
 
 #: templates/faq.html:75
 msgid ""
@@ -3447,7 +3447,7 @@ msgid ""
 msgstr ""
 "Imagens na <a href=\"%(messier_url)s\">página da Maratona Messier</a> são "
 "escolhidas em um processo democrático de indicações. Se você ver uma imagem "
-"de algum objeto do catálogo Messier e achar que ela deva aparecer na página "
+"de algum objeto do catálogo Messier e achar que ela deve aparecer na página "
 "da Maratona Messier, faça a indicação usando o menu <strong>Ações</strong>. "
 "A imagem com a maior quantidade de indicações para um determinado objeto, "
 "será automaticamente selecionada."
@@ -4524,7 +4524,8 @@ msgid ""
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
 "Por favor, entre em contato se precisar de ajuda, quiser reportar um "
-"problema, enviar comentários e sugestões ou se simplesmente dizer alô!"
+"problema, enviar comentários e sugestões ou se quiser simplesmente dizer "
+"alô!"
 
 #: templates/contact_form/contact.html:16 templates/image/detail.html:1325
 #: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
@@ -5121,7 +5122,7 @@ msgstr "Médio"
 
 #: templates/image/detail.html:832
 msgid "Full"
-msgstr "Inteiro"
+msgstr "Total"
 
 #: templates/image/detail.html:836
 msgid "Copy this"
@@ -5558,8 +5559,8 @@ msgid ""
 "<strong>Note</strong>: if you didn't upload a full resolution image, the "
 "pixel scale will be wrong!"
 msgstr ""
-"<strong>Nota</strong>: se você não enviar uma imagem com resolução total, a "
-"escala de pixels estará errada!"
+"<strong>Atenção</strong>: se você não enviar uma imagem com resolução total, "
+"a escala de pixels estará errada!"
 
 #: templates/image/edit/watermark.html:6
 msgid "Apply a watermark to image"
@@ -5585,7 +5586,7 @@ msgstr ""
 
 #: templates/image/edit/watermark.html:14
 msgid "Please note: animated GIFs cannot be watermarked at this time."
-msgstr "Nota: no momento, GIFs animados não podem receber marcas d'água."
+msgstr "Atenção: no momento, GIFs animados não podem receber marcas d'água."
 
 #: templates/image/edit/watermark.html:22
 msgid "Next step: basic information"
@@ -7099,8 +7100,8 @@ msgid ""
 "You can set a default type of license for everything you upload into "
 "AstroBin. Change your default here."
 msgstr ""
-"Você pode definir a licença padrão para tudo o que você enviar para o "
-"AstroBin. Mude este padrão aqui."
+"Você pode definir a licença padrão para tudo o que você enviar ao AstroBin. "
+"Mude este padrão aqui."
 
 #: templates/user/profile/edit/locations.html:6
 #: templates/user/profile/edit/locations.html:9
