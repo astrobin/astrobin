@@ -24,11 +24,6 @@
             <h3>{% trans "Edit gear item" %}</h3>
         </div>
         <div class="modal-body">
-            <div class="well">
-                <strong>{% trans "Please note!" %}</strong>
-                {% blocktrans %}When you add or edit the make, the name, and the properties of this product, the data is global and shared between all AstroBin users. Do not write any information in there that refers to your personal copy of this product, like "modded", "sold", "broken", "a present from my aunt" and so on. {% endblocktrans %}
-            </div>
-
             <form class="form-horizontal global" action="{% url save_gear_details %}" method="post">
                 <div class="form-content"></div>
                 <input type="hidden" name="gear_id" value="" />
@@ -60,6 +55,11 @@
             <h3>{% trans "Add gear item" %}</h3>
         </div>
         <div class="modal-body">
+            <div class="well">
+                <strong>{% trans "Please note!" %}</strong>
+                {% blocktrans %}When you add or edit the make, the name, and the properties of this product, the data is global and shared between all AstroBin users. Do not write any information in there that refers to your personal copy of this product, like "modded", "sold", "broken", "a present from my aunt" and so on. {% endblocktrans %}
+            </div>
+
             <form class="form-horizontal" action="{% url save_gear_details %}" method="post">
                 <div class="form-content"></div>
                 <div class="form-actions">
@@ -272,7 +272,6 @@
                         timeout: 10000,
                         cache: false,
                         success: function(data, textStatus, XMLHttpRequest) {
-                            console.log(data.makes);
                             var typeahead = $make.typeahead();
                             typeahead.data('typeahead').source = data.makes;
                         }
