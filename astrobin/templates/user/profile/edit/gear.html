@@ -272,7 +272,6 @@
                         timeout: 10000,
                         cache: false,
                         success: function(data, textStatus, XMLHttpRequest) {
-                            console.log(data.makes);
                             var typeahead = $make.typeahead();
                             typeahead.data('typeahead').source = data.makes;
                         }
