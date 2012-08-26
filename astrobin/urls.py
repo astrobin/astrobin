@@ -222,7 +222,7 @@ urlpatterns = patterns('',
     url(r'^affiliates/$', views.affiliates, name='affiliates'),
     url(r'^tos/', views.tos, name='tos'),
     url(r'^guidelines/', views.guidelines, name='guidelines'),
-    url(r'^language/set/(?P<lang>\w+)/$', views.set_language, name='set_language'),
+    url(r'^language/set/(?P<lang>[\w-]+)/$', views.set_language, name='set_language'),
 
     url(r'^blog/', include('zinnia.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
