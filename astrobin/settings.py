@@ -58,6 +58,7 @@ LANGUAGES = (
     ('tr', gettext('Turkish')),
     ('sq', gettext('Albanian')),
     ('pl', gettext('Polish')),
+    ('pt-BR', gettext('Brazilian Portuguese')),
 )
 MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 
