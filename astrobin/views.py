@@ -3424,8 +3424,7 @@ def save_gear_details(request):
             simplejson.dumps(response_dict),
             mimetype = 'application/javascript')
 
-    if created:
-        form.save()
+    form.save()
 
     profile = UserProfile.objects.get(user = request.user)
     user_gear = getattr(profile, user_gear_lookup[gear_type])
