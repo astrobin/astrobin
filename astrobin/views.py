@@ -4606,7 +4606,7 @@ def retailed_products_edit(request, id):
 def comments(request):
     return object_list(
         request, 
-        queryset = Comment.objects.all().filter(is_deleted = False).order_by('-added'),
+        queryset = Comment.objects.all().filter(is_deleted = False, image__is_wip = False).order_by('-added'),
         template_name = 'comments.html',
         template_object_name = 'comment',
         paginate_by = 100,

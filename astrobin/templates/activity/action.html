@@ -1,4 +1,6 @@
 {% load i18n avatar_tags %}
+
+{% if action.target_content_type.name != 'image' or not action.target.is_wip %}
 <div class="action">
     {% if action.actor.get_absolute_url %}
         <div class="avatar">
@@ -29,4 +31,4 @@
         {{action.timestamp|timesince}} {% trans "ago" %}
     </div>
 </div>
-
+{% endif %}
