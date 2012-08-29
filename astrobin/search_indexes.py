@@ -23,18 +23,6 @@ from django.db.models import Q
 from hitcount.models import HitCount
 
 
-def xapian_escape(s):
-    return ''.join(ch for ch in s if ch not in set(string.punctuation))
-
-
-def _join_stripped(a):
-    escaped = []
-    for i in a:
-        x = xapian_escape(''.join(i.split()))
-        escaped.append(x)
-    return a + escaped 
-
-
 def _get_integration(image):
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
@@ -54,54 +42,6 @@ def _get_integration(image):
 
     return integration
 
-
-def _prepare_subjects(obj):
-    # TODO: prepare also idlist
-    subjects = []
-    for s in obj.subjects.all():
-        name = s.mainId
-        mindreader = ""
-        match = re.match(r'^m\s?(?P<id>\d+.*)', name.lower())
-        if match:
-            mindreader = 'Messier %s' % match.group('id')
-        else:
-            match = re.match(r'^messier\s?(?P<id>\d+.*)', name.lower())
-            if match:
-                mindreader = 'M %s' % match.group('id')
-
-        subjects.append(name)
-        if mindreader != "":
-            subjects.append(mindreader)
-
-    return _join_stripped(subjects)
-
-
-def _prepare_imaging_telescopes(obj):
-    return _join_stripped(["%s" % gear_name(i) for i in obj.imaging_telescopes.all()])
-
-def _prepare_guiding_telescopes(obj):
-    return _join_stripped(["%s" % gear_name(i) for i in obj.guiding_telescopes.all()])
-
-def _prepare_imaging_cameras(obj):
-    return _join_stripped(["%s" % gear_name(i) for i in obj.imaging_cameras.all()])
-
-def _prepare_mounts(obj):
-    return _join_stripped(["%s" % gear_name(i) for i in obj.mounts.all()])
-
-def _prepare_guiding_cameras(obj):
-    return _join_stripped(["%s" % gear_name(i) for i in obj.guiding_cameras.all()])
-
-def _prepare_focal_reducers(obj):
-    return _join_stripped(["%s" % gear_name(i) for i in obj.focal_reducers.all()])
-
-def _prepare_software(obj):
-    return _join_stripped(["%s" % gear_name(i) for i in obj.software.all()])
-
-def _prepare_filters(obj):
-    return _join_stripped(["%s" % gear_name(i) for i in obj.filters.all()])
-
-def _prepare_accessories(obj):
-    return _join_stripped(["%s" % gear_name(i) for i in obj.accessories.all()])
 
 def _prepare_rating(obj):
     votes = obj.rating.votes
@@ -221,8 +161,6 @@ class GearIndex(SearchIndex):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
-    make = CharField(model_attr='make', null=True)
-    name = CharField(model_attr='name')
 
     images = IntegerField()
 
@@ -233,7 +171,7 @@ class GearIndex(SearchIndex):
     votes = IntegerField()
 
     # Total integration of images taken with this item.
-    integration = IntegerField()
+    integration = FloatField()
 
     # Total views on images taken with this item.
     views = IntegerField()
@@ -322,33 +260,21 @@ class GearIndex(SearchIndex):
         producers = CommercialGear.objects\
             .filter(gear = obj)\
             .exclude(Q(producer__userprofile__company_name = None) | Q(producer__userprofile__company_name = ""))
-        return _join_stripped(["%s" % x.producer.userprofile_set.all()[0].company_name for x in producers])
+        return ["%s" % x.producer.userprofile_set.all()[0].company_name for x in producers]
 
     def prepare_retailers(self, obj):
         retailers = RetailedGear.objects\
             .filter(gear = obj)\
             .exclude(Q(retailer__userprofile__company_name = None) | Q(retailer__userprofile__company_name = ""))
-        return _join_stripped(["%s" % x.retailer.userprofile_set.all()[0].company_name for x in retailers])
+        return ["%s" % x.retailer.userprofile_set.all()[0].company_name for x in retailers]
 
 
 class UserIndex(SearchIndex):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
-    username = CharField(model_attr='username')
     images = IntegerField()
-    avg_integration = IntegerField()
-
-    # All the gear used in this user's images.
-    imaging_telescopes = MultiValueField()
-    guiding_telescopes = MultiValueField()
-    mounts = MultiValueField()
-    imaging_cameras = MultiValueField()
-    guiding_cameras = MultiValueField()
-    focal_reducers = MultiValueField()
-    software = MultiValueField()
-    filters = MultiValueField()
-    accessories = MultiValueField()
+    avg_integration = FloatField()
 
     # Average rating of all user's images.
     rating = FloatField()
@@ -357,7 +283,7 @@ class UserIndex(SearchIndex):
     votes = IntegerField()
 
     # Total user ingegration.
-    integration = IntegerField()
+    integration = FloatField()
 
     # Average moon phase under which this user has operated.
     moon_phase = FloatField()
@@ -411,59 +337,6 @@ class UserIndex(SearchIndex):
 
         return (integration / 3600.0) / images if images else 0
 
-    def prepare_imaging_telescopes(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_imaging_telescopes(i)
-        return unique_items(l)
-
-    def prepare_guiding_telescopes(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_guiding_telescopes(i)
-        return unique_items(l)
-
-    def prepare_mounts(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_mounts(i)
-        return unique_items(l)
-
-    def prepare_imaging_cameras(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_imaging_cameras(i)
-        return unique_items(l)
-
-    def prepare_guiding_cameras(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_guiding_cameras(i)
-        return unique_items(l)
- 
-    def prepare_focal_reducers(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_focal_reducers(i)
-        return unique_items(l)
-
-    def prepare_software(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_software(i)
-        return unique_items(l)
- 
-    def prepare_filters(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_filters(i)
-        return unique_items(l)
-
-    def prepare_accessories(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_accessories(i)
-        return unique_items(l)
  
     def prepare_rating(self, obj):
         l = []
@@ -578,25 +451,11 @@ class ImageIndex(SearchIndex):
 
     text = CharField(document=True, use_template=True)
 
-    title = CharField(model_attr='title')
-    description = CharField(model_attr='description')
     uploaded = DateTimeField(model_attr='uploaded')
-
-    username = CharField()
-    subjects = MultiValueField()
-    imaging_telescopes = MultiValueField()
-    guiding_telescopes = MultiValueField()
-    mounts = MultiValueField()
-    imaging_cameras = MultiValueField()
-    guiding_cameras = MultiValueField()
-    focal_reducers = MultiValueField()
-    software = MultiValueField()
-    filters = MultiValueField()
-    accessories = MultiValueField()
 
     rating = FloatField()
     votes = IntegerField()
-    integration = IntegerField()
+    integration = FloatField()
     moon_phase = FloatField()
     first_acquisition_date = DateTimeField()
     last_acquisition_date = DateTimeField()
@@ -641,52 +500,6 @@ class ImageIndex(SearchIndex):
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
         return 300;
-
-    def prepare_title(self, obj):
-        value = obj.title
-
-        match = re.match(r'.*\s+m\s*(?P<id>\d+).*', obj.title.lower())
-        if match:
-            value += ' Messier %s Messier%s' % (match.group('id'), match.group('id'))
-
-        match = re.match(r'.*\s+messier\s*(?P<id>\d+).*', obj.title.lower())
-        if match:
-            value += ' M %s M%s' % (match.group('id'), match.group('id'))
-
-        return value + ' ' + ''.join(value.split())
-
-    def prepare_username(self, obj):
-        return str(obj.user.username)
-
-    def prepare_subjects(self, obj):
-        return _prepare_subjects(obj)
-
-    def prepare_imaging_telescopes(self, obj):
-        return _prepare_imaging_telescopes(obj)
-
-    def prepare_guiding_telescopes(self, obj):
-        return _prepare_guiding_telescopes(obj)
-
-    def prepare_mounts(self, obj):
-        return _prepare_mounts(obj)
-
-    def prepare_imaging_cameras(self, obj):
-        return _prepare_imaging_cameras(obj)
-
-    def prepare_guiding_cameras(self, obj):
-        return _prepare_guiding_cameras(obj)
-
-    def prepare_focal_reducers(self, obj):
-        return _prepare_focal_reducers(obj)
-
-    def prepare_software(self, obj):
-        return _prepare_software(obj)
-
-    def prepare_filters(self, obj):
-        return _prepare_filters(obj)
-
-    def prepare_accessories(self, obj):
-        return _prepare_accessories(obj)
 
     def prepare_rating(self, obj):
         return _prepare_rating(obj)

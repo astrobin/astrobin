@@ -18,7 +18,7 @@
 		{% if gear.focal_length %}<p><strong>{% trans "Focal length" %}</strong>: {{gear.focal_length}} mm</p>{% endif %}
 
 		<div class="actions">
-		    <a class="btn btn-mini btn-primary" href="/search/?q=&amp;as_values_imaging_telescopes={{gear.id}}{% search_form_query %}">{% trans "Find images" %}</a>
+		    <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name gear %}{% search_form_query %}">{% trans "Find images" %}</a>
 		    {% if is_authenticated %}
 		        {% if follows %}
 		            <a class="btn btn-mini btn-primary unfollow-gear" data-gear="{{gear.id}}" href="{% url unfollow_gear gear.id %}">{% trans "Unfollow" %}</a>

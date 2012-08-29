@@ -376,9 +376,9 @@ def search_image_list(context, request, object_list, paginate = True):
         has_next = page_obj.has_next
         has_previous = page_obj.has_previous
 
-    user_list  = [x for x in object_list if x.django_ct == 'auth.user']
-    gear_list  = [x for x in object_list if x.django_ct == 'astrobin.gear']
-    image_list = [x for x in object_list if x.django_ct == 'astrobin.image']
+    user_list  = [x for x in object_list if x.verbose_name == 'User']
+    gear_list  = [x for x in object_list if x.verbose_name == 'Gear']
+    image_list = [x for x in object_list if x.verbose_name == 'Image']
 
     multiple = 0
     if len(user_list) > 0:

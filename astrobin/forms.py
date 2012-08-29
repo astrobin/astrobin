@@ -10,8 +10,6 @@ from haystack.query import SQ
 from models import *
 from utils import affiliate_limit, retailer_affiliate_limit
 
-from search_indexes import xapian_escape
-
 import string
 import unicodedata
 import operator
@@ -412,9 +410,6 @@ class AdvancedSearchForm(SearchForm):
         if not self.is_valid():
             return EmptySearchQuerySet()
 
-        q = xapian_escape(self.cleaned_data['q']).replace(' ', '')
-        self.cleaned_data['q'] = q
-
         if self.cleaned_data['q'] == '':
             sqs = SearchQuerySet().models(User, Image, Gear).all()
             user_sqs = SearchQuerySet().models(User).all()
@@ -519,12 +514,10 @@ class AdvancedSearchForm(SearchForm):
         # This section deals with properties of the Gear search index.
         # TODO
 
-        if q == '':
+        if self.cleaned_data['q'] == '':
             sqs = SearchQuerySet().models(Image, User, Gear).all()
         else:
-            from itertools import chain
-            ids = [x.id for x in list(chain(sqs, user_sqs, image_sqs, gear_sqs))]
-            sqs = SearchQuerySet().filter(id__in = ids).order_by('model_weight')
+            sqs = sqs | user_sqs | image_sqs | gear_sqs
 
         search_type = self.cleaned_data['search_type']
         if search_type == '1':

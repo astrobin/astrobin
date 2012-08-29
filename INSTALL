@@ -94,7 +94,8 @@ ln -s ./venv/bin/pip vpip
     cssmin \
     django-tastypie \
     django-activity-stream \
-    django-modeltranslation
+    django-modeltranslation \
+    pysolr
 
 Install django-hitcount from sources:
 https://github.com/thornomad/django-hitcount/
@@ -112,10 +113,6 @@ https://github.com/thornomad/django-hitcount/
 # for the notifications system
 
 cd submodules
-
-cd xapian-haystack
-../../venv/bin/python setup.py install
-cd ..
 
 cd django-persistent-messages
 ../../venv/bin/python setup.py install
@@ -154,16 +151,6 @@ cd ../..
 # for the moon phase module
 . ./venv/bin/activate
 easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
-
-# Set up Xapian:
-# ==============
-
-cd xapian-core-1.2.6
-./configure --prefix=/opt && make && sudo make install
-cd ../xapian-bindings-1.2.6
-XAPIAN_CONFIG=/opt/bin/xapian-config ./configure --prefix=/home/astrobin/Code/astrobin/venv/lib/python2.7/site-packages && make && sudo make install
-deactivate
-cd ..
 
 
 # Set up MySQL:
@@ -219,6 +206,19 @@ sudo update-rc.d nginx defaults
 sudo rabbitmqctl add_user astrobin h3C_U77a
 sudo rabbitmqctl add_vhost astrobin
 sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
+
+
+# Configure Solr:
+# ===============
+
+sudo mkdir /opt/solr
+cd /opt/solr
+sudo curl -O http://www.nic.funet.fi/pub/mirrors/apache.org/lucene/solr/3.6.1/apache-solr-3.6.1.tgz
+sudo tar xvfz apache-solr-3.6.1.tgz
+
+./manage.py build_solr_schema > solr_schema.xml
+sudo mv solr_schema.xml /opt/solr/apache-solr-3.6.1/example/solr/conf/schema.xml
+
 
 
 # Build astrometry.net:

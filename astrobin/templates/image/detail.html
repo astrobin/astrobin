@@ -385,14 +385,14 @@
                                 <a href="/search/?q=&amp;ssms={{solar_system_main_subject_id}}{% search_form_query %}">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
                             {% endif %}
                             {% for s in subjects_short %}
-                                <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId|escape|cut:" "}}{% search_form_query %}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                                <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId}}{% search_form_query %}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                             {% endfor %}
                             {% if subjects_all|length > subjects_limit %}
                                 <span id="more-subjects">
                                     <span class="reminder">
                                         ,&nbsp;
                                         {% for s in subjects_reminder %}
-                                            <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId|escape|cut:" "}}{% search_form_query %}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                                            <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId}}{% search_form_query %}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
                                         {% endfor %}
                                     </span>
                                     <span class="more">

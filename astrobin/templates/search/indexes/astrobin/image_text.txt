@@ -1,2 +1,43 @@
+{{object.user.username}}
 {{object.title}}
+{{object.description}}
 
+{% for i in object.subjects.all %}
+	{{i}}
+{% endfor %}
+
+{% for i in object.imaging_telescopes.all %}
+	{{i}}
+{% endfor %}
+
+{% for i in object.imaging_cameras.all %}
+	{{i}}
+{% endfor %}
+
+{% for i in object.guiding_telescopes.all %}
+	{{i}}
+{% endfor %}
+
+{% for i in object.guiding_cameras.all %}
+	{{i}}
+{% endfor %}
+
+{% for i in object.mounts.all %}
+	{{i}}
+{% endfor %}
+
+{% for i in object.filters.all %}
+	{{i}}
+{% endfor %}
+
+{% for i in object.focal_reducers.all %}
+	{{i}}
+{% endfor %}
+
+{% for i in object.software.all %}
+	{{i}}
+{% endfor %}
+
+{% for i in object.accessories.all %}
+	{{i}}
+{% endfor %}

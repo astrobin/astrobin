@@ -5,7 +5,6 @@ from django.shortcuts import render_to_response
 from django.conf import settings
 from django.utils.translation import ugettext as _
 
-from search_indexes import xapian_escape
 from views import jsonDump, valueReader
 from models import Telescope, Camera
 from templatetags.tags import gear_name
@@ -19,8 +18,6 @@ class SearchView(SearchView):
 
     def get_results(self):
         q = self.request.GET.get('q')
-        if q:
-            q = xapian_escape(q).replace(' ', '')
         try:
             q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore')
         except:
@@ -36,32 +33,6 @@ class SearchView(SearchView):
         search_type = self.request.GET.get('type')
         if search_type:
             sqs = sqs.filter(**{search_type: q})
-
-        for tag, klass in {'imaging_telescopes': Telescope,
-                           'imaging_cameras': Camera}.iteritems():
-            ids, value = valueReader(self.request.GET, tag)
-            ks = []
-            k = None
-            for id in ids:
-                try:
-                    id = int(id)
-                    k = klass.objects.get(id=id)
-                except ValueError:
-                    k = klass.objects.filter(name=id)
-                    if k:
-                        k = k[0]
-                except klass.DoesNotExist:
-                    pass
-
-                if k:
-                    ks.append(k)
-                else:
-                    # Nothing found? We can abort and return empty queryset.
-                    return SearchQuerySet().none()
-
-            if ks:
-                filters = reduce(operator.or_, [SQ(**{tag: xapian_escape(gear_name(k)).replace(' ', '')}) for k in ks])
-                sqs = sqs.filter(filters).exclude(**{tag: None})
 
         if 'sort' in self.request.GET:
             order_by = self.request.GET['sort']
@@ -81,37 +52,12 @@ class SearchView(SearchView):
             _("Matching items:"),
         ]
 
-        # Prepare prefills
-        prefills = {}
-        for tag, klass in {'imaging_telescopes': Telescope,
-                           'imaging_cameras': Camera}.iteritems():
-            ids, value = valueReader(self.request.GET, tag)
-            prefills[tag] = []
-            k = None
-            for id in ids:
-                try:
-                    id = int(id)
-                    k = klass.objects.get(id=id)
-                except ValueError:
-                    k = klass.objects.filter(name=id)
-                    if k:
-                        k = k[0]
-                except klass.DoesNotExist:
-                    pass
-
-                if k:
-                    prefills[tag].append(k)
-
         context = {
             'query': self.query,
             'form': self.form,
             'page': page,
             'paginator': paginator,
             'suggestion': None,
-            'prefill_dict': {
-                'imaging_telescopes': [jsonDump(prefills['imaging_telescopes'])] + strings,
-                'imaging_cameras': [jsonDump(prefills['imaging_cameras'])] + strings,
-             }
         }
         
         if getattr(settings, 'HAYSTACK_INCLUDE_SPELLING', False):
