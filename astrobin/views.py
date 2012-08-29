@@ -152,7 +152,9 @@ def index(request):
         'small_size': settings.SMALL_THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
         'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
-        'global_actions': Action.objects.all()[:16],
+        'global_actions': Action.objects.exclude(
+            target_content_type = Image,
+            actions_with_astrobin_image_as_target__is_wip = True)[:16],
         'registration_form': RegistrationForm(),
     }
 
