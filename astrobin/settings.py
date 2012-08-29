@@ -9,7 +9,7 @@ TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = DEBUG
 
 ADMINS = (
-    ('Salvatore Iovene', 'salvatore@iovene.com'),
+    ('Salvatore Iovene at AstroBin', 'astrobin@astrobin.com'),
 )
 
 MANAGERS = ADMINS
@@ -58,6 +58,7 @@ LANGUAGES = (
     ('tr', gettext('Turkish')),
     ('sq', gettext('Albanian')),
     ('pl', gettext('Polish')),
+    ('pt-BR', gettext('Brazilian Portuguese')),
 )
 MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 
