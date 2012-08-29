@@ -51,7 +51,6 @@ from notifications import *
 from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from shortcuts import *
 from tasks import *
-from search_indexes import xapian_escape
 from image_utils import make_image_of_the_day
 from gear import *
 from utils import *
@@ -593,28 +592,6 @@ def image_detail(request, id, r):
     score = image.rating.score
     rating = float(score)/votes if votes > 0 else 0
 
-    related = None
-    related_images = None
-    if 'related' in request.GET:
-        related = request.GET['related']
-    else:
-        related = 'rel_user'
-
-    related_images = SearchQuerySet().models(Image)
-    if related == 'rel_user':
-        related_images = related_images.filter(username__exact=image.user.username)
-    elif related == 'rel_subject':
-        subjects = [xapian_escape(s.mainId) for s in image.subjects.all()]
-        related_images = related_images.filter(SQ(subjects__in=subjects))
-    elif related == 'rel_imaging_telescope':
-        telescopes = [xapian_escape(t.get_name()) for t in image.imaging_telescopes.all()]
-        related_images = related_images.filter(SQ(imaging_telescopes__in=telescopes))
-    elif related == 'rel_imaging_camera':
-        cameras = [xapian_escape(c.get_name()) for c in image.imaging_cameras.all()]
-        related_images = related_images.filter(SQ(imaging_cameras__in=cameras))
-
-    related_images = related_images.exclude(django_id=id).order_by('-uploaded')
-
     gear_list = (
         ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
         ('Imaging cameras'   , image.imaging_cameras.all(), 'imaging_cameras'),
@@ -812,8 +789,6 @@ def image_detail(request, id, r):
                      'already_voted': already_voted,
                      'current_rating': "%.2f" % rating,
                      'votes_number': votes,
-                     'related': related,
-                     'related_images': related_images,
                      'gear_list': gear_list,
                      'gear_list_has_commercial': gear_list_has_commercial,
                      'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
@@ -3038,10 +3013,10 @@ def leaderboard(request):
     response_dict = {}
 
     sqs = SearchQuerySet()
-    sort = '-user_integration'
+    sort = '-integration'
     if 'sort' in request.GET:
         sort = request.GET.get('sort')
-        if sort == 'tot_integration':
+        if sort == 'integration':
             sort = '-integration'
         elif sort == 'avg_integration':
             sort = '-avg_integration'

@@ -119,25 +119,6 @@
                     </p>
                     {% endwith %}
 
-
-                    {% with form.imaging_telescopes as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-    
-                    {% with form.imaging_cameras as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-    
                     {% with form.aperture_min as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -335,24 +316,6 @@
               "{% trans "&mu;m" %}:",
               ""
         );
-
-
-        {% autoescape off %}
-        {% for key, value in prefill_dict.items %}
-        var startText = '{{value.1}}';
-        var emptyText = '{{value.2}}';
-        var resultsTitleText = '{{value.3}}';
-        $('#id_{{key}}').autoSuggest('/autocomplete/{{key}}/',
-            {asHtmlID: '{{key}}',
-            selectedItemProp: 'id',
-            searchObjProps: 'name',
-            preFill: {{value.0}},
-            selectedValuesProp: 'name',
-            startText: startText,
-            emptyText: emptyText,
-            resultsTitleText: resultsTitleText});
-        {% endfor %}
-        {% endautoescape %}
 
         var $controls = $('.search-category .header .control');
         if (!astrobin_common.utils.checkParameterExists('q')) {
