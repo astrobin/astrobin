@@ -42,9 +42,9 @@
                             <td>{{page_obj.start_index|add:forloop.counter0}}</td>
                             <td>
                                 <a rel="popover" class="user-popover"
-                                   data-load="{% url user_popover_ajax u.username %}"
-                                   href="{% url user_page u.username %}">
-                                    {{u.username}}
+                                   data-load="{% url user_popover_ajax u.object.username %}"
+                                   href="{% url user_page u.object.username %}">
+                                    {{u.object.username}}
                                 </a>
                             </td>
                             <td>{{u.integration|floatformat}}</a></td>
