@@ -5,20 +5,22 @@
 
 {% block title %}AstroBin - {% trans "Set your default image license" %}{% endblock %}
 {% block content %}
-    {% include 'profile-edit-menu.html' %}
-    <h1>{% trans "Set your default image license" %}</h1>
+    <div class="row">
+        {% include 'profile-edit-menu.html' %}
+        <div class="span9">
+            <div class="well">
+                {% blocktrans %}You can associate a Creative Commons license with your content if you wish, to grant people the right to use your work under certain circumstances. For more information on what your options are, please visit the <a target="_blank" href="http://www.creativecommons.org/">Creative Commons website</a>.{% endblocktrans %}
+                <br/>
+                {% blocktrans %}You can set a default type of license for everything you upload into AstroBin. Change your default here.{% endblocktrans %}
+            </div>
 
-    <div class="well">
-        {% blocktrans %}You can associate a Creative Commons license with your content if you wish, to grant people the right to use your work under certain circumstances. For more information on what your options are, please visit the <a target="_blank" href="http://www.creativecommons.org/">Creative Commons website</a>.{% endblocktrans %}
-        <br/>
-        {% blocktrans %}You can set a default type of license for everything you upload into AstroBin. Change your default here.{% endblocktrans %}
-    </div>
-
-    <form class="form-horizontal"  method="post" action="{% url profile_save_license %}">{% csrf_token %}
-        {{form|as_bootstrap}}
-        <div class="form-actions">
-            <input class="btn btn-primary" type="submit" value="{% trans "Save" %}" />
+            <form class="form-horizontal"  method="post" action="{% url profile_save_license %}">{% csrf_token %}
+                {{form|as_bootstrap}}
+                <div class="form-actions">
+                    <input class="btn btn-primary" type="submit" value="{% trans "Save" %}" />
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 {% endblock %}
 

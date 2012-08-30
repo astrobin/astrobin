@@ -4,41 +4,42 @@
 {% load bootstrap_toolkit %}
 
 {% block content %}
+<div class="row">
     {% include 'profile-edit-menu.html' %}
+    <div class="span9">
+        <div class="row">
+            {% if not avatars %}
+                <div class="span9">
+                    <div class="alert alert-warning">
+                        {% trans "You do not yet have an avatar. Please upload one now." %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="span2">
+                    <div class="well"><strong>{% trans "Current avatar" %}</strong></div>
+                    {% avatar user %}
+                </div>
+            {% endif %}
 
-    <h1>{% trans "Change your avatar" %}</h1>
+            {% if avatars %}
+                <div class="span3">
+                    <div class="well"><strong>{% trans "Previously uploaded" %}</strong></div>
+                    <form method="POST" action="{% url avatar_change %}" class="avatar-change">
+                        {{primary_avatar_form|as_bootstrap}}
+                        <input class="btn btn-primary" type="submit" value="{% trans "Choose new default" %}" />
+                    </form>
+                </div>
+            {% endif %}
 
-    <div class="row">
-
-    {% if not avatars %}
-        <div class="span12">
-            <div class="alert alert-warning">
-                {% trans "You do not yet have an avatar. Please upload one now." %}
+                <div class="span4">
+                    <div class="well"><strong>{% trans "Upload a new image" %}</div>
+                    <form enctype="multipart/form-data" method="POST" action="{% url avatar_add %}" class="form-inline">
+                        <input type="file" name="avatar" value="{% trans "Avatar image" %}" />
+                        <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                    </form>
+                </div>
             </div>
         </div>
-    {% else %}
-        <div class="span3">
-            <div class="well"><strong>{% trans "Current avatar" %}</strong></div>
-            {% avatar user %}
-        </div>
-    {% endif %}
-
-    {% if avatars %}
-        <div class="span3">
-            <div class="well"><strong>{% trans "Previously uploaded" %}</strong></div>
-            <form method="POST" action="{% url avatar_change %}" class="avatar-change">
-                {{primary_avatar_form|as_bootstrap}}
-                <input class="btn btn-primary" type="submit" value="{% trans "Choose new default" %}" />
-            </form>
-        </div>
-    {% endif %}
-
-        <div class="span6">
-            <div class="well"><strong>{% trans "Upload a new image" %}</div>
-            <form enctype="multipart/form-data" method="POST" action="{% url avatar_add %}" class="form-inline">
-                <input type="file" name="avatar" value="{% trans "Avatar image" %}" />
-                <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
-            </form>
-        </div>
     </div>
+</div>
 {% endblock %}

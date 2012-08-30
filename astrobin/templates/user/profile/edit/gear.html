@@ -5,15 +5,13 @@
 
 {% block title %}AstroBin - {% trans "Edit your astrophotography gear" %}{% endblock %}
 {% block content %}
-    {% include 'profile-edit-menu.html' %}
     <div class="row">
-        <div class="span12">
-            <h1>{% trans "Edit your astrophotography gear" %}</h1>
-
+        {% include 'profile-edit-menu.html' %}
+        <div class="span9">
             {% for label, gear_items in prefill.items %}
                 {% list_gear label gear_items.0 gear_items.1 request.user %}
             {% endfor %}
-        </div> <!-- span12 -->
+        </div> <!-- span9 -->
     </div> <!-- row -->
 {% endblock %}
 
