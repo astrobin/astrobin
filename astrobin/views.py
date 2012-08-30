@@ -1690,7 +1690,7 @@ def user_page(request, username):
                 k_dict[l]['message'] = _("To fill in the missing dates, use the <strong>Edit acquisition details</strong> entry in the <strong>Actions</strong> menu for each image.")
                 k_list.append(k_dict)
                 for i in sqs.filter(
-                    Q(subject_type__lt = 500) &
+                    (Q(subject_type__lt = 500) | Q(subject_type = 600)) &
                     (Q(acquisition = None) | Q(acquisition__date = None))).distinct():
                     k_dict[l]['images'].append(i)
                
