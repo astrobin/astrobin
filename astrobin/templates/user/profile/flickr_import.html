@@ -2,43 +2,45 @@
 {% load i18n %}
 
 {% block content %}
-    {% include 'profile-edit-menu.html' %}
-
-    <h1>{% trans "Import your photos from Flickr" %}</h1>
-
-    <div class="well">
-        {% blocktrans %}Please note: when importing from Flickr, automatic watermarking of the images it not supported.{% endblocktrans %}
-    </div>
-    <div class="js">
-        <form class="form-horizontal" name="flickr_form" action="">{% csrf_token %}
-            {% if flickr_sets %}
-            <p id="flickr_sets">
-                <label for="id_flickr_sets">{% trans "Which set" %}:</label>
-                <select id="id_flickr_sets">
-                {% for title, id in flickr_sets.items %}
-                    <option value="{{id}}">{{title}}</option>
-                {% endfor %}
-                </select>
-            </p>
-            <p id="flickr_photos" class="hidden"></p>
-            <p id="flickr_progress" class="hidden"></p>
-            <p id="flickr_progress_message" class="hidden"></p>
-            {% endif %}
-
-            <div class="form-actions">
-                {% if flickr_sets %}
-                <input class="btn btn-primary" type="submit" value="{% trans "Import photos" %} &rarr;"/>
-                {% else %}
-                <input class="btn btn-primary" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
-                {% endif %}
+    <div class="row">
+        {% include 'profile-edit-menu.html' %}
+        <div class="span9">
+            <div class="well">
+                {% blocktrans %}Please note: when importing from Flickr, automatic watermarking of the images it not supported.{% endblocktrans %}
             </div>
-        </form>
+            <div class="js">
+                <form class="form-horizontal" name="flickr_form" action="">{% csrf_token %}
+                    {% if flickr_sets %}
+                    <p id="flickr_sets">
+                        <label for="id_flickr_sets">{% trans "Which set" %}:</label>
+                        <select id="id_flickr_sets">
+                        {% for title, id in flickr_sets.items %}
+                            <option value="{{id}}">{{title}}</option>
+                        {% endfor %}
+                        </select>
+                    </p>
+                    <p id="flickr_photos" class="hidden"></p>
+                    <p id="flickr_progress" class="hidden"></p>
+                    <p id="flickr_progress_message" class="hidden"></p>
+                    {% endif %}
+
+                    <div class="form-actions">
+                        {% if flickr_sets %}
+                        <input class="btn btn-primary" type="submit" value="{% trans "Import photos" %} &rarr;"/>
+                        {% else %}
+                        <input class="btn btn-primary" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            <noscript>
+                <p>
+                    {% blocktrans %}Unfortunately you need to enable Javascript to be able to import photos from Flickr at this time.{% endblocktrans %}
+                </p>
+            </noscript>
+        </div>
     </div>
-    <noscript>
-        <p>
-            {% blocktrans %}Unfortunately you need to enable Javascript to be able to import photos from Flickr at this time.{% endblocktrans %}
-        </p>
-    </noscript>
+
 {% endblock %}
 
 {% block extra_js %}

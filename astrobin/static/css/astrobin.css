@@ -676,6 +676,12 @@ body.full {
     max-height: inherit;
   }
 }
+.nav-pills .icon-chevron-right {
+  float: right;
+  margin-top: 1px;
+  margin-right: -6px;
+  opacity: 0.5;
+}
 .navbar-search {
   width: 120px;
 }
