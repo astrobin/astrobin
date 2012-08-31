@@ -22,10 +22,20 @@
             <h3>{% trans "Edit gear item" %}</h3>
         </div>
         <div class="modal-body">
+            <div class="alert alert-warning">
+                <button class="close" data-dismiss="alert">&times;</button>
+                <h4 class="alert-heading">{% trans "Please note!" %}</h4>
+                {% blocktrans %}When you add or edit the make, the name, and the properties of this product, the data is global and shared between all AstroBin users. Do not write any information in there that refers to your personal copy of this product, like "modded", "sold", "broken", "a present from my aunt" and so on. {% endblocktrans %}
+            </div>
+
             <form class="form-horizontal global" action="{% url save_gear_details %}" method="post">
-                <div class="form-content"></div>
+                <div class="form-content">
+                    <div class="loading">
+                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/>
+                    </div>
+                </div>
                 <input type="hidden" name="gear_id" value="" />
-                <div class="form-actions">
+                <div class="form-actions hidden">
                     <input type="submit" class="btn btn-primary" value="{% trans "Save" %}"/>
                     <input type="button" class="btn close-modal" value="{% trans "Close" %}"/>
                 </div>
@@ -36,9 +46,13 @@
             </div>
 
             <form class="form-horizontal custom" action="{% url save_gear_user_info %}" method="post">
-                <div class="form-content"></div>
+                <div class="form-content">
+                    <div class="loading">
+                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/>
+                    </div>
+                </div>
                 <input type="hidden" name="gear_id" value="" />
-                <div class="form-actions">
+                <div class="form-actions hidden">
                     <input type="submit" class="btn btn-primary" value="{% trans "Save" %}"/>
                     <input type="button" class="btn close-modal" value="{% trans "Close" %}"/>
                 </div>
@@ -60,8 +74,12 @@
             </div>
 
             <form class="form-horizontal" action="{% url save_gear_details %}" method="post">
-                <div class="form-content"></div>
-                <div class="form-actions">
+                <div class="form-content">
+                    <div class="loading">
+                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/>
+                    </div>
+                </div>
+                <div class="form-actions hidden">
                     <input type="submit" name="save" class="btn btn-primary" value="{% trans "Save" %}" />
                 </div>
             </form>
@@ -93,144 +111,159 @@
             });
         });
 
+        $('#add-gear-modal, #edit-gear-modal').on('hidden', function() {
+            $(this).find('.form-content').html('\
+                <div class="loading">\
+                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/>\
+                </div>'
+            );
+            $(this).find('.form-actions').addClass('hidden');
+        });
+
         $('.btn-gear .edit').live('click', function(event) {
             event.preventDefault();
 
             var $btn_gear = $(this).closest('.btn-gear');
             var id = $btn_gear.attr('id');
 
-            $.ajax({
-                url: '/get_edit_gear_form/' + id + '/',
-                dataType: 'json',
-                timeout: 10000,
-                cache: false,
-                success: function(data, textStatus, XMLHttpRequest) {
-                    var $dlg = $('#edit-gear-modal');
-                    var $form = $dlg.find('form.global');
+            setTimeout(function() {
+                $.ajax({
+                    url: '/get_edit_gear_form/' + id + '/',
+                    dataType: 'json',
+                    timeout: 10000,
+                    cache: false,
+                    success: function(data, textStatus, XMLHttpRequest) {
+                        var $dlg = $('#edit-gear-modal');
+                        var $form = $dlg.find('form.global');
 
-                    $form.find('.form-content').html(data['form']);
-                    $form.find('.btn-primary').removeClass('disabled');
-                    $form.find('.btn-primary').val("{% trans "Save" %}");
-                    $form.find('input[name=gear_id]').val(id);
+                        $form.find('.form-content').html(data['form']);
+                        $form.find('.btn-primary').removeClass('disabled');
+                        $form.find('.btn-primary').val("{% trans "Save" %}");
+                        $form.find('input[name=gear_id]').val(id);
+                        $form.find('.form-actions').removeClass('hidden');
 
-                    $form.find('input, select').bind('change keyup', function(event) {
-                        var $btn = $form.find('.btn-primary')
-                        $btn.removeClass('disabled');
-                        $btn.val("{% trans "Save" %}");
-                    });
-
-                    $form.find('.close-modal').click(function(event) {
-                        $dlg.modal('hide');
-                    });
-
-                    var ajaxFormOptions = {
-                        dataType: 'json',
-                        timeout: 10000,
-                        beforeSubmit: function(formData, $form, options) {
-                            var $btn = $form.find('.btn-primary')
-                            $btn.addClass('disabled');
-                            $btn.val("...");
-                        },
-                        success: function(responseJson, statusText, xhr, $form) {
+                        $form.find('input, select').bind('change keyup', function(event) {
                             var $btn = $form.find('.btn-primary')
                             $btn.removeClass('disabled');
+                            $btn.val("{% trans "Save" %}");
+                        });
 
-                            if (responseJson['success']) {
-                                $btn.val("{% trans "Form saved. Thank you!" %}");
+                        $form.find('.close-modal').click(function(event) {
+                            $dlg.modal('hide');
+                        });
 
-                                $btn_gear.find('.make').text($form.find('input[name=make]').val());
-                                $btn_gear.find('.name').text($form.find('input[name=name]').val());
+                        var ajaxFormOptions = {
+                            dataType: 'json',
+                            timeout: 10000,
+                            beforeSubmit: function(formData, $form, options) {
+                                var $btn = $form.find('.btn-primary')
+                                $btn.addClass('disabled');
+                                $btn.val("...");
+                            },
+                            success: function(responseJson, statusText, xhr, $form) {
+                                var $btn = $form.find('.btn-primary')
+                                $btn.removeClass('disabled');
 
-                                $.ajax({
-                                    url: '/get_is_gear_complete/' + id + '/',
-                                    dataType: 'json',
-                                    timeout: 10000,
-                                    cache: false,
-                                    success: function(data, textStatus, XMLHttpRequest) {
-                                        if (data['complete'])
-                                            $btn_gear.removeClass('incomplete');
-                                        else
-                                            $btn_gear.addClass('incomplete');
-                                    }
-                                });
-                            } else {
-                                $form.find('.form-content').html(responseJson['form']);
+                                if (responseJson['success']) {
+                                    $btn.val("{% trans "Form saved. Thank you!" %}");
+
+                                    $btn_gear.find('.make').text($form.find('input[name=make]').val());
+                                    $btn_gear.find('.name').text($form.find('input[name=name]').val());
+
+                                    $.ajax({
+                                        url: '/get_is_gear_complete/' + id + '/',
+                                        dataType: 'json',
+                                        timeout: 10000,
+                                        cache: false,
+                                        success: function(data, textStatus, XMLHttpRequest) {
+                                            if (data['complete'])
+                                                $btn_gear.removeClass('incomplete');
+                                            else
+                                                $btn_gear.addClass('incomplete');
+                                        }
+                                    });
+                                } else {
+                                    $form.find('.form-content').html(responseJson['form']);
+                                    $btn.removeClass('disabled');
+                                    $btn.val("{% trans "Save" %}");
+                                }
+
+                            },
+                            error: function(responseText, statusText, xhr, $form) {
+                                var $btn = $form.find('.btn-primary')
                                 $btn.removeClass('disabled');
                                 $btn.val("{% trans "Save" %}");
                             }
+                        };
 
-                        },
-                        error: function(responseText, statusText, xhr, $form) {
+                        $form.ajaxForm(ajaxFormOptions);
+                    },
+                    error: function(XmlHttpRequest, textStatus, errorThrown) {
+                        alert("Error: " + textStatus);
+                    }
+                });
+            }, 250);
+
+            setTimeout(function() {
+                $.ajax({
+                    url: '/get_gear_user_info_form/' + id + '/',
+                    dataType: 'json',
+                    timeout: 10000,
+                    cache: false,
+                    success: function(data, textStatus, XMLHttpRequest) {
+                        var $dlg = $('#edit-gear-modal');
+                        var $form = $dlg.find('form.custom');
+
+                        $form.find('.form-content').html(data['form']);
+                        $form.find('input[name=gear_id]').val(id);
+                        $form.find('.form-actions').removeClass('hidden');
+
+                        $form.find('input, select').bind('change keyup', function(event) {
                             var $btn = $form.find('.btn-primary')
                             $btn.removeClass('disabled');
                             $btn.val("{% trans "Save" %}");
-                        }
-                    };
+                        });
 
-                    $form.ajaxForm(ajaxFormOptions);
-                },
-                error: function(XmlHttpRequest, textStatus, errorThrown) {
-                    alert("Error: " + textStatus);
-                }
-            });
+                        $form.find('.close-modal').click(function(event) {
+                            $dlg.modal('hide');
+                        });
 
-            $.ajax({
-                url: '/get_gear_user_info_form/' + id + '/',
-                dataType: 'json',
-                timeout: 10000,
-                cache: false,
-                success: function(data, textStatus, XMLHttpRequest) {
-                    var $dlg = $('#edit-gear-modal');
-                    var $form = $dlg.find('form.custom');
+                        var ajaxFormOptions = {
+                            dataType: 'json',
+                            timeout: 10000,
+                            cache: false,
+                            beforeSubmit: function(formData, $form, options) {
+                                var $btn = $form.find('.btn-primary')
+                                $btn.addClass('disabled');
+                                $btn.val("...");
+                            },
+                            success: function(responseJson, statusText, xhr, $form) {
+                                var $btn = $form.find('.btn-primary')
+                                $btn.removeClass('disabled');
+                                $btn.val("{% trans "Form saved. Thank you!" %}");
 
-                    $form.find('.form-content').html(data['form']);
-                    $form.find('input[name=gear_id]').val(id);
-
-                    $form.find('input, select').bind('change keyup', function(event) {
-                        var $btn = $form.find('.btn-primary')
-                        $btn.removeClass('disabled');
-                        $btn.val("{% trans "Save" %}");
-                    });
-
-                    $form.find('.close-modal').click(function(event) {
-                        $dlg.modal('hide');
-                    });
-
-                    var ajaxFormOptions = {
-                        dataType: 'json',
-                        timeout: 10000,
-                        cache: false,
-                        beforeSubmit: function(formData, $form, options) {
-                            var $btn = $form.find('.btn-primary')
-                            $btn.addClass('disabled');
-                            $btn.val("...");
-                        },
-                        success: function(responseJson, statusText, xhr, $form) {
-                            var $btn = $form.find('.btn-primary')
-                            $btn.removeClass('disabled');
-                            $btn.val("{% trans "Form saved. Thank you!" %}");
-
-                            if (responseJson['success']) {
-                                var alias = $form.find('input[name=alias]').val();
-                                if (alias != '')
-                                    $btn_gear.find('.alias').text('(' + alias + ')');
-                            } else {
-                                $form.find('.form-content').html(responseJson['form']);
+                                if (responseJson['success']) {
+                                    var alias = $form.find('input[name=alias]').val();
+                                    if (alias != '')
+                                        $btn_gear.find('.alias').text('(' + alias + ')');
+                                } else {
+                                    $form.find('.form-content').html(responseJson['form']);
+                                }
+                            },
+                            error: function(responseText, statusText, xhr, $form) {
+                                var $btn = $form.find('.btn-primary')
+                                $btn.removeClass('disabled');
+                                $btn.val("{% trans "Save" %}");
                             }
-                        },
-                        error: function(responseText, statusText, xhr, $form) {
-                            var $btn = $form.find('.btn-primary')
-                            $btn.removeClass('disabled');
-                            $btn.val("{% trans "Save" %}");
-                        }
-                    };
+                        };
 
-                    $form.ajaxForm(ajaxFormOptions);
-                },
-                error: function(XmlHttpRequest, textStatus, errorThrown) {
-                    alert("Error: " + textStatus);
-                }
-            })
+                        $form.ajaxForm(ajaxFormOptions);
+                    },
+                    error: function(XmlHttpRequest, textStatus, errorThrown) {
+                        alert("Error: " + textStatus);
+                    }
+                });
+            }, 500);
 
             return false;
         });
@@ -239,150 +272,153 @@
             var $add_btn = $(this);
             var gear_type = $add_btn.attr('data-klass');
 
-            $.ajax({
-                url: '/get_empty_edit_gear_form/' + gear_type + '/',
-                dataType: 'json',
-                timeout: 10000,
-                cache: false,
-                success: function(data, textStatus, XMLHttpRequest) {
-                    var $dlg = $('#add-gear-modal'),
-                        $form = $dlg.find('form');
+            setTimeout(function() {
+                $.ajax({
+                    url: '/get_empty_edit_gear_form/' + gear_type + '/',
+                    dataType: 'json',
+                    timeout: 10000,
+                    cache: false,
+                    success: function(data, textStatus, XMLHttpRequest) {
+                        var $dlg = $('#add-gear-modal'),
+                            $form = $dlg.find('form');
 
-                    $form.find('.form-content').html(data['form']);
-                    $form.find('.btn-primary').removeClass('disabled');
-                    $form.find('.btn-primary').val("{% trans "Save" %}");
+                        $form.find('.form-content').html(data['form']);
+                        $form.find('.btn-primary').removeClass('disabled');
+                        $form.find('.btn-primary').val("{% trans "Save" %}");
+                        $form.find('.form-actions').removeClass('hidden');
 
-                    var $make = $form.find('input[name=make]'),
-                        $name = $form.find('input[name=name]');
+                        var $make = $form.find('input[name=make]'),
+                            $name = $form.find('input[name=name]');
 
-                    $form.find('.form-content').append(
-                        '<input type="hidden" name="gear_type" value="' + gear_type + '" />');
+                        $form.find('.form-content').append(
+                            '<input type="hidden" name="gear_type" value="' + gear_type + '" />');
 
-                    $make.attr('data-provide', 'typeahead');
-                    $make.attr('autocomplete', 'off');
+                        $make.attr('data-provide', 'typeahead');
+                        $make.attr('autocomplete', 'off');
 
-                    $name.attr('data-provide', 'typeahead');
-                    $name.attr('autocomplete', 'off');
+                        $name.attr('data-provide', 'typeahead');
+                        $name.attr('autocomplete', 'off');
 
-                    // Init autocomplete for appropriate gear type
-                    $.ajax({
-                        url: '/get-makes-by-type/' + gear_type + '/',
-                        dataType: 'json',
-                        timeout: 10000,
-                        cache: false,
-                        success: function(data, textStatus, XMLHttpRequest) {
-                            var typeahead = $make.typeahead();
-                            typeahead.data('typeahead').source = data.makes;
-                        }
-                    });
-
-                    $name.focus(function(e) {
-                        var make = $.trim($make.val());
-                        if (make != '') {
-                            $.ajax({
-                                url: '/gear/by-make/' + make + '/?klass=' + gear_type,
-                                dataType: 'json',
-                                timeout: 10000,
-                                cache: false,
-                                success: function(response, textStatus, XMLHttpRequest) {
-                                    $make.val(response.make);
-
-                                    var typeahead = $name.typeahead();
-                                    var gear_names = [];
-                                    for (var i = 0; i < response.gear.length; i++) {
-                                        gear_names.push(response.gear[i].name);
-                                    }
-                                    typeahead.data('typeahead').source = gear_names;
-                                }
-                            });
-                        }
-                    });
-
-                    var ajaxFormOptions = {
-                        dataType: 'json',
-                        timeout: 10000,
-                        cache: false,
-                        beforeSubmit: function(formData, $form, options) {
-                            var $btn = $form.find('input[name=save]')
-                            $btn.addClass('disabled');
-                            $btn.val("...");
-                        },
-                        success: function(responseJson, statusText, xhr, $form) {
-                            var $btn = $form.find('input[name=save]')
-                            $btn.removeClass('disabled');
-                            $btn.val("{% trans "Save" %}");
-
-                            if (responseJson['success']) {
-                                $dlg.modal('hide');
-
-                                var template = '\
-                                    <div class="btn btn-gear">\
-                                        <div class="labels">\
-                                            <div class="make"></div>\
-                                            <div class="name"></div>\
-                                            <div class="alias"></div>\
-                                        </div>\
-                                        <div class="actions">\
-                                            <a href="#" class="remove" rel="tooltip" title="{% trans "Remove" %}">\
-                                                <i class="icon-trash"></i>\
-                                            </a>\
-                                            <a href="#edit-gear-modal" class="edit" data-toggle="modal" rel="tooltip" title="{% trans "Edit" %}">\
-                                                <i class="icon-pencil"></i>\
-                                            </a>\
-                                            <a href="#" class="page" rel="tooltip" title="{% trans "View page" %}">\
-                                                <i class="icon-info-sign"></i>\
-                                            </a>\
-                                        </div>\
-                                    </div>'
-                                var $new_button = $(template);
-                                $new_button.attr('id', responseJson['id']);
-                                $new_button.find('.make').text(responseJson['make']);
-                                $new_button.find('.name').text(responseJson['name']);
-                                $new_button.find('.alias').text('(' + responseJson['alias'] + ')');
-                                $new_button.find('.page').attr('href', '/gear/' + responseJson['id'] + '/');
-
-                                if(responseJson['complete'] == false) {
-                                    $new_button.addClass('incomplete');
-                                }
-
-                                var $content = $add_btn.closest('.list-gear').find('.content');
-                                $content.find('.no-gear').remove();
-                                $content.append($new_button);
-                            } else {
-                                $form.find('.form-content').html(responseJson['form']);
-
-                                $form.find('.form-content').append(
-                                    '<input type="hidden" name="gear_type" value="' + gear_type + '" />');
-                                $form.find('input[name=make]').attr('data-provide', 'typeahead');
-                                $form.find('input[name=make]').attr('data-source', '{{all_gear_makes|safe|addslashes}}');
-
-                                $form.find('input[name=name]').attr('data-provide', 'typeahead');
-                                $form.find('input[name=name]').attr('data-source', '{{all_gear_names|safe|addslashes}}');
-
-                                if (responseJson.gear_id) {
-                                    $form.find('.form-content').append(
-                                        '<input type="hidden" name="gear_id" value="' + responseJson.gear_id + '" />');
-                                }
-
-                                if (responseJson.type == 'gear_type_missing') {
-                                    alert(responseJson.error);
-                                }
+                        // Init autocomplete for appropriate gear type
+                        $.ajax({
+                            url: '/get-makes-by-type/' + gear_type + '/',
+                            dataType: 'json',
+                            timeout: 10000,
+                            cache: false,
+                            success: function(data, textStatus, XMLHttpRequest) {
+                                var typeahead = $make.typeahead();
+                                typeahead.data('typeahead').source = data.makes;
                             }
+                        });
 
-                        },
-                        error: function(responseText, statusText, xhr, $form) {
-                            var $btn = $form.find('input[name=save]')
-                            $btn.removeClass('disabled');
-                            $btn.val("{% trans "Save" %}");
-                        }
-                    };
+                        $name.focus(function(e) {
+                            var make = $.trim($make.val());
+                            if (make != '') {
+                                $.ajax({
+                                    url: '/gear/by-make/' + make + '/?klass=' + gear_type,
+                                    dataType: 'json',
+                                    timeout: 10000,
+                                    cache: false,
+                                    success: function(response, textStatus, XMLHttpRequest) {
+                                        $make.val(response.make);
 
-                    $form.ajaxForm(ajaxFormOptions);
-                },
-                error: function(XmlHttpRequest, textStatus, errorThrown) {
-                    alert("Error: " + textStatus);
-                }
-            });
+                                        var typeahead = $name.typeahead();
+                                        var gear_names = [];
+                                        for (var i = 0; i < response.gear.length; i++) {
+                                            gear_names.push(response.gear[i].name);
+                                        }
+                                        typeahead.data('typeahead').source = gear_names;
+                                    }
+                                });
+                            }
+                        });
+
+                        var ajaxFormOptions = {
+                            dataType: 'json',
+                            timeout: 10000,
+                            cache: false,
+                            beforeSubmit: function(formData, $form, options) {
+                                var $btn = $form.find('input[name=save]')
+                                $btn.addClass('disabled');
+                                $btn.val("...");
+                            },
+                            success: function(responseJson, statusText, xhr, $form) {
+                                var $btn = $form.find('input[name=save]')
+                                $btn.removeClass('disabled');
+                                $btn.val("{% trans "Save" %}");
+
+                                if (responseJson['success']) {
+                                    $dlg.modal('hide');
+
+                                    var template = '\
+                                        <div class="btn btn-gear">\
+                                            <div class="labels">\
+                                                <div class="make"></div>\
+                                                <div class="name"></div>\
+                                                <div class="alias"></div>\
+                                            </div>\
+                                            <div class="actions">\
+                                                <a href="#" class="remove" rel="tooltip" title="{% trans "Remove" %}">\
+                                                    <i class="icon-trash"></i>\
+                                                </a>\
+                                                <a href="#edit-gear-modal" class="edit" data-toggle="modal" rel="tooltip" title="{% trans "Edit" %}">\
+                                                    <i class="icon-pencil"></i>\
+                                                </a>\
+                                                <a href="#" class="page" rel="tooltip" title="{% trans "View page" %}">\
+                                                    <i class="icon-info-sign"></i>\
+                                                </a>\
+                                            </div>\
+                                        </div>'
+                                    var $new_button = $(template);
+                                    $new_button.attr('id', responseJson['id']);
+                                    $new_button.find('.make').text(responseJson['make']);
+                                    $new_button.find('.name').text(responseJson['name']);
+                                    $new_button.find('.alias').text('(' + responseJson['alias'] + ')');
+                                    $new_button.find('.page').attr('href', '/gear/' + responseJson['id'] + '/');
+
+                                    if(responseJson['complete'] == false) {
+                                        $new_button.addClass('incomplete');
+                                    }
+
+                                    var $content = $add_btn.closest('.list-gear').find('.content');
+                                    $content.find('.no-gear').remove();
+                                    $content.append($new_button);
+                                } else {
+                                    $form.find('.form-content').html(responseJson['form']);
+
+                                    $form.find('.form-content').append(
+                                        '<input type="hidden" name="gear_type" value="' + gear_type + '" />');
+                                    $form.find('input[name=make]').attr('data-provide', 'typeahead');
+                                    $form.find('input[name=make]').attr('data-source', '{{all_gear_makes|safe|addslashes}}');
+
+                                    $form.find('input[name=name]').attr('data-provide', 'typeahead');
+                                    $form.find('input[name=name]').attr('data-source', '{{all_gear_names|safe|addslashes}}');
+
+                                    if (responseJson.gear_id) {
+                                        $form.find('.form-content').append(
+                                            '<input type="hidden" name="gear_id" value="' + responseJson.gear_id + '" />');
+                                    }
+
+                                    if (responseJson.type == 'gear_type_missing') {
+                                        alert(responseJson.error);
+                                    }
+                                }
+
+                            },
+                            error: function(responseText, statusText, xhr, $form) {
+                                var $btn = $form.find('input[name=save]')
+                                $btn.removeClass('disabled');
+                                $btn.val("{% trans "Save" %}");
+                            }
+                        };
+
+                        $form.ajaxForm(ajaxFormOptions);
+                    },
+                    error: function(XmlHttpRequest, textStatus, errorThrown) {
+                        alert("Error: " + textStatus);
+                    }
+                });
+            }, 250);
         });
     });
     </script>
