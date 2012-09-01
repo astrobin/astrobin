@@ -3024,6 +3024,8 @@ def leaderboard(request):
             sort = '-images'
         elif sort == 'comments':
             sort = '-comments_written'
+        else:
+            sort = '-integration'
 
     queryset = sqs.models(User).order_by(sort)
 
