@@ -218,9 +218,9 @@ sudo tar xvfz apache-solr-3.6.1.tgz
 
 ./manage.py build_solr_schema > solr_schema.xml
 sudo mv solr_schema.xml /opt/solr/apache-solr-3.6.1/example/solr/conf/schema.xml
-sudo cat ".level = WARNING" > /opt/solr/apache-solr-3.6.1/example/solr-logging.properties
-sudo cp scripts/supervisord/solr.conf /etc/supervisord/conf.d/
-
+sudo echo ".level = WARNING" > /opt/solr/apache-solr-3.6.1/example/solr-logging.properties
+sudo cp scripts/supervisord/solr.conf /etc/supervisor/conf.d/
+sudo mkdir /var/log/solr
 
 
 # Build astrometry.net:
