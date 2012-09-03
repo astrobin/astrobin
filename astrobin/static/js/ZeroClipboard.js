@@ -205,7 +205,7 @@ ZeroClipboard.Client.prototype = {
 	setText: function(newText) {
 		// set text to be copied to clipboard
 		this.clipText = newText;
-		if (this.ready && this.movie.setText !== undefined) this.movie.setText(newText);
+		if (this.ready && this.movie !== undefined && this.movie.setText !== undefined) this.movie.setText(newText);
 	},
 	
 	addEventListener: function(eventName, func) {
@@ -252,7 +252,7 @@ ZeroClipboard.Client.prototype = {
 				}
 				
 				this.ready = true;
-				if (this.movie.setText !== undefined) { 
+				if (this.movie !== undefined && this.movie.setText !== undefined) { 
 					this.movie.setText( this.clipText );
 					this.movie.setHandCursor( this.handCursorEnabled );
 				}
