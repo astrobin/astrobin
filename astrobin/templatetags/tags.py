@@ -509,6 +509,13 @@ def gear_name(gear):
 
 
 @register.simple_tag
+def gear_name_iriencoded(gear):
+    from django.template.defaultfilters import iriencode
+    name = gear_name(gear)
+    return iriencode(name)
+
+
+@register.simple_tag
 def gear_owners(gear):
     gear, gear_type = get_correct_gear(gear.id)
     return UserProfile.objects.filter(
