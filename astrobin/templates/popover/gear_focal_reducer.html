@@ -15,7 +15,7 @@
 		{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: <a href="/search/?q={{gear.get_make}}{% search_form_query %}&amp;search_type=3">{{gear.get_make}}</a></p>{% endif %}
 
 		<div class="actions">
-		    <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name gear %}{% search_form_query %}">{% trans "Find images" %}</a>
+		    <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name_iriencoded gear %}{% search_form_query %}">{% trans "Find images" %}</a>
 		    {% if is_authenticated %}
 		        {% if follows %}
 		            <a class="btn btn-mini btn-primary unfollow-gear" data-gear="{{gear.id}}" href="{% url unfollow_gear gear.id %}">{% trans "Unfollow" %}</a>
