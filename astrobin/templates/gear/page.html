@@ -195,17 +195,9 @@
         </div>
 
         <div class="row">
-            <div class="span6">
+            <div class="span4">
                 <div class="reviews subtle-container">
                     <div class="header"><h4><i class="icon-star-empty"></i> {% trans "Reviews" %}</h4></div>
-                    <p>
-                        {% if request.user.is_authenticated %}
-                            {% blocktrans %}Please be fair, honest and polite when writing a review. Many people will read your review: all the users on AstroBin who own this piece of gear, will be notified of your review.{% endblocktrans %}
-                        {% else %}
-                            {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to write a review.{% endblocktrans %}
-                        {% endif %}
-                    </p>
-
                     {% for review in reviews %}
                         <div id="r{{review.id}}" class="review">
                             <div class="avatar">
@@ -237,6 +229,14 @@
                 {% if request.user.is_authenticated %}
                     <div class="subtle-container">
                         <div class="header"><h4><i class="icon-star"></i> {% trans "Add your review" %}</h4></div>
+                        <p>
+                            {% if request.user.is_authenticated %}
+                                {% blocktrans %}Please be fair, honest and polite when writing a review. Many people will read your review: all the users on AstroBin who own this piece of gear, will be notified of your review.{% endblocktrans %}
+                            {% else %}
+                                {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to write a review.{% endblocktrans %}
+                            {% endif %}
+                        </p>
+
                         <form class="form-vertical review-form" method="post" action="{% url gear_review_save %}">
                             {{review_form|as_bootstrap}}
                             <input type="hidden" name="gear_id" value="{{gear.id}}" />
@@ -246,16 +246,9 @@
                 {% endif %}
             </div>
 
-            <div class="span6">
+            <div class="span8">
                 <div class="comments subtle-container">
                     <div class="header"><h4><i class="icon-comments-alt"></i> {% trans "Comments" %}</h4></div>
-                    <p>
-                        {% if request.user.is_authenticated %}
-                            {% blocktrans %}Use this space to start a discussion, leave a comment or ask a question about this piece of gear. All the users on AstroBin who own one, will be notified and can join the discussion.{% endblocktrans %}
-                        {% else %}
-                            {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
-                         {% endif %}
-                    </p>
 
                     {% if comments %}
                         {% load mptt_tags %}
@@ -327,6 +320,14 @@
                 {% if request.user.is_authenticated %}
                     <div class="subtle-container">
                         <div class="header"><h4><i class="icon-comment"></i> {% trans "Start a discussion, leave a comment or ask a question" %}</h4></div>
+			<p>
+			{% if request.user.is_authenticated %}
+			    {% blocktrans %}Use this space to start a discussion, leave a comment or ask a question about this piece of gear. All the users on AstroBin who own one, will be notified and can join the discussion.{% endblocktrans %}
+			{% else %}
+			    {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
+			 {% endif %}
+			</p>
+
                         <div class="top-level-form">
                             <form class="form-horizontal" action="{% url gear_comment_save %}" method="post">
                                 {{comment_form|as_bootstrap}}
