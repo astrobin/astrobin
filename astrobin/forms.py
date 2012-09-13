@@ -500,6 +500,9 @@ class AdvancedSearchForm(SearchForm):
         # This section deals with properties of the Image search index:
         if self.cleaned_data['solar_system_main_subject']:
             image_sqs = image_sqs.filter(solar_system_main_subject = self.cleaned_data['solar_system_main_subject'])
+            user_sqs = EmptySearchQuerySet()
+            gear_sqs = EmptySearchQuerySet()
+            sqs = EmptySearchQuerySet()
 
         if self.cleaned_data['license']:
             filters = reduce(operator.or_, [SQ(**{'license': x}) for x in self.cleaned_data['license']])
@@ -507,15 +510,16 @@ class AdvancedSearchForm(SearchForm):
         else:
             image_sqs = EmptySearchQuerySet()
 
-
         # This section deals with properties of the User search index.
         # TODO
 
         # This section deals with properties of the Gear search index.
         # TODO
 
-        if self.cleaned_data['q'] == '':
+        if self.cleaned_data['q'] == '' and self.cleaned_data['solar_system_main_subject'] == None:
             sqs = SearchQuerySet().models(Image, User, Gear).all()
+        elif self.cleaned_data['solar_system_main_subject']:
+            sqs = image_sqs
         else:
             sqs = sqs | user_sqs | image_sqs | gear_sqs
 
