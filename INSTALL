@@ -213,12 +213,12 @@ sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 
 sudo mkdir /opt/solr
 cd /opt/solr
-sudo curl -O http://www.nic.funet.fi/pub/mirrors/apache.org/lucene/solr/3.6.1/apache-solr-3.6.1.tgz
-sudo tar xvfz apache-solr-3.6.1.tgz
+sudo curl -O http://www.nic.funet.fi/pub/mirrors/apache.org/lucene/solr/4.0.0-BETA/apache-solr-4.0.0-BETA.tgz
+sudo tar xvfz apache-solr-4.0.0-BETA.tgz
 
 ./manage.py build_solr_schema > solr_schema.xml
-sudo mv solr_schema.xml /opt/solr/apache-solr-3.6.1/example/solr/conf/schema.xml
-sudo echo ".level = WARNING" > /opt/solr/apache-solr-3.6.1/example/solr-logging.properties
+sudo mv solr_schema.xml /opt/solr/apache-solr-4.0.0-BETA/example/solr/collection1/conf/schema.xml
+sudo echo ".level = WARNING" > /opt/solr/apache-solr-4.0.0-BETA/example/solr-logging.properties
 sudo cp scripts/supervisord/solr.conf /etc/supervisor/conf.d/
 sudo mkdir /var/log/solr
 
