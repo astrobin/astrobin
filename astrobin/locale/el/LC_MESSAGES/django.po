@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-30 20:17+0000\n"
-"PO-Revision-Date: 2012-09-14 09:31+0100\n"
-"Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
+"PO-Revision-Date: 2012-09-14 09:43+0100\n"
+"Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -2724,7 +2724,7 @@ msgstr "δευτερόλεπτα πριν"
 #: views.py:1940 views.py:3613 templatetags/tags.py:101
 #, python-format
 msgid "%s ago"
-msgstr "% πριν"
+msgstr "%s πριν"
 
 #: views.py:1956 templates/popover/user.html:18
 msgid "Member since"
@@ -6723,12 +6723,12 @@ msgstr "Αίτηση Κλειδιού API"
 #: templates/user/card.html:8
 #, python-format
 msgid "%(username)s's technical card"
-msgstr "Η τεχνική κάρτα του/της %(username)"
+msgstr "Η τεχνική κάρτα του/της %(username)s"
 
 #: templates/user/card.html:39
 #, python-format
 msgid "About %(username)s"
-msgstr "Σχετικά με τον/την %(username)"
+msgstr "Σχετικά με τον/την %(username)s"
 
 #: templates/user/card.html:61
 #, python-format
