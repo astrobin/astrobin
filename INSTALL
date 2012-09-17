@@ -239,7 +239,7 @@ Edit this file, disable auto indexing, and enable all large indexes from 213 to 
 # Set up supervisor
 cd ~/Code/astrobin
 sudo cp scripts/supervisord/* /etc/supervisor/conf.d/
-sudo mkdir /var/log/{celery,gunicorn}
+sudo mkdir /var/log/{celery,gunicorn,nginx,pootle}
 
 # Run it!
 # =======
