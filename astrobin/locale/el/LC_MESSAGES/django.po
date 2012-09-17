@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-30 20:17+0000\n"
-"PO-Revision-Date: 2012-09-14 09:43+0100\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2012-09-17 08:19+0100\n"
+"Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -1173,7 +1173,7 @@ msgstr "Εικόνες"
 #: templates/inclusion_tags/search_image_list.html:10
 #: templates/user/card.html:13 templates/user/profile-subnav.html:124
 msgid "Gear"
-msgstr "Εξοπλισμός"
+msgstr "Εξοπλισμό"
 
 #: forms.py:315
 msgid "Telescope type"
@@ -1344,7 +1344,7 @@ msgstr "Περιεχόμενο"
 
 #: locale_extras.py:7
 msgid "uploaded a new revision of"
-msgstr "ανέβηκε μια νέα έκδοση του"
+msgstr "ανέβασε μια νέα έκδοση του"
 
 #: locale_extras.py:8
 msgid "commented on image"
@@ -1356,7 +1356,7 @@ msgstr "σχολίασε το αντικείμενο εξοπλισμού"
 
 #: locale_extras.py:10
 msgid "has favorited"
-msgstr "έβαλε σαν αγαπημένο"
+msgstr "έβαλε σαν αγαπημένο το"
 
 #: locale_extras.py:11
 msgid "has written a review on"
@@ -2322,15 +2322,15 @@ msgstr "Χώρα"
 
 #: models.py:1656 templates/most_popular.html:80
 msgid "North"
-msgstr "Βόρεια"
+msgstr "Βόρειo"
 
 #: models.py:1656 templates/most_popular.html:86
 msgid "South"
-msgstr "Νότια"
+msgstr "Νότιo"
 
 #: models.py:1657
 msgid "North or south"
-msgstr "Βόρεια ή Νότια"
+msgstr "Βόρειo ή Νότιo"
 
 #: models.py:1672
 msgid "East"
@@ -4294,7 +4294,7 @@ msgstr "προηγούμενο"
 
 #: templates/pagination.html:27 templates/pagination/pagination.html:22
 msgid "next"
-msgstr "επόμενο"
+msgstr "επόμενη"
 
 #: templates/profile-edit-menu.html:48
 msgid "Import from Flickr"
