@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-25 13:07+0000\n"
-"PO-Revision-Date: 2012-09-11 11:19+0100\n"
+"PO-Revision-Date: 2012-09-18 10:54+0100\n"
 "Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sk\n"
@@ -1518,108 +1518,108 @@ msgstr "Informácia, popis alebo komentár o Vašej vlastnej kópii  produktu."
 
 #: models.py:317
 msgid "Refractor: achromatic"
-msgstr ""
+msgstr "Refraktor: achromát"
 
 #: models.py:318
 msgid "Refractor: semi-apochromatic"
-msgstr ""
+msgstr "Refraktor: polo-apochromát"
 
 #: models.py:319
 msgid "Refractor: apochromatic"
-msgstr ""
+msgstr "Refraktor: apochromát"
 
 #: models.py:320
 msgid "Refractor: non-achromatic Galilean"
-msgstr ""
+msgstr "Refraktor: neachromatický Galileiho"
 
 #: models.py:321
 msgid "Refractor: non-achromatic Keplerian"
-msgstr ""
+msgstr "Refraktor: neachromatický Keplerov"
 
 #: models.py:322
 msgid "Refractor: superachromat"
-msgstr ""
+msgstr "Refraktor: superachromát"
 
 #: models.py:324
 msgid "Reflector: Dall-Kirkham"
-msgstr ""
+msgstr "Reflektor: Dall-Kirkham"
 
 #: models.py:325
 msgid "Reflector: Nasmyth"
-msgstr ""
+msgstr "Reflektor: Nasmyth"
 
 #: models.py:326
 msgid "Reflector: Ritchey Chretien"
-msgstr ""
+msgstr "Reflektor: Ritchey-Chretien"
 
 #: models.py:327
 msgid "Reflector: Gregorian"
-msgstr ""
+msgstr "Reflektor: Gregory"
 
 #: models.py:328
 msgid "Reflector: Herschellian"
-msgstr ""
+msgstr "Reflektor: Herschelov"
 
 #: models.py:329
 msgid "Reflector: Newtonian"
-msgstr ""
+msgstr "Reflektor: Newton"
 
 #: models.py:331
 msgid "Catadioptric: Argunov-Cassegrain"
-msgstr ""
+msgstr "Katadioptrický: Argunov-Cassegrain"
 
 #: models.py:332
 msgid "Catadioptric: Klevtsov-Cassegrain"
-msgstr ""
+msgstr "Katadioptrický: Klevcov-Cassegrain"
 
 #: models.py:333
 msgid "Catadioptric: Lurie-Houghton"
-msgstr ""
+msgstr "Katadioptrický: Lurie-Houghton"
 
 #: models.py:334
 msgid "Catadioptric: Maksutov"
-msgstr ""
+msgstr "Katadioptrický: Maksutov"
 
 #: models.py:335
 msgid "Catadioptric: Maksutov-Cassegrain"
-msgstr ""
+msgstr "Katadioptrický: Maksutov-Cassegrain"
 
 #: models.py:336
 msgid "Catadioptric: modified Dall-Kirkham"
-msgstr ""
+msgstr "Katadioptrický: modifikovaný Dall-Kirkham"
 
 #: models.py:337
 msgid "Catadioptric: Schmidt camera"
-msgstr ""
+msgstr "Katadioptrický: Schmidtova fotokomora"
 
 #: models.py:338
 msgid "Catadioptric: Schmidt-Cassegrain"
-msgstr ""
+msgstr "Katadioptrický: Schmidt-Cassegrain"
 
 #: models.py:339
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgstr ""
+msgstr "Katadioptrický: ACF Schmidt-Cassegrain"
 
 #: models.py:340 stats.py:582
 msgid "Camera lens"
-msgstr ""
+msgstr "Fotografický objektív"
 
 #: models.py:341
 msgid "Binoculars"
-msgstr ""
+msgstr "Binokulár"
 
 #: models.py:345 templates/popover/gear_telescope.html:7
 msgid "Aperture"
-msgstr ""
+msgstr "Priemer"
 
 #: models.py:346 models.py:355 models.py:425 models.py:434 models.py:723
 msgid "(in mm)"
-msgstr ""
+msgstr "(v mm)"
 
 #: models.py:354 models.py:727 models.py:1164 templates/image/detail.html:483
 #: templates/popover/gear_telescope.html:8
 msgid "Focal length"
-msgstr ""
+msgstr "Ohnisková vzdialenosť"
 
 #: models.py:363 models.py:442 models.py:468 models.py:501
 #: templates/gear/page.html:60 templates/popover/gear_camera.html:5
@@ -1627,226 +1627,230 @@ msgstr ""
 #: templates/popover/gear_telescope.html:5 templates/popover/subject.html:9
 #: templates/subject/page.html:31
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: models.py:371 models.py:450 templates/search/search.html:312
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: models.py:379 templates/popover/gear_mount.html:6
 msgid "Max. payload"
-msgstr ""
+msgstr "Max. nosnosť"
 
 #: models.py:380
 msgid "(in kg)"
-msgstr ""
+msgstr "(v kg)"
 
 #: models.py:388 templates/popover/gear_mount.html:7
 msgid "Periodic error"
-msgstr ""
+msgstr "Periodická chyba"
 
 #: models.py:389
 msgid "(peak to peak, in arcseconds)"
-msgstr ""
+msgstr "(perióda, v uhlových sekundách)"
 
 #: models.py:398
 msgid "kg"
-msgstr ""
+msgstr "kg"
 
 #: models.py:406
 msgid "CCD"
-msgstr ""
+msgstr "CCD"
 
 #: models.py:407
 msgid "DSLR"
-msgstr ""
+msgstr "DSLR"
 
 #: models.py:408
 msgid "Guider/Planetary"
-msgstr ""
+msgstr "Pointačná/Planetárna kamera"
 
 #: models.py:409
 msgid "Film"
-msgstr ""
+msgstr "FIlm"
 
 #: models.py:410
 msgid "Compact"
-msgstr ""
+msgstr "Kompakt"
 
 #: models.py:411
 msgid "Video camera"
-msgstr ""
+msgstr "Video kamera"
 
 #: models.py:415 models.py:739 templates/popover/gear_camera.html:7
 #: templates/search/search.html:319
 msgid "Pixel size"
-msgstr ""
+msgstr "veľkosť pixelov"
 
 #: models.py:416 models.py:735
 msgid "(in &mu;m)"
-msgstr ""
+msgstr "(v &mu;m)"
 
 #: models.py:424 templates/popover/gear_camera.html:8
 msgid "Sensor width"
-msgstr ""
+msgstr "Šírka snímača"
 
 #: models.py:433 templates/popover/gear_camera.html:9
 msgid "Sensor height"
-msgstr ""
+msgstr "Výška snímača"
 
 #: models.py:450 templates/search/search.html:320
 msgid "&mu;m"
-msgstr ""
+msgstr "&mu;m"
 
 #: models.py:463
 msgid "Open source or freeware"
-msgstr ""
+msgstr "Open source alebo freeware"
 
 #: models.py:464
 msgid "Paid"
-msgstr ""
+msgstr "Platený"
 
 #: models.py:480
 msgid "Clear or color"
-msgstr ""
+msgstr "Číry alebo farebný"
 
 #: models.py:482
 msgid "Broadband: H-Alpha"
-msgstr ""
+msgstr "Širokopásmový: H-Alfa "
 
 #: models.py:483
 msgid "Broadband: H-Beta"
-msgstr ""
+msgstr "Širokopásmový: H-Beta"
 
 #: models.py:484
 msgid "Broadband: S-II"
-msgstr ""
+msgstr "Širokopásmový: S-II"
 
 #: models.py:485
 msgid "Broadband: O-III"
-msgstr ""
+msgstr "Širokopásmový: O-III"
 
 #: models.py:486
 msgid "Broadband: N-II"
-msgstr ""
+msgstr "Širokopásmový: N-II"
 
 #: models.py:488
 msgid "Narrowband: H-Alpha"
-msgstr ""
+msgstr "Úzkopásmový: H-Alfa"
 
 #: models.py:489
 msgid "Narrowband: H-Beta"
-msgstr ""
+msgstr "Úzkopásmový: H-Beta"
 
 #: models.py:490
 msgid "Narrowband: S-II"
-msgstr ""
+msgstr "Úzkopásmový: S-II"
 
 #: models.py:491
 msgid "Narrowband: O-III"
-msgstr ""
+msgstr "Úzkopásmový: O-III"
 
 #: models.py:492
 msgid "Narrowband: N-II"
-msgstr ""
+msgstr "Úzkopásmový: N-II"
 
 #: models.py:494
 msgid "Light pollution suppression"
-msgstr ""
+msgstr "Potláčajúci svetelné znečistenie (LPS)"
 
 #: models.py:495
 msgid "Planetary"
-msgstr ""
+msgstr "Planetárny"
 
 #: models.py:497
 msgid "UHC: Ultra High Contrast"
-msgstr ""
+msgstr "UHC: Ultra vysoký kontrast"
 
 #: models.py:508 templates/popover/gear_filter.html:7
 msgid "Bandwidth"
-msgstr ""
+msgstr "Šírka pásma"
 
 #: models.py:509
 msgid "(in nm)"
-msgstr ""
+msgstr "(v nm)"
 
 #: models.py:518
 msgid "nm"
-msgstr ""
+msgstr "mm"
 
 #: models.py:627
 msgid "I don't want this image plate-solved."
-msgstr ""
+msgstr "Nechcem astrometrickú redukciu pre tento obrázok"
 
 #: models.py:628
 msgid "This is not a deep sky image, don't plate-solve it."
-msgstr ""
+msgstr "Nie je to deep-sky obrázok, nerobiť astrometriu."
 
 #: models.py:629
 msgid "I have no idea about the size of field, try a blind solve."
-msgstr ""
+msgstr "Nemám predstavu o veľkosti poľa, skúsiť naslepo."
 
 #: models.py:630
 msgid "This is a very wide field image (more than 10 degrees)."
-msgstr ""
+msgstr "Je to veľmi širokoúhly obrázok (viac ako 10 stupňov)."
 
 #: models.py:631
 msgid "This is a wide field image (1 to 10 degrees)."
-msgstr ""
+msgstr "Je to širokoúhly obrázok (1 až 10 stupňov)."
 
 #: models.py:632
 msgid "This ia narrow field image (less than 1 degree)."
-msgstr ""
+msgstr "Je to malé zorné pole (menej ako 1stupeň)."
 
 #: models.py:636
 msgid "Deep sky object"
-msgstr ""
+msgstr "Deep sky objekt"
 
 #: models.py:637
 msgid "Solar system body or event"
-msgstr ""
+msgstr "Teleso alebo udalosť v Slnečnej sústave"
 
 #: models.py:638 views.py:1759 templates/wall.html:128
 msgid "Extremely wide field"
-msgstr ""
+msgstr "Extrémne široké pole"
 
 #: models.py:639 views.py:1765 templates/wall.html:134
 msgid "Star trails"
-msgstr ""
+msgstr "Star trails"
 
 #: models.py:640 views.py:1771 templates/base.html:338
 #: templates/profile-edit-menu.html:9 templates/wall.html:140
 #: templates/user/card.html:13 templates/user/profile-subnav.html:111
 msgid "Gear"
-msgstr ""
+msgstr "Príslušenstvo"
 
 #: models.py:658
 msgid "Title"
-msgstr ""
+msgstr "Názov"
 
 #: models.py:662 templates/image/detail.html:415
 #: templates/user/profile-subnav.html:105
 msgid "Subject type"
-msgstr ""
+msgstr "Typ"
 
 #: models.py:673
 msgid ""
 "If the main subject of your image is a body in the solar system, please "
 "select which (or which type) it is."
 msgstr ""
+"Ak je hlavným objektom snímky teleso v Slnečnej sústave, vyberte prosím "
+"ktoré to je (alebo akého je typu)."
 
 #: models.py:682
 msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr ""
+"Pretiahnite položky z pravej strany na ľavú stranu, alebo kliknite na značku "
+"plus"
 
 #: models.py:688 models.py:1688 templates/image/detail.html:528
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: models.py:689
 msgid "HTML tags are allowed."
-msgstr ""
+msgstr "HTML značky sú povolené."
 
 #: models.py:693
 msgid "Allow rating"
