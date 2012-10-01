@@ -552,6 +552,22 @@
             {% endif %}
             {% endcomment %}
 
+            <div class="alert alert-info">
+                <h4 class="alert-heading">AstroBin is on Facebook</h4>
+                <div class="row">
+                    <div class="span10">
+                        <p> AstroBin now has a Facebook page. The best images, handpicked by the staff,
+                            will be shown there, and there will be some social interaction and
+                            community building. If you're interested in some networking, please join
+                            and like the page! <small><em>(This message will be displayed only for a couple of days.)</em></small>
+                        </p>
+                    </div>
+                    <div class="span1">
+                        <div class="fb-like" data-href="http://facebook.com/astrobin" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false"></div>
+                    </div>
+                </div>
+            </div>
+
             {% if request.user.is_authenticated and messages %}
                 {% for message in messages %}
                     <div class="alert 
@@ -760,6 +776,15 @@
         </script>
 
         {% block extra_js %}{% endblock %}
-    </body>
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=100834516742118";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+</body>
 </html>
 
