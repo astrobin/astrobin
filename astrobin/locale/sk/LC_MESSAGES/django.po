@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-25 13:07+0000\n"
-"PO-Revision-Date: 2012-09-18 10:54+0100\n"
+"PO-Revision-Date: 2012-10-01 10:50+0100\n"
 "Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sk\n"
@@ -1854,25 +1854,27 @@ msgstr "HTML značky sú povolené."
 
 #: models.py:693
 msgid "Allow rating"
-msgstr ""
+msgstr "Povoliť hodnotenie"
 
 #: models.py:725
 msgid "Insert a focal length if you want to plate-solve."
-msgstr ""
+msgstr "Zadajte ohniskovú vzdialenosť ak si prajete premerať snímku."
 
 #: models.py:737
 msgid "Insert a pixel size if you want to plate-solve."
-msgstr ""
+msgstr "Zadajte veľkosť pixlov, ak si prajete premerať snímku."
 
 #: models.py:747
 msgid ""
 "This is the smallest of the binning values you used. If you imaged L in 1x1 "
 "and RGB in 2x2, put 1x1 here."
 msgstr ""
+"Najmenší binning, aký ste použili. Ak ste snímali L v binningu 1x1 a RGB v "
+"binningu 2x2, vložte sem 1x1."
 
 #: models.py:748 models.py:1060
 msgid "Binning"
-msgstr ""
+msgstr "Binning"
 
 #: models.py:757
 msgid ""
@@ -1880,197 +1882,206 @@ msgid ""
 "new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't "
 "matter."
 msgstr ""
+"Ak ste zmenili mierku obrázku pred uploadom, vložte sem percentuálnu veľkosť "
+"nového obrázku. Napríklad 50, ak ste ho zmenšili na polovicu. Na orezaní "
+"naopak nezáleží."
 
 #: models.py:758
 msgid "Scaling"
-msgstr ""
+msgstr "Mierka"
 
 #: models.py:770
 msgid "Apply watermark to image"
-msgstr ""
+msgstr "Aplikovať vodoznak na obrázok"
 
 #: models.py:774 templates/leaderboard.html:16
 msgid "Position"
-msgstr ""
+msgstr "Pozícia"
 
 #: models.py:875 templates/index.html:50 templates/image/detail.html:357
 #: templates/image/full.html:55 templates/inclusion_tags/image_list.html:13
 #: templates/inclusion_tags/messier_list.html:13
 #: templates/inclusion_tags/search_image_list.html:12
 msgid "(no title)"
-msgstr ""
+msgstr "(bez názvu)"
 
 #: models.py:1013
 msgid "Please use the following format: yyyy-mm-dd."
-msgstr ""
+msgstr "Použite prosím nasledovný formát: yyyy-mm-dd."
 
 #: models.py:1018 models.py:1224
 msgid "Image"
-msgstr ""
+msgstr "Obrázok"
 
 #: models.py:1037
 msgid "1 - Excellent dark-site sky (BLACK)"
-msgstr ""
+msgstr "1- Vynikajúca temná obloha  (ČIERNA)"
 
 #: models.py:1038
 msgid "2 - Typical truly dark site (GRAY)"
-msgstr ""
+msgstr "2 - Typická skutočne tmavá obloha (ŠEDÁ)"
 
 #: models.py:1039
 msgid "3 - Rural sky (BLUE)"
-msgstr ""
+msgstr "3 - Vidiecka obloha (MODRÁ)"
 
 #: models.py:1040
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
-msgstr ""
+msgstr "4 - Prechod medzi vidieckou a prímestskou oblohou (ZELENÁ/ŽLTÁ)"
 
 #: models.py:1041
 msgid "5 - Suburban sky (ORANGE)"
-msgstr ""
+msgstr "5 - Prímestská obloha (ORANŽOVÁ)"
 
 #: models.py:1042
 msgid "6 - Bright suburban sky (RED)"
-msgstr ""
+msgstr "6 - Jasná prímestská obloha (ČERVENÁ)"
 
 #: models.py:1043
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
 msgstr ""
+"7 - Prechod medzi prímestskou/mestskou oblohou aleob Mesiac v splne "
+"(ČERVENÁ)"
 
 #: models.py:1044
 msgid "8 - City sky (WHITE)"
-msgstr ""
+msgstr "8 - Mestská obloha (BIELA)"
 
 #: models.py:1045
 msgid "9 - Inner city sky (WHITE)"
-msgstr ""
+msgstr "9 - Obloha v centre mesta (BIELA)"
 
 #: models.py:1049
 msgid "Synthetic channel"
-msgstr ""
+msgstr "Umelý kanál"
 
 #: models.py:1054
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: models.py:1063
 msgid "Number"
-msgstr ""
+msgstr "Počet"
 
 #: models.py:1065
 msgid "The number of sub-frames."
-msgstr ""
+msgstr "Počet snímok."
 
 #: models.py:1068
 msgid "Duration"
-msgstr ""
+msgstr "Expozícia"
 
 #: models.py:1070
 msgid "Duration of each sub-frame, in seconds."
-msgstr ""
+msgstr "Expozícia jednotlivých snímok, v sekundách."
 
 #: models.py:1073
 msgid "ISO"
-msgstr ""
+msgstr "ISO"
 
 #: models.py:1077
 msgid "Gain"
-msgstr ""
+msgstr "Gain"
 
 #: models.py:1082
 msgid "Sensor cooling"
-msgstr ""
+msgstr "Chladenie snímača"
 
 #: models.py:1084
 msgid "The temperature of the chip. E.g.: -20."
-msgstr ""
+msgstr "Teplota snímača. Napr.: -20."
 
 #: models.py:1087 views.py:696
 msgid "Darks"
-msgstr ""
+msgstr "Temné snímky"
 
 #: models.py:1089
 msgid "The number of dark frames."
-msgstr ""
+msgstr "Počet temných snímok."
 
 #: models.py:1092 views.py:697
 msgid "Flats"
-msgstr ""
+msgstr "Flaty"
 
 #: models.py:1094
 msgid "The number of flat frames."
-msgstr ""
+msgstr "Počet flat snímok."
 
 #: models.py:1097 views.py:698
 msgid "Flat darks"
-msgstr ""
+msgstr "Temné snímky flatov."
 
 #: models.py:1099
 msgid "The number of dark flat frames."
-msgstr ""
+msgstr "Počet temných snímok flatov."
 
 #: models.py:1102 views.py:699
 msgid "Bias"
-msgstr ""
+msgstr "Bias"
 
 #: models.py:1104
 msgid "The number of bias/offset frames."
-msgstr ""
+msgstr "Počet bias/offset snímok."
 
 #: models.py:1107 views.py:702
 msgid "Bortle Dark-Sky Scale"
-msgstr ""
+msgstr "Bortleho stupnica tmavej oblohy"
 
 #: models.py:1111
 msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
 msgstr ""
+"Kvalita oblohy zodpovedajúca <a href=\"http://en.wikipedia.org/wiki"
+"/Bortle_Dark-Sky_Scale\" target=\"_blank\">Bortleho stupnici</a>."
 
 #: models.py:1115
 msgid "Mean mag/arcsec^2"
-msgstr ""
+msgstr "Stredná hodnota mag/arcsec^2"
 
 #: models.py:1116
 msgid "As measured with your Sky Quality Meter."
-msgstr ""
+msgstr "Nameraná Vašim SQM."
 
 #: models.py:1121 views.py:704
 msgid "Mean FWHM"
-msgstr ""
+msgstr "Stredná hodnota FWHM"
 
 #: models.py:1126 views.py:705
 msgid "Temperature"
-msgstr ""
+msgstr "Teplota"
 
 #: models.py:1129
 msgid "Ambient temperature (in Centigrade degrees)."
-msgstr ""
+msgstr "Teplota okolia (v stupňoch Celzia)."
 
 #: models.py:1150
 msgid "Number of frames"
-msgstr ""
+msgstr "Počet snímok"
 
 #: models.py:1151
 msgid "The total number of frames you have stacked."
-msgstr ""
+msgstr "Celkový počet snímok, ktoré ste poskladali."
 
 #: models.py:1155 templates/image/detail.html:480
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: models.py:1156
 msgid "Frames per second."
-msgstr ""
+msgstr "Snímky za sekundu"
 
 #: models.py:1165
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
 msgstr ""
+"Ohnisková vzdialenosť otickej sústavy, vrátane barlowovej šošovky a "
+"ostatných súčastí."
 
 #: models.py:1171 templates/image/detail.html:486
 msgid "CMI"
-msgstr ""
+msgstr "CMI"
 
 #: models.py:1172
 msgid "Latitude of the first Central Meridian."
