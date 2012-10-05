@@ -550,7 +550,6 @@
                     {% blocktrans %}AstroBin is running a campaign to collectively improve the consistency of the gear database.{% endblocktrans %} <a href="{% url gear_fix random_gear_item.id %}">{% trans "Click here to help!" %}</a>
                 </div>
             {% endif %}
-            {% endcomment %}
 
             <div class="alert alert-info">
                 <h4 class="alert-heading">AstroBin is on Facebook</h4>
@@ -567,6 +566,7 @@
                     </div>
                 </div>
             </div>
+            {% endcomment %}
 
             {% if request.user.is_authenticated and messages %}
                 {% for message in messages %}
@@ -778,6 +778,7 @@
 
         {% block extra_js %}{% endblock %}
 
+        {% comment %}
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -786,6 +787,7 @@
           js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=100834516742118";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
+        {% endcomment %}
 </body>
 </html>
 
