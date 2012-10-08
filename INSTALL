@@ -95,7 +95,8 @@ ln -s ./venv/bin/pip vpip
     django-tastypie \
     django-activity-stream \
     django-modeltranslation \
-    pysolr
+    pysolr \
+    numpy
 
 Install django-hitcount from sources:
 https://github.com/thornomad/django-hitcount/
