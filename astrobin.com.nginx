@@ -57,6 +57,12 @@ server {
         expires 30d;
     }
 
+    location /media/  {
+        root /home/astrobin/Code/astrobin;
+        expires 30d;
+    }
+
+
     location / {
         if ($request_uri ~* "^/robots.txt") {
             rewrite ^/robots.txt /sitestatic/robots.txt permanent;
