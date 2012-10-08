@@ -44,9 +44,8 @@ def _get_integration(image):
 
 
 def _prepare_rating(obj):
-    votes = obj.rating.votes
-    score = obj.rating.score
-    return float(score)/votes if votes > 0 else 0
+    from votes import index
+    return index([x.score for x in obj.rating.get_ratings()])
 
 def _prepare_moon_phase(obj):
     from moon import MoonPhase
@@ -223,7 +222,8 @@ class GearIndex(SearchIndex):
             l.append(_prepare_rating(i))
         if len(l) == 0:
             return 0
-        return reduce(lambda x, y: x + y, l) / len(l)
+        from votes import index
+        return index(l)
 
     def prepare_votes(self, obj):
         votes = 0
@@ -344,7 +344,8 @@ class UserIndex(SearchIndex):
             l.append(_prepare_rating(i))
         if len(l) == 0:
             return 0
-        return reduce(lambda x, y: x + y, l) / len(l)
+        from votes import index
+        return index(l)
 
     def prepare_votes(self, obj):
         votes = 0

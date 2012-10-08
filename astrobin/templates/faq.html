@@ -19,6 +19,7 @@
                 <li><a href="#9">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
                 <li><a href="#10">{% blocktrans %}How can I format my comments?{% endblocktrans %}</a></li>
                 <li><a href="#11">{% blocktrans %}What is the correct way to vote images?{% endblocktrans %}</a></li>
+                <li><a href="#12">{% blocktrans %}The rating values seem odd. How are they calculated?{% endblocktrans %}</a></li>
             </ol>
             <br/>
             <h2>{% trans "... and their answers!" %}</h2>
@@ -171,6 +172,16 @@
                             <td>{% trans "Top quality!" %}</td>
                         </tr>                       
                     </table>
+                </li>
+                <li>
+                    <a name="12"></a>
+                    <h4>{% blocktrans %}The rating values seem odd. How are they calculated?{% endblocktrans %}</h4>
+                    <p>
+                        {% blocktrans %}AstroBin uses two tricks to normalize image ratings. First of all, a <em>sigma-reject</em> algorithm is applied to exclude votes that are too far from the average. This takes care of people who don't vote honestly. Then the rating is interpolated via a hyperbolic function of the number of votes that the image received, to ensure that images with too few votes aren't rated better than images with similar rating, but lots of votes.{% endblocktrans %}
+                    </p>
+                    <p>
+                        {% blocktrans %}This produces the "AstroBin index", which is a fairer way to compare images and users.{% endblocktrans %}
+                    </p>
                 </li>
             </ol>
             <br/>

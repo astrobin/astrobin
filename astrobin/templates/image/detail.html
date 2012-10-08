@@ -754,8 +754,9 @@
                     <tr>
                         <th><div style="font-size: 16px"><i class="icon-star"></i></div></th>
                         <td>
-                            <span class="current-rating">{{current_rating}}</span>
+                            <span class="current-rating">{{index}}</span>
                             ~ [<span class="votes-number">{{votes_number}}</span>]
+                            <a class="small" rel="tooltip" title="AstroBin index" href="/faq/#12">?</a>
                         </td>
                     </tr>
                     <tr>
@@ -1340,7 +1341,7 @@ $(document).ready(function() {
         {{image.id}},
         {% if is_revision %}{{revision_image.id}}{% else %}0{% endif %},
         "{{image.user.username}}",
-        "{{current_rating}}",
+        "{{index}}",
         {
             rating: {
                 {% if not request.user.is_authenticated %}
