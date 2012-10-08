@@ -590,7 +590,8 @@ def image_detail(request, id, r):
     already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
     votes = image.rating.votes
     score = image.rating.score
-    rating = float(score)/votes if votes > 0 else 0
+    from votes import index
+    index = index([x.score for x in image.rating.get_ratings()])
 
     gear_list = (
         ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
@@ -787,7 +788,7 @@ def image_detail(request, id, r):
                      'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
                      'resized_size': resized_size,
                      'already_voted': already_voted,
-                     'current_rating': "%.2f" % rating,
+                     'index': "%.3f" % index,
                      'votes_number': votes,
                      'gear_list': gear_list,
                      'gear_list_has_commercial': gear_list_has_commercial,
@@ -877,9 +878,8 @@ def image_full(request, id, r):
 @require_GET
 def image_get_rating(request, image_id):
     image = get_object_or_404(Image, pk=image_id)
-    votes = image.rating.votes
-    score = image.rating.score
-    rating = float(score)/votes if votes > 0 else 0
+    from votes import index
+    rating = index([x.score for x in image.rating.get_ratings()])
 
     response_dict = {'rating': '%.2f' % rating}
     return ajax_response(response_dict)
@@ -3013,10 +3013,12 @@ def leaderboard(request):
     response_dict = {}
 
     sqs = SearchQuerySet()
-    sort = '-integration'
+    sort = '-rating'
     if 'sort' in request.GET:
         sort = request.GET.get('sort')
-        if sort == 'integration':
+        if sort == 'rating':
+            sort = '-rating'
+        elif sort == 'integration':
             sort = '-integration'
         elif sort == 'avg_integration':
             sort = '-avg_integration'
