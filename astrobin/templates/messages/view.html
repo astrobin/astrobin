@@ -9,7 +9,7 @@
         <p>
             {% blocktrans with participant.user.get_absolute_url as sender_url %}A conversation between <a href="{{ sender_url }}">you</a> and{% endblocktrans %}:
              {% for participant in participant.others %}
-                <a href="{{ participant.user.get_absolute_url }}">{{ participant.user }}</a>
+                <a href="{{ participant.user.get_absolute_url }}" class="btn btn-mini btn-primary">{{ participant.user }}</a>
              {% endfor %}
         </p>
         
