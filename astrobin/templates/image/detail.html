@@ -756,7 +756,7 @@
                         <td>
                             <a href="#" class="current-rating rating-popover"
                                rel="popover" data-load="{% url rating_popover_ajax image.id %}">
-                                {% if votes_number > 0 %}{{index}}{% else %}0.000{% endif %}
+                                {% if votes_number > 0 %}{{index|floatformat:3}}{% else %}0.000{% endif %}
                             </a>
                         </td>
                     </tr>
