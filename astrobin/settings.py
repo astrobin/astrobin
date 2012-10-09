@@ -315,7 +315,7 @@ PIPELINE_CSS = {
             'css/bootstrap-responsive.css',
             'css/astrobin.css',
         ),
-        'output_filename': 'css/astrobin_pipeline_screen_v20.css',
+        'output_filename': 'css/astrobin_pipeline_screen_v21.css',
         'extra_content':  {
             'media': 'screen, projection',
         },
@@ -353,7 +353,7 @@ PIPELINE_JS = {
             'js/bootstrap.js',
             'js/astrobin.js',
         ),
-        'output_filename': 'js/astrobin_pipeline_v7.js',
+        'output_filename': 'js/astrobin_pipeline_v8.js',
     },
 }
 
