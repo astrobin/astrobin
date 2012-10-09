@@ -259,6 +259,7 @@ urlpatterns = patterns('',
     url(r'^gear_popover_ajax/(?P<id>\d+)/$', views.gear_popover_ajax, name='gear_popover_ajax'),
     url(r'^subject_popover_ajax/(?P<id>\d+)/$', views.subject_popover_ajax, name='subject_popover_ajax'),
     url(r'^user_popover_ajax/(?P<username>[\w.@+-]+)/$', views.user_popover_ajax, name='user_popover_ajax'),
+    url(r'^rating_popover_ajax/(?P<id>\d+)/$', views.rating_popover_ajax, name='rating_popover_ajax'),
 
     url(r'^subject/(?P<id>\d+)/$', views.subject_page, name='subject_page'),
 
