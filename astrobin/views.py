@@ -588,8 +588,8 @@ def image_detail(request, id, r):
     from moon import MoonPhase;
 
     already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
-    votes = image.rating.votes
-    score = image.rating.score
+    ratings = image.rating.get_ratings()
+    votes = len(ratings)
     from votes import index
     index = index([x.score for x in image.rating.get_ratings()])
 
@@ -3645,10 +3645,10 @@ def rating_popover_ajax(request, id):
 
     ratings = [x.score for x in image.rating.get_ratings()]
 
-    votes_number = image.rating.votes
+    votes_number = len(ratings)
     avg = 0.000
     if votes_number > 0:
-        avg = image.rating.score / float(votes_number)
+        avg = sum(ratings) / float(votes_number)
     sigma_reject = average(ratings)
     index = index(ratings)
 
