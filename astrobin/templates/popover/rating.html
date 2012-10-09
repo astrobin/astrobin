@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load tags %}
+
+<div class="rating-popover">
+    <div class="data">
+	<table class="table table-condensed">
+		<tr>
+			<th>{% trans "Votes" %}:</th>
+			<td>{{votes_number}}</td>
+		</tr>
+		<tr>
+			<th>{% trans "Average" %}:</th>
+			<td>{{average|floatformat:3}}</td>
+		</tr>
+		<tr>
+			<th>{% trans "Sigma-reject average" %}:</th>
+			<td>{{sigma_reject|floatformat:3}}</td>
+		</tr>
+		<tr>
+			<th>{% trans "AstroBin index" %}:</th>
+			<td>{{index|floatformat:3}}</td>
+		</tr>
+	</table>
+
+	<div class="actions">
+	    <a class="btn btn-mini btn-primary" href="{% url faq %}#12">
+	    	<i class="icon-question-sign"></i>
+	    	{% trans "Info" %}
+	    </a>
+	</div>
+	</div>
+</div>

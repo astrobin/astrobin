@@ -3636,6 +3636,39 @@ def user_popover_ajax(request, username):
 
 
 @require_GET
+@never_cache
+def rating_popover_ajax(request, id):
+    image = get_object_or_404(Image, id = id)
+    template = 'popover/rating.html'
+
+    from votes import average, index
+
+    ratings = [x.score for x in image.rating.get_ratings()]
+
+    votes_number = image.rating.votes
+    avg = 0.000
+    if votes_number > 0:
+        avg = image.rating.score / float(votes_number)
+    sigma_reject = average(ratings)
+    index = index(ratings)
+
+    html = render_to_string(template,
+        {
+            'votes_number': votes_number,
+            'average': avg,
+            'sigma_reject': sigma_reject,
+            'index': index,
+        })
+
+    response_dict = {
+        'success': True,
+        'html': html,
+    }
+    return HttpResponse(
+        simplejson.dumps(response_dict),
+        mimetype = 'application/javascript')
+
+@require_GET
 def subject_page(request, id):
     subject = get_object_or_404(Subject, id = id)
 
