@@ -754,9 +754,10 @@
                     <tr>
                         <th><div style="font-size: 16px"><i class="icon-star"></i></div></th>
                         <td>
-                            <span class="current-rating">{{index}}</span>
-                            ~ [<span class="votes-number">{{votes_number}}</span>]
-                            <a class="small" rel="tooltip" title="AstroBin index" href="/faq/#12">?</a>
+                            <a href="#" class="current-rating rating-popover"
+                               rel="popover" data-load="{% url rating_popover_ajax image.id %}">
+                                {% if votes_number > 0 %}{{index}}{% else %}0.000{% endif %}
+                            </a>
                         </td>
                     </tr>
                     <tr>
@@ -1336,12 +1337,17 @@ $(document).ready(function() {
     astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
     astrobin_common.setup_subject_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
     astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+    astrobin_common.setup_rating_popovers();
 
     astrobin_image_detail.init(
         {{image.id}},
         {% if is_revision %}{{revision_image.id}}{% else %}0{% endif %},
         "{{image.user.username}}",
+        {% if votes_number > 0 %}
         "{{index}}",
+        {% else %}
+        "0",
+        {% endif %}
         {
             rating: {
                 {% if not request.user.is_authenticated %}
