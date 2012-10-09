@@ -2407,8 +2407,20 @@ li.revisions {
   margin-top: 2px;
 }
 .gear-popover .thumbnail,
-.user-popover .thumbnail {
+.user-popover .thumbnail,
+.subject-popover .thumbnail,
+.rating-popover .thumbnail {
   border: 0;
+}
+.gear-popover th,
+.user-popover th,
+.subject-popover th,
+.rating-popover th,
+.gear-popover td,
+.user-popover td,
+.subject-popover td,
+.rating-popover td {
+  border-color: #222;
 }
 .gear-page h1 {
   margin-bottom: 8px;
