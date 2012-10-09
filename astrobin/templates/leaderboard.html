@@ -43,6 +43,7 @@
                     </tr>
                     {% autopaginate user_list 100 %}
                     {% for u in user_list %}
+                        {% if u.object.username %}
                         <tr>
                             <td>{{page_obj.start_index|add:forloop.counter0}}</td>
                             <td>
@@ -58,6 +59,7 @@
                             <td>{{u.images}}</td>
                             <td>{{u.comments_written}}</td>
                         </tr>
+                        {% endif %}
                     {% endfor %}
                 </table>
                 <div class="pagination pagination-centered">
