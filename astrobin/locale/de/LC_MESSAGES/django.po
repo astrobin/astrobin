@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-09 05:41+0000\n"
-"PO-Revision-Date: 2012-10-02 14:50+0100\n"
+"PO-Revision-Date: 2012-10-10 10:08+0100\n"
 "Last-Translator: Michlll <astrobin.com@darkchamber.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -1438,9 +1438,8 @@ msgid "Brazilian Portuguese"
 msgstr "Brasilianisches Portugiesisch"
 
 #: models.py:66 models.py:81 settings.py:62
-#, fuzzy
 msgid "Greek"
-msgstr "Griechenland"
+msgstr "Griechisch"
 
 #: models.py:85
 msgid "Pulsars"
@@ -3339,7 +3338,7 @@ msgstr "Wie kann ich ein Bild bewerten?"
 
 #: templates/faq.html:22 templates/faq.html.py:178
 msgid "The rating values seem odd. How are they calculated?"
-msgstr ""
+msgstr "Die Bewertungen sehen seltsam aus. Wie werden die Werte berechnet?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3628,12 +3627,21 @@ msgid ""
 "that the image received, to ensure that images with too few votes aren't "
 "rated better than images with similar rating, but lots of votes."
 msgstr ""
+"AstroBin normalisiert die Bildbewertungen in zweierlei Hinsicht. Zuerst wird "
+"ein \"sigma-reject\"-Algorithmus angewendet, der die Stimmen ausnimmt, die zu "
+"weit vom Durchschnitt entfernt sind. Damit werden nicht ernst gemeinte "
+"Stimmabgaben gestrichen. Als zweites wird die Bewertung mit Hilfe einer "
+"hyperbolischen Funktion über die Anzahl der Stimmen interpoliert, damit "
+"Bilder mit wenigen Stimmen nicht besser bewertet werden als Bilder mit "
+"ähnlichen Bewertungen, aber vielen Stimmen."
 
 #: templates/faq.html:183
 msgid ""
 "This produces the \"AstroBin index\", which is a fairer way to compare "
 "images and users."
 msgstr ""
+"Daraus ergibt sich der \"AstroBin Index\", eine viel aussagekräftigere "
+"Bewertung von Bilder und Benutzern."
 
 #: templates/faq.html:189
 msgid ""
@@ -6462,16 +6470,15 @@ msgstr "Bilder finden"
 
 #: templates/popover/rating.html:12
 msgid "Average"
-msgstr ""
+msgstr "Durchschnitt"
 
 #: templates/popover/rating.html:16
 msgid "Sigma-reject average"
-msgstr ""
+msgstr "Sigma-reject"
 
 #: templates/popover/rating.html:20
-#, fuzzy
 msgid "AstroBin index"
-msgstr "AstroBin ist sozial!"
+msgstr "AstroBin Index"
 
 #: templates/popover/rating.html:28
 msgid "Info"
