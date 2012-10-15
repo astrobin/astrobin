@@ -893,7 +893,7 @@ def image_upload(request):
     profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
-        if profile and profile.telescopes.all() and profile.cameras.all():
+        if user_is_producer(request.user) or (profile and profile.telescopes.all() and profile.cameras.all()):
             response_dict['upload_form'] = ImageUploadForm()
 
     return render_to_response(
