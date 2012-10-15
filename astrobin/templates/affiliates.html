@@ -19,7 +19,7 @@
             </div>
 
             {% if affiliate.company_website %}
-                <a target="_blank" href={{affiliate.company_website}}">{{affiliate.company_website}}</a>
+                <a target="_blank" href="{{affiliate.company_website}}">{{affiliate.company_website}}</a>
             {% endif %}
             {{ affiliate.company_description|markdown|linebreaks }}
         </div>
