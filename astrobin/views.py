@@ -182,6 +182,11 @@ def index(request):
             l += 1
         response_dict['recently_five_starred'] = recent_fives_list[:10]
 
+        response_dict['recent_commercial_gear'] = Image.objects\
+            .filter(is_stored = True, is_wip = False)\
+            .exclude(featured_gear = None)\
+            .order_by('-uploaded')
+
         iotd = ImageOfTheDay.objects.all()[0]
         gear_list = (
             ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
@@ -200,7 +205,9 @@ def index(request):
 
     return object_list(
         request, 
-        queryset = Image.objects.filter(is_stored = True, is_wip = False).order_by('-uploaded'),
+        queryset = Image.objects
+            .filter(is_stored = True, is_wip = False, featured_gear = None)
+            .order_by('-uploaded'),
         template_name = 'index.html',
         template_object_name = 'image',
         paginate_by = 10 if request.user.is_authenticated() else 16,

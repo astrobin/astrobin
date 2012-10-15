@@ -2280,6 +2280,7 @@ form.avatar-change label.control-label {
   margin-top: 28px;
   padding: 8px 0 0 0;
   position: relative;
+  min-height: 197px;
 }
 .home-strip-container .title,
 .activity-stream .title {
@@ -2303,6 +2304,10 @@ form.avatar-change label.control-label {
 .activity-stream .title h3 {
   text-transform: uppercase;
   font-size: 2em;
+}
+.home-strip-container .title.small h3,
+.activity-stream .title.small h3 {
+  font-size: 1em;
 }
 .home-strip-container .thumbs,
 .activity-stream .thumbs {
