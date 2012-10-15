@@ -2313,6 +2313,21 @@ form.avatar-change label.control-label {
 .activity-stream .thumbs {
   margin-left: 58px;
 }
+.home-strip-container .more,
+.activity-stream .more {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 4px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  visibility: hidden;
+}
+.home-strip-container:hover .more {
+  visibility: visible;
+}
 .activity-stream {
   padding-top: 0;
   min-height: 922px;

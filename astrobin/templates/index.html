@@ -119,6 +119,9 @@
                     <div class="thumbs">
                         {% image_list request image_list 0 small_size %}
                     </div>
+                    <div class="more">
+                        <a href="{% url wall %}">{% trans "(view more)" %}</a>
+                    </div>
                 </div>
 
                 {% if recent_commercial_gear %}
