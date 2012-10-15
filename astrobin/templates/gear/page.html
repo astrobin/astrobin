@@ -7,17 +7,17 @@
 {% block content %}
     <div class="gear-page">
         <h1>{% gear_name gear %}</h1>
-        {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and gear.commercial.tagline %}
+        {% if show_tagline %}
             <h4>{{gear.commercial.tagline}}</h4>
         {% endif %}
-        {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and gear.commercial.link %}
+        {% if show_link %}
             <a class="commercial-link" href="{{gear.commercial.link}}" target="_blank">{{gear.commercial.link}}</a>
         {% endif %}
 
         <div class="commercial">
             <div class="row section">
                 <div class="span8">
-                    {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and gear.commercial.image %}
+                    {% if show_image %}
                         {% with gear.commercial.image as image %}
                             <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{{image.original_ext}}"
                                  alt="{{image.title|escape}}"/>
@@ -130,7 +130,7 @@
                     {% endif %}
                 </div>
             </div>
-            {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and commercial_image_revisions %}
+            {% if show_other_images %}
             <div class="row">
                 <div class="span8">
                     <div class="subtle-container">
@@ -149,7 +149,7 @@
             {% endif %}
         </div>
 
-        {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user and gear.commercial.description %}
+        {% if show_description %}
         <div class="row">
             <div class="span8">
                 <div class="subtle-container">

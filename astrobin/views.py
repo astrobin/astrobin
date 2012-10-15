@@ -3741,6 +3741,8 @@ def gear_page(request, id, slug):
     if gear.commercial and gear.commercial.image:
         commercial_image_revisions = ImageRevision.objects.filter(image = gear.commercial.image)
 
+    show_commercial = (gear.commercial and gear.commercial.is_paid) or gear.commercial.producer == request.user
+
     from django.contrib.contenttypes.models import ContentType
     return object_detail(
         request,
@@ -3764,6 +3766,12 @@ def gear_page(request, id, slug):
                  getattr(gear, k[0]),
                  k[1]) for k in gear.attributes()],
             'commercial_image_revisions': commercial_image_revisions,
+
+            'show_tagline': gear.commercial.tagline and show_commercial,
+            'show_link': gear.commercial.link and show_commercial,
+            'show_image': gear.commercial.image and show_commercial,
+            'show_other_images': commercial_image_revisions and show_commercial,
+            'show_description': gear.commercial.description and show_commercial,
         })
 
 
