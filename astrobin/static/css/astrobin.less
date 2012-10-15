@@ -2525,6 +2525,20 @@ form.avatar-change label.control-label {display: none;}
     .thumbs {
         margin-left: 58px;
     }
+
+    .more {
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      background-color: rgba(0,0,0,0.7);
+      padding: @spacer-small;
+      .rounded-corners;
+      visibility: hidden;
+    }
+}
+
+.home-strip-container:hover .more {
+  visibility: visible;
 }
 
 .activity-stream {
