@@ -121,6 +121,17 @@
                     </div>
                 </div>
 
+                {% if recent_commercial_gear %}
+                    <div class="home-strip-container">
+                        <div class="title small">
+                            <h3>{% trans "Commercial products" %}</h3>
+                        </div>
+                        <div class="thumbs">
+                            {% image_list request recent_commercial_gear 0 small_size %}
+                        </div>
+                    </div>
+                {% endif %}
+
                 {% if recent_from_followees %}
                     <div class="home-strip-container">
                         <div class="title">
