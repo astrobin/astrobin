@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-09 05:41+0000\n"
-"PO-Revision-Date: 2012-09-04 21:24+0100\n"
-"Last-Translator: njjmfm <josephmichail@gmail.com>\n"
+"PO-Revision-Date: 2012-10-14 16:12+0100\n"
+"Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1431,12 +1431,11 @@ msgstr "Polonais"
 
 #: models.py:65 models.py:80 settings.py:61
 msgid "Brazilian Portuguese"
-msgstr "Portugaise brésilien"
+msgstr "Portugais brésilien"
 
 #: models.py:66 models.py:81 settings.py:62
-#, fuzzy
 msgid "Greek"
-msgstr "Grèce"
+msgstr "Grec"
 
 #: models.py:85
 msgid "Pulsars"
@@ -3345,7 +3344,7 @@ msgstr "Comment voter correctement?"
 
 #: templates/faq.html:22 templates/faq.html.py:178
 msgid "The rating values seem odd. How are they calculated?"
-msgstr ""
+msgstr "Comment fonctionne le système de notation?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3623,12 +3622,22 @@ msgid ""
 "that the image received, to ensure that images with too few votes aren't "
 "rated better than images with similar rating, but lots of votes."
 msgstr ""
+"AstroBin utilise deux routines pour harmoniser la notation des images. En "
+"premier lieu, un algorithme <em>sigma-reject</em> est appliqué afin de "
+"rejeter les votes trop éloignés de la moyenne, permettant ainsi de ne pas "
+"prendre en compte les notes malhonnêtes. Dans un second temps, la notation "
+"est associée à une fonction hyperbolique du nombre de votes attribués à "
+"l'image, garantissant ainsi que les images avec peu de votes ne soient pas "
+"mieux classées que des images avec une notation similaire, mais davantage de "
+"votes."
 
 #: templates/faq.html:183
 msgid ""
 "This produces the \"AstroBin index\", which is a fairer way to compare "
 "images and users."
 msgstr ""
+"Ce système détermine \"l'indice AstroBin\", une formule plus équitable pour "
+"évaluer les images et les utilisateurs."
 
 #: templates/faq.html:189
 msgid ""
@@ -6476,16 +6485,15 @@ msgstr "Trouver des images"
 
 #: templates/popover/rating.html:12
 msgid "Average"
-msgstr ""
+msgstr "Moyenne"
 
 #: templates/popover/rating.html:16
 msgid "Sigma-reject average"
-msgstr ""
+msgstr "Moyenne sigma-reject"
 
 #: templates/popover/rating.html:20
-#, fuzzy
 msgid "AstroBin index"
-msgstr "Astrobin est communautaire!"
+msgstr "Indice AstroBin"
 
 #: templates/popover/rating.html:28
 msgid "Info"
