@@ -5,18 +5,16 @@
 
 {% block title %}AstroBin - {% trans "Edit your commercial information" %}{% endblock %}
 {% block content %}
-    {% include 'profile-edit-menu.html' %}
     <div class="row">
-        <div class="span12">
-            <h1>{% trans "Edit your commercial information" %}</h1>
-
+        {% include 'profile-edit-menu.html' %}
+        <div class="span9">
             <form class="form-horizontal" method="post" action="{% url profile_edit_commercial %}">
                 {{form|as_bootstrap}}
                 <div class="form-actions">
                     <input class="btn btn-primary" type="submit" value="{% trans "Save" %}" />
                 </div>
             </form>
-        </div> <!-- span12 -->
+        </div> <!-- span -->
     </div> <!-- row -->
 {% endblock %}
 
