@@ -281,6 +281,8 @@ def wall(request):
         sqs = sqs.filter(subject_type = 400)
     elif filter == 'gear':
         sqs = sqs.filter(subject_type = 500)
+    elif filter == 'products':
+        sqs = sqs.filter(is_commercial = True)
     elif filter == 'other':
         sqs = sqs.filter(subject_type = 600)
 

@@ -132,6 +132,9 @@
                         <div class="thumbs">
                             {% image_list request recent_commercial_gear 0 small_size %}
                         </div>
+                        <div class="more">
+                            <a href="{% url wall %}?filter=products">{% trans "(view more)" %}</a>
+                        </div>
                     </div>
                 {% endif %}
 

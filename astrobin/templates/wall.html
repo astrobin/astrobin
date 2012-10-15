@@ -143,6 +143,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{% query_string "filter='products'" "" %}">
+                            <span class="bg-icon{% if filter == 'products' %} icon-ok{% endif %}"></span>
+                            {% trans "Commercial products" %}
+                        </a>
+                    </li>
+                    <li>
                         <a href="{% query_string "filter='other'" "" %}">
                             <span class="bg-icon{% if filter == 'other' %} icon-ok{% endif %}"></span>
                             {% trans "Other" %}

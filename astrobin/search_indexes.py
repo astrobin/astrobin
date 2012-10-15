@@ -490,6 +490,8 @@ class ImageIndex(SearchIndex):
 
     comments = IntegerField()
 
+    is_commercial = BooleanField()
+
     subject_type = IntegerField(model_attr = 'subject_type')
 
     def index_queryset(self):
@@ -606,6 +608,10 @@ class ImageIndex(SearchIndex):
 
     def prepare_comments(self, obj):
         return _prepare_comments(obj)
+
+    def prepare_is_commercial(self, obj):
+        commercial_gear = CommercialGear.objects.filter(image = obj)
+        return commercial_gear.count() > 0
 
 
 class SubjectIdentifierIndex(SearchIndex):
