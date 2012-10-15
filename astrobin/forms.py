@@ -948,15 +948,18 @@ class ClaimCommercialGearForm(forms.Form):
 
     make = forms.ChoiceField(
         choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make'))),
+        label = _("Make"),
         help_text = _("The make, brand, producer or developer of this product."),
         required = True)
 
     name = forms.ChoiceField(
         choices = [('', '---------')],
+        label = _("Name"),
         required = True)
 
     merge_with = forms.ChoiceField(
         choices = [('', '---------')],
+        label = _("Merge"),
         help_text = _("Use this field to mark that the item you are claiming really is the same product (or a variation thereof) of something you have claimed before."),
         required = False)
 
@@ -981,6 +984,7 @@ class MergeCommercialGearForm(forms.Form):
 
     merge_with = forms.ChoiceField(
         choices = [('', '---------')],
+        label = _("Merge"),
         help_text = _("Use this field to mark that the item you are merging really is the same product (or a variation thereof) of something you have claimed before."),
         required = False)
 
@@ -1005,15 +1009,18 @@ class ClaimRetailedGearForm(forms.Form):
 
     make = forms.ChoiceField(
         choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make'))),
+        label = _("Make"),
         help_text = _("The make, brand, producer or developer of this product."),
         required = True)
 
     name = forms.ChoiceField(
         choices = [('', '---------')],
+        label = _("Name"),
         required = True)
 
     merge_with = forms.ChoiceField(
         choices = [('', '---------')],
+        label = _("Merge"),
         help_text = _("Use this field to mark that the item you are claiming really is the same product (or a variation thereof) of something you have claimed before."),
         required = False)
 
@@ -1048,6 +1055,7 @@ class MergeRetailedGearForm(forms.Form):
 
     merge_with = forms.ChoiceField(
         choices = [('', '---------')],
+        label = _("Merge"),
         help_text = _("Use this field to mark that the item you are merging really is the same product (or a variation thereof) of something you have claimed before."),
         required = False)
 
