@@ -3064,6 +3064,8 @@ def affiliates(request):
             .filter(
                 Q(user__groups__name = 'Producers') |
                 Q(user__groups__name = 'Retailers'))
+            .filter(
+                Q(user__groups__name = 'Paying'))
             .exclude(
                 Q(company_name = None) |
                 Q(company_name = "")).distinct(),
