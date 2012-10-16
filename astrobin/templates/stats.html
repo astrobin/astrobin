@@ -6,16 +6,15 @@
 
 {% block title %}AstroBin - {% trans "Stats" %}{% endblock %}
 {% block content %}
-    <div class="row">
+    <div class="well">
+        {% blocktrans %}<strong>{{total_users}}</strong> users uploaded <strong>{{total_images}}</strong> images, reaching <strong>{{total_integration}}</strong> hours of integration time.{% endblocktrans %}
+    </div>
+
+    <div class="row section">
         <div class="span12">
-            <div class="well">
-                {% blocktrans %}<strong>{{total_users}}</strong> users uploaded <strong>{{total_images}}</strong> images, reaching <strong>{{total_integration}}</strong> hours of integration time.{% endblocktrans %}
-            </div>
-            <div class="plots">
-                <h2>
-                        {% trans "Total integration hours in the last 12 months" %}
-                </h2>
-                <div id="stats_integration_hours" class="plot" style="width:940px;height:300px;">
+            <div class="subtle-container">
+                <div class="header">{% trans "Total integration hours in the last 12 months" %}</div>
+                <div id="stats_integration_hours" class="plot" style="width:914px;height:300px;">
                     <div class="loading">
                         <p>{% trans "Please wait: the plot is loading..." %}</p>
                         <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
@@ -25,75 +24,83 @@
         </div>
     </div>
 
-    <div class="row plot-container">
+    <div class="row section">
         <div class="span12">
-            <h2>
-                {% trans "Number of images by subject type" %}
-            </h2>
-            <div id="stats_subject_type_trend" class="plot" style="width:940px;height:200px;">
-                <div class="loading">
-                    <p>{% trans "Please wait: the plot is loading..." %}</p>
-                    <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+            <div class="subtle-container">
+                <div class="header">{% trans "Number of images by subject type" %}</div>
+                <div id="stats_subject_type_trend" class="plot" style="width:914px;height:200px;">
+                    <div class="loading">
+                        <p>{% trans "Please wait: the plot is loading..." %}</p>
+                        <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row plot-container">
+    <div class="row section">
         <div class="span6">
-            <div class="well"><strong>{% trans "Global distribution of camera types" %}</strong></div>
-            <div class="row">
-                <div class="span3">
-                    <div id="stats_camera_types" class="plot" style="width:200px; height: 200px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+            <div class="subtle-container">
+            <div class="header">{% trans "Global distribution of camera types" %}</div>
+                <div class="row">
+                    <div class="span3">
+                        <div id="stats_camera_types" class="plot" style="width:200px; height: 200px;">
+                            <div class="loading">
+                                <p>{% trans "Please wait: the plot is loading..." %}</p>
+                                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="span3">
-                    <div id="stats_camera_types_legend" class="legend"></div>
-                    <div id="stats_camera_types_hover"></div>
+                    <div class="span3">
+                        <div id="stats_camera_types_legend" class="legend"></div>
+                        <div id="stats_camera_types_hover"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="span6">
-            <div class="well"><strong>{% trans "Global distribution of telescope types" %}</strong></div>
-            <div class="row">
-                <div class="span3">
-                    <div id="stats_telescope_types" class="plot" style="width:200px; height: 200px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+            <div class="subtle-container">
+                <div class="header">{% trans "Global distribution of telescope types" %}</div>
+                <div class="row">
+                    <div class="span3">
+                        <div id="stats_telescope_types" class="plot" style="width:200px; height: 200px;">
+                            <div class="loading">
+                                <p>{% trans "Please wait: the plot is loading..." %}</p>
+                                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="span3">
-                    <div id="stats_telescope_types_legend" class="legend"></div>
-                    <div id="stats_telescope_types_hover"></div>
+                    <div class="span3">
+                        <div id="stats_telescope_types_legend" class="legend"></div>
+                        <div id="stats_telescope_types_hover"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row plot-container">
+    <div class="row">
         <div class="span6">
-            <div class="well"><strong>{% trans "CCD vs DLSR: the global trend" %}</strong></div>
-            <div id="stats_camera_types_trend" class="plot" style="width:460px; height: 200px;">
-                <div class="loading">
-                    <p>{% trans "Please wait: the plot is loading..." %}</p>
-                    <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+            <div class="subtle-container">
+                <div class="header">{% trans "CCD vs DLSR: the global trend" %}</div>
+                <div id="stats_camera_types_trend" class="plot" style="width:420px; height: 200px;">
+                    <div class="loading">
+                        <p>{% trans "Please wait: the plot is loading..." %}</p>
+                        <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="span6">
-            <div class="well"><strong>{% trans "Global trend of telescope types" %}</strong></div>
-            <div id="stats_telescope_types_trend" class="plot" style="width:460px; height: 200px;">
-                <div class="loading">
-                    <p>{% trans "Please wait: the plot is loading..." %}</p>
-                    <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+            <div class="subtle-container">
+                <div class="header">{% trans "Global trend of telescope types" %}</div>
+                <div id="stats_telescope_types_trend" class="plot" style="width:420px; height: 200px;">
+                    <div class="loading">
+                        <p>{% trans "Please wait: the plot is loading..." %}</p>
+                        <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                    </div>
                 </div>
             </div>
         </div>

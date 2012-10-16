@@ -1,138 +1,32 @@
 {% extends 'base.html' %}
 
 {% load i18n tags bootstrap_toolkit avatar_tags markup %}
+{% load hitcount_tags %}
 
 {% block title %}AstroBin - {% gear_name gear %}{% endblock %}
 
 {% block content %}
     <div class="gear-page">
-        <h1>{% gear_name gear %}</h1>
-        {% if show_tagline %}
-            <h4>{{gear.commercial.tagline}}</h4>
-        {% endif %}
-        {% if show_link %}
-            <a class="commercial-link" href="{{gear.commercial.link}}" target="_blank">{{gear.commercial.link}}</a>
-        {% endif %}
+        <div class="page-header">
+            <h1>{% gear_name gear %}
+                {% if show_tagline %}
+                    <small>{{gear.commercial.tagline}}</small>
+                {% endif %}
+            </h1>
+        </div>
 
-        <div class="commercial">
-            <div class="row section">
-                <div class="span8">
-                    {% if show_image %}
+        <div class="row section">
+            <div class="span8">
+                {% if show_image %}
+                    <div class="gear-image">
                         {% with gear.commercial.image as image %}
                             <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{{image.original_ext}}"
                                  alt="{{image.title|escape}}"/>
                         {% endwith %}
-                    {% else %}
-                        <div class="subtle-container">
-                            <div style="font-size: 30px; padding: 40px; text-align: center;">
-                                <i class="icon-question-sign"></i>
-                                {% trans "No image" %}
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="span4">
-                    <div class="subtle-container">
-                        <div class="header">
-                            <h4><i class="icon-tags"></i> {% trans "Properties" %}</h4>
-                        </div>
-                        <table class="table">
-                            <tr>
-                                <th>{% trans "Type" %}</th>
-                                <td>{% gear_type gear %}</td>
-                            </tr>
-                            <tr>
-                                <th>{% trans "Make" %}</th>
-                                <td>
-                                    {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user  %}
-                                        <a href="/search/?q={{gear.make}}{% search_form_query %}&amp;search_type=3">
-                                    {% endif %}
-                                        {{gear.make}}
-                                    {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user %}
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            {% for attribute in attributes %}
-                                {% if attribute.1 %}
-                                    <tr>
-                                        <th>{{attribute.0}}</th>
-                                        <td>{{attribute.1}}{% if attribute.2 %} {{attribute.2|safe}}{% endif %}</td>
-                                    </tr>
-                                {% endif %}
-                            {% endfor %}
-                            <tr>
-                                <th>{% trans "Owners" %}</th>
-                                <td>{{owners_count}}</td>
-                            </tr>
-                            <tr>
-                                <th>{% trans "Images" %}</th>
-                                <td>{{images_count}}</td>
-                            </tr>
-                            <tr>
-                                <th>{% trans "Reviews" %}</th>
-                                <td>{{reviews|length}}</td>
-                            </tr>
-                             <tr>
-                                <th>{% trans "Comments" %}</th>
-                                <td>{{comments|length}}</td>
-                            </tr>
-                        </table>
                     </div>
+                {% endif %}
 
-                    {% if gear.retailed.all %}
-                        <div class="subtle-container">
-                            <div class="header">
-                                <h4><i class="icon-credit-card"></i> {% trans "Buy it here" %}</h4>
-                            </div>
-                            <table class="table">
-                                {% for retailed in gear.retailed.all %}
-                                    {% with retailed.retailer.userprofile_set.all.0 as profile %}
-                                        {% if profile.company_name %}
-                                            <tr>
-                                                <th>
-                                                    <div class="company-name">
-                                                        {% if profile.company_website %}
-                                                            <a href="{{profile.company_website}}" target="_blank"
-                                                               rel="tooltip" title="{{profile.company_website}}">
-                                                        {% endif %}
-                                                            {{profile.company_name}}
-                                                        {% if profile.company_website %}
-                                                            </a>
-                                                        {% endif %}
-                                                    <div class="reailer-country">
-                                                        {% if profile.retailer_country %}
-                                                            {% trans profile.get_retailer_country_display %}
-                                                        {% endif %}
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    {{retailed.price|default:"-"}}
-                                                    {% if retailed.price %}
-                                                        {{retailed.currency}}
-                                                    {% endif %}
-                                                </td>
-                                                <td>
-                                                    {% if retailed.link %}
-                                                        <a href="{{retailed.link}}" target="_blank" rel="tooltip" title="{{retailed.link}}">
-                                                    {% endif %}
-                                                        <i class="icon-link"></i>
-                                                    {% if retailed.link %}
-                                                        </a>
-                                                    {% endif %}
-                                                </td>
-                                            </tr>
-                                        {% endif %}
-                                    {% endwith %}
-                                {% endfor %}
-                            </table>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-            {% if show_other_images %}
-            <div class="row">
-                <div class="span8">
+                {% if show_other_images %}
                     <div class="subtle-container">
                         <div class="header">
                             <h4><i class="icon-picture"></i> {% trans "Other images" %}</h4>
@@ -144,26 +38,17 @@
                              </a>
                         {% endfor %}
                     </div>
-                </div>
-            </div>
-            {% endif %}
-        </div>
+                {% endif %}         
 
-        {% if show_description %}
-        <div class="row">
-            <div class="span8">
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4><i class="icon-align-left"></i> {% trans "Producer's description" %}</h4>
+                {% if show_description %}
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4><i class="icon-align-left"></i> {% trans "Producer's description" %}</h4>
+                        </div>
+                        {{gear.commercial.description|markdown|linebreaks}}
                     </div>
-                    {{gear.commercial.description|markdown|linebreaks}}
-                </div>
-            </div>
-        </div>
-        {% endif %}
+                {% endif %}
 
-        <div class="row">
-            <div class="span12">
                 {% if examples %}
                     <div class="subtle-container">
                         <div class="header">
@@ -175,27 +60,10 @@
                                 </a>
                             </h4>
                         </div>
-                        {% image_list request examples 0 87 %}
+                        {% image_list request examples 0 95 %}
                     </div>
                 {% endif %}
 
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4><i class="icon-bar-chart"></i> {% trans "Total images" %}</h4>
-                    </div>
-                    <div id="stats_total_images" class="plot" style="width:900px; height: 200px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="span4">
                 <div class="reviews subtle-container">
                     <div class="header"><h4><i class="icon-star-empty"></i> {% trans "Reviews" %}</h4></div>
                     {% for review in reviews %}
@@ -244,9 +112,7 @@
                         </form>
                     </div>
                 {% endif %}
-            </div>
 
-            <div class="span8">
                 <div class="comments subtle-container">
                     <div class="header"><h4><i class="icon-comments-alt"></i> {% trans "Comments" %}</h4></div>
 
@@ -320,13 +186,13 @@
                 {% if request.user.is_authenticated %}
                     <div class="subtle-container">
                         <div class="header"><h4><i class="icon-comment"></i> {% trans "Start a discussion, leave a comment or ask a question" %}</h4></div>
-			<p>
-			{% if request.user.is_authenticated %}
-			    {% blocktrans %}Use this space to start a discussion, leave a comment or ask a question about this piece of gear. All the users on AstroBin who own one, will be notified and can join the discussion.{% endblocktrans %}
-			{% else %}
-			    {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
-			 {% endif %}
-			</p>
+                        <p>
+                        {% if request.user.is_authenticated %}
+                            {% blocktrans %}Use this space to start a discussion, leave a comment or ask a question about this piece of gear. All the users on AstroBin who own one, will be notified and can join the discussion.{% endblocktrans %}
+                        {% else %}
+                            {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
+                         {% endif %}
+                        </p>
 
                         <div class="top-level-form">
                             <form class="form-horizontal" action="{% url gear_comment_save %}" method="post">
@@ -349,13 +215,150 @@
                     </div> <!-- subtle-container -->
                 {% endif %}
             </div>
-        </div>
+
+            <div class="span4">
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4><i class="icon-tags"></i> {% trans "Properties" %}</h4>
+                    </div>
+                    <table class="table">
+                        {% if show_link %}
+                        <tr>
+                            <th>{% trans "Link" %}</th>
+                            <td>
+                                <a class="commercial-link" href="{{gear.commercial.link}}" target="_blank"
+                                   rel="tooltip" title="{{gear.commercial.link}}">
+                                    <i class="icon-link"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                        <tr>
+                            <th>{% trans "Type" %}</th>
+                            <td>{% gear_type gear %}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Make" %}</th>
+                            <td>
+                                {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user  %}
+                                    <a href="/search/?q={{gear.make}}{% search_form_query %}&amp;search_type=3">
+                                {% endif %}
+                                    {{gear.make}}
+                                {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user %}
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% for attribute in attributes %}
+                            {% if attribute.1 %}
+                                <tr>
+                                    <th>{{attribute.0}}</th>
+                                    <td>{{attribute.1}}{% if attribute.2 %} {{attribute.2|safe}}{% endif %}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        <tr>
+                            <th>{% trans "Owners" %}</th>
+                            <td>{{owners_count}}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Images" %}</th>
+                            <td>{{images_count}}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Reviews" %}</th>
+                            <td>{{reviews|length}}</td>
+                        </tr>
+                         <tr>
+                            <th>{% trans "Comments" %}</th>
+                            <td>{{comments|length}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                {% if gear.retailed.all %}
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4><i class="icon-credit-card"></i> {% trans "Buy it here" %}</h4>
+                        </div>
+                        <table class="table">
+                            {% for retailed in gear.retailed.all %}
+                                {% with retailed.retailer.userprofile_set.all.0 as profile %}
+                                    {% if profile.company_name %}
+                                        <tr>
+                                            <th>
+                                                <div class="company-name">
+                                                    {% if profile.company_website %}
+                                                        <a href="{{profile.company_website}}" target="_blank"
+                                                           rel="tooltip" title="{{profile.company_website}}">
+                                                    {% endif %}
+                                                        {{profile.company_name}}
+                                                    {% if profile.company_website %}
+                                                        </a>
+                                                    {% endif %}
+                                                <div class="reailer-country">
+                                                    {% if profile.retailer_country %}
+                                                        {% trans profile.get_retailer_country_display %}
+                                                    {% endif %}
+                                                </div>
+                                            </th>
+                                            <td>
+                                                {{retailed.price|default:"-"}}
+                                                {% if retailed.price %}
+                                                    {{retailed.currency}}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if retailed.link %}
+                                                    <a href="{{retailed.link}}" target="_blank" rel="tooltip" title="{{retailed.link}}">
+                                                {% endif %}
+                                                    <i class="icon-link"></i>
+                                                {% if retailed.link %}
+                                                    </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% endif %}
+
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4><i class="icon-bar-chart"></i> {% trans "Views" %}</h4>
+                    </div>
+                    <div id="stats_gear_views" class="plot" style="width:260px; height: 100px;">
+                        <div class="loading">
+                            <p>{% trans "Please wait: the plot is loading..." %}</p>
+                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4><i class="icon-bar-chart"></i> {% trans "Total images" %}</h4>
+                    </div>
+                    <div id="stats_total_images" class="plot" style="width:260px; height: 100px;">
+                        <div class="loading">
+                            <p>{% trans "Please wait: the plot is loading..." %}</p>
+                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- span4 -->
+        </div> <!-- row -->
     </div> <!-- gear-page -->
 {% endblock %}
 
 {% block extra_js %}
 <script type="text/javascript">
 $(document).ready(function() {
+    {% get_hit_count_javascript for gear %}
+
     var reviewFormOptions = {
         dataType: 'json',
         timeout: 30000,
@@ -602,6 +605,12 @@ $(document).ready(function() {
         "{% url stats_gear_total_images gear.id %}",
         30000);
     astrobin_stats.enableTooltips("#stats_total_images");
+
+    astrobin_stats.plot(
+        '#stats_gear_views',
+        "{% url stats_gear_views gear.id %}",
+        30000);
+    astrobin_stats.enableTooltips("#stats_gear_views");
 
     var hilighted_comment = location.hash.substr(1);
     if (hilighted_comment) {

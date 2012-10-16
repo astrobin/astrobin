@@ -136,6 +136,10 @@ urlpatterns = patterns('',
         views.stats_get_image_views_ajax,
         name = 'stats_image_views'),
 
+    url(r'^gear/(?P<id>\d+)/stats/views/$',
+        views.stats_get_gear_views_ajax,
+        name = 'stats_gear_views'),
+
      url(r'^stats/camera-types-trend/$',
         views.stats_camera_types_trend_ajax,
         name = 'stats_camera_types_trend'),

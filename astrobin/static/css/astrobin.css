@@ -888,6 +888,9 @@ li.astrobin-thumbnail img {
   -webkit-border-radius: 12px;
   border-radius: 12px;
 }
+.page-header {
+  border-bottom: 0;
+}
 .blog-entry {
   margin-bottom: 40px;
 }
@@ -1946,8 +1949,6 @@ div.token-input-dropdown p {
   color: #b8b8b8;
 }
 .plot {
-  margin-top: 12px;
-  margin-bottom: 52px;
   text-align: center;
 }
 .plot .loading {
@@ -2442,12 +2443,8 @@ li.revisions {
 .rating-popover td {
   border-color: #222;
 }
-.gear-page h1 {
-  margin-bottom: 8px;
-}
-.gear-page .commercial-link {
-  display: block;
-  margin-bottom: 8px;
+.gear-page .gear-image {
+  margin-bottom: 12px;
 }
 .user-business-card,
 .gear-business-card {

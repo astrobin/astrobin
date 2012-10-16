@@ -191,7 +191,7 @@ def uploaded_images(user, period='monthly'):
     return (flot_label, flot_data, flot_options)
 
 
-def views(user, period='daily'):
+def views(user, period='monthly'):
     _map = {
         'yearly' : (_("Views, yearly") , '%Y'),
         'monthly': (_("Views, monthly"), '%Y-%m'),
@@ -234,7 +234,7 @@ def views(user, period='daily'):
     return (flot_label, flot_data, flot_options)
 
 
-def image_views(image_id, period='daily'):
+def image_views(image_id, period='monthly'):
     _map = {
         'yearly' : (_("Views, yearly") , '%Y'),
         'monthly': (_("Views, monthly"), '%Y-%m'),
@@ -364,7 +364,7 @@ def subject_total_images(subject_id):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time'},
+        'xaxis': {'mode': 'time', 'timeformat': '%b'},
         'lines': {'show': 'true', 'fill': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -682,13 +682,10 @@ def gear_total_images(gear_id):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time'},
-        'lines': {'show': 'true', 'fill': 'true'},
-        'points': {'show': 'true'},
-        'legend': {
-            'position': 'nw',
-            'backgroundColor': '#000000',
-            'backgroundOpacity': 0.75},
+        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'lines': {'show':  True, 'fill': True},
+        'points': {'show': True},
+        'legend': {'show': False},
         'grid': {'hoverable': 'true'},
     }
 
@@ -728,6 +725,48 @@ def gear_total_images(gear_id):
             else:
                 flot_data.append([t, 0])
         flot_data = unique_items(flot_data)
+
+    return (flot_label, flot_data, flot_options)
+
+
+def gear_views(gear_id, period='monthly'):
+    _map = {
+        'yearly' : (_("Views, yearly") , '%Y'),
+        'monthly': (_("Views, monthly"), '%Y-%m'),
+        'daily'  : (_("Views, daily")  , '%Y-%m-%d'),
+    }
+
+    flot_label = _map[period][0]
+    flot_data = []
+    flot_options = {
+        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'lines': {'show': True, 'fill': True},
+        'points': {'show': True},
+        'legend': {'show': False},
+        'grid': {'hoverable': 'true'},
+    }
+
+    all = Hit.objects.filter(
+        Q(hitcount__object_pk = gear_id) &
+        Q(hitcount__content_type__model = 'gear')).order_by('created')
+    data = {}
+    for i in all:
+        key = i.created.date().strftime(_map[period][1])
+        if key in data:
+            data[key] += 1
+        else:
+            data[key] = 1 
+
+    if all:
+        for date in daterange(all[0].created.date(), datetime.today().date()):
+            grouped_date = date.strftime(_map[period][1])
+            t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+            if grouped_date in data.keys():
+                flot_data.append([t, data[grouped_date]])
+            else:
+                flot_data.append([t, 0])
+        flot_data = unique_items(flot_data)
+
 
     return (flot_label, flot_data, flot_options)
 
