@@ -771,3 +771,44 @@ def gear_views(gear_id, period='monthly'):
     return (flot_label, flot_data, flot_options)
 
 
+def producer_gear_views(username, period='monthly'):
+    _map = {
+        'yearly' : (_("Views, yearly") , '%Y'),
+        'monthly': (_("Views, monthly"), '%Y-%m'),
+        'daily'  : (_("Views, daily")  , '%Y-%m-%d'),
+    }
+
+    flot_label = _map[period][0]
+    flot_data = []
+    flot_options = {
+        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'lines': {'show': True, 'fill': True},
+        'points': {'show': True},
+        'legend': {'show': False},
+        'grid': {'hoverable': 'true'},
+    }
+
+    gear_ids = Gear.objects.filter(commercial__producer__username = username).values_list('pk', flat = True)
+    all = Hit.objects.filter(
+        Q(hitcount__object_pk__in = gear_ids) &
+        Q(hitcount__content_type__model = 'gear')).order_by('created')
+    data = {}
+    for i in all:
+        key = i.created.date().strftime(_map[period][1])
+        if key in data:
+            data[key] += 1
+        else:
+            data[key] = 1 
+
+    if all:
+        for date in daterange(all[0].created.date(), datetime.today().date()):
+            grouped_date = date.strftime(_map[period][1])
+            t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
+            if grouped_date in data.keys():
+                flot_data.append([t, data[grouped_date]])
+            else:
+                flot_data.append([t, 0])
+        flot_data = unique_items(flot_data)
+
+
+    return (flot_label, flot_data, flot_options)
