@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-    {% endif %} {# user_is_producer #}
+    {% endif %} <!-- user_is_producer -->
 
     {% if user_is_retailer %}
         <div class="row section">
@@ -185,7 +185,7 @@
                 </div>
             </div>
         </div>
-    {% endif %} {# user_is_retailer #}
+    {% endif %} <!-- user_is_retailer -->
 
     {% if user == request.user and user_is_producer or user_is_retailer %}
         <div class="row section">
@@ -295,7 +295,7 @@
                     <a href="#" class="btn btn-primary">Continue</a>
                 </div>
             </div>
-        {% endif %} {# user_is_producer %}
+        {% endif %} <!-- user_is_producer -->
 
         {% if user_is_retailer %}
             <div class="modal hide fade" id="claim-retailed-product-modal">
@@ -365,9 +365,9 @@
                     <a href="#" class="btn btn-primary">Continue</a>
                 </div>
             </div>
-        {% endif %} {# user_is_retailer #}
+        {% endif %} <!-- user_is_retailer -->
     {% endblock %}
-{% endifequal %} {# user == request.user #}
+{% endifequal %} <!-- user == request.user -->
 
 {% block extra_js %}
     {% include 'user/profile-js.html' %}
@@ -713,7 +713,7 @@
                     });
                 });
             </script>
-        {% endif %} {# user_is_producer #}
+        {% endif %} <!-- user_is_producer -->
 
         {% if user_is_retailer %}
             <script type="text/javascript">
@@ -1039,6 +1039,6 @@
                     });
                 });
             </script>
-        {% endif %} {# user_is_producer #}
-    {% endifequal %} {# user == request.user #}
+        {% endif %} <!-- user_is_producer -->
+    {% endifequal %} <!-- user == request.user -->
 {% endblock %}
