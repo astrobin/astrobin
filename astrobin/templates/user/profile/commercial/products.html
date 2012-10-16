@@ -16,10 +16,12 @@
         {% endifequal %}
     </h1>
 
+    {% if user == request.user %}
     <div class="alert alert-info">
         <i class="icon-info-sign"></i>
         {% blocktrans %}Please remember that you are only allowed to claim items that you really produce and/or retail.{% endblocktrans %}
     </div>
+    {% endif %}
 
     {% if user_is_producer %}
         <div class="row section">
