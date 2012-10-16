@@ -2104,6 +2104,21 @@ def stats_get_gear_views_ajax(request, id, period = 'monthly'):
     return ajax_response(response_dict)
 
 
+@require_GET
+def stats_get_producer_gear_views_ajax(request, username, period = 'monthly'):
+    import stats as _s
+
+    (label, data, options) = _s.producer_gear_views(username, period)
+
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
 @login_required
 @require_GET
 def user_profile_edit_basic(request):
