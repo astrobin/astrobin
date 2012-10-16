@@ -36,7 +36,7 @@ def integration_hours(user, period = 'monthly', since = 0):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time'},
+        'xaxis': {'mode': 'time', 'timeformat': '%b'},
         'lines': {'show': 'true', 'fill': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -90,7 +90,7 @@ def integration_hours_by_gear(user, period='monthly'):
 
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time'},
+        'xaxis': {'mode': 'time', 'timeformat': '%b'},
         'lines': {'show': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -155,7 +155,7 @@ def uploaded_images(user, period='monthly'):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time'},
+        'xaxis': {'mode': 'time', 'timeformat': '%b'},
         'lines': {'show': 'true', 'fill': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -201,7 +201,7 @@ def views(user, period='monthly'):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time'},
+        'xaxis': {'mode': 'time', 'timeformat': '%b'},
         'lines': {'show': 'true', 'fill': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -244,7 +244,7 @@ def image_views(image_id, period='monthly'):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time'},
+        'xaxis': {'mode': 'time', 'timeformat': '%b'},
         'lines': {'show': 'true', 'fill': 'true'},
         'points': {'show': 'true'},
         'legend': {
