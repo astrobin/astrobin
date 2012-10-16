@@ -36,7 +36,7 @@ def integration_hours(user, period = 'monthly', since = 0):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'xaxis': {'mode': 'time'},
         'lines': {'show': 'true', 'fill': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -45,6 +45,9 @@ def integration_hours(user, period = 'monthly', since = 0):
             'backgroundOpacity': 0.75},
         'grid': {'hoverable': 'true'},
     }
+
+    if period == 'monthly':
+        flot_options['xaxis']['timeformat'] = '%b'
 
     astrobin = User.objects.get(username = 'astrobin')
     all = DeepSky_Acquisition.objects.all().exclude(date = None).order_by('date')
@@ -90,7 +93,7 @@ def integration_hours_by_gear(user, period='monthly'):
 
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'xaxis': {'mode': 'time'},
         'lines': {'show': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -98,6 +101,9 @@ def integration_hours_by_gear(user, period='monthly'):
         },
         'grid': {'hoverable': 'true'},
     }
+
+    if period == 'monthly':
+        flot_options['xaxis']['timeformat'] = '%b'
 
     profile = UserProfile.objects.get(user = user)
     all_telescopes = profile.telescopes.all()
@@ -155,7 +161,7 @@ def uploaded_images(user, period='monthly'):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'xaxis': {'mode': 'time'},
         'lines': {'show': 'true', 'fill': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -164,6 +170,9 @@ def uploaded_images(user, period='monthly'):
             'backgroundOpacity': 0.75},
         'grid': {'hoverable': 'true'},
     }
+
+    if period == 'monthly':
+        flot_options['xaxis']['timeformat'] = '%b'
 
     astrobin = User.objects.get(username = 'astrobin')
     all = Image.objects.all().order_by('uploaded')
@@ -201,7 +210,7 @@ def views(user, period='monthly'):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'xaxis': {'mode': 'time'},
         'lines': {'show': 'true', 'fill': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -210,6 +219,9 @@ def views(user, period='monthly'):
             'backgroundOpacity': 0.75},
         'grid': {'hoverable': 'true'},
     }
+
+    if period == 'monthly':
+        flot_options['xaxis']['timeformat'] = '%b'
 
     user_images = Image.objects.filter(user = user)
     all = Hit.objects.filter(hitcount__object_pk__in = [x.pk for x in user_images]).order_by('created')
@@ -244,7 +256,7 @@ def image_views(image_id, period='monthly'):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'xaxis': {'mode': 'time'},
         'lines': {'show': 'true', 'fill': 'true'},
         'points': {'show': 'true'},
         'legend': {
@@ -253,6 +265,9 @@ def image_views(image_id, period='monthly'):
             'backgroundOpacity': 0.75},
         'grid': {'hoverable': 'true'},
     }
+
+    if period == 'monthly':
+        flot_options['xaxis']['timeformat'] = '%b'
 
     all = Hit.objects.filter(hitcount__object_pk = image_id).order_by('created')
     data = {}
@@ -739,12 +754,15 @@ def gear_views(gear_id, period='monthly'):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'xaxis': {'mode': 'time'},
         'lines': {'show': True, 'fill': True},
         'points': {'show': True},
         'legend': {'show': False},
         'grid': {'hoverable': 'true'},
     }
+
+    if period == 'monthly':
+        flot_options['xaxis']['timeformat'] = '%b'
 
     all = Hit.objects.filter(
         Q(hitcount__object_pk = gear_id) &
@@ -781,12 +799,15 @@ def producer_gear_views(username, period='monthly'):
     flot_label = _map[period][0]
     flot_data = []
     flot_options = {
-        'xaxis': {'mode': 'time', 'timeformat': '%b'},
+        'xaxis': {'mode': 'time'},
         'lines': {'show': True, 'fill': True},
         'points': {'show': True},
         'legend': {'show': False},
         'grid': {'hoverable': 'true'},
     }
+
+    if period == 'monthly':
+        flot_options['xaxis']['timeformat'] = '%b'
 
     gear_ids = Gear.objects.filter(commercial__producer__username = username).values_list('pk', flat = True)
     all = Hit.objects.filter(
