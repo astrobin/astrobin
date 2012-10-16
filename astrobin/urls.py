@@ -140,9 +140,9 @@ urlpatterns = patterns('',
         views.stats_get_gear_views_ajax,
         name = 'stats_gear_views'),
 
-    url(r'^gear/stats/producer/(?P<username>[\w.@+-]+)/views/(?P<period>\w+)/$',
-        views.stats_get_producer_gear_views_ajax,
-        name = 'stats_producer_gear_views'),
+    url(r'^gear/stats/affiliated/(?P<username>[\w.@+-]+)/views/(?P<period>\w+)/$',
+        views.stats_get_affiliated_gear_views_ajax,
+        name = 'stats_affiliated_gear_views'),
 
      url(r'^stats/camera-types-trend/$',
         views.stats_camera_types_trend_ajax,

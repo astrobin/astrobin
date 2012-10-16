@@ -217,6 +217,56 @@
             </div>
 
             <div class="span4">
+
+                {% if gear.retailed.all %}
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4><i class="icon-credit-card"></i> {% trans "Buy it here" %}</h4>
+                        </div>
+                        <table class="table">
+                            {% for retailed in gear.retailed.all %}
+                                {% with retailed.retailer.userprofile_set.all.0 as profile %}
+                                    {% if profile.company_name %}
+                                        <tr>
+                                            <th>
+                                                <div class="company-name">
+                                                    {% if profile.company_website %}
+                                                        <a href="{{profile.company_website}}" target="_blank"
+                                                           rel="tooltip" title="{{profile.company_website}}">
+                                                    {% endif %}
+                                                        {{profile.company_name}}
+                                                    {% if profile.company_website %}
+                                                        </a>
+                                                    {% endif %}
+                                                <div class="reailer-country">
+                                                    {% if profile.retailer_country %}
+                                                        {% trans profile.get_retailer_country_display %}
+                                                    {% endif %}
+                                                </div>
+                                            </th>
+                                            <td>
+                                                {{retailed.price|default:"-"}}
+                                                {% if retailed.price %}
+                                                    {{retailed.currency}}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if retailed.link %}
+                                                    <a class="btn btn-primary btn-mini" href="{{retailed.link}}" target="_blank" rel="tooltip" title="{{retailed.link}}">
+                                                        &nbsp;<i class="icon-external-link"></i>&nbsp;
+                                                    </a>
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% endif %}
+
                 <div class="subtle-container">
                     <div class="header">
                         <h4><i class="icon-tags"></i> {% trans "Properties" %}</h4>
@@ -226,9 +276,9 @@
                         <tr>
                             <th>{% trans "Link" %}</th>
                             <td>
-                                <a class="commercial-link" href="{{gear.commercial.link}}" target="_blank"
+                                <a class="commercial-link btn btn-primary btn-mini" href="{{gear.commercial.link}}" target="_blank"
                                    rel="tooltip" title="{{gear.commercial.link}}">
-                                    <i class="icon-link"></i>
+                                    &nbsp;<i class="icon-external-link"></i>&nbsp;
                                 </a>
                             </td>
                         </tr>
@@ -276,55 +326,6 @@
                         </tr>
                     </table>
                 </div>
-
-                {% if gear.retailed.all %}
-                    <div class="subtle-container">
-                        <div class="header">
-                            <h4><i class="icon-credit-card"></i> {% trans "Buy it here" %}</h4>
-                        </div>
-                        <table class="table">
-                            {% for retailed in gear.retailed.all %}
-                                {% with retailed.retailer.userprofile_set.all.0 as profile %}
-                                    {% if profile.company_name %}
-                                        <tr>
-                                            <th>
-                                                <div class="company-name">
-                                                    {% if profile.company_website %}
-                                                        <a href="{{profile.company_website}}" target="_blank"
-                                                           rel="tooltip" title="{{profile.company_website}}">
-                                                    {% endif %}
-                                                        {{profile.company_name}}
-                                                    {% if profile.company_website %}
-                                                        </a>
-                                                    {% endif %}
-                                                <div class="reailer-country">
-                                                    {% if profile.retailer_country %}
-                                                        {% trans profile.get_retailer_country_display %}
-                                                    {% endif %}
-                                                </div>
-                                            </th>
-                                            <td>
-                                                {{retailed.price|default:"-"}}
-                                                {% if retailed.price %}
-                                                    {{retailed.currency}}
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                {% if retailed.link %}
-                                                    <a href="{{retailed.link}}" target="_blank" rel="tooltip" title="{{retailed.link}}">
-                                                {% endif %}
-                                                    <i class="icon-link"></i>
-                                                {% if retailed.link %}
-                                                    </a>
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                    {% endif %}
-                                {% endwith %}
-                            {% endfor %}
-                        </table>
-                    </div>
-                {% endif %}
 
                 <div class="subtle-container">
                     <div class="header">

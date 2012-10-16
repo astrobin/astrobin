@@ -185,37 +185,38 @@
         </div>
     {% endif %} {# user_is_retailer #}
 
-    {% ifequal user request.user %}
-        {% if user_is_producer %}
-            <div class="row section">
-                <div class="span12">
-                    <a href="#claim-commercial-product-modal"
-                       class="btn btn-primary claim-commercial-product"
-                       data-toggle="modal">{% trans "Claim as producer" %}</a>
-                </div>
-            </div>
+    {% if user == request.user and user_is_producer or user_is_retailer %}
+        <div class="row section">
+            <div class="span12" style="text-align: center">
+                {% if user_is_producer %}
+                <a href="#claim-commercial-product-modal"
+                   class="btn btn-primary claim-commercial-product"
+                   data-toggle="modal">{% trans "Claim as producer" %}</a>
+                {% endif %}
 
-            <div class="row section">
-                <div class="span12">
-                    <div class="subtle-container">
-                        <div class="header">{% trans "Views" %}</div>
-                        <div id="stats_producer_gear_views" class="plot" style="width:914px;height:150px;">
-                            <div class="loading">
-                                <p>{% trans "Please wait: the plot is loading..." %}</p>
-                                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
-                            </div>
+                {% if user_is_retailer %}
+                    <a href="#claim-retailed-product-modal"
+                       class="btn btn-primary claim-retailed-product"
+                       data-toggle="modal">{% trans "Claim as retailer" %}</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <h2>{% trans "Plots" %}</h2>
+                <div class="subtle-container">
+                    <div class="header">{% trans "Views" %}</div>
+                    <div id="stats_affiliated_gear_views" class="plot" style="width:914px;height:150px;">
+                        <div class="loading">
+                            <p>{% trans "Please wait: the plot is loading..." %}</p>
+                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
                         </div>
                     </div>
                 </div>
             </div>
-        {% endif %}
-
-        {% if user_is_retailer %}
-            <a href="#claim-retailed-product-modal"
-               class="btn btn-primary claim-retailed-product"
-               data-toggle="modal">{% trans "Claim as retailer" %}</a>
-        {% endif %}
-    {% endifequal %}
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% ifequal user request.user %}
@@ -374,15 +375,19 @@
     </script>
     
     {% ifequal user request.user %}
-        {% if user_is_producer %}
-            <script type="text/javascript">
+        {% if user_is_producer or user_is_retailer %}
+            <script type="text/javascript">    
                 astrobin_stats.init();
                 astrobin_stats.plot(
-                    '#stats_producer_gear_views',
-                    "{% url stats_producer_gear_views user 'monthly' %}",
+                    '#stats_affiliated_gear_views',
+                    "{% url stats_affiliated_gear_views user 'monthly' %}",
                     30000);
-                astrobin_stats.enableTooltips("#stats_producer_gear_views");
+                astrobin_stats.enableTooltips("#stats_affiliated_gear_views");
+            </script>
+        {% endif %}
 
+        {% if user_is_producer %}
+            <script type="text/javascript">
                 $(document).ready(function() {
                     var $form = $('form#claim-commercial-product'),
                         $makes = undefined,
