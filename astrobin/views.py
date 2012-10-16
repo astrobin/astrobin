@@ -2105,10 +2105,10 @@ def stats_get_gear_views_ajax(request, id, period = 'monthly'):
 
 
 @require_GET
-def stats_get_producer_gear_views_ajax(request, username, period = 'monthly'):
+def stats_get_affiliated_gear_views_ajax(request, username, period = 'monthly'):
     import stats as _s
 
-    (label, data, options) = _s.producer_gear_views(username, period)
+    (label, data, options) = _s.affiliated_gear_views(username, period)
 
     response_dict = {
         'flot_label': label,

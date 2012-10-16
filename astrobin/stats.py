@@ -789,7 +789,7 @@ def gear_views(gear_id, period='monthly'):
     return (flot_label, flot_data, flot_options)
 
 
-def producer_gear_views(username, period='monthly'):
+def affiliated_gear_views(username, period='monthly'):
     _map = {
         'yearly' : (_("Views, yearly") , '%Y'),
         'monthly': (_("Views, monthly"), '%Y-%m'),
@@ -809,7 +809,9 @@ def producer_gear_views(username, period='monthly'):
     if period == 'monthly':
         flot_options['xaxis']['timeformat'] = '%b'
 
-    gear_ids = Gear.objects.filter(commercial__producer__username = username).values_list('pk', flat = True)
+    gear_ids = Gear.objects.filter(
+        Q(commercial__producer__username = username) |
+        Q(retailed__retailer__username = username)).values_list('pk', flat = True)
     all = Hit.objects.filter(
         Q(hitcount__object_pk__in = gear_ids) &
         Q(hitcount__content_type__model = 'gear')).order_by('created')
