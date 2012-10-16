@@ -1878,6 +1878,9 @@ def user_page(request, username):
 @require_GET
 def user_page_commercial_products(request, username):
     user = get_object_or_404(User, username = username)
+    if user != request.user:
+        return HttpResponseForbidden()
+
     profile = get_object_or_404(UserProfile, user = user)
 
     response_dict = {
