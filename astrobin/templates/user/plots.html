@@ -8,54 +8,67 @@
     {% include 'user/profile-subnav.html' %}
 
     <h1>{% blocktrans with user.username as user %}{{user}}'s plots{% endblocktrans %}</h1>
-    <div class="plot-container">
-        {% ifequal request.user user %}
-        <p>
-            {% url user_page user as user_page %}
-            {% blocktrans with user.username as user %}Hey <strong>{{user}}</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href="{{user_page}}?public&sub=nodata">here</a>.{% endblocktrans %}
-        </p>
-        {% endifequal %}
 
-        <a name="stats_integration_hours_anchor"></a>
-        <div class="well">{% trans "Total integration hours, plotted against time." %}</div>
-        <div id="stats_integration_hours" class="plot" style="width:940px;height:300px;">
-            <div class="loading">
-                <p>{% trans "Please wait: the plot is loading..." %}</p>
-                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+    {% ifequal request.user user %}
+    <p class="alert alert-info">
+        {% url user_page user as user_page %}
+        {% blocktrans with user.username as user %}Hey <strong>{{user}}</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href="{{user_page}}?public&sub=nodata">here</a>.{% endblocktrans %}
+    </p>
+    {% endifequal %}
+
+    <div class="row section">
+        <div class="span6">
+            <div class="subtle-container">
+                <a name="stats_integration_hours_anchor"></a>
+                <div class="header">{% trans "Total integration hours, plotted against time." %}</div>
+                <div id="stats_integration_hours" class="plot" style="width:420px;height:200px;">
+                    <div class="loading">
+                        <p>{% trans "Please wait: the plot is loading..." %}</p>
+                        <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="span6">
+            <div class="subtle-container">
+                <a name="stats_integration_hours_by_gear_anchor"></a>
+                <div class="header">{% trans "Total integration hours, plotted against time and arranged by imaging telescopes and lenses, and imaging cameras." %}</div>
+                <div id="stats_integration_hours_by_gear" class="plot" style="width:420px;height:200px;">
+                    <div class="loading">
+                        <p>{% trans "Please wait: the plot is loading..." %}</p>
+                        <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                    </div>
+                </div>
+                <div id="stats_integration_hours_by_gear_legend" class="legend"></div>
             </div>
         </div>
     </div>
 
-    <div class="plot-container">
-        <a name="stats_integration_hours_by_gear_anchor"></a>
-        <div class="well">{% trans "Total integration hours, plotted against time and arranged by imaging telescopes and lenses, and imaging cameras." %}</div>
-        <div id="stats_integration_hours_by_gear" class="plot" style="width:940px;height:300px;">
-            <div class="loading">
-                <p>{% trans "Please wait: the plot is loading..." %}</p>
-                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+    <div class="row">
+        <div class="span6">
+            <div class="subtle-container"
+                <a name="stats_views_anchor"></a>
+                <div class="header">{% trans "Combined view count for all the user's images, plotted against time." %}</div>
+                <div id="stats_views" class="plot" style="width:420px;height:200px;">
+                    <div class="loading">
+                        <p>{% trans "Please wait: the plot is loading..." %}</p>
+                        <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="stats_integration_hours_by_gear_legend" class="legend"></div>
-    </div>
 
-    <div class="plot-container">
-        <a name="stats_views_anchor"></a>
-        <div class="well">{% trans "Combined view count for all the user's images, plotted against time." %}</div>
-        <div id="stats_views" class="plot" style="width:940px;height:300px;">
-            <div class="loading">
-                <p>{% trans "Please wait: the plot is loading..." %}</p>
-                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
-            </div>
-        </div>
-    </div>
-
-    <div class="plot-container">
-        <a name="stats_uploaded_images_anchor"></a>
-        <div class="well">{% trans "Image uploads, plotted against time." %}</div>
-        <div id="stats_uploaded_images" class="plot" style="width:940px;height:300px;">
-            <div class="loading">
-                <p>{% trans "Please wait: the plot is loading..." %}</p>
-                <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+        <div class="span6">
+            <div class="subtle-container">
+                <a name="stats_uploaded_images_anchor"></a>
+                <div class="header">{% trans "Image uploads, plotted against time." %}</div>
+                <div id="stats_uploaded_images" class="plot" style="width:420px;height:200px;">
+                    <div class="loading">
+                        <p>{% trans "Please wait: the plot is loading..." %}</p>
+                        <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -111,7 +124,7 @@ $(document).ready(function() {
         {% if 's_vp' in request.GET %}
         "{% url stats_views user.username request.GET.s_vp %}",
         {% else %}
-        "{% url stats_views user.username 'daily' %}",
+        "{% url stats_views user.username 'monthly' %}",
         {% endif %}
         30000);
     astrobin_stats.enableTooltips("#stats_views");

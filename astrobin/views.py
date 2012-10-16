@@ -2060,7 +2060,7 @@ def user_profile_stats_get_uploaded_images_ajax(request, username, period = 'mon
 
 
 @require_GET
-def user_profile_stats_get_views_ajax(request, username, period = 'daily'):
+def user_profile_stats_get_views_ajax(request, username, period = 'monthly'):
     user = User.objects.get(username = username)
 
     import stats as _s
@@ -2075,10 +2075,25 @@ def user_profile_stats_get_views_ajax(request, username, period = 'daily'):
 
 
 @require_GET
-def stats_get_image_views_ajax(request, id, period = 'daily'):
+def stats_get_image_views_ajax(request, id, period = 'monthly'):
     import stats as _s
 
     (label, data, options) = _s.image_views(id, period)
+
+    response_dict = {
+        'flot_label': label,
+        'flot_data': data,
+        'flot_options': options,
+    }
+
+    return ajax_response(response_dict)
+
+
+@require_GET
+def stats_get_gear_views_ajax(request, id, period = 'monthly'):
+    import stats as _s
+
+    (label, data, options) = _s.gear_views(id, period)
 
     response_dict = {
         'flot_label': label,
