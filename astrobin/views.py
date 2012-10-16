@@ -1741,7 +1741,11 @@ def user_page(request, username):
                 k_dict = {l: {'message': None, 'images': []}}
                 k_dict[l]['message'] = _("To fill in the missing gear, use the <strong>Edit gear used</strong> entry in the <strong>Actions</strong> menu for each image.")
                 k_list.append(k_dict)
-                for i in sqs.filter(Q(imaging_telescopes = None) | Q(imaging_cameras = None)).distinct():
+                lacking = sqs.filter(
+                    (Q(subject_type = 100) | Q(subject_type = 200)) &
+                    (Q(imaging_telescopes = None) | Q(imaging_cameras = None))).distinct()
+                for i in lacking:
+                    print i.subject_type
                     k_dict[l]['images'].append(i)
 
                 l = _("Gear images")
