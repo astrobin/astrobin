@@ -159,7 +159,7 @@ def index(request):
         'small_size': settings.SMALL_THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
         'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
-        #'registratino_form': RegistrationForm(),
+        'registration_form': RegistrationForm(),
     }
 
     profile = None
