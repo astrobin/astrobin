@@ -3,6 +3,7 @@
 {% load tags %}
 {% load activity_tags %}
 {% load bootstrap_toolkit %}
+{% load avatar_tags %}
 
 {% block content %}
     {% if not request.user.is_authenticated %}
@@ -70,7 +71,7 @@
 
         {% with image_of_the_day as iotd %}
             <div class="visible-desktop">
-                <div class="row">
+                <div class="row section">
                     <div class="span10">
                         <div class="image-of-the-day">
                             <h2>{% trans "Image of the day" %}!</h2>
@@ -110,27 +111,86 @@
         {% endwith %}
 
         <div class="row">
-            <div class="span7"> <!-- all the recent images -->
-
-                <div class="home-strip-container">
-                    <div class="title">
-                        <h3>{% trans "Recent" %}</h3>
+            <div class="span4"> <!-- all the recent images -->
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>{% trans "Recent" %}</h4>
                     </div>
                     <div class="thumbs">
-                        {% image_list request image_list 0 small_size %}
+                        {% image_list request image_list 0 64 %}
                     </div>
                     <div class="more">
                         <a href="{% url wall %}">{% trans "(view more)" %}</a>
                     </div>
                 </div>
 
-                {% if recent_commercial_gear %}
-                    <div class="home-strip-container">
-                        <div class="title small">
-                            <h3>{% trans "Commercial products" %}</h3>
+                {% if recent_from_followees %}
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4>{% trans "Followed" %}</h4>
                         </div>
                         <div class="thumbs">
-                            {% image_list request recent_commercial_gear 0 small_size %}
+                            {% image_list request recent_from_followees 0 64 %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                        </h4>
+                    </div>
+                    <div class="thumbs">
+                        {% image_list request recently_five_starred 0 64 %}
+                    </div>
+                </div>
+
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>
+                            <img src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png" alt="{% trans "Recently favorited" %}"/>
+                        </h4>
+                    </div>
+                    <div class="thumbs">
+                        {% image_list request recently_favorited 0 64 %}
+                    </div>
+                </div>
+            </div> <!-- span4 -->
+
+            <div class="span4"> <!-- activity stream -->
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>{% trans "Activity stream" %}</h4>
+                    </div>
+                    <div class="activity-actions">
+                        {% for action in global_actions %}
+                            {% display_action action %}
+                        {% empty %}
+                            <p>{% trans "There is no activity yet." %}</p>
+                        {% endfor %}
+
+                        {% if global_actions|length == 16 %}
+                            <div class="more">
+                                <a href="{% url activities %}">{% trans "(view more)" %}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> <!-- span4 -->
+
+            <div class="span4"> <!-- commercial stuff -->
+                {% if recent_commercial_gear %}
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4>{% trans "Commercial products" %}</h4>
+                        </div>
+                        <div class="thumbs">
+                            {% image_list request recent_commercial_gear 0 64 %}
                         </div>
                         <div class="more">
                             <a href="{% url wall %}?filter=products">{% trans "(view more)" %}</a>
@@ -138,63 +198,47 @@
                     </div>
                 {% endif %}
 
-                {% if recent_from_followees %}
-                    <div class="home-strip-container">
-                        <div class="title">
-                            <h3>{% trans "Followed" %}</h3>
-                        </div>
-                        <div class="thumbs">
-                            {% image_list request recent_from_followees 0 small_size %}
-                        </div>
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>{% trans "Blog" %}</h4>
                     </div>
-                {% endif %}
+                   <div class="blog-stream-entries">
+                        {% for entry in blog_entries %}
+                            <div class="entry">
+                                {% if entry.authors.count %}
+                                <div class="avatar">
+                                    <a href="{{entry.authors.all.0}}">{% avatar entry.authors.all.0 64 %}</a>
+                                </div>
+                                {% endif %}
 
-                <div class="home-strip-container">
-                    <div class="title">
-                        <h3>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                        </h3>
-                    </div>
-                    <div class="thumbs">
-                        {% image_list request recently_five_starred 0 small_size %}
-                    </div>
-                </div>
+                                <div class="content">
+                                    <div class="meta">
+                                        {% if entry.authors.count %}
+                                            {{entry.authors.all.0}}:
+                                        {% endif %}
+                                        <a href="{{entry.get_absolute_url}}">{{entry.title}}</a>
+                                    </div>
+                                    <p>
+                                        {{entry.content|safe|striptags|truncatewords:30}}
+                                    </p>
+                                </div>
 
-                <div class="home-strip-container">
-                    <div class="title">
-                        <h3>
-                            <img src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png" alt="{% trans "Recently favorited" %}"/>
-                        </h3>
-                    </div>
-                    <div class="thumbs">
-                        {% image_list request recently_favorited 0 small_size %}
-                    </div>
-                </div>
-            </div> <!-- span7 -->
-
-            <div class="span5"> <!-- activity stream -->
-                <div class="activity-stream">
-                    <h3>{% trans "Activity stream" %}</h3>
-                    <div class="activity-actions">
-                        {% for action in global_actions %}
-                            {% display_action action %}
+                                <div class="when">
+                                    {{entry.creation_date|timesince}} {% trans "ago" %}
+                                </div>
+                            </div>
                         {% empty %}
-                                <p>{% trans "There is no activity yet." %}</p>
-                            {% endfor %}
-                        </div>
+                            <p>{% trans "There is no activity yet." %}</p>
+                        {% endfor %}
 
-                        {% if global_actions|length == 16 %}
-                            <div class="pagination-centered">
-                                <a href="{% url activities %}">{% trans "(view more)" %}</a>
+                        {% if blog_entries|length == 9 %}
+                            <div class="more">
+                                <a href="/blog/">{% trans "(view more)" %}</a>
                             </div>
                         {% endif %}
                     </div>
                 </div>
-            </div> <!-- span5 -->
+            </div> <!-- span4 -->
         </div> <!-- row -->
     {% endif %} {# authenticated #}
 {% endblock %}

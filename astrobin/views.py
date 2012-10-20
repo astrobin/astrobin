@@ -147,14 +147,22 @@ def jsonDumpSubjects(all):
 
 def index(request):
     """Main page"""
+
+    thumbnails_n = 16
+    products_n = 4
+    actions_n = 16
+    entries_n = 9
+
+    from zinnia.managers import entries_published
     response_dict = {
         'small_size': settings.SMALL_THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
         'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
         'global_actions': Action.objects.exclude(
             target_content_type = Image,
-            actions_with_astrobin_image_as_target__is_wip = True)[:16],
-        'registration_form': RegistrationForm(),
+            actions_with_astrobin_image_as_target__is_wip = True)[:actions_n],
+        'blog_entries': entries_published(Entry.objects.all())[:entries_n], #exclude(authors__username__in = 'astrobin')
+        'registratino_form': RegistrationForm(),
     }
 
     profile = None
@@ -162,30 +170,30 @@ def index(request):
         profile = UserProfile.objects.get(user=request.user)
 
         response_dict['recent_from_followees'] = \
-            Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:10]
+            Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:thumbnails_n]
 
         response_dict['recently_favorited'] = \
             Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
                          .exclude(last_favorited = None) \
-                         .order_by('-last_favorited')[:10]
+                         .order_by('-last_favorited')[:thumbnails_n]
 
         recent_fives_list = []
         l = 0
-        while len(recent_fives_list) < 10:
+        while len(recent_fives_list) < thumbnails_n:
             recent_fives_qs = \
                 Image.objects.filter(votes__score = 5) \
                              .distinct() \
-                             .order_by('-votes__date_added')[l:l+10]
+                             .order_by('-votes__date_added')[l:l+thumbnails_n]
             for i in recent_fives_qs:
                 if i not in recent_fives_list:
                     recent_fives_list.append(i)
             l += 1
-        response_dict['recently_five_starred'] = recent_fives_list[:10]
+        response_dict['recently_five_starred'] = recent_fives_list[:thumbnails_n]
 
         response_dict['recent_commercial_gear'] = Image.objects\
             .filter(is_stored = True, is_wip = False)\
             .exclude(featured_gear = None)\
-            .order_by('-uploaded')
+            .order_by('-uploaded')[:products_n]
 
         iotd = ImageOfTheDay.objects.all()[0]
         gear_list = (
@@ -210,7 +218,7 @@ def index(request):
             .order_by('-uploaded'),
         template_name = 'index.html',
         template_object_name = 'image',
-        paginate_by = 10 if request.user.is_authenticated() else 16,
+        paginate_by = thumbnails_n,
         extra_context = response_dict)
 
 

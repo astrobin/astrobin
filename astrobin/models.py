@@ -1877,15 +1877,15 @@ class GlobalStat(models.Model):
 
 from zinnia.models import Entry
 def blog_entry_notify(sender, instance, created, **kwargs):
-    if created:
-         push_notification(
+    if created and instance.published and 'astrobin' in [x.username for x in instance.authors.all()]:
+        push_notification(
             User.objects.all(),
             'new_blog_entry',
             {
                 'object': instance.title,
                 'object_url': instance.get_absolute_url()
             }
-         )
+        )
 post_save.connect(blog_entry_notify, sender = Entry)
 
 
