@@ -170,13 +170,13 @@
                         <h4>{% trans "Activity stream" %}</h4>
                     </div>
                     <div class="activity-actions">
-                        {% for action in global_actions %}
+                        {% for action in global_actions.0 %}
                             {% display_action action %}
                         {% empty %}
                             <p>{% trans "There is no activity yet." %}</p>
                         {% endfor %}
 
-                        {% if global_actions|length == 16 %}
+                        {% if global_actions.0|length == 16 %}
                             <div class="more">
                                 <a href="{% url activities %}">{% trans "(view more)" %}</a>
                             </div>
@@ -204,8 +204,8 @@
                     <div class="header">
                         <h4>{% trans "Blog" %}</h4>
                     </div>
-                   <div class="blog-stream-entries">
-                        {% for entry in blog_entries %}
+                    <div class="blog-stream-entries">
+                        {% for entry in blog_entries.0 %}
                             <div class="entry">
                                 {% if entry.authors.count %}
                                 <div class="avatar">
