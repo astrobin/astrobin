@@ -107,10 +107,10 @@ def _prepare_last_acquisition_date(obj):
 
     return date if date else datetime.datetime.min
 
-def _prepare_views(obj):
+def _prepare_views(obj, content_type):
     views = 0
     try:
-        views = HitCount.objects.get(object_pk = obj.pk).hits
+        views = HitCount.objects.get(object_pk = obj.pk, content_type__name = content_type).hits
     except HitCount.DoesNotExist:
         pass
 
@@ -241,7 +241,7 @@ class GearIndex(SearchIndex):
     def prepare_views(self, obj):
         views = 0
         for i in self.get_images(obj):
-            views += _prepare_views(i)
+            views += _prepare_views(i, 'image')
         return views
 
     def prepare_favorited(self, obj):
@@ -387,7 +387,7 @@ class UserIndex(SearchIndex):
     def prepare_views(self, obj):
         views = 0
         for i in Image.objects.filter(user = obj):
-            views += _prepare_views(i)
+            views += _prepare_views(i, 'image')
         return views
 
     def prepare_min_aperture(self, obj):
@@ -523,7 +523,7 @@ class ImageIndex(SearchIndex):
         return _prepare_last_acquisition_date(obj)
 
     def prepare_views(self, obj):
-        return _prepare_views(obj)
+        return _prepare_views(obj, 'image')
  
     def prepare_solar_system_main_subject(self, obj):
         return obj.solar_system_main_subject
