@@ -148,6 +148,7 @@ def jsonDumpSubjects(all):
 def index(request):
     """Main page"""
 
+    recent_thumbnails_n = 32
     thumbnails_n = 16
     products_n = 4
     actions_n = 16
@@ -168,9 +169,14 @@ def index(request):
         response_dict['global_actions'] = Action.objects.exclude(
             target_content_type = Image,
             actions_with_astrobin_image_as_target__is_wip = True)[:actions_n],
+
         response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n], #exclude(authors__username__in = 'astrobin')
+
         response_dict['recent_from_followees'] = \
             Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:thumbnails_n]
+
+        if response_dict['recent_from_followees'].count() > 0:
+            recent_thumbnails_n = 16
 
         response_dict['recently_favorited'] = \
             Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
@@ -218,7 +224,7 @@ def index(request):
             .order_by('-uploaded'),
         template_name = 'index.html',
         template_object_name = 'image',
-        paginate_by = thumbnails_n,
+        paginate_by = recent_thumbnails_n,
         extra_context = response_dict)
 
 
