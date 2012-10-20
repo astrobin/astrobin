@@ -158,17 +158,17 @@ def index(request):
         'small_size': settings.SMALL_THUMBNAIL_SIZE,
         's3_url': settings.S3_URL,
         'bucket_name': settings.AWS_STORAGE_BUCKET_NAME,
-        'global_actions': Action.objects.exclude(
-            target_content_type = Image,
-            actions_with_astrobin_image_as_target__is_wip = True)[:actions_n],
-        'blog_entries': entries_published(Entry.objects.all())[:entries_n], #exclude(authors__username__in = 'astrobin')
-        'registratino_form': RegistrationForm(),
+        #'registratino_form': RegistrationForm(),
     }
 
     profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
 
+        response_dict['global_actions'] = Action.objects.exclude(
+            target_content_type = Image,
+            actions_with_astrobin_image_as_target__is_wip = True)[:actions_n],
+        response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n], #exclude(authors__username__in = 'astrobin')
         response_dict['recent_from_followees'] = \
             Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:thumbnails_n]
 
