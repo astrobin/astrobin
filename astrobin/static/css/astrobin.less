@@ -1652,6 +1652,13 @@ div.favorite-container {
         margin-left: @spacer-large;
     }
 }
+
+.avatar {
+  img {
+    .rounded-corners(12px);
+  }
+}
+
 .explore-comment-container, .explore-review-container {
     width: 460px;
     padding: @spacer-small;
@@ -2486,64 +2493,22 @@ form.avatar-change label.control-label {display: none;}
     }
 }
 
-.home-strip-container, .activity-stream {
-    .stitched-box;
-    margin-top: @spacer-xxlarge;
-    padding: @spacer-medium 0 0 0;
-    position: relative;
-    min-height: 197px;
-
-    .title {
-        background: #303030 url('../images/darker-panel-tile.png');
-        width: 205px;
-        margin: 0;
-        text-align: center;
-        position: absolute;
-        top: 0;
-        left: 0;
-
-
-        -moz-transform:rotate(-90deg); 
-        -webkit-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-
-        -moz-transform-origin: 103px 102px;
-        -webkit-transform-origin: 103px 102px;
-        -o-transform-origin: 103px 102px;
-
-        filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\9";
-        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\9";
-
-        h3 {
-            text-transform: uppercase;
-            font-size: 2em;
-        }
-    }
-
-    .title.small h3 {
-      font-size: 1em;
-    }
-
-    .thumbs {
-        margin-left: 58px;
-    }
-
-    .more {
-      position: absolute;
-      top: -15px;
-      left: -15px;
-      background-color: rgba(0,0,0,0.7);
-      padding: @spacer-small;
-      .rounded-corners;
-      visibility: hidden;
-    }
+.subtle-container {
+  .more {
+    text-align: center;
+    background-color: rgba(0,0,0,0.7);
+    padding: @spacer-small;
+    .rounded-corners;
+    display: none;
+    margin-top: @spacer-medium;
+  }
 }
 
-.home-strip-container:hover .more {
-  visibility: visible;
+.subtle-container:hover .more {
+  display: block;
 }
 
-.activity-stream {
+.activity-stream, .blog-stream {
     padding-top: 0;
     min-height: 922px;
     max-height: 922px;
@@ -2559,15 +2524,12 @@ form.avatar-change label.control-label {display: none;}
     }
 }
 
-.activity-actions {
-    padding: @spacer-medium;
-    margin-bottom: @spacer-large;
-
-    .action {
+.activity-actions, .blog-stream-entries {
+    .action, .entry {
         border-bottom: 1px solid #393939;
         padding: @spacer-medium 0;
         position: relative;
-        min-height: 32px;
+        min-height: 64px;
 
         &:last-child {
             border-bottom: 0;
@@ -2580,7 +2542,14 @@ form.avatar-change label.control-label {display: none;}
         }
 
         .content {
-            font-size: 90%;
+          font-size: 90%;
+          p {
+            font-size: 80%;
+            color: darken(@text-color, 5%);
+            a:link, a:visited {
+              color: darken(@link-color, 5%);
+            }
+          }
         }
 
         .when {

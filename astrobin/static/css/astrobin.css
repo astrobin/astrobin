@@ -1459,6 +1459,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
   font-size: 1.5em;
   margin-left: 12px;
 }
+.avatar img {
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+}
 .explore-comment-container,
 .explore-review-container {
   width: 460px;
@@ -2270,72 +2275,28 @@ form.avatar-change label.control-label {
   padding-top: 4px;
   display: block;
 }
-.home-strip-container,
-.activity-stream {
-  margin-bottom: 4px;
-  padding: 8px;
-  border: 1px dashed #505050;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  margin-top: 28px;
-  padding: 8px 0 0 0;
-  position: relative;
-  min-height: 197px;
-}
-.home-strip-container .title,
-.activity-stream .title {
-  background: #303030 url('../images/darker-panel-tile.png');
-  width: 205px;
-  margin: 0;
+.subtle-container .more {
   text-align: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  -moz-transform: rotate(-90deg);
-  -webkit-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
-  -moz-transform-origin: 103px 102px;
-  -webkit-transform-origin: 103px 102px;
-  -o-transform-origin: 103px 102px;
-  filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\9";
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\9";
-}
-.home-strip-container .title h3,
-.activity-stream .title h3 {
-  text-transform: uppercase;
-  font-size: 2em;
-}
-.home-strip-container .title.small h3,
-.activity-stream .title.small h3 {
-  font-size: 1em;
-}
-.home-strip-container .thumbs,
-.activity-stream .thumbs {
-  margin-left: 58px;
-}
-.home-strip-container .more,
-.activity-stream .more {
-  position: absolute;
-  top: -15px;
-  left: -15px;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 4px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
-  visibility: hidden;
+  display: none;
+  margin-top: 8px;
 }
-.home-strip-container:hover .more {
-  visibility: visible;
+.subtle-container:hover .more {
+  display: block;
 }
-.activity-stream {
+.activity-stream,
+.blog-stream {
   padding-top: 0;
   min-height: 922px;
   max-height: 922px;
   overflow-y: hidden;
 }
-.activity-stream h3 {
+.activity-stream h3,
+.blog-stream h3 {
   background: #303030 url('../images/darker-panel-tile.png');
   text-transform: uppercase;
   font-size: 1.75em;
@@ -2343,28 +2304,56 @@ form.avatar-change label.control-label {
   margin-top: 0;
   text-align: center;
 }
-.activity-actions {
-  padding: 8px;
-  margin-bottom: 12px;
-}
-.activity-actions .action {
+.activity-actions .action,
+.blog-stream-entries .action,
+.activity-actions .entry,
+.blog-stream-entries .entry {
   border-bottom: 1px solid #393939;
   padding: 8px 0;
   position: relative;
-  min-height: 32px;
+  min-height: 64px;
 }
-.activity-actions .action:last-child {
+.activity-actions .action:last-child,
+.blog-stream-entries .action:last-child,
+.activity-actions .entry:last-child,
+.blog-stream-entries .entry:last-child {
   border-bottom: 0;
 }
-.activity-actions .action .avatar {
+.activity-actions .action .avatar,
+.blog-stream-entries .action .avatar,
+.activity-actions .entry .avatar,
+.blog-stream-entries .entry .avatar {
   float: left;
   margin-right: 8px;
   clear: both;
 }
-.activity-actions .action .content {
+.activity-actions .action .content,
+.blog-stream-entries .action .content,
+.activity-actions .entry .content,
+.blog-stream-entries .entry .content {
   font-size: 90%;
 }
-.activity-actions .action .when {
+.activity-actions .action .content p,
+.blog-stream-entries .action .content p,
+.activity-actions .entry .content p,
+.blog-stream-entries .entry .content p {
+  font-size: 80%;
+  color: #ababab;
+}
+.activity-actions .action .content p a:link,
+.blog-stream-entries .action .content p a:link,
+.activity-actions .entry .content p a:link,
+.blog-stream-entries .entry .content p a:link,
+.activity-actions .action .content p a:visited,
+.blog-stream-entries .action .content p a:visited,
+.activity-actions .entry .content p a:visited,
+.blog-stream-entries .entry .content p a:visited {
+  color: #b74329;
+}
+.activity-actions .action .when,
+.blog-stream-entries .action .when,
+.activity-actions .entry .when,
+.blog-stream-entries .entry .when {
   color: #525252;
   font-size: 60%;
   position: absolute;

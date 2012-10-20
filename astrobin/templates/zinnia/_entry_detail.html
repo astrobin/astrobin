@@ -1,7 +1,7 @@
 {% load tagging_tags comments i18n %}
 
 <div class="blog-entry">
-    <div class="row">
+    <div class="row section">
         <div class="span8 offset2">
             <h2>
                 <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
@@ -31,6 +31,20 @@
             </p>
         </div>
     </div>
+
+    {% if object.image %}
+    <div class="row section">
+      <div class="span8 offset2">
+        {% if continue_reading %}
+        <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+          {% endif %}
+          <img src="{{ object.image.url }}" alt="{{ object.title }}" class="left" />
+          {% if continue_reading %}
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
 
     <div class="row">
         <div class="span8 offset2">
