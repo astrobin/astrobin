@@ -62,6 +62,10 @@ server {
         expires 30d;
     }
 
+    location /uploads/  {
+        root /home/astrobin/Code/astrobin;
+        expires 90d;
+    }
 
     location / {
         if ($request_uri ~* "^/robots.txt") {
