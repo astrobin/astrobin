@@ -593,3 +593,8 @@ def get_image_url(image):
             return url
 
     return image.get_absolute_url()
+
+
+@register.simple_tag
+def get_image_path(image, resized = False, inverted = False):
+    return image.path(resized, inverted)
