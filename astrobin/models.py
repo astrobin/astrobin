@@ -984,6 +984,22 @@ class Image(models.Model):
     def get_absolute_url(self):
         return '/%i' % self.id
 
+    def path(self, resized = False, inverted = False):
+        filename = '%s%s%s%s' % (
+            self.filename,
+            '_resized' if resized else '',
+            '_inverted' if inverted else '',
+            self.original_ext)
+
+        if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
+            return '/uploads/%s' % filename
+
+        return 'http://%s/%s/%s' % (
+            settings.S3_URL,
+            settings.AWS_STORAGE_BUCKET_NAME,
+            filename)
+
+
     @staticmethod
     def by_gear(gear):
         types = {
@@ -1054,6 +1070,21 @@ class ImageRevision(models.Model):
     def get_absolute_url(self):
         return '/%i/%s/' % (self.image.id, self.label)
  
+    def path(self, resized = False, inverted = False):
+        filename = '%s%s%s%s' % (
+            self.filename,
+            '_resized' if resized else '',
+            '_inverted' if inverted else '',
+            self.original_ext)
+
+        if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
+            return '/uploads/%s' % filename
+
+        return 'http://%s/%s/%s' % (
+            settings.S3_URL,
+            settings.AWS_STORAGE_BUCKET_NAME,
+            filename)
+
 def image_revision_post_save(sender, instance, created, **kwargs):
     verb = "uploaded a new revision of"
     if created and not instance.image.is_wip:
