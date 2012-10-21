@@ -830,7 +830,6 @@ def image_detail(request, id, r):
                      'revision_image': revision_image,
                      'is_ready': is_ready,
                      'is_final': is_final,
-                     'full': 'full' in request.GET,
                      'dates_label': _("Dates"),
                      'uploaded_on': uploaded_on,
                      'subjects_short': subjects[:subjects_limit],
