@@ -16,7 +16,6 @@ import signal
 import time
 import threading
 import simplejson
-import glob
 
 from image_utils import *
 from storage import *
@@ -71,11 +70,6 @@ def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, la
     else:
         push_notification([user], 'image_not_solved',
                           {'object_url':'%s%s' % (settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
-
-    # Clean up!
-    clean_list = glob.glob(clean_path)
-    for f in clean_list:
-        os.remove(f)
 
 
 @task()
