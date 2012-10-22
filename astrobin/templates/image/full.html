@@ -111,11 +111,11 @@
                      {% with request.GET.mod as mod %}
                          <a href="{% url image_detail image.image.id image.label %}{% query_string "mod=mod" "" %}">
                             {% ifequal mod 'inverted' %}
-                                <img {% if read %}class="real"{% endif %}
+                                <img {% if real %}class="real"{% endif %}
                                      src="{% get_image_path image 0 1 %}"
                                      alt="{{image.title|escape}}"/>
                             {% else %}
-                                <img {% if read %}class="real"{% endif %}
+                                <img {% if real %}class="real"{% endif %}
                                      src="{% get_image_path image 0 0 %}"
                                      alt="{{image.title|escape}}"/>
                             {% endifequal %}
@@ -126,11 +126,11 @@
                 {% with request.GET.mod as mod %}
                     <a href="{% url image_detail image.id 0 %}{% query_string "mod=mod" "" %}">
                         {% ifequal mod 'inverted' %}
-                            <img {% if read %}class="real"{% endif %}
+                            <img {% if real %}class="real"{% endif %}
                                  src="{% get_image_path image 0 1 %}"
                                  alt="{{image.title|escape}}"/>
                         {% else %}
-                            <img {% if read %}class="real"{% endif %}
+                            <img {% if real %}class="real"{% endif %}
                                  src="{% get_image_path image 0 0 %}"
                                  alt="{{image.title|escape}}"/>
                         {% endifequal %}
