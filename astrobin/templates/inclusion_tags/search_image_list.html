@@ -25,7 +25,7 @@
                     {% with search_result.object.commercial.image as image %}
                         <div class="avatar">
                             <a href="{% url gear_page search_result.object.id search_result.object.slug %}">
-                                <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}" alt="{{image.title|escape}}" />
+                                <img src="{{IMAGES_URL}}{{image.filename}}_small_thumb{{image.original_ext}}" alt="{{image.title|escape}}" />
                             </a>
                         </div>
                     {% endwith %}
@@ -118,7 +118,7 @@
     {% if search_result.object.id %}
         <li class="thumbnail astrobin-thumbnail">
             <a href="{% get_image_url search_result.object %}">
-                <img src="http://{{s3_url}}/{{bucket_name}}/{% get_final_filename search_result.object %}_thumb.png"
+                <img src="{{IMAGES_URL}}{% get_final_filename search_result.object %}_thumb.png"
                      class="capty"
                      id="#capty-content-{{search_result.object.id}}"
                      alt="{{search_result.object.title|default:_("(no title)")}}"

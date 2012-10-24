@@ -20,7 +20,7 @@
                 {% if show_image %}
                     <div class="gear-image">
                         {% with gear.commercial.image as image %}
-                            <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}{{image.original_ext}}"
+                            <img src="{{IMAGES_URL}}{{image.filename}}{{image.original_ext}}"
                                  alt="{{image.title|escape}}"/>
                         {% endwith %}
                     </div>
@@ -33,7 +33,7 @@
                         </div>
                         {% for r in commercial_image_revisions %}
                             <a href="{% url image_detail r.image.id r.label %}" target="{{r.image.id}}_{{r.label}}">
-                                <img src="http://{{s3_url}}/{{bucket_name}}/{{r.filename}}_small_thumb{{r.original_ext}}"
+                                <img src="{{IMAGES_URL}}{{r.filename}}_small_thumb{{r.original_ext}}"
                                      alt="{{r.image.title|escape}}"/>
                              </a>
                         {% endfor %}

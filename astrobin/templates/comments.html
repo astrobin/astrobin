@@ -14,7 +14,7 @@
             <div class="explore-comment-container">
                 <div class="thumbnail">
                     <a rel="tooltip" title="{{comment.image.title|escape}}<br/>{% trans "by" %} {{comment.image.user.username}}" href="{% url image_detail comment.image.id %}" style="display:block;">
-                        <img src="{% if comment.image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{% get_final_filename comment.image %}_small_thumb{{comment.image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail.png{% endif %}" width="90" heigh="90"/>
+                        <img src="{% if comment.image.is_stored %}{{IMAGES_URL}}{% get_final_filename comment.image %}_small_thumb{{comment.image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail.png{% endif %}" width="90" heigh="90"/>
                     </a>
                 </div>
                 <div class="comment">

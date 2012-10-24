@@ -297,23 +297,23 @@
                                     {% with revision_image as image %}
                                         {% if inverted %}
                                         <a class="zoomable" href="{% url image_full image.image.id image.label %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                            <img src="{% get_image_path image 1 1 %}" alt="{{image.title|escape}}"/>
+                                            <img src="{% get_image_path image 1 "620x" %}" alt="{{image.title|escape}}"/>
                                         </a>
                                         {% endif %}
                                         {% if not inverted and not solved %}
                                         <a class="zoomable" href="{% url image_full image.image.id image.label %}{% query_string "" "mod, plate_solving_started" %}">
-                                            <img src="{% get_image_path image 1 0 %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                            <img src="{% get_image_path image 0 "620x" %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                         </a>
                                         {% endif %}
                                     {% endwith %}
                                 {% else %}
                                     {% if inverted %}
                                         <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                            <img src="{% get_image_path image 1 1 %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                            <img src="{% get_image_path image 1 "620x" %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                         </a>
                                         {% if image.is_solved and image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                                <img class="plot-overlay" src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
+                                                <img class="plot-overlay" src="{{IMAGES_URL}}{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
                                             </a>
                                         {% endif %}
                                     {% endif %}
@@ -321,14 +321,14 @@
                                     {% if solved %}
                                         {% if image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img src="{% get_image_path image 1 0 %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                                <img src="{% get_image_path image 0 "620x" %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                             </a>
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img class="fixed-plot-overlay" src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" style="left:{{plot_overlay_left}}px"/>
+                                                <img class="fixed-plot-overlay" src="{{IMAGES_URL}}{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" style="left:{{plot_overlay_left}}px"/>
                                             </a>
                                         {% else %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" />
+                                                <img src="{{IMAGES_URL}}{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" />
                                             </a>
                                         {% endif %}
                                     {% endif %}
@@ -339,7 +339,7 @@
                                         </a>
                                         {% if image.is_solved and image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img class="plot-overlay" src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
+                                                <img class="plot-overlay" src="{{IMAGES_URL}}{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" width="{{resized_size}}" style="left:{{plot_overlay_left}}px"/>
                                             </a>
                                         {% endif %}
                                     {% endif %}
@@ -653,7 +653,7 @@
                                     </div>
                                 {% endif %}
                                 <div class="image">
-                                    <img src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="86" height="86"/>
+                                    <img src="{% if image.is_stored %}{{IMAGES_URL}}{{image.filename}}_small_thumb{{image.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="86" height="86"/>
                                 </div>
                                 <div class="label">
                                     {% trans "Original" %}
@@ -679,7 +679,7 @@
                                     </div>
                                 {% endif %}
                                 <div class="image">
-                                    <img src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{{i.filename}}_small_thumb{{i.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="86" height="86"/>
+                                    <img src="{% if image.is_stored %}{{IMAGES_URL}}{{i.filename}}_small_thumb{{i.original_ext}}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail_small.png{% endif %}" alt="" width="86" height="86"/>
                                 </div>
                                 <div class="label">
                                     {{i.label}}
@@ -770,7 +770,7 @@
             {% if is_ready and not image.animated %}
                 <div class="subtle-container">
                     <div class="header"><h4><i class="icon-bar-chart"></i> {% trans "Histogram" %}</h4></div>
-                    <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
+                    <img src="{{IMAGES_URL}}{{image.filename}}_hist.png" alt="{% trans "Histogram" %}"/>
                 </div>
             {% endif %}
 
@@ -978,33 +978,33 @@ $(document).ready(function() {
         if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/][IMG]{{IMAGES_URL}}{{revision_image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
-                    "[URL=http://astrob.in/{{image.id}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{image.id}}/][IMG]{{IMAGES_URL}}{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
         } else
         if (sharing_mode == 1 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted][IMG]{{IMAGES_URL}}{{revision_image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
-                    "[URL=http://astrob.in/{{image.id}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/{{image.id}}/?mod=inverted][IMG]{{IMAGES_URL}}{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
         } else
         if (sharing_mode == 1 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/][IMG]{{IMAGES_URL}}{{revision_image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
-                    "[URL=http://astrob.in/full/{{image.id}}/][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{image.id}}/][IMG]{{IMAGES_URL}}{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
         } else
         if (sharing_mode == 1 && image_size == 1 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted][IMG]{{IMAGES_URL}}{{revision_image.filename}}_thumb.png[/IMG][/URL]"
                 {% else %}
-                    "[URL=http://astrob.in/full/{{image.id}}/?mod=inverted][IMG]http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png[/IMG][/URL]"
+                    "[URL=http://astrob.in/full/{{image.id}}/?mod=inverted][IMG]{{IMAGES_URL}}{{image.filename}}_thumb.png[/IMG][/URL]"
                 {% endif %}
         } else
         if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 1) {
@@ -1043,33 +1043,33 @@ $(document).ready(function() {
         if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/\"><img src=\"{{IMAGES_URL}}{{revision_image.filename}}_thumb.png\"/></a>"
                 {% else %}
-                    "<a href=\"http://astrob.in/{{image.id}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/{{image.id}}/\"><img src=\"{{IMAGES_URL}}{{image.filename}}_thumb.png\"/></a>"
                 {% endif %}
         } else
         if (sharing_mode == 2 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\"><img src=\"{{IMAGES_URL}}{{revision_image.filename}}_thumb.png\"/></a>"
                 {% else %}
-                    "<a href=\"http://astrob.in/{{image.id}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/><a>"
+                    "<a href=\"http://astrob.in/{{image.id}}/?mod=inverted\"><img src=\"{{IMAGES_URL}}{{image.filename}}_thumb.png\"/><a>"
                 {% endif %}
         } else
         if (sharing_mode == 2 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/\"><img src=\"{{IMAGES_URL}}{{revision_image.filename}}_thumb.png\"/></a>"
                 {% else %}
-                    "<a href=\"http://astrob.in/full/{{image.id}}/\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{image.id}}/\"><img src=\"{{IMAGES_URL}}{{image.filename}}_thumb.png\"/></a>"
                 {% endif %}
         } else
         if (sharing_mode == 2 && image_size == 1 && image_mode == 1 && thumbnail == 0) {
             content =
                 {% if is_revision %}
-                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{revision_image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{revision_image.image.id}}/{{revision_image.label}}/?mod=inverted\"><img src=\"{{IMAGES_URL}}{{revision_image.filename}}_thumb.png\"/></a>"
                 {% else %}
-                    "<a href=\"http://astrob.in/full/{{image.id}}/?mod=inverted\"><img src=\"http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png\"/></a>"
+                    "<a href=\"http://astrob.in/full/{{image.id}}/?mod=inverted\"><img src=\"{{IMAGES_URL}}{{image.filename}}_thumb.png\"/></a>"
                 {% endif %}
         } else
         if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 1) {
