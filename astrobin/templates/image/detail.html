@@ -297,19 +297,19 @@
                                     {% with revision_image as image %}
                                         {% if inverted %}
                                         <a class="zoomable" href="{% url image_full image.image.id image.label %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                            <img src="{% get_image_path image 1 "620x" %}" alt="{{image.title|escape}}"/>
+                                            <img src="{% get_image_path image 1 1 %}" alt="{{image.title|escape}}"/>
                                         </a>
                                         {% endif %}
                                         {% if not inverted and not solved %}
                                         <a class="zoomable" href="{% url image_full image.image.id image.label %}{% query_string "" "mod, plate_solving_started" %}">
-                                            <img src="{% get_image_path image 0 "620x" %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                            <img src="{% get_image_path image 1 0 %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                         </a>
                                         {% endif %}
                                     {% endwith %}
                                 {% else %}
                                     {% if inverted %}
                                         <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
-                                            <img src="{% get_image_path image 1 "620x" %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                            <img src="{% get_image_path image 1 1 %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                         </a>
                                         {% if image.is_solved and image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='inverted'" "plate_solving_started" %}">
@@ -321,7 +321,7 @@
                                     {% if solved %}
                                         {% if image.plot_is_overlay %}
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
-                                                <img src="{% get_image_path image 0 "620x" %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
+                                                <img src="{% get_image_path image 1 0 %}" alt="{{image.title|escape}}" width="{{resized_size}}"/>
                                             </a>
                                             <a class="zoomable" href="{% url image_full image.id %}{% query_string "mod='none'" "plate_solving_started" %}">
                                                 <img class="fixed-plot-overlay" src="{{IMAGES_URL}}{{image.filename}}_solved{{solved_ext}}" alt="{{image.title|escape}}" style="left:{{plot_overlay_left}}px"/>
