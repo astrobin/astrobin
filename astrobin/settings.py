@@ -94,7 +94,7 @@ SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10g'
 DEFAULT_FILE_STORAGE = 'astrobin.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID = 'AKIAJ46VGDGOKKHGGOAQ'
 AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'astrobin_images'
+AWS_STORAGE_BUCKET_NAME = 'cdn.astrobin.com'
 
 from S3 import CallingFormat
 AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
@@ -107,6 +107,7 @@ AWS_HEADERS = {
     
     }
 S3_URL = 's3.amazonaws.com'
+IMAGES_URL = 'http://cdn.astrobin.com/images/'
 
 RESIZED_IMAGE_SIZE = 620 
 THUMBNAIL_SIZE = 184

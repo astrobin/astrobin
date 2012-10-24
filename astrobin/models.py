@@ -994,9 +994,8 @@ class Image(models.Model):
         if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
             return '/uploads/%s' % filename
 
-        return 'http://%s/%s/%s' % (
-            settings.S3_URL,
-            settings.AWS_STORAGE_BUCKET_NAME,
+        return '%s%s' % (
+            settings.IMAGES_URL,
             filename)
 
 
@@ -1080,9 +1079,8 @@ class ImageRevision(models.Model):
         if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
             return '/uploads/%s' % filename
 
-        return 'http://%s/%s/%s' % (
-            settings.S3_URL,
-            settings.AWS_STORAGE_BUCKET_NAME,
+        return '%s%s' % (
+            settings.IMAGES_URL,
             filename)
 
 def image_revision_post_save(sender, instance, created, **kwargs):
