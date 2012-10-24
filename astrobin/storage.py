@@ -27,7 +27,7 @@ def download_from_bucket(filename, path):
 
 
 def save_to_bucket(filename, content):
-    default_storage.save(filename, ContentFile(content));
+    default_storage.save('images/%s' % filename, ContentFile(content));
 
 
 def watermark_image(image, text, position, opacity):
