@@ -96,14 +96,15 @@ DEFAULT_FILE_STORAGE = 'astrobin.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID = 'AKIAJ46VGDGOKKHGGOAQ'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'cdn.astrobin.com'
+AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
 
 from S3 import CallingFormat
 AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
 
 # see http://developer.yahoo.com/performance/rules.html#expires
 AWS_HEADERS = {
-    'Expires': 'Thu, 15 Apr 2020 20:00:00 GMT',
-    'Cache-Control': 'max-age=86400',
+    'Expires': 'Thu, 15 Apr 2080 20:00:00 GMT',
+    'Cache-Control': 'max-age=31557600',
     'x-amz-acl': 'public-read',
     
     }
