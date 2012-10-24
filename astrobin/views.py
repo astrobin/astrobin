@@ -914,6 +914,10 @@ def image_upload_process(request):
         messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
         return HttpResponseRedirect('/upload/')
 
+    if settings.READONLY_MODE:
+        messages.error(request, _("AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
+        return HttpResponseRedirect('/upload/')
+
     if 'file' not in request.FILES:
         return upload_error()
 
@@ -2937,6 +2941,10 @@ def image_revision_upload_process(request):
     file = None
     image_id = request.POST['image_id']
     image = Image.objects.get(id=image_id)
+
+    if settings.READONLY_MODE:
+        messages.error(request, _("AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
+        return HttpResponseRedirect(image.get_absolute_url())
 
     form = ImageRevisionUploadForm(request.POST, request.FILES)
     if not form.is_valid():
