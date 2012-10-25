@@ -5,7 +5,7 @@
     {% if gear.commercial and gear.commercial.image and gear.commercial.is_paid or gear.commercial.producer == user %}
         <div class="thumbnail astrobin-thumbnail">
             {% with gear.commercial.image as image %}
-                <img src="http://{{s3_url}}/{{bucket_name}}/{{image.filename}}_thumb.png"
+                <img src="{{IMAGES_URL}}{{image.filename}}_thumb.png"
                      alt="{{image.title|escape}}"/>
             {% endwith %}
         </div>
