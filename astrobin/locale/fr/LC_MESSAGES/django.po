@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-09 05:41+0000\n"
-"PO-Revision-Date: 2012-10-20 13:47+0100\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2012-10-24 17:17+0100\n"
+"Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1355,7 +1355,7 @@ msgstr "a marqué comme favori"
 
 #: locale_extras.py:11
 msgid "has written a review on"
-msgstr "a rédigé une critique sur"
+msgstr "a rédigé un test sur"
 
 #: models.py:45
 msgid "None (All rights reserved)"
@@ -2861,7 +2861,7 @@ msgstr "Nouvelle discussion sur un matériel que vous possédez"
 
 #: management/__init__.py:147
 msgid "New review of a gear item you own"
-msgstr "Nouvelle critique d'un matériel que vous possédez"
+msgstr "Nouveau test d'un matériel que vous possédez"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2987,7 +2987,7 @@ msgstr "Commentaires"
 #: templates/reviews.html.py:10 templates/gear/page.html:73
 #: templates/gear/page.html.py:200
 msgid "Reviews"
-msgstr "Critiques"
+msgstr "Tests"
 
 #: templates/base.html:147
 msgid "Advanced search"
@@ -4815,11 +4815,11 @@ msgstr "Images diverses"
 
 #: templates/gear/page.html:225
 msgid "There are no reviews yet."
-msgstr "Il n'y a aucune critique pour l'instant."
+msgstr "Il n'y a aucun test pour l'instant."
 
 #: templates/gear/page.html:231
 msgid "Add your review"
-msgstr "Ajouter votre critique"
+msgstr "Ajouter votre test"
 
 #: templates/gear/page.html:234
 msgid ""
@@ -6298,7 +6298,7 @@ msgid ""
 "%(user)s wrote a review of a gear item you own! Read it at following url: "
 "%(url)s"
 msgstr ""
-"%(user)s a posté une critique concernant un matériel que vous possédez! "
+"%(user)s a rédigé un test concernant un matériel que vous possédez! "
 "Consultez-la à l'adresse suivante: %(url)s"
 
 #: templates/notification/new_gear_review/notice.html:2
@@ -6308,14 +6308,13 @@ msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
 "you own!</a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> a posté une critique "
-"concernant un matériel que vous possédez!</a>"
+"<a href=\"%(url)s\"><strong>%(user)s</strong> a rédigé un test concernant un "
+"matériel que vous possédez!</a>"
 
 #: templates/notification/new_gear_review/short.txt:2
 #, python-format
 msgid "%(user)s wrote a review of a gear item you own!"
-msgstr ""
-"%(user)s a posté une critique concernant un matériel que vous possédez!"
+msgstr "%(user)s a rédigé un test concernant un matériel que vous possédez!"
 
 #: templates/notification/new_image/full.txt:2
 #, python-format
