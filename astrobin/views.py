@@ -2366,7 +2366,9 @@ def user_profile_save_gear(request):
 
 @login_required
 def user_profile_flickr_import(request):
-    response_dict = {}
+    response_dict = {
+        'readonly': settings.READONLY_MODE
+    }
 
     if 'flickr_token' in request.session:
         token = request.session['flickr_token']
