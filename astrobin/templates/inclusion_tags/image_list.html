@@ -10,7 +10,7 @@
             title="{{image.title|escape}}<br/>{% trans "by" %} {{image.user.username}}"
             style="display:block;"{% endif %}
             href="{% get_image_url image %}">
-            <img src="{% if image.is_stored %}http://{{s3_url}}/{{bucket_name}}/{% get_final_filename image %}{% if thumbnail_size == 90 %}_small_thumb{{image.original_ext}}{% else %}_thumb.png{% endif %}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail.png{% endif %}"
+            <img src="{% if image.is_stored %}{{IMAGES_URL}}{% get_final_filename image %}{% if thumbnail_size == 90 %}_small_thumb{{image.original_ext}}{% else %}_thumb.png{% endif %}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="{% if thumbnail_size == 184 %}capty {% endif %}"
                  id="#capty-content-{{image.id}}-{{randomid}}"
                  alt="{{image.title|default:_("(no title)")}}"
