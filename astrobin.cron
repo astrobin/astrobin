@@ -25,3 +25,4 @@
 05 00 * * * (cd ~/Code/astrobin; ./manage.py image_of_the_day) 2>&1 >/dev/null
 10 00 * * * (cd ~/Code/astrobin; ./manage.py merge_gear) 2>&1 >/dev/null
 30 00 * * * (cd ~/Code/astrobin; ./manage.py global_stats) 2>&1 >/dev/null
+00 00 * * * (find ~/Code/astrobin/uploads -type f -not -name ".*" -mtime +90 -exec rm -f {} \; 2>&1 >/dev/null)
