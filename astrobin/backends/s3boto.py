@@ -52,7 +52,7 @@ class S3BotoStorage(Storage):
                        headers=HEADERS, gzip=IS_GZIPPED,
                        gzip_content_types=GZIP_CONTENT_TYPES,
                        querystring_auth=QUERYSTRING_AUTH,
-                       force_no_ssl=False):
+                       force_no_ssl=True):
         self.bucket_name = bucket
         self.bucket_cname = bucket_cname
         self.acl = acl
