@@ -143,7 +143,7 @@ def make_image_of_the_day(image):
                 extension = revision.original_ext
 
     tempdir = tempfile.mkdtemp()
-    url = 'http://s3.amazonaws.com/%s/%s%s' \
+    url = 'http://s3.amazonaws.com/%s/images/%s%s' \
           % (settings.AWS_STORAGE_BUCKET_NAME, filename, extension)
     path = os.path.join(filename + extension)
 
