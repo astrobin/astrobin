@@ -51,6 +51,6 @@ class Command(BaseCommand):
                 yesterday = yesterday - timedelta(1)
 
         qcm = QueryCacheMiddleware()
-        qcm.unpatch()
         make_image_of_the_day(coolest_image)
+        qcm.unpatch()
 
