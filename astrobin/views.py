@@ -3564,6 +3564,7 @@ def gear_popover_ajax(request, id):
             'gear': gear,
             'follows': follows,
             'is_authenticated': request.user.is_authenticated(),
+            'IMAGES_URL': settings.IMAGES_URL,
         })
 
     response_dict = {
