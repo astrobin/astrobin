@@ -947,7 +947,7 @@ class ClaimCommercialGearForm(forms.Form):
     error_css_class = 'error'
 
     make = forms.ChoiceField(
-        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make'))),
+        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower()),
         label = _("Make"),
         help_text = _("The make, brand, producer or developer of this product."),
         required = True)
@@ -1008,7 +1008,7 @@ class ClaimRetailedGearForm(forms.Form):
     error_css_class = 'error'
 
     make = forms.ChoiceField(
-        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make'))),
+        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower()),
         label = _("Make"),
         help_text = _("The make, brand, producer or developer of this product."),
         required = True)
