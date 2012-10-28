@@ -82,7 +82,7 @@
                             <div class="info visible-desktop">
                                 <h3>{{iotd.image.title|truncatechars:"60"}}</h3>
                                 <span class="by">
-                                    by <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax iotd.image.user %}"
+                                    {% trans "by" %} <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax iotd.image.user %}"
                                           href="{% url user_page iotd.image.user %}">{{iotd.image.user}}</a>
                                 </span>
                                 {% for i in gear_list %}
