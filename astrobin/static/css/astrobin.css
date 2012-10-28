@@ -1421,30 +1421,21 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .image-detail .image-detail-inner {
   padding: 12px;
 }
-.image-detail .image-detail-inner #image-pill-card {
-  overflow: hidden;
-}
-.image-detail .image-detail-inner #image-pill-card .gear,
-.image-detail .image-detail-inner #image-pill-card .acquisition {
+.image-detail .image-detail-inner .gear,
+.image-detail .image-detail-inner .acquisition {
   float: left;
   width: 50%;
 }
-.image-detail .image-detail-inner #image-pill-card .gear-inner,
-.image-detail .image-detail-inner #image-pill-card .acquisition-inner {
+.image-detail .image-detail-inner .gear-inner,
+.image-detail .image-detail-inner .acquisition-inner {
   padding: 0 8px;
 }
-.image-detail .image-detail-inner #image-pill-card .gear-inner p,
-.image-detail .image-detail-inner #image-pill-card .acquisition-inner p {
+.image-detail .image-detail-inner .gear-inner p,
+.image-detail .image-detail-inner .acquisition-inner p {
   margin: 0;
 }
-.image-detail .image-detail-inner #image-pill-card .image-histogram {
+.image-detail .image-detail-inner .image-histogram {
   margin-top: 28px;
-}
-.image-detail .image-detail-inner #image-pill-description p {
-  padding: 8px;
-}
-.image-detail .image-detail-inner #image-pill-views .plot {
-  padding: 12px;
 }
 .avatar-block .avatar,
 .avatar-block .username {

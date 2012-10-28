@@ -1603,37 +1603,21 @@ div.favorite-container {
 .image-detail {
     .image-detail-inner {
         padding: @spacer-large;
-
-        #image-pill-card {
-            overflow: hidden;
             
-            .gear, .acquisition {
-                float: left;
-                width: 50%;
-            }
-            
-            .gear-inner, .acquisition-inner {
-                padding: 0 @spacer-medium;
-                
-                p {
-                    margin: 0;
-                }
-            }
-            .image-histogram {
-                margin-top: @spacer-xxlarge;
-            }
+        .gear, .acquisition {
+            float: left;
+            width: 50%;
         }
         
-        #image-pill-description {
+        .gear-inner, .acquisition-inner {
+            padding: 0 @spacer-medium;
+            
             p {
-                padding: @spacer-medium;
+                margin: 0;
             }
         }
-        
-        #image-pill-views {
-            .plot {
-                padding: @spacer-large;
-            }
+        .image-histogram {
+            margin-top: @spacer-xxlarge;
         }
     }
 }

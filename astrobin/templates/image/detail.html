@@ -426,95 +426,86 @@
             <div class="row image-detail">
                 <div class="span8">
                     <div class="subtle-container image-detail-inner">
-                        <ul class="nav nav-pills">
-                            <li class="active"><a href="#image-pill-card" data-toggle="pill">{% trans "Technical card" %}</a></li>
-                            <li><a href="#image-pill-views" data-toggle="pill">{% trans "Views" %}</a></li>
-                        </ul>
-                        <div class="pill-content">
-                            <div class="pill-pane fade in active" id="image-pill-card">
-                                <div class="gear">
-                                    <div class="gear-inner">
-                                        {% for i in gear_list %}
-                                            {% if i.1 %}
-                                                <p>
-                                                  <strong>{% trans i.0 %}:</strong>
-                                                  {% for g in i.1 %}
-                                                        <a rel="popover" class="gear-popover{% if g.commercial and g.commercial.is_paid or g.commercial.producer == request.user %} btn btn-mini btn-warning{% endif %}" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id g.slug %}">{% gear_name g %}</a>{% if not forloop.last %},&nbsp;{% endif %}
-                                                    {% endfor %}
-                                                </p>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                </div> <!-- gear -->
-    
-                                <div class="acquisition">
-                                    <div class="acquisition-inner">
-                                        {% if image_type == 'deep_sky' %}
-                                            {% for data in deep_sky_data %}
-                                                {% if data.1 %}
-                                                    <p>
-                                                        <strong>{{data.0}}</strong>:
-                                                        {% if data.0 == dates_label %}
-                                                            {% for date in data.1 %}
-                                                                <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}{% search_form_query %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
-                                                            {% endfor %}
-                                                        {% else %}
-                                                            {{data.1|safe|linebreaksbr}}
-                                                        {% endif %}
-                                                    </p>
-                                                {% endif %}
+                        <div class="header">
+                            <h4><i class="icon-list-alt"></i> {% trans "Technical card" %}</h4>
+                        </div>
+                        <div class="gear">
+                            <div class="gear-inner">
+                                {% for i in gear_list %}
+                                    {% if i.1 %}
+                                        <p>
+                                          <strong>{% trans i.0 %}:</strong>
+                                          {% for g in i.1 %}
+                                                <a rel="popover" class="gear-popover{% if g.commercial and g.commercial.is_paid or g.commercial.producer == request.user %} btn btn-mini btn-warning{% endif %}" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id g.slug %}">{% gear_name g %}</a>{% if not forloop.last %},&nbsp;{% endif %}
                                             {% endfor %}
-                                        {% else %}
-                                            {% if ssa.date %}
-                                                <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}{% search_form_query %}">{{ssa.date|date:"DATE_FORMAT"}}</a></p>
-                                            {% endif %}
-                                            {% if ssa.time %}
-                                                <p><strong>{% trans "Time" %}</strong>: {{ssa.time}}</p>
-                                            {% endif %}
-                                            {% if ssa.frames %}
-                                                <p><strong>{% trans "Frames" %}</strong>: {{ssa.frames}}</p>
-                                            {% endif %}
-                                            {% if ssa.fps %}
-                                                <p><strong>{% trans "FPS" %}</strong>: {{ssa.fps}}</p>
-                                            {% endif %}
-                                            {% if ssa.focal_length %}
-                                                <p><strong>{% trans "Focal length" %}</strong>: {{ssa.focal_length}}</p>
-                                            {% endif %}
-                                            {% if ssa.cmi %}
-                                                <p><strong>{% trans "CMI" %}</strong>: {{ssa.cmi}}</p>
-                                            {% endif %}
-                                            {% if ssa.cmii %}
-                                                <p><strong>{% trans "CMII" %}</strong>: {{ssa.cmii}}</p>
-                                            {% endif %}
-                                            {% if ssa.cmiii %}
-                                                <p><strong>{% trans "CMIII" %}</strong>: {{ssa.cmiii}}</p>
-                                            {% endif %}
-                                            {% if ssa.seeing %}
-                                                <p><strong>{% trans "Seeing" %}</strong>: {{ssa.seeing}}</p>
-                                            {% endif %}
-                                            {% if ssa.transparency %}
-                                                <p><strong>{% trans "Transparency" %}</strong>: {{ssa.transparency}}</p>
-                                            {% endif %}
-                                        {% endif %}
-        
-                                        {% if image.is_solved and image.ra_center_hms %}
-                                            <p><strong>{% trans "RA center" %}</strong>: {{image.ra_center_hms}}</p>
-                                            <p><strong>{% trans "DEC center" %}</strong>: {{image.dec_center_dms}}</p>
-                                            {% if image.pixscale != 0 %}
-                                                <p><strong>{% trans "Pixel scale" %}</strong>: {{image.pixscale|cut_decimals:"2"}} {% trans "arcsec/pixel" %}</p>
-                                            {% endif %}
-                                            <p><strong>{% trans "Orientation" %}</strong>: {{image.orientation|cut_decimals:"2"}} {% trans "degrees" %}</p>
-                                            <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
-                                            <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
-                                        {% endif %}
-                                    </div> <!-- acquisition-inner -->
-                                </div> <!-- acquisition -->
-                            </div> <!-- image-pill-card -->
-    
-                            <div class="pill-pane fade in" id="image-pill-views">
-                                <div class="plot" style="width:580px; height: 150px;"></div>
+                                        </p>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
-                        </div> <!-- pill-content -->
+                        </div> <!-- gear -->
+
+                        <div class="acquisition">
+                            <div class="acquisition-inner">
+                                {% if image_type == 'deep_sky' %}
+                                    {% for data in deep_sky_data %}
+                                        {% if data.1 %}
+                                            <p>
+                                                <strong>{{data.0}}</strong>:
+                                                {% if data.0 == dates_label %}
+                                                    {% for date in data.1 %}
+                                                        <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}{% search_form_query %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {{data.1|safe|linebreaksbr}}
+                                                {% endif %}
+                                            </p>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% if ssa.date %}
+                                        <p><strong>{% trans "Date" %}</strong>: <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}{% search_form_query %}">{{ssa.date|date:"DATE_FORMAT"}}</a></p>
+                                    {% endif %}
+                                    {% if ssa.time %}
+                                        <p><strong>{% trans "Time" %}</strong>: {{ssa.time}}</p>
+                                    {% endif %}
+                                    {% if ssa.frames %}
+                                        <p><strong>{% trans "Frames" %}</strong>: {{ssa.frames}}</p>
+                                    {% endif %}
+                                    {% if ssa.fps %}
+                                        <p><strong>{% trans "FPS" %}</strong>: {{ssa.fps}}</p>
+                                    {% endif %}
+                                    {% if ssa.focal_length %}
+                                        <p><strong>{% trans "Focal length" %}</strong>: {{ssa.focal_length}}</p>
+                                    {% endif %}
+                                    {% if ssa.cmi %}
+                                        <p><strong>{% trans "CMI" %}</strong>: {{ssa.cmi}}</p>
+                                    {% endif %}
+                                    {% if ssa.cmii %}
+                                        <p><strong>{% trans "CMII" %}</strong>: {{ssa.cmii}}</p>
+                                    {% endif %}
+                                    {% if ssa.cmiii %}
+                                        <p><strong>{% trans "CMIII" %}</strong>: {{ssa.cmiii}}</p>
+                                    {% endif %}
+                                    {% if ssa.seeing %}
+                                        <p><strong>{% trans "Seeing" %}</strong>: {{ssa.seeing}}</p>
+                                    {% endif %}
+                                    {% if ssa.transparency %}
+                                        <p><strong>{% trans "Transparency" %}</strong>: {{ssa.transparency}}</p>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if image.is_solved and image.ra_center_hms %}
+                                    <p><strong>{% trans "RA center" %}</strong>: {{image.ra_center_hms}}</p>
+                                    <p><strong>{% trans "DEC center" %}</strong>: {{image.dec_center_dms}}</p>
+                                    {% if image.pixscale != 0 %}
+                                        <p><strong>{% trans "Pixel scale" %}</strong>: {{image.pixscale|cut_decimals:"2"}} {% trans "arcsec/pixel" %}</p>
+                                    {% endif %}
+                                    <p><strong>{% trans "Orientation" %}</strong>: {{image.orientation|cut_decimals:"2"}} {% trans "degrees" %}</p>
+                                    <p><strong>{% trans "Field width" %}</strong>: {{image.fieldw|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
+                                    <p><strong>{% trans "Field height" %}</strong>: {{image.fieldh|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
+                                {% endif %}
+                            </div> <!-- acquisition-inner -->
+                        </div> <!-- acquisition -->
                     </div> <!-- image-detail-inner -->
                 </div> <!-- span8 -->
             </div> <!-- row image-detail -->
@@ -1408,13 +1399,6 @@ $(document).ready(function() {
                 }
             }
         });
-
-        astrobin_stats.init();
-        astrobin_stats.plot(
-            '#image-pill-views .plot',
-            '{% url stats_image_views image.id 'daily' %}',
-            5000);
-        astrobin_stats.enableTooltips('#views .plot');
 
         var hilighted_comment = location.hash.substr(1);
         if (hilighted_comment) {
