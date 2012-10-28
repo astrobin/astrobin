@@ -138,3 +138,58 @@ server {
         fastcgi_read_timeout 1200;
     }
 }
+
+
+upstream questions_app_server {
+    server 127.0.0.1:8083 fail_timeout=0;
+}
+
+server {
+    client_max_body_size 2M;
+    server_name questions.astrobin.com;
+
+    access_log /usr/local/nginx/logs/questions.astrobin.com-access.log;
+    error_log /usr/local/nginx/logs/questions.astrobin.com-error.log;
+
+    keepalive_timeout 10;
+    proxy_read_timeout 300;
+
+    ## Compression
+    # src: http://www.ruby-forum.com/topic/141251
+    # src: http://wiki.brightbox.co.uk/docs:nginx
+
+    gzip on;
+    gzip_http_version 1.0;
+    gzip_comp_level 2;
+    gzip_proxied any;
+    gzip_min_length  1100;
+    gzip_buffers 16 8k;
+    gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+    
+    # Some version of IE 6 don't handle compression well on some mime-types, so just disable for them
+    gzip_disable "MSIE [1-6].(?!.*SV1)";
+    
+    # Set a vary header so downstream proxies don't send cached gzipped content to IE6
+    gzip_vary on;
+    ## /Compression
+
+    location /static/  {
+        root /home/astrobin/Code/astrobin_questions;
+        expires 30d;
+    }
+
+    location / {
+        if ($request_uri ~* "^/robots.txt") {
+            rewrite ^/robots.txt /static/robots.txt permanent;
+        }
+
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        if (!-f $request_filename) {
+            proxy_pass http://questions_app_server;
+            break;
+        }
+    }
+}
+
