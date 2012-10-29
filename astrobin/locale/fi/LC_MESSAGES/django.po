@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-25 19:01+0000\n"
-"PO-Revision-Date: 2012-08-18 20:09+0100\n"
+"PO-Revision-Date: 2012-10-29 18:25+0100\n"
 "Last-Translator: MarkoT <mtoastro@gmail.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
@@ -1280,7 +1280,7 @@ msgstr "Syötä arvo väliltä 1 .. 10."
 
 #: forms.py:666 forms.py:684
 msgid "The date cannot be in the future."
-msgstr ""
+msgstr "Päivämäärä ei voi olla tulevaisuudessa."
 
 #: forms.py:711
 msgid "Nominate for"
@@ -1328,7 +1328,7 @@ msgstr "Nimi"
 #: templates/user/profile/commercial/products.html:485
 #: templates/user/profile/commercial/products.html:812
 msgid "Merge"
-msgstr ""
+msgstr "Yhdistä"
 
 #: forms.py:963 forms.py:1024
 msgid ""
@@ -1458,7 +1458,7 @@ msgstr "Puola"
 
 #: models.py:65 models.py:80 settings.py:62
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brasilian Portugali"
 
 #: models.py:66 models.py:81 settings.py:63
 #, fuzzy
@@ -2249,26 +2249,27 @@ msgstr "Kerro itsestäsi. HTML-tagit sallittu."
 
 #: models.py:1444
 msgid "Company name"
-msgstr ""
+msgstr "Yrityksen nimi"
 
 #: models.py:1445
 msgid "The name of the company you represent on AstroBin."
-msgstr ""
+msgstr "Yrityksen nimi, jota edustat AstroBin:ssa"
 
 #: models.py:1451
-#, fuzzy
 msgid "Company description"
-msgstr "Kuvaus"
+msgstr "Yrityksen kuvaus"
 
 #: models.py:1452
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#10\">formatting rules</a>."
 msgstr ""
+"Lyhyt kuvaus AstroBin:ssa edustamastasi yrityksestä. Voit käyttää joitain <a "
+"href=\"/faq/#10\">muotoiluja</a>."
 
 #: models.py:1460
 msgid "Company website"
-msgstr ""
+msgstr "Yrityksen kotisivu"
 
 #: models.py:1461
 msgid "The website of the company you represent on AstroBin."
@@ -2276,7 +2277,7 @@ msgstr "AstroBin:ssa edustamasi yrityksen sivusto."
 
 #: models.py:1465
 msgid "Country of operation"
-msgstr ""
+msgstr "Maa, jossa yritys toimii"
 
 #: models.py:1489 templates/base.html:419 templates/profile-edit-menu.html:42
 msgid "Default license"
@@ -2356,31 +2357,31 @@ msgstr ""
 
 #: models.py:1938
 msgid "AUD - Australian dollars"
-msgstr ""
+msgstr "AUD - Australian dollari"
 
 #: models.py:1939
 msgid "CAD - Canadian dollars"
-msgstr ""
+msgstr "CAD - Kanadan dollari"
 
 #: models.py:1940
 msgid "CHF - Swiss francs"
-msgstr ""
+msgstr "CHF - Sveitsin frangi"
 
 #: models.py:1941
 msgid "EUR - Euros"
-msgstr ""
+msgstr "EUR - Euro"
 
 #: models.py:1942
 msgid "GPB - Pound stelings"
-msgstr ""
+msgstr "GBP - Englannin punta"
 
 #: models.py:1943
 msgid "PLN - Polish zloty"
-msgstr ""
+msgstr "PLN - Puolan zloty"
 
 #: models.py:1944
 msgid "SEK - Swedish krona"
-msgstr ""
+msgstr "SEK - Ruotsin kruunu"
 
 #: models.py:1945
 msgid "USD - American dollars"
@@ -2392,7 +2393,7 @@ msgstr "Valmistaja"
 
 #: models.py:1962 models.py:2044
 msgid "The link to this product's page on your website."
-msgstr ""
+msgstr "Linkki tämän tuotteen sivuun sivustollasi."
 
 #: models.py:1970
 msgid "Price"
