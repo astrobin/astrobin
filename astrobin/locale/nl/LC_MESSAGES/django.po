@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-25 18:59+0000\n"
-"PO-Revision-Date: 2012-08-20 22:26+0100\n"
+"PO-Revision-Date: 2012-10-29 17:52+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
@@ -1466,12 +1466,11 @@ msgstr "Pools"
 
 #: models.py:65 models.py:80 settings.py:62
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Braziliaans Portugees"
 
 #: models.py:66 models.py:81 settings.py:63
-#, fuzzy
 msgid "Greek"
-msgstr "Griekenland"
+msgstr "Grieks"
 
 #: models.py:85
 msgid "Pulsars"
@@ -2632,6 +2631,8 @@ msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
+"AstroBin is momenteel in alleen-lezen modus (read-only) vanwege onderhoud "
+"aan de server. Gelieve straks opnieuw te proberen!"
 
 #: views.py:993
 msgid ""
@@ -3357,6 +3358,8 @@ msgstr "Hoe correct stemmen op foto's?"
 #: templates/faq.html:22 templates/faq.html.py:178
 msgid "The rating values seem odd. How are they calculated?"
 msgstr ""
+"Het punten van het waarderingssysteem ziet er een beetje vreemd uit. Hoe "
+"worden zij berekend?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3646,12 +3649,22 @@ msgid ""
 "that the image received, to ensure that images with too few votes aren't "
 "rated better than images with similar rating, but lots of votes."
 msgstr ""
+"AstroBin gebruikt twee berekeningsmethodes om de foto-waarderingscijfers te "
+"normalizeren. Ten eerste wordt het <em>sigma-reject</em> algoritme gebruikt "
+"om stemmen uit te sluiten die te ver van het gemiddelde liggen. Dit moet de "
+"stem van mensen bannen die niet eerlijk zijn. Vervolgens wordt de waardering "
+"geïnterpoleerd door een hyperbolische functie op het aantal stemmen dat de "
+"foto heeft gekregen om er zo voor te zorgen dat foto's met slechts een "
+"beperkt aantal waarderingen niet hoger gerangschikt worden dan foto's met "
+"eenzelfde waardering maar met veel meer stemmen."
 
 #: templates/faq.html:183
 msgid ""
 "This produces the \"AstroBin index\", which is a fairer way to compare "
 "images and users."
 msgstr ""
+"Dit genereert de \"AstroBin Index\", die op een meer eerlijke manier foto's en "
+"gebruikers vergelijkt."
 
 #: templates/faq.html:189
 msgid ""
@@ -6488,16 +6501,15 @@ msgstr "Vind foto's"
 
 #: templates/popover/rating.html:12
 msgid "Average"
-msgstr ""
+msgstr "Gemiddeld"
 
 #: templates/popover/rating.html:16
 msgid "Sigma-reject average"
-msgstr ""
+msgstr "Sigma-reject gemiddelde"
 
 #: templates/popover/rating.html:20
-#, fuzzy
 msgid "AstroBin index"
-msgstr "AstroBin is sociaal!"
+msgstr "AstroBin index"
 
 #: templates/popover/rating.html:28
 msgid "Info"

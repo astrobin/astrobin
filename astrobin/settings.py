@@ -124,9 +124,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-#    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.middleware.csrf.CsrfResponseMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
     'django.middleware.http.ConditionalGetMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -143,9 +141,9 @@ MIDDLEWARE_CLASSES = (
     'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
-#    'johnny.middleware.LocalStoreClearMiddleware',
-#    'johnny.middleware.QueryCacheMiddleware',
-#    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
+    'johnny.middleware.LocalStoreClearMiddleware',
+    'johnny.middleware.QueryCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
 ROOT_URLCONF = 'astrobin.urls'
@@ -327,7 +325,7 @@ PIPELINE_CSS = {
             'css/bootstrap-responsive.css',
             'css/astrobin.css',
         ),
-        'output_filename': 'css/astrobin_pipeline_screen_v25.css',
+        'output_filename': 'css/astrobin_pipeline_screen_v26.css',
         'extra_content':  {
             'media': 'screen, projection',
         },
