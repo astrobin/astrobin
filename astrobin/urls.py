@@ -296,5 +296,7 @@ urlpatterns = patterns('',
 
     url('^activity/', include('actstream.urls')),
     url('^activities/$', views.activities, name = 'activities'),
+
+    url(r'^openid/', include('openid_provider.urls')),
 )
 

@@ -207,6 +207,7 @@ INSTALLED_APPS = (
     'reviews',
     'actstream',
     'modeltranslation',
+    'openid_provider',
 )
 
 LOGIN_REDIRECT_URL = '/'
