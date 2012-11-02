@@ -1637,9 +1637,21 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .index-section {
   margin-bottom: 52px;
 }
-.well {
+.well,
+.hero-unit {
   background: url('../images/subtle-panel-tile.png');
   border: 0;
+}
+.hero-unit h1 {
+  font-size: 30px;
+  border-bottom: 0;
+  margin-bottom: 8px;
+}
+.hero-unit p {
+  font-size: 16px;
+}
+.hero-unit small {
+  color: #555;
 }
 .subtle-container {
   background: url('../images/subtle-panel-tile.png');
