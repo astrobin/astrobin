@@ -1550,7 +1550,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 def create_user_openid(sender, instance, created, **kwargs):  
     if created:
-        user.openid_set.create(openid=sender.username)
+        instance.openid_set.create(openid=instance.username)
 
 post_save.connect(create_user_profile, sender=User)
 post_save.connect(create_user_openid, sender=User)
