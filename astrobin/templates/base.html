@@ -87,11 +87,24 @@
                     </a>
                     <div class="site-nav nav-collapse collapse pull-left">
                         <ul class="nav">
-                            <li class="{% current request "^/$" %}"><a href="{% url index %}"><i class="icon-home"></i> {% trans "Home" %}</a></li>
-                            <li class="{% current request "^/blog/$" %}"><a href="/blog/"><i class="icon-pencil"></i> {% trans "Blog" %}</a></li>
+                            <li class="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
+                            <li class="dropdown {% current request "^/blog/" %}">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    {% trans "Community" %}
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/blog/"><i class="icon-pencil"></i> {% trans "Blog" %}</a></li>
+                                    <li class="divider">
+                                    <li>
+                                        <a href="http://questions.astrobin.com/" target="_blank">
+                                            <img src="{{STATIC_URL}}icons/flags/16/United-Kingdom.png" alt="AstroBin Questions"/> AstroBin Questions
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="dropdown {% current request "^/explore/|^/search/|^/stats/|^/leaderboard/" %}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-folder-open"></i>
                                     {% trans "Explore" %}
                                     <b class="caret"></b>
                                 </a>
@@ -167,7 +180,6 @@
                             </li>
                             <li class="dropdown {% current request "^/help/|^/faq/" %}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-question-sign"></i>
                                     {% trans "Help" %}
                                     <b class="caret"></b>
                                 </a>
@@ -230,7 +242,6 @@
                         <ul class="nav pull-right">
                             <li class="dropdown visible-desktop">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-flag"></i>
                                     {% trans "Language" %}
                                     <b class="caret"></b>
                                 </a>
