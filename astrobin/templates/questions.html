@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "AstroBin Questions" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "AstroBin Questions" %}</h1>
+    <div class="row">
+        <div class="span6">
+            <a href="http://questions.astrobin.com/" target="_blank">
+                <img src="{{STATIC_URL}}images/introducing-astrobin-questions.png" alt="AstroBin Questions"/>
+            </a>
+        </div>
+        <div class="span6">
+            <div style="text-align:center">
+                <a href="http://questons.astrobin.com/" target="_blank">
+                    <img src="{{STATIC_URL}}images/astrobin-questions-logo.png" alt="AstroBin Questions"/>
+                </a>
+            </div>
+            <p>
+            {% blocktrans %}As of today, the most common form in which astronomy communities exist is that of the forum. A 20+ years old concept, that doesn't scale well with massive amount of information, does a terrible job at organizing such information (in fact it barely tries), and presents a series of flaws, that will be explained below.{% endblocktrans %}
+            </p>
+
+            <h3>{% trans "What is AstroBin Questions?" %}</h3>
+            <p>
+            {% blocktrans %}It's a Questions &amp; Answers site focused on the quality of the content. The allowed subjects of discussion are Astrophotography and Astronomy.{% endblocktrans %}
+            </p>
+
+            <h3>{% trans "What's wrong with forums?" %}</h3>
+            <p>
+            {% blocktrans %}Forums are great for the recreational discussion, but they are <strong>terribly</strong> dated, as a system, for today's Internet standards. Here's a series of flaws that AstroBin Questions fixes:{% endblocktrans %}
+            </p>
+            <ol>
+                <li>
+                    <strong>{% trans "Every post is flat" %}</strong>
+                    <p>
+                    {% blocktrans %}It's very difficult to engage in several conversations at the same time in the same post, because the only way to do it is by quoting somebody. Very soon this becomes a mess.{% endblocktrans %}
+                    </p>
+                </li>
+
+                <li>
+                    <strong>{% trans "Every post has the same visibility" %}</strong>
+                    <p>
+                    {% blocktrans %}If you post a message asking whether you should use a Solar Filter when observing an eclipse, and I answer <em>"No, don't worry,"</em> the only way to invalidate that answer is that other people reply and explain why that's wrong. This doesn't guarantee that somebody will not go on and lose an eye. This is an extreme example: what I'm trying to say is that some post replies might be objectively wrong, and this will worsen the quality of the community.{% endblocktrans %}
+                    </p>
+                </li>
+
+                <li>
+                    <strong>{% trans "Every user has the same importance" %}</strong>
+                    <p>
+                    {% blocktrans %}Whether I'm Mr. Nobody, that just took his first astrophotograph last night, or a semi-professional astrophotographer with 20 years experience, on forums this doesn't matter. My posts or post replies will look the same. This worsens the quality of the community.{% endblocktrans %}
+                    </p>
+                </li>
+
+                <li>
+                    <strong>{% trans "Everything is static" %}</strong>
+                    <p>
+                    {% blocktrans %}If I write like a 7-year-old, nobody can fix it. If I suck at communicating and can't ask my question well, nobody can rephrase it. If I make a lot of typos, nobody can fix them. This is undesirable.{% endblocktrans %}
+                    </p>
+                </li>
+            </ol>
+
+            <p>
+            {% blocktrans %}AstroBin Questions addresses all these issues with a community driven, highly interactive, wiki-capable website that <strong>you</strong> moderate, thanks to a system based on <em>karma points</em>.{% endblocktrans %}
+            </p>
+
+            <p>
+            {% blocktrans %}Please join, and you can learn and teach about Astrophotography and Astronomy!{% endblocktrans %}
+            </p>
+
+            <h3>{% trans "Here's some more reading material to get you started" %}</h3>
+            <ul style="list-style:none">
+                <li>
+                    <a target="_blank" href="http://questions.astrobin.com/faq/">
+                        {% trans "Frequently Asked Questions about AstroBin Questions" %}
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://questions.astrobin.com/help/">
+                        {% trans "AstroBin Questions' help page" %}
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://questions.astrobin.com/question/1/">
+                        {% trans "An extension of this page, as a question on AstroBin Questions" %}
+                    </a>
+                </li>
+            </ul>
+
+            <div class="well well-large" style="text-align:center">
+                <a class="btn btn-primary btn-large" target="_blank" href="http://questions.astrobin.com/">
+                    {% trans "Go to AstroBin Questions!" %}
+                </a>
+            </div>
+
+            <small style="color: #555; font-size: 11px;">{% trans "PS: AstroBin Questions is only available in English, right now, but more languages will come soon." %}</small>
+        </div>
+    </div> <!-- row -->
+{% endblock %}
+

@@ -1825,9 +1825,22 @@ div.favorite-container {
     margin-bottom: @spacer-xxxlarge;
 }
 
-.well {
+.well, .hero-unit {
     background: url('../images/subtle-panel-tile.png');
     border: 0;
+}
+.hero-unit {
+    h1 {
+        font-size: 30px;
+        border-bottom: 0;
+        margin-bottom: @spacer-medium;
+    }
+    p {
+        font-size: 16px;
+    }
+    small {
+        color: #555;
+    }
 }
 
 .subtle-container {

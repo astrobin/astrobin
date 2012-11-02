@@ -69,6 +69,20 @@
 
     {% else %}<!-- authenticated -->
 
+        <div class="hero-unit">
+            <div style="float:left; margin-right: 40px; margin-bottom: 20px;">
+                <a href="http://questons.astrobin.com/" target="_blank">
+                    <img src="{{STATIC_URL}}images/astrobin-questions-logo.png" alt="AstroBin Questions"/>
+                </a>
+            </div>
+            <h1>{% trans "Introducing AstroBin Questions" %}</h1>
+            <p>
+                {% url help_questions as questions_url %}
+                {% blocktrans %}After revolutionizing the way astrophotographers preserve their data, AstroBin is set to start a new era in the way amateur astronomers communicate on the Internet. <a href="{{questions_url}}">Want to know more?</a>{% endblocktrans %}
+            </p>
+            <small>{% trans "PS: AstroBin Questions is only available in English, right now, but more languages will come soon." %}</small>
+        </div>
+
         {% with image_of_the_day as iotd %}
             <div class="visible-desktop">
                 <div class="row section">

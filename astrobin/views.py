@@ -3099,6 +3099,12 @@ def faq(request):
 
 
 @require_GET
+def help_questions(request):
+    return render_to_response('questions.html',
+        context_instance=RequestContext(request))
+
+
+@require_GET
 def tos(request):
     return render_to_response('tos.html',
         context_instance=RequestContext(request))

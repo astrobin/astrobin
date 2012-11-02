@@ -626,6 +626,21 @@
         </div> <!-- span8 -->
         
         <div class="span4"> <!-- right pane -->
+            <div class="subtle-container">
+                <div class="alert alert-warning">
+                    {% trans "Hey, check this out! It's important." %}
+                </div>
+                <div style="float:left; margin-right: 20px; margin-bottom: 10px;">
+                    <a href="http://questons.astrobin.com/" target="_blank">
+                        <img width="100" src="{{STATIC_URL}}images/astrobin-questions-logo.png" alt="AstroBin Questions"/>
+                    </a>
+                </div>
+                <strong>{% trans "Introducing AstroBin Questions" %}</strong>
+                <p>
+                    {% url help_questions as questions_url %}
+                    {% blocktrans %}After revolutionizing the way astrophotographers preserve their data, AstroBin is set to start a new era in the way amateur astronomers communicate on the Internet. <a href="{{questions_url}}">Want to know more?</a>{% endblocktrans %}
+                </p>
+            </div>
             {% if revisions or is_revision %}
             <div class="subtle-container">
                 <ul class="thumbnails astrobin-thumbnails">
