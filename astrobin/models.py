@@ -1909,20 +1909,6 @@ class GlobalStat(models.Model):
             self.users, self.images, self.integration)
 
 
-from zinnia.models import Entry
-def blog_entry_notify(sender, instance, created, **kwargs):
-    if created and instance.published and 'astrobin' in [x.username for x in instance.authors.all()]:
-        push_notification(
-            User.objects.all(),
-            'new_blog_entry',
-            {
-                'object': instance.title,
-                'object_url': instance.get_absolute_url()
-            }
-        )
-post_save.connect(blog_entry_notify, sender = Entry)
-
-
 from reviews.models import ReviewedItem
 def reviewed_item_post_save(sender, instance, created, **kwargs):
     verb = "has written a review on"
