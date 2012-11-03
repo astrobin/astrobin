@@ -731,7 +731,7 @@
 
             {% ifequal request.user image.user %}
             <div class="subtle-container">
-                <a href="http://questions.astrobin.com/questions/ask/?title=How%20can%20I%20improve%20this%20image?%20({{image.title|escape}})&text=!%5B{{image.title|escape}}%5D({% get_image_path image 1 0 %})%0A%0A%5B(View%20full%20size%20on%20AstroBin)%5D(http%253A%252F%252Fastrob.in%252Ffull%252F{{image.id}}%252F)%0A%0A%0AREMEMBER%20TO%20EDIT%20THIS%20PART!%0A%0A%0AThank%20you!&tags=critique"
+                <a href="http://questions.astrobin.com/questions/ask/?title=How%20can%20I%20improve%20this%20image?%20({{image.title|escape}})&text=!%5B{{image.title|escape}}%5D({% get_image_path image 1 0 %})%0A%0A%5B(View%20full%20size%20on%20AstroBin)%5D(http://astrob.in/full/{{image.id}}/)%0A%0A%0AREMEMBER%20TO%20EDIT%20THIS%20PART!%0A%0A%0AThank%20you!&tags=critique"
                    target="_blank"
                    class="btn btn-primary btn-large"
                    style="width:242px; font-weight: bold; font-size: 22px">
