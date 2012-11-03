@@ -2289,6 +2289,7 @@ def user_profile_save_locations(request):
         UserProfile, Location, form = LocationEditForm, extra = 1)
     formset = LocationsFormset(data = request.POST, instance = profile)
     if not formset.is_valid():
+        messages.error(request, _("There was one or more errors processing the form. You may need to scroll down to see them."))
         return render_to_response(
             'user/profile/edit/locations.html',
             {
