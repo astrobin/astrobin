@@ -2629,6 +2629,32 @@ li.revisions {
     }
 }
 
+/* Bootstrap popover */
+.popover {
+   .popover-inner {
+        padding: 0;
+        background: @dark-panel-color url('../images/dark-panel-tile.png');
+        -webkit-box-shadow: 0 0 22px rgba(0, 0, 0, 1);
+           -moz-box-shadow: 0 0 22px rgba(0, 0, 0, 1);
+                box-shadow: 0 0 22px rgba(0, 0, 0, 1);
+
+        .popover-title {
+            background: #303030 url('../images/darker-panel-tile.png');
+            margin-top: 0;
+            margin-bottom: 0;
+            border-bottom-color: #414141;
+        }
+
+        .popover-content {
+            background: @dark-panel-color url('../images/dark-panel-tile.png');
+        }
+    }
+}
+.popover.top .arrow {
+    border-top-color: @dark-panel-color;
+}
+ 
+
 .gear-page {
   .gear-image {
     margin-bottom: @spacer-large;
