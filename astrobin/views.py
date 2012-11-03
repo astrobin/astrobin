@@ -32,6 +32,7 @@ from djangoratings.models import Vote
 from reviews.forms import ReviewedItemForm
 from actstream.models import Action
 from registration.forms import RegistrationForm
+from zinnia.models import Entry
 
 from uuid import uuid4
 import os
