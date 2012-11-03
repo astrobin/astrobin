@@ -733,6 +733,9 @@
             <div class="subtle-container">
                 <a href="http://questions.astrobin.com/questions/ask/?title=How%20can%20I%20improve%20this%20image?%20({{image.title|escape}})&text=!%5B{{image.title|escape}}%5D({% get_image_path image 1 0 %})%0A%0A%5B(View%20full%20size%20on%20AstroBin)%5D(http://astrob.in/full/{{image.id}}/)%0A%0A%0AREMEMBER%20TO%20EDIT%20THIS%20PART!%0A%0A%0AThank%20you!&tags=critique"
                    target="_blank"
+                   id="request-critique"
+                   data-title="{% trans "What is this?" %}"
+                   data-content="{% blocktrans %}This button will create a post on AstroBin Questions, in which you can ask for critique, review or analisys of your image.{% endblocktrans %}"
                    class="btn btn-primary btn-large"
                    style="width:242px; font-weight: bold; font-size: 22px">
                    {% trans "Request critique" %}
@@ -1430,6 +1433,10 @@ $(document).ready(function() {
                 $('html, body').animate({scrollTop: $("#" + hilighted_comment).offset().top - 54}, 500);
             }, 1000);
         }
+
+        $('#request-critique').popover({
+            placement: 'top'
+        });
     });
 </script>
 {% endblock %}
