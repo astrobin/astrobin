@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-04 09:13+0000\n"
-"PO-Revision-Date: 2012-11-01 20:02+0100\n"
+"PO-Revision-Date: 2012-11-04 18:37+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -2773,6 +2773,8 @@ msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
+"Un ou plusieurs champs n'ont pas été renseignés. Il peut être nécessaire de "
+"faire défiler la page pour les vérifier tous."
 
 #: views.py:2846
 #, python-format
@@ -2978,9 +2980,8 @@ msgid "Home"
 msgstr "Accueil"
 
 #: templates/base.html:94
-#, fuzzy
 msgid "Community"
-msgstr "Commentaire"
+msgstr "Communauté"
 
 #: templates/base.html:98 templates/base.html.py:652 templates/index.html:215
 msgid "Blog"
@@ -3051,9 +3052,8 @@ msgstr "FAQ"
 
 #: templates/base.html:203 templates/questions.html:4
 #: templates/questions.html.py:7
-#, fuzzy
 msgid "AstroBin Questions"
-msgstr "Indice AstroBin"
+msgstr "Les Questions AstroBin"
 
 #: templates/base.html:227 templates/contact_form/contact.html:5
 #: templates/contact_form/contact.html:7
@@ -4139,7 +4139,7 @@ msgstr ""
 
 #: templates/index.html:76 templates/image/detail.html:636
 msgid "Introducing AstroBin Questions"
-msgstr ""
+msgstr "Nouveau! Les Questions AstroBin"
 
 #: templates/index.html:79 templates/image/detail.html:639
 #, python-format
@@ -4149,12 +4149,18 @@ msgid ""
 "communicate on the Internet. <a href=\"%(questions_url)s\">Want to know more?"
 "</a>"
 msgstr ""
+"Après avoir révolutionné la façon dont les astrophotographes partagent leur "
+"travail, AstroBin instaure une nouvelle ère de communication entre les "
+"astronomes amateurs sur Internet. <a href=\"%(questions_url)s\">En savoir "
+"plus?</a>"
 
 #: templates/index.html:81 templates/questions.html:94
 msgid ""
 "PS: AstroBin Questions is only available in English, right now, but more "
 "languages will come soon."
 msgstr ""
+"PS: Les Questions AstroBin sont disponibles uniquement en anglais pour le "
+"moment, les autres langues seront ajoutées très bientôt."
 
 #: templates/index.html:89
 msgid "Image of the day"
@@ -4399,21 +4405,28 @@ msgid ""
 "information (in fact it barely tries), and presents a series of flaws, that "
 "will be explained below."
 msgstr ""
+"De nos jours, les forums constituent l'outil le plus répandu au sein de "
+"l'astronomie communautaire. Ce concept âgé de plus de 20 ans, n'est plus "
+"adapté à une quantité d'informations en augmentation constante et a bien du "
+"mal à les organiser. Cela engendre un grand nombre d'imperfections, listées "
+"ci-dessous."
 
 #: templates/questions.html:22
-#, fuzzy
 msgid "What is AstroBin Questions?"
-msgstr "AstroBin, c'est quoi?"
+msgstr "Les Questions AstroBin, c'est quoi?"
 
 #: templates/questions.html:24
 msgid ""
 "It's a Questions &amp; Answers site focused on the quality of the content. "
 "The allowed subjects of discussion are Astrophotography and Astronomy."
 msgstr ""
+"Il s'agit d'un site de Questions &amp; Réponses, axé sur la qualité du "
+"contenu. Les sujets de discussion autorisés sont l'Astrophotographie et "
+"l'Astronomie."
 
 #: templates/questions.html:27
 msgid "What's wrong with forums?"
-msgstr ""
+msgstr "Quels sont les inconvénients d'un forum?"
 
 #: templates/questions.html:29
 msgid ""
@@ -4421,10 +4434,14 @@ msgid ""
 "<strong>terribly</strong> dated, as a system, for today's Internet "
 "standards. Here's a series of flaws that AstroBin Questions fixes:"
 msgstr ""
+"Les forums sont parfaits pour les discussions \"récréatives\", mais ils "
+"apparaissent terriblement désuets en tant que système fonctionnel, selon les "
+"standards actuels d'Internet. Voici quelques défauts que les Questions "
+"AstroBin corrigent:"
 
 #: templates/questions.html:33
 msgid "Every post is flat"
-msgstr ""
+msgstr "Chaque message est uniforme"
 
 #: templates/questions.html:35
 msgid ""
@@ -4432,10 +4449,13 @@ msgid ""
 "the same post, because the only way to do it is by quoting somebody. Very "
 "soon this becomes a mess."
 msgstr ""
+"Il est très difficile d'engager plusieurs conversations simultanées dans un "
+"même topic, car le seul moyen d'y parvenir est de citer un autre "
+"intervenant. Très rapidement, la discussion devient confuse."
 
 #: templates/questions.html:40
 msgid "Every post has the same visibility"
-msgstr ""
+msgstr "Chaque message a la même visibilité"
 
 #: templates/questions.html:42
 msgid ""
@@ -4447,10 +4467,18 @@ msgid ""
 "replies might be objectively wrong, and this will worsen the quality of the "
 "community."
 msgstr ""
+"Si vous postez un message demandant si vous devriez utiliser un filtre "
+"solaire pour observer une éclipse, et que quelqu'un répond <em>\"Non, pas la "
+"peine\"</em>, le seul moyen d'invalider cette réponse est qu'une autre "
+"personne intervienne et explique pourquoi cela est une ineptie. Mais ça ne "
+"garantit pas qu'entretemps, vous n'ayez pas perdu un oeil. Évidemment, c'est "
+"un exemple extrême: son but premier est de démontrer que certaines réponses "
+"sont totalement fausses, et appauvrissent la qualité du partage "
+"communautaire."
 
 #: templates/questions.html:47
 msgid "Every user has the same importance"
-msgstr ""
+msgstr "Chaque intervenant a la même légitimité"
 
 #: templates/questions.html:49
 msgid ""
@@ -4459,10 +4487,15 @@ msgid ""
 "this doesn't matter. My posts or post replies will look the same. This "
 "worsens the quality of the community."
 msgstr ""
+"Que vous soyez Mr Personne, qui vient juste de prendre sa première "
+"astrophoto la nuit dernière, ou bien un astrophotographe semi-professionnel "
+"avec 20 années d'expérience, cela ne fait pas de différence sur un forum. "
+"Les interventions auront le même poids, au détriment de la qualité générale "
+"des informations apportées."
 
 #: templates/questions.html:54
 msgid "Everything is static"
-msgstr ""
+msgstr "Tout est statique"
 
 #: templates/questions.html:56
 msgid ""
@@ -4470,6 +4503,10 @@ msgid ""
 "and can't ask my question well, nobody can rephrase it. If I make a lot of "
 "typos, nobody can fix them. This is undesirable."
 msgstr ""
+"Les messages semblant rédigés par un enfant de 7 ans ne sont pas corrigés. "
+"Les questions posées approximativement ne sont pas reformulées. Il en va de "
+"même pour les fautes de frappes. Bref, tous ces petits désagréments "
+"ternissent l'expérience communautaire."
 
 #: templates/questions.html:62
 msgid ""
@@ -4477,33 +4514,38 @@ msgid ""
 "highly interactive, wiki-capable website that <strong>you</strong> moderate, "
 "thanks to a system based on <em>karma points</em>."
 msgstr ""
+"Les Questions AstroBin remédient à tous ces problèmes, en s'appuyant sur une "
+"communauté responsable, hautement réactive, au sein d'un site wiki que "
+"<strong>vous</strong> administrez, à l'aide d'un système de privilèges basé "
+"sur les <em>points karma</em>."
 
 #: templates/questions.html:66
 msgid ""
 "Please join, and you can learn and teach about Astrophotography and "
 "Astronomy!"
 msgstr ""
+"N'hésitez pas à vous inscrire, et vous pourrez à la fois demander et "
+"prodiguer des conseils concernant l'Astrophotographie et l'Astronomie!"
 
 #: templates/questions.html:69
 msgid "Here's some more reading material to get you started"
-msgstr ""
+msgstr "Quelques informations supplémentaires pour débuter"
 
 #: templates/questions.html:73
-#, fuzzy
 msgid "Frequently Asked Questions about AstroBin Questions"
 msgstr "Foire Aux Questions"
 
 #: templates/questions.html:78
 msgid "AstroBin Questions' help page"
-msgstr ""
+msgstr "Page d'aide des Questions AstroBin"
 
 #: templates/questions.html:83
 msgid "An extension of this page, as a question on AstroBin Questions"
-msgstr ""
+msgstr "Un appendice de la page d'aide, sous forme de Question AstroBin"
 
 #: templates/questions.html:90
 msgid "Go to AstroBin Questions!"
-msgstr ""
+msgstr "Consulter les Questions AstroBin!"
 
 #: templates/stats.html:10
 #, python-format
@@ -5291,7 +5333,7 @@ msgstr ""
 
 #: templates/image/detail.html:631
 msgid "Hey, check this out! It's important."
-msgstr ""
+msgstr "Lisez ce qui suit! C'est important."
 
 #: templates/image/detail.html:655 templates/image/detail.html.py:681
 msgid "Final"
@@ -5310,25 +5352,25 @@ msgid "Mark as favorite"
 msgstr "Marquer comme favori"
 
 #: templates/image/detail.html:737
-#, fuzzy
 msgid "What is this?"
-msgstr "AstroBin, c'est quoi?"
+msgstr "Qu'est-ce que c'est?"
 
 #: templates/image/detail.html:738
 msgid ""
 "This button will create a post on AstroBin Questions, in which you can ask "
 "for critique, review or analisys of your image."
 msgstr ""
+"Ce bouton créera une Question AstroBin, dans laquelle vous pourrez demander "
+"une évaluation de votre image ou tout simplement de l'aide concernant un "
+"aspect de son traitement."
 
 #: templates/image/detail.html:738
-#, fuzzy
 msgid "Learn more about AstroBin Questions."
-msgstr "Foire Aux Questions"
+msgstr "En savoir plus sur les Questions AstroBin."
 
 #: templates/image/detail.html:741
-#, fuzzy
 msgid "Request critique"
-msgstr "Demande de"
+msgstr "Demande d'aide"
 
 #: templates/image/detail.html:789 templates/image/detail.html.py:790
 msgid "Histogram"
@@ -6671,17 +6713,16 @@ msgstr ""
 "<strong>%(object)s</strong>.</a>"
 
 #: templates/openid_provider/decide.html:5
-#, fuzzy
 msgid "Allow external login"
-msgstr "Autoriser la notation"
+msgstr "Permettre une identification externe"
 
 #: templates/openid_provider/decide.html:7
 msgid "The following site has requested verification of your account:"
-msgstr ""
+msgstr "Le site suivant demande une vérification de votre compte:"
 
 #: templates/openid_provider/decide.html:13
 msgid "Verify"
-msgstr ""
+msgstr "Vérifier"
 
 #: templates/popover/gear.html:9 templates/popover/gear_accessory.html:18
 #: templates/popover/gear_camera.html:22 templates/popover/gear_filter.html:20
