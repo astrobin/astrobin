@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 21:14+0000\n"
-"PO-Revision-Date: 2012-11-03 21:17+0100\n"
+"POT-Creation-Date: 2012-11-04 09:15+0000\n"
+"PO-Revision-Date: 2012-11-04 09:30+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -5322,6 +5322,10 @@ msgid ""
 msgstr ""
 "Questo pulsante creerà un messaggio su AstroBin Domande, ed in esso puoi "
 "chiedere critiche, consigli o analisi della tua immagine."
+
+#: templates/image/detail.html:738
+msgid "Learn more about AstroBin Questions."
+msgstr "Scopri di più riguado AstroBin Domande."
 
 #: templates/image/detail.html:741
 msgid "Request critique"
