@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 19:42+0000\n"
+"POT-Creation-Date: 2012-11-03 21:14+0000\n"
 "PO-Revision-Date: 2012-05-25 12:28+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1028,7 +1028,7 @@ msgstr ""
 #: templates/reviews.html:43 templates/gear/page.html:140
 #: templates/gear/page.html.py:277 templates/gear/page.html:459
 #: templates/image/detail.html:367 templates/image/detail.html.py:579
-#: templates/image/detail.html:1173
+#: templates/image/detail.html:1176
 msgid "Link"
 msgstr "Link"
 
@@ -1206,8 +1206,8 @@ msgstr "Ju lutem perdorni kete format: vvvv-mm-dd"
 msgid "Express value in hours"
 msgstr "Shpreh vleren me ore"
 
-#: forms.py:383 models.py:865 templates/image/detail.html:750
-#: templates/image/detail.html.py:751 templates/search/search.html:225
+#: forms.py:383 models.py:865 templates/image/detail.html:753
+#: templates/image/detail.html.py:754 templates/search/search.html:225
 msgid "License"
 msgstr "Liçense"
 
@@ -3056,7 +3056,7 @@ msgstr "Ju lutem zgjidhni nje gjuhe nga opsionet e mëposhtme."
 
 #: templates/base.html:346 templates/index.html:117 templates/upload.html:5
 #: templates/upload.html.py:17 templates/upload.html:33
-#: templates/avatar/change.html:38 templates/image/detail.html:1395
+#: templates/avatar/change.html:38 templates/image/detail.html:1398
 msgid "Upload"
 msgstr "Ngarko"
 
@@ -3241,16 +3241,16 @@ msgstr "Mbrapa te maja"
 
 #: templates/base.html:730 templates/gear/page.html:164
 #: templates/gear/page.html.py:478 templates/image/detail.html:603
-#: templates/image/detail.html.py:1192 templates/messages/compose.html:14
+#: templates/image/detail.html.py:1195 templates/messages/compose.html:14
 #: templates/openid_provider/decide.html:14
 msgid "Cancel"
 msgstr "Fshi"
 
-#: templates/base.html:770 templates/image/detail.html:1399
+#: templates/base.html:770 templates/image/detail.html:1402
 msgid "No file selected"
 msgstr "Asnje dosje e zgjedhur"
 
-#: templates/base.html:771 templates/image/detail.html:1400
+#: templates/base.html:771 templates/image/detail.html:1403
 msgid "Choose file"
 msgstr "Zgjidh dosjen"
 
@@ -3262,8 +3262,8 @@ msgstr ""
 #: templates/comments.html:55 templates/index.html:261
 #: templates/index.html.py:262 templates/leaderboard.html:76
 #: templates/reviews.html:58 templates/image/detail.html:265
-#: templates/image/detail.html.py:1337 templates/image/detail.html:1351
-#: templates/image/detail.html.py:1352 templates/image/detail.html:1353
+#: templates/image/detail.html.py:1340 templates/image/detail.html:1354
+#: templates/image/detail.html.py:1355 templates/image/detail.html:1356
 #: templates/popover/gear_accessory.html:24
 #: templates/popover/gear_camera.html:27 templates/popover/gear_filter.html:25
 #: templates/popover/gear_focal_reducer.html:23
@@ -3278,8 +3278,8 @@ msgstr "Ndiq"
 
 #: templates/comments.html:55 templates/index.html:261
 #: templates/index.html.py:262 templates/leaderboard.html:76
-#: templates/reviews.html:58 templates/image/detail.html:1351
-#: templates/image/detail.html.py:1352 templates/image/detail.html:1353
+#: templates/reviews.html:58 templates/image/detail.html:1354
+#: templates/image/detail.html.py:1355 templates/image/detail.html:1356
 #: templates/popover/gear_accessory.html:22
 #: templates/popover/gear_camera.html:25 templates/popover/gear_filter.html:23
 #: templates/popover/gear_focal_reducer.html:21
@@ -3624,24 +3624,24 @@ msgid ""
 "You can vote each image from 1 to 5 stars, and they are defined like this:"
 msgstr ""
 
-#: templates/faq.html:138 templates/image/detail.html:1380
+#: templates/faq.html:138 templates/image/detail.html:1383
 msgid "It's a start, but it needs better data."
 msgstr ""
 
-#: templates/faq.html:145 templates/image/detail.html:1381
+#: templates/faq.html:145 templates/image/detail.html:1384
 msgid "It looks good, but it needs better processing."
 msgstr ""
 
-#: templates/faq.html:153 templates/image/detail.html:1382
+#: templates/faq.html:153 templates/image/detail.html:1385
 msgid "Good data, good processing."
 msgstr ""
 
-#: templates/faq.html:162 templates/image/detail.html:1383
+#: templates/faq.html:162 templates/image/detail.html:1386
 #, fuzzy
 msgid "Great result!"
 msgstr "Asnje rezultat"
 
-#: templates/faq.html:172 templates/image/detail.html:1384
+#: templates/faq.html:172 templates/image/detail.html:1387
 #, fuzzy
 msgid "Top quality!"
 msgstr "Lartë majtas"
@@ -4528,7 +4528,7 @@ msgid "Upload as a work in progress"
 msgstr "Ngarko si një punim i papërfunduar"
 
 #: templates/upload.html:20 templates/upload.html.py:35
-#: templates/image/detail.html:1401
+#: templates/image/detail.html:1404
 msgid "Uploading..."
 msgstr "Duke ngarkuar..."
 
@@ -4663,7 +4663,7 @@ msgstr ""
 #: templates/commercial/products/retailed/edit.html:14
 #: templates/gear/page.html:163 templates/gear/page.html.py:477
 #: templates/image/detail.html:540 templates/image/detail.html.py:602
-#: templates/image/detail.html:1191 templates/image/edit/acquisition.html:28
+#: templates/image/detail.html:1194 templates/image/edit/acquisition.html:28
 #: templates/image/edit/acquisition.html:63
 #: templates/image/edit/acquisition.html:85 templates/image/edit/basic.html:82
 #: templates/image/edit/gear.html:53 templates/image/edit/license.html:22
@@ -4710,7 +4710,7 @@ msgid ""
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
 
-#: templates/contact_form/contact.html:16 templates/image/detail.html:1343
+#: templates/contact_form/contact.html:16 templates/image/detail.html:1346
 #: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
 #: templates/user/profile-js.html:28
 msgid "Send"
@@ -4912,23 +4912,23 @@ msgstr ""
 "register/\">rregjistrohuni</a> qe te komentoni."
 
 #: templates/gear/page.html:134 templates/gear/page.html.py:552
-#: templates/image/detail.html:573 templates/image/detail.html.py:1269
+#: templates/image/detail.html:573 templates/image/detail.html.py:1272
 msgid "(comment deleted)"
 msgstr "(komenti u fshi)"
 
 #: templates/gear/page.html:145 templates/gear/page.html.py:553
-#: templates/image/detail.html:584 templates/image/detail.html.py:1270
+#: templates/image/detail.html:584 templates/image/detail.html.py:1273
 msgid "Undelete"
 msgstr "E pafshire"
 
 #: templates/gear/page.html:147 templates/gear/page.html.py:460
 #: templates/gear/page.html:559 templates/image/detail.html:586
-#: templates/image/detail.html.py:1174 templates/image/detail.html:1276
+#: templates/image/detail.html.py:1177 templates/image/detail.html:1279
 msgid "Delete"
 msgstr "Fshi"
 
 #: templates/gear/page.html:150 templates/gear/page.html.py:461
-#: templates/image/detail.html:589 templates/image/detail.html.py:1175
+#: templates/image/detail.html:589 templates/image/detail.html.py:1178
 #: templates/inclusion_tags/list_gear.html:21
 #: templates/user/profile/commercial/products.html:79
 #: templates/user/profile/commercial/products.html:161
@@ -4946,7 +4946,7 @@ msgstr "Pergjigju"
 
 #: templates/gear/page.html:166 templates/gear/page.html.py:207
 #: templates/gear/page.html:483 templates/image/detail.html:542
-#: templates/image/detail.html.py:605 templates/image/detail.html:1197
+#: templates/image/detail.html.py:605 templates/image/detail.html:1200
 msgid "Formatting help"
 msgstr "Ndihme per formatim"
 
@@ -4988,7 +4988,7 @@ msgid "Owners"
 msgstr ""
 
 #: templates/gear/page.html:396 templates/gear/page.html.py:456
-#: templates/image/detail.html:1170
+#: templates/image/detail.html:1173
 msgid "just now"
 msgstr "menjehere"
 
@@ -5037,7 +5037,7 @@ msgstr "Shenoje kete version te ripunuar si ai final"
 msgid "Change license"
 msgstr "Nderro liçensen"
 
-#: templates/image/detail.html:81 templates/image/detail.html.py:1390
+#: templates/image/detail.html:81 templates/image/detail.html.py:1393
 msgid "Upload new revision"
 msgstr "Ngarko nje rishikim te ri"
 
@@ -5092,7 +5092,7 @@ msgid "View"
 msgstr "Shiko"
 
 #: templates/image/detail.html:181 templates/image/detail.html.py:235
-#: templates/image/detail.html:870
+#: templates/image/detail.html:873
 msgid "Inverted monochrome"
 msgstr "Ktheje ne bardh e zi"
 
@@ -5106,7 +5106,7 @@ msgid "Annotated"
 msgstr "E komentuar"
 
 #: templates/image/detail.html:205 templates/image/detail.html.py:229
-#: templates/image/detail.html:869
+#: templates/image/detail.html:872
 msgid "Normal"
 msgstr "Normal"
 
@@ -5114,7 +5114,7 @@ msgstr "Normal"
 msgid "View profile"
 msgstr "Shiko profilin"
 
-#: templates/image/detail.html:262 templates/image/detail.html.py:1329
+#: templates/image/detail.html:262 templates/image/detail.html.py:1332
 #: templates/user/profile-js.html:14 templates/user/profile-subnav.html:86
 msgid "Stop following"
 msgstr "Ndalo ndjekjen"
@@ -5123,7 +5123,7 @@ msgstr "Ndalo ndjekjen"
 msgid "Send private message"
 msgstr "Dergo mesazh privat"
 
-#: templates/image/detail.html:283 templates/image/detail.html.py:816
+#: templates/image/detail.html:283 templates/image/detail.html.py:819
 msgid "Share"
 msgstr "Shpernda"
 
@@ -5209,94 +5209,105 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
-#: templates/image/detail.html:716 templates/image/detail.html.py:900
+#: templates/image/detail.html:716 templates/image/detail.html.py:903
 #, fuzzy
 msgid "Remove from favorites"
 msgstr "Shikoni astrofotot e juaja"
 
-#: templates/image/detail.html:716 templates/image/detail.html.py:903
+#: templates/image/detail.html:716 templates/image/detail.html.py:906
 #, fuzzy
 msgid "Mark as favorite"
 msgstr "Shëno si e bërë."
 
+#: templates/image/detail.html:737
+#, fuzzy
+msgid "What is this?"
+msgstr "Cfarë është ky sit?"
+
 #: templates/image/detail.html:738
+msgid ""
+"This button will create a post on AstroBin Questions, in which you can ask "
+"for critique, review or analisys of your image."
+msgstr ""
+
+#: templates/image/detail.html:741
 #, fuzzy
 msgid "Request critique"
 msgstr "Kerkese nga"
 
-#: templates/image/detail.html:786 templates/image/detail.html.py:787
+#: templates/image/detail.html:789 templates/image/detail.html.py:790
 msgid "Histogram"
 msgstr "Histogrami"
 
-#: templates/image/detail.html:793
+#: templates/image/detail.html:796
 msgid "Made possible by"
 msgstr ""
 
-#: templates/image/detail.html:830
+#: templates/image/detail.html:833
 msgid "Sharing mode"
 msgstr ""
 
-#: templates/image/detail.html:832
+#: templates/image/detail.html:835
 #, fuzzy
 msgid "Simple link"
 msgstr "Linket e sitit"
 
-#: templates/image/detail.html:833
+#: templates/image/detail.html:836
 msgid "Forums"
 msgstr ""
 
-#: templates/image/detail.html:838
+#: templates/image/detail.html:841
 msgid "Thumbnail"
 msgstr ""
 
-#: templates/image/detail.html:840 templates/user/api_keys.html:29
+#: templates/image/detail.html:843 templates/user/api_keys.html:29
 #, fuzzy
 msgid "Yes"
 msgstr "Po."
 
-#: templates/image/detail.html:841
+#: templates/image/detail.html:844
 #, fuzzy
 msgid "No"
 msgstr "No."
 
-#: templates/image/detail.html:847
+#: templates/image/detail.html:850
 #, fuzzy
 msgid "Image size"
 msgstr "Foto"
 
-#: templates/image/detail.html:849
+#: templates/image/detail.html:852
 msgid "Regular"
 msgstr "Normale"
 
-#: templates/image/detail.html:850
+#: templates/image/detail.html:853
 msgid "Full"
 msgstr ""
 
-#: templates/image/detail.html:854
+#: templates/image/detail.html:857
 #, fuzzy
 msgid "Copy this"
 msgstr "Kopjo"
 
-#: templates/image/detail.html:857 templates/image/detail.html.py:860
-#: templates/image/detail.html:926 templates/image/edit/gear.html:75
+#: templates/image/detail.html:860 templates/image/detail.html.py:863
+#: templates/image/detail.html:929 templates/image/edit/gear.html:75
 msgid "Copy"
 msgstr "Kopjo"
 
-#: templates/image/detail.html:867
+#: templates/image/detail.html:870
 #, fuzzy
 msgid "Image mode"
 msgstr "Fotografi te ngarkuara"
 
-#: templates/image/detail.html:929
+#: templates/image/detail.html:932
 msgid "Copied!"
 msgstr ""
 
-#: templates/image/detail.html:1325 templates/user/profile-js.html:10
+#: templates/image/detail.html:1328 templates/user/profile-js.html:10
 #, python-format
 msgid "Follow %(username)s?"
 msgstr "Ndiq %(username)s?"
 
-#: templates/image/detail.html:1326 templates/user/profile-js.html:11
+#: templates/image/detail.html:1329 templates/user/profile-js.html:11
 #, python-format
 msgid ""
 "You will receive a notification every time %(username)s posts a new image. "
@@ -5304,16 +5315,16 @@ msgid ""
 msgstr ""
 "Ju do lajmeroheni cdo here kur %(username)s poston nje foto te re. Vazhdo?"
 
-#: templates/image/detail.html:1327 templates/user/profile-js.html:12
+#: templates/image/detail.html:1330 templates/user/profile-js.html:12
 msgid "Yes, follow!"
 msgstr "Po, ndiq!"
 
-#: templates/image/detail.html:1333 templates/user/profile-js.html:18
+#: templates/image/detail.html:1336 templates/user/profile-js.html:18
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr "Ndalo se ndjekuri %(username)s?"
 
-#: templates/image/detail.html:1334 templates/user/profile-js.html:19
+#: templates/image/detail.html:1337 templates/user/profile-js.html:19
 #, python-format
 msgid ""
 "You will stop receiving notifications when %(username)s posts a new image. "
@@ -5321,32 +5332,32 @@ msgid ""
 msgstr ""
 "Ju sdo keni me lajmerime kur %(username)s poston nje foto te re. Vazhdo?"
 
-#: templates/image/detail.html:1335 templates/user/profile-js.html:20
+#: templates/image/detail.html:1338 templates/user/profile-js.html:20
 msgid "Yes, stop following!"
 msgstr "Po, ndalo ndjekjen!"
 
-#: templates/image/detail.html:1341 templates/user/profile-js.html:26
+#: templates/image/detail.html:1344 templates/user/profile-js.html:26
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Dergo nje mesazh tek %(username)s"
 
-#: templates/image/detail.html:1372 templates/image/detail.html.py:1373
-#: templates/image/detail.html:1374 templates/image/detail.html.py:1375
-#: templates/image/detail.html:1376
+#: templates/image/detail.html:1375 templates/image/detail.html.py:1376
+#: templates/image/detail.html:1377 templates/image/detail.html.py:1378
+#: templates/image/detail.html:1379
 #, fuzzy
 msgid "You have already voted."
 msgstr "E ke percaktuar nje here kete foto"
 
-#: templates/image/detail.html:1391
+#: templates/image/detail.html:1394
 msgid ""
 "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr "A e keni permiresuar perpunimin e fotos tuaj? Ngarko rishikimin e ri!"
 
-#: templates/image/detail.html:1405
+#: templates/image/detail.html:1408
 msgid "Delete image and all its revisions?"
 msgstr "Fshi foton dhe gjithe rishikimet e saj?"
 
-#: templates/image/detail.html:1406
+#: templates/image/detail.html:1409
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
@@ -5354,15 +5365,15 @@ msgstr ""
 "Foto do fshihet perfundimisht dhe nuk mund te rikuperohet me. Te gjitha "
 "rishikimet e saj do te fshihen gjithashtu. A jeni te sigurt?"
 
-#: templates/image/detail.html:1407
+#: templates/image/detail.html:1410
 msgid "Yes, delete everything"
 msgstr "Po, fshi cdo gje"
 
-#: templates/image/detail.html:1412
+#: templates/image/detail.html:1415
 msgid "Delete this revision?"
 msgstr "Fshi kete rishikim?"
 
-#: templates/image/detail.html:1413
+#: templates/image/detail.html:1416
 msgid ""
 "This revision will be permanently deleted and cannot be recovered. Are you "
 "sure?"
@@ -5370,15 +5381,15 @@ msgstr ""
 "Ky rishikim do fshihet perfundimisht dhe nuk mund te rikuperohet me. A jeni "
 "te sigurt?"
 
-#: templates/image/detail.html:1414
+#: templates/image/detail.html:1417
 msgid "Yes, delete revision"
 msgstr "Po, fshi rishikimin"
 
-#: templates/image/detail.html:1419
+#: templates/image/detail.html:1422
 msgid "Delete original image?"
 msgstr "Fshi foton origjinale?"
 
-#: templates/image/detail.html:1420
+#: templates/image/detail.html:1423
 msgid ""
 "The image will be permanently deleted and cannot be recovered. Its revisions "
 "will not be deleted. Are you sure?"
@@ -5386,7 +5397,7 @@ msgstr ""
 "Foto do te fshihet perfundimisht dhe nuk mund te rikuperohet me. A jeni te "
 "sigurt?"
 
-#: templates/image/detail.html:1421
+#: templates/image/detail.html:1424
 msgid "Yes, delete image"
 msgstr "Po, fshi foton"
 
