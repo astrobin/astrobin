@@ -1,3 +1,40 @@
+@font-face {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Black';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Roboto Black'), local('Roboto-Black'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/mnpfi9pxYH-Go5UiibESIj8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Thin';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Roboto Thin'), local('Roboto-Thin'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Light';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/Hgo13k-tfSpn0qi1SFdUfT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
 @background-color: #333333;
 @link-color: #CC4B2E;
@@ -31,8 +68,8 @@
 @spacer-xxlarge: @spacer-small * 7;
 @spacer-xxxlarge: @spacer-small * 13;
 
-@headers_font: "Droid Sans";
-@regular_font: "Droid Sans";
+@headers_font: "Roboto Regular";
+@regular_font: "Roboto Regular";
 
 strong, .strong {
     color: @strong-text-color;
@@ -1096,6 +1133,7 @@ li.astrobin-thumbnail {
 h1, h2, h3, h4, h5, h6 {
     margin-top: @spacer-medium;
     margin-bottom: @spacer-large;
+    font-family: "Roboto Black", "Helvetica Neue", Helvetica, sans-serif;
 }
 h1, h2 {
     border-bottom: 1px solid #404040;
@@ -1159,8 +1197,9 @@ footer .bottom {
     margin-top: 40px;
 }
 footer p, footer a, footer li {
-    font-size: 10px;
-    line-height: 12px;
+    font-size: 11px;
+    line-height: 13px;
+    font-family: "Roboto Light";
 }
 footer ul {
     margin-left: 0px;
@@ -2382,7 +2421,7 @@ a.button {
         color: white;
         cursor: pointer;
         display: inline;
-        font-family: 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-family: 'Roboto Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         font-size: 13px;
         font-weight: normal;
         height: 28px;
