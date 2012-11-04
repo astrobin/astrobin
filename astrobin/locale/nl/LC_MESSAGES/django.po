@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 21:13+0000\n"
+"POT-Creation-Date: 2012-11-04 09:12+0000\n"
 "PO-Revision-Date: 2012-10-29 17:52+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -5318,6 +5318,11 @@ msgid ""
 "This button will create a post on AstroBin Questions, in which you can ask "
 "for critique, review or analisys of your image."
 msgstr ""
+
+#: templates/image/detail.html:738
+#, fuzzy
+msgid "Learn more about AstroBin Questions."
+msgstr "FAQ = Meest gestelde vragen"
 
 #: templates/image/detail.html:741
 #, fuzzy
