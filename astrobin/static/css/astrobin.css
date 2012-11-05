@@ -2559,3 +2559,26 @@ li.revisions {
 #more-subjects .reminder {
   display: none;
 }
+.community-bulletin {
+  color: #333;
+  background-color: #FFEEBB;
+  border: 1px solid #ECB;
+  padding: 8px;
+  margin-bottom: 12px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.community-bulletin span.title {
+  font-family: "Roboto Bold";
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 1px solid #B7B7B7;
+  background-color: #FFEEDD;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.community-bulletin p {
+  font-size: 87.5%;
+}
