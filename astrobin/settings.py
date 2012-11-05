@@ -20,11 +20,11 @@ DEFAULT_FROM_EMAIL = 'AstroBin <astrobin@astrobin.com>'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'astrobin',     # Or path to database file if using sqlite3.
-        'USER': 'astrobin',         # Not used with sqlite3.
-        'PASSWORD': 'h3C_U77a', # Not used with sqlite3.
-        'HOST': '',             # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',             # Set to empty string for default. Not used with sqlite3.
+        'NAME': os.environ['ASTROBIN_DATABASE_NAME'],         # Or path to database file if using sqlite3.
+        'USER': os.environ['ASTROBIN_DATABASE_USER'],         # Not used with sqlite3.
+        'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'], # Not used with sqlite3.
+        'HOST': os.environ['ASTROBIN_DATABASE_HOST'],         # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                                           # Set to empty string for default. Not used with sqlite3.
     }
 }
 DEFAULT_CHARSET = 'utf-8'
@@ -32,7 +32,7 @@ DEFAULT_CHARSET = 'utf-8'
 ASTROBIN_BASE_URL = 'http://www.astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
-ASTROBIN_BASE_PATH = '/home/astrobin/Code/astrobin'
+ASTROBIN_BASE_PATH = os.path.abspath(__file__)
 UPLOADS_DIRECTORY = ASTROBIN_BASE_PATH + '/uploads/'
 
 # Local time zone for this installation. Choices can be found here:
@@ -89,13 +89,13 @@ MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10g'
+SECRET_KEY = os.environ['ASTROBIN_DJANGO_SECRET_KEY']
 
 # Django storages
 DEFAULT_FILE_STORAGE = 'astrobin.backends.s3boto.S3BotoStorage'
-AWS_ACCESS_KEY_ID = 'AKIAJ46VGDGOKKHGGOAQ'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'cdn.astrobin.com'
+AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
 AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
 
 from S3 import CallingFormat
@@ -109,7 +109,7 @@ AWS_HEADERS = {
     
     }
 S3_URL = 's3.amazonaws.com'
-IMAGES_URL = 'http://cdn.astrobin.com/images/'
+IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
 
 RESIZED_IMAGE_SIZE = 620 
 THUMBNAIL_SIZE = 184
@@ -212,8 +212,8 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_ACTIVATION_DAYS = 7
 AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 
-FLICKR_API_KEY = '1f44b18e230b8c9816a39d9b34c3318d'
-FLICKR_SECRET  = 'd5fdb83e9aa995fc'
+FLICKR_API_KEY = os.environ['ASTROBIN_FLICKR_API_KEY']
+FLICKR_SECRET  = os.environ['ASTROBIN_FLICKR_SECRET']
 
 CACHES = {
     'default': {
@@ -230,7 +230,7 @@ JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
 
 HAYSTACK_SITECONF = 'astrobin.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'solr'
-HAYSTACK_SOLR_URL = 'http://127.0.0.1:8983/solr'
+HAYSTACK_SOLR_URL = os.environ['ASTROBIN_HAYSTACK_SOLR_URL']
 HAYSTACK_DEFAULT_OPERATOR = 'AND'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 24
 
@@ -244,12 +244,12 @@ djcelery.setup_loader()
 
 BROKER_HOST = 'localhost'
 BROKER_PORT = 5672
-BROKER_USER = 'astrobin'
-BROKER_PASSWORD = 'h3C_U77a'
+BROKER_USER = os.environ['ASTROBIN_BROKER_USER']
+BROKER_PASSWORD = os.environ['ASTROBIN_BROKER_PASSWORD']
 BROKER_VHOST = 'astrobin'
 
 CELERY_RESULT_BACKEND = 'database'
-CELERY_RESULT_DBURI = "mysql://astrobin:astrobin@localhost/astrobin"
+CELERY_RESULT_DBURI = os.environ['ASTROBIN_CELERY_RESULT_DBURI']
 CELERY_IMPORTS = ('astrobin.tasks', )
 CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},
                  "plate_solve": {"exchange":"plate_solve", "binding_key":"plate_solve_key"}
