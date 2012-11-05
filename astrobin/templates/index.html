@@ -69,6 +69,7 @@
 
     {% else %}<!-- authenticated -->
 
+        {% comment %}
         <div class="hero-unit">
             <div style="float:left; margin-right: 40px; margin-bottom: 20px;">
                 <img src="{{STATIC_URL}}images/astrobin-questions-logo.png" alt="AstroBin Questions"/>
@@ -80,6 +81,7 @@
             </p>
             <small>{% trans "PS: AstroBin Questions is only available in English, right now, but more languages will come soon." %}</small>
         </div>
+        {% endcomment %}
 
         {% with image_of_the_day as iotd %}
             <div class="visible-desktop">
