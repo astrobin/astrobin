@@ -4,18 +4,12 @@
 [submodule "submodules/django-privatebeta"]
 	path = submodules/django-privatebeta
 	url = https://github.com/badri/django-privatebeta.git
-[submodule "submodules/nginx_http_push_module"]
-	path = submodules/nginx_http_push_module
-	url = https://github.com/slact/nginx_http_push_module.git
 [submodule "submodules/django-persistent-messages"]
 	path = submodules/django-persistent-messages
 	url = https://github.com/siovene/django-persistent-messages.git
 [submodule "submodules/django-registration"]
 	path = submodules/django-registration
 	url = git@bitbucket.org:siovene/django-registration.git
-[submodule "submodules/xapian-haystack"]
-	path = submodules/xapian-haystack
-	url = https://github.com/notanumber/xapian-haystack.git
 [submodule "submodules/django-mptt"]
 	path = submodules/django-mptt
 	url = https://github.com/django-mptt/django-mptt.git
