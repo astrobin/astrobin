@@ -894,12 +894,7 @@ def image_get_rating(request, image_id):
 def image_upload(request):
     """Create new image"""
     response_dict = {}
-
-    profile = None
-    if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user=request.user)
-        if user_is_producer(request.user) or (profile and profile.telescopes.all() and profile.cameras.all()):
-            response_dict['upload_form'] = ImageUploadForm()
+    response_dict['upload_form'] = ImageUploadForm()
 
     return render_to_response(
         "upload.html",
