@@ -626,6 +626,20 @@
         </div> <!-- span8 -->
         
         <div class="span4"> <!-- right pane -->
+            {% ifequal request.user image.user %}
+            <div class="subtle-container">
+                <a href="http://questions.astrobin.com/questions/ask/?title=How%20can%20I%20improve%20this%20image?%20({{image.title|escape}})&text=!%5B{{image.title|escape}}%5D({{IMAGES_URL}}{{image.filename}}_resized{{image.original_ext}})%0A%0A%5B(View%20full%20size%20on%20AstroBin)%5D(http://astrob.in/full/{{image.id}}/)%0A%0A%0AREMEMBER%20TO%20EDIT%20THIS%20PART!%0A%0A%0AThank%20you!&tags=critique"
+                   target="_blank"
+                   id="request-critique"
+                   data-title="{% trans "What is this?" %}"
+                   data-content="{% blocktrans %}This button will create a post on AstroBin Questions, in which you can ask for critique, review or analisys of your image.{% endblocktrans %} <a href='{% url help_questions %}'>{% trans "Learn more about AstroBin Questions." %}</a>"
+                   class="btn btn-primary btn-large"
+                   style="width:242px; font-weight: bold; font-size: 22px">
+                   {% trans "Request critique" %}
+                </a>
+            </div>
+            {% endifequal %}
+
             <div class="subtle-container">
                 <div class="alert alert-warning">
                     {% trans "Hey, check this out! It's important." %}
@@ -639,6 +653,7 @@
                     {% blocktrans %}After revolutionizing the way astrophotographers preserve their data, AstroBin is set to start a new era in the way amateur astronomers communicate on the Internet. <a href="{{questions_url}}">Want to know more?</a>{% endblocktrans %}
                 </p>
             </div>
+
             {% if revisions or is_revision %}
             <div class="subtle-container">
                 <ul class="thumbnails astrobin-thumbnails">
@@ -729,19 +744,6 @@
                 {% endif %}
             </div> <!-- subtle-container -->
 
-            {% ifequal request.user image.user %}
-            <div class="subtle-container">
-                <a href="http://questions.astrobin.com/questions/ask/?title=How%20can%20I%20improve%20this%20image?%20({{image.title|escape}})&text=!%5B{{image.title|escape}}%5D({{IMAGES_URL}}{{image.filename}}_resized{{image.original_ext}})%0A%0A%5B(View%20full%20size%20on%20AstroBin)%5D(http://astrob.in/full/{{image.id}}/)%0A%0A%0AREMEMBER%20TO%20EDIT%20THIS%20PART!%0A%0A%0AThank%20you!&tags=critique"
-                   target="_blank"
-                   id="request-critique"
-                   data-title="{% trans "What is this?" %}"
-                   data-content="{% blocktrans %}This button will create a post on AstroBin Questions, in which you can ask for critique, review or analisys of your image.{% endblocktrans %} <a href='{% url help_questions %}'>{% trans "Learn more about AstroBin Questions." %}</a>"
-                   class="btn btn-primary btn-large"
-                   style="width:242px; font-weight: bold; font-size: 22px">
-                   {% trans "Request critique" %}
-                </a>
-            </div>
-            {% endifequal %}
             <div class="subtle-container image-basic-data">
                 <table class="table">
                     <tr>
@@ -1435,7 +1437,7 @@ $(document).ready(function() {
         }
 
         $('#request-critique').popover({
-            placement: 'top',
+            placement: 'bottom',
             trigger: 'hover',
             delay: {hide: 2000}
         });

@@ -2474,6 +2474,9 @@ li.revisions {
   border-color: #222;
 }
 /* Bootstrap popover */
+.popover {
+  z-index: 1030;
+}
 .popover .popover-inner {
   padding: 0;
   background: #2e2e2e url('../images/dark-panel-tile.png');
@@ -2482,7 +2485,7 @@ li.revisions {
   box-shadow: 0 0 22px #000000;
 }
 .popover .popover-inner .popover-title {
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #1b1b1b url('../images/darker-panel-tile.png');
   margin-top: 0;
   margin-bottom: 0;
   border-bottom-color: #414141;
@@ -2490,8 +2493,8 @@ li.revisions {
 .popover .popover-inner .popover-content {
   background: #2e2e2e url('../images/dark-panel-tile.png');
 }
-.popover.top .arrow {
-  border-top-color: #2e2e2e;
+.popover.bottom .arrow {
+  border-bottom-color: #1B1B1B;
 }
 .gear-page .gear-image {
   margin-bottom: 12px;
