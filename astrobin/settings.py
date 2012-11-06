@@ -16,6 +16,18 @@ ADMINS = (
 MANAGERS = ADMINS
 SERVER_EMAIL = 'astrobin@astrobin.com'
 DEFAULT_FROM_EMAIL = 'AstroBin <astrobin@astrobin.com>'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_SUBJECT_PREFIX = '[AstroBin Questions]'
+EMAIL_HOST='127.0.0.1'
+if DEBUG:
+    EMAIL_PORT='1025'
+else:
+    EMAIL_PORT='25'
+EMAIL_USE_TLS=False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 
 DATABASES = {
     'default': {
