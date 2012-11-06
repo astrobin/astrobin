@@ -25,3 +25,6 @@
 [submodule "submodules/django-reviews"]
 	path = submodules/django-reviews
 	url = git@github.com:siovene/django-reviews.git
+[submodule "submodules/django-hitcount"]
+	path = submodules/django-hitcount
+	url = git://github.com/thornomad/django-hitcount.git
