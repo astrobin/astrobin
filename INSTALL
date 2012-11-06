@@ -26,7 +26,8 @@ sudo apt-get install \
 	supervisor \
 	gcc-4.4 \
 	libxslt1-dev \
-	libxml2-dev
+	libxml2-dev \
+	nginx
 
 sudo apt-file update
 sudo pip install virtualenv
@@ -174,20 +175,10 @@ quit
 (When asked, do create super user astrobin:***REMOVED*** <astrobin@astrobin.com>)
 
 
-# Build nginx:
-# ============
-
-cd nginx-1.0.4
-./configure --add-module=../nginx_http_push_module
-# Remove -Werror and -g in objs/Makefile
-make
-sudo make install
-cd ..
-
 # Use nginx config
-Add 'include /home/astrobin/Code/astrobin/astrobin.com.nginx;' to the http{} section of /usr/local/nginx/conf/nginx.conf.
+Add 'include /home/astrobin/code/astrobin/astrobin.com.nginx;' to the http{} section of /etc/nginx/nginx.conf.
 
-Also set these in /usr/local/nginx/conf/nginx.conf
+Also set these in the same file:
 
 To the http section:
     client_max_body_size 20m;
@@ -195,10 +186,6 @@ To the http section:
 To the top:
     worker_processes 4;
     worker_rlimit_nofile 20480;
-
-# Configure nginx to start automatically
-sudo cp scripts/init/nginx /etc/init.d/
-sudo update-rc.d nginx defaults
 
 
 # Configure rabbitmq:
@@ -220,7 +207,7 @@ sudo tar xvfz apache-solr-4.0.0-BETA.tgz
 ./manage.py build_solr_schema > solr_schema.xml
 sudo mv solr_schema.xml /opt/solr/apache-solr-4.0.0-BETA/example/solr/collection1/conf/schema.xml
 sudo echo ".level = WARNING" > /opt/solr/apache-solr-4.0.0-BETA/example/solr-logging.properties
-sudo cp scripts/supervisord/solr.conf /etc/supervisor/conf.d/
+sudo cp conf/supervisord/solr.conf /etc/supervisor/conf.d/
 sudo mkdir /var/log/solr
 
 
@@ -239,12 +226,11 @@ Edit this file, disable auto indexing, and enable all large indexes from 213 to 
 
 # Set up supervisor
 cd ~/Code/astrobin
-sudo cp scripts/supervisord/* /etc/supervisor/conf.d/
+sudo cp conf/supervisord/* /etc/supervisor/conf.d/
 sudo mkdir /var/log/{celery,gunicorn,nginx,pootle}
 
 # Run it!
 # =======
-sudo /usr/local/nginx/sbin/nginx
 sudo supervisord
 sudo supervisorctl start all
 
