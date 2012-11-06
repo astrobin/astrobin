@@ -6,6 +6,7 @@ import mimetypes
 import email
 import time
 import datetime
+import os.path
 
 from PIL import Image as PILImage
 from PIL import ImageOps
@@ -34,7 +35,7 @@ def watermark_image(image, text, position, opacity):
     watermark = PILImage.new('RGBA', (image.size[0], image.size[1]))
     draw = ImageDraw.Draw(watermark, 'RGBA')
     fontsize = 1
-    ttf = 'sitestatic/fonts/arial.ttf'
+    ttf = os.path.join(settings.STATIC_ROOT, 'fonts/arial.ttf')
 
     img_fraction = 0.33
 
