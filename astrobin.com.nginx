@@ -27,8 +27,8 @@ server {
 
     rewrite ^/notices/$ /notifications permanent;
 
-    access_log /usr/local/nginx/logs/astrobin.com-access.log;
-    error_log /usr/local/nginx/logs/astrobin.com-error.log;
+    access_log /var/log/nginx/astrobin.com-access.log;
+    error_log /var/log/nginx/astrobin.com-error.log;
 
     keepalive_timeout 5;
     proxy_read_timeout 1200;
@@ -87,28 +87,28 @@ server {
     }
 
     # internal publish endpoint (keep it private / protected)
-    location /publish {
-        set $push_channel_id $arg_id;      #/?id=239aff3 or somesuch
-        push_publisher;
-
-        push_store_messages off;           # disable message queueing 
-        push_message_timeout 0;            # never expire buffer messages
-        push_message_buffer_length 0;      # don't store messages
-        #push_min_message_recipients 0;    # minimum recipients before purge
-    }
+    #location /publish {
+    #    set $push_channel_id $arg_id;      #/?id=239aff3 or somesuch
+    #    push_publisher;
+    #
+    #    push_store_messages off;           # disable message queueing 
+    #    push_message_timeout 0;            # never expire buffer messages
+    #    push_message_buffer_length 0;      # don't store messages
+    #    #push_min_message_recipients 0;    # minimum recipients before purge
+    #}
 
     # public long-polling endpoint
-    location /activity {
-        push_subscriber;
-
+    #location /activity {
+    #    push_subscriber;
+    #
         # how multiple listener requests to the same channel id are handled
         # - last: only the most recent listener request is kept, 409 for others.
         # - first: only the oldest listener request is kept, 409 for others.
         # - broadcast: any number of listener requests may be long-polling.
-        push_subscriber_concurrency first;
-        set $push_channel_id $arg_id;
-        default_type  text/plain;
-    } 
+    #    push_subscriber_concurrency first;
+    #    set $push_channel_id $arg_id;
+    #    default_type  text/plain;
+    #} 
 }
 
 server {
@@ -148,8 +148,8 @@ server {
     client_max_body_size 2M;
     server_name questions.astrobin.com;
 
-    access_log /usr/local/nginx/logs/questions.astrobin.com-access.log;
-    error_log /usr/local/nginx/logs/questions.astrobin.com-error.log;
+    access_log /var/log/nginx/questions.astrobin.com-access.log;
+    error_log /var/log/nginx/questions.astrobin.com-error.log;
 
     keepalive_timeout 10;
     proxy_read_timeout 300;
