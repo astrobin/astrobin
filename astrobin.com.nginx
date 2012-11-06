@@ -53,17 +53,17 @@ server {
     ## /Compression
 
     location /sitestatic/  {
-        root /home/astrobin/Code/astrobin;
+        root /webserver/www;
         expires 30d;
     }
 
     location /media/  {
-        root /home/astrobin/Code/astrobin;
+        root /webserver/www;
         expires 30d;
     }
 
     location /uploads/  {
-        root /home/astrobin/Code/astrobin;
+        root /webserver/www/uploads;
         expires 90d;
     }
 
@@ -82,7 +82,7 @@ server {
     }
 
     location /favicon.ico {
-        root /home/astrobin/Code/astrobin/static;
+        root /webserver/www/sitestatic;
         expires max;
     }
 
@@ -115,7 +115,7 @@ server {
     server_name translate.astrobin.com;
       
     location ^~ /html/ {
-        root /home/astrobin/Code/Pootle-2.1.6/;
+        root /home/astrobin/code/Pootle-2.1.6/;
     }
 
     location / {
@@ -173,8 +173,8 @@ server {
     gzip_vary on;
     ## /Compression
 
-    location /static/  {
-        root /home/astrobin/Code/astrobin_questions;
+    location /static/ {
+        root /webserver/questions;
         expires 30d;
     }
 

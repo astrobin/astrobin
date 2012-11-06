@@ -33,7 +33,7 @@ ASTROBIN_BASE_URL = 'http://www.astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
 ASTROBIN_BASE_PATH = os.path.abspath(__file__)
-UPLOADS_DIRECTORY = ASTROBIN_BASE_PATH + '/uploads/'
+UPLOADS_DIRECTORY = '/webserver/www/uploads/'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -66,7 +66,7 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 
 SITE_ID = 1
 
-STATIC_ROOT = ASTROBIN_BASE_PATH + '/sitestatic'
+STATIC_ROOT = '/webserver/www/sitestatic'
 STATIC_URL = '/sitestatic/'
 
 # If you set this to False, Django will make some optimizations so as not
