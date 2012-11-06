@@ -89,7 +89,7 @@ MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ['ASTROBIN_DJANGO_SECRET_KEY']
+SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10G'
 
 # Django storages
 DEFAULT_FILE_STORAGE = 'astrobin.backends.s3boto.S3BotoStorage'
