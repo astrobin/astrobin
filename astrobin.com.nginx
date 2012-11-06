@@ -63,7 +63,7 @@ server {
     }
 
     location /uploads/  {
-        root /webserver/www/uploads;
+        root /webserver/www/;
         expires 90d;
     }
 
