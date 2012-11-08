@@ -17,6 +17,7 @@ server {
 server {
         listen   80;
         server_name q.astrob.in;
+        rewrite ^/(\d+)/?$ http://questions.astrobin.com/question/$1 permanent;
         rewrite ^/(.*) http://questions.astrobin.com/$1 permanent;
 }
 
