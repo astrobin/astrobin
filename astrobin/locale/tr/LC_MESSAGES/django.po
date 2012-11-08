@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-04 09:15+0000\n"
+"POT-Creation-Date: 2012-11-05 13:14+0000\n"
 "PO-Revision-Date: 2012-07-19 18:56+0100\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1028,7 +1028,7 @@ msgstr ""
 #: templates/reviews.html:43 templates/gear/page.html:140
 #: templates/gear/page.html.py:277 templates/gear/page.html:459
 #: templates/image/detail.html:367 templates/image/detail.html.py:579
-#: templates/image/detail.html:1176
+#: templates/image/detail.html:1175
 msgid "Link"
 msgstr "Link"
 
@@ -1040,7 +1040,7 @@ msgstr "TIFF/FITS linki"
 msgid "Subjects"
 msgstr "Konular"
 
-#: forms.py:76 models.py:737 views.py:727 templates/base.html:434
+#: forms.py:76 models.py:737 views.py:727 templates/base.html:432
 #: templates/profile-edit-menu.html:36
 msgid "Locations"
 msgstr "Konumlar"
@@ -1075,7 +1075,7 @@ msgstr "Fotoğraflayan teleskop ya da lensler"
 msgid "Guiding telescopes or lenses"
 msgstr "Kılavuz teleskoplar ya da lensler"
 
-#: forms.py:161 forms.py:255 models.py:842 models.py:1473 views.py:2242
+#: forms.py:161 forms.py:255 models.py:842 models.py:1473 views.py:2237
 msgid "Mounts"
 msgstr "Kundaklar"
 
@@ -1087,19 +1087,19 @@ msgstr "Fotoğraflayan Kameralar"
 msgid "Guiding cameras"
 msgstr "Rehber Kameralar"
 
-#: forms.py:164 forms.py:257 models.py:845 models.py:1475 views.py:2243
+#: forms.py:164 forms.py:257 models.py:845 models.py:1475 views.py:2238
 msgid "Focal reducers"
 msgstr "Odak düşürücüler"
 
-#: forms.py:165 forms.py:258 models.py:846 models.py:1476 views.py:2244
+#: forms.py:165 forms.py:258 models.py:846 models.py:1476 views.py:2239
 msgid "Software"
 msgstr "Yazılım"
 
-#: forms.py:166 forms.py:259 models.py:847 models.py:1477 views.py:2245
+#: forms.py:166 forms.py:259 models.py:847 models.py:1477 views.py:2240
 msgid "Filters"
 msgstr "Filtreler"
 
-#: forms.py:167 forms.py:260 models.py:848 models.py:1478 views.py:2246
+#: forms.py:167 forms.py:260 models.py:848 models.py:1478 views.py:2241
 msgid "Accessories"
 msgstr "Aksesuarlar"
 
@@ -1133,11 +1133,11 @@ msgstr ""
 "İpucu: Filtrelerinizi ayırarak yazın! Örneğin LRGB'lerinizi tek kutuya "
 "girerseniz, hepsi için ayrı ayrı zaman bilgisi giremezsiniz."
 
-#: forms.py:254 models.py:1472 views.py:2240
+#: forms.py:254 models.py:1472 views.py:2235
 msgid "Telescopes and lenses"
 msgstr "Teleskop ve lensler"
 
-#: forms.py:256 models.py:1474 views.py:2241
+#: forms.py:256 models.py:1474 views.py:2236
 msgid "Cameras"
 msgstr "Kameralar"
 
@@ -1165,7 +1165,7 @@ msgstr ""
 msgid "Images"
 msgstr "Resim sayısı"
 
-#: forms.py:303 models.py:696 views.py:1787 templates/base.html:428
+#: forms.py:303 models.py:696 views.py:1782 templates/base.html:426
 #: templates/profile-edit-menu.html:30 templates/wall.html:142
 #: templates/inclusion_tags/search_image_list.html:10
 #: templates/user/card.html:13 templates/user/profile-subnav.html:124
@@ -1201,8 +1201,8 @@ msgstr "Lütfen şu formatı kullanın: yyyy-aa-gg"
 msgid "Express value in hours"
 msgstr "Değeri saat cinsinden ifade edin"
 
-#: forms.py:383 models.py:865 templates/image/detail.html:753
-#: templates/image/detail.html.py:754 templates/search/search.html:225
+#: forms.py:383 models.py:865 templates/image/detail.html:752
+#: templates/image/detail.html.py:753 templates/search/search.html:225
 msgid "License"
 msgstr "Lisans"
 
@@ -1537,7 +1537,7 @@ msgstr "Küçük gezegen"
 msgid "Comet"
 msgstr "Kuyruklu Yıldız"
 
-#: models.py:122 models.py:552 models.py:697 views.py:1793
+#: models.py:122 models.py:552 models.py:697 views.py:1788
 #: templates/wall.html:154
 msgid "Other"
 msgstr "Diğer"
@@ -1887,11 +1887,11 @@ msgstr "Derin uzay cisimleri"
 msgid "Solar system body or event"
 msgstr "Güneş sistemi nesnesi yada olayı"
 
-#: models.py:694 views.py:1775 templates/wall.html:130
+#: models.py:694 views.py:1770 templates/wall.html:130
 msgid "Extremely wide field"
 msgstr "Çok geniş alan"
 
-#: models.py:695 views.py:1781 templates/wall.html:136
+#: models.py:695 views.py:1776 templates/wall.html:136
 msgid "Star trails"
 msgstr "Yıldız izleri"
 
@@ -1974,7 +1974,7 @@ msgstr "Resme watermark uygula"
 msgid "Position"
 msgstr "Pozisyon"
 
-#: models.py:931 templates/index.html:92 templates/image/detail.html:360
+#: models.py:931 templates/index.html:95 templates/image/detail.html:360
 #: templates/image/full.html:55 templates/inclusion_tags/image_list.html:16
 #: templates/inclusion_tags/messier_list.html:13
 #: templates/inclusion_tags/search_image_list.html:124
@@ -2208,7 +2208,7 @@ msgstr "Şundan iste"
 msgid "Additional information"
 msgstr "Ek bilgi"
 
-#: models.py:1369 templates/base.html:141 templates/fits.html:5
+#: models.py:1369 templates/base.html:139 templates/fits.html:5
 #: templates/fits.html.py:10
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
@@ -2279,7 +2279,7 @@ msgstr ""
 msgid "Country of operation"
 msgstr ""
 
-#: models.py:1487 templates/base.html:440 templates/profile-edit-menu.html:42
+#: models.py:1487 templates/base.html:438 templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "Varsayılan lisans"
 
@@ -2290,7 +2290,7 @@ msgstr ""
 "Burada seçtiğiniz lisans otomatik olarak tüm yeni resimlerinize "
 "uygulanacaktır."
 
-#: models.py:1522 templates/base.html:246
+#: models.py:1522 templates/base.html:244
 msgid "Language"
 msgstr "Dil"
 
@@ -2462,7 +2462,7 @@ msgstr ""
 msgid "Commercial gear items"
 msgstr "şu ekipmana yorum yazdı:"
 
-#: search.py:51 views.py:1009 views.py:1262 views.py:1287
+#: search.py:51 views.py:1004 views.py:1257 views.py:1282
 #: templates/image/actions/bring_to_attention.html:30
 msgid "No results. Sorry."
 msgstr "Üzgünüz. Sonuç bulunamadı."
@@ -2570,7 +2570,7 @@ msgstr "Kareler"
 msgid "Integration"
 msgstr "Poz Toplamı"
 
-#: views.py:734 views.py:1957 views.py:1958
+#: views.py:734 views.py:1952 views.py:1953
 #: templates/inclusion_tags/search_image_list.html:129
 #: templates/search/search.html:293 templates/subject/page.html:80
 msgid "hours"
@@ -2592,20 +2592,20 @@ msgstr "Ort. Ay evresi"
 msgid "Mean SQM"
 msgstr "Ortalama SQM"
 
-#: views.py:915 views.py:2942
+#: views.py:910 views.py:2937
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Hatalı resim dosyası ya da resim dosyası yok. JPG, PNG ve GIF formatları "
 "desteklenmektedir."
 
-#: views.py:919 views.py:2950 templates/user/profile/flickr_import.html:10
+#: views.py:914 views.py:2945 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
 
-#: views.py:976
+#: views.py:971
 msgid ""
 "Plate-solving has started in the background. It might take a while, so "
 "please don't request it again! You will be notified when the job has "
@@ -2615,27 +2615,27 @@ msgstr ""
 "o yüzden lütfen tekrar istekte bulunmayın! Bu işlem bittiğinde "
 "bilgilendirileceksiniz. Teşekkürler!"
 
-#: views.py:1010
+#: views.py:1005
 msgid "Click on a suggestion or press TAB to add what you typed"
 msgstr "Bir öneriye tıklayın ya da yazdığınızı eklemek için TAB'a basın."
 
-#: views.py:1297 views.py:1380 views.py:1465 views.py:1487 views.py:2142
-#: views.py:2155 views.py:2176 views.py:2213 views.py:2303 views.py:2365
-#: views.py:2563 views.py:4464 views.py:4634
+#: views.py:1292 views.py:1375 views.py:1460 views.py:1482 views.py:2137
+#: views.py:2150 views.py:2171 views.py:2208 views.py:2298 views.py:2360
+#: views.py:2558 views.py:4459 views.py:4629
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
 msgstr "Form kaydedildi. Teşekkürler!"
 
-#: views.py:1429
+#: views.py:1424
 msgid "Fill in one session, before adding more."
 msgstr "Daha fazla eklemeden önce bir oturum ile ilgili bilgileri doldurun."
 
-#: views.py:1683
+#: views.py:1678
 msgid "No date specified"
 msgstr "Tarih belirtilmedi"
 
-#: views.py:1685
+#: views.py:1680
 msgid ""
 "To fill in the missing dates, use the <strong>Edit acquisition details</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
@@ -2644,13 +2644,13 @@ msgstr ""
 "<strong>Eylemler</strong> menüsünden <strong>Çekim detaylarını güncelle</"
 "strong> alt başlığını kullanın."
 
-#: views.py:1726 views.py:1825
+#: views.py:1721 views.py:1820
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
 "Herhangi bir görüntüleme teleskobu ya da lensi veyahut herhangi bir "
 "görüntüleme kamerası belirtilmedi"
 
-#: views.py:1728 views.py:1828
+#: views.py:1723 views.py:1823
 msgid ""
 "To fill in the missing gear, use the <strong>Edit gear used</strong> entry "
 "in the <strong>Actions</strong> menu for each image."
@@ -2659,19 +2659,19 @@ msgstr ""
 "<strong>Eylemler</strong> menüsünden <strong>Kullanılan ekipmanı güncelle</"
 "strong> alt başlığını kullanın."
 
-#: views.py:1737
+#: views.py:1732
 msgid "Gear images"
 msgstr "Ekipman resimleri"
 
-#: views.py:1769 templates/image/edit/acquisition.html:100
+#: views.py:1764 templates/image/edit/acquisition.html:100
 msgid "Solar system"
 msgstr "Güneş sistemi"
 
-#: views.py:1799 views.py:1815
+#: views.py:1794 views.py:1810
 msgid "No subjects specified"
 msgstr "Herhangi bir obje belirtilmedi"
 
-#: views.py:1801 views.py:1817
+#: views.py:1796 views.py:1812
 msgid ""
 "To fill in the missing subjects, use the <strong>Edit basic information</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
@@ -2679,11 +2679,11 @@ msgstr ""
 "Eksik objeleri tamamlamak için, her bir resim için <strong>Eylemler</strong> "
 "menüsünden <strong>Temel bilgileri güncelle</strong> alt başlığını kullanın."
 
-#: views.py:1834
+#: views.py:1829
 msgid "No acquisition details specified"
 msgstr "Hiç bir çekim detayı belirtilmedi."
 
-#: views.py:1837
+#: views.py:1832
 msgid ""
 "To fill in the missing acquisition details, use the <strong>Edit acquisition "
 "details</strong> entry in the <strong>Actions</strong> menu for each image."
@@ -2692,52 +2692,52 @@ msgstr ""
 "<strong>Eylemler</strong> menüsünden <strong>Çekim detaylarını güncelle</"
 "strong> alt başlığını kullanın."
 
-#: views.py:1935 views.py:3638 templatetags/tags.py:98
+#: views.py:1930 views.py:3633 templatetags/tags.py:98
 msgid "minutes"
 msgstr "dakika"
 
-#: views.py:1936 views.py:3639 templatetags/tags.py:99
+#: views.py:1931 views.py:3634 templatetags/tags.py:99
 msgid "seconds ago"
 msgstr "saniye önce"
 
-#: views.py:1938 views.py:3641 templatetags/tags.py:100
+#: views.py:1933 views.py:3636 templatetags/tags.py:100
 #, python-format
 msgid "%s ago"
 msgstr "%s önce"
 
-#: views.py:1954 templates/popover/user.html:18
+#: views.py:1949 templates/popover/user.html:18
 msgid "Member since"
 msgstr "Tarihinden beri üye"
 
-#: views.py:1955
+#: views.py:1950
 msgid "Last login"
 msgstr "Son giriş zamanı"
 
-#: views.py:1956
+#: views.py:1951
 msgid "Images uploaded"
 msgstr "Yüklenen fotoğraflar"
 
-#: views.py:1957
+#: views.py:1952
 msgid "Total integration time"
 msgstr "Poz Toplamı"
 
-#: views.py:1958
+#: views.py:1953
 msgid "Average integration time"
 msgstr "Ortalama poz süresi"
 
-#: views.py:2293
+#: views.py:2288
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
 
-#: views.py:2846
+#: views.py:2841
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
 msgstr "<strong>%s</strong> fotoğrafınız hakkında ilave bilgi isteği gönderdi."
 
-#: views.py:2896
+#: views.py:2891
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
@@ -2745,11 +2745,11 @@ msgstr ""
 "<strong>%s</strong> fotoğrafınızı TIFF ya da FITS formatında görme isteği "
 "gönderdi."
 
-#: views.py:3440 templatetags/tags.py:490
+#: views.py:3435 templatetags/tags.py:490
 msgid "no alias"
 msgstr "takma ad yok"
 
-#: views.py:4424 views.py:4617
+#: views.py:4419 views.py:4612
 msgid "You can't merge a product to itself."
 msgstr ""
 
@@ -2857,17 +2857,17 @@ msgstr ""
 "Üzgünüz, aradığınız sayfa maalesef mevcut değil. Eğer beklediğiniz bir "
 "fotoğraf ise, bunun anlamı kullanıcı fotoğrafı silmiş demektir."
 
-#: templates/activities.html:8 templates/index.html:180
+#: templates/activities.html:8 templates/index.html:183
 msgid "Activity stream"
 msgstr "Aktivite akışı"
 
-#: templates/activities.html:13 templates/index.html:186
-#: templates/index.html.py:243
+#: templates/activities.html:13 templates/index.html:189
+#: templates/index.html.py:246
 msgid "There is no activity yet."
 msgstr "Henüz herhangi bir aktivite yok."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:10
-#: templates/base.html:218
+#: templates/base.html:216
 msgid "Affiliates"
 msgstr ""
 
@@ -2925,45 +2925,45 @@ msgstr ""
 "24 saat içerisinde bir yanıt alacaksınız. AstronBin API'lerinin kullanımıyla "
 "ilgilendiğiniz için teşekkürler"
 
-#: templates/base.html:87 templates/base.html.py:649
+#: templates/base.html:85 templates/base.html.py:647
 msgid "Site links"
 msgstr "Site linkleri"
 
-#: templates/base.html:91 templates/base.html.py:651 templates/base.html:680
+#: templates/base.html:89 templates/base.html.py:649 templates/base.html:678
 msgid "Home"
 msgstr "Ana sayfa"
 
-#: templates/base.html:94
+#: templates/base.html:92
 #, fuzzy
 msgid "Community"
 msgstr "Yorum"
 
-#: templates/base.html:98 templates/base.html.py:652 templates/index.html:215
+#: templates/base.html:96 templates/base.html.py:650 templates/index.html:218
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/base.html:109 templates/explore_choose.html:6
+#: templates/base.html:107 templates/explore_choose.html:6
 msgid "Explore"
 msgstr "Araştır"
 
-#: templates/base.html:116 templates/most_popular.html:6
+#: templates/base.html:114 templates/most_popular.html:6
 msgid "Popular subjects"
 msgstr "Popüler objeler"
 
-#: templates/base.html:123 templates/explore_choose.html:8
+#: templates/base.html:121 templates/explore_choose.html:8
 #: templates/wall.html:5 templates/wall.html.py:168
 msgid "The Big Wall"
 msgstr "Çoklu gösterim"
 
-#: templates/base.html:129 templates/nightly.html:5
+#: templates/base.html:127 templates/nightly.html:5
 msgid "Night after night"
 msgstr "Günlük sıralama"
 
-#: templates/base.html:135 templates/explore_choose.html:16
+#: templates/base.html:133 templates/explore_choose.html:16
 msgid "Messier marathon"
 msgstr "Messier maratonu"
 
-#: templates/base.html:149 templates/comments.html:8
+#: templates/base.html:147 templates/comments.html:8
 #: templates/comments.html.py:10 templates/leaderboard.html:40
 #: templates/wall.html:57 templates/gear/page.html:117
 #: templates/gear/page.html.py:324 templates/image/detail.html:527
@@ -2973,182 +2973,182 @@ msgstr "Messier maratonu"
 msgid "Comments"
 msgstr "Yorumlar"
 
-#: templates/base.html:155 templates/reviews.html:8
+#: templates/base.html:153 templates/reviews.html:8
 #: templates/reviews.html.py:10 templates/gear/page.html:68
 #: templates/gear/page.html.py:320
 #, fuzzy
 msgid "Reviews"
 msgstr "Görüntülenme"
 
-#: templates/base.html:164
+#: templates/base.html:162
 msgid "Advanced search"
 msgstr "Gelişmiş arama"
 
-#: templates/base.html:171 templates/stats.html:7
+#: templates/base.html:169 templates/stats.html:7
 #: templates/subject/page.html:72 templates/user/card.html:27
 msgid "Stats"
 msgstr "İstatistikler"
 
-#: templates/base.html:177 templates/leaderboard.html:7
+#: templates/base.html:175 templates/leaderboard.html:7
 #: templates/leaderboard.html.py:12
 msgid "Leaderboard"
 msgstr "Liderlik sıralaması"
 
-#: templates/base.html:184 templates/base.html.py:653 templates/help.html:4
+#: templates/base.html:182 templates/base.html.py:651 templates/help.html:4
 msgid "Help"
 msgstr "Yardım"
 
-#: templates/base.html:191 templates/help.html:8
+#: templates/base.html:189 templates/help.html:8
 msgid "What is this site?"
 msgstr "Bu site nedir?"
 
-#: templates/base.html:197 templates/base.html.py:654 templates/faq.html:4
+#: templates/base.html:195 templates/base.html.py:652 templates/faq.html:4
 msgid "FAQ"
 msgstr "SSS"
 
-#: templates/base.html:203 templates/questions.html:4
+#: templates/base.html:201 templates/questions.html:4
 #: templates/questions.html.py:7
 #, fuzzy
 msgid "AstroBin Questions"
 msgstr "AstroBin sosyal bir platformdur."
 
-#: templates/base.html:227 templates/contact_form/contact.html:5
+#: templates/base.html:225 templates/contact_form/contact.html:5
 #: templates/contact_form/contact.html:7
 msgid "Contact"
 msgstr "Bağlantı"
 
-#: templates/base.html:239 templates/leaderboard.html:17
+#: templates/base.html:237 templates/leaderboard.html:17
 #: templates/image/detail.html:246 templates/user/profile-subnav.html:77
 msgid "User"
 msgstr "Kullanıcı"
 
-#: templates/base.html:316
+#: templates/base.html:314
 msgid "Help with translations!"
 msgstr "Çeviri yardımı!"
 
-#: templates/base.html:324
+#: templates/base.html:322
 msgid "Please select your language from the options above."
 msgstr "Yukarıdaki dil seçeneklerinden birini seçiniz."
 
-#: templates/base.html:346 templates/index.html:117 templates/upload.html:5
+#: templates/base.html:344 templates/index.html:120 templates/upload.html:5
 #: templates/upload.html.py:17 templates/upload.html:33
-#: templates/avatar/change.html:38 templates/image/detail.html:1398
+#: templates/avatar/change.html:38 templates/image/detail.html:1397
 msgid "Upload"
 msgstr "Yükleme"
 
-#: templates/base.html:349
+#: templates/base.html:347
 msgid "My places"
 msgstr "Mekanlarım"
 
-#: templates/base.html:355 templates/index.html:202 templates/wall.html:148
+#: templates/base.html:353 templates/index.html:205 templates/wall.html:148
 #: templates/user/profile-subnav.html:18
 msgid "Commercial products"
 msgstr ""
 
-#: templates/base.html:363 templates/popover/user.html:39
+#: templates/base.html:361 templates/popover/user.html:39
 #: templates/user/profile-subnav.html:26
 msgid "Gallery"
 msgstr "Galeri"
 
-#: templates/base.html:369 templates/inclusion_tags/search_image_list.html:44
+#: templates/base.html:367 templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:95
 #: templates/user/profile-subnav.html:32
 msgid "Favorites"
 msgstr "Favoriler"
 
-#: templates/base.html:375 templates/image/detail.html:430
+#: templates/base.html:373 templates/image/detail.html:430
 #: templates/image/full.html:78 templates/user/profile-subnav.html:38
 msgid "Technical card"
 msgstr "Teknik kart"
 
-#: templates/base.html:381 templates/user/profile-subnav.html:44
+#: templates/base.html:379 templates/user/profile-subnav.html:44
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr "Grafikler"
 
-#: templates/base.html:389 templates/messages/inbox.html:8
+#: templates/base.html:387 templates/messages/inbox.html:8
 msgid "My messages"
 msgstr "Mesajlarım"
 
-#: templates/base.html:395 templates/user/profile-subnav.html:66
+#: templates/base.html:393 templates/user/profile-subnav.html:66
 msgid "API Keys"
 msgstr "API anahtarları"
 
-#: templates/base.html:399
+#: templates/base.html:397
 msgid "My settings"
 msgstr "Ayarlarım"
 
-#: templates/base.html:403 templates/profile-edit-menu.html:8
+#: templates/base.html:401 templates/profile-edit-menu.html:8
 #: templates/subject/page.html:13
 msgid "Basic information"
 msgstr "Temel bilgiler"
 
-#: templates/base.html:411 templates/profile-edit-menu.html:15
+#: templates/base.html:409 templates/profile-edit-menu.html:15
 #, fuzzy
 msgid "Commercial information"
 msgstr "Ek bilgi"
 
-#: templates/base.html:420 templates/profile-edit-menu.html:23
+#: templates/base.html:418 templates/profile-edit-menu.html:23
 #, fuzzy
 msgid "Retailer information"
 msgstr "Temel bilgiler"
 
-#: templates/base.html:446 templates/profile-edit-menu.html:54
+#: templates/base.html:444 templates/profile-edit-menu.html:54
 msgid "Preferences"
 msgstr "Tercihler"
 
-#: templates/base.html:452 templates/profile-edit-menu.html:60
+#: templates/base.html:450 templates/profile-edit-menu.html:60
 msgid "Avatar"
 msgstr "Profil Resmi"
 
-#: templates/base.html:459 templates/user/profile.html:93
+#: templates/base.html:457 templates/user/profile.html:93
 #: templates/user/profile.html.py:96
 msgid "Logout"
 msgstr "Çıkış"
 
-#: templates/base.html:472 templates/base.html.py:473
+#: templates/base.html:470 templates/base.html.py:471
 msgid "Notifications"
 msgstr "Bilgilendirmeler"
 
-#: templates/base.html:484 templates/base.html.py:485
+#: templates/base.html:482 templates/base.html.py:483
 msgid "Requests"
 msgstr "İstekler"
 
-#: templates/base.html:496
+#: templates/base.html:494
 msgid "Have an invite? Login!"
 msgstr "Davet mi edildiniz? Giriş yapın!"
 
-#: templates/base.html:498 templates/registration/activation_complete.html:6
+#: templates/base.html:496 templates/registration/activation_complete.html:6
 msgid "Login"
 msgstr "Giriş"
 
-#: templates/base.html:504 templates/registration/login.html:15
+#: templates/base.html:502 templates/registration/login.html:15
 msgid "Register"
 msgstr "Kayıt ol"
 
-#: templates/base.html:516
+#: templates/base.html:514
 msgid "Quick search"
 msgstr "Hızlı arama"
 
-#: templates/base.html:601 templates/help.html:10
+#: templates/base.html:599 templates/help.html:10
 msgid "Hey!"
 msgstr "Hey!"
 
-#: templates/base.html:602
+#: templates/base.html:600
 msgid "Success!"
 msgstr ""
 
-#: templates/base.html:603 templates/base.html.py:615 templates/base.html:627
+#: templates/base.html:601 templates/base.html.py:613 templates/base.html:625
 #: templates/upload.html:52
 msgid "Warning!"
 msgstr "Uyarı!"
 
-#: templates/base.html:604
+#: templates/base.html:602
 #, fuzzy
 msgid "Error!"
 msgstr "Hata"
 
-#: templates/base.html:617
+#: templates/base.html:615
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -3156,18 +3156,18 @@ msgid ""
 "to do it now."
 msgstr ""
 
-#: templates/base.html:629
+#: templates/base.html:627
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
 "of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
 msgstr ""
 
-#: templates/base.html:643 templates/user/card.html:53
+#: templates/base.html:641 templates/user/card.html:53
 msgid "About"
 msgstr "Hakkında"
 
-#: templates/base.html:645
+#: templates/base.html:643
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -3178,27 +3178,27 @@ msgstr ""
 "Astrofotoğraflarınızı yüklemek isteyebileceğiniz ilk ve de son yerdir. "
 "Astrofotoğrafçılar için bir Astrofotoğrafçı tarafından yapılmıştır."
 
-#: templates/base.html:655 templates/tos.html:7
+#: templates/base.html:653 templates/tos.html:7
 msgid "Terms of Service"
 msgstr "Hizmet Şartları"
 
-#: templates/base.html:656 templates/guidelines.html:7
+#: templates/base.html:654 templates/guidelines.html:7
 msgid "Guidelines"
 msgstr "Kurallar"
 
-#: templates/base.html:660
+#: templates/base.html:658
 msgid "Thanks to"
 msgstr "Teşekkürler"
 
-#: templates/base.html:662
+#: templates/base.html:660
 msgid "The localization team"
 msgstr "Çeviri takımı"
 
-#: templates/base.html:668
+#: templates/base.html:666
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/base.html:670
+#: templates/base.html:668
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -3207,35 +3207,35 @@ msgstr ""
 "AstroBin Copyright &copy; 2010-2012 Salvatore Iovene, Tüm Hakları Saklıdır. "
 "Sitedeki fotoğrafların telif hakları fotoğraf sahiplerine aittir."
 
-#: templates/base.html:684
+#: templates/base.html:682
 msgid "Back to top"
 msgstr "En üste dön"
 
-#: templates/base.html:730 templates/gear/page.html:164
+#: templates/base.html:728 templates/gear/page.html:164
 #: templates/gear/page.html.py:478 templates/image/detail.html:603
-#: templates/image/detail.html.py:1195 templates/messages/compose.html:14
+#: templates/image/detail.html.py:1194 templates/messages/compose.html:14
 #: templates/openid_provider/decide.html:14
 msgid "Cancel"
 msgstr "İptal"
 
-#: templates/base.html:770 templates/image/detail.html:1402
+#: templates/base.html:768 templates/image/detail.html:1401
 msgid "No file selected"
 msgstr "Dosya seçilmedi"
 
-#: templates/base.html:771 templates/image/detail.html:1403
+#: templates/base.html:769 templates/image/detail.html:1402
 msgid "Choose file"
 msgstr "Dosya seçiniz"
 
-#: templates/comments.html:16 templates/index.html:97
+#: templates/comments.html:16 templates/index.html:100
 #: templates/inclusion_tags/image_list.html:10
 msgid "by"
 msgstr ""
 
-#: templates/comments.html:55 templates/index.html:261
-#: templates/index.html.py:262 templates/leaderboard.html:76
+#: templates/comments.html:55 templates/index.html:264
+#: templates/index.html.py:265 templates/leaderboard.html:76
 #: templates/reviews.html:58 templates/image/detail.html:265
-#: templates/image/detail.html.py:1340 templates/image/detail.html:1354
-#: templates/image/detail.html.py:1355 templates/image/detail.html:1356
+#: templates/image/detail.html.py:1339 templates/image/detail.html:1353
+#: templates/image/detail.html.py:1354 templates/image/detail.html:1355
 #: templates/popover/gear_accessory.html:24
 #: templates/popover/gear_camera.html:27 templates/popover/gear_filter.html:25
 #: templates/popover/gear_focal_reducer.html:23
@@ -3248,10 +3248,10 @@ msgstr ""
 msgid "Follow"
 msgstr "Takip et"
 
-#: templates/comments.html:55 templates/index.html:261
-#: templates/index.html.py:262 templates/leaderboard.html:76
-#: templates/reviews.html:58 templates/image/detail.html:1354
-#: templates/image/detail.html.py:1355 templates/image/detail.html:1356
+#: templates/comments.html:55 templates/index.html:264
+#: templates/index.html.py:265 templates/leaderboard.html:76
+#: templates/reviews.html:58 templates/image/detail.html:1353
+#: templates/image/detail.html.py:1354 templates/image/detail.html:1355
 #: templates/popover/gear_accessory.html:22
 #: templates/popover/gear_camera.html:25 templates/popover/gear_filter.html:23
 #: templates/popover/gear_focal_reducer.html:21
@@ -3598,24 +3598,24 @@ msgid ""
 "You can vote each image from 1 to 5 stars, and they are defined like this:"
 msgstr ""
 
-#: templates/faq.html:138 templates/image/detail.html:1383
+#: templates/faq.html:138 templates/image/detail.html:1382
 msgid "It's a start, but it needs better data."
 msgstr ""
 
-#: templates/faq.html:145 templates/image/detail.html:1384
+#: templates/faq.html:145 templates/image/detail.html:1383
 msgid "It looks good, but it needs better processing."
 msgstr ""
 
-#: templates/faq.html:153 templates/image/detail.html:1385
+#: templates/faq.html:153 templates/image/detail.html:1384
 msgid "Good data, good processing."
 msgstr ""
 
-#: templates/faq.html:162 templates/image/detail.html:1386
+#: templates/faq.html:162 templates/image/detail.html:1385
 #, fuzzy
 msgid "Great result!"
 msgstr "Sonuç bulunamadı"
 
-#: templates/faq.html:172 templates/image/detail.html:1387
+#: templates/faq.html:172 templates/image/detail.html:1386
 #, fuzzy
 msgid "Top quality!"
 msgstr "Sol üst"
@@ -4083,54 +4083,35 @@ msgstr ""
 "AstroBin'e kayıt olarak, <a href=\"%(tos_url)s\">kullanım koşullarımızı</a> "
 "kabul etmiş bulunuyorsunuz."
 
-#: templates/index.html:76 templates/image/detail.html:636
-msgid "Introducing AstroBin Questions"
-msgstr ""
-
-#: templates/index.html:79 templates/image/detail.html:639
-#, python-format
-msgid ""
-"After revolutionizing the way astrophotographers preserve their data, "
-"AstroBin is set to start a new era in the way amateur astronomers "
-"communicate on the Internet. <a href=\"%(questions_url)s\">Want to know more?"
-"</a>"
-msgstr ""
-
-#: templates/index.html:81 templates/questions.html:94
-msgid ""
-"PS: AstroBin Questions is only available in English, right now, but more "
-"languages will come soon."
-msgstr ""
-
-#: templates/index.html:89
+#: templates/index.html:92
 msgid "Image of the day"
 msgstr "Günün fotoğrafı"
 
-#: templates/index.html:129
+#: templates/index.html:132
 msgid "Recent"
 msgstr "En yeniler"
 
-#: templates/index.html:135 templates/index.html.py:191
-#: templates/index.html:208 templates/index.html.py:248
+#: templates/index.html:138 templates/index.html.py:194
+#: templates/index.html:211 templates/index.html.py:251
 #: templates/gear/page.html:59
 msgid "(view more)"
 msgstr "(daha fazla gözat)"
 
-#: templates/index.html:142
+#: templates/index.html:145
 msgid "Followed"
 msgstr "Takip ediliyor"
 
-#: templates/index.html:153 templates/index.html.py:154
-#: templates/index.html:155 templates/index.html.py:156
-#: templates/index.html:157
+#: templates/index.html:156 templates/index.html.py:157
+#: templates/index.html:158 templates/index.html.py:159
+#: templates/index.html:160
 msgid "Recently voted 5 stars"
 msgstr "En son 5 yıldız verilenler"
 
-#: templates/index.html:168
+#: templates/index.html:171
 msgid "Recently favorited"
 msgstr "En son favorilere eklenen"
 
-#: templates/index.html:239 templates/activity/action.html:30
+#: templates/index.html:242 templates/activity/action.html:30
 msgid "ago"
 msgstr "önce"
 
@@ -4446,6 +4427,12 @@ msgstr ""
 msgid "Go to AstroBin Questions!"
 msgstr ""
 
+#: templates/questions.html:94
+msgid ""
+"PS: AstroBin Questions is only available in English, right now, but more "
+"languages will come soon."
+msgstr ""
+
 #: templates/stats.html:10
 #, python-format
 msgid ""
@@ -4514,7 +4501,7 @@ msgid "Upload as a work in progress"
 msgstr "Taslak olarak yükle"
 
 #: templates/upload.html:20 templates/upload.html.py:35
-#: templates/image/detail.html:1404
+#: templates/image/detail.html:1403
 msgid "Uploading..."
 msgstr "Yükleniyor..."
 
@@ -4646,7 +4633,7 @@ msgstr ""
 #: templates/commercial/products/retailed/edit.html:14
 #: templates/gear/page.html:163 templates/gear/page.html.py:477
 #: templates/image/detail.html:540 templates/image/detail.html.py:602
-#: templates/image/detail.html:1194 templates/image/edit/acquisition.html:28
+#: templates/image/detail.html:1193 templates/image/edit/acquisition.html:28
 #: templates/image/edit/acquisition.html:63
 #: templates/image/edit/acquisition.html:85 templates/image/edit/basic.html:82
 #: templates/image/edit/gear.html:53 templates/image/edit/license.html:22
@@ -4696,7 +4683,7 @@ msgstr ""
 "bildirim ya da öneri vermek ya da basitçe temasa geçmek istiyorsanız, lütfen "
 "bizimle iletişime geçin."
 
-#: templates/contact_form/contact.html:16 templates/image/detail.html:1346
+#: templates/contact_form/contact.html:16 templates/image/detail.html:1345
 #: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
 #: templates/user/profile-js.html:28
 msgid "Send"
@@ -4892,23 +4879,23 @@ msgstr ""
 "a> ya da <a href=\"/accounts/login/\">giriş yapın</a>."
 
 #: templates/gear/page.html:134 templates/gear/page.html.py:552
-#: templates/image/detail.html:573 templates/image/detail.html.py:1272
+#: templates/image/detail.html:573 templates/image/detail.html.py:1271
 msgid "(comment deleted)"
 msgstr "(yorum silindi)"
 
 #: templates/gear/page.html:145 templates/gear/page.html.py:553
-#: templates/image/detail.html:584 templates/image/detail.html.py:1273
+#: templates/image/detail.html:584 templates/image/detail.html.py:1272
 msgid "Undelete"
 msgstr "Geri al"
 
 #: templates/gear/page.html:147 templates/gear/page.html.py:460
 #: templates/gear/page.html:559 templates/image/detail.html:586
-#: templates/image/detail.html.py:1177 templates/image/detail.html:1279
+#: templates/image/detail.html.py:1176 templates/image/detail.html:1278
 msgid "Delete"
 msgstr "Sil"
 
 #: templates/gear/page.html:150 templates/gear/page.html.py:461
-#: templates/image/detail.html:589 templates/image/detail.html.py:1178
+#: templates/image/detail.html:589 templates/image/detail.html.py:1177
 #: templates/inclusion_tags/list_gear.html:21
 #: templates/user/profile/commercial/products.html:79
 #: templates/user/profile/commercial/products.html:161
@@ -4926,7 +4913,7 @@ msgstr "Yanıtla"
 
 #: templates/gear/page.html:166 templates/gear/page.html.py:207
 #: templates/gear/page.html:483 templates/image/detail.html:542
-#: templates/image/detail.html.py:605 templates/image/detail.html:1200
+#: templates/image/detail.html.py:605 templates/image/detail.html:1199
 msgid "Formatting help"
 msgstr "Biçimlendirme yardımı"
 
@@ -4968,7 +4955,7 @@ msgid "Owners"
 msgstr ""
 
 #: templates/gear/page.html:396 templates/gear/page.html.py:456
-#: templates/image/detail.html:1173
+#: templates/image/detail.html:1172
 msgid "just now"
 msgstr "yalnızca şimdi"
 
@@ -5017,7 +5004,7 @@ msgstr "Bu revizyonu final revizyon olarak işaretle"
 msgid "Change license"
 msgstr "Lisansı değiştir"
 
-#: templates/image/detail.html:81 templates/image/detail.html.py:1393
+#: templates/image/detail.html:81 templates/image/detail.html.py:1392
 msgid "Upload new revision"
 msgstr "Yeni revizyon yükle"
 
@@ -5072,7 +5059,7 @@ msgid "View"
 msgstr "Görünüm"
 
 #: templates/image/detail.html:181 templates/image/detail.html.py:235
-#: templates/image/detail.html:873
+#: templates/image/detail.html:872
 msgid "Inverted monochrome"
 msgstr "Monokrom'a çevrilmiş"
 
@@ -5085,7 +5072,7 @@ msgid "Annotated"
 msgstr "Ek açıklamalı"
 
 #: templates/image/detail.html:205 templates/image/detail.html.py:229
-#: templates/image/detail.html:872
+#: templates/image/detail.html:871
 msgid "Normal"
 msgstr "Normal"
 
@@ -5093,7 +5080,7 @@ msgstr "Normal"
 msgid "View profile"
 msgstr "Profile gözat"
 
-#: templates/image/detail.html:262 templates/image/detail.html.py:1332
+#: templates/image/detail.html:262 templates/image/detail.html.py:1331
 #: templates/user/profile-js.html:14 templates/user/profile-subnav.html:86
 msgid "Stop following"
 msgstr "Takip etmekten vazgeç"
@@ -5102,7 +5089,7 @@ msgstr "Takip etmekten vazgeç"
 msgid "Send private message"
 msgstr "Özel mesaj gönder"
 
-#: templates/image/detail.html:283 templates/image/detail.html.py:819
+#: templates/image/detail.html:283 templates/image/detail.html.py:818
 msgid "Share"
 msgstr "Paylaş"
 
@@ -5175,115 +5162,129 @@ msgstr ""
 "arası bir camiadır: İngilizce kullanımı tercih edilir. Dipnot: <strong>"
 "%(user)s</strong> kullanıcısının tercih ettiği dil <strong>%(lang)s</strong>."
 
-#: templates/image/detail.html:631
-msgid "Hey, check this out! It's important."
-msgstr ""
-
-#: templates/image/detail.html:655 templates/image/detail.html.py:681
-msgid "Final"
-msgstr ""
-
-#: templates/image/detail.html:663
-msgid "Original"
-msgstr ""
-
-#: templates/image/detail.html:716 templates/image/detail.html.py:903
-#, fuzzy
-msgid "Remove from favorites"
-msgstr "Hiç favorilere eklenmedi"
-
-#: templates/image/detail.html:716 templates/image/detail.html.py:906
-msgid "Mark as favorite"
-msgstr "Favori olarak işaretle."
-
-#: templates/image/detail.html:737
+#: templates/image/detail.html:634
 #, fuzzy
 msgid "What is this?"
 msgstr "Bu site nedir?"
 
-#: templates/image/detail.html:738
+#: templates/image/detail.html:635
 msgid ""
 "This button will create a post on AstroBin Questions, in which you can ask "
 "for critique, review or analisys of your image."
 msgstr ""
 
-#: templates/image/detail.html:738
+#: templates/image/detail.html:635
 #, fuzzy
 msgid "Learn more about AstroBin Questions."
 msgstr "Sıkça Sorulan Sorular"
 
-#: templates/image/detail.html:741
+#: templates/image/detail.html:638
 #, fuzzy
 msgid "Request critique"
 msgstr "Şundan iste"
 
-#: templates/image/detail.html:789 templates/image/detail.html.py:790
+#: templates/image/detail.html:645
+#, fuzzy
+msgid "Community bulletin"
+msgstr "Yorum"
+
+#: templates/image/detail.html:647
+msgid "Introducing AstroBin Questions"
+msgstr ""
+
+#: templates/image/detail.html:649
+#, python-format
+msgid ""
+"After revolutionizing the way astrophotographers preserve their data, "
+"AstroBin is set to start a new era in the way amateur astronomers "
+"communicate on the Internet. <a href=\"%(questions_url)s\">Want to know more?"
+"</a>"
+msgstr ""
+
+#: templates/image/detail.html:667 templates/image/detail.html.py:693
+msgid "Final"
+msgstr ""
+
+#: templates/image/detail.html:675
+msgid "Original"
+msgstr ""
+
+#: templates/image/detail.html:728 templates/image/detail.html.py:902
+#, fuzzy
+msgid "Remove from favorites"
+msgstr "Hiç favorilere eklenmedi"
+
+#: templates/image/detail.html:728 templates/image/detail.html.py:905
+msgid "Mark as favorite"
+msgstr "Favori olarak işaretle."
+
+#: templates/image/detail.html:788 templates/image/detail.html.py:789
 msgid "Histogram"
 msgstr "Histogram"
 
-#: templates/image/detail.html:796
+#: templates/image/detail.html:795
 msgid "Made possible by"
 msgstr ""
 
-#: templates/image/detail.html:833
+#: templates/image/detail.html:832
 msgid "Sharing mode"
 msgstr "Paylaşım modu"
 
-#: templates/image/detail.html:835
+#: templates/image/detail.html:834
 msgid "Simple link"
 msgstr "Temel bağlantı"
 
-#: templates/image/detail.html:836
+#: templates/image/detail.html:835
 msgid "Forums"
 msgstr "Forumlar"
 
-#: templates/image/detail.html:841
+#: templates/image/detail.html:840
 msgid "Thumbnail"
 msgstr "Küçük resim"
 
-#: templates/image/detail.html:843 templates/user/api_keys.html:29
+#: templates/image/detail.html:842 templates/user/api_keys.html:29
 msgid "Yes"
 msgstr "Evet"
 
-#: templates/image/detail.html:844
+#: templates/image/detail.html:843
 msgid "No"
 msgstr "Hayır"
 
-#: templates/image/detail.html:850
+#: templates/image/detail.html:849
 msgid "Image size"
 msgstr "Resim boyutu"
 
-#: templates/image/detail.html:852
+#: templates/image/detail.html:851
 msgid "Regular"
 msgstr "Her zamanki"
 
-#: templates/image/detail.html:853
+#: templates/image/detail.html:852
 msgid "Full"
 msgstr "Dolu"
 
-#: templates/image/detail.html:857
+#: templates/image/detail.html:856
 msgid "Copy this"
 msgstr "Bunu kopyala"
 
-#: templates/image/detail.html:860 templates/image/detail.html.py:863
-#: templates/image/detail.html:929 templates/image/edit/gear.html:75
+#: templates/image/detail.html:859 templates/image/detail.html.py:862
+#: templates/image/detail.html:928 templates/image/edit/gear.html:75
 msgid "Copy"
 msgstr "Kopyala"
 
-#: templates/image/detail.html:870
+#: templates/image/detail.html:869
 msgid "Image mode"
 msgstr "Resim modu"
 
-#: templates/image/detail.html:932
+#: templates/image/detail.html:931
 msgid "Copied!"
 msgstr "Kopyalandı!"
 
-#: templates/image/detail.html:1328 templates/user/profile-js.html:10
+#: templates/image/detail.html:1327 templates/user/profile-js.html:10
 #, python-format
 msgid "Follow %(username)s?"
 msgstr "%(username)s kullanıcısını takip etmek istiyor musunuz?"
 
-#: templates/image/detail.html:1329 templates/user/profile-js.html:11
+#: templates/image/detail.html:1328 templates/user/profile-js.html:11
 #, python-format
 msgid ""
 "You will receive a notification every time %(username)s posts a new image. "
@@ -5292,16 +5293,16 @@ msgstr ""
 "%(username)s kullanıcısı her yeni resim yüklediğinde bir bildirim "
 "alacaksınız. Devam etmek istiyor musunuz?"
 
-#: templates/image/detail.html:1330 templates/user/profile-js.html:12
+#: templates/image/detail.html:1329 templates/user/profile-js.html:12
 msgid "Yes, follow!"
 msgstr "Evet, takip et!"
 
-#: templates/image/detail.html:1336 templates/user/profile-js.html:18
+#: templates/image/detail.html:1335 templates/user/profile-js.html:18
 #, python-format
 msgid "Stop following %(username)s?"
 msgstr "%(username)s kullanıcısını takip etmeyi bırakmak istiyor musunuz?"
 
-#: templates/image/detail.html:1337 templates/user/profile-js.html:19
+#: templates/image/detail.html:1336 templates/user/profile-js.html:19
 #, python-format
 msgid ""
 "You will stop receiving notifications when %(username)s posts a new image. "
@@ -5310,34 +5311,34 @@ msgstr ""
 "%(username)s kullanıcısı her yeni resim yüklediğinde artık bir bildirim "
 "almayacaksınız. Devam etmek istiyor musunuz?"
 
-#: templates/image/detail.html:1338 templates/user/profile-js.html:20
+#: templates/image/detail.html:1337 templates/user/profile-js.html:20
 msgid "Yes, stop following!"
 msgstr "Evet, takip etmeyi bırak!"
 
-#: templates/image/detail.html:1344 templates/user/profile-js.html:26
+#: templates/image/detail.html:1343 templates/user/profile-js.html:26
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "%(username)s kullanıcısına bir mesaj gönder"
 
-#: templates/image/detail.html:1375 templates/image/detail.html.py:1376
-#: templates/image/detail.html:1377 templates/image/detail.html.py:1378
-#: templates/image/detail.html:1379
+#: templates/image/detail.html:1374 templates/image/detail.html.py:1375
+#: templates/image/detail.html:1376 templates/image/detail.html.py:1377
+#: templates/image/detail.html:1378
 #, fuzzy
 msgid "You have already voted."
 msgstr "Bu resmi zaten daha önce aday göstermiştiniz"
 
-#: templates/image/detail.html:1394
+#: templates/image/detail.html:1393
 msgid ""
 "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr ""
 "Fotoğrafınız üzerinde uyguladığınız işleme tekniğinizi geliştirdiniz mi? O "
 "halde fotoğrafınızın yeni revizyonunu yükleyin!"
 
-#: templates/image/detail.html:1408
+#: templates/image/detail.html:1407
 msgid "Delete image and all its revisions?"
 msgstr "Resmi ve tüm revizyonlarını silmek istiyor musunuz?"
 
-#: templates/image/detail.html:1409
+#: templates/image/detail.html:1408
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
@@ -5345,15 +5346,15 @@ msgstr ""
 "Resim kalıcı olarak silinecektir ve bu işlem geri alınamaz. Ayrıca tüm "
 "revizyonları da silinecek. Silmek istediğinizden emin misiniz?"
 
-#: templates/image/detail.html:1410
+#: templates/image/detail.html:1409
 msgid "Yes, delete everything"
 msgstr "Evet, herşeyi sil"
 
-#: templates/image/detail.html:1415
+#: templates/image/detail.html:1414
 msgid "Delete this revision?"
 msgstr "Bu revizyonu silmek istiyor musunuz?"
 
-#: templates/image/detail.html:1416
+#: templates/image/detail.html:1415
 msgid ""
 "This revision will be permanently deleted and cannot be recovered. Are you "
 "sure?"
@@ -5361,15 +5362,15 @@ msgstr ""
 "Bu revizyon kalıcı olarak silinecektir ve bu işlem geri alınamaz. Silmek "
 "istediğinizden emin misiniz?"
 
-#: templates/image/detail.html:1417
+#: templates/image/detail.html:1416
 msgid "Yes, delete revision"
 msgstr "Evet, revizyonu sil"
 
-#: templates/image/detail.html:1422
+#: templates/image/detail.html:1421
 msgid "Delete original image?"
 msgstr "Orijinal resmi silmek istiyor musunuz?"
 
-#: templates/image/detail.html:1423
+#: templates/image/detail.html:1422
 msgid ""
 "The image will be permanently deleted and cannot be recovered. Its revisions "
 "will not be deleted. Are you sure?"
@@ -5377,7 +5378,7 @@ msgstr ""
 "Bu resim kalıcı olarak silinecektir ve bu işlem geri alınamaz. Revizyonları "
 "ise silinmeyecektir. Silmek istediğinizden emin misiniz?"
 
-#: templates/image/detail.html:1424
+#: templates/image/detail.html:1423
 msgid "Yes, delete image"
 msgstr "Evet, resmi sil"
 
