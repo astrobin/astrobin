@@ -220,7 +220,7 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
     },
-    'jhonny': dict(
+    'johnny': dict(
         BACKEND = 'johnny.backends.memcached.MemcachedCache',
         LOCATION = ['127.0.0.1:11211'],
         JOHNNY_CACHE = True,
