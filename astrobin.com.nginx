@@ -16,6 +16,18 @@ server {
 
 server {
         listen   80;
+        server_name q.astrob.in;
+        rewrite ^/(.*) http://questions.astrobin.com/$1 permanent;
+}
+
+server {
+        listen   80;
+        server_name trns.astrob.in;
+        rewrite ^/(.*) http://translate.astrobin.com/$1 permanent;
+}
+
+server {
+        listen   80;
         server_name astrobin.com;
         rewrite ^/(.*) http://www.astrobin.com/$1 permanent;
 }
