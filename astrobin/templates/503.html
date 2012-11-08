@@ -1,22 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends 'maintenance_base.html' %}
+{% load i18n %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <title>AstroBin</title>
-
-        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-        <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
-        <meta name="robots" content="index, follow, noarchive" />
-        <meta name="googlebot" content="noarchive" />
-    </head>
-
-    <body>
-        <h1><a href="/">AstroBin</a></h1>
-        <h2>English</h2>
-        <p>AstroBin is currently unavailable, and that's because we're briging in some new exciting feature! Check back in a little while.</p>
-        <h2>Italiano</h2>
-        <p>AstroBin al momento non è disponibile, perché stiamo aggiornandolo con nuove fantastiche funzionalità! Riprova tra un po'.</p>
-    </body>
-</html>
-
+{% block content %}
+    <h1>{% trans "AstroBin is temporarily unavailable" %}</h1>
+    <p>
+        {% blocktrans %}We apologize for the inconvenience, but we are performing some server maintenance, or probably a software upgrade. Usually this doesn't take more than 30 minutes.{% endblocktrans %}
+    </p>
+    <p>
+        {% blocktrans %}Come back soon!{% endblocktrans %}
+    </p>
+{% endblock %}
