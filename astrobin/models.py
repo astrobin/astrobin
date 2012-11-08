@@ -991,8 +991,10 @@ class Image(models.Model):
             '_inverted' if inverted else '',
             self.original_ext)
 
-        if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
-            return '/uploads/%s' % filename
+        # This code is disabled because of the switch to ASPwebhosting.
+        # We'll keep just serving from S3 and hope in CloudFronts caching.
+        #if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
+        #    return '/uploads/%s' % filename
 
         return '%s%s' % (
             settings.IMAGES_URL,
