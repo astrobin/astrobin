@@ -8,7 +8,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = DEBUG
 READONLY_MODE = False
-MEDIA_VERSION = '32'
+MEDIA_VERSION = '33'
 
 ADMINS = (
     ('Salvatore Iovene at AstroBin', 'astrobin@astrobin.com'),
