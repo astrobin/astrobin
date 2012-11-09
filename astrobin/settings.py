@@ -8,6 +8,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = DEBUG
 READONLY_MODE = False
+MEDIA_VERSION = '32'
 
 ADMINS = (
     ('Salvatore Iovene at AstroBin', 'astrobin@astrobin.com'),
@@ -325,7 +326,7 @@ PIPELINE_CSS = {
             'css/bootstrap-responsive.css',
             'css/astrobin.css',
         ),
-        'output_filename': 'css/astrobin_pipeline_screen_v31.css',
+        'output_filename': 'css/astrobin_pipeline_screen_v' + MEDIA_VERSION + '.css',
         'extra_content':  {
             'media': 'screen, projection',
         },
@@ -363,7 +364,7 @@ PIPELINE_JS = {
             'js/bootstrap.js',
             'js/astrobin.js',
         ),
-        'output_filename': 'js/astrobin_pipeline_v8.js',
+        'output_filename': 'js/astrobin_pipeline_v' + MEDIA_VERSION + '.js',
     },
 }
 
