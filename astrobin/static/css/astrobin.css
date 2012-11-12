@@ -100,8 +100,8 @@ textarea.uniform {
   font-weight: normal;
   padding: 3px;
   color: #333333;
-  background: url('../images/uniform/bg-input-focus.png') repeat-x 0px 0px;
-  background: url('../images/uniform/bg-input.png') repeat-x 0px 0px;
+  background: url(../images/uniform/bg-input-focus.png) repeat-x 0px 0px;
+  background: url(../images/uniform/bg-input.png) repeat-x 0px 0px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -112,7 +112,7 @@ input.email:focus,
 input.password:focus,
 textarea.uniform:focus {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  background: url('../images/uniform/bg-input-focus.png') repeat-x 0px 0px;
+  background: url(../images/uniform/bg-input-focus.png) repeat-x 0px 0px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -572,7 +572,7 @@ div.uploader input {
    HTML ELEMENTS
 ------------------------------------------------- */
 body {
-  background: #393939 url('../images/background-tile.png');
+  background: #393939 url(../images/background-tile.png);
   padding-top: 55px;
 }
 body.full {
@@ -630,7 +630,7 @@ body.full {
   }
 }
 .modal {
-  background: #2e2e2e url('../images/dark-panel-tile.png');
+  background: #2e2e2e url(../images/dark-panel-tile.png);
   border: none;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -640,7 +640,7 @@ body.full {
   border-radius: 6px;
 }
 .modal .modal-header {
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -654,7 +654,7 @@ body.full {
   color: white;
 }
 .modal .modal-footer {
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   border-top: 1px solid #303030;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -687,7 +687,7 @@ body.full {
 }
 .navbar .navbar-inner {
   border-top: 4px solid #3092cf;
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   -webkit-box-shadow: 0 0 12px #000000;
   -moz-box-shadow: 0 0 12px #000000;
   box-shadow: 0 0 12px #000000;
@@ -734,7 +734,7 @@ body.full {
 .subnav {
   width: 100%;
   height: 25px;
-  background: #cc4b2e url('../images/orange-panel-tile.png');
+  background: #cc4b2e url(../images/orange-panel-tile.png);
   border-top: 1px solid #b74329;
   border-bottom: 1px solid #b74329;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
@@ -867,7 +867,7 @@ body.full {
   -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
-  background: #333333 url('../images/dark-panel-tile.png');
+  background: #333333 url(../images/dark-panel-tile.png);
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -941,7 +941,7 @@ textarea:focus {
 .form-horizontal .form-actions,
 .form-vertical .form-actions,
 .form-inline .form-actions {
-  background: #333333 url('../images/dark-panel-tile.png');
+  background: #333333 url(../images/dark-panel-tile.png);
   border-color: #393939;
 }
 .form-horizontal input[type=text],
@@ -974,7 +974,7 @@ footer .container {
   margin: 0 auto;
   padding: 20px 30px 10px 30px;
   max-width: 940px;
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -1193,7 +1193,7 @@ x:default {
 .tabs ul li.ui-state-default {
   float: left;
   padding: 8px 12px;
-  background: #2e2e2e url('../images/dark-panel-tile.png');
+  background: #2e2e2e url(../images/dark-panel-tile.png);
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -1202,7 +1202,7 @@ x:default {
 .tabs ul li.ui-state-active {
   border-bottom: none;
   padding-bottom: 8px;
-  background: #393939 url('../images/light-panel-tile.png');
+  background: #393939 url(../images/light-panel-tile.png);
 }
 .tabs ul li.active {
   padding-bottom: 9px;
@@ -1245,7 +1245,7 @@ div.capty-caption a {
 }
 .ui-multiselect ul.available,
 .ui-multiselect ul.selected {
-  background: #393939 url('../images/light-panel-tile.png');
+  background: #393939 url(../images/light-panel-tile.png);
   min-height: 75px;
 }
 .ui-multiselect .ui-state-default {
@@ -1305,7 +1305,7 @@ div.capty-caption a {
   text-align: center;
   margin: 0;
   padding: 10px;
-  background: #393939 url('../images/subtle-panel-tile.png');
+  background: #393939 url(../images/subtle-panel-tile.png);
   border: 1px solid #2e2e2e;
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
@@ -1378,7 +1378,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
   position: relative;
 }
 .main-image .main-image-inner img {
-  cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
+  cursor: url(../cursors/magnify.cur), -moz-zoom-in, pointer;
   border: 1px solid #2e2e2e;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -1391,7 +1391,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .main-image .main-image-inner img.plot-overlay,
 .main-image .main-image-inner img.fixed-plot-overlay {
-  cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
+  cursor: url(../cursors/magnify.cur), -moz-zoom-in, pointer;
   position: absolute;
   top: 0;
   left: 0;
@@ -1465,7 +1465,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .explore-comment-container .header,
 .explore-review-container .header {
   color: #fcfcfc;
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   padding: 8px 4px;
   margin-bottom: 4px;
   padding: 8px;
@@ -1640,7 +1640,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .well,
 .hero-unit {
-  background: url('../images/subtle-panel-tile.png');
+  background: url(../images/subtle-panel-tile.png);
   border: 0;
 }
 .hero-unit h1 {
@@ -1655,7 +1655,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
   color: #555;
 }
 .subtle-container {
-  background: url('../images/subtle-panel-tile.png');
+  background: url(../images/subtle-panel-tile.png);
   border: 1px solid #2e2e2e;
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
@@ -1668,7 +1668,7 @@ div.favorite-container a.favorite:hover .favorite-hint {
   overflow: hidden;
 }
 .subtle-container .header {
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -1760,14 +1760,14 @@ div.favorite-container a.favorite:hover .favorite-hint {
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  background: #393939 url('../images/light-panel-tile.png');
+  background: #393939 url(../images/light-panel-tile.png);
   margin: 0 0 8px 0;
   padding: 0;
 }
 .search-category .header,
 .list-gear .header {
   color: #fcfcfc;
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   padding: 8px 4px;
   margin-bottom: 4px;
   padding: 8px;
@@ -1907,11 +1907,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
   overflow: hidden;
 }
 .message-container .message {
-  background: #393939 url('../images/light-panel-tile.png');
+  background: #393939 url(../images/light-panel-tile.png);
 }
 .message-container.other .message {
   float: right;
-  background: #2e2e2e url('../images/dark-panel-tile.png');
+  background: #2e2e2e url(../images/dark-panel-tile.png);
 }
 .message-form {
   margin-top: 52px;
@@ -2057,7 +2057,7 @@ p.small {
 }
 .ui-tooltip-default .ui-tooltip-titlebar,
 .ui-tooltip-default .ui-tooltip-content {
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   border-color: #111;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
@@ -2300,7 +2300,7 @@ form.avatar-change label.control-label {
 }
 .activity-stream h3,
 .blog-stream h3 {
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   text-transform: uppercase;
   font-size: 1.75em;
   padding: 8px 12px;
@@ -2414,7 +2414,7 @@ li.revisions {
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   text-align: center;
   font-weight: bold;
   margin-top: 2px;
@@ -2441,19 +2441,19 @@ li.revisions {
 }
 .popover .popover-inner {
   padding: 0;
-  background: #2e2e2e url('../images/dark-panel-tile.png');
+  background: #2e2e2e url(../images/dark-panel-tile.png);
   -webkit-box-shadow: 0 0 22px #000000;
   -moz-box-shadow: 0 0 22px #000000;
   box-shadow: 0 0 22px #000000;
 }
 .popover .popover-inner .popover-title {
-  background: #1b1b1b url('../images/darker-panel-tile.png');
+  background: #1b1b1b url(../images/darker-panel-tile.png);
   margin-top: 0;
   margin-bottom: 0;
   border-bottom-color: #414141;
 }
 .popover .popover-inner .popover-content {
-  background: #2e2e2e url('../images/dark-panel-tile.png');
+  background: #2e2e2e url(../images/dark-panel-tile.png);
 }
 .popover.bottom .arrow {
   border-bottom-color: #1B1B1B;
@@ -2477,7 +2477,7 @@ li.revisions {
 }
 .user-business-card .header,
 .gear-business-card .header {
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: #303030 url(../images/darker-panel-tile.png);
   height: 22px;
   width: 174px;
   padding: 8px 4px 0;
