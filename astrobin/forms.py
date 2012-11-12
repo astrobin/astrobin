@@ -83,11 +83,18 @@ class ImageEditBasicForm(forms.ModelForm):
     def clean_link(self):
         return self.cleaned_data['link'].strip()
 
+    def clean_subject_type(self):
+        subject_type = self.cleaned_data['subject_type']
+        if subject_type == 0:
+            raise forms.ValidationError(_('This field is required.'))
+
+        return self.cleaned_data['subject_type']
+
     def clean(self):
         try:
             subject_type = self.cleaned_data['subject_type']
         except KeyError:
-            raise forms.ValidationError('');
+            raise forms.ValidationError(_("There was one or more errors processing the form. You may need to scroll down to see them."))
 
         if subject_type in (100, 200):
             skip_as = False
