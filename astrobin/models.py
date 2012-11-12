@@ -689,6 +689,7 @@ class Image(models.Model):
     )
 
     SUBJECT_TYPE_CHOICES = (
+        (0, "---------"),
         (100, _("Deep sky object")),
         (200, _("Solar system body or event")),
         (300, _("Extremely wide field")),
@@ -716,8 +717,8 @@ class Image(models.Model):
 
     subject_type = models.IntegerField(
         verbose_name = _("Subject type"),
-        null = True,
         choices = SUBJECT_TYPE_CHOICES,
+        default = 0,
     )
 
     subjects = models.ManyToManyField(
