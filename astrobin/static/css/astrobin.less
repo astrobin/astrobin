@@ -173,8 +173,8 @@ textarea.uniform {
   font-weight: normal;
   padding: 3px;
   color: @background-color;
-  background: url('../images/uniform/bg-input-focus.png') repeat-x 0px 0px;
-  background: url('../images/uniform/bg-input.png') repeat-x 0px 0px;
+  background: url(../images/uniform/bg-input-focus.png) repeat-x 0px 0px;
+  background: url(../images/uniform/bg-input.png) repeat-x 0px 0px;
   .rounded-corners(3px);
   outline: 0;
 }
@@ -184,7 +184,7 @@ input.email:focus,
 input.password:focus,
 textarea.uniform:focus {
   box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
-  background: url('../images/uniform/bg-input-focus.png') repeat-x 0px 0px;
+  background: url(../images/uniform/bg-input-focus.png) repeat-x 0px 0px;
   .box-shadow;
 }
 
@@ -735,7 +735,7 @@ div.uploader input {
 ------------------------------------------------- */
 
 body {
-    background: @light-panel-color url('../images/background-tile.png');
+    background: @light-panel-color url(../images/background-tile.png);
     padding-top: 55px;
 }
 body.full {
@@ -804,13 +804,13 @@ body.full {
 
 
 .modal {
-    background: @dark-panel-color url('../images/dark-panel-tile.png');
+    background: @dark-panel-color url(../images/dark-panel-tile.png);
     border: none;
     .box-shadow;
     .rounded-corners;
     
     .modal-header {
-        background: #303030 url('../images/darker-panel-tile.png');
+        background: #303030 url(../images/darker-panel-tile.png);
         .rounded-corners-top;
         border-bottom: #404040;
         
@@ -824,7 +824,7 @@ body.full {
     }
 
     .modal-footer {
-        background: #303030 url('../images/darker-panel-tile.png');
+        background: #303030 url(../images/darker-panel-tile.png);
         border-top: 1px solid #303030;
         .no-box-shadow;
     }
@@ -865,7 +865,7 @@ body.full {
 
 .navbar .navbar-inner {
     border-top: 4px solid #3092cf;
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: #303030 url(../images/darker-panel-tile.png);
     -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 1);
        -moz-box-shadow: 0 0 12px rgba(0, 0, 0, 1);
             box-shadow: 0 0 12px rgba(0, 0, 0, 1);
@@ -917,7 +917,7 @@ body.full {
 .subnav {
   width: 100%;
   height: 25px;
-  background: @link-color url('../images/orange-panel-tile.png');
+  background: @link-color url(../images/orange-panel-tile.png);
   border-top: 1px solid darken(@link-color, 5%);
   border-bottom: 1px solid darken(@link-color, 5%);
   .box-shadow-subtle;
@@ -1048,7 +1048,7 @@ body.full {
     -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
        -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
             box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
-    background: #333 url('../images/dark-panel-tile.png');
+    background: #333 url(../images/dark-panel-tile.png);
     .rounded-corners;
 }
 
@@ -1113,7 +1113,7 @@ input:focus, textarea:focus {
 
 }
 .form-horizontal .form-actions, .form-vertical .form-actions, .form-inline .form-actions {
-    background: #333 url('../images/dark-panel-tile.png');
+    background: #333 url(../images/dark-panel-tile.png);
     border-color: #393939;
 }
 .form-horizontal input[type=text],
@@ -1153,7 +1153,7 @@ footer .container {
     margin: 0 auto;
     padding: 20px 30px 10px 30px;
     max-width: 940px;
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: #303030 url(../images/darker-panel-tile.png);
     .rounded-corners-top;
 }
 footer .bottom {
@@ -1356,13 +1356,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         li, li.ui-state-default {
             float: left;
             padding: @spacer-medium @spacer-large;
-            background: (@dark-panel-color) url('../images/dark-panel-tile.png');
+            background: (@dark-panel-color) url(../images/dark-panel-tile.png);
             .rounded-corners-top;
         }
         li.active, li.ui-state-active {
             border-bottom: none;
             padding-bottom: @spacer-medium;
-            background: (@light-panel-color) url('../images/light-panel-tile.png');
+            background: (@light-panel-color) url(../images/light-panel-tile.png);
         }
         li.active {
             padding-bottom: @spacer-medium + 1px;
@@ -1407,7 +1407,7 @@ div.capty-caption a {
         border-color: #282828;
     }
     ul.available, ul.selected {
-        background: (@light-panel-color) url('../images/light-panel-tile.png');
+        background: (@light-panel-color) url(../images/light-panel-tile.png);
         min-height: 75px;
     }
     .ui-state-default {
@@ -1476,7 +1476,7 @@ div.capty-caption a {
     text-align: center;
     margin: 0;
     padding: 10px;
-    background: @light-panel-color url('../images/subtle-panel-tile.png');
+    background: @light-panel-color url(../images/subtle-panel-tile.png);
     .common-border;
     .rounded-corners(12px);
     overflow: hidden;
@@ -1558,7 +1558,7 @@ div.favorite-container {
             z-index: 1;
             position: relative;
             img {
-                cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
+                cursor: url(../cursors/magnify.cur), -moz-zoom-in, pointer;
                 border: 1px solid @dark-panel-color;
                 .rounded-corners;
                 position: relative;
@@ -1567,7 +1567,7 @@ div.favorite-container {
                 max-width: 100%;
                 z-index: 1;}
             img.plot-overlay, img.fixed-plot-overlay {
-                cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
+                cursor: url(../cursors/magnify.cur), -moz-zoom-in, pointer;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -1651,7 +1651,7 @@ div.favorite-container {
 
     .header {
         color: @strong-text-color;
-        background: #303030 url('../images/darker-panel-tile.png');
+        background: #303030 url(../images/darker-panel-tile.png);
         padding: @spacer-medium @spacer-small;
         .stitched-box;
         border-bottom: 0;
@@ -1827,7 +1827,7 @@ div.favorite-container {
 }
 
 .well, .hero-unit {
-    background: url('../images/subtle-panel-tile.png');
+    background: url(../images/subtle-panel-tile.png);
     border: 0;
 }
 .hero-unit {
@@ -1845,7 +1845,7 @@ div.favorite-container {
 }
 
 .subtle-container {
-    background: url('../images/subtle-panel-tile.png');
+    background: url(../images/subtle-panel-tile.png);
     .common-border;
     .rounded-corners;
     padding: @spacer-large;
@@ -1853,7 +1853,7 @@ div.favorite-container {
     overflow: hidden;
     
     .header {
-        background: #303030 url('../images/darker-panel-tile.png');
+        background: #303030 url(../images/darker-panel-tile.png);
         .rounded-corners-top;
         border-bottom: #404040;
         margin: -12px -12px 12px;
@@ -1948,13 +1948,13 @@ div.favorite-container {
 
 .search-category, .list-gear {
     .stitched-box;
-    background: @light-panel-color url('../images/light-panel-tile.png');
+    background: @light-panel-color url(../images/light-panel-tile.png);
     margin: 0 0 @spacer-medium 0;
     padding: 0;
 
     .header {
         color: @strong-text-color;
-        background: #303030 url('../images/darker-panel-tile.png');
+        background: #303030 url(../images/darker-panel-tile.png);
         padding: @spacer-medium @spacer-small;
         .stitched-box;
 
@@ -2097,11 +2097,11 @@ div.favorite-container {
     overflow: hidden;
 }
 .message-container .message {
-    background: @light-panel-color url('../images/light-panel-tile.png');
+    background: @light-panel-color url(../images/light-panel-tile.png);
 }
 .message-container.other .message{
     float: right;
-    background: @dark-panel-color url('../images/dark-panel-tile.png');
+    background: @dark-panel-color url(../images/dark-panel-tile.png);
 }
 
 .message-form {
@@ -2263,7 +2263,7 @@ p.small {
 
 .ui-tooltip-default .ui-tooltip-titlebar,
 .ui-tooltip-default .ui-tooltip-content {
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: #303030 url(../images/darker-panel-tile.png);
     border-color: #111;
     .box-shadow-subtle;
     color: @text-color;
@@ -2512,7 +2512,7 @@ form.avatar-change label.control-label {display: none;}
     overflow-y: hidden;
 
     h3 {
-        background: #303030 url('../images/darker-panel-tile.png');
+        background: #303030 url(../images/darker-panel-tile.png);
         text-transform: uppercase;
         font-size: 1.75em;
         padding: @spacer-medium @spacer-large;
@@ -2612,7 +2612,7 @@ li.revisions {
 
     .label {
         .stitched-box;
-        background: #303030 url('../images/darker-panel-tile.png');
+        background: #303030 url(../images/darker-panel-tile.png);
         text-align: center;
         font-weight: bold;
         margin-top: 2px;
@@ -2635,20 +2635,20 @@ li.revisions {
 
     .popover-inner {
         padding: 0;
-        background: @dark-panel-color url('../images/dark-panel-tile.png');
+        background: @dark-panel-color url(../images/dark-panel-tile.png);
         -webkit-box-shadow: 0 0 22px rgba(0, 0, 0, 1);
            -moz-box-shadow: 0 0 22px rgba(0, 0, 0, 1);
                 box-shadow: 0 0 22px rgba(0, 0, 0, 1);
 
         .popover-title {
-            background: #1B1B1B url('../images/darker-panel-tile.png');
+            background: #1B1B1B url(../images/darker-panel-tile.png);
             margin-top: 0;
             margin-bottom: 0;
             border-bottom-color: #414141;
         }
 
         .popover-content {
-            background: @dark-panel-color url('../images/dark-panel-tile.png');
+            background: @dark-panel-color url(../images/dark-panel-tile.png);
         }
     }
 }
@@ -2672,7 +2672,7 @@ li.revisions {
     padding: 0;
 
     .header {
-        background: #303030 url('../images/darker-panel-tile.png');
+        background: #303030 url(../images/darker-panel-tile.png);
         height: 22px;
         width: 174px;
         padding: @spacer-medium @spacer-small 0;

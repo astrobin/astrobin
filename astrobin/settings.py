@@ -8,7 +8,6 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = DEBUG
 READONLY_MODE = False
-MEDIA_VERSION = '34'
 
 ADMINS = (
     ('Salvatore Iovene at AstroBin', 'astrobin@astrobin.com'),
@@ -45,7 +44,7 @@ DEFAULT_CHARSET = 'utf-8'
 ASTROBIN_BASE_URL = 'http://www.astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
-ASTROBIN_BASE_PATH = os.path.abspath(__file__)
+ASTROBIN_BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 UPLOADS_DIRECTORY = '/webserver/www/uploads/'
 
 # Local time zone for this installation. Choices can be found here:
@@ -79,37 +78,20 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 
 SITE_ID = 1
 
-STATIC_ROOT = '/webserver/www/sitestatic'
-STATIC_URL = '/sitestatic/'
-
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
 USE_L10N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ASTROBIN_BASE_PATH + '/media'
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media/'
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
-
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10G'
 
-# Django storages
-DEFAULT_FILE_STORAGE = 'astrobin.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'astrobin.backends.s3boto.DefaultStorage'
 AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
 AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
+AWS_S3_SECURE_URLS = False
 
 from S3 import CallingFormat
 AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
@@ -121,8 +103,34 @@ AWS_HEADERS = {
     'x-amz-acl': 'public-read',
     
     }
-S3_URL = 's3.amazonaws.com'
+
+S3_URL = 'http://cdn.astrobin.com/'
 IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
+STATIC_ROOT = '/webserver/www/sitestatic'
+STATIC_URL = '/sitestatic/'
+MEDIA_ROOT = 'media'
+MEDIA_URL = '/media/'
+STATIC_ROOT = 'sitestatic'
+STATIC_URL = '/sitestatic/'
+
+if not DEBUG:
+    STATICFILES_STORAGE = 'astrobin.backends.s3boto.StaticStorage'
+    S3_URL = 'http://cdn.astrobin.com/'
+    MEDIA_URL = S3_URL
+    STATIC_URL = S3_URL + 'www/static/'
+
+# Compressor
+COMPRESS_ENABLED = DEBUG is False
+if COMPRESS_ENABLED:
+    COMPRESS_CSS_FILTERS = [
+        'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.cssmin.CSSMinFilter',
+    ]
+    COMPRESS_STORAGE = 'astrobin.backends.s3boto.StaticStorage'
+    COMPRESS_URL = STATIC_URL
+    COMPRESS_OFFLINE = False
+
+ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
 
 RESIZED_IMAGE_SIZE = 620 
 THUMBNAIL_SIZE = 184
@@ -130,11 +138,10 @@ SMALL_THUMBNAIL_SIZE = 90
 IMAGE_OF_THE_DAY_WIDTH = 780
 IMAGE_OF_THE_DAY_HEIGHT = 180
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-)
+TEMPLATE_LOADERS = [
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader"
+]
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
@@ -153,7 +160,6 @@ MIDDLEWARE_CLASSES = (
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
-#    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     #'johnny.middleware.LocalStoreClearMiddleware',
     #'johnny.middleware.QueryCacheMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
@@ -213,12 +219,12 @@ INSTALLED_APPS = (
     'threaded_messages',
     'bootstrap_toolkit',
     'contact_form',
-    'pipeline',
     'tastypie',
     'reviews',
     'actstream',
     'modeltranslation',
     'openid_provider',
+    'compressor',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -274,12 +280,9 @@ CELERY_ROUTES = {"astrobin.tasks.solve_image" : {"queue":"plate_solve", "routing
 
 CELERYD_NODES = "w1 w2 w3 w4"
 CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG"
-CELERYD_CHDIR = ASTROBIN_BASE_PATH
 CELERYD_LOG_FILE = "celeryd.log"
 CELERYD_PID_FILE = "celeryd.pid"
-CELERYD = ASTROBIN_BASE_PATH + "manage.py celeryd"
 
-CELERYBEAT = ASTROBIN_BASE_PATH + "manage.py celerybeat"
 CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
 
 ASTROBIN_ENABLE_SOLVING = True
@@ -310,75 +313,14 @@ HITCOUNT_HITS_PER_IP_LIMIT = 0
 AVATAR_GRAVATAR_BACKUP = False
 AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png?v=1'
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 STATICFILES_FINDERS = (
     'staticfiles.finders.FileSystemFinder',
     'staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 STATICFILES_DIRS = (local_path('static/'),)
 
-PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 
-PIPELINE_CSS = {
-    'screen': {
-        'source_filenames': (
-            'css/jquery-ui.css',
-            'css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css',
-            'css/ui.multiselect.css',
-            'css/validationEngine.jquery.css',
-            'css/facebox.css',
-            'css/token-input.css',
-            'css/jquery.multiselect.css',
-            'css/jquery.qtip.css',
-
-            'css/reset.css',
-            'css/bootstrap.css',
-            'css/bootstrap-responsive.css',
-            'css/astrobin.css',
-        ),
-        'output_filename': 'css/astrobin_pipeline_screen_v' + MEDIA_VERSION + '.css',
-        'extra_content':  {
-            'media': 'screen, projection',
-        },
-    },
-}
-
-PIPELINE_JS = {
-    'scripts': {
-        'source_filenames': (
-            'js/jquery-1.7.1.js',
-            'js/jquery.i18n.js',
-            'js/plugins/localization/jquery.localisation.js',
-            'js/jquery.uniform.js',
-            'js/jquery-ui-1.8.16.custom.min.js',
-            'js/jquery.capty.js',
-            'js/jquery-ui-timepicker-addon.js',
-            'js/jquery.validationEngine-en.js',
-            'js/jquery.validationEngine.js',
-            'js/jquery.autoSuggest.js',
-            'js/jquery.blockUI.js',
-            'js/jquery.tmpl.1.1.1.js',
-            'js/ui.multiselect.js',
-            'js/plugins/scrollTo/jquery.scrollTo.js',
-            'js/facebox.js',
-            'js/jquery.form.js',
-            'js/jquery.tokeninput.js',
-            'js/jquery.flot.js',
-            'js/jquery.flot.pie.min.js',
-            'js/jquery.cycle.all.js',
-            'js/jquery.easing.1.3.js',
-            'js/jquery.multiselect.js',
-            'js/jquery.qtip.js',
-            'js/jquery.raty.js',
-            'js/respond.src.js',
-            'js/bootstrap.js',
-            'js/astrobin.js',
-        ),
-        'output_filename': 'js/astrobin_pipeline_v' + MEDIA_VERSION + '.js',
-    },
-}
 
 ACTSTREAM_ACTION_MODELS = (
     'auth.user',
