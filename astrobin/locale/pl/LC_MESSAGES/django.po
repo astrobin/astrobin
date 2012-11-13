@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-05 13:10+0000\n"
-"PO-Revision-Date: 2012-10-03 12:36+0100\n"
+"PO-Revision-Date: 2012-11-12 21:08+0100\n"
 "Last-Translator: milosz <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -1463,9 +1463,8 @@ msgid "Brazilian Portuguese"
 msgstr "Brazylijski Portugalski"
 
 #: models.py:66 models.py:81 settings.py:63
-#, fuzzy
 msgid "Greek"
-msgstr "Grecja"
+msgstr "Grecki"
 
 #: models.py:85
 msgid "Pulsars"
@@ -2456,12 +2455,14 @@ msgstr ""
 
 #: models.py:2024
 msgid "Tagline"
-msgstr ""
+msgstr "Slogan reklamowy"
 
 #: models.py:2025
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
+"Łatwe do zapamiętania zdanie, które podsumowuje ten produkt - dla celów "
+"marketingowych."
 
 #: models.py:2040
 msgid ""
@@ -2619,6 +2620,8 @@ msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
+"AstroBin jest w tej chwili w trybie odczytu z powodu prac utrzymaniowych. "
+"Spróbuj ponownie późnej!"
 
 #: views.py:971
 msgid ""
@@ -2742,6 +2745,8 @@ msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
+"W przetwarzaniu formularza wystąpiły błędy. Być może będziesz musiał "
+"przewinąć stronę w dół aby je zobaczyć."
 
 #: views.py:2841
 #, python-format
@@ -2883,7 +2888,7 @@ msgstr "Nie ma jeszcze żadnych aktualizacji."
 #: templates/affiliates.html:8 templates/affiliates.html.py:10
 #: templates/base.html:216
 msgid "Affiliates"
-msgstr ""
+msgstr "Firmy stowarzyszone"
 
 #: templates/affiliates.html:12
 msgid "The following companies support AstroBin."
@@ -2946,9 +2951,8 @@ msgid "Home"
 msgstr "Strona główna"
 
 #: templates/base.html:92
-#, fuzzy
 msgid "Community"
-msgstr "Komentarz"
+msgstr "Społeczność"
 
 #: templates/base.html:96 templates/base.html.py:650 templates/index.html:218
 msgid "Blog"
@@ -3019,9 +3023,8 @@ msgstr "FAQ"
 
 #: templates/base.html:201 templates/questions.html:4
 #: templates/questions.html.py:7
-#, fuzzy
 msgid "AstroBin Questions"
-msgstr "AstroBin jest społecznościowy!"
+msgstr "Pytania AstroBin"
 
 #: templates/base.html:225 templates/contact_form/contact.html:5
 #: templates/contact_form/contact.html:7
@@ -3352,7 +3355,7 @@ msgstr "Jak głosować na zdjęcia?"
 
 #: templates/faq.html:22 templates/faq.html.py:178
 msgid "The rating values seem odd. How are they calculated?"
-msgstr ""
+msgstr "Wartości ocen wydają się dziwne. Jak są obliczane?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3642,6 +3645,8 @@ msgid ""
 "This produces the \"AstroBin index\", which is a fairer way to compare "
 "images and users."
 msgstr ""
+"To tworzy \"indeks AstroBin\", który jest uczciwszym sposobem porównywania "
+"zdjęć przez użytkowników."
 
 #: templates/faq.html:189
 msgid ""
@@ -4326,19 +4331,20 @@ msgid ""
 msgstr ""
 
 #: templates/questions.html:22
-#, fuzzy
 msgid "What is AstroBin Questions?"
-msgstr "Czym jest AstroBin?"
+msgstr "Czym są \"Pytania AstroBin\"?"
 
 #: templates/questions.html:24
 msgid ""
 "It's a Questions &amp; Answers site focused on the quality of the content. "
 "The allowed subjects of discussion are Astrophotography and Astronomy."
 msgstr ""
+"To strona z Pytaniami i Odpowiedziami, w której nacisk jest położony na "
+"jakość zawartości. Dozwolonymi tematami są Astronomia i Astrofotografia."
 
 #: templates/questions.html:27
 msgid "What's wrong with forums?"
-msgstr ""
+msgstr "Co jest złego z forami?"
 
 #: templates/questions.html:29
 msgid ""
