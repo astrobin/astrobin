@@ -8,8 +8,6 @@ from astrobin.image_utils import make_image_of_the_day
 
 from datetime import date, datetime, timedelta
 
-from johnny.middleware import QueryCacheMiddleware
-
 class Command(BaseCommand):
     help = "Calculates and saves the image of the day."
 
@@ -50,7 +48,5 @@ class Command(BaseCommand):
             else:
                 yesterday = yesterday - timedelta(1)
 
-        qcm = QueryCacheMiddleware()
         make_image_of_the_day(coolest_image)
-        qcm.unpatch()
 
