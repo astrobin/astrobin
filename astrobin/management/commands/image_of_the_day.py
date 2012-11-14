@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Q
 
-from astrobin.models import Image, Favorite, Comment
+from astrobin.models import Image, Favorite, Comment, ImageOfTheDay
 from astrobin.image_utils import make_image_of_the_day
 
 from datetime import date, datetime, timedelta
@@ -31,14 +31,21 @@ class Command(BaseCommand):
                 coolest_image = yesterdays_images[0]
                 current_coolness = 0
                 for image in yesterdays_images:
+                    author = image.user
                     score = 0
                     for vote in image.votes.all():
                         score += vote.score 
 
                     times_favorited = Favorite.objects.filter(image = image).count()
-                    comments = Comment.objects.filter(image = image).count()
+                    comments = Comment.objects.filter(image = image).exclude(author = author).count()
 
                     coolness = score + (times_favorited * 3) + (comments * 5)
+                    try:
+                        iotd = ImageOfTheDay.objects.get(image = image)
+                    except ImageOfTheDay.DoesNotExist:
+                        iotd = None
+                    if iotd:
+                        coolness = -1
 
                     print "Examining: [%s] [%d/%d]" % (image.title.encode('utf-8'), coolness, current_coolness)
                     if coolness > current_coolness:
