@@ -1,6 +1,6 @@
 {% load tags %}
 {% load i18n %}
-{% load compressed %}
+{% load compress %}
 
 {% load hitcount_tags %}
 
@@ -20,7 +20,22 @@
 
         <!-- font -->
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
-        {% compressed_css 'screen' %}
+        {% compress css %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/ui.multiselect.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/validationEngine.jquery.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/facebox.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/token-input.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/jquery.multiselect.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/jquery.qtip.css"/>
+
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/reset.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/bootstrap-responsive.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/astrobin.css"/>
+        {% endcompress %}
+
 
         <script type="text/javascript">
           var _gaq = _gaq || [];
