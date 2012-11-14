@@ -108,10 +108,8 @@ S3_URL = 'http://cdn.astrobin.com/'
 IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
 STATIC_ROOT = '/webserver/www/sitestatic'
 STATIC_URL = '/sitestatic/'
-MEDIA_ROOT = 'media'
+MEDIA_ROOT = '/webserver/www/media'
 MEDIA_URL = '/media/'
-STATIC_ROOT = 'sitestatic'
-STATIC_URL = '/sitestatic/'
 
 if not DEBUG:
     STATICFILES_STORAGE = 'astrobin.backends.s3boto.StaticStorage'
@@ -130,7 +128,7 @@ if COMPRESS_ENABLED:
     COMPRESS_URL = STATIC_URL
     COMPRESS_OFFLINE = False
 
-ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 RESIZED_IMAGE_SIZE = 620 
 THUMBNAIL_SIZE = 184
