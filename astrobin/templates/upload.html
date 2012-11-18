@@ -64,6 +64,30 @@
 
         </div>
     {% endif %} <!-- upload_form -->
+
+    {# TODO: only show this to premium users #}
+    <div class="row">
+        <div class="span10 offset1">
+            <div id="rawdata-file-drop-area">
+                <div id="rawdata-placeholder">
+                    <h2>{% trans "Drop your raw data here" %}</h2>
+                    <small>{% trans "File types accepted: FIT and CR2" %}</small>
+                </div>
+                <table id="rawdata-filelist" class="table hidden">
+                    <tr>
+                        <th class="filename">{% trans "Filename" %}</th>
+                        <th class="size">{% trans "Size" %}</th>
+                        <th class="status">{% trans "Status" %}</th>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="rawdata-manual-upload">
+                <a id="rawdata-select" class="btn" href="#">{% trans "Select files" %}</a>
+                <a id="rawdata-upload" class="btn btn-primary disabled" href="#" disabled>{% trans "Start upload" %}</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_head %}
@@ -94,6 +118,47 @@
 
         $('.upload-forms .loading').hide();
         $('.upload-forms form').show();
+
+        var rawdata_uploader = new plupload.Uploader({
+            runtimes            : 'html5,flash,silverlight,browserplus',
+            browse_button       : 'rawdata-select',
+            drop_element        : 'rawdata-file-drop-area',
+            url                 : '',
+            flash_swf_url       : '{{STATIC_DIR}}js/plupload/js/plupload.flash.swf',
+            silverlight_xap_url : '{{STATIC_DIR}}js/plupload/js/plupload.silverlight.xap',
+            filters             : [
+                {title : "{% trans "FIT files" %}", extensions : "fit,fits"},
+                {title : "{% trans "CR2 files" %}", extensions : "cr2"}
+            ]
+        });
+ 
+        $('#rawdata-upload').click(function(e) {
+            rawdata_uploader.start();
+            e.preventDefault();
+        });
+
+        rawdata_uploader.bind('FilesAdded', function(up, files) {
+            $('#rawdata-placeholder').hide();
+            $('#rawdata-filelist').removeClass('hidden');
+            $('#rawdata-upload').removeClass('disabled').removeAttr('disabled');
+            $.each(files, function(i, file) {
+                var $row = $('<tr/>');
+                var $filename = $('<td class="filename"></td>');
+                var $size = $('<td class="size"></td>');
+                var $status = $('<td class="status"></td>');
+
+                $row.attr('id', file.id);
+                $row.append($filename).append($size).append($status);
+
+                $filename.text(file.name);
+                $size.text(plupload.formatSize(file.size));
+                $status.text("0%");
+
+                $('#rawdata-filelist').append($row);
+            });
+        });
+
+        rawdata_uploader.init(); 
     });
 </script>
 {% endblock %}
