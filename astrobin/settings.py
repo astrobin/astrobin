@@ -372,6 +372,7 @@ PIPELINE_JS = {
             'js/jquery.qtip.js',
             'js/jquery.raty.js',
             'js/respond.src.js',
+            'js/plupload/plupload.full.js',
             'js/bootstrap.js',
             'js/astrobin.js',
         ),
