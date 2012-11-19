@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-13 07:59-0600\n"
-"PO-Revision-Date: 2012-10-10 10:08+0100\n"
+"PO-Revision-Date: 2012-11-16 15:34+0100\n"
 "Last-Translator: Michlll <astrobin.com@darkchamber.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -1048,7 +1048,7 @@ msgstr "Standorte"
 
 #: forms.py:89
 msgid "This field is required."
-msgstr ""
+msgstr "Pflichtfeld"
 
 #: forms.py:97 views.py:2288
 msgid ""
@@ -2894,7 +2894,7 @@ msgstr ""
 
 #: templates/503.html:5
 msgid "AstroBin is temporarily unavailable"
-msgstr ""
+msgstr "AstroBin ist im vorübergehend nicht erreichbar"
 
 #: templates/503.html:7
 msgid ""
@@ -2988,9 +2988,8 @@ msgid "Home"
 msgstr "Home"
 
 #: templates/base.html:91 templates/maintenance_base.html:87
-#, fuzzy
 msgid "Community"
-msgstr "Kommentar"
+msgstr "Community"
 
 #: templates/base.html:95 templates/base.html.py:649 templates/index.html:218
 #: templates/maintenance_base.html:91 templates/maintenance_base.html:557
@@ -3072,9 +3071,8 @@ msgstr "FAQ"
 
 #: templates/base.html:200 templates/maintenance_base.html:196
 #: templates/questions.html:4 templates/questions.html.py:7
-#, fuzzy
 msgid "AstroBin Questions"
-msgstr "AstroBin Index"
+msgstr "AstroBin Questions"
 
 #: templates/base.html:224 templates/maintenance_base.html:220
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:7
@@ -4437,9 +4435,8 @@ msgid ""
 msgstr ""
 
 #: templates/questions.html:22
-#, fuzzy
 msgid "What is AstroBin Questions?"
-msgstr "Was ist AstroBin?"
+msgstr "Was ist AstroBin Questions?"
 
 #: templates/questions.html:24
 msgid ""
@@ -4526,13 +4523,12 @@ msgstr ""
 
 # FAQ versteht zwar jeder und steht auch im Duden, ich finde die ausgeschriebene deutsche Übersetzung aber schöner
 #: templates/questions.html:73
-#, fuzzy
 msgid "Frequently Asked Questions about AstroBin Questions"
-msgstr "Häufig gestellte Fragen"
+msgstr "Häufig gestellte Fragen über AstroBin Questions"
 
 #: templates/questions.html:78
 msgid "AstroBin Questions' help page"
-msgstr ""
+msgstr "AstroBin Questions Hilfe"
 
 #: templates/questions.html:83
 msgid "An extension of this page, as a question on AstroBin Questions"
@@ -5342,14 +5338,12 @@ msgstr ""
 
 # FAQ versteht zwar jeder und steht auch im Duden, ich finde die ausgeschriebene deutsche Übersetzung aber schöner
 #: templates/image/detail.html:635
-#, fuzzy
 msgid "Learn more about AstroBin Questions."
-msgstr "Häufig gestellte Fragen"
+msgstr "Erfahre mehr über AstroBin Questions"
 
 #: templates/image/detail.html:638
-#, fuzzy
 msgid "Request critique"
-msgstr "Anfrage von"
+msgstr "Kritik anfordern"
 
 #: templates/image/detail.html:645
 #, fuzzy
