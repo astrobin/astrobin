@@ -353,6 +353,14 @@
                                             </li>
                                         {% endif %}
 
+                                         <!-- TODO: only paying customers -->
+                                        <li>
+                                            <a href="{% url rawdata.library user %}">
+                                                <i class="icon-book"></i>
+                                                {% trans "Raw data library" %}
+                                            </a>
+                                        </li>
+                                       
                                         <li>
                                             <a href="{% url user_page request.user %}">
                                                 <i class="icon-picture"></i>
@@ -392,60 +400,10 @@
                                             </a>
                                         </li>
 
-                                        <li class="nav-header">{% trans "My settings" %}</li>
                                         <li>
                                             <a href="{% url profile_edit_basic %}">
                                                 <i class="icon-edit"></i>
-                                                {% trans "Basic information" %}
-                                            </a>
-                                        </li>
-
-                                        {% if is_producer or is_retailer %}
-                                        <li>
-                                            <a href="{% url profile_edit_commercial %}">
-                                                <i class="icon-briefcase"></i>
-                                                {% trans "Commercial information" %}
-                                            </a>
-                                        </li>
-                                        {% endif %}
-
-                                        {% if is_retailer %}
-                                        <li>
-                                            <a href="{% url profile_edit_retailer %}">
-                                                <i class="icon-truck"></i>
-                                                {% trans "Retailer information" %}
-                                            </a>
-                                        </li>
-                                        {% endif %}
-
-                                        <li>
-                                            <a href="{% url profile_edit_gear %}">
-                                                <i class="icon-cog"></i>
-                                                {% trans "Gear" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url profile_edit_locations %}">
-                                                <i class="icon-globe"></i>
-                                                {% trans "Locations" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url profile_edit_license %}">
-                                                <i class="icon-legal"></i>
-                                                {% trans "Default license" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url profile_edit_preferences %}">
-                                                <i class="icon-wrench"></i>
-                                                {% trans "Preferences" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url avatar_change %}">
-                                                <i class="icon-user"></i>
-                                                {% trans "Avatar" %}
+                                                {% trans "My settings" %}
                                             </a>
                                         </li>
                                         <li class="divider"></li>
