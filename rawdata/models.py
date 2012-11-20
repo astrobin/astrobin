@@ -30,6 +30,11 @@ class RawImage(models.Model):
         editable = False,
     )
 
+    size = models.IntegerField(
+        default = 0,
+        editable = False,
+    )
+
     uploaded = models.DateTimeField(
         auto_now_add = True,
         editable = False,
