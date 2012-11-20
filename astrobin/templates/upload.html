@@ -228,6 +228,7 @@
                 this.ui.$warning.addClass('hidden');
                 this.ui.$progress.removeClass('hidden');
                 this.ui.$eta.removeClass('hidden');
+                this.ui.$eta.html("{% trans "Upload started, please wait..." %}");
                 this.rawdata_uploader.start();
                 e.preventDefault();
             }, this));
