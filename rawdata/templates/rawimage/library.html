@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}AstroBin - {% blocktrans %}Your raw data library{% endblocktrans %}{% endblock %}
+
+{% block content %}
+    {% comment %}
+        The following template is assumed to exist in AstroBin.
+    {% endcomment %}
+    {% include 'user/profile-subnav.html' %}
+
+    <div class="page-header">
+        <h1>{% blocktrans %}Your raw data library{% endblocktrans %}
+            <small>
+                {% blocktrans with used_bytes|filesizeformat as x %}You have used {{x}} of your 100GB.{% endblocktrans %}
+                ({{used_percent}}%)
+            </small>
+        </h1>
+    </div>
+    {% if used_percent > 0 %}
+        <div class="progress {{progress_class}}">
+            <div class="bar" style="width:{{used_percent}}%"></div>
+        </div>
+    {% endif %}
+    
+{% endblock %}

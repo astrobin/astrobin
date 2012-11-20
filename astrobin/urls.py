@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib import admin
@@ -27,6 +28,8 @@ from astrobin import lookups
 from astrobin.models import Image
 from astrobin.search import SearchView
 from astrobin.forms import AdvancedSearchForm
+
+from rawdata import views as rawdata_views
 
 from tastypie.api import Api
 from astrobin.api import ImageResource, ImageRevisionResource,\
@@ -104,6 +107,7 @@ urlpatterns = patterns('',
 
     url(r'^me/$', views.me, name='me'),
     url(r'^users/(?P<username>[\w.@+-]+)/$', views.user_page, name='user_page'),
+    url(r'^users/(?P<username>[\w.@+-]+)/rawdata$', login_required(rawdata_views.RawImageLibrary.as_view()), name='rawdata.library'),
 
     url(r'^users/(?P<username>[\w.@+-]+)/commercial/products/$', views.user_page_commercial_products, name='user_page_commercial_products'),
 
