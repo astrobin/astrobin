@@ -2559,9 +2559,6 @@ li.revisions {
   padding-top: 30px;
   border-bottom: none;
 }
-#rawdata-manual-upload {
-  text-align: center;
-}
 #rawdata-filelist {
   color: #e5e5e5;
 }
@@ -2570,4 +2567,8 @@ li.revisions {
 }
 #rawdata-filelist .filename {
   width: 80%;
+}
+#rawdata-eta {
+  color: #888;
+  font-size: smaller;
 }
