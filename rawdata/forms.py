@@ -13,7 +13,7 @@ class RawImageUploadForm(ModelForm):
         file = self.cleaned_data['file']
         if file:
             name, ext = os.path.splitext(file.name)
-            supported_types = ('fit', 'fits', 'cr2')
+            supported_types = ('.fit', '.fits', '.cr2')
             if ext.lower() not in supported_types:
                 raise ValidationError(_('File type is not supported'))
 
