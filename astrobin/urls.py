@@ -39,6 +39,8 @@ v1_api.register(CommentResource())
 v1_api.register(ImageOfTheDayResource())
 
 urlpatterns = patterns('',
+    url(r'^rawdata/', include('rawdata.urls')),
+
     url(r'^$', views.index, name='index'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
     url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_full, name='image_full'),

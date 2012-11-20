@@ -188,7 +188,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.markup',
     'staticfiles',
+
     'astrobin',
+    'rawdata',
+
     'django.contrib.admin',
     'registration',
     'djangoratings',
