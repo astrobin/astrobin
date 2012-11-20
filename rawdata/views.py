@@ -5,9 +5,12 @@ from django.views.generic import *
 
 # This app
 from .models import RawImage
+from .forms import RawImageUploadForm
 
 class RawImageCreateView(CreateView):
     model = RawImage
+    form_class = RawImageUploadForm
+    template_name = 'rawimage/form.html'
     # success_url = lazy(reverse, str)('/') # TODO: url to user's raw data
     success_url = '/'
 
