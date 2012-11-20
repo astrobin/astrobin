@@ -18,6 +18,7 @@ class RawImageCreateView(CreateView):
         if form.is_valid():
             raw_image = form.save(commit = False)
             raw_image.user = self.request.user
+            raw_image.size = form.cleaned_data['file']._size
             raw_image.save()
 
         return super(RawImageCreateView, self).form_valid(form)
