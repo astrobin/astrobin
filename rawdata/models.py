@@ -34,3 +34,8 @@ class RawImage(models.Model):
         auto_now_add = True,
         editable = False,
     )
+
+    indexed = models.BooleanField(
+        default = False,
+        editable = False,
+    )
