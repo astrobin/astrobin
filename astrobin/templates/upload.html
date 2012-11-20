@@ -303,10 +303,9 @@
             this.rawdata_uploader.bind('UploadComplete', $.proxy(function(up, files) {
                 this.ui.$progress.find('.bar').width('100%');
                 this.enable(this.ui.$clear_btn);
-                // TODO: Add URL
                 this.ui.$eta.html(
                     "<strong>{% trans "Upload complete!" %}</strong> " +
-                    "<a href=\"#\">{% trans "Go to your Raw Data Library." %}</a>");
+                    "<a href=\"{% url 'rawdata.library' user %}\">{% trans "Go to your Raw Data Library." %}</a>");
             }, this));
 
             this.rawdata_uploader.init(); 
