@@ -12,7 +12,7 @@
     <div class="page-header">
         <h1>{% blocktrans %}Your raw data library{% endblocktrans %}
             <small>
-                {% blocktrans with used_bytes|filesizeformat as x %}You have used {{x}} of your 100GB.{% endblocktrans %}
+                {% blocktrans with used_bytes|filesizeformat as used and byte_limit|filesizeformat as limit %}You have used {{used}} of your {{limit}} .{% endblocktrans %}
                 ({{used_percent}}%)
             </small>
         </h1>
@@ -22,5 +22,11 @@
             <div class="bar" style="width:{{used_percent}}%"></div>
         </div>
     {% endif %}
-    
+
+    {% if over_limit %}
+        <div class="alert alert-error">
+            <h4 class="alert-heading"><i class="icon-fire"></i> {% trans "Error!" %}</h3>
+            {% trans "You have no more space left on your Raw Data account. Please delete some files to make room, or upgrade your account." %}
+        </div>
+    {% endif %} 
 {% endblock %}

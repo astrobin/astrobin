@@ -892,9 +892,13 @@ def image_get_rating(request, image_id):
 
 @login_required
 def image_upload(request):
+    from rawdata.utils import user_is_over_limit
+    from rawdata.groups import is_premium
     """Create new image"""
     response_dict = {}
     response_dict['upload_form'] = ImageUploadForm()
+    response_dict['rawdata_over_limit'] = user_is_over_limit(request.user)
+    response_dict['rawdata_is_premium'] = is_premium(request.user)
 
     return render_to_response(
         "upload.html",
@@ -4662,4 +4666,5 @@ def reviews(request):
         paginate_by = 100,
         extra_context = {
         })
+
 
