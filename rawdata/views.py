@@ -42,16 +42,16 @@ class RawImageLibrary(TemplateView):
     def get_context_data(self, **kwargs):
         total_files = RawImage.objects.filter(user = self.request.user)
 
-        data = {}
-        data['byte_limit'] = byte_limit(self.request.user)
-        data['used_bytes'] = user_used_bytes(self.request.user)
-        data['used_percent'] = user_used_percent(self.request.user)
-        data['over_limit'] = user_is_over_limit(self.request.user)
-        data['progress_class'] = user_progress_class(self.request.user)
-        data['total_files'] = total_files.count()
-        data['unindexed_count'] = total_files.filter(indexed = False).count()
+        context = super(RawImageLibrary, self).get_context_data(**kwargs)
+        context['byte_limit'] = byte_limit(self.request.user)
+        context['used_bytes'] = user_used_bytes(self.request.user)
+        context['used_percent'] = user_used_percent(self.request.user)
+        context['over_limit'] = user_is_over_limit(self.request.user)
+        context['progress_class'] = user_progress_class(self.request.user)
+        context['total_files'] = total_files.count()
+        context['unindexed_count'] = total_files.filter(indexed = False).count()
 
-        return data
+        return context
 
 
 class Help1(TemplateView):
