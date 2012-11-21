@@ -12,7 +12,7 @@
     <div class="page-header">
         <h1>{% blocktrans %}Your raw data library{% endblocktrans %}
             <small>
-                {% blocktrans with used_bytes|filesizeformat as used and byte_limit|filesizeformat as limit %}You have used {{used}} of your {{limit}} .{% endblocktrans %}
+                {% blocktrans with used_bytes|filesizeformat as used and byte_limit|filesizeformat as limit %}You have used {{used}} of your {{limit}}.{% endblocktrans %}
                 ({{used_percent}}%)
             </small>
         </h1>
@@ -29,4 +29,13 @@
             {% trans "You have no more space left on your Raw Data account. Please delete some files to make room, or upgrade your account." %}
         </div>
     {% endif %} 
+
+    {% if unindexed_count %}
+        <div class="alert alert-warning">
+            <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h3>
+            {% blocktrans with unindexed_count as number and total_files as total %}AstroBin is still working to index {{number}} of your {{total}} raw files.{% endblocktrans %}
+        </div>
+    {% endif %} 
+
+
 {% endblock %}
