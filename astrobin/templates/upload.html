@@ -6,7 +6,7 @@
 {% block title %}AstroBin - {% trans "Upload" %}{% endblock %}
 {% block content %}
     {% if upload_form %} 
-        <div class="row">
+        <div class="row section">
             <div class="span10 offset1">
                 <div class="upload-forms">
                     <div class="upload-form wip-form-box">
@@ -66,57 +66,69 @@
         </div>
     {% endif %} <!-- upload_form -->
 
-    {# TODO: only show this to premium users #}
-    <div class="row" id="rawdata-container">
-        <div class="span10 offset1">
-            <div id="rawdata-file-drop-area">
-                <div id="rawdata-placeholder">
-<!--[if lte IE 10]>
-                    <h2>{% trans "Use the button below to choose files" %}</h2>
-<![endif]-->
-
-<!--[if !IE]><!-->
-                    <h2>{% trans "Drop your raw data here" %}</h2>
-<!--<![endif]-->
-                    <small>{% trans "File types accepted: FIT and CR2" %}</small>
+    {% if rawdata_is_premium %}
+        {% if rawdata_over_limit %}
+            <div class="row">
+                <div class="span10 offset1">
+                    <div class="alert alert-error">
+                        <h4 class="alert-heading"><i class="icon-fire"></i> {% trans "Error!" %}</h3>
+                        {% trans "You have no more space left on your Raw Data account. Please delete some files to make room, or upgrade your account." %}
+                    </div>
                 </div>
-                <table id="rawdata-filelist" class="table hidden">
-                    <tr class="header">
-                        <th class="filename">{% trans "Filename" %}</th>
-                        <th class="size">{% trans "Size" %}</th>
-                        <th class="status">{% trans "Status" %}</th>
-                    </tr>
-                </table>
             </div>
+        {% else %}
+            <div class="row" id="rawdata-container">
+                <div class="span10 offset1">
+                    <div id="rawdata-file-drop-area">
+                        <div id="rawdata-placeholder">
+        <!--[if lte IE 10]>
+                            <h2>{% trans "Use the button below to choose files" %}</h2>
+        <![endif]-->
 
-            <div id="progress" class="progress progress-info progress-striped active hidden">
-                <div class="bar" style="width: 0%"></div>
-            </div>
+        <!--[if !IE]><!-->
+                            <h2>{% trans "Drop your raw data here" %}</h2>
+        <!--<![endif]-->
+                            <small>{% trans "File types accepted: FIT and CR2" %}</small>
+                        </div>
+                        <table id="rawdata-filelist" class="table hidden">
+                            <tr class="header">
+                                <th class="filename">{% trans "Filename" %}</th>
+                                <th class="size">{% trans "Size" %}</th>
+                                <th class="status">{% trans "Status" %}</th>
+                            </tr>
+                        </table>
+                    </div>
 
-            <div id="warning" class="alert alert-warning hidden">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <span class="content"></span> 
-            </div>
+                    <div id="progress" class="progress progress-info progress-striped active hidden">
+                        <div class="bar" style="width: 0%"></div>
+                    </div>
 
-            <div class="pull-left">
-                <button id="rawdata-select" class="btn">
-                    <i class="icon-folder-open"></i>
-                    {% trans "Choose files" %}
-                </button>
-                <button id="rawdata-clear" class="btn btn-danger">
-                    <i class="icon-trash"></i>
-                    {% trans "Reset" %}
-                </button>
+                    <div id="warning" class="alert alert-warning hidden">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <span class="content"></span> 
+                    </div>
+
+                    <div class="pull-left">
+                        <button id="rawdata-select" class="btn">
+                            <i class="icon-folder-open"></i>
+                            {% trans "Choose files" %}
+                        </button>
+                        <button id="rawdata-clear" class="btn btn-danger">
+                            <i class="icon-trash"></i>
+                            {% trans "Reset" %}
+                        </button>
+                    </div>
+                    <div class="pull-right">
+                        <span id="rawdata-eta" class="hidden"></span>
+                        <button id="rawdata-upload" class="btn btn-primary disabled" disabled="disabled">
+                            <i class="icon-upload"></i>
+                            {% trans "Start upload" %}
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="pull-right">
-                <span id="rawdata-eta" class="hidden"></span>
-                <button id="rawdata-upload" class="btn btn-primary disabled" disabled="disabled">
-                    <i class="icon-upload"></i>
-                    {% trans "Start upload" %}
-                </button>
-            </div>
-        </div>
-    </div>
+        {% endif %}
+    {% endif %}
 {% endblock %}
 
 {% block extra_head %}
@@ -148,6 +160,7 @@
         $('.upload-forms .loading').hide();
         $('.upload-forms form').show();
 
+        {% if is_premium %}
         var RawData = function() {
             this.ui = {
                 $container   : $('#rawdata-container'),
@@ -312,6 +325,7 @@
         };
 
         RawData();
+        {% endif %}
     });
 </script>
 {% endblock %}

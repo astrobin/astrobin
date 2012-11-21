@@ -1,11 +1,15 @@
 # Django
+from django.contrib.auth.decorators import user_passes_test
 from django.core.urlresolvers import reverse
 from django.utils.functional import lazy 
 from django.views.generic import *
+from django.utils.decorators import method_decorator
 
 # This app
 from .models import RawImage
 from .forms import RawImageUploadForm
+from .groups import is_premium, byte_limit
+from .utils import *
 
 class RawImageCreateView(CreateView):
     model = RawImage
@@ -13,6 +17,10 @@ class RawImageCreateView(CreateView):
     template_name = 'rawimage/form.html'
     # success_url = lazy(reverse, str)('/') # TODO: url to user's raw data
     success_url = '/'
+
+    @method_decorator(user_passes_test(lambda u: is_premium(u)))
+    def dispatch(self, *args, **kwargs):
+        return super(RawImageCreateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         if form.is_valid():
@@ -27,24 +35,16 @@ class RawImageCreateView(CreateView):
 class RawImageLibrary(TemplateView):
     template_name = 'rawimage/library.html'    
 
-    def get_used_bytes(self):
-        sizes = RawImage.objects\
-            .filter(user = self.request.user)\
-            .values_list('size', flat = True)
-        return sum(sizes)
-
-    def get_used_percent(self, b): 
-        return b * 100 / (1024*1024*1024*100)
-
-    def get_progress_class(self, p):
-        if p < 90: return 'progress-success'
-        if p > 97: return 'progress-error'
-        return 'progress-danger'
+    @method_decorator(user_passes_test(lambda u: is_premium(u)))
+    def dispatch(self, *args, **kwargs):
+        return super(RawImageLibrary, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         data = {}
-        data['used_bytes'] = self.get_used_bytes()
-        data['used_percent'] = self.get_used_percent(data['used_bytes'])
-        data['progress_class'] = self.get_progress_class(data['used_percent'])
+        data['byte_limit'] = byte_limit(self.request.user)
+        data['used_bytes'] = user_used_bytes(self.request.user)
+        data['used_percent'] = user_used_percent(self.request.user)
+        data['over_limit'] = user_is_over_limit(self.request.user)
+        data['progress_class'] = user_progress_class(self.request.user)
 
         return data
