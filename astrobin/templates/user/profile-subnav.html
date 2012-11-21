@@ -27,13 +27,14 @@
                         {% trans "Gallery" %}
                     </a>
                 </li>
-                <!-- TODO: only paying customers -->
+                {% if is_premium %}
                 <li>
                     <a href="{% url 'rawdata.library' user %}">
                         <i class="icon-book"></i>
                         {% trans "Raw data library" %}
                     </a>
                 </li>
+                {% endif %}
                 <li>
                     <a href="{% url 'user_page_favorites' user %}">
                         <i class="icon-heart"></i>

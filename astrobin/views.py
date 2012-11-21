@@ -897,8 +897,9 @@ def image_upload(request):
     """Create new image"""
     response_dict = {}
     response_dict['upload_form'] = ImageUploadForm()
-    response_dict['rawdata_over_limit'] = user_is_over_limit(request.user)
     response_dict['rawdata_is_premium'] = is_premium(request.user)
+    if response_dict['rawdata_is_premium']: 
+        response_dict['rawdata_over_limit'] = user_is_over_limit(request.user)
 
     return render_to_response(
         "upload.html",
