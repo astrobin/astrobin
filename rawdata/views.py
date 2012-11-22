@@ -8,7 +8,6 @@ from django.utils.decorators import method_decorator
 # This app
 from .models import RawImage
 from .forms import RawImageUploadForm
-from .groups import is_premium, byte_limit
 from .utils import *
 
 class RawImageCreateView(CreateView):
@@ -18,7 +17,7 @@ class RawImageCreateView(CreateView):
     # success_url = lazy(reverse, str)('/') # TODO: url to user's raw data
     success_url = '/'
 
-    @method_decorator(user_passes_test(lambda u: is_premium(u)))
+    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
     def dispatch(self, *args, **kwargs):
         return super(RawImageCreateView, self).dispatch(*args, **kwargs)
 
@@ -35,7 +34,7 @@ class RawImageCreateView(CreateView):
 class RawImageLibrary(TemplateView):
     template_name = 'rawimage/library.html'    
 
-    @method_decorator(user_passes_test(lambda u: is_premium(u)))
+    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
     def dispatch(self, *args, **kwargs):
         return super(RawImageLibrary, self).dispatch(*args, **kwargs)
 

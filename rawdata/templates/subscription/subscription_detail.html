@@ -23,17 +23,23 @@
                         {% trans "You have cancelled subscription to this plan." %}
                     </div>
 
-                    <p>{% trans "You may still resubscribe if you wish!" %}</p>
+                    <p>{% trans "You may still subscribe again, if you wish!" %}</p>
 
                     {{form.sandbox}}
+
+                    {% url subscription_list as plans_url %}
+                    {% blocktrans %}Return to the <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}
                 {% else %}
-                    <p>
+                    <div class="alert alert-info">
                         {% trans "You are subscribed to this plan." %}
                         {% blocktrans %}You may <a href="{{cancel_url}}">cancel via PayPal</a> if you wish.{% endblocktrans %}
-                    </p>
+                    </div>
+
+                    {% url subscription_list as plans_url %}
+                    {% blocktrans %}Return to the <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}
                 {% endif %}
             {% else %}
-                <p>
+                <div class="alert alert-warning">
                     {% trans "You did not cancel your old plan." %}
                     {% blocktrans %}You may <a href="{{cancel_url}}">cancel via PayPal</a> if you wish.{% endblocktrans %}
                 </p>
@@ -51,7 +57,12 @@
                 <div class="well">
                     {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
                 </div>
+
                 {{form.sandbox}}
+
+                {% url subscription_list as plans_url %}
+                {% blocktrans %}Return to the <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}
+
             {% endif %}
         {% endif %}
         <div class="thankyou">

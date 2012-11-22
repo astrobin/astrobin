@@ -892,14 +892,32 @@ def image_get_rating(request, image_id):
 
 @login_required
 def image_upload(request):
-    from rawdata.utils import user_is_over_limit
-    from rawdata.groups import is_premium
-    """Create new image"""
-    response_dict = {}
-    response_dict['upload_form'] = ImageUploadForm()
-    response_dict['rawdata_is_premium'] = is_premium(request.user)
-    if response_dict['rawdata_is_premium']: 
-        response_dict['rawdata_over_limit'] = user_is_over_limit(request.user)
+    from rawdata.utils import (
+        user_has_subscription,
+        user_has_active_subscription,
+        user_has_inactive_subscription,
+        user_is_over_limit,
+        byte_limit,
+        user_used_percent,
+        user_progress_class,
+    )
+
+    has_sub       = user_has_subscription(request.user)
+    has_act_sub   = has_sub and user_has_active_subscription(request.user)
+    has_inact_sub = has_sub and user_has_inactive_subscription(request.user)
+    is_over_limit = has_act_sub and user_is_over_limit(request.user)
+
+    response_dict = {
+        'upload_form': ImageUploadForm(),
+        'has_sub': has_sub,
+        'has_act_sub': has_act_sub,
+        'has_inact_sub': has_inact_sub,
+        'is_over_limit': is_over_limit,
+
+        'byte_limit': byte_limit(request.user),
+        'used_percent': user_used_percent(request.user),
+        'progress_class': user_progress_class(request.user),
+    }
 
     return render_to_response(
         "upload.html",

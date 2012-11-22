@@ -11,7 +11,10 @@
     </h2>
 
     <p>
+        {% if object.trial_period %}
         <em>{% blocktrans with object.trial_period as free_days %}Free for {{free_days}} days.{% endblocktrans %}</em>
+        {% endif %}
+
         <br/>
         <em>{% trans "You can cancel at any time." %}</em>
     </p>

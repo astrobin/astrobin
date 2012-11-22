@@ -403,17 +403,6 @@ PAYPAL_TEST = True
 PAYPAL_RECEIVER_EMAIL = 'test_1353509523_biz@gmail.com'
 SUBSCRIPTION_GRACE_PERIOD = 7
 SUBSCRIPTION_PAYPAL_SETTINGS = {
-    "cmd": "_xclick-subscriptions",
     "business": PAYPAL_RECEIVER_EMAIL,
-    "a3": "9.99",                      # monthly price 
-    "p3": 1,                           # duration of each unit (depends on unit)
-    "t3": "M",                         # duration unit ("M for Month")
-    "src": "1",                        # make payments recur
-    "sra": "1",                        # reattempt payment on payment error
-    "no_note": "1",                    # remove extra notes (optional)
-    "item_name": "Large",
-    #"notify_url": "http://www.example.com/your-ipn-location/",
-    #"return_url": "http://www.example.com/your-return-location/",
-    #"cancel_return": "http://www.example.com/your-cancel-location/",
 }
 
