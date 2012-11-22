@@ -2573,3 +2573,33 @@ li.revisions {
   color: #888;
   font-size: smaller;
 }
+.plan {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+.plan:first-child .plan-inner {
+  border-right: 1px solid #373737;
+}
+.plan:last-child .plan-inner {
+  border-left: 1px solid #373737;
+}
+.plan h1,
+.plan h2 {
+  border-bottom: none;
+}
+.plan h1 small,
+.plan h2 small {
+  font-size: 12px;
+  display: block;
+  margin-top: -16px;
+}
+.plan a.btn {
+  margin-top: 25px;
+}
+.thankyou {
+  font-size: 150%;
+  text-align: center;
+  margin: 30px;
+}

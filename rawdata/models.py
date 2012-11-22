@@ -44,3 +44,4 @@ class RawImage(models.Model):
         default = False,
         editable = False,
     )
+

@@ -308,5 +308,6 @@ urlpatterns = patterns('',
     url('^activities/$', views.activities, name = 'activities'),
 
     url(r'^openid/', include('openid_provider.urls')),
+    url(r'^subscriptions/', include('subscription.urls')),
 )
 
