@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "AstroBin Raw Data" %} - {% trans "Subscription plans" %}{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{% trans "AstroBin Raw Data" %} <small>{% trans "Subscription plans" %}</small></h1>
+    </div>
+
+    <p>
+        {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (<strong>FIT</strong> and <strong>CR2</strong>) on AstroBin. We will keep them neatly organized, and you will have a safe backup of all your work, including calibration files.{% endblocktrans %}
+    </p>
+    <p>
+        {% blocktrans %}Choose the plan that suits you best!{% endblocktrans %}
+    </p>
+
+    <div class="row">
+        {% for object in object_list %}
+            <div class="span4 plan">
+                {% include 'subscription/_plan.html' %}
+                <a class="btn btn-large btn-primary" href="{% url subscription_detail object.id %}">
+                    {% trans "Subscribe" %}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="thankyou">
+        {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
+    </div>
+{% endblock %}

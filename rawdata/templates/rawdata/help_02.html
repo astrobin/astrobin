@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "AstroBin Raw Data" %}{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{% trans "AstroBin Raw Data" %}
+            <small>{% trans "To safely store and organize your raw files." %}</small>
+        </h1>
+    </div>
+
+    <div class="row section">
+        <div class="span4 offset2">
+            <h3>{% trans "How does it work?" %}</h3>
+            <p>{% blocktrans %}You can have up to <strong>100GB</strong> to store your <strong>FIT</strong> and <strong>CR2</strong> files.{% endblocktrans %}</p>
+            
+            <p>{% blocktrans %}You can upload all of them in a matter of a few clicks, and AstroBin will start organizing your data in "virtual folders".{% endblocktrans %}</p>
+
+            <ul>
+                <li><strong>{% trans "By type" %}</strong> (BIAS, DARK, FLAT, LIGHT)</li>
+                <li><strong>{% trans "By acquisition date" %}</strong></li>
+                <li><strong>{% trans "By upload date" %}</strong></li>
+                <li><strong>{% trans "By subject" %}</strong> *</li>
+                <li><strong>{% trans "By filter" %}</strong> *</li>
+                <li><strong>{% trans "By acquisition camera" %}</strong> *</li>
+                <li><strong>{% trans "By temperature" %}</strong> *</li>
+            </ul>
+
+            <p>{% blocktrans %}Not only will your data be safely and securely preserved, but you will be able to download bundles of your files in a <strong>zip</strong> file.{% endblocktrans %}</p>
+
+            <p>{% blocktrans %}This way, it will be easy, later on, to download again your dark frames taken at -15&deg;C in October two years ago!{% endblocktrans %}</p>
+
+            <p><small>* {% trans "if the information is present in the file's headers" %}</small></p>
+        </div>
+
+        <div class="span4" style="padding-top: 80px; text-align: center;">
+            <img src="{{STATIC_URL}}rawdata/images/astrobin-rawdata-plan-medium.png" alt="{% trans "AstroBin Raw Data" %}" />
+            <a class="btn btn-primary btn-large" href="{% url subscription_list %}">{% trans "Sign up now!" %}</a>
+        </div>
+    </div>
+
+    <div class="pagination pagination-centered">
+        <ul>
+            <li>
+                <a href="{% url rawdata.help1 %}">{% trans "Previous page" %}</a>
+                <a href="{% url rawdata.help3 %}">{% trans "Next page" %}</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

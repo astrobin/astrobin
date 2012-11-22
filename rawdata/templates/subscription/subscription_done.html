@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "AstroBin Raw Data" %}{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{% trans "AstroBin Raw Data" %} <small>{% trans "Subscription confirmed" %}</small></h1>
+    </div>
+
+    <div class="alert alert-success">
+        {% blocktrans %}Your subscription to AstroBin Raw Data has been confirmed, and should be active within a few moments!{% endblocktrans %}
+    </div>
+
+    <p>
+        {% url image_upload as upload_url %}
+        {% blocktrans %}Head over to the <a href="{{upload_url}}">upload page</a> to get started. {% endblocktrans %}
+    </p>
+
+    <div class="thankyou">
+        {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<div class="plan-inner">
+    <img src="{{STATIC_URL}}rawdata/images/astrobin-rawdata-plan-{{object.name|lower}}.png"/>
+
+    <h1>{{object.name}} - {{object.description}}</h1>
+    <h2>$ {{object.price}} / {% trans "month" %}
+        <small>
+            {% blocktrans with object.price_per_day|floatformat:"2" as daily_price %}That's only $ {{daily_price}} per day!{% endblocktrans %}
+        </small>
+    </h2>
+
+    <p>
+        <em>{% blocktrans with object.trial_period as free_days %}Free for {{free_days}} days.{% endblocktrans %}</em>
+        <br/>
+        <em>{% trans "You can cancel at any time." %}</em>
+    </p>
+</div>
+
+
