@@ -6,8 +6,6 @@ from astrobin.models import Request
 from astrobin.models import UserProfile
 from astrobin.models import Gear
 
-from rawdata.groups import is_premium
-
 
 def privatebeta_enabled(request):
     return {'privatebeta_enabled': settings.PRIVATEBETA_ENABLE_BETA}
@@ -34,11 +32,13 @@ def user_language(request):
 
 
 def common_variables(request):
+    from rawdata.utils import user_has_subscription
+
     d = {
         'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
         'is_retailer': request.user.groups.filter(name='Retailers'),
-        'is_premium': is_premium(request.user),
+        'has_rawdata_subscription': user_has_subscription(request.user),
         'IMAGES_URL' : settings.IMAGES_URL,
     }
 

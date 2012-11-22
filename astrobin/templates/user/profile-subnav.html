@@ -27,7 +27,7 @@
                         {% trans "Gallery" %}
                     </a>
                 </li>
-                {% if is_premium %}
+                {% if has_rawdata_subscription %}
                 <li>
                     <a href="{% url 'rawdata.library' user %}">
                         <i class="icon-book"></i>

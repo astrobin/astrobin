@@ -1,4 +1,5 @@
-from .groups import is_premium, byte_limit
+from subscription.models import UserSubscription
+
 from .models import RawImage
 
 def user_used_bytes(user):
@@ -23,3 +24,46 @@ def user_progress_class(user):
 
 def user_is_over_limit(user):
     return user_used_percent(user) >= 100
+
+
+def user_has_subscription(user):
+    try:
+        us = UserSubscription.objects.get(user = user)
+    except UserSubscription.DoesNotExist:
+        return False
+
+    return True
+ 
+
+def user_has_active_subscription(user):
+    try:
+        us = UserSubscription.objects.get(user = user)
+    except UserSubscription.DoesNotExist:
+        return False
+
+    return us.active and not us.cancelled and not us.expired()
+
+def user_has_inactive_subscription(user):
+    try:
+        us = UserSubscription.objects.get(user = user)
+    except UserSubscription.DoesNotExist:
+        return False
+
+    return not us.active or us.cancelled or us.expired()
+
+
+def byte_limit(user):
+    try:
+        us = UserSubscription.objects.get(user = user)
+    except UserSubscription.DoesNotExist:
+        return 0
+
+    GB = 1024*1024*1024
+    if us.subscription.group.name == 'rawdata-25':
+        return 25*GB
+    if us.subscription.group.name == 'rawdata-50':
+        return 50*GB
+    if us.subscription.group.name == 'rawdata-100':
+        return 100*GB
+
+    return 0
