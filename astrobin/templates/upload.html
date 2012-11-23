@@ -156,6 +156,11 @@
                     </h4>
                     {% trans "Your Raw Data subscription is not active, or it has expired. If you have just subscribed, please wait for a few minutes. Thanks for your patience!" %}
                 </div>
+
+                <div style="text-align: center">
+                    {% url 'subscription_list' as plans_url %}
+                    {% blocktrans %}Go to the Raw Data <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}
+                </div>
             </div>
         </div>
     {% endif %}
