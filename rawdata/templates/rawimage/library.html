@@ -9,19 +9,32 @@
     {% endcomment %}
     {% include 'user/profile-subnav.html' %}
 
-    <div class="page-header">
-        <h1>{% blocktrans %}Your raw data library{% endblocktrans %}
-            <small>
-                {% blocktrans with used_bytes|filesizeformat as used and byte_limit|filesizeformat as limit %}You have used {{used}} of your {{limit}}.{% endblocktrans %}
-                ({{used_percent}}%)
-            </small>
-        </h1>
-    </div>
-    {% if used_percent > 0 %}
-        <div class="progress {{progress_class}}">
-            <div class="bar" style="width:{{used_percent}}%"></div>
+    <div class="row section">
+        <div class="span10">
+            <div class="page-header">
+                <h1>{% blocktrans %}Your raw data library{% endblocktrans %}
+                    <small>
+                        {% blocktrans with used_bytes|filesizeformat as used and byte_limit|filesizeformat as limit %}You have used {{used}} of your {{limit}}.{% endblocktrans %}
+                        ({{used_percent}}%)
+                    </small>
+                </h1>
+            </div>
+            {% if used_percent > 0 %}
+                <div class="progress {{progress_class}}">
+                    <div class="bar" style="width:{{used_percent}}%"></div>
+                </div>
+            {% endif %}
         </div>
-    {% endif %}
+
+        <div class="span2">
+            <a class="btn btn-large btn-primary btn-header" href="{% url subscription_list %}">
+                {% trans "Manage plans" %}
+            </a>
+            <a class="btn btn-large btn-primary btn-header" href="{% url image_upload %}">
+                {% trans "Upload" %}
+            </a>
+        </div>
+    </div>
 
     {% if over_limit %}
         <div class="alert alert-error">
