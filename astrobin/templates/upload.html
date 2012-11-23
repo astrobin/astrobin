@@ -197,6 +197,7 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src='{{STATIC_URL}}js/plupload/plupload.full.js'></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.upload-forms form').submit(function() {
