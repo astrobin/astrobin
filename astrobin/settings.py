@@ -267,7 +267,7 @@ BROKER_VHOST = 'astrobin'
 
 CELERY_RESULT_BACKEND = 'database'
 CELERY_RESULT_DBURI = os.environ['ASTROBIN_CELERY_RESULT_DBURI']
-CELERY_IMPORTS = ('astrobin.tasks', )
+CELERY_IMPORTS = ('astrobin.tasks', 'rawdata.tasks',)
 CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},
                  "plate_solve": {"exchange":"plate_solve", "binding_key":"plate_solve_key"}
                 }

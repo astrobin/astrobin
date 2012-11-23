@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.db import models
 
-
 def upload_path(instance, filename):
     instance.original_filename = filename
     ext = filename.split('.')[-1]
@@ -44,4 +43,23 @@ class RawImage(models.Model):
         default = False,
         editable = False,
     )
+
+    image_type = models.CharField(
+        max_length = 1,
+        default = 'U', # Unknown
+        editable = False,
+    )
+
+    class Meta:
+        app_label = 'rawdata'
+
+    def __unicode__(self):
+        return self.original_filename
+
+    def save(self, *args, **kwargs):
+        index = kwargs.pop('index', True)
+        super(RawImage, self).save(*args, **kwargs)
+        if index:
+            from .tasks import index_raw_image
+            index_raw_image.delay(self.id)
 
