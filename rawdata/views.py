@@ -38,6 +38,20 @@ class RawImageLibrary(TemplateView):
     def dispatch(self, *args, **kwargs):
         return super(RawImageLibrary, self).dispatch(*args, **kwargs)
 
+    def get_virtual_folders_by_type(self, user):
+        images = RawImage.objects.filter(user = user, indexed = True)
+        folders = {}
+        for image in images:
+            for t in RawImage.TYPE_CHOICES:
+                if image.image_type == t[0]:
+                    try:
+                        folder_dict = folders[t[0]]
+                        folder_dict['images'].append(image)
+                    except KeyError:
+                        folders[t[0]] = {'label': t[1], 'images': [image]}
+        
+        return folders
+
     def get_context_data(self, **kwargs):
         total_files = RawImage.objects.filter(user = self.request.user)
 
@@ -49,6 +63,13 @@ class RawImageLibrary(TemplateView):
         context['progress_class'] = user_progress_class(self.request.user)
         context['total_files'] = total_files.count()
         context['unindexed_count'] = total_files.filter(indexed = False).count()
+
+        folder_sort = self.request.GET.get('sort', 'type')
+
+        if folder_sort == 'type':
+            folders = self.get_virtual_folders_by_type(self.request.user)
+
+        context['folders'] = folders
 
         return context
 

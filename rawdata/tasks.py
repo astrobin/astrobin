@@ -6,7 +6,7 @@ from .models import RawImage
 def index_raw_image(id):
     def generate_dummy_data():
         from random import choice
-        image_type = choice(('U', 'O', 'D', 'F', 'L',))
+        image_type = choice(('0', '10', '20', '30', '40',))
 
         return {
             'image_type': image_type,

@@ -11,11 +11,17 @@ class Migration(SchemaMigration):
         # Adding field 'RawImage.size'
         db.add_column('rawdata_rawimage', 'size', self.gf('django.db.models.fields.IntegerField')(default=0), keep_default=False)
 
+        # Adding field 'RawImage.image_type'
+        db.add_column('rawdata_rawimage', 'image_type', self.gf('django.db.models.fields.IntegerField')(default=0, max_length=1), keep_default=False)
+
 
     def backwards(self, orm):
         
         # Deleting field 'RawImage.size'
         db.delete_column('rawdata_rawimage', 'size')
+
+        # Deleting field 'RawImage.image_type'
+        db.delete_column('rawdata_rawimage', 'image_type')
 
 
     models = {
@@ -73,6 +79,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'RawImage'},
             'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image_type': ('django.db.models.fields.IntegerField', [], {'default': '0', 'max_length': '1'}),
             'indexed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'original_filename': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'size': ('django.db.models.fields.IntegerField', [], {'default': '0'}),

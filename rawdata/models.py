@@ -6,6 +6,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 def upload_path(instance, filename):
     instance.original_filename = filename
@@ -15,6 +16,20 @@ def upload_path(instance, filename):
 
 
 class RawImage(models.Model):
+    TYPE_UNKNOWN = 0
+    TYPE_OFFSET  = 10
+    TYPE_DARK    = 20
+    TYPE_FLAT    = 30
+    TYPE_LIGHT   = 40
+
+    TYPE_CHOICES = (
+        (TYPE_UNKNOWN, _('Unknown')),
+        (TYPE_OFFSET,  _('Offset/Bias')),
+        (TYPE_DARK,    _('Dark')),
+        (TYPE_FLAT,    _('Flat')),
+        (TYPE_LIGHT,   _('Light')),
+    )
+
     user = models.ForeignKey(
         User,
         editable = False)
@@ -44,9 +59,10 @@ class RawImage(models.Model):
         editable = False,
     )
 
-    image_type = models.CharField(
+    image_type = models.IntegerField(
         max_length = 1,
-        default = 'U', # Unknown
+        default = 0, # Unknown
+        choices = TYPE_CHOICES,
         editable = False,
     )
 
