@@ -8,8 +8,8 @@
         <h1>{% trans "AstroBin Raw Data" %} <small>{% trans "Subscription change" %}</small></h1>
     </div>
 
-    <div class="alert alert-info">
-        {% blocktrans %}PayPal reports that you have tried to perform a change to your subscription. If there were any error messages, please <a href="/contact/"> let us now!</a>{% endblocktrans %}
+    <div class="alert alert-success">
+        {% blocktrans %}Your request for a change in your subscription has been processed successfully.{% endblocktrans %}
     </div>
 
     {% url subscription_list as plans_url %}
