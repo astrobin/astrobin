@@ -1,12 +1,14 @@
 {% load i18n %}
 
 <div class="plan-inner">
-    <img src="{{STATIC_URL}}rawdata/images/astrobin-rawdata-plan-{{object.name|lower}}.png"/>
+    <a href="{% url subscription_detail object.id %}">
+        <img src="{{STATIC_URL}}rawdata/images/astrobin-rawdata-plan-{{object.name|lower}}.png"/>
+    </a>
 
     <h1>{{object.name}} - {{object.description}}</h1>
-    <h2>$ {{object.price}} / {% trans "month" %}
+    <h2>$ {{object.price}} USD / {% trans "month" %}
         <small>
-            {% blocktrans with object.price_per_day|floatformat:"2" as daily_price %}That's only $ {{daily_price}} per day!{% endblocktrans %}
+            {% blocktrans with object.price_per_day|floatformat:"2" as daily_price %}That's only $ {{daily_price}} USD per day!{% endblocktrans %}
         </small>
     </h2>
 

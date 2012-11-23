@@ -11,7 +11,7 @@ def user_used_bytes(user):
 
 def user_used_percent(user):
     b = user_used_bytes(user)
-    limit = byte_limit(user)
+    limit = user_byte_limit(user)
     return b * 100 / limit
 
 
@@ -25,10 +25,16 @@ def user_progress_class(user):
 def user_is_over_limit(user):
     return user_used_percent(user) >= 100
 
+def user_get_subscription(user):
+    if not user.is_authenticated():
+        raise UserSubscription.DoesNotExist
+
+    return UserSubscription.objects.get(user = user)
+
 
 def user_has_subscription(user):
     try:
-        us = UserSubscription.objects.get(user = user)
+        user_get_subscription(user)
     except UserSubscription.DoesNotExist:
         return False
 
@@ -37,7 +43,7 @@ def user_has_subscription(user):
 
 def user_has_active_subscription(user):
     try:
-        us = UserSubscription.objects.get(user = user)
+        us = user_get_subscription(user)
     except UserSubscription.DoesNotExist:
         return False
 
@@ -45,25 +51,29 @@ def user_has_active_subscription(user):
 
 def user_has_inactive_subscription(user):
     try:
-        us = UserSubscription.objects.get(user = user)
+        us = user_get_subscription(user)
     except UserSubscription.DoesNotExist:
         return False
 
     return not us.active or us.cancelled or us.expired()
 
 
-def byte_limit(user):
-    try:
-        us = UserSubscription.objects.get(user = user)
-    except UserSubscription.DoesNotExist:
-        return 0
-
+def subscription_byte_limit(subscription):
     GB = 1024*1024*1024
-    if us.subscription.group.name == 'rawdata-25':
+    if subscription.group.name == 'rawdata-25':
         return 25*GB
-    if us.subscription.group.name == 'rawdata-50':
+    if subscription.group.name == 'rawdata-50':
         return 50*GB
-    if us.subscription.group.name == 'rawdata-100':
+    if subscription.group.name == 'rawdata-100':
         return 100*GB
 
     return 0
+   
+
+def user_byte_limit(user):
+    try:
+        us = user_get_subscription(user)
+    except UserSubscription.DoesNotExist:
+        return 0
+
+    return subscription_byte_limit(us.subscription)

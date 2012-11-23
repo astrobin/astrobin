@@ -2575,8 +2575,6 @@ li.revisions {
 }
 .plan {
   text-align: center;
-  margin-top: 20px;
-  padding-top: 10px;
   padding-bottom: 30px;
 }
 .plan:first-child .plan-inner {
@@ -2599,7 +2597,15 @@ li.revisions {
   margin-top: 25px;
 }
 .thankyou {
-  font-size: 150%;
+  font-size: 22px;
+  font-weight: bold;
   text-align: center;
   margin: 30px;
+}
+.thankyou small {
+  display: block;
+  font-size: 13px;
+  color: #eee;
+  padding-top: 10px;
+  font-weight: normal;
 }
