@@ -399,8 +399,8 @@ ACTSTREAM_ACTION_MODELS = (
     'astrobin.imagerevision',
 )
 
-PAYPAL_TEST = True
-PAYPAL_RECEIVER_EMAIL = 'test_1353509523_biz@gmail.com'
+PAYPAL_TEST = False
+PAYPAL_RECEIVER_EMAIL = 'astrobin@astrobin.com'
 SUBSCRIPTION_GRACE_PERIOD = 7
 SUBSCRIPTION_PAYPAL_SETTINGS = {
     "business": PAYPAL_RECEIVER_EMAIL,
