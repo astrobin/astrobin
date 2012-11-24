@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 
 # This app
 from .models import RawImage
+from .folders import *
 from .forms import RawImageUploadForm
 from .utils import *
 
@@ -38,17 +39,16 @@ class RawImageLibrary(TemplateView):
     def dispatch(self, *args, **kwargs):
         return super(RawImageLibrary, self).dispatch(*args, **kwargs)
 
-    def get_virtual_folders_by_type(self, user):
+    def get_folders_by_type(self, user):
         images = RawImage.objects.filter(user = user, indexed = True)
         folders = {}
-        for image in images:
-            for t in RawImage.TYPE_CHOICES:
-                if image.image_type == t[0]:
-                    try:
-                        folder_dict = folders[t[0]]
-                        folder_dict['images'].append(image)
-                    except KeyError:
-                        folders[t[0]] = {'label': t[1], 'images': [image]}
+        for t in RawImage.TYPE_CHOICES:
+            f = TypeFolder(type = t[0], label = t[1], source = images)
+            f.populate()
+            folders[f.get_type()] = {
+                'label': f.get_label(),
+                'images': f.get_images(),
+            }
         
         return folders
 
@@ -67,7 +67,7 @@ class RawImageLibrary(TemplateView):
         folder_sort = self.request.GET.get('sort', 'type')
 
         if folder_sort == 'type':
-            folders = self.get_virtual_folders_by_type(self.request.user)
+            folders = self.get_folders_by_type(self.request.user)
 
         context['folders'] = folders
 
