@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load rawdata_tags %}
 
 {% if images %}
     <table class="table rawdata-images">
@@ -13,7 +14,7 @@
         {% for image in images %}
             <tr class="rawimage">
                 <td>{{image.original_filename}}</td>
-                <td>{{image.image_type}}</td><!-- TODO: humanize this -->
+                <td>{{image.image_type|humanize_rawimage_type}}</td>
                 <td>
                     <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
                         {{image.uploaded|date}}

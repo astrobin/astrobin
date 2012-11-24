@@ -655,6 +655,7 @@
         <!--[if lte IE 8]><script type="text/javascript" src="{{STATIC_URL}}js/flashcanvas.js"></script><![endif]-->
 
         {% compressed_js 'scripts' %}
+        <script type="text/javascript" src="{{STATIC_URL}}js/locale/jquery.timeago.{{request.LANGUAGE_CODE}}.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Converter.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Sanitizer.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/ZeroClipboard.js"></script>
