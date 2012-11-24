@@ -26,7 +26,7 @@ class RawImageCreateView(CreateView):
             raw_image = form.save(commit = False)
             raw_image.user = self.request.user
             raw_image.size = form.cleaned_data['file']._size
-            raw_image.save(index = False) # We already started indexing 3 lines above
+            raw_image.save(index = True)
 
         return super(RawImageCreateView, self).form_valid(form)
 

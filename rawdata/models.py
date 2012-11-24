@@ -84,7 +84,7 @@ class RawImage(models.Model):
         return self.original_filename
 
     def save(self, *args, **kwargs):
-        index = kwargs.pop('index', True)
+        index = kwargs.pop('index', False)
         super(RawImage, self).save(*args, **kwargs)
         if index:
             from .tasks import index_raw_image
@@ -92,4 +92,4 @@ class RawImage(models.Model):
 
     def delete(self, *args, **kwargs):
         self.active = False
-        self.save(index = False)
+        self.save()
