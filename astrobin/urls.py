@@ -107,7 +107,6 @@ urlpatterns = patterns('',
 
     url(r'^me/$', views.me, name='me'),
     url(r'^users/(?P<username>[\w.@+-]+)/$', views.user_page, name='user_page'),
-    url(r'^users/(?P<username>[\w.@+-]+)/rawdata$', login_required(rawdata_views.RawImageLibrary.as_view()), name='rawdata.library'),
 
     url(r'^users/(?P<username>[\w.@+-]+)/commercial/products/$', views.user_page_commercial_products, name='user_page_commercial_products'),
 

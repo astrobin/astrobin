@@ -1,0 +1,53 @@
+{% load i18n %}
+
+<script type="text/javascript">
+    $(function() {
+        var $table = $('table.rawdata-images');
+        var $rows = $table.find('tr.rawimage');
+        var $header = $table.find('thead tr th:first');
+        var floating_header_selector = 'thead.tableFloatingHeader th:first';
+
+        function reset_header($h) {
+            $h.text("{% trans "Name" %}");
+        }
+
+        function reset_headers() {
+            reset_header($header);
+            reset_header($(floating_header_selector));
+        }
+
+        function selection_header($h, count) {
+            var $selected = $('<span/>').text('(' + count + ')');
+            var $reset = $('<a/>')
+                .attr('href', '#')
+                .text("{% trans "Reset selection" %}")
+                .click(function(e) {
+                    $table.find('tr.active').removeClass('active');
+                    reset_headers();
+                    e.preventDefault();
+                });
+
+            $h
+                .html($selected)
+                .append($reset);
+        }
+
+        function selection_headers(count) {
+            selection_header($header, count);
+            selection_header($(floating_header_selector), count);
+        }
+
+        $rows.click(function() {
+            $(this).toggleClass('active');
+
+            var count = $table.find('tr.rawimage.active').length;
+            if (count == 0) {
+                reset_headers();
+            } else {
+                selection_headers(count);
+            }
+        });
+
+        $table.stickyTableHeaders({fixedOffset: 44});
+    });
+</script>

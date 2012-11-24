@@ -64,12 +64,11 @@ class RawImageLibrary(TemplateView):
         context['total_files'] = total_files.count()
         context['unindexed_count'] = total_files.filter(indexed = False).count()
 
-        folder_sort = self.request.GET.get('sort', 'type')
-
-        if folder_sort == 'type':
-            folders = self.get_folders_by_type(self.request.user)
-
-        context['folders'] = folders
+        folders = self.request.GET.get('f', None)
+        if folders:
+            pass
+        else:
+            context['images'] = RawImage.objects.filter(user = self.request.user)
 
         return context
 

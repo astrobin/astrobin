@@ -1,8 +1,23 @@
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
 strong,
 .strong {
   color: #fcfcfc;
   font-weight: bold;
+}
+abbr[title] {
+  border-color: #555;
 }
 .box-shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -903,17 +918,30 @@ li.astrobin-thumbnail img {
 }
 .table th,
 .table td {
-  border-color: #414141;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  border-color: #363636;
 }
-.table tr:first-child th,
-.table tr:first-child td {
+.table thead tr th,
+.table thead tr td {
   border-top: none;
+  background-color: #272727;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.table thead tr th span,
+.table thead tr td span {
+  margin-right: 8px;
 }
 .table tbody tr:hover td,
 .table tbody tr:hover th {
-  background-color: transparent;
+  background: #343434;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #353535), color-stop(1, #333333));
+  background: -ms-linear-gradient(bottom, #353535, #333333);
+  background: -moz-linear-gradient(center bottom, #353535 0%, #333333 100%);
+}
+.table tbody tr.active td,
+.table tbody tr.active th.table tbody tr.active:hover td,
+.table tbody tr.active:hover th {
+  background: #404040 url(../images/background-tile.png);
 }
 h1,
 h2,
@@ -2612,4 +2640,12 @@ li.revisions {
 .btn-header {
   width: 110px;
   margin-top: 6px;
+}
+table.rawdata-images .download-link,
+table.rawdata-images .delete-link {
+  visibility: hidden;
+}
+table.rawdata-images tr:hover .download-link,
+table.rawdata-images tr:hover .delete-link {
+  visibility: visible;
 }

@@ -376,6 +376,8 @@ PIPELINE_JS = {
             'js/jquery.multiselect.js',
             'js/jquery.qtip.js',
             'js/jquery.raty.js',
+            'js/jquery.stickytableheaders.js',
+            'js/jquery.timeago.js',
             'js/respond.src.js',
             'js/bootstrap.js',
             'js/astrobin.js',
