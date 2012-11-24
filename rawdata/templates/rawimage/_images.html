@@ -1,0 +1,35 @@
+{% load i18n %}
+
+{% if images %}
+    <table class="table rawdata-images">
+        <thead>
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Type" %}</th>
+                <th>{% trans "Uploaded" %}</th>
+                <th></th> <!-- actions -->
+            </tr>
+        </thead>
+        {% for image in images %}
+            <tr class="rawimage">
+                <td>{{image.original_filename}}</td>
+                <td>{{image.image_type}}</td><!-- TODO: humanize this -->
+                <td>
+                    <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
+                        {{image.uploaded|date}}
+                    </abbr>
+                </td>
+                <td>
+                    <!-- TODO: link -->
+                    <a href="#" class="download-link" rel="tooltip" title="{% trans "Download" %}">
+                        <i class="icon-download-alt"></i>
+                    </a>
+                    <a href="#" class="delete-link" rel="tooltip" title="{% trans "Delete" %}">
+                        <i class="icon-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+

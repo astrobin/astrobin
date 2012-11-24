@@ -50,5 +50,13 @@
         </div>
     {% endif %} 
 
+    {% for type, data in folders.items %}
+        <p>{{data.label}}: {{data.images|length}} images.</p>
+    {% endfor %}
 
+    {% include 'rawimage/_images.html' %}
+{% endblock %}
+
+{% block extra_js %}
+    {% include 'rawimage/_images_js.html' %}
 {% endblock %}

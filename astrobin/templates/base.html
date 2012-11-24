@@ -727,6 +727,8 @@
                 $('input').filter('.timepickerclass').timepicker({});
                 $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
 
+                $('abbr.timeago').timeago();
+
                 $('input:checkbox, input:radio, input:file').uniform(
                     {fileDefaultText: '{% trans "No file selected" %}',
                      fileBtnText: '{% trans "Choose file" %}'

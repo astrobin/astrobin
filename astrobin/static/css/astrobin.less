@@ -1,3 +1,5 @@
+@import 'elements.less';
+
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
 @background-color: #333333;
 @link-color: #CC4B2E;
@@ -38,6 +40,11 @@ strong, .strong {
     color: @strong-text-color;
     font-weight: bold;
 }
+
+abbr[title] {
+    border-color: #555;
+}
+
 .rounded-corners (@radius: 6px) {
     -moz-border-radius: @radius;
     -webkit-border-radius: @radius;
@@ -1083,15 +1090,24 @@ li.astrobin-thumbnail {
     margin-bottom: 0;
 }
 .table th, .table td {
-    border-color: #414141;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    border-color: #363636;
 }
-.table tr:first-child th, .table tr:first-child td {
+.table thead tr th, .table thead tr td {
     border-top: none;
+    background-color: #272727;
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    span {
+        margin-right: @spacer-medium;
+    }
 }
 .table tbody tr:hover td, .table tbody tr:hover th {
-    background-color: transparent;
+    .gradient(#343434, #353535, #333);
+}
+.table tbody tr.active td, .table tbody tr.active th
+.table tbody tr.active:hover td, .table tbody tr.active:hover th {
+    background: #404040 url(../images/background-tile.png);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -2809,4 +2825,15 @@ li.revisions {
 .btn-header {
     width: 110px;
     margin-top: 6px;
+}
+
+table.rawdata-images {
+    .download-link, .delete-link {
+        visibility: hidden;
+    }
+
+    tr:hover .download-link,
+    tr:hover .delete-link {
+        visibility: visible;
+    }
 }
