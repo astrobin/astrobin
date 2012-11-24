@@ -8,6 +8,9 @@ from django.core.files.storage import FileSystemStorage
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+# This app
+from .managers import SoftDeleteManager
+
 def upload_path(instance, filename):
     instance.original_filename = filename
     ext = filename.split('.')[-1]
@@ -16,6 +19,9 @@ def upload_path(instance, filename):
 
 
 class RawImage(models.Model):
+    objects = SoftDeleteManager()
+
+    # Definitions
     TYPE_UNKNOWN = 0
     TYPE_OFFSET  = 10
     TYPE_DARK    = 20
@@ -59,6 +65,11 @@ class RawImage(models.Model):
         editable = False,
     )
 
+    active = models.BooleanField(
+        default = True,
+        editable = False,
+    )
+
     image_type = models.IntegerField(
         max_length = 1,
         default = 0, # Unknown
@@ -79,3 +90,6 @@ class RawImage(models.Model):
             from .tasks import index_raw_image
             index_raw_image.delay(self.id)
 
+    def delete(self, *args, **kwargs):
+        self.active = False
+        self.save(index = False)
