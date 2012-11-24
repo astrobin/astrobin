@@ -20,5 +20,5 @@ def index_raw_image(id):
     data = generate_dummy_data()
     image.image_type = data['image_type']
     image.indexed = True
-    image.save(index = False)
+    image.save()
     
