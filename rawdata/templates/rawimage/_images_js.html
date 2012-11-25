@@ -18,18 +18,33 @@
 
         function selection_header($h, count) {
             var $selected = $('<span/>').text('(' + count + ')');
-            var $reset = $('<a/>')
+
+            var $reset = $('<span/>').html($('<a/>')
                 .attr('href', '#')
+                .addClass('btn btn-mini')
                 .text("{% trans "Reset selection" %}")
                 .click(function(e) {
                     $table.find('tr.active').removeClass('active');
                     reset_headers();
                     e.preventDefault();
-                });
+                }));
+
+            var ids = [];
+            $.each($table.find('tr.active'), function(i, $row) {
+                ids.push($($row).attr('id'));
+            });
+            var $download = $('<span/>').html($('<a/>')
+                .attr('href', '/rawdata/download/' + ids.join(',') + '/')
+                .addClass('btn btn-mini btn-primary')
+                .html('<i class="icon-download-alt"></i> {% trans "Download" %}'));
 
             $h
                 .html($selected)
                 .append($reset);
+
+            if (count > 1) {
+                $h.append($download);
+            }
         }
 
         function selection_headers(count) {

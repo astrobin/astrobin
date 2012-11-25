@@ -1,3 +1,6 @@
+# Python
+import tempfile, zipfile
+
 # Django
 from django.contrib.auth.decorators import user_passes_test
 from django.core.servers.basehttp import FileWrapper
@@ -43,22 +46,36 @@ class RawImageDownloadView(base.View):
                 self.filelike.seek(0)
                 return self
 
-        id = kwargs.pop('id', 0)
-        if id == 0:
-            raise Http404
+        ids = kwargs.pop('ids', '').split(',')
+        if len(ids) == 1:
+            try:
+                image = RawImage.objects.get(id = ids[0])
+            except RawImage.DoesNotExist:
+                raise Http404
 
-        try:
-            image = RawImage.objects.get(id = id)
-        except RawImage.DoesNotExist:
-            raise Http404
+            if not image.active:
+                raise Http404
 
-        if not image.active:
-            raise Http404
+            wrapper = FixedFileWrapper(file(image.file.path))
+            response = HttpResponse(wrapper, content_type = 'application/octet-stream')
+            response['Content-Disposition'] = 'attachment; filename=%s' % image.original_filename
+            response['Content-Length'] = image.size
+        else:
+            temp = tempfile.TemporaryFile()
+            archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
+            for id in ids:
+                try:
+                    image = RawImage.objects.get(id = id)
+                    archive.write(image.file.path, image.original_filename)
+                except RawImage.DoesNotExist:
+                    pass
 
-        wrapper = FixedFileWrapper(file(image.file.path))
-        response = HttpResponse(wrapper, content_type = 'application/octet-stream')
-        response['Content-Disposition'] = 'attachment; filename=%s' % image.original_filename
-        response['Content-Length'] = image.size
+            archive.close()
+            wrapper = FixedFileWrapper(temp)
+            response = HttpResponse(wrapper, content_type='application/zip')
+            response['Content-Disposition'] = 'attachment; filename=rawdata.zip'
+            response['Content-Length'] = temp.tell()
+            temp.seek(0)
 
         return response
 

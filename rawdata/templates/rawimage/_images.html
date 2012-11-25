@@ -14,7 +14,7 @@
             </tr>
         </thead>
         {% for image in images %}
-            <tr class="rawimage">
+            <tr id="{{image.id}}" class="rawimage">
                 <td>{{image.original_filename}}</td>
                 <td>{{image.image_type|humanize_rawimage_type}}</td>
                 <td>

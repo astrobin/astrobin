@@ -1089,14 +1089,26 @@ li.astrobin-thumbnail {
 .table {
     margin-bottom: 0;
 }
+
+.table caption + thead tr:first-child th,
+.table caption + thead tr:first-child td,
+.table colgroup + thead tr:first-child th,
+.table colgroup + thead tr:first-child td,
+.table thead:first-child tr:first-child th,
+.table thead:first-child tr:first-child td {
+    border-top: 1px solid @link-color;
+    border-bottom: 1px solid @link-color;
+}
+
 .table th, .table td {
     border-color: #363636;
 }
 .table thead tr th, .table thead tr td {
-    border-top: none;
+    border-top: 1px solid @link-color;
+    border-bottom: 1px solid @link-color;
     background-color: #272727;
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
     span {
         margin-right: @spacer-medium;
