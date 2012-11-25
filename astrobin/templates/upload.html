@@ -361,7 +361,7 @@
                 var remaining = up.total.size - up.total.loaded;
                 var eta = this.hms(Math.round(remaining / speed / 1024));             
 
-                if (!isNaN(speed)) {
+                if (up.total.percent > 0 && eta != "Infinity:NaN:NaN") {
                     this.ui.$eta.html(
                         '<strong>' + up.total.percent + '%</strong> ' +
                         ' (' + speed + ' KB/s, ETA: ' + eta + ')');
