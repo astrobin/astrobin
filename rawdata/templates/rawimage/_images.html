@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load url from future %}
+
 {% load rawdata_tags %}
 
 {% if images %}
@@ -22,7 +24,9 @@
                 </td>
                 <td>
                     <!-- TODO: link -->
-                    <a href="#" class="download-link" rel="tooltip" title="{% trans "Download" %}">
+                    <a href="{% url 'rawdata.download' image.id %}"
+                       class="download-link"
+                       rel="tooltip" title="{% trans "Download" %}">
                         <i class="icon-download-alt"></i>
                     </a>
                     <a href="#" class="delete-link" rel="tooltip" title="{% trans "Delete" %}">
