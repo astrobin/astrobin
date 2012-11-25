@@ -925,6 +925,13 @@ li.astrobin-thumbnail img {
   border-top: 1px solid #cc4b2e;
   border-bottom: 1px solid #cc4b2e;
 }
+.table thead th {
+  vertical-align: middle;
+}
+.table thead th a,
+.table thead th button {
+  font-weight: normal;
+}
 .table th,
 .table td {
   border-color: #363636;
@@ -934,8 +941,8 @@ li.astrobin-thumbnail img {
   border-top: 1px solid #cc4b2e;
   border-bottom: 1px solid #cc4b2e;
   background-color: #272727;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 .table thead tr th span,
 .table thead tr td span {

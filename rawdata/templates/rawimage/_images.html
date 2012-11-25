@@ -10,7 +10,26 @@
                 <th>{% trans "Name" %}</th>
                 <th>{% trans "Type" %}</th>
                 <th>{% trans "Uploaded" %}</th>
-                <th></th> <!-- actions -->
+                <th>
+                    <div class="btn-group">
+                        <button class="btn btn-small btn-primary dropdown-toggle" data-toggle="dropdown">
+                            {% trans "Smart folders" %}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">{% trans "Types" %}</a></li>
+                            <li><a href="#">{% trans "Acquisition dates" %}</a></li>
+                            <li><a href="#">{% trans "Upload dates" %}</a></li>
+                            <li><a href="#">{% trans "Cameras" %}</a></li>
+                            <li><a href="#">{% trans "Telescopes" %}</a></li>
+                            <li><a href="#">{% trans "Filters" %}</a></li>
+                            <li><a href="#">{% trans "Subjects" %}</a></li>
+                            <li><a href="#">{% trans "Temperatures" %}</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">{% trans "Show file list" %}</a></li>
+                        </ul>
+                    </div>
+                </th>
             </tr>
         </thead>
         {% for image in images %}
