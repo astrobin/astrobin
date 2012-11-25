@@ -63,20 +63,28 @@
         }
 
         function del(ids) {
-            $.ajax({
-                type: 'DELETE',
-                url: '/rawdata/delete/' + ids.join(',') + '/',
-                cache: false,
-                success: function() {
-                    $.each(ids, function(i, id) {
-                        $table.find('tr#' + id).remove();
-                        if ($table.find('tbody tr').length == 0) {
+            $.each(ids, function(i, id) {
+                $table.find('tr#' + id + ' td').animate({'color': 'red'}, 1000);
+            });
+
+            setTimeout(function() {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/rawdata/delete/' + ids.join(',') + '/',
+                    cache: false,
+                    success: function() {
+                        $.each(ids, function(i, id) {
+                            $table.find('tr#' + id).fadeOut(1000);
+                        });
+
+                        if (ids.length > 0) {
                             reset_headers();
                         }
-                    });
-                    $('.tooltip').remove();
-                }
-            });
+
+                        $('.tooltip').remove();
+                    }
+                });
+            }, 1000);
         }
 
         $rows.click(function() {
