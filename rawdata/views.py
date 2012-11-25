@@ -56,6 +56,9 @@ class RawImageDownloadView(base.View):
             if not image.active:
                 raise Http404
 
+            if image.user != request.user:
+                raise Http404
+
             wrapper = FixedFileWrapper(file(image.file.path))
             response = HttpResponse(wrapper, content_type = 'application/octet-stream')
             response['Content-Disposition'] = 'attachment; filename=%s' % image.original_filename
@@ -66,9 +69,16 @@ class RawImageDownloadView(base.View):
             for id in ids:
                 try:
                     image = RawImage.objects.get(id = id)
+
+                    if not image.active:
+                        continue
+
+                    if image.user != request.user:
+                        raise Http404
+
                     archive.write(image.file.path, image.original_filename)
                 except RawImage.DoesNotExist:
-                    pass
+                    continue
 
             archive.close()
             wrapper = FixedFileWrapper(temp)
