@@ -182,6 +182,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INSTALLED_APPS = (
+    # Django apps
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -189,10 +191,12 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'staticfiles',
 
+    # AstroBin apps
+    'common',
     'astrobin',
     'rawdata',
 
-    'django.contrib.admin',
+    # Third party apps
     'registration',
     'djangoratings',
     'haystack',
