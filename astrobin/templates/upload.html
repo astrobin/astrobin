@@ -139,7 +139,7 @@
             </div>
         {% endif %}
 
-        <div style="text-align: center">
+        <div id="go-to-library" style="text-align: center">
             <a href="{% url 'rawdata.library' user %}">
                 {% trans "Go to your Raw Data Library." %}
             </a>
@@ -230,7 +230,8 @@
                 $drop_element: $('#rawdata-file-drop-area'),
                 $progress    : $('#progress'),
                 $warning     : $('#warning'),
-                $eta         : $('#rawdata-eta')
+                $eta         : $('#rawdata-eta'),
+                $goto_lib    : $('#go-to-library')
             };
 
             this.hms = function(sec) {
@@ -276,6 +277,7 @@
                 this.ui.$progress.addClass('hidden');
                 this.ui.$warning.addClass('hidden');
                 this.ui.$eta.addClass('hidden').text('');
+                this.ui.$goto_lib.show();
 
                 this.enable(this.ui.$browse_btn);
                 this.enable(this.ui.$clear_btn);
@@ -300,6 +302,7 @@
                 this.ui.$progress.removeClass('hidden');
                 this.ui.$eta.removeClass('hidden');
                 this.ui.$eta.html("{% trans "Upload started, please wait..." %}");
+                this.ui.$goto_lib.hide();
                 this.rawdata_uploader.start();
                 e.preventDefault();
             }, this));
