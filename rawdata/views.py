@@ -104,7 +104,7 @@ class RawImageDeleteView(BaseDeleteView):
                 image = self.get_queryset().get(id = id)
                 image.delete()
             except RawImage.DoesNotExist:
-                raise Http404
+                continue
 
         if request.is_ajax():
             return HttpResponse(
