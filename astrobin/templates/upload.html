@@ -361,9 +361,11 @@
                 var remaining = up.total.size - up.total.loaded;
                 var eta = this.hms(Math.round(remaining / speed / 1024));             
 
-                this.ui.$eta.html(
-                    '<strong>' + up.total.percent + '%</strong> ' +
-                    ' (' + speed + ' KB/s, ETA: ' + eta + ')');
+                if (!isNaN(speed)) {
+                    this.ui.$eta.html(
+                        '<strong>' + up.total.percent + '%</strong> ' +
+                        ' (' + speed + ' KB/s, ETA: ' + eta + ')');
+                }
             }, this));
 
             this.rawdata_uploader.bind('Error', $.proxy(function(up, err) {
