@@ -33,6 +33,7 @@
             $.each($table.find('tr.active'), function(i, $row) {
                 ids.push($($row).attr('id'));
             });
+
             var $download = $('<span/>').html($('<a/>')
                 .attr('href', '/rawdata/download/' + ids.join(',') + '/')
                 .addClass('btn btn-mini btn-primary')
@@ -58,6 +59,26 @@
             } else {
                 selection_headers(count);
             }
+        });
+
+        $('.delete-link').click(function(e) {
+            e.stopPropagation();
+
+            var self = this,
+                $row = $(self).closest('tr'),
+                id = $row.attr('id');
+
+            $row.css('color', 'red');
+            $.ajax({
+                type: 'DELETE',
+                url: '/rawdata/delete/' + id + '/',
+                cache: false,
+                success: function() {
+                    $row.remove();
+                    $('.tooltip').remove();
+                }
+            });
+            e.preventDefault();
         });
 
         $table.stickyTableHeaders({fixedOffset: 44});

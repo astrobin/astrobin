@@ -1,5 +1,7 @@
 # Python
 import tempfile, zipfile
+import simplejson
+
 
 # Django
 from django.contrib.auth.decorators import user_passes_test
@@ -9,6 +11,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.utils.functional import lazy 
 from django.views.generic import *
+from django.views.generic.edit import BaseDeleteView
 from django.utils.decorators import method_decorator
 
 # This app
@@ -90,8 +93,32 @@ class RawImageDownloadView(base.View):
         return response
 
 
+class RawImageDeleteView(BaseDeleteView):
+    def get_queryset(self):
+        return RawImage.objects.filter(user = self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        ids = kwargs.pop('ids', '').split(',')
+        for id in ids:
+            try:
+                image = self.get_queryset().get(id = id)
+                image.delete()
+            except RawImage.DoesNotExist:
+                raise Http404
+
+        if request.is_ajax():
+            return HttpResponse(
+                simplejson.dumps({
+                    'success': True,
+                    'ids': ','.join(ids),
+                }),
+                mimetype = 'application/json')
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
 class RawImageLibrary(TemplateView):
-    template_name = 'rawimage/library.html'    
+    template_name = 'rawimage/library.html'
 
     @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
     def dispatch(self, *args, **kwargs):
