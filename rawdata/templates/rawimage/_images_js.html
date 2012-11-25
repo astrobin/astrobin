@@ -39,15 +39,39 @@
                 .addClass('btn btn-mini btn-primary')
                 .html('<i class="icon-download-alt"></i> {% trans "Download" %}'));
 
+            var $del = $('<span/>').html($('<a/>')
+                .attr('href', '/rawdata/delete/' + ids.join(',') + '/')
+                .addClass('btn btn-mini btn-danger')
+                .html('<i class="icon-trash"></i> {% trans "Delete" %}'))
+                .click(function(e) {
+                    del(ids);
+                    e.preventDefault();
+                });
+
             $h
                 .html($selected)
                 .append($reset)
-                .append($download);
+                .append($download)
+                .append($del);
         }
 
         function selection_headers(count) {
             selection_header($header, count);
             selection_header($(floating_header_selector), count);
+        }
+
+        function del(ids) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/rawdata/delete/' + ids.join(',') + '/',
+                cache: false,
+                success: function() {
+                    $.each(ids, function(i, id) {
+                        $table.find('tr#' + id).remove();
+                    });
+                    $('.tooltip').remove();
+                }
+            });
         }
 
         $rows.click(function() {
@@ -68,16 +92,8 @@
                 $row = $(self).closest('tr'),
                 id = $row.attr('id');
 
-            $row.css('color', 'red');
-            $.ajax({
-                type: 'DELETE',
-                url: '/rawdata/delete/' + id + '/',
-                cache: false,
-                success: function() {
-                    $row.remove();
-                    $('.tooltip').remove();
-                }
-            });
+            del([id]);
+
             e.preventDefault();
         });
 
