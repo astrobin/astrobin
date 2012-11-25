@@ -1,6 +1,9 @@
 # Django
 from django.contrib.auth.decorators import user_passes_test
+from django.core.servers.basehttp import FileWrapper
 from django.core.urlresolvers import reverse
+from django.http import Http404
+from django.http import HttpResponse
 from django.utils.functional import lazy 
 from django.views.generic import *
 from django.utils.decorators import method_decorator
@@ -30,6 +33,34 @@ class RawImageCreateView(CreateView):
             raw_image.save(index = True)
 
         return super(RawImageCreateView, self).form_valid(form)
+
+
+class RawImageDownloadView(base.View):
+    def get(self, request, *args, **kwargs):
+        # https://code.djangoproject.com/ticket/6027
+        class FixedFileWrapper(FileWrapper):
+            def __iter__(self):
+                self.filelike.seek(0)
+                return self
+
+        id = kwargs.pop('id', 0)
+        if id == 0:
+            raise Http404
+
+        try:
+            image = RawImage.objects.get(id = id)
+        except RawImage.DoesNotExist:
+            raise Http404
+
+        if not image.active:
+            raise Http404
+
+        wrapper = FixedFileWrapper(file(image.file.path))
+        response = HttpResponse(wrapper, content_type = 'application/octet-stream')
+        response['Content-Disposition'] = 'attachment; filename=%s' % image.original_filename
+        response['Content-Length'] = image.size
+
+        return response
 
 
 class RawImageLibrary(TemplateView):
