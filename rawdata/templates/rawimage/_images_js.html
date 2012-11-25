@@ -64,7 +64,7 @@
 
         function del(ids) {
             $.each(ids, function(i, id) {
-                $table.find('tr#' + id + ' td').animate({'color': 'red'}, 1000);
+                $table.find('tr#' + id + ' td').animate({'color': 'red'}, 500);
             });
 
             setTimeout(function() {
@@ -74,7 +74,8 @@
                     cache: false,
                     success: function() {
                         $.each(ids, function(i, id) {
-                            $table.find('tr#' + id).fadeOut(1000);
+                            $table.find('tr.active').removeClass('active');
+                            $table.find('tr#' + id).fadeOut(500);
                         });
 
                         if (ids.length > 0) {
@@ -84,7 +85,7 @@
                         $('.tooltip').remove();
                     }
                 });
-            }, 1000);
+            }, 500);
         }
 
         $rows.click(function() {
