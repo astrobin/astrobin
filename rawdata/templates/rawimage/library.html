@@ -52,31 +52,38 @@
         </div>
     {% endif %} 
 
-    <div class="rawdata-browser-breadcumb">
-        <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload' %}">
-            {% trans "All files" %}
-        </a>
-
-        {% if filter_type %}
-            <span class="divider">/</span>
-            <a class="btn btn-mini btn-primary" href="{% query_string '' 'type' %}">
-                {% trans "Type" %}: {{filter_type|humanize_rawimage_type}}
-                <i class="icon-remove"></i>
+    {% if total_files %}
+        <div class="rawdata-browser-breadcumb">
+            <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload' %}">
+                {% trans "All files" %}
             </a>
-        {% endif %}
 
-        {% if filter_upload %}
-            <span class="divider">/</span>
-            <a class="btn btn-mini btn-primary" href="{% query_string '' 'upload' %}">
-                {% trans "Uploaded" %}: {{filter_upload}}
-                <i class="icon-remove"></i>
-            </a>
-        {% endif %}
+            {% if filter_type %}
+                <span class="divider">/</span>
+                <a class="btn btn-mini btn-primary" href="{% query_string '' 'type' %}">
+                    {% trans "Type" %}: {{filter_type|humanize_rawimage_type}}
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
 
-    </div>
+            {% if filter_upload %}
+                <span class="divider">/</span>
+                <a class="btn btn-mini btn-primary" href="{% query_string '' 'upload' %}">
+                    {% trans "Uploaded" %}: {{filter_upload}}
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
+        </div>
 
-    {% include 'rawimage/_folders.html' %}
-    {% include 'rawimage/_images.html' %}
+        {% include 'rawimage/_folders.html' %}
+        {% include 'rawimage/_images.html' %}
+    {% else %}
+        <p>
+            {% blocktrans %}There doesn't seem to be anything here.{% endblocktrans %}
+            {% url image_upload as upload_url %}
+            {% blocktrans %}Head over to the <a href="{{upload_url}}">upload page</a> to get started. {% endblocktrans %}
+        </p>
+    {% endif %}
 {% endblock %}
 
 {% block extra_js %}
