@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load common_tags %}
+{% load rawdata_tags %}
 
 {% block title %}AstroBin - {% blocktrans %}Your raw data library{% endblocktrans %}{% endblock %}
 
@@ -50,13 +52,33 @@
         </div>
     {% endif %} 
 
-    {% for type, data in folders.items %}
-        <p>{{data.label}}: {{data.images|length}} images.</p>
-    {% endfor %}
+    <div class="rawdata-browser-breadcumb">
+        <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload' %}">
+            {% trans "All files" %}
+        </a>
 
+        {% if filter_type %}
+            <span class="divider">/</span>
+            <a class="btn btn-mini btn-primary" href="{% query_string '' 'type' %}">
+                {% trans "Type" %}: {{filter_type|humanize_rawimage_type}}
+                <i class="icon-remove"></i>
+            </a>
+        {% endif %}
+
+        {% if filter_upload %}
+            <span class="divider">/</span>
+            <a class="btn btn-mini btn-primary" href="{% query_string '' 'upload' %}">
+                {% trans "Uploaded" %}: {{filter_upload}}
+                <i class="icon-remove"></i>
+            </a>
+        {% endif %}
+
+    </div>
+
+    {% include 'rawimage/_folders.html' %}
     {% include 'rawimage/_images.html' %}
 {% endblock %}
 
 {% block extra_js %}
-    {% include 'rawimage/_images_js.html' %}
+    {% include 'rawimage/_browser_js.html' %}
 {% endblock %}

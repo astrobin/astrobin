@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load common_tags %}
+{% load url from future %}
+
+<div class="btn-group">
+    <button class="btn btn-small btn-primary dropdown-toggle" data-toggle="dropdown">
+        {% trans "Smart folders" %}
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="{% query_string 'f=type' '' %}">{% trans "Type" %}</a></li>
+        <li><a href="#">{% trans "Acquisition date" %}</a></li>
+        <li><a href="{% query_string 'f=upload' '' %}">{% trans "Upload date" %}</a></li>
+        <li><a href="#">{% trans "Camera" %}</a></li>
+        <li><a href="#">{% trans "Telescope" %}</a></li>
+        <li><a href="#">{% trans "Filter" %}</a></li>
+        <li><a href="#">{% trans "Subject" %}</a></li>
+        <li><a href="#">{% trans "Temperature" %}</a></li>
+        <li class="divider"></li>
+        <li><a href="{% query_string 'f=none' '' %}">{% trans "Show file list" %}</a></li>
+    </ul>
+</div>
+

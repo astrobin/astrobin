@@ -1,35 +1,44 @@
-class BaseFolder(object):
-    """ A base folder that has simple methods to handle the image
-        collection.
-    """
-    def __init__(self, *args, **kwargs):
-        self.label = kwargs.pop('label', '')
-        self.images = [] 
-    
-    def get_images(self):
-        return self.images
+from operator import itemgetter
 
-    def add_image(self, image):
-        self.images.append(image)
-
-    def get_label(self):
-        return self.label
+class BaseFolderFactory(object):
+    def __init__(self, source = [], *args, **kwargs):
+        self.source = source
 
 
-class TypeFolder(BaseFolder):
-    """ A folder that holds images by type. Types are defined in the
-        RawImage model.
-    """
-    def __init__(self, *args, **kwargs):
-        super(TypeFolder, self).__init__(*args, **kwargs)
-        self.type_ = kwargs.pop('type', 0)
-        self.source = kwargs.pop('source', [])
-
-    def get_type(self):
-        return self.type_
-
-    def populate(self):
+class TypeFolderFactory(BaseFolderFactory):
+    def produce(self):
+        from .templatetags.rawdata_tags import humanize_rawimage_type
+        folders = [] # {'type': 123, 'label': 'abc', 'images': []}
         for image in self.source:
-            if image.image_type == self.type_:
-                self.add_image(image)
+            t = image.image_type
+            try:
+                index = map(itemgetter('type'), folders).index(t)
+                folders[index]['images'].append(image)
+            except ValueError:
+                folders.append({
+                    'folder_type': 'type',
+                    'type': t,
+                    'label': humanize_rawimage_type(t),
+                    'images': [image],
+                });
 
+        return folders
+
+
+class UploadDateFolderFactory(BaseFolderFactory):
+    def produce(self):
+        folders = [] # {'date': _, 'label': _, 'images': []}
+        for image in self.source:
+            date = image.uploaded.date()
+            try:
+                index = map(itemgetter('date'), folders).index(date)
+                folders[index]['images'].append(image)
+            except ValueError:
+                folders.append({
+                    'folder_type': 'upload',
+                    'date': date,
+                    'label': date,
+                    'images': [image],
+                });
+
+        return folders

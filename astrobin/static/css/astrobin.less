@@ -2844,7 +2844,7 @@ li.revisions {
     margin-top: 6px;
 }
 
-table.rawdata-images {
+table.rawdata-browser {
     .download-link, .delete-link {
         visibility: hidden;
     }
@@ -2852,5 +2852,38 @@ table.rawdata-images {
     tr:hover .download-link,
     tr:hover .delete-link {
         visibility: visible;
+    }
+
+    td.actions {
+        width: 102px;
+        text-align: right;
+    }
+
+    td.files {
+        width: 102px;
+    }
+
+    td.folder {
+        font-size: 20px;
+        width: 20px;
+    }
+}
+
+.rawdata-browser-breadcumb {
+    display: inline-block;
+    margin-bottom: @spacer-medium;
+
+    a {
+        margin-right: @spacer-small;
+        i {
+            padding-left: @spacer-small;
+            font-size: 8px;
+        }
+    }
+
+    .divider {
+        color: #777;
+        padding-right: 3px;
+        font-size: 12px;
     }
 }
