@@ -1,18 +1,21 @@
 # Python
-import tempfile, zipfile
+from datetime import datetime, timedelta
 import simplejson
+import tempfile, zipfile
 
 
 # Django
 from django.contrib.auth.decorators import user_passes_test
 from django.core.servers.basehttp import FileWrapper
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import Http404
 from django.http import HttpResponse
 from django.utils.functional import lazy 
 from django.views.generic import *
 from django.views.generic.edit import BaseDeleteView
 from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext as _
 
 # This app
 from .models import RawImage
@@ -149,11 +152,35 @@ class RawImageLibrary(TemplateView):
         context['total_files'] = total_files.count()
         context['unindexed_count'] = total_files.filter(indexed = False).count()
 
-        folders = self.request.GET.get('f', None)
-        if folders:
-            pass
+        images = RawImage.objects.filter(user = self.request.user)
+
+        filter_type = self.request.GET.get('type')
+        if filter_type:
+            context['filter_type'] = filter_type
+            images = images.filter(image_type = filter_type)
+
+        filter_upload = self.request.GET.get('upload')
+        if filter_upload:
+            context['filter_upload'] = filter_upload
+            images = images.filter(
+                Q(uploaded__gte = datetime.strptime(filter_upload, '%Y-%m-%d')) &
+                Q(uploaded__lte = datetime.strptime(filter_upload, '%Y-%m-%d') + timedelta(days=1)));
+
+
+        f = self.request.GET.get('f', 'upload')
+        if f:
+            if f == 'type':
+                factory = TypeFolderFactory(images)
+                context['folders'] = factory.produce()
+                context['folders_header'] = _("Type");
+            if f == 'upload':
+                factory = UploadDateFolderFactory(images)
+                context['folders'] = factory.produce()
+                context['folders_header'] = _("Upload date")
+            elif f == 'none':
+                context['images'] = images
         else:
-            context['images'] = RawImage.objects.filter(user = self.request.user)
+            context['images'] = images
 
         return context
 

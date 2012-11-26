@@ -1,0 +1,38 @@
+{% load i18n %}
+{% load url from future %}
+
+{% load common_tags %}
+{% load rawdata_tags %}
+
+{% if folders %}
+    <table class="table rawdata-browser folders">
+        <thead>
+            <tr>
+                <th colspan="2">{{folders_header}}</th>
+                <th>{% trans "Files" %}</th>
+                <th>{% include 'rawimage/_folder_dropdown.html' %}</th>
+            </tr>
+        </thead>
+        {% for folder in folders %}
+            <tr class="rawfile">
+                <td class="folder"><i class="icon-folder-close"></i></td>
+                <td class="folder-label">
+                    {% ifequal folder.folder_type 'type' %}
+                    <a href="{% query_string 'type=folder.type, f=none' '' %}">
+                    {% endifequal %}
+
+                    {% ifequal folder.folder_type 'upload' %}
+                    <a href="{% query_string 'upload=folder.date, f=none' '' %}">
+                    {% endifequal %}
+
+                        {{folder.label}}
+                    </a>
+                </td>
+                <td class="files">{{folder.images|length}}</td>
+                <td class="actions">
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+

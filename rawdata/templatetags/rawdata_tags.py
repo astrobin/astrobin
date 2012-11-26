@@ -10,6 +10,6 @@ register = Library()
 @register.filter
 def humanize_rawimage_type(image_type):
     for choice in RawImage.TYPE_CHOICES:
-        if image_type == choice[0]:
+        if int(image_type) == choice[0]:
             return choice[1]
     return _("Unknown")

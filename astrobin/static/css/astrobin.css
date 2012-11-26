@@ -2658,11 +2658,38 @@ li.revisions {
   width: 110px;
   margin-top: 6px;
 }
-table.rawdata-images .download-link,
-table.rawdata-images .delete-link {
+table.rawdata-browser .download-link,
+table.rawdata-browser .delete-link {
   visibility: hidden;
 }
-table.rawdata-images tr:hover .download-link,
-table.rawdata-images tr:hover .delete-link {
+table.rawdata-browser tr:hover .download-link,
+table.rawdata-browser tr:hover .delete-link {
   visibility: visible;
+}
+table.rawdata-browser td.actions {
+  width: 102px;
+  text-align: right;
+}
+table.rawdata-browser td.files {
+  width: 102px;
+}
+table.rawdata-browser td.folder {
+  font-size: 20px;
+  width: 20px;
+}
+.rawdata-browser-breadcumb {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.rawdata-browser-breadcumb a {
+  margin-right: 4px;
+}
+.rawdata-browser-breadcumb a i {
+  padding-left: 4px;
+  font-size: 8px;
+}
+.rawdata-browser-breadcumb .divider {
+  color: #777;
+  padding-right: 3px;
+  font-size: 12px;
 }
