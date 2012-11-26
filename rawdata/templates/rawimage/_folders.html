@@ -15,7 +15,7 @@
         </thead>
         {% for folder in folders %}
             <tr class="rawfile">
-                <td class="folder"><i class="icon-folder-close"></i></td>
+                <td class="icon"><i class="icon-folder-close"></i></td>
                 <td class="folder-label">
                     {% ifequal folder.folder_type 'type' %}
                     <a href="{% query_string 'type=folder.type, f=none' '' %}">

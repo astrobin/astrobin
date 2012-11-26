@@ -1,5 +1,4 @@
 # Python
-from datetime import datetime, timedelta
 import simplejson
 import tempfile, zipfile
 
@@ -8,7 +7,6 @@ import tempfile, zipfile
 from django.contrib.auth.decorators import user_passes_test
 from django.core.servers.basehttp import FileWrapper
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.http import Http404
 from django.http import HttpResponse
 from django.utils.functional import lazy 
@@ -154,33 +152,21 @@ class RawImageLibrary(TemplateView):
 
         images = RawImage.objects.filter(user = self.request.user)
 
-        filter_type = self.request.GET.get('type')
-        if filter_type:
-            context['filter_type'] = filter_type
-            images = images.filter(image_type = filter_type)
-
-        filter_upload = self.request.GET.get('upload')
-        if filter_upload:
-            context['filter_upload'] = filter_upload
-            images = images.filter(
-                Q(uploaded__gte = datetime.strptime(filter_upload, '%Y-%m-%d')) &
-                Q(uploaded__lte = datetime.strptime(filter_upload, '%Y-%m-%d') + timedelta(days=1)));
-
+        context['filter_type'] = self.request.GET.get('type')
+        context['filter_upload'] = self.request.GET.get('upload')
 
         f = self.request.GET.get('f', 'upload')
-        if f:
+        if not f or f == 'none':
+            context['images'] = images
+        else:
             if f == 'type':
                 factory = TypeFolderFactory(images)
-                context['folders'] = factory.produce()
                 context['folders_header'] = _("Type");
             if f == 'upload':
                 factory = UploadDateFolderFactory(images)
-                context['folders'] = factory.produce()
                 context['folders_header'] = _("Upload date")
-            elif f == 'none':
-                context['images'] = images
-        else:
-            context['images'] = images
+            factory.filter(self.request.GET)
+            context['folders'] = factory.produce()
 
         return context
 

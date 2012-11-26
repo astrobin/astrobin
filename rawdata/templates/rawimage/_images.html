@@ -8,7 +8,7 @@
     <table class="table rawdata-browser images">
         <thead>
             <tr>
-                <th>
+                <th colspan="2">
                     <span>
                         <a id="select-all" href="#" class="btn btn-mini">
                             {% trans "Select all" %}
@@ -22,6 +22,7 @@
         </thead>
         {% for image in images %}
             <tr id="{{image.id}}" class="rawfile">
+                <td class="icon"><i class="icon-file"></i></td>
                 <td>{{image.original_filename}}</td>
                 <td>{{image.image_type|humanize_rawimage_type}}</td>
                 <td>

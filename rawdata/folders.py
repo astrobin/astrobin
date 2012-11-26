@@ -1,8 +1,24 @@
+# Python
+from datetime import datetime, timedelta
 from operator import itemgetter
+
+# Django
+from django.db.models import Q
 
 class BaseFolderFactory(object):
     def __init__(self, source = [], *args, **kwargs):
         self.source = source
+
+    def filter(self, params):
+        filter_type = params.get('type')
+        if filter_type:
+            self.source = self.source.filter(image_type = filter_type)
+
+        filter_upload = params.get('upload')
+        if filter_upload:
+            self.source = self.source.filter(
+                Q(uploaded__gte = datetime.strptime(filter_upload, '%Y-%m-%d')) &
+                Q(uploaded__lte = datetime.strptime(filter_upload, '%Y-%m-%d') + timedelta(days=1)));
 
 
 class TypeFolderFactory(BaseFolderFactory):
