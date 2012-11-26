@@ -85,7 +85,9 @@
                     success: function() {
                         $.each(ids, function(i, id) {
                             $table.find('tr.active').removeClass('active');
-                            $table.find('tr#' + id).fadeOut(500);
+                            $table.find('tr#' + id).fadeOut(500, function() {
+                                $(this).remove();
+                            });
                         });
 
                         if (ids.length > 0) {
