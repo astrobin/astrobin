@@ -31,3 +31,4 @@ class RawImageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(RawImage, RawImageAdmin)
+admin.site.register(TemporaryArchive)

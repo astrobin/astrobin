@@ -70,6 +70,11 @@ server {
         expires 30d;
     }
 
+    location /tmpzips/  {
+        root /webserver/www;
+        expires 3d;
+    }
+
     location /media/  {
         root /webserver/www;
         expires 30d;

@@ -17,6 +17,11 @@ def upload_path(instance, filename):
     filename = "%s.%s" % (uuid.uuid4(), ext)
     return os.path.join('rawdata', str(instance.user.id), filename)
 
+def temporary_download_upload_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.zip" % uuid.uuid4()
+    return os.path.join('tmpzips', filename)
+
 
 class RawImage(models.Model):
     objects = SoftDeleteManager()
@@ -93,3 +98,43 @@ class RawImage(models.Model):
     def delete(self, *args, **kwargs):
         self.active = False
         self.save()
+
+
+class TemporaryArchive(models.Model):
+    objects = SoftDeleteManager()
+
+    user = models.ForeignKey(
+        User,
+        editable = False,
+    )
+
+    file = models.FileField(
+        storage = FileSystemStorage(location = '/webserver/www'),
+        upload_to = temporary_download_upload_path,
+    )
+
+    size = models.IntegerField(
+        default = 0,
+        editable = False,
+    )
+
+    created = models.DateTimeField(
+        auto_now_add = True,
+        editable = False,
+    )
+
+    active = models.BooleanField(
+        default = True,
+        editable = False,
+    )
+
+    class Meta:
+        app_label = 'rawdata'
+
+    def __unicode__(self):
+        return self.file.name
+
+    def delete(self, *args, **kwargs):
+        self.active = False
+        self.save()
+
