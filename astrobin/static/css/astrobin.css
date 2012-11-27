@@ -2693,3 +2693,19 @@ table.rawdata-browser td.icon {
   padding-right: 3px;
   font-size: 12px;
 }
+.download-with-icon {
+  text-align: center;
+  margin: 40px auto;
+  width: 450px;
+}
+.download-with-icon .image {
+  float: left;
+}
+.download-with-icon .data {
+  padding-top: 80px;
+}
+.download-with-icon .data .size {
+  color: #888;
+  display: block;
+  margin-top: 12px;
+}
