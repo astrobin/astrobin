@@ -60,12 +60,15 @@ def user_has_inactive_subscription(user):
 
 def subscription_byte_limit(subscription):
     GB = 1024*1024*1024
-    if subscription.group.name == 'rawdata-25':
-        return 25*GB
-    if subscription.group.name == 'rawdata-50':
-        return 50*GB
-    if subscription.group.name == 'rawdata-100':
+
+    if subscription.group.name == 'rawdata-meteor':
+        return 5*GB
+    if subscription.group.name == 'rawdata-luna':
         return 100*GB
+    if subscription.group.name == 'rawdata-sol':
+        return 200*GB
+    if subscription.group.name == 'rawdata-galaxia':
+        return 500*GB
 
     return 0
    
@@ -77,3 +80,24 @@ def user_byte_limit(user):
         return 0
 
     return subscription_byte_limit(us.subscription)
+
+def supported_raw_formats():
+    return [
+        "3fr",
+        "ari", "arw",
+        "bay",
+        "crw", "cr2", "cap",
+        "dcs", "dcr", "dng", "drf",
+        "eip", "erf",
+        "fff",
+        "iiq",
+        "k25", "kdc",
+        "mef", "mos", "mrw",
+        "nef", "nrw",
+        "obm", "orf",
+        "pef", "ptx", "pxn",
+        "r3d", "raf", "raw", "rwl", "rw2", "rwz",
+        "sr2", "srf", "srw",
+        "x3f",
+    ]
+

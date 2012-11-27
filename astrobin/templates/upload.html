@@ -88,7 +88,7 @@
         <!--[if !IE]><!-->
                             <h2>{% trans "Drop your raw data here" %}</h2>
         <!--<![endif]-->
-                            <small>{% trans "File types accepted: FIT and CR2" %}</small>
+                            <small>{% trans "Accepted file types: FIT and digital camera raw files" %}</small>
                         </div>
                         <table id="rawdata-filelist" class="table hidden">
                             <tr class="header">
@@ -169,7 +169,7 @@
         <div class="row section">
             <div class="span6 offset3">
                 <div class="well">
-                    <h4>{% trans "Did you know that AstroBin can host your FIT and CR2 files too?" %}</h4>
+                    <h4>{% trans "Did you know that AstroBin can host your FIT and digital camera raw files too?" %}</h4>
                     <p>
                         {% url 'rawdata.help1' as rawdata_url %}
                         {% blocktrans %}Have a look at <a href="{{rawdata_url}}">AstroBin Raw Data</a> if you want to safely store all your raw files, and have them neatily organized for future reference!{% endblocktrans %}
@@ -264,7 +264,7 @@
                 },
                 filters             : [
                     {title : "{% trans "FIT files" %}", extensions : "fit,fits"},
-                    {title : "{% trans "CR2 files" %}", extensions : "cr2"}
+                    {title : "{% trans "Raw files" %}", extensions : "{{supported_raw_formats|join:","}}"}
                 ]
             });
 
@@ -318,7 +318,7 @@
 
                 $.each(files, function(i, file) {
                     var ext = file.name.split('.').pop();
-                    var valid = $.inArray(ext.toLowerCase(), ["fit", "fits", "cr2"]) > -1;
+                    var valid = $.inArray(ext.toLowerCase(), ["fit", "fits"] + {{supported_raw_formats|safe}}) > -1;
 
                     if (valid) {
                         if (validFiles == 0) {
@@ -347,7 +347,7 @@
                         up.removeFile(file);
                         self.ui.$warning.find('.content').html(
                             "<h4 class=\"alert-heading\"><i class=\"icon-warning-sign\"></i> {% trans "Warning!" %}</h4> " +
-                            "{% trans "One ore more files were ignored because they did not look like FIT or CR2 files." %}");
+                            "{% trans "One ore more files were ignored because they did not look like FIT or digital camera raw files." %}");
                         self.ui.$warning.removeClass('hidden');
                     }
                 });

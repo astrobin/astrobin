@@ -900,6 +900,7 @@ def image_upload(request):
         user_byte_limit,
         user_used_percent,
         user_progress_class,
+        supported_raw_formats,
     )
 
     has_sub       = user_has_subscription(request.user)
@@ -917,6 +918,7 @@ def image_upload(request):
         'byte_limit': user_byte_limit(request.user),
         'used_percent': user_used_percent(request.user),
         'progress_class': user_progress_class(request.user),
+        'supported_raw_formats': supported_raw_formats(),
     }
 
     return render_to_response(

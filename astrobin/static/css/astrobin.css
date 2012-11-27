@@ -2619,24 +2619,42 @@ li.revisions {
   text-align: center;
   padding-bottom: 30px;
 }
-.plan:first-child .plan-inner {
+.plan .plan-inner {
   border-right: 1px solid #373737;
 }
 .plan:last-child .plan-inner {
-  border-left: 1px solid #373737;
+  border-right: none;
 }
-.plan h1,
+.plan h1 {
+  border-bottom: none;
+  font-size: 28px;
+}
+.plan h1 small {
+  font-size: 16px;
+  display: block;
+  margin-top: -14px;
+}
 .plan h2 {
   border-bottom: none;
+  font-size: 18px;
 }
-.plan h1 small,
 .plan h2 small {
-  font-size: 12px;
+  font-size: 14px;
   display: block;
-  margin-top: -16px;
+  margin-top: -18px;
+}
+.plan p {
+  color: #ddd;
+  font-size: 12px;
+  line-height: 14px;
 }
 .plan a.btn {
   margin-top: 25px;
+}
+.plan-description p {
+  font-size: 13px;
+  color: #cdcdcd;
+  text-align: center;
 }
 .thankyou {
   font-size: 22px;

@@ -2801,26 +2801,51 @@ li.revisions {
     text-align: center;
     padding-bottom: 30px;
 
-    &:first-child .plan-inner {
+    .plan-inner {
         border-right: 1px solid #373737;
     }
 
     &:last-child .plan-inner {
-        border-left: 1px solid #373737;
+        border-right: none;
     }
 
-    h1, h2 {
+    h1 {
         border-bottom: none;
+        font-size: 28px;
+
         small {
-            font-size: 12px;
+            font-size: 16px;
             display: block;
-            margin-top: -16px;
+            margin-top: -14px;
         }
+    }
+
+    h2 {
+        border-bottom: none;
+        font-size: 18px;
+
+        small {
+            font-size: 14px;
+            display: block;
+            margin-top: -18px;
+        }
+    }
+
+    p {
+        color: #ddd;
+        font-size: 12px;
+        line-height: 14px;
     }
 
     a.btn {
         margin-top: 25px;
     }
+}
+
+.plan-description p {
+    font-size: 13px;
+    color: #cdcdcd;
+    text-align: center;
 }
 
 .thankyou {
