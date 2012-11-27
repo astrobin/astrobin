@@ -13,7 +13,6 @@
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
 strong,
 .strong {
-  color: #fcfcfc;
   font-weight: bold;
 }
 abbr[title] {
@@ -1395,7 +1394,6 @@ div.favorite-container a.favorite .favorite-hint {
   left: 20px;
   width: 275px;
   visibility: hidden;
-  color: #fcfcfc;
   font-weight: bold;
 }
 div.favorite-container a.favorite:hover .favorite-hint {
@@ -1413,7 +1411,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
   float: right;
   padding-top: 2px;
   padding-right: 8px;
-  color: #fcfcfc;
   font-weight: bold;
 }
 .main-image {
@@ -2685,8 +2682,8 @@ table.rawdata-browser td.icon {
   margin-right: 4px;
 }
 .rawdata-browser-breadcumb a i {
-  padding-left: 4px;
-  font-size: 8px;
+  padding-left: 6px;
+  font-size: 9px;
 }
 .rawdata-browser-breadcumb .divider {
   color: #777;

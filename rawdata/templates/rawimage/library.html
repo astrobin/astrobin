@@ -61,7 +61,7 @@
             {% if filter_type %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{% query_string '' 'type' %}">
-                    {% trans "Type" %}: {{filter_type|humanize_rawimage_type}}
+                    {% trans "Type" %}: <strong>{{filter_type|humanize_rawimage_type}}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -69,7 +69,15 @@
             {% if filter_upload %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{% query_string '' 'upload' %}">
-                    {% trans "Uploaded" %}: {{filter_upload}}
+                    {% trans "Uploaded" %}: <strong>{{filter_upload}}</strong>
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
+
+            {% if folders_header %}
+                <span class="divider">/</span>
+                <a class="btn btn-mini" href="{% query_string 'f=none' '' %}">
+                    {% trans "Smart folders" %}: <strong>{{folders_header}}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
