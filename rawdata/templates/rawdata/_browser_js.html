@@ -11,7 +11,7 @@
 
         function reset_header($h) {
             if (is_folder_browser)
-                $h.text({{folders_header}});
+                $h.text("{{folders_header}}");
             else
                 var $select_all = $('<span/>').html($('<a/>')
                     .attr('href', '#')
