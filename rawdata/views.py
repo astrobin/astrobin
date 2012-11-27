@@ -115,12 +115,17 @@ class RawImageDeleteView(BaseDeleteView):
 
     def delete(self, request, *args, **kwargs):
         ids = kwargs.pop('ids', '').split(',')
-        for id in ids:
-            try:
-                image = self.get_queryset().get(id = id)
-                image.delete()
-            except RawImage.DoesNotExist:
-                continue
+        images = []
+
+        if ids and (len(ids) > 1 or ids[0] != '0'):
+            images = self.get_queryset().filter(id__in = ids)
+        else:
+            # Let's try to construct a list of image by generating virtual
+            # folders from the request's query string.
+            factory = FOLDER_TYPE_LOOKUP['none'](source = self.get_queryset())
+            images = factory.filter(self.request.GET)
+
+        images.delete()
 
         if request.is_ajax():
             return HttpResponse(
@@ -165,26 +170,24 @@ class RawImageLibrary(TemplateView):
         context['total_files'] = total_files.count()
         context['unindexed_count'] = total_files.filter(indexed = False).count()
 
-        images = RawImage.objects.filter(user = self.request.user)
-
         context['filter_type'] = self.request.GET.get('type')
         context['filter_upload'] = self.request.GET.get('upload')
 
+        all_images = RawImage.objects.filter(user = self.request.user)
+
         f = self.request.GET.get('f', 'upload')
         if not f or f == 'none':
-            context['images'] = images
+            factory = FOLDER_TYPE_LOOKUP['none'](source = all_images)
+            context['images'] = factory.filter(self.request.GET)
         else:
-            factory = None
-            if f == 'type':
-                factory = TypeFolderFactory(images)
-                context['folders_header'] = _("Type");
-            elif f == 'upload':
-                factory = UploadDateFolderFactory(images)
-                context['folders_header'] = _("Upload date")
-
-            if factory:
+            try:
+                factory = FOLDER_TYPE_LOOKUP[f](source = all_images)
                 factory.filter(self.request.GET)
+
+                context['folders_header'] = factory.get_label()
                 context['folders'] = factory.produce()
+            except KeyError:
+                raise Http404
 
         return context
 

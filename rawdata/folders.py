@@ -4,10 +4,15 @@ from operator import itemgetter
 
 # Django
 from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
 
 class BaseFolderFactory(object):
-    def __init__(self, source = [], *args, **kwargs):
-        self.source = source
+    def __init__(self, *args, **kwargs):
+        self.source = kwargs.pop('source', [])
+        self.label = ''
+
+    def get_label(self):
+        return self.label
 
     def filter(self, params):
         filter_type = params.get('type')
@@ -20,8 +25,26 @@ class BaseFolderFactory(object):
                 Q(uploaded__gte = datetime.strptime(filter_upload, '%Y-%m-%d')) &
                 Q(uploaded__lte = datetime.strptime(filter_upload, '%Y-%m-%d') + timedelta(days=1)));
 
+        return self.source
+
+
+class NoFolderFactory(BaseFolderFactory):
+    """ A special kind of factory that produces no folders, useful if you
+        still want to use .filter().
+    """
+    def __init__(self, *args, **kwargs):
+        super(NoFolderFactory, self).__init__(*args, **kwargs)
+        self.label = _("Name")
+
+    def produce(self):
+        return []
+
 
 class TypeFolderFactory(BaseFolderFactory):
+    def __init__(self, *args, **kwargs):
+        super(TypeFolderFactory, self).__init__(*args, **kwargs)
+        self.label = _("Type")
+
     def produce(self):
         from .templatetags.rawdata_tags import humanize_rawimage_type
         folders = [] # {'type': 123, 'label': 'abc', 'images': []}
@@ -42,6 +65,10 @@ class TypeFolderFactory(BaseFolderFactory):
 
 
 class UploadDateFolderFactory(BaseFolderFactory):
+    def __init__(self, *args, **kwargs):
+        super(UploadDateFolderFactory, self).__init__(*args, **kwargs)
+        self.label = _("Upload date")
+
     def produce(self):
         folders = [] # {'date': _, 'label': _, 'images': []}
         for image in self.source:
@@ -58,3 +85,12 @@ class UploadDateFolderFactory(BaseFolderFactory):
                 });
 
         return folders
+
+
+FOLDER_TYPE_LOOKUP = {
+    'none': NoFolderFactory,
+    'type': TypeFolderFactory,
+    'upload': UploadDateFolderFactory,
+}
+
+
