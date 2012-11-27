@@ -26,7 +26,6 @@ from .utils import *
 class RawImageCreateView(CreateView):
     model = RawImage
     form_class = RawImageUploadForm
-    template_name = 'rawimage/form.html'
     # success_url = lazy(reverse, str)('/') # TODO: url to user's raw data
     success_url = '/'
 
@@ -135,7 +134,7 @@ class RawImageDeleteView(BaseDeleteView):
 
 
 class RawImageLibrary(TemplateView):
-    template_name = 'rawimage/library.html'
+    template_name = 'rawdata/library.html'
 
     @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
     def dispatch(self, *args, **kwargs):
