@@ -83,8 +83,8 @@
             {% endif %}
         </div>
 
-        {% include 'rawimage/_folders.html' %}
-        {% include 'rawimage/_images.html' %}
+        {% include 'rawdata/_folders.html' %}
+        {% include 'rawdata/_images.html' %}
     {% else %}
         <p>
             {% blocktrans %}There doesn't seem to be anything here.{% endblocktrans %}
@@ -95,5 +95,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    {% include 'rawimage/_browser_js.html' %}
+    {% include 'rawdata/_browser_js.html' %}
 {% endblock %}
