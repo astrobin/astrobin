@@ -8,16 +8,20 @@
         <h1>{% trans "AstroBin Raw Data" %} <small>{% trans "Subscription plans" %}</small></h1>
     </div>
 
-    <p>
-        {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (<strong>FIT</strong> and <strong>CR2</strong>) on AstroBin. We will keep them neatly organized, and you will have a safe backup of all your work, including calibration files.{% endblocktrans %}
-    </p>
-    <p>
-        {% blocktrans %}Choose the plan that suits you best!{% endblocktrans %}
-    </p>
+    <div class="row section">
+        <div class="span12">
+            <p>
+                {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly organized, and you will have a safe backup of all your work, including calibration files.{% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans %}Choose the plan that suits you best!{% endblocktrans %}
+            </p>
+        </div>
+    </div>
 
     <div class="row">
         {% for object in object_list %}
-            <div class="span4 plan">
+            <div class="span3 plan">
                 {% include 'subscription/_plan.html' %}
                 <a class="btn btn-large btn-primary" href="{% url subscription_detail object.id %}">
                     {% trans "Manage" %}
@@ -26,7 +30,46 @@
         {% endfor %}
     </div>
 
+    <div class="row">
+        <div class="span3">
+            <div class="subtle-container plan-description">
+                <p>
+                {% blocktrans %} Choose this plan if you want to keep your expenses to a minimum, but still want the possibity to share your FIT and digital camera raw files with your friends. You can also participate to public data pools and contribute to the deepest deep sky images ever created, and you will always know that you support AstroBin.{% endblocktrans %}
+                </p>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="subtle-container plan-description">
+                <p>
+                {% blocktrans %}Choose this plan if you have started out in the recent year or two, or you don't want to share and backup your calibration files. Enjoy a lot of room for a convenient price.{% endblocktrans %}
+                </p>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="subtle-container plan-description">
+                <p>
+                {% blocktrans %}Choose this plan if you have several years worth of data. You will probably have enough room for all your calibration files, and will enjoy the full potential of the platform.{% endblocktrans %}
+                </p>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="subtle-container plan-description">
+                <p>
+                {% blocktrans %}Choose this plan if you have a massive amount of raw data that you want to share and backup securely online.{% endblocktrans %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+
     <div class="thankyou">
         {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
+    </div>
+    <div style="text-align:center">
+        {% url contact_form as contact_url %}
+        {% blocktrans %}PS: are you interested in larger plans? <a href="{{contact_url}}">Let us know!</a>{% endblocktrans %}
     </div>
 {% endblock %}
