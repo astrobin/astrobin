@@ -52,16 +52,22 @@ class RawImageDownloadView(base.View):
                 return self
 
         ids = kwargs.pop('ids', '').split(',')
-        if len(ids) == 1:
-            try:
-                image = RawImage.objects.get(id = ids[0])
-            except RawImage.DoesNotExist:
-                raise Http404
+        images = []
+
+        if ids and (len(ids) > 1 or ids[0] != '0'):
+            images = RawImage.objects.filter(user = self.request.user, id__in = ids)
+        else:
+            factory = FOLDER_TYPE_LOOKUP['none'](source = RawImage.objects.filter(user = self.request.user))
+            images = factory.filter(self.request.GET)
+
+        if not images:
+            # Empty?
+            raise Http404
+
+        if len(images) == 1:
+            image = images[0]
 
             if not image.active:
-                raise Http404
-
-            if image.user != request.user:
                 raise Http404
 
             wrapper = FixedFileWrapper(file(image.file.path))
@@ -69,42 +75,32 @@ class RawImageDownloadView(base.View):
             response['Content-Disposition'] = 'attachment; filename=%s' % image.original_filename
             response['Content-Length'] = image.size
         else:
-                temp = tempfile.NamedTemporaryFile()
-                archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
-                for id in ids:
-                    try:
-                        image = RawImage.objects.get(id = id)
+            temp = tempfile.NamedTemporaryFile()
+            print temp.name
+            archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
+            for image in images:
+                if not image.active:
+                    continue
+                archive.write(image.file.path, image.original_filename)
 
-                        if not image.active:
-                            continue
+            archive.close()
 
-                        if image.user != request.user:
-                            raise Http404
-
-                        archive.write(image.file.path, image.original_filename)
-                    except RawImage.DoesNotExist:
-                        continue
-
-                archive.close()
-
-                size = sum([x.file_size for x in archive.infolist()])
-                if size < 16*1024*1024:
-                    wrapper = FixedFileWrapper(temp)
-                    response = HttpResponse(wrapper, content_type='application/zip')
-                    response['Content-Disposition'] = 'attachment; filename=rawdata.zip'
-                    response['Content-Length'] = temp.tell()
-                    temp.seek(0)
-                else:
-                    t = TemporaryArchive(
-                        user = self.request.user,
-                        size = size,
-                    )
-                    t.file.save('', File(temp))
-                    t.save()
-                    response = HttpResponseRedirect(
-                        reverse('rawdata.temporary_archive_detail', args = (t.pk,)))
-
-                temp.close()
+            size = sum([x.file_size for x in archive.infolist()])
+            if size < 16*1024*1024:
+                wrapper = FixedFileWrapper(temp)
+                response = HttpResponse(wrapper, content_type='application/zip')
+                response['Content-Disposition'] = 'attachment; filename=rawdata.zip'
+                response['Content-Length'] = temp.tell()
+                temp.seek(0)
+            else:
+                t = TemporaryArchive(
+                    user = self.request.user,
+                    size = size,
+                )
+                t.file.save('', File(temp))
+                t.save()
+                response = HttpResponseRedirect(
+                    reverse('rawdata.temporary_archive_detail', args = (t.pk,)))
 
         return response
 

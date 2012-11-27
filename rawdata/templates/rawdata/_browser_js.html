@@ -67,7 +67,7 @@
                 var params = $table.find('tr.active td.folder-label a').attr('href').split('?')[1];
 
                 var $download = $('<span/>').html($('<a/>')
-                    .attr('href', '/rawdata/download/?' + params)
+                    .attr('href', '/rawdata/download/0/?' + params)
                     .addClass('btn btn-mini btn-primary')
                     .html('<i class="icon-download-alt"></i> {% trans "Download" %}'));
 
