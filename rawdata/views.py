@@ -174,14 +174,17 @@ class RawImageLibrary(TemplateView):
         if not f or f == 'none':
             context['images'] = images
         else:
+            factory = None
             if f == 'type':
                 factory = TypeFolderFactory(images)
                 context['folders_header'] = _("Type");
-            if f == 'upload':
+            elif f == 'upload':
                 factory = UploadDateFolderFactory(images)
                 context['folders_header'] = _("Upload date")
-            factory.filter(self.request.GET)
-            context['folders'] = factory.produce()
+
+            if factory:
+                factory.filter(self.request.GET)
+                context['folders'] = factory.produce()
 
         return context
 
