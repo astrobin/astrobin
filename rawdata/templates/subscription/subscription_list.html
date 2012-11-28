@@ -12,13 +12,17 @@
         <div class="span12">
             <p>
                 {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly organized, and you will have a safe backup of all your work, including calibration files.{% endblocktrans %}
+
+                {% url rawdata.help1 as rawdata_url %}
+                {% blocktrans %}Learn more by reading <a href="{{rawdata_url}}">a short introduction.</a>{% endblocktrans %}
             </p>
-            <p>
-                {% blocktrans %}Choose the plan that suits you best!{% endblocktrans %}
-            </p>
-        </div>
+       </div>
     </div>
 
+    <h3>
+        {% blocktrans %}Here are the available plans. Choose the one that suits you best!{% endblocktrans %}
+    </h3>
+ 
     <div class="row">
         {% for object in object_list %}
             <div class="span3 plan">
@@ -69,7 +73,6 @@
         {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
     </div>
     <div style="text-align:center">
-        {% url contact_form as contact_url %}
-        {% blocktrans %}PS: are you interested in larger plans? <a href="{{contact_url}}">Let us know!</a>{% endblocktrans %}
+        {% blocktrans %}PS: are you interested in larger plans? <a href="/contact/">Let us know!</a>{% endblocktrans %}
     </div>
 {% endblock %}

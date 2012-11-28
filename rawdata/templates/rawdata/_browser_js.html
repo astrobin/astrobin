@@ -44,47 +44,78 @@
                     e.preventDefault();
                 }));
 
+            var $download = $('<span/>').html($('<a/>')
+                .attr('href', '#')
+                .addClass('btn btn-mini btn-primary')
+                .html('<i class="icon-download-alt"></i> {% trans "Download" %}'));
+
+            var $share = $('<span/>').addClass('dropdown');
+            var $share_button = $('<button/>')
+                .addClass('btn btn-mini btn-primary dropdown-toggle')
+                .attr('data-toggle', 'dropdown')
+                .html('<i class="icon-share-alt"></i> ' +
+                      "{% trans "Share" %}" +
+                      '<b class="caret"></b>');
+            var $share_menu = $('<ul/>')
+                .addClass('dropdown-menu')
+                .html(
+                    '<li><a href="#" id="share-to-private-shared-folder">' +
+                    '<i class="icon-lock"></i> ' +
+                    "{% trans "Private shared folder" %}" + '</a></li>' +
+
+                    '<li><a href="#" id="share-to-public-data-pool">' +
+                    '<i class="icon-unlock"></i> ' +
+                    "{% trans "Public data pool" %}" + '</a></li>');
+            $share.append($share_button).append($share_menu);
+
+            var $del = $('<span/>').html($('<a/>')
+                .attr('href', '#')
+                .addClass('btn btn-mini btn-danger')
+                .html('<i class="icon-trash"></i> {% trans "Delete" %}'));
+
             if (is_image_browser) {
                 var ids = [];
                 $.each($table.find('tr.active'), function(i, $row) {
                     ids.push($($row).attr('id'));
                 });
 
-                var $download = $('<span/>').html($('<a/>')
-                    .attr('href', '/rawdata/download/' + ids.join(',') + '/')
-                    .addClass('btn btn-mini btn-primary')
-                    .html('<i class="icon-download-alt"></i> {% trans "Download" %}'));
+                $download.find('a')
+                    .attr('href', '/rawdata/download/' + ids.join(',') + '/');
 
-                var $del = $('<span/>').html($('<a/>')
-                    .attr('href', '#')
-                    .addClass('btn btn-mini btn-danger')
-                    .html('<i class="icon-trash"></i> {% trans "Delete" %}'))
-                    .click(function(e) {
-                        del(ids);
-                        e.preventDefault();
-                    });
+                $share_menu.find('#share-to-private-shared-folder')
+                    .attr('href', '/rawdata/privatesharedfolders/share/' + ids.join(',') + '/');
+
+                $share_menu.find('#share-to-public-data-pool')
+                    .attr('href', '/rawdata/publicdatapools/share/' + ids.join(',') + '/');
+
+                $del.find('a').click(function(e) {
+                    del(ids);
+                    e.preventDefault();
+                });
+
             } else if (is_folder_browser) {
                 var params = $table.find('tr.active td.folder-label a').attr('href').split('?')[1];
 
-                var $download = $('<span/>').html($('<a/>')
-                    .attr('href', '/rawdata/download/0/?' + params)
-                    .addClass('btn btn-mini btn-primary')
-                    .html('<i class="icon-download-alt"></i> {% trans "Download" %}'));
+                $download.find('a')
+                    .attr('href', '/rawdata/download/?' + params);
 
-                var $del = $('<span/>').html($('<a/>')
-                    .attr('href', '#')
-                    .addClass('btn btn-mini btn-danger')
-                    .html('<i class="icon-trash"></i> {% trans "Delete" %}'))
-                    .click(function(e) {
-                        del(params);
-                        e.preventDefault();
-                    });
+                $share_menu.find('#share-to-private-shared-folder')
+                    .attr('href', '/rawdata/privatesharedfolders/share/?' + params);
+
+                $share_menu.find('#share-to-public-data-pool')
+                    .attr('href', '/rawdata/publicdatapools/share/?' + params);
+
+                $del.find('a').click(function(e) {
+                    del(params);
+                    e.preventDefault();
+                });
             }
 
             $h
                 .html($selected)
                 .append($reset)
                 .append($download)
+                .append($share)
                 .append($del);
         }
 
@@ -108,7 +139,7 @@
                 $.each($table.find('tr.active'), function(i, $row) {
                     affected_rows.push($($row));
                 });
-                query_string = '0/?' + params;
+                query_string = '?' + params;
             }
 
             $.each(affected_rows, function(i, $row) {
@@ -125,6 +156,7 @@
                     success: function() {
                         $.each(affected_rows, function(i, $row) {
                             $row.remove();
+                            $('body').find('.tooltip').remove();
                         });
                     }
                 });

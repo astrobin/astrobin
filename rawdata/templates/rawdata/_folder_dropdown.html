@@ -5,7 +5,7 @@
 <div class="btn-group">
     <button class="btn btn-small btn-primary dropdown-toggle" data-toggle="dropdown">
         {% trans "Smart folders" %}
-        <span class="caret"></span>
+        <b class="caret"></b>
     </button>
     <ul class="dropdown-menu">
         <li>
@@ -24,7 +24,7 @@
 
         <li>
             <a href="{% query_string 'f=upload' '' %}">
-                {% if request.GET.f == 'upload' %}<i class="icon-ok"></i>{% endif %}
+                {% if request.GET.f == 'upload' or request.GET.f == None %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Upload date" %}
             </a>
         </li>

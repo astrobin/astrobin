@@ -1,4 +1,8 @@
+# Django
 from django.db import models
+
+# This app
+from .folders import FOLDER_TYPE_LOOKUP
 
 class SoftDeleteManager(models.Manager):
     def get_query_set(self):
@@ -16,3 +20,16 @@ class SoftDeleteManager(models.Manager):
         if 'pk' in kwargs:
             return self.all_with_inactive().filter(*args, **kwargs)
         return self.get_query_set().filter(*args, **kwargs)
+
+class RawImageManager(SoftDeleteManager):
+    def by_ids_or_params(self, ids, params):
+        qs = super(RawImageManager, self).get_query_set()
+        ids = ids.split(',') if ids else None
+        if ids:
+            qs = qs.filter(id__in = ids)
+        else:
+            factory = FOLDER_TYPE_LOOKUP['none'](source = qs)
+            qs = factory.filter(params)
+
+        return qs
+

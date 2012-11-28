@@ -874,6 +874,14 @@ body.full {
   text-decoration: none;
   background-color: inherit;
 }
+.btn-primary .caret,
+.btn-warning .caret,
+.btn-danger .caret,
+.btn-info .caret,
+.btn-success .caret,
+.btn-inverse .caret {
+  margin-left: 5px;
+}
 .astrobin-container {
   position: relative;
   padding: 34px 30px 30px 30px;
