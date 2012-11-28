@@ -1,27 +1,26 @@
 # Python
 from operator import itemgetter
 import simplejson
-import tempfile, zipfile
-
 
 # Django
 from django.contrib.auth.decorators import user_passes_test
-from django.core.files import File
-from django.core.servers.basehttp import FileWrapper
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.utils.functional import lazy 
-from django.views.generic import *
-from django.views.generic.edit import BaseDeleteView
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
+from django.views.generic import *
+from django.views.generic.edit import BaseDeleteView
 
 # This app
-from .models import RawImage, TemporaryArchive
 from .folders import *
-from .forms import RawImageUploadForm
+from .forms import *
+from .mixins import AjaxableResponseMixin
+from .models import *
 from .utils import *
+from .zip import serve_zip
 
 class RawImageCreateView(CreateView):
     model = RawImage
@@ -34,34 +33,18 @@ class RawImageCreateView(CreateView):
         return super(RawImageCreateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
-        if form.is_valid():
-            raw_image = form.save(commit = False)
-            raw_image.user = self.request.user
-            raw_image.size = form.cleaned_data['file']._size
-            raw_image.save(index = True)
+        raw_image = form.save(commit = False)
+        raw_image.user = self.request.user
+        raw_image.size = form.cleaned_data['file']._size
+        raw_image.save(index = True)
 
         return super(RawImageCreateView, self).form_valid(form)
 
 
 class RawImageDownloadView(base.View):
     def get(self, request, *args, **kwargs):
-        # https://code.djangoproject.com/ticket/6027
-        class FixedFileWrapper(FileWrapper):
-            def __iter__(self):
-                self.filelike.seek(0)
-                return self
-
-        ids = kwargs.pop('ids', '').split(',')
-        images = []
-
-        if ids and (len(ids) > 1 or ids[0] != '0'):
-            images = RawImage.objects.filter(user = self.request.user, id__in = ids)
-        else:
-            factory = FOLDER_TYPE_LOOKUP['none'](source = RawImage.objects.filter(user = self.request.user))
-            images = factory.filter(self.request.GET)
-
+        images = RawImage.objects.by_ids_or_params(kwargs.pop('ids', ''), self.request.GET)
         if not images:
-            # Empty?
             raise Http404
 
         if len(images) == 1:
@@ -74,61 +57,28 @@ class RawImageDownloadView(base.View):
             response = HttpResponse(wrapper, content_type = 'application/octet-stream')
             response['Content-Disposition'] = 'attachment; filename=%s' % image.original_filename
             response['Content-Length'] = image.size
-        else:
-            temp = tempfile.NamedTemporaryFile()
-            print temp.name
-            archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
-            for image in images:
-                if not image.active:
-                    continue
-                archive.write(image.file.path, image.original_filename)
+            return response
 
-            archive.close()
-
-            size = sum([x.file_size for x in archive.infolist()])
-            if size < 16*1024*1024:
-                wrapper = FixedFileWrapper(temp)
-                response = HttpResponse(wrapper, content_type='application/zip')
-                response['Content-Disposition'] = 'attachment; filename=rawdata.zip'
-                response['Content-Length'] = temp.tell()
-                temp.seek(0)
-            else:
-                t = TemporaryArchive(
-                    user = self.request.user,
-                    size = size,
-                )
-                t.file.save('', File(temp))
-                t.save()
-                response = HttpResponseRedirect(
-                    reverse('rawdata.temporary_archive_detail', args = (t.pk,)))
-
-        return response
+        return serve_zip(images, self.request.user)
 
 
 class RawImageDeleteView(BaseDeleteView):
-    def get_queryset(self):
-        return RawImage.objects.filter(user = self.request.user)
+    def get_object(self):
+        # We either delete my many ids or some query params
+        return None
 
     def delete(self, request, *args, **kwargs):
-        ids = kwargs.pop('ids', '').split(',')
-        images = []
-
-        if ids and (len(ids) > 1 or ids[0] != '0'):
-            images = self.get_queryset().filter(id__in = ids)
-        else:
-            # Let's try to construct a list of image by generating virtual
-            # folders from the request's query string.
-            factory = FOLDER_TYPE_LOOKUP['none'](source = self.get_queryset())
-            images = factory.filter(self.request.GET)
-
+        ids = kwargs.pop('ids', '')
+        images = RawImage.objects.by_ids_or_params(ids, self.request.GET)
         images.delete()
 
         if request.is_ajax():
+            context = {}
+            context['success'] = True
+            if ids:
+                context['ids'] = ','.join(ids)
             return HttpResponse(
-                simplejson.dumps({
-                    'success': True,
-                    'ids': ','.join(ids),
-                }),
+                simplejson.dumps(context),
                 mimetype = 'application/json')
 
         return HttpResponseRedirect(self.get_success_url())
@@ -190,6 +140,66 @@ class RawImageLibrary(TemplateView):
 
 class TemporaryArchiveDetailView(DetailView):
     model = TemporaryArchive
+
+
+class PublicDataPoolCreateView(AjaxableResponseMixin, CreateView):
+    model = PublicDataPool
+    form_class = PublicDataPoolForm
+
+    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
+    def dispatch(self, *args, **kwargs):
+        return super(PublicDataPoolCreateView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(PublicDataPoolCreateView, self).get_context_data(**kwargs)
+        images = RawImage.objects.by_ids_or_params(self.kwargs.pop('ids', ''), self.request.GET)
+        if not images:
+            raise Http404
+
+        context['images'] = images
+        if PublicDataPool.objects.all():
+            context['pools_form'] = PublicDataPool_SelectExistingForm()
+
+        return context
+ 
+    def form_valid(self, form):
+        pool = form.save(commit = False)
+        pool.creator = self.request.user
+        pool.save()
+
+        return super(PublicDataPoolCreateView, self).form_valid(form)
+
+
+class PublicDataPoolAddDataView(AjaxableResponseMixin, UpdateView):
+    model = PublicDataPool
+    form_class = PublicDataPool_ImagesForm
+
+    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
+    def dispatch(self, *args, **kwargs):
+        return super(PublicDataPoolAddDataView, self).dispatch(*args, **kwargs)
+
+    def form_valid(self, form):
+        pool = form.save(commit = False)
+        new = form.cleaned_data['images']
+        for image in new:
+            pool.images.add(image)
+        pool.save()
+        return super(PublicDataPoolAddDataView, self).form_valid(form)
+
+
+class PublicDataPoolDetailView(DetailView):
+    model = PublicDataPool
+
+    def get_context_data(self, **kwargs):
+        context = super(PublicDataPoolDetailView, self).get_context_data(**kwargs)
+        context['size'] = sum(x.size for x in self.get_object().images.all())
+        return context
+
+
+class PublicDataPoolDownloadView(base.View):
+    def get(self, request, *args, **kwargs):
+        pool = get_object_or_404(PublicDataPool, pk = kwargs.pop('pk'))
+        return serve_zip(pool.images.all(), self.request.user)
 
 
 class Help1(TemplateView):

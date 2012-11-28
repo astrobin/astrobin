@@ -263,7 +263,6 @@
                     'X-CSRFToken'      : '{{csrf_token}}'
                 },
                 filters             : [
-                    {title : "{% trans "FIT files" %}", extensions : "fit,fits"},
                     {title : "{% trans "Raw files" %}", extensions : "{{supported_raw_formats|join:","}}"}
                 ]
             });
@@ -318,7 +317,7 @@
 
                 $.each(files, function(i, file) {
                     var ext = file.name.split('.').pop();
-                    var valid = $.inArray(ext.toLowerCase(), ["fit", "fits"] + {{supported_raw_formats|safe}}) > -1;
+                    var valid = $.inArray(ext.toLowerCase(), {{supported_raw_formats|safe}}) > -1;
 
                     if (valid) {
                         if (validFiles == 0) {
