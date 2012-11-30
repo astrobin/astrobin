@@ -173,6 +173,7 @@ class PublicDataPool(models.Model):
     archive = models.ForeignKey(
         TemporaryArchive,
         null = True,
+        on_delete = models.SET_NULL,
     )
 
     active = models.BooleanField(
