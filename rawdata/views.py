@@ -3,13 +3,11 @@ from operator import itemgetter
 import simplejson
 
 # Django
-from django.contrib.auth.decorators import user_passes_test
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.functional import lazy 
-from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic import *
 from django.views.generic.edit import BaseDeleteView
@@ -17,20 +15,16 @@ from django.views.generic.edit import BaseDeleteView
 # This app
 from .folders import *
 from .forms import *
-from .mixins import AjaxableResponseMixin
+from .mixins import AjaxableResponseMixin, RestrictToSubscriberMixin
 from .models import *
 from .utils import *
 from .zip import serve_zip
 
-class RawImageCreateView(CreateView):
+class RawImageCreateView(RestrictToSubscriberMixin, CreateView):
     model = RawImage
     form_class = RawImageUploadForm
     # success_url = lazy(reverse, str)('/') # TODO: url to user's raw data
     success_url = '/'
-
-    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
-    def dispatch(self, *args, **kwargs):
-        return super(RawImageCreateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         raw_image = form.save(commit = False)
@@ -41,7 +35,7 @@ class RawImageCreateView(CreateView):
         return super(RawImageCreateView, self).form_valid(form)
 
 
-class RawImageDownloadView(base.View):
+class RawImageDownloadView(RestrictToSubscriberMixin, base.View):
     def get(self, request, *args, **kwargs):
         images = RawImage.objects.by_ids_or_params(kwargs.pop('ids', ''), self.request.GET)
         if not images:
@@ -63,7 +57,7 @@ class RawImageDownloadView(base.View):
         return response
 
 
-class RawImageDeleteView(BaseDeleteView):
+class RawImageDeleteView(RestrictToSubscriberMixin, BaseDeleteView):
     def get_object(self):
         # We either delete my many ids or some query params
         return None
@@ -85,12 +79,8 @@ class RawImageDeleteView(BaseDeleteView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class RawImageLibrary(TemplateView):
+class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
     template_name = 'rawdata/library.html'
-
-    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
-    def dispatch(self, *args, **kwargs):
-        return super(RawImageLibrary, self).dispatch(*args, **kwargs)
 
     def get_folders_by_type(self, user):
         images = RawImage.objects.filter(user = user, indexed = True)
@@ -139,17 +129,13 @@ class RawImageLibrary(TemplateView):
         return context
 
 
-class TemporaryArchiveDetailView(DetailView):
+class TemporaryArchiveDetailView(RestrictToSubscriberMixin, DetailView):
     model = TemporaryArchive
 
 
-class PublicDataPoolCreateView(AjaxableResponseMixin, CreateView):
+class PublicDataPoolCreateView(RestrictToSubscriberMixin, AjaxableResponseMixin, CreateView):
     model = PublicDataPool
     form_class = PublicDataPoolForm
-
-    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
-    def dispatch(self, *args, **kwargs):
-        return super(PublicDataPoolCreateView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(PublicDataPoolCreateView, self).get_context_data(**kwargs)
@@ -171,13 +157,9 @@ class PublicDataPoolCreateView(AjaxableResponseMixin, CreateView):
         return super(PublicDataPoolCreateView, self).form_valid(form)
 
 
-class PublicDataPoolAddDataView(AjaxableResponseMixin, UpdateView):
+class PublicDataPoolAddDataView(RestrictToSubscriberMixin, AjaxableResponseMixin, UpdateView):
     model = PublicDataPool
     form_class = PublicDataPool_ImagesForm
-
-    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
-    def dispatch(self, *args, **kwargs):
-        return super(PublicDataPoolAddDataView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         pool = form.save(commit = False)
@@ -197,7 +179,7 @@ class PublicDataPoolDetailView(DetailView):
         return context
 
 
-class PublicDataPoolDownloadView(base.View):
+class PublicDataPoolDownloadView(RestrictToSubscriberMixin, base.View):
     def get(self, request, *args, **kwargs):
         pool = get_object_or_404(PublicDataPool, pk = kwargs.pop('pk'))
         if pool.archive:
