@@ -31,6 +31,7 @@ class PublicDataPoolForm(forms.ModelForm):
 
     class Meta:
         model = PublicDataPool
+        fields = ('name', 'description',)
 
 
 class PublicDataPool_SelectExistingForm(forms.Form):

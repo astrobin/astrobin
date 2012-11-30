@@ -164,6 +164,7 @@
                 },
                 success: function(response, status, xhr, $form) {
                     var pool_id = response.pk;
+                    $form.closest('.modal').modal('hide');
                     post_images(pool_id, $('#success-2'));
                 }
             });
