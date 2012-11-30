@@ -6,6 +6,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.db import models
+from django.db.models.signals import m2m_changed
 from django.utils.translation import ugettext_lazy as _
 
 # This app
@@ -169,6 +170,11 @@ class PublicDataPool(models.Model):
         null = True,
     )
 
+    archive = models.ForeignKey(
+        TemporaryArchive,
+        null = True,
+    )
+
     active = models.BooleanField(
         default = True,
         editable = False,
@@ -179,3 +185,11 @@ class PublicDataPool(models.Model):
 
     class Meta:
         app_label = 'rawdata'
+
+
+def on_pool_images_changed(sender, instance, action, reverse, model, pk_set, **kwargs):
+    instance.archive = None
+    instance.save()
+
+m2m_changed.connect(on_pool_images_changed, sender = PublicDataPool.images.through)
+
