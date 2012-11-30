@@ -96,7 +96,7 @@ class RawImage(models.Model):
             from .tasks import index_raw_image
             index_raw_image.delay(self.id)
 
-    def delete(self, *args, **kwargs):
+    def delete(self):
         self.active = False
         self.save()
 
@@ -135,7 +135,7 @@ class TemporaryArchive(models.Model):
     def __unicode__(self):
         return self.file.name
 
-    def delete(self, *args, **kwargs):
+    def delete(self):
         self.active = False
         self.save()
 
@@ -186,6 +186,10 @@ class PublicDataPool(models.Model):
 
     class Meta:
         app_label = 'rawdata'
+
+    def delete(self):
+        self.active = False
+        self.save()
 
 
 def on_pool_images_changed(sender, instance, action, reverse, model, pk_set, **kwargs):
