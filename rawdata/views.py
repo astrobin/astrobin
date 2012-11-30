@@ -59,7 +59,8 @@ class RawImageDownloadView(base.View):
             response['Content-Length'] = image.size
             return response
 
-        return serve_zip(images, self.request.user)
+        response, archive = serve_zip(images, self.request.user)
+        return response
 
 
 class RawImageDeleteView(BaseDeleteView):
@@ -199,7 +200,16 @@ class PublicDataPoolDetailView(DetailView):
 class PublicDataPoolDownloadView(base.View):
     def get(self, request, *args, **kwargs):
         pool = get_object_or_404(PublicDataPool, pk = kwargs.pop('pk'))
-        return serve_zip(pool.images.all(), self.request.user)
+        if pool.archive:
+            return HttpResponseRedirect(
+                reverse('rawdata.temporary_archive_detail',
+                        args=(pool.archive.pk,)))
+
+        response, archive = serve_zip(pool.images.all(), self.request.user)
+        pool.archive = archive
+        pool.save()
+
+        return response
 
 
 class Help1(TemplateView):
