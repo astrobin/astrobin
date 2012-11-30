@@ -174,6 +174,7 @@ class PublicDataPool(models.Model):
         TemporaryArchive,
         null = True,
         on_delete = models.SET_NULL,
+        editable = False,
     )
 
     active = models.BooleanField(
