@@ -33,7 +33,7 @@ TMPZIPS=/webserver/www/tmpzips
 10 00 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py merge_gear) 2>&1 >/dev/null
 30 00 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py global_stats) 2>&1 >/dev/null
 00 01 * * * (find $UPLOADS -type f -not -name ".*" -mtime +90 -exec rm -f {} \; 2>&1 >/dev/null)
-00 11 * * * (find $TMPZIPS -type f -name "*.zip" -mtime +2 -exec rm -f {} \; 2>&1 >/dev/null)
+00 11 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py clean_temporary_archives) 2>&1 >/dev/null
 
 00 20 * * * (. $ASTROBIN_QUESTIONS_ROOT/env/production; $PYTHON $ASTROBIN_QUESTIONS_ROOT/manage.py send_email_alerts) 2>&1 >/dev/null
 00 02 * * * (. $ASTROBIN_QUESTIONS_ROOT/env/production; $PYTHON $ASTROBIN_QUESTIONS_ROOT/manage.py send_accept_answer_reminders) 2>&1 >/dev/null
