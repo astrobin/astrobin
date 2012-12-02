@@ -45,8 +45,11 @@ v1_api.register(ImageOfTheDayResource())
 
 urlpatterns = patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
+
     url(r'^rawdata/', include('rawdata.urls')),
     url(r'^nestedcomments/', include('nested_comments.urls')),
+
 
     url(r'^$', views.index, name='index'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
