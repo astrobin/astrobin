@@ -193,6 +193,7 @@ INSTALLED_APPS = (
 
     # AstroBin apps
     'common',
+    'nested_comments',
     'astrobin',
     'rawdata',
 
@@ -227,6 +228,8 @@ INSTALLED_APPS = (
     'openid_provider',
     'paypal.standard.ipn',
     'subscription',
+    'ember',
+    'rest_framework',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -356,7 +359,10 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
-            'js/jquery-1.7.1.js',
+            'common/js/jquery-1.8.3.js',
+            'common/js/handlebars-1.0.rc.1.js',
+            'common/js/ember-1.0.0-pre.2.js',
+
             'js/jquery.i18n.js',
             'js/plugins/localization/jquery.localisation.js',
             'js/jquery.uniform.js',
@@ -385,6 +391,8 @@ PIPELINE_JS = {
             'js/respond.src.js',
             'js/bootstrap.js',
             'js/astrobin.js',
+
+            'nested_comments/js/nested_comments_app.js',
         ),
         'output_filename': 'js/astrobin_pipeline_v' + MEDIA_VERSION + '.js',
     },
@@ -411,3 +419,7 @@ SUBSCRIPTION_PAYPAL_SETTINGS = {
     "business": PAYPAL_RECEIVER_EMAIL,
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+}

@@ -1,0 +1,44 @@
+{% load i18n %}
+{% load ember %}
+
+{% handlebars "nested-comments" %}
+    {{outlet top-level}}
+    {{outlet comments}}
+{% endhandlebars %}
+
+{% handlebars "top-level" %}
+    <p>Top level form goes here</p>
+{% endhandlebars %}
+
+{% handlebars "comments" %}
+    <p>Comments go here</p>
+{% endhandlebars %}
+
+<div id="nested-comments"></div>
+
+{% comment %}
+<div id="nested-comments">
+    <div class="top-level-form">
+        <form class="form-horizontal" action="{% url nested_comments.create content_type.id object.id %}" method="post">
+            {{comment_form}}
+
+            <input type="hidden" name="parent_id" value="" />
+            <input type="hidden" name="level" value="0" />
+
+            <div>
+                <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
+                <span class="help-inline">
+                    <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+                </span>
+                <span class="loader hidden">
+                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
+                </span>
+            </div>
+        </form>
+    </div> <!-- top-level-form -->
+
+    <div class="comments">
+        {% include 'nested_comments/nestedcomment_list.html' %}
+    </div>
+</div>
+{% endcomment %}

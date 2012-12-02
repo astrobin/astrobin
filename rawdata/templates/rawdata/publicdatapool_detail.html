@@ -61,7 +61,21 @@
                     </span>
                 </div>
             </div>
+
+            <div class="subtle-container comment-container">
+                <div class="header">
+                    <h4>
+                        <i class="icon-comments-alt"></i>
+                        {% trans "Comments" %}
+                    </h4>
+                </div>
+                <p>
+                    {% trans "You can use this space to discuss this public data pool and exchange information and tips with other contributors or people who want to process the data." %}
+                </p>
+
+                {% include 'nested_comments/nestedcomment_app.html' %}
+            </div>
         </div>
     </div>
-
 {% endblock %}
+

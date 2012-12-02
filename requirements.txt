@@ -4,6 +4,7 @@ Django==1.3.1
 Jinja2==2.6
 Markdown==2.1.1
 MySQL-python==1.2.3
+PIL==1.1.7
 Paste==1.7.5.1
 Pillow==1.7.7
 South==0.7.3
@@ -13,6 +14,8 @@ akismet==0.2.0
 amqplib==1.0.2
 anyjson==0.3.1
 argparse==1.2.1
+askbot==0.7.43
+beautifulsoup4==4.1.3
 boto==2.1.1
 ccy==0.5.1
 celery==2.2.7
@@ -30,6 +33,7 @@ django-compressor==1.1.2
 django-contact-form-gv==0.4.0
 django-countries==1.0.5
 django-debug-toolbar==0.9.4
+django-ember==0.1
 django-followit==0.0.3
 django-haystack==1.2.6
 django-hitcount==0.2
@@ -43,6 +47,7 @@ django-mptt==0.5.2
 django-notification==0.1.5
 django-openid-provider==0.4
 django-pagination==1.0.7
+django-paypal==0.1.2
 django-persistent-messages==0.1
 django-picklefield==0.1.9
 django-pipeline==1.2.1
@@ -53,6 +58,7 @@ django-reviews==0.1.0
 django-robots==0.8.1
 django-staticfiles==1.2.1
 django-storages==1.1.4
+django-subscription==0.1
 django-tagging==0.3.1
 django-tastypie==0.9.11
 django-threaded-messages==0.1.19
@@ -61,6 +67,7 @@ django-timezones==0.1.4
 django-tinymce==1.5.1b2
 django-uni-form==0.9.0
 django-xmlrpc==0.1.3
+djangorestframework==2.1.6
 egenix-mx-base==3.2.4
 fanstatic==0.11.4
 flickrapi==1.4.2
@@ -73,6 +80,7 @@ jsmin==2.0.2
 kombu==1.5.1
 lamson==1.1
 lockfile==0.9.1
+longerusername==0.4
 lxml==2.3.3
 markdown2==1.4.2
 mimeparse==0.1.3
