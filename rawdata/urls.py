@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^delete/(?:(?P<ids>[\d+,?]+)/)?$', login_required(RawImageDeleteView.as_view()), name = 'rawdata.delete'),
     url(r'^archive/(?P<pk>\d+)/$', login_required(TemporaryArchiveDetailView.as_view()), name = 'rawdata.temporary_archive_detail'),
 
+
+    url(r'^publicdatapools/$', PublicDataPoolListView.as_view(), name = 'rawdata.publicdatapool_list'),
     url(r'^publicdatapools/(?P<pk>\d+)/$', PublicDataPoolDetailView.as_view(), name = 'rawdata.publicdatapool_detail'),
     url(r'^publicdatapools/(?P<pk>\d+)/add-data/$', login_required(PublicDataPoolAddDataView.as_view()), name = 'rawdata.publicdatapool_add_data'),
     url(r'^publicdatapools/(?P<pk>\d+)/download/$', login_required(PublicDataPoolDownloadView.as_view()), name = 'rawdata.publicdatapool_download'),

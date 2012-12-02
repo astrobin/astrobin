@@ -3,6 +3,7 @@ from operator import itemgetter
 import simplejson
 
 # Django
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -12,10 +13,15 @@ from django.utils.translation import ugettext as _
 from django.views.generic import *
 from django.views.generic.edit import BaseDeleteView
 
+# Other AstroBin apps
+from common.mixins import AjaxableResponseMixin
+from nested_comments.forms import NestedCommentForm
+from nested_comments.models import NestedComment
+
 # This app
 from .folders import *
 from .forms import *
-from .mixins import AjaxableResponseMixin, RestrictToSubscriberMixin
+from .mixins import RestrictToSubscriberMixin
 from .models import *
 from .utils import *
 from .zip import serve_zip
@@ -175,7 +181,15 @@ class PublicDataPoolDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PublicDataPoolDetailView, self).get_context_data(**kwargs)
+        content_type = ContentType.objects.get_for_model(self.model)
+
         context['size'] = sum(x.size for x in self.get_object().images.all())
+        context['comment_form'] = NestedCommentForm()
+        context['content_type'] = ContentType.objects.get_for_model(self.model)
+        context['comments'] = NestedComment.objects.filter(
+            content_type = content_type,
+            object_id = self.get_object().id,
+        )
         return context
 
 
@@ -192,6 +206,10 @@ class PublicDataPoolDownloadView(RestrictToSubscriberMixin, base.View):
         pool.save()
 
         return response
+
+
+class PublicDataPoolListView(ListView):
+    model = PublicDataPool
 
 
 class Help1(TemplateView):

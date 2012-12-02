@@ -165,6 +165,11 @@ class PublicDataPool(models.Model):
         editable = False,
     )
 
+    updated = models.DateTimeField(
+        auto_now = True,
+        editable = False,
+    )
+
     images = models.ManyToManyField(
         RawImage,
         null = True,

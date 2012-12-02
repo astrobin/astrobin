@@ -30,11 +30,13 @@ from astrobin.search import SearchView
 from astrobin.forms import AdvancedSearchForm
 
 from rawdata import views as rawdata_views
+from nested_comments import views as nested_comments_views
 
 from tastypie.api import Api
 from astrobin.api import ImageResource, ImageRevisionResource,\
                          CommentResource, ImageOfTheDayResource
 
+# These are the old API, not djangorestframework
 v1_api = Api(api_name = 'v1')
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
@@ -42,7 +44,9 @@ v1_api.register(CommentResource())
 v1_api.register(ImageOfTheDayResource())
 
 urlpatterns = patterns('',
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^rawdata/', include('rawdata.urls')),
+    url(r'^nestedcomments/', include('nested_comments.urls')),
 
     url(r'^$', views.index, name='index'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
