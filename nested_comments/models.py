@@ -4,10 +4,8 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
-# Third party apps
-from mptt.models import MPTTModel, TreeForeignKey
 
-class NestedComment(MPTTModel):
+class NestedComment(models.Model):
     content_type = models.ForeignKey(
         ContentType,
     )
@@ -35,12 +33,12 @@ class NestedComment(MPTTModel):
         editable = False,
     )
 
-    parent = TreeForeignKey(
+    parent = models.ForeignKey(
         'self',
         null = True,
         blank = True,
-        editable = False,
-        related_name = 'children'
+        related_name = 'children',
+        on_delete = models.SET_NULL,
     )
 
     deleted = models.BooleanField(

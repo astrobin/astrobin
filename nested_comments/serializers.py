@@ -9,21 +9,22 @@ from rest_framework import serializers
 from .models import NestedComment
 
 
-class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
+class ContentTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContentType
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username',)
 
 
-class NestedCommentSerializer(serializers.HyperlinkedModelSerializer):
+class NestedCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = NestedComment
         fields = (
+            'id',
             'author',
             'content_type',
             'object_id',

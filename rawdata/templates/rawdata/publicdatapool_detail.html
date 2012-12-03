@@ -73,6 +73,10 @@
                     {% trans "You can use this space to discuss this public data pool and exchange information and tips with other contributors or people who want to process the data." %}
                 </p>
 
+                <div id="nested-comments"
+                     data-content-type-id="{{content_type.pk}}"
+                     data-object-id="{{object.pk}}">
+                </div>
                 {% include 'nested_comments/nestedcomment_app.html' %}
             </div>
         </div>

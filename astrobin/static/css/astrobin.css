@@ -1546,6 +1546,9 @@ div.favorite-container a.favorite:hover .favorite-hint {
   margin-top: 16px;
   font-size: 1em;
 }
+.comment-container .children {
+  margin-left: 12px;
+}
 .comment-container h3 {
   color: #fcfcfc;
   margin-bottom: 4px;

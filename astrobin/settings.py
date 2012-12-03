@@ -362,7 +362,7 @@ PIPELINE_JS = {
             'common/js/jquery-1.8.3.js',
             'common/js/handlebars-1.0.rc.1.js',
             'common/js/ember-1.0.0-pre.2.js',
-            'common/js/ember-resource.js',
+            'common/js/arboreal.js',
 
             'js/jquery.i18n.js',
             'js/plugins/localization/jquery.localisation.js',
@@ -422,5 +422,6 @@ SUBSCRIPTION_PAYPAL_SETTINGS = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    'PAGINATE_BY': 10
+    'PAGINATE_BY': 10,
+    'FILTER_BACKEND': 'rest_framework.filters.DjangoFilterBackend',
 }
