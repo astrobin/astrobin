@@ -51,6 +51,8 @@ class NestedCommentList(generics.ListCreateAPIView):
     """
     model = NestedComment
     serializer_class = NestedCommentSerializer
+    filter_fields = ('content_type', 'object_id',)
+
 
 class NestedCommentDetail(generics.RetrieveUpdateDestroyAPIView):
     """

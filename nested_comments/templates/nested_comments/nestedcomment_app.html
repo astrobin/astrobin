@@ -11,10 +11,26 @@
 {% endhandlebars %}
 
 {% handlebars "comments" %}
-    <p>Comments go here</p>
+    {{#each controller.tree.children}}
+        {{view NestedCommentsApp.singleCommentView nodeBinding="this"}}
+    {{/each}}
 {% endhandlebars %}
 
-<div id="nested-comments"></div>
+{% handlebars "singleComment" %}
+    <div class="meta">
+        <a class="author" href="#">
+            {{this.data.author_username}}
+        </a>
+    </div>
+    <div class="content">
+        {{this.data.text}}
+    </div>
+    <div class="children">
+        {{#each this.children}}
+            {{view NestedCommentsApp.singleCommentView nodeBinding="this"}}
+        {{/each}}
+    </div>
+{% endhandlebars %}
 
 {% comment %}
 <div id="nested-comments">

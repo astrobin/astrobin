@@ -5,7 +5,8 @@ $(function() {
     *******************************************************************/
 
     var nc_app = Em.Application.create({
-        rootElement: "#nested-comments"
+        rootElement: '#nested-comments',
+        baseApiURL: '/api/v2/nestedcomments/'
     });
 
 
@@ -14,64 +15,30 @@ $(function() {
     *******************************************************************/
 
     nc_app.User = Em.Object.extend({
+        id: null,
         username: null
     });
 
     nc_app.ContentType = Em.Object.extend({
+        id: null,
         name: null,
         app_label: null,
         model: null
     });
 
     nc_app.Comment = Em.Object.extend({
-       author: null,
-       content_type_id: null,
-       object_id: null,
-       text: null,
-       created: null,
-       updated: null,
-       deleted: null,
-       parent: null
-    });
-
-    /*******************************************************************
-    * Resources
-    *******************************************************************/
-
-    nc_app.UserResource = Ember.Resource.define({
-        url: '/api/v2/nestedcomments/users',
-        schema: {
-            username: String
-        }
-    });
-
-    nc_app.ContentTypeResource = Ember.Resource.define({
-        url: '/api/v2/nestedcomments/contenttypes',
-        schema: {
-            name: String,
-            app_label: String,
-            model: String
-        }
-    });
-
-    nc_app.CommentResource = Ember.Resource.define({
-        url: '/api/v2/nestedcomments/nestedcomments',
-        schema: {
-            author: {
-                type: nc_app.User
-            },
-            content_type: {
-                type: nc_app.ContentType
-            },
-            object_id: Number,
-            text: String,
-            created: Date,
-            updated: Date,
-            deleted: Boolean,
-            parent: {
-                type: nc_app.Comment
-            }
-        }
+        id: null,
+        author: null,
+        author_username: null,
+        content_type: null,
+        object_id: null,
+        text: null,
+        created: null,
+        updated: null,
+        deleted: null,
+        parent: null,
+        top: null,
+        children: []
     });
 
 
@@ -85,13 +52,95 @@ $(function() {
     });
 
     nc_app.TopLevelController = Em.Controller.extend();
+    nc_app.topLevelController = nc_app.TopLevelController.create();
     nc_app.TopLevelView = Em.View.extend({
         templateName: "top-level"
     });
 
-    nc_app.CommentsController = Em.Controller.extend();
+    nc_app.CommentsController = Em.Controller.extend({
+        tree: null,
+
+        addComment: function(comment) {
+            var self = this;
+
+            if (self.get('tree') == null) {
+                self.set('tree', new Arboreal());
+            }
+
+            if (comment.parent == null) {
+                self.get('tree').appendChild(comment);
+            } else {
+                var parent = self.tree.find(function(node) {
+                    return comment.parent = node.data.id;
+                });
+
+                if (parent != null) {
+                    parent.appendChild(comment);
+                }
+            }
+        },
+
+        fetchAuthor: function(comment) {
+            var url = nc_app.baseApiURL + 'users/' + comment.author + '/';
+
+            $.ajax({
+                url: url,
+                cache: false,
+                timeout: 10000,
+                dataType: 'json',
+                success: function(response) {
+                    comment.set('author_username', response.username);
+                }
+            });
+        },
+
+        fetchComments: function(url, data) {
+            var self = this;
+
+            if (url != null) {
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    timeout: 10000,
+                    dataType: 'json',
+                    data: data,
+                    success: function(response) {
+                        $.each(response.results, function(i, nc_data) {
+                            var comment = nc_app.Comment.create(nc_data);
+                            self.fetchAuthor(comment);
+                            self.addComment(comment);
+                        });
+
+                        self.fetchComments(response.next, data);
+                    }
+                });
+            }
+        },
+
+        find: function() {
+            var self = this,
+                content_type_id = $(nc_app.rootElement).attr('data-content-type-id'),
+                object_id = $(nc_app.rootElement).attr('data-object-id'),
+                url = nc_app.baseApiURL + 'nestedcomments/',
+                data = {
+                    'content_type': content_type_id,
+                    'object_id': object_id,
+                };
+
+            self.fetchComments(url, data);
+            return self.content;
+        }
+    });
+    nc_app.commentsController = nc_app.CommentsController.create();
+
     nc_app.CommentsView = Em.View.extend({
-        templateName: "comments"
+        templateName: 'comments',
+        classNames: ['comments'],
+    });
+
+    nc_app.singleCommentView = Em.View.extend({
+        templateName: 'singleComment',
+        classNames: ['comment-container']
     });
 
 
@@ -107,10 +156,14 @@ $(function() {
                 route: '/',
                 connectOutlets: function(router) {
                     var ctrl = router.get('applicationController');
-                    ctrl.connectOutlet('top-level', 'TopLevel');
-                    ctrl.connectOutlet('comments', 'Comments');
+                    ctrl.connectOutlet('top-level', 'topLevel');
+                    ctrl.connectOutlet('comments', 'comments');
+
+                    router.get('commentsController').find();
                 }
             })
         })
     });
+
+    window.NestedCommentsApp = nc_app;
 });
