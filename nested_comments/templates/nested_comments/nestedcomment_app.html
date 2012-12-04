@@ -1,6 +1,9 @@
 {% load i18n %}
 {% load ember %}
 
+<div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
+<div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
+
 {% handlebars "nested-comments" %}
     {{outlet top-level}}
     {{outlet comments}}
@@ -17,21 +20,45 @@
 {% endhandlebars %}
 
 {% handlebars "singleComment" %}
-    <div class="meta">
-        <a class="author" href="#">
-            {{view.node.data.author_username}}
-        </a>
-        {{view NestedCommentsApp.TimeagoView valueBinding="view.node.data.updated"}}
-    </div>
+    <div class="comment-container" {{bindAttr id="view.node.data.cid"}}>
+        <div class="meta">
+            <a class="author" href="#">
+                {{#if view.node.data.deleted}}
+                    {% trans "(deleted)" %}
+                {{else}}
+                    {{view.node.data.author_username}}
+                {{/if}}
+            </a>
+            {{view NestedCommentsApp.TimeagoView valueBinding="view.node.data.updated"}}
+        </div>
 
-    <div class="content">
-        {{view.node.data.text}}
-    </div>
+        <div class="content">
+            {{#if view.node.data.deleted}}
+                <p>{% trans "(deleted)" %}</p>
+            {{else}}
+                {{view.node.data.text}}
+            {{/if}}
+        </div>
 
-    <div class="children">
-        {{#each view.node.children}}
-            {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
-        {{/each}}
+        <div class="links">
+            <a {{bindAttr href="view.node.data.url"}}>{% trans "Link" %}</a>
+            {{#if view.node.data.authorIsRequestingUser}}
+                {{#if view.node.data.deleted}}
+                    <a href="#" {{action "undeleteComment"}}>{% trans "Undelete" %}</a>
+                {{else}}
+                    <a href="#" {{action "deleteComment"}}>{% trans "Delete" %}</a>
+                {{/if}}
+                <a href="#">{% trans "Edit" %}</a>
+            {{else}}
+                <a href="#">{% trans "Reply" %}</a>
+            {{/if}}
+        </div>
+
+        <div class="children">
+            {{#each view.node.children}}
+                {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
+            {{/each}}
+        </div>
     </div>
 {% endhandlebars %}
 

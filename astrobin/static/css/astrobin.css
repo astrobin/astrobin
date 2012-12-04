@@ -1618,16 +1618,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .comment,
 .review {
   position: relative;
+  margin-bottom: 8px;
 }
 .comment .content,
 .review .content {
-  margin-bottom: 4px;
-  padding: 8px;
-  border: 1px dashed #505050;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  padding: 8px;
+  padding: 8px 0;
 }
 .comment .content p,
 .review .content p {
@@ -1660,6 +1655,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .comment .links,
 .review .links {
   font-size: 0.85em;
+}
+.comment .links,
+.review .links {
+  padding: 4px 0;
+  border-bottom: 1px dashed #555;
 }
 .comment .links a,
 .review .links a {
