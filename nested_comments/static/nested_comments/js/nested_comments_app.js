@@ -51,11 +51,13 @@ $(function() {
         templateName: "nested-comments"
     });
 
+
     nc_app.TopLevelController = Em.Controller.extend();
     nc_app.topLevelController = nc_app.TopLevelController.create();
     nc_app.TopLevelView = Em.View.extend({
         templateName: "top-level"
     });
+
 
     nc_app.CommentsController = Em.Controller.extend({
         tree: null,
@@ -132,15 +134,28 @@ $(function() {
         }
     });
     nc_app.commentsController = nc_app.CommentsController.create();
-
     nc_app.CommentsView = Em.View.extend({
         templateName: 'comments',
         classNames: ['comments'],
     });
 
-    nc_app.singleCommentView = Em.View.extend({
+    nc_app.SingleCommentView = Em.View.extend({
         templateName: 'singleComment',
-        classNames: ['comment-container']
+        classNames: ['comment', 'comment-container']
+    });
+
+
+    nc_app.TimeagoView = Em.View.extend({
+        templateName: 'timeago',
+        tagName: 'abbr',
+        classNames: ['timeago'],
+        attributeBindings: ['title'],
+        titleBinding: "value",
+
+        didInsertElement: function() {
+            this._super();
+            this.$().timeago();
+        }
     });
 
 

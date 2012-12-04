@@ -1803,23 +1803,18 @@ div.favorite-container {
 }
 
 .comment, .review {
-    .stitched-box;
     position: relative;
 
-    .avatar {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-
     .content {
-        padding: @spacer-medium 0;
+        .stitched-box;
+        padding: @spacer-medium;
 
         p {
             color: @strong-text-color;
             line-height: 1.5em;
             padding: 0;
         }
+
         blockquote {
             margin: 0;
             padding: 0 0 0 @spacer-small;
@@ -1835,21 +1830,25 @@ div.favorite-container {
             }
         }
     }
+
     .content.deleted {
         p {
             color: @text-color / @hilight-factor;
             font-style: italic;
         }
     }
+
     .meta, .links {
         font-size: 0.85em;
     }
+
     .links {
         a {
             text-transform: lowercase;
             margin-right: @spacer-medium;
         }
     }
+
     form {
         display: none;
         textarea {

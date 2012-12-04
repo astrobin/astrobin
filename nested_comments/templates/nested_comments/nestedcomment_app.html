@@ -12,24 +12,31 @@
 
 {% handlebars "comments" %}
     {{#each controller.tree.children}}
-        {{view NestedCommentsApp.singleCommentView nodeBinding="this"}}
+        {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
     {{/each}}
 {% endhandlebars %}
 
 {% handlebars "singleComment" %}
     <div class="meta">
         <a class="author" href="#">
-            {{this.data.author_username}}
+            {{view.node.data.author_username}}
         </a>
+        {{view NestedCommentsApp.TimeagoView valueBinding="view.node.data.updated"}}
     </div>
+
     <div class="content">
-        {{this.data.text}}
+        {{view.node.data.text}}
     </div>
+
     <div class="children">
-        {{#each this.children}}
-            {{view NestedCommentsApp.singleCommentView nodeBinding="this"}}
+        {{#each view.node.children}}
+            {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
         {{/each}}
     </div>
+{% endhandlebars %}
+
+{% handlebars "timeago" %}
+    {{view.value}}
 {% endhandlebars %}
 
 {% comment %}
