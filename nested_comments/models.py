@@ -48,6 +48,11 @@ class NestedComment(models.Model):
     def __unicode__(self):
         return "%s: \"%s\"" % (self.author, self.text)
 
+    def delete(self):
+        if self.deleted == False:
+            self.deleted = True;
+            self.save();
+
     class Meta:
         app_label = 'nested_comments'
 
