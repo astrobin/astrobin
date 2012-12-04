@@ -36,19 +36,27 @@
             {{#if view.node.data.deleted}}
                 <p>{% trans "(deleted)" %}</p>
             {{else}}
-                {{view.node.data.text}}
+                {{#if view.node.data.editing}}
+                    {{view NestedCommentsApp.FormView commentBinding="view.node.data"}}
+                {{else}}
+                    {{view.node.data.text}}
+                {{/if}}
             {{/if}}
         </div>
 
         <div class="links">
             <a {{bindAttr href="view.node.data.url"}}>{% trans "Link" %}</a>
+
             {{#if view.node.data.authorIsRequestingUser}}
                 {{#if view.node.data.deleted}}
                     <a href="#" {{action "undeleteComment"}}>{% trans "Undelete" %}</a>
                 {{else}}
                     <a href="#" {{action "deleteComment"}}>{% trans "Delete" %}</a>
                 {{/if}}
-                <a href="#">{% trans "Edit" %}</a>
+
+                {{#if view.node.data.allowEditing}}
+                    <a href="#" {{action "editComment"}}>{% trans "Edit" %}</a>
+                {{/if}}
             {{else}}
                 <a href="#">{% trans "Reply" %}</a>
             {{/if}}
@@ -64,6 +72,23 @@
 
 {% handlebars "timeago" %}
     {{view.value}}
+{% endhandlebars %}
+
+{% handlebars "form" %}
+    {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+
+    <a class="btn btn-mini btn-primary" href="#">{% trans "Save" %}</a>
+    <a class="btn btn-mini" href="#" {{action cancelEditingComment}}>{% trans "Cancel" %}</a>
+
+    <span class="formatting-help">
+        <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
+    </span>
+
+    {{#if comment.submitting}}
+        <span class="loader">
+            <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
+        </span>
+    {{/if}}
 {% endhandlebars %}
 
 {% comment %}
