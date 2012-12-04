@@ -1804,10 +1804,10 @@ div.favorite-container {
 
 .comment, .review {
     position: relative;
+    margin-bottom: @spacer-medium;
 
     .content {
-        .stitched-box;
-        padding: @spacer-medium;
+        padding: @spacer-medium 0;
 
         p {
             color: @strong-text-color;
@@ -1843,6 +1843,9 @@ div.favorite-container {
     }
 
     .links {
+        padding: @spacer-small 0;
+        border-bottom: 1px dashed #555;
+
         a {
             text-transform: lowercase;
             margin-right: @spacer-medium;
