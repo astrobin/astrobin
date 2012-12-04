@@ -7,26 +7,31 @@ from django.views.generic import *
 # Third party apps
 from rest_framework import generics
 from rest_framework.decorators import api_view
+from rest_framework import permissions
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 
 # Other AstroBin apps
 from common.mixins import AjaxableResponseMixin
+from common.permissions import ReadOnly
 
 # This app
 from .forms import NestedCommentForm
 from .models import NestedComment
+from .permissions import IsOwnerOrReadOnly
 from .serializers import *
 
 
 class ContentTypeList(generics.ListAPIView):
     model = ContentType
     serializer_class = ContentTypeSerializer
+    permission_classes = (ReadOnly,)
 
 
 class ContentTypeDetail(generics.RetrieveAPIView):
     model = ContentType
     serializer_class = ContentTypeSerializer
+    permission_classes = (ReadOnly,)
 
 
 class UserList(generics.ListAPIView):
@@ -35,6 +40,7 @@ class UserList(generics.ListAPIView):
     """
     model = User
     serializer_class = UserSerializer
+    permission_classes = (ReadOnly,)
 
 
 class UserDetail(generics.RetrieveAPIView):
@@ -43,6 +49,7 @@ class UserDetail(generics.RetrieveAPIView):
     """
     model = User
     serializer_class = UserSerializer
+    permission_classes = (ReadOnly,)
 
 
 class NestedCommentList(generics.ListCreateAPIView):
@@ -52,6 +59,11 @@ class NestedCommentList(generics.ListCreateAPIView):
     model = NestedComment
     serializer_class = NestedCommentSerializer
     filter_fields = ('content_type', 'object_id',)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly,)
+
+    def pre_save(self, obj):
+        obj.author = self.request.user
 
 
 class NestedCommentDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -60,6 +72,11 @@ class NestedCommentDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     model = NestedComment
     serializer_class = NestedCommentSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly,)
+
+    def pre_save(self, obj):
+        obj.author = self.request.user
 
 
 class NestedCommentCreateView(AjaxableResponseMixin, CreateView):
