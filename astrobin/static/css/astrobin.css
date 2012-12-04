@@ -1573,7 +1573,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .comment-container .formatting-help {
   font-size: 0.8em;
-  float: right;
   text-transform: lowercase;
 }
 .comment-container .top-level-form .control-group {
@@ -1597,7 +1596,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .formatting-help {
   font-size: 0.8em;
-  float: right;
   text-transform: lowercase;
 }
 .top-level-form .control-group {
@@ -1666,13 +1664,10 @@ div.favorite-container a.favorite:hover .favorite-hint {
   text-transform: lowercase;
   margin-right: 8px;
 }
-.comment form,
-.review form {
-  display: none;
-}
 .comment form textarea,
 .review form textarea {
   width: 98.75%;
+  margin-bottom: 8px;
 }
 .review-form textarea,
 .review-form select {

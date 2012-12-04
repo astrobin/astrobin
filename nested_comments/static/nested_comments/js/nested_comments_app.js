@@ -30,9 +30,12 @@ $(function() {
         deleted: null,
         parent: null,
 
-        // Fields that we compute and never change
+        // Fields that we compute manually
         author_username: null,
         authorIsRequestingUser: null,
+        editing: false,
+        submitting: false,
+        original_text: null, // Text before editing starts
 
         // Computed properties
         cid: function() {
@@ -42,6 +45,10 @@ $(function() {
         url: function() {
             return nc_app.page_url + '#' + this.get('cid');
         }.property('id'),
+
+        allowEditing: function() {
+            return this.get('deleted') == false;
+        }.property('deleted'),
 
         // Functions
         delete: function() {
@@ -86,6 +93,16 @@ $(function() {
                     self.set('deleted', response.deleted);
                 }
             });
+        },
+
+        startEditing: function() {
+            this.set('original_text', this.get('text'));
+            this.set('editing', true);
+        },
+
+        cancelEditing: function() {
+            this.set('editing', false);
+            this.set('text', this.get('original_text'));
         }
      });
 
@@ -104,6 +121,13 @@ $(function() {
     nc_app.topLevelController = nc_app.TopLevelController.create();
     nc_app.TopLevelView = Em.View.extend({
         templateName: "top-level"
+    });
+
+
+    nc_app.FormView = Em.View.extend({
+        templateName: 'form',
+        tagName: 'form',
+        classNames: ['form-horizontal']
     });
 
 
@@ -235,8 +259,14 @@ $(function() {
                 undeleteComment: function(router, event) {
                     var comment = event.view.node.data;
                     comment.undelete();
+                },
+                editComment: function(router, event) {
+                    var comment = event.view.node.data;
+                    comment.startEditing();
+                },
+                cancelEditingComment: function(router, event) {
+                    event.view.comment.cancelEditing();
                 }
-
             })
         })
     });
