@@ -1617,23 +1617,17 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .comment,
 .review {
+  position: relative;
+}
+.comment .content,
+.review .content {
   margin-bottom: 4px;
   padding: 8px;
   border: 1px dashed #505050;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  position: relative;
-}
-.comment .avatar,
-.review .avatar {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.comment .content,
-.review .content {
-  padding: 8px 0;
+  padding: 8px;
 }
 .comment .content p,
 .review .content p {
