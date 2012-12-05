@@ -79,6 +79,7 @@ $(function() {
 
     nc_app.CommentsController = Em.Controller.extend({
         tree: null,
+        ready: false,
 
         addComment: function(comment) {
             var self = this;
@@ -133,6 +134,10 @@ $(function() {
                             self.fetchAuthor(comment);
                             self.addComment(comment);
                         });
+
+                        if (!self.get('ready')) {
+                            self.set('ready', true);
+                        }
 
                         self.fetchComments(response.next, data);
                     }
@@ -232,11 +237,27 @@ $(function() {
         templateName: 'comments',
         classNames: ['comments'],
 
+        loader_gif: 'images/ajax-loader.gif',
+        loader_url: null,
+
+        didInsertElement: function() {
+            this.set('loader_url', nc_app.static_url + this.loader_gif);
+        },
+
         SingleCommentView: Em.View.extend({
             templateName: 'singleComment',
             classNames: ['comment'],
             editing: false,
             submitting: false,
+            collapsed: false,
+
+            collapse: function() {
+                this.set('collapsed', true);
+            },
+
+            uncollapse: function() {
+                this.set('collapsed', false);
+            },
 
             delete: function() {
                 this.get('controller').delete(this.get('node.data'));
@@ -271,9 +292,10 @@ $(function() {
                 tagName: 'form',
                 classNames: ['form-horizontal'],
                 loader_gif: 'images/ajax-loader.gif',
+                loader_url: null,
 
                 didInsertElement: function() {
-                    this.loader_url = nc_app.static_url + this.loader_gif;
+                    this.set('loader_url', nc_app.static_url + this.loader_gif);
                 },
 
                 save: function() {
@@ -288,9 +310,11 @@ $(function() {
                     templateName: 'saveButton',
                     tagName: 'a',
                     classNames: ['btn btn-mini btn-primary'],
-                    attributeBindings: ['href'],
+                    classNameBindings: ['disabled'],
+                    attributeBindings: ['href', 'disabled'],
 
                     href: '#',
+                    disabledBinding: 'parentView.parentView.submitting',
 
                     click: function(event) {
                         this.get('parentView').save();
