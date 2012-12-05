@@ -1588,7 +1588,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .comment-container .loader {
   display: inline-block;
-  visibility: hidden;
 }
 .reviews,
 .comments {
@@ -1611,7 +1610,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .loader {
   display: inline-block;
-  visibility: hidden;
 }
 .comment,
 .review {

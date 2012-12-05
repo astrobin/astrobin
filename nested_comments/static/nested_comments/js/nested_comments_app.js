@@ -10,6 +10,7 @@ $(function() {
         ready: function() {
             this.user_id = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.page_url = $('#nested-comments-page-url').attr('data-value');
+            this.static_url = $('#nested-comments-static-url').attr('data-value');
         },
     });
 
@@ -66,13 +67,6 @@ $(function() {
     nc_app.topLevelController = nc_app.TopLevelController.create();
     nc_app.TopLevelView = Em.View.extend({
         templateName: "top-level"
-    });
-
-
-    nc_app.FormView = Em.View.extend({
-        templateName: 'form',
-        tagName: 'form',
-        classNames: ['form-horizontal']
     });
 
 
@@ -154,7 +148,7 @@ $(function() {
         },
 
         dump: function(comment) {
-            return {
+            var data = {
                 id: comment.get('id'),
                 author: comment.get('author'),
                 content_type: comment.get('content_type'),
@@ -165,6 +159,15 @@ $(function() {
                 deleted: comment.get('deleted') ? 'True' : 'False',
                 parent: comment.get('parent')
             }
+
+            // djangorestframework has trouble with null values:
+            // https://github.com/tomchristie/django-rest-framework/pull/356
+            if (comment.get('parent'))
+                data['parent'] = comment.get('parent');
+            else
+                data['parent'] = comment.get('id');
+
+            return data;
         },
 
         delete: function(comment) {
@@ -183,16 +186,9 @@ $(function() {
 
             data.deleted = 'False';
 
-            // djangorestframework has trouble with null values:
-            // https://github.com/tomchristie/django-rest-framework/pull/356
-            if (comment.get('parent'))
-                data['parent'] = comment.get('parent');
-            else
-                data['parent'] = comment.get('id');
-
             $.ajax({
                 type: 'put',
-                url: nc_app.baseApiURL + 'nestedcomments/' + comment.get('id') + '/',
+                url: nc_app.baseApiURL + 'nestedcomments/' + data.id + '/',
                 data: data,
                 timeout: 10000,
                 success: function(response) {
@@ -209,18 +205,67 @@ $(function() {
         cancelEditing: function(comment) {
             comment.set('editing', false);
             comment.set('text', comment.get('original_text'));
-        }
+        },
 
+        save: function(comment) {
+            var data = this.dump(comment);
+
+            comment.set('submitting', true);
+            $.ajax({
+                type: 'put',
+                url: nc_app.baseApiURL + 'nestedcomments/' + data.id + '/',
+                data: data,
+                timeout: 10000,
+                success: function() {
+                    comment.set('editing', false);
+                    comment.set('submitting', false);
+                }
+            });
+        }
     });
     nc_app.commentsController = nc_app.CommentsController.create();
+
     nc_app.CommentsView = Em.View.extend({
         templateName: 'comments',
         classNames: ['comments'],
-    });
 
-    nc_app.SingleCommentView = Em.View.extend({
-        templateName: 'singleComment',
-        classNames: ['comment']
+        SingleCommentView: Em.View.extend({
+            templateName: 'singleComment',
+            classNames: ['comment'],
+
+            EditView: Em.View.extend({
+                templateName: 'edit',
+                tagName: 'form',
+                classNames: ['form-horizontal'],
+                loader_gif: 'images/ajax-loader.gif',
+
+                didInsertElement: function() {
+                    this.loader_url = nc_app.static_url + this.loader_gif;
+                },
+
+                save: function(comment) {
+                    this.get('parentView.controller').save(comment);
+                },
+
+                SaveButtonView: Em.View.extend({
+                    templateName: 'saveButton',
+                    tagName: 'a',
+                    classNames: ['btn btn-mini btn-primary'],
+                    attributeBindings: ['href'],
+
+                    href: '#',
+
+                    save: function(comment) {
+                        this.get('parentView').save(comment);
+                    },
+
+                    click: function(event) {
+                        this.save(this.comment);
+                        event.preventDefault();
+                    }
+                })
+            })
+        })
     });
 
 
