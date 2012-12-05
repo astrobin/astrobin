@@ -40,7 +40,7 @@
                 {{#if view.node.data.editing}}
                     {{view view.EditView commentBinding="view.node.data"}}
                 {{else}}
-                    {{view.node.data.text}}
+                    {{{view.node.data.markdown}}}
                 {{/if}}
             {{/if}}
         </div>
@@ -56,7 +56,9 @@
                 {{/if}}
 
                 {{#if view.node.data.allowEditing}}
-                    <a href="#" {{action "editComment"}}>{% trans "Edit" %}</a>
+                    {{#unless view.node.data.editing}}
+                        <a href="#" {{action "editComment"}}>{% trans "Edit" %}</a>
+                    {{/unless}}
                 {{/if}}
             {{else}}
                 <a href="#">{% trans "Reply" %}</a>
@@ -81,15 +83,29 @@
     {{view view.SaveButtonView commentBinding="view.comment"}}
     <a class="btn btn-mini" href="#" {{action cancelEditingComment}}>{% trans "Cancel" %}</a>
 
-    <span class="formatting-help">
-        <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-    </span>
-
     {{#if view.comment.submitting}}
         <span class="loader">
             <img alt="" {{bindAttr src="view.loader_url"}}/> 
         </span>
     {{/if}}
+
+    <div class="preview">
+        <h3>{% trans "Preview" %}</h3>
+        {{{view.comment.markdown}}}
+    </div>
+
+    <div class="formatting-help">
+        <h3>{% trans "Formatting help" %}</h3>
+        <table class="table table-condensed">
+            <tr><td><strong>{% trans "You type:" %}</strong</td><td><strong>{% trans "You see:" %}</strong></td></tr>
+            <tr><td>*{% trans "italics" %}*</td><td><i>{% trans "italics" %}</i></td></tr>
+            <tr><td>**{% trans "bold" %}**</td><td><strong>{% trans "bold" %}</strong></td></tr>
+            <tr><td>[AstroBin!](http://astrobin.com)</td><td><a href="http://astrobin.com">AstroBin!</a></td></tr>
+            <tr><td><i>{% trans "(TAB or 4 spaces)" %}</i> {% trans "preformatted text" %}</td><td><tt>{% trans "preformatted text" %}</tt></td></tr>
+            <tr><td>&gt; {% trans "quoted text" %}</td><td>| <i>{% trans "quoted text" %}</i></td></tr>
+            <tr><td>\*{% trans "escape the formatting syntax" %}\*</td><td>*{% trans "escape the formatting syntax" %}*</td></tr>
+        </table>
+    </div>
 {% endhandlebars %}
 
 {% handlebars "saveButton" %}

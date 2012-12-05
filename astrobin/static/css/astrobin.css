@@ -1573,7 +1573,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .comment-container .formatting-help {
   font-size: 0.8em;
-  text-transform: lowercase;
 }
 .comment-container .top-level-form .control-group {
   margin-bottom: 0;
@@ -1595,7 +1594,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .formatting-help {
   font-size: 0.8em;
-  text-transform: lowercase;
 }
 .top-level-form .control-group {
   margin-bottom: 0;
@@ -1645,6 +1643,25 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .review .content.deleted p {
   color: #a4a4a4;
   font-style: italic;
+}
+.comment .preview,
+.review .preview {
+  padding: 12px;
+  margin-top: 12px;
+  background-color: #ffeebb;
+  border: 1px solid #ecb;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.comment .preview p,
+.review .preview p {
+  color: #333;
+}
+.comment .preview h3,
+.review .preview h3 {
+  margin-top: 0;
+  color: #111;
 }
 .comment .meta,
 .review .meta,

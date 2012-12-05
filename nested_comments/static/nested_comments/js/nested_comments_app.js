@@ -11,6 +11,8 @@ $(function() {
             this.user_id = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.page_url = $('#nested-comments-page-url').attr('data-value');
             this.static_url = $('#nested-comments-static-url').attr('data-value');
+
+            this.markdownConverter = new Markdown.Converter();
         },
     });
 
@@ -50,6 +52,13 @@ $(function() {
         allowEditing: function() {
             return this.get('deleted') == false;
         }.property('deleted'),
+
+        markdown: function() {
+            var converter = nc_app.markdownConverter;
+            var html = converter.makeHtml(this.get('text'));
+
+            return html;
+        }.property('text')
      });
 
 
