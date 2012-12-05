@@ -3,6 +3,7 @@
 
 <div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
 <div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
+<div id="nested-comments-static-url" data-value="{{STATIC_URL}}"></div>
 
 {% handlebars "nested-comments" %}
     {{outlet top-level}}
@@ -15,7 +16,7 @@
 
 {% handlebars "comments" %}
     {{#each controller.tree.children}}
-        {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
+        {{view view.SingleCommentView nodeBinding="this"}}
     {{/each}}
 {% endhandlebars %}
 
@@ -37,7 +38,7 @@
                 <p>{% trans "(deleted)" %}</p>
             {{else}}
                 {{#if view.node.data.editing}}
-                    {{view NestedCommentsApp.FormView commentBinding="view.node.data"}}
+                    {{view view.EditView commentBinding="view.node.data"}}
                 {{else}}
                     {{view.node.data.text}}
                 {{/if}}
@@ -64,7 +65,7 @@
 
         <div class="children">
             {{#each view.node.children}}
-                {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
+                {{view view.parentView.SingleCommentView nodeBinding="this"}}
             {{/each}}
         </div>
     </div>
@@ -74,21 +75,25 @@
     {{view.value}}
 {% endhandlebars %}
 
-{% handlebars "form" %}
+{% handlebars "edit" %}
     {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
-    <a class="btn btn-mini btn-primary" href="#">{% trans "Save" %}</a>
+    {{view view.SaveButtonView commentBinding="view.comment"}}
     <a class="btn btn-mini" href="#" {{action cancelEditingComment}}>{% trans "Cancel" %}</a>
 
     <span class="formatting-help">
         <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
     </span>
 
-    {{#if comment.submitting}}
+    {{#if view.comment.submitting}}
         <span class="loader">
-            <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
+            <img alt="" {{bindAttr src="view.loader_url"}}/> 
         </span>
     {{/if}}
+{% endhandlebars %}
+
+{% handlebars "saveButton" %}
+    {% trans "Save" %}
 {% endhandlebars %}
 
 {% comment %}
