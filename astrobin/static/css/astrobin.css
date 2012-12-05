@@ -1542,9 +1542,24 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .explore-review-container {
   width: 302px;
 }
+.reviews,
+.comments {
+  margin-bottom: 28px;
+}
+.reviews .loader,
+.comments .loader {
+  display: block;
+  text-align: center;
+}
 .comment-container {
   margin-top: 16px;
   font-size: 1em;
+  padding-left: 12px;
+  border-left: 1px dotted #404040;
+}
+.comment-container .collapse {
+  font-family: monospace;
+  letter-spacing: -2px;
 }
 .comment-container .children {
   margin-left: 12px;
@@ -1587,10 +1602,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .comment-container .loader {
   display: inline-block;
-}
-.reviews,
-.comments {
-  margin-bottom: 28px;
 }
 .formatting-help {
   font-size: 0.8em;

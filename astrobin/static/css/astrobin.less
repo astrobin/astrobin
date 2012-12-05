@@ -1716,9 +1716,24 @@ div.favorite-container {
     width: 302px;
 }
 
+.reviews, .comments {
+    margin-bottom: @spacer-xxlarge;
+    .loader {
+        display: block;
+        text-align: center;
+    }
+}
+
 .comment-container {
     margin-top: @spacer-xlarge;
     font-size: 1em;
+    padding-left: @spacer-large;
+    border-left: 1px dotted #404040;
+
+    .collapse {
+        font-family: monospace;
+        letter-spacing: -2px;
+    }
 
     .children {
         margin-left: @spacer-large;
@@ -1770,10 +1785,6 @@ div.favorite-container {
     }
 }
 
-.reviews, .comments {
-    margin-bottom: @spacer-xxlarge;
-}
-
 .formatting-help {
     font-size: 0.8em;
 }
@@ -1790,10 +1801,6 @@ div.favorite-container {
         padding: 0;
         border: none;
     }
-}
-
-.loader {
-    display: inline-block;
 }
 
 .comment, .review {

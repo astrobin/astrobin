@@ -15,9 +15,15 @@
 {% endhandlebars %}
 
 {% handlebars "comments" %}
-    {{#each controller.tree.children}}
-        {{view view.SingleCommentView nodeBinding="this"}}
-    {{/each}}
+    {{#if controller.ready}}
+        {{#each controller.tree.children}}
+            {{view view.SingleCommentView nodeBinding="this"}}
+        {{/each}}
+    {{else}}
+        <span class="loader">
+            <img alt="" {{bindAttr src="view.loader_url"}}/> 
+        </span>
+    {{/if}}
 {% endhandlebars %}
 
 {% handlebars "singleComment" %}
@@ -31,45 +37,53 @@
                 {{/if}}
             </a>
             {{view NestedCommentsApp.TimeagoView valueBinding="view.node.data.updated"}}
-        </div>
 
-        <div class="content">
-            {{#if view.node.data.deleted}}
-                <p>{% trans "(deleted)" %}</p>
+            {{#unless view.collapsed}}
+                <a href="#" class="collapse" {{action "collapse" target="view"}}>[-]</a>
             {{else}}
-                {{#if view.editing}}
-                    {{view view.EditView commentBinding="view.node.data"}}
-                {{else}}
-                    {{{view.node.data.markdown}}}
-                {{/if}}
-            {{/if}}
+                <a href="#" class="collapse" {{action "uncollapse" target="view"}}>[+]</a>
+            {{/unless}}
         </div>
 
-        <div class="links">
-            <a {{bindAttr href="view.node.data.url"}}>{% trans "Link" %}</a>
-
-            {{#if view.node.data.authorIsRequestingUser}}
+        {{#unless view.collapsed}}
+            <div class="content">
                 {{#if view.node.data.deleted}}
-                    <a href="#" {{action "undelete" target="view"}}>{% trans "Undelete" %}</a>
+                    <p>{% trans "(deleted)" %}</p>
                 {{else}}
-                    <a href="#" {{action "delete" target="view"}}>{% trans "Delete" %}</a>
+                    {{#if view.editing}}
+                        {{view view.EditView commentBinding="view.node.data"}}
+                    {{else}}
+                        {{{view.node.data.markdown}}}
+                    {{/if}}
                 {{/if}}
+            </div>
 
-                {{#if view.node.data.allowEditing}}
-                    {{#unless view.editing}}
-                        <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
-                    {{/unless}}
+            <div class="links">
+                <a {{bindAttr href="view.node.data.url"}}>{% trans "Link" %}</a>
+
+                {{#if view.node.data.authorIsRequestingUser}}
+                    {{#if view.node.data.deleted}}
+                        <a href="#" {{action "undelete" target="view"}}>{% trans "Undelete" %}</a>
+                    {{else}}
+                        <a href="#" {{action "delete" target="view"}}>{% trans "Delete" %}</a>
+                    {{/if}}
+
+                    {{#if view.node.data.allowEditing}}
+                        {{#unless view.editing}}
+                            <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
+                        {{/unless}}
+                    {{/if}}
+                {{else}}
+                    <a href="#">{% trans "Reply" %}</a>
                 {{/if}}
-            {{else}}
-                <a href="#">{% trans "Reply" %}</a>
-            {{/if}}
-        </div>
+            </div>
 
-        <div class="children">
-            {{#each view.node.children}}
-                {{view view.parentView.SingleCommentView nodeBinding="this"}}
-            {{/each}}
-        </div>
+            <div class="children">
+                {{#each view.node.children}}
+                    {{view view.parentView.SingleCommentView nodeBinding="this"}}
+                {{/each}}
+            </div>
+        {{/unless}}
     </div>
 {% endhandlebars %}
 
@@ -83,7 +97,7 @@
     {{view view.SaveButtonView commentBinding="view.comment"}}
     <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
 
-    {{#if view.comment.submitting}}
+    {{#if view.parentView.submitting}}
         <span class="loader">
             <img alt="" {{bindAttr src="view.loader_url"}}/> 
         </span>
