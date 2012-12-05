@@ -49,61 +49,6 @@ $(function() {
         allowEditing: function() {
             return this.get('deleted') == false;
         }.property('deleted'),
-
-        // Functions
-        delete: function() {
-            var self = this;
-
-            $.ajax({
-                type: 'delete',
-                url: nc_app.baseApiURL + 'nestedcomments/' + self.get('id') + '/',
-                timeout: 10000,
-                success: function() {
-                    self.set('deleted', true);
-                }
-            });
-        },
-
-        undelete: function() {
-            var self = this,
-                data = {
-                    author: self.get('author'),
-                    content_type: self.get('content_type'),
-                    object_id: self.get('object_id'),
-                    text: self.get('text'),
-                    created: self.get('created'),
-                    updated: self.get('updated'),
-                    deleted: 'False'
-                };
-
-            // djangorestframework has trouble with null values:
-            // https://github.com/tomchristie/django-rest-framework/pull/356
-            if (self.get('parent'))
-                data['parent'] = self.get('parent');
-            else
-                data['parent'] = self.get('id');
-
-            $.ajax({
-                type: 'put',
-                url: nc_app.baseApiURL + 'nestedcomments/' + self.get('id') + '/',
-                data: data,
-                timeout: 10000,
-                success: function(response) {
-                    console.log(response.deleted);
-                    self.set('deleted', response.deleted);
-                }
-            });
-        },
-
-        startEditing: function() {
-            this.set('original_text', this.get('text'));
-            this.set('editing', true);
-        },
-
-        cancelEditing: function() {
-            this.set('editing', false);
-            this.set('text', this.get('original_text'));
-        }
      });
 
 
@@ -206,7 +151,66 @@ $(function() {
 
             self.fetchComments(url, data);
             return self.content;
+        },
+
+        dump: function(comment) {
+            return {
+                id: comment.get('id'),
+                author: comment.get('author'),
+                content_type: comment.get('content_type'),
+                object_id: comment.get('object_id'),
+                text: comment.get('text'),
+                created: comment.get('created'),
+                updated: comment.get('updated'),
+                deleted: comment.get('deleted') ? 'True' : 'False',
+                parent: comment.get('parent')
+            }
+        },
+
+        delete: function(comment) {
+            $.ajax({
+                type: 'delete',
+                url: nc_app.baseApiURL + 'nestedcomments/' + comment.get('id') + '/',
+                timeout: 10000,
+                success: function() {
+                    comment.set('deleted', true);
+                }
+            });
+        },
+
+        undelete: function(comment) {
+            var data = this.dump(comment);
+
+            data.deleted = 'False';
+
+            // djangorestframework has trouble with null values:
+            // https://github.com/tomchristie/django-rest-framework/pull/356
+            if (comment.get('parent'))
+                data['parent'] = comment.get('parent');
+            else
+                data['parent'] = comment.get('id');
+
+            $.ajax({
+                type: 'put',
+                url: nc_app.baseApiURL + 'nestedcomments/' + comment.get('id') + '/',
+                data: data,
+                timeout: 10000,
+                success: function(response) {
+                    comment.set('deleted', response.deleted);
+                }
+            });
+        },
+
+        startEditing: function(comment) {
+            comment.set('original_text', comment.get('text'));
+            comment.set('editing', true);
+        },
+
+        cancelEditing: function(comment) {
+            comment.set('editing', false);
+            comment.set('text', comment.get('original_text'));
         }
+
     });
     nc_app.commentsController = nc_app.CommentsController.create();
     nc_app.CommentsView = Em.View.extend({
@@ -253,19 +257,16 @@ $(function() {
                 },
 
                 deleteComment: function(router, event) {
-                    var comment = event.view.node.data;
-                    comment.delete();
+                    router.get('commentsController').delete(event.view.node.data);
                 },
                 undeleteComment: function(router, event) {
-                    var comment = event.view.node.data;
-                    comment.undelete();
+                    router.get('commentsController').undelete(event.view.node.data);
                 },
                 editComment: function(router, event) {
-                    var comment = event.view.node.data;
-                    comment.startEditing();
+                    router.get('commentsController').startEditing(event.view.node.data);
                 },
                 cancelEditingComment: function(router, event) {
-                    event.view.comment.cancelEditing();
+                    router.get('commentsController').cancelEditing(event.view.comment);
                 }
             })
         })
