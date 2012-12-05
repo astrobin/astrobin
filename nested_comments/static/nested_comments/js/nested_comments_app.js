@@ -36,8 +36,6 @@ $(function() {
         // Fields that we compute manually
         author_username: null,
         authorIsRequestingUser: null,
-        editing: false,
-        submitting: false,
         original_text: null, // Text before editing starts
 
         // Computed properties
@@ -208,26 +206,22 @@ $(function() {
 
         startEditing: function(comment) {
             comment.set('original_text', comment.get('text'));
-            comment.set('editing', true);
         },
 
         cancelEditing: function(comment) {
-            comment.set('editing', false);
             comment.set('text', comment.get('original_text'));
         },
 
-        save: function(comment) {
+        save: function(comment, success_cb) {
             var data = this.dump(comment);
 
-            comment.set('submitting', true);
             $.ajax({
                 type: 'put',
                 url: nc_app.baseApiURL + 'nestedcomments/' + data.id + '/',
                 data: data,
                 timeout: 10000,
                 success: function() {
-                    comment.set('editing', false);
-                    comment.set('submitting', false);
+                    success_cb();
                 }
             });
         }
@@ -241,6 +235,36 @@ $(function() {
         SingleCommentView: Em.View.extend({
             templateName: 'singleComment',
             classNames: ['comment'],
+            editing: false,
+            submitting: false,
+
+            delete: function() {
+                this.get('controller').delete(this.get('node.data'));
+            },
+
+            undelete: function() {
+                this.get('controller').undelete(this.get('node.data'));
+            },
+
+            edit: function() {
+                this.set('editing', true);
+                this.get('controller').startEditing(this.get('node.data'));
+            },
+
+            save: function() {
+                var self = this;
+
+                self.set('submitting', true);
+                self.get('controller').save(self.get('node.data'), function() {
+                    self.set('submitting', false);
+                    self.set('editing', false);
+                });
+            },
+
+            cancel: function() {
+                this.set('editing', false);
+                this.get('controller').cancelEditing(this.get('node.data'));
+            },
 
             EditView: Em.View.extend({
                 templateName: 'edit',
@@ -252,8 +276,12 @@ $(function() {
                     this.loader_url = nc_app.static_url + this.loader_gif;
                 },
 
-                save: function(comment) {
-                    this.get('parentView.controller').save(comment);
+                save: function() {
+                    this.get('parentView').save();
+                },
+
+                cancel: function() {
+                    this.get('parentView').cancel();
                 },
 
                 SaveButtonView: Em.View.extend({
@@ -264,12 +292,8 @@ $(function() {
 
                     href: '#',
 
-                    save: function(comment) {
-                        this.get('parentView').save(comment);
-                    },
-
                     click: function(event) {
-                        this.save(this.comment);
+                        this.get('parentView').save();
                         event.preventDefault();
                     }
                 })
@@ -308,19 +332,6 @@ $(function() {
                     ctrl.connectOutlet('comments', 'comments');
 
                     router.get('commentsController').find();
-                },
-
-                deleteComment: function(router, event) {
-                    router.get('commentsController').delete(event.view.node.data);
-                },
-                undeleteComment: function(router, event) {
-                    router.get('commentsController').undelete(event.view.node.data);
-                },
-                editComment: function(router, event) {
-                    router.get('commentsController').startEditing(event.view.node.data);
-                },
-                cancelEditingComment: function(router, event) {
-                    router.get('commentsController').cancelEditing(event.view.comment);
                 }
             })
         })

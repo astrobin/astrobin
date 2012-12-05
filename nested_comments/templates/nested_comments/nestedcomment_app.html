@@ -37,7 +37,7 @@
             {{#if view.node.data.deleted}}
                 <p>{% trans "(deleted)" %}</p>
             {{else}}
-                {{#if view.node.data.editing}}
+                {{#if view.editing}}
                     {{view view.EditView commentBinding="view.node.data"}}
                 {{else}}
                     {{{view.node.data.markdown}}}
@@ -50,14 +50,14 @@
 
             {{#if view.node.data.authorIsRequestingUser}}
                 {{#if view.node.data.deleted}}
-                    <a href="#" {{action "undeleteComment"}}>{% trans "Undelete" %}</a>
+                    <a href="#" {{action "undelete" target="view"}}>{% trans "Undelete" %}</a>
                 {{else}}
-                    <a href="#" {{action "deleteComment"}}>{% trans "Delete" %}</a>
+                    <a href="#" {{action "delete" target="view"}}>{% trans "Delete" %}</a>
                 {{/if}}
 
                 {{#if view.node.data.allowEditing}}
-                    {{#unless view.node.data.editing}}
-                        <a href="#" {{action "editComment"}}>{% trans "Edit" %}</a>
+                    {{#unless view.editing}}
+                        <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
                     {{/unless}}
                 {{/if}}
             {{else}}
@@ -81,7 +81,7 @@
     {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
     {{view view.SaveButtonView commentBinding="view.comment"}}
-    <a class="btn btn-mini" href="#" {{action cancelEditingComment}}>{% trans "Cancel" %}</a>
+    <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
 
     {{#if view.comment.submitting}}
         <span class="loader">
