@@ -57,6 +57,7 @@ class NestedCommentList(generics.ListCreateAPIView):
     API endpoint that represents a list of nested comment.s
     """
     model = NestedComment
+    queryset = NestedComment.objects.order_by('pk')
     serializer_class = NestedCommentSerializer
     filter_fields = ('content_type', 'object_id',)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,

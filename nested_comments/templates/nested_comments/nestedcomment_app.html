@@ -10,33 +10,34 @@
     {{outlet comments}}
 {% endhandlebars %}
 
+
 {% handlebars "top-level" %}
     <p>Top level form goes here</p>
 {% endhandlebars %}
 
+
 {% handlebars "comments" %}
     {{#if controller.ready}}
-        {{#each controller.tree.children}}
-            {{view view.SingleCommentView nodeBinding="this"}}
+        {{#each controller.content}}
+            {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
         {{/each}}
     {{else}}
-        <span class="loader">
-            <img alt="" {{bindAttr src="view.loader_url"}}/> 
-        </span>
+        {{view NestedCommentsApp.LoaderView}}
     {{/if}}
 {% endhandlebars %}
 
+
 {% handlebars "singleComment" %}
-    <div class="comment-container" {{bindAttr id="view.node.data.cid"}}>
+    <div class="comment-container" {{bindAttr id="view.node.cid"}}>
         <div class="meta">
             <a class="author" href="#">
-                {{#if view.node.data.deleted}}
+                {{#if view.node.deleted}}
                     {% trans "(deleted)" %}
                 {{else}}
-                    {{view.node.data.author_username}}
+                    {{view.node.author_username}}
                 {{/if}}
             </a>
-            {{view NestedCommentsApp.TimeagoView valueBinding="view.node.data.updated"}}
+            {{view NestedCommentsApp.TimeagoView valueBinding="view.node.updated"}}
 
             {{#unless view.collapsed}}
                 <a href="#" class="collapse" {{action "collapse" target="view"}}>[-]</a>
@@ -47,108 +48,145 @@
 
         {{#unless view.collapsed}}
             <div class="content">
-                {{#if view.node.data.deleted}}
+                {{#if view.node.deleted}}
                     <p>{% trans "(deleted)" %}</p>
                 {{else}}
                     {{#if view.editing}}
-                        {{view view.EditView commentBinding="view.node.data"}}
+                        {{view view.EditView commentBinding="view.node"}}
                     {{else}}
-                        {{{view.node.data.markdown}}}
+                        {{{view.node.markdown}}}
                     {{/if}}
                 {{/if}}
             </div>
 
             <div class="links">
-                <a {{bindAttr href="view.node.data.url"}}>{% trans "Link" %}</a>
+                <a {{bindAttr href="view.node.url"}}>{% trans "Link" %}</a>
 
-                {{#if view.node.data.authorIsRequestingUser}}
-                    {{#if view.node.data.deleted}}
+                {{#if view.node.authorIsRequestingUser}}
+                    {{#if view.node.deleted}}
                         <a href="#" {{action "undelete" target="view"}}>{% trans "Undelete" %}</a>
                     {{else}}
                         <a href="#" {{action "delete" target="view"}}>{% trans "Delete" %}</a>
                     {{/if}}
 
-                    {{#if view.node.data.allowEditing}}
+                    {{#if view.node.allowEditing}}
                         {{#unless view.editing}}
                             <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
                         {{/unless}}
                     {{/if}}
                 {{else}}
-                    <a href="#">{% trans "Reply" %}</a>
+                    <a href="#" class="label label-important" {{action "reply" target="view"}}>
+                        {% trans "Reply" %}
+                    </a>
                 {{/if}}
             </div>
 
+            {{#if view.replying}}
+                <div class="reply">
+                    {{view view.ReplyView parentBinding="view.node.comment"}}
+                </div>
+            {{/if}}
+
             <div class="children">
                 {{#each view.node.children}}
-                    {{view view.parentView.SingleCommentView nodeBinding="this"}}
+                    {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
                 {{/each}}
             </div>
         {{/unless}}
     </div>
 {% endhandlebars %}
 
-{% handlebars "timeago" %}
-    {{view.value}}
-{% endhandlebars %}
 
 {% handlebars "edit" %}
     {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
-    {{view view.SaveButtonView commentBinding="view.comment"}}
+    {{view view.SaveEditButtonView commentBinding="view.comment"}}
     <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
 
     {{#if view.parentView.submitting}}
-        <span class="loader">
-            <img alt="" {{bindAttr src="view.loader_url"}}/> 
-        </span>
+        {{view NestedCommentsApp.LoaderView}}
     {{/if}}
 
-    <div class="preview">
-        <h3>{% trans "Preview" %}</h3>
-        {{{view.comment.markdown}}}
-    </div>
-
-    <div class="formatting-help">
-        <h3>{% trans "Formatting help" %}</h3>
-        <table class="table table-condensed">
-            <tr><td><strong>{% trans "You type:" %}</strong</td><td><strong>{% trans "You see:" %}</strong></td></tr>
-            <tr><td>*{% trans "italics" %}*</td><td><i>{% trans "italics" %}</i></td></tr>
-            <tr><td>**{% trans "bold" %}**</td><td><strong>{% trans "bold" %}</strong></td></tr>
-            <tr><td>[AstroBin!](http://astrobin.com)</td><td><a href="http://astrobin.com">AstroBin!</a></td></tr>
-            <tr><td><i>{% trans "(TAB or 4 spaces)" %}</i> {% trans "preformatted text" %}</td><td><tt>{% trans "preformatted text" %}</tt></td></tr>
-            <tr><td>&gt; {% trans "quoted text" %}</td><td>| <i>{% trans "quoted text" %}</i></td></tr>
-            <tr><td>\*{% trans "escape the formatting syntax" %}\*</td><td>*{% trans "escape the formatting syntax" %}*</td></tr>
-        </table>
-    </div>
+    {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
+    {{view NestedCommentsApp.FormattingHelpView}}
 {% endhandlebars %}
+
+
+{% handlebars "reply" %}
+    {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+
+    {{view view.SaveReplyButtonView}}
+    <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
+
+    {{#if view.parentView.submitting}}
+        {{view NestedCommentsApp.LoaderView}}
+    {{/if}}
+
+    {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
+    {{view NestedCommentsApp.FormattingHelpView}}
+{% endhandlebars %}
+
+
+{% handlebars "timeago" %}
+    {{view.value}}
+{% endhandlebars %}
+
 
 {% handlebars "saveButton" %}
     {% trans "Save" %}
 {% endhandlebars %}
 
-{% comment %}
-<div id="nested-comments">
-    <div class="top-level-form">
-        <form class="form-horizontal" action="{% url nested_comments.create content_type.id object.id %}" method="post">
-            {{comment_form}}
 
-            <input type="hidden" name="parent_id" value="" />
-            <input type="hidden" name="level" value="0" />
+{% handlebars "loader" %}
+    <img alt="" {{bindAttr src="view.loaderUrl"}}/>
+{% endhandlebars %}
 
-            <div>
-                <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
-                <span class="help-inline">
-                    <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-                </span>
-                <span class="loader hidden">
-                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
-                </span>
-            </div>
-        </form>
-    </div> <!-- top-level-form -->
 
-    <div class="comments">
-        {% include 'nested_comments/nestedcomment_list.html' %}
-    </div>
-</div>
-{% endcomment %}
+{% handlebars "preview" %}
+    <h3>{% trans "Preview" %}</h3>
+    {{{view.comment.markdown}}}
+{% endhandlebars %}
+
+
+{% handlebars "formatting-help" %}
+    <h3>{% trans "Formatting help" %}</h3>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>{% trans "You type:" %}</th>
+                <th>{% trans "You see:" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>*{% trans "italics" %}*</td>
+                <td><i>{% trans "italics" %}</i></td>
+            </tr>
+
+            <tr>
+                <td>**{% trans "bold" %}**</td>
+                <td><strong>{% trans "bold" %}</strong></td>
+            </tr>
+
+            <tr>
+                <td>[AstroBin!](http://astrobin.com)</td>
+                <td><a href="http://astrobin.com">AstroBin!</a></td>
+            </tr>
+
+            <tr>
+                <td><i>{% trans "(TAB or 4 spaces)" %}</i> {% trans "preformatted text" %}</td>
+                <td><tt>{% trans "preformatted text" %}</tt></td>
+            </tr>
+
+            <tr>
+                <td>&gt; {% trans "quoted text" %}</td>
+                <td>| <i>{% trans "quoted text" %}</i></td>
+            </tr>
+            
+            <tr>
+                <td>\*{% trans "escape the formatting syntax" %}\*</td>
+                <td>*{% trans "escape the formatting syntax" %}*</td>
+            </tr>
+        </tbody>
+    </table>
+{% endhandlebars %}
