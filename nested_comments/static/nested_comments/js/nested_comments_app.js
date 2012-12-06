@@ -6,11 +6,16 @@ $(function() {
 
     var nc_app = Em.Application.create({
         rootElement: '#nested-comments',
+
         baseApiURL: '/api/v2/nestedcomments/',
+        loaderGif: 'images/ajax-loader.gif',
+
         ready: function() {
-            this.user_id = parseInt($('#nested-comments-user-id').attr('data-value'));
+            this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.page_url = $('#nested-comments-page-url').attr('data-value');
-            this.static_url = $('#nested-comments-static-url').attr('data-value');
+            this.staticUrl = $('#nested-comments-static-url').attr('data-value');
+            this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
+            this.objectId = $(this.rootElement).attr('data-object-id');
 
             this.markdownConverter = new Markdown.Converter();
         },
@@ -27,15 +32,18 @@ $(function() {
         author: null,
         content_type: null,
         object_id: null,
-        text: null,
+        text: '',
         created: null,
         updated: null,
         deleted: null,
         parent: null,
 
         // Fields that we compute manually
+        children: null,
         author_username: null,
         authorIsRequestingUser: null,
+        editing: null,
+        submitting: null,
         original_text: null, // Text before editing starts
 
         // Computed properties
@@ -56,7 +64,18 @@ $(function() {
             var html = converter.makeHtml(this.get('text'));
 
             return html;
-        }.property('text')
+        }.property('text'),
+
+        // Functions
+        init: function() {
+            this._super();
+
+            this.deleted = false;
+            this.children = [];
+
+            this.editing = false;
+            this.submitting = false;
+        }
      });
 
 
@@ -77,30 +96,70 @@ $(function() {
     });
 
 
-    nc_app.CommentsController = Em.Controller.extend({
-        tree: null,
+    nc_app.SaveButtonView = Em.View.extend({
+        templateName: 'saveButton',
+        tagName: 'a',
+        classNames: ['btn btn-mini btn-primary'],
+        classNameBindings: ['disabled'],
+        attributeBindings: ['href', 'disabled'],
+
+        href: '#',
+        disabledBinding: 'parentView.parentView.submitting',
+
+        click: function(event) {
+            this.get('parentView').save();
+            event.preventDefault();
+        }
+    });
+
+
+    nc_app.CommentsController = Em.ArrayController.extend({
+        content: [], // The top-level comments
         ready: false,
+
+        findCommentById: function(id, root) {
+            var self = this;
+
+            if (root === undefined) {
+                for (var i = 0; i < self.content.length; i++) {
+                    var comment = self.findCommentById(id, self.content[i]);
+                    if (comment !== undefined)
+                        return comment;
+                }
+            } else {
+                if (root.get('id') == id)
+                    return root;
+                for (var i = 0; i < root.get('children').length; i++) {
+                    var comment = self.findCommentById(id, root.get('children')[i]);
+                    if (comment !== undefined)
+                        return comment;
+                }
+            }
+        },
 
         addComment: function(comment) {
             var self = this;
 
-            if (self.get('tree') == null) {
-                self.set('tree', new Arboreal());
-            }
-
             // djangorestframework has trouble with null values:
             // https://github.com/tomchristie/django-rest-framework/pull/356
-            if (comment.parent == null || comment.parent == comment.id) {
-                self.get('tree').appendChild(comment);
+            if (comment.get('parent') == null || comment.get('parent') == comment.get('id')) {
+                self.pushObject(comment);
             } else {
-                var parent = self.tree.find(function(node) {
-                    return comment.parent = node.data.id;
-                });
-
-                if (parent != null) {
-                    parent.appendChild(comment);
-                }
+                var parent = self.findCommentById(comment.get('parent'));
+                if (parent !== undefined) {
+                    parent.get('children').pushObject(comment);
+                } else
+                    self.pushObject(comment);
             }
+        },
+
+        createComment: function() {
+            return nc_app.Comment.create({
+                author: nc_app.userId,
+                content_type: nc_app.contentTypeId,
+                object_id: nc_app.objectId,
+                text: ''
+            });
         },
 
         fetchAuthor: function(comment) {
@@ -108,7 +167,6 @@ $(function() {
 
             $.ajax({
                 url: url,
-                cache: false,
                 timeout: 10000,
                 dataType: 'json',
                 success: function(response) {
@@ -130,7 +188,7 @@ $(function() {
                     success: function(response) {
                         $.each(response.results, function(i, nc_data) {
                             var comment = nc_app.Comment.create(nc_data);
-                            comment.set('authorIsRequestingUser', nc_app.user_id == comment.get('author'));
+                            comment.set('authorIsRequestingUser', nc_app.userId == comment.get('author'));
                             self.fetchAuthor(comment);
                             self.addComment(comment);
                         });
@@ -147,12 +205,10 @@ $(function() {
 
         find: function() {
             var self = this,
-                content_type_id = $(nc_app.rootElement).attr('data-content-type-id'),
-                object_id = $(nc_app.rootElement).attr('data-object-id'),
                 url = nc_app.baseApiURL + 'nestedcomments/',
                 data = {
-                    'content_type': content_type_id,
-                    'object_id': object_id,
+                    'content_type': nc_app.contentTypeId,
+                    'object_id': nc_app.objectId,
                 };
 
             self.fetchComments(url, data);
@@ -211,120 +267,166 @@ $(function() {
 
         startEditing: function(comment) {
             comment.set('original_text', comment.get('text'));
+            comment.set('editing', true);
+            comment.set('replying', false);
         },
 
         cancelEditing: function(comment) {
             comment.set('text', comment.get('original_text'));
+            comment.set('editing', false);
         },
 
-        save: function(comment, success_cb) {
+        saveEdit: function(comment) {
             var data = this.dump(comment);
 
+            comment.set('submitting', true);
             $.ajax({
                 type: 'put',
                 url: nc_app.baseApiURL + 'nestedcomments/' + data.id + '/',
                 data: data,
                 timeout: 10000,
                 success: function() {
-                    success_cb();
+                    comment.set('editing', false);
+                    comment.set('submitting', false);
+                }
+            });
+        },
+
+        startReplying: function(comment) {
+            comment.set('replying', true);
+            comment.set('editing', false);
+        },
+
+        cancelReplying: function(comment) {
+            comment.set('replying', false);
+        },
+
+        saveReply: function(comment, parent) {
+            var self = this,
+                data = self.dump(comment),
+                fake_date = '1970-01-01 00:00:00'; // The server will set the real date
+
+        
+            data['created'] = fake_date;
+            data['updated'] = fake_date;
+
+            parent.set('submitting', true);
+            $.ajax({
+                type: 'post',
+                url: nc_app.baseApiURL + 'nestedcomments/',
+                data: data,
+                timeout: 10000,
+                success: function(response) {
+                    parent.set('replying', false);
+                    parent.set('submitting', false);
+
+                    var new_comment = nc_app.Comment.create(response);
+                    new_comment.set('authorIsRequestingUser', true);
+                    self.addComment(new_comment);
                 }
             });
         }
     });
-    nc_app.commentsController = nc_app.CommentsController.create();
 
     nc_app.CommentsView = Em.View.extend({
         templateName: 'comments',
         classNames: ['comments'],
+    });
 
-        loader_gif: 'images/ajax-loader.gif',
-        loader_url: null,
 
-        didInsertElement: function() {
-            this.set('loader_url', nc_app.static_url + this.loader_gif);
+    nc_app.SingleCommentView = Em.View.extend({
+        templateName: 'singleComment',
+        classNames: ['comment'],
+        editingBinding: 'node.editing',
+        submittingBinding: 'node.submitting',
+        replyingBinding: 'node.replying',
+        collapsed: false,
+
+        collapse: function() {
+            this.set('collapsed', true);
         },
 
-        SingleCommentView: Em.View.extend({
-            templateName: 'singleComment',
-            classNames: ['comment'],
-            editing: false,
-            submitting: false,
-            collapsed: false,
+        uncollapse: function() {
+            this.set('collapsed', false);
+        },
 
-            collapse: function() {
-                this.set('collapsed', true);
-            },
+        delete: function() {
+            nc_app.get('router.commentsController').delete(this.get('node'));
+        },
 
-            uncollapse: function() {
-                this.set('collapsed', false);
-            },
+        undelete: function() {
+            nc_app.get('router.commentsController').undelete(this.get('node'));
+        },
 
-            delete: function() {
-                this.get('controller').delete(this.get('node.data'));
-            },
+        edit: function() {
+            nc_app.get('router.commentsController').startEditing(this.get('node'));
+        },
 
-            undelete: function() {
-                this.get('controller').undelete(this.get('node.data'));
-            },
+        saveEdit: function() {
+            nc_app.get('router.commentsController').saveEdit(this.get('node'));
+        },
 
-            edit: function() {
-                this.set('editing', true);
-                this.get('controller').startEditing(this.get('node.data'));
+        cancelEditing: function() {
+            nc_app.get('router.commentsController').cancelEditing(this.get('node'));
+        },
+
+        reply: function() {
+            nc_app.get('router.commentsController').startReplying(this.get('node'));
+        },
+
+        saveReply: function() {
+            nc_app.get('router.commentsController').saveReply(
+                this.get('replyComment'),
+                this.get('node'));
+        },
+
+        cancelReplying: function() {
+            nc_app.get('router.commentsController').cancelReplying(this.get('node'));
+        },
+
+        EditView: Em.View.extend({
+            templateName: 'edit',
+            tagName: 'form',
+
+            didInsertElement: function() {
+                this.$('textarea').focus();
             },
 
             save: function() {
-                var self = this;
-
-                self.set('submitting', true);
-                self.get('controller').save(self.get('node.data'), function() {
-                    self.set('submitting', false);
-                    self.set('editing', false);
-                });
+                this.get('parentView').saveEdit();
             },
 
             cancel: function() {
-                this.set('editing', false);
-                this.get('controller').cancelEditing(this.get('node.data'));
+                this.get('parentView').cancelEditing();
             },
 
-            EditView: Em.View.extend({
-                templateName: 'edit',
-                tagName: 'form',
-                classNames: ['form-horizontal'],
-                loader_gif: 'images/ajax-loader.gif',
-                loader_url: null,
+            SaveEditButtonView: nc_app.SaveButtonView.extend()
+        }),
 
-                didInsertElement: function() {
-                    this.set('loader_url', nc_app.static_url + this.loader_gif);
-                },
+        ReplyView: Em.View.extend({
+            templateName: 'reply',
+            tagName: 'form',
 
-                save: function() {
-                    this.get('parentView').save();
-                },
+            didInsertElement: function() {
+                var comment = this.get('parentView.controller').createComment();
+                comment.set('parent', this.get('parentView.node.id'));
+                this.set('comment', comment);
+                this.set('parentView.replyComment', comment);
 
-                cancel: function() {
-                    this.get('parentView').cancel();
-                },
+                this.$('textarea').focus();
+            },
 
-                SaveButtonView: Em.View.extend({
-                    templateName: 'saveButton',
-                    tagName: 'a',
-                    classNames: ['btn btn-mini btn-primary'],
-                    classNameBindings: ['disabled'],
-                    attributeBindings: ['href', 'disabled'],
+            cancel: function() {
+                this.get('parentView').cancelReplying();
+            },
 
-                    href: '#',
-                    disabledBinding: 'parentView.parentView.submitting',
+            save: function() {
+                this.get('parentView').saveReply();
+            },
 
-                    click: function(event) {
-                        this.get('parentView').save();
-                        event.preventDefault();
-                    }
-                })
-            })
+            SaveReplyButtonView: nc_app.SaveButtonView.extend()
         })
     });
-
 
     nc_app.TimeagoView = Em.View.extend({
         templateName: 'timeago',
@@ -337,6 +439,27 @@ $(function() {
             this._super();
             this.$().timeago();
         }
+    });
+
+    nc_app.LoaderView = Em.View.extend({
+        tagName: 'span',
+        classNames: ['loader'],
+        loaderUrl: null,
+        templateName: 'loader',
+
+        didInsertElement: function() {
+            this.set('loaderUrl', nc_app.staticUrl + nc_app.loaderGif);
+        }
+    });
+
+    nc_app.PreviewView = Em.View.extend({
+        classNames: ['preview'],
+        templateName: 'preview'
+    });
+
+    nc_app.FormattingHelpView = Em.View.extend({
+        classNames: ['formatting-help'],
+        templateName: 'formatting-help'
     });
 
 
