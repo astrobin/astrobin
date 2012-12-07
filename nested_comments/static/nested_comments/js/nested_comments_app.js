@@ -66,6 +66,17 @@ $(function() {
             return html;
         }.property('text'),
 
+        hasText: function() {
+            return this.get('text') != '';
+        }.property('text'),
+
+        disallowSaving: function() {
+            var submitting = this.get('submitting');
+            var hasText = this.get('hasText');
+
+            return submitting || !hasText;
+        }.property('submitting', 'text'),
+
         // Functions
         init: function() {
             this._super();
@@ -89,27 +100,39 @@ $(function() {
     });
 
 
-    nc_app.TopLevelController = Em.Controller.extend();
-    nc_app.topLevelController = nc_app.TopLevelController.create();
-    nc_app.TopLevelView = Em.View.extend({
-        templateName: "top-level"
-    });
-
-
     nc_app.SaveButtonView = Em.View.extend({
         templateName: 'saveButton',
-        tagName: 'a',
+        tagName: 'button',
         classNames: ['btn btn-mini btn-primary'],
         classNameBindings: ['disabled'],
-        attributeBindings: ['href', 'disabled'],
+        attributeBindings: ['disabled'],
 
-        href: '#',
-        disabledBinding: 'parentView.parentView.submitting',
+        disabledBinding: 'parentView.disallowSaving',
 
         click: function(event) {
             this.get('parentView').save();
             event.preventDefault();
         }
+    });
+
+
+    nc_app.TopLevelController = Em.Controller.extend();
+    nc_app.TopLevelView = Em.View.extend({
+        templateName: "top-level",
+        classNames: 'comment',
+        submittingBinding: 'comment.submitting',
+        disallowSavingBinding: 'comment.disallowSaving',
+
+        didInsertElement: function() {
+            var comment = nc_app.get('router.commentsController').createComment();
+            this.set('comment', comment);
+        },
+
+        save: function() {
+            nc_app.get('router.commentsController').saveNewComment(this.get('comment'));
+        },
+
+        SaveCommentButtonView: nc_app.SaveButtonView.extend()
     });
 
 
@@ -311,6 +334,7 @@ $(function() {
             data['updated'] = fake_date;
 
             parent.set('submitting', true);
+
             $.ajax({
                 type: 'post',
                 url: nc_app.baseApiURL + 'nestedcomments/',
@@ -319,6 +343,32 @@ $(function() {
                 success: function(response) {
                     parent.set('replying', false);
                     parent.set('submitting', false);
+
+                    var new_comment = nc_app.Comment.create(response);
+                    new_comment.set('authorIsRequestingUser', true);
+                    self.addComment(new_comment);
+                }
+            });
+        },
+
+        saveNewComment: function(comment) {
+            var self = this,
+                data = self.dump(comment),
+                fake_date = '1970-01-01 00:00:00'; // The server will set the real date
+
+        
+            data['created'] = fake_date;
+            data['updated'] = fake_date;
+
+            comment.set('submitting', true);
+
+            $.ajax({
+                type: 'post',
+                url: nc_app.baseApiURL + 'nestedcomments/',
+                data: data,
+                timeout: 10000,
+                success: function(response) {
+                    comment.set('submitting', false);
 
                     var new_comment = nc_app.Comment.create(response);
                     new_comment.set('authorIsRequestingUser', true);
@@ -338,8 +388,9 @@ $(function() {
         templateName: 'singleComment',
         classNames: ['comment'],
         editingBinding: 'node.editing',
-        submittingBinding: 'node.submitting',
         replyingBinding: 'node.replying',
+        submittingBinding: 'node.submitting',
+        disallowSavingBinding: 'node.disallowSaving',
         collapsed: false,
 
         collapse: function() {
@@ -387,6 +438,8 @@ $(function() {
         EditView: Em.View.extend({
             templateName: 'edit',
             tagName: 'form',
+            submittingBinding: 'parentView.submitting',
+            disallowSavingBinding: 'parentView.disallowSaving',
 
             didInsertElement: function() {
                 this.$('textarea').focus();
@@ -406,6 +459,8 @@ $(function() {
         ReplyView: Em.View.extend({
             templateName: 'reply',
             tagName: 'form',
+            submittingBinding: 'parentView.submitting',
+            disallowSavingBinding: 'parentView.disallowSaving',
 
             didInsertElement: function() {
                 var comment = this.get('parentView.controller').createComment();

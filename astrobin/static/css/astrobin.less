@@ -1717,10 +1717,20 @@ div.favorite-container {
 }
 
 .reviews, .comments {
+    margin-top: @spacer-large;
     margin-bottom: @spacer-xxlarge;
+    padding-top: @spacer-large;
+
+    border-top: 1px solid #424242;
+
     .loader {
         display: block;
         text-align: center;
+    }
+
+    small {
+        font-size: 87.5%;
+        color: darken(@text-color, 15%);
     }
 }
 
@@ -1766,40 +1776,8 @@ div.favorite-container {
         font-size: 0.8em;
     }
 
-    .top-level-form {
-        .control-group {
-            margin-bottom: 0;
-        }
-        .controls {
-            margin-left: 0;
-        }
-        .form-actions {
-            margin-top: @spacer-small;
-            padding: 0;
-            border: none;
-        }
-    }
-
     .loader {
         display: inline-block;
-    }
-}
-
-.formatting-help {
-    font-size: 0.8em;
-}
-
-.top-level-form {
-    .control-group {
-        margin-bottom: 0;
-    }
-    .controls {
-        margin-left: 0;
-    }
-    .form-actions {
-        margin-top: @spacer-small;
-        padding: 0;
-        border: none;
     }
 }
 
