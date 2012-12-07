@@ -1544,12 +1544,20 @@ div.favorite-container a.favorite:hover .favorite-hint {
 }
 .reviews,
 .comments {
+  margin-top: 12px;
   margin-bottom: 28px;
+  padding-top: 12px;
+  border-top: 1px solid #424242;
 }
 .reviews .loader,
 .comments .loader {
   display: block;
   text-align: center;
+}
+.reviews small,
+.comments small {
+  font-size: 87.5%;
+  color: #929292;
 }
 .comment-container {
   margin-top: 16px;
@@ -1616,9 +1624,6 @@ div.favorite-container a.favorite:hover .favorite-hint {
   margin-top: 4px;
   padding: 0;
   border: none;
-}
-.loader {
-  display: inline-block;
 }
 .comment,
 .review {
