@@ -410,20 +410,44 @@ $(function() {
         disallowSavingBinding: 'node.disallowSaving',
         collapsed: false,
 
-        didInsertElement: function() {
+        scroll: function() {
+            /* Using a timeout here, because the "reply" view is still
+             * visible, so we give it time to hide before scrolling. */
             var self = this;
+            setTimeout(function() {
+                $('html, body').animate({
+                    // 55 pixel is the fixed navigation bar
+                    scrollTop: self.$().offset().top - 55
+                }, 1000);
+            }, 250);
+        },
+
+        hilight: function() {
+            // There can be only one.
+            $('.comment.hilight').removeClass('hilight');
+            this.$().addClass('hilight');
+        },
+
+        didInsertElement: function() {
+            var self = this,
+                hilighted_comment = location.hash.substr(1);
 
             if (nc_app.get('router.commentsController.firstCommentAdded')) {
                 $('.comment.newlyAdded').removeClass('newlyAdded');
                 self.$().addClass('newlyAdded');
-                /* Using a timeout here, because the "reply" view is still
-                 * visible, so we give it time to hide before scrolling. */
-                setTimeout(function() {
-                    $('html, body').animate({
-                        scrollTop: self.$().offset().top - 55 // 55 pixel is the fixed navigation bar
-                    }, 2000);
-                }, 250);
+                self.scroll();
             }
+
+            if (hilighted_comment == self.get('node.cid')) {
+                self.hilight();
+                self.scroll();
+            }
+        },
+
+        link: function() {
+            this.hilight();
+            window.location.href = '#' + this.get('node.cid');
+            this.scroll();
         },
 
         collapse: function() {

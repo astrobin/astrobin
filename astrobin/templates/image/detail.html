@@ -522,7 +522,7 @@
                 </div>
             </div>
             {% endif %}
-            <div class="row comment-container">
+            <div class="row">
                 <div class="span8">
                     <div class="subtle-container">
                         <div class="header"><h4><i class="icon-comments-alt"></i> {% trans "Comments" %}</h4></div>
@@ -530,100 +530,21 @@
                         <p>
                             {% blocktrans with user=image.user lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
                         </p>
-                        <div class="top-level-form">
-                            <form class="form-horizontal" action="{% url image_comment_save %}" method="post">
-                                {{comment_form|as_bootstrap}}
-                                <input type="hidden" name="author" value="{{user.id}}" />
-                                <input type="hidden" name="image" value="{{image.id}}" />
-                                <input type="hidden" name="parent_id" value="" />
-                                <input type="hidden" name="level" value="0" />
-                                <div>
-                                    <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
-                                    <span class="help-inline">
-                                        <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-                                    </span>
-                                    <span class="loader">
-                                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
-                                    </span>
-                                </div>
-                            </form>
-                        </div> <!-- top-level-form -->
                         {% else %}
                             <p>
                                 {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
                             </p>
                         {% endif %}
-    
-                        {% if comments %}
-                            {% load mptt_tags %}
-                            {% recursetree comments %}
-                                <div style="margin-left: {{node.get_level|add:node.get_level}}em">
-                                    <div id="c{{node.id}}" class="comment">
-                                        <div class="avatar">
-                                            <a href="{% url user_page node.author %}">
-                                                {% avatar node.author 32 %}
-                                            </a>
-                                        </div>
-                                        <div class="meta">
-                                            <a rel="popover" class="author user-popover"
-                                               data-load="{% url user_popover_ajax node.author %}"
-                                               href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
-                                        </div>
-                                        <div class="content{% if node.is_deleted %} deleted{% endif %}">
-                                            {% if node.is_deleted %}
-                                                <p>{% trans "(comment deleted)" %}</p>
-                                            {% else %}
-                                                {{node.comment|markdown|linebreaks}}
-                                            {% endif %}
-                                        </div>
-                                        <div class="links">
-                                            <a class="permalink" href="{% url image_detail image.id %}#c{{node.id}}">{% trans "Link" %}</a>
-                                            {% if user.is_authenticated %}
-                                                {% if user == node.author %}
-                                                    <a class="delete" href="#">
-                                                        {% if node.is_deleted %}
-                                                            {% trans "Undelete" %}
-                                                        {% else %}
-                                                            {% trans "Delete" %}
-                                                        {% endif %}
-                                                    </a>
-                                                    <a class="edit" href="#">{% trans "Edit" %}</a>
-                                                {% else %}
-                                                    <a class="reply btn btn-mini btn-primary" href="#">{% trans "Reply" %}</a>
-                                                {% endif %}
-                                            {% endif %}
-                                        </div>
-                                        <form action="{% url image_comment_save %}" method="post">
-                                            {{comment_form.as_p}}
-                                            <input type="hidden" name="author" value="{{user.id}}" />
-                                            <input type="hidden" name="image" value="{{image.id}}" />
-                                            <input type="hidden" name="parent_id" value="{{node.id}}" />
-                                            <input type="hidden" name="level" value="{{node.get_level}}" />
-                                            <p>
-                                                <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
-                                                <input class="btn btn-mini cancel" type="reset" value="{% trans "Cancel" %}" />
-                                                <span class="formatting-help">
-                                                    <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-                                                </span>
-                                                <span class="loader">
-                                                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
-                                                </span>
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
-                                {% if not node.is_leaf_node %}
-                                    {{children}}
-                                {% endif %}
-                            {% endrecursetree %}
-                        {% else %}
-                            <div class="no-comments-yet">
-                                {% blocktrans %}There are no comments yet.{% endblocktrans %}
-                            </div>
-                        {% endif %}
+
+                        <div id="nested-comments"
+                             data-content-type-id="{{content_type.pk}}"
+                             data-object-id="{{image.pk}}">
+                        </div>
+                        {% include 'nested_comments/nestedcomment_app.html' %}
+
                     </div> <!-- subtle-container -->
                 </div> <!-- span8 -->
-            </div> <!-- row  comments-->
+            </div> <!-- row -->
         </div> <!-- span8 -->
         
         <div class="span4"> <!-- right pane -->
@@ -1425,14 +1346,6 @@ $(document).ready(function() {
                 }
             }
         });
-
-        var hilighted_comment = location.hash.substr(1);
-        if (hilighted_comment) {
-            $('#' + hilighted_comment).addClass('hilight');
-            setTimeout(function() {
-                $('html, body').animate({scrollTop: $("#" + hilighted_comment).offset().top - 54}, 500);
-            }, 1000);
-        }
 
         $('#request-critique').popover({
             placement: 'bottom',

@@ -12,6 +12,7 @@ from django.views.decorators.cache import never_cache
 from django.core.urlresolvers import reverse
 from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -831,8 +832,7 @@ def image_detail(request, id, r):
 
                      'solar_system_main_subject_id': image.solar_system_main_subject,
                      'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
-                     'comment_form': CommentForm(),
-                     'comments': Comment.objects.filter(image = image),
+                     'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
                      'preferred_language': preferred_language,
                      'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0 if request.user.is_authenticated() else False,
                      'times_favorited': Favorite.objects.filter(image = image).count(),
@@ -3787,7 +3787,6 @@ def gear_page(request, id, slug):
 
     show_commercial = (gear.commercial and gear.commercial.is_paid) or (gear.commercial and gear.commercial.producer == request.user)
 
-    from django.contrib.contenttypes.models import ContentType
     return object_detail(
         request,
         queryset = Gear.objects.all(),

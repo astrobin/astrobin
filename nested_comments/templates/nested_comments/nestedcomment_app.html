@@ -81,7 +81,7 @@
             </div>
 
             <div class="links">
-                <a {{bindAttr href="view.node.url"}}>{% trans "Link" %}</a>
+                <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}}>{% trans "Link" %}</a>
 
                 {{#if view.node.authorIsRequestingUser}}
                     {{#if view.node.deleted}}
@@ -95,10 +95,6 @@
                             <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
                         {{/unless}}
                     {{/if}}
-                    <a href="#" class="label label-important" {{action "reply" target="view"}}>
-                        {% trans "Reply" %}
-                    </a>
-
                 {{else}}
                     <a href="#" class="label label-important" {{action "reply" target="view"}}>
                         {% trans "Reply" %}
