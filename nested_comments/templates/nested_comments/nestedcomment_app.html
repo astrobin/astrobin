@@ -2,6 +2,7 @@
 {% load ember %}
 
 <div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
+<div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
 <div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
 <div id="nested-comments-static-url" data-value="{{STATIC_URL}}"></div>
 
@@ -94,6 +95,10 @@
                             <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
                         {{/unless}}
                     {{/if}}
+                    <a href="#" class="label label-important" {{action "reply" target="view"}}>
+                        {% trans "Reply" %}
+                    </a>
+
                 {{else}}
                     <a href="#" class="label label-important" {{action "reply" target="view"}}>
                         {% trans "Reply" %}
