@@ -1597,33 +1597,8 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .comment-container .formatting-help {
   font-size: 0.8em;
 }
-.comment-container .top-level-form .control-group {
-  margin-bottom: 0;
-}
-.comment-container .top-level-form .controls {
-  margin-left: 0;
-}
-.comment-container .top-level-form .form-actions {
-  margin-top: 4px;
-  padding: 0;
-  border: none;
-}
 .comment-container .loader {
   display: inline-block;
-}
-.formatting-help {
-  font-size: 0.8em;
-}
-.top-level-form .control-group {
-  margin-bottom: 0;
-}
-.top-level-form .controls {
-  margin-left: 0;
-}
-.top-level-form .form-actions {
-  margin-top: 4px;
-  padding: 0;
-  border: none;
 }
 .comment,
 .review {
@@ -1699,6 +1674,9 @@ div.favorite-container a.favorite:hover .favorite-hint {
 .review form textarea {
   width: 98.75%;
   margin-bottom: 8px;
+}
+.comment.newlyAdded {
+  background: rgba(0, 255, 0, 0.1);
 }
 .review-form textarea,
 .review-form select {

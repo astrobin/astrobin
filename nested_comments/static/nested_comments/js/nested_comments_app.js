@@ -12,6 +12,7 @@ $(function() {
 
         ready: function() {
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
+            this.username = $('#nested-comments-user-name').attr('data-value');
             this.page_url = $('#nested-comments-page-url').attr('data-value');
             this.staticUrl = $('#nested-comments-static-url').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
@@ -123,13 +124,21 @@ $(function() {
         submittingBinding: 'comment.submitting',
         disallowSavingBinding: 'comment.disallowSaving',
 
-        didInsertElement: function() {
+        reset: function() {
             var comment = nc_app.get('router.commentsController').createComment();
             this.set('comment', comment);
         },
 
+        didInsertElement: function() {
+            this.reset();
+        },
+
         save: function() {
-            nc_app.get('router.commentsController').saveNewComment(this.get('comment'));
+            var self = this;
+            nc_app.get('router.commentsController').saveNewComment(self.get('comment'))
+                .then(function(response, statusText, xhr) {
+                    self.reset();
+                });
         },
 
         SaveCommentButtonView: nc_app.SaveButtonView.extend()
@@ -139,6 +148,7 @@ $(function() {
     nc_app.CommentsController = Em.ArrayController.extend({
         content: [], // The top-level comments
         ready: false,
+        firstCommentAdded: false,
 
         findCommentById: function(id, root) {
             var self = this;
@@ -345,8 +355,10 @@ $(function() {
                     parent.set('submitting', false);
 
                     var new_comment = nc_app.Comment.create(response);
+                    new_comment.set('author_username', nc_app.username);
                     new_comment.set('authorIsRequestingUser', true);
                     self.addComment(new_comment);
+                    self.set('firstCommentAdded', true);
                 }
             });
         },
@@ -354,15 +366,18 @@ $(function() {
         saveNewComment: function(comment) {
             var self = this,
                 data = self.dump(comment),
-                fake_date = '1970-01-01 00:00:00'; // The server will set the real date
+                fake_date = '1970-01-01 00:00:00', // The server will set the real date
+                fake_id = 0;
 
         
             data['created'] = fake_date;
             data['updated'] = fake_date;
+            data['id'] = fake_id;
+            data['parent'] = fake_id;
 
             comment.set('submitting', true);
 
-            $.ajax({
+            return $.ajax({
                 type: 'post',
                 url: nc_app.baseApiURL + 'nestedcomments/',
                 data: data,
@@ -371,8 +386,10 @@ $(function() {
                     comment.set('submitting', false);
 
                     var new_comment = nc_app.Comment.create(response);
+                    new_comment.set('author_username', nc_app.username);
                     new_comment.set('authorIsRequestingUser', true);
                     self.addComment(new_comment);
+                    self.set('firstCommentAdded', true);
                 }
             });
         }
@@ -392,6 +409,22 @@ $(function() {
         submittingBinding: 'node.submitting',
         disallowSavingBinding: 'node.disallowSaving',
         collapsed: false,
+
+        didInsertElement: function() {
+            var self = this;
+
+            if (nc_app.get('router.commentsController.firstCommentAdded')) {
+                $('.comment.newlyAdded').removeClass('newlyAdded');
+                self.$().addClass('newlyAdded');
+                /* Using a timeout here, because the "reply" view is still
+                 * visible, so we give it time to hide before scrolling. */
+                setTimeout(function() {
+                    $('html, body').animate({
+                        scrollTop: self.$().offset().top - 55 // 55 pixel is the fixed navigation bar
+                    }, 2000);
+                }, 250);
+            }
+        },
 
         collapse: function() {
             this.set('collapsed', true);
