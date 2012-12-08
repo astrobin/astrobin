@@ -1734,8 +1734,10 @@ div.favorite-container {
     }
 }
 
-.comment-container {
+.comment, .review {
+    position: relative;
     margin-top: @spacer-xlarge;
+    margin-bottom: @spacer-medium;
     font-size: 1em;
     padding-left: @spacer-large;
     border-left: 1px dotted #404040;
@@ -1772,6 +1774,7 @@ div.favorite-container {
             text-shadow: none;
         }
     }
+
     .formatting-help {
         font-size: 0.8em;
     }
@@ -1779,11 +1782,6 @@ div.favorite-container {
     .loader {
         display: inline-block;
     }
-}
-
-.comment, .review {
-    position: relative;
-    margin-bottom: @spacer-medium;
 
     .avatar {
         float: left;
@@ -1859,6 +1857,11 @@ div.favorite-container {
             margin-bottom: @spacer-medium;
         }
     }
+}
+
+.review {
+    border-bottom: 1px dashed #555;
+    padding-bottom: @spacer-large;
 }
 
 .comment.newlyAdded, .comment.hilight, .review.hilight {
