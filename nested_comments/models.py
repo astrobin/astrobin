@@ -24,12 +24,12 @@ class NestedComment(models.Model):
     text = models.TextField()
 
     created = models.DateTimeField(
-        auto_now_add = True,
+        auto_now_add = False,
         editable = False,
     )
 
     updated = models.DateTimeField(
-        auto_now = True,
+        auto_now = False,
         editable = False,
     )
 
@@ -47,6 +47,10 @@ class NestedComment(models.Model):
 
     def __unicode__(self):
         return "%s: \"%s\"" % (self.author, self.text)
+
+    def get_absolute_url(self):
+        object_url = self.content_type.get_object_for_this_type(id = self.object_id).get_absolute_url()
+        return '%s#c%d' % (object_url, self.id)
 
     def delete(self):
         if self.deleted == False:

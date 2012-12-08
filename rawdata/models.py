@@ -5,6 +5,7 @@ import uuid
 # Django
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import m2m_changed
 from django.utils.translation import ugettext_lazy as _
@@ -196,6 +197,9 @@ class PublicDataPool(models.Model):
     def delete(self):
         self.active = False
         self.save()
+
+    def get_absolute_url(self):
+        return reverse('rawdata.publicdatapool_detail', args=(self.pk,))
 
 
 def on_pool_images_changed(sender, instance, action, reverse, model, pk_set, **kwargs):
