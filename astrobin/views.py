@@ -46,6 +46,8 @@ import operator
 import re
 import unicodedata
 
+from nested_comments.models import NestedComment
+
 from models import *
 from forms import *
 from management import NOTICE_TYPES
@@ -3798,8 +3800,7 @@ def gear_page(request, id, slug):
             'small_size': settings.SMALL_THUMBNAIL_SIZE,
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
             'reviews': ReviewedItem.objects.filter(gear = gear),
-            'comment_form': CommentForm(),
-            'comments': GearComment.objects.filter(gear = gear),
+            'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
             'images_count': Image.by_gear(gear).count(),
             'attributes': [
@@ -4669,7 +4670,7 @@ def retailed_products_edit(request, id):
 def comments(request):
     return object_list(
         request, 
-        queryset = Comment.objects.all().filter(is_deleted = False, image__is_wip = False).order_by('-added'),
+        queryset = NestedComment.objects.all().filter(deleted = False).order_by('-updated'),
         template_name = 'comments.html',
         template_object_name = 'comment',
         paginate_by = 100,

@@ -1605,6 +1605,11 @@ div.favorite-container a.favorite:hover .favorite-hint {
   position: relative;
   margin-bottom: 8px;
 }
+.comment .avatar,
+.review .avatar {
+  float: left;
+  margin-right: 12px;
+}
 .comment .content,
 .review .content {
   padding: 8px 0;
