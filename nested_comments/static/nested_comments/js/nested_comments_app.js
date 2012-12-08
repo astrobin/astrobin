@@ -359,6 +359,7 @@ $(function() {
             data['created'] = '1970-01-01';
             data['updated'] = '1970-01-01';
             data['id'] = 0;
+            data['parent'] = 0;
  
             comment.set('submitting', true);
 
