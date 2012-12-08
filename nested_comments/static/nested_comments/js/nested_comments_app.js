@@ -173,9 +173,7 @@ $(function() {
         addComment: function(comment) {
             var self = this;
 
-            // djangorestframework has trouble with null values:
-            // https://github.com/tomchristie/django-rest-framework/pull/356
-            if (comment.get('parent') == null || comment.get('parent') == comment.get('id')) {
+            if (comment.get('parent') == null) {
                 self.pushObject(comment);
             } else {
                 var parent = self.findCommentById(comment.get('parent'));
@@ -249,7 +247,7 @@ $(function() {
         },
 
         dump: function(comment) {
-            var data = {
+            return {
                 id: comment.get('id'),
                 author: comment.get('author'),
                 content_type: comment.get('content_type'),
@@ -260,15 +258,6 @@ $(function() {
                 deleted: comment.get('deleted') ? 'True' : 'False',
                 parent: comment.get('parent')
             }
-
-            // djangorestframework has trouble with null values:
-            // https://github.com/tomchristie/django-rest-framework/pull/356
-            if (comment.get('parent'))
-                data['parent'] = comment.get('parent');
-            else
-                data['parent'] = comment.get('id');
-
-            return data;
         },
 
         delete: function(comment) {
@@ -336,13 +325,11 @@ $(function() {
 
         saveReply: function(comment, parent) {
             var self = this,
-                data = self.dump(comment),
-                fake_date = '1970-01-01 00:00:00'; // The server will set the real date
+                data = self.dump(comment);
 
+            data['created'] = '1970-01-01';
+            data['updated'] = '1970-01-01';
         
-            data['created'] = fake_date;
-            data['updated'] = fake_date;
-
             parent.set('submitting', true);
 
             $.ajax({
@@ -365,16 +352,14 @@ $(function() {
 
         saveNewComment: function(comment) {
             var self = this,
-                data = self.dump(comment),
-                fake_date = '1970-01-01 00:00:00', // The server will set the real date
-                fake_id = 0;
+                data = self.dump(comment);
 
-        
-            data['created'] = fake_date;
-            data['updated'] = fake_date;
-            data['id'] = fake_id;
-            data['parent'] = fake_id;
-
+            // Some fake data to work around some djangorestframework
+            // deficiencies.
+            data['created'] = '1970-01-01';
+            data['updated'] = '1970-01-01';
+            data['id'] = 0;
+ 
             comment.set('submitting', true);
 
             return $.ajax({
