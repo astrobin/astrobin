@@ -502,7 +502,7 @@ $(function() {
             templateName: 'reply',
             tagName: 'form',
             submittingBinding: 'parentView.submitting',
-            disallowSavingBinding: 'parentView.disallowSaving',
+            disallowSavingBinding: 'comment.disallowSaving',
 
             didInsertElement: function() {
                 var comment = this.get('parentView.controller').createComment();

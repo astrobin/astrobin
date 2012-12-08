@@ -146,6 +146,10 @@
     {{view view.SaveReplyButtonView}}
     <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
 
+    {{#unless view.comment.hasText}}
+        <small>{% trans "The comment cannot be empty." %}</small>
+    {{/unless}}
+
     {{#if view.parentView.submitting}}
         {{view NestedCommentsApp.LoaderView}}
     {{/if}}
