@@ -25,7 +25,6 @@ admin.autodiscover()
 
 from astrobin import views
 from astrobin import lookups
-from astrobin.models import Image
 from astrobin.search import SearchView
 from astrobin.forms import AdvancedSearchForm
 
