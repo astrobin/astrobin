@@ -250,7 +250,7 @@ $(function() {
         },
 
         dump: function(comment) {
-            return {
+            data = {
                 id: comment.get('id'),
                 author: comment.get('author'),
                 content_type: comment.get('content_type'),
@@ -260,7 +260,12 @@ $(function() {
                 updated: comment.get('updated'),
                 deleted: comment.get('deleted') ? 'True' : 'False',
                 parent: comment.get('parent')
-            }
+            };
+
+            if (data.parent == null)
+                data.parent = 0;
+
+            return data;
         },
 
         delete: function(comment) {
