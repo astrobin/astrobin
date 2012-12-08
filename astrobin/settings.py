@@ -375,7 +375,6 @@ PIPELINE_JS = {
             'js/jquery.blockUI.js',
             'js/jquery.tmpl.1.1.1.js',
             'js/ui.multiselect.js',
-            'js/plugins/scrollTo/jquery.scrollTo.js',
             'js/facebox.js',
             'js/jquery.form.js',
             'js/jquery.tokeninput.js',
