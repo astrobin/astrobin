@@ -6,6 +6,7 @@ $(function() {
 
     var nc_app = Em.Application.create({
         rootElement: '#nested-comments',
+        ajaxTimeout: 20000,
 
         baseApiUrl: '/api/v2/',
         loaderGif: 'images/ajax-loader.gif',
@@ -201,7 +202,7 @@ $(function() {
 
             $.ajax({
                 url: url,
-                timeout: 10000,
+                timeout: nc_app.ajaxTimeout,
                 dataType: 'json',
                 success: function(response) {
                     comment.set('author_username', response.username);
@@ -216,7 +217,7 @@ $(function() {
                 $.ajax({
                     url: url,
                     cache: false,
-                    timeout: 10000,
+                    timeout: nc_app.ajaxTimeout,
                     dataType: 'json',
                     data: data,
                     success: function(response) {
@@ -266,7 +267,7 @@ $(function() {
             $.ajax({
                 type: 'delete',
                 url: nc_app.commentsApiUrl + comment.get('id') + '/',
-                timeout: 10000,
+                timeout: nc_app.ajaxTimeout,
                 success: function() {
                     comment.set('deleted', true);
                 }
@@ -282,7 +283,7 @@ $(function() {
                 type: 'put',
                 url: nc_app.commentsApiUrl + data.id + '/',
                 data: data,
-                timeout: 10000,
+                timeout: nc_app.ajaxTimeout,
                 success: function(response) {
                     comment.set('deleted', response.deleted);
                 }
@@ -302,13 +303,15 @@ $(function() {
 
         saveEdit: function(comment) {
             var data = this.dump(comment);
+            if (data.parent == null)
+                data.parent = 0;
 
             comment.set('submitting', true);
             $.ajax({
                 type: 'put',
                 url: nc_app.commentsApiUrl + data.id + '/',
                 data: data,
-                timeout: 10000,
+                timeout: nc_app.ajaxTimeout,
                 success: function() {
                     comment.set('editing', false);
                     comment.set('submitting', false);
@@ -338,7 +341,7 @@ $(function() {
                 type: 'post',
                 url: nc_app.commentsApiUrl,
                 data: data,
-                timeout: 10000,
+                timeout: nc_app.ajaxTimeout,
                 success: function(response) {
                     parent.set('replying', false);
                     parent.set('submitting', false);
@@ -369,7 +372,7 @@ $(function() {
                 type: 'post',
                 url: nc_app.commentsApiUrl,
                 data: data,
-                timeout: 10000,
+                timeout: nc_app.ajaxTimeout,
                 success: function(response) {
                     comment.set('submitting', false);
 
