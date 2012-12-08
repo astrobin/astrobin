@@ -7,10 +7,13 @@ $(function() {
     var nc_app = Em.Application.create({
         rootElement: '#nested-comments',
 
-        baseApiURL: '/api/v2/nestedcomments/',
+        baseApiUrl: '/api/v2/',
         loaderGif: 'images/ajax-loader.gif',
 
         ready: function() {
+            this.commentsApiUrl = this.baseApiUrl + 'nestedcomments/nestedcomments/';
+            this.authorsApiUrl = this.baseApiUrl + 'common/users/';
+
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.username = $('#nested-comments-user-name').attr('data-value');
             this.page_url = $('#nested-comments-page-url').attr('data-value');
@@ -194,7 +197,7 @@ $(function() {
         },
 
         fetchAuthor: function(comment) {
-            var url = nc_app.baseApiURL + 'users/' + comment.author + '/';
+            var url = nc_app.authorsApiUrl + comment.author + '/';
 
             $.ajax({
                 url: url,
@@ -236,13 +239,12 @@ $(function() {
 
         find: function() {
             var self = this,
-                url = nc_app.baseApiURL + 'nestedcomments/',
                 data = {
                     'content_type': nc_app.contentTypeId,
                     'object_id': nc_app.objectId,
                 };
 
-            self.fetchComments(url, data);
+            self.fetchComments(nc_app.commentsApiUrl, data);
             return self.content;
         },
 
@@ -263,7 +265,7 @@ $(function() {
         delete: function(comment) {
             $.ajax({
                 type: 'delete',
-                url: nc_app.baseApiURL + 'nestedcomments/' + comment.get('id') + '/',
+                url: nc_app.commentsApiUrl + comment.get('id') + '/',
                 timeout: 10000,
                 success: function() {
                     comment.set('deleted', true);
@@ -278,7 +280,7 @@ $(function() {
 
             $.ajax({
                 type: 'put',
-                url: nc_app.baseApiURL + 'nestedcomments/' + data.id + '/',
+                url: nc_app.commentsApiUrl + data.id + '/',
                 data: data,
                 timeout: 10000,
                 success: function(response) {
@@ -304,7 +306,7 @@ $(function() {
             comment.set('submitting', true);
             $.ajax({
                 type: 'put',
-                url: nc_app.baseApiURL + 'nestedcomments/' + data.id + '/',
+                url: nc_app.commentsApiUrl + data.id + '/',
                 data: data,
                 timeout: 10000,
                 success: function() {
@@ -334,7 +336,7 @@ $(function() {
 
             $.ajax({
                 type: 'post',
-                url: nc_app.baseApiURL + 'nestedcomments/',
+                url: nc_app.commentsApiUrl,
                 data: data,
                 timeout: 10000,
                 success: function(response) {
@@ -365,7 +367,7 @@ $(function() {
 
             return $.ajax({
                 type: 'post',
-                url: nc_app.baseApiURL + 'nestedcomments/',
+                url: nc_app.commentsApiUrl,
                 data: data,
                 timeout: 10000,
                 success: function(response) {

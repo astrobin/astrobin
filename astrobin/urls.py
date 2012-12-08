@@ -30,7 +30,6 @@ from astrobin.search import SearchView
 from astrobin.forms import AdvancedSearchForm
 
 from rawdata import views as rawdata_views
-from nested_comments import views as nested_comments_views
 
 from tastypie.api import Api
 from astrobin.api import ImageResource, ImageRevisionResource,\
@@ -46,9 +45,9 @@ v1_api.register(ImageOfTheDayResource())
 urlpatterns = patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
+    url(r'^api/v2/common/', include('common.api_urls')),
 
     url(r'^rawdata/', include('rawdata.urls')),
-    url(r'^nestedcomments/', include('nested_comments.urls')),
 
 
     url(r'^$', views.index, name='index'),
