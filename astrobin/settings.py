@@ -390,8 +390,6 @@ PIPELINE_JS = {
             'js/respond.src.js',
             'js/bootstrap.js',
             'js/astrobin.js',
-
-            'nested_comments/js/nested_comments_app.js',
         ),
         'output_filename': 'js/astrobin_pipeline_v' + MEDIA_VERSION + '.js',
     },
