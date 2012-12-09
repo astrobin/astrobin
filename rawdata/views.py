@@ -184,7 +184,7 @@ class PublicDataPoolAddImageView(RestrictToSubscriberMixin, base.View):
         pool = get_object_or_404(PublicDataPool, pk = kwargs.get('pk'))
         image = get_object_or_404(Image, pk = request.POST.get('image'))
         pool.processed_images.add(image)
-        messages.info(request, _("Your image has been added to the pool."))
+        messages.success(request, _("Your image has been added to the pool."))
 
         response_kwargs = {'content_type': 'application/json'}
         return HttpResponse({}, **response_kwargs)
