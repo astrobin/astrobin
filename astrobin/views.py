@@ -47,6 +47,7 @@ import re
 import unicodedata
 
 from nested_comments.models import NestedComment
+from rawdata.forms import PublicDataPool_SelectExistingForm
 
 from models import *
 from forms import *
@@ -839,6 +840,8 @@ def image_detail(request, id, r):
                      'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0 if request.user.is_authenticated() else False,
                      'times_favorited': Favorite.objects.filter(image = image).count(),
                      'plot_overlay_left' : (settings.RESIZED_IMAGE_SIZE - image.w) / 2 if image.w < settings.RESIZED_IMAGE_SIZE else 0,
+
+                     'select_datapool_form': PublicDataPool_SelectExistingForm(),
                     }
 
     return object_detail(

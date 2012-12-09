@@ -32,7 +32,8 @@
             <th>{% trans "Name" %}</th>
             <th>{% trans "Description" %}</th>
             <th>{% trans "Owner" %}</th>
-            <th>{% trans "Images" %}</th>
+            <th>{% trans "Raw images" %}</th>
+            <th>{% trans "Processed images" %}</th>
             <th>{% trans "Last updated" %}</th>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@
                            href="{% url user_page object.creator %}">{{object.creator}}</a>
                     </td>
                     <td>{{object.images.all|length}}</td>
+                    <td>{{object.processed_images.all|length}}</td>
                     <td>
                         <abbr class="timeago" title="{{object.updated|date:'Y-m-d\TH:i:s'}}">
                             {{object.updated|date}}

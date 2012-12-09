@@ -39,8 +39,13 @@ class PublicDataPool_SelectExistingForm(forms.Form):
 
     existing_pools = forms.ChoiceField(
         label = '',
-        choices = PublicDataPool.objects.all().values_list('id', 'name'),
+        choices = [],
     )
+
+    def __init__(self, **kwargs):
+        super(PublicDataPool_SelectExistingForm, self).__init__(**kwargs)
+        # Init choices here to prevent stagnation due to django caching.
+        self.fields['existing_pools'].choices = PublicDataPool.objects.all().values_list('id', 'name')
 
 
 class PublicDataPool_ImagesForm(forms.ModelForm):

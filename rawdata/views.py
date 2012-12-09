@@ -3,6 +3,7 @@ from operator import itemgetter
 import simplejson
 
 # Django
+from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.http import Http404
@@ -14,6 +15,7 @@ from django.views.generic import *
 from django.views.generic.edit import BaseDeleteView
 
 # Other AstroBin apps
+from astrobin.models import Image
 from common.mixins import AjaxableResponseMixin
 from nested_comments.forms import NestedCommentForm
 from nested_comments.models import NestedComment
@@ -25,6 +27,7 @@ from .mixins import RestrictToSubscriberMixin
 from .models import *
 from .utils import *
 from .zip import serve_zip
+
 
 class RawImageCreateView(RestrictToSubscriberMixin, CreateView):
     model = RawImage
@@ -174,6 +177,17 @@ class PublicDataPoolAddDataView(RestrictToSubscriberMixin, AjaxableResponseMixin
             pool.images.add(image)
         pool.save()
         return super(PublicDataPoolAddDataView, self).form_valid(form)
+
+
+class PublicDataPoolAddImageView(RestrictToSubscriberMixin, base.View):
+    def post(self, request, *args, **kwargs):
+        pool = get_object_or_404(PublicDataPool, pk = kwargs.get('pk'))
+        image = get_object_or_404(Image, pk = request.POST.get('image'))
+        pool.processed_images.add(image)
+        messages.info(request, _("Your image has been added to the pool."))
+
+        response_kwargs = {'content_type': 'application/json'}
+        return HttpResponse({}, **response_kwargs)
 
 
 class PublicDataPoolDetailView(DetailView):

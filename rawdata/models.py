@@ -13,6 +13,10 @@ from django.utils.translation import ugettext_lazy as _
 # This app
 from .managers import RawImageManager, SoftDeleteManager
 
+# Other AstroBin apps
+from astrobin.models import Image
+
+
 def upload_path(instance, filename):
     instance.original_filename = filename
     ext = filename.split('.')[-1]
@@ -86,6 +90,7 @@ class RawImage(models.Model):
 
     class Meta:
         app_label = 'rawdata'
+        ordering = ('-uploaded',)
 
     def __unicode__(self):
         return self.original_filename
@@ -176,6 +181,11 @@ class PublicDataPool(models.Model):
         null = True,
     )
 
+    processed_images = models.ManyToManyField(
+        Image,
+        null = True,
+    )
+
     archive = models.ForeignKey(
         TemporaryArchive,
         null = True,
@@ -193,6 +203,7 @@ class PublicDataPool(models.Model):
 
     class Meta:
         app_label = 'rawdata'
+        ordering = ('-updated',)
 
     def delete(self):
         self.active = False

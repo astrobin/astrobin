@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^publicdatapools/$', PublicDataPoolListView.as_view(), name = 'rawdata.publicdatapool_list'),
     url(r'^publicdatapools/(?P<pk>\d+)/$', PublicDataPoolDetailView.as_view(), name = 'rawdata.publicdatapool_detail'),
     url(r'^publicdatapools/(?P<pk>\d+)/add-data/$', login_required(PublicDataPoolAddDataView.as_view()), name = 'rawdata.publicdatapool_add_data'),
+    url(r'^publicdatapools/(?P<pk>\d+)/add-image/$', login_required(PublicDataPoolAddImageView.as_view()), name = 'rawdata.publicdatapool_add_image'),
     url(r'^publicdatapools/(?P<pk>\d+)/download/$', login_required(PublicDataPoolDownloadView.as_view()), name = 'rawdata.publicdatapool_download'),
     url(r'^publicdatapools/share/(?:(?P<ids>[\d+,?]+)/)?$', login_required(PublicDataPoolCreateView.as_view()), name = 'rawdata.public_data_pool_create'),
 )
