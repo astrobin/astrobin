@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load tags %} {% comment %} AstroBin tags {% endcomment %}
 
 {% block title %}AstroBin - {% blocktrans %}Public data pool{% endblocktrans %} - {{object}}{% endblock %}
 
@@ -15,6 +16,20 @@
     </div>
 
     <div class="well">{{object.description|linebreaks}}</div>
+
+    {% if object.processed_images.all %}
+        <div class="subtle-container">
+            <div class="header">
+                <h4>
+                    <i class="icon-picture"></i>
+                    {% trans "Processing submissions for this pool" %}
+                </h4>
+            </div>
+
+            {% image_list request object.processed_images.all 0 95 %}
+        </div>
+    {% endif %}
+
     <div class="row">
         <div class="span6"> <!-- file list -->
             <table class="table rawdata-browser">
