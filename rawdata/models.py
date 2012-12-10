@@ -166,6 +166,7 @@ class PublicDataPool(models.Model):
         User,
         editable = False,
         on_delete = models.SET_NULL,
+        null = True,
     )
 
     created = models.DateTimeField(
