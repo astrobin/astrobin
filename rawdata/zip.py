@@ -10,13 +10,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 # This app
 from .models import TemporaryArchive
 
-def serve_zip(images, owner, force_file = False):
-    # https://code.djangoproject.com/ticket/6027
-    class FixedFileWrapper(FileWrapper):
-        def __iter__(self):
-            self.filelike.seek(0)
-            return self
+# https://code.djangoproject.com/ticket/6027
+class FixedFileWrapper(FileWrapper):
+    def __iter__(self):
+        self.filelike.seek(0)
+        return self
 
+def serve_zip(images, owner, force_file = False):
     temp = tempfile.NamedTemporaryFile()
     archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
     for image in images:

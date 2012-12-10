@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap_toolkit %}
+{% load tags %} {% comment %} AstroBin tags {% endcomment %}
+
+{% block title %}AstroBin - {% blocktrans %}Private shared folder{% endblocktrans %} - {{object}}{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{% blocktrans %}{{object}}{% endblocktrans %}
+            <small>
+            {% url user_page object.creator as user_url %}
+            {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}A private shared folder created by <a href="{{user_url}}">{{user}}</a>, with {{size}} in {{image_count}} images.{% endblocktrans %}
+            </small>
+        </h1>
+    </div>
+
+    <div class="well">{{object.description|linebreaks}}</div>
+
+    {% if object.processed_images.all %}
+        <div class="subtle-container">
+            <div class="header">
+                <h4>
+                    <i class="icon-picture"></i>
+                    {% trans "Processing submissions for this folder" %}
+                </h4>
+            </div>
+
+            {% image_list request object.processed_images.all 0 95 %}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="span6"> <!-- file list -->
+            <table class="table rawdata-browser">
+                <thead>
+                    <tr>
+                        <th colspan="2">{% trans "Name" %}</th>
+                        <th>{% trans "Size" %}</th>
+                        <th>{% trans "Uploaded" %}</th>
+                        <th>{% trans "User" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for image in object.images.all %}
+                        <tr id="{{image.id}}" class="rawfile">
+                            <td class="icon"><i class="icon-file"></i></td>
+                            <td>{{image.original_filename}}</td>
+                            <td>{{image.size|filesizeformat}}</td>
+                            <td>
+                                <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
+                                    {{image.uploaded|date}}
+                                </abbr>
+                            </td>
+                            <td><a href="{% url user_page image.user %}">{{image.user}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="span6">
+            <div class="download-with-icon">
+                <div class="data" style="padding-top: 0">
+                    <a class="btn btn-primary btn-large" href="{% url rawdata.privatesharedfolder_download object.pk %}">
+                        {% trans "Download" %}
+                    </a>
+                    <span class="size">
+                        {% trans "Size before zip compression" %}: <strong>{{size|filesizeformat}}</strong>
+                    </span>
+                </div>
+            </div>
+
+            <div class="subtle-container">
+                <div class="header">
+                    <h4>
+                        <i class="icon-comments-alt"></i>
+                        {% trans "Comments" %}
+                    </h4>
+                </div>
+                <p>
+                    {% trans "You can use this space to discuss this public data pool and exchange information and tips with other contributors or people who want to process the data." %}
+                </p>
+
+                <div id="nested-comments"
+                     data-content-type-id="{{content_type.pk}}"
+                     data-object-id="{{object.pk}}">
+                </div>
+                {% include 'nested_comments/nestedcomment_app.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
+{% endblock %}

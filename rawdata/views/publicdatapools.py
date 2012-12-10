@@ -1,0 +1,103 @@
+# Django
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import get_object_or_404
+from django.views.generic import (
+    base,
+    CreateView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
+
+# This app
+from rawdata.forms import (
+    PublicDataPoolForm,
+    PublicDataPool_ImagesForm,
+    PublicDataPool_SelectExistingForm,
+)
+from rawdata.mixins import RestrictToSubscriberMixin
+from rawdata.models import PublicDataPool, RawImage, TemporaryArchive
+from rawdata.zip import *
+
+# Other AstroBin apps
+from common.mixins import AjaxableResponseMixin
+
+
+class PublicDataPoolCreateView(RestrictToSubscriberMixin, AjaxableResponseMixin, CreateView):
+    model = PublicDataPool
+    form_class = PublicDataPoolForm
+
+    def get_context_data(self, **kwargs):
+        context = super(PublicDataPoolCreateView, self).get_context_data(**kwargs)
+        images = RawImage.objects.by_ids_or_params(self.kwargs.pop('ids', ''), self.request.GET)
+        if not images:
+            raise Http404
+
+        context['images'] = images
+        if PublicDataPool.objects.all():
+            context['pools_form'] = PublicDataPool_SelectExistingForm()
+
+        return context
+ 
+    def form_valid(self, form):
+        pool = form.save(commit = False)
+        pool.creator = self.request.user
+        pool.save()
+
+        return super(PublicDataPoolCreateView, self).form_valid(form)
+
+
+class PublicDataPoolAddDataView(RestrictToSubscriberMixin, AjaxableResponseMixin, UpdateView):
+    model = PublicDataPool
+    form_class = PublicDataPool_ImagesForm
+
+    def form_valid(self, form):
+        pool = form.save(commit = False)
+        new = form.cleaned_data['images']
+        for image in new:
+            pool.images.add(image)
+        pool.save()
+        return super(PublicDataPoolAddDataView, self).form_valid(form)
+
+
+class PublicDataPoolAddImageView(RestrictToSubscriberMixin, base.View):
+    def post(self, request, *args, **kwargs):
+        pool = get_object_or_404(PublicDataPool, pk = kwargs.get('pk'))
+        image = get_object_or_404(Image, pk = request.POST.get('image'))
+        pool.processed_images.add(image)
+        messages.success(request, _("Your image has been added to the pool."))
+
+        response_kwargs = {'content_type': 'application/json'}
+        return HttpResponse({}, **response_kwargs)
+
+
+class PublicDataPoolDetailView(DetailView):
+    model = PublicDataPool
+
+    def get_context_data(self, **kwargs):
+        context = super(PublicDataPoolDetailView, self).get_context_data(**kwargs)
+        content_type = ContentType.objects.get_for_model(self.model)
+
+        context['size'] = sum(x.size for x in self.get_object().images.all())
+        context['content_type'] = ContentType.objects.get_for_model(self.model)
+        return context
+
+
+class PublicDataPoolDownloadView(RestrictToSubscriberMixin, base.View):
+    def get(self, request, *args, **kwargs):
+        pool = get_object_or_404(PublicDataPool, pk = kwargs.pop('pk'))
+        if pool.archive:
+            return HttpResponseRedirect(
+                reverse('rawdata.temporary_archive_detail',
+                        args=(pool.archive.pk,)))
+
+        response, archive = serve_zip(pool.images.all(), self.request.user)
+        pool.archive = archive
+        pool.save()
+
+        return response
+
+
+class PublicDataPoolListView(ListView):
+    model = PublicDataPool
+

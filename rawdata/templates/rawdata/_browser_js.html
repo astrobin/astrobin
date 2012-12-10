@@ -129,15 +129,15 @@
             var affected_rows = [];
 
             if (Object.prototype.toString.call(params) === '[object Array]') {
-                var ids = params
-                query_string = ids.join(',') + '/'
+                var ids = params;
+                query_string = ids.join(',') + '/';
 
                 $.each(ids, function(i, id) {
                     affected_rows.push($table.find('tr#' + id + ' td'));
                 });
             } else {
                 $.each($table.find('tr.active'), function(i, $row) {
-                    affected_rows.push($($row));
+                    affected_rows.push($row);
                 });
                 query_string = '?' + params;
             }
