@@ -536,10 +536,6 @@
                         <p>
                             {% blocktrans with user=image.user lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
                         </p>
-                        {% else %}
-                            <p>
-                                {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
-                            </p>
                         {% endif %}
 
                         <div id="nested-comments"
