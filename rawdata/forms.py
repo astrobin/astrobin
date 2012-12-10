@@ -6,7 +6,11 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 # This app
-from .models import RawImage, PublicDataPool
+from .models import (
+    RawImage,
+    PublicDataPool,
+    PrivateSharedFolder,
+)
 from .utils import supported_raw_formats
 
 class RawImageUploadForm(forms.ModelForm):
@@ -54,3 +58,34 @@ class PublicDataPool_ImagesForm(forms.ModelForm):
     class Meta:
         model = PublicDataPool
         fields = ('images',)
+
+
+class PrivateSharedFolderForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = PrivateSharedFolder
+        fields = ('name', 'description',)
+
+
+class PrivateSharedFolder_SelectExistingForm(forms.Form):
+    error_css_class = 'error'
+
+    existing_folders = forms.ChoiceField(
+        label = '',
+        choices = [],
+    )
+
+    def __init__(self, **kwargs):
+        super(PrivateSharedFolder_SelectExistingForm, self).__init__(**kwargs)
+        # Init choices here to prevent stagnation due to django caching.
+        self.fields['existing_folders'].choices = PrivateSharedFolder.objects.all().values_list('id', 'name')
+
+
+class PrivateSharedFolder_ImagesForm(forms.ModelForm):
+    error_css_class= 'error'
+
+    class Meta:
+        model = PrivateSharedFolder
+        fields = ('images',)
+

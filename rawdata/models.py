@@ -213,9 +213,83 @@ class PublicDataPool(models.Model):
         return reverse('rawdata.publicdatapool_detail', args=(self.pk,))
 
 
-def on_pool_images_changed(sender, instance, action, reverse, model, pk_set, **kwargs):
+class PrivateSharedFolder(models.Model):
+    objects = SoftDeleteManager()
+
+    name = models.CharField(
+        max_length = 128,
+        unique = True,
+        verbose_name = _("Name"),
+        help_text = _("A name for this folder. Be descriptive, so that the folder can be quickly recognized by the name."),
+    )
+
+    description = models.TextField(
+        verbose_name = _("Description"),
+        help_text = _("Describe the goals of this folder."),
+    )
+
+    creator = models.ForeignKey(
+        User,
+        editable = False,
+        related_name = 'privatesharedfolders_created',
+    )
+
+    created = models.DateTimeField(
+        auto_now_add = True,
+        editable = False,
+    )
+
+    updated = models.DateTimeField(
+        auto_now = True,
+        editable = False,
+    )
+
+    users = models.ManyToManyField(
+        User,
+        related_name = 'privatesharedfolders_invited',
+    )
+
+    images = models.ManyToManyField(
+        RawImage,
+        null = True,
+    )
+
+    processed_images = models.ManyToManyField(
+        Image,
+        null = True,
+    )
+
+    archive = models.ForeignKey(
+        TemporaryArchive,
+        null = True,
+        on_delete = models.SET_NULL,
+        editable = False,
+    )
+
+    active = models.BooleanField(
+        default = True,
+        editable = False,
+    )
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        app_label = 'rawdata'
+        ordering = ('-updated',)
+
+    def delete(self):
+        self.active = False
+        self.save()
+
+    def get_absolute_url(self):
+        return reverse('rawdata.publicdatapool_detail', args=(self.pk,))
+
+
+def on_images_changed(sender, instance, action, reverse, model, pk_set, **kwargs):
     instance.archive = None
     instance.save()
 
-m2m_changed.connect(on_pool_images_changed, sender = PublicDataPool.images.through)
+m2m_changed.connect(on_images_changed, sender = PublicDataPool.images.through)
+m2m_changed.connect(on_images_changed, sender = PrivateSharedFolder.images.through)
 

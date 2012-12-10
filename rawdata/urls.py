@@ -5,7 +5,10 @@ from django.views.generic import *
 
 # This app
 import signal_handlers
-from .views import *
+from .views.rawimage import *
+from .views.temporaryarchive import *
+from .views.publicdatapools import *
+from .views.privatesharedfolders import *
 
 signal_handlers.install()
 
@@ -22,5 +25,13 @@ urlpatterns = patterns('',
     url(r'^publicdatapools/(?P<pk>\d+)/add-data/$', login_required(PublicDataPoolAddDataView.as_view()), name = 'rawdata.publicdatapool_add_data'),
     url(r'^publicdatapools/(?P<pk>\d+)/add-image/$', login_required(PublicDataPoolAddImageView.as_view()), name = 'rawdata.publicdatapool_add_image'),
     url(r'^publicdatapools/(?P<pk>\d+)/download/$', login_required(PublicDataPoolDownloadView.as_view()), name = 'rawdata.publicdatapool_download'),
-    url(r'^publicdatapools/share/(?:(?P<ids>[\d+,?]+)/)?$', login_required(PublicDataPoolCreateView.as_view()), name = 'rawdata.public_data_pool_create'),
+    url(r'^publicdatapools/share/(?:(?P<ids>[\d+,?]+)/)?$', login_required(PublicDataPoolCreateView.as_view()), name = 'rawdata.publicdatapool_create'),
+
+
+    url(r'^privatesharedfolders/$', PrivateSharedFolderListView.as_view(), name = 'rawdata.privatesharedfolder_list'),
+    url(r'^privatesharedfolders/(?P<pk>\d+)/$', PrivateSharedFolderDetailView.as_view(), name = 'rawdata.privatesharedfolder_detail'),
+    url(r'^privatesharedfolders/(?P<pk>\d+)/add-data/$', login_required(PrivateSharedFolderAddDataView.as_view()), name = 'rawdata.privatesharedfolder_add_data'),
+    url(r'^privatesharedfolders/(?P<pk>\d+)/add-image/$', login_required(PrivateSharedFolderAddImageView.as_view()), name = 'rawdata.privatesharedfolder_add_image'),
+    url(r'^privatesharedfolders/(?P<pk>\d+)/download/$', login_required(PrivateSharedFolderDownloadView.as_view()), name = 'rawdata.privatesharedfolder_download'),
+    url(r'^privatesharedfolders/share/(?:(?P<ids>[\d+,?]+)/)?$', login_required(PrivateSharedFolderCreateView.as_view()), name = 'rawdata.public_data_pool_create'),
 )

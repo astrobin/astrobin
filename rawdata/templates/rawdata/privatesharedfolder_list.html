@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    AstroBin - {% trans "Private shared folders" %}
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            {% trans "Private shared folders" %}
+            <small>
+                {% trans "Collections of raw files shared with selected users." %}
+            </small>
+        </h1>
+    </div>
+
+    <div class="row section">
+        <div class="span12">
+            <p>
+                {% url rawdata.help1 as rawdata_url %}
+                {% blocktrans %}A <strong>private shared folder</strong> is a way for subscribers to the <a href="{{rawdata_url}}">AstoBin Raw Data Platform</a> to share raw data, like FITS and digital camera raw files, with other users, to collaborate on processing, get or provide technical help.{% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientic discoveries.{% endblocktrans %}
+            </p>
+        </div>
+    </div>
+
+    <div class="well">
+        {% blocktrans %}You have access to the following private shared folders.{% endblocktrans %}
+    </div>
+
+    <table class="table">
+        <thead>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Description" %}</th>
+            <th>{% trans "Owner" %}</th>
+            <th>{% trans "Raw images" %}</th>
+            <th>{% trans "Processed images" %}</th>
+            <th>{% trans "Last updated" %}</th>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td><a href="{% url rawdata.privatesharedfolder_detail object.pk %}">{{object.name}}</a></td>
+                    <td>{{object.description|truncatewords:"10"}}</td>
+                    <td>
+                        <a rel="popover" class="user-popover"
+                           data-load="{% url user_popover_ajax object.creator %}"
+                           href="{% url user_page object.creator %}">{{object.creator}}</a>
+                    </td>
+                    <td>{{object.images.all|length}}</td>
+                    <td>{{object.processed_images.all|length}}</td>
+                    <td>
+                        <abbr class="timeago" title="{{object.updated|date:'Y-m-d\TH:i:s'}}">
+                            {{object.updated|date}}
+                        </abbr>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('table').stickyTableHeaders({fixedOffset: 44});
+        astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+    });
+</script>
+{% endblock %}
