@@ -17,6 +17,7 @@ $(function() {
 
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.username = $('#nested-comments-user-name').attr('data-value');
+            this.userIsAuthenticated = $('#nested-comments-user-is-authenticated').attr('data-value');
             this.page_url = $('#nested-comments-page-url').attr('data-value');
             this.staticUrl = $('#nested-comments-static-url').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
@@ -135,6 +136,7 @@ $(function() {
 
         didInsertElement: function() {
             this.reset();
+            this.userIsAuthenticated = nc_app.userIsAuthenticated;
         },
 
         save: function() {
@@ -516,6 +518,8 @@ $(function() {
             disallowSavingBinding: 'comment.disallowSaving',
 
             didInsertElement: function() {
+                this.userIsAuthenticated = nc_app.userIsAuthenticated;
+
                 var comment = this.get('parentView.controller').createComment();
                 comment.set('parent', this.get('parentView.node.id'));
                 this.set('comment', comment);

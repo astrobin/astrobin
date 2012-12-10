@@ -3,6 +3,7 @@
 
 <div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
 <div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
+<div id="nested-comments-user-is-authenticated" data-value="{{request.user.is_authenticated}}"></div>
 <div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
 <div id="nested-comments-static-url" data-value="{{STATIC_URL}}"></div>
 
@@ -13,21 +14,26 @@
 
 
 {% handlebars "top-level" %}
-    <form>
-        {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+    {{#if view.userIsAuthenticated}}
+        <form>
+            {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
-        {{view view.SaveCommentButtonView}}
+            {{view view.SaveCommentButtonView}}
 
-        {{#if view.submitting}}
-            {{view NestedCommentsApp.LoaderView}}
-        {{/if}}
+            {{#if view.submitting}}
+                {{view NestedCommentsApp.LoaderView}}
+            {{/if}}
 
-        {{#if view.comment.hasText}}
-            {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
-        {{/if}}
+            {{#if view.comment.hasText}}
+                {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
+            {{/if}}
 
-        {{view NestedCommentsApp.FormattingHelpView}}
-    </form>
+            {{view NestedCommentsApp.FormattingHelpView}}
+        </form>
+    {{else}}
+
+        <p>{% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.</p>{% endblocktrans %}
+    {{/if}}
 {% endhandlebars %}
 
 
@@ -37,6 +43,8 @@
             <small>
                 {% blocktrans %}Remember to use the <span class="label label-important">reply</span> button when replying directly to a comment. To post a new top level comment, use the form at the end of the comment list.{% endblocktrans %}
             </small>
+        {{else}}
+           <p class="comment">{% trans "There are no comments yet." %}</p> 
         {{/if}}
 
         {{#each controller.content}}
@@ -141,24 +149,28 @@
 
 
 {% handlebars "reply" %}
-    {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+    {{# if view.userIsAuthenticated}}
+        {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
-    {{view view.SaveReplyButtonView}}
-    <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
+        {{view view.SaveReplyButtonView}}
+        <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
 
-    {{#unless view.comment.hasText}}
-        <small>{% trans "The comment cannot be empty." %}</small>
-    {{/unless}}
+        {{#unless view.comment.hasText}}
+            <small>{% trans "The comment cannot be empty." %}</small>
+        {{/unless}}
 
-    {{#if view.parentView.submitting}}
-        {{view NestedCommentsApp.LoaderView}}
+        {{#if view.parentView.submitting}}
+            {{view NestedCommentsApp.LoaderView}}
+        {{/if}}
+
+        {{#if view.comment.hasText}}
+            {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
+        {{/if}}
+
+        {{view NestedCommentsApp.FormattingHelpView}}
+    {{else}}
+        <p>{% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.</p>{% endblocktrans %}
     {{/if}}
-
-    {{#if view.comment.hasText}}
-        {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
-    {{/if}}
-
-    {{view NestedCommentsApp.FormattingHelpView}}
 {% endhandlebars %}
 
 
