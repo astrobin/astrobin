@@ -49,7 +49,8 @@ class RawImage(models.Model):
 
     user = models.ForeignKey(
         User,
-        editable = False)
+        editable = False
+    )
 
     file = models.FileField(
         storage = FileSystemStorage(location = '/webserver/www'),
@@ -164,6 +165,7 @@ class PublicDataPool(models.Model):
     creator = models.ForeignKey(
         User,
         editable = False,
+        on_delete = models.SET_NULL,
     )
 
     created = models.DateTimeField(
