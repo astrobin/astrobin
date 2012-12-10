@@ -1,5 +1,6 @@
 # Django
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import (
     base,
@@ -21,6 +22,17 @@ from rawdata.zip import *
 
 # Other AstroBin apps
 from common.mixins import AjaxableResponseMixin
+
+
+class RestrictToInviteeMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.get('pk'))
+        user = request.user
+
+        if user != folder.creator and user not in folder.users.all():
+            raise Http404
+
+        return super(RestrictToInviteeMixin, self).dispatch(request, *args, **kwargs)
 
 
 class PrivateSharedFolderCreateView(RestrictToSubscriberMixin, AjaxableResponseMixin, CreateView):
@@ -47,7 +59,8 @@ class PrivateSharedFolderCreateView(RestrictToSubscriberMixin, AjaxableResponseM
         return super(PrivateSharedFolderCreateView, self).form_valid(form)
 
 
-class PrivateSharedFolderAddDataView(RestrictToSubscriberMixin, AjaxableResponseMixin, UpdateView):
+class PrivateSharedFolderAddDataView(RestrictToSubscriberMixin, RestrictToInviteeMixin,
+                                     AjaxableResponseMixin, UpdateView):
     model = PrivateSharedFolder
     form_class = PrivateSharedFolder_ImagesForm
 
@@ -60,7 +73,7 @@ class PrivateSharedFolderAddDataView(RestrictToSubscriberMixin, AjaxableResponse
         return super(PrivateSharedFolderAddDataView, self).form_valid(form)
 
 
-class PrivateSharedFolderAddImageView(RestrictToSubscriberMixin, base.View):
+class PrivateSharedFolderAddImageView(RestrictToSubscriberMixin, RestrictToInviteeMixin, base.View):
     def post(self, request, *args, **kwargs):
         folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.get('pk'))
         image = get_object_or_404(Image, pk = request.POST.get('image'))
@@ -71,7 +84,7 @@ class PrivateSharedFolderAddImageView(RestrictToSubscriberMixin, base.View):
         return HttpResponse({}, **response_kwargs)
 
 
-class PrivateSharedFolderDetailView(DetailView):
+class PrivateSharedFolderDetailView(RestrictToSubscriberMixin, RestrictToInviteeMixin, DetailView):
     model = PrivateSharedFolder
 
     def get_context_data(self, **kwargs):
@@ -83,7 +96,7 @@ class PrivateSharedFolderDetailView(DetailView):
         return context
 
 
-class PrivateSharedFolderDownloadView(RestrictToSubscriberMixin, base.View):
+class PrivateSharedFolderDownloadView(RestrictToSubscriberMixin, RestrictToInviteeMixin, base.View):
     def get(self, request, *args, **kwargs):
         folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.pop('pk'))
         if folder.archive:
@@ -98,6 +111,11 @@ class PrivateSharedFolderDownloadView(RestrictToSubscriberMixin, base.View):
         return response
 
 
-class PrivateSharedFolderListView(ListView):
+class PrivateSharedFolderListView(RestrictToSubscriberMixin, ListView):
     model = PrivateSharedFolder
+
+    def get_queryset(self):
+        return self.model.objects.filter(
+            Q(creator = self.request.user) |
+            Q(users = self.request.user))
 

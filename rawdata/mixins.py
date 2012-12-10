@@ -37,6 +37,7 @@ class AjaxableResponseMixin(object):
 
 
 class RestrictToSubscriberMixin(object):
-    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u)))
+    @method_decorator(user_passes_test(lambda u: user_has_active_subscription(u),
+                                       login_url = '/rawdata/restricted')) #TODO: use reverse
     def dispatch(self, *args, **kwargs):
         return super(RestrictToSubscriberMixin, self).dispatch(*args, **kwargs)
