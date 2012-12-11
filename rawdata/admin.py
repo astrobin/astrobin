@@ -32,4 +32,5 @@ class RawImageAdmin(admin.ModelAdmin):
 
 admin.site.register(RawImage, RawImageAdmin)
 admin.site.register(PublicDataPool)
+admin.site.register(PrivateSharedFolder)
 admin.site.register(TemporaryArchive)

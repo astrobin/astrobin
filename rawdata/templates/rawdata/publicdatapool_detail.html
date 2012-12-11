@@ -6,8 +6,30 @@
 {% block title %}AstroBin - {% blocktrans %}Public data pool{% endblocktrans %} - {{object}}{% endblock %}
 
 {% block content %}
+    {% ifequal object.creator request.user %}
+        <div class="subnav subnav-fixed">
+            <ul class="nav nav-pills">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-bolt"></i>
+                        {% trans "Actions" %}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#edit-pool-modal" data-toggle="modal">
+                                <i class="icon-pencil"></i>
+                                {% trans "Edit" %}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    {% endifequal %}
+
     <div class="page-header">
-        <h1>{% blocktrans %}{{object}}{% endblocktrans %}
+        <h1>{{object}}
             <small>
             {% url user_page object.creator as user_url %}
             {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}A public data pool created by <a href="{{user_url}}">{{user}}</a>, with {{size}} in {{image_count}} images.{% endblocktrans %}
@@ -69,6 +91,7 @@
             <div class="download-with-icon">
                 <div class="data" style="padding-top: 0">
                     <a class="btn btn-primary btn-large" href="{% url rawdata.publicdatapool_download object.pk %}">
+                        <i class="icon-download-alt"></i>
                         {% trans "Download" %}
                     </a>
                     <span class="size">

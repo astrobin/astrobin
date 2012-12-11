@@ -829,6 +829,13 @@ body.full {
         }
     }
 
+    .modal-body {
+        small {
+            font-size: 87.5%;
+            color: darken(@text-color, 15%);
+        }
+    }
+
     .modal-footer {
         background: #303030 url('../images/darker-panel-tile.png');
         border-top: 1px solid #303030;
@@ -2961,3 +2968,6 @@ table.rawdata-browser {
         }
     }
 }
+
+table#private-shared-folders a.delete-folder { visibility: hidden; }
+table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }

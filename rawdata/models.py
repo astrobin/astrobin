@@ -221,7 +221,6 @@ class PrivateSharedFolder(models.Model):
 
     name = models.CharField(
         max_length = 128,
-        unique = True,
         verbose_name = _("Name"),
         help_text = _("A name for this folder. Be descriptive, so that the folder can be quickly recognized by the name."),
     )
@@ -255,11 +254,13 @@ class PrivateSharedFolder(models.Model):
     images = models.ManyToManyField(
         RawImage,
         null = True,
+        blank = True,
     )
 
     processed_images = models.ManyToManyField(
         Image,
         null = True,
+        blank = True,
     )
 
     archive = models.ForeignKey(

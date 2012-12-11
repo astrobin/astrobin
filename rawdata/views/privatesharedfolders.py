@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import (
     base,
+    edit,
     CreateView,
     DetailView,
     ListView,
@@ -16,7 +17,7 @@ from rawdata.forms import (
     PrivateSharedFolder_ImagesForm,
     PrivateSharedFolder_SelectExistingForm,
 )
-from rawdata.mixins import RestrictToSubscriberMixin
+from rawdata.mixins import RestrictToSubscriberMixin, RestrictToCreatorMixin
 from rawdata.models import PrivateSharedFolder, RawImage
 from rawdata.zip import *
 
@@ -59,6 +60,16 @@ class PrivateSharedFolderCreateView(RestrictToSubscriberMixin, AjaxableResponseM
         return super(PrivateSharedFolderCreateView, self).form_valid(form)
 
 
+class PrivateSharedFolderUpdateView(RestrictToCreatorMixin, RestrictToSubscriberMixin,
+                                    AjaxableResponseMixin, UpdateView):
+    model = PrivateSharedFolder
+    form_class = PrivateSharedFolderForm
+
+    def form_valid(self, form):
+        form.save();
+        return super(PrivateSharedFolderUpdateView, self).form_valid(form)
+
+
 class PrivateSharedFolderAddDataView(RestrictToSubscriberMixin, RestrictToInviteeMixin,
                                      AjaxableResponseMixin, UpdateView):
     model = PrivateSharedFolder
@@ -93,6 +104,7 @@ class PrivateSharedFolderDetailView(RestrictToSubscriberMixin, RestrictToInvitee
 
         context['size'] = sum(x.size for x in self.get_object().images.all())
         context['content_type'] = ContentType.objects.get_for_model(self.model)
+        context['update_form'] = PrivateSharedFolderForm(instance = self.get_object())
         return context
 
 
@@ -118,4 +130,19 @@ class PrivateSharedFolderListView(RestrictToSubscriberMixin, ListView):
         return self.model.objects.filter(
             Q(creator = self.request.user) |
             Q(users = self.request.user))
+
+
+class PrivateSharedFolderDeleteView(RestrictToSubscriberMixin, RestrictToCreatorMixin,
+                                    edit.BaseDeleteView):
+    model = PrivateSharedFolder
+
+    def get_queryset(self):
+        return self.model.objects.filter(creator = self.request.user)
+
+    def delete(Self, request, *args, **kwargs):
+        folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.pop('pk'))
+        folder.delete();
+
+        response_kwargs = {'content_type': 'application/json'}
+        return HttpResponse({}, **response_kwargs)
 
