@@ -667,6 +667,10 @@ body.full {
 .modal .modal-header .close {
   color: white;
 }
+.modal .modal-body small {
+  font-size: 87.5%;
+  color: #929292;
+}
 .modal .modal-footer {
   background: #303030 url('../images/darker-panel-tile.png');
   border-top: 1px solid #303030;
@@ -2757,4 +2761,10 @@ table.rawdata-browser td.icon {
   color: #888;
   display: block;
   margin-top: 12px;
+}
+table#private-shared-folders a.delete-folder {
+  visibility: hidden;
+}
+table#private-shared-folders tr:hover a.delete-folder {
+  visibility: visible;
 }
