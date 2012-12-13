@@ -49,6 +49,12 @@
                 .addClass('btn btn-mini btn-primary')
                 .html('<i class="icon-download-alt"></i> {% trans "Download" %}'));
 
+            var $preprocess = $('<span/>').html($('<a/>')
+                .attr('href', '#preprocess-modal')
+                .attr('data-toggle', 'modal')
+                .addClass('btn btn-mini btn-primary')
+                .html('<i class="icon-cogs"></i> {% trans "Preprocess" %}'));
+
             var $share = $('<span/>').addClass('dropdown');
             var $share_button = $('<button/>')
                 .addClass('btn btn-mini btn-primary dropdown-toggle')
@@ -115,6 +121,7 @@
                 .html($selected)
                 .append($reset)
                 .append($download)
+                .append($preprocess)
                 .append($share)
                 .append($del);
         }
