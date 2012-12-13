@@ -94,6 +94,36 @@
     {% endif %}
 {% endblock %}
 
+{% block modals %}
+    <div class="modal hide fade" id="preprocess-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Preprocess" %}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-error">
+                <h4 class="alert-header">
+                    <i class="icon-fire"></i>
+                    {% trans "Coming soon!" %}
+                </h4>
+            </div>
+
+            <p>
+                {% blocktrans %}<strong>AstroBin Raw Data</strong> will soon allow you to automatically preprocess your data with a single click!{% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans %}We are working on algorithms that will automatically scan your library for calibration files, and identify the best matches for dark, offset and flat files. AstroBin will automatically create master frames, calibrate your selected images, align them, stack them and offer you the stacked file for download, ready to be postprocessed in your favorite image processing program.{% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans %}We will let you know when this feature is available!{% endblocktrans %}
+            </p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans "OK" %}</a>
+        </div>
+    </div>
+{% endblock %}
+
 {% block extra_js %}
     {% include 'rawdata/_browser_js.html' %}
 {% endblock %}
