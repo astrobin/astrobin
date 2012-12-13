@@ -15,7 +15,7 @@ from rawdata.forms import (
     PublicDataPool_ImagesForm,
     PublicDataPool_SelectExistingForm,
 )
-from rawdata.mixins import RestrictToSubscriberMixin
+from rawdata.mixins import RestrictToSubscriberMixin, RestrictToCreatorMixin
 from rawdata.models import PublicDataPool, RawImage, TemporaryArchive
 from rawdata.zip import *
 
@@ -45,6 +45,16 @@ class PublicDataPoolCreateView(RestrictToSubscriberMixin, AjaxableResponseMixin,
         pool.save()
 
         return super(PublicDataPoolCreateView, self).form_valid(form)
+
+
+class PublicDataPoolUpdateView(RestrictToCreatorMixin, RestrictToSubscriberMixin,
+                               AjaxableResponseMixin, UpdateView):
+    model = PublicDataPool
+    form_class = PublicDataPoolForm
+
+    def form_valid(self, form):
+        form.save();
+        return super(PublicDataPoolUpdateView, self).form_valid(form)
 
 
 class PublicDataPoolAddDataView(RestrictToSubscriberMixin, AjaxableResponseMixin, UpdateView):
@@ -80,6 +90,7 @@ class PublicDataPoolDetailView(DetailView):
 
         context['size'] = sum(x.size for x in self.get_object().images.all())
         context['content_type'] = ContentType.objects.get_for_model(self.model)
+        context['update_form'] = PublicDataPoolForm(instance = self.get_object())
         return context
 
 

@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     url(r'^publicdatapools/(?P<pk>\d+)/add-image/$', login_required(PublicDataPoolAddImageView.as_view()), name = 'rawdata.publicdatapool_add_image'),
     url(r'^publicdatapools/(?P<pk>\d+)/download/$', login_required(PublicDataPoolDownloadView.as_view()), name = 'rawdata.publicdatapool_download'),
     url(r'^publicdatapools/share/(?:(?P<ids>[\d+,?]+)/)?$', login_required(PublicDataPoolCreateView.as_view()), name = 'rawdata.publicdatapool_create'),
+    url(r'^publicdatapools/(?P<pk>\d+)/update/$', login_required(PublicDataPoolUpdateView.as_view()), name = 'rawdata.publicdatapool_update'),
 
 
     url(r'^privatesharedfolders/$', PrivateSharedFolderListView.as_view(), name = 'rawdata.privatesharedfolder_list'),
