@@ -29,7 +29,7 @@
     {% endifequal %}
 
     <div class="page-header">
-        <h1>{{object}}
+        <h1><span id="pool-name">{{object}}</spa>
             <small>
             {% url user_page object.creator as user_url %}
             {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}A public data pool created by <a href="{{user_url}}">{{user}}</a>, with {{size}} in {{image_count}} images.{% endblocktrans %}
@@ -37,7 +37,7 @@
         </h1>
     </div>
 
-    <div class="well">{{object.description|linebreaks}}</div>
+    <div id="pool-description" class="well">{{object.description|linebreaks}}</div>
 
     {% if object.processed_images.all %}
         <div class="subtle-container">
@@ -121,6 +121,65 @@
     </div>
 {% endblock %}
 
+{% block modals %}
+    <div class="modal hide fade" id="edit-pool-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Edit public data pool" %}</h3>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" method="post"
+                  action="{% url rawdata.publicdatapool_update object.id %}">
+                {{update_form|as_bootstrap}}
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">{% trans "Cancel" %}</a>
+            <a href="#" class="btn btn-primary">{% trans "Save" %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+
 {% block extra_js %}
     <script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#edit-pool-modal form').ajaxForm({
+                timeout: 10000,
+                beforeSubmit: function(data, $form, options) {
+                    $form.find('.btn').addClass('disabled').attr('disabled');
+                },
+                error: function(xhr, status, error) {
+                    if (xhr.status == 400) {
+                        // Form did not validate
+                        data = $.parseJSON(xhr.responseText);
+                        for (var key in data) {
+                            var $input = $('[name=' + key + ']');
+                            $input.closest('.control-group').addClass('error');
+                            $input.after(
+                                $('<p/>')
+                                    .addClass('help-block error')
+                                    .text(data[key][0])
+                            );
+                            $form.find('.btn').removeClass('disabled').removeAttr('disabled');
+                        }
+                    }
+                },
+                success: function(response, status, xhr, $form) {
+                    $('#pool-name').text($form.find('input[name=name]').val());
+                    $('#pool-description').text($form.find('textarea[name=description]').val());
+                    $form.closest('.modal').modal('hide');
+                    $form.find('.error').removeClass('error');
+                    $form.find('.btn').removeClass('disabled').removeAttr('disabled');
+                }
+            });
+
+            $('#edit-pool-modal .btn-primary').click(function(e) {
+                $('#edit-pool-modal form').submit();
+                e.preventDefault();
+            });
+        });
+    </script>
 {% endblock %}
