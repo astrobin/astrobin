@@ -13,43 +13,48 @@ def push_notification(recipients, type, data):
         notification.send(recipients, type, data)
     except:
         pass
-    rendered = render_to_string('notification/%s/%s' % (type, 'short.html'), data)
-    encoded_data = simplejson.dumps({'message':rendered})
 
-    for r in recipients:
-        url = 'http://127.0.0.1/publish?id=notification_' + r.username
+
+    if settings.LONGPOLL_ENABLED:
+        rendered = render_to_string('notification/%s/%s' % (type, 'short.html'), data)
+        encoded_data = simplejson.dumps({'message':rendered})
+
+        for r in recipients:
+            url = 'http://127.0.0.1/publish?id=notification_' + r.username
+            try:
+                urllib2.urlopen(url, encoded_data);
+            except:
+                pass
+
+
+def push_message(recipient, data):
+    if settings.LONGPOLL_ENABLED:
+        encoded_data = simplejson.dumps(data)
+        url = 'http://127.0.0.1/publish?id=message_' + recipient.username
         try:
             urllib2.urlopen(url, encoded_data);
         except:
             pass
 
 
-def push_message(recipient, data):
-    encoded_data = simplejson.dumps(data)
-    url = 'http://127.0.0.1/publish?id=message_' + recipient.username
-    try:
-        urllib2.urlopen(url, encoded_data);
-    except:
-        pass
-
-
 def push_request(recipient, request):
-    data = {
-        'from_user':request.from_user.username,
-        'message'  :request.message,
-    }
+    if settings.LONGPOLL_ENABLED:
+        data = {
+            'from_user':request.from_user.username,
+            'message'  :request.message,
+        }
 
-    try:
-        data['image_id'] = request.image.id
-        data['location_id'] = request.location.id
-    except:
-        # we're allowed to pass because all but one will fail
-        pass
+        try:
+            data['image_id'] = request.image.id
+            data['location_id'] = request.location.id
+        except:
+            # we're allowed to pass because all but one will fail
+            pass
 
-    encoded_data = simplejson.dumps(data)
-    url = 'http://127.0.0.1/publish?id=request_' + recipient.username
-    try:
-        urllib2.urlopen(url, encoded_data);
-    except:
-        pass
+        encoded_data = simplejson.dumps(data)
+        url = 'http://127.0.0.1/publish?id=request_' + recipient.username
+        try:
+            urllib2.urlopen(url, encoded_data);
+        except:
+            pass
 
