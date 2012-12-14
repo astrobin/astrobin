@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
-from rawdata.models import RawImage, PublicDataPool
+from rawdata.models import RawImage, PublicDataPool, PrivateSharedFolder
 
 # This app
 from .notifications import push_notification
@@ -87,5 +87,27 @@ def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, 
         )
 
 
+def rawdata_privatesharedfolder_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
+    if not instance.creator:
+        return
+
+    if action == 'post_add' and len(pk_set) > 0:
+        contributors = [i.user for i in instance.images.all()]
+        users = [instance.creator] + contributors
+        submitter = RawImage.objects.get(pk = list(pk_set)[0]).user
+        users[:] = [x for x in users if x != submitter]
+        push_notification(
+            users,
+            'rawdata_posted_to_private_folder',
+            {
+                'user_name': submitter.username,
+                'user_url': reverse_url('user_page', kwargs = {'username': submitter.username}),
+                'folder_name': instance.name,
+                'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs = {'pk': instance.pk}),
+            },
+        )
+
+
 post_save.connect(nested_comment_post_save, sender = NestedComment)
 m2m_changed.connect(rawdata_publicdatapool_data_added, sender = PublicDataPool.images.through)
+m2m_changed.connect(rawdata_privatesharedfolder_data_added, sender = PrivateSharedFolder.images.through)
