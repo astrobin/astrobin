@@ -148,6 +148,12 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'rawdata_posted_to_pool',
+        _("New data posted to public pool"),
+        '',
+        2,
+    ),
 )
 
 
