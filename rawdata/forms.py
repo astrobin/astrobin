@@ -3,6 +3,7 @@ import os
 
 # Django
 from django import forms
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 # This app
@@ -76,12 +77,14 @@ class PrivateSharedFolder_SelectExistingForm(forms.Form):
         choices = [],
     )
 
-    def __init__(self, **kwargs):
+    def __init__(self, user, **kwargs):
         super(PrivateSharedFolder_SelectExistingForm, self).__init__(**kwargs)
         # Init choices here to prevent stagnation due to django caching.
-        creator = kwargs.pop('user')
-        self.fields['existing_folders'].choices =\
-            PrivateSharedFolder.objects.filter(creator = creator).values_list('id', 'name')
+        folders = PrivateSharedFolder.objects.filter(
+            Q(creator = user) |
+            Q(users = user)).values_list('id', 'name') 
+        self.fields['existing_folders'].choices = folders
+            
 
 
 class PrivateSharedFolder_ImagesForm(forms.ModelForm):
