@@ -1,5 +1,6 @@
 # Django
 from django.contrib.contenttypes.models import ContentType
+from django.http import Http404
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import (
