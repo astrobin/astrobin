@@ -75,6 +75,7 @@ def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, 
         contributors = [i.user for i in instance.images.all()]
         users = [instance.creator] + contributors
         submitter = RawImage.objects.get(pk = list(pk_set)[0]).user
+        users[:] = [x for x in users if x != submitter]
         push_notification(
             users,
             'rawdata_posted_to_pool',
