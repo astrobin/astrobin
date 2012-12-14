@@ -47,8 +47,8 @@ class PrivateSharedFolderCreateView(RestrictToSubscriberMixin, AjaxableResponseM
             raise Http404
 
         context['images'] = images
-        if PrivateSharedFolder.objects.all():
-            context['folders_form'] = PrivateSharedFolder_SelectExistingForm()
+        if PrivateSharedFolder.objects.filter(creator = self.request.user):
+            context['folders_form'] = PrivateSharedFolder_SelectExistingForm(creator = self.request.user)
 
         return context
  

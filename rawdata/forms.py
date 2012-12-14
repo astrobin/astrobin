@@ -79,7 +79,9 @@ class PrivateSharedFolder_SelectExistingForm(forms.Form):
     def __init__(self, **kwargs):
         super(PrivateSharedFolder_SelectExistingForm, self).__init__(**kwargs)
         # Init choices here to prevent stagnation due to django caching.
-        self.fields['existing_folders'].choices = PrivateSharedFolder.objects.all().values_list('id', 'name')
+        creator = kwargs.pop('user')
+        self.fields['existing_folders'].choices =\
+            PrivateSharedFolder.objects.filter(creator = creator).values_list('id', 'name')
 
 
 class PrivateSharedFolder_ImagesForm(forms.ModelForm):
