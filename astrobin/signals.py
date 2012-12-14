@@ -1,8 +1,11 @@
 # Django
+from django.core.urlresolvers import reverse as reverse_url
+from django.db.models.signals import m2m_changed
 from django.db.models.signals import post_save
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
+from rawdata.models import RawImage, PublicDataPool
 
 # This app
 from .notifications import push_notification
@@ -63,5 +66,26 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                 }
             )
 
-     
+
+def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
+    if not instance.creator:
+        return
+
+    if action == 'post_add' and len(pk_set) > 0:
+        contributors = [i.user for i in instance.images.all()]
+        users = [instance.creator] + contributors
+        submitter = RawImage.objects.get(pk = list(pk_set)[0]).user
+        push_notification(
+            users,
+            'rawdata_posted_to_pool',
+            {
+                'user_name': submitter.username,
+                'user_url': reverse_url('user_page', kwargs = {'username': submitter.username}),
+                'pool_name': instance.name,
+                'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs = {'pk': instance.pk}),
+            },
+        )
+
+
 post_save.connect(nested_comment_post_save, sender = NestedComment)
+m2m_changed.connect(rawdata_publicdatapool_data_added, sender = PublicDataPool.images.through)
