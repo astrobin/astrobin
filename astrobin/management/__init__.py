@@ -154,6 +154,12 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'rawdata_posted_to_private_folder',
+        _("New data posted to shared private folder"),
+        '',
+        2,
+    ),
 )
 
 
