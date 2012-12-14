@@ -9,6 +9,7 @@ TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
 MEDIA_VERSION = '34'
+LONGPOLL_ENABLED = False
 
 ADMINS = (
     ('Salvatore Iovene at AstroBin', 'astrobin@astrobin.com'),
