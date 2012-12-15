@@ -108,7 +108,7 @@
                 <div class="subtle-container">
                     <div class="header"><h4>{% trans "Shared with the following users" %}</h4></div>
                     {% for user in users %}
-                        <button id="remove-user" class="btn btn-small" data-id="{{user.id}}">
+                        <button id="remove-user" class="btn btn-small" style="margin-bottom: 4px" data-id="{{user.id}}">
                             {% ifequal object.creator request.user %}
                             <i class="icon-remove-sign"></i>
                             {% endifequal %}

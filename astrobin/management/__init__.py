@@ -160,6 +160,12 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'rawdata_invited_to_private_folder',
+        _("You are invited to a shared private folder"),
+        '',
+        2,
+    ),
 )
 
 

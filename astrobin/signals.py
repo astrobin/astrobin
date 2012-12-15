@@ -1,4 +1,5 @@
 # Django
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse as reverse_url
 from django.db.models.signals import m2m_changed
 from django.db.models.signals import post_save
@@ -109,6 +110,20 @@ def rawdata_privatesharedfolder_data_added(sender, instance, action, reverse, mo
         )
 
 
+def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, model, pk_set, **kwargs):
+    if action == 'post_add' and len(pk_set) > 0:
+        user = User.objects.get(pk = list(pk_set)[0])
+        push_notification(
+            [user],
+            'rawdata_invited_to_private_folder',
+            {
+                'folder_name': instance.name,
+                'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs = {'pk': instance.pk}),
+            },
+        )
+
+
 post_save.connect(nested_comment_post_save, sender = NestedComment)
 m2m_changed.connect(rawdata_publicdatapool_data_added, sender = PublicDataPool.images.through)
 m2m_changed.connect(rawdata_privatesharedfolder_data_added, sender = PrivateSharedFolder.images.through)
+m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender = PrivateSharedFolder.users.through)
