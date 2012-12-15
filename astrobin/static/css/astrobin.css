@@ -2771,3 +2771,10 @@ table#private-shared-folders a.delete-folder {
 table#private-shared-folders tr:hover a.delete-folder {
   visibility: visible;
 }
+#register-button {
+  text-align: center;
+  margin-top: 40px;
+}
+#register-button a {
+  font-size: 150%;
+}
