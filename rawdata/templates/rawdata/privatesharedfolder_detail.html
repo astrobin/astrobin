@@ -6,6 +6,14 @@
 {% block title %}AstroBin - {% blocktrans %}Private shared folder{% endblocktrans %} - {{object}}{% endblock %}
 
 {% block content %}
+    <div id="invite-success-alert" class="alert alert-success hidden">
+        <h4 class="alert-heading">
+            <i class="icon-ok-sign"></i>
+            {% trans "Success!" %}
+         </h4>
+        <p>{% blocktrans %}The users you selected have been invited. They will receive a notification.{% endblocktrans %}</p>
+    </div>
+
     {% ifequal object.creator request.user %}
         <div class="subnav subnav-fixed">
             <ul class="nav nav-pills">
@@ -16,6 +24,13 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            <a href="#invite-modal" data-toggle="modal">
+                                <i class="icon-plus"></i>
+                                {% trans "Invite" %}
+                            </a>
+                        </li>
+
                         <li>
                             <a href="#edit-folder-modal" data-toggle="modal">
                                 <i class="icon-pencil"></i>
@@ -89,6 +104,21 @@
         </div>
 
         <div class="span6">
+            {% if users %}
+                <div class="subtle-container">
+                    <div class="header"><h4>{% trans "Shared with the following users" %}</h4></div>
+                    {% for user in users %}
+                        <button id="remove-user" class="btn btn-small" data-id="{{user.id}}">
+                            {% ifequal object.creator request.user %}
+                            <i class="icon-remove-sign"></i>
+                            {% endifequal %}
+
+                            {{user}}
+                        </button>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
             <div class="download-with-icon">
                 <div class="data" style="padding-top: 0">
                     <a class="btn btn-primary btn-large" href="{% url rawdata.privatesharedfolder_download object.pk %}">
@@ -146,7 +176,7 @@
             <h3>{% trans "Edit folder" %}</h3>
         </div>
         <div class="modal-body">
-            <form class="form-horizontal" method="post"
+            <form id="edit-folder" class="form-horizontal" method="post"
                   action="{% url rawdata.privatesharedfolder_update object.id %}">
                 {{update_form|as_bootstrap}}
             </form>
@@ -157,6 +187,25 @@
             <a href="#" class="btn btn-primary">{% trans "Save" %}</a>
         </div>
     </div>
+
+    <div class="modal hide fade" id="invite-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Invite" %}</h3>
+        </div>
+        <div class="modal-body">
+            <p>{% blocktrans %}Invite users to this share private folders. Invitees will be able to add raw data and processed images, and invite more users.{% endblocktrans %}
+            <form id="invite" class="form-horizontal" method="post"
+                  action="{% url rawdata.privatesharedfolder_add_users object.id %}">
+                {{users_form|as_bootstrap}}
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">{% trans "Cancel" %}</a>
+            <a href="#" class="btn btn-primary">{% trans "Invite" %}</a>
+        </div>
+    </div>
 {% endblock %}
 
 
@@ -164,6 +213,9 @@
     <script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            var $edit_form = $('form#edit-folder');
+            var $invite_form = $('form#invite');
+
             $('#confirm-delete-folder').click(function(e) {
                 var id = $(this).data('id');
                 var $modal = $(this).closest('.modal');
@@ -180,7 +232,7 @@
                 e.preventDefault();
             });
 
-            $('#edit-folder-modal form').ajaxForm({
+            $('form#edit-folder').ajaxForm({
                 timeout: 10000,
                 beforeSubmit: function(data, $form, options) {
                     $form.find('.btn').addClass('disabled').attr('disabled');
@@ -197,7 +249,7 @@
                                     .addClass('help-block error')
                                     .text(data[key][0])
                             );
-                            $form.find('.btn').removeClass('disabled').removeAttr('disabled');
+                            $edit_form.find('.btn').removeClass('disabled').removeAttr('disabled');
                         }
                     }
                 },
@@ -211,9 +263,85 @@
             });
 
             $('#edit-folder-modal .btn-primary').click(function(e) {
-                $('#edit-folder-modal form').submit();
+                $('form#edit-folder').submit();
                 e.preventDefault();
             });
+
+            function extractor(query) {
+                var result = /([^,]+)$/.exec(query);
+                if(result && result[1])
+                    return result[1].trim();
+                return '';
+            }
+
+            $('#invite-modal input[name=users]').typeahead({
+                source: {{users_form_source|safe}},
+                updater: function(item) {
+                    return this.$element.val().replace(/[^,]*$/,'')+item+',';
+                },
+                matcher: function (item) {
+                  var tquery = extractor(this.query);
+                  if(!tquery) return false;
+                  return ~item.toLowerCase().indexOf(tquery)
+                },
+                highlighter: function (item) {
+                  var query = extractor(this.query).replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+                  return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+                    return '<strong>' + match + '</strong>'
+                  })
+                }
+            });
+
+            $('form#invite').ajaxForm({
+                timeout: 10000,
+                beforeSubmit: function(data, $form, options) {
+                    $form.find('.btn').addClass('disabled').attr('disabled');
+                },
+                error: function(xhr, status, error) {
+                    if (xhr.status == 400) {
+                        // Form did not validate
+                        data = $.parseJSON(xhr.responseText);
+                        for (var key in data) {
+                            var $input = $('[name=' + key + ']');
+                            $input.closest('.control-group').addClass('error');
+                            $input.after(
+                                $('<p/>')
+                                    .addClass('help-block error')
+                                    .text(data[key][0])
+                            );
+                            $invite_form.find('.btn').removeClass('disabled').removeAttr('disabled');
+                        }
+                    }
+                },
+                success: function(response, status, xhr, $form) {
+                    $form.closest('.modal').modal('hide');
+                    $('#invite-success-alert').removeClass('hidden');
+                    $form.find('.error').removeClass('error');
+                    $form.find('.btn').removeClass('disabled').removeAttr('disabled');
+                }
+            });
+
+            $('#invite-modal .btn-primary').click(function(e) {
+                $('form#invite').submit();
+                e.preventDefault();
+            });
+
+            {% ifequal object.creator request.user %}
+            $('button#remove-user').click(function(e) {
+                var $button = $(this);
+                var user_id = $button.attr('data-id');
+
+                $.ajax({
+                    url: '/rawdata/privatesharedfolders/' + {{object.id}} + '/remove-user/' + user_id + '/',
+                    type: 'post',
+                    success: function() {
+                        $button.remove();
+                    }
+                });
+
+                e.preventDefault();
+            });
+            {% endifequal %}
         });
     </script>
 {% endblock %}
