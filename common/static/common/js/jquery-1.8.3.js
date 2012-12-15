@@ -946,8 +946,8 @@ jQuery.Callbacks = function( options ) {
 		( optionsCache[ options ] || createOptions( options ) ) :
 		jQuery.extend( {}, options );
 
-	var // Last fire value (for non-forgettable lists)
-		memory,
+	    // Last fire value (for non-forgettable lists)
+	var	memory,
 		// Flag to know if list was already fired
 		fired,
 		// Flag to know if list is currently firing
