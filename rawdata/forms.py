@@ -94,3 +94,18 @@ class PrivateSharedFolder_ImagesForm(forms.ModelForm):
         model = PrivateSharedFolder
         fields = ('images',)
 
+
+class PrivateSharedFolder_UsersForm(forms.ModelForm):
+    error_css_class= 'error'
+
+    users = forms.CharField(
+        label = _("Users"),
+        help_text = _("A list of users you want to invite. Use a comma to separate them."),
+        widget = forms.TextInput(attrs = {
+                'data-provide': 'typeahead',
+        })
+    )
+
+    class Meta:
+        model = PrivateSharedFolder
+        fields = ()

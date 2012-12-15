@@ -1,4 +1,8 @@
+# Python
+import json
+
 # Django
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
 from django.db.models import Q
@@ -17,6 +21,7 @@ from rawdata.forms import (
     PrivateSharedFolderForm,
     PrivateSharedFolder_ImagesForm,
     PrivateSharedFolder_SelectExistingForm,
+    PrivateSharedFolder_UsersForm,
 )
 from rawdata.mixins import RestrictToSubscriberMixin, RestrictToCreatorMixin
 from rawdata.models import PrivateSharedFolder, RawImage
@@ -96,6 +101,36 @@ class PrivateSharedFolderAddImageView(RestrictToSubscriberMixin, RestrictToInvit
         return HttpResponse({}, **response_kwargs)
 
 
+class PrivateSharedFolderAddUsersView(RestrictToSubscriberMixin, RestrictToInviteeMixin,
+                                      AjaxableResponseMixin, UpdateView):
+    model = PrivateSharedFolder
+    form_class = PrivateSharedFolder_UsersForm
+
+    def form_valid(self, form):
+        folder = self.get_object()
+        usernames = form.cleaned_data['users'].split(',')
+        for username in usernames:
+            try:
+                user = User.objects.get(username = username) 
+                folder.users.add(user)
+            except:
+                continue
+        return super(PrivateSharedFolderAddUsersView, self).form_valid(form)
+
+
+class PrivateSharedFolderRemoveUserView(RestrictToSubscriberMixin, RestrictToCreatorMixin,
+                                        base.View):
+    model = PrivateSharedFolder
+
+    def post(self, request, *args, **kwargs):
+        folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.get('pk'))
+        user = get_object_or_404(User, pk = kwargs.get('user_id'))
+        folder.users.remove(user)
+
+        response_kwargs = {'content_type': 'application/json'}
+        return HttpResponse({}, **response_kwargs)
+
+
 class PrivateSharedFolderDetailView(RestrictToSubscriberMixin, RestrictToInviteeMixin, DetailView):
     model = PrivateSharedFolder
 
@@ -106,6 +141,11 @@ class PrivateSharedFolderDetailView(RestrictToSubscriberMixin, RestrictToInvitee
         context['size'] = sum(x.size for x in self.get_object().images.all())
         context['content_type'] = ContentType.objects.get_for_model(self.model)
         context['update_form'] = PrivateSharedFolderForm(instance = self.get_object())
+        context['users'] = self.get_object().users.all()
+        context['users_form'] = PrivateSharedFolder_UsersForm()
+        context['users_form_source'] = json.dumps(
+            list(User.objects.exclude(privatesharedfolders_invited = self.get_object())\
+                .values_list('username', flat = True)))
         return context
 
 
