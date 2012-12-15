@@ -72,6 +72,22 @@ class PublicDataPoolAddDataView(RestrictToSubscriberMixin, AjaxableResponseMixin
         return super(PublicDataPoolAddDataView, self).form_valid(form)
 
 
+class PublicDataPoolRemoveDataView(RestrictToSubscriberMixin, base.View):
+    model = PublicDataPool
+
+    def post(self, request, *args, **kwargs):
+        pool = get_object_or_404(PublicDataPool, pk = kwargs.get('pk'))
+        rawimage = get_object_or_404(RawImage, pk = kwargs.get('rawimage_pk'))
+
+        if request.user != rawimage.user:
+            raise Http404
+
+        pool.images.remove(rawimage)
+
+        response_kwargs = {'content_type': 'application/json'}
+        return HttpResponse({}, **response_kwargs)
+
+
 class PublicDataPoolAddImageView(RestrictToSubscriberMixin, base.View):
     def post(self, request, *args, **kwargs):
         pool = get_object_or_404(PublicDataPool, pk = kwargs.get('pk'))
