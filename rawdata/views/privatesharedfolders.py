@@ -144,8 +144,10 @@ class PrivateSharedFolderDetailView(RestrictToSubscriberMixin, RestrictToInvitee
         context['users'] = self.get_object().users.all()
         context['users_form'] = PrivateSharedFolder_UsersForm()
         context['users_form_source'] = json.dumps(
-            list(User.objects.exclude(privatesharedfolders_invited = self.get_object())\
-                .values_list('username', flat = True)))
+            list(User.objects\
+                    .exclude(pk = self.request.user.pk)
+                    .exclude(privatesharedfolders_invited = self.get_object())\
+                        .values_list('username', flat = True)))
         return context
 
 
