@@ -408,6 +408,7 @@ ACTSTREAM_ACTION_MODELS = (
     'astrobin.focalreducer',
     'astrobin.image',
     'astrobin.imagerevision',
+    'rawdata.PublicDataPool',
 )
 
 PAYPAL_TEST = False
