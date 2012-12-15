@@ -3,10 +3,12 @@ import json
 
 # Django
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext as _
 from django.views.generic import (
     base,
     edit,
@@ -28,6 +30,7 @@ from rawdata.models import PrivateSharedFolder, RawImage
 from rawdata.zip import *
 
 # Other AstroBin apps
+from astrobin.models import Image
 from common.mixins import AjaxableResponseMixin
 
 
@@ -183,6 +186,8 @@ class PrivateSharedFolderDeleteView(RestrictToSubscriberMixin, RestrictToCreator
     def delete(Self, request, *args, **kwargs):
         folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.pop('pk'))
         folder.delete();
+
+        messages.success(request, _("Your private shared folder has been deleted."))
 
         response_kwargs = {'content_type': 'application/json'}
         return HttpResponse({}, **response_kwargs)
