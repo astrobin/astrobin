@@ -71,10 +71,6 @@
         </table>
     {% else %}
         <div class="alert alert-error">
-            <h4 class="alert-heading">
-                <i class="icon-fire"></i>
-                {% trans "Error!" %}
-            </h4>
             {% url rawdata.library as library_url %}
             <p>{% blocktrans %}You don't have access to any private shared folders. If you want to create one, go to <a href="{{library_url}}">your Raw Data Library</a>, select some files or <strong>smart folders</strong> and use the <strong>Share</strong> button to share them.{% endblocktrans %}</p>
         </div>

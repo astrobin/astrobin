@@ -86,15 +86,51 @@ def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, 
         )
 
 
-def rawdata_privatesharedfolder_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
+def rawdata_publicdatapool_image_added(sender, instance, action, reverse, model, pk_set, **kwargs):
     if action == 'post_add' and len(pk_set) > 0:
         contributors = [i.user for i in instance.images.all()]
         users = [instance.creator] + contributors
+        submitter = Image.objects.get(pk = list(pk_set)[0]).user
+        users[:] = [x for x in users if x != submitter]
+        push_notification(
+            users,
+            'rawdata_posted_image_to_public_pool',
+            {
+                'user_name': submitter.username,
+                'user_url': reverse_url('user_page', kwargs = {'username': submitter.username}),
+                'pool_name': instance.name,
+                'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs = {'pk': instance.pk}),
+            },
+        )
+
+
+def rawdata_privatesharedfolder_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
+    if action == 'post_add' and len(pk_set) > 0:
+        invitees = instance.users.all()
+        users = [instance.creator] + list(invitees)
         submitter = RawImage.objects.get(pk = list(pk_set)[0]).user
         users[:] = [x for x in users if x != submitter]
         push_notification(
             users,
             'rawdata_posted_to_private_folder',
+            {
+                'user_name': submitter.username,
+                'user_url': reverse_url('user_page', kwargs = {'username': submitter.username}),
+                'folder_name': instance.name,
+                'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs = {'pk': instance.pk}),
+            },
+        )
+
+
+def rawdata_privatesharedfolder_image_added(sender, instance, action, reverse, model, pk_set, **kwargs):
+    if action == 'post_add' and len(pk_set) > 0:
+        invitees = instance.users.all()
+        users = [instance.creator] + list(invitees)
+        submitter = Image.objects.get(pk = list(pk_set)[0]).user
+        users[:] = [x for x in users if x != submitter]
+        push_notification(
+            users,
+            'rawdata_posted_image_to_private_folder',
             {
                 'user_name': submitter.username,
                 'user_url': reverse_url('user_page', kwargs = {'username': submitter.username}),
@@ -119,5 +155,7 @@ def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, mo
 
 post_save.connect(nested_comment_post_save, sender = NestedComment)
 m2m_changed.connect(rawdata_publicdatapool_data_added, sender = PublicDataPool.images.through)
+m2m_changed.connect(rawdata_publicdatapool_image_added, sender = PublicDataPool.processed_images.through)
 m2m_changed.connect(rawdata_privatesharedfolder_data_added, sender = PrivateSharedFolder.images.through)
+m2m_changed.connect(rawdata_privatesharedfolder_image_added, sender = PrivateSharedFolder.processed_images.through)
 m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender = PrivateSharedFolder.users.through)

@@ -1,7 +1,9 @@
 # Django
+from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext as _
 from django.views.generic import (
     base,
     CreateView,
@@ -21,6 +23,7 @@ from rawdata.models import PublicDataPool, RawImage, TemporaryArchive
 from rawdata.zip import *
 
 # Other AstroBin apps
+from astrobin.models import Image
 from common.mixins import AjaxableResponseMixin
 
 

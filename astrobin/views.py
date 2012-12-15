@@ -47,7 +47,8 @@ import re
 import unicodedata
 
 from nested_comments.models import NestedComment
-from rawdata.forms import PublicDataPool_SelectExistingForm
+from rawdata.forms import PublicDataPool_SelectExistingForm, PrivateSharedFolder_SelectExistingForm
+from rawdata.models import PrivateSharedFolder
 
 from models import *
 from forms import *
@@ -842,6 +843,10 @@ def image_detail(request, id, r):
                      'plot_overlay_left' : (settings.RESIZED_IMAGE_SIZE - image.w) / 2 if image.w < settings.RESIZED_IMAGE_SIZE else 0,
 
                      'select_datapool_form': PublicDataPool_SelectExistingForm(),
+                     'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = request.user),
+                     'has_sharedfolders': PrivateSharedFolder.objects.filter(
+                        Q(creator = request.user) |
+                        Q(users = request.user)).count() > 0,
                     }
 
     return object_detail(
