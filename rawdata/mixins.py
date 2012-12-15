@@ -3,7 +3,7 @@ import simplejson as json
 
 # Django
 from django.contrib.auth.decorators import user_passes_test
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 

@@ -91,6 +91,23 @@ class PrivateSharedFolderAddDataView(RestrictToSubscriberMixin, RestrictToInvite
         return super(PrivateSharedFolderAddDataView, self).form_valid(form)
 
 
+class PrivateSharedFolderRemoveDataView(RestrictToSubscriberMixin, RestrictToInviteeMixin,
+                                        base.View):
+    model = PrivateSharedFolder
+
+    def post(self, request, *args, **kwargs):
+        folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.get('pk'))
+        rawimage = get_object_or_404(RawImage, pk = kwargs.get('rawimage_pk'))
+
+        if request.user != rawimage.user:
+            raise Http404
+
+        folder.images.remove(rawimage)
+
+        response_kwargs = {'content_type': 'application/json'}
+        return HttpResponse({}, **response_kwargs)
+
+
 class PrivateSharedFolderAddImageView(RestrictToSubscriberMixin, RestrictToInviteeMixin, base.View):
     def post(self, request, *args, **kwargs):
         folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.get('pk'))

@@ -58,9 +58,10 @@
                 <thead>
                     <tr>
                         <th colspan="2">{% trans "Name" %}</th>
+                        <th>{% trans "User" %}</th>
                         <th>{% trans "Size" %}</th>
                         <th>{% trans "Uploaded" %}</th>
-                        <th>{% trans "User" %}</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,13 +69,24 @@
                         <tr id="{{image.id}}" class="rawfile">
                             <td class="counter">{{forloop.counter}}</td>
                             <td>{{image.original_filename}}</td>
+                            <td><a href="{% url user_page image.user %}">{{image.user}}</td>
                             <td>{{image.size|filesizeformat}}</td>
                             <td>
                                 <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
                                     {{image.uploaded|date}}
                                 </abbr>
                             </td>
-                            <td><a href="{% url user_page image.user %}">{{image.user}}</td>
+                            <td>
+                                {% ifequal request.user image.user %}
+                                    <a href="#"
+                                       class="remove-rawimage"
+                                       data-pk="{{image.pk}}"
+                                       rel="tooltip"
+                                       title="{% trans "Remove from this pool" %}">
+                                        <i class="icon-remove-sign"></i>
+                                    </a>
+                                {% endifequal %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -178,6 +190,22 @@
 
             $('#edit-pool-modal .btn-primary').click(function(e) {
                 $('#edit-pool-modal form').submit();
+                e.preventDefault();
+            });
+
+            $('.remove-rawimage').click(function(e) {
+                var $cells = $(this).closest('tr').find('td');
+                var pk = $(this).attr('data-pk');
+
+                $.ajax({
+                    url: '/rawdata/publicdatapools/' + {{object.pk}} + '/remove-data/' + pk + '/',
+                    type: 'post',
+                    success: function() {
+                        $cells.animate({'color': 'red'}, 500)
+                              .css('text-decoration', 'line-through');
+                    }
+                });
+
                 e.preventDefault();
             });
         });
