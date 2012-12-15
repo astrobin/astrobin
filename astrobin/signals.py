@@ -4,6 +4,9 @@ from django.core.urlresolvers import reverse as reverse_url
 from django.db.models.signals import m2m_changed
 from django.db.models.signals import post_save
 
+# Third party apps
+from actstream import action as act
+
 # Other AstroBin apps
 from nested_comments.models import NestedComment
 from rawdata.models import RawImage, PublicDataPool, PrivateSharedFolder
@@ -68,6 +71,12 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             )
 
 
+def rawdata_publicdatapool_post_save(sender, instance, created, **kwargs):
+    verb = "created a new public data pool"
+    if created:
+        act.send(instance.creator, verb = verb, target = instance)
+
+
 def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
     if action == 'post_add' and len(pk_set) > 0:
         contributors = [i.user for i in instance.images.all()]
@@ -84,6 +93,9 @@ def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, 
                 'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs = {'pk': instance.pk}),
             },
         )
+
+        verb = "added new data to public data pool"
+        act.send(instance.creator, verb = verb, target = instance)
 
 
 def rawdata_publicdatapool_image_added(sender, instance, action, reverse, model, pk_set, **kwargs):
@@ -102,6 +114,9 @@ def rawdata_publicdatapool_image_added(sender, instance, action, reverse, model,
                 'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs = {'pk': instance.pk}),
             },
         )
+
+        verb = "added a new processed image to public data pool"
+        act.send(instance.creator, verb = verb, target = instance)
 
 
 def rawdata_privatesharedfolder_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
@@ -154,6 +169,8 @@ def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, mo
 
 
 post_save.connect(nested_comment_post_save, sender = NestedComment)
+post_save.connect(rawdata_publicdatapool_post_save, sender = PublicDataPool)
+
 m2m_changed.connect(rawdata_publicdatapool_data_added, sender = PublicDataPool.images.through)
 m2m_changed.connect(rawdata_publicdatapool_image_added, sender = PublicDataPool.processed_images.through)
 m2m_changed.connect(rawdata_privatesharedfolder_data_added, sender = PrivateSharedFolder.images.through)
