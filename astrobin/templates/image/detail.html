@@ -566,11 +566,10 @@
 
             {% if request.user.is_authenticated %}
             <div class="community-bulletin">
-                <h4>{% trans "Community bulletin" %}</h4>
+                <h4>{% trans "Introducing AstroBin Raw Data" %}</h4>
                 <p>
-                    <span class="title">{% trans "Introducing AstroBin Questions" %}</span>
-                    {% url help_questions as questions_url %}
-                    {% blocktrans %}After revolutionizing the way astrophotographers preserve their data, AstroBin is set to start a new era in the way amateur astronomers communicate on the Internet. <a href="{{questions_url}}">Want to know more?</a>{% endblocktrans %}
+                    {% url rawdata.help1 as rawdata_url %}
+                    {% blocktrans %}<strong>AstroBin Raw Data</strong> is a platform for the secure storage of all your FIT and DLSR raw files, up to 500 GB! It will automatically keep your files organized, and allow you to share them with other members. <a href="{{rawdata_url}}">Want to know more?</a>{% endblocktrans %}
                 </p>
             </div>
             {% endif %}
