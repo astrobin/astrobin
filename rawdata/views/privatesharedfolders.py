@@ -83,10 +83,8 @@ class PrivateSharedFolderAddDataView(RestrictToSubscriberMixin, RestrictToInvite
 
     def form_valid(self, form):
         folder = form.save(commit = False)
-        new = form.cleaned_data['images']
-        for image in new:
-            folder.images.add(image)
-        folder.save()
+        images = form.cleaned_data['images']
+        folder.images.add(*images)
         return super(PrivateSharedFolderAddDataView, self).form_valid(form)
 
 

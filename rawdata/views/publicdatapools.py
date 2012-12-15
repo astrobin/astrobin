@@ -64,10 +64,8 @@ class PublicDataPoolAddDataView(RestrictToSubscriberMixin, AjaxableResponseMixin
 
     def form_valid(self, form):
         pool = form.save(commit = False)
-        new = form.cleaned_data['images']
-        for image in new:
-            pool.images.add(image)
-        pool.save()
+        images = form.cleaned_data['images']
+        pool.images.add(*images)
         return super(PublicDataPoolAddDataView, self).form_valid(form)
 
 
