@@ -39,7 +39,7 @@
             <a class="carousel-control right" href="#why-astrobin" data-slide="next">&rsaquo;</a>
         </div> <!-- carousel -->
 
-        <div class="row">
+        <div class="row section">
             <div class="span5">
                 <div class="subtle-container">
                     <div class="header">
@@ -51,22 +51,31 @@
             <div class="span7">
                 <div class="subtle-container">
                     <div class="header">
-                        <h4>{% trans "Register with AstroBin" %}</h4>
+                        <h4>{% trans "FIT and DSLR camera raw files" %}</h4>
                     </div>
-                    <div class="well">
-                        {% url tos as tos_url %}
-                        {% blocktrans %}By registering with AstroBin, you agree to our <a href="{{tos_url}}">terms of service</a>.{% endblocktrans %}
-                    </div> 
-                    <form class="form-horizontal" method="post" action="/accounts/register/"}>
-                        {{ registration_form|as_bootstrap }}
-                        <div class="form-actions">
-                            <input class="btn btn-primary" type="submit" value="{% trans 'Submit' %}" />
+                    <div class="row">
+                        <div class="span3">
+                            <a href="{% url rawdata.help1 %}">
+                                <img src="{{STATIC_URL}}rawdata/images/astrobin-rawdata-plan-galaxia.png"/>
+                            </a>
                         </div>
-                    </form>
+                        <div class="span3">
+                            <p>
+                                {% blocktrans %}AstroBin offers the storage of FIT and DSLR camera raw files too, for archival and sharing purposes!{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% url rawdata.help1 as rawdata_url %}
+                                {% blocktrans %}<strong>AstroBin Raw Data</strong> is a platform for the secure storage of all your FIT and DLSR raw files, up to 500 GB! It will automatically keep your files organized, and allow you to share them with other members. <a href="{{rawdata_url}}">Want to know more?</a>{% endblocktrans %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="register-button">
+                    <a href="/accounts/register/" class="btn btn-primary btn-large">{% trans "Register" %}</a>
                 </div>
             </div>
         </div>
-
     {% else %}<!-- authenticated -->
 
         {% comment %}
