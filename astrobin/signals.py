@@ -69,9 +69,6 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
 
 
 def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if not instance.creator:
-        return
-
     if action == 'post_add' and len(pk_set) > 0:
         contributors = [i.user for i in instance.images.all()]
         users = [instance.creator] + contributors
@@ -90,9 +87,6 @@ def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, 
 
 
 def rawdata_privatesharedfolder_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if not instance.creator:
-        return
-
     if action == 'post_add' and len(pk_set) > 0:
         contributors = [i.user for i in instance.images.all()]
         users = [instance.creator] + contributors
