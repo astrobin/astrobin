@@ -105,6 +105,7 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
 
         context['filter_type'] = self.request.GET.get('type')
         context['filter_upload'] = self.request.GET.get('upload')
+        context['filter_acquisition'] = self.request.GET.get('acquisition')
 
         all_images = RawImage.objects.filter(user = self.request.user)
 
@@ -123,6 +124,4 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
                 raise Http404
 
         return context
-
-
 

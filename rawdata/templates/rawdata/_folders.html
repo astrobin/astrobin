@@ -25,6 +25,10 @@
                     <a href="{% query_string 'upload=folder.date, f=none' '' %}">
                     {% endifequal %}
 
+                    {% ifequal folder.folder_type 'acquisition' %}
+                    <a href="{% query_string 'acquisition=folder.date, f=none' '' %}">
+                    {% endifequal %}
+
                         {{folder.label}}
                     </a>
                 </td>
