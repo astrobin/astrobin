@@ -34,17 +34,17 @@ class RawImage(models.Model):
 
     # Definitions
     TYPE_UNKNOWN = 0
-    TYPE_OFFSET  = 10
-    TYPE_DARK    = 20
-    TYPE_FLAT    = 30
-    TYPE_LIGHT   = 40
+    TYPE_LIGHT   = 1
+    TYPE_OFFSET  = 2 
+    TYPE_DARK    = 3
+    TYPE_FLAT    = 4
 
     TYPE_CHOICES = (
         (TYPE_UNKNOWN, _('Unknown')),
+        (TYPE_LIGHT,   _('Light')),
         (TYPE_OFFSET,  _('Offset/Bias')),
         (TYPE_DARK,    _('Dark')),
         (TYPE_FLAT,    _('Flat')),
-        (TYPE_LIGHT,   _('Light')),
     )
 
     user = models.ForeignKey(
@@ -87,6 +87,11 @@ class RawImage(models.Model):
         default = 0, # Unknown
         choices = TYPE_CHOICES,
         editable = False,
+    )
+
+    acquisition_date = models.DateTimeField(
+        null = True,
+        blank = True,
     )
 
     class Meta:

@@ -25,6 +25,12 @@ class BaseFolderFactory(object):
                 Q(uploaded__gte = datetime.strptime(filter_upload, '%Y-%m-%d')) &
                 Q(uploaded__lte = datetime.strptime(filter_upload, '%Y-%m-%d') + timedelta(days=1)));
 
+        filter_acquisition = params.get('acquisition')
+        if filter_acquisition:
+            self.source = self.source.filter(
+                Q(acquisition_date__gte = datetime.strptime(filter_acquisition, '%Y-%m-%d')) &
+                Q(acquisition_date__lte = datetime.strptime(filter_acquisition, '%Y-%m-%d') + timedelta(days=1)));
+
         return self.source
 
 
@@ -87,10 +93,35 @@ class UploadDateFolderFactory(BaseFolderFactory):
         return folders
 
 
+class AcquisitionDateFolderFactory(BaseFolderFactory):
+    def __init__(self, *args, **kwargs):
+        super(AcquisitionDateFolderFactory, self).__init__(*args, **kwargs)
+        self.label = _("Acquisition date")
+
+    def produce(self):
+        folders = [] # {'date': _, 'label': _, 'images': []}
+        for image in self.source:
+            if image.acquisition_date:
+                date = image.acquisition_date.date()
+                try:
+                    index = map(itemgetter('date'), folders).index(date)
+                    folders[index]['images'].append(image)
+                except ValueError:
+                    folders.append({
+                        'folder_type': 'acquisition',
+                        'date': date,
+                        'label': date,
+                        'images': [image],
+                    });
+
+        return folders
+
+
 FOLDER_TYPE_LOOKUP = {
     'none': NoFolderFactory,
     'type': TypeFolderFactory,
     'upload': UploadDateFolderFactory,
+    'acquisition': AcquisitionDateFolderFactory,
 }
 
 
