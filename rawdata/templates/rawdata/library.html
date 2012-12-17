@@ -54,7 +54,7 @@
 
     {% if total_files %}
         <div class="rawdata-browser-breadcumb">
-            <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload,acquisition' %}">
+            <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload,acquisition,camera' %}">
                 {% trans "All files" %}
             </a>
 
@@ -78,6 +78,14 @@
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{% query_string '' 'acquisition' %}">
                     {% trans "Acquisition date" %}: <strong>{{filter_acquisition}}</strong>
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
+
+            {% if filter_camera %}
+                <span class="divider">/</span>
+                <a class="btn btn-mini btn-primary" href="{% query_string '' 'camera' %}">
+                    {% trans "Camera" %}: <strong>{{filter_camera}}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}

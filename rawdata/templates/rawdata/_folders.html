@@ -29,6 +29,10 @@
                     <a href="{% query_string 'acquisition=folder.date, f=none' '' %}">
                     {% endifequal %}
 
+                    {% ifequal folder.folder_type 'camera' %}
+                    <a href="{% query_string 'camera=folder.camera, f=none' '' %}">
+                    {% endifequal %}
+
                         {{folder.label}}
                     </a>
                 </td>
