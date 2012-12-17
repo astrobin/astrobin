@@ -3,6 +3,7 @@ from django.http import Http404
 from django.views.generic import (
     base,
     CreateView,
+    DetailView,
     TemplateView,
 )
 from django.views.generic.edit import BaseDeleteView
@@ -29,6 +30,17 @@ class RawImageCreateView(RestrictToSubscriberMixin, CreateView):
         raw_image.save(index = True)
 
         return super(RawImageCreateView, self).form_valid(form)
+
+
+class RawImageDetailView(RestrictToSubscriberMixin, DetailView):
+    model = RawImage
+
+    def dispatch(self, *args, **kwargs):
+        response = super(RawImageDetailView, self).dispatch(*args, **kwargs)
+        if self.get_object().user != self.request.user:
+            raise Http404
+
+        return response
 
 
 class RawImageDownloadView(RestrictToSubscriberMixin, base.View):
