@@ -92,6 +92,14 @@ class RawImage(models.Model):
     acquisition_date = models.DateTimeField(
         null = True,
         blank = True,
+        editable = False,
+    )
+
+    camera = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        editable = False,
     )
 
     class Meta:

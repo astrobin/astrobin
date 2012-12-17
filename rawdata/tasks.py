@@ -17,6 +17,7 @@ def index_raw_image(id):
 
     image.image_type = abc_image.type()
     image.acquisition_date = abc_image.observationDate()
+    image.camera = abc_image.cameraModel()
 
     image.indexed = True
     image.save()

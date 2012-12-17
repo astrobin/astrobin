@@ -6,6 +6,7 @@ from operator import itemgetter
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
+UNKNOWN_LABEL = "---------"
 class BaseFolderFactory(object):
     def __init__(self, *args, **kwargs):
         self.source = kwargs.pop('source', [])
@@ -23,13 +24,20 @@ class BaseFolderFactory(object):
         if filter_upload:
             self.source = self.source.filter(
                 Q(uploaded__gte = datetime.strptime(filter_upload, '%Y-%m-%d')) &
-                Q(uploaded__lte = datetime.strptime(filter_upload, '%Y-%m-%d') + timedelta(days=1)));
+                Q(uploaded__lte = datetime.strptime(filter_upload, '%Y-%m-%d') + timedelta(days=1)))
 
         filter_acquisition = params.get('acquisition')
         if filter_acquisition:
             self.source = self.source.filter(
                 Q(acquisition_date__gte = datetime.strptime(filter_acquisition, '%Y-%m-%d')) &
-                Q(acquisition_date__lte = datetime.strptime(filter_acquisition, '%Y-%m-%d') + timedelta(days=1)));
+                Q(acquisition_date__lte = datetime.strptime(filter_acquisition, '%Y-%m-%d') + timedelta(days=1)))
+
+        filter_camera = params.get('camera')
+        if filter_camera:
+            if filter_camera != UNKNOWN_LABEL:
+                self.source = self.source.filter(camera = filter_camera)
+            else:
+                self.source = self.source.filter(camera__isnull = True)
 
         return self.source
 
@@ -65,7 +73,7 @@ class TypeFolderFactory(BaseFolderFactory):
                     'type': t,
                     'label': humanize_rawimage_type(t),
                     'images': [image],
-                });
+                })
 
         return folders
 
@@ -88,7 +96,7 @@ class UploadDateFolderFactory(BaseFolderFactory):
                     'date': date,
                     'label': date,
                     'images': [image],
-                });
+                })
 
         return folders
 
@@ -112,7 +120,30 @@ class AcquisitionDateFolderFactory(BaseFolderFactory):
                         'date': date,
                         'label': date,
                         'images': [image],
-                    });
+                    })
+
+        return folders
+
+
+class CameraFolderFactory(BaseFolderFactory):
+    def __init__(self, *args, **kwargs):
+        super(CameraFolderFactory, self).__init__(*args, **kwargs)
+        self.label = _("Camera")
+
+    def produce(self):
+        folders = [] # {'camera': 'abc', 'label': 'abc', 'images': []}
+        for image in self.source:
+            camera = image.camera if image.camera else UNKNOWN_LABEL 
+            try:
+                index = map(itemgetter('camera'), folders).index(camera)
+                folders[index]['images'].append(image)
+            except ValueError:
+                folders.append({
+                    'folder_type': 'camera',
+                    'camera': camera,
+                    'label': camera,
+                    'images': [image],
+                })
 
         return folders
 
@@ -122,6 +153,6 @@ FOLDER_TYPE_LOOKUP = {
     'type': TypeFolderFactory,
     'upload': UploadDateFolderFactory,
     'acquisition': AcquisitionDateFolderFactory,
+    'camera': CameraFolderFactory,
 }
-
 

@@ -106,6 +106,7 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
         context['filter_type'] = self.request.GET.get('type')
         context['filter_upload'] = self.request.GET.get('upload')
         context['filter_acquisition'] = self.request.GET.get('acquisition')
+        context['filter_camera'] = self.request.GET.get('camera')
 
         all_images = RawImage.objects.filter(user = self.request.user)
 
