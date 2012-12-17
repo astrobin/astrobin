@@ -103,10 +103,14 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
         context['total_files'] = total_files.count()
         context['unindexed_count'] = total_files.filter(indexed = False).count()
 
-        context['filter_type'] = self.request.GET.get('type')
-        context['filter_upload'] = self.request.GET.get('upload')
-        context['filter_acquisition'] = self.request.GET.get('acquisition')
-        context['filter_camera'] = self.request.GET.get('camera')
+        for filtering in (
+            'type',
+            'upload',
+            'acquisition',
+            'camera',
+            'temperature',
+        ):
+            context['filter_' + filtering] = self.request.GET.get(filtering)
 
         all_images = RawImage.objects.filter(user = self.request.user)
 

@@ -102,6 +102,12 @@ class RawImage(models.Model):
         editable = False,
     )
 
+    temperature = models.SmallIntegerField(
+        null = True,
+        blank = True,
+        editable = False,
+    )
+
     class Meta:
         app_label = 'rawdata'
         ordering = ('-uploaded',)
