@@ -33,6 +33,10 @@
                     <a href="{% query_string 'camera=folder.camera, f=none' '' %}">
                     {% endifequal %}
 
+                    {% ifequal folder.folder_type 'temperature' %}
+                    <a href="{% query_string 'temperature=folder.temperature, f=none' '' %}">
+                    {% endifequal %}
+
                         {{folder.label}}
                     </a>
                 </td>

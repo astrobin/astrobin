@@ -54,7 +54,7 @@
 
     {% if total_files %}
         <div class="rawdata-browser-breadcumb">
-            <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload,acquisition,camera' %}">
+            <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload,acquisition,camera,temperature' %}">
                 {% trans "All files" %}
             </a>
 
@@ -86,6 +86,14 @@
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{% query_string '' 'camera' %}">
                     {% trans "Camera" %}: <strong>{{filter_camera}}</strong>
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
+
+            {% if filter_temperature %}
+                <span class="divider">/</span>
+                <a class="btn btn-mini btn-primary" href="{% query_string '' 'temperature' %}">
+                    {% trans "Temperature" %}: <strong>{{filter_temperature}}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}

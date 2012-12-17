@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 UNKNOWN_LABEL = "---------"
+
 class BaseFolderFactory(object):
     def __init__(self, *args, **kwargs):
         self.source = kwargs.pop('source', [])
@@ -38,6 +39,14 @@ class BaseFolderFactory(object):
                 self.source = self.source.filter(camera = filter_camera)
             else:
                 self.source = self.source.filter(camera__isnull = True)
+
+        filter_temperature = params.get('temperature')
+        if filter_temperature:
+            if filter_temperature != UNKNOWN_LABEL:
+                self.source = self.source.filter(temperature = filter_temperature)
+            else:
+                self.source = self.source.filter(temperature__isnull = True)
+
 
         return self.source
 
@@ -148,11 +157,35 @@ class CameraFolderFactory(BaseFolderFactory):
         return folders
 
 
+class TemperatureFolderFactory(BaseFolderFactory):
+    def __init__(self, *args, **kwargs):
+        super(TemperatureFolderFactory, self).__init__(*args, **kwargs)
+        self.label = _("Temperature")
+
+    def produce(self):
+        folders = [] # {'temperature': '123', 'label': '123', 'images': []}
+        for image in self.source:
+            temperature = image.temperature if image.camera else UNKNOWN_LABEL 
+            try:
+                index = map(itemgetter('temperature'), folders).index(temperature)
+                folders[index]['images'].append(image)
+            except ValueError:
+                folders.append({
+                    'folder_type': 'temperature',
+                    'temperature': temperature,
+                    'label': temperature,
+                    'images': [image],
+                })
+
+        return folders
+
+
 FOLDER_TYPE_LOOKUP = {
     'none': NoFolderFactory,
     'type': TypeFolderFactory,
     'upload': UploadDateFolderFactory,
     'acquisition': AcquisitionDateFolderFactory,
     'camera': CameraFolderFactory,
+    'temperature': TemperatureFolderFactory,
 }
 

@@ -51,14 +51,14 @@
         </li>
 
         <li>
-            <a href="{% query_string 'f=Subject' '' %}">
+            <a href="{% query_string 'f=subject' '' %}">
                 {% if request.GET.f == 'subject' %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Subject" %}
             </a>
         </li>
 
         <li>
-            <a href="{% query_string 'f=Temperature' '' %}">
+            <a href="{% query_string 'f=temperature' '' %}">
                 {% if request.GET.f == 'temperature' %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Temperature" %}
             </a>

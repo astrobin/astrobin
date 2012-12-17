@@ -18,6 +18,7 @@ def index_raw_image(id):
     image.image_type = abc_image.type()
     image.acquisition_date = abc_image.observationDate()
     image.camera = abc_image.cameraModel()
+    image.temperature = abc_image.temperature() if abc_image.hasTemperature() else None
 
     image.indexed = True
     image.save()
