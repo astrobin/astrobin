@@ -2733,18 +2733,18 @@ table.rawdata-browser td.icon {
 table.rawdata-browser td.counter {
   color: #aaa;
 }
-.rawdata-browser-breadcumb {
+.rawdata-browser-breadcrumb {
   display: inline-block;
   margin-bottom: 8px;
 }
-.rawdata-browser-breadcumb a {
+.rawdata-browser-breadcrumb a {
   margin-right: 4px;
 }
-.rawdata-browser-breadcumb a i {
+.rawdata-browser-breadcrumb a i.icon-remove {
   padding-left: 6px;
   font-size: 9px;
 }
-.rawdata-browser-breadcumb .divider {
+.rawdata-browser-breadcrumb .divider {
   color: #777;
   padding-right: 3px;
   font-size: 12px;
