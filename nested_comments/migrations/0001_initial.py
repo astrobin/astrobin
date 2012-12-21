@@ -15,14 +15,10 @@ class Migration(SchemaMigration):
             ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
             ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('text', self.gf('django.db.models.fields.TextField')()),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('parent', self.gf('mptt.fields.TreeForeignKey')(blank=True, related_name='children', null=True, to=orm['nested_comments.NestedComment'])),
+            ('created', self.gf('django.db.models.fields.DateTimeField')()),
+            ('updated', self.gf('django.db.models.fields.DateTimeField')()),
+            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='children', null=True, to=orm['nested_comments.NestedComment'])),
             ('deleted', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('lft', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
-            ('rght', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
-            ('tree_id', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
-            ('level', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
         ))
         db.send_create_signal('nested_comments', ['NestedComment'])
 
@@ -88,17 +84,13 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'NestedComment'},
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {}),
             'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "'children'", 'null': 'True', 'to': "orm['nested_comments.NestedComment']"}),
-            'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'children'", 'null': 'True', 'to': "orm['nested_comments.NestedComment']"}),
             'text': ('django.db.models.fields.TextField', [], {}),
-            'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
+            'updated': ('django.db.models.fields.DateTimeField', [], {})
         }
     }
 

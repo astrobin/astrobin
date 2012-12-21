@@ -8,14 +8,14 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding field 'RawImage.camera'
-        db.add_column('rawdata_rawimage', 'camera', self.gf('django.db.models.fields.CharField')(max_length=128, null=True, blank=True), keep_default=False)
+        # Changing field 'Image.subject_type'
+        db.alter_column('astrobin_image', 'subject_type', self.gf('django.db.models.fields.IntegerField')())
 
 
     def backwards(self, orm):
         
-        # Deleting field 'RawImage.camera'
-        db.delete_column('rawdata_rawimage', 'camera')
+        # Changing field 'Image.subject_type'
+        db.alter_column('astrobin_image', 'subject_type', self.gf('django.db.models.fields.IntegerField')(null=True))
 
 
     models = {
@@ -33,9 +33,41 @@ class Migration(SchemaMigration):
             'timestamp': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'verb': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
+        'astrobin.abpod': {
+            'Meta': {'object_name': 'ABPOD'},
+            'date': ('django.db.models.fields.DateTimeField', [], {}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Image']", 'unique': 'True'})
+        },
         'astrobin.accessory': {
             'Meta': {'ordering': "('-updated',)", 'object_name': 'Accessory', '_ormbases': ['astrobin.Gear']},
             'gear_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['astrobin.Gear']", 'unique': 'True', 'primary_key': 'True'})
+        },
+        'astrobin.acquisition': {
+            'Meta': {'object_name': 'Acquisition'},
+            'date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Image']"})
+        },
+        'astrobin.app': {
+            'Meta': {'ordering': "['-created']", 'object_name': 'App'},
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'key': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '256', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
+            'registrar': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'app_api_key'", 'to': "orm['auth.User']"}),
+            'secret': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '256', 'blank': 'True'})
+        },
+        'astrobin.appapikeyrequest': {
+            'Meta': {'ordering': "['-created']", 'object_name': 'AppApiKeyRequest'},
+            'approved': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
+            'registrar': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'app_api_key_request'", 'to': "orm['auth.User']"})
         },
         'astrobin.camera': {
             'Meta': {'ordering': "('-updated',)", 'object_name': 'Camera', '_ormbases': ['astrobin.Gear']},
@@ -44,6 +76,20 @@ class Migration(SchemaMigration):
             'sensor_height': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '6', 'decimal_places': '2', 'blank': 'True'}),
             'sensor_width': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '6', 'decimal_places': '2', 'blank': 'True'}),
             'type': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
+        },
+        'astrobin.comment': {
+            'Meta': {'object_name': 'Comment'},
+            'added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'comment': ('django.db.models.fields.TextField', [], {}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Image']"}),
+            'is_deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "'children'", 'null': 'True', 'to': "orm['astrobin.Comment']"}),
+            'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'})
         },
         'astrobin.commercialgear': {
             'Meta': {'ordering': "['created']", 'object_name': 'CommercialGear'},
@@ -82,6 +128,35 @@ class Migration(SchemaMigration):
             'tagline_tr': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
+        'astrobin.deepsky_acquisition': {
+            'Meta': {'ordering': "['-saved_on', 'filter']", 'object_name': 'DeepSky_Acquisition', '_ormbases': ['astrobin.Acquisition']},
+            'acquisition_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['astrobin.Acquisition']", 'unique': 'True', 'primary_key': 'True'}),
+            'advanced': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'bias': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'binning': ('django.db.models.fields.IntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
+            'bortle': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'darks': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'duration': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'filter': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Filter']", 'null': 'True', 'blank': 'True'}),
+            'flat_darks': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'flats': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'gain': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'is_synthetic': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'iso': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'mean_fwhm': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'mean_sqm': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'number': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'saved_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
+            'sensor_cooling': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'temperature': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '5', 'decimal_places': '2', 'blank': 'True'})
+        },
+        'astrobin.favorite': {
+            'Meta': {'ordering': "('-created',)", 'object_name': 'Favorite'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Image']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+        },
         'astrobin.filter': {
             'Meta': {'ordering': "('-updated',)", 'object_name': 'Filter', '_ormbases': ['astrobin.Gear']},
             'bandwidth': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '6', 'decimal_places': '2', 'blank': 'True'}),
@@ -102,6 +177,54 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'retailed': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['astrobin.RetailedGear']", 'symmetrical': 'False'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'})
+        },
+        'astrobin.gearassistedmerge': {
+            'Meta': {'object_name': 'GearAssistedMerge'},
+            'cutoff': ('django.db.models.fields.DecimalField', [], {'default': '0', 'max_digits': '3', 'decimal_places': '2'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'master': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'assisted_master'", 'null': 'True', 'to': "orm['astrobin.Gear']"}),
+            'slave': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'assisted_slave'", 'null': 'True', 'to': "orm['astrobin.Gear']"})
+        },
+        'astrobin.gearcomment': {
+            'Meta': {'object_name': 'GearComment'},
+            'added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'comment': ('django.db.models.fields.TextField', [], {}),
+            'gear': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Gear']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "'children'", 'null': 'True', 'to': "orm['astrobin.GearComment']"}),
+            'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'})
+        },
+        'astrobin.gearhardmergeredirect': {
+            'Meta': {'object_name': 'GearHardMergeRedirect'},
+            'fro': ('django.db.models.fields.IntegerField', [], {}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'to': ('django.db.models.fields.IntegerField', [], {})
+        },
+        'astrobin.gearmakeautorename': {
+            'Meta': {'object_name': 'GearMakeAutoRename'},
+            'rename_from': ('django.db.models.fields.CharField', [], {'max_length': '128', 'primary_key': 'True'}),
+            'rename_to': ('django.db.models.fields.CharField', [], {'max_length': '128'})
+        },
+        'astrobin.gearuserinfo': {
+            'Meta': {'unique_together': "(('gear', 'user'),)", 'object_name': 'GearUserInfo'},
+            'alias': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
+            'comment': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'gear': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Gear']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+        },
+        'astrobin.globalstat': {
+            'Meta': {'ordering': "['-date']", 'object_name': 'GlobalStat'},
+            'date': ('django.db.models.fields.DateField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'images': ('django.db.models.fields.IntegerField', [], {}),
+            'integration': ('django.db.models.fields.IntegerField', [], {}),
+            'users': ('django.db.models.fields.IntegerField', [], {})
         },
         'astrobin.image': {
             'Meta': {'ordering': "('-uploaded', '-id')", 'object_name': 'Image'},
@@ -158,6 +281,33 @@ class Migration(SchemaMigration):
             'watermark_position': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'watermark_text': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'})
         },
+        'astrobin.imageoftheday': {
+            'Meta': {'ordering': "['-date']", 'object_name': 'ImageOfTheDay'},
+            'date': ('django.db.models.fields.DateField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'filename': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'image_of_the_day'", 'to': "orm['astrobin.Image']"})
+        },
+        'astrobin.imagerequest': {
+            'Meta': {'ordering': "['-created']", 'object_name': 'ImageRequest', '_ormbases': ['astrobin.Request']},
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Image']"}),
+            'request_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['astrobin.Request']", 'unique': 'True', 'primary_key': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '8'})
+        },
+        'astrobin.imagerevision': {
+            'Meta': {'ordering': "('uploaded', '-id')", 'object_name': 'ImageRevision'},
+            'filename': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
+            'h': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Image']"}),
+            'is_final': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_solved': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_stored': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'label': ('django.db.models.fields.CharField', [], {'max_length': '1'}),
+            'original_ext': ('django.db.models.fields.CharField', [], {'max_length': '6'}),
+            'uploaded': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'w': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+        },
         'astrobin.location': {
             'Meta': {'object_name': 'Location'},
             'altitude': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
@@ -176,11 +326,33 @@ class Migration(SchemaMigration):
             'state': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.UserProfile']", 'null': 'True'})
         },
+        'astrobin.messiermarathon': {
+            'Meta': {'ordering': "('messier_number',)", 'object_name': 'MessierMarathon'},
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Image']"}),
+            'messier_number': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'})
+        },
+        'astrobin.messiermarathonnominations': {
+            'Meta': {'ordering': "('messier_number', 'nominations')", 'unique_together': "(('messier_number', 'image'),)", 'object_name': 'MessierMarathonNominations'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['astrobin.Image']"}),
+            'messier_number': ('django.db.models.fields.IntegerField', [], {}),
+            'nominations': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'nominators': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'null': 'True', 'symmetrical': 'False'})
+        },
         'astrobin.mount': {
             'Meta': {'ordering': "('-updated',)", 'object_name': 'Mount', '_ormbases': ['astrobin.Gear']},
             'gear_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['astrobin.Gear']", 'unique': 'True', 'primary_key': 'True'}),
             'max_payload': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '6', 'decimal_places': '2', 'blank': 'True'}),
             'pe': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '6', 'decimal_places': '2', 'blank': 'True'})
+        },
+        'astrobin.request': {
+            'Meta': {'ordering': "['-created']", 'object_name': 'Request'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'from_user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'requester'", 'to': "orm['auth.User']"}),
+            'fulfilled': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'message': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'to_user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'requestee'", 'to': "orm['auth.User']"})
         },
         'astrobin.retailedgear': {
             'Meta': {'ordering': "['created']", 'object_name': 'RetailedGear'},
@@ -197,6 +369,19 @@ class Migration(SchemaMigration):
             'gear_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['astrobin.Gear']", 'unique': 'True', 'primary_key': 'True'}),
             'type': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
         },
+        'astrobin.solarsystem_acquisition': {
+            'Meta': {'object_name': 'SolarSystem_Acquisition', '_ormbases': ['astrobin.Acquisition']},
+            'acquisition_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['astrobin.Acquisition']", 'unique': 'True', 'primary_key': 'True'}),
+            'cmi': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'cmii': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'cmiii': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'focal_length': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'fps': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '12', 'decimal_places': '5', 'blank': 'True'}),
+            'frames': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'seeing': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'time': ('django.db.models.fields.CharField', [], {'max_length': '5', 'null': 'True', 'blank': 'True'}),
+            'transparency': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
+        },
         'astrobin.subject': {
             'Meta': {'object_name': 'Subject'},
             'catalog': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'}),
@@ -210,6 +395,14 @@ class Migration(SchemaMigration):
             'oid': ('django.db.models.fields.IntegerField', [], {}),
             'otype': ('django.db.models.fields.CharField', [], {'max_length': '16', 'null': 'True', 'blank': 'True'}),
             'ra': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '8', 'decimal_places': '5', 'blank': 'True'})
+        },
+        'astrobin.subjectidentifier': {
+            'Meta': {'object_name': 'SubjectIdentifier'},
+            'catalog': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'identifier': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '64'}),
+            'name': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '64'}),
+            'subject': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'idlist'", 'to': "orm['astrobin.Subject']"})
         },
         'astrobin.telescope': {
             'Meta': {'ordering': "('-updated',)", 'object_name': 'Telescope', '_ormbases': ['astrobin.Gear']},
@@ -298,56 +491,6 @@ class Migration(SchemaMigration):
             'score': ('django.db.models.fields.IntegerField', [], {}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'votes'", 'null': 'True', 'to': "orm['auth.User']"})
         },
-        'rawdata.privatesharedfolder': {
-            'Meta': {'ordering': "('-updated',)", 'object_name': 'PrivateSharedFolder'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'archive': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['rawdata.TemporaryArchive']", 'null': 'True'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'creator': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'privatesharedfolders_created'", 'to': "orm['auth.User']"}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'images': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['rawdata.RawImage']", 'null': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'processed_images': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['astrobin.Image']", 'null': 'True', 'blank': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'users': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'privatesharedfolders_invited'", 'symmetrical': 'False', 'to': "orm['auth.User']"})
-        },
-        'rawdata.publicdatapool': {
-            'Meta': {'ordering': "('-updated',)", 'object_name': 'PublicDataPool'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'archive': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['rawdata.TemporaryArchive']", 'null': 'True'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'creator': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'images': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['rawdata.RawImage']", 'null': 'True', 'symmetrical': 'False'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '128'}),
-            'processed_images': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['astrobin.Image']", 'null': 'True', 'symmetrical': 'False'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
-        },
-        'rawdata.rawimage': {
-            'Meta': {'ordering': "('-uploaded',)", 'object_name': 'RawImage'},
-            'acquisition_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'camera': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image_type': ('django.db.models.fields.IntegerField', [], {'default': '0', 'max_length': '1'}),
-            'indexed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'original_filename': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
-            'size': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'uploaded': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
-        },
-        'rawdata.temporaryarchive': {
-            'Meta': {'object_name': 'TemporaryArchive'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'size': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
-        },
         'reviews.revieweditem': {
             'Meta': {'ordering': "('date_added',)", 'object_name': 'ReviewedItem'},
             'content': ('django.db.models.fields.TextField', [], {}),
@@ -361,4 +504,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['rawdata']
+    complete_apps = ['astrobin']
