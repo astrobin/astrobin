@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 
 # Third party apps
 from actstream import action as act
+from rest_framework.authtoken.models import Token
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
@@ -75,6 +76,11 @@ def rawdata_publicdatapool_post_save(sender, instance, created, **kwargs):
     verb = "created a new public data pool"
     if created:
         act.send(instance.creator, verb = verb, target = instance)
+
+
+def create_auth_token(sender, instance, created, **kwargs):
+    if created:
+        Token.objects.get_or_create(user = instance)
 
 
 def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
@@ -170,6 +176,7 @@ def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, mo
 
 post_save.connect(nested_comment_post_save, sender = NestedComment)
 post_save.connect(rawdata_publicdatapool_post_save, sender = PublicDataPool)
+post_save.connect(create_auth_token, sender = User)
 
 m2m_changed.connect(rawdata_publicdatapool_data_added, sender = PublicDataPool.images.through)
 m2m_changed.connect(rawdata_publicdatapool_image_added, sender = PublicDataPool.processed_images.through)

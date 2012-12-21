@@ -231,6 +231,7 @@ INSTALLED_APPS = (
     'subscription',
     'ember',
     'rest_framework',
+    'rest_framework.authtoken',
 )
 
 LOGIN_REDIRECT_URL = '/'
