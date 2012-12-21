@@ -8,12 +8,20 @@ from django.views.generic import (
 )
 from django.views.generic.edit import BaseDeleteView
 
+# Third party apps
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework import permissions
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
 
 # This app
 from rawdata.folders import *
 from rawdata.forms import RawImageUploadForm
 from rawdata.mixins import RestrictToSubscriberMixin
 from rawdata.models import RawImage
+from rawdata.permissions import IsOwnerOrReadOnly, IsSubscriber
+from rawdata.serializers import RawImageSerializer
 from rawdata.utils import *
 from rawdata.zip import *
 
@@ -26,8 +34,7 @@ class RawImageCreateView(RestrictToSubscriberMixin, CreateView):
     def form_valid(self, form):
         raw_image = form.save(commit = False)
         raw_image.user = self.request.user
-        raw_image.size = form.cleaned_data['file']._size
-        raw_image.save(index = True)
+        raw_image.save()
 
         return super(RawImageCreateView, self).form_valid(form)
 
@@ -142,3 +149,30 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
 
         return context
 
+
+###############################################################################
+# API                                                                         #
+###############################################################################
+
+class RawImageList(generics.ListCreateAPIView):
+    model = RawImage
+    queryset = RawImage.objects.order_by('pk')
+    serializers_class = RawImageSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly,
+                          IsSubscriber,)
+
+    def pre_save(self, obj):
+        obj.user = self.request.user
+
+
+class RawImageDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = RawImage
+    serializers_class = RawImageSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly,
+                          IsSubscriber)
+
+    def pre_save(self, obj):
+        obj.user = self.request.user
+ 
