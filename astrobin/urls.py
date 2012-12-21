@@ -47,7 +47,8 @@ v1_api.register(CommentResource())
 v1_api.register(ImageOfTheDayResource())
 
 urlpatterns = patterns('',
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/v2/api-auth-token/', 'rest_framework.authtoken.views.obtain_auth_token'),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/common/', include('common.api_urls')),
 
