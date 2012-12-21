@@ -51,6 +51,7 @@ urlpatterns = patterns('',
     url(r'^api/v2/api-auth-token/', 'rest_framework.authtoken.views.obtain_auth_token'),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/common/', include('common.api_urls')),
+    url(r'^api/v2/rawdata/', include('rawdata.api_urls')),
 
     url(r'^rawdata/', include('rawdata.urls')),
 

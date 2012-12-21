@@ -39,6 +39,9 @@ DATABASES = {
         'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'], # Not used with sqlite3.
         'HOST': os.environ['ASTROBIN_DATABASE_HOST'],         # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                                           # Set to empty string for default. Not used with sqlite3.
+        'OPTIONS': {
+             "init_command": "SET foreign_key_checks = 0;",
+         },
     }
 }
 DEFAULT_CHARSET = 'utf-8'

@@ -5,6 +5,7 @@ from django.views.generic import *
 
 # This app
 import signal_handlers
+import signals
 from .views.rawimage import *
 from .views.temporaryarchive import *
 from .views.publicdatapools import *

@@ -60,6 +60,13 @@ class RawImage(models.Model):
     original_filename = models.CharField(
         max_length = 256,
         editable = False,
+        null = True,
+    )
+
+    original_path = models.CharField(
+        max_length = 512,
+        editable = False,
+        null = True,
     )
 
     size = models.IntegerField(
@@ -70,6 +77,7 @@ class RawImage(models.Model):
     uploaded = models.DateTimeField(
         auto_now_add = True,
         editable = False,
+        null = True,
     )
 
     indexed = models.BooleanField(
@@ -116,11 +124,8 @@ class RawImage(models.Model):
         return self.original_filename
 
     def save(self, *args, **kwargs):
-        index = kwargs.pop('index', False)
+        self.size = self.file.size
         super(RawImage, self).save(*args, **kwargs)
-        if index:
-            from .tasks import index_raw_image
-            index_raw_image.delay(self.id)
 
     def delete(self):
         self.active = False
