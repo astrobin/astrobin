@@ -2719,6 +2719,9 @@ table.rawdata-browser tr:hover .download-link,
 table.rawdata-browser tr:hover .delete-link {
   visibility: visible;
 }
+table.rawdata-browser td.filename {
+  font-size: 10px;
+}
 table.rawdata-browser td.actions {
   width: 102px;
   text-align: right;

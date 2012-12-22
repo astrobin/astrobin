@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load common_tags %}
 
 {% block title %}AstroBin - {% blocktrans %}Share on a private folder{% endblocktrans %}{% endblock %}
 
@@ -25,7 +26,9 @@
                     {% for image in images %}
                         <tr id="{{image.id}}" class="rawfile">
                             <td class="icon"><i class="icon-file"></i></td>
-                            <td>{{image.original_filename}}</td>
+                            <td class="filename" rel="tooltip" title="{{image.original_filename}}">
+                                {{image.original_filename|truncatechars:"40"}}
+                            </td>
                             <td>{{image.size|filesizeformat}}</td>
                             <td>
                                 <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
