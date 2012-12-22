@@ -11,7 +11,11 @@
     </div>
 
     <div class="row section">
-        <div class="span4 offset2">
+        <div class="span4">
+            {% include 'rawdata/_screenshot_tour.html' %}
+        </div>
+
+        <div class="span4">
             <h3>{% trans "Sharing is loving." %}</h3>
             <p>{% blocktrans %}Optionally, you can share your raw data with a friend, or why not, your entire astronomy club! This will make it really easy to collaborate on that massive <strong>100 integration hours</strong> project you've been meaning to complete. {% endblocktrans %}</p>
 
@@ -37,4 +41,8 @@
             </li>
         </ul>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    {% include 'rawdata/_screenshot_tour_js.html' %}
 {% endblock %}

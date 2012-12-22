@@ -11,7 +11,11 @@
     </div>
 
     <div class="row section">
-        <div class="span4 offset2">
+        <div class="span4">
+            {% include 'rawdata/_screenshot_tour.html' %}
+        </div>
+
+        <div class="span4">
             <h3>{% trans "What is AstroBin Raw Data?" %}</h3>
             <p>{% blocktrans %}You already love AstroBin because of how it keeps your images organized. Thanks to it, you will never have to worry about losing your precious work, nor all the important meta-data associated with it.{% endblocktrans %}</p>
             
@@ -37,4 +41,8 @@
             </li>
         </ul>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    {% include 'rawdata/_screenshot_tour_js.html' %}
 {% endblock %}

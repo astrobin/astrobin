@@ -11,7 +11,11 @@
     </div>
 
     <div class="row section">
-        <div class="span4 offset2">
+        <div class="span4">
+            {% include 'rawdata/_screenshot_tour.html' %}
+        </div>
+
+        <div class="span4">
             <h3>{% trans "How does it work?" %}</h3>
             <p>{% blocktrans %}You can have up to <strong>500 GB</strong> to store your <strong>FIT</strong> and <strong>digital camera raw</strong> files.{% endblocktrans %}</p>
             
@@ -50,4 +54,8 @@
             </li>
         </ul>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    {% include 'rawdata/_screenshot_tour_js.html' %}
 {% endblock %}

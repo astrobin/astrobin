@@ -349,6 +349,8 @@ PIPELINE_CSS = {
             'css/jquery.multiselect.css',
             'css/jquery.qtip.css',
 
+            'common/css/jquery.lightbox-0.5.css',
+
             'css/reset.css',
             'css/bootstrap.css',
             'css/bootstrap-responsive.css',
@@ -367,6 +369,7 @@ PIPELINE_JS = {
             'common/js/jquery-1.8.3.js',
             'common/js/handlebars-1.0.rc.1.js',
             'common/js/ember-1.0.0-pre.2.js',
+            'common/js/jquery.lightbox-0.5.js',
 
             'js/jquery.i18n.js',
             'js/plugins/localization/jquery.localisation.js',
