@@ -1,5 +1,9 @@
+# Django
 from django import template
 from django.template import Library, Node
+from django.template.defaultfilters import stringfilter
+from django.utils.encoding import force_unicode
+from django.utils.functional import allow_lazy
 from django.utils.safestring import mark_safe
 
 register = Library()
@@ -117,4 +121,31 @@ def string_to_list(string):
             if arg == '': continue
             args.append(arg)
     return args
+
+
+def truncate_chars(s, num):
+    s = force_unicode(s)
+    length = int(num)
+    if len(s) > length:
+        length = length - 3
+        s = s[:length].strip()
+        s += '...'
+    return s
+truncate_chars = allow_lazy(truncate_chars, unicode)
+
+
+@register.filter
+def truncatechars(value, arg):
+    """
+    Truncates a string after a certain number of characters, but respects word boundaries.
+    
+    Argument: Number of characters to truncate after.
+    """
+    try:
+        length = int(arg)
+    except ValueError: # If the argument is not a valid integer.
+        return value # Fail silently.
+    return truncate_chars(value, length)
+truncatechars.is_safe = True
+truncatechars = stringfilter(truncatechars)
 

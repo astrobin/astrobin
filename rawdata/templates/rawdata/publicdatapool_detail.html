@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load tags %} {% comment %} AstroBin tags {% endcomment %}
+{% load common_tags %}
 
 {% block title %}AstroBin - {% blocktrans %}Public data pool{% endblocktrans %} - {{object}}{% endblock %}
 
@@ -68,7 +69,9 @@
                     {% for image in object.images.all %}
                         <tr id="{{image.id}}" class="rawfile">
                             <td class="counter">{{forloop.counter}}</td>
-                            <td>{{image.original_filename}}</td>
+                            <td class="filename" rel="tooltip" title="{{image.original_filename}}">
+                                {{image.original_filename|truncatechars:40}}
+                            </td>
                             <td><a href="{% url user_page image.user %}">{{image.user}}</td>
                             <td>{{image.size|filesizeformat}}</td>
                             <td>

@@ -2,6 +2,7 @@
 {% load tags %}
 {% load inbox %}
 {% load compressed %}
+{% load common_tags %}
 
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
