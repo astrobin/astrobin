@@ -221,7 +221,7 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 				lastCall	= now;
 			}
 										
-			for( var i in mediastyles ){
+			for( var i = 0; i < mediastyles.length; i++ ){
 				var thisstyle = mediastyles[ i ],
 					min = thisstyle.minw,
 					max = thisstyle.maxw,
@@ -246,14 +246,14 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 			}
 			
 			//remove any existing respond style element(s)
-			for( var i in appendedEls ){
+			for( var i = 0; i < appendedEls.length; i++ ){
 				if( appendedEls[ i ] && appendedEls[ i ].parentNode === head ){
 					head.removeChild( appendedEls[ i ] );
 				}
 			}
 			
 			//inject active styles, grouped by media type
-			for( var i in styleBlocks ){
+			for( var i = 0; i < styleBlocks.length; i++ ){
 				var ss		= doc.createElement( "style" ),
 					css		= styleBlocks[ i ].join( "\n" );
 				
