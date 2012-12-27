@@ -1,9 +1,15 @@
+# Python
+import tempfile, zipfile
+
+# Django
+from django.core.files import File
+
 # Third party apps
 from celery.task import task
 import PyABC as abc
 
 # This app
-from .models import RawImage
+from .models import RawImage, TemporaryArchive
 
 @task()
 def index_raw_image(id):
@@ -23,3 +29,24 @@ def index_raw_image(id):
     image.indexed = True
     image.save()
     
+
+@task()
+def prepare_zip(images, owner, temp_archive, folder_or_pool = None):
+    temp = tempfile.NamedTemporaryFile()
+    archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
+    for image in images:
+        if not image.active:
+            continue
+        archive.write(image.file.path, image.original_filename)
+
+    archive.close()
+
+    size = sum([x.file_size for x in archive.infolist()])
+    temp_archive.size = size
+    temp_archive.file.save('', File(temp))
+    temp_archive.ready = True
+    temp_archive.save()
+
+    if folder_or_pool:
+        folder_or_pool.archive = temp_archive
+        folder_or_pool.save()

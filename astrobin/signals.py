@@ -10,7 +10,12 @@ from rest_framework.authtoken.models import Token
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
-from rawdata.models import RawImage, PublicDataPool, PrivateSharedFolder
+from rawdata.models import (
+    PrivateSharedFolder,
+    PublicDataPool,
+    RawImage,
+    TemporaryArchive,
+)
 
 # This app
 from .notifications import push_notification

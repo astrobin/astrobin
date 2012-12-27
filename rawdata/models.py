@@ -155,6 +155,11 @@ class TemporaryArchive(models.Model):
         editable = False,
     )
 
+    ready = models.BooleanField(
+        default = False,
+        editable = False,
+    )
+
     active = models.BooleanField(
         default = True,
         editable = False,

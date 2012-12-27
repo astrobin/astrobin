@@ -56,7 +56,7 @@ class RawImageDownloadView(RestrictToSubscriberMixin, base.View):
         if not images:
             raise Http404
 
-        response, archive = serve_zip(images, self.request.user)
+        response = serve_zip(images, self.request.user)
         return response
 
 

@@ -120,10 +120,7 @@ class PublicDataPoolDownloadView(RestrictToSubscriberMixin, base.View):
                 reverse('rawdata.temporary_archive_detail',
                         args=(pool.archive.pk,)))
 
-        response, archive = serve_zip(pool.images.all(), self.request.user)
-        pool.archive = archive
-        pool.save()
-
+        response = serve_zip(pool.images.all(), self.request.user, pool)
         return response
 
 
