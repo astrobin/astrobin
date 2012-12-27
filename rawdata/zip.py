@@ -10,13 +10,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 # This app
 from .models import TemporaryArchive
 
-# https://code.djangoproject.com/ticket/6027
-class FixedFileWrapper(FileWrapper):
-    def __iter__(self):
-        self.filelike.seek(0)
-        return self
 
-def serve_zip(images, owner, force_file = False):
+def serve_zip(images, owner):
     temp = tempfile.NamedTemporaryFile()
     archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
     for image in images:
@@ -26,23 +21,13 @@ def serve_zip(images, owner, force_file = False):
 
     archive.close()
 
-    response = None
     size = sum([x.file_size for x in archive.infolist()])
-    if size < 16*1024*1024 and not force_file:
-        wrapper = FixedFileWrapper(temp)
-        response = HttpResponse(wrapper, content_type='application/zip')
-        response['Content-Disposition'] = 'attachment; filename=rawdata.zip'
-        response['Content-Length'] = temp.tell()
-        temp.seek(0)
-    else:
-        t = TemporaryArchive(
-            user = owner,
-            size = size,
-        )
-        t.file.save('', File(temp))
-        t.save()
-        response = HttpResponseRedirect(
-            reverse('rawdata.temporary_archive_detail', args = (t.pk,)))
-        return response, t
-
-    return response, None
+    t = TemporaryArchive(
+        user = owner,
+        size = size,
+    )
+    t.file.save('', File(temp))
+    t.save()
+    response = HttpResponseRedirect(
+        reverse('rawdata.temporary_archive_detail', args = (t.pk,)))
+    return response, t
