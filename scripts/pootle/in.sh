@@ -10,6 +10,6 @@ do
 done
 
 echo "Updating Pootle..."
-../astrobin/venv/bin/python ./manage.py update_stores
+./manage.py update_stores
 
 echo "Done."
