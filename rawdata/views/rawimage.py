@@ -56,18 +56,6 @@ class RawImageDownloadView(RestrictToSubscriberMixin, base.View):
         if not images:
             raise Http404
 
-        if len(images) == 1:
-            image = images[0]
-
-            if not image.active:
-                raise Http404
-
-            wrapper = FixedFileWrapper(file(image.file.path))
-            response = HttpResponse(wrapper, content_type = 'application/octet-stream')
-            response['Content-Disposition'] = 'attachment; filename=%s' % image.original_filename
-            response['Content-Length'] = image.size
-            return response
-
         response, archive = serve_zip(images, self.request.user)
         return response
 
