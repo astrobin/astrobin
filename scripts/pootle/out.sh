@@ -4,7 +4,7 @@ FROM='po/astrobin/'
 TO='../astrobin/astrobin/locale/'
 
 echo "Syncing Pootle files to disk..."
-../astrobin/venv/bin/python ./manage.py sync_stores
+./manage.py sync_stores
 
 for lang in $LANGS
 do
