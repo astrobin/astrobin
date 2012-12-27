@@ -843,10 +843,10 @@ def image_detail(request, id, r):
                      'plot_overlay_left' : (settings.RESIZED_IMAGE_SIZE - image.w) / 2 if image.w < settings.RESIZED_IMAGE_SIZE else 0,
 
                      'select_datapool_form': PublicDataPool_SelectExistingForm(),
-                     'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = request.user),
+                     'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = request.user) if request.user.is_authenticated() else None,
                      'has_sharedfolders': PrivateSharedFolder.objects.filter(
                         Q(creator = request.user) |
-                        Q(users = request.user)).count() > 0,
+                        Q(users = request.user)).count() > 0 if request.user.is_authenticated() else False,
                     }
 
     return object_detail(
