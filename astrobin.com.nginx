@@ -35,6 +35,7 @@ server {
 
 server {
     listen 80 default;
+    listen 443 default ssl;
     client_max_body_size 4G;
     server_name www.astrobin.com;
 
@@ -42,6 +43,9 @@ server {
 
     access_log /var/log/nginx/astrobin.com-access.log;
     error_log /var/log/nginx/astrobin.com-error.log;
+
+    ssl_certificate      /etc/nginx/server.crt;
+    ssl_certificate_key  /etc/nginx/server.key;
 
     keepalive_timeout 5;
     proxy_read_timeout 1200;
