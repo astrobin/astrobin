@@ -24,7 +24,7 @@ $(function() {
             this.objectId = $(this.rootElement).attr('data-object-id');
 
             this.markdownConverter = new Markdown.Converter();
-        },
+        }
     });
 
 
@@ -245,7 +245,7 @@ $(function() {
             var self = this,
                 data = {
                     'content_type': nc_app.contentTypeId,
-                    'object_id': nc_app.objectId,
+                    'object_id': nc_app.objectId
                 };
 
             self.fetchComments(nc_app.commentsApiUrl, data);
@@ -271,7 +271,7 @@ $(function() {
             return data;
         },
 
-        delete: function(comment) {
+        delete_: function(comment) {
             $.ajax({
                 type: 'delete',
                 url: nc_app.commentsApiUrl + comment.get('id') + '/',
@@ -396,7 +396,7 @@ $(function() {
 
     nc_app.CommentsView = Em.View.extend({
         templateName: 'comments',
-        classNames: ['comments'],
+        classNames: ['comments']
     });
 
 
@@ -457,8 +457,8 @@ $(function() {
             this.set('collapsed', false);
         },
 
-        delete: function() {
-            nc_app.get('router.commentsController').delete(this.get('node'));
+        delete_: function() {
+            nc_app.get('router.commentsController').delete_(this.get('node'));
         },
 
         undelete: function() {
