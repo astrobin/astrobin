@@ -11,12 +11,12 @@ READONLY_MODE = False
 MEDIA_VERSION = '34'
 
 ADMINS = (
-    ('Salvatore Iovene at AstroBin', 'astrobin@astrobin.com'),
+    ('Salvatore Iovene', 'salvatore@astrobin.com'),
 )
 
 MANAGERS = ADMINS
-SERVER_EMAIL = 'astrobin@astrobin.com'
-DEFAULT_FROM_EMAIL = 'AstroBin <astrobin@astrobin.com>'
+SERVER_EMAIL = 'noreply@astrobin.com'
+DEFAULT_FROM_EMAIL = 'AstroBin <noreply@astrobin.com>'
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_SUBJECT_PREFIX = '[AstroBin]'
