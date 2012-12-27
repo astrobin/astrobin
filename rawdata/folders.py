@@ -29,9 +29,11 @@ class BaseFolderFactory(object):
 
         filter_acquisition = params.get('acquisition')
         if filter_acquisition:
-            self.source = self.source.filter(
-                Q(acquisition_date__gte = datetime.strptime(filter_acquisition, '%Y-%m-%d')) &
-                Q(acquisition_date__lte = datetime.strptime(filter_acquisition, '%Y-%m-%d') + timedelta(days=1)))
+            self.source = self.source\
+                .filter(
+                    Q(acquisition_date__gte = datetime.strptime(filter_acquisition, '%Y-%m-%d')) &
+                    Q(acquisition_date__lte = datetime.strptime(filter_acquisition, '%Y-%m-%d') +
+                                              timedelta(days=1)))
 
         filter_camera = params.get('camera')
         if filter_camera:
