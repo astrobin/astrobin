@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-13 07:59-0600\n"
-"PO-Revision-Date: 2012-11-12 21:08+0100\n"
+"PO-Revision-Date: 2012-12-07 17:59+0100\n"
 "Last-Translator: milosz <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -1047,7 +1047,7 @@ msgstr "Lokalizacje"
 
 #: forms.py:89
 msgid "This field is required."
-msgstr ""
+msgstr "To pole jest wymagane."
 
 #: forms.py:97 views.py:2288
 msgid ""
@@ -1352,23 +1352,29 @@ msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
+"Użyj tego pola, aby zaznaczyć, że produkt, do krórego rościsz sobie prawo, "
+"jest tym samym produkten (lub jego wariantem), do którego rościłeś sobie "
+"prawo wcześniej."
 
 #: forms.py:984 forms.py:1047
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
 msgstr ""
+"Nie możesz utworzyć więcej niż %d roszczeń. Rozważ zakup wyższego pakietu!"
 
 #: forms.py:995 forms.py:1066
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
+"Użyj tego pola, aby zaznaczyć, że produkt, którego stronę przyłączasz jest "
+"faktycznie tym samym produktem (lub jego wariantem), do którego rościłeś "
+"sobie prawo wcześniej."
 
 #: forms.py:1055
-#, fuzzy
 msgid "You have already claimed this product."
-msgstr "Już nominowałeś to zdjęcie"
+msgstr "Prawo do tego produktu rościłeś już wcześniej."
 
 #: locale_extras.py:4
 msgid "Recipient"
@@ -2883,7 +2889,7 @@ msgstr ""
 
 #: templates/503.html:5
 msgid "AstroBin is temporarily unavailable"
-msgstr ""
+msgstr "AstroBin jest tymczasowo niedostępne."
 
 #: templates/503.html:7
 msgid ""
@@ -2891,10 +2897,12 @@ msgid ""
 "maintenance, or probably a software upgrade. Usually this doesn't take more "
 "than 30 minutes."
 msgstr ""
+"Przepraszamy za utrudnienia, ale trwają prace konserwacyjne lub instalacja "
+"nowej wersji oprogramowania. Zwykle nie zajmuje to dłużej niż 30 minut."
 
 #: templates/503.html:10
 msgid "Come back soon!"
-msgstr ""
+msgstr "Za chwilę powrócimy!"
 
 #: templates/activities.html:8 templates/index.html:183
 msgid "Activity stream"
@@ -3696,6 +3704,13 @@ msgid ""
 "that the image received, to ensure that images with too few votes aren't "
 "rated better than images with similar rating, but lots of votes."
 msgstr ""
+"AstroBin używa dwóch technik żeby znormalizować oceny zdjęć. Po pierwsze "
+"algorytm <em>sigma-reject</em> jest stosowany do głosów, które zbytnio "
+"odbiegają od średniej. W ten sposób rozwiązuje się problem użytkowników, "
+"którzy nie głosują 'uczciwie'. Następnie oceny są interpolowane za pomocą "
+"hiperbolicznej funkcji liczby głosów, które otrzymało zdjęcie, aby upewnić "
+"się, że ocena zdjęć z małą liczbą głosów nie jest lepsza niż zdjęć z podobną "
+"średnią, ale większą liczbą głosów."
 
 #: templates/faq.html:183
 msgid ""
@@ -4386,6 +4401,11 @@ msgid ""
 "information (in fact it barely tries), and presents a series of flaws, that "
 "will be explained below."
 msgstr ""
+"Obecnie najbardziej popularną formą komunikacji społeczności astronomicznych "
+"są fora. To koncepcja, która ma ponad 20 lat, nie radzi sobie ze "
+"skalowaniem w przypadku wielkiej ilości informacji, nieefektywnie organizuje "
+"te informacje (w zasadzie ledwo się stara) i posiada szereg wad, które "
+"zostaną przedstawione poniżej."
 
 #: templates/questions.html:22
 msgid "What is AstroBin Questions?"
@@ -4409,10 +4429,13 @@ msgid ""
 "<strong>terribly</strong> dated, as a system, for today's Internet "
 "standards. Here's a series of flaws that AstroBin Questions fixes:"
 msgstr ""
+"Fora świetnie nadają się do rekreacyjnych dyskusji, ale są "
+"<strong>okropnie</strong> przestarzałe jako system w świetle obecnych "
+"standardów Internetu. Poniżej seria wad, które naprawiają Pytania AstroBin:"
 
 #: templates/questions.html:33
 msgid "Every post is flat"
-msgstr ""
+msgstr "Każdy post jest płaski"
 
 #: templates/questions.html:35
 msgid ""
@@ -4420,10 +4443,12 @@ msgid ""
 "the same post, because the only way to do it is by quoting somebody. Very "
 "soon this becomes a mess."
 msgstr ""
+"Ciężko w jednym poście angażować się w kilka dyskusji. Wymaga to cytowania i "
+"bardzo szybko staje się nieczytelne."
 
 #: templates/questions.html:40
 msgid "Every post has the same visibility"
-msgstr ""
+msgstr "Każdy post ma taką samą widoczność"
 
 #: templates/questions.html:42
 msgid ""
@@ -4435,10 +4460,17 @@ msgid ""
 "replies might be objectively wrong, and this will worsen the quality of the "
 "community."
 msgstr ""
+"Jeżeli na przykład zapytasz, czy potrzebujesz filtra słonecznego podczas "
+"obserwacji zaćmienia Słońca, a ja odpowiem <em>\"Nie, nie przejmuj się\"</em>, "
+"to jedynym sposobem, żeby unieważnić tą odpowiedź są odpowiedzi innych "
+"użytkowników, którzy wyjaśnią, jaki błąd został popełniony. To jednak nie "
+"gwarantuje, że ktoś nie spróbuje i nie straci wzroku. To przykład "
+"ekstremalny.  Próbuję przez to powiedzieć, że niektóre odpowiedzi mogą być "
+"obiektywnie złe, co pogarsza jakość wiedzy w społeczności."
 
 #: templates/questions.html:47
 msgid "Every user has the same importance"
-msgstr ""
+msgstr "Każdy użytkownik jest tak samo ważny"
 
 #: templates/questions.html:49
 msgid ""
@@ -4447,10 +4479,14 @@ msgid ""
 "this doesn't matter. My posts or post replies will look the same. This "
 "worsens the quality of the community."
 msgstr ""
+"Na forum nie ma znaczenia, czy opinię wygłasza Pan Nitk, który właśnie "
+"zrobił swoje pierwsze zdjęcie, czy profesjonalista z dwudziestoletnim "
+"starzem. Oba posty wyglądają tak samo. To pogarsza jakość wiedzy w "
+"społeczności."
 
 #: templates/questions.html:54
 msgid "Everything is static"
-msgstr ""
+msgstr "Wszystko jest statyczne"
 
 #: templates/questions.html:56
 msgid ""
@@ -4458,6 +4494,10 @@ msgid ""
 "and can't ask my question well, nobody can rephrase it. If I make a lot of "
 "typos, nobody can fix them. This is undesirable."
 msgstr ""
+"Jeżeli piszę jak siedmiolatek, nikt tego nie poprawi. Jeżeli słabo się "
+"komunikuję i nie potrafię jasno sformułować pytania, nikt mi nie pomoże. "
+"Jeżeli popełniam błędy ortograficzne, nikt ich nie porawi. To jest "
+"niepożądane."
 
 #: templates/questions.html:62
 msgid ""
@@ -4465,39 +4505,45 @@ msgid ""
 "highly interactive, wiki-capable website that <strong>you</strong> moderate, "
 "thanks to a system based on <em>karma points</em>."
 msgstr ""
+"Pytania AstroBin rozwiązują wszystkie te problemy dostarczając serwis, który "
+"jest redagowany przez społeczność, interaktywny, umożliwia formatowanie w "
+"stylu wikipedii. Serwis jest moderowany przez <strong>Was</strong> dzięki "
+"systemowi ocen bazującemu na <em>puntach karmy</em>."
 
 #: templates/questions.html:66
 msgid ""
 "Please join, and you can learn and teach about Astrophotography and "
 "Astronomy!"
 msgstr ""
+"Dołącz aby uczyć i zgłębiać wiedzę na temat astronomii i astrofotografii!"
 
 #: templates/questions.html:69
 msgid "Here's some more reading material to get you started"
-msgstr ""
+msgstr "Poniżej więcej materiałów które umożliwią łatwiejszy start."
 
 #: templates/questions.html:73
-#, fuzzy
 msgid "Frequently Asked Questions about AstroBin Questions"
-msgstr "Często Zadawane Pytania"
+msgstr "Często Zadawane Pytania na temat Pytań AstroBin"
 
 #: templates/questions.html:78
 msgid "AstroBin Questions' help page"
-msgstr ""
+msgstr "Strona pomocy Pytań AstroBin"
 
 #: templates/questions.html:83
 msgid "An extension of this page, as a question on AstroBin Questions"
-msgstr ""
+msgstr "Rozszerzenie tej strony jako pytanie w Pytaniach AstroBin"
 
 #: templates/questions.html:90
 msgid "Go to AstroBin Questions!"
-msgstr ""
+msgstr "Przejdź do Pytań AstroBin!"
 
 #: templates/questions.html:94
 msgid ""
 "PS: AstroBin Questions is only available in English, right now, but more "
 "languages will come soon."
 msgstr ""
+"PS: Pytania AstroBin są w tej chwili dostępne tylko po angielsku, ale "
+"kolejne wersje językowe pojawią się niebawem."
 
 #: templates/stats.html:10
 #, python-format
@@ -5266,34 +5312,32 @@ msgstr ""
 "jako preferowany."
 
 #: templates/image/detail.html:634
-#, fuzzy
 msgid "What is this?"
-msgstr "Czym jest AstroBin?"
+msgstr "Co to jest?"
 
 #: templates/image/detail.html:635
 msgid ""
 "This button will create a post on AstroBin Questions, in which you can ask "
 "for critique, review or analisys of your image."
 msgstr ""
+"Ten przycisk utworzy pytanie w Pytaniach AstroBin. Dzięki temu możesz "
+"poprosić o krytykę, recenzję lub analizę Twojego zdjęcia."
 
 #: templates/image/detail.html:635
-#, fuzzy
 msgid "Learn more about AstroBin Questions."
-msgstr "Często Zadawane Pytania"
+msgstr "Dowiedz się więcej na temat Pytań AstroBin."
 
 #: templates/image/detail.html:638
-#, fuzzy
 msgid "Request critique"
-msgstr "Poproś od"
+msgstr "Poproś o recenzję"
 
 #: templates/image/detail.html:645
-#, fuzzy
 msgid "Community bulletin"
-msgstr "Komentarz"
+msgstr "Biuletyn społeczności"
 
 #: templates/image/detail.html:647
 msgid "Introducing AstroBin Questions"
-msgstr ""
+msgstr "Przedstawiamy Pytania AstroBin"
 
 #: templates/image/detail.html:649
 #, python-format
@@ -5303,6 +5347,10 @@ msgid ""
 "communicate on the Internet. <a href=\"%(questions_url)s\">Want to know more?"
 "</a>"
 msgstr ""
+"Po zrewolucjonizowaniu sposobu w jaki astrofotografowie przechowują swoje "
+"prace, AstroBin rozpoczyna nową erę komunikacji pomiędzy astronomami w "
+"Internecie. <a href=\"%(questions_url)s\">Czy chcesz dowiedzieć się "
+"więcej?</a>"
 
 #: templates/image/detail.html:667 templates/image/detail.html.py:693
 msgid "Final"
@@ -5938,6 +5986,9 @@ msgid ""
 "your search using the <strong>Search type</strong> field in the "
 "<strong>Basic criteria</strong> box."
 msgstr ""
+"Wyszukiwarka znalazła wyniki różnych typów. Jeżeli chcesz, możesz zawęzić "
+"wyniki używając pola <strong>Typu wyszukiwania</strong> w sekcji "
+"<strong>Podstawowe kryteria</strong>."
 
 #: templates/inclusion_tags/search_image_list.html:40
 #: templates/inclusion_tags/search_image_list.html:91
@@ -6651,17 +6702,16 @@ msgstr ""
 "</a>"
 
 #: templates/openid_provider/decide.html:5
-#, fuzzy
 msgid "Allow external login"
-msgstr "Dopuść oceny"
+msgstr "Dopuść zewnętrzną autoryzację"
 
 #: templates/openid_provider/decide.html:7
 msgid "The following site has requested verification of your account:"
-msgstr ""
+msgstr "Następująca strona poprosiła o weryfikację Twojego konta:"
 
 #: templates/openid_provider/decide.html:13
 msgid "Verify"
-msgstr ""
+msgstr "Potwierdź"
 
 #: templates/popover/gear.html:9 templates/popover/gear_accessory.html:18
 #: templates/popover/gear_camera.html:22 templates/popover/gear_filter.html:20
@@ -6675,16 +6725,15 @@ msgstr "Znajdź zdjęcia"
 
 #: templates/popover/rating.html:12
 msgid "Average"
-msgstr ""
+msgstr "Średnia"
 
 #: templates/popover/rating.html:16
 msgid "Sigma-reject average"
-msgstr ""
+msgstr "Średnia sigma-reject"
 
 #: templates/popover/rating.html:20
-#, fuzzy
 msgid "AstroBin index"
-msgstr "AstroBin jest społecznościowy!"
+msgstr "Indeks AstroBin"
 
 #: templates/popover/rating.html:28
 msgid "Info"
@@ -7195,6 +7244,8 @@ msgid ""
 "Please remember that you are only allowed to claim items that you really "
 "produce and/or retail."
 msgstr ""
+"Pamiętaj, że możesz rościć sobie prawa tylko do produktów, które wytwarzasz "
+"i/lub sprzedajesz."
 
 #: templates/user/profile/commercial/products.html:32
 msgid "As producer"
@@ -7207,12 +7258,12 @@ msgstr "Identyfikatory sprzętu"
 
 #: templates/user/profile/commercial/products.html:95
 msgid "You haven't claimed any commercial products yet."
-msgstr ""
+msgstr "Nie rościłeś sobie jeszcze praw do żadnych produktów."
 
 #: templates/user/profile/commercial/products.html:97
 #, python-format
 msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr ""
+msgstr "%(user)s nie rościł sobie jeszcze praw do żadnych produktów."
 
 #: templates/user/profile/commercial/products.html:114
 msgid "As retailer"
@@ -7220,31 +7271,31 @@ msgstr "Jako sprzedawca"
 
 #: templates/user/profile/commercial/products.html:177
 msgid "You haven't claimed any retailed products yet."
-msgstr ""
+msgstr "Nie rościłeś sobie jeszcze praw do żadnych produktów."
 
 #: templates/user/profile/commercial/products.html:179
 #, python-format
 msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr ""
+msgstr "%(user)s nie rościł sobie jeszcze praw do żadnych produktów."
 
 #: templates/user/profile/commercial/products.html:196
 msgid "Claim as producer"
-msgstr ""
+msgstr "Zgłoś roszczenie jako producent"
 
 #: templates/user/profile/commercial/products.html:202
 msgid "Claim as retailer"
-msgstr ""
+msgstr "Zgłoś roszczenie jako sprzedawca"
 
 #: templates/user/profile/commercial/products.html:230
 msgid "Claim commercial product"
-msgstr ""
+msgstr "Zgłoś roszczenie do produktu"
 
 #: templates/user/profile/commercial/products.html:238
 #: templates/user/profile/commercial/products.html:312
 #: templates/user/profile/commercial/products.html:412
 #: templates/user/profile/commercial/products.html:739
 msgid "Claim"
-msgstr ""
+msgstr "Zgłoś roszczenie"
 
 #: templates/user/profile/commercial/products.html:247
 #: templates/user/profile/commercial/products.html:321
@@ -7253,7 +7304,7 @@ msgstr "Wybierz pozycje do usunięcia"
 
 #: templates/user/profile/commercial/products.html:251
 msgid "Be careful if you try to remove all of these!"
-msgstr ""
+msgstr "Bądź ostrożny, jeżeli będziesz chciał(a) usunąć wszystko!"
 
 #: templates/user/profile/commercial/products.html:252
 #: templates/user/profile/commercial/products.html:290
@@ -7261,6 +7312,8 @@ msgid ""
 "All the properties, including the commercial description, of this claim will "
 "be deleted and cannot be recovered!"
 msgstr ""
+"Wszystkie właściwości, łącznie z opisem, zostaną usunięte i nie będzie można "
+"ich przywrócić!"
 
 #: templates/user/profile/commercial/products.html:269
 #: templates/user/profile/commercial/products.html:339
@@ -7276,15 +7329,14 @@ msgstr "Czy jesteś pewny?"
 
 #: templates/user/profile/commercial/products.html:304
 msgid "Claim retailed product"
-msgstr ""
+msgstr "Zgłoś roszczenie do produktu"
 
 #: templates/user/profile/commercial/products.html:360
-#, fuzzy
 msgid ""
 "All the properties of this claim will be deleted and cannot be recovered!"
 msgstr ""
-"Ta wersja zostanie usunięta i nie będzie można jej przywrócić. Czy chcesz "
-"kontunuować?"
+"Wszystkie właściwości Twojego roszczenia zostaną usunięte i nie będzie można "
+"ich przywrócić!"
 
 #: templates/user/profile/commercial/products.html:417
 #: templates/user/profile/commercial/products.html:744
@@ -7296,9 +7348,8 @@ msgid "Edit your basic information"
 msgstr "Edytuj podstawowe dane"
 
 #: templates/user/profile/edit/commercial.html:6
-#, fuzzy
 msgid "Edit your commercial information"
-msgstr "Edytuj podstawowe dane"
+msgstr "Edytuj swoje informacje handlowe"
 
 #: templates/user/profile/edit/gear.html:6
 msgid "Edit your astrophotography gear"
@@ -7381,9 +7432,8 @@ msgid ""
 msgstr "Wybierz język oraz które powiadomienie e-mail chciałbyś/abyś otrzymać:"
 
 #: templates/user/profile/edit/retailer.html:6
-#, fuzzy
 msgid "Edit your retailer information"
-msgstr "Edytuj podstawowe dane"
+msgstr "Edytuj swoje informacje handlowe"
 
 #~ msgid "No image"
 #~ msgstr "Brak zdjęcia"

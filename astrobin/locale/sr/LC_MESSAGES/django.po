@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-13 11:13-0600\n"
-"PO-Revision-Date: 2012-11-16 14:45+0100\n"
+"PO-Revision-Date: 2012-11-25 18:36+0100\n"
 "Last-Translator: strugar <strugar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sr\n"
@@ -24,62 +24,50 @@ msgid "United Kingdom"
 msgstr "Velika Britanija"
 
 #: fields.py:11
-#, fuzzy
 msgid "Afghanistan"
 msgstr "Avganistan"
 
 #: fields.py:12
-#, fuzzy
 msgid "Aland Islands"
 msgstr "Ostrva Aland"
 
 #: fields.py:13
-#, fuzzy
 msgid "Albania"
 msgstr "Albanija"
 
 #: fields.py:14
-#, fuzzy
 msgid "Algeria"
 msgstr "Alžir"
 
 #: fields.py:15
-#, fuzzy
 msgid "American Samoa"
 msgstr "Američka Samoa"
 
 #: fields.py:16
-#, fuzzy
 msgid "Andorra"
 msgstr "Andora"
 
 #: fields.py:17
-#, fuzzy
 msgid "Angola"
 msgstr "Angola"
 
 #: fields.py:18
-#, fuzzy
 msgid "Anguilla"
-msgstr "Angila"
+msgstr "Angvila"
 
 #: fields.py:19
-#, fuzzy
 msgid "Antarctica"
 msgstr "Antarktik"
 
 #: fields.py:20
-#, fuzzy
 msgid "Antigua and Barbuda"
 msgstr "Antigva i Barbuda"
 
 #: fields.py:21
-#, fuzzy
 msgid "Argentina"
 msgstr "Argentina"
 
 #: fields.py:22
-#, fuzzy
 msgid "Armenia"
 msgstr "Jermenija"
 
@@ -3672,42 +3660,53 @@ msgid ""
 "This produces the \"AstroBin index\", which is a fairer way to compare "
 "images and users."
 msgstr ""
+"Odatle se dobija \"Astrobin\" indeks, koji predstavlja pošteniji način "
+"poređenja slika i korisnika."
 
 #: templates/faq.html:189
+#, fuzzy
 msgid ""
 "Do you have a question not covered here! Please <a href=\"/contact/"
 "\">contact us</a>!"
 msgstr ""
+"Imate li pitanje na koje ovde nije odgovoreno_! Molimo vas, <a "
+"href=\"/contact/\">kontaktirajte nas</a>!"
 
 #: templates/fits.html:12
 msgid ""
 "The authors of these images have been generous, and provided a link to the "
 "TIFF or FITS original files."
 msgstr ""
+"Autori ovih slika su bili velikodušni, i obezbedili su link ka originalnim "
+"TIFF ili FITS fajlovima."
 
 #: templates/guidelines.html:9
 msgid ""
 "AstroBin accounts are meant for members to share original images that they "
 "have created."
 msgstr ""
+"Nalozi na AstroBinu su namenjeni članovima, za deljenje originalnih slika "
+"koje su oni sami napravili."
 
 #: templates/guidelines.html:11
 msgid "What is allowed"
-msgstr ""
+msgstr "Šta je dozvoljeno"
 
 #: templates/guidelines.html:14
 msgid "Do upload content you have created yourself."
-msgstr ""
+msgstr "Uploadujte sadržaj koji ste napravili Vi sami."
 
 #: templates/guidelines.html:15
 msgid ""
 "Respect the copyright of others. Stealing images from other people and "
 "trying to pass them off as yours is not allowed on AstroBin."
 msgstr ""
+"Poštujte autorska prava drugih. Otimanje slika drugih ljudi i pokušaj da se "
+"prikažu kao Vaše nije dozvoljeno na AstroBinu."
 
 #: templates/guidelines.html:18
 msgid "Do fill in all the technical details you can."
-msgstr ""
+msgstr "Unesite sve tehničke detalje koje možete."
 
 #: templates/guidelines.html:19
 msgid ""
@@ -3715,22 +3714,27 @@ msgid ""
 "in a sea of chaos. As much as you can, please fill in the technical details "
 "of your images."
 msgstr ""
+"AstroBin se zasniva na ideji da su podaci značajni i da se ne mogu "
+"protraćiti u haotičnom moru. Molimo Vas da unesete tehničke detalje o Vašim "
+"slikama, koliko god je to moguće."
 
 #: templates/guidelines.html:22
 msgid "Be respectful of other users."
-msgstr ""
+msgstr "Poštujte druge korisnike."
 
 #: templates/guidelines.html:23
 msgid "Be nice and friendly to other users when you send them messages."
 msgstr ""
+"Budite ljubazni i prijateljski prema drugim korisnicima kada im šaljete "
+"poruke."
 
 #: templates/guidelines.html:26
 msgid "What is forbidden"
-msgstr ""
+msgstr "Šta je zabranjeno"
 
 #: templates/guidelines.html:29
 msgid "Don't upload anything that you don't hold the copyright for."
-msgstr ""
+msgstr "Nemojte da uploadujete ništa na šta nemate autorska prava."
 
 #: templates/guidelines.html:30
 msgid ""
@@ -3738,10 +3742,15 @@ msgid ""
 "Images taken with remote equipment and images taken with borrowed equipment "
 "are fine of course. What matters is that it was your work."
 msgstr ""
+"Jednostavno: nemojte da uploadujete sliku ako je niste Vi lično napravili. "
+"Slike napravljene pomoću daljinske opreme ili sa iznajmljenom opremom su, "
+"naravno, prihvatljive. Bitno je da je slika Vaših ruku delo."
 
 #: templates/guidelines.html:33
 msgid "No nudity, no explicitly sexual content, no illegal content."
 msgstr ""
+"Bez golotinje, bez eksplicitnog seksualnog sadržaja, bez nelegalnog "
+"sadržaja."
 
 #: templates/guidelines.html:34
 msgid ""
@@ -3749,10 +3758,14 @@ msgid ""
 "you upload any content that is illegal, porn or nudity. We also reserve the "
 "right to report you to the authorities, if we find it necessary."
 msgstr ""
+"Ukoliko uploadujete nelegalan, pornografski ili sadržaj u kome ima "
+"golotinje, Vaš nalog će biti trajno izbrisan, kao i Vaš sadržaj. Takođe "
+"zadržavamo pravo da Vas prijavimo vlastima, ukoliko budemo smatrali za "
+"neophodno."
 
 #: templates/guidelines.html:37
 msgid "Don't upload images that have nothing to do with astronomy."
-msgstr ""
+msgstr "Ne uploadujte slike koje nemaju ništa zajedničko sa astronomijom."
 
 #: templates/guidelines.html:38
 msgid ""
@@ -3760,16 +3773,23 @@ msgid ""
 "from your last vacation. Your account won't be deleted, but we will ask you "
 "to remove those pictures."
 msgstr ""
+"Slike Vaše opreme su prihvatljive, ali nemojte da uploadujete slike sa Vašeg "
+"zadnjeg odmora. Vaš nalog neće biti izbrisan, ali ćemo od Vas tražiti da "
+"uklonite te slike."
 
 #: templates/guidelines.html:41
 msgid "Don't use your account to host images for websites, banners or logos."
 msgstr ""
+"Nemojte da koristite svoj nalog da hostujete slike za web sajt, banere ili "
+"logoe."
 
 #: templates/guidelines.html:42
 msgid ""
 "Banners, logos, icons or other graphic elements that are not "
 "astrophotography are not allowed on AstroBin."
 msgstr ""
+"Baneri, logoi, ikone ili drugi grafički elementi koji ne spadaju u "
+"astrofotografiju nisu dozvoljeni na AstroBinu."
 
 #: templates/guidelines.html:46
 msgid ""
@@ -3777,6 +3797,9 @@ msgid ""
 "common sense\". If you feel you can't abide by them, please let us know what "
 "you feel is wrong."
 msgstr ""
+"Kao zaključak, ovi uslovi su samo način da se kaže \"molimo Vas da budete "
+"fini i koristite zdrav razum\". Ako ne možete da ih se pridržavate, molimo "
+"Vas da nam javite šta je po Vašem mišljenju pogrešno."
 
 #: templates/help.html:12
 msgid ""
@@ -3785,10 +3808,14 @@ msgid ""
 "numerous Astrophotography forums, I have found that the Internet is lacking "
 "a centralized place where astrophotographers can share their work."
 msgstr ""
+"Jeste li astrofotograf? Da li volite da dijelite rezultat Vašeg teškog rada "
+"sa drugima? S obzirom da sam i sam astrofotograf, i član brojnih "
+"astrofotografskih foruma, primetio sam da Internetu nedostaje centralizovano "
+"mesto gde astrofotografi mogu podeliti svoje radove."
 
 #: templates/help.html:14
 msgid "Well, this is finally over!"
-msgstr ""
+msgstr "Dakle, konačno je završeno!"
 
 #: templates/help.html:16
 msgid ""
@@ -3796,20 +3823,27 @@ msgid ""
 "ground up by an astrophotographer, and it provides means to people who want "
 "to share their astrophotographs."
 msgstr ""
+"<em>AstroBin</em> je tu da popuni prazninu. Ovo je web sajt izgrađen od "
+"temelja od strane astrofotografa, i pruža mogućnosti ljudima koji žele da "
+"podele svoje astrofotografije."
 
 #: templates/help.html:18
 msgid "So how is this different from any other image sharing websites?"
 msgstr ""
+"Na koji način se ovaj sajt razlikuje od bilo kog drugog sajta za deljenje "
+"fotografija?"
 
 #: templates/help.html:20
 msgid ""
 "<em>AstroBin</em> provides a number of features that are tailored "
 "specificlly to astrophotography. Here's a quick run down of the main ones:"
 msgstr ""
+"<em>AstroBin</em> ima brojne odlike, sazdane naročito za astrofotografiju. "
+"Evo brzog prikaza najvažnijih:"
 
 #: templates/help.html:23
 msgid "Dedication to data"
-msgstr ""
+msgstr "Posvećenost podacima"
 
 #: templates/help.html:25
 msgid ""
@@ -3817,6 +3851,10 @@ msgid ""
 "done with it. <em>AstroBin</em>, instead, has a user interface specifically "
 "designed to enable you to input all the technical data of your image."
 msgstr ""
+"Na sajtu za deljenje slika opšte namene, Vi biste uploadovali svoju sliku, i "
+"završili s time. <em>AstroBin</em>, nasuprot tome, ima korisnički interfejs "
+"naročito dizajniran da Vam omogući unos svih tehničkih podataka o Vašoj "
+"slici."
 
 #: templates/help.html:26
 msgid ""
@@ -3827,6 +3865,12 @@ msgid ""
 "Astronomical Database, which contains over 5 million objects under over 15 "
 "million names!"
 msgstr ""
+"<em>AstroBin</em> će autokompletirati Vaš unos, koristeći obimnu bazu "
+"podataka: sve, od teleskopa, CCD i filtera pa do astronomskih objekata u "
+"mnogim katalozima, će se pojaviti u pop-up prozorima kad počnete kucanje "
+"njihovog imena, kako bi Vam olakšao unos. <em>AstroBin</em> je povezan sa "
+"astronomskom bazom podataka SIMBAD, koja sadrži preko 5 miliona objekata pod "
+"više od 15 miliona imena!"
 
 #: templates/help.html:29
 msgid ""
@@ -3835,10 +3879,15 @@ msgid ""
 "interesting statistics. There is also a page that shows the most popular "
 "subjects organized by month and latitude!"
 msgstr ""
+"Astronomski subjekti na <em>AstroBinu</em> imaju svoju sopstvenu stranicu, "
+"gde možete videti njihove najbolje fotografije, kao i grafikone i crteže "
+"koji pokazuju trendove i interesantnu statistiku. Takođe postoji i stranica "
+"koja prikazuje najpopularnije subjekte sortirane prema mescima i geografskoj "
+"širini."
 
 #: templates/help.html:33
 msgid "Data is strongly interconnected"
-msgstr ""
+msgstr "Podaci su međusobno čvrsto povezani"
 
 #: templates/help.html:35
 msgid ""
@@ -3848,6 +3897,12 @@ msgid ""
 "certain filter. How about all the images between 6 and 8 hours of "
 "integration? Or with a certain Moon phase? You can do that!"
 msgstr ""
+"Jeste li ikad želei da vidite kako će izgledati Vaša naredna fotografija? Na "
+"<em>AstroBinu</em> možete da potražite sve slike određene mete, koje su "
+"napravljene sa određenim teleskopom i određenom CCD kamerom. Ili sa "
+"određenim filterom. A kako bi bilo da tražite sve slike sa vremenom "
+"integracije od 6 do 8 sati? Ili napravljene kad je Mesec u određenoj fazi? "
+"Možete da uradite i to!"
 
 #: templates/help.html:38
 msgid ""
@@ -3857,16 +3912,24 @@ msgid ""
 "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
 "want, you can search by telescope diameter too!"
 msgstr ""
+"AstroBin Vam može pomoći pri kupovini Vašeg sledećeg teleskopa ili CCD "
+"kamere, pretragom kombinacija opreme koju poseduju drugi korisnici. Na "
+"primer, možete pretražiti sve slike napravljene koristeći Canon 5D i bilo "
+"koji apohromatski refraktor, ili SBIG ST-8300 sa bilo kojim Richtey-Chretien "
+"teleskopom. Ili, ako želite, možete takođe tražiti i prema prečniku "
+"teleskopa."
 
 #: templates/help.html:41
 msgid ""
 "Finally, all this information is collected in interesting plots, that can "
 "help you figure out how some gear items are trending."
 msgstr ""
+"Konačno, sve ove informacije se sakupljaju u interesantnim grafikonima, koji "
+"Vam mogu pomoći da uočite trendove pojedinih delova opreme."
 
 #: templates/help.html:45
 msgid "All the data at a glance"
-msgstr ""
+msgstr "Svi podaci na jednom mestu"
 
 #: templates/help.html:47
 msgid ""
@@ -3875,12 +3938,17 @@ msgid ""
 "everything is visible at a glance in the Technical Card. Even the Moon age "
 "at the time of the acquisition is displayed."
 msgstr ""
+"Za svaku sliku na <em>AstroBinu</em> su zabeleženi svi tehnički podaci o "
+"njenom nastajanju. Teleskopi koji su korišćeni, kamere, montaže, filteri, "
+"sve je vidljivo na jednom mestu u Tehičkoj Karti. Prikazana je čak i faza "
+"Meseca u momentu nastajanja slike."
 
 #: templates/help.html:51
 msgid "More than just an image"
-msgstr ""
+msgstr "Više od same slike"
 
 #: templates/help.html:53
+#, fuzzy
 msgid ""
 "<em>AstroBin</em> will do more than just host a copy of your image: when you "
 "upload a photograph, a histogram and a black &amp; white inverted version of "
@@ -3889,20 +3957,30 @@ msgid ""
 "annotated version will appear on the site. <em>AstroBin</em> will know what "
 "are the astronomical objects in your image without you telling!"
 msgstr ""
+"<em>AstroBin</em> će učiniti više od samog hostovanja kopije Vaše slike: "
+"kada uploadujete fotografiju, u toku tog procesa će se generisati i "
+"histogram i crno &amp; bela inverzna verzija slike, tako da se lakše uoče "
+"slabi magelarni regioni ili spiralni kraci. Slike će takođe biti "
+"identifikovane, i na sajtu će se pojaviti verzija sa oznakama. "
+"<em>AstroBin</em> će znati koji se astronomski objekti nalaze na Vašoj "
+"slici, a da Vi to ne morate da mu kažete!"
 
 #: templates/help.html:57
 msgid "Protection from theft with automatic watermarking"
-msgstr ""
+msgstr "Automatsko postavljanje vodenog žiga, radi zaštite od zloupotrebe"
 
 #: templates/help.html:59
 msgid ""
 "<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
 "with the text of your choosing. All it takes is a click!"
 msgstr ""
+"<em>AstroBinov</em> čarobnjak za upload će Vam ponuditi da postavite vodeni "
+"žig na svoje fotografije, sa tekstom koji sami izaberete. Potreban je samo "
+"klik miša!"
 
 #: templates/help.html:63
 msgid "AstroBin supports multiple image revisions"
-msgstr ""
+msgstr "AstroBin podržava višestruke revizije slika"
 
 #: templates/help.html:65
 msgid ""
@@ -3912,16 +3990,25 @@ msgid ""
 "intuitively! Now it's going to be really easy to tell whether your "
 "processing has improved."
 msgstr ""
+"Nemojte mi reći da se niste nikad vratili i revidovali procesuiranje slike "
+"<em>nakon</em> što ste je objavili. <em>AstroBin</em> podržava takav "
+"koncept, i omogućava Vam da objavite nekoliko revizija iste slike, na lak i "
+"intutivan način! Sada će zaista biti lako uočiti da li se Vaše procesuiranje "
+"poboljšalo."
 
 #: templates/help.html:69
 msgid "AstroBin is social!"
-msgstr ""
+msgstr "AstroBin je društven!"
 
 #: templates/help.html:71
 msgid ""
 "On <em>AstroBin</em> you can message other astrophotographer, follow them "
 "and be notified when they post new images, or perform requests for more data."
 msgstr ""
+"Na <em>AstroBinu</em> možete da pošaljete poruku drugim astrofotgrafima, "
+"pratite ih i dobijete obaveštenje kada objave nove slike, ili zahtevate "
+"dodatne podatke.you can message other astrophotographer, follow them and be "
+"notified when they post new images, or perform requests for more data."
 
 #: templates/help.html:74
 msgid ""
@@ -3929,6 +4016,10 @@ msgid ""
 "there's a new image from a certain CCD, or telescope, or filter, and so on. "
 "Or you can monitor all the new images of a certain galaxy or nebula."
 msgstr ""
+"Možete da pratite i delove opreme ili astronomske subjekte, i dobijete "
+"obaveštenje kad god se objavi nova slika sa određene CCD, ili teleskopa, ili "
+"filtera, i tako dalje. Ili možete da pratite sve nove slike određene "
+"galaksije ili magline."
 
 #: templates/help.html:77
 msgid ""
@@ -3936,6 +4027,9 @@ msgid ""
 "might be chosen to appear in the site's <em>Messier Marathon</em>, or as "
 "<em>Currently hot</em> on the front page."
 msgstr ""
+"Možete da glasate za slike, ili da ih označite kao omiljene. Vaše slike bi "
+"mogle biti izabrane da budu objavljene na stranici <em>Mesijeov "
+"maraton</em>, ili kao <em>Trenutno najprivlačnije</em> na početnoj stranici."
 
 #: templates/help.html:81
 msgid ""
@@ -3948,19 +4042,28 @@ msgid ""
 "rescue to provide a home and a central hub for astrophotographers all over "
 "the world."
 msgstr ""
+"Kao što ste nesumnjivo zaključili do sada, <em>AstroBin</em> je znatno više "
+"od servisa za hosting slika. <em>AstroBin</em> je ono što je "
+"astrofotografskoj zajednici bilo potrebno već dugo vremena. Godinama sam "
+"gledao fantastične slike rasute svuda po internetu: sajtovi za hosting slika "
+"opšte namene, forumi, lični sajtovi, ili čak privremene lokacije. Neke od "
+"tih slika sadrže podatke koji su previše vredni da bi se izgubili u moru "
+"haosa. <em>AstroBin</em> pruža rešenje, obezbeđujući dom i čvorište "
+"astrofotografima širom sveta."
 
 #: templates/help.html:83
 msgid "So, what are you waiting for?"
-msgstr ""
+msgstr "Dakle, šta čekate?"
 
 #: templates/help.html:84
 msgid "Sign up now!"
-msgstr ""
+msgstr "Registrujte se odmah!"
 
 #: templates/index.html:15
 msgid "The perfect home for your astrophotography."
-msgstr ""
+msgstr "Savršen dom za Vašu astrofotografiju."
 
+# English version contains a dot in excesss between < a > tags - there shouldnćt be dot after "help page"?!
 #: templates/index.html:17
 #, python-format
 msgid ""
@@ -3969,10 +4072,13 @@ msgid ""
 "astrophotography community greatly! See the <a href=\"%(help_url)s\">help "
 "page.</a> for more information."
 msgstr ""
+"AstroBin je hosting servis namenjen naročito astrofotografima. Krcat je "
+"mogućnostima koje značajno pomažu astrofotografskoj zajednici! Za više "
+"informacija, pogledajte <a href=\"%(help_url)s\">stranicu za pomoć</a>."
 
 #: templates/index.html:24
 msgid "Unlimited uploads, unlimited size."
-msgstr ""
+msgstr "Neograničen upload, neograničena veličina."
 
 #: templates/index.html:25
 msgid ""
@@ -3980,10 +4086,13 @@ msgid ""
 "compression. On AstroBin you can (and should!) upload full size images. And "
 "you have unlimited space for free."
 msgstr ""
+"Astrofotografske slike imaju naučnu vrednost, koju ne bi trebalo izgubiti "
+"kompresijom fajla. Možete (i trebali biste!) uploadovati punu verziju slike "
+"na AstroBin. Imate neograničen prostor besplatno."
 
 #: templates/index.html:32
 msgid "Have your data neatly plotted."
-msgstr ""
+msgstr "Neka Vaši podaci budu uredno mapirani."
 
 #: templates/index.html:33
 msgid ""
@@ -3991,15 +4100,18 @@ msgid ""
 "neat and organized. And with our plots, you can get insights on your "
 "productivity and on the gear you use the most."
 msgstr ""
+"Podaci su najbitniji, i AstroBin Vam daje alate da Vaše podatke čuvate "
+"uredno i organizovano. A naši grafikoni Vam omogućavaju da steknete uvid u "
+"Vašu produktivnost i opremu koju najviše koristite."
 
 #: templates/index.html:46
 msgid "Recent images"
-msgstr ""
+msgstr "Skorašnje slike"
 
 #: templates/index.html:54 templates/registration/registration_form.html:5
 #: templates/registration/registration_form.html:8
 msgid "Register with AstroBin"
-msgstr ""
+msgstr "Registrujte se na AstroBin"
 
 #: templates/index.html:58 templates/registration/registration_form.html:11
 #, python-format
@@ -4007,57 +4119,59 @@ msgid ""
 "By registering with AstroBin, you agree to our <a href=\"%(tos_url)s\">terms "
 "of service</a>."
 msgstr ""
+"Registracijom na AstroBin, prihvatate naše <a href=\"%(tos_url)s\">uslove "
+"korišćenja</a>."
 
 #: templates/index.html:92
 msgid "Image of the day"
-msgstr ""
+msgstr "Slika dana"
 
 #: templates/index.html:132
 msgid "Recent"
-msgstr ""
+msgstr "Skorašnje"
 
 #: templates/index.html:138 templates/index.html.py:194
 #: templates/index.html:211 templates/index.html.py:251
 #: templates/gear/page.html:59
 msgid "(view more)"
-msgstr ""
+msgstr "(pogledajte još)"
 
 #: templates/index.html:145
 msgid "Followed"
-msgstr ""
+msgstr "Praćeno"
 
 #: templates/index.html:156 templates/index.html.py:157
 #: templates/index.html:158 templates/index.html.py:159
 #: templates/index.html:160
 msgid "Recently voted 5 stars"
-msgstr ""
+msgstr "Nedavno ocenjeno sa 5 zvezdica na glasanju"
 
 #: templates/index.html:171
 msgid "Recently favorited"
-msgstr ""
+msgstr "Nedavno označeno kao omiljeno"
 
 #: templates/index.html:242 templates/activity/action.html:30
 msgid "ago"
-msgstr ""
+msgstr "pre"
 
 #: templates/leaderboard.html:20 templates/reviews.html:39
 #: templates/wall.html:39 templates/gear/page.html:89
 #: templates/inclusion_tags/search_image_list.html:133
 #: templates/search/search.html:35
 msgid "Rating"
-msgstr ""
+msgstr "Ocena"
 
 #: templates/leaderboard.html:25 templates/subject/page.html:79
 msgid "Total integration"
-msgstr ""
+msgstr "Ukupna integracija"
 
 #: templates/leaderboard.html:30
 msgid "Avg. integration hours"
-msgstr ""
+msgstr "Prosečno vreme integracije, sati"
 
 #: templates/messier_marathon.html:5 templates/messier_marathon.html.py:10
 msgid "Messier Marathon"
-msgstr ""
+msgstr "Mesijeov maraton"
 
 #: templates/messier_marathon.html:12
 msgid ""
@@ -4066,6 +4180,10 @@ msgid ""
 "<strong>Actions</strong> menu and selecting <strong>Nominate for the Messier "
 "Marathon</strong>."
 msgstr ""
+"Ovo je spisak izdvojenih slika Mesijeovih objekata na AstroBinu. Možete da "
+"nominujete bilo koju sliku (pod uslovom da sadrži Mesijeov objekat) "
+"otvarajući meni <strong>Akcije</strong> i izborom <strong>Nominuj za "
+"Mesijeov Maraton</strong>."
 
 #: templates/messier_marathon.html:15
 #, python-format
@@ -4073,10 +4191,12 @@ msgid ""
 "What about <a href=\"%(search_url)s\">doing a search</a> and nominating some "
 "images now?"
 msgstr ""
+"Kako bi bilo da sada <a href=\"%(search_url)s\">pretražite</a> i nominujete "
+"neke slike?"
 
 #: templates/messier_nomination.html:6 templates/image/detail.html:164
 msgid "Nominate for the Messier Marathon"
-msgstr ""
+msgstr "Nominuj za Mesijeov Maraton"
 
 #: templates/messier_nomination.html:10
 #, python-format
@@ -4086,6 +4206,10 @@ msgid ""
 "objects that features AstroBin images nominated by the users. For each "
 "Messier object, the AstroBin image with the most nomination is chosen."
 msgstr ""
+"Nominovaćete ovu sliku za <a href=\"%(the_url)s\" target=\"_blank\">Mesijeov "
+"maraton</a>. Mesijeov maraton je lista Mesijeovih objekata u kojoj su "
+"izdvojene AstroBin slike koje su nominovali korisnici. Za svaki Mesijeov "
+"objekat je izdvojena AstroBin slika sa najviše nominacija."
 
 #: templates/messier_nomination.html:14
 #, python-format
@@ -4093,6 +4217,8 @@ msgid ""
 "Press <em>Continue</em> to nominate this image for <strong>M "
 "%(messier_object)s</strong>."
 msgstr ""
+"Kliknite <em>Nastavi</em> da biste nominovali ovu sliku za <strong>M %"
+"(messier_object)s</strong>."
 
 #: templates/messier_nomination.html:21
 msgid ""
@@ -4100,6 +4226,9 @@ msgid ""
 "think this is a mistake, please contact the author of the image and ask them "
 "to add the correct Messier object as a subject."
 msgstr ""
+"Izvinite, ali izgleda da ova slika ne sadrži Mesijeov objekat. Ako smatrate "
+"da je u pitanju greška, molimo Vas da kontaktirate autora slike, kako bi on "
+"dodao ispravan Mesijeov objekat kao naslov."
 
 #: templates/messier_nomination.html:24 templates/messier_nomination.html:35
 #: templates/messier_nomination.html:44
@@ -4115,64 +4244,66 @@ msgstr ""
 #: templates/image/edit/gear.html:54 templates/image/edit/license.html:23
 #: templates/image/edit/presolve.html:38
 msgid "Return to image"
-msgstr ""
+msgstr "Povtatak na sliku"
 
 #: templates/messier_nomination.html:28
 msgid ""
 "This image contains multiple Messier objects. Please choose the one for "
 "which you are nominating this image."
 msgstr ""
+"Ova slika sadrži više Mesijeovih objekata. Molimo Vas da izaberete jedan za "
+"koji nominujete ovu sliku."
 
 #: templates/messier_nomination.html:34 templates/messier_nomination.html:43
 #: templates/image/actions/bring_to_attention.html:14
 #: templates/image/actions/request_additional_information.html:10
 #: templates/image/actions/request_fits.html:10
 msgid "Continue"
-msgstr ""
+msgstr "Nastavak"
 
 #: templates/messier_nomination_finish.html:6
 msgid "You have already nominated this image"
-msgstr ""
+msgstr "Već ste nominovali ovu sliku"
 
 #: templates/messier_nomination_finish.html:7
 msgid "You can't nominate the same image more than once."
-msgstr ""
+msgstr "Ne možete nominovati istu sliku više od jednom."
 
 #: templates/messier_nomination_finish.html:9
 msgid "Thanks for your nomination"
-msgstr ""
+msgstr "Hvala Vam za nominaciju"
 
 #: templates/messier_nomination_finish.html:10
 msgid "Your nomination has been recorded, thank you!"
-msgstr ""
+msgstr "Vaša nominacija je zabeležena, hvala Vam!"
 
 #: templates/messier_nomination_finish.html:13
 msgid "Visit the Messier Marathon"
-msgstr ""
+msgstr "Posjetite Mesijeov maraton"
 
 #: templates/most_popular.html:14
 msgid "Select latitude"
-msgstr ""
+msgstr "Odaberite geografsku širinu"
 
 #: templates/most_popular.html:19
 msgid "From latitude:"
-msgstr ""
+msgstr "Od geografske širine:"
 
 #: templates/most_popular.html:47
 msgid "To latitude:"
-msgstr ""
+msgstr "Do geografske širine:"
 
 #: templates/most_popular.html:75
 msgid "Hemisphere:"
-msgstr ""
+msgstr "Hemisfera:"
 
 #: templates/most_popular.html:92
 msgid "Both"
-msgstr ""
+msgstr "Oboje"
 
 #: templates/most_popular.html:100
 msgid "Most popular subjects"
-msgstr ""
+msgstr "Najpopularniji subjekti"
 
 #: templates/most_popular.html:102
 msgid ""
@@ -4180,40 +4311,45 @@ msgid ""
 "subject, one image has been chosen. Use the menu to limit the images to "
 "those acquired from a certain latitude on Earth."
 msgstr ""
+"Ovo su najpopularniji subjekti na AstroBinu, iz meseca u mesec. Za svaki "
+"subjekat je odabrana jedna slika. Koristite ovaj meni da ograničite slike na "
+"one napravljene sa određene geografske dužine na Zemlji."
 
 #: templates/nightly.html:8
 msgid "Images acquired night after night"
-msgstr ""
+msgstr "Slike napravljene iz noći u noć"
 
 #: templates/nightly.html:12
 msgid ""
 "On this page you can see images that were actually taken each night, and not "
 "merely uploaded on a particular date."
 msgstr ""
+"Na ovoj stranici možete videti slike koje su stvarno napravljene svake noći, "
+"a ne prosto uploadovane određenog datuma."
 
 #: templates/nightly.html:28
 msgid "No image acquired in the selected month."
-msgstr ""
+msgstr "Tokom odabranog meseca nije napravljena nijedna slika."
 
 #: templates/nightly.html:35
 msgid "current month"
-msgstr ""
+msgstr "tekući mesec"
 
 #: templates/object_not_found.html:5
 msgid "Object not found"
-msgstr ""
+msgstr "Objekat nije nađen"
 
 #: templates/pagination.html:9 templates/pagination/pagination.html:6
 msgid "previous"
-msgstr ""
+msgstr "prethodni"
 
 #: templates/pagination.html:27 templates/pagination/pagination.html:22
 msgid "next"
-msgstr ""
+msgstr "sledeći"
 
 #: templates/profile-edit-menu.html:48
 msgid "Import from Flickr"
-msgstr ""
+msgstr "Uvezite s Flickr-a"
 
 #: templates/questions.html:19
 msgid ""
@@ -4223,20 +4359,27 @@ msgid ""
 "information (in fact it barely tries), and presents a series of flaws, that "
 "will be explained below."
 msgstr ""
+"Najzastupljenija forma u kojoj astronomske zajednice danas postoje su "
+"forumi. Koncept star više od 20 godina, koji nije baš dobro prilagođen "
+"ogromnoj količini informacija, te informacije organizuje na užasan način (u "
+"stvari, jedva pokušava da to uradi), i ima niz problema, koji su objašnjeni "
+"u nastavku."
 
 #: templates/questions.html:22
 msgid "What is AstroBin Questions?"
-msgstr ""
+msgstr "Šta su Pitanja AstroBina?"
 
 #: templates/questions.html:24
 msgid ""
 "It's a Questions &amp; Answers site focused on the quality of the content. "
 "The allowed subjects of discussion are Astrophotography and Astronomy."
 msgstr ""
+"To je sajt sa pitanjima i odgovorima, fokusitan na kvalitet sadržaja. "
+"Dozvoljeni predmeti rasprave su astrofotografija i astronomija."
 
 #: templates/questions.html:27
 msgid "What's wrong with forums?"
-msgstr ""
+msgstr "Šta ne valja na forumima?"
 
 #: templates/questions.html:29
 msgid ""
@@ -4244,10 +4387,15 @@ msgid ""
 "<strong>terribly</strong> dated, as a system, for today's Internet "
 "standards. Here's a series of flaws that AstroBin Questions fixes:"
 msgstr ""
+"Forumi su odlični za rekreativne rasprave, ali su <strong>strašno</strong> "
+"zastareli, kao sistem, za današnje standarde interneta. Evo liste "
+"nedostataka, koje Pitanja AstroBina razrešavaju:dated, as a system, for "
+"today's Internet standards. Here's a series of flaws that AstroBin Questions "
+"fixes:"
 
 #: templates/questions.html:33
 msgid "Every post is flat"
-msgstr ""
+msgstr "Svaki post je fiksiran"
 
 #: templates/questions.html:35
 msgid ""
@@ -4255,10 +4403,13 @@ msgid ""
 "the same post, because the only way to do it is by quoting somebody. Very "
 "soon this becomes a mess."
 msgstr ""
+"Veoma je teško uključiti se u nekoliko konverzacija istovremeno u istom "
+"postu, jer je jedini način da se to uradi da se neko citira. Ubrzo nastaje "
+"zbrka."
 
 #: templates/questions.html:40
 msgid "Every post has the same visibility"
-msgstr ""
+msgstr "Svaki post ima istu vidljivost"
 
 #: templates/questions.html:42
 msgid ""
@@ -4270,10 +4421,16 @@ msgid ""
 "replies might be objectively wrong, and this will worsen the quality of the "
 "community."
 msgstr ""
+"Ako objavite poruku sa pitanjem da li biste trebali da koristite sunčev "
+"filter tokom posmatranja pomračenja, i ja odgovorim <em>\"Ne, ne brini,\"</em> "
+"jedini način da se taj odgovor opovrgne je da drugi ljudi odgovore i "
+"objasne zašto je to pogrešno. To ne garantuje da neko neće izgubiti tok "
+"razgovora. Ovo je ekstreman primer: ono što pokušavam da kažem je da neki "
+"odgovori mogu biti objektivno pogrešni, i to pogoršava kvalitet zajednice."
 
 #: templates/questions.html:47
 msgid "Every user has the same importance"
-msgstr ""
+msgstr "Svaki korisnik ima isti značaj"
 
 #: templates/questions.html:49
 msgid ""
@@ -4282,10 +4439,14 @@ msgid ""
 "this doesn't matter. My posts or post replies will look the same. This "
 "worsens the quality of the community."
 msgstr ""
+"Na forumu ništa ne znači da li sam ja Gospodin Nepoznati, koji je napravio "
+"svoju prvu astrofotografiju prethodne noći, ili poluprofesionalni "
+"astrofotograf sa 20 godina iskustva. Moje poruke ili odgovori na poruke će "
+"izgledati isto. To pogoršava kvalitet zajednice."
 
 #: templates/questions.html:54
 msgid "Everything is static"
-msgstr ""
+msgstr "Sve je statično"
 
 #: templates/questions.html:56
 msgid ""
@@ -4293,6 +4454,10 @@ msgid ""
 "and can't ask my question well, nobody can rephrase it. If I make a lot of "
 "typos, nobody can fix them. This is undesirable."
 msgstr ""
+"Ako pišem kao sedmogodišnje dete, niko to ne može da ispravi. Ako loše "
+"komuniciram i ne umem da dobro formulišem svoje pitanje, niko ga ne može "
+"preformulisati. Ako pravim dosta grešaka u kucanju, niko ih ne može "
+"ispraviti. Sve to nije poželjno."
 
 #: templates/questions.html:62
 msgid ""
@@ -4300,38 +4465,46 @@ msgid ""
 "highly interactive, wiki-capable website that <strong>you</strong> moderate, "
 "thanks to a system based on <em>karma points</em>."
 msgstr ""
+"Pitanja AstroBina odgovaaraju na te probleme putem web sajta kojim upravlja "
+"zajednica, koji je veoma interaktivan i prilagođen \"wiki\" konceptu, koji "
+"<strong>vi</strong> moderirate, zahvaljujući sistemu koji se bazira na "
+"<em>karma poenima</em>."
 
 #: templates/questions.html:66
 msgid ""
 "Please join, and you can learn and teach about Astrophotography and "
 "Astronomy!"
 msgstr ""
+"Molimo Vas da se pridružite, i moći ćete da učite i podučavate "
+"astrofotografiju i astronomiju!"
 
 #: templates/questions.html:69
 msgid "Here's some more reading material to get you started"
-msgstr ""
+msgstr "Ovde se nalazi još materijala za čitanje, za početak"
 
 #: templates/questions.html:73
 msgid "Frequently Asked Questions about AstroBin Questions"
-msgstr ""
+msgstr "Često postavljana pitanja o Pitanjima AstroBina"
 
 #: templates/questions.html:78
 msgid "AstroBin Questions' help page"
-msgstr ""
+msgstr "Stranica za pomoć o Pitanjima AstroBina"
 
 #: templates/questions.html:83
 msgid "An extension of this page, as a question on AstroBin Questions"
-msgstr ""
+msgstr "Proširenje ove stranice, kao pitanje o Pitanjima AstroBina"
 
 #: templates/questions.html:90
 msgid "Go to AstroBin Questions!"
-msgstr ""
+msgstr "Idite na Pitanja AstroBina"
 
 #: templates/questions.html:94
 msgid ""
 "PS: AstroBin Questions is only available in English, right now, but more "
 "languages will come soon."
 msgstr ""
+"P.S. Pitanja AstroBina su za sada dostupna samo na engleskom jeziku, ali će "
+"više jezika biti uskoro dodato."
 
 #: templates/stats.html:10
 #, python-format
@@ -4340,10 +4513,13 @@ msgid ""
 "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
 "integration time."
 msgstr ""
+"<strong>%(total_users)s</strong> korisnika je uploadovalo <strong>%"
+"(total_images)s</strong> slika, sa ukupno <strong>%"
+"(total_integration)s</strong> sati integracije."
 
 #: templates/stats.html:16
 msgid "Total integration hours in the last 12 months"
-msgstr ""
+msgstr "Ukupno vreme integracije u satima, za zadnjih 12 meseci"
 
 #: templates/stats.html:19 templates/stats.html.py:33 templates/stats.html:49
 #: templates/stats.html.py:69 templates/stats.html:89
@@ -4355,7 +4531,7 @@ msgstr ""
 #: templates/user/plots.html:55 templates/user/plots.html.py:68
 #: templates/user/profile/commercial/products.html:214
 msgid "Please wait: the plot is loading..."
-msgstr ""
+msgstr "Molimo Vas sačekajte: grafikon se učitava..."
 
 #: templates/stats.html:20 templates/stats.html.py:34 templates/stats.html:50
 #: templates/stats.html.py:70 templates/stats.html:90
@@ -4367,50 +4543,55 @@ msgstr ""
 #: templates/user/plots.html:56 templates/user/plots.html.py:69
 #: templates/user/profile/commercial/products.html:215
 msgid "Loading..."
-msgstr ""
+msgstr "Učitavanje..."
 
 #: templates/stats.html:44
 msgid "Global distribution of camera types"
-msgstr ""
+msgstr "Globalna raspodjela vrsta kamera"
 
 #: templates/stats.html:64
 msgid "Global distribution of telescope types"
-msgstr ""
+msgstr "Globalna raspodjela vrsta teleskopa"
 
 #: templates/stats.html:86
 msgid "CCD vs DLSR: the global trend"
-msgstr ""
+msgstr "CCD protiv DLSR: globalni trend"
 
 #: templates/stats.html:98
 msgid "Global trend of telescope types"
-msgstr ""
+msgstr "Globalni trend vrsta teleskopa"
 
 #: templates/tos.html:9
 msgid ""
 "The following Terms are only available in English. It is your responsibility "
 "to comprehend them."
 msgstr ""
+"Naredni Uslovi su dostupni samo na engleskom jeziku. Vaša je odgovornost da "
+"ih ispravno razumete."
 
 #: templates/upload.html:13
 msgid "Upload as a work in progress"
-msgstr ""
+msgstr "Uploadujte kao rad koji je još u toku"
 
 #: templates/upload.html:20 templates/upload.html.py:35
 #: templates/image/detail.html:1403
 msgid "Uploading..."
-msgstr ""
+msgstr "Uploadovanje..."
 
 #: templates/upload.html:23
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Use this button to upload an image to the <strong>Staging Area</strong>. "
 "It's perfect for works in progress that you want to share on Internet "
 "forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgstr ""
+"Kliknite ovo dugme da uploadujete sliku u <strong>Otvoreni Deo</strong>. On "
+"je savršeno mesto za radove koji su još u toku, a koje želite da podelite na "
+"forumima. Pročitajte više u sekciji <a href=\"%(faq_url)s#6\">ČPP</a>."
 
 #: templates/upload.html:29
 msgid "Upload as a finished image"
-msgstr ""
+msgstr "Uploadujte kao završenu sliku"
 
 #: templates/upload.html:39
 #, python-format
@@ -4420,6 +4601,10 @@ msgid ""
 "on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
 "too."
 msgstr ""
+"Kliknite ovo dugme da uploadujete sliku u <strong>Javni Deo</strong>. Slika "
+"će biti prikazana u <a href=\"%(profile_url)s\">Vašem profilu</a> i ovde na "
+"početnoj stranici. Takođe, možete <a href=\"%(flickr_url)s\">da uvezete slike "
+"sa Flickr-a</a>."
 
 #: templates/upload.html:54
 #, python-format
@@ -4427,22 +4612,25 @@ msgid ""
 "Before you start uploading images, you have to add at least one telescope "
 "and one camera. Do that in <a href=\"%(the_url)s?initial\">your profile</a>!"
 msgstr ""
+"Pre nego što počnete da uploadujete slike, morate dodati makar jedan "
+"teleskop i jednu kameru. Učinite to u <a href=\"%(the_url)s?initial\">Vašem "
+"profilu</a>!"
 
 #: templates/wall.html:13
 msgid "Sort by"
-msgstr ""
+msgstr "Poređati po"
 
 #: templates/wall.html:20
 msgid "Uploaded"
-msgstr ""
+msgstr "Uploadovano"
 
 #: templates/wall.html:26
 msgid "Acquired"
-msgstr ""
+msgstr "Napravljeno"
 
 #: templates/wall.html:45
 msgid "Favorited"
-msgstr ""
+msgstr "Dodato u omiljene"
 
 #: templates/wall.html:51 templates/gear/page.html:332
 #: templates/inclusion_tags/search_image_list.html:53
@@ -4450,68 +4638,68 @@ msgstr ""
 #: templates/search/search.html:47
 #: templates/user/profile/commercial/products.html:211
 msgid "Views"
-msgstr ""
+msgstr "Broj pregleda"
 
 #: templates/wall.html:65
 msgid "Filter by"
-msgstr ""
+msgstr "Filtrirati po"
 
 #: templates/wall.html:72
 msgid "All deep sky objects"
-msgstr ""
+msgstr "Svi objekti dubokog neba"
 
 #: templates/wall.html:78
 msgid "Clusters"
-msgstr ""
+msgstr "Zvezdana jata"
 
 #: templates/wall.html:97
 msgid "All Solar System objects"
-msgstr ""
+msgstr "Svi objekti Sunčevog sistema"
 
 #: templates/wall.html:109
 msgid "Moon"
-msgstr ""
+msgstr "Mesec"
 
 #: templates/wall.html:115
 msgid "Planets"
-msgstr ""
+msgstr "Planete"
 
 #: templates/wall.html:121
 msgid "Comets"
-msgstr ""
+msgstr "Komete"
 
 #: templates/wall.html:161
 msgid "Remove filter"
-msgstr ""
+msgstr "Ukloniti filter"
 
 #: templates/avatar/change.html:14
 msgid "You do not yet have an avatar. Please upload one now."
-msgstr ""
+msgstr "Još uvek nemate avatar. Molimo Vas da ga uploadujete."
 
 #: templates/avatar/change.html:19
 msgid "Current avatar"
-msgstr ""
+msgstr "Sadašnji avatar"
 
 #: templates/avatar/change.html:26
 msgid "Previously uploaded"
-msgstr ""
+msgstr "Ranije uploadovano"
 
 #: templates/avatar/change.html:29
 msgid "Choose new default"
-msgstr ""
+msgstr "Izaberite novi podrazumevani"
 
 #: templates/avatar/change.html:35
 msgid "Upload a new image"
-msgstr ""
+msgstr "Uploadujte novu sliku"
 
 #: templates/avatar/change.html:37
 msgid "Avatar image"
-msgstr ""
+msgstr "Slika za avatar"
 
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:9
 msgid "Edit commercial product"
-msgstr ""
+msgstr "Izmenite komercijalni proizvod"
 
 #: templates/commercial/products/edit.html:14
 #: templates/commercial/products/retailed/edit.html:14
@@ -4540,42 +4728,45 @@ msgstr ""
 #: templates/user/profile/edit/preferences.html:19
 #: templates/user/profile/edit/retailer.html:14
 msgid "Save"
-msgstr ""
+msgstr "Sačuvajte"
 
 #: templates/commercial/products/edit.html:15
 #: templates/commercial/products/retailed/edit.html:15
 msgid "Return to list"
-msgstr ""
+msgstr "Povratak na listu"
 
 #: templates/commercial/products/edit.html:16
 #: templates/commercial/products/retailed/edit.html:16
 msgid "View in new window"
-msgstr ""
+msgstr "Pogledajte u novom prozoru"
 
 #: templates/commercial/products/retailed/edit.html:7
 #: templates/commercial/products/retailed/edit.html:9
 msgid "Edit retailed product"
-msgstr ""
+msgstr "Izmenite maloprodajni proizvod"
 
 #: templates/contact_form/contact.html:10
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
+"Molimo Vas da nas kontaktirate ako Vam treba bilo kakva pomoć, ili želite da "
+"prijavite problem, pošaljete povratnu informaciju ili sugestije, ili prosto "
+"želite da stupite u kontakt."
 
 #: templates/contact_form/contact.html:16 templates/image/detail.html:1345
 #: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
 #: templates/user/profile-js.html:28
 msgid "Send"
-msgstr ""
+msgstr "Pošaljite"
 
 #: templates/contact_form/contact_completed.html:5
 msgid "Thank you! Your message was sent successfully."
-msgstr ""
+msgstr "Hvala Vam! Vaša poruka je uspešno poslata."
 
 #: templates/gear/fix.html:10
 msgid "Instructions and examples"
-msgstr ""
+msgstr "Uputstva i primeri"
 
 #: templates/gear/fix.html:13
 msgid ""
@@ -4583,6 +4774,9 @@ msgid ""
 "names for the same object, ignoring the suggestions. But don't worry, we can "
 "fix it, and after it's fixed, it shouldn't get very messy in the future."
 msgstr ""
+"AstroBinova baza podataka o opremi je donekle nesređena: mnogi korisnici su "
+"uneli različita imena za isti objekat, ignorišući sugestije. Ali ne brinite, "
+"možemo to da rešimo, i nakon toga ne bi trebalo da bude nesređena ubuduće."
 
 #: templates/gear/fix.html:16
 msgid "Please read the instructions and the example below, they are important!"
