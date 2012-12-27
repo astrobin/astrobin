@@ -748,6 +748,11 @@ body.full {
   border-radius: 8px;
   width: 120px;
 }
+.site-nav.nav-collapse,
+.user-nav.nav-collapse {
+  overflow: visible;
+}
+/* Fixes dropdowns on IE */
 /* Subnav */
 .subnav {
   width: 100%;
