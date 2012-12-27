@@ -58,6 +58,7 @@ class NoFolderFactory(BaseFolderFactory):
     def __init__(self, *args, **kwargs):
         super(NoFolderFactory, self).__init__(*args, **kwargs)
         self.label = _("Name")
+        self.source = self.source.order_by('-pk')
 
     def produce(self):
         return []
@@ -67,6 +68,7 @@ class TypeFolderFactory(BaseFolderFactory):
     def __init__(self, *args, **kwargs):
         super(TypeFolderFactory, self).__init__(*args, **kwargs)
         self.label = _("Type")
+        self.source = self.source.order_by('-image_type')
 
     def produce(self):
         from .templatetags.rawdata_tags import humanize_rawimage_type
@@ -91,6 +93,7 @@ class UploadDateFolderFactory(BaseFolderFactory):
     def __init__(self, *args, **kwargs):
         super(UploadDateFolderFactory, self).__init__(*args, **kwargs)
         self.label = _("Upload date")
+        self.source = self.source.order_by('-uploaded')
 
     def produce(self):
         folders = [] # {'date': _, 'label': _, 'images': []}
@@ -114,6 +117,7 @@ class AcquisitionDateFolderFactory(BaseFolderFactory):
     def __init__(self, *args, **kwargs):
         super(AcquisitionDateFolderFactory, self).__init__(*args, **kwargs)
         self.label = _("Acquisition date")
+        self.source = self.source.order_by('-acquisition_date')
 
     def produce(self):
         folders = [] # {'date': _, 'label': _, 'images': []}
@@ -138,6 +142,7 @@ class CameraFolderFactory(BaseFolderFactory):
     def __init__(self, *args, **kwargs):
         super(CameraFolderFactory, self).__init__(*args, **kwargs)
         self.label = _("Camera")
+        self.source = self.source.order_by('camera')
 
     def produce(self):
         folders = [] # {'camera': 'abc', 'label': 'abc', 'images': []}
@@ -161,6 +166,7 @@ class TemperatureFolderFactory(BaseFolderFactory):
     def __init__(self, *args, **kwargs):
         super(TemperatureFolderFactory, self).__init__(*args, **kwargs)
         self.label = _("Temperature")
+        self.source = self.source.order_by('-temperature')
 
     def produce(self):
         folders = [] # {'temperature': '123', 'label': '123', 'images': []}
