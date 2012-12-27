@@ -1,33 +1,17 @@
-# Python
-import tempfile, zipfile
-
 # Django
-from django.core.files import File
-from django.core.servers.basehttp import FileWrapper
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 
 # This app
 from .models import TemporaryArchive
+from .tasks import prepare_zip
 
+def serve_zip(images, owner, folder_or_pool = None):
+    archive = TemporaryArchive(user = owner)
+    archive.save()
 
-def serve_zip(images, owner):
-    temp = tempfile.NamedTemporaryFile()
-    archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
-    for image in images:
-        if not image.active:
-            continue
-        archive.write(image.file.path, image.original_filename)
+    prepare_zip.delay(images, owner, archive, folder_or_pool)
 
-    archive.close()
-
-    size = sum([x.file_size for x in archive.infolist()])
-    t = TemporaryArchive(
-        user = owner,
-        size = size,
-    )
-    t.file.save('', File(temp))
-    t.save()
     response = HttpResponseRedirect(
-        reverse('rawdata.temporary_archive_detail', args = (t.pk,)))
-    return response, t
+        reverse('rawdata.temporary_archive_detail', args = (archive.pk,)))
+    return response

@@ -177,10 +177,7 @@ class PrivateSharedFolderDownloadView(RestrictToSubscriberMixin, RestrictToInvit
                 reverse('rawdata.temporary_archive_detail',
                         args=(folder.archive.pk,)))
 
-        response, archive = serve_zip(folder.images.all(), self.request.user)
-        folder.archive = archive
-        folder.save()
-
+        response = serve_zip(folder.images.all(), self.request.user, folder)
         return response
 
 

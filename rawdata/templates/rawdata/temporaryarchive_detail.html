@@ -4,27 +4,55 @@
 {% block title %}AstroBin - {% trans "Your download is ready" %}{% endblock %}
 
 {% block content %}
-    <div class="page-header">
-        <h1>{% trans "Your download is ready" %}</h1>
-    </div>
-
-    <p>
-        {% blocktrans %}We have prepared a ZIP file to bundle the raw data you have requested for download. Please be aware that this is a temporary file will be deleted from our servers within the next 48 hours, and this download is only for you. If you want to share data with others, don't give them this link, but use the <strong>Private shared folders</strong> or <strong>Public data pool</strong> pages.{% endblocktrans %}
-    </p>
-
-    <div class="download-with-icon">
-        <div class="image">
-            <a href="/{{object.file.name}}">
-                <img src="{{STATIC_URL}}rawdata/images/zip.png" alt="ZIP" />
-            </a>
+    {% if object.ready %}
+        <div class="page-header">
+            <h1>{% trans "Your download is ready" %}</h1>
         </div>
-        <div class="data">
-            <a class="btn btn-primary btn-large" href="/{{object.file.name}}">
-                {% trans "Download" %}
-            </a>
-            <span class="size">
-                {% trans "File size" %}: <strong>{{object.size|filesizeformat}}</strong>
-            </span>
+
+        <p>
+            {% blocktrans %}We have prepared a ZIP file to bundle the raw data you have requested for download. Please be aware that this is a temporary file will be deleted from our servers within the next 48 hours, and this download is only for you. If you want to share data with others, don't give them this link, but use the <strong>Private shared folders</strong> or <strong>Public data pool</strong> pages.{% endblocktrans %}
+        </p>
+
+        <div class="download-with-icon">
+            <div class="image">
+                <a href="/{{object.file.name}}">
+                    <img src="{{STATIC_URL}}rawdata/images/zip.png" alt="ZIP" />
+                </a>
+            </div>
+            <div class="data">
+                <a class="btn btn-primary btn-large" href="/{{object.file.name}}">
+                    {% trans "Download" %}
+                </a>
+                <span class="size">
+                    {% trans "File size" %}: <strong>{{object.size|filesizeformat}}</strong>
+                </span>
+            </div>
         </div>
-    </div>
+    {% else %}
+        <div class="page-header">
+            <h1>{% trans "Your download is processing" %}</h1>
+        </div>
+
+        <p>
+            {% blocktrans %}The file or files you have requested are being prepared for download. This should take only a second if you requested just a few files, or a minute for a lot of files. Try to refresh this page soon!{% endblocktrans %}
+        </p>
+
+        <div class="download-with-icon">
+            <div class="image">
+                <a href="/{{object.file.name}}">
+                    <img src="{{STATIC_URL}}rawdata/images/zip-not-ready.png" alt="ZIP" />
+                </a>
+            </div>
+            <div class="data">
+                <button class="btn btn-primary btn-large disabled">
+                    {% trans "Download not ready" %}
+                </button>
+                <span class="size">
+                    {% trans "Please refresh this page in a few seconds." %}
+                    <br/>
+                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt="" />
+                </span>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
