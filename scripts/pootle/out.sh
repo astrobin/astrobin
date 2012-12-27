@@ -1,5 +1,5 @@
 #!/bin/bash
-LANGS="ca de el es fi fr it nl pl pt pt-BR ro ru sk sq tr zh-CN"
+LANGS="ca de el es fi fr it nl pl pt pt-BR ro ru sk sq sr tr zh-CN"
 FROM='po/astrobin/'
 TO='../astrobin/astrobin/locale/'
 
