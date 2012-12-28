@@ -33,15 +33,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': os.environ['ASTROBIN_DATABASE_NAME'],         # Or path to database file if using sqlite3.
         'USER': os.environ['ASTROBIN_DATABASE_USER'],         # Not used with sqlite3.
         'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'], # Not used with sqlite3.
         'HOST': os.environ['ASTROBIN_DATABASE_HOST'],         # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                                           # Set to empty string for default. Not used with sqlite3.
-        'OPTIONS': {
-             "init_command": "SET foreign_key_checks = 0;",
-         },
     }
 }
 DEFAULT_CHARSET = 'utf-8'
