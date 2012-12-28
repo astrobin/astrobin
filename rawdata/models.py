@@ -110,6 +110,27 @@ class RawImage(models.Model):
         editable = False,
     )
 
+    telescopeName = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        editable = False,
+    )
+
+    filterName = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        editable = False,
+    )
+
+    subjectName = models.CharField(
+        max_length = 128,
+        null = True,
+        blank = True,
+        editable = False,
+    )
+
     temperature = models.SmallIntegerField(
         null = True,
         blank = True,
