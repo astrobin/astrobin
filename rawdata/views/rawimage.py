@@ -142,25 +142,29 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
 # API                                                                         #
 ###############################################################################
 
+def rawimage_pre_save(request, obj):
+    obj.user = request.user
+    obj.file_hash = md5_for_file(obj.file.file.file)
+
+
 class RawImageList(generics.ListCreateAPIView):
     model = RawImage
     queryset = RawImage.objects.order_by('pk')
-    serializers_class = RawImageSerializer
+    serializer_class = RawImageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,
                           IsSubscriber,)
 
     def pre_save(self, obj):
-        obj.user = self.request.user
+        rawimage_pre_save(self.request, obj)
 
 
 class RawImageDetail(generics.RetrieveUpdateDestroyAPIView):
     model = RawImage
-    serializers_class = RawImageSerializer
+    serializer_class = RawImageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,
                           IsSubscriber)
 
     def pre_save(self, obj):
-        obj.user = self.request.user
- 
+        rawimage_pre_save(self.request, obj)
