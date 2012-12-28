@@ -169,10 +169,11 @@ def index(request):
     profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
+        non_wip_image_ids = [str(x) for x in Image.objects.filter(is_wip = False).values_list('id', flat = True)]
 
         response_dict['global_actions'] = Action.objects.exclude(
             target_content_type = Image,
-            actions_with_astrobin_image_as_target__is_wip = True)[:actions_n],
+            target_object_id__in = non_wip_image_ids)[:actions_n],
 
         response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n], #exclude(authors__username__in = 'astrobin')
 
