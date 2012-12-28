@@ -57,6 +57,12 @@ class RawImage(models.Model):
         upload_to = upload_path,
     )
 
+    file_hash = models.CharField(
+        max_length = 32,
+        editable = False,
+        null = False,
+    )
+
     original_filename = models.CharField(
         max_length = 256,
         editable = False,

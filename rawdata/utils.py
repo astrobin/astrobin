@@ -103,3 +103,15 @@ def supported_raw_formats():
         "x3f",
     ]
 
+
+def md5_for_file(f, block_size=2**20):
+    import hashlib
+    md5 = hashlib.md5()
+    f.seek(0)
+    while True:
+        data = f.read(block_size)
+        if not data:
+            break
+        md5.update(data)
+    return md5.hexdigest()
+
