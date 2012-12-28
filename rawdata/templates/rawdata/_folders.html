@@ -33,6 +33,18 @@
                     <a href="{% query_string 'camera=folder.camera, f=none' '' %}">
                     {% endifequal %}
 
+                    {% ifequal folder.folder_type 'telescope' %}
+                    <a href="{% query_string 'telescope=folder.telescope, f=none' '' %}">
+                    {% endifequal %}
+
+                    {% ifequal folder.folder_type 'filterName' %}
+                    <a href="{% query_string 'filter=folder.filterName, f=none' '' %}">
+                    {% endifequal %}
+
+                    {% ifequal folder.folder_type 'subjectName' %}
+                    <a href="{% query_string 'subject=folder.subjectName, f=none' '' %}">
+                    {% endifequal %}
+
                     {% ifequal folder.folder_type 'temperature' %}
                     <a href="{% query_string 'temperature=folder.temperature, f=none' '' %}">
                     {% endifequal %}

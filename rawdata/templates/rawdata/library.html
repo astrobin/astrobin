@@ -54,7 +54,7 @@
 
     {% if total_files %}
         <div class="rawdata-browser-breadcrumb">
-            <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload,acquisition,camera,temperature' %}">
+            <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload,acquisition,camera,telescope,filter,subject,temperature' %}">
                 {% trans "All files" %}
             </a>
 
@@ -86,6 +86,30 @@
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{% query_string '' 'camera' %}">
                     {% trans "Camera" %}: <strong>{{filter_camera}}</strong>
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
+
+            {% if filter_telescope %}
+                <span class="divider">/</span>
+                <a class="btn btn-mini btn-primary" href="{% query_string '' 'telescope' %}">
+                    {% trans "Telescope or lens" %}: <strong>{{filter_telescope}}</strong>
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
+
+            {% if filter_filter %}
+                <span class="divider">/</span>
+                <a class="btn btn-mini btn-primary" href="{% query_string '' 'filter' %}">
+                    {% trans "Filter" %}: <strong>{{filter_filter}}</strong>
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
+
+            {% if filter_subject %}
+                <span class="divider">/</span>
+                <a class="btn btn-mini btn-primary" href="{% query_string '' 'subject' %}">
+                    {% trans "Subject" %}: <strong>{{filter_subject}}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}

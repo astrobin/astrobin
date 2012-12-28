@@ -42,13 +42,33 @@ class BaseFolderFactory(object):
             else:
                 self.source = self.source.filter(camera__isnull = True)
 
+        filter_telescope = params.get('telescope')
+        if filter_telescope:
+            if filter_telescope != UNKNOWN_LABEL:
+                self.source = self.source.filter(telescopeName = filter_telescope)
+            else:
+                self.source = self.source.filter(telescopeName__isnull = True)
+
+        filter_filter = params.get('filter')
+        if filter_filter:
+            if filter_filter != UNKNOWN_LABEL:
+                self.source = self.source.filter(filterName = filter_filter)
+            else:
+                self.source = self.source.filter(filterName__isnull = True)
+
+        filter_subject = params.get('subject')
+        if filter_subject:
+            if filter_subject != UNKNOWN_LABEL:
+                self.source = self.source.filter(subjectName = filter_subject)
+            else:
+                self.source = self.source.filter(subjectName__isnull = True)
+
         filter_temperature = params.get('temperature')
         if filter_temperature:
             if filter_temperature != UNKNOWN_LABEL:
                 self.source = self.source.filter(temperature = filter_temperature)
             else:
                 self.source = self.source.filter(temperature__isnull = True)
-
 
         return self.source
 
@@ -164,6 +184,78 @@ class CameraFolderFactory(BaseFolderFactory):
         return folders
 
 
+class TelescopeFolderFactory(BaseFolderFactory):
+    def __init__(self, *args, **kwargs):
+        super(TelescopeFolderFactory, self).__init__(*args, **kwargs)
+        self.label = _("Telescope or lens")
+        self.source = self.source.order_by('telescopeName')
+
+    def produce(self):
+        folders = [] # {'telescope': 'abc', 'label': 'abc', 'images': []}
+        for image in self.source:
+            telescope = image.telescopeName if image.telescopeName else UNKNOWN_LABEL 
+            try:
+                index = map(itemgetter('telescope'), folders).index(telescope)
+                folders[index]['images'].append(image)
+            except ValueError:
+                folders.append({
+                    'folder_type': 'telescope',
+                    'telescope': telescope,
+                    'label': telescope,
+                    'images': [image],
+                })
+
+        return folders
+
+
+class FilterFolderFactory(BaseFolderFactory):
+    def __init__(self, *args, **kwargs):
+        super(FilterFolderFactory, self).__init__(*args, **kwargs)
+        self.label = _("Filter")
+        self.source = self.source.order_by('filterName')
+
+    def produce(self):
+        folders = [] # {'filter': 'abc', 'label': 'abc', 'images': []}
+        for image in self.source:
+            filterName = image.filterName if image.filterName else UNKNOWN_LABEL 
+            try:
+                index = map(itemgetter('filterName'), folders).index(filterName)
+                folders[index]['images'].append(image)
+            except ValueError:
+                folders.append({
+                    'folder_type': 'filterName',
+                    'filterName': filterName,
+                    'label': filterName,
+                    'images': [image],
+                })
+
+        return folders
+
+
+class SubjectFolderFactory(BaseFolderFactory):
+    def __init__(self, *args, **kwargs):
+        super(SubjectFolderFactory, self).__init__(*args, **kwargs)
+        self.label = _("Subject")
+        self.source = self.source.order_by('subjectName')
+
+    def produce(self):
+        folders = [] # {'subject': 'abc', 'label': 'abc', 'images': []}
+        for image in self.source:
+            subjectName = image.subjectName if image.subjectName else UNKNOWN_LABEL 
+            try:
+                index = map(itemgetter('subjectName'), folders).index(subjectName)
+                folders[index]['images'].append(image)
+            except ValueError:
+                folders.append({
+                    'folder_type': 'subjectName',
+                    'subjectName': subjectName,
+                    'label': subjectName,
+                    'images': [image],
+                })
+
+        return folders
+
+
 class TemperatureFolderFactory(BaseFolderFactory):
     def __init__(self, *args, **kwargs):
         super(TemperatureFolderFactory, self).__init__(*args, **kwargs)
@@ -194,6 +286,9 @@ FOLDER_TYPE_LOOKUP = {
     'upload': UploadDateFolderFactory,
     'acquisition': AcquisitionDateFolderFactory,
     'camera': CameraFolderFactory,
+    'telescope': TelescopeFolderFactory,
+    'filter': FilterFolderFactory,
+    'subject': SubjectFolderFactory,
     'temperature': TemperatureFolderFactory,
 }
 
