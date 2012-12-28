@@ -144,7 +144,6 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
 
 def rawimage_pre_save(request, obj):
     obj.user = request.user
-    obj.file_hash = md5_for_file(obj.file.file.file)
 
 
 class RawImageList(generics.ListCreateAPIView):

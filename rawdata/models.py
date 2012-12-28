@@ -151,7 +151,9 @@ class RawImage(models.Model):
         return self.original_filename
 
     def save(self, *args, **kwargs):
+        from .utils import md5_for_file
         self.size = self.file.size
+        self.file_hash = md5_for_file(self.file.file.file)
         super(RawImage, self).save(*args, **kwargs)
 
     def delete(self):
