@@ -154,8 +154,6 @@ MIDDLEWARE_CLASSES = (
     'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
-    #'johnny.middleware.LocalStoreClearMiddleware',
-    #'johnny.middleware.QueryCacheMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
@@ -246,11 +244,6 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
     },
-    'johnny': dict(
-        BACKEND = 'johnny.backends.memcached.MemcachedCache',
-        LOCATION = ['127.0.0.1:11211'],
-        JOHNNY_CACHE = True,
-    )
 }
 JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
 
