@@ -5,6 +5,7 @@ import json
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
