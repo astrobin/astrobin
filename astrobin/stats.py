@@ -809,9 +809,9 @@ def affiliated_gear_views(username, period='monthly'):
     if period == 'monthly':
         flot_options['xaxis']['timeformat'] = '%b'
 
-    gear_ids = Gear.objects.filter(
+    gear_ids = [str(x) for x in Gear.objects.filter(
         Q(commercial__producer__username = username) |
-        Q(retailed__retailer__username = username)).values_list('pk', flat = True)
+        Q(retailed__retailer__username = username)).values_list('pk', flat = True)]
     all = Hit.objects.filter(
         Q(hitcount__object_pk__in = gear_ids) &
         Q(hitcount__content_type__model = 'gear')).order_by('created')
