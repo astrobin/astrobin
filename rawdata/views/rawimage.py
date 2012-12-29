@@ -1,5 +1,5 @@
 # Django
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.views.generic import (
     base,
     CreateView,
