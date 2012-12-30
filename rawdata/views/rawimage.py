@@ -1,3 +1,6 @@
+# Python
+import json
+
 # Django
 from django.http import Http404, HttpResponse
 from django.views.generic import (
@@ -47,6 +50,10 @@ class RawImageDownloadView(RestrictToSubscriberMixin, base.View):
 
 
 class RawImageDeleteView(RestrictToSubscriberMixin, BaseDeleteView):
+    # Dummy success_url, we don't actually need it, because we always request
+    # this view via ajax.
+    success_url = '/'
+
     def get_object(self):
         # We either delete my many ids or some query params
         return None
@@ -54,6 +61,11 @@ class RawImageDeleteView(RestrictToSubscriberMixin, BaseDeleteView):
     def delete(self, request, *args, **kwargs):
         ids = kwargs.pop('ids', '')
         images = RawImage.objects.by_ids_or_params(ids, self.request.GET)
+
+        for image in images:
+            if image.user != request.user:
+                raise Http404
+
         images.delete()
 
         if request.is_ajax():
@@ -62,7 +74,7 @@ class RawImageDeleteView(RestrictToSubscriberMixin, BaseDeleteView):
             if ids:
                 context['ids'] = ','.join(ids)
             return HttpResponse(
-                simplejson.dumps(context),
+                json.dumps(context),
                 mimetype = 'application/json')
 
         return HttpResponseRedirect(self.get_success_url())
