@@ -14,50 +14,71 @@ from .models import RawImage
 from .utils import md5_for_file
 
 class RawImageTest(TestCase):
-    def get_file(self):
-        f = open('rawdata/fixtures/test.fit', 'rb')
-        return f, md5_for_file(f)
-
     def setUp(self):
-        self.user = User.objects.create_user('username', 'fake@email.tld', 'passw0rd')
+        self.unsubscribed_user = User.objects.create_user('username_unsub', 'fake0@email.tld', 'passw0rd')
+        self.subscribed_user = User.objects.create_user('username_sub', 'fake1@email.tld', 'passw0rd')
         self.group = Group.objects.create(name = 'rawdata-meteor')
-        self.group.user_set.add(self.user)
+        self.group.user_set.add(self.subscribed_user)
         self.subscription = Subscription.objects.create(
             name = 'test_subscription',
             price = 1.0,
             group = self.group)
         self.user_subscription = UserSubscription.objects.create(
-            user = self.user,
+            user = self.subscribed_user,
             subscription = self.subscription,
             cancelled = False)
 
-    def test_api_create(self):
-        def test_response(data, expected_status_code,
-                          expected_field = None, expected_message = None):
-            response = self.client.post(reverse('api.rawdata.rawimage.list'), data)
-            self.assertEquals(response.status_code, expected_status_code)
-            if expected_field:
-                self.assertEquals(
-                    json.loads(response.content)[expected_field][0],
-                    expected_message)
+    def _test_response(self, url, data, expected_status_code = 200,
+                       expected_field = None, expected_message = None):
+        response = self.client.post(url, data)
+        self.assertEquals(response.status_code, expected_status_code)
+        if expected_field:
+            self.assertEquals(
+                json.loads(response.content)[expected_field][0],
+                expected_message)
 
-        f, h = self.get_file()
-        self.client.login(username = 'username', password = 'passw0rd')
+    def _get_file(self):
+        f = open('rawdata/fixtures/test.fit', 'rb')
+        h = md5_for_file(f)
 
-        # Test missing file
         f.seek(0)
-        test_response({}, 400, 'file', "This field is required.")
+        return f, h
 
-        # Test for success
-        f.seek(0)
-        test_response({'file': f}, 201)
+    def test_api_create_anon(self):
+        f, h = self._get_file()
+        self._test_response(reverse('api.rawdata.rawimage.list'), {'file': f}, 403)
+        f.close()
 
-        # Test for invalid hash
-        f.seek(0)
-        test_response({'file': f, 'file_hash': 'abcd'}, 400, 'non_field_errors',
-                      "file_hash abcd doesn't match uploaded file, whose hash is %s" % h)
+    def test_api_create_unsub(self):
+        f, h = self._get_file()
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        self._test_response(reverse('api.rawdata.rawimage.list'), {'file': f}, 403)
+        f.close()
 
+    def test_api_create_sub_missing_file(self):
+        f, h = self._get_file()
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        self._test_response(reverse('api.rawdata.rawimage.list'), {}, 400,
+                            'file', "This field is required.")
+        f.close()
+
+    def test_api_create_sub_invalid_hash(self):
+        f, h = self._get_file()
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        self._test_response(reverse('api.rawdata.rawimage.list'),
+                            {'file': f, 'file_hash': 'abcd'}, 400, 'non_field_errors',
+                            "file_hash abcd doesn't match uploaded file, whose hash is %s" % h)
+        f.close()
+
+    def test_api_create_sub_success(self):
+        f, h = self._get_file()
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        self._test_response(reverse('api.rawdata.rawimage.list'), {'file': f}, 201)
         f.close()
 
     def tearDown(self):
-        self.user.delete()
+        self.subscribed_user.delete()
+        self.unsubscribed_user.delete()
+        self.group.delete()
+        self.subscription.delete()
+        self.user_subscription.delete()
