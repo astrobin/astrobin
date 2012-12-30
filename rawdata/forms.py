@@ -14,22 +14,6 @@ from .models import (
 )
 from .utils import supported_raw_formats
 
-class RawImageUploadForm(forms.ModelForm):
-    error_css_class = 'error'
-
-    def clean_file(self):
-        file = self.cleaned_data['file']
-        if file:
-            name, ext = os.path.splitext(file.name)
-            if ext.lower().strip('.') not in supported_raw_formats():
-                raise forms.ValidationError(_('File type is not supported'))
-
-        return file
-
-    class Meta:
-        model = RawImage
-        fields = ('file',)
-
 
 class PublicDataPoolForm(forms.ModelForm):
     error_css_class = 'error'

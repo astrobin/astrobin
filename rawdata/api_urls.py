@@ -9,8 +9,8 @@ from .views.rawimage import *
 
 
 urlpatterns = patterns('',
-    url(r'^rawimages/$', RawImageList.as_view(), name='rawimage-list'),
-    url(r'^rawimages/(?P<pk>\d+)/$', RawImageDetail.as_view(), name='rawimage-detail'),
+    url(r'^rawimages/$', RawImageList.as_view(), name='api.rawdata.rawimage.list'),
+    url(r'^rawimages/(?P<pk>\d+)/$', RawImageDetail.as_view(), name='api.rawdata.rawimage.detail'),
 )
 
 # Format suffixes

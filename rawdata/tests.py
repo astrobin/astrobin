@@ -1,3 +1,6 @@
+# Python
+import json
+
 # Django
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
@@ -12,7 +15,8 @@ from .utils import md5_for_file
 
 class RawImageTest(TestCase):
     def get_file(self):
-        return open('rawdata/fixtures/test.fit', 'rb')
+        f = open('rawdata/fixtures/test.fit', 'rb')
+        return f, md5_for_file(f)
 
     def setUp(self):
         self.user = User.objects.create_user('username', 'fake@email.tld', 'passw0rd')
@@ -27,21 +31,31 @@ class RawImageTest(TestCase):
             subscription = self.subscription,
             cancelled = False)
 
-    def test_hash(self):
-        f = self.get_file()
-        file_hash = md5_for_file(f)
-        f.seek(0)
-        postdata = {'file': f, 'file_hash': file_hash}
+    def test_api_create(self):
+        def test_response(data, expected_status_code,
+                          expected_field = None, expected_message = None):
+            response = self.client.post(reverse('api.rawdata.rawimage.list'), data)
+            self.assertEquals(response.status_code, expected_status_code)
+            if expected_field:
+                self.assertEquals(
+                    json.loads(response.content)[expected_field][0],
+                    expected_message)
 
+        f, h = self.get_file()
         self.client.login(username = 'username', password = 'passw0rd')
 
-        response = self.client.post(reverse('rawimage-list'), postdata)
-        self.assertEquals(response.status_code, 201)
-
+        # Test missing file
         f.seek(0)
-        postdata['file_hash'] = 'abcd' # invalid hash
-        response = self.client.post(reverse('rawimage-list'), postdata)
-        self.assertEquals(response.status_code, 400)
+        test_response({}, 400, 'file', "This field is required.")
+
+        # Test for success
+        f.seek(0)
+        test_response({'file': f}, 201)
+
+        # Test for invalid hash
+        f.seek(0)
+        test_response({'file': f, 'file_hash': 'abcd'}, 400, 'non_field_errors',
+                      "file_hash abcd doesn't match uploaded file, whose hash is %s" % h)
 
         f.close()
 

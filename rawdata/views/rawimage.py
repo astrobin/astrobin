@@ -17,26 +17,12 @@ from rest_framework.response import Response
 
 # This app
 from rawdata.folders import *
-from rawdata.forms import RawImageUploadForm
 from rawdata.mixins import RestrictToSubscriberMixin
 from rawdata.models import RawImage
 from rawdata.permissions import IsOwnerOrReadOnly, IsSubscriber
 from rawdata.serializers import RawImageSerializer
 from rawdata.utils import *
 from rawdata.zip import *
-
-class RawImageCreateView(RestrictToSubscriberMixin, CreateView):
-    model = RawImage
-    form_class = RawImageUploadForm
-    # success_url = lazy(reverse, str)('/') # TODO: url to user's raw data
-    success_url = '/'
-
-    def form_valid(self, form):
-        raw_image = form.save(commit = False)
-        raw_image.user = self.request.user
-        raw_image.save()
-
-        return super(RawImageCreateView, self).form_valid(form)
 
 
 class RawImageDetailView(RestrictToSubscriberMixin, DetailView):
