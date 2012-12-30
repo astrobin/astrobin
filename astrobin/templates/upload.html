@@ -255,7 +255,7 @@
                 container           : this.ui.$container.attr('id'),
                 browse_button       : this.ui.$browse_btn.attr('id'),
                 drop_element        : this.ui.$drop_element.attr('id'),
-                url                 : '{% url 'rawdata.upload' %}',
+                url                 : '{% url 'api.rawdata.rawimage.list' %}',
                 flash_swf_url       : '{{STATIC_URL}}js/plupload/plupload.flash.swf',
                 silverlight_xap_url : '{{STATIC_URL}}js/plupload/plupload.silverlight.xap',
                 headers             : {

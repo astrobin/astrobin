@@ -60,7 +60,7 @@ class RawImage(models.Model):
     file_hash = models.CharField(
         max_length = 32,
         editable = False,
-        null = False,
+        null = True,
     )
 
     original_filename = models.CharField(
