@@ -420,3 +420,6 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10,
     'FILTER_BACKEND': 'rest_framework.filters.DjangoFilterBackend',
 }
+
+# http://docs.celeryproject.org/en/latest/django/unit-testing.html
+TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
