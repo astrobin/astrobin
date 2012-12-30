@@ -10,7 +10,8 @@ def serve_zip(images, owner, folder_or_pool = None):
     archive = TemporaryArchive(user = owner)
     archive.save()
 
-    prepare_zip.delay(images, owner, archive, folder_or_pool)
+    image_ids = images.values_list('id', flat = True)
+    prepare_zip.delay(image_ids, owner.id, archive.id, folder_or_pool)
 
     response = HttpResponseRedirect(
         reverse('rawdata.temporary_archive_detail', args = (archive.pk,)))

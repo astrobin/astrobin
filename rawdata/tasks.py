@@ -34,10 +34,11 @@ def index_raw_image(id):
     
 
 @task()
-def prepare_zip(images, owner, temp_archive, folder_or_pool = None):
+def prepare_zip(image_ids, owner_id, temp_archive_id, folder_or_pool = None):
     temp = tempfile.NamedTemporaryFile()
     archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
-    for image in images:
+    for image_id in image_ids:
+        image = RawImage.objects.get(id = image_id)
         if not image.active:
             continue
         archive.write(image.file.path, image.original_filename)
@@ -45,6 +46,8 @@ def prepare_zip(images, owner, temp_archive, folder_or_pool = None):
     archive.close()
 
     size = sum([x.file_size for x in archive.infolist()])
+
+    temp_archive = TemporaryArchive.objects.get(id = temp_archive_id)
     temp_archive.size = size
     temp_archive.file.save('', File(temp))
     temp_archive.ready = True
