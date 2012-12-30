@@ -5,6 +5,7 @@ import json
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.utils.http import urlencode
 
 # Third party apps
 from subscription.models import Subscription, UserSubscription
@@ -27,15 +28,25 @@ class RawImageTest(TestCase):
             user = self.subscribed_user,
             subscription = self.subscription,
             cancelled = False)
+        
+    def tearDown(self):
+        self.subscribed_user.delete()
+        self.unsubscribed_user.delete()
+        self.group.delete()
+        self.subscription.delete()
+        self.user_subscription.delete()
 
     def _test_response(self, url, data, expected_status_code = 200,
                        expected_field = None, expected_message = None):
         response = self.client.post(url, data)
+        response_json = json.loads(response.content)
         self.assertEquals(response.status_code, expected_status_code)
         if expected_field:
             self.assertEquals(
-                json.loads(response.content)[expected_field][0],
+                response_json[expected_field][0],
                 expected_message)
+
+        return response_json
 
     def _get_file(self):
         f = open('rawdata/fixtures/test.fit', 'rb')
@@ -43,6 +54,21 @@ class RawImageTest(TestCase):
 
         f.seek(0)
         return f, h
+
+    def _upload_file(self):
+        f, h = self._get_file()
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self._test_response(
+            reverse('api.rawdata.rawimage.list'),
+            {'file': f, 'file_hash': h},
+            201)
+        self.client.logout()
+        return response['id']
+
+     ######################################################################### 
+    ###########################################################################
+    ### C R E A T I O N                                                     ###
+     #########################################################################
 
     def test_api_create_anon(self):
         f, h = self._get_file()
@@ -76,9 +102,37 @@ class RawImageTest(TestCase):
         self._test_response(reverse('api.rawdata.rawimage.list'), {'file': f}, 201)
         f.close()
 
-    def tearDown(self):
-        self.subscribed_user.delete()
-        self.unsubscribed_user.delete()
-        self.group.delete()
-        self.subscription.delete()
-        self.user_subscription.delete()
+     ######################################################################### 
+    ###########################################################################
+    ### D O W N L O A D                                                     ###
+     #########################################################################
+
+    def test_download_anon(self):
+        f, h = self._get_file()
+        rawimage_id = self._upload_file()
+        response = self.client.get(reverse('rawdata.download', kwargs = {'ids': rawimage_id}))
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/download/2/',
+            status_code = 302, target_status_code = 200)
+
+    def test_download_unsub(self):
+        f, h = self._get_file()
+        rawimage_id = self._upload_file()
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.download', kwargs = {'ids': rawimage_id}), follow = True)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/download/4/'}),
+            status_code = 302, target_status_code = 200)
+
+    def test_download_sub(self):
+        f, h = self._get_file()
+        rawimage_id = self._upload_file()
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.download', kwargs = {'ids': rawimage_id}))
+        self.assertRedirects(
+            response,
+            reverse('rawdata.temporary_archive_detail', args = (1,)),
+            status_code = 302, target_status_code = 200)
+
