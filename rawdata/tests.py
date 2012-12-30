@@ -28,14 +28,19 @@ class RawImageTest(TestCase):
     def setUp(self):
         self.unsubscribed_user = User.objects.create_user('username_unsub', 'fake0@email.tld', 'passw0rd')
         self.subscribed_user = User.objects.create_user('username_sub', 'fake1@email.tld', 'passw0rd')
+        self.subscribed_user_2 = User.objects.create_user('username_sub_2', 'fake2@email.tld', 'passw0rd')
         self.group = Group.objects.create(name = 'rawdata-meteor')
-        self.group.user_set.add(self.subscribed_user)
+        self.group.user_set.add(self.subscribed_user, self.subscribed_user_2)
         self.subscription = Subscription.objects.create(
             name = 'test_subscription',
             price = 1.0,
             group = self.group)
         self.user_subscription = UserSubscription.objects.create(
             user = self.subscribed_user,
+            subscription = self.subscription,
+            cancelled = False)
+        self.user_subscription_2 = UserSubscription.objects.create(
+            user = self.subscribed_user_2,
             subscription = self.subscription,
             cancelled = False)
         
@@ -156,4 +161,56 @@ class RawImageTest(TestCase):
             response,
             reverse('rawdata.temporary_archive_detail', args = (newid,)),
             status_code = 302, target_status_code = 200)
+
+     ######################################################################### 
+    ###########################################################################
+    ### D E L E T E                                                         ###
+     #########################################################################
+
+    def test_delete_anon(self):
+        rawimage_id = self._upload_file()
+        response = self.client.delete(reverse('rawdata.delete', kwargs = {'ids': rawimage_id}))
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/delete/%d/' % rawimage_id,
+            status_code = 302, target_status_code = 200)
+
+    def test_delete_unsub(self):
+        rawimage_id = self._upload_file()
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.delete(reverse('rawdata.delete', kwargs = {'ids': rawimage_id}), follow = True)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/delete/%d/' % rawimage_id}),
+            status_code = 302, target_status_code = 200)
+
+    def test_delete_sub(self):
+        rawimage_id = self._upload_file()
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.delete(
+            reverse('rawdata.delete', kwargs = {'ids': rawimage_id}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(RawImage.objects.filter(id = rawimage_id).count(), 0)
+
+    def test_delete_multi_sub(self):
+        rawimage_id_1 = self._upload_file()
+        rawimage_id_2 = self._upload_file()
+
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.delete(
+            reverse('rawdata.delete', kwargs = {'ids': "%d,%d" % (rawimage_id_1, rawimage_id_2)}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(RawImage.objects.filter(id = rawimage_id_1).count(), 0)
+        self.assertEqual(RawImage.objects.filter(id = rawimage_id_2).count(), 0)
+
+    def test_delete_wrong_sub(self):
+        rawimage_id = self._upload_file()
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.delete(
+            reverse('rawdata.delete', kwargs = {'ids': rawimage_id}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(RawImage.objects.filter(id = rawimage_id).count(), 1)
 
