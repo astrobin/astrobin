@@ -35,7 +35,7 @@ def common_variables(request):
     from rawdata.utils import user_has_subscription
 
     d = {
-        'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
+        #'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
         'is_retailer': request.user.groups.filter(name='Retailers'),
         'has_rawdata_subscription': user_has_subscription(request.user),
