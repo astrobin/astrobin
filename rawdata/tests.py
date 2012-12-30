@@ -4,6 +4,7 @@ import json
 # Django
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
+from django.db.models import Max
 from django.test import TestCase
 from django.utils.http import urlencode
 
@@ -11,8 +12,17 @@ from django.utils.http import urlencode
 from subscription.models import Subscription, UserSubscription
 
 # This app
-from .models import RawImage
+from .models import RawImage, TemporaryArchive
 from .utils import md5_for_file
+
+
+# Utility functions
+def max_id(Klass):
+    new_id = Klass.objects.aggregate(Max('id'))['id__max']
+    if new_id is None:
+        new_id = 1
+    return new_id
+
 
 class RawImageTest(TestCase):
     def setUp(self):
@@ -108,31 +118,42 @@ class RawImageTest(TestCase):
      #########################################################################
 
     def test_download_anon(self):
-        f, h = self._get_file()
         rawimage_id = self._upload_file()
         response = self.client.get(reverse('rawdata.download', kwargs = {'ids': rawimage_id}))
         self.assertRedirects(
             response,
-            'http://testserver/accounts/login/?next=/rawdata/download/2/',
+            'http://testserver/accounts/login/?next=/rawdata/download/%d/' % rawimage_id,
             status_code = 302, target_status_code = 200)
 
     def test_download_unsub(self):
-        f, h = self._get_file()
         rawimage_id = self._upload_file()
         self.client.login(username = 'username_unsub', password = 'passw0rd')
         response = self.client.get(reverse('rawdata.download', kwargs = {'ids': rawimage_id}), follow = True)
         self.assertRedirects(
             response,
-            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/download/4/'}),
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/download/%d/' % rawimage_id}),
             status_code = 302, target_status_code = 200)
 
     def test_download_sub(self):
-        f, h = self._get_file()
         rawimage_id = self._upload_file()
         self.client.login(username = 'username_sub', password = 'passw0rd')
         response = self.client.get(reverse('rawdata.download', kwargs = {'ids': rawimage_id}))
+        newid = max_id(TemporaryArchive)
         self.assertRedirects(
             response,
-            reverse('rawdata.temporary_archive_detail', args = (1,)),
+            reverse('rawdata.temporary_archive_detail', args = (newid,)),
+            status_code = 302, target_status_code = 200)
+
+    def test_download_multi_sub(self):
+        rawimage1_id = self._upload_file()
+        rawimage2_id = self._upload_file()
+
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.download',
+            kwargs = {'ids': '%d,%d' % (rawimage1_id, rawimage2_id)}))
+        newid = max_id(TemporaryArchive)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.temporary_archive_detail', args = (newid,)),
             status_code = 302, target_status_code = 200)
 
