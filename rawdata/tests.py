@@ -360,14 +360,12 @@ class PrivateSharedFolderTest(TestCase):
      #########################################################################
 
     def test_add_data_anon(self):
-        self.client.login(username = 'username_sub', password = 'passw0rd')
         rawimage_id = upload_file(self)
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
             creator = self.subscribed_user)
         folder.save()
-        self.client.logout()
 
         post_data = {'images': rawimage_id}
         response = self.client.post( reverse('rawdata.privatesharedfolder_add_data', args = (folder.id,)),
@@ -379,17 +377,15 @@ class PrivateSharedFolderTest(TestCase):
             status_code = 302, target_status_code = 200)
 
     def test_add_data_unsub(self):
-        self.client.login(username = 'username_sub', password = 'passw0rd')
         rawimage_id = upload_file(self)
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
             creator = self.subscribed_user)
         folder.save()
-        self.client.logout()
 
-        self.client.login(username = 'username_unsub', password = 'passw0rd')
         post_data = {'images': rawimage_id}
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
         response = self.client.post(
             reverse('rawdata.privatesharedfolder_add_data', args = (folder.id,)),
             post_data,
@@ -404,7 +400,6 @@ class PrivateSharedFolderTest(TestCase):
     def test_add_data_sub(self):
         rawimage_id = upload_file(self)
 
-        self.client.login(username = 'username_sub', password = 'passw0rd')
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
@@ -412,6 +407,7 @@ class PrivateSharedFolderTest(TestCase):
         folder.save()
 
         post_data = {'images': rawimage_id}
+        self.client.login(username = 'username_sub', password = 'passw0rd')
         response = self.client.post(
             reverse('rawdata.privatesharedfolder_add_data', args = (folder.id,)),
             post_data,
@@ -425,7 +421,6 @@ class PrivateSharedFolderTest(TestCase):
         rawimage_id_1 = upload_file(self)
         rawimage_id_2 = upload_file(self)
 
-        self.client.login(username = 'username_sub', password = 'passw0rd')
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
@@ -433,6 +428,7 @@ class PrivateSharedFolderTest(TestCase):
         folder.save()
 
         post_data = {'images': (rawimage_id_1, rawimage_id_2)}
+        self.client.login(username = 'username_sub', password = 'passw0rd')
         response = self.client.post(
             reverse('rawdata.privatesharedfolder_add_data', args = (folder.id,)),
             post_data,
@@ -450,8 +446,8 @@ class PrivateSharedFolderTest(TestCase):
             creator = self.subscribed_user)
         folder.save()
 
-        self.client.login(username = 'username_sub_2', password = 'passw0rd')
         post_data = {'images': rawimage_id}
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
         response = self.client.post(
             reverse('rawdata.privatesharedfolder_add_data', args = (folder.id,)),
             post_data,
@@ -472,8 +468,8 @@ class PrivateSharedFolderTest(TestCase):
 
         folder.users.add(self.subscribed_user_2)
 
-        self.client.login(username = 'username_sub_2', password = 'passw0rd')
         post_data = {'images': rawimage_id}
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
         response = self.client.post(
             reverse('rawdata.privatesharedfolder_add_data', args = (folder.id,)),
             post_data,
