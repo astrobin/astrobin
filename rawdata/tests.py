@@ -645,7 +645,7 @@ class PrivateSharedFolderTest(TestCase):
             status_code = 302, target_status_code = 200)
         self.client.logout()
 
-    def test_add_imagesub(self):
+    def test_add_image_sub(self):
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
