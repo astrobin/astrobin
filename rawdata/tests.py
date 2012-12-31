@@ -822,3 +822,114 @@ class PrivateSharedFolderTest(TestCase):
 
         folder = PrivateSharedFolder.objects.get(id = folder.id)
         self.assertEqual(folder.users.all().count(), 1)
+
+     #########################################################################
+    ###########################################################################
+    ### R E M O V E   U S E R                                               ###
+     #########################################################################
+
+    def test_remove_user_anon(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.subscribed_user_2)
+
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_user',
+                    kwargs = {'pk': folder.id, 'user_id': self.subscribed_user_2.id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/%d/remove-user/%d/' % (folder.id, self.subscribed_user_2.id),
+            status_code = 302, target_status_code = 200)
+
+    def test_remove_user_unsub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.subscribed_user_2)
+
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_user',
+                    kwargs = {'pk': folder.id, 'user_id': self.subscribed_user_2.id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/remove-user/%d/' % (folder.id, self.subscribed_user_2.id)}),
+            status_code = 302, target_status_code = 200)
+        self.client.logout()
+
+    def test_remove_user_sub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.subscribed_user_2)
+
+        self.assertEqual(folder.users.all().count(), 1)
+
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_user',
+                    kwargs = {'pk': folder.id, 'user_id': self.subscribed_user_2.id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.users.all().count(), 0)
+
+    def test_remove_user_wrong_sub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.unsubscribed_user)
+
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_user',
+                    kwargs = {'pk': folder.id, 'user_id': self.unsubscribed_user.id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.users.all().count(), 1)
+
+    def test_remove_user_sub_invitee(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.subscribed_user_2)
+        folder.users.add(self.unsubscribed_user)
+
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_user',
+                    kwargs = {'pk': folder.id, 'user_id': self.unsubscribed_user.id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.users.all().count(), 2)
