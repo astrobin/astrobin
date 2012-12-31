@@ -706,3 +706,119 @@ class PrivateSharedFolderTest(TestCase):
 
         folder = PrivateSharedFolder.objects.get(id = folder.id)
         self.assertEqual(folder.processed_images.all().count(), 1)
+
+     #########################################################################
+    ###########################################################################
+    ### A D D   U S E R                                                     ###
+     #########################################################################
+
+    def test_add_users_anon(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        post_data = {'users': self.subscribed_user_2}
+        response = self.client.post(reverse('rawdata.privatesharedfolder_add_users', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/%d/add-users/' % folder.id,
+            status_code = 302, target_status_code = 200)
+
+    def test_add_users_unsub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        post_data = {'users': self.subscribed_user_2}
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_add_users', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/add-users/' % folder.id}),
+            status_code = 302, target_status_code = 200)
+        self.client.logout()
+
+    def test_add_users_sub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        post_data = {'users': self.subscribed_user_2}
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_add_users', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.users.all().count(), 1)
+
+    def test_add_users_multi_sub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        post_data = {'users': "%s,%s" % (self.subscribed_user_2, self.unsubscribed_user)}
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_add_users', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.users.all().count(), 2)
+
+    def test_add_users_wrong_sub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        post_data = {'users': self.subscribed_user_2}
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_add_users', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.users.all().count(), 0)
+
+    def test_add_users_sub_invitee(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.subscribed_user_2)
+
+        post_data = {'users': self.subscribed_user_2}
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_add_users', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.users.all().count(), 1)
