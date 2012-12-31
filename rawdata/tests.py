@@ -479,3 +479,119 @@ class PrivateSharedFolderTest(TestCase):
         folder = PrivateSharedFolder.objects.get(id = folder.id)
         self.assertEqual(folder.images.all().count(), 1)
 
+     #########################################################################
+    ###########################################################################
+    ### R E M O V E   D A T A                                               ###
+     #########################################################################
+
+    def test_remove_data_anon(self):
+        rawimage_id = upload_file(self)
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.images.add(rawimage_id)
+
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_data',
+                    kwargs = {'pk': folder.id, 'rawimage_pk': rawimage_id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/%d/remove-data/%d/' % (folder.id, rawimage_id),
+            status_code = 302, target_status_code = 200)
+
+    def test_remove_data_unsub(self):
+        rawimage_id = upload_file(self)
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.images.add(rawimage_id)
+
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_data',
+                    kwargs = {'pk': folder.id, 'rawimage_pk': rawimage_id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/remove-data/%d/' % (folder.id, rawimage_id)}),
+            status_code = 302, target_status_code = 200)
+        self.client.logout()
+
+    def test_remove_data_sub(self):
+        rawimage_id = upload_file(self)
+
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.images.add(rawimage_id)
+
+        self.assertEqual(folder.images.all().count(), 1)
+
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_data',
+                    kwargs = {'pk': folder.id, 'rawimage_pk': rawimage_id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.images.all().count(), 0)
+
+    def test_remove_data_wrong_sub(self):
+        rawimage_id = upload_file(self)
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.images.add(rawimage_id)
+
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_data',
+                    kwargs = {'pk': folder.id, 'rawimage_pk': rawimage_id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.images.all().count(), 1)
+
+    def test_remove_data_sub_invitee(self):
+        rawimage_id = upload_file(self)
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.subscribed_user_2)
+        folder.images.add(rawimage_id)
+
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_remove_data',
+                    kwargs = {'pk': folder.id, 'rawimage_pk': rawimage_id}),
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.images.all().count(), 1)
