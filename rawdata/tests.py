@@ -11,6 +11,9 @@ from django.utils.http import urlencode
 # Third party apps
 from subscription.models import Subscription, UserSubscription
 
+# Other AstroBin apps
+from astrobin.models import Image
+
 # This app
 from .forms import (
     PrivateSharedFolderForm,
@@ -65,6 +68,7 @@ def get_file():
 
     f.seek(0)
     return f, h
+
 
 def test_response(testcase, url, data, expected_status_code = 200,
                   expected_field = None, expected_message = None):
@@ -595,3 +599,110 @@ class PrivateSharedFolderTest(TestCase):
 
         folder = PrivateSharedFolder.objects.get(id = folder.id)
         self.assertEqual(folder.images.all().count(), 1)
+
+     #########################################################################
+    ###########################################################################
+    ### A D D   I M A G E                                                   ###
+     #########################################################################
+
+    def test_add_image_anon(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        image = Image.objects.create(title = "test image", user = self.subscribed_user)
+
+        post_data = {'image': image.id}
+        response = self.client.post( reverse('rawdata.privatesharedfolder_add_image', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/%d/add-image/' % folder.id,
+            status_code = 302, target_status_code = 200)
+
+    def test_add_image_unsub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        image = Image.objects.create(title = "test image", user = self.subscribed_user)
+
+        post_data = {'image': image.id}
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_add_image', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/add-image/' % folder.id}),
+            status_code = 302, target_status_code = 200)
+        self.client.logout()
+
+    def test_add_imagesub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        image = Image.objects.create(title = "test image", user = self.subscribed_user)
+
+        post_data = {'image': image.id}
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_add_image', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.processed_images.all().count(), 1)
+
+    def test_add_image_wrong_sub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        image = Image.objects.create(title = "test image", user = self.subscribed_user_2)
+
+        post_data = {'image': image.id}
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_add_image', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.processed_images.all().count(), 0)
+
+    def test_add_image_sub_invitee(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.subscribed_user_2)
+        image = Image.objects.create(title = "test image", user = self.subscribed_user_2)
+
+        post_data = {'image': image.id}
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.post(
+            reverse('rawdata.privatesharedfolder_add_image', args = (folder.id,)),
+            post_data,
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.client.logout()
+
+        folder = PrivateSharedFolder.objects.get(id = folder.id)
+        self.assertEqual(folder.processed_images.all().count(), 1)
