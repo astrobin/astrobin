@@ -933,3 +933,79 @@ class PrivateSharedFolderTest(TestCase):
 
         folder = PrivateSharedFolder.objects.get(id = folder.id)
         self.assertEqual(folder.users.all().count(), 2)
+
+     #########################################################################
+    ###########################################################################
+    ### D O W N L O A D                                                     ###
+     #########################################################################
+
+    def test_download_anon(self):
+        rawimage_id = upload_file(self)
+
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.images.add(rawimage_id)
+
+        response = self.client.get(reverse('rawdata.privatesharedfolder_download', args = (folder.id,)))
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/%d/download/' % folder.id,
+            status_code = 302, target_status_code = 200)
+
+    def test_download_unsub(self):
+        rawimage_id = upload_file(self)
+
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.images.add(rawimage_id)
+
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.privatesharedfolder_download', args = (folder.id,)), follow = True)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/download/' % folder.id}),
+            status_code = 302, target_status_code = 200)
+        self.client.logout()
+
+    def test_download_sub(self):
+        rawimage_id = upload_file(self)
+
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.images.add(rawimage_id)
+
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.privatesharedfolder_download', args = (folder.id,)), follow = True)
+        newid = max_id(TemporaryArchive)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.temporary_archive_detail', args = (newid,)),
+            status_code = 302, target_status_code = 200)
+        self.client.logout()
+
+    def test_download_wrong_sub(self):
+        rawimage_id = upload_file(self)
+
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.images.add(rawimage_id)
+
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.privatesharedfolder_download', args = (folder.id,)), follow = True)
+        self.assertEqual(response.status_code, 404)
