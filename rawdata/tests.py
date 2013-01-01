@@ -257,6 +257,87 @@ class PrivateSharedFolderTest(TestCase):
 
      #########################################################################
     ###########################################################################
+    ### L I S T                                                             ###
+     #########################################################################
+
+    def test_list_anon(self):
+        response = self.client.get(reverse('rawdata.privatesharedfolder_list'), follow = True)
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/',
+            status_code = 302, target_status_code = 200)
+
+    def test_list_unsub(self):
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.privatesharedfolder_list'), follow = True)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/'}),
+            status_code = 302, target_status_code = 200)
+        self.client.logout()
+
+    def test_list_sub(self):
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.privatesharedfolder_list'))
+        self.assertEqual(response.status_code, 200)
+        self.client.logout()
+
+     #########################################################################
+    ###########################################################################
+    ### D E T A I L                                                         ###
+     #########################################################################
+
+    def test_detail_anon(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        response = self.client.get(
+            reverse('rawdata.privatesharedfolder_detail', args = (folder.id,)),
+            follow = True)
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/%d/' % folder.id,
+            status_code = 302, target_status_code = 200)
+
+    def test_detail_unsub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.get(
+            reverse('rawdata.privatesharedfolder_detail', args = (folder.id,)),
+            follow = True)
+
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/' % folder.id}),
+            status_code = 302, target_status_code = 200)
+        self.client.logout()
+
+    def test_detail_sub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+
+        response = self.client.get(
+            reverse('rawdata.privatesharedfolder_detail', args = (folder.id,)),
+            follow = True)
+
+        self.assertEqual(response.status_code, 200)
+        self.client.logout()
+
+     #########################################################################
+    ###########################################################################
     ### C R E A T I O N                                                     ###
      #########################################################################
 
@@ -357,6 +438,67 @@ class PrivateSharedFolderTest(TestCase):
         folder = PrivateSharedFolder.objects.get(id = folder.id)
         self.assertEqual(folder.name, "changed name")
         self.assertEqual(folder.description, "changed description")
+
+     #########################################################################
+    ###########################################################################
+    ### D E L E T E                                                         ###
+     #########################################################################
+
+    def test_delete_anon(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        response = self.client.delete(
+            reverse('rawdata.privatesharedfolder_delete', args = (folder.id,)))
+        self.assertRedirects(
+            response,
+            'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/%d/delete/' % folder.id,
+            status_code = 302, target_status_code = 200)
+
+        count = PrivateSharedFolder.objects.filter(id = folder.id).count()
+        self.assertEqual(count, 1)
+
+    def test_delete_unsub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.delete(
+            reverse('rawdata.privatesharedfolder_delete', args = (folder.id,)),
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/delete/' % folder.id}),
+            status_code = 302, target_status_code = 200)
+
+        self.client.logout()
+
+        count = PrivateSharedFolder.objects.filter(id = folder.id).count()
+        self.assertEqual(count, 1)
+
+    def test_delete_sub(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.delete(
+            reverse('rawdata.privatesharedfolder_delete', args = (folder.id,)),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.logout()
+
+        count = PrivateSharedFolder.objects.filter(id = folder.id).count()
+        self.assertEqual(count, 0)
 
      #########################################################################
     ###########################################################################
