@@ -1149,6 +1149,27 @@ class PrivateSharedFolderTest(TestCase):
         response = self.client.get(reverse('rawdata.privatesharedfolder_download', args = (folder.id,)), follow = True)
         self.assertEqual(response.status_code, 404)
 
+    def test_download_invitee(self):
+        rawimage_id = upload_file(self)
+
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.images.add(rawimage_id)
+        folder.users.add(self.subscribed_user_2)
+
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.privatesharedfolder_download', args = (folder.id,)), follow = True)
+        newid = max_id(TemporaryArchive)
+        self.assertRedirects(
+            response,
+            reverse('rawdata.temporary_archive_detail', args = (newid,)),
+            status_code = 302, target_status_code = 200)
+        self.client.logout()
+
 
 class PublicDataPoolTest(TestCase):
     def setUp(self):
