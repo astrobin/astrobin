@@ -32,8 +32,8 @@ urlpatterns = patterns('',
     url(r'^publicdatapools/(?P<pk>\d+)/update/$', login_required(PublicDataPoolUpdateView.as_view()), name = 'rawdata.publicdatapool_update'),
 
 
-    url(r'^privatesharedfolders/$', PrivateSharedFolderListView.as_view(), name = 'rawdata.privatesharedfolder_list'),
-    url(r'^privatesharedfolders/(?P<pk>\d+)/$', PrivateSharedFolderDetailView.as_view(), name = 'rawdata.privatesharedfolder_detail'),
+    url(r'^privatesharedfolders/$', login_required(PrivateSharedFolderListView.as_view()), name = 'rawdata.privatesharedfolder_list'),
+    url(r'^privatesharedfolders/(?P<pk>\d+)/$', login_required(PrivateSharedFolderDetailView.as_view()), name = 'rawdata.privatesharedfolder_detail'),
     url(r'^privatesharedfolders/(?P<pk>\d+)/add-data/$', login_required(PrivateSharedFolderAddDataView.as_view()), name = 'rawdata.privatesharedfolder_add_data'),
     url(r'^privatesharedfolders/(?P<pk>\d+)/remove-data/(?P<rawimage_pk>\d+)/$', login_required(PrivateSharedFolderRemoveDataView.as_view()), name = 'rawdata.privatesharedfolder_remove_data'),
     url(r'^privatesharedfolders/(?P<pk>\d+)/add-image/$', login_required(PrivateSharedFolderAddImageView.as_view()), name = 'rawdata.privatesharedfolder_add_image'),
