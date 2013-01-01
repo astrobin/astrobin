@@ -372,13 +372,11 @@ class PrivateSharedFolderTest(TestCase):
      #########################################################################
 
     def test_update_anon(self):
-        self.client.login(username = 'username_sub', password = 'passw0rd')
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
             creator = self.subscribed_user)
         folder.save()
-        self.client.logout()
 
         post_data = {'name': "changed name", 'description': "changed description"}
         response = self.client.post(
@@ -390,13 +388,11 @@ class PrivateSharedFolderTest(TestCase):
             status_code = 302, target_status_code = 200)
 
     def test_update_unsub(self):
-        self.client.login(username = 'username_sub', password = 'passw0rd')
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
             creator = self.subscribed_user)
         folder.save()
-        self.client.logout()
 
         self.client.login(username = 'username_unsub', password = 'passw0rd')
         post_data = {'name': "changed name", 'description': "changed description"}
@@ -407,7 +403,6 @@ class PrivateSharedFolderTest(TestCase):
         self.client.logout()
 
     def test_update_sub(self):
-        self.client.login(username = 'username_sub', password = 'passw0rd')
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
@@ -415,6 +410,7 @@ class PrivateSharedFolderTest(TestCase):
         folder.save()
 
         post_data = {'name': "", 'description': "changed description"}
+        self.client.login(username = 'username_sub', password = 'passw0rd')
         response = self.client.post(
             reverse('rawdata.privatesharedfolder_update', args = (folder.id,)),
             post_data,
