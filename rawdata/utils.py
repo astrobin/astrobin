@@ -12,7 +12,7 @@ def user_used_bytes(user):
 def user_used_percent(user):
     b = user_used_bytes(user)
     limit = user_byte_limit(user)
-    return b * 100 / limit
+    return b * 100 / limit if limit > 0 else 100
 
 
 def user_progress_class(user):
