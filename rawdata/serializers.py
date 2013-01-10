@@ -12,6 +12,7 @@ from .models import RawImage
 from .utils import (
     md5_for_file,
     supported_raw_formats,
+    user_used_percent,
 )
 
 
@@ -29,6 +30,11 @@ class RawImageSerializer(serializers.ModelSerializer):
         return attrs
 
     def validate(self, attrs):
+        user = self.context['request'].user
+        if user_used_percent(user) >= 100:
+            raise serializers.ValidationError(
+                _("You don't have any free space on AstroBin Rawdata. Consider upgrading your account."))
+    
         try:
             provided_hash = attrs['file_hash']
         except KeyError:
@@ -40,6 +46,7 @@ class RawImageSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 "file_hash %s doesn't match uploaded file, whose hash is %s" %
                     (provided_hash, real_hash))
+
         return attrs
 
     class Meta:
