@@ -61,6 +61,10 @@ def user_has_inactive_subscription(user):
 def subscription_byte_limit(subscription):
     GB = 1024*1024*1024
 
+    # Used in the unit tests
+    if subscription.group.name == 'rawdata-empty':
+        return 0
+
     if subscription.group.name == 'rawdata-meteor':
         return 5*GB
     if subscription.group.name == 'rawdata-luna':

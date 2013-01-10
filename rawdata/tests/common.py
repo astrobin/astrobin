@@ -25,12 +25,23 @@ def setup_data(testcase):
     testcase.unsubscribed_user = User.objects.create_user('username_unsub', 'fake0@email.tld', 'passw0rd')
     testcase.subscribed_user = User.objects.create_user('username_sub', 'fake1@email.tld', 'passw0rd')
     testcase.subscribed_user_2 = User.objects.create_user('username_sub_2', 'fake2@email.tld', 'passw0rd')
+    testcase.subscribed_user_3 = User.objects.create_user('username_sub_3', 'fake3@email.tld', 'passw0rd')
+
     testcase.group = Group.objects.create(name = 'rawdata-meteor')
     testcase.group.user_set.add(testcase.subscribed_user, testcase.subscribed_user_2)
+
+    testcase.group_empty = Group.objects.create(name = 'rawdata-empty')
+    testcase.group_empty.user_set.add(testcase.subscribed_user_3)
+
     testcase.subscription = Subscription.objects.create(
         name = 'test_subscription',
         price = 1.0,
         group = testcase.group)
+    testcase.subscription_empty = Subscription.objects.create(
+        name = 'test_subscription_empty',
+        price = 1.0,
+        group = testcase.group_empty)
+
     testcase.user_subscription = UserSubscription.objects.create(
         user = testcase.subscribed_user,
         subscription = testcase.subscription,
@@ -38,6 +49,10 @@ def setup_data(testcase):
     testcase.user_subscription_2 = UserSubscription.objects.create(
         user = testcase.subscribed_user_2,
         subscription = testcase.subscription,
+        cancelled = False)
+    testcase.user_subscription_3 = UserSubscription.objects.create(
+        user = testcase.subscribed_user_3,
+        subscription = testcase.subscription_empty,
         cancelled = False)
 
 
