@@ -52,6 +52,16 @@ class RawImageTest(TestCase):
         self.client.logout()
         f.close()
 
+    def test_api_create_sub_quota_exceeded(self):
+        f, h = get_file()
+        self.client.login(username = 'username_sub_3', password = 'passw0rd')
+        test_response(self, reverse('api.rawdata.rawimage.list'),
+                            {'file': f}, 400, 'non_field_errors',
+                            "You don't have any free space on AstroBin Rawdata. Consider upgrading your account.")
+        self.client.logout()
+        f.close()
+
+
     def test_api_create_sub_success(self):
         f, h = get_file()
         self.client.login(username = 'username_sub', password = 'passw0rd')
