@@ -3,6 +3,7 @@ import os
 import uuid
 
 # Django
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
@@ -21,7 +22,7 @@ def upload_path(instance, filename):
     instance.original_filename = filename
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
-    return os.path.join('rawdata', str(instance.user.id), filename)
+    return os.path.join(str(instance.user.id), filename)
 
 def temporary_download_upload_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -53,7 +54,7 @@ class RawImage(models.Model):
     )
 
     file = models.FileField(
-        storage = FileSystemStorage(location = '/webserver/www'),
+        storage = FileSystemStorage(location = settings.RAWDATA_ROOT),
         upload_to = upload_path,
     )
 
