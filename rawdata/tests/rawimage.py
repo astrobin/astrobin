@@ -1,4 +1,8 @@
+# Python
+import os
+
 # Django
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils.http import urlencode
@@ -65,7 +69,8 @@ class RawImageTest(TestCase):
     def test_api_create_sub_success(self):
         f, h = get_file()
         self.client.login(username = 'username_sub', password = 'passw0rd')
-        test_response(self, reverse('api.rawdata.rawimage.list'), {'file': f}, 201)
+        response = test_response(self, reverse('api.rawdata.rawimage.list'), {'file': f}, 201)
+        self.assertEqual(os.path.exists(os.path.join(settings.RAWDATA_ROOT, response['file'])), True)
         self.client.logout()
         f.close()
 

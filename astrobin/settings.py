@@ -427,3 +427,5 @@ REST_FRAMEWORK = {
 
 # http://docs.celeryproject.org/en/latest/django/unit-testing.html
 TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
+
+RAWDATA_ROOT = '/rawdata/files'
