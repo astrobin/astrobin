@@ -48,59 +48,22 @@ echo "alias lessc=/home/astrobin/.npm/less/1.1.2/package/bin/lessc" >> ~/.bashrc
 
 cd
 mkdir Code && cd Code
-hg clone https://bitbucket.org/siovene/astrobin astrobin
+git clone https://bitbucket.org/siovene/astrobin astrobin
+cd astrobin
+git submodule init
+git submodule update
 
 
 # Python packages:
 # ================
 
-cd astrobin
-virtualenv --no-site-packages venv
-ln -s ./venv/bin/pip vpip
+cd; mkdir venv
+virtualenv --no-site-packages venv/astrobin/production
+. ~/venv/astrobin/production/bin/activate
 
-# setproctitle must be installed first
-./vpip install setproctitle
-./vpip install \
-    yolk \
-    django \
-    django-haystack \
-    django-celery celerymon \
-    gunicorn gunicorn-console \
-    django-debug-toolbar \
-    MySQL-python \
-    django-ratings \
-    django-memcached \
-    django-storages boto \
-    simplejson \
-    django-notification \
-    flickrapi \
-    Pillow \
-    python-memcached \
-    django-model-utils \
-    django-maintenancemode \
-    pytz \
-    django-timezones==0.1.4 \
-    south \
-    django-blog-zinnia \
-    django-staticfiles \
-    django-tinymce \
-    js.tinymce \
-    django-pagination \
-    lxml \
-    django-uni-form \
-    Markdown \
-    django-bootstrap-toolkit \
-    django-pipeline==1.2.1 \
-    jsmin \
-    cssmin \
-    django-tastypie \
-    django-activity-stream \
-    django-modeltranslation \
-    pysolr \
-    numpy
+./install_submodules.sh
+pip install -r requirements.txt
 
-Install django-hitcount from sources:
-https://github.com/thornomad/django-hitcount/
 
 # NOTE: if you run into this: https://github.com/ask/celery/commit/edf3b3f33acdada9264754068d9c74ee76692cd9
 # then install kombu, celery and django-celery from git master:
@@ -113,46 +76,6 @@ https://github.com/thornomad/django-hitcount/
 # cd django-celery; ../astrobin/venv/bin/python setup.py install; cd ..
 
 # for the notifications system
-
-cd submodules
-
-cd django-persistent-messages
-../../venv/bin/python setup.py install
-cd ..
-
-# for the private beta
-cd django-privatebeta
-../../venv/bin/python setup.py install
-cd ..
-
-# for the messaging system
-cd django-threaded-messages
-../../venv/bin/python setup.py install
-cd ..
-
-# registration
-cd django-registration
-../../venv/bin/python setup.py install
-cd ../..
-
-# for the threaded comments
-cd django-mptt
-../../venv/bin/python setup.py install
-cd ../..
-
-# for the contact form
-cd django-contact-form
-../../venv/bin/python setup.py install
-cd ../..
-
-# for the reviews
-cd django-reviews
-../../venv/bin/python setup.py install
-cd ../..
-
-# for the moon phase module
-. ./venv/bin/activate
-easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
 
 
 # Set up MySQL:
