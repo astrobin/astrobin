@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load common_tags %}
 {% load tags %}
 {% load inbox %}
 {% load compressed %}
@@ -137,6 +138,13 @@
                                             {% trans "TIFF/FITS" %}
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{% url rawdata.publicdatapool_list %}">
+                                            <i class="icon-book"></i>
+                                            {% trans "Public data pools" %}
+                                        </a>
+                                    </li>
+
 
                                     <li class="divider"></li>
                                     <li>
@@ -199,7 +207,14 @@
                                             {% trans "AstroBin Questions" %}
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{% url rawdata.help1 %}">
+                                            <i class="icon-book"></i>
+                                            {% trans "AstroBin Raw Data" %}
+                                        </a>
+                                    </li>
   
+ 
                                     <li class="divider"></li>
 
                                     <li>
@@ -379,6 +394,23 @@
                                         </li>
                                         <li class="divider"></li>
 
+                                        {% if has_rawdata_subscription %}
+                                        <li>
+                                            <a href="{% url rawdata.library %}">
+                                                <i class="icon-book"></i>
+                                                {% trans "Raw data library" %}
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url rawdata.privatesharedfolder_list %}">
+                                                <i class="icon-lock"></i>
+                                                {% trans "Private shared folders" %}
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        {% endif %}
+ 
                                         <li>
                                             <a href="{% url messages_inbox %}">
                                                 <i class="icon-inbox"></i>
@@ -392,60 +424,10 @@
                                             </a>
                                         </li>
 
-                                        <li class="nav-header">{% trans "My settings" %}</li>
                                         <li>
                                             <a href="{% url profile_edit_basic %}">
                                                 <i class="icon-edit"></i>
-                                                {% trans "Basic information" %}
-                                            </a>
-                                        </li>
-
-                                        {% if is_producer or is_retailer %}
-                                        <li>
-                                            <a href="{% url profile_edit_commercial %}">
-                                                <i class="icon-briefcase"></i>
-                                                {% trans "Commercial information" %}
-                                            </a>
-                                        </li>
-                                        {% endif %}
-
-                                        {% if is_retailer %}
-                                        <li>
-                                            <a href="{% url profile_edit_retailer %}">
-                                                <i class="icon-truck"></i>
-                                                {% trans "Retailer information" %}
-                                            </a>
-                                        </li>
-                                        {% endif %}
-
-                                        <li>
-                                            <a href="{% url profile_edit_gear %}">
-                                                <i class="icon-cog"></i>
-                                                {% trans "Gear" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url profile_edit_locations %}">
-                                                <i class="icon-globe"></i>
-                                                {% trans "Locations" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url profile_edit_license %}">
-                                                <i class="icon-legal"></i>
-                                                {% trans "Default license" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url profile_edit_preferences %}">
-                                                <i class="icon-wrench"></i>
-                                                {% trans "Preferences" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url avatar_change %}">
-                                                <i class="icon-user"></i>
-                                                {% trans "Avatar" %}
+                                                {% trans "My settings" %}
                                             </a>
                                         </li>
                                         <li class="divider"></li>
@@ -689,6 +671,7 @@
         <!--[if lte IE 8]><script type="text/javascript" src="{{STATIC_URL}}js/flashcanvas.js"></script><![endif]-->
 
         {% compressed_js 'scripts' %}
+        <script type="text/javascript" src="{{STATIC_URL}}js/locale/jquery.timeago.{{request.LANGUAGE_CODE}}.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Converter.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Sanitizer.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/ZeroClipboard.js"></script>
@@ -760,6 +743,8 @@
                 // date and time pickers
                 $('input').filter('.timepickerclass').timepicker({});
                 $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
+
+                $('abbr.timeago').timeago();
 
                 $('input:checkbox, input:radio, input:file').uniform(
                     {fileDefaultText: '{% trans "No file selected" %}',

@@ -8,8 +8,6 @@ sudo apt-get install \
 	git \
 	mercurial \
 	python2.7-dev \
-	mysql-server \
-	libmysqlclient-dev \
 	memcached \
 	rabbitmq-server \
 	python-pip \
@@ -155,15 +153,19 @@ cd ../..
 easy_install -i http://downloads.egenix.com/python/index/ucs4/ egenix-mx-base
 
 
-# Set up MySQL:
-# =============
+# Set up Postgresql:
+# ==================
 
-mysql -u root -p
-create user 'astrobin'@'localhost' identified by '***REMOVED***';
-create database astrobin character set utf8;
-use astrobin;
-grant all privileges on *.* to 'astrobin'@'localhost' identified by '***REMOVED***';
-quit
+sudo -u postgres createuser  (n/y/n)
+sudo -u postgres createdb astrobin
+sudo -u postgres createdb astrobin_questions_en
+sudo -u postgres createdb pootle
+sudo -u postgres psql
+alter user astrobin with encrypted password 's3cr3t';
+grant all privileges on database astrobin to astrobin;
+grant all privileges on database astrobin_questions_en to astrobin;
+grant all privileges on database pootle to astrobin;
+
 
 # Initialize db
 ./scripts/syncdb.sh
