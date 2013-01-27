@@ -9,6 +9,7 @@ TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
 MEDIA_VERSION = '34'
+LONGPOLL_ENABLED = False
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@astrobin.com'),
@@ -32,7 +33,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': os.environ['ASTROBIN_DATABASE_NAME'],         # Or path to database file if using sqlite3.
         'USER': os.environ['ASTROBIN_DATABASE_USER'],         # Not used with sqlite3.
         'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'], # Not used with sqlite3.
@@ -153,8 +154,6 @@ MIDDLEWARE_CLASSES = (
     'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
-    #'johnny.middleware.LocalStoreClearMiddleware',
-    #'johnny.middleware.QueryCacheMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
 
@@ -182,14 +181,22 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INSTALLED_APPS = (
+    # Django apps
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
     'staticfiles',
+
+    # AstroBin apps
+    'common',
+    'nested_comments',
     'astrobin',
-    'django.contrib.admin',
+    'rawdata',
+
+    # Third party apps
     'registration',
     'djangoratings',
     'haystack',
@@ -218,6 +225,11 @@ INSTALLED_APPS = (
     'actstream',
     'modeltranslation',
     'openid_provider',
+    'paypal.standard.ipn',
+    'subscription',
+    'ember',
+    'rest_framework',
+    'rest_framework.authtoken',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -232,11 +244,6 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
     },
-    'johnny': dict(
-        BACKEND = 'johnny.backends.memcached.MemcachedCache',
-        LOCATION = ['127.0.0.1:11211'],
-        JOHNNY_CACHE = True,
-    )
 }
 JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
 
@@ -262,7 +269,7 @@ BROKER_VHOST = 'astrobin'
 
 CELERY_RESULT_BACKEND = 'database'
 CELERY_RESULT_DBURI = os.environ['ASTROBIN_CELERY_RESULT_DBURI']
-CELERY_IMPORTS = ('astrobin.tasks', )
+CELERY_IMPORTS = ('astrobin.tasks', 'rawdata.tasks',)
 CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},
                  "plate_solve": {"exchange":"plate_solve", "binding_key":"plate_solve_key"}
                 }
@@ -318,7 +325,7 @@ STATICFILES_DIRS = (local_path('static/'),)
 
 PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.SlimItCompressor'
 
 PIPELINE_CSS = {
     'screen': {
@@ -331,6 +338,8 @@ PIPELINE_CSS = {
             'css/token-input.css',
             'css/jquery.multiselect.css',
             'css/jquery.qtip.css',
+
+            'common/css/jquery.lightbox-0.5.css',
 
             'css/reset.css',
             'css/bootstrap.css',
@@ -347,11 +356,15 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
-            'js/jquery-1.7.1.js',
+            'common/js/jquery-1.8.3.js',
+            'common/js/handlebars-1.0.rc.1.js',
+            'common/js/ember-1.0.0-pre.2.js',
+            'common/js/jquery.lightbox-0.5.js',
+
             'js/jquery.i18n.js',
             'js/plugins/localization/jquery.localisation.js',
             'js/jquery.uniform.js',
-            'js/jquery-ui-1.8.16.custom.min.js',
+            'js/jquery-ui-1.9.2.custom.js',
             'js/jquery.capty.js',
             'js/jquery-ui-timepicker-addon.js',
             'js/jquery.validationEngine-en.js',
@@ -360,7 +373,6 @@ PIPELINE_JS = {
             'js/jquery.blockUI.js',
             'js/jquery.tmpl.1.1.1.js',
             'js/ui.multiselect.js',
-            'js/plugins/scrollTo/jquery.scrollTo.js',
             'js/facebox.js',
             'js/jquery.form.js',
             'js/jquery.tokeninput.js',
@@ -371,6 +383,8 @@ PIPELINE_JS = {
             'js/jquery.multiselect.js',
             'js/jquery.qtip.js',
             'js/jquery.raty.js',
+            'js/jquery.stickytableheaders.js',
+            'js/jquery.timeago.js',
             'js/respond.src.js',
             'js/bootstrap.js',
             'js/astrobin.js',
@@ -391,4 +405,27 @@ ACTSTREAM_ACTION_MODELS = (
     'astrobin.focalreducer',
     'astrobin.image',
     'astrobin.imagerevision',
+    'rawdata.PublicDataPool',
 )
+
+PAYPAL_TEST = False
+PAYPAL_RECEIVER_EMAIL = 'astrobin@astrobin.com'
+SUBSCRIPTION_GRACE_PERIOD = 7
+SUBSCRIPTION_PAYPAL_SETTINGS = {
+    "business": PAYPAL_RECEIVER_EMAIL,
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10,
+    'FILTER_BACKEND': 'rest_framework.filters.DjangoFilterBackend',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication', # Useful for unit tests
+    )
+}
+
+# http://docs.celeryproject.org/en/latest/django/unit-testing.html
+TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
+
+RAWDATA_ROOT = '/rawdata/files'

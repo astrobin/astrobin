@@ -1,5 +1,7 @@
 {% load i18n %}
+{% load common_tags %}
 {% load tags %}
+{% load url from future %}
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
@@ -13,7 +15,7 @@
                 {% ifequal request.user user %}
                     {% if is_producer or is_retailer %}
                         <li>
-                            <a href="{% url user_page_commercial_products request.user %}">
+                            <a href="{% url 'user_page_commercial_products' request.user %}">
                                 <i class="icon-barcode"></i>
                                 {% trans "Commercial products" %}
                             </a>
@@ -21,25 +23,33 @@
                     {% endif %}
                 {% endifequal %}
                 <li>
-                    <a href="{% url user_page user %}">
+                    <a href="{% url 'user_page' user %}">
                         <i class="icon-picture"></i>
                         {% trans "Gallery" %}
                     </a>
                 </li>
+                {% if has_rawdata_subscription %}
                 <li>
-                    <a href="{% url user_page_favorites user %}">
+                    <a href="{% url 'rawdata.library' %}">
+                        <i class="icon-book"></i>
+                        {% trans "Raw data library" %}
+                    </a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'user_page_favorites' user %}">
                         <i class="icon-heart"></i>
                         {% trans "Favorites" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% url user_page_card user %}">
+                    <a href="{% url 'user_page_card' user %}">
                         <i class="icon-list-alt"></i>
                         {% trans "Technical card" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% url user_page_plots user %}">
+                    <a href="{% url 'user_page_plots' user %}">
                         <i class="icon-bar-chart"></i>
                         {% trans "Plots" %}
                     </a>
@@ -48,20 +58,20 @@
                 {% ifequal user request.user %}
                 <li class="divider"></li>
                 <li>
-                    <a href="{% url me %}">
+                    <a href="{% url 'me' %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% url me %}?staging">
+                    <a href="{% url 'me' %}?staging">
                         <i class="icon-lock"></i>
                         {% trans "Staging Area" %}
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="{% url user_page_api_keys user %}">
+                    <a href="{% url 'user_page_api_keys' user %}">
                         <i class="icon-key"></i>
                         {% trans "API Keys" %}
                     </a>
@@ -80,7 +90,7 @@
             <ul class="dropdown-menu">
                 <li>
                     <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
-                       href="{% if follows %}{% url unfollow user %}{% else %}{% url follow user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
+                       href="{% if follows %}{% url 'unfollow' user %}{% else %}{% url 'follow' user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
                         {% if follows %}
                             <i class="icon-eye-close"></i>
                             {% trans "Stop following" %}
@@ -91,7 +101,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="send-private-message" href="{% url messages_compose_to user %}{% query_string "next=request.path" "" %}">
+                    <a class="send-private-message" href="{% url 'messages_compose_to' user %}{% query_string "next=request.path" "" %}">
                         <i class="icon-envelope"></i>
                         {% trans "Send private message" %}
                     </a>

@@ -1,26 +1,32 @@
+# Python
 import string
 import re
 import datetime
 
+# Django
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
+
+# Third party apps
 from haystack.indexes import *
 from haystack import site
+from hitcount.models import HitCount
 
+# This app
 from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 from astrobin.models import Subject, SubjectIdentifier
 from astrobin.models import UserProfile
 from astrobin.models import Favorite
-from astrobin.models import Comment
 from astrobin.models import Gear, CommercialGear, RetailedGear
 
 from astrobin.templatetags.tags import gear_name
 from astrobin.utils import unique_items
 
-from django.contrib.auth.models import User
-from django.db.models import Q
-
-from hitcount.models import HitCount
+# Other AstroBin apps
+from nested_comments.models import NestedComment
 
 
 def _get_integration(image):
@@ -153,7 +159,11 @@ def _prepare_camera_types(obj):
     return [x.type for x in obj.imaging_cameras.all()]
 
 def _prepare_comments(obj):
-    return Comment.objects.filter(image = obj).count()
+    ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
+    return NestedComment.objects.filter(
+        content_type = ct,
+        object_id = obj.id,
+        deleted = False).count()
 
 
 class GearIndex(SearchIndex):
@@ -444,7 +454,7 @@ class UserIndex(SearchIndex):
         return comments
 
     def prepare_comments_written(self, obj):
-        return Comment.objects.filter(author = obj, is_deleted = False).count()
+        return NestedComment.objects.filter(author = obj, deleted = False).count()
 
 
 class ImageIndex(SearchIndex):

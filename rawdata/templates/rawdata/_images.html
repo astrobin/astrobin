@@ -1,0 +1,52 @@
+{% load i18n %}
+{% load url from future %}
+
+{% load common_tags %}
+{% load rawdata_tags %}
+
+{% if images %}
+    <table class="table rawdata-browser images">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <span>
+                        <a id="select-all" href="#" class="btn btn-mini">
+                            {% trans "Select all" %}
+                        </a>
+                    </span>
+                </th>
+                <th>{% trans "Type" %}</th>
+                <th>{% trans "Uploaded" %}</th>
+                <th>{% include "rawdata/_folder_dropdown.html" %}</th>
+            </tr>
+        </thead>
+        {% for image in images %}
+            <tr id="{{image.id}}" class="rawfile">
+                <td class="icon"><i class="icon-file"></i></td>
+                <td class="counter">{{forloop.counter}}</td>
+                <td class="filename">
+                    <a href="{% url 'rawdata.rawimage_detail' image.pk %}">
+                        {{image.original_filename|truncatechars:70}}
+                    </a>
+                </td>
+                <td>{{image.image_type|humanize_rawimage_type}}</td>
+                <td>
+                    <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
+                        {{image.uploaded|date}}
+                    </abbr>
+                </td>
+                <td class="actions">
+                    <a href="{% url 'rawdata.download' image.id %}"
+                       class="download-link"
+                       rel="tooltip" title="{% trans "Download" %}">
+                        <i class="icon-download-alt"></i>
+                    </a>
+                    <a href="#" class="delete-link" rel="tooltip" title="{% trans "Delete" %}">
+                        <i class="icon-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
