@@ -113,7 +113,7 @@ class PublicDataPoolDetailView(DetailView):
         return context
 
 
-class PublicDataPoolDownloadView(RestrictToSubscriberMixin, base.View):
+class PublicDataPoolDownloadView(base.View):
     def get(self, request, *args, **kwargs):
         pool = get_object_or_404(PublicDataPool, pk = kwargs.pop('pk'))
         if pool.archive:
