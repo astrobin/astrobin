@@ -43,4 +43,6 @@ urlpatterns = patterns('',
     url(r'^privatesharedfolders/share/(?:(?P<ids>[\d+,?]+)/)?$', login_required(PrivateSharedFolderCreateView.as_view()), name = 'rawdata.privatesharedfolder_create'),
     url(r'^privatesharedfolders/(?P<pk>\d+)/delete/$', login_required(PrivateSharedFolderDeleteView.as_view()), name = 'rawdata.privatesharedfolder_delete'),
     url(r'^privatesharedfolders/(?P<pk>\d+)/update/$', login_required(PrivateSharedFolderUpdateView.as_view()), name = 'rawdata.privatesharedfolder_update'),
+
+    url(r'^uploader/$', TemplateView.as_view(template_name = 'rawdata/uploader.html'), name = 'rawdata.uploader'),
 )

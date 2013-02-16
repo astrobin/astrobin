@@ -88,6 +88,7 @@
         <!--[if !IE]><!-->
                             <h2>{% trans "Drop your raw data here" %}</h2>
         <!--<![endif]-->
+                            <p><a href="{% url 'rawdata.uploader' %}">{% trans "or download the desktop client for easier uploads!" %}</a></p>
                             <small>{% trans "Accepted file types: FIT and digital camera raw files" %}</small>
                         </div>
                         <table id="rawdata-filelist" class="table hidden">
