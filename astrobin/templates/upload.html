@@ -5,7 +5,7 @@
 
 {% block title %}AstroBin - {% trans "Upload" %}{% endblock %}
 {% block content %}
-    {% if upload_form %} 
+    {% if upload_form %}
         <div class="row section">
             <div class="span10 offset1">
                 <div class="upload-forms">
@@ -105,7 +105,7 @@
 
                     <div id="warning" class="alert alert-warning hidden">
                         <button type="button" class="close" data-dismiss="alert">×</button>
-                        <span class="content"></span> 
+                        <span class="content"></span>
                     </div>
 
                     <div class="pull-left">
@@ -247,7 +247,7 @@
                     var min = rmin / 60;
                     sec = rmin % 60;
                     return Math.floor(hou) + ":" + Math.floor(min) + ":" + Math.floor(sec);
-                } 
+                }
             };
 
             this.rawdata_uploader = new plupload.Uploader({
@@ -358,7 +358,7 @@
 
                 var speed = parseInt(up.total.bytesPerSec / 1024) ;
                 var remaining = up.total.size - up.total.loaded;
-                var eta = this.hms(Math.round(remaining / speed / 1024));             
+                var eta = this.hms(Math.round(remaining / speed / 1024));
 
                 if (up.total.percent > 0 && eta != "Infinity:NaN:NaN") {
                     this.ui.$eta.html(
@@ -383,7 +383,7 @@
                     "<a href=\"{% url 'rawdata.library' %}\">{% trans "Go to your Raw Data Library." %}</a>");
             }, this));
 
-            this.rawdata_uploader.init(); 
+            this.rawdata_uploader.init();
         };
 
         RawData();
