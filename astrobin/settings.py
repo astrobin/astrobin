@@ -120,11 +120,11 @@ AWS_HEADERS = {
     'Expires': 'Thu, 15 Apr 2080 20:00:00 GMT',
     'Cache-Control': 'max-age=31557600',
     'x-amz-acl': 'public-read',
-    
+
     }
 S3_URL = 's3.amazonaws.com'
 IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
-RESIZED_IMAGE_SIZE = 620 
+RESIZED_IMAGE_SIZE = 620
 THUMBNAIL_SIZE = 184
 SMALL_THUMBNAIL_SIZE = 90
 IMAGE_OF_THE_DAY_WIDTH = 780

@@ -16,7 +16,7 @@ from .common import *
 class PublicDataPoolTest(TestCase):
     def setUp(self):
         setup_data(self)
-       
+
     def tearDown(self):
         teardown_data(self)
 

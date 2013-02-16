@@ -43,7 +43,7 @@ class PublicDataPoolCreateView(RestrictToSubscriberMixin, AjaxableResponseMixin,
             context['pools_form'] = PublicDataPool_SelectExistingForm()
 
         return context
- 
+
     def form_valid(self, form):
         pool = form.save(commit = False)
         pool.creator = self.request.user
