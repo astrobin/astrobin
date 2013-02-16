@@ -6,5 +6,5 @@ from rawdata.mixins import RestrictToSubscriberMixin
 from rawdata.models import TemporaryArchive
 
 
-class TemporaryArchiveDetailView(RestrictToSubscriberMixin, DetailView):
+class TemporaryArchiveDetailView(DetailView):
     model = TemporaryArchive

@@ -444,9 +444,10 @@ class PublicDataPoolTest(TestCase):
 
         self.client.login(username = 'username_unsub', password = 'passw0rd')
         response = self.client.get(reverse('rawdata.publicdatapool_download', args = (pool.id,)), follow = True)
+        newid = max_id(TemporaryArchive)
         self.assertRedirects(
             response,
-            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/publicdatapools/%d/download/' % pool.id}),
+            reverse('rawdata.temporary_archive_detail', args = (newid,)),
             status_code = 302, target_status_code = 200)
         self.client.logout()
 
