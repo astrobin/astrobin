@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 
 # Third party apps
 from rest_framework import serializers
+from rest_framework.exceptions import PermissionDenied, UnsupportedMediaType
 
 # This app
 from .models import RawImage
@@ -24,17 +25,18 @@ class RawImageSerializer(serializers.ModelSerializer):
             return attrs
 
         name, ext = os.path.splitext(value.name)
-        if ext.lower().strip('.') not in supported_raw_formats():
-            raise serializers.ValidationError(_('File type is not supported'))
+        stripped_ext = ext.lower().strip('.')
+        if stripped_ext not in supported_raw_formats():
+            raise UnsupportedMediaType(stripped_ext)
 
         return attrs
 
     def validate(self, attrs):
         user = self.context['request'].user
         if user_used_percent(user) >= 100:
-            raise serializers.ValidationError(
+            raise PermissionDenied(
                 _("You don't have any free space on AstroBin Rawdata. Consider upgrading your account."))
-    
+
         try:
             provided_hash = attrs['file_hash']
         except KeyError:

@@ -72,6 +72,14 @@ def get_file():
     return f, h
 
 
+def get_unsupported_file():
+    f = open('rawdata/fixtures/test.png', 'rb')
+    h = md5_for_file(f)
+
+    f.seek(0)
+    return f, h
+
+
 def test_response(testcase, url, data, expected_status_code = 200,
                   expected_field = None, expected_message = None):
     response = testcase.client.post(url, data)
@@ -95,5 +103,13 @@ def upload_file(testcase):
     testcase.client.logout()
     return response['id']
 
-
-
+def upload_unsupported_file(testcase):
+    f, h = get_unsupported_file()
+    testcase.client.login(username = 'username_sub', password = 'passw0rd')
+    response = test_response(
+        testcase,
+        reverse('api.rawdata.rawimage.list'),
+        {'file': f, 'file_hash': h},
+        201)
+    testcase.client.logout()
+    return response['id']

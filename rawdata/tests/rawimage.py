@@ -17,7 +17,7 @@ from .common import *
 class RawImageTest(TestCase):
     def setUp(self):
         setup_data(self)
-       
+
     def tearDown(self):
         teardown_data(self)
 
@@ -47,6 +47,15 @@ class RawImageTest(TestCase):
         self.client.logout()
         f.close()
 
+    def test_api_create_sub_unsupported_file(self):
+        f, h = get_unsupported_file()
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        test_response(self, reverse('api.rawdata.rawimage.list'),
+                            {'file': f, 'file_hash': h}, 415)
+        self.client.logout()
+        f.close()
+
+
     def test_api_create_sub_invalid_hash(self):
         f, h = get_file()
         self.client.login(username = 'username_sub', password = 'passw0rd')
@@ -60,8 +69,7 @@ class RawImageTest(TestCase):
         f, h = get_file()
         self.client.login(username = 'username_sub_3', password = 'passw0rd')
         test_response(self, reverse('api.rawdata.rawimage.list'),
-                            {'file': f}, 400, 'non_field_errors',
-                            "You don't have any free space on AstroBin Rawdata. Consider upgrading your account.")
+                            {'file': f}, 403)
         self.client.logout()
         f.close()
 
