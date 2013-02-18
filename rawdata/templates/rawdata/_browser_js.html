@@ -149,9 +149,9 @@
                 query_string = '?' + params;
             }
 
-            $.each(affected_rows, function(i, $row) {
-                $row.animate({'color': 'red'}, 500);
-                $row.css('text-decoration', 'line-through');
+            $.each(affected_rows, function(i, row) {
+                $(row).animate({'color': 'red'}, 500);
+                $(row).css('text-decoration', 'line-through');
             });
 
             setTimeout(function() {
@@ -161,8 +161,8 @@
                     cache: false,
                     timeout: 10000,
                     success: function() {
-                        $.each(affected_rows, function(i, $row) {
-                            $row.remove();
+                        $.each(affected_rows, function(i, row) {
+                            $(row).remove();
                             $('body').find('.tooltip').remove();
                         });
                     }
