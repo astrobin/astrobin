@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="span4 offset2">
+        <div class="span4">
             <div class="well" style="text-align: center">
                 <img src="{{STATIC_URL}}rawdata/images/windows-logo.png" alt="Windows"/>
                 <div>
@@ -49,7 +49,7 @@
             <div class="well" style="text-align: center">
                 <img src="{{STATIC_URL}}rawdata/images/linux-logo.png" alt="Linux"/>
                 <div>
-                    {% trans "Download for:" %} Ubuntu Linux:
+                    {% trans "Download for" %} <strong>Ubuntu Linux:</strong>
                     <a href="http://cdn.astrobin.com/uploader/astrobin_uploader_1.0_x86.deb">
                         32 bit
                     </a>
@@ -59,16 +59,23 @@
                     </a>
                 </div>
                 <div>
-                    {% trans "Download for:" %} Other Linux:
-                    <a href="http://cdn.astrobin.com/uploader/astrobin_uploader_1.0_x86.tar.gz">
-                        32 bit
-                    </a>
-                    /
-                    <a href="http://cdn.astrobin.com/uploader/astrobin_uploader_1.0_amd64.tar.gz">
-                        64 bit
-                    </a>
+                    {% trans "Download for" %} <strong>other Linux:</strong>
+                    <span class="label label-warning">{% trans "Coming soon" %}
+                    </span>
                 </div>
             </div>
         </div>
+        <div class="span4">
+            <div class="well" style="text-align: center">
+                <img src="{{STATIC_URL}}rawdata/images/osx-logo.png" alt="OS X"/>
+                <div>
+                    {% trans "Download for" %} <strong>OS X</strong>
+                    <span class="label label-warning">{% trans "Coming soon" %}
+                    </span>
+                </div>
+                <div>&nbsp;</div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}
