@@ -603,7 +603,11 @@ def image_detail(request, id, r):
 
     from moon import MoonPhase;
 
-    already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
+    if request.user.is_authenticated():
+        already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
+    else:
+        already_voted = False
+
     ratings = image.rating.get_ratings()
     votes = len(ratings)
     from votes import index
