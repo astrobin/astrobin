@@ -66,14 +66,14 @@ import pytz
 
 # need to translate to a non-naive timezone, even if timezone == settings.TIME_ZONE, so we can compare two dates
 def to_user_timezone(date, profile):
-    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE               
+    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
     return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(timezone))
-    
+
 def to_system_timezone(date, profile):
-    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE               
+    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
     return date.replace(tzinfo=pytz.timezone(timezone)).astimezone(pytz.timezone(settings.TIME_ZONE))
-    
-def now_timezone():   
+
+def now_timezone():
     return datetime.datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
@@ -100,7 +100,7 @@ def valueReader(source, field):
         value += source[as_field]
     if field in source:
         value += ',' + source[field]
-        
+
     if not (as_field in source or field in source):
         return [], ""
 
@@ -223,7 +223,7 @@ def index(request):
         response_dict['gear_list'] = gear_list
 
     return object_list(
-        request, 
+        request,
         queryset = Image.objects
             .filter(is_stored = True, is_wip = False, featured_gear = None)
             .order_by('-uploaded'),
@@ -236,7 +236,7 @@ def index(request):
 @require_GET
 def expore_choose(request):
     return render_to_response(
-        'explore_choose.html', {}, 
+        'explore_choose.html', {},
         context_instance = RequestContext(request))
 
 
@@ -304,7 +304,7 @@ def wall(request):
         sqs = sqs.filter(subject_type = 600)
 
     return object_list(
-        request, 
+        request,
         queryset=sqs,
         template_name='wall.html',
         template_object_name='image',
@@ -426,7 +426,7 @@ def popular(request):
         'most_popular.html',
         response_dict,
         context_instance = RequestContext(request))
-    
+
 
 @require_GET
 def messier(request):
@@ -438,7 +438,7 @@ def messier(request):
     }
 
     return object_list(
-        request, 
+        request,
         queryset=queryset,
         template_name='messier_marathon.html',
         template_object_name='object',
@@ -543,7 +543,7 @@ def fits(request):
     }
 
     return object_list(
-        request, 
+        request,
         queryset=qs,
         template_name='fits.html',
         template_object_name='image',
@@ -680,7 +680,7 @@ def image_detail(request, id, r):
                 if a.filter:
                     key = "filter(%s)" % a.filter.get_name()
                 if a.iso:
-                    key += '-ISO(%d)' % a.iso 
+                    key += '-ISO(%d)' % a.iso
                 if a.sensor_cooling:
                     key += '-temp(%d)' % a.sensor_cooling
                 if a.binning:
@@ -777,7 +777,7 @@ def image_detail(request, id, r):
             resized_size = image.w
 
     subjects = image.subjects.all()
-    subjects_limit = 5 
+    subjects_limit = 5
 
     licenses = (
         (0, 'cc/c.png',           LICENSE_CHOICES[0][1]),
@@ -1525,7 +1525,7 @@ def image_edit_save_license(request):
 @login_required
 @require_GET
 def image_delete(request, id):
-    image = get_object_or_404(Image, pk=id) 
+    image = get_object_or_404(Image, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1538,7 +1538,7 @@ def image_delete(request, id):
 @login_required
 @require_GET
 def image_delete_revision(request, id):
-    revision = get_object_or_404(ImageRevision, pk=id) 
+    revision = get_object_or_404(ImageRevision, pk=id)
     image = revision.image
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -1703,7 +1703,7 @@ def user_page(request, username):
                 acq = Acquisition.objects.filter(image__user = user)
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
 
-                k_list = [] 
+                k_list = []
                 smart_albums.append(k_list)
 
                 for y in years:
@@ -1723,7 +1723,7 @@ def user_page(request, username):
                     (Q(subject_type__lt = 500) | Q(subject_type = 600)) &
                     (Q(acquisition = None) | Q(acquisition__date = None))).distinct():
                     k_dict[l]['images'].append(i)
-               
+
                 sqs = Image.objects.none()
         elif subsection == 'gear':
             from templatetags.tags import gear_name
@@ -1970,7 +1970,7 @@ def user_page_card(request, username):
     if span == "0 " + _("minutes"):
         member_since = _("seconds ago")
     else:
-        member_since = _("%s ago") % span 
+        member_since = _("%s ago") % span
 
     last_login = user.last_login
     if request.user.is_authenticated():
@@ -2439,7 +2439,7 @@ def user_profile_flickr_import(request):
         # If we made it this far (it's a GET request), it means that we
         # are authenticated with flickr. Let's fetch the sets and send them to
         # the template.
-        
+
         # Hole shit, does it have to be so insane to get the info on the
         # authenticated user?
         nsid = flickr.urls_getUserProfile().find('user').attrib['nsid']
@@ -2465,7 +2465,7 @@ def user_profile_flickr_import(request):
 
                 title = info.find('title').text
                 description = info.find('description').text
- 
+
                 # Attempt to find the largest image
                 found_size = None
                 for label in ['Square', 'Thumbnail', 'Small', 'Medium', 'Medium640', 'Large', 'Original']:
@@ -2743,7 +2743,7 @@ def notifications(request):
         n.is_unseen()
 
     return object_list(
-        request, 
+        request,
         queryset=notification.Notice.objects.filter(user=request.user),
         template_name='notification/all.html',
         template_object_name='notification')
@@ -2797,7 +2797,7 @@ def bring_to_attention(request, id):
         response_dict,
         context_instance = RequestContext(request))
 
-  
+
 @login_required
 @require_POST
 def bring_to_attention_process(request):
@@ -3562,7 +3562,7 @@ def user_popover_ajax(request, username):
     if span == "0 " + _("minutes"):
         member_since = _("seconds ago")
     else:
-        member_since = _("%s ago") % span 
+        member_since = _("%s ago") % span
 
     html = render_to_string(template,
         {
@@ -4059,7 +4059,7 @@ def gear_review_save(request):
                 'user': review.user,
             }
         )
-       
+
         response_dict = {
             'success': True,
             'score': review.score,
@@ -4075,7 +4075,7 @@ def gear_review_save(request):
 @require_GET
 def activities(request):
     return object_list(
-        request, 
+        request,
         queryset = Action.objects.all(),
         template_name = 'activities.html',
         template_object_name = 'global_action',
@@ -4225,7 +4225,7 @@ def commercial_products_merge(request, from_id, to_id):
         }),
         mimetype = 'application/javascript')
 
-            
+
 @require_GET
 @login_required
 @user_passes_test(lambda u: user_is_producer(u))
@@ -4334,7 +4334,7 @@ def retailed_products_claim(request, id):
             'images': gear_images(gear),
             'is_merge': form.cleaned_data['merge_with'] != '',
         }),
-        mimetype = 'application/javascript')   
+        mimetype = 'application/javascript')
 
 
 @require_GET
@@ -4449,7 +4449,7 @@ def retailed_products_edit(request, id):
 @require_GET
 def comments(request):
     return object_list(
-        request, 
+        request,
         queryset = NestedComment.objects.all().filter(deleted = False).order_by('-updated'),
         template_name = 'comments.html',
         template_object_name = 'comment',
@@ -4460,7 +4460,7 @@ def comments(request):
 @require_GET
 def reviews(request):
     return object_list(
-        request, 
+        request,
         queryset = ReviewedItem.objects.all().order_by('-date_added'),
         template_name = 'reviews.html',
         template_object_name = 'review',
