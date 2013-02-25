@@ -204,6 +204,13 @@ AstroBin needs some groups for the affiliate program:
     * retailer-affiliate-100 (EUR 59.90) / 0.59
     * retailer-affiliate-inf (EUR 99.90) / ~0.00
 
+And some for the Raw Data platform:
+
+    * rawdata-meteor  (USD 2,90)
+    * rawdata-luna    (USD 9,90)
+    * rawdata-sol     (USD 19,90)
+    * rawdata-galaxia (USD 49,90)
+
 
 # (replace gunicorn.sh with run.sh if you want to debug)
 sudo supervisorctl stop gunicorn
