@@ -413,7 +413,7 @@
                                         {% endfor %}
                                     </span>
                                     <span class="more">
-                                        &#8230;&nbsp; 
+                                        &#8230;&nbsp;
                                         <a href="#">
                                             <em>
                                                {% blocktrans with subjects_reminder|length as number %}and {{number}} more (click to view).{% endblocktrans %}
@@ -527,7 +527,7 @@
                 </div> <!-- span8 -->
             </div> <!-- row image-detail -->
             {% endif %} {# image.subject_type < 500 #}
-                
+
             {% if image.description %}
             <div class="image-description row">
                 <div class="span8">
@@ -558,7 +558,7 @@
                 </div> <!-- span8 -->
             </div> <!-- row -->
         </div> <!-- span8 -->
-        
+
         <div class="span4"> <!-- right pane -->
             {% ifequal request.user image.user %}
             <div class="subtle-container">
@@ -566,7 +566,7 @@
                    target="_blank"
                    id="request-critique"
                    data-title="{% trans "What is this?" %}"
-                   data-content="{% blocktrans %}This button will create a post on AstroBin Questions, in which you can ask for critique, review or analisys of your image.{% endblocktrans %} <a href='{% url help_questions %}'>{% trans "Learn more about AstroBin Questions." %}</a>"
+                   data-content="{% blocktrans %}This button will create a post on AstroBin Questions, in which you can ask for critique, review or analysis of your image.{% endblocktrans %} <a href='{% url help_questions %}'>{% trans "Learn more about AstroBin Questions." %}</a>"
                    class="btn btn-primary btn-large"
                    style="width:242px; font-weight: bold; font-size: 22px">
                    {% trans "Request critique" %}
@@ -756,7 +756,7 @@
                 <span class='st_facebook' displayText='Facebook'></span>
                 <span class='st_twitter' displayText='Twitter'></span>
             </div>
-            
+
             <div class="well">
                 <form class="copy">
                     <table class="table">
@@ -962,7 +962,7 @@ $(document).ready(function() {
             "http://astrob.in/{{image.id}}/"
         {% endif %}
     );
-    
+
     var clip_html = clip.getHTML(16, 16);
     $('#clip-container .flash-container').append(clip_html);
 
@@ -975,10 +975,10 @@ $(document).ready(function() {
         var content = '';
 
         if (sharing_mode == 0) {
-            $('select[name=sharing_thumbnail]').attr('disabled', 'disabled'); 
+            $('select[name=sharing_thumbnail]').attr('disabled', 'disabled');
             $('select[name=sharing_thumbnail]').closest('.selector').addClass('disabled');
         } else {
-            $('select[name=sharing_thumbnail]').removeAttr('disabled'); 
+            $('select[name=sharing_thumbnail]').removeAttr('disabled');
             $('select[name=sharing_thumbnail]').closest('.selector').removeClass('disabled');
         }
 
