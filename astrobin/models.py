@@ -21,10 +21,13 @@ from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxLengthValidator
 from django.template.defaultfilters import slugify
 
 from tasks import *
+
+from nested_comments.models import NestedComment
 
 from djangoratings.fields import RatingField
 from djangoratings.models import Vote
@@ -260,8 +263,11 @@ class Gear(models.Model):
         except Filter.DoesNotExist:
             pass
 
-        # Find matching gear comments and move them to the master
-        GearComment.objects.filter(gear = slave).update(gear = self)
+        # Find matching comments and move them to the master
+        NestedComment.objects.filter(
+            content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
+            object_id = slave.id
+        ).update(object_id = self.id)
 
         # Find matching gear reviews and move them to the master
         reviews = ReviewedItem.objects.filter(gear = slave).update(object_id = self.id)
@@ -2060,3 +2066,4 @@ class CommercialGear(models.Model):
         app_label = 'astrobin'
         ordering = ['created']
         verbose_name_plural = _("Commercial gear items")
+

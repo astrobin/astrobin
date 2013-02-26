@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    AstroBin - {% trans "Private shared folders" %}
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            {% trans "Private shared folders" %}
+            <small>
+                {% trans "Collections of raw files shared with selected users." %}
+            </small>
+        </h1>
+    </div>
+
+    <div class="row section">
+        <div class="span12">
+            <p>
+                {% url rawdata.help1 as rawdata_url %}
+                {% blocktrans %}A <strong>private shared folder</strong> is a way for subscribers to the <a href="{{rawdata_url}}">AstoBin Raw Data Platform</a> to share raw data, like FIT and digital camera raw files, with other users, to collaborate on processing, get or provide technical help.{% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientic discoveries.{% endblocktrans %}
+            </p>
+        </div>
+    </div>
+
+    {% if object_list %}
+        <div class="well">
+            {% blocktrans %}You have access to the following private shared folders.{% endblocktrans %}
+        </div>
+
+        <table id="private-shared-folders" class="table">
+            <thead>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Description" %}</th>
+                <th>{% trans "Owner" %}</th>
+                <th>{% trans "Raw images" %}</th>
+                <th>{% trans "Processed images" %}</th>
+                <th colspan="2">{% trans "Last updated" %}</th>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                    <tr id="{{object.id}}">
+                        <td><a href="{% url rawdata.privatesharedfolder_detail object.pk %}">{{object.name}}</a></td>
+                        <td>{{object.description|truncatewords:"10"}}</td>
+                        <td>
+                            <a rel="popover" class="user-popover"
+                               data-load="{% url user_popover_ajax object.creator %}"
+                               href="{% url user_page object.creator %}">{{object.creator}}</a>
+                        </td>
+                        <td>{{object.images.all|length}}</td>
+                        <td>{{object.processed_images.all|length}}</td>
+                        <td>
+                            <abbr class="timeago" title="{{object.updated|date:'Y-m-d\TH:i:s'}}">
+                                {{object.updated|date}}
+                            </abbr>
+                        </td>
+                        <td>
+                            {% if object.creator == request.user %}
+                                <a href="#delete-folder-modal" data-toggle="modal" class="delete-folder">
+                                    <i class="icon-trash"></i>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-error">
+            {% url rawdata.library as library_url %}
+            <p>{% blocktrans %}You don't have access to any private shared folders. If you want to create one, go to <a href="{{library_url}}">your Raw Data Library</a>, select some files or <strong>smart folders</strong> and use the <strong>Share</strong> button to share them.{% endblocktrans %}</p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block modals %}
+    <div class="modal hide fade" id="delete-folder-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Delete folder" %}</h3>
+        </div>
+        <div class="modal-body">
+            <p>{% blocktrans %}Are you sure you want to delete this shared folder?{% endblocktrans %}</p>
+            <small>{% blocktrans %}Don't worry, no files will be deleted from your raw data account, nor from the accounts of other people who may have contributed to this shared folder.{% endblocktrans %}</small>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">{% trans "Cancel" %}</a>
+            <a href="#" id="confirm-delete-folder" class="btn btn-primary">{% trans "Delete" %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('table#private-shared-folders').stickyTableHeaders({fixedOffset: 44});
+        astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+
+        $(document).on('click', 'a.delete-folder', function() {
+            var folderId = $(this).closest('tr').attr('id');
+            $('#confirm-delete-folder').data('id', folderId);
+        });
+
+        $('#confirm-delete-folder').click(function(e) {
+            var id = $(this).data('id');
+            var $modal = $(this).closest('.modal');
+
+            $.ajax({
+                url: '/rawdata/privatesharedfolders/' + id + '/delete/',
+                type: 'delete',
+                timeout: 10000,
+                success: function() {
+                    $('tr#' + id + ' td')
+                        .animate({'color': 'red'}, 500)
+                        .css('text-decoration', 'line-through');
+                    $modal.modal('hide');
+                }
+            });
+
+            e.preventDefault();
+        });
+    });
+</script>
+{% endblock %}

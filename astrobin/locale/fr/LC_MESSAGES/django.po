@@ -7,7 +7,11 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 14:57-0500\n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2012-12-28 22:12+0100\n"
+=======
+"PO-Revision-Date: 2012-11-16 20:32+0100\n"
+>>>>>>> origin/raw-data
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -1411,6 +1415,7 @@ msgstr "a rédigé un test sur"
 
 #: locale_extras.py:12
 msgid "created a new public data pool"
+<<<<<<< HEAD
 msgstr "a créé une nouvelle collaboration publique"
 
 #: locale_extras.py:13
@@ -1420,6 +1425,17 @@ msgstr "a ajouté de nouvelles données à une collaboration publique"
 #: locale_extras.py:14
 msgid "added a new processed image to public data pool"
 msgstr "a ajouté une nouvelle image traitée à une collaboration publique"
+=======
+msgstr ""
+
+#: locale_extras.py:13
+msgid "added new data to public data pool"
+msgstr ""
+
+#: locale_extras.py:14
+msgid "added a new processed image to public data pool"
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: models.py:48
 msgid "None (All rights reserved)"
@@ -2909,6 +2925,7 @@ msgstr "Nouveau test d'un matériel que vous possédez"
 
 #: management/__init__.py:153
 msgid "New data posted to public pool"
+<<<<<<< HEAD
 msgstr "Nouvelles données postées dans une collaboration publique"
 
 #: management/__init__.py:159
@@ -2926,6 +2943,27 @@ msgstr "Nouvelle image postée dans une collaboration privée"
 #: management/__init__.py:177
 msgid "You are invited to a shared private folder"
 msgstr "Vous êtes convié(e) à une collaboration privée"
+=======
+msgstr ""
+
+#: management/__init__.py:159
+#, fuzzy
+msgid "New image posted to public data pool"
+msgstr "Nouvelle image d'un objet que vous avez spécifié"
+
+#: management/__init__.py:165
+msgid "New data posted to shared private folder"
+msgstr ""
+
+#: management/__init__.py:171
+msgid "New image posted to shared private folder"
+msgstr ""
+
+#: management/__init__.py:177
+#, fuzzy
+msgid "You are invited to a shared private folder"
+msgstr "Vous avez reçu un nouveau message privé."
+>>>>>>> origin/raw-data
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -3071,7 +3109,11 @@ msgstr "Marathon Messier"
 
 #: templates/base.html:145
 msgid "Public data pools"
+<<<<<<< HEAD
 msgstr "Collaborations publiques"
+=======
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/base.html:154 templates/comments.html:9
 #: templates/comments.html.py:11 templates/leaderboard.html:44
@@ -3126,8 +3168,14 @@ msgid "AstroBin Questions"
 msgstr "Les Questions AstroBin"
 
 #: templates/base.html:214
+<<<<<<< HEAD
 msgid "AstroBin Raw Data"
 msgstr "Compte Raw AstroBin"
+=======
+#, fuzzy
+msgid "AstroBin Raw Data"
+msgstr "Astrobin est communautaire!"
+>>>>>>> origin/raw-data
 
 #: templates/base.html:239 templates/maintenance_base.html:221
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:7
@@ -3191,11 +3239,19 @@ msgstr "Graphiques"
 
 #: templates/base.html:402 templates/user/profile-subnav.html:35
 msgid "Raw data library"
+<<<<<<< HEAD
 msgstr "Bibliothèque fichiers bruts"
 
 #: templates/base.html:409
 msgid "Private shared folders"
 msgstr "Collaborations privées"
+=======
+msgstr ""
+
+#: templates/base.html:409
+msgid "Private shared folders"
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/base.html:418 templates/maintenance_base.html:295
 #: templates/messages/inbox.html:9
@@ -4201,6 +4257,7 @@ msgstr "Images récentes"
 
 #: templates/index.html:55
 msgid "FIT and DSLR camera raw files"
+<<<<<<< HEAD
 msgstr "FIT et fichiers bruts d'APN Reflex"
 
 #: templates/index.html:65
@@ -4211,6 +4268,16 @@ msgstr ""
 "AstroBin propose également le stockage de FIT et de fichiers bruts d'APN "
 "Reflex, pour archivage ou partage!"
 
+=======
+msgstr ""
+
+#: templates/index.html:65
+msgid ""
+"AstroBin offers the storage of FIT and DSLR camera raw files too, for "
+"archival and sharing purposes!"
+msgstr ""
+
+>>>>>>> origin/raw-data
 #: templates/index.html:69 templates/image/detail.html:582
 #, python-format
 msgid ""
@@ -4219,10 +4286,13 @@ msgid ""
 "your files organized, and allow you to share them with other members. <a "
 "href=\"%(rawdata_url)s\">Want to know more?</a>"
 msgstr ""
+<<<<<<< HEAD
 "<strong>Le Compte RAW AstroBin</strong> est la plateforme de stockage "
 "sécurisé de tous vos fichiers RAW ou FIT, jusqu'à 500 GB! Les images sont "
 "automatiquement classées et vous pouvez les partager avec d'autres membres. "
 "<a href=\"%(rawdata_url)s\">Pour en savoir plus</a>"
+=======
+>>>>>>> origin/raw-data
 
 #: templates/index.html:102
 msgid "Image of the day"
@@ -4756,6 +4826,7 @@ msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
 msgstr ""
+<<<<<<< HEAD
 "Vous n'avez plus d'espace libre sur votre Compte Raw. Veuillez supprimer un "
 "ou plusieurs fichiers afin de libérer de l'espace, ou bien modifiez votre "
 "abonnement."
@@ -4775,6 +4846,25 @@ msgstr "Types de fichier acceptés: FIT et format brut d'APN"
 #: templates/upload.html:95
 msgid "Filename"
 msgstr "Nom de fichier"
+=======
+
+#: templates/upload.html:85
+msgid "Use the button below to choose files"
+msgstr ""
+
+#: templates/upload.html:89
+msgid "Drop your raw data here"
+msgstr ""
+
+#: templates/upload.html:91
+msgid "Accepted file types: FIT and digital camera raw files"
+msgstr ""
+
+#: templates/upload.html:95
+#, fuzzy
+msgid "Filename"
+msgstr "Surinam"
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:96 templates/popover/subject.html:14
 #: templates/subject/page.html:41
@@ -4786,6 +4876,7 @@ msgid "Status"
 msgstr "Statut"
 
 #: templates/upload.html:114
+<<<<<<< HEAD
 msgid "Choose files"
 msgstr "Sélectionner des fichiers"
 
@@ -4800,26 +4891,54 @@ msgstr "Publier"
 #: templates/upload.html:144 templates/upload.html.py:383
 msgid "Go to your Raw Data Library."
 msgstr "Consulter votre bibliothèque de fichiers bruts"
+=======
+#, fuzzy
+msgid "Choose files"
+msgstr "Choisir fichier"
+
+#: templates/upload.html:118
+msgid "Reset"
+msgstr ""
+
+#: templates/upload.html:125
+#, fuzzy
+msgid "Start upload"
+msgstr "a publié"
+
+#: templates/upload.html:144 templates/upload.html.py:383
+msgid "Go to your Raw Data Library."
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:157
 msgid ""
 "Your Raw Data subscription is not active, or it has expired. If you have "
 "just subscribed, please wait for a few minutes. Thanks for your patience!"
 msgstr ""
+<<<<<<< HEAD
 "Votre Compte Raw n'est pas actif, ou a expiré. Si vous venez à l'instant d'y "
 "souscrire, veuillez attendre quelques minutes. Merci pour votre patience!"
+=======
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:162
 #, python-format
 msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
+<<<<<<< HEAD
 msgstr "Consulter la <a href=\"%(plans_url)s\">page des plans</a> du Compte Raw."
+=======
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:172
 msgid ""
 "Did you know that AstroBin can host your FIT and digital camera raw files "
 "too?"
 msgstr ""
+<<<<<<< HEAD
 "Saviez-vous qu'AstroBin peut aussi héberger vos FIT et fichiers bruts d'APN?"
+=======
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:175
 #, python-format
@@ -4828,6 +4947,7 @@ msgid ""
 "to safely store all your raw files, and have them neatily organized for "
 "future reference!"
 msgstr ""
+<<<<<<< HEAD
 "Jetez un oeil aux <a href=\"%(rawdata_url)s\">Comptes Raw AstroBin</a> si vous "
 "désirez stocker en toute sécurité vos fichiers bruts, et les classer avec "
 "soin pour toute utilisation future!"
@@ -4839,18 +4959,36 @@ msgstr "Fichiers bruts"
 #: templates/upload.html:303
 msgid "Upload started, please wait..."
 msgstr "Chargement en cours, veuillez patienter..."
+=======
+
+#: templates/upload.html:266
+msgid "Raw files"
+msgstr ""
+
+#: templates/upload.html:303
+msgid "Upload started, please wait..."
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:349
 msgid ""
 "One ore more files were ignored because they did not look like FIT or "
 "digital camera raw files."
 msgstr ""
+<<<<<<< HEAD
 "Un ou plusieurs fichiers ont été ignorés car ils ne sont pas au format FIT, "
 "ni dans un format brut d'APN."
 
 #: templates/upload.html:382
 msgid "Upload complete!"
 msgstr "Chargement terminé!"
+=======
+
+#: templates/upload.html:382
+#, fuzzy
+msgid "Upload complete!"
+msgstr "Date de publication"
+>>>>>>> origin/raw-data
 
 #: templates/wall.html:14
 msgid "Sort by"
@@ -5340,12 +5478,23 @@ msgid "Move to staging area"
 msgstr "Déplacer vers la zone d'attente"
 
 #: templates/image/detail.html:122 templates/image/detail.html.py:818
+<<<<<<< HEAD
 msgid "Send to public data pool"
 msgstr "Envoyer vers une collaboration publique"
 
 #: templates/image/detail.html:129 templates/image/detail.html.py:855
 msgid "Send to private shared folder"
 msgstr "Envoyer vers une collaboration privée"
+=======
+#, fuzzy
+msgid "Send to public data pool"
+msgstr "Envoyer vers la zone publique"
+
+#: templates/image/detail.html:129 templates/image/detail.html.py:855
+#, fuzzy
+msgid "Send to private shared folder"
+msgstr "Envoyer un message privé"
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:139
 msgid "Delete original image"
@@ -5507,8 +5656,14 @@ msgid "Request critique"
 msgstr "Demande d'aide"
 
 #: templates/image/detail.html:579
+<<<<<<< HEAD
 msgid "Introducing AstroBin Raw Data"
 msgstr "Présentation des Comptes Raw AstroBin"
+=======
+#, fuzzy
+msgid "Introducing AstroBin Raw Data"
+msgstr "Nouveau! Les Questions AstroBin"
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:600 templates/image/detail.html.py:626
 msgid "Final"
@@ -5588,14 +5743,20 @@ msgid ""
 "If this image is the result of your processing of a public data pool, you "
 "can send it the pool so it's displayed there."
 msgstr ""
+<<<<<<< HEAD
 "Si vous avez traité un fichier brut provenant d'une collaboration publique, "
 "vous pouvez ajouter votre image à la collaboration en question."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:827
 msgid "Use this form to select an existing <strong>public data pool</strong>."
 msgstr ""
+<<<<<<< HEAD
 "Utilisez ce formulaire pour sélectionner <strong>une collaboration "
 "publique</strong> existante."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:839 templates/image/detail.html.py:887
 #, python-format
@@ -5603,8 +5764,11 @@ msgid ""
 "You need a <a href=\"%(rawdata_url)s\">Raw Data</a> subscription to perform "
 "this action."
 msgstr ""
+<<<<<<< HEAD
 "Vous devez souscrire un <a href=\"%(rawdata_url)s\">Compte Raw</a> pour "
 "effectuer cette action. "
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:840 templates/image/detail.html.py:888
 #, python-format
@@ -5614,25 +5778,32 @@ msgid ""
 "organized, but being part of it also means that you support AstroBin and can "
 "perhaps contribute your raw files to scientic discoveries."
 msgstr ""
+<<<<<<< HEAD
 "Un <a href=\"%(rawdata_url)s\">Compte Raw</a> est principalement un outil pour "
 "stocker en toute sécurité vos fichiers bruts, les organiser avec soin et "
 "sans efforts. Mais cela signifie également que vous supportez AstroBin. Et "
 "peut-être que vos fichiers bruts contribueront éventuellement à des "
 "découvertes scientifiques!"
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:859
 msgid ""
 "If this image is the result of your processing of a private shared folder, "
 "you can send it the folder so it's displayed there."
 msgstr ""
+<<<<<<< HEAD
 "Si vous avez traité un fichier brut provenant d'une collaboration privée, "
 "vous pouvez ajouter votre image à la collaboration en question."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:865
 msgid ""
 "Use this form to select a <strong>private shared folder</strong> you have "
 "created or have been invited to."
 msgstr ""
+<<<<<<< HEAD
 "Utilisez ce formulaire pour sélectionner <strong>une collaboration "
 "privée</strong> que vous avez créée ou à laquelle vous avez été convié(e)."
 
@@ -5643,6 +5814,16 @@ msgstr "Vous n'avez accès à aucune collaboration privée."
 #: templates/image/detail.html:897
 msgid "OK"
 msgstr "OK"
+=======
+
+#: templates/image/detail.html:877
+msgid "You don't have access to any shared private folders."
+msgstr ""
+
+#: templates/image/detail.html:897
+msgid "OK"
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:955
 msgid "Copied!"
@@ -6895,6 +7076,7 @@ msgid ""
 "\n"
 "Visit the folder at the following url: %(folder_url)s"
 msgstr ""
+<<<<<<< HEAD
 "Vous êtes convié(e) à une collaboration privée: \"%(folder_name)s\".\n"
 "\n"
 "Vous pouvez désormais y ajouter des données ou vos traitements d'images. "
@@ -6904,161 +7086,296 @@ msgstr ""
 
 #: templates/notification/rawdata_invited_to_private_folder/notice.html:2
 #, python-format
+=======
+
+#: templates/notification/rawdata_invited_to_private_folder/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\">Vous êtes convié(e) à une collaboration privée: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/short.html:2
 #, python-format
+=======
+"<a href=\"%(object_url)s\">Vous avez supprimé votre abonnement à la page de "
+"<strong>%(object)s</strong>.</a>"
+
+#: templates/notification/rawdata_invited_to_private_folder/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\">Vous êtes convié(e) à une collaboration privée: "
 "<strong>\"%(folder_name)s.\"</a>"
+=======
+"<a href=\"%(object_url)s\">Vous avez supprimé votre abonnement à la page de "
+"<strong>%(object)s</strong>.</a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_invited_to_private_folder/short.txt:2
 #, python-format
 msgid "You are invited you to the private shared folder: %(folder_name)s"
+<<<<<<< HEAD
 msgstr "Vous êtes convié(e) à une collaboration privée: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
 #, python-format
+=======
+msgstr ""
+
+#: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added a new processed image to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
+<<<<<<< HEAD
 "%(user_name)s a ajouté une nouvelle image traitée à la collaboration privée: "
 "\"%(folder_name)s\". Consultez-la à l'adresse suivante: %(folder_url)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
 #, python-format
+=======
+"%(originator)s a publié une nouvelle version d'une image! Consultez-la à "
+"l'adresse suivante: %(object_url)s"
+
+#: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> a ajouté une "
 "nouvelle image traitée à la collaboration privée: <strong>\"%"
 "(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
 #, python-format
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> a démarré une nouvelle "
+"discussion concernant un matériel que vous possédez!</a>"
+
+#: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> a ajouté une "
 "nouvelle image traitée à la collaboration privée: <strong>\"%"
 "(folder_name)s.\"</a>"
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> a mis votre image en favori !</"
+"a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.txt:2
 #, python-format
 msgid "New processed image in private shared folder: %(folder_name)s"
+<<<<<<< HEAD
 msgstr "Nouvelle image traitée dans la collaboration privée: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
 #, python-format
+=======
+msgstr ""
+
+#: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added a new processed image to the public data pool: "
 "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
 msgstr ""
+<<<<<<< HEAD
 "%(user_name)s a ajouté une nouvelle image traitée à la collaboration "
 "publique: \"%(pool_name)s\". Consultez-là à l'adresse suivante: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
 #, python-format
+=======
+"%(originator)s a publié une nouvelle version d'une image! Consultez-la à "
+"l'adresse suivante: %(object_url)s"
+
+#: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> a ajouté une nouvelle "
 "image traitée à la collaboration publique: <strong>\"%"
 "(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, python-format
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> a démarré une nouvelle "
+"discussion concernant un matériel que vous possédez!</a>"
+
+#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> a ajouté une nouvelle "
 "image traitée à la collaboration publique: <strong>\"%(pool_name)s.\"</a>"
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> a démarré une nouvelle "
+"discussion concernant un matériel que vous possédez!</a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
 msgid "New processed image in public data pool: %(pool_name)s"
+<<<<<<< HEAD
 msgstr "Nouvelle image traitée dans la collaboration publique: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_pool/full.txt:2
 #, python-format
+=======
+msgstr ""
+
+#: templates/notification/rawdata_posted_to_pool/full.txt:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
 "Check it out at the following url: %(pool_url)s"
 msgstr ""
+<<<<<<< HEAD
 "%(user_name)s a ajouté des nouvelles données à la collaboration publique: \"%"
 "(pool_name)s\". Consultez-les à l'adresse suivante: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
 #, python-format
+=======
+"%(user)s a répondu à votre commentaire! Consultez sa réponse à l'adresse "
+"suivante: %(url)s"
+
+#: templates/notification/rawdata_posted_to_pool/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> a ajouté des nouvelles "
 "données à la collaboration publique: <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, python-format
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> a démarré une nouvelle "
+"discussion concernant un matériel que vous possédez!</a>"
+
+#: templates/notification/rawdata_posted_to_pool/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> a ajouté des nouvelles "
 "données à la collaboration publique: <strong>\"%(pool_name)s.\"</a>"
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> a démarré une nouvelle "
+"discussion concernant un matériel que vous possédez!</a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
 #, python-format
 msgid "New data in public pool: %(pool_name)s"
+<<<<<<< HEAD
 msgstr "Nouvelles données dans la collaboration publique: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/full.txt:2
 #, python-format
+=======
+msgstr ""
+
+#: templates/notification/rawdata_posted_to_private_folder/full.txt:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added new data to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
+<<<<<<< HEAD
 "%(user_name)s a ajouté des nouvelles données à la collaboration privée: \"%"
 "(folder_name)s\". Consultez-les à l'adresse suivante: %(folder_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
 #, python-format
+=======
+"AstroBin a publié un nouvel article sur le blog: \"%(object)s\".\n"
+"\n"
+"Consultez-le à l'adresse suivante: %(object_url)s"
+
+#: templates/notification/rawdata_posted_to_private_folder/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> a ajouté des "
 "nouvelles données à la collaboration privée: <strong>\"%"
 "(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.html:2
 #, python-format
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> a mis votre image en favori !</"
+"a>"
+
+#: templates/notification/rawdata_posted_to_private_folder/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> a ajouté des "
 "nouvelles données à la collaboration privée: <strong>\"%(folder_name)s.\"</a>"
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> a mis votre image en favori !</"
+"a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_posted_to_private_folder/short.txt:2
 #, python-format
 msgid "New data in private shared folder: %(folder_name)s"
+<<<<<<< HEAD
 msgstr "Nouvelles données dans la collaboration privée: %(folder_name)s"
+=======
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/notification/received_email/full.txt:2
 msgid ""
@@ -7202,8 +7519,11 @@ msgid ""
 "Hi,\n"
 "please use the following link to activate your AstroBin account:"
 msgstr ""
+<<<<<<< HEAD
 "Bonjour, \n"
 "Veuillez suivre ce lien afin d'activer votre compte AstroBin:"
+=======
+>>>>>>> origin/raw-data
 
 #: templates/registration/activation_email.txt:7
 #, python-format
@@ -7215,8 +7535,11 @@ msgid ""
 "Sincerely,\n"
 "the AstroBin staff."
 msgstr ""
+<<<<<<< HEAD
 "Cordialement, \n"
 "L'équipe AstroBin"
+=======
+>>>>>>> origin/raw-data
 
 #: templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
@@ -7277,27 +7600,42 @@ msgstr "Réinitialiser le mot de passe sur %(site_name)s"
 
 #: templates/registration/registration_complete.html:6
 msgid "Registration completed"
+<<<<<<< HEAD
 msgstr "Inscription réussie."
 
 #: templates/registration/registration_complete.html:7
 msgid "You are now registered"
 msgstr "Vous êtes à présent inscrit."
+=======
+msgstr ""
+
+#: templates/registration/registration_complete.html:7
+#, fuzzy
+msgid "You are now registered"
+msgstr "Vous n'avez pas de demandes."
+>>>>>>> origin/raw-data
 
 #: templates/registration/registration_complete.html:12
 msgid ""
 "To confirm your e-mail address, we have sent you an e-mail with an "
 "activation link."
 msgstr ""
+<<<<<<< HEAD
 "Pour confirmer votre adresse e-mail, nous vous avons envoyé un e-mail "
 "contenant un lien d'activation."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/registration/registration_complete.html:16
 msgid ""
 "If you don't receive the e-mail within a few minutes, remember to check your "
 "spam folder."
 msgstr ""
+<<<<<<< HEAD
 "Si vous ne recevez pas d'e-mail d'ici quelques minutes, vérifiez votre "
 "dossier anti-spam."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/registration/registration_form.html:5
 #: templates/registration/registration_form.html:8
