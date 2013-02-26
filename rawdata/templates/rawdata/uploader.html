@@ -42,7 +42,12 @@
                 <div>
                     {% trans "Download for:" %}
                     <a class="btn btn-primary"
-                       href="http://cdn.astrobin.com/uploader/astrobin_uploader_1.0.msi">
+                       onClick="trackOutboundLink(
+                           this,
+                           'Outbound Links',
+                           'Raw Data Uploader, Windows');
+                           return false;"
+                       href="http://cdn.astrobin.com/uploader/AstroBinUploader-1.0.msi">
                         Windows
                         <i class="icon-download"></i>
                     </a>
