@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-29 02:32-0500\n"
-"PO-Revision-Date: 2012-12-29 09:47+0100\n"
+"POT-Creation-Date: 2013-02-26 08:12-0600\n"
+"PO-Revision-Date: 2013-02-26 14:22+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: folders.py:82 models.py:214 models.py:282
+#: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
 #: templates/rawdata/privatesharedfolder_form.html:20
 #: templates/rawdata/privatesharedfolder_list.html:37
@@ -69,39 +69,35 @@ msgstr "Soggetto"
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: forms.py:25
-msgid "File type is not supported"
-msgstr "Tipo di file non supportato"
-
-#: forms.py:102
+#: forms.py:86
 msgid "Users"
 msgstr "Utenti"
 
-#: forms.py:103
+#: forms.py:87
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr "Una lista di utenti da invitare. Usa lo spazio per separarli."
 
-#: models.py:43 templatetags/rawdata_tags.py:15
+#: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: models.py:44
+#: models.py:45
 msgid "Light"
 msgstr "Light"
 
-#: models.py:45
+#: models.py:46
 msgid "Offset/Bias"
 msgstr "Offset/Bias"
 
-#: models.py:46
+#: models.py:47
 msgid "Dark"
 msgstr "Dark"
 
-#: models.py:47
+#: models.py:48
 msgid "Flat"
 msgstr "Flat"
 
-#: models.py:215
+#: models.py:216
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
@@ -109,17 +105,17 @@ msgstr ""
 "Un nome pubblico per questo gruppo. Sii descrittivo, includi il nome "
 "dell'oggetto celeste ed una lunghezza focale di riferimento, in millimetri."
 
-#: models.py:219 models.py:287
+#: models.py:220 models.py:288
 #: templates/rawdata/privatesharedfolder_list.html:38
 #: templates/rawdata/publicdatapool_list.html:33
 msgid "Description"
 msgstr "Descrizione"
 
-#: models.py:220
+#: models.py:221
 msgid "Describe the goals and terms of this pool."
 msgstr "Descrivi gli obiettivi e le condizioni d'uso di questo gruppo."
 
-#: models.py:283
+#: models.py:284
 msgid ""
 "A name for this folder. Be descriptive, so that the folder can be quickly "
 "recognized by the name."
@@ -127,9 +123,17 @@ msgstr ""
 "Un nome per questa cartella. Sii descrittivo, in modo che la cartella possa "
 "essere velocemente riconosciuta solo dal nome."
 
-#: models.py:288
+#: models.py:289
 msgid "Describe the goals of this folder."
 msgstr "Descrivi gli obiettivi di questa cartella."
+
+#: serializers.py:38
+msgid ""
+"You don't have any free space on AstroBin Rawdata. Consider upgrading your "
+"account."
+msgstr ""
+"Hai esaurito lo spazio su AstroBin Rawdata. Considera il passaggio ad un "
+"piano superiore."
 
 #: signal_handlers.py:18
 msgid ""
@@ -255,8 +259,8 @@ msgid ""
 msgstr ""
 "La tua cartella <em>astrofotografia</em> è piena di migliaia di file "
 "<strong>FIT</strong> o <strong>raw di reflex</strong> malamente organizzati? "
-"È sempre difficile trovare i file di calibrazione giusta nella tua "
-"libreria? Ti piacerebbe avere un backup sicuro dei tuoi file grezzi?"
+"È sempre difficile trovare i file di calibrazione giusta nella tua libreria? "
+"Ti piacerebbe avere un backup sicuro dei tuoi file grezzi?"
 
 #: templates/rawdata/help_01.html:26
 msgid ""
@@ -265,9 +269,8 @@ msgid ""
 "will be securely accessible only by you."
 msgstr ""
 "<strong>AstroBin Dati Grezzi</strong> è la risposta! Per un prezzo molto "
-"conveniente, puoi archiviare la tua interà <strong>libreria di dati "
-"grezzi</strong> online, dove sarà accessibile in maniera sicura soltanto da "
-"te."
+"conveniente, puoi archiviare la tua interà <strong>libreria di dati grezzi</"
+"strong> online, dove sarà accessibile in maniera sicura soltanto da te."
 
 #: templates/rawdata/help_01.html:28
 msgid ""
@@ -397,9 +400,9 @@ msgid ""
 "seriously."
 msgstr ""
 "Ti è mai saltato un disco rigido sotto il naso, ed hai perso un mucchio di "
-"dati? Archiviando i tuoi dati grezzi su <strong>AstroBin Dati "
-"Grezzi</strong> sarai al sicura da disastri ed incidenti! Ad AstroBin, siamo "
-"molto seri riguardo il preservamento dei dati."
+"dati? Archiviando i tuoi dati grezzi su <strong>AstroBin Dati Grezzi</"
+"strong> sarai al sicura da disastri ed incidenti! Ad AstroBin, siamo molto "
+"seri riguardo il preservamento dei dati."
 
 #: templates/rawdata/help_03.html:25
 msgid "Do some science."
@@ -550,8 +553,8 @@ msgid ""
 "A private shared folder created by <a href=\"%(user_url)s\">%(user)s</a>, "
 "with %(size)s in %(image_count)s images."
 msgstr ""
-"Una cartella condivisa privata creata da <a href=\"%(user_url)s\">%"
-"(user)s</a>, con %(size)s in %(image_count)s immagini."
+"Una cartella condivisa privata creata da <a href=\"%(user_url)s\">%(user)s</"
+"a>, con %(size)s in %(image_count)s immagini."
 
 #: templates/rawdata/privatesharedfolder_detail.html:71
 msgid "Processing submissions for this folder"
@@ -667,8 +670,8 @@ msgstr ""
 "Una <strong>cartella condivisa privata</strong> è un posto dove puoi "
 "collaborare con amici, membri del tuo circolo di astronomia, o chiunque "
 "altro tu voglia. I tuoi dati grezzi sono condivisi solo con gli utenti "
-"scelti da te, che devono essere iscritti ad <strong>AstroBin Dati "
-"Grezzi</strong> a loro volta, e nessun altro."
+"scelti da te, che devono essere iscritti ad <strong>AstroBin Dati Grezzi</"
+"strong> a loro volta, e nessun altro."
 
 #: templates/rawdata/privatesharedfolder_form.html:50
 msgid ""
@@ -682,8 +685,8 @@ msgstr ""
 msgid ""
 "Use this form to select an existing <strong>private shared folder</strong>."
 msgstr ""
-"Usa questo modulo per selezionare una <strong>cartella condivisa "
-"privata</strong> esistente."
+"Usa questo modulo per selezionare una <strong>cartella condivisa privata</"
+"strong> esistente."
 
 #: templates/rawdata/privatesharedfolder_form.html:60
 #: templates/rawdata/publicdatapool_form.html:60
@@ -745,11 +748,10 @@ msgid ""
 "organized, but being part of it also means that you support AstroBin and can "
 "perhaps contribute your raw files to scientic discoveries."
 msgstr ""
-"La <a href=\"%(rawdata_url)s\">Piattaforma Dati Grezzi</a> è principalmente un "
-"modo per archiviare in maniera sicura i propri dati grezzi, e tenerli "
+"La <a href=\"%(rawdata_url)s\">Piattaforma Dati Grezzi</a> è principalmente "
+"un modo per archiviare in maniera sicura i propri dati grezzi, e tenerli "
 "organizzati per bene e senza sforzo, ma esserne parte vuole anche dire che "
-"supporti AstroBin e magari contribuisci i tuoi dati alla ricerca "
-"scientifica."
+"supporti AstroBin e magari contribuisci i tuoi dati alla ricerca scientifica."
 
 #: templates/rawdata/privatesharedfolder_list.html:32
 msgid "You have access to the following private shared folders."
@@ -824,11 +826,11 @@ msgid ""
 "\"%(rawdata_url)s\">AstroBin Raw Data</a>, or you can download the available "
 "data and try to process it!"
 msgstr ""
-"Questo gruppo di dati pubblici è stato creato il %(date)s da <a href=\"%"
-"(user_url)s\">%(user)s</a>. Consiste di %(size)s in %(image_count)s immagini. "
-"Puoi contribuire donando i tuoi file grezzi, se sei iscritto ad <a href=\"%"
-"(rawdata_url)s\">AstroBin Dati Grezzi</a>, oppure puoi scaricare i dati "
-"disponibili e provare ad elaborarli."
+"Questo gruppo di dati pubblici è stato creato il %(date)s da <a href="
+"\"%(user_url)s\">%(user)s</a>. Consiste di %(size)s in %(image_count)s "
+"immagini. Puoi contribuire donando i tuoi file grezzi, se sei iscritto ad <a "
+"href=\"%(rawdata_url)s\">AstroBin Dati Grezzi</a>, oppure puoi scaricare i "
+"dati disponibili e provare ad elaborarli."
 
 #: templates/rawdata/publicdatapool_detail.html:144
 msgid "Edit public data pool"
@@ -868,15 +870,15 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:56
 msgid "Use this form to select an existing <strong>public data pool</strong>."
 msgstr ""
-"Usa questo modulo per eselezionare un <strong>gruppo di dati "
-"pubblici</strong> esistente."
+"Usa questo modulo per eselezionare un <strong>gruppo di dati pubblici</"
+"strong> esistente."
 
 #: templates/rawdata/publicdatapool_form.html:73
 msgid ""
 "Or use this button to create a whole new <strong>public data pool</strong>."
 msgstr ""
-"Oppure usa questo pulsante per creare un <strong>gruppo di dati "
-"pubblici</strong> completamente nuovo."
+"Oppure usa questo pulsante per creare un <strong>gruppo di dati pubblici</"
+"strong> completamente nuovo."
 
 #: templates/rawdata/publicdatapool_form.html:77
 #: templates/rawdata/publicdatapool_form.html:90
@@ -932,8 +934,8 @@ msgid ""
 msgstr ""
 "Probabilmente, se qui perché sei stato invitato a contribuire ad una "
 "<strong>Cartella Condivisa Privata</strong>, un insieme di dati grezzi a cui "
-"gli utenti possono contribuire. Le <strong>Cartelle Condivise "
-"Private</strong> sono parte della <a href=\"%(rawdata_url)s\">Piattaforma Dati "
+"gli utenti possono contribuire. Le <strong>Cartelle Condivise Private</"
+"strong> sono parte della <a href=\"%(rawdata_url)s\">Piattaforma Dati "
 "Grezzi</a> di AstroBin."
 
 #: templates/rawdata/restricted.html:34
@@ -956,8 +958,8 @@ msgid ""
 msgstr ""
 "Abbiamo preparato un file ZIP per raggruppare i dati grezzi che hai "
 "richiesto. Tieni presente che questo file è temporaneo e sarà cancellato dai "
-"nostri server entro le prossime 48 ore, e che questo download è solo per "
-"te. Se vuoi condividare dati con altri, non dar loro questo link, ma usa le "
+"nostri server entro le prossime 48 ore, e che questo download è solo per te. "
+"Se vuoi condividare dati con altri, non dar loro questo link, ma usa le "
 "pagina di <strong>Cartelle condivise private</strong> or <strong>Gruppi di "
 "dati pubblici</strong>."
 
@@ -986,6 +988,68 @@ msgstr "Download non pronto"
 #: templates/rawdata/temporaryarchive_detail.html:51
 msgid "Please refresh this page in a few seconds."
 msgstr "Ricarica questa pagina tra qualche secondo."
+
+#: templates/rawdata/uploader.html:4 templates/rawdata/uploader.html.py:8
+msgid "AstroBin Raw Data Uploader"
+msgstr "Caricatore per AstroBin Dati Grezzi"
+
+#: templates/rawdata/uploader.html:10
+msgid "A desktop client"
+msgstr "Un client desktop"
+
+#: templates/rawdata/uploader.html:19
+msgid ""
+"The <strong>AstroBin Raw Data Uploader</strong>\n"
+"                is a desktop program compatible with Windows XP, Windows 7, "
+"and\n"
+"                reasonably recent Linux distributions."
+msgstr ""
+"Il <strong>Caricatore per AstroBin Dati Grezzi</strong>\n"
+"è un programma desktop compatibile con Windows XP, Windows 7, e\n"
+"versioni di Linux ragionevolmente recenti."
+
+#: templates/rawdata/uploader.html:24
+msgid ""
+"It's a program that works in the background\n"
+"                and quietly uploads your raw data files to AstroBin, "
+"finding\n"
+"                them in the root directory that you can specify in the\n"
+"                settings."
+msgstr ""
+"È un programma che lavora in background\n"
+"e silenziosamente carica i tuoi file grezzi su AstroBin, trovandoli\n"
+"nella cartella da te scelta, che puoi specificare nei\n"
+"settaggi."
+
+#: templates/rawdata/uploader.html:30
+msgid ""
+"With <strong>AstroBin Raw Data Uploader</strong>\n"
+"                you don't need to upload your raw data files manually, so "
+"you\n"
+"                can just install it, set it up, and then forget about it! "
+"You\n"
+"                will just know that your data is being safely backed up on\n"
+"                <strong>AstroBin Raw Data</strong>."
+msgstr ""
+"Con il <strong>Caricatore per AstroBin Dati Grezzi</strong>\n"
+"non devi caricare i tuoi file grezzi manualmente, così\n"
+"puoi semplicemente installarlo, impostarlo, e dimenticartene!\n"
+"Saprai che i tuoi file grezzi sono copiati come backup su\n"
+"<strong>AstroBin Dati Grezzi</strong>."
+
+#: templates/rawdata/uploader.html:43
+msgid "Download for:"
+msgstr "Scarica per:"
+
+#: templates/rawdata/uploader.html:62 templates/rawdata/uploader.html.py:67
+#: templates/rawdata/uploader.html:77
+msgid "Download for"
+msgstr "Scarica per"
+
+#: templates/rawdata/uploader.html:63 templates/rawdata/uploader.html.py:68
+#: templates/rawdata/uploader.html:78
+msgid "Coming soon"
+msgstr "In arrivo"
 
 #: templates/subscription/_plan.html:9
 msgid "month"
@@ -1105,7 +1169,8 @@ msgstr ""
 msgid ""
 "Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
 msgstr ""
-"Scopri di più leggendo <a href=\"%(rawdata_url)s\">una breve introduzione.</a>"
+"Scopri di più leggendo <a href=\"%(rawdata_url)s\">una breve introduzione.</"
+"a>"
 
 #: templates/subscription/subscription_list.html:23
 msgid "Here are the available plans. Choose the one that suits you best!"
@@ -1124,9 +1189,9 @@ msgid ""
 "support AstroBin."
 msgstr ""
 "Scegli questa offerta su vuoi spendere poco, ma comunque vuoi la possibilità "
-"di condividere i tuoi file con i tuoi amici. Puoi anche partecipare a "
-"gruppi di dati pubblici e dare il tuo contributo per creare le immagini deep "
-"sky più profonde mai create, e saprai sempre di supportare AstroBin."
+"di condividere i tuoi file con i tuoi amici. Puoi anche partecipare a gruppi "
+"di dati pubblici e dare il tuo contributo per creare le immagini deep sky "
+"più profonde mai create, e saprai sempre di supportare AstroBin."
 
 #: templates/subscription/subscription_list.html:49
 msgid ""
@@ -1160,17 +1225,20 @@ msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"
 msgstr ""
-"PS: sei interessato ad offerte più grandi? <a "
-"href=\"/contact/\">Contattaci!</a>"
+"PS: sei interessato ad offerte più grandi? <a href=\"/contact/\">Contattaci!"
+"</a>"
 
-#: views/privatesharedfolders.py:116
+#: views/privatesharedfolders.py:117
 msgid "Your image has been added to the private shared folder."
 msgstr "La tua immagine è stata aggiunta alla cartella condivisa privata."
 
-#: views/privatesharedfolders.py:204
+#: views/privatesharedfolders.py:205
 msgid "Your private shared folder has been deleted."
 msgstr "La tua cartella condivisa privata è stata cancellata."
 
-#: views/publicdatapools.py:96
+#: views/publicdatapools.py:97
 msgid "Your image has been added to the pool."
 msgstr "La tua immagine è stata aggiunta al gruppo."
+
+#~ msgid "File type is not supported"
+#~ msgstr "Tipo di file non supportato"

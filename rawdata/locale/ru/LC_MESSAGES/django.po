@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-29 02:33-0500\n"
+"POT-Creation-Date: 2013-02-26 08:12-0600\n"
 "PO-Revision-Date: 2013-01-16 16:19+0100\n"
 "Last-Translator: ArtyomChitailo <sigma72@ya.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: folders.py:82 models.py:214 models.py:282
+#: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
 #: templates/rawdata/privatesharedfolder_form.html:20
 #: templates/rawdata/privatesharedfolder_list.html:37
@@ -70,41 +70,37 @@ msgstr "Объект"
 msgid "Temperature"
 msgstr "Температура"
 
-#: forms.py:25
-msgid "File type is not supported"
-msgstr "Тип файла не поддерживается"
-
-#: forms.py:102
+#: forms.py:86
 msgid "Users"
 msgstr "Пользователи"
 
-#: forms.py:103
+#: forms.py:87
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr ""
 "Список пользователей, которых вы хотите пригласить. Имена пользователей "
 "разделяются запятыми."
 
-#: models.py:43 templatetags/rawdata_tags.py:15
+#: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: models.py:44
+#: models.py:45
 msgid "Light"
 msgstr "Кадр изображения"
 
-#: models.py:45
+#: models.py:46
 msgid "Offset/Bias"
 msgstr "Кадр смещения"
 
-#: models.py:46
+#: models.py:47
 msgid "Dark"
 msgstr "Кадр темнового тока"
 
-#: models.py:47
+#: models.py:48
 msgid "Flat"
 msgstr "Кадр плоского поля"
 
-#: models.py:215
+#: models.py:216
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
@@ -113,17 +109,17 @@ msgstr ""
 "описательным, включив название небесного объекта и фокусное расстояние в "
 "миллиметрах."
 
-#: models.py:219 models.py:287
+#: models.py:220 models.py:288
 #: templates/rawdata/privatesharedfolder_list.html:38
 #: templates/rawdata/publicdatapool_list.html:33
 msgid "Description"
 msgstr "Описание"
 
-#: models.py:220
+#: models.py:221
 msgid "Describe the goals and terms of this pool."
 msgstr "Опишите цели и правила данного фонда."
 
-#: models.py:283
+#: models.py:284
 msgid ""
 "A name for this folder. Be descriptive, so that the folder can be quickly "
 "recognized by the name."
@@ -131,9 +127,15 @@ msgstr ""
 "Название для данной папки. Рекомендуется давать понятное название, чтобы "
 "папку быстро можно было узнать по имени."
 
-#: models.py:288
+#: models.py:289
 msgid "Describe the goals of this folder."
 msgstr "Опишите назначение этой папки."
+
+#: serializers.py:38
+msgid ""
+"You don't have any free space on AstroBin Rawdata. Consider upgrading your "
+"account."
+msgstr ""
 
 #: signal_handlers.py:18
 msgid ""
@@ -869,6 +871,59 @@ msgstr ""
 msgid "Please refresh this page in a few seconds."
 msgstr ""
 
+#: templates/rawdata/uploader.html:4 templates/rawdata/uploader.html.py:8
+#, fuzzy
+msgid "AstroBin Raw Data Uploader"
+msgstr "Что такое \"AstroBin - \"сырые\" данные\"?"
+
+#: templates/rawdata/uploader.html:10
+msgid "A desktop client"
+msgstr ""
+
+#: templates/rawdata/uploader.html:19
+msgid ""
+"The <strong>AstroBin Raw Data Uploader</strong>\n"
+"                is a desktop program compatible with Windows XP, Windows 7, "
+"and\n"
+"                reasonably recent Linux distributions."
+msgstr ""
+
+#: templates/rawdata/uploader.html:24
+msgid ""
+"It's a program that works in the background\n"
+"                and quietly uploads your raw data files to AstroBin, "
+"finding\n"
+"                them in the root directory that you can specify in the\n"
+"                settings."
+msgstr ""
+
+#: templates/rawdata/uploader.html:30
+msgid ""
+"With <strong>AstroBin Raw Data Uploader</strong>\n"
+"                you don't need to upload your raw data files manually, so "
+"you\n"
+"                can just install it, set it up, and then forget about it! "
+"You\n"
+"                will just know that your data is being safely backed up on\n"
+"                <strong>AstroBin Raw Data</strong>."
+msgstr ""
+
+#: templates/rawdata/uploader.html:43
+#, fuzzy
+msgid "Download for:"
+msgstr "Скачать"
+
+#: templates/rawdata/uploader.html:62 templates/rawdata/uploader.html.py:67
+#: templates/rawdata/uploader.html:77
+#, fuzzy
+msgid "Download for"
+msgstr "Скачать"
+
+#: templates/rawdata/uploader.html:63 templates/rawdata/uploader.html.py:68
+#: templates/rawdata/uploader.html:78
+msgid "Coming soon"
+msgstr ""
+
 #: templates/subscription/_plan.html:9
 msgid "month"
 msgstr ""
@@ -1020,14 +1075,17 @@ msgid ""
 "a>"
 msgstr ""
 
-#: views/privatesharedfolders.py:116
+#: views/privatesharedfolders.py:117
 msgid "Your image has been added to the private shared folder."
 msgstr ""
 
-#: views/privatesharedfolders.py:204
+#: views/privatesharedfolders.py:205
 msgid "Your private shared folder has been deleted."
 msgstr ""
 
-#: views/publicdatapools.py:96
+#: views/publicdatapools.py:97
 msgid "Your image has been added to the pool."
 msgstr ""
+
+#~ msgid "File type is not supported"
+#~ msgstr "Тип файла не поддерживается"
