@@ -24,12 +24,12 @@ class NestedComment(models.Model):
     text = models.TextField()
 
     created = models.DateTimeField(
-        auto_now_add = False,
+        auto_now_add = True,
         editable = False,
     )
 
     updated = models.DateTimeField(
-        auto_now = False,
+        auto_now = True,
         editable = False,
     )
 
