@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 14:57-0500\n"
-"PO-Revision-Date: 2012-12-07 17:59+0100\n"
+"PO-Revision-Date: 2013-02-06 20:21+0100\n"
 "Last-Translator: milosz <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -2896,16 +2896,15 @@ msgstr "Nowe zdjęcie obiektu, który obserwujesz"
 
 #: management/__init__.py:165
 msgid "New data posted to shared private folder"
-msgstr ""
+msgstr "Nowe dane opublikowane we współdzielonym prywatnym folderze"
 
 #: management/__init__.py:171
 msgid "New image posted to shared private folder"
-msgstr ""
+msgstr "Nowe zdjęcie opublikowane we współdzielonym prywatnym folderze"
 
 #: management/__init__.py:177
-#, fuzzy
 msgid "You are invited to a shared private folder"
-msgstr "Otrzymałeś/aś nową prywatną wiadomość."
+msgstr "Zostałeś zaproszony do prywatnego współdzielonego folderu"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -3104,9 +3103,8 @@ msgid "AstroBin Questions"
 msgstr "Pytania AstroBin"
 
 #: templates/base.html:214
-#, fuzzy
 msgid "AstroBin Raw Data"
-msgstr "AstroBin jest społecznościowy!"
+msgstr "Surowe Dane AstroBin"
 
 #: templates/base.html:239 templates/maintenance_base.html:221
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:7
@@ -3170,11 +3168,11 @@ msgstr "Wykresy"
 
 #: templates/base.html:402 templates/user/profile-subnav.html:35
 msgid "Raw data library"
-msgstr ""
+msgstr "Biblioteka surowych danych"
 
 #: templates/base.html:409
 msgid "Private shared folders"
-msgstr ""
+msgstr "Prywatne współdzielone foldery"
 
 #: templates/base.html:418 templates/maintenance_base.html:295
 #: templates/messages/inbox.html:9
@@ -4170,13 +4168,16 @@ msgstr "Najnowsze zdjęcia"
 
 #: templates/index.html:55
 msgid "FIT and DSLR camera raw files"
-msgstr ""
+msgstr "Surowe dane w formacie FITS oraz z aparatów DSLR"
 
 #: templates/index.html:65
 msgid ""
 "AstroBin offers the storage of FIT and DSLR camera raw files too, for "
 "archival and sharing purposes!"
 msgstr ""
+"AstroBino oferuje również przestrzeń do przechowywania surowych danych w "
+"formacie FITS oraz z aparatów DSLR. Dane mogą być przechowywane w celu "
+"archiwizacji lub udostępniania!"
 
 #: templates/index.html:69 templates/image/detail.html:582
 #, python-format
@@ -4186,6 +4187,11 @@ msgid ""
 "your files organized, and allow you to share them with other members. <a "
 "href=\"%(rawdata_url)s\">Want to know more?</a>"
 msgstr ""
+"<strong>Surowe Dane AstroBin</strong> to platforma, która  umożliwia "
+"bezpieczne przechowywanie surowych danych w formacie FITS oraz z aparatów "
+"DSLR. Maksymalnie dostępne jest 500GB przestrzeni dyskowej! Pliki będą "
+"automatycznie posortowane. Możliwe jest też udostępnianie plików innym "
+"użytkownikom.  <a href=\"%(rawdata_url)s\">Chcesz wiedzieć więcej?</a>"
 
 #: templates/index.html:102
 msgid "Image of the day"
@@ -4710,23 +4716,24 @@ msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
 msgstr ""
+"Brak wolnego miejsca na Twoim koncie Surowych Danych. Usuń jakieś pliki lub "
+"dokup więcej przestrzeni dyskowej dla Twojego konta."
 
 #: templates/upload.html:85
 msgid "Use the button below to choose files"
-msgstr ""
+msgstr "Użyj przycisku poniżej aby wybrać pliki"
 
 #: templates/upload.html:89
 msgid "Drop your raw data here"
-msgstr ""
+msgstr "Dodaj Twoje pliki tutaj"
 
 #: templates/upload.html:91
 msgid "Accepted file types: FIT and digital camera raw files"
-msgstr ""
+msgstr "Dopuszczalne typy plików: FITS oraz pliki RAW z aparatów cyfrowych"
 
 #: templates/upload.html:95
-#, fuzzy
 msgid "Filename"
-msgstr "Surinam"
+msgstr "Nazwa pliku"
 
 #: templates/upload.html:96 templates/popover/subject.html:14
 #: templates/subject/page.html:41
@@ -4738,39 +4745,42 @@ msgid "Status"
 msgstr "Status"
 
 #: templates/upload.html:114
-#, fuzzy
 msgid "Choose files"
-msgstr "Zaznacz plik"
+msgstr "Wybierz pliki"
 
 #: templates/upload.html:118
 msgid "Reset"
-msgstr ""
+msgstr "Zresetuj"
 
 #: templates/upload.html:125
-#, fuzzy
 msgid "Start upload"
-msgstr "opublikowane"
+msgstr "Rozpocznij dodawanie"
 
 #: templates/upload.html:144 templates/upload.html.py:383
 msgid "Go to your Raw Data Library."
-msgstr ""
+msgstr "Przejdź do Twojej Biblioteki Surowych Plików"
 
 #: templates/upload.html:157
 msgid ""
 "Your Raw Data subscription is not active, or it has expired. If you have "
 "just subscribed, please wait for a few minutes. Thanks for your patience!"
 msgstr ""
+"Twoje konto Surowych Danych nie jest aktywne lub wygasło. Jeżeli właśnie "
+"opłaciłeś subskrypcję, poczekaj kilka minut. Dziękujemy za cierpliwość!"
 
 #: templates/upload.html:162
 #, python-format
 msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
 msgstr ""
+"Przejdź do <a href=\"%(plans_url)s\">planów subskrypcji</a> Surowych Danych."
 
 #: templates/upload.html:172
 msgid ""
 "Did you know that AstroBin can host your FIT and digital camera raw files "
 "too?"
 msgstr ""
+"Czy wiesz, że AstroBin może przechowywać także Twoje pliki FITS oraz pliki "
+"RAW z aparatów cyfrowych?"
 
 #: templates/upload.html:175
 #, python-format

@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 14:57-0500\n"
-"PO-Revision-Date: 2012-08-20 12:25+0100\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2013-01-20 16:57+0100\n"
+"Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -1043,13 +1043,15 @@ msgstr "Ubicaciones"
 
 #: forms.py:89
 msgid "This field is required."
-msgstr ""
+msgstr "Campo requerido."
 
 #: forms.py:97 views.py:2323
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
+"Hubo uno o más errores procesando el formulario. Puede que necesites "
+"desplazarte abajo para verlos."
 
 #: forms.py:112
 msgid "Please enter either some subjects or a main solar system subject."
@@ -1292,7 +1294,7 @@ msgstr "Por favor, introduce un valor entre 1 y 10."
 
 #: forms.py:673 forms.py:691
 msgid "The date cannot be in the future."
-msgstr ""
+msgstr "La fecha no puede ser futura."
 
 #: forms.py:718
 msgid "Nominate for"
@@ -1403,15 +1405,15 @@ msgstr "ha escrito un análisis sobre"
 
 #: locale_extras.py:12
 msgid "created a new public data pool"
-msgstr ""
+msgstr "creada una nueva carpeta pública"
 
 #: locale_extras.py:13
 msgid "added new data to public data pool"
-msgstr ""
+msgstr "añadidos nuevos datos a la carpeta pública"
 
 #: locale_extras.py:14
 msgid "added a new processed image to public data pool"
-msgstr ""
+msgstr "añadida una nueva imagen procesada a la carpeta pública"
 
 #: models.py:48
 msgid "None (All rights reserved)"
@@ -1483,12 +1485,11 @@ msgstr "Polaco"
 
 #: models.py:68 models.py:83 settings.py:79
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brasileño Portugués"
 
 #: models.py:69 models.py:84 settings.py:80
-#, fuzzy
 msgid "Greek"
-msgstr "Grecia"
+msgstr "Griego"
 
 #: models.py:88
 msgid "Pulsars"
@@ -2649,6 +2650,8 @@ msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
+"AstroBin está actualmente en modo sólo-lectura debido a mantenimiento del "
+"servidor. Por favor, vuelvelo a intentar más tarde."
 
 #: views.py:1006
 msgid ""
@@ -2883,25 +2886,23 @@ msgstr "Nuevo análisis de un ítem de instrumental de tu propiedad"
 
 #: management/__init__.py:153
 msgid "New data posted to public pool"
-msgstr ""
+msgstr "Nuevos datos publicados en la carpeta pública"
 
 #: management/__init__.py:159
-#, fuzzy
 msgid "New image posted to public data pool"
-msgstr "Nueva imagen de un objeto al que sigues"
+msgstr "Nueva imagen publicada en la carpeta pública"
 
 #: management/__init__.py:165
 msgid "New data posted to shared private folder"
-msgstr ""
+msgstr "Nuevos datos publicados en la carpeta privada compartida"
 
 #: management/__init__.py:171
 msgid "New image posted to shared private folder"
-msgstr ""
+msgstr "Nueva imagen publicada en la carpeta privada compartida"
 
 #: management/__init__.py:177
-#, fuzzy
 msgid "You are invited to a shared private folder"
-msgstr "Has recibido un nuevo mensaje privado."
+msgstr "Has sido invitado a una carpeta privada compartida"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2917,7 +2918,7 @@ msgstr ""
 
 #: templates/503.html:5
 msgid "AstroBin is temporarily unavailable"
-msgstr ""
+msgstr "AstroBin no está disponible temporalmente"
 
 #: templates/503.html:7
 msgid ""
@@ -2925,10 +2926,13 @@ msgid ""
 "maintenance, or probably a software upgrade. Usually this doesn't take more "
 "than 30 minutes."
 msgstr ""
+"Perdona las molestias, pero estamos realizando una tarea de mantenimiento "
+"del servidor o una actualización del software. Normalmente no durará más de "
+"30 minutos."
 
 #: templates/503.html:10
 msgid "Come back soon!"
-msgstr ""
+msgstr "¡Vuelve pronto!"
 
 #: templates/activities.html:8 templates/index.html:193
 msgid "Activity stream"
@@ -3007,9 +3011,8 @@ msgid "Home"
 msgstr "Inicio"
 
 #: templates/base.html:92 templates/maintenance_base.html:88
-#, fuzzy
 msgid "Community"
-msgstr "Comentario"
+msgstr "Comunidad"
 
 #: templates/base.html:96 templates/base.html.py:631 templates/index.html:228
 #: templates/maintenance_base.html:92 templates/maintenance_base.html:558
@@ -3044,7 +3047,7 @@ msgstr "Maratón Messier"
 
 #: templates/base.html:145
 msgid "Public data pools"
-msgstr ""
+msgstr "Carpetas públicas"
 
 #: templates/base.html:154 templates/comments.html:9
 #: templates/comments.html.py:11 templates/leaderboard.html:44
@@ -3095,14 +3098,12 @@ msgstr "FAQ"
 
 #: templates/base.html:208 templates/maintenance_base.html:197
 #: templates/questions.html:4 templates/questions.html.py:7
-#, fuzzy
 msgid "AstroBin Questions"
-msgstr "¡AstroBin es social!"
+msgstr "Consultorio AstroBin"
 
 #: templates/base.html:214
-#, fuzzy
 msgid "AstroBin Raw Data"
-msgstr "¡AstroBin es social!"
+msgstr "Datos Raw AstroBin"
 
 #: templates/base.html:239 templates/maintenance_base.html:221
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:7
@@ -3166,11 +3167,11 @@ msgstr "Gráficas"
 
 #: templates/base.html:402 templates/user/profile-subnav.html:35
 msgid "Raw data library"
-msgstr ""
+msgstr "Biblioteca de datos Raw"
 
 #: templates/base.html:409
 msgid "Private shared folders"
-msgstr ""
+msgstr "Carpetas privadas compartidas"
 
 #: templates/base.html:418 templates/maintenance_base.html:295
 #: templates/messages/inbox.html:9
@@ -3441,7 +3442,7 @@ msgstr "¿Cuál es el manera correcta de votar imágenes?"
 
 #: templates/faq.html:22 templates/faq.html.py:178
 msgid "The rating values seem odd. How are they calculated?"
-msgstr ""
+msgstr "Los valores de puntuación parecen confusos. ¿Cómo se calculan?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3725,12 +3726,21 @@ msgid ""
 "that the image received, to ensure that images with too few votes aren't "
 "rated better than images with similar rating, but lots of votes."
 msgstr ""
+"AstroBin usa dos trucos para normalizar la puntuación de las imágenes. Antes "
+"que nada se aplica un algoritmo <em>sigma-reject</em> para excluir votos "
+"alejados de la media; esto excluye a la gente que no vota con franqueza. "
+"Después la puntuación es interpolada mediante una función hiperbólica según "
+"el número de votos recibidos; para asegurar que las imágenes con pocos votos "
+"no sean calificadas mejor que las que tienen puntuación similar pero muchos "
+"votos."
 
 #: templates/faq.html:183
 msgid ""
 "This produces the \"AstroBin index\", which is a fairer way to compare "
 "images and users."
 msgstr ""
+"Esto produce el \"Índice AstroBin\", el modo más fácil de comparar imágenes y "
+"usuarios."
 
 #: templates/faq.html:189
 msgid ""
@@ -4173,13 +4183,15 @@ msgstr "Imágenes recientes"
 
 #: templates/index.html:55
 msgid "FIT and DSLR camera raw files"
-msgstr ""
+msgstr "Archivos FIT y archivos crudos de cámara digital"
 
 #: templates/index.html:65
 msgid ""
 "AstroBin offers the storage of FIT and DSLR camera raw files too, for "
 "archival and sharing purposes!"
 msgstr ""
+"AstroBin ofrece también almacenamiento para archivos FIT y archivos crudos "
+"de cámara digital ¡para archivar o compartir!"
 
 #: templates/index.html:69 templates/image/detail.html:582
 #, python-format
@@ -4189,6 +4201,11 @@ msgid ""
 "your files organized, and allow you to share them with other members. <a "
 "href=\"%(rawdata_url)s\">Want to know more?</a>"
 msgstr ""
+"<strong>Datos Raw AstroBin</strong> es una plataforma segura para el "
+"almacenamiento de todos tus archivos FIT o datos crudos de cámara digital, "
+"¡hasta 500 Gb para tener tus archivos organizados automáticamente, "
+"permitiendote el compartirlos con otros miembros. <a href=\"%"
+"(rawdata_url)s\">¿Quieres saber más?</a>"
 
 #: templates/index.html:102
 msgid "Image of the day"
@@ -4452,21 +4469,27 @@ msgid ""
 "information (in fact it barely tries), and presents a series of flaws, that "
 "will be explained below."
 msgstr ""
+"A día de hoy, la forma más común bajo la cual existen las comunidades "
+"astronómicas es la del foro. Un concepto con más de 20 años de antigüedad "
+"que no se maneja bien si dispone de cantidades masivas de información, "
+"siendo muy difícil la organización de dicha información y presentando una "
+"serie de problemas que se explican a continuación."
 
 #: templates/questions.html:22
-#, fuzzy
 msgid "What is AstroBin Questions?"
-msgstr "¿Qué es AstroBin?"
+msgstr "¿Qué es el Consultorio AstroBin?"
 
 #: templates/questions.html:24
 msgid ""
 "It's a Questions &amp; Answers site focused on the quality of the content. "
 "The allowed subjects of discussion are Astrophotography and Astronomy."
 msgstr ""
+"Es un lugar con preguntas y respuestas orientado a la calidad del contenido. "
+"Los temas de discusión permitidos son Astrofotografía y Astronomía."
 
 #: templates/questions.html:27
 msgid "What's wrong with forums?"
-msgstr ""
+msgstr "¿Que está mal de los forums?"
 
 #: templates/questions.html:29
 msgid ""
@@ -4474,10 +4497,14 @@ msgid ""
 "<strong>terribly</strong> dated, as a system, for today's Internet "
 "standards. Here's a series of flaws that AstroBin Questions fixes:"
 msgstr ""
+"Los foros están bien para entretenidas discusiones, pero son "
+"<strong>muy</strong> anticuados como sistema para los actuales estándars de "
+"Internet. He aquí una serie de defectos que el Consultorio AstroBin "
+"soluciona:"
 
 #: templates/questions.html:33
 msgid "Every post is flat"
-msgstr ""
+msgstr "Cada hilo es plano"
 
 #: templates/questions.html:35
 msgid ""
@@ -4485,10 +4512,13 @@ msgid ""
 "the same post, because the only way to do it is by quoting somebody. Very "
 "soon this becomes a mess."
 msgstr ""
+"Es muy difícil abordar varias conversaciones al mismo tiempo en el mismo "
+"hilo, ya que la única manera de hacerlo es citando a alguien. Muy pronto "
+"esto se convierte en un lío."
 
 #: templates/questions.html:40
 msgid "Every post has the same visibility"
-msgstr ""
+msgstr "Cada hilo tiene la misma visibilidad"
 
 #: templates/questions.html:42
 msgid ""
@@ -4500,10 +4530,17 @@ msgid ""
 "replies might be objectively wrong, and this will worsen the quality of the "
 "community."
 msgstr ""
+"Si escribes un mensaje preguntando si debe usar un filtro solar al observar "
+"un eclipse, y yo respondo <em> \"No, no te preocupes,\" </ em> la única manera "
+"de invalidar esa respuesta es que otras personas expliquen porqué es "
+"erróneo. Esto no garantiza que alguien no va a seguir y perder un ojo. Este "
+"es un ejemplo extremo: lo que estoy tratando de decir es que algunas "
+"respuestas  pueden ser objetivamente incorrectas, y esto lo que hace es "
+"empeorar la calidad de la comunidad."
 
 #: templates/questions.html:47
 msgid "Every user has the same importance"
-msgstr ""
+msgstr "Todos los usuarios son igual de importantes."
 
 #: templates/questions.html:49
 msgid ""
@@ -4512,10 +4549,14 @@ msgid ""
 "this doesn't matter. My posts or post replies will look the same. This "
 "worsens the quality of the community."
 msgstr ""
+"Si soy Don Nadie que la pasada noche acaba de hacer su primera "
+"astrofotografía o un astrofotógrafo semiprofesional con 20 años de "
+"experiencia, en los foros esto no importa; mis mensajes o respuestas tendrán "
+"el mismo aspecto. Esto empeora la calidad de la comunidad."
 
 #: templates/questions.html:54
 msgid "Everything is static"
-msgstr ""
+msgstr "Todo es estático"
 
 #: templates/questions.html:56
 msgid ""
@@ -4523,6 +4564,10 @@ msgid ""
 "and can't ask my question well, nobody can rephrase it. If I make a lot of "
 "typos, nobody can fix them. This is undesirable."
 msgstr ""
+"Si escribo como si tuviera 7 años, nadie puede arreglarlo. Si no me expreso "
+"bien y no formulo mi pregunta bien, nadie puede reformularla. Si hago "
+"errores de ortografía, nadie puede corregirlos. Todo esto no es "
+"recomendable."
 
 #: templates/questions.html:62
 msgid ""
@@ -4530,39 +4575,46 @@ msgid ""
 "highly interactive, wiki-capable website that <strong>you</strong> moderate, "
 "thanks to a system based on <em>karma points</em>."
 msgstr ""
+"El Consultorio AstroBin afronta todas estas cuestiones gracias al poder de "
+"una comunidad altamente interactiva en un sitio web de estilo wiki que "
+"<strong>tú</strong> puedes moderar gracias a un sistema basado en <em>puntos "
+"de karma</em>."
 
 #: templates/questions.html:66
 msgid ""
 "Please join, and you can learn and teach about Astrophotography and "
 "Astronomy!"
-msgstr ""
+msgstr "¡Únete y podrás aprender y enseñar Astrofotografía y Astronomía!"
 
 #: templates/questions.html:69
 msgid "Here's some more reading material to get you started"
-msgstr ""
+msgstr "Aquí hay algún material más de lectura para que empieces"
 
 #: templates/questions.html:73
-#, fuzzy
 msgid "Frequently Asked Questions about AstroBin Questions"
-msgstr "Preguntas frecuentes"
+msgstr "Preguntas frecuentes sobre el Consultorio AstroBin"
 
 #: templates/questions.html:78
 msgid "AstroBin Questions' help page"
-msgstr ""
+msgstr "Página de ayuda del Consultorio AstroBin"
 
 #: templates/questions.html:83
 msgid "An extension of this page, as a question on AstroBin Questions"
 msgstr ""
+"Una extensión de esta página en forma de pregunta en el Consultorio AstroBin "
+""
 
 #: templates/questions.html:90
 msgid "Go to AstroBin Questions!"
-msgstr ""
+msgstr "Ir al Consultorio AstroBin"
 
 #: templates/questions.html:94
 msgid ""
 "PS: AstroBin Questions is only available in English, right now, but more "
 "languages will come soon."
 msgstr ""
+"PS: El Consultorio AstroBin está ahora mismo sólo disponible en Inglés, pero "
+"pronto estará en más idiomas."
 
 #: templates/stats.html:10
 #, python-format
@@ -4678,23 +4730,25 @@ msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
 msgstr ""
+"No te queda más espacio en tu cuenta de Datos Raw. Por favor, borra algunos "
+"archivos para hacer sitio o actualiza tu cuenta."
 
 #: templates/upload.html:85
 msgid "Use the button below to choose files"
-msgstr ""
+msgstr "Usa el botón inferior para elegir archivos"
 
 #: templates/upload.html:89
 msgid "Drop your raw data here"
-msgstr ""
+msgstr "Deja tus Datos Raw aquí"
 
 #: templates/upload.html:91
 msgid "Accepted file types: FIT and digital camera raw files"
 msgstr ""
+"Tipos de archivo aceptados: FIT y archivos crudos (RAW) de cámaras digitales"
 
 #: templates/upload.html:95
-#, fuzzy
 msgid "Filename"
-msgstr "Surinam"
+msgstr "Nombre de archivo"
 
 #: templates/upload.html:96 templates/popover/subject.html:14
 #: templates/subject/page.html:41
@@ -4706,39 +4760,41 @@ msgid "Status"
 msgstr "Estatus"
 
 #: templates/upload.html:114
-#, fuzzy
 msgid "Choose files"
-msgstr "Examinar"
+msgstr "Seleccionar archivos"
 
 #: templates/upload.html:118
 msgid "Reset"
-msgstr ""
+msgstr "Reiniciar"
 
 #: templates/upload.html:125
-#, fuzzy
 msgid "Start upload"
-msgstr "ha subido"
+msgstr "Empezar a subir"
 
 #: templates/upload.html:144 templates/upload.html.py:383
 msgid "Go to your Raw Data Library."
-msgstr ""
+msgstr "Ir a tu Biblioteca de Datos Raw."
 
 #: templates/upload.html:157
 msgid ""
 "Your Raw Data subscription is not active, or it has expired. If you have "
 "just subscribed, please wait for a few minutes. Thanks for your patience!"
 msgstr ""
+"Tu suscripción a Datos Raw no está activada o ha expirado. Si te acabas de "
+"suscribir espera unos minutos. ¡Gracias por tu paciencia!"
 
 #: templates/upload.html:162
 #, python-format
 msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
-msgstr ""
+msgstr "Ir a la <a href=\"%(plans_url)s\">Página de Planes</a> de Datos Raw."
 
 #: templates/upload.html:172
 msgid ""
 "Did you know that AstroBin can host your FIT and digital camera raw files "
 "too?"
 msgstr ""
+"¿Sabes que AstroBin puede también alojar tus archivos FIT o archivos crudos "
+"de cámaras digitales?"
 
 #: templates/upload.html:175
 #, python-format
@@ -4747,25 +4803,29 @@ msgid ""
 "to safely store all your raw files, and have them neatily organized for "
 "future reference!"
 msgstr ""
+"Echa un vistazo a <a href=\"%(rawdata_url)s\">AstroBin Datos Raw</a> si "
+"quieres guardar seguros tus archivos en crudo y tenerlos bien organizados "
+"para futuras referencias."
 
 #: templates/upload.html:266
 msgid "Raw files"
-msgstr ""
+msgstr "Archivos Raw"
 
 #: templates/upload.html:303
 msgid "Upload started, please wait..."
-msgstr ""
+msgstr "Subida iniciada, espera por favor..."
 
 #: templates/upload.html:349
 msgid ""
 "One ore more files were ignored because they did not look like FIT or "
 "digital camera raw files."
 msgstr ""
+"Uno o más archivos fueron ignorados porque no parecen FIT o archivos crudos "
+"(RAW) de cámara digital."
 
 #: templates/upload.html:382
-#, fuzzy
 msgid "Upload complete!"
-msgstr "Fecha de subida"
+msgstr "¡Subida completada!"
 
 #: templates/wall.html:14
 msgid "Sort by"
@@ -4773,7 +4833,7 @@ msgstr "Ordenar por"
 
 #: templates/wall.html:21
 msgid "Uploaded"
-msgstr "Fecha de subida"
+msgstr "Subidos"
 
 #: templates/wall.html:27
 msgid "Acquired"
@@ -5241,14 +5301,12 @@ msgid "Move to staging area"
 msgstr "Mover al Área de Pruebas"
 
 #: templates/image/detail.html:122 templates/image/detail.html.py:818
-#, fuzzy
 msgid "Send to public data pool"
-msgstr "Promover al Área Pública"
+msgstr "Enviar a la carpeta pública"
 
 #: templates/image/detail.html:129 templates/image/detail.html.py:855
-#, fuzzy
 msgid "Send to private shared folder"
-msgstr "Enviar mensaje privado"
+msgstr "Enviar a la carpeta privada compartida"
 
 #: templates/image/detail.html:139
 msgid "Delete original image"
@@ -5390,29 +5448,28 @@ msgstr ""
 "%(lang)s</strong>."
 
 #: templates/image/detail.html:568
-#, fuzzy
 msgid "What is this?"
-msgstr "¿Qué es este sitio?"
+msgstr "¿Qué es esto?"
 
 #: templates/image/detail.html:569
 msgid ""
 "This button will create a post on AstroBin Questions, in which you can ask "
 "for critique, review or analisys of your image."
 msgstr ""
+"Este botón creará una entrada en el Consultorio AstroBin en el cual puedes "
+"solicitar una crítica, revisión o análisis de tu imagen."
 
 #: templates/image/detail.html:569
-#, fuzzy
 msgid "Learn more about AstroBin Questions."
-msgstr "Preguntas frecuentes"
+msgstr "Aprender más sobre el Consultorio AstroBin."
 
 #: templates/image/detail.html:572
-#, fuzzy
 msgid "Request critique"
-msgstr "Adquirida desde"
+msgstr "Solicitar crítica"
 
 #: templates/image/detail.html:579
 msgid "Introducing AstroBin Raw Data"
-msgstr ""
+msgstr "Conociendo Datos Raw de AstroBin"
 
 #: templates/image/detail.html:600 templates/image/detail.html.py:626
 msgid "Final"
@@ -5492,10 +5549,14 @@ msgid ""
 "If this image is the result of your processing of a public data pool, you "
 "can send it the pool so it's displayed there."
 msgstr ""
+"Si esta imagen es el resultado de un proceso de una carpeta pública, puedes "
+"enviarla dicha carpeta para que se muestre allí. "
 
 #: templates/image/detail.html:827
 msgid "Use this form to select an existing <strong>public data pool</strong>."
 msgstr ""
+"Usa este formulario para seleccionar una <strong>carpeta pública</strong> "
+"existente."
 
 #: templates/image/detail.html:839 templates/image/detail.html.py:887
 #, python-format
@@ -5503,6 +5564,8 @@ msgid ""
 "You need a <a href=\"%(rawdata_url)s\">Raw Data</a> subscription to perform "
 "this action."
 msgstr ""
+"Necesitas una suscripción a <a href=\"%(rawdata_url)s\">Datos Raw</a> para "
+"realizar esta acción."
 
 #: templates/image/detail.html:840 templates/image/detail.html.py:888
 #, python-format
@@ -5512,26 +5575,35 @@ msgid ""
 "organized, but being part of it also means that you support AstroBin and can "
 "perhaps contribute your raw files to scientic discoveries."
 msgstr ""
+"La <a href=\"%(rawdata_url)s\">Plataforma de Datos Raw</a> es principalmente "
+"un modo seguro de guardar tus archivos crudos y tenerlos bien organizados "
+"con poco esfuerzo, además de que ser parte de ella significa que das soporte "
+"a AstroBin, y quizás puedas contribuir con tus archivos crudos a "
+"descubrimientos científicos."
 
 #: templates/image/detail.html:859
 msgid ""
 "If this image is the result of your processing of a private shared folder, "
 "you can send it the folder so it's displayed there."
 msgstr ""
+"Si esta imagen es el resultado de tu proceso de una carpeta privada "
+"compartida, puedes enviarla a dicha carpeta para que se muestre allí."
 
 #: templates/image/detail.html:865
 msgid ""
 "Use this form to select a <strong>private shared folder</strong> you have "
 "created or have been invited to."
 msgstr ""
+"Usa este formulario para seleccionar una <strong>carpeta privada "
+"compartida</strong> que hayas creado o a la que hayas sido invitado."
 
 #: templates/image/detail.html:877
 msgid "You don't have access to any shared private folders."
-msgstr ""
+msgstr "No tienes acceso a ninguna carpeta privada compartida."
 
 #: templates/image/detail.html:897
 msgid "OK"
-msgstr ""
+msgstr "Aceptar"
 
 #: templates/image/detail.html:955
 msgid "Copied!"
@@ -6777,161 +6849,171 @@ msgid ""
 "\n"
 "Visit the folder at the following url: %(folder_url)s"
 msgstr ""
+"Has sido invitado a la carpeta privada compartida: \"%(folder_name)s\".\n"
+"\n"
+"Ahora puedes aportar datos e imágenes procesadas a esta carpeta. También "
+"puedes invitar a más gente.\n"
+"\n"
+"Visita la carpeta en el siguiente enlacel: %(folder_url)s"
 
 #: templates/notification/rawdata_invited_to_private_folder/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Has dejado de seguir a <strong>%(object)s</"
-"strong>.</a>"
+"<a href=\"%(folder_url)s\">Has sido invitado a la carpeta privada compartida: "
+"<strong>\"%(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Has dejado de seguir a <strong>%(object)s</"
-"strong>.</a>"
+"<a href=\"%(folder_url)s\">Has sido invitado a la carpeta privada compartida: "
+"<strong>\"%(folder_name)s.\"</a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/short.txt:2
 #, python-format
 msgid "You are invited you to the private shared folder: %(folder_name)s"
-msgstr ""
+msgstr "Has sido invitado a la carpeta privada compartida: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added a new processed image to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
-"%(originator)s ha publicado una nueva revisión de una imagen. Échale un "
-"vistazo en el siguiente enlace: %(object_url)s"
+"%(user_name)s ha añadido una nueva imagen procesada a la carpeta privada "
+"compartida: \"%(folder_name)s\". Compruébalo en el siguiente enlace: %"
+"(folder_url)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "strong></a>"
 msgstr ""
-"¡<a href=\"%(url)s\"><strong>%(user)s</strong> empezó un nuevo debate sobre "
-"un ítem de instrumental que posees!</a>"
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> ha añadido una nueva "
+"imagen procesada a la carpeta privada compartida: <strong>\"%"
+"(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "a>"
 msgstr ""
-"¡<a href=\"%(url)s\"><strong>%(user)s</strong> ha seleccionado tu imagen "
-"como favorita!</a>"
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> ha añadido una nueva "
+"imagen procesada a la carpeta privada compartida: <strong>\"%"
+"(folder_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.txt:2
 #, python-format
 msgid "New processed image in private shared folder: %(folder_name)s"
 msgstr ""
+"Nueva imagen procesada en la carpeta privada compartida: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added a new processed image to the public data pool: "
 "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
 msgstr ""
-"%(originator)s ha publicado una nueva revisión de una imagen. Échale un "
-"vistazo en el siguiente enlace: %(object_url)s"
+"%(user_name)s ha añadido una nueva imagen procesada a la carpeta pública: \"%"
+"(pool_name)s\". Compruébalo en el siguiente enlace: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
-"¡<a href=\"%(url)s\"><strong>%(user)s</strong> empezó un nuevo debate sobre "
-"un ítem de instrumental que posees!</a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha añadido una nueva "
+"imagen procesada a la carpeta pública: <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
-"¡<a href=\"%(url)s\"><strong>%(user)s</strong> empezó un nuevo debate sobre "
-"un ítem de instrumental que posees!</a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has añadido una nueva "
+"imagen procesada a la carpeta pública: <strong>\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
 msgid "New processed image in public data pool: %(pool_name)s"
-msgstr ""
+msgstr "Nueva imagen procesada en la carpeta pública: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_pool/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
 "Check it out at the following url: %(pool_url)s"
 msgstr ""
-"%(user)s ha respondido a tu comentario. Echa un vistazo en el siguiente "
-"enlace: %(url)s"
+"%(user_name)s ha añadido nuevos datos a la carpeta pública: \"%(pool_name)s\". "
+"Compruébalo en el siguiente enlace: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
-"¡<a href=\"%(url)s\"><strong>%(user)s</strong> empezó un nuevo debate sobre "
-"un ítem de instrumental que posees!</a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha añadido datos a la "
+"carpeta pública: <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
-"¡<a href=\"%(url)s\"><strong>%(user)s</strong> empezó un nuevo debate sobre "
-"un ítem de instrumental que posees!</a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha añadido datos a la "
+"carpeta pública: <strong>\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
 #, python-format
 msgid "New data in public pool: %(pool_name)s"
-msgstr ""
+msgstr "Nuevos datos en la carpeta pública: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added new data to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
-"AstroBin ha publicado una nueva entrada en el blog: \"%(object)s\".\n"
-"\n"
-"Échale un vistazo en el siguiente enlace: %(object_url)s"
+"%(user_name)s ha añadido datos a la carpeta privada compartida: \"%"
+"(folder_name)s\". Compruébalo en el siguiente enlace: %(folder_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
-"¡<a href=\"%(url)s\"><strong>%(user)s</strong> ha seleccionado tu imagen "
-"como favorita!</a>"
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> ha añadido nuevos "
+"datos a la carpeta privada compartida: <strong>\"%"
+"(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
 msgstr ""
-"¡<a href=\"%(url)s\"><strong>%(user)s</strong> ha seleccionado tu imagen "
-"como favorita!</a>"
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> ha añadido nuevos "
+"datos a la carpeta privada compartida: <strong>\"%(folder_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.txt:2
 #, python-format
 msgid "New data in private shared folder: %(folder_name)s"
-msgstr ""
+msgstr "Nuevos datos en la carpeta privada compartida: %(folder_name)s"
 
 #: templates/notification/received_email/full.txt:2
 msgid ""
@@ -6986,17 +7068,16 @@ msgstr ""
 "strong>.</a>"
 
 #: templates/openid_provider/decide.html:5
-#, fuzzy
 msgid "Allow external login"
-msgstr "Permitir calificación"
+msgstr "Permitir iniciar sesión externa"
 
 #: templates/openid_provider/decide.html:7
 msgid "The following site has requested verification of your account:"
-msgstr ""
+msgstr "El siguiente sitio ha solicitado verificación de tu cuenta:"
 
 #: templates/openid_provider/decide.html:13
 msgid "Verify"
-msgstr ""
+msgstr "Verificar"
 
 #: templates/popover/gear.html:9 templates/popover/gear_accessory.html:18
 #: templates/popover/gear_camera.html:22 templates/popover/gear_filter.html:20
@@ -7010,16 +7091,15 @@ msgstr "Encontrar imágenes"
 
 #: templates/popover/rating.html:12
 msgid "Average"
-msgstr ""
+msgstr "Media"
 
 #: templates/popover/rating.html:16
 msgid "Sigma-reject average"
-msgstr ""
+msgstr "Media con recorte Sigma"
 
 #: templates/popover/rating.html:20
-#, fuzzy
 msgid "AstroBin index"
-msgstr "¡AstroBin es social!"
+msgstr "Índice AstroBin"
 
 #: templates/popover/rating.html:28
 msgid "Info"
@@ -7077,6 +7157,8 @@ msgid ""
 "Hi,\n"
 "please use the following link to activate your AstroBin account:"
 msgstr ""
+"Hola,\n"
+"Por favor utiliza el siguiente enlace para activar tu cuenta de AstroBin:"
 
 #: templates/registration/activation_email.txt:7
 #, python-format
@@ -7088,6 +7170,8 @@ msgid ""
 "Sincerely,\n"
 "the AstroBin staff."
 msgstr ""
+"Sinceramente,\n"
+"El Equipo de AstroBin."
 
 #: templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
@@ -7148,24 +7232,27 @@ msgstr "Renovar contraseña en %(site_name)s"
 
 #: templates/registration/registration_complete.html:6
 msgid "Registration completed"
-msgstr ""
+msgstr "Registro completado"
 
 #: templates/registration/registration_complete.html:7
-#, fuzzy
 msgid "You are now registered"
-msgstr "No tienes peticiones."
+msgstr "Has sido registrado"
 
 #: templates/registration/registration_complete.html:12
 msgid ""
 "To confirm your e-mail address, we have sent you an e-mail with an "
 "activation link."
 msgstr ""
+"Te hemos enviado un correo con un enlace de activación para confirmar tu "
+"dirección de correo electrónico."
 
 #: templates/registration/registration_complete.html:16
 msgid ""
 "If you don't receive the e-mail within a few minutes, remember to check your "
 "spam folder."
 msgstr ""
+"Si no recibes el correo en unos minutos, no olvides revisar tu carpeta de "
+"correo basura."
 
 #: templates/registration/registration_form.html:5
 #: templates/registration/registration_form.html:8

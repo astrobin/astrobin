@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 14:57-0500\n"
-"PO-Revision-Date: 2012-09-04 21:31+0100\n"
-"Last-Translator: njjmfm <josephmichail@gmail.com>\n"
+"PO-Revision-Date: 2013-02-09 05:17+0100\n"
+"Last-Translator: time2k <timezhang@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh-CN\n"
 "MIME-Version: 1.0\n"
@@ -20,99 +20,99 @@ msgstr ""
 
 #: fields.py:10
 msgid "United Kingdom"
-msgstr " 联合王国"
+msgstr "联合王国"
 
 #: fields.py:11
 msgid "Afghanistan"
-msgstr ""
+msgstr "阿富汗"
 
 #: fields.py:12
 msgid "Aland Islands"
-msgstr ""
+msgstr "奥兰群岛"
 
 #: fields.py:13
 msgid "Albania"
-msgstr ""
+msgstr "阿尔巴尼亚"
 
 #: fields.py:14
 msgid "Algeria"
-msgstr ""
+msgstr "阿尔及利亚"
 
 #: fields.py:15
 msgid "American Samoa"
-msgstr ""
+msgstr "美属萨摩亚"
 
 #: fields.py:16
 msgid "Andorra"
-msgstr ""
+msgstr "安道尔共和国"
 
 #: fields.py:17
 msgid "Angola"
-msgstr ""
+msgstr "安哥拉"
 
 #: fields.py:18
 msgid "Anguilla"
-msgstr ""
+msgstr "安圭拉岛"
 
 #: fields.py:19
 msgid "Antarctica"
-msgstr ""
+msgstr "南极洲"
 
 #: fields.py:20
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "安提瓜和巴布达"
 
 #: fields.py:21
 msgid "Argentina"
-msgstr ""
+msgstr "阿根廷"
 
 #: fields.py:22
 msgid "Armenia"
-msgstr ""
+msgstr "亚美尼亚"
 
 #: fields.py:23
 msgid "Aruba"
-msgstr ""
+msgstr "阿鲁巴岛"
 
 #: fields.py:24
 msgid "Australia"
-msgstr ""
+msgstr "澳大利亚"
 
 #: fields.py:25
 msgid "Austria"
-msgstr ""
+msgstr "奥地利"
 
 #: fields.py:26
 msgid "Azerbaijan"
-msgstr ""
+msgstr "阿塞拜疆"
 
 #: fields.py:27
 msgid "Bahamas"
-msgstr ""
+msgstr "巴哈马群岛"
 
 #: fields.py:28
 msgid "Bahrain"
-msgstr ""
+msgstr "巴林"
 
 #: fields.py:29
 msgid "Bangladesh"
-msgstr ""
+msgstr "孟加拉共和国"
 
 #: fields.py:30
 msgid "Barbados"
-msgstr ""
+msgstr "巴巴多斯岛"
 
 #: fields.py:31
 msgid "Belarus"
-msgstr ""
+msgstr "白俄罗斯"
 
 #: fields.py:32
 msgid "Belgium"
-msgstr ""
+msgstr "比利时"
 
 #: fields.py:33
 msgid "Belize"
-msgstr ""
+msgstr "伯利兹城"
 
 #: fields.py:34
 msgid "Benin"
@@ -344,7 +344,7 @@ msgstr ""
 
 #: fields.py:91
 msgid "Germany"
-msgstr ""
+msgstr "德国"
 
 #: fields.py:92
 msgid "Ghana"
@@ -356,7 +356,7 @@ msgstr ""
 
 #: fields.py:94
 msgid "Greece"
-msgstr ""
+msgstr "希腊"
 
 #: fields.py:95
 msgid "Greenland"
@@ -744,11 +744,11 @@ msgstr ""
 
 #: fields.py:191
 msgid "Romania"
-msgstr ""
+msgstr "罗马尼亚"
 
 #: fields.py:192
 msgid "Russian Federation"
-msgstr ""
+msgstr "俄罗斯联邦"
 
 #: fields.py:193
 msgid "Rwanda"
@@ -1080,72 +1080,72 @@ msgstr ""
 
 #: forms.py:169 forms.py:401 models.py:850
 msgid "Imaging cameras"
-msgstr ""
+msgstr "拍摄相机"
 
 #: forms.py:170 models.py:851
 msgid "Guiding cameras"
-msgstr ""
+msgstr "导星相机"
 
 #: forms.py:171 forms.py:264 models.py:852 models.py:1484 views.py:2273
 msgid "Focal reducers"
-msgstr ""
+msgstr "减焦镜"
 
 #: forms.py:172 forms.py:265 models.py:853 models.py:1485 views.py:2274
 msgid "Software"
-msgstr ""
+msgstr "软件"
 
 #: forms.py:173 forms.py:266 models.py:854 models.py:1486 views.py:2275
 msgid "Filters"
-msgstr ""
+msgstr "滤镜"
 
 #: forms.py:174 forms.py:267 models.py:855 models.py:1487 views.py:2276
 msgid "Accessories"
-msgstr ""
+msgstr "附件"
 
 #: forms.py:196
 msgid "If you have a personal website, put the address here."
-msgstr ""
+msgstr "如果您有个人网站，请输入网址"
 
 #: forms.py:206 models.py:1411 templates/user/card.html:41
 msgid "Website"
-msgstr ""
+msgstr "网站"
 
 #: forms.py:230
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
-msgstr ""
+msgstr "您拥有的所有望远镜和镜头，包括您用来进行导星的，到这里"
 
 #: forms.py:239
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
-msgstr ""
+msgstr "您的数码单反，CCD相机，行星相机以及导星相机请到这里添加"
 
 #: forms.py:252
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
-msgstr ""
+msgstr "注意：分别输入单个滤镜，如果您输入LRGB，您将不能在分别添加这些滤镜"
 
 #: forms.py:261 models.py:1481 views.py:2270
 msgid "Telescopes and lenses"
-msgstr ""
+msgstr "望远镜和镜头"
 
 #: forms.py:263 models.py:1483 views.py:2271
 msgid "Cameras"
-msgstr ""
+msgstr "相机"
 
 #: forms.py:295 forms.py:309
 #: templates/inclusion_tags/search_image_list.html:64
 msgid "Users"
-msgstr ""
+msgstr "用户"
 
 #: forms.py:305
 msgid "Search type"
-msgstr ""
+msgstr "搜索类型"
 
 #: forms.py:307
 msgid "All"
-msgstr ""
+msgstr "所有的"
 
 #: forms.py:308 templates/leaderboard.html:39 templates/gear/page.html:235
 #: templates/inclusion_tags/search_image_list.html:52
@@ -1155,64 +1155,64 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:41
 #: templates/user/profile/commercial/products.html:123
 msgid "Images"
-msgstr ""
+msgstr "图片"
 
 #: forms.py:310 models.py:703 views.py:1817
 #: templates/maintenance_base.html:334 templates/profile-edit-menu.html:30
 #: templates/wall.html:143 templates/inclusion_tags/search_image_list.html:11
 #: templates/user/card.html:13 templates/user/profile-subnav.html:134
 msgid "Gear"
-msgstr ""
+msgstr "器材"
 
 #: forms.py:322
 msgid "Telescope type"
-msgstr ""
+msgstr "望远镜类型"
 
 #: forms.py:323 forms.py:329
 msgid "Any"
-msgstr ""
+msgstr "任何的"
 
 #: forms.py:328
 msgid "Camera type"
-msgstr ""
+msgstr "相机类型"
 
 #: forms.py:342 forms.py:347
 msgid "Express value in mm"
-msgstr ""
+msgstr "以毫米表示"
 
 #: forms.py:353 forms.py:358
 msgid "Express value in &mu;m"
-msgstr ""
+msgstr "以单位米表示"
 
 #: forms.py:365 forms.py:370 forms.py:598 forms.py:643 forms.py:684
 msgid "Please use the following format: yyyy-mm-dd"
-msgstr ""
+msgstr "请按照yyyy-mm-dd来输入日期"
 
 #: forms.py:374 forms.py:378
 msgid "Express value in hours"
-msgstr ""
+msgstr "以小时来表示"
 
 #: forms.py:390 models.py:872 templates/image/detail.html:685
 #: templates/image/detail.html.py:686 templates/search/search.html:226
 msgid "License"
-msgstr ""
+msgstr "版权"
 
 #: forms.py:397
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
-msgstr ""
+msgstr "按目标，望远镜或者镜头，相机，滤镜来搜索"
 
 #: forms.py:399 models.py:735
 msgid "Main solar system subject"
-msgstr ""
+msgstr "主要的太阳系目标"
 
 #: forms.py:402
 msgid "Min. telescope aperture"
-msgstr ""
+msgstr "最小望远镜孔径"
 
 #: forms.py:403
 msgid "Max. telescope aperture"
-msgstr ""
+msgstr "最大的望远镜孔径"
 
 #: forms.py:404
 msgid "Acquired after"
@@ -1224,15 +1224,15 @@ msgstr ""
 
 #: forms.py:406
 msgid "Min. integration"
-msgstr ""
+msgstr "最小曝光时间"
 
 #: forms.py:407
 msgid "Max. integration"
-msgstr ""
+msgstr "最大曝光时间"
 
 #: forms.py:408
 msgid "Min. Moon phase %"
-msgstr ""
+msgstr "最小月相%"
 
 #: forms.py:409
 msgid "Max. Moon phase %"
@@ -1240,44 +1240,44 @@ msgstr ""
 
 #: forms.py:548
 msgid "Latitude (degrees)"
-msgstr ""
+msgstr "赤纬（度）"
 
 #: forms.py:553
 msgid "Latitude (minutes)"
-msgstr ""
+msgstr "赤纬（分）"
 
 #: forms.py:559
 msgid "Latitude (seconds)"
-msgstr ""
+msgstr "赤纬（秒）"
 
 #: forms.py:566
 msgid "Longitude (degrees)"
-msgstr ""
+msgstr "赤经（度）"
 
 #: forms.py:571
 msgid "Longitude (minutes)"
-msgstr ""
+msgstr "赤经（分）"
 
 #: forms.py:577
 msgid "Longitude (seconds)"
-msgstr ""
+msgstr "赤经（秒）"
 
 #: forms.py:599 forms.py:644 forms.py:685 models.py:1106 models.py:1319
 #: templates/image/detail.html:483
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: forms.py:605
 msgid "Please enter a value between 1 and 5."
-msgstr ""
+msgstr "请输入一个1-5之间的数字"
 
 #: forms.py:612
 msgid "Please enter a value between 1 and 10."
-msgstr ""
+msgstr "请输入一个1-10之间的数字"
 
 #: forms.py:673 forms.py:691
 msgid "The date cannot be in the future."
-msgstr ""
+msgstr "时间不能是未来的"
 
 #: forms.py:718
 msgid "Nominate for"
@@ -1303,7 +1303,7 @@ msgstr ""
 
 #: forms.py:959 forms.py:1020 models.py:164
 msgid "The make, brand, producer or developer of this product."
-msgstr ""
+msgstr "该产品的制造商，品牌，生产商或者开发商"
 
 #: forms.py:964 forms.py:1025 models.py:171 models.py:1665 models.py:1821
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
@@ -1325,7 +1325,7 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:485
 #: templates/user/profile/commercial/products.html:812
 msgid "Merge"
-msgstr ""
+msgstr "合并"
 
 #: forms.py:970 forms.py:1031
 msgid ""
@@ -1471,84 +1471,84 @@ msgstr ""
 
 #: models.py:88
 msgid "Pulsars"
-msgstr ""
+msgstr "脉冲星"
 
 #: models.py:89
 msgid "Globular clusters"
-msgstr ""
+msgstr "球状星团"
 
 #: models.py:90
 msgid "Open clusters"
-msgstr ""
+msgstr "疏散星团"
 
 #: models.py:91 templates/wall.html:85
 msgid "Nebulae"
-msgstr ""
+msgstr "星云"
 
 #: models.py:92
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "行星状星云"
 
 #: models.py:93 templates/wall.html:91
 msgid "Galaxies"
-msgstr ""
+msgstr "星系"
 
 #: models.py:114 templates/wall.html:104
 msgid "Sun"
-msgstr ""
+msgstr "太阳"
 
 #: models.py:115
 msgid "Earth's Moon"
-msgstr ""
+msgstr "月亮"
 
 #: models.py:116
 msgid "Mercury"
-msgstr ""
+msgstr "水星"
 
 #: models.py:117
 msgid "Venus"
-msgstr ""
+msgstr "金星"
 
 #: models.py:118
 msgid "Mars"
-msgstr ""
+msgstr "火星"
 
 #: models.py:119
 msgid "Jupiter"
-msgstr ""
+msgstr "木星"
 
 #: models.py:120
 msgid "Saturn"
-msgstr ""
+msgstr "土星"
 
 #: models.py:121
 msgid "Uranus"
-msgstr ""
+msgstr "天王星"
 
 #: models.py:122
 msgid "Neptune"
-msgstr ""
+msgstr "海王星"
 
 #: models.py:123
 msgid "Minor planet"
-msgstr ""
+msgstr "小行星"
 
 #: models.py:124
 msgid "Comet"
-msgstr ""
+msgstr "彗星"
 
 #: models.py:125 models.py:558 models.py:704 views.py:1823
 #: templates/wall.html:155
 msgid "Other"
-msgstr ""
+msgstr "其他"
 
 #: models.py:129
 msgid "Center"
-msgstr ""
+msgstr "中心"
 
 #: models.py:130
 msgid "Top left"
-msgstr ""
+msgstr "左上"
 
 #: models.py:131
 msgid "Top center"
@@ -1556,11 +1556,11 @@ msgstr ""
 
 #: models.py:132
 msgid "Top right"
-msgstr ""
+msgstr "右上"
 
 #: models.py:133
 msgid "Bottom left"
-msgstr ""
+msgstr "左下"
 
 #: models.py:134
 msgid "Bottom center"
@@ -1568,7 +1568,7 @@ msgstr ""
 
 #: models.py:135
 msgid "Bottom right"
-msgstr ""
+msgstr "右下"
 
 #: models.py:172
 msgid ""
@@ -1588,28 +1588,28 @@ msgstr ""
 
 #: models.py:339
 msgid "Comment"
-msgstr ""
+msgstr "评论"
 
 #: models.py:340
 msgid ""
 "Information, description or comment about your own copy of this product."
-msgstr ""
+msgstr "信息，描述或者您对您拥有的这个产品的评论"
 
 #: models.py:379
 msgid "Refractor: achromatic"
-msgstr ""
+msgstr "折射镜：消色差"
 
 #: models.py:380
 msgid "Refractor: semi-apochromatic"
-msgstr ""
+msgstr "折射镜：半APO"
 
 #: models.py:381
 msgid "Refractor: apochromatic"
-msgstr ""
+msgstr "折射镜: APO"
 
 #: models.py:382
 msgid "Refractor: non-achromatic Galilean"
-msgstr ""
+msgstr "折射镜：非消色差的伽利略式"
 
 #: models.py:383
 msgid "Refractor: non-achromatic Keplerian"
@@ -1629,7 +1629,7 @@ msgstr ""
 
 #: models.py:388
 msgid "Reflector: Ritchey Chretien"
-msgstr ""
+msgstr "反射镜：RC"
 
 #: models.py:389
 msgid "Reflector: Gregorian"
@@ -1637,11 +1637,11 @@ msgstr ""
 
 #: models.py:390
 msgid "Reflector: Herschellian"
-msgstr ""
+msgstr "反射镜：牛顿式"
 
 #: models.py:391
 msgid "Reflector: Newtonian"
-msgstr ""
+msgstr "反射镜，牛顿式"
 
 #: models.py:393
 msgid "Catadioptric: Argunov-Cassegrain"
@@ -1657,11 +1657,11 @@ msgstr ""
 
 #: models.py:396
 msgid "Catadioptric: Maksutov"
-msgstr ""
+msgstr "折返镜：马可斯托夫式"
 
 #: models.py:397
 msgid "Catadioptric: Maksutov-Cassegrain"
-msgstr ""
+msgstr "遮反镜：马卡"
 
 #: models.py:398
 msgid "Catadioptric: modified Dall-Kirkham"
@@ -1669,11 +1669,11 @@ msgstr ""
 
 #: models.py:399
 msgid "Catadioptric: Schmidt camera"
-msgstr ""
+msgstr "折返镜：施密特相机"
 
 #: models.py:400
 msgid "Catadioptric: Schmidt-Cassegrain"
-msgstr ""
+msgstr "折反镜：施卡"
 
 #: models.py:401
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
@@ -1681,24 +1681,24 @@ msgstr ""
 
 #: models.py:402 stats.py:597
 msgid "Camera lens"
-msgstr ""
+msgstr "相机镜头"
 
 #: models.py:403
 msgid "Binoculars"
-msgstr ""
+msgstr "双筒望远镜"
 
 #: models.py:407 templates/popover/gear_telescope.html:17
 msgid "Aperture"
-msgstr ""
+msgstr "相对孔径"
 
 #: models.py:408 models.py:417 models.py:487 models.py:496 models.py:786
 msgid "(in mm)"
-msgstr ""
+msgstr "（单位：毫米）"
 
 #: models.py:416 models.py:790 models.py:1258 templates/image/detail.html:495
 #: templates/popover/gear_telescope.html:18
 msgid "Focal length"
-msgstr ""
+msgstr "焦距"
 
 #: models.py:425 models.py:504 models.py:530 models.py:563
 #: templates/gear/page.html:207 templates/popover/gear_camera.html:15
@@ -1707,60 +1707,60 @@ msgstr ""
 #: templates/popover/gear_telescope.html:15 templates/popover/subject.html:9
 #: templates/subject/page.html:31
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: models.py:433 models.py:512 templates/search/search.html:309
 msgid "mm"
-msgstr ""
+msgstr "毫米"
 
 #: models.py:441 templates/popover/gear_mount.html:16
 msgid "Max. payload"
-msgstr ""
+msgstr "最大载重量"
 
 #: models.py:442
 msgid "(in kg)"
-msgstr ""
+msgstr "（单位：千克)"
 
 #: models.py:450 templates/popover/gear_mount.html:17
 msgid "Periodic error"
-msgstr ""
+msgstr "周期性误差"
 
 #: models.py:451
 msgid "(peak to peak, in arcseconds)"
-msgstr ""
+msgstr "（峰峰值，单位角秒）"
 
 #: models.py:460
 msgid "kg"
-msgstr ""
+msgstr "千克"
 
 #: models.py:468
 msgid "CCD"
-msgstr ""
+msgstr "CCD"
 
 #: models.py:469
 msgid "DSLR"
-msgstr ""
+msgstr "单反"
 
 #: models.py:470
 msgid "Guider/Planetary"
-msgstr ""
+msgstr "导星/行星相机"
 
 #: models.py:471
 msgid "Film"
-msgstr ""
+msgstr "胶片"
 
 #: models.py:472
 msgid "Compact"
-msgstr ""
+msgstr "轻便"
 
 #: models.py:473
 msgid "Video camera"
-msgstr ""
+msgstr "视频摄像机"
 
 #: models.py:477 models.py:802 templates/popover/gear_camera.html:17
 #: templates/search/search.html:316
 msgid "Pixel size"
-msgstr ""
+msgstr "像素尺寸"
 
 #: models.py:478 models.py:798
 msgid "(in &mu;m)"
@@ -1768,11 +1768,11 @@ msgstr ""
 
 #: models.py:486 templates/popover/gear_camera.html:18
 msgid "Sensor width"
-msgstr ""
+msgstr "图像传感器宽度"
 
 #: models.py:495 templates/popover/gear_camera.html:19
 msgid "Sensor height"
-msgstr ""
+msgstr "图像传感器高度"
 
 #: models.py:512 templates/search/search.html:317
 msgid "&mu;m"
@@ -1780,7 +1780,7 @@ msgstr ""
 
 #: models.py:525
 msgid "Open source or freeware"
-msgstr ""
+msgstr "开源或者免费软件"
 
 #: models.py:526
 msgid "Paid"
@@ -1792,132 +1792,132 @@ msgstr ""
 
 #: models.py:544
 msgid "Broadband: H-Alpha"
-msgstr ""
+msgstr "宽带：H-Alpha"
 
 #: models.py:545
 msgid "Broadband: H-Beta"
-msgstr ""
+msgstr "宽带：H-Beta"
 
 #: models.py:546
 msgid "Broadband: S-II"
-msgstr ""
+msgstr "宽带：S-II"
 
 #: models.py:547
 msgid "Broadband: O-III"
-msgstr ""
+msgstr "宽带：O-III"
 
 #: models.py:548
 msgid "Broadband: N-II"
-msgstr ""
+msgstr "宽带：N-II"
 
 #: models.py:550
 msgid "Narrowband: H-Alpha"
-msgstr ""
+msgstr "窄带：H-Alpha"
 
 #: models.py:551
 msgid "Narrowband: H-Beta"
-msgstr ""
+msgstr "窄带:H-beta"
 
 #: models.py:552
 msgid "Narrowband: S-II"
-msgstr ""
+msgstr "窄带：S-II"
 
 #: models.py:553
 msgid "Narrowband: O-III"
-msgstr ""
+msgstr "窄带：O-III"
 
 #: models.py:554
 msgid "Narrowband: N-II"
-msgstr ""
+msgstr "窄带：N-II"
 
 #: models.py:556
 msgid "Light pollution suppression"
-msgstr ""
+msgstr "光害抑制"
 
 #: models.py:557
 msgid "Planetary"
-msgstr ""
+msgstr "行星"
 
 #: models.py:559
 msgid "UHC: Ultra High Contrast"
-msgstr ""
+msgstr "UHC：超高对比度"
 
 #: models.py:570 templates/popover/gear_filter.html:17
 msgid "Bandwidth"
-msgstr ""
+msgstr "带宽"
 
 #: models.py:571
 msgid "(in nm)"
-msgstr ""
+msgstr "（单位nm)"
 
 #: models.py:580
 msgid "nm"
-msgstr ""
+msgstr "我不希望求解（plate-solved)这个图片"
 
 #: models.py:689
 msgid "I don't want this image plate-solved."
-msgstr ""
+msgstr "这个不是一张深空图片，不要求解（plate-solve)"
 
 #: models.py:690
 msgid "This is not a deep sky image, don't plate-solve it."
-msgstr ""
+msgstr "我不清除视场大小，试一下盲解"
 
 #: models.py:691
 msgid "I have no idea about the size of field, try a blind solve."
-msgstr ""
+msgstr "这是一张广域照片（大于10度）"
 
 #: models.py:692
 msgid "This is a very wide field image (more than 10 degrees)."
-msgstr ""
+msgstr "这是一张广域照片（大于10度）"
 
 #: models.py:693
 msgid "This is a wide field image (1 to 10 degrees)."
-msgstr ""
+msgstr "这是一张广域照片（1度到10度） "
 
 #: models.py:694
 msgid "This ia narrow field image (less than 1 degree)."
-msgstr ""
+msgstr "这时一张窄域照片（小于1度）"
 
 #: models.py:699
 msgid "Deep sky object"
-msgstr ""
+msgstr "深空天体"
 
 #: models.py:700
 msgid "Solar system body or event"
-msgstr ""
+msgstr "太阳系天体或天象"
 
 #: models.py:701 views.py:1805 templates/wall.html:131
 msgid "Extremely wide field"
-msgstr ""
+msgstr "超广角"
 
 #: models.py:702 views.py:1811 templates/wall.html:137
 msgid "Star trails"
-msgstr ""
+msgstr "星轨"
 
 #: models.py:721
 msgid "Title"
-msgstr ""
+msgstr "标题"
 
 #: models.py:725 templates/image/detail.html:435
 #: templates/user/profile-subnav.html:128
 msgid "Subject type"
-msgstr ""
+msgstr "主题类型"
 
 #: models.py:736
 msgid ""
 "If the main subject of your image is a body in the solar system, please "
 "select which (or which type) it is."
-msgstr ""
+msgstr "如果您的照片的主体是太阳系的天体，请选择这是什么或者这属于什么类型"
 
 #: models.py:745
 msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
-msgstr ""
+msgstr "将这个项目右边拖到左边，或者点击“+”号"
 
 #: models.py:751 models.py:1829 models.py:2048 templates/gear/page.html:46
 #: templates/image/detail.html:535
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: models.py:752
 msgid "HTML tags are allowed."
@@ -1925,15 +1925,15 @@ msgstr ""
 
 #: models.py:756
 msgid "Allow rating"
-msgstr ""
+msgstr "允许打分"
 
 #: models.py:788
 msgid "Insert a focal length if you want to plate-solve."
-msgstr ""
+msgstr "如果您想求解这张照片请输入一个焦距"
 
 #: models.py:800
 msgid "Insert a pixel size if you want to plate-solve."
-msgstr ""
+msgstr "如果您想求解这张照片请输入像素尺寸"
 
 #: models.py:810
 msgid ""
@@ -1943,7 +1943,7 @@ msgstr ""
 
 #: models.py:811 models.py:1154
 msgid "Binning"
-msgstr ""
+msgstr "像素合并"
 
 #: models.py:820
 msgid ""
@@ -1954,38 +1954,38 @@ msgstr ""
 
 #: models.py:821
 msgid "Scaling"
-msgstr ""
+msgstr "缩放"
 
 #: models.py:833
 msgid "Apply watermark to image"
-msgstr ""
+msgstr "为这张照片加水印"
 
 #: models.py:837 templates/leaderboard.html:20
 msgid "Position"
-msgstr ""
+msgstr "位置"
 
 #: models.py:938 templates/index.html:105 templates/image/detail.html:377
 #: templates/image/full.html:56 templates/inclusion_tags/image_list.html:17
 #: templates/inclusion_tags/messier_list.html:14
 #: templates/inclusion_tags/search_image_list.html:125
 msgid "(no title)"
-msgstr ""
+msgstr "（没有标题）"
 
 #: models.py:1107
 msgid "Please use the following format: yyyy-mm-dd."
-msgstr ""
+msgstr "请使用yyyy-mm-dd的日期格式"
 
 #: models.py:1112 models.py:1318 models.py:2024
 msgid "Image"
-msgstr ""
+msgstr "图像"
 
 #: models.py:1131
 msgid "1 - Excellent dark-site sky (BLACK)"
-msgstr ""
+msgstr "绝对黑暗地点(黑)"
 
 #: models.py:1132
 msgid "2 - Typical truly dark site (GRAY)"
-msgstr ""
+msgstr "2.典型的全黑地点(灰)"
 
 #: models.py:1133
 msgid "3 - Rural sky (BLUE)"
@@ -2021,7 +2021,7 @@ msgstr ""
 
 #: models.py:1148
 msgid "Filter"
-msgstr ""
+msgstr "滤镜"
 
 #: models.py:1157
 msgid "Number"
@@ -2041,47 +2041,47 @@ msgstr ""
 
 #: models.py:1167
 msgid "ISO"
-msgstr ""
+msgstr "ISO感光度"
 
 #: models.py:1171
 msgid "Gain"
-msgstr ""
+msgstr "增益"
 
 #: models.py:1176
 msgid "Sensor cooling"
-msgstr ""
+msgstr "芯片制冷"
 
 #: models.py:1178
 msgid "The temperature of the chip. E.g.: -20."
-msgstr ""
+msgstr "芯片温度.例如：-20"
 
 #: models.py:1181 views.py:740
 msgid "Darks"
-msgstr ""
+msgstr "暗场"
 
 #: models.py:1183
 msgid "The number of dark frames."
-msgstr ""
+msgstr "暗场数量"
 
 #: models.py:1186 views.py:741
 msgid "Flats"
-msgstr ""
+msgstr "平场"
 
 #: models.py:1188
 msgid "The number of flat frames."
-msgstr ""
+msgstr "平场数量"
 
 #: models.py:1191 views.py:742
 msgid "Flat darks"
-msgstr ""
+msgstr "暗平场"
 
 #: models.py:1193
 msgid "The number of dark flat frames."
-msgstr ""
+msgstr "暗平场数量"
 
 #: models.py:1196 views.py:743
 msgid "Bias"
-msgstr ""
+msgstr "Bias场"
 
 #: models.py:1198
 msgid "The number of bias/offset frames."
@@ -2107,15 +2107,15 @@ msgstr ""
 
 #: models.py:1215 views.py:748
 msgid "Mean FWHM"
-msgstr ""
+msgstr "FWHM均值"
 
 #: models.py:1220 views.py:749
 msgid "Temperature"
-msgstr ""
+msgstr "温度"
 
 #: models.py:1223
 msgid "Ambient temperature (in Centigrade degrees)."
-msgstr ""
+msgstr "环境温度(单位摄氏度)"
 
 #: models.py:1244
 msgid "Number of frames"
@@ -2123,21 +2123,21 @@ msgstr ""
 
 #: models.py:1245
 msgid "The total number of frames you have stacked."
-msgstr ""
+msgstr "您叠加的总帧数"
 
 #: models.py:1249 templates/image/detail.html:492
 msgid "FPS"
-msgstr ""
+msgstr "帧率FPS"
 
 #: models.py:1250
 msgid "Frames per second."
-msgstr ""
+msgstr "每秒帧数"
 
 #: models.py:1259
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
-msgstr ""
+msgstr "整个光学系统的焦距，包括巴罗镜或者其他原件"
 
 #: models.py:1265 templates/image/detail.html:498
 msgid "CMI"
@@ -2173,7 +2173,7 @@ msgstr ""
 
 #: models.py:1299 templates/image/detail.html:510
 msgid "Transparency"
-msgstr ""
+msgstr "大气透明度"
 
 #: models.py:1300
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
@@ -2202,23 +2202,23 @@ msgstr ""
 
 #: models.py:1379
 msgid "Higher resolution"
-msgstr ""
+msgstr "更高的分辨率"
 
 #: models.py:1418 templates/user/card.html:45
 msgid "Job"
-msgstr ""
+msgstr "职业"
 
 #: models.py:1425 templates/user/card.html:49
 msgid "Hobbies"
-msgstr ""
+msgstr "爱好"
 
 #: models.py:1429
 msgid "Do you have any hobbies other than astrophotography?"
-msgstr ""
+msgstr "除了天文摄影以外的其他爱好"
 
 #: models.py:1436
 msgid "Timezone"
-msgstr ""
+msgstr "时区"
 
 #: models.py:1437
 msgid ""
@@ -2227,7 +2227,7 @@ msgstr ""
 
 #: models.py:1442
 msgid "About you"
-msgstr ""
+msgstr "关于您"
 
 #: models.py:1443
 msgid "Write something about yourself. HTML tags are allowed."
@@ -2235,7 +2235,7 @@ msgstr ""
 
 #: models.py:1451
 msgid "Company name"
-msgstr ""
+msgstr "公司名称"
 
 #: models.py:1452
 msgid "The name of the company you represent on AstroBin."
@@ -2243,7 +2243,7 @@ msgstr ""
 
 #: models.py:1458
 msgid "Company description"
-msgstr ""
+msgstr "公司描述"
 
 #: models.py:1459
 msgid ""
@@ -2253,7 +2253,7 @@ msgstr ""
 
 #: models.py:1467
 msgid "Company website"
-msgstr ""
+msgstr "公司网站"
 
 #: models.py:1468
 msgid "The website of the company you represent on AstroBin."
@@ -2275,7 +2275,7 @@ msgstr ""
 
 #: models.py:1531 templates/base.html:258
 msgid "Language"
-msgstr ""
+msgstr "语言"
 
 #: models.py:1666
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
@@ -2283,81 +2283,81 @@ msgstr ""
 
 #: models.py:1672
 msgid "City"
-msgstr ""
+msgstr "城市"
 
 #: models.py:1673
 msgid "If this location is not in a city, use the name of the closest city."
-msgstr ""
+msgstr "如果位置不在城市里，请用最近的城市"
 
 #: models.py:1679
 msgid "State or province"
-msgstr ""
+msgstr "省或直辖市"
 
 #: models.py:1684
 msgid "Country"
-msgstr ""
+msgstr "国家"
 
 #: models.py:1701 templates/most_popular.html:81
 msgid "North"
-msgstr ""
+msgstr "北方"
 
 #: models.py:1701 templates/most_popular.html:87
 msgid "South"
-msgstr ""
+msgstr "南方"
 
 #: models.py:1702
 msgid "North or south"
-msgstr ""
+msgstr "北或南"
 
 #: models.py:1717
 msgid "East"
-msgstr ""
+msgstr "东方"
 
 #: models.py:1717
 msgid "West"
-msgstr ""
+msgstr "西方"
 
 #: models.py:1718
 msgid "East or West"
-msgstr ""
+msgstr "东或西"
 
 #: models.py:1722
 msgid "Altitude"
-msgstr ""
+msgstr "海拔"
 
 #: models.py:1723
 msgid "In meters."
-msgstr ""
+msgstr "单位米"
 
 #: models.py:1822
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr ""
+msgstr "想要使用API函数的网站或者应用的名字"
 
 #: models.py:1830
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
-msgstr ""
+msgstr "请解释一下您的应用的目的，或者您打算怎样使用API"
 
 #: models.py:1936
 msgid "AUD - Australian dollars"
-msgstr ""
+msgstr "AUD-澳元"
 
 #: models.py:1937
 msgid "CAD - Canadian dollars"
-msgstr ""
+msgstr "CAD-加拿大元"
 
 #: models.py:1938
 msgid "CHF - Swiss francs"
-msgstr ""
+msgstr "CHF-瑞士法郎"
 
 #: models.py:1939
 msgid "EUR - Euros"
-msgstr ""
+msgstr "EUR-欧元"
 
 #: models.py:1940
 msgid "GPB - Pound stelings"
-msgstr ""
+msgstr "GPB-英镑"
 
 #: models.py:1941
 msgid "PLN - Polish zloty"
@@ -2369,7 +2369,7 @@ msgstr ""
 
 #: models.py:1943
 msgid "USD - American dollars"
-msgstr ""
+msgstr "USD-美元"
 
 #: models.py:1949 models.py:1999
 msgid "Producer"
@@ -2381,11 +2381,11 @@ msgstr ""
 
 #: models.py:1968
 msgid "Price"
-msgstr ""
+msgstr "价格"
 
 #: models.py:1976
 msgid "Currency"
-msgstr ""
+msgstr "货币"
 
 #: models.py:1992
 msgid "Retailed gear items"
@@ -2680,11 +2680,11 @@ msgstr ""
 
 #: views.py:1987
 msgid "Total integration time"
-msgstr ""
+msgstr "总的曝光时间"
 
 #: views.py:1988
 msgid "Average integration time"
-msgstr ""
+msgstr "平均曝光时间"
 
 #: views.py:2876
 #, python-format
@@ -3078,16 +3078,16 @@ msgstr ""
 #: templates/base.html:418 templates/maintenance_base.html:295
 #: templates/messages/inbox.html:9
 msgid "My messages"
-msgstr ""
+msgstr "我的消息"
 
 #: templates/base.html:424 templates/maintenance_base.html:301
 #: templates/user/profile-subnav.html:76
 msgid "API Keys"
-msgstr ""
+msgstr "API键值"
 
 #: templates/base.html:431 templates/maintenance_base.html:305
 msgid "My settings"
-msgstr ""
+msgstr "我的设置"
 
 #: templates/base.html:438 templates/maintenance_base.html:365
 #: templates/user/profile.html:93 templates/user/profile.html.py:96
@@ -3218,7 +3218,7 @@ msgstr ""
 #: templates/base.html:754 templates/maintenance_base.html:665
 #: templates/image/detail.html:1235
 msgid "Choose file"
-msgstr ""
+msgstr "选择文件"
 
 #: templates/comments.html:53 templates/index.html:274
 #: templates/index.html.py:275 templates/leaderboard.html:81
@@ -6555,11 +6555,11 @@ msgstr ""
 
 #: templates/requests/all.html:29
 msgid "Yes."
-msgstr ""
+msgstr "是"
 
 #: templates/requests/all.html:31
 msgid "No."
-msgstr ""
+msgstr "否"
 
 #: templates/requests/all.html:33
 msgid "Do it now?"
@@ -6637,11 +6637,11 @@ msgstr ""
 
 #: templates/subject/page.html:120
 msgid "Camera types"
-msgstr ""
+msgstr "相机类型"
 
 #: templates/subject/page.html:138
 msgid "Telescope types"
-msgstr ""
+msgstr "望远镜类型"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:11
 msgid "Your API Keys"
@@ -6708,7 +6708,7 @@ msgstr ""
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
-msgstr ""
+msgstr "未找到用户"
 
 #: templates/user/plots.html:5 templates/user/plots.html.py:10
 #, python-format

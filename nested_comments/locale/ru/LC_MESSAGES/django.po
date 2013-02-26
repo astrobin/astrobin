@@ -3,21 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-29 09:13-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-12-29 02:52-0500\n"
+"PO-Revision-Date: 2013-01-18 02:15+0100\n"
+"Last-Translator: ArtyomChitailo <sigma72@ya.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Pootle 2.1.6\n"
 
 #: templates/nested_comments/nestedcomment_app.html:35
 #: templates/nested_comments/nestedcomment_app.html:172
@@ -25,6 +25,9 @@ msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment.</p>"
 msgstr ""
+"Пожалуйста, <a href=\"/accounts/login/\">авторизуйтесь</a> или <a "
+"href=\"/accounts/register/\">зарегистрируйтесь</a>, чтобы оставить "
+"комментарий.</p>"
 
 #: templates/nested_comments/nestedcomment_app.html:44
 msgid ""
@@ -32,107 +35,111 @@ msgid ""
 "button when replying directly to a comment. To post a new top level comment, "
 "use the form at the end of the comment list."
 msgstr ""
+"Не забывайте пользоваться кнопкой <span class=\"label label-"
+"important\">ответ</span>, когда отвечаете непосредственно на комментарий. "
+"Чтобы отправить новый комментарий верхнего уровня, воспользуйтесь формой в "
+"конце списка комментариев."
 
 #: templates/nested_comments/nestedcomment_app.html:47
 msgid "There are no comments yet."
-msgstr ""
+msgstr "Больше комментариев нет."
 
 #: templates/nested_comments/nestedcomment_app.html:64
 #: templates/nested_comments/nestedcomment_app.html:81
 msgid "(deleted)"
-msgstr ""
+msgstr "(удалено)"
 
 #: templates/nested_comments/nestedcomment_app.html:92
 #: templates/nested_comments/nestedcomment_list.html:33
 msgid "Link"
-msgstr ""
+msgstr "Ссылка"
 
 #: templates/nested_comments/nestedcomment_app.html:96
 #: templates/nested_comments/nestedcomment_list.html:39
 msgid "Undelete"
-msgstr ""
+msgstr "Восстановить"
 
 #: templates/nested_comments/nestedcomment_app.html:98
 #: templates/nested_comments/nestedcomment_list.html:41
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: templates/nested_comments/nestedcomment_app.html:103
 #: templates/nested_comments/nestedcomment_list.html:44
 msgid "Edit"
-msgstr ""
+msgstr "Править"
 
 #: templates/nested_comments/nestedcomment_app.html:108
 #: templates/nested_comments/nestedcomment_list.html:46
 msgid "Reply"
-msgstr ""
+msgstr "Ответ"
 
 #: templates/nested_comments/nestedcomment_app.html:133
 #: templates/nested_comments/nestedcomment_app.html:156
 #: templates/nested_comments/nestedcomment_list.html:58
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: templates/nested_comments/nestedcomment_app.html:136
 #: templates/nested_comments/nestedcomment_app.html:159
 msgid "The comment cannot be empty."
-msgstr ""
+msgstr "Комментарий не может быть пустым."
 
 #: templates/nested_comments/nestedcomment_app.html:183
 #: templates/nested_comments/nestedcomment_list.html:57
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: templates/nested_comments/nestedcomment_app.html:193
 msgid "Preview"
-msgstr ""
+msgstr "Предпросмотр"
 
 #: templates/nested_comments/nestedcomment_app.html:199
 #: templates/nested_comments/nestedcomment_list.html:60
 msgid "Formatting help"
-msgstr ""
+msgstr "Справка по форматированию"
 
 #: templates/nested_comments/nestedcomment_app.html:203
 msgid "You type:"
-msgstr ""
+msgstr "Вы набираете:"
 
 #: templates/nested_comments/nestedcomment_app.html:204
 msgid "You see:"
-msgstr ""
+msgstr "Вы видите:"
 
 #: templates/nested_comments/nestedcomment_app.html:209
 #: templates/nested_comments/nestedcomment_app.html:210
 msgid "italics"
-msgstr ""
+msgstr "курсив"
 
 #: templates/nested_comments/nestedcomment_app.html:214
 #: templates/nested_comments/nestedcomment_app.html:215
 msgid "bold"
-msgstr ""
+msgstr "жирный"
 
 #: templates/nested_comments/nestedcomment_app.html:224
 msgid "(TAB or 4 spaces)"
-msgstr ""
+msgstr "(табуляция или 4 пробела)"
 
 #: templates/nested_comments/nestedcomment_app.html:224
 #: templates/nested_comments/nestedcomment_app.html:225
 msgid "preformatted text"
-msgstr ""
+msgstr "текст с форматированием"
 
 #: templates/nested_comments/nestedcomment_app.html:229
 #: templates/nested_comments/nestedcomment_app.html:230
 msgid "quoted text"
-msgstr ""
+msgstr "цитата"
 
 #: templates/nested_comments/nestedcomment_app.html:234
 #: templates/nested_comments/nestedcomment_app.html:235
 msgid "escape the formatting syntax"
-msgstr ""
+msgstr "отменить форматирование"
 
 #: templates/nested_comments/nestedcomment_list.html:26
 msgid "(comment deleted)"
-msgstr ""
+msgstr "(комментарий удален)"
 
 #: templates/nested_comments/nestedcomment_list.html:75
 msgid "There doesn't seem to be anything here."
-msgstr ""
+msgstr "Не кажется, что здесь что-то будет."

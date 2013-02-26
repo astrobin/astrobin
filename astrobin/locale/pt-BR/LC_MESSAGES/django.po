@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 14:58-0500\n"
-"PO-Revision-Date: 2012-09-26 22:45+0100\n"
+"PO-Revision-Date: 2013-02-23 22:53+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt-BR\n"
@@ -1045,13 +1045,15 @@ msgstr "Locais"
 
 #: forms.py:89
 msgid "This field is required."
-msgstr ""
+msgstr "Este campo é obrigatório."
 
 #: forms.py:97 views.py:2323
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
+"Houve um ou mais erros ao processar o formulário. Talvez seja necessário "
+"rolar a tela para vê-los."
 
 #: forms.py:112
 msgid "Please enter either some subjects or a main solar system subject."
@@ -1406,11 +1408,11 @@ msgstr "publicou uma opinião sobre"
 
 #: locale_extras.py:12
 msgid "created a new public data pool"
-msgstr ""
+msgstr "criou um novo conjunto de dados públicos"
 
 #: locale_extras.py:13
 msgid "added new data to public data pool"
-msgstr ""
+msgstr "adicionou novos dados ao conjunto de dados públicos"
 
 #: locale_extras.py:14
 msgid "added a new processed image to public data pool"
@@ -5396,25 +5398,24 @@ msgstr ""
 "preferido de <strong>%(user)s</strong> é <strong>%(lang)s</strong>."
 
 #: templates/image/detail.html:568
-#, fuzzy
 msgid "What is this?"
-msgstr "O que é este site?"
+msgstr "O que é isso?"
 
 #: templates/image/detail.html:569
 msgid ""
 "This button will create a post on AstroBin Questions, in which you can ask "
 "for critique, review or analisys of your image."
 msgstr ""
+"Este botão criará uma nova entrada na seção de Perguntas do AstroBin, onde "
+"você pode solicitar críticas, opiniões ou análises da sua imagem."
 
 #: templates/image/detail.html:569
-#, fuzzy
 msgid "Learn more about AstroBin Questions."
-msgstr "Perguntas frequentes"
+msgstr "Saiba mais sobre a seção de Perguntas do AstroBin."
 
 #: templates/image/detail.html:572
-#, fuzzy
 msgid "Request critique"
-msgstr "Solicitado por"
+msgstr "Solicite uma crítica"
 
 #: templates/image/detail.html:579
 msgid "Introducing AstroBin Raw Data"

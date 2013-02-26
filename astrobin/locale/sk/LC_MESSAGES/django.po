@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 14:58-0500\n"
-"PO-Revision-Date: 2012-10-01 10:50+0100\n"
+"PO-Revision-Date: 2013-02-11 07:20+0100\n"
 "Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sk\n"
@@ -1045,18 +1045,19 @@ msgstr "Miesta"
 
 #: forms.py:89
 msgid "This field is required."
-msgstr ""
+msgstr "Pole je povinné."
 
 #: forms.py:97 views.py:2323
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
+"Formulár obsahuje jednu alebo viac chýb. Uvidíte ich v dolnej časti "
+"formulára."
 
 #: forms.py:112
-#, fuzzy
 msgid "Please enter either some subjects or a main solar system subject."
-msgstr "Zadajte prosím názov alebo názov v slnečnej sústave."
+msgstr "Zadajte prosím názvy objektov alebo názov objektu v slnečnej sústave."
 
 #: forms.py:125
 msgid "Opacity"
@@ -1155,13 +1156,12 @@ msgid "Users"
 msgstr "Používatelia"
 
 #: forms.py:305
-#, fuzzy
 msgid "Search type"
-msgstr "Typ"
+msgstr "Typ vyhľadávania"
 
 #: forms.py:307
 msgid "All"
-msgstr ""
+msgstr "Všetko"
 
 #: forms.py:308 templates/leaderboard.html:39 templates/gear/page.html:235
 #: templates/inclusion_tags/search_image_list.html:52
@@ -1171,7 +1171,7 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:41
 #: templates/user/profile/commercial/products.html:123
 msgid "Images"
-msgstr ""
+msgstr "Obrázky"
 
 #: forms.py:310 models.py:703 views.py:1817
 #: templates/maintenance_base.html:334 templates/profile-edit-menu.html:30
@@ -1293,7 +1293,7 @@ msgstr "Vložte prosím hodnotu medzi 1 a 10"
 
 #: forms.py:673 forms.py:691
 msgid "The date cannot be in the future."
-msgstr ""
+msgstr "Dátum nemôže byť budúci."
 
 #: forms.py:718
 msgid "Nominate for"
@@ -1341,7 +1341,7 @@ msgstr "Názov"
 #: templates/user/profile/commercial/products.html:485
 #: templates/user/profile/commercial/products.html:812
 msgid "Merge"
-msgstr ""
+msgstr "Spojiť"
 
 #: forms.py:970 forms.py:1031
 msgid ""
@@ -1363,7 +1363,7 @@ msgstr ""
 
 #: forms.py:1055
 msgid "You have already claimed this product."
-msgstr ""
+msgstr "Tento produkt ste už požadovali."
 
 #: locale_extras.py:4
 msgid "Recipient"
@@ -1399,15 +1399,15 @@ msgstr "napísal recenziu"
 
 #: locale_extras.py:12
 msgid "created a new public data pool"
-msgstr ""
+msgstr "vytvorená nová verejná dátová zložka"
 
 #: locale_extras.py:13
 msgid "added new data to public data pool"
-msgstr ""
+msgstr "vložené nové dáta do verejnej zložky"
 
 #: locale_extras.py:14
 msgid "added a new processed image to public data pool"
-msgstr ""
+msgstr "priadné nové spracované obrázky do verejnej zložky"
 
 #: models.py:48
 msgid "None (All rights reserved)"
@@ -1479,12 +1479,11 @@ msgstr "Poľsky"
 
 #: models.py:68 models.py:83 settings.py:79
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brazílsky Portugalsky"
 
 #: models.py:69 models.py:84 settings.py:80
-#, fuzzy
 msgid "Greek"
-msgstr "Grécko"
+msgstr "Grécky"
 
 #: models.py:88
 msgid "Pulsars"
@@ -2179,258 +2178,258 @@ msgstr "CMI"
 
 #: models.py:1266
 msgid "Latitude of the first Central Meridian."
-msgstr ""
+msgstr "Zemepisná dĺžka prvého centrálneho poludníka."
 
 #: models.py:1274 templates/image/detail.html:501
 msgid "CMII"
-msgstr ""
+msgstr "CMII"
 
 #: models.py:1275
 msgid "Latitude of the second Central Meridian."
-msgstr ""
+msgstr "Zemepisná dĺžka druhého centrálneho poludníka."
 
 #: models.py:1283 templates/image/detail.html:504
 msgid "CMIII"
-msgstr ""
+msgstr "CMIII"
 
 #: models.py:1284
 msgid "Latitude of the third Central Meridian."
-msgstr ""
+msgstr "Zemepisná dĺžka tretieho centrálneho poludníka."
 
 #: models.py:1292 templates/image/detail.html:507
 msgid "Seeing"
-msgstr ""
+msgstr "Seeing"
 
 #: models.py:1293
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
-msgstr ""
+msgstr "Váš odhad seeingu, na stupnici 1 až 5."
 
 #: models.py:1299 templates/image/detail.html:510
 msgid "Transparency"
-msgstr ""
+msgstr "Priehľadnosť"
 
 #: models.py:1300
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
-msgstr ""
+msgstr "Váš odhad priehľadnosti na stupnici 1 až 10."
 
 #: models.py:1306 templates/image/detail.html:486
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
 #: models.py:1307
 msgid "Please use the following format: hh:mm."
-msgstr ""
+msgstr "Použite prosím formát: hh:mm."
 
 #: models.py:1365
 msgid "Request from"
-msgstr ""
+msgstr "Požiadavka na"
 
 #: models.py:1377
 msgid "Additional information"
-msgstr ""
+msgstr "Doplňujúce informácie"
 
 #: models.py:1378 templates/base.html:139 templates/fits.html:5
 #: templates/fits.html.py:10 templates/maintenance_base.html:135
 msgid "TIFF/FITS"
-msgstr ""
+msgstr "TIFF/FITS"
 
 #: models.py:1379
 msgid "Higher resolution"
-msgstr ""
+msgstr "Vyššie rozlíšenie"
 
 #: models.py:1418 templates/user/card.html:45
 msgid "Job"
-msgstr ""
+msgstr "Prácu"
 
 #: models.py:1425 templates/user/card.html:49
 msgid "Hobbies"
-msgstr ""
+msgstr "Záľuby"
 
 #: models.py:1429
 msgid "Do you have any hobbies other than astrophotography?"
-msgstr ""
+msgstr "Máte iné záľuby ako astrofotografia?"
 
 #: models.py:1436
 msgid "Timezone"
-msgstr ""
+msgstr "Časové pásmo"
 
 #: models.py:1437
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
-msgstr ""
+msgstr "Týmto výberom uvidíte všetky dátumy na AstroBin vo Vašom časovom pásme."
 
 #: models.py:1442
 msgid "About you"
-msgstr ""
+msgstr "O Vás"
 
 #: models.py:1443
 msgid "Write something about yourself. HTML tags are allowed."
-msgstr ""
+msgstr "Napíšte niečo o Vás. HTML značky sú povolené."
 
 #: models.py:1451
 msgid "Company name"
-msgstr ""
+msgstr "Názov spoločnosti"
 
 #: models.py:1452
 msgid "The name of the company you represent on AstroBin."
-msgstr ""
+msgstr "Názov spoločnosti, ktorú reprezentujete na AstroBin."
 
 #: models.py:1458
-#, fuzzy
 msgid "Company description"
-msgstr "Popis"
+msgstr "Popis spoločnosti"
 
 #: models.py:1459
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#10\">formatting rules</a>."
 msgstr ""
+"Krátky popis spoločnosti, ktorú reprezentujete na Astrobin. Môžete použiť "
+"niektoré <a href=\"/faq/#10\">formátovacie pravidlá</a>."
 
 #: models.py:1467
 msgid "Company website"
-msgstr ""
+msgstr "Web stránka spoločnosti"
 
 #: models.py:1468
 msgid "The website of the company you represent on AstroBin."
-msgstr ""
+msgstr "Web stránka spoločnosti, ktorú reprezentujete na AstroBin."
 
 #: models.py:1472
 msgid "Country of operation"
-msgstr ""
+msgstr "Krajina pôsobnosti"
 
 #: models.py:1496 templates/maintenance_base.html:346
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
-msgstr ""
+msgstr "Štandardná licencia"
 
 #: models.py:1498
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr ""
+"Tu vybraná licentia je automaticky aplikovaná na všetky Vaše nové obrázky."
 
 #: models.py:1531 templates/base.html:258
 msgid "Language"
-msgstr ""
+msgstr "Jazyk"
 
 #: models.py:1666
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
-msgstr ""
+msgstr "Popisný názov, napr. \"Domáca pozorovateľňa\" alebo \"Kozí vŕšok\"."
 
 #: models.py:1672
 msgid "City"
-msgstr ""
+msgstr "Mesto"
 
 #: models.py:1673
 msgid "If this location is not in a city, use the name of the closest city."
-msgstr ""
+msgstr "Ak sa miesto nenachádza v meste, použite názov najbližšieho mesta."
 
 #: models.py:1679
 msgid "State or province"
-msgstr ""
+msgstr "Štát alebo provincia"
 
 #: models.py:1684
 msgid "Country"
-msgstr ""
+msgstr "Krajina"
 
 #: models.py:1701 templates/most_popular.html:81
 msgid "North"
-msgstr ""
+msgstr "Sever"
 
 #: models.py:1701 templates/most_popular.html:87
 msgid "South"
-msgstr ""
+msgstr "Juh"
 
 #: models.py:1702
 msgid "North or south"
-msgstr ""
+msgstr "Sever alebo juh"
 
 #: models.py:1717
 msgid "East"
-msgstr ""
+msgstr "Východ"
 
 #: models.py:1717
 msgid "West"
-msgstr ""
+msgstr "Západ"
 
 #: models.py:1718
 msgid "East or West"
-msgstr ""
+msgstr "Východ alebo západ"
 
 #: models.py:1722
 msgid "Altitude"
-msgstr ""
+msgstr "Nadmorská výška"
 
 #: models.py:1723
 msgid "In meters."
-msgstr ""
+msgstr "v metroch."
 
 #: models.py:1822
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr ""
+msgstr "Názov webstránky alebo aplikácie, v ktorej chcete využiť API."
 
 #: models.py:1830
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
-msgstr ""
+msgstr "Popíšte prosím využitie Vašej aplikácie a ako plánujete použiť API."
 
 #: models.py:1936
 msgid "AUD - Australian dollars"
-msgstr ""
+msgstr "AUD - Austrálske doláre"
 
 #: models.py:1937
 msgid "CAD - Canadian dollars"
-msgstr ""
+msgstr "CAD - Kanadské doláre"
 
 #: models.py:1938
 msgid "CHF - Swiss francs"
-msgstr ""
+msgstr "CHF - Švajčiarske franky"
 
 #: models.py:1939
 msgid "EUR - Euros"
-msgstr ""
+msgstr "EUR - Eurá"
 
 #: models.py:1940
 msgid "GPB - Pound stelings"
-msgstr ""
+msgstr "GBP - Britské libry"
 
 #: models.py:1941
 msgid "PLN - Polish zloty"
-msgstr ""
+msgstr "PLN - Poľské zloté"
 
 #: models.py:1942
 msgid "SEK - Swedish krona"
-msgstr ""
+msgstr "SEK - Švédske koruny"
 
 #: models.py:1943
-#, fuzzy
 msgid "USD - American dollars"
-msgstr "Americká Samoa"
+msgstr "USD - Americké doláre"
 
 #: models.py:1949 models.py:1999
 msgid "Producer"
-msgstr ""
+msgstr "Výrobca"
 
 #: models.py:1960 models.py:2042
 msgid "The link to this product's page on your website."
-msgstr ""
+msgstr "Linka na popis produktu na Vašej webstránke"
 
 #: models.py:1968
 msgid "Price"
-msgstr ""
+msgstr "Cena"
 
 #: models.py:1976
 msgid "Currency"
-msgstr ""
+msgstr "Mena"
 
 #: models.py:1992
-#, fuzzy
 msgid "Retailed gear items"
-msgstr "okomentoval prílušenstvo"
+msgstr "Predávané príslušenstvo"
 
 #: models.py:2008
 msgid "Proper make"
-msgstr ""
+msgstr "Vlastná výroba"
 
 #: models.py:2009
 msgid ""
@@ -2438,6 +2437,8 @@ msgid ""
 "properly by the users. Write here the proper make/brand/producer/developer "
 "name."
 msgstr ""
+"Niekedy meno výrobcu, značky, vývojára nie sú správne napísané používateľmi. "
+"Sem napíšte správne meno značky, výrobcu vývojára."
 
 #: models.py:2016
 msgid "Proper name"
@@ -2461,123 +2462,127 @@ msgstr ""
 
 #: models.py:2033
 msgid "Tagline"
-msgstr ""
+msgstr "Časová os"
 
 #: models.py:2034
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
+"Zapamätateľná fráza, popisujúca produkt, použiteľná na marketingové účely."
 
 #: models.py:2049
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#10\">formatting rules</a>."
 msgstr ""
+"Sem môžete vpísať plný komerčný popis produktu.  Môžete použiť  <a "
+"href=\"/faq/#10\">formátovanie</a>."
 
 #: models.py:2068
-#, fuzzy
 msgid "Commercial gear items"
-msgstr "okomentoval prílušenstvo"
+msgstr "Komerčné príslušenstvo"
 
 #: search.py:51 views.py:1039 views.py:1292 views.py:1317
 #: templates/image/actions/bring_to_attention.html:30
 msgid "No results. Sorry."
-msgstr ""
+msgstr "Ľutujeme, žiadne výsledky."
 
 #: search.py:52
 msgid "Matching items:"
-msgstr ""
+msgstr "Zodpovedajúce položky:"
 
 #: stats.py:31
 msgid "Integration hours, yearly"
-msgstr ""
+msgstr "Integračné hodiny, ročne"
 
 #: stats.py:32 stats.py:333 templates/subject/page.html:94
 msgid "Integration hours, monthly"
-msgstr ""
+msgstr "Integračné hodiny, mešačne"
 
 #: stats.py:33
 msgid "Integration hours, daily"
-msgstr ""
+msgstr "Integračné hodiny, denne"
 
 #: stats.py:89
 msgid "Integration hours by gear, yearly"
-msgstr ""
+msgstr "Integračné hodiny podľa príslušenstva, ročne"
 
 #: stats.py:90
 msgid "Integration hours by gear, monthly"
-msgstr ""
+msgstr "Integračné hodiny podľa príslušenstva, mesačne"
 
 #: stats.py:91
 msgid "Integration hours by gear, daily"
-msgstr ""
+msgstr "Integračné hodiny podľa príslušenstva, denne"
 
 #: stats.py:156
 msgid "Uploaded images, yearly"
-msgstr ""
+msgstr "Vložené obrázky, ročne"
 
 #: stats.py:157 stats.py:296 templates/subject/page.html:102
 msgid "Uploaded images, monthly"
-msgstr ""
+msgstr "Vložené obrázky, mesačne"
 
 #: stats.py:158
 msgid "Uploaded images, daily"
-msgstr ""
+msgstr "Vložené obrázky, denne"
 
 #: stats.py:205 stats.py:251 stats.py:749 stats.py:794
 msgid "Views, yearly"
-msgstr ""
+msgstr "Zobrazenia, ročne"
 
 #: stats.py:206 stats.py:252 stats.py:750 stats.py:795
 msgid "Views, monthly"
-msgstr ""
+msgstr "Zobrazenia, mesačne"
 
 #: stats.py:207 stats.py:253 stats.py:751 stats.py:796
 msgid "Views, daily"
-msgstr ""
+msgstr "Zobrazenia, denne"
 
 #: stats.py:376 stats.py:694 templates/gear/page.html:263
 #: templates/subject/page.html:75 templates/subject/page.html.py:110
 msgid "Total images"
-msgstr ""
+msgstr "Celkový počet obrázkov"
 
 #: stats.py:513 stats.py:575
 msgid "Integration hours by camera type"
-msgstr ""
+msgstr "Integračné hodiny podľa typu kamery"
 
 #: stats.py:594
 msgid "Refractor"
-msgstr ""
+msgstr "Refraktor"
 
 #: stats.py:595
 msgid "Reflector"
-msgstr ""
+msgstr "Reflektor"
 
 #: stats.py:596
 msgid "Catadioptric"
-msgstr ""
+msgstr "Katadioptrický"
 
 #: stats.py:639 templates/stats.html:30
 msgid "Number of images by subject type"
-msgstr ""
+msgstr "Počet obrázkov podľa typu objektu"
 
 #: views.py:565
 msgid ""
 "The revision you are looking for is invalid, or was deleted. This is the "
 "original image."
 msgstr ""
+"Verzia, ktorú hľadáte je neplatná, alebo bola zmazaná. Toto je pôvodný "
+"obrázok."
 
 #: views.py:730
 msgid "Resolution"
-msgstr ""
+msgstr "Rozlíšenie"
 
 #: views.py:731 views.py:823
 msgid "Dates"
-msgstr ""
+msgstr "Dátumy"
 
 #: views.py:733 templates/image/detail.html:489
 msgid "Frames"
-msgstr ""
+msgstr "Snímky"
 
 #: views.py:739 templates/wall.html:33
 #: templates/inclusion_tags/search_image_list.html:37
@@ -2585,40 +2590,43 @@ msgstr ""
 #: templates/inclusion_tags/search_image_list.html:130
 #: templates/search/search.html:42 templates/search/search.html.py:293
 msgid "Integration"
-msgstr ""
+msgstr "Expozícia"
 
 #: views.py:739 views.py:1987 views.py:1988
 #: templates/inclusion_tags/search_image_list.html:130
 #: templates/search/search.html:294 templates/subject/page.html:80
 msgid "hours"
-msgstr ""
+msgstr "hodiny"
 
 #: views.py:744
 msgid "Avg. Moon age"
-msgstr ""
+msgstr "Vek Mesiaca"
 
 #: views.py:744
 msgid "days"
-msgstr ""
+msgstr "dní"
 
 #: views.py:745 templates/search/search.html:300
 msgid "Avg. Moon phase"
-msgstr ""
+msgstr "Fáza Mesiaca"
 
 #: views.py:747
 msgid "Mean SQM"
-msgstr ""
+msgstr "SQM"
 
 #: views.py:945 views.py:2972
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
+"Neplatný alebo neexistujúci obrázok. Podporované formáty sú JPG, PNG a GIF."
 
 #: views.py:949 views.py:2980 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
+"AstroBin je pre údržbu servera aktuálne dostupný len na čítanie. Opakujte "
+"svoj pokus neskôr prosím!"
 
 #: views.py:1006
 msgid ""
@@ -2626,10 +2634,12 @@ msgid ""
 "please don't request it again! You will be notified when the job has "
 "completed. Thanks!"
 msgstr ""
+"Astrometria bola spustená na pozadí. Môže to chvíľu trvať, neopakujte preto "
+"svoju požiadavku opätovne! Po skončení budete informovaní. Ďakujeme!"
 
 #: views.py:1040
 msgid "Click on a suggestion or press TAB to add what you typed"
-msgstr ""
+msgstr "Kliknite na návrhy, alebo stlačte TAB na pridanie písaného slova"
 
 #: views.py:1327 views.py:1410 views.py:1495 views.py:1517 views.py:2172
 #: views.py:2185 views.py:2206 views.py:2243 views.py:2333 views.py:2395
@@ -2637,168 +2647,176 @@ msgstr ""
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
-msgstr ""
+msgstr "Formulár bol uložený. Ďakujeme!"
 
 #: views.py:1459
 msgid "Fill in one session, before adding more."
-msgstr ""
+msgstr "Vyplňte jednu ???, pred pridaním ďalšej."
 
 #: views.py:1713
 msgid "No date specified"
-msgstr ""
+msgstr "Nebol zadaný dátum"
 
 #: views.py:1715
 msgid ""
 "To fill in the missing dates, use the <strong>Edit acquisition details</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
+"Na vyplnenie chýbajúcich údajov použite položku <strong>Úpravu expozičných "
+"údajov</strong> v menu <strong>Akcie</strong>."
 
 #: views.py:1756 views.py:1855
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
+msgstr "Nebol vybraný ďalekohľad, objektív alebo kamera"
 
 #: views.py:1758 views.py:1858
 msgid ""
 "To fill in the missing gear, use the <strong>Edit gear used</strong> entry "
 "in the <strong>Actions</strong> menu for each image."
 msgstr ""
+"Na zadanie chýbajúceho príslušenstva použite položku <strong>Úprava "
+"použitého príslušenstva</strong> v menu <strong>Akcie</strong>."
 
 #: views.py:1767
 msgid "Gear images"
-msgstr ""
+msgstr "Obrázky príslušenstva"
 
 #: views.py:1799 templates/image/edit/acquisition.html:100
 msgid "Solar system"
-msgstr ""
+msgstr "Slnečná sústava"
 
 #: views.py:1829 views.py:1845
 msgid "No subjects specified"
-msgstr ""
+msgstr "Nebol zadaný názov"
 
 #: views.py:1831 views.py:1847
 msgid ""
 "To fill in the missing subjects, use the <strong>Edit basic information</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
+"Na zadanie chýbajúceho názvu použite položku <strong>Úprava základných "
+"údajov</strong> v menu <strong>Akcie</strong>."
 
 #: views.py:1864
 msgid "No acquisition details specified"
-msgstr ""
+msgstr "Neboli zadané detaily snímania."
 
 #: views.py:1867
 msgid ""
 "To fill in the missing acquisition details, use the <strong>Edit acquisition "
 "details</strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
+"Na zadanie expozičných údajov použite položku <strong>Úprav expozičných "
+"údajov</strong> v menu <strong>Akcie</strong>."
 
 #: views.py:1965 views.py:3557 templatetags/tags.py:92
 msgid "minutes"
-msgstr ""
+msgstr "minúty"
 
 #: views.py:1966 views.py:3558 templatetags/tags.py:93
 msgid "seconds ago"
-msgstr ""
+msgstr "sekundy"
 
 #: views.py:1968 views.py:3560 templatetags/tags.py:94
 #, python-format
 msgid "%s ago"
-msgstr ""
+msgstr "%s pred"
 
 #: views.py:1984 templates/popover/user.html:18
 msgid "Member since"
-msgstr ""
+msgstr "Členom od"
 
 #: views.py:1985
 msgid "Last login"
-msgstr ""
+msgstr "Naposledy prihlásený"
 
 #: views.py:1986
 msgid "Images uploaded"
-msgstr ""
+msgstr "odoslaných obrázkov"
 
 #: views.py:1987
 msgid "Total integration time"
-msgstr ""
+msgstr "Celkový expozičný čas"
 
 #: views.py:1988
 msgid "Average integration time"
-msgstr ""
+msgstr "Priemerný expozičný čas"
 
 #: views.py:2876
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
-msgstr ""
+msgstr "<strong>%s</strong> požadoval doplňujúce informácie o Vašom obrázku."
 
 #: views.py:2926
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
-msgstr ""
+msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku. "
 
 #: views.py:3359 templatetags/tags.py:338
 msgid "no alias"
-msgstr ""
+msgstr "žiadna prezývka"
 
 #: views.py:4219 views.py:4412
 msgid "You can't merge a product to itself."
-msgstr ""
+msgstr "Nemôžete pripojiť produkt k sebe samému."
 
 #: management/__init__.py:15
 msgid "You have a new follower"
-msgstr ""
+msgstr "Máte nového sympatizanta"
 
 #: management/__init__.py:21
 msgid "Following a user was successful"
-msgstr ""
+msgstr "Sledovanie používateľa bolo úspešné"
 
 #: management/__init__.py:27
 msgid "Unfollowing a user was successful"
-msgstr ""
+msgstr "Ukončenie sledovania používateľa bolo úspešné"
 
 #: management/__init__.py:33
 msgid "New image from a user you follow"
-msgstr ""
+msgstr "Nový obrázok od používateľa, ktorého sledujete"
 
 #: management/__init__.py:39
 msgid "Image brought to your attention"
-msgstr ""
+msgstr "Obrázok daný do Vašej pozornosti"
 
 #: management/__init__.py:45
 msgid "New image revision from a user you follow"
-msgstr ""
+msgstr "Nová verzia obrázku od užívateľa, ktorého sledujete"
 
 #: management/__init__.py:51
 msgid "Your image is ready"
-msgstr ""
+msgstr "Váš obrázok je pripravený"
 
 #: management/__init__.py:57
 msgid "Your image was plate-solved"
-msgstr ""
+msgstr "Astrometria Vášho obrázok je dokončená"
 
 #: management/__init__.py:63
 msgid "Your image could not be plate-solved"
-msgstr ""
+msgstr "Astrometria Vášho obrázku sa nepodarila"
 
 #: management/__init__.py:69
 msgid "Your request was fulfilled"
-msgstr ""
+msgstr "Vaša požiadavka bola splnená"
 
 #: management/__init__.py:75
 msgid "Your image was deleted"
-msgstr ""
+msgstr "Váš obrázok bol zmazaný"
 
 #: management/__init__.py:81
 msgid "AstroBin has published a new blog entry"
-msgstr ""
+msgstr "AstroBin vydal nový článok na blogu"
 
 #: management/__init__.py:87
 msgid "Nomination for the Messier Marathon"
-msgstr ""
+msgstr "Nominácia na Messierov maratón"
 
 #: management/__init__.py:93
 msgid "Top Nomination for the Messier Marathon"
-msgstr ""
+msgstr "Top nominácie na messierov maratón"
 
 #: management/__init__.py:99
 msgid "You have some images that are lacking data"

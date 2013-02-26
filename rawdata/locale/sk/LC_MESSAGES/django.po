@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-29 09:13-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-12-29 02:33-0500\n"
+"PO-Revision-Date: 2012-12-31 10:41+0100\n"
+"Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Pootle 2.1.6\n"
 
 #: folders.py:82 models.py:214 models.py:282
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -26,92 +26,95 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:20
 #: templates/rawdata/publicdatapool_list.html:32
 msgid "Name"
-msgstr ""
+msgstr "Názov"
 
 #: folders.py:92 templates/rawdata/_folder_dropdown.html:14
 #: templates/rawdata/_images.html:18 templates/rawdata/library.html:65
 #: templates/rawdata/rawimage_detail.html:15
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: folders.py:117 templates/rawdata/_folder_dropdown.html:28
 msgid "Upload date"
-msgstr ""
+msgstr "Dátum nahratia"
 
 #: folders.py:141 templates/rawdata/_folder_dropdown.html:21
 #: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
 msgid "Acquisition date"
-msgstr ""
+msgstr "Dátum snímania"
 
 #: folders.py:166 templates/rawdata/_folder_dropdown.html:35
 #: templates/rawdata/library.html:89 templates/rawdata/rawimage_detail.html:19
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: folders.py:190 templates/rawdata/_folder_dropdown.html:42
 #: templates/rawdata/library.html:97
 msgid "Telescope or lens"
-msgstr ""
+msgstr "Ďalekohľad alebo objektív"
 
 #: folders.py:214 templates/rawdata/_folder_dropdown.html:49
 #: templates/rawdata/library.html:105
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: folders.py:238 templates/rawdata/_folder_dropdown.html:56
 #: templates/rawdata/library.html:113
 msgid "Subject"
-msgstr ""
+msgstr "Predmet"
 
 #: folders.py:262 templates/rawdata/_folder_dropdown.html:63
 #: templates/rawdata/library.html:121
 #: templates/rawdata/rawimage_detail.html:20
 msgid "Temperature"
-msgstr ""
+msgstr "Teplota"
 
 #: forms.py:25
 msgid "File type is not supported"
-msgstr ""
+msgstr "Typ súboru nie je podporovaný"
 
 #: forms.py:102
 msgid "Users"
-msgstr ""
+msgstr "Používatelia"
 
 #: forms.py:103
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr ""
+"Zoznam používateľov, ktorých chcete pozvať. Použite čiarku ako oddeľovať."
 
 #: models.py:43 templatetags/rawdata_tags.py:15
 msgid "Unknown"
-msgstr ""
+msgstr "Neznámy"
 
 #: models.py:44
 msgid "Light"
-msgstr ""
+msgstr "Light"
 
 #: models.py:45
 msgid "Offset/Bias"
-msgstr ""
+msgstr "Offset/Bias"
 
 #: models.py:46
 msgid "Dark"
-msgstr ""
+msgstr "Dark"
 
 #: models.py:47
 msgid "Flat"
-msgstr ""
+msgstr "Flat"
 
 #: models.py:215
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
 msgstr ""
+"Verejný názov pre tento súbor. Buďte popisný, použite názov objektu, "
+"ohniskovú vzdialenosť v milimetroch."
 
 #: models.py:219 models.py:287
 #: templates/rawdata/privatesharedfolder_list.html:38
 #: templates/rawdata/publicdatapool_list.html:33
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: models.py:220
 msgid "Describe the goals and terms of this pool."
@@ -121,7 +124,7 @@ msgstr ""
 msgid ""
 "A name for this folder. Be descriptive, so that the folder can be quickly "
 "recognized by the name."
-msgstr ""
+msgstr "Názov adresára. Buďte popisný, tak aby bol ľahko rozoznateľný po mene."
 
 #: models.py:288
 msgid "Describe the goals of this folder."
@@ -135,26 +138,26 @@ msgstr ""
 
 #: templates/rawdata/_browser_js.html:20 templates/rawdata/_images.html:14
 msgid "Select all"
-msgstr ""
+msgstr "Vybrať všetko"
 
 #: templates/rawdata/_browser_js.html:40
 msgid "Reset selection"
-msgstr ""
+msgstr "Zrušiť výber"
 
 #: templates/rawdata/_browser_js.html:50 templates/rawdata/_images.html:41
 #: templates/rawdata/privatesharedfolder_detail.html:142
 #: templates/rawdata/publicdatapool_detail.html:111
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
-msgstr ""
+msgstr "Stiahnuť"
 
 #: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
 msgid "Preprocess"
-msgstr ""
+msgstr "Predspracovať"
 
 #: templates/rawdata/_browser_js.html:63
 msgid "Share"
-msgstr ""
+msgstr "Zdieľať"
 
 #: templates/rawdata/_browser_js.html:70
 #: templates/rawdata/privatesharedfolder_detail.html:8
@@ -171,7 +174,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:184
 #: templates/rawdata/privatesharedfolder_list.html:92
 msgid "Delete"
-msgstr ""
+msgstr "Zmazať"
 
 #: templates/rawdata/_folder_dropdown.html:7
 #: templates/rawdata/library.html:129
@@ -180,7 +183,7 @@ msgstr ""
 
 #: templates/rawdata/_folders.html:12
 msgid "Files"
-msgstr ""
+msgstr "Súbory"
 
 #: templates/rawdata/_images.html:19 templates/rawdata/library.html:73
 #: templates/rawdata/privatesharedfolder_detail.html:87
@@ -189,7 +192,7 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:22
 #: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
-msgstr ""
+msgstr "Odoslané"
 
 #: templates/rawdata/_screenshot_tour.html:3
 msgid "Screenshot tour"
@@ -213,16 +216,17 @@ msgstr ""
 #: templates/subscription/subscription_list.html:4
 #: templates/subscription/subscription_list.html:8
 msgid "AstroBin Raw Data"
-msgstr ""
+msgstr "Astrobin Raw Data"
 
 #: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
 #: templates/rawdata/help_03.html:9
 msgid "To safely store and organize your raw files."
-msgstr ""
+msgstr "Na bezpečné ukladanie a usporiadanie vašich RAW súborov"
 
 #: templates/rawdata/help_01.html:19
+#, fuzzy
 msgid "What is AstroBin Raw Data?"
-msgstr ""
+msgstr "Čo je AstroBin Raw Data?"
 
 #: templates/rawdata/help_01.html:20
 msgid ""
