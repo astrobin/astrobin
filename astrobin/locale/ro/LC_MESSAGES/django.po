@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 14:57-0500\n"
-"PO-Revision-Date: 2012-12-20 18:56+0100\n"
-"Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
+"PO-Revision-Date: 2013-01-18 17:06+0100\n"
+"Last-Translator: Gabriel <gabycorban@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1));\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%"
+"100==0)&&(n!=0)))?2:1));\n"
 "X-Generator: Pootle 2.1.6\n"
 
 #: fields.py:10
@@ -1024,7 +1024,7 @@ msgstr ""
 #: forms.py:68
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr ""
-"Dacă este posibil, utilizează numele din catalog (ex. M101, or NGC224 or "
+"Dacă este posibil, utilizează denumirile din catalog (ex. M101, or NGC224 or "
 "IC1370)."
 
 #: forms.py:73 models.py:1959 models.py:2041 templates/comments.html:33
@@ -1061,8 +1061,8 @@ msgstr ""
 #: forms.py:112
 msgid "Please enter either some subjects or a main solar system subject."
 msgstr ""
-"Vă rugăm să introduceți fie anumite obiecte sau un obiect principal din "
-"sistemul solar."
+"Vă rugăm să introduceți  fie un anume subiect fie un subiect legat de "
+"sistemul nostru solar. "
 
 #: forms.py:125
 msgid "Opacity"
@@ -1902,7 +1902,7 @@ msgstr "Nu vreau această imagine placă-rezolvată."
 
 #: models.py:690
 msgid "This is not a deep sky image, don't plate-solve it."
-msgstr "Aceasta nu este o imagine Deep-Sky, nu folosi placare-rezolvată."
+msgstr "Aceasta nu este o imagine Deep-Sky, n-o lasa- rezolv-o ."
 
 #: models.py:691
 msgid "I have no idea about the size of field, try a blind solve."
@@ -1927,7 +1927,7 @@ msgstr "Obiect Deep-Sky"
 
 #: models.py:700
 msgid "Solar system body or event"
-msgstr "Corp din sistemul solar sau eveniment"
+msgstr "Corp sau eveniment  din sistemul solar "
 
 #: models.py:701 views.py:1805 templates/wall.html:131
 msgid "Extremely wide field"
@@ -1987,13 +1987,13 @@ msgid ""
 "This is the smallest of the binning values you used. If you imaged L in 1x1 "
 "and RGB in 2x2, put 1x1 here."
 msgstr ""
-"Aceasta este cea mai mică dintre valorile debarasărilor pe care le-aţi "
-"utilizat până acum. Dacă aţi fotografiat L în 1x1 şi RGB în 2x2, puneţi 1x1 "
-"aici."
+"Aceasta este cea mai mică dintre valorile de reductie matriciala a imaginii "
+"pe care le-aţi utilizat până acum. Dacă aţi fotografiat L în 1x1 şi RGB în "
+"2x2, puneţi 1x1 aici."
 
 #: models.py:811 models.py:1154
 msgid "Binning"
-msgstr "Debarasări"
+msgstr "Reductie matriciala a rezolutiei imaginii"
 
 #: models.py:820
 msgid ""
@@ -2002,8 +2002,8 @@ msgid ""
 "matter."
 msgstr ""
 "Dacă scalați imaginea înainte de încărcare, introduceți aici procentul din "
-"noua dimensiune. De exemplu, 50% Dacă ai făcut jumătate din dimensiunea. "
-"Tăierea, în schimb, nu contează."
+"noua dimensiune. De exemplu, 50% Dacă ai făcut jumătate din dimensiune. "
+"Decuparea, în schimb, nu contează."
 
 #: models.py:821
 msgid "Scaling"
@@ -2210,7 +2210,7 @@ msgstr "CMII"
 
 #: models.py:1275
 msgid "Latitude of the second Central Meridian."
-msgstr "Latitudinea Meridianului Central al doilea."
+msgstr "Latitudinea celui de-al doilea Meridian Central ."
 
 #: models.py:1283 templates/image/detail.html:504
 msgid "CMIII"
@@ -2218,7 +2218,7 @@ msgstr "CMIII"
 
 #: models.py:1284
 msgid "Latitude of the third Central Meridian."
-msgstr "Latitudinea Meridianului Central al treilea."
+msgstr "Latitudinea celui de-al treilea Meridian Central"
 
 #: models.py:1292 templates/image/detail.html:507
 msgid "Seeing"
@@ -2226,7 +2226,7 @@ msgstr "Seeing"
 
 #: models.py:1293
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
-msgstr "Estimarea ta a seeingului, pe o scară de la 1 la 5."
+msgstr "Estimarea proprie a seeingului, pe o scară de la 1 la 5."
 
 #: models.py:1299 templates/image/detail.html:510
 msgid "Transparency"
@@ -2484,6 +2484,11 @@ msgid ""
 "name.<br/>It is recommended that you try to group as many items as possible, "
 "so try to use a generic version of your product's name."
 msgstr ""
+"Uneori, numele produselor nu sunt scrise corespunzator de catre utilizatori. "
+"Scrieti aici numele corespunzator al produsului  neincluzand marca "
+"produsului/producătorul/numele dezvoltatorului. Este recomandat sa incercati "
+"gruparea a cat mai multor elemente posibile, asa incat incercati sa "
+"folositi o versiune generica a numelui produselor dumneavoastra.."
 
 #: models.py:2025
 msgid ""
@@ -2492,6 +2497,10 @@ msgid ""
 "choose it from this list. If you upload several revisions, they will also "
 "appear in the commercial page."
 msgstr ""
+"Imaginea oficiala comerciala pentru acest produs. Incarcati o imagine prin "
+"interfata uzuala de incarcare, setandu-l la tipul \"Gear\" si alegandu-l din "
+"aceaasta lista. Daca incarcati diverse versiuni revizuite acestea vor aparea "
+"deasemeni in pagina comercial."
 
 #: models.py:2033
 msgid "Tagline"
@@ -2501,16 +2510,21 @@ msgstr "Sloganul"
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
+"O fraza memorabila care va insuma insusirile acestui produs, in sensul "
+"marketingului."
 
 #: models.py:2049
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#10\">formatting rules</a>."
 msgstr ""
+"Aici puteti completa intreaga descriere comerciala a produsului "
+"dumneavoastra. Puteti utiliza reguli de formatare de tip <a "
+"href=\"/faq/\"10\">."
 
 #: models.py:2068
 msgid "Commercial gear items"
-msgstr ""
+msgstr "elemente comerciale pentru echipament"
 
 #: search.py:51 views.py:1039 views.py:1292 views.py:1317
 #: templates/image/actions/bring_to_attention.html:30
@@ -2540,10 +2554,12 @@ msgstr "Timp de integrare ( echipament )"
 #: stats.py:90
 msgid "Integration hours by gear, monthly"
 msgstr ""
+"Orele necesare echipamentului pentru integrarea imaginii , calculate lunar."
 
 #: stats.py:91
 msgid "Integration hours by gear, daily"
 msgstr ""
+"Orele necesare echipamentului pentru integrarea imaginii , calculate zilnic."
 
 #: stats.py:156
 msgid "Uploaded images, yearly"
@@ -2592,7 +2608,7 @@ msgstr "Catadioptric"
 
 #: stats.py:639 templates/stats.html:30
 msgid "Number of images by subject type"
-msgstr ""
+msgstr "Numarul imaginilor calculat pe tipuri de subiect"
 
 #: views.py:565
 msgid ""
@@ -2628,7 +2644,7 @@ msgstr "ore"
 
 #: views.py:744
 msgid "Avg. Moon age"
-msgstr ""
+msgstr "\"varsta\" medie a Lunei  (numarul de zile trecute de la Luna noua)"
 
 #: views.py:744
 msgid "days"
@@ -2636,7 +2652,7 @@ msgstr "zile"
 
 #: views.py:745 templates/search/search.html:300
 msgid "Avg. Moon phase"
-msgstr ""
+msgstr "aprecierea medie a fazei Lunei"
 
 #: views.py:747
 msgid "Mean SQM"
@@ -2646,12 +2662,16 @@ msgstr ""
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
+"Imagine nevalidata sau nici o imagine furnizata. Formatele permise sunt JPG, "
+"PNG si GIF."
 
 #: views.py:949 views.py:2980 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
+"Astrobin este in modul curent si exclusiv de citire, din motive de "
+"intretinere a serverului. Va rog sa reveniti in curand !"
 
 #: views.py:1006
 msgid ""
@@ -2675,7 +2695,7 @@ msgstr "Formă salvată. Mulțumesc!"
 
 #: views.py:1459
 msgid "Fill in one session, before adding more."
-msgstr ""
+msgstr "Completati o sesiune inainte de a mai adauga ceva."
 
 #: views.py:1713
 msgid "No date specified"
@@ -2686,16 +2706,22 @@ msgid ""
 "To fill in the missing dates, use the <strong>Edit acquisition details</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
+"Pentru a completa datele lipsa, folositi  intrarea <Edit acquisition "
+"details> in meniul <Actions> pentru fiecare imagine."
 
 #: views.py:1756 views.py:1855
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
+"Nu s-a specificat nici un telescop, lentila sau camera pentru producerea "
+"imaginii."
 
 #: views.py:1758 views.py:1858
 msgid ""
 "To fill in the missing gear, use the <strong>Edit gear used</strong> entry "
 "in the <strong>Actions</strong> menu for each image."
 msgstr ""
+"Pentru completarea echipamentului, folositi <Edit gear used> apelat in "
+"meniul <Actions> pentru fiecare imagine."
 
 #: views.py:1767
 msgid "Gear images"
@@ -2714,16 +2740,20 @@ msgid ""
 "To fill in the missing subjects, use the <strong>Edit basic information</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
+"Pentru completarea subiectelor lipsa folositi<Edit basic information> apelat "
+"din meniul<Actions> pentru fiecare imagine."
 
 #: views.py:1864
 msgid "No acquisition details specified"
-msgstr ""
+msgstr "N-ati specificat detaliile de achizitie"
 
 #: views.py:1867
 msgid ""
 "To fill in the missing acquisition details, use the <strong>Edit acquisition "
 "details</strong> entry in the <strong>Actions</strong> menu for each image."
 msgstr ""
+"Pentru completarea detaliilor de achizitie folositi<Edit acquisition "
+"details> apelat din meniul<Actions> pentru fiecare imagine."
 
 #: views.py:1965 views.py:3557 templatetags/tags.py:92
 msgid "minutes"
@@ -2740,7 +2770,7 @@ msgstr "%s in urmă"
 
 #: views.py:1984 templates/popover/user.html:18
 msgid "Member since"
-msgstr ""
+msgstr "Membru incepand din"
 
 #: views.py:1985
 msgid "Last login"
@@ -2756,27 +2786,27 @@ msgstr "Timp total de integrare"
 
 #: views.py:1988
 msgid "Average integration time"
-msgstr ""
+msgstr "Timpul mediu de integrare"
 
 #: views.py:2876
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
-msgstr ""
+msgstr "%s a cerut informatii aditionale despre imaginea dvs."
 
 #: views.py:2926
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
-msgstr ""
+msgstr "%s a cerut sa vada formatele TIFF sau FIT a imaginii dvs."
 
 #: views.py:3359 templatetags/tags.py:338
 msgid "no alias"
-msgstr ""
+msgstr "nici o asociere"
 
 #: views.py:4219 views.py:4412
 msgid "You can't merge a product to itself."
-msgstr ""
+msgstr "nu puteti alipi o imagine, ei insasi."
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -2784,23 +2814,23 @@ msgstr ""
 
 #: management/__init__.py:21
 msgid "Following a user was successful"
-msgstr ""
+msgstr "Regimul de urmarire a utilizatorului s-a activat cu succes."
 
 #: management/__init__.py:27
 msgid "Unfollowing a user was successful"
-msgstr ""
+msgstr "Regimul de urmarire a utilizatorului s-a dezactivat cu succes."
 
 #: management/__init__.py:33
 msgid "New image from a user you follow"
-msgstr ""
+msgstr "O noua imagine de la utilizatorul urmarit."
 
 #: management/__init__.py:39
 msgid "Image brought to your attention"
-msgstr ""
+msgstr "Imagine adusa in atentia dvs."
 
 #: management/__init__.py:45
 msgid "New image revision from a user you follow"
-msgstr ""
+msgstr "O noua imagine revizuita de la un utilizator pe care il urmariti"
 
 #: management/__init__.py:51
 msgid "Your image is ready"
@@ -2816,11 +2846,11 @@ msgstr ""
 
 #: management/__init__.py:69
 msgid "Your request was fulfilled"
-msgstr ""
+msgstr "Cererea dumneavoastra a fost indeplinita."
 
 #: management/__init__.py:75
 msgid "Your image was deleted"
-msgstr "Imaginea ta a fost eliminată"
+msgstr "Imaginea dumneavoastra a fost stearsa"
 
 #: management/__init__.py:81
 msgid "AstroBin has published a new blog entry"
@@ -2872,7 +2902,7 @@ msgstr "Un nou review al echipamentului pe care il detineti"
 
 #: management/__init__.py:153
 msgid "New data posted to public pool"
-msgstr ""
+msgstr "O noua data publicata in zona publica"
 
 #: management/__init__.py:159
 #, fuzzy
@@ -2881,16 +2911,15 @@ msgstr "O noua imagine cu subiectul pe care il urmaresti"
 
 #: management/__init__.py:165
 msgid "New data posted to shared private folder"
-msgstr ""
+msgstr "O noua data postata in zona privata a folderului de interschimb"
 
 #: management/__init__.py:171
 msgid "New image posted to shared private folder"
-msgstr ""
+msgstr "O noua imagine postata zona privata a folderului de interschimb"
 
 #: management/__init__.py:177
-#, fuzzy
 msgid "You are invited to a shared private folder"
-msgstr "Ai primit un nou mesaj privat ."
+msgstr "Sunteti invitat la a vizita un folder cu statut privat."
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2906,7 +2935,7 @@ msgstr ""
 
 #: templates/503.html:5
 msgid "AstroBin is temporarily unavailable"
-msgstr ""
+msgstr "Astrobin este temporar indisponibil"
 
 #: templates/503.html:7
 msgid ""
@@ -2914,10 +2943,13 @@ msgid ""
 "maintenance, or probably a software upgrade. Usually this doesn't take more "
 "than 30 minutes."
 msgstr ""
+"Ne cerem scuze pentru inconveniente, dar tocmai facem intretinerea "
+"serverului sau probabil un upgrade software. De obicei aceste intreruperi nu "
+"dureaza mai mult decat 30 minute."
 
 #: templates/503.html:10
 msgid "Come back soon!"
-msgstr ""
+msgstr "Reveniti curand !"
 
 #: templates/activities.html:8 templates/index.html:193
 msgid "Activity stream"
@@ -2970,7 +3002,7 @@ msgstr ""
 #: templates/registration/password_reset_form.html:12
 #: templates/registration/registration_form.html:18
 msgid "Submit"
-msgstr ""
+msgstr "De acord !"
 
 #: templates/app_api_key_request_complete.html:6
 msgid "Your API key request has been submitted"
@@ -2996,9 +3028,8 @@ msgid "Home"
 msgstr "Acasă"
 
 #: templates/base.html:92 templates/maintenance_base.html:88
-#, fuzzy
 msgid "Community"
-msgstr "Comentariu"
+msgstr "Comunitatea"
 
 #: templates/base.html:96 templates/base.html.py:631 templates/index.html:228
 #: templates/maintenance_base.html:92 templates/maintenance_base.html:558
@@ -3019,7 +3050,7 @@ msgstr "Subiecte populare"
 #: templates/maintenance_base.html:117 templates/wall.html:6
 #: templates/wall.html.py:169
 msgid "The Big Wall"
-msgstr ""
+msgstr "Marele Perete"
 
 #: templates/base.html:127 templates/maintenance_base.html:123
 #: templates/nightly.html:6
@@ -3065,7 +3096,7 @@ msgstr "Statistici"
 #: templates/base.html:182 templates/leaderboard.html:8
 #: templates/leaderboard.html.py:11 templates/maintenance_base.html:171
 msgid "Leaderboard"
-msgstr ""
+msgstr "Grupul de lideri"
 
 #: templates/base.html:189 templates/base.html.py:632 templates/help.html:4
 #: templates/maintenance_base.html:178 templates/maintenance_base.html:559
@@ -3084,13 +3115,12 @@ msgstr ""
 
 #: templates/base.html:208 templates/maintenance_base.html:197
 #: templates/questions.html:4 templates/questions.html.py:7
-#, fuzzy
 msgid "AstroBin Questions"
-msgstr "Index AstroBin"
+msgstr "AstroBin Intrebari"
 
 #: templates/base.html:214
 msgid "AstroBin Raw Data"
-msgstr ""
+msgstr "Astrobin date de tip Raw  "
 
 #: templates/base.html:239 templates/maintenance_base.html:221
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:7
@@ -3101,15 +3131,15 @@ msgstr "Contact"
 #: templates/maintenance_base.html:233 templates/image/detail.html:263
 #: templates/user/profile-subnav.html:87
 msgid "User"
-msgstr ""
+msgstr "Utilizator"
 
 #: templates/base.html:328
 msgid "Help with translations!"
-msgstr ""
+msgstr "Ajutati cu translatii !"
 
 #: templates/base.html:336
 msgid "Please select your language from the options above."
-msgstr ""
+msgstr "Va rog selectati limbajul dumneavoastra dintre optiunile de mai sus"
 
 #: templates/base.html:358 templates/index.html:130
 #: templates/maintenance_base.html:252 templates/upload.html:6
@@ -3154,11 +3184,11 @@ msgstr ""
 
 #: templates/base.html:402 templates/user/profile-subnav.html:35
 msgid "Raw data library"
-msgstr ""
+msgstr "Biblioteca de date Raw"
 
 #: templates/base.html:409
 msgid "Private shared folders"
-msgstr ""
+msgstr "Foldere cu distribuire privata"
 
 #: templates/base.html:418 templates/maintenance_base.html:295
 #: templates/messages/inbox.html:9
@@ -3256,6 +3286,9 @@ msgid ""
 "upload your astrophotography images. Made by an astrophotographer, for the "
 "astrophotographers."
 msgstr ""
+"Astrobin este un website specific dedicat astrofotografilor: este primul si "
+"ultimul loc unde va puteti incarca astrofotografiile. Facute de un "
+"astrofotograf pentru astrofotografi.  "
 
 #: templates/base.html:634 templates/maintenance_base.html:561
 #: templates/tos.html:7
@@ -3269,7 +3302,7 @@ msgstr "Orientări"
 
 #: templates/base.html:639 templates/maintenance_base.html:566
 msgid "Thanks to"
-msgstr ""
+msgstr "Datorită"
 
 #: templates/base.html:641 templates/maintenance_base.html:568
 msgid "The localization team"
@@ -3342,6 +3375,8 @@ msgid ""
 "The best way to see what's new on AstroBin: a big wall with 100 images per "
 "page, that you can sort and filter to your liking."
 msgstr ""
+"Cel mai bun mod de a vedea ce este nou pe Astrobin: un mare zid cu 100 "
+"imagini pe pagina, pe care le puteti sorta si filtra dupa cum va plac. "
 
 #: templates/explore_choose.html:12
 msgid "Nightly"
@@ -3384,11 +3419,11 @@ msgstr ""
 
 #: templates/faq.html:16 templates/faq.html.py:71
 msgid "What's the deal with the Staging Area and the Public Area?"
-msgstr ""
+msgstr "Care-i treaba cu Zona de Stagiat si Zona Publica ?"
 
 #: templates/faq.html:17 templates/faq.html.py:81
 msgid "How do I get an image featured on the Messier Marathon page?"
-msgstr ""
+msgstr "Cum obtin o imagine infatisata pe pagina Messier Marathon ?"
 
 #: templates/faq.html:18 templates/faq.html.py:89
 msgid "Why was AstroBin created?"
