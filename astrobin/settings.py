@@ -38,9 +38,10 @@ DATABASES = {
         'USER': os.environ['ASTROBIN_DATABASE_USER'],         # Not used with sqlite3.
         'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'], # Not used with sqlite3.
         'HOST': os.environ['ASTROBIN_DATABASE_HOST'],         # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                                           # Set to empty string for default. Not used with sqlite3.
+        'PORT': '5432',                                       # Set to empty string for default. Not used with sqlite3.
     }
 }
+
 DEFAULT_CHARSET = 'utf-8'
 
 ASTROBIN_BASE_URL = 'http://www.astrobin.com'

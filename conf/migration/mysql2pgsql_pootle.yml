@@ -13,7 +13,7 @@ destination:
  # if file is given, output goes to file, else postgres
  file: 
  postgres:
-  hostname: localhost
+  hostname: 192.168.7.11
   port: 5432
   username: astrobin
   password: ***REMOVED***
