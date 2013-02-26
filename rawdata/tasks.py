@@ -6,6 +6,7 @@ from django.core.files import File
 
 # Third party apps
 from celery.task import task
+import PySide.QtCore
 import PyABC as abc
 
 # This app
