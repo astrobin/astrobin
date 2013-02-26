@@ -6,7 +6,10 @@
 {% block content %}
     <div class="page-header">
         <h1>{% trans "AstroBin Raw Data Uploader" %}
-            <small>{% trans "A desktop client" %}</small>
+            <small>
+                {% trans "A desktop client" %}
+                <span class="label label-warning">BETA!</span>
+            </small>
         </h1>
     </div>
 
@@ -38,8 +41,15 @@
                 <img src="{{STATIC_URL}}rawdata/images/windows-logo.png" alt="Windows"/>
                 <div>
                     {% trans "Download for:" %}
-                    <a href="http://cdn.astrobin.com/uploader/astrobin_uploader_1.0.msi">
+                    <a class="btn btn-primary"
+                       onClick="trackOutboundLink(
+                           this,
+                           'Outbound Links',
+                           'Raw Data Uploader, Windows');
+                           return false;"
+                       href="http://cdn.astrobin.com/uploader/AstroBinUploader-1.0.msi">
                         Windows
+                        <i class="icon-download"></i>
                     </a>
                 </div>
                 <div>&nbsp;</div>
@@ -50,13 +60,8 @@
                 <img src="{{STATIC_URL}}rawdata/images/linux-logo.png" alt="Linux"/>
                 <div>
                     {% trans "Download for" %} <strong>Ubuntu Linux:</strong>
-                    <a href="http://cdn.astrobin.com/uploader/astrobin_uploader_1.0_x86.deb">
-                        32 bit
-                    </a>
-                    /
-                    <a href="http://cdn.astrobin.com/uploader/astrobin_uploader_1.0_amd64.deb">
-                        64 bit
-                    </a>
+                    <span class="label label-warning">{% trans "Coming soon" %}
+                    </span>
                 </div>
                 <div>
                     {% trans "Download for" %} <strong>other Linux:</strong>
