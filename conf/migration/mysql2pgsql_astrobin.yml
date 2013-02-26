@@ -6,17 +6,17 @@ mysql:
  port: 3306
  socket: /var/run/mysqld/mysqld.sock
  username: astrobin
- password: h3C_U77a
+ password: qH5l23dF
  database: astrobin
  compress: false
 destination:
  # if file is given, output goes to file, else postgres
  file: 
  postgres:
-  hostname: localhost
+  hostname: 192.168.7.11
   port: 5432
   username: astrobin
-  password: h3C_U77a
+  password: qH5l23dF
   database: astrobin
 
 # if tables is given, only the listed tables will be converted.  leave empty to convert all tables.
