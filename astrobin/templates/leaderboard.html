@@ -1,46 +1,51 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load common_tags %}
 {% load tags %}
 {% load pagination_tags %}
 {% load cache %}
 
 {% block title %}AstroBin - {% trans "Leaderboard" %}{% endblock %}
 {% block content %}
+    <div class="page-header">
+        <h1>{% trans "Leaderboard" %}</h1>
+    </div>
+
     <div class="row">
         <div class="span12">
             <div class="leaderboard">
-                <h1>{% trans "Leaderboard" %}</h1>
-
                 <table class="table">
-                    <tr>
-                        <th>{% trans "Position" %}</th>
-                        <th>{% trans "User" %}</th>
-                        <th>
-                            <a href="{% url leaderboard %}{% query_string "sort='rating'" "" %}">
-                                {% trans "Rating" %} <i class="icon-sort"></i>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="{% url leaderboard %}{% query_string "sort='integration'" "" %}">
-                                {% trans "Total integration" %} <i class="icon-sort"></i>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="{% url leaderboard %}{% query_string "sort='avg_integration'" "" %}">
-                                {% trans "Avg. integration hours" %} <i class="icon-sort"></i>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="{% url leaderboard %}{% query_string "sort='images'" "" %}">
-                                {% trans "Images" %} <i class="icon-sort"></i>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="{% url leaderboard %}{% query_string "sort='comments'" "" %}">
-                                {% trans "Comments" %} <i class="icon-sort"></i>
-                            </a>
-                        </th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>{% trans "Position" %}</th>
+                            <th>{% trans "User" %}</th>
+                            <th>
+                                <a href="{% url leaderboard %}{% query_string "sort='rating'" "" %}">
+                                    {% trans "Rating" %} <i class="icon-sort"></i>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="{% url leaderboard %}{% query_string "sort='integration'" "" %}">
+                                    {% trans "Total integration" %} <i class="icon-sort"></i>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="{% url leaderboard %}{% query_string "sort='avg_integration'" "" %}">
+                                    {% trans "Avg. integration hours" %} <i class="icon-sort"></i>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="{% url leaderboard %}{% query_string "sort='images'" "" %}">
+                                    {% trans "Images" %} <i class="icon-sort"></i>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="{% url leaderboard %}{% query_string "sort='comments'" "" %}">
+                                    {% trans "Comments" %} <i class="icon-sort"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
                     {% autopaginate user_list 100 %}
                     {% for u in user_list %}
                         {% if u.object.username %}

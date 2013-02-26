@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "AstroBin Raw Data" %} - {% trans "Subscription plan" %}: {{object.name}}{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{% trans "AstroBin Raw Data" %} <small>{% trans "Subscription plan" %}: {{object.name}}</small></h1>
+    </div>
+
+    <div class="row">
+        <div class="span4 plan">
+            <div class="subtle-container">
+                {% include "subscription/_plan.html" %}
+            </div>
+        </div>
+
+        <div class="span8">
+        {% if usersubscription %}
+            {% if usersubscription.cancelled  %}
+                <div class="alert alert-info">
+                    {% trans "Your subscription to this plan is cancelled." %}
+                </div>
+            {% endif %}
+
+            {% if usersubscription.active %}
+                <div class="alert alert-info">
+                    {% trans "You are subscribed to this plan." %}
+                    {% blocktrans %}You may <a href="{{cancel_url}}">cancel via PayPal</a> if you wish.{% endblocktrans %}
+                </div>
+            {% else %}
+                <div class="well">
+                    {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                </div>
+
+                <div style="test-align:center">
+                    {{form.render}}
+                </div>
+            {% endif %}
+        {% else %}
+            {% if change_denied_reasons %}
+                <div class="alert alert-error">
+                    <h4 class="alert-heading">
+                        <i class="icon-fire"></i>
+                        {% trans "You cannot switch to this plan." %}
+                    </h4>
+                    <ul class="unstyled">
+                        {% for reason in change_denied_reasons %}
+                            <li>{{reason}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="well">
+                    {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                </div>
+
+                <div style="text-align: center">
+                    {{form.render}}
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="thankyou">
+            {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
+            {% url subscription_list as plans_url %}
+            <small>{% blocktrans %}Return to the <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}</small>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

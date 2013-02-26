@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib import admin
@@ -24,14 +25,21 @@ admin.autodiscover()
 
 from astrobin import views
 from astrobin import lookups
-from astrobin.models import Image
 from astrobin.search import SearchView
 from astrobin.forms import AdvancedSearchForm
+
+from rawdata.views.helppages import (
+    Help1 as RawDataHelp1,
+    Help2 as RawDataHelp2,
+    Help3 as RawDataHelp3,
+)
+
 
 from tastypie.api import Api
 from astrobin.api import ImageResource, ImageRevisionResource,\
                          CommentResource, ImageOfTheDayResource
 
+# These are the old API, not djangorestframework
 v1_api = Api(api_name = 'v1')
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
@@ -39,6 +47,15 @@ v1_api.register(CommentResource())
 v1_api.register(ImageOfTheDayResource())
 
 urlpatterns = patterns('',
+    url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/v2/api-auth-token/', 'rest_framework.authtoken.views.obtain_auth_token'),
+    url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
+    url(r'^api/v2/common/', include('common.api_urls')),
+    url(r'^api/v2/rawdata/', include('rawdata.api_urls')),
+
+    url(r'^rawdata/', include('rawdata.urls')),
+
+
     url(r'^$', views.index, name='index'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
     url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_full, name='image_full'),
@@ -228,6 +245,9 @@ urlpatterns = patterns('',
     url(r'^help/api/$', views.api, name='api'),
     url(r'^faq/', views.faq, name='faq'),
     url(r'^help/questions/$', views.help_questions, name='help_questions'),
+    url(r'^help/rawdata/1/$', RawDataHelp1.as_view(), name='rawdata.help1'),
+    url(r'^help/rawdata/2/$', RawDataHelp2.as_view(), name='rawdata.help2'),
+    url(r'^help/rawdata/3/$', RawDataHelp3.as_view(), name='rawdata.help3'),
     url(r'^affiliates/$', views.affiliates, name='affiliates'),
     url(r'^tos/', views.tos, name='tos'),
     url(r'^guidelines/', views.guidelines, name='guidelines'),
@@ -249,11 +269,6 @@ urlpatterns = patterns('',
     url(r'^explore/reviews/$', views.reviews, name='reviews'),
 
     url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
-
-    url(r'^image_comments/save/$', views.image_comment_save, name='image_comment_save'),
-    url(r'^image_comments/delete/(?P<id>\d+)/$', views.image_comment_delete, name='image_comment_delete'),
-    url(r'^image_comments/get/(?P<id>\d+)/$', views.image_comment_get, name='image_comment_get'),
-    url(r'^image_comments/edit/$', views.image_comment_edit, name='image_comment_edit'),
 
     url(r'^get_edit_gear_form/(?P<id>\d+)/$', views.get_edit_gear_form, name='get_edit_gear_form'),
     url(r'^get_empty_edit_gear_form/(?P<gear_type>\w+)/$', views.get_empty_edit_gear_form, name='get_empty_edit_gear_form'),
@@ -277,10 +292,6 @@ urlpatterns = patterns('',
     url(r'^gear/fix/save/$', views.gear_fix_save, name='gear_fix_save'),
     url(r'^gear/fix/thanks/$', views.gear_fix_thanks, name='gear_fix_thanks'),
     url(r'^gear/review/save/$', views.gear_review_save, name='gear_review_save'),
-    url(r'^gear/comment/save/$', views.gear_comment_save, name='gear_comment_save'),
-    url(r'^gear/comment/edit/$', views.gear_comment_edit, name='gear_comment_edit'),
-    url(r'^gear/comment/get/(?P<id>\d+)/$', views.gear_comment_get, name='gear_comment_get'),
-    url(r'^gear/comment/delete/(?P<id>\d+)/$', views.gear_comment_delete, name='gear_comment_delete'),
     url(r'^gear/by-image/(?P<image_id>\d+)/$', views.gear_by_image, name='gear_by_image'),
     url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$', views.gear_by_make, name='gear_by_make'),
     url(r'^gear/by-ids/(?P<ids>([0-9]+,?)+)/$', views.gear_by_ids, name='gear_by_ids'),
@@ -299,5 +310,6 @@ urlpatterns = patterns('',
     url('^activities/$', views.activities, name = 'activities'),
 
     url(r'^openid/', include('openid_provider.urls')),
+    url(r'^subscriptions/', include('subscription.urls')),
 )
 

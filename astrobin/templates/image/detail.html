@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load common_tags %}
 {% load tags %}
 {% load hitcount_tags %}
 {% load markup %}
@@ -113,6 +114,22 @@
                         </a>
                     </li>
                     {% endif %} <!-- image.is_wip -->
+
+                    <li class="divider"></li>
+                    <li>
+                        <a data-toggle="modal" href="#send-to-datapool-modal">
+                            <i class="icon-plus-sign"></i>
+                            {% trans "Send to public data pool" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a data-toggle="modal" href="#send-to-sharedfolder-modal">
+                            <i class="icon-plus-sign"></i>
+                            {% trans "Send to private shared folder" %}
+                        </a>
+                    </li>
+
                     <li class="divider"></li>
                     <li>
                     {% if not is_revision %}
@@ -396,7 +413,7 @@
                                         {% endfor %}
                                     </span>
                                     <span class="more">
-                                        &#8230;&nbsp; 
+                                        &#8230;&nbsp;
                                         <a href="#">
                                             <em>
                                                {% blocktrans with subjects_reminder|length as number %}and {{number}} more (click to view).{% endblocktrans %}
@@ -510,7 +527,7 @@
                 </div> <!-- span8 -->
             </div> <!-- row image-detail -->
             {% endif %} {# image.subject_type < 500 #}
-                
+
             {% if image.description %}
             <div class="image-description row">
                 <div class="span8">
@@ -521,7 +538,7 @@
                 </div>
             </div>
             {% endif %}
-            <div class="row comment-container">
+            <div class="row">
                 <div class="span8">
                     <div class="subtle-container">
                         <div class="header"><h4><i class="icon-comments-alt"></i> {% trans "Comments" %}</h4></div>
@@ -529,102 +546,19 @@
                         <p>
                             {% blocktrans with user=image.user lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
                         </p>
-                        <div class="top-level-form">
-                            <form class="form-horizontal" action="{% url image_comment_save %}" method="post">
-                                {{comment_form|as_bootstrap}}
-                                <input type="hidden" name="author" value="{{user.id}}" />
-                                <input type="hidden" name="image" value="{{image.id}}" />
-                                <input type="hidden" name="parent_id" value="" />
-                                <input type="hidden" name="level" value="0" />
-                                <div>
-                                    <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
-                                    <span class="help-inline">
-                                        <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-                                    </span>
-                                    <span class="loader">
-                                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
-                                    </span>
-                                </div>
-                            </form>
-                        </div> <!-- top-level-form -->
-                        {% else %}
-                            <p>
-                                {% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.{% endblocktrans %}
-                            </p>
                         {% endif %}
-    
-                        {% if comments %}
-                            {% load mptt_tags %}
-                            {% recursetree comments %}
-                                <div style="margin-left: {{node.get_level|add:node.get_level}}em">
-                                    <div id="c{{node.id}}" class="comment">
-                                        <div class="avatar">
-                                            <a href="{% url user_page node.author %}">
-                                                {% avatar node.author 32 %}
-                                            </a>
-                                        </div>
-                                        <div class="meta">
-                                            <a rel="popover" class="author user-popover"
-                                               data-load="{% url user_popover_ajax node.author %}"
-                                               href="{% url user_page node.author %}">{{node.author}}</a> {{node.added|ago}}
-                                        </div>
-                                        <div class="content{% if node.is_deleted %} deleted{% endif %}">
-                                            {% if node.is_deleted %}
-                                                <p>{% trans "(comment deleted)" %}</p>
-                                            {% else %}
-                                                {{node.comment|markdown|linebreaks}}
-                                            {% endif %}
-                                        </div>
-                                        <div class="links">
-                                            <a class="permalink" href="{% url image_detail image.id %}#c{{node.id}}">{% trans "Link" %}</a>
-                                            {% if user.is_authenticated %}
-                                                {% if user == node.author %}
-                                                    <a class="delete" href="#">
-                                                        {% if node.is_deleted %}
-                                                            {% trans "Undelete" %}
-                                                        {% else %}
-                                                            {% trans "Delete" %}
-                                                        {% endif %}
-                                                    </a>
-                                                    <a class="edit" href="#">{% trans "Edit" %}</a>
-                                                {% else %}
-                                                    <a class="reply btn btn-mini btn-primary" href="#">{% trans "Reply" %}</a>
-                                                {% endif %}
-                                            {% endif %}
-                                        </div>
-                                        <form action="{% url image_comment_save %}" method="post">
-                                            {{comment_form.as_p}}
-                                            <input type="hidden" name="author" value="{{user.id}}" />
-                                            <input type="hidden" name="image" value="{{image.id}}" />
-                                            <input type="hidden" name="parent_id" value="{{node.id}}" />
-                                            <input type="hidden" name="level" value="{{node.get_level}}" />
-                                            <p>
-                                                <input class="btn btn-mini btn-primary" type="submit" value="{% trans "Save" %}" />
-                                                <input class="btn btn-mini cancel" type="reset" value="{% trans "Cancel" %}" />
-                                                <span class="formatting-help">
-                                                    <a href="{% url faq %}#10" target="_blank">{% trans "Formatting help" %}</a>
-                                                </span>
-                                                <span class="loader">
-                                                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/> 
-                                                </span>
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
-                                {% if not node.is_leaf_node %}
-                                    {{children}}
-                                {% endif %}
-                            {% endrecursetree %}
-                        {% else %}
-                            <div class="no-comments-yet">
-                                {% blocktrans %}There are no comments yet.{% endblocktrans %}
-                            </div>
-                        {% endif %}
+
+                        <div id="nested-comments"
+                             data-content-type-id="{{content_type.pk}}"
+                             data-object-id="{{image.pk}}">
+                        </div>
+                        {% include 'nested_comments/nestedcomment_app.html' %}
+
                     </div> <!-- subtle-container -->
                 </div> <!-- span8 -->
-            </div> <!-- row  comments-->
+            </div> <!-- row -->
         </div> <!-- span8 -->
-        
+
         <div class="span4"> <!-- right pane -->
             {% ifequal request.user image.user %}
             <div class="subtle-container">
@@ -632,7 +566,7 @@
                    target="_blank"
                    id="request-critique"
                    data-title="{% trans "What is this?" %}"
-                   data-content="{% blocktrans %}This button will create a post on AstroBin Questions, in which you can ask for critique, review or analisys of your image.{% endblocktrans %} <a href='{% url help_questions %}'>{% trans "Learn more about AstroBin Questions." %}</a>"
+                   data-content="{% blocktrans %}This button will create a post on AstroBin Questions, in which you can ask for critique, review or analysis of your image.{% endblocktrans %} <a href='{% url help_questions %}'>{% trans "Learn more about AstroBin Questions." %}</a>"
                    class="btn btn-primary btn-large"
                    style="width:242px; font-weight: bold; font-size: 22px">
                    {% trans "Request critique" %}
@@ -642,11 +576,10 @@
 
             {% if request.user.is_authenticated %}
             <div class="community-bulletin">
-                <h4>{% trans "Community bulletin" %}</h4>
+                <h4>{% trans "Introducing AstroBin Raw Data" %}</h4>
                 <p>
-                    <span class="title">{% trans "Introducing AstroBin Questions" %}</span>
-                    {% url help_questions as questions_url %}
-                    {% blocktrans %}After revolutionizing the way astrophotographers preserve their data, AstroBin is set to start a new era in the way amateur astronomers communicate on the Internet. <a href="{{questions_url}}">Want to know more?</a>{% endblocktrans %}
+                    {% url rawdata.help1 as rawdata_url %}
+                    {% blocktrans %}<strong>AstroBin Raw Data</strong> is a platform for the secure storage of all your FIT and DLSR raw files, up to 500 GB! It will automatically keep your files organized, and allow you to share them with other members. <a href="{{rawdata_url}}">Want to know more?</a>{% endblocktrans %}
                 </p>
             </div>
             {% endif %}
@@ -823,7 +756,7 @@
                 <span class='st_facebook' displayText='Facebook'></span>
                 <span class='st_twitter' displayText='Twitter'></span>
             </div>
-            
+
             <div class="well">
                 <form class="copy">
                     <table class="table">
@@ -878,12 +811,103 @@
             </div>
         </div>
     </div>
+
+    <div class="modal hide fade" id="send-to-datapool-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Send to public data pool" %}</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                {% blocktrans %}If this image is the result of your processing of a public data pool, you can send it the pool so it's displayed there.{% endblocktrans %}
+            </p>
+
+            {% if has_rawdata_subscription %}
+                <p>
+                    {% blocktrans %}Use this form to select an existing <strong>public data pool</strong>.{% endblocktrans %}
+                </p>
+                <form class="form-inline" id="select-datapool">
+                    {{select_datapool_form|as_bootstrap}}
+                </form>
+            {% else %}
+                <div class="alert alert-error">
+                    <h4 class="alert-heading">
+                        <i class="icon-fire"></i>
+                        {% trans "Error!" %}
+                    </h4>
+                    {% url rawdata.help1 as rawdata_url %}
+                    {% blocktrans %}You need a <a href="{{rawdata_url}}">Raw Data</a> subscription to perform this action.{% endblocktrans %}
+                    {% blocktrans %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientic discoveries.{% endblocktrans %}
+            {% endif %}
+        </div>
+        <div class="modal-footer">
+            {% if has_rawdata_subscription %}
+                <button id="send-to-datapool" class="btn btn-primary">{% trans "Send" %}</button>
+            {% else %}
+                <a class="btn btn-primary" href="{% url rawdata.help1 %}">Sign up now!</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="send-to-sharedfolder-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Send to private shared folder" %}</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                {% blocktrans %}If this image is the result of your processing of a private shared folder, you can send it the folder so it's displayed there.{% endblocktrans %}
+            </p>
+
+            {% if has_rawdata_subscription %}
+                {% if has_sharedfolders %}
+                    <p>
+                        {% blocktrans %}Use this form to select a <strong>private shared folder</strong> you have created or have been invited to.{% endblocktrans %}
+                    </p>
+                    <form class="form-inline" id="select-sharedfolder">
+                        {{select_sharedfolder_form|as_bootstrap}}
+                    </form>
+                {% else %}
+                    <div class="alert alert-error">
+                        <h4 class="alert-heading">
+                            <i class="icon-fire"></i>
+                            {% trans "Error!" %}
+                        </h4>
+                        {% url rawdata.help1 as rawdata_url %}
+                        {% blocktrans %}You don't have access to any shared private folders.{% endblocktrans %}
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="alert alert-error">
+                    <h4 class="alert-heading">
+                        <i class="icon-fire"></i>
+                        {% trans "Error!" %}
+                    </h4>
+                    {% url rawdata.help1 as rawdata_url %}
+                    {% blocktrans %}You need a <a href="{{rawdata_url}}">Raw Data</a> subscription to perform this action.{% endblocktrans %}
+                    {% blocktrans %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientic discoveries.{% endblocktrans %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="modal-footer">
+            {% if has_rawdata_subscription %}
+                {% if has_sharedfolders %}
+                    <button id="send-to-sharedfolder" class="btn btn-primary">{% trans "Send" %}</button>
+                {% else %}
+                    <a class="close btn" data-dismiss="modal">{% trans "OK" %}</a>
+                {% endif %}
+            {% else %}
+                <a class="btn btn-primary" href="{% url rawdata.help1 %}">Sign up now!</a>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_js %}
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "ur-15649ecb-6f21-a004-8032-7cf8416c478c"}); </script>
+<script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     {% if request.user.is_authenticated %}
@@ -938,7 +962,7 @@ $(document).ready(function() {
             "http://astrob.in/{{image.id}}/"
         {% endif %}
     );
-    
+
     var clip_html = clip.getHTML(16, 16);
     $('#clip-container .flash-container').append(clip_html);
 
@@ -951,10 +975,10 @@ $(document).ready(function() {
         var content = '';
 
         if (sharing_mode == 0) {
-            $('select[name=sharing_thumbnail]').attr('disabled', 'disabled'); 
+            $('select[name=sharing_thumbnail]').attr('disabled', 'disabled');
             $('select[name=sharing_thumbnail]').closest('.selector').addClass('disabled');
         } else {
-            $('select[name=sharing_thumbnail]').removeAttr('disabled'); 
+            $('select[name=sharing_thumbnail]').removeAttr('disabled');
             $('select[name=sharing_thumbnail]').closest('.selector').removeClass('disabled');
         }
 
@@ -1128,197 +1152,6 @@ $(document).ready(function() {
 
     {% get_hit_count_javascript for image %}
 
-    var ajaxFormOptions = {
-        dataType: 'json',
-        timeout: 5000,
-        beforeSubmit: function(formData, $form, options) {
-            $loader = $form.find('.loader');
-            $button = $form.find('.btn:first-child');
-            $textarea = $form.find('textarea');
-
-            if ($textarea.val() == '')
-                return false;
-
-            $button.attr('disabled', 'disabled').addClass('disabled');
-            $loader.css('visibility', 'visible');
-        },
-        success: function(responseJson, statusText, xhr, $form) {
-            var $loader = $form.find('.loader');
-            var $button = $form.find('.btn:first-child');
-
-            $button.removeAttr('disabled').removeClass('disabled');
-            $loader.css('visibility', 'hidden');
-
-            if (responseJson.action == 'save') {
-                var $textarea = $form.find('textarea');
-                if ($form.parent().hasClass('top-level-form')) {
-                    var $parent = $('.top-level-form');
-                    var is_top_level = true;
-                    var level = 0;
-                } else {
-                    var $parent = $form.closest('.comment').parent();
-                    var is_top_level = false;
-                    var level = parseInt($form.find('input:hidden[name="level"]').val()) + 1;
-                }
-                var parent_id = responseJson['comment_id']
-                var $nocomments = $('.no-comments-yet');
-
-                $container = $('<div/>').css('margin-left', level*2 + 'em');
-                $new_comment = $('<div/>').addClass('comment').attr('id', 'c' + parent_id);
-                $container.append($new_comment);
-
-                $meta = $('<div/>').addClass('meta');
-                $author = $('<a/>').attr('href', '{% url user_page user %}').addClass('author').text('{{user.username}}');
-                $meta.append($author).append("{% trans "just now" %}");
-
-                $links = $('<div/>').addClass('links');
-                $permalink = $('<a/>').addClass('permalink').attr('href', '{% url image_detail image.id %}#c' + parent_id).text('{% trans "Link" %}');
-                $delete = $('<a/>').addClass('delete').attr('href', '#').text('{% trans "Delete" %}');
-                $edit = $('<a/>').addClass('edit').attr('href', '#').text('{% trans "Edit" %}');
-
-                $links.append($permalink).append($delete).append($edit);
-
-                var converter = Markdown.getSanitizingConverter();
-                $content = $('<div/>').addClass('content').append($('<p/>').html(converter.makeHtml($textarea.val()).replace(/\n\r?/g, '<br />')));
-
-                new_form_template = "\
-                    <form action=\"{% url image_comment_save %}\" method=\"post\">\
-                        {{comment_form.as_p|escapejs}}\
-                        <input type=\"hidden\" id=\"csrfmiddlewaretoken\" name=\"csrfmiddlewaretoken\" value=\"{{csrf_token}}\" />\
-                        <input type=\"hidden\" name=\"author\" value=\"{{user.id}}\" />\
-                        <input type=\"hidden\" name=\"image\" value=\"{{image.id}}\" />\
-                        <input type=\"hidden\" name=\"parent_id\" value=\"" + parent_id + "\" />\
-                        <input type=\"hidden\" name=\"level\" value=\"" + level + "\" />\
-                        <p>\
-                            <input class=\"btn btn-mini btn-primary\" type=\"submit\" value=\"{% trans "Save" %}\" />\
-                            <input class=\"btn btn-mini cancel\" type=\"reset\" value=\"{% trans "Cancel" %}\" />\
-                            <span class=\"loader\">\
-                                <img src=\"{{STATIC_URL}}images/ajax-loader.gif\" alt=\"\"/>\
-                            </span>\
-                            <span class=\"formatting-help\">\
-                                <a href=\"{% url faq %}#10\" target=\"_blank\">{% trans "Formatting help" %}</a>\
-                            </span>\
-                        </p>\
-                    </form>"
-
-                $new_form = $(new_form_template);
-                $new_form.ajaxForm(ajaxFormOptions);
-
-                $new_comment.append($meta)
-                            .append($content)
-                            .append($links)
-                            .append($new_form);
-
-                $textarea.val('');
-                if (!is_top_level)
-                    $form.hide();
-
-                $nocomments.remove();
-                $container.insertAfter($parent);
-
-                // Updates comment count.
-                $('.comments-number').text(parseInt($('.comments-number').text()) + 1);
-            }
-            else if (responseJson.action == 'edit') {
-                var $comment = $form.closest('.comment');
-                var $content = $comment.find('.content');
-                var $links = $comment.find('.links');
-
-                var converter = Markdown.getSanitizingConverter();
-                $content.html($('<div/>').addClass('content').append($('<p/>').html(converter.makeHtml(responseJson.comment).replace(/\n\r?/g, '<br />'))));
-                $content.show();
-                $links.show();
-
-                $form.hide();
-            }
-        }
-    };
-
-    $('.top-level-form form, .comment form').ajaxForm(ajaxFormOptions);
-    $('.comment form .cancel').live('click', function() {
-        var $comment = $(this).closest('.comment');
-        var $content = $comment.find('.content');
-        var $links = $comment.find('.links');
-        var $form = $(this).closest('form');
-
-        $form.hide();
-        $content.show();
-        $links.show();
-
-        return false;
-    });
-
-    $('.comment .permalink').live('click', function() {
-        var id = $(this).closest('.comment').find('input:hidden[name="parent_id"]').val()
-        $('.comment.hilight').removeClass('hilight');
-        $('#c' + id).addClass('hilight');
-        return true;
-    });
-
-    $('.comment .delete').live('click', function() {
-        var id = $(this).closest('.comment').find('input:hidden[name="parent_id"]').val()
-        var $content = $(this).closest('.comment').find('> .content');
-        var $self = $(this);
-
-        $.ajax({
-            url: '/image_comments/delete/' + id + '/',
-            dataType: 'json',
-            timeout: 5000,
-            cache: false,
-            success: function(data, status, xhr) {
-                if (data.deleted) {
-                    $content.addClass('deleted');
-                    $content.html('<p>{% trans "(comment deleted)" %}</p>');
-                    $self.text('{% trans 'Undelete' %}');
-                } else {
-                    var converter = Markdown.getSanitizingConverter();
-
-                    $content.removeClass('deleted');
-                    $content.html(converter.makeHtml(data.comment).replace(/\n\r?/g, '<br />'));
-                    $self.text('{% trans 'Delete' %}');
-                }
-            }
-        });
-        return false;
-    });
-
-    $('.comment .edit').live('click', function() {
-        var $comment = $(this).closest('.comment');
-        var $content = $comment.find('.content');
-        var $links = $comment.find('.links');
-        var $form = $comment.find('form');
-        var $textarea = $form.find('textarea');
-        var id = $form.find('input:hidden[name="parent_id"]').val()
-
-        $.ajax({
-            url: '/image_comments/get/' + id + '/',
-            dataType: 'json',
-            timeout: 5000,
-            success: function(data, status, xhr) {
-                $content.hide();
-                $links.hide();
-                $textarea.val(data.comment);
-                $form.attr('action', '{% url image_comment_edit %}');
-                $form.show();
-            }
-        });
-
-        return false;
-    });
-
-    $('.comment .reply').live('click', function() {
-        var $comment = $(this).closest('.comment');
-        var $form = $comment.find('form');
-        var $textarea = $form.find('textarea');
-
-        $form.attr('action', '{% url image_comment_save %}');
-        $textarea.val('');
-        $form.show();
-        $textarea.focus();
-
-        return false;
-    });
-
     astrobin_common.init(
         '{{image.user.username}}',
         {
@@ -1425,18 +1258,42 @@ $(document).ready(function() {
             }
         });
 
-        var hilighted_comment = location.hash.substr(1);
-        if (hilighted_comment) {
-            $('#' + hilighted_comment).addClass('hilight');
-            setTimeout(function() {
-                $('html, body').animate({scrollTop: $("#" + hilighted_comment).offset().top - 54}, 500);
-            }, 1000);
-        }
-
         $('#request-critique').popover({
             placement: 'bottom',
             trigger: 'hover',
             delay: {hide: 2000}
+        });
+
+        $('button#send-to-datapool').click(function(e) {
+            var selected = $('form#select-datapool select option:selected').val();
+
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                data: {image: {{image.id}}},
+                url: '/rawdata/publicdatapools/' + selected + '/add-image/',
+                success: function() {
+                    window.location.href = '/rawdata/publicdatapools/' + selected + '/';
+                }
+            });
+
+            e.preventDefault();
+        });
+
+        $('button#send-to-sharedfolder').click(function(e) {
+            var selected = $('form#select-sharedfolder select option:selected').val();
+
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                data: {image: {{image.id}}},
+                url: '/rawdata/privatesharedfolders/' + selected + '/add-image/',
+                success: function() {
+                    window.location.href = '/rawdata/privatesharedfolders/' + selected + '/';
+                }
+            });
+
+            e.preventDefault();
         });
     });
 </script>

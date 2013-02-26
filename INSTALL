@@ -8,8 +8,6 @@ sudo apt-get install \
 	git \
 	mercurial \
 	python2.7-dev \
-	mysql-server \
-	libmysqlclient-dev \
 	memcached \
 	rabbitmq-server \
 	python-pip \
@@ -78,15 +76,19 @@ pip install -r requirements.txt
 # for the notifications system
 
 
-# Set up MySQL:
-# =============
+# Set up Postgresql:
+# ==================
 
-mysql -u root -p
-create user 'astrobin'@'localhost' identified by 'h3C_U77a';
-create database astrobin character set utf8;
-use astrobin;
-grant all privileges on *.* to 'astrobin'@'localhost' identified by 'h3C_U77a';
-quit
+sudo -u postgres createuser  (n/y/n)
+sudo -u postgres createdb astrobin
+sudo -u postgres createdb astrobin_questions_en
+sudo -u postgres createdb pootle
+sudo -u postgres psql
+alter user astrobin with encrypted password 's3cr3t';
+grant all privileges on database astrobin to astrobin;
+grant all privileges on database astrobin_questions_en to astrobin;
+grant all privileges on database pootle to astrobin;
+
 
 # Initialize db
 ./scripts/syncdb.sh
@@ -201,6 +203,13 @@ AstroBin needs some groups for the affiliate program:
     * retailer-affiliate-50  (EUR 39.90) / 0.79
     * retailer-affiliate-100 (EUR 59.90) / 0.59
     * retailer-affiliate-inf (EUR 99.90) / ~0.00
+
+And some for the Raw Data platform:
+
+    * rawdata-meteor  (USD 2,90)
+    * rawdata-luna    (USD 9,90)
+    * rawdata-sol     (USD 19,90)
+    * rawdata-galaxia (USD 49,90)
 
 
 # (replace gunicorn.sh with run.sh if you want to debug)

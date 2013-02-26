@@ -8,7 +8,11 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 14:57-0500\n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2012-12-28 12:59+0100\n"
+=======
+"PO-Revision-Date: 2012-10-29 17:52+0100\n"
+>>>>>>> origin/raw-data
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
@@ -1407,6 +1411,7 @@ msgstr "heeft een review geschreven over"
 
 #: locale_extras.py:12
 msgid "created a new public data pool"
+<<<<<<< HEAD
 msgstr "maakte een nieuwe publieke gegevensbank aan"
 
 #: locale_extras.py:13
@@ -1416,6 +1421,17 @@ msgstr "voegde nieuwe data toe aan een publieke gegevensbank"
 #: locale_extras.py:14
 msgid "added a new processed image to public data pool"
 msgstr "voegde een nieuwe bewerkte foto toe aan een publieke gegevensbank"
+=======
+msgstr ""
+
+#: locale_extras.py:13
+msgid "added new data to public data pool"
+msgstr ""
+
+#: locale_extras.py:14
+msgid "added a new processed image to public data pool"
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: models.py:48
 msgid "None (All rights reserved)"
@@ -2894,6 +2910,7 @@ msgstr "Nieuwe review van materiaal in je bezit"
 
 #: management/__init__.py:153
 msgid "New data posted to public pool"
+<<<<<<< HEAD
 msgstr "Nieuwe gegevens gepost in publieke gegevensbank"
 
 #: management/__init__.py:159
@@ -2911,6 +2928,27 @@ msgstr "Nieuwe foto gepost in een gedeelde privéfolder"
 #: management/__init__.py:177
 msgid "You are invited to a shared private folder"
 msgstr "Je bent uitgenodigd in een gedeelde privéfolder"
+=======
+msgstr ""
+
+#: management/__init__.py:159
+#, fuzzy
+msgid "New image posted to public data pool"
+msgstr "Nieuwe foto van een onderwerp dat je volgt"
+
+#: management/__init__.py:165
+msgid "New data posted to shared private folder"
+msgstr ""
+
+#: management/__init__.py:171
+msgid "New image posted to shared private folder"
+msgstr ""
+
+#: management/__init__.py:177
+#, fuzzy
+msgid "You are invited to a shared private folder"
+msgstr "Je hebt een nieuw privébericht gekregen."
+>>>>>>> origin/raw-data
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -3021,6 +3059,10 @@ msgid "Home"
 msgstr "Home"
 
 #: templates/base.html:92 templates/maintenance_base.html:88
+<<<<<<< HEAD
+=======
+#, fuzzy
+>>>>>>> origin/raw-data
 msgid "Community"
 msgstr "Gemeenschap"
 
@@ -3057,7 +3099,11 @@ msgstr "Messier Marathon"
 
 #: templates/base.html:145
 msgid "Public data pools"
+<<<<<<< HEAD
 msgstr "Publieke gegevensbanken"
+=======
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/base.html:154 templates/comments.html:9
 #: templates/comments.html.py:11 templates/leaderboard.html:44
@@ -3115,6 +3161,14 @@ msgstr "AstroBin Questions (vragen)"
 msgid "AstroBin Raw Data"
 msgstr "AstroBin Raw Data"
 
+<<<<<<< HEAD
+=======
+#: templates/base.html:214
+#, fuzzy
+msgid "AstroBin Raw Data"
+msgstr "AstroBin is sociaal!"
+
+>>>>>>> origin/raw-data
 #: templates/base.html:239 templates/maintenance_base.html:221
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:7
 msgid "Contact"
@@ -3177,11 +3231,19 @@ msgstr "Grafieken"
 
 #: templates/base.html:402 templates/user/profile-subnav.html:35
 msgid "Raw data library"
+<<<<<<< HEAD
 msgstr "Raw data verzameling"
 
 #: templates/base.html:409
 msgid "Private shared folders"
 msgstr "Gedeelde privéfolders"
+=======
+msgstr ""
+
+#: templates/base.html:409
+msgid "Private shared folders"
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/base.html:418 templates/maintenance_base.html:295
 #: templates/messages/inbox.html:9
@@ -4204,6 +4266,7 @@ msgstr "Recente foto's"
 
 #: templates/index.html:55
 msgid "FIT and DSLR camera raw files"
+<<<<<<< HEAD
 msgstr "FIT en raw DSLR bestanden"
 
 #: templates/index.html:65
@@ -4214,6 +4277,16 @@ msgstr ""
 "AstroBin biedt je eveneens de mogelijkheid tot het opslaan en delen van FIT "
 "en raw DSLR-camera bestanden!"
 
+=======
+msgstr ""
+
+#: templates/index.html:65
+msgid ""
+"AstroBin offers the storage of FIT and DSLR camera raw files too, for "
+"archival and sharing purposes!"
+msgstr ""
+
+>>>>>>> origin/raw-data
 #: templates/index.html:69 templates/image/detail.html:582
 #, python-format
 msgid ""
@@ -4222,10 +4295,13 @@ msgid ""
 "your files organized, and allow you to share them with other members. <a "
 "href=\"%(rawdata_url)s\">Want to know more?</a>"
 msgstr ""
+<<<<<<< HEAD
 "<strong>AstroBin Raw Data</strong> is een platform dat toelaat om tot 500GB "
 "aan FIT en raw DSLR bestanden veilig op te slaan! Het zal je bestanden "
 "automatisch ordenen en laat toe om ze te delen met andere leden.  <a href=\"%"
 "(rawdata_url)s\">Meer weten?</a>"
+=======
+>>>>>>> origin/raw-data
 
 #: templates/index.html:102
 msgid "Image of the day"
@@ -4759,6 +4835,7 @@ msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
 msgstr ""
+<<<<<<< HEAD
 "Je hebt geen plaats meer op je Raw Data abonnement. Gelieve ofwel andere "
 "bestanden te verwijderen, of je account up te graden."
 
@@ -4777,6 +4854,25 @@ msgstr "Volgende type bestanden worden aanvaard: FIT en raw DSLR."
 #: templates/upload.html:95
 msgid "Filename"
 msgstr "Bestandsnaam"
+=======
+
+#: templates/upload.html:85
+msgid "Use the button below to choose files"
+msgstr ""
+
+#: templates/upload.html:89
+msgid "Drop your raw data here"
+msgstr ""
+
+#: templates/upload.html:91
+msgid "Accepted file types: FIT and digital camera raw files"
+msgstr ""
+
+#: templates/upload.html:95
+#, fuzzy
+msgid "Filename"
+msgstr "Suriname"
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:96 templates/popover/subject.html:14
 #: templates/subject/page.html:41
@@ -4788,6 +4884,7 @@ msgid "Status"
 msgstr "Status"
 
 #: templates/upload.html:114
+<<<<<<< HEAD
 msgid "Choose files"
 msgstr "Kies bestanden"
 
@@ -4802,27 +4899,55 @@ msgstr "Start met upload"
 #: templates/upload.html:144 templates/upload.html.py:383
 msgid "Go to your Raw Data Library."
 msgstr "Ga naar je Raw Data Verzameling."
+=======
+#, fuzzy
+msgid "Choose files"
+msgstr "Kies bestand"
+
+#: templates/upload.html:118
+msgid "Reset"
+msgstr ""
+
+#: templates/upload.html:125
+#, fuzzy
+msgid "Start upload"
+msgstr "Gepost op"
+
+#: templates/upload.html:144 templates/upload.html.py:383
+msgid "Go to your Raw Data Library."
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:157
 msgid ""
 "Your Raw Data subscription is not active, or it has expired. If you have "
 "just subscribed, please wait for a few minutes. Thanks for your patience!"
 msgstr ""
+<<<<<<< HEAD
 "Je Raw Data abonnement is niet actief of is verlopen. Als je je juist hebt "
 "geabonneerd, kan je best enkele minuten wachten. Dank voor je geduld!"
+=======
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:162
 #, python-format
 msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
 msgstr ""
+<<<<<<< HEAD
 "Ga naar de Raw Data <a href=\"%(plans_url)s\">pagina met verschillende "
 "abonnee-formules</a>."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:172
 msgid ""
 "Did you know that AstroBin can host your FIT and digital camera raw files "
 "too?"
+<<<<<<< HEAD
 msgstr "Wist je dat AstroBin ook je FIT en digitale raw bestanden kan opslaan?"
+=======
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:175
 #, python-format
@@ -4831,6 +4956,7 @@ msgid ""
 "to safely store all your raw files, and have them neatily organized for "
 "future reference!"
 msgstr ""
+<<<<<<< HEAD
 "Neem een kijkje op <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> als je je "
 "raw bestanden hier veilig en ordelijk wil bewaren!"
 
@@ -4841,18 +4967,36 @@ msgstr "Raw bestanden"
 #: templates/upload.html:303
 msgid "Upload started, please wait..."
 msgstr "Uploaden is begonnen. Gelieve te wachten..."
+=======
+
+#: templates/upload.html:266
+msgid "Raw files"
+msgstr ""
+
+#: templates/upload.html:303
+msgid "Upload started, please wait..."
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/upload.html:349
 msgid ""
 "One ore more files were ignored because they did not look like FIT or "
 "digital camera raw files."
 msgstr ""
+<<<<<<< HEAD
 "Eén of meer bestanden werden niet behandeld omdat ze niet de kenmerken van "
 "een FIT of raw bestand leken te hebben."
 
 #: templates/upload.html:382
 msgid "Upload complete!"
 msgstr "Upload gelukt!"
+=======
+
+#: templates/upload.html:382
+#, fuzzy
+msgid "Upload complete!"
+msgstr "Datum van publicatie"
+>>>>>>> origin/raw-data
 
 #: templates/wall.html:14
 msgid "Sort by"
@@ -5339,12 +5483,23 @@ msgid "Move to staging area"
 msgstr "Plaats in Ontwikkelingszone"
 
 #: templates/image/detail.html:122 templates/image/detail.html.py:818
+<<<<<<< HEAD
 msgid "Send to public data pool"
 msgstr "Stuur naar een publieke gegevensbank"
 
 #: templates/image/detail.html:129 templates/image/detail.html.py:855
 msgid "Send to private shared folder"
 msgstr "Stuur naar een gedeelde privéfolder"
+=======
+#, fuzzy
+msgid "Send to public data pool"
+msgstr "Promoveer naar Publieke Zone"
+
+#: templates/image/detail.html:129 templates/image/detail.html.py:855
+#, fuzzy
+msgid "Send to private shared folder"
+msgstr "Stuur privébericht"
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:139
 msgid "Delete original image"
@@ -5486,6 +5641,10 @@ msgstr ""
 "<strong>%(lang)s</strong>."
 
 #: templates/image/detail.html:568
+<<<<<<< HEAD
+=======
+#, fuzzy
+>>>>>>> origin/raw-data
 msgid "What is this?"
 msgstr "Wat is dit?"
 
@@ -5498,10 +5657,15 @@ msgstr ""
 "input of analyse kan vragen omtrent je foto hiernaast."
 
 #: templates/image/detail.html:569
+<<<<<<< HEAD
+=======
+#, fuzzy
+>>>>>>> origin/raw-data
 msgid "Learn more about AstroBin Questions."
 msgstr "Leer meer over AstroBin Questions."
 
 #: templates/image/detail.html:572
+<<<<<<< HEAD
 msgid "Request critique"
 msgstr "Vraag om kritiek"
 
@@ -5509,6 +5673,16 @@ msgstr "Vraag om kritiek"
 msgid "Introducing AstroBin Raw Data"
 msgstr "Een introductie over AstroBin Raw Data"
 
+=======
+#, fuzzy
+msgid "Request critique"
+msgstr "Vraag van"
+
+#: templates/image/detail.html:579
+msgid "Introducing AstroBin Raw Data"
+msgstr ""
+
+>>>>>>> origin/raw-data
 #: templates/image/detail.html:600 templates/image/detail.html.py:626
 msgid "Final"
 msgstr "Finaal"
@@ -5587,15 +5761,21 @@ msgid ""
 "If this image is the result of your processing of a public data pool, you "
 "can send it the pool so it's displayed there."
 msgstr ""
+<<<<<<< HEAD
 "Als deze foto het resultaat is van het bewerken van de beelden uit een "
 "publieke gegevensbank, dan kan je ze naar die pool sturen zodat ze daar "
 "wordt getoond."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:827
 msgid "Use this form to select an existing <strong>public data pool</strong>."
 msgstr ""
+<<<<<<< HEAD
 "Gebruik dit formulier om een bestaande <strong>publieke "
 "gegevensbank</strong> te selecteren."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:839 templates/image/detail.html.py:887
 #, python-format
@@ -5603,8 +5783,11 @@ msgid ""
 "You need a <a href=\"%(rawdata_url)s\">Raw Data</a> subscription to perform "
 "this action."
 msgstr ""
+<<<<<<< HEAD
 "Je hebt een <a href=\"%(rawdata_url)s\">Raw Data</a> abonnement nodig om deze "
 "actie te kunnen uitvoeren."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:840 templates/image/detail.html.py:888
 #, python-format
@@ -5614,26 +5797,33 @@ msgid ""
 "organized, but being part of it also means that you support AstroBin and can "
 "perhaps contribute your raw files to scientic discoveries."
 msgstr ""
+<<<<<<< HEAD
 "Het <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is in eerste instantie "
 "een veilige manier om een backup te hebben van je raw bestanden terwijl ze "
 "makkelijk beheerbaar blijven. Maar het betekent ook dat je AstroBin steunt "
 "en dat je raw bestanden misschien kunnen bijdragen aan wetenschappelijke "
 "ontdekkingen."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:859
 msgid ""
 "If this image is the result of your processing of a private shared folder, "
 "you can send it the folder so it's displayed there."
 msgstr ""
+<<<<<<< HEAD
 "Als deze foto het resultaat is van het bewerken van de beelden uit een "
 "gedeelde privéfolder, dan kan je ze daarheen sturen zodat ze daar wordt "
 "getoond."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:865
 msgid ""
 "Use this form to select a <strong>private shared folder</strong> you have "
 "created or have been invited to."
 msgstr ""
+<<<<<<< HEAD
 "Gebruik dit formulier om een <strong>gedeelde privéfolder</strong> te kiezen "
 "die je zelf hebt gemaakt of waar je een uitnodiging voor hebt ontvangen."
 
@@ -5644,6 +5834,16 @@ msgstr "Er zijn geen gedeelde privéfolders waar je toegang tot hebt"
 #: templates/image/detail.html:897
 msgid "OK"
 msgstr "OK"
+=======
+
+#: templates/image/detail.html:877
+msgid "You don't have access to any shared private folders."
+msgstr ""
+
+#: templates/image/detail.html:897
+msgid "OK"
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/image/detail.html:955
 msgid "Copied!"
@@ -6892,6 +7092,7 @@ msgid ""
 "\n"
 "Visit the folder at the following url: %(folder_url)s"
 msgstr ""
+<<<<<<< HEAD
 "Je hebt toelating gekregen om volgende gedeelde privéfolder te gebruiken: \"%"
 "(folder_name)s\".\n"
 "\n"
@@ -6902,164 +7103,298 @@ msgstr ""
 
 #: templates/notification/rawdata_invited_to_private_folder/notice.html:2
 #, python-format
+=======
+
+#: templates/notification/rawdata_invited_to_private_folder/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(object_url)s\">Je bent uitgenodigd op volgende gedeelde "
 "privéfolder: <strong>\"%(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/short.html:2
 #, python-format
+=======
+"<a href=\"%(object_url)s\">Je volgt <strong>%(object)s</strong> niet meer.</"
+"a>"
+
+#: templates/notification/rawdata_invited_to_private_folder/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(object_url)s\">Je bent uitgenodigd op volgende gedeelde "
 "privéfolder: <strong>\"%(folder_name)s.\"</strong></a>"
+=======
+"<a href=\"%(object_url)s\">Je volgt <strong>%(object)s</strong> niet meer.</"
+"a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_invited_to_private_folder/short.txt:2
 #, python-format
 msgid "You are invited you to the private shared folder: %(folder_name)s"
+<<<<<<< HEAD
 msgstr "Je bent uitgenodigd op volgende gedeelde privéfolder: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
 #, python-format
+=======
+msgstr ""
+
+#: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added a new processed image to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
+<<<<<<< HEAD
 "%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
 "gedeelde privéfolder: \"%(folder_name)s\". Je kan ze bekijken op volgende url: "
 "%(folder_url)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
 #, python-format
+=======
+"%(originator)s heeft een nieuwe revisie gepost! Hier te bekijken: "
+"%(object_url)s"
+
+#: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft een nieuwe "
 "bewerkte foto toegevoegd aan volgende gedeelde privéfolder: <strong>\"%"
 "(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
 #, python-format
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> heeft een nieuwe discussie "
+"opgestart over een item dat jij ook bezit!</a>"
+
+#: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>heeft een nieuwe "
 "bewerkte foto toegevoegd aan volgende gedeelde privéfolder: <strong>\"%"
 "(folder_name)s.\"</a>"
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> heeft je foto als favoriet "
+"gemerkt!</a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.txt:2
 #, python-format
 msgid "New processed image in private shared folder: %(folder_name)s"
+<<<<<<< HEAD
 msgstr "Nieuw bewerkt beeld in gedeelde privéfolder: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
 #, python-format
+=======
+msgstr ""
+
+#: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added a new processed image to the public data pool: "
 "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
 msgstr ""
+<<<<<<< HEAD
 "%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
 "publieke gegevensbank: \"%(pool_name)s\". Hier te bekijken: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
 #, python-format
+=======
+"%(originator)s heeft een nieuwe revisie gepost! Hier te bekijken: "
+"%(object_url)s"
+
+#: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft een nieuwe "
 "bewerkte foto toegevoegd aan volgende publieke gegevensbank: <strong>\"%"
 "(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, python-format
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> heeft een nieuwe discussie "
+"opgestart over een item dat jij ook bezit!</a>"
+
+#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft een nieuwe "
 "bewerkte foto toegevoegd aan volgende publieke gegevensbank: <strong>\"%"
 "(pool_name)s.\"</a>"
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> heeft een nieuwe discussie "
+"opgestart over een item dat jij ook bezit!</a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
 msgid "New processed image in public data pool: %(pool_name)s"
+<<<<<<< HEAD
 msgstr "Nieuw bewerkt beeld in publieke gegevensbank: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_pool/full.txt:2
 #, python-format
+=======
+msgstr ""
+
+#: templates/notification/rawdata_posted_to_pool/full.txt:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
 "Check it out at the following url: %(pool_url)s"
 msgstr ""
+<<<<<<< HEAD
 "%(user_name)s heeft nieuwe data toegevoegd aan de publieke gegevensbank: \"%"
 "(pool_name)s\". Je kan ze raadplegen via volgende url: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
 #, python-format
+=======
+"%(user)s heeft op je commentaar geantwoord. Je kan het hier lezen: %(url)s"
+
+#: templates/notification/rawdata_posted_to_pool/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
 "toegevoegd aan de publieke gegevensbank: <strong>\"%"
 "(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, python-format
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> heeft een nieuwe discussie "
+"opgestart over een item dat jij ook bezit!</a>"
+
+#: templates/notification/rawdata_posted_to_pool/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
 "toegevoegd aan volgende publieke gegevensbank: <strong>\"%(pool_name)s.\"</a>"
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> heeft een nieuwe discussie "
+"opgestart over een item dat jij ook bezit!</a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
 #, python-format
 msgid "New data in public pool: %(pool_name)s"
+<<<<<<< HEAD
 msgstr "Nieuwe data in publieke gegevensbank: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/full.txt:2
 #, python-format
+=======
+msgstr ""
+
+#: templates/notification/rawdata_posted_to_private_folder/full.txt:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added new data to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
+<<<<<<< HEAD
 "%(user_name)s heeft nieuwe data toegevoegd aan volgende gedeelde "
 "privéfolder: \"%(folder_name)s\". Je kan ze bekijken via: %(folder_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
 #, python-format
+=======
+"AstroBin heeft een nieuw blogbericht gepost: \"%(object)s\".\n"
+"\n"
+"Je kan het nalezen op de volgende URL: %(object_url)s"
+
+#: templates/notification/rawdata_posted_to_private_folder/notice.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
 "toegevoegd aan volgende gedeelde privéfolder: <strong>\"%"
 "(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.html:2
 #, python-format
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> heeft je foto als favoriet "
+"gemerkt!</a>"
+
+#: templates/notification/rawdata_posted_to_private_folder/short.html:2
+#, fuzzy, python-format
+>>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
 msgstr ""
+<<<<<<< HEAD
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
 "toegevoegd aan volgende gedeelde privéfolder: <strong>\"%(folder_name)s.\"</a>"
+=======
+"<a href=\"%(url)s\"><strong>%(user)s</strong> heeft je foto als favoriet "
+"gemerkt!</a>"
+>>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_posted_to_private_folder/short.txt:2
 #, python-format
 msgid "New data in private shared folder: %(folder_name)s"
+<<<<<<< HEAD
 msgstr "Nieuwe dfata in gedeelde privéfolder: %(folder_name)s"
+=======
+msgstr ""
+>>>>>>> origin/raw-data
 
 #: templates/notification/received_email/full.txt:2
 msgid ""
@@ -7204,8 +7539,11 @@ msgid ""
 "Hi,\n"
 "please use the following link to activate your AstroBin account:"
 msgstr ""
+<<<<<<< HEAD
 "Hoi,\n"
 "gelieve volgende link te gebruiken om je AstroBin account te activeren:"
+=======
+>>>>>>> origin/raw-data
 
 #: templates/registration/activation_email.txt:7
 #, python-format
@@ -7217,8 +7555,11 @@ msgid ""
 "Sincerely,\n"
 "the AstroBin staff."
 msgstr ""
+<<<<<<< HEAD
 "Met vriendelijke groeten,\n"
 "het AstroBin team."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
@@ -7279,27 +7620,42 @@ msgstr "Resetten van het paswoord op %(site_name)s"
 
 #: templates/registration/registration_complete.html:6
 msgid "Registration completed"
+<<<<<<< HEAD
 msgstr "Registratie voltooid"
 
 #: templates/registration/registration_complete.html:7
 msgid "You are now registered"
 msgstr "Je bent nu geregistreerd"
+=======
+msgstr ""
+
+#: templates/registration/registration_complete.html:7
+#, fuzzy
+msgid "You are now registered"
+msgstr "Je hebt geen verzoeken."
+>>>>>>> origin/raw-data
 
 #: templates/registration/registration_complete.html:12
 msgid ""
 "To confirm your e-mail address, we have sent you an e-mail with an "
 "activation link."
 msgstr ""
+<<<<<<< HEAD
 "Om het bestaan van je e-mail adres te bevestigen, hebben we je een bericht "
 "gestuurd met een activatie-link."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/registration/registration_complete.html:16
 msgid ""
 "If you don't receive the e-mail within a few minutes, remember to check your "
 "spam folder."
 msgstr ""
+<<<<<<< HEAD
 "Als je de email niet binnen enkele minuten hebt ontvangen, controleer dan "
 "eerst je spam-folder."
+=======
+>>>>>>> origin/raw-data
 
 #: templates/registration/registration_form.html:5
 #: templates/registration/registration_form.html:8

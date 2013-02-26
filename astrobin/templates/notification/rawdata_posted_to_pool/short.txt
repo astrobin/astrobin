@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}New data in public pool: {{pool_name}}{% endblocktrans %}

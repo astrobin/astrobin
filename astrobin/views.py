@@ -12,6 +12,7 @@ from django.views.decorators.cache import never_cache
 from django.core.urlresolvers import reverse
 from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -45,6 +46,10 @@ import operator
 import re
 import unicodedata
 
+from nested_comments.models import NestedComment
+from rawdata.forms import PublicDataPool_SelectExistingForm, PrivateSharedFolder_SelectExistingForm
+from rawdata.models import PrivateSharedFolder
+
 from models import *
 from forms import *
 from management import NOTICE_TYPES
@@ -61,14 +66,14 @@ import pytz
 
 # need to translate to a non-naive timezone, even if timezone == settings.TIME_ZONE, so we can compare two dates
 def to_user_timezone(date, profile):
-    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE               
+    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
     return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(timezone))
-    
+
 def to_system_timezone(date, profile):
-    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE               
+    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
     return date.replace(tzinfo=pytz.timezone(timezone)).astimezone(pytz.timezone(settings.TIME_ZONE))
-    
-def now_timezone():   
+
+def now_timezone():
     return datetime.datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
@@ -95,7 +100,7 @@ def valueReader(source, field):
         value += source[as_field]
     if field in source:
         value += ',' + source[field]
-        
+
     if not (as_field in source or field in source):
         return [], ""
 
@@ -164,10 +169,11 @@ def index(request):
     profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
+        non_wip_image_ids = [str(x) for x in Image.objects.filter(is_wip = False).values_list('id', flat = True)]
 
         response_dict['global_actions'] = Action.objects.exclude(
             target_content_type = Image,
-            actions_with_astrobin_image_as_target__is_wip = True)[:actions_n],
+            target_object_id__in = non_wip_image_ids)[:actions_n],
 
         response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n], #exclude(authors__username__in = 'astrobin')
 
@@ -217,7 +223,7 @@ def index(request):
         response_dict['gear_list'] = gear_list
 
     return object_list(
-        request, 
+        request,
         queryset = Image.objects
             .filter(is_stored = True, is_wip = False, featured_gear = None)
             .order_by('-uploaded'),
@@ -230,7 +236,7 @@ def index(request):
 @require_GET
 def expore_choose(request):
     return render_to_response(
-        'explore_choose.html', {}, 
+        'explore_choose.html', {},
         context_instance = RequestContext(request))
 
 
@@ -298,7 +304,7 @@ def wall(request):
         sqs = sqs.filter(subject_type = 600)
 
     return object_list(
-        request, 
+        request,
         queryset=sqs,
         template_name='wall.html',
         template_object_name='image',
@@ -420,7 +426,7 @@ def popular(request):
         'most_popular.html',
         response_dict,
         context_instance = RequestContext(request))
-    
+
 
 @require_GET
 def messier(request):
@@ -432,7 +438,7 @@ def messier(request):
     }
 
     return object_list(
-        request, 
+        request,
         queryset=queryset,
         template_name='messier_marathon.html',
         template_object_name='object',
@@ -537,7 +543,7 @@ def fits(request):
     }
 
     return object_list(
-        request, 
+        request,
         queryset=qs,
         template_name='fits.html',
         template_object_name='image',
@@ -597,7 +603,11 @@ def image_detail(request, id, r):
 
     from moon import MoonPhase;
 
-    already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
+    if request.user.is_authenticated():
+        already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
+    else:
+        already_voted = False
+
     ratings = image.rating.get_ratings()
     votes = len(ratings)
     from votes import index
@@ -670,7 +680,7 @@ def image_detail(request, id, r):
                 if a.filter:
                     key = "filter(%s)" % a.filter.get_name()
                 if a.iso:
-                    key += '-ISO(%d)' % a.iso 
+                    key += '-ISO(%d)' % a.iso
                 if a.sensor_cooling:
                     key += '-temp(%d)' % a.sensor_cooling
                 if a.binning:
@@ -767,7 +777,7 @@ def image_detail(request, id, r):
             resized_size = image.w
 
     subjects = image.subjects.all()
-    subjects_limit = 5 
+    subjects_limit = 5
 
     licenses = (
         (0, 'cc/c.png',           LICENSE_CHOICES[0][1]),
@@ -831,12 +841,17 @@ def image_detail(request, id, r):
 
                      'solar_system_main_subject_id': image.solar_system_main_subject,
                      'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
-                     'comment_form': CommentForm(),
-                     'comments': Comment.objects.filter(image = image),
+                     'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
                      'preferred_language': preferred_language,
                      'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0 if request.user.is_authenticated() else False,
                      'times_favorited': Favorite.objects.filter(image = image).count(),
                      'plot_overlay_left' : (settings.RESIZED_IMAGE_SIZE - image.w) / 2 if image.w < settings.RESIZED_IMAGE_SIZE else 0,
+
+                     'select_datapool_form': PublicDataPool_SelectExistingForm(),
+                     'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = request.user) if request.user.is_authenticated() else None,
+                     'has_sharedfolders': PrivateSharedFolder.objects.filter(
+                        Q(creator = request.user) |
+                        Q(users = request.user)).count() > 0 if request.user.is_authenticated() else False,
                     }
 
     return object_detail(
@@ -892,9 +907,34 @@ def image_get_rating(request, image_id):
 
 @login_required
 def image_upload(request):
-    """Create new image"""
-    response_dict = {}
-    response_dict['upload_form'] = ImageUploadForm()
+    from rawdata.utils import (
+        user_has_subscription,
+        user_has_active_subscription,
+        user_has_inactive_subscription,
+        user_is_over_limit,
+        user_byte_limit,
+        user_used_percent,
+        user_progress_class,
+        supported_raw_formats,
+    )
+
+    has_sub       = user_has_subscription(request.user)
+    has_act_sub   = has_sub and user_has_active_subscription(request.user)
+    has_inact_sub = has_sub and user_has_inactive_subscription(request.user)
+    is_over_limit = has_act_sub and user_is_over_limit(request.user)
+
+    response_dict = {
+        'upload_form': ImageUploadForm(),
+        'has_sub': has_sub,
+        'has_act_sub': has_act_sub,
+        'has_inact_sub': has_inact_sub,
+        'is_over_limit': is_over_limit,
+
+        'byte_limit': user_byte_limit(request.user) if has_sub else 0,
+        'used_percent': user_used_percent(request.user) if has_sub else 100,
+        'progress_class': user_progress_class(request.user) if has_sub else '',
+        'supported_raw_formats': supported_raw_formats(),
+    }
 
     return render_to_response(
         "upload.html",
@@ -1485,7 +1525,7 @@ def image_edit_save_license(request):
 @login_required
 @require_GET
 def image_delete(request, id):
-    image = get_object_or_404(Image, pk=id) 
+    image = get_object_or_404(Image, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1498,7 +1538,7 @@ def image_delete(request, id):
 @login_required
 @require_GET
 def image_delete_revision(request, id):
-    revision = get_object_or_404(ImageRevision, pk=id) 
+    revision = get_object_or_404(ImageRevision, pk=id)
     image = revision.image
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -1663,7 +1703,7 @@ def user_page(request, username):
                 acq = Acquisition.objects.filter(image__user = user)
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
 
-                k_list = [] 
+                k_list = []
                 smart_albums.append(k_list)
 
                 for y in years:
@@ -1683,7 +1723,7 @@ def user_page(request, username):
                     (Q(subject_type__lt = 500) | Q(subject_type = 600)) &
                     (Q(acquisition = None) | Q(acquisition__date = None))).distinct():
                     k_dict[l]['images'].append(i)
-               
+
                 sqs = Image.objects.none()
         elif subsection == 'gear':
             from templatetags.tags import gear_name
@@ -1930,7 +1970,7 @@ def user_page_card(request, username):
     if span == "0 " + _("minutes"):
         member_since = _("seconds ago")
     else:
-        member_since = _("%s ago") % span 
+        member_since = _("%s ago") % span
 
     last_login = user.last_login
     if request.user.is_authenticated():
@@ -2399,7 +2439,7 @@ def user_profile_flickr_import(request):
         # If we made it this far (it's a GET request), it means that we
         # are authenticated with flickr. Let's fetch the sets and send them to
         # the template.
-        
+
         # Hole shit, does it have to be so insane to get the info on the
         # authenticated user?
         nsid = flickr.urls_getUserProfile().find('user').attrib['nsid']
@@ -2425,7 +2465,7 @@ def user_profile_flickr_import(request):
 
                 title = info.find('title').text
                 description = info.find('description').text
- 
+
                 # Attempt to find the largest image
                 found_size = None
                 for label in ['Square', 'Thumbnail', 'Small', 'Medium', 'Medium640', 'Large', 'Original']:
@@ -2703,7 +2743,7 @@ def notifications(request):
         n.is_unseen()
 
     return object_list(
-        request, 
+        request,
         queryset=notification.Notice.objects.filter(user=request.user),
         template_name='notification/all.html',
         template_object_name='notification')
@@ -2757,7 +2797,7 @@ def bring_to_attention(request, id):
         response_dict,
         context_instance = RequestContext(request))
 
-  
+
 @login_required
 @require_POST
 def bring_to_attention_process(request):
@@ -3183,117 +3223,6 @@ def nightly(request):
         })
 
 
-@require_POST
-@login_required
-def image_comment_save(request):
-    form = CommentForm(data = request.POST)
-
-    if form.is_valid():
-        author = User.objects.get(id = form.data['author'])
-        image = Image.objects.get(id = form.data['image'])
-        if request.user != author:
-            return HttpResponseForbidden()
-
-        comment = form.save(commit = False)
-        comment.author = author
-        comment.image = image
-        if form.data['parent_id'] != '':
-            comment.parent = Comment.objects.get(id = form.data['parent_id'])
-
-        comment.save()
-
-        notification = 'new_comment'
-        recipient = image.user
-        url = '%s/%d#c%d' % (settings.ASTROBIN_BASE_URL, image.id, comment.id)
-        if comment.parent:
-            notification = 'new_comment_reply'
-            recipient = comment.parent.author
-
-        if recipient != author:
-            push_notification(
-                [recipient], notification,
-                {
-                    'url': url,
-                    'user': author,
-                }
-            )
-                
-        response_dict = {
-            'success': True,
-            'comment_id': comment.id,
-            'comment': comment.comment,
-            'action': 'save',
-        }
-        return HttpResponse(
-            simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
-
-    return ajax_fail()
-
-
-@require_GET
-@login_required
-def image_comment_delete(request, id):
-    comment = get_object_or_404(Comment, id = id)
-    if comment.author != request.user:
-        return HttpResponseForbidden()
-
-    # NOTE: this function undeletes too!
-    comment.is_deleted = not comment.is_deleted
-    comment.save()
-
-    response_dict = {
-        'success': True,
-        'deleted': comment.is_deleted,
-        'comment': comment.comment,
-    }
-    return HttpResponse(
-        simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
-
-
-@require_GET
-@login_required
-def image_comment_get(request, id):
-    comment = get_object_or_404(Comment, id = id)
-
-    response_dict = {
-        'success': True,
-        'comment': comment.comment,
-    }
-    return HttpResponse(
-        simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
-
-
-@require_POST
-@login_required
-def image_comment_edit(request):
-    form = CommentForm(data = request.POST)
-
-    if form.is_valid():
-        author = User.objects.get(id = form.data['author'])
-        image = Image.objects.get(id = form.data['image'])
-        if request.user != author:
-            return HttpResponseForbidden()
-
-        comment = Comment.objects.get(id = form.data['parent_id'])
-        comment.comment = form.cleaned_data['comment']
-        comment.save()
-
-        response_dict = {
-            'success': True,
-            'comment_id': comment.id,
-            'comment': comment.comment,
-            'action': 'edit',
-        }
-        return HttpResponse(
-            simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
-
-    return ajax_fail()
-
-
 @require_GET
 @login_required
 @never_cache
@@ -3633,7 +3562,7 @@ def user_popover_ajax(request, username):
     if span == "0 " + _("minutes"):
         member_since = _("seconds ago")
     else:
-        member_since = _("%s ago") % span 
+        member_since = _("%s ago") % span
 
     html = render_to_string(template,
         {
@@ -3762,7 +3691,6 @@ def gear_page(request, id, slug):
 
     show_commercial = (gear.commercial and gear.commercial.is_paid) or (gear.commercial and gear.commercial.producer == request.user)
 
-    from django.contrib.contenttypes.models import ContentType
     return object_detail(
         request,
         queryset = Gear.objects.all(),
@@ -3774,8 +3702,7 @@ def gear_page(request, id, slug):
             'small_size': settings.SMALL_THUMBNAIL_SIZE,
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
             'reviews': ReviewedItem.objects.filter(gear = gear),
-            'comment_form': CommentForm(),
-            'comments': GearComment.objects.filter(gear = gear),
+            'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
             'images_count': Image.by_gear(gear).count(),
             'attributes': [
@@ -4132,7 +4059,7 @@ def gear_review_save(request):
                 'user': review.user,
             }
         )
-       
+
         response_dict = {
             'success': True,
             'score': review.score,
@@ -4145,132 +4072,10 @@ def gear_review_save(request):
     return ajax_fail()
 
 
-@require_POST
-@login_required
-def gear_comment_save(request):
-    form = GearCommentForm(data = request.POST)
-
-    if form.is_valid():
-        author = User.objects.get(id = form.data['author'])
-        gear, gear_type = get_correct_gear(form.data['gear_id'])
-        if request.user != author:
-            return HttpResponseForbidden()
-
-        comment = form.save(commit = False)
-        comment.author = author
-        comment.gear = gear
-        if form.data['parent_id'] != '':
-            comment.parent = GearComment.objects.get(id = form.data['parent_id'])
-
-        comment.save()
-
-        user_attr_lookup = {
-            'Telescope': 'telescopes',
-            'Camera': 'cameras',
-            'Mount': 'mounts',
-            'FocalReducer': 'focal_reducers',
-            'Software': 'software',
-            'Filter': 'filters',
-            'Accessory': 'accessories',
-        }
-
-        url = '%s/gear/%d#c%d' % (settings.ASTROBIN_BASE_URL, gear.id, comment.id)
-        if not comment.parent:
-            recipients = [x.user for x in UserProfile.objects.filter(
-                **{user_attr_lookup[gear_type]: gear})]
-            notification = 'new_gear_discussion'
-        else:
-            notification = 'new_comment_reply'
-            recipients = [comment.parent.author]
-
-        push_notification(
-            recipients, notification,
-            {
-                'url': url,
-                'user': author,
-            }
-        )
-                
-        response_dict = {
-            'success': True,
-            'comment_id': comment.id,
-            'comment': comment.comment,
-            'action': 'save',
-        }
-        return HttpResponse(
-            simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
-
-    return ajax_fail()
-
-
-@require_GET
-@login_required
-def gear_comment_delete(request, id):
-    comment = get_object_or_404(GearComment, id = id)
-    if comment.author != request.user:
-        return HttpResponseForbidden()
-
-    # NOTE: this function undeletes too!
-    comment.is_deleted = not comment.is_deleted
-    comment.save()
-
-    response_dict = {
-        'success': True,
-        'deleted': comment.is_deleted,
-        'comment': comment.comment,
-    }
-    return HttpResponse(
-        simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
-
-
-@require_GET
-@login_required
-def gear_comment_get(request, id):
-    comment = get_object_or_404(GearComment, id = id)
-
-    response_dict = {
-        'success': True,
-        'comment': comment.comment,
-    }
-    return HttpResponse(
-        simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
-
-
-@require_POST
-@login_required
-def gear_comment_edit(request):
-    form = GearCommentForm(data = request.POST)
-
-    if form.is_valid():
-        author = User.objects.get(id = form.data['author'])
-        gear = Gear.objects.get(id = form.data['gear_id'])
-        if request.user != author:
-            return HttpResponseForbidden()
-
-        comment = GearComment.objects.get(id = form.data['parent_id'])
-        comment.comment = form.cleaned_data['comment']
-        comment.save()
-
-        response_dict = {
-            'success': True,
-            'comment_id': comment.id,
-            'comment': comment.comment,
-            'action': 'edit',
-        }
-        return HttpResponse(
-            simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
-
-    return ajax_fail()
-
-
 @require_GET
 def activities(request):
     return object_list(
-        request, 
+        request,
         queryset = Action.objects.all(),
         template_name = 'activities.html',
         template_object_name = 'global_action',
@@ -4420,7 +4225,7 @@ def commercial_products_merge(request, from_id, to_id):
         }),
         mimetype = 'application/javascript')
 
-            
+
 @require_GET
 @login_required
 @user_passes_test(lambda u: user_is_producer(u))
@@ -4529,7 +4334,7 @@ def retailed_products_claim(request, id):
             'images': gear_images(gear),
             'is_merge': form.cleaned_data['merge_with'] != '',
         }),
-        mimetype = 'application/javascript')   
+        mimetype = 'application/javascript')
 
 
 @require_GET
@@ -4644,8 +4449,8 @@ def retailed_products_edit(request, id):
 @require_GET
 def comments(request):
     return object_list(
-        request, 
-        queryset = Comment.objects.all().filter(is_deleted = False, image__is_wip = False).order_by('-added'),
+        request,
+        queryset = NestedComment.objects.all().filter(deleted = False).order_by('-updated'),
         template_name = 'comments.html',
         template_object_name = 'comment',
         paginate_by = 100,
@@ -4655,11 +4460,12 @@ def comments(request):
 @require_GET
 def reviews(request):
     return object_list(
-        request, 
+        request,
         queryset = ReviewedItem.objects.all().order_by('-date_added'),
         template_name = 'reviews.html',
         template_object_name = 'review',
         paginate_by = 100,
         extra_context = {
         })
+
 

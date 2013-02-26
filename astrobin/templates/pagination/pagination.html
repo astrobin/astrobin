@@ -1,5 +1,7 @@
 {% if is_paginated %}
 {% load i18n %}
+{% load common_tags %}
+
 <ul>
     {% if page_obj.has_previous %}
         <li>

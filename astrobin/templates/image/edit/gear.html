@@ -114,7 +114,7 @@
                         $select.multiselect('selectNone');
 
                         var ids = data[attr];
-                        for (var i in ids) {
+                        for (var i = 0; i < ids.length; i++) {
                             var text = $select.find('option[value=' + ids[i] +']').text();
                             (function(a, b) {
                                 setTimeout(function() {

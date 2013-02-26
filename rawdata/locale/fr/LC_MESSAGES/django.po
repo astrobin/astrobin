@@ -1,0 +1,1017 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-29 09:13-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: folders.py:82 models.py:214 models.py:282
+#: templates/rawdata/privatesharedfolder_detail.html:84
+#: templates/rawdata/privatesharedfolder_form.html:20
+#: templates/rawdata/privatesharedfolder_list.html:37
+#: templates/rawdata/publicdatapool_detail.html:62
+#: templates/rawdata/publicdatapool_form.html:20
+#: templates/rawdata/publicdatapool_list.html:32
+msgid "Name"
+msgstr ""
+
+#: folders.py:92 templates/rawdata/_folder_dropdown.html:14
+#: templates/rawdata/_images.html:18 templates/rawdata/library.html:65
+#: templates/rawdata/rawimage_detail.html:15
+msgid "Type"
+msgstr ""
+
+#: folders.py:117 templates/rawdata/_folder_dropdown.html:28
+msgid "Upload date"
+msgstr ""
+
+#: folders.py:141 templates/rawdata/_folder_dropdown.html:21
+#: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
+msgid "Acquisition date"
+msgstr ""
+
+#: folders.py:166 templates/rawdata/_folder_dropdown.html:35
+#: templates/rawdata/library.html:89 templates/rawdata/rawimage_detail.html:19
+msgid "Camera"
+msgstr ""
+
+#: folders.py:190 templates/rawdata/_folder_dropdown.html:42
+#: templates/rawdata/library.html:97
+msgid "Telescope or lens"
+msgstr ""
+
+#: folders.py:214 templates/rawdata/_folder_dropdown.html:49
+#: templates/rawdata/library.html:105
+msgid "Filter"
+msgstr ""
+
+#: folders.py:238 templates/rawdata/_folder_dropdown.html:56
+#: templates/rawdata/library.html:113
+msgid "Subject"
+msgstr ""
+
+#: folders.py:262 templates/rawdata/_folder_dropdown.html:63
+#: templates/rawdata/library.html:121
+#: templates/rawdata/rawimage_detail.html:20
+msgid "Temperature"
+msgstr ""
+
+#: forms.py:25
+msgid "File type is not supported"
+msgstr ""
+
+#: forms.py:102
+msgid "Users"
+msgstr ""
+
+#: forms.py:103
+msgid "A list of users you want to invite. Use a comma to separate them."
+msgstr ""
+
+#: models.py:43 templatetags/rawdata_tags.py:15
+msgid "Unknown"
+msgstr ""
+
+#: models.py:44
+msgid "Light"
+msgstr ""
+
+#: models.py:45
+msgid "Offset/Bias"
+msgstr ""
+
+#: models.py:46
+msgid "Dark"
+msgstr ""
+
+#: models.py:47
+msgid "Flat"
+msgstr ""
+
+#: models.py:215
+msgid ""
+"A public name for this pool. Be descriptive, include the name of the "
+"celestial object and a target focal length in millimeters."
+msgstr ""
+
+#: models.py:219 models.py:287
+#: templates/rawdata/privatesharedfolder_list.html:38
+#: templates/rawdata/publicdatapool_list.html:33
+msgid "Description"
+msgstr ""
+
+#: models.py:220
+msgid "Describe the goals and terms of this pool."
+msgstr ""
+
+#: models.py:283
+msgid ""
+"A name for this folder. Be descriptive, so that the folder can be quickly "
+"recognized by the name."
+msgstr ""
+
+#: models.py:288
+msgid "Describe the goals of this folder."
+msgstr ""
+
+#: signal_handlers.py:18
+msgid ""
+"You cannot downgrade to this plan because your files would not fit in the "
+"allocated space. Please delete some files first."
+msgstr ""
+
+#: templates/rawdata/_browser_js.html:20 templates/rawdata/_images.html:14
+msgid "Select all"
+msgstr ""
+
+#: templates/rawdata/_browser_js.html:40
+msgid "Reset selection"
+msgstr ""
+
+#: templates/rawdata/_browser_js.html:50 templates/rawdata/_images.html:41
+#: templates/rawdata/privatesharedfolder_detail.html:142
+#: templates/rawdata/publicdatapool_detail.html:111
+#: templates/rawdata/temporaryarchive_detail.html:24
+msgid "Download"
+msgstr ""
+
+#: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
+msgid "Preprocess"
+msgstr ""
+
+#: templates/rawdata/_browser_js.html:63
+msgid "Share"
+msgstr ""
+
+#: templates/rawdata/_browser_js.html:70
+#: templates/rawdata/privatesharedfolder_detail.html:8
+msgid "Private shared folder"
+msgstr ""
+
+#: templates/rawdata/_browser_js.html:74
+#: templates/rawdata/publicdatapool_detail.html:8
+msgid "Public data pool"
+msgstr ""
+
+#: templates/rawdata/_browser_js.html:80 templates/rawdata/_images.html:44
+#: templates/rawdata/privatesharedfolder_detail.html:46
+#: templates/rawdata/privatesharedfolder_detail.html:184
+#: templates/rawdata/privatesharedfolder_list.html:92
+msgid "Delete"
+msgstr ""
+
+#: templates/rawdata/_folder_dropdown.html:7
+#: templates/rawdata/library.html:129
+msgid "Smart folders"
+msgstr ""
+
+#: templates/rawdata/_folders.html:12
+msgid "Files"
+msgstr ""
+
+#: templates/rawdata/_images.html:19 templates/rawdata/library.html:73
+#: templates/rawdata/privatesharedfolder_detail.html:87
+#: templates/rawdata/privatesharedfolder_form.html:22
+#: templates/rawdata/publicdatapool_detail.html:65
+#: templates/rawdata/publicdatapool_form.html:22
+#: templates/rawdata/rawimage_detail.html:17
+msgid "Uploaded"
+msgstr ""
+
+#: templates/rawdata/_screenshot_tour.html:3
+msgid "Screenshot tour"
+msgstr ""
+
+#: templates/rawdata/help_01.html:4 templates/rawdata/help_01.html.py:8
+#: templates/rawdata/help_01.html:32 templates/rawdata/help_02.html:4
+#: templates/rawdata/help_02.html.py:8 templates/rawdata/help_02.html:44
+#: templates/rawdata/help_03.html:4 templates/rawdata/help_03.html.py:8
+#: templates/rawdata/help_03.html:31 templates/rawdata/plans.html:4
+#: templates/rawdata/plans.html.py:8 templates/rawdata/restricted.html:4
+#: templates/rawdata/restricted.html:8
+#: templates/subscription/subscription_cancel.html:4
+#: templates/subscription/subscription_cancel.html:8
+#: templates/subscription/subscription_change_done.html:4
+#: templates/subscription/subscription_change_done.html:8
+#: templates/subscription/subscription_detail.html:4
+#: templates/subscription/subscription_detail.html:8
+#: templates/subscription/subscription_done.html:4
+#: templates/subscription/subscription_done.html:8
+#: templates/subscription/subscription_list.html:4
+#: templates/subscription/subscription_list.html:8
+msgid "AstroBin Raw Data"
+msgstr ""
+
+#: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
+#: templates/rawdata/help_03.html:9
+msgid "To safely store and organize your raw files."
+msgstr ""
+
+#: templates/rawdata/help_01.html:19
+msgid "What is AstroBin Raw Data?"
+msgstr ""
+
+#: templates/rawdata/help_01.html:20
+msgid ""
+"You already love AstroBin because of how it keeps your images organized. "
+"Thanks to it, you will never have to worry about losing your precious work, "
+"nor all the important meta-data associated with it."
+msgstr ""
+
+#: templates/rawdata/help_01.html:22
+msgid "What if we told you now you can do the same with your raw files?"
+msgstr ""
+
+#: templates/rawdata/help_01.html:24
+msgid ""
+"Is your <em>astrophotography</em> folder full of thousands of poorly "
+"organized <strong>FIT</strong> or <strong>digital camera raw</strong> files? "
+"Is it always hard to go back and find the right calibration files in your "
+"dark library? Do you just wish that you could backup your raw files "
+"somewhere safe?"
+msgstr ""
+
+#: templates/rawdata/help_01.html:26
+msgid ""
+"<strong>AstroBin Raw Data</strong> is the answer! For a very modest price, "
+"you can store your whole <strong>raw data library</strong> online, where it "
+"will be securely accessible only by you."
+msgstr ""
+
+#: templates/rawdata/help_01.html:28
+msgid ""
+"AstroBin will <em>automatically</em> organize your files by reading the "
+"<strong>FIT</strong> headers or <strong>EXIF</strong> information!"
+msgstr ""
+
+#: templates/rawdata/help_01.html:33 templates/rawdata/help_02.html:45
+#: templates/rawdata/help_03.html:32 templates/rawdata/help_03.html.py:40
+msgid "Sign up now!"
+msgstr ""
+
+#: templates/rawdata/help_01.html:40 templates/rawdata/help_02.html:53
+msgid "Next page"
+msgstr ""
+
+#: templates/rawdata/help_02.html:19
+msgid "How does it work?"
+msgstr ""
+
+#: templates/rawdata/help_02.html:20
+msgid ""
+"You can have up to <strong>500 GB</strong> to store your <strong>FIT</"
+"strong> and <strong>digital camera raw</strong> files."
+msgstr ""
+
+#: templates/rawdata/help_02.html:22
+msgid ""
+"You can upload all of them in a matter of a few clicks, and AstroBin will "
+"start organizing your data in \"virtual folders\"."
+msgstr ""
+
+#: templates/rawdata/help_02.html:24
+msgid ""
+"Forget about having to take care of complicated folder structures in your "
+"computer! CCD and DSLR raw files have comprehensive headers: why shouldn't "
+"you use those to automatically and efficiently tag your raw files?"
+msgstr ""
+
+#: templates/rawdata/help_02.html:27
+msgid "By type"
+msgstr ""
+
+#: templates/rawdata/help_02.html:28
+msgid "By acquisition date"
+msgstr ""
+
+#: templates/rawdata/help_02.html:29
+msgid "By upload date"
+msgstr ""
+
+#: templates/rawdata/help_02.html:30
+msgid "By subject"
+msgstr ""
+
+#: templates/rawdata/help_02.html:31
+msgid "By filter"
+msgstr ""
+
+#: templates/rawdata/help_02.html:32
+msgid "By acquisition telescope or lens"
+msgstr ""
+
+#: templates/rawdata/help_02.html:33
+msgid "By temperature"
+msgstr ""
+
+#: templates/rawdata/help_02.html:36
+msgid ""
+"Not only will your data be safely and securely preserved, but you will be "
+"able to download bundles of your files in a <strong>zip</strong> file."
+msgstr ""
+
+#: templates/rawdata/help_02.html:38
+msgid ""
+"This way, it will be easy, later on, to download again your dark frames "
+"taken at -15&deg;C in October two years ago!"
+msgstr ""
+
+#: templates/rawdata/help_02.html:40
+msgid "if the information is present in the file's headers"
+msgstr ""
+
+#: templates/rawdata/help_02.html:52 templates/rawdata/help_03.html:39
+msgid "Previous page"
+msgstr ""
+
+#: templates/rawdata/help_03.html:19
+msgid "Sharing is loving."
+msgstr ""
+
+#: templates/rawdata/help_03.html:20
+msgid ""
+"Optionally, you can share your raw data with a friend, or why not, your "
+"entire astronomy club! This will make it really easy to collaborate on that "
+"massive <strong>100 integration hours</strong> project you've been meaning "
+"to complete. "
+msgstr ""
+
+#: templates/rawdata/help_03.html:22
+msgid "Peace of mind."
+msgstr ""
+
+#: templates/rawdata/help_03.html:23
+msgid ""
+"Ever had a hard-drive crash on you, and lost a lot of data? By keeping your "
+"raw files on <strong>AstroBin Raw Data</strong> you will be safe from "
+"disaster and accidents! At AstroBin, we take data preservation very "
+"seriously."
+msgstr ""
+
+#: templates/rawdata/help_03.html:25
+msgid "Do some science."
+msgstr ""
+
+#: templates/rawdata/help_03.html:26
+msgid ""
+"Although your raw files are strictly private, unless you explicitly share "
+"them, professional and amateur astronomers may still search if a raw file of "
+"a particular area in the sky, acquired at a particular time, exists. You may "
+"happen to have the key to important scientific advancements in the fields of "
+"novae, supernovae, asteroids, comets, variable stars and more!"
+msgstr ""
+
+#: templates/rawdata/library.html:6 templates/rawdata/library.html.py:18
+msgid "Your raw data library"
+msgstr ""
+
+#: templates/rawdata/library.html:20
+#, python-format
+msgid "You have used %(used)s of your %(limit)s."
+msgstr ""
+
+#: templates/rawdata/library.html:34
+msgid "Manage plans"
+msgstr ""
+
+#: templates/rawdata/library.html:37
+msgid "Upload"
+msgstr ""
+
+#: templates/rawdata/library.html:44 templates/rawdata/restricted.html:18
+msgid "Error!"
+msgstr ""
+
+#: templates/rawdata/library.html:45
+msgid ""
+"You have no more space left on your Raw Data account. Please delete some "
+"files to make room, or upgrade your account."
+msgstr ""
+
+#: templates/rawdata/library.html:51
+msgid "Warning!"
+msgstr ""
+
+#: templates/rawdata/library.html:52
+#, python-format
+msgid ""
+"AstroBin is still working to index %(number)s of your %(total)s raw files."
+msgstr ""
+
+#: templates/rawdata/library.html:59
+msgid "All files"
+msgstr ""
+
+#: templates/rawdata/library.html:139
+msgid "There doesn't seem to be anything here."
+msgstr ""
+
+#: templates/rawdata/library.html:141
+#: templates/subscription/subscription_done.html:17
+#, python-format
+msgid ""
+"Head over to the <a href=\"%(upload_url)s\">upload page</a> to get started. "
+msgstr ""
+
+#: templates/rawdata/library.html:156
+msgid "Coming soon!"
+msgstr ""
+
+#: templates/rawdata/library.html:161
+msgid ""
+"<strong>AstroBin Raw Data</strong> will soon allow you to automatically "
+"preprocess your data with a single click!"
+msgstr ""
+
+#: templates/rawdata/library.html:164
+msgid ""
+"We are working on algorithms that will automatically scan your library for "
+"calibration files, and identify the best matches for dark, offset and flat "
+"files. AstroBin will automatically create master frames, calibrate your "
+"selected images, align them, stack them and offer you the stacked file for "
+"download, ready to be postprocessed in your favorite image processing "
+"program."
+msgstr ""
+
+#: templates/rawdata/library.html:167
+msgid "We will let you know when this feature is available!"
+msgstr ""
+
+#: templates/rawdata/library.html:171
+msgid "OK"
+msgstr ""
+
+#: templates/rawdata/plans.html:4 templates/rawdata/plans.html.py:9
+msgid "Plans"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:14
+#: templates/rawdata/privatesharedfolder_form.html:128
+#: templates/rawdata/publicdatapool_form.html:128
+msgid "Success!"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:16
+msgid ""
+"The users you selected have been invited. They will receive a notification."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:25
+#: templates/rawdata/publicdatapool_detail.html:17
+msgid "Actions"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:32
+#: templates/rawdata/privatesharedfolder_detail.html:210
+#: templates/rawdata/privatesharedfolder_detail.html:222
+msgid "Invite"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:39
+#: templates/rawdata/publicdatapool_detail.html:24
+msgid "Edit"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:59
+#, python-format
+msgid ""
+"A private shared folder created by <a href=\"%(user_url)s\">%(user)s</a>, "
+"with %(size)s in %(image_count)s images."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:71
+msgid "Processing submissions for this folder"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:85
+#: templates/rawdata/publicdatapool_detail.html:63
+msgid "User"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:86
+#: templates/rawdata/privatesharedfolder_form.html:21
+#: templates/rawdata/publicdatapool_detail.html:64
+#: templates/rawdata/publicdatapool_form.html:21
+#: templates/rawdata/rawimage_detail.html:16
+msgid "Size"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:111
+msgid "Remove from this folder"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:125
+msgid "Shared with the following users"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:145
+#: templates/rawdata/publicdatapool_detail.html:114
+msgid "Size before zip compression"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:154
+#: templates/rawdata/publicdatapool_detail.html:123
+msgid "Comments"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:158
+#: templates/rawdata/publicdatapool_detail.html:127
+msgid ""
+"You can use this space to discuss this public data pool and exchange "
+"information and tips with other contributors or people who want to process "
+"the data."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:175
+#: templates/rawdata/privatesharedfolder_list.html:84
+msgid "Delete folder"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:178
+#: templates/rawdata/privatesharedfolder_list.html:87
+msgid "Are you sure you want to delete this shared folder?"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:179
+#: templates/rawdata/privatesharedfolder_list.html:88
+msgid ""
+"Don't worry, no files will be deleted from your raw data account, nor from "
+"the accounts of other people who may have contributed to this shared folder."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:182
+#: templates/rawdata/privatesharedfolder_detail.html:202
+#: templates/rawdata/privatesharedfolder_detail.html:221
+#: templates/rawdata/privatesharedfolder_form.html:99
+#: templates/rawdata/privatesharedfolder_list.html:91
+#: templates/rawdata/publicdatapool_detail.html:154
+#: templates/rawdata/publicdatapool_form.html:99
+msgid "Cancel"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:192
+msgid "Edit folder"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:203
+#: templates/rawdata/publicdatapool_detail.html:155
+msgid "Save"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_detail.html:213
+msgid ""
+"Invite users to this share private folders. Invitees will be able to add raw "
+"data and processed images, and invite more users."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:6
+#: templates/rawdata/privatesharedfolder_form.html:10
+msgid "Share on a private folder"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:11
+msgid "Share your raw data with a selected group of people"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:46
+msgid ""
+"A <strong>private shared folder</strong> is a place where you can "
+"collaborate with friends, memebers of your local astronomy club, or anyone "
+"else you select. Your raw data is only shared with the people you select, "
+"who need to be subscibers to <strong>AstroBin Raw Data</strong> as well, and "
+"nobody else."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:50
+msgid ""
+"When you select an existing private shared folder, or create a new one, the "
+"images listed here on the side will be added to it."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:56
+msgid ""
+"Use this form to select an existing <strong>private shared folder</strong>."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:60
+#: templates/rawdata/publicdatapool_form.html:60
+msgid "Send"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:63
+#: templates/rawdata/publicdatapool_form.html:63
+msgid "Loading..."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:73
+msgid ""
+"Or use this button to create a whole new <strong>private shared folder</"
+"strong>."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:77
+#: templates/rawdata/privatesharedfolder_form.html:90
+msgid "Create new private shared folder"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_form.html:100
+#: templates/rawdata/publicdatapool_form.html:100
+msgid "Create"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:5
+#: templates/rawdata/privatesharedfolder_list.html:11
+msgid "Private shared folders"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:13
+msgid "Collections of raw files shared with selected users."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:22
+#, python-format
+msgid ""
+"A <strong>private shared folder</strong> is a way for subscribers to the <a "
+"href=\"%(rawdata_url)s\">AstoBin Raw Data Platform</a> to share raw data, "
+"like FIT and digital camera raw files, with other users, to collaborate on "
+"processing, get or provide technical help."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:25
+#: templates/rawdata/publicdatapool_list.html:25
+#: templates/rawdata/restricted.html:28
+#, python-format
+msgid ""
+"The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
+"securely back up your raw files, and keep them neatly and effortlessly "
+"organized, but being part of it also means that you support AstroBin and can "
+"perhaps contribute your raw files to scientic discoveries."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:32
+msgid "You have access to the following private shared folders."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:39
+#: templates/rawdata/publicdatapool_list.html:34
+msgid "Owner"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:40
+#: templates/rawdata/publicdatapool_list.html:35
+msgid "Raw images"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:41
+#: templates/rawdata/publicdatapool_list.html:36
+msgid "Processed images"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:42
+#: templates/rawdata/publicdatapool_list.html:37
+msgid "Last updated"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:75
+#, python-format
+msgid ""
+"You don't have access to any private shared folders. If you want to create "
+"one, go to <a href=\"%(library_url)s\">your Raw Data Library</a>, select "
+"some files or <strong>smart folders</strong> and use the <strong>Share</"
+"strong> button to share them."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:101
+#: templates/rawdata/publicdatapool_list.html:66
+msgid "Follow"
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:101
+#: templates/rawdata/publicdatapool_list.html:66
+msgid "Unfollow"
+msgstr ""
+
+#: templates/rawdata/publicdatapool_detail.html:37
+#, python-format
+msgid ""
+"A public data pool created by <a href=\"%(user_url)s\">%(user)s</a>, with "
+"%(size)s in %(image_count)s images."
+msgstr ""
+
+#: templates/rawdata/publicdatapool_detail.html:49
+msgid "Processing submissions for this pool"
+msgstr ""
+
+#: templates/rawdata/publicdatapool_detail.html:89
+msgid "Remove from this pool"
+msgstr ""
+
+#: templates/rawdata/publicdatapool_detail.html:104
+#, python-format
+msgid ""
+"This public data pool was created on %(date)s by <a href=\"%(user_url)s\">"
+"%(user)s</a>. It consists of %(size)s in %(image_count)s images. You can "
+"contribute by donating your raw files, if you are subscribed to <a href="
+"\"%(rawdata_url)s\">AstroBin Raw Data</a>, or you can download the available "
+"data and try to process it!"
+msgstr ""
+
+#: templates/rawdata/publicdatapool_detail.html:144
+msgid "Edit public data pool"
+msgstr ""
+
+#: templates/rawdata/publicdatapool_form.html:6
+#: templates/rawdata/publicdatapool_form.html:10
+msgid "Share on a public data pool"
+msgstr ""
+
+#: templates/rawdata/publicdatapool_form.html:11
+msgid "Contribute to public group of raw data"
+msgstr ""
+
+#: templates/rawdata/publicdatapool_form.html:46
+msgid ""
+"A <strong>public data pool</strong> is a place where anyone with an "
+"<strong>AstroBin Raw Data</strong> account can contribute raw data, and "
+"anyone in the world can download it. By sharing your raw data here, you are "
+"contributing your work to possibly massive efforts to produce the deepest "
+"deep sky images that the amateur astronomy community has ever attempted."
+msgstr ""
+
+#: templates/rawdata/publicdatapool_form.html:50
+msgid ""
+"When you select an existing data pool, or create a new one, the images "
+"listed here on the side will be added to it."
+msgstr ""
+
+#: templates/rawdata/publicdatapool_form.html:56
+msgid "Use this form to select an existing <strong>public data pool</strong>."
+msgstr ""
+
+#: templates/rawdata/publicdatapool_form.html:73
+msgid ""
+"Or use this button to create a whole new <strong>public data pool</strong>."
+msgstr ""
+
+#: templates/rawdata/publicdatapool_form.html:77
+#: templates/rawdata/publicdatapool_form.html:90
+msgid "Create new public data pool"
+msgstr ""
+
+#: templates/rawdata/publicdatapool_list.html:5
+#: templates/rawdata/publicdatapool_list.html:11
+msgid "Public data pools"
+msgstr ""
+
+#: templates/rawdata/publicdatapool_list.html:13
+msgid ""
+"Collections of raw files for massive, collectively acquired deep sky images."
+msgstr ""
+
+#: templates/rawdata/publicdatapool_list.html:22
+#, python-format
+msgid ""
+"A <strong>public data pool</strong> is a way for subscribers to the <a href="
+"\"%(rawdata_url)s\">AstoBin Raw Data Platform</a> to collectively contribute "
+"to repositories of FIT and digital camera raw files, and achieve massive "
+"integration times, often consisting in hundreds of integration hours, on "
+"super deep images of the cosmos."
+msgstr ""
+
+#: templates/rawdata/restricted.html:4 templates/rawdata/restricted.html:9
+msgid "Restricted content"
+msgstr ""
+
+#: templates/rawdata/restricted.html:21
+#, python-format
+msgid ""
+"The page you tried to access is reserved for subscribers to the AstroBin <a "
+"href=\"%(rawdata_url)s\">Raw Data Platform</a>."
+msgstr ""
+
+#: templates/rawdata/restricted.html:25
+#, python-format
+msgid ""
+"Probably, you are here because you weve invited to contribute to a "
+"<strong>Private Shared Folder</strong>, a collection of raw data that users "
+"can contribute to. <strong>Private Shared Folders</strong> are part of "
+"Astrobin's <a href=\"%(rawdata_url)s\">Raw Data Platform</a>."
+msgstr ""
+
+#: templates/rawdata/restricted.html:34
+msgid "Find out more!"
+msgstr ""
+
+#: templates/rawdata/temporaryarchive_detail.html:4
+#: templates/rawdata/temporaryarchive_detail.html:9
+msgid "Your download is ready"
+msgstr ""
+
+#: templates/rawdata/temporaryarchive_detail.html:13
+msgid ""
+"We have prepared a ZIP file to bundle the raw data you have requested for "
+"download. Please be aware that this is a temporary file will be deleted from "
+"our servers within the next 48 hours, and this download is only for you. If "
+"you want to share data with others, don't give them this link, but use the "
+"<strong>Private shared folders</strong> or <strong>Public data pool</strong> "
+"pages."
+msgstr ""
+
+#: templates/rawdata/temporaryarchive_detail.html:27
+msgid "File size"
+msgstr ""
+
+#: templates/rawdata/temporaryarchive_detail.html:33
+msgid "Your download is processing"
+msgstr ""
+
+#: templates/rawdata/temporaryarchive_detail.html:37
+msgid ""
+"The file or files you have requested are being prepared for download. This "
+"should take only a second if you requested just a few files, or a minute for "
+"a lot of files. Try to refresh this page soon!"
+msgstr ""
+
+#: templates/rawdata/temporaryarchive_detail.html:48
+msgid "Download not ready"
+msgstr ""
+
+#: templates/rawdata/temporaryarchive_detail.html:51
+msgid "Please refresh this page in a few seconds."
+msgstr ""
+
+#: templates/subscription/_plan.html:9
+msgid "month"
+msgstr ""
+
+#: templates/subscription/_plan.html:11
+#, python-format
+msgid "That's only $ %(daily_price)s USD per day!"
+msgstr ""
+
+#: templates/subscription/_plan.html:17
+#, python-format
+msgid "Free for %(free_days)s days."
+msgstr ""
+
+#: templates/subscription/_plan.html:21
+msgid "You can cancel at any time."
+msgstr ""
+
+#: templates/subscription/subscription_cancel.html:8
+msgid "Subscription process cancelled"
+msgstr ""
+
+#: templates/subscription/subscription_cancel.html:12
+msgid ""
+"Your transaction with PayPal has been cancelled, so no change in your "
+"subscription has occurred."
+msgstr ""
+
+#: templates/subscription/subscription_cancel.html:16
+#: templates/subscription/subscription_change_done.html:16
+#: templates/subscription/subscription_detail.html:67
+#, python-format
+msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
+msgstr ""
+
+#: templates/subscription/subscription_change_done.html:8
+msgid "Subscription change"
+msgstr ""
+
+#: templates/subscription/subscription_change_done.html:12
+msgid ""
+"Your request for a change in your subscription has been processed "
+"successfully."
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:4
+#: templates/subscription/subscription_detail.html:8
+msgid "Subscription plan"
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:22
+msgid "Your subscription to this plan is cancelled."
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:28
+msgid "You are subscribed to this plan."
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:29
+#, python-format
+msgid "You may <a href=\"%(cancel_url)s\">cancel via PayPal</a> if you wish."
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:33
+#: templates/subscription/subscription_detail.html:55
+msgid "Subscribe with a secure payment provided by PayPal:"
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:45
+msgid "You cannot switch to this plan."
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:65
+#: templates/subscription/subscription_done.html:21
+#: templates/subscription/subscription_list.html:73
+msgid "Thank you for supporting AstroBin!"
+msgstr ""
+
+#: templates/subscription/subscription_done.html:8
+msgid "Subscription confirmed"
+msgstr ""
+
+#: templates/subscription/subscription_done.html:12
+msgid ""
+"Your subscription request to AstroBin Raw Data has been received, and we are "
+"awaiting the final confirmation from PayPal. Your subscription should be "
+"active within a few minutes!"
+msgstr ""
+
+#: templates/subscription/subscription_list.html:4
+#: templates/subscription/subscription_list.html:8
+msgid "Subscription plans"
+msgstr ""
+
+#: templates/subscription/subscription_list.html:14
+msgid ""
+"<strong>AstroBin Raw Data</strong> allows you to store your raw files "
+"(<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. "
+"We will keep them neatly organized, and you will have a safe backup of all "
+"your work, including calibration files."
+msgstr ""
+
+#: templates/subscription/subscription_list.html:17
+#, python-format
+msgid ""
+"Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
+msgstr ""
+
+#: templates/subscription/subscription_list.html:23
+msgid "Here are the available plans. Choose the one that suits you best!"
+msgstr ""
+
+#: templates/subscription/subscription_list.html:31
+msgid "Manage"
+msgstr ""
+
+#: templates/subscription/subscription_list.html:41
+msgid ""
+" Choose this plan if you want to keep your expenses to a minimum, but still "
+"want the possibity to share your FIT and digital camera raw files with your "
+"friends. You can also participate to public data pools and contribute to the "
+"deepest deep sky images ever created, and you will always know that you "
+"support AstroBin."
+msgstr ""
+
+#: templates/subscription/subscription_list.html:49
+msgid ""
+"Choose this plan if you have started out in the recent year or two, or you "
+"don't want to share and backup your calibration files. Enjoy a lot of room "
+"for a convenient price."
+msgstr ""
+
+#: templates/subscription/subscription_list.html:57
+msgid ""
+"Choose this plan if you have several years worth of data. You will probably "
+"have enough room for all your calibration files, and will enjoy the full "
+"potential of the platform."
+msgstr ""
+
+#: templates/subscription/subscription_list.html:65
+msgid ""
+"Choose this plan if you have a massive amount of raw data that you want to "
+"share and backup securely online."
+msgstr ""
+
+#: templates/subscription/subscription_list.html:76
+msgid ""
+"PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
+"a>"
+msgstr ""
+
+#: views/privatesharedfolders.py:116
+msgid "Your image has been added to the private shared folder."
+msgstr ""
+
+#: views/privatesharedfolders.py:204
+msgid "Your private shared folder has been deleted."
+msgstr ""
+
+#: views/publicdatapools.py:96
+msgid "Your image has been added to the pool."
+msgstr ""
