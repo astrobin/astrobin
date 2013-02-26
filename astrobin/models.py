@@ -187,7 +187,7 @@ class Gear(models.Model):
     retailed = models.ManyToManyField(
         'RetailedGear',
     )
-    
+
     updated = models.DateTimeField(
         editable = False,
         auto_now = True,
@@ -200,7 +200,7 @@ class Gear(models.Model):
         null = True,
         blank = True,
     )
- 
+
     reviews = generic.GenericRelation(ReviewedItem)
 
     def __unicode__(self):
@@ -218,7 +218,7 @@ class Gear(models.Model):
 
     def slug(self):
         return slugify("%s %s" % (self.get_make(), self.get_name()))
-        
+
     def hard_merge(self, slave):
         from gear import get_correct_gear
         unused, master_gear_type = get_correct_gear(self.id)
@@ -574,7 +574,7 @@ class Filter(Gear):
         max_digits = 6,
         decimal_places = 2,
     )
-  
+
     def attributes(self):
         return super(Filter, self).attributes() +\
                [('bandwidth', _("nm"))]
@@ -847,9 +847,9 @@ class Image(models.Model):
     imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes or lenses"))
     guiding_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes or lenses"))
     mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"))
-    imaging_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='imaging_cameras', verbose_name=_("Imaging cameras")) 
+    imaging_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='imaging_cameras', verbose_name=_("Imaging cameras"))
     guiding_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='guiding_cameras', verbose_name=_("Guiding cameras"))
-    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers")) 
+    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers"))
     software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"))
     filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"))
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
@@ -933,7 +933,7 @@ class Image(models.Model):
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
-        
+
     def __unicode__(self):
         return self.title if self.title is not None else _("(no title)")
 
@@ -1051,7 +1051,7 @@ class ImageRevision(models.Model):
     class Meta:
         app_label = 'astrobin'
         ordering = ('uploaded', '-id')
-        
+
     def __unicode__(self):
         return self.image.title
 
@@ -1077,7 +1077,7 @@ class ImageRevision(models.Model):
 
     def get_absolute_url(self):
         return '/%i/%s/' % (self.image.id, self.label)
- 
+
     def path(self, resized = False, inverted = False):
         filename = '%s%s%s%s' % (
             self.filename,
@@ -1280,7 +1280,7 @@ class SolarSystem_Acquisition(Acquisition):
     )
 
     cmiii = models.DecimalField(
-        verbose_name = _("CMIII"), 
+        verbose_name = _("CMIII"),
         help_text = _("Latitude of the third Central Meridian."),
         null = True,
         blank = True,
@@ -1473,7 +1473,7 @@ class UserProfile(models.Model):
         null = True,
         blank = True,
     )
-    
+
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
 
@@ -1553,11 +1553,11 @@ class UserProfile(models.Model):
     class Meta:
         app_label = 'astrobin'
 
-def create_user_profile(sender, instance, created, **kwargs):  
+def create_user_profile(sender, instance, created, **kwargs):
     if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
 
-def create_user_openid(sender, instance, created, **kwargs):  
+def create_user_openid(sender, instance, created, **kwargs):
     if created:
         instance.openid_set.create(openid=instance.username)
 
@@ -1795,15 +1795,15 @@ class App(models.Model):
 
     def __unicode__(self):
         return u"%s for %s" % (self.key, self.registrar)
-    
+
     def save(self, *args, **kwargs):
         if not self.key:
             self.key = self.generate_key()
         if not self.secret:
             self.secret = self.generate_key()
-        
+
         return super(App, self).save(*args, **kwargs)
-    
+
     def generate_key(self):
         # Get a random UUID.
         new_uuid = uuid.uuid4()
@@ -1854,7 +1854,7 @@ class AppApiKeyRequest(models.Model):
         EmailMessage(**message).send(fail_silently = False)
 
         return super(AppApiKeyRequest, self).save(*args, **kwargs)
-    
+
     def approve(self):
         app, created = App.objects.get_or_create(
             registrar = self.registrar, name = self.name,
