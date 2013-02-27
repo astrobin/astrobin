@@ -157,6 +157,7 @@ MIDDLEWARE_CLASSES = (
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 ROOT_URLCONF = 'astrobin.urls'
 
