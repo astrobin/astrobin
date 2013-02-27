@@ -3445,8 +3445,6 @@ def favorite_ajax(request, id):
     f, created = Favorite.objects.get_or_create(image = image, user = request.user)
     if not created:
         f.delete()
-    else:
-        f.save()
 
     if image.user != request.user and created:
         push_notification(

@@ -1747,6 +1747,7 @@ class Favorite(models.Model):
     class Meta:
         app_label = 'astrobin'
         ordering = ('-created',)
+        unique_together = ('image', 'user')
 
 def favorite_post_save(sender, instance, created, **kwargs):
     verb = "has favorited"
