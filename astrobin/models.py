@@ -1051,6 +1051,7 @@ class ImageRevision(models.Model):
     class Meta:
         app_label = 'astrobin'
         ordering = ('uploaded', '-id')
+        unique_together = ('image', 'label')
 
     def __unicode__(self):
         return self.image.title
