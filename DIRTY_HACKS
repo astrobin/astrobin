@@ -1,0 +1,9 @@
+The following dirty hacks are currently implemented by hard-coding on the
+production server:
+
+1) The csrf_exempt decorator is added to the ipn view of django-paypal
+   To do it the proper way, install django-paypal from a better fork.
+
+2) The close() function in django/db/backends/__init__.py has been changed
+   according to https://code.djangoproject.com/ticket/15802
+   To do it the proper way, upgrade to django 1.4.
