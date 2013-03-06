@@ -39,6 +39,7 @@ DATABASES = {
         'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'], # Not used with sqlite3.
         'HOST': os.environ['ASTROBIN_DATABASE_HOST'],         # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '5432',                                       # Set to empty string for default. Not used with sqlite3.
+        'OPTIONS': {'autocommit': True},
     }
 }
 
@@ -157,7 +158,7 @@ MIDDLEWARE_CLASSES = (
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 )
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
 ROOT_URLCONF = 'astrobin.urls'
 
