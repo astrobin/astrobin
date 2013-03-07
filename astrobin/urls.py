@@ -37,13 +37,12 @@ from rawdata.views.helppages import (
 
 from tastypie.api import Api
 from astrobin.api import ImageResource, ImageRevisionResource,\
-                         CommentResource, ImageOfTheDayResource
+                         ImageOfTheDayResource
 
 # These are the old API, not djangorestframework
 v1_api = Api(api_name = 'v1')
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
-v1_api.register(CommentResource())
 v1_api.register(ImageOfTheDayResource())
 
 urlpatterns = patterns('',
@@ -86,7 +85,7 @@ urlpatterns = patterns('',
 
        (r'^accounts/', include('registration.urls')),
 
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
+    # Uncomment the admin/doc line below and add 'django.contrib.admindocs'
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
        (r'^admin/', include(admin.site.urls)),
@@ -190,7 +189,7 @@ urlpatterns = patterns('',
       url(r'^gear/stats/total-images/(?P<id>\d+)/$',
         views.stats_gear_total_images_ajax,
         name = 'stats_gear_total_images'),
- 
+
     url(r'^follow/(?P<username>[\w.@+-]+)/$', views.follow, name='follow'),
     url(r'^unfollow/(?P<username>[\w.@+-]+)/$', views.unfollow, name='unfollow'),
     url(r'^follow_gear/(?P<id>\d+)/$', views.follow_gear, name='follow_gear'),
@@ -211,7 +210,7 @@ urlpatterns = patterns('',
     url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
     url(r"^messages/recipient-search/$", messages_recipient_search, name="recipient_search"),
     url(r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply, {'template_name': 'messages/message_list_view.html'}, name="message_reply"),
-    # modal composing 
+    # modal composing
     url(r'^messages/modal-compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {
                             "template_name":"messages/modal_compose.html",
                             "form_class": MessagesComposeForm

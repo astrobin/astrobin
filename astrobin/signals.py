@@ -38,7 +38,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                         'user': instance.author,
                     }
                 )
- 
+
             if instance.parent and instance.parent.author != instance.author:
                 push_notification(
                     [instance.parent.author], 'new_comment_reply',
@@ -47,7 +47,10 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                         'user': instance.author,
                     }
                 )
-     
+
+            verb = "commented on image"
+            act.send(instance.author, verb = verb, target = obj)
+
         elif model_class == Gear:
             if not instance.parent:
                 gear, gear_type = get_correct_gear(obj.id)
@@ -75,6 +78,9 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                     'user': instance.author,
                 }
             )
+
+            verb = "commented on gear"
+            act.send(instance.author, verb = verb, target = gear)
 
 
 def rawdata_publicdatapool_post_save(sender, instance, created, **kwargs):

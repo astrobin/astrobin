@@ -4,7 +4,7 @@ from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields
 from tastypie.authentication import Authentication
 
-from astrobin.models import Image, ImageRevision, ImageOfTheDay, Comment, App
+from astrobin.models import Image, ImageRevision, ImageOfTheDay, App
 from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.templatetags.tags import gear_name
 
@@ -28,25 +28,6 @@ class AppAuthentication(Authentication):
         return True
 
 
-class CommentResource(ModelResource):
-    image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
-    author = fields.CharField()
-    replies = fields.ToManyField('self', 'children')
-
-    class Meta:
-        authentication = AppAuthentication()
-        queryset = Comment.objects.all()
-        fields = ['comment', 'added']
-
-    def dehydrate_comment(self, bundle):
-        if bundle.obj.is_deleted:
-            return '(comment deleted)'
-        return bundle.data['comment']
-
-    def dehydrate_author(self, bundle):
-        return bundle.obj.author.username
-
-
 class ImageRevisionResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
 
@@ -61,7 +42,7 @@ class ImageRevisionResource(ModelResource):
             'is_final',
         ]
         allowed_methods = ['get']
-    
+
 
 class ImageResource(ModelResource):
     user = fields.CharField('user__username')
@@ -74,8 +55,6 @@ class ImageResource(ModelResource):
 
     uploaded = fields.DateField('uploaded')
     updated = fields.DateField('updated')
-
-    comments = fields.ToManyField(CommentResource, 'comment_set')
 
     class Meta:
         authentication = AppAuthentication()
