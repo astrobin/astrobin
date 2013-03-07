@@ -7,12 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-27 14:57-0500\n"
-<<<<<<< HEAD
-"PO-Revision-Date: 2012-12-28 16:34+0100\n"
-=======
-"PO-Revision-Date: 2012-10-28 09:08+0100\n"
->>>>>>> origin/raw-data
+"POT-Creation-Date: 2013-02-26 08:12-0600\n"
+"PO-Revision-Date: 2012-12-29 19:10+0100\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -1043,7 +1039,7 @@ msgstr "Σύνδεσμος για TIFF/FITS"
 msgid "Subjects"
 msgstr "Θέματα"
 
-#: forms.py:76 models.py:744 views.py:732 templates/maintenance_base.html:340
+#: forms.py:76 models.py:744 views.py:737 templates/maintenance_base.html:340
 #: templates/profile-edit-menu.html:36
 msgid "Locations"
 msgstr "Τοποθεσίες"
@@ -1052,7 +1048,7 @@ msgstr "Τοποθεσίες"
 msgid "This field is required."
 msgstr "Αυτό το πεδίο είναι προαπαιτούμενο"
 
-#: forms.py:97 views.py:2323
+#: forms.py:97 views.py:2328
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -1094,7 +1090,7 @@ msgstr "Τηλεσκόπια απεικόνισης ή φακοί"
 msgid "Guiding telescopes or lenses"
 msgstr "Οδηγητικά τηλεσκόπια ή φακοί"
 
-#: forms.py:168 forms.py:262 models.py:849 models.py:1482 views.py:2272
+#: forms.py:168 forms.py:262 models.py:849 models.py:1482 views.py:2277
 msgid "Mounts"
 msgstr "Στηρίξεις"
 
@@ -1106,19 +1102,19 @@ msgstr "Κάμερες απεικόνισης"
 msgid "Guiding cameras"
 msgstr "Οδηγητικές κάμερες"
 
-#: forms.py:171 forms.py:264 models.py:852 models.py:1484 views.py:2273
+#: forms.py:171 forms.py:264 models.py:852 models.py:1484 views.py:2278
 msgid "Focal reducers"
 msgstr "Μειωτές εστιακού λόγου"
 
-#: forms.py:172 forms.py:265 models.py:853 models.py:1485 views.py:2274
+#: forms.py:172 forms.py:265 models.py:853 models.py:1485 views.py:2279
 msgid "Software"
 msgstr "Λογισμικό"
 
-#: forms.py:173 forms.py:266 models.py:854 models.py:1486 views.py:2275
+#: forms.py:173 forms.py:266 models.py:854 models.py:1486 views.py:2280
 msgid "Filters"
 msgstr "Φίλτρα"
 
-#: forms.py:174 forms.py:267 models.py:855 models.py:1487 views.py:2276
+#: forms.py:174 forms.py:267 models.py:855 models.py:1487 views.py:2281
 msgid "Accessories"
 msgstr "Λοιπός εξοπλισμός"
 
@@ -1152,11 +1148,11 @@ msgstr ""
 "LRGB σε ένα κουτί δεν θα μπορείτε να προσθέσετε ξεχωριστές λήψεις για το "
 "καθένα."
 
-#: forms.py:261 models.py:1481 views.py:2270
+#: forms.py:261 models.py:1481 views.py:2275
 msgid "Telescopes and lenses"
 msgstr "Τηλεσκόπια και φακοί"
 
-#: forms.py:263 models.py:1483 views.py:2271
+#: forms.py:263 models.py:1483 views.py:2276
 msgid "Cameras"
 msgstr "Κάμερες"
 
@@ -1183,12 +1179,12 @@ msgstr "Όλα"
 msgid "Images"
 msgstr "Εικόνες"
 
-#: forms.py:310 models.py:703 views.py:1817
+#: forms.py:310 models.py:703 views.py:1822
 #: templates/maintenance_base.html:334 templates/profile-edit-menu.html:30
 #: templates/wall.html:143 templates/inclusion_tags/search_image_list.html:11
 #: templates/user/card.html:13 templates/user/profile-subnav.html:134
 msgid "Gear"
-msgstr "Εξοπλισμό"
+msgstr "Εξοπλισμός"
 
 #: forms.py:322
 msgid "Telescope type"
@@ -1419,27 +1415,15 @@ msgstr "έγραψε μια κριτική για"
 
 #: locale_extras.py:12
 msgid "created a new public data pool"
-<<<<<<< HEAD
-msgstr "δημιουργήθηκε νέα κοινόχρηστη περιοχή δεδομένων"
+msgstr "δημιουργήθηκε νέα δημόσια περιοχή δεδομένων"
 
 #: locale_extras.py:13
 msgid "added new data to public data pool"
-msgstr "προστέθηκαν νέα δεδομένα στην κοινόχρηστη περιοχή δεδομένων"
+msgstr "προστέθηκαν νέα δεδομένα στην δημόσια περιοχή δεδομένων"
 
 #: locale_extras.py:14
 msgid "added a new processed image to public data pool"
-msgstr "προστέθηκε νέα επεξεργασμένη εικόνα στην κοινόχρηστη περιοχή δεδομένων"
-=======
-msgstr ""
-
-#: locale_extras.py:13
-msgid "added new data to public data pool"
-msgstr ""
-
-#: locale_extras.py:14
-msgid "added a new processed image to public data pool"
-msgstr ""
->>>>>>> origin/raw-data
+msgstr "προστέθηκε νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων"
 
 #: models.py:48
 msgid "None (All rights reserved)"
@@ -1469,55 +1453,51 @@ msgstr "Αναφορά Δημιουργού - Παρόμοια διανομή CC
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Αναφορά Δημιουργού - Όχι παράγωγα έργα CC"
 
-#: models.py:58 models.py:73 settings.py:69 views.py:799
+#: models.py:58 models.py:73 settings.py:67 views.py:804
 msgid "English"
 msgstr "Αγγλικά"
 
-#: models.py:59 models.py:74 settings.py:70
+#: models.py:59 models.py:74 settings.py:68
 msgid "Italian"
 msgstr "Ιταλικά"
 
-#: models.py:60 models.py:75 settings.py:71
+#: models.py:60 models.py:75 settings.py:69
 msgid "Spanish"
 msgstr "Ισπανικά"
 
-#: models.py:61 models.py:76 settings.py:72
+#: models.py:61 models.py:76 settings.py:70
 msgid "French"
 msgstr "Γαλλικά"
 
-#: models.py:62 models.py:77 settings.py:73
+#: models.py:62 models.py:77 settings.py:71
 msgid "Finnish"
 msgstr "Φινλανδικά"
 
-#: models.py:63 models.py:78 settings.py:74
+#: models.py:63 models.py:78 settings.py:72
 msgid "German"
 msgstr "Γερμανικά"
 
-#: models.py:64 models.py:79 settings.py:75
+#: models.py:64 models.py:79 settings.py:73
 msgid "Dutch"
 msgstr "Ολλανδικά"
 
-#: models.py:65 models.py:80 settings.py:76
+#: models.py:65 models.py:80 settings.py:74
 msgid "Turkish"
 msgstr "Τούρκικα"
 
-#: models.py:66 models.py:81 settings.py:77
+#: models.py:66 models.py:81 settings.py:75
 msgid "Albanian"
 msgstr "Αλβανικά"
 
-#: models.py:67 models.py:82 settings.py:78
+#: models.py:67 models.py:82 settings.py:76
 msgid "Polish"
 msgstr "Πολωνικά"
 
-#: models.py:68 models.py:83 settings.py:79
+#: models.py:68 models.py:83 settings.py:77
 msgid "Brazilian Portuguese"
 msgstr "Βραζιλιανικά Πορτογαλικά"
 
-#: models.py:69 models.py:84 settings.py:80
-<<<<<<< HEAD
-=======
-#, fuzzy
->>>>>>> origin/raw-data
+#: models.py:69 models.py:84 settings.py:78
 msgid "Greek"
 msgstr "Ελληνικά"
 
@@ -1589,7 +1569,7 @@ msgstr "Μικρός πλανήτης"
 msgid "Comet"
 msgstr "Κομήτης"
 
-#: models.py:125 models.py:558 models.py:704 views.py:1823
+#: models.py:125 models.py:558 models.py:704 views.py:1828
 #: templates/wall.html:155
 msgid "Other"
 msgstr "Άλλο"
@@ -1947,11 +1927,11 @@ msgstr "Αντικείμενο βαθύ ουρανού"
 msgid "Solar system body or event"
 msgstr "Σώμα ηλιακού συστήματος ή γεγονός"
 
-#: models.py:701 views.py:1805 templates/wall.html:131
+#: models.py:701 views.py:1810 templates/wall.html:131
 msgid "Extremely wide field"
 msgstr "Ακραίο ευρύ πεδίο"
 
-#: models.py:702 views.py:1811 templates/wall.html:137
+#: models.py:702 views.py:1816 templates/wall.html:137
 msgid "Star trails"
 msgstr "Αστρικά ίχνη"
 
@@ -2125,7 +2105,7 @@ msgstr "Ψύξη αισθητήρα"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Η θερμοκρασία του αισθητήρα. Π.χ. : -20."
 
-#: models.py:1181 views.py:740
+#: models.py:1181 views.py:745
 msgid "Darks"
 msgstr "Darks"
 
@@ -2133,7 +2113,7 @@ msgstr "Darks"
 msgid "The number of dark frames."
 msgstr "Ο αριθμός των dark καρέ."
 
-#: models.py:1186 views.py:741
+#: models.py:1186 views.py:746
 msgid "Flats"
 msgstr "Flats"
 
@@ -2141,7 +2121,7 @@ msgstr "Flats"
 msgid "The number of flat frames."
 msgstr "Ο αριθμός των flat καρέ."
 
-#: models.py:1191 views.py:742
+#: models.py:1191 views.py:747
 msgid "Flat darks"
 msgstr "Flat darks"
 
@@ -2149,7 +2129,7 @@ msgstr "Flat darks"
 msgid "The number of dark flat frames."
 msgstr "Ο αριθμός των dark flat καρέ."
 
-#: models.py:1196 views.py:743
+#: models.py:1196 views.py:748
 msgid "Bias"
 msgstr "Bias"
 
@@ -2157,7 +2137,7 @@ msgstr "Bias"
 msgid "The number of bias/offset frames."
 msgstr "Ο αριθμός των bias/offset καρέ."
 
-#: models.py:1201 views.py:746
+#: models.py:1201 views.py:751
 msgid "Bortle Dark-Sky Scale"
 msgstr "Κλίμακα Bortle σκοτεινού ουρανού"
 
@@ -2177,11 +2157,11 @@ msgstr "Μέσο mag/arcsec^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Όπως μετρήθηκε με τον μετρητή ποιότητας ουρανού."
 
-#: models.py:1215 views.py:748
+#: models.py:1215 views.py:753
 msgid "Mean FWHM"
 msgstr "Μέσο FWHM"
 
-#: models.py:1220 views.py:749
+#: models.py:1220 views.py:754
 msgid "Temperature"
 msgstr "Θερμοκρασία"
 
@@ -2269,7 +2249,7 @@ msgstr "Ζητήστε από"
 msgid "Additional information"
 msgstr "Περισσότερες πληροφορίες"
 
-#: models.py:1378 templates/base.html:139 templates/fits.html:5
+#: models.py:1378 templates/base.html:149 templates/fits.html:5
 #: templates/fits.html.py:10 templates/maintenance_base.html:135
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
@@ -2354,7 +2334,7 @@ msgstr ""
 "Η άδεια χρήσης που επιλέγετε εδώ εφαρμόζεται αυτόματα σε όλες τις νέες σας "
 "φωτογραφίες."
 
-#: models.py:1531 templates/base.html:258
+#: models.py:1531 templates/base.html:268
 msgid "Language"
 msgstr "Γλώσσα"
 
@@ -2547,7 +2527,7 @@ msgstr ""
 msgid "Commercial gear items"
 msgstr "Εμπορικά αντικείμενα εξοπλισμού"
 
-#: search.py:51 views.py:1039 views.py:1292 views.py:1317
+#: search.py:51 views.py:1044 views.py:1297 views.py:1322
 #: templates/image/actions/bring_to_attention.html:30
 msgid "No results. Sorry."
 msgstr "Λυπάμαι, κανένα αποτέλεσμα."
@@ -2629,26 +2609,26 @@ msgstr "Καταδιοπτρικό"
 msgid "Number of images by subject type"
 msgstr "Αριθμός εικόνων ανά τύπο αντικειμένου"
 
-#: views.py:565
+#: views.py:566
 msgid ""
 "The revision you are looking for is invalid, or was deleted. This is the "
 "original image."
 msgstr ""
 "Η έκδοση που ψάχνετε δεν είναι έγκυρη ή διεγράφη. Αυτή είναι η γνήσια εικόνα."
 
-#: views.py:730
+#: views.py:735
 msgid "Resolution"
 msgstr "Ανάλυση"
 
-#: views.py:731 views.py:823
+#: views.py:736 views.py:828
 msgid "Dates"
 msgstr "Ημερομηνίες"
 
-#: views.py:733 templates/image/detail.html:489
+#: views.py:738 templates/image/detail.html:489
 msgid "Frames"
 msgstr "Καρέ"
 
-#: views.py:739 templates/wall.html:33
+#: views.py:744 templates/wall.html:33
 #: templates/inclusion_tags/search_image_list.html:37
 #: templates/inclusion_tags/search_image_list.html:88
 #: templates/inclusion_tags/search_image_list.html:130
@@ -2656,36 +2636,36 @@ msgstr "Καρέ"
 msgid "Integration"
 msgstr "Ολοκλήρωση"
 
-#: views.py:739 views.py:1987 views.py:1988
+#: views.py:744 views.py:1992 views.py:1993
 #: templates/inclusion_tags/search_image_list.html:130
 #: templates/search/search.html:294 templates/subject/page.html:80
 msgid "hours"
 msgstr "ώρες"
 
-#: views.py:744
+#: views.py:749
 msgid "Avg. Moon age"
 msgstr "Μέση ηλικία Σελήνης"
 
-#: views.py:744
+#: views.py:749
 msgid "days"
 msgstr "ημέρες"
 
-#: views.py:745 templates/search/search.html:300
+#: views.py:750 templates/search/search.html:300
 msgid "Avg. Moon phase"
 msgstr "Μέση φάση Σελήνης"
 
-#: views.py:747
+#: views.py:752
 msgid "Mean SQM"
 msgstr "Μέσο SQM"
 
-#: views.py:945 views.py:2972
+#: views.py:950 views.py:2977
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Ανύπαρκτη εικόνα ή δεν έγινε παροχή εικόνας. Επιτρεπόμενες επεκτάσεις : JPG, "
 "PNG και GIF."
 
-#: views.py:949 views.py:2980 templates/user/profile/flickr_import.html:10
+#: views.py:954 views.py:2985 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2693,7 +2673,7 @@ msgstr ""
 "Το AstroBin είναι σε κατάσταση ανάγνωσης, λόγω συντήρησης του server. "
 "Παρακαλώ δοκιμάστε αργότερα!"
 
-#: views.py:1006
+#: views.py:1011
 msgid ""
 "Plate-solving has started in the background. It might take a while, so "
 "please don't request it again! You will be notified when the job has "
@@ -2703,29 +2683,29 @@ msgstr ""
 "μην την ξαναζητήσετε! Θα ειδοποιηθείτε όταν η εργασία ολοκληρωθεί. "
 "Ευχαριστούμε!"
 
-#: views.py:1040
+#: views.py:1045
 msgid "Click on a suggestion or press TAB to add what you typed"
 msgstr ""
 "Κάντε κλικ σε κάποια πρόταση ή πατήστε TAB για να προσθέσετε αυτό που "
 "πληκτρολογήσατε"
 
-#: views.py:1327 views.py:1410 views.py:1495 views.py:1517 views.py:2172
-#: views.py:2185 views.py:2206 views.py:2243 views.py:2333 views.py:2395
-#: views.py:2593 views.py:4259 views.py:4429
+#: views.py:1332 views.py:1415 views.py:1500 views.py:1522 views.py:2177
+#: views.py:2190 views.py:2211 views.py:2248 views.py:2338 views.py:2400
+#: views.py:2598 views.py:4264 views.py:4434
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
 msgstr "Η φόρμα σώθηκε. Ευχαριστούμε!"
 
-#: views.py:1459
+#: views.py:1464
 msgid "Fill in one session, before adding more."
 msgstr "Εισάγετε μια συνεδρίαση, προτού προσθέσετε άλλη."
 
-#: views.py:1713
+#: views.py:1718
 msgid "No date specified"
 msgstr "Δεν καθορίστηκε ημερομηνία"
 
-#: views.py:1715
+#: views.py:1720
 msgid ""
 "To fill in the missing dates, use the <strong>Edit acquisition details</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
@@ -2734,11 +2714,11 @@ msgstr ""
 "<strong>Επεξεργασία λεπτομερειών λήψης</strong> στο μενού <strong>Ενέργειες</"
 "strong> για κάθε εικόνα."
 
-#: views.py:1756 views.py:1855
+#: views.py:1761 views.py:1860
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr "Δεν έχουν οριστεί, τηλεσκόπια, φακοί ή κάμερες απεικόνισης"
 
-#: views.py:1758 views.py:1858
+#: views.py:1763 views.py:1863
 msgid ""
 "To fill in the missing gear, use the <strong>Edit gear used</strong> entry "
 "in the <strong>Actions</strong> menu for each image."
@@ -2747,19 +2727,19 @@ msgstr ""
 "<strong>Επεξεργασία εξοπλισμού που χρησιμοποιήθηκε</strong> στο μενού "
 "<strong>Ενέργειες</strong> για κάθε εικόνα."
 
-#: views.py:1767
+#: views.py:1772
 msgid "Gear images"
 msgstr "Εικόνες εξοπλισμού"
 
-#: views.py:1799 templates/image/edit/acquisition.html:100
+#: views.py:1804 templates/image/edit/acquisition.html:100
 msgid "Solar system"
 msgstr "Ηλιακό σύστημα"
 
-#: views.py:1829 views.py:1845
+#: views.py:1834 views.py:1850
 msgid "No subjects specified"
 msgstr "Δεν έχουν οριστεί θέματα"
 
-#: views.py:1831 views.py:1847
+#: views.py:1836 views.py:1852
 msgid ""
 "To fill in the missing subjects, use the <strong>Edit basic information</"
 "strong> entry in the <strong>Actions</strong> menu for each image."
@@ -2768,11 +2748,11 @@ msgstr ""
 "<strong>Επεξεργασία βασικών πληροφοριών</strong> στο μενού "
 "<strong>Ενέργειες</strong> για κάθε εικόνα."
 
-#: views.py:1864
+#: views.py:1869
 msgid "No acquisition details specified"
 msgstr "Δεν έχουν οριστεί λεπτομέρειες λήψης"
 
-#: views.py:1867
+#: views.py:1872
 msgid ""
 "To fill in the missing acquisition details, use the <strong>Edit acquisition "
 "details</strong> entry in the <strong>Actions</strong> menu for each image."
@@ -2781,40 +2761,40 @@ msgstr ""
 "επιλογή <strong>Επεξεργασία λεπτομερειών λήψης</strong> στο μενού "
 "<strong>Ενέργειες</strong> για κάθε εικόνα."
 
-#: views.py:1965 views.py:3557 templatetags/tags.py:92
+#: views.py:1970 views.py:3562 templatetags/tags.py:92
 msgid "minutes"
 msgstr "λεπτά"
 
-#: views.py:1966 views.py:3558 templatetags/tags.py:93
+#: views.py:1971 views.py:3563 templatetags/tags.py:93
 msgid "seconds ago"
 msgstr "δευτερόλεπτα πριν"
 
-#: views.py:1968 views.py:3560 templatetags/tags.py:94
+#: views.py:1973 views.py:3565 templatetags/tags.py:94
 #, python-format
 msgid "%s ago"
 msgstr "%s πριν"
 
-#: views.py:1984 templates/popover/user.html:18
+#: views.py:1989 templates/popover/user.html:18
 msgid "Member since"
 msgstr "Μέλος από τις"
 
-#: views.py:1985
+#: views.py:1990
 msgid "Last login"
 msgstr "Τελευταία σύνδεση"
 
-#: views.py:1986
+#: views.py:1991
 msgid "Images uploaded"
 msgstr "Ανεβασμένες φωτογραφίες"
 
-#: views.py:1987
+#: views.py:1992
 msgid "Total integration time"
 msgstr "Συνολικός χρόνος ολοκλήρωσης"
 
-#: views.py:1988
+#: views.py:1993
 msgid "Average integration time"
 msgstr "Μέσος χρόνος ολοκλήρωσης"
 
-#: views.py:2876
+#: views.py:2881
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested additional information about your image."
@@ -2822,18 +2802,18 @@ msgstr ""
 "Ο/Η <strong>%s</strong> έχει ζητήσει περισσότερες λεπτομέρειες για την "
 "εικόνα σας."
 
-#: views.py:2926
+#: views.py:2931
 #, python-format
 msgid ""
 "<strong>%s</strong> has requested to see the TIFF or FITS of your image."
 msgstr ""
 "Ο/Η <strong>%s</strong> έχει ζητήσει να δει το TIFF ή FITS της εικόνας σας."
 
-#: views.py:3359 templatetags/tags.py:338
+#: views.py:3364 templatetags/tags.py:338
 msgid "no alias"
 msgstr "δεν υπάρχει ψευδώνυμο"
 
-#: views.py:4219 views.py:4412
+#: views.py:4224 views.py:4417
 msgid "You can't merge a product to itself."
 msgstr "Δεν μπορείτε να συγχωνεύσετε ένα προϊόν με τον ευατό του."
 
@@ -2931,7 +2911,6 @@ msgstr "Νέα κριτική εξοπλισμού που έχετε"
 
 #: management/__init__.py:153
 msgid "New data posted to public pool"
-<<<<<<< HEAD
 msgstr "Νέα δεδομένα αναρτήθηκαν στην κοινόχρηστη περιοχή"
 
 #: management/__init__.py:159
@@ -2948,28 +2927,7 @@ msgstr "Νέα εικόνα αναρτήθηκε στο προσωπικό κο�
 
 #: management/__init__.py:177
 msgid "You are invited to a shared private folder"
-msgstr "Έχετε πρόσκληση σε ένα προσωπικό κοινόχρηστο φάκελο "
-=======
-msgstr ""
-
-#: management/__init__.py:159
-#, fuzzy
-msgid "New image posted to public data pool"
-msgstr "Νέα εικόνα ενός θέματος που ακολουθείτε"
-
-#: management/__init__.py:165
-msgid "New data posted to shared private folder"
-msgstr ""
-
-#: management/__init__.py:171
-msgid "New image posted to shared private folder"
-msgstr ""
-
-#: management/__init__.py:177
-#, fuzzy
-msgid "You are invited to a shared private folder"
-msgstr "Λάβατε νέο προσωπικό μήνυμα."
->>>>>>> origin/raw-data
+msgstr "Έχετε πρόσκληση σε ένα προσωπικό κοινόχρηστο φάκελο"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -3010,7 +2968,7 @@ msgid "There is no activity yet."
 msgstr "Δεν υπάρχει δραστηριότητα ακόμα."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:10
-#: templates/base.html:230 templates/maintenance_base.html:212
+#: templates/base.html:240 templates/maintenance_base.html:212
 msgid "Affiliates"
 msgstr "Συνεργάτες"
 
@@ -3066,65 +3024,57 @@ msgstr ""
 "Θα λάβετε απάντηση μέσα σε 24 ώρες. Σας ευχαριστούμε για το ενδιαφέρον σας "
 "να χρησιμοποιήσετε τα ΑΡΙ του AstroBin!"
 
-#: templates/base.html:85 templates/base.html.py:628
+#: templates/base.html:95 templates/base.html.py:642
 #: templates/maintenance_base.html:81 templates/maintenance_base.html:555
 msgid "Site links"
 msgstr "Σύνδεσμοι ιστότοπου"
 
-#: templates/base.html:89 templates/base.html.py:630 templates/base.html:660
+#: templates/base.html:99 templates/base.html.py:644 templates/base.html:674
 #: templates/maintenance_base.html:85 templates/maintenance_base.html:557
 #: templates/maintenance_base.html:587
 msgid "Home"
 msgstr "Κεντρική"
 
-#: templates/base.html:92 templates/maintenance_base.html:88
-<<<<<<< HEAD
-=======
-#, fuzzy
->>>>>>> origin/raw-data
+#: templates/base.html:102 templates/maintenance_base.html:88
 msgid "Community"
 msgstr "Κοινότητα"
 
-#: templates/base.html:96 templates/base.html.py:631 templates/index.html:228
+#: templates/base.html:106 templates/base.html.py:645 templates/index.html:228
 #: templates/maintenance_base.html:92 templates/maintenance_base.html:558
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/base.html:107 templates/explore_choose.html:6
+#: templates/base.html:117 templates/explore_choose.html:6
 #: templates/maintenance_base.html:103
 msgid "Explore"
 msgstr "Εξερεύνηση"
 
-#: templates/base.html:114 templates/maintenance_base.html:110
+#: templates/base.html:124 templates/maintenance_base.html:110
 #: templates/most_popular.html:7
 msgid "Popular subjects"
 msgstr "Δημοφιλή αντικείμενα"
 
-#: templates/base.html:121 templates/explore_choose.html:8
+#: templates/base.html:131 templates/explore_choose.html:8
 #: templates/maintenance_base.html:117 templates/wall.html:6
 #: templates/wall.html.py:169
 msgid "The Big Wall"
 msgstr "Ο Μεγάλος Τοίχος"
 
-#: templates/base.html:127 templates/maintenance_base.html:123
+#: templates/base.html:137 templates/maintenance_base.html:123
 #: templates/nightly.html:6
 msgid "Night after night"
 msgstr "Νύχτα-νύχτα"
 
-#: templates/base.html:133 templates/explore_choose.html:16
+#: templates/base.html:143 templates/explore_choose.html:16
 #: templates/maintenance_base.html:129
 msgid "Messier marathon"
 msgstr "Μαραθώνιος Μessier"
 
-#: templates/base.html:145
+#: templates/base.html:155
 msgid "Public data pools"
-<<<<<<< HEAD
-msgstr "Κοινόχρηστες περιοχές δεδομένων"
-=======
-msgstr ""
->>>>>>> origin/raw-data
+msgstr "Δημόσιες περιοχές δεδομένων"
 
-#: templates/base.html:154 templates/comments.html:9
+#: templates/base.html:164 templates/comments.html:9
 #: templates/comments.html.py:11 templates/leaderboard.html:44
 #: templates/maintenance_base.html:143 templates/wall.html:58
 #: templates/gear/page.html:117 templates/gear/page.html.py:243
@@ -3135,205 +3085,204 @@ msgstr ""
 msgid "Comments"
 msgstr "Σχόλια"
 
-#: templates/base.html:160 templates/maintenance_base.html:149
+#: templates/base.html:170 templates/maintenance_base.html:149
 #: templates/reviews.html:9 templates/reviews.html.py:11
 #: templates/gear/page.html:68 templates/gear/page.html.py:239
 msgid "Reviews"
 msgstr "Κριτικές"
 
-#: templates/base.html:169 templates/maintenance_base.html:158
+#: templates/base.html:179 templates/maintenance_base.html:158
 msgid "Advanced search"
 msgstr "Προχωρημένη αναζήτηση"
 
-#: templates/base.html:176 templates/maintenance_base.html:165
+#: templates/base.html:186 templates/maintenance_base.html:165
 #: templates/stats.html:7 templates/subject/page.html:72
 #: templates/user/card.html:27
 msgid "Stats"
 msgstr "Στατιστικά"
 
-#: templates/base.html:182 templates/leaderboard.html:8
+#: templates/base.html:192 templates/leaderboard.html:8
 #: templates/leaderboard.html.py:11 templates/maintenance_base.html:171
 msgid "Leaderboard"
 msgstr "Πίνακας κατάταξης"
 
-#: templates/base.html:189 templates/base.html.py:632 templates/help.html:4
+#: templates/base.html:199 templates/base.html.py:646 templates/help.html:4
 #: templates/maintenance_base.html:178 templates/maintenance_base.html:559
 msgid "Help"
 msgstr "Βοήθεια"
 
-#: templates/base.html:196 templates/help.html:8
+#: templates/base.html:206 templates/help.html:8
 #: templates/maintenance_base.html:185
 msgid "What is this site?"
 msgstr "Τι είναι αυτός ο ιστότοπος;"
 
-#: templates/base.html:202 templates/base.html.py:633 templates/faq.html:4
+#: templates/base.html:212 templates/base.html.py:647 templates/faq.html:4
 #: templates/maintenance_base.html:191 templates/maintenance_base.html:560
 msgid "FAQ"
 msgstr "Συχνές Ερωτήσεις"
 
-#: templates/base.html:208 templates/maintenance_base.html:197
+#: templates/base.html:218 templates/maintenance_base.html:197
 #: templates/questions.html:4 templates/questions.html.py:7
 msgid "AstroBin Questions"
-msgstr "Ερωτήσεις AstroBin "
+msgstr "Ερωτήσεις του AstroBin"
 
-#: templates/base.html:214
+#: templates/base.html:224
 msgid "AstroBin Raw Data"
-msgstr "Ανεπεξέργαστα δεδομένα AstroBin"
+msgstr "Ανεπεξέργαστα Δεδομένα του AstroBin"
 
-<<<<<<< HEAD
-=======
-#: templates/base.html:214
-#, fuzzy
-msgid "AstroBin Raw Data"
-msgstr "Το AstroBin είναι κοινωνικό!"
-
->>>>>>> origin/raw-data
-#: templates/base.html:239 templates/maintenance_base.html:221
+#: templates/base.html:249 templates/maintenance_base.html:221
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:7
 msgid "Contact"
 msgstr "Επικοινωνία"
 
-#: templates/base.html:251 templates/leaderboard.html:21
+#: templates/base.html:261 templates/leaderboard.html:21
 #: templates/maintenance_base.html:233 templates/image/detail.html:263
 #: templates/user/profile-subnav.html:87
 msgid "User"
 msgstr "Χρήστης"
 
-#: templates/base.html:328
+#: templates/base.html:338
 msgid "Help with translations!"
 msgstr "Βοήθεια με τις μεταφράσεις!"
 
-#: templates/base.html:336
+#: templates/base.html:346
 msgid "Please select your language from the options above."
 msgstr "Παρακαλώ επιλέξτε την γλώσσα σας από τις παραπάνω επιλογές."
 
-#: templates/base.html:358 templates/index.html:130
+#: templates/base.html:368 templates/index.html:130
 #: templates/maintenance_base.html:252 templates/upload.html:6
 #: templates/upload.html.py:18 templates/upload.html:34
 #: templates/avatar/change.html:38 templates/image/detail.html:1230
 msgid "Upload"
 msgstr "Ανέβασμα εικόνας"
 
-#: templates/base.html:361 templates/maintenance_base.html:255
+#: templates/base.html:371 templates/maintenance_base.html:255
 msgid "My places"
 msgstr "Τα μέρη μου"
 
-#: templates/base.html:367 templates/index.html:215
+#: templates/base.html:377 templates/index.html:215
 #: templates/maintenance_base.html:261 templates/wall.html:149
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
 msgstr "Εμπορικά προϊόντα"
 
-#: templates/base.html:375 templates/maintenance_base.html:269
+#: templates/base.html:385 templates/maintenance_base.html:269
 #: templates/popover/user.html:39 templates/user/profile-subnav.html:28
 msgid "Gallery"
 msgstr "Έκθεση εικόνων"
 
-#: templates/base.html:381 templates/maintenance_base.html:275
+#: templates/base.html:391 templates/maintenance_base.html:275
 #: templates/inclusion_tags/search_image_list.html:45
 #: templates/inclusion_tags/search_image_list.html:96
 #: templates/user/profile-subnav.html:42
 msgid "Favorites"
 msgstr "Αγαπημένα"
 
-#: templates/base.html:387 templates/maintenance_base.html:281
+#: templates/base.html:397 templates/maintenance_base.html:281
 #: templates/image/detail.html:447 templates/image/full.html:79
 #: templates/user/profile-subnav.html:48
 msgid "Technical card"
 msgstr "Τεχνική κάρτα"
 
-#: templates/base.html:393 templates/maintenance_base.html:287
+#: templates/base.html:403 templates/maintenance_base.html:287
 #: templates/user/profile-subnav.html:54
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr "Διαγράμματα"
 
-#: templates/base.html:402 templates/user/profile-subnav.html:35
+#: templates/base.html:412 templates/user/profile-subnav.html:35
 msgid "Raw data library"
-<<<<<<< HEAD
 msgstr "Βιβλιοθήκη ανεπεξέργαστων δεδομένων"
 
-#: templates/base.html:409
+#: templates/base.html:419
 msgid "Private shared folders"
-msgstr "Προσωπικοί κοινόχρηστοι φάκελοι"
-=======
-msgstr ""
+msgstr "Ιδιωτικοί κοινόχρηστοι φάκελοι"
 
-#: templates/base.html:409
-msgid "Private shared folders"
-msgstr ""
->>>>>>> origin/raw-data
-
-#: templates/base.html:418 templates/maintenance_base.html:295
+#: templates/base.html:428 templates/maintenance_base.html:295
 #: templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "Μηνύματα"
 
-#: templates/base.html:424 templates/maintenance_base.html:301
+#: templates/base.html:434 templates/maintenance_base.html:301
 #: templates/user/profile-subnav.html:76
 msgid "API Keys"
 msgstr "Κλειδιά ΑΡΙ"
 
-#: templates/base.html:431 templates/maintenance_base.html:305
+#: templates/base.html:441 templates/maintenance_base.html:305
 msgid "My settings"
 msgstr "Ρυθμίσεις"
 
-#: templates/base.html:438 templates/maintenance_base.html:365
+#: templates/base.html:448 templates/maintenance_base.html:365
 #: templates/user/profile.html:93 templates/user/profile.html.py:96
 msgid "Logout"
 msgstr "Έξοδος"
 
-#: templates/base.html:451 templates/base.html.py:452
+#: templates/base.html:461 templates/base.html.py:462
 #: templates/maintenance_base.html:378 templates/maintenance_base.html:379
 msgid "Notifications"
 msgstr "Ειδοποιήσεις"
 
-#: templates/base.html:463 templates/base.html.py:464
+#: templates/base.html:473 templates/base.html.py:474
 #: templates/maintenance_base.html:390 templates/maintenance_base.html:391
 msgid "Requests"
 msgstr "Αιτήσεις"
 
-#: templates/base.html:475 templates/maintenance_base.html:402
+#: templates/base.html:485 templates/maintenance_base.html:402
 msgid "Have an invite? Login!"
 msgstr "Έχετε πρόσκληση; Είσοδος!"
 
-#: templates/base.html:477 templates/maintenance_base.html:404
+#: templates/base.html:487 templates/maintenance_base.html:404
 #: templates/registration/activation_complete.html:6
 msgid "Login"
 msgstr "Είσοδος"
 
-#: templates/base.html:483 templates/index.html:76
+#: templates/base.html:493 templates/index.html:76
 #: templates/maintenance_base.html:410 templates/registration/login.html:15
 msgid "Register"
 msgstr "Εγγραφή"
 
-#: templates/base.html:495 templates/maintenance_base.html:422
+#: templates/base.html:505 templates/maintenance_base.html:422
 msgid "Quick search"
 msgstr "Γρήγορη αναζήτηση"
 
-#: templates/base.html:580 templates/help.html:10
+#: templates/base.html:582 templates/index.html:69
+#: templates/image/detail.html:582
+#, python-format
+msgid ""
+"<strong>AstroBin Raw Data</strong> is a platform for the secure storage of "
+"all your FIT and DLSR raw files, up to 500 GB! It will automatically keep "
+"your files organized, and allow you to share them with other members. <a "
+"href=\"%(rawdata_url)s\">Want to know more?</a>"
+msgstr ""
+"Τα <strong>Ανεπεξέργαστα Δεδομένα του AstroBin</strong> είναι μια πλατφόρμα "
+"για την ασφαλή αποθήκευση όλων των ανεπεξέργαστων αρχείων FIT και αρχείων "
+"raw από DLSR, μέχρι 500 GB! Θα κρατήσει αυτόματα τα αρχεία σας οργανωμένα, "
+"και θα σας επιτρέψει να τα μοιραστείτε με άλλα μέλη. <a href="
+"\"%(rawdata_url)s\">Θέλετε να μάθετε περισσότερα;</a>"
+
+#: templates/base.html:594 templates/help.html:10
 #: templates/maintenance_base.html:507
 msgid "Hey!"
 msgstr "Έι!"
 
-#: templates/base.html:581 templates/maintenance_base.html:508
+#: templates/base.html:595 templates/maintenance_base.html:508
 msgid "Success!"
 msgstr "Επιτυχία!"
 
-#: templates/base.html:582 templates/base.html.py:594 templates/base.html:606
+#: templates/base.html:596 templates/base.html.py:608 templates/base.html:620
 #: templates/maintenance_base.html:509 templates/maintenance_base.html:521
 #: templates/maintenance_base.html:533 templates/upload.html:53
-#: templates/upload.html.py:155 templates/upload.html:348
+#: templates/upload.html.py:156 templates/upload.html:349
 msgid "Warning!"
 msgstr "Προειδοποίηση!"
 
-#: templates/base.html:583 templates/maintenance_base.html:510
+#: templates/base.html:597 templates/maintenance_base.html:510
 #: templates/upload.html:74 templates/image/detail.html:836
 #: templates/image/detail.html.py:874 templates/image/detail.html:884
 msgid "Error!"
 msgstr "Σφάλμα!"
 
-#: templates/base.html:596 templates/maintenance_base.html:523
+#: templates/base.html:610 templates/maintenance_base.html:523
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -3344,7 +3293,7 @@ msgstr ""
 "συμπληρώσετε όλες τις πληροφορίες της εταιρίας σας! Κάντε κλικ <a href="
 "\"%(the_url)s\">εδώ</a> για να το κάνετε τώρα."
 
-#: templates/base.html:608 templates/maintenance_base.html:535
+#: templates/base.html:622 templates/maintenance_base.html:535
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
@@ -3354,12 +3303,12 @@ msgstr ""
 "δραστηριότητας σας! Κάντε κλικ <a href=\"%(the_url)s\">εδώ</a> για να το "
 "κάνετε τώρα."
 
-#: templates/base.html:622 templates/maintenance_base.html:549
+#: templates/base.html:636 templates/maintenance_base.html:549
 #: templates/user/card.html:53
 msgid "About"
 msgstr "Σχετικά"
 
-#: templates/base.html:624 templates/maintenance_base.html:551
+#: templates/base.html:638 templates/maintenance_base.html:551
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -3371,29 +3320,29 @@ msgstr ""
 "χρειάζεστε για να ανεβάσετε τις αστροφωτογραφίες σας. Φτιαγμένο από έναν "
 "αστροφωτογράφο, για τους αστροφωτογράφους."
 
-#: templates/base.html:634 templates/maintenance_base.html:561
+#: templates/base.html:648 templates/maintenance_base.html:561
 #: templates/tos.html:7
 msgid "Terms of Service"
 msgstr "Όροι χρήσης"
 
-#: templates/base.html:635 templates/guidelines.html:7
+#: templates/base.html:649 templates/guidelines.html:7
 #: templates/maintenance_base.html:562
 msgid "Guidelines"
 msgstr "Οδηγίες"
 
-#: templates/base.html:639 templates/maintenance_base.html:566
+#: templates/base.html:653 templates/maintenance_base.html:566
 msgid "Thanks to"
 msgstr "Ευχαριστίες"
 
-#: templates/base.html:641 templates/maintenance_base.html:568
+#: templates/base.html:655 templates/maintenance_base.html:568
 msgid "The localization team"
 msgstr "Η ομάδα προγραμματισμού"
 
-#: templates/base.html:647 templates/maintenance_base.html:574
+#: templates/base.html:661 templates/maintenance_base.html:574
 msgid "Copyright"
 msgstr "Πνευματικά Δικαιώματα"
 
-#: templates/base.html:649 templates/maintenance_base.html:576
+#: templates/base.html:663 templates/maintenance_base.html:576
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -3403,21 +3352,21 @@ msgstr ""
 "Όλα τα δικαιώματα προστατευμένα. Οι εικόνες σε αυτό τον ιστότοπο είναι "
 "πνευματικά δικαιώματα των αντίστοιχων ιδιοκτητών τους."
 
-#: templates/base.html:664 templates/maintenance_base.html:591
+#: templates/base.html:678 templates/maintenance_base.html:591
 msgid "Back to top"
 msgstr "Πίσω στην κορυφή"
 
-#: templates/base.html:711 templates/maintenance_base.html:634
+#: templates/base.html:725 templates/maintenance_base.html:634
 #: templates/messages/compose.html:14 templates/openid_provider/decide.html:14
 msgid "Cancel"
 msgstr "Άκυρο"
 
-#: templates/base.html:753 templates/maintenance_base.html:664
+#: templates/base.html:767 templates/maintenance_base.html:664
 #: templates/image/detail.html:1234
 msgid "No file selected"
 msgstr "Δεν επιλέχθηκε αρχείο"
 
-#: templates/base.html:754 templates/maintenance_base.html:665
+#: templates/base.html:768 templates/maintenance_base.html:665
 #: templates/image/detail.html:1235
 msgid "Choose file"
 msgstr "Επιλέξτε αρχείο"
@@ -3688,7 +3637,7 @@ msgstr ""
 "χάους που μπορεί το Internet να γίνει . Για χρόνια, φανταστικές "
 "αστροφωτογραφίες έχουν ανέβει σε forums του Internet, συχνά με λίγα ή χωρίς "
 "δεδομένα, ή σε ιστοσελίδες γενικής χρήσης φιλοξενίας εικόνων, κατά κανόνα "
-"χωρίς συνημμένες πληροφορίες. "
+"χωρίς συνημμένες πληροφορίες."
 
 #: templates/faq.html:94
 msgid ""
@@ -3775,7 +3724,7 @@ msgstr "(TAB ή 4 κενά)"
 
 #: templates/faq.html:124
 msgid "preformatted text"
-msgstr "μορφοποιημένο κείμενο"
+msgstr "προδιαμορφωμένο κείμενο"
 
 #: templates/faq.html:125
 msgid "quoted text"
@@ -3783,7 +3732,7 @@ msgstr "εισηγμένο κείμενο"
 
 #: templates/faq.html:126
 msgid "escape the formatting syntax"
-msgstr "έξοδος από την μορφοποίησης σύνταξης"
+msgstr "έξοδος από το συντακτικό μορφοποίησης"
 
 #: templates/faq.html:133
 msgid ""
@@ -3823,11 +3772,12 @@ msgid ""
 msgstr ""
 "Το AstroBin χρησιμοποιεί δυο κόλπα για να ομαλοποιήσει τις βαθμολογίες "
 "εικόνων. Πρώτα απ' όλα, ένας αλγόριθμος <em>sigma-reject</em> εφαρμόζεται "
-"για να απορρίψει τις ψήφους που πολύ εκτός του μέσου όρου. Αυτό φροντίζει "
-"τους ανθρώπους που δεν ψηφίζουν ειλικρινά. Μετά η βαθμολογία παρεμβάλλεται "
-"μέσω μιας υπερβολικής συνάρτησης του αριθμού των ψήφων που έλαβε η εικόνα, "
-"για να διασφαλίσει ότι οι εικόνες με λίγες ψήφους δεν θα βαθμολογηθούν "
-"καλύτερα από εικόνες με παρόμοια βαθμολογία, αλλά με πολλές ψήφους."
+"για να απορρίψει τις ψήφους που είναι πολύ εκτός του μέσου όρου. Αυτό "
+"φροντίζει τους ανθρώπους που δεν ψηφίζουν ειλικρινά. Μετά η βαθμολογία "
+"παρεμβάλλεται μέσω μιας υπερβολικής συνάρτησης του αριθμού των ψήφων που "
+"έλαβε η εικόνα, για να διασφαλίσει ότι οι εικόνες με λίγες ψήφους δεν θα "
+"βαθμολογηθούν καλύτερα από εικόνες με παρόμοια βαθμολογία, αλλά με πολλές "
+"ψήφους."
 
 #: templates/faq.html:183
 msgid ""
@@ -4288,7 +4238,6 @@ msgstr "Πρόσφατες εικόνες"
 
 #: templates/index.html:55
 msgid "FIT and DSLR camera raw files"
-<<<<<<< HEAD
 msgstr "Ανεπεξέργαστα αρχεία FIT και καμερών DSLR"
 
 #: templates/index.html:65
@@ -4298,33 +4247,6 @@ msgid ""
 msgstr ""
 "Το AstroBin παρέχει επίσης αποθήκευση ανεπεξέργαστων αρχείων FIT και καμερών "
 "DSLR, για λόγους αποθήκευσης και μοιράσματος!"
-
-=======
-msgstr ""
-
-#: templates/index.html:65
-msgid ""
-"AstroBin offers the storage of FIT and DSLR camera raw files too, for "
-"archival and sharing purposes!"
-msgstr ""
-
->>>>>>> origin/raw-data
-#: templates/index.html:69 templates/image/detail.html:582
-#, python-format
-msgid ""
-"<strong>AstroBin Raw Data</strong> is a platform for the secure storage of "
-"all your FIT and DLSR raw files, up to 500 GB! It will automatically keep "
-"your files organized, and allow you to share them with other members. <a "
-"href=\"%(rawdata_url)s\">Want to know more?</a>"
-msgstr ""
-<<<<<<< HEAD
-"Τα <strong>Ανεπεξέργαστα Δεδομένα του AstroBin</strong> είναι μια πλατφόρμα "
-"για την ασφαλή αποθήκευση όλων των ανεπεξέργαστων αρχείων FIT και καμερών "
-"DLSR, μέχρι 500 GB! Θα κρατήσει αυτόματα τα αρχεία σας οργανωμένα, και θα "
-"σας επιτρέψει να τα μοιραστείτε με άλλα μέλη. <a href=\"%"
-"(rawdata_url)s\">Θέλετε να μάθετε περισσότερα;</a>"
-=======
->>>>>>> origin/raw-data
 
 #: templates/index.html:102
 msgid "Image of the day"
@@ -4346,7 +4268,7 @@ msgstr "(δείτε περισσότερα)"
 
 #: templates/index.html:155
 msgid "Followed"
-msgstr "Ακολουθούνται"
+msgstr "Ακολουθείται"
 
 #: templates/index.html:166 templates/index.html.py:167
 #: templates/index.html:168 templates/index.html.py:169
@@ -4591,10 +4513,10 @@ msgid ""
 "will be explained below."
 msgstr ""
 "Από σήμερα, η πιο κοινή φόρμα στην οποία υπάρχουν οι αστρονομικές κοινότητες "
-"είναι αυτή ενός forum. Μια παλιά ιδεά άνω των 20 χρόνων η οποία δεν μπορεί "
-"να κλιμακωθεί καλά με την μαζική ποσότητα των πληροφοριών, κάνει μια άσχημη "
+"είναι αυτή ενός forum. Μια παλιά ιδέα άνω των 20 χρόνων η οποία δεν μπορεί "
+"να κλιμακωθεί καλά με την ογκώδη ποσότητα των πληροφοριών, κάνει μια άσχημη "
 "δουλειά στο να οργανώνει τέτοιες πληροφορίες (στην πραγματικότητα μόλις που "
-"προσπαθεί), και παρουσιάζει μια σειρά από ψεξάδια, τα οποία θα εξηγηθούν "
+"προσπαθεί), και παρουσιάζει μια σειρά από ψεγάδια, τα οποία θα εξηγηθούν "
 "παρακάτω."
 
 #: templates/questions.html:22
@@ -4608,11 +4530,11 @@ msgid ""
 msgstr ""
 "Είναι ένας ιστότοπος Ερωτήσεων &amp; Απαντήσεων επικεντρωμένος στην ποιότητα "
 "του περιεχομένου. Τα επιτρεπόμενα θέματα συζητήσεως είναι για την "
-"Αστροφωτογραφία και Αστρονμία."
+"Αστροφωτογραφία και Αστρονομία."
 
 #: templates/questions.html:27
 msgid "What's wrong with forums?"
-msgstr "Ποιό είναι το κακό με τα forums;"
+msgstr "Ποιο είναι το κακό με τα forums;"
 
 #: templates/questions.html:29
 msgid ""
@@ -4620,10 +4542,9 @@ msgid ""
 "<strong>terribly</strong> dated, as a system, for today's Internet "
 "standards. Here's a series of flaws that AstroBin Questions fixes:"
 msgstr ""
-"Τα forums είναι τέλεια για ψυχαγωγική συζήτηση, αλλά είναι "
-"<strong>τελείως</strong> ξεπερασμένα, σαν σύστημα, για τα πρότυπα του "
-"σημερινού Internet. Ορίστε μια σειρά από ψεξάδια τα οποία οι Ερωτήσεις του "
-"AstroBin διορθώνουν:"
+"Τα forums είναι τέλεια για ψυχαγωγική συζήτηση, αλλά είναι <strong>τελείως</"
+"strong> ξεπερασμένα, σαν σύστημα, για τα πρότυπα του σημερινού Internet. "
+"Ορίστε μια σειρά από ψεγάδια τα οποία οι Ερωτήσεις του AstroBin διορθώνουν:"
 
 #: templates/questions.html:33
 msgid "Every post is flat"
@@ -4635,9 +4556,9 @@ msgid ""
 "the same post, because the only way to do it is by quoting somebody. Very "
 "soon this becomes a mess."
 msgstr ""
-"Είναι πολύ δύσκολο να πάρεις μέρος σε αρκετές συζητήσεις την ίδια στιγμή, "
-"επειδή ο μόνος τρόπος να το κάνεις είναι με το να παραθέσετε την ανάρτηση "
-"κάποιου. Πολύ σύντομα γίνεται ένας χαμός."
+"Είναι πολύ δύσκολο να πάρεις μέρος σε αρκετές συζητήσεις την ίδια στιγμή "
+"στην ίδια ανάρτηση, επειδή ο μόνος τρόπος να το κάνεις αυτό είναι με το να "
+"παραθέσετε την ανάρτηση κάποιου. Πολύ σύντομα γίνεται ένας χαμός."
 
 #: templates/questions.html:40
 msgid "Every post has the same visibility"
@@ -4654,10 +4575,10 @@ msgid ""
 "community."
 msgstr ""
 "Αν αναρτήσετε ένα μήνυμα όπου ρωτάτε αν θα έπρεπε να χρησιμοποιήσετε ένα "
-"ηλιακό φίλτρο κατά την παρατήρηση μιας έκλειψης, και να απαντήσω <em>\"Όχι, "
-"μην ανησυχείς,\"</em> ο μόνος τρόπος για να ακυρωθεί αυτή η απάντηση είναι "
-"άλλοι άνθρωποι να απαντήσουν και να πουν γιατί αυτό δεν είναι σωστό. Αυτό "
-"δεν εγγυάται ότι κάποιος δεν θα πάει και θα χάσει ένα μάτι. Αυτό είναι ένα "
+"ηλιακό φίλτρο κατά την παρατήρηση μιας έκλειψης, και απαντήσω <em>\"Όχι, μην "
+"ανησυχείς,\"</em> ο μόνος τρόπος για να ακυρωθεί αυτή η απάντηση είναι άλλοι "
+"άνθρωποι να απαντήσουν και να πουν γιατί αυτό δεν είναι σωστό. Αυτό δεν "
+"εγγυάται ότι κάποιος δεν θα πάει και θα χάσει ένα μάτι. Αυτό είναι ένα "
 "ακραίο παράδειγμα: αυτό που προσπαθώ να πω είναι πως κάποιες αναρτήσεις "
 "μπορεί αντικειμενικά να είναι λάθος, και αυτό θα κάνει χειρότερη την "
 "ποιότητα της κοινότητας."
@@ -4700,10 +4621,10 @@ msgid ""
 "highly interactive, wiki-capable website that <strong>you</strong> moderate, "
 "thanks to a system based on <em>karma points</em>."
 msgstr ""
-"Οι Ερωτήσεις του AstroBin Questions απευθύνονται σε όλα αυτά τα θέματα με "
-"μια ιστοσελίδα στο πνεύμα της κοινότητας υψηλής διαδραστικότητας και "
-"δυνατότητας wiki την οποία <strong>εσείς</strong> εποπτεύετε, χάρη σε ένα "
-"σύστημα βασισμένο σε <em>πόντους κάρμα</em>."
+"Οι Ερωτήσεις του AstroBin απευθύνονται σε όλα αυτά τα θέματα με μια "
+"ιστοσελίδα στο πνεύμα της κοινότητας υψηλής διαδραστικότητας και δυνατότητας "
+"wiki την οποία <strong>εσείς</strong> εποπτεύετε, χάρη σε ένα σύστημα "
+"βασισμένο σε <em>πόντους κάρμα</em>."
 
 #: templates/questions.html:66
 msgid ""
@@ -4740,7 +4661,7 @@ msgid ""
 "languages will come soon."
 msgstr ""
 "Υ.Γ.: Οι Ερωτήσεις του AstroBin είναι διαθέσιμες μόνο στα Αγγλικά, προς το "
-"παρόν, αλλά σύντομα θα έλθουν και άλλες γλώσσες"
+"παρόν, αλλά σύντομα θα έλθουν και άλλες γλώσσες."
 
 #: templates/stats.html:10
 #, python-format
@@ -4858,7 +4779,6 @@ msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
 msgstr ""
-<<<<<<< HEAD
 "Δεν έχετε άλλο διαθέσιμο χώρο στον λογαριασμό των Ανεπεξέργαστων Δεδομένων. "
 "Παρακαλώ διαγράψτε μερικά αρχεία για να κάνετε χώρο, ή αναβαθμίστε τον "
 "λογαριασμό σας."
@@ -4870,156 +4790,98 @@ msgstr "Χρησιμοποιήστε το παρακάτω κουμπί για �
 #: templates/upload.html:89
 msgid "Drop your raw data here"
 msgstr "Τοποθετήστε τα ανεπεξέργαστα δεδομένα σας εδώ"
-=======
-
-#: templates/upload.html:85
-msgid "Use the button below to choose files"
-msgstr ""
-
-#: templates/upload.html:89
-msgid "Drop your raw data here"
-msgstr ""
->>>>>>> origin/raw-data
 
 #: templates/upload.html:91
-msgid "Accepted file types: FIT and digital camera raw files"
+msgid "or download the desktop client for easier uploads!"
 msgstr ""
-<<<<<<< HEAD
-"Αποδεκτοί τύποι αρχείων: FIT και ανεπεξέργαστα αρχεία ψηφιακών καμερών (raw) "
-""
 
-#: templates/upload.html:95
+#: templates/upload.html:92
+msgid "Accepted file types: FIT and digital camera raw files"
+msgstr "Αποδεκτοί τύποι αρχείων: FIT και αρχεία raw ψηφιακών καμερών"
+
+#: templates/upload.html:96
 msgid "Filename"
 msgstr "Όνομα αρχείου"
-=======
 
-#: templates/upload.html:95
-#, fuzzy
-msgid "Filename"
-msgstr "Σουρινάμ"
->>>>>>> origin/raw-data
-
-#: templates/upload.html:96 templates/popover/subject.html:14
+#: templates/upload.html:97 templates/popover/subject.html:14
 #: templates/subject/page.html:41
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: templates/upload.html:97 templates/messages/inbox.html:24
+#: templates/upload.html:98 templates/messages/inbox.html:24
 msgid "Status"
 msgstr "Κατάσταση"
 
-#: templates/upload.html:114
-<<<<<<< HEAD
+#: templates/upload.html:115
 msgid "Choose files"
 msgstr "Επιλέξτε αρχεία"
 
-#: templates/upload.html:118
+#: templates/upload.html:119
 msgid "Reset"
 msgstr "Επαναφορά"
 
-#: templates/upload.html:125
+#: templates/upload.html:126
 msgid "Start upload"
 msgstr "Εκκίνηση ανεβάσματος"
 
-#: templates/upload.html:144 templates/upload.html.py:383
+#: templates/upload.html:145 templates/upload.html.py:384
 msgid "Go to your Raw Data Library."
 msgstr "Μετάβαση την Βιβλιοθήκη Ανεπεξέργαστων Δεδομένων"
-=======
-#, fuzzy
-msgid "Choose files"
-msgstr "Επιλέξτε αρχείο"
 
-#: templates/upload.html:118
-msgid "Reset"
-msgstr ""
-
-#: templates/upload.html:125
-#, fuzzy
-msgid "Start upload"
-msgstr "ανέβηκε"
-
-#: templates/upload.html:144 templates/upload.html.py:383
-msgid "Go to your Raw Data Library."
-msgstr ""
->>>>>>> origin/raw-data
-
-#: templates/upload.html:157
+#: templates/upload.html:158
 msgid ""
 "Your Raw Data subscription is not active, or it has expired. If you have "
 "just subscribed, please wait for a few minutes. Thanks for your patience!"
 msgstr ""
-<<<<<<< HEAD
 "Η συνδρομή σας στα Ανεπεξέργαστα Δεδομένα δεν είναι ενεργοποιημένη. Αν μόλις "
 "τώρα γίνατε μέλος, παρακαλώ περιμένετε μερικά λεπτά. Σας ευχαριστούμε για "
 "την υπομονή σας!"
-=======
->>>>>>> origin/raw-data
 
-#: templates/upload.html:162
+#: templates/upload.html:163
 #, python-format
 msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
 msgstr ""
+"Μετάβαση στη <a href=\"%(plans_url)s\">σελίδα πλάνων</a> των Ανεπεξέργαστων "
+"Δεδομένων"
 
-#: templates/upload.html:172
+#: templates/upload.html:173
 msgid ""
 "Did you know that AstroBin can host your FIT and digital camera raw files "
 "too?"
 msgstr ""
-<<<<<<< HEAD
-"Γνωρίζατε ότι το AstroBin μπορεί να host τα αρχεία FIT όπως και τα "
-"ανεπεξέργαστα (raw) αρχεία από τις ψηφιακές κάμερες;"
-=======
->>>>>>> origin/raw-data
+"Γνωρίζατε ότι το AstroBin μπορεί να φιλοξενήσει τα αρχεία FIT όπως και τα "
+"raw αρχεία από τις ψηφιακές κάμερες;"
 
-#: templates/upload.html:175
+#: templates/upload.html:176
 #, python-format
 msgid ""
 "Have a look at <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> if you want "
 "to safely store all your raw files, and have them neatily organized for "
 "future reference!"
 msgstr ""
-<<<<<<< HEAD
 "Ρίξτε μια ματιά στα <a href=\"%(rawdata_url)s\">Ανεπεξέργαστα Δεδομένα του "
 "AstroBin</a> αν θέλετε να αποθηκεύσετε με ασφάλεια όλα τα ανεπεξέργαστα "
 "δεδομένα σας, και να τα έχετε τακτοποιημένα για μελλοντική αναφορά!"
 
-#: templates/upload.html:266
+#: templates/upload.html:267
 msgid "Raw files"
 msgstr "Ανεπεξέργαστα αρχεία"
 
-#: templates/upload.html:303
+#: templates/upload.html:304
 msgid "Upload started, please wait..."
 msgstr "Το ανέβασμα ξεκίνησε, παρακαλώ περιμένετε..."
-=======
 
-#: templates/upload.html:266
-msgid "Raw files"
-msgstr ""
-
-#: templates/upload.html:303
-msgid "Upload started, please wait..."
-msgstr ""
->>>>>>> origin/raw-data
-
-#: templates/upload.html:349
+#: templates/upload.html:350
 msgid ""
 "One ore more files were ignored because they did not look like FIT or "
 "digital camera raw files."
 msgstr ""
-<<<<<<< HEAD
-"Ένα ή περισσότερα αρχεία παραλήφθηκαν επειδή δεν έμοιαζαν να είναι FIT ή "
-"ανεπεξέργαστα (raw) αρχεία από ψηφιακή κάμερα."
+"Ένα ή περισσότερα αρχεία παραβλέφθηκαν επειδή δεν έμοιαζαν να είναι FIT ή "
+"raw αρχεία από ψηφιακή κάμερα."
 
-#: templates/upload.html:382
+#: templates/upload.html:383
 msgid "Upload complete!"
 msgstr "Το ανέβασμα ολοκληρώθηκε!"
-=======
-
-#: templates/upload.html:382
-#, fuzzy
-msgid "Upload complete!"
-msgstr "Ώρα ανεβάσματος"
->>>>>>> origin/raw-data
 
 #: templates/wall.html:14
 msgid "Sort by"
@@ -5448,7 +5310,7 @@ msgstr ""
 "Αυτή η εικόνα είναι <strong>δουλειά σε εξέλιξη</strong> από την <a href="
 "\"%(profile_url)s?staging\">Περιοχή Επεξεργασίας</a> σας. Αυτό σημαίνει πως "
 "κανείς δεν μπορεί να την δει εκτός και αν τους δώσετε έναν από τους "
-"συνδέσμους που θα βρείτε στο μενού <em>Κοινοποίηση  </em>. Χρησιμοποιείστε "
+"συνδέσμους που θα βρείτε στο μενού <em>Κοινοποίηση </em>. Χρησιμοποιείστε "
 "αυτόν τον σύνδεσμο για να κοινοποιήσετε αυτή την εικόνα σε forums του "
 "Internet και να πάρετε σχόλια. Όταν είστε ικανοποιημένοι, ίσως αφού "
 "ανεβάσετε μερικές αναθεωρήσεις, να την <a href=\"%(promote_url)s"
@@ -5501,23 +5363,12 @@ msgid "Move to staging area"
 msgstr "Προώθηση στην περιοχή επεξεργασίας"
 
 #: templates/image/detail.html:122 templates/image/detail.html.py:818
-<<<<<<< HEAD
 msgid "Send to public data pool"
 msgstr "Προώθηση στην κοινόχρηστη περιοχή δεδομένων"
 
 #: templates/image/detail.html:129 templates/image/detail.html.py:855
 msgid "Send to private shared folder"
 msgstr "Αποστολή στον κοινόχρηστο προσωπικό φάκελο"
-=======
-#, fuzzy
-msgid "Send to public data pool"
-msgstr "Προώθηση στην περιοχή προβολής"
-
-#: templates/image/detail.html:129 templates/image/detail.html.py:855
-#, fuzzy
-msgid "Send to private shared folder"
-msgstr "Αποστολή προσωπικού μηνύματος"
->>>>>>> origin/raw-data
 
 #: templates/image/detail.html:139
 msgid "Delete original image"
@@ -5659,45 +5510,30 @@ msgstr ""
 "%(lang)s</strong>."
 
 #: templates/image/detail.html:568
-<<<<<<< HEAD
-=======
-#, fuzzy
->>>>>>> origin/raw-data
 msgid "What is this?"
 msgstr "Τι είναι αυτό;"
 
 #: templates/image/detail.html:569
+#, fuzzy
 msgid ""
 "This button will create a post on AstroBin Questions, in which you can ask "
-"for critique, review or analisys of your image."
+"for critique, review or analysis of your image."
 msgstr ""
 "Αυτό το κουμπί θα δημιουργήσει μια ανάρτηση στις Ερωτήσεις του AstroBin, "
-"στις οποίες μπορείτε να ζητήσετε κριτική, να παρουσιάσετε ή ανάλυση της "
-"εικόνας σας."
+"στις οποίες μπορείτε να ζητήσετε κριτική, να παρουσιάσετε ή να ζητήσετε "
+"ανάλυση της εικόνας σας."
 
 #: templates/image/detail.html:569
-<<<<<<< HEAD
-=======
-#, fuzzy
->>>>>>> origin/raw-data
 msgid "Learn more about AstroBin Questions."
 msgstr "Μάθετε περισσότερα για τις Ερωτήσεις του AstroBin."
 
 #: templates/image/detail.html:572
-<<<<<<< HEAD
-=======
-#, fuzzy
->>>>>>> origin/raw-data
 msgid "Request critique"
 msgstr "Ζητήστε κριτική"
 
 #: templates/image/detail.html:579
 msgid "Introducing AstroBin Raw Data"
-<<<<<<< HEAD
 msgstr "Παρουσιάζουμε τα Ανεπεξέργαστα Δεδομένα του AstroBin"
-=======
-msgstr ""
->>>>>>> origin/raw-data
 
 #: templates/image/detail.html:600 templates/image/detail.html.py:626
 msgid "Final"
@@ -5777,21 +5613,15 @@ msgid ""
 "If this image is the result of your processing of a public data pool, you "
 "can send it the pool so it's displayed there."
 msgstr ""
-<<<<<<< HEAD
-"Αν αυτή η εικόνα είναι το αποτέλεσμα της επεξεργασίας σας μιας κοινόχρηστης "
+"Αν αυτή η εικόνα είναι το αποτέλεσμα της επεξεργασίας σας μιας δημόσιας "
 "περιοχής δεδομένων, μπορείτε να την στείλετε στην περιοχή ώστε να εμφανιστεί "
 "εκεί."
-=======
->>>>>>> origin/raw-data
 
 #: templates/image/detail.html:827
 msgid "Use this form to select an existing <strong>public data pool</strong>."
 msgstr ""
-<<<<<<< HEAD
 "Χρησιμοποιείστε αυτή την φόρμα για την επιλογή μιας υπάρχουσας "
-"<strong>κοινόχρηστης περιοχής δεδομένων</strong>."
-=======
->>>>>>> origin/raw-data
+"<strong>δημόσιας περιοχής δεδομένων</strong>."
 
 #: templates/image/detail.html:839 templates/image/detail.html.py:887
 #, python-format
@@ -5799,11 +5629,8 @@ msgid ""
 "You need a <a href=\"%(rawdata_url)s\">Raw Data</a> subscription to perform "
 "this action."
 msgstr ""
-<<<<<<< HEAD
 "Χρειάζεστε μια συνδρομή <a href=\"%(rawdata_url)s\">Ανεπεξέργαστων "
 "Δεδομένων</a> για να πραγματοποιήσετε αυτή την ενέργεια."
-=======
->>>>>>> origin/raw-data
 
 #: templates/image/detail.html:840 templates/image/detail.html.py:888
 #, python-format
@@ -5813,54 +5640,37 @@ msgid ""
 "organized, but being part of it also means that you support AstroBin and can "
 "perhaps contribute your raw files to scientic discoveries."
 msgstr ""
-<<<<<<< HEAD
 "Η <a href=\"%(rawdata_url)s\">Πλατφόρμα Ανεπεξέργαστων Δεδομένων</a> είναι "
 "κυρίως ένας τρόπος για δημιουργήσετε αντίγραφο ασφαλείας των ανεπεξέργαστων "
 "δεδομένων σας, και να τα κρατήσετε τακτοποιημένα και οργανωμένα χωρίς κόπο, "
 "αλλά όντας μέλος της σημαίνει επίσης ότι υποστηρίζετε το AstroBin και "
 "πιθανών να συνεισφέρετε τα ανεπεξέργαστα δεδομένα σας για επιστημονικές "
 "ανακαλύψεις."
-=======
->>>>>>> origin/raw-data
 
 #: templates/image/detail.html:859
 msgid ""
 "If this image is the result of your processing of a private shared folder, "
 "you can send it the folder so it's displayed there."
 msgstr ""
-<<<<<<< HEAD
-"Αν αυτή η εικόνα είναι το αποτέλεσμα της επεξεργασίας σας ενός προσωπικού "
+"Αν αυτή η εικόνα είναι το αποτέλεσμα της επεξεργασίας σας ενός ιδιωτικού "
 "κοινόχρηστου φακέλου, μπορείτε να την στείλετε στον φάκελο ώστε να "
 "εμφανιστεί εκεί"
-=======
->>>>>>> origin/raw-data
 
 #: templates/image/detail.html:865
 msgid ""
 "Use this form to select a <strong>private shared folder</strong> you have "
 "created or have been invited to."
 msgstr ""
-<<<<<<< HEAD
-"Χρησιμοποιήστε αυτή την φόρμα για την επιλογή ενός <strong>προσωπικού "
+"Χρησιμοποιήστε αυτή την φόρμα για την επιλογή ενός <strong>ιδιωτικού "
 "κοινόχρηστου φακέλου</strong> που δημιουργήσατε ή που σας έχουν καλέσει."
 
 #: templates/image/detail.html:877
 msgid "You don't have access to any shared private folders."
-msgstr "Δεν έχετε πρόσβαση σε κοινόχρηστους προσωπικούς φακέλους."
+msgstr "Δεν έχετε πρόσβαση σε κοινόχρηστους ιδιωτικούς φακέλους."
 
 #: templates/image/detail.html:897
 msgid "OK"
 msgstr "Εντάξει"
-=======
-
-#: templates/image/detail.html:877
-msgid "You don't have access to any shared private folders."
-msgstr ""
-
-#: templates/image/detail.html:897
-msgid "OK"
-msgstr ""
->>>>>>> origin/raw-data
 
 #: templates/image/detail.html:955
 msgid "Copied!"
@@ -6822,7 +6632,7 @@ msgstr ""
 "Η εικόνα σας έχει τις περισσότερες προτάσεις για το αντικείμενο Messier "
 "%(messier_object)s.\n"
 "\n"
-"Μπορείτε να βρείτε τον Μαραθώνιο Messier εδω: http://astrobin.com/explore/"
+"Μπορείτε να βρείτε τον Μαραθώνιο Messier εδώ: http://astrobin.com/explore/"
 "messier/"
 
 #: templates/notification/messier_top_nomination/notice.html:2
@@ -7110,8 +6920,7 @@ msgid ""
 "\n"
 "Visit the folder at the following url: %(folder_url)s"
 msgstr ""
-<<<<<<< HEAD
-"Έχετε μια πρόσκληση στο κοινόχρηστο προσωπικό φάκελο: \"%(folder_name)s\".\n"
+"Έχετε μια πρόσκληση στον ιδιωτικό κοινόχρηστο φάκελο: \"%(folder_name)s\".\n"
 "\n"
 "Μπορείτε τώρα να συνεισφέρετε δεδομένα και επεξεργασμένες εικόνες σε αυτόν "
 "τον φάκελο. Μπορείτε επίσης να καλέσετε και άλλα άτομα.\n"
@@ -7120,300 +6929,167 @@ msgstr ""
 
 #: templates/notification/rawdata_invited_to_private_folder/notice.html:2
 #, python-format
-=======
-
-#: templates/notification/rawdata_invited_to_private_folder/notice.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
-<<<<<<< HEAD
-"<a href=\"%(folder_url)s\">Είστε καλεσμένοι στον ακόλουθο προσωπικό "
+"<a href=\"%(folder_url)s\">Είστε καλεσμένοι στον ακόλουθο ιδιωτικό "
 "κοινόχρηστο φάκελο: <strong>\"%(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/short.html:2
 #, python-format
-=======
-"<a href=\"%(object_url)s\">Σταματήσατε να ακολουθείτε το <strong>%(object)s</"
-"strong>.</a>"
-
-#: templates/notification/rawdata_invited_to_private_folder/short.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</a>"
 msgstr ""
-<<<<<<< HEAD
-"<a href=\"%(folder_url)s\">Είστε καλεσμένοι στον ακόλουθο προσωπικό "
+"<a href=\"%(folder_url)s\">Είστε καλεσμένοι στον ακόλουθο ιδιωτικό "
 "κοινόχρηστο φάκελο: <strong>\"%(folder_name)s.\"</a>"
-=======
-"<a href=\"%(object_url)s\">Σταματήσατε να ακολουθείτε το <strong>%(object)s</"
-"strong>.</a>"
->>>>>>> origin/raw-data
 
 #: templates/notification/rawdata_invited_to_private_folder/short.txt:2
 #, python-format
 msgid "You are invited you to the private shared folder: %(folder_name)s"
 msgstr ""
-<<<<<<< HEAD
-"Είστε καλεσμένοι στον ακόλουθο προσωπικό κοινόχρηστο φάκελο: %(folder_name)s"
+"Είστε καλεσμένοι στον ακόλουθο ιδιωτικό κοινόχρηστο φάκελο: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
 #, python-format
-=======
-
-#: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added a new processed image to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
-<<<<<<< HEAD
-"Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στον προσωπικό "
-"κοινόχρηστο φάκελο: \"%(folder_name)s\". Δείτε την στο ακόλουθο url: %"
-"(folder_url)s"
+"Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στον ιδιωτικό "
+"κοινόχρηστο φάκελο: \"%(folder_name)s\". Δείτε την στο ακόλουθο url: "
+"%(folder_url)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
 #, python-format
-=======
-"Ο/Η %(originator)s ανέβασε μια νέα αναθεώρηση εικόνας! Δείτε την στο "
-"ακόλουθο url: %(object_url)s"
-
-#: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "strong></a>"
 msgstr ""
-<<<<<<< HEAD
 "Ο/Η <a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
-"μια νέα επεξεργασμένη εικόνα στον προσωπικό κοινόχρηστο φάκελο: <strong>\"%"
-"(folder_name)s.\"</strong></a>"
+"μια νέα επεξεργασμένη εικόνα στον ιδιωτικό κοινόχρηστο φάκελο: <strong>"
+"\"%(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
 #, python-format
-=======
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> άρχισε νέα συζήτηση για "
-"ένα αντικείμενο εξοπλισμού που έχετε!</a>"
-
-#: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "a>"
 msgstr ""
-<<<<<<< HEAD
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> hέχει προσθέσει μια "
-"νέα επεξεργασμένη εικόνα στον προσωπικό κοινόχρηστο φάκελο: <strong>\"%"
-"(folder_name)s.\"</a>"
-=======
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έβαλε την εικόνα σας σαν "
-"αγαπημένο!</a>"
->>>>>>> origin/raw-data
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει μια "
+"νέα επεξεργασμένη εικόνα στον ιδιωτικό κοινόχρηστο φάκελο: <strong>"
+"\"%(folder_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.txt:2
 #, python-format
 msgid "New processed image in private shared folder: %(folder_name)s"
 msgstr ""
-<<<<<<< HEAD
-"Νέα επεξεργασμένη εικόνα στον προσωπικό κοινόχρηστο φάκελο: %(folder_name)s"
+"Νέα επεξεργασμένη εικόνα στον ιδιωτικό κοινόχρηστο φάκελο: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
 #, python-format
-=======
-
-#: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added a new processed image to the public data pool: "
 "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
 msgstr ""
-<<<<<<< HEAD
-"Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στην "
-"κοινόχρηστη περιοχή δεδομένων: \"%(pool_name)s\". Δείτε την στο ακόλουθο url: "
+"Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στην δημόσια "
+"περιοχή δεδομένων: \"%(pool_name)s\". Δείτε την στο ακόλουθο url: "
 "%(pool_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
 #, python-format
-=======
-"Ο/Η %(originator)s ανέβασε μια νέα αναθεώρηση εικόνας! Δείτε την στο "
-"ακόλουθο url: %(object_url)s"
-
-#: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
-<<<<<<< HEAD
-"Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει μια "
-"νέα επεξεργασμένη εικόνα στην κοινόχρηστη περιοχή δεδομένων: <strong>\"%"
-"(pool_name)s.\"</strong></a>"
+"Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
+"μια νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: <strong>"
+"\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, python-format
-=======
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> άρχισε νέα συζήτηση για "
-"ένα αντικείμενο εξοπλισμού που έχετε!</a>"
-
-#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
-<<<<<<< HEAD
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>  έχει προσθέσει μια "
-"νέα επεξεργασμένη εικόνα στην κοινόχρηστη περιοχή δεδομένων: <strong>\"%"
-"(pool_name)s.\"</a>"
-=======
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> άρχισε νέα συζήτηση για "
-"ένα αντικείμενο εξοπλισμού που έχετε!</a>"
->>>>>>> origin/raw-data
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει μια "
+"νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: <strong>"
+"\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
 msgid "New processed image in public data pool: %(pool_name)s"
-msgstr ""
-<<<<<<< HEAD
-"Νέα επεξεργασμένη εικόνα στην κοινόχρηστη περιοχή δεδομένων: %(pool_name)s"
+msgstr "Νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_pool/full.txt:2
 #, python-format
-=======
-
-#: templates/notification/rawdata_posted_to_pool/full.txt:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
 "Check it out at the following url: %(pool_url)s"
 msgstr ""
-<<<<<<< HEAD
-"Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στην κοινόχρηστη περιοχή "
-"δεδομένων: \"%(pool_name)s\". Δείτε τα στο ακόλουθο url: %(pool_url)s"
+"Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στην δημόσια περιοχή: "
+"\"%(pool_name)s\". Δείτε τα στο ακόλουθο url: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
 #, python-format
-=======
-"Ο/Η %(user)s απάντησε στο σχόλιο σας. Δείτε την στο ακόλουθο url: %(url)s"
-
-#: templates/notification/rawdata_posted_to_pool/notice.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
-<<<<<<< HEAD
-"Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει νέα "
-"δεδομένα στην κοινόχρηστη περιοχή δεδομένων: <strong>\"%"
-"(pool_name)s.\"</strong></a>"
+"Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
+"νέα δεδομένα στην δημόσια περιοχή: <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, python-format
-=======
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> άρχισε νέα συζήτηση για "
-"ένα αντικείμενο εξοπλισμού που έχετε!</a>"
-
-#: templates/notification/rawdata_posted_to_pool/short.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
-<<<<<<< HEAD
-"Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει νέα "
-"δεδομένα στην κοινόχρηστη περιοχή δεδομένων: <strong>\"%(pool_name)s.\"</a>"
-=======
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> άρχισε νέα συζήτηση για "
-"ένα αντικείμενο εξοπλισμού που έχετε!</a>"
->>>>>>> origin/raw-data
+"Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
+"νέα δεδομένα στην δημόσια περιοχή: <strong>\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
 #, python-format
 msgid "New data in public pool: %(pool_name)s"
-<<<<<<< HEAD
-msgstr "Νέα δεδομένα στην κοινόχρηστη περιοχή δεδομένων: %(pool_name)s"
+msgstr "Νέα δεδομένα στην κοινόχρηστη περιοχή: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/full.txt:2
 #, python-format
-=======
-msgstr ""
-
-#: templates/notification/rawdata_posted_to_private_folder/full.txt:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "%(user_name)s has added new data to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
-<<<<<<< HEAD
-"Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στον προσωπικό κοινόχρηστο "
+"Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στον ιδιωτικό κοινόχρηστο "
 "φάκελο: \"%(folder_name)s\". Δείτε τα στο ακόλουθο url: %(folder_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
 #, python-format
-=======
-"Το AstroBin έχει εκδόσει μια νέα εγγραφή στο blog: \"%(object)s\".\n"
-"\n"
-"Δείτε την στο ακόλουθο url: %(object_url)s"
-
-#: templates/notification/rawdata_posted_to_private_folder/notice.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
-<<<<<<< HEAD
 "Ο/Η <a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
-"νέα δεδομένα στον προσωπικό κοινόχρηστο φάκελο: <strong>\"%"
-"(folder_name)s.\"</strong></a>"
+"νέα δεδομένα στον ιδιωτικό κοινόχρηστο φάκελο: <strong>\"%(folder_name)s.\"</"
+"strong></a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.html:2
 #, python-format
-=======
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έβαλε την εικόνα σας σαν "
-"αγαπημένο!</a>"
-
-#: templates/notification/rawdata_posted_to_private_folder/short.html:2
-#, fuzzy, python-format
->>>>>>> origin/raw-data
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
 msgstr ""
-<<<<<<< HEAD
 "Ο/Η <a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
-"νέα δεδομένα στον προσωπικό κοινόχρηστο φάκελο: <strong>\"%"
-"(folder_name)s.\"</a>"
-=======
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έβαλε την εικόνα σας σαν "
-"αγαπημένο!</a>"
->>>>>>> origin/raw-data
+"νέα δεδομένα στον ιδιωτικό κοινόχρηστο φάκελο: <strong>\"%(folder_name)s.\"</"
+"a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.txt:2
 #, python-format
 msgid "New data in private shared folder: %(folder_name)s"
-<<<<<<< HEAD
-msgstr "Νέα δεδομένα στον προσωπικό κοινόχρηστο φάκελο: %(folder_name)s"
-=======
-msgstr ""
->>>>>>> origin/raw-data
+msgstr "Νέα δεδομένα στον ιδιωτικό κοινόχρηστο φάκελο: %(folder_name)s"
 
 #: templates/notification/received_email/full.txt:2
 msgid ""
@@ -7499,7 +7175,7 @@ msgstr "Μέσος όρος Sigma-reject"
 
 #: templates/popover/rating.html:20
 msgid "AstroBin index"
-msgstr "Ευρετήριο AstroBin"
+msgstr "Δείκτης AstroBin"
 
 #: templates/popover/rating.html:28
 msgid "Info"
@@ -7531,7 +7207,7 @@ msgstr ""
 "και θα ανοίξει για τον υπόλοιπο κόσμο σύντομα. Εάν έχετε πρόσκληση μπορείτε "
 "να <a href=\"%(login_url)s\">μπείτε εδώ</a>, διαφορετικά μπορείτε να μας "
 "αφήσετε το email σας και να σας ενημερώσουμε για το πότε θα ανοίξει ο "
-"ιστότοπος. "
+"ιστότοπος."
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
@@ -7558,12 +7234,9 @@ msgid ""
 "Hi,\n"
 "please use the following link to activate your AstroBin account:"
 msgstr ""
-<<<<<<< HEAD
 "Γειά,\n"
 "παρακαλώ χρησιμοποιείστε τον ακόλουθο σύνδεσμο για να ενεργοποιήσετε τον "
 "λογαριασμό σας στο AstroBin:"
-=======
->>>>>>> origin/raw-data
 
 #: templates/registration/activation_email.txt:7
 #, python-format
@@ -7575,11 +7248,8 @@ msgid ""
 "Sincerely,\n"
 "the AstroBin staff."
 msgstr ""
-<<<<<<< HEAD
 "Με εκτίμηση,\n"
-"Το προσωπικό του AstroBin."
-=======
->>>>>>> origin/raw-data
+"το προσωπικό του AstroBin."
 
 #: templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
@@ -7638,42 +7308,27 @@ msgstr "Επαναφορά κωδικού του %(site_name)s"
 
 #: templates/registration/registration_complete.html:6
 msgid "Registration completed"
-<<<<<<< HEAD
 msgstr "Η εγγραφή ολοκληρώθηκε"
 
 #: templates/registration/registration_complete.html:7
 msgid "You are now registered"
 msgstr "Έχετε εγγραφεί"
-=======
-msgstr ""
-
-#: templates/registration/registration_complete.html:7
-#, fuzzy
-msgid "You are now registered"
-msgstr "Δεν έχετε αιτήσεις."
->>>>>>> origin/raw-data
 
 #: templates/registration/registration_complete.html:12
 msgid ""
 "To confirm your e-mail address, we have sent you an e-mail with an "
 "activation link."
 msgstr ""
-<<<<<<< HEAD
-"Για να επιβεβαιώσετε την διεύθυνση του e-mail σας, σας έχουμε στείλει ένα "
-"e-mail με τον σύνδεσμο ενεργοποίησης."
-=======
->>>>>>> origin/raw-data
+"Για να επιβεβαιώσετε την διεύθυνση του e-mail σας, σας έχουμε στείλει ένα e-"
+"mail με τον σύνδεσμο ενεργοποίησης."
 
 #: templates/registration/registration_complete.html:16
 msgid ""
 "If you don't receive the e-mail within a few minutes, remember to check your "
 "spam folder."
 msgstr ""
-<<<<<<< HEAD
 "Αν δεν λάβετε το e-mail μέσα σε μερικά λεπτά, θυμηθείτε να ελέγξετε τον "
 "φάκελο ανεπιθύμητης αλληλογραφίας."
-=======
->>>>>>> origin/raw-data
 
 #: templates/registration/registration_form.html:5
 #: templates/registration/registration_form.html:8
@@ -8131,7 +7786,7 @@ msgstr "Διεκδικήστε εμπορικό προϊόν"
 #: templates/user/profile/commercial/products.html:412
 #: templates/user/profile/commercial/products.html:739
 msgid "Claim"
-msgstr "Διεκδικήση"
+msgstr "Διεκδίκηση"
 
 #: templates/user/profile/commercial/products.html:247
 #: templates/user/profile/commercial/products.html:321
