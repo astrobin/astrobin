@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-29 09:13-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-02-26 08:12-0600\n"
+"PO-Revision-Date: 2013-02-09 05:24+0100\n"
+"Last-Translator: time2k <timezhang@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: zh-CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 2.1.6\n"
 
-#: folders.py:82 models.py:214 models.py:282
+#: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
 #: templates/rawdata/privatesharedfolder_form.html:20
 #: templates/rawdata/privatesharedfolder_list.html:37
@@ -25,161 +26,165 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:20
 #: templates/rawdata/publicdatapool_list.html:32
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: folders.py:92 templates/rawdata/_folder_dropdown.html:14
 #: templates/rawdata/_images.html:18 templates/rawdata/library.html:65
 #: templates/rawdata/rawimage_detail.html:15
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: folders.py:117 templates/rawdata/_folder_dropdown.html:28
 msgid "Upload date"
-msgstr ""
+msgstr "上传日期"
 
 #: folders.py:141 templates/rawdata/_folder_dropdown.html:21
 #: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
 msgid "Acquisition date"
-msgstr ""
+msgstr "拍摄日期"
 
 #: folders.py:166 templates/rawdata/_folder_dropdown.html:35
 #: templates/rawdata/library.html:89 templates/rawdata/rawimage_detail.html:19
 msgid "Camera"
-msgstr ""
+msgstr "相机"
 
 #: folders.py:190 templates/rawdata/_folder_dropdown.html:42
 #: templates/rawdata/library.html:97
 msgid "Telescope or lens"
-msgstr ""
+msgstr "望远镜或镜头"
 
 #: folders.py:214 templates/rawdata/_folder_dropdown.html:49
 #: templates/rawdata/library.html:105
 msgid "Filter"
-msgstr ""
+msgstr "滤镜"
 
 #: folders.py:238 templates/rawdata/_folder_dropdown.html:56
 #: templates/rawdata/library.html:113
 msgid "Subject"
-msgstr ""
+msgstr "拍摄主体"
 
 #: folders.py:262 templates/rawdata/_folder_dropdown.html:63
 #: templates/rawdata/library.html:121
 #: templates/rawdata/rawimage_detail.html:20
 msgid "Temperature"
-msgstr ""
+msgstr "温度"
 
-#: forms.py:25
-msgid "File type is not supported"
-msgstr ""
-
-#: forms.py:102
+#: forms.py:86
 msgid "Users"
-msgstr ""
+msgstr "用户"
 
-#: forms.py:103
+#: forms.py:87
 msgid "A list of users you want to invite. Use a comma to separate them."
-msgstr ""
+msgstr "您希望邀请的用户列表，用一个逗号来分割"
 
-#: models.py:43 templatetags/rawdata_tags.py:15
+#: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
-msgstr ""
-
-#: models.py:44
-msgid "Light"
-msgstr ""
+msgstr "未知"
 
 #: models.py:45
-msgid "Offset/Bias"
-msgstr ""
+msgid "Light"
+msgstr "光"
 
 #: models.py:46
-msgid "Dark"
-msgstr ""
+msgid "Offset/Bias"
+msgstr "偏置"
 
 #: models.py:47
-msgid "Flat"
-msgstr ""
+msgid "Dark"
+msgstr "暗场"
 
-#: models.py:215
+#: models.py:48
+msgid "Flat"
+msgstr "平场"
+
+#: models.py:216
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
 msgstr ""
+"为这个池取一个公共的名称。请使用描述性文字，包含天体名称和目标的焦距值（毫米"
+"单位）"
 
-#: models.py:219 models.py:287
+#: models.py:220 models.py:288
 #: templates/rawdata/privatesharedfolder_list.html:38
 #: templates/rawdata/publicdatapool_list.html:33
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
-#: models.py:220
+#: models.py:221
 msgid "Describe the goals and terms of this pool."
-msgstr ""
+msgstr "请描述这个池的目标和条件"
 
-#: models.py:283
+#: models.py:284
 msgid ""
 "A name for this folder. Be descriptive, so that the folder can be quickly "
 "recognized by the name."
-msgstr ""
+msgstr "这个目录的名称。请使用描述性的文字，以便这个目录可以被通过名称快速识别"
 
-#: models.py:288
+#: models.py:289
 msgid "Describe the goals of this folder."
+msgstr "请描述这个目录的目标"
+
+#: serializers.py:38
+msgid ""
+"You don't have any free space on AstroBin Rawdata. Consider upgrading your "
+"account."
 msgstr ""
 
 #: signal_handlers.py:18
 msgid ""
 "You cannot downgrade to this plan because your files would not fit in the "
 "allocated space. Please delete some files first."
-msgstr ""
+msgstr "您不能降级到此计划，因为您的文件装不进分配的空间。请先删除一些文件。"
 
 #: templates/rawdata/_browser_js.html:20 templates/rawdata/_images.html:14
 msgid "Select all"
-msgstr ""
+msgstr "选择所有的"
 
 #: templates/rawdata/_browser_js.html:40
 msgid "Reset selection"
-msgstr ""
+msgstr "重置选择"
 
 #: templates/rawdata/_browser_js.html:50 templates/rawdata/_images.html:41
 #: templates/rawdata/privatesharedfolder_detail.html:142
 #: templates/rawdata/publicdatapool_detail.html:111
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
-msgstr ""
+msgstr "下载"
 
 #: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
 msgid "Preprocess"
-msgstr ""
+msgstr "预处理"
 
 #: templates/rawdata/_browser_js.html:63
 msgid "Share"
-msgstr ""
+msgstr "分享"
 
 #: templates/rawdata/_browser_js.html:70
 #: templates/rawdata/privatesharedfolder_detail.html:8
 msgid "Private shared folder"
-msgstr ""
+msgstr "私人共享目录"
 
 #: templates/rawdata/_browser_js.html:74
 #: templates/rawdata/publicdatapool_detail.html:8
 msgid "Public data pool"
-msgstr ""
+msgstr "公共数据池"
 
 #: templates/rawdata/_browser_js.html:80 templates/rawdata/_images.html:44
 #: templates/rawdata/privatesharedfolder_detail.html:46
 #: templates/rawdata/privatesharedfolder_detail.html:184
 #: templates/rawdata/privatesharedfolder_list.html:92
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: templates/rawdata/_folder_dropdown.html:7
 #: templates/rawdata/library.html:129
 msgid "Smart folders"
-msgstr ""
+msgstr "精灵目录"
 
 #: templates/rawdata/_folders.html:12
 msgid "Files"
-msgstr ""
+msgstr "文件"
 
 #: templates/rawdata/_images.html:19 templates/rawdata/library.html:73
 #: templates/rawdata/privatesharedfolder_detail.html:87
@@ -188,11 +193,11 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:22
 #: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
-msgstr ""
+msgstr "已上传"
 
 #: templates/rawdata/_screenshot_tour.html:3
 msgid "Screenshot tour"
-msgstr ""
+msgstr "屏幕截图游览"
 
 #: templates/rawdata/help_01.html:4 templates/rawdata/help_01.html.py:8
 #: templates/rawdata/help_01.html:32 templates/rawdata/help_02.html:4
@@ -212,16 +217,16 @@ msgstr ""
 #: templates/subscription/subscription_list.html:4
 #: templates/subscription/subscription_list.html:8
 msgid "AstroBin Raw Data"
-msgstr ""
+msgstr "AstroBin 原始数据"
 
 #: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
 #: templates/rawdata/help_03.html:9
 msgid "To safely store and organize your raw files."
-msgstr ""
+msgstr "为了安全的存储和组织您的原始数据文件"
 
 #: templates/rawdata/help_01.html:19
 msgid "What is AstroBin Raw Data?"
-msgstr ""
+msgstr "什么是AstroBin原始数据"
 
 #: templates/rawdata/help_01.html:20
 msgid ""
@@ -229,6 +234,8 @@ msgid ""
 "Thanks to it, you will never have to worry about losing your precious work, "
 "nor all the important meta-data associated with it."
 msgstr ""
+"由于能让您的图像得到整理，您已经喜欢上了AstroBIN。感谢这个，您将永远不会担心"
+"丢失您以前的工作以及所有的重要相关数据。"
 
 #: templates/rawdata/help_01.html:22
 msgid "What if we told you now you can do the same with your raw files?"
@@ -242,6 +249,9 @@ msgid ""
 "dark library? Do you just wish that you could backup your raw files "
 "somewhere safe?"
 msgstr ""
+"您的<em>天文摄影</em>目录是否塞满了数千张杂乱无组织的<strong>FIT</strong>文件"
+"或者<strong>数码相机raw</strong> 文件? 您是不是经常很难在暗场库中找到正确的校"
+"准文件？您是不是希望可以在一个安全的地方备份您的原始文件？"
 
 #: templates/rawdata/help_01.html:26
 msgid ""
@@ -249,37 +259,45 @@ msgid ""
 "you can store your whole <strong>raw data library</strong> online, where it "
 "will be securely accessible only by you."
 msgstr ""
+"<strong>AstroBin Raw Data</strong> 就是答案! 一个非常合适的价格，您就可以在线"
+"存储您的整个<strong>原始文件库</strong>，并且仅限您自己来安全的访问。"
 
 #: templates/rawdata/help_01.html:28
 msgid ""
 "AstroBin will <em>automatically</em> organize your files by reading the "
 "<strong>FIT</strong> headers or <strong>EXIF</strong> information!"
 msgstr ""
+"AstroBin会根据读取您的<strong>FIT</strong>文件头或者<strong>EXIF</strong>信息"
+"来 <em>自动</em>编组您的文件！"
 
 #: templates/rawdata/help_01.html:33 templates/rawdata/help_02.html:45
 #: templates/rawdata/help_03.html:32 templates/rawdata/help_03.html.py:40
 msgid "Sign up now!"
-msgstr ""
+msgstr "现在马上注册！"
 
 #: templates/rawdata/help_01.html:40 templates/rawdata/help_02.html:53
 msgid "Next page"
-msgstr ""
+msgstr "下一页"
 
 #: templates/rawdata/help_02.html:19
 msgid "How does it work?"
-msgstr ""
+msgstr "它是如何工作的？"
 
 #: templates/rawdata/help_02.html:20
 msgid ""
 "You can have up to <strong>500 GB</strong> to store your <strong>FIT</"
 "strong> and <strong>digital camera raw</strong> files."
 msgstr ""
+"您可以得到上至<strong>500 GB</strong>的空间来存储您的<strong>FIT</strong>和"
+"<strong>数码相机raw</strong>文件"
 
 #: templates/rawdata/help_02.html:22
 msgid ""
 "You can upload all of them in a matter of a few clicks, and AstroBin will "
 "start organizing your data in \"virtual folders\"."
 msgstr ""
+"通过几步的鼠标点击，您可以全部上传它们，AstroBin就会开始在“可视化目录”中编组"
+"您的数据。"
 
 #: templates/rawdata/help_02.html:24
 msgid ""
@@ -287,6 +305,8 @@ msgid ""
 "computer! CCD and DSLR raw files have comprehensive headers: why shouldn't "
 "you use those to automatically and efficiently tag your raw files?"
 msgstr ""
+"忘记掉您不得不去伺候电脑中那复杂的目录结构吧！CCD和DSLR的原始文件都有综合文件"
+"头：为什么您不用这些来自动和高效的标注您的原始文件呢？"
 
 #: templates/rawdata/help_02.html:27
 msgid "By type"
@@ -298,29 +318,31 @@ msgstr ""
 
 #: templates/rawdata/help_02.html:29
 msgid "By upload date"
-msgstr ""
+msgstr "按上传日期"
 
 #: templates/rawdata/help_02.html:30
 msgid "By subject"
-msgstr ""
+msgstr "按主题"
 
 #: templates/rawdata/help_02.html:31
 msgid "By filter"
-msgstr ""
+msgstr "按过滤器"
 
 #: templates/rawdata/help_02.html:32
 msgid "By acquisition telescope or lens"
-msgstr ""
+msgstr "按探测望远镜或镜头"
 
 #: templates/rawdata/help_02.html:33
 msgid "By temperature"
-msgstr ""
+msgstr "按温度"
 
 #: templates/rawdata/help_02.html:36
 msgid ""
 "Not only will your data be safely and securely preserved, but you will be "
 "able to download bundles of your files in a <strong>zip</strong> file."
 msgstr ""
+"您的数据不仅仅被安全和牢靠的保护，您还可以用 <strong>zip</strong>文件格式来下"
+"载这些文件。"
 
 #: templates/rawdata/help_02.html:38
 msgid ""
@@ -330,15 +352,15 @@ msgstr ""
 
 #: templates/rawdata/help_02.html:40
 msgid "if the information is present in the file's headers"
-msgstr ""
+msgstr "如果文件头提供了这些信息"
 
 #: templates/rawdata/help_02.html:52 templates/rawdata/help_03.html:39
 msgid "Previous page"
-msgstr ""
+msgstr "上一页"
 
 #: templates/rawdata/help_03.html:19
 msgid "Sharing is loving."
-msgstr ""
+msgstr "分享就是爱。"
 
 #: templates/rawdata/help_03.html:20
 msgid ""
@@ -347,6 +369,8 @@ msgid ""
 "massive <strong>100 integration hours</strong> project you've been meaning "
 "to complete. "
 msgstr ""
+"您可以随意的，分享您的原始文件给一位朋友，或者干脆给您天文俱乐部的每一个人！"
+"您注定要的100小时累计曝光的巨大工程，可以相当简单的通过这种方式来合作完成。"
 
 #: templates/rawdata/help_03.html:22
 msgid "Peace of mind."
@@ -375,7 +399,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:6 templates/rawdata/library.html.py:18
 msgid "Your raw data library"
-msgstr ""
+msgstr "您的原始数据库"
 
 #: templates/rawdata/library.html:20
 #, python-format
@@ -388,11 +412,11 @@ msgstr ""
 
 #: templates/rawdata/library.html:37
 msgid "Upload"
-msgstr ""
+msgstr "上传"
 
 #: templates/rawdata/library.html:44 templates/rawdata/restricted.html:18
 msgid "Error!"
-msgstr ""
+msgstr "错误！"
 
 #: templates/rawdata/library.html:45
 msgid ""
@@ -402,7 +426,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:51
 msgid "Warning!"
-msgstr ""
+msgstr "警告！"
 
 #: templates/rawdata/library.html:52
 #, python-format
@@ -412,7 +436,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:59
 msgid "All files"
-msgstr ""
+msgstr "所有文件"
 
 #: templates/rawdata/library.html:139
 msgid "There doesn't seem to be anything here."
@@ -455,18 +479,18 @@ msgstr ""
 
 #: templates/rawdata/plans.html:4 templates/rawdata/plans.html.py:9
 msgid "Plans"
-msgstr ""
+msgstr "计划"
 
 #: templates/rawdata/privatesharedfolder_detail.html:14
 #: templates/rawdata/privatesharedfolder_form.html:128
 #: templates/rawdata/publicdatapool_form.html:128
 msgid "Success!"
-msgstr ""
+msgstr "成功！"
 
 #: templates/rawdata/privatesharedfolder_detail.html:16
 msgid ""
 "The users you selected have been invited. They will receive a notification."
-msgstr ""
+msgstr "您选择的用户已经被邀请了。他们将收到一个提示。"
 
 #: templates/rawdata/privatesharedfolder_detail.html:25
 #: templates/rawdata/publicdatapool_detail.html:17
@@ -477,12 +501,12 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:210
 #: templates/rawdata/privatesharedfolder_detail.html:222
 msgid "Invite"
-msgstr ""
+msgstr "邀请"
 
 #: templates/rawdata/privatesharedfolder_detail.html:39
 #: templates/rawdata/publicdatapool_detail.html:24
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 #: templates/rawdata/privatesharedfolder_detail.html:59
 #, python-format
@@ -506,11 +530,11 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:21
 #: templates/rawdata/rawimage_detail.html:16
 msgid "Size"
-msgstr ""
+msgstr "尺寸"
 
 #: templates/rawdata/privatesharedfolder_detail.html:111
 msgid "Remove from this folder"
-msgstr ""
+msgstr "从该文件夹删除"
 
 #: templates/rawdata/privatesharedfolder_detail.html:125
 msgid "Shared with the following users"
@@ -524,7 +548,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:154
 #: templates/rawdata/publicdatapool_detail.html:123
 msgid "Comments"
-msgstr ""
+msgstr "评论"
 
 #: templates/rawdata/privatesharedfolder_detail.html:158
 #: templates/rawdata/publicdatapool_detail.html:127
@@ -537,7 +561,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:175
 #: templates/rawdata/privatesharedfolder_list.html:84
 msgid "Delete folder"
-msgstr ""
+msgstr "删除文件夹"
 
 #: templates/rawdata/privatesharedfolder_detail.html:178
 #: templates/rawdata/privatesharedfolder_list.html:87
@@ -559,7 +583,7 @@ msgstr ""
 #: templates/rawdata/publicdatapool_detail.html:154
 #: templates/rawdata/publicdatapool_form.html:99
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: templates/rawdata/privatesharedfolder_detail.html:192
 msgid "Edit folder"
@@ -568,7 +592,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:203
 #: templates/rawdata/publicdatapool_detail.html:155
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: templates/rawdata/privatesharedfolder_detail.html:213
 msgid ""
@@ -608,7 +632,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_form.html:60
 #: templates/rawdata/publicdatapool_form.html:60
 msgid "Send"
-msgstr ""
+msgstr "发送"
 
 #: templates/rawdata/privatesharedfolder_form.html:63
 #: templates/rawdata/publicdatapool_form.html:63
@@ -629,7 +653,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_form.html:100
 #: templates/rawdata/publicdatapool_form.html:100
 msgid "Create"
-msgstr ""
+msgstr "建立"
 
 #: templates/rawdata/privatesharedfolder_list.html:5
 #: templates/rawdata/privatesharedfolder_list.html:11
@@ -672,17 +696,17 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_list.html:40
 #: templates/rawdata/publicdatapool_list.html:35
 msgid "Raw images"
-msgstr ""
+msgstr "原始图像"
 
 #: templates/rawdata/privatesharedfolder_list.html:41
 #: templates/rawdata/publicdatapool_list.html:36
 msgid "Processed images"
-msgstr ""
+msgstr "处理后图像"
 
 #: templates/rawdata/privatesharedfolder_list.html:42
 #: templates/rawdata/publicdatapool_list.html:37
 msgid "Last updated"
-msgstr ""
+msgstr "上一次更新"
 
 #: templates/rawdata/privatesharedfolder_list.html:75
 #, python-format
@@ -852,6 +876,59 @@ msgstr ""
 msgid "Please refresh this page in a few seconds."
 msgstr ""
 
+#: templates/rawdata/uploader.html:4 templates/rawdata/uploader.html.py:8
+#, fuzzy
+msgid "AstroBin Raw Data Uploader"
+msgstr "AstroBin 原始数据"
+
+#: templates/rawdata/uploader.html:10
+msgid "A desktop client"
+msgstr ""
+
+#: templates/rawdata/uploader.html:19
+msgid ""
+"The <strong>AstroBin Raw Data Uploader</strong>\n"
+"                is a desktop program compatible with Windows XP, Windows 7, "
+"and\n"
+"                reasonably recent Linux distributions."
+msgstr ""
+
+#: templates/rawdata/uploader.html:24
+msgid ""
+"It's a program that works in the background\n"
+"                and quietly uploads your raw data files to AstroBin, "
+"finding\n"
+"                them in the root directory that you can specify in the\n"
+"                settings."
+msgstr ""
+
+#: templates/rawdata/uploader.html:30
+msgid ""
+"With <strong>AstroBin Raw Data Uploader</strong>\n"
+"                you don't need to upload your raw data files manually, so "
+"you\n"
+"                can just install it, set it up, and then forget about it! "
+"You\n"
+"                will just know that your data is being safely backed up on\n"
+"                <strong>AstroBin Raw Data</strong>."
+msgstr ""
+
+#: templates/rawdata/uploader.html:43
+#, fuzzy
+msgid "Download for:"
+msgstr "下载"
+
+#: templates/rawdata/uploader.html:62 templates/rawdata/uploader.html.py:67
+#: templates/rawdata/uploader.html:77
+#, fuzzy
+msgid "Download for"
+msgstr "下载"
+
+#: templates/rawdata/uploader.html:63 templates/rawdata/uploader.html.py:68
+#: templates/rawdata/uploader.html:78
+msgid "Coming soon"
+msgstr ""
+
 #: templates/subscription/_plan.html:9
 msgid "month"
 msgstr ""
@@ -928,7 +1005,7 @@ msgstr ""
 #: templates/subscription/subscription_done.html:21
 #: templates/subscription/subscription_list.html:73
 msgid "Thank you for supporting AstroBin!"
-msgstr ""
+msgstr "感谢您支持AstroBIN!"
 
 #: templates/subscription/subscription_done.html:8
 msgid "Subscription confirmed"
@@ -1003,14 +1080,17 @@ msgid ""
 "a>"
 msgstr ""
 
-#: views/privatesharedfolders.py:116
+#: views/privatesharedfolders.py:117
 msgid "Your image has been added to the private shared folder."
-msgstr ""
+msgstr "您的图片已经被添加到私人共享目录"
 
-#: views/privatesharedfolders.py:204
+#: views/privatesharedfolders.py:205
 msgid "Your private shared folder has been deleted."
-msgstr ""
+msgstr "您的私人共享文件夹已经被删除"
 
-#: views/publicdatapools.py:96
+#: views/publicdatapools.py:97
 msgid "Your image has been added to the pool."
 msgstr ""
+
+#~ msgid "File type is not supported"
+#~ msgstr "文件格式不支持"

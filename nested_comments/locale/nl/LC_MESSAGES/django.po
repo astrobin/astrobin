@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-29 09:13-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-02-26 08:12-0600\n"
+"PO-Revision-Date: 2013-01-03 09:56+0100\n"
+"Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.1.6\n"
 
 #: templates/nested_comments/nestedcomment_app.html:35
 #: templates/nested_comments/nestedcomment_app.html:172
@@ -24,6 +24,8 @@ msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment.</p>"
 msgstr ""
+"Gelieve <a href=\"/accounts/login/\">in te loggen</a> of te <a href=\"/"
+"accounts/register/\">registreren</a> om commentaar te kunnen geven.</p>"
 
 #: templates/nested_comments/nestedcomment_app.html:44
 msgid ""
@@ -31,107 +33,111 @@ msgid ""
 "button when replying directly to a comment. To post a new top level comment, "
 "use the form at the end of the comment list."
 msgstr ""
+"Denk eraan om de <span class=\"label label-important\">antwoorden</span>-"
+"knop te gebruiken om een rechtstreeks antwoord te formuleren op een "
+"commentaar. Om een nieuw commentaar aan te maken dien je het invulveld te "
+"gebruiken onderaan de commentaarlijst."
 
 #: templates/nested_comments/nestedcomment_app.html:47
 msgid "There are no comments yet."
-msgstr ""
+msgstr "Er zijn nog geen commentaren."
 
 #: templates/nested_comments/nestedcomment_app.html:64
 #: templates/nested_comments/nestedcomment_app.html:81
 msgid "(deleted)"
-msgstr ""
+msgstr "(gewist)"
 
 #: templates/nested_comments/nestedcomment_app.html:92
 #: templates/nested_comments/nestedcomment_list.html:33
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #: templates/nested_comments/nestedcomment_app.html:96
 #: templates/nested_comments/nestedcomment_list.html:39
 msgid "Undelete"
-msgstr ""
+msgstr "Ongedaan maken wissen"
 
 #: templates/nested_comments/nestedcomment_app.html:98
 #: templates/nested_comments/nestedcomment_list.html:41
 msgid "Delete"
-msgstr ""
+msgstr "Wissen"
 
 #: templates/nested_comments/nestedcomment_app.html:103
 #: templates/nested_comments/nestedcomment_list.html:44
 msgid "Edit"
-msgstr ""
+msgstr "Bewerken"
 
 #: templates/nested_comments/nestedcomment_app.html:108
 #: templates/nested_comments/nestedcomment_list.html:46
 msgid "Reply"
-msgstr ""
+msgstr "Antwoorden"
 
 #: templates/nested_comments/nestedcomment_app.html:133
 #: templates/nested_comments/nestedcomment_app.html:156
 #: templates/nested_comments/nestedcomment_list.html:58
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: templates/nested_comments/nestedcomment_app.html:136
 #: templates/nested_comments/nestedcomment_app.html:159
 msgid "The comment cannot be empty."
-msgstr ""
+msgstr "Het commentaarveld mag niet leeg zijn."
 
 #: templates/nested_comments/nestedcomment_app.html:183
 #: templates/nested_comments/nestedcomment_list.html:57
 msgid "Save"
-msgstr ""
+msgstr "Bewaren"
 
 #: templates/nested_comments/nestedcomment_app.html:193
 msgid "Preview"
-msgstr ""
+msgstr "Voorbeeld"
 
 #: templates/nested_comments/nestedcomment_app.html:199
 #: templates/nested_comments/nestedcomment_list.html:60
 msgid "Formatting help"
-msgstr ""
+msgstr "Hulp ivm het formatteren"
 
 #: templates/nested_comments/nestedcomment_app.html:203
 msgid "You type:"
-msgstr ""
+msgstr "Je typt:"
 
 #: templates/nested_comments/nestedcomment_app.html:204
 msgid "You see:"
-msgstr ""
+msgstr "Je ziet:"
 
 #: templates/nested_comments/nestedcomment_app.html:209
 #: templates/nested_comments/nestedcomment_app.html:210
 msgid "italics"
-msgstr ""
+msgstr "schuinschrift"
 
 #: templates/nested_comments/nestedcomment_app.html:214
 #: templates/nested_comments/nestedcomment_app.html:215
 msgid "bold"
-msgstr ""
+msgstr "vet"
 
 #: templates/nested_comments/nestedcomment_app.html:224
 msgid "(TAB or 4 spaces)"
-msgstr ""
+msgstr "(TAB of 4 spaties)"
 
 #: templates/nested_comments/nestedcomment_app.html:224
 #: templates/nested_comments/nestedcomment_app.html:225
 msgid "preformatted text"
-msgstr ""
+msgstr "voorgeformatteerde tekst"
 
 #: templates/nested_comments/nestedcomment_app.html:229
 #: templates/nested_comments/nestedcomment_app.html:230
 msgid "quoted text"
-msgstr ""
+msgstr "aanhaling"
 
 #: templates/nested_comments/nestedcomment_app.html:234
 #: templates/nested_comments/nestedcomment_app.html:235
 msgid "escape the formatting syntax"
-msgstr ""
+msgstr "verlaten van de formatterenende syntax"
 
 #: templates/nested_comments/nestedcomment_list.html:26
 msgid "(comment deleted)"
-msgstr ""
+msgstr "(commentaar gewist)"
 
 #: templates/nested_comments/nestedcomment_list.html:75
 msgid "There doesn't seem to be anything here."
-msgstr ""
+msgstr "Het lijkt er op dat hier niets is."

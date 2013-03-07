@@ -585,6 +585,8 @@ def image_detail(request, id, r):
                 revision_image = ImageRevision.objects.get(image = image, label = r)
             except ImageRevision.DoesNotExist:
                 return missing_revision(image)
+            except MultipleObjectsReturned:
+                revision_image = ImageRevision.objects.filter(image = image, label = r)[0]
         if not revision_image:
             try:
                 revision_image = ImageRevision.objects.get(image = image, id = revision_id)
