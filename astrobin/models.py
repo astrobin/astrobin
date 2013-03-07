@@ -1072,8 +1072,8 @@ class ImageRevision(models.Model):
 
     def delete(self, *args, **kwargs):
         delete_data = not kwargs.pop('dont_delete_data', False)
-        if delete_data: 
-            delete_image.delay(self.filename, self.original_ext) 
+        if delete_data:
+            delete_image.delay(self.filename, self.original_ext)
         super(ImageRevision, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -1564,101 +1564,6 @@ def create_user_openid(sender, instance, created, **kwargs):
 
 post_save.connect(create_user_profile, sender=User)
 post_save.connect(create_user_openid, sender=User)
-
-
-class Comment(MPTTModel):
-    image = models.ForeignKey(
-        Image,
-    )
-    author = models.ForeignKey(
-        User,
-    )
-    comment = models.TextField(
-        verbose_name = "",
-    )
-    is_deleted = models.BooleanField(
-        default = False,
-    )
-    added  = models.DateTimeField(
-        auto_now_add = True,
-        editable = False,
-    )
-    parent = TreeForeignKey(
-        'self',
-        null = True,
-        blank = True,
-        editable = False,
-        related_name = 'children'
-    )
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            Comment.tree.insert_node(self, self.parent)
-        super(Comment, self).save(*args, **kwargs)
-
-    def __unicode__(self):
-        return self.comment
-
-    class MPTTMeta:
-        order_insertion_by = ['added']
-
-    class Meta:
-        app_label = 'astrobin'
-
-
-def comment_post_save(sender, instance, created, **kwargs):
-    verb = "commented on image"
-    if created:
-        action.send(instance.author, verb = verb,
-                    target = instance.image)
-post_save.connect(comment_post_save, sender = Comment)
-
-
-class GearComment(MPTTModel):
-    gear = models.ForeignKey(
-        Gear,
-    )
-    author = models.ForeignKey(
-        User,
-    )
-    comment = models.TextField(
-        verbose_name = "",
-    )
-    is_deleted = models.BooleanField(
-        default = False,
-    )
-    added  = models.DateTimeField(
-        auto_now_add = True,
-        editable = False,
-    )
-    parent = TreeForeignKey(
-        'self',
-        null = True,
-        blank = True,
-        editable = False,
-        related_name = 'children'
-    )
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            GearComment.tree.insert_node(self, self.parent)
-        super(GearComment, self).save(*args, **kwargs)
-
-    def __unicode__(self):
-        return self.comment
-
-    class MPTTMeta:
-        order_insertion_by = ['added']
-
-    class Meta:
-        app_label = 'astrobin'
-
-def gear_comment_post_save(sender, instance, created, **kwargs):
-    verb = "commented on gear item"
-    if created:
-        action.send(instance.author, verb = verb,
-                    target = instance.gear)
-post_save.connect(gear_comment_post_save, sender = GearComment)
 
 
 class Location(models.Model):

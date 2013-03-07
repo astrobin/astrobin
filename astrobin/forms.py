@@ -672,8 +672,8 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
         if date and date > datetime.date.today():
             raise forms.ValidationError(_("The date cannot be in the future."))
         return date
- 
- 
+
+
 class DeepSky_AcquisitionBasicForm(forms.ModelForm):
     error_css_class = 'error'
 
@@ -716,32 +716,6 @@ class MultipleMessierForm(forms.Form):
         super(MultipleMessierForm, self).__init__(**kwargs)
         self.fields['messier_object'] = forms.ChoiceField(choices = [((x, 'M %s' % x)) for x in objects])
         self.fields['messier_object'].label = _("Nominate for")
-
-
-class CommentForm(forms.ModelForm):
-    error_css_class = 'error'
-
-    class Meta:
-        model = Comment
-        fields = ('comment',)
-        widgets = {
-            'comment': forms.Textarea(attrs = {
-                'rows': 4,
-            })
-        }
-
-
-class GearCommentForm(forms.ModelForm):
-    error_css_class = 'error'
-
-    class Meta:
-        model = GearComment
-        fields = ('comment',)
-        widgets = {
-            'comment': forms.Textarea(attrs = {
-                'rows': 4,
-            })
-        }
 
 
 class TelescopeEditForm(forms.ModelForm):
