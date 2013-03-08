@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Q
 
-from astrobin.models import Image, Favorite, Comment, ImageOfTheDay
+from astrobin.models import Image, Favorite, ImageOfTheDay
 from astrobin.image_utils import make_image_of_the_day
+from nested_comments.models import NestedComment
 
 from datetime import date, datetime, timedelta
 
@@ -34,10 +35,14 @@ class Command(BaseCommand):
                     author = image.user
                     score = 0
                     for vote in image.votes.all():
-                        score += vote.score 
+                        score += vote.score
 
                     times_favorited = Favorite.objects.filter(image = image).count()
-                    comments = Comment.objects.filter(image = image).exclude(author = author).count()
+                    comments = NestedComment.objects.filter(
+                        deleted = False,
+                        content_type__app_label = 'astrobin',
+                        content_type__model = 'image',
+                        object_id = image.id).exclude(author = author).count()
 
                     coolness = score + (times_favorited * 3) + (comments * 5)
                     try:
