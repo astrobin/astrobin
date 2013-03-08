@@ -810,6 +810,11 @@ def image_detail(request, id, r):
                      'already_voted': already_voted,
                      'index': "%.3f" % index,
                      'votes_number': votes,
+                     'comments_number': NestedComment.objects.filter(
+                        deleted = False,
+                        content_type__app_label = 'astrobin',
+                        content_type__model = 'image',
+                        object_id = image.id).count(),
                      'gear_list': gear_list,
                      'gear_list_has_commercial': gear_list_has_commercial,
                      'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
