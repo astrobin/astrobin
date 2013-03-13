@@ -170,17 +170,17 @@ def index(request):
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
 
-        actions_cache_key = 'templates.index.actions.' + request.LANGUAGE_CODE
+        actions_cache_key = 'templates.index.actions'
         if cache.has_key(actions_cache_key):
             response_dict['global_actions'] = cache.get(actions_cache_key)
         else:
-            non_wip_image_ids = [str(x) for x in Image.objects.filter(is_wip = False).values_list('id', flat = True)]
+            non_wip_image_ids = [str(x) for x in Image.objects.filter(is_wip = False).order_by('-uploaded')[:actions_n].values_list('id', flat = True)]
 
             response_dict['global_actions'] = Action.objects.exclude(
-                target_content_type = Image,
-                target_object_id__in = non_wip_image_ids)[:actions_n]
+                Q(target_content_type = Image) &
+                Q(target_object_id__in = non_wip_image_ids))[:actions_n]
 
-            cache.set(actions_cache_key, response_dict['global_actions'])
+            cache.set(actions_cache_key, response_dict['global_actions'], 600)
 
         response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n] #exclude(authors__username__in = 'astrobin')
 
@@ -190,23 +190,33 @@ def index(request):
         if response_dict['recent_from_followees'].count() == 0:
             recent_thumbnails_n = 32
 
-        response_dict['recently_favorited'] = \
-            Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
-                         .exclude(last_favorited = None) \
-                         .order_by('-last_favorited')[:thumbnails_n]
+        faves_cache_key = 'templates.index.recently_favorited'
+        if cache.has_key(faves_cache_key):
+            response_dict['recently_favorited'] = cache.get(faves_cache_key)
+        else:
+            response_dict['recently_favorited'] = \
+                Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
+                             .exclude(last_favorited = None) \
+                             .order_by('-last_favorited')[:thumbnails_n]
+            cache.set(faves_cache_key, response_dict['recently_favorited'], 600)
 
-        recent_fives_list = []
-        l = 0
-        while len(recent_fives_list) < thumbnails_n:
-            recent_fives_qs = \
-                Image.objects.filter(votes__score = 5) \
-                             .distinct() \
-                             .order_by('-votes__date_added')[l:l+thumbnails_n]
-            for i in recent_fives_qs:
-                if i not in recent_fives_list:
-                    recent_fives_list.append(i)
-            l += 1
-        response_dict['recently_five_starred'] = recent_fives_list[:thumbnails_n]
+        fives_cache_key = 'templates.index.recently_five_starred'
+        if cache.has_key(fives_cache_key):
+            response_dict['recently_five_starred'] = cache.get(fives_cache_key)
+        else:
+            recent_fives_list = []
+            l = 0
+            while len(recent_fives_list) < thumbnails_n:
+                recent_fives_qs = \
+                    Image.objects.filter(votes__score = 5) \
+                                 .distinct() \
+                                 .order_by('-votes__date_added')[l:l+thumbnails_n]
+                for i in recent_fives_qs:
+                    if i not in recent_fives_list:
+                        recent_fives_list.append(i)
+                l += 1
+            response_dict['recently_five_starred'] = recent_fives_list[:thumbnails_n]
+            cache.set(fives_cache_key, response_dict['recently_five_starred'], 600)
 
         response_dict['recent_commercial_gear'] = Image.objects\
             .filter(is_stored = True, is_wip = False)\
