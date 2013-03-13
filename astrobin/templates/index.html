@@ -5,6 +5,7 @@
 {% load bootstrap_toolkit %}
 {% load avatar_tags %}
 {% load common_tags %}
+{% load cache %}
 
 {% block content %}
     {% if not request.user.is_authenticated %}
@@ -93,6 +94,7 @@
         </div>
         {% endcomment %}
 
+        {% cache 43200 index_iotd request.LANGUAGE_CODE %}
         {% with image_of_the_day as iotd %}
             <div class="visible-desktop">
                 <div class="row section">
@@ -133,6 +135,7 @@
                 </div>
             </div>
         {% endwith %}
+        {% endcache %}
 
         <div class="row">
             <div class="span4"> <!-- all the recent images -->
@@ -141,7 +144,9 @@
                         <h4>{% trans "Recent" %}</h4>
                     </div>
                     <div class="thumbs">
-                        {% image_list request image_list 0 64 %}
+                        {% cache 300 index_recent_images request.LANGUAGE_CODE %}
+                            {% image_list request image_list 0 64 %}
+                        {% endcache %}
                     </div>
                     <div class="more">
                         <a href="{% url wall %}">{% trans "(view more)" %}</a>
@@ -154,36 +159,46 @@
                             <h4>{% trans "Followed" %}</h4>
                         </div>
                         <div class="thumbs">
-                            {% image_list request recent_from_followees 0 64 %}
+                            {% cache 600 index_recent_from_followees request.user %}
+                                {% image_list request recent_from_followees 0 64 %}
+                            {% endcache %}
                         </div>
                     </div>
                 {% endif %}
 
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                            <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
-                        </h4>
+                {% if recently_five_starred %}
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                                <img rel="tooltip" title="{% trans "Recently voted 5 stars" %}" alt="" src="{{STATIC_URL}}icons/iconic/white/star_16x16.png"/>
+                            </h4>
+                        </div>
+                        <div class="thumbs">
+                            {% cache 600 index_recent_five_starred request.LANGUAGE_CODE %}
+                                {% image_list request recently_five_starred 0 64 %}
+                            {% endcache %}
+                        </div>
                     </div>
-                    <div class="thumbs">
-                        {% image_list request recently_five_starred 0 64 %}
-                    </div>
-                </div>
+                {% endif %}
 
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4>
-                            <img src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png" alt="{% trans "Recently favorited" %}"/>
-                        </h4>
+                {% if recently_favorited %}
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4>
+                                <img src="{{STATIC_URL}}icons/iconic/white/heart_stroke_16x14.png" alt="{% trans "Recently favorited" %}"/>
+                            </h4>
+                        </div>
+                        <div class="thumbs">
+                            {% cache 600 index_recent_favorited request.LANGUAGE_CODE %}
+                                {% image_list request recently_favorited 0 64 %}
+                            {% endcache %}
+                        </div>
                     </div>
-                    <div class="thumbs">
-                        {% image_list request recently_favorited 0 64 %}
-                    </div>
-                </div>
+                {% endif %}
             </div> <!-- span4 -->
 
             <div class="span4"> <!-- activity stream -->
@@ -214,7 +229,9 @@
                             <h4>{% trans "Commercial products" %}</h4>
                         </div>
                         <div class="thumbs">
-                            {% image_list request recent_commercial_gear 0 64 %}
+                            {% cache 86400 index_recent_commercial_gear request.LANGUAGE_CODE %}
+                                {% image_list request recent_commercial_gear 0 64 %}
+                            {% endcache %}
                         </div>
                         <div class="more">
                             <a href="{% url wall %}?filter=products">{% trans "(view more)" %}</a>
@@ -227,33 +244,35 @@
                         <h4>{% trans "Blog" %}</h4>
                     </div>
                     <div class="blog-stream-entries">
-                        {% for entry in blog_entries.0 %}
-                            <div class="entry">
-                                {% if entry.authors.count %}
-                                <div class="avatar">
-                                    <a href="{{entry.authors.all.0}}">{% avatar entry.authors.all.0 64 %}</a>
-                                </div>
-                                {% endif %}
-
-                                <div class="content">
-                                    <div class="meta">
-                                        {% if entry.authors.count %}
-                                            {{entry.authors.all.0}}:
-                                        {% endif %}
-                                        <a href="{{entry.get_absolute_url}}">{{entry.title}}</a>
+                        {% cache 3600 index_blog_entries request.LANGUAGE_CODE %}
+                            {% for entry in blog_entries.0 %}
+                                <div class="entry">
+                                    {% if entry.authors.count %}
+                                    <div class="avatar">
+                                        <a href="{{entry.authors.all.0}}">{% avatar entry.authors.all.0 64 %}</a>
                                     </div>
-                                    <p>
-                                        {{entry.content|safe|striptags|truncatewords:30}}
-                                    </p>
-                                </div>
+                                    {% endif %}
 
-                                <div class="when">
-                                    {{entry.creation_date|timesince}} {% trans "ago" %}
+                                    <div class="content">
+                                        <div class="meta">
+                                            {% if entry.authors.count %}
+                                                {{entry.authors.all.0}}:
+                                            {% endif %}
+                                            <a href="{{entry.get_absolute_url}}">{{entry.title}}</a>
+                                        </div>
+                                        <p>
+                                            {{entry.content|safe|striptags|truncatewords:30}}
+                                        </p>
+                                    </div>
+
+                                    <div class="when">
+                                        {{entry.creation_date|timesince}} {% trans "ago" %}
+                                    </div>
                                 </div>
-                            </div>
-                        {% empty %}
-                            <p>{% trans "There is no activity yet." %}</p>
-                        {% endfor %}
+                            {% empty %}
+                                <p>{% trans "There is no activity yet." %}</p>
+                            {% endfor %}
+                        {% endcache %}
 
                         {% if blog_entries|length == 9 %}
                             <div class="more">
