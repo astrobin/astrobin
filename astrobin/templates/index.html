@@ -207,7 +207,7 @@
                         <h4>{% trans "Activity stream" %}</h4>
                     </div>
                     <div class="activity-actions">
-                        {% for action in global_actions.0 %}
+                        {% for action in global_actions %}
                             {% display_action action %}
                         {% empty %}
                             <p>{% trans "There is no activity yet." %}</p>
@@ -245,7 +245,7 @@
                     </div>
                     <div class="blog-stream-entries">
                         {% cache 3600 index_blog_entries request.LANGUAGE_CODE %}
-                            {% for entry in blog_entries.0 %}
+                            {% for entry in blog_entries %}
                                 <div class="entry">
                                     {% if entry.authors.count %}
                                     <div class="avatar">

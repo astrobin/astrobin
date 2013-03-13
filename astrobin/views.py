@@ -169,13 +169,20 @@ def index(request):
     profile = None
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
-        non_wip_image_ids = [str(x) for x in Image.objects.filter(is_wip = False).values_list('id', flat = True)]
 
-        response_dict['global_actions'] = Action.objects.exclude(
-            target_content_type = Image,
-            target_object_id__in = non_wip_image_ids)[:actions_n],
+        actions_cache_key = 'templates.index.actions.' + request.LANGUAGE_CODE
+        if cache.has_key(actions_cache_key):
+            response_dict['global_actions'] = cache.get(actions_cache_key)
+        else:
+            non_wip_image_ids = [str(x) for x in Image.objects.filter(is_wip = False).values_list('id', flat = True)]
 
-        response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n], #exclude(authors__username__in = 'astrobin')
+            response_dict['global_actions'] = Action.objects.exclude(
+                target_content_type = Image,
+                target_object_id__in = non_wip_image_ids)[:actions_n]
+
+            cache.set(actions_cache_key, response_dict['global_actions'])
+
+        response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n] #exclude(authors__username__in = 'astrobin')
 
         response_dict['recent_from_followees'] = \
             Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:thumbnails_n]
