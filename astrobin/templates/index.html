@@ -94,7 +94,7 @@
         </div>
         {% endcomment %}
 
-        {% cache 43200 index_iotd request.LANGUAGE_CODE %}
+        {% cache 3600 index_iotd request.LANGUAGE_CODE %}
         {% with image_of_the_day as iotd %}
             <div class="visible-desktop">
                 <div class="row section">
