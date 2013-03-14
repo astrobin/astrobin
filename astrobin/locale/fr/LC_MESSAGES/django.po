@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-26 08:12-0600\n"
-"PO-Revision-Date: 2012-12-31 17:55+0100\n"
+"PO-Revision-Date: 2013-03-03 15:48+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -3253,10 +3253,10 @@ msgid ""
 "your files organized, and allow you to share them with other members. <a "
 "href=\"%(rawdata_url)s\">Want to know more?</a>"
 msgstr ""
-"<strong>Le Compte Raw AstroBin</strong> est la plateforme de stockage "
-"sécurisé de tous vos fichiers RAW ou FIT, jusqu'à 500 GB! Les images sont "
-"automatiquement classées et vous pouvez les partager avec d'autres membres. "
-"<a href=\"%(rawdata_url)s\">Pour en savoir plus</a>"
+"<strong>Le Compte Raw AstroBin</strong> est une plateforme de stockage "
+"sécurisé pour tous vos fichiers RAW ou FIT, jusqu'à 500 GB! Les images sont "
+"automatiquement classées et peuvent être partagées avec d'autres membres. <a "
+"href=\"%(rawdata_url)s\">En savoir davantage?</a>"
 
 #: templates/base.html:594 templates/help.html:10
 #: templates/maintenance_base.html:507
@@ -4215,15 +4215,15 @@ msgstr "Images récentes"
 
 #: templates/index.html:55
 msgid "FIT and DSLR camera raw files"
-msgstr "FIT et fichiers bruts d'APN Reflex"
+msgstr "FIT et fichiers bruts d'APN"
 
 #: templates/index.html:65
 msgid ""
 "AstroBin offers the storage of FIT and DSLR camera raw files too, for "
 "archival and sharing purposes!"
 msgstr ""
-"AstroBin propose également le stockage de FIT et de fichiers bruts d'APN "
-"Reflex, pour archivage ou partage!"
+"AstroBin propose un service de stockage de FIT et fichiers bruts d'APN, pour "
+"archivage ou partage!"
 
 #: templates/index.html:102
 msgid "Image of the day"
@@ -4771,7 +4771,7 @@ msgstr "Déposez vos fichiers bruts ici"
 
 #: templates/upload.html:91
 msgid "or download the desktop client for easier uploads!"
-msgstr ""
+msgstr "ou téléchargez le gestionnaire de publication!"
 
 #: templates/upload.html:92
 msgid "Accepted file types: FIT and digital camera raw files"
@@ -5496,13 +5496,12 @@ msgid "What is this?"
 msgstr "Qu'est-ce que c'est?"
 
 #: templates/image/detail.html:569
-#, fuzzy
 msgid ""
 "This button will create a post on AstroBin Questions, in which you can ask "
 "for critique, review or analysis of your image."
 msgstr ""
-"Ce bouton créera une Question AstroBin, où vous pourrez demander de l'aide "
-"concernant votre image."
+"Ce bouton créera une Question AstroBin, où vous pourrez demander une "
+"évaluation ou de l'aide concernant votre image."
 
 #: templates/image/detail.html:569
 msgid "Learn more about AstroBin Questions."
