@@ -62,7 +62,7 @@ class PrivateSharedFolderCreateView(RestrictToSubscriberMixin, AjaxableResponseM
             context['folders_form'] = PrivateSharedFolder_SelectExistingForm(user = self.request.user)
 
         return context
- 
+
     def form_valid(self, form):
         folder = form.save(commit = False)
         folder.creator = self.request.user
@@ -131,7 +131,7 @@ class PrivateSharedFolderAddUsersView(RestrictToSubscriberMixin, RestrictToInvit
         usernames = form.cleaned_data['users'].split(',')
         for username in usernames:
             try:
-                user = User.objects.get(username = username) 
+                user = User.objects.get(username = username)
                 folder.users.add(user)
             except:
                 continue

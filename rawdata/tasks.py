@@ -32,7 +32,7 @@ def index_raw_image(id):
 
     image.indexed = True
     image.save()
-    
+
 
 @task()
 def prepare_zip(image_ids, owner_id, temp_archive_id, folder_or_pool = None):
