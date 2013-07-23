@@ -1,3 +1,5 @@
+# Python
+from os import path
 # Django
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
@@ -116,7 +118,7 @@ class PublicDataPoolDetailView(DetailView):
 class PublicDataPoolDownloadView(base.View):
     def get(self, request, *args, **kwargs):
         pool = get_object_or_404(PublicDataPool, pk = kwargs.pop('pk'))
-        if pool.archive:
+        if pool.archive and path.exists(pool.archive.file.path):
             return HttpResponseRedirect(
                 reverse('rawdata.temporary_archive_detail',
                         args=(pool.archive.pk,)))

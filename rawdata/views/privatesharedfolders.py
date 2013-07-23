@@ -1,5 +1,6 @@
 # Python
 import json
+from os import path
 
 # Django
 from django.contrib.auth.models import User
@@ -173,7 +174,7 @@ class PrivateSharedFolderDetailView(RestrictToSubscriberMixin, RestrictToInvitee
 class PrivateSharedFolderDownloadView(RestrictToSubscriberMixin, RestrictToInviteeMixin, base.View):
     def get(self, request, *args, **kwargs):
         folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.pop('pk'))
-        if folder.archive:
+        if folder.archive and path.exists(folder.archive.file.path):
             return HttpResponseRedirect(
                 reverse('rawdata.temporary_archive_detail',
                         args=(folder.archive.pk,)))
