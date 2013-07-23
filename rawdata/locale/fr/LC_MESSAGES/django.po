@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-26 08:12-0600\n"
-"PO-Revision-Date: 2012-12-30 22:58+0100\n"
+"PO-Revision-Date: 2013-03-03 16:00+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -270,9 +270,9 @@ msgid ""
 "you can store your whole <strong>raw data library</strong> online, where it "
 "will be securely accessible only by you."
 msgstr ""
-"Le <strong>Compte Raw AstroBin</strong> est la solution ! Pour un très "
-"faible coût , vous pouvez stocker l'ensemble de votre <strong>bibliothèque "
-"de fichiers bruts</strong> en ligne, accessible seulement pour vous et en "
+"Le <strong>Compte Raw AstroBin</strong> est la solution! Pour un très faible "
+"coût, vous pouvez stocker l'ensemble de votre <strong>bibliothèque de "
+"fichiers bruts</strong> en ligne,  vous seul en ayant l'accès, et ce, en "
 "toute sécurité."
 
 #: templates/rawdata/help_01.html:28
@@ -301,7 +301,7 @@ msgid ""
 "You can have up to <strong>500 GB</strong> to store your <strong>FIT</"
 "strong> and <strong>digital camera raw</strong> files."
 msgstr ""
-"Disposez jusqu'à <strong>500 Go<</strong> d'espace de stockage pour vos "
+"Disposez jusqu'à <strong>500 Go</strong> d'espace de stockage pour vos "
 "fichiers <strong>FIT<strong> et <strong>RAW</strong>."
 
 #: templates/rawdata/help_02.html:22
@@ -424,10 +424,10 @@ msgid ""
 msgstr ""
 "Bien que vos fichiers soient strictement privés, à moins que vous ne les "
 "partagiez explicitement, les astronomes amateurs et professionnels peuvent "
-"rechercher si un fichier brut, acquis à une date particulière, dans une zone "
-"précise du ciel, existe. Vos données pourraient bien être la clé d'avancées "
-"scientifiques significatives dans l'étude des novae, supernovae, astéroïdes, "
-"comètes, étoiles variables et bien d'autres!"
+"éventuellement rechercher si un fichier brut, acquis à une date "
+"particulière, dans une zone précise du ciel, existe. Vos données pourraient "
+"bien être la clé d'avancées scientifiques significatives dans l'étude des "
+"novae, supernovae, astéroïdes, comètes, étoiles variables et bien d'autres!"
 
 #: templates/rawdata/library.html:6 templates/rawdata/library.html.py:18
 msgid "Your raw data library"
@@ -1066,12 +1066,12 @@ msgstr "mois"
 #: templates/subscription/_plan.html:11
 #, python-format
 msgid "That's only $ %(daily_price)s USD per day!"
-msgstr "Pour seulement %(daily_price)s $ (USD) par jour!"
+msgstr "Seulement %(daily_price)s $ (USD) par jour!"
 
 #: templates/subscription/_plan.html:17
 #, python-format
 msgid "Free for %(free_days)s days."
-msgstr "Gratuit pour %(free_days)s jours."
+msgstr "Gratuit pendant %(free_days)s jours."
 
 #: templates/subscription/_plan.html:21
 msgid "You can cancel at any time."
@@ -1251,5 +1251,5 @@ msgstr "Votre dossier de collaboration privée a été effacé."
 msgid "Your image has been added to the pool."
 msgstr "Votre image a été ajoutée à la collaboration publique."
 
-#~ msgid "File type is not supported"
-#~ msgstr "Type de fichier non supporté"
+msgid "File type is not supported"
+msgstr "Type de fichier non supporté"
