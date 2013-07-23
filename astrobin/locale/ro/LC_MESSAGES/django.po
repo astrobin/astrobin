@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-26 08:12-0600\n"
-"PO-Revision-Date: 2013-01-18 17:06+0100\n"
-"Last-Translator: Gabriel <gabycorban@yahoo.com>\n"
+"PO-Revision-Date: 2013-03-23 13:17+0100\n"
+"Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1));\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%"
+"100==0)&&(n!=0)))?2:1));\n"
 "X-Generator: Pootle 2.1.6\n"
 
 #: fields.py:10
@@ -7246,14 +7246,14 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:269
 #: templates/user/profile/commercial/products.html:339
 msgid "Select the product you want to merge to"
-msgstr "Selectati produsul pe care doriti sa il imbinati "
+msgstr "Selectaţi produsul pe care doriţi să îl imbinaţi "
 
 #: templates/user/profile/commercial/products.html:287
 #: templates/user/profile/commercial/products.html:291
 #: templates/user/profile/commercial/products.html:357
 #: templates/user/profile/commercial/products.html:361
 msgid "Are you sure?"
-msgstr "Sunteti sigur ?"
+msgstr "Sunteţi sigur?"
 
 #: templates/user/profile/commercial/products.html:304
 msgid "Claim retailed product"
@@ -7263,33 +7263,34 @@ msgstr "Revendicați produs de vânzare cu amănuntul"
 msgid ""
 "All the properties of this claim will be deleted and cannot be recovered!"
 msgstr ""
-"Toate proprietatile acestei reclamatii vor fi sterse si nu pot fi recuperate."
+"Toate proprietaţile acestei reclamaţii vor fi şterse şi nu pot fi "
+"recuperate."
 
 #: templates/user/profile/commercial/products.html:417
 #: templates/user/profile/commercial/products.html:744
 msgid "Please wait..."
-msgstr "Va rugam, asteptati..."
+msgstr "Vă rugăm, aşteptaţi..."
 
 #: templates/user/profile/edit/basic.html:6
 msgid "Edit your basic information"
-msgstr "Editati informatiile dumneavoastra de baza."
+msgstr "Editaţi-vă informaţiile de bază"
 
 #: templates/user/profile/edit/commercial.html:6
 msgid "Edit your commercial information"
-msgstr "Editatii informatiile dvs. comerciale."
+msgstr "Editaţi-vă informaţiile comerciale"
 
 #: templates/user/profile/edit/gear.html:6
 msgid "Edit your astrophotography gear"
-msgstr "Editati echipamentul dumneavoastra astrofoto."
+msgstr "Editaţi-vă echipamentul de astrofotografie"
 
 #: templates/user/profile/edit/gear.html:22
 msgid "Edit gear item"
-msgstr "Editare element de echipament"
+msgstr "Editaţi element de echipament"
 
 #: templates/user/profile/edit/gear.html:27
 #: templates/user/profile/edit/gear.html:72
 msgid "Please note!"
-msgstr "Va rugam, retineti !"
+msgstr "Vă rugăm, reţineţi !"
 
 #: templates/user/profile/edit/gear.html:28
 #: templates/user/profile/edit/gear.html:73
@@ -7308,63 +7309,62 @@ msgstr ""
 #: templates/user/profile/edit/gear.html:40
 #: templates/user/profile/edit/gear.html:57
 msgid "Close"
-msgstr "Inchis"
+msgstr "Închis"
 
 #: templates/user/profile/edit/gear.html:45
 msgid ""
 "The following information, instead, is personal, and may refer to your copy "
 "of this product."
 msgstr ""
-"Urmatoarele informatii sunt personale si se pot referi la copia produselor "
-"dumneavoastra."
+"Următoarele informaţii sunt personale şi se pot referi la copia produselor "
+"dumneavoastră."
 
 #: templates/user/profile/edit/gear.html:67
 msgid "Add gear item"
-msgstr "Adauga echipament utilizat."
+msgstr "Adaugă echipament utilizat"
 
 #: templates/user/profile/edit/license.html:6
 msgid "Set your default image license"
-msgstr "Seteaza imaginea standard de licenta."
+msgstr "Setează imaginea standard de licenţă."
 
 #: templates/user/profile/edit/license.html:14
 msgid ""
 "You can set a default type of license for everything you upload into "
 "AstroBin. Change your default here."
 msgstr ""
-"Poti seta o licenta de baza pentru tot ce incarci pe AstroBin. Schimba-ti "
-"licenta aici."
+"Poţi seta o licenţa de bază pentru tot ce încarci pe AstroBin. Schimbă-ţi "
+"licenţa aici."
 
 #: templates/user/profile/edit/locations.html:6
 msgid "Edit your locations"
-msgstr "Editati locatia dumneavoastra."
+msgstr "Editaţi locaţiile dumneavoastră"
 
 #: templates/user/profile/edit/locations.html:12
 msgid ""
 "Use the form below to add a new location. After you add one, a new empty "
 "form will be created at the bottom, in case you want to add more."
 msgstr ""
-"Utilizati formularul de mai jos pentru a adauga o noua locatie. Dupa ce ati "
-"adaugat una, un nou formular gol va fi creat in josul paginii in caz ca "
-"doriti sa adaugati mai multe."
+"Utilizaţi formularul de mai jos pentru a adăuga o nouă locaţie. După ce aţi "
+"adăugat una, un nou formular gol va fi creat în josul paginii, în caz că "
+"doriţi să adaugaţi mai multe."
 
 #: templates/user/profile/edit/locations.html:14
 msgid "AstroBin will not share your location details with other users."
-msgstr ""
-"AstroBin nu va afisa detalii despre locatia dumneavoastra celorlalti useri."
+msgstr "AstroBin nu va împărtăşi locaţia ta altor utilizatori."
 
 #: templates/user/profile/edit/preferences.html:6
 msgid "Edit your site preferences"
-msgstr "Editati preferintele pentru site."
+msgstr "Editaţi preferinţele pentru site"
 
 #: templates/user/profile/edit/preferences.html:12
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
-msgstr "Selectati limba dvs. si ce notificare e-mail doriti sa primiti."
+msgstr "Selectaţi limba dvs. şi ce notificare prin e-mail doriţi să primiţi:"
 
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
-msgstr ""
+msgstr "Editează informaţiile vânzătorului tău"
 
 #~ msgid "Activate account at"
 #~ msgstr "Cont activat la"
