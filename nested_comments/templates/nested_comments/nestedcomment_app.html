@@ -8,28 +8,36 @@
 <div id="nested-comments-static-url" data-value="{{STATIC_URL}}"></div>
 
 {% handlebars "nested-comments" %}
-    {{outlet comments}}
     {{outlet top-level}}
+    {{outlet comments}}
 {% endhandlebars %}
 
 
 {% handlebars "top-level" %}
     {{#if view.userIsAuthenticated}}
-        <form>
-            {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+        {{#unless view.collapsed}}
+            <form>
+                {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
-            {{view view.SaveCommentButtonView}}
+                {{view view.SaveCommentButtonView}}
+                <a class="btn btn-mini" href="#" {{action "collapse" target="view"}}>{% trans "Cancel" %}</a>
 
-            {{#if view.submitting}}
-                {{view NestedCommentsApp.LoaderView}}
-            {{/if}}
+                {{#if view.submitting}}
+                    {{view NestedCommentsApp.LoaderView}}
+                {{/if}}
 
-            {{#if view.comment.hasText}}
-                {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
-            {{/if}}
+                {{#if view.comment.hasText}}
+                    {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
+                {{/if}}
 
-            {{view NestedCommentsApp.FormattingHelpView}}
-        </form>
+                {{view NestedCommentsApp.FormattingHelpView}}
+            </form>
+        {{else}}
+            <a href="#"
+               class="uncollapse add-top-level label label-important"
+               {{action "uncollapse" target="view"}}>{% trans "Add a comment" %}
+            </a>
+        {{/unless}}
     {{else}}
 
         <p>{% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.</p>{% endblocktrans %}
@@ -40,11 +48,8 @@
 {% handlebars "comments" %}
     {{#if controller.ready}}
         {{#if controller.content.length}}
-            <small>
-                {% blocktrans %}Remember to use the <span class="label label-important">reply</span> button when replying directly to a comment. To post a new top level comment, use the form at the end of the comment list.{% endblocktrans %}
-            </small>
         {{else}}
-           <p class="comment">{% trans "There are no comments yet." %}</p> 
+           <p class="comment">{% trans "There are no comments yet." %}</p>
         {{/if}}
 
         {{#each controller.content}}
@@ -229,7 +234,7 @@
                 <td>&gt; {% trans "quoted text" %}</td>
                 <td>| <i>{% trans "quoted text" %}</i></td>
             </tr>
-            
+
             <tr>
                 <td>\*{% trans "escape the formatting syntax" %}\*</td>
                 <td>*{% trans "escape the formatting syntax" %}*</td>

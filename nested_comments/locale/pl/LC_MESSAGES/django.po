@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-26 08:12-0600\n"
+"POT-Creation-Date: 2013-07-24 17:18+0300\n"
 "PO-Revision-Date: 2013-02-06 20:27+0100\n"
 "Last-Translator: milosz <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,8 +19,19 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: templates/nested_comments/nestedcomment_app.html:35
-#: templates/nested_comments/nestedcomment_app.html:172
+#: templates/nested_comments/nestedcomment_app.html:23
+#: templates/nested_comments/nestedcomment_app.html:138
+#: templates/nested_comments/nestedcomment_app.html:161
+#: templates/nested_comments/nestedcomment_list.html:58
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: templates/nested_comments/nestedcomment_app.html:38
+msgid "Add a comment"
+msgstr ""
+
+#: templates/nested_comments/nestedcomment_app.html:43
+#: templates/nested_comments/nestedcomment_app.html:177
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment.</p>"
@@ -28,109 +39,93 @@ msgstr ""
 "<a href=\"/accounts/login/\">Zaloguj się</a> lub <a href=\"/accounts/"
 "register/\">zarejestruj</a> aby dodać komentarz.</p>"
 
-#: templates/nested_comments/nestedcomment_app.html:44
-msgid ""
-"Remember to use the <span class=\"label label-important\">reply</span> "
-"button when replying directly to a comment. To post a new top level comment, "
-"use the form at the end of the comment list."
-msgstr ""
-"Pamiętaj, aby używać opcji  <span class=\"label label-important\">odpowiedz</"
-"span>, kiedy odpowiadasz na komentarz. Aby utworzyć nowy komentarz, który "
-"nie jest odpowiedzią, użyj formularza poniżej."
-
-#: templates/nested_comments/nestedcomment_app.html:47
+#: templates/nested_comments/nestedcomment_app.html:52
 msgid "There are no comments yet."
 msgstr "Nie ma jeszcze komentarzy."
 
-#: templates/nested_comments/nestedcomment_app.html:64
-#: templates/nested_comments/nestedcomment_app.html:81
+#: templates/nested_comments/nestedcomment_app.html:69
+#: templates/nested_comments/nestedcomment_app.html:86
 msgid "(deleted)"
 msgstr "(usunięty)"
 
-#: templates/nested_comments/nestedcomment_app.html:92
+#: templates/nested_comments/nestedcomment_app.html:97
 #: templates/nested_comments/nestedcomment_list.html:33
 msgid "Link"
 msgstr "Łącze"
 
-#: templates/nested_comments/nestedcomment_app.html:96
+#: templates/nested_comments/nestedcomment_app.html:101
 #: templates/nested_comments/nestedcomment_list.html:39
 msgid "Undelete"
 msgstr "Przywróć"
 
-#: templates/nested_comments/nestedcomment_app.html:98
+#: templates/nested_comments/nestedcomment_app.html:103
 #: templates/nested_comments/nestedcomment_list.html:41
 msgid "Delete"
 msgstr "Usuń"
 
-#: templates/nested_comments/nestedcomment_app.html:103
+#: templates/nested_comments/nestedcomment_app.html:108
 #: templates/nested_comments/nestedcomment_list.html:44
 msgid "Edit"
 msgstr "Edytuj"
 
-#: templates/nested_comments/nestedcomment_app.html:108
+#: templates/nested_comments/nestedcomment_app.html:113
 #: templates/nested_comments/nestedcomment_list.html:46
 msgid "Reply"
 msgstr "Odpowiedz"
 
-#: templates/nested_comments/nestedcomment_app.html:133
-#: templates/nested_comments/nestedcomment_app.html:156
-#: templates/nested_comments/nestedcomment_list.html:58
-msgid "Cancel"
-msgstr "Anuluj"
-
-#: templates/nested_comments/nestedcomment_app.html:136
-#: templates/nested_comments/nestedcomment_app.html:159
+#: templates/nested_comments/nestedcomment_app.html:141
+#: templates/nested_comments/nestedcomment_app.html:164
 msgid "The comment cannot be empty."
 msgstr "Komentarz nie może być pusty"
 
-#: templates/nested_comments/nestedcomment_app.html:183
+#: templates/nested_comments/nestedcomment_app.html:188
 #: templates/nested_comments/nestedcomment_list.html:57
 msgid "Save"
 msgstr "Zapisz"
 
-#: templates/nested_comments/nestedcomment_app.html:193
+#: templates/nested_comments/nestedcomment_app.html:198
 msgid "Preview"
 msgstr "Podgląd"
 
-#: templates/nested_comments/nestedcomment_app.html:199
+#: templates/nested_comments/nestedcomment_app.html:204
 #: templates/nested_comments/nestedcomment_list.html:60
 msgid "Formatting help"
 msgstr "Pomoc na temat formatowania"
 
-#: templates/nested_comments/nestedcomment_app.html:203
+#: templates/nested_comments/nestedcomment_app.html:208
 msgid "You type:"
 msgstr "Piszesz:"
 
-#: templates/nested_comments/nestedcomment_app.html:204
+#: templates/nested_comments/nestedcomment_app.html:209
 msgid "You see:"
 msgstr "Widzisz:"
 
-#: templates/nested_comments/nestedcomment_app.html:209
-#: templates/nested_comments/nestedcomment_app.html:210
+#: templates/nested_comments/nestedcomment_app.html:214
+#: templates/nested_comments/nestedcomment_app.html:215
 msgid "italics"
 msgstr "italiki"
 
-#: templates/nested_comments/nestedcomment_app.html:214
-#: templates/nested_comments/nestedcomment_app.html:215
+#: templates/nested_comments/nestedcomment_app.html:219
+#: templates/nested_comments/nestedcomment_app.html:220
 msgid "bold"
 msgstr "pogrubienie"
 
-#: templates/nested_comments/nestedcomment_app.html:224
+#: templates/nested_comments/nestedcomment_app.html:229
 msgid "(TAB or 4 spaces)"
 msgstr "(TAB lub 4 spacje)"
 
-#: templates/nested_comments/nestedcomment_app.html:224
-#: templates/nested_comments/nestedcomment_app.html:225
+#: templates/nested_comments/nestedcomment_app.html:229
+#: templates/nested_comments/nestedcomment_app.html:230
 msgid "preformatted text"
 msgstr "tekst sformatowany"
 
-#: templates/nested_comments/nestedcomment_app.html:229
-#: templates/nested_comments/nestedcomment_app.html:230
+#: templates/nested_comments/nestedcomment_app.html:234
+#: templates/nested_comments/nestedcomment_app.html:235
 msgid "quoted text"
 msgstr "cytat"
 
-#: templates/nested_comments/nestedcomment_app.html:234
-#: templates/nested_comments/nestedcomment_app.html:235
+#: templates/nested_comments/nestedcomment_app.html:239
+#: templates/nested_comments/nestedcomment_app.html:240
 msgid "escape the formatting syntax"
 msgstr ""
 
@@ -141,3 +136,12 @@ msgstr "(komentarz usunięty)"
 #: templates/nested_comments/nestedcomment_list.html:75
 msgid "There doesn't seem to be anything here."
 msgstr "Nic tu nie ma."
+
+#~ msgid ""
+#~ "Remember to use the <span class=\"label label-important\">reply</span> "
+#~ "button when replying directly to a comment. To post a new top level "
+#~ "comment, use the form at the end of the comment list."
+#~ msgstr ""
+#~ "Pamiętaj, aby używać opcji  <span class=\"label label-important"
+#~ "\">odpowiedz</span>, kiedy odpowiadasz na komentarz. Aby utworzyć nowy "
+#~ "komentarz, który nie jest odpowiedzią, użyj formularza poniżej."
