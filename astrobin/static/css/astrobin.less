@@ -142,10 +142,10 @@ http://pixelmatrixdesign.com/uniform/themer.html
 
 /* Global Declaration */
 
-div.selector, 
-div.selector span, 
+div.selector,
+div.selector span,
 div.checker span,
-div.radio span, 
+div.radio span,
 div.uploader span.filename,
 div.uploader span.action,
 div.button,
@@ -155,14 +155,14 @@ div.button span {
   -webkit-font-smoothing: antialiased;
 }
 
-.selector, 
-.radio, 
-.checker, 
+.selector,
+.radio,
+.checker,
 .uploader,
-.button, 
-.selector *, 
-.radio *, 
-.checker *, 
+.button,
+.selector *,
+.radio *,
+.checker *,
 .uploader *,
 .button *{
   margin: 0;
@@ -172,7 +172,7 @@ div.button span {
 /* INPUT & TEXTAREA */
 
 input.text,
-input.email, 
+input.email,
 input.password,
 textarea.uniform {
   font-size: @base-font-size;
@@ -220,12 +220,12 @@ div.selector select {
   left: 0px;
 }
 
-div.selector:active, 
+div.selector:active,
 div.selector.active {
   background-position: -483px -156px;
 }
 
-div.selector:active span, 
+div.selector:active span,
 div.selector.active span {
   background-position: right -26px;
 }
@@ -279,7 +279,7 @@ div.checker span {
   width: 19px;
 }
 
-div.checker:active span, 
+div.checker:active span,
 div.checker.active span {
   background-position: -19px -260px;
 }
@@ -300,7 +300,7 @@ div.checker span.checked {
   background-position: -76px -260px;
 }
 
-div.checker:active span.checked, 
+div.checker:active span.checked,
 div.checker.active span.checked {
   background-position: -95px -260px;
 }
@@ -351,12 +351,12 @@ div.radio span {
   background-position: 0px -279px;
 }
 
-div.radio:active span, 
+div.radio:active span,
 div.radio.active span {
   background-position: -18px -279px;
 }
 
-div.radio.focus span, 
+div.radio.focus span,
 div.radio:hover span {
   background-position: -36px -279px;
 }
@@ -381,7 +381,7 @@ div.radio.focus span.checked, div.radio:hover span.checked {
   background-position: -108px -279px;
 }
 
-div.radio.focus:active span.checked, 
+div.radio.focus:active span.checked,
 div.radio:hover:active span.checked,
 div.radio.focus.active span.checked,
 div.radio.active:hover span.checked {
@@ -473,7 +473,7 @@ div.button.focus span,
 div.button:focus span,
 div.button:hover span,
 div.button.hover span {
-  background-position: right -673px; 
+  background-position: right -673px;
 }
 
 div.button.active,
@@ -593,16 +593,16 @@ div.uploader.disabled span.filename {
 }
 /*
 
-CORE FUNCTIONALITY 
+CORE FUNCTIONALITY
 
 Not advised to edit stuff below this line
 -----------------------------------------------------
 */
 
-.selector, 
-.checker, 
-.button, 
-.radio, 
+.selector,
+.checker,
+.button,
+.radio,
 .uploader {
   display: -moz-inline-box;
   display: inline-block;
@@ -814,12 +814,12 @@ body.full {
     border: none;
     .box-shadow;
     .rounded-corners;
-    
+
     .modal-header {
         background: #303030 url('../images/darker-panel-tile.png');
         .rounded-corners-top;
         border-bottom: #404040;
-        
+
         h3 {
             margin: 0;
             padding: 0;
@@ -1062,7 +1062,7 @@ body.full {
   cursor: default;
   text-decoration: none;
   background-color: inherit;
-} 
+}
 
 .btn-primary .caret,
 .btn-warning .caret,
@@ -1091,7 +1091,7 @@ li.astrobin-thumbnail {
     margin: 0;
     border: 0;
     .no-box-shadow;
-    
+
     img {
         .rounded-corners(12px);
     }
@@ -1330,14 +1330,14 @@ li:first-child.as-result-item {
 li.as-result-item.active {
     color: @link-color;}
 
-li.as-result-item em { 
-    font-style: normal; 
+li.as-result-item em {
+    font-style: normal;
     background: @text-color;
     padding: 0 2px;
     color: @background-color;}
 
-/* Webkit Hacks 
-@media screen and (-webkit-min-device-pixel-ratio:0) {  
+/* Webkit Hacks
+@media screen and (-webkit-min-device-pixel-ratio:0) {
     ul.as-selections {
         border-top-width: 2px;
     }
@@ -1375,7 +1375,7 @@ ul.as-selections li.as-selection-item a.as-edit {
     margin-top: 0;}
 
 /* Firefox 3.0 Hacks */
-ul.as-list,  x:-moz-any-link, x:default { 
+ul.as-list,  x:-moz-any-link, x:default {
     border: 1px solid @border-color;}
 BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     border: none;}
@@ -1386,7 +1386,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     background: transparent;
     border-width: 0px 0px 1px 0px;
     border-radius: 0px;
-   
+
     .ui-tabs-nav {
         padding-left: 0px;
         background: transparent;
@@ -1398,7 +1398,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .ui-tabs-panel {
         background: transparent;
         border-width: 0px 1px 1px 1px;
-    } 
+    }
     .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
         color: @link-color;
     }
@@ -1560,7 +1560,7 @@ div.capty-caption a {
                 padding-left: 0;
             }
         }
-        
+
         &:last-child {
             .upload-form-inner {
                 padding-right: 0;
@@ -1608,7 +1608,7 @@ div.favorite-container {
     padding-right: @spacer-medium;
     .strong;
 }
-        
+
 .main-image {
         text-align: center;
 
@@ -1631,7 +1631,7 @@ div.favorite-container {
                 left: 0;
                 opacity: 0.0;
                 max-width: 100%;
-                z-index: 2; 
+                z-index: 2;
                 border: none;}
             img.fixed-plot-overlay {
                 opacity: 1.0;}}}
@@ -1662,15 +1662,15 @@ div.favorite-container {
 .image-detail {
     .image-detail-inner {
         padding: @spacer-large;
-            
+
         .gear, .acquisition {
             float: left;
             width: 50%;
         }
-        
+
         .gear-inner, .acquisition-inner {
             padding: 0 @spacer-medium;
-            
+
             p {
                 margin: 0;
             }
@@ -1737,8 +1737,6 @@ div.favorite-container {
     margin-top: @spacer-large;
     margin-bottom: @spacer-xxlarge;
     padding-top: @spacer-large;
-
-    border-top: 1px solid #424242;
 
     .loader {
         display: block;
@@ -1853,7 +1851,7 @@ div.favorite-container {
             color: #111;
         }
     }
- 
+
     .meta, .links {
         font-size: 0.85em;
     }
@@ -1874,6 +1872,16 @@ div.favorite-container {
             margin-bottom: @spacer-medium;
         }
     }
+}
+
+.top-level {
+    margin-bottom: @spacer-xlarge;
+}
+
+.add-top-level {
+    height: 16px;
+    font-size: 14px;
+    padding: 8px;
 }
 
 .review {
@@ -1920,7 +1928,7 @@ div.favorite-container {
     padding: @spacer-large;
     margin-bottom: @spacer-large;
     overflow: hidden;
-    
+
     .header {
         background: #303030 url('../images/darker-panel-tile.png');
         .rounded-corners-top;
@@ -1936,12 +1944,12 @@ div.favorite-container {
     .col {
         float: left;
         width: 50%;
-        
+
         .inner {
             padding: @spacer-medium;
         }
     }
-    
+
     .form-horizontal input[type=text],
     .form-horizontal input[type=password],
     .form-horizontal textarea,
@@ -2008,7 +2016,7 @@ div.favorite-container {
         .slider {
             margin: @spacer-large @spacer-medium;
         }
-        
+
         .search-button {
             width: 100%;
         }
@@ -2108,7 +2116,7 @@ div.favorite-container {
     &:first-child {
         margin-top: 0;
     }
-    
+
     .more, .back {
         margin-left: @spacer-medium;
     }
@@ -2143,7 +2151,7 @@ div.favorite-container {
 
     .new, .sender, .subject, .message-tease, .actions {
         display: inline;
-    } 
+    }
     .date {
         color: @text-color / @hilight-factor;
     }
@@ -2250,7 +2258,7 @@ div.token-input-dropdown {
 
 .full-title {
     padding: 16px 80px;
-    
+
     .title {
         color: @strong-text-color;
         font-weight: bold;
@@ -2280,17 +2288,17 @@ form.copy {
     label {
         float: left;
     }
-    
+
     #clip-container {
         position: relative;
         float: left;
         display: inline-block;
         margin-left: @spacer-small;
-        
+
         img {
             cursor: hand; cursor: pointer;
         }
-        
+
         .flash-container {
             position: absolute;
             top: -3px;
@@ -2736,7 +2744,7 @@ li.revisions {
 .popover.bottom .arrow {
     border-bottom-color: #1B1B1B;
 }
- 
+
 
 .gear-page {
   .gear-image {
