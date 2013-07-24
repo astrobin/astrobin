@@ -561,6 +561,7 @@ $(function() {
 
         didInsertElement: function() {
             this._super();
+            this.$().attr("title", this.$().attr("title") + " UTC");
             this.$().timeago();
         }
     });
