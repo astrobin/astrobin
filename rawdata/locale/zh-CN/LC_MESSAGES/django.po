@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-26 08:12-0600\n"
-"PO-Revision-Date: 2013-02-09 05:24+0100\n"
-"Last-Translator: time2k <timezhang@gmail.com>\n"
+"PO-Revision-Date: 2013-04-22 06:05+0100\n"
+"Last-Translator: jiaozi <wangjiao@foxmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh-CN\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,7 @@ msgstr "请描述这个目录的目标"
 msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
-msgstr ""
+msgstr "您在 AstroBin Raw数据库上的空间不足，请升级您的用户。"
 
 #: signal_handlers.py:18
 msgid ""
@@ -239,7 +239,7 @@ msgstr ""
 
 #: templates/rawdata/help_01.html:22
 msgid "What if we told you now you can do the same with your raw files?"
-msgstr ""
+msgstr "您在 AstroBin Raw数据库上的空间不足，请升级您的用户。"
 
 #: templates/rawdata/help_01.html:24
 msgid ""
@@ -310,11 +310,11 @@ msgstr ""
 
 #: templates/rawdata/help_02.html:27
 msgid "By type"
-msgstr ""
+msgstr "按类型"
 
 #: templates/rawdata/help_02.html:28
 msgid "By acquisition date"
-msgstr ""
+msgstr "按购买日期"
 
 #: templates/rawdata/help_02.html:29
 msgid "By upload date"
@@ -941,11 +941,11 @@ msgstr ""
 #: templates/subscription/_plan.html:17
 #, python-format
 msgid "Free for %(free_days)s days."
-msgstr ""
+msgstr "免费X天"
 
 #: templates/subscription/_plan.html:21
 msgid "You can cancel at any time."
-msgstr ""
+msgstr "你能随时随地取消"
 
 #: templates/subscription/subscription_cancel.html:8
 msgid "Subscription process cancelled"
@@ -985,12 +985,12 @@ msgstr ""
 
 #: templates/subscription/subscription_detail.html:28
 msgid "You are subscribed to this plan."
-msgstr ""
+msgstr "您正在提交这个计划"
 
 #: templates/subscription/subscription_detail.html:29
 #, python-format
 msgid "You may <a href=\"%(cancel_url)s\">cancel via PayPal</a> if you wish."
-msgstr ""
+msgstr "如果你愿意，你能通过PayPal来取消"
 
 #: templates/subscription/subscription_detail.html:33
 #: templates/subscription/subscription_detail.html:55
@@ -1009,7 +1009,7 @@ msgstr "感谢您支持AstroBIN!"
 
 #: templates/subscription/subscription_done.html:8
 msgid "Subscription confirmed"
-msgstr ""
+msgstr "确认订阅"
 
 #: templates/subscription/subscription_done.html:12
 msgid ""
