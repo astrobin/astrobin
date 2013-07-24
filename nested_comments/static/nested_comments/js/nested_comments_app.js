@@ -99,7 +99,7 @@ $(function() {
     /*******************************************************************
     * Views and Controllers
     *******************************************************************/
-   
+
     nc_app.ApplicationController = Em.Controller.extend();
     nc_app.ApplicationView = Em.View.extend({
         templateName: "nested-comments"
@@ -125,10 +125,20 @@ $(function() {
     nc_app.TopLevelController = Em.Controller.extend();
     nc_app.TopLevelView = Em.View.extend({
         templateName: "top-level",
-        classNames: 'comment',
+        classNames: 'top-level comment',
         submittingBinding: 'comment.submitting',
         disallowSavingBinding: 'comment.disallowSaving',
         userIsAuthenticated: null,
+        collapsed: true,
+
+        collapse: function() {
+            this.set('collapsed', true);
+            this.reset();
+        },
+
+        uncollapse: function() {
+            this.set('collapsed', false);
+        },
 
         reset: function() {
             var comment = nc_app.get('router.commentsController').createComment();
@@ -342,7 +352,7 @@ $(function() {
 
             data['created'] = '1970-01-01';
             data['updated'] = '1970-01-01';
-        
+
             parent.set('submitting', true);
 
             $.ajax({
@@ -373,7 +383,7 @@ $(function() {
             data['updated'] = '1970-01-01';
             data['id'] = 0;
             data['parent'] = 0;
- 
+
             comment.set('submitting', true);
 
             return $.ajax({
@@ -580,7 +590,7 @@ $(function() {
     /*******************************************************************
     * Router
     *******************************************************************/
- 
+
     nc_app.Router = Em.Router.extend({
         location: 'none',
 
