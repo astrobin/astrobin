@@ -264,8 +264,7 @@
                         <ul class="nav pull-right">
                             <li class="dropdown visible-desktop">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    {% trans "Language" %}
-                                    <b class="caret"></b>
+                                    <i class="icon-flag"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
@@ -347,8 +346,6 @@
                                 </div>
                                 {% endif %}
                             </li> <!-- languages -->
-
-                            <li class="divider-vertical"></li>
 
                             {% if request.user.is_authenticated %}
                             <li class="dropdown">
@@ -451,14 +448,12 @@
                                 </div> <!-- btn-group -->
                             </li> <!-- user menu -->
 
-                            <li class="divider-vertical"></li>
-
                             <li class="dropdown notice-container visible-desktop">
                                 {% if notifications_count > 0 %}
                                     <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
                                 {% endif %}
                                 <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
-                                    <img alt="{% trans "Notifications" %}" src="{{STATIC_URL}}icons/iconic/orange/notifications.gif"/>
+                                    <i class="icon-check-empty"></i>
                                 </a>
                                 <ul class="dropdown-menu" id="notifications-popup">
                                     {% notification_list request 1 10 %}
@@ -470,7 +465,7 @@
                                     <span class="notice-count">{{requests_count}}</span>
                                 {% endif %}
                                 <a class="dropdown requests" data-toggle="dropdown" title="{% trans "Requests" %}" href="#">
-                                    <img alt="{% trans "Requests" %}" src="{{STATIC_URL}}icons/iconic/orange/requests.gif"/>
+                                    <i class="icon-plus"></i>
                                 </a>
                                 <ul class="dropdown-menu" id="requests-popup">
                                     {% request_list request %}
