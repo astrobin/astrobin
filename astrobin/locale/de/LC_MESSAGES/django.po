@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-26 08:11-0600\n"
-"PO-Revision-Date: 2013-01-17 22:19+0100\n"
-"Last-Translator: alizeerait <alizee.rait@gmail.com>\n"
+"PO-Revision-Date: 2013-05-05 18:01+0100\n"
+"Last-Translator: dark_sky <bushbarack@yahoo.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -1053,6 +1053,8 @@ msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
+"Es sind ein oder mehrer Fehler bei der Bearbeitung des Formulars "
+"aufgetreten. Möglicherweise musst du nach unten scrollen, um diese zu sehen."
 
 #: forms.py:112
 msgid "Please enter either some subjects or a main solar system subject."
@@ -2657,6 +2659,8 @@ msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
+"Aufgrund von Server-Wartungsarbeiten befindet sich Astrobin derzeit im Nur-"
+"Lesen Modus. Bitte versuche es später noch einmal!"
 
 #: views.py:1011
 msgid ""
@@ -2926,7 +2930,7 @@ msgstr ""
 
 #: templates/503.html:5
 msgid "AstroBin is temporarily unavailable"
-msgstr "AstroBin ist im vorübergehend nicht erreichbar"
+msgstr "AstroBin ist vorübergehend nicht erreichbar"
 
 #: templates/503.html:7
 msgid ""
@@ -2934,10 +2938,13 @@ msgid ""
 "maintenance, or probably a software upgrade. Usually this doesn't take more "
 "than 30 minutes."
 msgstr ""
+"Wir entschuldigen uns für die Unannehmlichkeit doch wir führen gerade einige "
+"Server-Wartungsarbeiten oder wahrscheinlich ein Software-Upgrade durch. Das "
+"dauert normalerweise nicht länger als 30 Minuten."
 
 #: templates/503.html:10
 msgid "Come back soon!"
-msgstr ""
+msgstr "Besuche uns bald wieder!"
 
 #: templates/activities.html:8 templates/index.html:193
 msgid "Activity stream"
