@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-26 08:12-0600\n"
-"PO-Revision-Date: 2013-02-23 22:53+0100\n"
+"PO-Revision-Date: 2013-07-21 15:29+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt-BR\n"
@@ -1416,7 +1416,7 @@ msgstr "adicionou novos dados ao conjunto de dados públicos"
 
 #: locale_extras.py:14
 msgid "added a new processed image to public data pool"
-msgstr ""
+msgstr "adicionou uma nova imagem para uma colaboração pública"
 
 #: models.py:48
 msgid "None (All rights reserved)"
@@ -1494,9 +1494,8 @@ msgid "Brazilian Portuguese"
 msgstr "Português brasileiro"
 
 #: models.py:69 models.py:84 settings.py:78
-#, fuzzy
 msgid "Greek"
-msgstr "Grécia"
+msgstr "Grego"
 
 #: models.py:88
 msgid "Pulsars"
@@ -2658,6 +2657,8 @@ msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
+"AstroBin está atualmente em modo de leitura, por causa da manutenção do "
+"servidor. Por favor, tente novamente mais tarde!"
 
 #: views.py:1011
 msgid ""
@@ -2890,25 +2891,23 @@ msgstr "Nova opinião sobre um equipamento que você possui"
 
 #: management/__init__.py:153
 msgid "New data posted to public pool"
-msgstr ""
+msgstr "Novos dados enviados à colaboração pública"
 
 #: management/__init__.py:159
-#, fuzzy
 msgid "New image posted to public data pool"
-msgstr "Nova imagem em um tópico que você segue"
+msgstr "Nova imagem enviada à colaboração pública"
 
 #: management/__init__.py:165
 msgid "New data posted to shared private folder"
-msgstr ""
+msgstr "Novos dados enviados à pasta de compartilhamento restrito"
 
 #: management/__init__.py:171
 msgid "New image posted to shared private folder"
-msgstr ""
+msgstr "Nova imagem enviada à pasta de compartilhamento restrito"
 
 #: management/__init__.py:177
-#, fuzzy
 msgid "You are invited to a shared private folder"
-msgstr "Você recebeu uma mensagem particular."
+msgstr "Você foi convidado para uma pasta de compartilhamento restrito"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -2924,7 +2923,7 @@ msgstr ""
 
 #: templates/503.html:5
 msgid "AstroBin is temporarily unavailable"
-msgstr ""
+msgstr "AstroBin está temporariamente indisponível"
 
 #: templates/503.html:7
 msgid ""
@@ -2932,10 +2931,13 @@ msgid ""
 "maintenance, or probably a software upgrade. Usually this doesn't take more "
 "than 30 minutes."
 msgstr ""
+"Pedimos desculpas pelo inconveniente, mas estamos realizando manutenção no "
+"servidor, ou provavelmente um upgrade de software. Normalmente, isso não "
+"leva mais do que 30 minutos."
 
 #: templates/503.html:10
 msgid "Come back soon!"
-msgstr ""
+msgstr "Volte em breve!"
 
 #: templates/activities.html:8 templates/index.html:193
 msgid "Activity stream"
@@ -3015,9 +3017,8 @@ msgid "Home"
 msgstr "Início"
 
 #: templates/base.html:102 templates/maintenance_base.html:88
-#, fuzzy
 msgid "Community"
-msgstr "Descrição"
+msgstr "Comunidade"
 
 #: templates/base.html:106 templates/base.html.py:645 templates/index.html:228
 #: templates/maintenance_base.html:92 templates/maintenance_base.html:558
@@ -3052,7 +3053,7 @@ msgstr "Maratona Messier"
 
 #: templates/base.html:155
 msgid "Public data pools"
-msgstr ""
+msgstr "Trabalhos de colaboração pública"
 
 #: templates/base.html:164 templates/comments.html:9
 #: templates/comments.html.py:11 templates/leaderboard.html:44
@@ -3103,14 +3104,12 @@ msgstr "FAQ"
 
 #: templates/base.html:218 templates/maintenance_base.html:197
 #: templates/questions.html:4 templates/questions.html.py:7
-#, fuzzy
 msgid "AstroBin Questions"
-msgstr "AstroBin é uma rede social!"
+msgstr "Perguntas sobre AstroBin"
 
 #: templates/base.html:224
-#, fuzzy
 msgid "AstroBin Raw Data"
-msgstr "AstroBin é uma rede social!"
+msgstr "AstroBin Raw Data"
 
 #: templates/base.html:249 templates/maintenance_base.html:221
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:7
@@ -3174,11 +3173,11 @@ msgstr "Estatísticas"
 
 #: templates/base.html:412 templates/user/profile-subnav.html:35
 msgid "Raw data library"
-msgstr ""
+msgstr "Biblioteca de dados RAW"
 
 #: templates/base.html:419
 msgid "Private shared folders"
-msgstr ""
+msgstr "Pastas de compartilhamento restrito"
 
 #: templates/base.html:428 templates/maintenance_base.html:295
 #: templates/messages/inbox.html:9
@@ -3236,6 +3235,11 @@ msgid ""
 "your files organized, and allow you to share them with other members. <a "
 "href=\"%(rawdata_url)s\">Want to know more?</a>"
 msgstr ""
+"<strong>AstroBin Raw Data</strong> é uma plataforma de hospedagem segura "
+"para todos os seus arquivos FIT e RAW, até o limite de 500 GB! Além da "
+"organização automática dos seus arquivos, a plataforma lhe permitirá "
+"compartilhá-los com outros membros. <a href=\"%(rawdata_url)s\">Quer saber "
+"mais?</a>"
 
 #: templates/base.html:594 templates/help.html:10
 #: templates/maintenance_base.html:507
@@ -3456,7 +3460,7 @@ msgstr "Como votar nas imagens?"
 
 #: templates/faq.html:22 templates/faq.html.py:178
 msgid "The rating values seem odd. How are they calculated?"
-msgstr ""
+msgstr "As avaliações parecem estranhas. Como elas são calculadas?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3738,12 +3742,21 @@ msgid ""
 "that the image received, to ensure that images with too few votes aren't "
 "rated better than images with similar rating, but lots of votes."
 msgstr ""
+"AstroBin usa dois truques para normalizar as classificações de imagem. "
+"Primeiro de tudo, um algoritmo <em> sigma-reject </ em> é aplicado para "
+"excluir votações que estão muito longe da média. Isto cuida das pessoas que "
+"não votam honestamente. Em seguida, a classificação é interpolada por meio "
+"de uma função hiperbólica do número de votos que a imagem recebeu, para "
+"assegurar que as imagens com poucos votos não são classificadas melhor do "
+"que as imagens com classificação semelhante, mas muitos votos."
 
 #: templates/faq.html:183
 msgid ""
 "This produces the \"AstroBin index\", which is a fairer way to compare "
 "images and users."
 msgstr ""
+"Isto produz o \"índice AstroBin\", que é uma forma mais justa para comparar "
+"imagens e utilizadores."
 
 #: templates/faq.html:189
 msgid ""
@@ -4184,13 +4197,15 @@ msgstr "Imagens recentes"
 
 #: templates/index.html:55
 msgid "FIT and DSLR camera raw files"
-msgstr ""
+msgstr "Arquivos Raw de câmera FIT e DSLR"
 
 #: templates/index.html:65
 msgid ""
 "AstroBin offers the storage of FIT and DSLR camera raw files too, for "
 "archival and sharing purposes!"
 msgstr ""
+"AstroBin oferece o armazenamento de FIT e também arquivos de câmera DSLR, "
+"para fins de arquivamento e compartilhamento!"
 
 #: templates/index.html:102
 msgid "Image of the day"
@@ -4455,21 +4470,27 @@ msgid ""
 "information (in fact it barely tries), and presents a series of flaws, that "
 "will be explained below."
 msgstr ""
+"Hoje, as formas mais comuns de comunidades astronômicas são os fóruns. Um "
+"conceito com mais de 20 anos, que não trabalha bem com grandes quantidades "
+"de informação, faz um péssimo trabalho na organização dessas informações "
+"(meramente tenta, na verdade) e apresenta uma série de falhas, que serão "
+"explicadas abaixo."
 
 #: templates/questions.html:22
-#, fuzzy
 msgid "What is AstroBin Questions?"
-msgstr "O que é o AstroBin?"
+msgstr "O que é a Seção de perguntas do AstroBin?"
 
 #: templates/questions.html:24
 msgid ""
 "It's a Questions &amp; Answers site focused on the quality of the content. "
 "The allowed subjects of discussion are Astrophotography and Astronomy."
 msgstr ""
+"É um site de Perguntas &amp; Respostas, focado na qualidade do conteúdo. São "
+"permitidos tópicos sobre Astrofotografia e Astronomia."
 
 #: templates/questions.html:27
 msgid "What's wrong with forums?"
-msgstr ""
+msgstr "O que há de errado com os fóruns?"
 
 #: templates/questions.html:29
 msgid ""
@@ -4477,10 +4498,14 @@ msgid ""
 "<strong>terribly</strong> dated, as a system, for today's Internet "
 "standards. Here's a series of flaws that AstroBin Questions fixes:"
 msgstr ""
+"Fóruns são ótimos para discussões informais, mas, como um sistema, são "
+"<strong>terrivelmente</strong> ultrapassados para os padrões de hoje da "
+"Internet. Veja uma série dessas falhas que a Seção de perguntas do Astrobin "
+"consegue suprir:"
 
 #: templates/questions.html:33
 msgid "Every post is flat"
-msgstr ""
+msgstr "Toda mensagem é independente"
 
 #: templates/questions.html:35
 msgid ""
@@ -4488,10 +4513,13 @@ msgid ""
 "the same post, because the only way to do it is by quoting somebody. Very "
 "soon this becomes a mess."
 msgstr ""
+"É muito difícil de participar de diversas conversas, ao mesmo tempo, sobre a "
+"mesma mensagem, porque a única maneira de fazer isso é citando alguém. Não "
+"demora para virar uma bagunça."
 
 #: templates/questions.html:40
 msgid "Every post has the same visibility"
-msgstr ""
+msgstr "Toda mensagem tem a mesma visibilidade"
 
 #: templates/questions.html:42
 msgid ""
@@ -4503,10 +4531,17 @@ msgid ""
 "replies might be objectively wrong, and this will worsen the quality of the "
 "community."
 msgstr ""
+"Se você enviar uma mensagem perguntando se deve usar um Filtro Solar ao "
+"observar um eclipse e eu responder <em>\"Não se preocupe\"</em>, a única "
+"maneira de invalidar esta resposta é quando outras pessoas intervêm e "
+"explicam o que está errado. Isto não garante que alguém não perca a visão "
+"tentando. Este é um exemplo extremo. O que eu estou tentando dizer é que "
+"algumas respostas podem estar erradas e isto prejudica a qualidade da "
+"comunidade."
 
 #: templates/questions.html:47
 msgid "Every user has the same importance"
-msgstr ""
+msgstr "Todo usuário tem a mesma importância"
 
 #: templates/questions.html:49
 msgid ""
@@ -4515,10 +4550,14 @@ msgid ""
 "this doesn't matter. My posts or post replies will look the same. This "
 "worsens the quality of the community."
 msgstr ""
+"Sendo o Sr. Ninguém, que tirou a sua primeira astrofoto na última noite, ou "
+"um astrofotógrafo semi profissional com 20 anos de experiência, nada disso "
+"importa em fóruns. Minhas mensagens ou respostas serão iguais. Isso "
+"prejudica a qualidade da comunidade."
 
 #: templates/questions.html:54
 msgid "Everything is static"
-msgstr ""
+msgstr "Tudo é estático"
 
 #: templates/questions.html:56
 msgid ""
@@ -4526,6 +4565,10 @@ msgid ""
 "and can't ask my question well, nobody can rephrase it. If I make a lot of "
 "typos, nobody can fix them. This is undesirable."
 msgstr ""
+"Se eu escrevo como uma criança de 7 anos, ninguém pode fazer nada. Se eu não "
+"me comunico bem e não consigo fazer uma pergunta coerente, ninguém consegue "
+"melhorá-la. Se eu escrever com vários erros, ninguém pode arrumá-los. Isto "
+"é indesejável."
 
 #: templates/questions.html:62
 msgid ""
@@ -4533,39 +4576,48 @@ msgid ""
 "highly interactive, wiki-capable website that <strong>you</strong> moderate, "
 "thanks to a system based on <em>karma points</em>."
 msgstr ""
+"A Seção de perguntas do AstroBin resolve todas essas questões com um site "
+"gerido pela comunidade, altamente interativo e com conteúdo no estilo "
+"\"wiki\", que <strong>você</strong> pode moderar, graças a um sistema baseado "
+"em <em>pontos de karma</em>."
 
 #: templates/questions.html:66
 msgid ""
 "Please join, and you can learn and teach about Astrophotography and "
 "Astronomy!"
 msgstr ""
+"Por favor participe e você poderá aprender e ensinar sobre astrofotografia e "
+"astronomia!"
 
 #: templates/questions.html:69
 msgid "Here's some more reading material to get you started"
-msgstr ""
+msgstr "Aqui tem mais material para você ler e começar a participar"
 
 #: templates/questions.html:73
-#, fuzzy
 msgid "Frequently Asked Questions about AstroBin Questions"
-msgstr "Perguntas frequentes"
+msgstr "Perguntas frequentes sobre a Seção de perguntas do AstroBin"
 
 #: templates/questions.html:78
 msgid "AstroBin Questions' help page"
-msgstr ""
+msgstr "Página de ajuda da Seção de perguntas do AstroBin"
 
 #: templates/questions.html:83
 msgid "An extension of this page, as a question on AstroBin Questions"
 msgstr ""
+"Uma extensão desta página, como se fosse um tópico da Seção de perguntas do "
+"AstroBin"
 
 #: templates/questions.html:90
 msgid "Go to AstroBin Questions!"
-msgstr ""
+msgstr "Vá para a Seção de perguntas do AstroBin!"
 
 #: templates/questions.html:94
 msgid ""
 "PS: AstroBin Questions is only available in English, right now, but more "
 "languages will come soon."
 msgstr ""
+"Obs.: Atualmente, a Seção de perguntas do AstroBin está disponível apenas em "
+"inglês, mas logo outros idiomas estarão disponíveis."
 
 #: templates/stats.html:10
 #, python-format

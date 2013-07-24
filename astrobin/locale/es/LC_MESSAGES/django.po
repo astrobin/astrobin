@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-26 08:12-0600\n"
-"PO-Revision-Date: 2013-01-20 16:57+0100\n"
-"Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
+"PO-Revision-Date: 2013-05-17 23:17+0100\n"
+"Last-Translator: joseamirandavelez <joseamirandavelez@gmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -4739,9 +4739,10 @@ msgstr "Usa el botón inferior para elegir archivos"
 msgid "Drop your raw data here"
 msgstr "Deja tus Datos Raw aquí"
 
+# Not sure if the best translation for "desktop client" is "aplicación de computadora"
 #: templates/upload.html:91
 msgid "or download the desktop client for easier uploads!"
-msgstr ""
+msgstr "o descargue la aplicación de computadora para subir fácilmente!"
 
 #: templates/upload.html:92
 msgid "Accepted file types: FIT and digital camera raw files"
