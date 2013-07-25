@@ -649,14 +649,14 @@
                     <div class="span3">
                         <h3>{% trans "Copyright" %}</h3>
                         <p>
-                        {% blocktrans %}AstroBin is Copyright &copy; 2010-2013 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners.{% endblocktrans %}
+                        {% blocktrans %}The images on this websites are copyright of their respective owners.{% endblocktrans %}
                         </p>
                     </div>
                 </div> <!-- row -->
 
                 <div class="row bottom">
                     <div class="span8">
-                        <p>&copy; 2010-2013 <a href="/users/siovene/">Salvatore Iovene</a><br/>
+                        <p>&copy; 2010-{% now "Y" %} <a href="/users/siovene/">Salvatore Iovene</a><br/>
                         <span style="color:#999">Hosted by <a href="http://www.aspwebhosting.com/" target="_blank">ASPwebhosting.com</a> (AstroBin user <a href="{% url user_page "Photon" %}">Photon</a>)</span></p>
                     </div>
                     <div class="span4">
