@@ -15,23 +15,24 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         coolest_image = None
         yesterday = date.today() - timedelta(1)
+        day_before_yesterday = yesterday - timedelta(1)
 
         while coolest_image is None:
-            print yesterday
+            print day_before_yesterday
 
-            yesterdays_images = Image.objects.filter(Q(uploaded__gte = yesterday) &
-                                                     Q(uploaded__lt = date.today()) &
-                                                     Q(subject_type__lt = 500) &
-                                                     Q(w__gte = settings.IMAGE_OF_THE_DAY_WIDTH) &
-                                                     Q(h__gte = settings.IMAGE_OF_THE_DAY_HEIGHT) &
-                                                     Q(is_stored = True) &
-                                                     Q(is_wip = False) &
-                                                     Q(original_ext__in = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG']))
+            candidate_images = Image.objects.filter(Q(uploaded__gte = day_before_yesterday) &
+                                                    Q(uploaded__lt = yesterday) &
+                                                    Q(subject_type__lt = 500) &
+                                                    Q(w__gte = settings.IMAGE_OF_THE_DAY_WIDTH) &
+                                                    Q(h__gte = settings.IMAGE_OF_THE_DAY_HEIGHT) &
+                                                    Q(is_stored = True) &
+                                                    Q(is_wip = False) &
+                                                    Q(original_ext__in = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG']))
 
-            if yesterdays_images:
-                coolest_image = yesterdays_images[0]
+            if candidate_images:
+                coolest_image = candidate_images[0]
                 current_coolness = 0
-                for image in yesterdays_images:
+                for image in candidate_images:
                     author = image.user
                     score = 0
                     for vote in image.votes.all():
@@ -58,7 +59,7 @@ class Command(BaseCommand):
                         current_coolness = coolness
                         print "\tCoolest image: [%s] [%d]" % (image.title.encode('utf-8'), coolness)
             else:
-                yesterday = yesterday - timedelta(1)
+                day_before_yesterday = day_before_yesterday - timedelta(1)
 
         make_image_of_the_day(coolest_image)
 
