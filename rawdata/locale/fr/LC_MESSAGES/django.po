@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-26 08:12-0600\n"
+"POT-Creation-Date: 2013-07-25 13:12+0300\n"
 "PO-Revision-Date: 2013-03-14 20:06+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,8 +134,8 @@ msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
 msgstr ""
-"Vous n'avez pas assez d'espace libre sur votre Compte Raw AstroBin. "
-"Peut-être devriez vous modifier votre abonnement?"
+"Vous n'avez pas assez d'espace libre sur votre Compte Raw AstroBin. Peut-"
+"être devriez vous modifier votre abonnement?"
 
 #: signal_handlers.py:18
 msgid ""
@@ -1253,17 +1253,17 @@ msgstr ""
 "PS : intéressé par des forfaits plus importants ? <a href=\"/contact/"
 "\">Contactez-nous !</a>"
 
-#: views/privatesharedfolders.py:117
+#: views/privatesharedfolders.py:118
 msgid "Your image has been added to the private shared folder."
 msgstr "Votre image a été ajoutée à la collaboration privée."
 
-#: views/privatesharedfolders.py:205
+#: views/privatesharedfolders.py:206
 msgid "Your private shared folder has been deleted."
 msgstr "Votre dossier de collaboration privée a été effacé."
 
-#: views/publicdatapools.py:97
+#: views/publicdatapools.py:99
 msgid "Your image has been added to the pool."
 msgstr "Votre image a été ajoutée à la collaboration publique."
 
-msgid "File type is not supported"
-msgstr "Type de fichier non supporté"
+#~ msgid "File type is not supported"
+#~ msgstr "Type de fichier non supporté"
