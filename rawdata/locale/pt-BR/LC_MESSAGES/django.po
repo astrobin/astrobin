@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-26 08:12-0600\n"
+"POT-Creation-Date: 2013-07-25 13:12+0300\n"
 "PO-Revision-Date: 2013-04-09 02:26+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -401,8 +401,8 @@ msgid ""
 msgstr ""
 "Você já passou por uma falha no disco rígido, perdendo uma quantidade enorme "
 "de dados? Deixando seus arquivos RAW no <strong>AstroBin Raw Data</strong>, "
-"você estará livre de desastres e acidentes! Aqui, no AstroBin, nós levamos "
-"a segurança dos seus dados a sério."
+"você estará livre de desastres e acidentes! Aqui, no AstroBin, nós levamos a "
+"segurança dos seus dados a sério."
 
 #: templates/rawdata/help_03.html:25
 msgid "Do some science."
@@ -460,8 +460,8 @@ msgstr "Cuidado!"
 msgid ""
 "AstroBin is still working to index %(number)s of your %(total)s raw files."
 msgstr ""
-"AstroBin ainda está trabalhando para indexar %(number) do seu total de %"
-"(total) arquivos RAW."
+"AstroBin ainda está trabalhando para indexar %(number) do seu total de "
+"%(total) arquivos RAW."
 
 #: templates/rawdata/library.html:59
 msgid "All files"
@@ -476,7 +476,8 @@ msgstr "Parece que não há nada aqui."
 #, python-format
 msgid ""
 "Head over to the <a href=\"%(upload_url)s\">upload page</a> to get started. "
-msgstr "Vá para a <a href=\"%(upload_url)s\">página de envios</a> para começar."
+msgstr ""
+"Vá para a <a href=\"%(upload_url)s\">página de envios</a> para começar."
 
 #: templates/rawdata/library.html:156
 msgid "Coming soon!"
@@ -500,10 +501,10 @@ msgid ""
 "program."
 msgstr ""
 "Estamos trabalhando em algorítimos que automaticamente buscarão por arquivos "
-"de calibração em sua biblioteca, identificando as melhores opções para "
-"dark, offset e flat frames. O AstroBin automaticamente criará os master "
-"frames, calibrará as imagens selecionadas, fará o alinhamento, empilhamento "
-"e fornecerá o arquivo final para baixar, pronto para receber o pós "
+"de calibração em sua biblioteca, identificando as melhores opções para dark, "
+"offset e flat frames. O AstroBin automaticamente criará os master frames, "
+"calibrará as imagens selecionadas, fará o alinhamento, empilhamento e "
+"fornecerá o arquivo final para baixar, pronto para receber o pós "
 "processamento no seu programa favorito."
 
 #: templates/rawdata/library.html:167
@@ -1129,14 +1130,14 @@ msgid ""
 "a>"
 msgstr ""
 
-#: views/privatesharedfolders.py:117
+#: views/privatesharedfolders.py:118
 msgid "Your image has been added to the private shared folder."
 msgstr ""
 
-#: views/privatesharedfolders.py:205
+#: views/privatesharedfolders.py:206
 msgid "Your private shared folder has been deleted."
 msgstr ""
 
-#: views/publicdatapools.py:97
+#: views/publicdatapools.py:99
 msgid "Your image has been added to the pool."
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-24 17:18+0300\n"
+"POT-Creation-Date: 2013-07-25 13:12+0300\n"
 "PO-Revision-Date: 2013-04-09 00:45+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,9 +23,7 @@ msgstr ""
 #: templates/nested_comments/nestedcomment_app.html:161
 #: templates/nested_comments/nestedcomment_list.html:58
 msgid "Cancel"
-msgstr ""
-"Por favor, <a href=\"/accounts/login/\">identifique-se</a> ou <a "
-"href=\"/accounts/register/\">registre-se</a> para comentar.</p>"
+msgstr "Cancelar"
 
 #: templates/nested_comments/nestedcomment_app.html:38
 msgid "Add a comment"
@@ -37,9 +35,8 @@ msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment.</p>"
 msgstr ""
-"Lembre-se de usar o botão <span class=\"label label-"
-"important\">responder</span> quando se dirigir a um comentário. Para iniciar "
-"uma nova discussão, use o formulário no final da lista de comentários."
+"Por favor, <a href=\"/accounts/login/\">identifique-se</a> ou <a href=\"/"
+"accounts/register/\">registre-se</a> para comentar.</p>"
 
 #: templates/nested_comments/nestedcomment_app.html:52
 msgid "There are no comments yet."
@@ -75,14 +72,8 @@ msgstr "Editar"
 msgid "Reply"
 msgstr "Responder"
 
-#: templates/nested_comments/nestedcomment_app.html:133
-#: templates/nested_comments/nestedcomment_app.html:156
-#: templates/nested_comments/nestedcomment_list.html:58
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: templates/nested_comments/nestedcomment_app.html:136
-#: templates/nested_comments/nestedcomment_app.html:159
+#: templates/nested_comments/nestedcomment_app.html:141
+#: templates/nested_comments/nestedcomment_app.html:164
 msgid "The comment cannot be empty."
 msgstr "Aparentemente o campo de comentário está vazio."
 
@@ -122,20 +113,15 @@ msgstr "negrito"
 msgid "(TAB or 4 spaces)"
 msgstr "(TAB ou 4 espaços)"
 
-#: templates/nested_comments/nestedcomment_app.html:224
-#: templates/nested_comments/nestedcomment_app.html:225
-msgid "preformatted text"
-msgstr "texto monoespaçado"
-
 #: templates/nested_comments/nestedcomment_app.html:229
 #: templates/nested_comments/nestedcomment_app.html:230
-msgid "quoted text"
-msgstr "citação"
+msgid "preformatted text"
+msgstr "texto monoespaçado"
 
 #: templates/nested_comments/nestedcomment_app.html:234
 #: templates/nested_comments/nestedcomment_app.html:235
 msgid "quoted text"
-msgstr ""
+msgstr "citação"
 
 #: templates/nested_comments/nestedcomment_app.html:239
 #: templates/nested_comments/nestedcomment_app.html:240
