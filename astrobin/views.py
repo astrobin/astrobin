@@ -3093,6 +3093,9 @@ def stats(request):
 def leaderboard(request):
     response_dict = {}
 
+    if 'page' in request.GET:
+        raise Http404
+
     sqs = SearchQuerySet()
     sort = '-rating'
     if 'sort' in request.GET:
