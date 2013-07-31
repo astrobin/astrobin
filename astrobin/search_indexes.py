@@ -51,6 +51,8 @@ def _get_integration(image):
 
 def _prepare_rating(obj):
     from votes import index
+    if not obj.allow_rating or obj.user.userprofile_set.all()[0].optout_rating:
+        return 0
     return index([x.score for x in obj.rating.get_ratings()])
 
 def _prepare_moon_phase(obj):

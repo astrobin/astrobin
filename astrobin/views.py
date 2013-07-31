@@ -827,6 +827,7 @@ def image_detail(request, id, r):
                      'already_voted': already_voted,
                      'index': "%.3f" % index,
                      'votes_number': votes,
+                     'allow_rating': image.allow_rating and not image.user.userprofile_set.all()[0].optout_rating,
                      'comments_number': NestedComment.objects.filter(
                         deleted = False,
                         content_type__app_label = 'astrobin',

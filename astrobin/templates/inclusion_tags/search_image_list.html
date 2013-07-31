@@ -131,7 +131,12 @@
                 {% endifequal %}
 
                 {% ifequal sort '-rating' %}
-                    {% trans "Rating" %}: {{search_result.rating|cut_decimals:3}} ~ [{{search_result.votes}}]
+                    {% trans "Rating" %}:
+                    {% if search_result.object.allow_rating and not search_result.object.user.userprofile_set.all.0.optout_rating %}
+                        {{search_result.rating|cut_decimals:3}} ~ [{{search_result.votes}}]
+                    {% else %}
+                        {% trans "n/a" %}
+                    {% endif %}
                 {% endifequal %}
 
                 {% ifequal sort '-favorited' %}

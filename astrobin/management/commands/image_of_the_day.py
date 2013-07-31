@@ -23,6 +23,8 @@ class Command(BaseCommand):
             candidate_images = Image.objects.filter(Q(uploaded__gte = day_before_yesterday) &
                                                     Q(uploaded__lt = yesterday) &
                                                     Q(subject_type__lt = 500) &
+                                                    Q(allow_rating = True) &
+                                                    Q(user__userprofile__optout_rating = False) &
                                                     Q(w__gte = settings.IMAGE_OF_THE_DAY_WIDTH) &
                                                     Q(h__gte = settings.IMAGE_OF_THE_DAY_HEIGHT) &
                                                     Q(is_stored = True) &
