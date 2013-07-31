@@ -669,7 +669,7 @@
                     </a>
                 </div>
 
-                {% if image.allow_rating %}
+                {% if allow_rating %}
                     <div id="rating"></div>
                 {% endif %}
             </div> <!-- subtle-container -->
@@ -700,6 +700,8 @@
                         <th><div style="font-size: 16px"><i class="icon-heart"></i></div></th>
                         <td><span class="favorites-number">{{times_favorited}}</span></td>
                     </tr>
+
+                    {% if allow_rating %}
                     <tr>
                         <th><div style="font-size: 16px"><i class="icon-star"></i></div></th>
                         <td>
@@ -709,6 +711,8 @@
                             </a>
                         </td>
                     </tr>
+                    {% endif %}
+
                     <tr>
                         <th><div style="font-size: 16px"><i class="icon-comments-alt"></i></div></th>
                         <td><span class="comments-number">{{comments_number}}</span></td>

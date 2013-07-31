@@ -754,6 +754,7 @@ class Image(models.Model):
 
     allow_rating = models.BooleanField(
         verbose_name = _("Allow rating"),
+        help_text = _("Let other users vote this image. This setting will have no effect if you have opted out from the rating system in your site's preferences."),
         default = True,
     )
 
@@ -1532,6 +1533,17 @@ class UserProfile(models.Model):
         verbose_name=_("Language"),
         choices = LANGUAGE_CHOICES,
     )
+
+    optout_rating = models.BooleanField(
+        default = False,
+        editable = True,
+        verbose_name = _("Opt out from the rating system"),
+        help_text = _(
+            "This will hide all the votes your image have received the past, " +
+            "prevent new votes and exclude you from the leaderboard and " +
+            "sorting by rating in searches.")
+    )
+
 
     def __unicode__(self):
         return "%s' profile" % self.user.username
