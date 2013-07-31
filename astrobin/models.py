@@ -1539,9 +1539,7 @@ class UserProfile(models.Model):
         editable = True,
         verbose_name = _("Opt out from the rating system"),
         help_text = _(
-            "This will hide all the votes your image have received the past, " +
-            "prevent new votes and exclude you from the leaderboard and " +
-            "sorting by rating in searches.")
+            "This will hide all the votes your image have received the past, prevent new votes and exclude you from the leaderboard and sorting by rating in searches.")
     )
 
 
