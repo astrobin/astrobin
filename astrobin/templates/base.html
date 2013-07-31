@@ -179,12 +179,14 @@
                                         </a>
                                     </li>
                                     <li class="divider"></li>
+                                    {% if request.user.is_superuser %}
                                     <li>
                                         <a href="{% url stats %}">
                                             <i class="icon-bar-chart"></i>
                                             {% trans "Stats" %}
                                         </a>
                                     </li>
+                                    {% endif %}
                                     <li>
                                         <a href="{% url leaderboard %}">
                                             <i class="icon-list-ol"></i>

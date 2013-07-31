@@ -3058,6 +3058,7 @@ def image_revision_upload_process(request):
 
 
 @require_GET
+@user_passes_test(lambda u: u.is_superuser)
 def stats(request):
     response_dict = {}
 
