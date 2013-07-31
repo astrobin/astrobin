@@ -47,7 +47,7 @@
                         </tr>
                     </thead>
                     {% autopaginate user_list 100 %}
-                    {% for u in user_list %}
+                    {% for u in user_list|slice:":100" %}
                         {% if u.object.username %}
                         <tr>
                             <td>{{page_obj.start_index|add:forloop.counter0}}</td>
@@ -67,9 +67,6 @@
                         {% endif %}
                     {% endfor %}
                 </table>
-                <div class="pagination pagination-centered">
-                    {% paginate 4 %}
-                </div>
             </div>
         </div>
     </div>
