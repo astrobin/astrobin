@@ -349,7 +349,7 @@ class UserIndex(SearchIndex):
 
         return (integration / 3600.0) / images if images else 0
 
- 
+
     def prepare_rating(self, obj):
         l = []
         for i in Image.objects.filter(user = obj):
@@ -409,7 +409,7 @@ class UserIndex(SearchIndex):
         if len(l) == 0:
             return 0
         return min(l)
-   
+
     def prepare_max_aperture(self, obj):
         l = []
         for i in Image.objects.filter(user = obj):
@@ -417,7 +417,7 @@ class UserIndex(SearchIndex):
         if len(l) == 0:
             return 0
         return max(l)
- 
+
     def prepare_min_pixel_size(self, obj):
         l = []
         for i in Image.objects.filter(user = obj):
@@ -425,7 +425,7 @@ class UserIndex(SearchIndex):
         if len(l) == 0:
             return 0
         return min(l)
-   
+
     def prepare_max_pixel_size(self, obj):
         l = []
         for i in Image.objects.filter(user = obj):
@@ -433,7 +433,7 @@ class UserIndex(SearchIndex):
         if len(l) == 0:
             return 0
         return max(l)
- 
+
     def prepare_favorited(self, obj):
         return Favorite.objects.filter(image__user = obj).count()
 
@@ -536,7 +536,7 @@ class ImageIndex(SearchIndex):
 
     def prepare_views(self, obj):
         return _prepare_views(obj, 'image')
- 
+
     def prepare_solar_system_main_subject(self, obj):
         return obj.solar_system_main_subject
 
