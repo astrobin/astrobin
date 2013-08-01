@@ -159,20 +159,6 @@
                             {% trans "Bring to a user's attention" %}
                         </a>
                     </li>
-                    {% if request.user != image.user %}
-                    <li>
-                        <a href="{% url image_request_additional_information image.id %}">
-                            <i class="icon-info-sign"></i>
-                            {% trans "Request additional information" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url image_request_fits image.id %}">
-                            <i class="icon-file"></i>
-                            {% trans "Request TIFF/FITS" %}
-                        </a>
-                    </li>
-                    {% endif %} <!-- not owner -->
                     {% if is_ready and image.subject_type == 100 or image.subject_type == 300 %}
                     <li class="divider"></li>
                     <li>

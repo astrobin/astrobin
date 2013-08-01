@@ -473,18 +473,6 @@
                                 </ul>
                             </li> <!-- notifications -->
 
-                            <li class="dropdown notice-container visible-desktop">
-                                {% if requests_count > 0 %}
-                                    <span class="notice-count">{{requests_count}}</span>
-                                {% endif %}
-                                <a class="dropdown requests" data-toggle="dropdown" title="{% trans "Requests" %}" href="#">
-                                    <i class="icon-plus"></i>
-                                </a>
-                                <ul class="dropdown-menu" id="requests-popup">
-                                    {% request_list request %}
-                                </ul>
-                            </li> <!-- requests -->
-
                             {% else %} <!-- request.user.is_authenticated -->
                             <li class="{% current request "^/accounts/login/" %}">
                                 <a href="{% url auth_login %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
