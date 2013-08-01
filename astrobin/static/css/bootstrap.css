@@ -1977,8 +1977,8 @@ table th[class*="span"],
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome-webfont.eot?v=3.2.1');
-  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=3.2.1') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=3.2.1') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=3.2.1') format('truetype'), url('../fonts/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1') format('svg');
+  src: url('../fonts/fontawesome-webfont.eot?v=3.2.1&t=1');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=3.2.1&t=1') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=3.2.1&t=1') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=3.2.1&t=1') format('truetype'), url('../fonts/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1&t=1') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -3861,17 +3861,17 @@ input[type="button"].btn-block {
 .btn-primary {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #cc602e;
-  background-image: -moz-linear-gradient(top, #cc4b2e, #cc802e);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cc4b2e), to(#cc802e));
-  background-image: -webkit-linear-gradient(top, #cc4b2e, #cc802e);
-  background-image: -o-linear-gradient(top, #cc4b2e, #cc802e);
-  background-image: linear-gradient(to bottom, #cc4b2e, #cc802e);
+  background-color: #bb452a;
+  background-image: -moz-linear-gradient(top, #cc4b2e, #a23c25);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cc4b2e), to(#a23c25));
+  background-image: -webkit-linear-gradient(top, #cc4b2e, #a23c25);
+  background-image: -o-linear-gradient(top, #cc4b2e, #a23c25);
+  background-image: linear-gradient(to bottom, #cc4b2e, #a23c25);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcc4b2e', endColorstr='#ffcc802e', GradientType=0);
-  border-color: #cc802e #cc802e #8e5920;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcc4b2e', endColorstr='#ffa23c25', GradientType=0);
+  border-color: #a23c25 #a23c25 #642517;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #cc802e;
+  *background-color: #a23c25;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -3883,12 +3883,12 @@ input[type="button"].btn-block {
 .btn-primary.disabled,
 .btn-primary[disabled] {
   color: #ffffff;
-  background-color: #cc802e;
-  *background-color: #b77329;
+  background-color: #a23c25;
+  *background-color: #8e3420;
 }
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #a26625 \9;
+  background-color: #792c1b \9;
 }
 .btn-warning {
   color: #ffffff;
@@ -4235,7 +4235,7 @@ input[type="submit"].btn.btn-mini {
   background-color: #e6e6e6;
 }
 .btn-group.open .btn-primary.dropdown-toggle {
-  background-color: #cc802e;
+  background-color: #a23c25;
 }
 .btn-group.open .btn-warning.dropdown-toggle {
   background-color: #f89406;
