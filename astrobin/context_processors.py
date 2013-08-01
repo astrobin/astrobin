@@ -5,6 +5,11 @@ from notification import models as notifications
 from astrobin.models import Request
 from astrobin.models import UserProfile
 from astrobin.models import Gear
+from astrobin.models import Image
+from astrobin.search_indexes import _prepare_rating
+from astrobin.votes import index
+
+from nested_comments.models import NestedComment
 
 
 def privatebeta_enabled(request):
@@ -27,6 +32,29 @@ def user_language(request):
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user = request.user)
         d['user_language'] = profile.language
+
+    return d
+
+
+def user_scores(request):
+    d = {
+        'user_scores_index': 0,
+        'user_scores_images': 0,
+        'user_scores_comments': 0,
+    }
+
+    if request.user.is_authenticated():
+        profile = UserProfile.objects.get(user = request.user)
+        images = Image.objects.filter(user = request.user, is_wip = False)
+        l = []
+
+        for i in images:
+            l.append(_prepare_rating(i))
+        if len(l) > 0:
+            d['user_scores_index'] = index (l)
+
+        d['user_scores_images'] = images.count()
+        d['user_scores_comments'] =  NestedComment.objects.filter(author = request.user, deleted = False).count()
 
     return d
 

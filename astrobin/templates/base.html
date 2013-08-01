@@ -83,10 +83,6 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="{% url index %}">
-                        <img src="{{STATIC_URL}}images/astrobin-logo-square-mini.png" alt="AstroBin" />
-                    </a>
-
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -95,7 +91,12 @@
                     </a>
                     <div class="site-nav nav-collapse collapse pull-left">
                         <ul class="nav">
-                            <li class="{% current request "^/$" %}"><a href="{% url index %}">{% trans "Home" %}</a></li>
+                            <li class="{% current request "^/$" %}">
+                                <a class="brand" href="{% url index %}">
+                                    <img src="{{STATIC_URL}}images/astrobin-logo-small.png" alt="AstroBin" />
+                                </a>
+                            </li>
+
                             <li class="dropdown {% current request "^/blog/" %}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     {% trans "Community" %}
@@ -353,11 +354,21 @@
                             <li class="dropdown">
                                 <div class="btn-group">
                                     <a href="{% url user_page request.user %}" class="btn btn-primary">
-                                        <i class="icon-user icon-white"></i>
-                                        {{request.user|truncatechars:"12"}}
+                                        {{request.user|truncatechars:"20"}}
+                                        <span id="navbar-user-scores">
+                                            <span id="astrobin-index" rel="tooltip" data-placement="bottom" title="{% trans "AstroBin Index" %}">
+                                                  {{user_scores_index|floatformat:3}}
+                                            </span> &bull;
+                                            <span rel="tooltip" data-placement="bottom" title="{% trans "Images" %}">
+                                                {{user_scores_images}}
+                                            </span>&bull;
+                                            <span rel="tooltip" data-placement="bottom" title="{% trans "Comments" %}">
+                                                {{user_scores_comments}}
+                                            </span>
+                                        </span>
                                     </a>
-                                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
+                                    <a href="#" class="btn btn-primary dropdown-toggle user-dropdown" data-toggle="dropdown">
+                                        <i class="icon-caret-down"></i>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -493,7 +504,7 @@
                         </ul>
                     </div> <!-- user-nav -->
 
-                    <form class="navbar-search pull-right visible-desktop" id="quick-search" action="{% url haystack_search %}" method="get" >
+                    <form class="navbar-search pull-left visible-desktop" id="quick-search" action="{% url haystack_search %}" method="get" >
                         <input class="tbox"
                                id="q"
                                type="text"
