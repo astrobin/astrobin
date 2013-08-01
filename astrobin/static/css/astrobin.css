@@ -2783,3 +2783,7 @@ table#private-shared-folders tr:hover a.delete-folder {
 #register-button a {
   font-size: 150%;
 }
+[class^="icon-"],
+[class*=" icon-"] {
+  padding-right: 8px;
+}
