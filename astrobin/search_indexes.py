@@ -325,6 +325,8 @@ class UserIndex(SearchIndex):
     comments = IntegerField()
     comments_written = IntegerField()
 
+    username = CharField(model_attr = 'username')
+
     def index_queryset(self):
         return User.objects.all()
 
@@ -505,6 +507,8 @@ class ImageIndex(SearchIndex):
     is_commercial = BooleanField()
 
     subject_type = IntegerField(model_attr = 'subject_type')
+
+    username = CharField(model_attr = 'user__username')
 
     def index_queryset(self):
         return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
