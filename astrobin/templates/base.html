@@ -351,6 +351,19 @@
                             </li> <!-- languages -->
 
                             {% if request.user.is_authenticated %}
+
+                            <li class="dropdown notice-container visible-desktop">
+                                {% if notifications_count > 0 %}
+                                    <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
+                                {% endif %}
+                                <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
+                                    <i class="icon-bell-alt"></i>
+                                </a>
+                                <ul class="dropdown-menu" id="notifications-popup">
+                                    {% notification_list request 1 10 %}
+                                </ul>
+                            </li> <!-- notifications -->
+
                             <li class="dropdown">
                                 <div class="btn-group">
                                     <a href="{% url user_page request.user %}" class="btn btn-primary">
@@ -460,18 +473,6 @@
                                     </ul>
                                 </div> <!-- btn-group -->
                             </li> <!-- user menu -->
-
-                            <li class="dropdown notice-container visible-desktop">
-                                {% if notifications_count > 0 %}
-                                    <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
-                                {% endif %}
-                                <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
-                                    <i class="icon-check-empty"></i>
-                                </a>
-                                <ul class="dropdown-menu" id="notifications-popup">
-                                    {% notification_list request 1 10 %}
-                                </ul>
-                            </li> <!-- notifications -->
 
                             {% else %} <!-- request.user.is_authenticated -->
                             <li class="{% current request "^/accounts/login/" %}">
