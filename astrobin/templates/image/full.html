@@ -47,7 +47,7 @@
             <div class="navbar-inner">
                 <div class="container">
                     <a class="brand" href="{% url index %}">
-                        <img src="{{STATIC_URL}}images/astrobin-logo-square-mini.png" alt="AstroBin" />
+                        <img src="{{STATIC_URL}}images/astrobin-logo-small.png" alt="AstroBin" />
                     </a>
 
                     <ul class="nav">
@@ -55,7 +55,7 @@
                             <div class="full-title">
                                 <span class="title">{{image.title|escape|default:_("(no title)")}}</span>
                                 <span class="subtitle">
-                                    ({% trans "uploaded" %}: {{image.uploaded|ago}}
+                                    ({{image.uploaded}}
                                     {% url user_page image.user.username as the_url %}
                                     {% blocktrans with user=image.user.username %}by <a href="{{the_url}}">{{user}}</a>{% endblocktrans %})
                                 </span>
@@ -105,7 +105,7 @@
                 </div>
             </div>
         </div>
-  
+
         <div id="full-size-image">
             {% if revision_image %}
                  {% with revision_image as image %}

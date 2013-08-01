@@ -748,8 +748,16 @@ body.full {
     padding-top: 0;
 }
 
-.navbar .brand {
-    display: none;
+#navbar-user-scores {
+    font-size: 66%;
+    color: #F2CEB8;
+    font-weight: bold;
+    padding-left: 4px;
+    vertical-align: middle;
+
+    span {
+        border-bottom: 1px dotted #D99560;
+    }
 }
 
 @media screen and (max-width: 979px) {
@@ -781,33 +789,7 @@ body.full {
             }
         }
     }
-
-    body:not(.full) .brand {
-        display: none;
-    }
 }
-@media screen and (min-width: 980px) and (max-width: 1159px) {
-    body:not(.full) .navbar .brand {
-        display: none;
-    }
-
-
-    body.full .navbar .brand {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-}
-@media screen and (min-width: 1160px) {
-    .navbar .brand {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-}
-
 
 .modal {
     background: @dark-panel-color url('../images/dark-panel-tile.png');
@@ -853,10 +835,6 @@ body.full {
     max-height: 40px;
 }
 
-.user-nav {
-  max-width: 400px;
-
-}
 @media screen and (max-width: 979px) {
     .navbar-fixed-top .container {
         max-height: inherit;
@@ -882,10 +860,12 @@ body.full {
 
 .navbar .nav > li > a {
     color: @link-color;
+    padding: 12px;
     &:hover {
         color: darken(@link-color, 5%);
     }
 }
+
 .dropdown-menu > li > a {
     color: @background-color;
 
@@ -894,14 +874,15 @@ body.full {
     }
 }
 
-.navbar .nav .dropdown-toggle .caret, .navbar .nav .open.dropdown .caret {
-    border-top-color: @link-color;
-    border-bottom-color: @link-color;
+.navbar .nav .dropdown-toggle .icon-caret-down, .navbar .nav .open.dropdown .icon-caret-down {
+    color: #F2CEB8;
+    font-size: 10px;
 }
 
-.navbar .nav .dropdown-toggle.btn-primary .caret, .navbar .nav .open.dropdown.btn-primary .caret {
+.navbar .nav .dropdown-toggle.btn-primary .icon-caret-down, .navbar .nav .open.dropdown.btn-primary .icon-caret-down {
     border-top-color: @strong-text-color;
     border-bottom-color: @strong-text-color;
+    font-size: 10px;
 }
 
 .navbar .nav .open.dropdown .dropdown-toggle,
@@ -910,6 +891,7 @@ body.full {
 }
 
 .navbar-search {
+    margin-top: 7px;
     margin-bottom: -6px;
 }
 .navbar input {
@@ -924,6 +906,10 @@ body.full {
 
 .site-nav.nav-collapse,
 .user-nav.nav-collapse { overflow: visible; } /* Fixes dropdowns on IE */
+
+.user-nav .user-dropdown {
+    min-height: 19px;
+}
 
 @media screen and (max-width: 979px) {
   .site-nav.nav-collapse,
@@ -2253,20 +2239,19 @@ div.token-input-dropdown {
 }
 
 .full-title {
-    padding: 16px 80px;
+    padding: 11px 0;
 
     .title {
         color: @strong-text-color;
         font-weight: bold;
-        font-size: 2.2em;
+        font-size: 1.5em;
         margin-right: @spacer-large;
     }
     .subtitle {
-        color: @text-color;
-        font-size: 80%;
+        color: darken(@text-color, 10%);
+        font-size: 75%;
         font-style: italic;
         margin-top: @spacer-small;
-        display: block;
     }
 }
 
