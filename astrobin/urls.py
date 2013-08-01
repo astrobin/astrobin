@@ -226,16 +226,6 @@ urlpatterns = patterns('',
     url(r'^bring-to-attention/process/$', views.bring_to_attention_process, name='bring_to_attention_process'),
     url(r'^(?P<id>\d+)/bring-to-attention/complete/$', views.bring_to_attention_complete, name='bring_to_attention_complete'),
 
-    url(r'^request/image/additional-information/(?P<image_id>\d+)/$', views.image_request_additional_information, name='image_request_additional_information'),
-    url(r'^request/image/additional-information/process/(?P<image_id>\d+)/$', views.image_request_additional_information_process, name='image_request_additional_information_process'),
-    url(r'^request/image/additional-information/complete/(?P<image_id>\d+)/$', views.image_request_additional_information_complete, name='image_request_additional_information_complete'),
-
-    url(r'^request/image/fits/(?P<image_id>\d+)/$', views.image_request_fits, name='image_request_fits'),
-    url(r'^request/image/fits/process/(?P<image_id>\d+)/$', views.image_request_fits_process, name='image_request_fits_process'),
-    url(r'^request/image/fits/complete/(?P<image_id>\d+)/$', views.image_request_fits_complete, name='image_request_fits_complete'),
-
-    url(r'^request/mark/fulfilled/(?P<request_id>\d+)/$', views.request_mark_fulfilled, name='request_mark_fulfilled'),
-
     url(r'^stats/', views.stats, name='stats'),
     url(r'^leaderboard/', views.leaderboard, name='leaderboard'),
     url(r'^help/$', views.help, name='help'),
