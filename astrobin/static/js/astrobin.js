@@ -15,13 +15,6 @@ astrobin_common = {
         notifications_element_image: 'img#notifications',
         notifications_element_ul   : 'ul#notification-feed',
 
-        /* Requests */
-        requests_base_url          : '/activity/?id=request_',
-        requests_element_empty     : 'ul#request-feed li#empty',
-        requests_element_image     : 'img#requests',
-        requests_element_ul        : 'ul#request-feed',
-        request_detail_url         : '/requests/detail/',
-
         follow_action: {
             dialog: {
                 title : '',
@@ -76,7 +69,7 @@ astrobin_common = {
                //Split Query String into separate parameters
                paramArray = fullQString.split("&");
 
-               //Loop through params, check if parameter exists.  
+               //Loop through params, check if parameter exists.
                for (i=0;i<paramArray.length;i++)
                {
                    currentParameter = paramArray[i].split("=");
@@ -117,36 +110,6 @@ astrobin_common = {
         });
     },
 
-    listen_for_requests: function(username, last_modified, etag) {
-        astrobin_common.globals.smart_ajax({
-            'beforeSend': function(xhr) {
-                xhr.setRequestHeader("If-None-Match", etag);
-                xhr.setRequestHeader("If-Modified-Since", last_modified);
-            },
-            url: astrobin_common.config.requests_base_url + username,
-            dataType: 'text',
-            type: 'get',
-            cache: 'false',
-            success: function(data, textStatus, xhr) {
-                etag = xhr.getResponseHeader('Etag');
-                last_modified = xhr.getResponseHeader('Last-Modified');
-
-                json = jQuery.parseJSON(data);
-
-                $(astrobin_common.config.requests_element_empty).remove();
-                $(astrobin_common.config.requests_element_ul).prepend('\
-                    <li class="unread">\
-                        <a href="' + astrobin_common.config.image_detail_url + json['image_id'] + '/">' + json['message'] + '\
-                        </a>\
-                    </li>\
-                ');
-
-                /* Start the next long poll. */
-                astrobin_common.listen_for_requests(username, last_modified, etag);
-            }
-        });
-    },
-
     start_listeners: function(username) {
         astrobin_common.globals.smart_ajax = function(settings) {
             // override complete() operation
@@ -178,7 +141,6 @@ astrobin_common = {
 
         setTimeout(function() {
             astrobin_common.listen_for_notifications(username, '', '');
-            astrobin_common.listen_for_requests(username, '', '');
         }, 1000);
     },
 
@@ -933,14 +895,14 @@ astrobin_image_detail = {
             $more.hide();
             $hide.show();
             return false;
-        });          
+        });
 
         $hide.find('a').click(function() {
             $reminder.hide();
             $hide.hide();
             $more.show();
             return false;
-        });          
+        });
     },
 
     setup_plot_overlay: function() {
@@ -948,7 +910,7 @@ astrobin_image_detail = {
             $(this).animate({opacity: 1.0});
         }).mouseout(function() {
             $(this).animate({opacity: 0.0});
-        }); 
+        });
     },
 
     init: function(image_id, revision_id, image_username, current_rating, config) {

@@ -2009,6 +2009,7 @@ def user_page_card(request, username):
     integrated_images = len(sqs.filter(integration__gt = 0))
     integration = sum([x.integration for x in sqs]) / 3600.0
     avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
+
     stats = (
         (_('Member since'), member_since),
         (_('Last login'), last_login),
@@ -2869,129 +2870,6 @@ def bring_to_attention_complete(request, id):
         'image/actions/bring_to_attention_complete.html',
         response_dict,
         context_instance = RequestContext(request))
-
-
-@login_required
-@require_GET
-def requests(request):
-    return object_list(
-        request,
-        queryset=Request.objects.filter(to_user=request.user).select_subclasses(),
-        template_name='requests/all.html',
-        template_object_name='req',
-        extra_context={})
-
-
-@login_required
-@require_GET
-def image_request_additional_information(request, image_id):
-    image = get_object_or_404(Image, id=image_id)
-
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-        'image': image,
-    }
-    return render_to_response(
-        'image/actions/request_additional_information.html',
-        response_dict,
-        context_instance = RequestContext(request))
-
-
-@login_required
-@require_GET
-def image_request_additional_information_process(request, image_id):
-    image = get_object_or_404(Image, id=image_id)
-
-    message = _('<strong>%s</strong> has requested additional information about your image.') % request.user
-    r = ImageRequest(
-        from_user=request.user,
-        to_user=image.user,
-        image=image,
-        fulfilled=False,
-        message=message, # not implemented yet
-        type='INFO')
-    r.save()
-    push_request(image.user, r)
-
-    return HttpResponseRedirect('/request/image/additional-information/complete/%s/' % image.id)
-
-
-@login_required
-@require_GET
-def image_request_additional_information_complete(request, image_id):
-    image = get_object_or_404(Image, id=image_id)
-
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-        'image': image,
-    }
-    return render_to_response(
-        'image/actions/request_additional_information_complete.html',
-        response_dict,
-        context_instance = RequestContext(request))
-
-
-@login_required
-@require_GET
-def image_request_fits(request, image_id):
-    image = get_object_or_404(Image, id=image_id)
-
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-        'image': image,
-    }
-    return render_to_response(
-        'image/actions/request_fits.html',
-        response_dict,
-        context_instance = RequestContext(request))
-
-
-@login_required
-@require_GET
-def image_request_fits_process(request, image_id):
-    image = get_object_or_404(Image, id=image_id)
-
-    # message not implemented yet, let's hard code it for the notification
-    message = _('<strong>%s</strong> has requested to see the TIFF or FITS of your image.') % request.user
-    r = ImageRequest(
-        from_user=request.user,
-        to_user=image.user,
-        image=image,
-        fulfilled=False,
-        message=message, # not implemented yet
-        type='FITS')
-    r.save()
-    push_request(image.user, r)
-
-    return HttpResponseRedirect('/request/image/fits/complete/%s/' % image.id)
-
-
-@login_required
-@require_GET
-def image_request_fits_complete(request, image_id):
-    image = get_object_or_404(Image, id=image_id)
-
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-        'image': image,
-    }
-    return render_to_response(
-        'image/actions/request_fits_complete.html',
-        response_dict,
-        context_instance = RequestContext(request))
-
-
-@login_required
-@require_GET
-def request_mark_fulfilled(request, request_id):
-    req = get_object_or_404(Request, id=request_id)
-    if req.to_user != request.user:
-        return HttpResponseForbidden()
-
-    req.fulfilled = True
-    req.save()
-
-    return HttpResponseRedirect('/requests/')
 
 
 @login_required

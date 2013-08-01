@@ -196,7 +196,7 @@
                                             {% trans "AstroBin Questions" %}
                                         </a>
                                     </li>
-  
+
                                     <li class="divider"></li>
 
                                     <li>
@@ -381,19 +381,7 @@
                                     {% notification_list request 1 10 %}
                                 </ul>
                             </li> <!-- notifications -->
-                            
-                            <li class="dropdown notice-container visible-desktop">
-                                {% if requests_count > 0 %}
-                                    <span class="notice-count">{{requests_count}}</span>
-                                {% endif %}
-                                <a class="dropdown requests" data-toggle="dropdown" title="{% trans "Requests" %}" href="#">
-                                    <img alt="{% trans "Requests" %}" src="{{STATIC_URL}}icons/iconic/orange/requests.gif"/>
-                                </a>
-                                <ul class="dropdown-menu" id="requests-popup">
-                                    {% request_list request %}
-                                </ul>
-                            </li> <!-- requests -->
-                                                        
+
                             {% else %} <!-- request.user.is_authenticated -->
                             <li>
                                 <a href="{% url auth_login %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
@@ -412,7 +400,7 @@
                         {% endif %} <!-- request.user.is_authenticated -->
                         </ul>
                     </div> <!-- user-nav -->
-                    
+
                     <form class="navbar-search pull-right visible-desktop" id="quick-search" action="{% url haystack_search %}" method="get" >
                         <input class="tbox"
                                id="q"
@@ -495,12 +483,12 @@
 
             {% if request.user.is_authenticated and messages %}
                 {% for message in messages %}
-                    <div class="alert 
+                    <div class="alert
                         {% if message.level == 20 %}alert-info{% endif %}
                         {% if message.level == 25 %}alert-success{% endif %}
                         {% if message.level == 30 %}alert-warning{% endif %}
                         {% if message.level == 40 %}alert-error{% endif %}">
-                        <button class="close" data-dismiss="alert">&times;</button> 
+                        <button class="close" data-dismiss="alert">&times;</button>
                         <h4 class="alert-heading">
                             {% if message.level == 20 %}<i class="icon-info-sign"></i> {% trans "Hey!" %}{% endif %}
                             {% if message.level == 25 %}<i class="icon-ok-sign"></i> {% trans "Success!" %}{% endif %}
