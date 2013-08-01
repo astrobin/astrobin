@@ -1991,7 +1991,6 @@ def user_page_card(request, username):
     date_time = user.date_joined.replace(tzinfo = None)
     diff = abs(date_time - datetime.datetime.today())
     span = timesince(date_time)
-    span = span.split(",")[0] # just the most significant digit
     if span == "0 " + _("minutes"):
         member_since = _("seconds ago")
     else:
