@@ -119,6 +119,13 @@
     {% if search_result.object.id %}
         <li class="thumbnail astrobin-thumbnail">
             <a href="{% get_image_url search_result.object %}">
+                {% if search_result.object.iotd_date %}
+                    <div class="iotd-thumb-banner">
+                        <h2>
+                            <i class="icon icon-trophy"></i>
+                        </h2>
+                    </div>
+                {% endif %}
                 <img src="{{IMAGES_URL}}{% get_final_filename search_result.object %}_thumb.png"
                      class="capty"
                      id="#capty-content-{{search_result.object.id}}"
