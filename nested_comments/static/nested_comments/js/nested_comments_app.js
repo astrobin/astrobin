@@ -14,6 +14,7 @@ $(function() {
         ready: function() {
             this.commentsApiUrl = this.baseApiUrl + 'nestedcomments/nestedcomments/';
             this.authorsApiUrl = this.baseApiUrl + 'common/users/';
+            this.usersUrl = '/users/'
 
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.username = $('#nested-comments-user-name').attr('data-value');
@@ -47,6 +48,7 @@ $(function() {
         // Fields that we compute manually
         children: null,
         author_username: null,
+        author_url: null,
         authorIsRequestingUser: null,
         editing: null,
         submitting: null,
@@ -219,6 +221,7 @@ $(function() {
                 dataType: 'json',
                 success: function(response) {
                     comment.set('author_username', response.username);
+                    comment.set('author_url', nc_app.usersUrl + response.username);
                 }
             });
         },
@@ -237,6 +240,7 @@ $(function() {
                         $.each(response.results, function(i, nc_data) {
                             var comment = nc_app.Comment.create(nc_data);
                             comment.set('authorIsRequestingUser', nc_app.userId == comment.get('author'));
+                            comment.set('deleted', nc_data.deleted);
                             self.fetchAuthor(comment);
                             self.addComment(comment);
                         });
@@ -366,6 +370,7 @@ $(function() {
 
                     var new_comment = nc_app.Comment.create(response);
                     new_comment.set('author_username', nc_app.username);
+                    new_comment.set('author_url', nc_app.usersUrl + nc_app.username);
                     new_comment.set('authorIsRequestingUser', true);
                     self.addComment(new_comment);
                     self.set('firstCommentAdded', true);
@@ -396,6 +401,7 @@ $(function() {
 
                     var new_comment = nc_app.Comment.create(response);
                     new_comment.set('author_username', nc_app.username);
+                    new_comment.set('author_url', nc_app.usersUrl + nc_app.username);
                     new_comment.set('authorIsRequestingUser', true);
                     self.addComment(new_comment);
                     self.set('firstCommentAdded', true);
