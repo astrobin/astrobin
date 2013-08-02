@@ -578,16 +578,6 @@
             </div>
             {% endifequal %}
 
-            {% if request.user.is_authenticated %}
-            <div class="community-bulletin">
-                <h4>{% trans "Introducing AstroBin Raw Data" %}</h4>
-                <p>
-                    {% url rawdata.help1 as rawdata_url %}
-                    {% blocktrans %}<strong>AstroBin Raw Data</strong> is a platform for the secure storage of all your FIT and DLSR raw files, up to 500 GB! It will automatically keep your files organized, and allow you to share them with other members. <a href="{{rawdata_url}}">Want to know more?</a>{% endblocktrans %}
-                </p>
-            </div>
-            {% endif %}
-
             {% if revisions or is_revision %}
             <div class="subtle-container">
                 <ul class="thumbnails astrobin-thumbnails">
