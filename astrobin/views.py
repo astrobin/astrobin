@@ -877,6 +877,8 @@ def image_detail(request, id, r):
                      'has_sharedfolders': PrivateSharedFolder.objects.filter(
                         Q(creator = request.user) |
                         Q(users = request.user)).count() > 0 if request.user.is_authenticated() else False,
+
+                     'iotd_date': image.iotd_date()
                     }
 
     return object_detail(
