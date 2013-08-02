@@ -293,6 +293,24 @@
         <div class="span8">
             <div class="row"> <!-- the image's row -->
                 <div class="span8">
+                    {% if iotd_date %}
+                    <div class="iotd-ribbon-container">
+                        <div class="iotd-ribbon">
+                            <div class="ribbon-stitches-top"></div>
+                            <strong class="ribbon-content">
+                                <h1>
+                                    <i class="icon-trophy"></i>
+                                    {% trans "Image of the day" %}
+                                    <span class="date">
+                                        {{iotd_date|date:"SHORT_DATE_FORMAT"}}
+                                    </span>
+                                </h1>
+                            </strong>
+                            <div class="ribbon-stitches-bottom"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+
                     <div class="main-image">
                         <div class="main-image-inner">
                             {% if is_ready %}

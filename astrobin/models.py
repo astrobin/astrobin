@@ -990,6 +990,13 @@ class Image(models.Model):
             settings.IMAGES_URL,
             filename)
 
+    def iotd_date(self):
+        try:
+            return ImageOfTheDay.objects.get(image = self).date
+        except ImageOfTheDay.DoesNotExist:
+            return None
+        except ImageOfTheDay.MultipleObjectsReturned:
+            return ImageOfTheDay.objects.filter(image = self)[0].date
 
     @staticmethod
     def by_gear(gear):
