@@ -2285,6 +2285,109 @@ a.button {
 form.avatar-change label.control-label {
   display: none;
 }
+.iotd-thumb-banner {
+  text-align: center;
+}
+.iotd-thumb-banner h2 {
+  margin: 0;
+  border-bottom: none;
+  font-size: 16px;
+  color: #fff;
+  background: #e3a936;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  height: 30px;
+  width: 30px;
+  border: 1px solid white;
+}
+.iotd-thumb-banner h2 .icon {
+  padding: 0;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+.iotd-ribbon-container {
+  position: relative;
+  min-height: 56px;
+  margin: 8px 0;
+}
+.iotd-ribbon {
+  width: 666px;
+  position: absolute;
+  left: -46px;
+  text-align: center;
+  font-size: 16px!important;
+  background: #e3a936;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e3a936), to(#a87a25));
+  background: -webkit-linear-gradient(top, #e3a936, #a87a25);
+  background: -moz-linear-gradient(top, #e3a936, #a87a25);
+  background: -ms-linear-gradient(top, #e3a936, #a87a25);
+  background: -o-linear-gradient(top, #e3a936, #a87a25);
+  background-image: -ms-linear-gradient(top, #e3a936 0%, #a87a25 100%);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
+}
+.iotd-ribbon h1 {
+  font-size: 22px!important;
+  color: #f5ddae;
+  text-shadow: #8f6b22 0 1px 0;
+  margin: 0px;
+  padding: 5px 10px;
+  border-bottom: none;
+}
+.iotd-ribbon h1 .date {
+  color: #fff;
+}
+.iotd-ribbon:after {
+  content: '';
+  position: absolute;
+  display: block;
+  bottom: -1em;
+  border: 1.5em solid #ad7e21;
+  z-index: -1;
+}
+.iotd-ribbon:after {
+  left: -2em;
+  border-right-width: 1.5em;
+  border-left-color: transparent;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+}
+.iotd-ribbon .ribbon-content:after {
+  border-color: #6b4e15 transparent transparent transparent;
+  position: absolute;
+  display: block;
+  border-style: solid;
+  bottom: -1em;
+  content: '';
+}
+.iotd-ribbon .ribbon-content:after {
+  left: 0;
+  border-width: 1em 0 0 1em;
+}
+.ribbon-stitches-top {
+  margin-top: 2px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
+}
+.ribbon-stitches-bottom {
+  margin-bottom: 2px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3);
+}
 .image-of-the-day {
   position: relative;
 }

@@ -11,6 +11,13 @@
             title="{{image.title|escape}}, {% trans "by" %} {{image.user.username}}"
             style="display:block;"{% endif %}
             href="{% get_image_url image %}">
+            {% if image.iotd_date %}
+                <div class="iotd-thumb-banner">
+                    <h2>
+                        <i class="icon icon-trophy"></i>
+                    </h2>
+                </div>
+            {% endif %}
             <img src="{% if image.is_stored %}{{IMAGES_URL}}{% get_final_filename image %}{% if thumbnail_size == 90 %}_small_thumb{{image.original_ext}}{% else %}_thumb.png{% endif %}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail.png{% endif %}"
                  class="{% if thumbnail_size == 184 %}capty {% endif %}"
                  id="#capty-content-{{image.id}}-{{randomid}}"
