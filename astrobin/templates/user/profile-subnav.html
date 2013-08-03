@@ -23,7 +23,7 @@
                     {% endif %}
                 {% endifequal %}
                 <li>
-                    <a href="{% url 'user_page' user %}">
+                    <a href="{% query_string "public=" "sub" %}">
                         <i class="icon-picture"></i>
                         {% trans "Gallery" %}
                     </a>
@@ -58,13 +58,13 @@
                 {% ifequal user request.user %}
                 <li class="divider"></li>
                 <li>
-                    <a href="{% url 'me' %}">
+                    <a href="{% query_string "public=" "sub" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'me' %}?staging">
+                    <a href="{% query_string "staging=" "sub,public" %}">
                         <i class="icon-lock"></i>
                         {% trans "Staging Area" %}
                     </a>
@@ -106,7 +106,7 @@
                         {% trans "Send private message" %}
                     </a>
                 </li>
-            </ul> 
+            </ul>
         </li>
         {% endif %}
 
@@ -117,26 +117,38 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="?public&sub=uploaded">
+                <li><a href="{% query_string "public=,sub=uploaded" "staging" %}">
                     <i class="icon-upload-alt"></i>
                     {% trans "Upload time" %}</a></li>
-                <li><a href="?public&sub=acquired">
+                <li><a href="{% query_string "public=,sub=acquired" "staging" %}">
                     <i class="icon-time"></i>
                     {% trans "Acquisition time" %}</a></li>
-                <li><a href="?public&sub=subject">
+                <li><a href="{% query_string "public=,sub=subject" "staging" %}">
                     <i class="icon-tags"></i>
                     {% trans "Subject type" %}</a></li>
-                <li><a href="?public&sub=year">
+                <li><a href="{% query_string "public=,sub=year" "staging" %}">
                     <i class="icon-calendar"></i>
                     {% trans "Year" %}</a></li>
-                <li><a href="?public&sub=gear">
+                <li><a href="{% query_string "public=,sub=gear" "staging" %}">
                     <i class="icon-cog"></i>
                     {% trans "Gear" %}</a></li>
                 <li class="divider"></li>
-                <li><a href="?public&sub=nodata">
+                <li><a href="{% query_string "public=,sub=nodata" "staging" %}">
                     <i class="icon-warning-sign"></i>
                     {% trans "Lacking data" %}</a></li>
             </ul>
+        </li>
+
+        <li class="pull-right">
+            {% ifequal request.GET.view 'list' %}
+                <a href="{% query_string "" "view" %}">
+                    <i class="icon-th"></i>
+                </a>
+            {% else %}
+                <a href="{% query_string "view=list" "" %}">
+                    <i class="icon-list"></i>
+                </a>
+            {% endifequal %}
         </li>
     </ul>
 </div>

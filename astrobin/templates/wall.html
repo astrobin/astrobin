@@ -163,6 +163,18 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="pull-right">
+                {% ifequal request.GET.view 'list' %}
+                    <a href="{% query_string "" "view" %}">
+                        <i class="icon-th"></i>
+                    </a>
+                {% else %}
+                    <a href="{% query_string "view=list" "" %}">
+                        <i class="icon-list"></i>
+                    </a>
+                {% endifequal %}
+            </li>
         </ul> <!-- nav -->
     </div> <!-- subnav -->
 
