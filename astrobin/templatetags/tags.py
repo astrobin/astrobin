@@ -16,7 +16,7 @@ from celery.result import AsyncResult
 from astrobin.models import Request
 from astrobin.gear import *
 
-register = Library() 
+register = Library()
 
 @register.simple_tag
 def current(request, pattern):
@@ -91,8 +91,8 @@ def ago(date_time):
         span = span.split(",")[0] # just the most significant digit
         if span == "0 " + _("minutes"):
             return _("seconds ago")
-        return _("%s ago") % span 
-    return datetime.datetime.date(date_time)  
+        return _("%s ago") % span
+    return datetime.datetime.date(date_time)
 
 
 @register.filter
@@ -101,7 +101,7 @@ def string_to_date(date):
         return datetime.strptime(date, "%Y-%m-%d")
     except:
         return datetime.now()
-        
+
 
 def image_list(context, request, object_list, paginate = True, size = settings.THUMBNAIL_SIZE):
     ret = {}
@@ -152,6 +152,7 @@ def image_list(context, request, object_list, paginate = True, size = settings.T
         'IMAGES_URL': settings.IMAGES_URL,
         'request': request,
         'sort': request.GET.get('sort'),
+        'view': request.GET.get('view', 'default'),
     }.items())
 
     return ret
@@ -264,6 +265,7 @@ def search_image_list(context, request, object_list, paginate = True):
         'sort': request.GET.get('sort'),
         'search_type': request.GET.get('search_type', 0),
         'multiple': multiple,
+        'view': request.GET.get('view', 'default'),
     }
 register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context=True)(search_image_list)
 

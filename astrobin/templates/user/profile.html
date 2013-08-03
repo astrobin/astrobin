@@ -37,9 +37,7 @@
                 {% for title, content in item.items %}
                     {% if content.images %}
                     <div class="album-part">
-                        <div class="well">
-                            <strong>{{title}}</strong>
-                        </div>
+                        <h3>{{title}}</h3>
                         {% if user == request.user and content.message %}
                         <p>
                             {{content.message|safe}}
@@ -56,7 +54,7 @@
     {% else %}
         {% if subtitle %}
             <div class="well">
-                <strong>{{subtitle}}</strong> 
+                <strong>{{subtitle}}</strong>
                 {% if backlink %}
                     <span class="back"><a href="{{backlink}}">{% trans "(go back)" %}</a></span>
                 {% endif %}

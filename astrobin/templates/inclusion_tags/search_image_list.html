@@ -2,6 +2,7 @@
 {% load tags %}
 {% load avatar_tags %}
 {% load common_tags %}
+{% load hitcount_tags %}
 
 {% if multiple %}
 <div class="alert alert-info">{% blocktrans %}This search found results of multiple types. If you want, you can refine your search using the <strong>Search type</strong> field in the <strong>Basic criteria</strong> box.{% endblocktrans %}</div>
@@ -112,81 +113,116 @@
 {% endif %}
 
 {% if image_list %}
-<h2>{% trans "Images" %}</h2>
 
-<ul class="thumbnails astrobin-thumbnails">
-{% for search_result in image_list %}
-    {% if search_result.object.id %}
-        <li class="thumbnail astrobin-thumbnail">
-            <a href="{% get_image_url search_result.object %}">
-                {% if search_result.object.iotd_date %}
-                    <div class="iotd-thumb-banner">
-                        <h2>
-                            <i class="icon icon-trophy"></i>
-                        </h2>
-                    </div>
+{% ifequal view "list" %}
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>{% trans "User" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th><i class="icon-calendar"></i></th>
+                <th><i class="icon-eye-open"></i></th>
+                <th><i class="icon-star"></i></th>
+                <th><i class="icon-heart"></i></th>
+                <th><i class="icon-comments-alt"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for search_result in image_list %}
+                {% if search_result.object.id %}
+                    <tr>
+                        <td>
+                            <a href="{% url user_page search_result.object.user %} ">{{search_result.object.user.username}}</a>
+                        </td>
+
+                        <td>
+                            <a href="{% get_image_url search_result.object %} ">{{search_result.object.title}}</a>
+                        </td>
+                        <td>{{search_result.object.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
+                        <td>{% get_hit_count for search_result.object %}</td>
+                        <td>{{search_result.object.astrobinIndex|floatformat:"3"}}</td>
+                        <td>{{search_result.object.favoritesNumber}}</td>
+                        <td>{{search_result.object.commentsNumber}}</td>
+                    </tr>
                 {% endif %}
-                <img src="{{IMAGES_URL}}{% get_final_filename search_result.object %}_thumb.png"
-                     class="capty"
-                     id="#capty-content-{{search_result.object.id}}"
-                     alt="{{search_result.object.title|default:_("(no title)")}}"
-                     width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
-            </a>
-            <div class="capty-content" id="capty-content-{{search_result.object.id}}">
-                {% ifequal sort '-integration' %}
-                    {% trans "Integration" %}: {{search_result.integration|seconds_to_hours}} {% trans "hours" %}
-                {% endifequal %}
-
-                {% ifequal sort '-rating' %}
-                    {% trans "Rating" %}:
-                    {% if search_result.object.allow_rating and not search_result.object.user.userprofile_set.all.0.optout_rating %}
-                        {{search_result.rating|cut_decimals:3}} ~ [{{search_result.votes}}]
-                    {% else %}
-                        {% trans "n/a" %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <ul class="thumbnails astrobin-thumbnails">
+    {% for search_result in image_list %}
+        {% if search_result.object.id %}
+            <li class="thumbnail astrobin-thumbnail">
+                <a href="{% get_image_url search_result.object %}">
+                    {% if search_result.object.iotd_date %}
+                        <div class="iotd-thumb-banner">
+                            <h2>
+                                <i class="icon icon-trophy"></i>
+                            </h2>
+                        </div>
                     {% endif %}
-                {% endifequal %}
+                    <img src="{{IMAGES_URL}}{% get_final_filename search_result.object %}_thumb.png"
+                         class="capty"
+                         id="#capty-content-{{search_result.object.id}}"
+                         alt="{{search_result.object.title|default:_("(no title)")}}"
+                         width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
+                </a>
+                <div class="capty-content" id="capty-content-{{search_result.object.id}}">
+                    {% ifequal sort '-integration' %}
+                        {% trans "Integration" %}: {{search_result.integration|seconds_to_hours}} {% trans "hours" %}
+                    {% endifequal %}
 
-                {% ifequal sort '-favorited' %}
-                    {% with search_result.favorited as favorited_count %}
-                        {% if favorited_count > 0 %}
-                            {% blocktrans count counter=favorited_count %}Favorited one time{% plural %}Favorited {{counter}} times{% endblocktrans %}
+                    {% ifequal sort '-rating' %}
+                        {% trans "Rating" %}:
+                        {% if search_result.object.allow_rating and not search_result.object.user.userprofile_set.all.0.optout_rating %}
+                            {{search_result.rating|cut_decimals:3}} ~ [{{search_result.votes}}]
                         {% else %}
-                            {% trans "Never favorited" %}
+                            {% trans "n/a" %}
                         {% endif %}
+                    {% endifequal %}
+
+                    {% ifequal sort '-favorited' %}
+                        {% with search_result.favorited as favorited_count %}
+                            {% if favorited_count > 0 %}
+                                {% blocktrans count counter=favorited_count %}Favorited one time{% plural %}Favorited {{counter}} times{% endblocktrans %}
+                            {% else %}
+                                {% trans "Never favorited" %}
+                            {% endif %}
+                        {% endwith %}
+                    {% endifequal %}
+
+                    {% ifequal sort '-uploaded' %}
+                        {{search_result.object.uploaded|ago}}
+                    {% endifequal %}
+
+                    {% ifequal sort '-acquired' %}
+                        {{search_result.last_acquisition_date}}
+                    {% endifequal %}
+
+                    {% ifequal sort '-views' %}
+                        {% with search_result.views as hit_count %}
+                            {% blocktrans count counter=hit_count|add:"0" %}Viewed one time{% plural %}Viewed {{counter}} times{% endblocktrans %}
+                        {% endwith %}
+                    {% endifequal %}
+
+                    {% ifequal sort '-comments' %}
+                        {% trans "Comments" %}: {{search_result.comments}}
+                    {% endifequal %}
+
+                    {% if not sort %}
+                        {{search_result.object.title|escape|truncatechars:23}}
+                    {% endif %}
+                    <br/>
+                    {% with search_result.object.user.username|truncatechars:24 as user %}
+                    {% url user_page user as user_page %}
+                    {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
                     {% endwith %}
-                {% endifequal %}
-
-                {% ifequal sort '-uploaded' %}
-                    {{search_result.object.uploaded|ago}}
-                {% endifequal %}
-
-                {% ifequal sort '-acquired' %}
-                    {{search_result.last_acquisition_date}}
-                {% endifequal %}
-
-                {% ifequal sort '-views' %}
-                    {% with search_result.views as hit_count %}
-                        {% blocktrans count counter=hit_count|add:"0" %}Viewed one time{% plural %}Viewed {{counter}} times{% endblocktrans %}
-                    {% endwith %}
-                {% endifequal %}
-
-                {% ifequal sort '-comments' %}
-                    {% trans "Comments" %}: {{search_result.comments}}
-                {% endifequal %}
-
-                {% if not sort %}
-                    {{search_result.object.title|escape|truncatechars:23}}
-                {% endif %}
-                <br/>
-                {% with search_result.object.user.username|truncatechars:24 as user %}
-                {% url user_page user as user_page %}
-                {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
-                {% endwith %}
-            </div>
-        </li>
-    {% endif %}
-{% endfor %}
-</ul>
+                </div>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endifequal %}
 {% endif %}
 
 {% if paginate %}

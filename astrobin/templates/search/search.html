@@ -50,10 +50,22 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="pull-right">
+                {% ifequal request.GET.view 'list' %}
+                    <a href="{% query_string "" "view" %}">
+                        <i class="icon-th"></i>
+                    </a>
+                {% else %}
+                    <a href="{% query_string "view=list" "" %}">
+                        <i class="icon-list"></i>
+                    </a>
+                {% endifequal %}
+            </li>
         </ul> <!-- nav -->
     </div> <!-- subnav -->
     {% endif %}
-    
+
 <div class="row">
     <div class="span3 advanced-search-box">
         <form method="get" action="{% url haystack_search %}">
@@ -82,7 +94,7 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
-   
+
                     {% with form.solar_system_main_subject as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -95,7 +107,7 @@
                     <input class="btn btn-primary search-button" type="submit" value="{% trans "Search" %} &rarr;" />
                 </div>
             </div>
-    
+
             <div class="search-category">
                 <div class="header">
                     <span class="title"><i class="icon-cog icon-white"></i> {% trans "Gear used" %}</span>
@@ -128,7 +140,7 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
-    
+
                     {% with form.aperture_max as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -146,7 +158,7 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
-    
+
                     {% with form.pixel_size_max as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -158,7 +170,7 @@
 
                 </div>
             </div>
-    
+
             <div class="search-category">
                 <div class="header">
                     <span class="title"><i class="icon-time icon-white"></i> {% trans "Acquisition details" %}</span>
@@ -173,7 +185,7 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
-    
+
                     {% with form.end_date as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -182,7 +194,7 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
-    
+
                     {% with form.integration_min as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -191,7 +203,7 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
-    
+
                     {% with form.integration_max as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -200,7 +212,7 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
-    
+
                     {% with form.moon_phase_min as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -209,7 +221,7 @@
                             <span class="helptext">{{field.help_text}}</span>
                     </p>
                     {% endwith %}
-    
+
                     {% with form.moon_phase_max as field %}
                     <p{% if field.errors %} class="error"{% endif %}>
                             {{field.errors}}
@@ -220,7 +232,7 @@
                     {% endwith %}
                 </div>
             </div>
-    
+
             <div class="search-category">
                 <div class="header">
                     <span class="title"><i class="icon-legal icon-white"></i> {% trans "License" %}</span>
@@ -236,7 +248,7 @@
                     {% endwith %}
                 </div>
             </div>
-    
+
             <input class="btn btn-primary search-button" type="submit" value="{% trans "Search" %} &rarr;" />
         </form>
     </div> <!-- span3 -->

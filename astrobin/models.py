@@ -998,6 +998,23 @@ class Image(models.Model):
         except ImageOfTheDay.MultipleObjectsReturned:
             return ImageOfTheDay.objects.filter(image = self)[0].date
 
+    def astrobinIndex(self):
+        ratings = self.rating.get_ratings()
+        votes = len(ratings)
+        from votes import index
+        return index([x.score for x in ratings])
+
+    def favoritesNumber(self):
+        return Favorite.objects.filter(image = self).count()
+
+    def commentsNumber(self):
+        from nested_comments.models import NestedComment
+        return NestedComment.objects.filter(
+            deleted = False,
+            content_type__app_label = 'astrobin',
+            content_type__model = 'image',
+            object_id = self.id).count()
+
     @staticmethod
     def by_gear(gear):
         types = {
