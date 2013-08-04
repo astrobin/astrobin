@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db.models import Q
+from django.utils.translation import ugettext as _
+
 from notification import models as notifications
 
 from astrobin.models import Request
@@ -46,13 +48,17 @@ def user_scores(request):
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user = request.user)
         all_images = Image.objects.filter(user = request.user, is_wip = False)
-        voted_images = Image.objects.filter(user = request.user, is_wip = False, allow_rating = True)
-        l = []
 
-        for i in voted_images:
-            l.append(_prepare_rating(i))
-        if len(l) > 0:
-            d['user_scores_index'] = index (l)
+        if UserProfile.objects.get(user = request.user).optout_rating:
+            d['user_scores_index'] = 0
+        else:
+            voted_images = Image.objects.filter(user = request.user, is_wip = False, allow_rating = True)
+            l = []
+
+            for i in voted_images:
+                l.append(_prepare_rating(i))
+            if len(l) > 0:
+                d['user_scores_index'] = index (l)
 
         d['user_scores_images'] = all_images.count()
         d['user_scores_comments'] =  NestedComment.objects.filter(author = request.user, deleted = False).count()
