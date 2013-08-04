@@ -354,7 +354,7 @@ class UserIndex(SearchIndex):
 
     def prepare_rating(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, allow_rating = True):
             l.append(_prepare_rating(i))
         if len(l) == 0:
             return 0
