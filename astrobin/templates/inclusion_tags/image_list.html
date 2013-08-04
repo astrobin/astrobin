@@ -30,10 +30,14 @@
                         <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
                         <td>{% get_hit_count for image %}</td>
                         <td>
-                            {% if image.allow_rating %}
-                                {{image.astrobinIndex|floatformat:"3"}}
+                            {% if image.user.userprofile_set.0.optout_rating %}
+                                {% trans "n/a" %}
                             {% else %}
-                                -
+                                {% if image.allow_raging %}
+                                    {{image.astrobinIndex|floatformat:"3"}}
+                                {% else %}
+                                    {% trans "n/a" %}
+                                {% endif %}
                             {% endif %}
                         </td>
                         <td>{{image.favoritesNumber}}</td>
