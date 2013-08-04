@@ -29,7 +29,13 @@
                         </td>
                         <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
                         <td>{% get_hit_count for image %}</td>
-                        <td>{{image.astrobinIndex|floatformat:"3"}}</td>
+                        <td>
+                            {% if image.allow_rating %}
+                                {{image.astrobinIndex|floatformat:"3"}}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
                         <td>{{image.favoritesNumber}}</td>
                         <td>{{image.commentsNumber}}</td>
                     </tr>

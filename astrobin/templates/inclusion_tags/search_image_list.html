@@ -140,7 +140,13 @@
                         </td>
                         <td>{{search_result.object.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
                         <td>{% get_hit_count for search_result.object %}</td>
-                        <td>{{search_result.object.astrobinIndex|floatformat:"3"}}</td>
+                        <td>
+                            {% if search_result.object.allow_rating %}
+                                {{search_result.object.astrobinIndex|floatformat:"3"}}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
                         <td>{{search_result.object.favoritesNumber}}</td>
                         <td>{{search_result.object.commentsNumber}}</td>
                     </tr>
