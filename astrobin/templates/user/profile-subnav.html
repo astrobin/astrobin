@@ -23,7 +23,7 @@
                     {% endif %}
                 {% endifequal %}
                 <li>
-                    <a href="{% query_string "public=" "sub" %}">
+                    <a href="{% url 'user_page' user %}{% query_string "public=" "sub" %}">
                         <i class="icon-picture"></i>
                         {% trans "Gallery" %}
                     </a>
@@ -77,6 +77,16 @@
                     </a>
                 </li>
                 {% endifequal %}
+
+                {% if request.user.is_superuser %}
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{% url 'user_page_votes' user %}">
+                            <i class="icon-star"></i>
+                            {% trans "Votes" %}
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </li>
 

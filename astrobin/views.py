@@ -27,6 +27,7 @@ from django.utils.encoding import smart_str, smart_unicode
 from django.utils.hashcompat import md5_constructor
 from django.utils.http import urlquote
 
+from djangoratings.models import Vote
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
 from reviews.forms import ReviewedItemForm
@@ -2061,6 +2062,29 @@ def user_page_api_keys(request, username):
             'user': user,
             'profile': profile,
             'api_keys': keys,
+        },
+        context_instance = RequestContext(request))
+
+
+@require_GET
+def user_page_votes(request, username):
+    """Shows the user's API Keys"""
+    if not request.user.is_superuser:
+        return HttpResponseForbidden()
+
+    user = get_object_or_404(User, username = username)
+    profile = UserProfile.objects.get(user=user)
+    votes = Vote.objects.filter(
+        content_type__app_label = 'astrobin',
+        content_type__model = 'image',
+        user = user).order_by('score')
+
+    return render_to_response(
+        'user/votes.html',
+        {
+            'user': user,
+            'profile': profile,
+            'votes': votes,
         },
         context_instance = RequestContext(request))
 
