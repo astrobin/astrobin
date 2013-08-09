@@ -21,6 +21,7 @@
 
                 <tbody>
                     {% for vote in votes %}
+                        {% if vote.content_object.user %}
                         <tr>
                             <td><a href="{% url image_detail vote.object_id %}">{{vote.content_object.title}}</a></td>
                             <td><a href="{% url user_page vote.content_object.user %}">{{vote.content_object.user}}</a></td>
@@ -28,6 +29,7 @@
                             <td>{{vote.score}}</td>
                             <td>{{vote.date_added|date:"SHORT_DATE_FORMAT"}}</td>
                         </tr>
+                        {% endif %}
                     {% endfor %}
                 </tbody>
             </table>
