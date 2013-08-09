@@ -12,6 +12,7 @@ from django.db.models import Q
 from notification import models as notifications
 from persistent_messages import models as messages
 from celery.result import AsyncResult
+from djangoratings.models import Vote
 
 from astrobin.models import Request
 from astrobin.gear import *
@@ -444,3 +445,38 @@ def get_image_url(image):
 @register.simple_tag
 def get_image_path(image, resized = False, inverted = False):
     return image.path(resized, inverted)
+
+
+@register.filter
+def votes_by_score(instance, args):
+    return Vote.objects.filter(
+        content_type__app_label = 'astrobin',
+        content_type__model = 'image',
+        object_id = instance.id,
+        score = args,
+    ).count()
+
+
+
+@register.filter
+def votes_percent_by_score(instance, score):
+    votes = Vote.objects.filter(
+        content_type__app_label = 'astrobin',
+        content_type__model = 'image',
+        object_id = instance.id,
+    )
+
+    if votes.count() == 0:
+        return 0;
+
+    number_by_score = [0, 0, 0, 0, 0]
+    for i in range(0, 5):
+        number_by_score[i] = votes.filter(score = i+1).count()
+
+    max = 0
+
+    for n in number_by_score:
+        if n > max:
+            max = n
+
+    return int(number_by_score[score-1] / float(max) * 100);

@@ -1550,11 +1550,9 @@ div.capty-caption a {
 
 div.favorite-container {
     display: inline;
-    margin-right: 12px;
 
     a.favorite {
         position: relative;
-        padding: 8px 30px;
 
         .favorite-hint {
             position: absolute;
@@ -1568,6 +1566,71 @@ div.favorite-container {
         &:hover {
             .favorite-hint {
                 visibility: visible;
+            }
+        }
+    }
+}
+
+div.rating-container {
+    position: relative;
+
+    .info {
+        position: absolute;
+        top: -11px;
+        right: -8px;
+        font-size: 80%;
+    }
+
+    .score-container {
+        float: left;
+        padding: 0 4px;
+
+        .current-rating {
+            font-size: 2.5em;
+            line-height: 2em;
+            text-align: center;
+        }
+
+        .total-votes {
+            text-align: center;
+            margin-top: @spacer-medium;
+            color: darken(@text-color, 10%);
+
+            i {
+                padding-right: @spacer-small;
+            }
+        }
+    }
+
+    .score-histogram-container {
+        float: right;
+        text-align: left;
+        padding: 16px 0;
+        width: 90px;
+
+        .score {
+            position: relative;
+
+            .score-label {
+                font-size: 85%;
+                padding-right: 8px;
+                position: absolute;
+                left: -30px;
+            }
+            .score-bar {
+                height: 20px;
+            }
+
+            .score-bar-5 { background-color: #88b131; }
+            .score-bar-4 { background-color: #99cc00; }
+            .score-bar-3 { background-color: #ffcf02; }
+            .score-bar-2 { background-color: #ff9f02; }
+            .score-bar-1 { background-color: #ff6f31; }
+
+            .score-total-votes {
+                position: absolute;
+                top: 0;
+                left: 4px;
             }
         }
     }
@@ -1662,16 +1725,42 @@ div.favorite-container {
 
 .avatar-block {
     .avatar, .username {
-        display: inline;
+        float: left;
     }
 
-    img {
+    .avatar img {
         .rounded-corners(12px);
     }
 
     .username {
         font-size: 1.5em;
         margin-left: @spacer-large;
+        margin-top: @spacer-small;
+
+        .data {
+            display: block;
+            font-size: 60%;
+            color: darken(@text-color, 10%);
+            margin-top: @spacer-small;
+            margin-bottom: @spacer-medium;
+
+            .license {
+                margin-right: @spacer-small;
+            }
+        }
+
+        .views, .favorites {
+            font-size: 85%;
+            color: darken(@text-color, 10%);
+
+            .number {
+                color: @strong-text-color;
+            }
+        }
+
+        .follow, .unfollow {
+            font-size: 66%;
+        }
     }
 }
 
@@ -3088,6 +3177,3 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
     }
 }
 
-[class^="icon-"], [class*=" icon-"] {
-    padding-right: 8px;
-}

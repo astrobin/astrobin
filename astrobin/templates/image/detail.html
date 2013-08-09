@@ -642,77 +642,105 @@
             <div class="subtle-container avatar-block">
                 <div class="avatar">
                     <a href="{% url user_page image.user %}">
-                        {% avatar image.user 86 %}
+                        {% avatar image.user 106 %}
                     </a>
                 </div>
                 <div class="username">
-                    <a rel="tooltip" title="{{image.user.username}}" href="{% url user_page image.user %}">{{image.user.username|truncatechars:18}}</a>
-                </div>
-            </div>
+                    <a   rel="tooltip"
+                         title="{{image.user.username}}"
+                         href="{% url user_page image.user %}">{{image.user.username|truncatechars:16}}</a>
 
-            <div class="subtle-container">
-                <div class="favorite-container">
-                    <a href="{% if request.user.is_authenticated %}#{% else %}/accounts/login/?next={{request.path}}{% endif %}" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Remove from favorites" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
-                        {% if already_favorited %}
-                            <div style="font-size: 32px; color: #FFA040;">
-                        {% else %}
-                            <div style="font-size: 32px;">
-                        {% endif %}
-                            <i class="icon-heart"></i>
+                    <div class="data">
+                        <img class="license"
+                             src="{{STATIC_URL}}icons/{{license_icon}}"
+                             alt="{% trans "License" %}: {{license_title}}"
+                             title="{% trans "License" %}: {{license_title}}" />
+
+                        <span class="uploaded">{{uploaded_on|ago}}</span>
+
+                        <div>
+                            <span class="views">
+                                {% get_hit_count for image as hit_count %}
+                                {% trans "Views" %}: <span class="number">{{hit_count}}</span>,
+                            </span>
+
+                            <span class="favorites">
+                                {% trans "Favorites" %}:
+                                <span class="number">{{times_favorited}}</span>
+                            </span>
                         </div>
-                    </a>
+                    </div>
+
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-primary{% if follows %} unfollow{% else %} follow{% endif %}"
+                           href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
+                            {% if follows %}
+                                {% trans "Stop following" %}
+                            {% else %}
+                                {% trans "Follow" %}
+                            {% endif %}
+                        </a>
+                    {% endif %} <!-- authenticated -->
+
+                    <div class="favorite-container">
+                        <a href="{% if request.user.is_authenticated %}#{% else %}/accounts/login/?next={{request.path}}{% endif %}" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Remove from favorites" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
+                            {% if already_favorited %}
+                                <div style="font-size: 15px; color: #FFA040;">
+                            {% else %}
+                                <div style="font-size: 16px;">
+                            {% endif %}
+                                <i class="icon-heart"></i>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
-
-                {% if allow_rating %}
-                    <div id="rating"></div>
-                {% endif %}
-            </div> <!-- subtle-container -->
-
-            <div class="subtle-container image-basic-data">
-                <table class="table">
-                    <tr>
-                        <th><div style="font-size: 16px"><i class="icon-legal"></i></div></th>
-                        <td>
-                            <a target="_blank" href="http://creativecommons.org/licenses/">
-                                <img class="license"
-                                     src="{{STATIC_URL}}icons/{{license_icon}}"
-                                     alt="{% trans "License" %}: {{license_title}}"
-                                     title="{% trans "License" %}: {{license_title}}" />
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><div style="font-size: 16px"><i class="icon-calendar"></i></div></th>
-                        <td>{{uploaded_on|ago}}</td>
-                    </tr>
-                    <tr>
-                        {% get_hit_count for image as hit_count %}
-                        <th><div style="font-size: 16px"><i class="icon-eye-open"></i></div></th>
-                        <td>{{hit_count}}</td>
-                    </tr>
-                    <tr>
-                        <th><div style="font-size: 16px"><i class="icon-heart"></i></div></th>
-                        <td><span class="favorites-number">{{times_favorited}}</span></td>
-                    </tr>
-
-                    {% if allow_rating %}
-                    <tr>
-                        <th><div style="font-size: 16px"><i class="icon-star"></i></div></th>
-                        <td>
-                            <a href="#" class="current-rating rating-popover"
-                               rel="popover" data-load="{% url rating_popover_ajax image.id %}">
-                                {% if votes_number > 0 %}{{index|floatformat:3}}{% else %}0.000{% endif %}
-                            </a>
-                        </td>
-                    </tr>
-                    {% endif %}
-
-                    <tr>
-                        <th><div style="font-size: 16px"><i class="icon-comments-alt"></i></div></th>
-                        <td><span class="comments-number">{{comments_number}}</span></td>
-                    </tr>
-                </table>
             </div>
+
+            {% if allow_rating %}
+                <div class="subtle-container">
+                    <div class="rating-container">
+                        <div class="info">
+                            <a href="{% url faq %}#12">
+                                <i class="icon-info-sign"></i>
+                            </a>
+                        </div>
+
+                        <div class="score-container">
+                            <div class="current-rating">
+                                {% if votes_number > 0 %}
+                                    {{index|floatformat:3}}
+                                {% else %}
+                                    {% trans "n/a" %}
+                                {% endif %}
+                            </div>
+
+                            <div id="rating"></div>
+
+                            <div class="total-votes">
+                                <i class="icon-user"></i>
+                                {{votes_number}}
+                            </div>
+                        </div>
+
+                        <div class="score-histogram-container">
+                            {% for i in "xxxxx" %}
+                                <div class="score score-{{forloop.revcounter}}">
+                                    <span class="score-label">
+                                        <i class="icon-star"></i> {{forloop.revcounter}}
+                                    </span>
+                                    <div class="score-bar score-bar-{{forloop.revcounter}}"
+                                          style="width:{{image|votes_percent_by_score:forloop.revcounter}}%">
+                                    </div>
+                                    <span class="score-total-votes score-total-votes-{{forloop.revcounter}}">
+                                        {{image|votes_by_score:forloop.revcounter}}
+                                    </span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div> <!-- subtle-container -->
+            {% endif %}
 
             {% if is_ready and not image.animated %}
                 <div class="subtle-container">
@@ -929,7 +957,7 @@ $(document).ready(function() {
 
                 $heart.parent().css('color', color);
                 $link.attr('data-original-title', title);
-                $('.favorites-number').text(data.favorites);
+                $('.favorites .number').text(data.favorites);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
             }
@@ -1184,7 +1212,6 @@ $(document).ready(function() {
     astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
     astrobin_common.setup_subject_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
     astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
-    astrobin_common.setup_rating_popovers();
 
     astrobin_image_detail.init(
         {{image.id}},
