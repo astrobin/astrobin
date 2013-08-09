@@ -627,10 +627,10 @@ def image_detail(request, id, r):
     else:
         already_voted = False
 
-    ratings = image.rating.get_ratings().filter(user__userprofile__suspended_from_voting = False)
+    ratings = image.get_ratings()
     votes = len(ratings)
     from votes import index
-    index = index([x.score for x in image.rating.get_ratings()])
+    index = index([x.score for x in image.get_ratings()])
 
     gear_list = (
         ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
