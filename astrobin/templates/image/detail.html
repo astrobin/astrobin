@@ -730,6 +730,20 @@
                 </div> <!-- subtle-container -->
             {% endif %}
 
+            {% if request.user.is_superuser %}
+                <div class="subtle-container">
+                    <div class="header"><h4><i class="icon-star"></i> {% trans "Votes" %}</h4></div>
+                    <table class="table table-condensed">
+                        {% for r in image.rating.get_ratings %}
+                            <tr>
+                                <td><a href="{% url user_page_votes r.user %}">{{r.user}}</a></td>
+                                <td>{{r.score}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+
             {% if is_ready and not image.animated %}
                 <div class="subtle-container">
                     <div class="header"><h4><i class="icon-bar-chart"></i> {% trans "Histogram" %}</h4></div>
