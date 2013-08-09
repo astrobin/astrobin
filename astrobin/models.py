@@ -1015,6 +1015,12 @@ class Image(models.Model):
             content_type__model = 'image',
             object_id = self.id).count()
 
+    def get_ratings(self):
+        return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = False)
+
+    def get_suspended_ratings(self):
+        return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = True)
+
     @staticmethod
     def by_gear(gear):
         types = {
@@ -1546,6 +1552,11 @@ class UserProfile(models.Model):
         verbose_name = _("Opt out from the rating system"),
         help_text = _(
             "This will hide all the votes your image have received the past, prevent new votes and exclude you from the leaderboard and sorting by rating in searches.")
+    )
+
+    suspended_from_voting = models.BooleanField(
+        default = False,
+        editable = False,
     )
 
 

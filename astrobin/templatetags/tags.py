@@ -454,6 +454,7 @@ def votes_by_score(instance, args):
         content_type__model = 'image',
         object_id = instance.id,
         score = args,
+        user__userprofile__suspended_from_voting = False,
     ).count()
 
 
@@ -464,6 +465,7 @@ def votes_percent_by_score(instance, score):
         content_type__app_label = 'astrobin',
         content_type__model = 'image',
         object_id = instance.id,
+        user__userprofile__suspended_from_voting = False,
     )
 
     if votes.count() == 0:
