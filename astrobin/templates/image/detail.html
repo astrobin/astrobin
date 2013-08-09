@@ -659,11 +659,13 @@
 
                     {% if user.is_authenticated %}
                         <a class="btn btn-primary{% if follows %} unfollow{% else %} follow{% endif %}"
-                           href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
+                           href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}"
+                           rel="tooltip"
+                           title="{% if follows %}{% trans "Stop following" %}{% else %}{% trans "Follow" %}{% endif %}">
                             {% if follows %}
-                                {% trans "Stop following" %}
+                                <i class="icon-eye-close"></i>
                             {% else %}
-                                {% trans "Follow" %}
+                                <i class="icon-eye-open"></i>
                             {% endif %}
                         </a>
                     {% endif %} <!-- authenticated -->
