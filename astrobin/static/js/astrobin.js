@@ -533,38 +533,6 @@ astrobin_common = {
         });
     },
 
-    setup_rating_popovers: function() {
-        $('.rating-popover').each(function() {
-            $(this).qtip({
-                position: {
-                    my: "left center",
-                    at: "right center"
-                },
-                show: {
-                    solo: true
-                },
-                hide: {
-                    fixed: true,
-                    delay: 1000
-                },
-                content: {
-                    text: "...",
-                    ajax: {
-                        loading: false,
-                        url:  $(this).attr('data-load'),
-                        type: 'GET',
-                        dataType: 'json',
-                        timeout: 5000,
-                        cache: false,
-                        success: function(data, status) {
-                            this.set('content.text', data.html);
-                        }
-                    }
-                }
-            });
-        });
-    },
-
     init: function(current_username, config) {
         /* Init */
         astrobin_common.globals.current_username = current_username;

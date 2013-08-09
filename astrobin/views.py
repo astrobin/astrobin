@@ -29,7 +29,6 @@ from django.utils.http import urlquote
 
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
-from djangoratings.models import Vote
 from reviews.forms import ReviewedItemForm
 from actstream.models import Action
 from registration.forms import RegistrationForm
@@ -3489,38 +3488,6 @@ def user_popover_ajax(request, username):
         mimetype = 'application/javascript')
 
 
-@require_GET
-@never_cache
-def rating_popover_ajax(request, id):
-    image = get_object_or_404(Image, id = id)
-    template = 'popover/rating.html'
-
-    from votes import average, index
-
-    ratings = [x.score for x in image.rating.get_ratings()]
-
-    votes_number = len(ratings)
-    avg = 0.000
-    if votes_number > 0:
-        avg = sum(ratings) / float(votes_number)
-    sigma_reject = average(ratings)
-    index = index(ratings)
-
-    html = render_to_string(template,
-        {
-            'votes_number': votes_number,
-            'average': avg,
-            'sigma_reject': sigma_reject,
-            'index': index,
-        })
-
-    response_dict = {
-        'success': True,
-        'html': html,
-    }
-    return HttpResponse(
-        simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
 
 @require_GET
 def subject_page(request, id):
