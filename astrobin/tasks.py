@@ -94,8 +94,9 @@ def image_stored_callback(image, stored, solve, lang):
     push_notification([user], 'image_ready', {'object_url':'%s%s' %(settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
 
     if not img.is_wip:
+        profile = UserProfile.objects.get(user = user)
         followers = [x.from_userprofile.user
-                     for x in UserProfile.follows.through.objects.filter(to_userprofile=user)]
+                     for x in UserProfile.follows.through.objects.filter(to_userprofile=profile)]
         notification = 'new_image_revision' if is_revision else 'new_image'
         push_notification(followers, notification,
                           {'originator':user,

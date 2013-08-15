@@ -185,7 +185,12 @@ def index(request):
         response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n] #exclude(authors__username__in = 'astrobin')
 
         response_dict['recent_from_followees'] = \
-            Image.objects.filter(is_stored = True, is_wip = False, user__in = profile.follows.all())[:thumbnails_n]
+            Image.objects.filter(
+                is_stored = True,
+                is_wip = False,
+                user__username__in = profile.follows.all().values_list(
+                    'user__username', flat="True")
+            )[:thumbnails_n]
 
         if response_dict['recent_from_followees'].count() == 0:
             recent_thumbnails_n = 32
@@ -1633,6 +1638,8 @@ def image_promote(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
+    profile = UserProfile.objects.get(user = request.user)
+
     if image.is_wip:
         image.is_wip = False
         image.save()
@@ -1640,7 +1647,7 @@ def image_promote(request, id):
         followers = [x.from_userprofile.user
                      for x in
                      UserProfile.follows.through.objects.filter(
-                        to_userprofile = request.user)]
+                        to_userprofile = profile)]
         push_notification(followers, 'new_image',
             {
                 'originator': request.user,
