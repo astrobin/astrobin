@@ -40,6 +40,8 @@ class ImageRevisionResource(ModelResource):
             'h',
             'is_solved',
             'is_final',
+            'filename',
+            'original_ext'
         ]
         allowed_methods = ['get']
 
