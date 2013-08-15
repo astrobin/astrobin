@@ -33,7 +33,7 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.all()
+        queryset = ImageRevision.objects.filter(image__is_stored = True, image__is_wip = False)
         fields = [
             'uploaded',
             'w',
