@@ -1830,18 +1830,27 @@ class AppApiKeyRequest(models.Model):
 class ImageOfTheDay(models.Model):
     image = models.ForeignKey(
         Image,
-        editable = False,
         related_name = 'image_of_the_day')
 
     filename = models.CharField(
         max_length = 64,
         null = True,
-        blank = False,
-        editable = False)
+        blank = False,)
 
     date = models.DateField(
-        editable = False,
         auto_now_add = True)
+
+    runnerup_1 = models.ForeignKey(
+        Image,
+        related_name = 'iotd_runnerup_1',
+        null = True,
+    )
+
+    runnerup_2 = models.ForeignKey(
+        Image,
+        related_name = 'iotd_runnerup_2',
+        null = True,
+    )
 
     class Meta:
         ordering = ['-date']

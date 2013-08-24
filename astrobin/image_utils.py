@@ -70,7 +70,7 @@ def generate_histogram(img):
 
     # Colours to be used
     backgroundColor = (0,0,0,0)     # Background color
-    lineColor = (102,102,102)       # Line color of fStop Markers 
+    lineColor = (102,102,102)       # Line color of fStop Markers
     red = (255,60,60)               # Color for the red lines
     green = (51,204,51)             # Color for the green lines
     blue = (0,102,255)              # Color for the blue lines
@@ -78,16 +78,16 @@ def generate_histogram(img):
     hist = img.histogram()
     histMax = max(hist)                                     # comon color
     xScale = float(histWidth)/len(hist)                     # xScaling
-    yScale = float((histHeight)*multiplerValue)/histMax     # yScaling 
+    yScale = float((histHeight)*multiplerValue)/histMax     # yScaling
 
-    im = PILImage.new("RGBA", (histWidth, histHeight), backgroundColor)   
+    im = PILImage.new("RGBA", (histWidth, histHeight), backgroundColor)
     red_layer = PILImage.new("RGBA", (histWidth, histHeight), red)
     green_layer = PILImage.new("RGBA", (histWidth, histHeight), green)
     blue_layer = PILImage.new("RGBA", (histWidth, histHeight), blue)
     draw = ImageDraw.Draw(im)
 
     # Draw Outline is required
-    if showFstopLines:    
+    if showFstopLines:
         xmarker = histWidth/fStopLines
         x =0
         for i in range(1,fStopLines+1):
@@ -111,7 +111,7 @@ def generate_histogram(img):
             # Wow, we could _not_ be any slower here. :-/
             alpha_mask = PILImage.new("L", (histWidth, histHeight), 0)
             alpha_mask_draw = ImageDraw.Draw(alpha_mask)
-            alpha_mask_draw.line((x, histHeight, x, histHeight - (i * yScale)), fill = 128)        
+            alpha_mask_draw.line((x, histHeight, x, histHeight - (i * yScale)), fill = 128)
             if color == red:
                 im = PILImage.composite(red_layer, im, alpha_mask)
             elif color == green:
@@ -186,7 +186,7 @@ def make_image_of_the_day(image):
 
     print "Saving to S3..."
     save_to_bucket(filename + '_iotd.jpg', f2.getvalue())
-    
+
     print "See if there's an existing image for today..."
     today = datetime.now().date()
     try:
@@ -204,7 +204,17 @@ def make_image_of_the_day(image):
     f.close()
     f2.close()
     os.remove(path)
-    os.removedirs(tempdir)    
+    os.removedirs(tempdir)
 
     print "Done."
 
+    return iotd
+
+
+def make_runnerup(image, iotd, position):
+    if position == 1:
+        iotd.runnerup_1 = image
+    elif position == 2:
+        iotd.runnerup_2 = image
+
+    iotd.save()
