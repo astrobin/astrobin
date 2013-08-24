@@ -9,10 +9,10 @@
         <p>
             {% blocktrans with participant.user.get_absolute_url as sender_url %}A conversation between <a href="{{ sender_url }}">you</a> and{% endblocktrans %}:
              {% for participant in participant.others %}
-                <a href="{{ participant.user.get_absolute_url }}" class="btn btn-mini btn-primary">{{ participant.user }}</a>
+                <a href="{{ participant.user.get_absolute_url }}" class="btn btn-mini btn-primary">{{ participant.user.userprofile_set.all.0 }}</a>
              {% endfor %}
         </p>
-        
+
         <div class="well">
             <a href="{% url messages_delete thread.pk %}" class="btn btn-danger">
                {% trans "Delete conversation" %}
@@ -31,7 +31,7 @@
               {% endwith %}
             {% endfor %}
          </div>
-         
+
          <div class="message-form">
             <form class="reply-form form-horizontal" method="POST" action="{% url message_reply thread.pk %}">
                <a name="reply"></a>

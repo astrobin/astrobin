@@ -12,7 +12,7 @@
     <div class="row">
         <div class="span12">
             <h1>{% trans "Messages" %}</h1>
-            
+
             <div class="well">
                 <a class="btn" href="{% url messages_compose %}{% query_string "next=request.path" "" %}">
                    {% trans "Compose message" %}
@@ -22,7 +22,7 @@
             <table class="table">
                 <tr>
                     <th>{% trans "Status" %}</th>
-                    <th>{% trans "Last sender" %}</th>
+                    <th>{% trans "Participants" %}</th>
                     <th>{% trans "Date and time" %}</th>
                     <th>{% trans "Subject" %}</th>
                     <th>{% trans "Excerpt" %}</th>
@@ -31,7 +31,11 @@
                 {% for message in thread_list %}
                     <tr>
                         <td>{% if message.new %}<strong>{% trans "New!" %}</strong>{% endif %}</td>
-                        <td><a href="{{ message.thread.latest_msg.sender.get_absolute_url }}">{{ message.thread.latest_msg.sender.username|truncchar:12 }}</a></td>
+                        <td>
+                            {% for participant in message.others %}
+                                <a href="{{ participant.user.get_absolute_url }}">{{participant.user.userprofile_set.all.0 }}</a>{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </td>
                         <td>{{message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</td>
                         <td>{{message.thread.subject|truncchar:25}}</td>
                         <td>{{message.thread.latest_msg.body|truncchar:35}}</td>
