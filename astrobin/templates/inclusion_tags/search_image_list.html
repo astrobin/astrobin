@@ -144,7 +144,7 @@
                             {% if search_result.object.user.userprofile_set.0.optout_rating %}
                                 {% trans "n/a" %}
                             {% else %}
-                                {% if search_result.object.allow_raging %}
+                                {% if search_result.object.allow_rating %}
                                     {{search_result.object.astrobinIndex|floatformat:"3"}}
                                 {% else %}
                                     {% trans "n/a" %}
