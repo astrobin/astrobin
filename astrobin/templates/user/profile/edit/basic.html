@@ -24,10 +24,10 @@
     <script language="javascript">
         $(document).ready(function() {
             var selects = $("select#id_timezone");
-            if (selects.length > 0 && selects.val() == "") {  
+            if (selects.length > 0 && selects.val() == "") {
              var offset_minutes = new Date().getTimezoneOffset();
              var offset = 100 * offset_minutes / 60;
-             var default_value = _first_timezone_match(selects, offset);  
+             var default_value = _first_timezone_match(selects, offset);
              selects.val(default_value);
             }
 
@@ -41,6 +41,10 @@
              });
              return match;
             }
+
+            {% ifequal 'rn' request.GET.hl %}
+                $('label[for=id_real_name]').parent().addClass('error');
+            {% endifequal %}
         });
     </script>
 {% endblock %}

@@ -199,7 +199,7 @@ class UserProfileEditBasicForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('website', 'job', 'hobbies', 'timezone', 'about')
+        fields = ('real_name', 'website', 'job', 'hobbies', 'timezone', 'about')
 
     def __init__(self, **kwargs):
         super(UserProfileEditBasicForm, self).__init__(**kwargs)
