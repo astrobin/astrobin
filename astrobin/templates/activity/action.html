@@ -10,9 +10,9 @@
     <div class="content">
         {% if action.actor.get_absolute_url %}
             <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax action.actor %}"
-               href="{{action.actor.get_absolute_url}}">{{action.actor}}</a>
+               href="{{action.actor.get_absolute_url}}">{{action.actor.userprofile_set.all.0}}</a>
         {% else %}
-            <a href="{{action.actor_url}}">{{action.actor}}</a>
+            <a href="{{action.actor_url}}">{{action.actor.userprofile_set.all.0}}</a>
         {% endif %}
 
         {% trans action.verb %}

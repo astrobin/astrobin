@@ -21,7 +21,7 @@
                 {% if image.is_stored %}
                     <tr>
                         <td>
-                            <a href="{% url user_page image.user %} ">{{image.user.username}}</a>
+                            <a href="{% url user_page image.user %} ">{{image.get_author_profile}}</a>
                         </td>
 
                         <td>
@@ -30,7 +30,7 @@
                         <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
                         <td>{% get_hit_count for image %}</td>
                         <td>
-                            {% if image.user.userprofile_set.0.optout_rating %}
+                            {% if image.get_author_profile.optout_rating %}
                                 {% trans "n/a" %}
                             {% else %}
                                 {% if image.allow_raging %}
@@ -54,7 +54,7 @@
         {% if image.is_stored %}
         <li class="thumbnail astrobin-thumbnail" style="width:{{thumbnail_size}}px">
             <a {% if thumbnail_size < 184 %}rel="tooltip"
-                title="{{image.title|escape}}, {% trans "by" %} {{image.user.username}}"
+                title="{{image.title|escape}}, {% trans "by" %} {{image.get_author_profile}}"
                 style="display:block;"{% endif %}
                 href="{% get_image_url image %}">
                 {% if image.iotd_date %}
@@ -74,10 +74,7 @@
             <div class="capty-content" id="capty-content-{{image.id}}-{{randomid}}">
                 {{image.title|escape|truncatechars:23}}
                 <br/>
-                {% with image.user.username|truncatechars:24 as user %}
-                {% url user_page user as user_page %}
-                {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
-                {% endwith %}
+                {% trans "by" %} <a href="{% url user_page image.user %}">{{image.get_author_profile}}</a>
             </div>
             {% endif %}
         </li>

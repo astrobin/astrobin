@@ -903,6 +903,14 @@ body.full {
     width: 120px;
 }
 
+.navbar .bubble input {
+    .rounded-corners(2px);
+    width: auto;
+    color: #555;
+    border-color: #aaa;
+    padding: 2px 6px;
+}
+
 .site-nav.nav-collapse,
 .user-nav.nav-collapse { overflow: visible; } /* Fixes dropdowns on IE */
 
@@ -2456,7 +2464,7 @@ p.small {
     border-width: 10px;
     height: 0;
     width: 0;
-    top: -19px;
+    top: -21px;
     left: 1em;
 }
 #language-prompt {
@@ -2474,6 +2482,24 @@ p.small {
     }
     .bubble:after {
         left: 100px;
+    }
+}
+#realname-prompt {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    z-index: 999;
+
+    .bubble {
+        width: 145px;
+        color: #C09853;
+        background-color: #FCF8E3;
+        border: 1px solid #FBEED5;
+        text-align: left;
+
+    }
+    .bubble:after {
+        left: 20px;
     }
 }
 

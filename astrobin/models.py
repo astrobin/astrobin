@@ -1021,6 +1021,10 @@ class Image(models.Model):
     def get_suspended_ratings(self):
         return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = True)
 
+    def get_author_profile(self):
+        profile = UserProfile.objects.get(user = self.user)
+        return profile
+
     @staticmethod
     def by_gear(gear):
         types = {
@@ -1421,6 +1425,14 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, editable=False)
 
     # Basic Information
+    real_name = models.CharField(
+        verbose_name = _("Real name"),
+        help_text = _("If present, your real name will be used throughout the website."),
+        max_length = 128,
+        null = True,
+        blank = True,
+    )
+
     website = models.CharField(
         verbose_name = _("Website"),
         max_length = 128,
@@ -1559,9 +1571,14 @@ class UserProfile(models.Model):
         editable = False,
     )
 
+    seen_realname = models.BooleanField(
+        default = False,
+        editable = False,
+    )
+
 
     def __unicode__(self):
-        return "%s' profile" % self.user.username
+        return self.real_name if self.real_name else self.user.__unicode__()
 
     def get_absolute_url(self):
         return '/users/%s' % self.user.username
