@@ -125,6 +125,42 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
+
+                            {% if iotd.runnerup_1 or iotd.runnerup_2 %}
+                            <div class="runner-ups">
+                                <h3>{% trans "Runner ups" %}:</h3>
+                                {% if iotd.runnerup_1 %}
+                                    <div class="runner-up">
+                                        <a
+                                            rel="tooltip"
+                                            title="{{iotd.runnerup_1.title|escape}}, {% trans "by" %} {{iotd.runnerup_1.get_author_profile}}",
+                                            href="{% get_image_url iotd.runnerup_1 %}">
+
+                                            <img
+                                                src="{{IMAGES_URL}}{% get_final_filename iotd.runnerup_1 %}_small_thumb{{iotd.runnerup_1.original_ext}}"
+                                                alt="{{iotd.runnerup_1.title|escape}}"
+                                                width="45" height="45" />
+                                        </a>
+                                    </div>
+                                {% endif %}
+
+                                {% if iotd.runnerup_2 %}
+                                    <div class="runner-up">
+                                        <a
+                                            rel="tooltip"
+                                            title="{{iotd.runnerup_2.title|escape}}, {% trans "by" %} {{iotd.runnerup_2.get_author_profile}}",
+                                            href="{% get_image_url iotd.runnerup_2 %}">
+
+                                            <img
+                                                src="{{IMAGES_URL}}{% get_final_filename iotd.runnerup_2 %}_small_thumb{{iotd.runnerup_2.original_ext}}"
+                                                alt="{{iotd.runnerup_2.title|escape}}"
+                                                width="45" height="45" />
+                                        </a>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="span2">
