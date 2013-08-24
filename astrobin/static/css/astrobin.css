@@ -736,7 +736,7 @@ body.full {
   width: auto;
   color: #555;
   border-color: #aaa;
-  padding: 2px 4px;
+  padding: 2px 6px;
 }
 .site-nav.nav-collapse,
 .user-nav.nav-collapse {
@@ -2561,6 +2561,30 @@ form.avatar-change label.control-label {
 }
 .image-of-the-day:hover .info {
   opacity: 1;
+}
+.image-of-the-day .runner-ups {
+  position: absolute;
+  left: -8px;
+  bottom: 4px;
+}
+.image-of-the-day .runner-ups h3 {
+  font-size: 1.2em;
+  line-height: 1em;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+  font-style: italic;
+  color: #dfdfdf;
+}
+.image-of-the-day .runner-ups .runner-up {
+  float: left;
+  margin-right: 8px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+}
+.image-of-the-day .runner-ups .runner-up img {
+  /* IE hack... */
+
+  height: 45px;
 }
 .btn-upload {
   padding: 34px 24px;

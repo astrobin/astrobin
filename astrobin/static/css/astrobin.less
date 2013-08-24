@@ -2762,6 +2762,31 @@ form.avatar-change label.control-label {display: none;}
             opacity: 1;
         }
     }
+
+    .runner-ups {
+        position: absolute;
+        left: -8px;
+        bottom: 4px;
+
+        h3 {
+            font-size: 1.2em;
+            line-height: 1em;
+            .text-shadow;
+            font-style: italic;
+            color: #dfdfdf;
+        }
+
+        .runner-up {
+            float: left;
+            margin-right: @spacer-medium;
+            .box-shadow;
+
+            img {
+                /* IE hack... */
+                height: 45px;
+            }
+        }
+    }
 }
 
 .btn-upload {
