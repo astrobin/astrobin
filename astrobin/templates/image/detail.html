@@ -13,7 +13,7 @@
     {% endif %}
 {% endblock %}
 
-{% block title %}AstroBin - {{image.title}} ({{image.user}}){% endblock %}
+{% block title %}AstroBin - {{image.title}} ({{image.get_author_profile}}){% endblock %}
 {% block content %}
     {% ifequal request.user image.user %}
     {% if image.is_wip %}
@@ -548,7 +548,7 @@
                         <div class="header"><h4><i class="icon-comments-alt"></i> {% trans "Comments" %}</h4></div>
                         {% if user.is_authenticated %}
                         <p>
-                            {% blocktrans with user=image.user lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
+                            {% blocktrans with user=image.get_author_profile lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
                         </p>
                         {% endif %}
 
@@ -633,8 +633,8 @@
                 </div>
                 <div class="username">
                     <a   rel="tooltip"
-                         title="{{image.user.username}}"
-                         href="{% url user_page image.user %}">{{image.user.username|truncatechars:16}}</a>
+                         title="{{image.get_author_profile}}"
+                         href="{% url user_page image.user %}">{{image.get_author_profile|truncatechars:16}}</a>
 
                     <div class="data">
                         <img class="license"
@@ -1202,23 +1202,23 @@ $(document).ready(function() {
         {
             follow_action: {
                 dialog: {
-                    title : "{% blocktrans with image.user.username as username %}Follow {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}",
+                    title : "{% blocktrans with image.get_author_profile as username %}Follow {{username}}?{% endblocktrans %}",
+                    body  : "{% blocktrans with image.get_author_profile as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}",
                     button: "{% trans "Yes, follow!" %}"
                 },
                 stop_following: "{% trans "Stop following" %}"
             },
             unfollow_action: {
                 dialog: {
-                    title : "{% blocktrans with image.user.username as username %}Stop following {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with image.user.username as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}",
+                    title : "{% blocktrans with image.get_author_profile as username %}Stop following {{username}}?{% endblocktrans %}",
+                    body  : "{% blocktrans with image.user.get_author_profile as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}",
                     button: "{% trans "Yes, stop following!" %}"
                 },
                 follow: "{% trans "Follow" %}"
             },
             message_action: {
                 dialog: {
-                    title : "{% blocktrans with image.user.username as username %}Send {{username}} a message{% endblocktrans %}",
+                    title : "{% blocktrans with image.get_author_profile as username %}Send {{username}} a message{% endblocktrans %}",
                     body  : "",
                     button: "{% trans "Send" %} &rarr;"
                 },
