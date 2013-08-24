@@ -75,7 +75,7 @@
                 <div class="header">
                     <i class="icon-user icon-white"></i>
                     <a href="{% url user_page search_result.object.username %}">
-                        {{search_result.object.username}}
+                        {{search_result.object.userprofile_set.all.0}}
                     </a>
                 </div>
                 <div class="avatar">
@@ -132,7 +132,7 @@
                 {% if search_result.object.id %}
                     <tr>
                         <td>
-                            <a href="{% url user_page search_result.object.user %} ">{{search_result.object.user.username}}</a>
+                            <a href="{% url user_page search_result.object.user %} ">{{search_result.object.user.userprofile_set.all.0}}</a>
                         </td>
 
                         <td>
@@ -223,10 +223,10 @@
                         {{search_result.object.title|escape|truncatechars:23}}
                     {% endif %}
                     <br/>
-                    {% with search_result.object.user.username|truncatechars:24 as user %}
-                    {% url user_page user as user_page %}
-                    {% blocktrans %} by <a href="{{user_page}}">{{user}}</a>{% endblocktrans %}
-                    {% endwith %}
+                    {% trans "by" %}
+                    <a href="{% url user_page search_result.object.user %}">
+                        {{search_result.object.user.userprofile_set.all.0}}
+                    </a>
                 </div>
             </li>
         {% endif %}

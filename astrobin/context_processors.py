@@ -38,6 +38,18 @@ def user_language(request):
     return d
 
 
+def user_profile(request):
+    d = {
+        'userprofile': None,
+    }
+
+    if request.user.is_authenticated():
+        profile = UserProfile.objects.get(user = request.user)
+        d['userprofile'] = profile
+
+    return d
+
+
 def user_scores(request):
     d = {
         'user_scores_index': 0,

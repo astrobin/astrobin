@@ -2575,6 +2575,16 @@ def flickr_auth_callback(request):
 
 
 @login_required
+@require_POST
+def user_profile_seen_realname(request):
+    profile = UserProfile.objects.get(user = request.user)
+    profile.seen_realname = True
+    profile.save()
+
+    return HttpResponseRedirect(request.POST.get('next', '/'))
+
+
+@login_required
 @require_GET
 def user_profile_edit_preferences(request):
     """Edits own preferences"""
