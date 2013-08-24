@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-24 06:30-0500\n"
-"PO-Revision-Date: 2013-08-13 20:13+0100\n"
+"PO-Revision-Date: 2013-08-24 16:38+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -2274,13 +2274,12 @@ msgid "Higher resolution"
 msgstr "Résolution supérieure"
 
 #: models.py:1429
-#, fuzzy
 msgid "Real name"
-msgstr "Dénomination correcte"
+msgstr "Vrai nom"
 
 #: models.py:1430
 msgid "If present, your real name will be used throughout the website."
-msgstr ""
+msgstr "Si renseigné, votre vrai nom sera utilisé sur l'ensemble du site."
 
 #: models.py:1444 templates/user/card.html:45
 msgid "Job"
@@ -3262,7 +3261,7 @@ msgstr "Se déconnecter"
 
 #: templates/base.html:481 templates/site_base.html:481
 msgid "Would you like to start using your real name on AstroBin?"
-msgstr ""
+msgstr "Désirez-vous utiliser votre vrai nom sur AstroBin?"
 
 #: templates/base.html:486 templates/site_base.html:486
 #: templates/image/detail.html:942
@@ -3271,7 +3270,7 @@ msgstr "OK"
 
 #: templates/base.html:492 templates/site_base.html:492
 msgid "No, tranks"
-msgstr ""
+msgstr "Non, merci"
 
 #: templates/base.html:507 templates/maintenance_base.html:390
 #: templates/site_base.html:507
@@ -5368,11 +5367,11 @@ msgstr ""
 "Cette image est encore une <strong>ébauche</strong> située dans votre <a "
 "href=\"%(profile_url)s?staging\">Zone d'attente</a>. Cela signifie que "
 "personne ne peut la consulter, à moins que vous ne communiquiez un des liens "
-"du menu <em>Partager</em> ci-dessous. Utilisez ces liens pour poster l'image "
+"du menu <em>Partager</em> ci-dessus. Utilisez ces liens pour poster l'image "
 "sur les forums Internet, et ainsi avoir des commentaires. Lorsque vous êtes "
-"satisfait, après avoir éventuellement publié plusieurs versions, vous pouvez "
-"<a href=\"%(promote_url)s\">l'envoyer</a> vers la <a href=\"%(profile_url)s"
-"\">Zone publique</a>."
+"satisfait, après avoir éventuellement publié plusieurs versions, vous "
+"pouvez <a href=\"%(promote_url)s\">l'envoyer</a> vers la <a href=\"%"
+"(profile_url)s\">Zone publique</a>."
 
 #: templates/image/detail.html:35 templates/messages/inbox.html:29
 #: templates/user/profile/commercial/products.html:43
@@ -6292,7 +6291,7 @@ msgstr "Messages"
 
 #: templates/messages/inbox.html:25
 msgid "Participants"
-msgstr ""
+msgstr "Participants"
 
 #: templates/messages/inbox.html:26
 msgid "Date and time"
