@@ -33,7 +33,7 @@
                             {% if image.get_author_profile.optout_rating %}
                                 {% trans "n/a" %}
                             {% else %}
-                                {% if image.allow_raging %}
+                                {% if image.allow_rating %}
                                     {{image.astrobinIndex|floatformat:"3"}}
                                 {% else %}
                                     {% trans "n/a" %}
