@@ -8,7 +8,7 @@
     </div>
 
     <div class="sender">
-        <a href="{{ message.sender.get_absolute_url }}">{{ message.sender }}</a>
+        <a href="{{ message.sender.get_absolute_url }}">{{ message.sender.userprofile_set.all.0 }}</a>
         <span class="date">{{ message.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
     </div>
     <div class="body">
