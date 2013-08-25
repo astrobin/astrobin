@@ -980,7 +980,7 @@ class Image(models.Model):
         if resized:
             suffix = '_resized'
 
-        if hd and self.id >= 53964:
+        if hd and self.id >= 53694:
             suffix = '_hd'
 
         if inverted:
@@ -1112,7 +1112,7 @@ class ImageRevision(models.Model):
         if resized:
             suffix = '_resized'
 
-        if hd and self.image.id >= 53964:
+        if hd and self.image.id >= 53694:
             suffix = '_hd'
 
         if inverted:
