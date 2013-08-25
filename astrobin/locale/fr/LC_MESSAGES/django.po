@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-24 06:30-0500\n"
+"POT-Creation-Date: 2013-08-24 13:24-0500\n"
 "PO-Revision-Date: 2013-08-24 16:38+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
@@ -1024,7 +1024,7 @@ msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr ""
 "Si possible, utilisez des noms de catalogues (ex: M101, ou NGC224 ou IC370)."
 
-#: forms.py:73 models.py:1910 models.py:1992 templates/comments.html:33
+#: forms.py:73 models.py:1919 models.py:2001 templates/comments.html:33
 #: templates/reviews.html:44 templates/gear/page.html:196
 #: templates/image/detail.html:388
 msgid "Link"
@@ -1965,7 +1965,7 @@ msgstr ""
 "Pour choisir le matériel utilisé pour cette image, glissez-le depuis la "
 "partie droite vers la partie gauche, ou cliquez sur le signe \"plus\"."
 
-#: models.py:751 models.py:1780 models.py:1999 templates/gear/page.html:46
+#: models.py:751 models.py:1780 models.py:2008 templates/gear/page.html:46
 #: templates/image/detail.html:539
 msgid "Description"
 msgstr "Description"
@@ -2040,7 +2040,7 @@ msgstr "(sans titre)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Utilisez le format suivant: aaaa-mm-jj."
 
-#: models.py:1130 models.py:1336 models.py:1975 templates/user/votes.html:15
+#: models.py:1130 models.py:1336 models.py:1984 templates/user/votes.html:15
 msgid "Image"
 msgstr "Image"
 
@@ -2442,63 +2442,63 @@ msgstr ""
 "Veuillez expliquer l'objet de votre application et de quelle manière vous "
 "comptez utiliser l'API."
 
-#: models.py:1887
+#: models.py:1896
 msgid "AUD - Australian dollars"
 msgstr "AUD - Dollars australiens"
 
-#: models.py:1888
+#: models.py:1897
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Dollars canadiens"
 
-#: models.py:1889
+#: models.py:1898
 msgid "CHF - Swiss francs"
 msgstr "CHF - Francs suisses"
 
-#: models.py:1890
+#: models.py:1899
 msgid "EUR - Euros"
 msgstr "EUR - Euros"
 
-#: models.py:1891
+#: models.py:1900
 msgid "GPB - Pound stelings"
 msgstr "GPB - Livre Sterling"
 
-#: models.py:1892
+#: models.py:1901
 msgid "PLN - Polish zloty"
 msgstr "PLN - Zloty polonais"
 
-#: models.py:1893
+#: models.py:1902
 msgid "SEK - Swedish krona"
 msgstr "SEK - Couronne suédoise"
 
-#: models.py:1894
+#: models.py:1903
 msgid "USD - American dollars"
 msgstr "USD - Dollars américains"
 
-#: models.py:1900 models.py:1950
+#: models.py:1909 models.py:1959
 msgid "Producer"
 msgstr "Fabricant"
 
-#: models.py:1911 models.py:1993
+#: models.py:1920 models.py:2002
 msgid "The link to this product's page on your website."
 msgstr "Lien vers cet article sur votre site internet."
 
-#: models.py:1919
+#: models.py:1928
 msgid "Price"
 msgstr "Prix"
 
-#: models.py:1927
+#: models.py:1936
 msgid "Currency"
 msgstr "Devise"
 
-#: models.py:1943
+#: models.py:1952
 msgid "Retailed gear items"
 msgstr "Matériel à la vente"
 
-#: models.py:1959
+#: models.py:1968
 msgid "Proper make"
 msgstr "Marque correcte"
 
-#: models.py:1960
+#: models.py:1969
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2508,11 +2508,11 @@ msgstr ""
 "de la marque/type/fabriquant/développeur de cet article. Indiquez ici la "
 "dénomination correcte."
 
-#: models.py:1967
+#: models.py:1976
 msgid "Proper name"
 msgstr "Dénomination correcte"
 
-#: models.py:1968
+#: models.py:1977
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2524,7 +2524,7 @@ msgstr ""
 "type/fabriquant/développeur. <br/> Il est recommandé de grouper un maximum "
 "d'articles, utilisez donc la dénomination générique de votre produit."
 
-#: models.py:1976
+#: models.py:1985
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2536,16 +2536,16 @@ msgstr ""
 "choisissez-le dans la liste. Si vous chargez plusieurs versions, elles "
 "apparaîtront également sur la page commerciale."
 
-#: models.py:1984
+#: models.py:1993
 msgid "Tagline"
 msgstr "Slogan"
 
-#: models.py:1985
+#: models.py:1994
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr "Une formule marquante pour résumer cet article, à but marketing."
 
-#: models.py:2000
+#: models.py:2009
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#10\">formatting rules</a>."
@@ -2553,7 +2553,7 @@ msgstr ""
 "Rédigez ici la description commerciale complète de votre produit. Vous "
 "pouvez utiliser des <a href=\"/faq/#10\">règles de formatage</a>."
 
-#: models.py:2019
+#: models.py:2028
 msgid "Commercial gear items"
 msgstr "Matériel commercial"
 
@@ -2975,12 +2975,12 @@ msgstr ""
 msgid "Come back soon!"
 msgstr "Revenez bientôt !"
 
-#: templates/activities.html:8 templates/index.html:211
+#: templates/activities.html:8 templates/index.html:247
 msgid "Activity stream"
 msgstr "Fil d'activité"
 
-#: templates/activities.html:13 templates/index.html:217
-#: templates/index.html.py:277
+#: templates/activities.html:13 templates/index.html:253
+#: templates/index.html.py:313
 msgid "There is no activity yet."
 msgstr "Il n'y a aucune activité pour l'instant."
 
@@ -3053,7 +3053,7 @@ msgstr "Liens internes"
 msgid "Community"
 msgstr "Communauté"
 
-#: templates/base.html:107 templates/base.html.py:663 templates/index.html:248
+#: templates/base.html:107 templates/base.html.py:663 templates/index.html:284
 #: templates/maintenance_base.html:92 templates/maintenance_base.html:546
 #: templates/site_base.html:107 templates/site_base.html.py:663
 msgid "Blog"
@@ -3184,7 +3184,7 @@ msgstr "Notifications"
 msgid "AstroBin Index"
 msgstr "Indice AstroBin"
 
-#: templates/base.html:391 templates/index.html:135
+#: templates/base.html:391 templates/index.html:171
 #: templates/maintenance_base.html:252 templates/site_base.html:391
 #: templates/upload.html:6 templates/upload.html.py:18
 #: templates/upload.html:34 templates/avatar/change.html:38
@@ -3197,7 +3197,7 @@ msgstr "Publier"
 msgid "My places"
 msgstr "Mon compte"
 
-#: templates/base.html:400 templates/index.html:233
+#: templates/base.html:400 templates/index.html:269
 #: templates/maintenance_base.html:261 templates/site_base.html:400
 #: templates/wall.html:149 templates/user/profile-subnav.html:20
 msgid "Commercial products"
@@ -3419,8 +3419,8 @@ msgstr "Aucun fichier"
 msgid "Choose file"
 msgstr "Choisir fichier"
 
-#: templates/comments.html:53 templates/index.html:296
-#: templates/index.html.py:297 templates/leaderboard.html:78
+#: templates/comments.html:53 templates/index.html:332
+#: templates/index.html.py:333 templates/leaderboard.html:78
 #: templates/reviews.html:59 templates/image/detail.html:268
 #: templates/image/detail.html.py:664 templates/image/detail.html:1217
 #: templates/image/detail.html.py:1231 templates/image/detail.html:1232
@@ -3437,8 +3437,8 @@ msgstr "Choisir fichier"
 msgid "Follow"
 msgstr "S'abonner"
 
-#: templates/comments.html:53 templates/index.html:296
-#: templates/index.html.py:297 templates/leaderboard.html:78
+#: templates/comments.html:53 templates/index.html:332
+#: templates/index.html.py:333 templates/leaderboard.html:78
 #: templates/reviews.html:59 templates/image/detail.html:1231
 #: templates/image/detail.html.py:1232 templates/image/detail.html:1233
 #: templates/popover/gear_accessory.html:22
@@ -4294,42 +4294,47 @@ msgstr ""
 msgid "Image of the day"
 msgstr "Image du jour"
 
-#: templates/index.html:115 templates/inclusion_tags/image_list.html:57
+#: templates/index.html:115 templates/index.html.py:137
+#: templates/index.html:152 templates/inclusion_tags/image_list.html:57
 #: templates/inclusion_tags/image_list.html:77
 #: templates/inclusion_tags/messier_list.html:20
 #: templates/inclusion_tags/search_image_list.html:226
 msgid "by"
 msgstr "par"
 
-#: templates/index.html:148
+#: templates/index.html:132
+msgid "Runners-up"
+msgstr ""
+
+#: templates/index.html:184
 msgid "Recent"
 msgstr "Récent"
 
 # Why is this fuzzy? This is the (view more) link in the home page, under the image thumbnails.
-#: templates/index.html:156 templates/index.html.py:222
-#: templates/index.html:241 templates/index.html.py:283
+#: templates/index.html:192 templates/index.html.py:258
+#: templates/index.html:277 templates/index.html.py:319
 #: templates/gear/page.html:59
 msgid "(view more)"
 msgstr "(voir davantage)"
 
-#: templates/index.html:163
+#: templates/index.html:199
 msgid "Followed"
 msgstr "Abonnements"
 
-#: templates/index.html:177 templates/index.html.py:178
-#: templates/index.html:179 templates/index.html.py:180
-#: templates/index.html:181
+#: templates/index.html:213 templates/index.html.py:214
+#: templates/index.html:215 templates/index.html.py:216
+#: templates/index.html:217
 msgid "Recently voted 5 stars"
 msgstr "Derniers votes 5 étoiles"
 
-#: templates/index.html:196
+#: templates/index.html:232
 msgid "Recently favorited"
 msgstr "Derniers ajouts comme favori"
 
 # Problème: la variable a disparu. Par exemple, sous une image, on trouve "postée il y a 3 jours" (en anglais, c'était "%s ago")
 # Ce "ago" correspond à l'information du fil d'activité. Problème > sans la variable, "2 hours ago" donnera en français "2 heures il y a". !!
 # Vu avec Salvatore. L'ancienne expression (ligne 576) doit être prise en compte lors de la MAJ.
-#: templates/index.html:273 templates/activity/action.html:30
+#: templates/index.html:309 templates/activity/action.html:30
 msgid "ago"
 msgstr "ago"
 
@@ -5369,9 +5374,9 @@ msgstr ""
 "personne ne peut la consulter, à moins que vous ne communiquiez un des liens "
 "du menu <em>Partager</em> ci-dessus. Utilisez ces liens pour poster l'image "
 "sur les forums Internet, et ainsi avoir des commentaires. Lorsque vous êtes "
-"satisfait, après avoir éventuellement publié plusieurs versions, vous "
-"pouvez <a href=\"%(promote_url)s\">l'envoyer</a> vers la <a href=\"%"
-"(profile_url)s\">Zone publique</a>."
+"satisfait, après avoir éventuellement publié plusieurs versions, vous pouvez "
+"<a href=\"%(promote_url)s\">l'envoyer</a> vers la <a href=\"%(profile_url)s"
+"\">Zone publique</a>."
 
 #: templates/image/detail.html:35 templates/messages/inbox.html:29
 #: templates/user/profile/commercial/products.html:43

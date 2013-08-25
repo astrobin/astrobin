@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-24 06:30-0500\n"
+"POT-Creation-Date: 2013-08-24 13:24-0500\n"
 "PO-Revision-Date: 2012-01-03 07:36-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
@@ -1018,7 +1018,7 @@ msgstr ""
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr ""
 
-#: forms.py:73 models.py:1910 models.py:1992 templates/comments.html:33
+#: forms.py:73 models.py:1919 models.py:2001 templates/comments.html:33
 #: templates/reviews.html:44 templates/gear/page.html:196
 #: templates/image/detail.html:388
 msgid "Link"
@@ -1915,7 +1915,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr ""
 
-#: models.py:751 models.py:1780 models.py:1999 templates/gear/page.html:46
+#: models.py:751 models.py:1780 models.py:2008 templates/gear/page.html:46
 #: templates/image/detail.html:539
 msgid "Description"
 msgstr ""
@@ -1982,7 +1982,7 @@ msgstr ""
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr ""
 
-#: models.py:1130 models.py:1336 models.py:1975 templates/user/votes.html:15
+#: models.py:1130 models.py:1336 models.py:1984 templates/user/votes.html:15
 msgid "Image"
 msgstr ""
 
@@ -2365,74 +2365,74 @@ msgid ""
 "the API."
 msgstr ""
 
-#: models.py:1887
+#: models.py:1896
 msgid "AUD - Australian dollars"
 msgstr ""
 
-#: models.py:1888
+#: models.py:1897
 msgid "CAD - Canadian dollars"
 msgstr ""
 
-#: models.py:1889
+#: models.py:1898
 msgid "CHF - Swiss francs"
 msgstr ""
 
-#: models.py:1890
+#: models.py:1899
 msgid "EUR - Euros"
 msgstr ""
 
-#: models.py:1891
+#: models.py:1900
 msgid "GPB - Pound stelings"
 msgstr ""
 
-#: models.py:1892
+#: models.py:1901
 msgid "PLN - Polish zloty"
 msgstr ""
 
-#: models.py:1893
+#: models.py:1902
 msgid "SEK - Swedish krona"
 msgstr ""
 
-#: models.py:1894
+#: models.py:1903
 msgid "USD - American dollars"
 msgstr ""
 
-#: models.py:1900 models.py:1950
+#: models.py:1909 models.py:1959
 msgid "Producer"
 msgstr ""
 
-#: models.py:1911 models.py:1993
+#: models.py:1920 models.py:2002
 msgid "The link to this product's page on your website."
 msgstr ""
 
-#: models.py:1919
+#: models.py:1928
 msgid "Price"
 msgstr ""
 
-#: models.py:1927
+#: models.py:1936
 msgid "Currency"
 msgstr ""
 
-#: models.py:1943
+#: models.py:1952
 msgid "Retailed gear items"
 msgstr ""
 
-#: models.py:1959
+#: models.py:1968
 msgid "Proper make"
 msgstr ""
 
-#: models.py:1960
+#: models.py:1969
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
 "name."
 msgstr ""
 
-#: models.py:1967
+#: models.py:1976
 msgid "Proper name"
 msgstr ""
 
-#: models.py:1968
+#: models.py:1977
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2440,7 +2440,7 @@ msgid ""
 "so try to use a generic version of your product's name."
 msgstr ""
 
-#: models.py:1976
+#: models.py:1985
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2448,22 +2448,22 @@ msgid ""
 "appear in the commercial page."
 msgstr ""
 
-#: models.py:1984
+#: models.py:1993
 msgid "Tagline"
 msgstr ""
 
-#: models.py:1985
+#: models.py:1994
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 
-#: models.py:2000
+#: models.py:2009
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#10\">formatting rules</a>."
 msgstr ""
 
-#: models.py:2019
+#: models.py:2028
 msgid "Commercial gear items"
 msgstr ""
 
@@ -2857,12 +2857,12 @@ msgstr ""
 msgid "Come back soon!"
 msgstr ""
 
-#: templates/activities.html:8 templates/index.html:211
+#: templates/activities.html:8 templates/index.html:247
 msgid "Activity stream"
 msgstr ""
 
-#: templates/activities.html:13 templates/index.html:217
-#: templates/index.html.py:277
+#: templates/activities.html:13 templates/index.html:253
+#: templates/index.html.py:313
 msgid "There is no activity yet."
 msgstr ""
 
@@ -2927,7 +2927,7 @@ msgstr ""
 msgid "Community"
 msgstr ""
 
-#: templates/base.html:107 templates/base.html.py:663 templates/index.html:248
+#: templates/base.html:107 templates/base.html.py:663 templates/index.html:284
 #: templates/maintenance_base.html:92 templates/maintenance_base.html:546
 #: templates/site_base.html:107 templates/site_base.html.py:663
 msgid "Blog"
@@ -3058,7 +3058,7 @@ msgstr ""
 msgid "AstroBin Index"
 msgstr ""
 
-#: templates/base.html:391 templates/index.html:135
+#: templates/base.html:391 templates/index.html:171
 #: templates/maintenance_base.html:252 templates/site_base.html:391
 #: templates/upload.html:6 templates/upload.html.py:18
 #: templates/upload.html:34 templates/avatar/change.html:38
@@ -3071,7 +3071,7 @@ msgstr ""
 msgid "My places"
 msgstr ""
 
-#: templates/base.html:400 templates/index.html:233
+#: templates/base.html:400 templates/index.html:269
 #: templates/maintenance_base.html:261 templates/site_base.html:400
 #: templates/wall.html:149 templates/user/profile-subnav.html:20
 msgid "Commercial products"
@@ -3282,8 +3282,8 @@ msgstr ""
 msgid "Choose file"
 msgstr ""
 
-#: templates/comments.html:53 templates/index.html:296
-#: templates/index.html.py:297 templates/leaderboard.html:78
+#: templates/comments.html:53 templates/index.html:332
+#: templates/index.html.py:333 templates/leaderboard.html:78
 #: templates/reviews.html:59 templates/image/detail.html:268
 #: templates/image/detail.html.py:664 templates/image/detail.html:1217
 #: templates/image/detail.html.py:1231 templates/image/detail.html:1232
@@ -3300,8 +3300,8 @@ msgstr ""
 msgid "Follow"
 msgstr ""
 
-#: templates/comments.html:53 templates/index.html:296
-#: templates/index.html.py:297 templates/leaderboard.html:78
+#: templates/comments.html:53 templates/index.html:332
+#: templates/index.html.py:333 templates/leaderboard.html:78
 #: templates/reviews.html:59 templates/image/detail.html:1231
 #: templates/image/detail.html.py:1232 templates/image/detail.html:1233
 #: templates/popover/gear_accessory.html:22
@@ -3949,38 +3949,43 @@ msgstr ""
 msgid "Image of the day"
 msgstr ""
 
-#: templates/index.html:115 templates/inclusion_tags/image_list.html:57
+#: templates/index.html:115 templates/index.html.py:137
+#: templates/index.html:152 templates/inclusion_tags/image_list.html:57
 #: templates/inclusion_tags/image_list.html:77
 #: templates/inclusion_tags/messier_list.html:20
 #: templates/inclusion_tags/search_image_list.html:226
 msgid "by"
 msgstr ""
 
-#: templates/index.html:148
+#: templates/index.html:132
+msgid "Runners-up"
+msgstr ""
+
+#: templates/index.html:184
 msgid "Recent"
 msgstr ""
 
-#: templates/index.html:156 templates/index.html.py:222
-#: templates/index.html:241 templates/index.html.py:283
+#: templates/index.html:192 templates/index.html.py:258
+#: templates/index.html:277 templates/index.html.py:319
 #: templates/gear/page.html:59
 msgid "(view more)"
 msgstr ""
 
-#: templates/index.html:163
+#: templates/index.html:199
 msgid "Followed"
 msgstr ""
 
-#: templates/index.html:177 templates/index.html.py:178
-#: templates/index.html:179 templates/index.html.py:180
-#: templates/index.html:181
+#: templates/index.html:213 templates/index.html.py:214
+#: templates/index.html:215 templates/index.html.py:216
+#: templates/index.html:217
 msgid "Recently voted 5 stars"
 msgstr ""
 
-#: templates/index.html:196
+#: templates/index.html:232
 msgid "Recently favorited"
 msgstr ""
 
-#: templates/index.html:273 templates/activity/action.html:30
+#: templates/index.html:309 templates/activity/action.html:30
 msgid "ago"
 msgstr ""
 

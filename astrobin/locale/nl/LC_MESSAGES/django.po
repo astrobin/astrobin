@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-24 06:29-0500\n"
+"POT-Creation-Date: 2013-08-24 13:24-0500\n"
 "PO-Revision-Date: 2013-01-05 10:38+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -1023,7 +1023,7 @@ msgstr ""
 msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 msgstr "Gebruik waar mogelijk catalogus namen zoals M101, of NGC224 of IC1370."
 
-#: forms.py:73 models.py:1910 models.py:1992 templates/comments.html:33
+#: forms.py:73 models.py:1919 models.py:2001 templates/comments.html:33
 #: templates/reviews.html:44 templates/gear/page.html:196
 #: templates/image/detail.html:388
 msgid "Link"
@@ -1950,7 +1950,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "Sleep objecten van rechts naar links of klik op het plusteken."
 
-#: models.py:751 models.py:1780 models.py:1999 templates/gear/page.html:46
+#: models.py:751 models.py:1780 models.py:2008 templates/gear/page.html:46
 #: templates/image/detail.html:539
 msgid "Description"
 msgstr "Beschrijving"
@@ -2022,7 +2022,7 @@ msgstr "(geen titel)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Gebruik het volgen de ISO formaat : yyyy-mm-dd."
 
-#: models.py:1130 models.py:1336 models.py:1975 templates/user/votes.html:15
+#: models.py:1130 models.py:1336 models.py:1984 templates/user/votes.html:15
 msgid "Image"
 msgstr "Beeld"
 
@@ -2421,63 +2421,63 @@ msgstr ""
 "Gelieve het doel van je toepassing te verduidelijken en hoe je de API gaat "
 "gebruiken."
 
-#: models.py:1887
+#: models.py:1896
 msgid "AUD - Australian dollars"
 msgstr "AUD - Australische dollar"
 
-#: models.py:1888
+#: models.py:1897
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Canadese dollar"
 
-#: models.py:1889
+#: models.py:1898
 msgid "CHF - Swiss francs"
 msgstr "CHF - Zwitserse frank"
 
-#: models.py:1890
+#: models.py:1899
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:1891
+#: models.py:1900
 msgid "GPB - Pound stelings"
 msgstr "GBP - Britse pond"
 
-#: models.py:1892
+#: models.py:1901
 msgid "PLN - Polish zloty"
 msgstr "PLN - Poolse zloty"
 
-#: models.py:1893
+#: models.py:1902
 msgid "SEK - Swedish krona"
 msgstr "SEK - Zweedse kroon"
 
-#: models.py:1894
+#: models.py:1903
 msgid "USD - American dollars"
 msgstr "USD - Amerikaanse dollar"
 
-#: models.py:1900 models.py:1950
+#: models.py:1909 models.py:1959
 msgid "Producer"
 msgstr "Producent"
 
-#: models.py:1911 models.py:1993
+#: models.py:1920 models.py:2002
 msgid "The link to this product's page on your website."
 msgstr "De link van dit produkt op je website."
 
-#: models.py:1919
+#: models.py:1928
 msgid "Price"
 msgstr "Prijs"
 
-#: models.py:1927
+#: models.py:1936
 msgid "Currency"
 msgstr "Munteenheid"
 
-#: models.py:1943
+#: models.py:1952
 msgid "Retailed gear items"
 msgstr "Verkocht produkt"
 
-#: models.py:1959
+#: models.py:1968
 msgid "Proper make"
 msgstr "Correct merk"
 
-#: models.py:1960
+#: models.py:1969
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2486,11 +2486,11 @@ msgstr ""
 "Soms wordt het merk/type/producent/ontwikkelaar van het produkt niet correct "
 "gespeld door de gebruikers. Schrijf hier de juiste manier."
 
-#: models.py:1967
+#: models.py:1976
 msgid "Proper name"
 msgstr "Correcte naam"
 
-#: models.py:1968
+#: models.py:1977
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2502,7 +2502,7 @@ msgstr ""
 "ontwikkelaar. <br/>Het is aanbevolen dat je zoveel mogelijk artikelen "
 "groepeert, dus tracht een generieke versie van je produktnaam te gebruiken."
 
-#: models.py:1976
+#: models.py:1985
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2514,17 +2514,17 @@ msgstr ""
 "lijst. Als je verschillende revisies uploadt dan zullen deze ook verschijnen "
 "op de commerciële pagina."
 
-#: models.py:1984
+#: models.py:1993
 msgid "Tagline"
 msgstr "Slagzin"
 
-#: models.py:1985
+#: models.py:1994
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "Een catchy zin die je produkt goed omschrijft. Voor marketing doeleinden."
 
-#: models.py:2000
+#: models.py:2009
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#10\">formatting rules</a>."
@@ -2533,7 +2533,7 @@ msgstr ""
 "neerschrijven. Je kan enkele <a href=\"/faq/#10\">formatteringsregels</a> "
 "gebruiken."
 
-#: models.py:2019
+#: models.py:2028
 msgid "Commercial gear items"
 msgstr "Commercieel materiaal"
 
@@ -2955,12 +2955,12 @@ msgstr ""
 msgid "Come back soon!"
 msgstr "Kom spoedig terug!"
 
-#: templates/activities.html:8 templates/index.html:211
+#: templates/activities.html:8 templates/index.html:247
 msgid "Activity stream"
 msgstr "Stroom van activiteiten"
 
-#: templates/activities.html:13 templates/index.html:217
-#: templates/index.html.py:277
+#: templates/activities.html:13 templates/index.html:253
+#: templates/index.html.py:313
 msgid "There is no activity yet."
 msgstr "Tot nu toe is er nog geen activiteit geregistreerd."
 
@@ -3034,7 +3034,7 @@ msgstr "Site links"
 msgid "Community"
 msgstr "Gemeenschap"
 
-#: templates/base.html:107 templates/base.html.py:663 templates/index.html:248
+#: templates/base.html:107 templates/base.html.py:663 templates/index.html:284
 #: templates/maintenance_base.html:92 templates/maintenance_base.html:546
 #: templates/site_base.html:107 templates/site_base.html.py:663
 msgid "Blog"
@@ -3166,7 +3166,7 @@ msgstr "Kennisgevingen"
 msgid "AstroBin Index"
 msgstr "AstroBin index"
 
-#: templates/base.html:391 templates/index.html:135
+#: templates/base.html:391 templates/index.html:171
 #: templates/maintenance_base.html:252 templates/site_base.html:391
 #: templates/upload.html:6 templates/upload.html.py:18
 #: templates/upload.html:34 templates/avatar/change.html:38
@@ -3179,7 +3179,7 @@ msgstr "Uploaden"
 msgid "My places"
 msgstr "Mijn paginas"
 
-#: templates/base.html:400 templates/index.html:233
+#: templates/base.html:400 templates/index.html:269
 #: templates/maintenance_base.html:261 templates/site_base.html:400
 #: templates/wall.html:149 templates/user/profile-subnav.html:20
 msgid "Commercial products"
@@ -3403,8 +3403,8 @@ msgstr "Geen bestand geselecteerd"
 msgid "Choose file"
 msgstr "Kies bestand"
 
-#: templates/comments.html:53 templates/index.html:296
-#: templates/index.html.py:297 templates/leaderboard.html:78
+#: templates/comments.html:53 templates/index.html:332
+#: templates/index.html.py:333 templates/leaderboard.html:78
 #: templates/reviews.html:59 templates/image/detail.html:268
 #: templates/image/detail.html.py:664 templates/image/detail.html:1217
 #: templates/image/detail.html.py:1231 templates/image/detail.html:1232
@@ -3421,8 +3421,8 @@ msgstr "Kies bestand"
 msgid "Follow"
 msgstr "Volgen"
 
-#: templates/comments.html:53 templates/index.html:296
-#: templates/index.html.py:297 templates/leaderboard.html:78
+#: templates/comments.html:53 templates/index.html:332
+#: templates/index.html.py:333 templates/leaderboard.html:78
 #: templates/reviews.html:59 templates/image/detail.html:1231
 #: templates/image/detail.html.py:1232 templates/image/detail.html:1233
 #: templates/popover/gear_accessory.html:22
@@ -4295,38 +4295,43 @@ msgstr ""
 msgid "Image of the day"
 msgstr "Foto van de dag"
 
-#: templates/index.html:115 templates/inclusion_tags/image_list.html:57
+#: templates/index.html:115 templates/index.html.py:137
+#: templates/index.html:152 templates/inclusion_tags/image_list.html:57
 #: templates/inclusion_tags/image_list.html:77
 #: templates/inclusion_tags/messier_list.html:20
 #: templates/inclusion_tags/search_image_list.html:226
 msgid "by"
 msgstr "door"
 
-#: templates/index.html:148
+#: templates/index.html:132
+msgid "Runners-up"
+msgstr ""
+
+#: templates/index.html:184
 msgid "Recent"
 msgstr "Recent"
 
-#: templates/index.html:156 templates/index.html.py:222
-#: templates/index.html:241 templates/index.html.py:283
+#: templates/index.html:192 templates/index.html.py:258
+#: templates/index.html:277 templates/index.html.py:319
 #: templates/gear/page.html:59
 msgid "(view more)"
 msgstr "(meer zien)"
 
-#: templates/index.html:163
+#: templates/index.html:199
 msgid "Followed"
 msgstr "Gevolgd"
 
-#: templates/index.html:177 templates/index.html.py:178
-#: templates/index.html:179 templates/index.html.py:180
-#: templates/index.html:181
+#: templates/index.html:213 templates/index.html.py:214
+#: templates/index.html:215 templates/index.html.py:216
+#: templates/index.html:217
 msgid "Recently voted 5 stars"
 msgstr "Onlangs bekroond met 5 sterren"
 
-#: templates/index.html:196
+#: templates/index.html:232
 msgid "Recently favorited"
 msgstr "Onlangs toegevoegd als favoriet"
 
-#: templates/index.html:273 templates/activity/action.html:30
+#: templates/index.html:309 templates/activity/action.html:30
 msgid "ago"
 msgstr "geleden"
 
