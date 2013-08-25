@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-24 06:30-0500\n"
+"POT-Creation-Date: 2013-08-24 13:24-0500\n"
 "PO-Revision-Date: 2012-12-29 19:10+0100\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1025,7 +1025,7 @@ msgstr ""
 "Όπου είναι δυνατόν χρησιμοποιήστε ονόματα καταλόγου (πχ. Μ101, ή NGC224, ή "
 "IC1370)."
 
-#: forms.py:73 models.py:1910 models.py:1992 templates/comments.html:33
+#: forms.py:73 models.py:1919 models.py:2001 templates/comments.html:33
 #: templates/reviews.html:44 templates/gear/page.html:196
 #: templates/image/detail.html:388
 msgid "Link"
@@ -1960,7 +1960,7 @@ msgstr ""
 "Σύρετε αντικείμενα από την δεξιά πλευρά, στην αριστερή ή κάντε κλικ στο "
 "σύμβολο του συν."
 
-#: models.py:751 models.py:1780 models.py:1999 templates/gear/page.html:46
+#: models.py:751 models.py:1780 models.py:2008 templates/gear/page.html:46
 #: templates/image/detail.html:539
 msgid "Description"
 msgstr "Περιγραφή"
@@ -2032,7 +2032,7 @@ msgstr "(χωρίς τίτλο)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Παρακαλώ χρησιμοποιήστε την εξής μορφή: εεεε-μμ-ηη (έτος-μήνας-ημέρα)"
 
-#: models.py:1130 models.py:1336 models.py:1975 templates/user/votes.html:15
+#: models.py:1130 models.py:1336 models.py:1984 templates/user/votes.html:15
 msgid "Image"
 msgstr "Εικόνα"
 
@@ -2434,65 +2434,65 @@ msgstr ""
 "Παρακαλώ εξηγήστε τον σκοπό της εφαρμογής σας καθώς και πως πρόκειται να "
 "χρησιμοποιήσετε το ΑΡΙ."
 
-#: models.py:1887
+#: models.py:1896
 msgid "AUD - Australian dollars"
 msgstr "AUD - Αυστραλιανά δολάρια"
 
-#: models.py:1888
+#: models.py:1897
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Καναδικά δολάρια"
 
-#: models.py:1889
+#: models.py:1898
 msgid "CHF - Swiss francs"
 msgstr "CHF - Ελβετικά φράγκα"
 
-#: models.py:1890
+#: models.py:1899
 msgid "EUR - Euros"
 msgstr "EUR - Ευρώ"
 
-#: models.py:1891
+#: models.py:1900
 msgid "GPB - Pound stelings"
 msgstr "GPB - Αγγλική λίρα"
 
-#: models.py:1892
+#: models.py:1901
 msgid "PLN - Polish zloty"
 msgstr "PLN - Πολωνικό ζλότυ"
 
-#: models.py:1893
+#: models.py:1902
 msgid "SEK - Swedish krona"
 msgstr "SEK - Κορώνα Σουηδίας"
 
-#: models.py:1894
+#: models.py:1903
 msgid "USD - American dollars"
 msgstr "USD - Αμερικανικό δολάριο"
 
-#: models.py:1900 models.py:1950
+#: models.py:1909 models.py:1959
 msgid "Producer"
 msgstr "Παραγωγός"
 
-#: models.py:1911 models.py:1993
+#: models.py:1920 models.py:2002
 msgid "The link to this product's page on your website."
 msgstr ""
 "Ο σύνδεσμος για την σελίδα αυτού του προϊόντος που βρίσκετε στην ιστοσελίδα "
 "σας."
 
-#: models.py:1919
+#: models.py:1928
 msgid "Price"
 msgstr "Τιμή"
 
-#: models.py:1927
+#: models.py:1936
 msgid "Currency"
 msgstr "Νόμισμα"
 
-#: models.py:1943
+#: models.py:1952
 msgid "Retailed gear items"
 msgstr "Αντικείμενα εξοπλισμού λιανικής πώλησης"
 
-#: models.py:1959
+#: models.py:1968
 msgid "Proper make"
 msgstr "Σωστό όνομα μάρκας"
 
-#: models.py:1960
+#: models.py:1969
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2502,11 +2502,11 @@ msgstr ""
 "αναγράφεται σωστά από τους χρήστες. Γράψτε εδώ το σωστό όνομα κατασκευής/"
 "μάρκας/παραγωγού/προγραμματιστή."
 
-#: models.py:1967
+#: models.py:1976
 msgid "Proper name"
 msgstr "Σωστό όνομα"
 
-#: models.py:1968
+#: models.py:1977
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2519,7 +2519,7 @@ msgstr ""
 "σε ομάδα όσο πιο πολλά αντικείμενα μπορείτε, έτσι προσπαθήστε να "
 "χρησιμοποιήστε μια γενική έκδοση για το όνομα του προϊόντος σας."
 
-#: models.py:1976
+#: models.py:1985
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2531,18 +2531,18 @@ msgstr ""
 "\"Εξοπλισμό\" και μετά επιλέξτε το από την λίστα. Αν ανεβάσετε αρκετές "
 "εκδόσεις, θα εμφανιστούν επίσης στην εμπορική σελίδα."
 
-#: models.py:1984
+#: models.py:1993
 msgid "Tagline"
 msgstr "Σλόγκαν"
 
-#: models.py:1985
+#: models.py:1994
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "Μια αξιοσημείωτη φράση η οποία θα περιγράφει το προϊόν, για διαφημιστικούς "
 "λόγους."
 
-#: models.py:2000
+#: models.py:2009
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#10\">formatting rules</a>."
@@ -2550,7 +2550,7 @@ msgstr ""
 "Εδώ μπορείτε να γράψετε την πλήρη εμπορική περιγραφή του προϊόντος. Μπορείτε "
 "να χρησιμοποιήσετε μερικούς <a href=\"/faq/#10\">κανόνες μορφοποίησης</a>."
 
-#: models.py:2019
+#: models.py:2028
 msgid "Commercial gear items"
 msgstr "Εμπορικά αντικείμενα εξοπλισμού"
 
@@ -2970,12 +2970,12 @@ msgstr ""
 msgid "Come back soon!"
 msgstr "Να επιστρέψετε σύντομα!"
 
-#: templates/activities.html:8 templates/index.html:211
+#: templates/activities.html:8 templates/index.html:247
 msgid "Activity stream"
 msgstr "Δραστηριότητα"
 
-#: templates/activities.html:13 templates/index.html:217
-#: templates/index.html.py:277
+#: templates/activities.html:13 templates/index.html:253
+#: templates/index.html.py:313
 msgid "There is no activity yet."
 msgstr "Δεν υπάρχει δραστηριότητα ακόμα."
 
@@ -3048,7 +3048,7 @@ msgstr "Σύνδεσμοι ιστότοπου"
 msgid "Community"
 msgstr "Κοινότητα"
 
-#: templates/base.html:107 templates/base.html.py:663 templates/index.html:248
+#: templates/base.html:107 templates/base.html.py:663 templates/index.html:284
 #: templates/maintenance_base.html:92 templates/maintenance_base.html:546
 #: templates/site_base.html:107 templates/site_base.html.py:663
 msgid "Blog"
@@ -3180,7 +3180,7 @@ msgstr "Ειδοποιήσεις"
 msgid "AstroBin Index"
 msgstr "Δείκτης AstroBin"
 
-#: templates/base.html:391 templates/index.html:135
+#: templates/base.html:391 templates/index.html:171
 #: templates/maintenance_base.html:252 templates/site_base.html:391
 #: templates/upload.html:6 templates/upload.html.py:18
 #: templates/upload.html:34 templates/avatar/change.html:38
@@ -3193,7 +3193,7 @@ msgstr "Ανέβασμα εικόνας"
 msgid "My places"
 msgstr "Τα μέρη μου"
 
-#: templates/base.html:400 templates/index.html:233
+#: templates/base.html:400 templates/index.html:269
 #: templates/maintenance_base.html:261 templates/site_base.html:400
 #: templates/wall.html:149 templates/user/profile-subnav.html:20
 msgid "Commercial products"
@@ -3418,8 +3418,8 @@ msgstr "Δεν επιλέχθηκε αρχείο"
 msgid "Choose file"
 msgstr "Επιλέξτε αρχείο"
 
-#: templates/comments.html:53 templates/index.html:296
-#: templates/index.html.py:297 templates/leaderboard.html:78
+#: templates/comments.html:53 templates/index.html:332
+#: templates/index.html.py:333 templates/leaderboard.html:78
 #: templates/reviews.html:59 templates/image/detail.html:268
 #: templates/image/detail.html.py:664 templates/image/detail.html:1217
 #: templates/image/detail.html.py:1231 templates/image/detail.html:1232
@@ -3436,8 +3436,8 @@ msgstr "Επιλέξτε αρχείο"
 msgid "Follow"
 msgstr "Ακολούθησε"
 
-#: templates/comments.html:53 templates/index.html:296
-#: templates/index.html.py:297 templates/leaderboard.html:78
+#: templates/comments.html:53 templates/index.html:332
+#: templates/index.html.py:333 templates/leaderboard.html:78
 #: templates/reviews.html:59 templates/image/detail.html:1231
 #: templates/image/detail.html.py:1232 templates/image/detail.html:1233
 #: templates/popover/gear_accessory.html:22
@@ -4314,38 +4314,43 @@ msgstr ""
 msgid "Image of the day"
 msgstr "Εικόνα της ημέρας"
 
-#: templates/index.html:115 templates/inclusion_tags/image_list.html:57
+#: templates/index.html:115 templates/index.html.py:137
+#: templates/index.html:152 templates/inclusion_tags/image_list.html:57
 #: templates/inclusion_tags/image_list.html:77
 #: templates/inclusion_tags/messier_list.html:20
 #: templates/inclusion_tags/search_image_list.html:226
 msgid "by"
 msgstr "από"
 
-#: templates/index.html:148
+#: templates/index.html:132
+msgid "Runners-up"
+msgstr ""
+
+#: templates/index.html:184
 msgid "Recent"
 msgstr "Πρόσφατες"
 
-#: templates/index.html:156 templates/index.html.py:222
-#: templates/index.html:241 templates/index.html.py:283
+#: templates/index.html:192 templates/index.html.py:258
+#: templates/index.html:277 templates/index.html.py:319
 #: templates/gear/page.html:59
 msgid "(view more)"
 msgstr "(δείτε περισσότερα)"
 
-#: templates/index.html:163
+#: templates/index.html:199
 msgid "Followed"
 msgstr "Ακολουθείται"
 
-#: templates/index.html:177 templates/index.html.py:178
-#: templates/index.html:179 templates/index.html.py:180
-#: templates/index.html:181
+#: templates/index.html:213 templates/index.html.py:214
+#: templates/index.html:215 templates/index.html.py:216
+#: templates/index.html:217
 msgid "Recently voted 5 stars"
 msgstr "Πρόσφατα ψηφισμένα με 5 αστέρια"
 
-#: templates/index.html:196
+#: templates/index.html:232
 msgid "Recently favorited"
 msgstr "Πρόσφατα αγαπημένα"
 
-#: templates/index.html:273 templates/activity/action.html:30
+#: templates/index.html:309 templates/activity/action.html:30
 msgid "ago"
 msgstr "πριν"
 
