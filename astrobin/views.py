@@ -3139,39 +3139,6 @@ def set_language(request, lang):
 
 
 @require_GET
-def nightly(request):
-    month_offset = int(request.GET.get('month_offset', 0))
-    start = monthdelta(datetime.datetime.today().date(), -month_offset)
-    sqs = None
-    daily = []
-    total = 0
-
-    for date in (start - datetime.timedelta(days = x) for x in range(1, start.day)):
-        k_dict = {date: []}
-        daily.append(k_dict)
-        for i in Image.objects.filter(acquisition__date = date, is_wip = False, is_stored = True).distinct():
-            k_dict[date].append(i)
-            total += 1
-
-    return object_list(
-        request,
-        queryset = Image.objects.none(), # Cheating at object_list
-        paginate_by = 1,
-        template_name = 'nightly.html',
-        extra_context = {
-            'thumbnail_size': settings.THUMBNAIL_SIZE,
-            'daily': daily,
-            'total': total,
-            'month_offset': month_offset,
-            'previous_month': month_offset - 1,
-            'next_month': month_offset + 1,
-            'current_month_label': start,
-            'previous_month_label': monthdelta(start, 1),
-            'next_month_label': monthdelta(start, -1)
-        })
-
-
-@require_GET
 @login_required
 @never_cache
 def get_edit_gear_form(request, id):
