@@ -1108,7 +1108,7 @@ class ImageRevision(models.Model):
     def get_absolute_url(self):
         return '/%i/%s/' % (self.image.id, self.label)
 
-    def path(self, resized = False, inverted = False):
+    def path(self, resized = False, inverted = False, hd = False):
         suffix = ''
 
         if resized:
