@@ -632,9 +632,11 @@
                     </a>
                 </div>
                 <div class="username">
-                    <a   rel="tooltip"
-                         title="{{image.get_author_profile}}"
-                         href="{% url user_page image.user %}">{{image.get_author_profile|truncatechars:13}}</a>
+                    <a
+                        class="username-link"
+                        rel="tooltip"
+                        title="{{image.get_author_profile}}"
+                        href="{% url user_page image.user %}">{{image.get_author_profile|truncatechars:20}}</a>
 
                     <div class="data">
                         <img class="license"
