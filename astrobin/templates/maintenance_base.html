@@ -104,13 +104,6 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{% url popular %}">
-                                            <i class="icon-fire"></i>
-                                            {% trans "Popular subjects" %}
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
                                         <a href="{% url wall %}">
                                             <i class="icon-th"></i>
                                             {% trans "The Big Wall" %}
@@ -128,12 +121,22 @@
                                             {% trans "Messier marathon" %}
                                         </a>
                                     </li>
+
+                                    <li class="divider"></li>
+
                                     <li>
                                         <a href="{% url fits %}">
                                             <i class="icon-file"></i>
                                             {% trans "TIFF/FITS" %}
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{% url rawdata.publicdatapool_list %}">
+                                            <i class="icon-book"></i>
+                                            {% trans "Public data pools" %}
+                                        </a>
+                                    </li>
+
 
                                     <li class="divider"></li>
                                     <li>
