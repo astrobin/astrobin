@@ -443,8 +443,8 @@ def get_image_url(image):
 
 
 @register.simple_tag
-def get_image_path(image, resized = False, inverted = False):
-    return image.path(resized, inverted)
+def get_image_path(image, resized = False, inverted = False, hd = False):
+    return image.path(resized, inverted, hd)
 
 
 @register.filter
