@@ -2762,18 +2762,54 @@ form.avatar-change label.control-label {display: none;}
             opacity: 1;
         }
     }
+}
 
+.iotd-archive-image {
+    padding-top: @spacer-large;
+    position: relative;
+
+    img {
+        .rounded-corners(3px);
+        .box-shadow;
+    }
+
+    .data {
+        position: absolute;
+        top: @spacer-xxlarge;
+        left: @spacer-large;
+        padding: @spacer-small @spacer-medium;
+        background-color: #111;
+        background-color: rgba(0,0,0,0.5);
+        .rounded-corners;
+
+        h3 {
+            font-size: 1em;
+            line-height: 1.2em;
+            margin: 0;
+            .text-shadow;
+        }
+
+        p {
+            margin: 0;
+            color: #bbb;
+            font-style: italic;
+            .text-shadow;
+        }
+    }
+}
+
+.image-of-the-day, .iotd-archive-image {
     .runner-ups {
         position: absolute;
         left: -8px;
         bottom: 4px;
 
         h3 {
-            font-size: 1.2em;
+            font-size: 1em;
             line-height: 1em;
             .text-shadow;
             font-style: italic;
-            color: #dfdfdf;
+            color: #ccc;
         }
 
         .runner-up {
@@ -2787,6 +2823,11 @@ form.avatar-change label.control-label {display: none;}
             }
         }
     }
+}
+
+.iotd-archive-image .runner-ups {
+    bottom: @spacer-large;
+    left: @spacer-xlarge;
 }
 
 .btn-upload {
