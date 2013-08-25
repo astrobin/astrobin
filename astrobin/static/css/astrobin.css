@@ -2562,29 +2562,72 @@ form.avatar-change label.control-label {
 .image-of-the-day:hover .info {
   opacity: 1;
 }
-.image-of-the-day .runner-ups {
+.iotd-archive-image {
+  padding-top: 12px;
+  position: relative;
+}
+.iotd-archive-image img {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+}
+.iotd-archive-image .data {
+  position: absolute;
+  top: 28px;
+  left: 12px;
+  padding: 4px 8px;
+  background-color: #111;
+  background-color: rgba(0, 0, 0, 0.5);
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.iotd-archive-image .data h3 {
+  font-size: 1em;
+  line-height: 1.2em;
+  margin: 0;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+}
+.iotd-archive-image .data p {
+  margin: 0;
+  color: #bbb;
+  font-style: italic;
+  text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
+}
+.image-of-the-day .runner-ups,
+.iotd-archive-image .runner-ups {
   position: absolute;
   left: -8px;
   bottom: 4px;
 }
-.image-of-the-day .runner-ups h3 {
-  font-size: 1.2em;
+.image-of-the-day .runner-ups h3,
+.iotd-archive-image .runner-ups h3 {
+  font-size: 1em;
   line-height: 1em;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
   font-style: italic;
-  color: #dfdfdf;
+  color: #ccc;
 }
-.image-of-the-day .runner-ups .runner-up {
+.image-of-the-day .runner-ups .runner-up,
+.iotd-archive-image .runner-ups .runner-up {
   float: left;
   margin-right: 8px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
 }
-.image-of-the-day .runner-ups .runner-up img {
+.image-of-the-day .runner-ups .runner-up img,
+.iotd-archive-image .runner-ups .runner-up img {
   /* IE hack... */
 
   height: 45px;
+}
+.iotd-archive-image .runner-ups {
+  bottom: 12px;
+  left: 16px;
 }
 .btn-upload {
   padding: 34px 24px;
