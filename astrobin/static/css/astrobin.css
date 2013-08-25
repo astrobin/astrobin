@@ -2600,8 +2600,8 @@ form.avatar-change label.control-label {
 .image-of-the-day .runner-ups,
 .iotd-archive-image .runner-ups {
   position: absolute;
-  left: -8px;
-  bottom: 4px;
+  bottom: 12px;
+  left: 16px;
 }
 .image-of-the-day .runner-ups h3,
 .iotd-archive-image .runner-ups h3 {
@@ -2624,10 +2624,6 @@ form.avatar-change label.control-label {
   /* IE hack... */
 
   height: 45px;
-}
-.iotd-archive-image .runner-ups {
-  bottom: 12px;
-  left: 16px;
 }
 .btn-upload {
   padding: 34px 24px;
