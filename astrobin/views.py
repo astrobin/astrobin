@@ -451,6 +451,21 @@ def popular(request):
 
 
 @require_GET
+def iotd_archive(request):
+    """Archive of 'Images of the day'"""
+
+    queryset = ImageOfTheDay.objects.all()
+
+    return object_list(
+        request,
+        queryset = queryset,
+        template_name = 'iotd_archive.html',
+        template_object_name = 'iotd',
+        paginate_by = 30,
+    )
+
+
+@require_GET
 def messier(request):
     """Messier marathon"""
 
