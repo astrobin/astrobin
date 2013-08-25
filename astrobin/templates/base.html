@@ -119,22 +119,15 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{% url popular %}">
-                                            <i class="icon-fire"></i>
-                                            {% trans "Popular subjects" %}
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
                                         <a href="{% url wall %}">
                                             <i class="icon-th"></i>
                                             {% trans "The Big Wall" %}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{% url nightly %}">
-                                            <i class="icon-time"></i>
-                                            {% trans "Night after night" %}
+                                        <a href="{% url iotd_archive %}">
+                                            <i class="icon-trophy"></i>
+                                            {% trans "Image of the day" %}
                                         </a>
                                     </li>
                                     <li>
@@ -143,6 +136,9 @@
                                             {% trans "Messier marathon" %}
                                         </a>
                                     </li>
+
+                                    <li class="divider"></li>
+
                                     <li>
                                         <a href="{% url fits %}">
                                             <i class="icon-file"></i>
