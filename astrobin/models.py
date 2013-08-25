@@ -975,14 +975,12 @@ class Image(models.Model):
         return '/%i' % self.id
 
     def path(self, resized = False, inverted = False, hd = False):
-        print hd
-
         suffix = ''
 
         if resized:
             suffix = '_resized'
 
-        if hd:
+        if hd and self.id >= 53964:
             suffix = '_hd'
 
         if inverted:
@@ -1114,7 +1112,7 @@ class ImageRevision(models.Model):
         if resized:
             suffix = '_resized'
 
-        if hd:
+        if hd and self.image.id >= 53964:
             suffix = '_hd'
 
         if inverted:
