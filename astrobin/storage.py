@@ -143,6 +143,18 @@ def store_image_in_backend(path, image_model):
             # I've seen this fail sometimes with IOError: image is truncated.
             pass
 
+        # Resize to HD size
+        (w, h) = image.size
+        (w, h) = scale_dimensions(w, h, settings.HD_IMAGE_SIZE)
+        hdImage = image.resize((w, h), PILImage.ANTIALIAS)
+
+        # Then save to bucket
+        hdFile = StringIO.StringIO()
+        hdImage = fix_image_mode(hdImage)
+        hdImage.save(hdFile, format_map[content_type][0], quality=100)
+        save_to_bucket(uid + '_hd' + format_map[content_type][1],
+                       hdFile.getvalue())
+
         # Then resize to the display image
         (w, h) = image.size
         (w, h) = scale_dimensions(w, h, settings.RESIZED_IMAGE_SIZE)
@@ -168,6 +180,17 @@ def store_image_in_backend(path, image_model):
         inverted.save(invertedFile, format_map[content_type][0])
         save_to_bucket(uid + '_inverted' + format_map[content_type][1],
                        invertedFile.getvalue())
+
+        grayscale = ImageOps.grayscale(hdImage)
+        inverted = ImageOps.invert(grayscale)
+        enhancer = ImageEnhance.Contrast(inverted)
+        inverted = enhancer.enhance(2.5)
+        invertedFile = StringIO.StringIO()
+        inverted = inverted.convert("RGB")
+        inverted.save(invertedFile, format_map[content_type][0])
+        save_to_bucket(uid + '_hd_inverted' + format_map[content_type][1],
+                       invertedFile.getvalue())
+
         grayscale = ImageOps.grayscale(resizedImage)
         inverted = ImageOps.invert(grayscale)
         enhancer = ImageEnhance.Contrast(inverted)

@@ -112,13 +112,23 @@
                      {% with request.GET.mod as mod %}
                          <a href="{% url image_detail image.image.id image.label %}{% query_string "mod=mod" "" %}">
                             {% ifequal mod 'inverted' %}
-                                <img {% if real %}class="real"{% endif %}
-                                     src="{% get_image_path image 0 1 %}"
-                                     alt="{{image.title|escape}}"/>
+                                {% if real %}
+                                    <img class="real"
+                                         src="{% get_image_path image 0 1 %}"
+                                         alt="{{image.title|escape}}"/>
+                                {% else %}
+                                    <img src="{% get_image_path image 0 1 1 %}"
+                                         alt="{{image.title|escape}}"/>
+                                {% endif %}
                             {% else %}
-                                <img {% if real %}class="real"{% endif %}
-                                     src="{% get_image_path image 0 0 %}"
-                                     alt="{{image.title|escape}}"/>
+                                {% if real %}
+                                    <img class="real"
+                                         src="{% get_image_path image 0 0 %}"
+                                         alt="{{image.title|escape}}"/>
+                                {% else %}
+                                    <img src="{% get_image_path image 0 0 1 %}"
+                                         alt="{{image.title|escape}}"/>
+                                {% endif %}
                             {% endifequal %}
                          </a>
                      {% endwith %}
@@ -127,13 +137,23 @@
                 {% with request.GET.mod as mod %}
                     <a href="{% url image_detail image.id 0 %}{% query_string "mod=mod" "" %}">
                         {% ifequal mod 'inverted' %}
-                            <img {% if real %}class="real"{% endif %}
-                                 src="{% get_image_path image 0 1 %}"
-                                 alt="{{image.title|escape}}"/>
+                            {% if real %}
+                                <img class="real"
+                                     src="{% get_image_path image 0 1 %}"
+                                     alt="{{image.title|escape}}"/>
+                            {% else %}
+                                <img src="{% get_image_path image 0 1 1 %}"
+                                     alt="{{image.title|escape}}"/>
+                            {% endif %}
                         {% else %}
-                            <img {% if real %}class="real"{% endif %}
-                                 src="{% get_image_path image 0 0 %}"
-                                 alt="{{image.title|escape}}"/>
+                            {% if real %}
+                                <img class="real"
+                                     src="{% get_image_path image 0 0 %}"
+                                     alt="{{image.title|escape}}"/>
+                            {% else %}
+                                <img src="{% get_image_path image 0 0 1 %}"
+                                     alt="{{image.title|escape}}"/>
+                            {% endif %}
                         {% endifequal %}
                      </a>
                 {% endwith %}
