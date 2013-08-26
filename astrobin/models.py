@@ -1009,7 +1009,8 @@ class Image(models.Model):
             return ImageOfTheDay.objects.filter(image = self)[0].date
 
     def astrobinIndex(self):
-        ratings = self.rating.get_ratings()
+        ratings = self.rating.get_ratings().filter(
+            user__userprofile__suspended_from_voting = False)
         votes = len(ratings)
         from votes import index
         return index([x.score for x in ratings])

@@ -533,8 +533,6 @@ def image_detail(request, id, r):
 
     ratings = image.get_ratings()
     votes = len(ratings)
-    from votes import index
-    index = index([x.score for x in image.get_ratings()])
 
     gear_list = (
         ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
@@ -729,7 +727,6 @@ def image_detail(request, id, r):
     response_dict = {'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
                      'resized_size': resized_size,
                      'already_voted': already_voted,
-                     'index': "%.3f" % index,
                      'votes_number': votes,
                      'allow_rating': image.allow_rating and not image.user.userprofile_set.all()[0].optout_rating,
                      'comments_number': NestedComment.objects.filter(
