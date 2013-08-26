@@ -1236,13 +1236,17 @@ $(document).ready(function() {
 
     astrobin_image_detail.init(
         {{image.id}},
+
         {% if is_revision %}{{revision_image.id}}{% else %}0{% endif %},
+
         "{{image.user.username}}",
+
         {% if votes_number > 0 %}
-        "{{index}}",
+        "{{image.astrobinIndex}}",
         {% else %}
         "0",
         {% endif %}
+
         {
             rating: {
                 {% if not request.user.is_authenticated %}
