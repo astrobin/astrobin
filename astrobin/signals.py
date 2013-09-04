@@ -49,7 +49,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                 )
 
             verb = "commented on image"
-            act.send(instance.author, verb = verb, target = obj)
+            act.send(instance.author, verb = verb, action_object = instance, target = obj)
 
         elif model_class == Gear:
             if not instance.parent:

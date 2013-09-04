@@ -22,7 +22,6 @@ def notices_count(request):
     response = {}
     if request.user.is_authenticated():
         response['notifications_count'] = notifications.Notice.objects.filter(Q(recipient = request.user) & Q(unseen = True)).count()
-        response['requests_count'] = Request.objects.filter(Q(to_user = request.user) & Q(fulfilled = False)).count()
 
     return response
 

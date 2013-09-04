@@ -154,15 +154,7 @@ def jsonDumpSubjects(all):
 def index(request):
     """Main page"""
 
-    recent_thumbnails_n = 16
-    thumbnails_n = 16
-    products_n = 4
-    actions_n = 16
-    entries_n = 9
-
-    from zinnia.managers import entries_published
     response_dict = {
-        'small_size': settings.SMALL_THUMBNAIL_SIZE,
         'registration_form': RegistrationForm(),
     }
 
@@ -170,92 +162,31 @@ def index(request):
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
 
-        actions_cache_key = 'templates.index.actions'
-        if cache.has_key(actions_cache_key):
-            response_dict['global_actions'] = cache.get(actions_cache_key)
-        else:
-            non_wip_image_ids = [str(x) for x in Image.objects.filter(is_wip = False).order_by('-uploaded')[:actions_n].values_list('id', flat = True)]
+        iotd = ImageOfTheDay.objects.all()[0]
+        gear_list = (
+            ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
+            ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
+            ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
+            ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
+            ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
+            ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
+            ('Software'          , iotd.image.software.all(), 'software'),
+            ('Filters'           , iotd.image.filters.all(), 'filters'),
+            ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
+        )
 
-            response_dict['global_actions'] = Action.objects.exclude(
-                Q(target_content_type = Image) &
-                Q(target_object_id__in = non_wip_image_ids))[:actions_n]
+        response_dict['image_of_the_day'] = iotd
+        response_dict['gear_list'] = gear_list
 
-            cache.set(actions_cache_key, response_dict['global_actions'], 600)
-
-        response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n] #exclude(authors__username__in = 'astrobin')
-
-        response_dict['recent_from_followees'] = \
-            Image.objects.filter(
-                is_stored = True,
-                is_wip = False,
-                user__username__in = profile.follows.all().values_list(
-                    'user__username', flat="True")
-            )[:thumbnails_n]
-
-        if response_dict['recent_from_followees'].count() == 0:
-            recent_thumbnails_n = 32
-
-        faves_cache_key = 'templates.index.recently_favorited'
-        if cache.has_key(faves_cache_key):
-            response_dict['recently_favorited'] = cache.get(faves_cache_key)
-        else:
-            response_dict['recently_favorited'] = \
-                Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
-                             .exclude(last_favorited = None) \
-                             .order_by('-last_favorited')[:thumbnails_n]
-            cache.set(faves_cache_key, response_dict['recently_favorited'], 600)
-
-        fives_cache_key = 'templates.index.recently_five_starred'
-        if cache.has_key(fives_cache_key):
-            response_dict['recently_five_starred'] = cache.get(fives_cache_key)
-        else:
-            recent_fives_list = []
-            l = 0
-            if Image.objects.all().count() > thumbnails_n:
-                while len(recent_fives_list) < thumbnails_n:
-                    recent_fives_qs = \
-                        Image.objects.filter(votes__score = 5) \
-                                     .distinct() \
-                                     .order_by('-votes__date_added')[l:l+thumbnails_n]
-                    for i in recent_fives_qs:
-                        if i not in recent_fives_list:
-                            recent_fives_list.append(i)
-                    l += 1
-                response_dict['recently_five_starred'] = recent_fives_list[:thumbnails_n]
-                cache.set(fives_cache_key, response_dict['recently_five_starred'], 600)
-
-        response_dict['recent_commercial_gear'] = Image.objects\
-            .filter(is_stored = True, is_wip = False)\
-            .exclude(featured_gear = None)\
-            .order_by('-uploaded')[:products_n]
-
-        try:
-            iotd = ImageOfTheDay.objects.all()[0]
-            gear_list = (
-                ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
-                ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
-                ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
-                ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
-                ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
-                ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
-                ('Software'          , iotd.image.software.all(), 'software'),
-                ('Filters'           , iotd.image.filters.all(), 'filters'),
-                ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
-            )
-
-            response_dict['image_of_the_day'] = iotd
-            response_dict['gear_list'] = gear_list
-        except IndexError:
-            pass
+    template = 'index.html'
+    if request.is_ajax():
+        template = 'index_page.html'
 
     return object_list(
         request,
-        queryset = Image.objects
-            .filter(is_stored = True, is_wip = False, featured_gear = None)
-            .order_by('-uploaded'),
-        template_name = 'index.html',
-        template_object_name = 'image',
-        paginate_by = recent_thumbnails_n,
+        queryset = Action.objects.all(),
+        template_name = template,
+        template_object_name = 'global_action',
         extra_context = response_dict)
 
 
@@ -2699,7 +2630,6 @@ def unfollow_subject(request, id):
 @require_GET
 def mark_notifications_seen(request):
     for n in notification.Notice.objects.filter(recipient=request.user):
-        n.is_unseen()
     return ajax_success()
 
 

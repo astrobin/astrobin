@@ -608,7 +608,7 @@ Not advised to edit stuff below this line
   display: inline-block;
   vertical-align: middle;
   zoom: 1;
-  *display: inline;
+  display: inline;
 }
 
 .selector select:focus, .radio input:focus, .checker input:focus, .uploader input:focus {
@@ -2878,8 +2878,8 @@ form.avatar-change label.control-label {display: none;}
 
 .activity-actions, .blog-stream-entries {
     .action, .entry {
-        border-bottom: 1px solid #393939;
         padding: @spacer-medium 0;
+        margin-bottom: @spacer-xxlarge;
         position: relative;
         min-height: 64px;
 
@@ -2889,27 +2889,42 @@ form.avatar-change label.control-label {display: none;}
 
         .avatar {
             float: left;
-            margin-right: @spacer-medium;
-            clear: both;
         }
 
         .content {
-          font-size: 90%;
-          p {
-            font-size: 80%;
-            color: darken(@text-color, 5%);
-            a:link, a:visited {
-              color: darken(@link-color, 5%);
-            }
-          }
-        }
+            font-size: 90%;
+            padding-left: 74px;
 
-        .when {
-            color: darken(@text-color, 40%);
-            font-size: 60%;
-            position: absolute;
-            bottom: -4px;
-            right: 2px;
+            p {
+                color: darken(@text-color, 2%);
+
+                a:link, a:visited {
+                    color: darken(@link-color, 2%);
+                }
+            }
+
+            .object > .comment {
+                margin: 0;
+                padding-top: @spacer-small;
+                padding-left: 0;
+                border: 0;
+
+                a > i.icon-link {
+                    color: lighten(@link-color, 15%);
+                    font-size: 80%;
+                }
+            }
+
+            .object > .image img {
+                .rounded-corners;
+                margin-bottom: @spacer-medium;
+            }
+
+            .when {
+                color: darken(@text-color, 30%);
+                font-size: 75%;
+                font-style: italic;
+            }
         }
     }
 }

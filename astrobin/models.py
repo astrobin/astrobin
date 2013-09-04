@@ -44,6 +44,12 @@ from reviews.models import ReviewedItem
 from actstream import action
 
 
+def image_upload_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return os.path.join('images', filename)
+
+
 LICENSE_CHOICES = (
     (0, _("None (All rights reserved)")),
     (1, _("Attribution-NonCommercial-ShareAlike Creative Commons")),
@@ -772,6 +778,9 @@ class Image(models.Model):
 
     filename = models.CharField(max_length=64, editable=False)
     original_ext = models.CharField(max_length=6, editable=False)
+    image_file = models.ImageField(
+        upload_to = image_upload_path,
+    )
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
@@ -1000,6 +1009,9 @@ class Image(models.Model):
             settings.IMAGES_URL,
             filename)
 
+    def resized_path(self):
+        return self.path(resized = True)
+
     def iotd_date(self):
         try:
             return ImageOfTheDay.objects.get(image = self).date
@@ -1053,6 +1065,12 @@ class Image(models.Model):
         images = Image.objects.filter(filters).distinct()
 
         return images
+
+def image_post_save(sender, instance, created, **kwargs):
+    verb = "uploaded a new image"
+    if created and not instance.is_wip:
+        action.send(instance.user, verb = verb, action_object = instance)
+post_save.connect(image_post_save, sender = Image)
 
 
 class ImageRevision(models.Model):
@@ -1134,10 +1152,13 @@ class ImageRevision(models.Model):
             settings.IMAGES_URL,
             filename)
 
+    def resized_path(self):
+        return self.path(resized = True)
+
 def image_revision_post_save(sender, instance, created, **kwargs):
     verb = "uploaded a new revision of"
     if created and not instance.image.is_wip:
-        action.send(instance.image.user, verb = verb, target = instance)
+        action.send(instance.image.user, verb = verb, action_object = instance)
 post_save.connect(image_revision_post_save, sender = ImageRevision)
 
 

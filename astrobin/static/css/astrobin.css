@@ -478,7 +478,7 @@ Not advised to edit stuff below this line
   display: inline-block;
   vertical-align: middle;
   zoom: 1;
-  *display: inline;
+  display: inline;
 }
 .selector select:focus,
 .radio input:focus,
@@ -2674,8 +2674,8 @@ form.avatar-change label.control-label {
 .blog-stream-entries .action,
 .activity-actions .entry,
 .blog-stream-entries .entry {
-  border-bottom: 1px solid #393939;
   padding: 8px 0;
+  margin-bottom: 28px;
   position: relative;
   min-height: 64px;
 }
@@ -2690,21 +2690,19 @@ form.avatar-change label.control-label {
 .activity-actions .entry .avatar,
 .blog-stream-entries .entry .avatar {
   float: left;
-  margin-right: 8px;
-  clear: both;
 }
 .activity-actions .action .content,
 .blog-stream-entries .action .content,
 .activity-actions .entry .content,
 .blog-stream-entries .entry .content {
   font-size: 90%;
+  padding-left: 74px;
 }
 .activity-actions .action .content p,
 .blog-stream-entries .action .content p,
 .activity-actions .entry .content p,
 .blog-stream-entries .entry .content p {
-  font-size: 80%;
-  color: #ababab;
+  color: #b3b3b3;
 }
 .activity-actions .action .content p a:link,
 .blog-stream-entries .action .content p a:link,
@@ -2714,17 +2712,40 @@ form.avatar-change label.control-label {
 .blog-stream-entries .action .content p a:visited,
 .activity-actions .entry .content p a:visited,
 .blog-stream-entries .entry .content p a:visited {
-  color: #b74329;
+  color: #c4482c;
 }
-.activity-actions .action .when,
-.blog-stream-entries .action .when,
-.activity-actions .entry .when,
-.blog-stream-entries .entry .when {
-  color: #525252;
-  font-size: 60%;
-  position: absolute;
-  bottom: -4px;
-  right: 2px;
+.activity-actions .action .content .object > .comment,
+.blog-stream-entries .action .content .object > .comment,
+.activity-actions .entry .content .object > .comment,
+.blog-stream-entries .entry .content .object > .comment {
+  margin: 0;
+  padding-top: 4px;
+  padding-left: 0;
+  border: 0;
+}
+.activity-actions .action .content .object > .comment a > i.icon-link,
+.blog-stream-entries .action .content .object > .comment a > i.icon-link,
+.activity-actions .entry .content .object > .comment a > i.icon-link,
+.blog-stream-entries .entry .content .object > .comment a > i.icon-link {
+  color: #dd7f69;
+  font-size: 80%;
+}
+.activity-actions .action .content .object > .image img,
+.blog-stream-entries .action .content .object > .image img,
+.activity-actions .entry .content .object > .image img,
+.blog-stream-entries .entry .content .object > .image img {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+.activity-actions .action .content .when,
+.blog-stream-entries .action .content .when,
+.activity-actions .entry .content .when,
+.blog-stream-entries .entry .content .when {
+  color: #6c6c6c;
+  font-size: 75%;
+  font-style: italic;
 }
 .notice-container .unread {
   background-color: #FADDD6;
