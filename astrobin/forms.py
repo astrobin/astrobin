@@ -36,7 +36,7 @@ def uniq_id_tuple(seq):
 
 
 class ImageUploadForm(forms.Form):
-    file = forms.ImageField()
+    image_file = forms.ImageField()
 
 
 class ImageEditPresolveForm(forms.ModelForm):

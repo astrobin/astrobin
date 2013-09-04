@@ -4,7 +4,7 @@ from django.conf import global_settings
 
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
@@ -162,7 +162,7 @@ MIDDLEWARE_CLASSES = [
 
 if DEBUG:
     MIDDLEWARE_CLASSES += [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
+        #'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
@@ -241,6 +241,8 @@ INSTALLED_APPS = (
     'ember',
     'rest_framework',
     'rest_framework.authtoken',
+    'easy_thumbnails',
+    'endless_pagination',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -405,20 +407,24 @@ PIPELINE_JS = {
     },
 }
 
-ACTSTREAM_ACTION_MODELS = (
-    'auth.user',
-    'astrobin.gear',
-    'astrobin.telescope',
-    'astrobin.camera',
-    'astrobin.mount',
-    'astrobin.filter',
-    'astrobin.software',
-    'astrobin.accessory',
-    'astrobin.focalreducer',
-    'astrobin.image',
-    'astrobin.imagerevision',
-    'rawdata.PublicDataPool',
-)
+ACTSTREAM_SETTINGS = {
+    'MODELS': (
+        'auth.user',
+        'astrobin.gear',
+        'astrobin.telescope',
+        'astrobin.camera',
+        'astrobin.mount',
+        'astrobin.filter',
+        'astrobin.software',
+        'astrobin.accessory',
+        'astrobin.focalreducer',
+        'astrobin.image',
+        'astrobin.imagerevision',
+        'rawdata.PublicDataPool',
+        'nested_comments.nestedcomment',
+    ),
+
+}
 
 PAYPAL_TEST = False
 PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene@gmail.com'
@@ -480,4 +486,11 @@ LOGGING = {
             'level': 'DEBUG',
         },
     }
+}
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'target_image': {'size': (360, 64), 'crop': True},
+        'object_image': {'size': (360, 192), 'crop': True},
+    },
 }

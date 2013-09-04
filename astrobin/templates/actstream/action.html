@@ -1,0 +1,89 @@
+{% load i18n avatar_tags thumbnail %}
+
+{% if action.action_object_content_type.model == 'image' and action.action_object.is_wip %}
+    /***/
+{% else %}
+<div class="action">
+    {% if action.actor.get_absolute_url %}
+        <div class="avatar">
+            <a href="{{action.actor.get_absolute_url}}">{% avatar action.actor 64 %}</a>
+        </div>
+    {% endif %}
+
+    <div class="content">
+
+        <div class="object">
+            {% ifequal action.action_object_content_type.model 'imagerevision' %}
+                <div class="image">
+                    <a href="{{action.action_object.get_absolute_url}}">
+                        <img src="{{action.action_object.resized_path|thumbnail_url:'object_image'}}"
+                             alt="{{action.action_object.image.title}}" />
+                    </a>
+                </div>
+            {% else %}
+                {% if action.target_content_type.model == 'image' %}
+                    <div class="image">
+                        <a href="{{action.target.get_absolute_url}}">
+                            <img src="{% thumbnail action.target.resized_path "360x64" crop="center" %}"
+                                 alt="{{action.target.title}}" />
+                        </a>
+                    </div>
+                {% endif %}
+            {% endifequal %}
+
+            {% ifequal action.action_object_content_type.model 'image' %}
+                <div class="image">
+                    <a href="{{action.action_object.get_absolute_url}}">
+
+                        <img src="{% thumbnail action.action_object.resized_path "360x192" crop="center" %}"
+                             alt="{{action.action_object.title}}" />
+                    </a>
+                </div>
+            {% endifequal %}
+
+        </div>
+
+        {% if action.actor.get_absolute_url %}
+            <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax action.actor %}"
+               href="{{action.actor.get_absolute_url}}">{{action.actor.userprofile_set.all.0}}</a>
+        {% else %}
+            <a href="{{action.actor_url}}">{{action.actor.userprofile_set.all.0}}</a>
+        {% endif %}
+
+        {% trans action.verb %}:
+
+        {% if action.target %}
+            {% if action.target.get_absolute_url %}
+                <a href="{{action.target.get_absolute_url}}">{{action.target}}</a>
+            {% else %}
+                <a href="{{action.target_url}}">{{action.target}}</a>
+            {% endif %}
+        {% else %}
+            {% if action.action_object %}
+                {% if action.action_object.get_absolute_url %}
+                    <a href="{{action.action_object.get_absolute_url}}">{{action.action_object}}</a>
+                {% else %}
+                    <a href="{{action.action_object_url}}">{{action.action_object}}</a>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+        {% if action.action_object %}
+            <div class="object">
+                {% ifequal action.action_object_content_type.model 'nestedcomment' %}
+                    <div class="comment">
+                        <p>
+                            {{action.action_object.text}}
+                            <a href="{{action.action_object.get_absolute_url}}"><i class="icon-link"></i></a>
+                        </p>
+                    </div>
+                {% endifequal %}
+            </div>
+        {% endif %}
+
+        <div class="when">
+            {{action.timestamp|timesince}} {% trans "ago" %}
+        </div>
+    </div>
+</div>
+{% endif %}

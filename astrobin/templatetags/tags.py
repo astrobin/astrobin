@@ -58,13 +58,6 @@ def related_images(request, object_list, type):
 def notification_list(request, show_footer = True, limit = 0):
     unseen = notifications.Notice.objects.filter(recipient = request.user, unseen = True)
     seen = notifications.Notice.objects.filter(recipient = request.user, unseen = False)
-    if limit > 0:
-        seen = seen[:limit]
-    return {
-        'unseen': unseen,
-        'seen': seen,
-        'show_footer': show_footer}
-
 
 @register.inclusion_tag('inclusion_tags/request_list.html')
 def request_list(request, show_footer = True):
