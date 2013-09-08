@@ -2698,7 +2698,7 @@ def unfollow_subject(request, id):
 @login_required
 @require_GET
 def mark_notifications_seen(request):
-    for n in notification.Notice.objects.filter(user=request.user):
+    for n in notification.Notice.objects.filter(recipient=request.user):
         n.is_unseen()
     return ajax_success()
 
@@ -2706,12 +2706,12 @@ def mark_notifications_seen(request):
 @login_required
 @require_GET
 def notifications(request):
-    for n in notification.Notice.objects.filter(user=request.user):
+    for n in notification.Notice.objects.filter(recipient=request.user):
         n.is_unseen()
 
     return object_list(
         request,
-        queryset=notification.Notice.objects.filter(user=request.user),
+        queryset=notification.Notice.objects.filter(recipient=request.user),
         template_name='notification/all.html',
         template_object_name='notification')
 
