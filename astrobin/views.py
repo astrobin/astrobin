@@ -211,38 +211,42 @@ def index(request):
         else:
             recent_fives_list = []
             l = 0
-            while len(recent_fives_list) < thumbnails_n:
-                recent_fives_qs = \
-                    Image.objects.filter(votes__score = 5) \
-                                 .distinct() \
-                                 .order_by('-votes__date_added')[l:l+thumbnails_n]
-                for i in recent_fives_qs:
-                    if i not in recent_fives_list:
-                        recent_fives_list.append(i)
-                l += 1
-            response_dict['recently_five_starred'] = recent_fives_list[:thumbnails_n]
-            cache.set(fives_cache_key, response_dict['recently_five_starred'], 600)
+            if Image.objects.all().count() > thumbnails_n:
+                while len(recent_fives_list) < thumbnails_n:
+                    recent_fives_qs = \
+                        Image.objects.filter(votes__score = 5) \
+                                     .distinct() \
+                                     .order_by('-votes__date_added')[l:l+thumbnails_n]
+                    for i in recent_fives_qs:
+                        if i not in recent_fives_list:
+                            recent_fives_list.append(i)
+                    l += 1
+                response_dict['recently_five_starred'] = recent_fives_list[:thumbnails_n]
+                cache.set(fives_cache_key, response_dict['recently_five_starred'], 600)
 
         response_dict['recent_commercial_gear'] = Image.objects\
             .filter(is_stored = True, is_wip = False)\
             .exclude(featured_gear = None)\
             .order_by('-uploaded')[:products_n]
 
-        iotd = ImageOfTheDay.objects.all()[0]
-        gear_list = (
-            ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
-            ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
-            ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
-            ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
-            ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
-            ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
-            ('Software'          , iotd.image.software.all(), 'software'),
-            ('Filters'           , iotd.image.filters.all(), 'filters'),
-            ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
-        )
+        try:
+            iotd = ImageOfTheDay.objects.all()[0]
+            gear_list = (
+                ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
+                ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
+                ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
+                ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
+                ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
+                ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
+                ('Software'          , iotd.image.software.all(), 'software'),
+                ('Filters'           , iotd.image.filters.all(), 'filters'),
+                ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
+            )
 
-        response_dict['image_of_the_day'] = iotd
-        response_dict['gear_list'] = gear_list
+            response_dict['image_of_the_day'] = iotd
+            response_dict['gear_list'] = gear_list
+        except IndexError:
+            pass
 
     return object_list(
         request,
