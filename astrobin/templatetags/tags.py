@@ -56,8 +56,8 @@ def related_images(request, object_list, type):
 
 @register.inclusion_tag('inclusion_tags/notification_list.html')
 def notification_list(request, show_footer = True, limit = 0):
-    unseen = notifications.Notice.objects.filter(user = request.user, unseen = True)
-    seen = notifications.Notice.objects.filter(user = request.user, unseen = False)
+    unseen = notifications.Notice.objects.filter(recipient = request.user, unseen = True)
+    seen = notifications.Notice.objects.filter(recipient = request.user, unseen = False)
     if limit > 0:
         seen = seen[:limit]
     return {
