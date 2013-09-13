@@ -1,0 +1,73 @@
+{% load i18n %}
+{% load tags %}
+
+<div class="image-title">
+    <div class="row">
+        <div class="span8">
+            <h3 class="image-title">{{image.title|escape|default:_("(no title)")}}</h3>
+        </div>
+    </div>
+
+    {% if image.link %}
+    <div class="row">
+        <div class="span8">
+            <strong>{% trans "Link" %}</strong>: <a href="{{image.link}}" target="_blank">{{image.link}}</a>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if image.link_to_fits %}
+    <div class="row">
+        <div class="span8">
+            <strong>{% trans "Link to TIFF/FITS" %}</strong>: <a href="{{image.link_to_fits}}" target="_blank">{{image.link_to_fits}}</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="span8">
+            {% comment %} TODO: hardcoded subject_type values? So ugly! {% endcomment %}
+            {% if image.subject_type == 100 or image.subject_type == 200 %}
+                <strong>{% trans "Contains" %}:</strong>
+                {% if solar_system_main_subject >= 0 %}
+                    <a href="/search/?q=&amp;ssms={{solar_system_main_subject_id}}{% search_form_query %}">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
+                {% endif %}
+                {% for s in subjects_short %}
+                    <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId}}{% search_form_query %}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                {% endfor %}
+                {% if subjects_all|length > subjects_limit %}
+                    <span id="more-subjects">
+                        <span class="reminder">
+                            ,&nbsp;
+                            {% for s in subjects_reminder %}
+                                <a {% if s.oid != -999 %}rel="popover" class="subject-popover" data-load="{% url subject_popover_ajax s.id %}"{% endif %} href="/search/?q={{s.mainId}}{% search_form_query %}">{{s.mainId|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </span>
+                        <span class="more">
+                            &#8230;&nbsp;
+                            <a href="#">
+                                <em>
+                                   {% blocktrans with subjects_reminder|length as number %}and {{number}} more (click to view).{% endblocktrans %}
+                                </em>
+                            </a>
+                        </span>
+                        <span class="hide">
+                            <a href="#">
+                                &nbsp;
+                                <em>
+                                   {% blocktrans %}(hide these subjects){% endblocktrans %}
+                                </em>
+                            </a>
+                        </span>
+                    </span>
+                {% endif %}
+            {% else %}
+                {% if image.subject_type != 600 %}
+                    <strong>{% trans "Subject type" %}:</strong> {{subject_type}}
+                {% endif %}
+            {% endif %}
+        </div> <!-- span8 -->
+    </div>
+</div>
+
+

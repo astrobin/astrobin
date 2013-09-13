@@ -162,21 +162,27 @@ def index(request):
     if request.user.is_authenticated():
         profile = UserProfile.objects.get(user=request.user)
 
-        iotd = ImageOfTheDay.objects.all()[0]
-        gear_list = (
-            ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
-            ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
-            ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
-            ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
-            ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
-            ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
-            ('Software'          , iotd.image.software.all(), 'software'),
-            ('Filters'           , iotd.image.filters.all(), 'filters'),
-            ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
-        )
+        try:
+            iotd = ImageOfTheDay.objects.all()[0]
+            gear_list = (
+                ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
+                ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
+                ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
+                ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
+                ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
+                ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
+                ('Software'          , iotd.image.software.all(), 'software'),
+                ('Filters'           , iotd.image.filters.all(), 'filters'),
+                ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
+            )
 
-        response_dict['image_of_the_day'] = iotd
-        response_dict['gear_list'] = gear_list
+            response_dict['image_of_the_day'] = iotd
+            response_dict['gear_list'] = gear_list
+            response_dict['iotd_runnerup_1_thumb'] = iotd.runnerup_1.thumbnail('runnerup', {'revision_label': 'final'})
+            response_dict['iotd_runnerup_2_thumb'] = iotd.runnerup_2.thumbnail('runnerup', {'revision_label': 'final'})
+        except IndexError:
+            # The is no IOTD
+            pass
 
     template = 'index.html'
     if request.is_ajax():
@@ -418,47 +424,35 @@ def image_detail(request, id, r):
     """ Show details of an image"""
     image = get_object_or_404(Image, pk=id)
 
-    def missing_revision(image):
-        messages.warning(request, _("The revision you are looking for is invalid, or was deleted. This is the original image."))
-        return HttpResponseRedirect(image.get_absolute_url())
+    # TODO: unify duplicated code with image_full
 
-    is_revision = False
-    revision_id = 0
-    revision_image = None
-    revisions = ImageRevision.objects.filter(image=image)
-    is_final = image.is_final
-    is_ready = image.is_stored
+    ################################
+    # REDIRECT TO CORRECT REVISION #
+    ################################
 
-    if 'r' in request.GET:
+    if r is None:
         r = request.GET.get('r')
 
-    if r and r != '0':
-        is_revision = True
+    revisions = ImageRevision.objects.filter(image = image)
+
+    if r is None and not image.is_final:
+        final_revs = revisions.filter(is_final = True)
+        # We should only have one
+        if final_revs:
+            final = revisions.filter(is_final = True)[0]
+            return HttpResponseRedirect('/%i/%s/' % (image.id, final.label))
+
+    if r is None:
         try:
-            revision_id = int(r)
-        except ValueError:
-            try:
-                revision_image = ImageRevision.objects.get(image = image, label = r)
-            except ImageRevision.DoesNotExist:
-                return missing_revision(image)
-            except MultipleObjectsReturned:
-                revision_image = ImageRevision.objects.filter(image = image, label = r)[0]
-        if not revision_image:
-            try:
-                revision_image = ImageRevision.objects.get(image = image, id = revision_id)
-            except ImageRevision.DoesNotExist:
-                return missing_revision(image)
+            r = revisions.filter(is_final = True)[0].label
+        except IndexError:
+            r = 0
 
-        is_final = revision_image.is_final
-        is_ready = revision_image.is_stored
-    elif not r:
-        if not is_final:
-            final_revs = revisions.filter(is_final = True)
-            # We should only have one
-            if final_revs:
-                final = revisions.filter(is_final = True)[0]
-                return HttpResponseRedirect('/%i/%s/' % (image.id, final.label))
 
+
+    #############################
+    # GENERATE ACQUISITION DATA #
+    #############################
     from moon import MoonPhase;
 
     if request.user.is_authenticated():
@@ -614,6 +608,12 @@ def image_detail(request, id, r):
     elif ssa:
         image_type = 'solar_system'
 
+
+
+    ###############
+    # FOLLOW DATA #
+    ###############
+
     follows = False
     profile = None
     if request.user.is_authenticated():
@@ -622,15 +622,13 @@ def image_detail(request, id, r):
         if UserProfile.objects.get(user=image.user) in profile.follows.all():
             follows = True
 
-    uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
-    resized_size = settings.RESIZED_IMAGE_SIZE
-    if is_revision:
-        if revision_image.w > 0 and revision_image.w < resized_size:
-            resized_size = revision_image.w
-    else:
-        if image.w > 0 and image.w < resized_size:
-            resized_size = image.w
+
+    ##############
+    # BASIC DATA #
+    ##############
+
+    uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
     subjects = image.subjects.all()
     subjects_limit = 5
@@ -645,13 +643,11 @@ def image_detail(request, id, r):
         (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
     )
 
-    solved_ext = ''
-    if image.uploaded < datetime.datetime(2011, 11, 13, 5, 3, 1):
-        solved_ext = '.png'
-    elif image.plot_is_overlay:
-        solved_ext = '.png'
-    else:
-        solved_ext = image.original_ext
+
+
+    ######################
+    # PREFERRED LANGUAGE #
+    ######################
 
     preferred_language = UserProfile.objects.get(user = image.user).language
     if preferred_language:
@@ -659,63 +655,92 @@ def image_detail(request, id, r):
     else:
         preferred_language = _("English")
 
-    response_dict = {'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
-                     'resized_size': resized_size,
-                     'already_voted': already_voted,
-                     'votes_number': votes,
-                     'allow_rating': image.allow_rating and not image.user.userprofile_set.all()[0].optout_rating,
-                     'comments_number': NestedComment.objects.filter(
-                        deleted = False,
-                        content_type__app_label = 'astrobin',
-                        content_type__model = 'image',
-                        object_id = image.id).count(),
-                     'gear_list': gear_list,
-                     'gear_list_has_commercial': gear_list_has_commercial,
-                     'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
-                     'image_type': image_type,
-                     'ssa': ssa,
-                     'deep_sky_data': deep_sky_data,
-                     'mod': request.GET.get('mod') if 'mod' in request.GET else '',
-                     'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
-                     'solved': True if 'mod' in request.GET and request.GET['mod'] == 'solved' else False,
-                     'follows': follows,
-                     'private_message_form': PrivateMessageForm(),
-                     'upload_revision_form': ImageRevisionUploadForm(),
-                     'revisions': revisions,
-                     'is_revision': is_revision,
-                     'revision_image': revision_image,
-                     'is_ready': is_ready,
-                     'is_final': is_final,
-                     'dates_label': _("Dates"),
-                     'uploaded_on': uploaded_on,
-                     'subjects_short': subjects[:subjects_limit],
-                     'subjects_reminder': subjects[subjects_limit:],
-                     'subjects_all': subjects,
-                     'subjects_limit': subjects_limit,
-                     'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][0] if image.subject_type else 0,
-                     'license_icon': licenses[image.license][1],
-                     'license_title': licenses[image.license][2],
-                     # Because of a regression introduced at
-                     # revision e1dad12babe5, now we have to
-                     # implement this ugly hack.
-                     'solved_ext': solved_ext,
 
-                     'solar_system_main_subject_id': image.solar_system_main_subject,
-                     'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
-                     'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
-                     'preferred_language': preferred_language,
-                     'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0 if request.user.is_authenticated() else False,
-                     'times_favorited': Favorite.objects.filter(image = image).count(),
-                     'plot_overlay_left' : (settings.RESIZED_IMAGE_SIZE - image.w) / 2 if image.w < settings.RESIZED_IMAGE_SIZE else 0,
 
-                     'select_datapool_form': PublicDataPool_SelectExistingForm(),
-                     'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = request.user) if request.user.is_authenticated() else None,
-                     'has_sharedfolders': PrivateSharedFolder.objects.filter(
-                        Q(creator = request.user) |
-                        Q(users = request.user)).count() > 0 if request.user.is_authenticated() else False,
+    #######################
+    # GENERATE THUMBNAILS #
+    #######################
 
-                     'iotd_date': image.iotd_date()
-                    }
+    mod = None
+    if 'mod' in request.GET and request.GET['mod'] == 'inverted':
+        mod = 'inverted'
+
+    thumbnail = image.thumbnail('regular', {
+        'revision_label': r,
+        'mod': mod,
+    })
+
+    revision_data = []
+    for revision in revisions:
+        revision_data.append({
+            'object': revision,
+            'thumbnail': revision.thumbnail('revision'),
+        })
+
+    original_revision_thumbnail = image.thumbnail('revision', {
+        'revision_label': 'original',
+    })
+
+
+    #################
+    # RESPONSE DICT #
+    #################
+
+    response_dict = {
+        'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
+
+        'thumbnail': thumbnail,
+        'histogram': image.thumbnail('histogram'),
+        'revision_data': revision_data,
+        'revision_label': r,
+        'original_revision_thumbnail': original_revision_thumbnail,
+        'mod': mod,
+
+        'already_voted': already_voted,
+        'votes_number': votes,
+        'allow_rating': image.allow_rating and not image.user.userprofile_set.all()[0].optout_rating,
+        'comments_number': NestedComment.objects.filter(
+            deleted = False,
+            content_type__app_label = 'astrobin',
+            content_type__model = 'image',
+            object_id = image.id).count(),
+        'gear_list': gear_list,
+        'gear_list_has_commercial': gear_list_has_commercial,
+        'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
+        'image_type': image_type,
+        'ssa': ssa,
+        'deep_sky_data': deep_sky_data,
+        # TODO: check that solved image is correcly laid on top
+        'follows': follows,
+        'private_message_form': PrivateMessageForm(),
+        'upload_revision_form': ImageRevisionUploadForm(),
+        'dates_label': _("Dates"),
+        'uploaded_on': uploaded_on,
+        'subjects_short': subjects[:subjects_limit],
+        'subjects_reminder': subjects[subjects_limit:],
+        'subjects_all': subjects,
+        'subjects_limit': subjects_limit,
+        'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][0] if image.subject_type else 0,
+        'license_icon': licenses[image.license][1],
+        'license_title': licenses[image.license][2],
+        # Because of a regression introduced at
+        # revision e1dad12babe5, now we have to
+        # implement this ugly hack.
+
+        'solar_system_main_subject_id': image.solar_system_main_subject,
+        'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
+        'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
+        'preferred_language': preferred_language,
+        'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0 if request.user.is_authenticated() else False,
+        'times_favorited': Favorite.objects.filter(image = image).count(),
+        'select_datapool_form': PublicDataPool_SelectExistingForm(),
+        'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = request.user) if request.user.is_authenticated() else None,
+        'has_sharedfolders': PrivateSharedFolder.objects.filter(
+            Q(creator = request.user) |
+            Q(users = request.user)).count() > 0 if request.user.is_authenticated() else False,
+
+        'iotd_date': image.iotd_date()
+    }
 
     return object_detail(
         request,
@@ -727,23 +752,58 @@ def image_detail(request, id, r):
 
 
 @require_GET
+def image_thumb(request, id, r, alias):
+    image = get_object_or_404(Image, id = id)
+    url = image.thumbnail(alias, {
+        'revision_label': r
+    })
+
+    return HttpResponse(
+        simplejson.dumps({
+            'id': id,
+            'url': url,
+        }),
+        mimetype = 'application/javascript'
+    )
+
+
+@require_GET
 def image_full(request, id, r):
     image = get_object_or_404(Image, pk=id)
 
-    is_revision = False
-    revision_id = 0
-    revision_image = None
-    if 'r' in request.GET:
+    ################################
+    # REDIRECT TO CORRECT REVISION #
+    ################################
+
+    if r is None:
         r = request.GET.get('r')
 
-    if r and r != '0':
-        is_revision = True
+    revisions = ImageRevision.objects.filter(image = image)
+
+    if r is None and not image.is_final:
+        final_revs = revisions.filter(is_final = True)
+        # We should only have one
+        if final_revs:
+            final = revisions.filter(is_final = True)[0]
+            return HttpResponseRedirect('/full/%i/%s/' % (image.id, final.label))
+
+    if r is None:
         try:
-            revision_id = int(r)
-        except ValueError:
-            revision_image = get_object_or_404(ImageRevision, image = image, label = r)
-        if not revision_image:
-            revision_image = get_object_or_404(ImageRevision, id=revision_id)
+            r = revisions.filter(is_final = True)[0].label
+        except IndexError:
+            r = 0
+
+
+
+    mode = None
+    if 'mod' in request.GET and request.GET['mod'] == 'inverted':
+        mode = 'inverted'
+
+    real = 'real' in request.GET
+    if real:
+        thumbnail_alias = 'real'
+    else:
+        thumbnail_alias = 'hd'
 
     return object_detail(
         request,
@@ -752,9 +812,12 @@ def image_full(request, id, r):
         template_name = 'image/full.html',
         template_object_name = 'image',
         extra_context = {
-            'revision_image': revision_image,
-            'is_revision': is_revision,
-            'real': 'real' in request.GET,
+            'real': real,
+            'revision_label': r,
+            'thumbnail': image.thumbnail(thumbnail_alias, {
+                'revision_label': r,
+                'mod': mode,
+            }),
         })
 
 
@@ -817,38 +880,32 @@ def image_upload_process(request):
         messages.error(request, _("AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
         return HttpResponseRedirect('/upload/')
 
-    if 'file' not in request.FILES:
+    if 'image_file' not in request.FILES:
         return upload_error()
 
     form = ImageUploadForm(request.POST, request.FILES)
-    file = request.FILES["file"]
-    filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    original_ext = original_ext.lower()
-    if original_ext == '.jpeg':
-        original_ext = '.jpg'
-    if original_ext not in ('.jpg', '.png', '.gif'):
+
+    if not form.is_valid():
+        return upload_error()
+
+    image_file = request.FILES["image_file"]
+    ext = os.path.splitext(image_file.name)[1].lower()
+    if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error()
 
     try:
         from PIL import Image as PILImage
-        trial_image = PILImage.open(file)
+        trial_image = PILImage.open(image_file)
         trial_image.verify()
     except:
         return upload_error()
 
-    destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
-    for chunk in file.chunks():
-        destination.write(chunk)
-    destination.close()
-
     profile = UserProfile.objects.get(user = request.user)
-    image = Image(
-        filename=filename,
-        original_ext=original_ext,
-        user=request.user,
-        license = profile.default_license,
-        is_wip = 'wip' in request.POST)
+    image = form.save(commit = False)
+    image.user = request.user
+    image.license = profile.default_license
 
+    image.image_file.file.seek(0) # Because we opened it with PIL
     image.save()
 
     return HttpResponseRedirect("/edit/presolve/%d/" % image.id)
@@ -865,8 +922,7 @@ def image_edit_presolve(request, id):
         if form.is_valid():
             form.save()
 
-            if image.is_stored:
-                image.solve()
+            image.solve()
 
             done_later = 'done_later' in request.POST
             if done_later:
@@ -907,7 +963,6 @@ def image_edit_basic(request, id):
                          _("No results. Sorry."),
                          _("Click on a suggestion or press TAB to add what you typed")],
          },
-         'is_ready': image.is_stored,
          'subjects': subjects,
         },
         context_instance=RequestContext(request))
@@ -917,7 +972,7 @@ def image_edit_basic(request, id):
 @require_GET
 def image_edit_watermark(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user or image.is_stored:
+    if request.user != image.user:
         return HttpResponseForbidden()
 
     profile = UserProfile.objects.get(user = image.user)
@@ -955,7 +1010,6 @@ def image_edit_gear(request, id):
     form = ImageEditGearForm(user=image.user, instance=image)
     response_dict = {
         'form': form,
-        'is_ready':image.is_stored,
         'image':image,
         'no_gear':no_gear,
         'copy_gear_form': CopyGearForm(request.user),
@@ -1021,7 +1075,6 @@ def image_edit_acquisition(request, id):
         'deep_sky_acquisition_basic_form': deep_sky_acquisition_basic_form,
         'advanced': advanced,
         'solar_system_acquisition': solar_system_acquisition,
-        'is_ready':image.is_stored,
     }
 
     return render_to_response('image/edit/acquisition.html',
@@ -1041,7 +1094,6 @@ def image_edit_acquisition_reset(request, id):
 
     response_dict = {
         'image': image,
-        'is_ready':image.is_stored,
         'deep_sky_acquisition_basic_form': DeepSky_AcquisitionBasicForm(),
     }
     return render_to_response('image/edit/acquisition.html',
@@ -1159,7 +1211,6 @@ def image_edit_save_basic(request):
                             "",
                             _("No results. Sorry.")],
             },
-            'is_ready': image.is_stored,
             'subjects': subjects,
         }
 
@@ -1201,7 +1252,7 @@ def image_edit_save_basic(request):
 def image_edit_save_watermark(request):
     image_id = request.POST.get('image_id')
     image = get_object_or_404(Image, pk=image_id)
-    if request.user != image.user or image.is_stored:
+    if request.user != image.user:
         return HttpResponseForbidden()
 
     form = ImageEditWatermarkForm(data = request.POST, instance = image)
@@ -1255,7 +1306,6 @@ def image_edit_save_gear(request):
                              instance=image)
     response_dict = {
         'image': image,
-        'is_ready':image.is_stored,
     }
 
     if not form.is_valid():
@@ -1270,8 +1320,7 @@ def image_edit_save_gear(request):
         if 'submit_next' in request.POST:
             return HttpResponseRedirect('/edit/acquisition/%i/' % image.id)
 
-        if not image.is_stored:
-            image.process(image.presolve_information > 1)
+        image.process(image.presolve_information > 1)
 
         return HttpResponseRedirect(image.get_absolute_url())
 
@@ -1294,7 +1343,6 @@ def image_edit_save_acquisition(request):
     response_dict = {
         'image': image,
         'edit_type': edit_type,
-        'is_ready':image.is_stored,
     }
 
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
@@ -1442,7 +1490,6 @@ def image_delete_original(request, id):
     image.w = final.w
     image.h = final.h
 
-    image.is_stored = final.is_stored
     image.is_solved = False # We don't solve revisions.
 
     image.is_final = True
@@ -1531,7 +1578,7 @@ def user_page(request, username):
     backlink = None
 
     smart_albums = []
-    sqs = Image.objects.filter(user = user, is_stored = True).order_by('-uploaded')
+    sqs = Image.objects.filter(user = user).order_by('-uploaded')
     lad_sql = 'SELECT date FROM astrobin_acquisition '\
               'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\
               'ORDER BY date DESC '\
@@ -1750,17 +1797,17 @@ def user_page(request, username):
         template_name='user/profile.html',
         template_object_name='image',
         paginate_by = 20,
-        extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                         'user':user,
-                         'profile':profile,
-                         'follows':follows,
-                         'private_message_form': PrivateMessageForm(),
-                         'section':section,
-                         'subsection':subsection,
-                         'subtitle':subtitle,
-                         'backlink':backlink,
-                         'smart_albums':smart_albums,
-                        })
+        extra_context = {
+             'user':user,
+             'profile':profile,
+             'follows':follows,
+             'private_message_form': PrivateMessageForm(),
+             'section':section,
+             'subsection':subsection,
+             'subtitle':subtitle,
+             'backlink':backlink,
+             'smart_albums':smart_albums,
+         })
 
 
 @require_GET
@@ -2747,11 +2794,11 @@ def bring_to_attention_complete(request, id):
 @login_required
 @require_POST
 def image_revision_upload_process(request):
+    # TODO: unify Image and ImageRevision
     def upload_error(image):
         messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
         return HttpResponseRedirect(image.get_absolute_url())
 
-    file = None
     image_id = request.POST['image_id']
     image = Image.objects.get(id=image_id)
 
@@ -2760,28 +2807,21 @@ def image_revision_upload_process(request):
         return HttpResponseRedirect(image.get_absolute_url())
 
     form = ImageRevisionUploadForm(request.POST, request.FILES)
+
     if not form.is_valid():
         return upload_error(image)
-    file = request.FILES["file"]
 
-    filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    original_ext = original_ext.lower()
-    if original_ext == '.jpeg':
-        original_ext = '.jpg'
-    if original_ext not in ('.jpg', '.png', '.gif'):
+    image_file = request.FILES["file"]
+    ext = os.path.splitext(image_file.name)[1].lower()
+    if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error(image)
 
     try:
         from PIL import Image as PILImage
-        trial_image = PILImage.open(file)
+        trial_image = PILImage.open(image_file)
         trial_image.verify()
     except:
         return upload_error(image)
-
-    destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
-    for chunk in file.chunks():
-        destination.write(chunk)
-    destination.close()
 
     revisions = ImageRevision.objects.filter(image = image).order_by('id')
     highest_label = 'A'
@@ -2793,13 +2833,12 @@ def image_revision_upload_process(request):
     image.is_final = False
     image.save()
 
-    image_revision = ImageRevision(
-        image = image,
-        filename = filename,
-        original_ext = original_ext,
-        is_final = True,
-        label = base26_encode(ord(highest_label) - ord('A') + 1),
-    )
+    image_revision = form.save(commit = False)
+    image_revision.image = image
+    image_revision.is_final = True
+    image_revision.label = base26_encode(ord(highest_label) - ord('A') + 1)
+
+    image_revision.image_file.file.seek(0) # Because we opened it with PIL
     image_revision.save()
     image_revision.process()
 

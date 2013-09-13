@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<div class="subtle-container">
+    <div class="header"><h4><i class="icon-comments-alt"></i> {% trans "Comments" %}</h4></div>
+    {% if user.is_authenticated %}
+    <p>
+        {% blocktrans with user=image.get_author_profile lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
+    </p>
+    {% endif %}
+
+    <div id="nested-comments"
+         data-content-type-id="{{content_type.pk}}"
+         data-object-id="{{image.pk}}">
+    </div>
+
+    {% include 'nested_comments/nestedcomment_app.html' %}
+
+</div> <!-- subtle-container -->
+

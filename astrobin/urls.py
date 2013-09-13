@@ -56,8 +56,11 @@ urlpatterns = patterns('',
 
 
     url(r'^$', views.index, name='index'),
+
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
+    url(r'^(?P<id>\d+)/(?P<r>\w+)/thumb/(?P<alias>\w+)/$', views.image_thumb, name='image_thumb'),
     url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_full, name='image_full'),
+
     url(r'^upload/$', views.image_upload, name='image_upload'),
     url(r'^upload/process$', views.image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', views.image_revision_upload_process, name='image_revision_upload_process'),

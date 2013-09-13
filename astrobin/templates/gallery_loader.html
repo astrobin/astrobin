@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('li.thumbnail img').each(function(index) {
+            $img = $(this);
+            id = $img.attr('data-id');
+
+            /* TODO: verify that this works in all browsers. */
+            $.ajax({
+                dataType: 'json',
+                timeout: 60*60*1000, /* 1 hour */
+                cache: true,
+                url: '/' + id + '/final/thumb/gallery/',
+                success: function(data, status, request) {
+                    $('li.thumbnail img[data-id=' + data.id + ']').attr('src', data.url);
+                }
+            });
+        });
+    });
+</script>

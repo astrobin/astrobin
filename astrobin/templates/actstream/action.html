@@ -16,16 +16,12 @@
             {% ifequal action.action_object_content_type.model 'imagerevision' %}
                 <div class="image">
                     <a href="{{action.action_object.get_absolute_url}}">
-                        <img src="{{action.action_object.resized_path|thumbnail_url:'object_image'}}"
-                             alt="{{action.action_object.image.title}}" />
                     </a>
                 </div>
             {% else %}
                 {% if action.target_content_type.model == 'image' %}
                     <div class="image">
                         <a href="{{action.target.get_absolute_url}}">
-                            <img src="{% thumbnail action.target.resized_path "360x64" crop="center" %}"
-                                 alt="{{action.target.title}}" />
                         </a>
                     </div>
                 {% endif %}
@@ -34,9 +30,6 @@
             {% ifequal action.action_object_content_type.model 'image' %}
                 <div class="image">
                     <a href="{{action.action_object.get_absolute_url}}">
-
-                        <img src="{% thumbnail action.action_object.resized_path "360x192" crop="center" %}"
-                             alt="{{action.action_object.title}}" />
                     </a>
                 </div>
             {% endifequal %}

@@ -216,7 +216,6 @@ class GearIndex(SearchIndex):
                 Q(filters = obj) |\
                 Q(accessories = obj)\
             ) & (\
-                Q(is_stored = True) &\
                 Q(is_wip = False)\
             )
         return Image.objects.filter(filters).distinct()
@@ -511,7 +510,7 @@ class ImageIndex(SearchIndex):
     username = CharField(model_attr = 'user__username')
 
     def index_queryset(self):
-        return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
+        return Image.objects.filter(Q(is_wip = False))
 
     def get_model(self):
         return Image

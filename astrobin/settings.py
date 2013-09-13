@@ -48,7 +48,7 @@ DEFAULT_CHARSET = 'utf-8'
 ASTROBIN_BASE_URL = 'http://www.astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
-ASTROBIN_BASE_PATH = os.path.abspath(__file__)
+ASTROBIN_BASE_PATH = os.path.dirname(__file__)
 UPLOADS_DIRECTORY = '/webserver/www/uploads/'
 
 # Local time zone for this installation. Choices can be found here:
@@ -92,7 +92,7 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ASTROBIN_BASE_PATH + '/media'
+MEDIA_ROOT = '/webserver/www/sitestatic/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -108,30 +108,25 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
 SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10G'
 
 # Django storages
-DEFAULT_FILE_STORAGE = 'astrobin.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageRootS3BotoStorage'
 AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
 AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
+AWS_S3_SECURE_URLS = False
+AWS_QUERYSTRING_AUTH = False
 
 from S3 import CallingFormat
 AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
 
 # see http://developer.yahoo.com/performance/rules.html#expires
 AWS_HEADERS = {
-    'Expires': 'Thu, 15 Apr 2080 20:00:00 GMT',
-    'Cache-Control': 'max-age=31557600',
-    'x-amz-acl': 'public-read',
+    'Expires': 'Fri, 9 May 2081 13:25:00 GMT+2'
+}
 
-    }
 S3_URL = 's3.amazonaws.com'
 IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
-HD_IMAGE_SIZE = 1824 # 95% of 1920
-RESIZED_IMAGE_SIZE = 620
-THUMBNAIL_SIZE = 184
-SMALL_THUMBNAIL_SIZE = 90
-IMAGE_OF_THE_DAY_WIDTH = 780
-IMAGE_OF_THE_DAY_HEIGHT = 180
+CDN_URL = os.environ['ASTROBIN_CDN_URL']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -337,7 +332,11 @@ STATICFILES_FINDERS = (
 )
 STATICFILES_DIRS = (local_path('static/'),)
 
-PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
+if not DEBUG:
+    PIPELINE_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
+else:
+    PIPELINE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.SlimItCompressor'
 
@@ -488,9 +487,51 @@ LOGGING = {
     }
 }
 
+THUMBNAIL_DEBUG = DEBUG
+THUMBNAIL_PROCESSORS = (
+    # Default processors
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    'easy_thumbnails.processors.scale_and_crop',
+    'easy_thumbnails.processors.filters',
+
+    # AstroBin processors
+    'astrobin.thumbnail_processors.rounded_corners',
+    'astrobin.thumbnail_processors.invert',
+    'astrobin.thumbnail_processors.watermark',
+    'astrobin.thumbnail_processors.histogram',
+)
 THUMBNAIL_ALIASES = {
     '': {
-        'target_image': {'size': (360, 64), 'crop': True},
-        'object_image': {'size': (360, 192), 'crop': True},
+        # Main image thumbnails
+        # TODO: verify what happens with animated GIF
+        'real': {'size': (16536, 16536), 'watermark': True},
+        'real_inverted': {'size': (16536, 16536), 'invert': True, 'watermark': True},
+
+        'hd': {'size': (1824, 1824), 'crop': False, 'watermark': True},
+        'hd_inverted': {'size': (1824, 1824), 'crop': False, 'invert': True, 'watermark': True},
+
+        'regular': {'size': (620, 620), 'crop': False, 'watermark': True},
+        'regular_inverted': {'size': (620, 620), 'crop': False, 'invert': True, 'watermark': True},
+
+        'gallery': {'size': (184, 184), 'crop': True, 'rounded': True, 'quality': 80},
+        'gallery_inverted': {'size': (184, 184), 'crop': True, 'rounded': True, 'quality': 80, 'inverted': True},
+        'thumb': {'size': (80, 80), 'crop': True, 'rounded': True, 'quality': 80},
+        'revision': {'size': (86, 86), 'crop': True, 'rounded': True, 'quality': 80},
+
+        # Tricks
+        'histogram': {'size': (274, 120), 'histogram': True},
+
+        # IOTD
+        'iotd': {'size': (780, 180), 'crop': True, 'watermark': True},
+        'runnerup': {'size': (50, 50), 'crop': True, 'rounded': True, 'quality': 80},
+
+        # Activity stream
+        'act_target': {'size': (360, 64), 'crop': True},
+        'act_object': {'size': (360, 192), 'crop': True},
     },
 }
+THUMBNAIL_QUALITY = 100
+THUMBNAIL_SUBDIR = 'thumbs'
+THUMBNAIL_DEFAULT_STORAGE = 'astrobin.s3utils.ImageRootS3BotoStorage'
+

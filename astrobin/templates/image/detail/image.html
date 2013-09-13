@@ -1,0 +1,15 @@
+{% load common_tags %}
+{% load tags %}
+{% load thumbnail %}
+
+<div class="main-image">
+    <div class="main-image-inner">
+        <!-- TODO: unify revision and normal/inverted/regular -->
+        <!-- TODO: the plate-solved image should be generated automatically via a thumbnail processor -->
+        <!-- TODO: check what happens with very old images -->
+        <a class="zoomable" href="{% url image_full image.id revision_label %}{% query_string "mod=mod" "plate_solving_started" %}">
+            <img src="{{thumbnail}}" alt="{{image.title|escape}}"/>
+        </a>
+    </div> <!-- main-image-inner -->
+</div> <!-- main-image -->
+

@@ -14,7 +14,8 @@
                             <h3>{% trans "Upload as a work in progress" %}</h3>
                             <div class="loading"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></div>
                             <form action="{% url 'image_upload_process' %}" method="post" enctype="multipart/form-data">
-                                <input type="file" name="file" class="file" id="id_file" />
+                                {% csrf_token %}
+                                <input type="file" name="image_file" class="file" id="id_file" />
                                 <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
                                 <input type="hidden" name="wip" value="" />
                             </form>
@@ -30,7 +31,8 @@
                             <h3>{% trans "Upload as a finished image" %}</h3>
                             <div class="loading"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></div>
                             <form action="{% url 'image_upload_process' %}" method="post" enctype="multipart/form-data">
-                                <input type="file" name="file" class="file" id="id_file" />
+                                {% csrf_token %}
+                                <input type="file" name="image_file" class="file" id="id_file" />
                                 <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
                             </form>
                             <div class="progressbar"><img src="{{STATIC_URL}}images/loading-bar.gif" alt="{% trans "Uploading..." %}"/></div>

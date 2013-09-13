@@ -73,65 +73,6 @@ def image_solved_callback(image, solved, subjects, did_use_scale, clean_path, la
 
 
 @task()
-def image_stored_callback(image, stored, solve, lang):
-    image.is_stored = stored
-    image.save()
-
-    user = None
-    img = None
-    is_revision = False
-    try:
-        user = image.user
-        img = image
-    except AttributeError:
-        # It's a revision
-        is_revision = True
-        user = image.image.user
-        img = image.image
-
-    from models import UserProfile, Gear
-    translation.activate(lang)
-    push_notification([user], 'image_ready', {'object_url':'%s%s' %(settings.ASTROBIN_BASE_URL, img.get_absolute_url())})
-
-    if not img.is_wip:
-        profile = UserProfile.objects.get(user = user)
-        followers = [x.from_userprofile.user
-                     for x in UserProfile.follows.through.objects.filter(to_userprofile=profile)]
-        notification = 'new_image_revision' if is_revision else 'new_image'
-        push_notification(followers, notification,
-                          {'originator':user,
-                           'object_url':settings.ASTROBIN_BASE_URL + img.get_absolute_url()
-                          }
-                         )
-        for gear_type in ('imaging_telescopes', 'guiding_telescopes', 'mounts',
-                          'imaging_cameras', 'guiding_cameras', 'focal_reducers',
-                          'software', 'filters', 'accessories'):
-            for gear_item in getattr(img, gear_type).all():
-                gear_followers = [x.user for x in UserProfile.objects.filter(follows_gear = Gear.objects.get(id = gear_item.id))]
-                push_notification(
-                    gear_followers, 'new_image_from_gear',
-                    {
-                        'gear': gear_item.name,
-                        'object_url': settings.ASTROBIN_BASE_URL + img.get_absolute_url()
-                    })
-
-        for subject in img.subjects.all():
-            print subject
-            subject_followers = [x.user for x in UserProfile.objects.filter(follows_subjects = subject)]
-            print subject_followers
-            push_notification(
-                subject_followers, 'new_image_of_subject',
-                {
-                    'subject': subject.mainId,
-                    'object_url': settings.ASTROBIN_BASE_URL + img.get_absolute_url()
-                })
-
-
-    if solve:
-        solve_image.delay(image, lang, callback=image_solved_callback)
-
-
-@task()
 def solve_image(image, lang, use_scale=True, callback=None):
     # If solving is disabled in the settings, then we override what we're
     # asked to do.
@@ -280,24 +221,4 @@ def solve_image(image, lang, use_scale=True, callback=None):
     if callback is not None:
         print "Calling solved callback."
         subtask(callback).delay(image, solved, subjects, use_scale, '%s%s*' % (path, uid), lang)
-
-
-@task()
-def store_image(image, solve, lang, callback=None):
-    try:
-        (w, h, animated) = store_image_in_backend(settings.UPLOADS_DIRECTORY, image)
-        image.w = w
-        image.h = h
-        image.animated = animated
-        image.save()
-    except S3CreateError, exc:
-        store_image.retry(exc=exc)
-
-    if callback is not None:
-        subtask(callback).delay(image, True, solve, lang)
-
-
-@task()
-def delete_image(filename, ext):
-    delete_image_from_backend(filename, ext)
 

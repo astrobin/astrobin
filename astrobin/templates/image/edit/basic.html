@@ -6,16 +6,10 @@
 
 {% block title %}AstroBin - {% trans "Edit your image: basic information" %}{% endblock %}
 {% block content %}
-    {% if image.is_stored %}
-        {% include 'image/edit/menu.html' %}   
-    {% endif %}
+    {% include 'image/edit/menu.html' %}
 
     <h1>
-        {% if image.is_stored %}
-            {% blocktrans %}Edit your image: basic information{% endblocktrans %}
-        {% else %}
-            {% blocktrans %}Step 3 of 5: basic information{% endblocktrans %}
-        {% endif %}
+        {% blocktrans %}Edit your image: basic information{% endblocktrans %}
     </h1>
 
     <form class="form-horizontal" id="basic" action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
@@ -78,13 +72,8 @@
         {% endif %}
 
         <div class="form-actions">
-            {% if image.is_stored %}
-                <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
-                <a class="btn" href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a>
-            {% else %}
-                <input class="btn btn-primary" type="submit" name="submit_next" value="{% trans "Next step: gear used" %} &rarr;" />
-                <input type="hidden" name="was_not_ready" value="true"/>
-            {% endif %}
+            <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
+            <a class="btn" href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a>
         </div>
     </form>
 {% endblock %}
@@ -153,7 +142,6 @@
                 reset_ds();
             }
 
-            {% if not image.is_stored %}
             if (selected.val() == 500 || selected.val() == 600) {
                 // For Gear and Other we don't need to edit gear or acquisition.
                 $('form#basic .form-actions input[name=submit_next]').val("{% trans "Save and finish" %} →");
@@ -164,7 +152,6 @@
                     "{% trans "Next step: gear used" %} →");
                 $('form#basic .form-actions input[name=skip_rest]').remove();
             }
-            {% endif %}
         }
 
         $('select[name=subject_type]').change(function() {
