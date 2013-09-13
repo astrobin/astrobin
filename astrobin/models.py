@@ -778,9 +778,6 @@ class Image(models.Model):
 
     filename = models.CharField(max_length=64, editable=False)
     original_ext = models.CharField(max_length=6, editable=False)
-    image_file = models.ImageField(
-        upload_to = image_upload_path,
-    )
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
