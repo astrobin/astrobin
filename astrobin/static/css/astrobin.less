@@ -2946,13 +2946,15 @@ li.revisions {
 }
 
 .revision {
+    position: relative;
+
     .overlay {
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.3);
         filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff')";
         position: absolute;
-        height: 120px;
+        height: 86px;
         width: 86px;
-        .rounded-corners(12px 12px 3px 3px);
+        .rounded-corners(12px);
     }
 
     .final {
@@ -2981,11 +2983,21 @@ li.revisions {
     }
 
     .label {
-        .stitched-box;
-        background: #303030 url('../images/darker-panel-tile.png');
+        position: absolute;
+        bottom: 0;
+
+        margin: 0;
+        padding: 2px 0;
+        width: 86px;
+
+        background: #303030;
+        background-color: rgba(0, 0, 0, 0.3);
+        filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c000000', endColorstr='#4c000000')";
+
         text-align: center;
         font-weight: bold;
-        margin-top: 2px;
+
+        .rounded-corners(0 0 12px 12px);
     }
 }
 

@@ -46,8 +46,7 @@ from actstream import action
 
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
-    filename = "%s.%s" % (uuid.uuid4(), ext)
-    return os.path.join('images', filename)
+    return "%s.%s" % (uuid.uuid4(), ext)
 
 
 LICENSE_CHOICES = (
@@ -683,6 +682,9 @@ class SubjectIdentifier(models.Model):
         super(SubjectIdentifier, self).save(*args, **kwargs)
 
 
+# TODO: unify Image and ImageRevision
+# TODO: remember that thumbnails must return 'final' version
+# TODO: notifications for gear and subjects after upload
 class Image(models.Model):
     BINNING_CHOICES = (
         (1, '1x1'),
@@ -776,8 +778,11 @@ class Image(models.Model):
         blank = True,
      )
 
-    filename = models.CharField(max_length=64, editable=False)
-    original_ext = models.CharField(max_length=6, editable=False)
+    image_file = models.ImageField(
+        upload_to = image_upload_path,
+        null = True,
+    )
+
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
@@ -865,7 +870,6 @@ class Image(models.Model):
     votes = generic.GenericRelation(Vote)
     user = models.ForeignKey(User)
 
-    is_stored = models.BooleanField(editable=False)
     is_solved = models.BooleanField(editable=False)
     plot_is_overlay = models.BooleanField(editable=False, default=False)
     is_wip = models.BooleanField(editable=False, default=False)
@@ -975,39 +979,11 @@ class Image(models.Model):
         super(Image, self).delete(*args, **kwargs)
 
     def delete_data(self):
-        delete_image.delay(self.filename, self.original_ext)
+        # Right now we don't delete anything, just to be on the safe side
+        pass
 
     def get_absolute_url(self):
         return '/%i' % self.id
-
-    def path(self, resized = False, inverted = False, hd = False):
-        suffix = ''
-
-        if resized:
-            suffix = '_resized'
-
-        if hd and self.id >= 53694:
-            suffix = '_hd'
-
-        if inverted:
-            suffix += '_inverted'
-
-        filename = '%s%s%s' % (
-            self.filename,
-            suffix,
-            self.original_ext)
-
-        # This code is disabled because of the switch to ASPwebhosting.
-        # We'll keep just serving from S3 and hope in CloudFronts caching.
-        #if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
-        #    return '/uploads/%s' % filename
-
-        return '%s%s' % (
-            settings.IMAGES_URL,
-            filename)
-
-    def resized_path(self):
-        return self.path(resized = True)
 
     def iotd_date(self):
         try:
@@ -1045,6 +1021,73 @@ class Image(models.Model):
         profile = UserProfile.objects.get(user = self.user)
         return profile
 
+    # TODO: verify how thumbnail integration works when sharing on forums
+    # TODO: why have mod as a setting when inverted is part of the alias?
+    def _thumbnail_real(self, alias, thumbnail_settings = {}):
+        from easy_thumbnails.files import get_thumbnailer
+
+        # We default to the original upload
+        field = self.image_file
+
+        revision_label = thumbnail_settings.get('revision_label', 'final')
+        mod = thumbnail_settings.get('mod', None)
+
+        # Possible modes: 'inverted', 'solved'.
+        if mod:
+            alias = alias + '_' + mod
+
+        if revision_label == '0':
+            pass
+        elif revision_label == 'final':
+            revisions = ImageRevision.objects.filter(image = self)
+            for r in revisions:
+                if r.is_final:
+                    field = r.image_file
+        else:
+            # We have some label
+            try:
+                r = ImageRevision.objects.get(image = self, label = revision_label)
+                field = r.image_file
+            except ImageRevision.DoesNotExist:
+                pass
+
+
+        thumbnailer = get_thumbnailer(field)
+        options = settings.THUMBNAIL_ALIASES[''][alias]
+
+        if self.watermark and 'watermark' in options:
+            options['watermark_text'] = self.watermark_text
+            options['watermark_position'] = self.watermark_position
+            options['watermark_opacity'] = self.watermark_opacity
+        else:
+            try:
+                del options['watermark']
+            except KeyError:
+                pass
+
+        return thumbnailer.get_thumbnail(options)
+
+    def thumbnail(self, alias, thumbnail_settings = {}):
+        from easy_thumbnails.exceptions import InvalidImageFormatError
+
+        try:
+            url = settings.IMAGES_URL + self._thumbnail_real(alias, thumbnail_settings).name
+            return url
+        except InvalidImageFormatError:
+            return ''
+
+    def thumbnail_raw(self, alias, thumbnail_settings = {}):
+        # TODO: uglish... this is a model, not a view.
+        from django.http import HttpResponse
+
+        thumb = self._thumbnail_real(alias, thumbnail_settings)
+
+        filename = thumb.name.split('/')[-1]
+        response = HttpResponse(thumb.file, content_type='image/jpeg')
+        response['Content-Disposition'] = 'attachment; filename=%s' % filename
+
+        return response
+
     @staticmethod
     def by_gear(gear):
         types = {
@@ -1072,14 +1115,15 @@ post_save.connect(image_post_save, sender = Image)
 
 class ImageRevision(models.Model):
     image = models.ForeignKey(Image)
-    filename = models.CharField(max_length=64, editable=False)
-    original_ext = models.CharField(max_length=6, editable=False)
-    uploaded = models.DateTimeField(editable=False, auto_now_add=True)
+    image_file = models.ImageField(
+        upload_to = image_upload_path,
+        null = True,
+    )
 
+    uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)
 
-    is_stored = models.BooleanField(editable=False)
     is_solved = models.BooleanField(editable=False)
 
     is_final = models.BooleanField(
@@ -1113,44 +1157,12 @@ class ImageRevision(models.Model):
     def process(self):
         store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
 
-    def delete(self, *args, **kwargs):
-        delete_data = not kwargs.pop('dont_delete_data', False)
-        if delete_data:
-            delete_image.delay(self.filename, self.original_ext)
-        super(ImageRevision, self).delete(*args, **kwargs)
-
     def get_absolute_url(self):
         return '/%i/%s/' % (self.image.id, self.label)
 
-    def path(self, resized = False, inverted = False, hd = False):
-        suffix = ''
+    def thumbnail(self, alias, thumbnail_settings = {}):
+        return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
 
-        if resized:
-            suffix = '_resized'
-
-        if hd and self.image.id >= 53694:
-            suffix = '_hd'
-
-        if inverted:
-            suffix += '_inverted'
-
-
-        filename = '%s%s%s' % (
-            self.filename,
-            suffix,
-            self.original_ext)
-
-        # This code is disabled because of the switch to ASPwebhosting.
-        # We'll keep just serving from S3 and hope in CloudFronts caching.
-        # if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
-        #    return '/uploads/%s' % filename
-
-        return '%s%s' % (
-            settings.IMAGES_URL,
-            filename)
-
-    def resized_path(self):
-        return self.path(resized = True)
 
 def image_revision_post_save(sender, instance, created, **kwargs):
     verb = "uploaded a new revision of"
@@ -1873,11 +1885,6 @@ class ImageOfTheDay(models.Model):
     image = models.ForeignKey(
         Image,
         related_name = 'image_of_the_day')
-
-    filename = models.CharField(
-        max_length = 64,
-        null = True,
-        blank = False,)
 
     date = models.DateField(
         auto_now_add = True)

@@ -86,6 +86,7 @@ def common_variables(request):
         'is_retailer': request.user.groups.filter(name='Retailers'),
         'has_rawdata_subscription': user_has_subscription(request.user),
         'IMAGES_URL' : settings.IMAGES_URL,
+        'CDN_URL' : settings.CDN_URL,
     }
 
     return d

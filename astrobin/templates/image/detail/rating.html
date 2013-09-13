@@ -1,0 +1,79 @@
+{% load i18n %}
+{% load tags %}
+
+{% if allow_rating %}
+    <div class="subtle-container">
+        <div class="rating-container">
+            <div class="info">
+                <a href="{% url faq %}#12">
+                    <i class="icon-info-sign"></i>
+                </a>
+            </div>
+
+            {% if request.user.userprofile_set.all.0.suspended_from_voting %}
+                <div class="alert alert-danger">
+                    {% blocktrans %}You are permanently suspended from voting because of suspicious activity. This include voting dishonestly, our of spite, or spirit of competition. If you believe this is a mistake, please get in touch with the administration of AstroBin.{% endblocktrans %}
+                </div>
+            {% endif %}
+
+            <div class="score-container">
+                <div class="current-rating">
+                    {% if votes_number > 0 %}
+                        {{image.astrobinIndex|floatformat:3}}
+                    {% else %}
+                        {% trans "n/a" %}
+                    {% endif %}
+                </div>
+
+                <div id="rating"></div>
+
+                <div class="total-votes">
+                    <i class="icon-user"></i>
+                    {{votes_number}}
+                </div>
+            </div>
+
+            <div class="score-histogram-container">
+                {% for i in "xxxxx" %}
+                    <div class="score score-{{forloop.revcounter}}">
+                        <span class="score-label">
+                            <i class="icon-star"></i> {{forloop.revcounter}}
+                        </span>
+                        <div class="score-bar score-bar-{{forloop.revcounter}}"
+                              style="width:{{image|votes_percent_by_score:forloop.revcounter}}%">
+                        </div>
+                        <span class="score-total-votes score-total-votes-{{forloop.revcounter}}">
+                            {{image|votes_by_score:forloop.revcounter}}
+                        </span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div> <!-- subtle-container -->
+{% endif %}
+
+{% if request.user.is_superuser %}
+    <div class="subtle-container">
+        <div class="header"><h4><i class="icon-star"></i> {% trans "Votes" %}</h4></div>
+        <table class="table table-condensed">
+            {% for r in image.get_ratings %}
+                <tr>
+                    <td><a href="{% url user_page_votes r.user %}">{{r.user}}</a></td>
+                    <td>{{r.score}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h3>Suspended</h3>
+
+        <table class="table table-condensed">
+            {% for r in image.get_suspended_ratings %}
+                <tr>
+                    <td><a href="{% url user_page_votes r.user %}">{{r.user}}</a></td>
+                    <td>{{r.score}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endif %}
+

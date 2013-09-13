@@ -64,9 +64,7 @@ class Command(BaseCommand):
                                                     Q(user__userprofile__optout_rating = False) &
                                                     Q(w__gte = settings.IMAGE_OF_THE_DAY_WIDTH) &
                                                     Q(h__gte = settings.IMAGE_OF_THE_DAY_HEIGHT) &
-                                                    Q(is_stored = True) &
-                                                    Q(is_wip = False) &
-                                                    Q(original_ext__in = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG']))
+                                                    Q(is_wip = False))
             start = start - timedelta(1)
 
         sorted_images = sorted(candidate_images, cmp = compare_images)

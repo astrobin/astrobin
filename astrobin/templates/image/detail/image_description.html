@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% if image.description %}
+<div class="image-description row">
+    <div class="span8">
+        <div class="subtle-container">
+            <div class="header"><h4><i class="icon-align-left"></i> {% trans "Description" %}</h4></div>
+            {{image.description|safe|linebreaks}}
+        </div>
+    </div>
+</div>
+{% endif %}
+

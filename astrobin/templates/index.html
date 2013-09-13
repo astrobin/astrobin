@@ -46,7 +46,7 @@
                     <div class="header">
                         <h4>{% trans "Recent images" %}</h4>
                     </div>
-                    {% image_list request image_list 0 80 %}
+		    <!-- TODO: image list here -->
                 </div>
             </div> <!-- recently uploaded row -->
             <div class="span7">
@@ -122,9 +122,8 @@
                                             href="{% get_image_url iotd.runnerup_1 %}">
 
                                             <img
-                                                src="{{IMAGES_URL}}{% get_final_filename iotd.runnerup_1 %}_small_thumb{{iotd.runnerup_1.original_ext}}"
-                                                alt="{{iotd.runnerup_1.title|escape}}"
-                                                width="45" height="45" />
+                                                src="{{iotd_runnerup_1_thumb}}"
+                                                alt="{{iotd.runnerup_1.title|escape}}" />
                                         </a>
                                     </div>
                                 {% endif %}
@@ -137,9 +136,8 @@
                                             href="{% get_image_url iotd.runnerup_2 %}">
 
                                             <img
-                                                src="{{IMAGES_URL}}{% get_final_filename iotd.runnerup_2 %}_small_thumb{{iotd.runnerup_2.original_ext}}"
-                                                alt="{{iotd.runnerup_2.title|escape}}"
-                                                width="45" height="45" />
+                                                src="{{iotd_runnerup_2_thumb}}"
+                                                alt="{{iotd.runnerup_2.title|escape}}" />
                                         </a>
                                     </div>
                                 {% endif %}

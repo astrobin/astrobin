@@ -33,15 +33,14 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.filter(image__is_stored = True, image__is_wip = False)
+        queryset = ImageRevision.objects.filter(image__is_wip = False)
         fields = [
             'uploaded',
             'w',
             'h',
             'is_solved',
             'is_final',
-            'filename',
-            'original_ext'
+            # TODO: filename somehow
         ]
         allowed_methods = ['get']
 
@@ -60,13 +59,12 @@ class ImageResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = Image.objects.filter(is_stored = True, is_wip = False)
+        queryset = Image.objects.filter(is_wip = False)
         fields = [
             'id',
             'title',
+            # TODO: filename somehow
 
-            'filename',
-            'original_ext',
             'uploaded',
             'description',
             'h',

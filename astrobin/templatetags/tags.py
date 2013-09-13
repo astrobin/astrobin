@@ -48,8 +48,6 @@ def related_images(request, object_list, type):
     return {
             'request': request,
             'images': images,
-            'small_thumbnail_size':settings.SMALL_THUMBNAIL_SIZE,
-            'IMAGES_URL': settings.IMAGES_URL,
             'related_type': type,
            }
 
@@ -69,11 +67,6 @@ def request_list(request, show_footer = True):
 @register.filter
 def append_slash(value):
     return value.replace('\n', '\\\n')
-
-
-@register.simple_tag
-def image_is_ready(image):
-    return AsyncResult(image.store_task_id).ready()
 
 
 @register.filter
@@ -97,7 +90,7 @@ def string_to_date(date):
         return datetime.now()
 
 
-def image_list(context, request, object_list, paginate = True, size = settings.THUMBNAIL_SIZE):
+def image_list(context, request, object_list, paginate = True):
     ret = {}
 
     try:
@@ -142,7 +135,6 @@ def image_list(context, request, object_list, paginate = True, size = settings.T
     ret = dict(ret.items() + {
         'image_list': image_list,
         'paginate': paginate,
-        'thumbnail_size': size,
         'IMAGES_URL': settings.IMAGES_URL,
         'request': request,
         'sort': request.GET.get('sort'),
@@ -186,8 +178,6 @@ def messier_list(context, request, object_list, paginate = True):
         'show_last': pages not in page_numbers,
         'object_list': object_list,
         'paginate': paginate,
-        'thumbnail_size':settings.THUMBNAIL_SIZE,
-        'IMAGES_URL': settings.IMAGES_URL,
         'request': request,
         'sort': request.GET.get('sort'),
     }
@@ -253,8 +243,6 @@ def search_image_list(context, request, object_list, paginate = True):
         'user_list': user_list,
         'gear_list': gear_list,
         'image_list': image_list,
-        'thumbnail_size':settings.THUMBNAIL_SIZE,
-        'IMAGES_URL': settings.IMAGES_URL,
         'request': request,
         'sort': request.GET.get('sort'),
         'search_type': request.GET.get('search_type', 0),
@@ -401,16 +389,6 @@ def gear_type(gear):
 
 
 @register.simple_tag
-def get_final_filename(image):
-    revisions = ImageRevision.objects.filter(image = image)
-    for r in revisions:
-        if r.is_final:
-            return r.filename
-
-    return image.filename
-
-
-@register.simple_tag
 def get_image_url(image):
     def commercial_gear_url(commercial_gear):
         gear = Gear.objects.filter(commercial = commercial_gear)
@@ -438,6 +416,17 @@ def get_image_url(image):
 @register.simple_tag
 def get_image_path(image, resized = False, inverted = False, hd = False):
     return image.path(resized, inverted, hd)
+
+
+# TODO: Move these tags to an images specific app (astrobin_app_images)
+@register.filter
+def gallery_thumbnail(image, revision_label):
+    return image.thumbnail('gallery', {'revision_label': revision_label})
+
+
+@register.filter
+def gallery_thumbnail_inverted(image, revision_label):
+    return image.thumbnail('gallery', {'revision_label': revision_label, 'mod': 'inverted'})
 
 
 @register.filter

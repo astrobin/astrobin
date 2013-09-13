@@ -2,10 +2,12 @@
 
 {% load i18n tags bootstrap_toolkit avatar_tags markup %}
 {% load hitcount_tags %}
+{% load thumbnail %}
 
 {% block title %}AstroBin - {% gear_name gear %}{% endblock %}
 
 {% block content %}
+    <!-- TODO: check that this page works -->
     <div class="gear-page">
         <div class="page-header">
             <h1>{% gear_name gear %}
@@ -20,7 +22,7 @@
                 {% if show_image %}
                     <div class="gear-image">
                         {% with gear.commercial.image as image %}
-                            <img src="{{IMAGES_URL}}{{image.filename}}{{image.original_ext}}"
+                            <img src="{{image.image_file|thumbnail_url:'regular'}}""
                                  alt="{{image.title|escape}}"/>
                         {% endwith %}
                     </div>
@@ -33,7 +35,7 @@
                         </div>
                         {% for r in commercial_image_revisions %}
                             <a href="{% url image_detail r.image.id r.label %}" target="{{r.image.id}}_{{r.label}}">
-                                <img src="{{IMAGES_URL}}{{r.filename}}_small_thumb{{r.original_ext}}"
+                                <img src="{{r.image.image_file|thumbnail_url:'thumb'}}"
                                      alt="{{r.image.title|escape}}"/>
                              </a>
                         {% endfor %}

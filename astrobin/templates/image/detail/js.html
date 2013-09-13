@@ -1,0 +1,305 @@
+{% load common_tags %}
+{% load i18n %}
+{% load hitcount_tags %}
+{% load tags %}
+
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "ur-15649ecb-6f21-a004-8032-7cf8416c478c"}); </script>
+<script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    {% if request.user.is_authenticated %}
+    $('a.favorite').click(function() {
+        var $link = $(this),
+            $heart = $link.find('i.icon-heart');
+
+        $.ajax({
+            url: '{% url favorite_ajax image.id %}',
+            dataType: 'json',
+            timeout: 5000,
+            success: function(data, textStatus, XMLHttpRequest) {
+                var color, title;
+                if (data.created) {
+                    color = '#FFA040';
+                    title = "{% trans "Remove from favorites" %}";
+                } else {
+                    color = "#FFFFFF";
+                    title = "{% trans "Mark as favorite" %}";
+                }
+
+                $heart.parent().css('color', color);
+                $link.attr('data-original-title', title);
+                $('.favorites .number').text(data.favorites);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+
+        return false;
+    });
+    {% endif %}
+
+    var clip = new ZeroClipboard.Client();
+    clip.setCSSEffects(false);
+
+    clip.addEventListener('mouseOver', function() {
+        $('.clip-status').show();
+    });
+    clip.addEventListener('mouseOut', function() {
+        $('.clip-status').hide();
+        $('.clip-status').text('{% trans "Copy" %}');
+    });
+    clip.addEventListener('complete', function() {
+        $('.clip-status').text('{% trans "Copied!" %}');
+    });
+
+    clip.setText("{% url image_detail image.id revision_label %}");
+
+    var clip_html = clip.getHTML(16, 16);
+    $('#clip-container .flash-container').append(clip_html);
+
+    $('form.copy select').change(function() {
+        var sharing_mode = parseInt($('select[name=sharing_mode] option:selected').val());
+        var image_size = parseInt($('select[name=sharing_image_size] option:selected').val());
+        var image_mode = parseInt($('select[name=sharing_image_mode] option:selected').val());
+        var thumbnail = parseInt($('select[name=sharing_thumbnail] option:selected').val());
+        var textarea = $('form.copy textarea');
+        var content = '';
+
+        if (sharing_mode == 0) {
+            $('select[name=sharing_thumbnail]').attr('disabled', 'disabled');
+            $('select[name=sharing_thumbnail]').closest('.selector').addClass('disabled');
+        } else {
+            $('select[name=sharing_thumbnail]').removeAttr('disabled');
+            $('select[name=sharing_thumbnail]').closest('.selector').removeClass('disabled');
+        }
+
+        /*************
+        * SIMPLE URL *
+        *************/
+        if (sharing_mode == 0 && image_size == 0 && image_mode == 0) {
+            content = "{{SHARE_PATH}}{% url image_detail image.id revision_label %}"
+        } else
+        if (sharing_mode == 0 && image_size == 0 && image_mode == 1) {
+            content = "{{SHARE_PATH}}{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "" %}"
+        } else
+        if (sharing_mode == 0 && image_size == 1 && image_mode == 0) {
+            content = "{{SHARE_PATH}}{% url image_full image.id revision_label %}"
+        } else
+        if (sharing_mode == 0 && image_size == 1 && image_mode == 1) {
+            content = "{{SHARE_PATH}}{% url image_full image.id revision_label %}{% query_string "mod='inverted'" "" %}"
+        } else
+
+        /********
+        * FORUM *
+        ********/
+        if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
+            content = "[URL={{SHARE_PATH}}{% url image_detail image.id revision_label %}][IMG]{{SHARE_PATH}}{{image|gallery_thumbnail:revision_label}}[/IMG][/URL]"
+        } else
+        if (sharing_mode == 1 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
+            content = "[URL={{SHARE_PATH}}{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "" %}][IMG]{{image|gallery_thumbnail_inverted:revision_label}}[/IMG][/URL]"
+        } else
+        if (sharing_mode == 1 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
+            content = "[URL={{SHARE_PATH}}{% url image_full image.id revision_label %}][IMG]{{image|gallery_thumbnail:revision_label}}[/IMG][/URL]"
+        } else
+        if (sharing_mode == 1 && image_size == 1 && image_mode == 1 && thumbnail == 0) {
+            content = "[URL={{SHARE_PATH}}{% url image_full image.id revision_label %}{% query_string "mod='inverted'" "" %}][IMG]{{image|gallery_thumbnail_inverted:revision_label}}[/IMG][/URL]"
+        } else
+        if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 1) {
+            content = "[URL={{SHARE_PATH}}{% url image_detail image.id revision_label %}]{{image.title}}[/URL]"
+        } else
+        if (sharing_mode == 1 && image_size == 0 && image_mode == 1 && thumbnail == 1) {
+            content = "[URL={{SHARE_PATH}}{% url image_detail image.id revision_label %}]{{image.title}}[/URL]"
+        } else
+        if (sharing_mode == 1 && image_size == 1 && image_mode == 0 && thumbnail == 1) {
+            content = "[URL={{SHARE_PATH}}{% url image_full image.id revision_label %}]{{image.title}}[/URL]"
+        } else
+        if (sharing_mode == 1 && image_size == 1 && image_mode == 1 && thumbnail == 1) {
+            content = "[URL={{SHARE_PATH}}{% url image_full image.id revision_label %}{% query_string "mod='inverted'" "" %}]{{image.title}}[/URL]"
+        } else
+
+        /*******
+        * HTML *
+        *******/
+        if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
+            content = "<a href=\"{{SHARE_PATH}}{% url image_detail image.id revision_label %}\"><img src=\"{{image|gallery_thumbnail:revision_label}}/></a>"
+        } else
+        if (sharing_mode == 2 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
+            content = "<a href=\"{{SHARE_PATH}}{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "" %}\"><img src=\"{{image|gallery_thumbnail_inverted:revision_label}}/></a>"
+        } else
+        if (sharing_mode == 2 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
+            content = "<a href=\"{{SHARE_PATH}}{% url image_full image.id revision_label %}\"><img src=\"{{image|gallery_thumbnail:revision_label}}/></a>"
+        } else
+        if (sharing_mode == 2 && image_size == 1 && image_mode == 1 && thumbnail == 0) {
+            content = "<a href=\"{{SHARE_PATH}}{% url image_full image.id revision_label %}{% query_string "mod='inverted'" "" %}\"><img src=\"{{image|gallery_thumbnail_inverted:revision_label}}/></a>"
+        } else
+        if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 1) {
+            content = "<a href=\"{{SHARE_PATH}}{% url image_detail image.id revision_label %}\">{{image.title}} (revision_label)</a>"
+        } else
+        if (sharing_mode == 2 && image_size == 0 && image_mode == 1 && thumbnail == 1) {
+            content = "<a href=\"{{SHARE_PATH}}{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "" %}\">{{image.title}} (revision_label)</a>"
+        } else
+        if (sharing_mode == 2 && image_size == 1 && image_mode == 0 && thumbnail == 1) {
+            content = "<a href=\"{{SHARE_PATH}}{% url image_full image.id revision_label %}\">{{image.title}} (revision_label)</a>"
+        } else
+        if (sharing_mode == 2 && image_size == 1 && image_mode == 1 && thumbnail == 1) {
+            content = "<a href=\"{{SHARE_PATH}}{% url image_full image.id revision_label %}{% query_string "mod='inverted'" "" %}\">{{image.title}} (revision_label)</a>"
+        }
+
+
+        clip.setText(content);
+        textarea.val(content);
+    });
+
+    {% get_hit_count_javascript for image %}
+
+    astrobin_common.init(
+        '{{image.user.username}}',
+        {
+            follow_action: {
+                dialog: {
+                    title : "{% blocktrans with image.get_author_profile as username %}Follow {{username}}?{% endblocktrans %}",
+                    body  : "{% blocktrans with image.get_author_profile as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}",
+                    button: "{% trans "Yes, follow!" %}"
+                },
+                stop_following: "{% trans "Stop following" %}"
+            },
+            unfollow_action: {
+                dialog: {
+                    title : "{% blocktrans with image.get_author_profile as username %}Stop following {{username}}?{% endblocktrans %}",
+                    body  : "{% blocktrans with image.user.get_author_profile as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}",
+                    button: "{% trans "Yes, stop following!" %}"
+                },
+                follow: "{% trans "Follow" %}"
+            },
+            message_action: {
+                dialog: {
+                    title : "{% blocktrans with image.get_author_profile as username %}Send {{username}} a message{% endblocktrans %}",
+                    body  : "",
+                    button: "{% trans "Send" %} &rarr;"
+                },
+                form_html: '{% autoescape off %}{{private_message_form.as_p|append_slash}}{% endautoescape %}',
+                csrf_token: '{{csrf_token}}',
+                url      : "{% url send_private_message %}"
+            }
+        });
+
+    astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+    astrobin_common.setup_subject_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+    astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+
+    astrobin_image_detail.init(
+        {{image.id}},
+
+        {% if is_revision %}{{revision_image.id}}{% else %}0{% endif %},
+
+        "{{image.user.username}}",
+
+        {% if votes_number > 0 %}
+        "{{image.astrobinIndex}}",
+        {% else %}
+        "0",
+        {% endif %}
+
+        {
+            rating: {
+                {% if not request.user.is_authenticated %}
+                redirectUrl: "/accounts/login/?next={{request.path}}",
+                {% endif %}
+                {% if already_voted %}
+                hint_list: [
+                    "{% trans "You have already voted." %}",
+                    "{% trans "You have already voted." %}",
+                    "{% trans "You have already voted." %}",
+                    "{% trans "You have already voted." %}",
+                    "{% trans "You have already voted." %}",
+                ],
+                {% else %}
+                hint_list: [
+                    "{% trans "It's a start, but it needs better data." %}",
+                    "{% trans "It looks good, but it needs better processing." %}",
+                    "{% trans "Good data, good processing." %}",
+                    "{% trans "Great result!" %}",
+                    "{% trans "Top quality!" %}"],
+                {% endif %}
+                read_only: {% if request.user.is_authenticated and not already_voted and not request.user.userprofile_set.all.0.suspended_from_voting and request.user != image.user %} false {% else %} true {% endif %}
+            },
+            upload_revision_action: {
+                dialog: {
+                    title: "{% trans "Upload new revision" %}",
+                    body : "{% blocktrans %}Did you improve the post-processing of your image? Upload the new revision!{% endblocktrans %}"
+                },
+                form_html: '{% autoescape off %}{{upload_revision_form.file}}\
+                            <div class="form-actions">\
+                                <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />\
+                            </div>\
+                            {% endautoescape %}',
+                csrf_token: '{{csrf_token}}',
+                fileDefaultText: "{% trans "No file selected" %}",
+                fileBtnText: "{% trans "Choose file" %}",
+                uploadingText: "{% trans "Uploading..." %}"
+            },
+            delete_action: {
+                dialog: {
+                    title : "{% trans "Delete image and all its revisions?" %}",
+                    body  : "{% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?"%}",
+                    button: "{% trans "Yes, delete everything" %}"
+                }
+            },
+            delete_revision_action: {
+                dialog: {
+                    title : "{% trans "Delete this revision?" %}",
+                    body  : "{% trans "This revision will be permanently deleted and cannot be recovered. Are you sure?"%}",
+                    button: "{% trans "Yes, delete revision" %}"
+                }
+            },
+            delete_original_action: {
+                dialog: {
+                    title : "{% trans "Delete original image?" %}",
+                    body  : "{% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}",
+                    button: "{% trans "Yes, delete image" %}"
+                }
+            }
+        });
+
+        $('#request-critique').popover({
+            placement: 'bottom',
+            trigger: 'hover',
+            delay: {hide: 2000}
+        });
+
+        $('button#send-to-datapool').click(function(e) {
+            var selected = $('form#select-datapool select option:selected').val();
+
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                data: {image: {{image.id}}},
+                url: '/rawdata/publicdatapools/' + selected + '/add-image/',
+                success: function() {
+                    window.location.href = '/rawdata/publicdatapools/' + selected + '/';
+                }
+            });
+
+            e.preventDefault();
+        });
+
+        $('button#send-to-sharedfolder').click(function(e) {
+            var selected = $('form#select-sharedfolder select option:selected').val();
+
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                data: {image: {{image.id}}},
+                url: '/rawdata/privatesharedfolders/' + selected + '/add-image/',
+                success: function() {
+                    window.location.href = '/rawdata/privatesharedfolders/' + selected + '/';
+                }
+            });
+
+            e.preventDefault();
+        });
+    });
+</script>
+

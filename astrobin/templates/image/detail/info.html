@@ -1,0 +1,69 @@
+{% load avatar_tags %}
+{% load common_tags %}
+{% load i18n %}
+{% load hitcount_tags %}
+{% load tags %} {% comment %} TODO: rename tags to astrobin_tags {% endcomment %}
+
+<div class="subtle-container avatar-block">
+    <div class="avatar">
+        <a href="{% url user_page image.user %}">
+            {% avatar image.user 106 %}
+        </a>
+    </div>
+    <div class="username">
+        <a
+            class="username-link"
+            rel="tooltip"
+            title="{{image.get_author_profile}}"
+            href="{% url user_page image.user %}">{{image.get_author_profile|truncatechars:20}}</a>
+
+        <div class="data">
+            <img class="license"
+                 src="{{STATIC_URL}}icons/{{license_icon}}"
+                 alt="{% trans "License" %}: {{license_title}}"
+                 title="{% trans "License" %}: {{license_title}}" />
+
+            <span class="uploaded">{{uploaded_on|ago}}</span>
+
+            <div>
+                <span class="views">
+                    {% get_hit_count for image as hit_count %}
+                    {% trans "Views" %}: <span class="number">{{hit_count}}</span>,
+                </span>
+
+                <span class="favorites">
+                    {% trans "Favorites" %}:
+                    <span class="number">{{times_favorited}}</span>
+                </span>
+            </div>
+        </div>
+
+        {% if user.is_authenticated %}
+            <a class="btn btn-primary{% if follows %} unfollow{% else %} follow{% endif %}"
+               href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}"
+               rel="tooltip"
+               title="{% if follows %}{% trans "Stop following" %}{% else %}{% trans "Follow" %}{% endif %}">
+                {% if follows %}
+                    <i class="icon-eye-close"></i>
+                {% else %}
+                    <i class="icon-eye-open"></i>
+                {% endif %}
+            </a>
+        {% endif %} <!-- authenticated -->
+
+        <div class="favorite-container">
+            <a href="{% if request.user.is_authenticated %}#{% else %}/accounts/login/?next={{request.path}}{% endif %}" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Remove from favorites" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
+                {% if already_favorited %}
+                    <div style="font-size: 15px; color: #FFA040;">
+                {% else %}
+                    <div style="font-size: 16px;">
+                {% endif %}
+                    <i class="icon-heart"></i>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+

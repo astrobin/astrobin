@@ -1,0 +1,73 @@
+{% load i18n %}
+
+{% if revision_data %}
+<div class="subtle-container">
+    <ul class="thumbnails astrobin-thumbnails">
+        <li class="thumbnail astrobin-thumbnail revisions">
+            <div class="revision">
+
+            {% if revision_label == '0' %}
+                <div class="overlay"></div>
+            {% else %}
+                <a href="{{image.get_absolute_url}}/0/">
+            {% endif %}
+                {% if image.is_final %}
+                    <div class="final">
+                        <span class="text">
+                            {% trans "Final" %}
+                        </span>
+                    </div>
+                {% endif %}
+
+                <div class="image">
+                    <img src="{{original_revision_thumbnail}}" alt="{{image.title|escape}}" />
+                </div>
+                <div class="label">
+                    {% trans "Original" %}
+                </div>
+
+            {% if revision_label != '0' %}
+                </a>
+            {% endif %}
+
+            </div> <!-- .revision -->
+        </li>
+
+        {% for r in revision_data %}
+        <li class="thumbnail astrobin-thumbnail revisions">
+            <div class="revision">
+
+            {% if revision_label == r.object.label %}
+                <div class="overlay"></div>
+            {% else %}
+                <a href="{{r.object.get_absolute_url}}">
+            {% endif %}
+
+                {% if r.object.is_final %}
+                    <div class="final">
+                        <span class="text">
+                            {% trans "Final" %}
+                        </span>
+                    </div>
+                {% endif %}
+
+                <div class="image">
+                    <img src="{{r.thumbnail}}" alt="{{r.object.label}}" />
+                </div>
+                <div class="label">
+                    {{r.object.label}}
+                </div>
+
+            {% if revision_label != r.object.label %}
+                </a>
+            {% endif %}
+
+            </div> <!-- .revision -->
+        </li>
+        {% endfor %}
+    </ul> <!-- thumbnails -->
+</div> <!-- subtle-container -->
+{% endif %}
+
+
+

@@ -6,39 +6,25 @@
 {% block title %}AstroBin - {% trans "Plate-solve" %}{% endblock %}
 
 {% block content %}
-    {% if 'done_later' not in request.GET %}
-        {% if image.is_stored %}
-            {% include 'image/edit/menu.html' %}   
-        {% endif %}
-    {% endif %}
+    {% include 'image/edit/menu.html' %}
 
-    {% if 'done_later' in request.GET %}
-        <h1>{% trans "Knowing the pixel scale will help" %}</h1>
-    {% else %}
-        <h1>
-            {% if not image.is_stored %}
-                {% blocktrans %}Step 1 of 5: plate solving scale{% endblocktrans %}
-            {% else %}
-                {% blocktrans %}Edit your image: plate-solving scale{% endblocktrans %}
-            {% endif %}
-        </h1>
-    {% endif %}
-    
+    <h1>
+        {% blocktrans %}Edit your image: plate-solving scale{% endblocktrans %}
+    </h1>
+
     <div class="well">
         {% blocktrans %}AstroBin <em>could</em> plate-solve your image without knowing anything about it, but that could be a long process. If you know the approximate size of the field of your image, plate-solving will be much faster and will have a better chance of success!{% endblocktrans %}
     </div>
-    
+
     <form class="form-horizontal" action="{% url image_edit_presolve image.id %}" method="post">
+        {% csrf_token %}
         {{form|as_bootstrap}}
         <input type="hidden" name="image_id" value="{{image.id}}" />
         <div class="form-actions">
-            {% if 'done_later' in request.GET %}
-                <input type="hidden" name="done_later" value="" />
-                <input class="btn btn-primary" type="submit" value="{% trans "Start plate-solving" %} &rarr;" />
-                <a class="btn" href="{% url image_detail image.id %}">{% trans "Return to image" %}</a>
-            {% else %}
-                <input class="btn btn-primary" type="submit" value="{% trans "Next step: watermark" %} &rarr;" />
-            {% endif %}
+            <!-- TODO: Remove references to done_later -->
+            <input type="hidden" name="done_later" value="" />
+            <input class="btn btn-primary" type="submit" value="{% trans "Start plate-solving" %} &rarr;" />
+            <a class="btn" href="{% url image_detail image.id %}">{% trans "Return to image" %}</a>
         </div>
     </form>
     <div class="well">

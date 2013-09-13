@@ -35,8 +35,10 @@ def uniq_id_tuple(seq):
     return ret
 
 
-class ImageUploadForm(forms.Form):
-    image_file = forms.ImageField()
+class ImageUploadForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('image_file',)
 
 
 class ImageEditPresolveForm(forms.ModelForm):
@@ -295,8 +297,11 @@ class BringToAttentionForm(forms.Form):
         self.fields['users'].label = _("Users")
 
 
-class ImageRevisionUploadForm(forms.Form):
-    file = forms.ImageField()
+# TODO: test image revision upload
+class ImageRevisionUploadForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('image_file',)
 
 
 class AdvancedSearchForm(SearchForm):
@@ -870,7 +875,7 @@ class CopyGearForm(forms.Form):
 
     def __init__(self, user, **kwargs):
         super(CopyGearForm, self).__init__(**kwargs)
-        self.fields['image'].queryset = Image.objects.filter(user = user, is_stored = True)
+        self.fields['image'].queryset = Image.objects.filter(user = user)
 
 
 class AppApiKeyRequestForm(forms.ModelForm):
@@ -982,7 +987,7 @@ class CommercialGearForm(forms.ModelForm):
 
     def __init__(self, user, **kwargs):
         super(CommercialGearForm, self).__init__(**kwargs)
-        self.fields['image'].queryset = Image.objects.filter(user = user, is_stored = True, subject_type = 500)
+        self.fields['image'].queryset = Image.objects.filter(user = user, subject_type = 500)
 
 
 class ClaimRetailedGearForm(forms.Form):

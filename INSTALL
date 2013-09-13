@@ -1,3 +1,111 @@
+# Creating chroot:
+# ================
+sudo apt-get install dchroot debootstrap
+mkdir -r ~/chroots/astrobin
+
+Append the following to /etc/schroo/schroot.conf:
+
+[astrobin]
+description=AstroBin
+location=/home/siovene/chroots/astrobin
+priority=3
+users=siovene
+groups=sbuild
+root-groups=root
+
+cd ~/chroots
+sudo debootstrap --variant=buildd --arch i386 raring astrobin/ http://mirrors.nic.funet.fi/ubuntu/
+
+In the chroot, edit /etc/apt/sources.list:
+
+deb http://mirrors.nic.funet.fi/ubuntu raring main
+deb http://archive.canonical.com/ubuntu raring partner
+deb http://extras.ubuntu.com/ubuntu raring main
+deb http://fi.archive.ubuntu.com/ubuntu raring universe
+
+Use the following script in ~/chroots to prepare the chroot:
+
+
+#!/bin/bash
+
+ECHO="echo -e"
+CP="cp -r"
+MKDIR="mkdir -p"
+
+if [ $# -eq 0 ]; then
+    $ECHO "Usage: $0 <user>"
+    $ECHO "\t <user>: The user that will be created in the chroot: must match a
+                 user in the host system."
+    exit 1
+fi
+
+if [ $EUID != 0 ]; then
+    sudo "$0" "$@"
+    exit $?
+fi
+
+if id -u $1 >/dev/null 2>&1; then
+    $ECHO "Preparing chroots for user $1..."
+else
+    $ECHO "User $1 does not exist."
+    exit 2
+fi
+
+for i in *; do
+    if [ -d "$i" ]; then
+        $ECHO "Processing $i:"
+        if mount | grep "$i/proc" > /dev/null; then
+            $ECHO "\t* Skipping mount /proc..."
+        else
+            $ECHO "\t* Mounting /proc..."
+            mount -o bind /proc $i/proc
+        fi
+
+        $ECHO "\t* Copying resolv.conf..."
+        $CP /etc/resolv.conf $i/etc/
+
+        if id -u $1 >/dev/null 2>&1 2>&1; then
+            $ECHO "\t* Skipping user creation..."
+        else
+            $ECHO "\t* Creating user..."
+            chroot $i /bin/bash -c "useradd --create-home --shell /bin/bash $1"
+        fi
+
+        $ECHO "\t* Copying SSH keys..."
+        $MKDIR $i/home/$1/.ssh
+        $CP /home/$1/.ssh/id_rsa.pub $i/home/$1/.ssh/
+        $CP /home/$1/.ssh/id_rsa $i/home/$1/.ssh/
+        chown siovene:siovene $i/home/$1/.ssh/*
+
+        $ECHO "\t* Copying git config..."
+        $CP /home/$1/.gitconfig $i/home/$1/
+
+        $ECHO "\t* Preparing locales..."
+        chroot $i /bin/bash -c "locale-gen en_US.UTF-8 > /dev/null 2>&1;
+                                dpkg-reconfigure locales > /dev/null 2>&1"
+    fi
+done
+
+$ECHO "All done."
+
+
+Use the following script to enter the chroot:
+
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 chroot_name."
+    exit 1
+fi
+
+if [ $EUID != 0 ]; then
+    sudo "$0" "$@"
+    exit $?
+fi
+
+chroot $1
+
+
 # Distribution packages:
 # ======================
 
@@ -25,27 +133,23 @@ sudo apt-get install \
 	gcc-4.4 \
 	libxslt1-dev \
 	libxml2-dev \
-	nginx
+	nginx \
+	node-less \
+	libpq-dev \
+	postgresql \
+	sudo \
+	cmake \
+	qt4-qmake \
+	libqt4-dev
 
 sudo apt-file update
 sudo pip install virtualenv
-
-# Install things needed by the CSS compiler
-cd /tmp
-sudo apt-get install git-core curl build-essential openssl libssl-dev
-git clone https://github.com/joyent/node.git && cd node
-git checkout v0.4.9 # or whatever the latest stable is
-./configure && make
-sudo make install
-curl http://npmjs.org/install.sh | sudo sh
-npm install less
-echo "alias lessc=/home/astrobin/.npm/less/1.1.2/package/bin/lessc" >> ~/.bashrc
 
 # Obtain the code:
 # ================
 
 cd
-mkdir Code && cd Code
+mkdir ~/code && cd ~/code
 git clone https://bitbucket.org/siovene/astrobin astrobin
 cd astrobin
 git submodule init
@@ -89,12 +193,10 @@ grant all privileges on database astrobin to astrobin;
 grant all privileges on database astrobin_questions_en to astrobin;
 grant all privileges on database pootle to astrobin;
 
+Edit /etc/postgresql/9.1/main/pg_hba.conf and set 127.0.01 from 'md5' to 'trust'.
 
 # Initialize db
 ./scripts/syncdb.sh
-./manage.py migrate astrobin 0001 --fake
-./manage.py migrate astrobin
-./manage.py migrate zinnia
 ./manage.py migrate threaded_messages
 
 (When asked, do create super user astrobin:***REMOVED*** <astrobin@astrobin.com>)
@@ -156,7 +258,7 @@ sudo mkdir /var/log/{celery,gunicorn,nginx,pootle}
 
 # Run it!
 # =======
-sudo supervisord
+sudo /etc/init.d/supervisord start
 sudo supervisorctl start all
 
 
