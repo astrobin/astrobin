@@ -288,7 +288,7 @@
                                 <div class="entry">
                                     {% if entry.authors.count %}
                                     <div class="avatar">
-                                        <a href="{{entry.authors.all.0}}">{% avatar entry.authors.all.0 64 %}</a>
+                                        <a href="{% url user_page entry.authors.all.0 %}">{% avatar entry.authors.all.0 64 %}</a>
                                     </div>
                                     {% endif %}
 
