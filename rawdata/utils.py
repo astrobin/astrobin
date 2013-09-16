@@ -87,7 +87,7 @@ def user_byte_limit(user):
 
 def supported_raw_formats():
     return [
-        "fit", "fits",
+        "fit", "fits", "fts",
 
         "3fr",
         "ari", "arw",
