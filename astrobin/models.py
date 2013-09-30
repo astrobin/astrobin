@@ -685,6 +685,7 @@ class SubjectIdentifier(models.Model):
 # TODO: unify Image and ImageRevision
 # TODO: remember that thumbnails must return 'final' version
 # TODO: notifications for gear and subjects after upload
+# TODO: this makes animated gifs static :-(
 class Image(models.Model):
     BINNING_CHOICES = (
         (1, '1x1'),
