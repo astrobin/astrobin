@@ -137,7 +137,6 @@ urlpatterns = patterns('',
     url(r'^commercial/products/retailed/edit/(?P<id>\d+)/$', views.retailed_products_edit, name='retailed_products_edit'),
 
     url(r'^users/(?P<username>[\w.@+-]+)/favorites/$', views.user_page_favorites, name='user_page_favorites'),
-    url(r'^users/(?P<username>[\w.@+-]+)/card/$', views.user_page_card, name='user_page_card'),
     url(r'^users/(?P<username>[\w.@+-]+)/plots/$', views.user_page_plots, name='user_page_plots'),
     url(r'^users/(?P<username>[\w.@+-]+)/apikeys/$', views.user_page_api_keys, name='user_page_api_keys'),
     url(r'^users/(?P<username>[\w.@+-]+)/votes$', views.user_page_votes, name='user_page_votes'),

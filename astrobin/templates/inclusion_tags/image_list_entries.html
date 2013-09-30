@@ -1,0 +1,30 @@
+{% load endless %}
+{% load i18n %}
+{% load tags %}
+
+{% lazy_paginate image_list %}
+{% for image in image_list %}
+    <li class="thumbnail astrobin-thumbnail">
+        <a rel="tooltip"
+            title="{{image.title|escape}}, {% trans "by" %} {{image.get_author_profile}}"
+            href="{% get_image_url image %}">
+
+            {% if image.iotd_date %}
+                <div class="iotd-thumb-banner">
+                    <h2>
+                        <i class="icon icon-trophy"></i>
+                    </h2>
+                </div>
+            {% endif %}
+
+            <img src="http://placehold.it/130/393939/eee&text={% trans "Loading..." %}"
+                 data-id="{{image.id}}"
+                 data-loaded="false"
+                 alt="{{image.title|default:_("(no title)")|escape}}" />
+        </a>
+    </li>
+{% empty %}
+    <li>{% trans "No images" %}.</li>
+{% endfor %}
+{% show_more %}
+

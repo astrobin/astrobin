@@ -366,6 +366,7 @@ PIPELINE_CSS = {
     },
 }
 
+# TODO: remove capty files
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
@@ -378,7 +379,6 @@ PIPELINE_JS = {
             'js/plugins/localization/jquery.localisation.js',
             'js/jquery.uniform.js',
             'js/jquery-ui-1.9.2.custom.js',
-            'js/jquery.capty.js',
             'js/jquery-ui-timepicker-addon.js',
             'js/jquery.validationEngine-en.js',
             'js/jquery.validationEngine.js',
@@ -514,8 +514,8 @@ THUMBNAIL_ALIASES = {
         'regular': {'size': (620, 620), 'crop': False, 'watermark': True},
         'regular_inverted': {'size': (620, 620), 'crop': False, 'invert': True, 'watermark': True},
 
-        'gallery': {'size': (184, 184), 'crop': True, 'rounded': True, 'quality': 80},
-        'gallery_inverted': {'size': (184, 184), 'crop': True, 'rounded': True, 'quality': 80, 'inverted': True},
+        'gallery': {'size': (130, 130), 'crop': True, 'rounded': True, 'quality': 80},
+        'gallery_inverted': {'size': (130, 130), 'crop': True, 'rounded': True, 'quality': 80, 'inverted': True},
         'thumb': {'size': (80, 80), 'crop': True, 'rounded': True, 'quality': 80},
         'revision': {'size': (86, 86), 'crop': True, 'rounded': True, 'quality': 80},
 
@@ -535,3 +535,5 @@ THUMBNAIL_QUALITY = 100
 THUMBNAIL_SUBDIR = 'thumbs'
 THUMBNAIL_DEFAULT_STORAGE = 'astrobin.s3utils.ImageRootS3BotoStorage'
 
+ENDLESS_PAGINATION_PER_PAGE = 35
+ENDLESS_PAGINATION_LOADING = '<img src="' + STATIC_URL + '/images/ajax-loader.gif" alt="..." />'

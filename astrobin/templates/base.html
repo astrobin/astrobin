@@ -410,12 +410,6 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{% url user_page_card request.user %}">
-                                                <i class="icon-list-alt"></i>
-                                                {% trans "Technical card" %}
-                                            </a>
-                                        </li>
-                                        <li>
                                             <a href="{% url user_page_plots request.user %}">
                                                 <i class="icon-bar-chart"></i>
                                                 {% trans "Plots" %}
@@ -763,10 +757,6 @@
                 $('.carousel').carousel();
                 $('.nav-tabs').tab();
                 $('[rel=tooltip]').tooltip();
-
-                $('.capty').capty({animation: 'fade', speed: 150, height: 45});
-                $('.capty-fixed').capty({animation: 'fixed', height: 45, opacity: 0.6});
-                $('.capty-content').show();
 
                 // date and time pickers
                 $('input').filter('.timepickerclass').timepicker({});

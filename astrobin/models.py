@@ -99,20 +99,20 @@ SUBJECT_LABELS = {
 }
 
 SUBJECT_TYPES = {
-    'Psr': SUBJECT_LABELS['PULSAR'],
-    'GlC': SUBJECT_LABELS['GLOBUL'],
-    'GCl': SUBJECT_LABELS['GLOBUL'],
-    'OpC': SUBJECT_LABELS['OPENCL'],
-    'HII': SUBJECT_LABELS['NEBULA'],
-    'RNe': SUBJECT_LABELS['NEBULA'],
-    'ISM': SUBJECT_LABELS['NEBULA'],
-    'sh ': SUBJECT_LABELS['NEBULA'],
-    'PN' : SUBJECT_LABELS['PLNEBU'],
-    'LIN': SUBJECT_LABELS['GALAXY'],
-    'IG' : SUBJECT_LABELS['GALAXY'],
-    'GiG': SUBJECT_LABELS['GALAXY'],
-    'Sy2': SUBJECT_LABELS['GALAXY'],
-    'G'  : SUBJECT_LABELS['GALAXY'],
+    'Psr': 'PULSAR',
+    'GlC': 'GLOBUL',
+    'GCl': 'GLOBUL',
+    'OpC': 'OPENCL',
+    'HII': 'NEBULA',
+    'RNe': 'NEBULA',
+    'ISM': 'NEBULA',
+    'sh ': 'NEBULA',
+    'PN' : 'PLNEBU',
+    'LIN': 'GALAXY',
+    'IG' : 'GALAXY',
+    'GiG': 'GALAXY',
+    'Sy2': 'GALAXY',
+    'G'  : 'GALAXY',
 }
 
 SOLAR_SYSTEM_SUBJECT_CHOICES = (
@@ -1023,7 +1023,9 @@ class Image(models.Model):
 
     # TODO: verify how thumbnail integration works when sharing on forums
     # TODO: why have mod as a setting when inverted is part of the alias?
-    def _thumbnail_real(self, alias, thumbnail_settings = {}):
+    def thumbnail(self, alias, thumbnail_settings = {}):
+        from django.core.cache import cache
+        from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
 
         # We default to the original upload
@@ -1051,6 +1053,17 @@ class Image(models.Model):
             except ImageRevision.DoesNotExist:
                 pass
 
+        app_model = "{0}.{1}".format(
+            self._meta.app_label,
+            self._meta.object_name).lower()
+        cache_key = 'easy_thumb_alias_cache_%s.%s_%s' % (
+            app_model,
+            field,
+            alias)
+        url = cache.get(cache_key)
+
+        if url:
+            return url
 
         thumbnailer = get_thumbnailer(field)
         options = settings.THUMBNAIL_ALIASES[''][alias]
@@ -1065,28 +1078,17 @@ class Image(models.Model):
             except KeyError:
                 pass
 
-        return thumbnailer.get_thumbnail(options)
-
-    def thumbnail(self, alias, thumbnail_settings = {}):
-        from easy_thumbnails.exceptions import InvalidImageFormatError
-
         try:
-            url = settings.IMAGES_URL + self._thumbnail_real(alias, thumbnail_settings).name
-            return url
+            thumbnail = thumbnailer.get_thumbnail(options)
+            url = settings.IMAGES_URL + thumbnail.name
+            cache.set(cache_key, url, 60*60*24*365)
         except InvalidImageFormatError:
-            return ''
+            return "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
+                options['size'][0],
+                options['size'][1])
 
-    def thumbnail_raw(self, alias, thumbnail_settings = {}):
-        # TODO: uglish... this is a model, not a view.
-        from django.http import HttpResponse
+        return url
 
-        thumb = self._thumbnail_real(alias, thumbnail_settings)
-
-        filename = thumb.name.split('/')[-1]
-        response = HttpResponse(thumb.file, content_type='image/jpeg')
-        response['Content-Disposition'] = 'attachment; filename=%s' % filename
-
-        return response
 
     @staticmethod
     def by_gear(gear):
