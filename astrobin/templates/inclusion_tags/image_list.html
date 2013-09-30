@@ -3,6 +3,7 @@
 {% load common_tags %}
 {% load hitcount_tags %}
 
+
 {% ifequal view "list" %}
     <table class="table table-condensed">
         <thead>
@@ -47,42 +48,19 @@
     </table>
 {% else %}
     <ul class="thumbnails astrobin-thumbnails">
-    {% for image in image_list %}
-        {% random_id %}
-        <li class="thumbnail astrobin-thumbnail" style="width:{{thumbnail_size}}px">
-            <a rel="tooltip"
-                title="{{image.title|escape}}, {% trans "by" %} {{image.get_author_profile}}"
-                style="display:block;"
-                href="{% get_image_url image %}">
+        {% include 'inclusion_tags/image_list_entries.html' %}
 
-                {% if image.iotd_date %}
-                    <div class="iotd-thumb-banner">
-                        <h2>
-                            <i class="icon icon-trophy"></i>
-                        </h2>
-                    </div>
-                {% endif %}
-
-                <img src="http://placehold.it/184/393939/eee&text={% trans "Loading..." %}"
-                     data-id="{{image.id}}"
-                     class="capty"
-                     id="#capty-content-{{image.id}}-{{randomid}}"
-                     alt="{{image.title|default:_("(no title)")|escape}}" />
-            </a>
-
-            <div class="capty-content" id="capty-content-{{image.id}}-{{randomid}}">
-                {{image.title|escape|truncatechars:23}}
-                <br/>
-                {% trans "by" %} <a href="{% url user_page image.user %}">{{image.get_author_profile}}</a>
-            </div>
-        </li>
-    {% empty %}
-        <li>{% trans "No images" %}.</li>
-    {% endfor %}
+        <script src="{{STATIC_URL}}common/js/jquery-1.8.3.js"></script>
+        <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
+        <script>
+            $.endlessPaginate({
+                paginateOnScroll: true,
+                paginateOnScrollMargin: 300,
+                onCompleted: function(context, fragment) {
+                    window.loadThumbnails(fragment);
+                }
+            });
+        </script>
     </ul>
 {% endifequal %}
-
-{% if paginate %}
-    {% include 'pagination.html' %}
-{% endif %}
 

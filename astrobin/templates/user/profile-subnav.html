@@ -23,7 +23,7 @@
                     {% endif %}
                 {% endifequal %}
                 <li>
-                    <a href="{% url 'user_page' user %}{% query_string "public=" "sub" %}">
+                    <a href="{% url 'user_page' user %}{% query_string "public=" "sub,active" %}">
                         <i class="icon-picture"></i>
                         {% trans "Gallery" %}
                     </a>
@@ -43,12 +43,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'user_page_card' user %}">
-                        <i class="icon-list-alt"></i>
-                        {% trans "Technical card" %}
-                    </a>
-                </li>
-                <li>
                     <a href="{% url 'user_page_plots' user %}">
                         <i class="icon-bar-chart"></i>
                         {% trans "Plots" %}
@@ -58,13 +52,13 @@
                 {% ifequal user request.user %}
                 <li class="divider"></li>
                 <li>
-                    <a href="{% query_string "public=" "sub" %}">
+                    <a href="{% query_string "" "sub,active,staging" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% query_string "staging=" "sub,public" %}">
+                    <a href="{% query_string "staging=" "sub,public,active" %}">
                         <i class="icon-lock"></i>
                         {% trans "Staging Area" %}
                     </a>
@@ -127,23 +121,23 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{% query_string "public=,sub=uploaded" "staging" %}">
+                <li><a href="{% query_string "public=,sub=uploaded" "staging,active" %}">
                     <i class="icon-upload-alt"></i>
                     {% trans "Upload time" %}</a></li>
-                <li><a href="{% query_string "public=,sub=acquired" "staging" %}">
+                <li><a href="{% query_string "public=,sub=acquired" "staging,active" %}">
                     <i class="icon-time"></i>
                     {% trans "Acquisition time" %}</a></li>
-                <li><a href="{% query_string "public=,sub=subject" "staging" %}">
+                <li><a href="{% query_string "public=,sub=subject" "staging,active" %}">
                     <i class="icon-tags"></i>
                     {% trans "Subject type" %}</a></li>
-                <li><a href="{% query_string "public=,sub=year" "staging" %}">
+                <li><a href="{% query_string "public=,sub=year" "staging,active" %}">
                     <i class="icon-calendar"></i>
                     {% trans "Year" %}</a></li>
-                <li><a href="{% query_string "public=,sub=gear" "staging" %}">
+                <li><a href="{% query_string "public=,sub=gear" "staging,active" %}">
                     <i class="icon-cog"></i>
                     {% trans "Gear" %}</a></li>
                 <li class="divider"></li>
-                <li><a href="{% query_string "public=,sub=nodata" "staging" %}">
+                <li><a href="{% query_string "public=,sub=nodata" "staging,active" %}">
                     <i class="icon-warning-sign"></i>
                     {% trans "Lacking data" %}</a></li>
             </ul>

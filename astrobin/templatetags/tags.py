@@ -90,58 +90,14 @@ def string_to_date(date):
         return datetime.now()
 
 
-def image_list(context, request, object_list, paginate = True):
-    ret = {}
-
-    try:
-        paginator = context['paginator']
-        page = int(context['page'])
-        pages = int(context['pages'])
-        page_obj = context['page_obj']
-        next = context['next']
-        previous = context['previous']
-        has_next = context['has_next']
-        has_previous = context['has_previous']
-
-        paging = True
-        adjacent_pages = 3
-    except KeyError:
-        paging = False
-
-    image_list = object_list
-
-    if paging:
-        startPage = max(page - adjacent_pages, 1)
-        if startPage <= 3: startPage = 1
-        endPage = page + adjacent_pages + 1
-        if endPage >= pages - 1: endPage = pages + 1
-        page_numbers = [n for n in range(startPage, endPage) \
-                if n > 0 and n <= pages]
-
-        ret = {
-            'page_obj': page_obj,
-            'paginator': paginator,
-            'page': page,
-            'pages': pages,
-            'page_numbers': page_numbers,
-            'next': next,
-            'previous': previous,
-            'has_next': has_next,
-            'has_previous': has_previous,
-            'show_first': 1 not in page_numbers,
-            'show_last': pages not in page_numbers,
-        }
-
-    ret = dict(ret.items() + {
-        'image_list': image_list,
-        'paginate': paginate,
-        'IMAGES_URL': settings.IMAGES_URL,
+def image_list(context, request, object_list):
+    return {
+        'image_list': object_list,
         'request': request,
         'sort': request.GET.get('sort'),
         'view': request.GET.get('view', 'default'),
-    }.items())
-
-    return ret
+        'STATIC_URL': settings.STATIC_URL,
+    }
 register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
 
 

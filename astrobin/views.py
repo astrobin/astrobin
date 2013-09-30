@@ -1571,123 +1571,94 @@ def user_page(request, username):
             follows = True
 
     section = 'public'
-    subsection = request.GET.get('sub')
-    if not subsection:
-        subsection = 'year'
-    subtitle = None
-    backlink = None
+    subsection = request.GET.get('sub', 'year')
+    active = request.GET.get('active')
+    menu = []
 
-    smart_albums = []
-    sqs = Image.objects.filter(user = user).order_by('-uploaded')
-    lad_sql = 'SELECT date FROM astrobin_acquisition '\
-              'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\
-              'ORDER BY date DESC '\
-              'LIMIT 1'
+    qs = Image.objects.filter(user = user).order_by('-uploaded')
 
     if 'staging' in request.GET:
         if request.user != user:
             return HttpResponseForbidden()
-        sqs = sqs.filter(is_wip = True)
+        qs = qs.filter(is_wip = True)
         section = 'staging'
     else:
-        sqs = sqs.filter(is_wip = False)
+        qs = qs.filter(is_wip = False)
+
+        ############
+        # UPLOADED #
+        ############
         if subsection == 'uploaded':
             # All good already
             pass
+
+        ############
+        # ACQUIRED #
+        ############
         elif subsection == 'acquired':
-            sqs = sqs.extra(select = {'last_acquisition_date': lad_sql},
+            lad_sql = 'SELECT date FROM astrobin_acquisition '\
+                      'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\
+                      'ORDER BY date DESC '\
+                      'LIMIT 1'
+            qs = qs.extra(select = {'last_acquisition_date': lad_sql},
                             order_by = ['-last_acquisition_date'])
+
+        ########
+        # YEAR #
+        ########
         elif subsection == 'year':
-            if 'year' in request.GET:
-                year = request.GET.get('year')
-                try:
-                    year = int(year)
-                    sqs = sqs.filter(acquisition__date__year = year).extra(
-                        select = {'last_acquisition_date': lad_sql},
-                        order_by = ['-last_acquisition_date']
-                    ).distinct()
-                except ValueError:
-                    sqs = Image.objects.none()
-
-                subtitle = year
-                backlink = "?public&sub=year"
-            else:
-                acq = Acquisition.objects.filter(image__user = user)
+            acq = Acquisition.objects.filter(image__user = user)
+            if acq:
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
+                nd = _("No date specified")
+                menu = [(str(x), str(x)) for x in years] + [(0, nd)]
 
-                k_list = []
-                smart_albums.append(k_list)
+                if active == 0:
+                    qs = qs.filter(
+                        (Q(subject_type__lt = 500) | Q(subject_type = 600)) &
+                        (Q(acquisition = None) | Q(acquisition__date = None))).distinct()
+                else:
+                    if active is None:
+                        if years:
+                            active = str(years[0])
 
-                for y in years:
-                    k_dict = {str(y): {'message': None, 'images': []}}
-                    k_list.append(k_dict)
-                    for i in sqs.filter(acquisition__date__year = y).extra(
-                        select = {'last_acquisition_date': lad_sql},
-                        order_by = ['-last_acquisition_date']
-                    ).distinct():
-                        k_dict[str(y)]['images'].append(i)
+                    if active:
+                        qs = qs.filter(acquisition__date__year = active).distinct()
 
-                l = _("No date specified")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_dict[l]['message'] = _("To fill in the missing dates, use the <strong>Edit acquisition details</strong> entry in the <strong>Actions</strong> menu for each image.")
-                k_list.append(k_dict)
-                for i in sqs.filter(
-                    (Q(subject_type__lt = 500) | Q(subject_type = 600)) &
-                    (Q(acquisition = None) | Q(acquisition__date = None))).distinct():
-                    k_dict[l]['images'].append(i)
-
-                sqs = Image.objects.none()
+        ########
+        # GEAR #
+        ########
         elif subsection == 'gear':
             from templatetags.tags import gear_name
 
-            if 'gear' in request.GET:
-                try:
-                    gear = int(request.GET.get('gear'))
-                except ValueError:
-                    # Probably the Google bot is following some old links, from the time when
-                    # the 'gear' argument was the name of the gear item.
-                    raise Http404
+            telescopes = profile.telescopes.all()
+            cameras = profile.cameras.all()
 
-                sqs = sqs.filter(Q(imaging_telescopes__id = gear) | Q(imaging_cameras__id = gear))
+            nd = _("No imaging telescopes or lenses, or no imaging cameras specified")
+            gi = _("Gear images")
 
-                try:
-                    subtitle = gear_name(Gear.objects.get(id=gear))
-                except Gear.DoesNotExist:
-                    subtitle = ''
+            menu += [(x.id, gear_name(x)) for x in telescopes]
+            menu += [(x.id, gear_name(x)) for x in cameras]
+            menu += [( 0, nd)]
+            menu += [(-1, gi)]
 
-                backlink = "?public&sub=gear"
-            else:
-                k_list = []
-                smart_albums.append(k_list)
-                for qs, filter in {
-                    profile.telescopes.all(): 'imaging_telescopes',
-                    profile.cameras.all(): 'imaging_cameras',
-                }.iteritems():
-                    for k in qs:
-                        name = gear_name(k)
-                        k_dict = {name: {'message': None, 'images': []}}
-                        k_list.append(k_dict)
-                        for i in sqs.filter(**{filter: k}).distinct():
-                            k_dict[name]['images'].append(i)
-
-                l = _("No imaging telescopes or lenses, or no imaging cameras specified")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_dict[l]['message'] = _("To fill in the missing gear, use the <strong>Edit gear used</strong> entry in the <strong>Actions</strong> menu for each image.")
-                k_list.append(k_dict)
-                lacking = sqs.filter(
+            if active == 0:
+                qs = qs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
                     (Q(imaging_telescopes = None) | Q(imaging_cameras = None))).distinct()
-                for i in lacking:
-                    print i.subject_type
-                    k_dict[l]['images'].append(i)
+            elif active == -1:
+                qs = qs.filter(Q(subject_type = 500)).distinct()
+            else:
+                if active is None:
+                    if telescopes:
+                        active = telescopes[0].id
+                if active:
+                    qs = qs.filter(Q(imaging_telescopes__id = active) |
+                                     Q(imaging_cameras__id = active)).distinct()
 
-                l = _("Gear images")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(Q(subject_type = 500)).distinct():
-                    k_dict[l]['images'].append(i)
-
-                sqs = Image.objects.none()
+        ###########
+        # SUBJECT #
+        ###########
         elif subsection == 'subject':
             def reverse_subject_type(label):
                 ret = []
@@ -1696,118 +1667,131 @@ def user_page(request, username):
                         ret.append(key)
                 return ret
 
-            if 'subject' in request.GET:
-                subject_type = request.GET.get('subject')
-                r = reverse_subject_type(subject_type)
-                sqs = sqs.filter(Q(subjects__otype__in = r)).distinct()
-                subtitle = subject_type
-                backlink = "?public&sub=subject"
-            else:
-                k_list = []
-                smart_albums.append(k_list)
+            k_list = []
 
-                for l in SUBJECT_LABELS.values():
-                    k_dict = {l: {'message': None, 'images': []}}
-                    k_list.append(k_dict)
-                    r = reverse_subject_type(l)
-                    for i in sqs.filter(Q(subjects__otype__in = r)).distinct():
-                        k_dict[l]['images'].append(i)
+            menu += [(x, y) for x, y in SUBJECT_LABELS.iteritems()]
+            menu += [('SOLAR',  _("Solar system"))]
+            menu += [('WIDE',   _("Extremely wide field"))]
+            menu += [('TRAILS', _("Star trails"))]
+            menu += [('GEAR', _("Gear"))]
+            menu += [('OTHER', _("Other"))]
+            menu += [('NOSUB', _("No subjects specified"))]
 
-                l = _("Solar system")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(solar_system_main_subject__gte = 0):
-                    k_dict[l]['images'].append(i)
+            if active is None:
+                active = 'NEBULA'
 
-                l = _("Extremely wide field")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(subject_type = 300):
-                    k_dict[l]['images'].append(i)
+            if active in SUBJECT_LABELS.keys():
+                r = reverse_subject_type(active)
+                qs = qs.filter(Q(subjects__otype__in = r)).distinct()
 
-                l = _("Star trails")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(subject_type = 400):
-                    k_dict[l]['images'].append(i)
+            elif active == 'SOLAR':
+                qs = qs.filter(solar_system_main_subject__gte = 0)
 
-                l = _("Gear")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(subject_type = 500):
-                    k_dict[l]['images'].append(i)
+            elif active == 'WIDE':
+                qs = qs.filter(subject_type = 300)
 
-                l = _("Other")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(subject_type = 600):
-                    k_dict[l]['images'].append(i)
+            elif active == 'TRAILS':
+                qs = qs.filter(subject_type = 400)
 
-                l = _("No subjects specified")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_dict[l]['message'] = _("To fill in the missing subjects, use the <strong>Edit basic information</strong> entry in the <strong>Actions</strong> menu for each image.")
-                k_list.append(k_dict)
-                for i in sqs.filter(
+            elif active == 'GEAR':
+                qs = qs.filter(subject_type = 500)
+
+            elif active == 'OTHER':
+                qs = qs.filter(subject_type = 600)
+
+            elif active == 'NOSUB':
+                qs = qs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
                     (Q(subjects = None)) &
-                    (Q(solar_system_main_subject = None))).distinct():
+                    (Q(solar_system_main_subject = None))).distinct()
 
-                    k_dict[l]['images'].append(i)
-
-                sqs = Image.objects.none()
+        ###########
+        # NO DATA #
+        ###########
         elif subsection == 'nodata':
             k_list = []
-            smart_albums.append(k_list)
 
-            l = _("No subjects specified")
-            k_dict = {l: {'message': None, 'images': []}}
-            k_dict[l]['message'] = _("To fill in the missing subjects, use the <strong>Edit basic information</strong> entry in the <strong>Actions</strong> menu for each image.")
-            k_list.append(k_dict)
-            for i in sqs.filter(
-                (Q(subject_type = 100) | Q(subject_type = 200)) &
-                (Q(subjects = None)) &
-                (Q(solar_system_main_subject = None))):
-                k_dict[l]['images'].append(i)
+            menu += [('SUB',  _("No subjects specified"))]
+            menu += [('GEAR', _("No imaging telescopes or lenses, or no imaging cameras specified"))]
+            menu += [('ACQ',  _("No acquisition details specified"))]
 
-            l = _("No imaging telescopes or lenses, or no imaging cameras specified")
-            k_dict = {l: {'message': None, 'images': []}}
-            k_list.append(k_dict)
-            k_dict[l]['message'] = _("To fill in the missing gear, use the <strong>Edit gear used</strong> entry in the <strong>Actions</strong> menu for each image.")
-            for i in sqs.filter(
-                Q(subject_type__lt = 500) &
-                (Q(imaging_telescopes = None) | Q(imaging_cameras = None))):
-                k_dict[l]['images'].append(i)
+            if active is None:
+                active = 'SUB'
 
-            l = _("No acquisition details specified")
-            k_dict = {l: {'message': None, 'images': []}}
-            k_list.append(k_dict)
-            k_dict[l]['message'] = _("To fill in the missing acquisition details, use the <strong>Edit acquisition details</strong> entry in the <strong>Actions</strong> menu for each image.")
-            for i in sqs.filter(
-                Q(subject_type__lt = 500) &
-                Q(acquisition = None)):
-                k_dict[l]['images'].append(i)
+            if active == 'SUB':
+                qs =  qs.filter(
+                    (Q(subject_type = 100) | Q(subject_type = 200)) &
+                    (Q(subjects = None)) &
+                    (Q(solar_system_main_subject = None)))
 
-            sqs = Image.objects.none()
+            elif active == 'GEAR':
+                qs = qs.filter(
+                    Q(subject_type__lt = 500) &
+                    (Q(imaging_telescopes = None) | Q(imaging_cameras = None)))
 
-        section = 'public'
+            elif active == 'ACQ':
+                qs = qs.filter(
+                    Q(subject_type__lt = 500) &
+                    Q(acquisition = None))
 
-    return object_list(
-        request,
-        queryset=sqs,
-        template_name='user/profile.html',
-        template_object_name='image',
-        paginate_by = 20,
-        extra_context = {
-             'user':user,
-             'profile':profile,
-             'follows':follows,
-             'private_message_form': PrivateMessageForm(),
-             'section':section,
-             'subsection':subsection,
-             'subtitle':subtitle,
-             'backlink':backlink,
-             'smart_albums':smart_albums,
-         })
+
+    # Calculate some stats
+    from django.template.defaultfilters import timesince
+
+    member_since = None
+    date_time = user.date_joined.replace(tzinfo = None)
+    diff = abs(date_time - datetime.datetime.today())
+    span = timesince(date_time)
+    if span == "0 " + _("minutes"):
+        member_since = _("seconds ago")
+    else:
+        member_since = _("%s ago") % span
+
+    last_login = user.last_login
+    if request.user.is_authenticated():
+        viewer_profile = UserProfile.objects.get(user = request.user)
+        last_login = to_user_timezone(user.last_login, viewer_profile)
+
+    sqs = SearchQuerySet()
+    sqs = sqs.filter(username = user.username).models(Image)
+    sqs = sqs.order_by('-uploaded')
+
+    images = len(sqs)
+    integrated_images = len(sqs.filter(integration__gt = 0))
+    integration = sum([x.integration for x in sqs]) / 3600.0
+    avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
+
+    stats = (
+        (_('Member since'), member_since),
+        (_('Last login'), last_login),
+        (_('Images uploaded'), str(images)),
+        (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
+        (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+    )
+
+
+    response_dict = {
+        'image_list': qs,
+        'sort': request.GET.get('sort'),
+        'view': request.GET.get('view', 'default'),
+        'user':user,
+        'profile':profile,
+        'follows':follows,
+        'private_message_form': PrivateMessageForm(),
+        'section':section,
+        'subsection':subsection,
+        'active':active,
+        'menu':menu,
+        'stats':stats,
+    }
+
+    template_name = 'user/profile.html'
+    if request.is_ajax():
+        template_name = 'inclusion_tags/image_list_entries.html'
+
+    return render_to_response(
+        template_name, response_dict,
+        context_instance = RequestContext(request))
 
 
 @require_GET
@@ -1854,66 +1838,6 @@ def user_page_favorites(request, username):
             'private_message_form': PrivateMessageForm(),
          }
      )
-
-
-@require_GET
-def user_page_card(request, username):
-    """Shows the user's public page"""
-    user = get_object_or_404(User, username = username)
-    profile = UserProfile.objects.get(user=user)
-
-    gear_list = [('Telescopes and lenses', profile.telescopes.all(), 'imaging_telescopes'),
-                 ('Mounts'        , profile.mounts.all(), 'mounts'),
-                 ('Cameras'       , profile.cameras.all(), 'imaging_cameras'),
-                 ('Focal reducers', profile.focal_reducers.all(), 'focal_reducers'),
-                 ('Software'      , profile.software.all(), 'software'),
-                 ('Filters'       , profile.filters.all(), 'filters'),
-                 ('Accessories'   , profile.accessories.all(), 'accessories'),
-                ]
-
-    # Calculate some stats
-    from django.template.defaultfilters import timesince
-
-    member_since = None
-    date_time = user.date_joined.replace(tzinfo = None)
-    diff = abs(date_time - datetime.datetime.today())
-    span = timesince(date_time)
-    if span == "0 " + _("minutes"):
-        member_since = _("seconds ago")
-    else:
-        member_since = _("%s ago") % span
-
-    last_login = user.last_login
-    if request.user.is_authenticated():
-        viewer_profile = UserProfile.objects.get(user = request.user)
-        last_login = to_user_timezone(user.last_login, viewer_profile)
-
-    sqs = SearchQuerySet()
-    sqs = sqs.filter(username = user.username).models(Image)
-    sqs = sqs.order_by('-uploaded')
-
-    images = len(sqs)
-    integrated_images = len(sqs.filter(integration__gt = 0))
-    integration = sum([x.integration for x in sqs]) / 3600.0
-    avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
-
-    stats = (
-        (_('Member since'), member_since),
-        (_('Last login'), last_login),
-        (_('Images uploaded'), len(sqs)),
-        (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
-        (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
-    )
-
-    return render_to_response(
-        'user/card.html',
-        {
-            'user':user,
-            'profile':profile,
-            'gear_list':gear_list,
-            'stats':stats,
-        },
-        context_instance = RequestContext(request))
 
 
 @require_GET
@@ -2677,7 +2601,7 @@ def unfollow_subject(request, id):
 @require_GET
 def mark_notifications_seen(request):
     for n in notification.Notice.objects.filter(recipient=request.user):
-    return ajax_success()
+        return ajax_success()
 
 
 @login_required
