@@ -508,11 +508,11 @@ THUMBNAIL_ALIASES = {
         'real': {'size': (16536, 16536), 'watermark': True},
         'real_inverted': {'size': (16536, 16536), 'invert': True, 'watermark': True},
 
-        'hd': {'size': (1824, 1824), 'crop': False, 'watermark': True},
-        'hd_inverted': {'size': (1824, 1824), 'crop': False, 'invert': True, 'watermark': True},
+        'hd': {'size': (1824, 16536), 'crop': False, 'watermark': True},
+        'hd_inverted': {'size': (1824, 16536), 'crop': False, 'invert': True, 'watermark': True},
 
-        'regular': {'size': (620, 620), 'crop': False, 'watermark': True},
-        'regular_inverted': {'size': (620, 620), 'crop': False, 'invert': True, 'watermark': True},
+        'regular': {'size': (620, 16536), 'crop': False, 'watermark': True},
+        'regular_inverted': {'size': (620, 16536), 'crop': False, 'invert': True, 'watermark': True},
 
         'gallery': {'size': (130, 130), 'crop': True, 'rounded': True, 'quality': 80},
         'gallery_inverted': {'size': (130, 130), 'crop': True, 'rounded': True, 'quality': 80, 'inverted': True},
