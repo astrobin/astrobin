@@ -58,7 +58,7 @@
         <tokenizer class="solr.WhitespaceTokenizerFactory"/>
       </analyzer>
     </fieldType>
-
+    
     <fieldType name="ngram" class="solr.TextField" >
       <analyzer type="index">
         <tokenizer class="solr.KeywordTokenizerFactory"/>
@@ -70,7 +70,7 @@
         <filter class="solr.LowerCaseFilterFactory"/>
       </analyzer>
     </fieldType>
-
+    
     <fieldType name="edge_ngram" class="solr.TextField" positionIncrementGap="1">
       <analyzer type="index">
         <tokenizer class="solr.WhitespaceTokenizerFactory" />
@@ -86,7 +86,7 @@
     </fieldType>
   </types>
 
-  <fields>
+  <fields>   
     <!-- general -->
     <field name="id" type="string" indexed="true" stored="true" multiValued="false" required="true"/>
     <field name="django_ct" type="string" indexed="true" stored="true" multiValued="false" />
@@ -100,7 +100,7 @@
     <dynamicField name="*_f"  type="sfloat"  indexed="true"  stored="true"/>
     <dynamicField name="*_d"  type="sdouble" indexed="true"  stored="true"/>
     <dynamicField name="*_dt" type="date"    indexed="true"  stored="true"/>
-
+    
 
     <field name="rating" type="sfloat" indexed="true" stored="true" multiValued="false" />
 
@@ -116,6 +116,10 @@
 
     <field name="is_commercial" type="boolean" indexed="true" stored="true" multiValued="false" />
 
+    <field name="images" type="slong" indexed="true" stored="true" multiValued="false" />
+
+    <field name="moon_phase" type="sfloat" indexed="true" stored="true" multiValued="false" />
+
     <field name="votes" type="slong" indexed="true" stored="true" multiValued="false" />
 
     <field name="is_nebulae" type="boolean" indexed="true" stored="true" multiValued="false" />
@@ -130,11 +134,13 @@
 
     <field name="is_deep_sky" type="boolean" indexed="true" stored="true" multiValued="false" />
 
+    <field name="comments_written" type="slong" indexed="true" stored="true" multiValued="false" />
+
     <field name="is_solar_system" type="boolean" indexed="true" stored="true" multiValued="false" />
 
     <field name="is_comets" type="boolean" indexed="true" stored="true" multiValued="false" />
 
-    <field name="uploaded" type="date" indexed="true" stored="true" multiValued="false" />
+    <field name="username" type="text" indexed="true" stored="true" multiValued="false" />
 
     <field name="favorited" type="slong" indexed="true" stored="true" multiValued="false" />
 
@@ -142,23 +148,27 @@
 
     <field name="views" type="slong" indexed="true" stored="true" multiValued="false" />
 
-    <field name="is_galaxies" type="boolean" indexed="true" stored="true" multiValued="false" />
+    <field name="uploaded" type="date" indexed="true" stored="true" multiValued="false" />
+
+    <field name="retailers" type="text" indexed="true" stored="true" multiValued="true" />
+
+    <field name="avg_integration" type="sfloat" indexed="true" stored="true" multiValued="false" />
+
+    <field name="producers" type="text" indexed="true" stored="true" multiValued="true" />
 
     <field name="camera_types" type="text" indexed="true" stored="true" multiValued="true" />
+
+    <field name="is_planets" type="boolean" indexed="true" stored="true" multiValued="false" />
 
     <field name="is_moon" type="boolean" indexed="true" stored="true" multiValued="false" />
 
     <field name="max_pixel_size" type="slong" indexed="true" stored="true" multiValued="false" />
 
-    <field name="moon_phase" type="sfloat" indexed="true" stored="true" multiValued="false" />
+    <field name="min_pixel_size" type="slong" indexed="true" stored="true" multiValued="false" />
 
     <field name="min_aperture" type="slong" indexed="true" stored="true" multiValued="false" />
 
     <field name="license" type="slong" indexed="true" stored="true" multiValued="false" />
-
-    <field name="username" type="text" indexed="true" stored="true" multiValued="false" />
-
-    <field name="min_pixel_size" type="slong" indexed="true" stored="true" multiValued="false" />
 
     <field name="is_clusters" type="boolean" indexed="true" stored="true" multiValued="false" />
 
@@ -166,7 +176,7 @@
 
     <field name="max_aperture" type="slong" indexed="true" stored="true" multiValued="false" />
 
-    <field name="is_planets" type="boolean" indexed="true" stored="true" multiValued="false" />
+    <field name="is_galaxies" type="boolean" indexed="true" stored="true" multiValued="false" />
 
     <field name="is_sun" type="boolean" indexed="true" stored="true" multiValued="false" />
 

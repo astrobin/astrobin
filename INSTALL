@@ -25,7 +25,6 @@ deb http://fi.archive.ubuntu.com/ubuntu raring universe
 
 Use the following script in ~/chroots to prepare the chroot:
 
-
 #!/bin/bash
 
 ECHO="echo -e"

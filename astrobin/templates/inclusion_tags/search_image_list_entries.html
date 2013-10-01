@@ -1,0 +1,17 @@
+{% load endless %}
+{% load i18n %}
+{% load tags %}
+
+{% lazy_paginate image_list %}
+{% for search_result in image_list %}
+    {% with search_result.object as image %}
+        <li class="thumbnail astrobin-thumbnail">
+            {% include 'inclusion_tags/image.html' %}
+        </li>
+    {% endwith %}
+{% empty %}
+    <li>{% include 'inclusion_tags/no_images.html' %}</li>
+{% endfor %}
+
+{% show_more %}
+

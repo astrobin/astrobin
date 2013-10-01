@@ -160,77 +160,19 @@
     </table>
 {% else %}
     <ul class="thumbnails astrobin-thumbnails">
-    {% for search_result in image_list %}
-        {% if search_result.object.id %}
-            <li class="thumbnail astrobin-thumbnail">
-                <a href="{% get_image_url search_result.object %}">
-                    {% if search_result.object.iotd_date %}
-                        <div class="iotd-thumb-banner">
-                            <h2>
-                                <i class="icon icon-trophy"></i>
-                            </h2>
-                        </div>
-                    {% endif %}
-                    <img src="{{IMAGES_URL}}{% get_final_filename search_result.object %}_thumb.png"
-                         class="capty"
-                         id="#capty-content-{{search_result.object.id}}"
-                         alt="{{search_result.object.title|default:_("(no title)")}}"
-                         width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
-                </a>
-                <div class="capty-content" id="capty-content-{{search_result.object.id}}">
-                    {% ifequal sort '-integration' %}
-                        {% trans "Integration" %}: {{search_result.integration|seconds_to_hours}} {% trans "hours" %}
-                    {% endifequal %}
+        {% include 'inclusion_tags/search_image_list_entries.html' %}
 
-                    {% ifequal sort '-rating' %}
-                        {% trans "Rating" %}:
-                        {% if search_result.object.allow_rating and not search_result.object.user.userprofile_set.all.0.optout_rating %}
-                            {{search_result.rating|cut_decimals:3}} ~ [{{search_result.votes}}]
-                        {% else %}
-                            {% trans "n/a" %}
-                        {% endif %}
-                    {% endifequal %}
-
-                    {% ifequal sort '-favorited' %}
-                        {% with search_result.favorited as favorited_count %}
-                            {% if favorited_count > 0 %}
-                                {% blocktrans count counter=favorited_count %}Favorited one time{% plural %}Favorited {{counter}} times{% endblocktrans %}
-                            {% else %}
-                                {% trans "Never favorited" %}
-                            {% endif %}
-                        {% endwith %}
-                    {% endifequal %}
-
-                    {% ifequal sort '-uploaded' %}
-                        {{search_result.object.uploaded|ago}}
-                    {% endifequal %}
-
-                    {% ifequal sort '-acquired' %}
-                        {{search_result.last_acquisition_date}}
-                    {% endifequal %}
-
-                    {% ifequal sort '-views' %}
-                        {% with search_result.views as hit_count %}
-                            {% blocktrans count counter=hit_count|add:"0" %}Viewed one time{% plural %}Viewed {{counter}} times{% endblocktrans %}
-                        {% endwith %}
-                    {% endifequal %}
-
-                    {% ifequal sort '-comments' %}
-                        {% trans "Comments" %}: {{search_result.comments}}
-                    {% endifequal %}
-
-                    {% if not sort %}
-                        {{search_result.object.title|escape|truncatechars:23}}
-                    {% endif %}
-                    <br/>
-                    {% trans "by" %}
-                    <a href="{% url user_page search_result.object.user %}">
-                        {{search_result.object.user.userprofile_set.all.0}}
-                    </a>
-                </div>
-            </li>
-        {% endif %}
-    {% endfor %}
+        <script src="{{STATIC_URL}}common/js/jquery-1.8.3.js"></script>
+        <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
+        <script>
+            $.endlessPaginate({
+                paginateOnScroll: true,
+                paginateOnScrollMargin: 300,
+                onCompleted: function(context, fragment) {
+                    window.loadThumbnails(fragment);
+                }
+            });
+        </script>
     </ul>
 {% endifequal %}
 {% endif %}
