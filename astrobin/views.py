@@ -208,9 +208,7 @@ def wall(request):
     """The Big Wall"""
     sqs = SearchQuerySet().all().models(Image)
 
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-    }
+    response_dict = {}
 
     if request.GET.get('sort') == '-acquired':
         response_dict['sort'] = '-acquired'
