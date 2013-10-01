@@ -89,9 +89,8 @@
                                 <i class="icon-trophy"></i>
                                 {% trans "Image of the day" %}!
                             </h2>
-                            <a href="{% url image_detail iotd.image.id %}">
-                                <img src="{{IMAGES_URL}}{{iotd.filename}}.jpg"
-                                     alt="{{iotd.image.title|default:_("(no title)")}}"/>
+                            <a href="{% get_image_url iotd.image %}">
+                                <img src="{{iotd_thumb}}" alt="{{iotd.image.title|escape}}" />
                             </a>
                             <div class="info visible-desktop">
                                 <h3>{{iotd.image.title|truncatechars:"60"}}</h3>

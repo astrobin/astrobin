@@ -178,8 +178,9 @@ def index(request):
 
             response_dict['image_of_the_day'] = iotd
             response_dict['gear_list'] = gear_list
-            response_dict['iotd_runnerup_1_thumb'] = iotd.runnerup_1.thumbnail('runnerup', {'revision_label': 'final'})
-            response_dict['iotd_runnerup_2_thumb'] = iotd.runnerup_2.thumbnail('runnerup', {'revision_label': 'final'})
+            response_dict['iotd_thumb'] = iotd.image.thumbnail('iotd')
+            response_dict['iotd_runnerup_1_thumb'] = iotd.runnerup_1.thumbnail('runnerup')
+            response_dict['iotd_runnerup_2_thumb'] = iotd.runnerup_2.thumbnail('runnerup')
         except IndexError:
             # The is no IOTD
             pass
