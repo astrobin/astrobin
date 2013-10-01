@@ -334,6 +334,12 @@ def get_image_path(image, resized = False, inverted = False, hd = False):
     return image.path(resized, inverted, hd)
 
 
+@register.simple_tag
+def final_thumbnail(image, alias):
+    if image:
+        return image.thumbnail(alias)
+
+
 # TODO: Move these tags to an images specific app (astrobin_app_images)
 @register.filter
 def gallery_thumbnail(image, revision_label):

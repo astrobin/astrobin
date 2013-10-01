@@ -1,4 +1,4 @@
-{% load i18n avatar_tags thumbnail %}
+{% load i18n avatar_tags tags thumbnail %}
 
 {% if action.action_object_content_type.model == 'image' and action.action_object.is_wip %}
     /***/
@@ -16,12 +16,14 @@
             {% ifequal action.action_object_content_type.model 'imagerevision' %}
                 <div class="image">
                     <a href="{{action.action_object.get_absolute_url}}">
+                            <img src="{% final_thumbnail action.target 'act_target' %}" alt="{{action.target.title|escape}}" />
                     </a>
                 </div>
             {% else %}
                 {% if action.target_content_type.model == 'image' %}
                     <div class="image">
-                        <a href="{{action.target.get_absolute_url}}">
+                        <a href="{% get_image_url action.target %}">
+                            <img src="{% final_thumbnail action.target 'act_target' %}" alt="{{action.target.title|escape}}" />
                         </a>
                     </div>
                 {% endif %}
@@ -29,7 +31,8 @@
 
             {% ifequal action.action_object_content_type.model 'image' %}
                 <div class="image">
-                    <a href="{{action.action_object.get_absolute_url}}">
+                    <a href="{% get_image_url action.action_object %}">
+                        <img src="{% final_thumbnail action.action_object 'act_object' %}" alt="{{action.action_object.title|escape}}" />
                     </a>
                 </div>
             {% endifequal %}
