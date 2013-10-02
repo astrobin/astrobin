@@ -200,17 +200,13 @@ def index(request):
 
     response_dict['global_actions'] = global_actions
 
+    template = 'index.html'
+    if request.is_ajax():
+        template = 'index_page.html'
+
     return render_to_response(
-        'index.html', response_dict,
+        template, response_dict,
         context_instance = RequestContext(request))
-
-
-    return object_list(
-        request,
-        queryset = Action.objects.all(),
-        template_name = template,
-        template_object_name = 'global_action',
-        extra_context = response_dict)
 
 
 @require_GET
