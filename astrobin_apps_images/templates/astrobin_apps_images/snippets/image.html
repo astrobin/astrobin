@@ -1,11 +1,16 @@
 {% load astrobin_apps_images_tags %}
+{% load common_tags %}
 {% load i18n %}
 
-<a rel="tooltip"
-    title="{{image.title|escape}},
-           {% trans "by" %}
-           {{image.get_author_profile}}"
-    href="{% get_image_url image %}">
+<a
+    {% if show_tooltip %}
+        rel="tooltip"
+        title="{{image.title|escape}},
+               {% trans "by" %}
+               {{image.get_author_profile}}"
+    {% endif %}
+
+    href="{{url}}{% if request.GET.mod %}{% query_string "mod=request.GET.mod" "" %}{% endif %}">
 
     {% if alias != 'iotd' and image.iotd_date %}
         <div class="iotd-thumb-banner">
@@ -15,7 +20,7 @@
         </div>
     {% endif %}
 
-    <img src="http://placehold.it/{{size}}/222/333&text=AstroBin {% trans "Loading" %}..."
+    <img src="http://placehold.it/{{size}}/222/333&text=AstroBin / {% trans "Loading" %}..."
          class="astrobin-image"
          data-id="{{image.id}}"
          data-loaded="false"

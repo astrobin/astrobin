@@ -983,8 +983,25 @@ class Image(models.Model):
         # Right now we don't delete anything, just to be on the safe side
         pass
 
-    def get_absolute_url(self):
-        return '/%i' % self.id
+    def get_absolute_url(self, revision = 'final', size = 'regular'):
+        if revision == 'final':
+            if not self.is_final:
+                r = ImageRevision.objects.filter(
+                    image = self, is_final = True)
+                if r:
+                    revision = r[0].label
+
+        url = '/'
+        if size == 'full':
+            url += 'full/'
+
+
+        url += '%i/' % self.id
+
+        if revision != 'final':
+            url += '%s/' % revision
+
+        return url
 
     def iotd_date(self):
         try:
@@ -1160,7 +1177,11 @@ class ImageRevision(models.Model):
     def process(self):
         store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
 
-    def get_absolute_url(self):
+    def get_absolute_url(self, revision = 'nd', size = 'regular'):
+        # We can ignore the revision argument of course
+        if size == 'full':
+            return '/%i/%s/full/' % (self.image.id, self.label)
+
         return '/%i/%s/' % (self.image.id, self.label)
 
     def thumbnail(self, alias, thumbnail_settings = {}):
