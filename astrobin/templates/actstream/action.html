@@ -11,7 +11,7 @@
     {% endif %}
 
     <div class="content">
-
+        {% if show_thumbnail %}
         <div class="object">
             {% ifequal action.action_object_content_type.model 'imagerevision' %}
                 <div class="image">
@@ -38,6 +38,7 @@
             {% endifequal %}
 
         </div>
+        {% endif %}
 
         {% if action.actor.get_absolute_url %}
             <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax action.actor %}"

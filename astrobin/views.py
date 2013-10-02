@@ -189,6 +189,22 @@ def index(request):
     if request.is_ajax():
         template = 'index_page.html'
 
+    # We don't want to show the same thumbnail more than once.
+    global_actions = [{'action': x, 'show_thumbnail': True} for x in Action.objects.all()[:100]]
+    actions_with_images = []
+    for i in global_actions:
+        if i['action'].target not in actions_with_images:
+            actions_with_images.append(i['action'].target)
+        else:
+            i['show_thumbnail'] = False
+
+    response_dict['global_actions'] = global_actions
+
+    return render_to_response(
+        'index.html', response_dict,
+        context_instance = RequestContext(request))
+
+
     return object_list(
         request,
         queryset = Action.objects.all(),
