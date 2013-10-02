@@ -1,0 +1,12 @@
+<script src="{{STATIC_URL}}common/js/jquery-1.8.3.js"></script>
+<script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
+<script>
+    $.endlessPaginate({
+        paginateOnScroll: true,
+        paginateOnScrollMargin: 300,
+        onCompleted: function(context, fragment) {
+            window.loadThumbnails(fragment);
+        }
+    });
+</script>
+
