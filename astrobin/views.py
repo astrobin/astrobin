@@ -178,9 +178,6 @@ def index(request):
 
             response_dict['image_of_the_day'] = iotd
             response_dict['gear_list'] = gear_list
-            response_dict['iotd_thumb'] = iotd.image.thumbnail('iotd')
-            response_dict['iotd_runnerup_1_thumb'] = iotd.runnerup_1.thumbnail('runnerup')
-            response_dict['iotd_runnerup_2_thumb'] = iotd.runnerup_2.thumbnail('runnerup')
         except IndexError:
             # The is no IOTD
             pass
@@ -189,14 +186,21 @@ def index(request):
     if request.is_ajax():
         template = 'index_page.html'
 
-    # We don't want to show the same thumbnail more than once.
-    global_actions = [{'action': x, 'show_thumbnail': True} for x in Action.objects.all()[:100]]
-    actions_with_images = []
-    for i in global_actions:
-        if i['action'].target not in actions_with_images:
-            actions_with_images.append(i['action'].target)
-        else:
-            i['show_thumbnail'] = False
+    from django.core.cache import cache
+    cache_key = 'astrobin_index_global_actions_%s' % request.LANGUAGE_CODE
+    global_actions = cache.get(cache_key)
+
+    if global_actions is None:
+        # We don't want to show the same thumbnail more than once.
+        global_actions = [{'action': x, 'show_thumbnail': True} for x in Action.objects.all()[:100]]
+        actions_with_images = []
+        for i in global_actions:
+            if i['action'].target not in actions_with_images:
+                actions_with_images.append(i['action'].target)
+            else:
+                i['show_thumbnail'] = False
+
+        cache.set(cache_key, global_actions)
 
     response_dict['global_actions'] = global_actions
 

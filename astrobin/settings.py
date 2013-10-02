@@ -201,6 +201,7 @@ INSTALLED_APPS = (
     'nested_comments',
     'astrobin',
     'rawdata',
+    'astrobin_apps_images',
 
     # Third party apps
     'registration',
@@ -375,6 +376,8 @@ PIPELINE_JS = {
             'common/js/ember-1.0.0-pre.2.js',
             'common/js/jquery.lightbox-0.5.js',
 
+            'astrobin_apps_images/js/astrobin_apps_images.js',
+
             'js/jquery.i18n.js',
             'js/plugins/localization/jquery.localisation.js',
             'js/jquery.uniform.js',
@@ -514,21 +517,21 @@ THUMBNAIL_ALIASES = {
         'regular': {'size': (620, 16536), 'crop': False, 'watermark': True},
         'regular_inverted': {'size': (620, 16536), 'crop': False, 'invert': True, 'watermark': True},
 
-        'gallery': {'size': (130, 130), 'crop': True, 'rounded': True, 'quality': 80},
-        'gallery_inverted': {'size': (130, 130), 'crop': True, 'rounded': True, 'quality': 80, 'inverted': True},
-        'thumb': {'size': (80, 80), 'crop': True, 'rounded': True, 'quality': 80},
-        'revision': {'size': (86, 86), 'crop': True, 'rounded': True, 'quality': 80},
+        'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
+        'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'inverted': True},
+        'thumb': {'size': (80, 80), 'crop': True, 'rounded': 'smart', 'quality': 80},
+        'revision': {'size': (86, 86), 'crop': True, 'rounded': 'smart', 'quality': 80},
 
         # Tricks
         'histogram': {'size': (274, 120), 'histogram': True},
 
         # IOTD
-        'iotd': {'size': (780, 180), 'crop': True, 'watermark': True},
-        'runnerup': {'size': (50, 50), 'crop': True, 'rounded': True, 'quality': 80},
+        'iotd': {'size': (780, 180), 'crop': 'smart', 'watermark': True},
+        'runnerup': {'size': (50, 50), 'crop': 'smart', 'rounded': True, 'quality': 80},
 
         # Activity stream
-        'act_target': {'size': (360, 64), 'crop': True},
-        'act_object': {'size': (360, 192), 'crop': True},
+        'act_target': {'size': (360, 64), 'crop': 'smart', 'quality': 80},
+        'act_object': {'size': (360, 192), 'crop': 'smart', 'quality': 80},
     },
 }
 THUMBNAIL_QUALITY = 100

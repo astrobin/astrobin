@@ -1,4 +1,6 @@
-{% load i18n avatar_tags tags thumbnail %}
+{% load astrobin_apps_images_tags %}
+{% load avatar_tags %}
+{% load i18n %}
 
 {% if action.action_object_content_type.model == 'image' and action.action_object.is_wip %}
     /***/
@@ -15,24 +17,19 @@
         <div class="object">
             {% ifequal action.action_object_content_type.model 'imagerevision' %}
                 <div class="image">
-                    <a href="{{action.action_object.get_absolute_url}}">
-                        <img src="{% final_thumbnail action.action_object 'act_object' %}" alt="{{action.action_object.title|escape}}" />
+                    {% astrobin_image action.action_object 'act_object' %}
                     </a>
                 </div>
             {% else %}
                 {% if action.target_content_type.model == 'image' %}
                     <div class="image">
-                        <a href="{% get_image_url action.target %}">
-                            <img src="{% final_thumbnail action.target 'act_target' %}" alt="{{action.target.title|escape}}" />
-                        </a>
+                        {% astrobin_image action.target 'act_target' %}
                     </div>
                 {% endif %}
 
                 {% if action.target_content_type.model == 'imagerevision' %}
                     <div class="image">
-                        <a href="{{action.target.get_absolute_url}}">
-                            <img src="{{action.target.image_file|thumbnail_url:'act_target'}}" alt="{{action.target.title|escape}}" />
-                        </a>
+                        {% astrobin_image action.target 'act_target' %}
                     </div>
                 {% endif %}
 
@@ -40,9 +37,7 @@
 
             {% ifequal action.action_object_content_type.model 'image' %}
                 <div class="image">
-                    <a href="{% get_image_url action.action_object %}">
-                        <img src="{% final_thumbnail action.action_object 'act_object' %}" alt="{{action.action_object.title|escape}}" />
-                    </a>
+                    {% astrobin_image action.action_object 'act_object' %}
                 </div>
             {% endifequal %}
 
