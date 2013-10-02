@@ -1504,6 +1504,11 @@ div.rating-container .score-histogram-container .score .score-total-votes {
   padding-right: 8px;
   font-weight: bold;
 }
+.astrobin-image-container {
+  /* Because of the IOTD banner. */
+
+  position: relative;
+}
 .main-image {
   text-align: center;
 }
@@ -2522,6 +2527,7 @@ form.avatar-change label.control-label {
   position: relative;
 }
 .image-of-the-day h2 {
+  z-index: 1;
   position: absolute;
   border: 0;
   margin: 0;
