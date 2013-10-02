@@ -1,10 +1,10 @@
-{% load activity_tags %}
+{% load astrobin_activity_tags %}
 {% load endless %}
 {% load i18n %}
 
-{% paginate global_action_list %}
-{% for action in global_action_list %}
-    {% display_action action %}
+{% lazy_paginate global_actions %}
+{% for action_wrapper in global_actions %}
+    {% astrobin_display_action action_wrapper %}
 {% empty %}
     <p>{% trans "There is no activity yet." %}</p>
 {% endfor %}
