@@ -16,7 +16,7 @@
             {% ifequal action.action_object_content_type.model 'imagerevision' %}
                 <div class="image">
                     <a href="{{action.action_object.get_absolute_url}}">
-                            <img src="{% final_thumbnail action.target 'act_target' %}" alt="{{action.target.title|escape}}" />
+                        <img src="{% final_thumbnail action.action_object 'act_object' %}" alt="{{action.action_object.title|escape}}" />
                     </a>
                 </div>
             {% else %}
@@ -27,6 +27,15 @@
                         </a>
                     </div>
                 {% endif %}
+
+                {% if action.target_content_type.model == 'imagerevision' %}
+                    <div class="image">
+                        <a href="{{action.target.get_absolute_url}}">
+                            <img src="{{action.target.image_file|thumbnail_url:'act_target'}}" alt="{{action.target.title|escape}}" />
+                        </a>
+                    </div>
+                {% endif %}
+
             {% endifequal %}
 
             {% ifequal action.action_object_content_type.model 'image' %}
