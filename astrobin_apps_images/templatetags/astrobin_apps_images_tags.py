@@ -12,7 +12,7 @@ register = Library()
 # Returns the URL of an image, taking into account the fact that it might be
 # a commercial gear image.
 @register.simple_tag
-def get_image_url(image):
+def get_image_url(image, revision = 'final', size = 'regular'):
     def commercial_gear_url(commercial_gear):
         gear = Gear.objects.filter(commercial = commercial_gear)
         if gear:
@@ -33,22 +33,38 @@ def get_image_url(image):
         if url:
             return url
 
-    return image.get_absolute_url()
+    return image.get_absolute_url(revision, size)
 
 
 # Renders an linked image tag with a placeholder and async loading of the
 # actual thumbnail.
-@register.simple_tag
-def astrobin_image(image, alias, revision = 'final'):
+def astrobin_image(
+    context, image, alias,
+    revision = 'final', url_size = 'regular'):
+
     size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
+    if alias in ('regular', 'regular_inverted',
+                 'hd'     , 'hd_inverted',
+                 'real'   , 'real_inverted'):
+        size = (size[0], int(size[0] / (image.w / float(image.h))))
 
-    return render_to_string(
-        'astrobin_apps_images/snippets/image.html',
-        {
-            'image'   : image,
-            'alias'   : alias,
-            'revision': revision,
-            'size'    : "%sx%s" % (size[0], size[1]),
-        },
-        None)
+    url = get_image_url(image, revision, url_size)
+    show_tooltip = alias in (
+        'gallery', 'gallery_inverted',
+        'thumb', 'runnerup',
+    )
 
+    return {
+        'image'       : image,
+        'alias'       : alias,
+        'revision'    : revision,
+        'size'        : "%sx%s" % (size[0], size[1]),
+        'url'         : url,
+        'show_tooltip': show_tooltip,
+        'request'     : context['request'],
+    }
+
+
+register.inclusion_tag(
+    'astrobin_apps_images/snippets/image.html',
+    takes_context = True)(astrobin_image)
