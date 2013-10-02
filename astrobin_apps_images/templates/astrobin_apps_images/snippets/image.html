@@ -1,0 +1,26 @@
+{% load astrobin_apps_images_tags %}
+{% load i18n %}
+
+<a rel="tooltip"
+    title="{{image.title|escape}},
+           {% trans "by" %}
+           {{image.get_author_profile}}"
+    href="{% get_image_url image %}">
+
+    {% if alias != 'iotd' and image.iotd_date %}
+        <div class="iotd-thumb-banner">
+            <h2>
+                <i class="icon icon-trophy"></i>
+            </h2>
+        </div>
+    {% endif %}
+
+    <img src="http://placehold.it/{{size}}/ddd/ddd/"
+         class="astrobin-image"
+         data-id="{{image.id}}"
+         data-loaded="false"
+         data-alias="{{alias}}"
+         data-revision="{{revision}}"
+         alt="{{image.title|escape}}" />
+</a>
+
