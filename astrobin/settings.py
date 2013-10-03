@@ -432,6 +432,7 @@ ACTSTREAM_SETTINGS = {
         'astrobin.imagerevision',
         'rawdata.PublicDataPool',
         'nested_comments.nestedcomment',
+        'reviews.revieweditem',
     ),
 
 }

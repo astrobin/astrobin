@@ -1958,6 +1958,7 @@ def reviewed_item_post_save(sender, instance, created, **kwargs):
     if created:
          action.send(instance.user,
                      verb = verb,
+                     action_object = instance,
                      target = instance.content_object)
 post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
 

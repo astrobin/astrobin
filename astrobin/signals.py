@@ -80,7 +80,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             )
 
             verb = "commented on gear"
-            act.send(instance.author, verb = verb, target = gear)
+            act.send(instance.author, verb = verb, action_object = instance, target = gear)
 
 
 def rawdata_publicdatapool_post_save(sender, instance, created, **kwargs):
