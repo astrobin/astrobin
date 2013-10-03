@@ -49,6 +49,11 @@ def astrobin_image(
                  'real'   , 'real_inverted'):
         size = (size[0], int(size[0] / (image.w / float(image.h))))
 
+    placehold_size = [size[0], size[1]]
+    for i in range(0,2):
+        if placehold_size[i] > 1920:
+            placehold_size[i] = 1920
+
     url = get_image_url(image, revision, url_size)
     show_tooltip = alias in (
         'gallery', 'gallery_inverted',
@@ -56,14 +61,16 @@ def astrobin_image(
     )
 
     return {
-        'image'       : image,
-        'alias'       : alias,
-        'revision'    : revision,
-        'size'        : "%sx%s" % (size[0], size[1]),
-        'mod'         : mod,
-        'url'         : url,
-        'show_tooltip': show_tooltip,
-        'request'     : context['request'],
+        'image'         : image,
+        'alias'         : alias,
+        'revision'      : revision,
+        'size'          : "%sx%s" % (size[0], size[1]),
+        'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
+        'mod'           : mod,
+        'real'          : alias in ('real', 'real_inverted'),
+        'url'           : url,
+        'show_tooltip'  : show_tooltip,
+        'request'       : context['request'],
     }
 
 

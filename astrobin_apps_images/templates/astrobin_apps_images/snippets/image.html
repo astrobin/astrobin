@@ -21,8 +21,8 @@
             </div>
         {% endif %}
 
-        <img src="http://placehold.it/{{size}}/222/333&text=AstroBin / {% trans "Loading" %}..."
-             class="astrobin-image"
+        <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin / {% trans "Loading" %}..."
+             class="astrobin-image{% if real %} real{% endif %}"
              data-id="{{image.id}}"
              data-loaded="false"
              data-alias="{{alias}}"
