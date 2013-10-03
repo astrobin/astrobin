@@ -913,7 +913,7 @@ def image_upload_process(request):
     image.image_file.file.seek(0) # Because we opened it with PIL
     image.save()
 
-    return HttpResponseRedirect("/edit/presolve/%d/" % image.id)
+    return HttpResponseRedirect("/edit/basic/%d/" % image.id)
 
 
 @login_required
@@ -1241,15 +1241,8 @@ def image_edit_save_basic(request):
                                 _("No results. Sorry.")]
     image.save()
 
-    if 'was_not_ready' in request.POST:
-        if 'submit_next' in request.POST and 'skip_rest' not in request.POST:
-            return HttpResponseRedirect('/edit/gear/%i/' % image.id)
-
-        image.process(image.presolve_information > 1)
-        return HttpResponseRedirect(image.get_absolute_url())
-
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect('/edit/basic/%i/' % image.id)
+    return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
