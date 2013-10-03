@@ -1,6 +1,7 @@
+{% load astrobin_apps_images_tags %}
 {% load common_tags %}
-{% load i18n %}
 {% load hitcount_tags %}
+{% load i18n %}
 {% load tags %}
 
 <script type="text/javascript">var switchTo5x=true;</script>
@@ -54,7 +55,7 @@ $(document).ready(function() {
         $('.clip-status').text('{% trans "Copied!" %}');
     });
 
-    clip.setText("{% url image_detail image.id revision_label %}");
+    clip.setText("{% get_image_url image revision_label %}");
 
     var clip_html = clip.getHTML(16, 16);
     $('#clip-container .flash-container').append(clip_html);
@@ -79,10 +80,10 @@ $(document).ready(function() {
         * SIMPLE URL *
         *************/
         if (sharing_mode == 0 && image_size == 0 && image_mode == 0) {
-            content = "{{SHARE_PATH}}{% url image_detail image.id revision_label %}"
+            content = "{{SHARE_PATH}}{% get_image_url image revision_label %}"
         } else
         if (sharing_mode == 0 && image_size == 0 && image_mode == 1) {
-            content = "{{SHARE_PATH}}{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "" %}"
+            content = "{{SHARE_PATH}}{% get_image_url image revision_label %}{% query_string "mod='inverted'" "" %}"
         } else
         if (sharing_mode == 0 && image_size == 1 && image_mode == 0) {
             content = "{{SHARE_PATH}}{% url image_full image.id revision_label %}"
@@ -95,10 +96,10 @@ $(document).ready(function() {
         * FORUM *
         ********/
         if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
-            content = "[URL={{SHARE_PATH}}{% url image_detail image.id revision_label %}][IMG]{{SHARE_PATH}}{{image|gallery_thumbnail:revision_label}}[/IMG][/URL]"
+            content = "[URL={{SHARE_PATH}}{% get_image_url image revision_label %}][IMG]{{SHARE_PATH}}{{image|gallery_thumbnail:revision_label}}[/IMG][/URL]"
         } else
         if (sharing_mode == 1 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
-            content = "[URL={{SHARE_PATH}}{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "" %}][IMG]{{image|gallery_thumbnail_inverted:revision_label}}[/IMG][/URL]"
+            content = "[URL={{SHARE_PATH}}{% get_image_url image revision_label %}{% query_string "mod='inverted'" "" %}][IMG]{{image|gallery_thumbnail_inverted:revision_label}}[/IMG][/URL]"
         } else
         if (sharing_mode == 1 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
             content = "[URL={{SHARE_PATH}}{% url image_full image.id revision_label %}][IMG]{{image|gallery_thumbnail:revision_label}}[/IMG][/URL]"
@@ -107,10 +108,10 @@ $(document).ready(function() {
             content = "[URL={{SHARE_PATH}}{% url image_full image.id revision_label %}{% query_string "mod='inverted'" "" %}][IMG]{{image|gallery_thumbnail_inverted:revision_label}}[/IMG][/URL]"
         } else
         if (sharing_mode == 1 && image_size == 0 && image_mode == 0 && thumbnail == 1) {
-            content = "[URL={{SHARE_PATH}}{% url image_detail image.id revision_label %}]{{image.title}}[/URL]"
+            content = "[URL={{SHARE_PATH}}{% get_image_url image revision_label %}]{{image.title}}[/URL]"
         } else
         if (sharing_mode == 1 && image_size == 0 && image_mode == 1 && thumbnail == 1) {
-            content = "[URL={{SHARE_PATH}}{% url image_detail image.id revision_label %}]{{image.title}}[/URL]"
+            content = "[URL={{SHARE_PATH}}{% get_image_url image revision_label %}]{{image.title}}[/URL]"
         } else
         if (sharing_mode == 1 && image_size == 1 && image_mode == 0 && thumbnail == 1) {
             content = "[URL={{SHARE_PATH}}{% url image_full image.id revision_label %}]{{image.title}}[/URL]"
@@ -123,10 +124,10 @@ $(document).ready(function() {
         * HTML *
         *******/
         if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 0) {
-            content = "<a href=\"{{SHARE_PATH}}{% url image_detail image.id revision_label %}\"><img src=\"{{image|gallery_thumbnail:revision_label}}/></a>"
+            content = "<a href=\"{{SHARE_PATH}}{% get_image_url image revision_label %}\"><img src=\"{{image|gallery_thumbnail:revision_label}}/></a>"
         } else
         if (sharing_mode == 2 && image_size == 0 && image_mode == 1 && thumbnail == 0) {
-            content = "<a href=\"{{SHARE_PATH}}{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "" %}\"><img src=\"{{image|gallery_thumbnail_inverted:revision_label}}/></a>"
+            content = "<a href=\"{{SHARE_PATH}}{% get_image_url image revision_label %}{% query_string "mod='inverted'" "" %}\"><img src=\"{{image|gallery_thumbnail_inverted:revision_label}}/></a>"
         } else
         if (sharing_mode == 2 && image_size == 1 && image_mode == 0 && thumbnail == 0) {
             content = "<a href=\"{{SHARE_PATH}}{% url image_full image.id revision_label %}\"><img src=\"{{image|gallery_thumbnail:revision_label}}/></a>"
@@ -135,10 +136,10 @@ $(document).ready(function() {
             content = "<a href=\"{{SHARE_PATH}}{% url image_full image.id revision_label %}{% query_string "mod='inverted'" "" %}\"><img src=\"{{image|gallery_thumbnail_inverted:revision_label}}/></a>"
         } else
         if (sharing_mode == 2 && image_size == 0 && image_mode == 0 && thumbnail == 1) {
-            content = "<a href=\"{{SHARE_PATH}}{% url image_detail image.id revision_label %}\">{{image.title}} (revision_label)</a>"
+            content = "<a href=\"{{SHARE_PATH}}{% get_image_url image revision_label %}\">{{image.title}} (revision_label)</a>"
         } else
         if (sharing_mode == 2 && image_size == 0 && image_mode == 1 && thumbnail == 1) {
-            content = "<a href=\"{{SHARE_PATH}}{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "" %}\">{{image.title}} (revision_label)</a>"
+            content = "<a href=\"{{SHARE_PATH}}{% get_image_url image revision_label %}{% query_string "mod='inverted'" "" %}\">{{image.title}} (revision_label)</a>"
         } else
         if (sharing_mode == 2 && image_size == 1 && image_mode == 0 && thumbnail == 1) {
             content = "<a href=\"{{SHARE_PATH}}{% url image_full image.id revision_label %}\">{{image.title}} (revision_label)</a>"

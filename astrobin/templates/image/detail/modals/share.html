@@ -1,3 +1,4 @@
+{% load astrobin_apps_images_tags %}
 {% load i18n %}
 
 <div class="modal hide fade" id="share-modal">
@@ -49,7 +50,7 @@
                                 <div class="flash-container"></div>
                                 <div class="clip-status">{% trans "Copy" %}</div>
                             </div>
-                            <textarea id="sharing_code" name="sharing_code" rows=6>{{SHARE_PATH}}{% url image_detail image.id revision_label %}</textarea>
+                            <textarea id="sharing_code" name="sharing_code" rows=6>{{SHARE_PATH}}{% get_image_url image revision_label %}</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -66,5 +67,4 @@
         </div>
     </div>
 </div>
-
 
