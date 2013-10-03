@@ -90,13 +90,12 @@ def string_to_date(date):
         return datetime.now()
 
 
-def image_list(context, request, object_list):
+def image_list(context, object_list, alias = 'gallery'):
     return {
         'image_list': object_list,
-        'request': request,
-        'sort': request.GET.get('sort'),
-        'view': request.GET.get('view', 'default'),
-        'STATIC_URL': settings.STATIC_URL,
+        'request': context['request'],
+        'alias': alias,
+        'view': context['request'].GET.get('view', 'default'),
     }
 register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
 

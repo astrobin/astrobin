@@ -3377,8 +3377,7 @@ def gear_page(request, id, slug):
         template_name = 'gear/page.html',
         template_object_name = 'gear',
         extra_context = {
-            'examples': all_images.order_by('-rating_score')[:30],
-            'small_size': settings.SMALL_THUMBNAIL_SIZE,
+            'examples': all_images.order_by('-rating_score')[:28],
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
             'reviews': ReviewedItem.objects.filter(gear = gear),
             'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'gear'),

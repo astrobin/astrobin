@@ -40,7 +40,7 @@
                              </a>
                         {% endfor %}
                     </div>
-                {% endif %}         
+                {% endif %}
 
                 {% if show_description %}
                     <div class="subtle-container">
@@ -62,7 +62,7 @@
                                 </a>
                             </h4>
                         </div>
-                        {% image_list request examples 0 95 %}
+                        {% image_list examples 'thumb' %}
                     </div>
                 {% endif %}
 
@@ -309,7 +309,7 @@ $(document).ready(function() {
 
                 var $content = $('<div/>').addClass('content');
                 var $score = $('<div/>').addClass('score');
-                
+
                 $content.text(response.content);
                 $score.text(response.score);
 

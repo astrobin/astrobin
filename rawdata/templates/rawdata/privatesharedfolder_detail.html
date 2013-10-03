@@ -71,7 +71,7 @@
                 </h4>
             </div>
 
-            {% image_list request object.processed_images.all 0 95 %}
+            {% image_list object.processed_images.all 'thumb' %}
         </div>
     {% endif %}
 
