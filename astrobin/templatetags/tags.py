@@ -304,19 +304,6 @@ def gear_type(gear):
     return '-'
 
 
-# TODO: delete this
-@register.simple_tag
-def get_image_path(image, resized = False, inverted = False, hd = False):
-    return image.path(resized, inverted, hd)
-
-
-# TODO: delete this
-@register.simple_tag
-def final_thumbnail(image, alias):
-    if image:
-        return image.thumbnail(alias)
-
-
 @register.filter
 def votes_by_score(instance, args):
     return Vote.objects.filter(
@@ -326,7 +313,6 @@ def votes_by_score(instance, args):
         score = args,
         user__userprofile__suspended_from_voting = False,
     ).count()
-
 
 
 @register.filter
