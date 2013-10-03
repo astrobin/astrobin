@@ -79,6 +79,16 @@
                         </p>
                     </div>
                 {% endifequal %}
+
+                {% ifequal action.action_object_content_type.model 'revieweditem' %}
+                    <div class="comment">
+                        <p>
+                            {{action.action_object.content}}
+                            <a href="{{action.action_object.get_absolute_url}}"><i class="icon-link"></i></a>
+                        </p>
+                    </div>
+                {% endifequal %}
+
             </div>
         {% endif %}
 
