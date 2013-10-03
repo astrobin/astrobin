@@ -1,11 +1,11 @@
+{% load astrobin_apps_images_tags %}
 {% load endless %}
 {% load i18n %}
-{% load tags %}
 
 {% lazy_paginate image_list %}
 {% for image in image_list %}
     <li class="thumbnail astrobin-thumbnail">
-        {% include 'inclusion_tags/image.html' %}
+        {% astrobin_image image 'gallery' %}
     </li>
 {% empty %}
     <li>{% include 'inclusion_tags/no_images.html' %}</li>
