@@ -1,0 +1,77 @@
+{% load astrobin_apps_images_tags %}
+{% load common_tags %}
+{% load i18n %}
+
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="icon-eye-open icon-white"></i>
+        {% trans "View" %}
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        {% if mod != 'inverted' and mod != 'solved' %}
+            <li>
+                <a href="{% get_image_url image revision_label %}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                    <i class="icon-adjust"></i>
+                    {% trans "Inverted monochrome" %}
+                </a>
+            </li>
+            {% if image.is_solved and mod != 'solved' %}
+            <li>
+                {% if is_revision %}
+                <a href="{% get_image_url image revision_label %}{% query_string "mod='solved', r=0" "plate_solving_started" %}">
+                    <i class="icon-screenshot"></i>
+                    {% trans "Annotated (original version)" %}
+                </a>
+                {% else %} <!-- is_revision -->
+                <a href="{% get_image_url image revision_label %}{% query_string "mod='solved'" "plate_solving_started" %}">
+                    <i class="icon-screenshot"></i>
+                    {% trans "Annotated" %}
+                </a>
+                {% endif %} <!-- is_revision -->
+            </li>
+            {% endif %} <!-- is_solved and not showing solved -->
+        {% endif %} <!-- not showing inverted and not showing solved -->
+
+        {% if mod == 'inverted' %}
+            <li>
+                <a href="{% get_image_url image revision_label %}{% query_string "" "plate_solving_started,mod" %}">
+                    <i class="icon-picture"></i>
+                    {% trans "Normal" %}
+                </a>
+            </li>
+            {% if image.is_solved and not solved %}
+            <li>
+                {% if is_revision %}
+                <a href="{% get_image_url image '0' %}{% query_string "mod='solved'" "plate_solving_started" %}">
+                    <i class="icon-screenshot"></i>
+                    {% trans "Annotated (original version)" %}
+                </a>
+                {% else %} <!-- is_revision -->
+                <a href="{% get_image_url image revision_label %}{% query_string "mod='solved'" "plate_solving_started" %}">
+                    <i class="icon-screenshot"></i>
+                    {% trans "Annotated" %}
+                </a>
+                {% endif %} <!-- is_revision -->
+            </li>
+            {% endif %} <!-- is_solved and not showing solved -->
+        {% endif %} <!-- showing inverted -->
+
+        {% if solved %}
+            <li>
+                <a href="{% get_image_url image revision_label %}{% query_string "" "plate_solving_started,mod" %}">
+                    <i class="icon-picture"></i>
+                    {% trans "Normal" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% get_image_url image revision_label %}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                    <i class="icon-adjust"></i>
+                    {% trans "Inverted monochrome" %}
+                </a>
+            </li>
+        {% endif %} <!-- showing solved -->
+    </ul>
+</li> <!-- view -->
+
+

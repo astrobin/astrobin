@@ -1,0 +1,42 @@
+{% load common_tags %}
+{% load i18n %}
+
+{% if request.user != image.user %}
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="icon-user icon-white"></i>
+        {% trans "User" %}
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="{% url user_page image.user %}">
+                <i class="icon-user"></i>
+                {% trans "View profile" %}
+            </a>
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+            <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
+               href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
+                {% if follows %}
+                    <i class="icon-eye-close"></i>
+                    {% trans "Stop following" %}
+                {% else %}
+                    <i class="icon-eye-open"></i>
+                    {% trans "Follow" %}
+                {% endif %}
+            </a>
+        </li>
+        {% endif %} <!-- authenticated -->
+        <li>
+            <a class="send-private-message" href="{% url messages_compose_to image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">
+                <i class="icon-envelope"></i>
+                {% trans "Send private message" %}
+            </a>
+        </li>
+    </ul>
+</li> <!-- user -->
+{% endif %} <!-- not owner -->
+
+
