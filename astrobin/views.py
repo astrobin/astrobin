@@ -195,12 +195,16 @@ def index(request):
         global_actions = [{'action': x, 'show_thumbnail': True} for x in Action.objects.all()[:100]]
         actions_with_images = []
         for i in global_actions:
-            if i['action'].target not in actions_with_images:
-                actions_with_images.append(i['action'].target)
+            key = i['action'].target
+            if key is None:
+                key = i['action'].action_object
+
+            if key not in actions_with_images:
+                actions_with_images.append(key)
             else:
                 i['show_thumbnail'] = False
 
-        cache.set(cache_key, global_actions)
+        cache.set(cache_key, global_actions, 300)
 
     response_dict['global_actions'] = global_actions
 
