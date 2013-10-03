@@ -680,21 +680,12 @@ def image_detail(request, id, r):
     if 'mod' in request.GET and request.GET['mod'] == 'inverted':
         mod = 'inverted'
 
-    thumbnail = image.thumbnail('regular', {
-        'revision_label': r,
-        'mod': mod,
-    })
-
+    # TODO: remove this structure
     revision_data = []
     for revision in revisions:
         revision_data.append({
             'object': revision,
-            'thumbnail': revision.thumbnail('revision'),
         })
-
-    original_revision_thumbnail = image.thumbnail('revision', {
-        'revision_label': 'original',
-    })
 
 
     #################
@@ -704,11 +695,10 @@ def image_detail(request, id, r):
     response_dict = {
         'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
 
-        'thumbnail': thumbnail,
+        # TODO: use astrobin_image template tag
         'histogram': image.thumbnail('histogram'),
         'revision_data': revision_data,
         'revision_label': r,
-        'original_revision_thumbnail': original_revision_thumbnail,
         'mod': mod,
 
         'already_voted': already_voted,
@@ -810,16 +800,18 @@ def image_full(request, id, r):
             r = 0
 
 
-
-    mode = None
+    mod = None
     if 'mod' in request.GET and request.GET['mod'] == 'inverted':
-        mode = 'inverted'
+        mod = 'inverted'
 
     real = 'real' in request.GET
     if real:
-        thumbnail_alias = 'real'
+        alias = 'real'
     else:
-        thumbnail_alias = 'hd'
+        alias = 'hd'
+
+    if mod:
+        alias += "_%s" % mod
 
     return object_detail(
         request,
@@ -829,11 +821,8 @@ def image_full(request, id, r):
         template_object_name = 'image',
         extra_context = {
             'real': real,
+            'alias': 'real' if real else 'hd',
             'revision_label': r,
-            'thumbnail': image.thumbnail(thumbnail_alias, {
-                'revision_label': r,
-                'mod': mode,
-            }),
         })
 
 

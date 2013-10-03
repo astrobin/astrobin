@@ -16,7 +16,7 @@ $(document).ready(function() {
 
             url += alias + '/';
 
-            if (mod != 'None' && mod != 'regular')
+            if (mod != '' && mod != 'None' && mod != 'regular')
                 url += mod + '/';
 
             /* TODO: verify that this works in all browsers. */
