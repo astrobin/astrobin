@@ -5,7 +5,7 @@
 {% lazy_paginate image_list %}
 {% for image in image_list %}
     <li class="thumbnail astrobin-thumbnail">
-        {% astrobin_image image 'gallery' %}
+        {% astrobin_image image alias %}
     </li>
 {% empty %}
     <li>{% include 'inclusion_tags/no_images.html' %}</li>

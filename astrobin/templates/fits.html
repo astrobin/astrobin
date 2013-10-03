@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
 {% load tags %}
 
@@ -11,8 +12,8 @@
             <div class="well">
                 {% blocktrans %}The authors of these images have been generous, and provided a link to the TIFF or FITS original files.{% endblocktrans %}
             </div>
-            
-            {% image_list request image_list %}
+
+            {% image_list image_list %}
         </div>
     </div>
 {% endblock %}
