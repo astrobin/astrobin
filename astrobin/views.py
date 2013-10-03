@@ -1611,7 +1611,7 @@ def user_page(request, username):
                 nd = _("No date specified")
                 menu = [(str(x), str(x)) for x in years] + [(0, nd)]
 
-                if active == 0:
+                if active == '0':
                     qs = qs.filter(
                         (Q(subject_type__lt = 500) | Q(subject_type = 600)) &
                         (Q(acquisition = None) | Q(acquisition__date = None))).distinct()
