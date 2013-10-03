@@ -248,12 +248,20 @@ AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 FLICKR_API_KEY = os.environ['ASTROBIN_FLICKR_API_KEY']
 FLICKR_SECRET  = os.environ['ASTROBIN_FLICKR_SECRET']
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    },
-}
+if not DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+        },
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        },
+    }
+
 JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
 
 HAYSTACK_SITECONF = 'astrobin.search_sites'
