@@ -6,6 +6,7 @@ $(document).ready(function() {
             var id = $img.attr('data-id');
             var alias = $img.attr('data-alias');
             var revision = $img.attr('data-revision');
+            var mod = $img.attr('data-mod');
             var url = '/' + id + '/'
 
             if (revision != '' && revision != 'final')
@@ -13,7 +14,10 @@ $(document).ready(function() {
             else
                 url += 'thumb/';
 
-            url += alias + '/'
+            url += alias + '/';
+
+            if (mod != 'None' && mod != 'regular')
+                url += mod + '/';
 
             /* TODO: verify that this works in all browsers. */
             $.ajax({

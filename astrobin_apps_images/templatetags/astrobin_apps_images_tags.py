@@ -40,7 +40,8 @@ def get_image_url(image, revision = 'final', size = 'regular'):
 # actual thumbnail.
 def astrobin_image(
     context, image, alias,
-    revision = 'final', url_size = 'regular'):
+    revision = 'final', url_size = 'regular',
+    mod = None):
 
     size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
     if alias in ('regular', 'regular_inverted',
@@ -59,6 +60,7 @@ def astrobin_image(
         'alias'       : alias,
         'revision'    : revision,
         'size'        : "%sx%s" % (size[0], size[1]),
+        'mod'         : mod,
         'url'         : url,
         'show_tooltip': show_tooltip,
         'request'     : context['request'],

@@ -1,5 +1,6 @@
-{% load i18n %}
+{% load astrobin_apps_images_tags %}
 {% load common_tags %}
+{% load i18n %}
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
@@ -153,7 +154,7 @@
             <ul class="dropdown-menu">
                 {% if mod != 'inverted' and mod != 'solved' %}
                     <li>
-                        <a href="{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                        <a href="{% get_image_url image revision_label %}{% query_string "mod='inverted'" "plate_solving_started" %}">
                             <i class="icon-adjust"></i>
                             {% trans "Inverted monochrome" %}
                         </a>
@@ -161,12 +162,12 @@
                     {% if image.is_solved and mod != 'solved' %}
                     <li>
                         {% if is_revision %}
-                        <a href="{% url image_detail image.id revision_label %}{% query_string "mod='solved', r=0" "plate_solving_started" %}">
+                        <a href="{% get_image_url image revision_label %}{% query_string "mod='solved', r=0" "plate_solving_started" %}">
                             <i class="icon-screenshot"></i>
                             {% trans "Annotated (original version)" %}
                         </a>
                         {% else %} <!-- is_revision -->
-                        <a href="{% url image_detail image.id revision_label %}{% query_string "mod='solved'" "plate_solving_started" %}">
+                        <a href="{% get_image_url image revision_label %}{% query_string "mod='solved'" "plate_solving_started" %}">
                             <i class="icon-screenshot"></i>
                             {% trans "Annotated" %}
                         </a>
@@ -177,7 +178,7 @@
 
                 {% if mod == 'inverted' %}
                     <li>
-                        <a href="{% url image_detail image.id revision_label %}{% query_string "" "plate_solving_started,mod" %}">
+                        <a href="{% get_image_url image revision_label %}{% query_string "" "plate_solving_started,mod" %}">
                             <i class="icon-picture"></i>
                             {% trans "Normal" %}
                         </a>
@@ -185,12 +186,12 @@
                     {% if image.is_solved and not solved %}
                     <li>
                         {% if is_revision %}
-                        <a href="{% url image_detail image.id 0 %}{% query_string "mod='solved'" "plate_solving_started" %}">
+                        <a href="{% get_image_url image '0' %}{% query_string "mod='solved'" "plate_solving_started" %}">
                             <i class="icon-screenshot"></i>
                             {% trans "Annotated (original version)" %}
                         </a>
                         {% else %} <!-- is_revision -->
-                        <a href="{% url image_detail image.id revision_label %}{% query_string "mod='solved'" "plate_solving_started" %}">
+                        <a href="{% get_image_url image revision_label %}{% query_string "mod='solved'" "plate_solving_started" %}">
                             <i class="icon-screenshot"></i>
                             {% trans "Annotated" %}
                         </a>
@@ -201,13 +202,13 @@
 
                 {% if solved %}
                     <li>
-                        <a href="{% url image_detail image.id revision_label %}{% query_string "" "plate_solving_started,mod" %}">
+                        <a href="{% get_image_url image revision_label %}{% query_string "" "plate_solving_started,mod" %}">
                             <i class="icon-picture"></i>
                             {% trans "Normal" %}
                         </a>
                     </li>
                     <li>
-                        <a href="{% url image_detail image.id revision_label %}{% query_string "mod='inverted'" "plate_solving_started" %}">
+                        <a href="{% get_image_url image revision_label %}{% query_string "mod='inverted'" "plate_solving_started" %}">
                             <i class="icon-adjust"></i>
                             {% trans "Inverted monochrome" %}
                         </a>

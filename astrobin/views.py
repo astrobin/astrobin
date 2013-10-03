@@ -767,10 +767,11 @@ def image_detail(request, id, r):
 
 
 @require_GET
-def image_thumb(request, id, r, alias):
+def image_thumb(request, id, r, alias, mod):
     image = get_object_or_404(Image, id = id)
     url = image.thumbnail(alias, {
-        'revision_label': r
+        'revision_label': r,
+        'mod': mod,
     })
 
     return HttpResponse(
