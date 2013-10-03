@@ -11,7 +11,7 @@
                    {{image.get_author_profile}}"
         {% endif %}
 
-        href="{{url}}{% if request.GET.mod %}{% query_string "mod=request.GET.mod" "" %}{% endif %}">
+        href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
         {% if alias != 'iotd' and image.iotd_date %}
             <div class="iotd-thumb-banner">
@@ -27,6 +27,7 @@
              data-loaded="false"
              data-alias="{{alias}}"
              data-revision="{{revision}}"
+             data-mod="{{mod}}"
              alt="{{image.title|escape}}" />
     </a>
 </div>

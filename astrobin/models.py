@@ -1041,6 +1041,7 @@ class Image(models.Model):
 
     # TODO: verify how thumbnail integration works when sharing on forums
     # TODO: why have mod as a setting when inverted is part of the alias?
+    # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail(self, alias, thumbnail_settings = {}):
         from django.core.cache import cache
         from easy_thumbnails.exceptions import InvalidImageFormatError
@@ -1053,7 +1054,7 @@ class Image(models.Model):
         mod = thumbnail_settings.get('mod', None)
 
         # Possible modes: 'inverted', 'solved'.
-        if mod:
+        if mod and mod != 'regular':
             alias = alias + '_' + mod
 
         if revision_label == '0':
