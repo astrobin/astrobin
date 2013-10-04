@@ -154,12 +154,14 @@ def jsonDumpSubjects(all):
 
 @page_template('index/personal_stream_page.html', key = 'personal_stream_page')
 @page_template('index/global_stream_page.html',   key = 'global_stream_page')
+@page_template('index/recent_images_page.html',   key = 'recent_images_page')
 def index(request, template = 'index/root.html', extra_context = None):
     """Main page"""
     from django.core.cache import cache
 
     response_dict = {
         'registration_form': RegistrationForm(),
+        'recent_images'    : Image.objects.all()[:640],
     }
 
     profile = None
@@ -196,21 +198,8 @@ def index(request, template = 'index/root.html', extra_context = None):
         actions = cache.get(cache_key)
 
         if actions is None:
-            # We don't want to show the same thumbnail more than once.
-            actions = [{'action': x, 'show_thumbnail': True} for x in Action.objects.all()[range_begin:range_end]]
-            actions_with_images = []
-            for i in actions:
-                key = i['action'].target
-                if key is None:
-                    key = i['action'].action_object
-
-                if key not in actions_with_images:
-                    actions_with_images.append(key)
-                else:
-                    i['show_thumbnail'] = False
-
+            actions = Action.objects.all()[range_begin:range_end]
             cache.set(cache_key, actions, 600)
-
         response_dict['global_actions'] = actions
 
 
@@ -244,9 +233,7 @@ def index(request, template = 'index/root.html', extra_context = None):
             ]
 
             # We don't want to show the same thumbnail more than once.
-            actions = [
-                {'action': x, 'show_thumbnail': True}
-                for x in Action.objects.filter(
+            actions = Action.objects.filter(
                     # Actor is user, or...
                     Q(
                         Q(actor_content_type__app_label = 'auth') &
@@ -297,22 +284,9 @@ def index(request, template = 'index/root.html', extra_context = None):
                         Q(action_object_object_id__in = followees_image_ids)
                     )
                 )[range_begin:range_end]
-            ]
-            actions_with_images = []
-            for i in actions:
-                key = i['action'].target
-                if key is None:
-                    key = i['action'].action_object
-
-                if key not in actions_with_images:
-                    actions_with_images.append(key)
-                else:
-                    i['show_thumbnail'] = False
 
             cache.set(cache_key, actions, 300)
-
         response_dict['personal_actions'] = actions
-
 
     if extra_context is not None:
         response_dict.update(extra_context)
@@ -1890,6 +1864,7 @@ def user_page(request, username):
         'active':active,
         'menu':menu,
         'stats':stats,
+        'alias':'gallery',
     }
 
     template_name = 'user/profile.html'

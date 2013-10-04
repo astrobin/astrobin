@@ -96,6 +96,7 @@ def image_list(context, object_list, alias = 'gallery'):
         'request': context['request'],
         'alias': alias,
         'view': context['request'].GET.get('view', 'default'),
+        'STATIC_URL': settings.STATIC_URL,
     }
 register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
 

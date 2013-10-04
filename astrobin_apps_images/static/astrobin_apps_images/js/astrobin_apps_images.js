@@ -1,6 +1,15 @@
 $(document).ready(function() {
     /* TODO: make this a jQuery plugin */
     window.loadAstroBinImages = function(fragment) {
+        /* We're relayouting all of them... how inefficient! */
+        $('.js-masonry').each(function() {
+            var masonry = $(this).data('masonry');
+            if (masonry !== undefined) {
+                masonry.reloadItems();
+                masonry.layout();
+            }
+        });
+
         $(fragment).find('img.astrobin-image[data-loaded=false]').each(function(index) {
             var $img = $(this);
             var id = $img.attr('data-id');

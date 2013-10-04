@@ -53,6 +53,9 @@ def astrobin_image(
     revision = 'final', url_size = 'regular',
     mod = None):
 
+    if alias == '':
+        alias = 'thumb'
+
     size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
     if alias in ('regular', 'regular_inverted',
                  'hd'     , 'hd_inverted',

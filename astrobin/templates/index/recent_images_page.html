@@ -2,10 +2,10 @@
 {% load endless %}
 {% load i18n %}
 
-{% lazy_paginate image_list using "image_list_page" %}
-{% for image in image_list %}
+{% paginate 64 recent_images using "recent_images_page" %}
+{% for image in recent_images %}
     <li class="thumbnail astrobin-thumbnail">
-        {% astrobin_image image alias %}
+        {% astrobin_image image 'thumb' %}
     </li>
 {% empty %}
     <li>{% include 'inclusion_tags/no_images.html' %}</li>

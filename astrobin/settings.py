@@ -5,10 +5,11 @@ from django.conf import global_settings
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 DEBUG = True
+CACHE = True
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '57'
+MEDIA_VERSION = '58'
 LONGPOLL_ENABLED = False
 
 ADMINS = (
@@ -248,7 +249,7 @@ AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 FLICKR_API_KEY = os.environ['ASTROBIN_FLICKR_API_KEY']
 FLICKR_SECRET  = os.environ['ASTROBIN_FLICKR_SECRET']
 
-if not DEBUG:
+if CACHE:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -410,6 +411,7 @@ PIPELINE_JS = {
             'js/jquery.stickytableheaders.js',
             'js/jquery.timeago.js',
             'js/respond.src.js',
+            'js/masonry.js',
             'js/bootstrap.js',
             'js/astrobin.js',
         ),
@@ -528,19 +530,19 @@ THUMBNAIL_ALIASES = {
 
         'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
         'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'inverted': True},
-        'thumb': {'size': (80, 80), 'crop': True, 'rounded': 'smart', 'quality': 80},
-        'revision': {'size': (86, 86), 'crop': True, 'rounded': 'smart', 'quality': 80},
+        'thumb': {'size': (80, 80), 'crop': True, 'rounded': 'smart', 'quality': 60},
+        'revision': {'size': (86, 86), 'crop': True, 'rounded': 'smart', 'quality': 60},
 
         # Tricks
         'histogram': {'size': (274, 120), 'histogram': True},
 
         # IOTD
         'iotd': {'size': (780, 180), 'crop': 'smart', 'watermark': True},
-        'runnerup': {'size': (50, 50), 'crop': 'smart', 'rounded': True, 'quality': 80},
+        'runnerup': {'size': (50, 50), 'crop': 'smart', 'rounded': True, 'quality': 60},
 
         # Activity stream
-        'act_target': {'size': (360, 64), 'crop': 'smart', 'quality': 80},
-        'act_object': {'size': (360, 192), 'crop': 'smart', 'quality': 80},
+        'act_target': {'size': (226, 62), 'crop': 'smart', 'quality': 80},
+        'act_object': {'size': (226, 226), 'crop': 'smart', 'quality': 80},
     },
 }
 THUMBNAIL_QUALITY = 100
