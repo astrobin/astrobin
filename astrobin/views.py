@@ -34,6 +34,7 @@ from reviews.forms import ReviewedItemForm
 from actstream.models import Action
 from registration.forms import RegistrationForm
 from zinnia.models import Entry
+from endless_pagination.decorators import page_template
 
 from uuid import uuid4
 import os
@@ -151,8 +152,11 @@ def jsonDumpSubjects(all):
 
 # VIEWS
 
-def index(request):
+@page_template('index/personal_stream_page.html', key = 'personal_stream_page')
+@page_template('index/global_stream_page.html',   key = 'global_stream_page')
+def index(request, template = 'index/root.html', extra_context = None):
     """Main page"""
+    from django.core.cache import cache
 
     response_dict = {
         'registration_form': RegistrationForm(),
@@ -182,35 +186,136 @@ def index(request):
             # The is no IOTD
             pass
 
-    template = 'index.html'
-    if request.is_ajax():
-        template = 'index_page.html'
+        range_begin      = 0
+        range_end        = 100
 
-    from django.core.cache import cache
-    cache_key = 'astrobin_index_global_actions_%s' % request.LANGUAGE_CODE
-    global_actions = cache.get(cache_key)
+        ##################
+        # GLOBAL ACTIONS #
+        ##################
+        cache_key = 'astrobin_index_global_actions_%s' % request.LANGUAGE_CODE
+        actions = cache.get(cache_key)
 
-    if global_actions is None:
-        # We don't want to show the same thumbnail more than once.
-        global_actions = [{'action': x, 'show_thumbnail': True} for x in Action.objects.all()[:100]]
-        actions_with_images = []
-        for i in global_actions:
-            key = i['action'].target
-            if key is None:
-                key = i['action'].action_object
+        if actions is None:
+            # We don't want to show the same thumbnail more than once.
+            actions = [{'action': x, 'show_thumbnail': True} for x in Action.objects.all()[range_begin:range_end]]
+            actions_with_images = []
+            for i in actions:
+                key = i['action'].target
+                if key is None:
+                    key = i['action'].action_object
 
-            if key not in actions_with_images:
-                actions_with_images.append(key)
-            else:
-                i['show_thumbnail'] = False
+                if key not in actions_with_images:
+                    actions_with_images.append(key)
+                else:
+                    i['show_thumbnail'] = False
 
-        cache.set(cache_key, global_actions, 300)
+            cache.set(cache_key, actions, 600)
 
-    response_dict['global_actions'] = global_actions
+        response_dict['global_actions'] = actions
 
-    template = 'index.html'
-    if request.is_ajax():
-        template = 'index_page.html'
+
+        ####################
+        # PERSONAL ACTIONS #
+        ####################
+        cache_key = 'astrobin_index_personal_actions_%s' % request.user
+        actions = cache.get(cache_key)
+
+        if actions is None:
+            users_image_ids = [
+                str(x) for x in
+                Image.objects.filter(
+                    user = request.user).values_list('id', flat = True)
+            ]
+
+            users_revision_ids = [
+                str(x) for x in
+                ImageRevision.objects.filter(
+                    image__user = request.user).values_list('id', flat = True)
+            ]
+
+            followed_user_ids = [
+                str(x) for x in
+                profile.follows.all().values_list('user__id', flat = True)
+            ]
+
+            followees_image_ids = [
+                str(x) for x in
+                Image.objects.filter(user_id__in = followed_user_ids).values_list('id', flat = True)
+            ]
+
+            # We don't want to show the same thumbnail more than once.
+            actions = [
+                {'action': x, 'show_thumbnail': True}
+                for x in Action.objects.filter(
+                    # Actor is user, or...
+                    Q(
+                        Q(actor_content_type__app_label = 'auth') &
+                        Q(actor_content_type__model = 'user') &
+                        Q(actor_object_id = request.user.id)
+                    ) |
+
+                    # Action concerns user's images as target, or...
+                    Q(
+                        Q(target_content_type__app_label = 'astrobin') &
+                        Q(target_content_type__model = 'image') &
+                        Q(target_object_id__in = users_image_ids)
+                    ) |
+                    Q(
+                        Q(target_content_type__app_label = 'astrobin') &
+                        Q(target_content_type__model = 'imagerevision') &
+                        Q(target_object_id__in = users_revision_ids)
+                    ) |
+
+                    # Action concerns user's images as object, or...
+                    Q(
+                        Q(action_object_content_type__app_label = 'astrobin') &
+                        Q(action_object_content_type__model = 'image') &
+                        Q(action_object_object_id__in = users_image_ids)
+                    ) |
+                    Q(
+                        Q(action_object_content_type__app_label = 'astrobin') &
+                        Q(action_object_content_type__model = 'imagerevision') &
+                        Q(action_object_object_id__in = users_revision_ids)
+                    ) |
+
+                    # Actor is somebody the user follows, or...
+                    Q(
+                        Q(actor_content_type__app_label = 'auth') &
+                        Q(actor_content_type__model = 'user') &
+                        Q(actor_object_id__in = followed_user_ids)
+                    ) |
+
+                    # Action concerns an image by a followed user...
+                    Q(
+                        Q(target_content_type__app_label = 'astrobin') &
+                        Q(target_content_type__model = 'image') &
+                        Q(target_object_id__in = followees_image_ids)
+                    ) |
+                    Q(
+                        Q(action_object_content_type__app_label = 'astrobin') &
+                        Q(action_object_content_type__model = 'image') &
+                        Q(action_object_object_id__in = followees_image_ids)
+                    )
+                )[range_begin:range_end]
+            ]
+            actions_with_images = []
+            for i in actions:
+                key = i['action'].target
+                if key is None:
+                    key = i['action'].action_object
+
+                if key not in actions_with_images:
+                    actions_with_images.append(key)
+                else:
+                    i['show_thumbnail'] = False
+
+            cache.set(cache_key, actions, 300)
+
+        response_dict['personal_actions'] = actions
+
+
+    if extra_context is not None:
+        response_dict.update(extra_context)
 
     return render_to_response(
         template, response_dict,

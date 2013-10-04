@@ -149,9 +149,30 @@
                 <div class="subtle-container">
                     <div class="header">
                         <h4>{% trans "Activity stream" %}</h4>
+                        <span class="pull-right">
+                            <a href="#personal-stream"
+                               data-toggle="tab",
+                               rel="tooltip"
+                               title="{% trans "Personal" %}">
+                                <i class="icon-group"></i>
+                            </a>
+                            <a href="#global-stream"
+                               data-toggle="tab"
+                               rel="tooltip"
+                               title="{% trans "Global" %}">
+                                <i class="icon-globe"></i>
+                            </a>
+                        </span>
                     </div>
                     <div class="activity-actions">
-                        {% include 'index_page.html' %}
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="personal-stream">
+                                {% include 'index/personal_stream_page.html' %}
+                            </div>
+                            <div class="tab-pane" id="global-stream">
+                                {% include 'index/global_stream_page.html' %}
+                            </div>
+                        </div>
                         {% include 'snippets/endless_pagination_js.html' %}
                     </div>
                 </div>
