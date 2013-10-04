@@ -1869,6 +1869,7 @@ div.rating-container .score-histogram-container .score .score-total-votes {
 }
 .subtle-container .header h4 {
   margin: 0;
+  display: inline;
 }
 .subtle-container .col {
   float: left;
@@ -2191,7 +2192,7 @@ div.token-input-dropdown p {
   text-align: center;
 }
 #full-size-image img {
-  width: 95%;
+  max-width: 95%;
   margin-top: 8px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;

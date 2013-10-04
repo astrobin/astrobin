@@ -59,14 +59,45 @@
             {% else %}
                 <a href="{{action.target_url}}">{{action.target}}</a>
             {% endif %}
+
+            {% if action.target_content_type.model == 'image' and action.target.user != action.actor %}
+                {% trans "by" %}
+                <a href="{{action.target.user.get_absolute_url}}">
+                    {{action.target.user.userprofile_set.all.0}}
+                </a>
+            {% endif %}
+
+            {% if action.target_content_type.model == 'imagerevision' and action.target.image.user != action.actor %}
+                {% trans "by" %}
+                <a href="{{action.target.image.user.get_absolute_url}}">
+                    {{action.target.image.user.userprofile_set.all.0}}
+                </a>
+            {% endif %}
+
         {% else %}
+
             {% if action.action_object %}
                 {% if action.action_object.get_absolute_url %}
                     <a href="{{action.action_object.get_absolute_url}}">{{action.action_object}}</a>
                 {% else %}
                     <a href="{{action.action_object_url}}">{{action.action_object}}</a>
                 {% endif %}
+
+                {% if action.action_object_content_type.model == 'image' and action.action_object.user != action.actor %}
+                    {% trans "by" %}
+                    <a href="{{action.action_object.user.get_absolute_url}}">
+                        {{action.action_object.user.userprofile_set.all.0}}
+                    </a>
+                {% endif %}
+
+                {% if action.action_object_content_type.model == 'imagerevision' and action.action_object.image.user != action.actor %}
+                    {% trans "by" %}
+                    <a href="{{action.action_object.image.user.get_absolute_url}}">
+                        {{action.action_object.image.user.userprofile_set.all.0}}
+                    </a>
+                {% endif %}
             {% endif %}
+
         {% endif %}
 
         {% if action.action_object %}
