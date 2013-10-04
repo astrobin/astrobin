@@ -2900,12 +2900,43 @@ form.avatar-change label.control-label {display: none;}
     }
 }
 
+.activity-stream-container {
+    background: none;
+    border: 0;
+    .rounded-corners(0);
+    .no-box-shadow;
+
+    .header {
+        border: 0;
+        background: #202020;
+        .rounded-corners(6px);
+        margin: 0 0 4px 0;
+        padding: 8px 12px;
+    }
+
+    #personal-stream, #global-stream {
+        overflow: hidden;
+    }
+}
+
 .activity-actions, .blog-stream-entries {
     .action, .entry {
         padding: @spacer-medium 0;
-        margin-bottom: @spacer-xxlarge;
         position: relative;
         min-height: 64px;
+
+        .action-inner {
+            padding: 8px;
+            margin: 8px;
+            background: #303030 url('../images/darker-panel-tile.png');
+            border: 1px solid #191919;
+            .box-shadow-subtle;
+            .rounded-corners(3px);
+
+            img.astrobin-image {
+                border: 1px solid #282828;
+            }
+        }
 
         &:last-child {
             border-bottom: 0;
@@ -2945,12 +2976,20 @@ form.avatar-change label.control-label {display: none;}
             }
 
             .when {
-                color: darken(@text-color, 30%);
+                color: darken(@text-color, 40%);
                 font-size: 75%;
                 font-style: italic;
             }
         }
     }
+
+    .action {
+        float: left;
+        width: 50%;
+        padding: 0;
+    }
+
+
 }
 
 .notice-container {
@@ -3326,14 +3365,17 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
 
 
 .endless_container {
+    position: absolute;
+    bottom: 0;
+    padding: 12px;
+
     .endless_more {
         visibility: hidden;
     }
 
     .endless_loading {
         text-align: center;
-        padding: 40px;
-        width: 100%
+        width: 100%;
         display: block;
     }
 }

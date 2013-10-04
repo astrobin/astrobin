@@ -145,8 +145,8 @@
         {% endcache %}
 
         <div class="row">
-            <div class="span6"> <!-- activity stream -->
-                <div class="subtle-container">
+            <div class="span9"> <!-- activity stream -->
+                <div class="subtle-container activity-stream-container">
                     <div class="header">
                         <h4>{% trans "Activity stream" %}</h4>
                         <span class="pull-right">
@@ -162,42 +162,55 @@
                                title="{% trans "Global" %}">
                                 <i class="icon-globe"></i>
                             </a>
+                            <a href="#recent-images"
+                               data-toggle="tab"
+                               rel="tooltip"
+                               title="{% trans "Recent images" %}">
+                                <i class="icon-th"></i>
+                            </a>
                         </span>
                     </div>
                     <div class="activity-actions">
                         <div class="tab-content">
-                            <div class="tab-pane active" id="personal-stream">
+                            <div class="tab-pane active js-masonry" id="personal-stream" data-masonry-options='{"itemSelector":".action"}'>
                                 {% include 'index/personal_stream_page.html' %}
                             </div>
-                            <div class="tab-pane" id="global-stream">
+                            <div class="tab-pane js-masonry" id="global-stream" data-masonry-options='{"itemSelector":".action"}'>
                                 {% include 'index/global_stream_page.html' %}
+                            </div>
+                            <div class="tab-pane" id="recent-images">
+                                <ul class="thumbnails astrobin-thumbnails">
+                                    {% include 'index/recent_images_page.html' %}
+                                </ul>
                             </div>
                         </div>
                         {% include 'snippets/endless_pagination_js.html' %}
                     </div>
                 </div>
-            </div> <!-- span6 -->
-
-            <div class="span6">
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4>{% trans "Recent images" %}</h4>
-                    </div>
-                </div>
-            </div> <!-- span3 -->
+            </div> <!-- activity stream -->
         </div> <!-- row -->
     {% endif %} {# authenticated #}
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
             astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
 
             $.ajaxSetup({timeout: 0});
-            $.endlessPaginate();
+
+            $('a[data-toggle="tab"]').click(function() {
+                $('.js-masonry').each(function() {
+                    var self = $(this);
+
+                    setTimeout(function() {
+                        masonry = self.data('masonry');
+                        if (masonry !== undefined)
+                            masonry.layout();
+                    }, 250);
+                });
+            });
         });
     </script>
 {% endblock %}

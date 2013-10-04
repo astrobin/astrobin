@@ -2692,14 +2692,57 @@ form.avatar-change label.control-label {
   margin-top: 0;
   text-align: center;
 }
+.activity-stream-container {
+  background: none;
+  border: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.activity-stream-container .header {
+  border: 0;
+  background: #202020;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  margin: 0 0 4px 0;
+  padding: 8px 12px;
+}
+.activity-stream-container #personal-stream,
+.activity-stream-container #global-stream {
+  overflow: hidden;
+}
 .activity-actions .action,
 .blog-stream-entries .action,
 .activity-actions .entry,
 .blog-stream-entries .entry {
   padding: 8px 0;
-  margin-bottom: 28px;
   position: relative;
   min-height: 64px;
+}
+.activity-actions .action .action-inner,
+.blog-stream-entries .action .action-inner,
+.activity-actions .entry .action-inner,
+.blog-stream-entries .entry .action-inner {
+  padding: 8px;
+  margin: 8px;
+  background: #303030 url('../images/darker-panel-tile.png');
+  border: 1px solid #191919;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.activity-actions .action .action-inner img.astrobin-image,
+.blog-stream-entries .action .action-inner img.astrobin-image,
+.activity-actions .entry .action-inner img.astrobin-image,
+.blog-stream-entries .entry .action-inner img.astrobin-image {
+  border: 1px solid #282828;
 }
 .activity-actions .action:last-child,
 .blog-stream-entries .action:last-child,
@@ -2765,9 +2808,15 @@ form.avatar-change label.control-label {
 .blog-stream-entries .action .content .when,
 .activity-actions .entry .content .when,
 .blog-stream-entries .entry .content .when {
-  color: #6c6c6c;
+  color: #525252;
   font-size: 75%;
   font-style: italic;
+}
+.activity-actions .action,
+.blog-stream-entries .action {
+  float: left;
+  width: 50%;
+  padding: 0;
 }
 .notice-container .unread {
   background-color: #FADDD6;
@@ -3112,12 +3161,16 @@ table#private-shared-folders tr:hover a.delete-folder {
 #register-button a {
   font-size: 150%;
 }
+.endless_container {
+  position: absolute;
+  bottom: 0;
+  padding: 12px;
+}
 .endless_container .endless_more {
   visibility: hidden;
 }
 .endless_container .endless_loading {
   text-align: center;
-  padding: 40px;
-  width: 100%
-        display: block;
+  width: 100%;
+  display: block;
 }
