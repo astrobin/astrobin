@@ -57,20 +57,26 @@ def user_scores(request):
     }
 
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user = request.user)
         all_images = Image.objects.filter(user = request.user, is_wip = False)
 
-        if UserProfile.objects.get(user = request.user).optout_rating:
-            d['user_scores_index'] = 0
-        else:
-            voted_images = Image.objects.filter(user = request.user, is_wip = False, allow_rating = True)
-            l = []
+        cache_key = "astrobin_user_score_%s" % request.user
+        user_index = cache.get(cache_key)
+        if user_index is None:
+            profile = request.user.get_profile()
 
-            for i in voted_images:
-                l.append(_prepare_rating(i))
-            if len(l) > 0:
-                d['user_scores_index'] = index (l)
+            if profile.optout_rating:
+                d['user_scores_index'] = 0
+            else:
+                voted_images = Image.objects.filter(user = request.user, is_wip = False, allow_rating = True)
+                l = []
 
+                for i in voted_images:
+                    l.append(_prepare_rating(i))
+                if len(l) > 0:
+                    user_index = index(l)
+                    cache.set(cache_key, user_index, 3600)
+
+        d['user_scores_index'] = user_index
         d['user_scores_images'] = all_images.count()
         d['user_scores_comments'] =  NestedComment.objects.filter(author = request.user, deleted = False).count()
 
