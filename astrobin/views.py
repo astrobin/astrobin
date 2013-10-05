@@ -166,7 +166,7 @@ def index(request, template = 'index/root.html', extra_context = None):
 
     profile = None
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user=request.user)
+        profile = request.user.get_profile()
 
         try:
             iotd = ImageOfTheDay.objects.all()[0]
@@ -715,9 +715,9 @@ def image_detail(request, id, r):
     follows = False
     profile = None
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user=request.user)
+        profile = request.user.get_profile()
     if profile:
-        if UserProfile.objects.get(user=image.user) in profile.follows.all():
+        if image.user.get_profile() in profile.follows.all():
             follows = True
 
 
@@ -747,7 +747,7 @@ def image_detail(request, id, r):
     # PREFERRED LANGUAGE #
     ######################
 
-    preferred_language = UserProfile.objects.get(user = image.user).language
+    preferred_language = image.user.get_profile().language
     if preferred_language:
         preferred_language = LANGUAGES[preferred_language]
     else:
@@ -988,7 +988,7 @@ def image_upload_process(request):
     except:
         return upload_error()
 
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     image = form.save(commit = False)
     image.user = request.user
     image.license = profile.default_license
@@ -1063,7 +1063,7 @@ def image_edit_watermark(request, id):
     if request.user != image.user:
         return HttpResponseForbidden()
 
-    profile = UserProfile.objects.get(user = image.user)
+    profile = image.user.get_profile()
     if not profile.default_watermark_text or profile.default_watermark_text == '':
         profile.default_watermark_text = "Copyright %s" % image.user.username
         profile.save()
@@ -1087,7 +1087,7 @@ def image_edit_watermark(request, id):
 @require_GET
 def image_edit_gear(request, id):
     image = Image.objects.get(pk=id)
-    profile = UserProfile.objects.get(user=image.user)
+    profile = image.user.get_profile()
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1147,7 +1147,7 @@ def image_edit_acquisition(request, id):
             if not dsa_qs:
                 extra = 1
             DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=extra, can_delete=False, form=DeepSky_AcquisitionForm)
-            profile = UserProfile.objects.get(user=image.user)
+            profile = image.user.get_profile()
             filter_queryset = profile.filters.all()
             DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
             deep_sky_acquisition_formset = DSAFormSet(instance=image)
@@ -1349,7 +1349,7 @@ def image_edit_save_watermark(request):
     form.save()
 
     # Save defaults in profile
-    profile = UserProfile.objects.get(user = image.user)
+    profile = image.user.get_profile()
     profile.default_watermark = form.cleaned_data['watermark']
     profile.default_watermark_text = form.cleaned_data['watermark_text']
     profile.default_watermark_position = form.cleaned_data['watermark_position']
@@ -1368,7 +1368,7 @@ def image_edit_save_watermark(request):
 def image_edit_save_gear(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
-    profile = UserProfile.objects.get(user = image.user)
+    profile = image.user.get_profile()
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1446,7 +1446,7 @@ def image_edit_save_acquisition(request):
                 deep_sky_acquisition_formset.save()
                 if 'add_more' in request.POST:
                     DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
-                    profile = UserProfile.objects.get(user=image.user)
+                    profile = image.user.get_profile()
                     filter_queryset = profile.filters.all()
                     DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
                     deep_sky_acquisition_formset = DSAFormSet(instance=image)
@@ -1597,7 +1597,7 @@ def image_promote(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
 
     if image.is_wip:
         image.is_wip = False
@@ -1641,14 +1641,14 @@ def me(request):
 def user_page(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(User, username = username)
-    profile = UserProfile.objects.get(user=user)
+    profile = user.get_profile()
 
     follows = False
     viewer_profile = None
     if request.user.is_authenticated():
-        viewer_profile = UserProfile.objects.get(user=request.user)
+        viewer_profile = request.user.get_profile()
     if viewer_profile:
-        if UserProfile.objects.get(user=user) in viewer_profile.follows.all():
+        if user.get_profile() in viewer_profile.follows.all():
             follows = True
 
     section = 'public'
@@ -1830,7 +1830,7 @@ def user_page(request, username):
 
     last_login = user.last_login
     if request.user.is_authenticated():
-        viewer_profile = UserProfile.objects.get(user = request.user)
+        viewer_profile = request.user.get_profile()
         last_login = to_user_timezone(user.last_login, viewer_profile)
 
     sqs = SearchQuerySet()
@@ -1882,7 +1882,7 @@ def user_page_commercial_products(request, username):
     if user != request.user:
         return HttpResponseForbidden()
 
-    profile = get_object_or_404(UserProfile, user = user)
+    profile = user.get_profile()
 
     response_dict = {
         'user': user,
@@ -1926,7 +1926,7 @@ def user_page_favorites(request, username):
 def user_page_plots(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(User, username = username)
-    profile = UserProfile.objects.get(user=user)
+    profile = user.get_profile()
 
     return render_to_response(
         'user/plots.html',
@@ -1944,7 +1944,7 @@ def user_page_api_keys(request, username):
     if user != request.user:
         return HttpResponseForbidden()
 
-    profile = UserProfile.objects.get(user=user)
+    profile = user.get_profile()
     keys = App.objects.filter(registrar = user)
 
     return render_to_response(
@@ -1964,7 +1964,7 @@ def user_page_votes(request, username):
         return HttpResponseForbidden()
 
     user = get_object_or_404(User, username = username)
-    profile = UserProfile.objects.get(user=user)
+    profile = user.get_profile()
     votes = Vote.objects.filter(
         content_type__app_label = 'astrobin',
         content_type__model = 'image',
@@ -2088,7 +2088,7 @@ def stats_get_affiliated_gear_views_ajax(request, username, period = 'monthly'):
 @require_GET
 def user_profile_edit_basic(request):
     """Edits own profile"""
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     form = UserProfileEditBasicForm(instance = profile)
 
     response_dict = {
@@ -2104,7 +2104,7 @@ def user_profile_edit_basic(request):
 def user_profile_save_basic(request):
     """Saves the form"""
 
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     form = UserProfileEditBasicForm(data=request.POST, instance = profile)
     response_dict = {'form': form}
 
@@ -2122,7 +2122,7 @@ def user_profile_save_basic(request):
 @login_required
 @user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
 def user_profile_edit_commercial(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     if request.method == 'POST':
         form = UserProfileEditCommercialForm(data=request.POST, instance = profile)
 
@@ -2143,7 +2143,7 @@ def user_profile_edit_commercial(request):
 @login_required
 @user_passes_test(lambda u: user_is_retailer(u))
 def user_profile_edit_retailer(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     if request.method == 'POST':
         form = UserProfileEditRetailerForm(data=request.POST, instance = profile)
 
@@ -2164,7 +2164,7 @@ def user_profile_edit_retailer(request):
 @login_required
 @require_GET
 def user_profile_edit_license(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     form = DefaultImageLicenseForm(instance = profile)
     return render_to_response(
         'user/profile/edit/license.html',
@@ -2175,7 +2175,7 @@ def user_profile_edit_license(request):
 @login_required
 @require_POST
 def user_profile_save_license(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     form = DefaultImageLicenseForm(data = request.POST, instance = profile)
 
     if not form.is_valid():
@@ -2194,7 +2194,7 @@ def user_profile_save_license(request):
 @require_GET
 def user_profile_edit_gear(request):
     """Edits own profile"""
-    profile = UserProfile.objects.get(user=request.user)
+    profile = request.user.get_profile()
 
     def uniq(seq):
        # Not order preserving
@@ -2232,7 +2232,7 @@ def user_profile_edit_gear(request):
 @login_required
 @require_POST
 def user_profile_edit_gear_remove(request, id):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     gear, gear_type = get_correct_gear(id)
     if not gear:
         raise Http404
@@ -2245,7 +2245,7 @@ def user_profile_edit_gear_remove(request, id):
 @login_required
 @require_GET
 def user_profile_edit_locations(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     LocationsFormset = inlineformset_factory(
         UserProfile, Location, form = LocationEditForm, extra = 1)
 
@@ -2261,7 +2261,7 @@ def user_profile_edit_locations(request):
 @login_required
 @require_POST
 def user_profile_save_locations(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     LocationsFormset = inlineformset_factory(
         UserProfile, Location, form = LocationEditForm, extra = 1)
     formset = LocationsFormset(data = request.POST, instance = profile)
@@ -2285,7 +2285,7 @@ def user_profile_save_locations(request):
 def user_profile_save_gear(request):
     """Saves the form"""
 
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
 
     profile.telescopes.clear()
     profile.mounts.clear()
@@ -2423,7 +2423,7 @@ def user_profile_flickr_import(request):
                     destination.write(file.read())
                     destination.close()
 
-                    profile = UserProfile.objects.get(user = request.user)
+                    profile = request.user.get_profile()
                     image = Image(filename=filename, original_ext=original_ext,
                                   user=request.user,
                                   title=title if title is not None else '',
@@ -2461,7 +2461,7 @@ def flickr_auth_callback(request):
 @login_required
 @require_POST
 def user_profile_seen_realname(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     profile.seen_realname = True
     profile.save()
 
@@ -2472,7 +2472,7 @@ def user_profile_seen_realname(request):
 @require_GET
 def user_profile_edit_preferences(request):
     """Edits own preferences"""
-    profile = UserProfile.objects.get(user=request.user)
+    profile = request.user.get_profile()
     form = UserProfileEditPreferencesForm(instance=profile)
     response_dict = {
         'form': form,
@@ -2504,7 +2504,7 @@ def user_profile_edit_preferences(request):
 def user_profile_save_preferences(request):
     """Saves the form"""
 
-    profile = UserProfile.objects.get(user=request.user)
+    profile = request.user.get_profile()
     form = UserProfileEditPreferencesForm(data=request.POST, instance=profile)
     response_dict = {'form': form}
 
@@ -2553,9 +2553,9 @@ def user_profile_save_preferences(request):
 @login_required
 @require_GET
 def follow(request, username):
-    from_profile = UserProfile.objects.get(user=request.user)
+    from_profile = request.user.get_profile()
     to_user = get_object_or_404(User, username=username)
-    to_profile = get_object_or_404(UserProfile, user=to_user)
+    to_profile = to_user.get_profile()
 
     if to_profile not in from_profile.follows.all():
         from_profile.follows.add(to_profile)
@@ -2579,9 +2579,9 @@ def follow(request, username):
 @login_required
 @require_GET
 def unfollow(request, username):
-    from_profile = UserProfile.objects.get(user=request.user)
+    from_profile = request.user.get_profile()
     to_user = get_object_or_404(User, username=username)
-    to_profile = get_object_or_404(UserProfile, user=to_user)
+    to_profile = to_user.get_profile()
 
     if to_profile in from_profile.follows.all():
         from_profile.follows.remove(to_profile)
@@ -2603,7 +2603,7 @@ def unfollow(request, username):
 @require_GET
 def follow_gear(request, id):
     gear = get_object_or_404(Gear, id = id)
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
 
     if gear not in profile.follows_gear.all():
         profile.follows_gear.add(gear)
@@ -2623,7 +2623,7 @@ def follow_gear(request, id):
 @require_GET
 def unfollow_gear(request, id):
     gear = get_object_or_404(Gear, id = id)
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
 
     if gear in profile.follows_gear.all():
         profile.follows_gear.remove(gear)
@@ -2643,7 +2643,7 @@ def unfollow_gear(request, id):
 @require_GET
 def follow_subject(request, id):
     subject = get_object_or_404(Subject, id = id)
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
 
     if subject not in profile.follows_subjects.all():
         profile.follows_subjects.add(subject)
@@ -2663,7 +2663,7 @@ def follow_subject(request, id):
 @require_GET
 def unfollow_subject(request, id):
     subject = get_object_or_404(Subject, id = id)
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
 
     if subject in profile.follows_subjects.all():
         profile.follows_subjects.remove(subject)
@@ -3006,7 +3006,7 @@ def set_language(request, lang):
         activate(lang)
 
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user = request.user)
+        profile = request.user.get_profile()
         profile.language = lang
         profile.save()
 
@@ -3146,7 +3146,7 @@ def save_gear_details(request):
 
     form.save()
 
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.get_profile()
     user_gear = getattr(profile, user_gear_lookup[gear_type])
     if gear not in user_gear.all():
         user_gear.add(gear)
@@ -3255,7 +3255,7 @@ def favorite_ajax(request, id):
 @never_cache
 def gear_popover_ajax(request, id):
     gear, gear_type = get_correct_gear(id)
-    profile = UserProfile.objects.get(user = request.user) \
+    profile = request.user.get_profile() \
               if request.user.is_authenticated() \
               else None
     template = 'popover/gear.html'
@@ -3302,7 +3302,7 @@ def gear_popover_ajax(request, id):
 def subject_popover_ajax(request, id):
     subject = get_object_or_404(Subject, id = id)
     template = 'popover/subject.html'
-    profile = UserProfile.objects.get(user = request.user) \
+    profile = request.user.get_profile() \
               if request.user.is_authenticated() \
               else None
 
@@ -3332,7 +3332,7 @@ def subject_popover_ajax(request, id):
 def user_popover_ajax(request, username):
     user = get_object_or_404(User, username = username)
     template = 'popover/user.html'
-    profile = UserProfile.objects.get(user = request.user) \
+    profile = request.user.get_profile() \
               if request.user.is_authenticated() \
               else None
 

@@ -11,7 +11,7 @@ from models import UserProfile
 
 import simbad
 
-from django.db.models import Q 
+from django.db.models import Q
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required
@@ -124,7 +124,7 @@ def autocomplete(request, what):
 @login_required
 @require_GET
 def autocomplete_user(request, what):
-    profile = UserProfile.objects.get(user=request.user)
+    profile = request.user.get_profile()
     values = ()
     for k, v in {'telescopes':profile.telescopes,
                  'imaging_telescopes':profile.telescopes,

@@ -51,7 +51,7 @@ def _get_integration(image):
 
 def _prepare_rating(obj):
     from votes import index
-    if not obj.allow_rating or obj.user.userprofile_set.all()[0].optout_rating:
+    if not obj.allow_rating or obj.user.get_profile().optout_rating:
         return 0
     return index([x.score for x in obj.rating.get_ratings().filter(user__userprofile__suspended_from_voting = False)])
 

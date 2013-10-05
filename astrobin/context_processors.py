@@ -1,11 +1,11 @@
 from django.conf import settings
+from django.core.cache import cache
 from django.db.models import Q
 from django.utils.translation import ugettext as _
 
 from notification import models as notifications
 
 from astrobin.models import Request
-from astrobin.models import UserProfile
 from astrobin.models import Gear
 from astrobin.models import Image
 from astrobin.search_indexes import _prepare_rating
@@ -31,7 +31,7 @@ def user_language(request):
         'user_language': request.LANGUAGE_CODE,
     }
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user = request.user)
+        profile = request.user.get_profile()
         d['user_language'] = profile.language
 
     return d
@@ -43,7 +43,7 @@ def user_profile(request):
     }
 
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user = request.user)
+        profile = request.user.get_profile()
         d['userprofile'] = profile
 
     return d
