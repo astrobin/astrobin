@@ -77,7 +77,7 @@ class ImageEditBasicForm(forms.ModelForm):
         self.fields['subjects'].label = _("Subjects")
         self.fields['locations'].label = _("Locations")
 
-        profile = UserProfile.objects.get(user = user)
+        profile = user.get_profile()
         locations = Location.objects.filter(user = profile)
         self.fields['locations'].queryset = locations
         self.fields['locations'].required = False
@@ -150,7 +150,7 @@ class ImageEditWatermarkForm(forms.ModelForm):
 class ImageEditGearForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
         super(ImageEditGearForm, self).__init__(**kwargs)
-        profile = UserProfile.objects.get(user=user)
+        profile = user.get_profile()
         telescopes = profile.telescopes.all()
         self.fields['imaging_telescopes'].queryset = telescopes
         self.fields['guiding_telescopes'].queryset = telescopes

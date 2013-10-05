@@ -105,7 +105,7 @@ def integration_hours_by_gear(user, period='monthly'):
     if period == 'monthly':
         flot_options['xaxis']['timeformat'] = '%b'
 
-    profile = UserProfile.objects.get(user = user)
+    profile = user.get_profile()
     all_telescopes = profile.telescopes.all()
     all_cameras = profile.cameras.all()
 
