@@ -339,6 +339,7 @@ HITCOUNT_HITS_PER_IP_LIMIT = 0
 
 AVATAR_GRAVATAR_BACKUP = False
 AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png?v=1'
+AVATAR_AUTO_GENERATE_SIZES = (64,)
 
 if DEBUG:
     STATICFILES_STORAGE = 'django.core.files.storage.FileSystemStorage'
