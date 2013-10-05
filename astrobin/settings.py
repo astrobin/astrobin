@@ -553,4 +553,4 @@ THUMBNAIL_SUBDIR = 'thumbs'
 THUMBNAIL_DEFAULT_STORAGE = 'astrobin.s3utils.ImageRootS3BotoStorage'
 
 ENDLESS_PAGINATION_PER_PAGE = 35
-ENDLESS_PAGINATION_LOADING = '<img src="' + STATIC_URL + '/images/ajax-loader.gif" alt="..." />'
+ENDLESS_PAGINATION_LOADING = '<img src="' + STATIC_URL + 'common/images/ajax-loader-bar.gif" alt="..." />'

@@ -3162,15 +3162,20 @@ table#private-shared-folders tr:hover a.delete-folder {
   font-size: 150%;
 }
 .endless_container {
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  padding: 12px;
+  left: 0;
+  width: 100%;
 }
 .endless_container .endless_more {
   visibility: hidden;
 }
 .endless_container .endless_loading {
   text-align: center;
-  width: 100%;
-  display: block;
+  padding: 24px 0;
+  background: #cc4b2e url('../images/orange-panel-tile.png');
+  border-top: 1px solid #111;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 -6px 12px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 -6px 12px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -6px 12px;
 }
