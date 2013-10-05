@@ -4,8 +4,8 @@ from django.conf import global_settings
 
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
-DEBUG = True
-CACHE = True
+DEBUG = False
+CACHE = not DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
@@ -29,8 +29,6 @@ else:
     EMAIL_PORT='25'
 EMAIL_USE_TLS=False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-
 
 DATABASES = {
     'default': {
@@ -81,29 +79,12 @@ LANGUAGES = (
 )
 MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 
-SITE_ID = 1
-
-STATIC_ROOT = '/webserver/www/sitestatic'
-STATIC_URL = '/sitestatic/'
-
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
 USE_L10N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/webserver/www/sitestatic/'
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media/'
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
+SITE_ID = 1
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10G'
@@ -128,6 +109,30 @@ AWS_HEADERS = {
 S3_URL = 's3.amazonaws.com'
 IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
 CDN_URL = os.environ['ASTROBIN_CDN_URL']
+
+STATIC_ROOT = '/webserver/www/sitestatic'
+if DEBUG:
+    STATIC_URL = '/sitestatic/'
+else:
+    STATIC_URL = CDN_URL + 'www/static/'
+
+# Absolute path to the directory that holds media.
+# Example: "/home/media/media.lawrence.com/"
+MEDIA_ROOT = '/webserver/www/sitestatic/'
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash if there is a path component (optional in other cases).
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
+if DEBUG:
+    MEDIA_URL = '/media/'
+else:
+    MEDIA_URL = CDN_URL
+
+# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
+# trailing slash.
+# Examples: "http://foo.com/media/", "/media/".
+ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -335,17 +340,15 @@ HITCOUNT_HITS_PER_IP_LIMIT = 0
 AVATAR_GRAVATAR_BACKUP = False
 AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png?v=1'
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+if DEBUG:
+    STATICFILES_STORAGE = 'django.core.files.storage.FileSystemStorage'
+else:
+    STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
 STATICFILES_FINDERS = (
     'staticfiles.finders.FileSystemFinder',
     'staticfiles.finders.AppDirectoriesFinder',
 )
 STATICFILES_DIRS = (local_path('static/'),)
-
-if not DEBUG:
-    PIPELINE_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
-else:
-    PIPELINE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.SlimItCompressor'
