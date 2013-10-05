@@ -7,3 +7,9 @@ production server:
 2) The close() function in django/db/backends/__init__.py has been changed
    according to https://code.djangoproject.com/ticket/15802
    To do it the proper way, upgrade to django 1.4.
+
+
+Some Postgres INDECES:
+
+create INDEX on astrobin_image using btree (uploaded, id);
+create INDEX on actstream_action using btree (timestamp);
