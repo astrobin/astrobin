@@ -1,6 +1,6 @@
 BeautifulSoup==3.2.0
 Coffin==0.3.6
-Django==1.4
+Django==1.4.2
 Jinja2==2.6
 Markdown==2.1.1
 PIL==1.1.7
@@ -105,3 +105,4 @@ django-endless-pagination==2.0
 -e git+https://github.com/SmileyChris/easy-thumbnails@0ef82a1e2a919ff0f7796f9f76625cd0aa8c9735#egg=easy_thumbnails
 django-mptt==0.5
 PySide==1.2.1
+django-avatar==2.0
