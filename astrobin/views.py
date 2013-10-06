@@ -210,29 +210,44 @@ def index(request, template = 'index/root.html', extra_context = None):
         actions = cache.get(cache_key)
 
         if actions is None:
-            users_image_ids = [
-                str(x) for x in
-                Image.objects.filter(
-                    user = request.user).values_list('id', flat = True)
-            ]
+            inner_cache_key = 'astrobin_users_image_ids_%s' % request.user
+            users_image_ids = cache.get(inner_cache_key)
+            if users_image_ids is None:
+                users_image_ids = [
+                    str(x) for x in
+                    Image.objects.filter(
+                        user = request.user).values_list('id', flat = True)
+                ]
+                cache.set(inner_cache_key, users_image_ids, 300)
 
-            users_revision_ids = [
-                str(x) for x in
-                ImageRevision.objects.filter(
-                    image__user = request.user).values_list('id', flat = True)
-            ]
+            inner_cache_key = 'astrobin_users_revision_ids_%s' % request.user
+            users_revision_ids = cache.get(inner_cache_key)
+            if users_revision_ids is None:
+                users_revision_ids = [
+                    str(x) for x in
+                    ImageRevision.objects.filter(
+                        image__user = request.user).values_list('id', flat = True)
+                ]
+                cache.set(inner_cache_key, users_revision_ids, 300)
 
-            followed_user_ids = [
-                str(x) for x in
-                profile.follows.all().values_list('user__id', flat = True)
-            ]
+            inner_cache_key = 'astrobin_followed_user_ids_%s' % request.user
+            followed_user_ids = cache.get(inner_cache_key)
+            if followed_user_ids is None:
+                followed_user_ids = [
+                    str(x) for x in
+                    profile.follows.all().values_list('user__id', flat = True)
+                ]
+                cache.set(inner_cache_key, followed_user_ids, 900)
 
-            followees_image_ids = [
-                str(x) for x in
-                Image.objects.filter(user_id__in = followed_user_ids).values_list('id', flat = True)
-            ]
+            inner_cache_key = 'astrobin_followees_image_ids_%s' % request.user
+            followees_image_ids = cache.get(inner_cache_key)
+            if followees_image_ids is None:
+                followees_image_ids = [
+                    str(x) for x in
+                    Image.objects.filter(user_id__in = followed_user_ids).values_list('id', flat = True)
+                ]
+                cache.set(inner_cache_key, followees_image_ids, 900)
 
-            # We don't want to show the same thumbnail more than once.
             actions = Action.objects.filter(
                     # Actor is user, or...
                     Q(
