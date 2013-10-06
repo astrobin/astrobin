@@ -14,8 +14,8 @@
         <a
             class="username-link"
             rel="tooltip"
-            title="{{image.get_author_profile}}"
-            href="{% url user_page image.user %}">{{image.get_author_profile|truncatechars:20}}</a>
+            title="{{image.user.userprofile}}"
+            href="{% url user_page image.user %}">{{image.user.userprofile|truncatechars:20}}</a>
 
         <div class="data">
             <img class="license"

@@ -21,7 +21,7 @@
             {% for image in image_list %}
                 <tr>
                     <td>
-                        <a href="{% url user_page image.user %} ">{{image.get_author_profile}}</a>
+                        <a href="{% url user_page image.user %} ">{{image.user.userprofile}}</a>
                     </td>
 
                     <td>
@@ -30,7 +30,7 @@
                     <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
                     <td>{% get_hit_count for image %}</td>
                     <td>
-                        {% if image.get_author_profile.optout_rating %}
+                        {% if image.user.userprofile.optout_rating %}
                             {% trans "n/a" %}
                         {% else %}
                             {% if image.allow_rating %}

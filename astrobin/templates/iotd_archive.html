@@ -22,7 +22,7 @@
                             {{iotd.date|date:"SHORT_DATE_FORMAT"}},
                             {% trans "by" %}
                             <a href="{% url user_page iotd.image.user %}">
-                                {{iotd.image.get_author_profile}}
+                                {{iotd.image.user.userprofile}}
                             </a>
                         </p>
                     </div>
@@ -34,7 +34,7 @@
                             <div class="runner-up">
                                 <a
                                     rel="tooltip"
-                                    title="{{iotd.runnerup_1.title|escape}}, {% trans "by" %} {{iotd.runnerup_1.get_author_profile}}",
+                                    title="{{iotd.runnerup_1.title|escape}}, {% trans "by" %} {{iotd.runnerup_1.user.userprofile}}",
                                     href="{% get_image_url iotd.runnerup_1 %}">
 
                                     <img
@@ -49,7 +49,7 @@
                             <div class="runner-up">
                                 <a
                                     rel="tooltip"
-                                    title="{{iotd.runnerup_2.title|escape}}, {% trans "by" %} {{iotd.runnerup_2.get_author_profile}}",
+                                    title="{{iotd.runnerup_2.title|escape}}, {% trans "by" %} {{iotd.runnerup_2.user.userprofile}}",
                                     href="{% get_image_url iotd.runnerup_2 %}">
 
                                     <img
