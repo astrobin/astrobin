@@ -1,7 +1,7 @@
 <script src="{{STATIC_URL}}common/js/jquery-1.8.3.js"></script>
 <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
 <script>
-    $.endlessPaginate({
+    $('ul.astrobin-thumbnails').endlessPaginate({
         paginateOnScroll: true,
         paginateOnScrollMargin: 300,
         onCompleted: function(context, fragment) {

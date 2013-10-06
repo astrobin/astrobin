@@ -2,13 +2,12 @@
 {% load endless %}
 {% load i18n %}
 
-{% lazy_paginate 20 personal_actions using "personal_stream_page" %}
-{% for action in personal_actions %}
+{% lazy_paginate 20 actions using "stream_page" %}
+{% for action in actions %}
     {% display_action action %}
 {% empty %}
     <p>
         {% trans "There is no activity yet." %}
-        {% trans "You should follow some people!" %}
     </p>
 {% endfor %}
 

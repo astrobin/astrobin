@@ -2,6 +2,7 @@
 
 {% load astrobin_apps_images_tags %}
 {% load avatar_tags %}
+{% load endless %}
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load common_tags %}
@@ -148,51 +149,76 @@
             <div class="span9"> <!-- activity stream -->
                 <div class="subtle-container activity-stream-container">
                     <div class="header">
-                        <h4>{% trans "Activity stream" %}</h4>
+                        <h4>
+                            {% ifequal section 'personal' %}
+                                {% trans "Your activity stream" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'global' %}
+                                {% trans "Global activity stream" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'images' %}
+                                {% trans "Recent images" %}
+                            {% endifequal %}
+                        </h4>
+
                         <span class="pull-right">
-                            <a href="#personal-stream"
-                               data-toggle="tab",
-                               rel="tooltip"
-                               title="{% trans "Personal" %}">
+                            {% if section != 'personal' %}
+                                <a href="{% url index %}{% query_string "s=personal" "" %}"
+                                   rel="tooltip"
+                                   title="{% trans "Personal" %}">
+                            {% endif %}
                                 <i class="icon-group"></i>
-                            </a>
-                            <a href="#global-stream"
-                               data-toggle="tab"
-                               rel="tooltip"
-                               title="{% trans "Global" %}">
+                            {% if section != 'personal' %}
+                                </a>
+                            {% endif %}
+
+                            {% if section != 'global' %}
+                                <a href="{% url index %}{% query_string "s=global" "" %}"
+                                   rel="tooltip"
+                                   title="{% trans "Global" %}">
+                            {% endif %}
                                 <i class="icon-globe"></i>
-                            </a>
-                            <a href="#recent-images"
-                               data-toggle="tab"
-                               rel="tooltip"
-                               title="{% trans "Recent images" %}">
+                            {% if section != 'global' %}
+                                </a>
+                            {% endif %}
+
+                            {% if section != 'images' %}
+                                <a href="{% url index %}{% query_string "s=images" "" %}"
+                                   rel="tooltip"
+                                   title="{% trans "Recent images" %}">
+                            {% endif %}
                                 <i class="icon-th"></i>
-                            </a>
+                            {% if section != 'images' %}
+                                </a>
+                            {% endif %}
                         </span>
                     </div>
+
                     <div class="activity-actions">
-                        <div class="tab-content">
-                            <div class="tab-pane active js-masonry" id="personal-stream" data-masonry-options='{"itemSelector":".action"}'>
-                                {% include 'index/personal_stream_page.html' %}
+                        {% if section == 'personal' or section == 'global' %}
+                            <div class="js-masonry endless" data-masonry-options='{"itemSelector":".action"}'>
+                                {% include 'index/stream_page.html' %}
                             </div>
-                            <div class="tab-pane js-masonry" id="global-stream" data-masonry-options='{"itemSelector":".action"}'>
-                                {% include 'index/global_stream_page.html' %}
-                            </div>
-                            <div class="tab-pane" id="recent-images">
+                        {% endif %}
+
+                        {% ifequal section 'images' %}
+                            <div class="endless">
                                 <ul class="thumbnails astrobin-thumbnails">
                                     {% include 'index/recent_images_page.html' %}
                                 </ul>
                             </div>
-                        </div>
-                        {% include 'snippets/endless_pagination_js.html' %}
-                    </div>
-                </div>
-            </div> <!-- activity stream -->
+                        {% endifequal %}
+                    </div> <!-- endless -->
+                </div> <!-- activity stream container -->
+            </div> <!-- span -->
         </div> <!-- row -->
     {% endif %} {# authenticated #}
 {% endblock %}
 
 {% block extra_js %}
+    <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
@@ -200,16 +226,23 @@
 
             $.ajaxSetup({timeout: 0});
 
-            $('a[data-toggle="tab"]').click(function() {
-                $('.js-masonry').each(function() {
-                    var self = $(this);
+            var endlessPaginateOptions = function($target) {
+                console.log("Creating endless pagination.");
+                return {
+                }
+            };
 
-                    setTimeout(function() {
-                        masonry = self.data('masonry');
-                        if (masonry !== undefined)
-                            masonry.layout();
-                    }, 250);
-                });
+            $('.endless').endlessPaginate({
+                paginateOnScroll: true,
+                paginateOnScrollMargin: 300,
+                onCompleted: function(context, fragment) {
+                    var masonry = $('.endless').data('masonry');
+                    if (masonry !== undefined) {
+                        masonry.reloadItems();
+                        masonry.layout();
+                    }
+                    window.loadAstroBinImages(fragment);
+                }
             });
         });
     </script>

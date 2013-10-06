@@ -6,6 +6,7 @@ local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 DEBUG = False
 CACHE = not DEBUG
+LOCAL_STATIC_STORAGE = DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
@@ -111,7 +112,7 @@ IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
 CDN_URL = os.environ['ASTROBIN_CDN_URL']
 
 STATIC_ROOT = '/webserver/www/sitestatic'
-if DEBUG:
+if LOCAL_STATIC_STORAGE:
     STATIC_URL = '/sitestatic/'
 else:
     STATIC_URL = CDN_URL + 'www/static/'
@@ -123,7 +124,7 @@ MEDIA_ROOT = '/webserver/www/sitestatic/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-if DEBUG:
+if LOCAL_STATIC_STORAGE:
     MEDIA_URL = '/media/'
 else:
     MEDIA_URL = CDN_URL
@@ -163,7 +164,7 @@ MIDDLEWARE_CLASSES = [
 
 if DEBUG:
     MIDDLEWARE_CLASSES += [
-        #'debug_toolbar.middleware.DebugToolbarMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
@@ -341,7 +342,7 @@ AVATAR_GRAVATAR_BACKUP = False
 AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png?v=1'
 AVATAR_AUTO_GENERATE_SIZES = (64,)
 
-if DEBUG:
+if LOCAL_STATIC_STORAGE:
     STATICFILES_STORAGE = 'django.core.files.storage.FileSystemStorage'
 else:
     STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
