@@ -1037,9 +1037,6 @@ class Image(models.Model):
     def get_suspended_ratings(self):
         return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = True)
 
-    def get_author_profile(self):
-        return self.user.userprofile
-
     # TODO: verify how thumbnail integration works when sharing on forums
     # TODO: why have mod as a setting when inverted is part of the alias?
     # TODO: this is generating thumbnails synchronously from the sharing dialog

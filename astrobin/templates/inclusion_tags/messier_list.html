@@ -17,7 +17,7 @@
             M {{object.messier_number}}
             <br/>
             {% trans "by" %}
-            <a href="{% url user_page object.image.user %}">{{object.image.get_author_profile}}</a>
+            <a href="{% url user_page object.image.user %}">{{object.image.user.userprofile}}</a>
         </div>
     </li>
 {% empty %}
