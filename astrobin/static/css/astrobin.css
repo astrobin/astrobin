@@ -3161,14 +3161,8 @@ table#private-shared-folders tr:hover a.delete-folder {
 #register-button a {
   font-size: 150%;
 }
-.endless_container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
 .endless_container .endless_more {
-  visibility: hidden;
+  display: none;
 }
 .endless_container .endless_loading {
   text-align: center;
@@ -3178,4 +3172,8 @@ table#private-shared-folders tr:hover a.delete-folder {
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 -6px 12px;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 -6px 12px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -6px 12px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
