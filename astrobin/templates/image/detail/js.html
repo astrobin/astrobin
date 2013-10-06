@@ -224,7 +224,7 @@ $(document).ready(function() {
                     "{% trans "Great result!" %}",
                     "{% trans "Top quality!" %}"],
                 {% endif %}
-                read_only: {% if request.user.is_authenticated and not already_voted and not request.user.userprofile_set.all.0.suspended_from_voting and request.user != image.user %} false {% else %} true {% endif %}
+                read_only: {% if request.user.is_authenticated and not already_voted and not request.user.userprofile.suspended_from_voting and request.user != image.user %} false {% else %} true {% endif %}
             },
             upload_revision_action: {
                 dialog: {
