@@ -1006,12 +1006,11 @@ class Image(models.Model):
         return url
 
     def iotd_date(self):
-        try:
-            return ImageOfTheDay.objects.get(image = self).date
-        except ImageOfTheDay.DoesNotExist:
-            return None
-        except ImageOfTheDay.MultipleObjectsReturned:
-            return ImageOfTheDay.objects.filter(image = self)[0].date
+        iotd = self.image_of_the_day.all()
+        if iotd:
+            return iotd[0].date
+
+        return None
 
     def astrobinIndex(self):
         ratings = self.rating.get_ratings().filter(
