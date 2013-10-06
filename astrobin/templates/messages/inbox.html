@@ -33,7 +33,7 @@
                         <td>{% if message.new %}<strong>{% trans "New!" %}</strong>{% endif %}</td>
                         <td>
                             {% for participant in message.others %}
-                                <a href="{{ participant.user.get_absolute_url }}">{{participant.user.userprofile_set.all.0 }}</a>{% if not forloop.last %},{% endif %}
+                                <a href="{{ participant.user.get_absolute_url }}">{{participant.user.userprofile }}</a>{% if not forloop.last %},{% endif %}
                             {% endfor %}
                         </td>
                         <td>{{message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</td>

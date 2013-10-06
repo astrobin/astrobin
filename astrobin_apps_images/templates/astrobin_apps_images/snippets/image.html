@@ -6,7 +6,7 @@
     <a
         {% if show_tooltip %}
             rel="tooltip"
-            title="{{image.title|escape}}, {% trans "by" %} {{image.get_author_profile}}"
+            title="{{image.title|escape}}, {% trans "by" %} {{image.user.userprofile}}"
         {% endif %}
 
         href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">

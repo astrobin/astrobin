@@ -31,7 +31,7 @@ def user_language(request):
         'user_language': request.LANGUAGE_CODE,
     }
     if request.user.is_authenticated():
-        profile = request.user.get_profile()
+        profile = request.user.userprofile
         d['user_language'] = profile.language
 
     return d
@@ -43,7 +43,7 @@ def user_profile(request):
     }
 
     if request.user.is_authenticated():
-        profile = request.user.get_profile()
+        profile = request.user.userprofile
         d['userprofile'] = profile
 
     return d
@@ -62,7 +62,7 @@ def user_scores(request):
         cache_key = "astrobin_user_score_%s" % request.user
         user_index = cache.get(cache_key)
         if user_index is None:
-            profile = request.user.get_profile()
+            profile = request.user.userprofile
 
             if profile.optout_rating:
                 d['user_scores_index'] = 0

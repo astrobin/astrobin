@@ -1038,7 +1038,7 @@ class Image(models.Model):
         return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = True)
 
     def get_author_profile(self):
-        return self.user.get_profile()
+        return self.user.userprofile
 
     # TODO: verify how thumbnail integration works when sharing on forums
     # TODO: why have mod as a setting when inverted is part of the alias?
@@ -1502,7 +1502,7 @@ class UserProfile(models.Model):
         'Accessory': 'accessories',
     }
 
-    user = models.ForeignKey(User, unique=True, editable=False)
+    user = models.OneToOneField(User, editable=False)
 
     # Basic Information
     real_name = models.CharField(

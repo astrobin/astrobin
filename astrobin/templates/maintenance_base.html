@@ -504,7 +504,7 @@
             {% endif %}
 
             {% if is_producer or is_retailer %}
-                {% with request.user.userprofile_set.all.0 as profile %}
+                {% with request.user.userprofile as profile %}
                     {% if not profile.company_name or not profile.company_description or not profile.company_website %}
                         <div class="alert alert-warning">
                             <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
@@ -516,7 +516,7 @@
             {% endif %}
 
             {% if is_retailer %}
-                {% with request.user.userprofile_set.all.0 as profile %}
+                {% with request.user.userprofile as profile %}
                     {% if not profile.retailer_country %}
                         <div class="alert alert-warning">
                             <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>

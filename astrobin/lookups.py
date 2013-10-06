@@ -124,7 +124,7 @@ def autocomplete(request, what):
 @login_required
 @require_GET
 def autocomplete_user(request, what):
-    profile = request.user.get_profile()
+    profile = request.user.userprofile
     values = ()
     for k, v in {'telescopes':profile.telescopes,
                  'imaging_telescopes':profile.telescopes,

@@ -51,7 +51,7 @@ def _get_integration(image):
 
 def _prepare_rating(obj):
     from votes import index
-    if not obj.allow_rating or obj.user.get_profile().optout_rating:
+    if not obj.allow_rating or obj.user.userprofile.optout_rating:
         return 0
     return index([x.score for x in obj.rating.get_ratings().filter(user__userprofile__suspended_from_voting = False)])
 
@@ -271,13 +271,13 @@ class GearIndex(SearchIndex):
         producers = CommercialGear.objects\
             .filter(gear = obj)\
             .exclude(Q(producer__userprofile__company_name = None) | Q(producer__userprofile__company_name = ""))
-        return ["%s" % x.producer.userprofile_set.all()[0].company_name for x in producers]
+        return ["%s" % x.producer.userprofile.company_name for x in producers]
 
     def prepare_retailers(self, obj):
         retailers = RetailedGear.objects\
             .filter(gear = obj)\
             .exclude(Q(retailer__userprofile__company_name = None) | Q(retailer__userprofile__company_name = ""))
-        return ["%s" % x.retailer.userprofile_set.all()[0].company_name for x in retailers]
+        return ["%s" % x.retailer.userprofile.company_name for x in retailers]
 
 
 class UserIndex(SearchIndex):

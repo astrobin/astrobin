@@ -45,9 +45,9 @@
 
             {% if action.actor.get_absolute_url %}
                 <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax action.actor %}"
-                   href="{{action.actor.get_absolute_url}}">{{action.actor.userprofile_set.all.0}}</a>
+                   href="{{action.actor.get_absolute_url}}">{{action.actor.userprofile}}</a>
             {% else %}
-                <a href="{{action.actor_url}}">{{action.actor.userprofile_set.all.0}}</a>
+                <a href="{{action.actor_url}}">{{action.actor.userprofile}}</a>
             {% endif %}
 
             {% trans action.verb %}:
@@ -62,14 +62,14 @@
                 {% if action.target_content_type.model == 'image' and action.target.user != action.actor %}
                     {% trans "by" %}
                     <a href="{{action.target.user.get_absolute_url}}">
-                        {{action.target.user.userprofile_set.all.0}}
+                        {{action.target.user.userprofile}}
                     </a>
                 {% endif %}
 
                 {% if action.target_content_type.model == 'imagerevision' and action.target.image.user != action.actor %}
                     {% trans "by" %}
                     <a href="{{action.target.image.user.get_absolute_url}}">
-                        {{action.target.image.user.userprofile_set.all.0}}
+                        {{action.target.image.user.userprofile}}
                     </a>
                 {% endif %}
 
@@ -85,14 +85,14 @@
                     {% if action.action_object_content_type.model == 'image' and action.action_object.user != action.actor %}
                         {% trans "by" %}
                         <a href="{{action.action_object.user.get_absolute_url}}">
-                            {{action.action_object.user.userprofile_set.all.0}}
+                            {{action.action_object.user.userprofile}}
                         </a>
                     {% endif %}
 
                     {% if action.action_object_content_type.model == 'imagerevision' and action.action_object.image.user != action.actor %}
                         {% trans "by" %}
                         <a href="{{action.action_object.image.user.get_absolute_url}}">
-                            {{action.action_object.image.user.userprofile_set.all.0}}
+                            {{action.action_object.image.user.userprofile}}
                         </a>
                     {% endif %}
                 {% endif %}

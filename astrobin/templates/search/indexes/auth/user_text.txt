@@ -1,6 +1,6 @@
 {{object.username}}
 
-{{object.userprofile_set.all.0.real_name}}
+{{object.userprofile.real_name}}
 
 {% for i in object.telescopes.all %}
 	{{i}}

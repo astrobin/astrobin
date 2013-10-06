@@ -146,7 +146,7 @@
                         </div>
                         <table class="table">
                             {% for retailed in gear.retailed.all %}
-                                {% with retailed.retailer.userprofile_set.all.0 as profile %}
+                                {% with retailed.retailer.userprofile as profile %}
                                     {% if profile.company_name %}
                                         <tr>
                                             <th>

@@ -10,7 +10,7 @@
                 </a>
             </div>
 
-            {% if request.user.userprofile_set.all.0.suspended_from_voting %}
+            {% if request.user.userprofile.suspended_from_voting %}
                 <div class="alert alert-danger">
                     {% blocktrans %}You are permanently suspended from voting because of suspicious activity. This include voting dishonestly, our of spite, or spirit of competition. If you believe this is a mistake, please get in touch with the administration of AstroBin.{% endblocktrans %}
                 </div>
