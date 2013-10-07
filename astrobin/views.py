@@ -294,6 +294,13 @@ def index(request, template = 'index/root.html', extra_context = None):
         elif section == 'images':
             response_dict['recent_images'] = Image.objects.select_related('user__userprofile')
 
+        elif section == 'favorited':
+            response_dict['recent_images'] = \
+                Image.objects.select_related('user__userprofile') \
+                    .annotate(last_favorited = models.Max('favorite__created')) \
+                    .exclude (last_favorited = None) \
+                    .order_by('-last_favorited')
+
     if extra_context is not None:
         response_dict.update(extra_context)
 
