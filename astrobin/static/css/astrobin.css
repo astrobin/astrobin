@@ -2721,12 +2721,13 @@ form.avatar-change label.control-label {
 .blog-stream-entries .entry {
   padding: 8px 0;
   position: relative;
-  min-height: 64px;
+  min-height: 160px;
 }
 .activity-actions .action .action-inner,
 .blog-stream-entries .action .action-inner,
 .activity-actions .entry .action-inner,
 .blog-stream-entries .entry .action-inner {
+  position: relative;
   padding: 8px;
   margin: 8px;
   background: #303030 url('../images/darker-panel-tile.png');
@@ -2755,6 +2756,34 @@ form.avatar-change label.control-label {
 .activity-actions .entry .avatar,
 .blog-stream-entries .entry .avatar {
   float: left;
+}
+.activity-actions .action .action-type,
+.blog-stream-entries .action .action-type,
+.activity-actions .entry .action-type,
+.blog-stream-entries .entry .action-type {
+  position: absolute;
+  top: 84px;
+  left: 24px;
+  font-size: 32px;
+  text-shadow: rgba(0, 0, 0, 0.2) 0 3px 3px;
+}
+.activity-actions .action .action-type i.icon-plus,
+.blog-stream-entries .action .action-type i.icon-plus,
+.activity-actions .entry .action-type i.icon-plus,
+.blog-stream-entries .entry .action-type i.icon-plus {
+  color: #FFFF9F;
+}
+.activity-actions .action .action-type i.icon-heart,
+.blog-stream-entries .action .action-type i.icon-heart,
+.activity-actions .entry .action-type i.icon-heart,
+.blog-stream-entries .entry .action-type i.icon-heart {
+  color: firebrick;
+}
+.activity-actions .action .action-type i.icon-comment-alt,
+.blog-stream-entries .action .action-type i.icon-comment-alt,
+.activity-actions .entry .action-type i.icon-comment-alt,
+.blog-stream-entries .entry .action-type i.icon-comment-alt {
+  color: lightblue;
 }
 .activity-actions .action .content,
 .blog-stream-entries .action .content,

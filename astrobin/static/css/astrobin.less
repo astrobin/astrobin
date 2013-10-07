@@ -2923,9 +2923,10 @@ form.avatar-change label.control-label {display: none;}
     .action, .entry {
         padding: @spacer-medium 0;
         position: relative;
-        min-height: 64px;
+        min-height: 160px;
 
         .action-inner {
+            position: relative;
             padding: 8px;
             margin: 8px;
             background: #303030 url('../images/darker-panel-tile.png');
@@ -2944,6 +2945,26 @@ form.avatar-change label.control-label {display: none;}
 
         .avatar {
             float: left;
+        }
+
+        .action-type {
+            position: absolute;
+            top: 84px;
+            left: 24px;
+            font-size: 32px;
+            .text-shadow-subtle;
+
+            i.icon-plus {
+                color: #FFFF9F;
+            }
+
+            i.icon-heart {
+                color: firebrick;
+            }
+
+            i.icon-comment-alt {
+                color: lightblue;
+            }
         }
 
         .content {
