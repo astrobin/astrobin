@@ -189,124 +189,110 @@ def index(request, template = 'index/root.html', extra_context = None):
             # The is no IOTD
             pass
 
-        range_begin      = 0
-        range_end        = 100
-
         if section == 'global':
             ##################
             # GLOBAL ACTIONS #
             ##################
-            cache_key = 'astrobin_index_global_actions_%s' % request.LANGUAGE_CODE
-            actions = cache.get(cache_key)
-
-            if actions is None:
-                actions = Action.objects.all()[range_begin:range_end]
-                cache.set(cache_key, actions, 600)
+            actions = Action.objects.all()
             response_dict['actions'] = actions
 
         elif section == 'personal':
             ####################
             # PERSONAL ACTIONS #
             ####################
-            cache_key = 'astrobin_index_personal_actions_%s' % request.user
-            actions = cache.get(cache_key)
+            cache_key = 'astrobin_users_image_ids_%s' % request.user
+            users_image_ids = cache.get(cache_key)
+            if users_image_ids is None:
+                users_image_ids = [
+                    str(x) for x in
+                    Image.objects.filter(
+                        user = request.user).values_list('id', flat = True)
+                ]
+                cache.set(cache_key, users_image_ids, 300)
 
-            if actions is None:
-                inner_cache_key = 'astrobin_users_image_ids_%s' % request.user
-                users_image_ids = cache.get(inner_cache_key)
-                if users_image_ids is None:
-                    users_image_ids = [
-                        str(x) for x in
-                        Image.objects.filter(
-                            user = request.user).values_list('id', flat = True)
-                    ]
-                    cache.set(inner_cache_key, users_image_ids, 300)
+            cache_key = 'astrobin_users_revision_ids_%s' % request.user
+            users_revision_ids = cache.get(cache_key)
+            if users_revision_ids is None:
+                users_revision_ids = [
+                    str(x) for x in
+                    ImageRevision.objects.filter(
+                        image__user = request.user).values_list('id', flat = True)
+                ]
+                cache.set(cache_key, users_revision_ids, 300)
 
-                inner_cache_key = 'astrobin_users_revision_ids_%s' % request.user
-                users_revision_ids = cache.get(inner_cache_key)
-                if users_revision_ids is None:
-                    users_revision_ids = [
-                        str(x) for x in
-                        ImageRevision.objects.filter(
-                            image__user = request.user).values_list('id', flat = True)
-                    ]
-                    cache.set(inner_cache_key, users_revision_ids, 300)
+            cache_key = 'astrobin_followed_user_ids_%s' % request.user
+            followed_user_ids = cache.get(cache_key)
+            if followed_user_ids is None:
+                followed_user_ids = [
+                    str(x) for x in
+                    profile.follows.all().values_list('user__id', flat = True)
+                ]
+                cache.set(cache_key, followed_user_ids, 900)
 
-                inner_cache_key = 'astrobin_followed_user_ids_%s' % request.user
-                followed_user_ids = cache.get(inner_cache_key)
-                if followed_user_ids is None:
-                    followed_user_ids = [
-                        str(x) for x in
-                        profile.follows.all().values_list('user__id', flat = True)
-                    ]
-                    cache.set(inner_cache_key, followed_user_ids, 900)
+            cache_key = 'astrobin_followees_image_ids_%s' % request.user
+            followees_image_ids = cache.get(cache_key)
+            if followees_image_ids is None:
+                followees_image_ids = [
+                    str(x) for x in
+                    Image.objects.filter(user_id__in = followed_user_ids).values_list('id', flat = True)
+                ]
+                cache.set(cache_key, followees_image_ids, 900)
 
-                inner_cache_key = 'astrobin_followees_image_ids_%s' % request.user
-                followees_image_ids = cache.get(inner_cache_key)
-                if followees_image_ids is None:
-                    followees_image_ids = [
-                        str(x) for x in
-                        Image.objects.filter(user_id__in = followed_user_ids).values_list('id', flat = True)
-                    ]
-                    cache.set(inner_cache_key, followees_image_ids, 900)
+            actions = Action.objects.filter(
+                    # Actor is user, or...
+                    Q(
+                        Q(actor_content_type__app_label = 'auth') &
+                        Q(actor_content_type__model = 'user') &
+                        Q(actor_object_id = request.user.id)
+                    ) |
 
-                actions = Action.objects.filter(
-                        # Actor is user, or...
-                        Q(
-                            Q(actor_content_type__app_label = 'auth') &
-                            Q(actor_content_type__model = 'user') &
-                            Q(actor_object_id = request.user.id)
-                        ) |
+                    # Action concerns user's images as target, or...
+                    Q(
+                        Q(target_content_type__app_label = 'astrobin') &
+                        Q(target_content_type__model = 'image') &
+                        Q(target_object_id__in = users_image_ids)
+                    ) |
+                    Q(
+                        Q(target_content_type__app_label = 'astrobin') &
+                        Q(target_content_type__model = 'imagerevision') &
+                        Q(target_object_id__in = users_revision_ids)
+                    ) |
 
-                        # Action concerns user's images as target, or...
-                        Q(
-                            Q(target_content_type__app_label = 'astrobin') &
-                            Q(target_content_type__model = 'image') &
-                            Q(target_object_id__in = users_image_ids)
-                        ) |
-                        Q(
-                            Q(target_content_type__app_label = 'astrobin') &
-                            Q(target_content_type__model = 'imagerevision') &
-                            Q(target_object_id__in = users_revision_ids)
-                        ) |
+                    # Action concerns user's images as object, or...
+                    Q(
+                        Q(action_object_content_type__app_label = 'astrobin') &
+                        Q(action_object_content_type__model = 'image') &
+                        Q(action_object_object_id__in = users_image_ids)
+                    ) |
+                    Q(
+                        Q(action_object_content_type__app_label = 'astrobin') &
+                        Q(action_object_content_type__model = 'imagerevision') &
+                        Q(action_object_object_id__in = users_revision_ids)
+                    ) |
 
-                        # Action concerns user's images as object, or...
-                        Q(
-                            Q(action_object_content_type__app_label = 'astrobin') &
-                            Q(action_object_content_type__model = 'image') &
-                            Q(action_object_object_id__in = users_image_ids)
-                        ) |
-                        Q(
-                            Q(action_object_content_type__app_label = 'astrobin') &
-                            Q(action_object_content_type__model = 'imagerevision') &
-                            Q(action_object_object_id__in = users_revision_ids)
-                        ) |
+                    # Actor is somebody the user follows, or...
+                    Q(
+                        Q(actor_content_type__app_label = 'auth') &
+                        Q(actor_content_type__model = 'user') &
+                        Q(actor_object_id__in = followed_user_ids)
+                    ) |
 
-                        # Actor is somebody the user follows, or...
-                        Q(
-                            Q(actor_content_type__app_label = 'auth') &
-                            Q(actor_content_type__model = 'user') &
-                            Q(actor_object_id__in = followed_user_ids)
-                        ) |
-
-                        # Action concerns an image by a followed user...
-                        Q(
-                            Q(target_content_type__app_label = 'astrobin') &
-                            Q(target_content_type__model = 'image') &
-                            Q(target_object_id__in = followees_image_ids)
-                        ) |
-                        Q(
-                            Q(action_object_content_type__app_label = 'astrobin') &
-                            Q(action_object_content_type__model = 'image') &
-                            Q(action_object_object_id__in = followees_image_ids)
-                        )
-                    )[range_begin:range_end]
-
-                cache.set(cache_key, actions, 300)
+                    # Action concerns an image by a followed user...
+                    Q(
+                        Q(target_content_type__app_label = 'astrobin') &
+                        Q(target_content_type__model = 'image') &
+                        Q(target_object_id__in = followees_image_ids)
+                    ) |
+                    Q(
+                        Q(action_object_content_type__app_label = 'astrobin') &
+                        Q(action_object_content_type__model = 'image') &
+                        Q(action_object_object_id__in = followees_image_ids)
+                    )
+                )
             response_dict['actions'] = actions
 
         elif section == 'images':
-            response_dict['recent_images'] = Image.objects.select_related('user__userprofile')[:640]
+            response_dict['recent_images'] = Image.objects.select_related('user__userprofile')
 
     if extra_context is not None:
         response_dict.update(extra_context)
