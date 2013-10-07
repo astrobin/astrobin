@@ -343,7 +343,7 @@ AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png?v=1'
 AVATAR_AUTO_GENERATE_SIZES = (64,)
 
 if LOCAL_STATIC_STORAGE:
-    STATICFILES_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 else:
     STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
 STATICFILES_FINDERS = (
