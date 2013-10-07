@@ -156,7 +156,7 @@
 
         <div class="row">
             <div class="span9"> <!-- activity stream -->
-                <div class="subtle-container activity-stream-container">
+                <div class="subtle-container simple-container">
                     <div class="header">
                         <h4>
                             {% ifequal section 'personal' %}
@@ -233,7 +233,7 @@
                         {% endif %}
 
                         {% if section == 'images' or section == 'favorited' %}
-                            <div class="endless">
+                            <div id="recent-images-loggedin" class="endless">
                                 <ul class="thumbnails astrobin-thumbnails">
                                     {% include 'index/recent_images_page.html' %}
                                 </ul>
@@ -242,6 +242,17 @@
                     </div> <!-- endless -->
                 </div> <!-- activity stream container -->
             </div> <!-- span -->
+
+            <div class="span3">
+                <div class="subtle-container simple-container">
+                    <div class="header"><h4>{% trans "Commercial products" %}<h4></div>
+                    <div id="commercial-products">
+                        {% cache 3600 index_recent_commercial_gear request.LANGUAGE_CODE %}
+                            {% image_list recent_commercial_gear 'thumb' %}
+                        {% endcache %}
+                    </div>
+                </div>
+            </div>
         </div> <!-- row -->
     {% endif %} {# authenticated #}
 </div>

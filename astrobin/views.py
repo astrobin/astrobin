@@ -194,6 +194,12 @@ def index(request, template = 'index/root.html', extra_context = None):
             # The is no IOTD
             pass
 
+        response_dict['recent_commercial_gear'] = Image.objects \
+            .select_related('user__userprofile') \
+            .filter(is_wip = False) \
+            .exclude(featured_gear = None)
+
+
         if section == 'global':
             ##################
             # GLOBAL ACTIONS #
