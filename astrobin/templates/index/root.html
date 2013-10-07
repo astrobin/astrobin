@@ -221,29 +221,30 @@
     <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
-            astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
-
-            $.ajaxSetup({timeout: 0});
-
-            var endlessPaginateOptions = function($target) {
-                console.log("Creating endless pagination.");
-                return {
+            var layoutMasonry = function() {
+                var masonry = $('.endless').data('masonry');
+                if (masonry !== undefined) {
+                    masonry.reloadItems();
+                    masonry.layout();
                 }
             };
+            setTimeout(function() {
+                layoutMasonry();
+            }, 500);
 
             $('.endless').endlessPaginate({
                 paginateOnScroll: true,
                 paginateOnScrollMargin: 300,
                 onCompleted: function(context, fragment) {
-                    var masonry = $('.endless').data('masonry');
-                    if (masonry !== undefined) {
-                        masonry.reloadItems();
-                        masonry.layout();
-                    }
+                    layoutMasonry();
                     window.loadAstroBinImages(fragment);
                 }
             });
+
+            astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+            astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+
+            $.ajaxSetup({timeout: 0});
         });
     </script>
 {% endblock %}
