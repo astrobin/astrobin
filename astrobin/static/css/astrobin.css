@@ -2875,6 +2875,7 @@ li.revisions {
   position: relative;
 }
 .revision .final .text {
+  z-index: 1;
   position: absolute;
   border: 0;
   margin: 0;
