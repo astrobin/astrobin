@@ -13,6 +13,20 @@
             </div>
         {% endif %}
 
+        <div class="action-type">
+            {% if action.verb == 'uploaded a new image' or action.verb == 'uploaded a new revision of' %}
+                <i class="icon-plus"></i>
+            {% endif %}
+
+            {% if action.verb == 'commented on image' or actoin.verb == 'commented on gear' %}
+                <i class="icon-comment-alt"></i>
+            {% endif %}
+
+            {% if action.verb == 'has favorited' %}
+                <i class="icon-heart"></i>
+            {% endif %}
+        </div>
+
         <div class="content">
             <div class="object">
                 {% ifequal action.action_object_content_type.model 'imagerevision' %}
