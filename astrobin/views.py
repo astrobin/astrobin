@@ -163,11 +163,16 @@ def index(request, template = 'index/root.html', extra_context = None):
     response_dict = {
         'registration_form': RegistrationForm(),
         'section': section,
+        'recent_images': Image.objects.select_related('user__userprofile'),
+        'recent_images_alias': 'thumb',
+        'recent_images_batch_size': 55,
     }
+
 
     profile = None
     if request.user.is_authenticated():
         profile = request.user.userprofile
+        response_dict['recent_images_batch_size'] = 64
 
         try:
             iotd = ImageOfTheDay.objects.all()[0]
@@ -292,9 +297,6 @@ def index(request, template = 'index/root.html', extra_context = None):
                 )
             response_dict['actions'] = actions
             response_dict['cache_prefix'] = 'astrobin_personal_actions'
-
-        elif section == 'images':
-            response_dict['recent_images'] = Image.objects.select_related('user__userprofile')
 
         elif section == 'favorited':
             response_dict['recent_images'] = \
