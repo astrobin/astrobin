@@ -256,7 +256,9 @@
                 paginateOnScroll: true,
                 paginateOnScrollMargin: 300,
                 onCompleted: function(context, fragment) {
-                    layoutMasonry();
+                    setTimeout(function() {
+                        layoutMasonry();
+                    }, 250);
                     window.loadAstroBinImages(fragment);
                 }
             });
