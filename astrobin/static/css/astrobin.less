@@ -2900,7 +2900,7 @@ form.avatar-change label.control-label {display: none;}
     }
 }
 
-.activity-stream-container {
+.simple-container {
     background: none;
     border: 0;
     .rounded-corners(0);
@@ -2912,6 +2912,10 @@ form.avatar-change label.control-label {display: none;}
         .rounded-corners(6px);
         margin: 0 0 4px 0;
         padding: 8px 12px;
+
+        h4 {
+            font-size: 13px;
+        }
     }
 
     #personal-stream, #global-stream {
@@ -2945,6 +2949,8 @@ form.avatar-change label.control-label {display: none;}
 
         .avatar {
             float: left;
+            max-width: 64px;
+            overflow: hidden;
         }
 
         .action-type {
@@ -3410,5 +3416,13 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
 #index {
     #recent-images {
         padding-left: 8px;
+    }
+
+    #recent-images-loggedin {
+        padding-left: 2px;
+    }
+
+    #commercial-products {
+        padding-left: 14px;
     }
 }

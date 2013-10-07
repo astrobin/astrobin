@@ -2692,7 +2692,7 @@ form.avatar-change label.control-label {
   margin-top: 0;
   text-align: center;
 }
-.activity-stream-container {
+.simple-container {
   background: none;
   border: 0;
   -moz-border-radius: 0;
@@ -2702,7 +2702,7 @@ form.avatar-change label.control-label {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.activity-stream-container .header {
+.simple-container .header {
   border: 0;
   background: #202020;
   -moz-border-radius: 6px;
@@ -2711,8 +2711,11 @@ form.avatar-change label.control-label {
   margin: 0 0 4px 0;
   padding: 8px 12px;
 }
-.activity-stream-container #personal-stream,
-.activity-stream-container #global-stream {
+.simple-container .header h4 {
+  font-size: 13px;
+}
+.simple-container #personal-stream,
+.simple-container #global-stream {
   overflow: hidden;
 }
 .activity-actions .action,
@@ -2756,6 +2759,8 @@ form.avatar-change label.control-label {
 .activity-actions .entry .avatar,
 .blog-stream-entries .entry .avatar {
   float: left;
+  max-width: 64px;
+  overflow: hidden;
 }
 .activity-actions .action .action-type,
 .blog-stream-entries .action .action-type,
@@ -3209,4 +3214,10 @@ table#private-shared-folders tr:hover a.delete-folder {
 }
 #index #recent-images {
   padding-left: 8px;
+}
+#index #recent-images-loggedin {
+  padding-left: 2px;
+}
+#index #commercial-products {
+  padding-left: 14px;
 }
