@@ -151,19 +151,28 @@
                     <div class="header">
                         <h4>
                             {% ifequal section 'personal' %}
+                                <i class="icon-group"></i>
                                 {% trans "Your activity stream" %}
                             {% endifequal %}
 
                             {% ifequal section 'global' %}
+                                <i class="icon-globe"></i>
                                 {% trans "Global activity stream" %}
                             {% endifequal %}
 
                             {% ifequal section 'images' %}
+                                <i class="icon-th"></i>
                                 {% trans "Recent images" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'favorited' %}
+                                <i class="icon-heart"></i>
+                                {% trans "Recently favorited" %}
                             {% endifequal %}
                         </h4>
 
                         <span class="pull-right">
+
                             {% if section != 'personal' %}
                                 <a href="{% url index %}{% query_string "s=personal" "" %}"
                                    rel="tooltip"
@@ -193,6 +202,17 @@
                             {% if section != 'images' %}
                                 </a>
                             {% endif %}
+
+                            {% if section != 'favorited' %}
+                                <a href="{% url index %}{% query_string "s=favorited" "" %}"
+                                   rel="tooltip"
+                                   title="{% trans "Recently favorited" %}">
+                            {% endif %}
+                                <i class="icon-heart"></i>
+                            {% if section != 'favorited' %}
+                                </a>
+                            {% endif %}
+
                         </span>
                     </div>
 
@@ -203,13 +223,13 @@
                             </div>
                         {% endif %}
 
-                        {% ifequal section 'images' %}
+                        {% if section == 'images' or section == 'favorited' %}
                             <div class="endless">
                                 <ul class="thumbnails astrobin-thumbnails">
                                     {% include 'index/recent_images_page.html' %}
                                 </ul>
                             </div>
-                        {% endifequal %}
+                        {% endif %}
                     </div> <!-- endless -->
                 </div> <!-- activity stream container -->
             </div> <!-- span -->
