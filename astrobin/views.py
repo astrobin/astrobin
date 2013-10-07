@@ -195,6 +195,7 @@ def index(request, template = 'index/root.html', extra_context = None):
             ##################
             actions = Action.objects.all()
             response_dict['actions'] = actions
+            response_dict['cache_prefix'] = 'astrobin_global_actions'
 
         elif section == 'personal':
             ####################
@@ -290,6 +291,7 @@ def index(request, template = 'index/root.html', extra_context = None):
                     )
                 )
             response_dict['actions'] = actions
+            response_dict['cache_prefix'] = 'astrobin_personal_actions'
 
         elif section == 'images':
             response_dict['recent_images'] = Image.objects.select_related('user__userprofile')

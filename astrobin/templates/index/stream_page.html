@@ -2,7 +2,7 @@
 {% load endless %}
 {% load i18n %}
 
-{% lazy_paginate 20 actions using "stream_page" %}
+{% cache_paginate 20 actions using "stream_page" cache prefix cache_prefix duration 300 %}
 {% for action in actions %}
     {% display_action action %}
 {% empty %}

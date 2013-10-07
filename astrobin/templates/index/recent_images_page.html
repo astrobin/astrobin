@@ -2,7 +2,7 @@
 {% load endless %}
 {% load i18n %}
 
-{% paginate 64 recent_images using "recent_images_page" %}
+{% lazy_paginate 64 recent_images using "recent_images_page" %}
 {% for image in recent_images %}
     <li class="thumbnail astrobin-thumbnail">
         {% astrobin_image image 'thumb' %}
