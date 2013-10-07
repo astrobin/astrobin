@@ -4217,27 +4217,3 @@ def retailed_products_edit(request, id):
         },
         context_instance = RequestContext(request))
 
-
-@require_GET
-def comments(request):
-    return object_list(
-        request,
-        queryset = NestedComment.objects.all().filter(deleted = False).order_by('-updated'),
-        template_name = 'comments.html',
-        template_object_name = 'comment',
-        paginate_by = 100,
-        extra_context = {})
-
-
-@require_GET
-def reviews(request):
-    return object_list(
-        request,
-        queryset = ReviewedItem.objects.all().order_by('-date_added'),
-        template_name = 'reviews.html',
-        template_object_name = 'review',
-        paginate_by = 100,
-        extra_context = {
-        })
-
-
