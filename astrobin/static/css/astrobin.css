@@ -1509,6 +1509,19 @@ div.rating-container .score-histogram-container .score .score-total-votes {
 
   position: relative;
 }
+.astrobin-image-container.plot-overlay {
+  position: absolute;
+  top: 0;
+}
+.astrobin-image-container.plot-overlay img {
+  opacity: 0;
+}
+.astrobin-image-container.plot-overlay img:hover {
+  opacity: 1;
+  transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out;
+}
 .main-image {
   text-align: center;
 }
@@ -1527,20 +1540,6 @@ div.rating-container .score-histogram-container .score .score-total-votes {
   left: 0;
   max-width: 100%;
   z-index: 1;
-}
-.main-image .main-image-inner img.plot-overlay,
-.main-image .main-image-inner img.fixed-plot-overlay {
-  cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.0;
-  max-width: 100%;
-  z-index: 2;
-  border: none;
-}
-.main-image .main-image-inner img.fixed-plot-overlay {
-  opacity: 1.0;
 }
 .image-title {
   margin-bottom: 16px;

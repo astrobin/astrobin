@@ -25,7 +25,7 @@
             </div>
         </form>
     {% else %}
-    {% if edit_type == 'deep_sky' or image.is_solved %}
+    {% if edit_type == 'deep_sky' or image.solution %}
         {% if advanced or request.GET.advanced == 'true' %}
         <div class="well">
         {% blocktrans %}You can insert as many acquisition sessions as you want, as often images are taken across several nights. An acquisition session is defined primarily by a date and a filter. Fill in your data and then click on <strong>Save</strong> to finish, or on <strong>Add more</strong> to add more acquisition sessions.{% endblocktrans %}

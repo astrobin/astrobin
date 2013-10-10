@@ -2,10 +2,12 @@
 
 <div class="main-image">
     <div class="main-image-inner">
-        <!-- TODO: unify revision and normal/inverted/regular -->
-        <!-- TODO: the plate-solved image should be generated automatically via a thumbnail processor -->
         <!-- TODO: check what happens with very old images -->
         {% astrobin_image image 'regular' revision_label 'full' mod %}
+
+        {% if image.solution and image.solution.job_success %}
+            {% astrobin_image image 'regular_solved_overlay' revision_label 'full' %}
+        {% endif %}
     </div> <!-- main-image-inner -->
 </div> <!-- main-image -->
 
