@@ -782,9 +782,7 @@ def image_detail(request, id, r):
     # GENERATE THUMBNAILS #
     #######################
 
-    mod = None
-    if 'mod' in request.GET and request.GET['mod'] == 'inverted':
-        mod = 'inverted'
+    mod = request.GET.get('mod')
 
     # TODO: remove this structure
     revision_data = []
@@ -1158,7 +1156,7 @@ def image_edit_acquisition(request, id):
     deep_sky_acquisition_formset = None
     deep_sky_acquisition_basic_form = None
     advanced = False
-    if edit_type == 'deep_sky' or image.is_solved:
+    if edit_type == 'deep_sky' or image.solution:
         advanced = dsa_qs[0].advanced if dsa_qs else False
         advanced = request.GET['advanced'] if 'advanced' in request.GET else advanced
         advanced = True if advanced == 'true' else advanced
@@ -1455,7 +1453,7 @@ def image_edit_save_acquisition(request):
     for a in SolarSystem_Acquisition.objects.filter(image=image):
         a.delete()
 
-    if edit_type == 'deep_sky' or image.is_solved:
+    if edit_type == 'deep_sky' or image.solution:
         if advanced:
             DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False, form=DeepSky_AcquisitionForm)
             saving_data = {}
@@ -1594,7 +1592,7 @@ def image_delete_original(request, id):
     image.w = final.w
     image.h = final.h
 
-    image.is_solved = False # We don't solve revisions.
+    image.solution.delete() # We don't solve revisions.
 
     image.is_final = True
     image.was_revision = True

@@ -43,6 +43,8 @@ from mptt.models import MPTTModel, TreeForeignKey
 from reviews.models import ReviewedItem
 from actstream import action
 
+from astrobin_apps_platesolving.models import Solution
+
 
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -873,7 +875,11 @@ class Image(models.Model):
     votes = generic.GenericRelation(Vote)
     user = models.ForeignKey(User)
 
-    is_solved = models.BooleanField(editable=False)
+    solution = models.OneToOneField(
+        Solution,
+        null = True,
+    )
+
     plot_is_overlay = models.BooleanField(editable=False, default=False)
     is_wip = models.BooleanField(editable=False, default=False)
     w = models.IntegerField(editable=False, default=0)
@@ -894,54 +900,6 @@ class Image(models.Model):
     was_revision = models.BooleanField(
         editable = False,
         default = False,
-    )
-
-    # astrometry
-    ra_center_hms = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 12,
-        editable = False,
-    )
-    dec_center_dms = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 13,
-        editable = False,
-    )
-    pixscale = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-        editable = False,
-    )
-    orientation = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-        editable = False,
-    )
-    fieldw = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-        editable = False,
-    )
-    fieldh = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-        editable = False,
-    )
-    fieldunits = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 32,
-        editable = False,
     )
 
     class Meta:
@@ -1044,6 +1002,7 @@ class Image(models.Model):
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
 
+
         # We default to the original upload
         field = self.image_file
 
@@ -1051,8 +1010,17 @@ class Image(models.Model):
         mod = thumbnail_settings.get('mod', None)
 
         # Possible modes: 'inverted', 'solved'.
-        if mod and mod != 'regular':
-            alias = alias + '_' + mod
+        if mod == 'inverted':
+            alias = alias + '_' +  mod
+        elif mod == 'solved':
+            # We don't support showing annotation for all image sizes because
+            # scaling them would make the text unreadable.
+            alias = 'regular_solved'
+
+
+        options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+        if alias in ('regular_solved', 'regular_solved_overlay'):
+            options['solution'] = self.solution
 
         if revision_label == '0':
             pass
@@ -1082,17 +1050,11 @@ class Image(models.Model):
             return url
 
         thumbnailer = get_thumbnailer(field)
-        options = settings.THUMBNAIL_ALIASES[''][alias]
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text
             options['watermark_position'] = self.watermark_position
             options['watermark_opacity'] = self.watermark_opacity
-        else:
-            try:
-                del options['watermark']
-            except KeyError:
-                pass
 
         try:
             thumbnail = thumbnailer.get_thumbnail(options)

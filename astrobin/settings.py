@@ -209,6 +209,7 @@ INSTALLED_APPS = (
     'astrobin',
     'rawdata',
     'astrobin_apps_images',
+    'astrobin_apps_platesolving',
 
     # Third party apps
     'registration',
@@ -314,6 +315,9 @@ CELERYBEAT = ASTROBIN_BASE_PATH + "manage.py celerybeat"
 CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
 
 ASTROBIN_ENABLE_SOLVING = True
+ASTROBIN_PLATESOLVING_BACKEND = \
+    'astrobin_apps_platesolving.backends.astrometry_net.solver.Solver'
+ASTROMETRY_NET_API_KEY = os.environ['ASTROMETRY_NET_API_KEY']
 
 PRIVATEBETA_ENABLE_BETA = False
 PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
@@ -507,6 +511,7 @@ LOGGING = {
 }
 
 THUMBNAIL_DEBUG = DEBUG
+THUMBNAIL_ALWAYS_GENERATE = THUMBNAIL_DEBUG
 THUMBNAIL_PROCESSORS = (
     # Default processors
     'easy_thumbnails.processors.colorspace',
@@ -518,6 +523,8 @@ THUMBNAIL_PROCESSORS = (
     'astrobin.thumbnail_processors.rounded_corners',
     'astrobin.thumbnail_processors.invert',
     'astrobin.thumbnail_processors.watermark',
+    'astrobin.thumbnail_processors.annotate',
+    'astrobin.thumbnail_processors.annotate_overlay',
     'astrobin.thumbnail_processors.histogram',
 )
 THUMBNAIL_ALIASES = {
@@ -527,11 +534,13 @@ THUMBNAIL_ALIASES = {
         'real': {'size': (16536, 16536), 'watermark': True},
         'real_inverted': {'size': (16536, 16536), 'invert': True, 'watermark': True},
 
-        'hd': {'size': (1824, 16536), 'crop': False, 'watermark': True},
-        'hd_inverted': {'size': (1824, 16536), 'crop': False, 'invert': True, 'watermark': True},
+        'hd': {'size': (1824, 0), 'crop': False, 'watermark': True},
+        'hd_inverted': {'size': (1824, 0), 'crop': False, 'invert': True, 'watermark': True},
 
-        'regular': {'size': (620, 16536), 'crop': False, 'watermark': True},
-        'regular_inverted': {'size': (620, 16536), 'crop': False, 'invert': True, 'watermark': True},
+        'regular': {'size': (620, 0), 'crop': False, 'watermark': True},
+        'regular_inverted': {'size': (620, 0), 'crop': False, 'invert': True, 'watermark': True},
+        'regular_solved': {'size': (620, 0), 'crop': False, 'annotate': True, 'watermark': True},
+        'regular_solved_overlay': {'size': (620, 0), 'crop': False, 'annotate_overlay': True, 'watermark': True},
 
         'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
         'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'inverted': True},
@@ -552,7 +561,8 @@ THUMBNAIL_ALIASES = {
 }
 THUMBNAIL_QUALITY = 100
 THUMBNAIL_SUBDIR = 'thumbs'
-THUMBNAIL_DEFAULT_STORAGE = 'astrobin.s3utils.ImageRootS3BotoStorage'
+THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 
 ENDLESS_PAGINATION_PER_PAGE = 35
 ENDLESS_PAGINATION_LOADING = '<img src="' + STATIC_URL + 'common/images/ajax-loader-bar.gif" alt="..." />'
+

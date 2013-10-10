@@ -2,7 +2,13 @@
 {% load common_tags %}
 {% load i18n %}
 
-<div class="astrobin-image-container">
+<div class="astrobin-image-container
+
+    {% if alias == 'regular_solved_overlay' %}
+        plot-overlay
+    {% endif %}
+">
+
     <a
         {% if show_tooltip %}
             rel="tooltip"

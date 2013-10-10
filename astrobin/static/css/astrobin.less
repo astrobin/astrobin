@@ -1677,37 +1677,48 @@ div.rating-container {
     .strong;
 }
 
+
 .astrobin-image-container {
     /* Because of the IOTD banner. */
     position: relative;
+
+    &.plot-overlay {
+        position: absolute;
+        top: 0;
+
+        img {
+            opacity: 0;
+
+            &:hover {
+                opacity: 1;
+                transition: opacity .25s ease-in-out;
+                -moz-transition: opacity .25s ease-in-out;
+                -webkit-transition: opacity .25s ease-in-out;
+            }
+        }
+    }
 }
 
 .main-image {
-        text-align: center;
+    text-align: center;
 
-        .main-image-inner {
-            z-index: 1;
+    .main-image-inner {
+        z-index: 1;
+        position: relative;
+        img {
+            cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
+            border: 1px solid @dark-panel-color;
+            .rounded-corners;
             position: relative;
-            img {
-                cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
-                border: 1px solid @dark-panel-color;
-                .rounded-corners;
-                position: relative;
-                top: 0;
-                left: 0;
-                max-width: 100%;
-                z-index: 1;}
-            img.plot-overlay, img.fixed-plot-overlay {
-                cursor: url('../cursors/magnify.cur'), -moz-zoom-in, pointer;
-                position: absolute;
-                top: 0;
-                left: 0;
-                opacity: 0.0;
-                max-width: 100%;
-                z-index: 2;
-                border: none;}
-            img.fixed-plot-overlay {
-                opacity: 1.0;}}}
+            top: 0;
+            left: 0;
+            max-width: 100%;
+            z-index: 1;
+        }
+    }
+}
+
+
 
 .image-title {
     margin-bottom: @spacer-xlarge;

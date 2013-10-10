@@ -25,6 +25,28 @@ def invert(image, invert = False, **kwargs):
     return image
 
 
+def annotate(image, annotate = False, **kwargs):
+    if annotate:
+        solution = kwargs.pop('solution')
+        if solution:
+            annotation = Image.open(solution.image_file.file)
+            annotation = annotation.resize(image.size, Image.ANTIALIAS)
+            image.paste(annotation, None, annotation)
+
+    return image
+
+
+def annotate_overlay(image, annotate_overlay = False, **kwargs):
+    if annotate_overlay:
+        solution = kwargs.pop('solution')
+        if solution:
+            annotation = Image.open(solution.image_file.file)
+            annotation = annotation.resize(image.size, Image.ANTIALIAS)
+            return annotation
+
+    return image
+
+
 def watermark(image, watermark = False, **kwargs):
     if watermark:
         try:

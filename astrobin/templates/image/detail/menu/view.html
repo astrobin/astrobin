@@ -16,7 +16,7 @@
                     {% trans "Inverted monochrome" %}
                 </a>
             </li>
-            {% if image.is_solved and mod != 'solved' %}
+            {% if image.solution and mod != 'solved' %}
             <li>
                 {% if is_revision %}
                 <a href="{% get_image_url image revision_label %}{% query_string "mod='solved', r=0" "plate_solving_started" %}">
@@ -30,7 +30,7 @@
                 </a>
                 {% endif %} <!-- is_revision -->
             </li>
-            {% endif %} <!-- is_solved and not showing solved -->
+            {% endif %} <!-- solution and not showing solved -->
         {% endif %} <!-- not showing inverted and not showing solved -->
 
         {% if mod == 'inverted' %}
@@ -40,7 +40,7 @@
                     {% trans "Normal" %}
                 </a>
             </li>
-            {% if image.is_solved and not solved %}
+            {% if image.solution and not solved %}
             <li>
                 {% if is_revision %}
                 <a href="{% get_image_url image '0' %}{% query_string "mod='solved'" "plate_solving_started" %}">
@@ -54,10 +54,10 @@
                 </a>
                 {% endif %} <!-- is_revision -->
             </li>
-            {% endif %} <!-- is_solved and not showing solved -->
+            {% endif %} <!-- solution and not showing solved -->
         {% endif %} <!-- showing inverted -->
 
-        {% if solved %}
+        {% if mod == 'solved' %}
             <li>
                 <a href="{% get_image_url image revision_label %}{% query_string "" "plate_solving_started,mod" %}">
                     <i class="icon-picture"></i>

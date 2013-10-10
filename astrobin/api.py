@@ -38,9 +38,9 @@ class ImageRevisionResource(ModelResource):
             'uploaded',
             'w',
             'h',
-            'is_solved',
             'is_final',
             # TODO: filename somehow
+            # TODO: solution
         ]
         allowed_methods = ['get']
 
@@ -74,24 +74,17 @@ class ImageResource(ModelResource):
             'link_to_fits',
             'rating_score',
             'rating_votes',
-            'is_solved',
             'license',
 
             'is_final',
 
-            'ra_center_hms',
-            'dec_center_dms',
-            'orientation',
-            'pixel_scale',
-            'fieldw',
-            'fieldh',
-            'fieldunits',
+            # TODO: solution
         ]
         allowed_methods = ['get']
         filtering = {
             'title': ALL,
             'description': ALL,
-            'is_solved': ('exact',),
+            # TODO: is_solved
             'user': ALL_WITH_RELATIONS,
             'uploaded': ALL,
             'fieldw': ALL,
