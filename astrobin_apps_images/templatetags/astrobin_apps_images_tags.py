@@ -57,6 +57,18 @@ def astrobin_image(
         alias = 'thumb'
 
     size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
+
+    w = image.w
+    h = image.h
+
+    if w == 0 or h == 0:
+        # Old images might not have a size in the database, let's fix it.
+        from django.core.files.images import get_image_dimensions
+        (w, h) = get_image_dimensions(image.image_file)
+        image.w = w
+        image.h = h
+        image.save()
+
     if alias in ('regular', 'regular_inverted',
                  'hd'     , 'hd_inverted',
                  'real'   , 'real_inverted'):
