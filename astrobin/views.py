@@ -1854,6 +1854,8 @@ def user_page(request, username):
         viewer_profile = request.user.userprofile
         last_login = to_user_timezone(user.last_login, viewer_profile)
 
+    followers = profile.followers.all().count()
+
     sqs = SearchQuerySet()
     sqs = sqs.filter(username = user.username).models(Image)
     sqs = sqs.order_by('-uploaded')
@@ -1873,6 +1875,7 @@ def user_page(request, username):
 
 
     response_dict = {
+        'followers': followers,
         'image_list': qs,
         'sort': request.GET.get('sort'),
         'view': request.GET.get('view', 'default'),
