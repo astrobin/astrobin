@@ -128,14 +128,81 @@ class Solver(AbstractPlateSolvingBackend):
 
         result = self.send_request('login', args)
         session = result.get('session')
-        print 'Got session:', session
 
         if not session:
             raise RequestError('no session in result')
         self.session = session
 
 
+    def _get_upload_args(self, **kwargs):
+        args = {}
+        for key,default,typ in [('allow_commercial_use', 'n', str),
+                                ('allow_modifications', 'n', str),
+                                ('publicly_visible', 'n', str),
+                                ('scale_units', None, str),
+                                ('scale_type', None, str),
+                                ('scale_lower', None, float),
+                                ('scale_upper', None, float),
+                                ('scale_est', None, float),
+                                ('scale_err', None, float),
+                                ('center_ra', None, float),
+                                ('center_dec', None, float),
+                                ('radius', None, float),
+                                ('downsample_factor', None, int),
+                                ('tweak_order', None, int),
+                                ('crpix_center', None, bool),
+                                # image_width, image_height
+                                ]:
+            if key in kwargs:
+                val = kwargs.pop(key)
+                val = typ(val)
+                args.update({key: val})
+            elif default is not None:
+                args.update({key: default})
+        return args
+
+
+    def url_upload(self, url, **kwargs):
+        args = dict(url=url)
+        args.update(self._get_upload_args(**kwargs))
+        result = self.send_request('url_upload', args)
+        return result
+
+
+    def job_status(self, job_id):
+        result = self.send_request('jobs/%s' % job_id)
+        stat = result.get('status')
+
+        """
+        if stat == 'success':
+            result = self.send_request('jobs/%s/calibration' % job_id)
+            print 'Calibration:', result
+            result = self.send_request('jobs/%s/tags' % job_id)
+            print 'Tags:', result
+            result = self.send_request('jobs/%s/machine_tags' % job_id)
+            print 'Machine Tags:', result
+            result = self.send_request('jobs/%s/objects_in_field' % job_id)
+            print 'Objects in field:', result
+            result = self.send_request('jobs/%s/annotations' % job_id)
+            print 'Annotations:', result
+            result = self.send_request('jobs/%s/info' % job_id)
+            print 'Calibration:', result
+        """
+
+        return result
+
+
+    def sub_status(self, sub_id):
+        return self.send_request('submissions/%s' % sub_id)
+
+
     def start(self, image):
         apikey = settings.ASTROMETRY_NET_API_KEY
         self.login(apikey)
+
+        upload = self.url_upload(image.url)
+        if upload['status'] == 'success':
+            return upload['subid']
+
+        return 0
 
