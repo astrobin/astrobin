@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load static %}
+
+<div id="platesolving-status">
+    <div class="alert alert-warning">
+        <strong><i class="icon-warning-sign"></i></strong>
+        {% trans "Getting plate-solving status, please wait..." %}
+    </div>
+</div>
+
+<script src="{% get_static_prefix %}/astrobin_apps_platesolving/js/astrobin_apps_platesolving.js"></script>

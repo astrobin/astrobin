@@ -878,6 +878,7 @@ class Image(models.Model):
     solution = models.OneToOneField(
         Solution,
         null = True,
+        on_delete = models.SET_NULL,
     )
 
     plot_is_overlay = models.BooleanField(editable=False, default=False)

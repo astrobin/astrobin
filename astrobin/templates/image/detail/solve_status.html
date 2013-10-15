@@ -1,0 +1,10 @@
+{% load astrobin_apps_platesolving_tags %}
+
+{% if request.user == image.user %}
+    {% comment %}
+        This tag may start a solving job.
+    {% endcomment %}
+
+    {% platesolving_status image.solution image.image_file %}
+{% endif %}
+
