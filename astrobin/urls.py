@@ -54,6 +54,7 @@ urlpatterns = patterns('',
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
 
     url(r'^rawdata/', include('rawdata.urls')),
+    url(r'^platesolving/', include('astrobin_apps_platesolving.urls')),
 
 
     url(r'^$', views.index, name='index'),

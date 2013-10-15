@@ -389,7 +389,6 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
-            'common/js/jquery-1.8.3.js',
             'common/js/handlebars-1.0.rc.1.js',
             'common/js/ember-1.0.0-pre.2.js',
             'common/js/jquery.lightbox-0.5.js',
