@@ -6,8 +6,8 @@ from astrobin_apps_platesolving.models import Solution
 class SolutionAdmin(admin.ModelAdmin):
     list_display = (
         'get_image_title','get_image_author',
-        'job_success', 'image_file')
-    list_filter = ('job_success',)
+        'status', 'submission_id', 'image_file')
+    list_filter = ('status',)
 
     def get_image_title(self, obj):
         return obj.image.title

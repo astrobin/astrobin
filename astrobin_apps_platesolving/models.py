@@ -1,9 +1,30 @@
 from django.db import models
 
+
 class Solution(models.Model):
-    job_success = models.BooleanField(
-        default = False,
+    STATUS_CHOICES = (
+        (0, 'missing'),
+        (1, 'pending'),
+        (2, 'failed'),
+        (3, 'success'),
     )
+
+    status = models.PositiveIntegerField(
+        default = 0,
+        choices = STATUS_CHOICES,
+    )
+
+    submission_id = models.PositiveIntegerField(
+        null = True,
+        blank = True,
+    )
+
+
+    image_file = models.ImageField(
+        upload_to = 'solutions',
+        null = True,
+    )
+
 
     objects_in_field = models.CharField(
         max_length = 128,
@@ -11,55 +32,39 @@ class Solution(models.Model):
         blank = True,
     )
 
-    image_file =  models.ImageField(
-        upload_to = 'solutions',
-        null = True,
-    )
-
-    ra_center_hms = models.CharField(
+    ra = models.DecimalField(
         null = True,
         blank = True,
-        max_length = 12,
+        max_digits = 16,
+        decimal_places = 14,
     )
 
-    dec_center_dms = models.CharField(
+    dec = models.DecimalField(
         null = True,
         blank = True,
-        max_length = 13,
+        max_digits = 6,
+        decimal_places = 3,
     )
 
     pixscale = models.DecimalField(
         null = True,
         blank = True,
-        max_digits = 14,
-        decimal_places = 10,
+        max_digits = 6,
+        decimal_places = 3,
     )
 
     orientation = models.DecimalField(
         null = True,
         blank = True,
-        max_digits = 14,
-        decimal_places = 10,
+        max_digits = 6,
+        decimal_places = 3,
     )
 
-    fieldw = models.DecimalField(
+    radius = models.DecimalField(
         null = True,
         blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-    )
-
-    fieldh = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-    )
-
-    fieldunits = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 32,
+        max_digits = 6,
+        decimal_places = 3,
     )
 
 
