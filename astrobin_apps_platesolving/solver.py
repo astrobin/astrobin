@@ -45,3 +45,9 @@ class Solver(object):
 
         return self.FAIL
 
+    def info(self, submission):
+        return self._backend().info(submission)
+
+    def annotated_image_url(self, submission):
+        return self._backend().annotated_image_url(submission)
+

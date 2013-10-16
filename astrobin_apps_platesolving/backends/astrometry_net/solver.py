@@ -206,6 +206,26 @@ class Solver(AbstractPlateSolvingBackend):
     def sub_status(self, sub_id):
         return self.send_request('submissions/%s' % sub_id)
 
+    def info(self, sub_id):
+        s = self.sub_status(sub_id)
+        jobs = s.get('jobs', [])
+
+        if not jobs:
+            return []
+
+        job_id = jobs[0]
+        return self.send_request('jobs/%d/info' % job_id)
+
+    def annotated_image_url(self, sub_id):
+        s = self.sub_status(sub_id)
+        jobs = s.get('jobs', [])
+
+        if not jobs:
+            return []
+
+        job_id = jobs[0]
+
+        return 'http://nova.astrometry.net/annotated_full/%d' % job_id
 
     def start(self, image_file):
         apikey = settings.ASTROMETRY_NET_API_KEY

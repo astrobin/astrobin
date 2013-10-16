@@ -995,17 +995,34 @@ class Image(models.Model):
     def get_suspended_ratings(self):
         return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = True)
 
+    def get_thumbnail_field(self, revision_label):
+        # We default to the original upload
+        field = self.image_file
+
+        if revision_label == '0':
+            pass
+        elif revision_label == 'final':
+            revisions = ImageRevision.objects.filter(image = self)
+            for r in revisions:
+                if r.is_final:
+                    field = r.image_file
+        else:
+            # We have some label
+            try:
+                r = ImageRevision.objects.get(image = self, label = revision_label)
+                field = r.image_file
+            except ImageRevision.DoesNotExist:
+                pass
+
+        return field
+
     # TODO: verify how thumbnail integration works when sharing on forums
     # TODO: why have mod as a setting when inverted is part of the alias?
     # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
-        from django.core.cache import cache
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
 
-
-        # We default to the original upload
-        field = self.image_file
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
         mod = thumbnail_settings.get('mod', None)
@@ -1023,33 +1040,8 @@ class Image(models.Model):
         if alias in ('regular_solved', 'regular_solved_overlay'):
             options['solution'] = self.solution
 
-        if revision_label == '0':
-            pass
-        elif revision_label == 'final':
-            revisions = ImageRevision.objects.filter(image = self)
-            for r in revisions:
-                if r.is_final:
-                    field = r.image_file
-        else:
-            # We have some label
-            try:
-                r = ImageRevision.objects.get(image = self, label = revision_label)
-                field = r.image_file
-            except ImageRevision.DoesNotExist:
-                pass
 
-        app_model = "{0}.{1}".format(
-            self._meta.app_label,
-            self._meta.object_name).lower()
-        cache_key = 'easy_thumb_alias_cache_%s.%s_%s' % (
-            app_model,
-            field,
-            alias)
-        thumb = cache.get(cache_key)
-
-        if thumb:
-            return thumb
-
+        field = self.get_thumbnail_field(revision_label);
         thumbnailer = get_thumbnailer(field)
 
         if self.watermark and 'watermark' in options:
@@ -1059,7 +1051,6 @@ class Image(models.Model):
 
         try:
             thumb = thumbnailer.get_thumbnail(options)
-            cache.set(cache_key, thumb, 60*60*24*365)
         except InvalidImageFormatError:
             return None
 
@@ -1067,14 +1058,30 @@ class Image(models.Model):
 
 
     def thumbnail(self, alias, thumbnail_settings = {}):
-        thumb = self.thumbnail_raw(alias, thumbnail_settings)
-        options = settings.THUMBNAIL_ALIASES[''][alias].copy()
-        url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
-            options['size'][0],
-            options['size'][1])
+        from django.core.cache import cache
 
-        if thumb:
-            url = settings.IMAGES_URL + thumb.name
+        revision_label = thumbnail_settings.get('revision_label', 'final')
+        field = self.get_thumbnail_field(revision_label);
+
+        app_model = "{0}.{1}".format(
+            self._meta.app_label,
+            self._meta.object_name).lower()
+        cache_key = 'easy_thumb_alias_cache_%s.%s_%s' % (
+            app_model,
+            field,
+            alias)
+
+        url = cache.get(cache_key)
+        if not url:
+            thumb = self.thumbnail_raw(alias, thumbnail_settings)
+            options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+            url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
+                options['size'][0],
+                options['size'][1])
+
+            if thumb:
+                url = settings.IMAGES_URL + thumb.name
+                cache.set(cache_key, url, 60*60*24*365)
 
         return url
 
