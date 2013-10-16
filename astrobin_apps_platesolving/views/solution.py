@@ -34,7 +34,8 @@ class SolveView(base.View):
 
         if solution.submission_id is None:
             solver = Solver()
-            submission = solver.solve(image.image_file)
+            thumb = image.thumbnail_raw('regular', {'revision_label': 0})
+            submission = solver.solve(thumb.file)
             solution.status = Solver.PENDING
             solution.submission_id = submission
             solution.save()

@@ -1,4 +1,10 @@
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email.mime.application  import MIMEApplication
+from email.encoders import encode_noop
+
 import simplejson
+
 from urllib import urlencode
 from urllib2 import urlopen, Request, HTTPError
 
@@ -118,9 +124,6 @@ class Solver(AbstractPlateSolvingBackend):
             return result
         except HTTPError, e:
             print 'HTTPError', e
-            txt = e.read()
-            open('err.html', 'wb').wzypr***REMOVED***rite(txt)
-            print 'Wrote error text to err.html'
 
 
     def login(self, apikey):
@@ -168,6 +171,14 @@ class Solver(AbstractPlateSolvingBackend):
         result = self.send_request('url_upload', args)
         return result
 
+    def upload(self, f, **kwargs):
+        args = self._get_upload_args(**kwargs)
+        try:
+            result = self.send_request('upload', args, (f.name, f.read()))
+            return result
+        except IOError:
+            print 'File %s does not exist' % fn
+            raise
 
     def job_status(self, job_id):
         result = self.send_request('jobs/%s' % job_id)
@@ -196,11 +207,11 @@ class Solver(AbstractPlateSolvingBackend):
         return self.send_request('submissions/%s' % sub_id)
 
 
-    def start(self, image):
+    def start(self, image_file):
         apikey = settings.ASTROMETRY_NET_API_KEY
         self.login(apikey)
 
-        upload = self.url_upload(image.url)
+        upload = self.upload(image_file)
         if upload['status'] == 'success':
             return upload['subid']
 

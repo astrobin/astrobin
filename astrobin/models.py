@@ -998,7 +998,7 @@ class Image(models.Model):
     # TODO: verify how thumbnail integration works when sharing on forums
     # TODO: why have mod as a setting when inverted is part of the alias?
     # TODO: this is generating thumbnails synchronously from the sharing dialog
-    def thumbnail(self, alias, thumbnail_settings = {}):
+    def thumbnail_raw(self, alias, thumbnail_settings = {}):
         from django.core.cache import cache
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
@@ -1045,10 +1045,10 @@ class Image(models.Model):
             app_model,
             field,
             alias)
-        url = cache.get(cache_key)
+        thumb = cache.get(cache_key)
 
-        if url:
-            return url
+        if thumb:
+            return thumb
 
         thumbnailer = get_thumbnailer(field)
 
@@ -1058,13 +1058,23 @@ class Image(models.Model):
             options['watermark_opacity'] = self.watermark_opacity
 
         try:
-            thumbnail = thumbnailer.get_thumbnail(options)
-            url = settings.IMAGES_URL + thumbnail.name
-            cache.set(cache_key, url, 60*60*24*365)
+            thumb = thumbnailer.get_thumbnail(options)
+            cache.set(cache_key, thumb, 60*60*24*365)
         except InvalidImageFormatError:
-            return "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
-                options['size'][0],
-                options['size'][1])
+            return None
+
+        return thumb
+
+
+    def thumbnail(self, alias, thumbnail_settings = {}):
+        thumb = self.thumbnail_raw(alias, thumbnail_settings)
+        options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+        url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
+            options['size'][0],
+            options['size'][1])
+
+        if thumb:
+            url = settings.IMAGES_URL + thumb.name
 
         return url
 

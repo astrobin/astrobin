@@ -19,8 +19,8 @@ class Solver(object):
         return getattr(module, backend_name)()
 
     # Starts the job and returns an id for later reference
-    def solve(self, image):
-        return self._backend().start(image)
+    def solve(self, image_file):
+        return self._backend().start(image_file)
 
     def status(self, submission):
         if submission is None or submission == 0:
