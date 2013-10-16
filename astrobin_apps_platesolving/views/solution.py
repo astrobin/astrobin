@@ -21,12 +21,36 @@ from astrobin_apps_platesolving.solver import Solver
 
 
 class SolveView(base.View):
-    def get(self, request, *args, **kwargs):
-        image = get_object_or_404(Image, id = kwargs.pop('id'))
-        solver = Solver()
-        submission = solver.solve(image.image_file)
+    def post(self, request, *args, **kwargs):
+        image = get_object_or_404(Image, pk = kwargs.pop('pk'))
+        solution = image.solution
 
-        context = {'submission': submission}
+        if solution is None:
+            solution = Solution()
+            solution.save()
+
+            image.solution = solution
+            image.save()
+
+        if solution.submission_id is None:
+            solver = Solver()
+            submission = solver.solve(image.image_file)
+            solution.status = Solver.PENDING
+            solution.submission_id = submission
+            solution.save()
+
+        context = {'submission': solution.submission_id}
+        return HttpResponse(simplejson.dumps(context), mimetype='application/json')
+
+
+class SolutionUpdateView(base.View):
+    def post(self, request, *args, **kwargs):
+        solution = get_object_or_404(Solution, pk = kwargs.pop('pk'))
+        solver = Solver()
+        solution.status = solver.status(solution.submission_id)
+        solution.save()
+
+        context = {'status': solution.status}
         return HttpResponse(simplejson.dumps(context), mimetype='application/json')
 
 

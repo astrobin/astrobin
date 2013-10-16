@@ -1,12 +1,16 @@
+# Django
 from django.db import models
+
+# This app
+from astrobin_apps_platesolving.solver import Solver
 
 
 class Solution(models.Model):
     STATUS_CHOICES = (
-        (0, 'missing'),
-        (1, 'pending'),
-        (2, 'failed'),
-        (3, 'success'),
+        (Solver.MISSING, 'Missing'),
+        (Solver.PENDING, 'Pending'),
+        (Solver.FAILED,  'Failed'),
+        (Solver.SUCCESS, 'Success'),
     )
 
     status = models.PositiveIntegerField(
@@ -23,6 +27,7 @@ class Solution(models.Model):
     image_file = models.ImageField(
         upload_to = 'solutions',
         null = True,
+        blank = True,
     )
 
 
