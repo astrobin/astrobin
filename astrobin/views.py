@@ -872,9 +872,18 @@ def image_thumb(request, id, r, alias, mod):
         simplejson.dumps({
             'id': id,
             'url': url,
-        }),
-        mimetype = 'application/javascript'
-    )
+        }))
+
+
+@require_GET
+def image_rawthumb(request, id, r, alias, mod):
+    image = get_object_or_404(Image, id = id)
+    url = image.thumbnail(alias, {
+        'revision_label': r,
+        'mod': mod,
+    })
+
+    return HttpResponseRedirect(url)
 
 
 @require_GET
