@@ -9,6 +9,8 @@
         this.$alert = this.$root.find('.alert');
         this.$icon = this.$root.find('icon');
 
+        this.updateQueries = 0;
+
         $.extend(this, config);
 
         astrobin_common.init_ajax_csrf_token();
@@ -58,6 +60,7 @@
                 type: 'post',
                 timeout: 30000,
                 success: function(data, textStatus, jqXHR) {
+                    self.updateQueries = self.updateQueries + 1;
                     self.dispatchOnStatus(data['status']);
                 }
             });
@@ -88,8 +91,15 @@
         },
 
         onStatusPending: function() {
-            this.$root.removeClass('hide');
-            this.update();
+            var self = this;
+
+            self.$root.removeClass('hide');
+            if (self.updateQueries == 0)
+                self.update();
+            else
+                setTimeout(function() {
+                    self.update();
+                }, 5000);
         },
 
         onStatusFailed: function() {
