@@ -796,6 +796,11 @@ def image_detail(request, id, r):
     # RESPONSE DICT #
     #################
 
+    print "Mod: %s" % mod
+    print "Rev: %s" % r
+
+    from astrobin_apps_platesolving.solver import Solver
+
     response_dict = {
         'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
 
@@ -804,6 +809,7 @@ def image_detail(request, id, r):
         'revision_data': revision_data,
         'revision_label': r,
         'mod': mod,
+        'show_solution': image.solution and image.solution.status == Solver.SUCCESS,
 
         'already_voted': already_voted,
         'votes_number': votes,

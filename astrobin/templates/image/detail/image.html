@@ -1,11 +1,16 @@
 {% load astrobin_apps_images_tags %}
+{% load common_tags %}
 
 <div class="main-image">
     <div class="main-image-inner">
         {% astrobin_image image 'regular' revision_label 'full' mod %}
 
-        {% if image.solution and image.solution.job_success %}
-            {% astrobin_image image 'regular_solved_overlay' revision_label 'full' %}
+        {% if show_solution %}
+            <div class="astrobin-image-container plot-overlay">
+                <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                    <img src="{{IMAGES_URL}}{{image.solution.image_file}}" alt="{{image.title|escape}}" />
+                </a>
+            </div>
         {% endif %}
     </div> <!-- main-image-inner -->
 </div> <!-- main-image -->
