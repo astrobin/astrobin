@@ -40,8 +40,8 @@ class Solution(models.Model):
     ra = models.DecimalField(
         null = True,
         blank = True,
-        max_digits = 16,
-        decimal_places = 14,
+        max_digits = 6,
+        decimal_places = 3,
     )
 
     dec = models.DecimalField(

@@ -49,6 +49,30 @@ class SolutionUpdateView(base.View):
         solution = get_object_or_404(Solution, pk = kwargs.pop('pk'))
         solver = Solver()
         solution.status = solver.status(solution.submission_id)
+
+        if solution.status == Solver.SUCCESS:
+            import urllib2
+            from django.core.files import File
+            from django.core.files.temp import NamedTemporaryFile
+
+            info = solver.info(solution.submission_id)
+
+            solution.objects_in_field = ', '.join(info['objects_in_field'])
+
+            solution.ra          = "%.3f" % info['calibration']['ra']
+            solution.dec         = "%.3f" % info['calibration']['dec']
+            solution.pixscale    = "%.3f" % info['calibration']['pixscale']
+            solution.orientation = "%.3f" % info['calibration']['orientation']
+            solution.radius      = "%.3f" % info['calibration']['radius']
+
+            url = solver.annotated_image_url(solution.submission_id)
+            img = NamedTemporaryFile(delete=True)
+            img.write(urllib2.urlopen(url).read())
+            img.flush()
+            img.seek(0)
+            f = File(img)
+            solution.image_file.save(solution.image.image_file.name, f)
+
         solution.save()
 
         context = {'status': solution.status}
