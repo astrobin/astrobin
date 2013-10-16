@@ -4,9 +4,10 @@ from django.conf import settings
 
 
 class Solver(object):
-    FAIL    = 0
-    SOLVING = 1
-    SUCCESS = 2
+    MISSING = 0
+    PENDING = 1
+    FAILED  = 2
+    SUCCESS = 3
 
     def _backend(self):
         module_name, backend_name = \
@@ -22,20 +23,23 @@ class Solver(object):
         return self._backend().start(image)
 
     def status(self, submission):
+        if submission is None or submission == 0:
+            return self.MISSING
+
         sub_status = self._backend().sub_status(submission)
         status = sub_status.get('status')
         if status == 'fail':
-            return self.FAIL
+            return self.FAILED
 
         jobs = sub_status.get('jobs', [])
         if not jobs:
-            return self.SOLVING
+            return self.PENDING
 
         job = jobs[0]
         job_result = self._backend().job_status(job)
         status = job_result.get('status')
         if status == 'solving':
-            return self.SOLVING
+            return self.PENDING
         elif status == 'success':
             return self.SUCCESS
 

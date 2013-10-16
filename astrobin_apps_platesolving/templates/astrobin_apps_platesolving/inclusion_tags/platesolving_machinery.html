@@ -1,21 +1,28 @@
 {% load i18n %}
 {% load static %}
 
-<div id="platesolving-status">
+<div id="platesolving-status" class="hide">
     <div class="alert alert-warning">
         <strong><i class="icon-warning-sign"></i></strong>
-        {% trans "Getting plate-solving status, please wait..." %}
+        <span class="alert-content">
+            {% trans "Getting plate-solving status, please wait..." %}
+        </span>
     </div>
 </div>
 
 <script src="{% get_static_prefix %}astrobin_apps_platesolving/js/astrobin_apps_platesolving.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        astrobin_apps_platesolving.init({
+        var solving = new AstroBinPlatesolving({
             solution: {{solution_id}},
-            image: {{image_id}}
+            image: {{image_id}},
+
+            beforeSolveMsg : "{% trans "Starting plate-solving process, please do not close this window..." %}",
+            solveStartedMsg: "{% trans "Plate-solving started in the background. Come check the result later!" %}",
+            solveFailedMsg : "{% trans "This image could not be plate-solved." %}",
+            solveSuccessMsg: "{% trans "This image has been successfully plate-solved. Please refresh the page to see the new data." %}"
         });
 
-        astrobin_apps_platesolving.analyze();
+        solving.process();
     });
 </script>
