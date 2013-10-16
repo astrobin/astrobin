@@ -40,11 +40,24 @@ class SolveView(base.View):
             solution.submission_id = submission
             solution.save()
 
-        context = {'submission': solution.submission_id}
+        context = {
+            'solution': solution.id,
+            'submission': solution.submission_id,
+        }
         return HttpResponse(simplejson.dumps(context), mimetype='application/json')
 
 
 class SolutionUpdateView(base.View):
+    def post(self, request, *args, **kwargs):
+        solution = get_object_or_404(Solution, pk = kwargs.pop('pk'))
+        solver = Solver()
+        status = solver.status(solution.submission_id)
+
+        context = {'status': status}
+        return HttpResponse(simplejson.dumps(context), mimetype='application/json')
+
+
+class SolutionFinalizeView(base.View):
     def post(self, request, *args, **kwargs):
         solution = get_object_or_404(Solution, pk = kwargs.pop('pk'))
         solver = Solver()

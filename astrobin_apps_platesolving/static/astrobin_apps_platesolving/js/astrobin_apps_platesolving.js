@@ -3,6 +3,7 @@
         this.solveURL  = '/platesolving/solve/';
         this.statusURL = '/api/v2/platesolving/solutions/';
         this.updateURL = '/platesolving/update/';
+        this.finalizeURL = '/platesolving/finalize/';
 
         this.$root = $('#platesolving-status');
         this.$content = this.$root.find('.alert-content');
@@ -36,6 +37,7 @@
                 type: 'post',
                 timeout: 30000,
                 success: function(data, textStatus, jqXHR) {
+                    self.solution = data['solution'];
                     self.onStarted();
                 }
             });
@@ -45,9 +47,14 @@
             var self = this;
 
             $.ajax({
-                url: this.statusURL + this.solution + '/',
+                url: self.statusURL + self.solution + '/',
                 success: function(data, textStatus, jqXHR) {
-                    self.dispatchOnStatus(data['status']);
+                    switch (data['status']) {
+                        case 0: self.onStatusMissing(); break;
+                        case 1: self.onStatusPending(); break;
+                        case 2: self.onStatusFailed(); break;
+                        case 3: self.onStatusSuccess(); break;
+                    }
                 }
             });
         },
@@ -56,23 +63,31 @@
             var self = this;
 
             $.ajax({
-                url: this.updateURL + this.solution + '/',
+                url: self.updateURL + self.solution + '/',
                 type: 'post',
                 timeout: 30000,
                 success: function(data, textStatus, jqXHR) {
                     self.updateQueries = self.updateQueries + 1;
-                    self.dispatchOnStatus(data['status']);
+                    switch (data['status']) {
+                        case 0: self.onStatusMissing(); break;
+                        case 1: self.onStatusPending(); break;
+                        case 2: self.onStatusFailed(); break;
+                        case 3:
+                            self.$icon.attr('class', 'icon-warning-sign');
+                            self.$alert.removeClass('alert-success').addClass('alert-warning');
+                            self.$content.text(self.solveFinalizingMsg);
+                            $.ajax({
+                                url: self.finalizeURL + self.solution + '/',
+                                type: 'post',
+                                timeout: 30000,
+                                success: function(data, textStatus, jqXHR) {
+                                    self.onStatusSuccess();
+                                }
+                            });
+                            break;
+                    }
                 }
             });
-        },
-
-        dispatchOnStatus: function(status) {
-            switch (status) {
-                case 0: this.onStatusMissing(); break;
-                case 1: this.onStatusPending(); break;
-                case 2: this.onStatusFailed(); break;
-                case 3: this.onStatusSuccess(); break;
-            }
         },
 
         onStarting: function() {
@@ -81,9 +96,7 @@
         },
 
         onStarted: function() {
-            this.$icon.attr('class', 'icon-ok');
-            this.$alert.removeClass('alert-warning').addClass('alert-success');
-            this.$content.text(this.solveStartedMsg);
+            this.onStatusPending();
         },
 
         onStatusMissing: function() {
