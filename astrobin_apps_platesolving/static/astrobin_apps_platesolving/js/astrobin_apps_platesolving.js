@@ -7,7 +7,7 @@
         this.$root = $('#platesolving-status');
         this.$content = this.$root.find('.alert-content');
         this.$alert = this.$root.find('.alert');
-        this.$icon = this.$root.find('icon');
+        this.$icon = this.$root.find('i');
 
         this.updateQueries = 0;
 
@@ -92,6 +92,10 @@
 
         onStatusPending: function() {
             var self = this;
+
+            self.$icon.attr('class', 'icon-ok');
+            self.$alert.removeClass('alert-warning').addClass('alert-success');
+            self.$content.text(self.solveStartedMsg);
 
             self.$root.removeClass('hide');
             if (self.updateQueries == 0)
