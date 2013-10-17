@@ -122,6 +122,7 @@
 
         onStatusFailed: function() {
             this.$icon.attr('class', 'icon-fire');
+            this.$progress.removeClass('progress-info').addClass('progress-danger');
             this.$bar.css({"width": "100%"});
             this.$content.text(this.solveFailedMsg);
             this.removeStatus();
@@ -129,6 +130,7 @@
 
         onStatusSuccess: function() {
             this.$icon.attr('class', 'icon-ok');
+            this.$progress.removeClass('progress-info').addClass('progress-success');
             this.$bar.css({"width": "100%"});
             this.$content.text(this.solveSuccessMsg);
             this.removeStatus();
