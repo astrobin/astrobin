@@ -211,6 +211,8 @@ INSTALLED_APPS = (
     'astrobin_apps_images',
     'astrobin_apps_platesolving',
 
+    'toggleproperties',
+
     # Third party apps
     'registration',
     'djangoratings',
@@ -561,3 +563,18 @@ THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 ENDLESS_PAGINATION_PER_PAGE = 35
 ENDLESS_PAGINATION_LOADING = '<img src="' + STATIC_URL + 'common/images/ajax-loader-bar.gif" alt="..." />'
 
+TOGGLEPROPERTIES = {
+    "bookmark": {
+        "property_tooltip_on": gettext("Remove from bookmarks"),
+        "property_tooltip_off": gettext("Bookmark"),
+        "property_icon": "icon-bookmark",
+    },
+
+    "like": {
+        "property_label_on": gettext("Unlike"),
+        "property_label_off": gettext("Like"),
+        "property_tooltip_on": gettext("Unlike"),
+        "property_tooltip_off": gettext("Like"),
+        "property_icon": "icon-thumbs-up",
+    }
+}
