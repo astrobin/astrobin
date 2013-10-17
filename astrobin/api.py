@@ -72,9 +72,8 @@ class ImageResource(ModelResource):
             'animated',
             'link',
             'link_to_fits',
-            'rating_score',
-            'rating_votes',
             'license',
+            # TODO: likes
 
             'is_final',
 
@@ -93,7 +92,7 @@ class ImageResource(ModelResource):
             'imaging_telescopes': ALL,
             'imaging_cameras': ALL,
         }
-        ordering = ['rating_score', 'rating_votes', 'uploaded']
+        ordering = ['uploaded']
 
     def dehydrate_subjects(self, bundle):
         subjects = bundle.obj.subjects.all()

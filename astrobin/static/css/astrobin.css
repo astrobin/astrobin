@@ -1426,84 +1426,6 @@ div.favorite-container a.favorite .favorite-hint {
 div.favorite-container a.favorite:hover .favorite-hint {
   visibility: visible;
 }
-div.rating-container {
-  position: relative;
-}
-div.rating-container .info {
-  position: absolute;
-  top: -11px;
-  right: -8px;
-  font-size: 80%;
-}
-div.rating-container .score-container {
-  float: left;
-  padding: 0 4px;
-}
-div.rating-container .score-container .current-rating {
-  font-size: 2.5em;
-  line-height: 2em;
-  text-align: center;
-}
-div.rating-container .score-container .total-votes {
-  text-align: center;
-  margin-top: 8px;
-  color: #9f9f9f;
-}
-div.rating-container .score-container .total-votes i {
-  padding-right: 4px;
-}
-div.rating-container .score-histogram-container {
-  float: right;
-  text-align: left;
-  padding: 16px 0;
-  width: 90px;
-}
-div.rating-container .score-histogram-container .score {
-  position: relative;
-}
-div.rating-container .score-histogram-container .score .score-label {
-  font-size: 85%;
-  padding-right: 8px;
-  position: absolute;
-  left: -30px;
-}
-div.rating-container .score-histogram-container .score .score-bar {
-  height: 20px;
-}
-div.rating-container .score-histogram-container .score .score-bar-5 {
-  background-color: #88b131;
-}
-div.rating-container .score-histogram-container .score .score-bar-4 {
-  background-color: #99cc00;
-}
-div.rating-container .score-histogram-container .score .score-bar-3 {
-  background-color: #ffcf02;
-}
-div.rating-container .score-histogram-container .score .score-bar-2 {
-  background-color: #ff9f02;
-}
-div.rating-container .score-histogram-container .score .score-bar-1 {
-  background-color: #ff6f31;
-}
-div.rating-container .score-histogram-container .score .score-total-votes {
-  position: absolute;
-  top: 0;
-  left: 4px;
-}
-#rating {
-  display: inline;
-}
-.rating-current {
-  float: right;
-  padding-top: 2px;
-  padding-right: 8px;
-}
-.rating-hint-container {
-  float: right;
-  padding-top: 2px;
-  padding-right: 8px;
-  font-weight: bold;
-}
 .astrobin-image-container {
   /* Because of the IOTD banner. */
 
@@ -2916,18 +2838,15 @@ li.revisions {
 }
 .gear-popover .thumbnail,
 .user-popover .thumbnail,
-.subject-popover .thumbnail,
-.rating-popover .thumbnail {
+.subject-popover .thumbnail {
   border: 0;
 }
 .gear-popover th,
 .user-popover th,
 .subject-popover th,
-.rating-popover th,
 .gear-popover td,
 .user-popover td,
-.subject-popover td,
-.rating-popover td {
+.subject-popover td {
   border-color: #222;
 }
 /* Bootstrap popover */

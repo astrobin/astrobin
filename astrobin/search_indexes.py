@@ -12,6 +12,7 @@ from django.db.models import Q
 from haystack.indexes import *
 from haystack import site
 from hitcount.models import HitCount
+from toggleproperties.models import ToggleProperty
 
 # This app
 from astrobin.models import Image
@@ -49,11 +50,8 @@ def _get_integration(image):
     return integration
 
 
-def _prepare_rating(obj):
-    from votes import index
-    if not obj.allow_rating or obj.user.userprofile.optout_rating:
-        return 0
-    return index([x.score for x in obj.rating.get_ratings().filter(user__userprofile__suspended_from_voting = False)])
+def _prepare_likes(obj):
+    return ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
 
 def _prepare_moon_phase(obj):
     from moon import MoonPhase
@@ -175,11 +173,8 @@ class GearIndex(SearchIndex):
 
     images = IntegerField()
 
-    # Average rating of all images taken with this item.
-    rating = FloatField()
-
-    # The sum of all votes on images taken with this item.
-    votes = IntegerField()
+    # Total likes of all images taken with this item.
+    likes = IntegerField()
 
     # Total integration of images taken with this item.
     integration = FloatField()
@@ -227,20 +222,12 @@ class GearIndex(SearchIndex):
     def prepare_images(self, obj):
         return len(self.get_images(obj))
 
-    def prepare_rating(self, obj):
-        l = []
+    def prepare_likes(self, obj):
+        likes = 0
         for i in self.get_images(obj):
-            l.append(_prepare_rating(i))
-        if len(l) == 0:
-            return 0
-        from votes import index
-        return index(l)
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
 
-    def prepare_votes(self, obj):
-        votes = 0
-        for i in self.get_images(obj):
-            votes += i.rating.votes
-        return votes
+        return likes
 
     def prepare_integration(self, obj):
         integration = 0
@@ -287,11 +274,8 @@ class UserIndex(SearchIndex):
     images = IntegerField()
     avg_integration = FloatField()
 
-    # Average rating of all user's images.
-    rating = FloatField()
-
-    # The sum of all votes of this user's images.
-    votes = IntegerField()
+    # Total likes of all user's images.
+    likes = IntegerField()
 
     # Total user ingegration.
     integration = FloatField()
@@ -351,20 +335,11 @@ class UserIndex(SearchIndex):
         return (integration / 3600.0) / images if images else 0
 
 
-    def prepare_rating(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj, allow_rating = True, is_wip = False):
-            l.append(_prepare_rating(i))
-        if len(l) == 0:
-            return 0
-        from votes import index
-        return index(l)
-
-    def prepare_votes(self, obj):
-        votes = 0
-        for i in Image.objects.filter(user = obj):
-            votes += i.rating.votes
-        return votes
+    def prepare_likes(self, obj):
+        likes = 0
+        for i in Image.objects.filter(user = obj, is_wip = False):
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
+        return likes
 
     def prepare_integration(self, obj):
         integration = 0
@@ -467,8 +442,7 @@ class ImageIndex(SearchIndex):
 
     uploaded = DateTimeField(model_attr='uploaded')
 
-    rating = FloatField()
-    votes = IntegerField()
+    likes = IntegerField()
     integration = FloatField()
     moon_phase = FloatField()
     first_acquisition_date = DateTimeField()
@@ -519,11 +493,8 @@ class ImageIndex(SearchIndex):
         # Printing here just because it's the first "prepare" function.
         return 300;
 
-    def prepare_rating(self, obj):
-        return _prepare_rating(obj)
-
-    def prepare_votes(self, obj):
-        return obj.rating.votes
+    def prepare_likes(self, obj):
+        return _prepare_likes(obj)
 
     def prepare_integration(self, obj):
         return _get_integration(obj)

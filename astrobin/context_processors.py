@@ -4,12 +4,11 @@ from django.db.models import Q
 from django.utils.translation import ugettext as _
 
 from notification import models as notifications
+from toggleproperties.models import ToggleProperty
 
 from astrobin.models import Request
 from astrobin.models import Gear
 from astrobin.models import Image
-from astrobin.search_indexes import _prepare_rating
-from astrobin.votes import index
 
 from nested_comments.models import NestedComment
 
@@ -50,41 +49,36 @@ def user_profile(request):
 
 
 def user_scores(request):
-    d = {
-        'user_scores_index': 0,
+    scores = {
+        'user_scores_likes': 0,
         'user_scores_images': 0,
         'user_scores_comments': 0,
         'user_scores_followers': 0,
     }
 
     if request.user.is_authenticated():
-        profile = request.user.userprofile
-        all_images = Image.objects.filter(user = request.user, is_wip = False)
-        followers = profile.followers.all().count()
-
         cache_key = "astrobin_user_score_%s" % request.user
-        user_index = cache.get(cache_key)
-        if user_index is None:
+        scores = cache.get(cache_key)
 
-            if profile.optout_rating:
-                d['user_scores_index'] = 0
-            else:
-                voted_images = Image.objects.filter(user = request.user, is_wip = False, allow_rating = True)
-                l = []
+        if not scores:
+            scores = {}
+            all_images = Image.objects.filter(user = request.user, is_wip = False)
 
-                for i in voted_images:
-                    l.append(_prepare_rating(i))
-                if len(l) > 0:
-                    user_index = index(l)
-                    cache.set(cache_key, user_index, 3600)
+            likes = 0
+            for i in all_images:
+                likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
+
+            profile = request.user.userprofile
+            followers = profile.followers.all().count()
 
 
-        d['user_scores_index'] = user_index
-        d['user_scores_images'] = all_images.count()
-        d['user_scores_comments'] =  NestedComment.objects.filter(author = request.user, deleted = False).count()
-        d['user_scores_followers'] = followers
+            scores['user_scores_likes'] = likes
+            scores['user_scores_images'] = all_images.count()
+            scores['user_scores_comments'] =  NestedComment.objects.filter(author = request.user, deleted = False).count()
+            scores['user_scores_followers'] = followers
+            cache.set(cache_key, scores, 600)
 
-    return d
+    return scores
 
 
 def common_variables(request):

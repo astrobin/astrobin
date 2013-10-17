@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Q
 
+from toggleproperties.models import ToggleProperty
+
 from astrobin.models import Image, Favorite, ImageOfTheDay
 from astrobin.image_utils import make_image_of_the_day, make_runnerup
 from nested_comments.models import NestedComment
@@ -11,28 +13,11 @@ from datetime import date, datetime, timedelta
 
 
 def calculate_score(image):
-    author = image.user
-    votes = 0
-    for vote in image.votes.all():
-        votes += vote.score
-
-    times_favorited = Favorite.objects.filter(image = image).exclude(user = author).count()
-    comments = NestedComment.objects.filter(
-        deleted = False,
-        content_type__app_label = 'astrobin',
-        content_type__model = 'image',
-        object_id = image.id).exclude(author = author).count()
-
-    score = votes + (times_favorited * 3) + (comments * 5)
     try:
         iotd = ImageOfTheDay.objects.get(image = image)
+        return -1
     except ImageOfTheDay.DoesNotExist:
-        iotd = None
-
-    if iotd:
-        score = -1
-
-    return score
+        return ToggleProperty.objects.toggleproperties_for_object("like", image).count()
 
 
 def compare_images(a, b):
@@ -60,10 +45,8 @@ class Command(BaseCommand):
             candidate_images = Image.objects.filter(Q(uploaded__gte = start) &
                                                     Q(uploaded__lte = yesterday) &
                                                     Q(subject_type__lt = 500) &
-                                                    Q(allow_rating = True) &
-                                                    Q(user__userprofile__optout_rating = False) &
-                                                    Q(w__gte = settings.IMAGE_OF_THE_DAY_WIDTH) &
-                                                    Q(h__gte = settings.IMAGE_OF_THE_DAY_HEIGHT) &
+                                                    Q(w__gte = settings.THUMBNAIL_ALIASES['']['iotd']['size'][0]) &
+                                                    Q(h__gte = settings.THUMBNAIL_ALIASES['']['iotd']['size'][1]) &
                                                     Q(is_wip = False))
             start = start - timedelta(1)
 

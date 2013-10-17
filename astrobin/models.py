@@ -42,6 +42,7 @@ from utils import user_is_paying
 from mptt.models import MPTTModel, TreeForeignKey
 from reviews.models import ReviewedItem
 from actstream import action
+from toggleproperties.models import ToggleProperty
 
 from astrobin_apps_platesolving.models import Solution
 
@@ -763,12 +764,6 @@ class Image(models.Model):
         help_text = _("HTML tags are allowed."),
     )
 
-    allow_rating = models.BooleanField(
-        verbose_name = _("Allow rating"),
-        help_text = _("Let other users vote this image. This setting will have no effect if you have opted out from the rating system in your site's preferences."),
-        default = True,
-    )
-
     link = models.CharField(
         max_length = 256,
         null = True,
@@ -871,8 +866,6 @@ class Image(models.Model):
     filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"))
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
 
-    rating = RatingField(range=5)
-    votes = generic.GenericRelation(Vote)
     user = models.ForeignKey(User)
 
     solution = models.OneToOneField(
@@ -971,12 +964,8 @@ class Image(models.Model):
 
         return None
 
-    def astrobinIndex(self):
-        ratings = self.rating.get_ratings().filter(
-            user__userprofile__suspended_from_voting = False)
-        votes = len(ratings)
-        from votes import index
-        return index([x.score for x in ratings])
+    def likes(self):
+        return ToggleProperty.objects.toggleproperties_for_object("like", self).count()
 
     def favoritesNumber(self):
         return Favorite.objects.filter(image = self).count()
@@ -988,12 +977,6 @@ class Image(models.Model):
             content_type__app_label = 'astrobin',
             content_type__model = 'image',
             object_id = self.id).count()
-
-    def get_ratings(self):
-        return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = False)
-
-    def get_suspended_ratings(self):
-        return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = True)
 
     def get_thumbnail_field(self, revision_label):
         # We default to the original upload
@@ -1612,19 +1595,6 @@ class UserProfile(models.Model):
         null=True, blank=True,
         verbose_name=_("Language"),
         choices = LANGUAGE_CHOICES,
-    )
-
-    optout_rating = models.BooleanField(
-        default = False,
-        editable = True,
-        verbose_name = _("Opt out from the rating system"),
-        help_text = _(
-            "This will hide all the votes your image have received the past, prevent new votes and exclude you from the leaderboard and sorting by rating in searches.")
-    )
-
-    suspended_from_voting = models.BooleanField(
-        default = False,
-        editable = False,
     )
 
     seen_realname = models.BooleanField(
