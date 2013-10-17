@@ -74,15 +74,14 @@
                         {% endif %}
                     {% endif %}
 
-                    {% if image.solution and image.ra_center_hms %}
-                        <p><strong>{% trans "RA center" %}</strong>: {{image.solution.ra_center_hms}}</p>
-                        <p><strong>{% trans "DEC center" %}</strong>: {{image.solution.dec_center_dms}}</p>
+                    {% if image.solution and image.solution.ra %}
+                        <p><strong>{% trans "RA center" %}</strong>: {{image.solution.ra}} {% trans "degrees" %}</p>
+                        <p><strong>{% trans "DEC center" %}</strong>: {{image.solution.dec}} {% trans "degrees" %}</p>
                         {% if image.pixscale != 0 %}
-                            <p><strong>{% trans "Pixel scale" %}</strong>: {{image.solution.pixscale|cut_decimals:"2"}} {% trans "arcsec/pixel" %}</p>
+                            <p><strong>{% trans "Pixel scale" %}</strong>: {{image.solution.pixscale}} {% trans "arcsec/pixel" %}</p>
                         {% endif %}
-                        <p><strong>{% trans "Orientation" %}</strong>: {{image.solution.orientation|cut_decimals:"2"}} {% trans "degrees" %}</p>
-                        <p><strong>{% trans "Field width" %}</strong>: {{image.solution.fieldw|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
-                        <p><strong>{% trans "Field height" %}</strong>: {{image.solution.fieldh|cut_decimals:"2"}} {% if image.fieldunits == 'degrees' %}{% trans "degrees" %}{% else %}{% if image.fieldunits == 'arcminutes' %}{% trans 'arcminutes' %}{% endif %}{% endif %}</p>
+                        <p><strong>{% trans "Orientation" %}</strong>: {{image.solution.orientation}} {% trans "degrees" %}</p>
+                        <p><strong>{% trans "Field radius" %}</strong>: {{image.solution.radius}} {% trans "degrees" %}</p>
                     {% endif %}
                 </div> <!-- acquisition-inner -->
             </div> <!-- acquisition -->
