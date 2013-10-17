@@ -445,6 +445,7 @@ ACTSTREAM_SETTINGS = {
         'rawdata.PublicDataPool',
         'nested_comments.nestedcomment',
         'reviews.revieweditem',
+        'toggleproperties.toggleproperty',
     ),
 
 }

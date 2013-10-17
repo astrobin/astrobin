@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 # Third party apps
 from actstream import action as act
 from rest_framework.authtoken.models import Token
+from toggleproperties.models import ToggleProperty
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
@@ -81,6 +82,12 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
 
             verb = "commented on gear"
             act.send(instance.author, verb = verb, action_object = instance, target = gear)
+
+
+def toggleproperty_post_save(sender, instance, created, **kwargs):
+    if created and instance.property_type == "like":
+        verb = "liked"
+        act.send(instance.user, verb = verb, target = instance.content_object)
 
 
 def rawdata_publicdatapool_post_save(sender, instance, created, **kwargs):
@@ -186,6 +193,7 @@ def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, mo
 
 
 post_save.connect(nested_comment_post_save, sender = NestedComment)
+post_save.connect(toggleproperty_post_save, sender = ToggleProperty)
 post_save.connect(rawdata_publicdatapool_post_save, sender = PublicDataPool)
 post_save.connect(create_auth_token, sender = User)
 

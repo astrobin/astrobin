@@ -2699,6 +2699,12 @@ form.avatar-change label.control-label {
 .blog-stream-entries .entry .action-type i.icon-plus {
   color: #FFFF9F;
 }
+.activity-actions .action .action-type i.icon-thumbs-up,
+.blog-stream-entries .action .action-type i.icon-thumbs-up,
+.activity-actions .entry .action-type i.icon-thumbs-up,
+.blog-stream-entries .entry .action-type i.icon-thumbs-up {
+  color: firebrick;
+}
 .activity-actions .action .action-type i.icon-heart,
 .blog-stream-entries .action .action-type i.icon-heart,
 .activity-actions .entry .action-type i.icon-heart,
