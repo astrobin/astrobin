@@ -1,4 +1,7 @@
 {% load astrobin_apps_platesolving_tags %}
 
-{% platesolving_machinery image %}
+{# Only solve deep-sky and wide field images. #}
+{% if image.subject_type == 100 or image.subject_type == 300 %}
+    {% platesolving_machinery image %}
+{% endif %}
 
