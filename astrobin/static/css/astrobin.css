@@ -3245,3 +3245,12 @@ table#private-shared-folders tr:hover a.delete-folder {
   top: 6px;
   left: 8px;
 }
+.toggleproperty-add-remove.property-like {
+  display: block;
+  margin: 16px 0;
+}
+.toggleproperty-add-remove.property-like button {
+  width: 100%;
+  font-size: 16px;
+  line-height: 32px;
+}
