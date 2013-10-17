@@ -206,26 +206,26 @@ class Solver(AbstractPlateSolvingBackend):
     def sub_status(self, sub_id):
         return self.send_request('submissions/%s' % sub_id)
 
-    def info(self, sub_id):
+    def get_job_from_sub(self, sub_id):
         s = self.sub_status(sub_id)
         jobs = s.get('jobs', [])
+        if not jobs or jobs[0] == 'null' or jobs[0] == 'None':
+            return None
 
-        if not jobs:
-            return []
+        return jobs[0]
 
-        job_id = jobs[0]
-        return self.send_request('jobs/%d/info' % job_id)
+
+    def info(self, sub_id):
+        job_id = self.get_job_from_sub(sub_id)
+        if job_id:
+            return self.send_request('jobs/%d/info' % job_id)
+        return {}
 
     def annotated_image_url(self, sub_id):
-        s = self.sub_status(sub_id)
-        jobs = s.get('jobs', [])
-
-        if not jobs:
-            return []
-
-        job_id = jobs[0]
-
-        return 'http://nova.astrometry.net/annotated_full/%d' % job_id
+        job_id = self.get_job_from_sub(sub_id)
+        if job_id:
+            return 'http://nova.astrometry.net/annotated_full/%d' % job_id
+        return ''
 
     def start(self, image_file):
         apikey = settings.ASTROMETRY_NET_API_KEY

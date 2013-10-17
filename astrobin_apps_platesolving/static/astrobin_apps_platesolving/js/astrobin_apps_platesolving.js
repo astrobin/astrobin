@@ -6,8 +6,9 @@
         this.finalizeURL = '/platesolving/finalize/';
 
         this.$root = $('#platesolving-status');
-        this.$content = this.$root.find('.alert-content');
-        this.$alert = this.$root.find('.alert');
+        this.$content = this.$root.find('.progress-text');
+        this.$progress = this.$root.find('.progress');
+        this.$bar = this.$root.find('.bar');
         this.$icon = this.$root.find('i');
 
         this.updateQueries = 0;
@@ -73,8 +74,8 @@
                         case 1: self.onStatusPending(); break;
                         case 2: self.onStatusFailed(); break;
                         case 3:
+                            self.$bar.css({"width": "75%"});
                             self.$icon.attr('class', 'icon-warning-sign');
-                            self.$alert.removeClass('alert-success').addClass('alert-warning');
                             self.$content.text(self.solveFinalizingMsg);
                             $.ajax({
                                 url: self.finalizeURL + self.solution + '/',
@@ -107,7 +108,7 @@
             var self = this;
 
             self.$icon.attr('class', 'icon-ok');
-            self.$alert.removeClass('alert-warning').addClass('alert-success');
+            self.$bar.css({"width": "50%"});
             self.$content.text(self.solveStartedMsg);
 
             self.$root.removeClass('hide');
@@ -121,14 +122,14 @@
 
         onStatusFailed: function() {
             this.$icon.attr('class', 'icon-fire');
-            this.$alert.removeClass('alert-warning').addClass('alert-error');
+            this.$bar.css({"width": "100%"});
             this.$content.text(this.solveFailedMsg);
             this.removeStatus();
         },
 
         onStatusSuccess: function() {
             this.$icon.attr('class', 'icon-ok');
-            this.$alert.removeClass('alert-warning').addClass('alert-success');
+            this.$bar.css({"width": "100%"});
             this.$content.text(this.solveSuccessMsg);
             this.removeStatus();
         },
