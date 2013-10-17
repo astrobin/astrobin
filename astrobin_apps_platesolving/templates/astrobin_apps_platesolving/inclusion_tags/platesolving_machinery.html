@@ -2,10 +2,13 @@
 {% load static %}
 
 <div id="platesolving-status" class="hide">
-    <div class="alert alert-warning">
-        <strong><i class="icon-warning-sign"></i></strong>
-        <span class="alert-content">
-            {% trans "Getting plate-solving status, please wait..." %}
+    <div class="progress progress-striped progress-info active">
+        <div class="bar" style="width:10%"></div>
+        <span class="progress-content">
+            <strong><i class="icon-warning-sign"></i></strong>
+            <span class="progress-text">
+                {% trans "Getting plate-solving status, please wait..." %}
+            </span>
         </span>
     </div>
 </div>
@@ -21,9 +24,9 @@
                     solution: {{solution_id}},
                     image: {{image_id}},
 
-                    beforeSolveMsg    : "{% trans "Plate-solving process starting, please do not close this window..." %}",
-                    solveStartedMsg   : "{% trans "Plate-solving started in the background." %}",
-                    solveFinalizingMsg: "{% trans "Plate-solving almost ready, please do not close this window..." %}",
+                    beforeSolveMsg    : "{% trans "Plate-solving process starting, please do not leave this page..." %}",
+                    solveStartedMsg   : "{% trans "Plate-solving started in the background. You may leave this page." %}",
+                    solveFinalizingMsg: "{% trans "Plate-solving almost ready, please do not leave this page..." %}",
                     solveFailedMsg    : "{% trans "This image could not be plate-solved." %}",
                     solveSuccessMsg   : "{% trans "This image has been successfully plate-solved. Please refresh the page to see the new data." %}"
                 });

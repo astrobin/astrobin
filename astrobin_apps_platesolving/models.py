@@ -32,7 +32,7 @@ class Solution(models.Model):
 
 
     objects_in_field = models.CharField(
-        max_length = 128,
+        max_length = 1024,
         null = True,
         blank = True,
     )

@@ -3450,3 +3450,22 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
     text-align: center;
     margin-top: @spacer-medium;
 }
+
+#platesolving-status {
+    .progress {
+        height: 32px;
+        margin-bottom: 4px;
+        position: relative;
+        background-color: #333;
+        background-image: linear-gradient(to bottom, #222222, #444444);
+
+
+        .progress-content {
+            color: yellow;
+            text-shadow: 1px 1px 1px black;
+            position: absolute;
+            top: 6px;
+            left: 8px;
+        }
+    }
+}
