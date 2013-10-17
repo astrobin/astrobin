@@ -175,35 +175,7 @@ $(document).ready(function() {
 
         "{{image.user.username}}",
 
-        {% if votes_number > 0 %}
-        "{{image.astrobinIndex}}",
-        {% else %}
-        "0",
-        {% endif %}
-
         {
-            rating: {
-                {% if not request.user.is_authenticated %}
-                redirectUrl: "/accounts/login/?next={{request.path}}",
-                {% endif %}
-                {% if already_voted %}
-                hint_list: [
-                    "{% trans "You have already voted." %}",
-                    "{% trans "You have already voted." %}",
-                    "{% trans "You have already voted." %}",
-                    "{% trans "You have already voted." %}",
-                    "{% trans "You have already voted." %}",
-                ],
-                {% else %}
-                hint_list: [
-                    "{% trans "It's a start, but it needs better data." %}",
-                    "{% trans "It looks good, but it needs better processing." %}",
-                    "{% trans "Good data, good processing." %}",
-                    "{% trans "Great result!" %}",
-                    "{% trans "Top quality!" %}"],
-                {% endif %}
-                read_only: {% if request.user.is_authenticated and not already_voted and not request.user.userprofile.suspended_from_voting and request.user != image.user %} false {% else %} true {% endif %}
-            },
             upload_revision_action: {
                 dialog: {
                     title: "{% trans "Upload new revision" %}",

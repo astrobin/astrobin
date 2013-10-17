@@ -554,16 +554,6 @@ astrobin_image_detail = {
         submenu   : 'div.sub',
         timeout   : 500,
 
-        /* Rating */
-        rating: {
-            element       : '#rating',
-            icons_path    : '/sitestatic/images/raty/',
-            rate_url      : '/rate/',
-            get_rating_url: '/get_rating/',
-            hint_list     : ['bad', 'poor', 'regular', 'good', 'gorgeous'],
-            read_only     : true
-        },
-
         upload_revision_action: {
             dialog: {
                 title: '',
@@ -621,12 +611,7 @@ astrobin_image_detail = {
         /* Common */
         image_id      : 0,
         revision_id   : 0,
-        image_username: '',
-
-        /* Rating */
-        rating: {
-           current: 0
-        }
+        image_username: ''
     },
 
     top_close: function() {
@@ -653,47 +638,6 @@ astrobin_image_detail = {
             window.clearTimeout(astrobin_image_detail.globals.closetimer);
             astrobin_image_detail.globals.closetimer = 0;
         }
-    },
-
-    setup_raty: function() {
-        $(astrobin_image_detail.config.rating.element).raty({
-            start: astrobin_image_detail.globals.rating.current,
-            path: astrobin_image_detail.config.rating.icons_path,
-            readOnly: astrobin_image_detail.config.rating.read_only,
-            half: false,
-            showHalf: true,
-            hintList: astrobin_image_detail.config.rating.hint_list,
-            redirectUrl: astrobin_image_detail.config.rating.redirectUrl,
-            space: false,
-            size: 24,
-            starHalf: 'star-half-big.png',
-            starOff:  'star-off-big.png',
-            starOn:   'star-on-big.png',
-            click: function(score) {
-                $.ajax({
-                    url: astrobin_image_detail.config.rating.rate_url + astrobin_image_detail.globals.image_id + '/' + score + '/',
-                    timeout: 5000,
-                    success: function(data, textStatus, XMLHttpRequst) {
-                        $.ajax({
-                            url: astrobin_image_detail.config.rating.get_rating_url + astrobin_image_detail.globals.image_id + '/',
-                            timeout: 5000,
-                            dataType: 'json',
-                            success: function(data) {
-                                var rating = data.rating
-                                $(astrobin_image_detail.config.rating.element).raty('start', rating);
-                                $(astrobin_image_detail.config.rating.element).raty('readOnly', true);
-                                $(astrobin_image_detail.config.rating.element).raty('fixHint');
-                                $('.current-rating').text(rating);
-                            },
-                            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            }
-                        });
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    }
-                });
-            }
-        });
     },
 
     setup_upload_revision: function() {
@@ -873,16 +817,12 @@ astrobin_image_detail = {
         });
     },
 
-    init: function(image_id, revision_id, image_username, current_rating, config) {
+    init: function(image_id, revision_id, image_username, config) {
         /* Init */
         astrobin_image_detail.globals.image_id = image_id;
         astrobin_image_detail.globals.revision_id = revision_id;
         astrobin_image_detail.globals.image_username = image_username;
-        astrobin_image_detail.globals.rating.current = parseFloat(current_rating);
         $.extend(true, astrobin_image_detail.config, config);
-
-        /* Rating */
-        astrobin_image_detail.setup_raty();
 
         /* Revisions */
         astrobin_image_detail.setup_upload_revision();

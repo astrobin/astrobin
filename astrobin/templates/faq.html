@@ -18,8 +18,6 @@
                 <li><a href="#8">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
                 <li><a href="#9">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
                 <li><a href="#10">{% blocktrans %}How can I format my comments?{% endblocktrans %}</a></li>
-                <li><a href="#11">{% blocktrans %}What is the correct way to vote images?{% endblocktrans %}</a></li>
-                <li><a href="#12">{% blocktrans %}The rating values seem odd. How are they calculated?{% endblocktrans %}</a></li>
             </ol>
             <br/>
             <h2>{% trans "... and their answers!" %}</h2>
@@ -125,63 +123,6 @@
                         <tr><td>&gt; {% trans "quoted text" %}</td><td>| <i>{% trans "quoted text" %}</i></td></tr>
                         <tr><td>\*{% trans "escape the formatting syntax" %}\*</td><td>*{% trans "escape the formatting syntax" %}*</td></tr>
                     </table>
-                </li>
-                <li>
-                    <a name="11"></a>
-                    <h4>{% blocktrans %}What is the correct way to vote images?{% endblocktrans %}</h4>
-                    <p>
-                    {% blocktrans %}You can vote each image from 1 to 5 stars, and they are defined like this:{% endblocktrans %}
-                    </p>
-                    <table class="table table-condensed">
-                        <tr>
-                            <th><i class="icon-star"></i></th>
-                            <td>{% trans "It's a start, but it needs better data." %}</td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                            </th>
-                            <td>{% trans "It looks good, but it needs better processing." %}</td>
-                        </tr>                       
-                        <tr>
-                            <th>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                            </th>
-                            <td>{% trans "Good data, good processing." %}</td>
-                        </tr>                       
-                        <tr>
-                            <th>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                            </th>
-                            <td>{% trans "Great result!" %}</td>
-                        </tr>                       
-                        <tr>
-                            <th>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                            </th>
-                            <td>{% trans "Top quality!" %}</td>
-                        </tr>                       
-                    </table>
-                </li>
-                <li>
-                    <a name="12"></a>
-                    <h4>{% blocktrans %}The rating values seem odd. How are they calculated?{% endblocktrans %}</h4>
-                    <p>
-                        {% blocktrans %}AstroBin uses two tricks to normalize image ratings. First of all, a <em>sigma-reject</em> algorithm is applied to exclude votes that are too far from the average. This takes care of people who don't vote honestly. Then the rating is interpolated via a hyperbolic function of the number of votes that the image received, to ensure that images with too few votes aren't rated better than images with similar rating, but lots of votes.{% endblocktrans %}
-                    </p>
-                    <p>
-                        {% blocktrans %}This produces the "AstroBin index", which is a fairer way to compare images and users.{% endblocktrans %}
-                    </p>
                 </li>
             </ol>
             <br/>

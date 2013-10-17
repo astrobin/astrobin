@@ -71,16 +71,6 @@
                     </a>
                 </li>
                 {% endifequal %}
-
-                {% if request.user.is_superuser %}
-                    <li class="divider"></li>
-                    <li>
-                        <a href="{% url 'user_page_votes' user %}">
-                            <i class="icon-star"></i>
-                            {% trans "Votes" %}
-                        </a>
-                    </li>
-                {% endif %}
             </ul>
         </li>
 

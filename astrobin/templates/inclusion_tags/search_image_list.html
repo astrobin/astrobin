@@ -40,8 +40,8 @@
                             <td>{{search_result.integration|floatformat}}</td>
                         </tr>
                         <tr>
-                            <th><i class="icon-star icon-white" rel="tooltip" title="{% trans "Votes" %}"></i></th>
-                            <td>{{search_result.votes}}</td>
+                            <th><i class="icon-thumbs-up" rel="tooltip" title="{% trans "Likes" %}"></i></th>
+                            <td>{{search_result.object.likes}}</td>
                         </tr>
                         <tr>
                             <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Favorites" %}"></i></th>
@@ -91,8 +91,8 @@
                             <td>{{search_result.integration|floatformat}}</td>
                         </tr>
                         <tr>
-                            <th><i class="icon-star icon-white" rel="tooltip" title="{% trans "Votes" %}"></i></th>
-                            <td>{{search_result.votes}}</td>
+                            <th><i class="icon-thumbs-up" rel="tooltip" title="{% trans "Likes" %}"></i></th>
+                            <td>{{search_result.object.likes}}</td>
                         </tr>
                         <tr>
                             <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Favorites" %}"></i></th>
@@ -123,7 +123,7 @@
                 <th>{% trans "Title" %}</th>
                 <th><i class="icon-calendar"></i></th>
                 <th><i class="icon-eye-open"></i></th>
-                <th><i class="icon-star"></i></th>
+                <th><i class="icon-thumbs-up"></i></th>
                 <th><i class="icon-heart"></i></th>
                 <th><i class="icon-comments-alt"></i></th>
             </tr>
@@ -141,17 +141,7 @@
                         </td>
                         <td>{{search_result.object.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
                         <td>{% get_hit_count for search_result.object %}</td>
-                        <td>
-                            {% if search_result.object.user.userprofile.optout_rating %}
-                                {% trans "n/a" %}
-                            {% else %}
-                                {% if search_result.object.allow_rating %}
-                                    {{search_result.object.astrobinIndex|floatformat:"3"}}
-                                {% else %}
-                                    {% trans "n/a" %}
-                                {% endif %}
-                            {% endif %}
-                        </td>
+                        <td>{{search_result.object.likes}}</td>
                         <td>{{search_result.object.favoritesNumber}}</td>
                         <td>{{search_result.object.commentsNumber}}</td>
                     </tr>

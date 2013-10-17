@@ -4,7 +4,6 @@ from django.conf import settings
 from django.contrib import admin
 from django.views.generic.simple import redirect_to
 
-from djangoratings.views import AddRatingFromModel
 from hitcount.views import update_hit_count_ajax
 
 from threaded_messages.views import search as messages_search
@@ -118,11 +117,6 @@ urlpatterns = patterns('',
     url(r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete, name='autocomplete'),
     url(r'^autocomplete_user/(?P<what>\w+)/$', lookups.autocomplete_user, name='autocomplete_user'),
     url(r'^autocomplete_usernames/$', lookups.autocomplete_usernames, name='autocomplete_usernames'),
-    url(r'rate/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(), {
-            'app_label': 'astrobin',
-            'model': 'image',
-            'field_name': 'rating',}, name='image_rate'),
-    url(r'get_rating/(?P<image_id>\d+)/', views.image_get_rating, name='image_get_rating'),
 
     url(r'^me/$', views.me, name='me'),
     url(r'^users/(?P<username>[\w.@+-]+)/$', views.user_page, name='user_page'),
@@ -143,7 +137,6 @@ urlpatterns = patterns('',
     url(r'^users/(?P<username>[\w.@+-]+)/favorites/$', views.user_page_favorites, name='user_page_favorites'),
     url(r'^users/(?P<username>[\w.@+-]+)/plots/$', views.user_page_plots, name='user_page_plots'),
     url(r'^users/(?P<username>[\w.@+-]+)/apikeys/$', views.user_page_api_keys, name='user_page_api_keys'),
-    url(r'^users/(?P<username>[\w.@+-]+)/votes$', views.user_page_votes, name='user_page_votes'),
     url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$',
         views.user_profile_stats_get_integration_hours_ajax,
         name = 'stats_integration_hours'),

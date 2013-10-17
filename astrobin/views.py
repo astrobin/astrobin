@@ -341,7 +341,7 @@ def wall(request):
         sqs = sqs.order_by('-views');
     elif request.GET.get('sort') == '-rating':
         response_dict['sort'] = '-rating'
-        sqs = sqs.order_by('-rating', '-votes')
+        sqs = sqs.order_by('-rating', '-likes')
     elif request.GET.get('sort') == '-favorited':
         response_dict['sort'] = '-favorited'
         sqs = sqs.order_by('-favorited')
@@ -576,14 +576,6 @@ def image_detail(request, id, r):
     #############################
     from moon import MoonPhase;
 
-    if request.user.is_authenticated():
-        already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
-    else:
-        already_voted = False
-
-    ratings = image.get_ratings()
-    votes = len(ratings)
-
     gear_list = (
         ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
         ('Imaging cameras'   , image.imaging_cameras.all(), 'imaging_cameras'),
@@ -811,9 +803,6 @@ def image_detail(request, id, r):
         'mod': mod,
         'show_solution': image.solution and image.solution.status == Solver.SUCCESS,
 
-        'already_voted': already_voted,
-        'votes_number': votes,
-        'allow_rating': image.allow_rating and not image.user.userprofile.optout_rating,
         'comments_number': NestedComment.objects.filter(
             deleted = False,
             content_type__app_label = 'astrobin',
@@ -943,16 +932,6 @@ def image_full(request, id, r):
             'alias': 'real' if real else 'hd',
             'revision_label': r,
         })
-
-
-@require_GET
-def image_get_rating(request, image_id):
-    image = get_object_or_404(Image, pk=image_id)
-    from votes import index
-    rating = index([x.score for x in image.rating.get_ratings()])
-
-    response_dict = {'rating': '%.2f' % rating}
-    return ajax_response(response_dict)
 
 
 @login_required
@@ -1992,29 +1971,6 @@ def user_page_api_keys(request, username):
             'user': user,
             'profile': profile,
             'api_keys': keys,
-        },
-        context_instance = RequestContext(request))
-
-
-@require_GET
-def user_page_votes(request, username):
-    """Shows the user's API Keys"""
-    if not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    user = get_object_or_404(User, username = username)
-    profile = user.userprofile
-    votes = Vote.objects.filter(
-        content_type__app_label = 'astrobin',
-        content_type__model = 'image',
-        user = user).order_by('score')
-
-    return render_to_response(
-        'user/votes.html',
-        {
-            'user': user,
-            'profile': profile,
-            'votes': votes,
         },
         context_instance = RequestContext(request))
 
