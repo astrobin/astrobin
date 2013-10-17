@@ -209,7 +209,7 @@ class Solver(AbstractPlateSolvingBackend):
     def get_job_from_sub(self, sub_id):
         s = self.sub_status(sub_id)
         jobs = s.get('jobs', [])
-        if not jobs or jobs[0] == 'null' or jobs[0] == 'None':
+        if not jobs or jobs[0] == None:
             return None
 
         return jobs[0]

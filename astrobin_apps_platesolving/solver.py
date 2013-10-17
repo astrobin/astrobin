@@ -31,6 +31,9 @@ class Solver(object):
         if status == 'fail':
             return self.FAILED
 
+        if not sub_status.get('user_images'):
+            return self.MISSING
+
         jobs = sub_status.get('jobs', [])
         if not jobs:
             return self.PENDING
