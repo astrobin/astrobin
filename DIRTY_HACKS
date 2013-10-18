@@ -21,13 +21,15 @@ CREATE VIEW recently_liked_viewd AS
 SELECT toggleproperties_toggleproperty.object_id::int AS object_id, MAX(toggleproperties_toggleproperty.created_on) AS like_created_on
 FROM toggleproperties_toggleproperty
 WHERE toggleproperties_toggleproperty.property_type = 'like'
-GROUP BY toggleproperties_toggleproperty.object_id;
+GROUP BY toggleproperties_toggleproperty.object_id
+LIMIT 640;
 
 CREATE VIEW recently_bookmarked_view AS
 SELECT toggleproperties_toggleproperty.object_id::int AS object_id, MAX(toggleproperties_toggleproperty.created_on) AS bookmark_created_on
 FROM toggleproperties_toggleproperty
 WHERE toggleproperties_toggleproperty.property_type = 'bookmark'
-GROUP BY toggleproperties_toggleproperty.object_id;
+GROUP BY toggleproperties_toggleproperty.object_id
+LIMIT 640;
 
 GRANT ALL ON recently_liked_view to astrobin;
 GRANT ALL ON recently_bookmarked_view to astrobin;
