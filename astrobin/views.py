@@ -308,20 +308,40 @@ def index(request, template = 'index/root.html', extra_context = None):
             image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
             response_dict['recent_images'] = \
                 Image.objects.raw(
-                    "SELECT astrobin_image.*, like_created_on " +
+                    "DROP TABLE IF EXISTS recently_liked_to_show;" +
+                    "CREATE TEMPORARY TABLE recently_liked_to_show ( object_id INT PRIMARY KEY, created TIMESTAMP);" +
+                    "INSERT INTO recently_liked_to_show " +
+                        "SELECT object_id::int, MAX(created_on) AS max_created_on " +
+                        "FROM toggleproperties_toggleproperty " +
+                        "WHERE property_type = 'like' " +
+                        "AND content_type_id = " + str(image_ct.id) + " " +
+                        "GROUP BY object_id " +
+                        "ORDER BY max_created_on DESC " +
+                        "LIMIT 64;" +
+                    "SELECT astrobin_image.* " +
                     "FROM astrobin_image " +
-                    "JOIN recently_liked_view ON recently_liked_view.object_id = astrobin_image.id " +
-                    "ORDER BY like_created_on DESC;"
+                    "JOIN recently_liked_to_show ON id = object_id " +
+                    "ORDER BY recently_liked_to_show.created DESC;"
                 )
 
         elif section == 'bookmarked':
             image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
             response_dict['recent_images'] = \
                 Image.objects.raw(
-                    "SELECT astrobin_image.*, bookmark_created_on " +
+                    "DROP TABLE IF EXISTS recently_bookmarked_to_show;" +
+                    "CREATE TEMPORARY TABLE recently_bookmarked_to_show ( object_id INT PRIMARY KEY, created TIMESTAMP) ON COMMIT DROP;" +
+                    "INSERT INTO recently_bookmarked_to_show " +
+                        "SELECT object_id::int, MAX(created_on) AS max_created_on " +
+                        "FROM toggleproperties_toggleproperty " +
+                        "WHERE property_type = 'bookmark' " +
+                        "AND content_type_id = " + str(image_ct.id) + " " +
+                        "GROUP BY object_id " +
+                        "ORDER BY max_created_on DESC " +
+                        "LIMIT 64;" +
+                    "SELECT astrobin_image.* " +
                     "FROM astrobin_image " +
-                    "JOIN recently_bookmarked_view ON recently_bookmarked_view.object_id = astrobin_image.id " +
-                    "ORDER BY bookmark_created_on DESC;"
+                    "JOIN recently_bookmarked_to_show ON id = object_id " +
+                    "ORDER BY recently_bookmarked_to_show.created DESC;"
                 )
 
     if extra_context is not None:
