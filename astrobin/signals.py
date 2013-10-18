@@ -86,7 +86,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
 
 def toggleproperty_post_save(sender, instance, created, **kwargs):
     if created and instance.property_type == "like":
-        verb = "liked"
+        verb = "likes"
         act.send(instance.user, verb = verb, target = instance.content_object)
 
 
