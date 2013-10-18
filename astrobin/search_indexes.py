@@ -216,6 +216,7 @@ class GearIndex(SearchIndex):
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
         return 100;
 
     def prepare_images(self, obj):
@@ -317,6 +318,7 @@ class UserIndex(SearchIndex):
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
         return 200;
 
     def prepare_images(self, obj):
@@ -493,6 +495,7 @@ class ImageIndex(SearchIndex):
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
         return 300;
 
     def prepare_likes(self, obj):
@@ -602,28 +605,6 @@ class ImageIndex(SearchIndex):
         return commercial_gear.count() > 0
 
 
-class SubjectIdentifierIndex(SearchIndex):
-    text = NgramField(document=True, use_template=True)
-
-    def index_queryset(self):
-        return SubjectIdentifier.objects.all()
-
-    def get_model(self):
-        return SubjectIdentifier
-
-
-class SubjectIndex(SearchIndex):
-    text = NgramField(document=True, use_template=True)
-
-    def index_queryset(self):
-        return Subject.objects.all()
-
-    def get_model(self):
-        return Subject
-
-
 site.register(Gear, GearIndex)
 site.register(User, UserIndex)
 site.register(Image, ImageIndex)
-site.register(SubjectIdentifier, SubjectIdentifierIndex)
-site.register(Subject, SubjectIndex)
