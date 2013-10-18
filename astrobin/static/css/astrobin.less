@@ -1574,29 +1574,6 @@ div.capty-caption a {
     }
 }
 
-div.favorite-container {
-    display: inline;
-
-    a.favorite {
-        position: relative;
-
-        .favorite-hint {
-            position: absolute;
-            top: 2px;
-            left: 20px;
-            width: 275px;
-            visibility: hidden;
-            .strong;
-        }
-
-        &:hover {
-            .favorite-hint {
-                visibility: visible;
-            }
-        }
-    }
-}
-
 .astrobin-image-container {
     /* Because of the IOTD banner. */
     position: relative;
@@ -1718,7 +1695,7 @@ div.favorite-container {
             }
         }
 
-        .views, .favorites {
+        .views, .bookmarks, .likes {
             font-size: 85%;
             color: darken(@text-color, 10%);
 

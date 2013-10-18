@@ -10,37 +10,6 @@
 <script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    {% if request.user.is_authenticated %}
-    $('a.favorite').click(function() {
-        var $link = $(this),
-            $heart = $link.find('i.icon-heart');
-
-        $.ajax({
-            url: '{% url favorite_ajax image.id %}',
-            dataType: 'json',
-            timeout: 5000,
-            success: function(data, textStatus, XMLHttpRequest) {
-                var color, title;
-                if (data.created) {
-                    color = '#FFA040';
-                    title = "{% trans "Remove from favorites" %}";
-                } else {
-                    color = "#FFFFFF";
-                    title = "{% trans "Mark as favorite" %}";
-                }
-
-                $heart.parent().css('color', color);
-                $link.attr('data-original-title', title);
-                $('.favorites .number').text(data.favorites);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-            }
-        });
-
-        return false;
-    });
-    {% endif %}
-
     var clip = new ZeroClipboard.Client();
     clip.setCSSEffects(false);
 

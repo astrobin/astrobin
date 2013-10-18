@@ -20,7 +20,6 @@ from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
 from astrobin.models import Subject, SubjectIdentifier
 from astrobin.models import UserProfile
-from astrobin.models import Favorite
 from astrobin.models import Gear, CommercialGear, RetailedGear
 
 from astrobin.templatetags.tags import gear_name
@@ -182,8 +181,8 @@ class GearIndex(SearchIndex):
     # Total views on images taken with this item.
     views = IntegerField()
 
-    # Number of favorites on images taken with this item.
-    favorited = IntegerField()
+    # Number of bookmarks on images taken with this item.
+    bookmarks = IntegerField()
 
     # Number of comments on images taken with this item.
     comments = IntegerField()
@@ -242,11 +241,11 @@ class GearIndex(SearchIndex):
             views += _prepare_views(i, 'image')
         return views
 
-    def prepare_favorited(self, obj):
-        favorites = 0
+    def prepare_bookmarks(self, obj):
+        bookmarks = 0
         for i in self.get_images(obj):
-            favorites += Favorite.objects.filter(image = i).count()
-        return favorites
+            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+        return bookmark
 
     def prepare_comments(self, obj):
         comments = 0
@@ -298,8 +297,8 @@ class UserIndex(SearchIndex):
     min_pixel_size = IntegerField()
     max_pixel_size = IntegerField()
 
-    # Number of favorites received.
-    favorited = IntegerField()
+    # Number of bookmarks on own images
+    bookmarks = IntegerField()
 
     # Types of telescopes and cameras with which this user has imaged.
     telescope_types = MultiValueField()
@@ -410,8 +409,11 @@ class UserIndex(SearchIndex):
             return 0
         return max(l)
 
-    def prepare_favorited(self, obj):
-        return Favorite.objects.filter(image__user = obj).count()
+    def prepare_bookmarks(self, obj):
+        bookmarks = 0
+        for i in Image.objects.filter(user = obj, is_wip = False):
+            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+        return bookmarks
 
     def prepare_telescope_types(self, obj):
         l = []
@@ -470,7 +472,7 @@ class ImageIndex(SearchIndex):
     min_pixel_size = IntegerField()
     max_pixel_size = IntegerField()
 
-    favorited = IntegerField()
+    bookmarks = IntegerField()
 
     telescope_types = MultiValueField()
     camera_types = MultiValueField()
@@ -583,8 +585,8 @@ class ImageIndex(SearchIndex):
                 s = int(camera.pixel_size)
         return s
 
-    def prepare_favorited(self, obj):
-        return Favorite.objects.filter(image = obj).count()
+    def prepare_bookmarks(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
 
     def prepare_telescope_types(self, obj):
         return _prepare_telescope_types(obj)

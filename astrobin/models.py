@@ -970,8 +970,8 @@ class Image(models.Model):
     def likes(self):
         return ToggleProperty.objects.toggleproperties_for_object("like", self).count()
 
-    def favoritesNumber(self):
-        return Favorite.objects.filter(image = self).count()
+    def bookmarks(self):
+        return ToggleProperty.objects.toggleproperties_for_object("bookmark", self).count()
 
     def commentsNumber(self):
         from nested_comments.models import NestedComment

@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load hitcount_tags %}
 {% load tags %} {% comment %} TODO: rename tags to astrobin_tags {% endcomment %}
+{% load toggleproperty_tags %}
 
 <div class="subtle-container avatar-block">
     <div class="avatar">
@@ -31,9 +32,9 @@
                     {% trans "Views" %}: <span class="number">{{hit_count}}</span>,
                 </span>
 
-                <span class="favorites">
-                    {% trans "Favorites" %}:
-                    <span class="number">{{times_favorited}}</span>
+                <span class="bookmarks">
+                    {% trans "Bookmarks" %}:
+                    <span class="number">{{image.bookmarks}}</span>
                 </span>
 
             </div>
@@ -50,19 +51,9 @@
                     <i class="icon-eye-open"></i>
                 {% endif %}
             </a>
-        {% endif %} <!-- authenticated -->
 
-        <div class="favorite-container">
-            <a href="{% if request.user.is_authenticated %}#{% else %}/accounts/login/?next={{request.path}}{% endif %}" class="btn btn-danger favorite" rel="tooltip" title="{% if already_favorited %}{% trans "Remove from favorites" %}{% else %}{% trans "Mark as favorite" %}{% endif %}">
-                {% if already_favorited %}
-                    <div style="font-size: 15px; color: #FFA040;">
-                {% else %}
-                    <div style="font-size: 16px;">
-                {% endif %}
-                    <i class="icon-heart"></i>
-                </div>
-            </a>
-        </div>
+            {% add_remove_toggleproperty "bookmark" image request.user %}
+        {% endif %} <!-- authenticated -->
     </div>
 </div>
 

@@ -313,6 +313,15 @@ def index(request, template = 'index/root.html', extra_context = None):
                     .order_by('-created_on')
                 ]
 
+        elif section == 'bookmarked':
+            image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
+            response_dict['recent_images'] = \
+                [x.content_object for x in \
+                 ToggleProperty.objects.filter(property_type = "bookmark", content_type = image_ct) \
+                    .order_by('-created_on')
+                ]
+
+
     if extra_context is not None:
         response_dict.update(extra_context)
 
@@ -344,9 +353,9 @@ def wall(request):
     elif request.GET.get('sort') == '-rating':
         response_dict['sort'] = '-rating'
         sqs = sqs.order_by('-rating', '-likes')
-    elif request.GET.get('sort') == '-favorited':
-        response_dict['sort'] = '-favorited'
-        sqs = sqs.order_by('-favorited')
+    elif request.GET.get('sort') == '-bookmarks':
+        response_dict['sort'] = '-bookmarks'
+        sqs = sqs.order_by('-bookmarks')
     elif request.GET.get('sort') == '-integration':
         response_dict['sort'] = '-integration'
         sqs = sqs.order_by('-integration')
@@ -837,8 +846,6 @@ def image_detail(request, id, r):
         'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
         'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
         'preferred_language': preferred_language,
-        'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0 if request.user.is_authenticated() else False,
-        'times_favorited': Favorite.objects.filter(image = image).count(),
         'select_datapool_form': PublicDataPool_SelectExistingForm(),
         'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = request.user) if request.user.is_authenticated() else None,
         'has_sharedfolders': PrivateSharedFolder.objects.filter(
@@ -1925,21 +1932,25 @@ def user_page_commercial_products(request, username):
 
 
 @require_GET
-def user_page_favorites(request, username):
+def user_page_bookmarks(request, username):
     user = get_object_or_404(User, username = username)
 
-    return object_list(
-        request,
-        queryset = Image.objects.filter(favorite__user = user),
-        template_name = 'user/favorites.html',
-        template_object_name = 'image',
-        paginate_by = 20,
-        extra_context = {
-            'thumbnail_size': settings.THUMBNAIL_SIZE,
+    image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
+    images = \
+        [x.content_object for x in \
+         ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+            .filter(content_type = image_ct) \
+            .order_by('-created_on')
+        ]
+
+    return render_to_response('user/bookmarks.html',
+        {
             'user': user,
+            'bookmarks': images,
             'private_message_form': PrivateMessageForm(),
-         }
-     )
+        },
+        context_instance = RequestContext(request)
+    )
 
 
 @require_GET
@@ -3220,32 +3231,6 @@ def save_gear_user_info(request):
     form.save()
     return ajax_success()
 
-
-@require_GET
-@login_required
-@never_cache
-def favorite_ajax(request, id):
-    image = get_object_or_404(Image, pk=id)
-
-    f, created = Favorite.objects.get_or_create(image = image, user = request.user)
-    if not created:
-        f.delete()
-
-    if image.user != request.user and created:
-        push_notification(
-            [image.user], 'new_favorite',
-            {
-                'url': settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
-                'user': request.user,
-            }
-        )
-
-    return HttpResponse(
-        simplejson.dumps({
-            'created': created,
-            'favorites': Favorite.objects.filter(image = image).count(),
-        }),
-        mimetype = 'application/javascript')
 
 
 @require_GET
