@@ -8,7 +8,7 @@ LOCALE_EXTRAS = (
     _("uploaded a new revision of"),
     _("commented on image"),
     _("commented on gear item"),
-    _("has bookmarked"),
+    _("bookmarked"),
     _("likes"),
     _("has written a review on"),
     _("created a new public data pool"),
