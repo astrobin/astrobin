@@ -5,9 +5,8 @@ from django.db.models import Q
 
 from toggleproperties.models import ToggleProperty
 
-from astrobin.models import Image, Favorite, ImageOfTheDay
+from astrobin.models import Image, ImageOfTheDay
 from astrobin.image_utils import make_image_of_the_day, make_runnerup
-from nested_comments.models import NestedComment
 
 from datetime import date, datetime, timedelta
 

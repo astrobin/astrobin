@@ -13,3 +13,4 @@ Some Postgres INDECES:
 
 create INDEX on astrobin_image using btree (uploaded, id);
 create INDEX on actstream_action using btree (timestamp);
+create index on toggleproperties_toggleproperty using btree(property_type, content_type_id, object_id);

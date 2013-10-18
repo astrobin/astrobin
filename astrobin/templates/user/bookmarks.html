@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+
+{% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s bookmarks{% endblocktrans %}{% endblock %}
+
+{% block content %}
+    {% include 'user/profile-subnav.html' %}
+    <h1>
+        {% ifequal user request.user %}
+            {% blocktrans %}Your bookmarks{% endblocktrans %}
+        {% else %}
+            {% blocktrans with user.username as username %}{{username}}'s bookmarks{% endblocktrans %}
+        {% endifequal %}
+    </h1>
+
+    {% image_list bookmarks %}
+{% endblock %}
+
+{% block extra_js %}
+    {% include 'user/profile-js.html' %}
+{% endblock %}

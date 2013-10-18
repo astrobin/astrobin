@@ -96,8 +96,8 @@ NOTICE_TYPES = (
         '',
     ),
     (
-        'new_favorite',
-        _("Your image was favorited"),
+        'new_bookmark',
+        _("Your image was bookmarked"),
         '',
     ),
     (

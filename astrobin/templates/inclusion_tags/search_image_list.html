@@ -44,8 +44,8 @@
                             <td>{{search_result.object.likes}}</td>
                         </tr>
                         <tr>
-                            <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Favorites" %}"></i></th>
-                            <td>{{search_result.favorited}}</td>
+                            <th><i class="icon-bookmark" rel="tooltip" title="{% trans "Bookmarks" %}"></i></th>
+                            <td>{{search_result.object.bookmarks}}</td>
                         </tr>
 
                     </table>
@@ -95,8 +95,8 @@
                             <td>{{search_result.object.likes}}</td>
                         </tr>
                         <tr>
-                            <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Favorites" %}"></i></th>
-                            <td>{{search_result.favorited}}</td>
+                            <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Bookmarks" %}"></i></th>
+                            <td>{{search_result.object.bookmarks}}</td>
                         </tr>
                     </table>
                 </div>
@@ -142,7 +142,7 @@
                         <td>{{search_result.object.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
                         <td>{% get_hit_count for search_result.object %}</td>
                         <td>{{search_result.object.likes}}</td>
-                        <td>{{search_result.object.favoritesNumber}}</td>
+                        <td>{{search_result.object.bookmarks}}</td>
                         <td>{{search_result.object.commentsNumber}}</td>
                     </tr>
                 {% endif %}
