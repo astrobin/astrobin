@@ -307,20 +307,22 @@ def index(request, template = 'index/root.html', extra_context = None):
         elif section == 'liked':
             image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
             response_dict['recent_images'] = \
-                [x.content_object for x in \
-                 ToggleProperty.objects.toggleproperties_for_user("like", request.user) \
-                    .filter(content_type = image_ct) \
-                    .order_by('-created_on')
-                ]
+                Image.objects.raw(
+                    "SELECT astrobin_image.*, like_created_on " +
+                    "FROM astrobin_image " +
+                    "JOIN recently_liked_view ON recently_liked_view.object_id = astrobin_image.id " +
+                    "ORDER BY like_created_on DESC;"
+                )
 
         elif section == 'bookmarked':
             image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
             response_dict['recent_images'] = \
-                [x.content_object for x in \
-                 ToggleProperty.objects.filter(property_type = "bookmark", content_type = image_ct) \
-                    .order_by('-created_on')
-                ]
-
+                Image.objects.raw(
+                    "SELECT astrobin_image.*, bookmark_created_on " +
+                    "FROM astrobin_image " +
+                    "JOIN recently_bookmarked_view ON recently_bookmarked_view.object_id = astrobin_image.id " +
+                    "ORDER BY bookmark_created_on DESC;"
+                )
 
     if extra_context is not None:
         response_dict.update(extra_context)
