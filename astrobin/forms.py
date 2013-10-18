@@ -716,13 +716,6 @@ class ImageLicenseForm(forms.ModelForm):
         fields = ('license',)
 
 
-class MultipleMessierForm(forms.Form):
-    def __init__(self, objects=None, **kwargs):
-        super(MultipleMessierForm, self).__init__(**kwargs)
-        self.fields['messier_object'] = forms.ChoiceField(choices = [((x, 'M %s' % x)) for x in objects])
-        self.fields['messier_object'].label = _("Nominate for")
-
-
 class TelescopeEditForm(forms.ModelForm):
     error_css_class = 'error'
 

@@ -71,16 +71,6 @@ NOTICE_TYPES = (
         '',
     ),
     (
-        'messier_nomination',
-        _("Nomination for the Messier Marathon"),
-        '',
-    ),
-    (
-        'messier_top_nomination',
-        _("Top Nomination for the Messier Marathon"),
-        '',
-    ),
-    (
         'lacking_data_reminder',
         _("You have some images that are lacking data"),
         '',

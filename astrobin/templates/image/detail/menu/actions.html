@@ -131,15 +131,6 @@
                 {% trans "Bring to a user's attention" %}
             </a>
         </li>
-        {% if image.subject_type == 100 or image.subject_type == 300 %}
-        <li class="divider"></li>
-        <li>
-            <a class="messier-nomination" href="{% url messier_nomination image.id %}">
-                <i class="icon-book"></i>
-                {% trans "Nominate for the Messier Marathon" %}
-            </a>
-        </li>
-        {% endif %}
      </ul>
  </li> <!-- actions -->
 
