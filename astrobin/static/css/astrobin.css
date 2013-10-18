@@ -1409,23 +1409,6 @@ div.capty-caption a {
 .upload-forms .upload-form:last-child .upload-form-inner {
   padding-right: 0;
 }
-div.favorite-container {
-  display: inline;
-}
-div.favorite-container a.favorite {
-  position: relative;
-}
-div.favorite-container a.favorite .favorite-hint {
-  position: absolute;
-  top: 2px;
-  left: 20px;
-  width: 275px;
-  visibility: hidden;
-  font-weight: bold;
-}
-div.favorite-container a.favorite:hover .favorite-hint {
-  visibility: visible;
-}
 .astrobin-image-container {
   /* Because of the IOTD banner. */
 
@@ -1529,12 +1512,14 @@ div.favorite-container a.favorite:hover .favorite-hint {
   margin-right: 4px;
 }
 .avatar-block .username .views,
-.avatar-block .username .favorites {
+.avatar-block .username .bookmarks,
+.avatar-block .username .likes {
   font-size: 85%;
   color: #9f9f9f;
 }
 .avatar-block .username .views .number,
-.avatar-block .username .favorites .number {
+.avatar-block .username .bookmarks .number,
+.avatar-block .username .likes .number {
   color: #fcfcfc;
 }
 .avatar-block .username .follow,
@@ -3178,4 +3163,7 @@ table#private-shared-folders tr:hover a.delete-folder {
   width: 100%;
   font-size: 16px;
   line-height: 32px;
+}
+.horizontal-separator {
+  padding: 0 4px;
 }
