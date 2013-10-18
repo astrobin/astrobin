@@ -17,6 +17,8 @@ create index on toggleproperties_toggleproperty using btree(property_type, conte
 create index on toggleproperties_toggleproperty using btree(property_type, content_type_id, created_on);
 CREATE INDEX object_id_integer_cast ON toggleproperties_toggleproperty (CAST(toggleproperties_toggleproperty.object_id AS INT))
 
+ALTER TABLE astrobin_messiermarathonnominations ADD CONSTRAINT uniquity (messier_number, image_id);
+
 
 Configuration tricks
 
