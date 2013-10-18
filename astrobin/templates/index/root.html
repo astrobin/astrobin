@@ -174,9 +174,9 @@
                                 {% trans "Recent images" %}
                             {% endifequal %}
 
-                            {% ifequal section 'favorited' %}
-                                <i class="icon-heart"></i>
-                                {% trans "Recently favorited" %}
+                            {% ifequal section 'liked' %}
+                                <i class="icon-thumbs-up"></i>
+                                {% trans "Recently liked" %}
                             {% endifequal %}
                         </h4>
 
@@ -212,13 +212,13 @@
                                 </a>
                             {% endif %}
 
-                            {% if section != 'favorited' %}
-                                <a href="{% url index %}{% query_string "s=favorited" "" %}"
+                            {% if section != 'liked' %}
+                                <a href="{% url index %}{% query_string "s=liked" "" %}"
                                    rel="tooltip"
-                                   title="{% trans "Recently favorited" %}">
+                                   title="{% trans "Recently liked" %}">
                             {% endif %}
-                                <i class="icon-heart"></i>
-                            {% if section != 'favorited' %}
+                                <i class="icon-thumbs-up"></i>
+                            {% if section != 'liked' %}
                                 </a>
                             {% endif %}
 
@@ -232,7 +232,7 @@
                             </div>
                         {% endif %}
 
-                        {% if section == 'images' or section == 'favorited' %}
+                        {% if section == 'images' or section == 'liked' %}
                             <div id="recent-images-loggedin" class="endless">
                                 <ul class="thumbnails astrobin-thumbnails">
                                     {% include 'index/recent_images_page.html' %}
