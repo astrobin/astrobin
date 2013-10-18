@@ -786,6 +786,9 @@ class Image(models.Model):
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
+    # For likes, bookmarks, and perhaps more.
+    toggleproperties = generic.GenericRelation(ToggleProperty)
+
     presolve_information = models.IntegerField(
         default = 0,
         choices = SOLVE_CHOICES,
