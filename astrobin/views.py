@@ -317,7 +317,7 @@ def index(request, template = 'index/root.html', extra_context = None):
                         "AND content_type_id = " + str(image_ct.id) + " " +
                         "GROUP BY object_id " +
                         "ORDER BY max_created_on DESC " +
-                        "LIMIT 64;" +
+                        "LIMIT 320;" +
                     "SELECT astrobin_image.* " +
                     "FROM astrobin_image " +
                     "JOIN recently_liked_to_show ON id = object_id " +
@@ -337,7 +337,7 @@ def index(request, template = 'index/root.html', extra_context = None):
                         "AND content_type_id = " + str(image_ct.id) + " " +
                         "GROUP BY object_id " +
                         "ORDER BY max_created_on DESC " +
-                        "LIMIT 64;" +
+                        "LIMIT 320;" +
                     "SELECT astrobin_image.* " +
                     "FROM astrobin_image " +
                     "JOIN recently_bookmarked_to_show ON id = object_id " +
