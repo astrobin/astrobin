@@ -170,7 +170,7 @@
                             {% endifequal %}
 
                             {% ifequal section 'images' %}
-                                <i class="icon-th"></i>
+                                <i class="icon-time"></i>
                                 {% trans "Recent images" %}
                             {% endifequal %}
 
@@ -207,12 +207,14 @@
                                 </a>
                             {% endif %}
 
+                            <span class="horizontal-separator"></span>
+
                             {% if section != 'images' %}
                                 <a href="{% url index %}{% query_string "s=images" "" %}"
                                    rel="tooltip"
                                    title="{% trans "Recent images" %}">
                             {% endif %}
-                                <i class="icon-th"></i>
+                                <i class="icon-time"></i>
                             {% if section != 'images' %}
                                 </a>
                             {% endif %}
