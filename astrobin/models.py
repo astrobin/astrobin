@@ -1718,24 +1718,6 @@ class Location(models.Model):
         app_label = 'astrobin'
 
 
-class Favorite(models.Model):
-    image = models.ForeignKey(Image)
-    user = models.ForeignKey(User)
-    created = models.DateTimeField(auto_now_add = True)
-
-    class Meta:
-        app_label = 'astrobin'
-        ordering = ('-created',)
-        unique_together = ('image', 'user')
-
-def favorite_post_save(sender, instance, created, **kwargs):
-    verb = "has favorited"
-    if created:
-        action.send(instance.user, verb = verb,
-                    target = instance.image)
-post_save.connect(favorite_post_save, sender = Favorite)
-
-
 class App(models.Model):
     registrar = models.ForeignKey(
         User,
