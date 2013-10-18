@@ -1385,33 +1385,6 @@ class ABPOD(models.Model):
         app_label = 'astrobin'
 
 
-class MessierMarathonNominations(models.Model):
-    messier_number = models.IntegerField()
-    image = models.ForeignKey(Image)
-    nominations = models.IntegerField(default = 0)
-    nominators = models.ManyToManyField(User, null=True)
-
-    def __unicode__(self):
-        return 'M %i' % self.messier_number
-
-    class Meta:
-        app_label = 'astrobin'
-        unique_together = ('messier_number', 'image')
-        ordering = ('messier_number', 'nominations')
-
-
-class MessierMarathon(models.Model):
-    messier_number = models.IntegerField(primary_key = True)
-    image = models.ForeignKey(Image)
-
-    def __unicode__(self):
-        return 'M %i' % self.messier_number
-
-    class Meta:
-        app_label = 'astrobin'
-        ordering = ('messier_number',)
-
-
 class Request(models.Model):
     from_user = models.ForeignKey(User, editable=False, related_name='requester')
     to_user   = models.ForeignKey(User, editable=False, related_name='requestee')
@@ -1524,7 +1497,7 @@ class UserProfile(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Company description"),
-        help_text = _("A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#10\">formatting rules</a>."),
+        help_text = _("A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#9\">formatting rules</a>."),
         validators = [MaxLengthValidator(1000)],
     )
 
@@ -2013,7 +1986,7 @@ class CommercialGear(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Description"),
-        help_text = _("Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#10\">formatting rules</a>."),
+        help_text = _("Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#9\">formatting rules</a>."),
     )
 
     created = models.DateTimeField(
