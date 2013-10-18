@@ -305,11 +305,11 @@ def index(request, template = 'index/root.html', extra_context = None):
             response_dict['cache_prefix'] = 'astrobin_personal_actions'
 
         elif section == 'liked':
+            image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
             response_dict['recent_images'] = \
                 [x.content_object for x in \
                  ToggleProperty.objects.toggleproperties_for_user("like", request.user) \
-                    .filter(content_type__app_label = 'astrobin',
-                            content_type__model = 'image') \
+                    .filter(content_type = image_ct) \
                     .order_by('-created_on')
                 ]
 
