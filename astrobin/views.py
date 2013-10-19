@@ -27,7 +27,6 @@ from django.utils.encoding import smart_str, smart_unicode
 from django.utils.hashcompat import md5_constructor
 from django.utils.http import urlquote
 
-from djangoratings.models import Vote
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
 from reviews.forms import ReviewedItemForm
@@ -3285,7 +3284,7 @@ def subject_page(request, id):
         template_name = 'subject/page.html',
         template_object_name = 'subject',
         extra_context = {
-            'examples': all_images.order_by('-rating_score')[:10],
+            'examples': all_images[:10],
             'total_images': all_images.count(),
             'total_integration': total_integration,
         })
@@ -3342,7 +3341,7 @@ def gear_page(request, id, slug):
         template_name = 'gear/page.html',
         template_object_name = 'gear',
         extra_context = {
-            'examples': all_images.order_by('-rating_score')[:28],
+            'examples': all_images[:28],
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
             'reviews': ReviewedItem.objects.filter(gear = gear),
             'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
