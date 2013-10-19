@@ -24,6 +24,8 @@
 
         <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin / {% trans "Loading" %}..."
              class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
+             width="{{size_x}}"
+             height="{{size_y}}"
              name="#capty-target-{{image.id}}-{{randomid}}"
              data-id="{{image.id}}"
              data-loaded="false"
