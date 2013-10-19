@@ -1,7 +1,9 @@
 {% load astrobin_apps_images_tags %}
+{% load cache %}
 {% load common_tags %}
 {% load i18n %}
 
+{% cache 300 astrobin_image image.id alias revision mod %}
 <div class="astrobin-image-container
 
     {% if alias == 'regular_solved_overlay' %}
@@ -61,9 +63,17 @@
                             <th><i class="icon-bookmark"></i></th>
                             <td>{{image.bookmarks}}</td>
                         </tr>
+
+                        {% if image.views %}
+                            <tr>
+                                <th><i class="icon-eye-open"></i></th>
+                                <td>{{image.view}}</td>
+                            </tr>
+                        {% endif %}
                     </table>
                 {% endif %}
             </div>
         </div>
     {% endif %}
 </div>
+{% endcache %}
