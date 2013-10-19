@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-25 02:46-0500\n"
-"PO-Revision-Date: 2013-01-05 10:38+0100\n"
+"PO-Revision-Date: 2013-10-14 09:51+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
@@ -1044,7 +1044,7 @@ msgstr "Locaties"
 
 #: forms.py:89
 msgid "This field is required."
-msgstr "Dit veld is verplicht"
+msgstr "Dit veld is verplicht."
 
 #: forms.py:97 views.py:2284
 msgid ""
@@ -1058,7 +1058,7 @@ msgstr ""
 msgid "Please enter either some subjects or a main solar system subject."
 msgstr ""
 "Gelieve ofwel enkele onderwerpen in te geven of een onderwerp van ons "
-"Zonnestelsel"
+"Zonnestelsel."
 
 #: forms.py:125
 msgid "Opacity"
@@ -1287,11 +1287,11 @@ msgstr "Datum"
 
 #: forms.py:605
 msgid "Please enter a value between 1 and 5."
-msgstr "Vul een waarde in tussen 1 en 5"
+msgstr "Vul een waarde in tussen 1 en 5."
 
 #: forms.py:612
 msgid "Please enter a value between 1 and 10."
-msgstr "Vul een waarde in tussen 1 en 10"
+msgstr "Vul een waarde in tussen 1 en 10."
 
 #: forms.py:673 forms.py:691
 msgid "The date cannot be in the future."
@@ -1897,19 +1897,19 @@ msgstr "Dit is geen deep-sky foto; ze hoeft niet ge-plate-solved te worden."
 
 #: models.py:691
 msgid "I have no idea about the size of field, try a blind solve."
-msgstr "Geen idee wat de maten zijn, probeer een blinde plate-solve"
+msgstr "Geen idee wat de maten zijn, probeer een blinde plate-solve."
 
 #: models.py:692
 msgid "This is a very wide field image (more than 10 degrees)."
-msgstr "Dit is een wijde breedbeeld opname (meer dan 10 graden)"
+msgstr "Dit is een wijde breedbeeld opname (meer dan 10 graden)."
 
 #: models.py:693
 msgid "This is a wide field image (1 to 10 degrees)."
-msgstr "Dit is een breedbeeld opname (1 tot 10 graden)"
+msgstr "Dit is een breedbeeld opname (1 tot 10 graden)."
 
 #: models.py:694
 msgid "This ia narrow field image (less than 1 degree)."
-msgstr "Dit is een smalbeeld opname (minder dan 1 graad)"
+msgstr "Dit is een smalbeeld opname (minder dan 1 graad)."
 
 #: models.py:699
 msgid "Deep sky object"
@@ -1943,7 +1943,7 @@ msgid ""
 "select which (or which type) it is."
 msgstr ""
 "Als het hoofdonderwerp in je beeld een object uit het zonnestelsel is, "
-"benoem dit dan (of geef aan welk type het is)"
+"benoem dit dan (of geef aan welk type het is)."
 
 #: models.py:745
 msgid ""
@@ -1957,17 +1957,20 @@ msgstr "Beschrijving"
 
 #: models.py:752
 msgid "HTML tags are allowed."
-msgstr "HTML tags zijn toegestaan"
+msgstr "HTML tags zijn toegestaan."
 
 #: models.py:756
 msgid "Allow rating"
-msgstr "Laat beoordeling toe."
+msgstr "Laat beoordeling toe"
 
 #: models.py:757
 msgid ""
 "Let other users vote this image. This setting will have no effect if you "
 "have opted out from the rating system in your site's preferences."
 msgstr ""
+"Laat andere gebruikers toe om op je foto's te stemmen. Deze instelling zal "
+"geen effect hebben als je het puntensysteem hebt afgezet in de voorkeuren "
+"van je site."
 
 #: models.py:789
 msgid "Insert a focal length if you want to plate-solve."
@@ -2260,13 +2263,13 @@ msgid "Higher resolution"
 msgstr "Hogere resolutie"
 
 #: models.py:1429
-#, fuzzy
 msgid "Real name"
-msgstr "Correcte naam"
+msgstr "Echte naam"
 
 #: models.py:1430
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
+"Als je hem hebt ingegeven, dan zal je echte naam op AstroBin getoond worden."
 
 #: models.py:1444 templates/user/card.html:45
 msgid "Job"
@@ -2278,7 +2281,7 @@ msgstr "Hobbies"
 
 #: models.py:1455
 msgid "Do you have any hobbies other than astrophotography?"
-msgstr "Heb je andere hobbies dan astrofotografie ?"
+msgstr "Heb je andere hobbies dan astrofotografie?"
 
 #: models.py:1462
 msgid "Timezone"
@@ -2346,13 +2349,16 @@ msgstr "Taal"
 
 #: models.py:1564
 msgid "Opt out from the rating system"
-msgstr ""
+msgstr "Desactiveren van het puntensysteem"
 
 #: models.py:1566
 msgid ""
 "This will hide all the votes your image have received the past, prevent new "
 "votes and exclude you from the leaderboard and sorting by rating in searches."
 msgstr ""
+"Dit zal alle stemmen op je foto's uit het verleden verbergen, verhindert "
+"nieuwe stemmen, sluit je uit van de ledenrangschikking en toont geen "
+"resultaten meer van je foto's bij het zoeken op rating."
 
 #: models.py:1616
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
@@ -2407,7 +2413,7 @@ msgstr "Hoogte"
 
 #: models.py:1673
 msgid "In meters."
-msgstr "in meter."
+msgstr "In meter."
 
 #: models.py:1773
 msgid "The name of the website or app that wishes to use the APIs."
@@ -2651,7 +2657,7 @@ msgstr "Integratie"
 #: templates/inclusion_tags/search_image_list.html:182
 #: templates/search/search.html:306 templates/subject/page.html:80
 msgid "hours"
-msgstr "Uren"
+msgstr "uren"
 
 #: views.py:672
 msgid "Avg. Moon age"
@@ -2698,7 +2704,7 @@ msgstr ""
 msgid "Click on a suggestion or press TAB to add what you typed"
 msgstr ""
 "Klik op een item dat voorgesteld wordt of druk TAB om in te voeren wat je "
-"hebt getyped."
+"hebt getyped"
 
 #: views.py:1263 views.py:1346 views.py:1431 views.py:1453 views.py:2133
 #: views.py:2146 views.py:2167 views.py:2204 views.py:2294 views.py:2356
@@ -2726,8 +2732,7 @@ msgstr ""
 
 #: views.py:1694 views.py:1793
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"Er werden geen telescopen of lenzen ingevoerd waarmee je beelden maakt."
+msgstr "Er werden geen telescopen of lenzen ingevoerd waarmee je beelden maakt"
 
 #: views.py:1696 views.py:1796
 msgid ""
@@ -2761,7 +2766,7 @@ msgstr ""
 #: views.py:1802
 msgid "No acquisition details specified"
 msgstr ""
-"Geen details ingevoerd omtrent de manier van het verkrijgen van het beeld."
+"Geen details ingevoerd omtrent de manier van het verkrijgen van het beeld"
 
 #: views.py:1805
 msgid ""
@@ -3150,7 +3155,7 @@ msgstr "Help met vertalen!"
 
 #: templates/base.html:344 templates/site_base.html:344
 msgid "Please select your language from the options above."
-msgstr "Gelieve uw taal te kiezen uit bovenstaande opties"
+msgstr "Gelieve uw taal te kiezen uit bovenstaande opties."
 
 #: templates/base.html:356 templates/maintenance_base.html:381
 #: templates/maintenance_base.html:382 templates/site_base.html:356
@@ -3159,9 +3164,8 @@ msgstr "Kennisgevingen"
 
 #: templates/base.html:369 templates/site_base.html:369
 #: templates/user/votes.html:17
-#, fuzzy
 msgid "AstroBin Index"
-msgstr "AstroBin index"
+msgstr "AstroBin Index"
 
 #: templates/base.html:387 templates/index.html:171
 #: templates/maintenance_base.html:255 templates/site_base.html:387
@@ -3240,7 +3244,7 @@ msgstr "Uitloggen"
 
 #: templates/base.html:477 templates/site_base.html:477
 msgid "Would you like to start using your real name on AstroBin?"
-msgstr ""
+msgstr "Wens je om je echte naam te gebruiken op AstroBin?"
 
 #: templates/base.html:482 templates/site_base.html:482
 #: templates/image/detail.html:942
@@ -3249,7 +3253,7 @@ msgstr "OK"
 
 #: templates/base.html:488 templates/site_base.html:488
 msgid "No, tranks"
-msgstr ""
+msgstr "Nee, dank je"
 
 #: templates/base.html:503 templates/maintenance_base.html:393
 #: templates/site_base.html:503
@@ -3337,7 +3341,7 @@ msgstr ""
 "AstroBin is een website voor het verzamelen van foto's met astrofotografen "
 "als doelpubliek: het is de eerste en enige plek op het net waar je je astro-"
 "foto's naar moet uploaden. Gemaakt door een astrofotograaf voor de "
-"astrofotograaf"
+"astrofotograaf."
 
 #: templates/base.html:658 templates/base.html.py:688
 #: templates/maintenance_base.html:85 templates/maintenance_base.html:548
@@ -3372,12 +3376,9 @@ msgid "Copyright"
 msgstr "Copyright"
 
 #: templates/base.html:677 templates/site_base.html:677
-#, fuzzy
 msgid "The images on this websites are copyright of their respective owners."
 msgstr ""
-"Astrobin is Copyright &copy; 2010-2012 Salvatore Iovene, alle rechten "
-"voorbehouden. De foto's op deze website zijn eigendom van hun "
-"respectievelijke auteurs."
+"De foto's op deze website zijn eigendom van hun respectievelijke auteurs."
 
 #: templates/base.html:692 templates/maintenance_base.html:582
 #: templates/site_base.html:692
@@ -3477,7 +3478,7 @@ msgid ""
 "I've seen beautiful images on this site. I'm not worthy of posting mine!"
 msgstr ""
 "Ik heb hier prachtige foto's gezien. Mijn beelden zijn het niet waard om "
-"erbij te zetten."
+"erbij te zetten!"
 
 #: templates/faq.html:16 templates/faq.html.py:71
 msgid "What's the deal with the Staging Area and the Public Area?"
@@ -3909,7 +3910,7 @@ msgstr ""
 "Je lidmaatschap wordt voorgoed verwijderd, inclusief alle upgeloade foto's "
 "als je materiaal publiceert dat illegaal is of porno/naaktheid bevat. We "
 "hebben dan ook steeds het recht om je aan te geven bij de bevoegde "
-"instanties als we dit nodig achten.."
+"instanties als we dit nodig achten."
 
 #: templates/guidelines.html:37
 msgid "Don't upload images that have nothing to do with astronomy."
@@ -4014,7 +4015,7 @@ msgid ""
 "million names!"
 msgstr ""
 "<em>AstroBin's</em> autocomplete-functie heeft een grote achterliggende "
-"database die telescopen,CCD's, filters en astronomische objecten uit "
+"database die telescopen, CCD's, filters en astronomische objecten uit "
 "verschillende catalogi bevat. Al deze trefwoorden verschijnen in een "
 "selectieveld vanaf het moment dat je een woord begint te typen. "
 "<em>AstroBin</em> is verbonden met de SIMBAD Astronomische Database die meer "
@@ -4027,10 +4028,10 @@ msgid ""
 "interesting statistics. There is also a page that shows the most popular "
 "subjects organized by month and latitude!"
 msgstr ""
-"Astronomische objecten op  <em>AstroBin</em> hebben een eigen pagina waar je "
-"er de mooiste foto's van kunt zien samen met plots en grafieken over trends "
+"Astronomische objecten op <em>AstroBin</em> hebben een eigen pagina waar je "
+"er de mooiste foto's van kunt zien, samen met plots en grafieken over trends "
 "en interessante statistieken. Er is ook een pagina die de meest populaire "
-"objecten laat zien georganizeerd per maand en breedtegraad."
+"objecten laat zien georganizeerd per maand en breedtegraad!"
 
 #: templates/help.html:33
 msgid "Data is strongly interconnected"
@@ -4076,7 +4077,7 @@ msgstr ""
 
 #: templates/help.html:45
 msgid "All the data at a glance"
-msgstr "Alle nodige gegevens in een oogopslag."
+msgstr "Alle nodige gegevens in een oogopslag"
 
 #: templates/help.html:47
 msgid ""
@@ -4152,9 +4153,9 @@ msgid ""
 "On <em>AstroBin</em> you can message other astrophotographer, follow them "
 "and be notified when they post new images, or perform requests for more data."
 msgstr ""
-"Je kan andere astrofotografen berichten sturen en volgen op <em>AstroBin</"
-"em>. Je kan een berichtje krijgen als ze nieuwe beelden publiceren of je kan "
-"ze bijkomende informatie vragen. "
+"Je kan andere astrofotografen berichten sturen en volgen op "
+"<em>AstroBin</em>. Je kan een berichtje krijgen als ze nieuwe beelden "
+"publiceren of je kan ze bijkomende informatie vragen."
 
 #: templates/help.html:74
 msgid ""
@@ -4292,7 +4293,7 @@ msgstr "door"
 
 #: templates/index.html:132 templates/iotd_archive.html:32
 msgid "Runners-up"
-msgstr ""
+msgstr "Plaatsvervangers"
 
 #: templates/index.html:184
 msgid "Recent"
@@ -4323,9 +4324,8 @@ msgid "ago"
 msgstr "geleden"
 
 #: templates/iotd_archive.html:5 templates/iotd_archive.html.py:10
-#, fuzzy
 msgid "Archive of 'Image of the day' winners"
-msgstr "Foto van de dag"
+msgstr "Archief van \"Foto van de dag\"-winnaars"
 
 #: templates/leaderboard.html:24 templates/reviews.html:40
 #: templates/wall.html:40 templates/gear/page.html:89
@@ -4718,7 +4718,7 @@ msgid ""
 "to comprehend them."
 msgstr ""
 "Volgende voorwaarden zijn enkel ter beschikking in het Engels. Het is jouw "
-"verantwoordelijkheid om ze te te begrijpen."
+"verantwoordelijkheid om ze te begrijpen."
 
 #: templates/upload.html:14
 msgid "Upload as a work in progress"
@@ -4753,10 +4753,10 @@ msgid ""
 "on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
 "too."
 msgstr ""
-"Gebruik deze knop om een foto up te loaden naar de <strong>Publieke Zone</"
-"strong>. Zodoende zal ze getoond worden op <a href=\"%(profile_url)s\">jouw "
-"profiel</a> en hier op de homepage. Je kan ook beelden <a href="
-"\"%(flickr_url)s\">importeren vanuit Flickr</a> ."
+"Gebruik deze knop om een foto up te loaden naar de <strong>Publieke "
+"Zone</strong>. Zodoende zal ze getoond worden op <a href=\"%"
+"(profile_url)s\">jouw profiel</a> en hier op de homepage. Je kan ook beelden "
+"<a href=\"%(flickr_url)s\">importeren vanuit Flickr</a>."
 
 #: templates/upload.html:55
 #, python-format
@@ -4786,11 +4786,11 @@ msgstr "Sleep je Raw Data naar hier"
 
 #: templates/upload.html:91
 msgid "or download the desktop client for easier uploads!"
-msgstr ""
+msgstr "of download de desktop client om makkelijker up te loaden!"
 
 #: templates/upload.html:92
 msgid "Accepted file types: FIT and digital camera raw files"
-msgstr "Volgende type bestanden worden aanvaard: FIT en raw DSLR."
+msgstr "Volgende type bestanden worden aanvaard: FIT en raw DSLR"
 
 #: templates/upload.html:96
 msgid "Filename"
@@ -5441,7 +5441,7 @@ msgstr "Bevat"
 #: templates/image/detail.html:423
 #, python-format
 msgid "and %(number)s more (click to view)."
-msgstr "en %(number)s andere (klik om te bekijken)"
+msgstr "en %(number)s andere (klik om te bekijken)."
 
 #: templates/image/detail.html:431
 msgid "(hide these subjects)"
@@ -5519,6 +5519,10 @@ msgid ""
 "you believe this is a mistake, please get in touch with the administration "
 "of AstroBin."
 msgstr ""
+"Je stemrecht wordt permanent geschorst omdat we verdachte activiteiten "
+"hebben vastgesteld. Hieronder wordt verstaan: oneerlijkheid, rancune of "
+"ongepast competentiegedrag. Als je denkt dat dit een vergissing is, gelieve "
+"dan contact op te nemen met de AstroBin admins."
 
 #: templates/image/detail.html:708 templates/inclusion_tags/image_list.html:34
 #: templates/inclusion_tags/image_list.html:39
@@ -5526,7 +5530,7 @@ msgstr ""
 #: templates/inclusion_tags/search_image_list.html:150
 #: templates/inclusion_tags/search_image_list.html:190
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 #: templates/image/detail.html:741
 #: templates/inclusion_tags/search_image_list.html:42
@@ -5650,7 +5654,7 @@ msgstr ""
 
 #: templates/image/detail.html:922
 msgid "You don't have access to any shared private folders."
-msgstr "Er zijn geen gedeelde privéfolders waar je toegang tot hebt"
+msgstr "Er zijn geen gedeelde privéfolders waar je toegang tot hebt."
 
 #: templates/image/detail.html:1000
 msgid "Copied!"
@@ -5695,7 +5699,7 @@ msgstr "Ja, stop met volgen!"
 #: templates/image/detail.html:1221 templates/user/profile-js.html:26
 #, python-format
 msgid "Send %(username)s a message"
-msgstr "Zend %(username)s een bericht."
+msgstr "Zend %(username)s een bericht"
 
 #: templates/image/detail.html:1251 templates/image/detail.html.py:1252
 #: templates/image/detail.html:1253 templates/image/detail.html.py:1254
@@ -6132,7 +6136,7 @@ msgstr "Toevoegen"
 
 #: templates/inclusion_tags/message_list.html:14
 msgid "You have no messages."
-msgstr "Je hebt geen berichten"
+msgstr "Je hebt geen berichten."
 
 #: templates/inclusion_tags/message_list.html:20
 msgid "Show all messages"
@@ -6226,7 +6230,7 @@ msgstr "Berichten"
 
 #: templates/messages/inbox.html:25
 msgid "Participants"
-msgstr ""
+msgstr "Deelnemers"
 
 #: templates/messages/inbox.html:26
 msgid "Date and time"
@@ -6457,7 +6461,7 @@ msgid ""
 "insufficient data!</a>"
 msgstr ""
 "<a href=\"%(url)s\">Je hebt <strong>%(number)s</strong> beelden met "
-"onvoldoende data!"
+"onvoldoende data!</a>"
 
 #: templates/notification/lacking_data_reminder/short.txt:2
 #, python-format
@@ -6497,9 +6501,9 @@ msgid ""
 "of <strong>%(messier_object)s</strong> for the Messier Marathon. "
 "Congratulations!</a>"
 msgstr ""
-"<a href=\"%(image_url)s\"><strong>%(user)s</strong> heeft je foto van "
-"<strong>%(messier_object)s</strong>  voor de Messier Marathon genomineerd. "
-"Proficiat!"
+"<a href=\"%(image_url)s\"><strong>%(user)s</strong> heeft je foto van <strong>"
+"%(messier_object)s</strong> voor de Messier Marathon genomineerd. "
+"Proficiat!</a>"
 
 #: templates/notification/messier_nomination/short.txt:2
 #, python-format
@@ -7098,7 +7102,7 @@ msgstr "Wat is AstroBin?"
 
 #: templates/privatebeta/invite.html:11
 msgid "AstroBin is currently in closed beta"
-msgstr "AstroBin draait momenteel in gesloten bètafase."
+msgstr "AstroBin draait momenteel in gesloten bètafase"
 
 #: templates/privatebeta/invite.html:14
 #, python-format
@@ -7492,7 +7496,7 @@ msgstr ""
 
 #: templates/user/profile.html:53
 msgid "No images."
-msgstr "Geen foto's"
+msgstr "Geen foto's."
 
 #: templates/user/profile.html:60
 msgid "(go back)"
