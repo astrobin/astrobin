@@ -171,7 +171,7 @@
 
                             {% ifequal section 'images' %}
                                 <i class="icon-time"></i>
-                                {% trans "Recent images" %}
+                                {% trans "Recently uploaded" %}
                             {% endifequal %}
 
                             {% ifequal section 'liked' %}
@@ -182,6 +182,11 @@
                             {% ifequal section 'bookmarked' %}
                                 <i class="icon-bookmark"></i>
                                 {% trans "Recently bookmarked" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'fits' %}
+                                <i class="icon-archive"></i>
+                                {% trans "Recent images with link to TIFF/FITS" %}
                             {% endifequal %}
                         </h4>
 
@@ -238,6 +243,16 @@
                             {% if section != 'bookmarked' %}
                                 </a>
                             {% endif %}
+
+                            {% if section != 'fits' %}
+                                <a href="{% url index %}{% query_string "s=fits" "" %}"
+                                   rel="tooltip"
+                                   title="{% trans "Recent images with link to TIFF/FITS" %}">
+                            {% endif %}
+                                <i class="icon-archive"></i>
+                            {% if section != 'fits' %}
+                                </a>
+                            {% endif %}
                         </span>
                     </div>
 
@@ -248,7 +263,7 @@
                             </div>
                         {% endif %}
 
-                        {% if section == 'images' or section == 'liked' or section == 'bookmarked' %}
+                        {% if section == 'images' or section == 'liked' or section == 'bookmarked' or section == 'fits'%}
                             <div id="recent-images-loggedin" class="endless">
                                 <ul class="thumbnails astrobin-thumbnails">
                                     {% include 'index/recent_images_page.html' %}

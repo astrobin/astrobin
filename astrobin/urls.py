@@ -248,7 +248,6 @@ urlpatterns = patterns('',
     url(r'^explore/choose/$', views.expore_choose, name='explore_choose'),
     url(r'^explore/wall/$', views.wall, name='wall'),
     url(r'^explore/iotd/$', views.iotd_archive, name='iotd_archive'),
-    url(r'^explore/fits/$', views.fits, name='fits'),
 
     url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 

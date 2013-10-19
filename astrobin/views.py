@@ -344,6 +344,12 @@ def index(request, template = 'index/root.html', extra_context = None):
                     "ORDER BY recently_bookmarked_to_show.created DESC;"
                 )
 
+        elif section == 'fits':
+            response_dict['recent_images'] = \
+                Image.objects.filter(is_wip = False).exclude(
+                        Q(link_to_fits = None) |
+                        Q(link_to_fits = ''))
+
     if extra_context is not None:
         response_dict.update(extra_context)
 
@@ -442,23 +448,6 @@ def iotd_archive(request):
         template_object_name = 'iotd',
         paginate_by = 30,
     )
-
-
-@require_GET
-def fits(request):
-    qs = Image.objects.exclude(Q(link_to_fits = None) | Q(link_to_fits = ''))
-
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-    }
-
-    return object_list(
-        request,
-        queryset=qs,
-        template_name='fits.html',
-        template_object_name='image',
-        paginate_by = 20,
-        extra_context = response_dict)
 
 
 @require_GET
