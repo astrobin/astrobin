@@ -400,7 +400,7 @@ PIPELINE_JS = {
             'js/jquery.i18n.js',
             'js/plugins/localization/jquery.localisation.js',
             'js/jquery.uniform.js',
-            'js/jquery-ui-1.9.2.custom.js',
+            'js/jquery-ui-1.10.3.custom.min.js',
             'js/jquery-ui-timepicker-addon.js',
             'js/jquery.validationEngine-en.js',
             'js/jquery.validationEngine.js',
