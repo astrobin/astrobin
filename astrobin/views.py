@@ -3167,6 +3167,7 @@ def gear_popover_ajax(request, id):
               else False
     html = render_to_string(template,
         {
+            'request': request,
             'user': request.user,
             'gear': gear,
             'follows': follows,
