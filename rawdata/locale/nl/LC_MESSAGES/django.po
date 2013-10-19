@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-25 02:47-0500\n"
-"PO-Revision-Date: 2013-01-04 20:16+0100\n"
+"PO-Revision-Date: 2013-10-14 10:14+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
@@ -123,7 +123,7 @@ msgid ""
 "recognized by the name."
 msgstr ""
 "Een naam voor deze folder. Gebruik een goede omschrijving voor deze "
-"fotoverzameling zodat je later nog weet wat er inzit"
+"fotoverzameling zodat je later nog weet wat er inzit."
 
 #: models.py:289
 msgid "Describe the goals of this folder."
@@ -134,6 +134,8 @@ msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
 msgstr ""
+"Je hebt geen vrije ruimte op AstroBin Rawdata. Overweeg om je account up te "
+"graden."
 
 #: signal_handlers.py:18
 msgid ""
@@ -301,7 +303,7 @@ msgid ""
 "strong> and <strong>digital camera raw</strong> files."
 msgstr ""
 "Je kan tot maximaal <strong>500 GB</strong> opslagruimte huren voor je "
-"<strong>FIT<strong> en <strong>RAW</strong> bestanden."
+"<strong>FIT</strong> en <strong>RAW</strong> bestanden."
 
 #: templates/rawdata/help_02.html:22
 msgid ""
@@ -357,8 +359,8 @@ msgid ""
 "able to download bundles of your files in a <strong>zip</strong> file."
 msgstr ""
 "Je gegevens worden niet enkel veilig bewaard, maar je krijgt ook de "
-"mogelijkheid om je bestanden in bundels down te loaden in een  <strong>zip</"
-"strong> file."
+"mogelijkheid om je bestanden in bundels down te loaden in een "
+"<strong>zip</strong> file."
 
 #: templates/rawdata/help_02.html:38
 msgid ""
@@ -795,9 +797,9 @@ msgid ""
 "strong> button to share them."
 msgstr ""
 "Je hebt geen toegang tot een gedeelde privéfolder. Als je er één wil "
-"aanmaken, ga dan naar <a href=\"%(library_url)s\">je Raw Data Bibliotheek</"
-"a>, selecteer bestanden of <strong>intelligente folders</strong>en gebruik "
-"de <strong>Delen</strong> knop."
+"aanmaken, ga dan naar <a href=\"%(library_url)s\">je Raw Data Bibliotheek</a>, "
+"selecteer bestanden of <strong>intelligente folders</strong> en gebruik de "
+"<strong>Delen</strong> knop."
 
 #: templates/rawdata/privatesharedfolder_list.html:101
 #: templates/rawdata/publicdatapool_list.html:66
@@ -835,9 +837,11 @@ msgid ""
 "\"%(rawdata_url)s\">AstroBin Raw Data</a>, or you can download the available "
 "data and try to process it!"
 msgstr ""
-"Deze publieke gegevensbank werd aangemaakt op %(date)s door <a href="
-"\"%(user_url)s\">%(user)s</a>. Ze bevat %(size)s voor %(image_count)s "
-"beelden."
+"Deze publieke gegevensbank werd aangemaakt op %(date)s door <a href=\"%"
+"(user_url)s\">%(user)s</a>. Ze bevat %(size)s voor %(image_count)s beelden. "
+"Je kan een bijdrage leveren als je een abonnement hebt op <a href=\"%"
+"(rawdata_url)s\">AstroBin Raw Data</a>, of je kan de aanwezige data "
+"downloaden en proberen om ze te bewerken."
 
 #: templates/rawdata/publicdatapool_detail.html:144
 msgid "Edit public data pool"
@@ -1000,13 +1004,12 @@ msgid "Please refresh this page in a few seconds."
 msgstr "Gelieve de pagina te verversen binnen enkele seconden."
 
 #: templates/rawdata/uploader.html:4 templates/rawdata/uploader.html.py:8
-#, fuzzy
 msgid "AstroBin Raw Data Uploader"
-msgstr "AstroBin Raw Data"
+msgstr "AstroBin Raw Data Uploader"
 
 #: templates/rawdata/uploader.html:10
 msgid "A desktop client"
-msgstr ""
+msgstr "Een desktop client"
 
 #: templates/rawdata/uploader.html:19
 msgid ""
@@ -1015,6 +1018,11 @@ msgid ""
 "and\n"
 "                reasonably recent Linux distributions."
 msgstr ""
+"De <strong>AstroBin Raw Data Uploader</strong>\n"
+"                                                                  is een "
+"desktop programma, compatibel met Windows XP, Windows 7, en\n"
+"                                                                  redelijk "
+"recente Linux distributies."
 
 #: templates/rawdata/uploader.html:24
 msgid ""
@@ -1024,6 +1032,11 @@ msgid ""
 "                them in the root directory that you can specify in the\n"
 "                settings."
 msgstr ""
+"Het is een programma dat in de achtergrond actief is\n"
+"                                                                  en je raw "
+"data bestanden die het vindt in de directory\n"
+"                                                                  die door "
+"jouw wordt ingegeven, uploadt in AstroBin."
 
 #: templates/rawdata/uploader.html:30
 msgid ""
@@ -1035,23 +1048,29 @@ msgid ""
 "                will just know that your data is being safely backed up on\n"
 "                <strong>AstroBin Raw Data</strong>."
 msgstr ""
+"Met <strong>AstroBin Raw Data Uploader</strong>\n"
+"                                                                  moet je je "
+"raw data bestanden niet meer manueel uploaden.\n"
+"                                                                  Je kan de "
+"Uploader installeren, configureren en vergeten!\n"
+"                                                                  Je kan er "
+"dan op vertouwen dat je data veilig wordt gebackupt op\n"
+"                                                                  "
+"<strong>AstroBin Raw Data</strong>."
 
 #: templates/rawdata/uploader.html:43
-#, fuzzy
 msgid "Download for:"
-msgstr "Downloaden"
+msgstr "Downloaden voor:"
 
 #: templates/rawdata/uploader.html:62 templates/rawdata/uploader.html.py:67
 #: templates/rawdata/uploader.html:77
-#, fuzzy
 msgid "Download for"
-msgstr "Downloaden"
+msgstr "Downloaden voor"
 
 #: templates/rawdata/uploader.html:63 templates/rawdata/uploader.html.py:68
 #: templates/rawdata/uploader.html:78
-#, fuzzy
 msgid "Coming soon"
-msgstr "Weldra ter beschikking!"
+msgstr "Weldra ter beschikking"
 
 #: templates/subscription/_plan.html:9
 msgid "month"
@@ -1162,9 +1181,9 @@ msgid ""
 "your work, including calibration files."
 msgstr ""
 "<strong>AstroBin Raw Data</strong> geeft je de mogelijkheid om raw bestanden "
-"(<strong>FIT</strong> en <strong>digital camera raw</strong> op AstroBin te "
-"bewaren. We zullen je foto's netjes geordend bewaren en laten aldus toe om "
-"een backup te maken van al je werk, inclusief calibratiebestanden."
+"(<strong>FIT</strong> en <strong>digital camera raw</strong>) op AstroBin "
+"te bewaren. We zullen je foto's netjes geordend bewaren en laten aldus toe "
+"om een backup te maken van al je werk, inclusief calibratiebestanden."
 
 #: templates/subscription/subscription_list.html:17
 #, python-format
