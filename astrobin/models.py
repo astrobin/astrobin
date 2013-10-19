@@ -29,9 +29,6 @@ from tasks import *
 
 from nested_comments.models import NestedComment
 
-from djangoratings.fields import RatingField
-from djangoratings.models import Vote
-
 from model_utils.managers import InheritanceManager
 from timezones.forms import PRETTY_TIMEZONE_CHOICES
 

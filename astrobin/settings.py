@@ -215,7 +215,6 @@ INSTALLED_APPS = (
 
     # Third party apps
     'registration',
-    'djangoratings',
     'haystack',
     'notification',
     'debug_toolbar',
