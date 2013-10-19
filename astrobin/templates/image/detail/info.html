@@ -29,14 +29,18 @@
             <div>
                 <span class="views">
                     {% get_hit_count for image as hit_count %}
-                    {% trans "Views" %}: <span class="number">{{hit_count}}</span>,
-                </span>
+                    {% trans "Views" %}: <span class="number">{{hit_count}}</span>
+                </span>,
 
                 <span class="bookmarks">
                     {% trans "Bookmarks" %}:
                     <span class="number">{{image.bookmarks}}</span>
-                </span>
+                </span>,
 
+                <span class="bookmarks">
+                    {% trans "Likes" %}:
+                    <span class="number">{{image.likes}}</span>
+                </span>
             </div>
         </div>
 
