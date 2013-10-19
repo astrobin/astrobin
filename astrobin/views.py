@@ -2805,11 +2805,11 @@ def leaderboard(request):
         raise Http404
 
     sqs = SearchQuerySet()
-    sort = '-rating'
+    sort = '-likes'
     if 'sort' in request.GET:
         sort = request.GET.get('sort')
-        if sort == 'rating':
-            sort = '-rating'
+        if sort == 'likes':
+            sort = '-likes'
         elif sort == 'integration':
             sort = '-integration'
         elif sort == 'avg_integration':

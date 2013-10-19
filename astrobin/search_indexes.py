@@ -225,7 +225,7 @@ class GearIndex(SearchIndex):
     def prepare_likes(self, obj):
         likes = 0
         for i in self.get_images(obj):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
 
         return likes
 
@@ -245,7 +245,7 @@ class GearIndex(SearchIndex):
     def prepare_bookmarks(self, obj):
         bookmarks = 0
         for i in self.get_images(obj):
-            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", i).count()
         return bookmarks
 
     def prepare_comments(self, obj):
@@ -339,7 +339,7 @@ class UserIndex(SearchIndex):
     def prepare_likes(self, obj):
         likes = 0
         for i in Image.objects.filter(user = obj, is_wip = False):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
     def prepare_integration(self, obj):
@@ -414,7 +414,7 @@ class UserIndex(SearchIndex):
     def prepare_bookmarks(self, obj):
         bookmarks = 0
         for i in Image.objects.filter(user = obj, is_wip = False):
-            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", i).count()
         return bookmarks
 
     def prepare_telescope_types(self, obj):
