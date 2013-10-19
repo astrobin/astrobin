@@ -17,43 +17,41 @@
     {% if search_result.object.id %}
         <li class="thumbnail astrobin-thumbnail">
             <div class="gear-business-card">
-                <div class="header">
-                    <i class="icon-cog icon-white"></i>
-                    <a href="{% url gear_page search_result.object.id search_result.object.slug %}">
-                        {% if search_result.object.make %}{{search_result.object.make}}{% endif %}
-                        {{search_result.object.name}}
-                    </a>
-                </div>
-                {% if search_result.object.commercial and search_result.object.commercial.image  %}
-                    {% with search_result.object.commercial.image as image %}
-                        <div class="avatar">
-                            <a href="{% url gear_page search_result.object.id search_result.object.slug %}">
-                                <img src="{{IMAGES_URL}}{{image.filename}}_small_thumb{{image.original_ext}}" alt="{{image.title|escape}}" />
-                            </a>
-                        </div>
-                    {% endwith %}
-                {% endif %}
-                <div class="quick-data">
-                    <table class="table">
-                        <tr>
-                            <th><i class="icon-time icon-white" rel="tooltip" title="{% trans "Integration" %}"></i></th>
-                            <td>{{search_result.integration|floatformat}}</td>
-                        </tr>
-                        <tr>
-                            <th><i class="icon-thumbs-up" rel="tooltip" title="{% trans "Likes" %}"></i></th>
-                            <td>{{search_result.object.likes}}</td>
-                        </tr>
-                        <tr>
-                            <th><i class="icon-bookmark" rel="tooltip" title="{% trans "Bookmarks" %}"></i></th>
-                            <td>{{search_result.object.bookmarks}}</td>
-                        </tr>
+                <div class="business-card-inner">
+                    <div class="header">
+                        <i class="icon-cog icon-white"></i>
+                        <a href="{% url gear_page search_result.object.id search_result.object.slug %}">
+                            {% if search_result.object.make %}{{search_result.object.make}}{% endif %}
+                            {{search_result.object.name}}
+                        </a>
+                    </div>
+                    {% if search_result.object.commercial and search_result.object.commercial.image  %}
+                        {% with search_result.object.commercial.image as image %}
+                            {% astrobin_image image 'thumb' %}
+                        {% endwith %}
+                    {% endif %}
+                    <div class="quick-data">
+                        <table class="table">
+                            <tr>
+                                <th><i class="icon-time icon-white" rel="tooltip" title="{% trans "Integration" %}"></i></th>
+                                <td>{{search_result.integration|floatformat}}</td>
+                            </tr>
+                            <tr>
+                                <th><i class="icon-thumbs-up" rel="tooltip" title="{% trans "Likes" %}"></i></th>
+                                <td>{{search_result.likes}}</td>
+                            </tr>
+                            <tr>
+                                <th><i class="icon-bookmark" rel="tooltip" title="{% trans "Bookmarks" %}"></i></th>
+                                <td>{{search_result.bookmarks}}</td>
+                            </tr>
 
-                    </table>
-                </div>
-                <div class="data">
-                    {% trans "Images" %}: <strong>{{search_result.images}}</strong><br/>
-                    {% trans "Comments" %}: <strong>{{search_result.comments}}</strong><br/>
-                    {% trans "Views" %}: <strong>{{search_result.views}}</strong>.
+                        </table>
+                    </div>
+                    <div class="data">
+                        {% trans "Images" %}: <strong>{{search_result.images}}</strong><br/>
+                        {% trans "Comments" %}: <strong>{{search_result.comments}}</strong><br/>
+                        {% trans "Views" %}: <strong>{{search_result.views}}</strong>
+                    </div>
                 </div>
             </div>
         </li>
@@ -73,38 +71,40 @@
     {% if search_result.object.id %}
         <li class="thumbnail astrobin-thumbnail">
             <div class="user-business-card">
-                <div class="header">
-                    <i class="icon-user icon-white"></i>
-                    <a href="{% url user_page search_result.object.username %}">
-                        {{search_result.object.userprofile}}
-                    </a>
-                </div>
-                <div class="avatar">
-                    <a href="{% url user_page search_result.object.username %}">
-                        {% avatar search_result.object 83 %}
-                    </a>
-                </div>
-                <div class="quick-data">
-                    <table class="table">
-                        <tr>
-                            <th><i class="icon-time icon-white" rel="tooltip" title="{% trans "Integration" %}"></i></th>
-                            <td>{{search_result.integration|floatformat}}</td>
-                        </tr>
-                        <tr>
-                            <th><i class="icon-thumbs-up" rel="tooltip" title="{% trans "Likes" %}"></i></th>
-                            <td>{{search_result.object.likes}}</td>
-                        </tr>
-                        <tr>
-                            <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Bookmarks" %}"></i></th>
-                            <td>{{search_result.object.bookmarks}}</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="data">
-                    {% trans "Date joined" %}: <strong>{{search_result.object.date_joined|ago}}</strong><br/>
-                    {% trans "Images" %}: <strong>{{search_result.images}}</strong><br/>
-                    {% trans "Comments" %}: <strong>{{search_result.comments_written}}/{{search_result.comments}}</strong><br/>
-                    {% trans "Views" %}: <strong>{{search_result.views}}</strong>.
+                <div class="business-card-inner">
+                    <div class="header">
+                        <i class="icon-user icon-white"></i>
+                        <a href="{% url user_page search_result.object.username %}">
+                            {{search_result.object.userprofile}}
+                        </a>
+                    </div>
+                    <div class="avatar">
+                        <a href="{% url user_page search_result.object.username %}">
+                            {% avatar search_result.object 83 %}
+                        </a>
+                    </div>
+                    <div class="quick-data">
+                        <table class="table">
+                            <tr>
+                                <th><i class="icon-time icon-white" rel="tooltip" title="{% trans "Integration" %}"></i></th>
+                                <td>{{search_result.integration|floatformat}}</td>
+                            </tr>
+                            <tr>
+                                <th><i class="icon-thumbs-up" rel="tooltip" title="{% trans "Likes" %}"></i></th>
+                                <td>{{search_result.likes}}</td>
+                            </tr>
+                            <tr>
+                                <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Bookmarks" %}"></i></th>
+                                <td>{{search_result.bookmarks}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="data">
+                        {% trans "Date joined" %}: <strong>{{search_result.object.date_joined|ago}}</strong><br/>
+                        {% trans "Images" %}: <strong>{{search_result.images}}</strong><br/>
+                        {% trans "Comments" %}: <strong>{{search_result.comments_written}}/{{search_result.comments}}</strong><br/>
+                        {% trans "Views" %}: <strong>{{search_result.views}}</strong>
+                    </div>
                 </div>
             </div>
         </li>
@@ -141,9 +141,9 @@
                         </td>
                         <td>{{search_result.object.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
                         <td>{% get_hit_count for search_result.object %}</td>
-                        <td>{{search_result.object.likes}}</td>
-                        <td>{{search_result.object.bookmarks}}</td>
-                        <td>{{search_result.object.commentsNumber}}</td>
+                        <td>{{search_result.likes}}</td>
+                        <td>{{search_result.bookmarks}}</td>
+                        <td>{{search_result.comments}}</td>
                     </tr>
                 {% endif %}
             {% endfor %}
