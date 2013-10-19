@@ -372,9 +372,9 @@ def wall(request):
     elif request.GET.get('sort') == '-views':
         response_dict['sort'] = '-views'
         sqs = sqs.order_by('-views');
-    elif request.GET.get('sort') == '-rating':
-        response_dict['sort'] = '-rating'
-        sqs = sqs.order_by('-rating', '-likes')
+    elif request.GET.get('sort') == '-likes':
+        response_dict['sort'] = '-likes'
+        sqs = sqs.order_by('-likes', '-likes')
     elif request.GET.get('sort') == '-bookmarks':
         response_dict['sort'] = '-bookmarks'
         sqs = sqs.order_by('-bookmarks')
@@ -422,10 +422,10 @@ def wall(request):
 
     return object_list(
         request,
-        queryset=sqs,
-        template_name='wall.html',
-        template_object_name='image',
-        paginate_by = 100,
+        queryset = sqs,
+        template_name = 'wall.html',
+        template_object_name = 'object',
+        paginate_by = 70,
         extra_context = response_dict)
 
 

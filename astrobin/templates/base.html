@@ -344,7 +344,7 @@
                                     <a href="{% url user_page request.user %}" class="btn btn-primary">
                                         {{userprofile|truncatechars:"20"}}
                                         <span id="navbar-user-scores">
-                                            <span id="astrobin-likes" rel="tooltip" data-placement="bottom" title="{% trans "Total number of likes" %}">
+                                            <span id="astrobin-likes" rel="tooltip" data-placement="bottom" title="{% trans "Number of likes" %}">
                                                   {{user_scores_likes}}
                                             </span> &bull;
                                             <span rel="tooltip" data-placement="bottom" title="{% trans "Images uploaded" %}">
