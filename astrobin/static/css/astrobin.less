@@ -1442,23 +1442,41 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin-top: 0;
 }
 
-.capty-content {
-    display: none;
-}
 div.capty-caption {
     background-color: black;
-    color: white;
-    text-shadow: 1px 1px 0 #222;
-    padding-left: 10px;
-    padding-top: 7px;
-    .rounded-corners-bottom(24px);
-    font-size: @base-font-size * 0.85;
+    padding: 0;
+    .rounded-corners(12px);
 }
 
-div.capty-caption a {
-    color: @link-color;
-    text-decoration: none;
-    text-shadow: none;
+div.capty-target {
+    display: none;
+
+    .capty-caption-content {
+        padding: 8px;
+
+        font-size: @base-font-size * 0.65;
+        color: #ddd;
+        text-shadow: 1px 1px 1px black;
+
+        .title {
+            color: @link-color;
+        }
+
+        .table-condensed th, .table-condensed td {
+            padding: 0 2px;
+        }
+
+        .link-overlay {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+
+            a {
+                display: block;
+                height: 100%;
+            }
+        }
+    }
 }
 
 

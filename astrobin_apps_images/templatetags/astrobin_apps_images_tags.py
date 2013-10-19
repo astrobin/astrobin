@@ -1,3 +1,7 @@
+# Python
+import random
+import string
+
 # Django
 from django.conf import settings
 from django.template import Library, Node
@@ -89,7 +93,8 @@ def astrobin_image(
         'image'         : image,
         'alias'         : alias,
         'revision'      : revision,
-        'size'          : "%sx%s" % (size[0], size[1]),
+        'size_x'        : size[0],
+        'size_y'        : size[1],
         'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
         'mod'           : mod,
         'real'          : alias in ('real', 'real_inverted'),
@@ -97,6 +102,13 @@ def astrobin_image(
         'show_tooltip'  : show_tooltip,
         'request'       : context['request'],
     }
+
+
+@register.simple_tag(takes_context = True)
+def random_id(context, size = 8, chars = string.ascii_uppercase + string.digits):
+    id = ''.join(random.choice(chars) for x in range(size))
+    context['randomid'] = id
+    return ''
 
 
 register.inclusion_tag(

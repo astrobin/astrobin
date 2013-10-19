@@ -1291,24 +1291,37 @@ x:default {
   border-top: none;
   margin-top: 0;
 }
-.capty-content {
-  display: none;
-}
 div.capty-caption {
   background-color: black;
-  color: white;
-  text-shadow: 1px 1px 0 #222;
-  padding-left: 10px;
-  padding-top: 7px;
-  -moz-border-radius: 0 0 24px 24px;
-  -webkit-border-radius: 0 0 24px 24px;
-  border-radius: 0 0 24px 24px;
-  font-size: 11.049999999999999px;
+  padding: 0;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
 }
-div.capty-caption a {
+div.capty-target {
+  display: none;
+}
+div.capty-target .capty-caption-content {
+  padding: 8px;
+  font-size: 8.450000000000001px;
+  color: #ddd;
+  text-shadow: 1px 1px 1px black;
+}
+div.capty-target .capty-caption-content .title {
   color: #cc4b2e;
-  text-decoration: none;
-  text-shadow: none;
+}
+div.capty-target .capty-caption-content .table-condensed th,
+div.capty-target .capty-caption-content .table-condensed td {
+  padding: 0 2px;
+}
+div.capty-target .capty-caption-content .link-overlay {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+}
+div.capty-target .capty-caption-content .link-overlay a {
+  display: block;
+  height: 100%;
 }
 .ui-multiselect {
   display: none;

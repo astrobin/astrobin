@@ -183,12 +183,6 @@ def seconds_to_hours(value):
     return "%.1f" % (int(value) / 3600.0)
 
 
-@register.simple_tag(takes_context = True)
-def random_id(context, size = 8, chars = string.ascii_uppercase + string.digits):
-    id = ''.join(random.choice(chars) for x in range(size))
-    context['randomid'] = id
-    return ''
-
 
 @register.filter
 def cut_decimals(value, places):

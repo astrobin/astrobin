@@ -374,6 +374,8 @@ PIPELINE_CSS = {
 
             'common/css/jquery.lightbox-0.5.css',
 
+            'astrobin_apps_images/css/jquery.capty.css',
+
             'css/reset.css',
             'css/bootstrap.css',
             'css/bootstrap-responsive.css',
@@ -395,6 +397,7 @@ PIPELINE_JS = {
             'common/js/jquery.lightbox-0.5.js',
 
             'astrobin_apps_images/js/astrobin_apps_images.js',
+            'astrobin_apps_images/js/jquery.capty.js',
 
             'js/jquery.i18n.js',
             'js/plugins/localization/jquery.localisation.js',
