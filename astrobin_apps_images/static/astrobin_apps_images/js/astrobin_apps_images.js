@@ -26,9 +26,16 @@ $(document).ready(function() {
                 cache: true,
                 url: url,
                 success: function(data, status, request) {
-                    $('img.astrobin-image[data-id=' + data.id + '][data-alias=' + alias + '][data-revision=' + revision +']')
+                    var $img = $('img.astrobin-image[data-id=' + data.id + '][data-alias=' + alias + '][data-revision=' + revision +']');
+
+                    $img
                         .attr('src', data.url)
                         .attr('data-loaded', 'true');
+
+                    if (alias == 'thumb' || alias == 'gallery') {
+                        $img.capty({animation: 'slide', speed: 200, height: $img.height()})
+                        $img.closest('.capty-wrapper').find('.capty-target').show();
+                    }
                 }
             });
         });
