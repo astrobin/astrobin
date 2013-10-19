@@ -53,6 +53,11 @@ class SolutionUpdateView(base.View):
         solver = Solver()
         status = solver.status(solution.submission_id)
 
+        if status == Solver.MISSING:
+            solution.status = status
+            solution.submission_id = None
+            solution.save()
+
         context = {'status': status}
         return HttpResponse(simplejson.dumps(context), mimetype='application/json')
 
