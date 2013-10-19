@@ -151,11 +151,20 @@
     </table>
 {% else %}
     <ul class="thumbnails astrobin-thumbnails">
-        {% include 'inclusion_tags/search_image_list_entries.html' %}
-        {% include 'snippets/endless_pagination_js.html' %}
+        {% for search_result in image_list %}
+            {% with search_result.object as image %}
+                <li class="thumbnail astrobin-thumbnail">
+                    {% astrobin_image image 'gallery' %}
+                </li>
+            {% endwith %}
+        {% empty %}
+            <li>{% include 'inclusion_tags/no_images.html' %}</li>
+        {% endfor %}
     </ul>
 {% endifequal %}
+
 {% endif %}
+
 
 {% if paginate %}
     {% include 'pagination.html' %}

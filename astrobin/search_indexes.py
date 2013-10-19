@@ -246,7 +246,7 @@ class GearIndex(SearchIndex):
         bookmarks = 0
         for i in self.get_images(obj):
             bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
-        return bookmark
+        return bookmarks
 
     def prepare_comments(self, obj):
         comments = 0

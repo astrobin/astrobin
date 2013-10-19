@@ -36,9 +36,9 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="{% query_string "sort='-rating'" "" %}">
-                            <span class="bg-icon{% if sort == '-rating' %} icon-ok{% endif %}"></span>
-                            {% trans "Rating" %}
+                        <a href="{% query_string "sort='-likes'" "" %}">
+                            <span class="bg-icon{% if sort == '-likes' %} icon-ok{% endif %}"></span>
+                            {% trans "Number of likes" %}
                         </a>
                     </li>
                     <li>
@@ -180,6 +180,6 @@
     </div> <!-- subnav -->
 
     <h1>{% trans "The Big Wall" %}</h1>
-    {% image_list image_list %}
+    {% search_image_list object_list %}
 {% endblock %}
 
