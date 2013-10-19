@@ -2886,19 +2886,21 @@ li.revisions {
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   position: relative;
-  height: 182px;
+  height: 212px;
   width: 182px;
-  margin: 0;
+  margin: 8px;
   padding: 0;
+}
+.user-business-card .business-card-inner,
+.gear-business-card .business-card-inner {
+  padding: 8px;
 }
 .user-business-card .header,
 .gear-business-card .header {
   background: #303030 url('../images/darker-panel-tile.png');
   height: 22px;
-  width: 174px;
   padding: 8px 4px 0;
-  font-size: 110%;
-  font-weight: bold;
+  margin: -8px -8px 12px;
 }
 .user-business-card .avatar,
 .gear-business-card .avatar {

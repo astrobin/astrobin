@@ -3065,18 +3065,20 @@ li.revisions {
 .user-business-card, .gear-business-card {
     .stitched-box;
     position: relative;
-    height: 182px;
+    height: 212px;
     width: 182px;
-    margin: 0;
+    margin: 8px;
     padding: 0;
+
+    .business-card-inner {
+        padding: 8px;
+    }
 
     .header {
         background: #303030 url('../images/darker-panel-tile.png');
         height: 22px;
-        width: 174px;
         padding: @spacer-medium @spacer-small 0;
-        font-size: 110%;
-        font-weight: bold;
+        margin: -8px -8px 12px;
     }
 
     .avatar {
