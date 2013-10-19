@@ -317,6 +317,7 @@ astrobin_common = {
                         timeout: 5000,
                         success: function(data, status) {
                             this.set('content.text', data.html);
+                            window.loadAstroBinImages(data.html);
                         }
                     }
                 }

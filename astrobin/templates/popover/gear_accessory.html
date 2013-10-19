@@ -1,3 +1,4 @@
+{% load astrobin_apps_images_tags %}
 {% load i18n %}
 {% load tags %}
 
@@ -5,8 +6,7 @@
     {% if gear.commercial and gear.commercial.image and gear.commercial.is_paid or gear.commercial.producer == user %}
         <div class="thumbnail astrobin-thumbnail">
             {% with gear.commercial.image as image %}
-                <img src="{{IMAGES_URL}}{{image.filename}}_thumb.png"
-                     alt="{{image.title|escape}}"/>
+                {% astrobin_image image 'gallery' %}
             {% endwith %}
         </div>
     {% endif %}
