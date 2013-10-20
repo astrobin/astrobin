@@ -485,6 +485,14 @@ def image_detail(request, id, r):
             r = 0
 
 
+    instance_to_platesolve = image
+    if r != 0:
+        try:
+            revision = ImageRevision.objects.filter(image = image, label = r)[0]
+            instance_to_platesolve = revision
+        except:
+            pass
+
 
     #############################
     # GENERATE ACQUISITION DATA #
@@ -703,9 +711,6 @@ def image_detail(request, id, r):
     # RESPONSE DICT #
     #################
 
-    print "Mod: %s" % mod
-    print "Rev: %s" % r
-
     from astrobin_apps_platesolving.solver import Solver
 
     response_dict = {
@@ -716,7 +721,8 @@ def image_detail(request, id, r):
         'revision_data': revision_data,
         'revision_label': r,
         'mod': mod,
-        'show_solution': image.solution and image.solution.status == Solver.SUCCESS,
+        'instance_to_platesolve': instance_to_platesolve,
+        'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
 
         'comments_number': NestedComment.objects.filter(
             deleted = False,

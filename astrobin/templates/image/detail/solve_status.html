@@ -2,6 +2,6 @@
 
 {# Only solve deep-sky and wide field images. #}
 {% if image.subject_type == 100 or image.subject_type == 300 %}
-    {% platesolving_machinery image %}
+    {% platesolving_machinery instance_to_platesolve %}
 {% endif %}
 

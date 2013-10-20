@@ -1,4 +1,6 @@
 # Django
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
 from django.db import models
 
 # This app
@@ -23,6 +25,9 @@ class Solution(models.Model):
         blank = True,
     )
 
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.TextField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     image_file = models.ImageField(
         upload_to = 'solutions',
@@ -79,3 +84,5 @@ class Solution(models.Model):
 
     class Meta:
         app_label = 'astrobin_apps_platesolving'
+        verbose_name = "Solution"
+        unique_together = ('content_type', 'object_id',)
