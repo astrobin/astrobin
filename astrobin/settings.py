@@ -578,5 +578,11 @@ TOGGLEPROPERTIES = {
         "property_tooltip_on": gettext("Unlike"),
         "property_tooltip_off": gettext("Like"),
         "property_icon": "icon-thumbs-up",
+    },
+
+    "follow": {
+        "property_tooltip_on": gettext("Stop following"),
+        "property_tooltip_off": gettext("Follow"),
+        "property_icon": "icon-eye-open",
     }
 }

@@ -15,20 +15,6 @@
                 {% trans "View profile" %}
             </a>
         </li>
-        {% if user.is_authenticated %}
-        <li>
-            <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
-               href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
-                {% if follows %}
-                    <i class="icon-eye-close"></i>
-                    {% trans "Stop following" %}
-                {% else %}
-                    <i class="icon-eye-open"></i>
-                    {% trans "Follow" %}
-                {% endif %}
-            </a>
-        </li>
-        {% endif %} <!-- authenticated -->
         <li>
             <a class="send-private-message" href="{% url messages_compose_to image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">
                 <i class="icon-envelope"></i>

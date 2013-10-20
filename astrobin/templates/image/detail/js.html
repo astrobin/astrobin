@@ -105,22 +105,6 @@ $(document).ready(function() {
     astrobin_common.init(
         '{{image.user.username}}',
         {
-            follow_action: {
-                dialog: {
-                    title : "{% blocktrans with image.user.userprofile as username %}Follow {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with image.user.userprofile as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}",
-                    button: "{% trans "Yes, follow!" %}"
-                },
-                stop_following: "{% trans "Stop following" %}"
-            },
-            unfollow_action: {
-                dialog: {
-                    title : "{% blocktrans with image.user.userprofile as username %}Stop following {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with image.user.user.userprofile as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}",
-                    button: "{% trans "Yes, stop following!" %}"
-                },
-                follow: "{% trans "Follow" %}"
-            },
             message_action: {
                 dialog: {
                     title : "{% blocktrans with image.user.userprofile as username %}Send {{username}} a message{% endblocktrans %}",
@@ -133,9 +117,9 @@ $(document).ready(function() {
             }
         });
 
-    astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
-    astrobin_common.setup_subject_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
-    astrobin_common.setup_user_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+    astrobin_common.setup_gear_popovers();
+    astrobin_common.setup_subject_popovers();
+    astrobin_common.setup_user_popovers();
 
     astrobin_image_detail.init(
         {{image.id}},

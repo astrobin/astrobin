@@ -4,6 +4,7 @@
 {% load common_tags %}
 {% load i18n %}
 {% load tags %}
+{% load toggleproperty_tags %}
 
 {% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 {% block content %}
@@ -31,8 +32,11 @@
                 </a>
             </div>
 
-            <div id="profile-followers" class="label label-success">
-                {% trans "Followers" %}: {{followers}}
+            <div id="profile-followers">
+                {% add_remove_toggleproperty "follow" user request.user %}
+                <div class="label label-success">
+                    {% trans "Followers" %}: {{followers}}
+                </div>
             </div>
 
             {% if stats %}

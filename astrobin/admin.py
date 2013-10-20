@@ -42,7 +42,6 @@ class UserProfileAdmin(admin.ModelAdmin):
         'software',
         'filters',
         'accessories',
-        'follows',
         'default_license',
         'language'
     )

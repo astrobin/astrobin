@@ -1716,14 +1716,12 @@ div.capty-target {
         .views, .bookmarks, .likes {
             font-size: 85%;
             color: darken(@text-color, 10%);
+            margin-right: @spacer-medium;
 
             .number {
                 color: @strong-text-color;
+                font-weight: bold;
             }
-        }
-
-        .follow, .unfollow {
-            font-size: 66%;
         }
     }
 }
@@ -3378,10 +3376,10 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
     }
 }
 
-#profile-followers {
-    width: 186px;
-    font-size: 22px;
-    line-height: 30px;
+#profile-followers .label {
+    width: 152px;
+    font-size: 14px;
+    padding: 7px 0;
     text-align: center;
     margin-top: @spacer-medium;
 }
@@ -3412,10 +3410,18 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
     button {
         width: 100%;
         font-size: 16px;
-        line-height: 32px;
+        line-height: 48px;
     }
 }
 
 .horizontal-separator {
     padding: 0 @spacer-small;
+}
+
+.btn.active, .btn:active {
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.33) inset, 0 -2px 2px rgba(255, 255, 255, 0.1) inset;
+}
+
+.btn-primary:active, .btn-primary.active {
+    color: #FF7F50;
 }

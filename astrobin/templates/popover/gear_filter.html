@@ -1,6 +1,7 @@
 {% load astrobin_apps_images_tags %}
 {% load i18n %}
 {% load tags %}
+{% load toggleproperty_tags %}
 
 <div class="gear-popover">
     {% if gear.commercial and gear.commercial.image and gear.commercial.is_paid or gear.commercial.producer == user %}
@@ -17,14 +18,10 @@
 		{% if gear.bandwidth %}<p><strong>{% trans "Bandwidth" %}</strong>: {{gear.bandwidth}} nm</p>{% endif %}
 
 		<div class="actions">
-		    <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name_iriencoded gear %}{% search_form_query %}">{% trans "Find images" %}</a>
 		    {% if is_authenticated %}
-		        {% if follows %}
-		            <a class="btn btn-mini btn-primary unfollow-gear" data-gear="{{gear.id}}" href="{% url unfollow_gear gear.id %}">{% trans "Unfollow" %}</a>
-		        {% else %}
-		            <a class="btn btn-mini btn-primary follow-gear" data-gear="{{gear.id}}" href="{% url follow_gear gear.id %}">{% trans "Follow" %}</a>
-		        {% endif %}
+                {% add_remove_toggleproperty "follow" gear request.user %}
 		    {% endif %}
+		    <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name_iriencoded gear %}{% search_form_query %}">{% trans "Find images" %}</a>
 		    <a class="btn btn-mini" href="{% url gear_page gear.id gear.slug %}">{% trans "View page" %}</a>
 		</div>
 	</div>

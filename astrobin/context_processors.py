@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.cache import cache
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.utils.translation import ugettext as _
 
@@ -59,6 +60,7 @@ def user_scores(request):
     if request.user.is_authenticated():
         cache_key = "astrobin_user_score_%s" % request.user
         scores = cache.get(cache_key)
+        user = User.objects.get(pk = request.user.pk) # The lazy object in the request won't do
 
         if not scores:
             scores = {}
@@ -69,7 +71,7 @@ def user_scores(request):
                 likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
 
             profile = request.user.userprofile
-            followers = profile.followers.all().count()
+            followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
 
 
             scores['user_scores_likes'] = likes

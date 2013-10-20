@@ -47,7 +47,7 @@
                             <tr data-id="{{item.id}}">
                                 <td class="gear-ids" data-gear-ids="{% for g in item.gear_set.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
                                     {% for g in item.gear_set.all %}
-                                        <a rel="popover" class="gear-popover" 
+                                        <a rel="popover" class="gear-popover"
                                            data-load="{% url gear_popover_ajax g.id %}"
                                            href="{% url gear_page g.id g.slug %}">
                                             {{g.id}}
@@ -373,12 +373,12 @@
     {% include 'user/profile-js.html' %}
 
     <script type="text/javascript">
-        astrobin_common.setup_gear_popovers("{% trans "Follow" %}", "{% trans "Unfollow" %}");
+        astrobin_common.setup_gear_popovers();
     </script>
-    
+
     {% ifequal user request.user %}
         {% if user_is_producer or user_is_retailer %}
-            <script type="text/javascript">    
+            <script type="text/javascript">
                 astrobin_stats.init();
                 astrobin_stats.plot(
                     '#stats_affiliated_gear_views',
@@ -466,7 +466,7 @@
                                     var $row = $('<tr/>');
 
                                     $table.find('tr.empty').remove();
-                                    
+
                                     $row.attr('data-id', response.id);
                                     $row.append('<td class="gear-ids" data-gear-ids="' + response.gear_ids + '">' + response.gear_ids_links + '</td>');
                                     $row.append('<td>' + response.make + '</td>');
@@ -528,7 +528,7 @@
                     $names.change(on_names_changed);
 
                     $('#claim-commercial-product-modal').on('show', function() {
-                        $makes.val($makes.find('option:first').val()); 
+                        $makes.val($makes.find('option:first').val());
                         $names.find('option').remove();
 
                         var $opt = $('<option/>');
@@ -589,7 +589,7 @@
                                 $table_row.find('td.gear-ids').html(response.claimed_gear_ids_links);
                                 $table_row.find('td.gear-ids').attr('data-gear-ids', response.claimed_gear_ids);
                             }
-                            
+
                             $modal.modal('hide');
                         });
 
@@ -793,7 +793,7 @@
                                     var $row = $('<tr/>');
 
                                     $table.find('tr.empty').remove();
-                                    
+
                                     $row.attr('data-id', response.id);
                                     $row.append('<td class="gear-ids" data-gear-ids="' + response.gear_ids + '">' + response.gear_ids_links + '</td>');
                                     $row.append('<td>' + response.make + '</td>');
@@ -855,7 +855,7 @@
                     $rnames.change(on_rnames_changed);
 
                     $('#claim-retailed-product-modal').on('show', function() {
-                        $rmakes.val($rmakes.find('option:first').val()); 
+                        $rmakes.val($rmakes.find('option:first').val());
                         $rnames.find('option').remove();
 
                         var $opt = $('<option/>');
@@ -916,7 +916,7 @@
                                 $table_row.find('td.gear-ids').html(response.claimed_gear_ids_links);
                                 $table_row.find('td.gear-ids').attr('data-gear-ids', response.claimed_gear_ids);
                             }
-                            
+
                             $modal.modal('hide');
                         });
 
