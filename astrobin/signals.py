@@ -1,5 +1,6 @@
 # Django
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse as reverse_url
 from django.db.models.signals import m2m_changed
 from django.db.models.signals import post_save
@@ -86,11 +87,21 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
 
 def toggleproperty_post_save(sender, instance, created, **kwargs):
     if created:
-        if instance.property_type == "like":
-            verb = "likes"
-        elif instance.property_type == 'bookmark':
-            verb = "bookmarked"
-        act.send(instance.user, verb = verb, target = instance.content_object)
+        if instance.property_type in ("like", "bookmark"):
+            if instance.property_type == "like":
+                verb = "likes"
+            elif instance.property_type == "bookmark":
+                verb = "bookmarked"
+            act.send(instance.user, verb = verb, target = instance.content_object)
+
+        elif instance.property_type == "follow":
+            user_ct = ContentType.objects.get_for_model(User)
+            if instance.content_type == user_ct:
+                followed_user = user_ct.get_object_for_this_type(pk = instance.object_id)
+                push_notification([followed_user], 'new_follower',
+                                  {'object': instance.user,
+                                   'object_url': instance.user.get_absolute_url()})
+
 
 
 def rawdata_publicdatapool_post_save(sender, instance, created, **kwargs):

@@ -13,31 +13,7 @@ astrobin_common = {
         notifications_base_url     : '/activity?id=notification_',
         notifications_element_empty: 'ul#notification-feed li#empty',
         notifications_element_image: 'img#notifications',
-        notifications_element_ul   : 'ul#notification-feed',
-
-        follow_action: {
-            dialog: {
-                title : '',
-                body  : '',
-                button: '',
-                height: 230
-            },
-            element       : 'a.follow',
-            url           : '/follow/',
-            stop_following: ''
-        },
-
-        unfollow_action: {
-            dialog: {
-                title : '',
-                body  : '',
-                button: '',
-                height: 230
-            },
-            element       : 'a.unfollow',
-            url           : '/unfollow/',
-            follow        : ''
-        }
+        notifications_element_ul   : 'ul#notification-feed'
     },
 
     globals: {
@@ -193,107 +169,7 @@ astrobin_common = {
         });
     },
 
-    setup_follow: function() {
-        $(astrobin_common.config.follow_action.element).live('click', function() {
-            var follow_a = $(this);
-
-            $('<div id="dialog-confirm"\
-                    title="' + astrobin_common.config.follow_action.dialog.title + '">\
-               </div>')
-                .html('\
-                        <p>\
-                            <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 20px 0;"></span>\
-                            ' + astrobin_common.config.follow_action.dialog.body + '\
-                        </p>')
-                .dialog({
-                    resizable: false,
-                    height: astrobin_common.config.follow_action.dialog.height,
-                    modal: true,
-                    buttons: [
-                        {
-                            text: 'OK',
-                            'class': 'btn btn-primary',
-                            click: function() {
-                                var dlg = $(this)
-                                $.ajax({
-                                    url: astrobin_common.config.follow_action.url + astrobin_common.globals.current_username,
-                                    dataType: 'json',
-                                    timeout: 5000,
-                                    cache: false,
-                                    success: function() {
-                                        dlg.dialog('close');
-                                        follow_a.html('<i class="icon-unfollow"></i> ' + astrobin_common.config.follow_action.stop_following);
-                                        follow_a.removeClass('follow').addClass('unfollow');
-                                    },
-                                    error: function(jqXHR, textStatus, errorThrown) {
-                                    }
-                                });
-                            }
-                        },
-                        {
-                            text: $.i18n._('Cancel'),
-                            'class': 'btn',
-                            click: function() {
-                                $(this).dialog('close');
-                            }
-                        }
-                    ]
-                });
-                return false;
-        });
-    },
-
-    setup_unfollow: function() {
-        $(astrobin_common.config.unfollow_action.element).live('click', function() {
-            var unfollow_a = $(this);
-
-            $('<div id="dialog-confirm"\
-                    title="' + astrobin_common.config.unfollow_action.dialog.title + '">\
-               </div>')
-                .html('\
-                        <p>\
-                            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>\
-                            ' + astrobin_common.config.unfollow_action.dialog.body + '\
-                        </p>')
-                .dialog({
-                    resizable: false,
-                    height: astrobin_common.config.unfollow_action.dialog.height,
-                    modal: true,
-                    buttons: [
-                        {
-                            text: 'OK',
-                            'class': 'btn btn-primary',
-                            click: function() {
-                                var dlg = $(this)
-                                $.ajax({
-                                    url: astrobin_common.config.unfollow_action.url + astrobin_common.globals.current_username,
-                                    dataType: 'json',
-                                    timeout: 5000,
-                                    cache: false,
-                                    success: function() {
-                                        dlg.dialog('close');
-                                        unfollow_a.html('<i class="icon-follow"></i> ' + astrobin_common.config.unfollow_action.follow);
-                                        unfollow_a.removeClass('unfollow').addClass('follow');
-                                    },
-                                    error: function(jqXHR, textStatus, errorThrown) {
-                                    }
-                                });
-                            }
-                        },
-                        {
-                            text: $.i18n._('Cancel'),
-                            'class': 'btn',
-                            click: function() {
-                                $(this).dialog('close');
-                            }
-                        }
-                    ]
-                });
-            return false;
-        });
-    },
-
-    setup_gear_popovers: function(follow_text, unfollow_text) {
+    setup_gear_popovers: function() {
         $('.gear-popover').each(function() {
             $(this).qtip({
                 position: {
@@ -323,58 +199,9 @@ astrobin_common = {
                 }
             });
         });
-
-        $('.follow-gear').live('click', function() {
-            var $link = $(this);
-            $.ajax({
-                url: $link.attr('href'),
-                timeout: 5000,
-                cache: false,
-                dataType: 'json',
-                beforeSend: function() {
-                    $link.text("...");
-                    $link.addClass('disabled');
-                },
-                success: function(data) {
-                    $link.text(unfollow_text);
-                    $link.attr('href', '/unfollow_gear/' + $link.attr('data-gear') + '/');
-                    $link.removeClass('follow-gear').addClass('unfollow-gear');
-                    $link.removeClass('disabled');
-                },
-                error: function() {
-                }
-            });
-
-            return false;
-        });
-
-        $('.unfollow-gear').live('click', function() {
-            var $link = $(this);
-            $.ajax({
-                url: $link.attr('href'),
-                timeout: 5000,
-                cache: false,
-                dataType: 'json',
-                beforeSend: function() {
-                    $link.text("...");
-                    $link.addClass('disabled');
-                },
-                success: function(data) {
-                    $link.text(follow_text);
-                    $link.attr('href', '/follow_gear/' + $link.attr('data-gear') + '/');
-                    $link.removeClass('unfollow-gear').addClass('follow-gear');
-                    $link.removeClass('disabled');
-                },
-                error: function() {
-                    alert("error");
-                }
-            });
-
-            return false;
-        });
     },
 
-    setup_subject_popovers: function(follow_text, unfollow_text) {
+    setup_subject_popovers: function() {
         $('.subject-popover').each(function() {
             $(this).qtip({
                 position: {
@@ -403,58 +230,9 @@ astrobin_common = {
                 }
             });
         });
-
-        $('.follow-subject').live('click', function() {
-            var $link = $(this);
-            $.ajax({
-                url: $link.attr('href'),
-                timeout: 5000,
-                cache: false,
-                dataType: 'json',
-                beforeSend: function() {
-                    $link.text("...");
-                    $link.addClass('disabled');
-                },
-                success: function(data) {
-                    $link.text(unfollow_text);
-                    $link.attr('href', '/unfollow_subject/' + $link.attr('data-subject') + '/');
-                    $link.removeClass('follow-subject').addClass('unfollow-subject');
-                    $link.removeClass('disabled');
-                },
-                error: function() {
-                }
-            });
-
-            return false;
-        });
-
-        $('.unfollow-subject').live('click', function() {
-            var $link = $(this);
-            $.ajax({
-                url: $link.attr('href'),
-                timeout: 5000,
-                cache: false,
-                dataType: 'json',
-                beforeSend: function() {
-                    $link.text("...");
-                    $link.addClass('disabled');
-                },
-                success: function(data) {
-                    $link.text(follow_text);
-                    $link.attr('href', '/follow_subject/' + $link.attr('data-subject') + '/');
-                    $link.removeClass('unfollow-subject').addClass('follow-subject');
-                    $link.removeClass('disabled');
-                },
-                error: function() {
-                    alert("error");
-                }
-            });
-
-            return false;
-        });
     },
 
-    setup_user_popovers: function(follow_text, unfollow_text) {
+    setup_user_popovers: function() {
         $('.user-popover').each(function() {
             $(this).qtip({
                 position: {
@@ -483,65 +261,12 @@ astrobin_common = {
                 }
             });
         });
-
-        $('.follow-user').live('click', function() {
-            var $link = $(this);
-            $.ajax({
-                url: $link.attr('href'),
-                timeout: 5000,
-                cache: false,
-                dataType: 'json',
-                beforeSend: function() {
-                    $link.text("...");
-                    $link.addClass('disabled');
-                },
-                success: function(data) {
-                    $link.text(unfollow_text);
-                    $link.attr('href', '/unfollow/' + $link.attr('data-user') + '/');
-                    $link.removeClass('follow-user').addClass('unfollow-user');
-                    $link.removeClass('disabled');
-                },
-                error: function() {
-                }
-            });
-
-            return false;
-        });
-
-        $('.unfollow-user').live('click', function() {
-            var $link = $(this);
-            $.ajax({
-                url: $link.attr('href'),
-                timeout: 5000,
-                cache: false,
-                dataType: 'json',
-                beforeSend: function() {
-                    $link.text("...");
-                    $link.addClass('disabled');
-                },
-                success: function(data) {
-                    $link.text(follow_text);
-                    $link.attr('href', '/follow/' + $link.attr('data-user') + '/');
-                    $link.removeClass('unfollow-user').addClass('follow-user');
-                    $link.removeClass('disabled');
-                },
-                error: function() {
-                    alert("error");
-                }
-            });
-
-            return false;
-        });
     },
 
     init: function(current_username, config) {
         /* Init */
         astrobin_common.globals.current_username = current_username;
         $.extend(true, astrobin_common.config, config);
-
-        /* Following */
-        astrobin_common.setup_follow();
-        astrobin_common.setup_unfollow();
    }
 };
 

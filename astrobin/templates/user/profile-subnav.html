@@ -83,18 +83,6 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
-                       href="{% if follows %}{% url 'unfollow' user %}{% else %}{% url 'follow' user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
-                        {% if follows %}
-                            <i class="icon-eye-close"></i>
-                            {% trans "Stop following" %}
-                        {% else %}
-                            <i class="icon-eye-open"></i>
-                            {% trans "Follow" %}
-                        {% endif %}
-                    </a>
-                </li>
-                <li>
                     <a class="send-private-message" href="{% url 'messages_compose_to' user %}{% query_string "next=request.path" "" %}">
                         <i class="icon-envelope"></i>
                         {% trans "Send private message" %}

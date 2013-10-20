@@ -29,33 +29,23 @@
             <div>
                 <span class="views">
                     {% get_hit_count for image as hit_count %}
-                    {% trans "Views" %}: <span class="number">{{hit_count}}</span>
-                </span>,
+                    <i class="icon-eye-open"></i> <span class="number">{{hit_count}}</span>
+                </span>
 
                 <span class="bookmarks">
-                    {% trans "Bookmarks" %}:
+                    <i class="icon-bookmark"></i>
                     <span class="number">{{image.bookmarks}}</span>
-                </span>,
+                </span>
 
-                <span class="bookmarks">
-                    {% trans "Likes" %}:
+                <span class="likes">
+                    <i class="icon-thumbs-up"></i>
                     <span class="number">{{image.likes}}</span>
                 </span>
             </div>
         </div>
 
         {% if user.is_authenticated %}
-            <a class="btn btn-primary{% if follows %} unfollow{% else %} follow{% endif %}"
-               href="{% if follows %}{% url unfollow image.user %}{% else %}{% url follow image.user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}"
-               rel="tooltip"
-               title="{% if follows %}{% trans "Stop following" %}{% else %}{% trans "Follow" %}{% endif %}">
-                {% if follows %}
-                    <i class="icon-eye-close"></i>
-                {% else %}
-                    <i class="icon-eye-open"></i>
-                {% endif %}
-            </a>
-
+            {% add_remove_toggleproperty "follow" image.user request.user %}
             {% add_remove_toggleproperty "bookmark" image request.user %}
         {% endif %} <!-- authenticated -->
     </div>

@@ -1529,15 +1529,13 @@ div.capty-target .capty-caption-content .link-overlay a {
 .avatar-block .username .likes {
   font-size: 85%;
   color: #9f9f9f;
+  margin-right: 8px;
 }
 .avatar-block .username .views .number,
 .avatar-block .username .bookmarks .number,
 .avatar-block .username .likes .number {
   color: #fcfcfc;
-}
-.avatar-block .username .follow,
-.avatar-block .username .unfollow {
-  font-size: 66%;
+  font-weight: bold;
 }
 .avatar img {
   -moz-border-radius: 12px;
@@ -3160,10 +3158,10 @@ table#private-shared-folders tr:hover a.delete-folder {
   font-size: x-small;
   font-style: italic;
 }
-#profile-followers {
-  width: 186px;
-  font-size: 22px;
-  line-height: 30px;
+#profile-followers .label {
+  width: 152px;
+  font-size: 14px;
+  padding: 7px 0;
   text-align: center;
   margin-top: 8px;
 }
@@ -3188,8 +3186,16 @@ table#private-shared-folders tr:hover a.delete-folder {
 .toggleproperty-add-remove.property-like button {
   width: 100%;
   font-size: 16px;
-  line-height: 32px;
+  line-height: 48px;
 }
 .horizontal-separator {
   padding: 0 4px;
+}
+.btn.active,
+.btn:active {
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.33) inset, 0 -2px 2px rgba(255, 255, 255, 0.1) inset;
+}
+.btn-primary:active,
+.btn-primary.active {
+  color: #FF7F50;
 }

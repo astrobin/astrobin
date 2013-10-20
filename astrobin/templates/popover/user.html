@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load tags %}
 {% load avatar_tags %}
+{% load toggleproperty_tags %}
 
 <div class="user-popover">
     <div class="thumbnail astrobin-thumbnail">
@@ -22,17 +23,7 @@
 
 		<div class="actions">
 		    {% if is_authenticated %}
-		        {% if follows %}
-		            <a class="btn btn-mini btn-primary unfollow-user" data-user="{{user}}" href="{% url unfollow user %}">
-		            	<i class="icon-eye-close"></i>
-		            	{% trans "Unfollow" %}
-		           	</a>
-		        {% else %}
-		            <a class="btn btn-mini btn-primary follow-user" data-user="{{user}}" href="{% url follow user %}">
-		            	<i class="icon-eye-open"></i>
-		            	{% trans "Follow" %}
-		            </a>
-		        {% endif %}
+                {% add_remove_toggleproperty "follow" user request.user %}
 		    {% endif %}
 		    <a class="btn btn-mini btn-primary" href="{% url user_page user %}">
 		    	<i class="icon-picture"></i>

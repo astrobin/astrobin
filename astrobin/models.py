@@ -1528,10 +1528,6 @@ class UserProfile(models.Model):
     filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"), related_name='filters')
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"), related_name='accessories')
 
-    follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers', symmetrical=False)
-    follows_gear = models.ManyToManyField('gear', null=True, blank=True)
-    follows_subjects = models.ManyToManyField('Subject', null=True, blank=True)
-
     default_license = models.IntegerField(
         choices = LICENSE_CHOICES,
         default = 0,

@@ -191,13 +191,6 @@ urlpatterns = patterns('',
         views.stats_gear_total_images_ajax,
         name = 'stats_gear_total_images'),
 
-    url(r'^follow/(?P<username>[\w.@+-]+)/$', views.follow, name='follow'),
-    url(r'^unfollow/(?P<username>[\w.@+-]+)/$', views.unfollow, name='unfollow'),
-    url(r'^follow_gear/(?P<id>\d+)/$', views.follow_gear, name='follow_gear'),
-    url(r'^unfollow_gear/(?P<id>\d+)/$', views.unfollow_gear, name='unfollow_gear'),
-    url(r'^follow_subject/(?P<id>\d+)/$', views.follow_subject, name='follow_subject'),
-    url(r'^unfollow_subject/(?P<id>\d+)/$', views.unfollow_subject, name='unfollow_subject'),
-
        (r'^notices/', include('notification.urls')),
     url(r'^push_notification/$', views.push_notification, name='push_notification'),
     url(r'^notifications/seen/$', views.mark_notifications_seen, name='mark_notification_seen'),

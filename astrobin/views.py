@@ -236,7 +236,11 @@ def index(request, template = 'index/root.html', extra_context = None):
             if followed_user_ids is None:
                 followed_user_ids = [
                     str(x) for x in
-                    profile.follows.all().values_list('user__id', flat = True)
+                    ToggleProperty.objects.filter(
+                        property_type = "follow",
+                        user = request.user,
+                        content_type = ContentType.objects.get_for_model(User)
+                    ).values_list('object_id', flat = True)
                 ]
                 cache.set(cache_key, followed_user_ids, 900)
 
@@ -646,18 +650,9 @@ def image_detail(request, id, r):
 
 
 
-    ###############
-    # FOLLOW DATA #
-    ###############
-
-    follows = False
     profile = None
     if request.user.is_authenticated():
         profile = request.user.userprofile
-    if profile:
-        if image.user.userprofile in profile.follows.all():
-            follows = True
-
 
 
     ##############
@@ -736,7 +731,6 @@ def image_detail(request, id, r):
         'ssa': ssa,
         'deep_sky_data': deep_sky_data,
         # TODO: check that solved image is correcly laid on top
-        'follows': follows,
         'private_message_form': PrivateMessageForm(),
         'upload_revision_form': ImageRevisionUploadForm(),
         'dates_label': _("Dates"),
@@ -1537,10 +1531,7 @@ def image_promote(request, id):
         image.is_wip = False
         image.save()
 
-        followers = [x.from_userprofile.user
-                     for x in
-                     UserProfile.follows.through.objects.filter(
-                        to_userprofile = profile)]
+        followers = [x.user for x in ToggleProperty.objects.toggleproperties_for_object("follow", request.user)]
         push_notification(followers, 'new_image',
             {
                 'originator': request.user,
@@ -1577,13 +1568,9 @@ def user_page(request, username):
     user = get_object_or_404(User, username = username)
     profile = user.userprofile
 
-    follows = False
     viewer_profile = None
     if request.user.is_authenticated():
         viewer_profile = request.user.userprofile
-    if viewer_profile:
-        if user.userprofile in viewer_profile.follows.all():
-            follows = True
 
     section = 'public'
     subsection = request.GET.get('sub', 'year')
@@ -1767,7 +1754,7 @@ def user_page(request, username):
         viewer_profile = request.user.userprofile
         last_login = to_user_timezone(user.last_login, viewer_profile)
 
-    followers = profile.followers.all().count()
+    followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
 
     sqs = SearchQuerySet()
     sqs = sqs.filter(username = user.username).models(Image)
@@ -1794,7 +1781,6 @@ def user_page(request, username):
         'view': request.GET.get('view', 'default'),
         'user':user,
         'profile':profile,
-        'follows':follows,
         'private_message_form': PrivateMessageForm(),
         'section':section,
         'subsection':subsection,
@@ -2470,135 +2456,6 @@ def user_profile_save_preferences(request):
 
 @login_required
 @require_GET
-def follow(request, username):
-    from_profile = request.user.userprofile
-    to_user = get_object_or_404(User, username=username)
-    to_profile = to_user.userprofile
-
-    if to_profile not in from_profile.follows.all():
-        from_profile.follows.add(to_profile)
-
-    push_notification([to_user], 'new_follower',
-                      {'object':request.user.username,
-                       'object_url':from_profile.get_absolute_url()})
-    push_notification([request.user], 'follow_success',
-                      {'object':username,
-                       'object_url':to_profile.get_absolute_url()})
-
-    if request.is_ajax():
-        return ajax_success()
-    else:
-        next_page = '/'
-        if 'next' in request.GET:
-            next_page = request.GET.get('next')
-        return HttpResponseRedirect(next_page)
-
-
-@login_required
-@require_GET
-def unfollow(request, username):
-    from_profile = request.user.userprofile
-    to_user = get_object_or_404(User, username=username)
-    to_profile = to_user.userprofile
-
-    if to_profile in from_profile.follows.all():
-        from_profile.follows.remove(to_profile)
-
-    push_notification([request.user], 'unfollow_success',
-                      {'object':username,
-                       'object_url':to_profile.get_absolute_url()})
-
-    if request.is_ajax():
-        return ajax_success()
-    else:
-        next_page = '/'
-        if 'next' in request.GET:
-            next_page = request.GET.get('next')
-        return HttpResponseRedirect(next_page)
-
-
-@login_required
-@require_GET
-def follow_gear(request, id):
-    gear = get_object_or_404(Gear, id = id)
-    profile = request.user.userprofile
-
-    if gear not in profile.follows_gear.all():
-        profile.follows_gear.add(gear)
-        profile.save()
-        if request.is_ajax():
-            return ajax_success()
-        else:
-            next_page = '/'
-            if 'next' in request.GET:
-                next_page = request.GET.get('next')
-            return HttpResponseRedirect(next_page)
-
-    return ajax_fail()
-
-
-@login_required
-@require_GET
-def unfollow_gear(request, id):
-    gear = get_object_or_404(Gear, id = id)
-    profile = request.user.userprofile
-
-    if gear in profile.follows_gear.all():
-        profile.follows_gear.remove(gear)
-        profile.save()
-        if request.is_ajax():
-            return ajax_success()
-        else:
-            next_page = '/'
-            if 'next' in request.GET:
-                next_page = request.GET.get('next')
-            return HttpResponseRedirect(next_page)
-
-    return ajax_fail()
-
-
-@login_required
-@require_GET
-def follow_subject(request, id):
-    subject = get_object_or_404(Subject, id = id)
-    profile = request.user.userprofile
-
-    if subject not in profile.follows_subjects.all():
-        profile.follows_subjects.add(subject)
-        profile.save()
-        if request.is_ajax():
-            return ajax_success()
-        else:
-            next_page = '/'
-            if 'next' in request.GET:
-                next_page = request.GET.get('next')
-            return HttpResponseRedirect(next_page)
-
-    return ajax_fail()
-
-
-@login_required
-@require_GET
-def unfollow_subject(request, id):
-    subject = get_object_or_404(Subject, id = id)
-    profile = request.user.userprofile
-
-    if subject in profile.follows_subjects.all():
-        profile.follows_subjects.remove(subject)
-        profile.save()
-        if request.is_ajax():
-            return ajax_success()
-        else:
-            next_page = '/'
-            if 'next' in request.GET:
-                next_page = request.GET.get('next')
-            return HttpResponseRedirect(next_page)
-
-    return ajax_fail()
-
-
-@login_required
-@require_GET
 def mark_notifications_seen(request):
     for n in notification.Notice.objects.filter(recipient=request.user):
         return ajax_success()
@@ -3167,15 +3024,11 @@ def gear_popover_ajax(request, id):
     elif gear_type == 'Accessory':
         template = 'popover/gear_accessory.html'
 
-    follows = Gear.objects.get(id = gear.id) in profile.follows_gear.all() \
-              if profile \
-              else False
     html = render_to_string(template,
         {
             'request': request,
             'user': request.user,
             'gear': gear,
-            'follows': follows,
             'is_authenticated': request.user.is_authenticated(),
             'IMAGES_URL': settings.IMAGES_URL,
         })
@@ -3199,15 +3052,11 @@ def subject_popover_ajax(request, id):
               if request.user.is_authenticated() \
               else None
 
-    follows = subject in profile.follows_subjects.all() \
-              if profile \
-              else False
-
     html = render_to_string(template,
         {
             'subject': subject,
-            'follows': follows,
             'is_authenticated': request.user.is_authenticated(),
+            'request': request,
         })
 
     response_dict = {
@@ -3229,10 +3078,6 @@ def user_popover_ajax(request, username):
               if request.user.is_authenticated() \
               else None
 
-    follows = user in profile.follows.all() \
-              if profile \
-              else False
-
     from django.template.defaultfilters import timesince
 
     member_since = None
@@ -3250,8 +3095,8 @@ def user_popover_ajax(request, username):
             'user': user,
             'images': Image.objects.filter(user = user).count(),
             'member_since': member_since,
-            'follows': follows,
             'is_authenticated': request.user.is_authenticated(),
+            'request': request,
         })
 
     response_dict = {
