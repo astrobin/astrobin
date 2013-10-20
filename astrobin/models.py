@@ -43,6 +43,15 @@ from toggleproperties.models import ToggleProperty
 
 from astrobin_apps_platesolving.models import Solution
 
+class HasSolutionMixin(object):
+     @property
+     def solution(self):
+         ctype = ContentType.objects.get_for_model(self.__class__)
+         try:
+             solution = Solution.objects.get(content_type__pk = ctype.id, object_id=self.id)
+         except:
+            return None
+         return solution
 
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -686,7 +695,7 @@ class SubjectIdentifier(models.Model):
 # TODO: remember that thumbnails must return 'final' version
 # TODO: notifications for gear and subjects after upload
 # TODO: this makes animated gifs static :-(
-class Image(models.Model):
+class Image(HasSolutionMixin, models.Model):
     BINNING_CHOICES = (
         (1, '1x1'),
         (2, '2x2'),
@@ -867,12 +876,6 @@ class Image(models.Model):
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
 
     user = models.ForeignKey(User)
-
-    solution = models.OneToOneField(
-        Solution,
-        null = True,
-        on_delete = models.SET_NULL,
-    )
 
     plot_is_overlay = models.BooleanField(editable=False, default=False)
     is_wip = models.BooleanField(editable=False, default=False)
@@ -1094,7 +1097,7 @@ def image_post_save(sender, instance, created, **kwargs):
 post_save.connect(image_post_save, sender = Image)
 
 
-class ImageRevision(models.Model):
+class ImageRevision(HasSolutionMixin, models.Model):
     image = models.ForeignKey(Image)
     image_file = models.ImageField(
         upload_to = image_upload_path,
@@ -1104,8 +1107,6 @@ class ImageRevision(models.Model):
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)
-
-    is_solved = models.BooleanField(editable=False)
 
     is_final = models.BooleanField(
         editable = False,
@@ -1144,6 +1145,9 @@ class ImageRevision(models.Model):
             return '/%i/%s/full/' % (self.image.id, self.label)
 
         return '/%i/%s/' % (self.image.id, self.label)
+
+    def thumbnail_raw(self, alias, thumbnail_settings = {}):
+        return self.image.thumbnail_raw(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
 
     def thumbnail(self, alias, thumbnail_settings = {}):
         return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))

@@ -12,6 +12,7 @@
         this.$icon = this.$root.find('i');
 
         this.updateQueries = 0;
+        this.missingCounter = 0;
 
         $.extend(this, config);
 
@@ -20,7 +21,7 @@
 
     Platesolving.prototype = {
         process: function() {
-            if (this.solution === 0) {
+            if (this.solution_id === 0) {
                 /* The platesolving has never been attempted on this resource. */
                 this.solve();
             } else {
@@ -34,11 +35,11 @@
             self.onStarting();
 
             $.ajax({
-                url: this.solveURL + this.image + '/',
+                url: this.solveURL + this.object_id + '/' + this.content_type_id + '/',
                 type: 'post',
                 timeout: 30000,
                 success: function(data, textStatus, jqXHR) {
-                    self.solution = data['solution'];
+                    self.solution_id = data['solution'];
                     self.onStarted();
                 }
             });
@@ -48,7 +49,7 @@
             var self = this;
 
             $.ajax({
-                url: self.statusURL + self.solution + '/',
+                url: self.statusURL + self.solution_id + '/',
                 success: function(data, textStatus, jqXHR) {
                     switch (data['status']) {
                         case 0: self.onStatusMissing(); break;
@@ -64,7 +65,7 @@
             var self = this;
 
             $.ajax({
-                url: self.updateURL + self.solution + '/',
+                url: self.updateURL + self.solution_id + '/',
                 type: 'post',
                 timeout: 30000,
                 success: function(data, textStatus, jqXHR) {
@@ -78,7 +79,7 @@
                             self.$icon.attr('class', 'icon-warning-sign');
                             self.$content.text(self.solveFinalizingMsg);
                             $.ajax({
-                                url: self.finalizeURL + self.solution + '/',
+                                url: self.finalizeURL + self.solution_id + '/',
                                 type: 'post',
                                 timeout: 30000,
                                 success: function(data, textStatus, jqXHR) {
@@ -92,6 +93,7 @@
         },
 
         onStarting: function() {
+            this.missingCounter = 0;
             this.$root.removeClass('hide');
             this.$content.text(this.beforeSolveMsg);
         },
@@ -101,7 +103,15 @@
         },
 
         onStatusMissing: function() {
-            this.solve();
+            var self = this;
+            if (self.missingCounter > 5)
+                self.solve();
+            else
+                setTimeout(function() {
+                    self.update();
+                }, 3000);
+
+            self.missingCounter += 1;
         },
 
         onStatusPending: function() {
@@ -117,7 +127,7 @@
             else
                 setTimeout(function() {
                     self.update();
-                }, 5000);
+                }, 3000);
         },
 
         onStatusFailed: function() {

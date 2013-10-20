@@ -8,7 +8,7 @@
         {% if show_solution %}
             <div class="astrobin-image-container plot-overlay">
                 <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
-                    <img src="{{IMAGES_URL}}{{image.solution.image_file}}" alt="{{image.title|escape}}" />
+                    <img src="{{IMAGES_URL}}{{instance_to_platesolve.solution.image_file}}" alt="{{image.title|escape}}" />
                 </a>
             </div>
         {% endif %}

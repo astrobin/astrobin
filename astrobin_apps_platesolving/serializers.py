@@ -11,6 +11,8 @@ class SolutionSerializer(serializers.ModelSerializer):
         read_only_fields = (
             'status',
             'submission_id',
+            'content_type',
+            'object_id',
             'image_file',
             'objects_in_field',
             'ra',

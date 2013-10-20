@@ -2,6 +2,7 @@
 import simplejson
 
 # Django
+from django.contrib.contenttypes.models import ContentType
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import base
@@ -9,10 +10,6 @@ from django.views.generic import base
 # restframework
 from rest_framework import generics
 from rest_framework import permissions
-
-# AstroBin apps
-from astrobin.models import Image # TODO: model will be moved to astrobin_apps_images
-from common.mixins import AjaxableResponseMixin
 
 # This app
 from astrobin_apps_platesolving.models import Solution
@@ -22,19 +19,16 @@ from astrobin_apps_platesolving.solver import Solver
 
 class SolveView(base.View):
     def post(self, request, *args, **kwargs):
-        image = get_object_or_404(Image, pk = kwargs.pop('pk'))
-        solution = image.solution
+        object_id = kwargs.pop('object_id')
+        content_type_id = kwargs.pop('content_type_id')
 
-        if solution is None:
-            solution = Solution()
-            solution.save()
-
-            image.solution = solution
-            image.save()
+        content_type = ContentType.objects.get_for_id(content_type_id)
+        target = get_object_or_404(content_type.model_class(), pk = object_id)
+        solution, created = Solution.objects.get_or_create(object_id = object_id, content_type = content_type)
 
         if solution.submission_id is None:
             solver = Solver()
-            thumb = image.thumbnail_raw('regular', {'revision_label': 0})
+            thumb = target.thumbnail_raw('regular')
             submission = solver.solve(thumb.file)
             solution.status = Solver.PENDING
             solution.submission_id = submission
@@ -55,7 +49,6 @@ class SolutionUpdateView(base.View):
 
         if status == Solver.MISSING:
             solution.status = status
-            solution.submission_id = None
             solution.save()
 
         context = {'status': status}
@@ -89,7 +82,9 @@ class SolutionFinalizeView(base.View):
             img.flush()
             img.seek(0)
             f = File(img)
-            solution.image_file.save(solution.image.image_file.name, f)
+
+            target = solution.content_type.get_object_for_this_type(pk = solution.object_id)
+            solution.image_file.save(target.image_file.name, f)
 
         solution.save()
 

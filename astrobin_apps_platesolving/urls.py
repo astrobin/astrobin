@@ -9,7 +9,7 @@ from astrobin_apps_platesolving.views.solution import SolutionFinalizeView
 
 urlpatterns = patterns('',
     url(
-        r'solve/(?P<pk>\d+)/$',
+        r'solve/(?P<object_id>\d+)/(?P<content_type_id>\d+)/$',
         SolveView.as_view(),
         name = 'astrobin_apps_platesolution.solve'),
 
