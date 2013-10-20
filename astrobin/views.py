@@ -307,6 +307,17 @@ def index(request, template = 'index/root.html', extra_context = None):
             response_dict['actions'] = actions
             response_dict['cache_prefix'] = 'astrobin_personal_actions'
 
+        elif section == 'followed':
+            user = User.objects.get(pk = request.user.pk)
+            user_ct = ContentType.objects.get_for_model(User)
+            followers = [user_ct.get_object_for_this_type(pk = x.object_id) for x in ToggleProperty.objects.filter(
+                property_type = "follow",
+                content_type = ContentType.objects.get_for_model(User),
+                user = user)]
+
+            response_dict['recent_images'] = \
+                Image.objects.filter(is_wip = False, user__in = followers)
+
         elif section == 'liked':
             image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
             response_dict['recent_images'] = \
