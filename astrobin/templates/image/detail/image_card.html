@@ -74,14 +74,14 @@
                         {% endif %}
                     {% endif %}
 
-                    {% if image.solution and image.solution.ra %}
-                        <p><strong>{% trans "RA center" %}</strong>: {{image.solution.ra}} {% trans "degrees" %}</p>
-                        <p><strong>{% trans "DEC center" %}</strong>: {{image.solution.dec}} {% trans "degrees" %}</p>
-                        {% if image.pixscale != 0 %}
-                            <p><strong>{% trans "Pixel scale" %}</strong>: {{image.solution.pixscale}} {% trans "arcsec/pixel" %}</p>
+                    {% if instance_to_platesolve.solution and instance_to_platesolve.solution.ra %}
+                        <p><strong>{% trans "RA center" %}</strong>: {{instance_to_platesolve.solution.ra}} {% trans "degrees" %}</p>
+                        <p><strong>{% trans "DEC center" %}</strong>: {{instance_to_platesolve.solution.dec}} {% trans "degrees" %}</p>
+                        {% if instance_to_platesolve.pixscale != 0 %}
+                            <p><strong>{% trans "Pixel scale" %}</strong>: {{instance_to_platesolve.solution.pixscale}} {% trans "arcsec/pixel" %}</p>
                         {% endif %}
-                        <p><strong>{% trans "Orientation" %}</strong>: {{image.solution.orientation}} {% trans "degrees" %}</p>
-                        <p><strong>{% trans "Field radius" %}</strong>: {{image.solution.radius}} {% trans "degrees" %}</p>
+                        <p><strong>{% trans "Orientation" %}</strong>: {{instance_to_platesolve.solution.orientation}} {% trans "degrees" %}</p>
+                        <p><strong>{% trans "Field radius" %}</strong>: {{instance_to_platesolve.solution.radius}} {% trans "degrees" %}</p>
                     {% endif %}
                 </div> <!-- acquisition-inner -->
             </div> <!-- acquisition -->
