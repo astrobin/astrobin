@@ -277,6 +277,9 @@ class UserIndex(SearchIndex):
     # Total likes of all user's images.
     likes = IntegerField()
 
+    # Number of followers
+    followers = IntegerField()
+
     # Total user ingegration.
     integration = FloatField()
 
@@ -341,6 +344,13 @@ class UserIndex(SearchIndex):
         for i in Image.objects.filter(user = obj, is_wip = False):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
+
+    def prepare_followers(self, obj):
+        return ToggleProperty.objects.filter(
+            property_type = "follow",
+            content_type = ContentType.objects.get_for_model(User),
+            object_id = obj.pk
+        ).count()
 
     def prepare_integration(self, obj):
         integration = 0

@@ -1161,7 +1161,7 @@ li.astrobin-thumbnail {
 
 h1, h2, h3, h4, h5, h6 {
     margin-top: @spacer-xlarge;
-    margin-bottom: @spacer-medium;
+    margin-bottom: @spacer-xxlarge;
     font-family: @headers_font;
 }
 h2 {
@@ -1679,10 +1679,6 @@ div.capty-target {
     }
 }
 
-.user-card .stats {
-    margin-top: @spacer-large;
-}
-
 .avatar-block {
     .avatar, .username {
         float: left;
@@ -1727,8 +1723,16 @@ div.capty-target {
 }
 
 .avatar {
+  position: relative;
+
   img {
     .rounded-corners(12px);
+  }
+
+  .property-follow {
+      position: absolute;
+      top: 8px;
+      right: 8px;
   }
 }
 
@@ -3376,12 +3380,47 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
     }
 }
 
-#profile-followers .label {
-    width: 152px;
-    font-size: 14px;
-    padding: 7px 0;
-    text-align: center;
-    margin-top: @spacer-medium;
+#profile-details {
+    margin-top: 8px;
+    padding: 6px;
+    overflow: hidden;
+    .rounded-corners(12px);
+    background: #232323;
+
+    ul {
+        list-style: none;
+        margin: 0;
+
+        li {
+            display: inline;
+
+            > a {
+                float: left;
+                color: #d6d6d6;
+                text-transform: uppercase;
+                padding: 4px 8px;
+                font-size: 9px;
+                text-align: center;
+                border-right: 1px solid #262626;
+
+                &:hover, &:hover strong {
+                    color: @link-color;
+                }
+
+                strong {
+                    display: block;
+                    font-size: 14px;
+                    color: white;
+                }
+            }
+
+            &:last-child {
+                > a {
+                    border: none;
+                }
+            }
+        }
+    }
 }
 
 #platesolving-status {
@@ -3430,3 +3469,46 @@ a.index-section-link {
 .btn-primary:active, .btn-primary.active {
     color: #FF7F50;
 }
+
+ul.user-list {
+    list-style: none;
+    margin: 0;
+
+    li {
+        float: left;
+        padding: 2px;
+    }
+}
+
+.user-card .stats {
+    margin-top: @spacer-large;
+}
+
+.user-card-inline {
+    margin: 0 32px 32px 0;
+
+    .avatar {
+        float: left;
+    }
+
+    #profile-details {
+        float: left;
+        margin-top: 0;
+        margin-left: 16px;
+
+        li {
+            padding: 0;
+
+            a {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .property-follow {
+                float: left;
+                margin: 4px 8px 0 12px
+            }
+        }
+    }
+}
+

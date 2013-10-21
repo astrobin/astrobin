@@ -158,6 +158,9 @@ def index(request, template = 'index/root.html', extra_context = None):
     from django.core.cache import cache
 
     section = request.GET.get('s', 'personal')
+    image_ct = ContentType.objects.get_for_model(Image)
+    image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
+    user_ct = ContentType.objects.get_for_model(User)
 
     response_dict = {
         'registration_form': RegistrationForm(),
@@ -256,10 +259,6 @@ def index(request, template = 'index/root.html', extra_context = None):
                 ]
                 cache.set(cache_key, followees_image_ids, 900)
 
-            image_ct = ContentType.objects.get_for_model(Image)
-            image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
-            user_ct = ContentType.objects.get_for_model(User)
-
             actions = Action.objects\
                 .prefetch_related(
                     'actor__userprofile',
@@ -313,7 +312,6 @@ def index(request, template = 'index/root.html', extra_context = None):
 
         elif section == 'followed':
             user = User.objects.get(pk = request.user.pk)
-            user_ct = ContentType.objects.get_for_model(User)
             followers = [user_ct.get_object_for_this_type(pk = x.object_id) for x in ToggleProperty.objects.filter(
                 property_type = "follow",
                 content_type = ContentType.objects.get_for_model(User),
@@ -323,7 +321,6 @@ def index(request, template = 'index/root.html', extra_context = None):
                 Image.objects.filter(is_wip = False, user__in = followers)
 
         elif section == 'liked':
-            image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
             response_dict['recent_images'] = \
                 Image.objects.raw(
                     "DROP TABLE IF EXISTS recently_liked_to_show;" +
@@ -1582,6 +1579,7 @@ def user_page(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(User, username = username)
     profile = user.userprofile
+    user_ct = ContentType.objects.get_for_model(User)
 
     viewer_profile = None
     if request.user.is_authenticated():
@@ -1770,6 +1768,10 @@ def user_page(request, username):
         last_login = to_user_timezone(user.last_login, viewer_profile)
 
     followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
+    following = ToggleProperty.objects.filter(
+        property_type = "follow",
+        user = user,
+        content_type = user_ct).count()
 
     sqs = SearchQuerySet()
     sqs = sqs.filter(username = user.username).models(Image)
@@ -1783,7 +1785,6 @@ def user_page(request, username):
     stats = (
         (_('Member since'), member_since),
         (_('Last login'), last_login),
-        (_('Images uploaded'), str(images)),
         (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
         (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
     )
@@ -1791,6 +1792,7 @@ def user_page(request, username):
 
     response_dict = {
         'followers': followers,
+        'following': following,
         'image_list': qs,
         'sort': request.GET.get('sort'),
         'view': request.GET.get('view', 'default'),
@@ -1802,6 +1804,7 @@ def user_page(request, username):
         'active':active,
         'menu':menu,
         'stats':stats,
+        'images_no': images,
         'alias':'gallery',
     }
 
@@ -1858,6 +1861,70 @@ def user_page_bookmarks(request, username):
         {
             'user': user,
             'bookmarks': images,
+            'private_message_form': PrivateMessageForm(),
+        },
+        context_instance = RequestContext(request)
+    )
+
+
+@require_GET
+@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key = 'users_page')
+def user_page_following(request, username, extra_context = None):
+    user = get_object_or_404(User, username = username)
+
+    user_ct = ContentType.objects.get_for_model(User)
+    followed_users = [
+        user_ct.get_object_for_this_type(pk = x.object_id) for x in
+        ToggleProperty.objects.filter(
+            property_type = "follow",
+            user = user,
+            content_type = user_ct)
+    ]
+
+    template_name = 'user/following.html'
+    if request.is_ajax():
+        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
+
+    return render_to_response(template_name,
+        {
+            'request_user': User.objects.get(pk = request.user.pk),
+            'layout': 'inline',
+            'user': user,
+            'user_list': followed_users,
+            'view': request.GET.get('view', 'default'),
+            'STATIC_URL': settings.STATIC_URL,
+            'private_message_form': PrivateMessageForm(),
+        },
+        context_instance = RequestContext(request)
+    )
+
+
+@require_GET
+@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key = 'users_page')
+def user_page_followers(request, username, extra_context = None):
+    user = get_object_or_404(User, username = username)
+
+    user_ct = ContentType.objects.get_for_model(User)
+    followers = [
+        x.user for x in
+        ToggleProperty.objects.filter(
+            property_type = "follow",
+            object_id = request.user.pk,
+            content_type = user_ct)
+    ]
+
+    template_name = 'user/followers.html'
+    if request.is_ajax():
+        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
+
+    return render_to_response(template_name,
+        {
+            'request_user': User.objects.get(pk = request.user.pk),
+            'layout': 'inline',
+            'user': user,
+            'user_list': followers,
+            'view': request.GET.get('view', 'default'),
+            'STATIC_URL': settings.STATIC_URL,
             'private_message_form': PrivateMessageForm(),
         },
         context_instance = RequestContext(request)
@@ -2687,6 +2754,8 @@ def leaderboard(request):
         sort = request.GET.get('sort')
         if sort == 'likes':
             sort = '-likes'
+        elif sort == 'followers':
+            sort = '-followers'
         elif sort == 'integration':
             sort = '-integration'
         elif sort == 'avg_integration':

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load avatar_tags %}
+{% load astrobin_apps_users_tags %}
 {% load common_tags %}
 {% load i18n %}
 {% load tags %}
@@ -19,39 +20,7 @@
 
 <div class="row">
     <div class="span3">
-        <div class="subtle-container user-card">
-            <div class="header">
-                <h4>
-                    {{user.userprofile}}
-                </h4>
-            </div>
-
-            <div class="avatar">
-                <a href="{% url user_page user %}">
-                    {% avatar user 194 %}
-                </a>
-            </div>
-
-            <div id="profile-followers">
-                {% add_remove_toggleproperty "follow" user request.user %}
-                <div class="label label-success">
-                    {% trans "Followers" %}: {{followers}}
-                </div>
-            </div>
-
-            {% if stats %}
-                <small>
-                    <dl class="stats">
-                        {% for i in stats %}
-                            {% if i.1 %}
-                                <dt>{{i.0}}</dt>
-                                <dd>{{i.1}}</dd>
-                            {% endif %}
-                        {% endfor %}
-                    </dl>
-                </small>
-            {% endif %}
-        </div>
+        {% astrobin_user user %}
 
         {% if menu %}
             <ul class="nav nav-tabs nav-stacked">
@@ -65,6 +34,26 @@
                 {% endfor %}
             </ul>
         {% endif %}
+
+        {% if stats %}
+        <div class="subtle-container">
+            <div class="header">
+                <h4>
+                    {% trans "Stats" %}
+                </h4>
+            </div>
+
+            {% for i in stats %}
+                {% if i.1 %}
+                    <p>
+                        {{i.0}}<br/>
+                        <strong>{{i.1}}</strong>
+                    </p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
     </div>
 
     <div class="span9"> <!-- images -->

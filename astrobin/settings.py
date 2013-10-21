@@ -210,6 +210,7 @@ INSTALLED_APPS = (
     'rawdata',
     'astrobin_apps_images',
     'astrobin_apps_platesolving',
+    'astrobin_apps_users',
 
     'toggleproperties',
 
