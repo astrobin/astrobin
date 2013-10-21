@@ -203,7 +203,10 @@ def index(request, template = 'index/root.html', extra_context = None):
             ##################
             # GLOBAL ACTIONS #
             ##################
-            actions = Action.objects.all()
+            actions = Action.objects.all().prefetch_related(
+                'actor__userprofile',
+                'target_content_type',
+                'target')
             response_dict['actions'] = actions
             response_dict['cache_prefix'] = 'astrobin_global_actions'
 
@@ -253,54 +256,55 @@ def index(request, template = 'index/root.html', extra_context = None):
                 ]
                 cache.set(cache_key, followees_image_ids, 900)
 
-            actions = Action.objects.filter(
+            image_ct = ContentType.objects.get_for_model(Image)
+            image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
+            user_ct = ContentType.objects.get_for_model(User)
+
+            actions = Action.objects\
+                .prefetch_related(
+                    'actor__userprofile',
+                    'target_content_type',
+                    'target'
+                ).filter(
                     # Actor is user, or...
                     Q(
-                        Q(actor_content_type__app_label = 'auth') &
-                        Q(actor_content_type__model = 'user') &
+                        Q(actor_content_type = user_ct) &
                         Q(actor_object_id = request.user.id)
                     ) |
 
                     # Action concerns user's images as target, or...
                     Q(
-                        Q(target_content_type__app_label = 'astrobin') &
-                        Q(target_content_type__model = 'image') &
+                        Q(target_content_type = image_ct) &
                         Q(target_object_id__in = users_image_ids)
                     ) |
                     Q(
-                        Q(target_content_type__app_label = 'astrobin') &
-                        Q(target_content_type__model = 'imagerevision') &
+                        Q(target_content_type = image_rev_ct) &
                         Q(target_object_id__in = users_revision_ids)
                     ) |
 
                     # Action concerns user's images as object, or...
                     Q(
-                        Q(action_object_content_type__app_label = 'astrobin') &
-                        Q(action_object_content_type__model = 'image') &
+                        Q(action_object_content_type = image_ct) &
                         Q(action_object_object_id__in = users_image_ids)
                     ) |
                     Q(
-                        Q(action_object_content_type__app_label = 'astrobin') &
-                        Q(action_object_content_type__model = 'imagerevision') &
+                        Q(action_object_content_type = image_rev_ct) &
                         Q(action_object_object_id__in = users_revision_ids)
                     ) |
 
                     # Actor is somebody the user follows, or...
                     Q(
-                        Q(actor_content_type__app_label = 'auth') &
-                        Q(actor_content_type__model = 'user') &
+                        Q(actor_content_type = user_ct) &
                         Q(actor_object_id__in = followed_user_ids)
                     ) |
 
                     # Action concerns an image by a followed user...
                     Q(
-                        Q(target_content_type__app_label = 'astrobin') &
-                        Q(target_content_type__model = 'image') &
+                        Q(target_content_type = image_ct) &
                         Q(target_object_id__in = followees_image_ids)
                     ) |
                     Q(
-                        Q(action_object_content_type__app_label = 'astrobin') &
-                        Q(action_object_content_type__model = 'image') &
+                        Q(action_object_content_type = image_ct) &
                         Q(action_object_object_id__in = followees_image_ids)
                     )
                 )
