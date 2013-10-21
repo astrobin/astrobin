@@ -999,7 +999,7 @@ h4,
 h5,
 h6 {
   margin-top: 16px;
-  margin-bottom: 8px;
+  margin-bottom: 28px;
   font-family: Georgia, Times, serif;
 }
 h2 {
@@ -1494,9 +1494,6 @@ div.capty-target .capty-caption-content .link-overlay a {
 .image-detail .image-detail-inner .image-histogram {
   margin-top: 28px;
 }
-.user-card .stats {
-  margin-top: 12px;
-}
 .avatar-block .avatar,
 .avatar-block .username {
   float: left;
@@ -1537,10 +1534,18 @@ div.capty-target .capty-caption-content .link-overlay a {
   color: #fcfcfc;
   font-weight: bold;
 }
+.avatar {
+  position: relative;
+}
 .avatar img {
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   border-radius: 12px;
+}
+.avatar .property-follow {
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 .explore-comment-container,
 .explore-review-container {
@@ -3158,12 +3163,42 @@ table#private-shared-folders tr:hover a.delete-folder {
   font-size: x-small;
   font-style: italic;
 }
-#profile-followers .label {
-  width: 152px;
-  font-size: 14px;
-  padding: 7px 0;
-  text-align: center;
+#profile-details {
   margin-top: 8px;
+  padding: 6px;
+  overflow: hidden;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+  background: #232323;
+}
+#profile-details ul {
+  list-style: none;
+  margin: 0;
+}
+#profile-details ul li {
+  display: inline;
+}
+#profile-details ul li > a {
+  float: left;
+  color: #d6d6d6;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  font-size: 9px;
+  text-align: center;
+  border-right: 1px solid #262626;
+}
+#profile-details ul li > a:hover,
+#profile-details ul li > a:hover strong {
+  color: #cc4b2e;
+}
+#profile-details ul li > a strong {
+  display: block;
+  font-size: 14px;
+  color: white;
+}
+#profile-details ul li:last-child > a {
+  border: none;
 }
 #platesolving-status .progress {
   height: 32px;
@@ -3202,4 +3237,37 @@ a.index-section-link {
 .btn-primary:active,
 .btn-primary.active {
   color: #FF7F50;
+}
+ul.user-list {
+  list-style: none;
+  margin: 0;
+}
+ul.user-list li {
+  float: left;
+  padding: 2px;
+}
+.user-card .stats {
+  margin-top: 12px;
+}
+.user-card-inline {
+  margin: 0 32px 32px 0;
+}
+.user-card-inline .avatar {
+  float: left;
+}
+.user-card-inline #profile-details {
+  float: left;
+  margin-top: 0;
+  margin-left: 16px;
+}
+.user-card-inline #profile-details li {
+  padding: 0;
+}
+.user-card-inline #profile-details li a {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.user-card-inline #profile-details li .property-follow {
+  float: left;
+  margin: 4px 8px 0 12px;
 }

@@ -52,8 +52,6 @@ def user_profile(request):
 def user_scores(request):
     scores = {
         'user_scores_likes': 0,
-        'user_scores_images': 0,
-        'user_scores_comments': 0,
         'user_scores_followers': 0,
     }
 
@@ -75,8 +73,6 @@ def user_scores(request):
 
 
             scores['user_scores_likes'] = likes
-            scores['user_scores_images'] = all_images.count()
-            scores['user_scores_comments'] =  NestedComment.objects.filter(author = request.user, deleted = False).count()
             scores['user_scores_followers'] = followers
             cache.set(cache_key, scores, 600)
 

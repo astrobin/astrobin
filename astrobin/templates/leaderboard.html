@@ -25,6 +25,11 @@
                                 </a>
                             </th>
                             <th>
+                                <a href="{% url leaderboard %}{% query_string "sort='followers'" "" %}">
+                                    {% trans "Followers" %} <i class="icon-sort"></i>
+                                </a>
+                            </th>
+                            <th>
                                 <a href="{% url leaderboard %}{% query_string "sort='integration'" "" %}">
                                     {% trans "Total integration" %} <i class="icon-sort"></i>
                                 </a>
@@ -59,6 +64,7 @@
                                 </a>
                             </td>
                             <td>{{u.likes}}</a></td>
+                            <td>{{u.followers}}</a></td>
                             <td>{{u.integration|floatformat}}</a></td>
                             <td>{{u.avg_integration|floatformat}}</a></td>
                             <td>{{u.images}}</td>

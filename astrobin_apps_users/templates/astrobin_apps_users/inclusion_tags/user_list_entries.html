@@ -1,0 +1,35 @@
+{% load astrobin_apps_users_tags %}
+{% load endless %}
+{% load i18n %}
+
+{% if view != 'list' %}
+    {% lazy_paginate 60 user_list using "user_list_page" %}
+{% endif %}
+
+
+{% for u in user_list %}
+
+    {% if view == 'list' %}
+        <tr>{% astrobin_user u layout %}</tr>
+    {% endif %}
+
+    {% if view == 'default' %}
+        <li>{% astrobin_user u layout %}</li>
+    {% endif %}
+
+{% empty %}
+
+    {% if view == 'list' %}
+        <td>{% trans "No users." %}</td>
+    {% endif %}
+
+    {% if view == 'default' %}
+        <li>{% trans "No users." %}</li>
+    {% endif %}
+
+{% endfor %}
+
+{% if view != 'list' %}
+    {% show_more %}
+{% endif %}
+

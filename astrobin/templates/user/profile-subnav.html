@@ -71,6 +71,20 @@
                     </a>
                 </li>
                 {% endifequal %}
+
+                <li class="divider"></li>
+                <li>
+                    <a href="{% url 'user_page_following' user %}">
+                        <i class="icon-eye-open"></i>
+                        {% trans "Following" %}
+                    </a>
+
+                <li>
+                    <a href="{% url 'user_page_followers' user %}">
+                        <i class="icon-eye-open"></i>
+                        {% trans "Followers" %}
+                    </a>
+                </li>
             </ul>
         </li>
 
