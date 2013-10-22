@@ -32,10 +32,11 @@
         {% if not is_final %}
         <li>
             {% if is_revision %}
-            <a href="{% url image_edit_revision_make_final revision_image.id %}">
+                <a href="{% url image_edit_revision_make_final revision_image.id %}">
             {% else %}
-            <a href="{% url image_edit_make_final image.id %}">
+                <a href="{% url image_edit_make_final image.id %}">
             {% endif %}
+
                 <i class="icon-ok"></i>
                 {% trans "Mark this revision as final" %}
             </a>
@@ -89,18 +90,18 @@
         <li>
         {% if not is_revision %}
             {% if revisions %}
-            <a class="delete-original danger" href="{% url image_delete_original image.id %}">
+            <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
                 <i class="icon-remove"></i>
                 {% trans "Delete original image" %}
             </a>
             {% else %}
-            <a class="delete-everything danger" href="{% url image_delete image.id %}">
+            <a data-toggle="modal" class="danger" href="#delete-modal">
                 <i class="icon-remove"></i>
-                {% trans "Delete everything" %}
+                {% trans "Delete" %}
             </a>
             {% endif %} <!-- revisions -->
         {% else %}
-            <a class="delete-revision danger" href="{% url image_delete_revision image.id %}">
+            <a data-toggle="modal" class="danger" href="#delete-revision-modal">
                 <i class="icon-remove"></i>
                 {% trans "Delete this revision" %}
             </a>

@@ -1,7 +1,7 @@
 (function(win) {
     function Platesolving(config) {
         this.solveURL  = '/platesolving/solve/';
-        this.statusURL = '/api/v2/platesolving/solutions/';
+        this.apiURL = '/api/v2/platesolving/solutions/';
         this.updateURL = '/platesolving/update/';
         this.finalizeURL = '/platesolving/finalize/';
 
@@ -49,7 +49,7 @@
             var self = this;
 
             $.ajax({
-                url: self.statusURL + self.solution_id + '/',
+                url: self.apiURL + self.solution_id + '/',
                 success: function(data, textStatus, jqXHR) {
                     switch (data['status']) {
                         case 0: self.onStatusMissing(); break;
@@ -92,6 +92,20 @@
             });
         },
 
+        restart: function() {
+            var self = this;
+            if (self.solution_id) {
+                $.ajax({
+                    url: self.apiURL + self.solution_id + '/',
+                    type: 'delete',
+                    timeout: 30000,
+                    success: function() {
+                        self.solve();
+                    }
+                });
+            }
+        },
+
         onStarting: function() {
             this.missingCounter = 0;
             this.$root.removeClass('hide');
@@ -105,7 +119,7 @@
         onStatusMissing: function() {
             var self = this;
             if (self.missingCounter > 5)
-                self.solve();
+                self.restart();
             else
                 setTimeout(function() {
                     self.update();
