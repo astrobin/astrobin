@@ -1436,9 +1436,12 @@ div.capty-target .capty-caption-content .link-overlay a {
 }
 .astrobin-image-container.plot-overlay img:hover {
   opacity: 1;
-  transition: opacity 0.25s ease-in-out;
-  -moz-transition: opacity 0.25s ease-in-out;
-  -webkit-transition: opacity 0.25s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+  -moz-transition: opacity 0.35s ease-in-out;
+  -webkit-transition: opacity 0.35s ease-in-out;
+}
+.astrobin-image-container.plot-overlay.plot-overlay-fixed img {
+  opacity: 1;
 }
 .main-image {
   text-align: center;
