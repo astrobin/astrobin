@@ -936,39 +936,8 @@ def image_upload_process(request):
     image.image_file.file.seek(0) # Because we opened it with PIL
     image.save()
 
+    messages.success(request, _("Image uploaded. After this basic information, remember to edit the gear and acquisition details using the Actions menu. Thank you!"))
     return HttpResponseRedirect("/edit/basic/%d/" % image.id)
-
-
-@login_required
-def image_edit_presolve(request, id):
-    image = get_object_or_404(Image, pk = id)
-    if request.user != image.user and not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    if request.method == 'POST':
-        form = ImageEditPresolveForm(data=request.POST, instance=image)
-        if form.is_valid():
-            form.save()
-
-            image.solve()
-
-            done_later = 'done_later' in request.POST
-            if done_later:
-                if image.presolve_information > 1:
-                    messages.info(request, _("Plate-solving has started in the background. It might take a while, so please don't request it again! You will be notified when the job has completed. Thanks!"))
-
-                return HttpResponseRedirect(image.get_absolute_url());
-
-            return HttpResponseRedirect('/edit/watermark/%s/' % image.id)
-    else:
-        form = ImageEditPresolveForm(instance=image)
-
-    return render_to_response('image/edit/presolve.html',
-        {
-            'image': image,
-             'form': form,
-        },
-        context_instance = RequestContext(request))
 
 
 @login_required
@@ -1299,7 +1268,6 @@ def image_edit_save_watermark(request):
     if 'submit_next' in request.POST:
         return HttpResponseRedirect('/edit/basic/%i/' % image.id)
 
-    image.process(image.presolve_information > 1)
     return HttpResponseRedirect(image.get_absolute_url())
 
 
@@ -1336,14 +1304,6 @@ def image_edit_save_gear(request):
     form.save()
 
     response_dict['image'] = image
-
-    if 'was_not_ready' in request.POST:
-        if 'submit_next' in request.POST:
-            return HttpResponseRedirect('/edit/acquisition/%i/' % image.id)
-
-        image.process(image.presolve_information > 1)
-
-        return HttpResponseRedirect(image.get_absolute_url())
 
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect('/edit/gear/%i/' % image.id)
@@ -1424,10 +1384,6 @@ def image_edit_save_acquisition(request):
                                       response_dict,
                                       context_instance=RequestContext(request))
         form.save()
-
-    if 'was_not_ready' in request.POST and 'add_mode' not in request.POST:
-        image.process(image.presolve_information > 1)
-        return HttpResponseRedirect(image.get_absolute_url())
 
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect("/edit/acquisition/%s/" % image_id)
@@ -2417,7 +2373,6 @@ def user_profile_flickr_import(request):
                                   subject_type = 600, # Default to Other only when doing a Flickr import
                                   license = profile.default_license)
                     image.save()
-                    image.process()
 
         return ajax_response(response_dict)
 
@@ -2674,7 +2629,7 @@ def image_revision_upload_process(request):
     if not form.is_valid():
         return upload_error(image)
 
-    image_file = request.FILES["file"]
+    image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
     if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error(image)
@@ -2697,14 +2652,15 @@ def image_revision_upload_process(request):
     image.save()
 
     image_revision = form.save(commit = False)
+    image_revision.user = request.user
     image_revision.image = image
     image_revision.is_final = True
     image_revision.label = base26_encode(ord(highest_label) - ord('A') + 1)
 
     image_revision.image_file.file.seek(0) # Because we opened it with PIL
     image_revision.save()
-    image_revision.process()
 
+    messages.success(request, _("Image uploaded. Thank you!"))
     return HttpResponseRedirect(image_revision.get_absolute_url())
 
 

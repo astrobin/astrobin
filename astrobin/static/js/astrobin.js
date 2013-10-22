@@ -280,21 +280,6 @@ astrobin_image_detail = {
         submenu   : 'div.sub',
         timeout   : 500,
 
-        upload_revision_action: {
-            dialog: {
-                title: '',
-                body : ''
-            },
-            element  : 'a.upload-revision',
-            form_html: '',
-            csrf_token: '',
-            url       : '/upload/revision/process/',
-            fileDefaultText: '',
-            fileBtnText: '',
-            uploadingText: '',
-            width: 300
-        },
-
         delete_action: {
             dialog: {
                 title : '',
@@ -364,46 +349,6 @@ astrobin_image_detail = {
             window.clearTimeout(astrobin_image_detail.globals.closetimer);
             astrobin_image_detail.globals.closetimer = 0;
         }
-    },
-
-    setup_upload_revision: function() {
-        $(astrobin_image_detail.config.upload_revision_action.element).click(function() {
-            var dlg = $('\
-                <div id="dialog-attention" title="' + astrobin_image_detail.config.upload_revision_action.dialog.title + '"></div>')
-                .html('\
-                    <div class="upload-revision">\
-                    <p>\
-                        ' + astrobin_image_detail.config.upload_revision_action.dialog.body + '\
-                    </p>\
-                    <form id="upload-revision" class="form-horizontal" action="' + astrobin_image_detail.config.upload_revision_action.url + '" method="post" enctype="multipart/form-data">\
-                        ' + astrobin_image_detail.config.upload_revision_action.form_html + '\
-                        <div style="display:none;"><input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="' + astrobin_image_detail.config.upload_revision_action.csrf_token + '" /></div> \
-                        <input type="hidden" name="image_id" value="' + astrobin_image_detail.globals.image_id  + '"/>\
-                    </form>\
-                    <div style="text-align:center" class="progressbar"><img src="/sitestatic/images/loading-bar.gif" alt=""/></div>\
-                    </div>\
-                ')
-                .dialog({
-                    width: astrobin_image_detail.config.upload_revision_action.width,
-                    resizable: false,
-                    modal: true});
-
-            $('input:file').uniform(
-               {fileDefaultText: astrobin_image_detail.config.upload_revision_action.fileDefaultText,
-                fileBtnText: astrobin_image_detail.config.upload_revision_action.fileBtnText
-               }
-            );
-            $('form#upload-revision').live('submit', function() {
-                form = $(this);
-                progressbar = form.parent().find('.progressbar');
-
-                form.hide();
-                progressbar.show();
-
-                return true;
-            });
-
-        });
     },
 
     setup_delete: function() {
@@ -549,9 +494,6 @@ astrobin_image_detail = {
         astrobin_image_detail.globals.revision_id = revision_id;
         astrobin_image_detail.globals.image_username = image_username;
         $.extend(true, astrobin_image_detail.config, config);
-
-        /* Revisions */
-        astrobin_image_detail.setup_upload_revision();
 
         /* Delete */
         astrobin_image_detail.setup_delete();

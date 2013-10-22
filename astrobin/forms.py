@@ -41,15 +41,6 @@ class ImageUploadForm(forms.ModelForm):
         fields = ('image_file',)
 
 
-class ImageEditPresolveForm(forms.ModelForm):
-    class Meta:
-        model = Image
-        fields = ('presolve_information',)
-        widgets = {
-            'presolve_information': forms.RadioSelect(choices = Image.SOLVE_CHOICES),
-        }
-
-
 class ImageEditBasicForm(forms.ModelForm):
     error_css_class = 'error'
 
@@ -297,10 +288,9 @@ class BringToAttentionForm(forms.Form):
         self.fields['users'].label = _("Users")
 
 
-# TODO: test image revision upload
 class ImageRevisionUploadForm(forms.ModelForm):
     class Meta:
-        model = Image
+        model = ImageRevision
         fields = ('image_file',)
 
 

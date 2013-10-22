@@ -49,28 +49,11 @@
             </a>
         </li>
         <li>
-            <a class="upload-revision" href="#">
+            <a class="upload-revision" href="#upload-revision-modal" data-toggle="modal">
                 <i class="icon-upload-alt"></i>
                 {% trans "Upload new revision" %}
             </a>
         </li>
-        {% if image.subject_type == 100 or image.subject_type == 300 %}
-            {% if not image.solution %}
-            <li>
-                <a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "plate_solving_started" %}">
-                    <i class="icon-screenshot"></i>
-                    {% trans "Plate-solve" %}
-                </a>
-            </li>
-            {% else %}
-            <li>
-                <a class="plate-solve" href="{% url image_edit_presolve image.id %}{% query_string "done_later=" "plate_solving_started" %}">
-                    <i class="icon-screenshot"></i>
-                    {% trans "Plate-solve again" %}
-                </a>
-            </li>
-            {% endif %} <!-- not image.solution -->
-        {% endif %} <!-- image is deep sky or wide field -->
         {% if image.is_wip %}
         <li>
             <a href="{% url image_promote image.id %}{% query_string "" "plate_solving_started" %}">
