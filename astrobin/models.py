@@ -703,15 +703,6 @@ class Image(HasSolutionMixin, models.Model):
         (4, '4x4'),
     )
 
-    SOLVE_CHOICES = (
-        (0, _("I don't want this image plate-solved.")),
-        (1, _("This is not a deep sky image, don't plate-solve it.")),
-        (2, _("I have no idea about the size of field, try a blind solve.")),
-        (3, _("This is a very wide field image (more than 10 degrees).")),
-        (4, _("This is a wide field image (1 to 10 degrees).")),
-        (5, _("This ia narrow field image (less than 1 degree).")),
-    )
-
     SUBJECT_TYPE_CHOICES = (
         (0, "---------"),
         (100, _("Deep sky object")),
@@ -795,53 +786,6 @@ class Image(HasSolutionMixin, models.Model):
     # For likes, bookmarks, and perhaps more.
     toggleproperties = generic.GenericRelation(ToggleProperty)
 
-    presolve_information = models.IntegerField(
-        default = 0,
-        choices = SOLVE_CHOICES,
-        verbose_name = "",
-    )
-
-    focal_length = models.IntegerField(
-        null = True,
-        blank = True,
-        help_text = _("(in mm)"),
-        error_messages = {
-            'required': _("Insert a focal length if you want to plate-solve."),
-        },
-        verbose_name = _("Focal length"),
-    )
-
-    pixel_size = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 5,
-        decimal_places = 2,
-        help_text = _("(in &mu;m)"),
-        error_messages = {
-            'required': _("Insert a pixel size if you want to plate-solve."),
-        },
-        verbose_name = _("Pixel size"),
-    )
-
-    binning = models.IntegerField(
-        null      = True,
-        blank     = True,
-        choices   = BINNING_CHOICES,
-        default   = 1,
-        help_text = _("This is the smallest of the binning values you used. If you imaged L in 1x1 and RGB in 2x2, put 1x1 here."),
-        verbose_name = _("Binning"),
-    )
-
-    scaling = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 6,
-        decimal_places = 2,
-        default = 100,
-        help_text = _("If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't matter."),
-        verbose_name = _("Scaling"),
-    )
-
     watermark_text = models.CharField(
         max_length = 128,
         null = True,
@@ -916,12 +860,6 @@ class Image(HasSolutionMixin, models.Model):
                 return
 
         super(Image, self).save(*args, **kwargs)
-
-    def process(self, solve=False):
-        store_image.delay(self, solve=solve, lang=translation.get_language(), callback=image_stored_callback)
-
-    def solve(self):
-        solve_image.delay(self, lang=translation.get_language(), callback=image_solved_callback)
 
     def delete(self, *args, **kwargs):
         self.delete_data()
@@ -1128,9 +1066,6 @@ class ImageRevision(HasSolutionMixin, models.Model):
                 return
 
         super(ImageRevision, self).save(*args, **kwargs)
-
-    def process(self):
-        store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
 
     def get_absolute_url(self, revision = 'nd', size = 'regular'):
         # We can ignore the revision argument of course
