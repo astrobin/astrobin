@@ -101,6 +101,7 @@ def astrobin_image(
         'url'           : url,
         'show_tooltip'  : show_tooltip,
         'request'       : context['request'],
+        'cache_key'     : "%s_%s_%s_%d" % (mod if mod else 'none', alias, revision, image.id)
     }
 
 
