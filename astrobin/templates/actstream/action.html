@@ -35,7 +35,7 @@
             <div class="object">
                 {% ifequal action.action_object_content_type.model 'imagerevision' %}
                     <div class="image">
-                        {% astrobin_image action.action_object 'act_object' %}
+                        {% astrobin_image action.action_object.image 'act_object' action.action_object.label %}
                         </a>
                     </div>
                 {% else %}
@@ -47,7 +47,7 @@
 
                     {% if action.target_content_type.model == 'imagerevision' %}
                         <div class="image">
-                            {% astrobin_image action.target 'act_target' %}
+                            {% astrobin_image action.target.image 'act_target' action.target.label %}
                         </div>
                     {% endif %}
 
