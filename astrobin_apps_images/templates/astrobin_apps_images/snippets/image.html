@@ -3,7 +3,7 @@
 {% load common_tags %}
 {% load i18n %}
 
-{% cache 300 astrobin_image image.id alias revision mod %}
+{% cache 300 astrobin_image cache_key %}
 <div class="astrobin-image-container
 
     {% if alias == 'regular_solved_overlay' %}

@@ -1009,23 +1009,14 @@ class Image(HasSolutionMixin, models.Model):
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
 
-
         revision_label = thumbnail_settings.get('revision_label', 'final')
         mod = thumbnail_settings.get('mod', None)
 
         # Possible modes: 'inverted', 'solved'.
         if mod == 'inverted':
             alias = alias + '_' +  mod
-        elif mod == 'solved':
-            # We don't support showing annotation for all image sizes because
-            # scaling them would make the text unreadable.
-            alias = 'regular_solved'
-
 
         options = settings.THUMBNAIL_ALIASES[''][alias].copy()
-        if alias in ('regular_solved', 'regular_solved_overlay'):
-            options['solution'] = self.solution
-
 
         field = self.get_thumbnail_field(revision_label);
         thumbnailer = get_thumbnailer(field)
@@ -1047,15 +1038,17 @@ class Image(HasSolutionMixin, models.Model):
         from django.core.cache import cache
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
+        mod = thumbnail_settings.get('mod', None)
         field = self.get_thumbnail_field(revision_label);
 
         app_model = "{0}.{1}".format(
             self._meta.app_label,
             self._meta.object_name).lower()
-        cache_key = 'easy_thumb_alias_cache_%s.%s_%s' % (
+        cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
             app_model,
             field,
-            alias)
+            alias,
+            mod)
 
         url = cache.get(cache_key)
         if not url:
