@@ -28,14 +28,16 @@ $(document).ready(function() {
                 success: function(data, status, request) {
                     var $img = $('img.astrobin-image[data-id=' + data.id + '][data-alias=' + alias + '][data-revision=' + revision +']');
 
+                    if (alias == 'thumb' || alias == 'gallery') {
+                        $img.load(function() {
+                            $img.capty({animation: 'slide', speed: 200, height: $img.height()});
+                            $img.closest('.capty-wrapper').find('.capty-target').show();
+                        });
+                    }
+
                     $img
                         .attr('src', data.url)
                         .attr('data-loaded', 'true');
-
-                    if (alias == 'thumb' || alias == 'gallery') {
-                        $img.capty({animation: 'slide', speed: 200, height: $img.height()})
-                        $img.closest('.capty-wrapper').find('.capty-target').show();
-                    }
                 }
             });
         });
