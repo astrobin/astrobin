@@ -32,10 +32,11 @@ class SolveView(base.View):
         if solution.submission_id is None:
             solver = Solver()
 
-            import pdb; pdb.set_trace()
             thumb_url = target.thumbnail('regular')
+            url = thumb_url.split('://')[1]
+            url = 'http://' + urllib2.quote(url.encode('utf-8'))
             headers = { 'User-Agent' : 'Mozilla/5.0' }
-            req = urllib2.Request(thumb_url, None, headers)
+            req = urllib2.Request(url, None, headers)
             img = NamedTemporaryFile(delete = True)
             img.write(urllib2.urlopen(req).read())
             img.flush()
