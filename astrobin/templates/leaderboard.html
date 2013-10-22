@@ -19,6 +19,12 @@
                         <tr>
                             <th>{% trans "Position" %}</th>
                             <th>{% trans "User" %}</th>
+
+                            <th>
+                                <a href="{% url leaderboard %}{% query_string "sort='avglikes'" "" %}">
+                                    {% trans "Average likes" %} <i class="icon-sort"></i>
+                                </a>
+                            </th>
                             <th>
                                 <a href="{% url leaderboard %}{% query_string "sort='likes'" "" %}">
                                     {% trans "Number of likes" %} <i class="icon-sort"></i>
@@ -63,10 +69,11 @@
                                     {{u.object.username}}
                                 </a>
                             </td>
-                            <td>{{u.likes}}</a></td>
-                            <td>{{u.followers}}</a></td>
-                            <td>{{u.integration|floatformat}}</a></td>
-                            <td>{{u.avg_integration|floatformat}}</a></td>
+                            <td>{{u.average_likes|floatformat}}</td>
+                            <td>{{u.likes}}</td>
+                            <td>{{u.followers}}</td>
+                            <td>{{u.integration|floatformat}}</td>
+                            <td>{{u.avg_integration|floatformat}}</td>
                             <td>{{u.images}}</td>
                             <td>{{u.comments_written}}</td>
                         </tr>

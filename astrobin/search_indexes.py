@@ -277,6 +277,9 @@ class UserIndex(SearchIndex):
     # Total likes of all user's images.
     likes = IntegerField()
 
+    # Total likes of all user's images.
+    average_likes = FloatField()
+
     # Number of followers
     followers = IntegerField()
 
@@ -344,6 +347,12 @@ class UserIndex(SearchIndex):
         for i in Image.objects.filter(user = obj, is_wip = False):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
+
+    def prepare_average_likes(self, obj):
+        likes = self.prepare_likes(obj)
+        images = self.prepare_images(obj)
+
+        return likes / float(images) if images > 0 else 0
 
     def prepare_followers(self, obj):
         return ToggleProperty.objects.filter(

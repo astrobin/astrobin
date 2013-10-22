@@ -2719,6 +2719,8 @@ def leaderboard(request):
         sort = request.GET.get('sort')
         if sort == 'likes':
             sort = '-likes'
+        if sort == 'avglikes':
+            sort = '-average_likes'
         elif sort == 'followers':
             sort = '-followers'
         elif sort == 'integration':
