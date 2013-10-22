@@ -39,6 +39,9 @@ class Solver(object):
             return self.PENDING
 
         job = jobs[0]
+        if job is None:
+            return self.PENDING
+
         job_result = self._backend().job_status(job)
         status = job_result.get('status')
         if status == 'solving':

@@ -501,11 +501,14 @@ def image_detail(request, id, r):
             r = 0
 
 
+    revision_image = None
     instance_to_platesolve = image
+    is_revision = False
     if r != 0:
         try:
-            revision = ImageRevision.objects.filter(image = image, label = r)[0]
-            instance_to_platesolve = revision
+            revision_image = ImageRevision.objects.filter(image = image, label = r)[0]
+            instance_to_platesolve = revision_image
+            is_revision = True
         except:
             pass
 
@@ -725,8 +728,13 @@ def image_detail(request, id, r):
 
         # TODO: use astrobin_image template tag
         'histogram': image.thumbnail('histogram'),
+
+        'revisions': revisions,
+        'is_revision': is_revision,
+        'revision_image': revision_image,
         'revision_data': revision_data,
         'revision_label': r,
+
         'mod': mod,
         'instance_to_platesolve': instance_to_platesolve,
         'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
@@ -1411,20 +1419,19 @@ def image_edit_save_license(request):
     return HttpResponseRedirect('/edit/license/%s/' % image_id)
 
 @login_required
-@require_GET
+@require_POST
 def image_delete(request, id):
     image = get_object_or_404(Image, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     image.delete()
-    push_notification([request.user], 'image_deleted', {});
-
-    return HttpResponseRedirect("/");
+    messages.success(request, _("Image deleted."));
+    return HttpResponseRedirect(request.user.get_absolute_url());
 
 
 @login_required
-@require_GET
+@require_POST
 def image_delete_revision(request, id):
     revision = get_object_or_404(ImageRevision, pk=id)
     image = revision.image
@@ -1436,12 +1443,13 @@ def image_delete_revision(request, id):
         image.save()
 
     revision.delete()
+    messages.success(request, _("Revision deleted."));
 
     return HttpResponseRedirect("/%i/" % image.id);
 
 
 @login_required
-@require_GET
+@require_POST
 def image_delete_original(request, id):
     image = get_object_or_404(Image, pk=id)
     if request.user != image.user and not request.user.is_superuser:
@@ -1460,29 +1468,30 @@ def image_delete_original(request, id):
         # You can't delete just the original if you have no revisions.
         return HttpResponseForbidden()
 
-    image.filename = final.filename
-    image.original_ext = final.original_ext
+    image.image_file = final.image_file
     image.uploaded = final.uploaded
 
     image.w = final.w
     image.h = final.h
 
-    image.solution.delete() # We don't solve revisions.
-
     image.is_final = True
     image.was_revision = True
 
+    if image.solution:
+        image.solution.delete()
+
     image.save()
-    final.delete(dont_delete_data = True)
 
-    # Update ImageOfTheDay
-    today = date.today()
-    try:
-        iotd = ImageOfTheDay.objects.get(date = today, image = image)
-        make_image_of_the_day(image)
-    except ImageOfTheDay.DoesNotExist:
-        pass
+    if final.solution:
+        # Get the solution this way, I don't know why it wouldn't work otherwise
+        content_type = ContentType.objects.get_for_model(ImageRevision)
+        solution = Solution.objects.get(content_type = content_type, object_id = final.pk)
+        solution.content_object = image
+        solution.save()
 
+    final.delete()
+
+    messages.success(request, _("Image deleted."));
     return HttpResponseRedirect("/%i/" % image.id);
 
 

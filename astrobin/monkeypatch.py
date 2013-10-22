@@ -1,5 +1,7 @@
 # http://stackoverflow.com/questions/5877497/storing-images-and-thumbnails-on-s3-in-django
 from django.core.files.images import ImageFile
+from django.core.files.images import get_image_dimensions
+
 def _get_image_dimensions(self):
     from numbers import Number
     if not hasattr(self, '_dimensions_cache'):

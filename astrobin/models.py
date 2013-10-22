@@ -47,11 +47,14 @@ class HasSolutionMixin(object):
      @property
      def solution(self):
          ctype = ContentType.objects.get_for_model(self.__class__)
+
          try:
-             solution = Solution.objects.get(content_type__pk = ctype.id, object_id=self.id)
+             solution = Solution.objects.get(content_type = ctype, object_id = self.id)
          except:
             return None
+
          return solution
+
 
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]

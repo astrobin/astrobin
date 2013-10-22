@@ -1,8 +1,11 @@
 # Python
 import simplejson
+import urllib2
 
 # Django
 from django.contrib.contenttypes.models import ContentType
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import base
@@ -28,8 +31,18 @@ class SolveView(base.View):
 
         if solution.submission_id is None:
             solver = Solver()
-            thumb = target.thumbnail_raw('regular')
-            submission = solver.solve(thumb.file)
+
+            import pdb; pdb.set_trace()
+            thumb_url = target.thumbnail('regular')
+            headers = { 'User-Agent' : 'Mozilla/5.0' }
+            req = urllib2.Request(thumb_url, None, headers)
+            img = NamedTemporaryFile(delete = True)
+            img.write(urllib2.urlopen(req).read())
+            img.flush()
+            img.seek(0)
+            f = File(img)
+
+            submission = solver.solve(f)
             solution.status = Solver.PENDING
             solution.submission_id = submission
             solution.save()
@@ -62,10 +75,6 @@ class SolutionFinalizeView(base.View):
         solution.status = solver.status(solution.submission_id)
 
         if solution.status == Solver.SUCCESS:
-            import urllib2
-            from django.core.files import File
-            from django.core.files.temp import NamedTemporaryFile
-
             info = solver.info(solution.submission_id)
 
             solution.objects_in_field = ', '.join(info['objects_in_field'])
