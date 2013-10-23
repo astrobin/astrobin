@@ -718,6 +718,20 @@ def image_detail(request, id, r):
         })
 
 
+    ##########################
+    # LIKE / BOOKMARKED THIS #
+    ##########################
+    like_this = [x.user for x in ToggleProperty.objects.filter(
+        property_type = "like",
+        object_id = image.pk,
+        content_type = ContentType.objects.get_for_model(Image))]
+
+    bookmarked_this = [x.user for x in ToggleProperty.objects.filter(
+        property_type = "bookmark",
+        object_id = image.pk,
+        content_type = ContentType.objects.get_for_model(Image))]
+
+
     #################
     # RESPONSE DICT #
     #################
@@ -739,6 +753,9 @@ def image_detail(request, id, r):
         'mod': mod,
         'instance_to_platesolve': instance_to_platesolve,
         'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
+
+        'like_this': like_this,
+        'bookmarked_this': bookmarked_this,
 
         'comments_number': NestedComment.objects.filter(
             deleted = False,

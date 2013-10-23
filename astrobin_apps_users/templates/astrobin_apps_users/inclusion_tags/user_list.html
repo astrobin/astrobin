@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% if view == 'list' %}
-    <table class="user-list table table-condensed">
+    <table class="astrobin-users table table-condensed">
         <tr>
             <th>{% trans "User" %}</th>
             <th>{% trans "Images" %}</th>
@@ -15,7 +15,7 @@
 {% endif %}
 
 {% if view == 'default' %}
-    <ul class="user-list">
+    <ul class="astrobin-users{% if layout == 'list' %} user-list{% endif %}">
         {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
         {% include 'astrobin_apps_users/inclusion_tags/endless_pagination_js.html' %}
     </ul>

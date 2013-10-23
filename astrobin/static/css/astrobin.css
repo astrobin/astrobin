@@ -648,6 +648,11 @@ body.full {
 .modal .modal-header h3 {
   margin: 0;
   padding: 0;
+  font-size: 13px;
+}
+.modal .modal-header h3 [class^="icon-"],
+.modal .modal-header h3 [class*=" icon-"] {
+  padding-right: 8px;
 }
 .modal .modal-header .close {
   color: white;
@@ -1529,7 +1534,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 .avatar-block .username .bookmarks,
 .avatar-block .username .likes {
   font-size: 85%;
-  color: #9f9f9f;
+  color: #929292;
   margin-right: 8px;
 }
 .avatar-block .username .views .number,
@@ -1537,6 +1542,11 @@ div.capty-target .capty-caption-content .link-overlay a {
 .avatar-block .username .likes .number {
   color: #fcfcfc;
   font-weight: bold;
+}
+.avatar-block .username .likes a,
+.avatar-block .username .bookmarks a {
+  color: #929292;
+  border-bottom: 1px dotted #646464;
 }
 .avatar {
   position: relative;
@@ -3242,11 +3252,11 @@ a.index-section-link {
 .btn-primary.active {
   color: #FF7F50;
 }
-ul.user-list {
+ul.astrobin-users {
   list-style: none;
   margin: 0;
 }
-ul.user-list li {
+ul.astrobin-users li {
   float: left;
   padding: 2px;
 }
@@ -3274,6 +3284,35 @@ ul.user-list li {
 .user-card-inline #profile-details li .property-follow {
   float: left;
   margin: 4px 8px 0 12px;
+}
+.astrobin-users.user-list li {
+  float: none;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+  border-bottom: 1px solid #404040;
+}
+.astrobin-users.user-list li .user-list-item {
+  position: relative;
+}
+.astrobin-users.user-list li .user-list-item .avatar {
+  float: left;
+  margin-right: 16px;
+}
+.astrobin-users.user-list li .user-list-item .name {
+  font-weight: bold;
+}
+.astrobin-users.user-list li .user-list-item .info {
+  color: #777;
+  font-size: 90%;
+}
+.astrobin-users.user-list li .user-list-item .follow {
+  position: absolute;
+  right: 4px;
+  top: 10px;
+}
+.astrobin-users.user-list li:last-child {
+  border-bottom: none;
 }
 #upload-revision-form .spinner {
   margin-left: 6px;
