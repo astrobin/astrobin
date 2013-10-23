@@ -90,8 +90,8 @@
             </div>
 
             <div class="info">
-                {% blocktrans with images as images_number %}{{images}} images{% endblocktrans %},
-                {% blocktrans with followers as followers_number %}{{followers}} followers{% endblocktrans %}
+                {% blocktrans count counter=images with images as images_number %}{{images_number}} image{% plural %}{{images_number}} images{% endblocktrans %},
+                {% blocktrans count counter=followers with followers as followers_number %}{{followers_number}} follower{% plural %}{{followers_number}} followers{% endblocktrans %}
             </div>
 
             {% if request_user %}
