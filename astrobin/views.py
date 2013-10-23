@@ -249,6 +249,7 @@ def index(request, template = 'index/root.html', extra_context = None):
                     ).values_list('object_id', flat = True)
                 ]
                 cache.set(cache_key, followed_user_ids, 900)
+            response_dict['has_followed_users'] = len(followed_user_ids) > 0
 
             cache_key = 'astrobin_followees_image_ids_%s' % request.user
             followees_image_ids = cache.get(cache_key)

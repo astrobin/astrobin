@@ -121,79 +121,42 @@ $(document).ready(function() {
     astrobin_common.setup_subject_popovers();
     astrobin_common.setup_user_popovers();
 
-    astrobin_image_detail.init(
-        {{image.id}},
+    $('#upload-revision-modal form input[type=submit]').click(function(e) {
+        $(this).addClass('disabled');
+        $(this).siblings('.spinner').show();
+    });
 
-        {% if is_revision %}{{revision_image.id}}{% else %}0{% endif %},
+    $('button#send-to-datapool').click(function(e) {
+        var selected = $('form#select-datapool select option:selected').val();
 
-        "{{image.user.username}}",
-
-        {
-            delete_action: {
-                dialog: {
-                    title : "{% trans "Delete image and all its revisions?" %}",
-                    body  : "{% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?"%}",
-                    button: "{% trans "Yes, delete everything" %}"
-                }
-            },
-            delete_revision_action: {
-                dialog: {
-                    title : "{% trans "Delete this revision?" %}",
-                    body  : "{% trans "This revision will be permanently deleted and cannot be recovered. Are you sure?"%}",
-                    button: "{% trans "Yes, delete revision" %}"
-                }
-            },
-            delete_original_action: {
-                dialog: {
-                    title : "{% trans "Delete original image?" %}",
-                    body  : "{% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}",
-                    button: "{% trans "Yes, delete image" %}"
-                }
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            data: {image: {{image.id}}},
+            url: '/rawdata/publicdatapools/' + selected + '/add-image/',
+            success: function() {
+                window.location.href = '/rawdata/publicdatapools/' + selected + '/';
             }
         });
 
-        $('#request-critique').popover({
-            placement: 'bottom',
-            trigger: 'hover',
-            delay: {hide: 2000}
-        });
-
-        $('#upload-revision-modal form input[type=submit]').click(function(e) {
-            $(this).addClass('disabled');
-            $(this).siblings('.spinner').show();
-        });
-
-        $('button#send-to-datapool').click(function(e) {
-            var selected = $('form#select-datapool select option:selected').val();
-
-            $.ajax({
-                type: 'post',
-                dataType: 'json',
-                data: {image: {{image.id}}},
-                url: '/rawdata/publicdatapools/' + selected + '/add-image/',
-                success: function() {
-                    window.location.href = '/rawdata/publicdatapools/' + selected + '/';
-                }
-            });
-
-            e.preventDefault();
-        });
-
-        $('button#send-to-sharedfolder').click(function(e) {
-            var selected = $('form#select-sharedfolder select option:selected').val();
-
-            $.ajax({
-                type: 'post',
-                dataType: 'json',
-                data: {image: {{image.id}}},
-                url: '/rawdata/privatesharedfolders/' + selected + '/add-image/',
-                success: function() {
-                    window.location.href = '/rawdata/privatesharedfolders/' + selected + '/';
-                }
-            });
-
-            e.preventDefault();
-        });
+        e.preventDefault();
     });
+
+    $('button#send-to-sharedfolder').click(function(e) {
+        var selected = $('form#select-sharedfolder select option:selected').val();
+
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            data: {image: {{image.id}}},
+            url: '/rawdata/privatesharedfolders/' + selected + '/add-image/',
+            success: function() {
+                window.location.href = '/rawdata/privatesharedfolders/' + selected + '/';
+            }
+        });
+
+        e.preventDefault();
+    });
+});
 </script>
 

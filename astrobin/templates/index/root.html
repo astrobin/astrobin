@@ -280,6 +280,16 @@
 
                     <div class="activity-actions">
                         {% if section == 'personal' or section == 'global' %}
+                            {% if section == 'personal' and not has_followed_users %}
+                                <div class="alert alert-info">
+                                    <h4 class="alert-heading">
+                                        <i class="icon-info-sign"></i> {% trans "Hey!" %}
+                                    </h4>
+
+                                    {% blocktrans %}To make your personal stream more interesting, you should follow some people!{% endblocktrans %}
+                                </div>
+                            {% endif %}
+
                             <div class="js-masonry endless" data-masonry-options='{"itemSelector":".action"}'>
                                 {% include 'index/stream_page.html' %}
                             </div>
