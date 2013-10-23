@@ -1,4 +1,5 @@
 import uuid
+from datetime import date
 from datetime import datetime
 import os
 import urllib2
@@ -58,7 +59,7 @@ class HasSolutionMixin(object):
 
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
-    return "%s.%s" % (uuid.uuid4(), ext)
+    return "%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
 
 
 LICENSE_CHOICES = (
