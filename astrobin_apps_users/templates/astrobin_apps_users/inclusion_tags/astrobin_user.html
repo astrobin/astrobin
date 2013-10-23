@@ -45,7 +45,7 @@
         </div>
     {% endif %}
 
-    {% if layout == 'inline' %}
+    {% if layout == 'inline' or layout == 'inline-mini' %}
         <div class="subtle-container user-card user-card-inline">
             <div class="header">
                 <h4>
@@ -62,13 +62,43 @@
             <div id="profile-details">
                 <ul>
                     <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
-                    <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
+
+                    {% if layout != 'inline-mini' %}
+                        <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
+                    {% endif %}
 
                     {% if request_user %}
                         <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
                     {% endif %}
                 </ul>
             </div>
+        </div>
+    {% endif %}
+
+    {% if layout == 'list' %}
+        <div class="user-list-item">
+            <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
+                <a href="{% url user_page user %}">
+                    {% avatar user 48 %}
+                </a>
+            </div>
+
+            <div class="name">
+                <a href="{% url user_page user %}">
+                    {{user.userprofile}}
+                </a>
+            </div>
+
+            <div class="info">
+                {% blocktrans with images as images_number %}{{images}} images{% endblocktrans %},
+                {% blocktrans with followers as followers_number %}{{followers}} followers{% endblocktrans %}
+            </div>
+
+            {% if request_user %}
+                <div class="follow">
+                    {% add_remove_toggleproperty "follow" user request_user %}
+                </div>
+            {% endif %}
         </div>
     {% endif %}
 {% endif %}

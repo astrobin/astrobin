@@ -805,7 +805,13 @@ body.full {
         h3 {
             margin: 0;
             padding: 0;
+            font-size: @base-font-size;
+
+            [class^="icon-"], [class*=" icon-"] {
+                padding-right: 8px;
+            }
         }
+
         .close {
             color: white;
         }
@@ -1718,13 +1724,18 @@ div.capty-target {
 
         .views, .bookmarks, .likes {
             font-size: 85%;
-            color: darken(@text-color, 10%);
+            color: darken(@text-color, 15%);
             margin-right: @spacer-medium;
 
             .number {
                 color: @strong-text-color;
                 font-weight: bold;
             }
+        }
+
+        .likes a, .bookmarks a {
+            color: darken(@text-color, 15%);
+            border-bottom: 1px dotted #646464;
         }
     }
 }
@@ -3477,7 +3488,7 @@ a.index-section-link {
     color: #FF7F50;
 }
 
-ul.user-list {
+ul.astrobin-users {
     list-style: none;
     margin: 0;
 
@@ -3515,6 +3526,44 @@ ul.user-list {
                 float: left;
                 margin: 4px 8px 0 12px
             }
+        }
+    }
+}
+
+.astrobin-users.user-list {
+    li {
+        float: none;
+        width: 100%;
+        overflow: hidden;
+        padding: 10px 0;
+        border-bottom: 1px solid #404040;
+
+        .user-list-item {
+            position: relative;
+
+            .avatar {
+                float: left;
+                margin-right: 16px;
+            }
+
+            .name {
+                font-weight: bold;
+            }
+
+            .info {
+                color: #777;
+                font-size: 90%;
+            }
+
+            .follow {
+                position: absolute;
+                right: 4px;
+                top: 10px;
+            }
+        }
+
+        &:last-child {
+            border-bottom: none;
         }
     }
 }
