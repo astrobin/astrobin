@@ -3,79 +3,81 @@
 {% load common_tags %}
 {% load i18n %}
 
-{% cache 300 astrobin_image cache_key %}
-<div class="astrobin-image-container
+{% if status != 'error' %}
+    {% cache 300 astrobin_image cache_key %}
+    <div class="astrobin-image-container
 
-    {% if alias == 'regular_solved_overlay' %}
-        plot-overlay
-    {% endif %}
-">
+        {% if alias == 'regular_solved_overlay' %}
+            plot-overlay
+        {% endif %}
+    ">
 
-    {% random_id %}
-    <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+        {% random_id %}
+        <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
-        {% if alias != 'iotd' and image.iotd_date %}
-            <div class="iotd-thumb-banner{% if alias == 'runnerup' %} iotd-thumb-banner-tiny{% endif %}">
-                <h2>
-                    <i class="icon icon-trophy"></i>
-                </h2>
+            {% if alias != 'iotd' and image.iotd_date %}
+                <div class="iotd-thumb-banner{% if alias == 'runnerup' %} iotd-thumb-banner-tiny{% endif %}">
+                    <h2>
+                        <i class="icon icon-trophy"></i>
+                    </h2>
+                </div>
+            {% endif %}
+
+            <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin / {% trans "Loading" %}..."
+                 class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
+                 width="{{size_x}}"
+                 height="{{size_y}}"
+                 name="#capty-target-{{image.id}}-{{randomid}}"
+                 data-id="{{image.id}}"
+                 data-loaded="false"
+                 data-alias="{{alias}}"
+                 data-revision="{{revision}}"
+                 data-mod="{{mod}}"
+                 alt="{{image.title|escape}}, {{image.user.userprofile}}" />
+        </a>
+
+        {% if alias == 'thumb' or alias == 'gallery' %}
+            <div id="capty-target-{{image.id}}-{{randomid}}" class="capty-target">
+                <div class="capty-caption-content">
+                    <div class="link-overlay" style="width:{{size_x}}px; height:{{size_y}}px">
+                        <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                            &nbsp;
+                        </a>
+                    </div>
+
+                    <p>
+                        <span class="title">{{image.title|escape}}</strong></span>,
+                        {{image.user.userprofile}}
+                    </p>
+
+                    {% if alias == 'gallery' %}
+                        <table class="table table-condensed">
+                            <tr>
+                                <th><i class="icon-calendar"></i></th>
+                                <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
+                            </tr>
+
+                            <tr>
+                                <th><i class="icon-thumbs-up"></i></th>
+                                <td>{{image.likes}}</td>
+                            </tr>
+
+                            <tr>
+                                <th><i class="icon-bookmark"></i></th>
+                                <td>{{image.bookmarks}}</td>
+                            </tr>
+
+                            {% if image.views %}
+                                <tr>
+                                    <th><i class="icon-eye-open"></i></th>
+                                    <td>{{image.view}}</td>
+                                </tr>
+                            {% endif %}
+                        </table>
+                    {% endif %}
+                </div>
             </div>
         {% endif %}
-
-        <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin / {% trans "Loading" %}..."
-             class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
-             width="{{size_x}}"
-             height="{{size_y}}"
-             name="#capty-target-{{image.id}}-{{randomid}}"
-             data-id="{{image.id}}"
-             data-loaded="false"
-             data-alias="{{alias}}"
-             data-revision="{{revision}}"
-             data-mod="{{mod}}"
-             alt="{{image.title|escape}}, {{image.user.userprofile}}" />
-    </a>
-
-    {% if alias == 'thumb' or alias == 'gallery' %}
-        <div id="capty-target-{{image.id}}-{{randomid}}" class="capty-target">
-            <div class="capty-caption-content">
-                <div class="link-overlay" style="width:{{size_x}}px; height:{{size_y}}px">
-                    <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
-                        &nbsp;
-                    </a>
-                </div>
-
-                <p>
-                    <span class="title">{{image.title|escape}}</strong></span>,
-                    {{image.user.userprofile}}
-                </p>
-
-                {% if alias == 'gallery' %}
-                    <table class="table table-condensed">
-                        <tr>
-                            <th><i class="icon-calendar"></i></th>
-                            <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
-                        </tr>
-
-                        <tr>
-                            <th><i class="icon-thumbs-up"></i></th>
-                            <td>{{image.likes}}</td>
-                        </tr>
-
-                        <tr>
-                            <th><i class="icon-bookmark"></i></th>
-                            <td>{{image.bookmarks}}</td>
-                        </tr>
-
-                        {% if image.views %}
-                            <tr>
-                                <th><i class="icon-eye-open"></i></th>
-                                <td>{{image.view}}</td>
-                            </tr>
-                        {% endif %}
-                    </table>
-                {% endif %}
-            </div>
-        </div>
-    {% endif %}
-</div>
-{% endcache %}
+    </div>
+    {% endcache %}
+{% endif %}

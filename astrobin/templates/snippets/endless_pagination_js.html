@@ -1,5 +1,9 @@
 <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
 <script>
+    $.ajaxSetup({
+        timeout: 30000
+    });
+
     $('ul.astrobin-thumbnails').endlessPaginate({
         paginateOnScroll: true,
         paginateOnScrollMargin: 300,

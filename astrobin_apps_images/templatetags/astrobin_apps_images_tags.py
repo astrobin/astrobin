@@ -57,6 +57,8 @@ def astrobin_image(
     revision = 'final', url_size = 'regular',
     mod = None):
 
+    response_dict = {}
+
     if alias == '':
         alias = 'thumb'
 
@@ -67,11 +69,14 @@ def astrobin_image(
 
     if w == 0 or h == 0:
         # Old images might not have a size in the database, let's fix it.
-        from django.core.files.images import get_image_dimensions
-        (w, h) = get_image_dimensions(image.image_file)
-        image.w = w
-        image.h = h
-        image.save()
+        try:
+            from django.core.files.images import get_image_dimensions
+            (w, h) = get_image_dimensions(image.image_file.file)
+            image.w = w
+            image.h = h
+            image.save()
+        except IOError:
+            response_dict['status'] = 'error'
 
     if alias in ('regular', 'regular_inverted',
                  'hd'     , 'hd_inverted',
@@ -89,7 +94,8 @@ def astrobin_image(
         'thumb', 'runnerup',
     )
 
-    return {
+    return dict(response_dict.items() + {
+        'status'        : 'success',
         'image'         : image,
         'alias'         : alias,
         'revision'      : revision,
@@ -102,7 +108,7 @@ def astrobin_image(
         'show_tooltip'  : show_tooltip,
         'request'       : context['request'],
         'cache_key'     : "%s_%s_%s_%d" % (mod if mod else 'none', alias, revision, image.id)
-    }
+    }.items())
 
 
 @register.simple_tag(takes_context = True)
