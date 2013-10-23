@@ -1,13 +1,18 @@
 {% load avatar_tags %}
+{% load cache %}
 {% load i18n %}
 {% load toggleproperty_tags %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 {% if view == 'list' %}
     <tr>
+        {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
         <td><a href="{% url user_page user %}">{{user.userprofile}}</a></td>
         <td><a href="{% url user_page user %}?sub=uploaded">{{images}}</a></td>
         <td><a href="{% url user_page_followers user %}">{{followers}}</a></td>
         <td><a href="{% url user_page_following user %}">{{following}}</a></td>
+        {% endcache %}
 
         {% if request_user %}
             <td class="pull-right">{% add_remove_toggleproperty "follow" user request_user %}</td>
@@ -34,14 +39,15 @@
                 {% endif %}
             </div>
 
+            {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
             <div id="profile-details">
                 <ul>
                     <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
                     <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
                     <li><a href="{% url user_page_following user %}"><strong>{{following}}</strong> {% trans "Following" %}</a></li>
                 </ul>
-
             </div>
+            {% endcache %}
         </div>
     {% endif %}
 
@@ -61,11 +67,13 @@
 
             <div id="profile-details">
                 <ul>
+                    {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
                     <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
 
                     {% if layout != 'inline-mini' %}
                         <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
                     {% endif %}
+                    {% endcache %}
 
                     {% if request_user %}
                         <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
@@ -89,10 +97,12 @@
                 </a>
             </div>
 
+            {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
             <div class="info">
                 {% blocktrans count counter=images with images as images_number %}{{images_number}} image{% plural %}{{images_number}} images{% endblocktrans %},
                 {% blocktrans count counter=followers with followers as followers_number %}{{followers_number}} follower{% plural %}{{followers_number}} followers{% endblocktrans %}
             </div>
+            {% endcache %}
 
             {% if request_user %}
                 <div class="follow">
