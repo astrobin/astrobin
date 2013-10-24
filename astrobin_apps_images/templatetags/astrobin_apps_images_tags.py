@@ -9,6 +9,10 @@ from django.template.loader import render_to_string
 
 # AstroBin
 from astrobin.models import CommercialGear, Gear
+from astrobin.models import Image
+
+# Third party
+from haystack.query import SearchQuerySet
 
 
 register = Library()
@@ -93,6 +97,14 @@ def astrobin_image(
         'gallery', 'gallery_inverted',
         'thumb', 'runnerup',
     )
+
+    ###########
+    # TOP 100 #
+    ###########
+    response_dict['top100'] = False
+    sqs = SearchQuerySet().models(Image).all().order_by('-likes')[:100]
+    if image in [x.object for x in sqs]:
+        response_dict['top100'] = True
 
     return dict(response_dict.items() + {
         'status'        : 'success',

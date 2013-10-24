@@ -2403,6 +2403,40 @@ form.avatar-change label.control-label {
   top: 3px;
   left: 3px;
 }
+.top100-badge {
+  text-align: center;
+}
+.top100-badge h2 {
+  margin: 0;
+  border-bottom: none;
+  font-size: 9px;
+  line-height: 7px;
+  color: #fff;
+  background: darkred;
+  position: absolute;
+  top: 42px;
+  left: 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  border: 1px solid white;
+  padding: 7px 6px;
+  z-index: 2;
+  text-transform: uppercase;
+}
+.top100-badge.top100-badge-large h2 {
+  font-size: 16px;
+  line-height: 12px;
+  padding: 12px 8px;
+  top: 8px;
+  right: 8px;
+  -moz-border-radius: 26px;
+  -webkit-border-radius: 26px;
+  border-radius: 26px;
+}
 .iotd-ribbon-container {
   position: relative;
   min-height: 56px;

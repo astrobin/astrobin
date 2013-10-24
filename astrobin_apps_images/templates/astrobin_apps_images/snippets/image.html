@@ -15,11 +15,18 @@
         {% random_id %}
         <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
+            {% comment %} TODO: abstract this with a Badges class {% endcomment %}
             {% if alias != 'iotd' and image.iotd_date %}
                 <div class="iotd-thumb-banner{% if alias == 'runnerup' %} iotd-thumb-banner-tiny{% endif %}">
                     <h2>
                         <i class="icon icon-trophy"></i>
                     </h2>
+                </div>
+            {% endif %}
+
+            {% if top100 and alias != 'runnerup' %}
+                <div class="top100-badge{% if alias == 'regular' %} top100-badge-large{% endif %}">
+                    <h2 {% if not image.iotd_date and alias != 'regular' %}style="top:8px"{% endif %}>Top<br/>100</h2>
                 </div>
             {% endif %}
 
