@@ -613,9 +613,7 @@ body.full {
     width: 100%;
   }
   .navbar .btn-navbar {
-    position: relative;
-    width: 50%;
-    float: left;
+    margin-right: 16px;
   }
   .navbar .btn-navbar .text {
     color: #fcfcfc;
@@ -767,6 +765,13 @@ body.full {
   .site-nav.nav-collapse,
   .user-nav.nav-collapse {
     overflow: hidden;
+  }
+  .site-nav.nav-collapse .nav > li > a,
+  .user-nav.nav-collapse .nav > li > a,
+  .site-nav.nav-collapse .dropdown-menu a,
+  .user-nav.nav-collapse .dropdown-menu a {
+    font-weight: normal;
+    color: #bbb !important;
   }
 }
 /* Subnav */
@@ -930,6 +935,7 @@ li.astrobin-thumbnail {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+  display: inline-block;
 }
 li.astrobin-thumbnail img {
   -moz-border-radius: 12px;
@@ -1303,6 +1309,7 @@ div.capty-caption {
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   border-radius: 12px;
+  z-index: 3;
 }
 div.capty-target {
   display: none;
@@ -1465,7 +1472,7 @@ div.capty-target .capty-caption-content .link-overlay a {
   position: relative;
   top: 0;
   left: 0;
-  max-width: 100%;
+  width: 100%;
   z-index: 1;
 }
 .image-title {
@@ -2402,7 +2409,7 @@ form.avatar-change label.control-label {
   margin: 8px 0;
 }
 .iotd-ribbon {
-  width: 666px;
+  width: 109%;
   position: absolute;
   left: -46px;
   text-align: center;
@@ -2419,7 +2426,7 @@ form.avatar-change label.control-label {
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
 }
 .iotd-ribbon h1 {
-  font-size: 22px!important;
+  font-size: 20px!important;
   color: #f5ddae;
   text-shadow: #8f6b22 0 1px 0;
   margin: 0px;

@@ -773,9 +773,7 @@ body.full {
             width: 100%;
         }
         .btn-navbar {
-            position: relative;
-            width: 50%;
-            float: left;
+            margin-right: 16px;
 
             .text {
                 color: @strong-text-color;
@@ -938,10 +936,16 @@ body.full {
 }
 
 @media screen and (max-width: 979px) {
-  .site-nav.nav-collapse,
-  .user-nav.nav-collapse { overflow: hidden; }
-}
+    .site-nav.nav-collapse,
+    .user-nav.nav-collapse {
+        overflow: hidden;
 
+        .nav > li > a, .dropdown-menu a {
+            font-weight: normal;
+            color: #bbb !important;
+        }
+    }
+}
 
 
 /* Subnav */
@@ -1100,6 +1104,7 @@ li.astrobin-thumbnail {
     margin: 0;
     border: 0;
     .no-box-shadow;
+    display: inline-block;
 
     img {
         .rounded-corners(12px);
@@ -1453,6 +1458,7 @@ div.capty-caption {
     background-color: black;
     padding: 0;
     .rounded-corners(12px);
+    z-index: 3;
 }
 
 div.capty-target {
@@ -1639,7 +1645,7 @@ div.capty-target {
             position: relative;
             top: 0;
             left: 0;
-            max-width: 100%;
+            width: 100%;
             z-index: 1;
         }
     }
@@ -2618,7 +2624,7 @@ form.avatar-change label.control-label {display: none;}
     margin: 8px 0;
 }
 .iotd-ribbon {
-   width: 666px;
+   width: 109%;
    position: absolute;
    left: -46px;
    text-align: center;
@@ -2634,8 +2640,9 @@ form.avatar-change label.control-label {display: none;}
    -moz-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
    box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
    }
+
 .iotd-ribbon h1 {
-   font-size: 22px!important;
+   font-size: 20px!important;
    color: #f5ddae;
    text-shadow: #8f6b22 0 1px 0;
    margin:0px;
