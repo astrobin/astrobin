@@ -7,9 +7,15 @@
 {% block content %}
     <div class="row">
         <div class="span4 offset1">
-            <h1>Fatal error</h1>
+            <h1>
+                {% trans "Fatal error" %}
+                <small>
+                    ({% trans "Nothing to worry about, it's not your fault." %})
+                </small>
+            </h1>
+
             <p>
-                {% blocktrans %}Something unexpected occurred! We have received an email with technical details, so we will try to fix the problem as soon as possible. Sorry for the inconvenience! {% endblocktrans %}
+                {% blocktrans %}Something unexpected occurred! We have received an email with technical details, so we will try to fix the problem as soon as possible. Sorry about the inconvenience! {% endblocktrans %}
             </p>
             <p>
                 <a href="{% url index %}">{% trans "Go back to the hom page." %}</a>
