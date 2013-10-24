@@ -1,0 +1,35 @@
+{% load compressed %}
+
+<!-- cdn js -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.rc.1/handlebars.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.1.0/ember.min.js"></script>
+<script src="//cdn.jsdelivr.net/lightbox/0.5/js/jquery.lightbox-0.5.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.ui.timepicker.addon/1.3.1/jquery-ui-timepicker-addon.min.js"</script>
+<script src="//cdn.jsdelivr.net/jquery.autosuggest/1.4/jquery.autoSuggest.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.61.0-2013.06.06/jquery.blockUI.min.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.multiselect/1.13/jquery.multiselect.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.tokeninput/1.6.0/jquery.tokeninput.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/flot/0.8/jquery.flot.pie.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.cycle/3.03/jquery.cycle.all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/jquery.qtip.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.1.0/jquery.timeago.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.1.1/masonry.pkgd.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+<!--[if lte IE 8]>
+<script src="//cdn.jsdelivr.net/flashcanvas/1.5/flashcanvas.js"></script>
+<![endif]-->
+
+<!-- own js -->
+{% compressed_js 'scripts' %}
+
+<!-- other js -->
+<script type="text/javascript" src="{{STATIC_URL}}js/locale/jquery.timeago.{{request.LANGUAGE_CODE}}.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Converter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Sanitizer.js"></script>
+
