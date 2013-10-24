@@ -7,28 +7,11 @@
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "ur-15649ecb-6f21-a004-8032-7cf8416c478c"}); </script>
+
 <script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
-    var clip = new ZeroClipboard.Client();
-    clip.setCSSEffects(false);
-
-    clip.addEventListener('mouseOver', function() {
-        $('.clip-status').show();
-    });
-    clip.addEventListener('mouseOut', function() {
-        $('.clip-status').hide();
-        $('.clip-status').text('{% trans "Copy" %}');
-    });
-    clip.addEventListener('complete', function() {
-        $('.clip-status').text('{% trans "Copied!" %}');
-    });
-
-    clip.setText("{% get_image_url image revision_label %}");
-
-    var clip_html = clip.getHTML(16, 16);
-    $('#clip-container .flash-container').append(clip_html);
-
     $('form.copy select').change(function() {
         var sharing_mode = parseInt($('select[name=sharing_mode] option:selected').val());
         var image_size = parseInt($('select[name=sharing_image_size] option:selected').val());
@@ -96,7 +79,6 @@ $(document).ready(function() {
             content += "</a>"
         }
 
-        clip.setText(content);
         textarea.val(content);
     });
 
