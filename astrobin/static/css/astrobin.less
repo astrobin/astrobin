@@ -2618,6 +2618,39 @@ form.avatar-change label.control-label {display: none;}
     }
 }
 
+.top100-badge {
+    text-align: center;
+    h2 {
+        margin: 0;
+        border-bottom: none;
+        font-size: 9px;
+        line-height: 7px;
+
+        color: #fff;
+        background: darkred;
+        position: absolute;
+        top: 42px;
+        left: 4px;
+        .box-shadow;
+        .rounded-corners(16px);
+        border: 1px solid white;
+        padding: 7px 6px;
+        z-index: 2;
+        text-transform: uppercase;
+    }
+
+    &.top100-badge-large {
+        h2 {
+            font-size: 16px;
+            line-height: 12px;
+            padding: 12px 8px;
+            top: 8px;
+            right: 8px;
+            .rounded-corners(26px);
+        }
+    }
+}
+
 .iotd-ribbon-container {
     position: relative;
     min-height: 56px;
