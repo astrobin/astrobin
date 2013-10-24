@@ -476,6 +476,7 @@ def no_javascript(request):
 def image_detail(request, id, r):
     """ Show details of an image"""
     image = get_object_or_404(Image, pk=id)
+    response_dict = {}
 
     # TODO: unify duplicated code with image_full
 
@@ -738,7 +739,7 @@ def image_detail(request, id, r):
 
     from astrobin_apps_platesolving.solver import Solver
 
-    response_dict = {
+    response_dict = dict(response_dict.items() + {
         'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
 
         # TODO: use astrobin_image template tag
@@ -795,7 +796,7 @@ def image_detail(request, id, r):
             Q(users = request.user)).count() > 0 if request.user.is_authenticated() else False,
 
         'iotd_date': image.iotd_date()
-    }
+    }.items())
 
     return object_detail(
         request,
