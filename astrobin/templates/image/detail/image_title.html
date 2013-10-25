@@ -32,35 +32,9 @@
                 {% if solar_system_main_subject >= 0 %}
                     <a href="/search/?q=&amp;ssms={{solar_system_main_subject_id}}{% search_form_query %}">{{solar_system_main_subject}}</a>{% if subjects_short %},{% endif %}
                 {% endif %}
-                {% for s in subjects_short %}
-                    <a href="/search/?q={{s}}{% search_form_query %}">{{s|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
+                {% for s in subjects_all %}
+                    <a href="/search/?q={{s|escape}}{% search_form_query %}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
                 {% endfor %}
-                {% if subjects_all|length > subjects_limit %}
-                    <span id="more-subjects">
-                        <span class="reminder">
-                            ,&nbsp;
-                            {% for s in subjects_reminder %}
-                                <a href="/search/?q={{s}}{% search_form_query %}">{{s|escape|cut:"NAME "|lower|capfirst}}</a>{% if not forloop.last %},{% endif %}
-                            {% endfor %}
-                        </span>
-                        <span class="more">
-                            &#8230;&nbsp;
-                            <a href="#">
-                                <em>
-                                   {% blocktrans with subjects_reminder|length as number %}and {{number}} more (click to view).{% endblocktrans %}
-                                </em>
-                            </a>
-                        </span>
-                        <span class="hide">
-                            <a href="#">
-                                &nbsp;
-                                <em>
-                                   {% blocktrans %}(hide these subjects){% endblocktrans %}
-                                </em>
-                            </a>
-                        </span>
-                    </span>
-                {% endif %}
             {% else %}
                 {% if image.subject_type != 600 %}
                     <strong>{% trans "Subject type" %}:</strong> {{subject_type}}
