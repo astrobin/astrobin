@@ -4,7 +4,7 @@
 {% load i18n %}
 
 {% if status != 'error' %}
-    {% cache 300 astrobin_image cache_key %}
+    {% cache 3600 astrobin_image cache_key %}
     <div class="astrobin-image-container
 
         {% if alias == 'regular_solved_overlay' %}
