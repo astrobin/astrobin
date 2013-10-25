@@ -57,3 +57,6 @@ class Solver(object):
     def annotated_image_url(self, submission):
         return self._backend().annotated_image_url(submission)
 
+    def sky_plot_zoom1_image_url(self, submission):
+        return self._backend().sky_plot_zoom1_image_url(submission)
+

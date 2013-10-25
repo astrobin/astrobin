@@ -227,6 +227,12 @@ class Solver(AbstractPlateSolvingBackend):
             return 'http://nova.astrometry.net/annotated_full/%d' % job_id
         return ''
 
+    def sky_plot_zoom1_image_url(self, sub_id):
+        job_id = self.get_job_from_sub(sub_id)
+        if job_id:
+            return 'http://nova.astrometry.net/sky_plot/zoom1/%d' % job_id
+        return ''
+
     def start(self, image_file):
         apikey = settings.ASTROMETRY_NET_API_KEY
         self.login(apikey)
