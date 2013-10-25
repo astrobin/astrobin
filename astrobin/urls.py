@@ -255,10 +255,7 @@ urlpatterns = patterns('',
     url(r'^save_gear_user_info/$', views.save_gear_user_info, name='save_gear_user_info'),
 
     url(r'^gear_popover_ajax/(?P<id>\d+)/$', views.gear_popover_ajax, name='gear_popover_ajax'),
-    url(r'^subject_popover_ajax/(?P<id>\d+)/$', views.subject_popover_ajax, name='subject_popover_ajax'),
     url(r'^user_popover_ajax/(?P<username>[\w.@+-]+)/$', views.user_popover_ajax, name='user_popover_ajax'),
-
-    url(r'^subject/(?P<id>\d+)/$', views.subject_page, name='subject_page'),
 
     url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-_]+)/)?$', views.gear_page, name='gear_page'),
     url(r'^gear/fix/(?P<id>\d+)/$', views.gear_fix, name='gear_fix'),
