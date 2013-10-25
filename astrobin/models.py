@@ -47,14 +47,14 @@ from astrobin_apps_platesolving.models import Solution
 class HasSolutionMixin(object):
      @property
      def solution(self):
-         ctype = ContentType.objects.get_for_model(self.__class__)
+        ctype = ContentType.objects.get_for_model(self.__class__)
 
-         try:
-             solution = Solution.objects.get(content_type = ctype, object_id = self.id)
-         except:
-            return None
+        try:
+            solution = Solution.objects.get(content_type = ctype, object_id = self.id)
+        except:
+           return None
 
-         return solution
+        return solution
 
 
 def image_upload_path(instance, filename):
