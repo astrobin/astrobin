@@ -7,24 +7,7 @@ from django.db import models
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        from djangoratings.models import Vote
-        from toggleproperties.models import ToggleProperty
-
-        for vote in Vote.objects.filter(score__gt = 3):
-            tp = ToggleProperty.objects.filter(
-                property_type = "like",
-                user = vote.user,
-                content_type = vote.content_type,
-                object_id = vote.object_id)
-
-            if not tp:
-                tp = ToggleProperty(
-                    property_type = "like",
-                    user = vote.user,
-                    content_type = vote.content_type,
-                    object_id = vote.object_id,
-                    created_on = vote.date_added)
-                tp.save()
+        pass
 
 
     def backwards(self, orm):
