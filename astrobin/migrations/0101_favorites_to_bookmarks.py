@@ -7,30 +7,26 @@ from django.db import models
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        from django.contrib.auth.models import User
-        from django.contrib.contenttypes.models import ContentType
-        from toggleproperties.models import ToggleProperty
-
-        image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
+        image_ct = orm['contenttypes.contenttype'].objects.get(app_label = 'astrobin', model = 'image')
 
         for fave in orm['astrobin.favorite'].objects.all():
-            tp = ToggleProperty.objects.filter(
+            tp = orm['toggleproperties.toggleproperty'].objects.filter(
                 property_type = "bookmark",
                 user = fave.user,
                 content_type = image_ct,
                 object_id = fave.image.id)
 
             if not tp:
-                user = User.objects.get(id = fave.user.id)
-                tp = ToggleProperty(
+                user = orm['auth.user'].objects.get(id = fave.user.id)
+                tp = orm['toggleproperties.toggleproperty'](
                     property_type = "bookmark",
                     user = user,
                     content_type = image_ct,
                     object_id = fave.image.id)
                 tp.save()
 
-                # Force timestamp
-                ToggleProperty.objects.filter(pk = tp.pk).update(created_on = fave.created)
+                # Force timestamp thanks to update()
+                orm['toggleproperties.toggleproperty'].objects.filter(pk = tp.pk).update(created_on = fave.created)
 
 
     def backwards(self, orm):
