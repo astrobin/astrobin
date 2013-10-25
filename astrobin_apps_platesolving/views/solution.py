@@ -86,6 +86,8 @@ class SolutionFinalizeView(base.View):
             solution.orientation = "%.3f" % info['calibration']['orientation']
             solution.radius      = "%.3f" % info['calibration']['radius']
 
+            target = solution.content_type.get_object_for_this_type(pk = solution.object_id)
+
             url = solver.annotated_image_url(solution.submission_id)
             img = NamedTemporaryFile(delete=True)
             img.write(urllib2.urlopen(url).read())
@@ -93,8 +95,8 @@ class SolutionFinalizeView(base.View):
             img.seek(0)
             f = File(img)
 
-            target = solution.content_type.get_object_for_this_type(pk = solution.object_id)
             solution.image_file.save(target.image_file.name, f)
+
 
         solution.save()
 

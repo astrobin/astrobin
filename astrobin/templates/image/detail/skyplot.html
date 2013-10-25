@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% if image.solution and image.solution.skyplot_zoom1 %}
+    <div class="subtle-container sky-plot">
+        <div class="header"><h4><i class="icon-crosshairs"></i> {% trans "Sky plot" %}</h4></div>
+        <img src="{{image.solution.skyplot_zoom1}}" alt="{% trans "Sky plot" %}"/>
+    </div>
+{% endif %}
+

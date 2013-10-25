@@ -35,6 +35,11 @@ class Solution(models.Model):
         blank = True,
     )
 
+    skyplot_zoom1 = models.ImageField(
+        upload_to = 'skyplots',
+        null = True,
+        blank = True,
+    )
 
     objects_in_field = models.CharField(
         max_length = 1024,
