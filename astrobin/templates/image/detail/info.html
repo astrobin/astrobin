@@ -48,10 +48,8 @@
             </div>
         </div>
 
-        {% if user.is_authenticated %}
-            {% add_remove_toggleproperty "follow" image.user request.user %}
-            {% add_remove_toggleproperty "bookmark" image request.user %}
-        {% endif %} <!-- authenticated -->
+        {% add_remove_toggleproperty "follow" image.user request.user %}
+        {% add_remove_toggleproperty "bookmark" image request.user %}
     </div>
 </div>
 
