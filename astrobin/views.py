@@ -678,7 +678,7 @@ def image_detail(request, id, r):
 
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
-    subjects = image.objects_in_field
+    subjects = image.objects_in_field.split(',')
     subjects_limit = 5
 
     licenses = (
