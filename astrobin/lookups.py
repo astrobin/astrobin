@@ -20,21 +20,9 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.utils.encoding import smart_str
 
-from haystack.query import SearchQuerySet
-
 import simplejson
 import string
 import re
-
-INTERESTING_CATALOGS = (
-    'NAME',
-    'M',
-    'NGC',
-    'IC',
-    'VDB',
-    'SH',
-)
-
 
 @require_GET
 def autocomplete(request, what):
@@ -44,58 +32,6 @@ def autocomplete(request, what):
 
     q = smart_str(request.GET['q'])
     limit = 10
-
-    # Subjects have a special case because their name is in the mainId field.
-    if what == 'subjects':
-        db_values = SearchQuerySet().autocomplete(text = q).models(SubjectIdentifier)[:10]
-        for v in db_values:
-            if v.object.catalog in INTERESTING_CATALOGS:
-                id = str(v.object.subject.id)
-                name = v.object.identifier
-                if v.object.catalog == 'NAME':
-                    name = name[4:]
-
-                item = {'id': id, 'name': name}
-                if item not in values:
-                    values.append(item)
-
-        # Not enough? Search Subjects.
-        if len(values) < 10:
-            db_values = SearchQuerySet().autocomplete(text = q).models(Subject)[:10]
-            for v in db_values:
-                if (v.object.catalog and v.object.catalog in INTERESTING_CATALOGS) or not v.object.catalog:
-                    id = str(v.object.id)
-                    name = v.object.mainId
-                    if v.object.catalog == 'NAME':
-                        name = name[4:]
-
-                    item = {'id': id, 'name': name}
-                    if item not in values:
-                        values.append(item)
-
-        # If still not enough, query Simbad.
-        if len(values) < 10:
-            limit = 10 - len(values)
-            subjects = simbad.find_subjects(q)[:limit]
-            if subjects:
-                for s in subjects:
-                    name = s.mainId
-                    if q.lower() not in name.lower():
-                        sids = SubjectIdentifier.objects.filter(subject = s)
-                        for sid in sids:
-                            if q.lower() in sid.identifier.lower():
-                                name = sid.identifier
-                    split = name.split(' ')
-                    if len(split) > 1:
-                        catalog = split[0]
-                        if catalog in INTERESTING_CATALOGS:
-                            if catalog == 'NAME':
-                                name = name[4:]
-                            item = {'id': str(s.id), 'name': name}
-                            if item not in values:
-                                values.append(item)
-
-        return HttpResponse(simplejson.dumps(values))
 
     regex = ".*%s.*" % re.escape(q)
     for k, v in {'locations': Location,
