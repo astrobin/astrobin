@@ -589,6 +589,6 @@ TOGGLEPROPERTIES = {
     "follow": {
         "property_tooltip_on": gettext("Stop following"),
         "property_tooltip_off": gettext("Follow"),
-        "property_icon": "icon-eye-open",
+        "property_icon": "icon-plus",
     }
 }
