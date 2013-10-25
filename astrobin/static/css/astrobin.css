@@ -2364,18 +2364,26 @@ a.button {
 form.avatar-change label.control-label {
   display: none;
 }
-.iotd-thumb-banner {
+.astrobin-image-container ul.badges {
+  list-display: none;
+  margin: 0;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+}
+.astrobin-image-container ul.badges li {
+  margin-bottom: 3px;
+}
+.astrobin-image-container ul.badges li.iotd-thumb-banner {
   text-align: center;
 }
-.iotd-thumb-banner h2 {
+.astrobin-image-container ul.badges li.iotd-thumb-banner h2 {
   margin: 0;
   border-bottom: none;
   font-size: 16px;
   color: #fff;
   background: #e3a936;
-  position: absolute;
-  top: 4px;
-  left: 4px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -2386,36 +2394,22 @@ form.avatar-change label.control-label {
   width: 30px;
   border: 1px solid white;
 }
-.iotd-thumb-banner h2 .icon {
+.astrobin-image-container ul.badges li.iotd-thumb-banner h2 .icon {
   padding: 0;
   position: absolute;
   top: 8px;
   left: 8px;
 }
-.iotd-thumb-banner-tiny h2 {
-  font-size: 10px;
-  top: 2px;
-  left: 2px;
-  height: 16px;
-  width: 16px;
-}
-.iotd-thumb-banner-tiny h2 .icon {
-  top: 3px;
-  left: 3px;
-}
-.top100-badge {
+.astrobin-image-container ul.badges li.top100-badge {
   text-align: center;
 }
-.top100-badge h2 {
+.astrobin-image-container ul.badges li.top100-badge h2 {
   margin: 0;
   border-bottom: none;
   font-size: 9px;
   line-height: 7px;
   color: #fff;
   background: darkred;
-  position: absolute;
-  top: 42px;
-  left: 4px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
@@ -2423,16 +2417,17 @@ form.avatar-change label.control-label {
   -webkit-border-radius: 16px;
   border-radius: 16px;
   border: 1px solid white;
-  padding: 7px 6px;
-  z-index: 2;
+  padding: 8px 6px 6px 6px;
   text-transform: uppercase;
+  width: 18px;
 }
-.top100-badge.top100-badge-large h2 {
+.astrobin-image-container ul.badges li.top100-badge h2 span {
+  display: block;
+}
+.astrobin-image-container ul.badges li.top100-badge.top100-badge-large h2 {
   font-size: 16px;
   line-height: 12px;
   padding: 12px 8px;
-  top: 8px;
-  right: 8px;
   -moz-border-radius: 26px;
   -webkit-border-radius: 26px;
   border-radius: 26px;

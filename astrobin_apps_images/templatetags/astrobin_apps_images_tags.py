@@ -98,13 +98,20 @@ def astrobin_image(
         'thumb', 'runnerup',
     )
 
-    ###########
-    # TOP 100 #
-    ###########
-    response_dict['top100'] = False
-    sqs = SearchQuerySet().models(Image).all().order_by('-likes')[:100]
-    if image in [x.object for x in sqs]:
-        response_dict['top100'] = True
+
+    ##########
+    # BADGES #
+    ##########
+
+    badges = []
+
+    if alias in ('thumb', 'gallery', 'regular'):
+        if image.iotd_date():
+            badges.append('iotd')
+
+        sqs = SearchQuerySet().models(Image).all().order_by('-likes')[:100]
+        if image in [x.object for x in sqs]:
+            badges.append('top100')
 
     return dict(response_dict.items() + {
         'status'        : 'success',
@@ -119,7 +126,8 @@ def astrobin_image(
         'url'           : url,
         'show_tooltip'  : show_tooltip,
         'request'       : context['request'],
-        'cache_key'     : "%s_%s_%s_%d" % (mod if mod else 'none', alias, revision, image.id)
+        'cache_key'     : "%s_%s_%s_%d" % (mod if mod else 'none', alias, revision, image.id),
+        'badges'        : badges,
     }.items())
 
 

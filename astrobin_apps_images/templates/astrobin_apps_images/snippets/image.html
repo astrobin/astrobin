@@ -13,22 +13,32 @@
     ">
 
         {% random_id %}
+
         <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
-            {% comment %} TODO: abstract this with a Badges class {% endcomment %}
-            {% if image.iotd_date and alias == 'thumb' or alias == 'gallery' %}
-                <div class="iotd-thumb-banner{% if alias == 'runnerup' %} iotd-thumb-banner-tiny{% endif %}">
-                    <h2>
-                        <i class="icon icon-trophy"></i>
-                    </h2>
-                </div>
+            {% if badges %}
+                <ul class="badges">
+                    {% for badge in badges %}
+                        {% if badge == 'iotd' and alias != 'regular' %}
+                            <li class="iotd-thumb-banner">
+                                <h2>
+                                    <i class="icon icon-trophy"></i>
+                                </h2>
+                            </li>
+                        {% endif %}
+
+                        {% if badge == 'top100' %}
+                            <li class="top100-badge{% if alias == 'regular' %} top100-badge-large{% endif %}">
+                                <h2>
+                                    <span>Top</span>
+                                    <span>100</span>
+                                </h2>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
             {% endif %}
 
-            {% if top100 and alias == 'thumb' or alias == 'gallery' or alias == 'regular' %}
-                <div class="top100-badge{% if alias == 'regular' %} top100-badge-large{% endif %}">
-                    <h2 {% if not image.iotd_date and alias != 'regular' %}style="top:8px"{% endif %}>Top<br/>100</h2>
-                </div>
-            {% endif %}
 
             <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin / {% trans "Loading" %}..."
                  class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
