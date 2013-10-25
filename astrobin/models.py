@@ -744,6 +744,13 @@ class Image(HasSolutionMixin, models.Model):
         Subject,
     )
 
+    objects_in_field = models.CharField(
+        max_length = 512,
+        verbose_name = _("Objects in field"),
+        help_text=_("Use a <strong>comma</strong> to separate the values."),
+        null = True,
+    )
+
     solar_system_main_subject = models.IntegerField(
         verbose_name = _("Main solar system subject"),
         help_text = _("If the main subject of your image is a body in the solar system, please select which (or which type) it is."),

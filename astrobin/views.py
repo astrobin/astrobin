@@ -678,7 +678,7 @@ def image_detail(request, id, r):
 
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
-    subjects = image.subjects.all()
+    subjects = image.objects_in_field
     subjects_limit = 5
 
     licenses = (
@@ -3115,32 +3115,6 @@ def gear_popover_ajax(request, id):
 
 @require_GET
 @never_cache
-def subject_popover_ajax(request, id):
-    subject = get_object_or_404(Subject, id = id)
-    template = 'popover/subject.html'
-    profile = request.user.userprofile \
-              if request.user.is_authenticated() \
-              else None
-
-    html = render_to_string(template,
-        {
-            'subject': subject,
-            'is_authenticated': request.user.is_authenticated(),
-            'request': request,
-        })
-
-    response_dict = {
-        'success': True,
-        'html': html,
-    }
-
-    return HttpResponse(
-        simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
-
-
-@require_GET
-@never_cache
 def user_popover_ajax(request, username):
     user = get_object_or_404(User, username = username)
     template = 'popover/user.html'
@@ -3177,38 +3151,6 @@ def user_popover_ajax(request, username):
     return HttpResponse(
         simplejson.dumps(response_dict),
         mimetype = 'application/javascript')
-
-
-
-@require_GET
-def subject_page(request, id):
-    subject = get_object_or_404(Subject, id = id)
-
-    all_images = Image.objects.filter(subjects = subject)
-
-    integration_list = DeepSky_Acquisition.objects \
-        .filter(image__subjects = subject) \
-        .exclude(Q(number = None) | Q(duration = None)) \
-        .values_list('number', 'duration')
-
-    total_integration = '0'
-    if integration_list:
-        total_integration = '%.2f' % \
-            (reduce(lambda x, y: x+y,
-                    [x[0]*x[1] for x in integration_list]) \
-            / 3600.00)
-
-    return object_detail(
-        request,
-        queryset = Subject.objects.all(),
-        object_id = id,
-        template_name = 'subject/page.html',
-        template_object_name = 'subject',
-        extra_context = {
-            'examples': all_images[:10],
-            'total_images': all_images.count(),
-            'total_integration': total_integration,
-        })
 
 
 @require_GET
