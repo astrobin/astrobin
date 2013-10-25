@@ -73,9 +73,7 @@
                     {% endif %}
                     {% endcache %}
 
-                    {% if request_user %}
-                        <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
-                    {% endif %}
+                    <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
                 </ul>
             </div>
         </div>
@@ -102,11 +100,9 @@
             </div>
             {% endcache %}
 
-            {% if request_user %}
-                <div class="follow">
-                    {% add_remove_toggleproperty "follow" user request_user %}
-                </div>
-            {% endif %}
+            <div class="follow">
+                {% add_remove_toggleproperty "follow" user request_user %}
+            </div>
         </div>
     {% endif %}
 {% endif %}
