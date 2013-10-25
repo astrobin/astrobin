@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db.models import Q
 
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
@@ -30,6 +31,13 @@ class AppAuthentication(Authentication):
 
 class ImageRevisionResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
+    url_thumb = fields.CharField()
+    url_gallery = fields.CharField()
+    url_regular = fields.CharField()
+    url_hd = fields.CharField()
+    url_real = fields.CharField()
+
+    is_solved = fields.BooleanField()
 
     class Meta:
         authentication = AppAuthentication()
@@ -38,11 +46,36 @@ class ImageRevisionResource(ModelResource):
             'uploaded',
             'w',
             'h',
+
+            'url_thumb',
+            'url_gallery',
+            'url_regular',
+            'url_hd',
+            'url_real',
+
             'is_final',
-            # TODO: filename somehow
-            # TODO: solution
+            'is_solved',
         ]
+
         allowed_methods = ['get']
+
+    def dehydrate_url_thumb(self, bundle):
+        return '%s/%d/%s/thumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_url_gallery(self, bundle):
+        return '%s/%d/%s/thumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_url_regular(self, bundle):
+        return '%s/%d/%s/thumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_url_hd(self, bundle):
+        return '%s/%d/%s/thumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_url_real(self, bundle):
+        return '%s/%d/%s/thumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_is_solved(self, bundle):
+        return bundle.obj.solution != None
 
 
 class ImageResource(ModelResource):
@@ -57,13 +90,26 @@ class ImageResource(ModelResource):
     uploaded = fields.DateField('uploaded')
     updated = fields.DateField('updated')
 
+    url_thumb = fields.CharField()
+    url_gallery = fields.CharField()
+    url_regular = fields.CharField()
+    url_hd = fields.CharField()
+    url_real = fields.CharField()
+
+    is_solved = fields.BooleanField()
+
     class Meta:
         authentication = AppAuthentication()
         queryset = Image.objects.filter(is_wip = False)
         fields = [
             'id',
             'title',
-            # TODO: filename somehow
+
+            'url_thumb',
+            'url_gallery',
+            'url_regular',
+            'url_hd',
+            'url_real',
 
             'uploaded',
             'description',
@@ -76,23 +122,38 @@ class ImageResource(ModelResource):
             # TODO: likes
 
             'is_final',
-
-            # TODO: solution
+            'is_solved',
         ]
         allowed_methods = ['get']
+
         filtering = {
             'title': ALL,
             'description': ALL,
-            # TODO: is_solved
+            'is_solved': ALL,
             'user': ALL_WITH_RELATIONS,
             'uploaded': ALL,
-            'fieldw': ALL,
-            'fieldh': ALL,
-            'fieldunits': ALL,
             'imaging_telescopes': ALL,
             'imaging_cameras': ALL,
         }
         ordering = ['uploaded']
+
+    def dehydrate_url_thumb(self, bundle):
+        return '%s/%d/0/thumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_gallery(self, bundle):
+        return '%s/%d/0/thumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_regular(self, bundle):
+        return '%s/%d/0/thumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_hd(self, bundle):
+        return '%s/%d/0/thumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_real(self, bundle):
+        return '%s/%d/0/thumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_is_solved(self, bundle):
+        return bundle.obj.solution != None
 
     def dehydrate_subjects(self, bundle):
         subjects = bundle.obj.subjects.all()
@@ -129,11 +190,16 @@ class ImageResource(ModelResource):
 
 
 class ImageOfTheDayResource(ModelResource):
+    image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
+    runnerup_1 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_1')
+    runnerup_2 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_2')
+
     class Meta:
         authentication = AppAuthentication()
         queryset = ImageOfTheDay.objects.all()
         fields = [
             'image',
-            'filename',
+            'runnerup_1',
+            'runnerup_2',
             'date',
         ]
