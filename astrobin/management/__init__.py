@@ -91,6 +91,11 @@ NOTICE_TYPES = (
         '',
     ),
     (
+        'new_like',
+        _("Your image was liked"),
+        '',
+    ),
+    (
         'new_image_from_gear',
         _("New image with some gear you follow"),
         '',

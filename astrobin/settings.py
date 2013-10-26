@@ -158,6 +158,7 @@ MIDDLEWARE_CLASSES = [
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
+    'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 ]

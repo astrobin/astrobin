@@ -41,7 +41,7 @@ django-maintenancemode==0.10
 django-memcached==0.1.2
 django-model-utils==1.0.0
 django-modeltranslation==0.3.3
--e git+https://github.com/yourcelf/django-notification#egg=django-notification
+-e git+https://github.com/wadevries/django-notification.git#egg=django-notification
 django-openid-provider==0.4
 django-pagination==1.0.7
 django-paypal==0.1.2
@@ -106,3 +106,5 @@ django-mptt==0.5
 PySide==1.2.1
 django-avatar==2.0
 -e git+https://siovene@bitbucket.org/siovene/django-toggle-properties.git#egg=toggleproperties
+-e git+https://github.com/rassie/django-persistent-messages.git#django-persistent-messages
+django-request-provider==1.0.1

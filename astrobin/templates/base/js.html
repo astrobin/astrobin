@@ -85,11 +85,11 @@
         var notifications_mark_seen = function() {
             $.ajax(
             {
-                url: '/notifications/seen/',
+                url: '/persistent_messages/mark_read/all/',
                 dataType: 'json',
                 success: function() {
-                    $('#notifications-popup li.unread').removeClass('unread');
                     $('#notifications_count').remove();
+                    $('#notifications-popup li.unread').removeClass('unread');
                 }
             });
         };

@@ -7,6 +7,7 @@ from django.utils.translation import ugettext as _
 from haystack.query import SearchQuerySet
 from notification import models as notifications
 from toggleproperties.models import ToggleProperty
+from persistent_messages.models import Message
 
 from astrobin.models import Request
 from astrobin.models import Gear
@@ -22,7 +23,7 @@ def privatebeta_enabled(request):
 def notices_count(request):
     response = {}
     if request.user.is_authenticated():
-        response['notifications_count'] = notifications.Notice.objects.filter(Q(recipient = request.user) & Q(unseen = True)).count()
+        response['notifications_count'] = Message.objects.filter(user = request.user, read = False).count()
 
     return response
 

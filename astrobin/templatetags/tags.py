@@ -9,8 +9,7 @@ from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
-from notification import models as notifications
-from persistent_messages import models as messages
+from persistent_messages.models import Message
 from celery.result import AsyncResult
 
 from astrobin.models import Request
@@ -51,16 +50,16 @@ def related_images(request, object_list, type):
            }
 
 
-@register.inclusion_tag('inclusion_tags/notification_list.html')
-def notification_list(request, show_footer = True, limit = 0):
-    unseen = notifications.Notice.objects.filter(recipient = request.user, unseen = True)
-    seen = notifications.Notice.objects.filter(recipient = request.user, unseen = False)
+@register.inclusion_tag('inclusion_tags/notification_list.html', takes_context = True)
+def notification_list(context):
+    unseen = Message.objects.filter(user = context['request'].user, read = False).order_by('-created')
+    seen   = Message.objects.filter(user = context['request'].user, read = True ).order_by('-created')[:10]
 
-@register.inclusion_tag('inclusion_tags/request_list.html')
-def request_list(request, show_footer = True):
     return {
-        'requests':Request.objects.filter(to_user=request.user).order_by('-created').select_subclasses()[:10],
-        'show_footer':show_footer}
+        'request': context['request'],
+        'unseen' : unseen,
+        'seen'   : seen,
+    }
 
 
 @register.filter

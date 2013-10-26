@@ -1,4 +1,5 @@
 # Django
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse as reverse_url
@@ -21,8 +22,36 @@ from rawdata.models import (
 
 # This app
 from .notifications import push_notification
-from .models import Image, Gear, UserProfile
+from .models import Image, ImageRevision, Gear, UserProfile
 from .gear import get_correct_gear
+
+
+def image_post_save(sender, instance, created, **kwargs):
+    if created:
+        followers = [x.user for x in ToggleProperty.objects.filter(
+            property_type = "follow",
+            content_type = ContentType.objects.get_for_model(User),
+            object_id = instance.user.pk)]
+
+        push_notification(followers, 'new_image',
+            {
+                'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                'originator': instance.user.userprofile,
+            })
+
+
+def imagerevision_post_save(sender, instance, created, **kwargs):
+    if created:
+        followers = [x.user for x in ToggleProperty.objects.filter(
+            property_type = "follow",
+            content_type = ContentType.objects.get_for_model(User),
+            object_id = instance.user.pk)]
+
+        push_notification(followers, 'new_image_revision',
+            {
+                'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                'originator': instance.user.userprofile,
+            })
 
 
 def nested_comment_post_save(sender, instance, created, **kwargs):
@@ -93,6 +122,14 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             elif instance.property_type == "bookmark":
                 verb = "bookmarked"
             act.send(instance.user, verb = verb, target = instance.content_object)
+
+            if instance.content_type == ContentType.objects.get_for_model(Image):
+                push_notification(
+                    [instance.content_object.user], 'new_' + instance.property_type,
+                    {
+                        'url': settings.ASTROBIN_BASE_URL + instance.content_object.get_absolute_url(),
+                        'user': instance.user.userprofile,
+                    })
 
         elif instance.property_type == "follow":
             user_ct = ContentType.objects.get_for_model(User)
@@ -206,6 +243,8 @@ def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, mo
         )
 
 
+post_save.connect(image_post_save, sender = Image)
+post_save.connect(imagerevision_post_save, sender = ImageRevision)
 post_save.connect(nested_comment_post_save, sender = NestedComment)
 post_save.connect(toggleproperty_post_save, sender = ToggleProperty)
 post_save.connect(rawdata_publicdatapool_post_save, sender = PublicDataPool)
