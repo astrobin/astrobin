@@ -617,83 +617,6 @@ def build_catalog_and_name(obj, name):
         setattr(obj, 'catalog', cat)
     setattr(obj, 'name', name)
 
-class Subject(models.Model):
-    # Simbad object id
-    oid = models.IntegerField()
-    # Right ascension
-    ra = models.DecimalField(max_digits=8, decimal_places=5, null=True, blank=True)
-    # Declination
-    dec = models.DecimalField(max_digits=8, decimal_places=5, null=True, blank=True)
-    # Main object identifier (aka main name)
-    mainId = models.CharField(max_length=64, unique=True)
-    # Object type
-    otype = models.CharField(max_length=16, null=True, blank=True)
-    # Morphological type
-    mtype = models.CharField(max_length=16, null=True, blank=True)
-    # Dimensions along the major and minor axis
-    dim_majaxis = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    dim_minaxis = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-
-    # Catalog name, i.e. fist word of a SIMBAD mainId
-    catalog = models.CharField(max_length=64, null=True, blank=True)
-
-    # id of the Subject, excluding the catalog name
-    name = models.CharField(max_length=64, default = '')
-
-    # The list of identifier (aka alternative names) is done via
-    # a many-to-one relationship in SubjectIdentifier.
-
-    def __unicode__(self):
-        return self.mainId
-
-    class Meta:
-        app_label = 'astrobin'
-
-    # Note: this function doesn't deal with the alternative names.
-    def initFromJSON(self, json):
-        for attr in [field.name for field in self._meta.fields]:
-            if attr != 'id' and attr in json:
-                setattr(self, attr, json[attr])
-
-    def getFromSimbad(self):
-        if not self.mainId:
-            return
-        url = settings.SIMBAD_SEARCH_URL + self.mainId
-        f = None
-        try:
-            f = urllib2.urlopen(url)
-        except:
-            return;
-
-        json = simplejson.loads(f.read())
-        self.initFromJson(json)
-        f.close()
-
-    def save(self, *args, **kwargs):
-        build_catalog_and_name(self, self.mainId)
-        super(Subject, self).save(*args, **kwargs)
-
-
-class SubjectIdentifier(models.Model):
-    identifier = models.CharField(max_length=64, unique=True)
-    subject = models.ForeignKey(Subject, related_name='idlist')
-
-    # Catalog name, i.e. fist word of a SIMBAD mainId
-    catalog = models.CharField(max_length=64, null=True, blank=True)
-
-    # id of the Subject, excluding the catalog name
-    name = models.CharField(max_length=64, default = '')
-
-    class Meta:
-        app_label = 'astrobin'
-
-    def __unicode__(self):
-        return self.identifier
-
-    def save(self, *args, **kwargs):
-        build_catalog_and_name(self, self.identifier)
-        super(SubjectIdentifier, self).save(*args, **kwargs)
-
 
 # TODO: unify Image and ImageRevision
 # TODO: remember that thumbnails must return 'final' version
@@ -738,10 +661,6 @@ class Image(HasSolutionMixin, models.Model):
         verbose_name = _("Subject type"),
         choices = SUBJECT_TYPE_CHOICES,
         default = 0,
-    )
-
-    subjects = models.ManyToManyField(
-        Subject,
     )
 
     objects_in_field = models.CharField(
