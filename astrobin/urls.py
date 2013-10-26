@@ -195,8 +195,7 @@ urlpatterns = patterns('',
 
        (r'^notices/', include('notification.urls')),
     url(r'^push_notification/$', views.push_notification, name='push_notification'),
-    url(r'^notifications/seen/$', views.mark_notifications_seen, name='mark_notification_seen'),
-    url(r'^notifications/$', views.notifications, name='notifications'),
+    url(r'^persistent_messages/', include('persistent_messages.urls')),
 
     url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
     url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),

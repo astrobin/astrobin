@@ -2,20 +2,22 @@
 
 {% if request.user.is_authenticated and messages %}
     {% for message in messages %}
-        <div class="alert
-            {% if message.level == 20 %}alert-info{% endif %}
-            {% if message.level == 25 %}alert-success{% endif %}
-            {% if message.level == 30 %}alert-warning{% endif %}
-            {% if message.level == 40 %}alert-error{% endif %}">
-            <button class="close" data-dismiss="alert">&times;</button>
-            <h4 class="alert-heading">
-                {% if message.level == 20 %}<i class="icon-info-sign"></i> {% trans "Hey!" %}{% endif %}
-                {% if message.level == 25 %}<i class="icon-ok-sign"></i> {% trans "Success!" %}{% endif %}
-                {% if message.level == 30 %}<i class="icon-warning-sign"></i> {% trans "Warning!" %}{% endif %}
-                {% if message.level == 40 %}<i class="icon-fire"></i> {% trans "Error!" %}{% endif %}
-            </h4>
-            {{message}}
-        </div>
+        {% if not message.is_persistent %}
+            <div class="alert
+                {% if message.level == 20 %}alert-info{% endif %}
+                {% if message.level == 25 %}alert-success{% endif %}
+                {% if message.level == 30 %}alert-warning{% endif %}
+                {% if message.level == 40 %}alert-error{% endif %}">
+                <button class="close" data-dismiss="alert">&times;</button>
+                <h4 class="alert-heading">
+                    {% if message.level == 20 %}<i class="icon-info-sign"></i> {% trans "Hey!" %}{% endif %}
+                    {% if message.level == 25 %}<i class="icon-ok-sign"></i> {% trans "Success!" %}{% endif %}
+                    {% if message.level == 30 %}<i class="icon-warning-sign"></i> {% trans "Warning!" %}{% endif %}
+                    {% if message.level == 40 %}<i class="icon-fire"></i> {% trans "Error!" %}{% endif %}
+                </h4>
+                {{message}}
+            </div>
+        {% endif %}
     {% endfor %}
 {% endif %}
 
