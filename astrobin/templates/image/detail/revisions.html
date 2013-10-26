@@ -1,15 +1,11 @@
 {% load astrobin_apps_images_tags %}
 {% load i18n %}
 
-{% if revision_data %}
+{% if revisions %}
 <div class="subtle-container">
     <ul class="thumbnails astrobin-thumbnails">
         <li class="thumbnail astrobin-thumbnail revisions">
             <div class="revision">
-                {% if revision_label == '0' %}
-                    <div class="overlay"></div>
-                {% endif %}
-
                 {% if image.is_final %}
                     <div class="final">
                         <span class="text">
@@ -22,20 +18,16 @@
                     {% astrobin_image image 'revision' '0' %}
                 </div>
 
-                <div class="label">
+                <div class="label{% if revision_label == '0' %} active{% endif %}">
                     {% trans "Original" %}
                 </div>
             </div> <!-- .revision -->
         </li>
 
-        {% for r in revision_data %}
+        {% for r in revisions %}
             <li class="thumbnail astrobin-thumbnail revisions">
                 <div class="revision">
-                    {% if revision_label == r.object.label %}
-                        <div class="overlay"></div>
-                    {% endif %}
-
-                    {% if r.object.is_final %}
+                    {% if r.is_final %}
                         <div class="final">
                             <span class="text">
                                 {% trans "Final" %}
@@ -44,11 +36,11 @@
                     {% endif %}
 
                     <div class="image">
-                        {% astrobin_image r.object.image 'revision' r.object.label %}
+                        {% astrobin_image r.image 'revision' r.label %}
                     </div>
 
-                    <div class="label">
-                        {{r.object.label}}
+                    <div class="label{% if revision_label == r.label %} active{% endif %}">
+                        {{r.label}}
                     </div>
                 </div> <!-- .revision -->
             </li>
