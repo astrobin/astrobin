@@ -5,7 +5,6 @@ from models import FocalReducer
 from models import Software
 from models import Filter
 from models import Accessory
-from models import Subject, SubjectIdentifier
 from models import Location
 from models import UserProfile
 
