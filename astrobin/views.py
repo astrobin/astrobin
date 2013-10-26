@@ -677,6 +677,7 @@ def image_detail(request, id, r):
     ##############
 
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
+    mod = request.GET.get('mod')
 
     subjects = image.objects_in_field.split(',')
     skyplot_zoom1 = None
@@ -719,21 +720,6 @@ def image_detail(request, id, r):
         preferred_language = _("English")
 
 
-
-    #######################
-    # GENERATE THUMBNAILS #
-    #######################
-
-    mod = request.GET.get('mod')
-
-    # TODO: remove this structure
-    revision_data = []
-    for revision in revisions:
-        revision_data.append({
-            'object': revision,
-        })
-
-
     ##########################
     # LIKE / BOOKMARKED THIS #
     ##########################
@@ -763,7 +749,6 @@ def image_detail(request, id, r):
         'revisions': revisions,
         'is_revision': is_revision,
         'revision_image': revision_image,
-        'revision_data': revision_data,
         'revision_label': r,
 
         'mod': mod,

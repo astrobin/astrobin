@@ -2851,16 +2851,6 @@ li.revisions {
 .revision {
   position: relative;
 }
-.revision .overlay {
-  background-color: rgba(255, 255, 255, 0.3);
-  filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff')";
-  position: absolute;
-  height: 86px;
-  width: 86px;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
-}
 .revision .final {
   position: relative;
 }
@@ -2899,6 +2889,11 @@ li.revisions {
   -moz-border-radius: 0 0 12px 12px;
   -webkit-border-radius: 0 0 12px 12px;
   border-radius: 0 0 12px 12px;
+}
+.revision .label.active {
+  background: white;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #111;
 }
 .gear-popover .thumbnail,
 .user-popover .thumbnail,

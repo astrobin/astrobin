@@ -3033,15 +3033,6 @@ li.revisions {
 .revision {
     position: relative;
 
-    .overlay {
-        background-color: rgba(255, 255, 255, 0.3);
-        filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff')";
-        position: absolute;
-        height: 86px;
-        width: 86px;
-        .rounded-corners(12px);
-    }
-
     .final {
         position: relative;
 
@@ -3084,6 +3075,12 @@ li.revisions {
         font-weight: bold;
 
         .rounded-corners(0 0 12px 12px);
+
+        &.active {
+            background: white;
+            background-color: rgba(255, 255, 255, 0.66);
+            color: #111;
+        }
     }
 }
 
