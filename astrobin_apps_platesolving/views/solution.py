@@ -97,12 +97,13 @@ class SolutionFinalizeView(base.View):
             solution.image_file.save(target.image_file.name, f)
 
             url = solver.sky_plot_zoom1_image_url(solution.submission_id)
-            img = NamedTemporaryFile(delete=True)
-            img.write(urllib2.urlopen(url).read())
-            img.flush()
-            img.seek(0)
-            f = File(img)
-            solution.skyplot_zoom1.save(target.image_file.name, f)
+            if url:
+                img = NamedTemporaryFile(delete=True)
+                img.write(urllib2.urlopen(url).read())
+                img.flush()
+                img.seek(0)
+                f = File(img)
+                solution.skyplot_zoom1.save(target.image_file.name, f)
 
         solution.save()
 
