@@ -9,7 +9,6 @@ from django.db.models import Q
 class ImageAdmin(admin.ModelAdmin):
     fields = (
         'title',
-        'subjects',
         'description',
         'imaging_telescopes',
         'guiding_telescopes',
@@ -207,8 +206,6 @@ admin.site.register(FocalReducer)
 admin.site.register(Software)
 admin.site.register(Filter)
 admin.site.register(Accessory)
-admin.site.register(Subject)
-admin.site.register(SubjectIdentifier)
 admin.site.register(DeepSky_Acquisition)
 admin.site.register(SolarSystem_Acquisition)
 admin.site.register(Image, ImageAdmin)

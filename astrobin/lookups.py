@@ -8,8 +8,6 @@ from models import Accessory
 from models import Location
 from models import UserProfile
 
-import simbad
-
 from django.db.models import Q
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
