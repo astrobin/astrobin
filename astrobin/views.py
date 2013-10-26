@@ -679,12 +679,20 @@ def image_detail(request, id, r):
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
 
     subjects = image.objects_in_field.split(',')
+    skyplot_zoom1 = None
+
     if is_revision:
-         if revision_image.solution and revision_image.solution.objects_in_field:
-            subjects = revision_image.solution.objects_in_field.split(',')
+        if revision_image.solution:
+            if revision_image.solution.objects_in_field:
+               subjects = revision_image.solution.objects_in_field.split(',')
+            if revision_image.solution.skyplot_zoom1:
+                skyplot_zoom1 = revision_image.solution.skyplot_zoom1
     else:
-        if image.solution and image.solution.objects_in_field:
-            subjects = image.solution.objects_in_field.split(',')
+        if image.solution:
+            if image.solution.objects_in_field:
+                subjects = image.solution.objects_in_field.split(',')
+            if image.solution.skyplot_zoom1:
+                skyplot_zoom1 = image.solution.skyplot_zoom1
 
     subjects_limit = 5
 
@@ -761,6 +769,7 @@ def image_detail(request, id, r):
         'mod': mod,
         'instance_to_platesolve': instance_to_platesolve,
         'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
+        'skyplot_zoom1': skyplot_zoom1,
 
         'like_this': like_this,
         'bookmarked_this': bookmarked_this,

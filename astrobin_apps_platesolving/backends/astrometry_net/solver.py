@@ -215,6 +215,14 @@ class Solver(AbstractPlateSolvingBackend):
         return jobs[0]
 
 
+    def get_job_calibration_from_sub(self, sub_id):
+        s = self.sub_status(sub_id)
+        jc = s.get('job_calibrations', [[]])
+        if not jc or jc[0] == []:
+            return None
+
+        return jc[0][1]
+
     def info(self, sub_id):
         job_id = self.get_job_from_sub(sub_id)
         if job_id:
@@ -228,9 +236,9 @@ class Solver(AbstractPlateSolvingBackend):
         return ''
 
     def sky_plot_zoom1_image_url(self, sub_id):
-        job_id = self.get_job_from_sub(sub_id)
-        if job_id:
-            return 'http://nova.astrometry.net/sky_plot/zoom1/%d' % job_id
+        jc_id = self.get_job_calibration_from_sub(sub_id)
+        if jc_id:
+            return 'http://staging.astrometry.net/sky_plot/zoom1/%d' % jc_id
         return ''
 
     def start(self, image_file):
