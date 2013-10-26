@@ -1455,9 +1455,6 @@ div.capty-target .capty-caption-content .link-overlay a {
 .astrobin-image-container.plot-overlay.plot-overlay-fixed img {
   opacity: 1;
 }
-.main-image {
-  text-align: center;
-}
 .main-image .main-image-inner {
   z-index: 1;
   position: relative;
@@ -1471,7 +1468,6 @@ div.capty-target .capty-caption-content .link-overlay a {
   position: relative;
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 1;
 }
 .image-title {
