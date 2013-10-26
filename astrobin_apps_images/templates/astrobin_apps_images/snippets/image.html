@@ -5,12 +5,7 @@
 
 {% if status != 'error' %}
     {% cache 3600 astrobin_image cache_key %}
-    <div class="astrobin-image-container
-
-        {% if alias == 'regular_solved_overlay' %}
-            plot-overlay
-        {% endif %}
-    ">
+    <div class="astrobin-image-container">
 
         {% random_id %}
 
