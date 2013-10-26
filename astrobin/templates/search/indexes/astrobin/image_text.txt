@@ -2,7 +2,7 @@
 {{object.title}}
 {{object.description}}
 
-{% for i in object.subjects.all %}
+{% for i in object.objects_in_field %}
 	{{i}}
 {% endfor %}
 
