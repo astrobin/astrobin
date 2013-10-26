@@ -679,7 +679,7 @@ def image_detail(request, id, r):
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
     mod = request.GET.get('mod')
 
-    subjects = image.objects_in_field.split(',')
+    subjects = image.objects_in_field.split(',') if image.objects_in_field else ''
     skyplot_zoom1 = None
 
     if is_revision:

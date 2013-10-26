@@ -49,7 +49,7 @@ class Solver(object):
         elif status == 'success':
             return self.SUCCESS
 
-        return self.FAIL
+        return self.FAILED
 
     def info(self, submission):
         return self._backend().info(submission)
