@@ -21,13 +21,8 @@
                             <th>{% trans "User" %}</th>
 
                             <th>
-                                <a href="{% url leaderboard %}{% query_string "sort='avglikes'" "" %}">
-                                    {% trans "Average likes" %} <i class="icon-sort"></i>
-                                </a>
-                            </th>
-                            <th>
                                 <a href="{% url leaderboard %}{% query_string "sort='likes'" "" %}">
-                                    {% trans "Number of likes" %} <i class="icon-sort"></i>
+                                    {% trans "AstroBin index" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
                             <th>
@@ -36,48 +31,33 @@
                                 </a>
                             </th>
                             <th>
-                                <a href="{% url leaderboard %}{% query_string "sort='integration'" "" %}">
-                                    {% trans "Total integration" %} <i class="icon-sort"></i>
-                                </a>
-                            </th>
-                            <th>
-                                <a href="{% url leaderboard %}{% query_string "sort='avg_integration'" "" %}">
-                                    {% trans "Avg. integration hours" %} <i class="icon-sort"></i>
-                                </a>
-                            </th>
-                            <th>
                                 <a href="{% url leaderboard %}{% query_string "sort='images'" "" %}">
                                     {% trans "Images" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
                             <th>
-                                <a href="{% url leaderboard %}{% query_string "sort='comments'" "" %}">
-                                    {% trans "Comments" %} <i class="icon-sort"></i>
+                                <a href="{% url leaderboard %}{% query_string "sort='integration'" "" %}">
+                                    {% trans "Total integration" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
                         </tr>
                     </thead>
                     {% autopaginate user_list 100 %}
                     {% for u in user_list|slice:":100" %}
-                        {% if u.object.username %}
                         <tr>
                             <td>{{page_obj.start_index|add:forloop.counter0}}</td>
                             <td>
                                 <a rel="popover" class="user-popover"
                                    data-load="{% url user_popover_ajax u.object.username %}"
                                    href="{% url user_page u.object.username %}">
-                                    {{u.object.username}}
+                                    {{u.object.userprofile}}
                                 </a>
                             </td>
-                            <td>{{u.average_likes|floatformat}}</td>
-                            <td>{{u.likes}}</td>
+                            <td>{{u.normalized_likes|floatformat:2}}</td>
                             <td>{{u.followers}}</td>
-                            <td>{{u.integration|floatformat}}</td>
-                            <td>{{u.avg_integration|floatformat}}</td>
                             <td>{{u.images}}</td>
-                            <td>{{u.comments_written}}</td>
+                            <td>{{u.integration|floatformat:2}}</td>
                         </tr>
-                        {% endif %}
                     {% endfor %}
                 </table>
             </div>

@@ -17,6 +17,8 @@
                 <li><a href="#7">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
                 <li><a href="#8">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
                 <li><a href="#9">{% blocktrans %}How can I format my comments?{% endblocktrans %}</a></li>
+                <li><a href="#10">{% blocktrans %}How is the AstroBin index calculated?{% endblocktrans %}</a></li>
+                <li><a href="#11">{% blocktrans %}How is the Image of the Day selected?{% endblocktrans %}</a></li>
             </ol>
             <br/>
             <h2>{% trans "... and their answers!" %}</h2>
@@ -114,6 +116,20 @@
                         <tr><td>&gt; {% trans "quoted text" %}</td><td>| <i>{% trans "quoted text" %}</i></td></tr>
                         <tr><td>\*{% trans "escape the formatting syntax" %}\*</td><td>*{% trans "escape the formatting syntax" %}*</td></tr>
                     </table>
+                </li>
+                <li>
+                    <a name="10"></a>
+                    <h4>{% blocktrans %}How is the AstroBin index calculated?{% endblocktrans %}</h4>
+                    <p>
+                    {% blocktrans %}The AstroBin index is a function of the number of Likes and the number of images posted by a user.{% endblocktrans %}
+                    </p>
+                </li>
+                <li>
+                    <a name="11"></a>
+                    <h4>{% blocktrans %}How is the Image of the Day selected?{% endblocktrans %}
+                    <p>
+                    {% blocktrans %}Every night, an algorithm looks at the images uploaded during the previous 7 days. The image with most Likes in that period is selected as Image of the Day.{% endblocktrans %}
+                    </p>
                 </li>
             </ol>
             <br/>

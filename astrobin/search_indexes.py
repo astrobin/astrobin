@@ -279,6 +279,9 @@ class UserIndex(SearchIndex):
     # Total likes of all user's images.
     average_likes = FloatField()
 
+    # Normalized likes (best images only)
+    normalized_likes = FloatField()
+
     # Number of followers
     followers = IntegerField()
 
@@ -352,6 +355,30 @@ class UserIndex(SearchIndex):
         images = self.prepare_images(obj)
 
         return likes / float(images) if images > 0 else 0
+
+    def prepare_normalized_likes(self, obj):
+        def average(values):
+            if len(values):
+                return sum(values) / float(len(values))
+            return 0
+
+        def index(values):
+            import math
+            return average(values) * math.log(len(values)+1, 10)
+
+        avg = self.prepare_average_likes(obj)
+        norm = []
+
+        for i in Image.objects.filter(user = obj, is_wip = False):
+            likes = i.likes()
+            if likes >= avg:
+                norm.append(likes)
+
+        if len(norm) == 0:
+            return 0
+
+        return index(norm)
+
 
     def prepare_followers(self, obj):
         return ToggleProperty.objects.filter(

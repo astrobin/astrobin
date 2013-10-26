@@ -2723,25 +2723,19 @@ def leaderboard(request):
         raise Http404
 
     sqs = SearchQuerySet()
-    sort = '-likes'
+    sort = '-normalized_likes'
     if 'sort' in request.GET:
         sort = request.GET.get('sort')
         if sort == 'likes':
-            sort = '-likes'
-        if sort == 'avglikes':
-            sort = '-average_likes'
+            sort = '-normalized_likes'
         elif sort == 'followers':
             sort = '-followers'
         elif sort == 'integration':
             sort = '-integration'
-        elif sort == 'avg_integration':
-            sort = '-avg_integration'
         elif sort == 'images':
             sort = '-images'
-        elif sort == 'comments':
-            sort = '-comments_written'
         else:
-            sort = '-integration'
+            sort = '-normalized_likes'
 
     queryset = sqs.models(User).order_by(sort)
 
