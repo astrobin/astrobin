@@ -56,16 +56,11 @@ class ImageEditBasicForm(forms.ModelForm):
         help_text = _("If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."),
         error_messages = {'invalid': "The address must start with http:// or https://."},
     )
-    subjects = forms.CharField(
-        required = False,
-        help_text=_("If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."),
-    )
 
     def __init__(self, user=None, **kwargs):
         super(ImageEditBasicForm, self).__init__(**kwargs)
         self.fields['link'].label = _("Link")
         self.fields['link_to_fits'].label = _("Link to TIFF/FITS")
-        self.fields['subjects'].label = _("Subjects")
         self.fields['locations'].label = _("Locations")
 
         profile = user.userprofile
@@ -83,32 +78,9 @@ class ImageEditBasicForm(forms.ModelForm):
 
         return self.cleaned_data['subject_type']
 
-    def clean(self):
-        try:
-            subject_type = self.cleaned_data['subject_type']
-        except KeyError:
-            raise forms.ValidationError(_("There was one or more errors processing the form. You may need to scroll down to see them."))
-
-        if subject_type in (100, 200):
-            skip_as = False
-            try:
-                subjects = self.data['as_values_subjects'].strip()
-            except MultiValueDictKeyError:
-                skip_as = True
-
-            solar_system = self.cleaned_data['solar_system_main_subject']
-            nojs_subjects = self.data['subjects'].strip()
-
-            if solar_system is None and\
-                 (skip_as or (len(subjects) == 0 or (len(subjects) == 1 and subjects[0] in ('', ',')))) and\
-                 (len(nojs_subjects) == 0 or (len(nojs_subjects) == 1 and nojs_subjects[0] in ('', ','))):
-                raise forms.ValidationError(_("Please enter either some subjects or a main solar system subject."));
-
-        return self.cleaned_data
-
     class Meta:
         model = Image
-        fields = ('title', 'link', 'link_to_fits', 'subject_type', 'solar_system_main_subject', 'subjects', 'locations', 'description')
+        fields = ('title', 'link', 'link_to_fits', 'subject_type', 'solar_system_main_subject', 'locations', 'description')
 
 
 class ImageEditWatermarkForm(forms.ModelForm):
