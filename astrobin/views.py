@@ -1659,16 +1659,7 @@ def user_page(request, username):
         # SUBJECT #
         ###########
         elif subsection == 'subject':
-            def reverse_subject_type(label):
-                ret = []
-                for key, value in SUBJECT_TYPES.iteritems():
-                    if value == label:
-                        ret.append(key)
-                return ret
-
-            k_list = []
-
-            menu += [(x, y) for x, y in SUBJECT_LABELS.iteritems()]
+            menu += [('DEEP', _("Deep sky"))]
             menu += [('SOLAR',  _("Solar system"))]
             menu += [('WIDE',   _("Extremely wide field"))]
             menu += [('TRAILS', _("Star trails"))]
@@ -1677,11 +1668,10 @@ def user_page(request, username):
             menu += [('NOSUB', _("No subjects specified"))]
 
             if active is None:
-                active = 'NEBULA'
+                active = 'DEEP'
 
-            if active in SUBJECT_LABELS.keys():
-                r = reverse_subject_type(active)
-                qs = qs.filter(Q(subjects__otype__in = r)).distinct()
+            if active == 'DEEP':
+                qs = qs.filter(subject_type = 100)
 
             elif active == 'SOLAR':
                 qs = qs.filter(solar_system_main_subject__gte = 0)

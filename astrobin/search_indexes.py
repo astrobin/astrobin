@@ -18,7 +18,6 @@ from toggleproperties.models import ToggleProperty
 from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
-from astrobin.models import Subject, SubjectIdentifier
 from astrobin.models import UserProfile
 from astrobin.models import Gear, CommercialGear, RetailedGear
 

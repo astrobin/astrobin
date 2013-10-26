@@ -109,8 +109,8 @@ def astrobin_image(
         if image.iotd_date():
             badges.append('iotd')
 
-        sqs = SearchQuerySet().models(Image).all().order_by('-likes')[:100]
-        if image in [x.object for x in sqs]:
+        top100_ids = SearchQuerySet().models(Image).all().order_by('-likes').values_list('django_id', flat = True)[:100]
+        if image.pk in top100_ids:
             badges.append('top100')
 
     return dict(response_dict.items() + {
