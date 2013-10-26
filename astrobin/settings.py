@@ -154,7 +154,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
-#   'astrobin.middlewares.ProfilerMiddleware',
+    'astrobin.middlewares.ProfileMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
