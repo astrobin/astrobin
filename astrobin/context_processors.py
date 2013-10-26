@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.utils.translation import ugettext as _
 
+from haystack.query import SearchQuerySet
 from notification import models as notifications
 from toggleproperties.models import ToggleProperty
 
@@ -51,7 +52,7 @@ def user_profile(request):
 
 def user_scores(request):
     scores = {
-        'user_scores_likes': 0,
+        'user_scores_index': 0,
         'user_scores_followers': 0,
     }
 
@@ -62,19 +63,14 @@ def user_scores(request):
 
         if not scores:
             scores = {}
-            all_images = Image.objects.filter(user = request.user, is_wip = False)
 
-            likes = 0
-            for i in all_images:
-                likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
+            user_search_result = SearchQuerySet().models(User).filter(django_id = request.user.pk)[0]
+            index = user_search_result.normalized_likes
+            followers = user_search_result.followers
 
-            profile = request.user.userprofile
-            followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
-
-
-            scores['user_scores_likes'] = likes
+            scores['user_scores_index'] = index
             scores['user_scores_followers'] = followers
-            cache.set(cache_key, scores, 600)
+            cache.set(cache_key, scores, 43200)
 
     return scores
 
