@@ -142,13 +142,6 @@ def jsonDump(all):
         return []
 
 
-def jsonDumpSubjects(all):
-    if len(all) > 0:
-        return simplejson.dumps([{'id': i.id, 'name': i.mainId} for i in all])
-    else:
-        return []
-
-
 # VIEWS
 
 @page_template('index/stream_page.html', key = 'stream_page')
@@ -975,20 +968,11 @@ def image_edit_basic(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    subjects =  u', '.join(x.mainId for x in image.subjects.all())
-
     form = ImageEditBasicForm(user = image.user, instance = image)
 
     return render_to_response('image/edit/basic.html',
         {'image':image,
          'form':form,
-         'prefill_dict': {
-            'subjects': [jsonDumpSubjects(image.subjects.all()),
-                         "",
-                         _("No results. Sorry."),
-                         _("Click on a suggestion or press TAB to add what you typed")],
-         },
-         'subjects': subjects,
         },
         context_instance=RequestContext(request))
 
@@ -1182,43 +1166,6 @@ def image_edit_license(request, id):
 @login_required
 @require_POST
 def image_edit_save_basic(request):
-    def find_subject(id):
-        def find_in_simbad(id):
-            import simbad
-            subject = simbad.find_single_subject(id.strip())
-            if subject:
-                return subject
-            else:
-                subjects = simbad.find_subjects(id.strip())
-                if subjects:
-                    return subjects[0]
-
-        try:
-            return Subject.objects.get(id = float(id))
-        except ValueError:
-            subject = Subject.objects.filter(Q(mainId = id) | Q(name = id))
-            if subject:
-               return subject[0]
-            else:
-                identifier = SubjectIdentifier.objects.filter(identifier = id)
-                if identifier:
-                    return identifier[0].subject
-                else:
-                    subject = find_in_simbad(id)
-                    if subject:
-                        return subject
-        except Subject.DoesNotExist:
-            return None
-
-        '''Alright fine, I give up. Let's look for it in
-        our database.'''
-        subject = Subject()
-        subject.oid = -999
-        subject.mainId = id.strip()
-        subject.save()
-
-        return subject
-
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
     form = ImageEditBasicForm(user = image.user, data=request.POST, instance=image)
@@ -1226,40 +1173,16 @@ def image_edit_save_basic(request):
         return HttpResponseForbidden()
 
     if not form.is_valid():
-        subjects =  u', '.join(x.mainId for x in image.subjects.all())
-
         response_dict = {
             'image': image,
             'form': form,
-            'prefill_dict': {
-               'subjects': [jsonDumpSubjects(image.subjects.all()),
-                            "",
-                            _("No results. Sorry.")],
-            },
-            'subjects': subjects,
         }
 
         return render_to_response("image/edit/basic.html",
             response_dict,
             context_instance=RequestContext(request))
 
-    prefill_dict = {}
-
-    try:
-        form.save()
-    except ValueError:
-        pass
-
-    image.subjects.clear()
-    (ids, value) = valueReader(request.POST, 'subjects')
-    for id in ids:
-        subject = find_subject(id)
-        if subject:
-            image.subjects.add(subject)
-    prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
-                                "",
-                                _("No results. Sorry.")]
-    image.save()
+    form.save()
 
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect(image.get_absolute_url())
