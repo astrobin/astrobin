@@ -1495,7 +1495,6 @@ def image_delete_original(request, id):
     image.h = final.h
 
     image.is_final = True
-    image.was_revision = True
 
     if image.solution:
         image.solution.delete()

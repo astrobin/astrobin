@@ -849,11 +849,6 @@ class Image(HasSolutionMixin, models.Model):
         default = True
     )
 
-    was_revision = models.BooleanField(
-        editable = False,
-        default = False,
-    )
-
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
