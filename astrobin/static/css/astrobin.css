@@ -2221,7 +2221,6 @@ p.small {
   position: relative;
   margin: 0;
   padding: 10px;
-  text-align: center;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -2244,7 +2243,7 @@ p.small {
 #language-prompt {
   position: absolute;
   top: 45px;
-  right: 5px;
+  right: 0px;
   z-index: 999;
 }
 #language-prompt .bubble {
@@ -2254,12 +2253,12 @@ p.small {
   border: 1px solid #FBEED5;
 }
 #language-prompt .bubble:after {
-  left: 100px;
+  left: 99px;
 }
 #realname-prompt {
   position: absolute;
-  top: 45px;
-  right: 0;
+  top: 40px;
+  left: 0;
   z-index: 999;
 }
 #realname-prompt .bubble {

@@ -7,29 +7,3 @@
     </ul>
 </div> <!-- user-nav -->
 
-{% if request.user.is_authenticated and not userprofile.real_name and request.path != "/profile/edit/basic/" and not userprofile.seen_realname %}
-<div id="realname-prompt">
-    <div class="bubble">
-        {% blocktrans %}Would you like to start using your real name on AstroBin?{% endblocktrans %}
-        <form method="POST" action="{% url profile_seen_realname %}">
-            <a
-                class="btn btn-mini btn-primary"
-                href="{% url profile_edit_basic %}?hl=rn">
-                {% trans "OK" %}
-            </a>
-
-            <input
-                type="submit"
-                class="btn btn-mini btn-secondary navbar-popup-input"
-                value="{% trans "No, tranks" %}" />
-
-            <input
-                type="hidden"
-                name="next"
-                value="{{request.path}}" />
-        </div>
-    </div>
-</div>
-{% endif %}
-
-
