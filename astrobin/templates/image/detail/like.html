@@ -1,4 +1,15 @@
 {% load toggleproperty_tags %}
 
-{% add_remove_toggleproperty "like" image request.user %}
+{% if request.user.is_authenticated and user_scores_index < 1.5 %}
+    <span class="toggleproperty-add-remove property-like">
+        <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
+            <i class="icon-thumbs-up"></i>
+            <span class="toggleproperties-label">
+                Like
+            </span>
+        </a>
+    </span>
+{% else %}
+    {% add_remove_toggleproperty "like" image request.user %}
+{% endif %}
 
