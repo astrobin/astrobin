@@ -1351,7 +1351,7 @@ class UserProfile(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Company description"),
-        help_text = _("A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#9\">formatting rules</a>."),
+        help_text = _("A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
         validators = [MaxLengthValidator(1000)],
     )
 
@@ -1836,7 +1836,7 @@ class CommercialGear(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Description"),
-        help_text = _("Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#9\">formatting rules</a>."),
+        help_text = _("Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
     )
 
     created = models.DateTimeField(
