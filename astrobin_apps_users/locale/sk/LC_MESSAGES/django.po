@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-28 12:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:43
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:69
+#: templates/astrobin_apps_users/inclusion_tags/user_list.html:7
+msgid "Images"
+msgstr ""
+
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:44
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:72
+#: templates/astrobin_apps_users/inclusion_tags/user_list.html:8
+msgid "Followers"
+msgstr ""
+
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:45
+#: templates/astrobin_apps_users/inclusion_tags/user_list.html:9
+msgid "Following"
+msgstr ""
+
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:98
+#, python-format
+msgid "%(images_number)s image"
+msgid_plural "%(images_number)s images"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:99
+#, python-format
+msgid "%(followers_number)s follower"
+msgid_plural "%(followers_number)s followers"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/astrobin_apps_users/inclusion_tags/user_list.html:6
+msgid "User"
+msgstr ""
+
+#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:23
+#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:27
+msgid "No users."
+msgstr ""
