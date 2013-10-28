@@ -60,19 +60,19 @@ class ImageRevisionResource(ModelResource):
         allowed_methods = ['get']
 
     def dehydrate_url_thumb(self, bundle):
-        return '%s/%d/%s/thumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_gallery(self, bundle):
-        return '%s/%d/%s/thumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_regular(self, bundle):
-        return '%s/%d/%s/thumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_hd(self, bundle):
-        return '%s/%d/%s/thumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_real(self, bundle):
-        return '%s/%d/%s/thumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
@@ -138,28 +138,28 @@ class ImageResource(ModelResource):
         ordering = ['uploaded']
 
     def dehydrate_url_thumb(self, bundle):
-        return '%s/%d/0/thumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
 
     def dehydrate_url_gallery(self, bundle):
-        return '%s/%d/0/thumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
 
     def dehydrate_url_regular(self, bundle):
-        return '%s/%d/0/thumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
 
     def dehydrate_url_hd(self, bundle):
-        return '%s/%d/0/thumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
 
     def dehydrate_url_real(self, bundle):
-        return '%s/%d/0/thumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
 
     def dehydrate_subjects(self, bundle):
-        subjects = bundle.obj.subjects.all()
+        subjects = bundle.obj.objects_in_field
         ssms = bundle.obj.solar_system_main_subject
 
-        ret = [x.mainId for x in subjects]
+        ret = subjects
 
         if ssms:
             ret.append(SOLAR_SYSTEM_SUBJECT_CHOICES[ssms][1])
@@ -173,20 +173,6 @@ class ImageResource(ModelResource):
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
         return [gear_name(x) for x in cameras]
-
-    def build_filters(self, filters = None):
-        if filters is None:
-            filters = {}
-
-        orm_filters = super(ImageResource, self).build_filters(filters)
-
-        if 'subject' in filters:
-            qs = Image.objects.filter(
-                Q(subjects__mainId = filters['subject']) |
-                Q(subjects__idlist__identifier = filters['subject']))
-            orm_filters['pk__in'] = [i.pk for i in qs]
-
-        return orm_filters
 
 
 class ImageOfTheDayResource(ModelResource):
