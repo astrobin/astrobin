@@ -1,4 +1,11 @@
 #!/bin/bash
-cd astrobin; django-admin.py makemessages -a -e html,txt,py -i *zinnia*; cd ..
-cd rawdata; django-admin.py makemessages -a; cd ..
-cd nested_comments; django-admin.py makemessages -a; cd ..
+apps="astrobin rawdata nested_comments astrobin_apps_users astrobin_apps_images astrobin_apps_platesolving"
+langs="ca cs de el en es fa fi fr hu it nl pl pt-BR pt ro ru sk sq sr tr zh-CN"
+
+for app in $apps; do
+    echo "Processing app: $app"
+    for lang in $langs; do
+        (cd $app; django-admin.py makemessages -l $lang -e html,txt,py -i *zinnia*)
+    done
+done
+
