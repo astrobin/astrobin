@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-25 02:47-0500\n"
+"POT-Creation-Date: 2013-10-28 12:45+0000\n"
 "PO-Revision-Date: 2012-05-25 12:28+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1002,13 +1002,13 @@ msgstr "Zambia"
 msgid "Zimbabwe"
 msgstr "Zimbabve"
 
-#: forms.py:57
+#: forms.py:50
 msgid ""
 "If you're hosting a copy of this image on your website, put the address here."
 msgstr ""
 "Nese zoteroni ne sitin tuaj nje kopje te ketij imazhi.vendose adresen ketu."
 
-#: forms.py:63
+#: forms.py:56
 msgid ""
 "If you want to share the TIFF or FITS file of your image, put a link to the "
 "file here. Unfortunately, AstroBin cannot offer to store these files at the "
@@ -1018,52 +1018,29 @@ msgstr ""
 "linkun ketu.Fatkeqesisht.Astrobin nuk mundet ti permbaje keto file,keshtuqe "
 "do ju duhet ti zoteroni ne hapsiren tuaj personale."
 
-#: forms.py:68
-msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
-msgstr ""
-"Nese eshte e mundur, perdor emertimet e katalogeve (p.sh. M101, ose NGC224 "
-"ose IC 1370)."
-
-#: forms.py:73 models.py:1919 models.py:2001 templates/comments.html:33
-#: templates/reviews.html:44 templates/gear/page.html:196
-#: templates/image/detail.html:388
+#: forms.py:62 models.py:1749 models.py:1831 templates/gear/page.html:198
+#: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Link"
 
-#: forms.py:74 templates/image/detail.html:396
+#: forms.py:63 templates/image/detail/image_title.html:22
 msgid "Link to TIFF/FITS"
 msgstr "Linku per TIFF/FITS"
 
-#: forms.py:75
-msgid "Subjects"
-msgstr "Subjektet"
-
-#: forms.py:76 models.py:744 views.py:660 templates/maintenance_base.html:343
+#: forms.py:64 models.py:683 views.py:637 templates/maintenance_base.html:316
 #: templates/profile-edit-menu.html:36
 msgid "Locations"
 msgstr "Vendndodhjet"
 
-#: forms.py:89
+#: forms.py:77
 msgid "This field is required."
 msgstr ""
 
-#: forms.py:97 views.py:2284
-msgid ""
-"There was one or more errors processing the form. You may need to scroll "
-"down to see them."
-msgstr ""
-
-#: forms.py:112
-msgid "Please enter either some subjects or a main solar system subject."
-msgstr ""
-"Ju lutem shkruani apo veconi subjektin ose nje subjekt kryesor te sistemit "
-"diellor."
-
-#: forms.py:125
+#: forms.py:90
 msgid "Opacity"
 msgstr "Patejdukshmeria"
 
-#: forms.py:126
+#: forms.py:91
 msgid ""
 "0 means invisible; 100 means completely opaque. Recommended values are: 10 "
 "if the watermark will appear on the dark sky background, 50 if on some "
@@ -1073,57 +1050,57 @@ msgstr ""
 "e keshilluara jane: 10 nese watermark do vendoset mbi nje sfond qielli te "
 "erret, 50 nese vendoset mbi sfonde te hapur ne ngjyre."
 
-#: forms.py:139
+#: forms.py:104
 msgid "If you want to watermark this image, you must specify some text."
 msgstr ""
 "Nese deshiron te perdoresh watermark per kete foto, duhet te specifikonsh "
 "tekstin."
 
-#: forms.py:166 forms.py:400 models.py:848
+#: forms.py:131 forms.py:367 models.py:742
 msgid "Imaging telescopes or lenses"
 msgstr "Teleskope fotografik ose lentet"
 
-#: forms.py:167 models.py:849
+#: forms.py:132 models.py:743
 msgid "Guiding telescopes or lenses"
 msgstr "Teleskopi ndjekes ose lentet"
 
-#: forms.py:168 forms.py:262 models.py:850 models.py:1508 views.py:2233
+#: forms.py:133 forms.py:227 models.py:744 models.py:1377 views.py:2104
 msgid "Mounts"
 msgstr "Montatura"
 
-#: forms.py:169 forms.py:401 models.py:851
+#: forms.py:134 forms.py:368 models.py:745
 msgid "Imaging cameras"
 msgstr "Kamera fotografike"
 
-#: forms.py:170 models.py:852
+#: forms.py:135 models.py:746
 msgid "Guiding cameras"
 msgstr "Kamera per Ndjekje"
 
-#: forms.py:171 forms.py:264 models.py:853 models.py:1510 views.py:2234
+#: forms.py:136 forms.py:229 models.py:747 models.py:1379 views.py:2105
 msgid "Focal reducers"
 msgstr "Reduktori fokales"
 
-#: forms.py:172 forms.py:265 models.py:854 models.py:1511 views.py:2235
+#: forms.py:137 forms.py:230 models.py:748 models.py:1380 views.py:2106
 msgid "Software"
 msgstr "Programi"
 
-#: forms.py:173 forms.py:266 models.py:855 models.py:1512 views.py:2236
+#: forms.py:138 forms.py:231 models.py:749 models.py:1381 views.py:2107
 msgid "Filters"
 msgstr "Filtra"
 
-#: forms.py:174 forms.py:267 models.py:856 models.py:1513 views.py:2237
+#: forms.py:139 forms.py:232 models.py:750 models.py:1382 views.py:2108
 msgid "Accessories"
 msgstr "Paisje"
 
-#: forms.py:196
+#: forms.py:161
 msgid "If you have a personal website, put the address here."
 msgstr "Nese ke nje website personal, vendosni adresen ketu."
 
-#: forms.py:206 models.py:1437 templates/user/card.html:41
+#: forms.py:171 models.py:1306
 msgid "Website"
 msgstr "Siti web"
 
-#: forms.py:230
+#: forms.py:195
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
@@ -1131,11 +1108,11 @@ msgstr ""
 "Te gjithe teleskopet dhe lentet qe zoteroni, duke perfshire edhe ato per "
 "ndjekjen, shko ketu."
 
-#: forms.py:239
+#: forms.py:204
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr "DSLR-te, CCD-te, kamerat planetare dhe kamerat e ndjekjes shko ketu."
 
-#: forms.py:252
+#: forms.py:217
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
@@ -1144,190 +1121,185 @@ msgstr ""
 "LRGB ne nje kuti,nuk do mundni ti ndani filmimet e bera ne menyren qe i keni "
 "bere."
 
-#: forms.py:261 models.py:1507 views.py:2231
+#: forms.py:226 models.py:1376 views.py:2102
 msgid "Telescopes and lenses"
 msgstr "Teleskope dhe lente"
 
-#: forms.py:263 models.py:1509 views.py:2232
+#: forms.py:228 models.py:1378 views.py:2103
 msgid "Cameras"
 msgstr "Kamerat"
 
-#: forms.py:295 forms.py:309
-#: templates/inclusion_tags/search_image_list.html:65
+#: forms.py:260 forms.py:276
+#: templates/inclusion_tags/search_image_list.html:64
 msgid "Users"
 msgstr "Perdoruesit"
 
-#: forms.py:305
+#: forms.py:272
 #, fuzzy
 msgid "Search type"
 msgstr "Kërko"
 
-#: forms.py:307
+#: forms.py:274
 msgid "All"
 msgstr ""
 
-#: forms.py:308 templates/base.html:372 templates/leaderboard.html:39
-#: templates/site_base.html:372 templates/gear/page.html:235
-#: templates/inclusion_tags/search_image_list.html:53
+#: forms.py:275 templates/leaderboard.html:35 templates/gear/page.html:237
+#: templates/inclusion_tags/search_image_list.html:51
 #: templates/inclusion_tags/search_image_list.html:104
-#: templates/popover/user.html:14
+#: templates/popover/user.html:15
 #: templates/user/profile/commercial/products.html:41
 #: templates/user/profile/commercial/products.html:123
 msgid "Images"
 msgstr "Foto"
 
-#: forms.py:310 models.py:703 views.py:1755
-#: templates/maintenance_base.html:337 templates/profile-edit-menu.html:30
-#: templates/wall.html:143 templates/inclusion_tags/search_image_list.html:12
-#: templates/user/card.html:13 templates/user/profile-subnav.html:144
+#: forms.py:277 models.py:639 views.py:1592
+#: templates/maintenance_base.html:310 templates/profile-edit-menu.html:30
+#: templates/wall.html:144 templates/inclusion_tags/search_image_list.html:13
+#: templates/user/profile-subnav.html:130
 msgid "Gear"
 msgstr "Mekanizëm"
 
-#: forms.py:322
+#: forms.py:289
 #, fuzzy
 msgid "Telescope type"
 msgstr "Hapja e teleskopit"
 
-#: forms.py:323 forms.py:329
+#: forms.py:290 forms.py:296
 msgid "Any"
 msgstr ""
 
-#: forms.py:328
+#: forms.py:295
 #, fuzzy
 msgid "Camera type"
 msgstr "Lentet e kamerës"
 
-#: forms.py:342 forms.py:347
+#: forms.py:309 forms.py:314
 msgid "Express value in mm"
 msgstr "Shpreh vleren ne mm"
 
-#: forms.py:353 forms.py:358
+#: forms.py:320 forms.py:325
 #, fuzzy
 msgid "Express value in &mu;m"
 msgstr "Shpreh vleren ne mm"
 
-#: forms.py:365 forms.py:370 forms.py:598 forms.py:643 forms.py:684
+#: forms.py:332 forms.py:337 forms.py:565 forms.py:610 forms.py:651
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Ju lutem perdorni kete format: vvvv-mm-dd"
 
-#: forms.py:374 forms.py:378
+#: forms.py:341 forms.py:345
 msgid "Express value in hours"
 msgstr "Shpreh vleren me ore"
 
-#: forms.py:390 models.py:873 templates/image/detail.html:642
-#: templates/image/detail.html.py:643 templates/search/search.html:238
+#: forms.py:357 models.py:763 templates/image/detail/info.html:25
+#: templates/image/detail/info.html:26 templates/search/search.html:238
 msgid "License"
 msgstr "Liçense"
 
-#: forms.py:397
+#: forms.py:364
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr "Kerko per objekte astronomik, teleskop ose lente, kamera, filtra..."
 
-#: forms.py:399 models.py:735
+#: forms.py:366 models.py:674
 msgid "Main solar system subject"
 msgstr "Objekt kryesor i sistemit diellor"
 
-#: forms.py:402
+#: forms.py:369
 msgid "Min. telescope aperture"
 msgstr "Min. hapja e teleskopit"
 
-#: forms.py:403
+#: forms.py:370
 msgid "Max. telescope aperture"
 msgstr "Max. hapja teleskopit"
 
-#: forms.py:404
+#: forms.py:371
 msgid "Acquired after"
 msgstr "Blere mbas"
 
-#: forms.py:405
+#: forms.py:372
 msgid "Acquired before"
 msgstr "Blere perpara"
 
-#: forms.py:406
+#: forms.py:373
 msgid "Min. integration"
 msgstr "Min. integrimi,shuma"
 
-#: forms.py:407
+#: forms.py:374
 msgid "Max. integration"
 msgstr "Max. integrimit,shuma"
 
-#: forms.py:408
+#: forms.py:375
 msgid "Min. Moon phase %"
 msgstr "Min. Faza henore%"
 
-#: forms.py:409
+#: forms.py:376
 msgid "Max. Moon phase %"
 msgstr "Max. Faza henore %"
 
-#: forms.py:548
+#: forms.py:515
 msgid "Latitude (degrees)"
 msgstr "Gjeresia gjeografike (grade)"
 
-#: forms.py:553
+#: forms.py:520
 msgid "Latitude (minutes)"
 msgstr "Gjeresia gjeografike (minuta)"
 
-#: forms.py:559
+#: forms.py:526
 msgid "Latitude (seconds)"
 msgstr "Gjeresia gjeografike (sekonda)"
 
-#: forms.py:566
+#: forms.py:533
 msgid "Longitude (degrees)"
 msgstr "Gjatesia gjeografike (grade)"
 
-#: forms.py:571
+#: forms.py:538
 msgid "Longitude (minutes)"
 msgstr "Gjatesia gjeografike (minuta)"
 
-#: forms.py:577
+#: forms.py:544
 msgid "Longitude (seconds)"
 msgstr "Gjatesia gjeografike (sekonda)"
 
-#: forms.py:599 forms.py:644 forms.py:685 models.py:1124 models.py:1337
-#: templates/image/detail.html:487
+#: forms.py:566 forms.py:611 forms.py:652 models.py:1020 models.py:1233
+#: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "Data"
 
-#: forms.py:605
+#: forms.py:572
 msgid "Please enter a value between 1 and 5."
 msgstr "Ju lutem percaktoni nje vlere midis 1 dhe 5."
 
-#: forms.py:612
+#: forms.py:579
 msgid "Please enter a value between 1 and 10."
 msgstr "Ju lutem percaktoni nje vlere midis 1 dhe 10."
 
-#: forms.py:673 forms.py:691
+#: forms.py:640 forms.py:658
 msgid "The date cannot be in the future."
 msgstr ""
 
-#: forms.py:718
-msgid "Nominate for"
-msgstr "Emërto për"
-
-#: forms.py:932 forms.py:993 models.py:163 templates/gear/fix.html:32
+#: forms.py:892 forms.py:953 models.py:181 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
 #: templates/gear/fix.html.py:42 templates/gear/fix.html:47
 #: templates/gear/fix.html.py:52 templates/gear/fix.html:57
 #: templates/gear/fix.html.py:62 templates/gear/fix.html:67
 #: templates/gear/fix.html.py:72 templates/gear/fix.html:77
-#: templates/gear/page.html:211 templates/popover/gear.html:5
-#: templates/popover/gear_accessory.html:15
-#: templates/popover/gear_camera.html:16 templates/popover/gear_filter.html:16
-#: templates/popover/gear_focal_reducer.html:15
-#: templates/popover/gear_mount.html:15
-#: templates/popover/gear_software.html:16
-#: templates/popover/gear_telescope.html:16
+#: templates/gear/page.html:213 templates/popover/gear.html:5
+#: templates/popover/gear_accessory.html:16
+#: templates/popover/gear_camera.html:17 templates/popover/gear_filter.html:17
+#: templates/popover/gear_focal_reducer.html:16
+#: templates/popover/gear_mount.html:16
+#: templates/popover/gear_software.html:17
+#: templates/popover/gear_telescope.html:17
 #: templates/user/profile/commercial/products.html:38
 #: templates/user/profile/commercial/products.html:120
 msgid "Make"
 msgstr "Bëj"
 
-#: forms.py:933 forms.py:994 models.py:164
+#: forms.py:893 forms.py:954 models.py:182
 msgid "The make, brand, producer or developer of this product."
 msgstr ""
 
-#: forms.py:938 forms.py:999 models.py:171 models.py:1615 models.py:1772
+#: forms.py:898 forms.py:959 models.py:189 models.py:1467 models.py:1606
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1339,7 +1311,7 @@ msgstr ""
 msgid "Name"
 msgstr "Emer"
 
-#: forms.py:943 forms.py:968 forms.py:1004 forms.py:1039
+#: forms.py:903 forms.py:928 forms.py:964 forms.py:999
 #: templates/user/profile/commercial/products.html:82
 #: templates/user/profile/commercial/products.html:164
 #: templates/user/profile/commercial/products.html:280
@@ -1349,25 +1321,25 @@ msgstr "Emer"
 msgid "Merge"
 msgstr ""
 
-#: forms.py:944 forms.py:1005
+#: forms.py:904 forms.py:965
 msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
 
-#: forms.py:958 forms.py:1021
+#: forms.py:918 forms.py:981
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
 msgstr ""
 
-#: forms.py:969 forms.py:1040
+#: forms.py:929 forms.py:1000
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
 
-#: forms.py:1029
+#: forms.py:989
 #, fuzzy
 msgid "You have already claimed this product."
 msgstr "E ke percaktuar nje here kete foto"
@@ -1385,564 +1357,552 @@ msgid "Body"
 msgstr "Trupi"
 
 #: locale_extras.py:7
+#, fuzzy
+msgid "uploaded a new image"
+msgstr "Fotot e ngarkuara"
+
+#: locale_extras.py:8
 msgid "uploaded a new revision of"
 msgstr "Ngarko nje rishikim te ri"
 
-#: locale_extras.py:8
+#: locale_extras.py:9
 msgid "commented on image"
 msgstr "(komenti u fshi)"
 
-#: locale_extras.py:9
+#: locale_extras.py:10
 #, fuzzy
 msgid "commented on gear item"
 msgstr "Modifiko mekanizmin e perdorur"
 
-#: locale_extras.py:10
-msgid "has favorited"
-msgstr "Shëno si e bërë."
-
 #: locale_extras.py:11
-msgid "has written a review on"
+msgid "bookmarked"
 msgstr ""
 
 #: locale_extras.py:12
-msgid "created a new public data pool"
+msgid "likes"
 msgstr ""
 
 #: locale_extras.py:13
-msgid "added new data to public data pool"
+msgid "has written a review on"
 msgstr ""
 
 #: locale_extras.py:14
+msgid "created a new public data pool"
+msgstr ""
+
+#: locale_extras.py:15
+msgid "added new data to public data pool"
+msgstr ""
+
+#: locale_extras.py:16
 msgid "added a new processed image to public data pool"
 msgstr ""
 
-#: models.py:48
+#: models.py:66
 msgid "None (All rights reserved)"
 msgstr "Asgje (Te gjitha te drejtat e rezervuara)"
 
-#: models.py:49
+#: models.py:67
 msgid "Attribution-NonCommercial-ShareAlike Creative Commons"
 msgstr "Atributim-JoKomerciale-ShperndaEpelqe Creative Commons"
 
-#: models.py:50
+#: models.py:68
 msgid "Attribution-NonCommercial Creative Commons"
 msgstr "Atributim-JoKomercial Creative Commons"
 
-#: models.py:51
+#: models.py:69
 msgid "Attribution-NonCommercial-NoDerivs Creative Commons"
 msgstr "Atributim-JoKomercial-JoPerfitues Creative Commons"
 
-#: models.py:52
+#: models.py:70
 msgid "Attribution Creative Commons"
 msgstr "Atributim Creative Commons"
 
-#: models.py:53
+#: models.py:71
 msgid "Attribution-ShareAlike Creative Commons"
 msgstr "Atributim-ShperndaEpelqe Creative Commons"
 
-#: models.py:54
+#: models.py:72
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Atributim-JoPerfitues Creative Commons"
 
-#: models.py:58 models.py:73 settings.py:68 views.py:727
+#: models.py:76 models.py:91 settings.py:68 views.py:713
 msgid "English"
 msgstr "Anglisht"
 
-#: models.py:59 models.py:74 settings.py:69
+#: models.py:77 models.py:92 settings.py:69
 msgid "Italian"
 msgstr "Italisht"
 
-#: models.py:60 models.py:75 settings.py:70
+#: models.py:78 models.py:93 settings.py:70
 msgid "Spanish"
 msgstr "Spanjisht"
 
-#: models.py:61 models.py:76 settings.py:71
+#: models.py:79 models.py:94 settings.py:71
 msgid "French"
 msgstr "Frengjisht"
 
-#: models.py:62 models.py:77 settings.py:72
+#: models.py:80 models.py:95 settings.py:72
 msgid "Finnish"
 msgstr "Finlandeze"
 
-#: models.py:63 models.py:78 settings.py:73
+#: models.py:81 models.py:96 settings.py:73
 msgid "German"
 msgstr "Gjermane"
 
-#: models.py:64 models.py:79 settings.py:74
+#: models.py:82 models.py:97 settings.py:74
 msgid "Dutch"
 msgstr "Hollandeze"
 
-#: models.py:65 models.py:80 settings.py:75
+#: models.py:83 models.py:98 settings.py:75
 msgid "Turkish"
 msgstr "Turqisht"
 
-#: models.py:66 models.py:81 settings.py:76
+#: models.py:84 models.py:99 settings.py:76
 msgid "Albanian"
 msgstr "Shqiperia"
 
-#: models.py:67 models.py:82 settings.py:77
+#: models.py:85 models.py:100 settings.py:77
 #, fuzzy
 msgid "Polish"
 msgstr "Anglisht"
 
-#: models.py:68 models.py:83 settings.py:78
+#: models.py:86 models.py:101 settings.py:78
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: models.py:69 models.py:84 settings.py:79
+#: models.py:87 models.py:102 settings.py:79
 #, fuzzy
 msgid "Greek"
 msgstr "Greqi"
 
-#: models.py:88
+#: models.py:106
 msgid "Pulsars"
 msgstr "Pulsarët"
 
-#: models.py:89
+#: models.py:107
 msgid "Globular clusters"
 msgstr "Dyndjet Globulare"
 
-#: models.py:90
+#: models.py:108
 msgid "Open clusters"
 msgstr "Dyndjet e Perhapura"
 
-#: models.py:91 templates/wall.html:85
+#: models.py:109 templates/wall.html:86
 msgid "Nebulae"
 msgstr "Mjegullnajat"
 
-#: models.py:92
+#: models.py:110
 msgid "Planetary nebulae"
 msgstr "Mjegullnaje Planetare"
 
-#: models.py:93 templates/wall.html:91
+#: models.py:111 templates/wall.html:92
 msgid "Galaxies"
 msgstr "Galaksite"
 
-#: models.py:114 templates/wall.html:104
+#: models.py:132 templates/wall.html:105
 msgid "Sun"
 msgstr "Dielli"
 
-#: models.py:115
+#: models.py:133
 msgid "Earth's Moon"
 msgstr "Hena"
 
-#: models.py:116
+#: models.py:134
 msgid "Mercury"
 msgstr "Merkuri"
 
-#: models.py:117
+#: models.py:135
 msgid "Venus"
 msgstr "Aferdita"
 
-#: models.py:118
+#: models.py:136
 msgid "Mars"
 msgstr "Marsi"
 
-#: models.py:119
+#: models.py:137
 msgid "Jupiter"
 msgstr "Jupiteri"
 
-#: models.py:120
+#: models.py:138
 msgid "Saturn"
 msgstr "Saturni"
 
-#: models.py:121
+#: models.py:139
 msgid "Uranus"
 msgstr "Urani"
 
-#: models.py:122
+#: models.py:140
 msgid "Neptune"
 msgstr "Neptuni"
 
-#: models.py:123
+#: models.py:141
 msgid "Minor planet"
 msgstr "Planet i vogel"
 
-#: models.py:124
+#: models.py:142
 msgid "Comet"
 msgstr "Kometë"
 
-#: models.py:125 models.py:558 models.py:704 views.py:1761
-#: templates/wall.html:155
+#: models.py:143 models.py:576 models.py:640 views.py:1593
+#: templates/wall.html:156
 msgid "Other"
 msgstr "Te tjerë"
 
-#: models.py:129
+#: models.py:147
 msgid "Center"
 msgstr "Qendër"
 
-#: models.py:130
+#: models.py:148
 msgid "Top left"
 msgstr "Lartë majtas"
 
-#: models.py:131
+#: models.py:149
 msgid "Top center"
 msgstr "Lartë ne qendër"
 
-#: models.py:132
+#: models.py:150
 msgid "Top right"
 msgstr "Lartë djathtas"
 
-#: models.py:133
+#: models.py:151
 msgid "Bottom left"
 msgstr "Ne fund majtas"
 
-#: models.py:134
+#: models.py:152
 msgid "Bottom center"
 msgstr "Ne fund ne qendër"
 
-#: models.py:135
+#: models.py:153
 msgid "Bottom right"
 msgstr "Ne fund djathtas"
 
-#: models.py:172
+#: models.py:190
 msgid ""
 "Just the name of this product, without any properties or personal "
 "customizations. Try to use the international name, in English language, if "
 "applicable. This name is shared among all users on AstroBin."
 msgstr ""
 
-#: models.py:331
+#: models.py:349
 msgid "Alias"
 msgstr ""
 
-#: models.py:332
+#: models.py:350
 msgid ""
 "A descriptive name, alias or nickname for your own copy of this product."
 msgstr ""
 
-#: models.py:339
+#: models.py:357
 #, fuzzy
 msgid "Comment"
 msgstr "Komentet"
 
-#: models.py:340
+#: models.py:358
 msgid ""
 "Information, description or comment about your own copy of this product."
 msgstr ""
 
-#: models.py:379
+#: models.py:397
 msgid "Refractor: achromatic"
 msgstr "Refraktor: akromatik"
 
-#: models.py:380
+#: models.py:398
 msgid "Refractor: semi-apochromatic"
 msgstr "Refraktor: gjysem-apokromatik"
 
-#: models.py:381
+#: models.py:399
 msgid "Refractor: apochromatic"
 msgstr "Refraktor: apokromatik"
 
-#: models.py:382
+#: models.py:400
 msgid "Refractor: non-achromatic Galilean"
 msgstr "Refraktor: jo-akromatik Galilean"
 
-#: models.py:383
+#: models.py:401
 msgid "Refractor: non-achromatic Keplerian"
 msgstr "Refraktor: jo-akromatik Keplerian"
 
-#: models.py:384
+#: models.py:402
 msgid "Refractor: superachromat"
 msgstr "Refraktor: superakromat"
 
-#: models.py:386
+#: models.py:404
 msgid "Reflector: Dall-Kirkham"
 msgstr "Reflektor: Dall-Kirkham"
 
-#: models.py:387
+#: models.py:405
 msgid "Reflector: Nasmyth"
 msgstr "Reflektor: Nasmyth"
 
-#: models.py:388
+#: models.py:406
 msgid "Reflector: Ritchey Chretien"
 msgstr "Reflektor: Ritchey Chretien"
 
-#: models.py:389
+#: models.py:407
 msgid "Reflector: Gregorian"
 msgstr "Reflektor: Gregorjan"
 
-#: models.py:390
+#: models.py:408
 msgid "Reflector: Herschellian"
 msgstr "Reflektor: Herschellian"
 
-#: models.py:391
+#: models.py:409
 #, fuzzy
 msgid "Reflector: Newtonian"
 msgstr "Reflektor: Njutonian"
 
-#: models.py:393
+#: models.py:411
 msgid "Catadioptric: Argunov-Cassegrain"
 msgstr "Katadioptrik: Argunov-Cassegrain"
 
-#: models.py:394
+#: models.py:412
 msgid "Catadioptric: Klevtsov-Cassegrain"
 msgstr "Katadioptrik: Klevtsov-Cassegrain"
 
-#: models.py:395
+#: models.py:413
 msgid "Catadioptric: Lurie-Houghton"
 msgstr "Katadioptrik: Lurie-Houghton"
 
-#: models.py:396
+#: models.py:414
 msgid "Catadioptric: Maksutov"
 msgstr "Katadioptrik: Maksutov"
 
-#: models.py:397
+#: models.py:415
 msgid "Catadioptric: Maksutov-Cassegrain"
 msgstr "Katadioptrik: Maksutov-Cassegrain"
 
-#: models.py:398
+#: models.py:416
 msgid "Catadioptric: modified Dall-Kirkham"
 msgstr "Katadioptrik: Dall-Kirkham i modifikuar"
 
-#: models.py:399
+#: models.py:417
 msgid "Catadioptric: Schmidt camera"
 msgstr "Katadioptrik: Schmidt kamera"
 
-#: models.py:400
+#: models.py:418
 msgid "Catadioptric: Schmidt-Cassegrain"
 msgstr "Katadioptrik: Schmidt-Cassegrain"
 
-#: models.py:401
+#: models.py:419
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Katadioptrik: ACF Schmidt-Cassegrain"
 
-#: models.py:402 stats.py:597
+#: models.py:420 stats.py:597
 msgid "Camera lens"
 msgstr "Lentet e kamerës"
 
-#: models.py:403
+#: models.py:421
 msgid "Binoculars"
 msgstr "Dylbi"
 
-#: models.py:407 templates/popover/gear_telescope.html:17
+#: models.py:425 templates/popover/gear_telescope.html:18
 msgid "Aperture"
 msgstr "Hapja"
 
-#: models.py:408 models.py:417 models.py:487 models.py:496 models.py:787
+#: models.py:426 models.py:435 models.py:505 models.py:514
 msgid "(in mm)"
 msgstr "(në mm)"
 
-#: models.py:416 models.py:791 models.py:1276 templates/image/detail.html:499
-#: templates/popover/gear_telescope.html:18
+#: models.py:434 models.py:1172 templates/image/detail/image_card.html:58
+#: templates/popover/gear_telescope.html:19
 msgid "Focal length"
 msgstr "Gjatesia fokale"
 
-#: models.py:425 models.py:504 models.py:530 models.py:563
-#: templates/gear/page.html:207 templates/popover/gear_camera.html:15
-#: templates/popover/gear_filter.html:15
-#: templates/popover/gear_software.html:15
-#: templates/popover/gear_telescope.html:15 templates/popover/subject.html:9
-#: templates/subject/page.html:31
+#: models.py:443 models.py:522 models.py:548 models.py:581
+#: templates/gear/page.html:209 templates/popover/gear_camera.html:16
+#: templates/popover/gear_filter.html:16
+#: templates/popover/gear_software.html:16
+#: templates/popover/gear_telescope.html:16 templates/popover/subject.html:10
 msgid "Type"
 msgstr "Shtyp"
 
-#: models.py:433 models.py:512 templates/search/search.html:321
+#: models.py:451 models.py:530 templates/search/search.html:321
 msgid "mm"
 msgstr "mm"
 
-#: models.py:441 templates/popover/gear_mount.html:16
+#: models.py:459 templates/popover/gear_mount.html:17
 msgid "Max. payload"
 msgstr "Max. kapacitetit mbajtes"
 
-#: models.py:442
+#: models.py:460
 msgid "(in kg)"
 msgstr "(ne kg)"
 
-#: models.py:450 templates/popover/gear_mount.html:17
+#: models.py:468 templates/popover/gear_mount.html:18
 msgid "Periodic error"
 msgstr "Gabimi periodik"
 
-#: models.py:451
+#: models.py:469
 msgid "(peak to peak, in arcseconds)"
 msgstr "(kulm në kulm, ne arkosekonda)"
 
-#: models.py:460
+#: models.py:478
 msgid "kg"
 msgstr ""
 
-#: models.py:468
+#: models.py:486
 msgid "CCD"
 msgstr "CCD"
 
-#: models.py:469
+#: models.py:487
 msgid "DSLR"
 msgstr "DSLR"
 
-#: models.py:470
+#: models.py:488
 msgid "Guider/Planetary"
 msgstr "Kamera Ndjekese/Planetare"
 
-#: models.py:471
+#: models.py:489
 msgid "Film"
 msgstr "Filmi"
 
-#: models.py:472
+#: models.py:490
 msgid "Compact"
 msgstr "Kompakte"
 
-#: models.py:473
+#: models.py:491
 #, fuzzy
 msgid "Video camera"
 msgstr "Kamera per Ndjekje"
 
-#: models.py:477 models.py:803 templates/popover/gear_camera.html:17
+#: models.py:495 templates/popover/gear_camera.html:18
 #: templates/search/search.html:328
 msgid "Pixel size"
 msgstr "Madhesia e pikselave"
 
-#: models.py:478 models.py:799
+#: models.py:496
 msgid "(in &mu;m)"
 msgstr "(në &mu;m)"
 
-#: models.py:486 templates/popover/gear_camera.html:18
+#: models.py:504 templates/popover/gear_camera.html:19
 msgid "Sensor width"
 msgstr "Gjerësia sensorit"
 
-#: models.py:495 templates/popover/gear_camera.html:19
+#: models.py:513 templates/popover/gear_camera.html:20
 msgid "Sensor height"
 msgstr "Gjatësia e sensorit"
 
-#: models.py:512 templates/search/search.html:329
+#: models.py:530 templates/search/search.html:329
 #, fuzzy
 msgid "&mu;m"
 msgstr "(në &mu;m)"
 
-#: models.py:525
+#: models.py:543
 msgid "Open source or freeware"
 msgstr "Burim i hapur ose falas"
 
-#: models.py:526
+#: models.py:544
 msgid "Paid"
 msgstr "Paguar"
 
-#: models.py:542
+#: models.py:560
 msgid "Clear or color"
 msgstr "Pastro ose ngjyros"
 
-#: models.py:544
+#: models.py:562
 msgid "Broadband: H-Alpha"
 msgstr "Vala e gjerë: H-Alfa"
 
-#: models.py:545
+#: models.py:563
 msgid "Broadband: H-Beta"
 msgstr "Vala e gjerë: H-Beta"
 
-#: models.py:546
+#: models.py:564
 msgid "Broadband: S-II"
 msgstr "Vala e gjerë: S-II"
 
-#: models.py:547
+#: models.py:565
 msgid "Broadband: O-III"
 msgstr "Vala e gjerë: O-III"
 
-#: models.py:548
+#: models.py:566
 msgid "Broadband: N-II"
 msgstr "Vala e gjerë: N-II"
 
-#: models.py:550
+#: models.py:568
 msgid "Narrowband: H-Alpha"
 msgstr "Vala e ngushte: H-Alfa"
 
-#: models.py:551
+#: models.py:569
 msgid "Narrowband: H-Beta"
 msgstr "Valaa e ngushte: H-Beta"
 
-#: models.py:552
+#: models.py:570
 msgid "Narrowband: S-II"
 msgstr "Vala e ngushte: S-II"
 
-#: models.py:553
+#: models.py:571
 msgid "Narrowband: O-III"
 msgstr "Vala e ngushte: O-III"
 
-#: models.py:554
+#: models.py:572
 msgid "Narrowband: N-II"
 msgstr "Vala e ngushte: N-II"
 
-#: models.py:556
+#: models.py:574
 msgid "Light pollution suppression"
 msgstr "Ulës i Ndotjes se Ndricimit artificial"
 
-#: models.py:557
+#: models.py:575
 msgid "Planetary"
 msgstr "Filter planetar"
 
-#: models.py:559
+#: models.py:577
 msgid "UHC: Ultra High Contrast"
 msgstr "UHC: Ultra Kontrast i Lartë"
 
-#: models.py:570 templates/popover/gear_filter.html:17
+#: models.py:588 templates/popover/gear_filter.html:18
 msgid "Bandwidth"
 msgstr "Gjeresia e Valës"
 
-#: models.py:571
+#: models.py:589
 #, fuzzy
 msgid "(in nm)"
 msgstr "(në mm)"
 
-#: models.py:580
+#: models.py:598
 msgid "nm"
 msgstr ""
 
-#: models.py:689
-msgid "I don't want this image plate-solved."
-msgstr "Nuk e dua kete foto te zberthyer me astrometri."
-
-#: models.py:690
-msgid "This is not a deep sky image, don't plate-solve it."
-msgstr ""
-"Kjo nuk është nje fotografi e qiellit te thellë, mos e zberthe ne lastër."
-
-#: models.py:691
-msgid "I have no idea about the size of field, try a blind solve."
-msgstr ""
-"Nuk e di se çfare përmasash ka fusha e shikimit, provo një zgjidhje te "
-"verbërt."
-
-#: models.py:692
-msgid "This is a very wide field image (more than 10 degrees)."
-msgstr ""
-"Kjo eshte nje fotografi me fushe te gjerë shikimi (më shumë se 10 gradë)."
-
-#: models.py:693
-msgid "This is a wide field image (1 to 10 degrees)."
-msgstr "Kjo është një foto me fushë te gjërë shikimi (1 deri 10 gradë)."
-
-#: models.py:694
-msgid "This ia narrow field image (less than 1 degree)."
-msgstr ""
-"Kjo është nje fotografi me fushe të ngushtë shikimi (me pak se 1 gradë)."
-
-#: models.py:699
+#: models.py:635
 #, fuzzy
 msgid "Deep sky object"
 msgstr "Te gjitha objektet e qiellit te thelle"
 
-#: models.py:700
+#: models.py:636
 #, fuzzy
 msgid "Solar system body or event"
 msgstr "Sistemi diellor"
 
-#: models.py:701 views.py:1743 templates/wall.html:131
+#: models.py:637 views.py:1590 templates/wall.html:132
 msgid "Extremely wide field"
 msgstr ""
 
-#: models.py:702 views.py:1749 templates/wall.html:137
+#: models.py:638 views.py:1591 templates/wall.html:138
 msgid "Star trails"
 msgstr ""
 
-#: models.py:721 templates/inclusion_tags/image_list.html:11
-#: templates/inclusion_tags/search_image_list.html:122
+#: models.py:657 templates/inclusion_tags/image_list.html:12
+#: templates/inclusion_tags/search_image_list.html:123
 msgid "Title"
 msgstr "Titulli"
 
-#: models.py:725 templates/image/detail.html:439
-#: templates/user/profile-subnav.html:138
+#: models.py:661 templates/image/detail/image_title.html:41
+#: templates/user/profile-subnav.html:124
 msgid "Subject type"
 msgstr "Tipi i subjektit"
 
-#: models.py:736
+#: models.py:668
+#, fuzzy
+msgid "Objects in field"
+msgstr "Objekti nuk gjindet"
+
+#: models.py:669
+msgid "Use a <strong>comma</strong> to separate the values."
+msgstr "Perdor nje <strong>presje</strong> per te ndare vlerat."
+
+#: models.py:675
 msgid ""
 "If the main subject of your image is a body in the solar system, please "
 "select which (or which type) it is."
@@ -1950,203 +1910,159 @@ msgstr ""
 "Nese subjekti i fotos tuaj është nje trup i sistemit diellor, ju lutem "
 "zgjidhni ate (ose tipin) që është."
 
-#: models.py:745
+#: models.py:684
 msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr ""
 "Zvarrit artikullin nga krahu i djathte ne te majte, ose klikoni shenjen plus."
 
-#: models.py:751 models.py:1780 models.py:2008 templates/gear/page.html:46
-#: templates/image/detail.html:539
+#: models.py:690 models.py:1614 models.py:1838 templates/gear/page.html:48
+#: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Përshkrimi"
 
-#: models.py:752
+#: models.py:691
 msgid "HTML tags are allowed."
 msgstr "Kodet HTML lejohen."
 
-#: models.py:756
-msgid "Allow rating"
-msgstr "Lejo vlersimin"
-
-#: models.py:757
-msgid ""
-"Let other users vote this image. This setting will have no effect if you "
-"have opted out from the rating system in your site's preferences."
-msgstr ""
-
-#: models.py:789
-msgid "Insert a focal length if you want to plate-solve."
-msgstr ""
-"Vendos gjatesine e fokales nese deshironi te zbertheni foton me astrometri."
-
-#: models.py:801
-msgid "Insert a pixel size if you want to plate-solve."
-msgstr ""
-"Vendos madhesine e pikselit nese deshironi te zbertheni foton me astrometri."
-
-#: models.py:811
-msgid ""
-"This is the smallest of the binning values you used. If you imaged L in 1x1 "
-"and RGB in 2x2, put 1x1 here."
-msgstr ""
-"Kjo eshte vlera me e ulet e shumzimit te nje pikseli. Nëse keni fotografuar "
-"L në 1x1 dhe RGB në 2x2, këtu vendos 1x1."
-
-#: models.py:812 models.py:1172
-msgid "Binning"
-msgstr "Binning"
-
-#: models.py:821
-msgid ""
-"If you scaled your image before uploading, enter here the percentage of the "
-"new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't "
-"matter."
-msgstr ""
-"Nese e keni zvogeluar fotografine perpara se ta ngarkonit, vendos perqindjen "
-"e permasave te reja ketu. P.sh. 50 nese keni vene gjysmen e permasave. "
-"Prerja e fotografise,nuk ka rendesi."
-
-#: models.py:822
-msgid "Scaling"
-msgstr "Shkallëzimi"
-
-#: models.py:834
+#: models.py:728
 msgid "Apply watermark to image"
 msgstr "Vendos nje watermark mbi foto"
 
-#: models.py:838 templates/leaderboard.html:20
+#: models.py:732 templates/leaderboard.html:20
 msgid "Position"
 msgstr "Pozicioni"
 
-#: models.py:939 templates/index.html:110 templates/image/detail.html:381
-#: templates/image/full.html:56 templates/inclusion_tags/image_list.html:70
-#: templates/inclusion_tags/messier_list.html:14
-#: templates/inclusion_tags/search_image_list.html:177
+#: models.py:776 templates/image/full.html:56
+#: templates/image/detail/image_title.html:7
 msgid "(no title)"
 msgstr "(pa titull)"
 
-#: models.py:1125
+#: models.py:1021
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Ju lutem perdorni formatin qe vijon: vvvv-mm-dd."
 
-#: models.py:1130 models.py:1336 models.py:1984 templates/user/votes.html:15
+#: models.py:1026 models.py:1232 models.py:1814
 msgid "Image"
 msgstr "Imazhi"
 
-#: models.py:1149
+#: models.py:1045
 msgid "1 - Excellent dark-site sky (BLACK)"
 msgstr "1 - Sit me Qiell te erret te Shkelqyer (Zezë)"
 
-#: models.py:1150
+#: models.py:1046
 msgid "2 - Typical truly dark site (GRAY)"
 msgstr "2 - Sit tipik me nje qiell te erret vertete (GRI)"
 
-#: models.py:1151
+#: models.py:1047
 msgid "3 - Rural sky (BLUE)"
 msgstr "3 - Qiell fshati (Blu)"
 
-#: models.py:1152
+#: models.py:1048
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4 - Midis fshatit/periferise (JESHIL/VERDHE)"
 
-#: models.py:1153
+#: models.py:1049
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5 - Qiell periferie (PORTOKALLI)"
 
-#: models.py:1154
+#: models.py:1050
 msgid "6 - Bright suburban sky (RED)"
 msgstr "6 - Qiell i ndriçuar periferie (KUQE)"
 
-#: models.py:1155
+#: models.py:1051
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
 msgstr "7 - Qiell periferik/urban ose me Hene te Plote (KUQE)"
 
-#: models.py:1156
+#: models.py:1052
 msgid "8 - City sky (WHITE)"
 msgstr "8 - Qiell qyteti (BARDHE)"
 
-#: models.py:1157
+#: models.py:1053
 msgid "9 - Inner city sky (WHITE)"
 msgstr "9 - Qiell perbrenda nje qyteti (BARDHE)"
 
-#: models.py:1161
+#: models.py:1057
 msgid "Synthetic channel"
 msgstr "Kanal sintetik"
 
-#: models.py:1166
+#: models.py:1062
 msgid "Filter"
 msgstr "Filtër"
 
-#: models.py:1175
+#: models.py:1068
+msgid "Binning"
+msgstr "Binning"
+
+#: models.py:1071
 msgid "Number"
 msgstr "Numri"
 
-#: models.py:1177
+#: models.py:1073
 msgid "The number of sub-frames."
 msgstr "Numri i nën-fotove."
 
-#: models.py:1180
+#: models.py:1076
 msgid "Duration"
 msgstr "Kohezgjatja"
 
-#: models.py:1182
+#: models.py:1078
 msgid "Duration of each sub-frame, in seconds."
 msgstr "Kohezgjatja e çdo nen-fotoje, në sekonda."
 
-#: models.py:1185
+#: models.py:1081
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:1189
+#: models.py:1085
 msgid "Gain"
 msgstr "Permiresimi i drites"
 
-#: models.py:1194
+#: models.py:1090
 msgid "Sensor cooling"
 msgstr "Ftohja e sensorit"
 
-#: models.py:1196
+#: models.py:1092
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura e çipit(chip). P.sh.: -20."
 
-#: models.py:1199 views.py:668
+#: models.py:1095 views.py:645
 msgid "Darks"
 msgstr "Dark-et"
 
-#: models.py:1201
+#: models.py:1097
 msgid "The number of dark frames."
 msgstr "Numri i fotove dark."
 
-#: models.py:1204 views.py:669
+#: models.py:1100 views.py:646
 msgid "Flats"
 msgstr "Flat-et"
 
-#: models.py:1206
+#: models.py:1102
 msgid "The number of flat frames."
 msgstr "Numri i fotove flat."
 
-#: models.py:1209 views.py:670
+#: models.py:1105 views.py:647
 msgid "Flat darks"
 msgstr "Flat dark-et"
 
-#: models.py:1211
+#: models.py:1107
 msgid "The number of dark flat frames."
 msgstr "Numri i fotove dark flat."
 
-#: models.py:1214 views.py:671
+#: models.py:1110 views.py:648
 msgid "Bias"
 msgstr "Bias"
 
-#: models.py:1216
+#: models.py:1112
 msgid "The number of bias/offset frames."
 msgstr "Numeri i fotove bias/offset."
 
-#: models.py:1219 views.py:674
+#: models.py:1115 views.py:651
 msgid "Bortle Dark-Sky Scale"
 msgstr "Erresira Bortle-Renditja qiellit"
 
-#: models.py:1223
+#: models.py:1119
 msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
@@ -2154,43 +2070,43 @@ msgstr ""
 "Cilesia e qiellit sipas <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-"
 "Sky_Scale\" target=\"_blank\">vlersimit Bortle</a>."
 
-#: models.py:1227
+#: models.py:1123
 msgid "Mean mag/arcsec^2"
 msgstr "Mesatarja mag/arksek^2"
 
-#: models.py:1228
+#: models.py:1124
 msgid "As measured with your Sky Quality Meter."
 msgstr "Aq sa shenon Matesi i Cilesise se Qiellit nese e zoteroni ate."
 
-#: models.py:1233 views.py:676
+#: models.py:1129 views.py:653
 msgid "Mean FWHM"
 msgstr "Mesatarja FWHM"
 
-#: models.py:1238 views.py:677
+#: models.py:1134 views.py:654
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: models.py:1241
+#: models.py:1137
 msgid "Ambient temperature (in Centigrade degrees)."
 msgstr "Temperatura e ambjentit (ne grade Centigrade)."
 
-#: models.py:1262
+#: models.py:1158
 msgid "Number of frames"
 msgstr "Numri i fotove"
 
-#: models.py:1263
+#: models.py:1159
 msgid "The total number of frames you have stacked."
 msgstr "Numri total i fotove qe keni bashkengjitur."
 
-#: models.py:1267 templates/image/detail.html:496
+#: models.py:1163 templates/image/detail/image_card.html:55
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:1268
+#: models.py:1164
 msgid "Frames per second."
 msgstr "Foto per sekond."
 
-#: models.py:1277
+#: models.py:1173
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
@@ -2198,302 +2114,290 @@ msgstr ""
 "Gjatësia fokale e tërë trenit optik, duke perfshire lentet barlow apo paisje "
 "te tjera shtesë."
 
-#: models.py:1283 templates/image/detail.html:502
+#: models.py:1179 templates/image/detail/image_card.html:61
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:1284
+#: models.py:1180
 msgid "Latitude of the first Central Meridian."
 msgstr "Gjeresia gjeografike e Meridianit te pare Qendror."
 
-#: models.py:1292 templates/image/detail.html:505
+#: models.py:1188 templates/image/detail/image_card.html:64
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:1293
+#: models.py:1189
 msgid "Latitude of the second Central Meridian."
 msgstr "Gjeresia gjeografike e Meridianit te dyte Qendror."
 
-#: models.py:1301 templates/image/detail.html:508
+#: models.py:1197 templates/image/detail/image_card.html:67
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:1302
+#: models.py:1198
 msgid "Latitude of the third Central Meridian."
 msgstr "Gjeresia gjeografike e Meridianit te trete Qendror."
 
-#: models.py:1310 templates/image/detail.html:511
+#: models.py:1206 templates/image/detail/image_card.html:70
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:1311
+#: models.py:1207
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "Vleresimi yt per seeing, ne nje shkalle nga 1 ne 5."
 
-#: models.py:1317 templates/image/detail.html:514
+#: models.py:1213 templates/image/detail/image_card.html:73
 msgid "Transparency"
 msgstr "Transparenca"
 
-#: models.py:1318
+#: models.py:1214
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "Vleresimi yt per transparencen, ne nje shkalle nga 1 ne 10."
 
-#: models.py:1324 templates/image/detail.html:490
+#: models.py:1220 templates/image/detail/image_card.html:49
 msgid "Time"
 msgstr "Ora"
 
-#: models.py:1325
+#: models.py:1221
 msgid "Please use the following format: hh:mm."
 msgstr "Ju lutem perdorni formatin qe vijon: oo:mm."
 
-#: models.py:1383
+#: models.py:1252
 msgid "Request from"
 msgstr "Kerkese nga"
 
-#: models.py:1395
+#: models.py:1264
 msgid "Additional information"
 msgstr "Informacione shtese"
 
-#: models.py:1396 templates/base.html:146 templates/fits.html:5
-#: templates/fits.html.py:10 templates/maintenance_base.html:131
-#: templates/site_base.html:146
+#: models.py:1265
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:1397
+#: models.py:1266
 msgid "Higher resolution"
 msgstr "Risolucion i larte"
 
-#: models.py:1429
+#: models.py:1298
 msgid "Real name"
 msgstr ""
 
-#: models.py:1430
+#: models.py:1299
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
 
-#: models.py:1444 templates/user/card.html:45
+#: models.py:1313
 msgid "Job"
 msgstr "Puna"
 
-#: models.py:1451 templates/user/card.html:49
+#: models.py:1320
 msgid "Hobbies"
 msgstr "Hobit"
 
-#: models.py:1455
+#: models.py:1324
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Keni te tjere hobi perveç astrofotografise?"
 
-#: models.py:1462
+#: models.py:1331
 msgid "Timezone"
 msgstr "Orari zones"
 
-#: models.py:1463
+#: models.py:1332
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 "Mbasi te keni zgjedhur kete, do te shikoni cdo te dhene ne AstroBin sipas "
 "Orarit te zones te ciles i perkisni."
 
-#: models.py:1468
+#: models.py:1337
 msgid "About you"
 msgstr "Persa ju perket ju"
 
-#: models.py:1469
+#: models.py:1338
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Shkruani dicka per veten. Kodet HTML lejohen."
 
-#: models.py:1477
+#: models.py:1346
 msgid "Company name"
 msgstr ""
 
-#: models.py:1478
+#: models.py:1347
 msgid "The name of the company you represent on AstroBin."
 msgstr ""
 
-#: models.py:1484
+#: models.py:1353
 #, fuzzy
 msgid "Company description"
 msgstr "Përshkrimi"
 
-#: models.py:1485
+#: models.py:1354
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
-"some <a href=\"/faq/#10\">formatting rules</a>."
+"some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
 
-#: models.py:1493
+#: models.py:1362
 msgid "Company website"
 msgstr ""
 
-#: models.py:1494
+#: models.py:1363
 msgid "The website of the company you represent on AstroBin."
 msgstr ""
 
-#: models.py:1498
+#: models.py:1367
 msgid "Country of operation"
 msgstr ""
 
-#: models.py:1522 templates/maintenance_base.html:349
+#: models.py:1387 templates/maintenance_base.html:322
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "Liçenca e parazgjedhur/default"
 
-#: models.py:1524
+#: models.py:1389
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr ""
 "Liçenca qe ju zgjodhet do aplikohet automatikisht ne te gjitha fotot e juaja "
 "te reja."
 
-#: models.py:1557
+#: models.py:1422
 msgid "Language"
 msgstr "Gjuha"
 
-#: models.py:1564
-msgid "Opt out from the rating system"
-msgstr ""
-
-#: models.py:1566
-msgid ""
-"This will hide all the votes your image have received the past, prevent new "
-"votes and exclude you from the leaderboard and sorting by rating in searches."
-msgstr ""
-
-#: models.py:1616
+#: models.py:1468
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "Nje emer pershkrues, p.sh. 'Observatori shtepise' ose 'Mali Tomorrit'."
 
-#: models.py:1622
+#: models.py:1474
 msgid "City"
 msgstr "Qyteti"
 
-#: models.py:1623
+#: models.py:1475
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr ""
 "Nese ky vend nuk eshte ne nje qytet, perdorni emrin e qytetit me te afert."
 
-#: models.py:1629
+#: models.py:1481
 msgid "State or province"
 msgstr "Distrikti apo pronince"
 
-#: models.py:1634
+#: models.py:1486
 msgid "Country"
 msgstr "Shteti"
 
-#: models.py:1651
+#: models.py:1503
 msgid "North"
 msgstr "Veri"
 
-#: models.py:1651
+#: models.py:1503
 msgid "South"
 msgstr "Jug"
 
-#: models.py:1652
+#: models.py:1504
 msgid "North or south"
 msgstr "Veri apo jug"
 
-#: models.py:1667
+#: models.py:1519
 msgid "East"
 msgstr "Lindje"
 
-#: models.py:1667
+#: models.py:1519
 msgid "West"
 msgstr "Perëndim"
 
-#: models.py:1668
+#: models.py:1520
 msgid "East or West"
 msgstr "Lindje ose Perëndim"
 
-#: models.py:1672
+#: models.py:1524
 msgid "Altitude"
 msgstr "Lartësia"
 
-#: models.py:1673
+#: models.py:1525
 msgid "In meters."
 msgstr "Ne metra."
 
-#: models.py:1773
+#: models.py:1607
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr ""
 
-#: models.py:1781
+#: models.py:1615
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr ""
 
-#: models.py:1896
+#: models.py:1726
 msgid "AUD - Australian dollars"
 msgstr ""
 
-#: models.py:1897
+#: models.py:1727
 msgid "CAD - Canadian dollars"
 msgstr ""
 
-#: models.py:1898
+#: models.py:1728
 msgid "CHF - Swiss francs"
 msgstr ""
 
-#: models.py:1899
+#: models.py:1729
 msgid "EUR - Euros"
 msgstr ""
 
-#: models.py:1900
+#: models.py:1730
 msgid "GPB - Pound stelings"
 msgstr ""
 
-#: models.py:1901
+#: models.py:1731
 msgid "PLN - Polish zloty"
 msgstr ""
 
-#: models.py:1902
+#: models.py:1732
 msgid "SEK - Swedish krona"
 msgstr ""
 
-#: models.py:1903
+#: models.py:1733
 #, fuzzy
 msgid "USD - American dollars"
 msgstr "Samoa Amerikane"
 
-#: models.py:1909 models.py:1959
+#: models.py:1739 models.py:1789
 msgid "Producer"
 msgstr ""
 
-#: models.py:1920 models.py:2002
+#: models.py:1750 models.py:1832
 msgid "The link to this product's page on your website."
 msgstr ""
 
-#: models.py:1928
+#: models.py:1758
 msgid "Price"
 msgstr ""
 
-#: models.py:1936
+#: models.py:1766
 #, fuzzy
 msgid "Currency"
 msgstr "Transparenca"
 
-#: models.py:1952
+#: models.py:1782
 #, fuzzy
 msgid "Retailed gear items"
 msgstr "Modifiko mekanizmin e perdorur"
 
-#: models.py:1968
+#: models.py:1798
 msgid "Proper make"
 msgstr ""
 
-#: models.py:1969
+#: models.py:1799
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
 "name."
 msgstr ""
 
-#: models.py:1976
+#: models.py:1806
 msgid "Proper name"
 msgstr ""
 
-#: models.py:1977
+#: models.py:1807
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2501,7 +2405,7 @@ msgid ""
 "so try to use a generic version of your product's name."
 msgstr ""
 
-#: models.py:1985
+#: models.py:1815
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2509,28 +2413,27 @@ msgid ""
 "appear in the commercial page."
 msgstr ""
 
-#: models.py:1993
+#: models.py:1823
 msgid "Tagline"
 msgstr ""
 
-#: models.py:1994
+#: models.py:1824
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 
-#: models.py:2009
+#: models.py:1839
 msgid ""
 "Here you can write the full commercial description of your product. You can "
-"use some <a href=\"/faq/#10\">formatting rules</a>."
+"use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
 
-#: models.py:2028
+#: models.py:1858
 #, fuzzy
 msgid "Commercial gear items"
 msgstr "Modifiko mekanizmin e perdorur"
 
-#: search.py:51 views.py:975 views.py:1228 views.py:1253
-#: templates/image/actions/bring_to_attention.html:30
+#: search.py:51 templates/image/actions/bring_to_attention.html:30
 msgid "No results. Sorry."
 msgstr "Asnje rezultat. Me vjen keq."
 
@@ -2538,11 +2441,36 @@ msgstr "Asnje rezultat. Me vjen keq."
 msgid "Matching items:"
 msgstr "Duke bashkrenditur artikujt:"
 
+#: settings.py:574
+#, fuzzy
+msgid "Remove from bookmarks"
+msgstr "Shikoni astrofotot e juaja"
+
+#: settings.py:575
+msgid "Bookmark"
+msgstr ""
+
+#: settings.py:580 settings.py:582
+msgid "Unlike"
+msgstr ""
+
+#: settings.py:581 settings.py:583
+msgid "Like"
+msgstr ""
+
+#: settings.py:588
+msgid "Stop following"
+msgstr "Ndalo ndjekjen"
+
+#: settings.py:589
+msgid "Follow"
+msgstr "Ndiq"
+
 #: stats.py:31
 msgid "Integration hours, yearly"
 msgstr "Integrimi orëve, vjetor"
 
-#: stats.py:32 stats.py:333 templates/subject/page.html:94
+#: stats.py:32 stats.py:333
 msgid "Integration hours, monthly"
 msgstr "Integrimi orëve, mujor"
 
@@ -2566,7 +2494,7 @@ msgstr "Integrimi orëve për mekanizem, ditor"
 msgid "Uploaded images, yearly"
 msgstr "Fotot e ngarkuara, vjetor"
 
-#: stats.py:157 stats.py:296 templates/subject/page.html:102
+#: stats.py:157 stats.py:296
 msgid "Uploaded images, monthly"
 msgstr "Fotot e ngarkuara, mujor"
 
@@ -2586,8 +2514,7 @@ msgstr "Shikime, mujore"
 msgid "Views, daily"
 msgstr "Shikime, perdite"
 
-#: stats.py:376 stats.py:694 templates/gear/page.html:263
-#: templates/subject/page.html:75 templates/subject/page.html.py:110
+#: stats.py:376 stats.py:694 templates/gear/page.html:265
 #, fuzzy
 msgid "Total images"
 msgstr "Asnje foto"
@@ -2617,189 +2544,159 @@ msgstr "Katadioptrik: Maksutov"
 msgid "Number of images by subject type"
 msgstr "Foto re nga %(originator)s"
 
-#: views.py:487
-msgid ""
-"The revision you are looking for is invalid, or was deleted. This is the "
-"original image."
-msgstr ""
-
-#: views.py:658
+#: views.py:635
 msgid "Resolution"
 msgstr "Risolucioni"
 
-#: views.py:659 views.py:757
+#: views.py:636 views.py:769
 msgid "Dates"
 msgstr "Te dhenat"
 
-#: views.py:661 templates/image/detail.html:493
+#: views.py:638 templates/image/detail/image_card.html:52
 msgid "Frames"
 msgstr "Fotot"
 
-#: views.py:667 templates/wall.html:33
-#: templates/inclusion_tags/search_image_list.html:38
+#: views.py:644 templates/wall.html:34
+#: templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
-#: templates/inclusion_tags/search_image_list.html:182
 #: templates/search/search.html:42 templates/search/search.html.py:305
 msgid "Integration"
 msgstr "Integrimi"
 
-#: views.py:667 views.py:1925 views.py:1926
-#: templates/inclusion_tags/search_image_list.html:182
-#: templates/search/search.html:306 templates/subject/page.html:80
+#: views.py:644 views.py:1688 views.py:1689 templates/search/search.html:306
 msgid "hours"
 msgstr "oret"
 
-#: views.py:672
+#: views.py:649
 msgid "Avg. Moon age"
 msgstr "Mes. Mosha Hënës"
 
-#: views.py:672
+#: views.py:649
 msgid "days"
 msgstr "ditët"
 
-#: views.py:673 templates/search/search.html:312
+#: views.py:650 templates/search/search.html:312
 msgid "Avg. Moon phase"
 msgstr "Mes. Fazës Hënore"
 
-#: views.py:675
+#: views.py:652
 msgid "Mean SQM"
 msgstr "Mesatarja SQM"
 
-#: views.py:881 views.py:2820
+#: views.py:928 views.py:2538
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr "Fotografi jo e vlefshme. Formatet e lejuara jane JPG, PNG dhe GIF."
 
-#: views.py:885 views.py:2828 templates/user/profile/flickr_import.html:10
+#: views.py:932 views.py:2545 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
 
-#: views.py:942
+#: views.py:963
 msgid ""
-"Plate-solving has started in the background. It might take a while, so "
-"please don't request it again! You will be notified when the job has "
-"completed. Thanks!"
+"Image uploaded. After this basic information, remember to edit the gear and "
+"acquisition details using the Actions menu. Thank you!"
 msgstr ""
-"Zberthimi ka filluar ne sfond. Do duhet pak kohe, lutemi mos kerkoni akoma "
-"ate! Do lajmeroheni sapo te mbaroj. Faleminderit!"
 
-#: views.py:976
-msgid "Click on a suggestion or press TAB to add what you typed"
-msgstr "Kliko mbi sygjerim ose shtyp TAB per te shtuar ate qe shkruat"
-
-#: views.py:1263 views.py:1346 views.py:1431 views.py:1453 views.py:2133
-#: views.py:2146 views.py:2167 views.py:2204 views.py:2294 views.py:2356
-#: views.py:2564 views.py:4044 views.py:4214
+#: views.py:1190 views.py:1262 views.py:1342 views.py:1364 views.py:2004
+#: views.py:2017 views.py:2038 views.py:2075 views.py:2165 views.py:2227
+#: views.py:2434 views.py:3656 views.py:3826
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
 msgstr "Forma u shpetua. Faleminderit!"
 
-#: views.py:1395
+#: views.py:1310
 msgid "Fill in one session, before adding more."
 msgstr "Ploteso ne nje seance, para se te shtoni me shume."
 
-#: views.py:1651
+#: views.py:1375 views.py:1439
+#, fuzzy
+msgid "Image deleted."
+msgstr "Fotografia juaj u fshi"
+
+#: views.py:1392
+msgid "Revision deleted."
+msgstr ""
+
+#: views.py:1538
 msgid "No date specified"
 msgstr "Asnje datë e specifikuar"
 
-#: views.py:1653
-msgid ""
-"To fill in the missing dates, use the <strong>Edit acquisition details</"
-"strong> entry in the <strong>Actions</strong> menu for each image."
-msgstr ""
-"Per te plotesuar te dhenat qe mungojne, perdor <strong>Nderro detajet e "
-"fotos</strong> hyni ne <strong>Veprimet</strong> menuja per cdo foto."
-
-#: views.py:1694 views.py:1793
+#: views.py:1562 views.py:1630
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
 "Asnje teleskop per foto apo lente, ose asnje aparat apo kamer e specifikuar"
 
-#: views.py:1696 views.py:1796
-msgid ""
-"To fill in the missing gear, use the <strong>Edit gear used</strong> entry "
-"in the <strong>Actions</strong> menu for each image."
-msgstr ""
-"Per te plotesuar mekanizmin qe mungon, perdor<strong>Nderro mekanizmin e "
-"perdorur</strong> hyni ne <strong>Veprime</strong> menuper cdo foto."
-
-#: views.py:1705
+#: views.py:1563
 #, fuzzy
 msgid "Gear images"
 msgstr "Asnje foto"
 
-#: views.py:1737 templates/image/edit/acquisition.html:100
+#: views.py:1588 templates/image/edit/acquisition.html:81
+msgid "Deep sky"
+msgstr "Qiell i thellë"
+
+#: views.py:1589 templates/image/edit/acquisition.html:78
 msgid "Solar system"
 msgstr "Sistemi diellor"
 
-#: views.py:1767 views.py:1783
+#: views.py:1594 views.py:1629
 msgid "No subjects specified"
 msgstr "Asnje subjekt i specifikuar"
 
-#: views.py:1769 views.py:1785
-msgid ""
-"To fill in the missing subjects, use the <strong>Edit basic information</"
-"strong> entry in the <strong>Actions</strong> menu for each image."
-msgstr ""
-"Per te plotesuar subjektet qe mungojne, perdor <strong>Modifiko "
-"informacionet baze</strong> hyni ne <strong>Veprime</strong> menuja per cdo "
-"foto."
-
-#: views.py:1802
+#: views.py:1631
 msgid "No acquisition details specified"
 msgstr "Asnje detaj filmimi i specifikuar"
 
-#: views.py:1805
-msgid ""
-"To fill in the missing acquisition details, use the <strong>Edit acquisition "
-"details</strong> entry in the <strong>Actions</strong> menu for each image."
-msgstr ""
-"Per te plotesuar detajet e filmimit qe mungojne, perdor <strong>Modifiko "
-"detajet e filmimit</strong> hyni ne <strong>Veprime</strong> menu per cdo "
-"foto."
-
-#: views.py:1902 views.py:3374 templatetags/tags.py:93
+#: views.py:1660 views.py:3019 templatetags/tags.py:77
 msgid "minutes"
 msgstr "minuta"
 
-#: views.py:1903 views.py:3375 templatetags/tags.py:94
+#: views.py:1661 views.py:3020 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "sekonda më parë"
 
-#: views.py:1905 views.py:3377 templatetags/tags.py:95
+#: views.py:1663 views.py:3022 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "%s më parë"
 
-#: views.py:1922 templates/popover/user.html:18
+#: views.py:1686 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Anëtar që"
 
-#: views.py:1923
+#: views.py:1687
 msgid "Last login"
 msgstr "Hyrja e fundit"
 
-#: views.py:1924
-msgid "Images uploaded"
-msgstr "Fotografi te ngarkuara"
-
-#: views.py:1925
+#: views.py:1688
 msgid "Total integration time"
 msgstr "Koha totale e integrimit fotografik"
 
-#: views.py:1926
+#: views.py:1689
 msgid "Average integration time"
 msgstr "Koha mesatare e integrimit fotografik"
 
-#: views.py:3178 templatetags/tags.py:341
+#: views.py:2155
+msgid ""
+"There was one or more errors processing the form. You may need to scroll "
+"down to see them."
+msgstr ""
+
+#: views.py:2584
+#, fuzzy
+msgid "Image uploaded. Thank you!"
+msgstr "Forma u shpetua. Faleminderit!"
+
+#: views.py:2886 templatetags/tags.py:237
 #, fuzzy
 msgid "no alias"
 msgstr "Somali"
 
-#: views.py:4004 views.py:4197
+#: views.py:3616 views.py:3809
 msgid "You can't merge a product to itself."
 msgstr ""
 
@@ -2852,71 +2749,68 @@ msgid "AstroBin has published a new blog entry"
 msgstr "AstroBin ka publikuar nje blog te ri hyrje"
 
 #: management/__init__.py:87
-msgid "Nomination for the Messier Marathon"
-msgstr "Nominim per Maratonen Messier"
-
-#: management/__init__.py:93
-msgid "Top Nomination for the Messier Marathon"
-msgstr "Nominimi kryesor per Maratonen Messier"
-
-#: management/__init__.py:99
 msgid "You have some images that are lacking data"
 msgstr "Juve keni disa fotografi ku mungojne te dhënat"
 
-#: management/__init__.py:105
+#: management/__init__.py:93
 msgid "Your image received a new comment"
 msgstr "Fotografia juaj ka pasur nje koment të ri"
 
-#: management/__init__.py:111
+#: management/__init__.py:99
 msgid "There was a reply to your comment"
 msgstr "Komenti yt pati nje përgjigje"
 
-#: management/__init__.py:117
+#: management/__init__.py:105
 #, fuzzy
-msgid "Your image was favorited"
+msgid "Your image was bookmarked"
 msgstr "Fotografia juaj u fshi"
 
-#: management/__init__.py:123
+#: management/__init__.py:111
+#, fuzzy
+msgid "Your image was liked"
+msgstr "Fotografia juaj u fshi"
+
+#: management/__init__.py:117
 #, fuzzy
 msgid "New image with some gear you follow"
 msgstr "Nje fotografi e re nga nje përdorues qe juve ndiqni"
 
-#: management/__init__.py:129
+#: management/__init__.py:123
 #, fuzzy
 msgid "New image of a subject you follow"
 msgstr "Nje fotografi e re nga nje përdorues qe juve ndiqni"
 
-#: management/__init__.py:135
+#: management/__init__.py:129
 msgid "Your API Key request has been approved"
 msgstr ""
 
-#: management/__init__.py:141
+#: management/__init__.py:135
 msgid "New discussion about a gear item you own"
 msgstr ""
 
-#: management/__init__.py:147
+#: management/__init__.py:141
 #, fuzzy
 msgid "New review of a gear item you own"
 msgstr "Nje fotografi e re nga nje përdorues qe juve ndiqni"
 
-#: management/__init__.py:153
+#: management/__init__.py:147
 msgid "New data posted to public pool"
 msgstr ""
 
-#: management/__init__.py:159
+#: management/__init__.py:153
 #, fuzzy
 msgid "New image posted to public data pool"
 msgstr "Nje fotografi e re nga nje përdorues qe juve ndiqni"
 
-#: management/__init__.py:165
+#: management/__init__.py:159
 msgid "New data posted to shared private folder"
 msgstr ""
 
-#: management/__init__.py:171
+#: management/__init__.py:165
 msgid "New image posted to shared private folder"
 msgstr ""
 
-#: management/__init__.py:177
+#: management/__init__.py:171
 #, fuzzy
 msgid "You are invited to a shared private folder"
 msgstr "Ju keni nje mesazh privat te ri."
@@ -2933,6 +2827,26 @@ msgstr ""
 "Na vjen keq, por faqja qe po kerkoni nuk eshte këtu. Nese prisnit nje "
 "fotografi, kjo do te thote qe autori e ka fshire atë."
 
+#: templates/500.html:11
+msgid "Fatal error"
+msgstr ""
+
+#: templates/500.html:13
+msgid "Nothing to worry about, it's not your fault."
+msgstr ""
+
+#: templates/500.html:18
+msgid ""
+"Something unexpected occurred! We have received an email with technical "
+"details, so we will try to fix the problem as soon as possible. Sorry about "
+"the inconvenience! "
+msgstr ""
+
+#: templates/500.html:21
+#, fuzzy
+msgid "Go back to the hom page."
+msgstr "Kthehu te faqja kryesore."
+
 #: templates/503.html:5
 msgid "AstroBin is temporarily unavailable"
 msgstr ""
@@ -2948,19 +2862,17 @@ msgstr ""
 msgid "Come back soon!"
 msgstr ""
 
-#: templates/activities.html:8 templates/index.html:247
+#: templates/activities.html:8
 msgid "Activity stream"
 msgstr ""
 
-#: templates/activities.html:13 templates/index.html:253
-#: templates/index.html.py:313
+#: templates/activities.html:13 templates/index/stream_page.html:10
 #, fuzzy
 msgid "There is no activity yet."
 msgstr "Nuk ka asnje koment."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:10
-#: templates/base.html:239 templates/maintenance_base.html:215
-#: templates/site_base.html:239
+#: templates/maintenance_base.html:188 templates/base/site_links.html:127
 msgid "Affiliates"
 msgstr ""
 
@@ -2992,7 +2904,7 @@ msgstr ""
 "Duke u rregjistruar me AstroBin, ju bini dakord me <a href=\"%(tos_url)s"
 "\">Rregulloren e sherbimit</a>."
 
-#: templates/app_api_key_request.html:18 templates/gear/page.html:111
+#: templates/app_api_key_request.html:18 templates/gear/page.html:113
 #: templates/registration/password_change_form.html:11
 #: templates/registration/password_reset_confirm.html:14
 #: templates/registration/password_reset_form.html:12
@@ -3011,418 +2923,16 @@ msgid ""
 "AstroBin's APIs!"
 msgstr ""
 
-#: templates/base.html:91 templates/base.html.py:656
-#: templates/maintenance_base.html:81 templates/maintenance_base.html:546
-#: templates/site_base.html:91 templates/site_base.html.py:656
-msgid "Site links"
-msgstr "Linket e sitit"
-
-#: templates/base.html:103 templates/maintenance_base.html:88
-#: templates/site_base.html:103
-#, fuzzy
-msgid "Community"
-msgstr "Komentet"
-
-#: templates/base.html:107 templates/base.html.py:659 templates/index.html:284
-#: templates/maintenance_base.html:92 templates/maintenance_base.html:549
-#: templates/site_base.html:107 templates/site_base.html.py:659
-msgid "Blog"
-msgstr "Blog in English"
-
-#: templates/base.html:118 templates/explore_choose.html:6
-#: templates/maintenance_base.html:103 templates/site_base.html:118
+#: templates/explore_choose.html:6 templates/maintenance_base.html:103
+#: templates/base/site_links.html:34
 msgid "Explore"
 msgstr "Eksploroni"
 
-#: templates/base.html:125 templates/explore_choose.html:8
-#: templates/maintenance_base.html:110 templates/site_base.html:125
-#: templates/wall.html:6 templates/wall.html.py:181
+#: templates/explore_choose.html:8 templates/maintenance_base.html:110
+#: templates/wall.html:7 templates/wall.html.py:182
+#: templates/base/site_links.html:41
 msgid "The Big Wall"
 msgstr "Muri i madh"
-
-#: templates/base.html:131 templates/index.html:106
-#: templates/maintenance_base.html:116 templates/site_base.html:131
-#: templates/image/detail.html:303
-#, fuzzy
-msgid "Image of the day"
-msgstr "Fotografi te ngarkuara"
-
-#: templates/base.html:137 templates/explore_choose.html:12
-#: templates/maintenance_base.html:122 templates/site_base.html:137
-msgid "Messier marathon"
-msgstr "Maratona Messier"
-
-#: templates/base.html:152 templates/maintenance_base.html:137
-#: templates/site_base.html:152
-msgid "Public data pools"
-msgstr ""
-
-#: templates/base.html:161 templates/base.html.py:375
-#: templates/comments.html:9 templates/comments.html.py:11
-#: templates/leaderboard.html:44 templates/maintenance_base.html:146
-#: templates/site_base.html:161 templates/site_base.html.py:375
-#: templates/wall.html:58 templates/gear/page.html:117
-#: templates/gear/page.html.py:243 templates/image/detail.html:548
-#: templates/inclusion_tags/search_image_list.html:54
-#: templates/inclusion_tags/search_image_list.html:105
-#: templates/inclusion_tags/search_image_list.html:219
-msgid "Comments"
-msgstr "Komentet"
-
-#: templates/base.html:167 templates/maintenance_base.html:152
-#: templates/reviews.html:9 templates/reviews.html.py:11
-#: templates/site_base.html:167 templates/gear/page.html:68
-#: templates/gear/page.html.py:239
-#, fuzzy
-msgid "Reviews"
-msgstr "Shikime"
-
-#: templates/base.html:176 templates/maintenance_base.html:161
-#: templates/site_base.html:176
-msgid "Advanced search"
-msgstr ""
-
-#: templates/base.html:184 templates/maintenance_base.html:168
-#: templates/site_base.html:184 templates/stats.html:7
-#: templates/subject/page.html:72 templates/user/card.html:27
-msgid "Stats"
-msgstr "Statistikat"
-
-#: templates/base.html:191 templates/leaderboard.html:8
-#: templates/leaderboard.html.py:11 templates/maintenance_base.html:174
-#: templates/site_base.html:191
-msgid "Leaderboard"
-msgstr "Fituesit"
-
-#: templates/base.html:198 templates/base.html.py:660 templates/help.html:4
-#: templates/maintenance_base.html:181 templates/maintenance_base.html:550
-#: templates/site_base.html:198 templates/site_base.html.py:660
-msgid "Help"
-msgstr "Ndihmë"
-
-#: templates/base.html:205 templates/help.html:8
-#: templates/maintenance_base.html:188 templates/site_base.html:205
-msgid "What is this site?"
-msgstr "Cfarë është ky sit?"
-
-#: templates/base.html:211 templates/base.html.py:661 templates/faq.html:4
-#: templates/maintenance_base.html:194 templates/maintenance_base.html:551
-#: templates/site_base.html:211 templates/site_base.html.py:661
-msgid "FAQ"
-msgstr "FAQ"
-
-#: templates/base.html:217 templates/maintenance_base.html:200
-#: templates/questions.html:4 templates/questions.html.py:7
-#: templates/site_base.html:217
-#, fuzzy
-msgid "AstroBin Questions"
-msgstr "AstroBin është shoqëror!"
-
-#: templates/base.html:223 templates/site_base.html:223
-#, fuzzy
-msgid "AstroBin Raw Data"
-msgstr "AstroBin është shoqëror!"
-
-#: templates/base.html:248 templates/maintenance_base.html:224
-#: templates/site_base.html:248 templates/contact_form/contact.html:5
-#: templates/contact_form/contact.html:7
-#, fuzzy
-msgid "Contact"
-msgstr "Permban"
-
-#: templates/base.html:260 templates/leaderboard.html:21
-#: templates/maintenance_base.html:236 templates/site_base.html:260
-#: templates/image/detail.html:249 templates/inclusion_tags/image_list.html:10
-#: templates/inclusion_tags/search_image_list.html:121
-#: templates/user/profile-subnav.html:97 templates/user/votes.html:16
-msgid "User"
-msgstr "Perdorues"
-
-#: templates/base.html:336 templates/site_base.html:336
-msgid "Help with translations!"
-msgstr ""
-
-#: templates/base.html:344 templates/site_base.html:344
-msgid "Please select your language from the options above."
-msgstr "Ju lutem zgjidhni nje gjuhe nga opsionet e mëposhtme."
-
-#: templates/base.html:356 templates/maintenance_base.html:381
-#: templates/maintenance_base.html:382 templates/site_base.html:356
-msgid "Notifications"
-msgstr "Lajmerime"
-
-#: templates/base.html:369 templates/site_base.html:369
-#: templates/user/votes.html:17
-#, fuzzy
-msgid "AstroBin Index"
-msgstr "AstroBin është shoqëror!"
-
-#: templates/base.html:387 templates/index.html:171
-#: templates/maintenance_base.html:255 templates/site_base.html:387
-#: templates/upload.html:6 templates/upload.html.py:18
-#: templates/upload.html:34 templates/avatar/change.html:38
-#: templates/image/detail.html:1274
-msgid "Upload"
-msgstr "Ngarko"
-
-#: templates/base.html:390 templates/maintenance_base.html:258
-#: templates/site_base.html:390
-#, fuzzy
-msgid "My places"
-msgstr "Faqja ime"
-
-#: templates/base.html:396 templates/index.html:269
-#: templates/maintenance_base.html:264 templates/site_base.html:396
-#: templates/wall.html:149 templates/user/profile-subnav.html:20
-msgid "Commercial products"
-msgstr ""
-
-#: templates/base.html:404 templates/maintenance_base.html:272
-#: templates/site_base.html:404 templates/popover/user.html:39
-#: templates/user/profile-subnav.html:28
-msgid "Gallery"
-msgstr "Galeri"
-
-#: templates/base.html:410 templates/maintenance_base.html:278
-#: templates/site_base.html:410 templates/image/detail.html:654
-#: templates/inclusion_tags/search_image_list.html:46
-#: templates/inclusion_tags/search_image_list.html:97
-#: templates/user/profile-subnav.html:42
-msgid "Favorites"
-msgstr ""
-
-#: templates/base.html:416 templates/maintenance_base.html:284
-#: templates/site_base.html:416 templates/image/detail.html:451
-#: templates/image/full.html:79 templates/user/profile-subnav.html:48
-msgid "Technical card"
-msgstr "Skeda teknike"
-
-#: templates/base.html:422 templates/maintenance_base.html:290
-#: templates/site_base.html:422 templates/user/profile-subnav.html:54
-#: templates/user/profile/commercial/products.html:209
-msgid "Plots"
-msgstr "Grafiket"
-
-#: templates/base.html:431 templates/site_base.html:431
-#: templates/user/profile-subnav.html:35
-msgid "Raw data library"
-msgstr ""
-
-#: templates/base.html:438 templates/site_base.html:438
-msgid "Private shared folders"
-msgstr ""
-
-#: templates/base.html:447 templates/maintenance_base.html:298
-#: templates/site_base.html:447 templates/messages/inbox.html:9
-#, fuzzy
-msgid "My messages"
-msgstr "Mesazhe"
-
-#: templates/base.html:453 templates/maintenance_base.html:304
-#: templates/site_base.html:453 templates/user/profile-subnav.html:76
-msgid "API Keys"
-msgstr ""
-
-#: templates/base.html:460 templates/maintenance_base.html:308
-#: templates/site_base.html:460
-msgid "My settings"
-msgstr ""
-
-#: templates/base.html:467 templates/maintenance_base.html:368
-#: templates/site_base.html:467 templates/user/profile.html:91
-#: templates/user/profile.html.py:94
-msgid "Logout"
-msgstr "Dalje"
-
-#: templates/base.html:477 templates/site_base.html:477
-msgid "Would you like to start using your real name on AstroBin?"
-msgstr ""
-
-#: templates/base.html:482 templates/site_base.html:482
-#: templates/image/detail.html:942
-msgid "OK"
-msgstr ""
-
-#: templates/base.html:488 templates/site_base.html:488
-msgid "No, tranks"
-msgstr ""
-
-#: templates/base.html:503 templates/maintenance_base.html:393
-#: templates/site_base.html:503
-msgid "Have an invite? Login!"
-msgstr "Keni nje ftesë? Hyni!"
-
-#: templates/base.html:505 templates/maintenance_base.html:395
-#: templates/site_base.html:505
-#: templates/registration/activation_complete.html:6
-msgid "Login"
-msgstr "Hyrje"
-
-#: templates/base.html:511 templates/index.html:77
-#: templates/maintenance_base.html:401 templates/site_base.html:511
-#: templates/registration/login.html:15
-msgid "Register"
-msgstr "Regjistrohu"
-
-#: templates/base.html:523 templates/maintenance_base.html:413
-#: templates/site_base.html:523
-msgid "Quick search"
-msgstr "Kërkim i shpejtë"
-
-#: templates/base.html:608 templates/help.html:10
-#: templates/maintenance_base.html:498 templates/site_base.html:608
-msgid "Hey!"
-msgstr "Hej!"
-
-#: templates/base.html:609 templates/maintenance_base.html:499
-#: templates/site_base.html:609
-msgid "Success!"
-msgstr ""
-
-#: templates/base.html:610 templates/base.html.py:622 templates/base.html:634
-#: templates/maintenance_base.html:500 templates/maintenance_base.html:512
-#: templates/maintenance_base.html:524 templates/site_base.html:610
-#: templates/site_base.html.py:622 templates/site_base.html:634
-#: templates/upload.html:53 templates/upload.html.py:156
-#: templates/upload.html:349
-msgid "Warning!"
-msgstr "Kujdes!"
-
-#: templates/base.html:611 templates/maintenance_base.html:501
-#: templates/site_base.html:611 templates/upload.html:74
-#: templates/image/detail.html:881 templates/image/detail.html.py:919
-#: templates/image/detail.html:929
-#, fuzzy
-msgid "Error!"
-msgstr "Gabim"
-
-#: templates/base.html:624 templates/maintenance_base.html:514
-#: templates/site_base.html:624
-#, python-format
-msgid ""
-"As a producer and/or a retailer on AstroBin, it's very important that you "
-"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
-"to do it now."
-msgstr ""
-
-#: templates/base.html:636 templates/maintenance_base.html:526
-#: templates/site_base.html:636
-#, python-format
-msgid ""
-"As a retailer on AstroBin, it's very important that you fill in your country "
-"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
-msgstr ""
-
-#: templates/base.html:650 templates/maintenance_base.html:540
-#: templates/site_base.html:650 templates/user/card.html:53
-msgid "About"
-msgstr "Përreth"
-
-#: templates/base.html:652 templates/maintenance_base.html:542
-#: templates/site_base.html:652
-msgid ""
-"AstroBin is an image hosting website specifically targeted to "
-"astrophotographers: it's the first and the last place where you need to "
-"upload your astrophotography images. Made by an astrophotographer, for the "
-"astrophotographers."
-msgstr ""
-"AstroBin eshte nje sit bartës fotografishë, i synuar per astrofotografët: "
-"është vendi i parë dhe i fundit ku ju do keni nevojë të ngarkoni astrofotot "
-"tuaja. I krijuar nga një astrofotograf, për astrofotografët."
-
-#: templates/base.html:658 templates/base.html.py:688
-#: templates/maintenance_base.html:85 templates/maintenance_base.html:548
-#: templates/maintenance_base.html:578 templates/site_base.html:658
-#: templates/site_base.html.py:688
-msgid "Home"
-msgstr "Faqja kryesore"
-
-#: templates/base.html:662 templates/maintenance_base.html:552
-#: templates/site_base.html:662 templates/tos.html:7
-msgid "Terms of Service"
-msgstr "Rregullat e Shërbimit"
-
-#: templates/base.html:663 templates/guidelines.html:7
-#: templates/maintenance_base.html:553 templates/site_base.html:663
-msgid "Guidelines"
-msgstr "Udhëzime"
-
-#: templates/base.html:667 templates/maintenance_base.html:557
-#: templates/site_base.html:667
-msgid "Thanks to"
-msgstr "Falenderime"
-
-#: templates/base.html:669 templates/maintenance_base.html:559
-#: templates/site_base.html:669
-msgid "The localization team"
-msgstr "Lokalizimi i skuadres tonë"
-
-#: templates/base.html:675 templates/maintenance_base.html:565
-#: templates/site_base.html:675
-msgid "Copyright"
-msgstr "Copyright"
-
-#: templates/base.html:677 templates/site_base.html:677
-#, fuzzy
-msgid "The images on this websites are copyright of their respective owners."
-msgstr ""
-"AstroBin është Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
-"Reserved. Fotografitë ne këtë sit jane copyright i pronarëve përkates."
-
-#: templates/base.html:692 templates/maintenance_base.html:582
-#: templates/site_base.html:692
-msgid "Back to top"
-msgstr "Mbrapa te maja"
-
-#: templates/base.html:739 templates/maintenance_base.html:625
-#: templates/site_base.html:739 templates/messages/compose.html:14
-#: templates/openid_provider/decide.html:14
-msgid "Cancel"
-msgstr "Fshi"
-
-#: templates/base.html:781 templates/maintenance_base.html:655
-#: templates/site_base.html:781 templates/image/detail.html:1278
-msgid "No file selected"
-msgstr "Asnje dosje e zgjedhur"
-
-#: templates/base.html:782 templates/maintenance_base.html:656
-#: templates/site_base.html:782 templates/image/detail.html:1279
-msgid "Choose file"
-msgstr "Zgjidh dosjen"
-
-#: templates/comments.html:53 templates/index.html:332
-#: templates/index.html.py:333 templates/leaderboard.html:78
-#: templates/reviews.html:59 templates/image/detail.html:268
-#: templates/image/detail.html.py:664 templates/image/detail.html:1217
-#: templates/image/detail.html.py:1231 templates/image/detail.html:1232
-#: templates/image/detail.html.py:1233
-#: templates/popover/gear_accessory.html:24
-#: templates/popover/gear_camera.html:27 templates/popover/gear_filter.html:25
-#: templates/popover/gear_focal_reducer.html:23
-#: templates/popover/gear_mount.html:25
-#: templates/popover/gear_software.html:24
-#: templates/popover/gear_telescope.html:26 templates/popover/subject.html:23
-#: templates/popover/user.html:33 templates/user/card.html:79
-#: templates/user/profile-js.html:22 templates/user/profile-subnav.html:109
-#: templates/user/profile/commercial/products.html:376
-msgid "Follow"
-msgstr "Ndiq"
-
-#: templates/comments.html:53 templates/index.html:332
-#: templates/index.html.py:333 templates/leaderboard.html:78
-#: templates/reviews.html:59 templates/image/detail.html:1231
-#: templates/image/detail.html.py:1232 templates/image/detail.html:1233
-#: templates/popover/gear_accessory.html:22
-#: templates/popover/gear_camera.html:25 templates/popover/gear_filter.html:23
-#: templates/popover/gear_focal_reducer.html:21
-#: templates/popover/gear_mount.html:23
-#: templates/popover/gear_software.html:22
-#: templates/popover/gear_telescope.html:24 templates/popover/subject.html:21
-#: templates/popover/user.html:28 templates/user/card.html:79
-#: templates/user/profile/commercial/products.html:376
-#, fuzzy
-msgid "Unfollow"
-msgstr "Ndiq"
 
 #: templates/explore_choose.html:9
 msgid ""
@@ -3432,13 +2942,11 @@ msgstr ""
 "Mënyra më e mirë për të parë të rejat në AstroBin: një mur i madh me 100 "
 "foto per faqe, qe mund ti zgjidhni apo filtroni sipas dëshirës."
 
-#: templates/explore_choose.html:13
-msgid ""
-"A list of objects from the Messier catalog, each one represented by an "
-"AstroBin image chosen by the users via a democratic nomination process."
-msgstr ""
-"Një listë objektesh nga katalogu Messier, secila e përfaqësuar nga një foto "
-"e AstroBin e zgjedhur ne mënyrë demokratike nga proçesi emërtimit."
+#: templates/faq.html:4 templates/maintenance_base.html:167
+#: templates/maintenance_base.html:524 templates/base/footer.html:19
+#: templates/base/site_links.html:99
+msgid "FAQ"
+msgstr "FAQ"
 
 #: templates/faq.html:9
 msgid "Frequently Asked Questions"
@@ -3472,27 +2980,27 @@ msgid "What's the deal with the Staging Area and the Public Area?"
 msgstr "Cila është marrëveshja me Zonën e Punimit dhe Zonën Publike?"
 
 #: templates/faq.html:17 templates/faq.html.py:81
-msgid "How do I get an image featured on the Messier Marathon page?"
-msgstr "Si mund te gjej nje foto qe i perket faqes se Maratones Messier?"
-
-#: templates/faq.html:18 templates/faq.html.py:89
 msgid "Why was AstroBin created?"
 msgstr "Përse u krijua AstroBin?"
 
-#: templates/faq.html:19 templates/faq.html.py:102
+#: templates/faq.html:18 templates/faq.html.py:94
 msgid "What are the plans for the future?"
 msgstr "Cilat janë planet për të ardhmen?"
 
-#: templates/faq.html:20 templates/faq.html.py:115
+#: templates/faq.html:19 templates/faq.html.py:107
 msgid "How can I format my comments?"
 msgstr "Si mund ti formatoj komentet e mija?"
 
-#: templates/faq.html:21 templates/faq.html.py:131
-msgid "What is the correct way to vote images?"
+#: templates/faq.html:20 templates/faq.html.py:123
+msgid "How is the AstroBin index calculated?"
 msgstr ""
 
-#: templates/faq.html:22 templates/faq.html.py:178
-msgid "The rating values seem odd. How are they calculated?"
+#: templates/faq.html:21 templates/faq.html.py:131
+msgid "I received some Likes, why is my AstroBin index not updated?"
+msgstr ""
+
+#: templates/faq.html:22 templates/faq.html.py:138
+msgid "How is the Image of the Day selected?"
 msgstr ""
 
 #: templates/faq.html:25
@@ -3617,23 +3125,7 @@ msgstr ""
 "dukshme ne profilin tuaj. Mos harroni qe ju mund te spostoni gjithashtu para "
 "mbrapa nga nje zone ne tjetren, sa here te deshironi!"
 
-#: templates/faq.html:84
-#, python-format
-msgid ""
-"Images on the <a href=\"%(messier_url)s\">Messier Marathon page</a> are "
-"selected via a democratic nomination process. If you see an image of some "
-"Messier Object, and you think that it should appear on the Messier Marathon "
-"page, nominate it using the <strong>Actions</strong> menu. The image with "
-"the most nominations for a certain Messier object will automatically be "
-"featured."
-msgstr ""
-"Fotot ne <a href=\"%(messier_url)s\">Faqja e Maratones Messier</a> zgjidhen "
-"nga nje proçes automatik emertimi. Nese shikoni fotografi te Objekteve "
-"Messier, dhe mendoni qe duhet te shfaqet ne faqen e Maratones Messier, "
-"emertoje ate duke perdorur menune e <strong>Veprime</strong>. Fotografia me "
-"me shume emertime per nje objekt Messieri do shfaqet automatikisht."
-
-#: templates/faq.html:91
+#: templates/faq.html:83
 msgid ""
 "AstroBin was born out of the desire to end something that had been going on "
 "for too long: the waste of incredible material to the sea of chaos that the "
@@ -3648,7 +3140,7 @@ msgstr ""
 "fton fotot tuaja, pa pasur mundesine te nderroni informacionet, apo ti "
 "shtoni ato."
 
-#: templates/faq.html:94
+#: templates/faq.html:86
 msgid ""
 "Such an image would be seen by some people, then quickly forgotten, and "
 "reduced to nothing more than a bunch of pixel in the giant wasteland of the "
@@ -3658,7 +3150,7 @@ msgstr ""
 "reduktohet në asgjë më shumë se një grusht pikselash në djerrinë gjigante te "
 "internetit."
 
-#: templates/faq.html:97
+#: templates/faq.html:89
 msgid ""
 "This should not be allowed to happen. AstroBin is the response: an effort to "
 "host, collect, index and categorize the output of the astrophotographers all "
@@ -3670,7 +3162,7 @@ msgstr ""
 "astrofotografeve anembane botes, në mënyrë që të dhënat e tyre të çmuara të "
 "shërbejnë për një qëllim, dhe te kenë një kuptim dhe përgjithmonë."
 
-#: templates/faq.html:104
+#: templates/faq.html:96
 msgid ""
 "<em>AstroBin</em> is just starting out, and this time we can really say that "
 "the sky is the limit! Tons of ideas are in the pipeline. As the user base "
@@ -3685,7 +3177,7 @@ msgstr ""
 "ngarkoni foton e nje galaksie, dhe AstroBin do ta krahasoj ate me foto te "
 "tjera te marra me parë."
 
-#: templates/faq.html:107
+#: templates/faq.html:99
 msgid ""
 "AstroBin could also recommend subjects for you to image! Knowing your "
 "equipment, your location, and comparing what you have imaged to what users "
@@ -3696,7 +3188,7 @@ msgstr ""
 "fotografuar me ato te perdoruesve te tjere,AstroBin mund te sugjeroj sfiden "
 "tuaj te ardhshme!"
 
-#: templates/faq.html:110
+#: templates/faq.html:102
 msgid ""
 "Thanks to the input from the community, more ideas are flowing in and the "
 "list get bigger and bigger."
@@ -3704,89 +3196,66 @@ msgstr ""
 "Falë bashkepunimit të tërë komunitetit, me shume ide do lulezojne dhe lista "
 "do behet gjithmone e me e gjërë."
 
-#: templates/faq.html:117
+#: templates/faq.html:109
 msgid ""
 "AstroBin uses the Markdown syntax. Please use the following reference table:"
 msgstr ""
 "AstroBin perdor sintaksën Markdown. Lutemi perdorni tabelen e referencave qe "
 "vijon:"
 
-#: templates/faq.html:120
+#: templates/faq.html:112
 msgid "You type:"
 msgstr "Ju shkruat:"
 
-#: templates/faq.html:120
+#: templates/faq.html:112
 msgid "You see:"
 msgstr "Ju patë:"
 
-#: templates/faq.html:121
+#: templates/faq.html:113
 msgid "italics"
 msgstr "Shkronja kursive"
 
-#: templates/faq.html:122
+#: templates/faq.html:114
 msgid "bold"
 msgstr "shkronja te zeza"
 
-#: templates/faq.html:124
+#: templates/faq.html:116
 msgid "(TAB or 4 spaces)"
 msgstr "(TAB ose 4 hapesira)"
 
-#: templates/faq.html:124
+#: templates/faq.html:116
 msgid "preformatted text"
 msgstr "tekst i paraformatuar"
 
-#: templates/faq.html:125
+#: templates/faq.html:117
 msgid "quoted text"
 msgstr "tekst i cituar"
 
-#: templates/faq.html:126
+#: templates/faq.html:118
 msgid "escape the formatting syntax"
 msgstr "shmang formatimin sintaksë"
 
+#: templates/faq.html:125
+msgid ""
+"The AstroBin index is a function of the number of Likes and the number of "
+"images posted by a user."
+msgstr ""
+
 #: templates/faq.html:133
 msgid ""
-"You can vote each image from 1 to 5 stars, and they are defined like this:"
+"Because it's computationally expensive, the AstroBin index is updated only "
+"every 24 hours. The same applies for the search index, the Big Wall, and "
+"some other user data."
 msgstr ""
 
-#: templates/faq.html:138 templates/image/detail.html:1259
-msgid "It's a start, but it needs better data."
-msgstr ""
-
-#: templates/faq.html:145 templates/image/detail.html:1260
-msgid "It looks good, but it needs better processing."
-msgstr ""
-
-#: templates/faq.html:153 templates/image/detail.html:1261
-msgid "Good data, good processing."
-msgstr ""
-
-#: templates/faq.html:162 templates/image/detail.html:1262
-#, fuzzy
-msgid "Great result!"
-msgstr "Asnje rezultat"
-
-#: templates/faq.html:172 templates/image/detail.html:1263
-#, fuzzy
-msgid "Top quality!"
-msgstr "Lartë majtas"
-
-#: templates/faq.html:180
+#: templates/faq.html:140
 msgid ""
-"AstroBin uses two tricks to normalize image ratings. First of all, a "
-"<em>sigma-reject</em> algorithm is applied to exclude votes that are too far "
-"from the average. This takes care of people who don't vote honestly. Then "
-"the rating is interpolated via a hyperbolic function of the number of votes "
-"that the image received, to ensure that images with too few votes aren't "
-"rated better than images with similar rating, but lots of votes."
+"Every night, an algorithm looks at the images uploaded during the previous 7 "
+"days. The image with most Likes in that period is selected as Image of the "
+"Day."
 msgstr ""
 
-#: templates/faq.html:183
-msgid ""
-"This produces the \"AstroBin index\", which is a fairer way to compare "
-"images and users."
-msgstr ""
-
-#: templates/faq.html:189
+#: templates/faq.html:146
 #, fuzzy
 msgid ""
 "Do you have a question not covered here! Please <a href=\"/contact/"
@@ -3794,13 +3263,10 @@ msgid ""
 msgstr ""
 "Keni ndonje kerkese qe nuk e gjeni ketu! Lutemi na dergoni nje e-mail tek:"
 
-#: templates/fits.html:12
-msgid ""
-"The authors of these images have been generous, and provided a link to the "
-"TIFF or FITS original files."
-msgstr ""
-"Autoret e ketyre fotove kane qene bujar, dhe kane shtuar linkun per tek "
-"dosjet origjinale TIFF ose FITS."
+#: templates/guidelines.html:7 templates/maintenance_base.html:526
+#: templates/base/footer.html:21
+msgid "Guidelines"
+msgstr "Udhëzime"
 
 #: templates/guidelines.html:9
 msgid ""
@@ -3920,7 +3386,24 @@ msgstr ""
 "veprojni në përputhje me to, ju lutem na tregoni se çfarë ju mendoni është e "
 "gabuar."
 
-#: templates/help.html:12
+#: templates/help.html:4 templates/maintenance_base.html:154
+#: templates/maintenance_base.html:523 templates/base/footer.html:18
+#: templates/base/site_links.html:86
+msgid "Help"
+msgstr "Ndihmë"
+
+#: templates/help.html:8 templates/maintenance_base.html:161
+#: templates/base/site_links.html:93 templates/index/root.html:69
+msgid "What is this site?"
+msgstr "Cfarë është ky sit?"
+
+#: templates/help.html:10 templates/maintenance_base.html:471
+#: templates/base/alerts.html:13 templates/index/root.html:71
+#: templates/index/root.html.py:285
+msgid "Hey!"
+msgstr "Hej!"
+
+#: templates/help.html:12 templates/index/root.html:73
 msgid ""
 "Are you an astrophotographer? Do you like to share the outcome of your hard "
 "work with others? As an astrophotographer myself, and a subscriber to "
@@ -3936,7 +3419,7 @@ msgstr ""
 msgid "Well, this is finally over!"
 msgstr "Pra, kjo eshte me ne fund!"
 
-#: templates/help.html:16
+#: templates/help.html:16 templates/index/root.html:76
 msgid ""
 "<em>AstroBin</em> comes to fill the gap. It's a website built from the "
 "ground up by an astrophotographer, and it provides means to people who want "
@@ -4119,14 +3602,7 @@ msgid ""
 "Or you can monitor all the new images of a certain galaxy or nebula."
 msgstr ""
 
-#: templates/help.html:77
-msgid ""
-"You can cast your vote on images, and mark them as favorite. Your images "
-"might be chosen to appear in the site's <em>Messier Marathon</em>, or as "
-"<em>Currently hot</em> on the front page."
-msgstr ""
-
-#: templates/help.html:81
+#: templates/help.html:79
 msgid ""
 "As you have undoubtly realized by now, <em>AstroBin</em> is way more than an "
 "image hosting service. It's what the Astrophotography community has needed "
@@ -4146,173 +3622,297 @@ msgstr ""
 "e kaosit. <em>AstroBin</em> vjen në shpëtim për të siguruar një shtëpi dhe "
 "një pikë qëndrore për astrofotografet në të gjithë botën."
 
-#: templates/help.html:83
+#: templates/help.html:81
 msgid "So, what are you waiting for?"
 msgstr "Pra, çfare po pret?"
 
-#: templates/help.html:84
+#: templates/help.html:82
 msgid "Sign up now!"
 msgstr "Rregjistrohu tani!"
 
-#: templates/index.html:17
-msgid "The perfect home for your astrophotography."
-msgstr "Shtepia perfekte per astrofotot e juaja."
-
-#: templates/index.html:19
-#, python-format
-msgid ""
-"AstroBin is an image hosting service made specifically for "
-"astrophotographers. It comes packed with features that benefit the "
-"astrophotography community greatly! See the <a href=\"%(help_url)s\">help "
-"page.</a> for more information."
-msgstr ""
-"AstroBin është një shërbim image hosting i bërë posaçërisht për "
-"astrofotografët. Ai eshte e mbushur me karakteristika nga te cilat "
-"përfitojnë në masë të madhe i gjithe komuniteti i astrofotografëve anembanë! "
-"Shiko <a href=\"%(help_url)s\">Faqja Ndihmes.</a> per me shume informacione."
-
-#: templates/index.html:26
-msgid "Unlimited uploads, unlimited size."
-msgstr "Ngarkime te pakufizuara, permasa te pakufizuara."
-
-#: templates/index.html:27
-msgid ""
-"Astrophotography images have scientific value that shouldn't be lost in file "
-"compression. On AstroBin you can (and should!) upload full size images. And "
-"you have unlimited space for free."
-msgstr ""
-"Fotografite astronomike kane vlera shkencore qe s'duhet te humbasin ne "
-"kompresimin e tij. Ne AstroBin ju mund (dhe duhet) te ngarkoni foto me "
-"permasa maksimale. Dhe ju keni hapsire te pakufizuar falas."
-
-#: templates/index.html:34
-msgid "Have your data neatly plotted."
-msgstr "Te dhenat teknike janë të shënuara mirë."
-
-#: templates/index.html:35
-msgid ""
-"Data is everything, and AstroBin will give you the tools to keep your data "
-"neat and organized. And with our plots, you can get insights on your "
-"productivity and on the gear you use the most."
-msgstr ""
-"Te dhenat teknike jane gjithçka, dhe AstroBin do ju jape juve paisjet qe ti "
-"mbani ato te organizuara. Dhe me te dhenat tona mund te thelloni "
-"produktivitetin tuaj dhe cili mekanizem funksionon me mire."
-
-#: templates/index.html:48
-msgid "Recent images"
-msgstr "Fotot e fundit"
-
-#: templates/index.html:56
-msgid "FIT and DSLR camera raw files"
-msgstr ""
-
-#: templates/index.html:66
-msgid ""
-"AstroBin offers the storage of FIT and DSLR camera raw files too, for "
-"archival and sharing purposes!"
-msgstr ""
-
-#: templates/index.html:70
-#, python-format
-msgid ""
-"<strong>AstroBin Raw Data</strong> is a platform for the secure storage of "
-"all your FIT and DLSR raw files, up to 500 GB! It will automatically keep "
-"your files organized, and allow you to share them with other members. <a "
-"href=\"%(rawdata_url)s\">Want to know more?</a>"
-msgstr ""
-
-#: templates/index.html:115 templates/index.html.py:137
-#: templates/index.html:152 templates/iotd_archive.html:23
-#: templates/iotd_archive.html.py:37 templates/iotd_archive.html:52
-#: templates/inclusion_tags/image_list.html:57
-#: templates/inclusion_tags/image_list.html:77
-#: templates/inclusion_tags/messier_list.html:20
-#: templates/inclusion_tags/search_image_list.html:226
-msgid "by"
-msgstr ""
-
-#: templates/index.html:132 templates/iotd_archive.html:32
-msgid "Runners-up"
-msgstr ""
-
-#: templates/index.html:184
-#, fuzzy
-msgid "Recent"
-msgstr "RA qendra"
-
-#: templates/index.html:192 templates/index.html.py:258
-#: templates/index.html:277 templates/index.html.py:319
-#: templates/gear/page.html:59
-msgid "(view more)"
-msgstr "(shiko me shume)"
-
-#: templates/index.html:199
-#, fuzzy
-msgid "Followed"
-msgstr "Ndiq"
-
-#: templates/index.html:213 templates/index.html.py:214
-#: templates/index.html:215 templates/index.html.py:216
-#: templates/index.html:217
-msgid "Recently voted 5 stars"
-msgstr ""
-
-#: templates/index.html:232
-msgid "Recently favorited"
-msgstr ""
-
-#: templates/index.html:309 templates/activity/action.html:30
-#, fuzzy
-msgid "ago"
-msgstr "%s më parë"
-
-#: templates/iotd_archive.html:5 templates/iotd_archive.html.py:10
+#: templates/iotd_archive.html:7 templates/iotd_archive.html.py:12
 #, fuzzy
 msgid "Archive of 'Image of the day' winners"
 msgstr "Fotografi te ngarkuara"
 
-#: templates/leaderboard.html:24 templates/reviews.html:40
-#: templates/wall.html:40 templates/gear/page.html:89
-#: templates/inclusion_tags/search_image_list.html:186
-#: templates/search/search.html:36
-msgid "Rating"
-msgstr "Vleresimi"
+#: templates/iotd_archive.html:22 templates/actstream/action.html:81
+#: templates/actstream/action.html.py:88 templates/actstream/action.html:104
+#: templates/actstream/action.html:111 templates/index/root.html:109
+msgid "by"
+msgstr ""
 
-#: templates/leaderboard.html:29 templates/subject/page.html:79
+#: templates/iotd_archive.html:31 templates/index/root.html:126
+msgid "Runners-up"
+msgstr ""
+
+#: templates/leaderboard.html:8 templates/leaderboard.html.py:11
+#: templates/maintenance_base.html:147 templates/base/site_links.html:78
+msgid "Leaderboard"
+msgstr "Fituesit"
+
+#: templates/leaderboard.html:21 templates/maintenance_base.html:209
+#: templates/image/detail/menu/user.html:8
+#: templates/inclusion_tags/image_list.html:11
+#: templates/inclusion_tags/search_image_list.html:122
+#: templates/user/profile-subnav.html:95
+msgid "User"
+msgstr "Perdorues"
+
+#: templates/leaderboard.html:25 templates/base/user_links_entries.html:108
+#, fuzzy
+msgid "AstroBin index"
+msgstr "AstroBin është shoqëror!"
+
+#: templates/leaderboard.html:30 templates/base/user_links_entries.html:111
+#: templates/user/profile-subnav.html:85
+#, fuzzy
+msgid "Followers"
+msgstr "Ndiq"
+
+#: templates/leaderboard.html:40
 msgid "Total integration"
 msgstr "Integrimi total"
 
-#: templates/leaderboard.html:34
-msgid "Avg. integration hours"
-msgstr "Mes. integrimit te oreve"
+#: templates/maintenance_base.html:81 templates/maintenance_base.html:519
+#: templates/base/footer.html:14
+msgid "Site links"
+msgstr "Linket e sitit"
 
-#: templates/maintenance_base.html:312 templates/profile-edit-menu.html:8
-#: templates/subject/page.html:13
+#: templates/maintenance_base.html:85 templates/maintenance_base.html:521
+#: templates/maintenance_base.html:550 templates/base/footer.html:16
+#: templates/base/footer.html.py:45
+msgid "Home"
+msgstr "Faqja kryesore"
+
+#: templates/maintenance_base.html:88 templates/base/site_links.html:18
+#, fuzzy
+msgid "Community"
+msgstr "Komentet"
+
+#: templates/maintenance_base.html:92 templates/maintenance_base.html:522
+#: templates/base/footer.html:17 templates/base/site_links.html:22
+msgid "Blog"
+msgstr "Blog in English"
+
+#: templates/maintenance_base.html:116 templates/base/site_links.html:47
+#: templates/image/detail/iotd_banner.html:10 templates/index/root.html:101
+#, fuzzy
+msgid "Image of the day"
+msgstr "Fotografi te ngarkuara"
+
+#: templates/maintenance_base.html:125 templates/base/site_links.html:56
+msgid "Public data pools"
+msgstr ""
+
+#: templates/maintenance_base.html:134 templates/base/site_links.html:63
+msgid "Advanced search"
+msgstr ""
+
+#: templates/maintenance_base.html:141 templates/stats.html:7
+#: templates/base/site_links.html:71 templates/user/profile.html:42
+msgid "Stats"
+msgstr "Statistikat"
+
+#: templates/maintenance_base.html:173 templates/questions.html:4
+#: templates/questions.html.py:7 templates/base/site_links.html:105
+#, fuzzy
+msgid "AstroBin Questions"
+msgstr "AstroBin është shoqëror!"
+
+#: templates/maintenance_base.html:197 templates/base/site_links.html:136
+#: templates/contact_form/contact.html:5 templates/contact_form/contact.html:7
+#, fuzzy
+msgid "Contact"
+msgstr "Permban"
+
+#: templates/maintenance_base.html:228 templates/upload.html:6
+#: templates/upload.html.py:18 templates/upload.html:34
+#: templates/avatar/change.html:38 templates/base/user_links_entries.html:123
+#: templates/image/detail/modals/upload_revision.html:17
+#: templates/index/root.html:148
+msgid "Upload"
+msgstr "Ngarko"
+
+#: templates/maintenance_base.html:231
+#: templates/base/user_links_entries.html:126
+#, fuzzy
+msgid "My places"
+msgstr "Faqja ime"
+
+#: templates/maintenance_base.html:237 templates/wall.html:150
+#: templates/base/user_links_entries.html:132 templates/index/root.html:310
+#: templates/user/profile-subnav.html:20
+msgid "Commercial products"
+msgstr ""
+
+#: templates/maintenance_base.html:245
+#: templates/base/user_links_entries.html:140 templates/popover/user.html:30
+#: templates/user/profile-subnav.html:28
+msgid "Gallery"
+msgstr "Galeri"
+
+#: templates/maintenance_base.html:251 templates/wall.html:47
+#: templates/base/user_links_entries.html:146
+#: templates/inclusion_tags/search_image_list.html:44
+#: templates/inclusion_tags/search_image_list.html:97
+#: templates/user/profile-subnav.html:42
+msgid "Bookmarks"
+msgstr ""
+
+#: templates/maintenance_base.html:257 templates/image/full.html:75
+#: templates/image/detail/image_card.html:10
+msgid "Technical card"
+msgstr "Skeda teknike"
+
+#: templates/maintenance_base.html:263
+#: templates/base/user_links_entries.html:152
+#: templates/user/profile-subnav.html:48
+#: templates/user/profile/commercial/products.html:209
+msgid "Plots"
+msgstr "Grafiket"
+
+#: templates/maintenance_base.html:271
+#: templates/base/user_links_entries.html:177 templates/messages/inbox.html:9
+#, fuzzy
+msgid "My messages"
+msgstr "Mesazhe"
+
+#: templates/maintenance_base.html:277
+#: templates/base/user_links_entries.html:183
+#: templates/user/profile-subnav.html:70
+msgid "API Keys"
+msgstr ""
+
+#: templates/maintenance_base.html:281
+#: templates/base/user_links_entries.html:190
+msgid "My settings"
+msgstr ""
+
+#: templates/maintenance_base.html:285 templates/profile-edit-menu.html:8
 #, fuzzy
 msgid "Basic information"
 msgstr "Informacione bazë"
 
-#: templates/maintenance_base.html:320 templates/profile-edit-menu.html:15
+#: templates/maintenance_base.html:293 templates/profile-edit-menu.html:15
 #, fuzzy
 msgid "Commercial information"
 msgstr "Informacione shtese"
 
-#: templates/maintenance_base.html:329 templates/profile-edit-menu.html:23
+#: templates/maintenance_base.html:302 templates/profile-edit-menu.html:23
 #, fuzzy
 msgid "Retailer information"
 msgstr "Informacione bazë"
 
-#: templates/maintenance_base.html:355 templates/profile-edit-menu.html:54
+#: templates/maintenance_base.html:328 templates/profile-edit-menu.html:54
 msgid "Preferences"
 msgstr "Preferencat"
 
-#: templates/maintenance_base.html:361 templates/profile-edit-menu.html:60
+#: templates/maintenance_base.html:334 templates/profile-edit-menu.html:60
 #, fuzzy
 msgid "Avatar"
 msgstr "Katar"
 
-#: templates/maintenance_base.html:567
+#: templates/maintenance_base.html:341
+#: templates/base/user_links_entries.html:197 templates/user/profile.html:88
+#: templates/user/profile.html.py:91
+msgid "Logout"
+msgstr "Dalje"
+
+#: templates/maintenance_base.html:354 templates/maintenance_base.html:355
+#: templates/base/user_links_entries.html:95
+msgid "Notifications"
+msgstr "Lajmerime"
+
+#: templates/maintenance_base.html:366
+#: templates/base/user_links_entries.html:235
+msgid "Have an invite? Login!"
+msgstr "Keni nje ftesë? Hyni!"
+
+#: templates/maintenance_base.html:368
+#: templates/base/user_links_entries.html:237
+#: templates/registration/activation_complete.html:6
+msgid "Login"
+msgstr "Hyrje"
+
+#: templates/maintenance_base.html:374
+#: templates/base/user_links_entries.html:243
+#: templates/registration/login.html:15
+msgid "Register"
+msgstr "Regjistrohu"
+
+#: templates/maintenance_base.html:386 templates/base/search_form.html:8
+msgid "Quick search"
+msgstr "Kërkim i shpejtë"
+
+#: templates/maintenance_base.html:472 templates/base/alerts.html:14
+msgid "Success!"
+msgstr ""
+
+#: templates/maintenance_base.html:473 templates/maintenance_base.html:485
+#: templates/maintenance_base.html:497 templates/upload.html:53
+#: templates/upload.html.py:156 templates/upload.html:349
+#: templates/base/alerts.html:15 templates/base/alerts.html.py:28
+#: templates/base/alerts.html:40
+msgid "Warning!"
+msgstr "Kujdes!"
+
+#: templates/maintenance_base.html:474 templates/upload.html:74
+#: templates/base/alerts.html:16
+#: templates/image/detail/modals/send_to_datapool.html:25
+#: templates/image/detail/modals/send_to_sharedfolder.html:26
+#: templates/image/detail/modals/send_to_sharedfolder.html:36
+#, fuzzy
+msgid "Error!"
+msgstr "Gabim"
+
+#: templates/maintenance_base.html:487 templates/base/alerts.html:30
+#, python-format
+msgid ""
+"As a producer and/or a retailer on AstroBin, it's very important that you "
+"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
+"to do it now."
+msgstr ""
+
+#: templates/maintenance_base.html:499 templates/base/alerts.html:42
+#, python-format
+msgid ""
+"As a retailer on AstroBin, it's very important that you fill in your country "
+"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
+msgstr ""
+
+#: templates/maintenance_base.html:513 templates/base/footer.html:8
+msgid "About"
+msgstr "Përreth"
+
+#: templates/maintenance_base.html:515 templates/base/footer.html:10
+msgid ""
+"AstroBin is an image hosting website specifically targeted to "
+"astrophotographers: it's the first and the last place where you need to "
+"upload your astrophotography images. Made by an astrophotographer, for the "
+"astrophotographers."
+msgstr ""
+"AstroBin eshte nje sit bartës fotografishë, i synuar per astrofotografët: "
+"është vendi i parë dhe i fundit ku ju do keni nevojë të ngarkoni astrofotot "
+"tuaja. I krijuar nga një astrofotograf, për astrofotografët."
+
+#: templates/maintenance_base.html:525 templates/tos.html:7
+#: templates/base/footer.html:20
+msgid "Terms of Service"
+msgstr "Rregullat e Shërbimit"
+
+#: templates/maintenance_base.html:530 templates/base/footer.html:25
+msgid "Thanks to"
+msgstr "Falenderime"
+
+#: templates/maintenance_base.html:532 templates/base/footer.html:27
+msgid "The localization team"
+msgstr "Lokalizimi i skuadres tonë"
+
+#: templates/maintenance_base.html:537 templates/base/footer.html:32
+msgid "Copyright"
+msgstr "Copyright"
+
+#: templates/maintenance_base.html:539
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -4321,113 +3921,22 @@ msgstr ""
 "AstroBin është Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. Fotografitë ne këtë sit jane copyright i pronarëve përkates."
 
-#: templates/messier_marathon.html:5 templates/messier_marathon.html.py:10
-msgid "Messier Marathon"
-msgstr "Maratona Messier"
+#: templates/maintenance_base.html:554 templates/base/footer.html:49
+msgid "Back to top"
+msgstr "Mbrapa te maja"
 
-#: templates/messier_marathon.html:12
-msgid ""
-"This is a list of Messier objects featuring images on AstroBin. You can "
-"nominate any image (as long as it contains a Messier object), by opening the "
-"<strong>Actions</strong> menu and selecting <strong>Nominate for the Messier "
-"Marathon</strong>."
-msgstr ""
-"Kjo eshte nje liste e objekteve Messier qe shfaqen ne AstroBin. Ju mund te "
-"emertoni cdo foto(derisa ajo permban nje objekt Messier), duke hapur menune "
-"<strong>Veprime</strong> dhe duke zgjedhur <strong>Emerto per Maratonen "
-"Messier</strong>."
+#: templates/maintenance_base.html:597 templates/base/js.html:33
+#: templates/messages/compose.html:14 templates/openid_provider/decide.html:14
+msgid "Cancel"
+msgstr "Fshi"
 
-#: templates/messier_marathon.html:15
-#, python-format
-msgid ""
-"What about <a href=\"%(search_url)s\">doing a search</a> and nominating some "
-"images now?"
-msgstr ""
-"Po persa i perket <a href=\"%(search_url)s\">duke kerkuar</a> dhe emerimin e "
-"disa fotove tani?"
+#: templates/maintenance_base.html:627 templates/base/js.html:69
+msgid "No file selected"
+msgstr "Asnje dosje e zgjedhur"
 
-#: templates/messier_nomination.html:6 templates/image/detail.html:167
-msgid "Nominate for the Messier Marathon"
-msgstr "Emëro për Maratonen Messier"
-
-#: templates/messier_nomination.html:10
-#, python-format
-msgid ""
-"You will nominate this image for the <a href=\"%(the_url)s\" target=\"_blank"
-"\">Messier Marathon</a>. The Messier Marathon is a list of the Messier "
-"objects that features AstroBin images nominated by the users. For each "
-"Messier object, the AstroBin image with the most nomination is chosen."
-msgstr ""
-"Ju do percaktoni kete foto per <a href=\"%(the_url)s\" target=\"_blank"
-"\">Maratonen Messier</a>. Maratona Messier eshte nje liste e objekteve "
-"Messier qe shfaqen ne AstroBin te percaktuar nga perdoruesit. Per cdo objekt "
-"Messier, foto e AstroBin me percaktime me te shumta u zgjodh."
-
-#: templates/messier_nomination.html:14
-#, python-format
-msgid ""
-"Press <em>Continue</em> to nominate this image for <strong>M "
-"%(messier_object)s</strong>."
-msgstr ""
-"Shtyp <em>Vazhdo</em> per te percaktuar kete foto per <strong>M "
-"%(messier_object)s</strong>."
-
-#: templates/messier_nomination.html:21
-msgid ""
-"Sorry, but it doesn't look like this image contains a Messier object. If you "
-"think this is a mistake, please contact the author of the image and ask them "
-"to add the correct Messier object as a subject."
-msgstr ""
-"Na vjen keq, por fotografia nuk permban objekte Messier. Nese mendoni qe ky "
-"eshte nje gabim, ju lutemi kontaktoni autorin e fotos dhe pyeteni ate per te "
-"shtuar objektin korrekt si subjekt."
-
-#: templates/messier_nomination.html:24 templates/messier_nomination.html:35
-#: templates/messier_nomination.html:44
-#: templates/messier_nomination_finish.html:14
-#: templates/image/actions/bring_to_attention.html:15
-#: templates/image/actions/request_additional_information_complete.html:11
-#: templates/image/actions/request_fits_complete.html:11
-#: templates/image/edit/acquisition.html:30
-#: templates/image/edit/acquisition.html:66
-#: templates/image/edit/acquisition.html:87 templates/image/edit/basic.html:83
-#: templates/image/edit/gear.html:54 templates/image/edit/license.html:23
-#: templates/image/edit/presolve.html:38
-msgid "Return to image"
-msgstr "Kthehu tek foto"
-
-#: templates/messier_nomination.html:28
-msgid ""
-"This image contains multiple Messier objects. Please choose the one for "
-"which you are nominating this image."
-msgstr ""
-"Kjo foto permban objekte te shumte Messier. Lutemi zgjidhni cilin prej tyre "
-"deshironi te percaktoni."
-
-#: templates/messier_nomination.html:34 templates/messier_nomination.html:43
-#: templates/image/actions/bring_to_attention.html:14
-msgid "Continue"
-msgstr "Vazhdo"
-
-#: templates/messier_nomination_finish.html:6
-msgid "You have already nominated this image"
-msgstr "E ke percaktuar nje here kete foto"
-
-#: templates/messier_nomination_finish.html:7
-msgid "You can't nominate the same image more than once."
-msgstr "Nuk mund te percaktoni te njejten foto me shume se nje here."
-
-#: templates/messier_nomination_finish.html:9
-msgid "Thanks for your nomination"
-msgstr "Faleminderit per percaktimin"
-
-#: templates/messier_nomination_finish.html:10
-msgid "Your nomination has been recorded, thank you!"
-msgstr "Percaktimi juaj u rregjistrua, ju faleminderit!"
-
-#: templates/messier_nomination_finish.html:13
-msgid "Visit the Messier Marathon"
-msgstr "Vizito Maratonen Messier"
+#: templates/maintenance_base.html:628 templates/base/js.html:70
+msgid "Choose file"
+msgstr "Zgjidh dosjen"
 
 #: templates/object_not_found.html:5
 msgid "Object not found"
@@ -4582,24 +4091,20 @@ msgstr "Integrimi total i oreve 12 muajt e fundit"
 
 #: templates/stats.html:19 templates/stats.html.py:33 templates/stats.html:49
 #: templates/stats.html.py:69 templates/stats.html:89
-#: templates/stats.html.py:101 templates/gear/page.html:255
-#: templates/gear/page.html.py:267 templates/subject/page.html:97
-#: templates/subject/page.html.py:105 templates/subject/page.html:113
-#: templates/subject/page.html.py:125 templates/subject/page.html:143
-#: templates/user/plots.html:26 templates/user/plots.html.py:39
-#: templates/user/plots.html:55 templates/user/plots.html.py:68
+#: templates/stats.html.py:101 templates/gear/page.html:257
+#: templates/gear/page.html.py:269 templates/user/plots.html:26
+#: templates/user/plots.html.py:39 templates/user/plots.html:55
+#: templates/user/plots.html.py:68
 #: templates/user/profile/commercial/products.html:214
 msgid "Please wait: the plot is loading..."
 msgstr "Ju lutem prisni: tabelai po karikohet..."
 
 #: templates/stats.html:20 templates/stats.html.py:34 templates/stats.html:50
 #: templates/stats.html.py:70 templates/stats.html:90
-#: templates/stats.html.py:102 templates/gear/page.html:256
-#: templates/gear/page.html.py:268 templates/subject/page.html:98
-#: templates/subject/page.html.py:106 templates/subject/page.html:114
-#: templates/subject/page.html.py:126 templates/subject/page.html:144
-#: templates/user/plots.html:27 templates/user/plots.html.py:40
-#: templates/user/plots.html:56 templates/user/plots.html.py:69
+#: templates/stats.html.py:102 templates/gear/page.html:258
+#: templates/gear/page.html.py:270 templates/user/plots.html:27
+#: templates/user/plots.html.py:40 templates/user/plots.html:56
+#: templates/user/plots.html.py:69
 #: templates/user/profile/commercial/products.html:215
 msgid "Loading..."
 msgstr "Duke karikuar..."
@@ -4633,7 +4138,6 @@ msgid "Upload as a work in progress"
 msgstr "Ngarko si një punim i papërfunduar"
 
 #: templates/upload.html:21 templates/upload.html.py:36
-#: templates/image/detail.html:1280
 msgid "Uploading..."
 msgstr "Duke ngarkuar..."
 
@@ -4702,8 +4206,7 @@ msgstr ""
 msgid "Filename"
 msgstr "Surinam"
 
-#: templates/upload.html:97 templates/popover/subject.html:14
-#: templates/subject/page.html:41
+#: templates/upload.html:97 templates/popover/subject.html:15
 msgid "Size"
 msgstr ""
 
@@ -4774,62 +4277,74 @@ msgstr ""
 msgid "Upload complete!"
 msgstr "Koha ngarkimit"
 
-#: templates/wall.html:14
+#: templates/wall.html:15
 msgid "Sort by"
 msgstr "Zgjidh për"
 
-#: templates/wall.html:21
+#: templates/wall.html:22
 msgid "Uploaded"
 msgstr "Ngarkuar"
 
-#: templates/wall.html:27
+#: templates/wall.html:28
 msgid "Acquired"
 msgstr "Marrë"
 
-#: templates/wall.html:46
-msgid "Favorited"
-msgstr ""
+#: templates/wall.html:41
+#, fuzzy
+msgid "Number of likes"
+msgstr "Numri i fotove"
 
-#: templates/wall.html:52 templates/gear/page.html:251
-#: templates/image/detail.html:650
-#: templates/inclusion_tags/search_image_list.html:55
+#: templates/wall.html:53 templates/gear/page.html:253
+#: templates/inclusion_tags/search_image_list.html:53
 #: templates/inclusion_tags/search_image_list.html:106
 #: templates/search/search.html:48
 #: templates/user/profile/commercial/products.html:211
 msgid "Views"
 msgstr "Shikime"
 
-#: templates/wall.html:66
+#: templates/wall.html:59 templates/gear/page.html:119
+#: templates/gear/page.html.py:245 templates/image/detail/comments.html:4
+#: templates/inclusion_tags/search_image_list.html:52
+#: templates/inclusion_tags/search_image_list.html:105
+msgid "Comments"
+msgstr "Komentet"
+
+#: templates/wall.html:67
 msgid "Filter by"
 msgstr "Filtro per"
 
-#: templates/wall.html:73
+#: templates/wall.html:74
 msgid "All deep sky objects"
 msgstr "Te gjitha objektet e qiellit te thelle"
 
-#: templates/wall.html:79
+#: templates/wall.html:80
 msgid "Clusters"
 msgstr "Dyndjet"
 
-#: templates/wall.html:98
+#: templates/wall.html:99
 msgid "All Solar System objects"
 msgstr "Te gjitha objektet e Sistemit Diellor"
 
-#: templates/wall.html:110
+#: templates/wall.html:111
 msgid "Moon"
 msgstr "Hëna"
 
-#: templates/wall.html:116
+#: templates/wall.html:117
 msgid "Planets"
 msgstr "Planete"
 
-#: templates/wall.html:122
+#: templates/wall.html:123
 msgid "Comets"
 msgstr "Kometa"
 
-#: templates/wall.html:162
+#: templates/wall.html:163
 msgid "Remove filter"
 msgstr "Hiqeni filtrin"
+
+#: templates/actstream/action.html:144
+#, fuzzy
+msgid "ago"
+msgstr "%s më parë"
 
 #: templates/avatar/change.html:14
 msgid "You do not yet have an avatar. Please upload one now."
@@ -4859,6 +4374,48 @@ msgstr "Fotot e ngarkuara"
 msgid "Avatar image"
 msgstr "Vendos nje watermark mbi foto"
 
+#: templates/base/footer.html:34
+#, fuzzy
+msgid "The images on this websites are copyright of their respective owners."
+msgstr ""
+"AstroBin është Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
+"Reserved. Fotografitë ne këtë sit jane copyright i pronarëve përkates."
+
+#: templates/base/site_links.html:111
+#, fuzzy
+msgid "AstroBin Raw Data"
+msgstr "AstroBin është shoqëror!"
+
+#: templates/base/user_links_entries.html:75
+msgid "Help with translations!"
+msgstr ""
+
+#: templates/base/user_links_entries.html:83
+msgid "Please select your language from the options above."
+msgstr "Ju lutem zgjidhni nje gjuhe nga opsionet e mëposhtme."
+
+#: templates/base/user_links_entries.html:161
+#: templates/user/profile-subnav.html:35
+msgid "Raw data library"
+msgstr ""
+
+#: templates/base/user_links_entries.html:168
+msgid "Private shared folders"
+msgstr ""
+
+#: templates/base/user_links_entries.html:206
+msgid "Would you like to start using your real name on AstroBin?"
+msgstr ""
+
+#: templates/base/user_links_entries.html:211
+#: templates/image/detail/modals/send_to_sharedfolder.html:49
+msgid "OK"
+msgstr ""
+
+#: templates/base/user_links_entries.html:217
+msgid "No, tranks"
+msgstr ""
+
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:9
 msgid "Edit commercial product"
@@ -4866,10 +4423,10 @@ msgstr ""
 
 #: templates/commercial/products/edit.html:14
 #: templates/commercial/products/retailed/edit.html:14
-#: templates/image/edit/acquisition.html:28
-#: templates/image/edit/acquisition.html:63
-#: templates/image/edit/acquisition.html:85 templates/image/edit/basic.html:82
-#: templates/image/edit/gear.html:53 templates/image/edit/license.html:22
+#: templates/image/edit/acquisition.html:21
+#: templates/image/edit/acquisition.html:51
+#: templates/image/edit/acquisition.html:67 templates/image/edit/basic.html:67
+#: templates/image/edit/gear.html:46 templates/image/edit/license.html:22
 #: templates/location/edit.html:18 templates/user/profile/edit/basic.html:14
 #: templates/user/profile/edit/commercial.html:14
 #: templates/user/profile/edit/gear.html:39
@@ -4913,10 +4470,11 @@ msgid ""
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
 
-#: templates/contact_form/contact.html:16 templates/image/detail.html:890
-#: templates/image/detail.html.py:940 templates/image/detail.html:1223
-#: templates/messages/compose.html:12 templates/messages/modal_compose.html:16
-#: templates/user/profile-js.html:28
+#: templates/contact_form/contact.html:16 templates/image/detail/js.html:94
+#: templates/image/detail/modals/send_to_datapool.html:35
+#: templates/image/detail/modals/send_to_sharedfolder.html:47
+#: templates/messages/compose.html:12 templates/messages/modal_compose.html:13
+#: templates/user/profile-js.html:13
 msgid "Send"
 msgstr "Derguar"
 
@@ -5079,34 +4637,47 @@ msgid ""
 "grateful."
 msgstr ""
 
-#: templates/gear/page.html:32
+#: templates/gear/page.html:34
 #, fuzzy
 msgid "Other images"
 msgstr "Asnje foto"
 
-#: templates/gear/page.html:57 templates/subject/page.html:89
+#: templates/gear/page.html:59
 #, fuzzy
 msgid "Some images"
 msgstr "Asnje foto"
 
-#: templates/gear/page.html:93
+#: templates/gear/page.html:61
+msgid "(view more)"
+msgstr "(shiko me shume)"
+
+#: templates/gear/page.html:70 templates/gear/page.html.py:241
+#, fuzzy
+msgid "Reviews"
+msgstr "Shikime"
+
+#: templates/gear/page.html:91
+msgid "Rating"
+msgstr "Vleresimi"
+
+#: templates/gear/page.html:95
 #, fuzzy
 msgid "There are no reviews yet."
 msgstr "Nuk ka asnje koment."
 
-#: templates/gear/page.html:99
+#: templates/gear/page.html:101
 #, fuzzy
 msgid "Add your review"
 msgstr "Shto me shume"
 
-#: templates/gear/page.html:102
+#: templates/gear/page.html:104
 msgid ""
 "Please be fair, honest and polite when writing a review. Many people will "
 "read your review: all the users on AstroBin who own this piece of gear, will "
 "be notified of your review."
 msgstr ""
 
-#: templates/gear/page.html:104
+#: templates/gear/page.html:106
 #, fuzzy
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
@@ -5115,14 +4686,14 @@ msgstr ""
 "Lutemi <a href=\"/accounts/login/\">hyni</a> ose <a href=\"/accounts/"
 "register/\">rregjistrohuni</a> qe te komentoni."
 
-#: templates/gear/page.html:121
+#: templates/gear/page.html:123
 msgid ""
 "Use this space to start a discussion, leave a comment or ask a question "
 "about this piece of gear. All the users on AstroBin who own one, will be "
 "notified and can join the discussion."
 msgstr ""
 
-#: templates/gear/page.html:123
+#: templates/gear/page.html:125
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment."
@@ -5130,482 +4701,25 @@ msgstr ""
 "Lutemi <a href=\"/accounts/login/\">hyni</a> ose <a href=\"/accounts/"
 "register/\">rregjistrohuni</a> qe te komentoni."
 
-#: templates/gear/page.html:143
+#: templates/gear/page.html:145
 msgid "Buy it here"
 msgstr ""
 
-#: templates/gear/page.html:191
+#: templates/gear/page.html:193
 msgid "Properties"
 msgstr ""
 
-#: templates/gear/page.html:231
+#: templates/gear/page.html:233
 #: templates/user/profile/commercial/products.html:40
 #: templates/user/profile/commercial/products.html:122
 msgid "Owners"
 msgstr ""
 
-#: templates/gear/page.html:316
+#: templates/gear/page.html:318
 msgid "just now"
 msgstr "menjehere"
 
-#: templates/image/detail.html:24
-#, python-format
-msgid ""
-"This image is a <strong>work in progress</strong> from your <a href="
-"\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
-"unless you give them one of the links you can find in the <em>Share</em> "
-"menu below. Use that link to post this image to Internet forums and get "
-"feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
-"\"%(profile_url)s\">Public Area</a>."
-msgstr ""
-"Kjo foto eshte nje <strong>pune e pambaruar</strong> nga <a href="
-"\"%(profile_url)s?staging\">Zona Punes</a>. Kjo do te thote qe asnjeri nuk e "
-"shikon dot ate,derisa ju nuk i jepni kodin e lidhjes qe gjendet ne menune "
-"<em>Shpernda</em>. Perdor ate link per te postuar foton neper forume qe te "
-"marresh vleresime mbi te. Kur te jeni i kenaqur, mbase duke ngarkuar "
-"riperpunimet, beji reklam <a href=\"%(promote_url)s\">nxite ate</a> tek <a "
-"href=\"%(profile_url)s\">Zona Publike</a>."
-
-#: templates/image/detail.html:35 templates/messages/inbox.html:29
-#: templates/user/profile/commercial/products.html:43
-#: templates/user/profile/commercial/products.html:125
-msgid "Actions"
-msgstr "Veprime"
-
-#: templates/image/detail.html:43
-msgid "Edit basic information"
-msgstr "Modifiko informacionet baze"
-
-#: templates/image/detail.html:50
-msgid "Edit gear used"
-msgstr "Modifiko mekanizmin e perdorur"
-
-#: templates/image/detail.html:56
-msgid "Edit acquisition details"
-msgstr "Modifiko detajet e fotos"
-
-#: templates/image/detail.html:68
-msgid "Mark this revision as final"
-msgstr "Shenoje kete version te ripunuar si ai final"
-
-#: templates/image/detail.html:76
-msgid "Change license"
-msgstr "Nderro liçensen"
-
-#: templates/image/detail.html:82 templates/image/detail.html.py:1269
-msgid "Upload new revision"
-msgstr "Ngarko nje rishikim te ri"
-
-#: templates/image/detail.html:90 templates/image/edit/presolve.html:6
-msgid "Plate-solve"
-msgstr "Zberthe"
-
-#: templates/image/detail.html:97
-msgid "Plate-solve again"
-msgstr "Zbertheje prap"
-
-#: templates/image/detail.html:106
-msgid "Promote to public area"
-msgstr "Reklamoje te zona publike"
-
-#: templates/image/detail.html:113
-msgid "Move to staging area"
-msgstr "Levize te zona punes"
-
-#: templates/image/detail.html:122 templates/image/detail.html.py:863
-#, fuzzy
-msgid "Send to public data pool"
-msgstr "Reklamoje te zona publike"
-
-#: templates/image/detail.html:129 templates/image/detail.html.py:900
-#, fuzzy
-msgid "Send to private shared folder"
-msgstr "Dergo mesazh privat"
-
-#: templates/image/detail.html:139
-msgid "Delete original image"
-msgstr "Fshije foton origjinale"
-
-#: templates/image/detail.html:144
-msgid "Delete everything"
-msgstr "Fshi cdo gje"
-
-#: templates/image/detail.html:150
-msgid "Delete this revision"
-msgstr "Fshije rishikimin"
-
-#: templates/image/detail.html:159
-msgid "Bring to a user's attention"
-msgstr "Dergoje ne vemendjen e dikujt"
-
-#: templates/image/detail.html:176 templates/image/full.html:68
-#: templates/user/profile-subnav.html:11
-#: templates/user/profile/commercial/products.html:76
-#: templates/user/profile/commercial/products.html:158
-#: templates/user/profile/commercial/products.html:479
-#: templates/user/profile/commercial/products.html:806
-msgid "View"
-msgstr "Shiko"
-
-#: templates/image/detail.html:184 templates/image/detail.html.py:238
-#: templates/image/detail.html:850
-msgid "Inverted monochrome"
-msgstr "Ktheje ne bardh e zi"
-
-#: templates/image/detail.html:192 templates/image/detail.html.py:216
-#, fuzzy
-msgid "Annotated (original version)"
-msgstr "E komentuar (versioni origjinal)"
-
-#: templates/image/detail.html:197 templates/image/detail.html.py:221
-msgid "Annotated"
-msgstr "E komentuar"
-
-#: templates/image/detail.html:208 templates/image/detail.html.py:232
-#: templates/image/detail.html:849
-msgid "Normal"
-msgstr "Normal"
-
-#: templates/image/detail.html:256
-msgid "View profile"
-msgstr "Shiko profilin"
-
-#: templates/image/detail.html:265 templates/image/detail.html.py:664
-#: templates/image/detail.html:1209 templates/user/profile-js.html:14
-#: templates/user/profile-subnav.html:106
-msgid "Stop following"
-msgstr "Ndalo ndjekjen"
-
-#: templates/image/detail.html:276 templates/user/profile-subnav.html:116
-msgid "Send private message"
-msgstr "Dergo mesazh privat"
-
-#: templates/image/detail.html:286 templates/image/detail.html.py:796
-msgid "Share"
-msgstr "Shpernda"
-
-#: templates/image/detail.html:370
-msgid ""
-"This image was just uploaded and is still processing. Please try to refresh "
-"this page in a few seconds."
-msgstr ""
-"Kjo foto sapo u ngarkua dhe po vazhdon proçesi. Lutemi rifreskoni faqen per "
-"pak sekonda."
-
-#: templates/image/detail.html:404
-msgid "Contains"
-msgstr "Permban"
-
-#: templates/image/detail.html:423
-#, python-format
-msgid "and %(number)s more (click to view)."
-msgstr "dhe %(number)s me shume (kliko per te shikuar)."
-
-#: templates/image/detail.html:431
-msgid "(hide these subjects)"
-msgstr "(fshih keto subjekte)"
-
-#: templates/image/detail.html:519
-msgid "RA center"
-msgstr "RA qendra"
-
-#: templates/image/detail.html:520
-msgid "DEC center"
-msgstr "DEC qendra"
-
-#: templates/image/detail.html:522
-msgid "Pixel scale"
-msgstr "Shkalla pikselave"
-
-#: templates/image/detail.html:522
-msgid "arcsec/pixel"
-msgstr "arcsec/piksel"
-
-#: templates/image/detail.html:524
-msgid "Orientation"
-msgstr "Orientimi"
-
-#: templates/image/detail.html:524 templates/image/detail.html.py:525
-#: templates/image/detail.html:526
-msgid "degrees"
-msgstr "gradë"
-
-#: templates/image/detail.html:525
-msgid "Field width"
-msgstr "Gjerësia fushës"
-
-#: templates/image/detail.html:525 templates/image/detail.html.py:526
-msgid "arcminutes"
-msgstr "arcminuta"
-
-#: templates/image/detail.html:526
-msgid "Field height"
-msgstr "Lartësia fushës"
-
-#: templates/image/detail.html:551
-#, python-format
-msgid ""
-"<strong>Leave a comment here</strong>, and remember that AstroBin is an "
-"international community: using English is preferred. PS: <strong>%(user)s</"
-"strong>'s preferred language is <strong>%(lang)s</strong>."
-msgstr ""
-"<strong>Le nje koment ketu</strong>, dhe kujtohu qe AstroBin eshte nje "
-"komunitet nderkombetar: perdorimi i Anglishtes eshte i preferuar. PS: "
-"<strong>%(user)s</strong> perdor si gjuhe te preferuar <strong>%(lang)s</"
-"strong>."
-
-#: templates/image/detail.html:580 templates/image/detail.html.py:606
-msgid "Final"
-msgstr ""
-
-#: templates/image/detail.html:588
-msgid "Original"
-msgstr ""
-
-#: templates/image/detail.html:674 templates/image/detail.html.py:971
-#, fuzzy
-msgid "Remove from favorites"
-msgstr "Shikoni astrofotot e juaja"
-
-#: templates/image/detail.html:674 templates/image/detail.html.py:974
-#, fuzzy
-msgid "Mark as favorite"
-msgstr "Shëno si e bërë."
-
-#: templates/image/detail.html:699
-msgid ""
-"You are permanently suspended from voting because of suspicious activity. "
-"This include voting dishonestly, our of spite, or spirit of competition. If "
-"you believe this is a mistake, please get in touch with the administration "
-"of AstroBin."
-msgstr ""
-
-#: templates/image/detail.html:708 templates/inclusion_tags/image_list.html:34
-#: templates/inclusion_tags/image_list.html:39
-#: templates/inclusion_tags/search_image_list.html:145
-#: templates/inclusion_tags/search_image_list.html:150
-#: templates/inclusion_tags/search_image_list.html:190
-msgid "n/a"
-msgstr ""
-
-#: templates/image/detail.html:741
-#: templates/inclusion_tags/search_image_list.html:42
-#: templates/inclusion_tags/search_image_list.html:93
-#: templates/popover/rating.html:8 templates/user/profile-subnav.html:86
-#: templates/user/votes.html:5 templates/user/votes.html.py:11
-msgid "Votes"
-msgstr ""
-
-#: templates/image/detail.html:766 templates/image/detail.html.py:767
-msgid "Histogram"
-msgstr "Histogrami"
-
-#: templates/image/detail.html:773
-msgid "Made possible by"
-msgstr ""
-
-#: templates/image/detail.html:810
-msgid "Sharing mode"
-msgstr ""
-
-#: templates/image/detail.html:812
-#, fuzzy
-msgid "Simple link"
-msgstr "Linket e sitit"
-
-#: templates/image/detail.html:813
-msgid "Forums"
-msgstr ""
-
-#: templates/image/detail.html:818
-msgid "Thumbnail"
-msgstr ""
-
-#: templates/image/detail.html:820 templates/user/api_keys.html:29
-#, fuzzy
-msgid "Yes"
-msgstr "Po."
-
-#: templates/image/detail.html:821
-#, fuzzy
-msgid "No"
-msgstr "No."
-
-#: templates/image/detail.html:827
-#, fuzzy
-msgid "Image size"
-msgstr "Foto"
-
-#: templates/image/detail.html:829
-msgid "Regular"
-msgstr "Normale"
-
-#: templates/image/detail.html:830
-msgid "Full"
-msgstr ""
-
-#: templates/image/detail.html:834
-#, fuzzy
-msgid "Copy this"
-msgstr "Kopjo"
-
-#: templates/image/detail.html:837 templates/image/detail.html.py:840
-#: templates/image/detail.html:997 templates/image/edit/gear.html:75
-msgid "Copy"
-msgstr "Kopjo"
-
-#: templates/image/detail.html:847
-#, fuzzy
-msgid "Image mode"
-msgstr "Fotografi te ngarkuara"
-
-#: templates/image/detail.html:867
-msgid ""
-"If this image is the result of your processing of a public data pool, you "
-"can send it the pool so it's displayed there."
-msgstr ""
-
-#: templates/image/detail.html:872
-msgid "Use this form to select an existing <strong>public data pool</strong>."
-msgstr ""
-
-#: templates/image/detail.html:884 templates/image/detail.html.py:932
-#, python-format
-msgid ""
-"You need a <a href=\"%(rawdata_url)s\">Raw Data</a> subscription to perform "
-"this action."
-msgstr ""
-
-#: templates/image/detail.html:885 templates/image/detail.html.py:933
-#, python-format
-msgid ""
-"The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
-"securely back up your raw files, and keep them neatly and effortlessly "
-"organized, but being part of it also means that you support AstroBin and can "
-"perhaps contribute your raw files to scientic discoveries."
-msgstr ""
-
-#: templates/image/detail.html:904
-msgid ""
-"If this image is the result of your processing of a private shared folder, "
-"you can send it the folder so it's displayed there."
-msgstr ""
-
-#: templates/image/detail.html:910
-msgid ""
-"Use this form to select a <strong>private shared folder</strong> you have "
-"created or have been invited to."
-msgstr ""
-
-#: templates/image/detail.html:922
-msgid "You don't have access to any shared private folders."
-msgstr ""
-
-#: templates/image/detail.html:1000
-msgid "Copied!"
-msgstr ""
-
-#: templates/image/detail.html:1205 templates/user/profile-js.html:10
-#, python-format
-msgid "Follow %(username)s?"
-msgstr "Ndiq %(username)s?"
-
-#: templates/image/detail.html:1206 templates/user/profile-js.html:11
-#, python-format
-msgid ""
-"You will receive a notification every time %(username)s posts a new image. "
-"Continue?"
-msgstr ""
-"Ju do lajmeroheni cdo here kur %(username)s poston nje foto te re. Vazhdo?"
-
-#: templates/image/detail.html:1207 templates/user/profile-js.html:12
-msgid "Yes, follow!"
-msgstr "Po, ndiq!"
-
-#: templates/image/detail.html:1213 templates/user/profile-js.html:18
-#, python-format
-msgid "Stop following %(username)s?"
-msgstr "Ndalo se ndjekuri %(username)s?"
-
-#: templates/image/detail.html:1214 templates/user/profile-js.html:19
-#, python-format
-msgid ""
-"You will stop receiving notifications when %(username)s posts a new image. "
-"Continue?"
-msgstr ""
-"Ju sdo keni me lajmerime kur %(username)s poston nje foto te re. Vazhdo?"
-
-#: templates/image/detail.html:1215 templates/user/profile-js.html:20
-msgid "Yes, stop following!"
-msgstr "Po, ndalo ndjekjen!"
-
-#: templates/image/detail.html:1221 templates/user/profile-js.html:26
-#, python-format
-msgid "Send %(username)s a message"
-msgstr "Dergo nje mesazh tek %(username)s"
-
-#: templates/image/detail.html:1251 templates/image/detail.html.py:1252
-#: templates/image/detail.html:1253 templates/image/detail.html.py:1254
-#: templates/image/detail.html:1255
-#, fuzzy
-msgid "You have already voted."
-msgstr "E ke percaktuar nje here kete foto"
-
-#: templates/image/detail.html:1270
-msgid ""
-"Did you improve the post-processing of your image? Upload the new revision!"
-msgstr "A e keni permiresuar perpunimin e fotos tuaj? Ngarko rishikimin e ri!"
-
-#: templates/image/detail.html:1284
-msgid "Delete image and all its revisions?"
-msgstr "Fshi foton dhe gjithe rishikimet e saj?"
-
-#: templates/image/detail.html:1285
-msgid ""
-"The image will be permanently deleted and cannot be recovered. All its "
-"revisions will be deleted too. Are you sure?"
-msgstr ""
-"Foto do fshihet perfundimisht dhe nuk mund te rikuperohet me. Te gjitha "
-"rishikimet e saj do te fshihen gjithashtu. A jeni te sigurt?"
-
-#: templates/image/detail.html:1286
-msgid "Yes, delete everything"
-msgstr "Po, fshi cdo gje"
-
-#: templates/image/detail.html:1291
-msgid "Delete this revision?"
-msgstr "Fshi kete rishikim?"
-
-#: templates/image/detail.html:1292
-msgid ""
-"This revision will be permanently deleted and cannot be recovered. Are you "
-"sure?"
-msgstr ""
-"Ky rishikim do fshihet perfundimisht dhe nuk mund te rikuperohet me. A jeni "
-"te sigurt?"
-
-#: templates/image/detail.html:1293
-msgid "Yes, delete revision"
-msgstr "Po, fshi rishikimin"
-
-#: templates/image/detail.html:1298
-msgid "Delete original image?"
-msgstr "Fshi foton origjinale?"
-
-#: templates/image/detail.html:1299
-msgid ""
-"The image will be permanently deleted and cannot be recovered. Its revisions "
-"will not be deleted. Are you sure?"
-msgstr ""
-"Foto do te fshihet perfundimisht dhe nuk mund te rikuperohet me. A jeni te "
-"sigurt?"
-
-#: templates/image/detail.html:1300
-msgid "Yes, delete image"
-msgstr "Po, fshi foton"
-
-#: templates/image/full.html:13 templates/image/full.html.py:97
+#: templates/image/full.html:13 templates/image/full.html.py:86
 #, fuzzy
 msgid "Full resolution"
 msgstr "Shiko me risolucion te plote"
@@ -5615,7 +4729,16 @@ msgstr "Shiko me risolucion te plote"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "nga <a href=\"%(the_url)s\">%(user)s</a>"
 
-#: templates/image/full.html:89
+#: templates/image/full.html:68 templates/image/detail/menu/view.html:8
+#: templates/user/profile-subnav.html:11
+#: templates/user/profile/commercial/products.html:76
+#: templates/user/profile/commercial/products.html:158
+#: templates/user/profile/commercial/products.html:479
+#: templates/user/profile/commercial/products.html:806
+msgid "View"
+msgstr "Shiko"
+
+#: templates/image/full.html:82
 #, fuzzy
 msgid "Fit to window"
 msgstr "Pershtat fotot sipas gjeresise se dritares"
@@ -5631,6 +4754,19 @@ msgid ""
 msgstr ""
 "Duke zgjedhur disa perdorues dhe klikuar butonin poshte, do i dergoni atyre "
 "nje lajmerim per te vrojtuar foton tuaj."
+
+#: templates/image/actions/bring_to_attention.html:14
+msgid "Continue"
+msgstr "Vazhdo"
+
+#: templates/image/actions/bring_to_attention.html:15
+#: templates/image/actions/request_additional_information_complete.html:11
+#: templates/image/edit/acquisition.html:23
+#: templates/image/edit/acquisition.html:54
+#: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:68
+#: templates/image/edit/gear.html:47 templates/image/edit/license.html:23
+msgid "Return to image"
+msgstr "Kthehu tek foto"
 
 #: templates/image/actions/bring_to_attention.html:31
 msgid "Click on a user below!"
@@ -5659,44 +4795,378 @@ msgstr ""
 "shpejt nese do ta bejne. Mos harro qe ju mund te <a href=\"%(message_url)s"
 "\">dergoni nje mesazh</a> gjithashtu."
 
-#: templates/image/actions/request_fits_complete.html:5
-msgid "TIFF/FITS requested"
-msgstr "TIFF/FITS u kerkuan"
-
-#: templates/image/actions/request_fits_complete.html:8
+#: templates/image/detail/comments.html:7
 #, python-format
 msgid ""
-"<strong>%(username)s</strong> has been notified. Hopefully they will get in "
-"touch with you and send you the TIFF/FITS files. AstroBin doesn't currently "
-"offer to host these files, unfortunately."
+"<strong>Leave a comment here</strong>, and remember that AstroBin is an "
+"international community: using English is preferred. PS: <strong>%(user)s</"
+"strong>'s preferred language is <strong>%(lang)s</strong>."
 msgstr ""
-"<strong>%(username)s</strong> u njoftua. Shpresojmë qe ata do të marrin "
-"kontakt me ju dhe të ju dërgojnë dosjet TIFF/FITS. AstroBin aktualisht nuk "
-"ofron dot hapesire për të pritur këto fotografi, per fat te keq."
+"<strong>Le nje koment ketu</strong>, dhe kujtohu qe AstroBin eshte nje "
+"komunitet nderkombetar: perdorimi i Anglishtes eshte i preferuar. PS: "
+"<strong>%(user)s</strong> perdor si gjuhe te preferuar <strong>%(lang)s</"
+"strong>."
+
+#: templates/image/detail/commercial.html:6
+msgid "Made possible by"
+msgstr ""
+
+#: templates/image/detail/histogram.html:8
+#: templates/image/detail/histogram.html:9
+msgid "Histogram"
+msgstr "Histogrami"
+
+#: templates/image/detail/image_card.html:78
+msgid "RA center"
+msgstr "RA qendra"
+
+#: templates/image/detail/image_card.html:78
+#: templates/image/detail/image_card.html:79
+#: templates/image/detail/image_card.html:83
+#: templates/image/detail/image_card.html:84
+msgid "degrees"
+msgstr "gradë"
+
+#: templates/image/detail/image_card.html:79
+msgid "DEC center"
+msgstr "DEC qendra"
+
+#: templates/image/detail/image_card.html:81
+msgid "Pixel scale"
+msgstr "Shkalla pikselave"
+
+#: templates/image/detail/image_card.html:81
+msgid "arcsec/pixel"
+msgstr "arcsec/piksel"
+
+#: templates/image/detail/image_card.html:83
+msgid "Orientation"
+msgstr "Orientimi"
+
+#: templates/image/detail/image_card.html:84
+#, fuzzy
+msgid "Field radius"
+msgstr "Gjerësia fushës"
+
+#: templates/image/detail/image_title.html:32
+msgid "Contains"
+msgstr "Permban"
+
+#: templates/image/detail/js.html:92 templates/user/profile-js.html:11
+#, python-format
+msgid "Send %(username)s a message"
+msgstr "Dergo nje mesazh tek %(username)s"
+
+#: templates/image/detail/revisions.html:12
+#: templates/image/detail/revisions.html:33
+msgid "Final"
+msgstr ""
+
+#: templates/image/detail/revisions.html:22
+msgid "Original"
+msgstr ""
+
+#: templates/image/detail/skyplot.html:5 templates/image/detail/skyplot.html:7
+msgid "Sky plot"
+msgstr ""
+
+#: templates/image/detail/wip_banner.html:9
+#, python-format
+msgid ""
+"This image is a <strong>work in progress</strong> from your <a href="
+"\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
+"unless you give them one of the links you can find in the <em>Share</em> "
+"menu below. Use that link to post this image to Internet forums and get "
+"feedback on it. When you are satisfied, perhaps after uploading some "
+"revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
+"\"%(profile_url)s\">Public Area</a>."
+msgstr ""
+"Kjo foto eshte nje <strong>pune e pambaruar</strong> nga <a href="
+"\"%(profile_url)s?staging\">Zona Punes</a>. Kjo do te thote qe asnjeri nuk e "
+"shikon dot ate,derisa ju nuk i jepni kodin e lidhjes qe gjendet ne menune "
+"<em>Shpernda</em>. Perdor ate link per te postuar foton neper forume qe te "
+"marresh vleresime mbi te. Kur te jeni i kenaqur, mbase duke ngarkuar "
+"riperpunimet, beji reklam <a href=\"%(promote_url)s\">nxite ate</a> tek <a "
+"href=\"%(profile_url)s\">Zona Publike</a>."
+
+#: templates/image/detail/menu/actions.html:7 templates/messages/inbox.html:29
+#: templates/user/profile/commercial/products.html:43
+#: templates/user/profile/commercial/products.html:125
+msgid "Actions"
+msgstr "Veprime"
+
+#: templates/image/detail/menu/actions.html:15
+msgid "Edit basic information"
+msgstr "Modifiko informacionet baze"
+
+#: templates/image/detail/menu/actions.html:22
+msgid "Edit gear used"
+msgstr "Modifiko mekanizmin e perdorur"
+
+#: templates/image/detail/menu/actions.html:28
+msgid "Edit acquisition details"
+msgstr "Modifiko detajet e fotos"
+
+#: templates/image/detail/menu/actions.html:41
+msgid "Mark this revision as final"
+msgstr "Shenoje kete version te ripunuar si ai final"
+
+#: templates/image/detail/menu/actions.html:49
+msgid "Change license"
+msgstr "Nderro liçensen"
+
+#: templates/image/detail/menu/actions.html:55
+#: templates/image/detail/modals/upload_revision.html:7
+msgid "Upload new revision"
+msgstr "Ngarko nje rishikim te ri"
+
+#: templates/image/detail/menu/actions.html:62
+msgid "Promote to public area"
+msgstr "Reklamoje te zona publike"
+
+#: templates/image/detail/menu/actions.html:69
+msgid "Move to staging area"
+msgstr "Levize te zona punes"
+
+#: templates/image/detail/menu/actions.html:78
+#: templates/image/detail/modals/send_to_datapool.html:7
+#, fuzzy
+msgid "Send to public data pool"
+msgstr "Reklamoje te zona publike"
+
+#: templates/image/detail/menu/actions.html:85
+#: templates/image/detail/modals/send_to_sharedfolder.html:7
+#, fuzzy
+msgid "Send to private shared folder"
+msgstr "Dergo mesazh privat"
+
+#: templates/image/detail/menu/actions.html:95
+msgid "Delete original image"
+msgstr "Fshije foton origjinale"
+
+#: templates/image/detail/menu/actions.html:100
+#: templates/image/detail/modals/delete.html:14
+#: templates/image/detail/modals/delete.html:31
+#: templates/image/detail/modals/delete.html:48
+msgid "Delete"
+msgstr "Fshi"
+
+#: templates/image/detail/menu/actions.html:106
+msgid "Delete this revision"
+msgstr "Fshije rishikimin"
+
+#: templates/image/detail/menu/actions.html:115
+msgid "Bring to a user's attention"
+msgstr "Dergoje ne vemendjen e dikujt"
+
+#: templates/image/detail/menu/share.html:6
+#: templates/image/detail/modals/share.html:7
+msgid "Share"
+msgstr "Shpernda"
+
+#: templates/image/detail/menu/user.html:15
+msgid "View profile"
+msgstr "Shiko profilin"
+
+#: templates/image/detail/menu/user.html:21
+#: templates/user/profile-subnav.html:102
+msgid "Send private message"
+msgstr "Dergo mesazh privat"
+
+#: templates/image/detail/menu/view.html:16
+#: templates/image/detail/menu/view.html:70
+#: templates/image/detail/modals/share.html:54
+msgid "Inverted monochrome"
+msgstr "Ktheje ne bardh e zi"
+
+#: templates/image/detail/menu/view.html:24
+#: templates/image/detail/menu/view.html:48
+#, fuzzy
+msgid "Annotated (original version)"
+msgstr "E komentuar (versioni origjinal)"
+
+#: templates/image/detail/menu/view.html:29
+#: templates/image/detail/menu/view.html:53
+msgid "Annotated"
+msgstr "E komentuar"
+
+#: templates/image/detail/menu/view.html:40
+#: templates/image/detail/menu/view.html:64
+#: templates/image/detail/modals/share.html:53
+msgid "Normal"
+msgstr "Normal"
+
+#: templates/image/detail/modals/bookmarked_this.html:7
+msgid "The following people bookmarked this image"
+msgstr ""
+
+#: templates/image/detail/modals/cant_like.html:7
+msgid "Sorry"
+msgstr ""
+
+#: templates/image/detail/modals/cant_like.html:11
+msgid ""
+"We're really sorry, but liking an image requires an AstroBin index of 2 or "
+"more."
+msgstr ""
+
+#: templates/image/detail/modals/cant_like.html:14
+msgid ""
+"Such limitation improves the website as a whole by discouraging people from "
+"creating fake accounts to like their own images. Thank you for understanding!"
+msgstr ""
+
+#: templates/image/detail/modals/delete.html:6
+msgid "Delete image and all its revisions?"
+msgstr "Fshi foton dhe gjithe rishikimet e saj?"
+
+#: templates/image/detail/modals/delete.html:10
+msgid ""
+"The image will be permanently deleted and cannot be recovered. All its "
+"revisions will be deleted too. Are you sure?"
+msgstr ""
+"Foto do fshihet perfundimisht dhe nuk mund te rikuperohet me. Te gjitha "
+"rishikimet e saj do te fshihen gjithashtu. A jeni te sigurt?"
+
+#: templates/image/detail/modals/delete.html:23
+msgid "Delete this revision?"
+msgstr "Fshi kete rishikim?"
+
+#: templates/image/detail/modals/delete.html:27
+msgid ""
+"This revision will be permanently deleted and cannot be recovered. Are you "
+"sure?"
+msgstr ""
+"Ky rishikim do fshihet perfundimisht dhe nuk mund te rikuperohet me. A jeni "
+"te sigurt?"
+
+#: templates/image/detail/modals/delete.html:40
+msgid "Delete original image?"
+msgstr "Fshi foton origjinale?"
+
+#: templates/image/detail/modals/delete.html:44
+msgid ""
+"The image will be permanently deleted and cannot be recovered. Its revisions "
+"will not be deleted. Are you sure?"
+msgstr ""
+"Foto do te fshihet perfundimisht dhe nuk mund te rikuperohet me. A jeni te "
+"sigurt?"
+
+#: templates/image/detail/modals/like_this.html:7
+msgid "The following people like this image"
+msgstr ""
+
+#: templates/image/detail/modals/send_to_datapool.html:11
+msgid ""
+"If this image is the result of your processing of a public data pool, you "
+"can send it the pool so it's displayed there."
+msgstr ""
+
+#: templates/image/detail/modals/send_to_datapool.html:16
+msgid "Use this form to select an existing <strong>public data pool</strong>."
+msgstr ""
+
+#: templates/image/detail/modals/send_to_datapool.html:28
+#: templates/image/detail/modals/send_to_sharedfolder.html:39
+#, python-format
+msgid ""
+"You need a <a href=\"%(rawdata_url)s\">Raw Data</a> subscription to perform "
+"this action."
+msgstr ""
+
+#: templates/image/detail/modals/send_to_datapool.html:29
+#: templates/image/detail/modals/send_to_sharedfolder.html:40
+#, python-format
+msgid ""
+"The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
+"securely back up your raw files, and keep them neatly and effortlessly "
+"organized, but being part of it also means that you support AstroBin and can "
+"perhaps contribute your raw files to scientic discoveries."
+msgstr ""
+
+#: templates/image/detail/modals/send_to_sharedfolder.html:11
+msgid ""
+"If this image is the result of your processing of a private shared folder, "
+"you can send it the folder so it's displayed there."
+msgstr ""
+
+#: templates/image/detail/modals/send_to_sharedfolder.html:17
+msgid ""
+"Use this form to select a <strong>private shared folder</strong> you have "
+"created or have been invited to."
+msgstr ""
+
+#: templates/image/detail/modals/send_to_sharedfolder.html:29
+msgid "You don't have access to any shared private folders."
+msgstr ""
+
+#: templates/image/detail/modals/share.html:21
+msgid "Sharing mode"
+msgstr ""
+
+#: templates/image/detail/modals/share.html:23
+#, fuzzy
+msgid "Simple link"
+msgstr "Linket e sitit"
+
+#: templates/image/detail/modals/share.html:24
+msgid "Forums"
+msgstr ""
+
+#: templates/image/detail/modals/share.html:29
+msgid "Thumbnail"
+msgstr ""
+
+#: templates/image/detail/modals/share.html:31 templates/user/api_keys.html:29
+#, fuzzy
+msgid "Yes"
+msgstr "Po."
+
+#: templates/image/detail/modals/share.html:32
+#, fuzzy
+msgid "No"
+msgstr "No."
+
+#: templates/image/detail/modals/share.html:38
+#, fuzzy
+msgid "Image size"
+msgstr "Foto"
+
+#: templates/image/detail/modals/share.html:40
+msgid "Regular"
+msgstr "Normale"
+
+#: templates/image/detail/modals/share.html:41
+msgid "Full"
+msgstr ""
+
+#: templates/image/detail/modals/share.html:45
+#, fuzzy
+msgid "Copy this"
+msgstr "Kopjo"
+
+#: templates/image/detail/modals/share.html:51
+#, fuzzy
+msgid "Image mode"
+msgstr "Fotografi te ngarkuara"
+
+#: templates/image/detail/modals/upload_revision.html:11
+msgid ""
+"Did you improve the post-processing of your image? Upload the new revision!"
+msgstr "A e keni permiresuar perpunimin e fotos tuaj? Ngarko rishikimin e ri!"
 
 #: templates/image/edit/acquisition.html:6
-#: templates/image/edit/acquisition.html:15
+#: templates/image/edit/acquisition.html:12
 msgid "Edit your image: acquisition details"
 msgstr "Modifikoni foton tuaj: detajet e sesionit"
 
-#: templates/image/edit/acquisition.html:17
-msgid "Step 5 of 5: acquisition details"
-msgstr "Hapi 5 i 5: detajet e sesionit"
-
-#: templates/image/edit/acquisition.html:29
-#: templates/image/edit/acquisition.html:65
-#: templates/image/edit/acquisition.html:86
+#: templates/image/edit/acquisition.html:22
+#: templates/image/edit/acquisition.html:53
+#: templates/image/edit/acquisition.html:68
 msgid "Remove data"
 msgstr "Hiqini te dhenet"
 
-#: templates/image/edit/acquisition.html:33
-#: templates/image/edit/acquisition.html:69
-#: templates/image/edit/acquisition.html:90
-#: templates/image/edit/basic.html:159
-msgid "Save and finish"
-msgstr "Shpeto dhe mbaro"
-
-#: templates/image/edit/acquisition.html:41
+#: templates/image/edit/acquisition.html:30
 msgid ""
 "You can insert as many acquisition sessions as you want, as often images are "
 "taken across several nights. An acquisition session is defined primarily by "
@@ -5710,7 +5180,7 @@ msgstr ""
 "<strong>Shpëto</strong> per te mbaruar, ose <strong>Shto me shumë</strong> "
 "per te shtuar sesione te tjera fotografie."
 
-#: templates/image/edit/acquisition.html:43
+#: templates/image/edit/acquisition.html:32
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
@@ -5719,20 +5189,19 @@ msgstr ""
 "Jane shume te dhena per ju per tu trajtuar? Shko tek <a class=\"button\" "
 "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">forma baze</a>."
 
-#: templates/image/edit/acquisition.html:49
+#: templates/image/edit/acquisition.html:38
 msgid "Acquisition session"
 msgstr "Sesioni fotografik"
 
-#: templates/image/edit/acquisition.html:49
+#: templates/image/edit/acquisition.html:38
 msgid "(scroll down for more)"
 msgstr "(leviz rroten e mausit per me shume)"
 
-#: templates/image/edit/acquisition.html:64
-#: templates/image/edit/acquisition.html:70
+#: templates/image/edit/acquisition.html:52
 msgid "Add more"
 msgstr "Shto me shume"
 
-#: templates/image/edit/acquisition.html:76
+#: templates/image/edit/acquisition.html:59
 #, python-format
 msgid ""
 "With this form you can input the basic details for the acquisition of your "
@@ -5745,39 +5214,19 @@ msgstr ""
 "secilin filtër, shko tek <a class=\"button\" href=\"%(advanced_form_url)s?"
 "edit_type=deep_sky&advanced=true\">forma advancuar</a>."
 
-#: templates/image/edit/acquisition.html:96
+#: templates/image/edit/acquisition.html:74
 msgid "What kind of image is this?"
 msgstr "Cfare lloj foto eshte kjo?"
 
-#: templates/image/edit/acquisition.html:103
-msgid "Deep sky"
-msgstr "Qiell i thellë"
-
-#: templates/image/edit/basic.html:7 templates/image/edit/basic.html.py:15
+#: templates/image/edit/basic.html:7 templates/image/edit/basic.html.py:12
 msgid "Edit your image: basic information"
 msgstr "Modifiko foton: informacionet bazë"
 
-#: templates/image/edit/basic.html:17
-msgid "Step 3 of 5: basic information"
-msgstr "Hapi 3 i 5: informacionet bazë"
-
-#: templates/image/edit/basic.html:45
-msgid "Use a <strong>comma</strong> to separate the values."
-msgstr "Perdor nje <strong>presje</strong> per te ndare vlerat."
-
-#: templates/image/edit/basic.html:85 templates/image/edit/basic.html:164
-msgid "Next step: gear used"
-msgstr "Hapi tjeter: mekanizmi i perdorur"
-
-#: templates/image/edit/gear.html:6 templates/image/edit/gear.html.py:15
+#: templates/image/edit/gear.html:6 templates/image/edit/gear.html.py:12
 msgid "Edit your image: gear used"
 msgstr "Modifiko foton tuaj: mekanizmi i perdorur"
 
-#: templates/image/edit/gear.html:17
-msgid "Step 4 of 5: gear used"
-msgstr "Hapi 4 i 5: mekanizmi i përdorur"
-
-#: templates/image/edit/gear.html:24
+#: templates/image/edit/gear.html:18
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your <a "
@@ -5786,7 +5235,7 @@ msgstr ""
 "Nuk sheh asgje ketu? Mbase duhet te shtoni nje mekanizem ne <a href="
 "\"%(the_url)s\">profilin</a> tuaj!"
 
-#: templates/image/edit/gear.html:26
+#: templates/image/edit/gear.html:20
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or click the plus sign."
@@ -5794,29 +5243,29 @@ msgstr ""
 "Per te zgjedhur mekanizmin e perdorur per kete foto, zvarrit artikujt nga e "
 "djathta ne te majte, ose kliko mbi shenjen plus."
 
-#: templates/image/edit/gear.html:32
+#: templates/image/edit/gear.html:26
 msgid ""
 "Use this button to import the gear settings from another image of yours."
 msgstr ""
 
-#: templates/image/edit/gear.html:32
+#: templates/image/edit/gear.html:26
 msgid "Copy from another image"
 msgstr ""
 
 #: templates/image/edit/gear.html:56
-msgid "Next step: acquisition"
-msgstr "Hapi tjeter: rregjistrimi fotos"
-
-#: templates/image/edit/gear.html:67
 #, fuzzy
 msgid "Copy gear"
 msgstr "Kopjo"
 
-#: templates/image/edit/gear.html:71
+#: templates/image/edit/gear.html:60
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
 "for you, but you will still need to save it in the end."
 msgstr ""
+
+#: templates/image/edit/gear.html:64
+msgid "Copy"
+msgstr "Kopjo"
 
 #: templates/image/edit/license.html:6 templates/image/edit/license.html:9
 msgid "Change the license for this image"
@@ -5858,45 +5307,6 @@ msgstr "Mekanizmi perdorur"
 msgid "Acquisition details"
 msgstr "Detajet e sesionit fotografik"
 
-#: templates/image/edit/presolve.html:16
-msgid "Knowing the pixel scale will help"
-msgstr "Te dish madhesine e nje pikseli do te te ndihmoj"
-
-#: templates/image/edit/presolve.html:20
-msgid "Step 1 of 5: plate solving scale"
-msgstr "Hapi 1/5: shkallezimi i zberthimit te fotos"
-
-#: templates/image/edit/presolve.html:22
-msgid "Edit your image: plate-solving scale"
-msgstr "Modifiko foton tuaj: shkalla zberthimit"
-
-#: templates/image/edit/presolve.html:28
-msgid ""
-"AstroBin <em>could</em> plate-solve your image without knowing anything "
-"about it, but that could be a long process. If you know the approximate size "
-"of the field of your image, plate-solving will be much faster and will have "
-"a better chance of success!"
-msgstr ""
-"AstroBin <em>mund</em> te zberthej ne info foton tuaj pa ditur asgje rreth "
-"saj, por do zgjase si proces. Nese dini perafersisht masen e fushes fizive "
-"te fotos, zberthimi do jete me i shpejte dhe i sakte!"
-
-#: templates/image/edit/presolve.html:37
-msgid "Start plate-solving"
-msgstr "Fillo zberthimin"
-
-#: templates/image/edit/presolve.html:40
-msgid "Next step: watermark"
-msgstr "Hapi tjeter: watermark"
-
-#: templates/image/edit/presolve.html:45
-msgid ""
-"<strong>Note</strong>: if you didn't upload a full resolution image, the "
-"pixel scale will be wrong!"
-msgstr ""
-"<strong>Vini re</strong>: nese nuk keni ngarkuar nje foto me risoluzion te "
-"larte, shkalla e pikselave do jete e gabuar!"
-
 #: templates/image/edit/watermark.html:6
 #, fuzzy
 msgid "Apply a watermark to image"
@@ -5928,11 +5338,6 @@ msgstr "Vini re: GIF-et e animuara nuk mund ti vihet watermarku kesaj here."
 msgid "Next step: basic information"
 msgstr "Hapi tjeter: informacionet baze"
 
-#: templates/inclusion_tags/image_list.html:83
-#: templates/inclusion_tags/messier_list.html:26
-msgid "No images"
-msgstr "Asnje foto"
-
 #: templates/inclusion_tags/list_gear.html:17
 #: templates/user/profile/commercial/products.html:85
 #: templates/user/profile/commercial/products.html:167
@@ -5955,12 +5360,12 @@ msgid "Edit"
 msgstr "Modifiko"
 
 #: templates/inclusion_tags/list_gear.html:25
-#: templates/popover/gear_accessory.html:27
-#: templates/popover/gear_camera.html:30 templates/popover/gear_filter.html:28
-#: templates/popover/gear_focal_reducer.html:26
-#: templates/popover/gear_mount.html:28
-#: templates/popover/gear_software.html:27
-#: templates/popover/gear_telescope.html:29 templates/popover/subject.html:26
+#: templates/popover/gear_accessory.html:23
+#: templates/popover/gear_camera.html:27 templates/popover/gear_filter.html:25
+#: templates/popover/gear_focal_reducer.html:23
+#: templates/popover/gear_mount.html:25
+#: templates/popover/gear_software.html:24
+#: templates/popover/gear_telescope.html:26 templates/popover/subject.html:23
 #: templates/user/profile/edit/gear.html:367
 #, fuzzy
 msgid "View page"
@@ -5982,30 +5387,28 @@ msgstr "Juve nuk keni mesazhe."
 msgid "Show all messages"
 msgstr "Trego te gjithe mesazhet"
 
-#: templates/inclusion_tags/notification_list.html:22
-msgid "Show all notifications"
-msgstr "Trego te gjitha lajmerimet"
+#: templates/inclusion_tags/no_images.html:3
+msgid "No images"
+msgstr "Asnje foto"
 
-#: templates/inclusion_tags/notification_list.html:26
+#: templates/inclusion_tags/notification_list.html:24
 msgid "You have no new notifications."
 msgstr "Nuk keni asnje lajmerim."
 
-#: templates/inclusion_tags/related_images.html:17
-msgid "newer"
-msgstr "te reja"
-
-#: templates/inclusion_tags/related_images.html:22
-msgid "older"
-msgstr "me te vjeter"
-
-#: templates/inclusion_tags/search_image_list.html:8
+#: templates/inclusion_tags/search_image_list.html:9
 msgid ""
 "This search found results of multiple types. If you want, you can refine "
 "your search using the <strong>Search type</strong> field in the "
 "<strong>Basic criteria</strong> box."
 msgstr ""
 
-#: templates/inclusion_tags/search_image_list.html:67
+#: templates/inclusion_tags/search_image_list.html:40
+#: templates/inclusion_tags/search_image_list.html:93
+#: templates/search/search.html:36
+msgid "Likes"
+msgstr ""
+
+#: templates/inclusion_tags/search_image_list.html:66
 msgid ""
 "If you searched for a gear item, the following users own one, or have imaged "
 "with one."
@@ -6015,23 +5418,123 @@ msgstr ""
 msgid "Date joined"
 msgstr ""
 
-#: templates/inclusion_tags/search_image_list.html:197
-#, fuzzy, python-format
-msgid "Favorited one time"
-msgid_plural "Favorited %(counter)s times"
-msgstr[0] "e parë një herë"
-msgstr[1] "e parë %(counter)s herë"
+#: templates/index/root.html:20
+msgid "The perfect home for your astrophotography."
+msgstr "Shtepia perfekte per astrofotot e juaja."
 
-#: templates/inclusion_tags/search_image_list.html:199
-msgid "Never favorited"
+#: templates/index/root.html:22
+#, python-format
+msgid ""
+"AstroBin is an image hosting service made specifically for "
+"astrophotographers. It comes packed with features that benefit the "
+"astrophotography community greatly! See the <a href=\"%(help_url)s\">help "
+"page.</a> for more information."
+msgstr ""
+"AstroBin është një shërbim image hosting i bërë posaçërisht për "
+"astrofotografët. Ai eshte e mbushur me karakteristika nga te cilat "
+"përfitojnë në masë të madhe i gjithe komuniteti i astrofotografëve anembanë! "
+"Shiko <a href=\"%(help_url)s\">Faqja Ndihmes.</a> per me shume informacione."
+
+#: templates/index/root.html:29
+msgid "Unlimited uploads, unlimited size."
+msgstr "Ngarkime te pakufizuara, permasa te pakufizuara."
+
+#: templates/index/root.html:30
+msgid ""
+"Astrophotography images have scientific value that shouldn't be lost in file "
+"compression. On AstroBin you can (and should!) upload full size images. And "
+"you have unlimited space for free."
+msgstr ""
+"Fotografite astronomike kane vlera shkencore qe s'duhet te humbasin ne "
+"kompresimin e tij. Ne AstroBin ju mund (dhe duhet) te ngarkoni foto me "
+"permasa maksimale. Dhe ju keni hapsire te pakufizuar falas."
+
+#: templates/index/root.html:37
+msgid "Have your data neatly plotted."
+msgstr "Te dhenat teknike janë të shënuara mirë."
+
+#: templates/index/root.html:38
+msgid ""
+"Data is everything, and AstroBin will give you the tools to keep your data "
+"neat and organized. And with our plots, you can get insights on your "
+"productivity and on the gear you use the most."
+msgstr ""
+"Te dhenat teknike jane gjithçka, dhe AstroBin do ju jape juve paisjet qe ti "
+"mbani ato te organizuara. Dhe me te dhenat tona mund te thelloni "
+"produktivitetin tuaj dhe cili mekanizem funksionon me mire."
+
+#: templates/index/root.html:51
+msgid "FIT and DSLR camera raw files"
 msgstr ""
 
-#: templates/inclusion_tags/search_image_list.html:214
+#: templates/index/root.html:57
+msgid ""
+"AstroBin offers the storage of FIT and DSLR camera raw files too, for "
+"archival and sharing purposes!"
+msgstr ""
+
+#: templates/index/root.html:61
 #, python-format
-msgid "Viewed one time"
-msgid_plural "Viewed %(counter)s times"
-msgstr[0] "E pare nje here"
-msgstr[1] "E pare %(counter)s here"
+msgid ""
+"<strong>AstroBin Raw Data</strong> is a platform for the secure storage of "
+"all your FIT and DLSR raw files, up to 500 GB! It will automatically keep "
+"your files organized, and allow you to share them with other members. <a "
+"href=\"%(rawdata_url)s\">Want to know more?</a>"
+msgstr ""
+
+#: templates/index/root.html:163
+msgid "Your activity stream"
+msgstr ""
+
+#: templates/index/root.html:168
+msgid "Global activity stream"
+msgstr ""
+
+#: templates/index/root.html:173
+#, fuzzy
+msgid "Recently uploaded"
+msgstr "u ngarkua"
+
+#: templates/index/root.html:178 templates/index/root.html.py:238
+#, fuzzy
+msgid "Recent images from people you follow"
+msgstr "Nje fotografi e re nga nje përdorues qe juve ndiqni"
+
+#: templates/index/root.html:183 templates/index/root.html.py:249
+#, fuzzy
+msgid "Recently liked"
+msgstr "u ngarkua"
+
+#: templates/index/root.html:188 templates/index/root.html.py:260
+#, fuzzy
+msgid "Recently bookmarked"
+msgstr "u ngarkua"
+
+#: templates/index/root.html:193 templates/index/root.html.py:271
+#, fuzzy
+msgid "Recent images with link to TIFF/FITS"
+msgstr "Linku per TIFF/FITS"
+
+#: templates/index/root.html:203
+msgid "Personal"
+msgstr ""
+
+#: templates/index/root.html:214
+msgid "Global"
+msgstr ""
+
+#: templates/index/root.html:227
+msgid "Recent images"
+msgstr "Fotot e fundit"
+
+#: templates/index/root.html:288
+msgid ""
+"To make your personal stream more interesting, you should follow some people!"
+msgstr ""
+
+#: templates/index/root.html:315
+msgid "Do you want your product here?"
+msgstr ""
 
 #: templates/location/edit.html:8
 msgid "If this location is missing data, or has incorrect data, please fix it."
@@ -6045,15 +5548,15 @@ msgstr "Modifikoni vendndodhjen tuaj"
 msgid "Compose message"
 msgstr "Shkruani meseazh"
 
-#: templates/messages/compose.html:42 templates/messages/modal_compose.html:43
+#: templates/messages/compose.html:42 templates/messages/modal_compose.html:40
 msgid "Type in a search term"
 msgstr "Shkruaj ne nje term kerkues"
 
-#: templates/messages/compose.html:43 templates/messages/modal_compose.html:44
+#: templates/messages/compose.html:43 templates/messages/modal_compose.html:41
 msgid "No results"
 msgstr "Asnje rezultat"
 
-#: templates/messages/compose.html:44 templates/messages/modal_compose.html:45
+#: templates/messages/compose.html:44 templates/messages/modal_compose.html:42
 msgid "Searching"
 msgstr "Duke kerkuar"
 
@@ -6090,7 +5593,7 @@ msgstr "Pergjigju"
 msgid "No messages"
 msgstr "Asnje mesazh"
 
-#: templates/messages/modal_compose.html:63
+#: templates/messages/modal_compose.html:60
 msgid "Message sent"
 msgstr "Mesazhi u dergua"
 
@@ -6289,96 +5792,6 @@ msgstr ""
 msgid "You have %(number)s images with insufficient data!"
 msgstr "Juve keni %(number)s foto ku mungojne te dhenat!"
 
-#: templates/notification/messier_nomination/full.txt:2
-#, python-format
-msgid ""
-"%(user)s has nominated your image of %(messier_object)s for the Messier "
-"Marathon. Congratulations!\n"
-"\n"
-"This is the image of yours that was nominated: http://astrobin.com"
-"%(image_url)s\n"
-"\n"
-"The Messier Marathon is a list of Messier objects featuring images from "
-"AstroBin, chosen by the users via nominations.\n"
-"\n"
-"You can find the Messier Marathon here: http://astrobin.com/explore/messier/"
-msgstr ""
-"%(user)s ka percaktuar foton tuaj te %(messier_object)s per Maratonen "
-"Messier. Urime!\n"
-"\n"
-"Kjo eshte fotografia e juaj qe kane percaktuar: http://astrobin.com"
-"%(image_url)s\n"
-"\n"
-"Maratona Messier eshte nje liste e objekteve Messier qe shfaqen ne AstoBin, "
-"te zgjedhur nga perdoruesit me percaktimin e tyre personal.\n"
-"\n"
-"Juve mund ta gjeni Maratonen Messier ketu: http://astrobin.com/explore/"
-"messier/"
-
-#: templates/notification/messier_nomination/notice.html:2
-#: templates/notification/messier_nomination/short.html:2
-#, python-format
-msgid ""
-"<a href=\"%(image_url)s\"><strong>%(user)s</strong> has nominated your image "
-"of <strong>%(messier_object)s</strong> for the Messier Marathon. "
-"Congratulations!</a>"
-msgstr ""
-"<a href=\"%(image_url)s\"><strong>%(user)s</strong> ka percaktuar foton tuaj "
-"te <strong>%(messier_object)s</strong> per Maratonen Messier. Urime!</a>"
-
-#: templates/notification/messier_nomination/short.txt:2
-#, python-format
-msgid ""
-"Your image of %(messier_object)s has been nominated for the Messier Marathon!"
-msgstr "Foto juaj e %(messier_object)s eshte percaktuar per Maratonen Messier!"
-
-#: templates/notification/messier_top_nomination/full.txt:2
-#, python-format
-msgid ""
-"Your image of %(messier_object)s is now featured in the Messier Marathon. "
-"Congratulations!\n"
-"\n"
-"This is the image of yours that is featured: http://astrobin.com"
-"%(image_url)s\n"
-"\n"
-"The Messier Marathon is a list of Messier objects featuring images from "
-"AstroBin, chosen by the users via nominations.\n"
-"Your image is now the most nominated for the Messier object "
-"%(messier_object)s.\n"
-"\n"
-"You can find the Messier Marathon here: http://astrobin.com/explore/messier/"
-msgstr ""
-"Foto juaj e %(messier_object)s është paraqitur tani në Maratonën Messier. "
-"Urime!\n"
-"\n"
-"Kjo është fotografia juaj që është paraqitur: http://astrobin.com"
-"%(image_url)s\n"
-"\n"
-"Maratona Messier është një listë e objekteve Messier e shfaqur ne imazhet "
-"nga AstroBin, e zgjedhur nga ana e përdoruesit përmes percaktimit te tyre "
-"personal.\n"
-"Foto juaj tani është më e percaktuara për objektet Messier "
-"%(messier_object)s.\n"
-"\n"
-"Ju mund ta gjeni Maratonën Messier këtu: http://astrobin.com/explore/messier/"
-
-#: templates/notification/messier_top_nomination/notice.html:2
-#: templates/notification/messier_top_nomination/short.html:2
-#, python-format
-msgid ""
-"<a href=\"%(image_url)s\">Your image of <strong>%(messier_object)s</strong> "
-"is now featured in the Messier Marathon. Congratulations!</a>"
-msgstr ""
-"<a href=\"%(image_url)s\">Foto juaj e <strong>%(messier_object)s</strong> "
-"tani eshte shfaqur ne Maratonen Messier. Urime!</a>"
-
-#: templates/notification/messier_top_nomination/short.txt:2
-#, python-format
-msgid ""
-"Your image of %(messier_object)s is now featured in the Messier Marathon!"
-msgstr ""
-"Foto juaj e %(messier_object)s tani eshte shfaqur ne Maratonen Messier!"
-
 #: templates/notification/new_blog_entry/full.txt:2
 #, python-format
 msgid ""
@@ -6404,6 +5817,27 @@ msgstr ""
 #, python-format
 msgid "AstroBin has publushed a new blog entry: %(object)s"
 msgstr "Astrobin ka publikuar hyrjen ne nje blog te ri: %(object)s"
+
+#: templates/notification/new_bookmark/full.txt:2
+#, fuzzy, python-format
+msgid "%(user)s has added your image to their bookmarks: %(url)s"
+msgstr ""
+"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
+
+#: templates/notification/new_bookmark/notice.html:2
+#: templates/notification/new_bookmark/short.html:2
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
+"bookmarks!</a>"
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
+
+#: templates/notification/new_bookmark/short.txt:2
+#, fuzzy, python-format
+msgid "%(user)s has added yout image to their bookmarks: %(url)s"
+msgstr ""
+"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
 
 #: templates/notification/new_comment/full.txt:2
 #, python-format
@@ -6445,22 +5879,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s replied to your comment."
 msgstr "%(user)s ju pergjigj komentit tuaj."
-
-#: templates/notification/new_favorite/full.txt:2
-#: templates/notification/new_favorite/short.txt:2
-#, fuzzy, python-format
-msgid "%(user)s has marked your image as a favorite: %(url)s"
-msgstr ""
-"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
-
-#: templates/notification/new_favorite/notice.html:2
-#: templates/notification/new_favorite/short.html:2
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> has marked your image as a "
-"favorite!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
 
 #: templates/notification/new_follower/full.txt:2
 #, python-format
@@ -6631,6 +6049,20 @@ msgstr ""
 #, python-format
 msgid "New image revision by %(originator)s"
 msgstr "Foto e re e riparë nga %(originator)s"
+
+#: templates/notification/new_like/full.txt:2
+#: templates/notification/new_like/short.txt:2
+#, fuzzy, python-format
+msgid "%(user)s likes your image: %(url)s"
+msgstr ""
+"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
+
+#: templates/notification/new_like/notice.html:2
+#: templates/notification/new_like/short.html:2
+#, fuzzy, python-format
+msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -6855,39 +6287,21 @@ msgstr ""
 msgid "Verify"
 msgstr ""
 
-#: templates/popover/gear.html:9 templates/popover/gear_accessory.html:18
-#: templates/popover/gear_camera.html:22 templates/popover/gear_filter.html:20
-#: templates/popover/gear_focal_reducer.html:18
-#: templates/popover/gear_mount.html:20
-#: templates/popover/gear_software.html:19
-#: templates/popover/gear_telescope.html:21 templates/popover/subject.html:18
-#: templates/subject/page.html:64
+#: templates/popover/gear.html:9 templates/popover/gear_accessory.html:22
+#: templates/popover/gear_camera.html:26 templates/popover/gear_filter.html:24
+#: templates/popover/gear_focal_reducer.html:22
+#: templates/popover/gear_mount.html:24
+#: templates/popover/gear_software.html:23
+#: templates/popover/gear_telescope.html:25 templates/popover/subject.html:22
 #, fuzzy
 msgid "Find images"
 msgstr "Asnje foto"
 
-#: templates/popover/rating.html:12
-msgid "Average"
-msgstr ""
-
-#: templates/popover/rating.html:16
-msgid "Sigma-reject average"
-msgstr ""
-
-#: templates/popover/rating.html:20
-#, fuzzy
-msgid "AstroBin index"
-msgstr "AstroBin është shoqëror!"
-
-#: templates/popover/rating.html:28
-msgid "Info"
-msgstr "Info"
-
-#: templates/popover/subject.html:5 templates/subject/page.html:17
+#: templates/popover/subject.html:6
 msgid "RA"
 msgstr ""
 
-#: templates/popover/subject.html:6 templates/subject/page.html:24
+#: templates/popover/subject.html:7
 msgid "Dec"
 msgstr ""
 
@@ -7043,7 +6457,7 @@ msgstr ""
 msgid "Search"
 msgstr "Kërko"
 
-#: templates/search/search.html:17 templates/user/profile-subnav.html:126
+#: templates/search/search.html:17 templates/user/profile-subnav.html:112
 #, fuzzy
 msgid "Sort"
 msgstr "Zgjidh për"
@@ -7052,7 +6466,7 @@ msgstr "Zgjidh për"
 msgid "Relevance"
 msgstr "Rëndësisë"
 
-#: templates/search/search.html:30 templates/user/profile-subnav.html:132
+#: templates/search/search.html:30 templates/user/profile-subnav.html:118
 msgid "Upload time"
 msgstr "Koha ngarkimit"
 
@@ -7094,29 +6508,6 @@ msgstr "# e zgjedhur"
 msgid "Select licenses"
 msgstr "Zgjidh liçencat"
 
-#: templates/subject/page.html:51
-msgid "Interesting links"
-msgstr ""
-
-#: templates/subject/page.html:55
-#, fuzzy
-msgid "SIMBAD page"
-msgstr "Faqja ime"
-
-#: templates/subject/page.html:60
-msgid "SIMBAD clickable map"
-msgstr ""
-
-#: templates/subject/page.html:120
-#, fuzzy
-msgid "Camera types"
-msgstr "Lentet e kamerës"
-
-#: templates/subject/page.html:138
-#, fuzzy
-msgid "Telescope types"
-msgstr "Hapja e teleskopit"
-
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:11
 msgid "Your API Keys"
 msgstr ""
@@ -7141,48 +6532,48 @@ msgstr ""
 msgid "Request an API Key"
 msgstr ""
 
-#: templates/user/card.html:8
-#, python-format
-msgid "%(username)s's technical card"
-msgstr "Skeda teknike e %(username)s"
-
-#: templates/user/card.html:39
-#, python-format
-msgid "About %(username)s"
-msgstr "Rreth %(username)s"
-
-#: templates/user/card.html:61
-#, python-format
-msgid ""
-" You have written nothing about yourself. Why don't you <a href=\"%(the_url)s"
-"\">do it now?</a>"
-msgstr ""
-"Juve nuk keni shkruar asgje per veten. Perse nuk e <a href=\"%(the_url)s"
-"\">beni tani?</a>"
-
-#: templates/user/card.html:65
-#, python-format
-msgid "%(username)s didn't write anything about themselves."
-msgstr "%(username)s nuk ka shkruar asgje per veten."
-
-#: templates/user/favorites.html:5
+#: templates/user/bookmarks.html:5
 #, fuzzy, python-format
-msgid "%(user)s's favorites"
+msgid "%(user)s's bookmarks"
 msgstr "%(user)s parcelat"
 
-#: templates/user/favorites.html:11
-#, fuzzy
-msgid "View your favorites"
-msgstr "Shikoni astrofotot e juaja"
+#: templates/user/bookmarks.html:11
+msgid "Your bookmarks"
+msgstr ""
 
-#: templates/user/favorites.html:13
+#: templates/user/bookmarks.html:13
 #, fuzzy, python-format
-msgid "View %(username)s's favorites"
+msgid "%(username)s's bookmarks"
 msgstr "Shiko fotot e %(username)s:"
 
-#: templates/user/favorites.html:19
-msgid "These are the images you marked as favorite."
+#: templates/user/followers.html:7
+#, fuzzy, python-format
+msgid "%(user)s's followers"
+msgstr "Galeria e %(user)s"
+
+#: templates/user/followers.html:13
+#, fuzzy
+msgid "Your followers"
+msgstr "Juve keni nje ndjekes te ri"
+
+#: templates/user/followers.html:15
+#, fuzzy, python-format
+msgid "%(username)s's followers"
+msgstr "Shiko fotot e %(username)s:"
+
+#: templates/user/following.html:7
+#, fuzzy, python-format
+msgid "%(user)s's followed users"
+msgstr "Galeria e %(user)s"
+
+#: templates/user/following.html:13
+msgid "Your followed users"
 msgstr ""
+
+#: templates/user/following.html:15
+#, fuzzy, python-format
+msgid "%(username)s's followed users"
+msgstr "Shiko fotot e %(username)s:"
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
@@ -7228,41 +6619,37 @@ msgstr ""
 msgid "Image uploads, plotted against time."
 msgstr "Ngarkimet e fotove, te sistemuara kunder kohes."
 
-#: templates/user/profile-subnav.html:63
+#: templates/user/profile-subnav.html:57
 msgid "Public Area"
 msgstr "Zona Publike"
 
-#: templates/user/profile-subnav.html:69
+#: templates/user/profile-subnav.html:63
 msgid "Staging Area"
 msgstr "Zona Punës"
 
-#: templates/user/profile-subnav.html:135
+#: templates/user/profile-subnav.html:79
+#, fuzzy
+msgid "Following"
+msgstr "Ndiq"
+
+#: templates/user/profile-subnav.html:121
 msgid "Acquisition time"
 msgstr "Koha seances fotografike"
 
-#: templates/user/profile-subnav.html:141
+#: templates/user/profile-subnav.html:127
 msgid "Year"
 msgstr "Viti"
 
-#: templates/user/profile-subnav.html:148
+#: templates/user/profile-subnav.html:134
 msgid "Lacking data"
 msgstr "Te dhënat që mungojnë"
 
-#: templates/user/profile.html:5
+#: templates/user/profile.html:10
 #, python-format
 msgid "%(user)s's gallery"
 msgstr "Galeria e %(user)s"
 
-#: templates/user/profile.html:12
-msgid "View your images"
-msgstr "Shikoni astrofotot e juaja"
-
-#: templates/user/profile.html:14
-#, python-format
-msgid "View %(username)s's images:"
-msgstr "Shiko fotot e %(username)s:"
-
-#: templates/user/profile.html:20
+#: templates/user/profile.html:17
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
 "can show people individual images by sharing them using the <em>Share</em> "
@@ -7272,11 +6659,11 @@ msgstr ""
 "mund ti tregoni njerezve foto individuale duke i shperndare ato duke "
 "perdorur menune <em>Shpernda</em>."
 
-#: templates/user/profile.html:28
+#: templates/user/profile.html:62
 msgid "These images don't have enough data. It's a shame..."
 msgstr "keto foto nuk kane te dhena te mjaftueshme. Eshte gjynah..."
 
-#: templates/user/profile.html:30
+#: templates/user/profile.html:64
 msgid ""
 "If you want your images to be categorized in albums, you should really fill "
 "in some data. Imaging telescopes, imaging cameras and subjects are the bare "
@@ -7287,33 +6674,11 @@ msgstr ""
 "subjektet jane minimumi. Te dhenat e fotografimit jane gjithashtu te "
 "rendesishme."
 
-#: templates/user/profile.html:53
-msgid "No images."
-msgstr "Asnje foto."
-
-#: templates/user/profile.html:60
-msgid "(go back)"
-msgstr "(shko mbrapa)"
-
-#: templates/user/profile.html:66
-msgid ""
-"These images are ordered so that the most recently acquired appear first. "
-"Please note: images with no acquisition dates will appear last, and in no "
-"particular order."
-msgstr ""
-"Keto foto jane te renditura qe me te rejat e marra duken te parat. Te lutem "
-"vini re: fotot pa detaje fotografimi do duken te fundit, dhe jo ne nje "
-"renditje te vecante."
-
-#: templates/user/profile.html:68
-msgid "Please fill in the missing dates on all your images!"
-msgstr "Ju lutem permbushni te dhenat qe mungojne ne te fjitha fotot!"
-
-#: templates/user/profile.html:79
+#: templates/user/profile.html:76
 msgid "Tools"
 msgstr "Veglat"
 
-#: templates/user/profile.html:83 templates/user/profile.html.py:86
+#: templates/user/profile.html:80 templates/user/profile.html.py:83
 msgid "Edit profile"
 msgstr "Modifiko profilin"
 
@@ -7574,6 +6939,556 @@ msgstr "Zgjidhni cfare notifikimi me e-mail deshironi te mirrni:"
 msgid "Edit your retailer information"
 msgstr "Modifko informacionet baze personale"
 
+#~ msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
+#~ msgstr ""
+#~ "Nese eshte e mundur, perdor emertimet e katalogeve (p.sh. M101, ose "
+#~ "NGC224 ose IC 1370)."
+
+#~ msgid "Subjects"
+#~ msgstr "Subjektet"
+
+#~ msgid "Please enter either some subjects or a main solar system subject."
+#~ msgstr ""
+#~ "Ju lutem shkruani apo veconi subjektin ose nje subjekt kryesor te "
+#~ "sistemit diellor."
+
+#~ msgid "Nominate for"
+#~ msgstr "Emërto për"
+
+#~ msgid "has favorited"
+#~ msgstr "Shëno si e bërë."
+
+#~ msgid "I don't want this image plate-solved."
+#~ msgstr "Nuk e dua kete foto te zberthyer me astrometri."
+
+#~ msgid "This is not a deep sky image, don't plate-solve it."
+#~ msgstr ""
+#~ "Kjo nuk është nje fotografi e qiellit te thellë, mos e zberthe ne lastër."
+
+#~ msgid "I have no idea about the size of field, try a blind solve."
+#~ msgstr ""
+#~ "Nuk e di se çfare përmasash ka fusha e shikimit, provo një zgjidhje te "
+#~ "verbërt."
+
+#~ msgid "This is a very wide field image (more than 10 degrees)."
+#~ msgstr ""
+#~ "Kjo eshte nje fotografi me fushe te gjerë shikimi (më shumë se 10 gradë)."
+
+#~ msgid "This is a wide field image (1 to 10 degrees)."
+#~ msgstr "Kjo është një foto me fushë te gjërë shikimi (1 deri 10 gradë)."
+
+#~ msgid "This ia narrow field image (less than 1 degree)."
+#~ msgstr ""
+#~ "Kjo është nje fotografi me fushe të ngushtë shikimi (me pak se 1 gradë)."
+
+#~ msgid "Allow rating"
+#~ msgstr "Lejo vlersimin"
+
+#~ msgid "Insert a focal length if you want to plate-solve."
+#~ msgstr ""
+#~ "Vendos gjatesine e fokales nese deshironi te zbertheni foton me "
+#~ "astrometri."
+
+#~ msgid "Insert a pixel size if you want to plate-solve."
+#~ msgstr ""
+#~ "Vendos madhesine e pikselit nese deshironi te zbertheni foton me "
+#~ "astrometri."
+
+#~ msgid ""
+#~ "This is the smallest of the binning values you used. If you imaged L in "
+#~ "1x1 and RGB in 2x2, put 1x1 here."
+#~ msgstr ""
+#~ "Kjo eshte vlera me e ulet e shumzimit te nje pikseli. Nëse keni "
+#~ "fotografuar L në 1x1 dhe RGB në 2x2, këtu vendos 1x1."
+
+#~ msgid ""
+#~ "If you scaled your image before uploading, enter here the percentage of "
+#~ "the new size. E.g. 50 if you made it half the size. Cropping, instead, "
+#~ "doesn't matter."
+#~ msgstr ""
+#~ "Nese e keni zvogeluar fotografine perpara se ta ngarkonit, vendos "
+#~ "perqindjen e permasave te reja ketu. P.sh. 50 nese keni vene gjysmen e "
+#~ "permasave. Prerja e fotografise,nuk ka rendesi."
+
+#~ msgid "Scaling"
+#~ msgstr "Shkallëzimi"
+
+#~ msgid ""
+#~ "Plate-solving has started in the background. It might take a while, so "
+#~ "please don't request it again! You will be notified when the job has "
+#~ "completed. Thanks!"
+#~ msgstr ""
+#~ "Zberthimi ka filluar ne sfond. Do duhet pak kohe, lutemi mos kerkoni "
+#~ "akoma ate! Do lajmeroheni sapo te mbaroj. Faleminderit!"
+
+#~ msgid "Click on a suggestion or press TAB to add what you typed"
+#~ msgstr "Kliko mbi sygjerim ose shtyp TAB per te shtuar ate qe shkruat"
+
+#~ msgid ""
+#~ "To fill in the missing dates, use the <strong>Edit acquisition details</"
+#~ "strong> entry in the <strong>Actions</strong> menu for each image."
+#~ msgstr ""
+#~ "Per te plotesuar te dhenat qe mungojne, perdor <strong>Nderro detajet e "
+#~ "fotos</strong> hyni ne <strong>Veprimet</strong> menuja per cdo foto."
+
+#~ msgid ""
+#~ "To fill in the missing gear, use the <strong>Edit gear used</strong> "
+#~ "entry in the <strong>Actions</strong> menu for each image."
+#~ msgstr ""
+#~ "Per te plotesuar mekanizmin qe mungon, perdor<strong>Nderro mekanizmin e "
+#~ "perdorur</strong> hyni ne <strong>Veprime</strong> menuper cdo foto."
+
+#~ msgid ""
+#~ "To fill in the missing subjects, use the <strong>Edit basic information</"
+#~ "strong> entry in the <strong>Actions</strong> menu for each image."
+#~ msgstr ""
+#~ "Per te plotesuar subjektet qe mungojne, perdor <strong>Modifiko "
+#~ "informacionet baze</strong> hyni ne <strong>Veprime</strong> menuja per "
+#~ "cdo foto."
+
+#~ msgid ""
+#~ "To fill in the missing acquisition details, use the <strong>Edit "
+#~ "acquisition details</strong> entry in the <strong>Actions</strong> menu "
+#~ "for each image."
+#~ msgstr ""
+#~ "Per te plotesuar detajet e filmimit qe mungojne, perdor <strong>Modifiko "
+#~ "detajet e filmimit</strong> hyni ne <strong>Veprime</strong> menu per cdo "
+#~ "foto."
+
+#~ msgid "Images uploaded"
+#~ msgstr "Fotografi te ngarkuara"
+
+#~ msgid "Nomination for the Messier Marathon"
+#~ msgstr "Nominim per Maratonen Messier"
+
+#~ msgid "Top Nomination for the Messier Marathon"
+#~ msgstr "Nominimi kryesor per Maratonen Messier"
+
+#~ msgid "Messier marathon"
+#~ msgstr "Maratona Messier"
+
+#, fuzzy
+#~ msgid "AstroBin Index"
+#~ msgstr "AstroBin është shoqëror!"
+
+#, fuzzy
+#~ msgid "Unfollow"
+#~ msgstr "Ndiq"
+
+#~ msgid ""
+#~ "A list of objects from the Messier catalog, each one represented by an "
+#~ "AstroBin image chosen by the users via a democratic nomination process."
+#~ msgstr ""
+#~ "Një listë objektesh nga katalogu Messier, secila e përfaqësuar nga një "
+#~ "foto e AstroBin e zgjedhur ne mënyrë demokratike nga proçesi emërtimit."
+
+#~ msgid "How do I get an image featured on the Messier Marathon page?"
+#~ msgstr "Si mund te gjej nje foto qe i perket faqes se Maratones Messier?"
+
+#~ msgid ""
+#~ "Images on the <a href=\"%(messier_url)s\">Messier Marathon page</a> are "
+#~ "selected via a democratic nomination process. If you see an image of some "
+#~ "Messier Object, and you think that it should appear on the Messier "
+#~ "Marathon page, nominate it using the <strong>Actions</strong> menu. The "
+#~ "image with the most nominations for a certain Messier object will "
+#~ "automatically be featured."
+#~ msgstr ""
+#~ "Fotot ne <a href=\"%(messier_url)s\">Faqja e Maratones Messier</a> "
+#~ "zgjidhen nga nje proçes automatik emertimi. Nese shikoni fotografi te "
+#~ "Objekteve Messier, dhe mendoni qe duhet te shfaqet ne faqen e Maratones "
+#~ "Messier, emertoje ate duke perdorur menune e <strong>Veprime</strong>. "
+#~ "Fotografia me me shume emertime per nje objekt Messieri do shfaqet "
+#~ "automatikisht."
+
+#, fuzzy
+#~ msgid "Great result!"
+#~ msgstr "Asnje rezultat"
+
+#, fuzzy
+#~ msgid "Top quality!"
+#~ msgstr "Lartë majtas"
+
+#~ msgid ""
+#~ "The authors of these images have been generous, and provided a link to "
+#~ "the TIFF or FITS original files."
+#~ msgstr ""
+#~ "Autoret e ketyre fotove kane qene bujar, dhe kane shtuar linkun per tek "
+#~ "dosjet origjinale TIFF ose FITS."
+
+#, fuzzy
+#~ msgid "Recent"
+#~ msgstr "RA qendra"
+
+#~ msgid "Avg. integration hours"
+#~ msgstr "Mes. integrimit te oreve"
+
+#~ msgid "Messier Marathon"
+#~ msgstr "Maratona Messier"
+
+#~ msgid ""
+#~ "This is a list of Messier objects featuring images on AstroBin. You can "
+#~ "nominate any image (as long as it contains a Messier object), by opening "
+#~ "the <strong>Actions</strong> menu and selecting <strong>Nominate for the "
+#~ "Messier Marathon</strong>."
+#~ msgstr ""
+#~ "Kjo eshte nje liste e objekteve Messier qe shfaqen ne AstroBin. Ju mund "
+#~ "te emertoni cdo foto(derisa ajo permban nje objekt Messier), duke hapur "
+#~ "menune <strong>Veprime</strong> dhe duke zgjedhur <strong>Emerto per "
+#~ "Maratonen Messier</strong>."
+
+#~ msgid ""
+#~ "What about <a href=\"%(search_url)s\">doing a search</a> and nominating "
+#~ "some images now?"
+#~ msgstr ""
+#~ "Po persa i perket <a href=\"%(search_url)s\">duke kerkuar</a> dhe "
+#~ "emerimin e disa fotove tani?"
+
+#~ msgid "Nominate for the Messier Marathon"
+#~ msgstr "Emëro për Maratonen Messier"
+
+#~ msgid ""
+#~ "You will nominate this image for the <a href=\"%(the_url)s\" target="
+#~ "\"_blank\">Messier Marathon</a>. The Messier Marathon is a list of the "
+#~ "Messier objects that features AstroBin images nominated by the users. For "
+#~ "each Messier object, the AstroBin image with the most nomination is "
+#~ "chosen."
+#~ msgstr ""
+#~ "Ju do percaktoni kete foto per <a href=\"%(the_url)s\" target=\"_blank"
+#~ "\">Maratonen Messier</a>. Maratona Messier eshte nje liste e objekteve "
+#~ "Messier qe shfaqen ne AstroBin te percaktuar nga perdoruesit. Per cdo "
+#~ "objekt Messier, foto e AstroBin me percaktime me te shumta u zgjodh."
+
+#~ msgid ""
+#~ "Press <em>Continue</em> to nominate this image for <strong>M "
+#~ "%(messier_object)s</strong>."
+#~ msgstr ""
+#~ "Shtyp <em>Vazhdo</em> per te percaktuar kete foto per <strong>M "
+#~ "%(messier_object)s</strong>."
+
+#~ msgid ""
+#~ "Sorry, but it doesn't look like this image contains a Messier object. If "
+#~ "you think this is a mistake, please contact the author of the image and "
+#~ "ask them to add the correct Messier object as a subject."
+#~ msgstr ""
+#~ "Na vjen keq, por fotografia nuk permban objekte Messier. Nese mendoni qe "
+#~ "ky eshte nje gabim, ju lutemi kontaktoni autorin e fotos dhe pyeteni ate "
+#~ "per te shtuar objektin korrekt si subjekt."
+
+#~ msgid ""
+#~ "This image contains multiple Messier objects. Please choose the one for "
+#~ "which you are nominating this image."
+#~ msgstr ""
+#~ "Kjo foto permban objekte te shumte Messier. Lutemi zgjidhni cilin prej "
+#~ "tyre deshironi te percaktoni."
+
+#~ msgid "You have already nominated this image"
+#~ msgstr "E ke percaktuar nje here kete foto"
+
+#~ msgid "You can't nominate the same image more than once."
+#~ msgstr "Nuk mund te percaktoni te njejten foto me shume se nje here."
+
+#~ msgid "Thanks for your nomination"
+#~ msgstr "Faleminderit per percaktimin"
+
+#~ msgid "Your nomination has been recorded, thank you!"
+#~ msgstr "Percaktimi juaj u rregjistrua, ju faleminderit!"
+
+#~ msgid "Visit the Messier Marathon"
+#~ msgstr "Vizito Maratonen Messier"
+
+#~ msgid "Plate-solve"
+#~ msgstr "Zberthe"
+
+#~ msgid "Plate-solve again"
+#~ msgstr "Zbertheje prap"
+
+#~ msgid "Delete everything"
+#~ msgstr "Fshi cdo gje"
+
+#~ msgid ""
+#~ "This image was just uploaded and is still processing. Please try to "
+#~ "refresh this page in a few seconds."
+#~ msgstr ""
+#~ "Kjo foto sapo u ngarkua dhe po vazhdon proçesi. Lutemi rifreskoni faqen "
+#~ "per pak sekonda."
+
+#~ msgid "and %(number)s more (click to view)."
+#~ msgstr "dhe %(number)s me shume (kliko per te shikuar)."
+
+#~ msgid "(hide these subjects)"
+#~ msgstr "(fshih keto subjekte)"
+
+#~ msgid "arcminutes"
+#~ msgstr "arcminuta"
+
+#~ msgid "Field height"
+#~ msgstr "Lartësia fushës"
+
+#, fuzzy
+#~ msgid "Mark as favorite"
+#~ msgstr "Shëno si e bërë."
+
+#~ msgid "Follow %(username)s?"
+#~ msgstr "Ndiq %(username)s?"
+
+#~ msgid ""
+#~ "You will receive a notification every time %(username)s posts a new "
+#~ "image. Continue?"
+#~ msgstr ""
+#~ "Ju do lajmeroheni cdo here kur %(username)s poston nje foto te re. Vazhdo?"
+
+#~ msgid "Yes, follow!"
+#~ msgstr "Po, ndiq!"
+
+#~ msgid "Stop following %(username)s?"
+#~ msgstr "Ndalo se ndjekuri %(username)s?"
+
+#~ msgid ""
+#~ "You will stop receiving notifications when %(username)s posts a new "
+#~ "image. Continue?"
+#~ msgstr ""
+#~ "Ju sdo keni me lajmerime kur %(username)s poston nje foto te re. Vazhdo?"
+
+#~ msgid "Yes, stop following!"
+#~ msgstr "Po, ndalo ndjekjen!"
+
+#, fuzzy
+#~ msgid "You have already voted."
+#~ msgstr "E ke percaktuar nje here kete foto"
+
+#~ msgid "Yes, delete everything"
+#~ msgstr "Po, fshi cdo gje"
+
+#~ msgid "Yes, delete revision"
+#~ msgstr "Po, fshi rishikimin"
+
+#~ msgid "Yes, delete image"
+#~ msgstr "Po, fshi foton"
+
+#~ msgid "TIFF/FITS requested"
+#~ msgstr "TIFF/FITS u kerkuan"
+
+#~ msgid ""
+#~ "<strong>%(username)s</strong> has been notified. Hopefully they will get "
+#~ "in touch with you and send you the TIFF/FITS files. AstroBin doesn't "
+#~ "currently offer to host these files, unfortunately."
+#~ msgstr ""
+#~ "<strong>%(username)s</strong> u njoftua. Shpresojmë qe ata do të marrin "
+#~ "kontakt me ju dhe të ju dërgojnë dosjet TIFF/FITS. AstroBin aktualisht "
+#~ "nuk ofron dot hapesire për të pritur këto fotografi, per fat te keq."
+
+#~ msgid "Step 5 of 5: acquisition details"
+#~ msgstr "Hapi 5 i 5: detajet e sesionit"
+
+#~ msgid "Save and finish"
+#~ msgstr "Shpeto dhe mbaro"
+
+#~ msgid "Step 3 of 5: basic information"
+#~ msgstr "Hapi 3 i 5: informacionet bazë"
+
+#~ msgid "Next step: gear used"
+#~ msgstr "Hapi tjeter: mekanizmi i perdorur"
+
+#~ msgid "Step 4 of 5: gear used"
+#~ msgstr "Hapi 4 i 5: mekanizmi i përdorur"
+
+#~ msgid "Next step: acquisition"
+#~ msgstr "Hapi tjeter: rregjistrimi fotos"
+
+#~ msgid "Knowing the pixel scale will help"
+#~ msgstr "Te dish madhesine e nje pikseli do te te ndihmoj"
+
+#~ msgid "Step 1 of 5: plate solving scale"
+#~ msgstr "Hapi 1/5: shkallezimi i zberthimit te fotos"
+
+#~ msgid "Edit your image: plate-solving scale"
+#~ msgstr "Modifiko foton tuaj: shkalla zberthimit"
+
+#~ msgid ""
+#~ "AstroBin <em>could</em> plate-solve your image without knowing anything "
+#~ "about it, but that could be a long process. If you know the approximate "
+#~ "size of the field of your image, plate-solving will be much faster and "
+#~ "will have a better chance of success!"
+#~ msgstr ""
+#~ "AstroBin <em>mund</em> te zberthej ne info foton tuaj pa ditur asgje "
+#~ "rreth saj, por do zgjase si proces. Nese dini perafersisht masen e fushes "
+#~ "fizive te fotos, zberthimi do jete me i shpejte dhe i sakte!"
+
+#~ msgid "Start plate-solving"
+#~ msgstr "Fillo zberthimin"
+
+#~ msgid "Next step: watermark"
+#~ msgstr "Hapi tjeter: watermark"
+
+#~ msgid ""
+#~ "<strong>Note</strong>: if you didn't upload a full resolution image, the "
+#~ "pixel scale will be wrong!"
+#~ msgstr ""
+#~ "<strong>Vini re</strong>: nese nuk keni ngarkuar nje foto me risoluzion "
+#~ "te larte, shkalla e pikselave do jete e gabuar!"
+
+#~ msgid "Show all notifications"
+#~ msgstr "Trego te gjitha lajmerimet"
+
+#~ msgid "newer"
+#~ msgstr "te reja"
+
+#~ msgid "older"
+#~ msgstr "me te vjeter"
+
+#, fuzzy
+#~ msgid "Favorited one time"
+#~ msgid_plural "Favorited %(counter)s times"
+#~ msgstr[0] "e parë një herë"
+#~ msgstr[1] "e parë %(counter)s herë"
+
+#~ msgid "Viewed one time"
+#~ msgid_plural "Viewed %(counter)s times"
+#~ msgstr[0] "E pare nje here"
+#~ msgstr[1] "E pare %(counter)s here"
+
+#~ msgid ""
+#~ "%(user)s has nominated your image of %(messier_object)s for the Messier "
+#~ "Marathon. Congratulations!\n"
+#~ "\n"
+#~ "This is the image of yours that was nominated: http://astrobin.com"
+#~ "%(image_url)s\n"
+#~ "\n"
+#~ "The Messier Marathon is a list of Messier objects featuring images from "
+#~ "AstroBin, chosen by the users via nominations.\n"
+#~ "\n"
+#~ "You can find the Messier Marathon here: http://astrobin.com/explore/"
+#~ "messier/"
+#~ msgstr ""
+#~ "%(user)s ka percaktuar foton tuaj te %(messier_object)s per Maratonen "
+#~ "Messier. Urime!\n"
+#~ "\n"
+#~ "Kjo eshte fotografia e juaj qe kane percaktuar: http://astrobin.com"
+#~ "%(image_url)s\n"
+#~ "\n"
+#~ "Maratona Messier eshte nje liste e objekteve Messier qe shfaqen ne "
+#~ "AstoBin, te zgjedhur nga perdoruesit me percaktimin e tyre personal.\n"
+#~ "\n"
+#~ "Juve mund ta gjeni Maratonen Messier ketu: http://astrobin.com/explore/"
+#~ "messier/"
+
+#~ msgid ""
+#~ "<a href=\"%(image_url)s\"><strong>%(user)s</strong> has nominated your "
+#~ "image of <strong>%(messier_object)s</strong> for the Messier Marathon. "
+#~ "Congratulations!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(image_url)s\"><strong>%(user)s</strong> ka percaktuar foton "
+#~ "tuaj te <strong>%(messier_object)s</strong> per Maratonen Messier. Urime!"
+#~ "</a>"
+
+#~ msgid ""
+#~ "Your image of %(messier_object)s has been nominated for the Messier "
+#~ "Marathon!"
+#~ msgstr ""
+#~ "Foto juaj e %(messier_object)s eshte percaktuar per Maratonen Messier!"
+
+#~ msgid ""
+#~ "Your image of %(messier_object)s is now featured in the Messier Marathon. "
+#~ "Congratulations!\n"
+#~ "\n"
+#~ "This is the image of yours that is featured: http://astrobin.com"
+#~ "%(image_url)s\n"
+#~ "\n"
+#~ "The Messier Marathon is a list of Messier objects featuring images from "
+#~ "AstroBin, chosen by the users via nominations.\n"
+#~ "Your image is now the most nominated for the Messier object "
+#~ "%(messier_object)s.\n"
+#~ "\n"
+#~ "You can find the Messier Marathon here: http://astrobin.com/explore/"
+#~ "messier/"
+#~ msgstr ""
+#~ "Foto juaj e %(messier_object)s është paraqitur tani në Maratonën Messier. "
+#~ "Urime!\n"
+#~ "\n"
+#~ "Kjo është fotografia juaj që është paraqitur: http://astrobin.com"
+#~ "%(image_url)s\n"
+#~ "\n"
+#~ "Maratona Messier është një listë e objekteve Messier e shfaqur ne imazhet "
+#~ "nga AstroBin, e zgjedhur nga ana e përdoruesit përmes percaktimit te tyre "
+#~ "personal.\n"
+#~ "Foto juaj tani është më e percaktuara për objektet Messier "
+#~ "%(messier_object)s.\n"
+#~ "\n"
+#~ "Ju mund ta gjeni Maratonën Messier këtu: http://astrobin.com/explore/"
+#~ "messier/"
+
+#~ msgid ""
+#~ "<a href=\"%(image_url)s\">Your image of <strong>%(messier_object)s</"
+#~ "strong> is now featured in the Messier Marathon. Congratulations!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(image_url)s\">Foto juaj e <strong>%(messier_object)s</strong> "
+#~ "tani eshte shfaqur ne Maratonen Messier. Urime!</a>"
+
+#~ msgid ""
+#~ "Your image of %(messier_object)s is now featured in the Messier Marathon!"
+#~ msgstr ""
+#~ "Foto juaj e %(messier_object)s tani eshte shfaqur ne Maratonen Messier!"
+
+#~ msgid "Info"
+#~ msgstr "Info"
+
+#, fuzzy
+#~ msgid "SIMBAD page"
+#~ msgstr "Faqja ime"
+
+#, fuzzy
+#~ msgid "Camera types"
+#~ msgstr "Lentet e kamerës"
+
+#, fuzzy
+#~ msgid "Telescope types"
+#~ msgstr "Hapja e teleskopit"
+
+#~ msgid "%(username)s's technical card"
+#~ msgstr "Skeda teknike e %(username)s"
+
+#~ msgid "About %(username)s"
+#~ msgstr "Rreth %(username)s"
+
+#~ msgid ""
+#~ " You have written nothing about yourself. Why don't you <a href="
+#~ "\"%(the_url)s\">do it now?</a>"
+#~ msgstr ""
+#~ "Juve nuk keni shkruar asgje per veten. Perse nuk e <a href=\"%(the_url)s"
+#~ "\">beni tani?</a>"
+
+#~ msgid "%(username)s didn't write anything about themselves."
+#~ msgstr "%(username)s nuk ka shkruar asgje per veten."
+
+#, fuzzy
+#~ msgid "%(user)s's favorites"
+#~ msgstr "%(user)s parcelat"
+
+#, fuzzy
+#~ msgid "View your favorites"
+#~ msgstr "Shikoni astrofotot e juaja"
+
+#~ msgid "View your images"
+#~ msgstr "Shikoni astrofotot e juaja"
+
+#~ msgid "No images."
+#~ msgstr "Asnje foto."
+
+#~ msgid "(go back)"
+#~ msgstr "(shko mbrapa)"
+
+#~ msgid ""
+#~ "These images are ordered so that the most recently acquired appear first. "
+#~ "Please note: images with no acquisition dates will appear last, and in no "
+#~ "particular order."
+#~ msgstr ""
+#~ "Keto foto jane te renditura qe me te rejat e marra duken te parat. Te "
+#~ "lutem vini re: fotot pa detaje fotografimi do duken te fundit, dhe jo ne "
+#~ "nje renditje te vecante."
+
+#~ msgid "Please fill in the missing dates on all your images!"
+#~ msgstr "Ju lutem permbushni te dhenat qe mungojne ne te fjitha fotot!"
+
 #, fuzzy
 #~ msgid "Popular subjects"
 #~ msgstr "Me teper: i njejti subjekt"
@@ -7749,9 +7664,6 @@ msgstr "Modifko informacionet baze personale"
 #~ msgid "Undelete"
 #~ msgstr "E pafshire"
 
-#~ msgid "Delete"
-#~ msgstr "Fshi"
-
 #~ msgid "Formatting help"
 #~ msgstr "Ndihme per formatim"
 
@@ -7788,9 +7700,6 @@ msgstr "Modifko informacionet baze personale"
 
 #~ msgid "Gorgeous"
 #~ msgstr "I mrekullueshem"
-
-#~ msgid "Go back to the home page."
-#~ msgstr "Kthehu te faqja kryesore."
 
 #~ msgid "Label"
 #~ msgstr "Etikete"
@@ -7829,10 +7738,6 @@ msgstr "Modifko informacionet baze personale"
 
 #~ msgid "My page"
 #~ msgstr "Faqja ime"
-
-#, fuzzy
-#~ msgid "Recently uploaded"
-#~ msgstr "u ngarkua"
 
 #, fuzzy
 #~ msgid "Recently uploaded by the users you follow"
