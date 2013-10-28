@@ -2471,7 +2471,6 @@ def bring_to_attention(request, id):
     form = BringToAttentionForm()
 
     response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
         'form': form,
         'image': image,
     }
@@ -2489,7 +2488,6 @@ def bring_to_attention_process(request):
     image = get_object_or_404(Image, id=image_id)
 
     response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
         'form': form,
         'image': image,
     }
@@ -2521,7 +2519,6 @@ def bring_to_attention_complete(request, id):
     image = get_object_or_404(Image, id=id)
 
     response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
         'image': image,
     }
     return render_to_response(
