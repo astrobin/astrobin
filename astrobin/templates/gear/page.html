@@ -107,7 +107,7 @@
                             {% endif %}
                         </p>
 
-                        <form class="form-vertical review-form" method="post" action="{% url gear_review_save %}">
+                        <form class="form-vertical review-form" method="post" action="{% url gear_review_save %}">{% csrf_token %}
                             {{review_form|as_bootstrap}}
                             <input type="hidden" name="gear_id" value="{{gear.id}}" />
                             <input type="submit" class="btn btn-mini btn-primary" value="{% trans "Submit" %} &rarr;" />

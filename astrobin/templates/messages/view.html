@@ -33,7 +33,7 @@
          </div>
 
          <div class="message-form">
-            <form class="reply-form form-horizontal" method="POST" action="{% url message_reply thread.pk %}">
+            <form class="reply-form form-horizontal" method="POST" action="{% url message_reply thread.pk %}">{% csrf_token %}
                <a name="reply"></a>
                {{ form|as_bootstrap }}
                <div class="form-actions">
