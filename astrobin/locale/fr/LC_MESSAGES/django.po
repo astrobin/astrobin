@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-25 02:47-0500\n"
-"PO-Revision-Date: 2013-08-24 16:38+0100\n"
+"PO-Revision-Date: 2013-09-07 15:36+0100\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -4291,7 +4291,7 @@ msgstr "par"
 
 #: templates/index.html:132 templates/iotd_archive.html:32
 msgid "Runners-up"
-msgstr ""
+msgstr "Suppléants"
 
 #: templates/index.html:184
 msgid "Recent"
@@ -4326,9 +4326,8 @@ msgid "ago"
 msgstr "ago"
 
 #: templates/iotd_archive.html:5 templates/iotd_archive.html.py:10
-#, fuzzy
 msgid "Archive of 'Image of the day' winners"
-msgstr "Image du jour"
+msgstr "Archives 'Image du jour'"
 
 #: templates/leaderboard.html:24 templates/reviews.html:40
 #: templates/wall.html:40 templates/gear/page.html:89
