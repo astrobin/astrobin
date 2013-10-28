@@ -2507,7 +2507,7 @@ def bring_to_attention_process(request):
     push_notification(recipients, 'attention_request',
                       {'object':image,
                        'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
-                       'originator':request.user,
+                       'originator':request.user.userprofile,
                        'originator_url': request.user.get_absolute_url()})
 
     return HttpResponseRedirect('/%d/bring-to-attention/complete/' % image.id)
