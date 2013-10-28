@@ -7,6 +7,7 @@ $(document).ready(function() {
             var alias = $img.attr('data-alias');
             var revision = $img.attr('data-revision');
             var mod = $img.attr('data-mod');
+            var animated = $img.attr('data-animated');
             var url = '/' + id + '/'
 
             if (revision != '' && revision != 'final')
@@ -18,6 +19,10 @@ $(document).ready(function() {
 
             if (mod != '' && mod != 'None' && mod != 'regular')
                 url += mod + '/';
+
+            if (animated == 'True') {
+                url += '?animated'
+            }
 
             /* TODO: verify that this works in all browsers. */
             $.ajax({

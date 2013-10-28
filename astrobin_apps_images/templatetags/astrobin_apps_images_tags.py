@@ -1,6 +1,7 @@
 # Python
 import random
 import string
+from PIL import Image as PILImage
 
 # Django
 from django.conf import settings
@@ -92,7 +93,20 @@ def astrobin_image(
         if placehold_size[i] > 1920:
             placehold_size[i] = 1920
 
+
+    # Determine whether this is an animated gif
+    animated = False
+    if image.image_file.name.lower().endswith('.gif'):
+        gif = PILImage.open(image.image_file.file)
+        try:
+            gif.seek(1)
+        except EOFError:
+            animated = False
+        else:
+            animated = True
+
     url = get_image_url(image, revision, url_size)
+
     show_tooltip = alias in (
         'gallery', 'gallery_inverted',
         'thumb', 'runnerup',
@@ -128,6 +142,7 @@ def astrobin_image(
         'request'       : context['request'],
         'cache_key'     : "%s_%s_%s_%d" % (mod if mod else 'none', alias, revision, image.id),
         'badges'        : badges,
+        'animated'      : animated,
     }.items())
 
 
