@@ -87,27 +87,30 @@ class ProfileMiddleware(object):
                "</pre>"
 
     def process_response(self, request, response):
-        if (settings.DEBUG or request.user.is_superuser) and 'prof' in request.GET:
-            self.prof.close()
+        try:
+            if (settings.DEBUG or request.user.is_superuser) and 'prof' in request.GET:
+                self.prof.close()
 
-            out = StringIO.StringIO()
-            old_stdout = sys.stdout
-            sys.stdout = out
+                out = StringIO.StringIO()
+                old_stdout = sys.stdout
+                sys.stdout = out
 
-            stats = hotshot.stats.load(self.tmpfile)
-            stats.sort_stats('time', 'calls')
-            stats.print_stats()
+                stats = hotshot.stats.load(self.tmpfile)
+                stats.sort_stats('time', 'calls')
+                stats.print_stats()
 
-            sys.stdout = old_stdout
-            stats_str = out.getvalue()
+                sys.stdout = old_stdout
+                stats_str = out.getvalue()
 
-            if response and response.content and stats_str:
-                response.content = "<pre>" + stats_str + "</pre>"
+                if response and response.content and stats_str:
+                    response.content = "<pre>" + stats_str + "</pre>"
 
-            response.content = "\n".join(response.content.split("\n")[:40])
+                response.content = "\n".join(response.content.split("\n")[:40])
 
-            response.content += self.summary_for_files(stats_str)
+                response.content += self.summary_for_files(stats_str)
 
-            os.unlink(self.tmpfile)
+                os.unlink(self.tmpfile)
+        except AttributeError:
+            pass
 
         return response
