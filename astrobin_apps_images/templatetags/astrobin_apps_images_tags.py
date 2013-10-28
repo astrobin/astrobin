@@ -97,9 +97,9 @@ def astrobin_image(
         placehold_size[0] = w
         placehold_size[1] = h
 
-    # Determine whether this is an animated gif
+    # Determine whether this is an animated gif, and we should show it as such
     animated = False
-    if image.image_file.name.lower().endswith('.gif'):
+    if image.image_file.name.lower().endswith('.gif') and alias in ('regular', 'hd', 'real'):
         gif = PILImage.open(image.image_file.file)
         try:
             gif.seek(1)
