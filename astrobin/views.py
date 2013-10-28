@@ -2359,7 +2359,7 @@ def user_profile_edit_preferences(request):
     response_dict = {
         'form': form,
     }
-    email_medium = "1" # see NOTICE_MEDIA in notifications/models.py
+    email_medium = 0 # see NOTICE_MEDIA in notifications/models.py
     email_default = NOTICE_MEDIA_DEFAULTS[email_medium]
     notice_settings = NoticeSetting.objects.filter(
         user=request.user,
@@ -2401,7 +2401,7 @@ def user_profile_save_preferences(request):
             activate(lang)
 
         # save the notification settings
-        email_medium = "1" # see NOTICE_MEDIA in notifications/models.py
+        email_medium = 0 # see NOTICE_MEDIA in notifications/models.py
         for notice_type in NOTICE_TYPES:
             if notice_type[3] == 2:
                 label = notice_type[0]
