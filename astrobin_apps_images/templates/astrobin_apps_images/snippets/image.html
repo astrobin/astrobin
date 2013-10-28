@@ -62,10 +62,8 @@
                         </a>
                     </div>
 
-                    <p>
-                        <span class="title">{{image.title|escape}}</strong></span>,
-                        {{image.user.userprofile}}
-                    </p>
+                    <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">{{image.title|escape|default:_("(no title)")}}</a>,
+                    {{image.user.userprofile}}
 
                     {% if alias == 'gallery' %}
                         <table class="table table-condensed">

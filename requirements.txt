@@ -100,7 +100,7 @@ tornado==2.1.1
 wsgiref==0.1.2
 yolk==0.4.1
 django-registration==1.0
--e git+https://github.com/frankban/django-endless-pagination.git@725bde91db6da2be0663652b0df4501ba72306e7#egg=django-endless-pagination
+-e git+https://github.com/siovene/django-endless-pagination.git@725bde91db6da2be0663652b0df4501ba72306e7#egg=django-endless-pagination
 -e git+https://github.com/SmileyChris/easy-thumbnails@52960a6165ca49e0cf418160c218157c14628c63#egg=easy_thumbnails
 django-mptt==0.5
 PySide==1.2.1

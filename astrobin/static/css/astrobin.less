@@ -1470,8 +1470,9 @@ div.capty-target {
         color: #ddd;
         text-shadow: 1px 1px 1px black;
 
-        .title {
+        a {
             color: @link-color;
+            font-size: 90%;
         }
 
         .table-condensed th, .table-condensed td {
@@ -1696,6 +1697,10 @@ div.capty-target {
 
 .avatar-block {
     .avatar, .username {
+        display: block;
+    }
+
+    .avatar {
         float: left;
     }
 
@@ -1705,7 +1710,7 @@ div.capty-target {
 
     .username {
         font-size: 1.5em;
-        margin-left: @spacer-large;
+        margin-left: 120px;
         margin-top: @spacer-small;
 
         a.username-link {
@@ -3445,7 +3450,7 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
                 color: #d6d6d6;
                 text-transform: uppercase;
                 padding: 4px 8px;
-                font-size: 9px;
+                font-size: 8px;
                 text-align: center;
                 border-right: 1px solid #262626;
 
