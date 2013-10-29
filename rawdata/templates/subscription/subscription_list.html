@@ -22,18 +22,29 @@
     <h3>
         {% blocktrans %}Here are the available plans. Choose the one that suits you best!{% endblocktrans %}
     </h3>
- 
+
     <div class="row">
         {% for object in object_list %}
-            <div class="span3 plan">
-                {% include 'subscription/_plan.html' %}
-                <a class="btn btn-large btn-primary" href="{% url subscription_detail object.id %}">
-                    {% trans "Manage" %}
-                </a>
-            </div>
+            {% comment %}
+                These are hardcoded here because there are other subscription plans not
+                pertaining Raw Data.
+            {% endcomment %}
+
+
+            {% if object.name == 'Meteor' or object.name == 'Luna' or object.name == 'Sol' or object.name == 'Galaxia' %}
+                <div class="span3 plan">
+                    {% include 'subscription/_plan.html' %}
+                    <a class="btn btn-large btn-primary" href="{% url subscription_detail object.id %}">
+                        {% trans "Manage" %}
+                    </a>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 
+    {% comment %}
+        More hardcoded things, but well...
+    {% endcomment %}
     <div class="row">
         <div class="span3">
             <div class="subtle-container plan-description">
