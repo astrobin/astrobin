@@ -23,6 +23,7 @@
         <div class="span4"> <!-- right pane -->
             {% include 'image/detail/info.html' %}
             {% include 'image/detail/like.html' %}
+            {% include 'image/detail/ad.html' %}
             {% include 'image/detail/revisions.html' %}
             {% include 'image/detail/skyplot.html' %}
             {% include 'image/detail/histogram.html' %}
@@ -40,6 +41,7 @@
     {% include 'image/detail/modals/send_to_datapool.html' %}
     {% include 'image/detail/modals/send_to_sharedfolder.html' %}
     {% include 'image/detail/modals/cant_like.html' %}
+    {% include 'image/detail/modals/remove_ads.html' %}
 {% endblock %}
 
 {% block extra_js %}
