@@ -17,18 +17,6 @@ NOTICE_TYPES = (
         2,
     ),
     (
-        'follow_success',
-        _('Following a user was successful'),
-        '',
-        1,
-    ),
-    (
-        'unfollow_success',
-        _('Unfollowing a user was successful'),
-        '',
-        1,
-    ),
-    (
         'new_image',
         _('New image from a user you follow'),
         '',
@@ -47,12 +35,6 @@ NOTICE_TYPES = (
         2,
     ),
     (
-        'image_ready',
-        _('Your image is ready'),
-        '',
-        1,
-    ),
-    (
         'image_solved',
         _('Your image was plate-solved'),
         '',
@@ -65,26 +47,8 @@ NOTICE_TYPES = (
         1,
     ),
     (
-        'request_fulfilled',
-        _('Your request was fulfilled'),
-        '',
-        1,
-    ),
-    (
-        'image_deleted',
-        _('Your image was deleted'),
-        '',
-        1,
-    ),
-    (
         'new_blog_entry',
         _('AstroBin has published a new blog entry'),
-        '',
-        1,
-    ),
-    (
-        'lacking_data_reminder',
-        _("You have some images that are lacking data"),
         '',
         1,
     ),

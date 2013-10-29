@@ -73,7 +73,19 @@
                     switch (data['status']) {
                         case 0: self.onStatusMissing(); break;
                         case 1: self.onStatusPending(); break;
-                        case 2: self.onStatusFailed(); break;
+                        case 2:
+                            self.$bar.css({"width": "75%"});
+                            self.$icon.attr('class', 'icon-warning-sign');
+                            self.$content.text(self.solveFinalizingMsg);
+                            $.ajax({
+                                url: self.finalizeURL + self.solution_id + '/',
+                                type: 'post',
+                                timeout: 30000,
+                                success: function(data, textStatus, jqXHR) {
+                                    self.onStatusFailed();
+                                }
+                            });
+                            break;
                         case 3:
                             self.$bar.css({"width": "75%"});
                             self.$icon.attr('class', 'icon-warning-sign');
