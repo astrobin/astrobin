@@ -12,6 +12,7 @@ MAINTENANCE_MODE = False
 READONLY_MODE = False
 MEDIA_VERSION = '58'
 LONGPOLL_ENABLED = False
+ADS_ENABLED = True
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@astrobin.com'),
@@ -251,6 +252,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'easy_thumbnails',
     'endless_pagination',
+    'dfp', # For Google DFP
 )
 
 LOGIN_REDIRECT_URL = '/'

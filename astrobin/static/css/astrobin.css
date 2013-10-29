@@ -1927,6 +1927,19 @@ div.capty-target .capty-caption-content .link-overlay a {
   width: 594px;
   max-width: 96%;
 }
+.subtle-container.advertisement {
+  padding: 0;
+}
+.subtle-container.advertisement .header {
+  padding: 8px;
+  margin: 0;
+}
+.subtle-container.advertisement .header .remove {
+  float: right;
+  padding: 0 2px;
+  font-size: 90%;
+  color: #505050;
+}
 .comment-author {
   padding-bottom: 8px;
 }

@@ -86,6 +86,7 @@ def common_variables(request):
         'has_rawdata_subscription': user_has_subscription(request.user),
         'IMAGES_URL' : settings.IMAGES_URL,
         'CDN_URL' : settings.CDN_URL,
+        'ADS_ENABLED': settings.ADS_ENABLED,
     }
 
     return d
