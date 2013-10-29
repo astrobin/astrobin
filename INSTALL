@@ -299,6 +299,13 @@ And some for the Raw Data platform:
     * rawdata-sol     (USD 19,90)
     * rawdata-galaxia (USD 49,90)
 
+And some for donors:
+
+    * donor-meteor    (USD 2.00)
+    * donor-luna      (USD 5.00)
+    * donor-sol       (USD 10.00)
+    * donor-galaxia   (USD 20.00)
+
 
 # (replace gunicorn.sh with run.sh if you want to debug)
 sudo supervisorctl stop gunicorn
