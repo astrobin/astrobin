@@ -408,12 +408,6 @@ def wall(request):
         response_dict['filter'] = filter
     if filter == 'all_ds':
         sqs = sqs.filter(is_deep_sky = True)
-    elif filter == 'clusters':
-        sqs = sqs.filter(is_clusters = True)
-    elif filter == 'nebulae':
-        sqs = sqs.filter(is_nebulae = True)
-    elif filter == 'galaxies':
-        sqs = sqs.filter(is_galaxies = True)
     elif filter == 'all_ss':
         sqs = sqs.filter(is_solar_system = True)
     elif filter == 'sun':

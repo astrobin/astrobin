@@ -75,30 +75,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "filter='clusters'" "" %}">
-                            <span class="bg-icon{% if filter == 'clusters' %} icon-ok{% endif %}"></span>
-                            {% trans "Clusters" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% query_string "filter='nebulae'" "" %}">
-                            <span class="bg-icon{% if filter == 'nebulae' %} icon-ok{% endif %}"></span>
-                            {% trans "Nebulae" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% query_string "filter='galaxies'" "" %}">
-                            <span class="bg-icon{% if filter == 'galaxies' %} icon-ok{% endif %}"></span>
-                            {% trans "Galaxies" %}
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
                         <a href="{% query_string "filter='all_ss'" "" %}">
                             <span class="bg-icon{% if filter == 'all_ss' %} icon-ok{% endif %}"></span>
                             {% trans "All Solar System objects" %}
                         </a>
                     </li>
+
+                    <li class="divider"></li>
+
                     <li>
                         <a href="{% query_string "filter='sun'" "" %}">
                             <span class="bg-icon{% if filter == 'sun' %} icon-ok{% endif %}"></span>
