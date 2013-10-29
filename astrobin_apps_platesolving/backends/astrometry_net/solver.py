@@ -238,7 +238,7 @@ class Solver(AbstractPlateSolvingBackend):
     def sky_plot_zoom1_image_url(self, sub_id):
         jc_id = self.get_job_calibration_from_sub(sub_id)
         if jc_id:
-            return 'http://staging.astrometry.net/sky_plot/zoom1/%d' % jc_id
+            return 'http://nova.astrometry.net/sky_plot/zoom1/%d' % jc_id
         return ''
 
     def start(self, image_file):
