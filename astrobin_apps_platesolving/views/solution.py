@@ -73,9 +73,9 @@ class SolutionFinalizeView(base.View):
     def post(self, request, *args, **kwargs):
         solution = get_object_or_404(Solution, pk = kwargs.pop('pk'))
         solver = Solver()
-        solution.status = solver.status(solution.submission_id)
+        status = solver.status(solution.submission_id)
 
-        if solution.status == Solver.SUCCESS:
+        if status == Solver.SUCCESS:
             info = solver.info(solution.submission_id)
 
             solution.objects_in_field = ', '.join(info['objects_in_field'])
@@ -105,6 +105,7 @@ class SolutionFinalizeView(base.View):
                 f = File(img)
                 solution.skyplot_zoom1.save(target.image_file.name, f)
 
+        solution.status = status
         solution.save()
 
         context = {'status': solution.status}

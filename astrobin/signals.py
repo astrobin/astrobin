@@ -20,6 +20,9 @@ from rawdata.models import (
     TemporaryArchive,
 )
 
+from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.solver import Solver
+
 # This app
 from .notifications import push_notification
 from .models import Image, ImageRevision, Gear, UserProfile
@@ -136,7 +139,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             if instance.content_type == user_ct:
                 followed_user = user_ct.get_object_for_this_type(pk = instance.object_id)
                 push_notification([followed_user], 'new_follower',
-                                  {'object': instance.user,
+                                  {'object': instance.user.userprofile,
                                    'object_url': instance.user.get_absolute_url()})
 
 
@@ -243,11 +246,36 @@ def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, mo
         )
 
 
+def solution_post_save(sender, instance, created, **kwargs):
+    notification = None
+    user = None
+
+    ct = instance.content_type
+    target = ct.get_object_for_this_type(pk = instance.object_id)
+    if ct.model == 'image':
+        user = target.user
+    elif ct.model == 'imagerevision':
+        user = target.image.user
+    else:
+        return
+
+    if instance.status == Solver.FAILED:
+        notification = 'image_not_solved'
+    elif instance.status == Solver.SUCCESS:
+        notification = 'image_solved'
+    else:
+        return
+
+    push_notification([user], notification,
+        {'object_url': settings.ASTROBIN_BASE_URL + target.get_absolute_url()})
+
+
 post_save.connect(image_post_save, sender = Image)
 post_save.connect(imagerevision_post_save, sender = ImageRevision)
 post_save.connect(nested_comment_post_save, sender = NestedComment)
 post_save.connect(toggleproperty_post_save, sender = ToggleProperty)
 post_save.connect(rawdata_publicdatapool_post_save, sender = PublicDataPool)
+post_save.connect(solution_post_save, sender = Solution)
 post_save.connect(create_auth_token, sender = User)
 
 m2m_changed.connect(rawdata_publicdatapool_data_added, sender = PublicDataPool.images.through)
@@ -255,3 +283,5 @@ m2m_changed.connect(rawdata_publicdatapool_image_added, sender = PublicDataPool.
 m2m_changed.connect(rawdata_privatesharedfolder_data_added, sender = PrivateSharedFolder.images.through)
 m2m_changed.connect(rawdata_privatesharedfolder_image_added, sender = PrivateSharedFolder.processed_images.through)
 m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender = PrivateSharedFolder.users.through)
+
+
