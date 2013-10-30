@@ -58,7 +58,9 @@
 
         {% block extra_js %}{% endblock %}
 
-        {% dfp_footer %}
+        {% if ADS_ENABLED %}
+            {% dfp_footer %}
+        {% endif %}
     </body>
 </html>
 

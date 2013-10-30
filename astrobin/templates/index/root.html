@@ -306,6 +306,8 @@
             </div> <!-- span -->
 
             <div class="span3 visible-desktop">
+                {% include 'index/ad.html' %}
+
                 <div class="subtle-container simple-container">
                     <div class="header"><h4>{% trans "Commercial products" %}<h4></div>
                     <div id="commercial-products">
@@ -319,6 +321,10 @@
         </div> <!-- row -->
     {% endif %} {# authenticated #}
 </div>
+{% endblock %}
+
+{% block modals %}
+    {% include 'snippets/remove_ads.html' %}
 {% endblock %}
 
 {% block extra_js %}
