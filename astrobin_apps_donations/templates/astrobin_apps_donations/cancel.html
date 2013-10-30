@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Your recurring donation has been canceled" %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span6 offset3">
+            <h1>{% trans "Your recurring donation has been canceled" %}</h1>
+
+            <p>
+                {% blocktrans %}We are very grateful for your support so far! Your contribution has helped AstroBin with its ever increasing hosting costs, and served an incentive for us to continue to improve it.{% endblocktrans %}
+            </p>
+
+            <p>
+                {% blocktrans %}From now on, you will again see ads on this website.{% endblocktrans %}
+            </p>
+
+            <hr/>
+
+            <p class="text-right">
+                {% blocktrans %}Whishing you clear skies and excellent seeing!{% endblocktrans %}
+            </p>
+
+            <p class="text-right">
+                <small>
+                    Salvatore Iovene, {% trans "Founder of AstroBin" %}
+                </small>
+            </p>
+        </div>
+    </div>
+{% endblock %}

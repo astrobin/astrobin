@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Thank you for your donation!" %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span6 offset3">
+            <h1>{% trans "Thank you for your donation!" %}</h1>
+
+            <p>
+                {% blocktrans %}We are very grateful for your support! Your contribution will help AstroBin with its ever increasing hosting costs, and will serve an incentive for us to continue to improve it.{% endblocktrans %}
+            </p>
+
+            <p>
+                {% blocktrans %}In a few minutes, once your PayPal transaction is processed, we will stop showing you ads on this website.{% endblocktrans %}
+            </p>
+
+            <hr/>
+
+            <p class="text-right">
+                {% blocktrans %}Whishing you clear skies and excellent seeing!{% endblocktrans %}
+            </p>
+
+            <p class="text-right">
+                <small>
+                    Salvatore Iovene, {% trans "Founder of AstroBin" %}
+                </small>
+            </p>
+        </div>
+    </div>
+{% endblock %}
