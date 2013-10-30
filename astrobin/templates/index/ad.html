@@ -1,0 +1,17 @@
+{% load i18n %}
+{% load dfp_tags %}
+
+{% if ADS_ENABLED %}
+    <div class="subtle-container simple-container advertisement advertisement-frontpage">
+        <div class="header">
+            <h4><i class="icon-dollar"></i> {% trans "Advertisement" %}</h4>
+
+            <a class="remove" data-toggle="modal" href="#remove-ads-modal">
+                <i class="icon-remove"></i>
+            </a>
+        </div>
+
+        {% dfp_tag '47890729/image-page' 220 135 '' '' %}
+    </div>
+{% endif %}
+
