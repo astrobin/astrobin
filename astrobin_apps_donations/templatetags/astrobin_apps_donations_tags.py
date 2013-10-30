@@ -13,6 +13,5 @@ def donate_modal(context):
         'base_url': settings.ASTROBIN_BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
         'subscription': Subscription.objects.get(name = 'AstroBin Donor'),
-        'button_id': settings.PAYPAL_DONATION_BUTTON_ID,
         'request': context['request'],
     }

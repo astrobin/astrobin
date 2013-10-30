@@ -325,7 +325,9 @@
 {% endblock %}
 
 {% block modals %}
-    {% donate_modal %}
+    {% if ADS_ENABLED and not user_is_donor %}
+        {% donate_modal %}
+    {% endif %}
 {% endblock %}
 
 {% block extra_js %}
