@@ -1,7 +1,8 @@
 {% load i18n %}
 {% load dfp_tags %}
 
-{% if ADS_ENABLED %}
+{% comment %} TODO: make an app: astrobin_apps_ads {% endcomment %}
+{% if ADS_ENABLED and not user_is_donor %}
     <div class="subtle-container advertisement">
         <div class="header">
             <h4><i class="icon-dollar"></i> {% trans "Advertisement" %}</h4>

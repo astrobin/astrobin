@@ -78,12 +78,14 @@ def user_scores(request):
 
 def common_variables(request):
     from rawdata.utils import user_has_subscription
+    from astrobin_apps_donations.utils import user_is_donor
 
     d = {
         #'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
         'is_retailer': request.user.groups.filter(name='Retailers'),
         'has_rawdata_subscription': user_has_subscription(request.user),
+        'user_is_donor': user_is_donor(request.user),
         'IMAGES_URL' : settings.IMAGES_URL,
         'CDN_URL' : settings.CDN_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
