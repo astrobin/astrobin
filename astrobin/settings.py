@@ -214,6 +214,7 @@ INSTALLED_APPS = (
     'astrobin_apps_images',
     'astrobin_apps_platesolving',
     'astrobin_apps_users',
+    'astrobin_apps_donations',
 
     'toggleproperties',
 
