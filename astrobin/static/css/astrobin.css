@@ -3498,3 +3498,15 @@ ul.astrobin-users li {
 
   -webkit-filter: grayscale(100%);
 }
+.form-donate {
+  padding: 8px;
+}
+.form-donate label {
+  display: block;
+  text-align: left;
+  font-style: italic;
+  font-weight: bold;
+}
+.form-donate input.button {
+  padding-left: 8px;
+}
