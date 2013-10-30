@@ -299,6 +299,10 @@ And some for the Raw Data platform:
     * rawdata-sol     (USD 19,90)
     * rawdata-galaxia (USD 49,90)
 
+For the donations:
+
+    * astrobin-donor
+
 
 # (replace gunicorn.sh with run.sh if you want to debug)
 sudo supervisorctl stop gunicorn
