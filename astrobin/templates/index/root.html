@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load astrobin_apps_donations_tags %}
 {% load astrobin_apps_images_tags %}
 {% load avatar_tags %}
 {% load endless %}
@@ -324,7 +325,7 @@
 {% endblock %}
 
 {% block modals %}
-    {% include 'astrobin_apps_donations/modals/remove_ads.html' %}
+    {% donate_modal %}
 {% endblock %}
 
 {% block extra_js %}

@@ -20,29 +20,49 @@ class RecurringDonation(models.Model):
 # PayPal IPN signals
 
 def handle_payment_was_successful(sender, **kwargs):
+    print "Payment success"
     payment = sender
-    user = auth.models.User.objects.get(pk = payment.custom)
+
+    try:
+        user = auth.models.User.objects.get(pk = payment.custom)
+    except auth.User.DoesNotExist:
+        return
+
     amount = payment.mc_gross
 
-    donation, created = RecurringDonation.objects.get_or_create(user = user)
-
-    if created:
+    try:
+        donation = RecurringDonation.objects.get(user = user)
         donation.payment = payment
         donation.amount = amount
         donation.active = True
+    except RecurringDonation.DoesNotExist:
+        donation = RecurringDonation(
+            payment = payment,
+            user = user,
+            amount = amount,
+            active = True)
+    finally:
         donation.save()
 
 
 def handle_payment_was_canceled(sender, **kwargs):
+    print "Payment cancel"
     payment = sender
-    user = auth.models.User.objects.get(pk = payment.custom)
 
-    donation, created = RecurringDonation.objects.get_or_create(user = user)
-    if not created:
+    try:
+        user = auth.models.User.objects.get(pk = payment.custom)
+    except auth.User.DoesNotExist:
+        return
+
+    try:
+        donation = RecurringDonation.objects.get(user = user)
         donation.active = False
         donation.save()
+    except RecurringDonation.DoesNotExist:
+        return
 
 
+"""
 # Signup/success
 ipn.signals.subscription_signup.connect(handle_payment_was_successful)
 ipn.signals.payment_was_successful.connect(handle_payment_was_successful)
@@ -51,4 +71,4 @@ ipn.signals.payment_was_successful.connect(handle_payment_was_successful)
 ipn.signals.subscription_cancel.connect(handle_payment_was_canceled)
 ipn.signals.payment_was_flagged.connect(handle_payment_was_canceled)
 ipn.signals.subscription_eot.connect(handle_payment_was_canceled)
-
+"""

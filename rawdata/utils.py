@@ -2,6 +2,15 @@ from subscription.models import UserSubscription
 
 from .models import RawImage
 
+
+SUBSCRIPTION_NAMES = (
+    'Meteor',
+    'Luna',
+    'Sol',
+    'Galaxia',
+)
+
+
 def user_used_bytes(user):
     sizes = RawImage.objects\
         .filter(user = user)\
@@ -29,7 +38,7 @@ def user_get_subscription(user):
     if not user.is_authenticated():
         raise UserSubscription.DoesNotExist
 
-    return UserSubscription.objects.get(user = user)
+    return UserSubscription.objects.get(user = user, subscription__name__in = SUBSCRIPTION_NAMES)
 
 
 def user_has_subscription(user):
@@ -39,7 +48,7 @@ def user_has_subscription(user):
         return False
 
     return True
- 
+
 
 def user_has_active_subscription(user):
     try:
@@ -75,7 +84,7 @@ def subscription_byte_limit(subscription):
         return 500*GB
 
     return 0
-   
+
 
 def user_byte_limit(user):
     try:

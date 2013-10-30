@@ -449,8 +449,15 @@ ACTSTREAM_SETTINGS = {
 
 }
 
-PAYPAL_TEST = False
-PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene@gmail.com'
+PAYPAL_TEST = True
+
+if PAYPAL_TEST:
+    PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene+paypal+sandbox+business@gmail.com'
+    PAYPAL_DONATION_BUTTON_ID = 'BNPHA3KC3TW2Q'
+else:
+    PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene@gmail.com'
+    PAYPAL_DONATION_BUTTON_ID = 'E5CR76YQ8BPY8'
+
 SUBSCRIPTION_GRACE_PERIOD = 7
 SUBSCRIPTION_PAYPAL_SETTINGS = {
     "business": PAYPAL_RECEIVER_EMAIL,

@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% load astrobin_apps_donations_tags %}
+
+
 {% include 'image/detail/custom_ga.html' %}
 {% include 'image/detail/title.html' %}
 
@@ -42,7 +45,7 @@
     {% include 'image/detail/modals/send_to_sharedfolder.html' %}
     {% include 'image/detail/modals/cant_like.html' %}
 
-    {% include 'astrobin_apps_donations/modals/remove_ads.html' %}
+    {% donate_modal %}
 {% endblock %}
 
 {% block extra_js %}
