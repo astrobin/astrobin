@@ -1,0 +1,44 @@
+.badge-donor {
+    position: absolute;
+    padding: 0 !important;
+}
+
+.badge-donor-large {
+    width: 32px;
+    height: 32px;
+    top: 8px;
+    left: 8px;
+}
+
+.badge-donor-large i {
+    font-size: 20px;
+    line-height: 32px;
+    padding: 8px;
+}
+
+.badge-donor-medium {
+    width: 24px;
+    height: 24px;
+    top: 4px;
+    left: 4px;
+}
+
+.badge-donor-medium i {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 5px;
+}
+
+.badge-donor-small {
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 2px;
+}
+
+.badge-donor-small i {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 3px;
+}
+

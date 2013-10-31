@@ -35,6 +35,14 @@ def cancel_donation_modal(context):
     }
 
 
+@register.inclusion_tag('astrobin_apps_donations/inclusion_tags/donor_badge.html')
+def donor_badge(user, size = 'large'):
+    return {
+        'user': user,
+        'size': size,
+    }
+
+
 @register.filter
 def is_donor(user):
     if user.is_authenticated():

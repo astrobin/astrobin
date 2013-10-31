@@ -33,6 +33,7 @@
             <div class="avatar" style="width: 194px; height: 194px; overflow: hidden;">
                 <a href="{% url user_page user %}">
                     {% avatar user 194 %}
+                    {% donor_badge user 'large' %}
                 </a>
 
                 {% add_remove_toggleproperty "follow" user request_user %}
@@ -65,6 +66,7 @@
             <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
                 <a href="{% url user_page user %}">
                     {% avatar user 48 %}
+                    {% donor_badge user 'small' %}
                 </a>
             </div>
 
@@ -89,6 +91,7 @@
             <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
                 <a href="{% url user_page user %}">
                     {% avatar user 48 %}
+                    {% donor_badge user 'small' %}
                 </a>
             </div>
 

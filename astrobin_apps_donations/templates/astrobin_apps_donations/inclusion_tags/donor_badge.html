@@ -1,0 +1,8 @@
+{% load astrobin_apps_donations_tags %}
+
+{% if user|is_donor %}
+    <div class="badge badge-success badge-donor badge-donor-{{size}}">
+        <i class="icon-gift"></i>
+    </div>
+{% endif %}
+
