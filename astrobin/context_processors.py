@@ -63,12 +63,19 @@ def user_scores(request):
         user = User.objects.get(pk = request.user.pk) # The lazy object in the request won't do
 
         if not scores:
-            scores = {}
+            try:
+                user_search_result =\
+                    SearchQuerySet().models(User).filter(django_id = request.user.pk)[0]
+            except IndexError:
+                return {
+                    'user_scores_index': 0,
+                    'user_scores_followers': 0
+                }
 
-            user_search_result = SearchQuerySet().models(User).filter(django_id = request.user.pk)[0]
             index = user_search_result.normalized_likes
             followers = user_search_result.followers
 
+            scores = {}
             scores['user_scores_index'] = index
             scores['user_scores_followers'] = followers
             cache.set(cache_key, scores, 43200)
