@@ -1,7 +1,8 @@
+{% load astrobin_apps_donations_tags %}
 {% load i18n %}
 {% load dfp_tags %}
 
-{% if ADS_ENABLED and not user_is_donor %}
+{% if ADS_ENABLED and not request.user|is_donor %}
     <div class="subtle-container simple-container advertisement advertisement-frontpage">
         <div class="header">
             <h4><i class="icon-dollar"></i> {% trans "Advertisement" %}</h4>
