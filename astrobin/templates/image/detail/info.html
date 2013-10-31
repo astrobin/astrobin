@@ -1,4 +1,5 @@
 {% load avatar_tags %}
+{% load astrobin_apps_donations_tags %}
 {% load common_tags %}
 {% load i18n %}
 {% load hitcount_tags %}
@@ -9,6 +10,7 @@
     <div class="avatar">
         <a href="{% url user_page image.user %}">
             {% avatar image.user 106 %}
+            {% donor_badge user 'medium' %}
         </a>
     </div>
     <div class="username">

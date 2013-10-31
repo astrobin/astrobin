@@ -373,6 +373,7 @@ PIPELINE_CSS = {
             'common/css/jquery.lightbox-0.5.css',
 
             'astrobin_apps_images/css/jquery.capty.css',
+            'astrobin_apps_donations/css/astrobin_apps_donations.css',
 
             'css/reset.css',
             'css/bootstrap.css',
