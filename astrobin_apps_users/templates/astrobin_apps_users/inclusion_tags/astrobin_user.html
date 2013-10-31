@@ -1,3 +1,4 @@
+{% load astrobin_apps_donations_tags %}
 {% load avatar_tags %}
 {% load cache %}
 {% load i18n %}
@@ -46,6 +47,10 @@
                 </ul>
             </div>
             {% endcache %}
+
+            {% if request.user == user and user|is_donor %}
+                {% thank_you_for_your_support %}
+            {% endif %}
         </div>
     {% endif %}
 

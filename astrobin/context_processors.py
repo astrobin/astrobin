@@ -85,7 +85,6 @@ def common_variables(request):
         'is_producer': request.user.groups.filter(name='Producers'),
         'is_retailer': request.user.groups.filter(name='Retailers'),
         'has_rawdata_subscription': user_has_subscription(request.user),
-        'user_is_donor': user_is_donor(request.user),
         'IMAGES_URL' : settings.IMAGES_URL,
         'CDN_URL' : settings.CDN_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
