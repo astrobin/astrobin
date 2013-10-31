@@ -40,7 +40,10 @@
                 timeout: 30000,
                 success: function(data, textStatus, jqXHR) {
                     self.solution_id = data['solution'];
-                    self.onStarted();
+
+                    if(data['status'] <= 1) {
+                        self.onStarted();
+                    }
                 }
             });
         },
@@ -50,6 +53,7 @@
 
             $.ajax({
                 url: self.apiURL + self.solution_id + '/',
+                cache: false,
                 success: function(data, textStatus, jqXHR) {
                     switch (data['status']) {
                         case 0: self.onStatusMissing(); break;

@@ -51,6 +51,7 @@ class SolveView(base.View):
         context = {
             'solution': solution.id,
             'submission': solution.submission_id,
+            'status': solution.status,
         }
         return HttpResponse(simplejson.dumps(context), mimetype='application/json')
 
