@@ -1,3 +1,4 @@
+{% load astrobin_apps_donations_tags %}
 {% load astrobin_apps_images_tags %}
 {% load avatar_tags %}
 {% load i18n %}
@@ -10,6 +11,7 @@
         {% if action.actor.get_absolute_url %}
             <div class="avatar">
                 <a href="{{action.actor.get_absolute_url}}">{% avatar action.actor 64 %}</a>
+                {% donor_badge action.actor 'small' %}
             </div>
         {% endif %}
 
