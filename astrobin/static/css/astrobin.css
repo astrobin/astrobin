@@ -2380,8 +2380,14 @@ p.small {
 #realname-prompt .bubble:after {
   left: 20px;
 }
+.alert h4 {
+  margin-bottom: 12px;
+}
+.alert p {
+  margin-bottom: 2px;
+}
 .alert-heading {
-  margin: 0;
+  margin: 0 0 12px 0;
 }
 .alert-info strong {
   color: #333333;
