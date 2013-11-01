@@ -745,7 +745,7 @@ def image_detail(request, id, r):
 
         'like_this': like_this,
         'bookmarked_this': bookmarked_this,
-        'min_index_to_like': 20.00,
+        'min_index_to_like': 1.00,
 
         'comments_number': NestedComment.objects.filter(
             deleted = False,
