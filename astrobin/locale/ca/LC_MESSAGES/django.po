@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 12:43+0000\n"
+"POT-Creation-Date: 2013-11-01 07:22+0000\n"
 "PO-Revision-Date: 2013-01-20 01:02+0100\n"
 "Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1028,7 +1028,7 @@ msgstr "Enllaç"
 msgid "Link to TIFF/FITS"
 msgstr "Enllaç a l'arxiu TIFF/FITS"
 
-#: forms.py:64 models.py:683 views.py:637 templates/maintenance_base.html:316
+#: forms.py:64 models.py:683 views.py:631 templates/maintenance_base.html:316
 #: templates/profile-edit-menu.html:36
 msgid "Locations"
 msgstr "Ubicacions"
@@ -1065,7 +1065,7 @@ msgstr "Telescopis o objectius"
 msgid "Guiding telescopes or lenses"
 msgstr "Telescopis o objectius de guiatge"
 
-#: forms.py:133 forms.py:227 models.py:744 models.py:1377 views.py:2104
+#: forms.py:133 forms.py:227 models.py:744 models.py:1377 views.py:2099
 msgid "Mounts"
 msgstr "Muntures"
 
@@ -1077,19 +1077,19 @@ msgstr "Càmeres"
 msgid "Guiding cameras"
 msgstr "Càmeres de guiatge"
 
-#: forms.py:136 forms.py:229 models.py:747 models.py:1379 views.py:2105
+#: forms.py:136 forms.py:229 models.py:747 models.py:1379 views.py:2100
 msgid "Focal reducers"
 msgstr "Reductors de focal"
 
-#: forms.py:137 forms.py:230 models.py:748 models.py:1380 views.py:2106
+#: forms.py:137 forms.py:230 models.py:748 models.py:1380 views.py:2101
 msgid "Software"
 msgstr "Programari"
 
-#: forms.py:138 forms.py:231 models.py:749 models.py:1381 views.py:2107
+#: forms.py:138 forms.py:231 models.py:749 models.py:1381 views.py:2102
 msgid "Filters"
 msgstr "Filtres"
 
-#: forms.py:139 forms.py:232 models.py:750 models.py:1382 views.py:2108
+#: forms.py:139 forms.py:232 models.py:750 models.py:1382 views.py:2103
 msgid "Accessories"
 msgstr "Accessoris"
 
@@ -1121,11 +1121,11 @@ msgstr ""
 "escrius LRGB en una casella no podràs afegir sessions diferents per a cada "
 "filtre"
 
-#: forms.py:226 models.py:1376 views.py:2102
+#: forms.py:226 models.py:1376 views.py:2097
 msgid "Telescopes and lenses"
 msgstr "Telescopis i objectius"
 
-#: forms.py:228 models.py:1378 views.py:2103
+#: forms.py:228 models.py:1378 views.py:2098
 msgid "Cameras"
 msgstr "Càmeres"
 
@@ -1151,9 +1151,9 @@ msgstr "Tots"
 msgid "Images"
 msgstr "Imatges"
 
-#: forms.py:277 models.py:639 views.py:1592
+#: forms.py:277 models.py:639 views.py:1587
 #: templates/maintenance_base.html:310 templates/profile-edit-menu.html:30
-#: templates/wall.html:144 templates/inclusion_tags/search_image_list.html:13
+#: templates/wall.html:128 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
 msgid "Gear"
 msgstr "Equip"
@@ -1423,7 +1423,7 @@ msgstr "Reconeixement-CompartirIgual CC BY-SA"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Reconeixement-SenseObraDerivada CC BY-ND"
 
-#: models.py:76 models.py:91 settings.py:68 views.py:713
+#: models.py:76 models.py:91 settings.py:68 views.py:707
 msgid "English"
 msgstr "Anglès"
 
@@ -1483,7 +1483,7 @@ msgstr "Cúmuls globul·lars"
 msgid "Open clusters"
 msgstr "Cúmuls oberts"
 
-#: models.py:109 templates/wall.html:86
+#: models.py:109
 msgid "Nebulae"
 msgstr "Nebuloses"
 
@@ -1491,11 +1491,11 @@ msgstr "Nebuloses"
 msgid "Planetary nebulae"
 msgstr "Nebuloses planetàries"
 
-#: models.py:111 templates/wall.html:92
+#: models.py:111
 msgid "Galaxies"
 msgstr "Galàxies"
 
-#: models.py:132 templates/wall.html:105
+#: models.py:132 templates/wall.html:89
 msgid "Sun"
 msgstr "Sol"
 
@@ -1539,8 +1539,8 @@ msgstr "Planeta menor"
 msgid "Comet"
 msgstr "Cometa"
 
-#: models.py:143 models.py:576 models.py:640 views.py:1593
-#: templates/wall.html:156
+#: models.py:143 models.py:576 models.py:640 views.py:1588
+#: templates/wall.html:140
 msgid "Other"
 msgstr "Un altre"
 
@@ -1867,11 +1867,11 @@ msgstr "Objecte de cel profund"
 msgid "Solar system body or event"
 msgstr "Cos del sistema solar o event"
 
-#: models.py:637 views.py:1590 templates/wall.html:132
+#: models.py:637 views.py:1585 templates/wall.html:116
 msgid "Extremely wide field"
 msgstr "Molt gran camp"
 
-#: models.py:638 views.py:1591 templates/wall.html:138
+#: models.py:638 views.py:1586 templates/wall.html:122
 msgid "Star trails"
 msgstr "Traces d'estels"
 
@@ -2017,7 +2017,7 @@ msgstr "Sensor refredat"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del xip. Per exemple -20."
 
-#: models.py:1095 views.py:645
+#: models.py:1095 views.py:639
 msgid "Darks"
 msgstr "Darks"
 
@@ -2025,7 +2025,7 @@ msgstr "Darks"
 msgid "The number of dark frames."
 msgstr "Nombre de darks"
 
-#: models.py:1100 views.py:646
+#: models.py:1100 views.py:640
 msgid "Flats"
 msgstr "Flats"
 
@@ -2033,7 +2033,7 @@ msgstr "Flats"
 msgid "The number of flat frames."
 msgstr "Nombre de flats"
 
-#: models.py:1105 views.py:647
+#: models.py:1105 views.py:641
 msgid "Flat darks"
 msgstr "Dark-flats"
 
@@ -2041,7 +2041,7 @@ msgstr "Dark-flats"
 msgid "The number of dark flat frames."
 msgstr "Nombre de dark-flats."
 
-#: models.py:1110 views.py:648
+#: models.py:1110 views.py:642
 msgid "Bias"
 msgstr "Bias"
 
@@ -2049,7 +2049,7 @@ msgstr "Bias"
 msgid "The number of bias/offset frames."
 msgstr "Nombre de bias/offset."
 
-#: models.py:1115 views.py:651
+#: models.py:1115 views.py:645
 msgid "Bortle Dark-Sky Scale"
 msgstr "Escala de cel fosc de Bortle"
 
@@ -2069,11 +2069,11 @@ msgstr "Magnitud mitjana per segon d'arc ^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Mesurada amb un Sky Quality Meter"
 
-#: models.py:1129 views.py:653
+#: models.py:1129 views.py:647
 msgid "Mean FWHM"
 msgstr "FWHM mitjà"
 
-#: models.py:1134 views.py:654
+#: models.py:1134 views.py:648
 msgid "Temperature"
 msgstr "Temperatura"
 
@@ -2444,28 +2444,28 @@ msgstr "Ho sentim, no hi ha resultats"
 msgid "Matching items:"
 msgstr "Elements coincidents:"
 
-#: settings.py:574
+#: settings.py:572
 #, fuzzy
 msgid "Remove from bookmarks"
 msgstr "Darreres marcades com a preferides"
 
-#: settings.py:575
+#: settings.py:573
 msgid "Bookmark"
 msgstr ""
 
-#: settings.py:580 settings.py:582
+#: settings.py:578 settings.py:580
 msgid "Unlike"
 msgstr ""
 
-#: settings.py:581 settings.py:583
+#: settings.py:579 settings.py:581
 msgid "Like"
 msgstr ""
 
-#: settings.py:588
+#: settings.py:586
 msgid "Stop following"
 msgstr ""
 
-#: settings.py:589
+#: settings.py:587
 msgid "Follow"
 msgstr "Seguir"
 
@@ -2541,52 +2541,52 @@ msgstr "Catadiòptric"
 msgid "Number of images by subject type"
 msgstr "Nombre d'imatges per tema"
 
-#: views.py:635
+#: views.py:629
 msgid "Resolution"
 msgstr "Resolució"
 
-#: views.py:636 views.py:769
+#: views.py:630 views.py:764
 msgid "Dates"
 msgstr "Dates"
 
-#: views.py:638 templates/image/detail/image_card.html:52
+#: views.py:632 templates/image/detail/image_card.html:52
 msgid "Frames"
 msgstr "Subexposicions"
 
-#: views.py:644 templates/wall.html:34
+#: views.py:638 templates/wall.html:34
 #: templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:42 templates/search/search.html.py:305
 msgid "Integration"
 msgstr "Temps d'integració"
 
-#: views.py:644 views.py:1688 views.py:1689 templates/search/search.html:306
+#: views.py:638 views.py:1683 views.py:1684 templates/search/search.html:306
 msgid "hours"
 msgstr "hores"
 
-#: views.py:649
+#: views.py:643
 msgid "Avg. Moon age"
 msgstr "Edat lunar mitjana"
 
-#: views.py:649
+#: views.py:643
 msgid "days"
 msgstr "dies"
 
-#: views.py:650 templates/search/search.html:312
+#: views.py:644 templates/search/search.html:312
 msgid "Avg. Moon phase"
 msgstr "Fase lunar mitjana"
 
-#: views.py:652
+#: views.py:646
 msgid "Mean SQM"
 msgstr "SQM mitjà"
 
-#: views.py:928 views.py:2538
+#: views.py:923 views.py:2533
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "No hi ha imatge o és incorrecta. Els formats permesos són JPG, PNG i GIF."
 
-#: views.py:932 views.py:2545 templates/user/profile/flickr_import.html:10
+#: views.py:927 views.py:2540 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2594,106 +2594,106 @@ msgstr ""
 "AstroBin es troba en mode de \"només lectura\" degut al manteniment del "
 "servidor. Si us plau, torna a provar-ho més tard. "
 
-#: views.py:963
+#: views.py:958
 msgid ""
 "Image uploaded. After this basic information, remember to edit the gear and "
 "acquisition details using the Actions menu. Thank you!"
 msgstr ""
 
-#: views.py:1190 views.py:1262 views.py:1342 views.py:1364 views.py:2004
-#: views.py:2017 views.py:2038 views.py:2075 views.py:2165 views.py:2227
-#: views.py:2434 views.py:3656 views.py:3826
+#: views.py:1185 views.py:1257 views.py:1337 views.py:1359 views.py:1999
+#: views.py:2012 views.py:2033 views.py:2070 views.py:2160 views.py:2222
+#: views.py:2429 views.py:3651 views.py:3821
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
 msgstr "Formulari desat. Gràcies!"
 
-#: views.py:1310
+#: views.py:1305
 msgid "Fill in one session, before adding more."
 msgstr "Completar una sessió abans d'afegir-ne més"
 
-#: views.py:1375 views.py:1439
+#: views.py:1370 views.py:1434
 #, fuzzy
 msgid "Image deleted."
 msgstr "La teva imatge s'ha esborrat"
 
-#: views.py:1392
+#: views.py:1387
 msgid "Revision deleted."
 msgstr ""
 
-#: views.py:1538
+#: views.py:1533
 msgid "No date specified"
 msgstr "Sense data"
 
-#: views.py:1562 views.py:1630
+#: views.py:1557 views.py:1625
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr "No s'ha especificat telescopis, objectius fotogràfics, o càmeres "
 
-#: views.py:1563
+#: views.py:1558
 msgid "Gear images"
 msgstr "Imatges d'equip"
 
-#: views.py:1588 templates/image/edit/acquisition.html:81
+#: views.py:1583 templates/image/edit/acquisition.html:81
 msgid "Deep sky"
 msgstr ""
 
-#: views.py:1589 templates/image/edit/acquisition.html:78
+#: views.py:1584 templates/image/edit/acquisition.html:78
 msgid "Solar system"
 msgstr "Sistema Solar"
 
-#: views.py:1594 views.py:1629
+#: views.py:1589 views.py:1624
 msgid "No subjects specified"
 msgstr "No s'ha especificat tema"
 
-#: views.py:1631
+#: views.py:1626
 msgid "No acquisition details specified"
 msgstr "No s'han especificat detalls d'adquisició"
 
-#: views.py:1660 views.py:3019 templatetags/tags.py:77
+#: views.py:1655 views.py:3014 templatetags/tags.py:77
 msgid "minutes"
 msgstr "minuts"
 
-#: views.py:1661 views.py:3020 templatetags/tags.py:78
+#: views.py:1656 views.py:3015 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "fa"
 
-#: views.py:1663 views.py:3022 templatetags/tags.py:79
+#: views.py:1658 views.py:3017 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "%s segons"
 
-#: views.py:1686 templates/popover/user.html:19
+#: views.py:1681 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Membre des de"
 
-#: views.py:1687
+#: views.py:1682
 msgid "Last login"
 msgstr "Darrer accés"
 
-#: views.py:1688
+#: views.py:1683
 msgid "Total integration time"
 msgstr "Temps total d'integració"
 
-#: views.py:1689
+#: views.py:1684
 msgid "Average integration time"
 msgstr "Temps d'integració mitjà"
 
-#: views.py:2155
+#: views.py:2150
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
 
-#: views.py:2584
+#: views.py:2579
 #, fuzzy
 msgid "Image uploaded. Thank you!"
 msgstr "Formulari desat. Gràcies!"
 
-#: views.py:2886 templatetags/tags.py:237
+#: views.py:2881 templatetags/tags.py:237
 msgid "no alias"
 msgstr "sense àlies"
 
-#: views.py:3616 views.py:3809
+#: views.py:3611 views.py:3804
 msgid "You can't merge a product to itself."
 msgstr "No pots annexar un producte en ell mateix."
 
@@ -2702,108 +2702,84 @@ msgid "You have a new follower"
 msgstr "Tens un nou seguidor"
 
 #: management/__init__.py:21
-msgid "Following a user was successful"
-msgstr "Segueixes aquest usuari"
-
-#: management/__init__.py:27
-msgid "Unfollowing a user was successful"
-msgstr "No segueixes aquest usuari"
-
-#: management/__init__.py:33
 msgid "New image from a user you follow"
 msgstr "Un usuari al qual segueixes ha pujat una imatge nova"
 
-#: management/__init__.py:39
+#: management/__init__.py:27
 msgid "Image brought to your attention"
 msgstr "Una imatge requereix la teva atenció"
 
-#: management/__init__.py:45
+#: management/__init__.py:33
 msgid "New image revision from a user you follow"
 msgstr "Nova revisió d'una imatge d'un usuari al qual segueixes"
 
-#: management/__init__.py:51
-msgid "Your image is ready"
-msgstr "La teva imatge està preparada"
-
-#: management/__init__.py:57
+#: management/__init__.py:39
 msgid "Your image was plate-solved"
 msgstr "El camp de la teva imatge ha estat resolt"
 
-#: management/__init__.py:63
+#: management/__init__.py:45
 msgid "Your image could not be plate-solved"
 msgstr "El camp de la teva imatge no ha pogut ser resolt"
 
-#: management/__init__.py:69
-msgid "Your request was fulfilled"
-msgstr "La teva petició s'ha completat"
-
-#: management/__init__.py:75
-msgid "Your image was deleted"
-msgstr "La teva imatge s'ha esborrat"
-
-#: management/__init__.py:81
+#: management/__init__.py:51
 msgid "AstroBin has published a new blog entry"
 msgstr "AstroBin ha publicat una nova entrada al blog"
 
-#: management/__init__.py:87
-msgid "You have some images that are lacking data"
-msgstr "Falten dades en algunes de les teves imatges"
-
-#: management/__init__.py:93
+#: management/__init__.py:57
 msgid "Your image received a new comment"
 msgstr "Nou comentari sobre alguna de les teves imatges"
 
-#: management/__init__.py:99
+#: management/__init__.py:63
 msgid "There was a reply to your comment"
 msgstr "Hi ha resposta a un dels teus comentaris"
 
-#: management/__init__.py:105
+#: management/__init__.py:69
 #, fuzzy
 msgid "Your image was bookmarked"
 msgstr "Han marcat una de les teves imatges com a favorita"
 
-#: management/__init__.py:111
+#: management/__init__.py:75
 #, fuzzy
 msgid "Your image was liked"
 msgstr "La teva imatge s'ha esborrat"
 
-#: management/__init__.py:117
+#: management/__init__.py:81
 msgid "New image with some gear you follow"
 msgstr "Nova imatge amb algun equip al qual segueixes"
 
-#: management/__init__.py:123
+#: management/__init__.py:87
 msgid "New image of a subject you follow"
 msgstr "Nova imatge d'algun tema que segueixes"
 
-#: management/__init__.py:129
+#: management/__init__.py:93
 msgid "Your API Key request has been approved"
 msgstr "La teva petició de clau API s'ha acceptat"
 
-#: management/__init__.py:135
+#: management/__init__.py:99
 msgid "New discussion about a gear item you own"
 msgstr "Nova discussió sobre un equip de la teva propietat"
 
-#: management/__init__.py:141
+#: management/__init__.py:105
 msgid "New review of a gear item you own"
 msgstr "Nova anàlisi sobre algun dels instruments de la teva propietat"
 
-#: management/__init__.py:147
+#: management/__init__.py:111
 msgid "New data posted to public pool"
 msgstr "Noves dades publicades al catàleg públic"
 
-#: management/__init__.py:153
+#: management/__init__.py:117
 msgid "New image posted to public data pool"
 msgstr "Nova imatge publicada al catàleg públic"
 
-#: management/__init__.py:159
+#: management/__init__.py:123
 msgid "New data posted to shared private folder"
 msgstr "Noves dades publicades a la carpeta privada compartida"
 
-#: management/__init__.py:165
+#: management/__init__.py:129
 msgid "New image posted to shared private folder"
 msgstr "Nova imatge publicada a la carpeta privada compartida"
 
-#: management/__init__.py:171
+#: management/__init__.py:135
 msgid "You are invited to a shared private folder"
 msgstr "Has estat convidat a una carpeta privada compartida"
 
@@ -2926,7 +2902,7 @@ msgid "Explore"
 msgstr "Explorar"
 
 #: templates/explore_choose.html:8 templates/maintenance_base.html:110
-#: templates/wall.html:7 templates/wall.html.py:182
+#: templates/wall.html:7 templates/wall.html.py:166
 #: templates/base/site_links.html:41
 msgid "The Big Wall"
 msgstr "El Gran Mur"
@@ -3727,7 +3703,7 @@ msgstr "Pujar"
 msgid "My places"
 msgstr "Les meves imatges"
 
-#: templates/maintenance_base.html:237 templates/wall.html:150
+#: templates/maintenance_base.html:237 templates/wall.html:134
 #: templates/base/user_links_entries.html:132 templates/index/root.html:310
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
@@ -4285,26 +4261,22 @@ msgid "All deep sky objects"
 msgstr ""
 
 #: templates/wall.html:80
-msgid "Clusters"
-msgstr ""
-
-#: templates/wall.html:99
 msgid "All Solar System objects"
 msgstr ""
 
-#: templates/wall.html:111
+#: templates/wall.html:95
 msgid "Moon"
 msgstr ""
 
-#: templates/wall.html:117
+#: templates/wall.html:101
 msgid "Planets"
 msgstr ""
 
-#: templates/wall.html:123
+#: templates/wall.html:107
 msgid "Comets"
 msgstr ""
 
-#: templates/wall.html:163
+#: templates/wall.html:147
 msgid "Remove filter"
 msgstr ""
 
@@ -4928,20 +4900,26 @@ msgstr ""
 msgid "The following people bookmarked this image"
 msgstr ""
 
-#: templates/image/detail/modals/cant_like.html:7
+#: templates/image/detail/modals/cant_like.html:8
 msgid "Sorry"
 msgstr ""
 
-#: templates/image/detail/modals/cant_like.html:11
+#: templates/image/detail/modals/cant_like.html:12
+#, python-format
 msgid ""
-"We're really sorry, but liking an image requires an AstroBin index of 2 or "
-"more."
+"We're really sorry, but liking an image requires an AstroBin index of "
+"<strong>%(min_index_to_like)s</strong> or greater."
 msgstr ""
 
-#: templates/image/detail/modals/cant_like.html:14
+#: templates/image/detail/modals/cant_like.html:16
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
 "creating fake accounts to like their own images. Thank you for understanding!"
+msgstr ""
+
+#: templates/image/detail/modals/cant_like.html:20
+#, python-format
+msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
 msgstr ""
 
 #: templates/image/detail/modals/delete.html:6
@@ -6684,6 +6662,24 @@ msgstr ""
 #, fuzzy
 msgid "Edit your retailer information"
 msgstr "Informació addicional"
+
+#~ msgid "Following a user was successful"
+#~ msgstr "Segueixes aquest usuari"
+
+#~ msgid "Unfollowing a user was successful"
+#~ msgstr "No segueixes aquest usuari"
+
+#~ msgid "Your image is ready"
+#~ msgstr "La teva imatge està preparada"
+
+#~ msgid "Your request was fulfilled"
+#~ msgstr "La teva petició s'ha completat"
+
+#~ msgid "Your image was deleted"
+#~ msgstr "La teva imatge s'ha esborrat"
+
+#~ msgid "You have some images that are lacking data"
+#~ msgstr "Falten dades en algunes de les teves imatges"
 
 #~ msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
 #~ msgstr ""

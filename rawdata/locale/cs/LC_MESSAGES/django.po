@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the AstroBin package.
 # Salvatore Iovene <salvatore@iovene.com>, 2013
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 12:45+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-11-01 07:24+0000\n"
+"PO-Revision-Date: 2013-10-20 22:33+0100\n"
+"Last-Translator: VojtechKudela <vojtiik@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Pootle 2.1.6\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -26,37 +26,37 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:20
 #: templates/rawdata/publicdatapool_list.html:32
 msgid "Name"
-msgstr ""
+msgstr "Název"
 
 #: folders.py:92 templates/rawdata/_folder_dropdown.html:14
 #: templates/rawdata/_images.html:18 templates/rawdata/library.html:65
 #: templates/rawdata/rawimage_detail.html:15
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: folders.py:117 templates/rawdata/_folder_dropdown.html:28
 msgid "Upload date"
-msgstr ""
+msgstr "Datum nahrání"
 
 #: folders.py:141 templates/rawdata/_folder_dropdown.html:21
 #: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
 msgid "Acquisition date"
-msgstr ""
+msgstr "Datum pořízení"
 
 #: folders.py:166 templates/rawdata/_folder_dropdown.html:35
 #: templates/rawdata/library.html:89 templates/rawdata/rawimage_detail.html:19
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: folders.py:190 templates/rawdata/_folder_dropdown.html:42
 #: templates/rawdata/library.html:97
 msgid "Telescope or lens"
-msgstr ""
+msgstr "Dalekohled nebo objektiv"
 
 #: folders.py:214 templates/rawdata/_folder_dropdown.html:49
 #: templates/rawdata/library.html:105
 msgid "Filter"
-msgstr ""
+msgstr "Filtr"
 
 #: folders.py:238 templates/rawdata/_folder_dropdown.html:56
 #: templates/rawdata/library.html:113
@@ -67,19 +67,21 @@ msgstr ""
 #: templates/rawdata/library.html:121
 #: templates/rawdata/rawimage_detail.html:20
 msgid "Temperature"
-msgstr ""
+msgstr "Teplota"
 
 #: forms.py:86
 msgid "Users"
-msgstr ""
+msgstr "Uživatelé"
 
 #: forms.py:87
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr ""
+"Seznam uživatelů, které chcete pozvat. Jednotlivé uživatele oddělujte "
+"čárkami."
 
 #: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
-msgstr ""
+msgstr "Neznámé"
 
 #: models.py:45
 msgid "Light"
@@ -107,7 +109,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_list.html:38
 #: templates/rawdata/publicdatapool_list.html:33
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: models.py:221
 msgid "Describe the goals and terms of this pool."
@@ -118,10 +120,12 @@ msgid ""
 "A name for this folder. Be descriptive, so that the folder can be quickly "
 "recognized by the name."
 msgstr ""
+"Název složky. Buďte, prosím, popisní, aby byla složka snadno nalezitelná "
+"podle názvu."
 
 #: models.py:289
 msgid "Describe the goals of this folder."
-msgstr ""
+msgstr "Popište účel této složky."
 
 #: serializers.py:38
 msgid ""
@@ -137,7 +141,7 @@ msgstr ""
 
 #: templates/rawdata/_browser_js.html:20 templates/rawdata/_images.html:14
 msgid "Select all"
-msgstr ""
+msgstr "Vybrat vše"
 
 #: templates/rawdata/_browser_js.html:40
 msgid "Reset selection"
@@ -148,7 +152,7 @@ msgstr ""
 #: templates/rawdata/publicdatapool_detail.html:111
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
-msgstr ""
+msgstr "Stáhnout"
 
 #: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
 msgid "Preprocess"
@@ -156,12 +160,12 @@ msgstr ""
 
 #: templates/rawdata/_browser_js.html:63
 msgid "Share"
-msgstr ""
+msgstr "Sdílet"
 
 #: templates/rawdata/_browser_js.html:70
 #: templates/rawdata/privatesharedfolder_detail.html:8
 msgid "Private shared folder"
-msgstr ""
+msgstr "Soukromá sdílená složka"
 
 #: templates/rawdata/_browser_js.html:74
 #: templates/rawdata/publicdatapool_detail.html:8
@@ -173,7 +177,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:184
 #: templates/rawdata/privatesharedfolder_list.html:92
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 #: templates/rawdata/_folder_dropdown.html:7
 #: templates/rawdata/library.html:129
@@ -182,7 +186,7 @@ msgstr ""
 
 #: templates/rawdata/_folders.html:12
 msgid "Files"
-msgstr ""
+msgstr "Soubory"
 
 #: templates/rawdata/_images.html:19 templates/rawdata/library.html:73
 #: templates/rawdata/privatesharedfolder_detail.html:87
@@ -191,7 +195,7 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:22
 #: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
-msgstr ""
+msgstr "Nahráno"
 
 #: templates/rawdata/_screenshot_tour.html:3
 msgid "Screenshot tour"
@@ -215,7 +219,7 @@ msgstr ""
 #: templates/subscription/subscription_list.html:4
 #: templates/subscription/subscription_list.html:8
 msgid "AstroBin Raw Data"
-msgstr ""
+msgstr "AstroBin Raw Data"
 
 #: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
 #: templates/rawdata/help_03.html:9
@@ -501,7 +505,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:85
 #: templates/rawdata/publicdatapool_detail.html:63
 msgid "User"
-msgstr ""
+msgstr "Uživatel"
 
 #: templates/rawdata/privatesharedfolder_detail.html:86
 #: templates/rawdata/privatesharedfolder_form.html:21
@@ -509,25 +513,25 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:21
 #: templates/rawdata/rawimage_detail.html:16
 msgid "Size"
-msgstr ""
+msgstr "Velikost"
 
 #: templates/rawdata/privatesharedfolder_detail.html:111
 msgid "Remove from this folder"
-msgstr ""
+msgstr "Odstranit z této složky"
 
 #: templates/rawdata/privatesharedfolder_detail.html:125
 msgid "Shared with the following users"
-msgstr ""
+msgstr "Sdíleno s těmito uživateli"
 
 #: templates/rawdata/privatesharedfolder_detail.html:145
 #: templates/rawdata/publicdatapool_detail.html:114
 msgid "Size before zip compression"
-msgstr ""
+msgstr "Velikost před kompresí"
 
 #: templates/rawdata/privatesharedfolder_detail.html:154
 #: templates/rawdata/publicdatapool_detail.html:123
 msgid "Comments"
-msgstr ""
+msgstr "Komentáře"
 
 #: templates/rawdata/privatesharedfolder_detail.html:158
 #: templates/rawdata/publicdatapool_detail.html:127
@@ -540,12 +544,12 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:175
 #: templates/rawdata/privatesharedfolder_list.html:84
 msgid "Delete folder"
-msgstr ""
+msgstr "Smazat složku"
 
 #: templates/rawdata/privatesharedfolder_detail.html:178
 #: templates/rawdata/privatesharedfolder_list.html:87
 msgid "Are you sure you want to delete this shared folder?"
-msgstr ""
+msgstr "Chcete určitě smazat tuto sdílenou složku?"
 
 #: templates/rawdata/privatesharedfolder_detail.html:179
 #: templates/rawdata/privatesharedfolder_list.html:88
@@ -562,16 +566,16 @@ msgstr ""
 #: templates/rawdata/publicdatapool_detail.html:154
 #: templates/rawdata/publicdatapool_form.html:99
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: templates/rawdata/privatesharedfolder_detail.html:192
 msgid "Edit folder"
-msgstr ""
+msgstr "Upravit složku"
 
 #: templates/rawdata/privatesharedfolder_detail.html:203
 #: templates/rawdata/publicdatapool_detail.html:155
 msgid "Save"
-msgstr ""
+msgstr "Uložit"
 
 #: templates/rawdata/privatesharedfolder_detail.html:213
 msgid ""
@@ -665,27 +669,27 @@ msgstr ""
 
 #: templates/rawdata/privatesharedfolder_list.html:32
 msgid "You have access to the following private shared folders."
-msgstr ""
+msgstr "Máte přístup k následujícím soukromým sdíleným složkám."
 
 #: templates/rawdata/privatesharedfolder_list.html:39
 #: templates/rawdata/publicdatapool_list.html:34
 msgid "Owner"
-msgstr ""
+msgstr "Vlastník"
 
 #: templates/rawdata/privatesharedfolder_list.html:40
 #: templates/rawdata/publicdatapool_list.html:35
 msgid "Raw images"
-msgstr ""
+msgstr "Surové snímky"
 
 #: templates/rawdata/privatesharedfolder_list.html:41
 #: templates/rawdata/publicdatapool_list.html:36
 msgid "Processed images"
-msgstr ""
+msgstr "Zpracované snímky"
 
 #: templates/rawdata/privatesharedfolder_list.html:42
 #: templates/rawdata/publicdatapool_list.html:37
 msgid "Last updated"
-msgstr ""
+msgstr "Naposledy aktualizováno"
 
 #: templates/rawdata/privatesharedfolder_list.html:75
 #, python-format
@@ -699,12 +703,12 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_list.html:101
 #: templates/rawdata/publicdatapool_list.html:66
 msgid "Follow"
-msgstr ""
+msgstr "Sledovat"
 
 #: templates/rawdata/privatesharedfolder_list.html:101
 #: templates/rawdata/publicdatapool_list.html:66
 msgid "Unfollow"
-msgstr ""
+msgstr "Přestat sledovat"
 
 #: templates/rawdata/publicdatapool_detail.html:37
 #, python-format
@@ -942,13 +946,13 @@ msgstr ""
 
 #: templates/subscription/subscription_change_done.html:8
 msgid "Subscription change"
-msgstr ""
+msgstr "Změna předplatného"
 
 #: templates/subscription/subscription_change_done.html:12
 msgid ""
 "Your request for a change in your subscription has been processed "
 "successfully."
-msgstr ""
+msgstr "Vaše žádost o změnu předplatného byla úspěšně zpracována."
 
 #: templates/subscription/subscription_detail.html:4
 #: templates/subscription/subscription_detail.html:8
@@ -1019,7 +1023,7 @@ msgstr ""
 
 #: templates/subscription/subscription_list.html:31
 msgid "Manage"
-msgstr ""
+msgstr "Spravovat"
 
 #: templates/subscription/subscription_list.html:41
 msgid ""
@@ -1062,7 +1066,7 @@ msgstr ""
 
 #: views/privatesharedfolders.py:206
 msgid "Your private shared folder has been deleted."
-msgstr ""
+msgstr "Vaše soukromá sdílená složka byla smazána."
 
 #: views/publicdatapools.py:99
 msgid "Your image has been added to the pool."
