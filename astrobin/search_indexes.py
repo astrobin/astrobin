@@ -330,12 +330,12 @@ class UserIndex(SearchIndex):
         return 200;
 
     def prepare_images(self, obj):
-        return len(Image.objects.filter(user = obj))
+        return Image.objects.filter(user = obj, is_wip = False).count()
 
     def prepare_avg_integration(self, obj):
         integration = 0
         images = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             image_integration = _get_integration(i)
             if image_integration:
                 images += 1
@@ -389,14 +389,14 @@ class UserIndex(SearchIndex):
 
     def prepare_integration(self, obj):
         integration = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             integration += _get_integration(i)
 
         return integration / 3600.0
 
     def prepare_moon_phase(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_moon_phase(i))
         if len(l) == 0:
             return 0
@@ -404,7 +404,7 @@ class UserIndex(SearchIndex):
 
     def prepare_first_acquisition_date(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_first_acquisition_date(obj))
         if len(l) == 0:
             return None
@@ -412,7 +412,7 @@ class UserIndex(SearchIndex):
 
     def prepare_last_acquisition_date(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_last_acquisition_date(obj))
         if len(l) == 0:
             return None
@@ -420,13 +420,13 @@ class UserIndex(SearchIndex):
 
     def prepare_views(self, obj):
         views = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             views += _prepare_views(i, 'image')
         return views
 
     def prepare_min_aperture(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_min_aperture(i))
         if len(l) == 0:
             return 0
@@ -434,7 +434,7 @@ class UserIndex(SearchIndex):
 
     def prepare_max_aperture(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_max_aperture(i))
         if len(l) == 0:
             return 0
@@ -442,7 +442,7 @@ class UserIndex(SearchIndex):
 
     def prepare_min_pixel_size(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_min_pixel_size(i))
         if len(l) == 0:
             return 0
@@ -450,7 +450,7 @@ class UserIndex(SearchIndex):
 
     def prepare_max_pixel_size(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_max_pixel_size(i))
         if len(l) == 0:
             return 0
@@ -464,19 +464,19 @@ class UserIndex(SearchIndex):
 
     def prepare_telescope_types(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l += _prepare_telescope_types(i)
         return unique_items(l)
 
     def prepare_camera_types(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l += _prepare_camera_types(i)
         return unique_items(l)
 
     def prepare_comments(self, obj):
         comments = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             comments += _prepare_comments(i)
         return comments
 
@@ -533,7 +533,7 @@ class ImageIndex(SearchIndex):
     username = CharField(model_attr = 'user__username')
 
     def index_queryset(self):
-        return Image.objects.filter(Q(is_wip = False))
+        return Image.objects.filter(is_wip = False)
 
     def get_model(self):
         return Image
