@@ -8,15 +8,17 @@
             <h3><i class="icon-frown"></i> {% trans "Sorry" %}</h3>
         </div>
         <div class="modal-body">
-            <p>
-                {% blocktrans %}We're really sorry, but liking an image requires an AstroBin index of 2 or more.{% endblocktrans %}
-            </p>
+            <div class="alert alert-error">
+                {% blocktrans %}We're really sorry, but liking an image requires an AstroBin index of <strong>{{min_index_to_like}}</strong> or greater.{% endblocktrans %}
+            </div>
+
             <p>
                 {% blocktrans %}Such limitation improves the website as a whole by discouraging people from creating fake accounts to like their own images. Thank you for understanding!{% endblocktrans %}
             </p>
 
-            <div class="alert alert-warning">
-                {% blocktrans with user_scores_index as index %}Currently, your AstroBin index is <strong>{{index}}</strong>.{% endblocktrans %}
+            <p>
+                {% blocktrans with user_scores_index|floatformat:2 as index %}Currently, your AstroBin index is <strong>{{index}}</strong>.{% endblocktrans %}
+            </p>
         </div>
     </div>
 {% endif %}
