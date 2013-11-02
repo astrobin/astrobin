@@ -1,7 +1,7 @@
 {% load comments i18n %}
 {% load bootstrap_toolkit %}
 
-<form class="form-horizontal" action="{% comment_form_target %}" method="post">
+<form class="form-horizontal" action="{% comment_form_target %}" method="post">{% csrf_token %}
     {{form|as_bootstrap}}
     <input type="hidden" name="next" value="{% url zinnia_discussion_success %}"/>
     <div class="form-actions">

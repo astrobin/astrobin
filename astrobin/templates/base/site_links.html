@@ -1,0 +1,143 @@
+{% load i18n %}
+{% load tags %}
+
+<button class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+</button>
+
+<a class="brand" href="{% url index %}">
+    <img src="{{STATIC_URL}}images/astrobin-logo-small.png" alt="AstroBin" />
+</a>
+
+<div class="site-nav nav-collapse collapse pull-left">
+    <ul class="nav">
+        <li class="dropdown {% current request "^/blog/" %}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {% trans "Community" %}
+                <i class="icon-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/blog/"><i class="icon-pencil"></i> {% trans "Blog" %}</a></li>
+                <li class="divider"></li>
+                <li>
+                    <a href="http://questions.astrobin.com/" target="_blank">
+                        <img src="{{STATIC_URL}}icons/flags/16/United-Kingdom.png" alt="AstroBin Questions"/> AstroBin Questions
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown {% current request "^/explore/|^/search/|^/stats/|^/leaderboard/" %}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {% trans "Explore" %}
+                <i class="icon-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{% url wall %}">
+                        <i class="icon-th"></i>
+                        {% trans "The Big Wall" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url iotd_archive %}">
+                        <i class="icon-trophy"></i>
+                        {% trans "Image of the day" %}
+                    </a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li>
+                    <a href="{% url rawdata.publicdatapool_list %}">
+                        <i class="icon-book"></i>
+                        {% trans "Public data pools" %}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url haystack_search %}">
+                        <i class="icon-search"></i>
+                        {% trans "Advanced search" %}
+                    </a>
+                </li>
+                <li class="divider"></li>
+                {% if request.user.is_superuser %}
+                <li>
+                    <a href="{% url stats %}">
+                        <i class="icon-bar-chart"></i>
+                        {% trans "Stats" %}
+                    </a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{% url leaderboard %}">
+                        <i class="icon-list-ol"></i>
+                        {% trans "Leaderboard" %}
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown {% current request "^/help/|^/faq/" %}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {% trans "Help" %}
+                <i class="icon-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{% url help %}">
+                        <i class="icon-info-sign"></i>
+                        {% trans "What is this site?" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url faq %}">
+                        <i class="icon-question-sign"></i>
+                        {% trans "FAQ" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url help_questions %}">
+                        <i class="icon-question-sign"></i>
+                        {% trans "AstroBin Questions" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url rawdata.help1 %}">
+                        <i class="icon-book"></i>
+                        {% trans "AstroBin Raw Data" %}
+                    </a>
+                </li>
+
+
+                <li class="divider"></li>
+
+                <li>
+                    <a href="{% url api %}">
+                        <i class="icon-key"></i>
+                        API (beta)
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url affiliates %}">
+                        <i class="icon-group"></i>
+                        {% trans "Affiliates" %}
+                    </a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li>
+                    <a href="/contact/">
+                        <i class="icon-envelope"></i>
+                        {% trans "Contact" %}
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div> <!-- nav-collapse -->
+

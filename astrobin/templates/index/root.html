@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+
+{% load astrobin_apps_images_tags %}
+{% load avatar_tags %}
+{% load endless %}
+{% load i18n %}
+{% load bootstrap_toolkit %}
+{% load common_tags %}
+{% load cache %}
+{% load tags %}
+
+{% block content %}
+<div id="index">
+    {% if not request.user.is_authenticated %}
+        <div id="why-astrobin" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="active item">
+                    <img src="{{STATIC_URL}}images/M81_astrojoe.jpg" />
+                    <div class="carousel-caption">
+                        <h4>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h4>
+                        {% url help as help_url %}
+                        <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="{{STATIC_URL}}images/M42_astrojoe.jpg" />
+                    <div class="carousel-caption">
+                        <h4>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h4>
+                        <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free.{% endblocktrans %}</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="{{STATIC_URL}}images/M45_astrojoe.jpg" />
+                    <div class="carousel-caption">
+                        <h4>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h4>
+                        <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
+                    </div>
+                </div>
+            </div> <!-- carousel-inner -->
+
+            <a class="carousel-control left" href="#why-astrobin" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#why-astrobin" data-slide="next">&rsaquo;</a>
+        </div> <!-- carousel -->
+
+        <div class="row section">
+            <div class="span6">
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>{% trans "FIT and DSLR camera raw files" %}</h4>
+                    </div>
+                    <a class="pull-left" href="{% url rawdata.help1 %}">
+                        <img src="{{STATIC_URL}}rawdata/images/astrobin-rawdata-plan-galaxia.png"/>
+                    </a>
+                    <p>
+                        {% blocktrans %}AstroBin offers the storage of FIT and DSLR camera raw files too, for archival and sharing purposes!{% endblocktrans %}
+                    </p>
+                    <p>
+                        {% url rawdata.help1 as rawdata_url %}
+                        {% blocktrans %}<strong>AstroBin Raw Data</strong> is a platform for the secure storage of all your FIT and DLSR raw files, up to 500 GB! It will automatically keep your files organized, and allow you to share them with other members. <a href="{{rawdata_url}}">Want to know more?</a>{% endblocktrans %}
+                    </p>
+                </div>
+            </div> <!-- span -->
+
+            <div class="span6">
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>{% trans "What is this site?" %}</h4>
+                    </div>
+                    <h4>{% trans "Hey!" %}</h4>
+                    <p>
+                    {% blocktrans %}Are you an astrophotographer? Do you like to share the outcome of your hard work with others? As an astrophotographer myself, and a subscriber to numerous Astrophotography forums, I have found that the Internet is lacking a centralized place where astrophotographers can share their work.{% endblocktrans %}
+                    </p>
+                    <p>
+                    {% blocktrans %}<em>AstroBin</em> comes to fill the gap. It's a website built from the ground up by an astrophotographer, and it provides means to people who want to share their astrophotographs.{% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+        </div> <!-- row -->
+
+        <div class="row">
+            <div class="span12">
+                <div id="recent-images" class="endless">
+                    <ul class="thumbnails astrobin-thumbnails">
+                        {% include 'index/recent_images_page.html' %}
+                    </ul>
+                </div> <!-- endless -->
+            </div> <!-- span -->
+        </div> <!-- row -->
+
+    {% else %}<!-- authenticated -->
+
+        {% cache 3600 index_iotd request.LANGUAGE_CODE %}
+        {% with image_of_the_day as iotd %}
+            <div class="row section">
+                <div class="span10">
+                    <div class="image-of-the-day">
+                        <h2>
+                            <i class="icon-trophy"></i>
+                            {% trans "Image of the day" %}!
+                        </h2>
+
+                        {% astrobin_image iotd.image 'iotd' %}
+
+                        <div class="info visible-desktop">
+                            <h3>{{iotd.image.title|truncatechars:"60"}}</h3>
+                            <span class="by">
+                                {% trans "by" %} <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax iotd.image.user %}"
+                                      href="{% url user_page iotd.image.user %}">{{iotd.image.user.userprofile}}</a>
+                            </span>
+                            {% for i in gear_list %}
+                                {% if i.1 %}
+                                <p>
+                                    <strong>{% trans i.0 %}:</strong>
+                                    {% for g in i.1 %}
+                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id g.slug %}">{% gear_name g %}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                    {% endfor %}
+                                </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        {% if iotd.runnerup_1 or iotd.runnerup_2 %}
+                        <div class="runner-ups">
+                            <h3 class="visible-desktop">{% trans "Runners-up" %}:</h3>
+                            {% if iotd.runnerup_1 %}
+                                <div class="runner-up">
+                                    {% astrobin_image iotd.runnerup_1 'runnerup' %}
+                                </div>
+                            {% endif %}
+
+                            {% if iotd.runnerup_2 %}
+                                <div class="runner-up">
+                                    {% astrobin_image iotd.runnerup_2 'runnerup' %}
+                                </div>
+                            {% endif %}
+
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="span2 visible-desktop">
+                    <a class="btn btn-primary btn-upload" href="{% url image_upload %}">
+                        <div style="font-size: 92px;"><i class="icon-upload-alt icon-white"></i></div>
+                        <span class="text">
+                            {% trans "Upload" %}
+                        </span>
+                    </a>
+                </div>
+            </div>
+        {% endwith %}
+        {% endcache %}
+
+        <div class="row">
+            <div class="span9"> <!-- activity stream -->
+                <div class="subtle-container simple-container">
+                    <div class="header">
+                        <h4>
+                            {% ifequal section 'personal' %}
+                                <i class="icon-group"></i>
+                                {% trans "Your activity stream" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'global' %}
+                                <i class="icon-globe"></i>
+                                {% trans "Global activity stream" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'images' %}
+                                <i class="icon-time"></i>
+                                {% trans "Recently uploaded" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'followed' %}
+                                <i class="icon-eye-open"></i>
+                                {% trans "Recent images from people you follow" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'liked' %}
+                                <i class="icon-thumbs-up"></i>
+                                {% trans "Recently liked" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'bookmarked' %}
+                                <i class="icon-bookmark"></i>
+                                {% trans "Recently bookmarked" %}
+                            {% endifequal %}
+
+                            {% ifequal section 'fits' %}
+                                <i class="icon-archive"></i>
+                                {% trans "Recent images with link to TIFF/FITS" %}
+                            {% endifequal %}
+                        </h4>
+
+                        <span class="pull-right">
+
+                            {% if section != 'personal' %}
+                                <a href="{% url index %}{% query_string "s=personal" "" %}"
+                                   class="index-section-link"
+                                   rel="tooltip"
+                                   title="{% trans "Personal" %}">
+                            {% endif %}
+                                <i class="icon-group"></i>
+                            {% if section != 'personal' %}
+                                </a>
+                            {% endif %}
+
+                            {% if section != 'global' %}
+                                <a href="{% url index %}{% query_string "s=global" "" %}"
+                                   class="index-section-link"
+                                   rel="tooltip"
+                                   title="{% trans "Global" %}">
+                            {% endif %}
+                                <i class="icon-globe"></i>
+                            {% if section != 'global' %}
+                                </a>
+                            {% endif %}
+
+                            <span class="horizontal-separator">/</span>
+
+                            {% if section != 'images' %}
+                                <a href="{% url index %}{% query_string "s=images" "" %}"
+                                   class="index-section-link"
+                                   rel="tooltip"
+                                   title="{% trans "Recent images" %}">
+                            {% endif %}
+                                <i class="icon-time"></i>
+                            {% if section != 'images' %}
+                                </a>
+                            {% endif %}
+
+                            {% if section != 'followed' %}
+                                <a href="{% url index %}{% query_string "s=followed" "" %}"
+                                   class="index-section-link"
+                                   rel="tooltip"
+                                   title="{% trans "Recent images from people you follow" %}">
+                            {% endif %}
+                                <i class="icon-eye-open"></i>
+                            {% if section != 'followed' %}
+                                </a>
+                            {% endif %}
+
+                            {% if section != 'liked' %}
+                                <a href="{% url index %}{% query_string "s=liked" "" %}"
+                                   class="index-section-link"
+                                   rel="tooltip"
+                                   title="{% trans "Recently liked" %}">
+                            {% endif %}
+                                <i class="icon-thumbs-up"></i>
+                            {% if section != 'liked' %}
+                                </a>
+                            {% endif %}
+
+                            {% if section != 'bookmarked' %}
+                                <a href="{% url index %}{% query_string "s=bookmarked" "" %}"
+                                   class="index-section-link"
+                                   rel="tooltip"
+                                   title="{% trans "Recently bookmarked" %}">
+                            {% endif %}
+                                <i class="icon-bookmark"></i>
+                            {% if section != 'bookmarked' %}
+                                </a>
+                            {% endif %}
+
+                            {% if section != 'fits' %}
+                                <a href="{% url index %}{% query_string "s=fits" "" %}"
+                                   class="index-section-link"
+                                   rel="tooltip"
+                                   title="{% trans "Recent images with link to TIFF/FITS" %}">
+                            {% endif %}
+                                <i class="icon-archive"></i>
+                            {% if section != 'fits' %}
+                                </a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div class="activity-actions">
+                        {% if section == 'personal' or section == 'global' %}
+                            {% if section == 'personal' and not has_followed_users %}
+                                <div class="alert alert-info">
+                                    <h4 class="alert-heading">
+                                        <i class="icon-info-sign"></i> {% trans "Hey!" %}
+                                    </h4>
+
+                                    {% blocktrans %}To make your personal stream more interesting, you should follow some people!{% endblocktrans %}
+                                </div>
+                            {% endif %}
+
+                            <div class="js-masonry endless" data-masonry-options='{"itemSelector":".action"}'>
+                                {% include 'index/stream_page.html' %}
+                            </div>
+                        {% endif %}
+
+                        {% if section == 'images' or section == 'followed' or section == 'liked' or section == 'bookmarked' or section == 'fits'%}
+                            <div id="recent-images-loggedin" class="endless">
+                                <ul class="thumbnails astrobin-thumbnails">
+                                    {% include 'index/recent_images_page.html' %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div> <!-- endless -->
+                </div> <!-- activity stream container -->
+            </div> <!-- span -->
+
+            <div class="span3 visible-desktop">
+                <div class="subtle-container simple-container">
+                    <div class="header"><h4>{% trans "Commercial products" %}<h4></div>
+                    <div id="commercial-products">
+                        {% cache 3600 index_recent_commercial_gear request.LANGUAGE_CODE %}
+                            {% image_list recent_commercial_gear 'thumb' %}
+                        {% endcache %}
+                        <a class="your-product-here" href="/contact/">{% trans "Do you want your product here?" %}</a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- row -->
+    {% endif %} {# authenticated #}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var layoutMasonry = function() {
+                var masonry = $('.endless').data('masonry');
+                if (masonry !== undefined) {
+                    masonry.reloadItems();
+                    masonry.layout();
+                }
+            };
+            setTimeout(function() {
+                layoutMasonry();
+            }, 500);
+
+            $('.endless').endlessPaginate({
+                paginateOnScroll: true,
+                paginateOnScrollMargin: 300,
+                onCompleted: function(context, fragment) {
+                    setTimeout(function() {
+                        layoutMasonry();
+                    }, 250);
+                    window.loadAstroBinImages(fragment);
+                }
+            });
+
+            astrobin_common.setup_gear_popovers();
+            astrobin_common.setup_user_popovers();
+
+            $.ajaxSetup({timeout: 0});
+        });
+    </script>
+{% endblock %}

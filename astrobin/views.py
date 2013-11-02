@@ -27,13 +27,13 @@ from django.utils.encoding import smart_str, smart_unicode
 from django.utils.hashcompat import md5_constructor
 from django.utils.http import urlquote
 
-from djangoratings.models import Vote
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
 from reviews.forms import ReviewedItemForm
 from actstream.models import Action
 from registration.forms import RegistrationForm
 from zinnia.models import Entry
+from endless_pagination.decorators import page_template
 
 from uuid import uuid4
 import os
@@ -142,117 +142,229 @@ def jsonDump(all):
         return []
 
 
-def jsonDumpSubjects(all):
-    if len(all) > 0:
-        return simplejson.dumps([{'id': i.id, 'name': i.mainId} for i in all])
-    else:
-        return []
-
-
 # VIEWS
 
-def index(request):
+@page_template('index/stream_page.html', key = 'stream_page')
+@page_template('index/recent_images_page.html',   key = 'recent_images_page')
+def index(request, template = 'index/root.html', extra_context = None):
     """Main page"""
+    from django.core.cache import cache
 
-    recent_thumbnails_n = 16
-    thumbnails_n = 16
-    products_n = 4
-    actions_n = 16
-    entries_n = 9
+    section = request.GET.get('s', 'personal')
+    image_ct = ContentType.objects.get_for_model(Image)
+    image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
+    user_ct = ContentType.objects.get_for_model(User)
 
-    from zinnia.managers import entries_published
     response_dict = {
-        'small_size': settings.SMALL_THUMBNAIL_SIZE,
         'registration_form': RegistrationForm(),
+        'section': section,
+        'recent_images': Image.objects.select_related('user__userprofile'),
+        'recent_images_alias': 'thumb',
+        'recent_images_batch_size': 55,
     }
+
 
     profile = None
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user=request.user)
+        profile = request.user.userprofile
+        response_dict['recent_images_batch_size'] = 64
 
-        actions_cache_key = 'templates.index.actions'
-        if cache.has_key(actions_cache_key):
-            response_dict['global_actions'] = cache.get(actions_cache_key)
-        else:
-            non_wip_image_ids = [str(x) for x in Image.objects.filter(is_wip = False).order_by('-uploaded')[:actions_n].values_list('id', flat = True)]
+        try:
+            iotd = ImageOfTheDay.objects.all()[0]
+            gear_list = (
+                ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
+                ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
+                ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
+                ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
+                ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
+                ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
+                ('Software'          , iotd.image.software.all(), 'software'),
+                ('Filters'           , iotd.image.filters.all(), 'filters'),
+                ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
+            )
 
-            response_dict['global_actions'] = Action.objects.exclude(
-                Q(target_content_type = Image) &
-                Q(target_object_id__in = non_wip_image_ids))[:actions_n]
+            response_dict['image_of_the_day'] = iotd
+            response_dict['gear_list'] = gear_list
+        except IndexError:
+            # The is no IOTD
+            pass
 
-            cache.set(actions_cache_key, response_dict['global_actions'], 600)
+        response_dict['recent_commercial_gear'] = Image.objects \
+            .select_related('user__userprofile') \
+            .filter(is_wip = False) \
+            .exclude(featured_gear = None)
 
-        response_dict['blog_entries'] = entries_published(Entry.objects.all())[:entries_n] #exclude(authors__username__in = 'astrobin')
 
-        response_dict['recent_from_followees'] = \
-            Image.objects.filter(
-                is_stored = True,
-                is_wip = False,
-                user__username__in = profile.follows.all().values_list(
-                    'user__username', flat="True")
-            )[:thumbnails_n]
+        if section == 'global':
+            ##################
+            # GLOBAL ACTIONS #
+            ##################
+            actions = Action.objects.all().prefetch_related(
+                'actor__userprofile',
+                'target_content_type',
+                'target')
+            response_dict['actions'] = actions
+            response_dict['cache_prefix'] = 'astrobin_global_actions'
 
-        if response_dict['recent_from_followees'].count() == 0:
-            recent_thumbnails_n = 32
+        elif section == 'personal':
+            ####################
+            # PERSONAL ACTIONS #
+            ####################
+            cache_key = 'astrobin_users_image_ids_%s' % request.user
+            users_image_ids = cache.get(cache_key)
+            if users_image_ids is None:
+                users_image_ids = [
+                    str(x) for x in
+                    Image.objects.filter(
+                        user = request.user).values_list('id', flat = True)
+                ]
+                cache.set(cache_key, users_image_ids, 300)
 
-        faves_cache_key = 'templates.index.recently_favorited'
-        if cache.has_key(faves_cache_key):
-            response_dict['recently_favorited'] = cache.get(faves_cache_key)
-        else:
-            response_dict['recently_favorited'] = \
-                Image.objects.annotate(last_favorited = models.Max('favorite__created')) \
-                             .exclude(last_favorited = None) \
-                             .order_by('-last_favorited')[:thumbnails_n]
-            cache.set(faves_cache_key, response_dict['recently_favorited'], 600)
+            cache_key = 'astrobin_users_revision_ids_%s' % request.user
+            users_revision_ids = cache.get(cache_key)
+            if users_revision_ids is None:
+                users_revision_ids = [
+                    str(x) for x in
+                    ImageRevision.objects.filter(
+                        image__user = request.user).values_list('id', flat = True)
+                ]
+                cache.set(cache_key, users_revision_ids, 300)
 
-        fives_cache_key = 'templates.index.recently_five_starred'
-        if cache.has_key(fives_cache_key):
-            response_dict['recently_five_starred'] = cache.get(fives_cache_key)
-        else:
-            recent_fives_list = []
-            l = 0
-            while len(recent_fives_list) < thumbnails_n:
-                recent_fives_qs = \
-                    Image.objects.filter(votes__score = 5) \
-                                 .distinct() \
-                                 .order_by('-votes__date_added')[l:l+thumbnails_n]
-                for i in recent_fives_qs:
-                    if i not in recent_fives_list:
-                        recent_fives_list.append(i)
-                l += 1
-            response_dict['recently_five_starred'] = recent_fives_list[:thumbnails_n]
-            cache.set(fives_cache_key, response_dict['recently_five_starred'], 600)
+            cache_key = 'astrobin_followed_user_ids_%s' % request.user
+            followed_user_ids = cache.get(cache_key)
+            if followed_user_ids is None:
+                followed_user_ids = [
+                    str(x) for x in
+                    ToggleProperty.objects.filter(
+                        property_type = "follow",
+                        user = request.user,
+                        content_type = ContentType.objects.get_for_model(User)
+                    ).values_list('object_id', flat = True)
+                ]
+                cache.set(cache_key, followed_user_ids, 900)
+            response_dict['has_followed_users'] = len(followed_user_ids) > 0
 
-        response_dict['recent_commercial_gear'] = Image.objects\
-            .filter(is_stored = True, is_wip = False)\
-            .exclude(featured_gear = None)\
-            .order_by('-uploaded')[:products_n]
+            cache_key = 'astrobin_followees_image_ids_%s' % request.user
+            followees_image_ids = cache.get(cache_key)
+            if followees_image_ids is None:
+                followees_image_ids = [
+                    str(x) for x in
+                    Image.objects.filter(user_id__in = followed_user_ids).values_list('id', flat = True)
+                ]
+                cache.set(cache_key, followees_image_ids, 900)
 
-        iotd = ImageOfTheDay.objects.all()[0]
-        gear_list = (
-            ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
-            ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
-            ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
-            ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
-            ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
-            ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
-            ('Software'          , iotd.image.software.all(), 'software'),
-            ('Filters'           , iotd.image.filters.all(), 'filters'),
-            ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
-        )
+            actions = Action.objects\
+                .prefetch_related(
+                    'actor__userprofile',
+                    'target_content_type',
+                    'target'
+                ).filter(
+                    # Actor is user, or...
+                    Q(
+                        Q(actor_content_type = user_ct) &
+                        Q(actor_object_id = request.user.id)
+                    ) |
 
-        response_dict['image_of_the_day'] = iotd
-        response_dict['gear_list'] = gear_list
+                    # Action concerns user's images as target, or...
+                    Q(
+                        Q(target_content_type = image_ct) &
+                        Q(target_object_id__in = users_image_ids)
+                    ) |
+                    Q(
+                        Q(target_content_type = image_rev_ct) &
+                        Q(target_object_id__in = users_revision_ids)
+                    ) |
 
-    return object_list(
-        request,
-        queryset = Image.objects
-            .filter(is_stored = True, is_wip = False, featured_gear = None)
-            .order_by('-uploaded'),
-        template_name = 'index.html',
-        template_object_name = 'image',
-        paginate_by = recent_thumbnails_n,
-        extra_context = response_dict)
+                    # Action concerns user's images as object, or...
+                    Q(
+                        Q(action_object_content_type = image_ct) &
+                        Q(action_object_object_id__in = users_image_ids)
+                    ) |
+                    Q(
+                        Q(action_object_content_type = image_rev_ct) &
+                        Q(action_object_object_id__in = users_revision_ids)
+                    ) |
+
+                    # Actor is somebody the user follows, or...
+                    Q(
+                        Q(actor_content_type = user_ct) &
+                        Q(actor_object_id__in = followed_user_ids)
+                    ) |
+
+                    # Action concerns an image by a followed user...
+                    Q(
+                        Q(target_content_type = image_ct) &
+                        Q(target_object_id__in = followees_image_ids)
+                    ) |
+                    Q(
+                        Q(action_object_content_type = image_ct) &
+                        Q(action_object_object_id__in = followees_image_ids)
+                    )
+                )
+            response_dict['actions'] = actions
+            response_dict['cache_prefix'] = 'astrobin_personal_actions'
+
+        elif section == 'followed':
+            user = User.objects.get(pk = request.user.pk)
+            followers = [user_ct.get_object_for_this_type(pk = x.object_id) for x in ToggleProperty.objects.filter(
+                property_type = "follow",
+                content_type = ContentType.objects.get_for_model(User),
+                user = user)]
+
+            response_dict['recent_images'] = \
+                Image.objects.filter(is_wip = False, user__in = followers)
+
+        elif section == 'liked':
+            response_dict['recent_images'] = \
+                Image.objects.raw(
+                    "DROP TABLE IF EXISTS recently_liked_to_show;" +
+                    "CREATE TEMPORARY TABLE recently_liked_to_show ( object_id INT PRIMARY KEY, created TIMESTAMP);" +
+                    "INSERT INTO recently_liked_to_show " +
+                        "SELECT object_id::int, MAX(created_on) AS max_created_on " +
+                        "FROM toggleproperties_toggleproperty " +
+                        "WHERE property_type = 'like' " +
+                        "AND content_type_id = " + str(image_ct.id) + " " +
+                        "GROUP BY object_id " +
+                        "ORDER BY max_created_on DESC " +
+                        "LIMIT 320;" +
+                    "SELECT astrobin_image.* " +
+                    "FROM astrobin_image " +
+                    "JOIN recently_liked_to_show ON id = object_id " +
+                    "ORDER BY recently_liked_to_show.created DESC;"
+                )
+
+        elif section == 'bookmarked':
+            image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
+            response_dict['recent_images'] = \
+                Image.objects.raw(
+                    "DROP TABLE IF EXISTS recently_bookmarked_to_show;" +
+                    "CREATE TEMPORARY TABLE recently_bookmarked_to_show ( object_id INT PRIMARY KEY, created TIMESTAMP) ON COMMIT DROP;" +
+                    "INSERT INTO recently_bookmarked_to_show " +
+                        "SELECT object_id::int, MAX(created_on) AS max_created_on " +
+                        "FROM toggleproperties_toggleproperty " +
+                        "WHERE property_type = 'bookmark' " +
+                        "AND content_type_id = " + str(image_ct.id) + " " +
+                        "GROUP BY object_id " +
+                        "ORDER BY max_created_on DESC " +
+                        "LIMIT 320;" +
+                    "SELECT astrobin_image.* " +
+                    "FROM astrobin_image " +
+                    "JOIN recently_bookmarked_to_show ON id = object_id " +
+                    "ORDER BY recently_bookmarked_to_show.created DESC;"
+                )
+
+        elif section == 'fits':
+            response_dict['recent_images'] = \
+                Image.objects.filter(is_wip = False).exclude(
+                        Q(link_to_fits = None) |
+                        Q(link_to_fits = ''))
+
+    if extra_context is not None:
+        response_dict.update(extra_context)
+
+    return render_to_response(
+        template, response_dict,
+        context_instance = RequestContext(request))
 
 
 @require_GET
@@ -267,9 +379,7 @@ def wall(request):
     """The Big Wall"""
     sqs = SearchQuerySet().all().models(Image)
 
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-    }
+    response_dict = {}
 
     if request.GET.get('sort') == '-acquired':
         response_dict['sort'] = '-acquired'
@@ -277,12 +387,12 @@ def wall(request):
     elif request.GET.get('sort') == '-views':
         response_dict['sort'] = '-views'
         sqs = sqs.order_by('-views');
-    elif request.GET.get('sort') == '-rating':
-        response_dict['sort'] = '-rating'
-        sqs = sqs.order_by('-rating', '-votes')
-    elif request.GET.get('sort') == '-favorited':
-        response_dict['sort'] = '-favorited'
-        sqs = sqs.order_by('-favorited')
+    elif request.GET.get('sort') == '-likes':
+        response_dict['sort'] = '-likes'
+        sqs = sqs.order_by('-likes', '-likes')
+    elif request.GET.get('sort') == '-bookmarks':
+        response_dict['sort'] = '-bookmarks'
+        sqs = sqs.order_by('-bookmarks')
     elif request.GET.get('sort') == '-integration':
         response_dict['sort'] = '-integration'
         sqs = sqs.order_by('-integration')
@@ -298,12 +408,6 @@ def wall(request):
         response_dict['filter'] = filter
     if filter == 'all_ds':
         sqs = sqs.filter(is_deep_sky = True)
-    elif filter == 'clusters':
-        sqs = sqs.filter(is_clusters = True)
-    elif filter == 'nebulae':
-        sqs = sqs.filter(is_nebulae = True)
-    elif filter == 'galaxies':
-        sqs = sqs.filter(is_galaxies = True)
     elif filter == 'all_ss':
         sqs = sqs.filter(is_solar_system = True)
     elif filter == 'sun':
@@ -327,10 +431,10 @@ def wall(request):
 
     return object_list(
         request,
-        queryset=sqs,
-        template_name='wall.html',
-        template_object_name='image',
-        paginate_by = 100,
+        queryset = sqs,
+        template_name = 'wall.html',
+        template_object_name = 'object',
+        paginate_by = 70,
         extra_context = response_dict)
 
 
@@ -350,129 +454,6 @@ def iotd_archive(request):
 
 
 @require_GET
-def messier(request):
-    """Messier marathon"""
-
-    queryset = MessierMarathon.objects.all().order_by('messier_number')
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-    }
-
-    return object_list(
-        request,
-        queryset=queryset,
-        template_name='messier_marathon.html',
-        template_object_name='object',
-        paginate_by = 55, # Haha, how clever.
-        extra_context = response_dict)
-
-
-@require_GET
-@login_required
-def messier_nomination(request, id):
-    image = get_object_or_404(Image, pk=id)
-
-    response_dict = {
-        'image': image,
-        'has_messier': False,
-        'has_multiple_messier': False,
-        'messier_object': None,
-        'messier_objects_list': [],
-        'form': None,
-    }
-
-    subjects = image.subjects.all()
-    messier = [x.name for x in subjects if x.catalog == 'M']
-    if not messier:
-        pass
-    elif len(messier) == 1:
-        response_dict['has_messier'] = True
-        response_dict['messier_object'] = messier[0]
-    else:
-        response_dict['has_messier'] = True
-        response_dict['has_multiple_messier'] = True
-        response_dict['form'] = MultipleMessierForm(messier)
-
-    return render_to_response(
-        'messier_nomination.html',
-        response_dict,
-        context_instance = RequestContext(request))
-
-
-@require_POST
-@login_required
-def messier_nomination_process(request):
-    image = get_object_or_404(Image, pk=request.POST['image_id'])
-    messier_object = request.POST['messier_object']
-
-    response_dict = {
-        'image': image,
-        'already_nominated': False,
-    }
-
-    nominations, created = MessierMarathonNominations.objects.get_or_create(
-        messier_number = int(messier_object),
-        image = image)
-    if nominations.nominators.filter(id = request.user.id):
-        response_dict['already_nominated'] = True
-    else:
-        top_for_object = MessierMarathonNominations.objects.filter(messier_number = int(messier_object)).order_by('-nominations')[:1]
-        top_nominations = top_for_object[0].nominations if top_for_object else 0
-
-        nominations.nominators.add(request.user)
-        nominations.nominations += 1
-        nominations.save()
-
-        push_notification(
-            [image.user], 'messier_nomination',
-            {
-                'user': request.user.username,
-                'user_url': request.user.get_absolute_url(),
-                'messier_object': 'M %s' % messier_object,
-                'image_url': image.get_absolute_url(),
-            },
-        )
-
-        if nominations.nominations > top_nominations:
-            try:
-                marathon_item = MessierMarathon.objects.get(messier_number = int(messier_object))
-                marathon_item.image = image
-            except MessierMarathon.DoesNotExist:
-                marathon_item = MessierMarathon(messier_number = int(messier_object), image = image)
-            finally:
-                marathon_item.save()
-                push_notification(
-                    [image.user], 'messier_top_nomination',
-                    {
-                        'messier_object': 'M %s' % messier_object,
-                        'image_url': image.get_absolute_url(),
-                    },
-                )
-
-    return render_to_response(
-        'messier_nomination_finish.html',
-        response_dict,
-        context_instance = RequestContext(request))
-
-
-@require_GET
-def fits(request):
-    qs = Image.objects.exclude(Q(link_to_fits = None) | Q(link_to_fits = ''))
-
-    response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
-    }
-
-    return object_list(
-        request,
-        queryset=qs,
-        template_name='fits.html',
-        template_object_name='image',
-        paginate_by = 20,
-        extra_context = response_dict)
-
-
-@require_GET
 def no_javascript(request):
     return render_to_response('no_javascript.html',
         context_instance=RequestContext(request))
@@ -482,57 +463,49 @@ def no_javascript(request):
 def image_detail(request, id, r):
     """ Show details of an image"""
     image = get_object_or_404(Image, pk=id)
+    response_dict = {}
 
-    def missing_revision(image):
-        messages.warning(request, _("The revision you are looking for is invalid, or was deleted. This is the original image."))
-        return HttpResponseRedirect(image.get_absolute_url())
+    # TODO: unify duplicated code with image_full
 
-    is_revision = False
-    revision_id = 0
-    revision_image = None
-    revisions = ImageRevision.objects.filter(image=image)
-    is_final = image.is_final
-    is_ready = image.is_stored
+    ################################
+    # REDIRECT TO CORRECT REVISION #
+    ################################
 
-    if 'r' in request.GET:
+    if r is None:
         r = request.GET.get('r')
 
-    if r and r != '0':
-        is_revision = True
+    revisions = ImageRevision.objects.filter(image = image)
+
+    if r is None and not image.is_final:
+        final_revs = revisions.filter(is_final = True)
+        # We should only have one
+        if final_revs:
+            final = revisions.filter(is_final = True)[0]
+            return HttpResponseRedirect('/%i/%s/' % (image.id, final.label))
+
+    if r is None:
         try:
-            revision_id = int(r)
-        except ValueError:
-            try:
-                revision_image = ImageRevision.objects.get(image = image, label = r)
-            except ImageRevision.DoesNotExist:
-                return missing_revision(image)
-            except MultipleObjectsReturned:
-                revision_image = ImageRevision.objects.filter(image = image, label = r)[0]
-        if not revision_image:
-            try:
-                revision_image = ImageRevision.objects.get(image = image, id = revision_id)
-            except ImageRevision.DoesNotExist:
-                return missing_revision(image)
+            r = revisions.filter(is_final = True)[0].label
+        except IndexError:
+            r = 0
 
-        is_final = revision_image.is_final
-        is_ready = revision_image.is_stored
-    elif not r:
-        if not is_final:
-            final_revs = revisions.filter(is_final = True)
-            # We should only have one
-            if final_revs:
-                final = revisions.filter(is_final = True)[0]
-                return HttpResponseRedirect('/%i/%s/' % (image.id, final.label))
 
+    revision_image = None
+    instance_to_platesolve = image
+    is_revision = False
+    if r != 0:
+        try:
+            revision_image = ImageRevision.objects.filter(image = image, label = r)[0]
+            instance_to_platesolve = revision_image
+            is_revision = True
+        except:
+            pass
+
+
+    #############################
+    # GENERATE ACQUISITION DATA #
+    #############################
     from moon import MoonPhase;
-
-    if request.user.is_authenticated():
-        already_voted = bool(image.rating.get_rating_for_user(request.user, request.META['REMOTE_ADDR']))
-    else:
-        already_voted = False
-
-    ratings = image.get_ratings()
-    votes = len(ratings)
 
     gear_list = (
         ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
@@ -679,25 +652,36 @@ def image_detail(request, id, r):
     elif ssa:
         image_type = 'solar_system'
 
-    follows = False
+
+
     profile = None
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user=request.user)
-    if profile:
-        if UserProfile.objects.get(user=image.user) in profile.follows.all():
-            follows = True
+        profile = request.user.userprofile
+
+
+    ##############
+    # BASIC DATA #
+    ##############
 
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
+    mod = request.GET.get('mod')
 
-    resized_size = settings.RESIZED_IMAGE_SIZE
+    subjects = image.objects_in_field.split(',') if image.objects_in_field else ''
+    skyplot_zoom1 = None
+
     if is_revision:
-        if revision_image.w > 0 and revision_image.w < resized_size:
-            resized_size = revision_image.w
+        if revision_image.solution:
+            if revision_image.solution.objects_in_field:
+               subjects = revision_image.solution.objects_in_field.split(',')
+            if revision_image.solution.skyplot_zoom1:
+                skyplot_zoom1 = revision_image.solution.skyplot_zoom1
     else:
-        if image.w > 0 and image.w < resized_size:
-            resized_size = image.w
+        if image.solution:
+            if image.solution.objects_in_field:
+                subjects = image.solution.objects_in_field.split(',')
+            if image.solution.skyplot_zoom1:
+                skyplot_zoom1 = image.solution.skyplot_zoom1
 
-    subjects = image.subjects.all()
     subjects_limit = 5
 
     licenses = (
@@ -710,77 +694,98 @@ def image_detail(request, id, r):
         (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
     )
 
-    solved_ext = ''
-    if image.uploaded < datetime.datetime(2011, 11, 13, 5, 3, 1):
-        solved_ext = '.png'
-    elif image.plot_is_overlay:
-        solved_ext = '.png'
-    else:
-        solved_ext = image.original_ext
 
-    preferred_language = UserProfile.objects.get(user = image.user).language
+
+    ######################
+    # PREFERRED LANGUAGE #
+    ######################
+
+    preferred_language = image.user.userprofile.language
     if preferred_language:
         preferred_language = LANGUAGES[preferred_language]
     else:
         preferred_language = _("English")
 
-    response_dict = {'small_thumbnail_size': settings.SMALL_THUMBNAIL_SIZE,
-                     'resized_size': resized_size,
-                     'already_voted': already_voted,
-                     'votes_number': votes,
-                     'allow_rating': image.allow_rating and not image.user.userprofile_set.all()[0].optout_rating,
-                     'comments_number': NestedComment.objects.filter(
-                        deleted = False,
-                        content_type__app_label = 'astrobin',
-                        content_type__model = 'image',
-                        object_id = image.id).count(),
-                     'gear_list': gear_list,
-                     'gear_list_has_commercial': gear_list_has_commercial,
-                     'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
-                     'image_type': image_type,
-                     'ssa': ssa,
-                     'deep_sky_data': deep_sky_data,
-                     'mod': request.GET.get('mod') if 'mod' in request.GET else '',
-                     'inverted': True if 'mod' in request.GET and request.GET['mod'] == 'inverted' else False,
-                     'solved': True if 'mod' in request.GET and request.GET['mod'] == 'solved' else False,
-                     'follows': follows,
-                     'private_message_form': PrivateMessageForm(),
-                     'upload_revision_form': ImageRevisionUploadForm(),
-                     'revisions': revisions,
-                     'is_revision': is_revision,
-                     'revision_image': revision_image,
-                     'is_ready': is_ready,
-                     'is_final': is_final,
-                     'dates_label': _("Dates"),
-                     'uploaded_on': uploaded_on,
-                     'subjects_short': subjects[:subjects_limit],
-                     'subjects_reminder': subjects[subjects_limit:],
-                     'subjects_all': subjects,
-                     'subjects_limit': subjects_limit,
-                     'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][0] if image.subject_type else 0,
-                     'license_icon': licenses[image.license][1],
-                     'license_title': licenses[image.license][2],
-                     # Because of a regression introduced at
-                     # revision e1dad12babe5, now we have to
-                     # implement this ugly hack.
-                     'solved_ext': solved_ext,
 
-                     'solar_system_main_subject_id': image.solar_system_main_subject,
-                     'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
-                     'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
-                     'preferred_language': preferred_language,
-                     'already_favorited': Favorite.objects.filter(image = image, user = request.user).count() > 0 if request.user.is_authenticated() else False,
-                     'times_favorited': Favorite.objects.filter(image = image).count(),
-                     'plot_overlay_left' : (settings.RESIZED_IMAGE_SIZE - image.w) / 2 if image.w < settings.RESIZED_IMAGE_SIZE else 0,
+    ##########################
+    # LIKE / BOOKMARKED THIS #
+    ##########################
+    like_this = [x.user for x in ToggleProperty.objects.filter(
+        property_type = "like",
+        object_id = image.pk,
+        content_type = ContentType.objects.get_for_model(Image))]
 
-                     'select_datapool_form': PublicDataPool_SelectExistingForm(),
-                     'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = request.user) if request.user.is_authenticated() else None,
-                     'has_sharedfolders': PrivateSharedFolder.objects.filter(
-                        Q(creator = request.user) |
-                        Q(users = request.user)).count() > 0 if request.user.is_authenticated() else False,
+    bookmarked_this = [x.user for x in ToggleProperty.objects.filter(
+        property_type = "bookmark",
+        object_id = image.pk,
+        content_type = ContentType.objects.get_for_model(Image))]
 
-                     'iotd_date': image.iotd_date()
-                    }
+
+    #################
+    # RESPONSE DICT #
+    #################
+
+    from astrobin_apps_platesolving.solver import Solver
+
+    response_dict = dict(response_dict.items() + {
+        'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
+
+        # TODO: use astrobin_image template tag
+        'histogram': image.thumbnail('histogram'),
+
+        'revisions': revisions,
+        'is_revision': is_revision,
+        'revision_image': revision_image,
+        'revision_label': r,
+
+        'mod': mod,
+        'instance_to_platesolve': instance_to_platesolve,
+        'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
+        'skyplot_zoom1': skyplot_zoom1,
+
+        'like_this': like_this,
+        'bookmarked_this': bookmarked_this,
+        'min_index_to_like': 1.00,
+
+        'comments_number': NestedComment.objects.filter(
+            deleted = False,
+            content_type__app_label = 'astrobin',
+            content_type__model = 'image',
+            object_id = image.id).count(),
+        'gear_list': gear_list,
+        'gear_list_has_commercial': gear_list_has_commercial,
+        'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
+        'image_type': image_type,
+        'ssa': ssa,
+        'deep_sky_data': deep_sky_data,
+        # TODO: check that solved image is correcly laid on top
+        'private_message_form': PrivateMessageForm(),
+        'upload_revision_form': ImageRevisionUploadForm(),
+        'dates_label': _("Dates"),
+        'uploaded_on': uploaded_on,
+        'subjects_short': subjects[:subjects_limit],
+        'subjects_reminder': subjects[subjects_limit:],
+        'subjects_all': subjects,
+        'subjects_limit': subjects_limit,
+        'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][0] if image.subject_type else 0,
+        'license_icon': licenses[image.license][1],
+        'license_title': licenses[image.license][2],
+        # Because of a regression introduced at
+        # revision e1dad12babe5, now we have to
+        # implement this ugly hack.
+
+        'solar_system_main_subject_id': image.solar_system_main_subject,
+        'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
+        'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
+        'preferred_language': preferred_language,
+        'select_datapool_form': PublicDataPool_SelectExistingForm(),
+        'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = request.user) if request.user.is_authenticated() else None,
+        'has_sharedfolders': PrivateSharedFolder.objects.filter(
+            Q(creator = request.user) |
+            Q(users = request.user)).count() > 0 if request.user.is_authenticated() else False,
+
+        'iotd_date': image.iotd_date()
+    }.items())
 
     return object_detail(
         request,
@@ -792,23 +797,73 @@ def image_detail(request, id, r):
 
 
 @require_GET
+def image_thumb(request, id, r, alias, mod):
+    image = get_object_or_404(Image, id = id)
+
+    url = settings.IMAGES_URL + image.image_file.name
+    if 'animated' not in request.GET:
+        url = image.thumbnail(alias, {
+            'revision_label': r,
+            'mod': mod,
+        })
+
+    return HttpResponse(
+        simplejson.dumps({
+            'id': id,
+            'url': url,
+        }))
+
+
+@require_GET
+def image_rawthumb(request, id, r, alias, mod):
+    image = get_object_or_404(Image, id = id)
+    url = image.thumbnail(alias, {
+        'revision_label': r,
+        'mod': mod,
+    })
+
+    return HttpResponseRedirect(url)
+
+
+@require_GET
 def image_full(request, id, r):
     image = get_object_or_404(Image, pk=id)
 
-    is_revision = False
-    revision_id = 0
-    revision_image = None
-    if 'r' in request.GET:
+    ################################
+    # REDIRECT TO CORRECT REVISION #
+    ################################
+
+    if r is None:
         r = request.GET.get('r')
 
-    if r and r != '0':
-        is_revision = True
+    revisions = ImageRevision.objects.filter(image = image)
+
+    if r is None and not image.is_final:
+        final_revs = revisions.filter(is_final = True)
+        # We should only have one
+        if final_revs:
+            final = revisions.filter(is_final = True)[0]
+            return HttpResponseRedirect('/full/%i/%s/' % (image.id, final.label))
+
+    if r is None:
         try:
-            revision_id = int(r)
-        except ValueError:
-            revision_image = get_object_or_404(ImageRevision, image = image, label = r)
-        if not revision_image:
-            revision_image = get_object_or_404(ImageRevision, id=revision_id)
+            r = revisions.filter(is_final = True)[0].label
+        except IndexError:
+            r = 0
+
+
+    mod = None
+    if 'mod' in request.GET and request.GET['mod'] == 'inverted':
+        mod = 'inverted'
+
+    real = 'real' in request.GET
+    if real:
+        alias = 'real'
+    else:
+        alias = 'hd'
+
+    if mod:
+        alias += "_%s" % mod
 
     return object_detail(
         request,
@@ -817,20 +872,10 @@ def image_full(request, id, r):
         template_name = 'image/full.html',
         template_object_name = 'image',
         extra_context = {
-            'revision_image': revision_image,
-            'is_revision': is_revision,
-            'real': 'real' in request.GET,
+            'real': real,
+            'alias': 'real' if real else 'hd',
+            'revision_label': r,
         })
-
-
-@require_GET
-def image_get_rating(request, image_id):
-    image = get_object_or_404(Image, pk=image_id)
-    from votes import index
-    rating = index([x.score for x in image.rating.get_ratings()])
-
-    response_dict = {'rating': '%.2f' % rating}
-    return ajax_response(response_dict)
 
 
 @login_required
@@ -882,74 +927,36 @@ def image_upload_process(request):
         messages.error(request, _("AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
         return HttpResponseRedirect('/upload/')
 
-    if 'file' not in request.FILES:
+    if 'image_file' not in request.FILES:
         return upload_error()
 
     form = ImageUploadForm(request.POST, request.FILES)
-    file = request.FILES["file"]
-    filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    original_ext = original_ext.lower()
-    if original_ext == '.jpeg':
-        original_ext = '.jpg'
-    if original_ext not in ('.jpg', '.png', '.gif'):
+
+    if not form.is_valid():
+        return upload_error()
+
+    image_file = request.FILES["image_file"]
+    ext = os.path.splitext(image_file.name)[1].lower()
+    if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error()
 
     try:
         from PIL import Image as PILImage
-        trial_image = PILImage.open(file)
+        trial_image = PILImage.open(image_file)
         trial_image.verify()
     except:
         return upload_error()
 
-    destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
-    for chunk in file.chunks():
-        destination.write(chunk)
-    destination.close()
+    profile = request.user.userprofile
+    image = form.save(commit = False)
+    image.user = request.user
+    image.license = profile.default_license
 
-    profile = UserProfile.objects.get(user = request.user)
-    image = Image(
-        filename=filename,
-        original_ext=original_ext,
-        user=request.user,
-        license = profile.default_license,
-        is_wip = 'wip' in request.POST)
-
+    image.image_file.file.seek(0) # Because we opened it with PIL
     image.save()
 
-    return HttpResponseRedirect("/edit/presolve/%d/" % image.id)
-
-
-@login_required
-def image_edit_presolve(request, id):
-    image = get_object_or_404(Image, pk = id)
-    if request.user != image.user and not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    if request.method == 'POST':
-        form = ImageEditPresolveForm(data=request.POST, instance=image)
-        if form.is_valid():
-            form.save()
-
-            if image.is_stored:
-                image.solve()
-
-            done_later = 'done_later' in request.POST
-            if done_later:
-                if image.presolve_information > 1:
-                    messages.info(request, _("Plate-solving has started in the background. It might take a while, so please don't request it again! You will be notified when the job has completed. Thanks!"))
-
-                return HttpResponseRedirect(image.get_absolute_url());
-
-            return HttpResponseRedirect('/edit/watermark/%s/' % image.id)
-    else:
-        form = ImageEditPresolveForm(instance=image)
-
-    return render_to_response('image/edit/presolve.html',
-        {
-            'image': image,
-             'form': form,
-        },
-        context_instance = RequestContext(request))
+    messages.success(request, _("Image uploaded. After this basic information, remember to edit the gear and acquisition details using the Actions menu. Thank you!"))
+    return HttpResponseRedirect("/edit/basic/%d/" % image.id)
 
 
 @login_required
@@ -959,21 +966,11 @@ def image_edit_basic(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    subjects =  u', '.join(x.mainId for x in image.subjects.all())
-
     form = ImageEditBasicForm(user = image.user, instance = image)
 
     return render_to_response('image/edit/basic.html',
         {'image':image,
          'form':form,
-         'prefill_dict': {
-            'subjects': [jsonDumpSubjects(image.subjects.all()),
-                         "",
-                         _("No results. Sorry."),
-                         _("Click on a suggestion or press TAB to add what you typed")],
-         },
-         'is_ready': image.is_stored,
-         'subjects': subjects,
         },
         context_instance=RequestContext(request))
 
@@ -982,10 +979,10 @@ def image_edit_basic(request, id):
 @require_GET
 def image_edit_watermark(request, id):
     image = get_object_or_404(Image, pk=id)
-    if request.user != image.user or image.is_stored:
+    if request.user != image.user:
         return HttpResponseForbidden()
 
-    profile = UserProfile.objects.get(user = image.user)
+    profile = image.user.userprofile
     if not profile.default_watermark_text or profile.default_watermark_text == '':
         profile.default_watermark_text = "Copyright %s" % image.user.username
         profile.save()
@@ -1009,7 +1006,7 @@ def image_edit_watermark(request, id):
 @require_GET
 def image_edit_gear(request, id):
     image = Image.objects.get(pk=id)
-    profile = UserProfile.objects.get(user=image.user)
+    profile = image.user.userprofile
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1020,7 +1017,6 @@ def image_edit_gear(request, id):
     form = ImageEditGearForm(user=image.user, instance=image)
     response_dict = {
         'form': form,
-        'is_ready':image.is_stored,
         'image':image,
         'no_gear':no_gear,
         'copy_gear_form': CopyGearForm(request.user),
@@ -1058,7 +1054,7 @@ def image_edit_acquisition(request, id):
     deep_sky_acquisition_formset = None
     deep_sky_acquisition_basic_form = None
     advanced = False
-    if edit_type == 'deep_sky' or image.is_solved:
+    if edit_type == 'deep_sky' or image.solution:
         advanced = dsa_qs[0].advanced if dsa_qs else False
         advanced = request.GET['advanced'] if 'advanced' in request.GET else advanced
         advanced = True if advanced == 'true' else advanced
@@ -1070,7 +1066,7 @@ def image_edit_acquisition(request, id):
             if not dsa_qs:
                 extra = 1
             DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=extra, can_delete=False, form=DeepSky_AcquisitionForm)
-            profile = UserProfile.objects.get(user=image.user)
+            profile = image.user.userprofile
             filter_queryset = profile.filters.all()
             DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
             deep_sky_acquisition_formset = DSAFormSet(instance=image)
@@ -1086,7 +1082,6 @@ def image_edit_acquisition(request, id):
         'deep_sky_acquisition_basic_form': deep_sky_acquisition_basic_form,
         'advanced': advanced,
         'solar_system_acquisition': solar_system_acquisition,
-        'is_ready':image.is_stored,
     }
 
     return render_to_response('image/edit/acquisition.html',
@@ -1106,7 +1101,6 @@ def image_edit_acquisition_reset(request, id):
 
     response_dict = {
         'image': image,
-        'is_ready':image.is_stored,
         'deep_sky_acquisition_basic_form': DeepSky_AcquisitionBasicForm(),
     }
     return render_to_response('image/edit/acquisition.html',
@@ -1170,43 +1164,6 @@ def image_edit_license(request, id):
 @login_required
 @require_POST
 def image_edit_save_basic(request):
-    def find_subject(id):
-        def find_in_simbad(id):
-            import simbad
-            subject = simbad.find_single_subject(id.strip())
-            if subject:
-                return subject
-            else:
-                subjects = simbad.find_subjects(id.strip())
-                if subjects:
-                    return subjects[0]
-
-        try:
-            return Subject.objects.get(id = float(id))
-        except ValueError:
-            subject = Subject.objects.filter(Q(mainId = id) | Q(name = id))
-            if subject:
-               return subject[0]
-            else:
-                identifier = SubjectIdentifier.objects.filter(identifier = id)
-                if identifier:
-                    return identifier[0].subject
-                else:
-                    subject = find_in_simbad(id)
-                    if subject:
-                        return subject
-        except Subject.DoesNotExist:
-            return None
-
-        '''Alright fine, I give up. Let's look for it in
-        our database.'''
-        subject = Subject()
-        subject.oid = -999
-        subject.mainId = id.strip()
-        subject.save()
-
-        return subject
-
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
     form = ImageEditBasicForm(user = image.user, data=request.POST, instance=image)
@@ -1214,51 +1171,19 @@ def image_edit_save_basic(request):
         return HttpResponseForbidden()
 
     if not form.is_valid():
-        subjects =  u', '.join(x.mainId for x in image.subjects.all())
-
         response_dict = {
             'image': image,
             'form': form,
-            'prefill_dict': {
-               'subjects': [jsonDumpSubjects(image.subjects.all()),
-                            "",
-                            _("No results. Sorry.")],
-            },
-            'is_ready': image.is_stored,
-            'subjects': subjects,
         }
 
         return render_to_response("image/edit/basic.html",
             response_dict,
             context_instance=RequestContext(request))
 
-    prefill_dict = {}
-
-    try:
-        form.save()
-    except ValueError:
-        pass
-
-    image.subjects.clear()
-    (ids, value) = valueReader(request.POST, 'subjects')
-    for id in ids:
-        subject = find_subject(id)
-        if subject:
-            image.subjects.add(subject)
-    prefill_dict['subjects'] = [jsonDumpSubjects(image.subjects.all()),
-                                "",
-                                _("No results. Sorry.")]
-    image.save()
-
-    if 'was_not_ready' in request.POST:
-        if 'submit_next' in request.POST and 'skip_rest' not in request.POST:
-            return HttpResponseRedirect('/edit/gear/%i/' % image.id)
-
-        image.process(image.presolve_information > 1)
-        return HttpResponseRedirect(image.get_absolute_url())
+    form.save()
 
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect('/edit/basic/%i/' % image.id)
+    return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
@@ -1266,7 +1191,7 @@ def image_edit_save_basic(request):
 def image_edit_save_watermark(request):
     image_id = request.POST.get('image_id')
     image = get_object_or_404(Image, pk=image_id)
-    if request.user != image.user or image.is_stored:
+    if request.user != image.user:
         return HttpResponseForbidden()
 
     form = ImageEditWatermarkForm(data = request.POST, instance = image)
@@ -1282,7 +1207,7 @@ def image_edit_save_watermark(request):
     form.save()
 
     # Save defaults in profile
-    profile = UserProfile.objects.get(user = image.user)
+    profile = image.user.userprofile
     profile.default_watermark = form.cleaned_data['watermark']
     profile.default_watermark_text = form.cleaned_data['watermark_text']
     profile.default_watermark_position = form.cleaned_data['watermark_position']
@@ -1292,7 +1217,6 @@ def image_edit_save_watermark(request):
     if 'submit_next' in request.POST:
         return HttpResponseRedirect('/edit/basic/%i/' % image.id)
 
-    image.process(image.presolve_information > 1)
     return HttpResponseRedirect(image.get_absolute_url())
 
 
@@ -1301,7 +1225,7 @@ def image_edit_save_watermark(request):
 def image_edit_save_gear(request):
     image_id = request.POST.get('image_id')
     image = Image.objects.get(pk=image_id)
-    profile = UserProfile.objects.get(user = image.user)
+    profile = image.user.userprofile
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1320,7 +1244,6 @@ def image_edit_save_gear(request):
                              instance=image)
     response_dict = {
         'image': image,
-        'is_ready':image.is_stored,
     }
 
     if not form.is_valid():
@@ -1330,15 +1253,6 @@ def image_edit_save_gear(request):
     form.save()
 
     response_dict['image'] = image
-
-    if 'was_not_ready' in request.POST:
-        if 'submit_next' in request.POST:
-            return HttpResponseRedirect('/edit/acquisition/%i/' % image.id)
-
-        if not image.is_stored:
-            image.process(image.presolve_information > 1)
-
-        return HttpResponseRedirect(image.get_absolute_url())
 
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect('/edit/gear/%i/' % image.id)
@@ -1359,7 +1273,6 @@ def image_edit_save_acquisition(request):
     response_dict = {
         'image': image,
         'edit_type': edit_type,
-        'is_ready':image.is_stored,
     }
 
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
@@ -1368,7 +1281,7 @@ def image_edit_save_acquisition(request):
     for a in SolarSystem_Acquisition.objects.filter(image=image):
         a.delete()
 
-    if edit_type == 'deep_sky' or image.is_solved:
+    if edit_type == 'deep_sky' or image.solution:
         if advanced:
             DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False, form=DeepSky_AcquisitionForm)
             saving_data = {}
@@ -1382,7 +1295,7 @@ def image_edit_save_acquisition(request):
                 deep_sky_acquisition_formset.save()
                 if 'add_more' in request.POST:
                     DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm)
-                    profile = UserProfile.objects.get(user=image.user)
+                    profile = image.user.userprofile
                     filter_queryset = profile.filters.all()
                     DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset = filter_queryset))
                     deep_sky_acquisition_formset = DSAFormSet(instance=image)
@@ -1421,10 +1334,6 @@ def image_edit_save_acquisition(request):
                                       context_instance=RequestContext(request))
         form.save()
 
-    if 'was_not_ready' in request.POST and 'add_mode' not in request.POST:
-        image.process(image.presolve_information > 1)
-        return HttpResponseRedirect(image.get_absolute_url())
-
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect("/edit/acquisition/%s/" % image_id)
 
@@ -1451,20 +1360,19 @@ def image_edit_save_license(request):
     return HttpResponseRedirect('/edit/license/%s/' % image_id)
 
 @login_required
-@require_GET
+@require_POST
 def image_delete(request, id):
     image = get_object_or_404(Image, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     image.delete()
-    push_notification([request.user], 'image_deleted', {});
-
-    return HttpResponseRedirect("/");
+    messages.success(request, _("Image deleted."));
+    return HttpResponseRedirect(request.user.get_absolute_url());
 
 
 @login_required
-@require_GET
+@require_POST
 def image_delete_revision(request, id):
     revision = get_object_or_404(ImageRevision, pk=id)
     image = revision.image
@@ -1476,12 +1384,13 @@ def image_delete_revision(request, id):
         image.save()
 
     revision.delete()
+    messages.success(request, _("Revision deleted."));
 
     return HttpResponseRedirect("/%i/" % image.id);
 
 
 @login_required
-@require_GET
+@require_POST
 def image_delete_original(request, id):
     image = get_object_or_404(Image, pk=id)
     if request.user != image.user and not request.user.is_superuser:
@@ -1500,30 +1409,29 @@ def image_delete_original(request, id):
         # You can't delete just the original if you have no revisions.
         return HttpResponseForbidden()
 
-    image.filename = final.filename
-    image.original_ext = final.original_ext
+    image.image_file = final.image_file
     image.uploaded = final.uploaded
 
     image.w = final.w
     image.h = final.h
 
-    image.is_stored = final.is_stored
-    image.is_solved = False # We don't solve revisions.
-
     image.is_final = True
-    image.was_revision = True
+
+    if image.solution:
+        image.solution.delete()
 
     image.save()
-    final.delete(dont_delete_data = True)
 
-    # Update ImageOfTheDay
-    today = date.today()
-    try:
-        iotd = ImageOfTheDay.objects.get(date = today, image = image)
-        make_image_of_the_day(image)
-    except ImageOfTheDay.DoesNotExist:
-        pass
+    if final.solution:
+        # Get the solution this way, I don't know why it wouldn't work otherwise
+        content_type = ContentType.objects.get_for_model(ImageRevision)
+        solution = Solution.objects.get(content_type = content_type, object_id = final.pk)
+        solution.content_object = image
+        solution.save()
 
+    final.delete()
+
+    messages.success(request, _("Image deleted."));
     return HttpResponseRedirect("/%i/" % image.id);
 
 
@@ -1534,16 +1442,13 @@ def image_promote(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
 
     if image.is_wip:
         image.is_wip = False
         image.save()
 
-        followers = [x.from_userprofile.user
-                     for x in
-                     UserProfile.follows.through.objects.filter(
-                        to_userprofile = profile)]
+        followers = [x.user for x in ToggleProperty.objects.toggleproperties_for_object("follow", request.user)]
         push_notification(followers, 'new_image',
             {
                 'originator': request.user,
@@ -1578,254 +1483,233 @@ def me(request):
 def user_page(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(User, username = username)
-    profile = UserProfile.objects.get(user=user)
+    profile = user.userprofile
+    user_ct = ContentType.objects.get_for_model(User)
 
-    follows = False
     viewer_profile = None
     if request.user.is_authenticated():
-        viewer_profile = UserProfile.objects.get(user=request.user)
-    if viewer_profile:
-        if UserProfile.objects.get(user=user) in viewer_profile.follows.all():
-            follows = True
+        viewer_profile = request.user.userprofile
 
     section = 'public'
-    subsection = request.GET.get('sub')
-    if not subsection:
-        subsection = 'year'
-    subtitle = None
-    backlink = None
+    subsection = request.GET.get('sub', 'year')
+    active = request.GET.get('active')
+    menu = []
 
-    smart_albums = []
-    sqs = Image.objects.filter(user = user, is_stored = True).order_by('-uploaded')
-    lad_sql = 'SELECT date FROM astrobin_acquisition '\
-              'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\
-              'ORDER BY date DESC '\
-              'LIMIT 1'
+    qs = Image.objects.filter(user = user).order_by('-uploaded')
 
     if 'staging' in request.GET:
         if request.user != user:
             return HttpResponseForbidden()
-        sqs = sqs.filter(is_wip = True)
+        qs = qs.filter(is_wip = True)
         section = 'staging'
     else:
-        sqs = sqs.filter(is_wip = False)
+        qs = qs.filter(is_wip = False)
+
+        ############
+        # UPLOADED #
+        ############
         if subsection == 'uploaded':
             # All good already
             pass
+
+        ############
+        # ACQUIRED #
+        ############
         elif subsection == 'acquired':
-            sqs = sqs.extra(select = {'last_acquisition_date': lad_sql},
+            lad_sql = 'SELECT date FROM astrobin_acquisition '\
+                      'WHERE date IS NOT NULL AND image_id = astrobin_image.id '\
+                      'ORDER BY date DESC '\
+                      'LIMIT 1'
+            qs = qs.extra(select = {'last_acquisition_date': lad_sql},
                             order_by = ['-last_acquisition_date'])
+
+        ########
+        # YEAR #
+        ########
         elif subsection == 'year':
-            if 'year' in request.GET:
-                year = request.GET.get('year')
-                try:
-                    year = int(year)
-                    sqs = sqs.filter(acquisition__date__year = year).extra(
-                        select = {'last_acquisition_date': lad_sql},
-                        order_by = ['-last_acquisition_date']
-                    ).distinct()
-                except ValueError:
-                    sqs = Image.objects.none()
-
-                subtitle = year
-                backlink = "?public&sub=year"
-            else:
-                acq = Acquisition.objects.filter(image__user = user)
+            acq = Acquisition.objects.filter(image__user = user)
+            if acq:
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
+                nd = _("No date specified")
+                menu = [(str(x), str(x)) for x in years] + [(0, nd)]
 
-                k_list = []
-                smart_albums.append(k_list)
+                if active == '0':
+                    qs = qs.filter(
+                        (Q(subject_type__lt = 500) | Q(subject_type = 600)) &
+                        (Q(acquisition = None) | Q(acquisition__date = None))).distinct()
+                else:
+                    if active is None:
+                        if years:
+                            active = str(years[0])
 
-                for y in years:
-                    k_dict = {str(y): {'message': None, 'images': []}}
-                    k_list.append(k_dict)
-                    for i in sqs.filter(acquisition__date__year = y).extra(
-                        select = {'last_acquisition_date': lad_sql},
-                        order_by = ['-last_acquisition_date']
-                    ).distinct():
-                        k_dict[str(y)]['images'].append(i)
+                    if active:
+                        qs = qs.filter(acquisition__date__year = active).distinct()
 
-                l = _("No date specified")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_dict[l]['message'] = _("To fill in the missing dates, use the <strong>Edit acquisition details</strong> entry in the <strong>Actions</strong> menu for each image.")
-                k_list.append(k_dict)
-                for i in sqs.filter(
-                    (Q(subject_type__lt = 500) | Q(subject_type = 600)) &
-                    (Q(acquisition = None) | Q(acquisition__date = None))).distinct():
-                    k_dict[l]['images'].append(i)
-
-                sqs = Image.objects.none()
+        ########
+        # GEAR #
+        ########
         elif subsection == 'gear':
             from templatetags.tags import gear_name
 
-            if 'gear' in request.GET:
-                try:
-                    gear = int(request.GET.get('gear'))
-                except ValueError:
-                    # Probably the Google bot is following some old links, from the time when
-                    # the 'gear' argument was the name of the gear item.
-                    raise Http404
+            telescopes = profile.telescopes.all()
+            cameras = profile.cameras.all()
 
-                sqs = sqs.filter(Q(imaging_telescopes__id = gear) | Q(imaging_cameras__id = gear))
+            nd = _("No imaging telescopes or lenses, or no imaging cameras specified")
+            gi = _("Gear images")
 
-                try:
-                    subtitle = gear_name(Gear.objects.get(id=gear))
-                except Gear.DoesNotExist:
-                    subtitle = ''
+            menu += [(x.id, gear_name(x)) for x in telescopes]
+            menu += [(x.id, gear_name(x)) for x in cameras]
+            menu += [( 0, nd)]
+            menu += [(-1, gi)]
 
-                backlink = "?public&sub=gear"
-            else:
-                k_list = []
-                smart_albums.append(k_list)
-                for qs, filter in {
-                    profile.telescopes.all(): 'imaging_telescopes',
-                    profile.cameras.all(): 'imaging_cameras',
-                }.iteritems():
-                    for k in qs:
-                        name = gear_name(k)
-                        k_dict = {name: {'message': None, 'images': []}}
-                        k_list.append(k_dict)
-                        for i in sqs.filter(**{filter: k}).distinct():
-                            k_dict[name]['images'].append(i)
-
-                l = _("No imaging telescopes or lenses, or no imaging cameras specified")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_dict[l]['message'] = _("To fill in the missing gear, use the <strong>Edit gear used</strong> entry in the <strong>Actions</strong> menu for each image.")
-                k_list.append(k_dict)
-                lacking = sqs.filter(
+            if active == 0:
+                qs = qs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
                     (Q(imaging_telescopes = None) | Q(imaging_cameras = None))).distinct()
-                for i in lacking:
-                    print i.subject_type
-                    k_dict[l]['images'].append(i)
-
-                l = _("Gear images")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(Q(subject_type = 500)).distinct():
-                    k_dict[l]['images'].append(i)
-
-                sqs = Image.objects.none()
-        elif subsection == 'subject':
-            def reverse_subject_type(label):
-                ret = []
-                for key, value in SUBJECT_TYPES.iteritems():
-                    if value == label:
-                        ret.append(key)
-                return ret
-
-            if 'subject' in request.GET:
-                subject_type = request.GET.get('subject')
-                r = reverse_subject_type(subject_type)
-                sqs = sqs.filter(Q(subjects__otype__in = r)).distinct()
-                subtitle = subject_type
-                backlink = "?public&sub=subject"
+            elif active == -1:
+                qs = qs.filter(Q(subject_type = 500)).distinct()
             else:
-                k_list = []
-                smart_albums.append(k_list)
+                if active is None:
+                    if telescopes:
+                        active = telescopes[0].id
+                if active:
+                    qs = qs.filter(Q(imaging_telescopes__id = active) |
+                                     Q(imaging_cameras__id = active)).distinct()
 
-                for l in SUBJECT_LABELS.values():
-                    k_dict = {l: {'message': None, 'images': []}}
-                    k_list.append(k_dict)
-                    r = reverse_subject_type(l)
-                    for i in sqs.filter(Q(subjects__otype__in = r)).distinct():
-                        k_dict[l]['images'].append(i)
+        ###########
+        # SUBJECT #
+        ###########
+        elif subsection == 'subject':
+            menu += [('DEEP', _("Deep sky"))]
+            menu += [('SOLAR',  _("Solar system"))]
+            menu += [('WIDE',   _("Extremely wide field"))]
+            menu += [('TRAILS', _("Star trails"))]
+            menu += [('GEAR', _("Gear"))]
+            menu += [('OTHER', _("Other"))]
+            menu += [('NOSUB', _("No subjects specified"))]
 
-                l = _("Solar system")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(solar_system_main_subject__gte = 0):
-                    k_dict[l]['images'].append(i)
+            if active is None:
+                active = 'DEEP'
 
-                l = _("Extremely wide field")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(subject_type = 300):
-                    k_dict[l]['images'].append(i)
+            if active == 'DEEP':
+                qs = qs.filter(subject_type = 100)
 
-                l = _("Star trails")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(subject_type = 400):
-                    k_dict[l]['images'].append(i)
+            elif active == 'SOLAR':
+                qs = qs.filter(solar_system_main_subject__gte = 0)
 
-                l = _("Gear")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(subject_type = 500):
-                    k_dict[l]['images'].append(i)
+            elif active == 'WIDE':
+                qs = qs.filter(subject_type = 300)
 
-                l = _("Other")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_list.append(k_dict)
-                for i in sqs.filter(subject_type = 600):
-                    k_dict[l]['images'].append(i)
+            elif active == 'TRAILS':
+                qs = qs.filter(subject_type = 400)
 
-                l = _("No subjects specified")
-                k_dict = {l: {'message': None, 'images': []}}
-                k_dict[l]['message'] = _("To fill in the missing subjects, use the <strong>Edit basic information</strong> entry in the <strong>Actions</strong> menu for each image.")
-                k_list.append(k_dict)
-                for i in sqs.filter(
+            elif active == 'GEAR':
+                qs = qs.filter(subject_type = 500)
+
+            elif active == 'OTHER':
+                qs = qs.filter(subject_type = 600)
+
+            elif active == 'NOSUB':
+                qs = qs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
                     (Q(subjects = None)) &
-                    (Q(solar_system_main_subject = None))).distinct():
+                    (Q(solar_system_main_subject = None))).distinct()
 
-                    k_dict[l]['images'].append(i)
-
-                sqs = Image.objects.none()
+        ###########
+        # NO DATA #
+        ###########
         elif subsection == 'nodata':
             k_list = []
-            smart_albums.append(k_list)
 
-            l = _("No subjects specified")
-            k_dict = {l: {'message': None, 'images': []}}
-            k_dict[l]['message'] = _("To fill in the missing subjects, use the <strong>Edit basic information</strong> entry in the <strong>Actions</strong> menu for each image.")
-            k_list.append(k_dict)
-            for i in sqs.filter(
-                (Q(subject_type = 100) | Q(subject_type = 200)) &
-                (Q(subjects = None)) &
-                (Q(solar_system_main_subject = None))):
-                k_dict[l]['images'].append(i)
+            menu += [('SUB',  _("No subjects specified"))]
+            menu += [('GEAR', _("No imaging telescopes or lenses, or no imaging cameras specified"))]
+            menu += [('ACQ',  _("No acquisition details specified"))]
 
-            l = _("No imaging telescopes or lenses, or no imaging cameras specified")
-            k_dict = {l: {'message': None, 'images': []}}
-            k_list.append(k_dict)
-            k_dict[l]['message'] = _("To fill in the missing gear, use the <strong>Edit gear used</strong> entry in the <strong>Actions</strong> menu for each image.")
-            for i in sqs.filter(
-                Q(subject_type__lt = 500) &
-                (Q(imaging_telescopes = None) | Q(imaging_cameras = None))):
-                k_dict[l]['images'].append(i)
+            if active is None:
+                active = 'SUB'
 
-            l = _("No acquisition details specified")
-            k_dict = {l: {'message': None, 'images': []}}
-            k_list.append(k_dict)
-            k_dict[l]['message'] = _("To fill in the missing acquisition details, use the <strong>Edit acquisition details</strong> entry in the <strong>Actions</strong> menu for each image.")
-            for i in sqs.filter(
-                Q(subject_type__lt = 500) &
-                Q(acquisition = None)):
-                k_dict[l]['images'].append(i)
+            if active == 'SUB':
+                qs =  qs.filter(
+                    (Q(subject_type = 100) | Q(subject_type = 200)) &
+                    (Q(subjects = None)) &
+                    (Q(solar_system_main_subject = None)))
 
-            sqs = Image.objects.none()
+            elif active == 'GEAR':
+                qs = qs.filter(
+                    Q(subject_type__lt = 500) &
+                    (Q(imaging_telescopes = None) | Q(imaging_cameras = None)))
 
-        section = 'public'
+            elif active == 'ACQ':
+                qs = qs.filter(
+                    Q(subject_type__lt = 500) &
+                    Q(acquisition = None))
 
-    return object_list(
-        request,
-        queryset=sqs,
-        template_name='user/profile.html',
-        template_object_name='image',
-        paginate_by = 20,
-        extra_context = {'thumbnail_size':settings.THUMBNAIL_SIZE,
-                         'user':user,
-                         'profile':profile,
-                         'follows':follows,
-                         'private_message_form': PrivateMessageForm(),
-                         'section':section,
-                         'subsection':subsection,
-                         'subtitle':subtitle,
-                         'backlink':backlink,
-                         'smart_albums':smart_albums,
-                        })
+
+    # Calculate some stats
+    from django.template.defaultfilters import timesince
+
+    member_since = None
+    date_time = user.date_joined.replace(tzinfo = None)
+    diff = abs(date_time - datetime.datetime.today())
+    span = timesince(date_time)
+    if span == "0 " + _("minutes"):
+        member_since = _("seconds ago")
+    else:
+        member_since = _("%s ago") % span
+
+    last_login = user.last_login
+    if request.user.is_authenticated():
+        viewer_profile = request.user.userprofile
+        last_login = to_user_timezone(user.last_login, viewer_profile)
+
+    followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
+    following = ToggleProperty.objects.filter(
+        property_type = "follow",
+        user = user,
+        content_type = user_ct).count()
+
+    sqs = SearchQuerySet()
+    sqs = sqs.filter(username = user.username).models(Image)
+    sqs = sqs.order_by('-uploaded')
+
+    images = len(sqs)
+    integrated_images = len(sqs.filter(integration__gt = 0))
+    integration = sum([x.integration for x in sqs]) / 3600.0
+    avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
+
+    stats = (
+        (_('Member since'), member_since),
+        (_('Last login'), last_login),
+        (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
+        (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+    )
+
+
+    response_dict = {
+        'followers': followers,
+        'following': following,
+        'image_list': qs,
+        'sort': request.GET.get('sort'),
+        'view': request.GET.get('view', 'default'),
+        'user':user,
+        'profile':profile,
+        'private_message_form': PrivateMessageForm(),
+        'section':section,
+        'subsection':subsection,
+        'active':active,
+        'menu':menu,
+        'stats':stats,
+        'images_no': images,
+        'alias':'gallery',
+    }
+
+    template_name = 'user/profile.html'
+    if request.is_ajax():
+        template_name = 'inclusion_tags/image_list_entries.html'
+
+    return render_to_response(
+        template_name, response_dict,
+        context_instance = RequestContext(request))
 
 
 @require_GET
@@ -1834,7 +1718,7 @@ def user_page_commercial_products(request, username):
     if user != request.user:
         return HttpResponseForbidden()
 
-    profile = get_object_or_404(UserProfile, user = user)
+    profile = user.userprofile
 
     response_dict = {
         'user': user,
@@ -1857,88 +1741,96 @@ def user_page_commercial_products(request, username):
 
 
 @require_GET
-def user_page_favorites(request, username):
+def user_page_bookmarks(request, username):
     user = get_object_or_404(User, username = username)
 
-    return object_list(
-        request,
-        queryset = Image.objects.filter(favorite__user = user),
-        template_name = 'user/favorites.html',
-        template_object_name = 'image',
-        paginate_by = 20,
-        extra_context = {
-            'thumbnail_size': settings.THUMBNAIL_SIZE,
+    image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
+    images = \
+        [x.content_object for x in \
+         ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+            .filter(content_type = image_ct) \
+            .order_by('-created_on')
+        ]
+
+    return render_to_response('user/bookmarks.html',
+        {
             'user': user,
+            'bookmarks': images,
             'private_message_form': PrivateMessageForm(),
-         }
-     )
+        },
+        context_instance = RequestContext(request)
+    )
 
 
 @require_GET
-def user_page_card(request, username):
-    """Shows the user's public page"""
+@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key = 'users_page')
+def user_page_following(request, username, extra_context = None):
     user = get_object_or_404(User, username = username)
-    profile = UserProfile.objects.get(user=user)
 
-    gear_list = [('Telescopes and lenses', profile.telescopes.all(), 'imaging_telescopes'),
-                 ('Mounts'        , profile.mounts.all(), 'mounts'),
-                 ('Cameras'       , profile.cameras.all(), 'imaging_cameras'),
-                 ('Focal reducers', profile.focal_reducers.all(), 'focal_reducers'),
-                 ('Software'      , profile.software.all(), 'software'),
-                 ('Filters'       , profile.filters.all(), 'filters'),
-                 ('Accessories'   , profile.accessories.all(), 'accessories'),
-                ]
+    user_ct = ContentType.objects.get_for_model(User)
+    followed_users = [
+        user_ct.get_object_for_this_type(pk = x.object_id) for x in
+        ToggleProperty.objects.filter(
+            property_type = "follow",
+            user = user,
+            content_type = user_ct)
+    ]
 
-    # Calculate some stats
-    from django.template.defaultfilters import timesince
+    template_name = 'user/following.html'
+    if request.is_ajax():
+        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
 
-    member_since = None
-    date_time = user.date_joined.replace(tzinfo = None)
-    diff = abs(date_time - datetime.datetime.today())
-    span = timesince(date_time)
-    if span == "0 " + _("minutes"):
-        member_since = _("seconds ago")
-    else:
-        member_since = _("%s ago") % span
-
-    last_login = user.last_login
-    if request.user.is_authenticated():
-        viewer_profile = UserProfile.objects.get(user = request.user)
-        last_login = to_user_timezone(user.last_login, viewer_profile)
-
-    sqs = SearchQuerySet()
-    sqs = sqs.filter(username = user.username).models(Image)
-    sqs = sqs.order_by('-uploaded')
-
-    images = len(sqs)
-    integrated_images = len(sqs.filter(integration__gt = 0))
-    integration = sum([x.integration for x in sqs]) / 3600.0
-    avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
-
-    stats = (
-        (_('Member since'), member_since),
-        (_('Last login'), last_login),
-        (_('Images uploaded'), len(sqs)),
-        (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
-        (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+    return render_to_response(template_name,
+        {
+            'request_user': User.objects.get(pk = request.user.pk) if request.user.is_authenticated() else None,
+            'layout': 'inline',
+            'user': user,
+            'user_list': followed_users,
+            'view': request.GET.get('view', 'default'),
+            'STATIC_URL': settings.STATIC_URL,
+            'private_message_form': PrivateMessageForm(),
+        },
+        context_instance = RequestContext(request)
     )
 
-    return render_to_response(
-        'user/card.html',
+
+@require_GET
+@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key = 'users_page')
+def user_page_followers(request, username, extra_context = None):
+    user = get_object_or_404(User, username = username)
+
+    user_ct = ContentType.objects.get_for_model(User)
+    followers = [
+        x.user for x in
+        ToggleProperty.objects.filter(
+            property_type = "follow",
+            object_id = user.pk,
+            content_type = user_ct)
+    ]
+
+    template_name = 'user/followers.html'
+    if request.is_ajax():
+        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
+
+    return render_to_response(template_name,
         {
-            'user':user,
-            'profile':profile,
-            'gear_list':gear_list,
-            'stats':stats,
+            'request_user': User.objects.get(pk = request.user.pk) if request.user.is_authenticated() else None,
+            'layout': 'inline',
+            'user': user,
+            'user_list': followers,
+            'view': request.GET.get('view', 'default'),
+            'STATIC_URL': settings.STATIC_URL,
+            'private_message_form': PrivateMessageForm(),
         },
-        context_instance = RequestContext(request))
+        context_instance = RequestContext(request)
+    )
 
 
 @require_GET
 def user_page_plots(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(User, username = username)
-    profile = UserProfile.objects.get(user=user)
+    profile = user.userprofile
 
     return render_to_response(
         'user/plots.html',
@@ -1956,7 +1848,7 @@ def user_page_api_keys(request, username):
     if user != request.user:
         return HttpResponseForbidden()
 
-    profile = UserProfile.objects.get(user=user)
+    profile = user.userprofile
     keys = App.objects.filter(registrar = user)
 
     return render_to_response(
@@ -1965,29 +1857,6 @@ def user_page_api_keys(request, username):
             'user': user,
             'profile': profile,
             'api_keys': keys,
-        },
-        context_instance = RequestContext(request))
-
-
-@require_GET
-def user_page_votes(request, username):
-    """Shows the user's API Keys"""
-    if not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    user = get_object_or_404(User, username = username)
-    profile = UserProfile.objects.get(user=user)
-    votes = Vote.objects.filter(
-        content_type__app_label = 'astrobin',
-        content_type__model = 'image',
-        user = user).order_by('score')
-
-    return render_to_response(
-        'user/votes.html',
-        {
-            'user': user,
-            'profile': profile,
-            'votes': votes,
         },
         context_instance = RequestContext(request))
 
@@ -2100,7 +1969,7 @@ def stats_get_affiliated_gear_views_ajax(request, username, period = 'monthly'):
 @require_GET
 def user_profile_edit_basic(request):
     """Edits own profile"""
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     form = UserProfileEditBasicForm(instance = profile)
 
     response_dict = {
@@ -2116,7 +1985,7 @@ def user_profile_edit_basic(request):
 def user_profile_save_basic(request):
     """Saves the form"""
 
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     form = UserProfileEditBasicForm(data=request.POST, instance = profile)
     response_dict = {'form': form}
 
@@ -2134,7 +2003,7 @@ def user_profile_save_basic(request):
 @login_required
 @user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
 def user_profile_edit_commercial(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     if request.method == 'POST':
         form = UserProfileEditCommercialForm(data=request.POST, instance = profile)
 
@@ -2155,7 +2024,7 @@ def user_profile_edit_commercial(request):
 @login_required
 @user_passes_test(lambda u: user_is_retailer(u))
 def user_profile_edit_retailer(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     if request.method == 'POST':
         form = UserProfileEditRetailerForm(data=request.POST, instance = profile)
 
@@ -2176,7 +2045,7 @@ def user_profile_edit_retailer(request):
 @login_required
 @require_GET
 def user_profile_edit_license(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     form = DefaultImageLicenseForm(instance = profile)
     return render_to_response(
         'user/profile/edit/license.html',
@@ -2187,7 +2056,7 @@ def user_profile_edit_license(request):
 @login_required
 @require_POST
 def user_profile_save_license(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     form = DefaultImageLicenseForm(data = request.POST, instance = profile)
 
     if not form.is_valid():
@@ -2206,7 +2075,7 @@ def user_profile_save_license(request):
 @require_GET
 def user_profile_edit_gear(request):
     """Edits own profile"""
-    profile = UserProfile.objects.get(user=request.user)
+    profile = request.user.userprofile
 
     def uniq(seq):
        # Not order preserving
@@ -2244,7 +2113,7 @@ def user_profile_edit_gear(request):
 @login_required
 @require_POST
 def user_profile_edit_gear_remove(request, id):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     gear, gear_type = get_correct_gear(id)
     if not gear:
         raise Http404
@@ -2257,7 +2126,7 @@ def user_profile_edit_gear_remove(request, id):
 @login_required
 @require_GET
 def user_profile_edit_locations(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     LocationsFormset = inlineformset_factory(
         UserProfile, Location, form = LocationEditForm, extra = 1)
 
@@ -2273,7 +2142,7 @@ def user_profile_edit_locations(request):
 @login_required
 @require_POST
 def user_profile_save_locations(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     LocationsFormset = inlineformset_factory(
         UserProfile, Location, form = LocationEditForm, extra = 1)
     formset = LocationsFormset(data = request.POST, instance = profile)
@@ -2297,7 +2166,7 @@ def user_profile_save_locations(request):
 def user_profile_save_gear(request):
     """Saves the form"""
 
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
 
     profile.telescopes.clear()
     profile.mounts.clear()
@@ -2435,7 +2304,7 @@ def user_profile_flickr_import(request):
                     destination.write(file.read())
                     destination.close()
 
-                    profile = UserProfile.objects.get(user = request.user)
+                    profile = request.user.userprofile
                     image = Image(filename=filename, original_ext=original_ext,
                                   user=request.user,
                                   title=title if title is not None else '',
@@ -2443,7 +2312,6 @@ def user_profile_flickr_import(request):
                                   subject_type = 600, # Default to Other only when doing a Flickr import
                                   license = profile.default_license)
                     image.save()
-                    image.process()
 
         return ajax_response(response_dict)
 
@@ -2473,7 +2341,7 @@ def flickr_auth_callback(request):
 @login_required
 @require_POST
 def user_profile_seen_realname(request):
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     profile.seen_realname = True
     profile.save()
 
@@ -2484,12 +2352,12 @@ def user_profile_seen_realname(request):
 @require_GET
 def user_profile_edit_preferences(request):
     """Edits own preferences"""
-    profile = UserProfile.objects.get(user=request.user)
+    profile = request.user.userprofile
     form = UserProfileEditPreferencesForm(instance=profile)
     response_dict = {
         'form': form,
     }
-    email_medium = "1" # see NOTICE_MEDIA in notifications/models.py
+    email_medium = 0 # see NOTICE_MEDIA in notifications/models.py
     email_default = NOTICE_MEDIA_DEFAULTS[email_medium]
     notice_settings = NoticeSetting.objects.filter(
         user=request.user,
@@ -2516,7 +2384,7 @@ def user_profile_edit_preferences(request):
 def user_profile_save_preferences(request):
     """Saves the form"""
 
-    profile = UserProfile.objects.get(user=request.user)
+    profile = request.user.userprofile
     form = UserProfileEditPreferencesForm(data=request.POST, instance=profile)
     response_dict = {'form': form}
 
@@ -2531,7 +2399,7 @@ def user_profile_save_preferences(request):
             activate(lang)
 
         # save the notification settings
-        email_medium = "1" # see NOTICE_MEDIA in notifications/models.py
+        email_medium = 0 # see NOTICE_MEDIA in notifications/models.py
         for notice_type in NOTICE_TYPES:
             if notice_type[3] == 2:
                 label = notice_type[0]
@@ -2560,156 +2428,6 @@ def user_profile_save_preferences(request):
 
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect("/profile/edit/preferences/");
-
-
-@login_required
-@require_GET
-def follow(request, username):
-    from_profile = UserProfile.objects.get(user=request.user)
-    to_user = get_object_or_404(User, username=username)
-    to_profile = get_object_or_404(UserProfile, user=to_user)
-
-    if to_profile not in from_profile.follows.all():
-        from_profile.follows.add(to_profile)
-
-    push_notification([to_user], 'new_follower',
-                      {'object':request.user.username,
-                       'object_url':from_profile.get_absolute_url()})
-    push_notification([request.user], 'follow_success',
-                      {'object':username,
-                       'object_url':to_profile.get_absolute_url()})
-
-    if request.is_ajax():
-        return ajax_success()
-    else:
-        next_page = '/'
-        if 'next' in request.GET:
-            next_page = request.GET.get('next')
-        return HttpResponseRedirect(next_page)
-
-
-@login_required
-@require_GET
-def unfollow(request, username):
-    from_profile = UserProfile.objects.get(user=request.user)
-    to_user = get_object_or_404(User, username=username)
-    to_profile = get_object_or_404(UserProfile, user=to_user)
-
-    if to_profile in from_profile.follows.all():
-        from_profile.follows.remove(to_profile)
-
-    push_notification([request.user], 'unfollow_success',
-                      {'object':username,
-                       'object_url':to_profile.get_absolute_url()})
-
-    if request.is_ajax():
-        return ajax_success()
-    else:
-        next_page = '/'
-        if 'next' in request.GET:
-            next_page = request.GET.get('next')
-        return HttpResponseRedirect(next_page)
-
-
-@login_required
-@require_GET
-def follow_gear(request, id):
-    gear = get_object_or_404(Gear, id = id)
-    profile = UserProfile.objects.get(user = request.user)
-
-    if gear not in profile.follows_gear.all():
-        profile.follows_gear.add(gear)
-        profile.save()
-        if request.is_ajax():
-            return ajax_success()
-        else:
-            next_page = '/'
-            if 'next' in request.GET:
-                next_page = request.GET.get('next')
-            return HttpResponseRedirect(next_page)
-
-    return ajax_fail()
-
-
-@login_required
-@require_GET
-def unfollow_gear(request, id):
-    gear = get_object_or_404(Gear, id = id)
-    profile = UserProfile.objects.get(user = request.user)
-
-    if gear in profile.follows_gear.all():
-        profile.follows_gear.remove(gear)
-        profile.save()
-        if request.is_ajax():
-            return ajax_success()
-        else:
-            next_page = '/'
-            if 'next' in request.GET:
-                next_page = request.GET.get('next')
-            return HttpResponseRedirect(next_page)
-
-    return ajax_fail()
-
-
-@login_required
-@require_GET
-def follow_subject(request, id):
-    subject = get_object_or_404(Subject, id = id)
-    profile = UserProfile.objects.get(user = request.user)
-
-    if subject not in profile.follows_subjects.all():
-        profile.follows_subjects.add(subject)
-        profile.save()
-        if request.is_ajax():
-            return ajax_success()
-        else:
-            next_page = '/'
-            if 'next' in request.GET:
-                next_page = request.GET.get('next')
-            return HttpResponseRedirect(next_page)
-
-    return ajax_fail()
-
-
-@login_required
-@require_GET
-def unfollow_subject(request, id):
-    subject = get_object_or_404(Subject, id = id)
-    profile = UserProfile.objects.get(user = request.user)
-
-    if subject in profile.follows_subjects.all():
-        profile.follows_subjects.remove(subject)
-        profile.save()
-        if request.is_ajax():
-            return ajax_success()
-        else:
-            next_page = '/'
-            if 'next' in request.GET:
-                next_page = request.GET.get('next')
-            return HttpResponseRedirect(next_page)
-
-    return ajax_fail()
-
-
-@login_required
-@require_GET
-def mark_notifications_seen(request):
-    for n in notification.Notice.objects.filter(user=request.user):
-        n.is_unseen()
-    return ajax_success()
-
-
-@login_required
-@require_GET
-def notifications(request):
-    for n in notification.Notice.objects.filter(user=request.user):
-        n.is_unseen()
-
-    return object_list(
-        request,
-        queryset=notification.Notice.objects.filter(user=request.user),
-        template_name='notification/all.html',
-        template_object_name='notification')
 
 
 @login_required
@@ -2751,7 +2469,6 @@ def bring_to_attention(request, id):
     form = BringToAttentionForm()
 
     response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
         'form': form,
         'image': image,
     }
@@ -2769,7 +2486,6 @@ def bring_to_attention_process(request):
     image = get_object_or_404(Image, id=image_id)
 
     response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
         'form': form,
         'image': image,
     }
@@ -2789,7 +2505,7 @@ def bring_to_attention_process(request):
     push_notification(recipients, 'attention_request',
                       {'object':image,
                        'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
-                       'originator':request.user,
+                       'originator':request.user.userprofile,
                        'originator_url': request.user.get_absolute_url()})
 
     return HttpResponseRedirect('/%d/bring-to-attention/complete/' % image.id)
@@ -2801,7 +2517,6 @@ def bring_to_attention_complete(request, id):
     image = get_object_or_404(Image, id=id)
 
     response_dict = {
-        'thumbnail_size': settings.THUMBNAIL_SIZE,
         'image': image,
     }
     return render_to_response(
@@ -2813,11 +2528,11 @@ def bring_to_attention_complete(request, id):
 @login_required
 @require_POST
 def image_revision_upload_process(request):
+    # TODO: unify Image and ImageRevision
     def upload_error(image):
         messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
         return HttpResponseRedirect(image.get_absolute_url())
 
-    file = None
     image_id = request.POST['image_id']
     image = Image.objects.get(id=image_id)
 
@@ -2826,28 +2541,21 @@ def image_revision_upload_process(request):
         return HttpResponseRedirect(image.get_absolute_url())
 
     form = ImageRevisionUploadForm(request.POST, request.FILES)
+
     if not form.is_valid():
         return upload_error(image)
-    file = request.FILES["file"]
 
-    filename, original_ext = str(uuid4()), os.path.splitext(file.name)[1]
-    original_ext = original_ext.lower()
-    if original_ext == '.jpeg':
-        original_ext = '.jpg'
-    if original_ext not in ('.jpg', '.png', '.gif'):
+    image_file = request.FILES["image_file"]
+    ext = os.path.splitext(image_file.name)[1].lower()
+    if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error(image)
 
     try:
         from PIL import Image as PILImage
-        trial_image = PILImage.open(file)
+        trial_image = PILImage.open(image_file)
         trial_image.verify()
     except:
         return upload_error(image)
-
-    destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
-    for chunk in file.chunks():
-        destination.write(chunk)
-    destination.close()
 
     revisions = ImageRevision.objects.filter(image = image).order_by('id')
     highest_label = 'A'
@@ -2859,16 +2567,16 @@ def image_revision_upload_process(request):
     image.is_final = False
     image.save()
 
-    image_revision = ImageRevision(
-        image = image,
-        filename = filename,
-        original_ext = original_ext,
-        is_final = True,
-        label = base26_encode(ord(highest_label) - ord('A') + 1),
-    )
-    image_revision.save()
-    image_revision.process()
+    image_revision = form.save(commit = False)
+    image_revision.user = request.user
+    image_revision.image = image
+    image_revision.is_final = True
+    image_revision.label = base26_encode(ord(highest_label) - ord('A') + 1)
 
+    image_revision.image_file.file.seek(0) # Because we opened it with PIL
+    image_revision.save()
+
+    messages.success(request, _("Image uploaded. Thank you!"))
     return HttpResponseRedirect(image_revision.get_absolute_url())
 
 
@@ -2913,21 +2621,19 @@ def leaderboard(request):
         raise Http404
 
     sqs = SearchQuerySet()
-    sort = '-rating'
+    sort = '-normalized_likes'
     if 'sort' in request.GET:
         sort = request.GET.get('sort')
-        if sort == 'rating':
-            sort = '-rating'
+        if sort == 'likes':
+            sort = '-normalized_likes'
+        elif sort == 'followers':
+            sort = '-followers'
         elif sort == 'integration':
             sort = '-integration'
-        elif sort == 'avg_integration':
-            sort = '-avg_integration'
         elif sort == 'images':
             sort = '-images'
-        elif sort == 'comments':
-            sort = '-comments_written'
         else:
-            sort = '-integration'
+            sort = '-normalized_likes'
 
     queryset = sqs.models(User).order_by(sort)
 
@@ -3027,7 +2733,7 @@ def set_language(request, lang):
         activate(lang)
 
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user = request.user)
+        profile = request.user.userprofile
         profile.language = lang
         profile.save()
 
@@ -3167,7 +2873,7 @@ def save_gear_details(request):
 
     form.save()
 
-    profile = UserProfile.objects.get(user = request.user)
+    profile = request.user.userprofile
     user_gear = getattr(profile, user_gear_lookup[gear_type])
     if gear not in user_gear.all():
         user_gear.add(gear)
@@ -3245,38 +2951,12 @@ def save_gear_user_info(request):
     return ajax_success()
 
 
-@require_GET
-@login_required
-@never_cache
-def favorite_ajax(request, id):
-    image = get_object_or_404(Image, pk=id)
-
-    f, created = Favorite.objects.get_or_create(image = image, user = request.user)
-    if not created:
-        f.delete()
-
-    if image.user != request.user and created:
-        push_notification(
-            [image.user], 'new_favorite',
-            {
-                'url': settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
-                'user': request.user,
-            }
-        )
-
-    return HttpResponse(
-        simplejson.dumps({
-            'created': created,
-            'favorites': Favorite.objects.filter(image = image).count(),
-        }),
-        mimetype = 'application/javascript')
-
 
 @require_GET
 @never_cache
 def gear_popover_ajax(request, id):
     gear, gear_type = get_correct_gear(id)
-    profile = UserProfile.objects.get(user = request.user) \
+    profile = request.user.userprofile \
               if request.user.is_authenticated() \
               else None
     template = 'popover/gear.html'
@@ -3296,46 +2976,13 @@ def gear_popover_ajax(request, id):
     elif gear_type == 'Accessory':
         template = 'popover/gear_accessory.html'
 
-    follows = Gear.objects.get(id = gear.id) in profile.follows_gear.all() \
-              if profile \
-              else False
     html = render_to_string(template,
         {
+            'request': request,
             'user': request.user,
             'gear': gear,
-            'follows': follows,
             'is_authenticated': request.user.is_authenticated(),
             'IMAGES_URL': settings.IMAGES_URL,
-        })
-
-    response_dict = {
-        'success': True,
-        'html': html,
-    }
-
-    return HttpResponse(
-        simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
-
-
-@require_GET
-@never_cache
-def subject_popover_ajax(request, id):
-    subject = get_object_or_404(Subject, id = id)
-    template = 'popover/subject.html'
-    profile = UserProfile.objects.get(user = request.user) \
-              if request.user.is_authenticated() \
-              else None
-
-    follows = subject in profile.follows_subjects.all() \
-              if profile \
-              else False
-
-    html = render_to_string(template,
-        {
-            'subject': subject,
-            'follows': follows,
-            'is_authenticated': request.user.is_authenticated(),
         })
 
     response_dict = {
@@ -3353,13 +3000,9 @@ def subject_popover_ajax(request, id):
 def user_popover_ajax(request, username):
     user = get_object_or_404(User, username = username)
     template = 'popover/user.html'
-    profile = UserProfile.objects.get(user = request.user) \
+    profile = request.user.userprofile \
               if request.user.is_authenticated() \
               else None
-
-    follows = user in profile.follows.all() \
-              if profile \
-              else False
 
     from django.template.defaultfilters import timesince
 
@@ -3378,8 +3021,8 @@ def user_popover_ajax(request, username):
             'user': user,
             'images': Image.objects.filter(user = user).count(),
             'member_since': member_since,
-            'follows': follows,
             'is_authenticated': request.user.is_authenticated(),
+            'request': request,
         })
 
     response_dict = {
@@ -3390,38 +3033,6 @@ def user_popover_ajax(request, username):
     return HttpResponse(
         simplejson.dumps(response_dict),
         mimetype = 'application/javascript')
-
-
-
-@require_GET
-def subject_page(request, id):
-    subject = get_object_or_404(Subject, id = id)
-
-    all_images = Image.objects.filter(subjects = subject)
-
-    integration_list = DeepSky_Acquisition.objects \
-        .filter(image__subjects = subject) \
-        .exclude(Q(number = None) | Q(duration = None)) \
-        .values_list('number', 'duration')
-
-    total_integration = '0'
-    if integration_list:
-        total_integration = '%.2f' % \
-            (reduce(lambda x, y: x+y,
-                    [x[0]*x[1] for x in integration_list]) \
-            / 3600.00)
-
-    return object_detail(
-        request,
-        queryset = Subject.objects.all(),
-        object_id = id,
-        template_name = 'subject/page.html',
-        template_object_name = 'subject',
-        extra_context = {
-            'examples': all_images.order_by('-rating_score')[:10],
-            'total_images': all_images.count(),
-            'total_integration': total_integration,
-        })
 
 
 @require_GET
@@ -3475,8 +3086,7 @@ def gear_page(request, id, slug):
         template_name = 'gear/page.html',
         template_object_name = 'gear',
         extra_context = {
-            'examples': all_images.order_by('-rating_score')[:30],
-            'small_size': settings.SMALL_THUMBNAIL_SIZE,
+            'examples': all_images[:28],
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
             'reviews': ReviewedItem.objects.filter(gear = gear),
             'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
@@ -4221,28 +3831,4 @@ def retailed_products_edit(request, id):
             'gear': Gear.objects.filter(retailed = product)[0],
         },
         context_instance = RequestContext(request))
-
-
-@require_GET
-def comments(request):
-    return object_list(
-        request,
-        queryset = NestedComment.objects.all().filter(deleted = False).order_by('-updated'),
-        template_name = 'comments.html',
-        template_object_name = 'comment',
-        paginate_by = 100,
-        extra_context = {})
-
-
-@require_GET
-def reviews(request):
-    return object_list(
-        request,
-        queryset = ReviewedItem.objects.all().order_by('-date_added'),
-        template_name = 'reviews.html',
-        template_object_name = 'review',
-        paginate_by = 100,
-        extra_context = {
-        })
-
 

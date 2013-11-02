@@ -1,0 +1,45 @@
+{% load i18n %}
+{% load static %}
+
+<div id="platesolving-status" class="hide">
+    <div class="progress progress-striped progress-info active">
+        <div class="bar" style="width:10%"></div>
+        <span class="progress-content">
+            <strong><i class="icon-warning-sign"></i></strong>
+            <span class="progress-text">
+                {% trans "Getting plate-solving status, please wait..." %}
+            </span>
+        </span>
+    </div>
+</div>
+
+<script src="{% get_static_prefix %}astrobin_apps_platesolving/js/astrobin_apps_platesolving.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var $img = $('.main-image img').first();
+
+        function attemptPlatesolving()  {
+            if ($img.attr('data-loaded') == 'true') {
+                var solving = new AstroBinPlatesolving({
+                    object_id: {{object_id}},
+                    content_type_id: {{content_type_id}},
+                    solution_id: {{solution_id}},
+
+                    beforeSolveMsg    : "{% trans "Plate-solving process starting, please do not leave this page..." %}",
+                    solveStartedMsg   : "{% trans "Plate-solving started in the background. You may leave this page." %}",
+                    solveFinalizingMsg: "{% trans "Plate-solving almost ready, please do not leave this page..." %}",
+                    solveFailedMsg    : "{% trans "This image could not be plate-solved." %}",
+                    solveSuccessMsg   : "{% trans "This image has been successfully plate-solved. Please refresh the page to see the new data." %}"
+                });
+
+                solving.process();
+            } else {
+                setTimeout(function() {
+                    attemptPlatesolving()
+                }, 2000);
+            }
+        }
+
+        attemptPlatesolving();
+    });
+</script>

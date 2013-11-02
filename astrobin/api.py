@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db.models import Q
 
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
@@ -30,20 +31,51 @@ class AppAuthentication(Authentication):
 
 class ImageRevisionResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
+    url_thumb = fields.CharField()
+    url_gallery = fields.CharField()
+    url_regular = fields.CharField()
+    url_hd = fields.CharField()
+    url_real = fields.CharField()
+
+    is_solved = fields.BooleanField()
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.filter(image__is_stored = True, image__is_wip = False)
+        queryset = ImageRevision.objects.filter(image__is_wip = False)
         fields = [
             'uploaded',
             'w',
             'h',
-            'is_solved',
+
+            'url_thumb',
+            'url_gallery',
+            'url_regular',
+            'url_hd',
+            'url_real',
+
             'is_final',
-            'filename',
-            'original_ext'
+            'is_solved',
         ]
+
         allowed_methods = ['get']
+
+    def dehydrate_url_thumb(self, bundle):
+        return '%s/%d/%s/rawthumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_url_gallery(self, bundle):
+        return '%s/%d/%s/rawthumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_url_regular(self, bundle):
+        return '%s/%d/%s/rawthumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_url_hd(self, bundle):
+        return '%s/%d/%s/rawthumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_url_real(self, bundle):
+        return '%s/%d/%s/rawthumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_is_solved(self, bundle):
+        return bundle.obj.solution != None
 
 
 class ImageResource(ModelResource):
@@ -58,15 +90,27 @@ class ImageResource(ModelResource):
     uploaded = fields.DateField('uploaded')
     updated = fields.DateField('updated')
 
+    url_thumb = fields.CharField()
+    url_gallery = fields.CharField()
+    url_regular = fields.CharField()
+    url_hd = fields.CharField()
+    url_real = fields.CharField()
+
+    is_solved = fields.BooleanField()
+
     class Meta:
         authentication = AppAuthentication()
-        queryset = Image.objects.filter(is_stored = True, is_wip = False)
+        queryset = Image.objects.filter(is_wip = False)
         fields = [
             'id',
             'title',
 
-            'filename',
-            'original_ext',
+            'url_thumb',
+            'url_gallery',
+            'url_regular',
+            'url_hd',
+            'url_real',
+
             'uploaded',
             'description',
             'h',
@@ -74,41 +118,48 @@ class ImageResource(ModelResource):
             'animated',
             'link',
             'link_to_fits',
-            'rating_score',
-            'rating_votes',
-            'is_solved',
             'license',
+            # TODO: likes
 
             'is_final',
-
-            'ra_center_hms',
-            'dec_center_dms',
-            'orientation',
-            'pixel_scale',
-            'fieldw',
-            'fieldh',
-            'fieldunits',
+            'is_solved',
         ]
         allowed_methods = ['get']
+
         filtering = {
             'title': ALL,
             'description': ALL,
-            'is_solved': ('exact',),
+            'is_solved': ALL,
             'user': ALL_WITH_RELATIONS,
             'uploaded': ALL,
-            'fieldw': ALL,
-            'fieldh': ALL,
-            'fieldunits': ALL,
             'imaging_telescopes': ALL,
             'imaging_cameras': ALL,
         }
-        ordering = ['rating_score', 'rating_votes', 'uploaded']
+        ordering = ['uploaded']
+
+    def dehydrate_url_thumb(self, bundle):
+        return '%s/%d/0/rawthumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_gallery(self, bundle):
+        return '%s/%d/0/rawthumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_regular(self, bundle):
+        return '%s/%d/0/rawthumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_hd(self, bundle):
+        return '%s/%d/0/rawthumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_real(self, bundle):
+        return '%s/%d/0/rawthumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_is_solved(self, bundle):
+        return bundle.obj.solution != None
 
     def dehydrate_subjects(self, bundle):
-        subjects = bundle.obj.subjects.all()
+        subjects = bundle.obj.objects_in_field
         ssms = bundle.obj.solar_system_main_subject
 
-        ret = [x.mainId for x in subjects]
+        ret = subjects
 
         if ssms:
             ret.append(SOLAR_SYSTEM_SUBJECT_CHOICES[ssms][1])
@@ -123,27 +174,18 @@ class ImageResource(ModelResource):
         cameras = bundle.obj.imaging_cameras.all()
         return [gear_name(x) for x in cameras]
 
-    def build_filters(self, filters = None):
-        if filters is None:
-            filters = {}
-
-        orm_filters = super(ImageResource, self).build_filters(filters)
-
-        if 'subject' in filters:
-            qs = Image.objects.filter(
-                Q(subjects__mainId = filters['subject']) |
-                Q(subjects__idlist__identifier = filters['subject']))
-            orm_filters['pk__in'] = [i.pk for i in qs]
-
-        return orm_filters
-
 
 class ImageOfTheDayResource(ModelResource):
+    image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
+    runnerup_1 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_1')
+    runnerup_2 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_2')
+
     class Meta:
         authentication = AppAuthentication()
         queryset = ImageOfTheDay.objects.all()
         fields = [
             'image',
-            'filename',
+            'runnerup_1',
+            'runnerup_2',
             'date',
         ]

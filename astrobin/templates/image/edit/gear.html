@@ -6,18 +6,12 @@
 {% block title %}AstroBin - {% trans "Edit your image: gear used" %}{% endblock %}
 
 {% block content %}
-    {% if image.is_stored %}
-        {% include 'image/edit/menu.html' %}
-    {% endif %}
+    {% include 'image/edit/menu.html' %}
 
     <h1>
-    {% if image.is_stored %}
         {% trans "Edit your image: gear used" %}
-    {% else %}
-        {% trans "Step 4 of 5: gear used" %}
-    {% endif %}
     </h1>
-    
+
     <div class="well">
         {% if no_gear %}
             {% url profile_edit_gear as the_url %}
@@ -49,13 +43,8 @@
         <input type="hidden" name="image_id" value="{{image.id}}" />
 
         <div class="form-actions">
-            {% if image.is_stored %}
-                <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
-                <a class="btn" href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a>
-            {% else %}
-                <input class="btn btn-primary" type="submit" name="submit_next" value="{% trans "Next step: acquisition" %} &rarr;" /></li>
-                <input type="hidden" name="was_not_ready" value="true"/></li>
-            {% endif %}
+            <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
+            <a class="btn" href="{{image.get_absolute_url}}/">{% trans "Return to image" %}</a>
         </div>
     </form>
 {% endblock %}

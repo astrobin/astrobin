@@ -9,12 +9,7 @@ from django.db.models import Q
 class ImageAdmin(admin.ModelAdmin):
     fields = (
         'title',
-        'subjects',
         'description',
-        'focal_length',
-        'pixel_size',
-        'binning',
-        'scaling',
         'imaging_telescopes',
         'guiding_telescopes',
         'mounts',
@@ -42,31 +37,11 @@ class UserProfileAdmin(admin.ModelAdmin):
         'software',
         'filters',
         'accessories',
-        'follows',
         'default_license',
         'language'
     )
 
     search_fields = ('user__username',)
-    actions = ['suspend_from_voting', 'allow_voting',]
-
-    def suspend_from_voting(modeladmin, request, queryset):
-        for profile in queryset:
-            profile.suspended_from_voting = True
-            profile.save()
-
-        return HttpResponseRedirect('/admin/astrobin/userprofile/')
-    suspend_from_voting.short_description = 'Suspend from voting'
-
-
-    def allow_voting(modeladmin, request, queryset):
-        for profile in queryset:
-            profile.suspended_from_voting = False
-            profile.save()
-
-        return HttpResponseRedirect('/admin/astrobin/userprofile/')
-    allow_voting.short_description = 'Allow voting'
-
 
 class GearAdmin(admin.ModelAdmin):
     list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
@@ -214,7 +189,6 @@ class AppAdmin(admin.ModelAdmin):
 class ImageOfTheDayAdmin(admin.ModelAdmin):
     list_display = (
         'image',
-        'filename',
         'date',
     )
     ordering = ('-date',)
@@ -232,8 +206,6 @@ admin.site.register(FocalReducer)
 admin.site.register(Software)
 admin.site.register(Filter)
 admin.site.register(Accessory)
-admin.site.register(Subject)
-admin.site.register(SubjectIdentifier)
 admin.site.register(DeepSky_Acquisition)
 admin.site.register(SolarSystem_Acquisition)
 admin.site.register(Image, ImageAdmin)
@@ -243,8 +215,6 @@ admin.site.register(ImageRequest)
 admin.site.register(ABPOD)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Location)
-admin.site.register(MessierMarathon)
-admin.site.register(MessierMarathonNominations)
 admin.site.register(AppApiKeyRequest, AppApiRequestAdmin)
 admin.site.register(App, AppAdmin)
 admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)

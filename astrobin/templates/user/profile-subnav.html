@@ -23,7 +23,7 @@
                     {% endif %}
                 {% endifequal %}
                 <li>
-                    <a href="{% url 'user_page' user %}{% query_string "public=" "sub" %}">
+                    <a href="{% url 'user_page' user %}{% query_string "public=" "sub,active" %}">
                         <i class="icon-picture"></i>
                         {% trans "Gallery" %}
                     </a>
@@ -37,15 +37,9 @@
                 </li>
                 {% endif %}
                 <li>
-                    <a href="{% url 'user_page_favorites' user %}">
-                        <i class="icon-heart"></i>
-                        {% trans "Favorites" %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'user_page_card' user %}">
-                        <i class="icon-list-alt"></i>
-                        {% trans "Technical card" %}
+                    <a href="{% url 'user_page_bookmarks' user %}">
+                        <i class="icon-bookmark"></i>
+                        {% trans "Bookmarks" %}
                     </a>
                 </li>
                 <li>
@@ -58,13 +52,13 @@
                 {% ifequal user request.user %}
                 <li class="divider"></li>
                 <li>
-                    <a href="{% query_string "public=" "sub" %}">
+                    <a href="{% query_string "" "sub,active,staging" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% query_string "staging=" "sub,public" %}">
+                    <a href="{% query_string "staging=" "sub,public,active" %}">
                         <i class="icon-lock"></i>
                         {% trans "Staging Area" %}
                     </a>
@@ -78,15 +72,19 @@
                 </li>
                 {% endifequal %}
 
-                {% if request.user.is_superuser %}
-                    <li class="divider"></li>
-                    <li>
-                        <a href="{% url 'user_page_votes' user %}">
-                            <i class="icon-star"></i>
-                            {% trans "Votes" %}
-                        </a>
-                    </li>
-                {% endif %}
+                <li class="divider"></li>
+                <li>
+                    <a href="{% url 'user_page_following' user %}">
+                        <i class="icon-eye-open"></i>
+                        {% trans "Following" %}
+                    </a>
+
+                <li>
+                    <a href="{% url 'user_page_followers' user %}">
+                        <i class="icon-eye-open"></i>
+                        {% trans "Followers" %}
+                    </a>
+                </li>
             </ul>
         </li>
 
@@ -98,18 +96,6 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li>
-                    <a class="{% if follows %}unfollow{% else %}follow{% endif %}"
-                       href="{% if follows %}{% url 'unfollow' user %}{% else %}{% url 'follow' user %}{% endif %}{% query_string "next=request.path" "plate_solving_started" %}">
-                        {% if follows %}
-                            <i class="icon-eye-close"></i>
-                            {% trans "Stop following" %}
-                        {% else %}
-                            <i class="icon-eye-open"></i>
-                            {% trans "Follow" %}
-                        {% endif %}
-                    </a>
-                </li>
                 <li>
                     <a class="send-private-message" href="{% url 'messages_compose_to' user %}{% query_string "next=request.path" "" %}">
                         <i class="icon-envelope"></i>
@@ -127,23 +113,23 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{% query_string "public=,sub=uploaded" "staging" %}">
+                <li><a href="{% query_string "public=,sub=uploaded" "staging,active" %}">
                     <i class="icon-upload-alt"></i>
                     {% trans "Upload time" %}</a></li>
-                <li><a href="{% query_string "public=,sub=acquired" "staging" %}">
+                <li><a href="{% query_string "public=,sub=acquired" "staging,active" %}">
                     <i class="icon-time"></i>
                     {% trans "Acquisition time" %}</a></li>
-                <li><a href="{% query_string "public=,sub=subject" "staging" %}">
+                <li><a href="{% query_string "public=,sub=subject" "staging,active" %}">
                     <i class="icon-tags"></i>
                     {% trans "Subject type" %}</a></li>
-                <li><a href="{% query_string "public=,sub=year" "staging" %}">
+                <li><a href="{% query_string "public=,sub=year" "staging,active" %}">
                     <i class="icon-calendar"></i>
                     {% trans "Year" %}</a></li>
-                <li><a href="{% query_string "public=,sub=gear" "staging" %}">
+                <li><a href="{% query_string "public=,sub=gear" "staging,active" %}">
                     <i class="icon-cog"></i>
                     {% trans "Gear" %}</a></li>
                 <li class="divider"></li>
-                <li><a href="{% query_string "public=,sub=nodata" "staging" %}">
+                <li><a href="{% query_string "public=,sub=nodata" "staging,active" %}">
                     <i class="icon-warning-sign"></i>
                     {% trans "Lacking data" %}</a></li>
             </ul>

@@ -1,9 +1,9 @@
-{% load i18n %}
+{% load astrobin_apps_images_tags %}
 {% load common_tags %}
-{% load tags %}
 {% load compressed %}
-
 {% load hitcount_tags %}
+{% load i18n %}
+{% load tags %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -71,29 +71,18 @@
                             {% with request.GET.mod as mod %}
                                 <ul class="dropdown-menu">
                                     <li>
-                                        {% if is_revision %}
-                                            <a href="{% url image_detail revision_image.image.id revision_image.label %}{% query_string "mod=mod" "" %}">
-                                        {% else %}
-                                            <a href="{% url image_detail image.id 0 %}{% query_string "mod=mod" "" %}">
-                                        {% endif %}
+                                        <a href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
                                             {% blocktrans %}Technical card{% endblocktrans %}
                                         </a>
                                     </li>
+
                                     <li>
                                         {% if real %}
-                                            {% if is_revision %}
-                                                <a href="{% url image_full revision_image.image.id revision_image.label %}{% query_string "mod=mod" "real" %}">
-                                            {% else %}
-                                                <a href="{% url image_full image.id 0 %}{% query_string "mod=mod" "real" %}">
-                                            {% endif %}
+                                            <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
                                                 {% blocktrans %}Fit to window{% endblocktrans %}
                                             </a>
                                         {% else %}
-                                            {% if is_revision %}
-                                                <a href="{% url image_full revision_image.image.id revision_image.label %}{% query_string "mod=mod,real=''" "" %}">
-                                            {% else %}
-                                                <a href="{% url image_full image.id 0 %}{% query_string "mod=mod,real=''" "" %}">
-                                            {% endif %}
+                                                <a href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
                                                 {% blocktrans %}Full resolution{% endblocktrans %}
                                             </a>
                                         {% endif %}
@@ -107,60 +96,11 @@
         </div>
 
         <div id="full-size-image">
-            {% if revision_image %}
-                 {% with revision_image as image %}
-                     {% with request.GET.mod as mod %}
-                         <a href="{% url image_detail image.image.id image.label %}{% query_string "mod=mod" "" %}">
-                            {% ifequal mod 'inverted' %}
-                                {% if real %}
-                                    <img class="real"
-                                         src="{% get_image_path image 0 1 %}"
-                                         alt="{{image.title|escape}}"/>
-                                {% else %}
-                                    <img src="{% get_image_path image 0 1 1 %}"
-                                         alt="{{image.title|escape}}"/>
-                                {% endif %}
-                            {% else %}
-                                {% if real %}
-                                    <img class="real"
-                                         src="{% get_image_path image 0 0 %}"
-                                         alt="{{image.title|escape}}"/>
-                                {% else %}
-                                    <img src="{% get_image_path image 0 0 1 %}"
-                                         alt="{{image.title|escape}}"/>
-                                {% endif %}
-                            {% endifequal %}
-                         </a>
-                     {% endwith %}
-                 {% endwith %}
-            {% else %}
-                {% with request.GET.mod as mod %}
-                    <a href="{% url image_detail image.id 0 %}{% query_string "mod=mod" "" %}">
-                        {% ifequal mod 'inverted' %}
-                            {% if real %}
-                                <img class="real"
-                                     src="{% get_image_path image 0 1 %}"
-                                     alt="{{image.title|escape}}"/>
-                            {% else %}
-                                <img src="{% get_image_path image 0 1 1 %}"
-                                     alt="{{image.title|escape}}"/>
-                            {% endif %}
-                        {% else %}
-                            {% if real %}
-                                <img class="real"
-                                     src="{% get_image_path image 0 0 %}"
-                                     alt="{{image.title|escape}}"/>
-                            {% else %}
-                                <img src="{% get_image_path image 0 0 1 %}"
-                                     alt="{{image.title|escape}}"/>
-                            {% endif %}
-                        {% endifequal %}
-                     </a>
-                {% endwith %}
-            {% endif %}
+            {% astrobin_image image alias revision_label 'regular' request.GET.mod %}
         </div>
-        <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}common/js/jquery-1.8.3.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}astrobin_apps_images/js/astrobin_apps_images.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/astrobin.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {

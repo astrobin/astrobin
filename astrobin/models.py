@@ -1,4 +1,5 @@
 import uuid
+from datetime import date
 from datetime import datetime
 import os
 import urllib2
@@ -29,9 +30,6 @@ from tasks import *
 
 from nested_comments.models import NestedComment
 
-from djangoratings.fields import RatingField
-from djangoratings.models import Vote
-
 from model_utils.managers import InheritanceManager
 from timezones.forms import PRETTY_TIMEZONE_CHOICES
 
@@ -42,6 +40,26 @@ from utils import user_is_paying
 from mptt.models import MPTTModel, TreeForeignKey
 from reviews.models import ReviewedItem
 from actstream import action
+from toggleproperties.models import ToggleProperty
+
+from astrobin_apps_platesolving.models import Solution
+
+class HasSolutionMixin(object):
+     @property
+     def solution(self):
+        ctype = ContentType.objects.get_for_model(self.__class__)
+
+        try:
+            solution = Solution.objects.get(content_type = ctype, object_id = self.id)
+        except:
+           return None
+
+        return solution
+
+
+def image_upload_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return "%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
 
 
 LICENSE_CHOICES = (
@@ -94,20 +112,20 @@ SUBJECT_LABELS = {
 }
 
 SUBJECT_TYPES = {
-    'Psr': SUBJECT_LABELS['PULSAR'],
-    'GlC': SUBJECT_LABELS['GLOBUL'],
-    'GCl': SUBJECT_LABELS['GLOBUL'],
-    'OpC': SUBJECT_LABELS['OPENCL'],
-    'HII': SUBJECT_LABELS['NEBULA'],
-    'RNe': SUBJECT_LABELS['NEBULA'],
-    'ISM': SUBJECT_LABELS['NEBULA'],
-    'sh ': SUBJECT_LABELS['NEBULA'],
-    'PN' : SUBJECT_LABELS['PLNEBU'],
-    'LIN': SUBJECT_LABELS['GALAXY'],
-    'IG' : SUBJECT_LABELS['GALAXY'],
-    'GiG': SUBJECT_LABELS['GALAXY'],
-    'Sy2': SUBJECT_LABELS['GALAXY'],
-    'G'  : SUBJECT_LABELS['GALAXY'],
+    'Psr': 'PULSAR',
+    'GlC': 'GLOBUL',
+    'GCl': 'GLOBUL',
+    'OpC': 'OPENCL',
+    'HII': 'NEBULA',
+    'RNe': 'NEBULA',
+    'ISM': 'NEBULA',
+    'sh ': 'NEBULA',
+    'PN' : 'PLNEBU',
+    'LIN': 'GALAXY',
+    'IG' : 'GALAXY',
+    'GiG': 'GALAXY',
+    'Sy2': 'GALAXY',
+    'G'  : 'GALAXY',
 }
 
 SOLAR_SYSTEM_SUBJECT_CHOICES = (
@@ -599,99 +617,17 @@ def build_catalog_and_name(obj, name):
         setattr(obj, 'catalog', cat)
     setattr(obj, 'name', name)
 
-class Subject(models.Model):
-    # Simbad object id
-    oid = models.IntegerField()
-    # Right ascension
-    ra = models.DecimalField(max_digits=8, decimal_places=5, null=True, blank=True)
-    # Declination
-    dec = models.DecimalField(max_digits=8, decimal_places=5, null=True, blank=True)
-    # Main object identifier (aka main name)
-    mainId = models.CharField(max_length=64, unique=True)
-    # Object type
-    otype = models.CharField(max_length=16, null=True, blank=True)
-    # Morphological type
-    mtype = models.CharField(max_length=16, null=True, blank=True)
-    # Dimensions along the major and minor axis
-    dim_majaxis = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    dim_minaxis = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
 
-    # Catalog name, i.e. fist word of a SIMBAD mainId
-    catalog = models.CharField(max_length=64, null=True, blank=True)
-
-    # id of the Subject, excluding the catalog name
-    name = models.CharField(max_length=64, default = '')
-
-    # The list of identifier (aka alternative names) is done via
-    # a many-to-one relationship in SubjectIdentifier.
-
-    def __unicode__(self):
-        return self.mainId
-
-    class Meta:
-        app_label = 'astrobin'
-
-    # Note: this function doesn't deal with the alternative names.
-    def initFromJSON(self, json):
-        for attr in [field.name for field in self._meta.fields]:
-            if attr != 'id' and attr in json:
-                setattr(self, attr, json[attr])
-
-    def getFromSimbad(self):
-        if not self.mainId:
-            return
-        url = settings.SIMBAD_SEARCH_URL + self.mainId
-        f = None
-        try:
-            f = urllib2.urlopen(url)
-        except:
-            return;
-
-        json = simplejson.loads(f.read())
-        self.initFromJson(json)
-        f.close()
-
-    def save(self, *args, **kwargs):
-        build_catalog_and_name(self, self.mainId)
-        super(Subject, self).save(*args, **kwargs)
-
-
-class SubjectIdentifier(models.Model):
-    identifier = models.CharField(max_length=64, unique=True)
-    subject = models.ForeignKey(Subject, related_name='idlist')
-
-    # Catalog name, i.e. fist word of a SIMBAD mainId
-    catalog = models.CharField(max_length=64, null=True, blank=True)
-
-    # id of the Subject, excluding the catalog name
-    name = models.CharField(max_length=64, default = '')
-
-    class Meta:
-        app_label = 'astrobin'
-
-    def __unicode__(self):
-        return self.identifier
-
-    def save(self, *args, **kwargs):
-        build_catalog_and_name(self, self.identifier)
-        super(SubjectIdentifier, self).save(*args, **kwargs)
-
-
-class Image(models.Model):
+# TODO: unify Image and ImageRevision
+# TODO: remember that thumbnails must return 'final' version
+# TODO: notifications for gear and subjects after upload
+# TODO: this makes animated gifs static :-(
+class Image(HasSolutionMixin, models.Model):
     BINNING_CHOICES = (
         (1, '1x1'),
         (2, '2x2'),
         (3, '3x3'),
         (4, '4x4'),
-    )
-
-    SOLVE_CHOICES = (
-        (0, _("I don't want this image plate-solved.")),
-        (1, _("This is not a deep sky image, don't plate-solve it.")),
-        (2, _("I have no idea about the size of field, try a blind solve.")),
-        (3, _("This is a very wide field image (more than 10 degrees).")),
-        (4, _("This is a wide field image (1 to 10 degrees).")),
-        (5, _("This ia narrow field image (less than 1 degree).")),
     )
 
     SUBJECT_TYPE_CHOICES = (
@@ -727,8 +663,11 @@ class Image(models.Model):
         default = 0,
     )
 
-    subjects = models.ManyToManyField(
-        Subject,
+    objects_in_field = models.CharField(
+        max_length = 512,
+        verbose_name = _("Objects in field"),
+        help_text=_("Use a <strong>comma</strong> to separate the values."),
+        null = True,
     )
 
     solar_system_main_subject = models.IntegerField(
@@ -752,12 +691,6 @@ class Image(models.Model):
         help_text = _("HTML tags are allowed."),
     )
 
-    allow_rating = models.BooleanField(
-        verbose_name = _("Allow rating"),
-        help_text = _("Let other users vote this image. This setting will have no effect if you have opted out from the rating system in your site's preferences."),
-        default = True,
-    )
-
     link = models.CharField(
         max_length = 256,
         null = True,
@@ -770,57 +703,18 @@ class Image(models.Model):
         blank = True,
      )
 
-    filename = models.CharField(max_length=64, editable=False)
-    original_ext = models.CharField(max_length=6, editable=False)
+    image_file = models.ImageField(
+        upload_to = image_upload_path,
+        height_field = 'h',
+        width_field = 'w',
+        null = True,
+    )
+
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
-    presolve_information = models.IntegerField(
-        default = 0,
-        choices = SOLVE_CHOICES,
-        verbose_name = "",
-    )
-
-    focal_length = models.IntegerField(
-        null = True,
-        blank = True,
-        help_text = _("(in mm)"),
-        error_messages = {
-            'required': _("Insert a focal length if you want to plate-solve."),
-        },
-        verbose_name = _("Focal length"),
-    )
-
-    pixel_size = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 5,
-        decimal_places = 2,
-        help_text = _("(in &mu;m)"),
-        error_messages = {
-            'required': _("Insert a pixel size if you want to plate-solve."),
-        },
-        verbose_name = _("Pixel size"),
-    )
-
-    binning = models.IntegerField(
-        null      = True,
-        blank     = True,
-        choices   = BINNING_CHOICES,
-        default   = 1,
-        help_text = _("This is the smallest of the binning values you used. If you imaged L in 1x1 and RGB in 2x2, put 1x1 here."),
-        verbose_name = _("Binning"),
-    )
-
-    scaling = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 6,
-        decimal_places = 2,
-        default = 100,
-        help_text = _("If you scaled your image before uploading, enter here the percentage of the new size. E.g. 50 if you made it half the size. Cropping, instead, doesn't matter."),
-        verbose_name = _("Scaling"),
-    )
+    # For likes, bookmarks, and perhaps more.
+    toggleproperties = generic.GenericRelation(ToggleProperty)
 
     watermark_text = models.CharField(
         max_length = 128,
@@ -855,12 +749,8 @@ class Image(models.Model):
     filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"))
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
 
-    rating = RatingField(range=5)
-    votes = generic.GenericRelation(Vote)
     user = models.ForeignKey(User)
 
-    is_stored = models.BooleanField(editable=False)
-    is_solved = models.BooleanField(editable=False)
     plot_is_overlay = models.BooleanField(editable=False, default=False)
     is_wip = models.BooleanField(editable=False, default=False)
     w = models.IntegerField(editable=False, default=0)
@@ -876,59 +766,6 @@ class Image(models.Model):
     is_final = models.BooleanField(
         editable = False,
         default = True
-    )
-
-    was_revision = models.BooleanField(
-        editable = False,
-        default = False,
-    )
-
-    # astrometry
-    ra_center_hms = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 12,
-        editable = False,
-    )
-    dec_center_dms = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 13,
-        editable = False,
-    )
-    pixscale = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-        editable = False,
-    )
-    orientation = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-        editable = False,
-    )
-    fieldw = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-        editable = False,
-    )
-    fieldh = models.DecimalField(
-        null = True,
-        blank = True,
-        max_digits = 14,
-        decimal_places = 10,
-        editable = False,
-    )
-    fieldunits = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 32,
-        editable = False,
     )
 
     class Meta:
@@ -949,12 +786,6 @@ class Image(models.Model):
 
         super(Image, self).save(*args, **kwargs)
 
-    def process(self, solve=False):
-        store_image.delay(self, solve=solve, lang=translation.get_language(), callback=image_stored_callback)
-
-    def solve(self):
-        solve_image.delay(self, lang=translation.get_language(), callback=image_solved_callback)
-
     def delete(self, *args, **kwargs):
         self.delete_data()
 
@@ -969,54 +800,41 @@ class Image(models.Model):
         super(Image, self).delete(*args, **kwargs)
 
     def delete_data(self):
-        delete_image.delay(self.filename, self.original_ext)
+        # Right now we don't delete anything, just to be on the safe side
+        pass
 
-    def get_absolute_url(self):
-        return '/%i' % self.id
+    def get_absolute_url(self, revision = 'final', size = 'regular'):
+        if revision == 'final':
+            if not self.is_final:
+                r = ImageRevision.objects.filter(
+                    image = self, is_final = True)
+                if r:
+                    revision = r[0].label
 
-    def path(self, resized = False, inverted = False, hd = False):
-        suffix = ''
+        url = '/'
+        if size == 'full':
+            url += 'full/'
 
-        if resized:
-            suffix = '_resized'
 
-        if hd and self.id >= 53694:
-            suffix = '_hd'
+        url += '%i/' % self.id
 
-        if inverted:
-            suffix += '_inverted'
+        if revision != 'final':
+            url += '%s/' % revision
 
-        filename = '%s%s%s' % (
-            self.filename,
-            suffix,
-            self.original_ext)
-
-        # This code is disabled because of the switch to ASPwebhosting.
-        # We'll keep just serving from S3 and hope in CloudFronts caching.
-        #if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
-        #    return '/uploads/%s' % filename
-
-        return '%s%s' % (
-            settings.IMAGES_URL,
-            filename)
+        return url
 
     def iotd_date(self):
-        try:
-            return ImageOfTheDay.objects.get(image = self).date
-        except ImageOfTheDay.DoesNotExist:
-            return None
-        except ImageOfTheDay.MultipleObjectsReturned:
-            return ImageOfTheDay.objects.filter(image = self)[0].date
+        iotd = self.image_of_the_day.all()
+        if iotd:
+            return iotd[0].date
 
-    def astrobinIndex(self):
-        ratings = self.rating.get_ratings().filter(
-            user__userprofile__suspended_from_voting = False)
-        votes = len(ratings)
-        from votes import index
-        return index([x.score for x in ratings])
+        return None
 
-    def favoritesNumber(self):
-        return Favorite.objects.filter(image = self).count()
+    def likes(self):
+        return ToggleProperty.objects.toggleproperties_for_object("like", self).count()
+
+    def bookmarks(self):
+        return ToggleProperty.objects.toggleproperties_for_object("bookmark", self).count()
 
     def commentsNumber(self):
         from nested_comments.models import NestedComment
@@ -1026,15 +844,89 @@ class Image(models.Model):
             content_type__model = 'image',
             object_id = self.id).count()
 
-    def get_ratings(self):
-        return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = False)
+    def get_thumbnail_field(self, revision_label):
+        # We default to the original upload
+        field = self.image_file
 
-    def get_suspended_ratings(self):
-        return self.rating.get_ratings().filter(user__userprofile__suspended_from_voting = True)
+        if revision_label == '0':
+            pass
+        elif revision_label == 'final':
+            revisions = ImageRevision.objects.filter(image = self)
+            for r in revisions:
+                if r.is_final:
+                    field = r.image_file
+        else:
+            # We have some label
+            try:
+                r = ImageRevision.objects.get(image = self, label = revision_label)
+                field = r.image_file
+            except ImageRevision.DoesNotExist:
+                pass
 
-    def get_author_profile(self):
-        profile = UserProfile.objects.get(user = self.user)
-        return profile
+        return field
+
+    # TODO: verify how thumbnail integration works when sharing on forums
+    # TODO: why have mod as a setting when inverted is part of the alias?
+    # TODO: this is generating thumbnails synchronously from the sharing dialog
+    def thumbnail_raw(self, alias, thumbnail_settings = {}):
+        from easy_thumbnails.exceptions import InvalidImageFormatError
+        from easy_thumbnails.files import get_thumbnailer
+
+        revision_label = thumbnail_settings.get('revision_label', 'final')
+        mod = thumbnail_settings.get('mod', None)
+
+        # Possible modes: 'inverted', 'solved'.
+        if mod == 'inverted':
+            alias = alias + '_' +  mod
+
+        options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+
+        field = self.get_thumbnail_field(revision_label);
+        thumbnailer = get_thumbnailer(field)
+
+        if self.watermark and 'watermark' in options:
+            options['watermark_text'] = self.watermark_text
+            options['watermark_position'] = self.watermark_position
+            options['watermark_opacity'] = self.watermark_opacity
+
+        try:
+            thumb = thumbnailer.get_thumbnail(options)
+        except InvalidImageFormatError:
+            return None
+
+        return thumb
+
+
+    def thumbnail(self, alias, thumbnail_settings = {}):
+        from django.core.cache import cache
+
+        revision_label = thumbnail_settings.get('revision_label', 'final')
+        mod = thumbnail_settings.get('mod', None)
+        field = self.get_thumbnail_field(revision_label);
+
+        app_model = "{0}.{1}".format(
+            self._meta.app_label,
+            self._meta.object_name).lower()
+        cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
+            app_model,
+            field,
+            alias,
+            mod)
+
+        url = cache.get(cache_key)
+        if not url:
+            thumb = self.thumbnail_raw(alias, thumbnail_settings)
+            options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+            url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
+                options['size'][0],
+                options['size'][1])
+
+            if thumb:
+                url = settings.IMAGES_URL + thumb.name
+                cache.set(cache_key, url, 60*60*24*365)
+
+        return url
+
 
     @staticmethod
     def by_gear(gear):
@@ -1054,18 +946,23 @@ class Image(models.Model):
 
         return images
 
+def image_post_save(sender, instance, created, **kwargs):
+    verb = "uploaded a new image"
+    if created and not instance.is_wip:
+        action.send(instance.user, verb = verb, action_object = instance)
+post_save.connect(image_post_save, sender = Image)
 
-class ImageRevision(models.Model):
+
+class ImageRevision(HasSolutionMixin, models.Model):
     image = models.ForeignKey(Image)
-    filename = models.CharField(max_length=64, editable=False)
-    original_ext = models.CharField(max_length=6, editable=False)
-    uploaded = models.DateTimeField(editable=False, auto_now_add=True)
+    image_file = models.ImageField(
+        upload_to = image_upload_path,
+        null = True,
+    )
 
+    uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)
-
-    is_stored = models.BooleanField(editable=False)
-    is_solved = models.BooleanField(editable=False)
 
     is_final = models.BooleanField(
         editable = False,
@@ -1095,49 +992,24 @@ class ImageRevision(models.Model):
 
         super(ImageRevision, self).save(*args, **kwargs)
 
-    def process(self):
-        store_image.delay(self, solve=False, lang=translation.get_language(), callback=image_stored_callback)
+    def get_absolute_url(self, revision = 'nd', size = 'regular'):
+        # We can ignore the revision argument of course
+        if size == 'full':
+            return '/%i/%s/full/' % (self.image.id, self.label)
 
-    def delete(self, *args, **kwargs):
-        delete_data = not kwargs.pop('dont_delete_data', False)
-        if delete_data:
-            delete_image.delay(self.filename, self.original_ext)
-        super(ImageRevision, self).delete(*args, **kwargs)
-
-    def get_absolute_url(self):
         return '/%i/%s/' % (self.image.id, self.label)
 
-    def path(self, resized = False, inverted = False, hd = False):
-        suffix = ''
+    def thumbnail_raw(self, alias, thumbnail_settings = {}):
+        return self.image.thumbnail_raw(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
 
-        if resized:
-            suffix = '_resized'
+    def thumbnail(self, alias, thumbnail_settings = {}):
+        return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
 
-        if hd and self.image.id >= 53694:
-            suffix = '_hd'
-
-        if inverted:
-            suffix += '_inverted'
-
-
-        filename = '%s%s%s' % (
-            self.filename,
-            suffix,
-            self.original_ext)
-
-        # This code is disabled because of the switch to ASPwebhosting.
-        # We'll keep just serving from S3 and hope in CloudFronts caching.
-        # if os.path.isfile(settings.UPLOADS_DIRECTORY + filename):
-        #    return '/uploads/%s' % filename
-
-        return '%s%s' % (
-            settings.IMAGES_URL,
-            filename)
 
 def image_revision_post_save(sender, instance, created, **kwargs):
     verb = "uploaded a new revision of"
     if created and not instance.image.is_wip:
-        action.send(instance.image.user, verb = verb, target = instance)
+        action.send(instance.image.user, verb = verb, action_object = instance)
 post_save.connect(image_revision_post_save, sender = ImageRevision)
 
 
@@ -1367,33 +1239,6 @@ class ABPOD(models.Model):
         app_label = 'astrobin'
 
 
-class MessierMarathonNominations(models.Model):
-    messier_number = models.IntegerField()
-    image = models.ForeignKey(Image)
-    nominations = models.IntegerField(default = 0)
-    nominators = models.ManyToManyField(User, null=True)
-
-    def __unicode__(self):
-        return 'M %i' % self.messier_number
-
-    class Meta:
-        app_label = 'astrobin'
-        unique_together = ('messier_number', 'image')
-        ordering = ('messier_number', 'nominations')
-
-
-class MessierMarathon(models.Model):
-    messier_number = models.IntegerField(primary_key = True)
-    image = models.ForeignKey(Image)
-
-    def __unicode__(self):
-        return 'M %i' % self.messier_number
-
-    class Meta:
-        app_label = 'astrobin'
-        ordering = ('messier_number',)
-
-
 class Request(models.Model):
     from_user = models.ForeignKey(User, editable=False, related_name='requester')
     to_user   = models.ForeignKey(User, editable=False, related_name='requestee')
@@ -1446,7 +1291,7 @@ class UserProfile(models.Model):
         'Accessory': 'accessories',
     }
 
-    user = models.ForeignKey(User, unique=True, editable=False)
+    user = models.OneToOneField(User, editable=False)
 
     # Basic Information
     real_name = models.CharField(
@@ -1506,7 +1351,7 @@ class UserProfile(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Company description"),
-        help_text = _("A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#10\">formatting rules</a>."),
+        help_text = _("A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
         validators = [MaxLengthValidator(1000)],
     )
 
@@ -1535,10 +1380,6 @@ class UserProfile(models.Model):
     software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"), related_name='software')
     filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"), related_name='filters')
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"), related_name='accessories')
-
-    follows = models.ManyToManyField('self', null=True, blank=True, related_name='followers', symmetrical=False)
-    follows_gear = models.ManyToManyField('gear', null=True, blank=True)
-    follows_subjects = models.ManyToManyField('Subject', null=True, blank=True)
 
     default_license = models.IntegerField(
         choices = LICENSE_CHOICES,
@@ -1580,19 +1421,6 @@ class UserProfile(models.Model):
         null=True, blank=True,
         verbose_name=_("Language"),
         choices = LANGUAGE_CHOICES,
-    )
-
-    optout_rating = models.BooleanField(
-        default = False,
-        editable = True,
-        verbose_name = _("Opt out from the rating system"),
-        help_text = _(
-            "This will hide all the votes your image have received the past, prevent new votes and exclude you from the leaderboard and sorting by rating in searches.")
-    )
-
-    suspended_from_voting = models.BooleanField(
-        default = False,
-        editable = False,
     )
 
     seen_realname = models.BooleanField(
@@ -1711,24 +1539,6 @@ class Location(models.Model):
 
     class Meta:
         app_label = 'astrobin'
-
-
-class Favorite(models.Model):
-    image = models.ForeignKey(Image)
-    user = models.ForeignKey(User)
-    created = models.DateTimeField(auto_now_add = True)
-
-    class Meta:
-        app_label = 'astrobin'
-        ordering = ('-created',)
-        unique_together = ('image', 'user')
-
-def favorite_post_save(sender, instance, created, **kwargs):
-    verb = "has favorited"
-    if created:
-        action.send(instance.user, verb = verb,
-                    target = instance.image)
-post_save.connect(favorite_post_save, sender = Favorite)
 
 
 class App(models.Model):
@@ -1856,11 +1666,6 @@ class ImageOfTheDay(models.Model):
         Image,
         related_name = 'image_of_the_day')
 
-    filename = models.CharField(
-        max_length = 64,
-        null = True,
-        blank = False,)
-
     date = models.DateField(
         auto_now_add = True)
 
@@ -1908,6 +1713,7 @@ def reviewed_item_post_save(sender, instance, created, **kwargs):
     if created:
          action.send(instance.user,
                      verb = verb,
+                     action_object = instance,
                      target = instance.content_object)
 post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
 
@@ -2030,7 +1836,7 @@ class CommercialGear(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Description"),
-        help_text = _("Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#10\">formatting rules</a>."),
+        help_text = _("Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
     )
 
     created = models.DateTimeField(

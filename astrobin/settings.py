@@ -5,10 +5,12 @@ from django.conf import global_settings
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 DEBUG = False
+CACHE = not DEBUG
+LOCAL_STATIC_STORAGE = DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '57'
+MEDIA_VERSION = '58'
 LONGPOLL_ENABLED = False
 
 ADMINS = (
@@ -29,11 +31,9 @@ else:
 EMAIL_USE_TLS=False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': os.environ['ASTROBIN_DATABASE_NAME'],         # Or path to database file if using sqlite3.
         'USER': os.environ['ASTROBIN_DATABASE_USER'],         # Not used with sqlite3.
         'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'], # Not used with sqlite3.
@@ -48,7 +48,7 @@ DEFAULT_CHARSET = 'utf-8'
 ASTROBIN_BASE_URL = 'http://www.astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
-ASTROBIN_BASE_PATH = os.path.abspath(__file__)
+ASTROBIN_BASE_PATH = os.path.dirname(__file__)
 UPLOADS_DIRECTORY = '/webserver/www/uploads/'
 
 # Local time zone for this installation. Choices can be found here:
@@ -80,67 +80,70 @@ LANGUAGES = (
 )
 MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 
-SITE_ID = 1
-
-STATIC_ROOT = '/webserver/www/sitestatic'
-STATIC_URL = '/sitestatic/'
-
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
 USE_L10N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ASTROBIN_BASE_PATH + '/media'
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media/'
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
+SITE_ID = 1
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10G'
 
 # Django storages
-DEFAULT_FILE_STORAGE = 'astrobin.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageRootS3BotoStorage'
 AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
 AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
+AWS_S3_SECURE_URLS = False
+AWS_QUERYSTRING_AUTH = False
 
 from S3 import CallingFormat
 AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
 
 # see http://developer.yahoo.com/performance/rules.html#expires
 AWS_HEADERS = {
-    'Expires': 'Thu, 15 Apr 2080 20:00:00 GMT',
-    'Cache-Control': 'max-age=31557600',
-    'x-amz-acl': 'public-read',
+    'Expires': 'Fri, 9 May 2081 13:25:00 GMT+2'
+}
 
-    }
 S3_URL = 's3.amazonaws.com'
 IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
-HD_IMAGE_SIZE = 1824 # 95% of 1920
-RESIZED_IMAGE_SIZE = 620
-THUMBNAIL_SIZE = 184
-SMALL_THUMBNAIL_SIZE = 90
-IMAGE_OF_THE_DAY_WIDTH = 780
-IMAGE_OF_THE_DAY_HEIGHT = 180
+CDN_URL = os.environ['ASTROBIN_CDN_URL']
+
+STATIC_ROOT = '/webserver/www/sitestatic'
+if LOCAL_STATIC_STORAGE:
+    STATIC_URL = '/sitestatic/'
+else:
+    STATIC_URL = CDN_URL + 'www/static/'
+
+# Absolute path to the directory that holds media.
+# Example: "/home/media/media.lawrence.com/"
+MEDIA_ROOT = '/webserver/www/sitestatic/'
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash if there is a path component (optional in other cases).
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
+if LOCAL_STATIC_STORAGE:
+    MEDIA_URL = '/media/'
+else:
+    MEDIA_URL = CDN_URL
+
+# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
+# trailing slash.
+# Examples: "http://foo.com/media/", "/media/".
+ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
+    ('django.template.loaders.cached.Loader',(
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
 )
 
 MIDDLEWARE_CLASSES = [
-    'django.middleware.cache.UpdateCacheMiddleware', # KEEP AT THE BEGINNING
     'django.middleware.http.ConditionalGetMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -148,15 +151,14 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
-#   'astrobin.middlewares.ProfilerMiddleware',
+    'astrobin.middlewares.ProfileMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
+    'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
-    'django.middleware.cache.FetchFromCacheMiddleware', # KEEP AT THE END
 ]
 
 if DEBUG:
@@ -177,8 +179,8 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
-    'django.core.context_processors.auth',
-    'notification.context_processors.notification',
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
     'astrobin.context_processors.privatebeta_enabled',
     'astrobin.context_processors.notices_count',
     'astrobin.context_processors.user_language',
@@ -206,10 +208,14 @@ INSTALLED_APPS = (
     'nested_comments',
     'astrobin',
     'rawdata',
+    'astrobin_apps_images',
+    'astrobin_apps_platesolving',
+    'astrobin_apps_users',
+
+    'toggleproperties',
 
     # Third party apps
     'registration',
-    'djangoratings',
     'haystack',
     'notification',
     'debug_toolbar',
@@ -241,6 +247,8 @@ INSTALLED_APPS = (
     'ember',
     'rest_framework',
     'rest_framework.authtoken',
+    'easy_thumbnails',
+    'endless_pagination',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -250,19 +258,27 @@ AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 FLICKR_API_KEY = os.environ['ASTROBIN_FLICKR_API_KEY']
 FLICKR_SECRET  = os.environ['ASTROBIN_FLICKR_SECRET']
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    },
-}
+if CACHE:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+        },
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        },
+    }
+
 JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
 
 HAYSTACK_SITECONF = 'astrobin.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'solr'
 HAYSTACK_SOLR_URL = os.environ['ASTROBIN_HAYSTACK_SOLR_URL']
 HAYSTACK_DEFAULT_OPERATOR = 'AND'
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 24
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 70
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
 if DEBUG:
@@ -281,14 +297,9 @@ BROKER_VHOST = 'astrobin'
 
 CELERY_RESULT_BACKEND = 'database'
 CELERY_RESULT_DBURI = os.environ['ASTROBIN_CELERY_RESULT_DBURI']
-CELERY_IMPORTS = ('astrobin.tasks', 'rawdata.tasks',)
-CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},
-                 "plate_solve": {"exchange":"plate_solve", "binding_key":"plate_solve_key"}
-                }
+CELERY_IMPORTS = ('rawdata.tasks',)
+CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},}
 CELERY_DEFAULT_QUEUE = "default"
-CELERY_ROUTES = {"astrobin.tasks.solve_image" : {"queue":"plate_solve", "routing_key":"plate_solve_key"},
-                 "astrobin.tasks.image_solved_callback" : {"queue":"plate_solve", "routing_key":"plate_solve_key"},
-                }
 
 CELERYD_NODES = "w1 w2 w3 w4"
 CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG"
@@ -301,6 +312,9 @@ CELERYBEAT = ASTROBIN_BASE_PATH + "manage.py celerybeat"
 CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
 
 ASTROBIN_ENABLE_SOLVING = True
+ASTROBIN_PLATESOLVING_BACKEND = \
+    'astrobin_apps_platesolving.backends.astrometry_net.solver.Solver'
+ASTROMETRY_NET_API_KEY = os.environ['ASTROMETRY_NET_API_KEY']
 
 PRIVATEBETA_ENABLE_BETA = False
 PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
@@ -311,9 +325,6 @@ PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
 
 ASTROBIN_USER='astrobin'
 
-
-SIMBAD_QUERY_URL="http://simbad.u-strasbg.fr/simbad/sim-nameresolver?data=@,I.0,J,C.0,T,D,M,I&output.max=1&output=json&option=strict&Ident="
-SIMBAD_SEARCH_QUERY_URL="http://simbad.u-strasbg.fr/simbad/sim-nameresolver?data=@,I.0,J,C.0,T,D,M,I&output=json&Ident="
 
 NOTIFICATION_LANGUAGE_MODULE = "astrobin.UserProfile"
 
@@ -327,15 +338,18 @@ HITCOUNT_HITS_PER_IP_LIMIT = 0
 
 AVATAR_GRAVATAR_BACKUP = False
 AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png?v=1'
+AVATAR_AUTO_GENERATE_SIZES = (64,)
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+if LOCAL_STATIC_STORAGE:
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+else:
+    STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
 STATICFILES_FINDERS = (
     'staticfiles.finders.FileSystemFinder',
     'staticfiles.finders.AppDirectoriesFinder',
 )
 STATICFILES_DIRS = (local_path('static/'),)
 
-PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.SlimItCompressor'
 
@@ -353,6 +367,8 @@ PIPELINE_CSS = {
 
             'common/css/jquery.lightbox-0.5.css',
 
+            'astrobin_apps_images/css/jquery.capty.css',
+
             'css/reset.css',
             'css/bootstrap.css',
             'css/bootstrap-responsive.css',
@@ -365,19 +381,21 @@ PIPELINE_CSS = {
     },
 }
 
+# TODO: remove capty files
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
-            'common/js/jquery-1.8.3.js',
             'common/js/handlebars-1.0.rc.1.js',
             'common/js/ember-1.0.0-pre.2.js',
             'common/js/jquery.lightbox-0.5.js',
 
+            'astrobin_apps_images/js/astrobin_apps_images.js',
+            'astrobin_apps_images/js/jquery.capty.js',
+
             'js/jquery.i18n.js',
             'js/plugins/localization/jquery.localisation.js',
             'js/jquery.uniform.js',
-            'js/jquery-ui-1.9.2.custom.js',
-            'js/jquery.capty.js',
+            'js/jquery-ui-1.10.3.custom.min.js',
             'js/jquery-ui-timepicker-addon.js',
             'js/jquery.validationEngine-en.js',
             'js/jquery.validationEngine.js',
@@ -394,10 +412,10 @@ PIPELINE_JS = {
             'js/jquery.easing.1.3.js',
             'js/jquery.multiselect.js',
             'js/jquery.qtip.js',
-            'js/jquery.raty.js',
             'js/jquery.stickytableheaders.js',
             'js/jquery.timeago.js',
             'js/respond.src.js',
+            'js/masonry.js',
             'js/bootstrap.js',
             'js/astrobin.js',
         ),
@@ -405,20 +423,26 @@ PIPELINE_JS = {
     },
 }
 
-ACTSTREAM_ACTION_MODELS = (
-    'auth.user',
-    'astrobin.gear',
-    'astrobin.telescope',
-    'astrobin.camera',
-    'astrobin.mount',
-    'astrobin.filter',
-    'astrobin.software',
-    'astrobin.accessory',
-    'astrobin.focalreducer',
-    'astrobin.image',
-    'astrobin.imagerevision',
-    'rawdata.PublicDataPool',
-)
+ACTSTREAM_SETTINGS = {
+    'MODELS': (
+        'auth.user',
+        'astrobin.gear',
+        'astrobin.telescope',
+        'astrobin.camera',
+        'astrobin.mount',
+        'astrobin.filter',
+        'astrobin.software',
+        'astrobin.accessory',
+        'astrobin.focalreducer',
+        'astrobin.image',
+        'astrobin.imagerevision',
+        'rawdata.PublicDataPool',
+        'nested_comments.nestedcomment',
+        'reviews.revieweditem',
+        'toggleproperties.toggleproperty',
+    ),
+
+}
 
 PAYPAL_TEST = False
 PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene@gmail.com'
@@ -463,6 +487,10 @@ LOGGING = {
             'class':'logging.StreamHandler',
             'formatter': 'standard'
         },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
     },
     'loggers': {
         'django': {
@@ -479,5 +507,84 @@ LOGGING = {
             'handlers': ['console',],
             'level': 'DEBUG',
         },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+
+THUMBNAIL_DEBUG = DEBUG
+THUMBNAIL_ALWAYS_GENERATE = THUMBNAIL_DEBUG
+THUMBNAIL_PROCESSORS = (
+    # Default processors
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    'easy_thumbnails.processors.scale_and_crop',
+    'easy_thumbnails.processors.filters',
+
+    # AstroBin processors
+    'astrobin.thumbnail_processors.rounded_corners',
+    'astrobin.thumbnail_processors.invert',
+    'astrobin.thumbnail_processors.watermark',
+    'astrobin.thumbnail_processors.histogram',
+)
+THUMBNAIL_ALIASES = {
+    '': {
+        # Main image thumbnails
+        # TODO: verify what happens with animated GIF
+        'real': {'size': (16536, 16536), 'watermark': True},
+        'real_inverted': {'size': (16536, 16536), 'invert': True, 'watermark': True},
+
+        'hd': {'size': (1824, 0), 'crop': False, 'watermark': True},
+        'hd_inverted': {'size': (1824, 0), 'crop': False, 'invert': True, 'watermark': True},
+
+        'regular': {'size': (620, 0), 'crop': False, 'watermark': True},
+        'regular_inverted': {'size': (620, 0), 'crop': False, 'invert': True, 'watermark': True},
+
+        'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
+        'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'inverted': True},
+        'thumb': {'size': (80, 80), 'crop': True, 'rounded': 'smart', 'quality': 60},
+        'revision': {'size': (86, 86), 'crop': True, 'rounded': 'smart', 'quality': 60},
+
+        # Tricks
+        'histogram': {'size': (274, 120), 'histogram': True},
+
+        # IOTD
+        'iotd': {'size': (780, 180), 'crop': 'smart', 'watermark': True},
+        'runnerup': {'size': (50, 50), 'crop': 'smart', 'rounded': True, 'quality': 60},
+
+        # Activity stream
+        'act_target': {'size': (226, 62), 'crop': 'smart', 'quality': 80},
+        'act_object': {'size': (226, 226), 'crop': 'smart', 'quality': 80},
+    },
+}
+THUMBNAIL_QUALITY = 100
+THUMBNAIL_SUBDIR = 'thumbs'
+THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+
+ENDLESS_PAGINATION_PER_PAGE = 35
+ENDLESS_PAGINATION_LOADING = '<img src="' + STATIC_URL + 'common/images/ajax-loader-bar.gif" alt="..." />'
+
+TOGGLEPROPERTIES = {
+    "bookmark": {
+        "property_tooltip_on": gettext("Remove from bookmarks"),
+        "property_tooltip_off": gettext("Bookmark"),
+        "property_icon": "icon-bookmark",
+    },
+
+    "like": {
+        "property_label_on": gettext("Unlike"),
+        "property_label_off": gettext("Like"),
+        "property_tooltip_on": gettext("Unlike"),
+        "property_tooltip_off": gettext("Like"),
+        "property_icon": "icon-thumbs-up",
+    },
+
+    "follow": {
+        "property_tooltip_on": gettext("Stop following"),
+        "property_tooltip_off": gettext("Follow"),
+        "property_icon": "icon-plus",
     }
 }

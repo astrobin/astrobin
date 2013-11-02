@@ -2,10 +2,12 @@
 
 {% load i18n tags bootstrap_toolkit avatar_tags markup %}
 {% load hitcount_tags %}
+{% load thumbnail %}
 
 {% block title %}AstroBin - {% gear_name gear %}{% endblock %}
 
 {% block content %}
+    <!-- TODO: check that this page works -->
     <div class="gear-page">
         <div class="page-header">
             <h1>{% gear_name gear %}
@@ -20,7 +22,7 @@
                 {% if show_image %}
                     <div class="gear-image">
                         {% with gear.commercial.image as image %}
-                            <img src="{{IMAGES_URL}}{{image.filename}}{{image.original_ext}}"
+                            <img src="{{image.image_file|thumbnail_url:'regular'}}""
                                  alt="{{image.title|escape}}"/>
                         {% endwith %}
                     </div>
@@ -33,12 +35,12 @@
                         </div>
                         {% for r in commercial_image_revisions %}
                             <a href="{% url image_detail r.image.id r.label %}" target="{{r.image.id}}_{{r.label}}">
-                                <img src="{{IMAGES_URL}}{{r.filename}}_small_thumb{{r.original_ext}}"
+                                <img src="{{r.image.image_file|thumbnail_url:'thumb'}}"
                                      alt="{{r.image.title|escape}}"/>
                              </a>
                         {% endfor %}
                     </div>
-                {% endif %}         
+                {% endif %}
 
                 {% if show_description %}
                     <div class="subtle-container">
@@ -60,7 +62,7 @@
                                 </a>
                             </h4>
                         </div>
-                        {% image_list request examples 0 95 %}
+                        {% image_list examples 'thumb' %}
                     </div>
                 {% endif %}
 
@@ -105,7 +107,7 @@
                             {% endif %}
                         </p>
 
-                        <form class="form-vertical review-form" method="post" action="{% url gear_review_save %}">
+                        <form class="form-vertical review-form" method="post" action="{% url gear_review_save %}">{% csrf_token %}
                             {{review_form|as_bootstrap}}
                             <input type="hidden" name="gear_id" value="{{gear.id}}" />
                             <input type="submit" class="btn btn-mini btn-primary" value="{% trans "Submit" %} &rarr;" />
@@ -144,7 +146,7 @@
                         </div>
                         <table class="table">
                             {% for retailed in gear.retailed.all %}
-                                {% with retailed.retailer.userprofile_set.all.0 as profile %}
+                                {% with retailed.retailer.userprofile as profile %}
                                     {% if profile.company_name %}
                                         <tr>
                                             <th>
@@ -307,7 +309,7 @@ $(document).ready(function() {
 
                 var $content = $('<div/>').addClass('content');
                 var $score = $('<div/>').addClass('score');
-                
+
                 $content.text(response.content);
                 $score.text(response.score);
 

@@ -87,6 +87,7 @@
 
             <h2>How to display images.</h2>
             <p>
+                <!-- TODO: refactor for removal of filename and original_ext -->
                 If you get an Image object using the APIs, it will have a <em>filename</em>
                 and <em>original_ext</em> field. To display the image, you must append them
                 to <strong>{{IMAGES_URL}}</strong>.
@@ -123,10 +124,6 @@
             <p>Remember that you can combine most of these queries, so feel free to experiment!</p>
             <table class="table">
                 <tr>
-                    <th>Get the 5 top-rated images:</th>
-                    <td><code>image/?order_by=-rating_score&amp;limit=5</code></td>
-                </tr>
-                <tr>
                     <th>Get a single image by ID:</th>
                     <td><code>image/1234/</code></td>
                 </tr>
@@ -159,14 +156,6 @@
                 <tr>
                     <th>Comparison operators:</th>
                     <td><code>__lt=</code> <code>__lte=</code> <code>__gt=</code> <code>__gte=</code></td>
-                </tr>
-                <tr>
-                    <th>Search only plate-solved images</th>
-                    <td><code>image/?is_solved=True</code></td>
-                </tr>
-                <tr>
-                    <th>Search by field size:</th>
-                    <td><code>image/?fieldw__gte=2&amp;fieldh__gte=2&amp;fieldunits=degrees</code>
                 </tr>
                 <tr>
                     <th>Get today's Image Of The Day:</th>

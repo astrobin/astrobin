@@ -1,15 +1,17 @@
 from django.conf import settings
+from django.core.cache import cache
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.utils.translation import ugettext as _
 
+from haystack.query import SearchQuerySet
 from notification import models as notifications
+from toggleproperties.models import ToggleProperty
+from persistent_messages.models import Message
 
 from astrobin.models import Request
-from astrobin.models import UserProfile
 from astrobin.models import Gear
 from astrobin.models import Image
-from astrobin.search_indexes import _prepare_rating
-from astrobin.votes import index
 
 from nested_comments.models import NestedComment
 
@@ -21,8 +23,7 @@ def privatebeta_enabled(request):
 def notices_count(request):
     response = {}
     if request.user.is_authenticated():
-        response['notifications_count'] = notifications.Notice.objects.filter(Q(user = request.user) & Q(unseen = True)).count()
-        response['requests_count'] = Request.objects.filter(Q(to_user = request.user) & Q(fulfilled = False)).count()
+        response['notifications_count'] = Message.objects.filter(user = request.user, read = False).count()
 
     return response
 
@@ -32,7 +33,7 @@ def user_language(request):
         'user_language': request.LANGUAGE_CODE,
     }
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user = request.user)
+        profile = request.user.userprofile
         d['user_language'] = profile.language
 
     return d
@@ -44,38 +45,42 @@ def user_profile(request):
     }
 
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user = request.user)
+        profile = request.user.userprofile
         d['userprofile'] = profile
 
     return d
 
 
 def user_scores(request):
-    d = {
+    scores = {
         'user_scores_index': 0,
-        'user_scores_images': 0,
-        'user_scores_comments': 0,
+        'user_scores_followers': 0,
     }
 
     if request.user.is_authenticated():
-        profile = UserProfile.objects.get(user = request.user)
-        all_images = Image.objects.filter(user = request.user, is_wip = False)
+        cache_key = "astrobin_user_score_%s" % request.user
+        scores = cache.get(cache_key)
+        user = User.objects.get(pk = request.user.pk) # The lazy object in the request won't do
 
-        if UserProfile.objects.get(user = request.user).optout_rating:
-            d['user_scores_index'] = 0
-        else:
-            voted_images = Image.objects.filter(user = request.user, is_wip = False, allow_rating = True)
-            l = []
+        if not scores:
+            try:
+                user_search_result =\
+                    SearchQuerySet().models(User).filter(django_id = request.user.pk)[0]
+            except IndexError:
+                return {
+                    'user_scores_index': 0,
+                    'user_scores_followers': 0
+                }
 
-            for i in voted_images:
-                l.append(_prepare_rating(i))
-            if len(l) > 0:
-                d['user_scores_index'] = index (l)
+            index = user_search_result.normalized_likes
+            followers = user_search_result.followers
 
-        d['user_scores_images'] = all_images.count()
-        d['user_scores_comments'] =  NestedComment.objects.filter(author = request.user, deleted = False).count()
+            scores = {}
+            scores['user_scores_index'] = index
+            scores['user_scores_followers'] = followers
+            cache.set(cache_key, scores, 43200)
 
-    return d
+    return scores
 
 
 def common_variables(request):
@@ -87,6 +92,7 @@ def common_variables(request):
         'is_retailer': request.user.groups.filter(name='Retailers'),
         'has_rawdata_subscription': user_has_subscription(request.user),
         'IMAGES_URL' : settings.IMAGES_URL,
+        'CDN_URL' : settings.CDN_URL,
     }
 
     return d

@@ -7,7 +7,7 @@
     <div class="well">
         {% blocktrans %}By choosing some users and clicking the button below, you will send them a notification prompting them to checkout this image.{% endblocktrans %}
     </div>
-    <form class="form-horizontal" action="{% url bring_to_attention_process %}" method="post">
+    <form class="form-horizontal" action="{% url bring_to_attention_process %}" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
         <input type="hidden" name="image_id" value="{{image.id}}" />
         <div class="form-actions">

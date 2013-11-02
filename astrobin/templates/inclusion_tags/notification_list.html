@@ -2,25 +2,23 @@
 
 {% if unseen or seen %}
     {% for n in unseen %}
-    <li class="unread">
-        {% autoescape off %}{{n.message}}{% endautoescape %}
-    </li>
+        {% if n.is_persistent %}
+            <li class="unread">
+                {% autoescape off %}{{n.message}}{% endautoescape %}
+            </li>
+        {% endif %}
     {% endfor %}
 
     {% if seen %}
         {% if unseen %}
             <li class="divider"></li>
         {% endif %}
-        {% for n in seen %}
-        <li>{% autoescape off %}{{n.message}}{% endautoescape %}</li>
-        {% endfor %}
-    {% endif %}
 
-    {% if show_footer %}
-    <li class="divider"></li>
-    <li>
-        <a href="{% url notifications %}">{% trans "Show all notifications" %}</a>
-    </li>
+        {% for n in seen %}
+            {% if n.is_persistent %}
+                <li>{% autoescape off %}{{n.message}}{% endautoescape %}</li>
+            {% endif %}
+        {% endfor %}
     {% endif %}
 {% else %}
     <li><a href="#">{% trans "You have no new notifications." %}</a></li>

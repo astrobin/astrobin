@@ -10,7 +10,7 @@
     {% blocktrans %}Please contact us if you need any assistance, or want to report a problem, give some feedback or suggestions, or simply want to get in touch!{% endblocktrans %}
 </div>
 
-<form class="form-horizontal" action="" method="post">
+<form class="form-horizontal" action="" method="post">{% csrf_token %}
     {{form|as_bootstrap}}
     <div class="form-actions">
         <input class="btn btn-primary" type="submit" value="{% trans "Send" %}" />

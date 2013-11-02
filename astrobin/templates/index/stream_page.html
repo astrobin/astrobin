@@ -1,0 +1,15 @@
+{% load activity_tags %}
+{% load endless %}
+{% load i18n %}
+
+{% lazy_paginate 40 actions using "stream_page" %}
+{% for action in actions %}
+    {% display_action action %}
+{% empty %}
+    <p>
+        {% trans "There is no activity yet." %}
+    </p>
+{% endfor %}
+
+{% show_more %}
+

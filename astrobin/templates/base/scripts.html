@@ -1,0 +1,14 @@
+{% load compressed %}
+
+<!--[if lte IE 8]>
+<script src="//cdn.jsdelivr.net/flashcanvas/1.5/flashcanvas.js"></script>
+<![endif]-->
+
+<!-- own js -->
+{% compressed_js 'scripts' %}
+
+<!-- other js -->
+<script type="text/javascript" src="{{STATIC_URL}}js/locale/jquery.timeago.{{request.LANGUAGE_CODE}}.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Converter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Sanitizer.js"></script>
+

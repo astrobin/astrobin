@@ -12,14 +12,13 @@ from django.db.models import Q
 from haystack.indexes import *
 from haystack import site
 from hitcount.models import HitCount
+from toggleproperties.models import ToggleProperty
 
 # This app
 from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
-from astrobin.models import Subject, SubjectIdentifier
 from astrobin.models import UserProfile
-from astrobin.models import Favorite
 from astrobin.models import Gear, CommercialGear, RetailedGear
 
 from astrobin.templatetags.tags import gear_name
@@ -49,11 +48,8 @@ def _get_integration(image):
     return integration
 
 
-def _prepare_rating(obj):
-    from votes import index
-    if not obj.allow_rating or obj.user.userprofile_set.all()[0].optout_rating:
-        return 0
-    return index([x.score for x in obj.rating.get_ratings().filter(user__userprofile__suspended_from_voting = False)])
+def _prepare_likes(obj):
+    return ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
 
 def _prepare_moon_phase(obj):
     from moon import MoonPhase
@@ -175,11 +171,8 @@ class GearIndex(SearchIndex):
 
     images = IntegerField()
 
-    # Average rating of all images taken with this item.
-    rating = FloatField()
-
-    # The sum of all votes on images taken with this item.
-    votes = IntegerField()
+    # Total likes of all images taken with this item.
+    likes = IntegerField()
 
     # Total integration of images taken with this item.
     integration = FloatField()
@@ -187,8 +180,8 @@ class GearIndex(SearchIndex):
     # Total views on images taken with this item.
     views = IntegerField()
 
-    # Number of favorites on images taken with this item.
-    favorited = IntegerField()
+    # Number of bookmarks on images taken with this item.
+    bookmarks = IntegerField()
 
     # Number of comments on images taken with this item.
     comments = IntegerField()
@@ -216,32 +209,24 @@ class GearIndex(SearchIndex):
                 Q(filters = obj) |\
                 Q(accessories = obj)\
             ) & (\
-                Q(is_stored = True) &\
                 Q(is_wip = False)\
             )
         return Image.objects.filter(filters).distinct()
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
         return 100;
 
     def prepare_images(self, obj):
         return len(self.get_images(obj))
 
-    def prepare_rating(self, obj):
-        l = []
+    def prepare_likes(self, obj):
+        likes = 0
         for i in self.get_images(obj):
-            l.append(_prepare_rating(i))
-        if len(l) == 0:
-            return 0
-        from votes import index
-        return index(l)
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
 
-    def prepare_votes(self, obj):
-        votes = 0
-        for i in self.get_images(obj):
-            votes += i.rating.votes
-        return votes
+        return likes
 
     def prepare_integration(self, obj):
         integration = 0
@@ -256,11 +241,11 @@ class GearIndex(SearchIndex):
             views += _prepare_views(i, 'image')
         return views
 
-    def prepare_favorited(self, obj):
-        favorites = 0
+    def prepare_bookmarks(self, obj):
+        bookmarks = 0
         for i in self.get_images(obj):
-            favorites += Favorite.objects.filter(image = i).count()
-        return favorites
+            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", i).count()
+        return bookmarks
 
     def prepare_comments(self, obj):
         comments = 0
@@ -272,13 +257,13 @@ class GearIndex(SearchIndex):
         producers = CommercialGear.objects\
             .filter(gear = obj)\
             .exclude(Q(producer__userprofile__company_name = None) | Q(producer__userprofile__company_name = ""))
-        return ["%s" % x.producer.userprofile_set.all()[0].company_name for x in producers]
+        return ["%s" % x.producer.userprofile.company_name for x in producers]
 
     def prepare_retailers(self, obj):
         retailers = RetailedGear.objects\
             .filter(gear = obj)\
             .exclude(Q(retailer__userprofile__company_name = None) | Q(retailer__userprofile__company_name = ""))
-        return ["%s" % x.retailer.userprofile_set.all()[0].company_name for x in retailers]
+        return ["%s" % x.retailer.userprofile.company_name for x in retailers]
 
 
 class UserIndex(SearchIndex):
@@ -288,11 +273,17 @@ class UserIndex(SearchIndex):
     images = IntegerField()
     avg_integration = FloatField()
 
-    # Average rating of all user's images.
-    rating = FloatField()
+    # Total likes of all user's images.
+    likes = IntegerField()
 
-    # The sum of all votes of this user's images.
-    votes = IntegerField()
+    # Total likes of all user's images.
+    average_likes = FloatField()
+
+    # Normalized likes (best images only)
+    normalized_likes = FloatField()
+
+    # Number of followers
+    followers = IntegerField()
 
     # Total user ingegration.
     integration = FloatField()
@@ -315,8 +306,8 @@ class UserIndex(SearchIndex):
     min_pixel_size = IntegerField()
     max_pixel_size = IntegerField()
 
-    # Number of favorites received.
-    favorited = IntegerField()
+    # Number of bookmarks on own images
+    bookmarks = IntegerField()
 
     # Types of telescopes and cameras with which this user has imaged.
     telescope_types = MultiValueField()
@@ -335,15 +326,16 @@ class UserIndex(SearchIndex):
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
         return 200;
 
     def prepare_images(self, obj):
-        return len(Image.objects.filter(user = obj))
+        return Image.objects.filter(user = obj, is_wip = False).count()
 
     def prepare_avg_integration(self, obj):
         integration = 0
         images = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             image_integration = _get_integration(i)
             if image_integration:
                 images += 1
@@ -352,31 +344,59 @@ class UserIndex(SearchIndex):
         return (integration / 3600.0) / images if images else 0
 
 
-    def prepare_rating(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj, allow_rating = True, is_wip = False):
-            l.append(_prepare_rating(i))
-        if len(l) == 0:
-            return 0
-        from votes import index
-        return index(l)
+    def prepare_likes(self, obj):
+        likes = 0
+        for i in Image.objects.filter(user = obj, is_wip = False):
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
+        return likes
 
-    def prepare_votes(self, obj):
-        votes = 0
-        for i in Image.objects.filter(user = obj):
-            votes += i.rating.votes
-        return votes
+    def prepare_average_likes(self, obj):
+        likes = self.prepare_likes(obj)
+        images = self.prepare_images(obj)
+
+        return likes / float(images) if images > 0 else 0
+
+    def prepare_normalized_likes(self, obj):
+        def average(values):
+            if len(values):
+                return sum(values) / float(len(values))
+            return 0
+
+        def index(values):
+            import math
+            return average(values) * math.log(len(values)+1, 10)
+
+        avg = self.prepare_average_likes(obj)
+        norm = []
+
+        for i in Image.objects.filter(user = obj, is_wip = False):
+            likes = i.likes()
+            if likes >= avg:
+                norm.append(likes)
+
+        if len(norm) == 0:
+            return 0
+
+        return index(norm)
+
+
+    def prepare_followers(self, obj):
+        return ToggleProperty.objects.filter(
+            property_type = "follow",
+            content_type = ContentType.objects.get_for_model(User),
+            object_id = obj.pk
+        ).count()
 
     def prepare_integration(self, obj):
         integration = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             integration += _get_integration(i)
 
         return integration / 3600.0
 
     def prepare_moon_phase(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_moon_phase(i))
         if len(l) == 0:
             return 0
@@ -384,7 +404,7 @@ class UserIndex(SearchIndex):
 
     def prepare_first_acquisition_date(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_first_acquisition_date(obj))
         if len(l) == 0:
             return None
@@ -392,7 +412,7 @@ class UserIndex(SearchIndex):
 
     def prepare_last_acquisition_date(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_last_acquisition_date(obj))
         if len(l) == 0:
             return None
@@ -400,13 +420,13 @@ class UserIndex(SearchIndex):
 
     def prepare_views(self, obj):
         views = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             views += _prepare_views(i, 'image')
         return views
 
     def prepare_min_aperture(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_min_aperture(i))
         if len(l) == 0:
             return 0
@@ -414,7 +434,7 @@ class UserIndex(SearchIndex):
 
     def prepare_max_aperture(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_max_aperture(i))
         if len(l) == 0:
             return 0
@@ -422,7 +442,7 @@ class UserIndex(SearchIndex):
 
     def prepare_min_pixel_size(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_min_pixel_size(i))
         if len(l) == 0:
             return 0
@@ -430,30 +450,33 @@ class UserIndex(SearchIndex):
 
     def prepare_max_pixel_size(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l.append(_prepare_max_pixel_size(i))
         if len(l) == 0:
             return 0
         return max(l)
 
-    def prepare_favorited(self, obj):
-        return Favorite.objects.filter(image__user = obj).count()
+    def prepare_bookmarks(self, obj):
+        bookmarks = 0
+        for i in Image.objects.filter(user = obj, is_wip = False):
+            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", i).count()
+        return bookmarks
 
     def prepare_telescope_types(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l += _prepare_telescope_types(i)
         return unique_items(l)
 
     def prepare_camera_types(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             l += _prepare_camera_types(i)
         return unique_items(l)
 
     def prepare_comments(self, obj):
         comments = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user = obj, is_wip = False):
             comments += _prepare_comments(i)
         return comments
 
@@ -468,8 +491,7 @@ class ImageIndex(SearchIndex):
 
     uploaded = DateTimeField(model_attr='uploaded')
 
-    rating = FloatField()
-    votes = IntegerField()
+    likes = IntegerField()
     integration = FloatField()
     moon_phase = FloatField()
     first_acquisition_date = DateTimeField()
@@ -497,7 +519,7 @@ class ImageIndex(SearchIndex):
     min_pixel_size = IntegerField()
     max_pixel_size = IntegerField()
 
-    favorited = IntegerField()
+    bookmarks = IntegerField()
 
     telescope_types = MultiValueField()
     camera_types = MultiValueField()
@@ -511,20 +533,18 @@ class ImageIndex(SearchIndex):
     username = CharField(model_attr = 'user__username')
 
     def index_queryset(self):
-        return Image.objects.filter(Q(is_stored = True), Q(is_wip = False))
+        return Image.objects.filter(is_wip = False)
 
     def get_model(self):
         return Image
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
         return 300;
 
-    def prepare_rating(self, obj):
-        return _prepare_rating(obj)
-
-    def prepare_votes(self, obj):
-        return obj.rating.votes
+    def prepare_likes(self, obj):
+        return _prepare_likes(obj)
 
     def prepare_integration(self, obj):
         return _get_integration(obj)
@@ -547,27 +567,6 @@ class ImageIndex(SearchIndex):
 
     def prepare_is_deep_sky(self, obj):
         return DeepSky_Acquisition.objects.filter(image = obj).count() > 0
-
-    def prepare_is_clusters(self, obj):
-        for subject in obj.subjects.all():
-            if subject.otype in ('GlC', 'GCl', 'OpC'):
-                return True
-
-        return False
-
-    def prepare_is_nebulae(self, obj):
-        for subject in obj.subjects.all():
-            if subject.otype in ('Psr', 'HII', 'RNe', 'ISM', 'sh ', 'PN '):
-                return True
-
-        return False
-
-    def prepare_is_galaxies(self, obj):
-        for subject in obj.subjects.all():
-            if subject.otype in ('LIN', 'IG', 'GiG', 'Sy2', 'G'):
-                return True
-
-        return False
 
     def prepare_is_solar_system(self, obj):
         if obj.solar_system_main_subject:
@@ -613,8 +612,8 @@ class ImageIndex(SearchIndex):
                 s = int(camera.pixel_size)
         return s
 
-    def prepare_favorited(self, obj):
-        return Favorite.objects.filter(image = obj).count()
+    def prepare_bookmarks(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
 
     def prepare_telescope_types(self, obj):
         return _prepare_telescope_types(obj)
@@ -630,28 +629,6 @@ class ImageIndex(SearchIndex):
         return commercial_gear.count() > 0
 
 
-class SubjectIdentifierIndex(SearchIndex):
-    text = NgramField(document=True, use_template=True)
-
-    def index_queryset(self):
-        return SubjectIdentifier.objects.all()
-
-    def get_model(self):
-        return SubjectIdentifier
-
-
-class SubjectIndex(SearchIndex):
-    text = NgramField(document=True, use_template=True)
-
-    def index_queryset(self):
-        return Subject.objects.all()
-
-    def get_model(self):
-        return Subject
-
-
 site.register(Gear, GearIndex)
 site.register(User, UserIndex)
 site.register(Image, ImageIndex)
-site.register(SubjectIdentifier, SubjectIdentifierIndex)
-site.register(Subject, SubjectIndex)

@@ -1,0 +1,149 @@
+{% load astrobin_apps_images_tags %}
+{% load avatar_tags %}
+{% load i18n %}
+
+{% if action.action_object_content_type.model == 'image' and action.action_object.is_wip %}
+    /***/
+{% else %}
+<div class="action">
+    <div class="action-inner">
+        {% if action.actor.get_absolute_url %}
+            <div class="avatar">
+                <a href="{{action.actor.get_absolute_url}}">{% avatar action.actor 64 %}</a>
+            </div>
+        {% endif %}
+
+        <div class="action-type">
+            {% if action.verb == 'uploaded a new image' or action.verb == 'uploaded a new revision of' %}
+                <i class="icon-plus"></i>
+            {% endif %}
+
+            {% if action.verb == 'commented on image' or actoin.verb == 'commented on gear' %}
+                <i class="icon-comment"></i>
+            {% endif %}
+
+            {% if action.verb == 'bookmarked' %}
+                <i class="icon-bookmark"></i>
+            {% endif %}
+
+            {% if action.verb == 'likes' %}
+                <i class="icon-thumbs-up"></i>
+            {% endif %}
+        </div>
+
+        <div class="content">
+            <div class="object">
+                {% ifequal action.action_object_content_type.model 'imagerevision' %}
+                    <div class="image">
+                        {% astrobin_image action.action_object.image 'act_object' action.action_object.label %}
+                        </a>
+                    </div>
+                {% else %}
+                    {% if action.target_content_type.model == 'image' %}
+                        <div class="image">
+                            {% astrobin_image action.target 'act_target' %}
+                        </div>
+                    {% endif %}
+
+                    {% if action.target_content_type.model == 'imagerevision' %}
+                        <div class="image">
+                            {% astrobin_image action.target.image 'act_target' action.target.label %}
+                        </div>
+                    {% endif %}
+
+                {% endifequal %}
+
+                {% ifequal action.action_object_content_type.model 'image' %}
+                    <div class="image">
+                        {% astrobin_image action.action_object 'act_object' %}
+                    </div>
+                {% endifequal %}
+
+            </div>
+
+            {% if action.actor.get_absolute_url %}
+                <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax action.actor %}"
+                   href="{{action.actor.get_absolute_url}}">{{action.actor.userprofile}}</a>
+            {% else %}
+                <a href="{{action.actor_url}}">{{action.actor.userprofile}}</a>
+            {% endif %}
+
+            {% trans action.verb %}:
+
+            {% if action.target %}
+                {% if action.target.get_absolute_url %}
+                    <a href="{{action.target.get_absolute_url}}">{{action.target}}</a>
+                {% else %}
+                    <a href="{{action.target_url}}">{{action.target}}</a>
+                {% endif %}
+
+                {% if action.target_content_type.model == 'image' and action.target.user != action.actor %}
+                    {% trans "by" %}
+                    <a href="{{action.target.user.get_absolute_url}}">
+                        {{action.target.user.userprofile}}
+                    </a>
+                {% endif %}
+
+                {% if action.target_content_type.model == 'imagerevision' and action.target.image.user != action.actor %}
+                    {% trans "by" %}
+                    <a href="{{action.target.image.user.get_absolute_url}}">
+                        {{action.target.image.user.userprofile}}
+                    </a>
+                {% endif %}
+
+            {% else %}
+
+                {% if action.action_object %}
+                    {% if action.action_object.get_absolute_url %}
+                        <a href="{{action.action_object.get_absolute_url}}">{{action.action_object}}</a>
+                    {% else %}
+                        <a href="{{action.action_object_url}}">{{action.action_object}}</a>
+                    {% endif %}
+
+                    {% if action.action_object_content_type.model == 'image' and action.action_object.user != action.actor %}
+                        {% trans "by" %}
+                        <a href="{{action.action_object.user.get_absolute_url}}">
+                            {{action.action_object.user.userprofile}}
+                        </a>
+                    {% endif %}
+
+                    {% if action.action_object_content_type.model == 'imagerevision' and action.action_object.image.user != action.actor %}
+                        {% trans "by" %}
+                        <a href="{{action.action_object.image.user.get_absolute_url}}">
+                            {{action.action_object.image.user.userprofile}}
+                        </a>
+                    {% endif %}
+                {% endif %}
+
+            {% endif %}
+
+            {% if action.action_object %}
+                <div class="object">
+                    {% ifequal action.action_object_content_type.model 'nestedcomment' %}
+                        <div class="comment">
+                            <p>
+                                {{action.action_object.text}}
+                                <a href="{{action.action_object.get_absolute_url}}"><i class="icon-link"></i></a>
+                            </p>
+                        </div>
+                    {% endifequal %}
+
+                    {% ifequal action.action_object_content_type.model 'revieweditem' %}
+                        <div class="comment">
+                            <p>
+                                {{action.action_object.content}}
+                                <a href="{{action.action_object.get_absolute_url}}"><i class="icon-link"></i></a>
+                            </p>
+                        </div>
+                    {% endifequal %}
+
+                </div>
+            {% endif %}
+
+            <div class="when">
+                {{action.timestamp|timesince}} {% trans "ago" %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

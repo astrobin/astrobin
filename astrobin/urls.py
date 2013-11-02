@@ -4,7 +4,6 @@ from django.conf import settings
 from django.contrib import admin
 from django.views.generic.simple import redirect_to
 
-from djangoratings.views import AddRatingFromModel
 from hitcount.views import update_hit_count_ajax
 
 from threaded_messages.views import search as messages_search
@@ -51,17 +50,23 @@ urlpatterns = patterns('',
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/common/', include('common.api_urls')),
     url(r'^api/v2/rawdata/', include('rawdata.api_urls')),
+    url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
 
     url(r'^rawdata/', include('rawdata.urls')),
+    url(r'^platesolving/', include('astrobin_apps_platesolving.urls')),
+    url(r'^toggleproperties/', include('toggleproperties.urls')),
 
 
     url(r'^$', views.index, name='index'),
+
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
+    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/(?:(?P<mod>\w+)/)?$', views.image_thumb, name='image_thumb'),
+    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:(?P<mod>\w+)/)?$', views.image_rawthumb, name='image_rawthumb'),
     url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_full, name='image_full'),
+
     url(r'^upload/$', views.image_upload, name='image_upload'),
     url(r'^upload/process$', views.image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', views.image_revision_upload_process, name='image_revision_upload_process'),
-    url(r'^edit/presolve/(?P<id>\d+)/$', views.image_edit_presolve, name='image_edit_presolve'),
     url(r'^edit/basic/(?P<id>\d+)/$', views.image_edit_basic, name='image_edit_basic'),
     url(r'^edit/watermark/(?P<id>\d+)/$', views.image_edit_watermark, name='image_edit_watermark'),
     url(r'^edit/gear/(?P<id>\d+)/$', views.image_edit_gear, name='image_edit_gear'),
@@ -108,14 +113,10 @@ urlpatterns = patterns('',
     url(r'^flickr_auth_callback/$', views.flickr_auth_callback, name='flickr_auth_callback'),
     url(r'^profile/edit/preferences/$', views.user_profile_edit_preferences, name='profile_edit_preferences'),
     url(r'^profile/save/preferences/$', views.user_profile_save_preferences, name='profile_save_preferences'),
+
     url(r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete, name='autocomplete'),
     url(r'^autocomplete_user/(?P<what>\w+)/$', lookups.autocomplete_user, name='autocomplete_user'),
     url(r'^autocomplete_usernames/$', lookups.autocomplete_usernames, name='autocomplete_usernames'),
-    url(r'rate/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(), {
-            'app_label': 'astrobin',
-            'model': 'image',
-            'field_name': 'rating',}, name='image_rate'),
-    url(r'get_rating/(?P<image_id>\d+)/', views.image_get_rating, name='image_get_rating'),
 
     url(r'^me/$', views.me, name='me'),
     url(r'^users/(?P<username>[\w.@+-]+)/$', views.user_page, name='user_page'),
@@ -133,11 +134,11 @@ urlpatterns = patterns('',
     url(r'^commercial/products/retailed/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$', views.retailed_products_merge, name='retailedgg_products_merge'),
     url(r'^commercial/products/retailed/edit/(?P<id>\d+)/$', views.retailed_products_edit, name='retailed_products_edit'),
 
-    url(r'^users/(?P<username>[\w.@+-]+)/favorites/$', views.user_page_favorites, name='user_page_favorites'),
-    url(r'^users/(?P<username>[\w.@+-]+)/card/$', views.user_page_card, name='user_page_card'),
+    url(r'^users/(?P<username>[\w.@+-]+)/bookmarks/$', views.user_page_bookmarks, name='user_page_bookmarks'),
+    url(r'^users/(?P<username>[\w.@+-]+)/following/$', views.user_page_following, name='user_page_following'),
+    url(r'^users/(?P<username>[\w.@+-]+)/followers/$', views.user_page_followers, name='user_page_followers'),
     url(r'^users/(?P<username>[\w.@+-]+)/plots/$', views.user_page_plots, name='user_page_plots'),
     url(r'^users/(?P<username>[\w.@+-]+)/apikeys/$', views.user_page_api_keys, name='user_page_api_keys'),
-    url(r'^users/(?P<username>[\w.@+-]+)/votes$', views.user_page_votes, name='user_page_votes'),
     url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$',
         views.user_profile_stats_get_integration_hours_ajax,
         name = 'stats_integration_hours'),
@@ -192,17 +193,9 @@ urlpatterns = patterns('',
         views.stats_gear_total_images_ajax,
         name = 'stats_gear_total_images'),
 
-    url(r'^follow/(?P<username>[\w.@+-]+)/$', views.follow, name='follow'),
-    url(r'^unfollow/(?P<username>[\w.@+-]+)/$', views.unfollow, name='unfollow'),
-    url(r'^follow_gear/(?P<id>\d+)/$', views.follow_gear, name='follow_gear'),
-    url(r'^unfollow_gear/(?P<id>\d+)/$', views.unfollow_gear, name='unfollow_gear'),
-    url(r'^follow_subject/(?P<id>\d+)/$', views.follow_subject, name='follow_subject'),
-    url(r'^unfollow_subject/(?P<id>\d+)/$', views.unfollow_subject, name='unfollow_subject'),
-
        (r'^notices/', include('notification.urls')),
     url(r'^push_notification/$', views.push_notification, name='push_notification'),
-    url(r'^notifications/seen/$', views.mark_notifications_seen, name='mark_notification_seen'),
-    url(r'^notifications/$', views.notifications, name='notifications'),
+    url(r'^persistent_messages/', include('persistent_messages.urls')),
 
     url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
     url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
@@ -249,12 +242,6 @@ urlpatterns = patterns('',
     url(r'^explore/choose/$', views.expore_choose, name='explore_choose'),
     url(r'^explore/wall/$', views.wall, name='wall'),
     url(r'^explore/iotd/$', views.iotd_archive, name='iotd_archive'),
-    url(r'^explore/messier/$', views.messier, name='messier'),
-    url(r'^explore/messier/nominate/(?P<id>\d+)/$', views.messier_nomination, name='messier_nomination'),
-    url(r'^explore/messier/nominate/process/$', views.messier_nomination_process, name='messier_nomination_process'),
-    url(r'^explore/fits/$', views.fits, name='fits'),
-    url(r'^explore/comments/$', views.comments, name='comments'),
-    url(r'^explore/reviews/$', views.reviews, name='reviews'),
 
     url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 
@@ -266,13 +253,8 @@ urlpatterns = patterns('',
     url(r'^get_gear_user_info_form/(?P<id>\d+)/$', views.get_gear_user_info_form, name='get_gear_user_info_form'),
     url(r'^save_gear_user_info/$', views.save_gear_user_info, name='save_gear_user_info'),
 
-    url(r'^favorite_ajax/(?P<id>\d+)/$', views.favorite_ajax, name='favorite_ajax'),
-
     url(r'^gear_popover_ajax/(?P<id>\d+)/$', views.gear_popover_ajax, name='gear_popover_ajax'),
-    url(r'^subject_popover_ajax/(?P<id>\d+)/$', views.subject_popover_ajax, name='subject_popover_ajax'),
     url(r'^user_popover_ajax/(?P<username>[\w.@+-]+)/$', views.user_popover_ajax, name='user_popover_ajax'),
-
-    url(r'^subject/(?P<id>\d+)/$', views.subject_page, name='subject_page'),
 
     url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-_]+)/)?$', views.gear_page, name='gear_page'),
     url(r'^gear/fix/(?P<id>\d+)/$', views.gear_fix, name='gear_fix'),

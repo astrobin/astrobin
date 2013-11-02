@@ -8,43 +8,43 @@
         <div class="span12">
             <h2>{% trans "Frequently Asked Questions" %}</h2>
             <ol>
-                <li><a href="#1">{% blocktrans %}Is this website for free?{% endblocktrans %}</a></li>
-                <li><a href="#2">{% blocktrans %}Are there any limits on how large and how many images I can upload?{% endblocktrans %}</a></li>
-                <li><a href="#3">{% blocktrans %}What image formats are supported?{% endblocktrans %}</a></li>
-                <li><a href="#4">{% blocktrans %}Is my data safe on AstroBin?{% endblocktrans %}</a></li>
-                <li><a href="#5">{% blocktrans %}I've seen beautiful images on this site. I'm not worthy of posting mine!{% endblocktrans %}</a></li>
-                <li><a href="#6">{% blocktrans %}What's the deal with the Staging Area and the Public Area?{% endblocktrans %}</a></li>
-                <li><a href="#7">{% blocktrans %}How do I get an image featured on the Messier Marathon page?{% endblocktrans %}</a></li>
-                <li><a href="#8">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
-                <li><a href="#9">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
-                <li><a href="#10">{% blocktrans %}How can I format my comments?{% endblocktrans %}</a></li>
-                <li><a href="#11">{% blocktrans %}What is the correct way to vote images?{% endblocktrans %}</a></li>
-                <li><a href="#12">{% blocktrans %}The rating values seem odd. How are they calculated?{% endblocktrans %}</a></li>
+                <li><a href="#free">{% blocktrans %}Is this website for free?{% endblocktrans %}</a></li>
+                <li><a href="#limits">{% blocktrans %}Are there any limits on how large and how many images I can upload?{% endblocktrans %}</a></li>
+                <li><a href="#formats">{% blocktrans %}What image formats are supported?{% endblocktrans %}</a></li>
+                <li><a href="#safe">{% blocktrans %}Is my data safe on AstroBin?{% endblocktrans %}</a></li>
+                <li><a href="#worthy">{% blocktrans %}I've seen beautiful images on this site. I'm not worthy of posting mine!{% endblocktrans %}</a></li>
+                <li><a href="#staging">{% blocktrans %}What's the deal with the Staging Area and the Public Area?{% endblocktrans %}</a></li>
+                <li><a href="#why">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
+                <li><a href="#plans">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
+                <li><a href="#comments">{% blocktrans %}How can I format my comments?{% endblocktrans %}</a></li>
+                <li><a href="#indexhow">{% blocktrans %}How is the AstroBin index calculated?{% endblocktrans %}</a></li>
+                <li><a href="#indexslow">{% blocktrans %}I received some Likes, why is my AstroBin index not updated?{% endblocktrans %}</a></li>
+                <li><a href="#iots">{% blocktrans %}How is the Image of the Day selected?{% endblocktrans %}</a></li>
             </ol>
             <br/>
             <h2>{% trans "... and their answers!" %}</h2>
             <ol class="faq">
                 <li>
-                    <a name="1"></a>
+                    <a name="free"></a>
                     <h4>{% blocktrans %}Is this website for free?{% endblocktrans %}</h4>
                     <p>{% blocktrans %}Yes. AstroBin is completely free!{% endblocktrans %}</p>
                 </li>
                 <li>
-                    <a name="2"></a>
+                    <a name="limits"></a>
                     <h4>{% blocktrans %}Are there any limits on how large and how many images I can upload?{% endblocktrans %}</h4>
                     <p>
                     {% blocktrans %}<strong>NO!</strong> On AstroBin you can upload as many images as you want, and as large as you want. In fact, full size images are encouraged!{% endblocktrans %}
                     </p>
                 </li>
                 <li>
-                    <a name="3"></a>
+                    <a name="formats"></a>
                     <h4>{% blocktrans %}What image formats are supported?{% endblocktrans %}</h4>
                     <p>
                     {% blocktrans %}AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too.{% endblocktrans %}
                     </p>
                 </li>
                 <li>
-                    <a name="4"></a>
+                    <a name="safe"></a>
                     <h4>{% blocktrans %}Is my data safe on AstroBin?{% endblocktrans %}</h4>
                     <p>
                     {% trans "Absolutely. There are multiple ways in which AstroBin can store your data very safely. First of all, the images you upload are stored on a highly durable, highly available, redundant backend. The durability of the storage backend is 99.999999999 percent over a given year. This means that if you upload 10,000 images, you can expect to lose one image to data corruption once in 10,000,000 year. The images are duplicated across two different physical servers, for protection against natural disasters." %}
@@ -60,14 +60,14 @@
                     </p>
                 </li>
                 <li>
-                    <a name="5"></a>
+                    <a name="worthy"></a>
                     <h4>{% blocktrans %}I've seen beautiful images on this site. I'm not worthy of posting mine!{% endblocktrans %}</h4>
                     <p>
                     {% blocktrans %}Nonsense. AstroBin has <strong>not</strong> been made to showcase beautiful image, but to give everybody an opportunity to contribute to a vast and evergrowing effort of centralization and indexing of important data. That 30 minute picture of M31 you took last night between the clouds <em>belongs</em> here! Don't be shy and post it!{% endblocktrans %}
                     </p>
                 </li>
                 <li>
-                    <a name="6"></a>
+                    <a name="staging"></a>
                     <h4>{% blocktrans %}What's the deal with the Staging Area and the Public Area?{% endblocktrans %}</h4>
                     <p>
                     {% blocktrans %}On AstroBin you have two places for our images. The Staging Area is where you can upload images that you want to quickly share on forums, mailing lists or social networks. The days of scaling down and compressing your image so you can upload it to a forum for feedback and critique are over! Just upload to AstroBin's Staging Area, and send the link to anyone you want. The image will be visible only to the intended recipients, and won't appear on your profile or AstroBin's home page.{% endblocktrans %}
@@ -77,15 +77,7 @@
                     </p>
                 </li>
                 <li>
-                    <a name="7"></a>
-                    <h4>{% blocktrans %}How do I get an image featured on the Messier Marathon page?{% endblocktrans %}</h4>
-                    <p>
-                    {% url messier as messier_url %}
-                    {% blocktrans %}Images on the <a href="{{messier_url}}">Messier Marathon page</a> are selected via a democratic nomination process. If you see an image of some Messier Object, and you think that it should appear on the Messier Marathon page, nominate it using the <strong>Actions</strong> menu. The image with the most nominations for a certain Messier object will automatically be featured.{% endblocktrans %}
-                    </p>
-                </li>
-                <li>
-                    <a name="8"></a>
+                    <a name="why"></a>
                     <h4>{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</h4>
                     <p>
                     {% blocktrans %}AstroBin was born out of the desire to end something that had been going on for too long: the waste of incredible material to the sea of chaos that the Internet can be. For years, fantastic astrophotographs have beeen uploaded to Internet Forums, often with little or no data, or to general purpose image hosting websites, invariably with no data attached.{% endblocktrans %}
@@ -98,7 +90,7 @@
                     </p>
                 </li>
                 <li>
-                    <a name="9"></a>
+                    <a name="plans"></a>
                     <h4>{% blocktrans %}What are the plans for the future?{% endblocktrans %}</h4>
                     <p>
                     {% blocktrans %}<em>AstroBin</em> is just starting out, and this time we can really say that the sky is the limit! Tons of ideas are in the pipeline. As the user base grows, so does the data. Suddenly, things like automated supernovae search become possible: you could simply upload an image of a galaxy, and AstroBin could compare it to pictures of the same galaxy taken previously.{% endblocktrans %}
@@ -111,7 +103,7 @@
                     </p>
                 </li>
                 <li>
-                    <a name="10"></a>
+                    <a name="comments"></a>
                     <h4>{% blocktrans %}How can I format my comments?{% endblocktrans %}</h4>
                     <p>
                     {% blocktrans %}AstroBin uses the Markdown syntax. Please use the following reference table:{% endblocktrans %}
@@ -127,60 +119,25 @@
                     </table>
                 </li>
                 <li>
-                    <a name="11"></a>
-                    <h4>{% blocktrans %}What is the correct way to vote images?{% endblocktrans %}</h4>
+                    <a name="indexhow"></a>
+                    <h4>{% blocktrans %}How is the AstroBin index calculated?{% endblocktrans %}</h4>
                     <p>
-                    {% blocktrans %}You can vote each image from 1 to 5 stars, and they are defined like this:{% endblocktrans %}
+                    {% blocktrans %}The AstroBin index is a function of the number of Likes and the number of images posted by a user.{% endblocktrans %}
                     </p>
-                    <table class="table table-condensed">
-                        <tr>
-                            <th><i class="icon-star"></i></th>
-                            <td>{% trans "It's a start, but it needs better data." %}</td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                            </th>
-                            <td>{% trans "It looks good, but it needs better processing." %}</td>
-                        </tr>                       
-                        <tr>
-                            <th>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                            </th>
-                            <td>{% trans "Good data, good processing." %}</td>
-                        </tr>                       
-                        <tr>
-                            <th>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                            </th>
-                            <td>{% trans "Great result!" %}</td>
-                        </tr>                       
-                        <tr>
-                            <th>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                            </th>
-                            <td>{% trans "Top quality!" %}</td>
-                        </tr>                       
-                    </table>
                 </li>
+
                 <li>
-                    <a name="12"></a>
-                    <h4>{% blocktrans %}The rating values seem odd. How are they calculated?{% endblocktrans %}</h4>
+                    <a name="indexslow">
+                    <h4>{% blocktrans %}I received some Likes, why is my AstroBin index not updated?{% endblocktrans %}</h4>
                     <p>
-                        {% blocktrans %}AstroBin uses two tricks to normalize image ratings. First of all, a <em>sigma-reject</em> algorithm is applied to exclude votes that are too far from the average. This takes care of people who don't vote honestly. Then the rating is interpolated via a hyperbolic function of the number of votes that the image received, to ensure that images with too few votes aren't rated better than images with similar rating, but lots of votes.{% endblocktrans %}
-                    </p>
+                    {% blocktrans %}Because it's computationally expensive, the AstroBin index is updated only every 24 hours. The same applies for the search index, the Big Wall, and some other user data.{% endblocktrans %}
+                </li>
+
+                <li>
+                    <a name="iotd"></a>
+                    <h4>{% blocktrans %}How is the Image of the Day selected?{% endblocktrans %}</h4>
                     <p>
-                        {% blocktrans %}This produces the "AstroBin index", which is a fairer way to compare images and users.{% endblocktrans %}
+                    {% blocktrans %}Every night, an algorithm looks at the images uploaded during the previous 7 days. The image with most Likes in that period is selected as Image of the Day.{% endblocktrans %}
                     </p>
                 </li>
             </ol>
