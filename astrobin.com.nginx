@@ -38,7 +38,7 @@ server {
     listen 443 default ssl;
     client_max_body_size 4G;
     server_name www.astrobin.com;
-    error_page 502 503 /sitestatic/html/502.html;
+    error_page 502 503 https://s3.amazonaws.com/cdn.astrobin.com/www/static/html/502.html;
 
     rewrite ^/notices/$ /notifications permanent;
 

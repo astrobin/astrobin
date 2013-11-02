@@ -10,7 +10,7 @@ LOCAL_STATIC_STORAGE = DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '58'
+MEDIA_VERSION = '59'
 LONGPOLL_ENABLED = False
 
 ADMINS = (
@@ -201,7 +201,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
-    'staticfiles',
+    'django.contrib.staticfiles',
 
     # AstroBin apps
     'common',
@@ -345,8 +345,8 @@ if LOCAL_STATIC_STORAGE:
 else:
     STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
 STATICFILES_FINDERS = (
-    'staticfiles.finders.FileSystemFinder',
-    'staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 STATICFILES_DIRS = (local_path('static/'),)
 
@@ -364,8 +364,6 @@ PIPELINE_CSS = {
             'css/token-input.css',
             'css/jquery.multiselect.css',
             'css/jquery.qtip.css',
-
-            'common/css/jquery.lightbox-0.5.css',
 
             'astrobin_apps_images/css/jquery.capty.css',
 
@@ -387,7 +385,6 @@ PIPELINE_JS = {
         'source_filenames': (
             'common/js/handlebars-1.0.rc.1.js',
             'common/js/ember-1.0.0-pre.2.js',
-            'common/js/jquery.lightbox-0.5.js',
 
             'astrobin_apps_images/js/astrobin_apps_images.js',
             'astrobin_apps_images/js/jquery.capty.js',
