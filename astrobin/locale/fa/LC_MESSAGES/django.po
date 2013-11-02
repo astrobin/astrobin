@@ -2655,7 +2655,7 @@ msgstr "ثانیه های قبل"
 #: views.py:1658 views.py:3017 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
-msgstr "% قبل"
+msgstr "%s قبل"
 
 #: views.py:1681 templates/popover/user.html:19
 msgid "Member since"
@@ -4041,8 +4041,8 @@ msgid ""
 "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
 "integration time."
 msgstr ""
-"(total_users): آپلود کاربران. (total_images): تصاویر، در دسترس بودن. "
-"(total_integration): ساعات یکپارچه سازی تصاویر"
+"%(total_users)s: آپلود کاربران. %(total_images)s: تصاویر، در دسترس بودن. "
+"%(total_integration)s: ساعات یکپارچه سازی تصاویر"
 
 #: templates/stats.html:16
 msgid "Total integration hours in the last 12 months"
