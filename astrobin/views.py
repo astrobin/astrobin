@@ -1449,8 +1449,7 @@ def image_promote(request, id):
         image.save()
 
         followers = [
-            User.objects.get(id=x.user.id) for x in
-            ToggleProperty.objects.toggleproperties_for_object("follow", request.user)
+            ToggleProperty.objects.toggleproperties_for_object("follow", User.objects.get(pk = request.user.pk))
         ]
         push_notification(followers, 'new_image',
             {
