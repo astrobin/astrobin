@@ -158,7 +158,7 @@ def index(request, template = 'index/root.html', extra_context = None):
     response_dict = {
         'registration_form': RegistrationForm(),
         'section': section,
-        'recent_images': Image.objects.select_related('user__userprofile'),
+        'recent_images': Image.objects.filter(is_wip = False).select_related('user__userprofile'),
         'recent_images_alias': 'thumb',
         'recent_images_batch_size': 55,
     }
@@ -330,6 +330,7 @@ def index(request, template = 'index/root.html', extra_context = None):
                     "SELECT astrobin_image.* " +
                     "FROM astrobin_image " +
                     "JOIN recently_liked_to_show ON id = object_id " +
+                    "WHERE astrobin_image.is_wip = false " +
                     "ORDER BY recently_liked_to_show.created DESC;"
                 )
 
@@ -350,6 +351,7 @@ def index(request, template = 'index/root.html', extra_context = None):
                     "SELECT astrobin_image.* " +
                     "FROM astrobin_image " +
                     "JOIN recently_bookmarked_to_show ON id = object_id " +
+                    "WHERE astrobin_image.is_wip = false " +
                     "ORDER BY recently_bookmarked_to_show.created DESC;"
                 )
 
