@@ -882,7 +882,16 @@ class Image(HasSolutionMixin, models.Model):
         options = settings.THUMBNAIL_ALIASES[''][alias].copy()
 
         field = self.get_thumbnail_field(revision_label);
-        thumbnailer = get_thumbnailer(field)
+
+        # Try to generate the thumbnail starting from the file cache locally.
+        local_path = field.storage.local_storage.path(field.name)
+        try:
+            with open(local_path) as local_file:
+                thumbnailer = get_thumbnailer(local_file, field.name)
+        except IOError:
+            # If things go awry, fallback to getting the file from the remote
+            # storage.
+            thumbnailer = get_thumbnailer(field)
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text
@@ -917,6 +926,7 @@ class Image(HasSolutionMixin, models.Model):
         if not url:
             thumb = self.thumbnail_raw(alias, thumbnail_settings)
             options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+
             url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
                 options['size'][0],
                 options['size'][1])
