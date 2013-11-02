@@ -1448,7 +1448,10 @@ def image_promote(request, id):
         image.is_wip = False
         image.save()
 
-        followers = [x.user for x in ToggleProperty.objects.toggleproperties_for_object("follow", request.user)]
+        followers = [
+            User.objects.get(id=x.user.id) for x in
+            ToggleProperty.objects.toggleproperties_for_object("follow", request.user)
+        ]
         push_notification(followers, 'new_image',
             {
                 'originator': request.user,
