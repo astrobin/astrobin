@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-01 07:24+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2013-11-02 00:05+0100\n"
+"Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.1.6\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -26,163 +26,180 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:20
 #: templates/rawdata/publicdatapool_list.html:32
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: folders.py:92 templates/rawdata/_folder_dropdown.html:14
 #: templates/rawdata/_images.html:18 templates/rawdata/library.html:65
 #: templates/rawdata/rawimage_detail.html:15
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #: folders.py:117 templates/rawdata/_folder_dropdown.html:28
 msgid "Upload date"
-msgstr ""
+msgstr "Data de pujada"
 
 #: folders.py:141 templates/rawdata/_folder_dropdown.html:21
 #: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
 msgid "Acquisition date"
-msgstr ""
+msgstr "Data d'adquisició"
 
 #: folders.py:166 templates/rawdata/_folder_dropdown.html:35
 #: templates/rawdata/library.html:89 templates/rawdata/rawimage_detail.html:19
 msgid "Camera"
-msgstr ""
+msgstr "Càmera"
 
 #: folders.py:190 templates/rawdata/_folder_dropdown.html:42
 #: templates/rawdata/library.html:97
 msgid "Telescope or lens"
-msgstr ""
+msgstr "Telescopi o objectiu "
 
 #: folders.py:214 templates/rawdata/_folder_dropdown.html:49
 #: templates/rawdata/library.html:105
 msgid "Filter"
-msgstr ""
+msgstr "Filtre"
 
 #: folders.py:238 templates/rawdata/_folder_dropdown.html:56
 #: templates/rawdata/library.html:113
 msgid "Subject"
-msgstr ""
+msgstr "Objecte"
 
 #: folders.py:262 templates/rawdata/_folder_dropdown.html:63
 #: templates/rawdata/library.html:121
 #: templates/rawdata/rawimage_detail.html:20
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatura"
 
 #: forms.py:86
+#, fuzzy
 msgid "Users"
-msgstr ""
+msgstr "Usuaris"
 
 #: forms.py:87
+#, fuzzy
 msgid "A list of users you want to invite. Use a comma to separate them."
-msgstr ""
+msgstr "Llista d'usuaris als quals vols convidar. Separa'ls amb una coma."
 
 #: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
-msgstr ""
+msgstr "Desconegut"
 
 #: models.py:45
 msgid "Light"
-msgstr ""
+msgstr "Light"
 
 #: models.py:46
+#, fuzzy
 msgid "Offset/Bias"
-msgstr ""
+msgstr "Offset/Bias"
 
 #: models.py:47
+#, fuzzy
 msgid "Dark"
-msgstr ""
+msgstr "Dark"
 
 #: models.py:48
+#, fuzzy
 msgid "Flat"
-msgstr ""
+msgstr "Flat"
 
 #: models.py:216
+#, fuzzy
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
 msgstr ""
+"Nom públic per a aquesta carpeta. Sigues descriptiu, inclou el nom de "
+"l'objecte i una longitud focal en mil·límetres."
 
 #: models.py:220 models.py:288
 #: templates/rawdata/privatesharedfolder_list.html:38
 #: templates/rawdata/publicdatapool_list.html:33
+#, fuzzy
 msgid "Description"
-msgstr ""
+msgstr "Descripció"
 
 #: models.py:221
 msgid "Describe the goals and terms of this pool."
-msgstr ""
+msgstr "Descriu els objectius i condicions d'aquesta carpeta."
 
 #: models.py:284
 msgid ""
 "A name for this folder. Be descriptive, so that the folder can be quickly "
 "recognized by the name."
 msgstr ""
+"Nom per aquesta carpeta. Sigues descriptiu per que la carpeta sigui "
+"reconeguda fàcilment pel seu nom."
 
 #: models.py:289
 msgid "Describe the goals of this folder."
-msgstr ""
+msgstr "Descriu els objectes d'aquesta carpeta."
 
 #: serializers.py:38
 msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
 msgstr ""
+"No ten més espai lliure en Astrobin Rawdata. Considera actualitzar el teu "
+"compte"
 
 #: signal_handlers.py:18
 msgid ""
 "You cannot downgrade to this plan because your files would not fit in the "
 "allocated space. Please delete some files first."
 msgstr ""
+"No pots reduir la capacitat del teu pla degut a que els teus arxius no hi "
+"caben a l'espai assignat. Si us plau, primer esborra alguns arxius."
 
 #: templates/rawdata/_browser_js.html:20 templates/rawdata/_images.html:14
 msgid "Select all"
-msgstr ""
+msgstr "Seleccionar tots"
 
 #: templates/rawdata/_browser_js.html:40
 msgid "Reset selection"
-msgstr ""
+msgstr "Reinicía la selecció"
 
 #: templates/rawdata/_browser_js.html:50 templates/rawdata/_images.html:41
 #: templates/rawdata/privatesharedfolder_detail.html:142
 #: templates/rawdata/publicdatapool_detail.html:111
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
-msgstr ""
+msgstr "Descarregar"
 
 #: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
 msgid "Preprocess"
-msgstr ""
+msgstr "Preprocessar"
 
 #: templates/rawdata/_browser_js.html:63
 msgid "Share"
-msgstr ""
+msgstr "Compartir"
 
 #: templates/rawdata/_browser_js.html:70
 #: templates/rawdata/privatesharedfolder_detail.html:8
 msgid "Private shared folder"
-msgstr ""
+msgstr "Carpeta privada compartida"
 
 #: templates/rawdata/_browser_js.html:74
 #: templates/rawdata/publicdatapool_detail.html:8
+#, fuzzy
 msgid "Public data pool"
-msgstr ""
+msgstr "Carpeta pública"
 
 #: templates/rawdata/_browser_js.html:80 templates/rawdata/_images.html:44
 #: templates/rawdata/privatesharedfolder_detail.html:46
 #: templates/rawdata/privatesharedfolder_detail.html:184
 #: templates/rawdata/privatesharedfolder_list.html:92
 msgid "Delete"
-msgstr ""
+msgstr "Esborrar"
 
 #: templates/rawdata/_folder_dropdown.html:7
 #: templates/rawdata/library.html:129
+#, fuzzy
 msgid "Smart folders"
-msgstr ""
+msgstr "Carpetes intel·ligents"
 
 #: templates/rawdata/_folders.html:12
 msgid "Files"
-msgstr ""
+msgstr "Arxius"
 
 #: templates/rawdata/_images.html:19 templates/rawdata/library.html:73
 #: templates/rawdata/privatesharedfolder_detail.html:87
@@ -191,11 +208,11 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:22
 #: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
-msgstr ""
+msgstr "Pujat"
 
 #: templates/rawdata/_screenshot_tour.html:3
 msgid "Screenshot tour"
-msgstr ""
+msgstr "Veure captures de pantalla"
 
 #: templates/rawdata/help_01.html:4 templates/rawdata/help_01.html.py:8
 #: templates/rawdata/help_01.html:32 templates/rawdata/help_02.html:4
@@ -214,17 +231,20 @@ msgstr ""
 #: templates/subscription/subscription_done.html:8
 #: templates/subscription/subscription_list.html:4
 #: templates/subscription/subscription_list.html:8
+#, fuzzy
 msgid "AstroBin Raw Data"
-msgstr ""
+msgstr "Dades Raw AstroBin"
 
 #: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
 #: templates/rawdata/help_03.html:9
+#, fuzzy
 msgid "To safely store and organize your raw files."
-msgstr ""
+msgstr "Per desar y organitzar els teus arxius Raw. "
 
 #: templates/rawdata/help_01.html:19
+#, fuzzy
 msgid "What is AstroBin Raw Data?"
-msgstr ""
+msgstr "¿Qué és Dades Raw AstroBin?"
 
 #: templates/rawdata/help_01.html:20
 msgid ""
@@ -232,6 +252,9 @@ msgid ""
 "Thanks to it, you will never have to worry about losing your precious work, "
 "nor all the important meta-data associated with it."
 msgstr ""
+"Ara ja t'agrada AstroBin per com organitza les teves imatges. Gràcies a això "
+"ja mai no et preocuparàs de perdre la teva preciada feina ni les dades "
+"asociades amb ella."
 
 #: templates/rawdata/help_01.html:22
 msgid "What if we told you now you can do the same with your raw files?"

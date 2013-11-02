@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-01 07:22+0000\n"
-"PO-Revision-Date: 2013-05-05 18:01+0100\n"
-"Last-Translator: dark_sky <bushbarack@yahoo.de>\n"
+"PO-Revision-Date: 2013-11-01 09:10+0100\n"
+"Last-Translator: Niels <astrobin.com@n13l5.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -1376,28 +1376,32 @@ msgid "commented on gear item"
 msgstr "Ausrüstung kommentieren"
 
 #: locale_extras.py:11
+#, fuzzy
 msgid "bookmarked"
-msgstr ""
+msgstr "Lesezeichen gesetzt"
 
 #: locale_extras.py:12
+#, fuzzy
 msgid "likes"
-msgstr ""
+msgstr "mag"
 
 #: locale_extras.py:13
 msgid "has written a review on"
 msgstr "hat einen Bericht geschrieben zu"
 
 #: locale_extras.py:14
+#, fuzzy
 msgid "created a new public data pool"
-msgstr ""
+msgstr "erstellte einen neuen öffentlichen Datenpool"
 
 #: locale_extras.py:15
+#, fuzzy
 msgid "added new data to public data pool"
-msgstr ""
+msgstr "fügte Daten zum öffentlichen Datenpool hinzu"
 
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
-msgstr ""
+msgstr "fügte ein bearbeitetes Bild zum öffentlichen Datenpool hinzu"
 
 #: models.py:66
 msgid "None (All rights reserved)"
@@ -2193,6 +2197,7 @@ msgstr "Richtiger Name"
 #: models.py:1299
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
+"Wenn vorhanden, wird dein richtiger Name wird auf der Webseite verwendet."
 
 #: models.py:1313
 msgid "Job"
@@ -2238,13 +2243,12 @@ msgid "Company description"
 msgstr "Firmenbeschreibung"
 
 #: models.py:1354
-#, fuzzy
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
 "Kurze Beschreibung der Firma, die du auf AstroBin repräsentierst. Du kannst "
-"<a href=\"/faq/#10\">Formatierungen</a> verwenden."
+" <a href=\"/faq/#comments\">Formatierungen</a> verwenden."
 
 #: models.py:1362
 msgid "Company website"
@@ -2442,13 +2446,12 @@ msgid ""
 msgstr "Ein Marketingspruch, der dieses Produkt zusammenfasst."
 
 #: models.py:1839
-#, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
-"Kommerzielle Beschreibung deines Produktes. Du kannst <a href=\"/faq/"
-"#10\">Formatierungen</a> verwenden."
+"Kommerzielle Beschreibung deines Produktes. Du kannst <a "
+"href=\"/faq/#comments\">Formatierungen</a> verwenden."
 
 #: models.py:1858
 msgid "Commercial gear items"
@@ -5555,7 +5558,6 @@ msgid "Global activity stream"
 msgstr "Aktivitäten-Stream"
 
 #: templates/index/root.html:173
-#, fuzzy
 msgid "Recently uploaded"
 msgstr "hochgeladen"
 

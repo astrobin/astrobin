@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-01 07:24+0000\n"
-"PO-Revision-Date: 2013-02-07 15:33+0100\n"
-"Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
+"PO-Revision-Date: 2013-11-01 23:30+0100\n"
+"Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -133,6 +133,8 @@ msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
 msgstr ""
+"No te queda espacio libre en AstroBin Rawdata. Considera actualizar tu "
+"cuenta."
 
 #: signal_handlers.py:18
 msgid ""
@@ -939,11 +941,11 @@ msgid ""
 "can contribute to. <strong>Private Shared Folders</strong> are part of "
 "Astrobin's <a href=\"%(rawdata_url)s\">Raw Data Platform</a>."
 msgstr ""
-"Probablemente estés aquí debido a que hayas sido invitado a acceder en una "
-"<strong>Carpeta Privada Compartida</strong>: una colección de datos Raw en "
+"Probablemente estés aquí debido a que hayas sido invitado a acceder a una "
+"<strong>Carpeta Privada Compartida</strong>, una colección de datos Raw en "
 "la que los usuarios pueden contribuir. Las <strong>carpetas privadas "
-"compartidas</strong> son parte de la <a href=\"%(rawdata_url)s\">Plataforma "
-"de Datos Raw</a> de AstroBin."
+"compartidas</strong> son parte de la <a href=\"%(rawdata_url)s\">Plataforma de "
+"Datos Raw</a> de AstroBin."
 
 #: templates/rawdata/restricted.html:34
 msgid "Find out more!"
@@ -997,13 +999,12 @@ msgid "Please refresh this page in a few seconds."
 msgstr "Por favor, refresca esta página en unos pocos segundos."
 
 #: templates/rawdata/uploader.html:4 templates/rawdata/uploader.html.py:8
-#, fuzzy
 msgid "AstroBin Raw Data Uploader"
-msgstr "Datos Raw AstroBin"
+msgstr "Cargador de datos Raw de AstroBin"
 
 #: templates/rawdata/uploader.html:10
 msgid "A desktop client"
-msgstr ""
+msgstr "Un cliente de escritorio"
 
 #: templates/rawdata/uploader.html:19
 msgid ""
@@ -1034,9 +1035,8 @@ msgid ""
 msgstr ""
 
 #: templates/rawdata/uploader.html:43
-#, fuzzy
 msgid "Download for:"
-msgstr "Descargar"
+msgstr "Descargar para:"
 
 #: templates/rawdata/uploader.html:62 templates/rawdata/uploader.html.py:67
 #: templates/rawdata/uploader.html:77
