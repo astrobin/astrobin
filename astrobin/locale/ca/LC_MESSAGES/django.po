@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-01 07:22+0000\n"
-"PO-Revision-Date: 2013-01-20 01:02+0100\n"
+"PO-Revision-Date: 2013-11-01 16:05+0100\n"
 "Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ca\n"
@@ -1324,18 +1324,26 @@ msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
+"Utilitza aquest camp per marcar que l'article que reclames en realitat és el "
+"mateix producte (o una variant del mateix) d'algún altre que ja has "
+"reclamat abans."
 
 #: forms.py:918 forms.py:981
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
 msgstr ""
+"No es poden crear més de %d reclamacions. Pensa en la possibilitat "
+"d'actualitzar la teva afiliació!"
 
 #: forms.py:929 forms.py:1000
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
+"Utilitza aquest camp per marcar que l'article que estàs fusionant en "
+"realitat és el mateix producte (o una variant del mateix) d'algún altre que "
+"ja has reclamat abans."
 
 #: forms.py:989
 #, fuzzy
@@ -1355,9 +1363,8 @@ msgid "Body"
 msgstr "Cos"
 
 #: locale_extras.py:7
-#, fuzzy
 msgid "uploaded a new image"
-msgstr "S'ha pujat una nova revisió de"
+msgstr "ha pujat una nova revisió de"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
@@ -1373,11 +1380,11 @@ msgstr "ha comentat un aparell"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr ""
+msgstr "marcat"
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr ""
+msgstr "li agrada"
 
 #: locale_extras.py:13
 msgid "has written a review on"
@@ -2176,7 +2183,7 @@ msgstr "Denominació correcta"
 
 #: models.py:1299
 msgid "If present, your real name will be used throughout the website."
-msgstr ""
+msgstr "Si hi consta, el seu nom real s'utilitza en tot el lloc web."
 
 #: models.py:1313
 msgid "Job"
@@ -2367,9 +2374,8 @@ msgid "Price"
 msgstr "Preu"
 
 #: models.py:1766
-#, fuzzy
 msgid "Currency"
-msgstr "Transparència"
+msgstr "Moneda"
 
 #: models.py:1782
 msgid "Retailed gear items"
@@ -2412,10 +2418,14 @@ msgid ""
 "choose it from this list. If you upload several revisions, they will also "
 "appear in the commercial page."
 msgstr ""
+"La imatge oficial, comercial d'aquest producte. Puja una imatge a través de "
+"la interfície habitual, estableix el tipus d'objecte com \"Instrumental\", i "
+"després selecciona-la de la llista. Si carregues diverses revisions, també "
+"apareixeran a la pàgina comercial."
 
 #: models.py:1823
 msgid "Tagline"
-msgstr ""
+msgstr "Lema"
 
 #: models.py:1824
 msgid ""
@@ -2432,9 +2442,8 @@ msgstr ""
 "servir algunes <a href=\"/faq/#10\">marques de format</a> "
 
 #: models.py:1858
-#, fuzzy
 msgid "Commercial gear items"
-msgstr "ha comentat un aparell"
+msgstr "Elements d'instrumental comercials"
 
 #: search.py:51 templates/image/actions/bring_to_attention.html:30
 msgid "No results. Sorry."
@@ -2445,25 +2454,24 @@ msgid "Matching items:"
 msgstr "Elements coincidents:"
 
 #: settings.py:572
-#, fuzzy
 msgid "Remove from bookmarks"
-msgstr "Darreres marcades com a preferides"
+msgstr "Desmarcar com a preferides"
 
 #: settings.py:573
 msgid "Bookmark"
-msgstr ""
+msgstr "Preferit"
 
 #: settings.py:578 settings.py:580
 msgid "Unlike"
-msgstr ""
+msgstr "Ja no m'agrada"
 
 #: settings.py:579 settings.py:581
 msgid "Like"
-msgstr ""
+msgstr "M'agrada"
 
 #: settings.py:586
 msgid "Stop following"
-msgstr ""
+msgstr "Deixar de seguir"
 
 #: settings.py:587
 msgid "Follow"
@@ -2599,6 +2607,8 @@ msgid ""
 "Image uploaded. After this basic information, remember to edit the gear and "
 "acquisition details using the Actions menu. Thank you!"
 msgstr ""
+"Imatge actualitzada. Després d'aquesta informació bàsica, recorda editar "
+"l'equip i les dades d'adquisició amb el menú Accions. Gràcies!"
 
 #: views.py:1185 views.py:1257 views.py:1337 views.py:1359 views.py:1999
 #: views.py:2012 views.py:2033 views.py:2070 views.py:2160 views.py:2222
@@ -2619,7 +2629,7 @@ msgstr "La teva imatge s'ha esborrat"
 
 #: views.py:1387
 msgid "Revision deleted."
-msgstr ""
+msgstr "Revisió esborrada."
 
 #: views.py:1533
 msgid "No date specified"
@@ -2635,7 +2645,7 @@ msgstr "Imatges d'equip"
 
 #: views.py:1583 templates/image/edit/acquisition.html:81
 msgid "Deep sky"
-msgstr ""
+msgstr "Cel profund"
 
 #: views.py:1584 templates/image/edit/acquisition.html:78
 msgid "Solar system"
@@ -2683,6 +2693,8 @@ msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
+"Hi ha hagut un o més errors en processar el formulari. Potser cal desplaçar "
+"la pàgina al final per veure-ls."
 
 #: views.py:2579
 #, fuzzy
@@ -2739,9 +2751,8 @@ msgid "Your image was bookmarked"
 msgstr "Han marcat una de les teves imatges com a favorita"
 
 #: management/__init__.py:75
-#, fuzzy
 msgid "Your image was liked"
-msgstr "La teva imatge s'ha esborrat"
+msgstr "La teva imatge ha agradat"
 
 #: management/__init__.py:81
 msgid "New image with some gear you follow"
@@ -2797,11 +2808,11 @@ msgstr ""
 
 #: templates/500.html:11
 msgid "Fatal error"
-msgstr ""
+msgstr "Error fatal"
 
 #: templates/500.html:13
 msgid "Nothing to worry about, it's not your fault."
-msgstr ""
+msgstr "No t'has de preocupar, no es culpa teva."
 
 #: templates/500.html:18
 msgid ""
@@ -2809,10 +2820,13 @@ msgid ""
 "details, so we will try to fix the problem as soon as possible. Sorry about "
 "the inconvenience! "
 msgstr ""
+"Ha ocorregut una cosa inesperada! Hem rebut un correu electrònic amb els "
+"detalls tècnics, pel que tractarem de solucionar el problema el més aviat "
+"possible. Disculpeu les molèsties!"
 
 #: templates/500.html:21
 msgid "Go back to the hom page."
-msgstr ""
+msgstr "Ves a la pàgina d'inici."
 
 #: templates/503.html:5
 msgid "AstroBin is temporarily unavailable"
@@ -2964,15 +2978,16 @@ msgstr "Com puc assignar format els meus comentaris?"
 
 #: templates/faq.html:20 templates/faq.html.py:123
 msgid "How is the AstroBin index calculated?"
-msgstr ""
+msgstr "Com es calcula l'índex AstroBin?"
 
 #: templates/faq.html:21 templates/faq.html.py:131
 msgid "I received some Likes, why is my AstroBin index not updated?"
 msgstr ""
+"He rebut alguns \"M'agrada\", per què no s'actualitza el meu index AstroBin?"
 
 #: templates/faq.html:22 templates/faq.html.py:138
 msgid "How is the Image of the Day selected?"
-msgstr ""
+msgstr "Com es selecciona la \"Imatge del Dia\"?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3201,6 +3216,8 @@ msgid ""
 "The AstroBin index is a function of the number of Likes and the number of "
 "images posted by a user."
 msgstr ""
+"L'índex AstroBin és en funció del nombre de \"M'agrada\" i el nombre d'imatges "
+"enviades per un usuari."
 
 #: templates/faq.html:133
 msgid ""
@@ -3208,6 +3225,9 @@ msgid ""
 "every 24 hours. The same applies for the search index, the Big Wall, and "
 "some other user data."
 msgstr ""
+"Com que és computacionalment car, l'índex AstroBin s'actualitza només cada "
+"24 hores. El mateix s'aplica per a l'índex de recerca, la Gran Muralla, i "
+"alguns altres dades de l'usuari."
 
 #: templates/faq.html:140
 msgid ""
@@ -3215,13 +3235,17 @@ msgid ""
 "days. The image with most Likes in that period is selected as Image of the "
 "Day."
 msgstr ""
+"Cada nit, un algoritme analitza les imatges pujades en els últims 7 dies. La "
+"imatge amb més \"M'agrada\" en aquest període se selecciona com a imatge del "
+"dia."
 
 #: templates/faq.html:146
-#, fuzzy
 msgid ""
 "Do you have a question not covered here! Please <a href=\"/contact/"
 "\">contact us</a>!"
-msgstr "Tens algun dubte encara, envia'ns un e-mail a:"
+msgstr ""
+"si encara tens dubtes sense resoldre, si us plau <a "
+"href=\"/contact/\">contacta'ns</a>!"
 
 #: templates/guidelines.html:7 templates/maintenance_base.html:526
 #: templates/base/footer.html:21
@@ -3600,19 +3624,19 @@ msgid "Sign up now!"
 msgstr "Registra't ara!"
 
 #: templates/iotd_archive.html:7 templates/iotd_archive.html.py:12
-#, fuzzy
 msgid "Archive of 'Image of the day' winners"
-msgstr "Imatge del dia"
+msgstr "Arxiu de guanyadors de la Imatge del dia"
 
 #: templates/iotd_archive.html:22 templates/actstream/action.html:81
 #: templates/actstream/action.html.py:88 templates/actstream/action.html:104
 #: templates/actstream/action.html:111 templates/index/root.html:109
 msgid "by"
-msgstr ""
+msgstr "per"
 
 #: templates/iotd_archive.html:31 templates/index/root.html:126
+#, fuzzy
 msgid "Runners-up"
-msgstr ""
+msgstr "Subcampions"
 
 #: templates/leaderboard.html:8 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:147 templates/base/site_links.html:78
@@ -3628,15 +3652,13 @@ msgid "User"
 msgstr "Usuari"
 
 #: templates/leaderboard.html:25 templates/base/user_links_entries.html:108
-#, fuzzy
 msgid "AstroBin index"
-msgstr "AstroBin és social!"
+msgstr "Index AstroBin"
 
 #: templates/leaderboard.html:30 templates/base/user_links_entries.html:111
 #: templates/user/profile-subnav.html:85
-#, fuzzy
 msgid "Followers"
-msgstr "Seguides"
+msgstr "Seguidors"
 
 #: templates/leaderboard.html:40
 msgid "Total integration"
@@ -3721,7 +3743,7 @@ msgstr "Galeria"
 #: templates/inclusion_tags/search_image_list.html:97
 #: templates/user/profile-subnav.html:42
 msgid "Bookmarks"
-msgstr ""
+msgstr "Favorits"
 
 #: templates/maintenance_base.html:257 templates/image/full.html:75
 #: templates/image/detail/image_card.html:10
@@ -3761,9 +3783,8 @@ msgid "Commercial information"
 msgstr "Informació addicional"
 
 #: templates/maintenance_base.html:302 templates/profile-edit-menu.html:23
-#, fuzzy
 msgid "Retailer information"
-msgstr "Informació bàsica"
+msgstr "Informació del venedor"
 
 #: templates/maintenance_base.html:328 templates/profile-edit-menu.html:54
 msgid "Preferences"

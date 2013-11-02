@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-01 07:22+0000\n"
-"PO-Revision-Date: 2013-09-11 08:09+0100\n"
-"Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
+"PO-Revision-Date: 2013-11-01 23:26+0100\n"
+"Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -1358,9 +1358,8 @@ msgid "Body"
 msgstr "Contenido"
 
 #: locale_extras.py:7
-#, fuzzy
 msgid "uploaded a new image"
-msgstr "Subir nueva imagen"
+msgstr "ha subido una nueva imagen"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
@@ -1376,11 +1375,11 @@ msgstr "ha comentado un elemento de instrumental"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr ""
+msgstr "añadido a favoritos"
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr ""
+msgstr "le gusta"
 
 #: locale_extras.py:13
 msgid "has written a review on"
@@ -1891,9 +1890,8 @@ msgid "Subject type"
 msgstr "Tipo de objeto"
 
 #: models.py:668
-#, fuzzy
 msgid "Objects in field"
-msgstr "Objeto no encontrado"
+msgstr "Objetos en el campo"
 
 #: models.py:669
 msgid "Use a <strong>comma</strong> to separate the values."
@@ -2183,7 +2181,7 @@ msgstr "Denominación correcta"
 
 #: models.py:1299
 msgid "If present, your real name will be used throughout the website."
-msgstr ""
+msgstr "Si consta, su nombre real se usará en todo el sitio web."
 
 #: models.py:1313
 msgid "Job"
@@ -2463,15 +2461,15 @@ msgstr "Quitar de favoritas"
 
 #: settings.py:573
 msgid "Bookmark"
-msgstr ""
+msgstr "Favorita"
 
 #: settings.py:578 settings.py:580
 msgid "Unlike"
-msgstr ""
+msgstr "Ya no me gusta"
 
 #: settings.py:579 settings.py:581
 msgid "Like"
-msgstr ""
+msgstr "Me gusta"
 
 #: settings.py:586
 msgid "Stop following"
@@ -2611,6 +2609,8 @@ msgid ""
 "Image uploaded. After this basic information, remember to edit the gear and "
 "acquisition details using the Actions menu. Thank you!"
 msgstr ""
+"Imagen añadida. Recuerde editar el equipo y los detalles de adquisición "
+"usando el menú de Acciones. Gracias!"
 
 #: views.py:1185 views.py:1257 views.py:1337 views.py:1359 views.py:1999
 #: views.py:2012 views.py:2033 views.py:2070 views.py:2160 views.py:2222
@@ -2630,9 +2630,8 @@ msgid "Image deleted."
 msgstr "Tu imagen ha sido borrada"
 
 #: views.py:1387
-#, fuzzy
 msgid "Revision deleted."
-msgstr "Registro completado"
+msgstr "Revisión borrada."
 
 #: views.py:1533
 msgid "No date specified"
@@ -2755,9 +2754,8 @@ msgid "Your image was bookmarked"
 msgstr "Tu imagen ha sido seleccionada como favorita"
 
 #: management/__init__.py:75
-#, fuzzy
 msgid "Your image was liked"
-msgstr "Tu imagen ha sido borrada"
+msgstr "Tu imagen ha sido votada"
 
 #: management/__init__.py:81
 msgid "New image with some gear you follow"
@@ -2813,11 +2811,11 @@ msgstr ""
 
 #: templates/500.html:11
 msgid "Fatal error"
-msgstr ""
+msgstr "Error fatal"
 
 #: templates/500.html:13
 msgid "Nothing to worry about, it's not your fault."
-msgstr ""
+msgstr "No hay de que preocuparse, no ha sido error tuyo."
 
 #: templates/500.html:18
 msgid ""
@@ -2825,6 +2823,9 @@ msgid ""
 "details, so we will try to fix the problem as soon as possible. Sorry about "
 "the inconvenience! "
 msgstr ""
+"Algo inesperado ha ocurrido! Hemos recibido un correo con los detalles "
+"técnicos e intentaremos solucionarlo lo antes posible. Disculpe las "
+"molestias!"
 
 #: templates/500.html:21
 #, fuzzy
@@ -2983,15 +2984,16 @@ msgstr "¿Cómo puedo dar formato a mis comentarios?"
 
 #: templates/faq.html:20 templates/faq.html.py:123
 msgid "How is the AstroBin index calculated?"
-msgstr ""
+msgstr "Como se calcula el Índice AstroBin?"
 
 #: templates/faq.html:21 templates/faq.html.py:131
 msgid "I received some Likes, why is my AstroBin index not updated?"
 msgstr ""
+"He recibido varios Me Gusta, por qué no se actualiza mi Índice AstroBin?"
 
 #: templates/faq.html:22 templates/faq.html.py:138
 msgid "How is the Image of the Day selected?"
-msgstr ""
+msgstr "Como se elige la Imagen del Día?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3229,6 +3231,8 @@ msgid ""
 "The AstroBin index is a function of the number of Likes and the number of "
 "images posted by a user."
 msgstr ""
+"El Índice AstroBin es una función entre el número de Me Gusta y el número de "
+"imágenes subidas por el usuario."
 
 #: templates/faq.html:133
 msgid ""
@@ -3236,6 +3240,9 @@ msgid ""
 "every 24 hours. The same applies for the search index, the Big Wall, and "
 "some other user data."
 msgstr ""
+"Debido a que es computacionalmente costoso, el índice AstroBin se actualiza "
+"sólo cada 24 horas. Lo mismo se aplica para el índice de búsqueda, la Gran "
+"Muralla, y algunos otros datos del usuario."
 
 #: templates/faq.html:140
 msgid ""
@@ -3243,6 +3250,9 @@ msgid ""
 "days. The image with most Likes in that period is selected as Image of the "
 "Day."
 msgstr ""
+"Cada noche, un algorritmo revisa las imágenes subidas durante los 7 días "
+"previos. La imagen con mayor número de Me Gusta en ese periodo es "
+"seleccionada como Imagen del Dia."
 
 #: templates/faq.html:146
 msgid ""
@@ -3639,9 +3649,8 @@ msgid "Sign up now!"
 msgstr "¡Registrate ahora!"
 
 #: templates/iotd_archive.html:7 templates/iotd_archive.html.py:12
-#, fuzzy
 msgid "Archive of 'Image of the day' winners"
-msgstr "Imagen del día"
+msgstr "Archivo de ganadores de la Imagen del día"
 
 #: templates/iotd_archive.html:22 templates/actstream/action.html:81
 #: templates/actstream/action.html.py:88 templates/actstream/action.html:104
@@ -3651,7 +3660,7 @@ msgstr "por"
 
 #: templates/iotd_archive.html:31 templates/index/root.html:126
 msgid "Runners-up"
-msgstr "Subcampeónes"
+msgstr "Subcampeones"
 
 #: templates/leaderboard.html:8 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:147 templates/base/site_links.html:78
@@ -3672,9 +3681,8 @@ msgstr "Índice AstroBin"
 
 #: templates/leaderboard.html:30 templates/base/user_links_entries.html:111
 #: templates/user/profile-subnav.html:85
-#, fuzzy
 msgid "Followers"
-msgstr "Seguidas"
+msgstr "Seguidores"
 
 #: templates/leaderboard.html:40
 msgid "Total integration"
@@ -3759,7 +3767,7 @@ msgstr "Galería"
 #: templates/inclusion_tags/search_image_list.html:97
 #: templates/user/profile-subnav.html:42
 msgid "Bookmarks"
-msgstr ""
+msgstr "Favoritos"
 
 #: templates/maintenance_base.html:257 templates/image/full.html:75
 #: templates/image/detail/image_card.html:10
@@ -4332,9 +4340,8 @@ msgid "Acquired"
 msgstr "Fecha de adquisición"
 
 #: templates/wall.html:41
-#, fuzzy
 msgid "Number of likes"
-msgstr "Número de tomas"
+msgstr "Número de Me Gusta"
 
 #: templates/wall.html:53 templates/gear/page.html:253
 #: templates/inclusion_tags/search_image_list.html:53
@@ -4436,7 +4443,7 @@ msgstr "Carpetas privadas compartidas"
 
 #: templates/base/user_links_entries.html:206
 msgid "Would you like to start using your real name on AstroBin?"
-msgstr ""
+msgstr "Quieres empezar a usar tu nombre real en AstroBin?"
 
 #: templates/base/user_links_entries.html:211
 #: templates/image/detail/modals/send_to_sharedfolder.html:49
@@ -4911,9 +4918,8 @@ msgid "Orientation"
 msgstr "Orientación"
 
 #: templates/image/detail/image_card.html:84
-#, fuzzy
 msgid "Field radius"
-msgstr "Anchura del campo"
+msgstr "Radio del campo"
 
 #: templates/image/detail/image_title.html:32
 msgid "Contains"
@@ -5062,11 +5068,11 @@ msgstr "Normal"
 
 #: templates/image/detail/modals/bookmarked_this.html:7
 msgid "The following people bookmarked this image"
-msgstr ""
+msgstr "Las siguientes personas eligieron como favorita esta imagen"
 
 #: templates/image/detail/modals/cant_like.html:8
 msgid "Sorry"
-msgstr ""
+msgstr "Disculpa"
 
 #: templates/image/detail/modals/cant_like.html:12
 #, python-format
@@ -5074,17 +5080,22 @@ msgid ""
 "We're really sorry, but liking an image requires an AstroBin index of "
 "<strong>%(min_index_to_like)s</strong> or greater."
 msgstr ""
+"Disculpe, pero para votar una imagen como Me Gusta se requiere un índice de "
+"AstroBin de <strong>%(min_index_to_like)s</strong> o mayor."
 
 #: templates/image/detail/modals/cant_like.html:16
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
 "creating fake accounts to like their own images. Thank you for understanding!"
 msgstr ""
+"Esta limitación permite mejorar el sitio web en su conjunto, al desalentar "
+"la creación de cuentas falsas por parte de algunos usuarios para votar sus "
+"propias imágenes. Gracias por su comprensión!"
 
 #: templates/image/detail/modals/cant_like.html:20
 #, python-format
 msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
-msgstr ""
+msgstr "Actualmente tu índice AstroBin es <strong>%(index)s</strong>."
 
 #: templates/image/detail/modals/delete.html:6
 msgid "Delete image and all its revisions?"
@@ -5124,7 +5135,7 @@ msgstr ""
 
 #: templates/image/detail/modals/like_this.html:7
 msgid "The following people like this image"
-msgstr ""
+msgstr "Las siguientes personas votaron Me gusta a esta imagen"
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
@@ -5490,7 +5501,7 @@ msgstr ""
 #: templates/inclusion_tags/search_image_list.html:93
 #: templates/search/search.html:36
 msgid "Likes"
-msgstr ""
+msgstr "Me Gusta"
 
 #: templates/inclusion_tags/search_image_list.html:66
 msgid ""
@@ -5581,9 +5592,8 @@ msgid "Your activity stream"
 msgstr "Flujo de actividad"
 
 #: templates/index/root.html:168
-#, fuzzy
 msgid "Global activity stream"
-msgstr "Flujo de actividad"
+msgstr "Flujo de actividad global"
 
 #: templates/index/root.html:173
 msgid "Recently uploaded"
@@ -5595,27 +5605,24 @@ msgid "Recent images from people you follow"
 msgstr "Nueva imagen de un usuario al que sigues"
 
 #: templates/index/root.html:183 templates/index/root.html.py:249
-#, fuzzy
 msgid "Recently liked"
-msgstr "Últimas subidas"
+msgstr "Últimas votadas"
 
 #: templates/index/root.html:188 templates/index/root.html.py:260
-#, fuzzy
 msgid "Recently bookmarked"
-msgstr "Últimas subidas"
+msgstr "Últimas añadidas a favoritos"
 
 #: templates/index/root.html:193 templates/index/root.html.py:271
-#, fuzzy
 msgid "Recent images with link to TIFF/FITS"
-msgstr "Enlace a TIFF/FITS"
+msgstr "Imágenes recientes con enlace a TIFF/FITS"
 
 #: templates/index/root.html:203
 msgid "Personal"
-msgstr ""
+msgstr "Personal"
 
 #: templates/index/root.html:214
 msgid "Global"
-msgstr ""
+msgstr "Global"
 
 #: templates/index/root.html:227
 msgid "Recent images"
@@ -5625,11 +5632,12 @@ msgstr "Imágenes recientes"
 msgid ""
 "To make your personal stream more interesting, you should follow some people!"
 msgstr ""
+"Para hacer su flujo personal más interesante, ¡debería seguir a otros "
+"usuarios!"
 
 #: templates/index/root.html:315
-#, fuzzy
 msgid "Do you want your product here?"
-msgstr "Deja tus Datos Raw aquí"
+msgstr "Quiere su producto aquí?"
 
 #: templates/location/edit.html:8
 msgid "If this location is missing data, or has incorrect data, please fix it."
@@ -5663,7 +5671,7 @@ msgstr "Mensajes"
 
 #: templates/messages/inbox.html:25
 msgid "Participants"
-msgstr ""
+msgstr "Participantes"
 
 #: templates/messages/inbox.html:26
 msgid "Date and time"
@@ -6169,16 +6177,15 @@ msgstr "Nueva revisión de imagen de %(originator)s"
 
 #: templates/notification/new_like/full.txt:2
 #: templates/notification/new_like/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s likes your image: %(url)s"
-msgstr "%(user)s ha seleccionado tu imagen como favorita: %(url)s"
+msgstr "%(user)s ha votado tu imagen como Me Gusta: %(url)s"
 
 #: templates/notification/new_like/notice.html:2
 #: templates/notification/new_like/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> ha comentado tu imagen.</a>"
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> ha votado tu imagen!</a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -6673,47 +6680,46 @@ msgid "Request an API Key"
 msgstr "Pedir una Llave API"
 
 #: templates/user/bookmarks.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's bookmarks"
-msgstr "Gráficas de %(user)s"
+msgstr "Favoritos de %(user)s"
 
 #: templates/user/bookmarks.html:11
 msgid "Your bookmarks"
-msgstr ""
+msgstr "Tus favoritos"
 
 #: templates/user/bookmarks.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's bookmarks"
-msgstr "Imágenes de %(username)s:"
+msgstr "Favoritos de %(username)s:"
 
 #: templates/user/followers.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's followers"
-msgstr "Galería de %(user)s"
+msgstr "Seguidores de %(user)s"
 
 #: templates/user/followers.html:13
-#, fuzzy
 msgid "Your followers"
-msgstr "Tienes un nuevo seguidor"
+msgstr "Tus seguidores"
 
 #: templates/user/followers.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's followers"
-msgstr "Ver favoritas de %(username)s"
+msgstr "Seguidores de %(username)s"
 
 #: templates/user/following.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's followed users"
-msgstr "Galería de %(user)s"
+msgstr "Usuarios seguidos por %(user)s"
 
 #: templates/user/following.html:13
 msgid "Your followed users"
-msgstr ""
+msgstr "Tus usuarios seguidos"
 
 #: templates/user/following.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's followed users"
-msgstr "Ver favoritas de %(username)s"
+msgstr "Usuarios seguidos por %(username)s"
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
