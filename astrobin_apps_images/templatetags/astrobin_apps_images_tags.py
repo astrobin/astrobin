@@ -65,7 +65,14 @@ def astrobin_image(
     response_dict = {}
 
     if image is None:
-        return response_dict
+        return {
+            'status': 'failure',
+            'image': '',
+            'alias': alias,
+            'revision': revision,,
+            'mod': mod,
+            'cache_key': 'astrobin_image_no_image',
+        }
 
     if alias == '':
         alias = 'thumb'
