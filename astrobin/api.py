@@ -156,7 +156,7 @@ class ImageResource(ModelResource):
         return bundle.obj.solution != None
 
     def dehydrate_subjects(self, bundle):
-        subjects = bundle.obj.objects_in_field
+        subjects = bundle.obj.objects_in_field.split(',')
         ssms = bundle.obj.solar_system_main_subject
 
         ret = subjects
