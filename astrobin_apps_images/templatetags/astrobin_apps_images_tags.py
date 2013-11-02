@@ -69,7 +69,7 @@ def astrobin_image(
             'status': 'failure',
             'image': '',
             'alias': alias,
-            'revision': revision,,
+            'revision': revision,
             'mod': mod,
             'cache_key': 'astrobin_image_no_image',
         }
