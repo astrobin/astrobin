@@ -14,7 +14,13 @@ class CachedS3BotoStorage(S3BotoStorage):
 
     def _save(self, name, content):
         name = super(CachedS3BotoStorage, self)._save(name, content)
-        self.local_storage._save(name, content)
+
+        try:
+            self.local_storage._save(name, content)
+        except OSError:
+            # Probably the filename was too long for the local storage.
+            pass
+
         return name
 
 ImageStorage = lambda: CachedS3BotoStorage(location='images')
