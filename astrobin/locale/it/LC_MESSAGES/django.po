@@ -6273,7 +6273,7 @@ msgid ""
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(username)s</strong> ha aggiunto una nuova "
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha aggiunto una nuova "
 "immagine elaborata al gruppo di dati pubblici: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 
@@ -6284,7 +6284,7 @@ msgid ""
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha aggiunto una "
-"nuova immagine elaborata al gruppo di dati pubblici: <strong>\"%(pool_names."
+"nuova immagine elaborata al gruppo di dati pubblici: <strong>\"%(pool_name)s."
 "\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
@@ -6308,7 +6308,7 @@ msgid ""
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha aggiunto nuovi "
-"dati al gruppo pubblico: <strong>\"&(pool_name)s.\"</strong></a>"
+"dati al gruppo pubblico: <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, python-format
