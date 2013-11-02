@@ -64,6 +64,9 @@ def astrobin_image(
 
     response_dict = {}
 
+    if image is None:
+        return response_dict
+
     if alias == '':
         alias = 'thumb'
 
