@@ -890,8 +890,11 @@ class Image(HasSolutionMixin, models.Model):
                 thumbnailer = get_thumbnailer(local_file, field.name)
         except IOError:
             # If things go awry, fallback to getting the file from the remote
-            # storage.
-            thumbnailer = get_thumbnailer(field)
+            # storage. But download it locally first if it doesn't exist, so
+            # it can be used again later.
+            remote_file = field.storage._open(field.name)
+            local_file = field.storage.local_storage._save(field.name, remote_file)
+            thumbnailer = get_thumbnailer(local_file, field.name)
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text
