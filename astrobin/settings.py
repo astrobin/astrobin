@@ -50,7 +50,7 @@ ASTROBIN_BASE_URL = 'http://www.astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
 ASTROBIN_BASE_PATH = os.path.dirname(__file__)
-UPLOADS_DIRECTORY = '/webserver/www/uploads/'
+IMAGE_CACHE_DIRECTORY = '/webserver/www/imagecache/'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -92,7 +92,7 @@ SITE_ID = 1
 SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10G'
 
 # Django storages
-DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageRootS3BotoStorage'
+DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageStorage'
 AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
