@@ -1612,7 +1612,7 @@ def user_page(request, username):
             elif active == 'NOSUB':
                 qs = qs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
-                    (Q(subjects = None)) &
+                    (Q(objects_in_field = None)) &
                     (Q(solar_system_main_subject = None))).distinct()
 
         ###########
@@ -1631,7 +1631,7 @@ def user_page(request, username):
             if active == 'SUB':
                 qs =  qs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
-                    (Q(subjects = None)) &
+                    (Q(objects_in_field = None)) &
                     (Q(solar_system_main_subject = None)))
 
             elif active == 'GEAR':
