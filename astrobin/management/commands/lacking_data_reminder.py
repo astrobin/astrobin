@@ -11,7 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for user in User.objects.all():
             number = 0
-            qs = Image.objects.filter(user = user, is_stored = True, is_wip = False)
+            qs = Image.objects.filter(user = user, is_wip = False)
 
             number += qs.filter(
                 (Q(subject_type = 100) & Q(subjects = None)) |

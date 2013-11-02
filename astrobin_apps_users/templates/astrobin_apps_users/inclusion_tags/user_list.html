@@ -1,0 +1,23 @@
+{% load i18n %}
+
+{% if view == 'list' %}
+    <table class="astrobin-users table table-condensed">
+        <tr>
+            <th>{% trans "User" %}</th>
+            <th>{% trans "Images" %}</th>
+            <th>{% trans "Followers" %}</th>
+            <th>{% trans "Following" %}</th>
+            <th>&nbsp;</th>
+        </tr>
+
+        {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
+    </table>
+{% endif %}
+
+{% if view == 'default' %}
+    <ul class="astrobin-users{% if layout == 'list' %} user-list{% endif %}">
+        {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
+        {% include 'astrobin_apps_users/inclusion_tags/endless_pagination_js.html' %}
+    </ul>
+{% endif %}
+

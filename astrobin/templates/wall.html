@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
 {% load common_tags %}
 {% load tags %}
@@ -35,15 +36,15 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="{% query_string "sort='-rating'" "" %}">
-                            <span class="bg-icon{% if sort == '-rating' %} icon-ok{% endif %}"></span>
-                            {% trans "Rating" %}
+                        <a href="{% query_string "sort='-likes'" "" %}">
+                            <span class="bg-icon{% if sort == '-likes' %} icon-ok{% endif %}"></span>
+                            {% trans "Number of likes" %}
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "sort='-favorited'" "" %}">
-                            <span class="bg-icon{% if sort == '-favorited' %} icon-ok{% endif %}"></span>
-                            {% trans "Favorited" %}
+                        <a href="{% query_string "sort='-bookmarks'" "" %}">
+                            <span class="bg-icon{% if sort == '-bookmarks' %} icon-ok{% endif %}"></span>
+                            {% trans "Bookmarks" %}
                         </a>
                     </li>
                     <li>
@@ -74,30 +75,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "filter='clusters'" "" %}">
-                            <span class="bg-icon{% if filter == 'clusters' %} icon-ok{% endif %}"></span>
-                            {% trans "Clusters" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% query_string "filter='nebulae'" "" %}">
-                            <span class="bg-icon{% if filter == 'nebulae' %} icon-ok{% endif %}"></span>
-                            {% trans "Nebulae" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% query_string "filter='galaxies'" "" %}">
-                            <span class="bg-icon{% if filter == 'galaxies' %} icon-ok{% endif %}"></span>
-                            {% trans "Galaxies" %}
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
                         <a href="{% query_string "filter='all_ss'" "" %}">
                             <span class="bg-icon{% if filter == 'all_ss' %} icon-ok{% endif %}"></span>
                             {% trans "All Solar System objects" %}
                         </a>
                     </li>
+
+                    <li class="divider"></li>
+
                     <li>
                         <a href="{% query_string "filter='sun'" "" %}">
                             <span class="bg-icon{% if filter == 'sun' %} icon-ok{% endif %}"></span>
@@ -179,6 +164,6 @@
     </div> <!-- subnav -->
 
     <h1>{% trans "The Big Wall" %}</h1>
-    {% search_image_list request image_list %}
+    {% search_image_list object_list %}
 {% endblock %}
 

@@ -1,0 +1,56 @@
+{% load avatar_tags %}
+{% load common_tags %}
+{% load i18n %}
+{% load hitcount_tags %}
+{% load tags %} {% comment %} TODO: rename tags to astrobin_tags {% endcomment %}
+{% load toggleproperty_tags %}
+
+<div class="subtle-container avatar-block">
+    <div class="avatar">
+        <a href="{% url user_page image.user %}">
+            {% avatar image.user 106 %}
+        </a>
+    </div>
+    <div class="username">
+        <a
+            class="username-link"
+            rel="tooltip"
+            title="{{image.user.userprofile}}"
+            href="{% url user_page image.user %}">{{image.user.userprofile|truncatechars:20}}</a>
+
+        <div class="data">
+            <img class="license"
+                 src="{{STATIC_URL}}icons/{{license_icon}}"
+                 alt="{% trans "License" %}: {{license_title}}"
+                 title="{% trans "License" %}: {{license_title}}" />
+
+            <span class="uploaded">{{uploaded_on|ago}}</span>
+
+            <div>
+                <span class="views">
+                    {% get_hit_count for image as hit_count %}
+                    <i class="icon-eye-open"></i> <span class="number">{{hit_count}}</span>
+                </span>
+
+                <span class="bookmarks">
+                    <a href="#people-bookmarked-this-modal" data-toggle="modal">
+                        <i class="icon-bookmark"></i>
+                        <span class="number">{{image.bookmarks}}</span>
+                    </a>
+                </span>
+
+                <span class="likes">
+                    <a href="#people-like-this-modal" data-toggle="modal">
+                        <i class="icon-thumbs-up"></i>
+                        <span class="number">{{image.likes}}</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+
+        {% add_remove_toggleproperty "follow" image.user request.user %}
+        {% add_remove_toggleproperty "bookmark" image request.user %}
+    </div>
+</div>
+
+

@@ -12,7 +12,7 @@
         {% url tos as tos_url %}
         {% blocktrans %}Please make sure you have read the section about APIs in the <a href="{{tos_url}}">Terms of Service</a>.{% endblocktrans %}
     </div>
-    <form class="form-horizontal" action="{% url app_api_key_request_process %}" method="post">
+    <form class="form-horizontal" action="{% url app_api_key_request_process %}" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="{% trans "Submit" %} &rarr;" />

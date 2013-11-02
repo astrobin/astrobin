@@ -1,0 +1,51 @@
+{% load i18n %}
+
+<div class="modal hide fade" id="delete-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Delete image and all its revisions?" %}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="well">
+            {% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?" %}
+        </div>
+
+        <form class="form-inline" action="{% url image_delete image.id %}" method="post">{% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}"/>
+        </form>
+    </div>
+</div>
+
+{% if is_revision and revision_image %}
+    <div class="modal hide fade" id="delete-revision-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Delete this revision?" %}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="well">
+                {% trans "This revision will be permanently deleted and cannot be recovered. Are you sure?"%}
+            </div>
+
+            <form class="form-inline" action="{% url image_delete_revision revision_image.id %}" method="post">{% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}"/>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+<div class="modal hide fade" id="delete-original-image-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Delete original image?" %}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="well">
+            {% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}
+        </div>
+
+        <form class="form-inline" action="{% url image_delete_original image.id %}" method="post">{% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}"/>
+        </form>
+    </div>
+</div>

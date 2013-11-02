@@ -57,7 +57,7 @@ def integration_hours(user, period = 'monthly', since = 0):
 
     if user != astrobin:
         all = all.filter(image__user = user)
-    
+
     data = {}
     for i in all:
         integration = 0
@@ -105,7 +105,7 @@ def integration_hours_by_gear(user, period='monthly'):
     if period == 'monthly':
         flot_options['xaxis']['timeformat'] = '%b'
 
-    profile = UserProfile.objects.get(user = user)
+    profile = user.userprofile
     all_telescopes = profile.telescopes.all()
     all_cameras = profile.cameras.all()
 
@@ -185,7 +185,7 @@ def uploaded_images(user, period='monthly'):
         if key in data:
             data[key] += 1
         else:
-            data[key] = 1 
+            data[key] = 1
 
     if all:
         for date in daterange(all[0].uploaded.date(), datetime.today().date()):
@@ -231,7 +231,7 @@ def views(user, period='monthly'):
         if key in data:
             data[key] += 1
         else:
-            data[key] = 1 
+            data[key] = 1
 
     if all:
         for date in daterange(all[0].created.date(), datetime.today().date()):
@@ -276,7 +276,7 @@ def image_views(image_id, period='monthly'):
         if key in data:
             data[key] += 1
         else:
-            data[key] = 1 
+            data[key] = 1
 
     if all:
         for date in daterange(all[0].created.date(), datetime.today().date()):
@@ -315,7 +315,7 @@ def subject_images_monthly(subject_id):
         if key in data:
             data[key] += 1
         else:
-            data[key] = 1 
+            data[key] = 1
 
     if all:
         for date in daterange(all[0].uploaded.date(), datetime.today().date()):
@@ -416,7 +416,7 @@ def subject_total_images(subject_id):
 
 
 def subject_camera_types(subject_id, lang = 'en'):
-    flot_label = None 
+    flot_label = None
     flot_data = []
     flot_options = {
         'series': {
@@ -462,7 +462,7 @@ def subject_camera_types(subject_id, lang = 'en'):
 
 
 def subject_telescope_types(subject_id, lang='en'):
-    flot_label = None 
+    flot_label = None
     flot_data = []
     flot_options = {
         'series': {
@@ -528,7 +528,7 @@ def camera_types_trend():
     }
 
     for g in Camera.CAMERA_TYPES:
-        if g[0] > 1: 
+        if g[0] > 1:
             # Limit to CCD and DSLR
             continue
 
@@ -773,7 +773,7 @@ def gear_views(gear_id, period='monthly'):
         if key in data:
             data[key] += 1
         else:
-            data[key] = 1 
+            data[key] = 1
 
     if all:
         for date in daterange(all[0].created.date(), datetime.today().date()):
@@ -821,7 +821,7 @@ def affiliated_gear_views(username, period='monthly'):
         if key in data:
             data[key] += 1
         else:
-            data[key] = 1 
+            data[key] = 1
 
     if all:
         for date in daterange(all[0].created.date(), datetime.today().date()):

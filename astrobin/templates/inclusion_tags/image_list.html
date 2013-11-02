@@ -1,7 +1,8 @@
-{% load i18n %}
-{% load tags %}
+{% load astrobin_apps_images_tags %}
 {% load common_tags %}
 {% load hitcount_tags %}
+{% load i18n %}
+
 
 {% ifequal view "list" %}
     <table class="table table-condensed">
@@ -11,80 +12,34 @@
                 <th>{% trans "Title" %}</th>
                 <th><i class="icon-calendar"></i></th>
                 <th><i class="icon-eye-open"></i></th>
-                <th><i class="icon-star"></i></th>
-                <th><i class="icon-heart"></i></th>
+                <th><i class="icon-thumbs-up"></i></th>
+                <th><i class="icon-bookmark"></i></th>
                 <th><i class="icon-comments-alt"></i></th>
             </tr>
         </thead>
         <tbody>
             {% for image in image_list %}
-                {% if image.is_stored %}
-                    <tr>
-                        <td>
-                            <a href="{% url user_page image.user %} ">{{image.get_author_profile}}</a>
-                        </td>
+                <tr>
+                    <td>
+                        <a href="{% url user_page image.user %} ">{{image.user.userprofile}}</a>
+                    </td>
 
-                        <td>
-                            <a href="{% get_image_url image %} ">{{image.title}}</a>
-                        </td>
-                        <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
-                        <td>{% get_hit_count for image %}</td>
-                        <td>
-                            {% if image.get_author_profile.optout_rating %}
-                                {% trans "n/a" %}
-                            {% else %}
-                                {% if image.allow_rating %}
-                                    {{image.astrobinIndex|floatformat:"3"}}
-                                {% else %}
-                                    {% trans "n/a" %}
-                                {% endif %}
-                            {% endif %}
-                        </td>
-                        <td>{{image.favoritesNumber}}</td>
-                        <td>{{image.commentsNumber}}</td>
-                    </tr>
-                {% endif %}
+                    <td>
+                        <a href="{% get_image_url image %} ">{{image.title}}</a>
+                    </td>
+                    <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
+                    <td>{% get_hit_count for image %}</td>
+                    <td>{{image.likes}}</td>
+                    <td>{{image.bookmarks}}</td>
+                    <td>{{image.commentsNumber}}</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
 {% else %}
     <ul class="thumbnails astrobin-thumbnails">
-    {% for image in image_list %}
-        {% random_id %}
-        {% if image.is_stored %}
-        <li class="thumbnail astrobin-thumbnail" style="width:{{thumbnail_size}}px">
-            <a {% if thumbnail_size < 184 %}rel="tooltip"
-                title="{{image.title|escape}}, {% trans "by" %} {{image.get_author_profile}}"
-                style="display:block;"{% endif %}
-                href="{% get_image_url image %}">
-                {% if image.iotd_date %}
-                    <div class="iotd-thumb-banner">
-                        <h2>
-                            <i class="icon icon-trophy"></i>
-                        </h2>
-                    </div>
-                {% endif %}
-                <img src="{% if image.is_stored %}{{IMAGES_URL}}{% get_final_filename image %}{% if thumbnail_size == 90 %}_small_thumb{{image.original_ext}}{% else %}_thumb.png{% endif %}{% else %}{{STATIC_URL}}icons/iconic/orange/waiting_thumbnail.png{% endif %}"
-                     class="{% if thumbnail_size == 184 %}capty {% endif %}"
-                     id="#capty-content-{{image.id}}-{{randomid}}"
-                     alt="{{image.title|default:_("(no title)")}}"
-                     width="{{thumbnail_size}}" height="{{thumbnail_size}}" />
-            </a>
-            {% if thumbnail_size == 184 %}
-            <div class="capty-content" id="capty-content-{{image.id}}-{{randomid}}">
-                {{image.title|escape|truncatechars:23}}
-                <br/>
-                {% trans "by" %} <a href="{% url user_page image.user %}">{{image.get_author_profile}}</a>
-            </div>
-            {% endif %}
-        </li>
-        {% endif %}
-    {% empty %}
-        <li>{% trans "No images" %}.</li>
-    {% endfor %}
+        {% include 'inclusion_tags/image_list_entries.html' %}
+        {% include 'snippets/endless_pagination_js.html' %}
     </ul>
 {% endifequal %}
 
-{% if paginate %}
-    {% include 'pagination.html' %}
-{% endif %}

@@ -35,17 +35,10 @@ def uniq_id_tuple(seq):
     return ret
 
 
-class ImageUploadForm(forms.Form):
-    file = forms.ImageField()
-
-
-class ImageEditPresolveForm(forms.ModelForm):
+class ImageUploadForm(forms.ModelForm):
     class Meta:
         model = Image
-        fields = ('presolve_information',)
-        widgets = {
-            'presolve_information': forms.RadioSelect(choices = Image.SOLVE_CHOICES),
-        }
+        fields = ('image_file',)
 
 
 class ImageEditBasicForm(forms.ModelForm):
@@ -63,19 +56,14 @@ class ImageEditBasicForm(forms.ModelForm):
         help_text = _("If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."),
         error_messages = {'invalid': "The address must start with http:// or https://."},
     )
-    subjects = forms.CharField(
-        required = False,
-        help_text=_("If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."),
-    )
 
     def __init__(self, user=None, **kwargs):
         super(ImageEditBasicForm, self).__init__(**kwargs)
         self.fields['link'].label = _("Link")
         self.fields['link_to_fits'].label = _("Link to TIFF/FITS")
-        self.fields['subjects'].label = _("Subjects")
         self.fields['locations'].label = _("Locations")
 
-        profile = UserProfile.objects.get(user = user)
+        profile = user.userprofile
         locations = Location.objects.filter(user = profile)
         self.fields['locations'].queryset = locations
         self.fields['locations'].required = False
@@ -90,32 +78,9 @@ class ImageEditBasicForm(forms.ModelForm):
 
         return self.cleaned_data['subject_type']
 
-    def clean(self):
-        try:
-            subject_type = self.cleaned_data['subject_type']
-        except KeyError:
-            raise forms.ValidationError(_("There was one or more errors processing the form. You may need to scroll down to see them."))
-
-        if subject_type in (100, 200):
-            skip_as = False
-            try:
-                subjects = self.data['as_values_subjects'].strip()
-            except MultiValueDictKeyError:
-                skip_as = True
-
-            solar_system = self.cleaned_data['solar_system_main_subject']
-            nojs_subjects = self.data['subjects'].strip()
-
-            if solar_system is None and\
-                 (skip_as or (len(subjects) == 0 or (len(subjects) == 1 and subjects[0] in ('', ',')))) and\
-                 (len(nojs_subjects) == 0 or (len(nojs_subjects) == 1 and nojs_subjects[0] in ('', ','))):
-                raise forms.ValidationError(_("Please enter either some subjects or a main solar system subject."));
-
-        return self.cleaned_data
-
     class Meta:
         model = Image
-        fields = ('title', 'link', 'link_to_fits', 'subject_type', 'solar_system_main_subject', 'subjects', 'locations', 'description', 'allow_rating')
+        fields = ('title', 'link', 'link_to_fits', 'subject_type', 'solar_system_main_subject', 'locations', 'description')
 
 
 class ImageEditWatermarkForm(forms.ModelForm):
@@ -148,7 +113,7 @@ class ImageEditWatermarkForm(forms.ModelForm):
 class ImageEditGearForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
         super(ImageEditGearForm, self).__init__(**kwargs)
-        profile = UserProfile.objects.get(user=user)
+        profile = user.userprofile
         telescopes = profile.telescopes.all()
         self.fields['imaging_telescopes'].queryset = telescopes
         self.fields['guiding_telescopes'].queryset = telescopes
@@ -270,7 +235,7 @@ class UserProfileEditGearForm(forms.Form):
 class UserProfileEditPreferencesForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['language', 'optout_rating']
+        fields = ['language',]
 
     def __init__(self, user=None, **kwargs):
         super(UserProfileEditPreferencesForm, self).__init__(**kwargs)
@@ -295,8 +260,10 @@ class BringToAttentionForm(forms.Form):
         self.fields['users'].label = _("Users")
 
 
-class ImageRevisionUploadForm(forms.Form):
-    file = forms.ImageField()
+class ImageRevisionUploadForm(forms.ModelForm):
+    class Meta:
+        model = ImageRevision
+        fields = ('image_file',)
 
 
 class AdvancedSearchForm(SearchForm):
@@ -711,13 +678,6 @@ class ImageLicenseForm(forms.ModelForm):
         fields = ('license',)
 
 
-class MultipleMessierForm(forms.Form):
-    def __init__(self, objects=None, **kwargs):
-        super(MultipleMessierForm, self).__init__(**kwargs)
-        self.fields['messier_object'] = forms.ChoiceField(choices = [((x, 'M %s' % x)) for x in objects])
-        self.fields['messier_object'].label = _("Nominate for")
-
-
 class TelescopeEditForm(forms.ModelForm):
     error_css_class = 'error'
 
@@ -870,7 +830,7 @@ class CopyGearForm(forms.Form):
 
     def __init__(self, user, **kwargs):
         super(CopyGearForm, self).__init__(**kwargs)
-        self.fields['image'].queryset = Image.objects.filter(user = user, is_stored = True)
+        self.fields['image'].queryset = Image.objects.filter(user = user)
 
 
 class AppApiKeyRequestForm(forms.ModelForm):
@@ -982,7 +942,7 @@ class CommercialGearForm(forms.ModelForm):
 
     def __init__(self, user, **kwargs):
         super(CommercialGearForm, self).__init__(**kwargs)
-        self.fields['image'].queryset = Image.objects.filter(user = user, is_stored = True, subject_type = 500)
+        self.fields['image'].queryset = Image.objects.filter(user = user, subject_type = 500)
 
 
 class ClaimRetailedGearForm(forms.Form):

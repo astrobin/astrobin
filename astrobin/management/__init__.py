@@ -14,107 +14,65 @@ NOTICE_TYPES = (
         'new_follower',
         _('You have a new follower'),
         '',
-        2
-    ),
-    (
-        'follow_success',
-        _('Following a user was successful'),
-        '',
-        0
-    ),
-    (
-        'unfollow_success',
-        _('Unfollowing a user was successful'),
-        '',
-        0
+        2,
     ),
     (
         'new_image',
         _('New image from a user you follow'),
         '',
-        2
+        2,
     ),
     (
         'attention_request',
         _('Image brought to your attention'),
         '',
-        2
+        2,
     ),
     (
         'new_image_revision',
         _('New image revision from a user you follow'),
         '',
-        2
-    ),
-    (
-        'image_ready',
-        _('Your image is ready'),
-        '',
-        0
+        2,
     ),
     (
         'image_solved',
         _('Your image was plate-solved'),
         '',
-        2
+        1,
     ),
     (
         'image_not_solved',
         _('Your image could not be plate-solved'),
         '',
-        2
-    ),
-    (
-        'request_fulfilled',
-        _('Your request was fulfilled'),
-        '',
-        2
-    ),
-    (
-        'image_deleted',
-        _('Your image was deleted'),
-        '',
-        0
+        1,
     ),
     (
         'new_blog_entry',
         _('AstroBin has published a new blog entry'),
         '',
-        0
-    ),
-    (
-        'messier_nomination',
-        _("Nomination for the Messier Marathon"),
-        '',
-        2
-    ),
-    (
-        'messier_top_nomination',
-        _("Top Nomination for the Messier Marathon"),
-        '',
-        2
-    ),
-    (
-        'lacking_data_reminder',
-        _("You have some images that are lacking data"),
-        '',
-        0
+        1,
     ),
     (
         'new_comment',
         _("Your image received a new comment"),
         '',
-        2
+        2,
     ),
     (
         'new_comment_reply',
         _("There was a reply to your comment"),
         '',
-        2
+        2,
     ),
     (
-        'new_favorite',
-        _("Your image was favorited"),
+        'new_bookmark',
+        _("Your image was bookmarked"),
+        '',
+        2,
+    ),
+    (
+        'new_like',
+        _("Your image was liked"),
         '',
         2,
     ),
@@ -187,7 +145,7 @@ def create_notice_types(app, created_models, verbosity, **kwargs):
         notification.create_notice_type(notice_type[0],
                                         notice_type[1],
                                         notice_type[2],
-                                        notice_type[3])
+                                        default = notice_type[3])
 
 
 signals.post_syncdb.connect(create_notice_types, sender=notification)

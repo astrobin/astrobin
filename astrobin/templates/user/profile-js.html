@@ -1,26 +1,11 @@
 {% load i18n %}
 {% load tags %}
+
 <script type="text/javascript">
 $(document).ready(function() {
     astrobin_common.init(
         '{{user.username}}',
         {
-            follow_action: {
-                dialog: {
-                    title : "{% blocktrans with user.username as username %}Follow {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with user.username as username %}You will receive a notification every time {{username}} posts a new image. Continue?{% endblocktrans %}",
-                    button: "{% trans "Yes, follow!" %}"
-                },
-                stop_following: "{% trans "Stop following" %}"
-            },
-            unfollow_action: {
-                dialog: {
-                    title : "{% blocktrans with user.username as username %}Stop following {{username}}?{% endblocktrans %}",
-                    body  : "{% blocktrans with user.username as username %}You will stop receiving notifications when {{username}} posts a new image. Continue?{% endblocktrans %}",
-                    button: "{% trans "Yes, stop following!" %}"
-                },
-                follow: "{% trans "Follow" %}"
-            },
             message_action: {
                 dialog: {
                     title : "{% blocktrans with user.username as username %}Send {{username}} a message{% endblocktrans %}",

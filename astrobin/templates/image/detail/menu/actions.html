@@ -1,0 +1,120 @@
+{% load common_tags %}
+{% load i18n %}
+
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="icon-bolt icon-white"></i>
+        {% trans "Actions" %}
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        {% if request.user == image.user or request.user.is_superuser %}
+        <li>
+            <a href="{% url image_edit_basic image.id %}">
+                <i class="icon-edit"></i>
+                {% trans "Edit basic information" %}
+            </a>
+        </li>
+        {% if image.subject_type < 500 %}
+            <li>
+                <a href="{% url image_edit_gear image.id %}">
+                    <i class="icon-cog"></i>
+                    {% trans "Edit gear used" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url image_edit_acquisition image.id %}">
+                    <i class="icon-time"></i>
+                    {% trans "Edit acquisition details" %}
+                </a>
+            </li>
+        {% endif %}
+        {% if not is_final %}
+        <li>
+            {% if is_revision %}
+                <a href="{% url image_edit_revision_make_final revision_image.id %}">
+            {% else %}
+                <a href="{% url image_edit_make_final image.id %}">
+            {% endif %}
+
+                <i class="icon-ok"></i>
+                {% trans "Mark this revision as final" %}
+            </a>
+        </li>
+        {% endif %} <!-- not is_final -->
+        <li class="divider"></li>
+        <li>
+            <a href="{% url image_edit_license image.id %}">
+                <i class="icon-legal"></i>
+                {% trans "Change license" %}
+            </a>
+        </li>
+        <li>
+            <a class="upload-revision" href="#upload-revision-modal" data-toggle="modal">
+                <i class="icon-upload-alt"></i>
+                {% trans "Upload new revision" %}
+            </a>
+        </li>
+        {% if image.is_wip %}
+        <li>
+            <a href="{% url image_promote image.id %}{% query_string "" "plate_solving_started" %}">
+                <i class="icon-unlock"></i>
+                {% trans "Promote to public area" %}
+            </a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url image_demote image.id %}{% query_string "" "plate_solving_started" %}">
+                <i class="icon-lock"></i>
+                {% trans "Move to staging area" %}
+            </a>
+        </li>
+        {% endif %} <!-- image.is_wip -->
+
+        <li class="divider"></li>
+        <li>
+            <a data-toggle="modal" href="#send-to-datapool-modal">
+                <i class="icon-plus-sign"></i>
+                {% trans "Send to public data pool" %}
+            </a>
+        </li>
+
+        <li>
+            <a data-toggle="modal" href="#send-to-sharedfolder-modal">
+                <i class="icon-plus-sign"></i>
+                {% trans "Send to private shared folder" %}
+            </a>
+        </li>
+
+        <li class="divider"></li>
+        <li>
+        {% if not is_revision %}
+            {% if revisions %}
+            <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
+                <i class="icon-remove"></i>
+                {% trans "Delete original image" %}
+            </a>
+            {% else %}
+            <a data-toggle="modal" class="danger" href="#delete-modal">
+                <i class="icon-remove"></i>
+                {% trans "Delete" %}
+            </a>
+            {% endif %} <!-- revisions -->
+        {% else %}
+            <a data-toggle="modal" class="danger" href="#delete-revision-modal">
+                <i class="icon-remove"></i>
+                {% trans "Delete this revision" %}
+            </a>
+        {% endif %} <!-- not is_revision -->
+        </li>
+        {% endif %} <!-- owner or superuser -->
+        <li class="divider"></li>
+        <li>
+            <a href="{% url bring_to_attention image.id %}">
+                <i class="icon-retweet"></i>
+                {% trans "Bring to a user's attention" %}
+            </a>
+        </li>
+     </ul>
+ </li> <!-- actions -->
+

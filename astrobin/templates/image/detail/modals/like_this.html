@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load astrobin_apps_users_tags %}
+
+<div class="modal hide fade" id="people-like-this-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-thumbs-up"></i> {% trans "The following people like this image" %}</h3>
+    </div>
+    <div class="modal-body">
+        {% astrobin_apps_users_list like_this 'list' %}
+    </div>
+</div>
+

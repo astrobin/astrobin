@@ -1,0 +1,108 @@
+{% load avatar_tags %}
+{% load cache %}
+{% load i18n %}
+{% load toggleproperty_tags %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% if view == 'list' %}
+    <tr>
+        {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
+        <td><a href="{% url user_page user %}">{{user.userprofile}}</a></td>
+        <td><a href="{% url user_page user %}?sub=uploaded">{{images}}</a></td>
+        <td><a href="{% url user_page_followers user %}">{{followers}}</a></td>
+        <td><a href="{% url user_page_following user %}">{{following}}</a></td>
+        {% endcache %}
+
+        {% if request_user %}
+            <td class="pull-right">{% add_remove_toggleproperty "follow" user request_user %}</td>
+        {% endif %}
+    </tr>
+{% endif %}
+
+{% if view == 'default' %}
+    {% if layout == 'standard' %}
+        <div class="subtle-container user-card">
+            <div class="header">
+                <h4>
+                    {{user.userprofile}}
+                </h4>
+            </div>
+
+            <div class="avatar" style="width: 194px; height: 194px; overflow: hidden;">
+                <a href="{% url user_page user %}">
+                    {% avatar user 194 %}
+                </a>
+
+                {% add_remove_toggleproperty "follow" user request_user %}
+            </div>
+
+            {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
+            <div id="profile-details">
+                <ul>
+                    <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
+                    <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
+                    <li><a href="{% url user_page_following user %}"><strong>{{following}}</strong> {% trans "Following" %}</a></li>
+                </ul>
+            </div>
+            {% endcache %}
+        </div>
+    {% endif %}
+
+    {% if layout == 'inline' or layout == 'inline-mini' %}
+        <div class="subtle-container user-card user-card-inline">
+            <div class="header">
+                <h4>
+                    {{user.userprofile}}
+                </h4>
+            </div>
+
+            <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
+                <a href="{% url user_page user %}">
+                    {% avatar user 48 %}
+                </a>
+            </div>
+
+            <div id="profile-details">
+                <ul>
+                    {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
+                    <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
+
+                    {% if layout != 'inline-mini' %}
+                        <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
+                    {% endif %}
+                    {% endcache %}
+
+                    <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if layout == 'list' %}
+        <div class="user-list-item">
+            <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
+                <a href="{% url user_page user %}">
+                    {% avatar user 48 %}
+                </a>
+            </div>
+
+            <div class="name">
+                <a href="{% url user_page user %}">
+                    {{user.userprofile}}
+                </a>
+            </div>
+
+            {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
+            <div class="info">
+                {% blocktrans count counter=images with images as images_number %}{{images_number}} image{% plural %}{{images_number}} images{% endblocktrans %},
+                {% blocktrans count counter=followers with followers as followers_number %}{{followers_number}} follower{% plural %}{{followers_number}} followers{% endblocktrans %}
+            </div>
+            {% endcache %}
+
+            <div class="follow">
+                {% add_remove_toggleproperty "follow" user request_user %}
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

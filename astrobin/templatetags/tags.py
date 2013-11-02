@@ -9,10 +9,8 @@ from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
-from notification import models as notifications
-from persistent_messages import models as messages
+from persistent_messages.models import Message
 from celery.result import AsyncResult
-from djangoratings.models import Vote
 
 from astrobin.models import Request
 from astrobin.gear import *
@@ -48,39 +46,25 @@ def related_images(request, object_list, type):
     return {
             'request': request,
             'images': images,
-            'small_thumbnail_size':settings.SMALL_THUMBNAIL_SIZE,
-            'IMAGES_URL': settings.IMAGES_URL,
             'related_type': type,
            }
 
 
-@register.inclusion_tag('inclusion_tags/notification_list.html')
-def notification_list(request, show_footer = True, limit = 0):
-    unseen = notifications.Notice.objects.filter(user = request.user, unseen = True)
-    seen = notifications.Notice.objects.filter(user = request.user, unseen = False)
-    if limit > 0:
-        seen = seen[:limit]
-    return {
-        'unseen': unseen,
-        'seen': seen,
-        'show_footer': show_footer}
+@register.inclusion_tag('inclusion_tags/notification_list.html', takes_context = True)
+def notification_list(context):
+    unseen = Message.objects.filter(user = context['request'].user, read = False).order_by('-created')
+    seen   = Message.objects.filter(user = context['request'].user, read = True ).order_by('-created')[:10]
 
-
-@register.inclusion_tag('inclusion_tags/request_list.html')
-def request_list(request, show_footer = True):
     return {
-        'requests':Request.objects.filter(to_user=request.user).order_by('-created').select_subclasses()[:10],
-        'show_footer':show_footer}
+        'request': context['request'],
+        'unseen' : unseen,
+        'seen'   : seen,
+    }
 
 
 @register.filter
 def append_slash(value):
     return value.replace('\n', '\\\n')
-
-
-@register.simple_tag
-def image_is_ready(image):
-    return AsyncResult(image.store_task_id).ready()
 
 
 @register.filter
@@ -104,104 +88,19 @@ def string_to_date(date):
         return datetime.now()
 
 
-def image_list(context, request, object_list, paginate = True, size = settings.THUMBNAIL_SIZE):
-    ret = {}
-
-    try:
-        paginator = context['paginator']
-        page = int(context['page'])
-        pages = int(context['pages'])
-        page_obj = context['page_obj']
-        next = context['next']
-        previous = context['previous']
-        has_next = context['has_next']
-        has_previous = context['has_previous']
-
-        paging = True
-        adjacent_pages = 3
-    except KeyError:
-        paging = False
-
-    image_list = object_list
-
-    if paging:
-        startPage = max(page - adjacent_pages, 1)
-        if startPage <= 3: startPage = 1
-        endPage = page + adjacent_pages + 1
-        if endPage >= pages - 1: endPage = pages + 1
-        page_numbers = [n for n in range(startPage, endPage) \
-                if n > 0 and n <= pages]
-
-        ret = {
-            'page_obj': page_obj,
-            'paginator': paginator,
-            'page': page,
-            'pages': pages,
-            'page_numbers': page_numbers,
-            'next': next,
-            'previous': previous,
-            'has_next': has_next,
-            'has_previous': has_previous,
-            'show_first': 1 not in page_numbers,
-            'show_last': pages not in page_numbers,
-        }
-
-    ret = dict(ret.items() + {
-        'image_list': image_list,
-        'paginate': paginate,
-        'thumbnail_size': size,
-        'IMAGES_URL': settings.IMAGES_URL,
-        'request': request,
-        'sort': request.GET.get('sort'),
-        'view': request.GET.get('view', 'default'),
-    }.items())
-
-    return ret
+def image_list(context, object_list, alias = 'gallery'):
+    return {
+        'image_list': object_list,
+        'request': context['request'],
+        'alias': alias,
+        'view': context['request'].GET.get('view', 'default'),
+        'STATIC_URL': settings.STATIC_URL,
+    }
 register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
 
 
-def messier_list(context, request, object_list, paginate = True):
-    adjacent_pages = 3
-
-    paginator = context['paginator']
-    page = int(context['page'])
-    pages = int(context['pages'])
-    page_obj = context['page_obj']
-    next = context['next']
-    previous = context['previous']
-    has_next = context['has_next']
-    has_previous = context['has_previous']
-
-    startPage = max(page - adjacent_pages, 1)
-    if startPage <= 3: startPage = 1
-    endPage = page + adjacent_pages + 1
-    if endPage >= pages - 1: endPage = pages + 1
-    page_numbers = [n for n in range(startPage, endPage) \
-            if n > 0 and n <= pages]
-
-    return {
-        'page_obj': page_obj,
-        'paginator': paginator,
-        'page': page,
-        'pages': pages,
-        'page_numbers': page_numbers,
-        'next': next,
-        'previous': previous,
-        'has_next': has_next,
-        'has_previous': has_previous,
-        'show_first': 1 not in page_numbers,
-        'show_last': pages not in page_numbers,
-        'object_list': object_list,
-        'paginate': paginate,
-        'thumbnail_size':settings.THUMBNAIL_SIZE,
-        'IMAGES_URL': settings.IMAGES_URL,
-        'request': request,
-        'sort': request.GET.get('sort'),
-    }
-register.inclusion_tag('inclusion_tags/messier_list.html', takes_context=True)(messier_list)
-
-
-def search_image_list(context, request, object_list, paginate = True):
+@register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context = True)
+def search_image_list(context, object_list, paginate = True):
     adjacent_pages = 3
 
     try:
@@ -242,9 +141,13 @@ def search_image_list(context, request, object_list, paginate = True):
     endPage = page + adjacent_pages + 1
     if endPage >= pages - 1: endPage = pages + 1
     page_numbers = [n for n in range(startPage, endPage) \
-            if n > 0 and n <= pages]
+                    if n > 0 and n <= pages]
 
+    request = context['request']
     return {
+        'request': request,
+        'STATIC_URL': settings.STATIC_URL,
+
         'page_obj': page_obj,
         'paginator': paginator,
         'page': page,
@@ -257,18 +160,17 @@ def search_image_list(context, request, object_list, paginate = True):
         'paginate': paginate,
         'show_first': 1 not in page_numbers,
         'show_last': pages not in page_numbers,
+
         'user_list': user_list,
         'gear_list': gear_list,
         'image_list': image_list,
-        'thumbnail_size':settings.THUMBNAIL_SIZE,
-        'IMAGES_URL': settings.IMAGES_URL,
-        'request': request,
+
         'sort': request.GET.get('sort'),
         'search_type': request.GET.get('search_type', 0),
         'multiple': multiple,
         'view': request.GET.get('view', 'default'),
     }
-register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context=True)(search_image_list)
+
 
 @register.filter
 def seconds_to_hours(value):
@@ -279,12 +181,6 @@ def seconds_to_hours(value):
 
     return "%.1f" % (int(value) / 3600.0)
 
-
-@register.simple_tag(takes_context = True)
-def random_id(context, size = 8, chars = string.ascii_uppercase + string.digits):
-    id = ''.join(random.choice(chars) for x in range(size))
-    context['randomid'] = id
-    return ''
 
 
 @register.filter
@@ -406,79 +302,3 @@ def gear_type(gear):
 
     return '-'
 
-
-@register.simple_tag
-def get_final_filename(image):
-    revisions = ImageRevision.objects.filter(image = image)
-    for r in revisions:
-        if r.is_final:
-            return r.filename
-
-    return image.filename
-
-
-@register.simple_tag
-def get_image_url(image):
-    def commercial_gear_url(commercial_gear):
-        gear = Gear.objects.filter(commercial = commercial_gear)
-        if gear:
-            return gear[0].get_absolute_url()
-        return None
-
-    try:
-        commercial_gear = CommercialGear.objects.get(image = image)
-        url = commercial_gear_url(commercial_gear)
-        if url:
-            return url
-
-    except CommercialGear.DoesNotExist:
-        pass
-    except CommercialGear.MultipleObjectsReturned:
-        commercial_gear = CommercialGear.objects.filter(image = image)[0]
-        url = commercial_gear_url(commercial_gear)
-        if url:
-            return url
-
-    return image.get_absolute_url()
-
-
-@register.simple_tag
-def get_image_path(image, resized = False, inverted = False, hd = False):
-    return image.path(resized, inverted, hd)
-
-
-@register.filter
-def votes_by_score(instance, args):
-    return Vote.objects.filter(
-        content_type__app_label = 'astrobin',
-        content_type__model = 'image',
-        object_id = instance.id,
-        score = args,
-        user__userprofile__suspended_from_voting = False,
-    ).count()
-
-
-
-@register.filter
-def votes_percent_by_score(instance, score):
-    votes = Vote.objects.filter(
-        content_type__app_label = 'astrobin',
-        content_type__model = 'image',
-        object_id = instance.id,
-        user__userprofile__suspended_from_voting = False,
-    )
-
-    if votes.count() == 0:
-        return 0;
-
-    number_by_score = [0, 0, 0, 0, 0]
-    for i in range(0, 5):
-        number_by_score[i] = votes.filter(score = i+1).count()
-
-    max = 0
-
-    for n in number_by_score:
-        if n > max:
-            max = n
-
-    return int(number_by_score[score-1] / float(max) * 100);

@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load astrobin_apps_users_tags %}
+
+<div class="modal hide fade" id="people-bookmarked-this-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-bookmark"></i> {% trans "The following people bookmarked this image" %}</h3>
+    </div>
+    <div class="modal-body">
+        {% astrobin_apps_users_list bookmarked_this 'list' %}
+    </div>
+</div>
+

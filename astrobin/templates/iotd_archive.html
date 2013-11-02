@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load astrobin_apps_images_tags %}
 {% load tags %}
 
 {% block title %}AstroBin - {% trans "Archive of 'Image of the day' winners" %}{% endblock %}
@@ -11,10 +13,7 @@
 
             {% for iotd in iotd_list %}
                 <div class="iotd-archive-image">
-                    <a href="{% url image_detail iotd.image.id %}">
-                        <img src="{{IMAGES_URL}}{{iotd.filename}}.jpg"
-                             alt="{{iotd.image.title|escape}}" />
-                    </a>
+                    {% astrobin_image iotd.image 'iotd' %}
 
                     <div class="data">
                         <h3>{{iotd.image.title|escape}}</h3>
@@ -22,7 +21,7 @@
                             {{iotd.date|date:"SHORT_DATE_FORMAT"}},
                             {% trans "by" %}
                             <a href="{% url user_page iotd.image.user %}">
-                                {{iotd.image.get_author_profile}}
+                                {{iotd.image.user.userprofile}}
                             </a>
                         </p>
                     </div>
@@ -32,31 +31,13 @@
                         <h3>{% trans "Runners-up" %}:</h3>
                         {% if iotd.runnerup_1 %}
                             <div class="runner-up">
-                                <a
-                                    rel="tooltip"
-                                    title="{{iotd.runnerup_1.title|escape}}, {% trans "by" %} {{iotd.runnerup_1.get_author_profile}}",
-                                    href="{% get_image_url iotd.runnerup_1 %}">
-
-                                    <img
-                                        src="{{IMAGES_URL}}{% get_final_filename iotd.runnerup_1 %}_small_thumb{{iotd.runnerup_1.original_ext}}"
-                                        alt="{{iotd.runnerup_1.title|escape}}"
-                                        width="45" height="45" />
-                                </a>
+                                {% astrobin_image iotd.runnerup_1 'runnerup' %}
                             </div>
                         {% endif %}
 
                         {% if iotd.runnerup_2 %}
                             <div class="runner-up">
-                                <a
-                                    rel="tooltip"
-                                    title="{{iotd.runnerup_2.title|escape}}, {% trans "by" %} {{iotd.runnerup_2.get_author_profile}}",
-                                    href="{% get_image_url iotd.runnerup_2 %}">
-
-                                    <img
-                                        src="{{IMAGES_URL}}{% get_final_filename iotd.runnerup_2 %}_small_thumb{{iotd.runnerup_2.original_ext}}"
-                                        alt="{{iotd.runnerup_2.title|escape}}"
-                                        width="45" height="45" />
-                                </a>
+                                {% astrobin_image iotd.runnerup_2 'runnerup' %}
                             </div>
                         {% endif %}
                     </div>

@@ -1,0 +1,56 @@
+{% load bootstrap_toolkit %}
+{% load i18n %}
+
+<div class="modal hide fade" id="send-to-sharedfolder-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Send to private shared folder" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            {% blocktrans %}If this image is the result of your processing of a private shared folder, you can send it the folder so it's displayed there.{% endblocktrans %}
+        </p>
+
+        {% if has_rawdata_subscription %}
+            {% if has_sharedfolders %}
+                <p>
+                    {% blocktrans %}Use this form to select a <strong>private shared folder</strong> you have created or have been invited to.{% endblocktrans %}
+                </p>
+                <form class="form-inline" id="select-sharedfolder">
+                    {{select_sharedfolder_form|as_bootstrap}}
+                </form>
+            {% else %}
+                <div class="alert alert-error">
+                    <h4 class="alert-heading">
+                        <i class="icon-fire"></i>
+                        {% trans "Error!" %}
+                    </h4>
+                    {% url rawdata.help1 as rawdata_url %}
+                    {% blocktrans %}You don't have access to any shared private folders.{% endblocktrans %}
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="alert alert-error">
+                <h4 class="alert-heading">
+                    <i class="icon-fire"></i>
+                    {% trans "Error!" %}
+                </h4>
+                {% url rawdata.help1 as rawdata_url %}
+                {% blocktrans %}You need a <a href="{{rawdata_url}}">Raw Data</a> subscription to perform this action.{% endblocktrans %}
+                {% blocktrans %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientic discoveries.{% endblocktrans %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="modal-footer">
+        {% if has_rawdata_subscription %}
+            {% if has_sharedfolders %}
+                <button id="send-to-sharedfolder" class="btn btn-primary">{% trans "Send" %}</button>
+            {% else %}
+                <a class="close btn" data-dismiss="modal">{% trans "OK" %}</a>
+            {% endif %}
+        {% else %}
+            <a class="btn btn-primary" href="{% url rawdata.help1 %}">Sign up now!</a>
+        {% endif %}
+    </div>
+</div>
+
