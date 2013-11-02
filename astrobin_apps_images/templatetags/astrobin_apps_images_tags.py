@@ -64,6 +64,11 @@ def astrobin_image(
 
     response_dict = {}
 
+    if alias == '':
+        alias = 'thumb'
+
+    size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
+
     if image is None:
         return {
             'status': 'failure',
@@ -71,13 +76,10 @@ def astrobin_image(
             'alias': alias,
             'revision': revision,
             'mod': mod,
+            'size_x': size[0],
+            'size_y': size[1],
             'cache_key': 'astrobin_image_no_image',
         }
-
-    if alias == '':
-        alias = 'thumb'
-
-    size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
 
     w = image.w
     h = image.h
