@@ -26,8 +26,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxLengthValidator
 from django.template.defaultfilters import slugify
 
-from tasks import *
-
 from nested_comments.models import NestedComment
 
 from model_utils.managers import InheritanceManager

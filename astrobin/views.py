@@ -56,7 +56,6 @@ from management import NOTICE_TYPES
 from notifications import *
 from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from shortcuts import *
-from tasks import *
 from image_utils import make_image_of_the_day
 from gear import *
 from utils import *
