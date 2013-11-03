@@ -73,7 +73,7 @@ def to_system_timezone(date, profile):
     return date.replace(tzinfo=pytz.timezone(timezone)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 def now_timezone():
-    return datetime.datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
+    return datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
 def monthdelta(date, delta):
@@ -1670,7 +1670,7 @@ def user_page(request, username):
 
     member_since = None
     date_time = user.date_joined.replace(tzinfo = None)
-    diff = abs(date_time - datetime.datetime.today())
+    diff = abs(date_time - datetime.today())
     span = timesince(date_time)
     if span == "0 " + _("minutes"):
         member_since = _("seconds ago")
@@ -3028,7 +3028,7 @@ def user_popover_ajax(request, username):
 
     member_since = None
     date_time = user.date_joined.replace(tzinfo = None)
-    diff = abs(date_time - datetime.datetime.today())
+    diff = abs(date_time - datetime.today())
     span = timesince(date_time)
     span = span.split(",")[0] # just the most significant digit
     if span == "0 " + _("minutes"):

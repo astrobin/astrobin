@@ -51,11 +51,13 @@
                 <img src="{{STATIC_URL}}icons/flags/16/Albania.png" alt="Shqipe"/> Shqipe
             </a>
         </li>
+	{% comment %}
         <li>
             <a href="{% url set_language "pl" %}" title="Polski">
                 <img src="{{STATIC_URL}}icons/flags/16/Poland.png" alt="Polski"/> Polski
             </a>
         </li>
+        {% endcomment %}
         <li>
             <a href="{% url set_language "pt-BR" %}" title="Português brasileiro">
                 <img src="{{STATIC_URL}}icons/flags/16/Brazil.png" alt="Português brasileiro"/> Português brasileiro
