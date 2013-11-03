@@ -69,7 +69,7 @@ def astrobin_image(
 
     size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
 
-    if image is None:
+    if image is None or not isinstance(image, Image):
         return {
             'status': 'failure',
             'image': '',
