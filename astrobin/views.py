@@ -945,6 +945,11 @@ def image_upload_process(request):
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
+
+    if ext in ('.png', '.PNG'):
+        messages.error(request, _("AstroBin is currently having some difficulties with PNG files. Please upload this as a JPG until we solve the problem. Sorry for the inconvenience!"))
+        return HttpResponseRedirect(reverse('image_upload'))
+
     if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error()
 
@@ -2567,6 +2572,11 @@ def image_revision_upload_process(request):
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
+
+    if ext in ('.png', '.PNG'):
+        messages.error(request, _("AstroBin is currently having some difficulties with PNG files. Please upload this as a JPG until we solve the problem. Sorry for the inconvenience!"))
+        return HttpResponseRedirect(reverse('image_upload'))
+
     if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error(image)
 
