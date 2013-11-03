@@ -957,8 +957,7 @@ def image_upload_process(request):
     image.image_file.file.seek(0) # Because we opened it with PIL
     image.save()
 
-    messages.success(request, _("Image uploaded. After this basic information, remember to edit the gear and acquisition details using the Actions menu. Thank you!"))
-    return HttpResponseRedirect("/edit/basic/%d/" % image.id)
+    return HttpResponseRedirect(reverse('image_edit_watermark', kwargs={'id': image.id}))
 
 
 @login_required
@@ -1036,6 +1035,8 @@ def image_edit_acquisition(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
+    from astrobin_apps_platesolving.solver import Solver
+
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
 
@@ -1056,7 +1057,7 @@ def image_edit_acquisition(request, id):
     deep_sky_acquisition_formset = None
     deep_sky_acquisition_basic_form = None
     advanced = False
-    if edit_type == 'deep_sky' or image.solution:
+    if edit_type == 'deep_sky' or (image.solution and image.solution.status != Solver.FAILED):
         advanced = dsa_qs[0].advanced if dsa_qs else False
         advanced = request.GET['advanced'] if 'advanced' in request.GET else advanced
         advanced = True if advanced == 'true' else advanced
@@ -1184,8 +1185,12 @@ def image_edit_save_basic(request):
 
     form.save()
 
-    messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect(image.get_absolute_url())
+
+    if 'submit_gear' in request.POST:
+        return HttpResponseRedirect(reverse('image_edit_gear', kwargs={'id': image.id}))
+    else:
+        messages.success(request, _("Form saved. Thank you!"))
+        return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
@@ -1217,7 +1222,7 @@ def image_edit_save_watermark(request):
     profile.save()
 
     if 'submit_next' in request.POST:
-        return HttpResponseRedirect('/edit/basic/%i/' % image.id)
+        return HttpResponseRedirect(reverse('image_edit_basic', kwargs={'id': image.id}))
 
     return HttpResponseRedirect(image.get_absolute_url())
 
@@ -1256,8 +1261,11 @@ def image_edit_save_gear(request):
 
     response_dict['image'] = image
 
+    if 'submit_acquisition' in request.POST:
+        return HttpResponseRedirect(reverse('image_edit_acquisition', kwargs={'id': image.id}))
+
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect('/edit/gear/%i/' % image.id)
+    return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
@@ -1337,7 +1345,7 @@ def image_edit_save_acquisition(request):
         form.save()
 
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect("/edit/acquisition/%s/" % image_id)
+    return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
@@ -1359,7 +1367,8 @@ def image_edit_save_license(request):
     form.save()
 
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect('/edit/license/%s/' % image_id)
+    return HttpResponseRedirect(image.get_absolute_url())
+
 
 @login_required
 @require_POST
