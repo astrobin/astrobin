@@ -6,18 +6,18 @@
 {% block title %}AstroBin - {% trans "Apply a watermark to image" %}{% endblock %}
 {% block content %}
     <h1>
-        {% blocktrans %}Step 2 of 5: watermark{% endblocktrans %}
+        {% blocktrans %}Apply a watermark to image{% endblocktrans %}
     </h1>
-    
+
     <div class="well">
         {% blocktrans %}AstroBin can protect your images from theft by applying a watermark to them. Be careful with your settings though: once a watermark has been applied, it cannot be removed (AstroBin won't store the non-watermarked version of your image, for your safety). If you don't like the watermark resulting from the following settings, your only choice is to delete the image and start over.{% endblocktrans %}
         {% blocktrans %}Please note: animated GIFs cannot be watermarked at this time.{% endblocktrans %}
     </div>
-    
+
     <form class="form-horizontal" action="{% url image_edit_save_watermark %}" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
         <input type="hidden" name="image_id" value="{{image.id}}" />
-        
+
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" name="submit_next" value="{% trans "Next step: basic information" %} &rarr;" /></li>
         </div>
