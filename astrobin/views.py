@@ -150,15 +150,16 @@ def index(request, template = 'index/root.html', extra_context = None):
     """Main page"""
     from django.core.cache import cache
 
-    section = request.GET.get('s', 'personal')
     image_ct = ContentType.objects.get_for_model(Image)
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
     response_dict = {
         'registration_form': RegistrationForm(),
-        'section': section,
-        'recent_images': Image.objects.filter(is_wip = False).select_related('user__userprofile'),
+        'recent_images': Image.objects\
+            .filter(is_wip = False)\
+            .exclude(Q(title = None) | Q(title = ''))\
+            .select_related('user__userprofile'),
         'recent_images_alias': 'thumb',
         'recent_images_batch_size': 55,
     }
@@ -167,6 +168,14 @@ def index(request, template = 'index/root.html', extra_context = None):
     profile = None
     if request.user.is_authenticated():
         profile = request.user.userprofile
+        section = request.GET.get('s')
+        if section is None:
+            section = profile.default_frontpage_section
+        else:
+            profile.default_frontpage_section = section
+            profile.save()
+        response_dict['section'] = section
+
         response_dict['recent_images_batch_size'] = 64
 
         try:

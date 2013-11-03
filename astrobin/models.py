@@ -1394,6 +1394,11 @@ class UserProfile(models.Model):
     filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"), related_name='filters')
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"), related_name='accessories')
 
+    default_frontpage_section = models.CharField(
+        max_length = 16,
+        editable = False,
+        default = 'personal')
+
     default_license = models.IntegerField(
         choices = LICENSE_CHOICES,
         default = 0,
