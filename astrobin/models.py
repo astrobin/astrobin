@@ -867,6 +867,8 @@ class Image(HasSolutionMixin, models.Model):
     # TODO: why have mod as a setting when inverted is part of the alias?
     # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
+        from django.core.files.base import File
+        from django.core.files.storage import FileSystemStorage
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
 
@@ -881,23 +883,36 @@ class Image(HasSolutionMixin, models.Model):
 
         field = self.get_thumbnail_field(revision_label);
 
+        local_path = None
+        name = field.name
+
+        # If it's one of the small thumbnails, try to generate it from the 'regular' size.
+        if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object'):
+            regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
+            name = regular_thumbnail.name
+            local_path = field.storage.local_storage.path(name)
+
         # Try to generate the thumbnail starting from the file cache locally.
-        local_path = field.storage.local_storage.path(field.name)
+        if local_path is None:
+            local_path = field.storage.local_storage.path(name)
+
         try:
-            with open(local_path) as local_file:
-                thumbnailer = get_thumbnailer(local_file, field.name)
+            with open(local_path):
+                thumbnailer = get_thumbnailer(
+                    FileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                    name)
         except IOError:
             # If things go awry, fallback to getting the file from the remote
             # storage. But download it locally first if it doesn't exist, so
             # it can be used again later.
             try:
-                remote_file = field.storage._open(field.name)
+                remote_file = field.storage._open(name)
             except IOError:
                 # The remote file doesn't exist?
                 return None
 
-            local_file = field.storage.local_storage._save(field.name, remote_file)
-            thumbnailer = get_thumbnailer(local_file, field.name)
+            local_file = field.storage.local_storage._save(name, remote_file)
+            thumbnailer = get_thumbnailer(local_file, name)
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text
