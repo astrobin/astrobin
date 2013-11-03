@@ -51,6 +51,7 @@ ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
 ASTROBIN_BASE_PATH = os.path.dirname(__file__)
 IMAGE_CACHE_DIRECTORY = '/webserver/www/imagecache/'
+UPLOADS_DIRECTORY = IMAGE_CACHE_DIRECTORY
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

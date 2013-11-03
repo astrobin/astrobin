@@ -237,7 +237,7 @@
                                    rel="tooltip"
                                    title="{% trans "Recent images from people you follow" %}">
                             {% endif %}
-                                <i class="icon-eye-open"></i>
+                                <i class="icon-plus-sign"></i>
                             {% if section != 'followed' %}
                                 </a>
                             {% endif %}
@@ -273,6 +273,16 @@
                                 <i class="icon-archive"></i>
                             {% if section != 'fits' %}
                                 </a>
+                            {% endif %}
+
+                            {% if request.user.userprofile.default_frontpage_section != section %}
+                                <span class="horizontal-separator">/</span>
+                                <a  href="{% url set_default_frontpage_section section %}"
+                                    rel="tooltip"
+                                    title="{% trans "Set current front page section as default" %}">
+                                    <i class="icon-ok"></i>
+                                </a>
+                                    <i
                             {% endif %}
                         </span>
                     </div>

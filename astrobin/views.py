@@ -56,7 +56,6 @@ from management import NOTICE_TYPES
 from notifications import *
 from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from shortcuts import *
-from tasks import *
 from image_utils import make_image_of_the_day
 from gear import *
 from utils import *
@@ -150,15 +149,16 @@ def index(request, template = 'index/root.html', extra_context = None):
     """Main page"""
     from django.core.cache import cache
 
-    section = request.GET.get('s', 'personal')
     image_ct = ContentType.objects.get_for_model(Image)
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
     response_dict = {
         'registration_form': RegistrationForm(),
-        'section': section,
-        'recent_images': Image.objects.filter(is_wip = False).select_related('user__userprofile'),
+        'recent_images': Image.objects\
+            .filter(is_wip = False)\
+            .exclude(Q(title = None) | Q(title = ''))\
+            .select_related('user__userprofile'),
         'recent_images_alias': 'thumb',
         'recent_images_batch_size': 55,
     }
@@ -167,6 +167,12 @@ def index(request, template = 'index/root.html', extra_context = None):
     profile = None
     if request.user.is_authenticated():
         profile = request.user.userprofile
+
+        section = request.GET.get('s')
+        if section is None:
+            section = profile.default_frontpage_section
+        response_dict['section'] = section
+
         response_dict['recent_images_batch_size'] = 64
 
         try:
@@ -3845,4 +3851,14 @@ def retailed_products_edit(request, id):
             'gear': Gear.objects.filter(retailed = product)[0],
         },
         context_instance = RequestContext(request))
+
+
+@login_required
+def set_default_frontpage_section(request, section):
+    profile = request.user.userprofile
+    profile.default_frontpage_section = section
+    profile.save()
+
+    messages.success(request, _("Default front page section changed."))
+    return HttpResponseRedirect(reverse('index'))
 
