@@ -274,6 +274,16 @@
                             {% if section != 'fits' %}
                                 </a>
                             {% endif %}
+
+                            {% if request.user.userprofile.default_frontpage_section != section %}
+                                <span class="horizontal-separator">/</span>
+                                <a  href="{% url set_default_frontpage_section section %}"
+                                    rel="tooltip"
+                                    title="{% trans "Set current front page section as default" %}">
+                                    <i class="icon-ok"></i>
+                                </a>
+                                    <i
+                            {% endif %}
                         </span>
                     </div>
 
