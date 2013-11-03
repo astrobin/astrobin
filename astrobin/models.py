@@ -890,7 +890,12 @@ class Image(HasSolutionMixin, models.Model):
             # If things go awry, fallback to getting the file from the remote
             # storage. But download it locally first if it doesn't exist, so
             # it can be used again later.
-            remote_file = field.storage._open(field.name)
+            try:
+                remote_file = field.storage._open(field.name)
+            except IOError:
+                # The remote file doesn't exist?
+                return None
+
             local_file = field.storage.local_storage._save(field.name, remote_file)
             thumbnailer = get_thumbnailer(local_file, field.name)
 
