@@ -280,5 +280,7 @@ urlpatterns = patterns('',
 
     url(r'^openid/', include('openid_provider.urls')),
     url(r'^subscriptions/', include('subscription.urls')),
+
+    url(r'^set-default-frontpage-section/(?P<section>\w+)/$', views.set_default_frontpage_section, name = 'set_default_frontpage_section'),
 )
 

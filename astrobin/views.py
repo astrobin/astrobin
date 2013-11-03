@@ -168,12 +168,10 @@ def index(request, template = 'index/root.html', extra_context = None):
     profile = None
     if request.user.is_authenticated():
         profile = request.user.userprofile
+
         section = request.GET.get('s')
         if section is None:
             section = profile.default_frontpage_section
-        else:
-            profile.default_frontpage_section = section
-            profile.save()
         response_dict['section'] = section
 
         response_dict['recent_images_batch_size'] = 64
@@ -3854,4 +3852,14 @@ def retailed_products_edit(request, id):
             'gear': Gear.objects.filter(retailed = product)[0],
         },
         context_instance = RequestContext(request))
+
+
+@login_required
+def set_default_frontpage_section(request, section):
+    profile = request.user.userprofile
+    profile.default_frontpage_section = section
+    profile.save()
+
+    messages.success(request, _("Default front page section changed."))
+    return HttpResponseRedirect(reverse('index'))
 
