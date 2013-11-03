@@ -889,8 +889,9 @@ class Image(HasSolutionMixin, models.Model):
         # If it's one of the small thumbnails, try to generate it from the 'regular' size.
         if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object'):
             regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
-            name = regular_thumbnail.name
-            local_path = field.storage.local_storage.path(name)
+            if regular_thumbnail:
+                name = regular_thumbnail.name
+                local_path = field.storage.local_storage.path(name)
 
         # Try to generate the thumbnail starting from the file cache locally.
         if local_path is None:
