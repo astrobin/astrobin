@@ -912,8 +912,11 @@ class Image(HasSolutionMixin, models.Model):
                 # The remote file doesn't exist?
                 return None
 
-            local_file = field.storage.local_storage._save(name, remote_file)
-            thumbnailer = get_thumbnailer(local_file, name)
+            try:
+                local_file = field.storage.local_storage._save(name, remote_file)
+                thumbnailer = get_thumbnailer(local_file, name)
+            except OSError:
+                pass
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text
