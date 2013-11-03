@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-03 06:49-0600\n"
-"PO-Revision-Date: 2013-11-01 10:21+0100\n"
+"POT-Creation-Date: 2013-11-03 07:27-0600\n"
+"PO-Revision-Date: 2013-11-03 13:12+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -1378,7 +1378,7 @@ msgstr "ha commentato lo strumento"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr "ha aggiunto ai segnalibro"
+msgstr "ha aggiunto ai segnalibri"
 
 #: locale_extras.py:12
 msgid "likes"
@@ -2457,11 +2457,11 @@ msgstr "Risultati:"
 
 #: settings.py:571
 msgid "Remove from bookmarks"
-msgstr "Rimuovi dai segnalibro"
+msgstr "Rimuovi dai segnalibri"
 
 #: settings.py:572
 msgid "Bookmark"
-msgstr "Aggiungi ai segnalibro"
+msgstr "Segnalibri"
 
 #: settings.py:577 settings.py:579
 msgid "Unlike"
@@ -2745,7 +2745,7 @@ msgstr "Un tuo commento ha ricevuto una risposta"
 
 #: management/__init__.py:69
 msgid "Your image was bookmarked"
-msgstr "La qua immagine è stata aggiunta ai segnalibro"
+msgstr "La tua immagine è stata aggiunta ai segnalibri"
 
 #: management/__init__.py:75
 msgid "Your image was liked"
@@ -2817,8 +2817,8 @@ msgid ""
 "details, so we will try to fix the problem as soon as possible. Sorry about "
 "the inconvenience! "
 msgstr ""
-"È accaduto qualcosa di inaspettato! Abbiamo ricevuto una e-mail con i "
-"dettagli tecnici, quindi cercheremo di risolvere il problema il prima "
+"È accaduto qualcosa di inaspettato. Abbiamo ricevuto una e-mail con tutti i "
+"dettagli tecnici, quindi cercheremo di risolvere il problema al più presto "
 "possibile. Spiacenti per il disagio!"
 
 #: templates/500.html:21
@@ -2982,12 +2982,11 @@ msgstr "Come viene calcolato l'Indice AstroBin?"
 #: templates/faq.html:21 templates/faq.html.py:131
 msgid "I received some Likes, why is my AstroBin index not updated?"
 msgstr ""
-"Ho ricevuto dei Mi piace, perché il mio Indice AstroBin non è stato "
-"aggiornato?"
+"Ho ricevuto alcuni Mi piace, perché il mio Indice AstroBin non è cambiato?"
 
 #: templates/faq.html:22 templates/faq.html.py:138
 msgid "How is the Image of the Day selected?"
-msgstr "Come viene selezionata la Foto del Giorno?"
+msgstr "Come viene selezionata la foto del giorno?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3224,7 +3223,7 @@ msgid ""
 "images posted by a user."
 msgstr ""
 "L'Indice AstroBin è una funzione del numero di Mi piace ed il numero di "
-"immagini postate da un utente."
+"immagini pubblicate da un utente."
 
 #: templates/faq.html:133
 msgid ""
@@ -3232,8 +3231,8 @@ msgid ""
 "every 24 hours. The same applies for the search index, the Big Wall, and "
 "some other user data."
 msgstr ""
-"Dato che il suo calcolo necessita un po' di tempo, l'Indice AstroBin viene "
-"aggiornato solo ogni 24 ore. Lo stesso vale per l'indice di ricerca, il "
+"Dato che il suo calcolo richiede un po' di tempo, l'Indice AstroBin è "
+"agigornato solo ogni 24 ore. Lo stesso vale per l'indice di ricerca, il "
 "Grande Muro, ed altri dati utente."
 
 #: templates/faq.html:140
@@ -3242,9 +3241,9 @@ msgid ""
 "days. The image with most Likes in that period is selected as Image of the "
 "Day."
 msgstr ""
-"Ogni notte, un algoritmo analizza le immagini caricate durante i precedenti "
-"7 giorni. L'immagine con più Mi piace in quel periodo viene selezionata come "
-"Foto del Giorno."
+"Ogni notte, un algoritmo prende in considerazione le immagini caricate "
+"durante i precedenti 7 giorni. L'immagine con più Mi piace viene selezionata "
+"come Foto del giorno."
 
 #: templates/faq.html:146
 msgid ""
@@ -5051,7 +5050,7 @@ msgstr "Normale"
 
 #: templates/image/detail/modals/bookmarked_this.html:7
 msgid "The following people bookmarked this image"
-msgstr "Le seguenti persona hanno aggiunto questa immagine ai segnalibro"
+msgstr "Le seguenti persone hanno aggiunto la tua immagine ai segnalibri"
 
 #: templates/image/detail/modals/cant_like.html:8
 msgid "Sorry"
@@ -5063,16 +5062,15 @@ msgid ""
 "We're really sorry, but liking an image requires an AstroBin index of "
 "<strong>%(min_index_to_like)s</strong> or greater."
 msgstr ""
-"Siamo davvero spiacenti, ma per cliccare Mi piace su un'immagine occorre "
-"avere un Indice AstroBin di <strong>%(min_index_to_like)s</strong> o "
-"superiore."
+"Siamo spiacenti, ma cliccare Mi piace richiede un Indice AstroBin di <strong>"
+"%(min_index_to_like)s</strong> o superiore."
 
 #: templates/image/detail/modals/cant_like.html:16
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
 "creating fake accounts to like their own images. Thank you for understanding!"
 msgstr ""
-"Questa limitazione migliora il sito discoraggiando le persone dal creare "
+"Questa limitazione migliora il sito discoraggiando gli utenti dal creare "
 "account fasulli per cliccare Mi piace sulle proprie immagini. Grazie per la "
 "comprensione!"
 
@@ -5119,7 +5117,7 @@ msgstr ""
 
 #: templates/image/detail/modals/like_this.html:7
 msgid "The following people like this image"
-msgstr "Alle seguenti persone piace questa immagine"
+msgstr "Alle seguenti persone piace la tua immagine"
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
@@ -5586,7 +5584,7 @@ msgstr "Caricate di recente"
 
 #: templates/index/root.html:178 templates/index/root.html.py:238
 msgid "Recent images from people you follow"
-msgstr "Immagini recenti da persone che segui"
+msgstr "Immagini recenti dagli utenti che segui"
 
 #: templates/index/root.html:183 templates/index/root.html.py:249
 msgid "Recently liked"
@@ -5594,7 +5592,7 @@ msgstr "Piaciute di recente"
 
 #: templates/index/root.html:188 templates/index/root.html.py:260
 msgid "Recently bookmarked"
-msgstr "Aggiunte ai segnalibro di recente"
+msgstr "Aggiunte ai segnalibri di recente"
 
 #: templates/index/root.html:193 templates/index/root.html.py:271
 msgid "Recent images with link to TIFF/FITS"
@@ -5619,7 +5617,8 @@ msgstr ""
 #: templates/index/root.html:298
 msgid ""
 "To make your personal stream more interesting, you should follow some people!"
-msgstr "Per rendere il tuo stream più interessante, segui degli utenti!"
+msgstr ""
+"Per rendere il tuo stream più interessante, dovresti seguire qualche utente!"
 
 #: templates/index/root.html:325
 msgid "Do you want your product here?"
@@ -5932,7 +5931,7 @@ msgstr "AstroBin ha pubblicato un nuovo messaggio nel blog: %(object)s"
 #: templates/notification/new_bookmark/full.txt:2
 #, python-format
 msgid "%(user)s has added your image to their bookmarks: %(url)s"
-msgstr "%(user)s ha aggiunto la tua immagine ai suoi segnalibro: %(url)s"
+msgstr "%(user)s ha aggiunto la tua immagine ai suoi segnalibri: %(url)s"
 
 #: templates/notification/new_bookmark/notice.html:2
 #: templates/notification/new_bookmark/short.html:2
@@ -5942,12 +5941,12 @@ msgid ""
 "bookmarks!</a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> ha aggiunto la tua immagine ai "
-"suoi segnalibro!</a>"
+"suoi segnalibri!</a>"
 
 #: templates/notification/new_bookmark/short.txt:2
 #, python-format
 msgid "%(user)s has added yout image to their bookmarks: %(url)s"
-msgstr "%(user)s ha aggiunto la tua immagine ai suoi segnalibro: %(url)s"
+msgstr "%(user)s ha aggiunto la tua immagine ai suoi segnalibri: %(url)s"
 
 #: templates/notification/new_comment/full.txt:2
 #, python-format
@@ -6177,7 +6176,7 @@ msgstr "A %(user)s piace la tua immagine: %(url)s"
 #, python-format
 msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgstr ""
-"<a href=\"%(url)s\">A <strong>%(user)s</strong> piace la tua immagine!</a>"
+"<a href=\"%(url)s\">A <strong>%(user)s</strong>piace la tua immagine!</a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -6273,9 +6272,9 @@ msgid ""
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha aggiunto una "
-"nuova immagine elaborata al gruppo di dati pubblici: <strong>\"%(pool_name)s."
-"\"</strong></a>"
+"<a href=\"%(pool_url)s\"><strong>%(username)s</strong> ha aggiunto una nuova "
+"immagine elaborata al gruppo di dati pubblici: <strong>\"%(pool_name)s.\"</"
+"strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, python-format
@@ -6284,7 +6283,7 @@ msgid ""
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha aggiunto una "
-"nuova immagine elaborata al gruppo di dati pubblici: <strong>\"%(pool_name)s."
+"nuova immagine elaborata al gruppo di dati pubblici: <strong>\"%(pool_names."
 "\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
@@ -6308,7 +6307,7 @@ msgid ""
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha aggiunto nuovi "
-"dati al gruppo pubblico: <strong>\"%(pool_name)s.\"</strong></a>"
+"dati al gruppo pubblico: <strong>\"&(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, python-format
@@ -6675,21 +6674,21 @@ msgstr "Richiedi una API Key"
 #: templates/user/bookmarks.html:5
 #, python-format
 msgid "%(user)s's bookmarks"
-msgstr "Segnalibro di %(user)s"
+msgstr "Segnalibri di %(user)s"
 
 #: templates/user/bookmarks.html:11
 msgid "Your bookmarks"
-msgstr "I tuoi segnalibro"
+msgstr "I tuoi segnalibri"
 
 #: templates/user/bookmarks.html:13
 #, python-format
 msgid "%(username)s's bookmarks"
-msgstr "I segnalibro di %(username)s:"
+msgstr "I segnalibri di %(username)s"
 
 #: templates/user/followers.html:7
 #, python-format
 msgid "%(user)s's followers"
-msgstr "I follower di %(user)s"
+msgstr "Follower di %(user)s"
 
 #: templates/user/followers.html:13
 msgid "Your followers"
@@ -6707,12 +6706,12 @@ msgstr "Utenti seguiti da %(user)s"
 
 #: templates/user/following.html:13
 msgid "Your followed users"
-msgstr "Utenti seguiti da te"
+msgstr "You utenti che segui"
 
 #: templates/user/following.html:15
 #, python-format
 msgid "%(username)s's followed users"
-msgstr "Utenti seguiti da %(username)s"
+msgstr "Gli utenti seguiti da %(username)s"
 
 #: templates/user/not_found.html:5
 msgid "User not found:"
@@ -7085,8 +7084,8 @@ msgstr "Modifica le tue informazioni di negoziante"
 #~ "and acquisition details using the Actions menu. Thank you!"
 #~ msgstr ""
 #~ "Immagine caricata. Dopo queste informazioni di base, ricordati di "
-#~ "modificare la strumentazione ed i dettagli di acquisizione usando il menù "
-#~ "Azioni. Grazie!"
+#~ "inserire la strumentazione usate ed i dettagli di acquisizione usando il "
+#~ "menú Azioni. Grazie!"
 
 #~ msgid "Step 2 of 5: watermark"
 #~ msgstr "Passo 2 di 5: watermark"
