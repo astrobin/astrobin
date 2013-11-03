@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-03 06:50-0600\n"
-"PO-Revision-Date: 2013-11-01 08:34+0100\n"
+"POT-Creation-Date: 2013-11-03 07:29-0600\n"
+"PO-Revision-Date: 2013-11-03 12:59+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:10
 msgid "Getting plate-solving status, please wait..."
-msgstr "Controllo dello stato della riduzione astrmetrica, attendere..."
+msgstr "Controllo dello stato della riduzione astrometrica, attendere..."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:28
 msgid "Plate-solving process starting, please do not leave this page..."
@@ -29,19 +29,20 @@ msgstr ""
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:29
 msgid "Plate-solving started in the background. You may leave this page."
-msgstr "Riduzione astrometrica avviata. Puoi chiudere questa pagina."
+msgstr "Riduzione astrometrica in corso. Puoi chiudere questa pagina."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:30
 msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr "Riduzione astrometrica quasi pronta, non chiudere questa pagina..."
+msgstr "Riduzione astrmetrica quasi pronta, non chiudere questa pagina..."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:31
 msgid "This image could not be plate-solved."
-msgstr "Riduzione astrometrica non riuscita."
+msgstr "Non è stato possibile ridurre l'immagine astrometricamente."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:32
 msgid ""
 "This image has been successfully plate-solved. Please refresh the page to "
 "see the new data."
 msgstr ""
-"Riduzione astrometrica riuscita. Ricarica la pagina per vedere i nuovi dati."
+"L'immagine è stata ridotta astrometricamente. Ricarica la pagine per vedere "
+"i nuovi dati."

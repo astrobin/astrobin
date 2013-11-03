@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-03 06:49-0600\n"
-"PO-Revision-Date: 2013-09-07 15:36+0100\n"
-"Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
+"POT-Creation-Date: 2013-11-03 07:27-0600\n"
+"PO-Revision-Date: 2013-11-03 13:11+0100\n"
+"Last-Translator: OrionRider <orionrider@telenet.be>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1361,9 +1361,8 @@ msgid "Body"
 msgstr "Texte"
 
 #: locale_extras.py:7
-#, fuzzy
 msgid "uploaded a new image"
-msgstr "Publier une nouvelle image"
+msgstr "a chargé une nouvelle image"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
@@ -1379,11 +1378,11 @@ msgstr "a commenté le matériel"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr ""
+msgstr "marqué comme favori"
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr ""
+msgstr "aime"
 
 #: locale_extras.py:13
 msgid "has written a review on"
@@ -1903,9 +1902,8 @@ msgid "Subject type"
 msgstr "Type d'objet"
 
 #: models.py:666
-#, fuzzy
 msgid "Objects in field"
-msgstr "Objet non trouvé"
+msgstr "Objets dans le champ"
 
 #: models.py:667
 msgid "Use a <strong>comma</strong> to separate the values."
@@ -2239,7 +2237,6 @@ msgid "Company description"
 msgstr "Description de la société"
 
 #: models.py:1365
-#, fuzzy
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2447,7 +2444,6 @@ msgid ""
 msgstr "Une formule marquante pour résumer cet article, à but marketing."
 
 #: models.py:1855
-#, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2468,21 +2464,20 @@ msgid "Matching items:"
 msgstr "Résultats de la recherche:"
 
 #: settings.py:571
-#, fuzzy
 msgid "Remove from bookmarks"
-msgstr "Retirer des favoris"
+msgstr "Enlever des favoris"
 
 #: settings.py:572
 msgid "Bookmark"
-msgstr ""
+msgstr "Favori"
 
 #: settings.py:577 settings.py:579
 msgid "Unlike"
-msgstr ""
+msgstr "N'aime pas"
 
 #: settings.py:578 settings.py:580
 msgid "Like"
-msgstr ""
+msgstr "Aime"
 
 #: settings.py:585
 msgid "Stop following"
@@ -2630,14 +2625,12 @@ msgid "Fill in one session, before adding more."
 msgstr "Remplissez une session avant d'en ajouter une autre."
 
 #: views.py:1387 views.py:1451
-#, fuzzy
 msgid "Image deleted."
-msgstr "Votre image a été effacée"
+msgstr "Image effacée."
 
 #: views.py:1404
-#, fuzzy
 msgid "Revision deleted."
-msgstr "Inscription réussie."
+msgstr "Versions effacée."
 
 #: views.py:1553
 msgid "No date specified"
@@ -2705,9 +2698,8 @@ msgstr ""
 "faire défiler la page pour les vérifier tous."
 
 #: views.py:2599
-#, fuzzy
 msgid "Image uploaded. Thank you!"
-msgstr "Formulaire enregistré. Merci!"
+msgstr "Image chargée. Merci!"
 
 #: views.py:2901 templatetags/tags.py:237
 msgid "no alias"
@@ -2759,14 +2751,12 @@ msgid "There was a reply to your comment"
 msgstr "Il y a une réponse à votre commentaire"
 
 #: management/__init__.py:69
-#, fuzzy
 msgid "Your image was bookmarked"
 msgstr "Votre image a été marquée comme favori"
 
 #: management/__init__.py:75
-#, fuzzy
 msgid "Your image was liked"
-msgstr "Votre image a été effacée"
+msgstr "Votre image a été appréciée"
 
 #: management/__init__.py:81
 msgid "New image with some gear you follow"
@@ -2822,11 +2812,11 @@ msgstr ""
 
 #: templates/500.html:11
 msgid "Fatal error"
-msgstr ""
+msgstr "Erreur fatale"
 
 #: templates/500.html:13
 msgid "Nothing to worry about, it's not your fault."
-msgstr ""
+msgstr "Pas de panique, ce n'est pas de votre faute."
 
 #: templates/500.html:18
 msgid ""
@@ -2834,6 +2824,8 @@ msgid ""
 "details, so we will try to fix the problem as soon as possible. Sorry about "
 "the inconvenience! "
 msgstr ""
+"Désolé, une erreur inattendue s'est produite! Nous avons reçu les détails "
+"par email, le problème sera résolu dès que possible."
 
 #: templates/500.html:21
 #, fuzzy
@@ -2994,15 +2986,17 @@ msgstr "Comment formater le texte de mes commentaires?"
 
 #: templates/faq.html:20 templates/faq.html.py:123
 msgid "How is the AstroBin index calculated?"
-msgstr ""
+msgstr "Comment est calculé l'index AstroBin?"
 
 #: templates/faq.html:21 templates/faq.html.py:131
 msgid "I received some Likes, why is my AstroBin index not updated?"
 msgstr ""
+"Mes images ont été appréciées, pourquoi mon index AstroBin n'a-t-il pas "
+"changé?"
 
 #: templates/faq.html:22 templates/faq.html.py:138
 msgid "How is the Image of the Day selected?"
-msgstr ""
+msgstr "Comment est sélectionnée l'image du jour?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3233,6 +3227,8 @@ msgid ""
 "The AstroBin index is a function of the number of Likes and the number of "
 "images posted by a user."
 msgstr ""
+"L'index AstroBin dépend du nombre de 'j'aime' et du nombre d'images postées "
+"par l'utilisateur."
 
 #: templates/faq.html:133
 msgid ""
@@ -3240,6 +3236,9 @@ msgid ""
 "every 24 hours. The same applies for the search index, the Big Wall, and "
 "some other user data."
 msgstr ""
+"L'index AstroBin n'est caclulé que toutes les 24h, pour ne pas surcharger "
+"les serveurs. C'est aussi le cas pour l'index de recherche, le Grand Mur et "
+"d'autres données."
 
 #: templates/faq.html:140
 msgid ""
@@ -3247,6 +3246,9 @@ msgid ""
 "days. The image with most Likes in that period is selected as Image of the "
 "Day."
 msgstr ""
+"Chaque nuit, un algorithme examine les images chargées dans les 7 dernier "
+"sjours. L'image la plus appréciée pendant cette période est sélectionnée "
+"comme image du jour."
 
 #: templates/faq.html:146
 msgid ""
@@ -3675,7 +3677,6 @@ msgstr "Indice AstroBin"
 
 #: templates/leaderboard.html:29 templates/base/user_links_entries.html:114
 #: templates/user/profile-subnav.html:85
-#, fuzzy
 msgid "Followers"
 msgstr "Abonnements"
 
@@ -7117,6 +7118,14 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Modifier les informations du distributeur"
+
+#~ msgid ""
+#~ "Image uploaded. After this basic information, remember to edit the gear "
+#~ "and acquisition details using the Actions menu. Thank you!"
+#~ msgstr ""
+#~ "Image chargée. Après ces informations de base, pensez à ajouter le "
+#~ "matériel et les détails d'acquisition en utilisant le menu 'Actions'. "
+#~ "Merci!"
 
 #~ msgid "Step 2 of 5: watermark"
 #~ msgstr "Etape 2 sur 5: filigrane"
