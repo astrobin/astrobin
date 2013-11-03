@@ -7,11 +7,11 @@ local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 DEBUG = False
 CACHE = not DEBUG
-LOCAL_STATIC_STORAGE = DEBUG
+LOCAL_STATIC_STORAGE = True
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '59'
+MEDIA_VERSION = '60'
 LONGPOLL_ENABLED = False
 
 ADMINS = (
@@ -76,7 +76,7 @@ LANGUAGES = (
     ('nl', gettext('Dutch')),
     ('tr', gettext('Turkish')),
     ('sq', gettext('Albanian')),
-    ('pl', gettext('Polish')),
+    #('pl', gettext('Polish')),
     ('pt-BR', gettext('Brazilian Portuguese')),
     ('el', gettext('Greek')),
 )

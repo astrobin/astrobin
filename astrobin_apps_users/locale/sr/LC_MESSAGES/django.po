@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-01 07:25+0000\n"
+"POT-Creation-Date: 2013-11-03 07:29-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,6 +42,7 @@ msgid "%(images_number)s image"
 msgid_plural "%(images_number)s images"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:99
 #, python-format
@@ -49,6 +50,7 @@ msgid "%(followers_number)s follower"
 msgid_plural "%(followers_number)s followers"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:6
 msgid "User"

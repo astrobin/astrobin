@@ -70,14 +70,14 @@ def append_slash(value):
 @register.filter
 def ago(date_time):
     date_time = date_time.replace(tzinfo = None)
-    diff = abs(date_time - datetime.datetime.today())
+    diff = abs(date_time - datetime.today())
     if diff.days <= 0:
         span = timesince(date_time)
         span = span.split(",")[0] # just the most significant digit
         if span == "0 " + _("minutes"):
             return _("seconds ago")
         return _("%s ago") % span
-    return datetime.datetime.date(date_time)
+    return datetime.date(date_time)
 
 
 @register.filter
