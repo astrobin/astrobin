@@ -1,7 +1,6 @@
 {% load astrobin_apps_images_tags %}
 {% load cache %}
 {% load common_tags %}
-{% load i18n %}
 
 {% if status != 'error' %}
     {% cache 3600 astrobin_image cache_key %}
@@ -35,12 +34,13 @@
             {% endif %}
 
 
-            <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin / {% trans "Loading" %}..."
+            <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin"
                  class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
 
                  {% if alias != 'regular' %}
                      width="{{size_x}}"
                      height="{{size_y}}"
+                     style="width:{{size_x}}px; height:{{size_y}}px;"
                  {% endif %}
 
                  name="#capty-target-{{image.id}}-{{randomid}}"

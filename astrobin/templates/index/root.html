@@ -342,9 +342,6 @@
                     masonry.layout();
                 }
             };
-            setTimeout(function() {
-                layoutMasonry();
-            }, 500);
 
             $('.endless').endlessPaginate({
                 paginateOnScroll: true,
@@ -356,6 +353,10 @@
                     window.loadAstroBinImages(fragment);
                 }
             });
+
+            setTimeout(function() {
+                layoutMasonry();
+            }, 500);
 
             astrobin_common.setup_gear_popovers();
             astrobin_common.setup_user_popovers();
