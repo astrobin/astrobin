@@ -157,7 +157,7 @@ MIDDLEWARE_CLASSES = [
     'pagination.middleware.PaginationMiddleware',
     'astrobin.middlewares.ProfileMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
-    'privatebeta.middleware.PrivateBetaMiddleware',
+    #'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
