@@ -1552,7 +1552,7 @@ def user_page(request, username):
         # YEAR #
         ########
         elif subsection == 'year':
-            acq = Acquisition.objects.filter(image__user = user)
+            acq = Acquisition.objects.filter(image__user = user, image__is_wip = False)
             if acq:
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
                 nd = _("No date specified")
