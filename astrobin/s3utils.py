@@ -1,3 +1,7 @@
+# Python
+import hashlib
+from unidecode import unidecode
+
 # Django
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -16,8 +20,8 @@ class CachedS3BotoStorage(S3BotoStorage):
         name = super(CachedS3BotoStorage, self)._save(name, content)
 
         try:
-            self.local_storage._save(name, content)
-        except OSError:
+            self.local_storage._save(hashlib.md5(unidecode(name)).hexdigest(), content)
+        except (OSError, UnicodeEncodeError):
             # Probably the filename was too long for the local storage.
             pass
 
