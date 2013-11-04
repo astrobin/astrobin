@@ -867,6 +867,8 @@ class Image(HasSolutionMixin, models.Model):
     # TODO: why have mod as a setting when inverted is part of the alias?
     # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
+        import hashlib
+        from unidecode import unidecode
         from django.core.files.base import File
         from django.core.files.storage import FileSystemStorage
         from easy_thumbnails.exceptions import InvalidImageFormatError
@@ -885,24 +887,26 @@ class Image(HasSolutionMixin, models.Model):
 
         local_path = None
         name = field.name
+        name_hash = hashlib.md5(unidecode(name)).hexdigest()
 
         # If it's one of the small thumbnails, try to generate it from the 'regular' size.
         if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object', 'histogram'):
             regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
             if regular_thumbnail:
                 name = regular_thumbnail.name
-                local_path = field.storage.local_storage.path(name)
+                name_hash = hashlib.md5(unidecode(name)).hexdigest()
+                local_path = field.storage.local_storage.path(name_hash)
 
         # Try to generate the thumbnail starting from the file cache locally.
         if local_path is None:
-            local_path = field.storage.local_storage.path(name)
+            local_path = field.storage.local_storage.path(name_hash)
 
         try:
             with open(local_path):
                 thumbnailer = get_thumbnailer(
                     FileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
-                    name)
-        except IOError:
+                    name_hash)
+        except (IOError, UnicodeEncodeError):
             # If things go awry, fallback to getting the file from the remote
             # storage. But download it locally first if it doesn't exist, so
             # it can be used again later.
@@ -913,9 +917,9 @@ class Image(HasSolutionMixin, models.Model):
                 return None
 
             try:
-                local_file = field.storage.local_storage._save(name, remote_file)
-                thumbnailer = get_thumbnailer(local_file, name)
-            except OSError:
+                local_file = field.storage.local_storage._save(name_hash, remote_file)
+                thumbnailer = get_thumbnailer(local_file, name_hash)
+            except (OSError, UnicodeEncodeError):
                 pass
 
         if self.watermark and 'watermark' in options:
