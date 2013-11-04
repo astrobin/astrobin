@@ -887,7 +887,7 @@ class Image(HasSolutionMixin, models.Model):
         name = field.name
 
         # If it's one of the small thumbnails, try to generate it from the 'regular' size.
-        if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object'):
+        if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object', 'histogram'):
             regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
             if regular_thumbnail:
                 name = regular_thumbnail.name
