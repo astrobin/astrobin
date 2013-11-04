@@ -874,8 +874,11 @@ class Image(HasSolutionMixin, models.Model):
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
 
-        revision_label = thumbnail_settings.get('revision_label', 'final')
+        revision_label = thumbnail_settings.get('revision_label')
         mod = thumbnail_settings.get('mod', None)
+
+        if revision_label is None:
+            revision_label = 'final'
 
         # Possible modes: 'inverted', 'solved'.
         if mod == 'inverted':
