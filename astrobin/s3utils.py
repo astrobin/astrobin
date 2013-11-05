@@ -1,5 +1,6 @@
 # Python
 import hashlib
+import os
 from unidecode import unidecode
 
 # Django
@@ -11,10 +12,36 @@ from storages.backends.s3boto import S3BotoStorage
 from pipeline.storage import PipelineMixin
 
 
+class OverwritingFileSystemStorage(FileSystemStorage):
+    def get_available_name(self, name):
+        """
+        Returns the only possible filename, not caring if the file gets overwritten.
+        """
+        dir_name, file_name = os.path.split(name)
+        file_root, file_ext = os.path.splitext(file_name)
+        name = os.path.join(dir_name, "%s%s" % (file_root, file_ext))
+
+        return name
+
+    def _save(self, name, content):
+        """
+        We're going to delete the file before we save it.
+        """
+        full_path = self.path(name)
+
+        try:
+            os.remove(full_path)
+        except OSError:
+            pass
+
+        return super(OverwritingFileSystemStorage, self)._save(name, content)
+
+
 class CachedS3BotoStorage(S3BotoStorage):
     def __init__(self, *args, **kwargs):
         super(CachedS3BotoStorage, self).__init__(location=kwargs.pop('location'))
-        self.local_storage = FileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY)
+        self.local_storage = OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY)
+
 
     def _save(self, name, content):
         name = super(CachedS3BotoStorage, self)._save(name, content)
