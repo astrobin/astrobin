@@ -6,6 +6,9 @@ import urllib2
 import simplejson
 import hmac
 import operator
+import logging
+
+log = logging.getLogger('apps')
 
 try:
     from hashlib import sha1

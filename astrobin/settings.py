@@ -486,6 +486,14 @@ LOGGING = {
             'class':'logging.StreamHandler',
             'formatter': 'standard'
         },
+        'logfile': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': "logs/astrobin.txt",
+            'maxBytes': 50000,
+            'backupCount': 2,
+            'formatter': 'standard',
+        },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
@@ -503,7 +511,7 @@ LOGGING = {
             'propagate': False,
         },
         'apps': {
-            'handlers': ['console',],
+            'handlers': ['console', 'logfile'],
             'level': 'DEBUG',
         },
         'django.request': {
