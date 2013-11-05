@@ -9,23 +9,7 @@ $(document).ready(function() {
                 var id = $img.attr('data-id');
                 var alias = $img.attr('data-alias');
                 var revision = $img.attr('data-revision');
-                var mod = $img.attr('data-mod');
-                var animated = $img.attr('data-animated');
-                var url = '/' + id + '/'
-
-                if (revision != '' && revision != 'final')
-                    url += revision + '/thumb/';
-                else
-                    url += 'thumb/';
-
-                url += alias + '/';
-
-                if (mod != '' && mod != 'None' && mod != 'regular')
-                    url += mod + '/';
-
-                if (animated == 'True') {
-                    url += '?animated'
-                }
+                var url = $img.attr('data-get-thumb-url');
 
                 $.ajax({
                     dataType: 'json',
