@@ -873,9 +873,9 @@ class Image(HasSolutionMixin, models.Model):
         import hashlib
         from unidecode import unidecode
         from django.core.files.base import File
-        from django.core.files.storage import FileSystemStorage
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
+        from astrobin.s3utils import OverwritingFileSystemStorage
 
         revision_label = thumbnail_settings.get('revision_label')
         mod = thumbnail_settings.get('mod', None)
@@ -908,11 +908,15 @@ class Image(HasSolutionMixin, models.Model):
             local_path = field.storage.local_storage.path(name_hash)
 
         try:
+            size = os.path.getsize(local_path)
+            if size == 0:
+                raise IOError("Empty file")
+
             with open(local_path):
                 thumbnailer = get_thumbnailer(
-                    FileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                    OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
                     name_hash)
-        except (IOError, UnicodeEncodeError):
+        except (OSError, IOError, UnicodeEncodeError):
             # If things go awry, fallback to getting the file from the remote
             # storage. But download it locally first if it doesn't exist, so
             # it can be used again later.
