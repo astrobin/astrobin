@@ -7,6 +7,7 @@ from PIL import Image as PILImage
 from django.conf import settings
 from django.template import Library, Node
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext as _
 
 # AstroBin
 from astrobin.models import CommercialGear, Gear
@@ -93,12 +94,15 @@ def astrobin_image(
             image.h = h
             image.save()
         except IOError:
+            w = size[0]
+            h = size[1] if size[1] > 0 else w
             response_dict['status'] = 'error'
+            response_dict['error_message'] = _("Data corruption. Please upload this image again. Sorry!")
 
     if alias in ('regular', 'regular_inverted',
                  'hd'     , 'hd_inverted',
                  'real'   , 'real_inverted'):
-        size = (size[0], int(size[0] / (image.w / float(image.h))))
+        size = (size[0], int(size[0] / (w / float(h))))
 
     placehold_size = [size[0], size[1]]
     for i in range(0,2):
