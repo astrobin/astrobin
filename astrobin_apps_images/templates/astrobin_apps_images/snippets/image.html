@@ -1,12 +1,23 @@
 {% load astrobin_apps_images_tags %}
 {% load cache %}
 {% load common_tags %}
+{% load i18n %}
 
 {% if status != 'error' %}
     {% cache 3600 astrobin_image cache_key %}
     <div class="astrobin-image-container">
 
         {% random_id %}
+
+        {% if error_message %}
+            <div class="alert alert-error">
+                <h4 class="alert-heading">
+                    <i class="icon-fire"></i> {% trans "Error!" %}
+                </h4>
+                {{error_message}}
+            </div>
+        {% endif %}
+
 
         <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
@@ -32,7 +43,6 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-
 
             <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin"
                  class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
