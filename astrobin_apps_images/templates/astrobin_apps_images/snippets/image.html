@@ -47,7 +47,7 @@
             <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin"
                  class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
 
-                 {% if alias != 'regular' %}
+                 {% if provide_size %}
                      width="{{size_x}}"
                      height="{{size_y}}"
                      style="width:{{size_x}}px; height:{{size_y}}px;"
