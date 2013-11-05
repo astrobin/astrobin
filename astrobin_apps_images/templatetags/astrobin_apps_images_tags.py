@@ -63,7 +63,9 @@ def astrobin_image(
     revision = 'final', url_size = 'regular',
     mod = None):
 
-    response_dict = {}
+    response_dict = {
+        'provide_size': True,
+    }
 
     if alias == '':
         alias = 'thumb'
@@ -103,6 +105,7 @@ def astrobin_image(
                  'hd'     , 'hd_inverted',
                  'real'   , 'real_inverted'):
         size = (size[0], int(size[0] / (w / float(h))))
+        response_dict['provide_size'] = False
 
     placehold_size = [size[0], size[1]]
     for i in range(0,2):
