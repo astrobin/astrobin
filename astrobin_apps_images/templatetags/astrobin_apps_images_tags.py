@@ -5,6 +5,7 @@ from PIL import Image as PILImage
 
 # Django
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.template import Library, Node
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
@@ -149,6 +150,21 @@ def astrobin_image(
         if image.pk in top100_ids:
             badges.append('top100')
 
+    get_thumb_kwargs = {
+        'id': image.id,
+        'alias': alias,
+    }
+    if mod:
+        get_thumb_kwargs['mod'] = mod
+    if revision is None or revision != 'final':
+        get_thumb_kwargs['r'] = revision
+
+    get_thumb_url = reverse('image_thumb', kwargs = get_thumb_kwargs)
+    if animated:
+        get_thumb_url += '?animated'
+
+    print get_thumb_url
+
     return dict(response_dict.items() + {
         'status'        : 'success',
         'image'         : image,
@@ -165,6 +181,7 @@ def astrobin_image(
         'cache_key'     : "%s_%s_%s_%d" % (mod if mod else 'none', alias, revision, image.id),
         'badges'        : badges,
         'animated'      : animated,
+        'get_thumb_url' : get_thumb_url,
     }.items())
 
 
