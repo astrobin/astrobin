@@ -5,6 +5,7 @@ from PIL import Image as PILImage
 
 # Django
 from django.conf import settings
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.template import Library, Node
 from django.template.loader import render_to_string
@@ -150,20 +151,29 @@ def astrobin_image(
         if image.pk in top100_ids:
             badges.append('top100')
 
-    get_thumb_kwargs = {
-        'id': image.id,
-        'alias': alias,
-    }
-    if mod:
-        get_thumb_kwargs['mod'] = mod
-    if revision is None or revision != 'final':
-        get_thumb_kwargs['r'] = revision
 
-    get_thumb_url = reverse('image_thumb', kwargs = get_thumb_kwargs)
-    if animated:
-        get_thumb_url += '?animated'
+    cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
+        'astrobin.image',
+        image.get_thumbnail_field(revision),
+        alias,
+        mod)
 
-    print get_thumb_url
+    thumb_url = cache.get(cache_key)
+
+    get_thumb_url = None
+    if thumb_url is None:
+        get_thumb_kwargs = {
+            'id': image.id,
+            'alias': alias,
+        }
+        if mod:
+            get_thumb_kwargs['mod'] = mod
+        if revision is None or revision != 'final':
+            get_thumb_kwargs['r'] = revision
+
+        get_thumb_url = reverse('image_thumb', kwargs = get_thumb_kwargs)
+        if animated:
+            get_thumb_url += '?animated'
 
     return dict(response_dict.items() + {
         'status'        : 'success',
@@ -182,6 +192,7 @@ def astrobin_image(
         'badges'        : badges,
         'animated'      : animated,
         'get_thumb_url' : get_thumb_url,
+        'thumb_url'     : thumb_url,
     }.items())
 
 
