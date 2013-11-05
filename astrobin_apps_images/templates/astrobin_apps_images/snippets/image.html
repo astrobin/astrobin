@@ -44,7 +44,16 @@
                 </ul>
             {% endif %}
 
-            <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin"
+            <img
+                {% if thumb_url %}
+                     src="{{thumb_url}}"
+                     data-preloaded="true"
+                     data-loaded="true"
+                {% else %}
+                     src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin"
+                     data-loaded="false"
+                {% endif %}
+
                  class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
 
                  {% if provide_size %}
@@ -55,7 +64,6 @@
 
                  name="#capty-target-{{image.id}}-{{randomid}}"
                  data-id="{{image.id}}"
-                 data-loaded="false"
                  data-alias="{{alias}}"
                  data-revision="{{revision}}"
                  data-get-thumb-url="{{get_thumb_url}}"
