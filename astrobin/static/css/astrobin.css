@@ -443,7 +443,6 @@ div.radio {
 }
 /* Uploader */
 div.uploader {
-  width: 190px;
   cursor: pointer;
 }
 div.uploader span.action {
@@ -588,6 +587,7 @@ div.uploader {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  display: inline-block;
 }
 div.uploader span.action {
   float: left;
@@ -617,7 +617,7 @@ div.uploader input {
 
   opacity: 0;
   position: absolute;
-  top: 0;
+  top: 2px;
   right: 0;
   bottom: 0;
   float: right;
@@ -1487,6 +1487,9 @@ div.capty-target .capty-caption-content .link-overlay a {
 }
 .upload-forms .upload-form .upload-form-inner form {
   display: none;
+}
+.upload-forms .upload-form .upload-form-inner form .btn-primary {
+  display: inline-block;
 }
 .upload-forms .upload-form:first-child .upload-form-inner {
   border-right: 1px solid #484848;
