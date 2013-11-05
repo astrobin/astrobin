@@ -6,7 +6,6 @@ $(document).ready(function() {
             var random_timeout = Math.floor((Math.random()*750)+250);
 
             setTimeout(function() {
-                console.log("ciao");
                 var id = $img.attr('data-id');
                 var alias = $img.attr('data-alias');
                 var revision = $img.attr('data-revision');
