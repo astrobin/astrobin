@@ -871,8 +871,10 @@ class Image(HasSolutionMixin, models.Model):
     # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
         import hashlib
+        import urllib2
+
         from unidecode import unidecode
-        from django.core.files.base import File
+        from django.core.files.base import File, ContentFile
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
@@ -897,6 +899,7 @@ class Image(HasSolutionMixin, models.Model):
 
         # If it's one of the small thumbnails, try to generate it from the 'regular' size.
         if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object', 'histogram'):
+            log.debug("Image %d: going to get the 'regular' thumbnail..." % self.id)
             regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
             if regular_thumbnail:
                 name = regular_thumbnail.name
@@ -916,20 +919,38 @@ class Image(HasSolutionMixin, models.Model):
                 thumbnailer = get_thumbnailer(
                     OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
                     name_hash)
+                log.debug("Image %d: got thumbnail from local file %s." % (self.id, name_hash))
         except (OSError, IOError, UnicodeEncodeError):
             # If things go awry, fallback to getting the file from the remote
             # storage. But download it locally first if it doesn't exist, so
             # it can be used again later.
-            try:
-                remote_file = field.storage._open(name)
-            except IOError:
-                # The remote file doesn't exist?
-                return None
+            log.debug("Image %d: getting remote file..." % self.id)
+
+            # First try to get the file via URL, because that might hit the CloudFlare cache.
+            url = settings.IMAGES_URL + field.name
+            log.debug("Image %d: trying URL %s..." % (self.id, url))
+            headers = { 'User-Agent': 'Mozilla/5.0' }
+            req = urllib2.Request(url, None, headers)
+            remote_file = ContentFile(urllib2.urlopen(req).read())
+
+            # If that didn't work, we'll get the file rebularly via django-storages.
+            if remote_file is None:
+                log.debug("Image %d: getting via URL didn't work. Falling back to django-storages..." % self.id)
+                try:
+                    remote_file = field.storage._open(name)
+                except IOError:
+                    # The remote file doesn't exist?
+                    log.error("Image %d: the remote file doesn't exist?" % self.id)
+                    return None
 
             try:
                 local_file = field.storage.local_storage._save(name_hash, remote_file)
-                thumbnailer = get_thumbnailer(local_file, name_hash)
+                thumbnailer = get_thumbnailer(
+                    OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                    name_hash)
+                log.debug("Image %d: saved local file %s." % (self.id, name_hash))
             except (OSError, UnicodeEncodeError):
+                log.error("Image %d: unable to save the local file." % self.id)
                 pass
 
         if self.watermark and 'watermark' in options:
@@ -939,7 +960,9 @@ class Image(HasSolutionMixin, models.Model):
 
         try:
             thumb = thumbnailer.get_thumbnail(options)
-        except (InvalidImageFormatError, SyntaxError):
+            log.debug("Image %d: thumbnail generated." % self.id)
+        except Exception as e:
+            log.error("Image %d: unable to generate thumbnail: %s." % (self.id, e.message))
             return None
 
         return thumb
