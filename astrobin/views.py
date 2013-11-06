@@ -56,7 +56,6 @@ from management import NOTICE_TYPES
 from notifications import *
 from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from shortcuts import *
-from tasks import *
 from image_utils import make_image_of_the_day
 from gear import *
 from utils import *
@@ -74,7 +73,7 @@ def to_system_timezone(date, profile):
     return date.replace(tzinfo=pytz.timezone(timezone)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 def now_timezone():
-    return datetime.datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
+    return datetime.now().replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
 def monthdelta(date, delta):
@@ -150,15 +149,16 @@ def index(request, template = 'index/root.html', extra_context = None):
     """Main page"""
     from django.core.cache import cache
 
-    section = request.GET.get('s', 'personal')
     image_ct = ContentType.objects.get_for_model(Image)
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
     response_dict = {
         'registration_form': RegistrationForm(),
-        'section': section,
-        'recent_images': Image.objects.select_related('user__userprofile'),
+        'recent_images': Image.objects\
+            .filter(is_wip = False)\
+            .exclude(Q(title = None) | Q(title = ''))\
+            .select_related('user__userprofile'),
         'recent_images_alias': 'thumb',
         'recent_images_batch_size': 55,
     }
@@ -167,6 +167,12 @@ def index(request, template = 'index/root.html', extra_context = None):
     profile = None
     if request.user.is_authenticated():
         profile = request.user.userprofile
+
+        section = request.GET.get('s')
+        if section is None:
+            section = profile.default_frontpage_section
+        response_dict['section'] = section
+
         response_dict['recent_images_batch_size'] = 64
 
         try:
@@ -330,6 +336,7 @@ def index(request, template = 'index/root.html', extra_context = None):
                     "SELECT astrobin_image.* " +
                     "FROM astrobin_image " +
                     "JOIN recently_liked_to_show ON id = object_id " +
+                    "WHERE astrobin_image.is_wip = false " +
                     "ORDER BY recently_liked_to_show.created DESC;"
                 )
 
@@ -350,6 +357,7 @@ def index(request, template = 'index/root.html', extra_context = None):
                     "SELECT astrobin_image.* " +
                     "FROM astrobin_image " +
                     "JOIN recently_bookmarked_to_show ON id = object_id " +
+                    "WHERE astrobin_image.is_wip = false " +
                     "ORDER BY recently_bookmarked_to_show.created DESC;"
                 )
 
@@ -745,6 +753,7 @@ def image_detail(request, id, r):
 
         'like_this': like_this,
         'bookmarked_this': bookmarked_this,
+        'min_index_to_like': 1.00,
 
         'comments_number': NestedComment.objects.filter(
             deleted = False,
@@ -936,6 +945,11 @@ def image_upload_process(request):
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
+
+    if ext in ('.png', '.PNG'):
+        messages.error(request, _("AstroBin is currently having some difficulties with PNG files. Please upload this as a JPG until we solve the problem. Sorry for the inconvenience!"))
+        return HttpResponseRedirect(reverse('image_upload'))
+
     if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error()
 
@@ -954,8 +968,7 @@ def image_upload_process(request):
     image.image_file.file.seek(0) # Because we opened it with PIL
     image.save()
 
-    messages.success(request, _("Image uploaded. After this basic information, remember to edit the gear and acquisition details using the Actions menu. Thank you!"))
-    return HttpResponseRedirect("/edit/basic/%d/" % image.id)
+    return HttpResponseRedirect(reverse('image_edit_watermark', kwargs={'id': image.id}))
 
 
 @login_required
@@ -1033,6 +1046,8 @@ def image_edit_acquisition(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
+    from astrobin_apps_platesolving.solver import Solver
+
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
 
@@ -1053,7 +1068,7 @@ def image_edit_acquisition(request, id):
     deep_sky_acquisition_formset = None
     deep_sky_acquisition_basic_form = None
     advanced = False
-    if edit_type == 'deep_sky' or image.solution:
+    if edit_type == 'deep_sky' or (image.solution and image.solution.status != Solver.FAILED):
         advanced = dsa_qs[0].advanced if dsa_qs else False
         advanced = request.GET['advanced'] if 'advanced' in request.GET else advanced
         advanced = True if advanced == 'true' else advanced
@@ -1181,8 +1196,12 @@ def image_edit_save_basic(request):
 
     form.save()
 
-    messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect(image.get_absolute_url())
+
+    if 'submit_gear' in request.POST:
+        return HttpResponseRedirect(reverse('image_edit_gear', kwargs={'id': image.id}))
+    else:
+        messages.success(request, _("Form saved. Thank you!"))
+        return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
@@ -1214,7 +1233,7 @@ def image_edit_save_watermark(request):
     profile.save()
 
     if 'submit_next' in request.POST:
-        return HttpResponseRedirect('/edit/basic/%i/' % image.id)
+        return HttpResponseRedirect(reverse('image_edit_basic', kwargs={'id': image.id}))
 
     return HttpResponseRedirect(image.get_absolute_url())
 
@@ -1253,8 +1272,11 @@ def image_edit_save_gear(request):
 
     response_dict['image'] = image
 
+    if 'submit_acquisition' in request.POST:
+        return HttpResponseRedirect(reverse('image_edit_acquisition', kwargs={'id': image.id}))
+
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect('/edit/gear/%i/' % image.id)
+    return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
@@ -1334,7 +1356,7 @@ def image_edit_save_acquisition(request):
         form.save()
 
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect("/edit/acquisition/%s/" % image_id)
+    return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required
@@ -1356,7 +1378,8 @@ def image_edit_save_license(request):
     form.save()
 
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect('/edit/license/%s/' % image_id)
+    return HttpResponseRedirect(image.get_absolute_url())
+
 
 @login_required
 @require_POST
@@ -1447,7 +1470,10 @@ def image_promote(request, id):
         image.is_wip = False
         image.save()
 
-        followers = [x.user for x in ToggleProperty.objects.toggleproperties_for_object("follow", request.user)]
+        followers = [
+            x.user for x in
+            ToggleProperty.objects.toggleproperties_for_object("follow", User.objects.get(pk = request.user.pk))
+        ]
         push_notification(followers, 'new_image',
             {
                 'originator': request.user,
@@ -1526,7 +1552,7 @@ def user_page(request, username):
         # YEAR #
         ########
         elif subsection == 'year':
-            acq = Acquisition.objects.filter(image__user = user)
+            acq = Acquisition.objects.filter(image__user = user, image__is_wip = False)
             if acq:
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
                 nd = _("No date specified")
@@ -1611,7 +1637,7 @@ def user_page(request, username):
             elif active == 'NOSUB':
                 qs = qs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
-                    (Q(subjects = None)) &
+                    (Q(objects_in_field = None)) &
                     (Q(solar_system_main_subject = None))).distinct()
 
         ###########
@@ -1630,7 +1656,7 @@ def user_page(request, username):
             if active == 'SUB':
                 qs =  qs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
-                    (Q(subjects = None)) &
+                    (Q(objects_in_field = None)) &
                     (Q(solar_system_main_subject = None)))
 
             elif active == 'GEAR':
@@ -1649,7 +1675,7 @@ def user_page(request, username):
 
     member_since = None
     date_time = user.date_joined.replace(tzinfo = None)
-    diff = abs(date_time - datetime.datetime.today())
+    diff = abs(date_time - datetime.today())
     span = timesince(date_time)
     if span == "0 " + _("minutes"):
         member_since = _("seconds ago")
@@ -2546,6 +2572,11 @@ def image_revision_upload_process(request):
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
+
+    if ext in ('.png', '.PNG'):
+        messages.error(request, _("AstroBin is currently having some difficulties with PNG files. Please upload this as a JPG until we solve the problem. Sorry for the inconvenience!"))
+        return HttpResponseRedirect(reverse('image_upload'))
+
     if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error(image)
 
@@ -3007,7 +3038,7 @@ def user_popover_ajax(request, username):
 
     member_since = None
     date_time = user.date_joined.replace(tzinfo = None)
-    diff = abs(date_time - datetime.datetime.today())
+    diff = abs(date_time - datetime.today())
     span = timesince(date_time)
     span = span.split(",")[0] # just the most significant digit
     if span == "0 " + _("minutes"):
@@ -3830,4 +3861,14 @@ def retailed_products_edit(request, id):
             'gear': Gear.objects.filter(retailed = product)[0],
         },
         context_instance = RequestContext(request))
+
+
+@login_required
+def set_default_frontpage_section(request, section):
+    profile = request.user.userprofile
+    profile.default_frontpage_section = section
+    profile.save()
+
+    messages.success(request, _("Default front page section changed."))
+    return HttpResponseRedirect(reverse('index'))
 

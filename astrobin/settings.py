@@ -1,16 +1,17 @@
 # Django settings for astrobin project.
 import os
 from django.conf import global_settings
+from django.utils.translation import ugettext_lazy as _
 
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 DEBUG = False
 CACHE = not DEBUG
-LOCAL_STATIC_STORAGE = DEBUG
+LOCAL_STATIC_STORAGE = True
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '58'
+MEDIA_VERSION = '60'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 
@@ -50,7 +51,8 @@ ASTROBIN_BASE_URL = 'http://www.astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
 ASTROBIN_BASE_PATH = os.path.dirname(__file__)
-UPLOADS_DIRECTORY = '/webserver/www/uploads/'
+IMAGE_CACHE_DIRECTORY = '/webserver/www/imagecache/'
+UPLOADS_DIRECTORY = IMAGE_CACHE_DIRECTORY
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -75,7 +77,7 @@ LANGUAGES = (
     ('nl', gettext('Dutch')),
     ('tr', gettext('Turkish')),
     ('sq', gettext('Albanian')),
-    ('pl', gettext('Polish')),
+    #('pl', gettext('Polish')),
     ('pt-BR', gettext('Brazilian Portuguese')),
     ('el', gettext('Greek')),
 )
@@ -92,7 +94,7 @@ SITE_ID = 1
 SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10G'
 
 # Django storages
-DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageRootS3BotoStorage'
+DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageStorage'
 AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
@@ -156,7 +158,7 @@ MIDDLEWARE_CLASSES = [
     'pagination.middleware.PaginationMiddleware',
     'astrobin.middlewares.ProfileMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
-    'privatebeta.middleware.PrivateBetaMiddleware',
+    #'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
@@ -202,7 +204,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
-    'staticfiles',
+    'django.contrib.staticfiles',
 
     # AstroBin apps
     'common',
@@ -348,8 +350,8 @@ if LOCAL_STATIC_STORAGE:
 else:
     STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
 STATICFILES_FINDERS = (
-    'staticfiles.finders.FileSystemFinder',
-    'staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 STATICFILES_DIRS = (local_path('static/'),)
 
@@ -367,8 +369,6 @@ PIPELINE_CSS = {
             'css/token-input.css',
             'css/jquery.multiselect.css',
             'css/jquery.qtip.css',
-
-            'common/css/jquery.lightbox-0.5.css',
 
             'astrobin_apps_images/css/jquery.capty.css',
             'astrobin_apps_donations/css/astrobin_apps_donations.css',
@@ -391,7 +391,6 @@ PIPELINE_JS = {
         'source_filenames': (
             'common/js/handlebars-1.0.rc.1.js',
             'common/js/ember-1.0.0-pre.2.js',
-            'common/js/jquery.lightbox-0.5.js',
 
             'astrobin_apps_images/js/astrobin_apps_images.js',
             'astrobin_apps_images/js/jquery.capty.js',
@@ -496,6 +495,14 @@ LOGGING = {
             'class':'logging.StreamHandler',
             'formatter': 'standard'
         },
+        'logfile': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': "logs/astrobin.txt",
+            'maxBytes': 50000,
+            'backupCount': 2,
+            'formatter': 'standard',
+        },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
@@ -513,7 +520,7 @@ LOGGING = {
             'propagate': False,
         },
         'apps': {
-            'handlers': ['console',],
+            'handlers': ['console', 'logfile'],
             'level': 'DEBUG',
         },
         'django.request': {
@@ -578,22 +585,22 @@ ENDLESS_PAGINATION_LOADING = '<img src="' + STATIC_URL + 'common/images/ajax-loa
 
 TOGGLEPROPERTIES = {
     "bookmark": {
-        "property_tooltip_on": gettext("Remove from bookmarks"),
-        "property_tooltip_off": gettext("Bookmark"),
+        "property_tooltip_on": _("Remove from bookmarks"),
+        "property_tooltip_off": _("Bookmark"),
         "property_icon": "icon-bookmark",
     },
 
     "like": {
-        "property_label_on": gettext("Unlike"),
-        "property_label_off": gettext("Like"),
-        "property_tooltip_on": gettext("Unlike"),
-        "property_tooltip_off": gettext("Like"),
+        "property_label_on": _("Unlike"),
+        "property_label_off": _("Like"),
+        "property_tooltip_on": _("Unlike"),
+        "property_tooltip_off": _("Like"),
         "property_icon": "icon-thumbs-up",
     },
 
     "follow": {
-        "property_tooltip_on": gettext("Stop following"),
-        "property_tooltip_off": gettext("Follow"),
+        "property_tooltip_on": _("Stop following"),
+        "property_tooltip_off": _("Follow"),
         "property_icon": "icon-plus",
     }
 }

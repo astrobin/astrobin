@@ -5,8 +5,11 @@ from PIL import Image as PILImage
 
 # Django
 from django.conf import settings
+from django.core.cache import cache
+from django.core.urlresolvers import reverse
 from django.template import Library, Node
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext as _
 
 # AstroBin
 from astrobin.models import CommercialGear, Gear
@@ -62,12 +65,26 @@ def astrobin_image(
     revision = 'final', url_size = 'regular',
     mod = None):
 
-    response_dict = {}
+    response_dict = {
+        'provide_size': True,
+    }
 
     if alias == '':
         alias = 'thumb'
 
     size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
+
+    if image is None or not isinstance(image, Image):
+        return {
+            'status': 'failure',
+            'image': '',
+            'alias': alias,
+            'revision': revision,
+            'mod': mod,
+            'size_x': size[0],
+            'size_y': size[1],
+            'cache_key': 'astrobin_image_no_image',
+        }
 
     w = image.w
     h = image.h
@@ -81,12 +98,16 @@ def astrobin_image(
             image.h = h
             image.save()
         except IOError:
+            w = size[0]
+            h = size[1] if size[1] > 0 else w
             response_dict['status'] = 'error'
+            response_dict['error_message'] = _("Data corruption. Please upload this image again. Sorry!")
 
     if alias in ('regular', 'regular_inverted',
                  'hd'     , 'hd_inverted',
                  'real'   , 'real_inverted'):
-        size = (size[0], int(size[0] / (image.w / float(image.h))))
+        size = (size[0], int(size[0] / (w / float(h))))
+        response_dict['provide_size'] = False
 
     placehold_size = [size[0], size[1]]
     for i in range(0,2):
@@ -130,6 +151,30 @@ def astrobin_image(
         if image.pk in top100_ids:
             badges.append('top100')
 
+
+    cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
+        'astrobin.image',
+        image.get_thumbnail_field(revision),
+        alias,
+        mod)
+
+    thumb_url = cache.get(cache_key)
+
+    get_thumb_url = None
+    if thumb_url is None:
+        get_thumb_kwargs = {
+            'id': image.id,
+            'alias': alias,
+        }
+        if mod:
+            get_thumb_kwargs['mod'] = mod
+        if revision is None or revision != 'final':
+            get_thumb_kwargs['r'] = revision
+
+        get_thumb_url = reverse('image_thumb', kwargs = get_thumb_kwargs)
+        if animated:
+            get_thumb_url += '?animated'
+
     return dict(response_dict.items() + {
         'status'        : 'success',
         'image'         : image,
@@ -146,6 +191,8 @@ def astrobin_image(
         'cache_key'     : "%s_%s_%s_%d" % (mod if mod else 'none', alias, revision, image.id),
         'badges'        : badges,
         'animated'      : animated,
+        'get_thumb_url' : get_thumb_url,
+        'thumb_url'     : thumb_url,
     }.items())
 
 

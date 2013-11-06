@@ -1,9 +1,6 @@
 [submodule "submodules/django-threaded-messages"]
 	path = submodules/django-threaded-messages
 	url = https://github.com/siovene/django-threaded-messages.git
-[submodule "submodules/django-privatebeta"]
-	path = submodules/django-privatebeta
-	url = https://github.com/badri/django-privatebeta.git
 [submodule "submodules/django-persistent-messages"]
 	path = submodules/django-persistent-messages
 	url = https://github.com/siovene/django-persistent-messages.git
@@ -21,4 +18,4 @@
 	url = https://github.com/thornomad/django-hitcount.git
 [submodule "django-subscription"]
 	path = submodules/django-subscription
-	url = https@github.com/siovene/django-subscription.git
+	url = git@github.com:siovene/django-subscription.git

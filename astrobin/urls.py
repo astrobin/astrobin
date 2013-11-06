@@ -62,7 +62,7 @@ urlpatterns = patterns('',
 
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/(?:(?P<mod>\w+)/)?$', views.image_thumb, name='image_thumb'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:(?P<mod>\w+)/)?$', views.image_rawthumb, name='image_rawthumb'),
+    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:(?P<mod>\w+)/)?(?:get.jpg)?$', views.image_rawthumb, name='image_rawthumb'),
     url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_full, name='image_full'),
 
     url(r'^upload/$', views.image_upload, name='image_upload'),
@@ -281,5 +281,7 @@ urlpatterns = patterns('',
 
     url(r'^openid/', include('openid_provider.urls')),
     url(r'^subscriptions/', include('subscription.urls')),
+
+    url(r'^set-default-frontpage-section/(?P<section>\w+)/$', views.set_default_frontpage_section, name = 'set_default_frontpage_section'),
 )
 

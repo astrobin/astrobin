@@ -4,7 +4,7 @@
 {% load i18n %}
 
 {% if action.action_object_content_type.model == 'image' and action.action_object.is_wip %}
-    /***/
+    <!-- Skipping WIP image. -->
 {% else %}
 <div class="action">
     <div class="action-inner">

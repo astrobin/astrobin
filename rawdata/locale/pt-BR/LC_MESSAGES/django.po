@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 12:46+0000\n"
+"POT-Creation-Date: 2013-11-03 06:50-0600\n"
 "PO-Revision-Date: 2013-04-09 02:26+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -429,7 +429,7 @@ msgstr "Sua biblioteca RAW"
 #: templates/rawdata/library.html:20
 #, python-format
 msgid "You have used %(used)s of your %(limit)s."
-msgstr "Você já usou %(used) do seu limite de %(limit)."
+msgstr "Você já usou %(used)s do seu limite de %(limit)s."
 
 #: templates/rawdata/library.html:34
 msgid "Manage plans"
@@ -460,8 +460,8 @@ msgstr "Cuidado!"
 msgid ""
 "AstroBin is still working to index %(number)s of your %(total)s raw files."
 msgstr ""
-"AstroBin ainda está trabalhando para indexar %(number) do seu total de "
-"%(total) arquivos RAW."
+"AstroBin ainda está trabalhando para indexar %(number)s do seu total de "
+"%(total)s arquivos RAW."
 
 #: templates/rawdata/library.html:59
 msgid "All files"
