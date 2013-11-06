@@ -939,7 +939,7 @@ class Image(HasSolutionMixin, models.Model):
 
         try:
             thumb = thumbnailer.get_thumbnail(options)
-        except InvalidImageFormatError:
+        except (InvalidImageFormatError, SyntaxError):
             return None
 
         return thumb
