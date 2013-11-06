@@ -1512,7 +1512,11 @@ def user_page(request, username):
     active = request.GET.get('active')
     menu = []
 
-    qs = Image.objects.filter(user = user).order_by('-uploaded')
+    qs = Image.objects\
+        .filter(user = user)\
+        .select_related('user__userprofile')\
+        .prefetch_related('image_of_the_day', 'featured_gear', 'revisions')\
+        .order_by('-uploaded')
 
     if 'staging' in request.GET:
         if request.user != user:
