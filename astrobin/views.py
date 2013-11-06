@@ -363,10 +363,9 @@ def index(request, template = 'index/root.html', extra_context = None):
                 )
 
         elif section == 'fits':
-            response_dict['recent_images'] = \
-                Image.objects.filter(is_wip = False).exclude(
-                        Q(link_to_fits = None) |
-                        Q(link_to_fits = ''))
+            response_dict['recent_images'] = recent_images.exclude(
+                Q(link_to_fits = None) |
+                Q(link_to_fits = ''))
 
     if extra_context is not None:
         response_dict.update(extra_context)
