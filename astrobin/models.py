@@ -929,7 +929,11 @@ class Image(HasSolutionMixin, models.Model):
             log.debug("Image %d: trying URL %s..." % (self.id, url))
             headers = { 'User-Agent': 'Mozilla/5.0' }
             req = urllib2.Request(url, None, headers)
-            remote_file = ContentFile(urllib2.urlopen(req).read())
+
+            try:
+                remote_file = ContentFile(urllib2.urlopen(req).read())
+            except urllib2.HTTPError:
+                remote_file = None
 
             # If that didn't work, we'll get the file rebularly via django-storages.
             if remote_file is None:
