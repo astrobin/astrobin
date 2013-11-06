@@ -731,9 +731,6 @@ def image_detail(request, id, r):
     response_dict = dict(response_dict.items() + {
         'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
 
-        # TODO: use astrobin_image template tag
-        'histogram': image.thumbnail('histogram'),
-
         'revisions': revisions,
         'is_revision': is_revision,
         'revision_image': revision_image,
