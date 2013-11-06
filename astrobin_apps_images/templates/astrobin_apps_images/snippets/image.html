@@ -9,6 +9,16 @@
 
         {% random_id %}
 
+        {% if error_message %}
+            <div class="alert alert-error">
+                <h4 class="alert-heading">
+                    <i class="icon-fire"></i> {% trans "Error!" %}
+                </h4>
+                {{error_message}}
+            </div>
+        {% endif %}
+
+
         <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
             {% if badges %}
@@ -34,22 +44,29 @@
                 </ul>
             {% endif %}
 
+            <img
+                {% if thumb_url %}
+                     src="{{thumb_url}}"
+                     data-preloaded="true"
+                     data-loaded="true"
+                {% else %}
+                     src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin"
+                     data-loaded="false"
+                {% endif %}
 
-            <img src="http://placehold.it/{{placehold_size}}/222/333&text=AstroBin / {% trans "Loading" %}..."
                  class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
 
-                 {% if alias != 'regular' %}
+                 {% if provide_size %}
                      width="{{size_x}}"
                      height="{{size_y}}"
+                     style="width:{{size_x}}px; height:{{size_y}}px;"
                  {% endif %}
 
                  name="#capty-target-{{image.id}}-{{randomid}}"
                  data-id="{{image.id}}"
-                 data-loaded="false"
                  data-alias="{{alias}}"
                  data-revision="{{revision}}"
-                 data-mod="{{mod}}"
-                 data-animated="{{animated}}"
+                 data-get-thumb-url="{{get_thumb_url}}"
                  alt="{{image.title|escape}}, {{image.user.userprofile}}" />
         </a>
 

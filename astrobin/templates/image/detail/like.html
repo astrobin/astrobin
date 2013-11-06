@@ -1,15 +1,17 @@
 {% load toggleproperty_tags %}
 
-{% if request.user.is_authenticated and user_scores_index < 2 %}
-    <span class="toggleproperty-add-remove property-like">
-        <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
-            <i class="icon-thumbs-up"></i>
-            <span class="toggleproperties-label">
-                Like
-            </span>
-        </a>
-    </span>
-{% else %}
-    {% add_remove_toggleproperty "like" image request.user %}
+{% if request.user != image.user %}
+    {% if request.user.is_authenticated and user_scores_index < min_index_to_like %}
+        <span class="toggleproperty-add-remove property-like">
+            <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
+                <i class="icon-thumbs-up"></i>
+                <span class="toggleproperties-label">
+                    Like
+                </span>
+            </a>
+        </span>
+    {% else %}
+        {% add_remove_toggleproperty "like" image request.user %}
+    {% endif %}
 {% endif %}
 

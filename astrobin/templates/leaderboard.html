@@ -2,7 +2,6 @@
 {% load i18n %}
 {% load common_tags %}
 {% load tags %}
-{% load pagination_tags %}
 {% load cache %}
 
 {% block title %}AstroBin - {% trans "Leaderboard" %}{% endblock %}
@@ -42,10 +41,9 @@
                             </th>
                         </tr>
                     </thead>
-                    {% autopaginate user_list 100 %}
                     {% for u in user_list|slice:":100" %}
                         <tr>
-                            <td>{{page_obj.start_index|add:forloop.counter0}}</td>
+                            <td>{{forloop.counter}}</td>
                             <td>
                                 <a rel="popover" class="user-popover"
                                    data-load="{% url user_popover_ajax u.object.username %}"

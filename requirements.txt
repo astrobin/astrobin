@@ -23,7 +23,7 @@ celerymon==0.4.0
 chardet==1.0.1
 cssmin==0.1.4
 distribute==0.6.32
-django-activity-stream==0.4.3
+django-activity-stream==0.4.5beta1
 django-appconf==0.5
 django-blog-zinnia==0.9
 django-bootstrap-toolkit==2.5.3
@@ -106,6 +106,6 @@ django-mptt==0.5
 PySide==1.2.1
 django-avatar==2.0
 -e git+https://siovene@bitbucket.org/siovene/django-toggle-properties.git#egg=toggleproperties
--e git+https://github.com/rassie/django-persistent-messages.git#django-persistent-messages
-django-request-provider==1.0.1
+-e git+https://github.com/rassie/django-persistent-messages.git#egg=django-persistent-messages
+privatebeta
 django-dfp==0.2.2

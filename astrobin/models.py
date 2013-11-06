@@ -6,6 +6,9 @@ import urllib2
 import simplejson
 import hmac
 import operator
+import logging
+
+log = logging.getLogger('apps')
 
 try:
     from hashlib import sha1
@@ -25,8 +28,6 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxLengthValidator
 from django.template.defaultfilters import slugify
-
-from tasks import *
 
 from nested_comments.models import NestedComment
 
@@ -869,11 +870,18 @@ class Image(HasSolutionMixin, models.Model):
     # TODO: why have mod as a setting when inverted is part of the alias?
     # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
+        import hashlib
+        from unidecode import unidecode
+        from django.core.files.base import File
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
+        from astrobin.s3utils import OverwritingFileSystemStorage
 
-        revision_label = thumbnail_settings.get('revision_label', 'final')
+        revision_label = thumbnail_settings.get('revision_label')
         mod = thumbnail_settings.get('mod', None)
+
+        if revision_label is None:
+            revision_label = 'final'
 
         # Possible modes: 'inverted', 'solved'.
         if mod == 'inverted':
@@ -882,7 +890,47 @@ class Image(HasSolutionMixin, models.Model):
         options = settings.THUMBNAIL_ALIASES[''][alias].copy()
 
         field = self.get_thumbnail_field(revision_label);
-        thumbnailer = get_thumbnailer(field)
+
+        local_path = None
+        name = field.name
+        name_hash = hashlib.md5(unidecode(name)).hexdigest()
+
+        # If it's one of the small thumbnails, try to generate it from the 'regular' size.
+        if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object', 'histogram'):
+            regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
+            if regular_thumbnail:
+                name = regular_thumbnail.name
+                name_hash = hashlib.md5(unidecode(name)).hexdigest()
+                local_path = field.storage.local_storage.path(name_hash)
+
+        # Try to generate the thumbnail starting from the file cache locally.
+        if local_path is None:
+            local_path = field.storage.local_storage.path(name_hash)
+
+        try:
+            size = os.path.getsize(local_path)
+            if size == 0:
+                raise IOError("Empty file")
+
+            with open(local_path):
+                thumbnailer = get_thumbnailer(
+                    OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                    name_hash)
+        except (OSError, IOError, UnicodeEncodeError):
+            # If things go awry, fallback to getting the file from the remote
+            # storage. But download it locally first if it doesn't exist, so
+            # it can be used again later.
+            try:
+                remote_file = field.storage._open(name)
+            except IOError:
+                # The remote file doesn't exist?
+                return None
+
+            try:
+                local_file = field.storage.local_storage._save(name_hash, remote_file)
+                thumbnailer = get_thumbnailer(local_file, name_hash)
+            except (OSError, UnicodeEncodeError):
+                pass
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text
@@ -917,6 +965,7 @@ class Image(HasSolutionMixin, models.Model):
         if not url:
             thumb = self.thumbnail_raw(alias, thumbnail_settings)
             options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+
             url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
                 options['size'][0],
                 options['size'][1])
@@ -1380,6 +1429,11 @@ class UserProfile(models.Model):
     software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"), related_name='software')
     filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"), related_name='filters')
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"), related_name='accessories')
+
+    default_frontpage_section = models.CharField(
+        max_length = 16,
+        editable = False,
+        default = 'personal')
 
     default_license = models.IntegerField(
         choices = LICENSE_CHOICES,

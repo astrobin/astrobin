@@ -251,12 +251,6 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{% url user_page_card request.user %}">
-                                                <i class="icon-list-alt"></i>
-                                                {% trans "Technical card" %}
-                                            </a>
-                                        </li>
-                                        <li>
                                             <a href="{% url user_page_plots request.user %}">
                                                 <i class="icon-bar-chart"></i>
                                                 {% trans "Plots" %}
@@ -354,7 +348,7 @@
                                     <img alt="{% trans "Notifications" %}" src="{{STATIC_URL}}icons/iconic/orange/notifications.gif"/>
                                 </a>
                                 <ul class="dropdown-menu" id="notifications-popup">
-                                    {% notification_list request 1 10 %}
+                                    {% notification_list %}
                                 </ul>
                             </li> <!-- notifications -->
 

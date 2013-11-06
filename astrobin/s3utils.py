@@ -1,8 +1,63 @@
+# Python
+import hashlib
+import os
+from unidecode import unidecode
+
+# Django
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+
+# Third party
 from storages.backends.s3boto import S3BotoStorage
 from pipeline.storage import PipelineMixin
 
-ImageRootS3BotoStorage = lambda: S3BotoStorage(location='images')
+
+class OverwritingFileSystemStorage(FileSystemStorage):
+    def get_available_name(self, name):
+        """
+        Returns the only possible filename, not caring if the file gets overwritten.
+        """
+        dir_name, file_name = os.path.split(name)
+        file_root, file_ext = os.path.splitext(file_name)
+        name = os.path.join(dir_name, "%s%s" % (file_root, file_ext))
+
+        return name
+
+    def _save(self, name, content):
+        """
+        We're going to delete the file before we save it.
+        """
+        full_path = self.path(name)
+
+        try:
+            os.remove(full_path)
+        except OSError:
+            pass
+
+        return super(OverwritingFileSystemStorage, self)._save(name, content)
+
+
+class CachedS3BotoStorage(S3BotoStorage):
+    def __init__(self, *args, **kwargs):
+        super(CachedS3BotoStorage, self).__init__(location=kwargs.pop('location'))
+        self.local_storage = OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY)
+
+
+    def _save(self, name, content):
+        name = super(CachedS3BotoStorage, self)._save(name, content)
+
+        try:
+            self.local_storage._save(hashlib.md5(unidecode(name)).hexdigest(), content)
+        except (OSError, UnicodeEncodeError):
+            # Probably the filename was too long for the local storage.
+            pass
+
+        return name
+
+ImageStorage = lambda: CachedS3BotoStorage(location='images')
+
 
 class S3PipelineStorage(PipelineMixin, S3BotoStorage):
     pass
 StaticRootS3BotoStorage = lambda: S3PipelineStorage(location='www/static')
+

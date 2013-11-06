@@ -577,7 +577,6 @@ div.radio {
 
 /* Uploader */
 div.uploader {
-  width: 190px;
   cursor: pointer;
 }
 
@@ -717,6 +716,7 @@ div.uploader {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  display: inline-block;
 }
 
 div.uploader span.action {
@@ -740,7 +740,7 @@ div.uploader span.filename {
 div.uploader input {
   .opacity(0);
   position: absolute;
-  top: 0;
+  top: 2px;
   right: 0;
   bottom: 0;
   float: right;
@@ -1599,6 +1599,10 @@ div.capty-target {
 
             form {
                 display: none;
+
+                .btn-primary {
+                    display: inline-block;
+                }
             }
         }
 
@@ -2528,8 +2532,16 @@ p.small {
     }
 }
 
+.alert h4 {
+    margin-bottom: 12px;
+}
+
+.alert p {
+    margin-bottom: 2px;
+}
+
 .alert-heading {
-    margin: 0;
+    margin: 0 0 12px 0;
 }
 
 .alert-info strong {

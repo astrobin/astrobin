@@ -3,50 +3,37 @@ $(document).ready(function() {
     window.loadAstroBinImages = function(fragment) {
         $(fragment).find('img.astrobin-image[data-loaded=false]').each(function(index) {
             var $img = $(this);
-            var id = $img.attr('data-id');
-            var alias = $img.attr('data-alias');
-            var revision = $img.attr('data-revision');
-            var mod = $img.attr('data-mod');
-            var animated = $img.attr('data-animated');
-            var url = '/' + id + '/'
+            var random_timeout = Math.floor((Math.random()*0)+100);
 
-            if (revision != '' && revision != 'final')
-                url += revision + '/thumb/';
-            else
-                url += 'thumb/';
+            setTimeout(function() {
+                var id = $img.attr('data-id');
+                var alias = $img.attr('data-alias');
+                var revision = $img.attr('data-revision');
+                var url = $img.attr('data-get-thumb-url');
 
-            url += alias + '/';
+                $.ajax({
+                    dataType: 'json',
+                    timeout: 0,
+                    cache: true,
+                    url: url,
+                    success: function(data, status, request) {
+                        var $img = $('img.astrobin-image[data-id=' + data.id + '][data-alias=' + alias + '][data-revision=' + revision +']');
 
-            if (mod != '' && mod != 'None' && mod != 'regular')
-                url += mod + '/';
+                        if (alias == 'thumb' || alias == 'gallery') {
+                            $img.load(function() {
+                                $img.capty({animation: 'slide', speed: 200, height: $img.height()});
+                                $img.closest('.capty-wrapper').find('.capty-target').show();
+                            });
+                        }
 
-            if (animated == 'True') {
-                url += '?animated'
-            }
-
-            /* TODO: verify that this works in all browsers. */
-            $.ajax({
-                dataType: 'json',
-                timeout: 0,
-                cache: true,
-                url: url,
-                success: function(data, status, request) {
-                    var $img = $('img.astrobin-image[data-id=' + data.id + '][data-alias=' + alias + '][data-revision=' + revision +']');
-
-                    if (alias == 'thumb' || alias == 'gallery') {
-                        $img.load(function() {
-                            $img.capty({animation: 'slide', speed: 200, height: $img.height()});
-                            $img.closest('.capty-wrapper').find('.capty-target').show();
-                        });
+                        $img
+                            .attr('src', data.url)
+                            .attr('data-loaded', 'true');
                     }
-
-                    $img
-                        .attr('src', data.url)
-                        .attr('data-loaded', 'true');
-                }
-            });
+                });
+            }, random_timeout);
         });
-    }
+    };
 
     window.loadAstroBinImages($('body'));
 });
