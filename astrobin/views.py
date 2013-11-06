@@ -158,7 +158,8 @@ def index(request, template = 'index/root.html', extra_context = None):
         'recent_images': Image.objects\
             .filter(is_wip = False)\
             .exclude(Q(title = None) | Q(title = ''))\
-            .select_related('user__userprofile'),
+            .select_related('user__userprofile')\
+            .prefetch_related('image_of_the_day', 'featured_gear', 'revisions'),
         'recent_images_alias': 'thumb',
         'recent_images_batch_size': 55,
     }
