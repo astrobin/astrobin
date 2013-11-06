@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+
+{% load astrobin_apps_donations_tags %}
 {% load i18n %}
 {% load tags %}
 {% load url from future %}
@@ -6,6 +8,24 @@
 {% block title %}AstroBin - {% trans "Upload" %}{% endblock %}
 {% block content %}
     {% if upload_form %}
+
+        {% if ADS_ENABLED %}
+        <div class="row">
+            <div class="span10 offset1">
+                <div class="alert alert-info alert-please-donate">
+                    <p>
+                    {% trans "AstroBin needs your help! Hosting costs are surging month after month, and we could really use a donation." %}
+                    </p>
+
+                    <a data-toggle="modal" href="#remove-ads-modal" class="btn btn-primary align-center">
+                        <i class="icon-gift"></i>
+                        {% trans "Please donate!" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
         <div class="row section">
             <div class="span10 offset1">
                 <div class="upload-forms">
@@ -200,6 +220,12 @@
         }
     </style>
 </noscript>
+{% endblock %}
+
+{% block modals %}
+    {% if ADS_ENABLED and not request.user|is_donor %}
+        {% donate_modal %}
+    {% endif %}
 {% endblock %}
 
 {% block extra_js %}
