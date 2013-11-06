@@ -718,15 +718,8 @@ def image_detail(request, id, r):
     ##########################
     # LIKE / BOOKMARKED THIS #
     ##########################
-    like_this = [x.user for x in ToggleProperty.objects.filter(
-        property_type = "like",
-        object_id = image.pk,
-        content_type = ContentType.objects.get_for_model(Image))]
-
-    bookmarked_this = [x.user for x in ToggleProperty.objects.filter(
-        property_type = "bookmark",
-        object_id = image.pk,
-        content_type = ContentType.objects.get_for_model(Image))]
+    like_this = image.toggleproperties.filter(property_type = "like")
+    bookmarked_this = image.toggleproperties.filter(property_type = "bookmark")
 
 
     #################
@@ -751,6 +744,7 @@ def image_detail(request, id, r):
         'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
         'skyplot_zoom1': skyplot_zoom1,
 
+        'image_ct': ContentType.objects.get_for_model(Image),
         'like_this': like_this,
         'bookmarked_this': bookmarked_this,
         'min_index_to_like': 1.00,
