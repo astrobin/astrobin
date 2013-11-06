@@ -153,13 +153,15 @@ def index(request, template = 'index/root.html', extra_context = None):
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
+    recent_images = Image.objects\
+        .filter(is_wip = False)\
+        .exclude(Q(title = None) | Q(title = ''))\
+        .select_related('user__userprofile')\
+        .prefetch_related('image_of_the_day', 'featured_gear', 'revisions')
+
     response_dict = {
         'registration_form': RegistrationForm(),
-        'recent_images': Image.objects\
-            .filter(is_wip = False)\
-            .exclude(Q(title = None) | Q(title = ''))\
-            .select_related('user__userprofile')\
-            .prefetch_related('image_of_the_day', 'featured_gear', 'revisions'),
+        'recent_images': recent_images,
         'recent_images_alias': 'thumb',
         'recent_images_batch_size': 55,
     }
@@ -312,14 +314,12 @@ def index(request, template = 'index/root.html', extra_context = None):
             response_dict['cache_prefix'] = 'astrobin_personal_actions'
 
         elif section == 'followed':
-            user = User.objects.get(pk = request.user.pk)
-            followers = [user_ct.get_object_for_this_type(pk = x.object_id) for x in ToggleProperty.objects.filter(
+            followed = [x.object_id for x in ToggleProperty.objects.filter(
                 property_type = "follow",
                 content_type = ContentType.objects.get_for_model(User),
-                user = user)]
+                user = request.user)]
 
-            response_dict['recent_images'] = \
-                Image.objects.filter(is_wip = False, user__in = followers)
+            response_dict['recent_images'] = recent_images.filter(user__in = followed)
 
         elif section == 'liked':
             response_dict['recent_images'] = \
