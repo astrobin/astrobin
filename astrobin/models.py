@@ -807,8 +807,7 @@ class Image(HasSolutionMixin, models.Model):
     def get_absolute_url(self, revision = 'final', size = 'regular'):
         if revision == 'final':
             if not self.is_final:
-                r = ImageRevision.objects.filter(
-                    image = self, is_final = True)
+                r = self.revisions.filter(is_final = True)
                 if r:
                     revision = r[0].label
 
@@ -852,8 +851,7 @@ class Image(HasSolutionMixin, models.Model):
         if revision_label == '0':
             pass
         elif revision_label == 'final':
-            revisions = ImageRevision.objects.filter(image = self)
-            for r in revisions:
+            for r in self.revisions.all():
                 if r.is_final:
                     field = r.image_file
         else:
@@ -1026,7 +1024,11 @@ post_save.connect(image_post_save, sender = Image)
 
 
 class ImageRevision(HasSolutionMixin, models.Model):
-    image = models.ForeignKey(Image)
+    image = models.ForeignKey(
+        Image,
+        related_name = 'revisions'
+    )
+
     image_file = models.ImageField(
         upload_to = image_upload_path,
         null = True,

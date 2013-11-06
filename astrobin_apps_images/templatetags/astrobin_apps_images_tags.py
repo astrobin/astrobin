@@ -32,18 +32,13 @@ def get_image_url(image, revision = 'final', size = 'regular'):
         return None
 
     try:
-        commercial_gear = CommercialGear.objects.get(image = image)
+        commercial_gear = image.featured_gear.all()[0]
         url = commercial_gear_url(commercial_gear)
         if url:
             return url
 
-    except CommercialGear.DoesNotExist:
+    except IndexError:
         pass
-    except CommercialGear.MultipleObjectsReturned:
-        commercial_gear = CommercialGear.objects.filter(image = image)[0]
-        url = commercial_gear_url(commercial_gear)
-        if url:
-            return url
 
     return image.get_absolute_url(revision, size)
 
