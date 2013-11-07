@@ -153,11 +153,7 @@ def index(request, template = 'index/root.html', extra_context = None):
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
-    recent_images = Image.objects\
-        .filter(is_wip = False)\
-        .exclude(Q(title = None) | Q(title = ''))\
-        .select_related('user__userprofile')\
-        .prefetch_related('image_of_the_day', 'featured_gear', 'revisions')
+    recent_images = Image.objects.exclude(Q(title = None) | Q(title = ''))
 
     response_dict = {
         'registration_form': RegistrationForm(),
@@ -198,10 +194,7 @@ def index(request, template = 'index/root.html', extra_context = None):
             # The is no IOTD
             pass
 
-        response_dict['recent_commercial_gear'] = Image.objects \
-            .select_related('user__userprofile') \
-            .filter(is_wip = False) \
-            .exclude(featured_gear = None)
+        response_dict['recent_commercial_gear'] = Image.objects.exclude(featured_gear = None)
 
 
         if section == 'global':
@@ -470,7 +463,10 @@ def no_javascript(request):
 @require_GET
 def image_detail(request, id, r):
     """ Show details of an image"""
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(
+        Image.objects.all(),
+        pk = id)
+
     response_dict = {}
 
     # TODO: unify duplicated code with image_full
@@ -482,7 +478,9 @@ def image_detail(request, id, r):
     if r is None:
         r = request.GET.get('r')
 
-    revisions = ImageRevision.objects.filter(image = image)
+    revisions = ImageRevision.objects\
+        .select_related('image__user__userprofile')\
+        .filter(image = image)
 
     if r is None and not image.is_final:
         final_revs = revisions.filter(is_final = True)
@@ -797,7 +795,7 @@ def image_detail(request, id, r):
 
 @require_GET
 def image_thumb(request, id, r, alias, mod):
-    image = get_object_or_404(Image, id = id)
+    image = get_object_or_404(Image.all_objects, id = id)
 
     url = settings.IMAGES_URL + image.image_file.name
     if 'animated' not in request.GET:
@@ -815,7 +813,7 @@ def image_thumb(request, id, r, alias, mod):
 
 @require_GET
 def image_rawthumb(request, id, r, alias, mod):
-    image = get_object_or_404(Image, id = id)
+    image = get_object_or_404(Image.all_objects, id = id)
     url = image.thumbnail(alias, {
         'revision_label': r,
         'mod': mod,
@@ -1511,20 +1509,15 @@ def user_page(request, username):
     active = request.GET.get('active')
     menu = []
 
-    qs = Image.objects\
-        .filter(user = user)\
-        .select_related('user__userprofile')\
-        .prefetch_related('image_of_the_day', 'featured_gear', 'revisions')\
-        .order_by('-uploaded')
+    qs = Image.objects.filter(user = user)
 
     if 'staging' in request.GET:
         if request.user != user:
             return HttpResponseForbidden()
-        qs = qs.filter(is_wip = True)
+        qs = Image.wip.filter(user = user)
         section = 'staging'
+        subsection = None
     else:
-        qs = qs.filter(is_wip = False)
-
         ############
         # UPLOADED #
         ############

@@ -2764,8 +2764,7 @@ form.avatar-change label.control-label {
 }
 .image-of-the-day .runner-ups .runner-up img,
 .iotd-archive-image .runner-ups .runner-up img {
-  /* IE hack... */
-
+  width: 45px;
   height: 45px;
 }
 .btn-upload {
@@ -2985,6 +2984,13 @@ li.revisions {
 }
 .revision {
   position: relative;
+}
+.revision .badges {
+  display: none;
+}
+.revision img {
+  width: 86px;
+  height: 86px;
 }
 .revision .final {
   position: relative;

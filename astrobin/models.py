@@ -43,6 +43,7 @@ from reviews.models import ReviewedItem
 from actstream import action
 from toggleproperties.models import ToggleProperty
 
+from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager
 from astrobin_apps_platesolving.models import Solution
 
 class HasSolutionMixin(object):
@@ -201,6 +202,7 @@ class Gear(models.Model):
         null = True,
         editable = False,
         on_delete = models.SET_NULL,
+        related_name = 'base_gear',
     )
 
     retailed = models.ManyToManyField(
@@ -773,6 +775,10 @@ class Image(HasSolutionMixin, models.Model):
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
 
+    all_objects = ImagesManager()
+    objects = PublicImagesManager()
+    wip = WipImagesManager()
+
     def __unicode__(self):
         return self.title if self.title is not None else _("(no title)")
 
@@ -895,7 +901,7 @@ class Image(HasSolutionMixin, models.Model):
         name_hash = field.storage.generate_local_name(name)
 
         # If it's one of the small thumbnails, try to generate it from the 'regular' size.
-        if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object', 'histogram'):
+        if alias in ('gallery', 'thumb', 'act_target', 'act_object', 'histogram'):
             log.debug("Image %d: going to get the 'regular' thumbnail..." % self.id)
             regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
             if regular_thumbnail:
@@ -971,6 +977,7 @@ class Image(HasSolutionMixin, models.Model):
 
     def thumbnail(self, alias, thumbnail_settings = {}):
         from django.core.cache import cache
+        from astrobin_apps_images.models import ThumbnailGroup
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
         mod = thumbnail_settings.get('mod', None)
@@ -987,25 +994,35 @@ class Image(HasSolutionMixin, models.Model):
 
         url = cache.get(cache_key)
         if not url:
-            thumb = self.thumbnail_raw(alias, thumbnail_settings)
-            options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+            # Not found in cache, attempt to fetch from database
+            try:
+                thumbnails = self.thumbnails.get(revision = revision_label)
+                url = getattr(thumbnails, alias)
+                log.debug("Image %d: thumbnail url found in database." % self.id)
+            except ThumbnailGroup.DoesNotExist:
+                log.debug("Image %d: there are no thumbnails in database." % self.id)
+                thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
 
-            url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
-                options['size'][0],
-                options['size'][1])
+            if not url:
+                thumb = self.thumbnail_raw(alias, thumbnail_settings)
+                options = settings.THUMBNAIL_ALIASES[''][alias].copy()
 
-            if thumb:
-                url = settings.IMAGES_URL + thumb.name
-                cache.set(cache_key, url, 60*60*24*365)
+                url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
+                    options['size'][0],
+                    options['size'][1])
+
+                if thumb:
+                    url = settings.IMAGES_URL + thumb.name
+                    setattr(thumbnails, alias, url)
+                    thumbnails.save()
+                    cache.set(cache_key, url, 60*60*24*365)
 
         return url
 
 
     @staticmethod
     def by_gear(gear, gear_type = None):
-        images = Image.objects\
-            .select_related('user__userprofile')\
-            .prefetch_related('image_of_the_day', 'featured_gear', 'revisions')
+        images = Image.objects.all()
 
         if gear_type:
             image_attr_lookup = {
