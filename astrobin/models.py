@@ -888,6 +888,10 @@ class Image(HasSolutionMixin, models.Model):
         if revision_label is None:
             revision_label = 'final'
 
+        # Compatibility
+        if alias in ('revision', 'runnerup'):
+            alias = 'thumb'
+
         # Possible modes: 'inverted', 'solved'.
         if mod == 'inverted':
             alias = alias + '_' +  mod
