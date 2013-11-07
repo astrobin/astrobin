@@ -251,7 +251,12 @@ def solution_post_save(sender, instance, created, **kwargs):
     user = None
 
     ct = instance.content_type
-    target = ct.get_object_for_this_type(pk = instance.object_id)
+
+    try:
+        target = ct.get_object_for_this_type(pk = instance.object_id)
+    except ct.get_model().DoesNotExist:
+        return
+
     if ct.model == 'image':
         user = target.user
     elif ct.model == 'imagerevision':

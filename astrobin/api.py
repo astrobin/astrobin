@@ -80,7 +80,7 @@ class ImageRevisionResource(ModelResource):
 
 class ImageResource(ModelResource):
     user = fields.CharField('user__username')
-    revisions = fields.ToManyField(ImageRevisionResource, 'imagerevision_set')
+    revisions = fields.ToManyField(ImageRevisionResource, 'revisions')
 
     subjects = fields.ListField()
 

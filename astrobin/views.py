@@ -153,12 +153,15 @@ def index(request, template = 'index/root.html', extra_context = None):
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
+    recent_images = Image.objects\
+        .filter(is_wip = False)\
+        .exclude(Q(title = None) | Q(title = ''))\
+        .select_related('user__userprofile')\
+        .prefetch_related('image_of_the_day', 'featured_gear', 'revisions')
+
     response_dict = {
         'registration_form': RegistrationForm(),
-        'recent_images': Image.objects\
-            .filter(is_wip = False)\
-            .exclude(Q(title = None) | Q(title = ''))\
-            .select_related('user__userprofile'),
+        'recent_images': recent_images,
         'recent_images_alias': 'thumb',
         'recent_images_batch_size': 55,
     }
@@ -311,14 +314,12 @@ def index(request, template = 'index/root.html', extra_context = None):
             response_dict['cache_prefix'] = 'astrobin_personal_actions'
 
         elif section == 'followed':
-            user = User.objects.get(pk = request.user.pk)
-            followers = [user_ct.get_object_for_this_type(pk = x.object_id) for x in ToggleProperty.objects.filter(
+            followed = [x.object_id for x in ToggleProperty.objects.filter(
                 property_type = "follow",
                 content_type = ContentType.objects.get_for_model(User),
-                user = user)]
+                user = request.user)]
 
-            response_dict['recent_images'] = \
-                Image.objects.filter(is_wip = False, user__in = followers)
+            response_dict['recent_images'] = recent_images.filter(user__in = followed)
 
         elif section == 'liked':
             response_dict['recent_images'] = \
@@ -362,10 +363,9 @@ def index(request, template = 'index/root.html', extra_context = None):
                 )
 
         elif section == 'fits':
-            response_dict['recent_images'] = \
-                Image.objects.filter(is_wip = False).exclude(
-                        Q(link_to_fits = None) |
-                        Q(link_to_fits = ''))
+            response_dict['recent_images'] = recent_images.exclude(
+                Q(link_to_fits = None) |
+                Q(link_to_fits = ''))
 
     if extra_context is not None:
         response_dict.update(extra_context)
@@ -718,15 +718,8 @@ def image_detail(request, id, r):
     ##########################
     # LIKE / BOOKMARKED THIS #
     ##########################
-    like_this = [x.user for x in ToggleProperty.objects.filter(
-        property_type = "like",
-        object_id = image.pk,
-        content_type = ContentType.objects.get_for_model(Image))]
-
-    bookmarked_this = [x.user for x in ToggleProperty.objects.filter(
-        property_type = "bookmark",
-        object_id = image.pk,
-        content_type = ContentType.objects.get_for_model(Image))]
+    like_this = image.toggleproperties.filter(property_type = "like")
+    bookmarked_this = image.toggleproperties.filter(property_type = "bookmark")
 
 
     #################
@@ -738,9 +731,6 @@ def image_detail(request, id, r):
     response_dict = dict(response_dict.items() + {
         'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
 
-        # TODO: use astrobin_image template tag
-        'histogram': image.thumbnail('histogram'),
-
         'revisions': revisions,
         'is_revision': is_revision,
         'revision_image': revision_image,
@@ -751,6 +741,7 @@ def image_detail(request, id, r):
         'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
         'skyplot_zoom1': skyplot_zoom1,
 
+        'image_ct': ContentType.objects.get_for_model(Image),
         'like_this': like_this,
         'bookmarked_this': bookmarked_this,
         'min_index_to_like': 1.00,
@@ -1520,7 +1511,11 @@ def user_page(request, username):
     active = request.GET.get('active')
     menu = []
 
-    qs = Image.objects.filter(user = user).order_by('-uploaded')
+    qs = Image.objects\
+        .filter(user = user)\
+        .select_related('user__userprofile')\
+        .prefetch_related('image_of_the_day', 'featured_gear', 'revisions')\
+        .order_by('-uploaded')
 
     if 'staging' in request.GET:
         if request.user != user:
@@ -3080,16 +3075,6 @@ def gear_page(request, id, slug):
         else:
             return HttpResponseRedirect(gear.get_absolute_url())
 
-    image_attr_lookup = {
-        'Telescope': 'imaging_telescopes',
-        'Camera': 'imaging_cameras',
-        'Mount': 'mounts',
-        'FocalReducer': 'focal_reducers',
-        'Software': 'software',
-        'Filter': 'filters',
-        'Accessory': 'accessories',
-    }
-
     user_attr_lookup = {
         'Telescope': 'telescopes',
         'Camera': 'cameras',
@@ -3102,10 +3087,11 @@ def gear_page(request, id, slug):
 
     from gear import CLASS_LOOKUP
 
-    all_images = Image.objects.filter(**{image_attr_lookup[gear_type]: gear})
+    all_images = Image.by_gear(gear, gear_type).filter(is_wip = False)
+
     commercial_image_revisions = None
     if gear.commercial and gear.commercial.image:
-        commercial_image_revisions = ImageRevision.objects.filter(image = gear.commercial.image)
+        commercial_image_revisions = gear.commercial.image.revisions.all()
 
     show_commercial = (gear.commercial and gear.commercial.is_paid) or (gear.commercial and gear.commercial.producer == request.user)
 
@@ -3119,9 +3105,9 @@ def gear_page(request, id, slug):
             'examples': all_images[:28],
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
             'reviews': ReviewedItem.objects.filter(gear = gear),
-            'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
+            'content_type': ContentType.objects.get_for_model(Gear),
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
-            'images_count': Image.by_gear(gear).count(),
+            'images_count': all_images.count(),
             'attributes': [
                 (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
                  getattr(gear, k[0]),

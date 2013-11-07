@@ -1,11 +1,15 @@
 {% load astrobin_apps_donations_tags %}
 {% load astrobin_apps_images_tags %}
 {% load avatar_tags %}
+{% load cache %}
 {% load i18n %}
 
 {% if action.action_object_content_type.model == 'image' and action.action_object.is_wip %}
     <!-- Skipping WIP image. -->
 {% else %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% cache 604800 action action.id LANGUAGE_CODE %}
 <div class="action">
     <div class="action-inner">
         {% if action.actor.get_absolute_url %}
@@ -148,4 +152,5 @@
         </div>
     </div>
 </div>
+{% endcache %}
 {% endif %}
