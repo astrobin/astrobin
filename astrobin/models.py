@@ -1003,22 +1003,41 @@ class Image(HasSolutionMixin, models.Model):
 
 
     @staticmethod
-    def by_gear(gear):
-        types = {
-            'imaging_telescopes': Telescope,
-            'guiding_telescopes': Telescope,
-            'mounts': Mount,
-            'imaging_cameras': Camera,
-            'guiding_cameras': Camera,
-            'focal_reducers': FocalReducer,
-            'software': Software,
-            'filters': Filter,
-            'accessories': Accessory,
-        }
-        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: gear.pk}) for t in types])
-        images = Image.objects.filter(filters).distinct()
+    def by_gear(gear, gear_type = None):
+        images = Image.objects\
+            .select_related('user__userprofile')\
+            .prefetch_related('image_of_the_day', 'featured_gear', 'revisions')
+
+        if gear_type:
+            image_attr_lookup = {
+                'Telescope': 'imaging_telescopes',
+                'Camera': 'imaging_cameras',
+                'Mount': 'mounts',
+                'FocalReducer': 'focal_reducers',
+                'Software': 'software',
+                'Filter': 'filters',
+                'Accessory': 'accessories',
+            }
+
+            images = images.filter(**{image_attr_lookup[gear_type]: gear})
+        else:
+            types = {
+                'imaging_telescopes': Telescope,
+                'guiding_telescopes': Telescope,
+                'mounts': Mount,
+                'imaging_cameras': Camera,
+                'guiding_cameras': Camera,
+                'focal_reducers': FocalReducer,
+                'software': Software,
+                'filters': Filter,
+                'accessories': Accessory,
+            }
+
+            filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: gear.pk}) for t in types])
+            images = images.filter(filters).distinct()
 
         return images
+
 
 def image_post_save(sender, instance, created, **kwargs):
     verb = "uploaded a new image"

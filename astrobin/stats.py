@@ -709,17 +709,7 @@ def gear_total_images(gear_id):
     except Gear.DoesNotExist:
         return (flot_label, flot_data, flot_options)
 
-    all = Image.objects.filter(
-        Q(imaging_telescopes = gear) |
-        Q(guiding_telescopes = gear) |
-        Q(imaging_cameras = gear) |
-        Q(guiding_cameras = gear) |
-        Q(mounts = gear) |
-        Q(focal_reducers = gear) |
-        Q(filters = gear) |
-        Q(software = gear) |
-        Q(accessories = gear)).order_by('uploaded')
-
+    all = Image.by_gear(gear).filter(is_wip = False)
     data = {}
     total = 0
     for i in all:
