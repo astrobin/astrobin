@@ -3075,16 +3075,6 @@ def gear_page(request, id, slug):
         else:
             return HttpResponseRedirect(gear.get_absolute_url())
 
-    image_attr_lookup = {
-        'Telescope': 'imaging_telescopes',
-        'Camera': 'imaging_cameras',
-        'Mount': 'mounts',
-        'FocalReducer': 'focal_reducers',
-        'Software': 'software',
-        'Filter': 'filters',
-        'Accessory': 'accessories',
-    }
-
     user_attr_lookup = {
         'Telescope': 'telescopes',
         'Camera': 'cameras',
@@ -3097,10 +3087,11 @@ def gear_page(request, id, slug):
 
     from gear import CLASS_LOOKUP
 
-    all_images = Image.objects.filter(**{image_attr_lookup[gear_type]: gear})
+    all_images = Image.by_gear(gear, gear_type).filter(is_wip = False)
+
     commercial_image_revisions = None
     if gear.commercial and gear.commercial.image:
-        commercial_image_revisions = ImageRevision.objects.filter(image = gear.commercial.image)
+        commercial_image_revisions = gear.commercial.image.revisions.all()
 
     show_commercial = (gear.commercial and gear.commercial.is_paid) or (gear.commercial and gear.commercial.producer == request.user)
 
@@ -3114,9 +3105,9 @@ def gear_page(request, id, slug):
             'examples': all_images[:28],
             'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
             'reviews': ReviewedItem.objects.filter(gear = gear),
-            'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
+            'content_type': ContentType.objects.get_for_model(Gear),
             'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
-            'images_count': Image.by_gear(gear).count(),
+            'images_count': all_images.count(),
             'attributes': [
                 (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
                  getattr(gear, k[0]),
