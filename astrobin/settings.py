@@ -14,6 +14,7 @@ READONLY_MODE = False
 MEDIA_VERSION = '65'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
+DONATIONS_ENABLED = False
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@astrobin.com'),

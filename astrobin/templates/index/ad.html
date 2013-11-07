@@ -7,7 +7,7 @@
         <div class="header">
             <h4><i class="icon-dollar"></i> {% trans "Advertisement" %}</h4>
 
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated and DONATIONS_ENABLED %}
                 <a class="remove" data-toggle="modal" href="#remove-ads-modal">
                     <i class="icon-remove"></i>
                 </a>

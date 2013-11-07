@@ -1,3 +1,24 @@
+#donate-header-button {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size 16px;
+
+    background-color: hsl(46, 100%, 52%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffe799", endColorstr="#ffc50a");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#ffe799), to(#ffc50a));
+    background-image: -moz-linear-gradient(top, #ffe799, #ffc50a);
+    background-image: -ms-linear-gradient(top, #ffe799, #ffc50a);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffe799), color-stop(100%, #ffc50a));
+    background-image: -webkit-linear-gradient(top, #ffe799, #ffc50a);
+    background-image: -o-linear-gradient(top, #ffe799, #ffc50a);
+    background-image: linear-gradient(#ffe799, #ffc50a);
+    border-color: #ffc50a #ffc50a hsl(46, 100%, 45%);
+    color: #6B012A !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.46);
+    -webkit-font-smoothing: antialiased;
+}
+
 .badge-donor {
     position: absolute;
     padding: 0 !important;
