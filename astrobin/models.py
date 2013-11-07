@@ -16,7 +16,7 @@ except ImportError:
     import sha
     sha1 = sha.sha
 
-from django.db import models
+from django.db import models, IntegrityError
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -1005,7 +1005,11 @@ class Image(HasSolutionMixin, models.Model):
                 log.debug("Image %d: thumbnail url found in database." % self.id)
             except ThumbnailGroup.DoesNotExist:
                 log.debug("Image %d: there are no thumbnails in database." % self.id)
-                thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
+                try:
+                    thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
+                except IntegrityError:
+                    # Race condition
+                    pass
 
             if not url:
                 thumb = self.thumbnail_raw(alias, thumbnail_settings)
@@ -1017,9 +1021,10 @@ class Image(HasSolutionMixin, models.Model):
 
                 if thumb:
                     url = settings.IMAGES_URL + thumb.name
-                    setattr(thumbnails, alias, url)
-                    thumbnails.save()
                     cache.set(cache_key, url, 60*60*24*365)
+                    if thumbnails:
+                        setattr(thumbnails, alias, url)
+                        thumbnails.save()
 
         return url
 
