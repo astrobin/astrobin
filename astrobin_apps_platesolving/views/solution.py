@@ -6,6 +6,7 @@ import urllib2
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
+from django.db import IntegrityError
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import base
@@ -32,21 +33,24 @@ class SolveView(base.View):
         if solution.submission_id is None:
             solver = Solver()
 
-            thumb_url = target.thumbnail('regular')
-            url = thumb_url.split('://')[1]
-            url = 'http://' + urllib2.quote(url.encode('utf-8'))
-            headers = { 'User-Agent' : 'Mozilla/5.0' }
-            req = urllib2.Request(url, None, headers)
-            img = NamedTemporaryFile(delete = True)
-            img.write(urllib2.urlopen(req).read())
-            img.flush()
-            img.seek(0)
-            f = File(img)
+            try:
+                thumb_url = target.thumbnail('regular')
+                url = thumb_url.split('://')[1]
+                url = 'http://' + urllib2.quote(url.encode('utf-8'))
+                headers = { 'User-Agent' : 'Mozilla/5.0' }
+                req = urllib2.Request(url, None, headers)
+                img = NamedTemporaryFile(delete = True)
+                img.write(urllib2.urlopen(req).read())
+                img.flush()
+                img.seek(0)
+                f = File(img)
 
-            submission = solver.solve(f)
-            solution.status = Solver.PENDING
-            solution.submission_id = submission
-            solution.save()
+                submission = solver.solve(f)
+                solution.status = Solver.PENDING
+                solution.submission_id = submission
+                solution.save()
+            except urllib2.HTTPError:
+                pass
 
         context = {
             'solution': solution.id,
@@ -87,7 +91,11 @@ class SolutionFinalizeView(base.View):
             solution.orientation = "%.3f" % info['calibration']['orientation']
             solution.radius      = "%.3f" % info['calibration']['radius']
 
-            target = solution.content_type.get_object_for_this_type(pk = solution.object_id)
+            try:
+                target = solution.content_type.get_object_for_this_type(pk = solution.object_id)
+            except solution.content_type.model_class().DoesNotExist:
+                context = {'status': Solver.FAILED}
+                return HttpResponse(simplejson.dumps(context), mimetype='application/json')
 
             url = solver.annotated_image_url(solution.submission_id)
             img = NamedTemporaryFile(delete=True)
@@ -95,7 +103,11 @@ class SolutionFinalizeView(base.View):
             img.flush()
             img.seek(0)
             f = File(img)
-            solution.image_file.save(target.image_file.name, f)
+
+            try:
+                solution.image_file.save(target.image_file.name, f)
+            except IntegrityError:
+                pass
 
             url = solver.sky_plot_zoom1_image_url(solution.submission_id)
             if url:
@@ -104,7 +116,11 @@ class SolutionFinalizeView(base.View):
                 img.flush()
                 img.seek(0)
                 f = File(img)
-                solution.skyplot_zoom1.save(target.image_file.name, f)
+
+                try:
+                    solution.skyplot_zoom1.save(target.image_file.name, f)
+                except IntegrityError:
+                    pass
 
         solution.status = status
         solution.save()

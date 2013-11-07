@@ -807,8 +807,7 @@ class Image(HasSolutionMixin, models.Model):
     def get_absolute_url(self, revision = 'final', size = 'regular'):
         if revision == 'final':
             if not self.is_final:
-                r = ImageRevision.objects.filter(
-                    image = self, is_final = True)
+                r = self.revisions.filter(is_final = True)
                 if r:
                     revision = r[0].label
 
@@ -852,8 +851,7 @@ class Image(HasSolutionMixin, models.Model):
         if revision_label == '0':
             pass
         elif revision_label == 'final':
-            revisions = ImageRevision.objects.filter(image = self)
-            for r in revisions:
+            for r in self.revisions.all():
                 if r.is_final:
                     field = r.image_file
         else:
@@ -870,9 +868,10 @@ class Image(HasSolutionMixin, models.Model):
     # TODO: why have mod as a setting when inverted is part of the alias?
     # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
-        import hashlib
+        import urllib2
+
         from unidecode import unidecode
-        from django.core.files.base import File
+        from django.core.files.base import File, ContentFile
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
@@ -893,14 +892,15 @@ class Image(HasSolutionMixin, models.Model):
 
         local_path = None
         name = field.name
-        name_hash = hashlib.md5(unidecode(name)).hexdigest()
+        name_hash = field.storage.generate_local_name(name)
 
         # If it's one of the small thumbnails, try to generate it from the 'regular' size.
         if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object', 'histogram'):
+            log.debug("Image %d: going to get the 'regular' thumbnail..." % self.id)
             regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
             if regular_thumbnail:
                 name = regular_thumbnail.name
-                name_hash = hashlib.md5(unidecode(name)).hexdigest()
+                name_hash = field.storage.generate_local_name(name)
                 local_path = field.storage.local_storage.path(name_hash)
 
         # Try to generate the thumbnail starting from the file cache locally.
@@ -916,20 +916,42 @@ class Image(HasSolutionMixin, models.Model):
                 thumbnailer = get_thumbnailer(
                     OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
                     name_hash)
+                log.debug("Image %d: got thumbnail from local file %s." % (self.id, name_hash))
         except (OSError, IOError, UnicodeEncodeError):
             # If things go awry, fallback to getting the file from the remote
             # storage. But download it locally first if it doesn't exist, so
             # it can be used again later.
+            log.debug("Image %d: getting remote file..." % self.id)
+
+            # First try to get the file via URL, because that might hit the CloudFlare cache.
+            url = settings.IMAGES_URL + field.name
+            log.debug("Image %d: trying URL %s..." % (self.id, url))
+            headers = { 'User-Agent': 'Mozilla/5.0' }
+            req = urllib2.Request(url, None, headers)
+
             try:
-                remote_file = field.storage._open(name)
-            except IOError:
-                # The remote file doesn't exist?
-                return None
+                remote_file = ContentFile(urllib2.urlopen(req).read())
+            except urllib2.HTTPError:
+                remote_file = None
+
+            # If that didn't work, we'll get the file rebularly via django-storages.
+            if remote_file is None:
+                log.debug("Image %d: getting via URL didn't work. Falling back to django-storages..." % self.id)
+                try:
+                    remote_file = field.storage._open(name)
+                except IOError:
+                    # The remote file doesn't exist?
+                    log.error("Image %d: the remote file doesn't exist?" % self.id)
+                    return None
 
             try:
                 local_file = field.storage.local_storage._save(name_hash, remote_file)
-                thumbnailer = get_thumbnailer(local_file, name_hash)
+                thumbnailer = get_thumbnailer(
+                    OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                    name_hash)
+                log.debug("Image %d: saved local file %s." % (self.id, name_hash))
             except (OSError, UnicodeEncodeError):
+                log.error("Image %d: unable to save the local file." % self.id)
                 pass
 
         if self.watermark and 'watermark' in options:
@@ -939,7 +961,9 @@ class Image(HasSolutionMixin, models.Model):
 
         try:
             thumb = thumbnailer.get_thumbnail(options)
-        except (InvalidImageFormatError, SyntaxError):
+            log.debug("Image %d: thumbnail generated." % self.id)
+        except Exception as e:
+            log.error("Image %d: unable to generate thumbnail: %s." % (self.id, e.message))
             return None
 
         return thumb
@@ -978,22 +1002,41 @@ class Image(HasSolutionMixin, models.Model):
 
 
     @staticmethod
-    def by_gear(gear):
-        types = {
-            'imaging_telescopes': Telescope,
-            'guiding_telescopes': Telescope,
-            'mounts': Mount,
-            'imaging_cameras': Camera,
-            'guiding_cameras': Camera,
-            'focal_reducers': FocalReducer,
-            'software': Software,
-            'filters': Filter,
-            'accessories': Accessory,
-        }
-        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: gear.pk}) for t in types])
-        images = Image.objects.filter(filters).distinct()
+    def by_gear(gear, gear_type = None):
+        images = Image.objects\
+            .select_related('user__userprofile')\
+            .prefetch_related('image_of_the_day', 'featured_gear', 'revisions')
+
+        if gear_type:
+            image_attr_lookup = {
+                'Telescope': 'imaging_telescopes',
+                'Camera': 'imaging_cameras',
+                'Mount': 'mounts',
+                'FocalReducer': 'focal_reducers',
+                'Software': 'software',
+                'Filter': 'filters',
+                'Accessory': 'accessories',
+            }
+
+            images = images.filter(**{image_attr_lookup[gear_type]: gear})
+        else:
+            types = {
+                'imaging_telescopes': Telescope,
+                'guiding_telescopes': Telescope,
+                'mounts': Mount,
+                'imaging_cameras': Camera,
+                'guiding_cameras': Camera,
+                'focal_reducers': FocalReducer,
+                'software': Software,
+                'filters': Filter,
+                'accessories': Accessory,
+            }
+
+            filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: gear.pk}) for t in types])
+            images = images.filter(filters).distinct()
 
         return images
+
 
 def image_post_save(sender, instance, created, **kwargs):
     verb = "uploaded a new image"
@@ -1003,7 +1046,11 @@ post_save.connect(image_post_save, sender = Image)
 
 
 class ImageRevision(HasSolutionMixin, models.Model):
-    image = models.ForeignKey(Image)
+    image = models.ForeignKey(
+        Image,
+        related_name = 'revisions'
+    )
+
     image_file = models.ImageField(
         upload_to = image_upload_path,
         null = True,
