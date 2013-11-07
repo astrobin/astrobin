@@ -999,6 +999,7 @@ class Image(HasSolutionMixin, models.Model):
         url = cache.get(cache_key)
         if not url:
             # Not found in cache, attempt to fetch from database
+            thumbnails = None
             try:
                 thumbnails = self.thumbnails.get(revision = revision_label)
                 url = getattr(thumbnails, alias)
