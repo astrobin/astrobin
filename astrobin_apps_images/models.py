@@ -31,7 +31,7 @@ class ThumbnailGroup(models.Model):
     act_object       = models.CharField(max_length = 512, null = True, blank = True)
 
     def __unicode__(self):
-        return "Thumbnails for image " % self.image.title
+        return "Thumbnails for image %s" % self.image.title
 
     class Meta:
         app_label = 'astrobin_apps_images'
