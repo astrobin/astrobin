@@ -1,82 +1,33 @@
 {% load i18n %}
 
 {% if request.user.is_authenticated %}
-    <div class="modal hide fade" id="remove-ads-modal">
+    <div class="modal hide fade" id="donate-modal">
         <div class="modal-header">
             <a class="close" data-dismiss="modal">&times;</a>
-            <h3><i class="icon-gift"></i> {% trans "Donate to remove ads" %}</h3>
+            <h3><i class="icon-gift"></i> {% trans "Please donate!" %}</h3>
         </div>
         <div class="modal-body">
             <p>
-                {% blocktrans %}Although we have tried to keep AstroBin ad free, as of right now the only way we can keep the website running is with commercial support by advertisers.{% endblocktrans %}
+                {% blocktrans %}Hosting this website is getting more and more expensive as new users sign up all the time.{% endblocktrans %}
+                {% blocktrans %}AstroBin stores images at full size and quality, and with no limitations, because quality is important when it comes to astrophotography. But such files can be large, and bandwidth is expensive.{% endblocktrans %}
             </p>
+
             <p>
-                {% blocktrans %}The ads you will see on AstroBin are related to astronomy and astrophotography only. They come from legitimate advertisers whose business we support, and each image and word is reviewed and approved before it's published. AstroBin will not share any personal information about you to its advertisers.{% endblocktrans %}
+                {% blocktrans %}If you too would hate for AstroBin to cease to exist, we kindly ask you for a contribution. It would help us with the hosting bills, as they grow fatter and fatter each month, and who knows, maybe offer a little compensation for the thousands of hours that were put into the project.{% endblocktrans %}
             </p>
+
             <p>
-                {% blocktrans %}However, if you still feel that you would rather not see these ads, we kindly ask you for a small donation. It will keep our servers running and help with the hosting costs. AstroBin stores images at full size and with no limitation, because quality is important when it comes to astrophotography. But such files can be large, and bandwidth is expensive. {% endblocktrans %}
+                {% blocktrans %}Please donate any amount you want, selecting from the options below and subscribing with a recurring monthly payment.{% endblocktrans %}
             </p>
+
             <p>
-                {% blocktrans %}Please donate any amount you want, selecting from the options below, by subscribing with a recurring monthly payment. If you donate, you will not be shown ads anymore.{% endblocktrans %}
+                {% trans "Thank you!" %}
             </p>
         </div>
 
         <div class="modal-footer">
-
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="form-inline form-donate">
-                <input type="hidden" name="cmd" value="_xclick-subscriptions">
-                <input type="hidden" name="business" value="{{business}}">
-                <input type="hidden" name="lc" value="FI">
-                <input type="hidden" name="item_name" value="{{subscription.name}}">
-                <input type="hidden" name="item_number" value="{{subscription.id}}">
-                <input type="hidden" name="no_note" value="1">
-                <input type="hidden" name="no_shipping" value="1">
-                <input type="hidden" name="rm" value="1">
-                <input type="hidden" name="return" value="{{base_url}}/donations/success/">
-                <input type="hidden" name="cancel_return" value="{{base_url}}/donations/cancel/">
-                <input type="hidden" name="src" value="1">
-                <input type="hidden" name="currency_code" value="USD">
-                <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribe_LG.gif:NonHosted">
-                <input type="hidden" name="notify_url" value="{{base_url}}/subscriptions/paypal/">
-                <input type="hidden" name="custom" value="{{request.user.id}}"/>
-
-                <label for="os0">
-                    {% trans "What is AstroBin worth to you?" %}
-                </label>
-                <select name="os0">
-                    <option value="A coffee">{% trans "A coffee" %}: $2.00 USD - {% trans "monthly" %}</option>
-                    <option value="A snack"> {% trans "A snack"  %}: $3.00 USD - {% trans "monthly" %}</option>
-                    <option value="A pizza" selected="selected"> {% trans "A pizza"  %}: $5.00 USD - {% trans "monthly" %}</option>
-                    <option value="A movie night"> {% trans "A movie night" %}: $10.00 USD - {% trans "monthly" %}</option>
-                </select>
-
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_LG.gif" name="submit"  class="button"/>
-                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
-
-                <input type="hidden" name="currency_code" value="USD">
-
-                <input type="hidden" name="option_select0" value="A coffee">
-                <input type="hidden" name="option_amount0" value="2.00">
-                <input type="hidden" name="option_period0" value="M">
-                <input type="hidden" name="option_frequency0" value="1">
-
-                <input type="hidden" name="option_select1" value="A snack">
-                <input type="hidden" name="option_amount1" value="3.00">
-                <input type="hidden" name="option_period1" value="M">
-                <input type="hidden" name="option_frequency1" value="1">
-
-                <input type="hidden" name="option_select2" value="A pizza">
-                <input type="hidden" name="option_amount2" value="5.00">
-                <input type="hidden" name="option_period2" value="M">
-                <input type="hidden" name="option_frequency2" value="1">
-
-                <input type="hidden" name="option_select3" value="A movie night">
-                <input type="hidden" name="option_amount3" value="10.00">
-                <input type="hidden" name="option_period3" value="M">
-                <input type="hidden" name="option_frequency3" value="1">
-
-                <input type="hidden" name="option_index" value="k">
-            </form>
+            {% include 'astrobin_apps_donations/inclusion_tags/_paypal_button.html' %}
         </div>
     </div>
 {% endif %}
+

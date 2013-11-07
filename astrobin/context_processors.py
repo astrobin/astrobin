@@ -94,6 +94,7 @@ def common_variables(request):
         'IMAGES_URL' : settings.IMAGES_URL,
         'CDN_URL' : settings.CDN_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
+        'DONATIONS_ENABLED': settings.DONATIONS_ENABLED,
     }
 
     return d

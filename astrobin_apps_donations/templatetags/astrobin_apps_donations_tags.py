@@ -22,6 +22,16 @@ def donate_modal(context):
     }
 
 
+@register.inclusion_tag('astrobin_apps_donations/inclusion_tags/remove_ads_modal.html', takes_context = True)
+def remove_ads_modal(context):
+    return {
+        'base_url': settings.ASTROBIN_BASE_URL,
+        'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
+        'subscription': Subscription.objects.get(name = 'AstroBin Donor'),
+        'request': context['request'],
+    }
+
+
 @register.inclusion_tag('astrobin_apps_donations/inclusion_tags/cancel_modal.html', takes_context = True)
 def cancel_donation_modal(context):
     if settings.PAYPAL_TEST:
