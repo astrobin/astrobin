@@ -42,13 +42,16 @@ class CachedS3BotoStorage(S3BotoStorage):
         super(CachedS3BotoStorage, self).__init__(location=kwargs.pop('location'))
         self.local_storage = OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY)
 
+    def generate_local_name(self, name):
+        return hashlib.md5(unidecode(name)).hexdigest()
 
     def _save(self, name, content):
         name = super(CachedS3BotoStorage, self)._save(name, content)
 
         try:
-            self.local_storage._save(hashlib.md5(unidecode(name)).hexdigest(), content)
-        except (OSError, UnicodeEncodeError):
+            local_name = self.generate_local_name(name)
+            self.local_storage._save(local_name, content)
+        except (OSError, UnicodeEncodeError) as e:
             # Probably the filename was too long for the local storage.
             pass
 

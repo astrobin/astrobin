@@ -868,7 +868,6 @@ class Image(HasSolutionMixin, models.Model):
     # TODO: why have mod as a setting when inverted is part of the alias?
     # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
-        import hashlib
         import urllib2
 
         from unidecode import unidecode
@@ -893,7 +892,7 @@ class Image(HasSolutionMixin, models.Model):
 
         local_path = None
         name = field.name
-        name_hash = hashlib.md5(unidecode(name)).hexdigest()
+        name_hash = field.storage.generate_local_name(name)
 
         # If it's one of the small thumbnails, try to generate it from the 'regular' size.
         if alias in ('gallery', 'thumb', 'revision', 'runnerup', 'act_target', 'act_object', 'histogram'):
@@ -901,7 +900,7 @@ class Image(HasSolutionMixin, models.Model):
             regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
             if regular_thumbnail:
                 name = regular_thumbnail.name
-                name_hash = hashlib.md5(unidecode(name)).hexdigest()
+                name_hash = field.storage.generate_local_name(name)
                 local_path = field.storage.local_storage.path(name_hash)
 
         # Try to generate the thumbnail starting from the file cache locally.
