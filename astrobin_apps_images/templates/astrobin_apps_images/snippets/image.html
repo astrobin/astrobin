@@ -1,11 +1,10 @@
 {% load astrobin_apps_images_tags %}
+{% load cache %}
 {% load common_tags %}
 {% load i18n %}
 
 {% if status != 'error' %}
     <div class="astrobin-image-container">
-
-        {% random_id %}
 
         {% if error_message %}
             <div class="alert alert-error">
@@ -16,6 +15,9 @@
             </div>
         {% endif %}
 
+        {% cache 43200 astrobin_image cache_key %}
+
+        {% random_id %}
 
         {% if alias != 'histogram' %}
         <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
@@ -113,5 +115,6 @@
                 </div>
             </div>
         {% endif %}
+        {% endcache %}
     </div>
 {% endif %}
