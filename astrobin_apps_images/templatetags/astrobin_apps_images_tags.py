@@ -161,8 +161,10 @@ def astrobin_image(
             'id': image.id,
             'alias': alias,
         }
-        if mod:
+
+        if mod and mod in ('none', 'regular', 'inverted'):
             get_thumb_kwargs['mod'] = mod
+
         if revision is None or revision != 'final':
             get_thumb_kwargs['r'] = revision
 
