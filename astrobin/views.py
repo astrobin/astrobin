@@ -3085,10 +3085,6 @@ def gear_page(request, id, slug):
 
     all_images = Image.by_gear(gear, gear_type).filter(is_wip = False)
 
-    commercial_image_revisions = None
-    if gear.commercial and gear.commercial.image:
-        commercial_image_revisions = gear.commercial.image.revisions.all()
-
     show_commercial = (gear.commercial and gear.commercial.is_paid) or (gear.commercial and gear.commercial.producer == request.user)
 
     return object_detail(
@@ -3108,12 +3104,11 @@ def gear_page(request, id, slug):
                 (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
                  getattr(gear, k[0]),
                  k[1]) for k in gear.attributes()],
-            'commercial_image_revisions': commercial_image_revisions,
 
             'show_tagline': show_commercial and gear.commercial.tagline,
             'show_link': show_commercial and gear.commercial.link,
             'show_image': show_commercial and gear.commercial.image,
-            'show_other_images': show_commercial and commercial_image_revisions,
+            'show_other_images': show_commercial and gear.commercial.image and gear.commercial.image.revisions.all(),
             'show_description': show_commercial and gear.commercial.description,
         })
 
