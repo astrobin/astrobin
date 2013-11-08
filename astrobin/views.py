@@ -194,7 +194,8 @@ def index(request, template = 'index/root.html', extra_context = None):
             # The is no IOTD
             pass
 
-        response_dict['recent_commercial_gear'] = Image.objects.exclude(featured_gear = None)
+        response_dict['recent_commercial_gear'] =\
+            [x for x in Image.objects.exclude(featured_gear = None) if x.featured_gear.all()[0].is_paid()]
 
 
         if section == 'global':
@@ -3085,7 +3086,7 @@ def gear_page(request, id, slug):
 
     all_images = Image.by_gear(gear, gear_type).filter(is_wip = False)
 
-    show_commercial = (gear.commercial and gear.commercial.is_paid) or (gear.commercial and gear.commercial.producer == request.user)
+    show_commercial = (gear.commercial and gear.commercial.is_paid()) or (gear.commercial and gear.commercial.producer == request.user)
 
     return object_detail(
         request,
