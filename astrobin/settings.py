@@ -420,6 +420,7 @@ PIPELINE_JS = {
             'js/jquery.timeago.js',
             'js/respond.src.js',
             'js/masonry.js',
+            'js/dfp.gpt.logger.override.js',
             'js/bootstrap.js',
             'js/astrobin.js',
         ),
