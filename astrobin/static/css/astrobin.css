@@ -1932,6 +1932,14 @@ div.capty-target .capty-caption-content .link-overlay a {
 }
 .subtle-container.advertisement {
   padding: 0;
+  background: none;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  /* Hide by default, will be shown if ad is rendered. */
+
+  display: none;
 }
 .subtle-container.advertisement .header {
   padding: 8px;
@@ -1944,7 +1952,7 @@ div.capty-target .capty-caption-content .link-overlay a {
   color: #505050;
 }
 .subtle-container.advertisement.advertisement-frontpage {
-  padding-top: 10px;
+  padding-top: 12px;
 }
 .comment-author {
   padding-bottom: 8px;
