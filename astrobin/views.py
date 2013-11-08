@@ -761,6 +761,7 @@ def image_detail(request, id, r):
         'upload_revision_form': ImageRevisionUploadForm(),
         'dates_label': _("Dates"),
         'uploaded_on': uploaded_on,
+        'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),
         'subjects_short': subjects[:subjects_limit],
         'subjects_reminder': subjects[subjects_limit:],
         'subjects_all': subjects,
