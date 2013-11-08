@@ -7,7 +7,7 @@
 {% load tags %}
 {% load toggleproperty_tags %}
 
-{% block title %}{% blocktrans with user=user %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with user=user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 
 {% block content %}
 <a name="page_anchor"></a>
