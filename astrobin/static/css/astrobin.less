@@ -2050,6 +2050,12 @@ div.capty-target {
 
     &.advertisement {
         padding: 0;
+        background: none;
+        border: none;
+        .no-box-shadow;
+
+        /* Hide by default, will be shown if ad is rendered. */
+        display: none;
 
         .header {
             padding: @spacer-medium;
@@ -2064,7 +2070,7 @@ div.capty-target {
         }
 
         &.advertisement-frontpage {
-            padding-top: 10px;
+            padding-top: 12px;
         }
     }
 }
