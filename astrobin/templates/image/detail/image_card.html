@@ -77,7 +77,7 @@
                     {% if instance_to_platesolve.solution and instance_to_platesolve.solution.ra %}
                         <p><strong>{% trans "RA center" %}</strong>: {{instance_to_platesolve.solution.ra}} {% trans "degrees" %}</p>
                         <p><strong>{% trans "DEC center" %}</strong>: {{instance_to_platesolve.solution.dec}} {% trans "degrees" %}</p>
-                        {% if instance_to_platesolve.pixscale and instance_to_platesolve.pixscale != 0 %}
+                        {% if instance_to_platesolve.solution.pixscale and instance_to_platesolve.solution.pixscale != 0 %}
                             <p><strong>{% trans "Pixel scale" %}</strong>: {{instance_to_platesolve.solution.pixscale}} {% trans "arcsec/pixel" %}</p>
                         {% endif %}
                         <p><strong>{% trans "Orientation" %}</strong>: {{instance_to_platesolve.solution.orientation}} {% trans "degrees" %}</p>
