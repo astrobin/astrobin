@@ -824,7 +824,7 @@ def image_rawthumb(request, id, r, alias, mod):
 
 @require_GET
 def image_full(request, id, r):
-    image = get_object_or_404(Image.all_object, pk=id)
+    image = get_object_or_404(Image.all_objects, pk=id)
 
     ################################
     # REDIRECT TO CORRECT REVISION #
