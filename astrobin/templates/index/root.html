@@ -9,6 +9,8 @@
 {% load cache %}
 {% load tags %}
 
+{% block title %}AstroBin{% endblock %}
+
 {% block content %}
 <div id="index">
     {% if not request.user.is_authenticated %}
