@@ -4,6 +4,7 @@ import urllib2
 
 # Django
 from django.contrib.contenttypes.models import ContentType
+from django.conf import settings
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.db import IntegrityError
@@ -87,9 +88,20 @@ class SolutionFinalizeView(base.View):
 
             solution.ra          = "%.3f" % info['calibration']['ra']
             solution.dec         = "%.3f" % info['calibration']['dec']
-            solution.pixscale    = "%.3f" % info['calibration']['pixscale']
             solution.orientation = "%.3f" % info['calibration']['orientation']
             solution.radius      = "%.3f" % info['calibration']['radius']
+
+            # Get the images 'w' and adjust pixscale
+            if solution.content_object:
+                w = solution.content_object.w
+                pixscale = info['calibration']['pixscale']
+                if w and pixscale:
+                    thumbnail_w = settings.THUMBNAIL_ALIASES['']['regular']['size'][0]
+                    ratio = thumbnail_w / float(w)
+                    corrected_scale = float(pixscale) * ratio
+                    solution.pixscale = "%.3f" %  corrected_scale
+                else:
+                    solution.pixscale = None
 
             try:
                 target = solution.content_type.get_object_for_this_type(pk = solution.object_id)
