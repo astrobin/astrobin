@@ -1,6 +1,10 @@
 {% load compressed %}
 
-        {% include "base/preamble.html" %}
+<!DOCTYPE html>
+<html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
+    <head>
+        <title>{% block title %}{% endblock %} | AstroBin</title>
+
         {% include "base/meta.html" %}
         {% include "base/favicon.html" %}
         {% include "base/ie8html5.html" %}

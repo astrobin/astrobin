@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% include 'image/detail/custom_ga.html' %}
-{% include 'image/detail/title.html' %}
+
+{% block title %}{{image.title}} ({{image.user.userprofile}}){% endblock %}
 
 {% block content %}
     {% include 'image/detail/wip_banner.html' %}

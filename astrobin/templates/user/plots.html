@@ -2,7 +2,8 @@
 {% load i18n %}
 {% load tags %}
 
-{% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s plots{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with user=user %}{{user}}'s plots{% endblocktrans %}{% endblock %}
+
 {% block content %}
     <a name="page_anchor"></a>
     {% include 'user/profile-subnav.html' %}
