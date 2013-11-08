@@ -987,6 +987,9 @@ class Image(HasSolutionMixin, models.Model):
         mod = thumbnail_settings.get('mod', None)
         field = self.get_thumbnail_field(revision_label);
 
+        if alias in ('revision', 'runnerup'):
+            alias = 'thumb'
+
         app_model = "{0}.{1}".format(
             self._meta.app_label,
             self._meta.object_name).lower()
