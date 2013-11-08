@@ -34,7 +34,9 @@
                     {% avatar user 194 %}
                 </a>
 
-                {% add_remove_toggleproperty "follow" user request_user %}
+                {% if request.user != user %}
+                    {% add_remove_toggleproperty "follow" user request_user %}
+                {% endif %}
             </div>
 
             {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
@@ -73,7 +75,9 @@
                     {% endif %}
                     {% endcache %}
 
-                    <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
+                    {% if request.user != user %}
+                        <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -100,9 +104,11 @@
             </div>
             {% endcache %}
 
-            <div class="follow">
-                {% add_remove_toggleproperty "follow" user request_user %}
-            </div>
+            {% if request.user != user %}
+                <div class="follow">
+                    {% add_remove_toggleproperty "follow" user request_user %}
+                </div>
+            {% endif %}
         </div>
     {% endif %}
 {% endif %}
