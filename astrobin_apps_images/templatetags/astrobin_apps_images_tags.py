@@ -26,7 +26,7 @@ register = Library()
 @register.simple_tag
 def get_image_url(image, revision = 'final', size = 'regular'):
     def commercial_gear_url(commercial_gear):
-        gear = Gear.objects.filter(commercial = commercial_gear)
+        gear = commercial_gear.base_gear.all()
         if gear:
             return gear[0].get_absolute_url()
         return None
@@ -128,7 +128,7 @@ def astrobin_image(
 
     show_tooltip = alias in (
         'gallery', 'gallery_inverted',
-        'thumb', 'runnerup',
+        'thumb',
     )
 
 

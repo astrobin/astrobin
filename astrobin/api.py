@@ -100,7 +100,7 @@ class ImageResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = Image.objects.filter(is_wip = False)
+        queryset = Image.objects.all()
         fields = [
             'id',
             'title',

@@ -11,7 +11,7 @@ LOCAL_STATIC_STORAGE = True
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '65'
+MEDIA_VERSION = '66'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = False
@@ -563,14 +563,12 @@ THUMBNAIL_ALIASES = {
         'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
         'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'inverted': True},
         'thumb': {'size': (80, 80), 'crop': True, 'rounded': 'smart', 'quality': 60},
-        'revision': {'size': (86, 86), 'crop': True, 'rounded': 'smart', 'quality': 60},
 
         # Tricks
         'histogram': {'size': (274, 120), 'histogram': True},
 
         # IOTD
         'iotd': {'size': (780, 180), 'crop': 'smart', 'watermark': True},
-        'runnerup': {'size': (50, 50), 'crop': 'smart', 'rounded': True, 'quality': 60},
 
         # Activity stream
         'act_target': {'size': (226, 62), 'crop': 'smart', 'quality': 80},

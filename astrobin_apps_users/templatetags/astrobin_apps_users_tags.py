@@ -16,7 +16,7 @@ register = Library()
 @register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context = True)
 def astrobin_user(context, user, layout="standard"):
     user_ct = ContentType.objects.get_for_model(User)
-    images = Image.objects.filter(user = user, is_wip = False).count()
+    images = Image.objects.filter(user = user).count()
     followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
     following = ToggleProperty.objects.filter(
         property_type = "follow",
