@@ -464,7 +464,7 @@ def no_javascript(request):
 def image_detail(request, id, r):
     """ Show details of an image"""
     image = get_object_or_404(
-        Image.objects.all(),
+        Image.all_objects,
         pk = id)
 
     response_dict = {}
@@ -786,7 +786,7 @@ def image_detail(request, id, r):
 
     return object_detail(
         request,
-        queryset = Image.objects.all(),
+        queryset = Image.all_objects.all(),
         object_id = id,
         template_name = 'image/detail.html',
         template_object_name = 'image',
@@ -824,7 +824,7 @@ def image_rawthumb(request, id, r, alias, mod):
 
 @require_GET
 def image_full(request, id, r):
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(Image.all_object, pk=id)
 
     ################################
     # REDIRECT TO CORRECT REVISION #
@@ -864,7 +864,7 @@ def image_full(request, id, r):
 
     return object_detail(
         request,
-        queryset = Image.objects.all(),
+        queryset = Image.all_objects.all(),
         object_id = id,
         template_name = 'image/full.html',
         template_object_name = 'image',
@@ -954,6 +954,9 @@ def image_upload_process(request):
     image.user = request.user
     image.license = profile.default_license
 
+    if 'wip' in request.POST:
+        image.is_wip = True
+
     image.image_file.file.seek(0) # Because we opened it with PIL
     image.save()
 
@@ -1006,7 +1009,7 @@ def image_edit_watermark(request, id):
 @login_required
 @require_GET
 def image_edit_gear(request, id):
-    image = Image.objects.get(pk=id)
+    image = Image.all_objects.get(pk=id)
     profile = image.user.userprofile
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -1168,7 +1171,7 @@ def image_edit_license(request, id):
 @require_POST
 def image_edit_save_basic(request):
     image_id = request.POST.get('image_id')
-    image = Image.objects.get(pk=image_id)
+    image = Image.all_objects.get(pk=image_id)
     form = ImageEditBasicForm(user = image.user, data=request.POST, instance=image)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -1231,7 +1234,7 @@ def image_edit_save_watermark(request):
 @require_POST
 def image_edit_save_gear(request):
     image_id = request.POST.get('image_id')
-    image = Image.objects.get(pk=image_id)
+    image = Image.all_objects.get(pk=image_id)
     profile = image.user.userprofile
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -1272,7 +1275,7 @@ def image_edit_save_gear(request):
 @require_POST
 def image_edit_save_acquisition(request):
     image_id = request.POST.get('image_id')
-    image = Image.objects.get(pk=image_id)
+    image = Image.all_objects.get(pk=image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
