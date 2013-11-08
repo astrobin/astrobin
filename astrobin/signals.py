@@ -129,8 +129,10 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             elif instance.property_type == "bookmark":
                 verb = "bookmarked"
 
-            if instance.content_type == ContentType.objects.get_for_model(Image) and instance.is_wip:
-                return
+            if instance.content_type == ContentType.objects.get_for_model(Image):
+                image = instance.content_type.get_object_for_this_type(id = instance.object_id)
+                if image.is_wip:
+                    return
 
             act.send(instance.user, verb = verb, target = instance.content_object)
 
