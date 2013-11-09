@@ -671,7 +671,10 @@ def image_detail(request, id, r):
     ##############
 
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
+    alias = 'regular'
     mod = request.GET.get('mod')
+    if mod == 'inverted':
+        alias = 'regular_inverted'
 
     subjects = image.objects_in_field.split(',') if image.objects_in_field else ''
     skyplot_zoom1 = None
@@ -730,12 +733,13 @@ def image_detail(request, id, r):
     response_dict = dict(response_dict.items() + {
         'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
 
+        'alias': alias,
+        'mod': mod,
         'revisions': revisions,
         'is_revision': is_revision,
         'revision_image': revision_image,
         'revision_label': r,
 
-        'mod': mod,
         'instance_to_platesolve': instance_to_platesolve,
         'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
         'skyplot_zoom1': skyplot_zoom1,
@@ -796,14 +800,13 @@ def image_detail(request, id, r):
 
 
 @require_GET
-def image_thumb(request, id, r, alias, mod):
+def image_thumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
 
     url = settings.IMAGES_URL + image.image_file.name
     if 'animated' not in request.GET:
         url = image.thumbnail(alias, {
             'revision_label': r,
-            'mod': mod,
         })
 
     return HttpResponse(
@@ -814,11 +817,10 @@ def image_thumb(request, id, r, alias, mod):
 
 
 @require_GET
-def image_rawthumb(request, id, r, alias, mod):
+def image_rawthumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
     url = image.thumbnail(alias, {
         'revision_label': r,
-        'mod': mod,
     })
 
     return HttpResponseRedirect(url)
@@ -872,7 +874,7 @@ def image_full(request, id, r):
         template_object_name = 'image',
         extra_context = {
             'real': real,
-            'alias': 'real' if real else 'hd',
+            'alias': alias,
             'revision_label': r,
         })
 
