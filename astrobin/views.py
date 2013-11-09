@@ -2516,9 +2516,11 @@ def bring_to_attention_process(request):
     (usernames, value) = valueReader(request.POST, 'users')
     recipients = []
     for username in usernames:
-        user = User.objects.get(username=username)
-        if user is not None:
+        try
+            user = User.objects.get(username=username)
             recipients.append(user)
+        except User.DoesNotExist:
+            pass
 
     push_notification(recipients, 'attention_request',
                       {'object':image,
