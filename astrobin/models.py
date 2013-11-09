@@ -883,8 +883,6 @@ class Image(HasSolutionMixin, models.Model):
         return '0'
 
 
-    # TODO: verify how thumbnail integration works when sharing on forums
-    # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
         import urllib2
 
@@ -913,22 +911,17 @@ class Image(HasSolutionMixin, models.Model):
         name = field.name
         name_hash = field.storage.generate_local_name(name)
 
-        # If it's one of the small thumbnails, try to generate it from the 'regular' size.
-        if alias in ('gallery', 'thumb', 'act_target', 'act_object', 'histogram'):
-            log.debug("Image %d: going to get the 'regular' thumbnail..." % self.id)
-            regular_thumbnail = self.thumbnail_raw('regular', thumbnail_settings)
-            if regular_thumbnail:
-                name = regular_thumbnail.name
-                name_hash = field.storage.generate_local_name(name)
-                local_path = field.storage.local_storage.path(name_hash)
+        log.debug("Image %s: starting with name = %s, local path = %s" % (self.id, name, local_path))
 
         # Try to generate the thumbnail starting from the file cache locally.
         if local_path is None:
             local_path = field.storage.local_storage.path(name_hash)
 
         try:
+            log.debug("Image %s: trying local path %s" % (self.id, local_path))
             size = os.path.getsize(local_path)
             if size == 0:
+                log.debug("Image %s: size 0 in local path %s" % (self.id, local_path))
                 raise IOError("Empty file")
 
             with open(local_path):
@@ -1004,7 +997,8 @@ class Image(HasSolutionMixin, models.Model):
         from django.core.cache import cache
         from astrobin_apps_images.models import ThumbnailGroup
 
-        revision_label = thumbnail_settings.get('revision_label', 'final')
+        options = thumbnail_settings.copy()
+        revision_label = options.get('revision_label', 'final')
         field = self.get_thumbnail_field(revision_label);
 
         if alias in ('revision', 'runnerup'):
@@ -1012,8 +1006,9 @@ class Image(HasSolutionMixin, models.Model):
 
         if revision_label in (None, 'final'):
             revision_label = self.get_final_revision_label()
+            options['revision_label'] = revision_label
 
-        log.debug("Image %d: requested thumbnail: %s / %s" % (self.id, revision_label, alias))
+        log.debug("Image %d: requested thumbnail: %s / %s" % (self.id, alias, revision_label))
 
         cache_key = self.thumbnail_cache_key(field, alias)
         url = cache.get(cache_key)
@@ -1033,7 +1028,7 @@ class Image(HasSolutionMixin, models.Model):
                     pass
 
             if not url:
-                thumb = self.thumbnail_raw(alias, thumbnail_settings)
+                thumb = self.thumbnail_raw(alias, options)
                 options = settings.THUMBNAIL_ALIASES[''][alias].copy()
 
                 url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
@@ -1043,9 +1038,11 @@ class Image(HasSolutionMixin, models.Model):
                 if thumb:
                     url = settings.IMAGES_URL + thumb.name
                     cache.set(cache_key, url, 60*60*24*365)
+                    log.debug("Image %d: saved generated thumbnail in the cache." % self.id)
                     if thumbnails:
                         setattr(thumbnails, alias, url)
                         thumbnails.save()
+                        log.debug("Image %d: saved generated thumbnail in the database." % self.id)
 
         return url
 

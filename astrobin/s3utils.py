@@ -1,5 +1,6 @@
 # Python
 import hashlib
+import logging
 import os
 from unidecode import unidecode
 
@@ -10,6 +11,9 @@ from django.core.files.storage import FileSystemStorage
 # Third party
 from storages.backends.s3boto import S3BotoStorage
 from pipeline.storage import PipelineMixin
+
+
+log = logging.getLogger('apps')
 
 
 class OverwritingFileSystemStorage(FileSystemStorage):
@@ -43,7 +47,9 @@ class CachedS3BotoStorage(S3BotoStorage):
         self.local_storage = OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY)
 
     def generate_local_name(self, name):
-        return hashlib.md5(unidecode(name)).hexdigest()
+        local_name = hashlib.md5(unidecode(name)).hexdigest()
+        log.debug("Generated localname: %s -> %s" % (name, local_name))
+        return local_name
 
     def _save(self, name, content):
         name = super(CachedS3BotoStorage, self)._save(name, content)
