@@ -551,7 +551,7 @@ THUMBNAIL_ALIASES = {
         'regular_inverted': {'size': (620, 0), 'crop': False, 'invert': True, 'watermark': True},
 
         'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
-        'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'inverted': True},
+        'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'invert': True},
         'thumb': {'size': (80, 80), 'crop': True, 'rounded': 'smart', 'quality': 60},
 
         # Tricks
