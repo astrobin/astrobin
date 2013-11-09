@@ -894,7 +894,6 @@ class Image(HasSolutionMixin, models.Model):
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
-        log.debug("Image %d: requested raw thumbnail: %s / %s" % (self.id, alias, revision_label))
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
         if revision_label is None:
