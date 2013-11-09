@@ -20,30 +20,30 @@
         {% random_id %}
 
         {% if alias != 'histogram' %}
-        <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+            <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
-            {% if badges %}
-                <ul class="badges">
-                    {% for badge in badges %}
-                        {% if badge == 'iotd' and alias != 'regular' %}
-                            <li class="iotd-thumb-banner">
-                                <h2>
-                                    <i class="icon icon-trophy"></i>
-                                </h2>
-                            </li>
-                        {% endif %}
+                {% if badges %}
+                    <ul class="badges">
+                        {% for badge in badges %}
+                            {% if badge == 'iotd' and alias != 'regular' %}
+                                <li class="iotd-thumb-banner">
+                                    <h2>
+                                        <i class="icon icon-trophy"></i>
+                                    </h2>
+                                </li>
+                            {% endif %}
 
-                        {% if badge == 'top100' %}
-                            <li class="top100-badge{% if alias == 'regular' %} top100-badge-large{% endif %}">
-                                <h2>
-                                    <span>Top</span>
-                                    <span>100</span>
-                                </h2>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            {% endif %}
+                            {% if badge == 'top100' %}
+                                <li class="top100-badge{% if alias == 'regular' %} top100-badge-large{% endif %}">
+                                    <h2>
+                                        <span>Top</span>
+                                        <span>100</span>
+                                    </h2>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %} {# badges #}
         {% endif %} {# not histogram #}
 
             <img

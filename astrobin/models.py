@@ -870,8 +870,20 @@ class Image(HasSolutionMixin, models.Model):
 
         return field
 
+
+    def get_final_revision_label(self):
+        # Avoid hitting the db by potentially exitting early
+        if self.is_final:
+            return '0'
+
+        for r in self.revisions.all():
+            if r.is_final:
+                return r.label
+
+        return '0'
+
+
     # TODO: verify how thumbnail integration works when sharing on forums
-    # TODO: why have mod as a setting when inverted is part of the alias?
     # TODO: this is generating thumbnails synchronously from the sharing dialog
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
         import urllib2
@@ -882,8 +894,7 @@ class Image(HasSolutionMixin, models.Model):
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
-        revision_label = thumbnail_settings.get('revision_label')
-        mod = thumbnail_settings.get('mod', None)
+        revision_label = thumbnail_settings.get('revision_label', 'final')
 
         if revision_label is None:
             revision_label = 'final'
@@ -891,10 +902,6 @@ class Image(HasSolutionMixin, models.Model):
         # Compatibility
         if alias in ('revision', 'runnerup'):
             alias = 'thumb'
-
-        # Possible modes: 'inverted', 'solved'.
-        if mod == 'inverted':
-            alias = alias + '_' +  mod
 
         options = settings.THUMBNAIL_ALIASES[''][alias].copy()
 
@@ -979,26 +986,34 @@ class Image(HasSolutionMixin, models.Model):
         return thumb
 
 
+    def thumbnail_cache_key(self, field, alias):
+        app_model = "{0}.{1}".format(
+            self._meta.app_label,
+            self._meta.object_name).lower()
+        cache_key ='easy_thumb_alias_cache_%s.%s_%s' % (
+            app_model,
+            field,
+            alias)
+
+        return cache_key
+
+
     def thumbnail(self, alias, thumbnail_settings = {}):
         from django.core.cache import cache
         from astrobin_apps_images.models import ThumbnailGroup
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
-        mod = thumbnail_settings.get('mod', None)
         field = self.get_thumbnail_field(revision_label);
 
         if alias in ('revision', 'runnerup'):
             alias = 'thumb'
 
-        app_model = "{0}.{1}".format(
-            self._meta.app_label,
-            self._meta.object_name).lower()
-        cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
-            app_model,
-            field,
-            alias,
-            mod)
+        if revision_label in (None, 'final'):
+            revision_label = self.get_final_revision_label()
 
+        log.debug("Requested thumbnail: %d / %s / %s" % (self.id, revision_label, alias))
+
+        cache_key = self.thumbnail_cache_key(field, alias)
         url = cache.get(cache_key)
         if not url:
             # Not found in cache, attempt to fetch from database
@@ -1006,7 +1021,7 @@ class Image(HasSolutionMixin, models.Model):
             try:
                 thumbnails = self.thumbnails.get(revision = revision_label)
                 url = getattr(thumbnails, alias)
-                log.debug("Image %d: thumbnail url found in database." % self.id)
+                log.debug("Image %d: thumbnail url found in database: %s" % (self.id, url))
             except ThumbnailGroup.DoesNotExist:
                 log.debug("Image %d: there are no thumbnails in database." % self.id)
                 try:
