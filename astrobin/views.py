@@ -2552,7 +2552,7 @@ def image_revision_upload_process(request):
         return HttpResponseRedirect(image.get_absolute_url())
 
     image_id = request.POST['image_id']
-    image = Image.objects.get(id=image_id)
+    image = Image.all_objects.get(id=image_id)
 
     if settings.READONLY_MODE:
         messages.error(request, _("AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
