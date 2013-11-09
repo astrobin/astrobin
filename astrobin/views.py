@@ -2516,7 +2516,7 @@ def bring_to_attention_process(request):
     (usernames, value) = valueReader(request.POST, 'users')
     recipients = []
     for username in usernames:
-        try
+        try:
             user = User.objects.get(username=username)
             recipients.append(user)
         except User.DoesNotExist:
