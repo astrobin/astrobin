@@ -66,7 +66,7 @@ def astrobin_image(
     if alias == '':
         alias = 'thumb'
 
-    if alias in ('regular_inverted', 'hd_inverted', 'real_inverted'):
+    if alias in ('gallery_inverted', 'regular_inverted', 'hd_inverted', 'real_inverted'):
         mod = 'inverted'
     else:
         mod = None
@@ -141,7 +141,7 @@ def astrobin_image(
 
     badges = []
 
-    if alias in ('thumb', 'gallery', 'regular', 'regular_inverted'):
+    if alias in ('thumb', 'gallery', 'gallery_inverted', 'regular', 'regular_inverted'):
         if image.iotd_date():
             badges.append('iotd')
 
