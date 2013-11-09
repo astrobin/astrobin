@@ -894,6 +894,7 @@ class Image(HasSolutionMixin, models.Model):
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
+        log.debug("Image %d: requested raw thumbnail: %s / %s" % (self.id, alias, revision_label))
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
         if revision_label is None:
@@ -902,6 +903,8 @@ class Image(HasSolutionMixin, models.Model):
         # Compatibility
         if alias in ('revision', 'runnerup'):
             alias = 'thumb'
+
+        log.debug("Image %d: requested raw thumbnail: %s / %s" % (self.id, alias, revision_label))
 
         options = settings.THUMBNAIL_ALIASES[''][alias].copy()
 
@@ -1011,7 +1014,7 @@ class Image(HasSolutionMixin, models.Model):
         if revision_label in (None, 'final'):
             revision_label = self.get_final_revision_label()
 
-        log.debug("Requested thumbnail: %d / %s / %s" % (self.id, revision_label, alias))
+        log.debug("Image %d: requested thumbnail: %s / %s" % (self.id, revision_label, alias))
 
         cache_key = self.thumbnail_cache_key(field, alias)
         url = cache.get(cache_key)
