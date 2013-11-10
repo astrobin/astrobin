@@ -785,7 +785,7 @@ class Image(HasSolutionMixin, models.Model):
     def save(self, *args, **kwargs):
         if self.id:
             try:
-                image = Image.objects.get(id = self.id)
+                image = Image.all_objects.get(id = self.id)
             except Image.DoesNotExist:
                 # Abort!
                 print "Aborting because image was deleted."
