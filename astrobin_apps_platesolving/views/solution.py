@@ -151,6 +151,7 @@ class SolutionList(generics.ListCreateAPIView):
     queryset = Solution.objects.order_by('pk')
     serializer_class = SolutionSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_fields = ('content_type', 'object_id',)
 
 
 class SolutionDetail(generics.RetrieveUpdateDestroyAPIView):
