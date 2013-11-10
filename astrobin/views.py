@@ -875,6 +875,7 @@ def image_full(request, id, r):
         extra_context = {
             'real': real,
             'alias': alias,
+            'mod': mod,
             'revision_label': r,
         })
 
