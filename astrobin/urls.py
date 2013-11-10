@@ -60,6 +60,7 @@ urlpatterns = patterns('',
 
     url(r'^$', views.index, name='index'),
 
+    url(r'^(?P<id>\d+)/flagthumbs/$', views.image_flag_thumbs, name='image_flag_thumbs'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', views.image_thumb, name='image_thumb'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', views.image_rawthumb, name='image_rawthumb'),
