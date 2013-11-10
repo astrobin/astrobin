@@ -949,10 +949,6 @@ def image_upload_process(request):
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
-    if ext in ('.png', '.PNG'):
-        messages.error(request, _("AstroBin is currently having some difficulties with PNG files. Please upload this as a JPG until we solve the problem. Sorry for the inconvenience!"))
-        return HttpResponseRedirect(reverse('image_upload'))
-
     if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error()
 
@@ -960,6 +956,9 @@ def image_upload_process(request):
         from PIL import Image as PILImage
         trial_image = PILImage.open(image_file)
         trial_image.verify()
+
+        if ext == '.png' and trial_image.mode == 'I':
+            messages.warning(request, _("You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
     except:
         return upload_error()
 
@@ -2583,10 +2582,6 @@ def image_revision_upload_process(request):
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
-    if ext in ('.png', '.PNG'):
-        messages.error(request, _("AstroBin is currently having some difficulties with PNG files. Please upload this as a JPG until we solve the problem. Sorry for the inconvenience!"))
-        return HttpResponseRedirect(reverse('image_upload'))
-
     if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error(image)
 
@@ -2594,6 +2589,9 @@ def image_revision_upload_process(request):
         from PIL import Image as PILImage
         trial_image = PILImage.open(image_file)
         trial_image.verify()
+
+        if ext == '.png' and trial_image.mode == 'I':
+            messages.warning(request, _("You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
     except:
         return upload_error(image)
 
