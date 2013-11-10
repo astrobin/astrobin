@@ -53,7 +53,7 @@
         {% endcomment %}
         astrobin_common.init_ajax_csrf_token();
 
-        $('img.astrobin-image[data-preloaded=true]').each(function() {
+        $('img.astrobin-image.capty[data-preloaded=true]').each(function() {
             var $img = $(this);
             setTimeout(function() {
                 var height = $img.height();;
