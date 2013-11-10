@@ -19,6 +19,7 @@ class ContentTypeList(generics.ListAPIView):
     model = ContentType
     serializer_class = ContentTypeSerializer
     permission_classes = (ReadOnly,)
+    filter_fields = ('app_label', 'model',)
 
 
 class ContentTypeDetail(generics.RetrieveAPIView):
