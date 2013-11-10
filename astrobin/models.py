@@ -1076,9 +1076,14 @@ class Image(HasSolutionMixin, models.Model):
                 else:
                     log.debug("Image %d: unable to find cache key %s" % (self.id, cache_key))
 
-                # Then we delete the local file cache
+                # Then we delete the remote thumbnail
                 filename = thumbnailer.get_thumbnail_name(options)
+                field.storage.delete(filename)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename))
+
+                # Then we delete the local file cache
                 local_filename = field.storage.generate_local_name(field.name)
+                log.debug("Image %d: deleted local file %s" % (self.id, local_filename))
 
                 try:
                     os.remove(os.path.join(field.storage.local_storage.location, local_filename))
