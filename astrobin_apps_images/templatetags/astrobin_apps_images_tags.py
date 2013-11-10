@@ -150,7 +150,8 @@ def astrobin_image(
             badges.append('top100')
 
 
-    cache_key = image.thumbnail_cache_key(image.get_thumbnail_field(revision), alias)
+    field = image.get_thumbnail_field(revision)
+    cache_key = image.thumbnail_cache_key(field, alias)
     thumb_url = cache.get(cache_key)
 
     get_thumb_url = None
@@ -180,7 +181,7 @@ def astrobin_image(
         'url'           : url,
         'show_tooltip'  : show_tooltip,
         'request'       : context['request'],
-        'cache_key'     : "%d_%s_%s" % (image.id, revision, alias),
+        'cache_key'     : "%d_%s_%s_%s" % (image.id, revision, alias, field),
         'badges'        : badges,
         'animated'      : animated,
         'get_thumb_url' : get_thumb_url,
