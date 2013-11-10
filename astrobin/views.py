@@ -1394,6 +1394,7 @@ def image_delete(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
+    image.thumbnail_invalidate_all()
     image.delete()
     messages.success(request, _("Image deleted."));
     return HttpResponseRedirect(request.user.get_absolute_url());
@@ -1411,6 +1412,7 @@ def image_delete_revision(request, id):
         image.is_final = True
         image.save()
 
+    image.thumbnail_invalidate_all()
     revision.delete()
     messages.success(request, _("Revision deleted."));
 
@@ -1457,6 +1459,7 @@ def image_delete_original(request, id):
         solution.content_object = image
         solution.save()
 
+    image.thumbnail_invalidate_all()
     final.delete()
 
     messages.success(request, _("Image deleted."));
