@@ -1054,6 +1054,7 @@ class Image(HasSolutionMixin, models.Model):
     def thumbnail_invalidate_all(self):
         from django.core.cache import cache
         from easy_thumbnails.files import get_thumbnailer
+        from astrobin_apps_images.models import ThumbnailGroup
 
         def invalidate_from_field(field, revision_label = '0'):
             log.debug("Image %d: invalidating thumbnails for field / label: %s / %s" % (self.id, field, revision_label))
