@@ -2257,6 +2257,9 @@ def user_profile_save_gear(request):
 
 @login_required
 def user_profile_flickr_import(request):
+    from django.core.files import File
+    from django.core.files.temp import NamedTemporaryFile
+
     response_dict = {
         'readonly': settings.READONLY_MODE
     }
@@ -2329,15 +2332,16 @@ def user_profile_flickr_import(request):
 
                 if found_size is not None:
                     source = found_size.attrib['source']
-                    file = urllib2.urlopen(source)
-                    filename = str(uuid4())
-                    original_ext = '.jpg'
-                    destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
-                    destination.write(file.read())
-                    destination.close()
+
+                    img = NamedTemporaryFile(delete=True)
+                    img.write(urllib2.urlopen(source).read())
+                    img.flush()
+                    img.seek(0)
+                    f = File(img)
+
 
                     profile = request.user.userprofile
-                    image = Image(filename=filename, original_ext=original_ext,
+                    image = Image(image_file = f,
                                   user=request.user,
                                   title=title if title is not None else '',
                                   description=description if description is not None else '',
