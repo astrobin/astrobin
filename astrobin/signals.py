@@ -264,7 +264,7 @@ def solution_post_save(sender, instance, created, **kwargs):
 
     try:
         target = ct.get_object_for_this_type(pk = instance.object_id)
-    except ct.get_model().DoesNotExist:
+    except ct.model_class().DoesNotExist:
         return
 
     if ct.model == 'image':
