@@ -56,7 +56,7 @@
         $('img.astrobin-image.capty[data-preloaded=true]').each(function() {
             var $img = $(this);
             setTimeout(function() {
-                var height = $img.height();;
+                var height = parseInt($img.attr('height'));
                 $img.capty({
                     animation: 'slide',
                     speed: 200,
