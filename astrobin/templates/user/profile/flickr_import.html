@@ -31,9 +31,9 @@
 
                     <div class="form-actions">
                         {% if flickr_sets %}
-                        <input class="btn btn-primary" type="submit" value="{% trans "Import photos" %} &rarr;"/>
+                        <input class="btn btn-primary btn-flickr" type="submit" value="{% trans "Import photos" %} &rarr;"/>
                         {% else %}
-                        <input class="btn btn-primary" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
+                        <input class="btn btn-primary btn-flickr" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
                         {% endif %}
                     </div>
                 </form>
@@ -63,7 +63,7 @@ $(function() {
         // we have passed the user authentication phase
         phase++;
     }
-    $('.btn').click(function() {
+    $('.btn-flickr').click(function() {
         if (phase == 0) {
                 window.location = link;
         } else if (phase == 1) { // Time to ask for the photos in the set.
@@ -80,8 +80,8 @@ $(function() {
                                 var ret = '\
                                     <h3>{% trans "Click to select the photos you want to import" %}</h3> \
                                     <ul class="select-links"> \
-                                        <li><a id="all" href="#">{% trans "Select all" %}</a></li> \
-                                        <li><a id="none" href="#">{% trans "Select none" %}</a></li> \
+                                        <li><a class="btn" id="all" href="#">{% trans "Select all" %}</a></li> \
+                                        <li><a class="btn" id="none" href="#">{% trans "Select none" %}</a></li> \
                                     </ul>';
                                 $.each(photos, function(id, url) {
                                     ret += '\
@@ -103,9 +103,9 @@ $(function() {
             $('p#flickr_progress').removeClass('hidden');
             $('p#flickr_progress').html('<img src="{{STATIC_URL}}images/loading-bar.gif" alt="Loading..."/>');
             $('p#flickr_progress_message').removeClass('hidden');
-            $('.btn').hide();
+            $('.btn-flickr').hide();
             $('p#flickr_progress_message').html("<strong>{% trans "Importing images." %}</strong> {% trans "Do not navigate away from this window: this might take a while!" %}");
-            
+
             $.ajax({
                     type: 'POST',
                     url: '/profile/edit/flickr/',
