@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load tags %}
 
-{% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s bookmarks{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with user=user %}{{user}}'s bookmarks{% endblocktrans %}{% endblock %}
 
 {% block content %}
     {% include 'user/profile-subnav.html' %}

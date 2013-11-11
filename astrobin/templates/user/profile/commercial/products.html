@@ -45,8 +45,8 @@
                         </tr>
                         {% for item in commercial_gear_list %}
                             <tr data-id="{{item.id}}">
-                                <td class="gear-ids" data-gear-ids="{% for g in item.gear_set.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
-                                    {% for g in item.gear_set.all %}
+                                <td class="gear-ids" data-gear-ids="{% for g in item.base_gear.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
+                                    {% for g in item.base_gear.all %}
                                         <a rel="popover" class="gear-popover"
                                            data-load="{% url gear_popover_ajax g.id %}"
                                            href="{% url gear_page g.id g.slug %}">
@@ -58,22 +58,22 @@
                                     {% if item.proper_make %}
                                         {{item.proper_make}}
                                     {% else %}
-                                        {{item.gear_set.all.0.make}}
+                                        {{item.base_gear.all.0.make}}
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if item.proper_name %}
                                         {{item.proper_name}}
                                     {% else %}
-                                        {{item.gear_set.all.0.name}}
+                                        {{item.base_gear.all.0.name}}
                                     {% endif %}
                                 </td>
-                                <td>{% gear_set_owners item.gear_set %}</td>
-                                <td>{% gear_set_images item.gear_set %}</td>
+                                <td>{% gear_set_owners item.base_gear %}</td>
+                                <td>{% gear_set_images item.base_gear %}</td>
 
                                 {% ifequal user request.user %}
                                 <td>
-                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id item.gear_set.all.0.slug %}">
+                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.base_gear.all.0.id item.base_gear.all.0.slug %}">
                                         <i class="icon-eye-open"></i>
                                     </a>
                                     <a rel="tooltip" title="{% trans "Edit" %}" href="{% url commercial_products_edit item.id %}">
@@ -127,8 +127,8 @@
                         </tr>
                         {% for item in retailed_gear_list %}
                             <tr data-id="{{item.id}}">
-                                <td class="gear-ids" data-gear-ids="{% for g in item.gear_set.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
-                                    {% for g in item.gear_set.all %}
+                                <td class="gear-ids" data-gear-ids="{% for g in item.base_gear.all %}{{g.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
+                                    {% for g in item.base_gear.all %}
                                         <a rel="popover" class="gear-popover"
                                            data-load="{% url gear_popover_ajax g.id %}"
                                            href="{% url gear_page g.id g.slug %}">
@@ -140,22 +140,22 @@
                                     {% if item.proper_make %}
                                         {{item.proper_make}}
                                     {% else %}
-                                        {{item.gear_set.all.0.make}}
+                                        {{item.base_gear.all.0.make}}
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if item.proper_name %}
                                         {{item.proper_name}}
                                     {% else %}
-                                        {{item.gear_set.all.0.name}}
+                                        {{item.base_gear.all.0.name}}
                                     {% endif %}
                                 </td>
-                                <td>{% gear_set_owners item.gear_set %}</td>
-                                <td>{% gear_set_images item.gear_set %}</td>
+                                <td>{% gear_set_owners item.base_gear %}</td>
+                                <td>{% gear_set_images item.base_gear %}</td>
 
                                 {% ifequal user request.user %}
                                 <td>
-                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.gear_set.all.0.id item.gear_set.all.0.slug %}">
+                                    <a rel="tooltip" title="{% trans "View" %}" href="{% url gear_page item.base_gear.all.0.id item.base_gear.all.0.slug %}">
                                         <i class="icon-eye-open"></i>
                                     </a>
                                     <a rel="tooltip" title="{% trans "Edit" %}" href="{% url retailed_products_edit item.id %}">

@@ -6,7 +6,8 @@
 {% load common_tags %}
 {% load tags %}
 
-{% block title %}AstroBin - {% trans "My messages" %}{% endblock %}
+{% block title %}{% trans "My messages" %}{% endblock %}
+
 {% block content %}
     {% autopaginate thread_list 25 %}
     <div class="row">

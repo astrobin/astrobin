@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
     <head>
-        <title>{% block title %}AstroBin{% endblock %}</title>
+        <title>{% block title %}{% endblock %} | AstroBin</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />

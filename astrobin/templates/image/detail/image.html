@@ -3,7 +3,7 @@
 
 <div class="main-image">
     <div class="main-image-inner">
-        {% astrobin_image image 'regular' revision_label 'full' mod %}
+        {% astrobin_image image alias revision_label 'full' %}
 
         {% if show_solution %}
             <div class="astrobin-image-container plot-overlay {% if mod == 'solved' %} plot-overlay-fixed{% endif %}">

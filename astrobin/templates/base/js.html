@@ -53,6 +53,19 @@
         {% endcomment %}
         astrobin_common.init_ajax_csrf_token();
 
+        $('img.astrobin-image.capty[data-preloaded=true]').each(function() {
+            var $img = $(this);
+            setTimeout(function() {
+                var height = parseInt($img.attr('height'));
+                $img.capty({
+                    animation: 'slide',
+                    speed: 200,
+                    height: height
+                });
+                $img.closest('.capty-wrapper').find('.capty-target').show();
+            },1000);
+        });
+
         $('.dropdown-toggle').dropdown();
         $('.carousel').carousel();
         $('.nav-tabs').tab();

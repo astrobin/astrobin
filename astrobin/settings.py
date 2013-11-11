@@ -11,7 +11,7 @@ LOCAL_STATIC_STORAGE = True
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '66'
+MEDIA_VERSION = '67'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = False
@@ -562,7 +562,7 @@ THUMBNAIL_ALIASES = {
         'regular_inverted': {'size': (620, 0), 'crop': False, 'invert': True, 'watermark': True},
 
         'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
-        'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'inverted': True},
+        'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'invert': True},
         'thumb': {'size': (80, 80), 'crop': True, 'rounded': 'smart', 'quality': 60},
 
         # Tricks
