@@ -140,12 +140,13 @@ server {
 
 server {
     server_name translate.astrobin.com;
-      
-    location ^~ /html/ {
-        root /webserver/pootle/;
-	expires 30d;
+    root /home/astrobin/venv/translate.astrobin.com/lib/python2.7/site-packages/pootle;
+ 
+    location ^~ /assets/ {
+        root /home/astrobin/venv/translate.astrobin.com/lib/python2.7/site-packages/pootle;
+        expires 30d;
     }
-
+     
     location / {
         fastcgi_pass 127.0.0.1:8084;
         fastcgi_param QUERY_STRING $query_string;
