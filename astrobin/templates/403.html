@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
+{% block title %}{% trans "You are not allowed to see this page." %}{% endblock %}
+
 {% block content %}
     <h1>{% trans "You are not allowed to see this page." %}</h1>
 {% endblock %}

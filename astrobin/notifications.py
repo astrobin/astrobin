@@ -11,20 +11,30 @@ from notification import models as notification
 import persistent_messages
 
 def push_notification(recipients, notice_type, data):
+    current_language = translation.get_language()
+
     data['notices_url'] = settings.ASTROBIN_BASE_URL + '/'
-    data['LANGUAGE_CODE'] = translation.get_language()
+
     try:
         notification.send(recipients, notice_type, data)
     except:
         pass
 
-    notification_message = render_to_string(
-        'notification/%s/%s' % (notice_type, 'short.html'),
-         data)
-
     request = get_request()
 
     for r in recipients:
+        language = r.userprofile.language
+
+        if language is not None:
+            if language == 'pl':
+                # Polish is currently broken...
+                language = 'en'
+            translation.activate(language)
+
+        notification_message = render_to_string(
+            'notification/%s/%s' % (notice_type, 'short.html'),
+             data)
+
         persistent_messages.add_message(
             request,
             persistent_messages.INFO,
@@ -38,4 +48,6 @@ def push_notification(recipients, notice_type, data):
                 urllib2.urlopen(url, encoded_data);
             except:
                 pass
+
+    translation.activate(current_language)
 

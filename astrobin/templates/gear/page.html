@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
+{% load astrobin_apps_images_tags %}
 {% load i18n tags bootstrap_toolkit avatar_tags markup %}
 {% load hitcount_tags %}
 {% load thumbnail %}
 
-{% block title %}AstroBin - {% gear_name gear %}{% endblock %}
+{% block title %}{% gear_name gear %}{% endblock %}
 
 {% block content %}
     <!-- TODO: check that this page works -->
@@ -21,10 +22,7 @@
             <div class="span8">
                 {% if show_image %}
                     <div class="gear-image">
-                        {% with gear.commercial.image as image %}
-                            <img src="{{image.image_file|thumbnail_url:'regular'}}""
-                                 alt="{{image.title|escape}}"/>
-                        {% endwith %}
+                        {% astrobin_image gear.commercial.image 'regular' %}
                     </div>
                 {% endif %}
 
@@ -33,11 +31,11 @@
                         <div class="header">
                             <h4><i class="icon-picture"></i> {% trans "Other images" %}</h4>
                         </div>
-                        {% for r in commercial_image_revisions %}
-                            <a href="{% url image_detail r.image.id r.label %}" target="{{r.image.id}}_{{r.label}}">
-                                <img src="{{r.image.image_file|thumbnail_url:'thumb'}}"
-                                     alt="{{r.image.title|escape}}"/>
-                             </a>
+                        <ul class="thumbnails astrobin-thumbnails">
+                        {% for r in gear.commercial.image.revisions.all %}
+                            <li class="thumbnail astrobin-thumbnail revisions">
+                                {% astrobin_image gear.commercial.image 'thumb' r.label %}
+                            </li>
                         {% endfor %}
                     </div>
                 {% endif %}

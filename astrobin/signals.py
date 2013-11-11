@@ -30,7 +30,7 @@ from .gear import get_correct_gear
 
 
 def image_post_save(sender, instance, created, **kwargs):
-    if created:
+    if created and not instance.is_wip:
         followers = [x.user for x in ToggleProperty.objects.filter(
             property_type = "follow",
             content_type = ContentType.objects.get_for_model(User),
@@ -44,7 +44,7 @@ def image_post_save(sender, instance, created, **kwargs):
 
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
-    if created:
+    if created and not instance.image.is_wip:
         followers = [x.user for x in ToggleProperty.objects.filter(
             property_type = "follow",
             content_type = ContentType.objects.get_for_model(User),
@@ -64,6 +64,10 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         url = "http://astrobin.com/" + instance.get_absolute_url()
 
         if model_class == Image:
+            image = instance.content_type.get_object_for_this_type(id = instance.object_id)
+            if image.is_wip:
+                return
+
             if instance.author != obj.user:
                 push_notification(
                     [obj.user], 'new_comment',
@@ -124,6 +128,12 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 verb = "likes"
             elif instance.property_type == "bookmark":
                 verb = "bookmarked"
+
+            if instance.content_type == ContentType.objects.get_for_model(Image):
+                image = instance.content_type.get_object_for_this_type(id = instance.object_id)
+                if image.is_wip:
+                    return
+
             act.send(instance.user, verb = verb, target = instance.content_object)
 
             if instance.content_type == ContentType.objects.get_for_model(Image):
@@ -254,7 +264,7 @@ def solution_post_save(sender, instance, created, **kwargs):
 
     try:
         target = ct.get_object_for_this_type(pk = instance.object_id)
-    except ct.get_model().DoesNotExist:
+    except ct.model_class().DoesNotExist:
         return
 
     if ct.model == 'image':

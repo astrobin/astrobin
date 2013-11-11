@@ -57,8 +57,7 @@ def gallery_thumbnail_inverted(image, revision_label):
 # actual thumbnail.
 def astrobin_image(
     context, image, alias,
-    revision = 'final', url_size = 'regular',
-    mod = None):
+    revision = 'final', url_size = 'regular'):
 
     response_dict = {
         'provide_size': True,
@@ -66,6 +65,11 @@ def astrobin_image(
 
     if alias == '':
         alias = 'thumb'
+
+    if alias in ('gallery_inverted', 'regular_inverted', 'hd_inverted', 'real_inverted'):
+        mod = 'inverted'
+    else:
+        mod = None
 
     size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
 
@@ -75,10 +79,9 @@ def astrobin_image(
             'image': '',
             'alias': alias,
             'revision': revision,
-            'mod': mod,
             'size_x': size[0],
             'size_y': size[1],
-            'cache_key': 'astrobin_image_no_image',
+            'capty_cache_key': 'astrobin_image_no_image',
         }
 
     w = image.w
@@ -138,7 +141,7 @@ def astrobin_image(
 
     badges = []
 
-    if alias in ('thumb', 'gallery', 'regular'):
+    if alias in ('thumb', 'gallery', 'gallery_inverted', 'regular', 'regular_inverted'):
         if image.iotd_date():
             badges.append('iotd')
 
@@ -147,12 +150,8 @@ def astrobin_image(
             badges.append('top100')
 
 
-    cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
-        'astrobin.image',
-        image.get_thumbnail_field(revision),
-        alias,
-        mod)
-
+    field = image.get_thumbnail_field(revision)
+    cache_key = image.thumbnail_cache_key(field, alias)
     thumb_url = cache.get(cache_key)
 
     get_thumb_url = None
@@ -161,9 +160,6 @@ def astrobin_image(
             'id': image.id,
             'alias': alias,
         }
-
-        if mod and mod in ('none', 'regular', 'inverted'):
-            get_thumb_kwargs['mod'] = mod
 
         if revision is None or revision != 'final':
             get_thumb_kwargs['r'] = revision
@@ -176,16 +172,16 @@ def astrobin_image(
         'status'        : 'success',
         'image'         : image,
         'alias'         : alias,
+        'mod'           : mod,
         'revision'      : revision,
         'size_x'        : size[0],
         'size_y'        : size[1],
         'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
-        'mod'           : mod,
         'real'          : alias in ('real', 'real_inverted'),
         'url'           : url,
         'show_tooltip'  : show_tooltip,
         'request'       : context['request'],
-        'cache_key'     : "%s_%s_%s_%d" % (mod if mod else 'none', alias, revision, image.id),
+        'capty_cache_key': "%d_%s_%s" % (image.id, revision, alias),
         'badges'        : badges,
         'animated'      : animated,
         'get_thumb_url' : get_thumb_url,
@@ -203,3 +199,4 @@ def random_id(context, size = 8, chars = string.ascii_uppercase + string.digits)
 register.inclusion_tag(
     'astrobin_apps_images/snippets/image.html',
     takes_context = True)(astrobin_image)
+

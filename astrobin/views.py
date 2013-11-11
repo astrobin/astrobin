@@ -194,7 +194,8 @@ def index(request, template = 'index/root.html', extra_context = None):
             # The is no IOTD
             pass
 
-        response_dict['recent_commercial_gear'] = Image.objects.exclude(featured_gear = None)
+        response_dict['recent_commercial_gear'] =\
+            [x for x in Image.objects.exclude(featured_gear = None) if x.featured_gear.all()[0].is_paid()]
 
 
         if section == 'global':
@@ -464,7 +465,7 @@ def no_javascript(request):
 def image_detail(request, id, r):
     """ Show details of an image"""
     image = get_object_or_404(
-        Image.objects.all(),
+        Image.all_objects,
         pk = id)
 
     response_dict = {}
@@ -670,7 +671,10 @@ def image_detail(request, id, r):
     ##############
 
     uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
+    alias = 'regular'
     mod = request.GET.get('mod')
+    if mod == 'inverted':
+        alias = 'regular_inverted'
 
     subjects = image.objects_in_field.split(',') if image.objects_in_field else ''
     skyplot_zoom1 = None
@@ -729,12 +733,13 @@ def image_detail(request, id, r):
     response_dict = dict(response_dict.items() + {
         'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
 
+        'alias': alias,
+        'mod': mod,
         'revisions': revisions,
         'is_revision': is_revision,
         'revision_image': revision_image,
         'revision_label': r,
 
-        'mod': mod,
         'instance_to_platesolve': instance_to_platesolve,
         'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
         'skyplot_zoom1': skyplot_zoom1,
@@ -760,6 +765,7 @@ def image_detail(request, id, r):
         'upload_revision_form': ImageRevisionUploadForm(),
         'dates_label': _("Dates"),
         'uploaded_on': uploaded_on,
+        'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),
         'subjects_short': subjects[:subjects_limit],
         'subjects_reminder': subjects[subjects_limit:],
         'subjects_all': subjects,
@@ -786,22 +792,30 @@ def image_detail(request, id, r):
 
     return object_detail(
         request,
-        queryset = Image.objects.all(),
+        queryset = Image.all_objects.all(),
         object_id = id,
         template_name = 'image/detail.html',
         template_object_name = 'image',
         extra_context = response_dict)
 
 
+@login_required
+@require_POST
+def image_flag_thumbs(request, id):
+    image = get_object_or_404(Image.all_objects, id = id)
+    image.thumbnail_invalidate_all()
+    messages.success(request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
+    return HttpResponseRedirect(reverse("image_detail", kwargs= {'id': id}))
+
+
 @require_GET
-def image_thumb(request, id, r, alias, mod):
+def image_thumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
 
     url = settings.IMAGES_URL + image.image_file.name
     if 'animated' not in request.GET:
         url = image.thumbnail(alias, {
             'revision_label': r,
-            'mod': mod,
         })
 
     return HttpResponse(
@@ -812,11 +826,10 @@ def image_thumb(request, id, r, alias, mod):
 
 
 @require_GET
-def image_rawthumb(request, id, r, alias, mod):
+def image_rawthumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
     url = image.thumbnail(alias, {
         'revision_label': r,
-        'mod': mod,
     })
 
     return HttpResponseRedirect(url)
@@ -824,7 +837,7 @@ def image_rawthumb(request, id, r, alias, mod):
 
 @require_GET
 def image_full(request, id, r):
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(Image.all_objects, pk=id)
 
     ################################
     # REDIRECT TO CORRECT REVISION #
@@ -864,13 +877,14 @@ def image_full(request, id, r):
 
     return object_detail(
         request,
-        queryset = Image.objects.all(),
+        queryset = Image.all_objects.all(),
         object_id = id,
         template_name = 'image/full.html',
         template_object_name = 'image',
         extra_context = {
             'real': real,
-            'alias': 'real' if real else 'hd',
+            'alias': alias,
+            'mod': mod,
             'revision_label': r,
         })
 
@@ -935,10 +949,6 @@ def image_upload_process(request):
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
-    if ext in ('.png', '.PNG'):
-        messages.error(request, _("AstroBin is currently having some difficulties with PNG files. Please upload this as a JPG until we solve the problem. Sorry for the inconvenience!"))
-        return HttpResponseRedirect(reverse('image_upload'))
-
     if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error()
 
@@ -946,6 +956,9 @@ def image_upload_process(request):
         from PIL import Image as PILImage
         trial_image = PILImage.open(image_file)
         trial_image.verify()
+
+        if ext == '.png' and trial_image.mode == 'I':
+            messages.warning(request, _("You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
     except:
         return upload_error()
 
@@ -953,6 +966,9 @@ def image_upload_process(request):
     image = form.save(commit = False)
     image.user = request.user
     image.license = profile.default_license
+
+    if 'wip' in request.POST:
+        image.is_wip = True
 
     image.image_file.file.seek(0) # Because we opened it with PIL
     image.save()
@@ -1006,7 +1022,7 @@ def image_edit_watermark(request, id):
 @login_required
 @require_GET
 def image_edit_gear(request, id):
-    image = Image.objects.get(pk=id)
+    image = Image.all_objects.get(pk=id)
     profile = image.user.userprofile
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -1168,7 +1184,7 @@ def image_edit_license(request, id):
 @require_POST
 def image_edit_save_basic(request):
     image_id = request.POST.get('image_id')
-    image = Image.objects.get(pk=image_id)
+    image = Image.all_objects.get(pk=image_id)
     form = ImageEditBasicForm(user = image.user, data=request.POST, instance=image)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -1231,7 +1247,7 @@ def image_edit_save_watermark(request):
 @require_POST
 def image_edit_save_gear(request):
     image_id = request.POST.get('image_id')
-    image = Image.objects.get(pk=image_id)
+    image = Image.all_objects.get(pk=image_id)
     profile = image.user.userprofile
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -1272,7 +1288,7 @@ def image_edit_save_gear(request):
 @require_POST
 def image_edit_save_acquisition(request):
     image_id = request.POST.get('image_id')
-    image = Image.objects.get(pk=image_id)
+    image = Image.all_objects.get(pk=image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1377,6 +1393,7 @@ def image_delete(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
+    image.thumbnail_invalidate_all()
     image.delete()
     messages.success(request, _("Image deleted."));
     return HttpResponseRedirect(request.user.get_absolute_url());
@@ -1394,6 +1411,7 @@ def image_delete_revision(request, id):
         image.is_final = True
         image.save()
 
+    image.thumbnail_invalidate_all()
     revision.delete()
     messages.success(request, _("Revision deleted."));
 
@@ -1440,6 +1458,7 @@ def image_delete_original(request, id):
         solution.content_object = image
         solution.save()
 
+    image.thumbnail_invalidate_all()
     final.delete()
 
     messages.success(request, _("Image deleted."));
@@ -1738,7 +1757,7 @@ def user_page_commercial_products(request, username):
         'profile': profile,
         'user_is_producer': user_is_producer(user),
         'user_is_retailer': user_is_retailer(user),
-        'commercial_gear_list': CommercialGear.objects.filter(producer = user).exclude(gear = None),
+        'commercial_gear_list': CommercialGear.objects.filter(producer = user).exclude(base_gear = None),
         'retailed_gear_list': RetailedGear.objects.filter(retailer = user).exclude(gear = None),
         'claim_commercial_gear_form': ClaimCommercialGearForm(user = user),
         'merge_commercial_gear_form': MergeCommercialGearForm(user = user),
@@ -2238,6 +2257,9 @@ def user_profile_save_gear(request):
 
 @login_required
 def user_profile_flickr_import(request):
+    from django.core.files import File
+    from django.core.files.temp import NamedTemporaryFile
+
     response_dict = {
         'readonly': settings.READONLY_MODE
     }
@@ -2310,15 +2332,16 @@ def user_profile_flickr_import(request):
 
                 if found_size is not None:
                     source = found_size.attrib['source']
-                    file = urllib2.urlopen(source)
-                    filename = str(uuid4())
-                    original_ext = '.jpg'
-                    destination = open(settings.UPLOADS_DIRECTORY + filename + original_ext, 'wb+')
-                    destination.write(file.read())
-                    destination.close()
+
+                    img = NamedTemporaryFile(delete=True)
+                    img.write(urllib2.urlopen(source).read())
+                    img.flush()
+                    img.seek(0)
+                    f = File(img)
+
 
                     profile = request.user.userprofile
-                    image = Image(filename=filename, original_ext=original_ext,
+                    image = Image(image_file = f,
                                   user=request.user,
                                   title=title if title is not None else '',
                                   description=description if description is not None else '',
@@ -2511,9 +2534,11 @@ def bring_to_attention_process(request):
     (usernames, value) = valueReader(request.POST, 'users')
     recipients = []
     for username in usernames:
-        user = User.objects.get(username=username)
-        if user is not None:
+        try:
+            user = User.objects.get(username=username)
             recipients.append(user)
+        except User.DoesNotExist:
+            pass
 
     push_notification(recipients, 'attention_request',
                       {'object':image,
@@ -2547,7 +2572,7 @@ def image_revision_upload_process(request):
         return HttpResponseRedirect(image.get_absolute_url())
 
     image_id = request.POST['image_id']
-    image = Image.objects.get(id=image_id)
+    image = Image.all_objects.get(id=image_id)
 
     if settings.READONLY_MODE:
         messages.error(request, _("AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
@@ -2561,10 +2586,6 @@ def image_revision_upload_process(request):
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
-    if ext in ('.png', '.PNG'):
-        messages.error(request, _("AstroBin is currently having some difficulties with PNG files. Please upload this as a JPG until we solve the problem. Sorry for the inconvenience!"))
-        return HttpResponseRedirect(reverse('image_upload'))
-
     if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
         return upload_error(image)
 
@@ -2572,6 +2593,9 @@ def image_revision_upload_process(request):
         from PIL import Image as PILImage
         trial_image = PILImage.open(image_file)
         trial_image.verify()
+
+        if ext == '.png' and trial_image.mode == 'I':
+            messages.warning(request, _("You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
     except:
         return upload_error(image)
 
@@ -3082,11 +3106,7 @@ def gear_page(request, id, slug):
 
     all_images = Image.by_gear(gear, gear_type).filter(is_wip = False)
 
-    commercial_image_revisions = None
-    if gear.commercial and gear.commercial.image:
-        commercial_image_revisions = gear.commercial.image.revisions.all()
-
-    show_commercial = (gear.commercial and gear.commercial.is_paid) or (gear.commercial and gear.commercial.producer == request.user)
+    show_commercial = (gear.commercial and gear.commercial.is_paid()) or (gear.commercial and gear.commercial.producer == request.user)
 
     return object_detail(
         request,
@@ -3105,12 +3125,11 @@ def gear_page(request, id, slug):
                 (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
                  getattr(gear, k[0]),
                  k[1]) for k in gear.attributes()],
-            'commercial_image_revisions': commercial_image_revisions,
 
             'show_tagline': show_commercial and gear.commercial.tagline,
             'show_link': show_commercial and gear.commercial.link,
             'show_image': show_commercial and gear.commercial.image,
-            'show_other_images': show_commercial and commercial_image_revisions,
+            'show_other_images': show_commercial and gear.commercial.image and gear.commercial.image.revisions.all(),
             'show_description': show_commercial and gear.commercial.description,
         })
 
