@@ -181,7 +181,7 @@ def astrobin_image(
         'url'           : url,
         'show_tooltip'  : show_tooltip,
         'request'       : context['request'],
-        'cache_key'     : "%d_%s_%s_%s" % (image.id, revision, alias, field),
+        'capty_cache_key': "%d_%s_%s" % (image.id, revision, alias),
         'badges'        : badges,
         'animated'      : animated,
         'get_thumb_url' : get_thumb_url,

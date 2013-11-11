@@ -15,8 +15,6 @@
             </div>
         {% endif %}
 
-        {% cache 43200 astrobin_image cache_key %}
-
         {% random_id %}
 
         {% if alias != 'histogram' %}
@@ -77,6 +75,7 @@
 
         {% if alias == 'thumb' or alias == 'gallery' %}
             <div id="capty-target-{{image.id}}-{{randomid}}" class="capty-target">
+            {% cache 43200 astrobin_image_capty capty_cache_key %}
                 <div class="capty-caption-content">
                     <div class="link-overlay" style="width:{{size_x}}px; height:{{size_y}}px">
                         <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
@@ -113,8 +112,8 @@
                         </table>
                     {% endif %}
                 </div>
+            {% endcache %}
             </div>
         {% endif %}
-        {% endcache %}
     </div>
 {% endif %}
