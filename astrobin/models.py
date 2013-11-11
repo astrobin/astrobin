@@ -1054,12 +1054,19 @@ class Image(HasSolutionMixin, models.Model):
     def thumbnail_invalidate_all(self):
         from django.core.cache import cache
         from easy_thumbnails.files import get_thumbnailer
+
+        from astrobin.s3utils import OverwritingFileSystemStorage
         from astrobin_apps_images.models import ThumbnailGroup
 
         def invalidate_from_field(field, revision_label = '0'):
             log.debug("Image %d: invalidating thumbnails for field / label: %s / %s" % (self.id, field, revision_label))
 
             thumbnailer = get_thumbnailer(field)
+            local_filename = field.storage.generate_local_name(field.name)
+            local_thumbnailer = get_thumbnailer(
+                    OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                    local_filename)
+
             aliases = settings.THUMBNAIL_ALIASES['']
             for alias, thumbnail_settings in aliases.iteritems():
                 options = settings.THUMBNAIL_ALIASES[''][alias].copy()
@@ -1081,8 +1088,12 @@ class Image(HasSolutionMixin, models.Model):
                 field.storage.delete(filename)
                 log.debug("Image %d: deleted remote file %s" % (self.id, filename))
 
+                filename = local_thumbnailer.get_thumbnail_name(options)
+                field.storage.delete(filename)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename))
+
                 # Then we delete the local file cache
-                local_filename = field.storage.generate_local_name(field.name)
+                field.storage.local_storage.delete(local_filename)
                 log.debug("Image %d: deleted local file %s" % (self.id, local_filename))
 
                 try:
