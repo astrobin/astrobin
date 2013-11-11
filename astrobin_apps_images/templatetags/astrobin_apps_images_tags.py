@@ -81,7 +81,7 @@ def astrobin_image(
             'revision': revision,
             'size_x': size[0],
             'size_y': size[1],
-            'cache_key': 'astrobin_image_no_image',
+            'capty_cache_key': 'astrobin_image_no_image',
         }
 
     w = image.w
