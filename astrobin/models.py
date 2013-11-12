@@ -1149,13 +1149,6 @@ class Image(HasSolutionMixin, models.Model):
         return images
 
 
-def image_post_save(sender, instance, created, **kwargs):
-    verb = "uploaded a new image"
-    if created and not instance.is_wip:
-        action.send(instance.user, verb = verb, action_object = instance)
-post_save.connect(image_post_save, sender = Image)
-
-
 class ImageRevision(HasSolutionMixin, models.Model):
     image = models.ForeignKey(
         Image,
@@ -1211,13 +1204,6 @@ class ImageRevision(HasSolutionMixin, models.Model):
 
     def thumbnail(self, alias, thumbnail_settings = {}):
         return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
-
-
-def image_revision_post_save(sender, instance, created, **kwargs):
-    verb = "uploaded a new revision of"
-    if created and not instance.image.is_wip:
-        action.send(instance.image.user, verb = verb, action_object = instance)
-post_save.connect(image_revision_post_save, sender = ImageRevision)
 
 
 class Acquisition(models.Model):
