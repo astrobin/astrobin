@@ -31,6 +31,7 @@ from django.utils.http import urlquote
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
 from reviews.forms import ReviewedItemForm
+from actstream import action as act
 from actstream.models import Action
 from registration.forms import RegistrationForm
 from zinnia.models import Entry
@@ -1510,6 +1511,8 @@ def image_promote(request, id):
                 'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
             })
 
+        verb = "uploaded a new image"
+        act.send(image.user, verb = verb, action_object = image)
 
     return HttpResponseRedirect('/%i/' % image.id);
 

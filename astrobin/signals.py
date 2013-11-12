@@ -42,6 +42,9 @@ def image_post_save(sender, instance, created, **kwargs):
                 'originator': instance.user.userprofile,
             })
 
+        verb = "uploaded a new image"
+        act.send(instance.user, verb = verb, action_object = instance)
+
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
     if created and not instance.image.is_wip:
@@ -55,6 +58,9 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
                 'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
                 'originator': instance.user.userprofile,
             })
+
+        verb = "uploaded a new revision of"
+        act.send(instance.image.user, verb = verb, action_object = instance)
 
 
 def nested_comment_post_save(sender, instance, created, **kwargs):
