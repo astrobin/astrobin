@@ -1912,6 +1912,9 @@ div.capty-target .capty-caption-content .link-overlay a {
   margin: 0;
   display: inline;
 }
+.subtle-container .header h4 i {
+  margin-right: 8px;
+}
 .subtle-container .col {
   float: left;
   width: 50%;
@@ -1942,7 +1945,6 @@ div.capty-target .capty-caption-content .link-overlay a {
   display: none;
 }
 .subtle-container.advertisement .header {
-  padding: 8px;
   margin: 0;
 }
 .subtle-container.advertisement .header .remove {
