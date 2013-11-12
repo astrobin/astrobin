@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-03 07:27-0600\n"
-"PO-Revision-Date: 2013-11-03 13:12+0100\n"
+"PO-Revision-Date: 2013-11-11 18:21+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -16,11 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1384194093.945420\n"
 
 #: fields.py:10
 msgid "United Kingdom"
-msgstr "Regno-Unito"
+msgstr "Regno Unito"
 
 #: fields.py:11
 msgid "Afghanistan"
@@ -2705,7 +2706,7 @@ msgstr "Non puoi unire un prodotto a se stesso."
 
 #: views.py:3862
 msgid "Default front page section changed."
-msgstr ""
+msgstr "La sezione prefefinita della pagina iniziale è stata cambiata."
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -5612,7 +5613,7 @@ msgstr "Immagini recenti"
 
 #: templates/index/root.html:282
 msgid "Set current front page section as default"
-msgstr ""
+msgstr "Imposta questa sezione della pagina iniziale come predefinita"
 
 #: templates/index/root.html:298
 msgid ""
