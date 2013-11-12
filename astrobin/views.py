@@ -22,8 +22,9 @@ from django.db.models import Q, Count
 from django.db import IntegrityError
 from django.utils.translation import ugettext as _
 from django.forms.models import formset_factory, inlineformset_factory
-from django.utils.functional import curry
+from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.encoding import smart_str, smart_unicode
+from django.utils.functional import curry
 from django.utils.hashcompat import md5_constructor
 from django.utils.http import urlquote
 
@@ -1183,7 +1184,12 @@ def image_edit_license(request, id):
 @login_required
 @require_POST
 def image_edit_save_basic(request):
-    image_id = request.POST.get('image_id')
+    try:
+        image_id = request.POST['image_id']
+    except MultiValueDictKeyError:
+        raise Http404
+
+
     image = Image.all_objects.get(pk=image_id)
     form = ImageEditBasicForm(user = image.user, data=request.POST, instance=image)
     if request.user != image.user and not request.user.is_superuser:
@@ -1212,7 +1218,11 @@ def image_edit_save_basic(request):
 @login_required
 @require_POST
 def image_edit_save_watermark(request):
-    image_id = request.POST.get('image_id')
+    try:
+        image_id = request.POST['image_id']
+    except MultiValueDictKeyError:
+        raise Http404
+
     image = get_object_or_404(Image, pk=image_id)
     if request.user != image.user:
         return HttpResponseForbidden()
@@ -1246,7 +1256,11 @@ def image_edit_save_watermark(request):
 @login_required
 @require_POST
 def image_edit_save_gear(request):
-    image_id = request.POST.get('image_id')
+    try:
+        image_id = request.POST['image_id']
+    except MultiValueDictKeyError:
+        raise Http404
+
     image = Image.all_objects.get(pk=image_id)
     profile = image.user.userprofile
     if request.user != image.user and not request.user.is_superuser:
@@ -1287,7 +1301,11 @@ def image_edit_save_gear(request):
 @login_required
 @require_POST
 def image_edit_save_acquisition(request):
-    image_id = request.POST.get('image_id')
+    try:
+        image_id = request.POST['image_id']
+    except MultiValueDictKeyError:
+        raise Http404
+
     image = Image.all_objects.get(pk=image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -1367,7 +1385,11 @@ def image_edit_save_acquisition(request):
 @login_required
 @require_POST
 def image_edit_save_license(request):
-    image_id = request.POST.get('image_id')
+    try:
+        image_id = request.POST['image_id']
+    except MultiValueDictKeyError:
+        raise Http404
+
     image = get_object_or_404(Image, pk=image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -2517,8 +2539,12 @@ def bring_to_attention(request, id):
 @login_required
 @require_POST
 def bring_to_attention_process(request):
+    try:
+        image_id = request.POST['image_id']
+    except MultiValueDictKeyError:
+        raise Http404
+
     form = BringToAttentionForm(data=request.POST)
-    image_id = request.POST.get('image_id')
     image = get_object_or_404(Image, id=image_id)
 
     response_dict = {
@@ -2571,7 +2597,11 @@ def image_revision_upload_process(request):
         messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
         return HttpResponseRedirect(image.get_absolute_url())
 
-    image_id = request.POST['image_id']
+    try:
+        image_id = request.POST['image_id']
+    except MultiValueDictKeyError:
+        raise Http404
+
     image = Image.all_objects.get(id=image_id)
 
     if settings.READONLY_MODE:
