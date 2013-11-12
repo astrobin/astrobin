@@ -321,7 +321,7 @@
                 {% include 'index/ad.html' %}
 
                 <div class="subtle-container simple-container">
-                    <div class="header"><h4>{% trans "Commercial products" %}<h4></div>
+                    <div class="header"><h4><i class="icon-suitcase"></i>{% trans "Affiliates" %}<h4></div>
                     <div id="commercial-products">
                         {% cache 3600 index_recent_commercial_gear request.LANGUAGE_CODE %}
                             {% image_list recent_commercial_gear 'thumb' %}
