@@ -253,7 +253,7 @@ class GearIndex(SearchIndex):
 
     def prepare_producers(self, obj):
         producers = CommercialGear.objects\
-            .filter(gear = obj)\
+            .filter(base_gear = obj)\
             .exclude(Q(producer__userprofile__company_name = None) | Q(producer__userprofile__company_name = ""))
         return ["%s" % x.producer.userprofile.company_name for x in producers]
 
