@@ -805,7 +805,9 @@ def image_detail(request, id, r):
 @require_POST
 def image_flag_thumbs(request, id):
     image = get_object_or_404(Image.all_objects, id = id)
-    image.thumbnail_invalidate_all()
+    image.thumbnail_invalidate()
+    for r in image.revisions.all():
+        r.thumbnail_invalidate()
     messages.success(request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
     return HttpResponseRedirect(reverse("image_detail", kwargs= {'id': id}))
 
@@ -1416,7 +1418,7 @@ def image_delete(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    image.thumbnail_invalidate_all()
+    image.thumbnail_invalidate()
     image.delete()
     messages.success(request, _("Image deleted."));
     return HttpResponseRedirect(request.user.get_absolute_url());
@@ -1434,7 +1436,7 @@ def image_delete_revision(request, id):
         image.is_final = True
         image.save()
 
-    image.thumbnail_invalidate_all()
+    revision.thumbnail_invalidate()
     revision.delete()
     messages.success(request, _("Revision deleted."));
 
@@ -1448,18 +1450,19 @@ def image_delete_original(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    revisions = ImageRevision.objects.filter(image = image).order_by('-uploaded')
+    revisions = image.revisions.all()
     final = None
-    if revisions:
+
+    if image.is_final:
+        final = revisions[0]
+    else:
         for r in revisions:
             if r.is_final:
                 final = r
-        if not final:
-            # Fallback to the most recent revision.
-            final = revisions[0]
-    else:
-        # You can't delete just the original if you have no revisions.
-        return HttpResponseForbidden()
+
+    if final is None:
+        # Fallback to the most recent revision.
+        final = revisions[0]
 
     image.image_file = final.image_file
     image.updated = final.uploaded
@@ -1481,7 +1484,10 @@ def image_delete_original(request, id):
         solution.content_object = image
         solution.save()
 
-    image.thumbnail_invalidate_all()
+    image.thumbnails.filter(revision = '0').delete()
+    image.thumbnails.filter(revision = final.label).update(revision = '0')
+
+    final.thumbnail_invalidate()
     final.delete()
 
     messages.success(request, _("Image deleted."));

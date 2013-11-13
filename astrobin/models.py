@@ -1001,6 +1001,7 @@ class Image(HasSolutionMixin, models.Model):
         revision_label = options.get('revision_label', 'final')
         field = self.get_thumbnail_field(revision_label);
 
+        # For compatibility:
         if alias in ('revision', 'runnerup'):
             alias = 'thumb'
 
@@ -1012,112 +1013,118 @@ class Image(HasSolutionMixin, models.Model):
 
         cache_key = self.thumbnail_cache_key(field, alias)
         url = cache.get(cache_key)
-        if not url:
-            # Not found in cache, attempt to fetch from database
-            log.debug("Image %d: thumbnail not found in cache %s" % (self.id, cache_key))
-            thumbnails = None
-            try:
-                thumbnails = self.thumbnails.get(revision = revision_label)
-                url = getattr(thumbnails, alias)
+        if url:
+            log.debug("Image %d: got URL from cache entry %s" % (self.id, cache_key))
+            return url
+
+        # Not found in cache, attempt to fetch from database
+        log.debug("Image %d: thumbnail not found in cache %s" % (self.id, cache_key))
+        thumbnails = None
+        try:
+            thumbnails = self.thumbnails.get(revision = revision_label)
+            url = getattr(thumbnails, alias)
+            if url:
                 cache.set(cache_key, url, 60*60*24*365)
-                log.debug("Image %d: thumbnail url found in database: %s" % (self.id, url))
-            except ThumbnailGroup.DoesNotExist:
-                log.debug("Image %d: there are no thumbnails in database." % self.id)
+                log.debug("Image %d: thumbnail url found in database and save into cache: %s" % (self.id, url))
+                return url
+        except ThumbnailGroup.DoesNotExist:
+            log.debug("Image %d: there are no thumbnails in database." % self.id)
+            try:
+                thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
+            except IntegrityError:
+                # Race condition
+                pass
+
+        # If we got down here, we don't have an url yet.
+        thumb = self.thumbnail_raw(alias, options)
+        thumbnail_alias_settings = settings.THUMBNAIL_ALIASES[''][alias].copy()
+
+        if thumb:
+            url = settings.IMAGES_URL + thumb.name
+            cache.set(cache_key, url, 60*60*24*365)
+            log.debug("Image %d: saved generated thumbnail in the cache." % self.id)
+            if not thumbnails:
                 try:
                     thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
+                    setattr(thumbnails, alias, url)
+                    thumbnails.save()
+                    log.debug("Image %d: saved generated thumbnail in the database." % self.id)
                 except IntegrityError:
                     # Race condition
                     pass
 
-            if not url:
-                thumb = self.thumbnail_raw(alias, options)
-                options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+            return url
 
-                url = "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
-                    options['size'][0],
-                    options['size'][1])
-
-                if thumb:
-                    url = settings.IMAGES_URL + thumb.name
-                    cache.set(cache_key, url, 60*60*24*365)
-                    log.debug("Image %d: saved generated thumbnail in the cache." % self.id)
-                    if thumbnails:
-                        setattr(thumbnails, alias, url)
-                        thumbnails.save()
-                        log.debug("Image %d: saved generated thumbnail in the database." % self.id)
-        else:
-            log.debug("Image %d: got URL from cache entry %s" % (self.id, cache_key))
-
-        return url
+        return "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
+            thumbnail_alias_settings['size'][0],
+            thumbnail_alias_settings['size'][1])
 
 
-    def thumbnail_invalidate_all(self):
+    def thumbnail_invalidate_real(self, field, revision_label):
         from django.core.cache import cache
         from easy_thumbnails.files import get_thumbnailer
 
         from astrobin.s3utils import OverwritingFileSystemStorage
         from astrobin_apps_images.models import ThumbnailGroup
 
-        def invalidate_from_field(field, revision_label = '0'):
-            log.debug("Image %d: invalidating thumbnails for field / label: %s / %s" % (self.id, field, revision_label))
+        log.debug("Image %d: invalidating thumbnails for field / label: %s / %s" % (self.id, field, revision_label))
 
-            thumbnailer = get_thumbnailer(field)
-            local_filename = field.storage.generate_local_name(field.name)
-            local_thumbnailer = get_thumbnailer(
-                    OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
-                    local_filename)
+        thumbnailer = get_thumbnailer(field)
+        local_filename = field.storage.generate_local_name(field.name)
+        local_thumbnailer = get_thumbnailer(
+                OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                local_filename)
 
-            aliases = settings.THUMBNAIL_ALIASES['']
-            for alias, thumbnail_settings in aliases.iteritems():
-                options = settings.THUMBNAIL_ALIASES[''][alias].copy()
-                if self.watermark and 'watermark' in options:
-                    options['watermark_text'] = self.watermark_text
-                    options['watermark_position'] = self.watermark_position
-                    options['watermark_opacity'] = self.watermark_opacity
+        aliases = settings.THUMBNAIL_ALIASES['']
+        for alias, thumbnail_settings in aliases.iteritems():
+            options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+            if self.watermark and 'watermark' in options:
+                options['watermark_text'] = self.watermark_text
+                options['watermark_position'] = self.watermark_position
+                options['watermark_opacity'] = self.watermark_opacity
 
-                # First we delete it from the cache
-                cache_key = self.thumbnail_cache_key(field, alias)
-                if cache.get(cache_key):
-                    log.debug("Image %d: deleting cache key %s" % (self.id, cache_key))
-                    cache.delete(cache_key)
-                else:
-                    log.debug("Image %d: unable to find cache key %s" % (self.id, cache_key))
+            # First we delete it from the cache
+            cache_key = self.thumbnail_cache_key(field, alias)
+            if cache.get(cache_key):
+                log.debug("Image %d: deleting cache key %s" % (self.id, cache_key))
+                cache.delete(cache_key)
+            else:
+                log.debug("Image %d: unable to find cache key %s" % (self.id, cache_key))
 
-                # Then we delete the remote thumbnail
-                filename1 = thumbnailer.get_thumbnail_name(options)
-                filename2 = thumbnailer.get_thumbnail_name(options, transparent = True)
-                field.storage.delete(filename1)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
-                field.storage.delete(filename2)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
+            # Then we delete the remote thumbnail
+            filename1 = thumbnailer.get_thumbnail_name(options)
+            filename2 = thumbnailer.get_thumbnail_name(options, transparent = True)
+            field.storage.delete(filename1)
+            log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
+            field.storage.delete(filename2)
+            log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
-                filename1 = local_thumbnailer.get_thumbnail_name(options)
-                filename2 = local_thumbnailer.get_thumbnail_name(options, transparent = True)
-                field.storage.delete(filename1)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
-                field.storage.delete(filename2)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
+            filename1 = local_thumbnailer.get_thumbnail_name(options)
+            filename2 = local_thumbnailer.get_thumbnail_name(options, transparent = True)
+            field.storage.delete(filename1)
+            log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
+            field.storage.delete(filename2)
+            log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
-                # Then we delete the local file cache
-                field.storage.local_storage.delete(local_filename)
-                log.debug("Image %d: deleted local file %s" % (self.id, local_filename))
+            # Then we delete the local file cache
+            field.storage.local_storage.delete(local_filename)
+            log.debug("Image %d: deleted local file %s" % (self.id, local_filename))
 
-                try:
-                    os.remove(os.path.join(field.storage.local_storage.location, local_filename))
-                    log.debug("Image %d: removed local cache %s" % (self.id, local_filename))
-                except OSError:
-                    log.debug("Image %d: locally cached file not found." % self.id)
-
-            # Then we remove the database entries
             try:
-                thumbnailgroup = self.thumbnails.get(revision = revision_label).delete()
-                log.debug("Image %d: removed thumbnail group." % self.id)
-            except ThumbnailGroup.DoesNotExist:
-                log.debug("Image %d: thumbnail group missing." % self.id)
+                os.remove(os.path.join(field.storage.local_storage.location, local_filename))
+                log.debug("Image %d: removed local cache %s" % (self.id, local_filename))
+            except OSError:
+                log.debug("Image %d: locally cached file not found." % self.id)
 
-        invalidate_from_field(self.image_file)
-        for r in self.revisions.all():
-            invalidate_from_field(r.image_file, r.label)
+        # Then we remove the database entries
+        try:
+            thumbnailgroup = self.thumbnails.get(revision = revision_label).delete()
+            log.debug("Image %d: removed thumbnail group." % self.id)
+        except ThumbnailGroup.DoesNotExist:
+            log.debug("Image %d: thumbnail group missing." % self.id)
+
+    def thumbnail_invalidate(self):
+        return self.thumbnail_invalidate_real(self.image_file, '0')
 
 
     @staticmethod
@@ -1210,6 +1217,9 @@ class ImageRevision(HasSolutionMixin, models.Model):
 
     def thumbnail(self, alias, thumbnail_settings = {}):
         return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
+
+    def thumbnail_invalidate(self):
+        return self.image.thumbnail_invalidate_real(self.image_file, self.label)
 
 
 class Acquisition(models.Model):
