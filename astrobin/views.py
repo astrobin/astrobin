@@ -672,7 +672,7 @@ def image_detail(request, id, r):
     # BASIC DATA #
     ##############
 
-    uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
+    updated_on = to_user_timezone(image.updated, profile) if profile else image.updated
     alias = 'regular'
     mod = request.GET.get('mod')
     if mod == 'inverted':
@@ -766,7 +766,7 @@ def image_detail(request, id, r):
         'private_message_form': PrivateMessageForm(),
         'upload_revision_form': ImageRevisionUploadForm(),
         'dates_label': _("Dates"),
-        'uploaded_on': uploaded_on,
+        'updated_on': updated_on,
         'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),
         'subjects_short': subjects[:subjects_limit],
         'subjects_reminder': subjects[subjects_limit:],
@@ -1462,7 +1462,7 @@ def image_delete_original(request, id):
         return HttpResponseForbidden()
 
     image.image_file = final.image_file
-    image.uploaded = final.uploaded
+    image.updated = final.updated
 
     image.w = final.w
     image.h = final.h
