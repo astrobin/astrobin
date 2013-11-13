@@ -14,7 +14,7 @@
 
 <ul class="thumbnails astrobin-thumbnails">
 {% for search_result in gear_list %}
-    {% if search_result.object %}
+    {% if search_result.object and search_result.object.id %}
         <li class="thumbnail astrobin-thumbnail">
             <div class="gear-business-card">
                 <div class="business-card-inner">
@@ -68,7 +68,7 @@
 
 <ul class="thumbnails astrobin-thumbnails">
 {% for search_result in user_list %}
-    {% if search_result.object %}
+    {% if search_result.object and search_result.object.id %}
         <li class="thumbnail astrobin-thumbnail">
             <div class="user-business-card">
                 <div class="business-card-inner">
@@ -130,7 +130,7 @@
         </thead>
         <tbody>
             {% for search_result in image_list %}
-                {% if search_result.object %}
+                {% if search_result.object and search_result.object.id %}
                     <tr>
                         <td>
                             <a href="{% url user_page search_result.object.user %} ">{{search_result.object.user.userprofile}}</a>
@@ -153,9 +153,11 @@
     <ul class="thumbnails astrobin-thumbnails">
         {% for search_result in image_list %}
             {% with search_result.object as image %}
-                <li class="thumbnail astrobin-thumbnail">
-                    {% astrobin_image image 'gallery' %}
-                </li>
+                {% if image and image.id %}
+                    <li class="thumbnail astrobin-thumbnail">
+                        {% astrobin_image image 'gallery' %}
+                    </li>
+                {% endif %}
             {% endwith %}
         {% empty %}
             <li>{% include 'inclusion_tags/no_images.html' %}</li>
