@@ -1462,7 +1462,7 @@ def image_delete_original(request, id):
         return HttpResponseForbidden()
 
     image.image_file = final.image_file
-    image.updated = final.updated
+    image.updated = final.uploaded
 
     image.w = final.w
     image.h = final.h
