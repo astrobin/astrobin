@@ -1084,13 +1084,19 @@ class Image(HasSolutionMixin, models.Model):
                     log.debug("Image %d: unable to find cache key %s" % (self.id, cache_key))
 
                 # Then we delete the remote thumbnail
-                filename = thumbnailer.get_thumbnail_name(options)
-                field.storage.delete(filename)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename))
+                filename1 = thumbnailer.get_thumbnail_name(options)
+                filename2 = thumbnailer.get_thumbnail_name(options, transparent = True)
+                field.storage.delete(filename1)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
+                field.storage.delete(filename2)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
-                filename = local_thumbnailer.get_thumbnail_name(options)
-                field.storage.delete(filename)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename))
+                filename1 = local_thumbnailer.get_thumbnail_name(options)
+                filename2 = local_thumbnailer.get_thumbnail_name(options, transparent = True)
+                field.storage.delete(filename1)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
+                field.storage.delete(filename2)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
                 # Then we delete the local file cache
                 field.storage.local_storage.delete(local_filename)
