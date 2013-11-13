@@ -2776,6 +2776,7 @@ form.avatar-change label.control-label {
 .iotd-archive-image .runner-ups h3 {
   font-size: 1em;
   line-height: 1em;
+  margin-bottom: 4px;
   text-shadow: rgba(0, 0, 0, 0.8) 0 1px 1px;
   font-style: italic;
   color: #ccc;
@@ -2787,11 +2788,9 @@ form.avatar-change label.control-label {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-}
-.image-of-the-day .runner-ups .runner-up img,
-.iotd-archive-image .runner-ups .runner-up img {
-  width: 45px;
-  height: 45px;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
 }
 .btn-upload {
   padding: 31.5px 24px;
