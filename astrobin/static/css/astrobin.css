@@ -3004,18 +3004,13 @@ form.avatar-change label.control-label {
   font-style: italic;
 }
 li.revisions {
-  margin-right: 1px;
-  margin-bottom: 4px;
+  padding: 5px;
 }
 .revision {
   position: relative;
 }
 .revision .badges {
   display: none;
-}
-.revision img {
-  width: 86px;
-  height: 86px;
 }
 .revision .final {
   position: relative;
@@ -3046,7 +3041,7 @@ li.revisions {
   bottom: 0;
   margin: 0;
   padding: 2px 0;
-  width: 86px;
+  width: 80px;
   background: #303030;
   background-color: rgba(0, 0, 0, 0.3);
   filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c000000', endColorstr='#4c000000')";
