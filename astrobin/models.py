@@ -1046,12 +1046,14 @@ class Image(HasSolutionMixin, models.Model):
             if not thumbnails:
                 try:
                     thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
-                    setattr(thumbnails, alias, url)
-                    thumbnails.save()
-                    log.debug("Image %d: saved generated thumbnail in the database." % self.id)
                 except IntegrityError:
                     # Race condition
                     pass
+
+            if thumbnails:
+                setattr(thumbnails, alias, url)
+                thumbnails.save()
+                log.debug("Image %d: saved generated thumbnail in the database." % self.id)
 
             return url
 
