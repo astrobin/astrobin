@@ -1467,12 +1467,12 @@ def image_delete_original(request, id):
         # Fallback to the most recent revision.
         final = revisions[0]
 
+    image.thumbnail_invalidate()
+
     image.image_file = final.image_file
     image.updated = final.uploaded
-
     image.w = final.w
     image.h = final.h
-
     image.is_final = True
 
     if image.solution:
@@ -1487,7 +1487,6 @@ def image_delete_original(request, id):
         solution.content_object = image
         solution.save()
 
-    image.thumbnails.filter(revision = '0').delete()
     image.thumbnails.filter(revision = final.label).update(revision = '0')
 
     final.thumbnail_invalidate()
