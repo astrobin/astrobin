@@ -929,7 +929,8 @@ class Image(HasSolutionMixin, models.Model):
                     OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
                     name_hash)
                 log.debug("Image %d: got thumbnail from local file %s." % (self.id, name_hash))
-        except (OSError, IOError, UnicodeEncodeError):
+        except (OSError, IOError, UnicodeEncodeError) as e:
+            log.debug("Image %d: unable to get thumbnail from local file: %s" % (self.id, repr(e)))
             # If things go awry, fallback to getting the file from the remote
             # storage. But download it locally first if it doesn't exist, so
             # it can be used again later.
@@ -1025,7 +1026,7 @@ class Image(HasSolutionMixin, models.Model):
             url = getattr(thumbnails, alias)
             if url:
                 cache.set(cache_key, url, 60*60*24*365)
-                log.debug("Image %d: thumbnail url found in database and save into cache: %s" % (self.id, url))
+                log.debug("Image %d: thumbnail url found in database and saved into cache: %s" % (self.id, url))
                 return url
         except ThumbnailGroup.DoesNotExist:
             log.debug("Image %d: there are no thumbnails in database." % self.id)
