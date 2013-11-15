@@ -1451,8 +1451,11 @@ def image_delete_original(request, id):
         return HttpResponseForbidden()
 
     revisions = image.revisions.all()
-    final = None
 
+    if not revisions:
+        return image_delete(request, id)
+
+    final = None
     if image.is_final:
         final = revisions[0]
     else:
