@@ -177,7 +177,7 @@ class Solver(AbstractPlateSolvingBackend):
             result = self.send_request('upload', args, (f.name, f.read()))
             return result
         except IOError:
-            print 'File %s does not exist' % fn
+            print 'File %s does not exist' % f.name
             raise
 
     def job_status(self, job_id):
