@@ -50,7 +50,7 @@ class SolveView(base.View):
                 solution.status = Solver.PENDING
                 solution.submission_id = submission
                 solution.save()
-            except urllib2.HTTPError, urllib2.URLError, IOError:
+            except (urllib2.HTTPError, urllib2.URLError, IOError):
                 solution.status = Solver.MISSING
                 solution.submission_id = None
                 solution.save()
