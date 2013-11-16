@@ -121,9 +121,10 @@ def astrobin_image(
         placehold_size[1] = h
 
     # Determine whether this is an animated gif, and we should show it as such
+    field = image.get_thumbnail_field(revision)
     animated = False
-    if image.image_file.name.lower().endswith('.gif') and alias in ('regular', 'hd', 'real'):
-        gif = PILImage.open(image.image_file.file)
+    if field.name.lower().endswith('.gif') and alias in ('regular', 'hd', 'real'):
+        gif = PILImage.open(field.file)
         try:
             gif.seek(1)
         except EOFError:
@@ -154,9 +155,8 @@ def astrobin_image(
             badges.append('top100')
 
 
-    field = image.get_thumbnail_field(revision)
     cache_key = image.thumbnail_cache_key(field, alias)
-    if animated and alias in ('regular', 'hd', 'real'):
+    if animated:
         cache_key += '_animated'
     thumb_url = cache.get(cache_key)
 
