@@ -1022,7 +1022,9 @@ class Image(HasSolutionMixin, models.Model):
         # because right now we can't thumbnail gifs preserving animation
         if 'animated' in options and options['animated'] == True:
             if alias in ('regular', 'hd', 'real'):
-                return settings.IMAGES_URL + field.name
+                url = settings.IMAGES_URL + field.name
+                cache.set(cache_key, url, 60*60*24*365)
+                return url
 
         # Not found in cache, attempt to fetch from database
         log.debug("Image %d: thumbnail not found in cache %s" % (self.id, cache_key))
