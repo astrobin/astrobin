@@ -944,7 +944,7 @@ class Image(HasSolutionMixin, models.Model):
 
             try:
                 remote_file = ContentFile(urllib2.urlopen(req).read())
-            except urllib2.HTTPError:
+            except (urllib2.HTTPError, urllib2.URLError):
                 remote_file = None
 
             # If that didn't work, we'll get the file rebularly via django-storages.
