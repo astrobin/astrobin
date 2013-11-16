@@ -1012,6 +1012,12 @@ class Image(HasSolutionMixin, models.Model):
 
         log.debug("Image %d: requested thumbnail: %s / %s" % (self.id, alias, revision_label))
 
+        # If this is an animated gif, let's just return the full size URL
+        # because right now we can't thumbnail gifs preserving animation
+        if 'animated' in options and options['animated'] == True:
+            if alias in ('regular', 'hd', 'real'):
+                return settings.IMAGES_URL + field.name
+
         cache_key = self.thumbnail_cache_key(field, alias)
         url = cache.get(cache_key)
         if url:

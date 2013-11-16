@@ -816,11 +816,10 @@ def image_flag_thumbs(request, id):
 def image_thumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
 
-    url = settings.IMAGES_URL + image.image_file.name
-    if 'animated' not in request.GET:
-        url = image.thumbnail(alias, {
-            'revision_label': r,
-        })
+    url = image.thumbnail(alias, {
+        'revision_label': r,
+        'animated': 'animated' in request.GET,
+    })
 
     return HttpResponse(
         simplejson.dumps({
