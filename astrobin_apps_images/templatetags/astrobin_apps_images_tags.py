@@ -156,6 +156,8 @@ def astrobin_image(
 
     field = image.get_thumbnail_field(revision)
     cache_key = image.thumbnail_cache_key(field, alias)
+    if animated:
+        cache_key += '_animated'
     thumb_url = cache.get(cache_key)
 
     get_thumb_url = None
