@@ -3,44 +3,48 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-11 13:58+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-11-03 07:29-0600\n"
+"PO-Revision-Date: 2013-11-12 16:57+0000\n"
+"Last-Translator: jcbo <jcbo@wp.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1384275474.177423\n"
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:10
 msgid "Getting plate-solving status, please wait..."
-msgstr ""
+msgstr "Pobieram status mapowania szczegółów zdjęcia, proszę czekać..."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:28
 msgid "Plate-solving process starting, please do not leave this page..."
-msgstr ""
+msgstr "Mapowanie szczegółów zdjęcia rozpoczęte, proszę nie opuszczać strony..."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:29
 msgid "Plate-solving started in the background. You may leave this page."
-msgstr ""
+msgstr "Mapowanie szczegółów zdjęcia uruchomione w tle. Możesz opuścić stronę."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:30
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr ""
+"Mapowanie szczegółów zdjęcia prawie gotowe, proszę nie opuszczać strony..."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:31
 msgid "This image could not be plate-solved."
-msgstr ""
+msgstr "Mapowanie szczegółów nie jest możliwe dla tego zdjęcia."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:32
 msgid ""
 "This image has been successfully plate-solved. Please refresh the page to "
 "see the new data."
 msgstr ""
+"Mapowanie szczegółów zdjęcia zostało pozytywnie zakończone. Proszę odświeżyć "
+"stronę aby zobaczyć efekty zmian."
