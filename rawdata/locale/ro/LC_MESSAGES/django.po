@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-11 13:57+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-11-03 06:50-0600\n"
+"PO-Revision-Date: 2013-11-17 06:48+0000\n"
+"Last-Translator: Teodorian <irimiateodorian@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1))\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%"
+"100==0)&&(n!=0)))?2:1));\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1384670890.793413\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -33,82 +34,86 @@ msgstr ""
 #: templates/rawdata/_images.html:18 templates/rawdata/library.html:65
 #: templates/rawdata/rawimage_detail.html:15
 msgid "Type"
-msgstr ""
+msgstr "Tip"
 
 #: folders.py:117 templates/rawdata/_folder_dropdown.html:28
 msgid "Upload date"
-msgstr ""
+msgstr "Data incarcarii"
 
 #: folders.py:141 templates/rawdata/_folder_dropdown.html:21
 #: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
 msgid "Acquisition date"
-msgstr ""
+msgstr "Data achizitiei"
 
 #: folders.py:166 templates/rawdata/_folder_dropdown.html:35
 #: templates/rawdata/library.html:89 templates/rawdata/rawimage_detail.html:19
 msgid "Camera"
-msgstr ""
+msgstr "Camera"
 
 #: folders.py:190 templates/rawdata/_folder_dropdown.html:42
 #: templates/rawdata/library.html:97
 msgid "Telescope or lens"
-msgstr ""
+msgstr "Telescopul sau obiectivul"
 
 #: folders.py:214 templates/rawdata/_folder_dropdown.html:49
 #: templates/rawdata/library.html:105
 msgid "Filter"
-msgstr ""
+msgstr "Filtru"
 
 #: folders.py:238 templates/rawdata/_folder_dropdown.html:56
 #: templates/rawdata/library.html:113
 msgid "Subject"
-msgstr ""
+msgstr "Subiectul"
 
 #: folders.py:262 templates/rawdata/_folder_dropdown.html:63
 #: templates/rawdata/library.html:121
 #: templates/rawdata/rawimage_detail.html:20
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatura"
 
 #: forms.py:86
 msgid "Users"
-msgstr ""
+msgstr "Utilizatori"
 
 #: forms.py:87
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr ""
+"O lista a utilizatorilor pe care doriti sa ii invitati. Utilizati o virgula "
+"pentru a-i separa."
 
 #: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
-msgstr ""
+msgstr "Necunoscut"
 
 #: models.py:45
 msgid "Light"
-msgstr ""
+msgstr "Lumina"
 
 #: models.py:46
 msgid "Offset/Bias"
-msgstr ""
+msgstr "Offset/Bias"
 
 #: models.py:47
 msgid "Dark"
-msgstr ""
+msgstr "Intunecat (Dark)"
 
 #: models.py:48
 msgid "Flat"
-msgstr ""
+msgstr "Flatul"
 
 #: models.py:216
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
 msgstr ""
+"Un denumire publica pentru acest sonda. Fiti descriptiv si includeti numele "
+"obiectului ceresc precum si distanta focala in milimetri."
 
 #: models.py:220 models.py:288
 #: templates/rawdata/privatesharedfolder_list.html:38
 #: templates/rawdata/publicdatapool_list.html:33
 msgid "Description"
-msgstr ""
+msgstr "Descriere"
 
 #: models.py:221
 msgid "Describe the goals and terms of this pool."
@@ -157,33 +162,33 @@ msgstr ""
 
 #: templates/rawdata/_browser_js.html:63
 msgid "Share"
-msgstr ""
+msgstr "Distribuie"
 
 #: templates/rawdata/_browser_js.html:70
 #: templates/rawdata/privatesharedfolder_detail.html:8
 msgid "Private shared folder"
-msgstr ""
+msgstr "Folder distribuit in privat"
 
 #: templates/rawdata/_browser_js.html:74
 #: templates/rawdata/publicdatapool_detail.html:8
 msgid "Public data pool"
-msgstr ""
+msgstr "Sondaj public"
 
 #: templates/rawdata/_browser_js.html:80 templates/rawdata/_images.html:44
 #: templates/rawdata/privatesharedfolder_detail.html:46
 #: templates/rawdata/privatesharedfolder_detail.html:184
 #: templates/rawdata/privatesharedfolder_list.html:92
 msgid "Delete"
-msgstr ""
+msgstr "Sterge"
 
 #: templates/rawdata/_folder_dropdown.html:7
 #: templates/rawdata/library.html:129
 msgid "Smart folders"
-msgstr ""
+msgstr "Foldere inteligente"
 
 #: templates/rawdata/_folders.html:12
 msgid "Files"
-msgstr ""
+msgstr "Fisiere"
 
 #: templates/rawdata/_images.html:19 templates/rawdata/library.html:73
 #: templates/rawdata/privatesharedfolder_detail.html:87
@@ -192,11 +197,11 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:22
 #: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
-msgstr ""
+msgstr "Incarcat"
 
 #: templates/rawdata/_screenshot_tour.html:3
 msgid "Screenshot tour"
-msgstr ""
+msgstr "Turul capturilor de ecran"
 
 #: templates/rawdata/help_01.html:4 templates/rawdata/help_01.html.py:8
 #: templates/rawdata/help_01.html:32 templates/rawdata/help_02.html:4
@@ -216,7 +221,7 @@ msgstr ""
 #: templates/subscription/subscription_list.html:4
 #: templates/subscription/subscription_list.html:8
 msgid "AstroBin Raw Data"
-msgstr ""
+msgstr "AstroBin Raw Data"
 
 #: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
 #: templates/rawdata/help_03.html:9
@@ -271,7 +276,7 @@ msgstr ""
 
 #: templates/rawdata/help_02.html:19
 msgid "How does it work?"
-msgstr ""
+msgstr "Cum functioneaza ?"
 
 #: templates/rawdata/help_02.html:20
 msgid ""
@@ -284,6 +289,8 @@ msgid ""
 "You can upload all of them in a matter of a few clicks, and AstroBin will "
 "start organizing your data in \"virtual folders\"."
 msgstr ""
+"Puteți încărca toatul într-o actiune de câteva clicuri, și AstroBin va "
+"începe organizarea datelor în \"foldere virtuale\"."
 
 #: templates/rawdata/help_02.html:24
 msgid ""
@@ -291,26 +298,29 @@ msgid ""
 "computer! CCD and DSLR raw files have comprehensive headers: why shouldn't "
 "you use those to automatically and efficiently tag your raw files?"
 msgstr ""
+"Uita de  grija unor structuri complicate ale folderelor de pe computer! "
+"Fișierele CCD si DSLR au antetele complete: de ce să nu utilizați automat si "
+"eficient tagul fișierelelor RAW?"
 
 #: templates/rawdata/help_02.html:27
 msgid "By type"
-msgstr ""
+msgstr "Dupa tip"
 
 #: templates/rawdata/help_02.html:28
 msgid "By acquisition date"
-msgstr ""
+msgstr "Dupa data achizitiei"
 
 #: templates/rawdata/help_02.html:29
 msgid "By upload date"
-msgstr ""
+msgstr "Dupa data incarcarii"
 
 #: templates/rawdata/help_02.html:30
 msgid "By subject"
-msgstr ""
+msgstr "Dupa subiect"
 
 #: templates/rawdata/help_02.html:31
 msgid "By filter"
-msgstr ""
+msgstr "Dupa filtru"
 
 #: templates/rawdata/help_02.html:32
 msgid "By acquisition telescope or lens"
@@ -363,10 +373,14 @@ msgid ""
 "disaster and accidents! At AstroBin, we take data preservation very "
 "seriously."
 msgstr ""
+"Ati avut vreodata un accident de hard-disk si ati pierdut o gramada de date? "
+"Prin pastrarea fisierelor raw pe <strong>AstroBin Raw Data</strong>veti fi "
+"in siguranta fata de acest fel de accidente ! La AstroBin, noi luam masuri "
+"serioase pentru conservarea datelor. "
 
 #: templates/rawdata/help_03.html:25
 msgid "Do some science."
-msgstr ""
+msgstr "Sa facem si putina stiinta."
 
 #: templates/rawdata/help_03.html:26
 msgid ""
@@ -980,7 +994,7 @@ msgstr ""
 
 #: templates/subscription/subscription_detail.html:65
 #: templates/subscription/subscription_done.html:21
-#: templates/subscription/subscription_list.html:86
+#: templates/subscription/subscription_list.html:73
 msgid "Thank you for supporting AstroBin!"
 msgstr ""
 
@@ -1018,11 +1032,11 @@ msgstr ""
 msgid "Here are the available plans. Choose the one that suits you best!"
 msgstr ""
 
-#: templates/subscription/subscription_list.html:39
+#: templates/subscription/subscription_list.html:31
 msgid "Manage"
 msgstr ""
 
-#: templates/subscription/subscription_list.html:54
+#: templates/subscription/subscription_list.html:41
 msgid ""
 " Choose this plan if you want to keep your expenses to a minimum, but still "
 "want the possibity to share your FIT and digital camera raw files with your "
@@ -1031,27 +1045,27 @@ msgid ""
 "support AstroBin."
 msgstr ""
 
-#: templates/subscription/subscription_list.html:62
+#: templates/subscription/subscription_list.html:49
 msgid ""
 "Choose this plan if you have started out in the recent year or two, or you "
 "don't want to share and backup your calibration files. Enjoy a lot of room "
 "for a convenient price."
 msgstr ""
 
-#: templates/subscription/subscription_list.html:70
+#: templates/subscription/subscription_list.html:57
 msgid ""
 "Choose this plan if you have several years worth of data. You will probably "
 "have enough room for all your calibration files, and will enjoy the full "
 "potential of the platform."
 msgstr ""
 
-#: templates/subscription/subscription_list.html:78
+#: templates/subscription/subscription_list.html:65
 msgid ""
 "Choose this plan if you have a massive amount of raw data that you want to "
 "share and backup securely online."
 msgstr ""
 
-#: templates/subscription/subscription_list.html:89
+#: templates/subscription/subscription_list.html:76
 msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-11 13:57+0000\n"
+"POT-Creation-Date: 2013-11-03 06:50-0600\n"
 "PO-Revision-Date: 2013-01-16 16:19+0100\n"
 "Last-Translator: ArtyomChitailo <sigma72@ya.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -998,7 +998,7 @@ msgstr ""
 
 #: templates/subscription/subscription_detail.html:65
 #: templates/subscription/subscription_done.html:21
-#: templates/subscription/subscription_list.html:86
+#: templates/subscription/subscription_list.html:73
 msgid "Thank you for supporting AstroBin!"
 msgstr ""
 
@@ -1036,11 +1036,11 @@ msgstr ""
 msgid "Here are the available plans. Choose the one that suits you best!"
 msgstr ""
 
-#: templates/subscription/subscription_list.html:39
+#: templates/subscription/subscription_list.html:31
 msgid "Manage"
 msgstr ""
 
-#: templates/subscription/subscription_list.html:54
+#: templates/subscription/subscription_list.html:41
 msgid ""
 " Choose this plan if you want to keep your expenses to a minimum, but still "
 "want the possibity to share your FIT and digital camera raw files with your "
@@ -1049,27 +1049,27 @@ msgid ""
 "support AstroBin."
 msgstr ""
 
-#: templates/subscription/subscription_list.html:62
+#: templates/subscription/subscription_list.html:49
 msgid ""
 "Choose this plan if you have started out in the recent year or two, or you "
 "don't want to share and backup your calibration files. Enjoy a lot of room "
 "for a convenient price."
 msgstr ""
 
-#: templates/subscription/subscription_list.html:70
+#: templates/subscription/subscription_list.html:57
 msgid ""
 "Choose this plan if you have several years worth of data. You will probably "
 "have enough room for all your calibration files, and will enjoy the full "
 "potential of the platform."
 msgstr ""
 
-#: templates/subscription/subscription_list.html:78
+#: templates/subscription/subscription_list.html:65
 msgid ""
 "Choose this plan if you have a massive amount of raw data that you want to "
 "share and backup securely online."
 msgstr ""
 
-#: templates/subscription/subscription_list.html:89
+#: templates/subscription/subscription_list.html:76
 msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"

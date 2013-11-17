@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-11 13:58+0000\n"
+"POT-Creation-Date: 2013-11-03 07:29-0600\n"
 "PO-Revision-Date: 2013-11-03 12:55+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: templates/astrobin_apps_images/snippets/image.html:12
-msgid "Error!"
-msgstr ""
-
-#: templates/astrobin_apps_images/snippets/image.html:53
+#: templates/astrobin_apps_images/snippets/image.html:38
 msgid "Loading"
 msgstr "Caricamento"
 
-#: templates/astrobin_apps_images/snippets/image.html:86
+#: templates/astrobin_apps_images/snippets/image.html:65
 msgid "(no title)"
 msgstr "(senza titolo)"
-
-#: templatetags/astrobin_apps_images_tags.py:102
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr ""
