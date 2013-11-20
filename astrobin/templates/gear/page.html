@@ -11,11 +11,12 @@
     <!-- TODO: check that this page works -->
     <div class="gear-page">
         <div class="page-header">
-            <h1>{% gear_name gear %}
-                {% if show_tagline %}
-                    <small>{{gear.commercial.tagline}}</small>
-                {% endif %}
+            <h1>{{gear.get_name}}
+                <small>{% trans "by" %} {{gear.get_make}}</small>
             </h1>
+            {% if show_tagline %}
+                <h4>{{gear.commercial.tagline}}</h4>
+            {% endif %}
         </div>
 
         <div class="row section">
