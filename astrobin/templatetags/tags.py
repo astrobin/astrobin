@@ -247,14 +247,9 @@ def gear_alias(gear, user):
 
 
 @register.simple_tag
-def gear_name(gear):
-    return "%s %s" % (gear.get_make(), gear.get_name())
-
-
-@register.simple_tag
 def gear_name_iriencoded(gear):
     from django.template.defaultfilters import iriencode
-    name = gear_name(gear)
+    name = unicode(gear)
     return iriencode(name)
 
 

@@ -1613,16 +1613,14 @@ def user_page(request, username):
         # GEAR #
         ########
         elif subsection == 'gear':
-            from templatetags.tags import gear_name
-
             telescopes = profile.telescopes.all()
             cameras = profile.cameras.all()
 
             nd = _("No imaging telescopes or lenses, or no imaging cameras specified")
             gi = _("Gear images")
 
-            menu += [(x.id, gear_name(x)) for x in telescopes]
-            menu += [(x.id, gear_name(x)) for x in cameras]
+            menu += [(x.id, unicode(x)) for x in telescopes]
+            menu += [(x.id, unicode(x)) for x in cameras]
             menu += [( 0, nd)]
             menu += [(-1, gi)]
 

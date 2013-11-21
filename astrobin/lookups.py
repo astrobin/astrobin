@@ -48,8 +48,7 @@ def autocomplete(request, what):
             if k == 'locations':
                 return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.name} for v in values]))
             else:
-                from templatetags.tags import gear_name
-                return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': gear_name(v)} for v in values]))
+                return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': unicode(v)} for v in values]))
 
     return HttpResponse(simplejson.dumps([{}]))
 
