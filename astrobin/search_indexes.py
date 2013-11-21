@@ -21,7 +21,6 @@ from astrobin.models import SolarSystem_Acquisition
 from astrobin.models import UserProfile
 from astrobin.models import Gear, CommercialGear, RetailedGear
 
-from astrobin.templatetags.tags import gear_name
 from astrobin.utils import unique_items
 
 # Other AstroBin apps

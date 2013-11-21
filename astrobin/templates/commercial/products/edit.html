@@ -4,10 +4,10 @@
 {% load bootstrap_toolkit %}
 
 
-{% block title %}{% trans "Edit commercial product" %}: {% gear_name gear %}{% endblock %}
+{% block title %}{% trans "Edit commercial product" %}: {{gear}}{% endblock %}
 
 {% block content %}
-    <h1>{% blocktrans %}Edit commercial product{% endblocktrans %}: {% gear_name gear %}</h1>
+    <h1>{% blocktrans %}Edit commercial product{% endblocktrans %}: {{gear}}</h1>
     <form class="form-horizontal" id="basic" action="{% url commercial_products_save product.id %}" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
 

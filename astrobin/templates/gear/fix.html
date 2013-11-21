@@ -2,7 +2,7 @@
 
 {% load i18n tags bootstrap_toolkit %}
 
-{% block title %}{% gear_name gear %}{% endblock %}
+{% block title %}{{gear}}{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -90,7 +90,7 @@
         </div>
 
         <div class="span6">
-            <h1>{% gear_name gear %}</h1>
+            <h1>{{gear}}</h1>
             <div class="well">
                 <p>
                     {% blocktrans %}After you fix an item, another one at random will be offered.{% endblocktrans %}

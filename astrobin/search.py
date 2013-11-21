@@ -7,7 +7,6 @@ from django.utils.translation import ugettext as _
 
 from views import jsonDump, valueReader
 from models import Telescope, Camera
-from templatetags.tags import gear_name
 
 import operator
 import unicodedata

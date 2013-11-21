@@ -7,7 +7,6 @@ from tastypie.authentication import Authentication
 
 from astrobin.models import Image, ImageRevision, ImageOfTheDay, App
 from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
-from astrobin.templatetags.tags import gear_name
 
 
 class AppAuthentication(Authentication):
@@ -173,11 +172,11 @@ class ImageResource(ModelResource):
 
     def dehydrate_imaging_telescopes(self, bundle):
         telescopes = bundle.obj.imaging_telescopes.all()
-        return [gear_name(x) for x in telescopes]
+        return [unicode(x) for x in telescopes]
 
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
-        return [gear_name(x) for x in cameras]
+        return [unicode(x) for x in cameras]
 
 
 class ImageOfTheDayResource(ModelResource):

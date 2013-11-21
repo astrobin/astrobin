@@ -225,11 +225,14 @@ class Gear(models.Model):
     reviews = generic.GenericRelation(ReviewedItem)
 
     def __unicode__(self):
-        if self.make and self.make.lower() in self.name.lower():
-            return self.name
-        if not self.make or self.make == '':
-            return self.name
-        return "%s %s" % (self.make, self.name)
+        make = self.get_make()
+        name = self.get_name()
+
+        if make and make.lower() in name.lower():
+            return name
+        if not make or make == '':
+            return name
+        return "%s %s" % (make, name)
 
     def attributes(self):
         return []

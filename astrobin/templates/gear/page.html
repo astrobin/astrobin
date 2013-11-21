@@ -5,7 +5,7 @@
 {% load hitcount_tags %}
 {% load thumbnail %}
 
-{% block title %}{% gear_name gear %}{% endblock %}
+{% block title %}{{gear}}{% endblock %}
 
 {% block content %}
     <!-- TODO: check that this page works -->
@@ -56,7 +56,7 @@
                             <h4>
                                 <i class="icon-picture"></i>
                                 {% trans "Some images" %}
-                                <a href="/search/?q={% gear_name gear %}{% search_form_query %}">
+                                <a href="/search/?q={{gear}}{% search_form_query %}">
                                     {% trans "(view more)" %}
                                 </a>
                             </h4>
