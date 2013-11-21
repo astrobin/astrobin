@@ -212,9 +212,9 @@
                             <th>{% trans "Make" %}</th>
                             <td>
                                 {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user  %}
-                                    <a href="/search/?q={{gear.make}}{% search_form_query %}&amp;search_type=3">
+                                    <a href="/search/?q={{gear.get_make}}{% search_form_query %}&amp;search_type=3">
                                 {% endif %}
-                                    {{gear.make}}
+                                    {{gear.get_make}}
                                 {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user %}
                                     </a>
                                 {% endif %}
