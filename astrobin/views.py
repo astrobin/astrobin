@@ -1648,7 +1648,6 @@ def user_page(request, username):
             menu += [('TRAILS', _("Star trails"))]
             menu += [('GEAR', _("Gear"))]
             menu += [('OTHER', _("Other"))]
-            menu += [('NOSUB', _("No subjects specified"))]
 
             if active is None:
                 active = 'DEEP'
@@ -1670,12 +1669,6 @@ def user_page(request, username):
 
             elif active == 'OTHER':
                 qs = qs.filter(subject_type = 600)
-
-            elif active == 'NOSUB':
-                qs = qs.filter(
-                    (Q(subject_type = 100) | Q(subject_type = 200)) &
-                    (Q(objects_in_field = None)) &
-                    (Q(solar_system_main_subject = None))).distinct()
 
         ###########
         # NO DATA #
