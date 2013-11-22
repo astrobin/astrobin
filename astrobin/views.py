@@ -1556,7 +1556,7 @@ def user_page(request, username):
         viewer_profile = request.user.userprofile
 
     section = 'public'
-    subsection = request.GET.get('sub', 'year')
+    subsection = request.GET.get('sub', 'uploaded')
     active = request.GET.get('active')
     menu = []
 
