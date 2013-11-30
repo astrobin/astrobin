@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-03 07:27-0600\n"
-"PO-Revision-Date: 2012-12-29 19:10+0100\n"
+"PO-Revision-Date: 2013-11-18 13:37+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1384781845.574258\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1364,9 +1365,8 @@ msgid "Body"
 msgstr "Περιεχόμενο"
 
 #: locale_extras.py:7
-#, fuzzy
 msgid "uploaded a new image"
-msgstr "Ανεβάστε μια νέα εικόνα"
+msgstr "ανέβασε μια νέα εικόνα"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
@@ -1382,7 +1382,7 @@ msgstr "σχολίασε το αντικείμενο εξοπλισμού"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr ""
+msgstr "προστέθηκε στους σελιδοδείκτες"
 
 #: locale_extras.py:12
 msgid "likes"
@@ -1899,9 +1899,8 @@ msgid "Subject type"
 msgstr "Τύπος αντικειμένου"
 
 #: models.py:666
-#, fuzzy
 msgid "Objects in field"
-msgstr "Το αντικείμενο δεν βρέθηκε"
+msgstr "Αντικείμενα στο πεδίο"
 
 #: models.py:667
 msgid "Use a <strong>comma</strong> to separate the values."
@@ -2185,13 +2184,14 @@ msgid "Higher resolution"
 msgstr "Υψηλότερη ανάλυση"
 
 #: models.py:1309
-#, fuzzy
 msgid "Real name"
-msgstr "Σωστό όνομα"
+msgstr "Πραγματικό όνομα"
 
 #: models.py:1310
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
+"Αν υπάρχει, το πραγματικό σας όνομα θα χρησιμοποιείται σε ολόκληρη την "
+"ιστοσελίδα"
 
 #: models.py:1324
 msgid "Job"
@@ -2237,7 +2237,6 @@ msgid "Company description"
 msgstr "Περιγραφή της εταιρίας"
 
 #: models.py:1365
-#, fuzzy
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2452,13 +2451,13 @@ msgstr ""
 "λόγους."
 
 #: models.py:1855
-#, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
-"Εδώ μπορείτε να γράψετε την πλήρη εμπορική περιγραφή του προϊόντος. Μπορείτε "
-"να χρησιμοποιήσετε μερικούς <a href=\"/faq/#10\">κανόνες μορφοποίησης</a>."
+"Εδώ μπορείτε να γράψετε την πλήρη εμπορική περιγραφή του προϊόντος σας. "
+"Μπορείτε να χρησιμοποιήσετε μερικούς <a href=\"/faq/#10\">κανόνες "
+"μορφοποίησης</a>."
 
 #: models.py:1874
 msgid "Commercial gear items"
@@ -2473,7 +2472,6 @@ msgid "Matching items:"
 msgstr "Σχετικά αντικείμενα:"
 
 #: settings.py:571
-#, fuzzy
 msgid "Remove from bookmarks"
 msgstr "Αφαίρεση από τα αγαπημένα"
 
@@ -2636,9 +2634,8 @@ msgid "Fill in one session, before adding more."
 msgstr "Εισάγετε μια συνεδρίαση, προτού προσθέσετε άλλη."
 
 #: views.py:1387 views.py:1451
-#, fuzzy
 msgid "Image deleted."
-msgstr "Η εικόνα σας διαγράφηκε"
+msgstr "Η εικόνα διαγράφηκε"
 
 #: views.py:1404
 #, fuzzy
@@ -2711,9 +2708,8 @@ msgstr ""
 "χρειαστεί να κατεβείτε πιο κάτω στην σελίδα για να τα δείτε."
 
 #: views.py:2599
-#, fuzzy
 msgid "Image uploaded. Thank you!"
-msgstr "Η φόρμα σώθηκε. Ευχαριστούμε!"
+msgstr "Η εικόνα φορτώθηκε. Ευχαριστούμε!"
 
 #: views.py:2901 templatetags/tags.py:237
 msgid "no alias"
@@ -2764,7 +2760,6 @@ msgid "There was a reply to your comment"
 msgstr "Υπήρξε απάντηση στο σχόλιο σας"
 
 #: management/__init__.py:69
-#, fuzzy
 msgid "Your image was bookmarked"
 msgstr "Η εικόνα σας προστέθηκε στα αγαπημένα"
 
@@ -3253,13 +3248,20 @@ msgid ""
 "every 24 hours. The same applies for the search index, the Big Wall, and "
 "some other user data."
 msgstr ""
+"Επειδή είναι υπολογιστικά δαπανηρό, το ευρετήριο του AstroBin ανανεώνεται "
+"κάθε 24 ώρες. Το ίδιο ισχύει και για το ευρετήριο αναζήτησης, τον Μεγάλο "
+"Τοίχο, και μερικά άλλα στοιχεία χρηστών."
 
 #: templates/faq.html:140
+#, fuzzy
 msgid ""
 "Every night, an algorithm looks at the images uploaded during the previous 7 "
 "days. The image with most Likes in that period is selected as Image of the "
 "Day."
 msgstr ""
+"Κάθε βράδυ, ένας αλγόριθμος ψάχνει τις εικόνες που ανέβηκαν τις προηγούμενες "
+"7 ημέρες. Η εικόνα με τα περισσότερα Likes σε αυτή την περίοδο επιλέγεται "
+"σαν Εικόνα της Ημέρας."
 
 #: templates/faq.html:146
 msgid ""
@@ -3664,9 +3666,8 @@ msgid "Sign up now!"
 msgstr "Εγγραφείτε τώρα!"
 
 #: templates/iotd_archive.html:7 templates/iotd_archive.html.py:12
-#, fuzzy
 msgid "Archive of 'Image of the day' winners"
-msgstr "Εικόνα της ημέρας"
+msgstr "Αρχείο νικητών της \"Εικόνας της ημέρας\""
 
 #: templates/iotd_archive.html:22 templates/actstream/action.html:81
 #: templates/actstream/action.html.py:88 templates/actstream/action.html:104
@@ -3784,7 +3785,7 @@ msgstr "Έκθεση εικόνων"
 #: templates/inclusion_tags/search_image_list.html:97
 #: templates/user/profile-subnav.html:42
 msgid "Bookmarks"
-msgstr ""
+msgstr "Αγαπημένα"
 
 #: templates/maintenance_base.html:257
 #: templates/base/user_links_entries.html:155
@@ -4442,12 +4443,10 @@ msgid "Avatar image"
 msgstr "Εικόνα avatar"
 
 #: templates/base/footer.html:34
-#, fuzzy
 msgid "The images on this websites are copyright of their respective owners."
 msgstr ""
-"Το AstroBin είναι Πνευματικό Δικαίωμα &copy; του Salvatore Iovene 2010-2012, "
-"Όλα τα δικαιώματα προστατευμένα. Οι εικόνες σε αυτό τον ιστότοπο είναι "
-"πνευματικά δικαιώματα των αντίστοιχων ιδιοκτητών τους."
+"Οι εικόνες σε αυτές τις ιστοσελίδες είναι πνευματικά δικαιώματα των "
+"αντίστοιχων ιδιοκτητών."
 
 #: templates/base/site_links.html:111
 msgid "AstroBin Raw Data"
@@ -5108,7 +5107,7 @@ msgstr "Κανονικό"
 
 #: templates/image/detail/modals/bookmarked_this.html:7
 msgid "The following people bookmarked this image"
-msgstr ""
+msgstr "Οι παρακάτω έβαλαν στα αγαπημένα τους αυτή την εικόνα"
 
 #: templates/image/detail/modals/cant_like.html:8
 msgid "Sorry"

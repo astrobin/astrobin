@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-03 07:27-0600\n"
-"PO-Revision-Date: 2013-11-14 13:45+0000\n"
+"PO-Revision-Date: 2013-11-27 12:41+0000\n"
 "Last-Translator: naavis <svnaavis@gmail.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1384436719.340626\n"
+"X-POOTLE-MTIME: 1385556095.339761\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2214,13 +2214,12 @@ msgid "Company description"
 msgstr "Yrityksen kuvaus"
 
 #: models.py:1365
-#, fuzzy
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
-"Lyhyt kuvaus AstroBin:ssa edustamastasi yrityksestä. Voit käyttää joitain <a "
-"href=\"/faq/#10\">muotoiluja</a>."
+"Lyhyt kuvaus AstroBinissa edustamastasi yrityksestä. Voit käyttää joitakin "
+"<a href=\"/faq/#comments\">muotoiluja</a>."
 
 #: models.py:1373
 msgid "Company website"
@@ -2412,18 +2411,16 @@ msgid ""
 msgstr "Helposti muistettava yhteenveto tuotteesta markkinointitarkoituksiin."
 
 #: models.py:1855
-#, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
-"Lyhyt kuvaus AstroBin:ssa edustamastasi yrityksestä. Voit käyttää joitain <a "
-"href=\"/faq/#10\">muotoiluja</a>."
+"Tähän voit kirjoittaa täyden kuvauksen tuotteestasi. Voit käyttää joitakin "
+"<a href=\"/faq/#comments\">muotoiluja</a>."
 
 #: models.py:1874
-#, fuzzy
 msgid "Commercial gear items"
-msgstr "kommentoi laitetta"
+msgstr "Kaupalliset laitteet"
 
 #: search.py:51 templates/image/actions/bring_to_attention.html:30
 msgid "No results. Sorry."
@@ -2434,9 +2431,8 @@ msgid "Matching items:"
 msgstr "Osumat:"
 
 #: settings.py:571
-#, fuzzy
 msgid "Remove from bookmarks"
-msgstr "Ei merkitty suosikiksi vielä kertaakaan"
+msgstr "Poista kirjanmerkeistä"
 
 #: settings.py:572
 msgid "Bookmark"
@@ -3694,7 +3690,7 @@ msgstr "Omat paikat"
 #: templates/base/user_links_entries.html:135 templates/index/root.html:320
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
-msgstr ""
+msgstr "Kaupalliset tuotteet"
 
 #: templates/maintenance_base.html:245
 #: templates/base/user_links_entries.html:143 templates/popover/user.html:30
@@ -3740,7 +3736,7 @@ msgstr "Perustiedot"
 #: templates/maintenance_base.html:287 templates/profile-edit-menu.html:15
 #, fuzzy
 msgid "Commercial information"
-msgstr "Lisätietoja"
+msgstr "Kaupallista tietoa"
 
 #: templates/maintenance_base.html:296 templates/profile-edit-menu.html:23
 #, fuzzy
@@ -3814,6 +3810,8 @@ msgid ""
 "fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
 "to do it now."
 msgstr ""
+"Tuottajana ja/tai myyjänä AstroBinissä on hyvin tärkeää ilmoittaa kaikki "
+"yritystiedot! Klikkaa <a href=\"%(the_url)s\">tästä</a> tehdäksesi niin heti."
 
 #: templates/maintenance_base.html:493 templates/base/alerts.html:42
 #, python-format
@@ -3939,11 +3937,15 @@ msgid "Every post is flat"
 msgstr "Jokainen viesti on litteä"
 
 #: templates/questions.html:35
+#, fuzzy
 msgid ""
 "It's very difficult to engage in several conversations at the same time in "
 "the same post, because the only way to do it is by quoting somebody. Very "
 "soon this becomes a mess."
 msgstr ""
+"On hyvin vaikeaa keskustella useasta asiasta yhtä aikaa samassa viestissä, "
+"koska ainoa tapa tehdä näin on tehdä lainauksia. Viesteistä tulee nopeasti "
+"hyvin sotkuisia."
 
 #: templates/questions.html:40
 msgid "Every post has the same visibility"
@@ -4156,11 +4158,11 @@ msgstr ""
 #: templates/upload.html:92
 msgid "Accepted file types: FIT and digital camera raw files"
 msgstr ""
+"Hyväksytyt tiedostoformaatit: FIT ja digitaalikameroiden raakakuvatiedostot"
 
 #: templates/upload.html:96
-#, fuzzy
 msgid "Filename"
-msgstr "Surinam"
+msgstr "Tiedostonimi"
 
 #: templates/upload.html:97 templates/popover/subject.html:15
 msgid "Size"
@@ -4171,9 +4173,8 @@ msgid "Status"
 msgstr "Status"
 
 #: templates/upload.html:115
-#, fuzzy
 msgid "Choose files"
-msgstr "Valitse tiedosto"
+msgstr "Valitse tiedostot"
 
 #: templates/upload.html:119
 msgid "Reset"
@@ -4185,7 +4186,7 @@ msgstr "Käynnistä lähetys"
 
 #: templates/upload.html:145 templates/upload.html.py:384
 msgid "Go to your Raw Data Library."
-msgstr ""
+msgstr "Mene Raakadatakirjastoosi."
 
 #: templates/upload.html:158
 msgid ""
@@ -4229,9 +4230,8 @@ msgid ""
 msgstr ""
 
 #: templates/upload.html:383
-#, fuzzy
 msgid "Upload complete!"
-msgstr "Latausaika"
+msgstr "Lataus on valmis!"
 
 #: templates/wall.html:15
 msgid "Sort by"
@@ -4246,9 +4246,8 @@ msgid "Acquired"
 msgstr "Kuvattu"
 
 #: templates/wall.html:41
-#, fuzzy
 msgid "Number of likes"
-msgstr "Ruutujen lukumäärä"
+msgstr "Tykkäyksien lukumäärä"
 
 #: templates/wall.html:53 templates/gear/page.html:253
 #: templates/inclusion_tags/search_image_list.html:53
@@ -4294,9 +4293,8 @@ msgid "Remove filter"
 msgstr "Poista suodatus"
 
 #: templates/actstream/action.html:144
-#, fuzzy
 msgid "ago"
-msgstr "%s sitten"
+msgstr "sitten"
 
 #: templates/avatar/change.html:14
 msgid "You do not yet have an avatar. Please upload one now."
@@ -4622,9 +4620,8 @@ msgid ""
 msgstr ""
 
 #: templates/gear/page.html:34
-#, fuzzy
 msgid "Other images"
-msgstr "Kalustokuvia"
+msgstr "Muita kuvia"
 
 #: templates/gear/page.html:59
 msgid "Some images"
@@ -4686,11 +4683,11 @@ msgstr ""
 
 #: templates/gear/page.html:145
 msgid "Buy it here"
-msgstr ""
+msgstr "Osta tuote tästä"
 
 #: templates/gear/page.html:193
 msgid "Properties"
-msgstr ""
+msgstr "Ominaisuudet"
 
 #: templates/gear/page.html:233
 #: templates/user/profile/commercial/products.html:40
@@ -4980,11 +4977,11 @@ msgstr "Normaali"
 
 #: templates/image/detail/modals/bookmarked_this.html:7
 msgid "The following people bookmarked this image"
-msgstr ""
+msgstr "Seuraavat ihmiset ovat merkinneet tämän kuvan kirjanmerkkeihinsä"
 
 #: templates/image/detail/modals/cant_like.html:8
 msgid "Sorry"
-msgstr ""
+msgstr "Pahoittelut"
 
 #: templates/image/detail/modals/cant_like.html:12
 #, python-format
@@ -4992,12 +4989,18 @@ msgid ""
 "We're really sorry, but liking an image requires an AstroBin index of "
 "<strong>%(min_index_to_like)s</strong> or greater."
 msgstr ""
+"Pahoittelut, mutta kuvasta tykkääminen vaatii AstroBin-indeksiksi <strong>%"
+"(min_index_to_like)s</strong> tai enemmän."
 
 #: templates/image/detail/modals/cant_like.html:16
+#, fuzzy
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
 "creating fake accounts to like their own images. Thank you for understanding!"
 msgstr ""
+"Rajoitus parantaa sivustoa kokonaisuutena estämällä ihmisiä luomasta "
+"valheellisia käyttäjätilejä, joilla lisätä omien kuviensa tykkäysmääriä. "
+"Kiitos ymmärryksestä!"
 
 #: templates/image/detail/modals/cant_like.html:20
 #, python-format
@@ -5451,6 +5454,8 @@ msgid ""
 "AstroBin offers the storage of FIT and DSLR camera raw files too, for "
 "archival and sharing purposes!"
 msgstr ""
+"AstroBin tarjoaa tilaa sekä FIT-kuvien että järjestelmäkameroiden "
+"raakakuvien säilytystä ja jakamista varten."
 
 #: templates/index/root.html:61
 #, python-format

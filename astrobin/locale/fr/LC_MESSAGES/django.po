@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-03 07:27-0600\n"
-"PO-Revision-Date: 2013-11-15 19:14+0000\n"
+"PO-Revision-Date: 2013-11-18 19:52+0000\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-POOTLE-MTIME: 1384542863.972913\n"
+"X-POOTLE-MTIME: 1384804371.790111\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1363,7 +1363,7 @@ msgstr "Texte"
 
 #: locale_extras.py:7
 msgid "uploaded a new image"
-msgstr "a chargé une nouvelle image"
+msgstr "a publié une nouvelle image"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
@@ -1379,7 +1379,7 @@ msgstr "a commenté le matériel"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr "marqué comme favori"
+msgstr "a marqué comme favori"
 
 #: locale_extras.py:12
 msgid "likes"
@@ -3227,7 +3227,7 @@ msgid ""
 "The AstroBin index is a function of the number of Likes and the number of "
 "images posted by a user."
 msgstr ""
-"L'index AstroBin dépend du nombre de 'j'aime' et du nombre d'images postées "
+"L'index AstroBin dépend du nombre de 'J'aime' et du nombre d'images postées "
 "par l'utilisateur."
 
 #: templates/faq.html:133
@@ -3246,9 +3246,9 @@ msgid ""
 "days. The image with most Likes in that period is selected as Image of the "
 "Day."
 msgstr ""
-"Chaque nuit, un algorithme examine les images chargées dans les 7 dernier "
-"sjours. L'image la plus appréciée pendant cette période est sélectionnée "
-"comme image du jour."
+"Chaque nuit, un algorithme examine les images publiées au cours 7 derniers "
+"jours. L'image la plus appréciée durant cette période est désignée comme "
+"image du jour."
 
 #: templates/faq.html:146
 msgid ""
@@ -6798,7 +6798,7 @@ msgstr "Zone d'attente"
 
 #: templates/user/profile-subnav.html:79
 msgid "Following"
-msgstr "S'abonner"
+msgstr "Abonnements"
 
 #: templates/user/profile-subnav.html:121
 msgid "Acquisition time"
