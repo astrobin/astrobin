@@ -1076,7 +1076,7 @@ class Image(HasSolutionMixin, models.Model):
             thumbnail_alias_settings['size'][1])
 
 
-    def thumbnail_invalidate_real(self, field, revision_label):
+    def thumbnail_invalidate_real(self, field, revision_label, delete_remote = True):
         from django.core.cache import cache
         from easy_thumbnails.files import get_thumbnailer
 
@@ -1108,19 +1108,20 @@ class Image(HasSolutionMixin, models.Model):
                 log.debug("Image %d: unable to find cache key %s" % (self.id, cache_key))
 
             # Then we delete the remote thumbnail
-            filename1 = thumbnailer.get_thumbnail_name(options)
-            filename2 = thumbnailer.get_thumbnail_name(options, transparent = True)
-            field.storage.delete(filename1)
-            log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
-            field.storage.delete(filename2)
-            log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
+            if delete_remote:
+                filename1 = thumbnailer.get_thumbnail_name(options)
+                filename2 = thumbnailer.get_thumbnail_name(options, transparent = True)
+                field.storage.delete(filename1)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
+                field.storage.delete(filename2)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
-            filename1 = local_thumbnailer.get_thumbnail_name(options)
-            filename2 = local_thumbnailer.get_thumbnail_name(options, transparent = True)
-            field.storage.delete(filename1)
-            log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
-            field.storage.delete(filename2)
-            log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
+                filename1 = local_thumbnailer.get_thumbnail_name(options)
+                filename2 = local_thumbnailer.get_thumbnail_name(options, transparent = True)
+                field.storage.delete(filename1)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
+                field.storage.delete(filename2)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
             # Then we delete the local file cache
             field.storage.local_storage.delete(local_filename)
@@ -1139,8 +1140,8 @@ class Image(HasSolutionMixin, models.Model):
         except ThumbnailGroup.DoesNotExist:
             log.debug("Image %d: thumbnail group missing." % self.id)
 
-    def thumbnail_invalidate(self):
-        return self.thumbnail_invalidate_real(self.image_file, '0')
+    def thumbnail_invalidate(self, delete_remote = True):
+        return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
 
 
     @staticmethod
@@ -1234,8 +1235,8 @@ class ImageRevision(HasSolutionMixin, models.Model):
     def thumbnail(self, alias, thumbnail_settings = {}):
         return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
 
-    def thumbnail_invalidate(self):
-        return self.image.thumbnail_invalidate_real(self.image_file, self.label)
+    def thumbnail_invalidate(self, delete_remote = True):
+        return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete_remote)
 
 
 class Acquisition(models.Model):
