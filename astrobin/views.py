@@ -805,9 +805,9 @@ def image_detail(request, id, r):
 @require_POST
 def image_flag_thumbs(request, id):
     image = get_object_or_404(Image.all_objects, id = id)
-    image.thumbnail_invalidate()
+    image.thumbnail_invalidate(False)
     for r in image.revisions.all():
-        r.thumbnail_invalidate()
+        r.thumbnail_invalidate(False)
     messages.success(request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
     return HttpResponseRedirect(reverse("image_detail", kwargs= {'id': id}))
 
