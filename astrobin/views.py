@@ -1488,7 +1488,6 @@ def image_delete_original(request, id):
 
     image.thumbnails.filter(revision = final.label).update(revision = '0')
 
-    final.thumbnail_invalidate()
     final.delete()
 
     messages.success(request, _("Image deleted."));
