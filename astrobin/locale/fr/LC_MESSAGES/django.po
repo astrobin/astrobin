@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-03 07:27-0600\n"
-"PO-Revision-Date: 2013-11-18 19:52+0000\n"
+"PO-Revision-Date: 2013-12-15 14:46+0000\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-POOTLE-MTIME: 1384804371.790111\n"
+"X-POOTLE-MTIME: 1387118781.820699\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2585,7 +2585,7 @@ msgstr "Heures"
 
 #: views.py:651
 msgid "Avg. Moon age"
-msgstr "Age moyen de la Lune"
+msgstr "Âge moyen de la Lune"
 
 #: views.py:651
 msgid "days"
@@ -3246,9 +3246,9 @@ msgid ""
 "days. The image with most Likes in that period is selected as Image of the "
 "Day."
 msgstr ""
-"Chaque nuit, un algorithme examine les images publiées au cours 7 derniers "
-"jours. L'image la plus appréciée durant cette période est désignée comme "
-"image du jour."
+"Chaque nuit, un algorithme examine les images publiées au cours des 7 "
+"derniers jours. L'image la plus appréciée durant cette période est désignée "
+"comme image du jour."
 
 #: templates/faq.html:146
 msgid ""
@@ -4925,7 +4925,7 @@ msgstr "Centre DEC"
 
 #: templates/image/detail/image_card.html:81
 msgid "Pixel scale"
-msgstr "Echelle des pixels"
+msgstr "Échelle des pixels"
 
 #: templates/image/detail/image_card.html:81
 msgid "arcsec/pixel"
@@ -6547,7 +6547,7 @@ msgstr "Réinitialiser le mot de passe"
 
 #: templates/registration/logout.html:4 templates/registration/logout.html:6
 msgid "Good bye!"
-msgstr "A bientôt!"
+msgstr "À bientôt!"
 
 #: templates/registration/logout.html:7
 msgid "You have been logged out. Come back soon!"
