@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-03 07:28-0600\n"
+"POT-Creation-Date: 2013-12-22 07:42+0000\n"
 "PO-Revision-Date: 2012-12-29 19:25+0100\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1147,7 +1147,7 @@ msgstr "Δεν μπορείτε να μεταβείτε σε αυτό το πλ�
 
 #: templates/subscription/subscription_detail.html:65
 #: templates/subscription/subscription_done.html:21
-#: templates/subscription/subscription_list.html:73
+#: templates/subscription/subscription_list.html:86
 msgid "Thank you for supporting AstroBin!"
 msgstr "Σας ευχαριστούμε που στηρίζετε το AstroBin!"
 
@@ -1196,11 +1196,11 @@ msgid "Here are the available plans. Choose the one that suits you best!"
 msgstr ""
 "Αυτά είναι τα διαθέσιμα πλάνα. Επιλέξτε αυτό που σας ταιριάζει καλύτερα!"
 
-#: templates/subscription/subscription_list.html:31
+#: templates/subscription/subscription_list.html:39
 msgid "Manage"
 msgstr "Διαχείριση"
 
-#: templates/subscription/subscription_list.html:41
+#: templates/subscription/subscription_list.html:54
 msgid ""
 " Choose this plan if you want to keep your expenses to a minimum, but still "
 "want the possibity to share your FIT and digital camera raw files with your "
@@ -1215,7 +1215,7 @@ msgstr ""
 "στις πιο βαθιές εικόνες βαθύ ουρανού που δημιουργήθηκαν ποτέ, και θα ξέρετε "
 "ότι πάντα θα υποστηρίζετε το AstroBin."
 
-#: templates/subscription/subscription_list.html:49
+#: templates/subscription/subscription_list.html:62
 msgid ""
 "Choose this plan if you have started out in the recent year or two, or you "
 "don't want to share and backup your calibration files. Enjoy a lot of room "
@@ -1225,7 +1225,7 @@ msgstr ""
 "δεν θέλετε να μοιραστείτε και να έχετε αντίγραφο ασφαλείας των αρχείων "
 "βαθμονόμησης. Μπορείτε να ευχαριστηθείτε πολύ χώρο σε μια καλή τιμή."
 
-#: templates/subscription/subscription_list.html:57
+#: templates/subscription/subscription_list.html:70
 msgid ""
 "Choose this plan if you have several years worth of data. You will probably "
 "have enough room for all your calibration files, and will enjoy the full "
@@ -1235,7 +1235,7 @@ msgstr ""
 "αρκετό χώρο για όλα τα αρχεία βαθμονόμησης, και θα ευχαριστηθείτε την πλήρη "
 "δυνατότητα της πλατφόρμας. "
 
-#: templates/subscription/subscription_list.html:65
+#: templates/subscription/subscription_list.html:78
 msgid ""
 "Choose this plan if you have a massive amount of raw data that you want to "
 "share and backup securely online."
@@ -1244,7 +1244,7 @@ msgstr ""
 "οποία θέλετε να μοιραστείτε και να δημιουργήσετε αντίγραφο ασφαλείας με "
 "ασφάλεια online."
 
-#: templates/subscription/subscription_list.html:76
+#: templates/subscription/subscription_list.html:89
 msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"
