@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-03 07:27-0600\n"
-"PO-Revision-Date: 2013-11-27 12:41+0000\n"
+"PO-Revision-Date: 2013-12-08 21:09+0000\n"
 "Last-Translator: naavis <svnaavis@gmail.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
 "Language: fi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1385556095.339761\n"
+"X-POOTLE-MTIME: 1386536969.631108\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2756,16 +2756,15 @@ msgstr "Uusi kuva seuraamastasi kohteesta"
 
 #: management/__init__.py:123
 msgid "New data posted to shared private folder"
-msgstr ""
+msgstr "Uutta dataa lisätty jaettuun yksityiskansioon"
 
 #: management/__init__.py:129
 msgid "New image posted to shared private folder"
-msgstr ""
+msgstr "Uusi kuva lisätty jaettuun yksityiskansioon"
 
 #: management/__init__.py:135
-#, fuzzy
 msgid "You are invited to a shared private folder"
-msgstr "Sinulle on uusi yksityisviesti."
+msgstr "Sinut on kutsuttu jaettuun yksityiskansioon"
 
 #: templates/403.html:5
 msgid "You are not allowed to see this page."
@@ -4346,7 +4345,7 @@ msgstr "Raakadatakirjasto"
 
 #: templates/base/user_links_entries.html:171
 msgid "Private shared folders"
-msgstr ""
+msgstr "Jaetut yksityiskansiot"
 
 #: templates/base/user_links_entries.html:209
 msgid "Would you like to start using your real name on AstroBin?"
@@ -4364,7 +4363,7 @@ msgstr "Ei kiitos"
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:9
 msgid "Edit commercial product"
-msgstr ""
+msgstr "Muokkaa kaupallista tuotetta"
 
 #: templates/commercial/products/edit.html:14
 #: templates/commercial/products/retailed/edit.html:14
@@ -4395,14 +4394,13 @@ msgstr "Tallenna"
 
 #: templates/commercial/products/edit.html:15
 #: templates/commercial/products/retailed/edit.html:15
-#, fuzzy
 msgid "Return to list"
-msgstr "Palaa kuvaan"
+msgstr "Palaa listaan"
 
 #: templates/commercial/products/edit.html:16
 #: templates/commercial/products/retailed/edit.html:16
 msgid "View in new window"
-msgstr ""
+msgstr "Avaa uudessa ikkunassa"
 
 #: templates/commercial/products/retailed/edit.html:7
 #: templates/commercial/products/retailed/edit.html:9
@@ -4617,7 +4615,7 @@ msgstr "Kiitokset!"
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
 "grateful."
-msgstr ""
+msgstr "Panoksesi on hyvin tärkeä, ja koko AstroBin-yhteisö on kiitollinen."
 
 #: templates/gear/page.html:34
 msgid "Other images"
@@ -4840,7 +4838,7 @@ msgstr "Lähetä viesti käyttäjälle %(username)s"
 #: templates/image/detail/revisions.html:12
 #: templates/image/detail/revisions.html:33
 msgid "Final"
-msgstr ""
+msgstr "Lopullinen versio"
 
 #: templates/image/detail/revisions.html:22
 msgid "Original"
@@ -4916,9 +4914,8 @@ msgstr "Nosta julkiselle alueelle"
 
 #: templates/image/detail/menu/actions.html:85
 #: templates/image/detail/modals/send_to_sharedfolder.html:7
-#, fuzzy
 msgid "Send to private shared folder"
-msgstr "Lähetä yksityisviesti"
+msgstr "Lähetä jaettuun yksityiskansioon"
 
 #: templates/image/detail/menu/actions.html:95
 msgid "Delete original image"
@@ -4993,13 +4990,12 @@ msgstr ""
 "(min_index_to_like)s</strong> tai enemmän."
 
 #: templates/image/detail/modals/cant_like.html:16
-#, fuzzy
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
 "creating fake accounts to like their own images. Thank you for understanding!"
 msgstr ""
 "Rajoitus parantaa sivustoa kokonaisuutena estämällä ihmisiä luomasta "
-"valheellisia käyttäjätilejä, joilla lisätä omien kuviensa tykkäysmääriä. "
+"ylimääräisiä käyttäjätilejä, joilla lisätä omien kuviensa tykkäysmääriä. "
 "Kiitos ymmärryksestä!"
 
 #: templates/image/detail/modals/cant_like.html:20
@@ -5484,9 +5480,8 @@ msgid "Recent images from people you follow"
 msgstr "Uusi kuva seuraamaltasi käyttäjältä"
 
 #: templates/index/root.html:183 templates/index/root.html.py:249
-#, fuzzy
 msgid "Recently liked"
-msgstr "ladattu"
+msgstr "Viime aikoina tykätyt"
 
 #: templates/index/root.html:188 templates/index/root.html.py:260
 #, fuzzy
@@ -6285,7 +6280,7 @@ msgstr ""
 
 #: templates/openid_provider/decide.html:13
 msgid "Verify"
-msgstr ""
+msgstr "Todenna"
 
 #: templates/popover/gear.html:9 templates/popover/gear_accessory.html:22
 #: templates/popover/gear_camera.html:26 templates/popover/gear_filter.html:24
@@ -6425,7 +6420,6 @@ msgid "Registration completed"
 msgstr "Rekisteröinti valmis"
 
 #: templates/registration/registration_complete.html:7
-#, fuzzy
 msgid "You are now registered"
 msgstr "Olet nyt rekisteröitynyt"
 
@@ -6540,7 +6534,7 @@ msgid "Request an API Key"
 msgstr "Pyydä rajapinta-avainta."
 
 #: templates/user/bookmarks.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's bookmarks"
 msgstr "Käyttäjän %(user)s kirjanmerkit"
 
@@ -6549,12 +6543,12 @@ msgid "Your bookmarks"
 msgstr "Kirjanmerkkisi"
 
 #: templates/user/bookmarks.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's bookmarks"
 msgstr "Käyttäjän %(username)s kirjanmerkit"
 
 #: templates/user/followers.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's followers"
 msgstr "Käyttäjän %(user)s seuraajat"
 
@@ -6830,7 +6824,7 @@ msgstr "Klikkaa valitaksesi kuvat, jotka haluat tuoda"
 #: templates/user/profile/commercial/products.html:357
 #: templates/user/profile/commercial/products.html:361
 msgid "Are you sure?"
-msgstr ""
+msgstr "Oletko varma?"
 
 #: templates/user/profile/commercial/products.html:304
 msgid "Claim retailed product"
@@ -6870,7 +6864,7 @@ msgstr "Muokkaa käytettyjä laitteita"
 #: templates/user/profile/edit/gear.html:27
 #: templates/user/profile/edit/gear.html:72
 msgid "Please note!"
-msgstr ""
+msgstr "Huomaa!"
 
 #: templates/user/profile/edit/gear.html:28
 #: templates/user/profile/edit/gear.html:73
@@ -6884,7 +6878,7 @@ msgstr ""
 #: templates/user/profile/edit/gear.html:40
 #: templates/user/profile/edit/gear.html:57
 msgid "Close"
-msgstr ""
+msgstr "Sulje"
 
 #: templates/user/profile/edit/gear.html:45
 msgid ""
