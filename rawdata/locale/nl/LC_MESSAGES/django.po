@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-03 06:50-0600\n"
+"POT-Creation-Date: 2013-12-22 07:43+0000\n"
 "PO-Revision-Date: 2013-10-14 10:14+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1150,7 +1150,7 @@ msgstr "Je kan niet overschakelen naar dit type abonnement."
 
 #: templates/subscription/subscription_detail.html:65
 #: templates/subscription/subscription_done.html:21
-#: templates/subscription/subscription_list.html:73
+#: templates/subscription/subscription_list.html:86
 msgid "Thank you for supporting AstroBin!"
 msgstr "Bedankt om AstroBin te steunen!"
 
@@ -1198,11 +1198,11 @@ msgstr ""
 "Dit zijn de beschikbare abonnementstypes. Kies voor de formule die je het "
 "best past!"
 
-#: templates/subscription/subscription_list.html:31
+#: templates/subscription/subscription_list.html:39
 msgid "Manage"
 msgstr "Beheren"
 
-#: templates/subscription/subscription_list.html:41
+#: templates/subscription/subscription_list.html:54
 msgid ""
 " Choose this plan if you want to keep your expenses to a minimum, but still "
 "want the possibity to share your FIT and digital camera raw files with your "
@@ -1216,7 +1216,7 @@ msgstr ""
 "leveren aan de creatie van de meest gedetailleerde deep sky foto's ooit door "
 "amateurs gemaakt. Daarenboven steun je hierbij het AstroBin-project."
 
-#: templates/subscription/subscription_list.html:49
+#: templates/subscription/subscription_list.html:62
 msgid ""
 "Choose this plan if you have started out in the recent year or two, or you "
 "don't want to share and backup your calibration files. Enjoy a lot of room "
@@ -1227,7 +1227,7 @@ msgstr ""
 "te bewaren. Geniet met deze formule van een grote opslagmogelijkheid voor "
 "een eerlijke prijs."
 
-#: templates/subscription/subscription_list.html:57
+#: templates/subscription/subscription_list.html:70
 msgid ""
 "Choose this plan if you have several years worth of data. You will probably "
 "have enough room for all your calibration files, and will enjoy the full "
@@ -1238,7 +1238,7 @@ msgstr ""
 "calibratiebestanden en kan je van het volle potentieel van het platform "
 "gebruik maken."
 
-#: templates/subscription/subscription_list.html:65
+#: templates/subscription/subscription_list.html:78
 msgid ""
 "Choose this plan if you have a massive amount of raw data that you want to "
 "share and backup securely online."
@@ -1246,7 +1246,7 @@ msgstr ""
 "Kies deze formule als je een massieve hoeveelheid aan raw data on-line wil "
 "opslaan en delen."
 
-#: templates/subscription/subscription_list.html:76
+#: templates/subscription/subscription_list.html:89
 msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"
