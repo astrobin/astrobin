@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:39+0000\n"
-"PO-Revision-Date: 2013-09-11 08:09+0100\n"
+"POT-Creation-Date: 2014-01-28 08:56+0000\n"
+"PO-Revision-Date: 2014-01-15 18:36+0000\n"
 "Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1389810988.257327\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2174,9 +2175,8 @@ msgid "Higher resolution"
 msgstr "Resolución máxima"
 
 #: models.py:1524
-#, fuzzy
 msgid "Real name"
-msgstr "Denominación correcta"
+msgstr "Nombre real"
 
 #: models.py:1525
 msgid "If present, your real name will be used throughout the website."
@@ -2593,6 +2593,8 @@ msgstr "Fondo de Cielo (Mag./seg.^2)"
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
+"Gracias por informar del problema. Todas las miniaturas serán generadas de "
+"nuevo."
 
 #: views.py:937 views.py:2597
 msgid ""
@@ -2613,6 +2615,8 @@ msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
 msgstr ""
+"Has subido un archivo PNG indexado. AstroBin necesitará reducir el número de "
+"colores a 256 para poder trabajar con él."
 
 #: views.py:1216 views.py:1299 views.py:1383 views.py:1409 views.py:2053
 #: views.py:2066 views.py:2087 views.py:2124 views.py:2214 views.py:2276
@@ -2629,7 +2633,7 @@ msgstr "Completar una sesión antes de añadir más."
 #: views.py:1422 views.py:1493
 #, fuzzy
 msgid "Image deleted."
-msgstr "Tu imagen ha sido borrada"
+msgstr "Imagen borrada."
 
 #: views.py:1440
 msgid "Revision deleted."
@@ -2704,7 +2708,7 @@ msgstr ""
 #: views.py:2651
 #, fuzzy
 msgid "Image uploaded. Thank you!"
-msgstr "Formulario guardado. ¡Gracias!"
+msgstr "Imagen subida. ¡Gracias!"
 
 #: views.py:2953 templatetags/tags.py:237
 msgid "no alias"
@@ -2716,7 +2720,7 @@ msgstr "No puedes anexar un producto a él mismo."
 
 #: views.py:3900
 msgid "Default front page section changed."
-msgstr ""
+msgstr "Sección de página principal cambiada."
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -2757,7 +2761,7 @@ msgstr "Hay una respuesta a tu comentario"
 #: management/__init__.py:69
 #, fuzzy
 msgid "Your image was bookmarked"
-msgstr "Tu imagen ha sido seleccionada como favorita"
+msgstr "Tu imagen ha sido marcada"
 
 #: management/__init__.py:75
 msgid "Your image was liked"
@@ -2841,7 +2845,7 @@ msgstr "Volver a la página de inicio."
 #: templates/503.html:4
 #, fuzzy
 msgid "AstroBin in temporarily unavailable"
-msgstr "AstroBin no está disponible temporalmente"
+msgstr "Entrada a AstroBin temporalmente no disponible"
 
 #: templates/503.html:7
 msgid "AstroBin is temporarily unavailable"
@@ -4958,7 +4962,7 @@ msgstr "Original"
 
 #: templates/image/detail/skyplot.html:5 templates/image/detail/skyplot.html:7
 msgid "Sky plot"
-msgstr ""
+msgstr "Carta celeste"
 
 #: templates/image/detail/wip_banner.html:9
 #, python-format
@@ -6311,6 +6315,7 @@ msgstr ""
 "\"%(pool_name)s\". Compruébalo en el siguiente enlace: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
+#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
@@ -6320,15 +6325,6 @@ msgstr ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> ha añadido una nueva "
 "imagen procesada a la carpeta pública: <strong>\"%(pool_name)s.\"</strong></"
 "a>"
-
-#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has añadido una "
-"nueva imagen procesada a la carpeta pública: <strong>\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
@@ -7128,6 +7124,14 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Edita tu información de vendedor"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has añadido una "
+#~ "nueva imagen procesada a la carpeta pública: <strong>\"%(pool_name)s.\"</"
+#~ "a>"
 
 #~ msgid ""
 #~ "<a href=\"%(folder_url)s\">You are invited you to the private shared "

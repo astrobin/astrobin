@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:45+0000\n"
+"POT-Creation-Date: 2014-01-28 09:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,26 +66,54 @@ msgid "What is AstroBin worth to you?"
 msgstr ""
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:24
+msgid "Monthly contributions"
+msgstr ""
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:26
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:27
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:28
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:29
+#, python-format
+msgid "$%(amount)s/month"
+msgstr ""
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
 msgid "A coffee"
 msgstr ""
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:24
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:26
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:27
-msgid "monthly"
-msgstr ""
-
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:34
 msgid "A snack"
 msgstr ""
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:26
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:27
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:35
 msgid "A pizza"
 msgstr ""
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:27
-msgid "A movie night"
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:28
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:36
+msgid "A movie night for one"
+msgstr ""
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:29
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:37
+msgid "A frugal dinner out for one"
+msgstr ""
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:32
+msgid "Yearly contributions (cheaper!)"
+msgstr ""
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:34
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:35
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:36
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:37
+#, python-format
+msgid "$%(amount)s/year"
 msgstr ""
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:8
@@ -143,7 +171,8 @@ msgstr ""
 #: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:24
 msgid ""
 "Please donate any amount you want, selecting from the options below and "
-"subscribing with a recurring monthly payment."
+"subscribing with a recurring monthly payment. You will be able to cancel "
+"your subscription whenever you want."
 msgstr ""
 
 #: templates/astrobin_apps_donations/inclusion_tags/donate_modal.html:24

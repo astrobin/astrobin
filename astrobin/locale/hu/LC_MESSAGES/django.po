@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:40+0000\n"
+"POT-Creation-Date: 2014-01-28 08:56+0000\n"
 "PO-Revision-Date: 2013-04-29 08:29+0100\n"
 "Last-Translator: kelemenlajos <kelemenlajos@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5703,18 +5703,12 @@ msgid ""
 msgstr ""
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
+#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
-msgstr ""
-
-#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2

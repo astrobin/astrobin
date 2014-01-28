@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:42+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-01-28 08:58+0000\n"
+"PO-Revision-Date: 2014-01-05 12:47+0000\n"
+"Last-Translator: sayco <sayco.only@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5\n"
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1388926024.5077\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -27,163 +28,170 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:20
 #: templates/rawdata/publicdatapool_list.html:32
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #: folders.py:92 templates/rawdata/_folder_dropdown.html:14
 #: templates/rawdata/_images.html:18 templates/rawdata/library.html:65
 #: templates/rawdata/rawimage_detail.html:15
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #: folders.py:117 templates/rawdata/_folder_dropdown.html:28
 msgid "Upload date"
-msgstr ""
+msgstr "تاريخ النشر"
 
 #: folders.py:141 templates/rawdata/_folder_dropdown.html:21
 #: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
 msgid "Acquisition date"
-msgstr ""
+msgstr "تاريخ الاقتناء"
 
 #: folders.py:166 templates/rawdata/_folder_dropdown.html:35
 #: templates/rawdata/library.html:89 templates/rawdata/rawimage_detail.html:19
 msgid "Camera"
-msgstr ""
+msgstr "الكاميرا"
 
 #: folders.py:190 templates/rawdata/_folder_dropdown.html:42
 #: templates/rawdata/library.html:97
 msgid "Telescope or lens"
-msgstr ""
+msgstr "تلسكوب أو عدسة"
 
 #: folders.py:214 templates/rawdata/_folder_dropdown.html:49
 #: templates/rawdata/library.html:105
 msgid "Filter"
-msgstr ""
+msgstr "فلتر"
 
 #: folders.py:238 templates/rawdata/_folder_dropdown.html:56
 #: templates/rawdata/library.html:113
 msgid "Subject"
-msgstr ""
+msgstr "الموضوع"
 
 #: folders.py:262 templates/rawdata/_folder_dropdown.html:63
 #: templates/rawdata/library.html:121
 #: templates/rawdata/rawimage_detail.html:20
 msgid "Temperature"
-msgstr ""
+msgstr "درجة الحرارة"
 
 #: forms.py:86
 msgid "Users"
-msgstr ""
+msgstr "المستخدمون"
 
 #: forms.py:87
 msgid "A list of users you want to invite. Use a comma to separate them."
-msgstr ""
+msgstr "قائمة المستخدمين الذين تريد دعوتهم. استخدام فاصلة للفصل بينهما."
 
 #: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
-msgstr ""
+msgstr "مجهول"
 
 #: models.py:45
 msgid "Light"
-msgstr ""
+msgstr "فاتح"
 
 #: models.py:46
 msgid "Offset/Bias"
-msgstr ""
+msgstr "موازنة / الانحياز"
 
 #: models.py:47
 msgid "Dark"
-msgstr ""
+msgstr "داكن"
 
 #: models.py:48
 msgid "Flat"
-msgstr ""
+msgstr "مسطح"
 
 #: models.py:216
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
 msgstr ""
+"الاسم العام لهذا التجمع. قم بوصفه، أضف اسم الجرم السماوي والبعد البؤري "
+"بملليمتر."
 
 #: models.py:220 models.py:288
 #: templates/rawdata/privatesharedfolder_list.html:38
 #: templates/rawdata/publicdatapool_list.html:33
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #: models.py:221
 msgid "Describe the goals and terms of this pool."
-msgstr ""
+msgstr "يرجى وصف أهداف وشروط هذا التجمع."
 
 #: models.py:284
 msgid ""
 "A name for this folder. Be descriptive, so that the folder can be quickly "
 "recognized by the name."
 msgstr ""
+"الأسم الخاص للمجلد. يفضل ان يكون الأسم عبارة عن وصف, فيسهل التعرف علي المجلد "
+"بسرعة."
 
 #: models.py:289
 msgid "Describe the goals of this folder."
-msgstr ""
+msgstr "أذكر الهدف من هذا المجلد."
 
 #: serializers.py:38
 msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
 msgstr ""
+"لا يوجد مساحة فارغة لديك علي أستروبين للبيانات الخام. يمكنك ترقية حسابك."
 
 #: signal_handlers.py:18
 msgid ""
 "You cannot downgrade to this plan because your files would not fit in the "
 "allocated space. Please delete some files first."
 msgstr ""
+"لا يمكنك الرجوع لهذة الخطة حيث المساحة المتاحة بها لا تتناسب مع حجم ملفاتك. "
+"يرجى حذف بعض الملفات أولا."
 
 #: templates/rawdata/_browser_js.html:20 templates/rawdata/_images.html:14
 msgid "Select all"
-msgstr ""
+msgstr "تحديد الكل"
 
 #: templates/rawdata/_browser_js.html:40
 msgid "Reset selection"
-msgstr ""
+msgstr "إزالة التحديد"
 
 #: templates/rawdata/_browser_js.html:50 templates/rawdata/_images.html:41
 #: templates/rawdata/privatesharedfolder_detail.html:142
 #: templates/rawdata/publicdatapool_detail.html:111
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
-msgstr ""
+msgstr "تحميل"
 
 #: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
 msgid "Preprocess"
-msgstr ""
+msgstr "تمهيد"
 
 #: templates/rawdata/_browser_js.html:63
 msgid "Share"
-msgstr ""
+msgstr "مُشاركة"
 
 #: templates/rawdata/_browser_js.html:70
 #: templates/rawdata/privatesharedfolder_detail.html:8
 msgid "Private shared folder"
-msgstr ""
+msgstr "المجلد المشترك الخاص"
 
 #: templates/rawdata/_browser_js.html:74
 #: templates/rawdata/publicdatapool_detail.html:8
 msgid "Public data pool"
-msgstr ""
+msgstr "تجمع البيانات العامة"
 
 #: templates/rawdata/_browser_js.html:80 templates/rawdata/_images.html:44
 #: templates/rawdata/privatesharedfolder_detail.html:46
 #: templates/rawdata/privatesharedfolder_detail.html:184
 #: templates/rawdata/privatesharedfolder_list.html:92
 msgid "Delete"
-msgstr ""
+msgstr "حدف"
 
 #: templates/rawdata/_folder_dropdown.html:7
 #: templates/rawdata/library.html:129
 msgid "Smart folders"
-msgstr ""
+msgstr "المجلدات الذكية"
 
 #: templates/rawdata/_folders.html:12
 msgid "Files"
-msgstr ""
+msgstr "الملفات"
 
 #: templates/rawdata/_images.html:19 templates/rawdata/library.html:73
 #: templates/rawdata/privatesharedfolder_detail.html:87
@@ -192,11 +200,11 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:22
 #: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
-msgstr ""
+msgstr "رُفِعت"
 
 #: templates/rawdata/_screenshot_tour.html:3
 msgid "Screenshot tour"
-msgstr ""
+msgstr "جولة لقطة من الشاشه"
 
 #: templates/rawdata/help_01.html:4 templates/rawdata/help_01.html.py:8
 #: templates/rawdata/help_01.html:32 templates/rawdata/help_02.html:4
@@ -216,12 +224,12 @@ msgstr ""
 #: templates/subscription/subscription_list.html:4
 #: templates/subscription/subscription_list.html:8
 msgid "AstroBin Raw Data"
-msgstr ""
+msgstr "البيانات الخام بأستروبين"
 
 #: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
 #: templates/rawdata/help_03.html:9
 msgid "To safely store and organize your raw files."
-msgstr ""
+msgstr "لتخزين وتنظيم الملفات الخام الخاصة بك بأمان ."
 
 #: templates/rawdata/help_01.html:19
 msgid "What is AstroBin Raw Data?"
@@ -278,6 +286,8 @@ msgid ""
 "You can have up to <strong>500 GB</strong> to store your <strong>FIT</"
 "strong> and <strong>digital camera raw</strong> files."
 msgstr ""
+"يمكنك ان تمتلك حتى <strong>500 جيجا بايت</strong> لحفظ الملفات من النوع "
+"<strong>FIT</strong> و <strong>الملفات الخام</strong> للكاميرا الرقمية."
 
 #: templates/rawdata/help_02.html:22
 msgid ""

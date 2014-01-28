@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:42+0000\n"
+"POT-Creation-Date: 2014-01-28 08:58+0000\n"
 "PO-Revision-Date: 2012-07-19 18:56+0100\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6162,20 +6162,12 @@ msgstr ""
 "edebilirsiniz: %(object_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
+#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, fuzzy, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
-"favorilerine ekledi!</a>"
-
-#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
 "favorilerine ekledi!</a>"
@@ -6964,6 +6956,14 @@ msgstr "Dilinizi ve hangi e-mail bilgilendirmesini almak istediğinizi seçin:"
 #, fuzzy
 msgid "Edit your retailer information"
 msgstr "Temel bilgilerinizi düzenleyin"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
+#~ "favorilerine ekledi!</a>"
 
 #, fuzzy
 #~ msgid ""
