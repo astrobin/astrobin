@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-28 08:57+0000\n"
-"PO-Revision-Date: 2014-01-28 11:41+0000\n"
+"PO-Revision-Date: 2014-01-28 12:00+0000\n"
 "Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1390909294.993441\n"
+"X-POOTLE-MTIME: 1390910433.621685\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -3437,12 +3437,12 @@ msgid ""
 msgstr ""
 "Ты астрофотограф? Тебе нравится делиться своими достижениями с другими? "
 "Будучи сам астрофотографом, и подписчиком множества Астрофотографических "
-"форумов, я нашёл место в Интернете для удобного и централизованного способа "
+"форумов, я искал место в Интернете для удобного и централизованного способа "
 "размещать и делиться своими работами с другими астрофотографами."
 
 #: templates/help.html:14
 msgid "Well, this is finally over!"
-msgstr "Ну, наконец-то всё нормально!"
+msgstr "Ну, наконец-то оно есть!"
 
 #: templates/help.html:16 templates/index/root.html:79
 msgid ""
@@ -3450,20 +3450,25 @@ msgid ""
 "ground up by an astrophotographer, and it provides means to people who want "
 "to share their astrophotographs."
 msgstr ""
+"<em>AstroBin</em> появился чтобы заполнить этот пробел. Этот веб-сайт "
+"построен с нуля астрофотографом, и предоставляет средства для людей, которые "
+"хотят делиться своими астрофото."
 
 #: templates/help.html:18
 msgid "So how is this different from any other image sharing websites?"
-msgstr ""
+msgstr "Так в чём отличия от других сайтов для обмена изображениями?"
 
 #: templates/help.html:20
 msgid ""
 "<em>AstroBin</em> provides a number of features that are tailored "
 "specificlly to astrophotography. Here's a quick run down of the main ones:"
 msgstr ""
+"<em>AstroBin</em> предоставляет ряд особенностей, учитывая специфичность "
+"астрофотографии. Вот быстренько основные из них:"
 
 #: templates/help.html:23
 msgid "Dedication to data"
-msgstr ""
+msgstr "Верность данным"
 
 #: templates/help.html:25
 msgid ""
@@ -3471,6 +3476,9 @@ msgid ""
 "done with it. <em>AstroBin</em>, instead, has a user interface specifically "
 "designed to enable you to input all the technical data of your image."
 msgstr ""
+"На обычных сайтах по обмену изображениями вы можете только загрузить их и "
+"всё на этом. <em>AstroBin</em>, в свою очередь, даёт интерфейс для ввода "
+"всех необходимых данных и деталей к вашему изображению."
 
 #: templates/help.html:26
 msgid ""
@@ -3481,6 +3489,12 @@ msgid ""
 "Astronomical Database, which contains over 5 million objects under over 15 "
 "million names!"
 msgstr ""
+"<em>AstroBin</em> позволяет автозаполнять ваш ввод используя обширную базу "
+"данных: разнообразные телескопы, ПЗС-матрицы и фильтры для астрономических "
+"объектов из большого каталога отображаются во всплывающих подсказках в то "
+"время как вы начинаете печатать их названия.<em>AstroBin</em> подключён к "
+"астрономический базе SIMBAD, которая содержит свыше 5 миллионов объектов и "
+"свыше 15 миллионов названий!"
 
 #: templates/help.html:29
 msgid ""
@@ -3489,10 +3503,14 @@ msgid ""
 "interesting statistics. There is also a page that shows the most popular "
 "subjects organized by month and latitude!"
 msgstr ""
+"На <em>AstroBin</em> каждый астрономический объект имеет свою страницу, на "
+"которой вы можете найти лучшие их фотографии, построить графики и таблицы, "
+"показывающие занятную статистику. Так же есть страницы показывающие "
+"популярные объекты сортированные по месяцам и широте."
 
 #: templates/help.html:33
 msgid "Data is strongly interconnected"
-msgstr ""
+msgstr "Данные сильно связаны друг с другом"
 
 #: templates/help.html:35
 msgid ""
@@ -3502,6 +3520,11 @@ msgid ""
 "certain filter. How about all the images between 6 and 8 hours of "
 "integration? Or with a certain Moon phase? You can do that!"
 msgstr ""
+"Вы когда-нибудь хотели узнать, как будет выглядеть ваше будущее фото? На "
+"<em>AstroBin</em>, вы можете искать все изображения определенной цели, "
+"которые были взяты с определенным телескопом и определенной ПЗС или камерой. "
+"Или с конкретным фильтром. Как насчет всех изображений с 6 до 8 часов "
+"посещаемости? Или с определенной фазой Луны? Вы можете сделать это!"
 
 #: templates/help.html:38
 msgid ""
@@ -3511,6 +3534,12 @@ msgid ""
 "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
 "want, you can search by telescope diameter too!"
 msgstr ""
+"AstroBin может помочь вам с вашим следующим выбором телескопом или камерой "
+"для покупки, путем поиска комбинаций оборудования, принадлежащих другим "
+"пользователям. Например, вы могли бы искать все фотографии, сделанных с "
+"помощью Canon 5D и любым апохроматическим рефрактором, или SBIG ST-8300 с "
+"любым телескопом Ричи-Кретьена. Или, если вы хотите, вы можете осуществлять "
+"поиск по диаметру телескопа! "
 
 #: templates/help.html:41
 msgid ""
