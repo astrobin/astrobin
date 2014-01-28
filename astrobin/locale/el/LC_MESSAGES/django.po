@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:38+0000\n"
-"PO-Revision-Date: 2013-11-18 13:37+0000\n"
+"POT-Creation-Date: 2014-01-28 08:56+0000\n"
+"PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1384781845.574258\n"
+"X-POOTLE-MTIME: 1390556429.512273\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1386,7 +1386,7 @@ msgstr "προστέθηκε στους σελιδοδείκτες"
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr ""
+msgstr "αρέσει"
 
 #: locale_extras.py:13
 msgid "has written a review on"
@@ -2476,15 +2476,15 @@ msgstr "Αφαίρεση από τα αγαπημένα"
 
 #: settings.py:589
 msgid "Bookmark"
-msgstr ""
+msgstr "Προσθήκη στα αγαπημένα"
 
 #: settings.py:594 settings.py:596
 msgid "Unlike"
-msgstr ""
+msgstr "Δεν μου αρέσει"
 
 #: settings.py:595 settings.py:597
 msgid "Like"
-msgstr ""
+msgstr "Μου αρέσει"
 
 #: settings.py:602
 msgid "Stop following"
@@ -2609,6 +2609,8 @@ msgstr "Μέσο SQM"
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
+"Σας ευχαριστούμε για την αναφορά του προβλήματος. Όλες οι μικρογραφίες θα "
+"δημιουργηθούν ξανά."
 
 #: views.py:937 views.py:2597
 msgid ""
@@ -2630,6 +2632,8 @@ msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
 msgstr ""
+"Ανεβάσατε ένα αρχείο Indexed PNG. Το AstroBin θα χρειαστεί να χαμηλώσει την "
+"αναλύση χρώματος στα 256 για να μπορέσει να το επεξεργαστεί."
 
 #: views.py:1216 views.py:1299 views.py:1383 views.py:1409 views.py:2053
 #: views.py:2066 views.py:2087 views.py:2124 views.py:2214 views.py:2276
@@ -2648,9 +2652,8 @@ msgid "Image deleted."
 msgstr "Η εικόνα διαγράφηκε"
 
 #: views.py:1440
-#, fuzzy
 msgid "Revision deleted."
-msgstr "Η εγγραφή ολοκληρώθηκε"
+msgstr "Η αναθεώρηση διαγράφτηκε."
 
 #: views.py:1596
 msgid "No date specified"
@@ -2731,7 +2734,7 @@ msgstr "Δεν μπορείτε να συγχωνεύσετε ένα προϊό�
 
 #: views.py:3900
 msgid "Default front page section changed."
-msgstr ""
+msgstr "Έγινε αλλαγή στο τμήμα της αρχικής σελίδας."
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -2774,9 +2777,8 @@ msgid "Your image was bookmarked"
 msgstr "Η εικόνα σας προστέθηκε στα αγαπημένα"
 
 #: management/__init__.py:75
-#, fuzzy
 msgid "Your image was liked"
-msgstr "Η εικόνα σας διαγράφηκε"
+msgstr "Η εικόνα σας άρεσε"
 
 #: management/__init__.py:81
 msgid "New image with some gear you follow"
@@ -2832,11 +2834,11 @@ msgstr ""
 
 #: templates/500.html:11
 msgid "Fatal error"
-msgstr ""
+msgstr "Μοιραίο σφάλμα"
 
 #: templates/500.html:13
 msgid "Nothing to worry about, it's not your fault."
-msgstr ""
+msgstr "Δεν χρειάζετε να ανησυχείτε, δεν είναι δικό σας λάθος."
 
 #: templates/500.html:18
 msgid ""
@@ -2844,14 +2846,15 @@ msgid ""
 "details, so we will try to fix the problem as soon as possible. Sorry about "
 "the inconvenience! "
 msgstr ""
+"Συνέβει κάτι το απρόσμενο! Λάβαμε ένα email με τεχνικές λεπτομέριες, ώστε να "
+"προσπαθήσουμε να διορθώσουμε το πρόβλημα το συντομότερο δυνατό. Λυπούμαστε "
+"για την ενόχληση!"
 
 #: templates/500.html:21
-#, fuzzy
 msgid "Go back to the hom page."
-msgstr "Επιστρέψτε στην κεντρική σελίδα."
+msgstr "Μετάβαση στην αρχική σελίδα."
 
 #: templates/503.html:4
-#, fuzzy
 msgid "AstroBin in temporarily unavailable"
 msgstr "Το AstroBin είναι προσωρινά εκτός διαθεσιμότητας"
 
@@ -3010,15 +3013,16 @@ msgstr "Πώς μπορώ να μορφοποιήσω τα σχόλια μου;"
 
 #: templates/faq.html:20 templates/faq.html.py:123
 msgid "How is the AstroBin index calculated?"
-msgstr ""
+msgstr "Πως υπολογίζεται ο δείκτης του AstroBin;"
 
 #: templates/faq.html:21 templates/faq.html.py:131
 msgid "I received some Likes, why is my AstroBin index not updated?"
 msgstr ""
+"Έλαβα μερικές προτιμήσεις, γιατί δεν ενημερώθηκε ο δείκτης μου του AstroBin;"
 
 #: templates/faq.html:22 templates/faq.html.py:138
 msgid "How is the Image of the Day selected?"
-msgstr ""
+msgstr "Πως γίνεται επιλογή της Εικόνας της Ημέρας;"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3258,6 +3262,8 @@ msgid ""
 "The AstroBin index is a function of the number of Likes and the number of "
 "images posted by a user."
 msgstr ""
+"Ο δείκτης του AstroBin είναι μια συνάρτηση απ΄τον αριθμών των προτιμήσεων "
+"και του αριθμού των εικόνων που αναρτήθηκαν από έναν χρήστη."
 
 #: templates/faq.html:133
 msgid ""
@@ -3270,15 +3276,14 @@ msgstr ""
 "Τοίχο, και μερικά άλλα στοιχεία χρηστών."
 
 #: templates/faq.html:140
-#, fuzzy
 msgid ""
 "Every night, an algorithm looks at the images uploaded during the previous 7 "
 "days. The image with most Likes in that period is selected as Image of the "
 "Day."
 msgstr ""
 "Κάθε βράδυ, ένας αλγόριθμος ψάχνει τις εικόνες που ανέβηκαν τις προηγούμενες "
-"7 ημέρες. Η εικόνα με τα περισσότερα Likes σε αυτή την περίοδο επιλέγεται "
-"σαν Εικόνα της Ημέρας."
+"7 ημέρες. Η εικόνα με τια περισσότερες προτιμήσεις σε αυτή την περίοδο "
+"επιλέγεται σαν Εικόνα της Ημέρας."
 
 #: templates/faq.html:146
 msgid ""
@@ -3695,7 +3700,7 @@ msgstr "από"
 
 #: templates/iotd_archive.html:32 templates/index/root.html:129
 msgid "Runners-up"
-msgstr ""
+msgstr "Ακολουθούν"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:147 templates/base/site_links.html:78
@@ -3716,9 +3721,8 @@ msgstr "Δείκτης AstroBin"
 
 #: templates/leaderboard.html:30 templates/base/user_links_entries.html:115
 #: templates/user/profile-subnav.html:85
-#, fuzzy
 msgid "Followers"
-msgstr "Ακολουθείται"
+msgstr "Θαυμαστές"
 
 #: templates/leaderboard.html:40
 msgid "Total integration"
@@ -4283,7 +4287,7 @@ msgstr "Τοποθετήστε τα ανεπεξέργαστα δεδομένα 
 
 #: templates/upload.html:93
 msgid "or download the desktop client for easier uploads!"
-msgstr ""
+msgstr "ή κατεβάστε το desktop client για ευκολότερα ανεβάσματα!"
 
 #: templates/upload.html:94
 msgid "Accepted file types: FIT and digital camera raw files"
@@ -4385,9 +4389,8 @@ msgid "Acquired"
 msgstr "Λήφθηκε"
 
 #: templates/wall.html:42
-#, fuzzy
 msgid "Number of likes"
-msgstr "Αριθμός καρέ"
+msgstr "Αριθμός προτιμήσεων"
 
 #: templates/wall.html:54 templates/gear/page.html:252
 #: templates/inclusion_tags/search_image_list.html:53
@@ -4489,7 +4492,7 @@ msgstr "Ιδιωτικοί κοινόχρηστοι φάκελοι"
 
 #: templates/base/user_links_entries.html:216
 msgid "Would you like to start using your real name on AstroBin?"
-msgstr ""
+msgstr "Θα θέλατε να χρησιμοποιήστε το πραγματικό σας όνομα στο AstroBin;"
 
 #: templates/base/user_links_entries.html:221
 #: templates/image/detail/modals/send_to_sharedfolder.html:49
@@ -4498,7 +4501,7 @@ msgstr "Εντάξει"
 
 #: templates/base/user_links_entries.html:227
 msgid "No, tranks"
-msgstr ""
+msgstr "Όχι, ευχαριστώ"
 
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:10
@@ -4975,9 +4978,8 @@ msgid "Orientation"
 msgstr "Προσανατολισμός"
 
 #: templates/image/detail/image_card.html:84
-#, fuzzy
 msgid "Field radius"
-msgstr "Εύρος πεδίου"
+msgstr "Ακτίνα πεδίου"
 
 #: templates/image/detail/image_title.html:33
 msgid "Contains"
@@ -4999,7 +5001,7 @@ msgstr "Αρχική"
 
 #: templates/image/detail/skyplot.html:5 templates/image/detail/skyplot.html:7
 msgid "Sky plot"
-msgstr ""
+msgstr "Διάγραμμα ουρανού"
 
 #: templates/image/detail/wip_banner.html:9
 #, python-format
@@ -5088,7 +5090,7 @@ msgstr "Διαγραφή αυτής της έκδοσης"
 
 #: templates/image/detail/menu/actions.html:116
 msgid "Flag malfunctionig thumbnails"
-msgstr ""
+msgstr "Επισήμανση σφάλματος μικρογραφιών"
 
 #: templates/image/detail/menu/actions.html:125
 msgid "Bring to a user's attention"
@@ -5136,13 +5138,12 @@ msgstr "Οι παρακάτω έβαλαν στα αγαπημένα τους α
 
 #: templates/image/detail/modals/bookmarked_this.html:11
 #: templates/image/detail/modals/like_this.html:11
-#, fuzzy
 msgid "Loading"
-msgstr "Γίνεται φόρτωση..."
+msgstr "Γίνεται φόρτωση"
 
 #: templates/image/detail/modals/cant_like.html:8
 msgid "Sorry"
-msgstr ""
+msgstr "Συγγνώμη"
 
 #: templates/image/detail/modals/cant_like.html:12
 #, python-format
@@ -5150,17 +5151,23 @@ msgid ""
 "We're really sorry, but liking an image requires an AstroBin index of "
 "<strong>%(min_index_to_like)s</strong> or greater."
 msgstr ""
+"Λυπούμαστε, αλλά για να προτιμήσετε μια εικόνα απαιτείται δείκτης του "
+"AstroBin <strong>%(min_index_to_like)s</strong> ή μεγαλύτερος"
 
 #: templates/image/detail/modals/cant_like.html:16
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
 "creating fake accounts to like their own images. Thank you for understanding!"
 msgstr ""
+"Αυτός ο περιορισμός βελτιώνει τον ιστότοπο σαν σύνολο με το να αποτρέπει "
+"άτομα να δημιουργούν ψεύτικους λογαριασμούς για να προτιμήσουν τις εικόνες "
+"τους. Ευχαριστούμε για την κατανόηση!"
 
 #: templates/image/detail/modals/cant_like.html:20
 #, python-format
 msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
 msgstr ""
+"Μέχρι στιγμής, ο δείκτης σας του AstroBin είναι <strong>%(index)s</strong>."
 
 #: templates/image/detail/modals/delete.html:6
 msgid "Delete image and all its revisions?"
@@ -5200,17 +5207,19 @@ msgstr ""
 
 #: templates/image/detail/modals/flag_thumbnails.html:7
 msgid "Flag malfunctioning thumbnails"
-msgstr ""
+msgstr "Επισήμανση μικρογραφιών με βλάβη"
 
 #: templates/image/detail/modals/flag_thumbnails.html:11
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
 "its revisions."
 msgstr ""
+"Αυτό θα ενεργοποιήσει την αναγέννηση όλων των μικρογραφιών για αυτή την "
+"εικόνα και όλες τις αναθεωρήσεις της."
 
 #: templates/image/detail/modals/like_this.html:8
 msgid "The following people like this image"
-msgstr ""
+msgstr "Στα ακόλουθα άτομα αρέσει αυτή η εικόνα"
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
@@ -5585,7 +5594,7 @@ msgstr ""
 #: templates/inclusion_tags/search_image_list.html:93
 #: templates/search/search.html:37
 msgid "Likes"
-msgstr ""
+msgstr "Προτιμήσεις"
 
 #: templates/inclusion_tags/search_image_list.html:66
 msgid ""
@@ -5672,47 +5681,40 @@ msgstr ""
 "\"%(rawdata_url)s\">Θέλετε να μάθετε περισσότερα;</a>"
 
 #: templates/index/root.html:166
-#, fuzzy
 msgid "Your activity stream"
-msgstr "Δραστηριότητα"
+msgstr "Η δραστηριότητα σας"
 
 #: templates/index/root.html:171
-#, fuzzy
 msgid "Global activity stream"
-msgstr "Δραστηριότητα"
+msgstr "Παγκόσμια δραστηριότητα"
 
 #: templates/index/root.html:176
-#, fuzzy
 msgid "Recently uploaded"
-msgstr "Ανεβασμένες φωτογραφίες"
+msgstr "Πρόσφατα ανεβασμένα"
 
 #: templates/index/root.html:181 templates/index/root.html.py:241
-#, fuzzy
 msgid "Recent images from people you follow"
-msgstr "Νέα εικόνα από χρήστη που ακολουθείτε"
+msgstr "Πρόσφατες εικόνες από άτομα που ακολουθείτε"
 
 #: templates/index/root.html:186 templates/index/root.html.py:252
-#, fuzzy
 msgid "Recently liked"
-msgstr "Ανεβασμένες φωτογραφίες"
+msgstr "Προτιμήθηκε πρόσφατα"
 
 #: templates/index/root.html:191 templates/index/root.html.py:263
-#, fuzzy
 msgid "Recently bookmarked"
-msgstr "Ανεβασμένες φωτογραφίες"
+msgstr "Πρόσφατα στα αγαπημένα "
 
 #: templates/index/root.html:196 templates/index/root.html.py:274
-#, fuzzy
 msgid "Recent images with link to TIFF/FITS"
-msgstr "Σύνδεσμος για TIFF/FITS"
+msgstr "Πρόσφατες εικόνες με σύνδεσμο για TIFF/FITS"
 
 #: templates/index/root.html:206
 msgid "Personal"
-msgstr ""
+msgstr "Προσωπική Ροή"
 
 #: templates/index/root.html:217
 msgid "Global"
-msgstr ""
+msgstr "Παγκόσμια Ροή"
 
 #: templates/index/root.html:230
 msgid "Recent images"
@@ -5720,17 +5722,18 @@ msgstr "Πρόσφατες εικόνες"
 
 #: templates/index/root.html:285
 msgid "Set current front page section as default"
-msgstr ""
+msgstr "Θέστε την τρέχουσα σελίδα σαν προεπιλογή"
 
 #: templates/index/root.html:300
 msgid ""
 "To make your personal stream more interesting, you should follow some people!"
 msgstr ""
+"Για να κάνετε την προσωπική σας ροή πιο ενδιαφέρουσα, καλό θα ήταν να "
+"ακολουθήσετε μερικά άτομα!"
 
 #: templates/index/root.html:329
-#, fuzzy
 msgid "Do you want your product here?"
-msgstr "Τοποθετήστε τα ανεπεξέργαστα δεδομένα σας εδώ"
+msgstr "Θέλετε το προϊόν σας εδώ;"
 
 #: templates/location/edit.html:5 templates/location/edit.html.py:14
 msgid "Edit your location"
@@ -5765,7 +5768,7 @@ msgstr "Μηνύματα"
 
 #: templates/messages/inbox.html:26
 msgid "Participants"
-msgstr ""
+msgstr "Συμμετέχοντες"
 
 #: templates/messages/inbox.html:27
 msgid "Date and time"
@@ -6029,22 +6032,22 @@ msgid "AstroBin has publushed a new blog entry: %(object)s"
 msgstr "Το AstroBin έχει εκδώσει μια νέα εγγραφή στο blog: %(object)s"
 
 #: templates/notification/new_bookmark/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has added your image to their bookmarks: %(url)s"
-msgstr "Ο/Η %(user)s έβαλε την εικόνα σας σαν αγαπημένο: %(url)s"
+msgstr "Ο/Η %(user)s έβαλε την εικόνα σας στα αγαπημένα του/της: %(url)s"
 
 #: templates/notification/new_bookmark/notice.html:2
 #: templates/notification/new_bookmark/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
 "bookmarks!</a>"
 msgstr ""
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έβαλε την εικόνα σας σαν "
-"αγαπημένο!</a>"
+"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έβαλε την εικόνα σας στα "
+"αγαπημένα του/της!</a>"
 
 #: templates/notification/new_bookmark/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has added yout image to their bookmarks: %(url)s"
 msgstr "Ο/Η %(user)s έβαλε την εικόνα σας σαν αγαπημένο: %(url)s"
 
@@ -6266,16 +6269,16 @@ msgstr "Νέα έκδοση εικόνας από τον/την %(originator)s"
 
 #: templates/notification/new_like/full.txt:2
 #: templates/notification/new_like/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s likes your image: %(url)s"
-msgstr "Ο/Η %(user)s έβαλε την εικόνα σας σαν αγαπημένο: %(url)s"
+msgstr "Ο/Η %(user)s προτιμάει την εικόνα σας: %(url)s"
 
 #: templates/notification/new_like/notice.html:2
 #: templates/notification/new_like/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgstr ""
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> σχολίασε την εικόνα σας!</"
+"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> προτιμάει την εικόνα σας!</"
 "a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
@@ -6360,6 +6363,7 @@ msgstr ""
 "%(pool_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
+#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
@@ -6369,16 +6373,6 @@ msgstr ""
 "Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
 "μια νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: <strong>"
 "\"%(pool_name)s.\"</strong></a>"
-
-#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει μια "
-"νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: <strong>"
-"\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
@@ -6771,47 +6765,46 @@ msgid "Request an API Key"
 msgstr "Αίτηση Κλειδιού API"
 
 #: templates/user/bookmarks.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's bookmarks"
-msgstr "Διαγράμματα του/της %(user)s"
+msgstr "Αγαπημένα του/της %(user)s"
 
 #: templates/user/bookmarks.html:11
 msgid "Your bookmarks"
-msgstr ""
+msgstr "Τα αγαπημένα σας"
 
 #: templates/user/bookmarks.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's bookmarks"
-msgstr "Δείτε τις εικόνες του/της %(username)s:"
+msgstr "Τα αγαπημένα του/της %(username)s"
 
 #: templates/user/followers.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's followers"
-msgstr "Έκθεση του/της %(user)s"
+msgstr "Θαυμαστές του/της %(user)s"
 
 #: templates/user/followers.html:13
-#, fuzzy
 msgid "Your followers"
-msgstr "Έχετε νέο άτομο που σας ακολουθεί"
+msgstr "Οι θαυμαστές σας"
 
 #: templates/user/followers.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's followers"
-msgstr "Δείτε τα αγαπημένα του/της %(username)s"
+msgstr "Οι θαυμαστές του/της %(username)s"
 
 #: templates/user/following.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's followed users"
-msgstr "Έκθεση του/της %(user)s"
+msgstr "Χρήστες που ακολουθεί ο/η %(user)s"
 
 #: templates/user/following.html:13
 msgid "Your followed users"
-msgstr ""
+msgstr "Οι χρήστες σας που ακολουθούνται"
 
 #: templates/user/following.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's followed users"
-msgstr "Δείτε τα αγαπημένα του/της %(username)s"
+msgstr "Χρήστες που ακολουθούνται από τον/την %(username)s"
 
 #: templates/user/not_found.html:4 templates/user/not_found.html.py:7
 msgid "User not found:"
@@ -6866,9 +6859,8 @@ msgid "Staging Area"
 msgstr "Περιοχή Επεξεργασίας"
 
 #: templates/user/profile-subnav.html:79
-#, fuzzy
 msgid "Following"
-msgstr "Ακολούθησε"
+msgstr "Ακολουθείτε"
 
 #: templates/user/profile-subnav.html:121
 msgid "Acquisition time"
@@ -6963,7 +6955,7 @@ msgstr "Γίνεται εισαγωγή εικόνων"
 #: templates/user/profile/flickr_import.html:107
 msgid "Do not navigate away from this window: this might take a while!"
 msgstr ""
-"Μήν φύγετε από αυτό το παράθυρο: Η διαδικασία μπορεί να διαρκέσει λίγη ώρα!"
+"Μην φύγετε από αυτό το παράθυρο: Η διαδικασία μπορεί να διαρκέσει λίγη ώρα!"
 
 #: templates/user/profile/flickr_import.html:116
 msgid ""
@@ -7185,6 +7177,14 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Επεξεργασία των πληροφοριών σας λιανικής πωλήσεως"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
+#~ "μια νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: <strong>"
+#~ "\"%(pool_name)s.\"</a>"
 
 #~ msgid ""
 #~ "<a href=\"%(folder_url)s\">You are invited you to the private shared "

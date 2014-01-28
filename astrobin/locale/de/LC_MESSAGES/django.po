@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:38+0000\n"
-"PO-Revision-Date: 2013-05-05 18:01+0100\n"
-"Last-Translator: dark_sky <bushbarack@yahoo.de>\n"
+"POT-Creation-Date: 2014-01-28 08:55+0000\n"
+"PO-Revision-Date: 2014-01-20 19:07+0000\n"
+"Last-Translator: Michael <Michael.Halscheid@yahoo.com>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1390244825.725478\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2471,7 +2472,7 @@ msgstr "Als Favorit löschen"
 
 #: settings.py:589
 msgid "Bookmark"
-msgstr ""
+msgstr "Lesezeichen"
 
 #: settings.py:594 settings.py:596
 msgid "Unlike"
@@ -6263,20 +6264,12 @@ msgstr ""
 "unter folgender URL: %(object_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
+#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, fuzzy, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> hat eine Diskussion zu einem "
-"Teil deiner Ausrüstung gestartet.</a>"
-
-#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> hat eine Diskussion zu einem "
 "Teil deiner Ausrüstung gestartet.</a>"
@@ -7086,6 +7079,14 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Deine Händlernformationen bearbeiten"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> hat eine Diskussion zu "
+#~ "einem Teil deiner Ausrüstung gestartet.</a>"
 
 #, fuzzy
 #~ msgid ""
