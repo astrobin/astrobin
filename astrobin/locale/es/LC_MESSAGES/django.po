@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-28 08:56+0000\n"
-"PO-Revision-Date: 2014-01-15 18:36+0000\n"
-"Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
+"PO-Revision-Date: 2014-01-29 01:48+0000\n"
+"Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1389810988.257327\n"
+"X-POOTLE-MTIME: 1390960085.256615\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -92,7 +92,7 @@ msgstr "Bahamas"
 
 #: fields.py:28
 msgid "Bahrain"
-msgstr "Baréin"
+msgstr "Bahrein"
 
 #: fields.py:29
 msgid "Bangladesh"
@@ -120,7 +120,7 @@ msgstr "Benín"
 
 #: fields.py:35
 msgid "Bermuda"
-msgstr "Bermudas"
+msgstr "Islas Bermudas"
 
 #: fields.py:36
 msgid "Bhutan"
@@ -2225,7 +2225,6 @@ msgid "Company description"
 msgstr "Descripción de la empresa"
 
 #: models.py:1580
-#, fuzzy
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2433,7 +2432,6 @@ msgstr ""
 "mercadotecnia."
 
 #: models.py:2070
-#, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2454,7 +2452,6 @@ msgid "Matching items:"
 msgstr "Elementos coincidentes:"
 
 #: settings.py:588
-#, fuzzy
 msgid "Remove from bookmarks"
 msgstr "Quitar de favoritas"
 
@@ -2631,7 +2628,6 @@ msgid "Fill in one session, before adding more."
 msgstr "Completar una sesión antes de añadir más."
 
 #: views.py:1422 views.py:1493
-#, fuzzy
 msgid "Image deleted."
 msgstr "Imagen borrada."
 
@@ -2706,7 +2702,6 @@ msgstr ""
 "desplazarte abajo para verlos."
 
 #: views.py:2651
-#, fuzzy
 msgid "Image uploaded. Thank you!"
 msgstr "Imagen subida. ¡Gracias!"
 
@@ -2838,7 +2833,6 @@ msgstr ""
 "molestias!"
 
 #: templates/500.html:21
-#, fuzzy
 msgid "Go back to the hom page."
 msgstr "Volver a la página de inicio."
 
@@ -5098,7 +5092,6 @@ msgstr "Las siguientes personas eligieron como favorita esta imagen"
 
 #: templates/image/detail/modals/bookmarked_this.html:11
 #: templates/image/detail/modals/like_this.html:11
-#, fuzzy
 msgid "Loading"
 msgstr "Cargando..."
 
@@ -5174,6 +5167,8 @@ msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
 "its revisions."
 msgstr ""
+"Esto dará lugar a la regeneración de todas las imágenes en miniatura para "
+"esta imagen y todas sus revisiones."
 
 #: templates/image/detail/modals/like_this.html:8
 msgid "The following people like this image"
@@ -5630,7 +5625,6 @@ msgstr ""
 "\">¿Quieres saber más?</a>"
 
 #: templates/index/root.html:166
-#, fuzzy
 msgid "Your activity stream"
 msgstr "Flujo de actividad"
 
@@ -5643,7 +5637,6 @@ msgid "Recently uploaded"
 msgstr "Últimas subidas"
 
 #: templates/index/root.html:181 templates/index/root.html.py:241
-#, fuzzy
 msgid "Recent images from people you follow"
 msgstr "Nueva imagen de un usuario al que sigues"
 
@@ -5673,7 +5666,7 @@ msgstr "Imágenes recientes"
 
 #: templates/index/root.html:285
 msgid "Set current front page section as default"
-msgstr ""
+msgstr "Colocar esta sección de la página de inicio como predeterminado"
 
 #: templates/index/root.html:300
 msgid ""
@@ -5988,13 +5981,13 @@ msgid "AstroBin has publushed a new blog entry: %(object)s"
 msgstr "AstroBin ha publicado una nueva entrada en el blog: %(object)s"
 
 #: templates/notification/new_bookmark/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has added your image to their bookmarks: %(url)s"
-msgstr "%(user)s ha seleccionado tu imagen como favorita: %(url)s"
+msgstr "%(user)s han seleccionado tu imagen como favorita: %(url)s"
 
 #: templates/notification/new_bookmark/notice.html:2
 #: templates/notification/new_bookmark/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
 "bookmarks!</a>"
@@ -6003,9 +5996,9 @@ msgstr ""
 "como favorita!</a>"
 
 #: templates/notification/new_bookmark/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has added yout image to their bookmarks: %(url)s"
-msgstr "%(user)s ha seleccionado tu imagen como favorita: %(url)s"
+msgstr "%(user)s han seleccionado tu imagen como favorita: %(url)s"
 
 #: templates/notification/new_comment/full.txt:2
 #, python-format
@@ -6808,9 +6801,8 @@ msgid "Staging Area"
 msgstr "Área de Pruebas"
 
 #: templates/user/profile-subnav.html:79
-#, fuzzy
 msgid "Following"
-msgstr "Seguir"
+msgstr "Siguiendo"
 
 #: templates/user/profile-subnav.html:121
 msgid "Acquisition time"
