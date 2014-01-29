@@ -87,6 +87,7 @@ LANGUAGE_CHOICES = (
     ('pl', _("Polish")),
     ('pt-BR', _("Brazilian Portuguese")),
     ('el', _("Greek")),
+    ('ru', _("Russian")),
 )
 
 LANGUAGES = {
@@ -102,6 +103,7 @@ LANGUAGES = {
     'pl': _("Polish"),
     'pt-BR': _("Brazilian Portuguese"),
     'el': _("Greek"),
+    'ru': _("Russian"),
 }
 
 SUBJECT_LABELS = {

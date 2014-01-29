@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-28 08:58+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2014-01-29 02:42+0000\n"
+"Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1390963344.47881\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -70,12 +71,10 @@ msgid "Temperature"
 msgstr "Temperatura"
 
 #: forms.py:86
-#, fuzzy
 msgid "Users"
 msgstr "Usuaris"
 
 #: forms.py:87
-#, fuzzy
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr "Llista d'usuaris als quals vols convidar. Separa'ls amb una coma."
 
@@ -88,22 +87,18 @@ msgid "Light"
 msgstr "Light"
 
 #: models.py:46
-#, fuzzy
 msgid "Offset/Bias"
 msgstr "Offset/Bias"
 
 #: models.py:47
-#, fuzzy
 msgid "Dark"
 msgstr "Dark"
 
 #: models.py:48
-#, fuzzy
 msgid "Flat"
 msgstr "Flat"
 
 #: models.py:216
-#, fuzzy
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
@@ -114,7 +109,6 @@ msgstr ""
 #: models.py:220 models.py:288
 #: templates/rawdata/privatesharedfolder_list.html:38
 #: templates/rawdata/publicdatapool_list.html:33
-#, fuzzy
 msgid "Description"
 msgstr "Descripció"
 
@@ -180,7 +174,6 @@ msgstr "Carpeta privada compartida"
 
 #: templates/rawdata/_browser_js.html:74
 #: templates/rawdata/publicdatapool_detail.html:8
-#, fuzzy
 msgid "Public data pool"
 msgstr "Carpeta pública"
 
@@ -193,7 +186,6 @@ msgstr "Esborrar"
 
 #: templates/rawdata/_folder_dropdown.html:7
 #: templates/rawdata/library.html:129
-#, fuzzy
 msgid "Smart folders"
 msgstr "Carpetes intel·ligents"
 
@@ -231,20 +223,17 @@ msgstr "Veure captures de pantalla"
 #: templates/subscription/subscription_done.html:8
 #: templates/subscription/subscription_list.html:4
 #: templates/subscription/subscription_list.html:8
-#, fuzzy
 msgid "AstroBin Raw Data"
 msgstr "Dades Raw AstroBin"
 
 #: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
 #: templates/rawdata/help_03.html:9
-#, fuzzy
 msgid "To safely store and organize your raw files."
 msgstr "Per desar y organitzar els teus arxius Raw. "
 
 #: templates/rawdata/help_01.html:19
-#, fuzzy
 msgid "What is AstroBin Raw Data?"
-msgstr "¿Qué és Dades Raw AstroBin?"
+msgstr "Qué és Dades Raw AstroBin?"
 
 #: templates/rawdata/help_01.html:20
 msgid ""
@@ -258,7 +247,7 @@ msgstr ""
 
 #: templates/rawdata/help_01.html:22
 msgid "What if we told you now you can do the same with your raw files?"
-msgstr ""
+msgstr "I si et diem que ara pots fer el mateix amb els teus arxius Raw?"
 
 #: templates/rawdata/help_01.html:24
 msgid ""
@@ -268,6 +257,10 @@ msgid ""
 "dark library? Do you just wish that you could backup your raw files "
 "somewhere safe?"
 msgstr ""
+"Tens la carpeta <em>astrofotografía</em> plena d'arxius <strong>FIT</strong> "
+"o <strong>Raw digitals</strong> desorganitzats? Tens problemes per trobar "
+"els arxius de calibració a la carpeta de darks? O senzillament vols tenir "
+"una còpia de seguretat dels teus arxius en un lloc segur?"
 
 #: templates/rawdata/help_01.html:26
 msgid ""
@@ -275,21 +268,27 @@ msgid ""
 "you can store your whole <strong>raw data library</strong> online, where it "
 "will be securely accessible only by you."
 msgstr ""
+"<strong>Dades Raw AstroBin</strong> és la resposta! Per un reduit preu "
+"podràs enmagatzemar complerta i en línia tota la teva <strong>llibrería de "
+"dades Raw</strong>, on es mantindrá segura i accesible nomès per a tú."
 
 #: templates/rawdata/help_01.html:28
 msgid ""
 "AstroBin will <em>automatically</em> organize your files by reading the "
 "<strong>FIT</strong> headers or <strong>EXIF</strong> information!"
 msgstr ""
+"AstroBin organitzará <em>automàticament</em> els teus arxius, mitjançant la "
+"lectura de les capçaleres <strong>FIT</strong> o les dades "
+"<strong>EXIF</strong>!"
 
 #: templates/rawdata/help_01.html:33 templates/rawdata/help_02.html:45
 #: templates/rawdata/help_03.html:32 templates/rawdata/help_03.html.py:40
 msgid "Sign up now!"
-msgstr ""
+msgstr "Registra't ara!"
 
 #: templates/rawdata/help_01.html:40 templates/rawdata/help_02.html:53
 msgid "Next page"
-msgstr ""
+msgstr "Pàgina següent"
 
 #: templates/rawdata/help_02.html:19
 msgid "How does it work?"
@@ -340,31 +339,36 @@ msgstr ""
 
 #: templates/rawdata/help_02.html:33
 msgid "By temperature"
-msgstr ""
+msgstr "Per temperatura"
 
 #: templates/rawdata/help_02.html:36
 msgid ""
 "Not only will your data be safely and securely preserved, but you will be "
 "able to download bundles of your files in a <strong>zip</strong> file."
 msgstr ""
+"No només les teves dades seran guardades de forma segura, sinó que podràs "
+"descarregar els teus arxius per blocs en un arxiu <strong> zip </ strong> "
+"comprimit."
 
 #: templates/rawdata/help_02.html:38
 msgid ""
 "This way, it will be easy, later on, to download again your dark frames "
 "taken at -15&deg;C in October two years ago!"
 msgstr ""
+"Així et serà més fàcil, més endevant, descarregar de nou les captures dark "
+"que vas fer a 15º sota zero a l'octubre de fa dos anys."
 
 #: templates/rawdata/help_02.html:40
 msgid "if the information is present in the file's headers"
-msgstr ""
+msgstr "si la informació es troba a les capçaleres dels arxius"
 
 #: templates/rawdata/help_02.html:52 templates/rawdata/help_03.html:39
 msgid "Previous page"
-msgstr ""
+msgstr "Pàgina prèvia"
 
 #: templates/rawdata/help_03.html:19
 msgid "Sharing is loving."
-msgstr ""
+msgstr "Compartir es amistat."
 
 #: templates/rawdata/help_03.html:20
 msgid ""
@@ -373,10 +377,14 @@ msgid ""
 "massive <strong>100 integration hours</strong> project you've been meaning "
 "to complete. "
 msgstr ""
+"Opcionalment pots compartir les teves dades Raw amb un amic o, perquè no, "
+"amb tota la teva agrupació astronòmica. Això faría més fàcil col·laborar en "
+"aquell gran projecte de <strong> 100 hores d'integració</strong> que "
+"t'agradaría completar."
 
 #: templates/rawdata/help_03.html:22
 msgid "Peace of mind."
-msgstr ""
+msgstr "Consciència en pau."
 
 #: templates/rawdata/help_03.html:23
 msgid ""
@@ -385,6 +393,10 @@ msgid ""
 "disaster and accidents! At AstroBin, we take data preservation very "
 "seriously."
 msgstr ""
+"Mai se t'ha espatllat un disc dur i has perdut un munt de dades? Amb els "
+"teus arxius crus a <strong>Dades Raw AstroBin</strong> no hi haurà perill de "
+"desastres o accidents! A AstroBin tractem la protecció de dades molt "
+"seriosament."
 
 #: templates/rawdata/help_03.html:25
 msgid "Do some science."
@@ -435,31 +447,35 @@ msgstr ""
 msgid ""
 "AstroBin is still working to index %(number)s of your %(total)s raw files."
 msgstr ""
+"AstroBin encara treballa per indexar %(number)s dels teus %(total)s arxius "
+"raw."
 
 #: templates/rawdata/library.html:59
 msgid "All files"
-msgstr ""
+msgstr "Tots els fitxers"
 
 #: templates/rawdata/library.html:139
 msgid "There doesn't seem to be anything here."
-msgstr ""
+msgstr "No sembla que hi hagi res aquí."
 
 #: templates/rawdata/library.html:141
 #: templates/subscription/subscription_done.html:17
 #, python-format
 msgid ""
 "Head over to the <a href=\"%(upload_url)s\">upload page</a> to get started. "
-msgstr ""
+msgstr "Ves a la <a href=\"%(upload_url)s\">pàgina de càrrega</a> per començar."
 
 #: templates/rawdata/library.html:156
 msgid "Coming soon!"
-msgstr ""
+msgstr "Fins aviat!"
 
 #: templates/rawdata/library.html:161
 msgid ""
 "<strong>AstroBin Raw Data</strong> will soon allow you to automatically "
 "preprocess your data with a single click!"
 msgstr ""
+"<strong>Dades Raw AstroBin</strong> aviat et permetrà preprocesar les teves "
+"dades automàticament amb simple clic!"
 
 #: templates/rawdata/library.html:164
 msgid ""
@@ -470,14 +486,20 @@ msgid ""
 "download, ready to be postprocessed in your favorite image processing "
 "program."
 msgstr ""
+"Estem treballant uns algoritmes que rastrejaran automàticament els arxius de "
+"calibratge de la teva biblioteca i identificaran els millors conjunts "
+"d'arxius dark, offset i flat. AstroBin crearà automàticament els \"Màsters\", "
+"calibrarà les imatges seleccionades, les alinearà, les apilarà, i t'oferirà "
+"l'arxiu apilat per descarregar, a punt per treballar-lo amb el teu programa "
+"de processat."
 
 #: templates/rawdata/library.html:167
 msgid "We will let you know when this feature is available!"
-msgstr ""
+msgstr "Rebràs un avís quan aquesta prestació estigui disponible!"
 
 #: templates/rawdata/library.html:171
 msgid "OK"
-msgstr ""
+msgstr "D'acord"
 
 #: templates/rawdata/plans.html:4 templates/rawdata/plans.html.py:9
 msgid "Plans"
@@ -532,25 +554,25 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:21
 #: templates/rawdata/rawimage_detail.html:16
 msgid "Size"
-msgstr ""
+msgstr "Mida"
 
 #: templates/rawdata/privatesharedfolder_detail.html:111
 msgid "Remove from this folder"
-msgstr ""
+msgstr "Suprimeix d'aquesta carpeta"
 
 #: templates/rawdata/privatesharedfolder_detail.html:125
 msgid "Shared with the following users"
-msgstr ""
+msgstr "Compartit amb els següents usuaris"
 
 #: templates/rawdata/privatesharedfolder_detail.html:145
 #: templates/rawdata/publicdatapool_detail.html:114
 msgid "Size before zip compression"
-msgstr ""
+msgstr "Mida abans de comprimir"
 
 #: templates/rawdata/privatesharedfolder_detail.html:154
 #: templates/rawdata/publicdatapool_detail.html:123
 msgid "Comments"
-msgstr ""
+msgstr "Comentaris"
 
 #: templates/rawdata/privatesharedfolder_detail.html:158
 #: templates/rawdata/publicdatapool_detail.html:127
@@ -559,16 +581,19 @@ msgid ""
 "information and tips with other contributors or people who want to process "
 "the data."
 msgstr ""
+"Pots fer servir aquest espai per discutir envers aquesta carpeta pública, "
+"intercanviar informació i solucions amb altres contribuents o gent que "
+"vulgui processar les dades."
 
 #: templates/rawdata/privatesharedfolder_detail.html:175
 #: templates/rawdata/privatesharedfolder_list.html:84
 msgid "Delete folder"
-msgstr ""
+msgstr "Eliminar la carpeta"
 
 #: templates/rawdata/privatesharedfolder_detail.html:178
 #: templates/rawdata/privatesharedfolder_list.html:87
 msgid "Are you sure you want to delete this shared folder?"
-msgstr ""
+msgstr "Segur que vols suprimir aquest recurs compartit?"
 
 #: templates/rawdata/privatesharedfolder_detail.html:179
 #: templates/rawdata/privatesharedfolder_list.html:88
@@ -576,6 +601,9 @@ msgid ""
 "Don't worry, no files will be deleted from your raw data account, nor from "
 "the accounts of other people who may have contributed to this shared folder."
 msgstr ""
+"Descuida, cap arxiu serà eliminat del teu compte de dades RAW ni dels "
+"comptes d'altres persones que hagin contribuït en aquesta carpeta "
+"compartida. "
 
 #: templates/rawdata/privatesharedfolder_detail.html:182
 #: templates/rawdata/privatesharedfolder_detail.html:202
@@ -634,37 +662,39 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_form.html:60
 #: templates/rawdata/publicdatapool_form.html:60
 msgid "Send"
-msgstr ""
+msgstr "Envia"
 
 #: templates/rawdata/privatesharedfolder_form.html:63
 #: templates/rawdata/publicdatapool_form.html:63
 msgid "Loading..."
-msgstr ""
+msgstr "S'està carregant..."
 
 #: templates/rawdata/privatesharedfolder_form.html:73
 msgid ""
 "Or use this button to create a whole new <strong>private shared folder</"
 "strong>."
 msgstr ""
+"També pots clicar aquest botó per crear una nova <strong>carpeta privada "
+"compartida</strong>."
 
 #: templates/rawdata/privatesharedfolder_form.html:77
 #: templates/rawdata/privatesharedfolder_form.html:90
 msgid "Create new private shared folder"
-msgstr ""
+msgstr "Crear una nova carpeta privada compartida"
 
 #: templates/rawdata/privatesharedfolder_form.html:100
 #: templates/rawdata/publicdatapool_form.html:100
 msgid "Create"
-msgstr ""
+msgstr "Crea"
 
 #: templates/rawdata/privatesharedfolder_list.html:5
 #: templates/rawdata/privatesharedfolder_list.html:11
 msgid "Private shared folders"
-msgstr ""
+msgstr "Carpetes privades compartides"
 
 #: templates/rawdata/privatesharedfolder_list.html:13
 msgid "Collections of raw files shared with selected users."
-msgstr ""
+msgstr "Col·lecció d'arxius Raw compartits amb els usuaris seleccionats. "
 
 #: templates/rawdata/privatesharedfolder_list.html:22
 #, python-format
@@ -674,6 +704,11 @@ msgid ""
 "like FIT and digital camera raw files, with other users, to collaborate on "
 "processing, get or provide technical help."
 msgstr ""
+"Una <strong>carpeta privada compartida</strong> es un mitjà perquè els "
+"suscriptors de <a href=\"%(rawdata_url)s\">Dades Raw AstroBin</a> puguin "
+"compartir dades, com ara archius FIT o RAW d'una càmera digital, amb altres "
+"usuaris per tal de col·laborar amb el processament o donar o rebre ajut "
+"tècnic."
 
 #: templates/rawdata/privatesharedfolder_list.html:25
 #: templates/rawdata/publicdatapool_list.html:25
