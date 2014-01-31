@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-28 08:58+0000\n"
-"PO-Revision-Date: 2013-11-17 17:21+0000\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2014-01-30 14:50+0000\n"
+"Last-Translator: DengYW <deng_yw@yahoo.cn>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh-CN\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1384708862.979537\n"
+"X-POOTLE-MTIME: 1391093451.653236\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1365,7 +1365,7 @@ msgstr ""
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr ""
+msgstr "赞"
 
 #: locale_extras.py:13
 msgid "has written a review on"
@@ -1637,11 +1637,11 @@ msgstr "反射镜，牛顿式"
 
 #: models.py:417
 msgid "Catadioptric: Argunov-Cassegrain"
-msgstr ""
+msgstr "折反射：阿古诺夫-卡塞格林式"
 
 #: models.py:418
 msgid "Catadioptric: Klevtsov-Cassegrain"
-msgstr ""
+msgstr "折反射：克莱夫斯托夫-卡塞格林式"
 
 #: models.py:419
 msgid "Catadioptric: Lurie-Houghton"
@@ -1669,7 +1669,7 @@ msgstr "折反镜：施卡"
 
 #: models.py:425
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgstr ""
+msgstr "折反射：ACF 施密特-卡塞格林式"
 
 #: models.py:426 stats.py:596
 msgid "Camera lens"
@@ -2109,7 +2109,7 @@ msgstr ""
 
 #: models.py:1432 templates/image/detail/image_card.html:70
 msgid "Seeing"
-msgstr ""
+msgstr "视宁度"
 
 #: models.py:1433
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
@@ -2141,7 +2141,7 @@ msgstr ""
 
 #: models.py:1491
 msgid "TIFF/FITS"
-msgstr ""
+msgstr "TIFF或FITS"
 
 #: models.py:1492
 msgid "Higher resolution"
@@ -2149,7 +2149,7 @@ msgstr "更高的分辨率"
 
 #: models.py:1524
 msgid "Real name"
-msgstr ""
+msgstr "真实姓名"
 
 #: models.py:1525
 msgid "If present, your real name will be used throughout the website."
@@ -2324,7 +2324,7 @@ msgstr "USD-美元"
 
 #: models.py:1970 models.py:2020
 msgid "Producer"
-msgstr ""
+msgstr "制作程序"
 
 #: models.py:1981 models.py:2063
 msgid "The link to this product's page on your website."
@@ -2414,7 +2414,7 @@ msgstr ""
 
 #: settings.py:595 settings.py:597
 msgid "Like"
-msgstr ""
+msgstr "喜欢"
 
 #: settings.py:602
 msgid "Stop following"
@@ -5927,7 +5927,7 @@ msgstr ""
 #: templates/registration/password_change_done.html:4
 #: templates/registration/password_change_done.html:7
 msgid "Password changed"
-msgstr ""
+msgstr "密码已更改"
 
 #: templates/registration/password_change_form.html:5
 #: templates/registration/password_change_form.html:8
@@ -5947,7 +5947,7 @@ msgstr ""
 
 #: templates/registration/password_reset_confirm.html:18
 msgid "Password reset failed"
-msgstr ""
+msgstr "密码重置失败"
 
 #: templates/registration/password_reset_done.html:4
 #: templates/registration/password_reset_done.html:7
@@ -6019,7 +6019,7 @@ msgstr ""
 
 #: templates/search/search.html:321
 msgid "Telescope's aperture"
-msgstr ""
+msgstr "望远镜孔径"
 
 #: templates/search/search.html:358 templates/search/search.html.py:365
 #: templates/search/search.html:374
@@ -6197,17 +6197,17 @@ msgstr ""
 
 #: templates/user/profile.html:78
 msgid "Tools"
-msgstr ""
+msgstr "工具"
 
 #: templates/user/profile.html:82 templates/user/profile.html.py:85
 msgid "Edit profile"
-msgstr ""
+msgstr "编辑个人档案"
 
 #: templates/user/profile/flickr_import.html:14
 msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
 "images it not supported."
-msgstr ""
+msgstr "请注意：当从Flickr导入时，不支持自动加盖水印"
 
 #: templates/user/profile/flickr_import.html:20
 msgid "Which set"
@@ -6215,39 +6215,39 @@ msgstr ""
 
 #: templates/user/profile/flickr_import.html:34
 msgid "Import photos"
-msgstr ""
+msgstr "导入照片"
 
 #: templates/user/profile/flickr_import.html:36
 msgid "Authenticate with Flickr"
-msgstr ""
+msgstr "Flickr鉴权"
 
 #: templates/user/profile/flickr_import.html:43
 msgid ""
 "Unfortunately you need to enable Javascript to be able to import photos from "
 "Flickr at this time."
-msgstr ""
+msgstr "很不巧，此时您需要开启Javascript支持以便从Flickr导入照片"
 
 #: templates/user/profile/flickr_import.html:81
 msgid "Click to select the photos you want to import"
-msgstr ""
+msgstr "点击选择您想要导入的照片"
 
 #: templates/user/profile/flickr_import.html:97
 msgid "Import selected photos"
-msgstr ""
+msgstr "导入选择好的照片"
 
 #: templates/user/profile/flickr_import.html:107
 msgid "Importing images."
-msgstr ""
+msgstr "正在导入图片"
 
 #: templates/user/profile/flickr_import.html:107
 msgid "Do not navigate away from this window: this might take a while!"
-msgstr ""
+msgstr "请不要离开此窗口：这可能需要一会才能完成！"
 
 #: templates/user/profile/flickr_import.html:116
 msgid ""
 "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
 "(and keep an eye on your notifications)!"
-msgstr ""
+msgstr "完成啦！请前往 <a href=\\\"/me\\\">你的资料</a> 看看新照片吧（一定要注意看您的提醒哦）!"
 
 #: templates/user/profile/commercial/products.html:7
 #: templates/user/profile/commercial/products.html:15
@@ -6376,7 +6376,7 @@ msgstr ""
 #: templates/user/profile/edit/gear.html:27
 #: templates/user/profile/edit/gear.html:72
 msgid "Please note!"
-msgstr ""
+msgstr "请注意！"
 
 #: templates/user/profile/edit/gear.html:28
 #: templates/user/profile/edit/gear.html:73
@@ -6400,11 +6400,11 @@ msgstr ""
 
 #: templates/user/profile/edit/gear.html:67
 msgid "Add gear item"
-msgstr ""
+msgstr "添加器材项目"
 
 #: templates/user/profile/edit/license.html:6
 msgid "Set your default image license"
-msgstr ""
+msgstr "设置您的默认图片许可类型"
 
 #: templates/user/profile/edit/license.html:14
 msgid ""
@@ -6428,7 +6428,7 @@ msgstr ""
 
 #: templates/user/profile/edit/locations.html:14
 msgid "AstroBin will not share your location details with other users."
-msgstr ""
+msgstr "AstroBin不会和其他用户共享你的所在地详细信息"
 
 #: templates/user/profile/edit/preferences.html:6
 msgid "Edit your site preferences"

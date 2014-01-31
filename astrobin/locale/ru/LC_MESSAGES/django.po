@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-28 08:57+0000\n"
-"PO-Revision-Date: 2014-01-29 10:56+0000\n"
+"PO-Revision-Date: 2014-01-30 09:35+0000\n"
 "Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1390992970.504838\n"
+"X-POOTLE-MTIME: 1391074548.40072\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2987,7 +2987,7 @@ msgstr ""
 
 #: templates/faq.html:16 templates/faq.html.py:71
 msgid "What's the deal with the Staging Area and the Public Area?"
-msgstr "В чём разница между Промежуточной областью и Общественной областью?"
+msgstr "В чём разница между Staging Area и Public Area?"
 
 #: templates/faq.html:17 templates/faq.html.py:81
 msgid "Why was AstroBin created?"
@@ -3530,12 +3530,12 @@ msgid ""
 "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
 "want, you can search by telescope diameter too!"
 msgstr ""
-"AstroBin может помочь вам с вашим следующим выбором телескопом или камерой "
+"AstroBin может помочь вам с вашим следующим выбором телескопа или камерой "
 "для покупки, путем поиска комбинаций оборудования, принадлежащих другим "
 "пользователям. Например, вы могли бы искать все фотографии, сделанных с "
 "помощью Canon 5D и любым апохроматическим рефрактором, или SBIG ST-8300 с "
-"любым телескопом Ричи-Кретьена. Или, если вы хотите, вы можете осуществлять "
-"поиск по диаметру телескопа!"
+"любым телескопом Ричи-Кретьена. Или, если вы хотите, вы так же можете "
+"осуществлять поиск по диаметру телескопа!"
 
 #: templates/help.html:41
 msgid ""
@@ -4117,7 +4117,7 @@ msgstr "Справка AstroBin вопросов"
 #: templates/questions.html:83
 #, fuzzy
 msgid "An extension of this page, as a question on AstroBin Questions"
-msgstr "На расширении этой страницы, как вопрос а AstroBin-вопросах"
+msgstr "На расширении этой страницы, как вопрос на AstroBin-вопросах"
 
 #: templates/questions.html:90
 msgid "Go to AstroBin Questions!"
@@ -4958,7 +4958,7 @@ msgstr "Оригинал"
 
 #: templates/image/detail/skyplot.html:5 templates/image/detail/skyplot.html:7
 msgid "Sky plot"
-msgstr "График неба"
+msgstr "Положение на небе"
 
 #: templates/image/detail/wip_banner.html:9
 #, python-format
@@ -5050,7 +5050,7 @@ msgstr "Отметить повреждённые миниатюры"
 
 #: templates/image/detail/menu/actions.html:125
 msgid "Bring to a user's attention"
-msgstr "Донести до внимания пользователя"
+msgstr "Обратить внимание других"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -5207,6 +5207,10 @@ msgid ""
 "organized, but being part of it also means that you support AstroBin and can "
 "perhaps contribute your raw files to scientic discoveries."
 msgstr ""
+"<a href=\"%(rawdata_url)s\">Платформа Raw-данных</a> - это, прежде всего, "
+"место для надежного хранения ваших raw-файлов, где они будут четко и просто "
+"упорядочены. Но кроме того, это также оказание поддержки для AstroBin и "
+"возможность своими raw-файлами снимков внести вклад в научные открытия."
 
 #: templates/image/detail/modals/send_to_sharedfolder.html:11
 msgid ""
@@ -5230,7 +5234,7 @@ msgstr "У вас нет доступа ни к одному личному ка
 
 #: templates/image/detail/modals/share.html:15
 msgid "Sharing mode"
-msgstr "Режим общего"
+msgstr "Способ поделиться"
 
 #: templates/image/detail/modals/share.html:17
 msgid "Simple link"
@@ -5296,6 +5300,11 @@ msgid ""
 "strong> to finish, or on <strong>Add more</strong> to add more acquisition "
 "sessions."
 msgstr ""
+"Вы можете вложить столько сеансов съемки, сколько захотите, так как часто "
+"изображения снимаются в течение нескольких ночей. Сеанс съемки главным "
+"образом определяется датой и типом фильтра. Заполните данные и нажмите на "
+"кнопку <strong>Сохранить</strong> для выхода или на <strong>Добавить "
+"еще</strong>, чтобы добавить больше сеансов съемки."
 
 #: templates/image/edit/acquisition.html:32
 #, python-format
@@ -5303,6 +5312,9 @@ msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
 msgstr ""
+"Слишком много информации, чтобы в ней разобраться? Перейдите на <a "
+"class=\"button\" href=\"%"
+"(basic_form_url)s?edit_type=deep_sky&advanced=false\">базовую форму</a>."
 
 #: templates/image/edit/acquisition.html:38
 msgid "Acquisition session"
@@ -5403,6 +5415,11 @@ msgid ""
 "\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons "
 "website</a>."
 msgstr ""
+"Вы можете выпустить ваш материал под лицензией Creative Commons, если "
+"захотите, чтобы дать людям право использовать вашу работу на определенных "
+"условиях. За подробной информацией о вариантах, пожалуйста, обратитесь на <a "
+"target=\"_blank\" href=\"http://www.creativecommons.org/\">Веб-сайт Creative "
+"Commons</a>."
 
 #: templates/image/edit/license.html:15
 #, python-format
@@ -5821,8 +5838,8 @@ msgid ""
 "%(originator)s would like to bring the following image to your attention: "
 "%(object_url)s"
 msgstr ""
-"%(originator)s хотел бы донести подписанное изображение до вашего внимания: "
-"%(object_url)s"
+"%(originator)s хотел бы обратить ваше внимание на изображение: %"
+"(object_url)s"
 
 #: templates/notification/attention_request/notice.html:2
 #: templates/notification/attention_request/short.html:1
@@ -5831,8 +5848,8 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
 "image to your attention.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> хочет донести "
-"изображение до вашего внимания.</a>"
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> хочет обратить ваше "
+"внимание на изображение.</a>"
 
 #: templates/notification/attention_request/short.txt:2
 #, python-format
@@ -6275,11 +6292,13 @@ msgid "New processed image in private shared folder: %(folder_name)s"
 msgstr "Новое рабочее изображение в личном каталоге обмена: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "%(user_name)s has added a new processed image to the public data pool: "
 "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
 msgstr ""
+"%(user_name)s добавил новое рабочее изображение в публичный пул данных: «%"
+"(pool_name)s». Подробности: %(pool_url)s "
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
 #: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
@@ -6298,30 +6317,36 @@ msgid "New processed image in public data pool: %(pool_name)s"
 msgstr "Новое рабочее изображение в общественном фонде: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_pool/full.txt:2
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
 "Check it out at the following url: %(pool_url)s"
 msgstr ""
+"%(user_name)s добавил обновления в публичный пул: «%(pool_name)s». Подробнее "
+"по адресу: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> добавил обновления в "
+"публичный пул: <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> добавил обновления в "
+"публичный пул: <strong>\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
-#, python-format
+#, fuzzy, python-format
 msgid "New data in public pool: %(pool_name)s"
-msgstr ""
+msgstr "Обновления в публичном пуле: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/full.txt:2
 #, python-format
@@ -6379,6 +6404,8 @@ msgid ""
 "%(originator)s has fulfilled your request! Check it out at the following "
 "url: %(object_url)s"
 msgstr ""
+"%(originator)s выполнил вашу заявку! Смотрите ее по следующему адресу: %"
+"(object_url)s"
 
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
@@ -6387,11 +6414,13 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
 "your request</a>"
 msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> выполнил вашу "
+"заявку</a>"
 
 #: templates/notification/request_fulfilled/short.txt:2
 #, python-format
 msgid "%(originator)s has fulfilled your request."
-msgstr ""
+msgstr "%(originator)s выполнил вашу заявку."
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
@@ -6601,7 +6630,7 @@ msgstr "Упорядочить"
 
 #: templates/search/search.html:25
 msgid "Relevance"
-msgstr ""
+msgstr "Релевантность"
 
 #: templates/search/search.html:31 templates/user/profile-subnav.html:118
 msgid "Upload time"
@@ -6728,20 +6757,18 @@ msgid ""
 "make sure by checking whether you have images which lack data <a href="
 "\"%(user_page)s?public&sub=nodata\">here</a>."
 msgstr ""
-"Привет, <strong>%(user)s</strong>! Я хотел лишь указать вам на то, что вы "
-"могли бы сделать эти графики более полезными, если бы добавили все данные к "
-"вашим изображениям. Пожалуйста, проверьте, нет ли у вас изображений с "
-"неполными данными <a href=\"%(user_page)s?public&sub=nodata\">здесь</a>."
 
 #: templates/user/plots.html:24
 msgid "Total integration hours, plotted against time."
-msgstr ""
+msgstr "Всего часов накопления сигнала, вдоль оси времени."
 
 #: templates/user/plots.html:37
 msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
 msgstr ""
+"Всего часов накопления сигнала, относительно времени, сгруппированно по "
+"телескопам и объективам и камерам."
 
 #: templates/user/plots.html:53
 msgid "Combined view count for all the user's images, plotted against time."
@@ -6788,6 +6815,9 @@ msgid ""
 "can show people individual images by sharing them using the <em>Share</em> "
 "menu."
 msgstr ""
+"Это ваши изображения в «работе»: только вы видите этот список. Вы можете "
+"показать отдельные изображения другим людям, поделившись ими с помощью меню "
+"<em>Поделиться</em>."
 
 #: templates/user/profile.html:64
 msgid "These images don't have enough data. It's a shame..."
@@ -6822,7 +6852,7 @@ msgstr ""
 
 #: templates/user/profile/flickr_import.html:20
 msgid "Which set"
-msgstr ""
+msgstr "Какой набор"
 
 #: templates/user/profile/flickr_import.html:34
 msgid "Import photos"
@@ -6879,6 +6909,8 @@ msgid ""
 "Please remember that you are only allowed to claim items that you really "
 "produce and/or retail."
 msgstr ""
+"Пожалуйста, помните, что вы можете заявлять только те вещи, которые "
+"действительно производите и/или продаете."
 
 #: templates/user/profile/commercial/products.html:32
 msgid "As producer"
@@ -6909,18 +6941,16 @@ msgstr "Вы еще не заявляли ни одного продаваемо
 #: templates/user/profile/commercial/products.html:179
 #, python-format
 msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr ""
+msgstr "%(user)s не заявлял еще ни одного продаваемого продукта."
 
-# и залезть в бутылку =)
+# наверно таки они привлекают внимание к своим штучкам)
 #: templates/user/profile/commercial/products.html:196
-#, fuzzy
 msgid "Claim as producer"
-msgstr "Назваться продюсером"
+msgstr "Заявить как производитель"
 
 #: templates/user/profile/commercial/products.html:202
-#, fuzzy
 msgid "Claim as retailer"
-msgstr "Назваться продавцом"
+msgstr "Заявить как продавец"
 
 #: templates/user/profile/commercial/products.html:230
 msgid "Claim commercial product"
@@ -6932,7 +6962,7 @@ msgstr "Заявить коммерческий продукт"
 #: templates/user/profile/commercial/products.html:739
 #, fuzzy
 msgid "Claim"
-msgstr "Назваться"
+msgstr "Заявить"
 
 #: templates/user/profile/commercial/products.html:247
 #: templates/user/profile/commercial/products.html:321
@@ -7023,6 +7053,8 @@ msgid ""
 "The following information, instead, is personal, and may refer to your copy "
 "of this product."
 msgstr ""
+"Следующие данные, наоборот, личные и могут относиться к вашему экземпляру "
+"продукта."
 
 #: templates/user/profile/edit/gear.html:67
 msgid "Add gear item"
