@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-28 08:56+0000\n"
-"PO-Revision-Date: 2014-01-29 01:48+0000\n"
-"Last-Translator: Bufot <bufote@hotmail.com>\n"
+"PO-Revision-Date: 2014-01-31 01:47+0000\n"
+"Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1390960085.256615\n"
+"X-POOTLE-MTIME: 1391132854.34558\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -5043,8 +5043,9 @@ msgid "Delete this revision"
 msgstr "Borrar esta revisión"
 
 #: templates/image/detail/menu/actions.html:116
+#, fuzzy
 msgid "Flag malfunctionig thumbnails"
-msgstr ""
+msgstr "seña las miniaturas no funcionadas"
 
 #: templates/image/detail/menu/actions.html:125
 msgid "Bring to a user's attention"
@@ -5159,8 +5160,9 @@ msgstr ""
 "revisiones no serán borradas. ¿Estás seguro?"
 
 #: templates/image/detail/modals/flag_thumbnails.html:7
+#, fuzzy
 msgid "Flag malfunctioning thumbnails"
-msgstr ""
+msgstr "seña las miniaturas no funcionadas"
 
 #: templates/image/detail/modals/flag_thumbnails.html:11
 msgid ""

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-28 08:55+0000\n"
-"PO-Revision-Date: 2014-01-28 18:49+0000\n"
-"Last-Translator: romasalah <thekingosm168@hotmail.com>\n"
+"PO-Revision-Date: 2014-01-31 03:33+0000\n"
+"Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1390934980.66159\n"
+"X-POOTLE-MTIME: 1391139228.374202\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -53,12 +53,10 @@ msgid "Angola"
 msgstr "أنغولا"
 
 #: fields.py:18
-#, fuzzy
 msgid "Anguilla"
 msgstr "أنجويلا"
 
 #: fields.py:19
-#, fuzzy
 msgid "Antarctica"
 msgstr "القارة القطبية الجنوبية"
 
@@ -212,7 +210,7 @@ msgstr "جزيرة عيد الميلاد"
 
 #: fields.py:57
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "جزر كوكوس"
 
 #: fields.py:58
 msgid "Colombia"
@@ -304,7 +302,7 @@ msgstr "اثيوبيا"
 
 #: fields.py:80
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "جزر فوكلاند"
 
 #: fields.py:81
 msgid "Faroe Islands"
@@ -363,7 +361,6 @@ msgid "Greece"
 msgstr "اليونان"
 
 #: fields.py:95
-#, fuzzy
 msgid "Greenland"
 msgstr "جرينلاند"
 
@@ -401,7 +398,7 @@ msgstr "غويانا"
 
 #: fields.py:104
 msgid "Haiti"
-msgstr ""
+msgstr "هايتي"
 
 #: fields.py:105
 msgid "Heard Island and McDonald Islands"
@@ -589,7 +586,7 @@ msgstr "موريشيوس"
 
 #: fields.py:151
 msgid "Mayotte"
-msgstr ""
+msgstr "مايوت"
 
 #: fields.py:152
 msgid "Mexico"
@@ -597,7 +594,7 @@ msgstr "المكسيك"
 
 #: fields.py:153
 msgid "Micronesia, Federated States of"
-msgstr ""
+msgstr "ولايات ميكرونيزيا المتحدة"
 
 #: fields.py:154
 msgid "Moldova"
@@ -673,11 +670,11 @@ msgstr "نيجيريا"
 
 #: fields.py:172
 msgid "Niue"
-msgstr ""
+msgstr "نييوي"
 
 #: fields.py:173
 msgid "Norfolk Island"
-msgstr ""
+msgstr "جزيرة نورفولك"
 
 #: fields.py:174
 msgid "Northern Mariana Islands"
@@ -725,7 +722,7 @@ msgstr "الفلبّين"
 
 #: fields.py:185
 msgid "Pitcairn"
-msgstr ""
+msgstr "جزر بيتكيرن"
 
 #: fields.py:186
 msgid "Poland"
@@ -761,7 +758,7 @@ msgstr "رواندا"
 
 #: fields.py:194
 msgid "Saint Barthelemy"
-msgstr ""
+msgstr "سان بارتليمي"
 
 #: fields.py:195
 msgid "Saint Helena"
@@ -801,35 +798,35 @@ msgstr "ساو تومي و برينسيب"
 
 #: fields.py:204
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "المملكة العربية السعودية"
 
 #: fields.py:205
 msgid "Senegal"
-msgstr ""
+msgstr "السنغال"
 
 #: fields.py:206
 msgid "Serbia"
-msgstr ""
+msgstr "صربيا"
 
 #: fields.py:207
 msgid "Seychelles"
-msgstr ""
+msgstr "سيشيل"
 
 #: fields.py:208
 msgid "Sierra Leone"
-msgstr ""
+msgstr "سيراليون"
 
 #: fields.py:209
 msgid "Singapore"
-msgstr ""
+msgstr "سنغافورة"
 
 #: fields.py:210
 msgid "Slovakia"
-msgstr ""
+msgstr "سلوفاكيا"
 
 #: fields.py:211
 msgid "Slovenia"
-msgstr ""
+msgstr "سلوفينيا"
 
 #: fields.py:212
 msgid "Solomon Islands"
@@ -869,7 +866,7 @@ msgstr "سفالبارد و جان ماين"
 
 #: fields.py:221
 msgid "Swaziland"
-msgstr ""
+msgstr "سوازيلاند"
 
 #: fields.py:222
 msgid "Sweden"
@@ -945,23 +942,23 @@ msgstr "أوغندا"
 
 #: fields.py:240
 msgid "Ukraine"
-msgstr ""
+msgstr "أوكرانيا"
 
 #: fields.py:241
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "الإمارات العربيّة المتّحدة"
 
 #: fields.py:242
 msgid "United States"
-msgstr ""
+msgstr "الولايات المتّحدة"
 
 #: fields.py:243
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "جزر الولايات المتّحدة الصّغرى النّائية"
 
 #: fields.py:244
 msgid "Uruguay"
-msgstr ""
+msgstr "أوروغواي"
 
 #: fields.py:245
 msgid "Uzbekistan"
@@ -1001,11 +998,11 @@ msgstr "اليمن"
 
 #: fields.py:254
 msgid "Zambia"
-msgstr ""
+msgstr "زامبيا"
 
 #: fields.py:255
 msgid "Zimbabwe"
-msgstr ""
+msgstr "زيمبابوي"
 
 #: forms.py:50
 msgid ""
@@ -1020,28 +1017,32 @@ msgid ""
 "file here. Unfortunately, AstroBin cannot offer to store these files at the "
 "moment, so you will have to host them on your personal space."
 msgstr ""
+"إذا كنت تريد مشاركة ملف TIFF أو FITS من صورتك ، ضع رابط الملف هنا. مع الأسف، "
+"Astrobin لايمكن أن يعرض تخزين هذه الملفات حاليا؛لذلك يجب أن تستضيفهم علي "
+"الموقع الخاص بك."
 
 #: forms.py:62 models.py:1980 models.py:2062 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
-msgstr ""
+msgstr "رابط"
 
 #: forms.py:63 templates/image/detail/image_title.html:22
 msgid "Link to TIFF/FITS"
-msgstr ""
+msgstr "رابط لملف TIFF/FITS"
 
 #: forms.py:64 models.py:689 views.py:640 templates/maintenance_base.html:310
 #: templates/profile-edit-menu.html:36
 msgid "Locations"
-msgstr ""
+msgstr "المواقع"
 
 #: forms.py:77
 msgid "This field is required."
-msgstr ""
+msgstr "هذا الحقل مطلوب."
 
 #: forms.py:90
+#, fuzzy
 msgid "Opacity"
-msgstr ""
+msgstr "الإعتام"
 
 #: forms.py:91
 msgid ""
@@ -1049,10 +1050,12 @@ msgid ""
 "if the watermark will appear on the dark sky background, 50 if on some "
 "bright object."
 msgstr ""
+"0 تعني غير مرئية ، 100 تعني معتمة تماما. القيم المقترحة هي : 10 اذا كانت "
+"العلامة ستوضع علي خلفية سماء مظلمة ، 50 اذا كانت ستوضع علي جسم مضئ أكثر."
 
 #: forms.py:104
 msgid "If you want to watermark this image, you must specify some text."
-msgstr ""
+msgstr "لوضع علامة مائية علي هذه الصورة ؛ يجب أن تكتب نصاً."
 
 #: forms.py:131 forms.py:367 models.py:748
 msgid "Imaging telescopes or lenses"
@@ -1084,7 +1087,7 @@ msgstr "البرمجيات"
 
 #: forms.py:138 forms.py:231 models.py:755 models.py:1607 views.py:2156
 msgid "Filters"
-msgstr ""
+msgstr "مرشّحات"
 
 #: forms.py:139 forms.py:232 models.py:756 models.py:1608 views.py:2157
 msgid "Accessories"
@@ -1092,48 +1095,54 @@ msgstr ""
 
 #: forms.py:161
 msgid "If you have a personal website, put the address here."
-msgstr ""
+msgstr "إذا كنت تملك موقع شخصي ؛ ضع عنوانه هنا."
 
 #: forms.py:171 models.py:1532
 msgid "Website"
-msgstr ""
+msgstr "موقع الويب"
 
 #: forms.py:195
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
+"ضع كل التلسكوبات و العدسات التي تملكها هنا ، متضمنه تلك المُستخدَمه في "
+"الإرشاد."
 
 #: forms.py:204
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr ""
+"كاميرات DSLR و CCD و الكاميرات الكوكبية و كاميرات الإرشاد الخاصة بك في هذا "
+"الحقل."
 
 #: forms.py:217
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
 msgstr ""
+"تلميح: اكتب مرشحاتك كل علي حدة ! إذا وضعت ، علي سبيل المثال ، مرشحات LRGB في "
+"حقل واحد ، لن تستطيع اضافة بيانات التقاط منفصلة لكل منهم."
 
 #: forms.py:226 models.py:1602 views.py:2151
 msgid "Telescopes and lenses"
-msgstr ""
+msgstr "التلسكوبات و الكاميرات"
 
 #: forms.py:228 models.py:1604 views.py:2152
 msgid "Cameras"
-msgstr ""
+msgstr "الكاميرات"
 
 #: forms.py:260 forms.py:276
 #: templates/inclusion_tags/search_image_list.html:64
 msgid "Users"
-msgstr ""
+msgstr "المستخدمون"
 
 #: forms.py:272
 msgid "Search type"
-msgstr ""
+msgstr "نوع البحث"
 
 #: forms.py:274
 msgid "All"
-msgstr ""
+msgstr "الكلّ"
 
 #: forms.py:275 templates/leaderboard.html:35 templates/gear/page.html:236
 #: templates/inclusion_tags/search_image_list.html:51
@@ -1142,52 +1151,53 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:41
 #: templates/user/profile/commercial/products.html:123
 msgid "Images"
-msgstr ""
+msgstr "الصور"
 
 #: forms.py:277 models.py:645 views.py:1648
 #: templates/maintenance_base.html:304 templates/profile-edit-menu.html:30
 #: templates/wall.html:129 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
 msgid "Gear"
-msgstr ""
+msgstr "الأجهزة"
 
 #: forms.py:289
 msgid "Telescope type"
-msgstr ""
+msgstr "نوع التلسكوب"
 
 #: forms.py:290 forms.py:296
+#, fuzzy
 msgid "Any"
-msgstr ""
+msgstr "أي"
 
 #: forms.py:295
 msgid "Camera type"
-msgstr ""
+msgstr "نوع آلة التصوير"
 
 #: forms.py:309 forms.py:314
 msgid "Express value in mm"
-msgstr ""
+msgstr "اكتب القيمة بالمليمتر"
 
 #: forms.py:320 forms.py:325
 msgid "Express value in &mu;m"
-msgstr ""
+msgstr "اكتب القيمة بالميكرومتر"
 
 #: forms.py:332 forms.py:337 forms.py:565 forms.py:610 forms.py:651
 msgid "Please use the following format: yyyy-mm-dd"
-msgstr ""
+msgstr "من فضلك اتبع هذا الترتيب : سنة-شهر-يوم"
 
 #: forms.py:341 forms.py:345
 msgid "Express value in hours"
-msgstr ""
+msgstr "اكتب القيمة بالساعة"
 
 #: forms.py:357 models.py:769 templates/image/detail/info.html:27
 #: templates/image/detail/info.html:28 templates/search/search.html:239
 msgid "License"
-msgstr ""
+msgstr "الرخصة"
 
 #: forms.py:364
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
-msgstr ""
+msgstr "ابحث عن أجرام سماوية أو تلسكوبات أو عدسات أو كاميرات أو مرشحات..."
 
 #: forms.py:366 models.py:680
 msgid "Main solar system subject"
@@ -1195,76 +1205,76 @@ msgstr ""
 
 #: forms.py:369
 msgid "Min. telescope aperture"
-msgstr ""
+msgstr "أقل قطر للتلسكوب"
 
 #: forms.py:370
 msgid "Max. telescope aperture"
-msgstr ""
+msgstr "أكبر قطر للتلسكوب"
 
 #: forms.py:371
 msgid "Acquired after"
-msgstr ""
+msgstr "تم التقاطها بعد"
 
 #: forms.py:372
 msgid "Acquired before"
-msgstr ""
+msgstr "تم التقاطها قبل"
 
 #: forms.py:373
 msgid "Min. integration"
-msgstr ""
+msgstr "أقل مدة تعريض للضوء"
 
 #: forms.py:374
 msgid "Max. integration"
-msgstr ""
+msgstr "أطول مدة تعريض للضوء"
 
 #: forms.py:375
 msgid "Min. Moon phase %"
-msgstr ""
+msgstr "أصغر طور للقمر %"
 
 #: forms.py:376
 msgid "Max. Moon phase %"
-msgstr ""
+msgstr "أكبر طور للقمر %"
 
 #: forms.py:515
 msgid "Latitude (degrees)"
-msgstr ""
+msgstr "دائرة العرض (درجات)"
 
 #: forms.py:520
 msgid "Latitude (minutes)"
-msgstr ""
+msgstr "دائرة العرض (دقائق)"
 
 #: forms.py:526
 msgid "Latitude (seconds)"
-msgstr ""
+msgstr "دائرة العرض (ثواني)"
 
 #: forms.py:533
 msgid "Longitude (degrees)"
-msgstr ""
+msgstr "خط الطول (درجات)"
 
 #: forms.py:538
 msgid "Longitude (minutes)"
-msgstr ""
+msgstr "خط الطول (الدقائق)"
 
 #: forms.py:544
 msgid "Longitude (seconds)"
-msgstr ""
+msgstr "خط الطول (الثواني)"
 
 #: forms.py:566 forms.py:611 forms.py:652 models.py:1246 models.py:1459
 #: templates/image/detail/image_card.html:46
 msgid "Date"
-msgstr ""
+msgstr "التاريخ"
 
 #: forms.py:572
 msgid "Please enter a value between 1 and 5."
-msgstr ""
+msgstr "من فضلك ادخل قيمة بين 1 و 5."
 
 #: forms.py:579
 msgid "Please enter a value between 1 and 10."
-msgstr ""
+msgstr "من فضلك ادخل قيمة بين 1 و 10."
 
 #: forms.py:640 forms.py:658
 msgid "The date cannot be in the future."
-msgstr ""
+msgstr "التاريخ لا يمكن أن يكون في المستقبل."
 
 #: forms.py:892 forms.py:953 models.py:183 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
@@ -1282,11 +1292,11 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:38
 #: templates/user/profile/commercial/products.html:120
 msgid "Make"
-msgstr ""
+msgstr "الطراز"
 
 #: forms.py:893 forms.py:954 models.py:184
 msgid "The make, brand, producer or developer of this product."
-msgstr ""
+msgstr "الطراز أو العلامة التجارية أو المُنتِج أو المُطوّر لهذا المُنتَج."
 
 #: forms.py:898 forms.py:959 models.py:191 models.py:1698 models.py:1837
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
@@ -1298,7 +1308,7 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:39
 #: templates/user/profile/commercial/products.html:121
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #: forms.py:903 forms.py:928 forms.py:964 forms.py:999
 #: templates/user/profile/commercial/products.html:82
@@ -1308,7 +1318,7 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:485
 #: templates/user/profile/commercial/products.html:812
 msgid "Merge"
-msgstr ""
+msgstr "دمج"
 
 #: forms.py:904 forms.py:965
 msgid ""
@@ -1334,59 +1344,60 @@ msgstr ""
 
 #: locale_extras.py:4
 msgid "Recipient"
-msgstr ""
+msgstr "المستقبِل"
 
 #: locale_extras.py:5 templates/messages/inbox.html:28
 msgid "Subject"
-msgstr ""
+msgstr "الموضوع"
 
 #: locale_extras.py:6
 msgid "Body"
-msgstr ""
+msgstr "المتن"
 
 #: locale_extras.py:7
 msgid "uploaded a new image"
-msgstr ""
+msgstr "تم تحميل صورة جديدة"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
-msgstr ""
+msgstr "تم تحميل مراجعة جديدة"
 
 #: locale_extras.py:9
 msgid "commented on image"
-msgstr ""
+msgstr "قام بالتعليق علي صورة"
 
 #: locale_extras.py:10
 msgid "commented on gear item"
-msgstr ""
+msgstr "قام بالتعليق علي أحد الأجهزة"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr ""
+msgstr "حدد علامة موقع"
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr ""
+msgstr "إعجابات"
 
 #: locale_extras.py:13
+#, fuzzy
 msgid "has written a review on"
-msgstr ""
+msgstr "كتب رأي عن"
 
 #: locale_extras.py:14
 msgid "created a new public data pool"
-msgstr ""
+msgstr "أنشأ مساحة بيانات عامة جديد"
 
 #: locale_extras.py:15
 msgid "added new data to public data pool"
-msgstr ""
+msgstr "أضافَ بيانات جديدة إلي مساحة بيانات عامة"
 
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
-msgstr ""
+msgstr "أضافَ صورة معالَجة جديدة ألي مساحة بيانات عامة"
 
 #: models.py:68
 msgid "None (All rights reserved)"
-msgstr ""
+msgstr "لايوجد (جميع الحقوق محفوظة)"
 
 #: models.py:69
 msgid "Attribution-NonCommercial-ShareAlike Creative Commons"
@@ -1414,152 +1425,152 @@ msgstr ""
 
 #: models.py:78 models.py:93 settings.py:72 views.py:719
 msgid "English"
-msgstr ""
+msgstr "الإنجليزية"
 
 #: models.py:79 models.py:94 settings.py:73
 msgid "Italian"
-msgstr ""
+msgstr "الإيطالية"
 
 #: models.py:80 models.py:95 settings.py:74
 msgid "Spanish"
-msgstr ""
+msgstr "الإسبانية"
 
 #: models.py:81 models.py:96 settings.py:75
 msgid "French"
-msgstr ""
+msgstr "الفرنسية"
 
 #: models.py:82 models.py:97 settings.py:76
 msgid "Finnish"
-msgstr ""
+msgstr "الفنلندية"
 
 #: models.py:83 models.py:98 settings.py:77
 msgid "German"
-msgstr ""
+msgstr "الألمانية"
 
 #: models.py:84 models.py:99 settings.py:78
 msgid "Dutch"
-msgstr ""
+msgstr "الهولندية"
 
 #: models.py:85 models.py:100 settings.py:79
 msgid "Turkish"
-msgstr ""
+msgstr "التركيّة"
 
 #: models.py:86 models.py:101 settings.py:80
 msgid "Albanian"
-msgstr ""
+msgstr "الألبانية"
 
 #: models.py:87 models.py:102
 msgid "Polish"
-msgstr ""
+msgstr "البولندية"
 
 #: models.py:88 models.py:103 settings.py:82
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "برتغالية البرازيل"
 
 #: models.py:89 models.py:104 settings.py:83
 msgid "Greek"
-msgstr ""
+msgstr "اليونانيّة"
 
 #: models.py:108
 msgid "Pulsars"
-msgstr ""
+msgstr "نجوم نابضة"
 
 #: models.py:109
 msgid "Globular clusters"
-msgstr ""
+msgstr "(تجمعات نجمية مغلقة) عناقيد كٌروية"
 
 #: models.py:110
 msgid "Open clusters"
-msgstr ""
+msgstr "تجمعات نجمية مفتوحة (عناقيد مفتوحة)"
 
 #: models.py:111
 msgid "Nebulae"
-msgstr ""
+msgstr "سُدم"
 
 #: models.py:112
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "سُدم كوكبية"
 
 #: models.py:113
 msgid "Galaxies"
-msgstr ""
+msgstr "مجرات"
 
 #: models.py:134 templates/wall.html:90
 msgid "Sun"
-msgstr ""
+msgstr "الشمس"
 
 #: models.py:135
 msgid "Earth's Moon"
-msgstr ""
+msgstr "قمر الأرض"
 
 #: models.py:136
 msgid "Mercury"
-msgstr ""
+msgstr "عطارد"
 
 #: models.py:137
 msgid "Venus"
-msgstr ""
+msgstr "الزهرة"
 
 #: models.py:138
 msgid "Mars"
-msgstr ""
+msgstr "المريخ"
 
 #: models.py:139
 msgid "Jupiter"
-msgstr ""
+msgstr "المشترِي"
 
 #: models.py:140
 msgid "Saturn"
-msgstr ""
+msgstr "زحل"
 
 #: models.py:141
 msgid "Uranus"
-msgstr ""
+msgstr "أورانوس"
 
 #: models.py:142
 msgid "Neptune"
-msgstr ""
+msgstr "نبتون"
 
 #: models.py:143
 msgid "Minor planet"
-msgstr ""
+msgstr "كويكب"
 
 #: models.py:144
 msgid "Comet"
-msgstr ""
+msgstr "مذنَّب"
 
 #: models.py:145 models.py:582 models.py:646 views.py:1649
 #: templates/wall.html:141 templates/image/edit/acquisition.html:84
 msgid "Other"
-msgstr ""
+msgstr "أخرى"
 
 #: models.py:149
 msgid "Center"
-msgstr ""
+msgstr "الوسط"
 
 #: models.py:150
 msgid "Top left"
-msgstr ""
+msgstr "أعلى اليسار"
 
 #: models.py:151
 msgid "Top center"
-msgstr ""
+msgstr "أعلى الوسط"
 
 #: models.py:152
 msgid "Top right"
-msgstr ""
+msgstr "أعلى اليمين"
 
 #: models.py:153
 msgid "Bottom left"
-msgstr ""
+msgstr "أسفل اليسار"
 
 #: models.py:154
 msgid "Bottom center"
-msgstr ""
+msgstr "أسفل الوسط"
 
 #: models.py:155
 msgid "Bottom right"
-msgstr ""
+msgstr "أسفل اليمين"
 
 #: models.py:192
 msgid ""
@@ -1567,129 +1578,139 @@ msgid ""
 "customizations. Try to use the international name, in English language, if "
 "applicable. This name is shared among all users on AstroBin."
 msgstr ""
+"اسم المنتج فقط ، بدون أي تفاصيل أو تعديلات شخصية. حاول أن تستخدم الاسم "
+"الدولي للمنتج باللغة الإنجليزية إن أمكن. هذا الاسم تتم مشاركته بين كل "
+"مستخدمي موقع Astrobin."
 
 #: models.py:355
+#, fuzzy
 msgid "Alias"
-msgstr ""
+msgstr "الاسم المستعار"
 
 #: models.py:356
+#, fuzzy
 msgid ""
 "A descriptive name, alias or nickname for your own copy of this product."
-msgstr ""
+msgstr "اسم تفصيلي أو اسم مستعار لنسختك من هذا المنتج"
 
 #: models.py:363
 msgid "Comment"
-msgstr ""
+msgstr "تعليق"
 
 #: models.py:364
+#, fuzzy
 msgid ""
 "Information, description or comment about your own copy of this product."
-msgstr ""
+msgstr "معلومات أو وصف أو تعليق يخص نسختك من هذا المنتج"
 
 #: models.py:403
 msgid "Refractor: achromatic"
-msgstr ""
+msgstr "كاسر: لا لَوني"
 
 #: models.py:404
+#, fuzzy
 msgid "Refractor: semi-apochromatic"
-msgstr ""
+msgstr "كاسر: نصف لا لَوني متطور"
 
 #: models.py:405
 msgid "Refractor: apochromatic"
-msgstr ""
+msgstr "كاسر: لا لَوني متطور"
 
 #: models.py:406
 msgid "Refractor: non-achromatic Galilean"
-msgstr ""
+msgstr "كاسر: نوع جاليليو،بدون تعديل لوني"
 
 #: models.py:407
+#, fuzzy
 msgid "Refractor: non-achromatic Keplerian"
-msgstr ""
+msgstr "كاسر: نوع كيبلر،بدون تعديل لوني"
 
 #: models.py:408
+#, fuzzy
 msgid "Refractor: superachromat"
-msgstr ""
+msgstr "كاسر: سوبر لا لَوني"
 
 #: models.py:410
 msgid "Reflector: Dall-Kirkham"
-msgstr ""
+msgstr "عاكس: نظام Dall-kirkham"
 
 #: models.py:411
 msgid "Reflector: Nasmyth"
-msgstr ""
+msgstr "عاكس: نظام Nasmyth"
 
 #: models.py:412
 msgid "Reflector: Ritchey Chretien"
-msgstr ""
+msgstr "عاكس: نظام Ritchey Chretien"
 
 #: models.py:413
 msgid "Reflector: Gregorian"
-msgstr ""
+msgstr "عاكس: نظام جريجوري"
 
 #: models.py:414
 msgid "Reflector: Herschellian"
-msgstr ""
+msgstr "عاكس: نظام هيرشل"
 
 #: models.py:415
 msgid "Reflector: Newtonian"
-msgstr ""
+msgstr "عاكس: نظام نيوتن"
 
 #: models.py:417
 msgid "Catadioptric: Argunov-Cassegrain"
-msgstr ""
+msgstr "كاتاديوبتريك: نظام Argunov-Cassegrain"
 
 #: models.py:418
 msgid "Catadioptric: Klevtsov-Cassegrain"
-msgstr ""
+msgstr "كاتاديوبتريك: نظام Klevtsov-Cassegrain"
 
 #: models.py:419
 msgid "Catadioptric: Lurie-Houghton"
-msgstr ""
+msgstr "كاتاديوبتريك: نظام Lurie-Houghton"
 
 #: models.py:420
 msgid "Catadioptric: Maksutov"
-msgstr ""
+msgstr "كاتاديوبتريك: نظام ماكستوف"
 
 #: models.py:421
 msgid "Catadioptric: Maksutov-Cassegrain"
-msgstr ""
+msgstr "كاتاديوبتريك: ماكستوف-كاسيجرين"
 
 #: models.py:422
 msgid "Catadioptric: modified Dall-Kirkham"
-msgstr ""
+msgstr "كاتاديوبتريك: نظام Dall-Kirkham مُعدَل"
 
 #: models.py:423
 msgid "Catadioptric: Schmidt camera"
-msgstr ""
+msgstr "كاتاديوبتريك: نظام Schmidt"
 
 #: models.py:424
 msgid "Catadioptric: Schmidt-Cassegrain"
-msgstr ""
+msgstr "كاتاديوبتريك: نظام Schmidt-Cassegrain"
 
 #: models.py:425
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgstr ""
+msgstr "كاتاديوبتريك: نظام ACF Schmidt-Cassegrain"
 
 #: models.py:426 stats.py:596
 msgid "Camera lens"
-msgstr ""
+msgstr "عدسة آلة التصوير"
 
 #: models.py:427
 msgid "Binoculars"
-msgstr ""
+msgstr "المنظار الثنائي"
 
 #: models.py:431 templates/popover/gear_telescope.html:18
+#, fuzzy
 msgid "Aperture"
-msgstr ""
+msgstr " قطر البؤرة"
 
 #: models.py:432 models.py:441 models.py:511 models.py:520
 msgid "(in mm)"
-msgstr ""
+msgstr "(بالمليمتر)"
 
 #: models.py:440 models.py:1398 templates/image/detail/image_card.html:58
 #: templates/popover/gear_telescope.html:19
 msgid "Focal length"
-msgstr ""
+msgstr "البعد البؤري"
 
 #: models.py:449 models.py:528 models.py:554 models.py:587
 #: templates/gear/page.html:208 templates/popover/gear_camera.html:16
@@ -1697,47 +1718,47 @@ msgstr ""
 #: templates/popover/gear_software.html:16
 #: templates/popover/gear_telescope.html:16 templates/popover/subject.html:10
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #: models.py:457 models.py:536 templates/search/search.html:322
 msgid "mm"
-msgstr ""
+msgstr "مليمتر"
 
 #: models.py:465 templates/popover/gear_mount.html:17
 msgid "Max. payload"
-msgstr ""
+msgstr "أقصي حمولة"
 
 #: models.py:466
 msgid "(in kg)"
-msgstr ""
+msgstr "(بالكيلوجرام)"
 
 #: models.py:474 templates/popover/gear_mount.html:18
 msgid "Periodic error"
-msgstr ""
+msgstr "الخطأ الدوري"
 
 #: models.py:475
 msgid "(peak to peak, in arcseconds)"
-msgstr ""
+msgstr "(من قمة إلي قمة بالقوس ثانية)"
 
 #: models.py:484
 msgid "kg"
-msgstr ""
+msgstr "كيلوجرام"
 
 #: models.py:492
 msgid "CCD"
-msgstr ""
+msgstr "CCD"
 
 #: models.py:493
 msgid "DSLR"
-msgstr ""
+msgstr "DSLR"
 
 #: models.py:494
 msgid "Guider/Planetary"
-msgstr ""
+msgstr "إرشاد/كوكبية"
 
 #: models.py:495
 msgid "Film"
-msgstr ""
+msgstr "فيلم"
 
 #: models.py:496
 msgid "Compact"
@@ -1745,133 +1766,136 @@ msgstr ""
 
 #: models.py:497
 msgid "Video camera"
-msgstr ""
+msgstr "آلة تصوير فيديو"
 
 #: models.py:501 templates/popover/gear_camera.html:18
 #: templates/search/search.html:329
 msgid "Pixel size"
-msgstr ""
+msgstr "حجم البكسل"
 
 #: models.py:502
 msgid "(in &mu;m)"
-msgstr ""
+msgstr "بالميكرومتر"
 
 #: models.py:510 templates/popover/gear_camera.html:19
 msgid "Sensor width"
-msgstr ""
+msgstr "عرض المستشعر"
 
 #: models.py:519 templates/popover/gear_camera.html:20
 msgid "Sensor height"
-msgstr ""
+msgstr "طول المستشعر"
 
 #: models.py:536 templates/search/search.html:330
 msgid "&mu;m"
-msgstr ""
+msgstr "بالميكرومتر"
 
 #: models.py:549
 msgid "Open source or freeware"
-msgstr ""
+msgstr "برنامج ذو مصدر مفتوح أو مجاني"
 
 #: models.py:550
 msgid "Paid"
-msgstr ""
+msgstr "مدفوع القيمة"
 
 #: models.py:566
 msgid "Clear or color"
-msgstr ""
+msgstr "شفاف أو مُلون"
 
 #: models.py:568
 msgid "Broadband: H-Alpha"
-msgstr ""
+msgstr "واسع النطاق: هيدروجين ألفا"
 
 #: models.py:569
 msgid "Broadband: H-Beta"
-msgstr ""
+msgstr "واسع النطاق: هيدروجين بيتا"
 
 #: models.py:570
 msgid "Broadband: S-II"
-msgstr ""
+msgstr "واسع النطاق: كبريت ثنائي التأين S-II"
 
 #: models.py:571
 msgid "Broadband: O-III"
-msgstr ""
+msgstr "واسع النطاق: أكسجين ثنائي التأين O-III"
 
 #: models.py:572
 msgid "Broadband: N-II"
-msgstr ""
+msgstr "واسع النطاق: نيتروجين ثنائي التأين N-II"
 
 #: models.py:574
 msgid "Narrowband: H-Alpha"
-msgstr ""
+msgstr "ضيق النطاق: هيدروجين ألفا"
 
 #: models.py:575
 msgid "Narrowband: H-Beta"
-msgstr ""
+msgstr "ضيق النطاق: هيدروجين بيتا"
 
 #: models.py:576
 msgid "Narrowband: S-II"
-msgstr ""
+msgstr "ضيق النطاق: كبريت ثنائي التأين S-II"
 
 #: models.py:577
 msgid "Narrowband: O-III"
-msgstr ""
+msgstr "ضيق النطاق: أكسجين ثنائي التأين O-III"
 
 #: models.py:578
 msgid "Narrowband: N-II"
-msgstr ""
+msgstr "ضيق النطاق: نيتروجين ثنائي التأين N-II"
 
 #: models.py:580
+#, fuzzy
 msgid "Light pollution suppression"
-msgstr ""
+msgstr "عازل للتلوث الضوئي"
 
 #: models.py:581
 msgid "Planetary"
-msgstr ""
+msgstr "كوكبي"
 
 #: models.py:583
+#, fuzzy
 msgid "UHC: Ultra High Contrast"
-msgstr ""
+msgstr "‎‎ تباين ضوئي فائق UHC:Ultra high contrast"
 
 #: models.py:594 templates/popover/gear_filter.html:18
 msgid "Bandwidth"
-msgstr ""
+msgstr "عرض النطاق"
 
 #: models.py:595
 msgid "(in nm)"
-msgstr ""
+msgstr "(بالنانومتر)"
 
 #: models.py:604
 msgid "nm"
-msgstr ""
+msgstr "نانومتر"
 
 #: models.py:641
 msgid "Deep sky object"
-msgstr ""
+msgstr "أجرام الفضاء العميق"
 
 #: models.py:642
 msgid "Solar system body or event"
-msgstr ""
+msgstr "جسم أو حَدَث في المجموعة الشمسية"
 
 #: models.py:643 views.py:1646 templates/wall.html:117
 msgid "Extremely wide field"
-msgstr ""
+msgstr "واسع المجال جداًَ"
 
 #: models.py:644 views.py:1647 templates/wall.html:123
 msgid "Star trails"
-msgstr ""
+msgstr "العنوان"
 
 #: models.py:663 templates/inclusion_tags/image_list.html:12
 #: templates/inclusion_tags/search_image_list.html:123
 msgid "Title"
-msgstr ""
+msgstr "العنوان"
 
 #: models.py:667 templates/user/profile-subnav.html:124
+#, fuzzy
 msgid "Subject type"
-msgstr ""
+msgstr "نوع الجسم"
 
 #: models.py:674
 msgid "Objects in field"
-msgstr ""
+msgstr "الأجرام في مجال الصورة"
 
 #: models.py:675
 msgid "Use a <strong>comma</strong> to separate the values."
@@ -1882,16 +1906,20 @@ msgid ""
 "If the main subject of your image is a body in the solar system, please "
 "select which (or which type) it is."
 msgstr ""
+"إذا كان الموضوع الرئيسي لصورتك هو جسم في المجموعة الشمسية ، من فضلك اختره أو "
+"اختر نوعه"
 
 #: models.py:690
 msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr ""
+"اسحب البنود التي تريدها من الجانب الأيمن إلي الجانب الأيسر ، أو اضغط علي "
+"علامة الزائد."
 
 #: models.py:696 models.py:1845 models.py:2069 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #: models.py:697
 msgid "HTML tags are allowed."
@@ -1899,96 +1927,97 @@ msgstr ""
 
 #: models.py:734
 msgid "Apply watermark to image"
-msgstr ""
+msgstr "تطبيق علامة مائية علي الصورة"
 
 #: models.py:738 templates/leaderboard.html:20
 msgid "Position"
-msgstr ""
+msgstr "الموضع"
 
 #: models.py:786 templates/image/full.html:56
 #: templates/image/detail/image_title.html:7
 msgid "(no title)"
-msgstr ""
+msgstr "(بدون عناوين)"
 
 #: models.py:1247
 msgid "Please use the following format: yyyy-mm-dd."
-msgstr ""
+msgstr "من فضلك استخدم هذا الترتيب: سنة-شهر-يوم."
 
 #: models.py:1252 models.py:1458 models.py:2045
 msgid "Image"
-msgstr ""
+msgstr "الصورة"
 
 #: models.py:1271
 msgid "1 - Excellent dark-site sky (BLACK)"
-msgstr ""
+msgstr "1- مكان سماء معتمة ممتاز (أسود)"
 
 #: models.py:1272
 msgid "2 - Typical truly dark site (GRAY)"
-msgstr ""
+msgstr "2-مكان سماء معتمة (رمادي)"
 
 #: models.py:1273
 msgid "3 - Rural sky (BLUE)"
-msgstr ""
+msgstr "3-سماء ريفية (أزرق)"
 
 #: models.py:1274
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
-msgstr ""
+msgstr "سماء مابين الريف و الضواحي (أخضر/أصفر)"
 
 #: models.py:1275
 msgid "5 - Suburban sky (ORANGE)"
-msgstr ""
+msgstr "سماء ضواحي (برتقالي)"
 
 #: models.py:1276
 msgid "6 - Bright suburban sky (RED)"
-msgstr ""
+msgstr "سماء ضواحي مضيئة (أحمر)"
 
 #: models.py:1277
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
-msgstr ""
+msgstr "سماء مابين الضواحي و المدن أو قمر مكتمل (أحمر)"
 
 #: models.py:1278
 msgid "8 - City sky (WHITE)"
-msgstr ""
+msgstr "سماء مدينة (أبيض)"
 
 #: models.py:1279
 msgid "9 - Inner city sky (WHITE)"
-msgstr ""
+msgstr "سماء وسط المدينة (أبيض)"
 
 #: models.py:1283
 msgid "Synthetic channel"
-msgstr ""
+msgstr "مُجمعة من ألوان أولية"
 
 #: models.py:1288
 msgid "Filter"
-msgstr ""
+msgstr "مرشِّح"
 
 #: models.py:1294
 msgid "Binning"
-msgstr ""
+msgstr "تجميع البكسلات"
 
 #: models.py:1297
 msgid "Number"
-msgstr ""
+msgstr "العدد"
 
 #: models.py:1299
 msgid "The number of sub-frames."
-msgstr ""
+msgstr "عدد الإطارات المضيئة."
 
 #: models.py:1302
 msgid "Duration"
-msgstr ""
+msgstr "المدة"
 
 #: models.py:1304
 msgid "Duration of each sub-frame, in seconds."
-msgstr ""
+msgstr "مدة كل إطار مضئ ، بالثانية."
 
 #: models.py:1307
 msgid "ISO"
-msgstr ""
+msgstr "حساسية المستشعر ISO"
 
 #: models.py:1311
+#, fuzzy
 msgid "Gain"
-msgstr ""
+msgstr "عامل مضاعفة حساسية المستشعر"
 
 #: models.py:1316
 msgid "Sensor cooling"
@@ -1996,39 +2025,39 @@ msgstr ""
 
 #: models.py:1318
 msgid "The temperature of the chip. E.g.: -20."
-msgstr ""
+msgstr "درجة حرارة المستشعر. علي سبيل المثال: -20."
 
 #: models.py:1321 views.py:648
 msgid "Darks"
-msgstr ""
+msgstr "الإطارات المظلمة"
 
 #: models.py:1323
 msgid "The number of dark frames."
-msgstr ""
+msgstr "عدد الإطارات المظلمة."
 
 #: models.py:1326 views.py:649
 msgid "Flats"
-msgstr ""
+msgstr "الإطارات المستوية"
 
 #: models.py:1328
 msgid "The number of flat frames."
-msgstr ""
+msgstr "عدد الإطارات المستوية."
 
 #: models.py:1331 views.py:650
 msgid "Flat darks"
-msgstr ""
+msgstr "الإطارات المظلمة للإطارات المستوية"
 
 #: models.py:1333
 msgid "The number of dark flat frames."
-msgstr ""
+msgstr "عدد الإطارات المظلمة للإطارات المستوية."
 
 #: models.py:1336 views.py:651
 msgid "Bias"
-msgstr ""
+msgstr "إطارات خطأ النقل Bias"
 
 #: models.py:1338
 msgid "The number of bias/offset frames."
-msgstr ""
+msgstr "عدد إطارات خطأ النقل Bias."
 
 #: models.py:1341 views.py:654
 msgid "Bortle Dark-Sky Scale"
@@ -2041,12 +2070,13 @@ msgid ""
 msgstr ""
 
 #: models.py:1349
+#, fuzzy
 msgid "Mean mag/arcsec^2"
-msgstr ""
+msgstr "المتوسط الحسابي للقدر الظاهري لكل قوس ثانية مربع"
 
 #: models.py:1350
 msgid "As measured with your Sky Quality Meter."
-msgstr ""
+msgstr "كما تمت قياسته بجهاز حساب جودة السماء."
 
 #: models.py:1355 views.py:656
 msgid "Mean FWHM"
@@ -2054,33 +2084,35 @@ msgstr ""
 
 #: models.py:1360 views.py:657
 msgid "Temperature"
-msgstr ""
+msgstr "درجة الحرارة"
 
 #: models.py:1363
 msgid "Ambient temperature (in Centigrade degrees)."
-msgstr ""
+msgstr "درجة حرارة البيئة المحيطة (بالدرجة السيلزية)."
 
 #: models.py:1384
 msgid "Number of frames"
-msgstr ""
+msgstr "عدد الإطارات"
 
 #: models.py:1385
 msgid "The total number of frames you have stacked."
-msgstr ""
+msgstr "العدد الكلي للإطارات الّتي قمت بتجميعها."
 
 #: models.py:1389 templates/image/detail/image_card.html:55
 msgid "FPS"
-msgstr ""
+msgstr "إطار في الثانية"
 
 #: models.py:1390
 msgid "Frames per second."
-msgstr ""
+msgstr "إطارات في الثَانية"
 
 #: models.py:1399
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
 msgstr ""
+"البعد البؤري لجهازك البصري بأكمله،متصمناً عدسات التقريب barlow أو أي مكونات "
+"أخرى."
 
 #: models.py:1405 templates/image/detail/image_card.html:61
 msgid "CMI"
@@ -2144,40 +2176,41 @@ msgstr ""
 
 #: models.py:1492
 msgid "Higher resolution"
-msgstr ""
+msgstr "دقة عالية"
 
 #: models.py:1524
 msgid "Real name"
-msgstr ""
+msgstr "الاسم الحقيقي"
 
 #: models.py:1525
 msgid "If present, your real name will be used throughout the website."
-msgstr ""
+msgstr "سيتم استخدام اسمك الحقيقي -إن وُجد- في الموقع."
 
 #: models.py:1539
 msgid "Job"
-msgstr ""
+msgstr "المهنة"
 
 #: models.py:1546
 msgid "Hobbies"
-msgstr ""
+msgstr "الهوايات"
 
 #: models.py:1550
 msgid "Do you have any hobbies other than astrophotography?"
-msgstr ""
+msgstr "هل تملك هوايات أخرى بجانب التصوير الفلكي؟"
 
 #: models.py:1557
 msgid "Timezone"
-msgstr ""
+msgstr "المنطقة الزمنية"
 
 #: models.py:1558
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
+"باختيار هذا؛سوف تري كل التواريخ علي موقع Astrobin تبعاَ لمنطقتك الزمنية."
 
 #: models.py:1563
 msgid "About you"
-msgstr ""
+msgstr "نبذة عن نفسك"
 
 #: models.py:1564
 msgid "Write something about yourself. HTML tags are allowed."
@@ -2193,7 +2226,7 @@ msgstr ""
 
 #: models.py:1579
 msgid "Company description"
-msgstr ""
+msgstr "وصف الشركة"
 
 #: models.py:1580
 msgid ""
@@ -2203,33 +2236,34 @@ msgstr ""
 
 #: models.py:1588
 msgid "Company website"
-msgstr ""
+msgstr "موقع الويب للشركة"
 
 #: models.py:1589
 msgid "The website of the company you represent on AstroBin."
-msgstr ""
+msgstr "موقع الويب للشركة التي تُمثلُها علي Astrobin"
 
 #: models.py:1593
+#, fuzzy
 msgid "Country of operation"
-msgstr ""
+msgstr "دولة العمل"
 
 #: models.py:1618 templates/maintenance_base.html:316
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
-msgstr ""
+msgstr "الرخصة الافتراضية"
 
 #: models.py:1620
 msgid ""
 "The license you select here is automatically applied to all your new images."
-msgstr ""
+msgstr "الرخصة الّتي تختارُها هنا سوف يتم تطبيقها علي جميع صورك الجديدة."
 
 #: models.py:1653
 msgid "Language"
-msgstr ""
+msgstr "اللّغة"
 
 #: models.py:1699
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
-msgstr ""
+msgstr "اسم وصفي،علي سبيل المثال \"مرصد في المنزل\" أو \"جبل سانت كاترين\"."
 
 #: models.py:1705
 msgid "City"
@@ -2265,41 +2299,41 @@ msgstr ""
 
 #: models.py:1750
 msgid "West"
-msgstr ""
+msgstr "غرب"
 
 #: models.py:1751
 msgid "East or West"
-msgstr ""
+msgstr "شرق أو غرب"
 
 #: models.py:1755
 msgid "Altitude"
-msgstr ""
+msgstr "الارتفاع"
 
 #: models.py:1756
 msgid "In meters."
-msgstr ""
+msgstr "بالمتر."
 
 #: models.py:1838
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr ""
+msgstr "اسم موقع الويب أو التطبيق الّذي تريد استخدامه كـ API."
 
 #: models.py:1846
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
-msgstr ""
+msgstr "من فضلك اشرح الغرض من تطبيقك ، وكيف تنوي استخدام الـ API."
 
 #: models.py:1957
 msgid "AUD - Australian dollars"
-msgstr ""
+msgstr "دولار أسترالي"
 
 #: models.py:1958
 msgid "CAD - Canadian dollars"
-msgstr ""
+msgstr "دولار كندي"
 
 #: models.py:1959
 msgid "CHF - Swiss francs"
-msgstr ""
+msgstr "فرنك سويسري"
 
 #: models.py:1960
 msgid "EUR - Euros"
