@@ -82,6 +82,7 @@ LANGUAGES = (
     ('pt-BR', gettext('Brazilian Portuguese')),
     ('el', gettext('Greek')),
     ('ru', gettext('Russian')),
+    ('ar', gettext('Arabic')),
 )
 MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 

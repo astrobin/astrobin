@@ -3,32 +3,33 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 08:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-02-03 11:22+0000\n"
+"PO-Revision-Date: 2014-02-11 09:03+0000\n"
+"Last-Translator: mychat_aa <mychat.aa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: zh-TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1392109407.501257\n"
 
 #: templates/astrobin_apps_images/snippets/image.html:12
 msgid "Error!"
-msgstr ""
+msgstr "錯誤!"
 
 #: templates/astrobin_apps_images/snippets/image.html:53
 msgid "Loading"
-msgstr ""
+msgstr "載入中"
 
 #: templates/astrobin_apps_images/snippets/image.html:86
 msgid "(no title)"
-msgstr ""
+msgstr "(未命名)"
 
 #: templatetags/astrobin_apps_images_tags.py:103
 msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr ""
+msgstr "對不起! 資料損壞. 請重新上傳圖片"
