@@ -476,7 +476,7 @@ REST_FRAMEWORK = {
 # http://docs.celeryproject.org/en/latest/django/unit-testing.html
 TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
 
-RAWDATA_ROOT = '/rawdata/files'
+RAWDATA_ROOT = '/rawdata_s3/files'
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
