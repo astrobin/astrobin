@@ -1908,12 +1908,14 @@ class ImageOfTheDay(models.Model):
         Image,
         related_name = 'iotd_runnerup_1',
         null = True,
+        on_delete = models.SET_NULL,
     )
 
     runnerup_2 = models.ForeignKey(
         Image,
         related_name = 'iotd_runnerup_2',
         null = True,
+        on_delete = models.SET_NULL,
     )
 
     class Meta:
