@@ -1822,13 +1822,17 @@ def user_page_following(request, username, extra_context = None):
     user = get_object_or_404(User, username = username)
 
     user_ct = ContentType.objects.get_for_model(User)
-    followed_users = [
-        user_ct.get_object_for_this_type(pk = x.object_id) for x in
-        ToggleProperty.objects.filter(
-            property_type = "follow",
-            user = user,
-            content_type = user_ct)
-    ]
+    followed_users = []
+    properties = ToggleProperty.objects.filter(
+        property_type = "follow",
+        user = user,
+        content_type = user_ct)
+
+    for p in properties:
+        try:
+            followed_users.append(user_ct.get_object_for_this_type(pk = p.object_id))
+        except User.DoesNotExist:
+            pass
 
     template_name = 'user/following.html'
     if request.is_ajax():
