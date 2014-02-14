@@ -21,7 +21,7 @@
         {% trans "What is AstroBin worth to you?" %}
     </label>
     <select name="os0">
-        <optgroup label="Monthly contributions">
+        <optgroup label="{% trans "Monthly contributions" %}">
             <option value="A coffee, once a month">&nbsp;&nbsp;{% blocktrans with 2.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A coffee" %}</option>
             <option value="A snack, once a month">&nbsp;&nbsp;{% blocktrans with 3.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A snack" %}</option>
             <option value="A pizza, once a month" selected="selected">&nbsp;&nbsp;{% blocktrans with 6.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A pizza" %}</option>
@@ -29,7 +29,7 @@
             <option value="A frugal dinner out for one, once a month">&nbsp;{% blocktrans with 25.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
         </optgroup>
 
-        <optgroup label="Yearly contributions (cheaper!)">j
+        <optgroup label="{% trans "Yearly contributions (cheaper!)" %}">
             <option value="A coffee, once a month (with yearly payments)">&nbsp;{% blocktrans with 24.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A coffee" %}</option>
             <option value="A snack, once a month (with yearly payments)">&nbsp;{% blocktrans with 34.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A snack" %}</option>
             <option value="A pizza, once a month (with yearly payments)">&nbsp;{% blocktrans with 60.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A pizza" %}</option>

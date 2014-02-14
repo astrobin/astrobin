@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:44+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-02-03 11:22+0000\n"
+"PO-Revision-Date: 2014-02-03 02:16+0000\n"
+"Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5\n"
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1391393818.693567\n"
 
 #: templates/astrobin_apps_donations/cancel.html:5
 #: templates/astrobin_apps_donations/cancel.html:10
@@ -33,22 +34,22 @@ msgstr ""
 
 #: templates/astrobin_apps_donations/cancel.html:17
 msgid "From now on, you will again see ads on this website."
-msgstr ""
+msgstr "من الآن فصاعدا ، سوف تري الإعلانات مرة أخري علي هذا الموقع."
 
 #: templates/astrobin_apps_donations/cancel.html:23
 #: templates/astrobin_apps_donations/success.html:23
 msgid "Whishing you clear skies and excellent seeing!"
-msgstr ""
+msgstr "نتمني لك سماءً صافية و رؤية ممتازة!"
 
 #: templates/astrobin_apps_donations/cancel.html:28
 #: templates/astrobin_apps_donations/success.html:28
 msgid "Founder of AstroBin"
-msgstr ""
+msgstr "مؤسس AstroBin"
 
 #: templates/astrobin_apps_donations/success.html:5
 #: templates/astrobin_apps_donations/success.html:10
 msgid "Thank you for your donation!"
-msgstr ""
+msgstr "شكرا علي تبرعك!"
 
 #: templates/astrobin_apps_donations/success.html:13
 msgid ""
@@ -56,39 +57,72 @@ msgid ""
 "with its ever increasing hosting costs, and will serve an incentive for us "
 "to continue to improve it."
 msgstr ""
+"نحن شاكرين جداً لدعمك لنا! مساهمتك سوف تساعد AstroBin في تكاليف الإستضافة "
+"المتزايدة دائماَ ، و ستصبح محفِّز لنا لمتابعة تطويره."
 
 #: templates/astrobin_apps_donations/success.html:17
 msgid ""
 "In a few minutes, once your PayPal transaction is processed, we will stop "
 "showing you ads on this website."
 msgstr ""
+"خلال بضع دقائق ، و بمجرد معالجة تحويل PayPal ، سنتوقف عن عرض الإعلانات لك "
+"علي هذا الموقع."
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:21
 msgid "What is AstroBin worth to you?"
-msgstr ""
+msgstr "ماذا يساوي AstroBin بالنسبة لك؟"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:24
+msgid "Monthly contributions"
+msgstr "المساهمات الشهرية"
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:26
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:27
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:28
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:29
+#, fuzzy, python-format
+msgid "$%(amount)s/month"
+msgstr "$%(amount)s/شهر"
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
 msgid "A coffee"
-msgstr ""
+msgstr "كوب قهوة"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:24
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:26
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:27
-msgid "monthly"
-msgstr ""
-
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:34
 msgid "A snack"
-msgstr ""
-
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:26
-msgid "A pizza"
-msgstr ""
+msgstr "وجبة سريعة"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:27
-msgid "A movie night"
-msgstr ""
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:35
+msgid "A pizza"
+msgstr "بيتزا"
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:28
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:36
+#, fuzzy
+msgid "A movie night for one"
+msgstr "فيلم لشخص واحد"
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:29
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:37
+msgid "A frugal dinner out for one"
+msgstr "عشاء مقتصد لفرد خارج المنزل"
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:32
+msgid "Yearly contributions (cheaper!)"
+msgstr "المساهمات السنوية (أرخص!)"
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:34
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:35
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:36
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:37
+#, python-format
+msgid "$%(amount)s/year"
+msgstr "$%(amount)s/سنة"
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:8
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:24
@@ -145,13 +179,16 @@ msgstr ""
 #: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:24
 msgid ""
 "Please donate any amount you want, selecting from the options below and "
-"subscribing with a recurring monthly payment."
+"subscribing with a recurring monthly payment. You will be able to cancel "
+"your subscription whenever you want."
 msgstr ""
+"من فضلك تبرع بالقيمة الّتي تريدها عن طريق اختيار أحد الخيارات بالأسفل و "
+"الإ‪شتراك في تبرع شهري ‫متكرر.يمكنك إلغاء اشتراكك متي تريد."
 
 #: templates/astrobin_apps_donations/inclusion_tags/donate_modal.html:24
 #: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:29
 msgid "Thank you!"
-msgstr ""
+msgstr "شكراً لك!"
 
 #: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:11
 msgid ""

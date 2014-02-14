@@ -1,6 +1,6 @@
 #!/bin/bash
-LANGS="ar ca cs de el es fa fi fr it hu nl pl pt pt-BR ro ru sk sq sr tr zh-CN"
-PROJECTS="astrobin nested_comments rawdata astrobin_apps_users astrobin_apps_images astrobin_apps_platesolving"
+LANGS="ar ca cs de el es fa fi fr it hu nl pl pt pt-BR ro ru sk sq sr tr zh-CN zh-TW"
+PROJECTS="astrobin nested_comments rawdata astrobin_apps_users astrobin_apps_images astrobin_apps_platesolving astrobin_apps_donations"
 TO='/home/astrobin/code/astrobin'
 FROM='/home/astrobin/venv/translate.astrobin.com/lib/python2.7/site-packages/pootle/po'
 

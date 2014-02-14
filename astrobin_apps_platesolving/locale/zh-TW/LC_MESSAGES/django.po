@@ -1,0 +1,45 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-03 11:22+0000\n"
+"PO-Revision-Date: 2014-02-11 09:04+0000\n"
+"Last-Translator: mychat_aa <mychat.aa@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1392109450.37444\n"
+
+#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:10
+msgid "Getting plate-solving status, please wait..."
+msgstr "分析星體資料，請稍候..."
+
+#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:28
+msgid "Plate-solving process starting, please do not leave this page..."
+msgstr "開始分析星體資料，請不要離開本頁..."
+
+#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:29
+msgid "Plate-solving started in the background. You may leave this page."
+msgstr "分析星體資料在背景中執行，你可以離開本頁."
+
+#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:30
+msgid "Plate-solving almost ready, please do not leave this page..."
+msgstr "分析星體資料準備中，請不要離開本頁..."
+
+#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:31
+msgid "This image could not be plate-solved."
+msgstr "這張圖片無法分析星體資料."
+
+#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:32
+msgid ""
+"This image has been successfully plate-solved. Please refresh the page to "
+"see the new data."
+msgstr "這張圖片已完成分享星體資料，請重新整理本頁去看新的資料."
